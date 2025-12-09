@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:map';
+@use '../../styles/settings';
 
 // VTabs
 $tabs-density: ( 'default': 0, 'comfortable' : -1, 'compact': -3) !default;
@@ -12,3 +13,6 @@ $tab-border-radius: 0 !default;
 $tab-max-width: 360px !default;
 $tab-min-width: 90px !default;
 $tab-slider-size: 2px !default;
+
+$tab-inset-radius: settings.$border-radius-root !default;
+$tab-inset-padding: 4px !default;

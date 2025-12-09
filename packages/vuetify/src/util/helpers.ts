@@ -4,13 +4,18 @@ import {
   capitalize,
   Comment,
   Fragment,
+  isProxy,
+  isReactive,
+  isRef,
   isVNode,
   reactive,
   shallowRef,
+  toRaw,
   toRef,
   unref,
   watchEffect,
 } from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -42,33 +47,6 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
   if (obj == null) return fallback
 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
-}
-
-export function deepEqual (a: any, b: any): boolean {
-  if (a === b) return true
-
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
-    // If the values are Date, compare them as timestamps
-    return false
-  }
-
-  if (a !== Object(a) || b !== Object(b)) {
-    // If the values aren't objects, they were already checked for equality
-    return false
-  }
-
-  const props = Object.keys(a)
-
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]))
 }
 
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
@@ -419,17 +397,6 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   return wrap
 }
 
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
-  let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
-    }
-  }
-}
-
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
@@ -550,7 +517,7 @@ export function findChildrenWithProvide (
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
@@ -651,10 +618,36 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
@@ -835,3 +828,23 @@ export function onlyDefinedProps (props: Record<string, any>) {
 }
 
 export type NonEmptyArray<T> = [T, ...T[]]
+
+export function deepToRaw<T extends {}> (value: T): T {
+  const objectIterator = (input: any): any => {
+    if (Array.isArray(input)) {
+      return input.map(item => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (isPlainObject(input)) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key as keyof typeof acc] = objectIterator(input[key])
+        return acc
+      }, {} as T)
+    }
+    return input
+  }
+
+  return objectIterator(value)
+}

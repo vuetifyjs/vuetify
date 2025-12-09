@@ -7,7 +7,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Utilities
 import { render, screen } from '@test'
-import { commands, userEvent } from '@vitest/browser/context'
+import { commands, userEvent } from 'vitest/browser'
 import { ref } from 'vue'
 
 describe('VListGroup', () => {

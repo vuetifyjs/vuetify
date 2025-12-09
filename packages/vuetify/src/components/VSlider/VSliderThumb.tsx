@@ -103,7 +103,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     })
 
     function parseKeydown (e: KeyboardEvent, value: number) {
-      if (props.noKeyboard) return
+      if (props.noKeyboard || disabled.value) return
       if (!relevantKeys.includes(e.key)) return
 
       e.preventDefault()

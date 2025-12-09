@@ -63,6 +63,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   disableSort: Boolean,
   fixedHeader: Boolean,
   multiSort: Boolean,
+  initialSortOrder: String as PropType<'asc' | 'desc'>,
   sortAscIcon: {
     type: IconValue,
     default: '$sortAsc',
@@ -111,15 +112,15 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
     function handleEnterKeyPress (event: KeyboardEvent, column: InternalDataTableHeader) {
       if (event.key === 'Enter' && !props.disableSort) {
-        toggleSort(column)
+        toggleSort(column, event)
       }
     }
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
 
-      if (!item) return props.sortAscIcon
-
-      return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
+      return (!item && props.initialSortOrder === 'asc') || item?.order === 'asc'
+        ? props.sortAscIcon
+        : props.sortDescIcon
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -179,7 +180,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           noPadding={ noPadding }
           empty={ isEmpty }
           tabindex={ column.sortable ? 0 : undefined }
-          onClick={ column.sortable ? () => toggleSort(column) : undefined }
+          onClick={ column.sortable ? (event: PointerEvent) => toggleSort(column, event) : undefined }
           onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
         >
@@ -204,6 +205,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
+                    color={ props.color }
                     density={ props.density }
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -246,14 +248,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const displayItems = computed<ItemProps['items']>(() => {
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
-
-      const appendIcon = computed(() => {
-        const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
-
-        if (showSelectColumn == null) return
-
-        return allSelected.value ? '$checkboxOn' : someSelected.value ? '$checkboxIndeterminate' : '$checkboxOff'
-      })
+      const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
 
       return (
         <VDataTableColumn
@@ -267,6 +262,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           <div class="v-data-table-header__content">
             <VSelect
               chips
+              color={ props.color }
               class="v-data-table__td-sort-select"
               clearable
               density="default"
@@ -275,10 +271,17 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               multiple={ props.multiSort }
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
-              appendIcon={ appendIcon.value }
-              onClick:append={ () => selectAll(!allSelected.value) }
             >
               {{
+                append: showSelectColumn ? () => (
+                  <VCheckboxBtn
+                    color={ props.color }
+                    density="compact"
+                    modelValue={ allSelected.value }
+                    indeterminate={ someSelected.value && !allSelected.value }
+                    onUpdate:modelValue={ () => selectAll(!allSelected.value) }
+                  />
+                ) : undefined,
                 chip: props => (
                   <VChip
                     onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
@@ -329,7 +332,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   name="v-data-table-progress"
                   absolute
                   active
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ typeof props.loading === 'boolean' || props.loading === 'true'
+                    ? props.color
+                    : props.loading }
                   indeterminate
                   v-slots={{ default: slots.loader }}
                 />

@@ -161,9 +161,11 @@ export const VAutocomplete = genericComponent<new <
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
+    const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
+
     const highlightFirst = computed(() => {
       const selectFirst = props.autoSelectFirst === true ||
-        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+        (props.autoSelectFirst === 'exact' && search.value === firstSelectableItem.value?.title)
       return selectFirst &&
         displayItems.value.length > 0 &&
         !isPristine.value &&
@@ -184,7 +186,7 @@ export const VAutocomplete = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
@@ -214,6 +216,7 @@ export const VAutocomplete = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
@@ -235,9 +238,10 @@ export const VAutocomplete = genericComponent<new <
       if (
         highlightFirst.value &&
         ['Enter', 'Tab'].includes(e.key) &&
-        !model.value.some(({ value }) => value === displayItems.value[0].value)
+        firstSelectableItem.value &&
+        !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
       ) {
-        select(displayItems.value[0])
+        select(firstSelectableItem.value)
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -458,7 +462,7 @@ export const VAutocomplete = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <VMenu
                   id={ menuId.value }
@@ -488,6 +492,8 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
+                      aria-labelledby={ `${id.value}-label` }
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -503,8 +509,10 @@ export const VAutocomplete = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
-                            active: (highlightFirst.value && index === 0) ? true : undefined,
+                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -534,6 +542,8 @@ export const VAutocomplete = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      aria-hidden
+                                      onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
 
@@ -570,7 +580,7 @@ export const VAutocomplete = genericComponent<new <
                     select(item, false)
                   }
 
-                  const slotProps = {
+                  const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
                       if (e.key !== 'Enter' && e.key !== ' ') return
@@ -586,7 +596,7 @@ export const VAutocomplete = genericComponent<new <
                     },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
-                  }
+                  })
 
                   const hasSlot = hasChips.value ? !!slots.chip : !!slots.selection
                   const slotContent = hasSlot
@@ -660,8 +670,7 @@ export const VAutocomplete = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
-                    aria-label={ ariaLabel.value }
-                    title={ ariaLabel.value }
+                    aria-hidden
                     tabindex="-1"
                   />
                 ) : undefined }

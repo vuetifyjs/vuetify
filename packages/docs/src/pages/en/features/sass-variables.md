@@ -163,6 +163,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "height-screen": false,
     "height": false,
     "justify-content": false,
+    "justify-items": false,
     "left": false,
     "margin-bottom": false,
     "margin-end": false,
@@ -250,6 +251,14 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 @forward 'vuetify/settings' with (
   $layers: true,
 );
+```
+
+```ts { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  theme: {
+    layers: true,
+  },
+})
 ```
 
 Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything.

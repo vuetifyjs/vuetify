@@ -37,6 +37,7 @@ export type VDataTableRowSlots<T> = {
 }
 
 export const makeVDataTableRowProps = propsFactory({
+  color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
@@ -139,7 +140,7 @@ export const VDataTableRow = genericComponent<new <T>(
           return (
             <VDataTableColumn
               align={ column.align }
-              indent={ column.intent }
+              indent={ column.indent }
               class={{
                 'v-data-table__td--expanded-row': column.key === 'data-table-expand',
                 'v-data-table__td--select-row': column.key === 'data-table-select',
@@ -163,12 +164,14 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-select']?.({
                       ...slotProps,
                       props: {
+                        color: props.color,
                         disabled: !item.selectable,
                         modelValue: isSelected([item]),
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        color={ props.color }
                         disabled={ !item.selectable }
                         density={ props.density }
                         modelValue={ isSelected([item]) }

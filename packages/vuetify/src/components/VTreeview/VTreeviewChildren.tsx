@@ -38,6 +38,12 @@ export type VTreeviewChildrenSlots<T> = {
     internalItem: InternalListItem<T>
     loading: boolean
   }
+  footer: {
+    props: { indentLines?: IndentLineType[] }
+    item: T
+    internalItem: InternalListItem<T>
+    loading: boolean
+  }
   divider: { props: InternalListItem['props'] }
   subheader: { props: InternalListItem['props'] }
 }
@@ -188,6 +194,11 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
       const treeviewChildrenProps = VTreeviewChildren.filterProps({ ...props, ...treeItemProps })
 
+      const footerProps = {
+        hideActions: props.hideActions,
+        indentLines: indentLines.footer,
+      }
+
       return children ? (
         <VTreeviewGroup
           { ...treeviewGroupProps }
@@ -200,6 +211,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
+                hideActions: props.hideActions,
                 indentLines: indentLines.node,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: isClickOnOpen.value
@@ -215,7 +227,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     ref={ el => activatorItems.value[index] = el as VTreeviewItem }
                     { ...listItemProps }
                     hasCustomPrepend={ !!slots.prepend }
-                    hideActions={ props.hideActions }
                     value={ props.returnObject ? item.raw : itemProps.value }
                     loading={ loading }
                     v-slots={ slotsWithItem }
@@ -224,15 +235,18 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               )
             },
             default: () => (
-              <VTreeviewChildren
-                { ...treeviewChildrenProps }
-                items={ children }
-                indentLinesVariant={ props.indentLinesVariant }
-                parentIndentLines={ indentLines.children }
-                isLastGroup={ nextItemHasChildren }
-                returnObject={ props.returnObject }
-                v-slots={ slots }
-              />
+              <>
+                <VTreeviewChildren
+                  { ...treeviewChildrenProps }
+                  items={ children }
+                  indentLinesVariant={ props.indentLinesVariant }
+                  parentIndentLines={ indentLines.children }
+                  isLastGroup={ nextItemHasChildren }
+                  returnObject={ props.returnObject }
+                  v-slots={ slots }
+                />
+                { slots.footer?.({ props: footerProps, item: item.raw, internalItem: item, loading }) }
+              </>
             ),
           }}
         </VTreeviewGroup>

@@ -26,7 +26,7 @@ The `v-tabs` component is used for hiding content behind a selectable item. This
 
 The `v-tabs` component is a styled extension of [v-slide-group](/components/slide-groups). It provides an easy to use interface for organizing content into separate sections.
 
-<ExamplesExample file="v-tabs/usage" />
+<ExamplesUsage name="v-tabs" />
 
 <PromotedEntry />
 
@@ -71,7 +71,7 @@ The **center-active** prop will make the active tab always centered.
 
 #### Fixed tabs
 
-The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px), and centers them.
+The **fixed-tabs** prop forces `v-tab` items to take up all available space up to 300px width, and centers them.
 
 <ExamplesExample file="v-tabs/prop-fixed-tabs" />
 
@@ -86,6 +86,12 @@ The **grow** prop will make the tab items take up all available space with no li
 Using **stacked** increases the `v-tabs` height to 72px to allow for both icons and text to be displayed.
 
 <ExamplesExample file="v-tabs/prop-stacked" />
+
+#### Slider Transition
+
+With **slider-transition** you can change default animation of the slider so it better fits with the app design.
+
+<ExamplesExample file="v-tabs/prop-slider-transition" />
 
 #### Pagination
 

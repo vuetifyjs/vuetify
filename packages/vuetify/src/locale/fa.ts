@@ -50,6 +50,9 @@ export default {
       previousMonth: 'ماه قبل',
       nextMonth: 'ماه بعد',
       selectYear: 'انتخاب سال',
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectMonth: 'انتخاب ماه',
       selectDate: '{0}',
       currentDate: 'امروز، {0}',
     },
@@ -85,6 +88,9 @@ export default {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
     title: 'انتخاب زمان',
+    hour: 'ساعت',
+    minute: 'دقیقه',
+    second: 'ثانیه',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +147,7 @@ export default {
     space: 'فاصله',
     plus: 'بعلاوه',
     shortcut: 'میانبر صفحه کلید: {0}',
+    or: 'یا',
   },
   video: {
     play: 'پخش',

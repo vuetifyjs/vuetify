@@ -206,7 +206,7 @@
   })
 
   async function onClickCopy () {
-    navigator.clipboard.writeText(
+    await navigator.clipboard.writeText(
       sections.value.map(section => section.content).join('\n')
     )
 

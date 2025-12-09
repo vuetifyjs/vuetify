@@ -25,7 +25,7 @@
     "open": "Syncable prop that allows one to control which nodes are open. The array consists of the `item-key` of each open item.",
     "openAll": "When `true` will cause all branch nodes to be opened when component is mounted.",
     "openOnClick": "When `true` will cause nodes to be opened by clicking anywhere on it, instead of only opening by clicking on expand icon. When using this prop with `activatable` you will be unable to mark nodes with children as active.",
-    "returnObject": "When `true` will make `v-model`, `active.sync` and `open.sync` return the complete object instead of just the key.",
+    "returnObject": "When `true` will make `v-model`, `v-model:selected, `v-model:activated` and `v-model:opened` return the complete object instead of just the key.",
     "rounded": "Provides an alternative active style for `v-treeview` node. Only visible when `activatable` is `true` and should not be used in conjunction with the `shaped` prop.",
     "search": "The search model for filtering results.",
     "selectable": "Will render a checkbox next to each node allowing them to be selected. Additionally, the **[openOnClick](/api/v-treeview/#props-open-on-click)** property will be applied internally.",
@@ -41,7 +41,8 @@
   "slots": {
     "append": "Appends content after label.",
     "prepend": "Prepends content before label.",
-    "header": "Slot for custom header.",
+    "header": "Slot for expandable nodes (all items that are not leafs).",
+    "footer": "Slot for footer below expanded children.",
     "subheader": "Slot for custom subheader.",
     "divider": "Slot for custom divider."
   },

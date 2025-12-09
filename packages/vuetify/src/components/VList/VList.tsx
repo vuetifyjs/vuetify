@@ -24,6 +24,7 @@ import { makeVariantProps } from '@/composables/variant'
 // Utilities
 import { computed, ref, shallowRef, toRef } from 'vue'
 import {
+  convertToUnit,
   EventProp,
   focusChild,
   genericComponent,
@@ -104,6 +105,8 @@ export const makeVListProps = propsFactory({
     default: 'one',
   },
   slim: Boolean,
+  prependGap: [Number, String],
+  indent: [Number, String],
   nav: Boolean,
 
   'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
@@ -127,11 +130,7 @@ export const makeVListProps = propsFactory({
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
-export const VList = genericComponent<new <
-  T extends readonly any[],
-  S = unknown,
-  O = unknown
->(
+export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
   props: {
     items?: T
     itemTitle?: SelectItemKey<ItemType<T>>
@@ -139,11 +138,13 @@ export const VList = genericComponent<new <
     itemChildren?: SelectItemKey<ItemType<T>>
     itemProps?: SelectItemKey<ItemType<T>>
     selected?: S
+    activated?: A
+    opened?: O
     'onUpdate:selected'?: (value: S) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:opened'?: (value: O) => void
     'onClick:open'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
     'onClick:select'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
-    opened?: O
-    'onUpdate:opened'?: (value: O) => void
   },
   slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -169,7 +170,8 @@ export const VList = genericComponent<new <
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { children, open, parents, select, getPath } = useNested(props)
+    const { children, open, parents, select, getPath } = useNested(props, items, () => props.returnObject)
+
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -254,6 +256,11 @@ export const VList = genericComponent<new <
     }
 
     useRender(() => {
+      const indent = props.indent ??
+        (props.prependGap
+          ? Number(props.prependGap) + 24
+          : undefined)
+
       return (
         <props.tag
           ref={ contentRef }
@@ -274,6 +281,11 @@ export const VList = genericComponent<new <
             props.class,
           ]}
           style={[
+            {
+              '--v-list-indent': convertToUnit(indent),
+              '--v-list-group-prepend': indent ? '0px' : undefined,
+              '--v-list-prepend-gap': convertToUnit(props.prependGap),
+            },
             backgroundColorStyles.value,
             dimensionStyles.value,
             props.style,

@@ -5,6 +5,7 @@ import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
 import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
@@ -68,7 +69,6 @@ export const makeVDateInputProps = propsFactory({
     hideHeader: true,
     showAdjacentMonths: true,
   }), [
-    'active',
     'location',
     'rounded',
     'height',
@@ -110,15 +110,7 @@ export const VDateInput = genericComponent<new <
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
 
-    const clamp = (date: unknown) => {
-      if (props.max && adapter.isAfter(date, props.max)) {
-        return props.max
-      }
-      if (props.min && adapter.isBefore(date, props.min)) {
-        return props.min
-      }
-      return date
-    }
+    const { clampDate, isInAllowedRange } = useCalendarRange(props)
 
     const emptyModelValue = () => props.multiple ? [] : null
 
@@ -246,16 +238,21 @@ export const VDateInput = genericComponent<new <
         model.value = emptyModelValue()
       } else if (!props.multiple) {
         if (isValid(value)) {
-          model.value = clamp(parseDate(value))
+          model.value = clampDate(parseDate(value))
         }
       } else {
         const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
-            const [start, stop] = parts.map(parseDate).map(clamp).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+            const [start, stop] = parts
+              .map(parseDate)
+              .map(clampDate)
+              .toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
             model.value = createDateRange(adapter, start, stop)
           } else {
-            model.value = parts.map(parseDate).map(clamp)
+            model.value = parts
+              .map(parseDate)
+              .filter(isInAllowedRange)
           }
         }
       }

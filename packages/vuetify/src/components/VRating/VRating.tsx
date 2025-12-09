@@ -15,7 +15,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, shallowRef, useId } from 'vue'
+import { computed, nextTick, ref, shallowRef, useId } from 'vue'
 import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -100,6 +100,7 @@ export const VRating = genericComponent<VRatingSlots>()({
   setup (props, { slots }) {
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
+    const root = ref<HTMLElement>()
     const rating = useProxiedModel(props, 'modelValue')
     const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, Number(props.length)))
 
@@ -140,12 +141,42 @@ export const VRating = genericComponent<VRatingSlots>()({
       }
     }))
 
+    const currentItemIndex = computed(() => {
+      return props.halfIncrements
+        ? 1 + Math.floor(Math.max(0, Number(rating.value ?? 0) - 0.5)) * 2
+        : Math.floor(Math.max(0, Number(rating.value ?? 0) - 1))
+    })
+
+    function moveCurrentFocus () {
+      const currentItem = root.value?.querySelector('[tabindex="0"]') as HTMLElement
+      currentItem?.focus()
+    }
+
+    function onItemKeydown (event: KeyboardEvent) {
+      if (props.disabled || props.readonly) return
+      if (event.ctrlKey || event.altKey) return
+
+      const step = props.halfIncrements ? 0.5 : 1
+
+      if (event.key === 'ArrowRight') {
+        const newValue = Math.min(Number(props.length), Number(rating.value ?? 0) + step)
+        rating.value = newValue
+        nextTick(() => moveCurrentFocus())
+      }
+      if (event.key === 'ArrowLeft') {
+        const newValue = Math.max(0, Number(rating.value ?? 0) - step)
+        rating.value = newValue
+        nextTick(() => moveCurrentFocus())
+      }
+    }
+
     const uid = useId()
     const name = computed(() => props.name ?? `v-rating-${uid}`)
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
       const { onMouseenter, onMouseleave, onClick } = eventState.value[index + 1]
       const id = `${name.value}-${String(value).replace('.', '-')}`
+      const isFocusable = index === currentItemIndex.value
       const btnProps = {
         color: itemState.value[index]?.color,
         density: props.density,
@@ -154,6 +185,8 @@ export const VRating = genericComponent<VRatingSlots>()({
         ripple: props.ripple,
         size: props.size,
         variant: 'plain' as Variant,
+        tabindex: isFocusable ? 0 : -1,
+        onKeydown: onItemKeydown,
       }
 
       return (
@@ -225,6 +258,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             props.class,
           ]}
           style={ props.style }
+          ref={ root }
         >
           <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
 

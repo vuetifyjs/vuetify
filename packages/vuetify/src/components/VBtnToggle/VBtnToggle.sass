@@ -8,3 +8,25 @@
 
       &.v-btn--variant-plain
         opacity: 1
+
+    @media (forced-colors: active)
+      > .v-btn:not(.v-btn--disabled)
+        border-color: buttontext !important
+
+        &:focus-visible
+          outline: 0
+
+        &:not(.v-btn--active)
+          &:hover,
+          &:focus-visible
+            color: highlight
+            border-color: currentColor !important
+
+      > .v-btn--active
+        color: highlight !important
+        forced-color-adjust: preserve-parent-color
+
+        &:not(.v-btn--variant-text, .v-btn--variant-plain)
+          background-color: highlight !important
+          color: highlighttext !important
+          border-color: highlight !important

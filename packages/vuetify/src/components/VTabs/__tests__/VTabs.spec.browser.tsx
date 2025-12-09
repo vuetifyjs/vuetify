@@ -2,7 +2,7 @@
 import { VTab, VTabs } from '..'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -106,7 +106,5 @@ describe('VTabs', () => {
     expect(model.value).toBe('B')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })
