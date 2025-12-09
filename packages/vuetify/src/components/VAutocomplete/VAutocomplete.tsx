@@ -666,6 +666,7 @@ export const VAutocomplete = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
+                    aria-hidden
                     tabindex="-1"
                   />
                 ) : undefined }

@@ -729,6 +729,7 @@ export const VCombobox = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
+                    aria-hidden
                     tabindex="-1"
                   />
                 ) : undefined }
