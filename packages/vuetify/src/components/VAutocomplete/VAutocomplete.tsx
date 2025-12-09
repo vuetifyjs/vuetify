@@ -184,7 +184,7 @@ export const VAutocomplete = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
@@ -458,7 +458,7 @@ export const VAutocomplete = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <VMenu
                   id={ menuId.value }
@@ -488,6 +488,8 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
+                      aria-labelledby={ `${id.value}-label` }
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -505,6 +507,8 @@ export const VAutocomplete = genericComponent<new <
                             key: item.value,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -534,10 +538,7 @@ export const VAutocomplete = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
-                                      aria-label={ isSelected
-                                        ? t('$vuetify.selectionControl.checked')
-                                        : t('$vuetify.selectionControl.unchecked')
-                                      }
+                                      aria-hidden
                                       onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
@@ -665,8 +666,7 @@ export const VAutocomplete = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
-                    aria-label={ ariaLabel.value }
-                    title={ ariaLabel.value }
+                    aria-hidden
                     tabindex="-1"
                   />
                 ) : undefined }

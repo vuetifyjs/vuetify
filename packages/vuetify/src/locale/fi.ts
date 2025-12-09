@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
   },
-  selectionControl: {
-    checked: 'Valittu',
-    unchecked: 'Ei valittu',
-  },
   dataTable: {
     itemsPerPageText: 'Rivejä sivulla:',
     ariaLabel: {

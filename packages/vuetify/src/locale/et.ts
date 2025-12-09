@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
   },
-  selectionControl: {
-    checked: 'Valitud',
-    unchecked: 'Pole valitud',
-  },
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {

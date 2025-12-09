@@ -190,7 +190,7 @@ export const VSelect = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const computedMenuProps = computed(() => {
       return {
@@ -416,12 +416,10 @@ export const VSelect = genericComponent<new <
           onKeydown={ onKeydown }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
-          aria-label={ ariaLabel.value }
-          title={ ariaLabel.value }
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <select
                   hidden
@@ -464,7 +462,8 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
-                      aria-label={ `${props.label}-list` }
+                      aria-labelledby={ `${id.value}-label` }
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
@@ -483,6 +482,8 @@ export const VSelect = genericComponent<new <
                             ref: itemRef,
                             key: item.value,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -512,10 +513,7 @@ export const VSelect = genericComponent<new <
                                         modelValue={ isSelected }
                                         ripple={ false }
                                         tabindex="-1"
-                                        aria-label={ isSelected
-                                          ? t('$vuetify.selectionControl.checked')
-                                          : t('$vuetify.selectionControl.unchecked')
-                                        }
+                                        aria-hidden
                                         onClick={ (event: MouseEvent) => event.preventDefault() }
                                       />
                                     ) : undefined }
@@ -626,6 +624,7 @@ export const VSelect = genericComponent<new <
                     class="v-select__menu-icon"
                     color={ vTextFieldRef.value?.fieldIconColor }
                     icon={ props.menuIcon }
+                    aria-hidden
                   />
                 ) : undefined }
               </>
