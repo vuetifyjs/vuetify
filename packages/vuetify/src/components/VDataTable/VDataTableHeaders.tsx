@@ -17,7 +17,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, mergeProps } from 'vue'
+import { computed, mergeProps, ref, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -249,6 +249,30 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
       const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
+      const chips = ref<any>([]);
+      
+      watch(() => chips.value, () => {
+        if (!chips.value) return
+        const c = [chips.value].flat()
+        for (const chip of c) {
+          if (chip.sortable && !isSorted(chip)) {
+            toggleSort(chip)
+          }
+        }
+      })
+
+      function onClickChip(item: any) {
+        if (item.raw?.sortable) {
+          toggleSort(item.raw)
+        }
+        if (!isSorted(item.raw)) {
+          if (Array.isArray(chips.value)) {
+            chips.value = chips.value.filter(chip => chip.value !== item.value)
+          } else {
+            chips.value = []
+          }
+        }
+      }
 
       return (
         <VDataTableColumn
@@ -261,6 +285,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           <div class="v-data-table-header__content">
             <VSelect
+              v-model={ chips.value }
               chips
               color={ props.color }
               class="v-data-table__td-sort-select"
@@ -269,6 +294,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               items={ displayItems.value }
               label={ t('$vuetify.dataTable.sortBy') }
               multiple={ props.multiSort }
+              return-object
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
             >
@@ -284,7 +310,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                 ) : undefined,
                 chip: props => (
                   <VChip
-                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                    onClick={ () => onClickChip(props.item) }
                     onMousedown={ (e: MouseEvent) => {
                       e.preventDefault()
                       e.stopPropagation()
