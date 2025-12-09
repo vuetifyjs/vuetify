@@ -161,9 +161,11 @@ export const VAutocomplete = genericComponent<new <
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
+    const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
+
     const highlightFirst = computed(() => {
       const selectFirst = props.autoSelectFirst === true ||
-        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+        (props.autoSelectFirst === 'exact' && search.value === firstSelectableItem.value?.title)
       return selectFirst &&
         displayItems.value.length > 0 &&
         !isPristine.value &&
@@ -214,6 +216,7 @@ export const VAutocomplete = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
@@ -235,9 +238,10 @@ export const VAutocomplete = genericComponent<new <
       if (
         highlightFirst.value &&
         ['Enter', 'Tab'].includes(e.key) &&
-        !model.value.some(({ value }) => value === displayItems.value[0].value)
+        firstSelectableItem.value &&
+        !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
       ) {
-        select(displayItems.value[0])
+        select(firstSelectableItem.value)
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -505,7 +509,7 @@ export const VAutocomplete = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
-                            active: (highlightFirst.value && index === 0) ? true : undefined,
+                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
                             onClick: () => select(item, null),
                             'aria-posinset': index + 1,
                             'aria-setsize': displayItems.value.length,
