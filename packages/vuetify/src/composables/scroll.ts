@@ -68,13 +68,13 @@ export function useScroll (
     return clamp(((scrollThreshold.value - currentScroll.value) / scrollThreshold.value) || 0)
   })
 
-  const getScrollMetrics = (targetEl: Element | Window) => {
+  function getScrollMetrics (targetEl: Element | Window) {
     const clientHeight = ('window' in targetEl) ? window.innerHeight : targetEl.clientHeight
     const scrollHeight = ('window' in targetEl) ? document.documentElement.scrollHeight : targetEl.scrollHeight
     return { clientHeight, scrollHeight }
   }
 
-  const checkScrollableSpace = () => {
+  function checkScrollableSpace () {
     const targetEl = target.value
     if (!targetEl) return
 
@@ -91,11 +91,11 @@ export function useScroll (
     hasEnoughScrollableSpace.value = maxScrollableDistance > minRequiredDistance
   }
 
-  const onResize = () => {
+  function onResize () {
     checkScrollableSpace()
   }
 
-  const onScroll = () => {
+  function onScroll () {
     const targetEl = target.value
 
     if (!targetEl || (canScroll && !canScroll.value)) return
