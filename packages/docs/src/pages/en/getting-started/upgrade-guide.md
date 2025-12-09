@@ -152,6 +152,17 @@ The **$field-clearable-margin** SASS variable has been removed and replaced with
 +   $field-gap: 8px,
 ```
 
+### VCounter (hint under VTextField, VTextarea and VFieldInput)
+
+The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
+
+```diff { resource="styles/styles.scss"}
+.v-counter {
+  opacity: 1;
+  color: /* your $counter-color */;
+}
+```
+
 ### VSelect/VCombobox/VAutocomplete
 
 #### `item` in slots has been renamed to `internalItem`
