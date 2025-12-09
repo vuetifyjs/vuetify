@@ -167,7 +167,7 @@ export const VSelect = genericComponent<new <
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
 
     let keyboardLookupPrefix = ''
-    let keyboardLookupIndex = -1
+    let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
@@ -250,7 +250,7 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
-        keyboardLookupIndex = -1
+        keyboardLookupIndex = 0
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
@@ -263,12 +263,13 @@ export const VSelect = genericComponent<new <
         if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
           // No matches but we have a repeated letter, try the next item with that prefix
           keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
+          keyboardLookupIndex++
           result = findItemBase()
           if (result) return result
         }
 
         // Still nothing, wrap around to the top
-        keyboardLookupIndex = -1
+        keyboardLookupIndex = 0
         result = findItemBase()
         if (result) return result
 
@@ -277,7 +278,7 @@ export const VSelect = genericComponent<new <
         return findItemBase()
       }
       function findItemBase () {
-        for (let i = keyboardLookupIndex + 1; i < items.length; i++) {
+        for (let i = keyboardLookupIndex; i < items.length; i++) {
           const _item = items[i]
           if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
             return [_item, i] as const
