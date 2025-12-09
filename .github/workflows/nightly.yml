@@ -114,8 +114,9 @@ jobs:
               exit 1
           fi
       - uses: vuetifyjs/setup-action@master
-      - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
+      - run: pnpm exec playwright install chromium
       - run: pnpm vizzly run "pnpm test:browser"
         working-directory: ./packages/vuetify
         env:
           VIZZLY_TOKEN: ${{ secrets.VIZZLY_TOKEN }}
+          TEST_TDD_ONLY: 1

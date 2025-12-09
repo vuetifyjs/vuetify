@@ -18,6 +18,7 @@ import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
@@ -62,7 +63,13 @@ export const makeVExpansionPanelsProps = propsFactory({
   },
 }, 'VExpansionPanels')
 
-export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
+export const VExpansionPanels = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VExpansionPanelSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VExpansionPanels',
 
   props: makeVExpansionPanelsProps(),
