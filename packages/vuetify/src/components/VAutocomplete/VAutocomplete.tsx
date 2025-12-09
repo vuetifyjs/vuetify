@@ -156,6 +156,7 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
+    const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
@@ -598,8 +599,6 @@ export const VAutocomplete = genericComponent<new <
                     )
                     : undefined
 
-                  const allowsChanges = toRef(() => !props.readonly && !props.disabled && !form.isReadonly.value && !form.isDisabled.value)
-                  const closableChips = toRef(() => props.closableChips && allowsChanges.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (

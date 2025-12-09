@@ -145,6 +145,7 @@ export const VCombobox = genericComponent<new <
     )
     const form = useForm(props)
 
+    const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
@@ -661,8 +662,6 @@ export const VCombobox = genericComponent<new <
                     )
                     : undefined
 
-                  const allowsChanges = toRef(() => !props.readonly && !props.disabled && !form.isReadonly.value && !form.isDisabled.value)
-                  const closableChips = toRef(() => props.closableChips && allowsChanges.value)
                   if (hasSlot && !slotContent) return undefined
 
                   return (
