@@ -8,6 +8,7 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
@@ -50,6 +51,7 @@ export const makeVOtpInputProps = propsFactory({
     default: 'number',
   },
 
+  ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeFocusProps(),
   ...pick(makeVFieldProps({
@@ -81,6 +83,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
@@ -229,6 +232,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         disabled: toRef(() => props.disabled),
         error: toRef(() => props.error),
         variant: toRef(() => props.variant),
+        rounded: toRef(() => props.rounded),
       },
     }, { scoped: true })
 
@@ -256,6 +260,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             {
               'v-otp-input--divided': !!props.divider,
             },
+            densityClasses.value,
             props.class,
           ]}
           style={[

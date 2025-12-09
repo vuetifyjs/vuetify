@@ -112,7 +112,16 @@ You can control the color of the selected node checkbox.
 
 #### Selection type
 
-Treeview now supports two different selection types. The default type is **'leaf'**, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is **'independent'**, which allows one to select parent nodes, but each node is independent of its parent and children.
+Treeview supports several selection modes:
+
+- **leaf** (default): Limits selection to items without children.
+- **independent**: Lets you select any node, with no parent-child linkage at all.
+- **classic**: Selecting a parent selects all descendants, and parent nodes show as selected only when all their descendants are selected. Only leaf nodes are added to the model.
+
+Classic has two variants that are displayed the same way but with slightly different v-model behavior:
+
+- **branch**: Any parent node with at least one selected descendant is also added to the model.
+- **trunk**: If all children are selected only the parent node is added to the model.
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 

@@ -78,12 +78,22 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         !isActive.value
       )
     })
+
+    const appBarHeight = computed(() => {
+      const height = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
+      return height + extensionHeight
+    })
+
     const {
       currentScroll,
       scrollThreshold,
       isScrollingUp,
       scrollRatio,
-    } = useScroll(props, { canScroll })
+      isAtBottom,
+      reachedBottomWhileScrollingDown,
+      hasEnoughScrollableSpace,
+    } = useScroll(props, { canScroll, layoutSize: appBarHeight })
 
     const canHide = toRef(() => (
       scrollBehavior.value.hide ||
@@ -120,15 +130,32 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
 
     useToggleScope(() => !!props.scrollBehavior, () => {
       watchEffect(() => {
-        if (canHide.value) {
-          if (scrollBehavior.value.inverted) {
-            isActive.value = currentScroll.value > scrollThreshold.value
-          } else {
-            isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
-          }
-        } else {
+        if (!canHide.value) {
           isActive.value = true
+          return
         }
+
+        if (scrollBehavior.value.inverted) {
+          isActive.value = currentScroll.value > scrollThreshold.value
+          return
+        }
+
+        // If there's not enough scrollable space, don't apply scroll-hide behavior at all
+        // This prevents flickering/bouncing animations on short pages
+        if (!hasEnoughScrollableSpace.value) {
+          isActive.value = true
+          return
+        }
+
+        // Prevent navbar from showing when we reached bottom while scrolling down
+        // This handles the case where scroll momentum causes to hit bottom during hide transition
+        if (reachedBottomWhileScrollingDown.value) {
+          isActive.value = false
+          return
+        }
+
+        // Normal behavior: show when scrolling up (and not at bottom) or above threshold
+        isActive.value = (isScrollingUp.value && !isAtBottom.value) || (currentScroll.value < scrollThreshold.value)
       })
     })
 
