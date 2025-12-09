@@ -308,6 +308,62 @@ $typography: map-deep-merge(
       'letter-spacing': .1666666667em,
       'font-family': $body-font-family,
       'text-transform': uppercase
+    ),
+    'body-large': (
+      'size': 1rem,
+      'weight': 400,
+      'line-height': 1.5,
+      'letter-spacing': .03125em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'body-medium': (
+      'size': .875rem,
+      'weight': 400,
+      'line-height': 1.425,
+      'letter-spacing': .0178571429em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'label-large': (
+      'size': .875rem,
+      'weight': 500,
+      'line-height': 2.6,
+      'letter-spacing': .0892857143em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'label-small': (
+      'size': .75rem,
+      'weight': 400,
+      'line-height': 1.667,
+      'letter-spacing': .0333333333em,
+      'font-family': $body-font-family,
+      'text-transform': none
+    ),
+    'headline-large': (
+      'size': 3.75rem,
+      'weight': 300,
+      'line-height': 1,
+      'letter-spacing': -.0083333333em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'headline-medium': (
+      'size': 2.125rem,
+      'weight': 400,
+      'line-height': 1.175,
+      'letter-spacing': .0073529412em,
+      'font-family': $heading-font-family,
+      'text-transform': none
+    ),
+    'headline-small': (
+      'size': 1.25rem,
+      'weight': 500,
+      'line-height': 1.6,
+      'letter-spacing': .0125em,
+      'font-family': $heading-font-family,
+      'text-transform': none
     )
   ),
   $typography

@@ -11,4 +11,4 @@ $dialog-card-actions-justify: flex-end !default;
 $dialog-card-header-padding: 16px 24px !default;
 $dialog-card-header-text-padding-top: 0 !default;
 $dialog-card-text-padding: 16px 24px 24px !default;
-$dialog-card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-1', 'letter-spacing') !default;
+$dialog-card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-large', 'letter-spacing') !default;
