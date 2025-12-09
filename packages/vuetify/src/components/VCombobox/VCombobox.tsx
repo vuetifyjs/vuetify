@@ -551,6 +551,7 @@ export const VCombobox = genericComponent<new <
                       onFocusout={ onFocusout }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }

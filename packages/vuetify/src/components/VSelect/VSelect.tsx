@@ -463,6 +463,7 @@ export const VSelect = genericComponent<new <
                       selectable
                       aria-live="polite"
                       aria-label={ `${props.label}-list` }
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }

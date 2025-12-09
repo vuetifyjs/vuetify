@@ -488,6 +488,7 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
+                      aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
                       { ...props.listProps }
