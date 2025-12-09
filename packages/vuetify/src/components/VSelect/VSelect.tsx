@@ -545,6 +545,7 @@ export const VSelect = genericComponent<new <
 
                     select(item, false)
                   }
+
                   const slotProps = mergeProps(VChip.filterProps(item.props), {
                     'onClick:close': onChipClose,
                     onKeydown (e: KeyboardEvent) {
