@@ -4,7 +4,6 @@ import { propsFactory } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter } from 'vue'
-import { useLocale } from './locale'
 
 // Types
 export interface MenuActivatorProps {
@@ -25,19 +24,15 @@ export const makeMenuActivatorProps = propsFactory({
 }, 'autocomplete')
 
 export function useMenuActivator (props: MenuActivatorProps, isOpen: MaybeRefOrGetter<boolean>) {
-  const { t } = useLocale()
-
   const uid = useId()
   const menuId = computed(() => `menu-${uid}`)
 
   const ariaExpanded = toRef(() => toValue(isOpen))
   const ariaControls = toRef(() => menuId.value)
-  const ariaLabel = toRef(() => t(toValue(isOpen) ? props.closeText : props.openText))
 
   return {
     menuId,
     ariaExpanded,
     ariaControls,
-    ariaLabel,
   }
 }
