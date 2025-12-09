@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 // Styles
 import './VAutocomplete.sass'
 
@@ -217,6 +216,7 @@ export const VAutocomplete = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
@@ -507,7 +507,7 @@ export const VAutocomplete = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
-                            active: (highlightFirst.value && item.value === firstSelectableItem.value?.value) ? true : undefined,
+                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
                             onClick: () => select(item, null),
                           })
 

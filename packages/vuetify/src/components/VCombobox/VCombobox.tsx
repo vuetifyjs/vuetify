@@ -292,7 +292,8 @@ export const VCombobox = genericComponent<new <
         menu.value = false
       }
 
-      if (highlightFirst.value &&
+      if (
+        highlightFirst.value &&
         ['Enter', 'Tab'].includes(e.key) &&
         firstSelectableItem.value &&
         !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
@@ -569,7 +570,7 @@ export const VCombobox = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
-                            active: (highlightFirst.value && item.value === firstSelectableItem.value?.value) ? true : undefined,
+                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
                             onClick: () => select(item, null),
                           })
 
