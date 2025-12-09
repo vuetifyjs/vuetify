@@ -458,7 +458,7 @@ export const VAutocomplete = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <VMenu
                   id={ menuId.value }
@@ -488,6 +488,7 @@ export const VAutocomplete = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
+                      aria-labelledby={ `${id.value}-label` }
                       aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }

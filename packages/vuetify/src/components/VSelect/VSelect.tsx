@@ -419,7 +419,7 @@ export const VSelect = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <select
                   hidden
@@ -462,7 +462,7 @@ export const VSelect = genericComponent<new <
                       tabindex="-1"
                       selectable
                       aria-live="polite"
-                      aria-label={ `${props.label}-list` }
+                      aria-labelledby={ `${id.value}-label` }
                       aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }

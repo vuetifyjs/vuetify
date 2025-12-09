@@ -521,7 +521,7 @@ export const VCombobox = genericComponent<new <
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <VMenu
                   id={ menuId.value }
@@ -551,6 +551,7 @@ export const VCombobox = genericComponent<new <
                       onFocusout={ onFocusout }
                       tabindex="-1"
                       aria-live="polite"
+                      aria-labelledby={ `${id.value}-label` }
                       aria-multiselectable={ props.multiple }
                       color={ props.itemColor ?? props.color }
                       { ...listEvents }
