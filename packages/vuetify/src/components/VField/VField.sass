@@ -146,10 +146,13 @@
     input
       letter-spacing: inherit
 
-    @at-root
-      & input::placeholder,
-      input#{&}::placeholder,
-      textarea#{&}::placeholder
+    @at-root :where(& input, input#{&}, textarea#{&}, select#{&})
+      background-color: transparent
+      border-style: none
+      padding: 0
+      margin: 0
+
+      &::placeholder
         color: currentColor
         opacity: var(--v-disabled-opacity)
 
