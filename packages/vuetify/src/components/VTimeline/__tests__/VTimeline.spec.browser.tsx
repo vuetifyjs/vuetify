@@ -2,7 +2,7 @@
 import { VTimeline, VTimelineItem } from '..'
 
 // Utilities
-import { generate, render, screen } from '@test'
+import { render, screen, showcase } from '@test'
 import { nextTick, ref } from 'vue'
 
 // Types
@@ -171,7 +171,5 @@ describe('VTimeline', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

@@ -4,8 +4,8 @@ meta:
   description: Add Vuetify as a search engine to your Chrome browser for quick access to the documentation
   keywords: search engine, vuetify search engine, vuetify chrome search engine, vuetify chrome extension
 related:
-  - /getting-started/quick-start/
-  - /getting-started/why-vuetify/
+  - /getting-started/installation/
+  - /introduction/why-vuetify/
 ---
 
 # Search engine

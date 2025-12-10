@@ -238,6 +238,11 @@
       "autocomplete": "3.10.0"
     }
   },
+  "VOtpInput": {
+    "props": {
+      "density": "3.12.0"
+    }
+  },
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
@@ -376,7 +381,8 @@
       "eager": "3.2.0",
       "interactive": "3.8.0",
       "stickToTarget": "3.10.0",
-      "viewportMargin": "3.11.0"
+      "viewportMargin": "3.11.0",
+      "persistent": "3.11.3"
     }
   },
   "VVirtualScroll": {

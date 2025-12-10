@@ -2,6 +2,7 @@
 /* eslint-disable sonarjs/no-identical-functions */
 // Utilities
 import {
+  branchSelectStrategy,
   classicSelectStrategy,
   independentSelectStrategy,
   independentSingleSelectStrategy,
@@ -869,6 +870,58 @@ describe('selectStrategies', () => {
       ])
 
       expect(strategy.out(value, children, parents)).toEqual(['3'])
+    })
+  })
+
+  describe('branch', () => {
+    it('selects individual leaves', () => {
+      const strategy = branchSelectStrategy(false)
+
+      const value = new Map([
+        ['1', 'indeterminate'],
+        ['2', 'on'],
+        ['3', 'indeterminate'],
+        ['4', 'on'],
+      ] as const)
+
+      const children = new Map([
+        ['1', ['2', '3']],
+        ['3', ['4', '5']],
+      ])
+
+      const parents = new Map([
+        ['2', '1'],
+        ['3', '1'],
+        ['4', '3'],
+        ['5', '3'],
+      ])
+
+      expect(strategy.out(value, children, parents)).toEqual(['1', '2', '3', '4'])
+    })
+
+    it('selects a parent node', () => {
+      const strategy = branchSelectStrategy(false)
+
+      const value = new Map([
+        ['1', 'indeterminate'],
+        ['3', 'on'],
+        ['4', 'on'],
+        ['5', 'on'],
+      ] as const)
+
+      const children = new Map([
+        ['1', ['2', '3']],
+        ['3', ['4', '5']],
+      ])
+
+      const parents = new Map([
+        ['2', '1'],
+        ['3', '1'],
+        ['4', '3'],
+        ['5', '3'],
+      ])
+
+      expect(strategy.out(value, children, parents)).toEqual(['1', '3', '4', '5'])
     })
   })
 })

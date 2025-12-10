@@ -1,5 +1,5 @@
 // Utilities
-import { nextTick, onBeforeUnmount, toRef, toValue, watch } from 'vue'
+import { nextTick, onScopeDispose, toRef, toValue, watch } from 'vue'
 import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
@@ -24,6 +24,7 @@ const registry = new Map<symbol, {
   isActive: Ref<boolean>
   contentEl: Ref<HTMLElement | undefined>
 }>()
+let subscribers = 0
 
 function onKeydown (e: KeyboardEvent) {
   const activeElement = document.activeElement as HTMLElement | null
@@ -97,13 +98,6 @@ export function useFocusTrap (
   }
 ) {
   const trapId = Symbol('trap')
-  watch(() => props.retainFocus, val => {
-    if (val) {
-      registry.set(trapId, { isActive, contentEl })
-    } else {
-      registry.delete(trapId)
-    }
-  }, { immediate: true })
 
   let focusTrapSuppressed = false
   let focusTrapSuppressionTimeout = -1
@@ -168,24 +162,41 @@ export function useFocusTrap (
 
   const shouldCapture = toRef(() => isActive.value && props.captureFocus && !props.disableInitialFocus)
 
-  IN_BROWSER && watch(shouldCapture, val => {
-    if (val) {
-      document.addEventListener('pointerdown', onPointerdown)
-      document.addEventListener('focusin', captureOnFocus, { once: true })
-      document.addEventListener('keydown', captureOnKeydown)
-    } else {
-      document.removeEventListener('pointerdown', onPointerdown)
-      document.removeEventListener('focusin', captureOnFocus)
-      document.removeEventListener('keydown', captureOnKeydown)
-    }
-  }, { immediate: true })
+  if (IN_BROWSER) {
+    watch(() => props.retainFocus, val => {
+      if (val) {
+        registry.set(trapId, { isActive, contentEl })
+      } else {
+        registry.delete(trapId)
+      }
+    }, { immediate: true })
 
-  onBeforeUnmount(() => {
+    watch(shouldCapture, val => {
+      if (val) {
+        document.addEventListener('pointerdown', onPointerdown)
+        document.addEventListener('focusin', captureOnFocus, { once: true })
+        document.addEventListener('keydown', captureOnKeydown)
+      } else {
+        document.removeEventListener('pointerdown', onPointerdown)
+        document.removeEventListener('focusin', captureOnFocus)
+        document.removeEventListener('keydown', captureOnKeydown)
+      }
+    }, { immediate: true })
+
+    if (subscribers++ < 1) {
+      document.addEventListener('keydown', onKeydown)
+    }
+  }
+
+  onScopeDispose(() => {
+    registry.delete(trapId)
     clearTimeout(focusTrapSuppressionTimeout)
     document.removeEventListener('pointerdown', onPointerdown)
     document.removeEventListener('focusin', captureOnFocus)
     document.removeEventListener('keydown', captureOnKeydown)
-  })
 
-  IN_BROWSER && document.addEventListener('keydown', onKeydown)
+    if (--subscribers < 1) {
+      document.removeEventListener('keydown', onKeydown)
+    }
+  })
 }
