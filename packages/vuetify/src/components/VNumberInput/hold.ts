@@ -27,6 +27,8 @@ export function useHold ({ toggleUpDown }: { toggleUpDown: (increment: boolean) 
     document.removeEventListener('blur', holdStop)
   }
 
+  onScopeDispose(holdStop)
+
   function tick (value: 'up' | 'down') {
     toggleUpDown(value === 'up')
   }
