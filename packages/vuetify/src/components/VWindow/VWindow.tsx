@@ -260,6 +260,32 @@ export const VWindow = genericComponent<new <T>(
       }
     })
 
+    function onKeyDown (e: KeyboardEvent) {
+      if (props.direction === 'horizontal' && !['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        return
+      }
+
+      if (props.direction === 'vertical' && !['ArrowUp', 'ArrowDown'].includes(e.key)) {
+        return
+      }
+
+      e.preventDefault()
+
+      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+        const prevArrow = arrows.value[0]
+        const prevEl = Array.isArray(prevArrow) ? prevArrow[0] : prevArrow
+        prevEl.el?.focus()
+        prev()
+      }
+
+      if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+        const nextArrow = arrows.value[1]
+        const nextEl = Array.isArray(nextArrow) ? nextArrow[0] : nextArrow
+        nextEl.el?.focus()
+        next()
+      }
+    }
+
     useRender(() => (
       <props.tag
         ref={ rootRef }
@@ -298,6 +324,7 @@ export const VWindow = genericComponent<new <T>(
                 { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
                 { 'v-window__controls--right': props.verticalArrows === 'right' },
               ]}
+              onKeydown={ onKeyDown }
             >
               { arrows.value }
             </div>
