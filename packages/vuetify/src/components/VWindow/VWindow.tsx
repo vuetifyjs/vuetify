@@ -272,18 +272,23 @@ export const VWindow = genericComponent<new <T>(
       e.preventDefault()
 
       if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
-        const prevArrow = arrows.value[0]
-        const prevEl = Array.isArray(prevArrow) ? prevArrow[0] : prevArrow
-        prevEl.el?.focus()
         prev()
+        nextTick(() => { canMoveBack.value ? focusArrow(0) : focusArrow(1) })
       }
 
       if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
-        const nextArrow = arrows.value[1]
-        const nextEl = Array.isArray(nextArrow) ? nextArrow[0] : nextArrow
-        nextEl.el?.focus()
         next()
+        nextTick(() => { canMoveForward.value ? focusArrow(1) : focusArrow(0) })
       }
+    }
+
+    function focusArrow (index: number) {
+      const arrow = arrows.value[index]
+
+      if (!arrow) return
+
+      const arrowEl = Array.isArray(arrow) ? arrow[0] : arrow
+      arrowEl.el?.focus()
     }
 
     useRender(() => (
