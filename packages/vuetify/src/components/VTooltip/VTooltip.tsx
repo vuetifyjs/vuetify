@@ -41,7 +41,6 @@ export const makeVTooltipProps = propsFactory({
     'retainFocus',
     'captureFocus',
     'disableInitialFocus',
-    'persistent',
   ]),
 }, 'VTooltip')
 
@@ -109,7 +108,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           absolute
           location={ location.value }
           origin={ origin.value }
-          persistent
           role="tooltip"
           activatorProps={ activatorProps.value }
           _disableGlobalStack
