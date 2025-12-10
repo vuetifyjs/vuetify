@@ -713,7 +713,7 @@ describe('VAutocomplete', () => {
     })
 
     const getPrependIcon = () => queryByCSS('.v-field__prepend-inner .v-icon')
-    const getAppendIcon  = () => queryByCSS('.v-autocomplete__append-inner-icon')
+    const getAppendIcon = () => queryByCSS('.v-autocomplete__append-inner-icon')
 
     // both append and prepend
     expect(getPrependIcon()).toBeVisible()
@@ -729,7 +729,6 @@ describe('VAutocomplete', () => {
     expect(getPrependIcon()).toBeVisible()
     expect(getAppendIcon()).toBeNull()
   })
-
 
   showcase({ stories })
 })

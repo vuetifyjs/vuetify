@@ -664,7 +664,7 @@ export const VAutocomplete = genericComponent<new <
             'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
-                
+
                 { props.menuIcon && (
                   <VIcon
                     class="v-autocomplete__menu-icon"
