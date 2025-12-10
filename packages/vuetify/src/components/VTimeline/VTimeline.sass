@@ -11,8 +11,14 @@
     .v-timeline-divider__dot
       background: $timeline-dot-divider-background
 
+      @media (forced-colors: active)
+        border: 2px solid
+
     .v-timeline-divider__inner-dot
       background: $timeline-inner-dot-divider-background
+
+      @media (forced-colors: active)
+        background-color: transparent !important
 
   .v-timeline
     display: grid
@@ -124,6 +130,9 @@
       width: $timeline-divider-line-thickness
       top: $timeline-line-start
 
+    @media (forced-colors: active)
+      background: canvastext
+
   .v-timeline-divider__after
     background: $timeline-divider-line-background
     position: absolute
@@ -138,6 +147,9 @@
       height: $timeline-line-size
       width: $timeline-divider-line-thickness
       bottom: $timeline-line-start
+
+    @media (forced-colors: active)
+      background: canvastext
 
   .v-timeline-item:first-child
     .v-timeline-divider__before

@@ -8,7 +8,6 @@
   .v-text-field
     input
       color: inherit
-      opacity: 0
       flex: $text-field-input-flex
       transition: $text-field-input-transition
       min-width: 0
@@ -40,15 +39,14 @@
           @at-root #{selector.append('.v-text-field--suffixed', &)}
             --v-field-padding-start: #{$text-field-input-padding-end}
 
+      &:not(.v-field--no-label, .v-field--active)
+        input::placeholder
+          opacity: 0
+
     .v-input__details
       padding-inline: $text-field-details-padding-inline
       @at-root #{selector.append('.v-input--plain-underlined', &)}
         padding-inline: 0
-
-    .v-field--no-label,
-    .v-field--active
-      input
-        opacity: 1
 
     .v-field--single-line
       input

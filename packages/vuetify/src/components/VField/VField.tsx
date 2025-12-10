@@ -25,6 +25,7 @@ import {
   EventProp,
   genericComponent,
   nullifyTransforms,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   standardEasing,
   useRender,
@@ -117,6 +118,8 @@ export const VField = genericComponent<new <T>(
 
   props: {
     id: String,
+    details: Boolean,
+    labelId: String,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),
@@ -135,13 +138,13 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses } = useRounded(props)
     const { rtlClasses } = useRtl()
 
-    const isActive = computed(() => props.dirty || props.active)
-    const hasLabel = computed(() => !!(props.label || slots.label))
-    const hasFloatingLabel = computed(() => !props.singleLine && hasLabel.value)
+    const isActive = toRef(() => props.dirty || props.active)
+    const hasLabel = toRef(() => !!(props.label || slots.label))
+    const hasFloatingLabel = toRef(() => !props.singleLine && hasLabel.value)
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = computed(() => `${id.value}-messages`)
+    const messagesId = toRef(() => !props.details ? undefined : `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -158,11 +161,11 @@ export const VField = genericComponent<new <T>(
       return props.iconColor === true ? color.value : props.iconColor
     })
 
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
-      if (hasFloatingLabel.value) {
+      if (hasFloatingLabel.value && !PREFERS_REDUCED_MOTION()) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
 
@@ -279,15 +282,16 @@ export const VField = genericComponent<new <T>(
 
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
-              { props.prependInnerIcon && (
-                <InputIcon
-                  key="prepend-icon"
-                  name="prependInner"
-                  color={ iconColor.value }
-                />
-              )}
-
-              { slots['prepend-inner']?.(slotProps.value) }
+              { slots['prepend-inner']
+                ? slots['prepend-inner'](slotProps.value)
+                : (props.prependInnerIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prependInner"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -299,6 +303,7 @@ export const VField = genericComponent<new <T>(
                 class={[textColorClasses.value]}
                 floating
                 for={ id.value }
+                aria-hidden={ !isActive.value }
                 style={ textColorStyles.value }
               >
                 { label() }
@@ -306,7 +311,13 @@ export const VField = genericComponent<new <T>(
             )}
 
             { hasLabel.value && (
-              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+              <VFieldLabel
+                key="label"
+                ref={ labelRef }
+                id={ props.labelId }
+                for={ id.value }
+                aria-hidden={ hasFloatingLabel.value && isActive.value }
+              >
                 { label() }
               </VFieldLabel>
             )}
@@ -353,6 +364,7 @@ export const VField = genericComponent<new <T>(
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
+                      tabindex: -1,
                     },
                   })
                   : (
@@ -360,6 +372,7 @@ export const VField = genericComponent<new <T>(
                       name="clear"
                       onFocus={ focus }
                       onBlur={ blur }
+                      tabindex={ -1 }
                     />
                   )}
                 </VDefaultsProvider>
@@ -369,15 +382,16 @@ export const VField = genericComponent<new <T>(
 
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
-              { slots['append-inner']?.(slotProps.value) }
-
-              { props.appendInnerIcon && (
-                <InputIcon
-                  key="append-icon"
-                  name="appendInner"
-                  color={ iconColor.value }
-                />
-              )}
+              { slots['append-inner']
+                ? slots['append-inner'](slotProps.value)
+                : (props.appendInnerIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -394,7 +408,7 @@ export const VField = genericComponent<new <T>(
 
                 { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
+                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
@@ -405,7 +419,7 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
+              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                 { label() }
               </VFieldLabel>
             )}

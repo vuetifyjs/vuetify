@@ -1,5 +1,5 @@
 // Utilities
-import { onBeforeUnmount, ref, shallowRef, watch } from 'vue'
+import { onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { SUPPORTS_INTERSECTION } from '@/util'
 
 export function useIntersectionObserver (callback?: IntersectionObserverCallback, options?: IntersectionObserverInit) {
@@ -13,7 +13,7 @@ export function useIntersectionObserver (callback?: IntersectionObserverCallback
       isIntersecting.value = !!entries.find(entry => entry.isIntersecting)
     }, options)
 
-    onBeforeUnmount(() => {
+    onScopeDispose(() => {
       observer.disconnect()
     })
 

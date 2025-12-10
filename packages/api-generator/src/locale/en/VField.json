@@ -11,6 +11,7 @@
     "flat": "Removes box shadow when using a variant with elevation.",
     "iconColor": "Sets the color of the prepend/append icons.",
     "id": "Sets the DOM id on the component.",
+    "details": "Controls whether the field generates an `aria-describedby` attribute for accessibility.",
     "persistentClear": "Always show the clearable icon when the input is dirty (By default it only shows on hover).",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend-inner** slot.",
     "reverse": "Reverses the orientation.",
@@ -27,12 +28,13 @@
     "update:focused": "Emitted when the input is focused or blurred"
   },
   "slots": {
-    "append-iInner": "Slot that is appended to the input.",
+    "append-inner": "Slot that is appended to the input.",
     "clear": "Slot for custom clear icon (displayed when the **clearable** prop is equal to true).",
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component.",
     "prepend-inner": "Slot that is prepended to the input."
   },
   "exposed": {
-    "controlRef": "Reference to the control element of the field."
+    "controlRef": "Reference to the control element of the field.",
+    "fieldIconColor": "The color of the icon."
   }
 }

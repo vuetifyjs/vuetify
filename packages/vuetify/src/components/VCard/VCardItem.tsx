@@ -9,6 +9,7 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { toDisplayString } from 'vue'
@@ -38,6 +39,7 @@ export const makeCardItemProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeTagProps(),
 }, 'VCardItem')
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
@@ -55,7 +57,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle != null || slots.subtitle)
 
       return (
-        <div
+        <props.tag
           class={[
             'v-card-item',
             props.class,
@@ -157,7 +159,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
               )}
            </div>
           )}
-        </div>
+        </props.tag>
       )
     })
 

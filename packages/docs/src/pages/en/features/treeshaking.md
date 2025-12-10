@@ -63,19 +63,18 @@ module.exports = {
 ```
 
 ::: tab Nuxt
-<p class="ma-4">Nuxt also uses the vite plugin but needs some extra configuration to load it in the correct order:</p>
+<p class="ma-4">Nuxt also uses the vite plugin:</p>
 
 ```js { resource="nuxt.config.js" }
 import vuetify from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  modules: [
-    async (options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
-        vuetify()
-      ))
-    },
-  ],
+  //...
+  vite: {
+    plugins: [
+      vuetify(),
+    ]
+  },
 })
 ```
 
@@ -168,11 +167,11 @@ export default new Vuetify(opts)
 ```
 -->
 
-Dynamic components using `<component>` can be registered locally:
+Dynamic components using `<component>` can just be imported in setup components:
 
 ```html { resource="Component.vue" }
 <template>
-  <component :is="button ? 'v-btn' : 'v-chip'" />
+  <component :is="button ? VBtn : VChip" />
 </template>
 
 <script setup>
@@ -181,6 +180,24 @@ Dynamic components using `<component>` can be registered locally:
   import { shallowRef } from 'vue'
 
   const button = shallowRef(false)
+</script>
+```
+
+Or registered locally in options components:
+
+```html { resource="Component.vue" }
+<template>
+  <component :is="button ? 'v-btn' : 'v-chip'" />
+</template>
+
+<script>
+  import { VBtn } from 'vuetify/components/VBtn'
+  import { VChip } from 'vuetify/components/VChip'
+
+  export default {
+    components: { VBtn, VChip },
+    data: () => ({ button: false }),
+  }
 </script>
 ```
 

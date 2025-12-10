@@ -1,15 +1,16 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
 export interface LocaleMessages {
   [key: string]: LocaleMessages | string
 }
 
 export interface LocaleOptions {
+  decimalSeparator?: string
   messages?: LocaleMessages
   locale?: string
   fallback?: string
@@ -18,6 +19,7 @@ export interface LocaleOptions {
 
 export interface LocaleInstance {
   name: string
+  decimalSeparator: ShallowRef<string>
   messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
@@ -134,7 +136,7 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 
@@ -144,7 +146,7 @@ export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], pro
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 

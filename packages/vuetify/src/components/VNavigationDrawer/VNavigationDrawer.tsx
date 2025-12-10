@@ -16,6 +16,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -28,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -91,6 +92,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeElevationProps(),
   ...makeLayoutItemProps(),
   ...makeRoundedProps(),
+  ...omit(makeFocusTrapProps(), ['disableInitialFocus']),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
 }, 'VNavigationDrawer')
@@ -109,7 +111,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
     const { displayClasses, mobile } = useDisplay(props)
     const { roundedClasses } = useRounded(props)
@@ -133,13 +135,15 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
-    const isPersistent = computed(() => props.persistent)
+    const isPersistent = toRef(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
       props.sticky &&
       !isTemporary.value &&
       location.value !== 'bottom'
     )
+
+    useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl })
 
     useToggleScope(() => props.expandOnHover && props.rail != null, () => {
       watch(isHovering, val => emit('update:rail', !val))
@@ -166,7 +170,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isActive,
       isTemporary,
       width,
-      touchless: toRef(props, 'touchless'),
+      touchless: toRef(() => props.touchless),
       position: location,
     })
 
@@ -184,7 +188,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       layoutSize,
       elementSize: width,
       active: readonly(isActive),
-      disableTransitions: computed(() => isDragging.value),
+      disableTransitions: toRef(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         props.absolute || (isSticky.value && typeof isStuck.value !== 'string')
@@ -193,9 +197,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
-    const scrimColor = useBackgroundColor(computed(() => {
+    const scrimColor = useBackgroundColor(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
-    }))
+    })
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
@@ -247,6 +251,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               stickyStyles.value,
               props.style,
             ]}
+            inert={ !isActive.value }
             { ...scopeId }
             { ...attrs }
           >

@@ -27,10 +27,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed } from 'vue'
+import { shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -96,7 +96,7 @@ export type VCardSlots = VCardItemSlots & {
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVCardProps(),
 
@@ -112,16 +112,24 @@ export const VCard = genericComponent<VCardSlots>()({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
+    const loadingColor = shallowRef<string | undefined>(undefined)
 
-    const isLink = computed(() => props.link !== false && link.isLink.value)
-    const isClickable = computed(() =>
-      !props.disabled &&
-      props.link !== false &&
-      (props.link || link.isClickable.value)
-    )
+    watch(() => props.loading, (val, old) => {
+      loadingColor.value = !val && typeof old === 'string'
+        ? old
+        : typeof val === 'boolean'
+          ? undefined
+          : val
+    }, { immediate: true })
 
     useRender(() => {
-      const Tag = isLink.value ? 'a' : props.tag
+      const isLink = props.link !== false && link.isLink.value
+      const isClickable = (
+        !props.disabled &&
+        props.link !== false &&
+        (props.link || link.isClickable.value)
+      )
+      const Tag = isLink ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title != null)
       const hasSubtitle = !!(slots.subtitle || props.subtitle != null)
       const hasHeader = hasTitle || hasSubtitle
@@ -133,13 +141,14 @@ export const VCard = genericComponent<VCardSlots>()({
 
       return (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-card',
             {
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': isClickable.value,
+              'v-card--link': isClickable,
             },
             themeClasses.value,
             borderClasses.value,
@@ -158,10 +167,9 @@ export const VCard = genericComponent<VCardSlots>()({
             locationStyles.value,
             props.style,
           ]}
-          onClick={ isClickable.value && link.navigate }
-          v-ripple={ isClickable.value && props.ripple }
+          onClick={ isClickable && link.navigate }
+          v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
-          { ...link.linkProps }
         >
           { hasImage && (
             <div key="image" class="v-card__image">
@@ -190,7 +198,7 @@ export const VCard = genericComponent<VCardSlots>()({
           <LoaderSlot
             name="v-card"
             active={ !!props.loading }
-            color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+            color={ loadingColor.value }
             v-slots={{ default: slots.loader }}
           />
 
@@ -226,7 +234,7 @@ export const VCard = genericComponent<VCardSlots>()({
             <VCardActions v-slots={{ default: slots.actions }} />
           )}
 
-          { genOverlays(isClickable.value, 'v-card') }
+          { genOverlays(isClickable, 'v-card') }
         </Tag>
       )
     })

@@ -1,6 +1,6 @@
 <template>
   <AppMenuMenu
-    v-if="user.notifications.show"
+    v-if="user.one.notifications.enabled"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
@@ -125,7 +125,6 @@
   }
 
   const { t } = useI18n()
-  const { event } = useGtag()
   const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
@@ -135,8 +134,8 @@
   const all = ref<Notification[]>([])
   const showArchived = shallowRef(false)
 
-  const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
-  const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
+  const unread = computed(() => all.value.filter(({ slug }) => !user.one.notifications.read.includes(slug)))
+  const read = computed(() => all.value.filter(({ slug }) => user.one.notifications.read.includes(slug)))
   const notifications = computed(() => showArchived.value ? read.value : unread.value)
   const done = computed(() => {
     return (
@@ -161,16 +160,12 @@
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
-    event('click', {
-      event_category: 'vuetify-notification',
-      event_label: notification.slug,
-      value: notification.metadata.action,
-    })
+    sweClick('notification', notification.slug, notification.metadata.action)
   }
   function toggle ({ slug }: Notification) {
-    user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter((n: any) => n !== slug)
-      : [...user.notifications.read, slug]
+    user.one.notifications.read = user.one.notifications.read.includes(slug)
+      ? user.one.notifications.read.filter((n: any) => n !== slug)
+      : [...user.one.notifications.read, slug]
   }
 
   onMounted(async () => {

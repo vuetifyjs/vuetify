@@ -3,13 +3,17 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use '../VSelect/mixins' as *
 
 @include tools.layer('components')
   .v-autocomplete
+    @include select-compact-chip-label
+
     .v-field
       .v-text-field__prefix,
       .v-text-field__suffix,
       .v-field__input,
+      .v-field__input > input,
       &.v-field
         cursor: text
 
@@ -38,9 +42,10 @@
   .v-autocomplete
     &__content
       overflow: hidden
-
       @include tools.elevation($autocomplete-content-elevation)
-      @include tools.rounded($autocomplete-content-border-radius)
+
+      @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
+        @include tools.rounded($autocomplete-content-border-radius)
 
     &__mask
       background: rgb(var(--v-theme-surface-light))
@@ -56,15 +61,6 @@
     &__selection
       &:first-child
         margin-inline-start: 0
-
-    &--chips.v-input--density-compact
-      .v-field--variant-solo,
-      .v-field--variant-solo-inverted,
-      .v-field--variant-filled,
-      .v-field--variant-solo-filled
-        .v-label.v-field-label
-          &--floating
-            top: 0px
 
     &--selecting-index
       .v-autocomplete__selection

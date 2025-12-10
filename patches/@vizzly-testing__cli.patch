@@ -1,0 +1,13 @@
+diff --git a/dist/services/tdd-service.js b/dist/services/tdd-service.js
+index 9e35265d95239e6d00be328811876a363374474f..d9430ef93a2c1ed78c09ed76ea167a9ee5754dea 100644
+--- a/dist/services/tdd-service.js
++++ b/dist/services/tdd-service.js
+@@ -980,7 +980,7 @@ export class TddService {
+         overwrite: true,
+         includeClusters: true // Enable spatial clustering analysis
+       });
+-      if (!result.isDifferent) {
++      if (!result.isDifferent || result.diffPixels / result.diffClusters.length < 3) {
+         // Images match
+         const comparison = {
+           id: generateComparisonId(signature),

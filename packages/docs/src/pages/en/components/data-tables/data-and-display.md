@@ -8,11 +8,17 @@ related:
   - /components/data-tables/basics/
   - /components/paginations/
   - /components/tables/
+features:
+  github: /components/VDataTable/
+  label: 'C: VDataTable'
+  report: true
 ---
 
 # Data and Display
 
 Data table filtering is a key feature that allows users to quickly find the data they are looking for.
+
+<PageFeatures />
 
 <PromotedEntry />
 
@@ -50,7 +56,7 @@ Pagination is used to split up large amounts of data into smaller chunks.
 
 ### External pagination
 
-Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember that you must apply the **.sync** modifier.
+Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember to use **v-model**, so you fully control the state.
 
 <ExamplesExample file="v-data-table/misc-external-paginate" />
 
@@ -116,7 +122,11 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 
 ### Multi sort
 
-Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
+Using the **multi-sort** prop will allow user to sort on multiple columns at the same time. You can specify whether new columns should be added first or last to the **sort-by** array. By specifying optional **modifier** key, you can support both modes.
+
+::: warning
+`multi-sort` with object parameter requires at least [v3.11.0](/getting-started/release-notes/?version=v3.11.0)
+:::
 
 <ExamplesExample file="v-data-table/prop-multi-sort" />
 

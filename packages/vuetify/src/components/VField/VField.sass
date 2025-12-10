@@ -230,6 +230,9 @@
     transition: $field-transition-timing
     transition-property: opacity, transform, width
 
+    @media (prefers-reduced-motion: reduce)
+      transition-property: opacity
+
     .v-field--focused &,
     .v-field--persistent-clear &
       opacity: 1
@@ -253,9 +256,11 @@
     position: absolute
     top: var(--v-input-padding-top)
     transform-origin: left center
-    transition: $field-transition-timing
-    transition-property: opacity, transform
     z-index: 1
+
+    @media (prefers-reduced-motion: no-preference)
+      transition: $field-transition-timing
+      transition-property: opacity, transform
 
     .v-field--variant-underlined &,
     .v-field--variant-plain &
@@ -373,7 +378,9 @@
       &__end
         border: 0 solid currentColor
         opacity: var(--v-field-border-opacity)
-        transition: opacity $field-subtle-transition-timing
+
+        @media (prefers-reduced-motion: no-preference)
+          transition: opacity $field-subtle-transition-timing
 
       &__start
         flex: 0 0 $field-control-affixed-padding
@@ -413,7 +420,6 @@
         &::before,
         &::after
           opacity: var(--v-field-border-opacity)
-          transition: opacity $field-subtle-transition-timing
 
           @include tools.absolute(true)
 
@@ -540,3 +546,8 @@
       opacity: 0
 
   /* endregion */
+
+  @media (forced-colors: active)
+    .v-field
+      .v-progress-linear
+        border: none

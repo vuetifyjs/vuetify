@@ -1,6 +1,16 @@
 const os = require('os')
 
-const maxWorkers = Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / 1024 ** 3 / 3.1)))
+function clamp (v, min, max) {
+  return Math.max(min, Math.floor(Math.min(max, v)))
+}
+
+const memoryReserve = 3 // leave room for tsc too
+const availableMemory = (os.freemem() / 1024 ** 3) - memoryReserve
+const memoryPerWorker = 2.8
+const threads = os.cpus().length / 2
+const maxWorkers = clamp(availableMemory / memoryPerWorker, 1, threads)
+
+console.log(`${maxWorkers} workers`)
 
 module.exports = {
   maxWorkers,
@@ -11,8 +21,9 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '<rootDir>/src/**/*.tsx',
     '<rootDir>/src/**/*.vue',
+    '<rootDir>/src/**/*.json',
   ],
-  moduleFileExtensions: ['vue', 'ts', 'js', 'tsx'],
+  moduleFileExtensions: ['vue', 'ts', 'js', 'tsx', 'json'],
   reporters: [['jest-silent-reporter', {
     showWarnings: true,
     useDots: true,

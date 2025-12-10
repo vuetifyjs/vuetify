@@ -12,12 +12,13 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 export const makeVDataTableFooterProps = propsFactory({
+  color: String,
   prevIcon: {
     type: IconValue,
     default: '$prev',
@@ -110,11 +111,13 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
             <VSelect
               items={ itemsPerPageOptions.value }
+              itemColor={ props.color }
               modelValue={ itemsPerPage.value }
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
               variant="outlined"
-              hide-details
+              aria-label={ t(props.itemsPerPageText) }
+              hideDetails
             />
           </div>
 
@@ -128,16 +131,16 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
             <VPagination
               v-model={ page.value }
               density="comfortable"
-              first-aria-label={ props.firstPageLabel }
-              last-aria-label={ props.lastPageLabel }
+              firstAriaLabel={ props.firstPageLabel }
+              lastAriaLabel={ props.lastPageLabel }
               length={ pageCount.value }
-              next-aria-label={ props.nextPageLabel }
-              previous-aria-label={ props.prevPageLabel }
+              nextAriaLabel={ props.nextPageLabel }
+              previousAriaLabel={ props.prevPageLabel }
               rounded
-              show-first-last-page
-              total-visible={ props.showCurrentPage ? 1 : 0 }
+              showFirstLastPage
+              totalVisible={ props.showCurrentPage ? 1 : 0 }
               variant="plain"
-              { ...paginationProps }
+              { ...omit(paginationProps, ['color']) }
             ></VPagination>
           </div>
         </div>

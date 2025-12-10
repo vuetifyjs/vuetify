@@ -1,9 +1,9 @@
 <template>
   <AppListList
-    v-if="one.isSubscriber && user.pins"
+    v-if="one.isSubscriber && user.ecosystem.docs.pins.enabled"
     v-model:opened="opened"
     :items="pinned"
-    class="pb-0 mb-n2"
+    class="pb-0 mb-n1"
     nav
   >
     <template #item="{ props: itemProps }">
@@ -11,7 +11,6 @@
         <v-list-item
           :title="itemProps.title"
           :to="itemProps.to"
-          class="mb-1"
           v-bind="activatorProps"
           @click.prevent="onClickPin(itemProps.to)"
         >

@@ -1,2 +1,61 @@
 packages:
-  - 'packages/*'
+  - packages/*
+
+autoInstallPeers: false
+
+ignoreWorkspaceRootCheck: true
+
+ignoredBuiltDependencies:
+  - edgedriver
+  - geckodriver
+  - unrs-resolver
+  - vue-demi
+
+linkWorkspacePackages: deep
+
+minimumReleaseAge: 4320
+
+minimumReleaseAgeExclude:
+  - '@vuetify/one'
+  - '@vuetify/testing-library-dom'
+  - playwright
+  - playwright-core
+  - '@vizzly-testing/vitest@0.0.3'
+  - '@vizzly-testing/cli@0.17.0'
+  - '@vizzly-testing/honeydiff@0.4.3'
+
+nodeLinker: hoisted
+
+onlyBuiltDependencies:
+  - esbuild@0.25.9
+
+overrides:
+  '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.3
+  '@types/node': $@types/node
+  '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.6.0
+  brilliant-errors>bumpp: '-'
+  brilliant-errors>vitest: '-'
+  vite-ssr>react-router-dom: '-'
+  vite-ssr>react-ssr-prepass: '-'
+
+patchedDependencies:
+  '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
+  '@testing-library/vue': patches/@testing-library__vue.patch
+  '@vitest/browser': patches/@vitest__browser.patch
+  '@vizzly-testing/cli': patches/@vizzly-testing__cli.patch
+  playwright-core: patches/playwright-core.patch
+
+peerDependencyRules:
+  allowedVersions:
+    '@sentry/vue>pinia': '*'
+    '@testing-library/user-event>@testing-library/dom': '*'
+    '@vitejs/plugin-vue': '*'
+    '@vueuse/head': '*'
+    rollup: '*'
+    vite: '*'
+
+shellEmulator: true
+
+updateConfig:
+  ignoreDependencies:
+    - babel-plugin-add-import-extension

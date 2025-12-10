@@ -5,21 +5,10 @@ import dts from 'rollup-plugin-dts'
 import fg from 'fast-glob'
 import mm from 'micromatch'
 import MagicString from 'magic-string'
+import { codeTransform } from './types-code-transform.js'
 
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
-
-/**
- * @param code {string}
- * @returns {string}
- */
-export function codeTransform (code) {
-  return code
-    // ignore missing vue-router
-    .replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
-    // tsc adds extra export statements to namespaces that break module augmentation
-    .replaceAll(/^\s*export \{\s*\};?$/gm, '')
-}
 
 /**
  * @param input {string}
@@ -87,9 +76,14 @@ async function getShims (useImport) {
       .map(name => `    ${name}: ${name}`).join('\n')
   }
 
+  const directives = importMap.directives.map(name => (
+    `    v${name}: typeof import('vuetify/directives')['${name}']`
+  )).join('\n')
+
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
     .replaceAll(/^\s*\/\/ @skip-build\s[\s\S]*?\s$/gm, '')
     .replace(/^\s*\/\/ @generate-components$/gm, components)
+    .replace(/^\s*\/\/ @generate-directives$/gm, directives)
 }
 
 /** @type {import("rollup").RollupOptions[]} */

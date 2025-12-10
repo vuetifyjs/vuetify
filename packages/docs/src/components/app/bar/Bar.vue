@@ -19,7 +19,7 @@
     </template>
 
     <template #append>
-      <template v-if="mdAndUp">
+      <div v-if="mdAndUp" class="d-flex ga-1 pe-2">
         <AppBarBlogLink />
 
         <AppBarLearnMenu />
@@ -28,28 +28,30 @@
 
         <AppBarEcosystemMenu />
 
-        <AppBarTeamLink v-if="lgAndUp" />
-
         <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <AppBarEnterpriseLink />
-      </template>
+        <AppBarOneLink />
+      </div>
 
-      <AppVerticalDivider v-if="smAndUp" class="ms-3 me-2" />
+      <AppVerticalDivider v-if="mdAndUp" />
 
-      <AppBarStoreLink v-if="smAndUp" />
+      <div class="d-flex ga-1">
+        <AppBarStoreLink v-if="smAndUp" />
 
-      <AppBarJobsLink v-if="smAndUp" />
+        <AppBarGitHubLink v-if="smAndUp" />
 
-      <AppBarLanguageMenu v-if="smAndUp" />
+        <AppBarLanguageMenu />
 
-      <AppBarSettingsToggle />
+        <AppBarSettingsToggle />
+      </div>
     </template>
   </VoAppBar>
 </template>
 
 <script setup>
   const app = useAppStore()
-  const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
+
+  const mdAndUp = computed(() => width.value >= 1077)
 </script>
