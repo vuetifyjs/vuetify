@@ -151,6 +151,42 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
       }
     }
 
+    function onKeyDown (e: KeyboardEvent) {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        return
+      }
+
+      e.preventDefault()
+
+      let newValue
+
+      if (e.key === 'ArrowLeft') {
+        newValue = [adapter.addDays(model.value[0], -1)]
+      }
+
+      if (e.key === 'ArrowRight') {
+        newValue = [adapter.addDays(model.value[0], 1)]
+      }
+
+      if (e.key === 'ArrowUp') {
+        newValue = [adapter.addDays(model.value[0], -7)]
+      }
+
+      if (e.key === 'ArrowDown') {
+        newValue = [adapter.addDays(model.value[0], 7)]
+      }
+
+      if (!newValue) return
+
+      model.value = newValue
+
+      nextTick(() => {
+        const el = daysRef.value?.querySelector(`[data-v-date="${adapter.toISO(newValue[0])}"] > [type="button"]`)
+
+        el?.focus()
+      })
+    }
+
     useRender(() => (
       <div class="v-date-picker-month">
         { props.showWeek && (
@@ -174,41 +210,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
             ref={ daysRef }
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
-            onKeydown={ (e: KeyboardEvent) => {
-              if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-                return
-              }
-
-              e.preventDefault()
-
-              let newValue
-
-              if (e.key === 'ArrowLeft') {
-                newValue = [adapter.addDays(model.value[0], -1)]
-              }
-
-              if (e.key === 'ArrowRight') {
-                newValue = [adapter.addDays(model.value[0], 1)]
-              }
-
-              if (e.key === 'ArrowUp') {
-                newValue = [adapter.addDays(model.value[0], -7)]
-              }
-
-              if (e.key === 'ArrowDown') {
-                newValue = [adapter.addDays(model.value[0], 7)]
-              }
-
-              if (!newValue) return
-
-              model.value = newValue
-
-              nextTick(() => {
-                const el = daysRef.value?.querySelector(`[data-v-date="${adapter.toISO(newValue[0])}"] > [type="button"]`)
-
-                el?.focus()
-              })
-            } }
+            onKeydown={ onKeyDown }
           >
             { !props.hideWeekdays && adapter.getWeekdays(props.firstDayOfWeek).map(weekDay => (
               <div
