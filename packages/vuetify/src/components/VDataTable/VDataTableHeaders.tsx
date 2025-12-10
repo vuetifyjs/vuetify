@@ -249,8 +249,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
       const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
-      const chips = ref<any>([]);
-      
+      const chips = ref<any>([])
+
       watch(() => chips.value, () => {
         if (!chips.value) return
         const c = [chips.value].flat()
@@ -261,7 +261,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         }
       })
 
-      function onClickChip(item: any) {
+      function onClickChip (item: any) {
         if (item.raw?.sortable) {
           toggleSort(item.raw)
         }
@@ -294,7 +294,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               items={ displayItems.value }
               label={ t('$vuetify.dataTable.sortBy') }
               multiple={ props.multiSort }
-              return-object
+              returnObject
               variant="underlined"
               onClick:clear={ () => sortBy.value = [] }
             >
