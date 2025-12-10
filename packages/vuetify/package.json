@@ -62,6 +62,18 @@
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
     },
+    "./styles/core": {
+      "sass": "./lib/styles/core.scss",
+      "default": "./lib/styles/core.css"
+    },
+    "./styles/colors": {
+      "sass": "./lib/styles/colors.scss",
+      "default": "./lib/styles/colors.css"
+    },
+    "./styles/utilities": {
+      "sass": "./lib/styles/utilities.scss",
+      "default": "./lib/styles/utilities.css"
+    },
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.js",
     "./blueprints": "./lib/blueprints/index.js",

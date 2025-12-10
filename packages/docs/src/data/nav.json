@@ -54,6 +54,7 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
       "layers",
       "transitions",
