@@ -17,6 +17,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
 
@@ -60,7 +61,13 @@ export const makeVDatePickerMonthProps = propsFactory({
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
-export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
+export const VDatePickerMonth = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VDatePickerMonthSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDatePickerMonth',
 
   props: makeVDatePickerMonthProps(),
