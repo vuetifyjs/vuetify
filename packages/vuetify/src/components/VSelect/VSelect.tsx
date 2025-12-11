@@ -224,14 +224,22 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
-      if (slots['list-footer'] && (e.key === 'Tab')) {
-        e.stopImmediatePropagation()
-        return footerRef.value?.focus()
+      if (e.key === 'Tab' && !e.shiftKey && footerRef.value) {
+        const firstFocusableInFooter = focusableChildren(footerRef.value).at(0)
+        if (firstFocusableInFooter) {
+          e.preventDefault()
+          e.stopImmediatePropagation()
+          return firstFocusableInFooter.focus()
+        }
       }
 
-      if (slots['list-header'] && (e.key === 'Tab' && e.shiftKey)) {
-        e.stopImmediatePropagation()
-        return headerRef.value?.focus()
+      if (e.key === 'Tab' && e.shiftKey && headerRef.value) {
+        const firstFocusableInHeader = focusableChildren(headerRef.value).at(0)
+        if (firstFocusableInHeader) {
+          e.preventDefault()
+          e.stopImmediatePropagation()
+          return firstFocusableInHeader.focus()
+        }
       }
 
       if (checkPrintable(e)) {
