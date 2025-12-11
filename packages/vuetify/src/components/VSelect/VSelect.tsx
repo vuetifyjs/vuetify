@@ -146,6 +146,8 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -220,10 +222,39 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
+      if (slots['list-footer'] && (e.key === 'Tab')) {
+        e.stopImmediatePropagation()
+        return footerRef.value?.focus()
+      }
+
+      if (slots['list-header'] && (e.key === 'Tab' && e.shiftKey)) {
+        e.stopImmediatePropagation()
+        return headerRef.value?.focus()
+      }
+
       if (checkPrintable(e)) {
         onKeydown(e)
       }
     }
+
+    function onHeaderKeydown (e: KeyboardEvent) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        return listRef.value?.focus('first')
+      }
+    }
+
+    function onFooterKeydown (e: KeyboardEvent) {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        return listRef.value?.focus('last')
+      }
+      if (e.key === 'Tab' && !e.shiftKey) {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || form.isReadonly.value) return
 
@@ -327,10 +358,7 @@ export const VSelect = genericComponent<new <
     }
     function onBlur (e: FocusEvent) {
       const target = e.target as Element
-      if (
-        !vTextFieldRef.value?.$el.contains(target) &&
-        !vMenuRef.value?.contentEl?.contains(target)
-      ) {
+      if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
       }
     }
@@ -463,10 +491,9 @@ export const VSelect = genericComponent<new <
                 >
                   <VSheet
                     onFocusin={ onFocusin }
-                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
                     { slots['list-header'] && (
-                      <header>
+                      <header onKeydown={ onHeaderKeydown } ref={ headerRef } tabindex="-1">
                         { slots['list-header']() }
                       </header>
                     )}
@@ -481,7 +508,8 @@ export const VSelect = genericComponent<new <
                         tabindex="-1"
                         selectable
                         aria-live="polite"
-                        aria-label={ `${props.label}-list` }
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
                         color={ props.itemColor ?? props.color }
                         { ...listEvents }
                         { ...props.listProps }
@@ -554,7 +582,7 @@ export const VSelect = genericComponent<new <
                     )}
 
                     { slots['list-footer'] && (
-                      <footer>
+                      <footer ref={ footerRef } onKeydown={ onFooterKeydown } tabindex="-1">
                         { slots['list-footer']() }
                       </footer>
                     )}
