@@ -8,6 +8,7 @@ import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
@@ -127,6 +128,7 @@ export const VAutocomplete = genericComponent<new <
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
+    const { InputIcon } = useInputIcon(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -678,12 +680,11 @@ export const VAutocomplete = genericComponent<new <
                 )}
 
                 { props.appendInnerIcon && (
-                  <VIcon
-                    class="v-autocomplete__append-inner-icon"
-                    color={ vTextFieldRef.value?.fieldIconColor }
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ args[0].iconColor.value }
                     icon={ props.appendInnerIcon }
-                    aria-hidden
-                    tabindex="-1"
                   />
                 )}
               </>
