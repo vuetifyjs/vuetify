@@ -705,26 +705,23 @@ describe('VAutocomplete', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/22429
   it('should check if prepend/append inner icons are visible', async () => {
-    const { rerender, queryByCSS } = render(VAutocomplete, {
+    const { rerender } = render(VAutocomplete, {
       props: {
         prependInnerIcon: 'mdi-magnify',
         appendInnerIcon: 'mdi-close',
       },
     })
 
-    const getPrependIcon = () => queryByCSS('.v-field__prepend-inner .v-icon')
-    const getAppendIcon = () => queryByCSS('.v-autocomplete__append-inner-icon')
+    const getPrependIcon = () => screen.queryByCSS('.v-field__prepend-inner .v-icon.mdi-magnify')
+    const getAppendIcon = () => screen.queryByCSS('.v-field__append-inner .v-icon.mdi-close')
 
-    // both append and prepend
     expect(getPrependIcon()).toBeVisible()
     expect(getAppendIcon()).toBeVisible()
 
-    // only append
     await rerender({ prependInnerIcon: undefined, appendInnerIcon: 'mdi-close' })
     expect(getPrependIcon()).toBeNull()
     expect(getAppendIcon()).toBeVisible()
 
-    // only prepend
     await rerender({ prependInnerIcon: 'mdi-magnify', appendInnerIcon: undefined })
     expect(getPrependIcon()).toBeVisible()
     expect(getAppendIcon()).toBeNull()
