@@ -489,9 +489,7 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
-                  <VSheet
-                    onFocusin={ onFocusin }
-                  >
+                  <VSheet onFocusin={ onFocusin }>
                     { slots['list-header'] && (
                       <header onKeydown={ onHeaderKeydown } ref={ headerRef } tabindex="-1">
                         { slots['list-header']() }
