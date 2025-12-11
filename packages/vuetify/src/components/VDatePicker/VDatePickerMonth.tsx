@@ -42,6 +42,10 @@ export const makeVDatePickerMonthProps = propsFactory({
   hideWeekdays: Boolean,
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
   showWeek: Boolean,
+  readonly: {
+    type: Boolean,
+    defauly: false,
+  },
   transition: {
     type: String,
     default: 'picker-transition',
@@ -261,6 +265,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   class: 'v-date-picker-month__day-btn',
                   color: item.isSelected || item.isToday ? props.color : undefined,
                   disabled: item.isDisabled,
+                  readonly: props.readonly,
                   icon: true,
                   ripple: false,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
