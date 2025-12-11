@@ -21,7 +21,7 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.0.3'
-  - '@vizzly-testing/cli@0.16.4'
+  - '@vizzly-testing/cli@0.17.0'
   - '@vizzly-testing/honeydiff@0.4.3'
 
 nodeLinker: hoisted
@@ -42,6 +42,7 @@ patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
   '@vitest/browser': patches/@vitest__browser.patch
+  '@vizzly-testing/cli': patches/@vizzly-testing__cli.patch
   playwright-core: patches/playwright-core.patch
 
 peerDependencyRules:
