@@ -34,6 +34,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
