@@ -79,7 +79,7 @@ export const makeVDatePickerProps = propsFactory({
   },
   landscapeHeaderWidth: [Number, String],
 
-  ...makeVDatePickerControlsProps(),
+  ...omit(makeVDatePickerControlsProps(), ['active', 'monthText', 'yearText']),
   ...makeVDatePickerMonthProps({
     weeksInMonth: 'static' as const,
   }),
@@ -171,13 +171,16 @@ export const VDatePicker = genericComponent<new <
         : formattedDate
     })
 
-    const date = toRef(() => {
-      const monthTwoDigits = String(month.value + 1).padStart(2, '0')
-      return adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
+    const monthStart = toRef(() => {
+      let date = adapter.date()
+      date = adapter.setDate(date, 1)
+      date = adapter.setMonth(date, month.value)
+      date = adapter.setYear(date, year.value) // year is not always ISO
+      return date
     })
-    const monthYearText = toRef(() => adapter.format(date.value, 'monthAndYear'))
-    const monthText = toRef(() => adapter.format(date.value, 'monthShort'))
-    const yearText = toRef(() => adapter.format(date.value, 'year'))
+    const monthYearText = toRef(() => adapter.format(monthStart.value, 'monthAndYear'))
+    const monthText = toRef(() => adapter.format(monthStart.value, 'monthShort'))
+    const yearText = toRef(() => adapter.format(monthStart.value, 'year'))
 
     // const headerIcon = toRef(() => props.inputMode === 'calendar' ? props.keyboardIcon : props.calendarIcon)
     const headerTransition = toRef(() => `date-picker-header${isReversing.value ? '-reverse' : ''}-transition`)
@@ -201,7 +204,7 @@ export const VDatePicker = genericComponent<new <
           const prevYearEnd = adapter.addDays(adapter.startOfYear(_date), -1)
 
           adapter.isAfter(minDate.value, prevMonthEnd) && targets.push('prev-month')
-          adapter.isAfter(minDate.value, prevYearEnd) && targets.push('next-year')
+          adapter.isAfter(minDate.value, prevYearEnd) && targets.push('prev-year')
         }
 
         if (maxDate.value) {

@@ -275,9 +275,11 @@ export const VWindow = genericComponent<new <T>(
         ]}
         style={[
           props.style,
-          props.transitionDuration && !PREFERS_REDUCED_MOTION
-            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
-            : undefined,
+          {
+            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
+              ? convertToUnit(props.transitionDuration, 'ms')
+              : null,
+          },
         ]}
         v-touch={ touchOptions.value }
       >

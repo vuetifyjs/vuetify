@@ -269,11 +269,11 @@
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
 
-@media (forced-colors: active)
-  .v-btn
-    &:not(&--variant-text, &--variant-plain)
-      border: thin solid
+  @media (forced-colors: active)
+    .v-btn
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid
 
-    &:focus-visible
-      outline: 2px solid
-      outline-offset: 2px
+      &:focus-visible
+        outline: 2px solid
+        outline-offset: 2px

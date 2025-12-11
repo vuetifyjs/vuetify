@@ -10,18 +10,26 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTabsSymbol } from './shared'
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { GenericProps } from '@/util'
 
 export const makeVTabsWindowProps = propsFactory({
   ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),
 }, 'VTabsWindow')
 
-export const VTabsWindow = genericComponent()({
+export const VTabsWindow = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VWindowSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTabsWindow',
 
   props: makeVTabsWindowProps(),
 
   emits: {
-    'update:modelValue': (v: unknown) => true,
+    'update:modelValue': (v: any) => true,
   },
 
   setup (props, { slots }) {
