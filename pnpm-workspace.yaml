@@ -23,6 +23,8 @@ minimumReleaseAgeExclude:
   - '@vizzly-testing/vitest@0.0.3'
   - '@vizzly-testing/cli@0.17.0'
   - '@vizzly-testing/honeydiff@0.4.3'
+  - 'sass@1.96.0'
+  - 'sass-embedded@1.96.0'
 
 nodeLinker: hoisted
 
