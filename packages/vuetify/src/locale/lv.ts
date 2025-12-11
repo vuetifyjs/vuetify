@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
   },
-  selectionControl: {
-    checked: 'Atzīmēts',
-    unchecked: 'Nav atzīmēts',
-  },
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {

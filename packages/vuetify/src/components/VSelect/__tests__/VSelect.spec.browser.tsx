@@ -736,20 +736,17 @@ describe('VSelect', () => {
 
     const inputField = getByRole('combobox', { expanded: false })
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
     await userEvent.click(inputField, { force: true })
     await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
-    expect(inputField).toHaveAttribute('aria-label', 'Close')
 
     await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/22052

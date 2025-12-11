@@ -149,14 +149,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let lastScrollTime = 0
 
   watch(viewportHeight, (val, oldVal) => {
-    if (oldVal) {
-      calculateVisibleItems()
-      if (val < oldVal) {
-        requestAnimationFrame(() => {
-          scrollVelocity = 0
-          calculateVisibleItems()
-        })
-      }
+    calculateVisibleItems()
+    if (val < oldVal) {
+      requestAnimationFrame(() => {
+        scrollVelocity = 0
+        calculateVisibleItems()
+      })
     }
   })
 

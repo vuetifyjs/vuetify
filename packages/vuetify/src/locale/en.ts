@@ -11,10 +11,6 @@ export default {
     noResultsText: 'No matching records found',
     loadingText: 'Loading items...',
   },
-  selectionControl: {
-    checked: 'Checked',
-    unchecked: 'Not Checked',
-  },
   dataTable: {
     itemsPerPageText: 'Rows per page:',
     ariaLabel: {

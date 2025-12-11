@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Uyğun məlumat tapılmadı',
     loadingText: 'Yüklənir... Zəhmət olmasa, gözləyin.',
   },
-  selectionControl: {
-    checked: 'Seçilmiş',
-    unchecked: 'Seçilməmiş',
-  },
   dataTable: {
     itemsPerPageText: 'Səhifə başı sətir sayı:',
     ariaLabel: {

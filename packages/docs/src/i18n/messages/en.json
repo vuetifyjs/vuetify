@@ -353,7 +353,7 @@
   "types": "Types",
   "twitter": "Twitter",
   "ui-components": "UI Components",
-  "ui-kits": "UI Kits",
+  "ui-kits": "Vuetify UI Kits",
   "ui": "UI",
   "ultra-wide": "Ultra-wide",
   "upgrade-guide": "Upgrade guide",
@@ -368,5 +368,12 @@
   "viewport": "Viewport",
   "vuetify": "Vuetify",
   "vuetify-one": "Vuetify One",
+  "vuetify-create": "Vuetify Create",
+  "vuetify-bin": "Vuetify Bin",
+  "vuetify-issues": "Vuetify Issues",
+  "vuetify-link": "Vuetify Link",
+  "vuetify-play": "Vuetify Play",
+  "vuetify-snips": "Vuetify Snips",
+  "vuetify-store": "Vuetify Store",
   "x": "Xitter"
 }

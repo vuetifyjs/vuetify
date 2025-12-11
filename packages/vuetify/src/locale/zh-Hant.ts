@@ -11,10 +11,6 @@ export default {
     noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
   },
-  selectionControl: {
-    checked: '已選取',
-    unchecked: '未選取',
-  },
   dataTable: {
     itemsPerPageText: '每頁列數：',
     ariaLabel: {

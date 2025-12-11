@@ -23,6 +23,9 @@ patchedDependencies:
   '@vitest/browser':
     hash: f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3
     path: patches/@vitest__browser.patch
+  '@vizzly-testing/cli':
+    hash: 67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0
+    path: patches/@vizzly-testing__cli.patch
   playwright-core:
     hash: be7446f2a75303dc1fce05913c13dad66a8c466d103eb5627c9092726d2e3430
     path: patches/playwright-core.patch
@@ -282,8 +285,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.25(typescript@5.8.3))
       '@vuetify/one':
-        specifier: ^2.6.2
-        version: 2.6.2(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.25)(lodash-es@4.17.21)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))(vuetify@packages+vuetify)
+        specifier: ^2.6.7
+        version: 2.6.7(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.25)(lodash-es@4.17.21)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -520,11 +523,11 @@ importers:
         specifier: ^4.0.13
         version: 4.0.13(vitest@4.0.13)
       '@vizzly-testing/cli':
-        specifier: ^0.16.4
-        version: 0.16.4(typescript@5.8.3)
+        specifier: ^0.17.0
+        version: 0.17.0(patch_hash=67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0)(typescript@5.8.3)
       '@vizzly-testing/vitest':
         specifier: ^0.0.3
-        version: 0.0.3(@vizzly-testing/cli@0.16.4(typescript@5.8.3))(vitest@4.0.13)
+        version: 0.0.3(@vizzly-testing/cli@0.17.0(patch_hash=67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0)(typescript@5.8.3))(vitest@4.0.13)
       '@vue/reactivity':
         specifier: ^3.5.25
         version: 3.5.25
@@ -3233,13 +3236,13 @@ packages:
   '@vitest/utils@4.0.13':
     resolution: {integrity: sha512-ydozWyQ4LZuu8rLp47xFUWis5VOKMdHjXCWhs1LuJsTNKww+pTHQNK4e0assIB9K80TxFyskENL6vCu3j34EYA==}
 
-  '@vizzly-testing/cli@0.16.4':
-    resolution: {integrity: sha512-kCB2weSjkEedeWSLcfh/68GNtIZwLOmQeYgWjv76RsNcVjHuewBHcLLEGBoMhmA1w8Kl/fTQUuYYrECJwglTCA==}
+  '@vizzly-testing/cli@0.17.0':
+    resolution: {integrity: sha512-6WjFFp1IfQZrp2NwRqo4/aDirIYQ+0hYCT/h94CN7YJUiKbkcJKeCUGeQs3lpbmES9KZ88RtB00XV4hoWFG7RQ==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
-  '@vizzly-testing/honeydiff@0.4.3':
-    resolution: {integrity: sha512-x7V+V/R8TmFNqHInmXjlDgJBhmKnliCXxXZyZ3XoHP6lwnMAjtvRnoLrPl2CFn4AHKllxPT4ofyMUb+VoJprLQ==}
+  '@vizzly-testing/honeydiff@0.5.0':
+    resolution: {integrity: sha512-Pw/CdhvtLm/uH0M/1rZukwlc5z41CWusXDUCDYBznxyBCWGayPFAY1vifQ3EaKCeWL31OF/pUsAr1lFBtEmnGg==}
     engines: {node: '>=22.0.0'}
 
   '@vizzly-testing/vitest@0.0.3':
@@ -3395,8 +3398,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.6.2':
-    resolution: {integrity: sha512-wvx6M7Ipcnp6Nv4YUbLSaKWynj2NxRSxXJMfpl2m39Z6L2N+8UxrFUJBgb4k8HUQhE3qaQj4kfzREojzgb5Y8Q==}
+  '@vuetify/one@2.6.7':
+    resolution: {integrity: sha512-x8GSGjiDrTh0BfsZIxHzNEm3XyBNmJEyugshbc8T0QPbcxHIzes3NxjVGIeUX8PSOLj+fszxB3iUfKxNgH/Rfw==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -11256,9 +11259,9 @@ snapshots:
       '@vitest/pretty-format': 4.0.13
       tinyrainbow: 3.0.3
 
-  '@vizzly-testing/cli@0.16.4(typescript@5.8.3)':
+  '@vizzly-testing/cli@0.17.0(patch_hash=67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0)(typescript@5.8.3)':
     dependencies:
-      '@vizzly-testing/honeydiff': 0.4.3
+      '@vizzly-testing/honeydiff': 0.5.0
       commander: 14.0.2
       cosmiconfig: 9.0.0(typescript@5.8.3)
       dotenv: 17.2.3
@@ -11268,11 +11271,11 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@vizzly-testing/honeydiff@0.4.3': {}
+  '@vizzly-testing/honeydiff@0.5.0': {}
 
-  '@vizzly-testing/vitest@0.0.3(@vizzly-testing/cli@0.16.4(typescript@5.8.3))(vitest@4.0.13)':
+  '@vizzly-testing/vitest@0.0.3(@vizzly-testing/cli@0.17.0(patch_hash=67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0)(typescript@5.8.3))(vitest@4.0.13)':
     dependencies:
-      '@vizzly-testing/cli': 0.16.4(typescript@5.8.3)
+      '@vizzly-testing/cli': 0.17.0(patch_hash=67d4b9235cc23347239c72f4befc5e832f435e579c4062bfe1c86e64a5ed70e0)(typescript@5.8.3)
       vitest: 4.0.13(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.13)(@vitest/ui@4.0.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@27.2.0)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1)
 
   '@volar/language-core@2.4.23':
@@ -11535,7 +11538,7 @@ snapshots:
       vue: 3.5.25(typescript@5.8.3)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.6.2(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.25)(lodash-es@4.17.21)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))(vuetify@packages+vuetify)':
+  '@vuetify/one@2.6.7(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.25)(lodash-es@4.17.21)(vite@7.2.4(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.94.2)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       lodash-es: 4.17.21

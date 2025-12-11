@@ -21,7 +21,7 @@ import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -50,7 +50,7 @@ export const makeVTextFieldProps = propsFactory({
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: never
+  default: { id: Readonly<Ref<string>> }
   counter: VCounterSlot
 }
 
@@ -264,7 +264,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                               class={ fieldClass }
                               data-no-activator=""
                             >
-                              { slots.default() }
+                              { slots.default({ id }) }
                               { inputNode }
                             </div>
                           ) : cloneVNode(inputNode, { class: fieldClass }),

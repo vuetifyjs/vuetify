@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
   },
-  selectionControl: {
-    checked: 'Zaznaczone',
-    unchecked: 'Niezaznaczone',
-  },
   dataTable: {
     itemsPerPageText: 'Wierszy na stronie:',
     ariaLabel: {

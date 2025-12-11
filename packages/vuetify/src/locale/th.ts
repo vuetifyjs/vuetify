@@ -11,10 +11,6 @@ export default {
     noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'กำลังโหลดข้อมูล...',
   },
-  selectionControl: {
-    checked: 'เลือกแล้ว',
-    unchecked: 'ยังไม่เลือก',
-  },
   dataTable: {
     itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {

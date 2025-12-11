@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Nerasta atitinkančių įrašų',
     loadingText: 'Kraunama...',
   },
-  selectionControl: {
-    checked: 'Pažymėta',
-    unchecked: 'Nepažymėta',
-  },
   dataTable: {
     itemsPerPageText: 'Eilutės per puslapį:',
     ariaLabel: {

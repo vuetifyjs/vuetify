@@ -11,10 +11,6 @@ export default {
     noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Φόρτωση αντικειμένου...',
   },
-  selectionControl: {
-    checked: 'Επιλεγμένο',
-    unchecked: 'Μη επιλεγμένο',
-  },
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',
     ariaLabel: {

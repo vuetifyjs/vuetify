@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## November 2025 Update
+
+🖊️ John Leider • 📅 December 10th, 2025
+
+November delivered Vuetify v3.11.0 (Harbinger) with VCalendar and VHotkey promoted from labs, new VTimePicker input variant, VDatePicker MD3 improvements, and significant CLI progress. J-Sek contributed an impressive 14 PRs while the v0 project hit 109 commits across 5 releases... { .text-medium-emphasis }
+
+[Read More](/blog/november-2025-update/) { .text-end }
+
 ## October 2025 Update
 
 🖊️ John Leider • 📅 November 11th, 2025
