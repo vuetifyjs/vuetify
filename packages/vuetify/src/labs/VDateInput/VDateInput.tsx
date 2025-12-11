@@ -194,11 +194,13 @@ export const VDateInput = genericComponent<new <
     }
 
     function onClick (e: MouseEvent) {
+      if (props.disabled) return
+
       e.preventDefault()
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        isEditingInput.value = true
+        isEditingInput.value = !props.readonly
       } else {
         menu.value = true
       }
@@ -287,8 +289,8 @@ export const VDateInput = genericComponent<new <
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
-          onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onClick:control={ onClick }
+          onClick:prepend={ onClick }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
         >
