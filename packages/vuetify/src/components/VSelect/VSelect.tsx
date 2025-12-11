@@ -236,6 +236,13 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
 
+      if (e.key === 'Backspace') {
+        e.preventDefault()
+        model.value = []
+        onClear(e as any)
+        return
+      }
+
       if (e.key === 'Home') {
         listRef.value?.focus('first')
       } else if (e.key === 'End') {
