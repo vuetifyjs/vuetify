@@ -35,8 +35,10 @@
   @for $i from list.length($maps) through 1
     $current-map: list.nth($maps, $i)
     $current-key: list.nth($keys, $i)
-    $current-val: if($i == list.length($maps), $value, $result)
-    $result: map.merge($current-map, ($current-key: $current-val))
+    @if $i == list.length($maps)
+      $result: map.merge($current-map, ($current-key: $value))
+    @else
+      $result: map.merge($current-map, ($current-key: $result))
 
   // Return result
   @return $result
@@ -49,10 +51,16 @@
 
 @function breakpoint-min($name, $breakpoints)
   $min: map.get($breakpoints, $name)
-  @return if($min != 0, $min, null)
+  @if $min != 0
+    @return $min
+  @else
+    @return null
 
 @function breakpoint-infix($name, $breakpoints)
-  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}")
+  @if breakpoint-min($name, $breakpoints) == null
+    @return ''
+  @else
+    @return '-#{$name}'
 
 // Adapted from https://gist.github.com/pentzzsolt/4949bbd7691d43d00616dc4f1451cae9#file-non-destructive-map-merge-4-scss
 @function map-deep-merge($parent-map, $child-map)
