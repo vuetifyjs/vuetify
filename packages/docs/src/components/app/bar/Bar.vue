@@ -30,7 +30,7 @@
 
         <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <AppBarOneLink />
+        <AppBarOneLink class="ml-4" />
       </div>
 
       <AppVerticalDivider v-if="mdAndUp" />
