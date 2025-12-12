@@ -11,6 +11,7 @@ import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
@@ -33,6 +34,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -127,6 +129,8 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'list-header': never
+    'list-footer': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -143,6 +147,8 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -217,10 +223,53 @@ export const VSelect = genericComponent<new <
       menu.value = !menu.value
     }
     function onListKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab' && !e.shiftKey && footerRef.value) {
+        const firstFocusableInFooter = focusableChildren(footerRef.value).at(0)
+        if (firstFocusableInFooter) {
+          e.preventDefault()
+          e.stopImmediatePropagation()
+          return firstFocusableInFooter.focus()
+        }
+      }
+
+      if (e.key === 'Tab' && e.shiftKey && headerRef.value) {
+        const firstFocusableInHeader = focusableChildren(headerRef.value).at(0)
+        if (firstFocusableInHeader) {
+          e.preventDefault()
+          e.stopImmediatePropagation()
+          return firstFocusableInHeader.focus()
+        }
+      }
+
+      if (e.key === 'Tab' && !e.shiftKey) {
+        // We did not need this previously... needs some investigation
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+
       if (checkPrintable(e)) {
         onKeydown(e)
       }
     }
+
+    function onHeaderKeydown (e: KeyboardEvent) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        return listRef.value?.focus('first')
+      }
+    }
+
+    function onFooterKeydown (e: KeyboardEvent) {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        return listRef.value?.focus('last')
+      }
+      if (e.key === 'Tab' && !e.shiftKey) {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || form.isReadonly.value) return
 
@@ -323,7 +372,8 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      const target = e.target as Element
+      if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
       }
     }
@@ -454,91 +504,102 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      tabindex="-1"
-                      selectable
-                      aria-live="polite"
-                      aria-labelledby={ `${id.value}-label` }
-                      aria-multiselectable={ props.multiple }
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
-                      { slots['prepend-item']?.() }
+                  <VSheet onFocusin={ onFocusin }>
+                    { slots['list-header'] && (
+                      <header onKeydown={ onHeaderKeydown } ref={ headerRef } tabindex="-1">
+                        { slots['list-header']() }
+                      </header>
+                    )}
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                    { hasList && (
+                      <VList
+                        key="select-list"
+                        ref={ listRef }
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onKeydown={ onListKeydown }
+                        tabindex="-1"
+                        selectable
+                        aria-live="polite"
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
+                        { slots['prepend-item']?.() }
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
-                        { ({ item, index, itemRef }) => {
-                          const camelizedProps = camelizeProps(item.props)
+                        { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                          <VListItem key="no-data" title={ t(props.noDataText) } />
+                        ))}
 
-                          const itemProps = mergeProps(item.props, {
-                            ref: itemRef,
-                            key: item.value,
-                            onClick: () => select(item, null),
-                            'aria-posinset': index + 1,
-                            'aria-setsize': displayItems.value.length,
-                          })
+                        <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
+                          { ({ item, index, itemRef }) => {
+                            const camelizedProps = camelizeProps(item.props)
 
-                          if (item.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            const itemProps = mergeProps(item.props, {
+                              ref: itemRef,
+                              key: item.value,
+                              onClick: () => select(item, null),
+                            })
+
+                            if (item.type === 'divider') {
+                              return slots.divider?.({ props: item.raw, index }) ?? (
+                                <VDivider { ...item.props } key={ `divider-${index}` } />
+                              )
+                            }
+
+                            if (item.type === 'subheader') {
+                              return slots.subheader?.({ props: item.raw, index }) ?? (
+                                <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                              )
+                            }
+
+                            return slots.item?.({
+                              item,
+                              index,
+                              props: itemProps,
+                            }) ?? (
+                              <VListItem { ...itemProps } role="option">
+                                {{
+                                  prepend: ({ isSelected }) => (
+                                    <>
+                                      { props.multiple && !props.hideSelected ? (
+                                        <VCheckboxBtn
+                                          key={ item.value }
+                                          modelValue={ isSelected }
+                                          ripple={ false }
+                                          tabindex="-1"
+                                          aria-hidden
+                                          onClick={ (event: MouseEvent) => event.preventDefault() }
+                                        />
+                                      ) : undefined }
+
+                                      { camelizedProps.prependAvatar && (
+                                        <VAvatar image={ camelizedProps.prependAvatar } />
+                                      )}
+
+                                      { camelizedProps.prependIcon && (
+                                        <VIcon icon={ camelizedProps.prependIcon } />
+                                      )}
+                                    </>
+                                  ),
+                                }}
+                              </VListItem>
                             )
-                          }
+                          }}
+                        </VVirtualScroll>
 
-                          if (item.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            )
-                          }
+                        { slots['append-item']?.() }
+                      </VList>
+                    )}
 
-                          return slots.item?.({
-                            item,
-                            index,
-                            props: itemProps,
-                          }) ?? (
-                            <VListItem { ...itemProps } role="option">
-                              {{
-                                prepend: ({ isSelected }) => (
-                                  <>
-                                    { props.multiple && !props.hideSelected ? (
-                                      <VCheckboxBtn
-                                        key={ item.value }
-                                        modelValue={ isSelected }
-                                        ripple={ false }
-                                        tabindex="-1"
-                                        aria-hidden
-                                        onClick={ (event: MouseEvent) => event.preventDefault() }
-                                      />
-                                    ) : undefined }
-
-                                    { camelizedProps.prependAvatar && (
-                                      <VAvatar image={ camelizedProps.prependAvatar } />
-                                    )}
-
-                                    { camelizedProps.prependIcon && (
-                                      <VIcon icon={ camelizedProps.prependIcon } />
-                                    )}
-                                  </>
-                                ),
-                              }}
-                            </VListItem>
-                          )
-                        }}
-                      </VVirtualScroll>
-
-                      { slots['append-item']?.() }
-                    </VList>
-                  )}
+                    { slots['list-footer'] && (
+                      <footer ref={ footerRef } onKeydown={ onFooterKeydown } tabindex="-1">
+                        { slots['list-footer']() }
+                      </footer>
+                    )}
+                  </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
