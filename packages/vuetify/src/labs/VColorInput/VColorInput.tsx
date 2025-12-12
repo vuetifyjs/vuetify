@@ -50,6 +50,7 @@ export const makeVColorInputProps = propsFactory({
     type: String as PropType<VAvatar['$props']['variant']>,
     default: 'text',
   },
+  pickerProps: Object as PropType<VColorPicker['$props']>,
 
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
@@ -111,15 +112,18 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const colorPickerProps = VColorPicker.filterProps(omit(props, [
-        'active',
-        'bgColor',
-        'color',
-        'rounded',
-        'maxWidth',
-        'minWidth',
-        'width',
-      ]))
+      const colorPickerProps = {
+        ...VColorPicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+        ])),
+        ...props.pickerProps,
+      }
       const textFieldProps = VTextField.filterProps(props)
 
       const slotWithPip = props.hidePip
