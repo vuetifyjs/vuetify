@@ -8,6 +8,7 @@ import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
@@ -77,7 +78,7 @@ export const makeVComboboxProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
-  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  }), ['validationValue', 'dirty']),
 }, 'VCombobox')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -133,6 +134,7 @@ export const VCombobox = genericComponent<new <
     let cleared = false
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
+    const { InputIcon } = useInputIcon(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -738,6 +740,13 @@ export const VCombobox = genericComponent<new <
                     tabindex="-1"
                   />
                 ) : undefined }
+                { props.appendInnerIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ args[0].iconColor.value }
+                  />
+                )}
               </>
             ),
           }}
