@@ -666,8 +666,7 @@ export const VAutocomplete = genericComponent<new <
             'append-inner': (...args) => (
               <>
                 { slots['append-inner']?.(...args) }
-
-                { props.menuIcon && (
+                { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
                     color={ vTextFieldRef.value?.fieldIconColor }
@@ -677,8 +676,7 @@ export const VAutocomplete = genericComponent<new <
                     aria-hidden
                     tabindex="-1"
                   />
-                )}
-
+                ) : undefined }
                 { props.appendInnerIcon && (
                   <InputIcon
                     key="append-icon"
