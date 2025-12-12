@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Please choose at least one value',
     pattern: 'Invalid format',
   },
+  command: {
+    search: 'Type a command or search...',
+  },
   hotkey: {
     then: 'then',
     ctrl: 'Ctrl',

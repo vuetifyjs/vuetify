@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Vælg venligst mindst én værdi',
     pattern: 'Ugyldigt format',
   },
+  command: {
+    search: 'Skriv en kommando eller søg...',
+  },
   hotkey: {
     then: 'derefter',
     ctrl: 'Ctrl',

@@ -1,0 +1,36 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-command-palette {
+    > .v-overlay__content > .v-sheet {
+      display: flex;
+      flex: 1 1 100%;
+      flex-direction: column;
+    }
+
+    &__input-container {
+      padding: 8px 16px;
+    }
+
+    &__content {
+      overflow-y: auto;
+    }
+
+    &__no-data {
+      padding: 16px;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    &__list {
+      .v-list-subheader {
+        opacity: 0.7;
+        user-select: none;
+      }
+
+      .v-divider {
+        margin-block: 4px;
+      }
+    }
+  }
+}

@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Valitse ainakin yksi arvo',
     pattern: 'Virheellinen muoto',
   },
+  command: {
+    search: 'Kirjoita komento tai hae...',
+  },
   hotkey: {
     then: 'sitten',
     ctrl: 'Ctrl',

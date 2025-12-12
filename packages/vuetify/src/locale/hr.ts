@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Odaberite barem jednu vrijednost',
     pattern: 'Nevaljan format',
   },
+  command: {
+    search: 'Unesite naredbu ili pretražite...',
+  },
   hotkey: {
     then: 'zatim',
     ctrl: 'Ctrl',
