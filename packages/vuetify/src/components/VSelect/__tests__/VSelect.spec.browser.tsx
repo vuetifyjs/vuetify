@@ -789,6 +789,106 @@ describe('VSelect', () => {
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
+  describe('backspace key functionality', () => {
+    it('should clear v-model when backspace is pressed in single selection mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+    })
+
+    it('should clear v-model when backspace is pressed in multiple selection mode', async () => {
+      const selectedItems = ref(['Item 1', 'Item 2'])
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItems.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          multiple
+        />
+      ))
+
+      expect(selectedItems.value).toHaveLength(2)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItems.value).toHaveLength(0)
+    })
+
+    it('should open menu when backspace is pressed with openOnClear prop', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          openOnClear
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+      expect(screen.queryByRole('listbox')).toBeNull()
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+    })
+
+    it('should not clear v-model when backspace is pressed in readonly mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          readonly
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBe('Item 1')
+    })
+
+    it('should clear v-model with chips when backspace is pressed', async () => {
+      const selectedItems = ref(['Item 1', 'Item 2'])
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItems.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          multiple
+          chips
+          closableChips
+        />
+      ))
+
+      expect(selectedItems.value).toHaveLength(2)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItems.value).toHaveLength(0)
+    })
+  })
+
   describe('native form submission', () => {
     const items = [
       { title: 'Item 1', value: 1 },
