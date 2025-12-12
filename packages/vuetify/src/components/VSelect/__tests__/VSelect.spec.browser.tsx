@@ -789,8 +789,8 @@ describe('VSelect', () => {
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
-  describe('backspace key functionality', () => {
-    it('should clear v-model when backspace is pressed in single selection mode', async () => {
+  describe('clear with backspace', () => {
+    it('should clear selection in single selection mode', async () => {
       const selectedItem = ref('Item 1')
 
       const { element } = render(() => (
@@ -809,7 +809,7 @@ describe('VSelect', () => {
       expect(selectedItem.value).toBeNull()
     })
 
-    it('should clear v-model when backspace is pressed in multiple selection mode', async () => {
+    it('should clear selection in multiple selection mode', async () => {
       const selectedItems = ref(['Item 1', 'Item 2'])
 
       const { element } = render(() => (
@@ -829,7 +829,7 @@ describe('VSelect', () => {
       expect(selectedItems.value).toHaveLength(0)
     })
 
-    it('should open menu when backspace is pressed with openOnClear prop', async () => {
+    it('should open menu with openOnClear prop', async () => {
       const selectedItem = ref('Item 1')
 
       const { element } = render(() => (
@@ -851,7 +851,7 @@ describe('VSelect', () => {
       await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
     })
 
-    it('should not clear v-model when backspace is pressed in readonly mode', async () => {
+    it('should not clear in readonly mode', async () => {
       const selectedItem = ref('Item 1')
 
       const { element } = render(() => (
