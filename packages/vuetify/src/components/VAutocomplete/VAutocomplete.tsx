@@ -682,7 +682,6 @@ export const VAutocomplete = genericComponent<new <
                     key="append-icon"
                     name="appendInner"
                     color={ args[0].iconColor.value }
-                    icon={ props.appendInnerIcon }
                   />
                 )}
               </>
