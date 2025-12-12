@@ -149,7 +149,7 @@
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
     "@vitest/ui": "^4.0.13",
-    "@vizzly-testing/cli": "^0.17.0",
+    "@vizzly-testing/cli": "^0.19.2",
     "@vizzly-testing/vitest": "^0.0.3",
     "@vue/reactivity": "^3.5.25",
     "@vue/shared": "^3.5.25",
