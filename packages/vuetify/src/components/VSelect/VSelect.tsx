@@ -243,6 +243,12 @@ export const VSelect = genericComponent<new <
         }
       }
 
+      if (e.key === 'Tab' && !e.shiftKey) {
+        // We did not need this previously... needs some investigation
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+
       if (checkPrintable(e)) {
         onKeydown(e)
       }
