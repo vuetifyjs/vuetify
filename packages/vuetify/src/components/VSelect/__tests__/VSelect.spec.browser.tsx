@@ -795,6 +795,7 @@ describe('VSelect', () => {
 
       const { element } = render(() => (
         <VSelect
+          clearable
           v-model={ selectedItem.value }
           items={['Item 1', 'Item 2', 'Item 3']}
         />
@@ -813,6 +814,7 @@ describe('VSelect', () => {
 
       const { element } = render(() => (
         <VSelect
+          clearable
           v-model={ selectedItems.value }
           items={['Item 1', 'Item 2', 'Item 3']}
           multiple
@@ -832,6 +834,7 @@ describe('VSelect', () => {
 
       const { element } = render(() => (
         <VSelect
+          clearable
           v-model={ selectedItem.value }
           items={['Item 1', 'Item 2', 'Item 3']}
           openOnClear
@@ -853,6 +856,7 @@ describe('VSelect', () => {
 
       const { element } = render(() => (
         <VSelect
+          clearable
           v-model={ selectedItem.value }
           items={['Item 1', 'Item 2', 'Item 3']}
           readonly
@@ -865,27 +869,6 @@ describe('VSelect', () => {
       await userEvent.keyboard('{Backspace}')
 
       expect(selectedItem.value).toBe('Item 1')
-    })
-
-    it('should clear v-model with chips when backspace is pressed', async () => {
-      const selectedItems = ref(['Item 1', 'Item 2'])
-
-      const { element } = render(() => (
-        <VSelect
-          v-model={ selectedItems.value }
-          items={['Item 1', 'Item 2', 'Item 3']}
-          multiple
-          chips
-          closableChips
-        />
-      ))
-
-      expect(selectedItems.value).toHaveLength(2)
-
-      await userEvent.click(element)
-      await userEvent.keyboard('{Backspace}')
-
-      expect(selectedItems.value).toHaveLength(0)
     })
   })
 

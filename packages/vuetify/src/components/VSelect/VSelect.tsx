@@ -236,7 +236,7 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
 
-      if (e.key === 'Backspace') {
+      if (props.clearable && e.key === 'Backspace') {
         e.preventDefault()
         model.value = []
         onClear(e)
