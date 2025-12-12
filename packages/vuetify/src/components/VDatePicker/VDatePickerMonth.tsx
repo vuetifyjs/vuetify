@@ -42,10 +42,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   hideWeekdays: Boolean,
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
   showWeek: Boolean,
-  readonly: {
-    type: Boolean,
-    defauly: false,
-  },
+  readonly: Boolean,
   transition: {
     type: String,
     default: 'picker-transition',
