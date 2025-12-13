@@ -4,7 +4,7 @@ import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
 
 // Utilities
-import { render, screen } from '@test'
+import { render, screen, userEvent } from '@test'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', async () => {
@@ -42,7 +42,7 @@ describe('VBreadcrumbs', () => {
 
   it('should use color', () => {
     render(() => (
-      <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>
+      <VBreadcrumbs items={['hello', 'world']} color="primary" activeColor="primary"></VBreadcrumbs>
     ))
 
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
@@ -109,5 +109,75 @@ describe('VBreadcrumbs', () => {
 
     expect(screen.getByText('/')).toBeVisible()
     expect(screen.getByText('-')).toBeVisible()
+  })
+
+  it('should collapse into ellipsis when items exceed totalVisible', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
+        totalVisible={ 5 }
+      />
+    ))
+
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
+    expect(ellipsis).toHaveClass('v-breadcrumbs-item--ellipsis')
+  })
+
+  it('should expand all items when ellipsis is clicked and collapseInMenu = false', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']}
+        totalVisible={ 5 }
+        collapseInMenu={ false }
+      />
+    ))
+
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
+
+    await userEvent.click(ellipsis)
+
+    const items = screen.getAllByCSS('.v-breadcrumbs-item')
+    expect(items).toHaveLength(8)
+  })
+
+  it('should show a VMenu when collapseInMenu = true', async () => {
+    render(() => (
+      <VBreadcrumbs
+        items={[
+          { title: 'a' },
+          { title: 'b', href: '/b' },
+          { title: 'c', href: '/c' },
+          { title: 'd' },
+        ]}
+        totalVisible={ 3 }
+        collapseInMenu
+      />
+    ))
+
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
+
+    await userEvent.click(ellipsis)
+
+    const listItems = screen.getAllByText(/b|c/)
+    expect(listItems).toHaveLength(2)
+  })
+
+  it('should not use VMenu when collapseInMenu = false', () => {
+    render(() => (
+      <VBreadcrumbs
+        items={['a', 'b', 'c', 'd']}
+        totalVisible={ 3 }
+        collapseInMenu={ false }
+      />
+    ))
+
+    const ellipsis = screen.getByText('...')
+    expect(ellipsis).toBeVisible()
+
+    const menu = screen.queryByCSS('.v-menu')
+    expect(menu).toBeNull()
   })
 })
