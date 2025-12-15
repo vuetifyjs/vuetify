@@ -520,11 +520,11 @@ importers:
         specifier: ^4.0.13
         version: 4.0.13(vitest@4.0.13)
       '@vizzly-testing/cli':
-        specifier: ^0.19.2
-        version: 0.19.2(typescript@5.8.3)
+        specifier: ^0.20.0
+        version: 0.20.0(typescript@5.8.3)
       '@vizzly-testing/vitest':
         specifier: ^0.0.3
-        version: 0.0.3(@vizzly-testing/cli@0.19.2(typescript@5.8.3))(vitest@4.0.13)
+        version: 0.0.3(@vizzly-testing/cli@0.20.0(typescript@5.8.3))(vitest@4.0.13)
       '@vue/reactivity':
         specifier: ^3.5.25
         version: 3.5.25
@@ -3396,8 +3396,8 @@ packages:
   '@vitest/utils@4.0.13':
     resolution: {integrity: sha512-ydozWyQ4LZuu8rLp47xFUWis5VOKMdHjXCWhs1LuJsTNKww+pTHQNK4e0assIB9K80TxFyskENL6vCu3j34EYA==}
 
-  '@vizzly-testing/cli@0.19.2':
-    resolution: {integrity: sha512-Eg+OZq+lOhl5fV+MBx060pIZEi/GG1+0fKfP9ZeSvLuU8emHbIP3wg+t2lmaXeWgustVvQRh1H39Jag1oeaBQw==}
+  '@vizzly-testing/cli@0.20.0':
+    resolution: {integrity: sha512-aQqZnMgVvuYjuNNjk1ztKCNIyy9mDzFE6ORivNr4Wak5CvXLU37ABuM10UqXhYU4dHqXoG8YG8CGvFTjV0XS0Q==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -11555,7 +11555,7 @@ snapshots:
       '@vitest/pretty-format': 4.0.13
       tinyrainbow: 3.0.3
 
-  '@vizzly-testing/cli@0.19.2(typescript@5.8.3)':
+  '@vizzly-testing/cli@0.20.0(typescript@5.8.3)':
     dependencies:
       '@vizzly-testing/honeydiff': 0.6.0
       commander: 14.0.2
@@ -11569,9 +11569,9 @@ snapshots:
 
   '@vizzly-testing/honeydiff@0.6.0': {}
 
-  '@vizzly-testing/vitest@0.0.3(@vizzly-testing/cli@0.19.2(typescript@5.8.3))(vitest@4.0.13)':
+  '@vizzly-testing/vitest@0.0.3(@vizzly-testing/cli@0.20.0(typescript@5.8.3))(vitest@4.0.13)':
     dependencies:
-      '@vizzly-testing/cli': 0.19.2(typescript@5.8.3)
+      '@vizzly-testing/cli': 0.20.0(typescript@5.8.3)
       vitest: 4.0.13(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.13)(@vitest/ui@4.0.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@27.2.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
 
   '@volar/language-core@2.4.23':
