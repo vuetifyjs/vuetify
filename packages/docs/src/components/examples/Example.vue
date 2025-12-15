@@ -249,7 +249,7 @@
       hide: xs.value,
     },
     {
-      icon: '$figma',
+      icon: '$vuetify-figma',
       path: 'view-in-figma',
       href: figmaLink.value,
       target: '_blank',
