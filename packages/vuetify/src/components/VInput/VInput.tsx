@@ -205,6 +205,7 @@ export const VInput = genericComponent<new <T>(
                 ? slots.prepend(slotProps.value)
                 : (props.prependIcon && (
                   <InputIcon
+                    tabindex={ -1 }
                     key="prepend-icon"
                     name="prepend"
                     color={ iconColor.value }
@@ -226,6 +227,7 @@ export const VInput = genericComponent<new <T>(
                 ? slots.append(slotProps.value)
                 : (props.appendIcon && (
                   <InputIcon
+                    tabindex={ -1 }
                     key="append-icon"
                     name="append"
                     color={ iconColor.value }
