@@ -1,6 +1,7 @@
 // Components
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
@@ -109,6 +110,7 @@ export const VDateInput = genericComponent<new <
     const adapter = useDate()
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
+    const { InputIcon } = useInputIcon(props)
 
     const { clampDate, isInAllowedRange } = useCalendarRange(props)
 
@@ -288,7 +290,6 @@ export const VDateInput = genericComponent<new <
           onBlur={ onBlur }
           validationValue={ model.value }
           onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
         >
@@ -350,6 +351,18 @@ export const VDateInput = genericComponent<new <
 
                 { slots.default?.() }
               </>
+            ),
+            prepend: prependSlotProps => (
+              slots.prepend
+                ? slots.prepend(prependSlotProps)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    tabindex={ -1 }
+                    onClick={ isInteractive.value ? onClick : undefined }
+                  />
+                ))
             ),
           }}
         </VTextField>
