@@ -54,6 +54,7 @@ export const makeVDateInputProps = propsFactory({
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
   },
+  pickerProps: Object as PropType<VDatePicker['$props']>,
 
   ...makeDateFormatProps(),
   ...makeDisplayProps({
@@ -262,16 +263,19 @@ export const VDateInput = genericComponent<new <
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, [
-        'active',
-        'bgColor',
-        'color',
-        'location',
-        'rounded',
-        'maxWidth',
-        'minWidth',
-        'width',
-      ]))
+      const datePickerProps = {
+        ...VDatePicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'location',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+        ])),
+        ...props.pickerProps,
+      }
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
