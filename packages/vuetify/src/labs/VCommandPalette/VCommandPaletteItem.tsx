@@ -30,6 +30,7 @@ export const VCommandPaletteItemComponent = genericComponent()({
     useRender(() => (
       <VListItem
         index={ props.index }
+        value={ props.item.value }
         title={ props.item.title }
         subtitle={ props.item.subtitle }
         prependIcon={ props.item.prependIcon }

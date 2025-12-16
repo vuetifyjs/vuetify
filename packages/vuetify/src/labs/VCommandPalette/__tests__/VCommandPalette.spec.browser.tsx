@@ -322,7 +322,7 @@ describe('VCommandPalette', () => {
   describe('Slots', () => {
     it('should render prepend, append, and no-data slots', async () => {
       const model = ref(true)
-      const search = ref('nonexistent')
+      const search = ref('')
       render(() => (
         <VCommandPalette
           v-model={ model.value }
@@ -337,9 +337,16 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
+      await wait(100)
 
       expect(screen.getByTestId('prepend-slot')).toBeInTheDocument()
       expect(screen.getByTestId('append-slot')).toBeInTheDocument()
+
+      // Type a search that yields no results to trigger no-data slot
+      const input = screen.getByRole('textbox')
+      await userEvent.type(input, 'nonexistent')
+      await wait(100)
+
       expect(screen.getByTestId('no-data-slot')).toBeInTheDocument()
     })
   })
@@ -364,7 +371,7 @@ describe('VCommandPalette', () => {
       })
     })
 
-    it('should update aria-selected when navigating', async () => {
+    it('should update aria-activedescendant when navigating', async () => {
       const model = ref(true)
       render(() => (
         <VCommandPalette v-model={ model.value } items={ testItems } />
@@ -373,15 +380,19 @@ describe('VCommandPalette', () => {
       await screen.findByRole('dialog')
       await wait(100)
 
+      const listbox = screen.getByRole('listbox')
       const options = screen.getAllByRole('option')
-      expect(options[0].getAttribute('aria-selected')).toBe('true')
-      expect(options[1].getAttribute('aria-selected')).toBe('false')
 
+      // Initially focused on first item
+      const firstItemId = options[0].id
+      expect(listbox.getAttribute('aria-activedescendant')).toBe(firstItemId)
+
+      // Navigate to second item
       await userEvent.keyboard('{ArrowDown}')
       await wait(100)
 
-      expect(options[0].getAttribute('aria-selected')).toBe('false')
-      expect(options[1].getAttribute('aria-selected')).toBe('true')
+      const secondItemId = options[1].id
+      expect(listbox.getAttribute('aria-activedescendant')).toBe(secondItemId)
     })
   })
 })

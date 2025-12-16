@@ -213,8 +213,13 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         searchQuery.value = ''
         navigation.reset()
 
+        // Use requestAnimationFrame to ensure DOM is fully rendered
         nextTick(() => {
-          searchInputRef.value?.controlRef?.focus()
+          requestAnimationFrame(() => {
+            if (searchInputRef.value && typeof searchInputRef.value.focus === 'function') {
+              searchInputRef.value.focus()
+            }
+          })
         })
       } else if (!newValue && oldValue) {
         nextTick(() => {
@@ -222,7 +227,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           previouslyFocusedElement.value = null
         })
       }
-    })
+    }, { immediate: true })
 
     const computedDialogProps = computed(() => {
       const baseProps: Record<string, any> = {
