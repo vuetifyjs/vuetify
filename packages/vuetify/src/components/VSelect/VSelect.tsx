@@ -208,7 +208,7 @@ export const VSelect = genericComponent<new <
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
 
-    function onClear (e: MouseEvent) {
+    function onClear (e: MouseEvent | KeyboardEvent) {
       if (props.openOnClear) {
         menu.value = true
       }
@@ -236,6 +236,13 @@ export const VSelect = genericComponent<new <
 
       if (['Escape', 'Tab'].includes(e.key)) {
         menu.value = false
+      }
+
+      if (props.clearable && e.key === 'Backspace') {
+        e.preventDefault()
+        model.value = []
+        onClear(e)
+        return
       }
 
       if (e.key === 'Home') {
