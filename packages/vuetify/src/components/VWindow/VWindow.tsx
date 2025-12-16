@@ -261,22 +261,20 @@ export const VWindow = genericComponent<new <T>(
     })
 
     function onKeyDown (e: KeyboardEvent) {
-      if (props.direction === 'horizontal' && !['ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        return
-      }
-
-      if (props.direction === 'vertical' && !['ArrowUp', 'ArrowDown'].includes(e.key)) {
-        return
-      }
-
-      e.preventDefault()
-
-      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
         prev()
         nextTick(() => { canMoveBack.value ? focusArrow(0) : focusArrow(1) })
       }
 
-      if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
         next()
         nextTick(() => { canMoveForward.value ? focusArrow(1) : focusArrow(0) })
       }

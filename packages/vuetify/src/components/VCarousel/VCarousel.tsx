@@ -106,28 +106,23 @@ export const VCarousel = genericComponent<new <T>(
     }
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
-      if (props.direction === 'horizontal' && !['ArrowLeft', 'ArrowRight'].includes(e.key)) {
-        return
-      }
-
-      if (props.direction === 'vertical' && !['ArrowUp', 'ArrowDown'].includes(e.key)) {
-        return
-      }
-
-      e.preventDefault()
-
-      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
         group.prev()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
       }
 
-      if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
         group.next()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
       }
-
-      nextTick(() => {
-        const activeBtn = windowRef.value?.$el.querySelector('.v-btn--active')
-        activeBtn?.focus()
-      })
     }
 
     useRender(() => {
