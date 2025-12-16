@@ -77,12 +77,8 @@ This would be the same as only importing `vuetify/styles/core`:
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
-  $body-font-family: ('Remora Sans', sans-serif),
   $color-pack: false,
   $utilities: false,
-  $layers: false, // applies to core styles
-  // $grid-breakpoints: (...), // applies to responsive utilites
-  // $typography: (...)
 );
 ```
 
@@ -94,8 +90,7 @@ The `vuetify/settings` module is used to configure global SASS variables. See [s
 
 ```scss { resource="src/styles/_settings.scss" }
 @use 'vuetify/settings' with (
-  $layers: false, // applies to components
-  // $grid-breakpoints: (...), // applies to VContainer and VCol
-  // rest of component-specific variables
+  $utilities: false,
+  $body-font-family: ('Remora Sans', sans-serif),
 );
 ```
