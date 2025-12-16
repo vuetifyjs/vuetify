@@ -20,7 +20,7 @@ Latest news, updates, and stories about Vuetify.
 
 ## Vuetify Project baseline with Nuxt and UnoCSS
 
-🖊️ Jacek Czarniecki • 📅 December 15th, 2025
+🖊️ Jacek Czarniecki • 📅 December 16th, 2025
 
 Let's explore a lean, production‑ready setup for Nuxt application that combines Vuetify 3 with UnoCSS. By disabling Vuetify’s default CSS bundles (basic colors and utility classes) and generating only the styles actually used, the resulting CSS footprint shrinks dramatically. We will ensure the project foundation works with themes, typography, and breakpoints without compromises. { .text-medium-emphasis }
 
