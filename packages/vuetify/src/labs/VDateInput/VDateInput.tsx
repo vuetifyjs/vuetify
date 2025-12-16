@@ -277,7 +277,7 @@ export const VDateInput = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          class={ props.class }
+          class={['v-date-input', props.class]}
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
