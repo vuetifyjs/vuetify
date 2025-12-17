@@ -33,7 +33,7 @@ The article will walk through scaffolding a starter project, installing and wiri
 
 ## The steps ahead
 
-Right after generatig starter project we are going to disable all CSS for non-theme colors (Material colors palette) and CSS utilities. This leaves out styles for "reset", transitions and components. UnoCSS is going to generate them on the fly making sure we only bundle CSS we actually use.
+Right after generating starter project we are going to disable all CSS for non-theme colors (Material colors palette) and CSS utilities. This leaves out styles for "reset", transitions and components. UnoCSS is going to generate them on the fly making sure we only bundle CSS we actually use.
 
 Along the way we will keep in mind that successful integration has to correctly match following aspects:
 
@@ -41,7 +41,7 @@ Along the way we will keep in mind that successful integration has to correctly 
 - custom typography
 - responsive breakpoints
 
-Lastly, we will enable CSS layers to estabilish order. This part is meant for advanced frontend developers and teams that have a solid knowledge of CSS and the layers can impact day to day work. It is not a free lunch and it might not always fit the workflow or the way you write CSS.
+Lastly, we will enable CSS layers to establish order. This part is meant for advanced frontend developers and teams that have a solid knowledge of CSS and the layers can impact day to day work. It is not a free lunch and it might not always fit the workflow or the way you write CSS.
 
 ## Scaffold a new project
 
@@ -460,7 +460,7 @@ unocss: {
 
 ### Custom typography (text variants)
 
-> If you intend to fully rely on TailwindCSS classes or have some specific typography requirements, you can skip no the next part.
+> If you intend to fully rely on TailwindCSS classes or have some specific typography requirements, you can skip to the next part.
 
 Let's add a quick preview page for all the typography options that used to be provided by Vuetify.
 
@@ -544,7 +544,7 @@ However, unlike other aspects it is more challenging to have a squicky cleanup w
 - `settings.scss` - breakpoints for VContainer, VCol and responsive utilities (if we would keep any)
 - general Vuetify configuration `display` » `thresholds` for responsive logic in some components, `useDisplay` and `$vuetify.display.*`
 
-UnoCSS needs its own values and expects slightly different format, but we can still define them in a separate TS file and, so we won't end up with 3 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enought talking - let's jump right into the code.
+UnoCSS needs its own values and expects slightly different format, but we can still define them in a separate TS file and, so we won't end up with 3 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enough talking - let's jump right into the code.
 
 Create `breakpoints.ts` under `./app/theme` (create new `theme` folder) with the following content:
 
