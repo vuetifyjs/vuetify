@@ -1,6 +1,6 @@
 <template>
   <v-tooltip
-    v-if="auth.user.isAdmin"
+    v-if="auth.isAdmin"
     location="bottom"
     text="Admin"
   >
