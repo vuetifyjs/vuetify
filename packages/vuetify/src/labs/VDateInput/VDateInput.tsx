@@ -363,7 +363,7 @@ export const VDateInput = genericComponent<new <
                   <InputIcon
                     key="prepend-icon"
                     name="prepend"
-                    tabindex={ -1 }
+                    tabindex={ props['onClick:prepend'] ? undefined : -1 }
                     onClick={ isInteractive.value ? onClick : undefined }
                   />
                 ))
