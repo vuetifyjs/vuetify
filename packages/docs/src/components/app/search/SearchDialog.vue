@@ -159,11 +159,11 @@
   function transformItems (items: any[]) {
     // const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], locale)
     items = items.map(item => {
-      const url = new URL(item.url)
+      const url = new URL(item.url_without_variables)
 
       return {
         ...item,
-        url: url.href.split(url.origin).pop().replace(url.search, ''),
+        url: url.href.split(url.origin).pop(),
       }
     })
     const groups = groupItems(items, 'lvl0')
