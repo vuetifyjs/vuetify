@@ -19,9 +19,9 @@ The article will walk through scaffolding a starter project, installing and wiri
 * [The steps ahead](#the-steps-ahead)
 * [Scaffold a new project](#scaffold-a-new-project)
 * [Keep an eye on the outputs](#keep-an-eye-on-the-outputs)
-* [Disable CSS for utilities and standard colors](#disable-css-for-utilities-and-standard-colors)
+* [Disable CSS for utilities](#disable-css-for-utilities)
   * [Shortest way to setup UnoCSS](#shortest-way-to-setup-unocss)
-  * [Migrating to utilities from TailwindCSS v4](#migrating-to-utilities-from-tailwind-css-v4)
+  * [Migrating to utilities from TailwindCSS v4](#migrating-to-utilities-from-tailwindcss-v4)
   * [Resolve specificity issues (quickly)](#resolve-specificity-issues-quickly)
   * [Font family configuration](#font-family-configuration)
   * [Light/dark mode compatibility](#light-dark-mode-compatibility)
@@ -37,9 +37,9 @@ Right after generating starter project we are going to disable all CSS for non-t
 
 Along the way we will keep in mind that successful integration has to correctly match following aspects:
 
-- themes (light / dark mode)
-- custom typography
-- responsive breakpoints
+* themes (light / dark mode)
+* custom typography
+* responsive breakpoints
 
 Lastly, we will enable CSS layers to establish order. This part is meant for advanced frontend developers and teams that have a solid knowledge of CSS and the layers can impact day to day work. It is not a free lunch and it might not always fit the workflow or the way you write CSS.
 
@@ -131,7 +131,7 @@ Let's adjust the `app/assets/settings.scss`:
 );
 ```
 
-If you run `pnpm build` again, you may observe that `entry.*.css` bundle is significantly smaller. We could get even further by replacing MDI font icons with SVG icons or UnoCSS icons "preset", but it is out of scope for this article.
+If you run `pnpm build` again, you may observe that `entry.*.css` bundle is significantly smaller. We could get even further by replacing MDI font icons with SVG icons or UnoCSS preset for icons, but it is out of scope for this article.
 
 ### Shortest way to setup UnoCSS
 
@@ -158,7 +158,7 @@ bun add -D unocss unocss-preset-vuetify @unocss/nuxt
 Register the module in `nuxt.config.ts` and paste initial configuration nearby:
 
 ```ts
-import { presetVuetify, borderRadii } from 'unocss-preset-vuetify'
+import { presetVuetify } from 'unocss-preset-vuetify'
 
 export default defineNuxtConfig({
   // ...
@@ -174,16 +174,14 @@ export default defineNuxtConfig({
     presets: [
       presetVuetify(),
     ],
-    safelist: [
-      ...Object.keys(borderRadii).map(v => ['rounded', v].filter(Boolean).join('-')),
-    ]
+    safelist: [/* classes that have to be always generated */],
   },
 })
 ```
 
-And with this preset, we get all the utilities back. Except this time, UnoCSS scans the project files and generates CSS only for the classes we actually use.
+With the dedicated preset for Vuetify, we get all the utilities back. Except this time, UnoCSS scans the project files and generates CSS only for the classes we actually use.
 
-Keep in mind that this released not long ago. If you notice any problem or limitation, reach out on [Discord](https://community.vuetifyjs.com) or post the issue on [GitHub](https://github.com/vuetifyjs/unocss-preset-vuetify).
+Keep in mind that this library was released fairly recently. If you notice any problem or limitation, reach out on [Discord](https://community.vuetifyjs.com) or post the issue on [GitHub](https://github.com/vuetifyjs/unocss-preset-vuetify).
 
 ### Migrating to utilities from TailwindCSS v4
 
@@ -211,20 +209,18 @@ bun add -D @unocss/preset-wind4
 
 :::
 
-```diff
--import { presetVuetify } from 'unocss-preset-vuetify'
-+import presetWind4 from '@unocss/preset-wind4'
+```ts
+import presetWind4 from '@unocss/preset-wind4'
 
 export default defineNuxtConfig({
   // ...
   unocss: {
     presets: [
--      presetVuetify(),
-+      presetWind4({
-+        preflights: {
-+          reset: false,
-+        },
-+      }),
+      presetWind4({
+        preflights: {
+          reset: false,
+        },
+      }),
     ],
   },
 })
@@ -234,37 +230,37 @@ The code above ensures we use only CSS reset from Vuetify and won't experience c
 
 Since TailwindCSS preset comes with its color palette we can use it instead of the Material palette from Vuetify. It is not an equivalent replacement, but if you want to go all-in with TailwindCSS utilities, you probably know what to expect ahead. Let's change the `app/assets/settings.scss`:
 
-```diff
+```scss
 @use 'vuetify/settings' with (
-+  $color-pack: false,
+  $color-pack: false, // <- disable colors from Material palette
   $utilities: false,
 );
 ```
 
 We can finish this part with small adjustment to the example content in `HelloWorld.vue` and `AppFooter.vue`
 
-- replace `fill-height` with `h-full`
-- replace `font-weight-` with `font-`
-- replace `mb-n1` with `-mb-1`
+* replace `fill-height` with `h-full`
+* replace `font-weight-` with `font-`
+* replace `mb-n1` with `-mb-1`
 
 Optionally replace typography classes if you intend to use utilities from TailwindCSS. Further in the article, we will configure UnoCSS to provide typography aligned with Vuetify conventions. If you already know you won't need it, these are the closest equivalents (for the font size only):
 
-- `text-h2` » `text-5xl`
-- `text-h5` » `text-2xl`
-- `text-subtitle-1` » `text-base`
-- `text-body-2` » `text-sm`
+* `text-h2` » `text-5xl`
+* `text-h5` » `text-2xl`
+* `text-subtitle-1` » `text-base`
+* `text-body-2` » `text-sm`
 
 Turns out `v-container` paired with `fill-height` class gets special additional styles when `v-row` is also on the page. So we need to add some more utility classes to move the content to the center:
 
 ```html
-  <v-container class="h-full flex items-center" max-width="900">
+<v-container class="h-full flex items-center" max-width="900">
 ```
 
 There is one more component that relies on utility classes - `v-row`. Convenient props named `justify` and `align` rely on the utilitity classes for CSS properties `justify-content` and `align-items` respectively. TailwindCSS won't detect them though and even if we could force it to generate them, the classes in TailwindCSS are named slightly differently (e.g. `justify-space-between` vs `justify-between`). There are couple of ways to get around it.
 
-- just paste the classes in any CSS/SCSS file meant for global styles (e.g. `main.scss`)
-- spread `$utilites` to selectively disable most of them while keeping `justify-content` and `align-items`
-- don't use VRow/VCol or ban just those two problematic props (can be achieved by patching `vuetify-eslint-plugin`)
+* just paste the classes in any CSS/SCSS file meant for global styles (e.g. `main.scss`)
+* spread `$utilites` to selectively disable most of them while keeping `justify-content` and `align-items`
+* don't use VRow/VCol or ban just those two problematic props (can be achieved by patching `vuetify-eslint-plugin`)
 
 If you go with the first option, you can copy the classes below.
 
@@ -331,11 +327,11 @@ In our current configuration order in which the styles are loaded matters - whic
 
 Usually the easiest fix would be to make UnoCSS generate all the styles with `!important`. This would make them equivalent to original Vuetify utility classes that all had `!important` by default. It is not very elegant, but get's the job done and is easy to reason about. If you are interested in using CSS layers instead, skip to the [final](#using-css-layers) part of this article.
 
-```diff
+```ts
 unocss: {
   presets: [
     presetWind4({
-+      important: true, // <-- utility classes always win
+      important: true, // <- utility classes always win
       preflights: { ... },
     }),
   ],
@@ -346,25 +342,25 @@ unocss: {
 
 To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of configuration required to set up custom font family. Beware it scans the output CSS - doing a magic trick similar to TailwindCSS, but for the fonts. So you might want to inspect the build logs and make sure there is no mention of Roboto after applying the changes described below.
 
-```diff
-  unocss: {
-    presets: [ ... ],
-+    theme: {
-+      font: {
-+        heading: "'Bricolage Grotesque', sans-serif",
-+        body: "Sen, sans-serif",
-+        mono: "'Sometype Mono', monospace",
-+      },
-+    },
-+    safelist: ['font-heading', 'font-body', 'font-mono'],
+```ts
+unocss: {
+  presets: [ ... ],
+  theme: {
+    font: {
+      heading: "'Bricolage Grotesque', sans-serif",
+      body: "Sen, sans-serif",
+      mono: "'Sometype Mono', monospace",
+    },
   },
-+  fonts: {
-+    defaults: {
-+      weights: [300, 400, 500, 700],
-+      styles: ['normal', 'italic'],
-+      subsets: ['latin'],
-+    },
-+  },
+  safelist: ['font-heading', 'font-body', 'font-mono'],
+},
+fonts: {
+  defaults: {
+    weights: [300, 400, 500, 700],
+    styles: ['normal', 'italic'],
+    subsets: ['latin'],
+  },
+},
 ```
 
 ```scss
@@ -395,25 +391,25 @@ New file has to be referenced or imported. Go ahead and include it in `nuxt.conf
 
 Let's add some colors and try using `dark:*` prefix for some classes to see what happens.
 
-```diff
+```ts
 unocss: {
   //...
   theme: {
     font: { ... },
     colors: {
-+     primary: {
-+       800: '#003256',
-+     },
-+     secondary: {
-+       600: '#00677e',
-+       800: '#003543',
-+     },
+      primary: {
+        800: '#003256',
+      },
+      secondary: {
+        600: '#00677e',
+        800: '#003543',
+      },
     },
   },
 },
 ```
 
-Now we can try ` dark:bg-primary-800` to one of the cards, and `dark:bg-linear-to-r dark:from-secondary-800 dark:to-secondary-600` to another.
+Now we can try `dark:bg-primary-800` to one of the cards, and `dark:bg-linear-to-r dark:from-secondary-800 dark:to-secondary-600` to another.
 
 In order to toggle themes we can add a quick button in the corner of the page. Simply paste the following code anywhere (e.g. in `default.vue` layout file).
 
@@ -447,15 +443,18 @@ What we actually want there is `.v-theme--dark` not `.dark`.
 
 To align UnoCSS with Vuetify we need add some more code inside `presetWind4({ ... })`
 
-```diff
+```ts
 unocss: {
   presets: [
     presetWind4({
       preflights: { ... },
-+     dark: {
-+       dark: '.v-theme--dark',
-+       light: '.v-theme--light',
-+     },
+      dark: {
+        dark: '.v-theme--dark',
+        light: '.v-theme--light',
+      },
+    }),
+  ],
+},
 ```
 
 ### Custom typography (text variants)
@@ -541,8 +540,8 @@ Default breakpoints provided by TailwindCSS preset are not compatible with Vueti
 
 However, unlike other aspects it is more challenging to have a squicky cleanup with a single definition. It is true with Vuetify even without integrating it with Uno or Tailwind. When we customize vanilla Vuetify project we end up having some duplication. It is usually not a big deal, and we can add comments that remind us to keep both places in sync.
 
-- `settings.scss` - breakpoints for VContainer, VCol and responsive utilities (if we would keep any)
-- general Vuetify configuration `display` » `thresholds` for responsive logic in some components, `useDisplay` and `$vuetify.display.*`
+* `settings.scss` - breakpoints for VContainer, VCol and responsive utilities (if we would keep any)
+* general Vuetify configuration `display` » `thresholds` for responsive logic in some components, `useDisplay` and `$vuetify.display.*`
 
 UnoCSS needs its own values and expects slightly different format, but we can still define them in a separate TS file and, so we won't end up with 3 places to maintain. As a side-note, integration with TailwindCSS v4 (without UnoCSS) would mean we are back with 3 definitions, because latest TailwindCSS expects pure CSS variables. Anyway, enough talking - let's jump right into the code.
 
@@ -572,8 +571,8 @@ export const forTailwind = Object.entries(breakpoints)
 
 Import and apply it to both Vuetify in UnoCSS in `nuxt.config.ts`
 
-```diff
-+import * as breakpoints from './app/theme/breakpoints'
+```ts
+import * as breakpoints from './app/theme/breakpoints'
 
 export default defineNuxtConfig({
   // ...
@@ -583,23 +582,24 @@ export default defineNuxtConfig({
     theme: {
       font: { ... },
       colors: { ... },
-+     breakpoint: breakpoints.forTailwind,
+      breakpoint: breakpoints.forTailwind,
     },
     shortcuts: { ... },
   },
 
   vuetify: {
     moduleOptions: { ... },
-+   vuetifyOptions: {
-+     display: {
-+       mobileBreakpoint: 'md',
-+       thresholds: breakpoints.forVuetify,
-+     },
-+   },
+    vuetifyOptions: {
+      display: {
+        mobileBreakpoint: 'md',
+        thresholds: breakpoints.forVuetify,
+      },
+    },
   },
+}),
 ```
 
-Now adjust the SCSS variables for Vuetify. Note that as of `v3.11.2 ` the `$container-max-widths` would be calculated without rounding the values. I prefer those values to be stable
+Now adjust the SCSS variables for Vuetify. Note that in **v3.x** the `$container-max-widths` would be calculated from breakpoints without rounding the values. If you prefer those values to be stable and rounded to `100px`, you can simply define them right below.
 
 ```scss
 @use 'vuetify/settings' with (
@@ -688,11 +688,11 @@ CSS `@layer` is a relatively new feature designed to scope blocks of CSS and avo
 
 In our example, all we want from CSS layers is to separate utility classes and ensure they get applied on top of base and components CSS without using `!important`. We will start by ensuring we don't have any leftover configuration in `nuxt.config.ts`:
 
-```diff
+```ts
 unocss: {
   presets: [
     presetWind4({
--      important: true,
+      // important: true, // <- we won't need it
       preflights: { ... },
     }),
   ],
@@ -701,37 +701,39 @@ unocss: {
 
 CSS layers are going to be enabled by default in Vuetify v4. If you still use version 3.x, you can opt-in by changing two places: Sass variables and theme configuration.
 
-```diff
+```scss
 @use 'vuetify/settings' with (
-+ $layers: true,
+  $layers: true, // <- enable layers for CSS generated with Sass
+  // ...
+);
 ```
 
 This will ensure CSS reset, base styles, transitions, component-specific styles and utilities are all wrapped in the dedicated layers.
 
 Update Vuetify configuration to enable `@layers` for themes - CSS that is generated at runtime and injected into document `<head>`.
 
-```diff
-  theme: {
-+   layers: true,
-    defaultTheme: 'dark',
-    themes: {
-      dark: { ... },
-      light: { ... },
+```ts
+theme: {
+  layers: true, // <- enable layers for theme CSS
+  defaultTheme: 'dark',
+  themes: { ... },
+  // ...
+}
 ```
 
 Finally we update UnoCSS configuration
 
-```diff
+```ts
 unocss: {
   presets: [ ... ],
-+  layers: {
-+    'uno.theme': 0,
-+    'uno.shortcuts': 1,
-+    'uno.utilities': 2,
-+  },
-+  outputToCssLayers: {
-+    cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
-+  },
+  layers: {
+    'uno.theme': 0,
+    'uno.shortcuts': 1,
+    'uno.utilities': 2,
+  },
+  outputToCssLayers: {
+    cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
+  },
   theme: { ... },
   shortcuts: { ... },
 },
@@ -806,12 +808,12 @@ Here are some examples that help visualize the purpose of each group.
 
 Whoa! That's a lot. Integrating UnoCSS with a Vuetify + Nuxt project proves to be more than just `$utilities: false` and droping any configuration. Although we could take a shortcut with `important: true` I hope you will take an opportunity to use powerful `@layer` feature and elevate your development experience even more. Regardless, we achieved smaller CSS bundles and on-demand utility generation. Here are the key takeaways:
 
-- `unocss-preset-vuetify` (although experimental) can be a drop-in replacement of Vuetify utilities in projects that prefer to avoid full migration to TailwindCSS and its conventions
-- `@unocss/preset-wind4` is a go-to for developers eager to embrace widely adopted utilities
-- **Dark mode alignment**: Configure UnoCSS to use `.v-theme--dark` and `.v-theme--light` selectors instead of the default `.dark` class
-- **typography** can be fully restored using UnoCSS shortcuts also gaining responsive prefix support
-- **breakpoints** can be aligned across Vuetify's display config, Sass variables, and UnoCSS theme to avoid layout inconsistencies
-- **CSS layers**: enable `$layers: true` in Sass and configure UnoCSS layers to establish a clear cascade order without relying on `!important`
+* `unocss-preset-vuetify` (although experimental) can be a drop-in replacement of Vuetify utilities in projects that prefer to avoid full migration to TailwindCSS and its conventions
+* `@unocss/preset-wind4` is a go-to for developers eager to embrace widely adopted utilities
+* **Dark mode alignment**: Configure UnoCSS to use `.v-theme--dark` and `.v-theme--light` selectors instead of the default `.dark` class
+* **typography** can be fully restored using UnoCSS shortcuts also gaining responsive prefix support
+* **breakpoints** can be aligned across Vuetify's display config, Sass variables, and UnoCSS theme to avoid layout inconsistencies
+* **CSS layers**: enable `$layers: true` in Sass and configure UnoCSS layers to establish a clear cascade order without relying on `!important`
 
 The result is a leaner, more maintainable styling setup that combines Vuetify's component library with atomic CSS utilities.
 
