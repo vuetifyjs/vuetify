@@ -8,7 +8,6 @@ import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
-import { provideCommandPaletteContext } from './composables/useCommandPaletteContext'
 import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
@@ -19,7 +18,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, nextTick, onUnmounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, provide, ref, shallowRef, watch, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -27,6 +26,7 @@ import type { PropType, Ref, VNode } from 'vue'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
 import { isActionItem } from './types'
 import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
+import { VCommandPaletteSymbol } from './shared'
 
 export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
@@ -112,7 +112,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       },
     })
 
-    provideCommandPaletteContext({
+    provide(VCommandPaletteSymbol, {
       items: computed(() => props.items),
       filteredItems,
       selectedIndex: navigation.selectedIndex,
