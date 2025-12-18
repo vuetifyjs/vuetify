@@ -163,7 +163,7 @@
 
       return {
         ...item,
-        url: url.href.split(url.origin).pop(),
+        url: url.href.split(url.origin).pop().replace(url.search, ''),
       }
     })
     const groups = groupItems(items, 'lvl0')
