@@ -23,10 +23,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
+import { VCommandPaletteSymbol } from './shared'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
 import { isActionItem } from './types'
 import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
-import { VCommandPaletteSymbol } from './shared'
 
 export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
