@@ -432,16 +432,12 @@ In order to toggle themes we can add a quick button in the corner of the page. S
 
 ```html
 <v-btn
-  :icon="`svg:${mdiThemeLightDark}`"
+  icon="mdi-theme-light-dark"
   position="absolute"
   location="top right"
   class="ma-2"
   @click="$vuetify.theme.cycle()"
 />
-```
-
-```ts
-import { mdiThemeLightDark } from '@mdi/js'
 ```
 
 > When adding new colors in `nuxt.config.ts` you might need to occasionally restart the Dev server.
@@ -451,9 +447,9 @@ Hm... toggling dark mode does not apply the background and gradient from classes
 Upon inspection of Elements tab in the browser DevTools, we can find the generated code by searching for `.dark\:`
 
 ```css
-.dark .dark\:from-secondary-800{ ... }
-.dark .dark\:to-secondary-600{ ... }
-.dark .dark\:bg-linear-to-r{ ... }
+.dark .dark\:from-secondary-800 { ... }
+.dark .dark\:to-secondary-600 { ... }
+.dark .dark\:bg-linear-to-r { ... }
 ```
 
 What we actually want there is `.v-theme--dark` not `.dark`.
