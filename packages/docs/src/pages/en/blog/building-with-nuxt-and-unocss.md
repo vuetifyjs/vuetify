@@ -209,6 +209,8 @@ bun add -D @unocss/preset-wind4
 
 :::
 
+The preset called [Wind4](https://unocss.dev/presets/wind4) is an official configuration builder providing making it easy to expose all the utilities from TailwindCSS v4 in your project. There are 2 configuration points - an object passed to the main `presetWind4` method and `theme` field next to the `presets`. Unlike using pure TailwindCSS v4 it let's us configure stuff in JavaScript code.
+
 ```ts
 import presetWind4 from '@unocss/preset-wind4'
 
@@ -222,6 +224,7 @@ export default defineNuxtConfig({
         },
       }),
     ],
+    theme: {},
   },
 })
 ```
@@ -352,6 +355,7 @@ unocss: {
       preflights: { ... },
     }),
   ],
+  theme: {},
 },
 ```
 
