@@ -936,5 +936,91 @@ describe('VSelect', () => {
     })
   })
 
+  describe('list-header and list-footer slots', () => {
+    it('should render list-header and list-footer slots', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2']}>
+          {{
+            'list-header': () => (
+              <div data-testid="header-content">Header Content</div>
+            ),
+            'list-footer': () => (
+              <div data-testid="footer-content">Footer Content</div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      const header = screen.getByTestId('header-content')
+      const footer = screen.getByTestId('footer-content')
+
+      expect(header).toHaveTextContent('Header Content')
+      expect(footer).toHaveTextContent('Footer Content')
+    })
+
+    it('should navigate from header to list with ArrowDown key', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'list-header': () => (
+              <div>
+                <button data-testid="header-button">Header Button</button>
+              </div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      const headerButton = screen.getByTestId('header-button')
+      headerButton.focus()
+      expect(headerButton).toHaveFocus()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await nextTick()
+
+      const firstOption = screen.getAllByRole('option')[0]
+      expect(firstOption).toHaveFocus()
+    })
+
+    it('should navigate from footer to list with ArrowUp key and close menu with Tab', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'list-footer': () => (
+              <div>
+                <button data-testid="footer-button">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      const footerButton = screen.getByTestId('footer-button')
+      footerButton.focus()
+      expect(footerButton).toHaveFocus()
+
+      await userEvent.keyboard('{ArrowUp}')
+      await nextTick()
+
+      const lastOption = screen.getAllByRole('option').at(-1)
+      expect(lastOption).toHaveFocus()
+
+      footerButton.focus()
+      expect(footerButton).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    })
+  })
+
   showcase({ stories })
 })
