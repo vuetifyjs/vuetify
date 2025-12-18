@@ -264,7 +264,7 @@ There is one more component that relies on utility classes - `v-row`. Convenient
 
 If you go with the first option, you can copy the classes below.
 
-```css
+```scss
 .justify-start { justify-content: flex-start }
 .justify-end { justify-content: flex-end }
 .justify-center { justify-content: center }
@@ -277,6 +277,10 @@ If you go with the first option, you can copy the classes below.
 .align-center { align-items: center }
 .align-baseline { align-items: baseline }
 .align-stretch { align-items: stretch }
+
+.order-1 { order: 1 }
+// repeat until 12...
+.order-last { order: 13 }
 ```
 
 Second option is trading hardcoded styles for some noise in the Sass configuration.
@@ -285,8 +289,19 @@ Second option is trading hardcoded styles for some noise in the Sass configurati
 $utilities: (
   "align-items": (responsive: false, unimportant: (align-items)),
   "justify-content": (responsive: false, unimportant: (justify-content)),
+  "order": (responsive: false, unimportant: (order)),
   // followed by 80+ lines with all other utilities set to `false`
-  // full list: https://vuetifyjs.com/en/features/sass-variables/#disabling-utility-classes
+)
+```
+
+By default, those utilities have `responsive: true` and `!important`. The example above is something I would recommend if you plan on using `@layer` which we will go over in the last section of this article.
+
+```scss
+$utilities: (
+  // "align-items"     // keep default
+  // "justify-content" // keep default
+  // "order"           // keep default
+  // followed by 80+ lines with all other utilities set to `false`
 )
 ```
 
@@ -320,6 +335,8 @@ $utilities: (
 ```
 
 Did I mention we have the same problem with `border`? ...ugh... same story, let's move on.
+
+Assuming you want to use VRow and VCol and `$utilities` is no longer `false`, you might be surprised to notice that utilities like `elevation-*`, `hidden-*` (and 2 more) got re-enabled. Those do not have their dedicated flags in the `$utilities` configuration map and only get removed when using strictly `$utilities: false`. It will be resolved in the future - keep an eye on ([#22405](https://github.com/vuetifyjs/vuetify/pull/22405)).
 
 ### Resolve specificity issues (quickly)
 
