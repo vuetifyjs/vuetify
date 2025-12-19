@@ -4,6 +4,7 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <div class="text-center">
       <v-command-palette
@@ -51,21 +52,15 @@
   const snackbar = ref(false)
   const selectedItem = ref('')
   const placeholder = ref('Search commands...')
-  const hotkey = ref('ctrl+shift+p')
+  const hotkey = ref('ctrl+shift+k')
   const options = []
 
   const items = [
     {
-      title: 'New File',
-      subtitle: 'Create a new file',
-      prependIcon: 'mdi-file-plus',
-      value: 'new-file',
-    },
-    {
-      title: 'New Folder',
-      subtitle: 'Create a new folder',
-      prependIcon: 'mdi-folder-plus',
-      value: 'new-folder',
+      title: 'Find File',
+      subtitle: 'Open general search',
+      prependIcon: 'mdi-file-find',
+      value: 'find-file',
     },
     {
       title: 'Open Project',
@@ -81,15 +76,9 @@
       title: 'Settings',
     },
     {
-      title: 'Preferences',
-      subtitle: 'Configure application settings',
-      prependIcon: 'mdi-cog',
-      value: 'preferences',
-    },
-    {
       title: 'Help',
       subtitle: 'View documentation',
-      prependIcon: 'mdi-help-circle',
+      prependIcon: 'mdi-help-circle-outline',
       value: 'help',
     },
   ]
@@ -120,4 +109,13 @@
     selectedItem.value = item.title
     snackbar.value = true
   }
+
+  const script = computed(() => {
+    return `<script setup>
+  import { shallowRef } from 'vue'
+
+  const search = shallowRef('')
+  const items = ${JSON.stringify(items, null, 2)}
+<` + '/script>'
+  })
 </script>
