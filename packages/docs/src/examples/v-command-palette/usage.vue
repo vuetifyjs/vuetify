@@ -12,6 +12,7 @@
         v-model:search="search"
         v-bind="props"
         :items="items"
+        max-width="500"
         @click:item="onItemClick"
       >
         <template v-slot:activator="{ props: activatorProps }">
@@ -95,6 +96,7 @@
   v-model="dialog"
   v-model:search="search"${propsToString(props.value)}
   :items="items"
+  max-width="500"
   @click:item="onItemClick"
 >
   <template v-slot:activator="{ props: activatorProps }">
@@ -116,6 +118,10 @@
 
   const search = shallowRef('')
   const items = ${JSON.stringify(items, null, 2)}
+
+  function onItemClick (item, event) {
+    console.log('selected item:', item)
+  }
 <` + '/script>'
   })
 </script>
