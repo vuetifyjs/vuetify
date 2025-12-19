@@ -2,6 +2,8 @@
 import './VCommandPalette.scss'
 
 // Components
+import { VCommandPaletteSymbol } from './shared'
+import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
 import { VDialog } from '@/components/VDialog'
 import { VList } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
@@ -19,14 +21,13 @@ import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, watch, watchEffect } from 'vue'
+import { isActionItem } from './types'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
-import { VCommandPaletteSymbol } from './shared'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
-import { isActionItem } from './types'
-import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
@@ -54,6 +55,7 @@ export const makeVCommandPaletteProps = propsFactory({
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
+  activator: OverlaySlots['activator']
   default: never
   prepend: never
   append: never
@@ -262,6 +264,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         class="v-command-palette"
       >
         {{
+          activator: slots.activator,
           default: () => (
             <VSheet
               class={[
