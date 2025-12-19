@@ -20,6 +20,10 @@
       background: transparent
       border-radius: 50%
       box-shadow: $color-picker-canvas-dot-box-shadow
+      
+      @media (forced-colors: active)
+        border-style: solid
+        outline: 2px solid highlight
 
       &--disabled
         box-shadow: $color-picker-canvas-dot-disabled-box-shadow

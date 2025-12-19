@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.11.2",
+  "version": "3.11.3",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -127,12 +127,14 @@
     "build:types:lib": "tsgo --pretty --emitDeclarationOnly -p tsconfig.dist.json && node build/transform-types.js",
     "build:types:bundle": "rollup --config build/rollup.types.config.js",
     "tsc": "tsc",
+    "tdd": "vizzly tdd start",
+    "tdd:stop": "vizzly tdd stop",
     "test": "vitest",
     "test:unit": "vitest --project unit",
     "test:browser": "vitest --project browser",
     "test:open": "TEST_BAIL=1 vitest --project browser -w",
     "test:coverage": "pnpm test --coverage",
-    "test:percy": "percy exec -- vitest --project browser",
+    "test:screen": "node ../../scripts/tdd-run.js ",
     "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
@@ -147,8 +149,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@intlify/devtools-types": "^11.1.12",
-    "@percy/cli": "^1.31.4",
-    "@percy/sdk-utils": "^1.31.4",
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -161,6 +161,8 @@
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
     "@vitest/ui": "^4.0.13",
+    "@vizzly-testing/cli": "^0.17.0",
+    "@vizzly-testing/vitest": "^0.0.3",
     "@vue/reactivity": "^3.5.25",
     "@vue/shared": "^3.5.25",
     "@vue/test-utils": "^2.4.6",

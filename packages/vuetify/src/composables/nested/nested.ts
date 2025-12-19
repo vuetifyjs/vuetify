@@ -24,6 +24,7 @@ import {
 } from './activeStrategies'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
+  branchSelectStrategy,
   classicSelectStrategy,
   independentSelectStrategy,
   independentSingleSelectStrategy,
@@ -55,6 +56,7 @@ export type SelectStrategyProp =
   | 'single-independent'
   | 'classic'
   | 'trunk'
+  | 'branch'
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -191,6 +193,7 @@ export const useNested = (
       case 'independent': return independentSelectStrategy(props.mandatory)
       case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
       case 'trunk': return trunkSelectStrategy(props.mandatory)
+      case 'branch': return branchSelectStrategy(props.mandatory)
       case 'classic':
       default: return classicSelectStrategy(props.mandatory)
     }

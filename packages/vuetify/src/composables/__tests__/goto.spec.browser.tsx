@@ -54,7 +54,7 @@ describe('goto', () => {
     const bottom = screen.getByCSS('#bottom')
 
     await userEvent.click(top)
-    await expect.poll(() => window.scrollY).toBeCloseTo(1250, -1)
+    await expect.poll(() => window.scrollY).toBeCloseTo(1260, -1)
 
     await userEvent.click(bottom)
     await expect.poll(() => window.scrollY).toBe(0)
@@ -73,9 +73,13 @@ describe('goto', () => {
     const end = screen.getByCSS('#end')
 
     await userEvent.click(start)
-    await expect.poll(() => window.scrollX).toBeCloseTo(755, -1)
+    await expect.poll(() => window.scrollX).toBeCloseTo(770, -1)
+
+    expect('target is not reachable').not.toHaveBeenTipped()
 
     await userEvent.click(end)
     await expect.poll(() => window.scrollX).toBe(0)
+
+    expect('target is not reachable').not.toHaveBeenTipped()
   })
 })

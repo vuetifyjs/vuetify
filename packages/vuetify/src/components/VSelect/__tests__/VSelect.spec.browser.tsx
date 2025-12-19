@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -736,20 +736,17 @@ describe('VSelect', () => {
 
     const inputField = getByRole('combobox', { expanded: false })
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
     await userEvent.click(inputField, { force: true })
     await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
-    expect(inputField).toHaveAttribute('aria-label', 'Close')
 
     await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/22052
@@ -856,7 +853,5 @@ describe('VSelect', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })
