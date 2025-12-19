@@ -9,6 +9,7 @@ import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
@@ -95,7 +96,7 @@ export const makeVSelectProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
-  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  }), ['validationValue', 'dirty']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
 
@@ -165,6 +166,7 @@ export const VSelect = genericComponent<new <
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
+    const { InputIcon } = useInputIcon(props)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupIndex = 0
@@ -206,7 +208,7 @@ export const VSelect = genericComponent<new <
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
 
-    function onClear (e: MouseEvent) {
+    function onClear (e: MouseEvent | KeyboardEvent) {
       if (props.openOnClear) {
         menu.value = true
       }
@@ -234,6 +236,13 @@ export const VSelect = genericComponent<new <
 
       if (['Escape', 'Tab'].includes(e.key)) {
         menu.value = false
+      }
+
+      if (props.clearable && e.key === 'Backspace') {
+        e.preventDefault()
+        model.value = []
+        onClear(e)
+        return
       }
 
       if (e.key === 'Home') {
@@ -631,6 +640,13 @@ export const VSelect = genericComponent<new <
                     aria-hidden
                   />
                 ) : undefined }
+                { props.appendInnerIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ args[0].iconColor.value }
+                  />
+                )}
               </>
             ),
           }}
