@@ -217,7 +217,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           { ...textFieldProps }
           v-model={ model.value }
           ref={ vTextFieldRef }
-          class={ props.class }
+          class={['v-mask-input', props.class]}
           style={ props.style }
           validationValue={ validationValue.value }
           onCut={ onCut }

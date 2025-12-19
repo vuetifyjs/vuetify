@@ -789,6 +789,89 @@ describe('VSelect', () => {
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
+  describe('clear with backspace', () => {
+    it('should clear selection in single selection mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+    })
+
+    it('should clear selection in multiple selection mode', async () => {
+      const selectedItems = ref(['Item 1', 'Item 2'])
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItems.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          multiple
+        />
+      ))
+
+      expect(selectedItems.value).toHaveLength(2)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItems.value).toHaveLength(0)
+    })
+
+    it('should open menu with openOnClear prop', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          openOnClear
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+      expect(screen.queryByRole('listbox')).toBeNull()
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+    })
+
+    it('should not clear in readonly mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          readonly
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBe('Item 1')
+    })
+  })
+
   describe('native form submission', () => {
     const items = [
       { title: 'Item 1', value: 1 },

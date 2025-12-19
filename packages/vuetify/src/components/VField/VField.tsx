@@ -32,7 +32,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -42,6 +42,7 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
   isFocused: Ref<boolean>
+  iconColor: ComputedRef<string | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
@@ -210,6 +211,7 @@ export const VField = genericComponent<new <T>(
       isActive,
       isFocused,
       controlRef,
+      iconColor,
       blur,
       focus,
     }))
