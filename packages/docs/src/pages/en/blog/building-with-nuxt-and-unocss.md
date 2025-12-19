@@ -125,7 +125,7 @@ When inspecting bundles, keep in mind VSCode might refuse to format large files,
 
 Let's adjust the `app/assets/settings.scss`:
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $utilities: false,
 );
@@ -157,7 +157,7 @@ bun add -D unocss unocss-preset-vuetify @unocss/nuxt
 
 Register the module in `nuxt.config.ts` and paste initial configuration nearby:
 
-```ts
+```ts { resource="nuxt.config.ts" }
 import { presetVuetify } from 'unocss-preset-vuetify'
 
 export default defineNuxtConfig({
@@ -211,7 +211,7 @@ bun add -D @unocss/preset-wind4
 
 The preset called [Wind4](https://unocss.dev/presets/wind4) is an official configuration builder providing making it easy to expose all the utilities from TailwindCSS v4 in your project. There are 2 configuration points - an object passed to the main `presetWind4` method and `theme` field next to the `presets`. Unlike using pure TailwindCSS v4 it let's us configure stuff in JavaScript code.
 
-```ts
+```ts { resource="nuxt.config.ts" }
 import presetWind4 from '@unocss/preset-wind4'
 
 export default defineNuxtConfig({
@@ -233,7 +233,7 @@ The code above ensures we use only CSS reset from Vuetify and won't experience c
 
 Since TailwindCSS preset comes with its color palette we can use it instead of the Material palette from Vuetify. It is not an equivalent replacement, but if you want to go all-in with TailwindCSS utilities, you probably know what to expect ahead. Let's change the `app/assets/settings.scss`:
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $color-pack: false, // <- disable colors from Material palette
   $utilities: false,
@@ -288,7 +288,7 @@ If you go with the first option, you can copy the classes below.
 
 Second option is trading hardcoded styles for some noise in the Sass configuration.
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $utilities: (
     "align-items": (responsive: false, unimportant: (align-items)),
@@ -301,7 +301,7 @@ Second option is trading hardcoded styles for some noise in the Sass configurati
 
 By default, those utilities have `responsive: true` and `!important`. The example above is something I would recommend if you plan on using `@layer` which we will go over in the last section of this article.
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $utilities: (
     // "align-items"     // keep default
@@ -314,13 +314,13 @@ By default, those utilities have `responsive: true` and `!important`. The exampl
 
 The important thing to note here is that we did not use CSS layers so you might see that utility classes from TailwindCSS do not override default styles. An example would be:
 
-```html
+```scss { resource="app/components/HelloWorld.vue" }
 <v-card class="h-[120px] flex items-center">...</v-card>
 ```
 
 Something that is not really noticable at first glance is the card rounding. `rounded="lg"` is not recognized by UnoCSS with TailwindCSS preset and `.rounded-lg` class won't appear in the output CSS.
 
-```css
+```scss
 .rounded-0 { border-radius: 0 }
 .rounded-sm { border-radius: 2px }
 .rounded { border-radius: 4px }
@@ -333,12 +333,14 @@ Something that is not really noticable at first glance is the card rounding. `ro
 
 or
 
-```scss
-$utilities: (
-  // ...
-  "rounded": (responsive: false, unimportant: (border-radius)),
-  // ...
-)
+```scss { resource="app/assets/settings.scss" }
+@use 'vuetify/settings' with (
+  $utilities: (
+    // ...
+    "rounded": (responsive: false, unimportant: (border-radius)),
+    // ...
+  ),
+);
 ```
 
 Did I mention we have the same problem with `border`? ...ugh... same story, let's move on.
@@ -351,44 +353,50 @@ In our current configuration order in which the styles are loaded matters - whic
 
 Usually the easiest fix would be to make UnoCSS generate all the styles with `!important`. This would make them equivalent to original Vuetify utility classes that all had `!important` by default. It is not very elegant, but get's the job done and is easy to reason about. If you are interested in using CSS layers instead, skip to the [final](#using-css-layers) part of this article.
 
-```ts
-unocss: {
-  presets: [
-    presetWind4({
-      important: true, // <- utility classes always win
-      preflights: { ... },
-    }),
-  ],
-  theme: {},
-},
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  // ...
+  unocss: {
+    presets: [
+      presetWind4({
+        important: true, // <- utility classes always win
+        preflights: { ... },
+      }),
+    ],
+    theme: {},
+  },
+})
 ```
 
 ### Font family configuration
 
 To customize fonts we will rely on `@nuxt/fonts` to minimize the amount of configuration required to set up custom font family. Beware, it scans the output CSS - doing a magic trick similar to TailwindCSS, but for the fonts. So you might want to inspect the build logs and make sure there is no mention of Roboto after applying the changes described below.
 
-```ts
-unocss: {
-  presets: [ ... ],
-  theme: {
-    font: {
-      heading: "'Bricolage Grotesque', sans-serif",
-      body: "Sen, sans-serif",
-      mono: "'Sometype Mono', monospace",
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  // ...
+  unocss: {
+    presets: [ ... ],
+    theme: {
+      font: {
+        heading: "'Bricolage Grotesque', sans-serif",
+        body: "Sen, sans-serif",
+        mono: "'Sometype Mono', monospace",
+      },
+    },
+    safelist: ['font-heading', 'font-body', 'font-mono'],
+  },
+  fonts: {
+    defaults: {
+      weights: [300, 400, 500, 700],
+      styles: ['normal', 'italic'],
+      subsets: ['latin'],
     },
   },
-  safelist: ['font-heading', 'font-body', 'font-mono'],
-},
-fonts: {
-  defaults: {
-    weights: [300, 400, 500, 700],
-    styles: ['normal', 'italic'],
-    subsets: ['latin'],
-  },
-},
+})
 ```
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $heading-font-family: var(--font-heading),
   $body-font-family: var(--font-body),
@@ -398,7 +406,7 @@ fonts: {
 
 We can also create `/assets/main.scss` to make use of monospace font in global styles. It is not strictly necessary, but apps usually need some custom global styles anyway.
 
-```scss
+```scss { resource="app/assets/main.scss" }
 code,
 pre,
 .v-code {
@@ -408,7 +416,7 @@ pre,
 
 New file has to be referenced or imported. Go ahead and include it in `nuxt.config.ts`:
 
-```ts
+```ts { resource="nuxt.config.ts" }
   css: ['assets/main.scss'],
 ```
 
@@ -416,22 +424,25 @@ New file has to be referenced or imported. Go ahead and include it in `nuxt.conf
 
 Let's add some colors and try using `dark:*` prefix for some classes to see what happens.
 
-```ts
-unocss: {
-  //...
-  theme: {
-    font: { ... },
-    colors: {
-      primary: {
-        800: '#003256',
-      },
-      secondary: {
-        600: '#00677e',
-        800: '#003543',
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  // ...
+  unocss: {
+    presets: [ ... ],
+    theme: {
+      font: { ... },
+      colors: {
+        primary: {
+          800: '#003256',
+        },
+        secondary: {
+          600: '#00677e',
+          800: '#003543',
+        },
       },
     },
   },
-},
+})
 ```
 
 Now we can try `dark:bg-primary-800` to one of the cards, and `dark:bg-linear-to-r dark:from-secondary-800 dark:to-secondary-600` to another.
@@ -464,18 +475,21 @@ What we actually want there is `.v-theme--dark` not `.dark`.
 
 To align UnoCSS with Vuetify we need add some more code inside `presetWind4({ ... })`
 
-```ts
-unocss: {
-  presets: [
-    presetWind4({
-      preflights: { ... },
-      dark: {
-        dark: '.v-theme--dark',
-        light: '.v-theme--light',
-      },
-    }),
-  ],
-},
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  //...
+  unocss: {
+    presets: [
+      presetWind4({
+        preflights: { ... },
+        dark: {
+          dark: '.v-theme--dark',
+          light: '.v-theme--light',
+        },
+      }),
+    ],
+  },
+})
 ```
 
 ### Custom typography (text variants)
@@ -533,26 +547,29 @@ We can see none of the usual helper classes work because we disabled `$utilities
 
 Following configuration is aligned with defaults from Vuetify v3.11.x
 
-```ts
-unocss: {
-  presets: [ ... ],
-  theme: { ... },
-  shortcuts: {
-    'text-h1': 'font-heading normal-case text-[6rem] font-[300] leading-[1] tracking-[-.015625em]',
-    'text-h2': 'font-heading normal-case text-[3.75rem] font-[300] leading-[1] tracking-[-.0083333333em]',
-    'text-h3': 'font-heading normal-case text-[3rem] font-[400] leading-[1.05] tracking-[normal]',
-    'text-h4': 'font-heading normal-case text-[2.125rem] font-[400] leading-[1.175] tracking-[.0073529412em]',
-    'text-h5': 'font-heading normal-case text-[1.5rem] font-[400] leading-[1.333] tracking-[normal]',
-    'text-h6': 'font-heading normal-case text-[1.25rem] font-[500] leading-[1.6] tracking-[.0125em]',
-    'text-subtitle-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.75] tracking-[.009375em]',
-    'text-subtitle-2': 'font-body normal-case text-[.875rem] font-[500] leading-[1.6] tracking-[.0071428571em]',
-    'text-body-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.5] tracking-[.03125em]',
-    'text-body-2': 'font-body normal-case text-[.875rem] font-[400] leading-[1.425] tracking-[.0178571429em]',
-    'text-button': 'font-body uppercase text-[.875rem] font-[500] leading-[2.6] tracking-[.0892857143em]',
-    'text-caption': 'font-body normal-case text-[.75rem] font-[400] leading-[1.667] tracking-[.0333333333em]',
-    'text-overline': 'font-body uppercase text-[.75rem] font-[500] leading-[2.667] tracking-[.1666666667em]',
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  //...
+  unocss: {
+    presets: [ ... ],
+    theme: { ... },
+    shortcuts: {
+      'text-h1': 'font-heading normal-case text-[6rem] font-[300] leading-[1] tracking-[-.015625em]',
+      'text-h2': 'font-heading normal-case text-[3.75rem] font-[300] leading-[1] tracking-[-.0083333333em]',
+      'text-h3': 'font-heading normal-case text-[3rem] font-[400] leading-[1.05] tracking-[normal]',
+      'text-h4': 'font-heading normal-case text-[2.125rem] font-[400] leading-[1.175] tracking-[.0073529412em]',
+      'text-h5': 'font-heading normal-case text-[1.5rem] font-[400] leading-[1.333] tracking-[normal]',
+      'text-h6': 'font-heading normal-case text-[1.25rem] font-[500] leading-[1.6] tracking-[.0125em]',
+      'text-subtitle-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.75] tracking-[.009375em]',
+      'text-subtitle-2': 'font-body normal-case text-[.875rem] font-[500] leading-[1.6] tracking-[.0071428571em]',
+      'text-body-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.5] tracking-[.03125em]',
+      'text-body-2': 'font-body normal-case text-[.875rem] font-[400] leading-[1.425] tracking-[.0178571429em]',
+      'text-button': 'font-body uppercase text-[.875rem] font-[500] leading-[2.6] tracking-[.0892857143em]',
+      'text-caption': 'font-body normal-case text-[.75rem] font-[400] leading-[1.667] tracking-[.0333333333em]',
+      'text-overline': 'font-body uppercase text-[.75rem] font-[500] leading-[2.667] tracking-[.1666666667em]',
+    },
   },
-},
+})
 ```
 
 ### Customize breakpoints
@@ -568,7 +585,7 @@ UnoCSS needs its own values and expects slightly different format, but we can st
 
 Create `breakpoints.ts` under `./app/theme` (create new `theme` folder) with the following content:
 
-```ts
+```ts { resource="app/theme/breakpoints.ts" }
 import type { DisplayThresholds } from 'vuetify'
 
 // repeated in settings.scss
@@ -592,12 +609,11 @@ export const forTailwind = Object.entries(breakpoints)
 
 Import and apply it to both Vuetify in UnoCSS in `nuxt.config.ts`
 
-```ts
+```ts { resource="nuxt.config.ts" }
 import * as breakpoints from './app/theme/breakpoints'
 
 export default defineNuxtConfig({
   // ...
-
   unocss: {
     presets: [ ... ],
     theme: {
@@ -622,7 +638,7 @@ export default defineNuxtConfig({
 
 Now adjust the SCSS variables for Vuetify. Note that in **v3.x** the `$container-max-widths` would be calculated from breakpoints without rounding the values. If you prefer those values to be stable and rounded to `100px`, you can simply define them right below.
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $grid-breakpoints: (
     // repeated in breakpoints.ts
@@ -709,20 +725,23 @@ CSS `@layer` is a relatively new feature designed to scope blocks of CSS and avo
 
 In our example, all we want from CSS layers is to separate utility classes and ensure they get applied on top of base and components CSS without using `!important`. We will start by ensuring we don't have any leftover configuration in `nuxt.config.ts`:
 
-```ts
-unocss: {
-  presets: [
-    presetWind4({
-      // important: true, // <- we won't need it
-      preflights: { ... },
-    }),
-  ],
-},
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  // ...
+  unocss: {
+    presets: [
+      presetWind4({
+        // important: true, // <- we won't need it
+        preflights: { ... },
+      }),
+    ],
+  },
+})
 ```
 
 CSS layers are going to be enabled by default in Vuetify v4. If you still use version 3.x, you can opt-in by changing two places: Sass variables and theme configuration.
 
-```scss
+```scss { resource="app/assets/settings.scss" }
 @use 'vuetify/settings' with (
   $layers: true, // <- enable layers for CSS generated with Sass
   // ...
@@ -733,38 +752,43 @@ This will ensure CSS reset, base styles, transitions, component-specific styles 
 
 Update Vuetify configuration to enable `@layers` for themes - CSS that is generated at runtime and injected into document `<head>`.
 
-```ts
-theme: {
-  layers: true, // <- enable layers for theme CSS
-  defaultTheme: 'dark',
-  themes: { ... },
+```ts { resourcce="vuetify.config.ts" }
+export default defineVuetifyConfiguration({
+  theme: {
+    layers: true, // <- enable layers for theme CSS
+    defaultTheme: 'dark',
+    themes: { ... },
+    // ...
+  }
   // ...
-}
+})
 ```
 
 Finally we update UnoCSS configuration
 
-```ts
-unocss: {
-  presets: [ ... ],
-  layers: {
-    'uno.theme': 0,
-    'uno.shortcuts': 1,
-    'uno.utilities': 2,
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  // ...
+  unocss: {
+    presets: [ ... ],
+    layers: {
+      'uno.theme': 0,
+      'uno.shortcuts': 1,
+      'uno.utilities': 2,
+    },
+    outputToCssLayers: {
+      cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
+    },
+    theme: { ... },
+    shortcuts: { ... },
   },
-  outputToCssLayers: {
-    cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
-  },
-  theme: { ... },
-  shortcuts: { ... },
-},
+})
 ```
 
 You can now utilize them to manage overrides without fighting specificity.
 For example:
 
-```scss
-// main.scss
+```scss { resource="app/assets/main.scss" }
 @layer vuetify.base {
   code, pre, .v-code {
     font-family: var(--font-mono);
@@ -782,7 +806,7 @@ When it comes to regular development, you should define layers you intend make s
 
 Here are some examples that help visualize the purpose of each group.
 
-```scss
+```scss { resource="app/assets/main.scss" }
 @layer app.base {
   .page {
     padding: 0 2rem 4rem;
