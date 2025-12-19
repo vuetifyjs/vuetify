@@ -425,7 +425,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       )
     }
 
-    return '@layer vuetify.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
+    return '@layer vuetify-utilities.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)

@@ -1,8 +1,11 @@
 @use '../settings';
 
 @mixin layer ($name) {
+  @if ($name == 'transitions' or $name == 'trumps') {
+    $name: 'final.' + $name;
+  }
   @at-root (without: layer) {
-    @layer vuetify.#{$name} {
+    @layer vuetify-#{$name} {
       @content;
     }
   }
