@@ -45,6 +45,7 @@ export const makeVCommandPaletteProps = propsFactory({
   location: String,
   activator: [String, Object],
   dialogProps: Object as PropType<Record<string, any>>,
+  listProps: Object as PropType<VList['$props']>,
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
   ...makeThemeProps(),
@@ -296,6 +297,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     itemType="type"
                     itemProps
                     activatable
+                    { ...props.listProps }
                     navigationStrategy="track"
                     navigationIndex={ navigation.selectedIndex.value }
                     onUpdate:navigationIndex={ navigation.setSelectedIndex }
