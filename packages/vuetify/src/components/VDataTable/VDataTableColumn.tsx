@@ -6,7 +6,7 @@ import type { PropType } from 'vue'
 
 export const VDataTableColumn = defineFunctionalComponent({
   align: {
-    type: String as PropType<'start' | 'center' | 'end'>,
+    type: String as PropType<'start' | 'middle' | 'end'>,
     default: 'start',
   },
   fixed: {

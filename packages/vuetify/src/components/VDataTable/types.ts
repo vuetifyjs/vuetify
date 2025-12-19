@@ -13,7 +13,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   title?: string
 
   fixed?: boolean | 'start' | 'end'
-  align?: 'start' | 'end' | 'center'
+  align?: 'start' | 'end' | 'middle'
 
   width?: number | string
   minWidth?: number | string
