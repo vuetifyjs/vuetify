@@ -23,6 +23,7 @@ This page contains a detailed list of breaking changes and the steps required to
 - The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
   - `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
   - `<ul>`, `<ol>` and headings have padding and margins.
+- There are now pre-compiled entry points for the most common style changes. If you have a sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
 ## Themes
 
