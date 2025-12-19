@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <div>
     <page-feature-chip
       v-if="!isGeneratedPage"
       :href="contribute"
