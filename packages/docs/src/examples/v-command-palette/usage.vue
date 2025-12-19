@@ -10,8 +10,9 @@
       <v-command-palette
         v-model="dialog"
         v-model:search="search"
-        v-bind="props"
+        :hotkey="hotkey"
         :items="items"
+        :placeholder="placeholder"
         max-width="500"
         @click:item="onItemClick"
       >
@@ -84,19 +85,14 @@
     },
   ]
 
-  const props = computed(() => {
-    return {
-      placeholder: placeholder.value,
-      hotkey: hotkey.value || undefined,
-    }
-  })
-
   const code = computed(() => {
     return `<v-command-palette
   v-model="dialog"
-  v-model:search="search"${propsToString(props.value)}
+  v-model:search="search"
   :items="items"
+  hotkey="${hotkey.value}"
   max-width="500"
+  placeholder="${placeholder.value}"
   @click:item="onItemClick"
 >
   <template v-slot:activator="{ props: activatorProps }">
