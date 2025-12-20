@@ -146,7 +146,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       computedItems.value
         .map(item => ({
           ...item.raw,
-          _virtualIndex: item.index,
+          virtualIndex: item.index,
         }))
     )
 

@@ -49,7 +49,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
 export interface DataTableItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   key: any
   index: number
-  _virtualIndex?: number
+  virtualIndex?: number
   columns: {
     [key: string]: any
   }
