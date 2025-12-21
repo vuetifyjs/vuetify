@@ -3,12 +3,13 @@ import './VGrid.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeDensityProps } from '@/composables/density'
 import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { deprecate, genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { Prop, PropType } from 'vue'
@@ -67,9 +68,9 @@ const propMap = {
 }
 
 const classMap = {
-  align: 'align',
-  justify: 'justify',
-  alignContent: 'align-content',
+  align: 'v-align',
+  justify: 'v-justify',
+  alignContent: 'v-align-content',
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: string) {
@@ -88,7 +89,9 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
 }
 
 export const makeVRowProps = propsFactory({
+  /** @deprecated use density="comfortable" instead */
   dense: Boolean,
+  /** @deprecated use density="compact" instead */
   noGutters: Boolean,
   align: {
     type: String as PropType<typeof ALIGN_VALUES[number]>,
@@ -110,6 +113,7 @@ export const makeVRowProps = propsFactory({
 
   ...alignContentProps,
   ...makeComponentProps(),
+  ...makeDensityProps(),
   ...makeTagProps(),
 }, 'VRow')
 
@@ -119,6 +123,13 @@ export const VRow = genericComponent()({
   props: makeVRowProps(),
 
   setup (props, { slots }) {
+    if (props.dense) {
+      deprecate('dense', 'density="comfortable"')
+    }
+    if (props.noGutters) {
+      deprecate('noGutters', 'density="compact"')
+    }
+
     const classes = computed(() => {
       const classList: any[] = []
 
@@ -133,11 +144,12 @@ export const VRow = genericComponent()({
       }
 
       classList.push({
-        'v-row--no-gutters': props.noGutters,
-        'v-row--dense': props.dense,
-        [`align-${props.align}`]: props.align,
-        [`justify-${props.justify}`]: props.justify,
-        [`align-content-${props.alignContent}`]: props.alignContent,
+        'v-row--density-default': props.density === 'default' && !props.noGutters && !props.dense,
+        'v-row--density-compact': props.density === 'compact' || props.noGutters,
+        'v-row--density-comfortable': props.density === 'comfortable' || props.dense,
+        [`v-row--align-${props.align}`]: props.align,
+        [`v-row--justify-${props.justify}`]: props.justify,
+        [`v-row--align-content-${props.alignContent}`]: props.alignContent,
       })
 
       return classList

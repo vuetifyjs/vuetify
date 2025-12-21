@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-card class="pa-6 mb-6" variant="flat">
-      <v-row dense>
+      <v-row density="comfortable">
         <v-col cols="12" sm="3">
           <h5 class="my-0">FAB position</h5>
 

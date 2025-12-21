@@ -3,7 +3,6 @@
     <v-row
       class="mb-6"
       justify="center"
-      no-gutters
     >
       <v-col lg="2">
         <v-card
@@ -33,7 +32,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row no-gutters>
+    <v-row>
       <v-col>
         <v-card
           class="pa-2"

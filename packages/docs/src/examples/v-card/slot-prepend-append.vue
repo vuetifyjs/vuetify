@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center" justify="center" dense>
+  <v-row align="center" density="comfortable" justify="center">
     <v-col cols="12" md="6">
       <v-card
         append-icon="mdi-check"

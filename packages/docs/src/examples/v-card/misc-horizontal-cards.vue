@@ -24,7 +24,7 @@
 
       <v-main>
         <v-container>
-          <v-row dense>
+          <v-row density="comfortable">
             <v-col cols="12">
               <v-card color="#385F73">
                 <v-card-title class="text-h5">

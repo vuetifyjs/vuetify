@@ -1,36 +1,43 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
+@use './utilities'
 
 @include tools.layer('components')
   // Row
   //
   // Rows contain and clear the floats of your columns.
   .v-row
-    @include make-row
+    @include make-row(settings.$grid-gutter)
 
     & + .v-row
-      margin-top: settings.$grid-gutter * .5
+      margin-top: settings.$grid-gutter
 
-      &--dense
-        margin-top: settings.$form-grid-gutter * .5
+      &--density-comfortable
+        margin-top: settings.$form-grid-gutter
 
-    &--dense
-      margin: -(settings.$form-grid-gutter) * .5
+    &.v-row--density-compact
+      margin-top: 0
 
-      > .v-col,
-      > [class*="v-col-"]
-        padding: settings.$form-grid-gutter * .5
+    &--density-comfortable
+      @include make-row(settings.$form-grid-gutter)
 
-    // Remove the negative margin from default .v-row, then the horizontal padding
-    // from all immediate children columns (to prevent runaway style inheritance).
-    &.v-row--no-gutters
-      margin: 0
-      > .v-col,
-      > [class*="v-col-"]
-        padding: 0
+    &.v-row--density-compact
+      @include make-row(0)
 
   // Columns
   //
   // Common styles for small and large grid columns
   @include make-grid-columns
+
+  @each $breakpoint in map.keys(settings.$grid-breakpoints)
+    // Generate media query
+    @include tools.media-breakpoint-up($breakpoint)
+      $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
+      // Loop over each v-row property
+      @each $key, $utility in utilities.$v-row-utils
+         @include tools.generate-utility($utility, $infix, 'bidi')
+      // Loop over each v-col property
+      @each $key, $utility in utilities.$v-col-utils
+         @include tools.generate-utility($utility, $infix, 'bidi')

@@ -133,8 +133,8 @@ export const VCol = genericComponent()({
         'v-col': !hasColClasses || !props.cols,
         [`v-col-${props.cols}`]: props.cols,
         [`offset-${props.offset}`]: props.offset,
-        [`order-${props.order}`]: props.order,
-        [`align-self-${props.alignSelf}`]: props.alignSelf,
+        [`v-col--order-${props.order}`]: props.order,
+        [`v-col--align-self-${props.alignSelf}`]: props.alignSelf,
       })
 
       return classList

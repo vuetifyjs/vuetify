@@ -10,7 +10,7 @@
       </div>
     </v-alert>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12" md="6">
         <v-card subtitle="Standard Vuetify key representations" title="Default Key Mapping">
           <template v-slot:text>
@@ -68,7 +68,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Platform Comparison with Custom Mapping">
           <template v-slot:text>
@@ -148,7 +148,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Code Example">
           <template v-slot:text>
