@@ -146,14 +146,42 @@ Longer content can be truncated with a text ellipsis using the `.text-truncate` 
 
 <ExamplesExample file="text-and-typography/text-truncate" />
 
-## Changing Global Font
+## Customizing Fonts
 
-You can change the global font-family **Roboto** used by Vuetify. Ensure you have [SASS Variable](/features/sass-variables) configured in your project, import your font, and set the  `$body-font-family` / `$heading-font-family` sass variable to your new font. By default, `$heading-font-family` is set to `$body-font-family`.
+By default, Vuetify uses **Roboto** as font family for regular text and headings. You can customize the font-family by overriding the following SASS variables:
 
-```scss { resource="src/styles/main.scss" }
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@100,300,400,500,700,900&display=swap')
+- `$body-font-family` — Used for body text and most components
+- `$heading-font-family` — Used for headings. (defaults to `$body-font-family`)
 
-$body-font-family: "Open Sans", sans-serif;
+### Loading Custom Fonts
+
+Before configuring Vuetify, ensure your chosen font is available in your application. There are several ways to load fonts:
+
+- **Fonts from CDN** — Add an `@import` in your CSS or a `<link>` tag in your HTML
+- **Local font files** — Use `@font-face` declarations
+- **NPM packages** — Install packages like `@fontsource/open-sans`
+
+### Configuring Vuetify
+
+Ensure you have [SASS Variables](/features/sass-variables) configured in your project, then set the font-family variables:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'sass:string';
+@use 'vuetify/settings' with (
+  $body-font-family: string.unquote('"Open Sans", sans-serif'),
+  $heading-font-family: string.unquote('"Montserrat", sans-serif')
+);
+```
+
+### Using CSS Variables
+
+You can use CSS custom properties for font-family values, allowing runtime changes or integration with theming systems:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $body-font-family: var(--font-sans)
+  // $heading-font-family inherits the same font in this example
+);
 ```
 
 ## RTL Alignment
