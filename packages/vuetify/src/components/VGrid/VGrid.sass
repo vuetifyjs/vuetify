@@ -3,18 +3,6 @@
 @use './mixins' as *
 
 @include tools.layer('components')
-  .v-container
-    @include make-container
-    @include make-container-max-widths
-
-    &--fluid
-      max-width: 100%
-
-    &.fill-height
-      align-items: center
-      display: flex
-      flex-wrap: wrap
-
   // Row
   //
   // Rows contain and clear the floats of your columns.
@@ -41,9 +29,6 @@
       > .v-col,
       > [class*="v-col-"]
         padding: 0
-
-  .v-spacer
-    flex-grow: 1
 
   // Columns
   //
