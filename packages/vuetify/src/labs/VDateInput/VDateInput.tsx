@@ -264,6 +264,7 @@ export const VDateInput = genericComponent<new <
     }
 
     useRender(() => {
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = {
         ...VDatePicker.filterProps(omit(props, [
@@ -358,18 +359,18 @@ export const VDateInput = genericComponent<new <
                 { slots.default?.() }
               </>
             ),
-            prepend: prependSlotProps => (
+            prepend: hasPrepend ? prependSlotProps => (
               slots.prepend
                 ? slots.prepend(prependSlotProps)
                 : (props.prependIcon && (
                   <InputIcon
                     key="prepend-icon"
                     name="prepend"
-                    tabindex={ -1 }
-                    onClick={ onClick }
+                    tabindex={ props['onClick:prepend'] ? undefined : -1 }
+                    onClick={ isInteractive.value ? onClick : undefined }
                   />
                 ))
-            ),
+            ) : undefined,
           }}
         </VTextField>
       )
