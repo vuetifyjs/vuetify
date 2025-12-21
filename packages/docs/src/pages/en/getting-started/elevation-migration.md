@@ -28,25 +28,12 @@ Vuetify 4 introduces Material Design 3 (MD3) elevation shadows, which differ sig
 - Simplified, more distinct elevation steps
 - Better alignment with MD3 design principles
 
-## MD3 Elevation Levels
-
-| Level | Usage                            |
-| ----- | -------------------------------- |
-| 0     | No shadow - flat surfaces        |
-| 1     | Low emphasis - cards at rest     |
-| 2     | Cards, contained buttons         |
-| 3     | FABs, Snackbars                  |
-| 4     | Navigation drawer, Bottom sheet  |
-| 5     | Dialogs                          |
-
-In MD3, elevation changes are commonly used to indicate interactive states. For example, a card at rest might use `elevation-1`, rising to `elevation-2` on hover and `elevation-3` when pressed or dragged.
-
 ### Adapt CSS classes
 
 Update your elevation classes to use the new 0-5 scale.
 
 | MD2 (old)           | MD3 (new)            |
-| ------------------- | -------------------- |
+|---------------------|----------------------|
 | `elevation-0`       | `elevation-0` (0dp)  |
 | `elevation-{1-3}`   | `elevation-1` (1dp)  |
 | `elevation-{4-6}`   | `elevation-2` (3dp)  |
