@@ -63,6 +63,12 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject> | null
 
+type FocusableGroups = {
+  header: HTMLElement[]
+  list: HTMLElement[]
+  footer: HTMLElement[]
+}
+
 export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
@@ -224,52 +230,93 @@ export const VSelect = genericComponent<new <
 
       menu.value = !menu.value
     }
-    function onListKeydown (e: KeyboardEvent) {
-      if (e.key === 'Tab' && !e.shiftKey && footerRef.value) {
-        const firstFocusableInFooter = focusableChildren(footerRef.value).at(0)
-        if (firstFocusableInFooter) {
-          e.preventDefault()
-          e.stopImmediatePropagation()
-          return firstFocusableInFooter.focus()
-        }
+
+    function onMenuKeydown (e: KeyboardEvent) {
+      const target = e.target as Element
+
+      const eventOrigin = headerRef.value?.contains(target) ? 'header'
+        : footerRef.value?.contains(target) ? 'footer'
+        : 'list'
+
+      if (e.key === 'Tab') {
+        handleTab(eventOrigin, e)
       }
 
-      if (e.key === 'Tab' && e.shiftKey && headerRef.value) {
-        const firstFocusableInHeader = focusableChildren(headerRef.value).at(0)
-        if (firstFocusableInHeader) {
-          e.preventDefault()
-          e.stopImmediatePropagation()
-          return firstFocusableInHeader.focus()
-        }
-      }
-
-      if (e.key === 'Tab' && !e.shiftKey) {
-        // We did not need this previously... needs some investigation
-        menu.value = false
-        vTextFieldRef.value?.focus()
-      }
-
-      if (checkPrintable(e)) {
+      if (eventOrigin === 'list' && checkPrintable(e)) {
         onKeydown(e)
       }
     }
 
-    function onHeaderKeydown (e: KeyboardEvent) {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault()
-        return listRef.value?.focus('first')
+    async function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
+      const direction = e.shiftKey ? 'backward' : 'forward'
+      const focusable = {
+        header: headerRef.value ? focusableChildren(headerRef.value) : [],
+        list: listRef.value ? focusableChildren(listRef.value.$el) : [],
+        footer: footerRef.value ? focusableChildren(footerRef.value) : [],
       }
-    }
 
-    function onFooterKeydown (e: KeyboardEvent) {
-      if (e.key === 'ArrowUp') {
+      const nextSlot = nextFocusSlot(focusable, origin, direction, e.target as Element)
+
+      if (nextSlot) {
         e.preventDefault()
-        return listRef.value?.focus('last')
+        e.stopImmediatePropagation()
+        if (nextSlot === 'header') {
+          focusable.header.at(-1)!.focus()
+        } else if (nextSlot === 'footer') {
+          focusable.footer.at(0)!.focus()
+        } else if (nextSlot === 'list') {
+          if (displayItems.value.length > 0) {
+            // focusing first or last is just as bad when it does not take virtualization into account
+            // ideally we would send `undefined` and it should re-focus last item
+            listRef.value?.focus(0)
+          } else {
+            focusable.list.at(origin === 'header' ? 0 : -1)!.focus()
+          }
+        }
+        return
       }
-      if (e.key === 'Tab' && !e.shiftKey) {
+
+      if (
+        (origin === 'header' && direction === 'backward' && focusable.header.at(0) === e.target) ||
+        (origin === 'list' && direction === 'backward' && focusable.header.length === 0) ||
+        (origin === 'footer' && direction === 'forward' && focusable.footer.at(-1) === e.target) ||
+        (origin === 'list' && direction === 'forward' && focusable.footer.length === 0)
+      ) {
+        // We did not need this previously... needs some investigation
         menu.value = false
         vTextFieldRef.value?.focus()
       }
+    }
+
+    function nextFocusSlot (
+      focusable: FocusableGroups,
+      origin: string,
+      direction: 'forward' | 'backward',
+      target: Element
+    ): keyof FocusableGroups | null {
+      if (origin === 'header' && direction === 'forward' && focusable.header.at(-1) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.footer.length > 0) {
+          return 'footer'
+        }
+      }
+      if (origin === 'list') {
+        if (direction === 'forward' && focusable.footer.length > 0) {
+          return 'footer'
+        }
+        if (direction === 'backward' && focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      if (origin === 'footer' && direction === 'backward' && focusable.footer.at(0) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      return null
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -513,10 +560,12 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
-
-                  <VSheet onFocusin={ onFocusin }>
+                  <VSheet
+                    onFocusin={ onFocusin }
+                    onKeydown={ onMenuKeydown }
+                  >
                     { slots['list-header'] && (
-                      <header onKeydown={ onHeaderKeydown } ref={ headerRef } tabindex="-1">
+                      <header ref={ headerRef }>
                         { slots['list-header']() }
                       </header>
                     )}
@@ -527,7 +576,6 @@ export const VSelect = genericComponent<new <
                         ref={ listRef }
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                        onKeydown={ onListKeydown }
                         tabindex="-1"
                         selectable
                         aria-live="polite"
@@ -607,7 +655,7 @@ export const VSelect = genericComponent<new <
                     )}
 
                     { slots['list-footer'] && (
-                      <footer ref={ footerRef } onKeydown={ onFooterKeydown } tabindex="-1">
+                      <footer ref={ footerRef }>
                         { slots['list-footer']() }
                       </footer>
                     )}
