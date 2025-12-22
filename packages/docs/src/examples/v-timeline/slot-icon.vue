@@ -7,7 +7,7 @@
       <template v-slot:opposite>
         <span>Tus eu perfecto</span>
       </template>
-      <v-card class="elevation-2">
+      <v-card class="elevation-1">
         <v-card-title class="text-h5">
           Lorem ipsum
         </v-card-title>

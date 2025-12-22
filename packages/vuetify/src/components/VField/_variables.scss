@@ -23,7 +23,7 @@ $field-gap: 6px !default;
 // CONTROL
 $field-control-solo-background: rgb(var(--v-theme-surface)) !default;
 $field-control-solo-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
-$field-control-solo-elevation: 2 !default;
+$field-control-solo-elevation: 1 !default;
 $field-control-solo-inverted-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $field-control-solo-inverted-focused-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $field-control-filled-background: tools.theme-color('on-surface', var(--v-idle-opacity)) !default;

@@ -13,22 +13,7 @@ related:
 
 Vuetify 4 introduces Material Design 3 (MD3) elevation shadows, which differ significantly from the previous MD2 system. This guide helps you understand the changes and provides options for maintaining MD2 shadows if needed.
 
-## What Changed
-
-### MD2 Elevation (Previous)
-
-- **25 levels** (0-24)
-- **3 shadow layers**: umbra, penumbra, ambient
-- More granular control with subtle differences between levels
-
-### MD3 Elevation (New)
-
-- **6 levels** (0-5)
-- **2 shadow layers**: key, ambient
-- Simplified, more distinct elevation steps
-- Better alignment with MD3 design principles
-
-### Adapt CSS classes
+## Adapt CSS classes
 
 Update your elevation classes to use the new 0-5 scale.
 
@@ -53,7 +38,7 @@ The same levels change should be applied to direct uses of Sass `elevation(...)`
 }
 ```
 
-### Migrating customizations
+## Migrating customizations
 
 MD2 shadows provided by Vuetify exposed a possibility to customize via :
 

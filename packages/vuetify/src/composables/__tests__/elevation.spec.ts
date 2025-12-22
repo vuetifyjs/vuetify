@@ -3,17 +3,15 @@ import { makeElevationProps, useElevation } from '../elevation'
 
 // Utilities
 
-// Utilities
-
 describe('elevation.ts', () => {
   it('should have the correct class', () => {
     const values = [
       [1, ['elevation-1']],
       [undefined, []],
       [null, []],
-      [20, ['elevation-20']],
+      [5, ['elevation-5']],
       [0, ['elevation-0']],
-      ['14', ['elevation-14']],
+      ['3', ['elevation-3']],
     ] as const
 
     for (const [elevation, equal] of values) {

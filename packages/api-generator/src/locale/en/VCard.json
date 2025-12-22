@@ -1,7 +1,7 @@
 {
   "props": {
     "flat": "Removes the card's elevation.",
-    "hover": "Applies **4dp** of elevation when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",
+    "hover": "Applies **3dp** (level 2) of elevation when hovered (default 1dp). You can find more information on the [elevation page](/styles/elevation).",
     "image": "Apply a specific background image to the component.",
     "prependIcon": "Prepends a [v-icon](/components/icons/) component to the header."
   },

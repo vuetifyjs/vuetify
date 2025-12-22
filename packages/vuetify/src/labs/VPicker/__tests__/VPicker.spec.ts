@@ -65,7 +65,7 @@ describe.skip('VPicker.ts', () => {
         title: [compileToFunctions('<span>title</span>')],
       },
       props: {
-        elevation: 15,
+        elevation: 4,
       },
     })
 

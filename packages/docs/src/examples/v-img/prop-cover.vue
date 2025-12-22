@@ -4,7 +4,7 @@
       <div class="text-subtitle-2">Default</div>
       <v-img
         :aspect-ratio="1"
-        class="bg-surface elevation-10"
+        class="bg-surface elevation-3"
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
         width="300"
       ></v-img>
@@ -14,7 +14,7 @@
       <div class="text-subtitle-2">Cover</div>
       <v-img
         :aspect-ratio="1"
-        class="bg-surface elevation-10"
+        class="bg-surface elevation-3"
         src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
         width="300"
         cover

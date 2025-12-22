@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     color="purple"
-    elevation="10"
+    elevation="3"
     width="360"
   >
     <div class="d-flex justify-between">

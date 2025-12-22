@@ -1,5 +1,5 @@
 <template>
-  <v-sheet elevation="6">
+  <v-sheet elevation="2">
     <v-tabs
       bg-color="indigo"
       next-icon="mdi-arrow-right-bold-box-outline"
