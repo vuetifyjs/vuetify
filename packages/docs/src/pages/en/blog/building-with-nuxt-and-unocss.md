@@ -113,7 +113,7 @@ bun run build
 
 :::
 
-![Log from Nuxt build showing entry bundle exceeding 500kB (unminified)](tmp/nuxt-build-log.png)
+![Log from Nuxt build showing entry bundle exceeding 500kB (unminified)](https://cdn.vuetifyjs.com/docs/images/blog/building-with-nuxt-and-unocss/nuxt-build-log.png)
 
 Anytime you build the project, bundle files are right there in the `.output/public/_nuxt` directory. The CSS bundle file named `entry{hash}.css` is one that might be particularly interesting.
 
