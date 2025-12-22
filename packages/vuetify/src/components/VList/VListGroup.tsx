@@ -15,6 +15,10 @@ import { MaybeTransition } from '@/composables/transition'
 import { computed, inject, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+import type { TagProps } from '@/composables/tag'
+
 export type VListGroupSlots = {
   default: never
   activator: { isOpen: boolean, props: Record<string, unknown> }
@@ -31,6 +35,7 @@ const VListGroupActivator = defineComponent({
 })
 
 export const makeVListGroupProps = propsFactory({
+  groupTag: [String, Object, Function] as PropType<TagProps['tag']>,
   /* @deprecated */
   activeColor: String,
   baseColor: String,
@@ -53,7 +58,7 @@ export const makeVListGroupProps = propsFactory({
   value: null,
 
   ...makeComponentProps(),
-  ...makeTagProps(),
+  ...makeTagProps({ tag: undefined }),
 }, 'VListGroup')
 
 export const VListGroup = genericComponent<VListGroupSlots>()({
@@ -94,42 +99,47 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       },
     }))
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-list-group',
-          {
-            'v-list-group--prepend': list?.hasPrepend.value,
-            'v-list-group--fluid': props.fluid,
-            'v-list-group--subgroup': props.subgroup,
-            'v-list-group--open': isOpen.value,
-          },
-          props.class,
-        ]}
-        style={ props.style }
-      >
-        { slots.activator && (
-          <VDefaultsProvider defaults={ activatorDefaults.value }>
-            <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
-            </VListGroupActivator>
-          </VDefaultsProvider>
-        )}
+    useRender(() => {
+      const Tag = props.tag ?? parent?.tags.value?.item ?? 'div'
+      const GroupTag = props.groupTag ?? parent?.tags.value?.group ?? 'div'
 
-        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
-          { renderWhenClosed.value
-            ? (
-            <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-              { slots.default?.() }
-            </div>
-            ) : isOpen.value && (
-            <div class="v-list-group__items" role="group" aria-labelledby={ id.value }>
-              { slots.default?.() }
-            </div>
-            )}
-        </MaybeTransition>
-      </props.tag>
-    ))
+      return (
+        <Tag
+          class={[
+            'v-list-group',
+            {
+              'v-list-group--prepend': list?.hasPrepend.value,
+              'v-list-group--fluid': props.fluid,
+              'v-list-group--subgroup': props.subgroup,
+              'v-list-group--open': isOpen.value,
+            },
+            props.class,
+          ]}
+          style={ props.style }
+        >
+          { slots.activator && (
+            <VDefaultsProvider defaults={ activatorDefaults.value }>
+              <VListGroupActivator>
+                { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
+              </VListGroupActivator>
+            </VDefaultsProvider>
+          )}
+
+          <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
+            { renderWhenClosed.value
+              ? (
+              <GroupTag class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+                { slots.default?.() }
+              </GroupTag>
+              ) : isOpen.value && (
+              <GroupTag class="v-list-group__items" role="group" aria-labelledby={ id.value }>
+                { slots.default?.() }
+              </GroupTag>
+              )}
+          </MaybeTransition>
+        </Tag>
+      )
+    })
 
     return {
       isOpen,

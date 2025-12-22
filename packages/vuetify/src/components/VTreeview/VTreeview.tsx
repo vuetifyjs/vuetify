@@ -51,6 +51,7 @@ export const makeVTreeviewProps = propsFactory({
     collapseIcon: '$treeviewCollapse',
     expandIcon: '$treeviewExpand',
     slim: true,
+    tag: 'div',
   }), ['nav', 'openStrategy']),
 
   modelValue: Array,

@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // Styles
 import './VListItem.sass'
 
@@ -112,7 +113,7 @@ export const makeVListItemProps = propsFactory({
   ...makeElevationProps(),
   ...makeRoundedProps(),
   ...makeRouterProps(),
-  ...makeTagProps(),
+  ...makeTagProps({ tag: undefined }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VListItem')
@@ -144,6 +145,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       parent,
       openOnSelect,
       scrollToActive,
+      tags,
       id: uid,
     } = useNestedItem(id, () => props.disabled, false)
     const list = useList()
@@ -264,7 +266,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     }
 
     useRender(() => {
-      const Tag = isLink.value ? 'a' : props.tag
+      const Tag = isLink.value ? 'a' : (props.tag ?? tags.value.item ?? 'div')
       const hasTitle = (slots.title || props.title != null)
       const hasSubtitle = (slots.subtitle || props.subtitle != null)
       const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
