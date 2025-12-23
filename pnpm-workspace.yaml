@@ -6,6 +6,7 @@ autoInstallPeers: false
 ignoreWorkspaceRootCheck: true
 
 ignoredBuiltDependencies:
+  - '@parcel/watcher'
   - edgedriver
   - geckodriver
   - unrs-resolver
