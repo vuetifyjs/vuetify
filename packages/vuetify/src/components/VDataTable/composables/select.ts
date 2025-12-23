@@ -8,7 +8,7 @@ import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
-import type { EventProp } from '@/util'
+import type { EventProp, ValueComparator } from '@/util'
 
 export interface SelectableItem {
   value: any
@@ -37,7 +37,7 @@ export interface DataTableSelectStrategy {
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
-  valueComparator?: typeof deepEqual
+  valueComparator?: ValueComparator
   'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
 
@@ -90,7 +90,7 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-  valueComparator: Function as PropType<typeof deepEqual>,
+  valueComparator: Function as PropType<ValueComparator>,
 }, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
