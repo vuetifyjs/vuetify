@@ -1,4 +1,5 @@
 // Styles
+import './main.scss'
 import 'prism-theme-vars/base.css'
 
 // Plugins

@@ -4,7 +4,7 @@
 @use '../settings';
 
 @if (settings.$utilities != false and map.get(settings.$misc, 'elevation') != false and list.length(settings.$utilities) > 0) {
-  @include tools.layer('utilities') {
+  @include tools.layer('utilities.helpers') {
     $z: 24;
     @while $z >= 0 {
       .elevation-#{$z} {

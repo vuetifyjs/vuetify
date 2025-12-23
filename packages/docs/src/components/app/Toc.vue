@@ -212,7 +212,7 @@
 </script>
 
 <style lang="sass" scoped>
-  @layer vuetify.overrides
+  @layer base
     #app-toc
       ul
         list-style-type: none

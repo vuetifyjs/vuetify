@@ -19,11 +19,31 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Styles
 
-- Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
-- The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
-  - `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
-  - `<ul>`, `<ol>` and headings have padding and margins.
-- There are now pre-compiled entry points for the most common style changes. If you have a sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
+There are now pre-compiled entry points for the most common style changes. If you have a sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
+
+The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
+
+- `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
+- `<ul>`, `<ol>` and headings have padding and margins.
+
+### Layers
+
+Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
+
+If you were already using `$layers: true` in Vuetify 3, there are now five top-level layers instead of one.
+
+```diff
+- @layer base, vuetify, overrides;
++ @layer base, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final, overrides;
+```
+
+This can be used to easily interleave your own layers with ours:
+
+```diff
+@layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
+```
+
+If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
 ## Themes
 

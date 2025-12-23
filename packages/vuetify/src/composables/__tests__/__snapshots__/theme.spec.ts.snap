@@ -6,7 +6,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     id="custom-vuetify-stylesheet-id"
     type="text/css"
   >
-    @layer vuetify.theme {
+    @layer vuetify-utilities.theme {
   :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
@@ -373,7 +373,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     id="vuetify-theme-stylesheet"
     type="text/css"
   >
-    @layer vuetify.theme {
+    @layer vuetify-utilities.theme {
   :where(#my-app) {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
@@ -745,7 +745,7 @@ exports[`createTheme > should create style element 1`] = `
     id="vuetify-theme-stylesheet"
     type="text/css"
   >
-    @layer vuetify.theme {
+    @layer vuetify-utilities.theme {
   :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;

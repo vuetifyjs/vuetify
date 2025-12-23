@@ -1,17 +1,23 @@
 @use '../settings';
 
-@layer vuetify {
-  @layer reset, base, components, transitions;
-
-  // Use to override styles in other components
-  // This replaces hacks like .v-btn.v-btn and most of !important
-  @layer overrides;
-
-  @layer theme.background, theme.foreground, utilities;
-
-  // Only use for rules that need to override theme or utils
-  @layer trumps;
-
-  // Don't use, this is for consumers
-  @layer custom;
+@layer vuetify-core {
+  @layer reset, base;
 }
+
+@layer vuetify-components;
+
+// Contextual styles for nested components
+// This replaces hacks like .v-btn.v-btn and most of !important
+@layer vuetify-overrides;
+
+@layer vuetify-utilities {
+  @layer helpers;
+  @layer theme {
+    @layer background, foreground;
+  }
+}
+
+// Rules that need to override theme or utils
+@layer vuetify-final {
+  @layer transitions, trumps;
+};
