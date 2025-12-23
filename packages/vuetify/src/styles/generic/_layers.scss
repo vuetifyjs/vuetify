@@ -11,6 +11,7 @@
 @layer vuetify-overrides;
 
 @layer vuetify-utilities {
+  @layer helpers;
   @layer theme {
     @layer background, foreground;
   }

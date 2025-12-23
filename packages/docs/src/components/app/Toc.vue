@@ -27,10 +27,9 @@
       >
         <li
           :class="[
-            'ps-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': activeItem === to.slice(1),
-              'text-medium-emphasis': activeItem !== to.slice(1),
               'ps-6': level === 3,
               'ps-9': level === 4,
               'ps-12': level === 5,
