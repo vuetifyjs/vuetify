@@ -59,7 +59,7 @@ You can't interact with disabled picker.
 
 #### Elevation
 
-Emphasize the `v-time-picker` component by providing an **elevation** from 0 to 24. Elevation modifies the `box-shadow` css property.
+Emphasize the `v-time-picker` component by providing an **elevation** from 0 to 5. Elevation modifies the `box-shadow` css property.
 
 <ExamplesExample file="v-time-picker/prop-elevation" />
 

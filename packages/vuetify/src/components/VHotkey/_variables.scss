@@ -31,7 +31,7 @@ $hotkey-prefix-suffix-font-weight: normal !default;
 // Variant variables
 $hotkey-background: rgb(var(--v-theme-surface)) !default;
 $hotkey-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
-$hotkey-elevation: 2 !default;
+$hotkey-elevation: 1 !default;
 $hotkey-plain-opacity: .62 !default;
 
 $hotkey-variants: (

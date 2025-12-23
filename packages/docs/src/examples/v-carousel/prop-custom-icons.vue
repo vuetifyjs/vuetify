@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    elevation="24"
+    elevation="5"
     max-width="444"
   >
     <v-carousel

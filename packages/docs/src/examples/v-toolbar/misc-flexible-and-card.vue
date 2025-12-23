@@ -12,7 +12,7 @@
 
     <v-card
       class="mx-auto mt-n16 mb-4"
-      elevation="4"
+      elevation="2"
       height="200"
       max-width="600"
     >

@@ -3,7 +3,7 @@
 
 @mixin elevation($z)
   &
-    box-shadow: map.get(settings.$shadow-key-umbra, $z), map.get(settings.$shadow-key-penumbra, $z), map.get(settings.$shadow-key-ambient, $z)
+    box-shadow: map.get(settings.$shadow-key, $z), map.get(settings.$shadow-ambient, $z)
 
 @mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1))
   &

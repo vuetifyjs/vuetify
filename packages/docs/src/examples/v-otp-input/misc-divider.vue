@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="py-8 px-6 mx-auto ma-4 text-center"
-    elevation="4"
+    elevation="2"
     max-width="500"
     rounded="lg"
     width="100%"

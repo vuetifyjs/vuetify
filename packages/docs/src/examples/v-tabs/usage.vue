@@ -5,7 +5,7 @@
     :name="name"
     :options="options"
   >
-    <v-card :class="direction === 'vertical' ? 'd-flex' : ''" elevation="4">
+    <v-card :class="direction === 'vertical' ? 'd-flex' : ''" elevation="2">
       <v-tabs
         v-model="tab"
         v-bind="props"
@@ -79,7 +79,7 @@
 
   const code = computed(() => {
     return `
-<v-sheet${direction.value === 'vertical' ? 'class="d-flex"' : ''} elevation="4">
+<v-sheet${direction.value === 'vertical' ? 'class="d-flex"' : ''} elevation="2">
   <${name}${propsToString(props.value, [], 2)}>
     <v-tab value="one">Item One</v-tab>
     <v-tab value="two">Item Two</v-tab>

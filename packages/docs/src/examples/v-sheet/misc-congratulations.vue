@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4"
-    elevation="4"
+    elevation="2"
     height="250"
     max-width="800"
     width="100%"

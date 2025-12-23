@@ -50,7 +50,7 @@
         <v-btn
           class="ma-4"
           color="#4c00d5"
-          elevation="8"
+          elevation="3"
           icon="mdi-plus"
         ></v-btn>
       </v-layout-item>

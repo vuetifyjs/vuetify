@@ -24,6 +24,7 @@ This page contains a detailed list of breaking changes and the steps required to
   - `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
   - `<ul>`, `<ol>` and headings have padding and margins.
 - There are now pre-compiled entry points for the most common style changes. If you have a sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
+- Elevation shadows have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24). See [Elevation migration](/getting-started/elevation-migration) for details and tips to restore legacy MD2 levels if needed.
 
 ## Themes
 

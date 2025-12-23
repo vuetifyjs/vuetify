@@ -152,6 +152,7 @@ function genDefaults () {
         variables: {
           'border-color': '#000000',
           'border-opacity': 0.12,
+          'shadow-color': '#000000',
           'high-emphasis-opacity': 0.87,
           'medium-emphasis-opacity': 0.60,
           'disabled-opacity': 0.38,
@@ -189,6 +190,7 @@ function genDefaults () {
         variables: {
           'border-color': '#FFFFFF',
           'border-opacity': 0.12,
+          'shadow-color': '#000000',
           'high-emphasis-opacity': 1,
           'medium-emphasis-opacity': 0.70,
           'disabled-opacity': 0.50,

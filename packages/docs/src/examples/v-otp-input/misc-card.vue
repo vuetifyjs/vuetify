@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="py-8 px-6 text-center mx-auto ma-4"
-    elevation="12"
+    elevation="4"
     max-width="400"
     width="100%"
   >

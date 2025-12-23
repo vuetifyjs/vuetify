@@ -22,7 +22,7 @@
     >
       <v-card
         class="d-flex align-center justify-center ma-2"
-        elevation="2"
+        elevation="1"
         height="200"
       >
         <h1
