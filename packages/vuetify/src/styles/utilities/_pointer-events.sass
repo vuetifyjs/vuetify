@@ -1,8 +1,9 @@
 @use 'sass:list'
+@use 'sass:map'
 @use '../settings'
 @use '../tools'
 
-@if (settings.$utilities != false and list.length(settings.$utilities) > 0)
+@if (settings.$utilities != false and map.get(settings.$misc, 'pointer-events') != false and list.length(settings.$utilities) > 0)
   @include tools.layer('utilities.helpers')
     .pointer-events-none
       pointer-events: none !important

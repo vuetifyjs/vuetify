@@ -6,6 +6,17 @@
 $color-pack: true !default;
 $reset: true !default;
 
+$misc: () !default;
+$misc: map-deep-merge(
+  (
+    elevation: true,
+    hidden: true,
+    'sr-only': true,
+    'pointer-events': true,
+  ),
+  $misc
+);
+
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
 $line-height-root: 1.5 !default;

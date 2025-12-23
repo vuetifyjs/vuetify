@@ -44,6 +44,7 @@ export type ListItemSlot = {
   isOpen: boolean
   isSelected: boolean
   isIndeterminate: boolean
+  isDisabled: boolean
   select: (value: boolean) => void
 }
 
@@ -228,6 +229,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       isOpen: isOpen.value,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
+      isDisabled: props.disabled,
     } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {

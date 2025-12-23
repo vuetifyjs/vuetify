@@ -246,7 +246,6 @@
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
-      hide: xs.value,
     },
     {
       icon: '$vuetify-figma',
