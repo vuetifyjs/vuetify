@@ -19,7 +19,7 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Styles
 
-There are now pre-compiled entry points for the most common style changes. If you have a sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
+There are now pre-compiled entry points for the most common style changes. If you have a Sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
 The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
 
@@ -39,7 +39,7 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 
 This can be used to easily interleave your own layers with ours:
 
-```diff
+```css
 @layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
 ```
 
@@ -63,7 +63,7 @@ Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue
 
 ### VSnackbar
 
-Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** SASS variable. It can be replaced with `min-height` equivalent.
+Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
 
 ```diff
   <VSnackbar
@@ -76,7 +76,7 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
 
 ### VTextField
 
-Removed the **$text-field-details-padding-inline** SASS variable.
+Removed the **$text-field-details-padding-inline** Sass variable.
 
 ```diff { resource="src/styles/settings/_variables.scss" }
 @use 'vuetify/settings' with (
@@ -87,7 +87,7 @@ Removed the **$text-field-details-padding-inline** SASS variable.
 
 ### VRadioGroup
 
-Removed the **$radio-group-details-padding-inline** SASS variable.
+Removed the **$radio-group-details-padding-inline** Sass variable.
 
 ```diff { resource="src/styles/settings/_variables.scss" }
 @use 'vuetify/settings' with (
@@ -98,19 +98,20 @@ Removed the **$radio-group-details-padding-inline** SASS variable.
 
 ### VFileInput
 
-Removed the **$file-input-details-padding-inline** SASS variable.
+Removed the **$file-input-details-padding-inline** Sass variable.
 
 ```diff { resource="src/styles/settings/_variables.scss" }
 @use 'vuetify/settings' with (
 -  $file-input-details-padding-inline: <value>
 +  $input-details-padding-inline: <value>
 );
+```
 
 ### VBtn display
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
-The **$button-stacked-icon-margin** SASS variable has been removed and replaced with **$button-stacked-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
+The **$button-stacked-icon-margin** Sass variable has been removed and replaced with **$button-stacked-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
 
 ```diff { resource="styles/styles.scss"}
   @use 'vuetify/settings' with (
@@ -121,9 +122,9 @@ The **$button-stacked-icon-margin** SASS variable has been removed and replaced 
 
 ### VBtn text-transform
 
-The default text transform of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
+The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
-- Set it in the SASS variables for typography:
+- Set it in the Sass variables for typography:
 
 ```scss
 @use 'vuetify/settings' with (
@@ -135,7 +136,7 @@ The default text transform of _uppercase_ has been **removed**. To restore the p
 )
 ```
 
-- Or set it in the SASS variables for buttons:
+- Or set it in the Sass variables for buttons:
 
 ```scss
 @use 'vuetify/settings' with (
@@ -170,7 +171,7 @@ const vuetify = createVuetify({
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
-The **$field-clearable-margin** SASS variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
+The **$field-clearable-margin** Sass variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
 
 ```diff { resource="styles/styles.scss"}
   @use 'vuetify/settings' with (
@@ -182,7 +183,7 @@ The **$field-clearable-margin** SASS variable has been removed and replaced with
 
 The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
 
-```diff { resource="styles/styles.scss"}
+```scss { resource="styles/styles.scss"}
 .v-counter {
   opacity: 1;
   color: /* your $counter-color */;
