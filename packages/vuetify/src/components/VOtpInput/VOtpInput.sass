@@ -20,6 +20,14 @@
         &__end
           flex: 1
 
+      input::placeholder
+        color: currentColor
+        opacity: var(--v-disabled-opacity)
+
+      &.v-field--focused
+        input::placeholder
+          opacity: 0
+
   .v-otp-input__divider
     margin: $otp-input-divider-margin
 

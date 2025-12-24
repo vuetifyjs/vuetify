@@ -137,7 +137,6 @@ declare module 'vue' {
     IntroductionSlaDeck: typeof import('./src/components/introduction/SlaDeck.vue')['default']
     OneFAQ: typeof import('./src/components/one/FAQ.vue')['default']
     OneHero: typeof import('./src/components/one/Hero.vue')['default']
-    OneOtherSubs: typeof import('./src/components/one/OtherSubs.vue')['default']
     OneProperties: typeof import('./src/components/one/Properties.vue')['default']
     OneRoadmap: typeof import('./src/components/one/Roadmap.vue')['default']
     OneSubscribeCard: typeof import('./src/components/one/SubscribeCard.vue')['default']
