@@ -11,7 +11,7 @@ $banner-border-radius: map.get(settings.$rounded, 0) !default;
 $banner-border-style: settings.$border-style-root !default;
 $banner-border-thin-width: thin !default;
 $banner-border-width: 0 0 thin 0 !default;
-$banner-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$banner-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $banner-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $banner-elevation: 0 !default;
 $banner-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;

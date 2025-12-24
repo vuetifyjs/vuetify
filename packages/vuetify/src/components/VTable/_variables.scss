@@ -5,7 +5,7 @@
 
 // VTable
 $table-background: rgb(var(--v-theme-surface)) !default;
-$table-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$table-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $table-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
 $table-header-height: 56px !default;
 $table-header-font-weight: 500 !default;

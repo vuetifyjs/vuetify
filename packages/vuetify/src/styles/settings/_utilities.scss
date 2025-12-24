@@ -500,9 +500,9 @@ $utilities: () !default;
         property: color,
         class: text,
         values: (
-          high-emphasis: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)),
-          medium-emphasis: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)),
-          disabled: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)),
+          high-emphasis: theme-color('on-background', var(--v-high-emphasis-opacity)),
+          medium-emphasis: theme-color('on-background', var(--v-medium-emphasis-opacity)),
+          disabled: theme-color('on-background', var(--v-disabled-opacity)),
         )
       ),
       "text-overflow": (

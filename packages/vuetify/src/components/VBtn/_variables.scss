@@ -8,7 +8,7 @@
 $button-colored-disabled: true !default;
 
 $button-background: rgb(var(--v-theme-surface)) !default;
-$button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$button-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $button-banner-actions-padding: 0 8px !default; // @deprecated
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;

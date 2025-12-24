@@ -103,7 +103,7 @@
       @else
         opacity: 1
         @include tools.layer('trumps')
-          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+          color: tools.theme-color('on-surface', $button-disabled-opacity)
 
       &.v-btn--variant-elevated,
       &.v-btn--variant-flat
@@ -111,7 +111,7 @@
 
         @if ($button-colored-disabled)
           opacity: 1
-          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+          color: tools.theme-color('on-surface', $button-disabled-opacity)
           background: rgb(var(--v-theme-surface))
         @else
           @include tools.layer('trumps')

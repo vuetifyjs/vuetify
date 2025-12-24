@@ -10,7 +10,7 @@ $card-border-radius: settings.$border-radius-root !default;
 $card-border-style: settings.$border-style-root !default;
 $card-border-thin-width: thin !default;
 $card-border-width: 0 !default;
-$card-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$card-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
 $card-loader-top: 0 !default;
@@ -58,7 +58,7 @@ $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
 
 // VCardSubtitle
-$card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$card-subtitle-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
 $card-subtitle-compact-line-height: 1rem !default;
 $card-subtitle-flex: none !default;
