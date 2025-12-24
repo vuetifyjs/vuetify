@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Por favor, escolha pelo menos um valor',
     pattern: 'Formato inválido',
   },
+  command: {
+    search: 'Digite um comando ou pesquise...',
+  },
   hotkey: {
     then: 'então',
     ctrl: 'Ctrl',
