@@ -195,7 +195,7 @@ Before starting development you should know which branch to base your changes on
 | Vuetify 3 | Documentation | `master` |
 | Vuetify 3 | Bug fixes | `master` |
 | Vuetify 3 | New features | `dev` |
-| Vuetify 3 | Features with breaking changes| `next` |
+| Vuetify 4 | Features with breaking changes| `next` |
 | Vuetify 2 | Documentation|  `v2-stable` |
 | Vuetify 2 | Bug fixes | `v2-stable` |
 | Vuetify 2 | New features | `v2-dev` |
