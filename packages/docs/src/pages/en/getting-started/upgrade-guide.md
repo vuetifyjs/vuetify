@@ -229,6 +229,17 @@ Or remove `.raw`:
   </VSelect>
 ```
 
+### VContainer
+
+Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
+
+```diff
+<v-container
+-  class="fill-height"
++  class="fill-height d-flex align-center flex-wrap"
+/>
+```
+
 ### General changes
 
 #### Slot variables are (mostly) no longer refs
