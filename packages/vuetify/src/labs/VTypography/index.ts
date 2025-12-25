@@ -1,0 +1,1 @@
+export { VTypography } from './VTypography'
