@@ -15,7 +15,7 @@ $chip-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $chip-density: ("default": 0, "comfortable": -1, "compact": -2) !default;
 $chip-disabled-opacity: 0.3 !default;
 $chip-elevation: 1 !default;
-$chip-font-size: tools.map-deep-get(settings.$typography, "button", "size") !default;
+$chip-font-size: var(--v-text--label-large-font-size) !default;
 $chip-font-weight: 400 !default;
 $chip-height: 32px !default;
 $chip-icon-size-multiplier: calc(18/21) !default;
