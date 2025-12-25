@@ -108,6 +108,7 @@ declare module 'vue' {
     DocTabs: typeof import('./src/components/doc/Tabs.vue')['default']
     DocThemeCard: typeof import('./src/components/doc/ThemeCard.vue')['default']
     DocThemeVendor: typeof import('./src/components/doc/ThemeVendor.vue')['default']
+    DocTypographyPreview: typeof import('./src/components/doc/TypographyPreview.vue')['default']
     DocUpNext: typeof import('./src/components/doc/UpNext.vue')['default']
     DocVueJobs: typeof import('./src/components/doc/VueJobs.vue')['default']
     ExamplesExample: typeof import('./src/components/examples/Example.vue')['default']
