@@ -389,6 +389,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const lines: string[] = []
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
 
+    lines.push('@layer base {\n')
+
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
     }
@@ -401,6 +403,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ...genCssVariables(theme, parsedOptions.prefix),
       ], parsedOptions.scope)
     }
+
+    lines.push('}\n')
 
     if (parsedOptions.utilities) {
       const bgLines: string[] = []
