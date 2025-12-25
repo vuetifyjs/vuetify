@@ -50,7 +50,7 @@ In the above examples we import the default `mdi` icon set and its corresponding
 
 ::: info
 
-While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
+While it is still possible to supply the icon value through the default slot in Vuetify 3+ (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
 :::
 
