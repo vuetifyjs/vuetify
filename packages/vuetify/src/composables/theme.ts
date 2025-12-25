@@ -32,6 +32,7 @@ import {
 import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { Color } from '@/util'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -71,29 +72,29 @@ interface InternalThemeDefinition {
 }
 
 export interface Colors extends BaseColors, OnColors {
-  [key: string]: string
+  [key: string]: Color
 }
 
 interface BaseColors {
-  background: string
-  surface: string
-  primary: string
-  secondary: string
-  success: string
-  warning: string
-  error: string
-  info: string
+  background: Color
+  surface: Color
+  primary: Color
+  secondary: Color
+  success: Color
+  warning: Color
+  error: Color
+  info: Color
 }
 
 interface OnColors {
-  'on-background': string
-  'on-surface': string
-  'on-primary': string
-  'on-secondary': string
-  'on-success': string
-  'on-warning': string
-  'on-error': string
-  'on-info': string
+  'on-background': Color
+  'on-surface': Color
+  'on-primary': Color
+  'on-secondary': Color
+  'on-success': Color
+  'on-warning': Color
+  'on-error': Color
+  'on-info': Color
 }
 
 export interface ThemeInstance {
@@ -265,7 +266,7 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   return variables
 }
 
-function genVariation (name: string, color: string, variations: VariationsOptions | false) {
+function genVariation (name: string, color: Color, variations: VariationsOptions | false) {
   const object: Record<string, string> = {}
   if (variations) {
     for (const variation of (['lighten', 'darken'] as const)) {
