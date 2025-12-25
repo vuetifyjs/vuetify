@@ -59,6 +59,21 @@ export default createVuetify({
 
 Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
 
+## Breakpoints
+
+The default breakpoints have been reduced to better match modern device sizes:
+
+| Breakpoint | Change              |
+|------------|---------------------|
+| xs         | 0 (unchanged)       |
+| sm         | 600px (unchanged)   |
+| md         | ~~960px~~  » 840px  |
+| lg         | ~~1280px~~ » 1145px |
+| xl         | ~~1920px~~ » 1545px |
+| xxl        | ~~2560px~~ » 2138px |
+
+One of the components specifically impacted by those changes is VContainer. See the detailed information about those changes [below](#vcontainer).
+
 ## Components
 
 ### VSnackbar
@@ -240,6 +255,17 @@ Container component won't center the content vertically when paired with `fill-h
 +  class="fill-height d-flex align-center flex-wrap"
 />
 ```
+
+#### Max widths
+
+The calculation for `$container-max-widths` has changed to round values down to the nearest 100px for more predictable sizing. With the default breakpoints, this results in the following container widths:
+
+| Breakpoint | Change              |
+|------------|---------------------|
+| md         | ~~900px~~  » 700px  |
+| lg         | ~~1200px~~ » 1000px |
+| xl         | ~~1800px~~ » 1400px |
+| xxl        | ~~2400px~~ » 2000px |
 
 ### General changes
 

@@ -42,7 +42,7 @@
           <small class="d-block me-n1 mb-n1">
             <a
               class="text-decoration-none d-inline-flex align-center"
-              href="https://material.io/design/layout/responsive-layout-grid.html"
+              href="https://m3.material.io/foundations/layout/applying-layout/window-size-classes"
               rel="noopener noreferrer"
               target="_blank"
             >
