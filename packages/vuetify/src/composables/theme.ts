@@ -19,6 +19,7 @@ import {
   getCurrentInstance,
   getForeground,
   getLuma,
+  getOrCreateStyleElement,
   IN_BROWSER,
   lighten,
   mergeDeep,
@@ -320,24 +321,6 @@ function upsertStyles (id: string, cspNonce: string | undefined, styles: string)
   if (!styleEl) return
 
   styleEl.innerHTML = styles
-}
-
-function getOrCreateStyleElement (id: string, cspNonce?: string) {
-  if (!IN_BROWSER) return null
-
-  let style = document.getElementById(id) as HTMLStyleElement | null
-
-  if (!style) {
-    style = document.createElement('style')
-    style.id = id
-    style.type = 'text/css'
-
-    if (cspNonce) style.setAttribute('nonce', cspNonce)
-
-    document.head.appendChild(style)
-  }
-
-  return style
 }
 
 // Composables

@@ -7,9 +7,10 @@ import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createTypography, TypographySymbol } from '@/composables/typography'
 
 // Utilities
-import { effectScope, nextTick, reactive } from 'vue'
+import { effectScope, nextTick, reactive, readonly } from 'vue'
 import { defineComponent, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
@@ -21,6 +22,7 @@ import type { GoToOptions } from '@/composables/goto'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { TypographyOptions } from '@/composables/typography'
 
 // Exports
 export * from './composables'
@@ -39,6 +41,7 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: SSROptions
+  typography?: TypographyOptions
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -61,6 +64,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     const locale = createLocale(options.locale)
     const date = createDate(options.date, locale)
     const goTo = createGoTo(options.goTo, locale)
+    const typography = createTypography(options.typography, readonly(display.thresholds))
 
     function install (app: App) {
       for (const key in directives) {
@@ -93,6 +97,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(DateOptionsSymbol, date.options)
       app.provide(DateAdapterSymbol, date.instance)
       app.provide(GoToSymbol, goTo)
+      if (typography) {
+        app.provide(TypographySymbol, typography)
+      }
 
       if (IN_BROWSER && options.ssr) {
         if (app.$nuxt) {
@@ -121,6 +128,9 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
                 icons: inject.call(this, IconSymbol),
                 locale: inject.call(this, LocaleSymbol),
                 date: inject.call(this, DateAdapterSymbol),
+                typography: typography
+                  ? inject.call(this, TypographySymbol)
+                  : null,
               })
             },
           },
@@ -142,6 +152,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       locale,
       date,
       goTo,
+      typography,
     }
   })!
 }

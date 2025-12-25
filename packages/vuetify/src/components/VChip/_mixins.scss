@@ -7,7 +7,7 @@
 
 @mixin chip-sizes {
   @each $sizeName, $multiplier in settings.$size-scales {
-    $size: map.get($chip-sizes, "font-size") + math.div(2 * $multiplier, 16);
+    $size: calc(map.get($chip-sizes, "font-size") + #{2px * $multiplier});
     $height: map.get($chip-sizes, "height") + (6 * $multiplier);
     $padding: math.round(math.div($height, $chip-padding-ratio));
 
