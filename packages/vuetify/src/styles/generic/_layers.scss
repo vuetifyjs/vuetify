@@ -13,7 +13,7 @@
 @layer vuetify-utilities {
   @layer helpers;
   @layer theme {
-    @layer background, foreground;
+    @layer base, background, foreground;
   }
 }
 

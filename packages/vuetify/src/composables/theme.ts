@@ -17,8 +17,8 @@ import {
   darken,
   deprecate,
   getCurrentInstance,
-  getForeground,
   getLuma,
+  hasLightForeground,
   IN_BROWSER,
   lighten,
   mergeDeep,
@@ -166,6 +166,8 @@ function genDefaults () {
           'theme-on-kbd': '#000000',
           'theme-code': '#F5F5F5',
           'theme-on-code': '#000000',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
         },
       },
       dark: {
@@ -203,6 +205,8 @@ function genDefaults () {
           'theme-on-kbd': '#FFFFFF',
           'theme-code': '#343434',
           'theme-on-code': '#CCCCCC',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
         },
       },
     },
@@ -291,7 +295,7 @@ function genVariations (colors: InternalThemeDefinition['colors'], variations: V
   return variationColors
 }
 
-function genOnColors (colors: InternalThemeDefinition['colors']) {
+function genOnColors (colors: InternalThemeDefinition['colors'], variables: InternalThemeDefinition['variables']) {
   const onColors = {} as InternalThemeDefinition['colors']
 
   for (const color of Object.keys(colors)) {
@@ -300,7 +304,9 @@ function genOnColors (colors: InternalThemeDefinition['colors']) {
     const onColor = `on-${color}` as keyof OnColors
     const colorVal = parseColor(colors[color])
 
-    onColors[onColor] = getForeground(colorVal)
+    onColors[onColor] = hasLightForeground(colorVal)
+      ? variables['theme-on-dark']
+      : variables['theme-on-light']
   }
 
   return onColors
@@ -368,7 +374,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ...original,
         colors: {
           ...colors,
-          ...genOnColors(colors),
+          ...genOnColors(colors, original.variables),
         },
       }
     }
