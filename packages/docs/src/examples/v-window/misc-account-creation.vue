@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-card-title class="text-h6 font-weight-regular justify-space-between">
+    <v-card-title class="text-title-large font-weight-regular justify-space-between">
       <span>{{ currentTitle }}</span>
       <v-avatar
         color="primary"
@@ -19,7 +19,7 @@
             label="Email"
             placeholder="john@google.com"
           ></v-text-field>
-          <span class="text-caption text-grey-darken-1">
+          <span class="text-body-small text-grey-darken-1">
             This is the email you will use to login to your Vuetify account
           </span>
         </v-card-text>
@@ -35,7 +35,7 @@
             label="Confirm Password"
             type="password"
           ></v-text-field>
-          <span class="text-caption text-grey-darken-1">
+          <span class="text-body-small text-grey-darken-1">
             Please enter a password for your account
           </span>
         </v-card-text>
@@ -48,10 +48,10 @@
             height="128"
             src="https://cdn.vuetifyjs.com/images/logos/v.svg"
           ></v-img>
-          <h3 class="text-h6 font-weight-light mb-2">
+          <h3 class="text-title-large font-weight-light mb-2">
             Welcome to Vuetify
           </h3>
-          <span class="text-caption text-grey">Thanks for signing up!</span>
+          <span class="text-body-small text-grey">Thanks for signing up!</span>
         </div>
       </v-window-item>
     </v-window>

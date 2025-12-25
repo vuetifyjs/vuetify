@@ -6,7 +6,7 @@
     <v-card-text>
       <div>Word of the Day</div>
 
-      <p class="text-h4 font-weight-black">el·ee·mos·y·nar·y</p>
+      <p class="text-headline-large font-weight-black">el·ee·mos·y·nar·y</p>
 
       <p>adjective</p>
 
@@ -33,7 +33,7 @@
         style="bottom: 0;"
       >
         <v-card-text class="pb-0">
-          <p class="text-h4">Origin</p>
+          <p class="text-headline-large">Origin</p>
 
           <p class="text-medium-emphasis">
             late 16th century (as a noun denoting a place where alms were distributed): from medieval Latin eleemosynarius, from late Latin eleemosyna ‘alms’, from Greek eleēmosunē ‘compassion’

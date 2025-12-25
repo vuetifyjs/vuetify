@@ -5,14 +5,14 @@
     height="500"
     width="360"
   >
-    <div class="d-flex justify-center mt-auto text-h5 ">
+    <div class="d-flex justify-center mt-auto text-headline-small ">
       Rating overview
     </div>
 
     <div class="d-flex align-center flex-column my-auto">
-      <div class="text-h2 mt-5">
+      <div class="text-display-large mt-5">
         3.5
-        <span class="text-h6 ml-n3">/5</span>
+        <span class="text-title-large ml-n3">/5</span>
       </div>
 
       <v-rating

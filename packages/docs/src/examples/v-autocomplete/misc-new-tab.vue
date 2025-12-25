@@ -44,7 +44,7 @@
           >
             <v-avatar :icon="shortcut.icon" class="mb-2" color="white" variant="tonal"></v-avatar>
 
-            <div class="text-caption text-truncate" v-text="shortcut.title"></div>
+            <div class="text-body-small text-truncate" v-text="shortcut.title"></div>
           </v-card>
         </v-col>
 
@@ -55,17 +55,17 @@
 
                 <v-avatar class="mb-2" color="white" icon="mdi-plus" variant="tonal"></v-avatar>
 
-                <div class="text-caption text-truncate">Add shortcut</div>
+                <div class="text-body-small text-truncate">Add shortcut</div>
               </v-card>
             </template>
 
             <v-card rounded="lg" title="Add shortcut">
               <template v-slot:text>
-                <v-label class="text-caption">Name</v-label>
+                <v-label class="text-body-small">Name</v-label>
 
                 <v-text-field density="compact" variant="solo-filled" flat></v-text-field>
 
-                <v-label class="text-caption">URL</v-label>
+                <v-label class="text-body-small">URL</v-label>
 
                 <v-text-field density="compact" variant="solo-filled" flat></v-text-field>
               </template>

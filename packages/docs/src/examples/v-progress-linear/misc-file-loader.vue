@@ -37,7 +37,7 @@
         justify="center"
       >
         <v-col
-          class="text-subtitle-1 text-center"
+          class="text-body-large text-center"
           cols="12"
         >
           Getting your files

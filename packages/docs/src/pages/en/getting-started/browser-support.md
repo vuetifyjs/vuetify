@@ -32,8 +32,8 @@ This is not an exhaustive list of compatible browsers, but the main targeted one
 | Internet Explorer       |         | ⛔ Not supported                  |
 | Other Browsers          |         | ❓ Not officially supported       |
 
-<p class="text-caption">* All browsers on iOS use WebKit and have the same support as Safari</p>
-<p class="text-caption">** Some components may have incorrect colors due to lack of support for [relative color syntax](https://www.w3.org/TR/css-color-5/#relative-colors) (e.g. <v-code>rgb(from ...)</v-code>)</p>
+<p class="text-body-small">* All browsers on iOS use WebKit and have the same support as Safari</p>
+<p class="text-body-small">** Some components may have incorrect colors due to lack of support for [relative color syntax](https://www.w3.org/TR/css-color-5/#relative-colors) (e.g. <v-code>rgb(from ...)</v-code>)</p>
 
 This table is updated with minor releases of Vuetify. Chrome, Firefox, and Safari will be supported at least two years back from the Vuetify x.x.0 release date.
 Current start date is December 2023.

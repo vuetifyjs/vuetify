@@ -286,7 +286,7 @@ Your own styles will always<sup>*</sup> override vuetify's if you don't use `@la
 @layer base, vuetify, overrides;
 ```
 
-\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-body-small" }
 
 ## Caveats
 

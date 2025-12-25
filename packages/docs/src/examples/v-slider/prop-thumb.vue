@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column">
     <div>
-      <div class="text-caption">
+      <div class="text-body-small">
         Show thumb when using slider
       </div>
       <v-slider
@@ -11,7 +11,7 @@
     </div>
 
     <div>
-      <div class="text-caption">
+      <div class="text-body-small">
         Always show thumb label
       </div>
       <v-slider
@@ -21,7 +21,7 @@
     </div>
 
     <div>
-      <div class="text-caption">
+      <div class="text-body-small">
         Custom thumb size
       </div>
       <v-slider
@@ -32,7 +32,7 @@
     </div>
 
     <div>
-      <div class="text-caption">
+      <div class="text-body-small">
         Custom thumb label
       </div>
       <v-slider

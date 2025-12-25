@@ -21,7 +21,7 @@
       >
         <template #append-inner>
           <AppBtn size="small" border>
-            <span class="text-caption text-disabled">{{ t('esc') }}</span>
+            <span class="text-body-small text-disabled">{{ t('esc') }}</span>
           </AppBtn>
         </template>
       </AppTextField>
@@ -98,7 +98,7 @@
       <v-divider class="mt-4" />
 
       <div class="d-flex mx-4 my-2 align-center">
-        <AppLink class="text-caption" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
+        <AppLink class="text-body-small" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
           Advanced search
         </AppLink>
         <v-spacer />

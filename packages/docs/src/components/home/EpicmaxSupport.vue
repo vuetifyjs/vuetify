@@ -1,6 +1,6 @@
 <template>
   <section class="bg-light-blue-darken-4 py-8">
-    <h2 class="v-heading mb-2 text-h4 text-sm-h4">{{ t("epicmax.title") }}</h2>
+    <h2 class="v-heading mb-2 text-headline-large text-sm-headline-large">{{ t("epicmax.title") }}</h2>
     <p class="mx-auto" style="max-width: 700px">{{ t("epicmax.message") }}</p>
     <v-btn
       :aria-label="t('epicmax.learn-more')"

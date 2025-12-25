@@ -10,7 +10,7 @@
 
       <span
         v-if="index === 2"
-        class="text-grey text-caption align-self-center"
+        class="text-grey text-body-small align-self-center"
       >
         (+{{ value.length - 2 }} others)
       </span>

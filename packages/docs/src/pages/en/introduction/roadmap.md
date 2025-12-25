@@ -44,7 +44,7 @@ The following is a list of all planned components for the year 2025.
 | v-date-range-picker                                             | Q4 2025       | TBD                |
 | v-date-time-picker                                              | Q4 2025       | TBD                |
 
-\* Already in Labs { .text-caption }
+\* Already in Labs { .text-body-small }
 
 ### Other components and features
 
@@ -60,7 +60,7 @@ The following is a list of all planned components for the year 2025.
 | v-drag (directive)                                         | TBD           | TBD                |
 | v-chat                                                     | TBD           | TBD                |
 
-\* Already in Labs { .text-caption }
+\* Already in Labs { .text-body-small }
 
 ## Released
 

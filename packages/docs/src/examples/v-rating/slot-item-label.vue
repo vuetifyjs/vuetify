@@ -7,7 +7,7 @@
       <template v-slot:item-label="props">
         <span
           :class="`text-${colors[props.index]}`"
-          class="font-weight-black text-caption"
+          class="font-weight-black text-body-small"
         >
           {{ props.label }}
         </span>

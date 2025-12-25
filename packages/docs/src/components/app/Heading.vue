@@ -21,11 +21,11 @@
 
 <script setup>
   const HEADING_CLASSES = {
-    1: 'text-h3 text-sm-h3',
-    2: 'text-h4 text-sm-h4',
-    3: 'text-h5',
-    4: 'text-h6',
-    5: 'text-subtitle-1 font-weight-medium',
+    1: 'text-display-medium text-sm-display-medium',
+    2: 'text-headline-large text-sm-headline-large',
+    3: 'text-headline-small',
+    4: 'text-title-large',
+    5: 'text-body-large font-weight-medium',
   }
 
   const props = defineProps({

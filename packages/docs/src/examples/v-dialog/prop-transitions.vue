@@ -18,7 +18,7 @@
             <v-card>
               <v-toolbar title="Opening from the Bottom"></v-toolbar>
 
-              <v-card-text class="text-h2 pa-12">
+              <v-card-text class="text-display-large pa-12">
                 Hello world!
               </v-card-text>
 
@@ -49,7 +49,7 @@
             <v-card>
               <v-toolbar title="Opening from the Top"></v-toolbar>
 
-              <v-card-text class="text-h2 pa-12">
+              <v-card-text class="text-display-large pa-12">
                 Hello world!
               </v-card-text>
 

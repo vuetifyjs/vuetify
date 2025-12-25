@@ -36,7 +36,7 @@
             size="128"
           ></v-icon>
 
-          <div class="text-h4 font-weight-bold">This receipt was sent</div>
+          <div class="text-headline-large font-weight-bold">This receipt was sent</div>
         </div>
 
         <v-divider></v-divider>

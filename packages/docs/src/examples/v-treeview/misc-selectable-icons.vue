@@ -31,7 +31,7 @@
         <v-card-text>
           <div
             v-if="tree.length === 0"
-            class="text-h6 font-weight-light text-grey pa-4 text-center"
+            class="text-title-large font-weight-light text-grey pa-4 text-center"
           >
             Select your favorite breweries
           </div>

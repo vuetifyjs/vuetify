@@ -9,7 +9,7 @@
       </v-col>
 
       <v-col class="text-center text-lg-start" cols="auto">
-        <h1 class="text-h2 font-weight-medium mb-3 ms-n1">
+        <h1 class="text-display-large font-weight-medium mb-3 ms-n1">
           Vue Component Framework
         </h1>
 
@@ -25,7 +25,7 @@
           <v-col cols="auto">
             <v-hover v-slot="{ isHovering, props }">
               <v-sheet
-                class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
+                class="px-2 py-2 d-inline-flex align-center text-mono text-body-medium text-no-wrap"
                 color="surface"
                 width="215"
                 border
@@ -61,7 +61,7 @@
 
           <v-col cols="auto">
             <v-sheet
-              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
+              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-body-small"
               color="surface"
               width="215"
               border
@@ -75,7 +75,7 @@
 
           <v-col cols="auto">
             <v-sheet
-              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-caption"
+              class="pa-1 ps-3 d-inline-flex align-center justify-space-between text-body-small"
               color="surface"
               width="215"
               border

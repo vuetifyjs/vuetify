@@ -15,7 +15,7 @@
           max-width="350"
           v-bind="props"
         >
-          <v-card-text class="my-4 text-center text-h6">
+          <v-card-text class="my-4 text-center text-title-large">
             Hover over me!
           </v-card-text>
         </v-card>
