@@ -7,7 +7,7 @@
 
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
   @each $sizeName, $multiplier in settings.$size-scales {
-    $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
+    $size: calc(map.get($map, "font-size") + #{2px * $multiplier});
     $height: map.get($map, 'height') + (settings.$size-scale * $multiplier);
     $selector: '.v-btn--size-#{$sizeName}';
     @if $immediate {
