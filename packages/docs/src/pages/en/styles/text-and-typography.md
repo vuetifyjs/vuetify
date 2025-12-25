@@ -1,7 +1,7 @@
 ---
 meta:
   title: Text and typography
-  description: View the various typography styles. From headings to captions, with various weights, sizes and italics.
+  description: View the various typography styles. From display to labels, with various weights, sizes and italics.
   keywords: typography, headings, titles, text
 related:
   - /styles/display/
@@ -9,30 +9,32 @@ related:
   - /features/internationalization/
 features:
   report: true
-  spec: https://m2.material.io/design/typography/the-type-system.html
+  spec: https://m3.material.io/styles/typography/type-scale-tokens
 ---
 
 # Text and typography
 
-Control text size, alignment, wrapping, overflow, transforms and more. By default, Vuetify uses the Material Design specification [Roboto Font](https://fonts.google.com/specimen/Roboto).
+Control text size, alignment, wrapping, overflow, transforms and more. By default, Vuetify uses the Material Design 3 specification [Roboto Font](https://fonts.google.com/specimen/Roboto).
 
 <PageFeatures />
 
 | Class | Properties |
 | - | - |
-| **text-h1** | font-size: 6rem;<br>font-weight: 300;<br>line-height: 1;<br>letter-spacing: -0.015625em |
-| **text-h2** | font-size: 3.75rem;<br>font-weight: 300;<br>line-height: 1;<br>letter-spacing: -0.0083333333em; |
-| **text-h3** | font-size: 3rem;<br>font-weight: 400;<br>line-height: 1.05;<br>letter-spacing: normal; |
-| **text-h4** | font-size: 2.125rem;<br>font-weight: 400;<br>line-height: 1.175;<br>letter-spacing: 0.0073529412em; |
-| **text-h5** | font-size: 1.5rem;<br>font-weight: 400;<br>line-height: 1.333;<br>line-height: normal; |
-| **text-h6** | font-size: 1.25rem;<br>font-weight: 500;<br>line-height: 1.6;<br>letter-spacing: 0.0125em; |
-| **text-subtitle-1** | font-size: 1rem;<br>font-weight: normal;<br>line-height: 1.75;<br>letter-spacing: 0.009375em; |
-| **text-subtitle-2** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 1.6;<br>letter-spacing: 0.0071428571em; |
-| **text-body-1** | font-size: 1rem;<br>font-weight: 400;<br>line-height: 1.5;<br>letter-spacing: 0.03125em; |
-| **text-body-2** | font-size: 0.875rem;<br>font-weight: 400;<br>line-height: 1.425;<br>letter-spacing: 0.0178571429em; |
-| **text-button** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 2.6;<br>letter-spacing: 0.0892857143em;<br>text-transform: uppercase; |
-| **text-caption** | font-size: 0.75rem;<br>font-weight: 400;<br>line-height: 1.667;<br>letter-spacing: 0.0333333333em; |
-| **text-overline** | font-size: 0.75rem;<br>font-weight: 500;<br>line-height: 2.667;<br>letter-spacing: 0.1666666667em;<br>text-transform: uppercase; |
+| **text-display-large** | font-size: 57px;<br>font-weight: 500;<br>line-height: 64px;<br>letter-spacing: -0.25px; |
+| **text-display-medium** | font-size: 45px;<br>font-weight: 500;<br>line-height: 52px;<br>letter-spacing: 0px; |
+| **text-display-small** | font-size: 36px;<br>font-weight: 500;<br>line-height: 44px;<br>letter-spacing: 0px; |
+| **text-headline-large** | font-size: 32px;<br>font-weight: 500;<br>line-height: 40px;<br>letter-spacing: 0px; |
+| **text-headline-medium** | font-size: 28px;<br>font-weight: 500;<br>line-height: 36px;<br>letter-spacing: 0px; |
+| **text-headline-small** | font-size: 24px;<br>font-weight: 500;<br>line-height: 32px;<br>letter-spacing: 0px; |
+| **text-title-large** | font-size: 22px;<br>font-weight: 400;<br>line-height: 30px;<br>letter-spacing: 0px; |
+| **text-title-medium** | font-size: 16px;<br>font-weight: 500;<br>line-height: 24px;<br>letter-spacing: 0.15px; |
+| **text-title-small** | font-size: 14px;<br>font-weight: 500;<br>line-height: 20px;<br>letter-spacing: 0.1px; |
+| **text-body-large** | font-size: 16px;<br>font-weight: 400;<br>line-height: 24px;<br>letter-spacing: 0.5px; |
+| **text-body-medium** | font-size: 14px;<br>font-weight: 400;<br>line-height: 20px;<br>letter-spacing: 0.25px; |
+| **text-body-small** | font-size: 12px;<br>font-weight: 400;<br>line-height: 16px;<br>letter-spacing: 0.4px; |
+| **text-label-large** | font-size: 14px;<br>font-weight: 500;<br>line-height: 20px;<br>letter-spacing: 0.1px; |
+| **text-label-medium** | font-size: 12px;<br>font-weight: 500;<br>line-height: 16px;<br>letter-spacing: 0.5px; |
+| **text-label-small** | font-size: 11px;<br>font-weight: 500;<br>line-height: 16px;<br>letter-spacing: 0.5px; |
 | **text-high-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)); |
 | **text-medium-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)); |
 | **text-disabled** | color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)); |
@@ -62,31 +64,33 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **font-weight-light** | font-weight: 300; |
 | **font-weight-thin** | font-weight: 100; |
 | **font-italic** | font-style: italic; |
-| **text-{breakpoint}-h1** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-h2** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-h3** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-h4** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-h5** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-h6** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-subtitle-1** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-subtitle-2** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-body-1** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-body-2** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-button** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-caption** | Set the font size for the specified breakpoint. |
-| **text-{breakpoint}-overline** | Set the font size for the specified breakpoint. { style="max-height: 600px;" fixed-header } |
+| **text-{breakpoint}-display-large** | Set the text-display-large style for the specified breakpoint. |
+| **text-{breakpoint}-display-medium** | Set the text-display-medium style for the specified breakpoint. |
+| **text-{breakpoint}-display-small** | Set the text-display-small style for the specified breakpoint. |
+| **text-{breakpoint}-headline-large** | Set the text-headline-large style for the specified breakpoint. |
+| **text-{breakpoint}-headline-medium** | Set the text-headline-medium style for the specified breakpoint. |
+| **text-{breakpoint}-headline-small** | Set the text-headline-small style for the specified breakpoint. |
+| **text-{breakpoint}-title-large** | Set the text-title-large style for the specified breakpoint. |
+| **text-{breakpoint}-title-medium** | Set the text-title-medium style for the specified breakpoint. |
+| **text-{breakpoint}-title-small** | Set the text-title-small style for the specified breakpoint. |
+| **text-{breakpoint}-body-large** | Set the text-body-large style for the specified breakpoint. |
+| **text-{breakpoint}-body-medium** | Set the text-body-medium style for the specified breakpoint. |
+| **text-{breakpoint}-body-small** | Set the text-body-small style for the specified breakpoint. |
+| **text-{breakpoint}-label-large** | Set the text-label-large style for the specified breakpoint. |
+| **text-{breakpoint}-label-medium** | Set the text-label-medium style for the specified breakpoint. |
+| **text-{breakpoint}-label-small** | Set the text-label-small style for the specified breakpoint. { style="max-height: 600px;" fixed-header } |
 
 <PromotedEntry />
 
 ## Usage
 
-Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).
+Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://m3.material.io/styles/typography/type-scale-tokens).
 
 <ExamplesExample file="text-and-typography/typography" />
 
 ### Breakpoints
 
-All of the typography classes support the responsive breakpoints seen in other parts of the framework. The base class `.text-{value}` corresponds to the `xsAndUp` breakpoint, while the classes `.text-{breakpoint}-{value}` can be used for the rest of the breakpoints (`sm`, `md`, `lg` and `xl`).
+All of the typography classes support the responsive breakpoints seen in other parts of the framework. The base class `.text-{variant}` corresponds to the `xsAndUp` breakpoint, while the classes `.text-{breakpoint}-{variant}` can be used for the rest of the breakpoints (`sm`, `md`, `lg` and `xl`).
 
 The following example shows a slightly contrived example of how one can use the different classes to effect:
 
