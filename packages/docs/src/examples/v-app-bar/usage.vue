@@ -5,7 +5,7 @@
     :name="name"
     :options="options"
   >
-    <v-layout class="overflow-visible">
+    <v-layout class="border" style="height: 150px;">
       <v-app-bar v-bind="props">
         <template v-slot:prepend>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
