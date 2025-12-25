@@ -22,7 +22,7 @@
 
           <div class="pt-1 pa-3">
             <div class="d-flex justify-space-between align-center">
-              <span class="text-body-1 font-weight-bold text-truncate">{{ item.title }}</span>
+              <span class="text-body-large font-weight-bold text-truncate">{{ item.title }}</span>
 
               <v-btn
                 color="grey"
@@ -32,7 +32,7 @@
               />
             </div>
 
-            <div class="d-flex align-center ga-1 text-caption text-medium-emphasis">
+            <div class="d-flex align-center ga-1 text-body-small text-medium-emphasis">
               <v-icon icon="mdi-calendar-blank-outline" size="small" />
               {{ item.createdAt }}
             </div>

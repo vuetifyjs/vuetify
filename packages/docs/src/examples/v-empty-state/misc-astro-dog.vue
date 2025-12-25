@@ -32,11 +32,11 @@
           </template>
 
           <template v-slot:title>
-            <div class="text-h6 text-high-emphasis">Empty in drafts</div>
+            <div class="text-title-large text-high-emphasis">Empty in drafts</div>
           </template>
 
           <template v-slot:text>
-            <div class="text-body-1">Save a draft message and it will show up here</div>
+            <div class="text-body-large">Save a draft message and it will show up here</div>
           </template>
         </v-empty-state>
       </v-main>

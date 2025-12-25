@@ -21,7 +21,7 @@
             flat
           >
 
-            <v-card-subtitle class="pt-3 pb-1 text-subtitle-2 pl-0 text-medium-emphasis d-inline-flex align-center ga-1">
+            <v-card-subtitle class="pt-3 pb-1 text-title-small pl-0 text-medium-emphasis d-inline-flex align-center ga-1">
               <v-icon icon="$calendar" size="small" />
 
               {{ blog.date }}
@@ -33,7 +33,7 @@
               </router-link>
             </v-card-title>
 
-            <div class="text-medium-emphasis text-subtitle-1 pl-0">
+            <div class="text-medium-emphasis text-body-large pl-0">
               {{ blog.shortDescription }}
             </div>
 
@@ -48,7 +48,7 @@
             /> -->
 
             <v-card-text class="pl-0 pt-2">
-              <div class="d-flex align-center ga-2 text-subtitle-2 text-medium-emphasis">
+              <div class="d-flex align-center ga-2 text-title-small text-medium-emphasis">
                 <v-avatar :image="blog.avatar" size="32" />
 
                 {{ blog.author }}
@@ -77,11 +77,11 @@
             rounded="lg"
             flat
           >
-            <v-card-subtitle class="pt-5 text-caption text-medium-emphasis d-inline-flex align-center ga-1">
+            <v-card-subtitle class="pt-5 text-body-small text-medium-emphasis d-inline-flex align-center ga-1">
               <v-icon icon="mdi-calendar" size="16" /> {{ item.date }}
             </v-card-subtitle>
 
-            <v-card-title class="d-inline-block text-subtitle-1 pt-1">
+            <v-card-title class="d-inline-block text-body-large pt-1">
               <router-link :to="item.to" class="text-high-emphasis d-inline-flex">
                 {{ item.title }}
               </router-link>
@@ -89,13 +89,13 @@
 
             <v-card-text
               :class="{ 'text-truncate': smAndDown }"
-              class="text-medium-emphasis text-body-2 py-0"
+              class="text-medium-emphasis text-body-medium py-0"
             >
               {{ item.shortDescription?.substring(0, 115) + (item.shortDescription?.length > 300 ? '...' : '') }}
             </v-card-text>
 
-            <v-card-text class="text-body-2 text-medium-emphasis pt-2">
-              <div class="d-flex align-center ga-2 text-body-2 text-medium-emphasis">
+            <v-card-text class="text-body-medium text-medium-emphasis pt-2">
+              <div class="d-flex align-center ga-2 text-body-medium text-medium-emphasis">
                 <v-avatar :image="item.avatar" size="22" />
 
                 {{ item.author }}

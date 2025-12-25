@@ -6,7 +6,7 @@
     <v-card-text>
       <div>Word of the Day</div>
 
-      <p class="text-h4 font-weight-black">be•nev•o•lent</p>
+      <p class="text-headline-large font-weight-black">be•nev•o•lent</p>
 
       <p>adjective</p>
 

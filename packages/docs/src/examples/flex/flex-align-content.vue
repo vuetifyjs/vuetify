@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex flex-wrap ga-6" fluid>
     <div v-for="variant in variants" :key="variant.value">
-      <div class="text-caption mb-2">align-content-{{ variant.value }}</div>
+      <div class="text-body-small mb-2">align-content-{{ variant.value }}</div>
       <v-sheet
         :class="`d-flex align-content-${variant.value} flex-wrap bg-surface-variant`"
         height="200"

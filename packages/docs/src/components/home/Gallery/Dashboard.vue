@@ -14,7 +14,7 @@
           border
         >
           <v-list-item>
-            <v-list-item-title class="text-caption">{{ item.subtitle }}</v-list-item-title>
+            <v-list-item-title class="text-body-small">{{ item.subtitle }}</v-list-item-title>
 
             <v-list-item-title>{{ item.title }}</v-list-item-title>
 
@@ -96,7 +96,7 @@
               </template>
 
               <template #append>
-                <span class="text-subtitle-1 font-weight-regular">
+                <span class="text-body-large font-weight-regular">
                   {{ item.amount }}
                 </span>
               </template>

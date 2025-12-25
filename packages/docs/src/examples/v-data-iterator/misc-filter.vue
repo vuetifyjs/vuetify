@@ -34,12 +34,12 @@
 
                 <v-list-item :subtitle="item.raw.subtitle" class="mb-2">
                   <template v-slot:title>
-                    <strong class="text-h6 mb-2">{{ item.raw.title }}</strong>
+                    <strong class="text-title-large mb-2">{{ item.raw.title }}</strong>
                   </template>
                 </v-list-item>
 
                 <div class="d-flex justify-space-between px-4">
-                  <div class="d-flex align-center text-caption text-medium-emphasis me-1">
+                  <div class="d-flex align-center text-body-small text-medium-emphasis me-1">
                     <v-icon icon="mdi-clock" start></v-icon>
 
                     <div class="text-truncate">{{ item.raw.duration }}</div>
@@ -71,7 +71,7 @@
             @click="prevPage"
           ></v-btn>
 
-          <div class="mx-2 text-caption">
+          <div class="mx-2 text-body-small">
             Page {{ page }} of {{ pageCount }}
           </div>
 

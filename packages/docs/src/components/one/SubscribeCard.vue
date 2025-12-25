@@ -1,10 +1,10 @@
 <template>
   <v-container id="features" class="pa-md-12 pa-4 mx-auto" max-width="900" fluid>
-    <h2 class="text-h4 text-md-h3 font-weight-bold mb-2 text-center">
+    <h2 class="text-headline-large text-md-display-medium font-weight-bold mb-2 text-center">
       What You Get
     </h2>
 
-    <p class="text-body-1 text-medium-emphasis mb-8 text-center">
+    <p class="text-body-large text-medium-emphasis mb-8 text-center">
       Choose the plan that fits your needs
     </p>
 
@@ -22,16 +22,16 @@
             <v-icon class="mr-3" color="primary" icon="mdi-account" size="32" />
 
             <div>
-              <div class="text-h6 font-weight-bold">Solo Developer</div>
+              <div class="text-title-large font-weight-bold">Solo Developer</div>
 
-              <div class="text-body-2 text-medium-emphasis">For individual developers</div>
+              <div class="text-body-medium text-medium-emphasis">For individual developers</div>
             </div>
           </div>
 
           <div class="mb-6">
-            <span class="text-h4 font-weight-bold">${{ prices.solo[interval].split(' ')[0] }}</span>
+            <span class="text-headline-large font-weight-bold">${{ prices.solo[interval].split(' ')[0] }}</span>
 
-            <span class="text-body-2 text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
+            <span class="text-body-medium text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
           </div>
 
           <v-list
@@ -50,7 +50,7 @@
                 />
               </template>
 
-              <v-list-item-title class="text-wrap text-body-2">
+              <v-list-item-title class="text-wrap text-body-medium">
                 {{ item.text }}
               </v-list-item-title>
 
@@ -97,7 +97,7 @@
             />
 
             <div>
-              <div class="text-h6 font-weight-bold">
+              <div class="text-title-large font-weight-bold">
                 Team
 
                 <v-chip
@@ -109,14 +109,14 @@
                 />
               </div>
 
-              <div class="text-body-2 text-medium-emphasis">For teams up to 25 members</div>
+              <div class="text-body-medium text-medium-emphasis">For teams up to 25 members</div>
             </div>
           </div>
 
           <div class="mb-6">
-            <span class="text-h4 font-weight-bold">${{ prices.team[interval].split(' ')[0] }}</span>
+            <span class="text-headline-large font-weight-bold">${{ prices.team[interval].split(' ')[0] }}</span>
 
-            <span class="text-body-2 text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
+            <span class="text-body-medium text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
           </div>
 
           <v-list bg-color="transparent" class="flex-grow-1 px-0" density="compact" slim>
@@ -129,7 +129,7 @@
                 />
               </template>
 
-              <v-list-item-title class="text-wrap text-body-2">
+              <v-list-item-title class="text-wrap text-body-medium">
                 {{ item.text }}
               </v-list-item-title>
 
@@ -184,7 +184,7 @@
       </v-btn-toggle>
     </div>
 
-    <p class="text-caption text-medium-emphasis text-center mt-4">
+    <p class="text-body-small text-medium-emphasis text-center mt-4">
       Cancel anytime. Secure payment via Stripe.
     </p>
   </v-container>

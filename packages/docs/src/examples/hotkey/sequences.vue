@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-card>
           <v-card-text>
-            <p class="text-body-2 mb-4">
+            <p class="text-body-medium mb-4">
               Key sequences require pressing keys in order within the timeout period.
               Try the sequences below:
             </p>
@@ -57,12 +57,12 @@
             <v-divider class="my-4"></v-divider>
 
             <div class="activity-log pa-3 border rounded">
-              <h4 class="text-subtitle-1 mb-2">Activity Log:</h4>
+              <h4 class="text-body-large mb-2">Activity Log:</h4>
               <div v-if="messages.length === 0" class="text-grey">
                 No sequences triggered yet...
               </div>
-              <div v-for="message in messages" :key="message.id" class="text-body-2 mb-1">
-                <span class="text-grey text-caption">{{ message.time }}</span> - {{ message.text }}
+              <div v-for="message in messages" :key="message.id" class="text-body-medium mb-1">
+                <span class="text-grey text-body-small">{{ message.time }}</span> - {{ message.text }}
               </div>
               <v-btn v-if="messages.length > 0" class="mt-2" size="small" @click="clearMessages">
                 Clear Log

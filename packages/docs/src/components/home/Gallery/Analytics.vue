@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar color="transparent">
-      <v-toolbar-title class="text-h6">Analytics</v-toolbar-title>
+      <v-toolbar-title class="text-title-large">Analytics</v-toolbar-title>
 
       <template #append>
         <v-btn-toggle v-model="range" density="compact" variant="outlined" mandatory>
@@ -17,9 +17,9 @@
         <v-col v-for="stat in stats" :key="stat.title" cols="6" md="3">
           <v-card elevation="0" rounded="lg" border>
             <v-card-text class="pb-0">
-              <div class="text-caption text-medium-emphasis">{{ stat.title }}</div>
+              <div class="text-body-small text-medium-emphasis">{{ stat.title }}</div>
               <div class="d-flex align-center justify-space-between">
-                <span class="text-h6">{{ stat.value }}</span>
+                <span class="text-title-large">{{ stat.value }}</span>
                 <v-chip
                   :color="stat.change > 0 ? 'success' : 'error'"
                   :prepend-icon="stat.change > 0 ? 'mdi-arrow-up' : 'mdi-arrow-down'"

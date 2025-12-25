@@ -18,7 +18,7 @@
 
       <v-responsive min-height="50vh"></v-responsive>
 
-      <div class="text-center text-body-2 mb-12">
+      <div class="text-center text-body-medium mb-12">
         The card will appear below:
       </div>
 
@@ -112,7 +112,7 @@
   <div class="pa-6 text-center position-sticky">Scroll down</div>
   <v-responsive min-height="100vh"></v-responsive>
 
-  <div class="text-center text-body-2 mb-12">
+  <div class="text-center text-body-medium mb-12">
     The card will appear below:
   </div>
 
