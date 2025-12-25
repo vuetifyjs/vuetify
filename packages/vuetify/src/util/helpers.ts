@@ -848,3 +848,21 @@ export function deepToRaw<T extends {}> (value: T): T {
 
   return objectIterator(value)
 }
+
+export function getOrCreateStyleElement (id: string, cspNonce?: string) {
+  if (!IN_BROWSER) return null
+
+  let style = document.getElementById(id) as HTMLStyleElement | null
+
+  if (!style) {
+    style = document.createElement('style')
+    style.id = id
+    style.type = 'text/css'
+
+    if (cspNonce) style.setAttribute('nonce', cspNonce)
+
+    document.head.appendChild(style)
+  }
+
+  return style
+}
