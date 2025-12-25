@@ -15,6 +15,7 @@
   @layer theme {
     @layer background, foreground;
   }
+  @layer typography;
 }
 
 // Rules that need to override theme or utils
