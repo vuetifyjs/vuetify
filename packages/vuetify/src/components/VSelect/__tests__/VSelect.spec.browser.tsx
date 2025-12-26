@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, wait, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -933,6 +933,88 @@ describe('VSelect', () => {
       expect(select).toHaveLength(2)
       expect(select).toContain('1')
       expect(select).toContain('2')
+    })
+  })
+
+  describe('list-header and list-footer slots', () => {
+    it('should render list-header and list-footer slots', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2']}>
+          {{
+            'list-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'list-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate freely between interactive elements with Tab', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
+          {{
+            'list-header': () => (
+              <div>
+                <button data-testid="button-1">Button 1</button>
+                <button data-testid="button-2">Button 2</button>
+              </div>
+            ),
+            'list-footer': () => (
+              <div class="d-flex justify-between">
+                <button data-testid="button-3">Button 3</button>
+                <button data-testid="button-4">Button 4</button>
+              </div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('button-1')).toHaveTextContent('Button 1')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await wait(100) // sometimes lags when the list is longer
+      await expect.poll(() => screen.getByTestId('button-1')).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-2')).toHaveFocus()
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('button-1')).toHaveFocus()
+      await userEvent.keyboard('{Tab}{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+      await userEvent.keyboard('{ArrowDown}')
+      expect(screen.getAllByRole('option').at(1)).toHaveFocus()
+      await userEvent.keyboard('{End}')
+      await wait(300) // scrolling
+      await expect.poll(() => screen.getAllByRole('option').at(-1)).toHaveFocus()
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-3')).toHaveFocus()
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-4')).toHaveFocus()
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('button-3')).toHaveFocus()
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('button-2')).toHaveFocus()
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('button-1')).toHaveFocus()
+      await userEvent.keyboard('{Tab}{Tab}{Tab}{Tab}')
+      expect(screen.getByTestId('button-4')).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
     })
   })
 
