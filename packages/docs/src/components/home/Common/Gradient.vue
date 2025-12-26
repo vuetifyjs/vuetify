@@ -1,5 +1,5 @@
 <template>
-  <div class="v-bg position-absolute top-0 right-0 left-0 bottom-0">
+  <div class="v-bg">
     <div
       :class="{
         [`bg-${props.color || defaultColor}`]: true,
@@ -7,7 +7,6 @@
       }"
       :style="{ clipPath }"
       aria-hidden="true"
-      class="overflow-hidden w-100 h-100"
     />
   </div>
 </template>
@@ -44,13 +43,23 @@
 </script>
 
 <style scoped>
+@layer base {
   .v-bg {
     filter: blur(100px);
     pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 
   .v-bg > div {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
     background: rgb(var(--v-theme-primary));
     z-index: -10;
   }
+}
 </style>
