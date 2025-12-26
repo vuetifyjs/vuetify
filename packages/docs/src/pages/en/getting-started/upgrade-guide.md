@@ -76,52 +76,6 @@ One of the components specifically impacted by those changes is VContainer. See 
 
 ## Components
 
-### VSnackbar
-
-Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
-
-```diff
-  <VSnackbar
-    v-model="visible"
--    multi-line
-+    min-height="68"
-    :text="message"
-  />
-```
-
-### VTextField
-
-Removed the **$text-field-details-padding-inline** Sass variable.
-
-```diff { resource="src/styles/settings/_variables.scss" }
-@use 'vuetify/settings' with (
--  $text-field-details-padding-inline: <value>
-+  $input-details-padding-inline: <value>
-);
-```
-
-### VRadioGroup
-
-Removed the **$radio-group-details-padding-inline** Sass variable.
-
-```diff { resource="src/styles/settings/_variables.scss" }
-@use 'vuetify/settings' with (
--  $radio-group-details-padding-inline: <value>
-+  $input-details-padding-inline: <value>
-);
-```
-
-### VFileInput
-
-Removed the **$file-input-details-padding-inline** Sass variable.
-
-```diff { resource="src/styles/settings/_variables.scss" }
-@use 'vuetify/settings' with (
--  $file-input-details-padding-inline: <value>
-+  $input-details-padding-inline: <value>
-);
-```
-
 ### VBtn display
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
@@ -182,6 +136,39 @@ const vuetify = createVuetify({
 + <v-btn>BUTTON</v-btn>
 ```
 
+### VContainer
+
+Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
+
+```diff
+<v-container
+-  class="fill-height"
++  class="fill-height d-flex align-center flex-wrap"
+/>
+```
+
+#### Max widths
+
+The calculation for `$container-max-widths` has changed to round values down to the nearest 100px for more predictable sizing. With the default breakpoints, this results in the following container widths:
+
+| Breakpoint | Change              |
+|------------|---------------------|
+| md         | ~~900px~~  » 700px  |
+| lg         | ~~1200px~~ » 1000px |
+| xl         | ~~1800px~~ » 1400px |
+| xxl        | ~~2400px~~ » 2000px |
+
+### VCounter (hint under VTextField, VTextarea and VFieldInput)
+
+The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
+
+```scss { resource="styles/styles.scss"}
+.v-counter {
+  opacity: 1;
+  color: /* your $counter-color */;
+}
+```
+
 ### VField
 
 In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
@@ -194,15 +181,26 @@ The **$field-clearable-margin** Sass variable has been removed and replaced with
 +   $field-gap: 8px,
 ```
 
-### VCounter (hint under VTextField, VTextarea and VFieldInput)
+### VFileInput
 
-The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
+Removed the **$file-input-details-padding-inline** Sass variable.
 
-```scss { resource="styles/styles.scss"}
-.v-counter {
-  opacity: 1;
-  color: /* your $counter-color */;
-}
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $file-input-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VRadioGroup
+
+Removed the **$radio-group-details-padding-inline** Sass variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $radio-group-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
 ```
 
 ### VSelect/VCombobox/VAutocomplete
@@ -245,27 +243,29 @@ Or remove `.raw`:
   </VSelect>
 ```
 
-### VContainer
+### VSnackbar
 
-Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
+Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
 
 ```diff
-<v-container
--  class="fill-height"
-+  class="fill-height d-flex align-center flex-wrap"
-/>
+  <VSnackbar
+    v-model="visible"
+-    multi-line
++    min-height="68"
+    :text="message"
+  />
 ```
 
-#### Max widths
+### VTextField
 
-The calculation for `$container-max-widths` has changed to round values down to the nearest 100px for more predictable sizing. With the default breakpoints, this results in the following container widths:
+Removed the **$text-field-details-padding-inline** Sass variable.
 
-| Breakpoint | Change              |
-|------------|---------------------|
-| md         | ~~900px~~  » 700px  |
-| lg         | ~~1200px~~ » 1000px |
-| xl         | ~~1800px~~ » 1400px |
-| xxl        | ~~2400px~~ » 2000px |
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $text-field-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
 
 ### General changes
 
