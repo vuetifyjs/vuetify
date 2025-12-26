@@ -12,7 +12,6 @@
           class="mx-auto"
           elevation="2"
           rounded="lg"
-          v-bind="hoverProps"
         >
           <v-img
             :aspect-ratio="16/7"
