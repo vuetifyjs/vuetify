@@ -6,7 +6,7 @@
 @use './variables' as *;
 
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
-  @each $sizeName, $multiplier in settings.$size-scales {
+  @each $sizeName, $multiplier in settings.$button-size-scales {
     $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
     $height: map.get($map, 'height') + (settings.$size-scale * $multiplier);
     $selector: '.v-btn--size-#{$sizeName}';
@@ -17,9 +17,42 @@
     #{$selector} {
       --v-btn-size: #{$size};
       --v-btn-height: #{$height};
-      font-size: var(--v-btn-size);
       min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
-      padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
+
+      @if ($sizeName == 'x-small') {
+        --v-btn-height: 32px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0 12px;
+      }
+
+      @if ($sizeName == 'small') {
+        --v-btn-height: 40px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0 16px;
+      }
+
+      @if ($sizeName == 'default') {
+        --v-btn-height: 56px;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0 24px;
+      }
+
+      @if ($sizeName == 'large') {
+        --v-btn-height: 96px;
+        font-size: 24px;
+        font-weight: 400;
+        padding: 0 48px;
+      }
+
+      @if ($sizeName == 'x-large') {
+        --v-btn-height: 136px;
+        font-size: 32px;
+        font-weight: 400;
+        padding: 0 64px;
+    }
     }
   }
 }
