@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-between" dense>
+    <v-row density="comfortable" justify="space-between">
       <v-col cols="12" md="5">
         <v-treeview
           v-model:activated="active"

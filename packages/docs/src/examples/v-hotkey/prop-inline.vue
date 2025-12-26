@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-0" fluid>
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card>
           <template v-slot:text>

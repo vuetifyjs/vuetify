@@ -9,7 +9,7 @@
         <v-row
           align="center"
           class="spacer"
-          no-gutters
+          density="compact"
         >
           <v-col
             cols="4"

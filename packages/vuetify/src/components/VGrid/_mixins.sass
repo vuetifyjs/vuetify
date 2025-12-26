@@ -15,38 +15,31 @@
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       max-width: $container-max-width
 
-@mixin make-row($gutter: settings.$grid-gutter)
+@mixin make-row($gap: settings.$grid-gutter)
   display: flex
   flex-wrap: wrap
   flex: 1 1 auto
-  margin: -$gutter * .5
+  gap: $gap
 
-@mixin make-col-ready($gutter: settings.$grid-gutter)
-  // Prevent columns from becoming too narrow when at smaller grid tiers by
-  // always setting `width: 100%;`. This works because we use `flex` values
-  // later on to override this initial width.
-  width: 100%
-  padding: $gutter * .5
+@function col-span-width($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
+  @return calc((#{$size} * (100% - #{$columns - 1} * #{$gap}) / #{$columns}) + #{$size - 1} * #{$gap})
 
-@mixin make-col($size, $columns: settings.$grid-columns)
-  flex: 0 0 math.percentage(math.div($size, $columns))
-  // Add a `max-width` to ensure content within each column does not blow out
-  // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-  // do not appear to require this.
-  max-width: math.percentage(math.div($size, $columns))
+@function col-span-offset($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
+  @return calc((#{$size} * (100% - #{$columns - 1} * #{$gap}) / #{$columns}) + #{$size} * #{$gap})
 
-@mixin make-col-offset($size, $columns: settings.$grid-columns)
-  $num: math.div($size, $columns)
-  @if $num == 0
-    margin-inline-start: 0
-  @else
-    margin-inline-start: math.percentage($num)
+@mixin make-col($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
+  flex: 0 0 col-span-width($size, $columns, $gap)
+  min-width: 0
 
-@mixin make-grid-columns($columns: settings.$grid-columns, $gutter: settings.$grid-gutter, $breakpoints: settings.$grid-breakpoints)
+@mixin make-col-offset($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
+  margin-inline-start: col-span-offset($size, $columns, $gap)
+
+@mixin make-grid-columns($columns: settings.$grid-columns, $breakpoints: settings.$grid-breakpoints)
   // Common properties for all breakpoints
   %grid-column
     width: 100%
-    padding: $gutter * .5
+
+  // Define column classes for each breakpoint
   @each $breakpoint in map.keys($breakpoints)
     $infix: tools.breakpoint-infix($breakpoint, $breakpoints)
     // Allow columns to stretch full width below their breakpoints
@@ -56,6 +49,7 @@
     .v-col#{$infix},
     .v-col#{$infix}-auto
       @extend %grid-column
+
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .v-col#{$infix}
@@ -66,12 +60,37 @@
         flex: 0 0 auto
         width: auto
         max-width: 100% // Reset earlier grid tiers
+
+      // Standard columns with default gap
       @for $i from 1 through $columns
-        .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns)
-      // `$columns - 1` because offsetting by the width of an entire row isn't possible
+        :where(.v-row.v-row--density-default) > .v-col#{$infix}-#{$i}
+          @include make-col($i, $columns, settings.$grid-gutter)
+
+      // Dense row columns
+      @for $i from 1 through $columns
+        .v-row--density-comfortable > .v-col#{$infix}-#{$i}
+          @include make-col($i, $columns, settings.$form-grid-gutter)
+
+      // No-gutters columns
+      @for $i from 1 through $columns
+        .v-row--density-compact > .v-col#{$infix}-#{$i}
+          @include make-col($i, $columns, 0px)
+
+      // Standard offsets with default gap
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           // Avoid emitting useless .offset-0
-          .offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns)
+          :where(.v-row.v-row--density-default) > .offset#{$infix}-#{$i}
+            @include make-col-offset($i, $columns, settings.$grid-gutter)
+
+      // Dense row offsets
+      @for $i from 0 through $columns - 1
+        @if not ($infix == "" and $i == 0)
+          .v-row--density-comfortable > .offset#{$infix}-#{$i}
+            @include make-col-offset($i, $columns, settings.$form-grid-gutter)
+
+      // No-gutters offsets
+      @for $i from 0 through $columns - 1
+        @if not ($infix == "" and $i == 0)
+          .v-row--density-compact > .offset#{$infix}-#{$i}
+            @include make-col-offset($i, $columns, 0px)
