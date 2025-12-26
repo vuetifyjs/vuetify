@@ -6,8 +6,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     id="custom-vuetify-stylesheet-id"
     type="text/css"
   >
-    @layer vuetify-utilities.theme {
-  @layer base {
+    @layer vuetify-utilities {
+  @layer theme-base {
   :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
@@ -188,7 +188,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
   }
   }
-  @layer background {
+  @layer theme-background {
     .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
       background-color: rgb(var(--v-theme-background));
@@ -255,7 +255,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
       color: rgb(var(--v-theme-on-warning));
     }
   }
-  @layer foreground {
+  @layer theme-foreground {
     .text-background {
       color: rgb(var(--v-theme-background));
     }
@@ -381,8 +381,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     id="vuetify-theme-stylesheet"
     type="text/css"
   >
-    @layer vuetify-utilities.theme {
-  @layer base {
+    @layer vuetify-utilities {
+  @layer theme-base {
   :where(#my-app) {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
@@ -563,7 +563,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
   }
   }
-  @layer background {
+  @layer theme-background {
     :where(#my-app) .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
       background-color: rgb(var(--v-theme-background));
@@ -630,7 +630,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
       color: rgb(var(--v-theme-on-warning));
     }
   }
-  @layer foreground {
+  @layer theme-foreground {
     :where(#my-app) .text-background {
       color: rgb(var(--v-theme-background));
     }
@@ -761,8 +761,8 @@ exports[`createTheme > should create style element 1`] = `
     id="vuetify-theme-stylesheet"
     type="text/css"
   >
-    @layer vuetify-utilities.theme {
-  @layer base {
+    @layer vuetify-utilities {
+  @layer theme-base {
   :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
@@ -943,7 +943,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-light: 0, 0, 0;
   }
   }
-  @layer background {
+  @layer theme-background {
     .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
       background-color: rgb(var(--v-theme-background));
@@ -1010,7 +1010,7 @@ exports[`createTheme > should create style element 1`] = `
       color: rgb(var(--v-theme-on-warning));
     }
   }
-  @layer foreground {
+  @layer theme-foreground {
     .text-background {
       color: rgb(var(--v-theme-background));
     }

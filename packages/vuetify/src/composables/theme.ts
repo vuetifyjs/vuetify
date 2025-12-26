@@ -390,7 +390,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const lines: string[] = []
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
 
-    lines.push('@layer base {\n')
+    lines.push('@layer theme-base {\n')
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
@@ -427,16 +427,16 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       }
 
       lines.push(
-        '@layer background {\n',
+        '@layer theme-background {\n',
         ...bgLines.map(v => `  ${v}`),
         '}\n',
-        '@layer foreground {\n',
+        '@layer theme-foreground {\n',
         ...fgLines.map(v => `  ${v}`),
         '}\n',
       )
     }
 
-    return '@layer vuetify-utilities.theme {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
+    return '@layer vuetify-utilities {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)

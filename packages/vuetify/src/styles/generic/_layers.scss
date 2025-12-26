@@ -11,10 +11,10 @@
 @layer vuetify-overrides;
 
 @layer vuetify-utilities {
+  @layer theme-base;
   @layer helpers;
-  @layer theme {
-    @layer base, background, foreground;
-  }
+  @layer theme-background;
+  @layer theme-foreground;
 }
 
 // Rules that need to override theme or utils
