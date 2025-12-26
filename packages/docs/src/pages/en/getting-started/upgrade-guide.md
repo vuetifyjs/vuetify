@@ -192,6 +192,28 @@ Removed the **$file-input-details-padding-inline** Sass variable.
 );
 ```
 
+### VForm
+
+Slot variables are no longer refs, read-only values passed to slots are now unwrapped:
+
+```diff
+  <VForm>
+    <template #default="{ isValid, validate }">
+      <VBtn @click="validate" text="validate" />
+-     Form is {{ isValid.value ? 'valid' : 'invalid' }}
++     Form is {{ isValid ? 'valid' : 'invalid' }}
+    </template>
+  </VForm>
+```
+
+The following properties are affected:
+  - errors
+  - isDisabled
+  - isReadonly
+  - isValidating
+  - isValid
+  - items
+
 ### VRadioGroup
 
 Removed the **$radio-group-details-padding-inline** Sass variable.
@@ -266,39 +288,3 @@ Removed the **$text-field-details-padding-inline** Sass variable.
 +  $input-details-padding-inline: <value>
 );
 ```
-
-### General changes
-
-#### Slot variables are (mostly) no longer refs
-
-Read-only values passed to slots are now unwrapped:
-
-```diff
-  <VForm>
-    <template #default="{ isValid, validate }">
-      <VBtn @click="validate" text="validate" />
--     Form is {{ isValid.value ? 'valid' : 'invalid' }}
-+     Form is {{ isValid ? 'valid' : 'invalid' }}
-    </template>
-  </VForm>
-```
-
-There are still some writable refs though, for example in VDialog:
-
-```html
-<VDialog>
-  <template #default="{ isActive }">
-    <VBtn @click="isActive.value = false">Close</VBtn>
-  </template>
-</VDialog>
-```
-
-Affected components:
-
-- VForm
-  - errors
-  - isDisabled
-  - isReadonly
-  - isValidating
-  - isValid
-  - items
