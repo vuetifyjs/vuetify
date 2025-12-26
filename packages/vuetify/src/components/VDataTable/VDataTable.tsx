@@ -194,7 +194,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
         loading: toRef(() => props.loading),
         loadingText: toRef(() => props.loadingText),
       },
-    })
+    }, { root: true })
 
     const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
