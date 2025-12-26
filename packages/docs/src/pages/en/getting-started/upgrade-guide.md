@@ -207,12 +207,13 @@ Slot variables are no longer refs, read-only values passed to slots are now unwr
 ```
 
 The following properties are affected:
-  - errors
-  - isDisabled
-  - isReadonly
-  - isValidating
-  - isValid
-  - items
+
+- errors
+- isDisabled
+- isReadonly
+- isValidating
+- isValid
+- items
 
 ### VRadioGroup
 
