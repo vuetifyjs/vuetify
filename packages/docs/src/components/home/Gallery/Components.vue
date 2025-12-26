@@ -49,7 +49,7 @@
             </v-card>
 
             <v-card class="text-left" elevation="5" rounded="lg">
-              <v-layout>
+              <v-layout height="700">
                 <v-system-bar class="justify-center" theme="dark" window>
                   <div class="position-absolute left-0 ml-3">
                     <v-avatar class="mx-1" color="error" size="12" />
@@ -144,20 +144,13 @@
                   </template>
                 </v-navigation-drawer>
 
-                <v-main>
-                  <v-sheet
-                    border="sm"
-                    class="overflow-y-auto"
-                    height="600"
-                    max-width="100%"
-                  >
-                    <v-slide-x-transition mode="out-in">
-                      <component
-                        :is="selectedComponent.component"
-                        @login="selectedComponent = components[0]"
-                      />
-                    </v-slide-x-transition>
-                  </v-sheet>
+                <v-main scrollable>
+                  <v-slide-x-transition mode="out-in">
+                    <component
+                      :is="selectedComponent.component"
+                      @login="selectedComponent = components[0]"
+                    />
+                  </v-slide-x-transition>
                 </v-main>
               </v-layout>
             </v-card>
