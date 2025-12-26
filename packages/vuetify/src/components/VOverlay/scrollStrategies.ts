@@ -80,7 +80,6 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
     ...getScrollParents(target, props.contained ? offsetParent : undefined),
     ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),
   ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
-  const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
 
   const scrollableParent = (el => hasScrollbar(el) && el)(offsetParent || document.documentElement)
   if (scrollableParent) {
@@ -90,11 +89,6 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   scrollElements.forEach((el, i) => {
     el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
     el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
-
-    if (el !== document.documentElement || getComputedStyle(el).overflowY !== 'scroll') {
-      el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-    }
-
     el.classList.add('v-overlay-scroll-blocked')
   })
 
@@ -108,7 +102,6 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
       el.style.scrollBehavior = 'auto'
       el.style.removeProperty('--v-body-scroll-x')
       el.style.removeProperty('--v-body-scroll-y')
-      el.style.removeProperty('--v-scrollbar-offset')
       el.classList.remove('v-overlay-scroll-blocked')
 
       el.scrollLeft = -x
