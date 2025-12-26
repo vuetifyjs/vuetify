@@ -91,7 +91,7 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
     el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
     el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
 
-    if (el !== document.documentElement) {
+    if (el !== document.documentElement || getComputedStyle(el).overflowY !== 'scroll') {
       el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     }
 

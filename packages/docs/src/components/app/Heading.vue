@@ -35,7 +35,7 @@
   })
 
   const component = computed(() => `h${props.level}`)
-  const classes = computed(() => ['v-heading', 'mb-2', HEADING_CLASSES[props.level]])
+  const classes = computed(() => ['v-heading', 'mt-0', 'mb-2', HEADING_CLASSES[props.level]])
 </script>
 
 <style lang="sass">
@@ -54,4 +54,7 @@
 
       &:not(:hover):not(:focus)
         opacity: 0
+
+    + p
+      margin-block-start: 0
 </style>

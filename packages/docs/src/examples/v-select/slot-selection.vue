@@ -6,7 +6,7 @@
     multiple
   >
     <template v-slot:selection="{ item, index }">
-      <v-chip v-if="index < 2" :text="item.title"></v-chip>
+      <v-chip v-if="index < 2" :text="item"></v-chip>
 
       <span
         v-if="index === 2"
@@ -33,3 +33,8 @@
     }),
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2074-33165&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

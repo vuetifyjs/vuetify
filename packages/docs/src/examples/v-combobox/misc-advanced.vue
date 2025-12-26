@@ -13,7 +13,7 @@
       <template v-slot:selection="{ item, index }">
         <v-chip
           v-if="item === Object(item)"
-          :color="`${item.raw.color}-lighten-3`"
+          :color="`${item.color}-lighten-3`"
           :text="item.title"
           size="small"
           variant="flat"
@@ -23,7 +23,7 @@
         ></v-chip>
       </template>
       <template v-slot:item="{ props, item }">
-        <template v-if="item.raw.header">
+        <template v-if="item.header">
           <v-list-item
             v-if="alreadySelected"
             title="Item is already selected"
@@ -31,7 +31,7 @@
           <v-list-item v-else-if="search">
             <span class="mr-3">Create</span>
             <v-chip
-              :color="`${colors[nonce]}-lighten-3`"
+              :color="`${colors[nonce - 1]}-lighten-3`"
               size="small"
               variant="flat"
               label
@@ -43,7 +43,7 @@
         </template>
         <v-list-item v-else @click="props.onClick">
           <v-text-field
-            v-if="editingItem === item.raw"
+            v-if="editingItem === item"
             v-model="editingItem.title"
             bg-color="transparent"
             class="mr-3"
@@ -53,23 +53,23 @@
             hide-details
             @click.stop
             @keydown.stop
-            @keyup.enter="edit(item.raw)"
+            @keyup.enter="edit(item)"
             @mousedown.stop
           ></v-text-field>
           <v-chip
             v-else
-            :color="`${item.raw.color}-lighten-3`"
-            :text="item.raw.title"
+            :color="`${item.color}-lighten-3`"
+            :text="item.title"
             variant="flat"
             label
           ></v-chip>
           <template v-slot:append>
             <v-btn
-              :color="editingItem !== item.raw ? 'primary' : 'success'"
-              :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
+              :color="editingItem !== item ? 'primary' : 'success'"
+              :icon="editingItem !== item ? 'mdi-pencil' : 'mdi-check'"
               size="small"
               variant="text"
-              @click.stop.prevent="edit(item.raw)"
+              @click.stop.prevent="edit(item)"
             ></v-btn>
             <v-btn
               v-if="editingItem !== item.raw"
@@ -260,3 +260,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2047-82949&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

@@ -2,7 +2,6 @@
   <VoAppBar
     id="app-bar"
     border="b"
-    class="px-md-3"
     logo="vuetify"
     flat
   >

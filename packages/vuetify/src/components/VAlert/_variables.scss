@@ -9,7 +9,7 @@ $alert-border-radius: settings.$border-radius-root !default;
 $alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
-$alert-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
+$alert-color: tools.theme-color('on-surface-light', var(--v-high-emphasis-opacity)) !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $alert-elevation: 1 !default;
 $alert-padding: 16px !default;

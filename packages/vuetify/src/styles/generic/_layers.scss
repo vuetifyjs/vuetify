@@ -1,7 +1,23 @@
 @use '../settings';
 
-@if (settings.$layers) {
-  @layer vuetify {
-    @layer reset, transitions, base, components, overrides, theme.background, theme.foreground, utilities;
-  }
+@layer vuetify-core {
+  @layer reset, base;
 }
+
+@layer vuetify-components;
+
+// Contextual styles for nested components
+// This replaces hacks like .v-btn.v-btn and most of !important
+@layer vuetify-overrides;
+
+@layer vuetify-utilities {
+  @layer theme-base;
+  @layer helpers;
+  @layer theme-background;
+  @layer theme-foreground;
+}
+
+// Rules that need to override theme or utils
+@layer vuetify-final {
+  @layer transitions, trumps;
+};

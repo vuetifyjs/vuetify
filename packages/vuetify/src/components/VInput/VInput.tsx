@@ -53,6 +53,10 @@ export const makeVInputProps = propsFactory({
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
   hint: String,
+  indentDetails: {
+    type: Boolean,
+    default: null,
+  },
   persistentHint: Boolean,
   messages: {
     type: [Array, String] as PropType<string | readonly string[]>,
@@ -187,6 +191,7 @@ export const VInput = genericComponent<new <T>(
               'v-input--focused': props.focused,
               'v-input--glow': props.glow,
               'v-input--hide-spin-buttons': props.hideSpinButtons,
+              'v-input--indent-details': props.indentDetails,
             },
             densityClasses.value,
             themeClasses.value,
@@ -201,15 +206,16 @@ export const VInput = genericComponent<new <T>(
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
-              { slots.prepend?.(slotProps.value) }
-
-              { props.prependIcon && (
-                <InputIcon
-                  key="prepend-icon"
-                  name="prepend"
-                  color={ iconColor.value }
-                />
-              )}
+              { slots.prepend
+                ? slots.prepend(slotProps.value)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -221,15 +227,16 @@ export const VInput = genericComponent<new <T>(
 
           { hasAppend && (
             <div key="append" class="v-input__append">
-              { props.appendIcon && (
-                <InputIcon
-                  key="append-icon"
-                  name="append"
-                  color={ iconColor.value }
-                />
-              )}
-
-              { slots.append?.(slotProps.value) }
+              { slots.append
+                ? slots.append(slotProps.value)
+                : (props.appendIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="append"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 

@@ -23,6 +23,10 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--focus-visible
+      .v-list-item__overlay
+        opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+
     @supports selector(:focus-visible)
       &::after
         pointer-events: none
@@ -32,7 +36,8 @@
         transition: opacity .2s ease-in-out
         @include tools.absolute(true)
 
-      &:focus-visible::after
+      &:focus-visible::after,
+      &--focus-visible::after
         opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
     &__prepend,
@@ -324,7 +329,8 @@
       min-width: 0
 
   .v-list-group__items .v-list-item
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+    @include tools.layer('overrides')
+      padding-inline-start: calc(#{$base-padding} + var(--indent-padding))
 
   .v-list-group__header:not(.v-treeview-item--activatable-group-activator).v-list-item--active
     &:not(:focus-visible)
@@ -335,6 +341,7 @@
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
+@include tools.layer('trumps')
   @media (forced-colors: active)
     .v-list-item
       &--link:not(&--active)
@@ -347,17 +354,20 @@
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
-          color: highlight !important
+          color: highlight
 
       &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
-        background: highlight !important
+        background: highlight
 
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
           opacity: 1
-          color: highlighttext !important
+          color: highlighttext
           forced-color-adjust: preserve-parent-color
+
+      &--focus-visible::after
+        opacity: 1
 
       @supports selector(:focus-visible)
         &::after

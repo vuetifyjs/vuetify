@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Videos
   title: Video component

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <div>
     <page-feature-chip
       v-if="!isGeneratedPage"
       :href="contribute"
@@ -40,7 +40,7 @@
     <page-feature-chip
       v-if="frontmatter?.features?.report"
       :text="t('report-a-bug')"
-      href="https://issues.vuetifyjs.com/"
+      href="https://issues.vuetifyjs.com/?repo=vuetify&type=bug"
       prepend-icon="mdi-bug-outline"
       rel="noopener noreferrer"
       target="_blank"

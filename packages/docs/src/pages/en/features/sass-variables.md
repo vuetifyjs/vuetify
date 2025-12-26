@@ -127,7 +127,21 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 ## Disabling utility classes
 
-Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selecively keeping only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
+
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
+  $utilities: false,
+);
+```
+
+Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`.
+
+::: info
+
+Vuetify includes several utility classes that are not covered by the `$utilities` map: `elevation`, `hidden`, `sr-only`, and `pointer-events`. If you want to disable these styles while keeping some utilities enabled, you can use the `$misc` variable. See the example at the end of the snippet below.
+
+:::
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
@@ -220,16 +234,16 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "white-space": false,
     "width": false,
   ),
+  $misc: (
+    'pointer-events': false,
+    'sr-only': false,
+    "elevation": false,
+    "hidden": false,
+  ),
 );
 ```
 
-To disable all utility classes, set the entire `$utilities` variable to `false`:
-
-```scss { resource="src/styles/main.scss" }
-@use 'vuetify' with (
-  $utilities: false,
-);
-```
+This is useful when you want to use your own implementation of these styles. For example, if your design system uses standardized shadow levels instead of Vuetify's elevation classes, you can disable the built-in elevation styles and define your own.
 
 ## Disabling color packs
 

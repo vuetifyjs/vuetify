@@ -9,7 +9,7 @@ $list-border-radius: 0 !default;
 $list-border-style: settings.$border-style-root !default;
 $list-border-thin-width: thin !default;
 $list-border-width: 0 !default;
-$list-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$list-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $list-disabled-opacity: 0.6 !default;
 $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
@@ -20,7 +20,7 @@ $list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
 
 // VListSubheader
-$list-subheader-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$list-subheader-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $list-subheader-font-size: .875rem !default;
 $list-subheader-font-weight: 400 !default;
 $list-subheader-inset-padding-start: 56px !default;

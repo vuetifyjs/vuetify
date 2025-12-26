@@ -17,8 +17,8 @@ import {
   darken,
   deprecate,
   getCurrentInstance,
-  getForeground,
   getLuma,
+  hasLightForeground,
   IN_BROWSER,
   lighten,
   mergeDeep,
@@ -32,6 +32,7 @@ import {
 import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { Color } from '@/util'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -42,8 +43,6 @@ export type ThemeOptions = false | {
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
-  unimportant?: boolean
-  layers?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -57,9 +56,7 @@ interface InternalThemeOptions {
   stylesheetId: string
   scope?: string
   scoped: boolean
-  unimportant: boolean
   utilities: boolean
-  layers?: boolean
 }
 
 interface VariationsOptions {
@@ -75,29 +72,29 @@ interface InternalThemeDefinition {
 }
 
 export interface Colors extends BaseColors, OnColors {
-  [key: string]: string
+  [key: string]: Color
 }
 
 interface BaseColors {
-  background: string
-  surface: string
-  primary: string
-  secondary: string
-  success: string
-  warning: string
-  error: string
-  info: string
+  background: Color
+  surface: Color
+  primary: Color
+  secondary: Color
+  success: Color
+  warning: Color
+  error: Color
+  info: Color
 }
 
 interface OnColors {
-  'on-background': string
-  'on-surface': string
-  'on-primary': string
-  'on-secondary': string
-  'on-success': string
-  'on-warning': string
-  'on-error': string
-  'on-info': string
+  'on-background': Color
+  'on-surface': Color
+  'on-primary': Color
+  'on-secondary': Color
+  'on-success': Color
+  'on-warning': Color
+  'on-error': Color
+  'on-info': Color
 }
 
 export interface ThemeInstance {
@@ -131,7 +128,7 @@ export const makeThemeProps = propsFactory({
 
 function genDefaults () {
   return {
-    defaultTheme: 'light',
+    defaultTheme: 'system',
     prefix: 'v-',
     variations: { colors: [], lighten: 0, darken: 0 },
     themes: {
@@ -170,6 +167,8 @@ function genDefaults () {
           'theme-on-kbd': '#000000',
           'theme-code': '#F5F5F5',
           'theme-on-code': '#000000',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
         },
       },
       dark: {
@@ -207,12 +206,13 @@ function genDefaults () {
           'theme-on-kbd': '#FFFFFF',
           'theme-code': '#343434',
           'theme-on-code': '#CCCCCC',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
         },
       },
     },
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
-    unimportant: false,
     utilities: true,
   }
 }
@@ -251,7 +251,7 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
     const rgb = parseColor(value)
-    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (rgb.a == null ? '' : `,${rgb.a}`))
     if (!key.startsWith('on-')) {
       variables.push(`--${prefix}theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
@@ -266,7 +266,7 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   return variables
 }
 
-function genVariation (name: string, color: string, variations: VariationsOptions | false) {
+function genVariation (name: string, color: Color, variations: VariationsOptions | false) {
   const object: Record<string, string> = {}
   if (variations) {
     for (const variation of (['lighten', 'darken'] as const)) {
@@ -296,7 +296,7 @@ function genVariations (colors: InternalThemeDefinition['colors'], variations: V
   return variationColors
 }
 
-function genOnColors (colors: InternalThemeDefinition['colors']) {
+function genOnColors (colors: InternalThemeDefinition['colors'], variables: InternalThemeDefinition['variables']) {
   const onColors = {} as InternalThemeDefinition['colors']
 
   for (const color of Object.keys(colors)) {
@@ -305,7 +305,9 @@ function genOnColors (colors: InternalThemeDefinition['colors']) {
     const onColor = `on-${color}` as keyof OnColors
     const colorVal = parseColor(colors[color])
 
-    onColors[onColor] = getForeground(colorVal)
+    onColors[onColor] = hasLightForeground(colorVal)
+      ? variables['theme-on-dark']
+      : variables['theme-on-light']
   }
 
   return onColors
@@ -373,7 +375,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ...original,
         colors: {
           ...colors,
-          ...genOnColors(colors),
+          ...genOnColors(colors, original.variables),
         },
       }
     }
@@ -386,8 +388,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const styles = computed(() => {
     const lines: string[] = []
-    const important = parsedOptions.unimportant ? '' : ' !important'
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
+
+    lines.push('@layer theme-base {\n')
 
     if (current.value?.dark) {
       createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
@@ -402,6 +405,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       ], parsedOptions.scope)
     }
 
+    lines.push('}\n')
+
     if (parsedOptions.utilities) {
       const bgLines: string[] = []
       const fgLines: string[] = []
@@ -409,41 +414,29 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
       for (const key of colors) {
         if (key.startsWith('on-')) {
-          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
         } else {
           createCssClass(bgLines, `.${scoped}bg-${key}`, [
             `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
-            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`,
-            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))${important}`,
+            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))`,
+            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))`,
           ], parsedOptions.scope)
-          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
           createCssClass(fgLines, `.${scoped}border-${key}`, [`--${parsedOptions.prefix}border-color: var(--${parsedOptions.prefix}theme-${key})`], parsedOptions.scope)
         }
       }
 
-      if (parsedOptions.layers) {
-        lines.push(
-          '@layer background {\n',
-          ...bgLines.map(v => `  ${v}`),
-          '}\n',
-          '@layer foreground {\n',
-          ...fgLines.map(v => `  ${v}`),
-          '}\n',
-        )
-      } else {
-        lines.push(...bgLines, ...fgLines)
-      }
+      lines.push(
+        '@layer theme-background {\n',
+        ...bgLines.map(v => `  ${v}`),
+        '}\n',
+        '@layer theme-foreground {\n',
+        ...fgLines.map(v => `  ${v}`),
+        '}\n',
+      )
     }
 
-    let final = lines.map((str, i) => (i === 0 ? str : `    ${str}`)).join('')
-    if (parsedOptions.layers) {
-      final =
-        '@layer vuetify.theme {\n' +
-          lines.map(v => `  ${v}`).join('') +
-        '\n}'
-    }
-
-    return final
+    return '@layer vuetify-utilities {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)

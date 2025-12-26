@@ -29,10 +29,11 @@
     transition-property: width, left, right
     transition: inherit
 
-  @media (forced-colors: active)
-    .v-progress-linear__buffer
-      background-color: highlight !important
-      opacity: .5 !important
+  @include tools.layer('trumps')
+    @media (forced-colors: active)
+      .v-progress-linear__buffer
+        background-color: highlight
+        opacity: .5
 
   .v-progress-linear__content
     align-items: center
@@ -52,8 +53,9 @@
   .v-progress-linear__indeterminate
     background: $progress-linear-background
 
-    @media (forced-colors: active)
-      background-color: highlight !important
+    @include tools.layer('trumps')
+      @media (forced-colors: active)
+        background-color: highlight
 
   .v-progress-linear__determinate
     height: inherit

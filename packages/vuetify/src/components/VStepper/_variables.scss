@@ -1,4 +1,5 @@
 @use '../../styles/settings';
+@use '../../styles/tools';
 
 $stepper-actions-padding: 1rem !default;
 $stepper-actions-stepper-padding: 0 1.5rem 1rem !default;
@@ -15,7 +16,7 @@ $stepper-item-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !default;
 $stepper-header-divider-margin: 0 -16px !default;
 $stepper-header-elevation: 2 !default;
 $stepper-window-margin: 1.5rem !default;
-$stepper-item-avatar-background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity)) !default;
+$stepper-item-avatar-background: tools.theme-color('surface-variant', var(--v-medium-emphasis-opacity)) !default;
 $stepper-item-avatar-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $stepper-item-avatar-font-size: .75rem !default;
 $stepper-item-avatar-margin-inline-end: 8px !default;

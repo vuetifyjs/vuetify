@@ -5,7 +5,17 @@
 
 $color-pack: true !default;
 $reset: true !default;
-$layers: false !default;
+
+$misc: () !default;
+$misc: map-deep-merge(
+  (
+    elevation: true,
+    hidden: true,
+    'sr-only': true,
+    'pointer-events': true,
+  ),
+  $misc
+);
 
 $body-font-family: 'Roboto', sans-serif !default;
 $font-size-root: 1rem !default;
@@ -125,10 +135,10 @@ $grid-breakpoints: map-deep-merge(
   (
     'xs': 0,
     'sm': 600px,
-    'md': 960px,
-    'lg': 1280px,
-    'xl': 1920px,
-    'xxl': 2560px,
+    'md': 840px,
+    'lg': 1145px,
+    'xl': 1545px,
+    'xxl': 2138px,
   ),
   $grid-breakpoints
 );
@@ -155,10 +165,10 @@ $container-max-widths: map-deep-merge(
   (
     'xs': null,
     'sm': null,
-    'md': map.get($grid-breakpoints, 'md') * 0.9375,
-    'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
-    'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
-    'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
+    'md': 100 * math.floor(map.get($grid-breakpoints, 'md') * 0.009375),
+    'lg': 100 * math.floor(map.get($grid-breakpoints, 'lg') * 0.009375),
+    'xl': 100 * math.floor(map.get($grid-breakpoints, 'xl') * 0.009375),
+    'xxl': 100 * math.floor(map.get($grid-breakpoints, 'xxl') * 0.009375),
   ),
   $container-max-widths
 );
@@ -292,7 +302,7 @@ $typography: map-deep-merge(
       'line-height': 2.6,
       'letter-spacing': .0892857143em,
       'font-family': $body-font-family,
-      'text-transform': uppercase
+      'text-transform': none
     ),
     'caption': (
       'size': .75rem,
@@ -342,7 +352,6 @@ $decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1) !default; // Entering
 $accelerated-easing: cubic-bezier(0.4, 0, 1, 1) !default; // Leaving
 
 // Elements
-$bootable-transition: 0.2s $decelerated-easing !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;
 

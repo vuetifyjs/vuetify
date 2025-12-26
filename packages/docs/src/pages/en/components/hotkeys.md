@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Hotkeys
   title: Hotkey component

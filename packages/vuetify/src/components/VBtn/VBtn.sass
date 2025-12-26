@@ -10,9 +10,8 @@
   .v-btn
     align-items: center
     border-radius: $button-border-radius
-    display: inline-grid
-    grid-template-areas: "prepend content append"
-    grid-template-columns: max-content auto max-content
+    display: inline-flex
+    flex-direction: row
     font-weight: $button-font-weight
     justify-content: center
     letter-spacing: $button-text-letter-spacing
@@ -85,8 +84,8 @@
       min-width: 100%
 
     &--spaced
-      display: grid
-      grid-template-columns: max-content 1fr max-content
+      .v-btn__content
+        flex-grow: 1
 
       &.v-btn--spaced-start > .v-btn__content
         justify-content: end
@@ -103,9 +102,8 @@
           opacity: $button-disabled-opacity
       @else
         opacity: 1
-        &.v-btn
-          // specificity has to be higher to override theme !important
-          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity) !important
+        @include tools.layer('trumps')
+          color: tools.theme-color('on-surface', $button-disabled-opacity)
 
       &.v-btn--variant-elevated,
       &.v-btn--variant-flat
@@ -113,10 +111,11 @@
 
         @if ($button-colored-disabled)
           opacity: 1
-          color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+          color: tools.theme-color('on-surface', $button-disabled-opacity)
           background: rgb(var(--v-theme-surface))
         @else
-          background: rgb(var(--v-theme-surface)) !important
+          @include tools.layer('trumps')
+            background: rgb(var(--v-theme-surface))
 
         .v-btn__overlay
           // __overlay uses currentColor, so we need to divide
@@ -132,11 +131,10 @@
         opacity: 0
 
     &--stacked
-      grid-template-areas: "prepend" "content" "append"
-      grid-template-columns: auto
-      grid-template-rows: max-content max-content max-content
-      justify-items: center
-      align-content: center
+      align-items: center
+      flex-direction: column
+      justify-content: center
+      gap: $button-stacked-gap
 
       .v-btn__content
         flex-direction: column
@@ -147,14 +145,6 @@
       .v-btn__content > .v-icon--start,
       .v-btn__content > .v-icon--end
         margin-inline: 0
-
-      .v-btn__prepend,
-      .v-btn__content > .v-icon--start
-        margin-bottom: $button-stacked-icon-margin
-
-      .v-btn__append,
-      .v-btn__content > .v-icon--end
-        margin-top: $button-stacked-icon-margin
 
       @at-root
         @include button-sizes($button-stacked-sizes, true)
@@ -208,21 +198,18 @@
     transition: $button-content-transition
 
   .v-btn__prepend
-    grid-area: prepend
     margin-inline: $button-margin-start $button-margin-end
 
     .v-btn--slim &
       margin-inline-start: 0
 
   .v-btn__append
-    grid-area: append
     margin-inline: $button-margin-end $button-margin-start
 
     .v-btn--slim &
       margin-inline-end: 0
 
   .v-btn__content
-    grid-area: content
     justify-content: center
     white-space: $button-white-space
 
@@ -269,11 +256,11 @@
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity
 
-@media (forced-colors: active)
-  .v-btn
-    &:not(&--variant-text, &--variant-plain)
-      border: thin solid
+  @media (forced-colors: active)
+    .v-btn
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid
 
-    &:focus-visible
-      outline: 2px solid
-      outline-offset: 2px
+      &:focus-visible
+        outline: 2px solid
+        outline-offset: 2px

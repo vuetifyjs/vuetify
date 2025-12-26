@@ -1,9 +1,10 @@
 ---
+emphasized: true
 meta:
   nav: Upgrade guide
   title: Upgrade guide
-  description: Detailed instruction on how to upgrade Vuetify to 3.0
-  keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
+  description: Detailed instruction on how to upgrade Vuetify to 4.0
+  keywords: migration, upgrade, releases, upgrading vuetify, alpha, v4
 related:
   - /introduction/roadmap/
   - /introduction/long-term-support/
@@ -12,297 +13,278 @@ related:
 
 # Upgrade Guide
 
-This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
+This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 4
 
 <PageFeatures />
 
-::: error
-  <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
-:::
+## Styles
 
-::: info
+There are now pre-compiled entry points for the most common style changes. If you have a Sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
-Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
 
-:::
+- `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
+- `<ul>`, `<ol>` and headings have padding and margins.
 
-::: warning
-  Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
+### Layers
 
-- [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
-:::
+Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
 
-## Setup
+If you were already using `$layers: true` in Vuetify 3, there are now five top-level layers instead of one.
 
-- **Vuetify** class removed, use **createVuetify** function
+```diff
+- @layer base, vuetify, overrides;
++ @layer base, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final, overrides;
+```
 
-```js { resource="2.x" }
-Vue.use(Vuetify)
+This can be used to easily interleave your own layers with ours:
 
-const vuetify = new Vuetify({ ... })
+```css
+@layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
+```
 
-const app = new Vue({
-  vuetify,
-  ...
+If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
+
+## Themes
+
+The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+
+```diff { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
++ theme: {
++   defaultTheme: 'light',
++ },
 })
 ```
 
-```js { resource="3.0" }
-const app = createApp()
+Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
 
-const vuetify = createVuetify({ ... })
+## Breakpoints
 
-app.use(vuetify)
-```
+The default breakpoints have been reduced to better match modern device sizes:
 
-- `import ... from 'vuetify'` is now a-la-carte, import `'vuetify/dist/vuetify.js'` instead to get the complete bundle (not recommended).
-- `'vuetify/lib'` should no longer be used, change to `'vuetify'` / `'vuetify/components'` / `'vuetify/directives'` as appropriate.
-- Only component styles are included, global styles must be imported separately from `'vuetify/styles'`.
-- [vuetify-loader](https://npmjs.com/package/vuetify-loader) has been renamed to [webpack-plugin-vuetify](https://npmjs.com/package/webpack-plugin-vuetify), and we also have a new plugin for vite [vite-plugin-vuetify](https://npmjs.com/package/vite-plugin-vuetify).
+| Breakpoint | Change              |
+|------------|---------------------|
+| xs         | 0 (unchanged)       |
+| sm         | 600px (unchanged)   |
+| md         | ~~960px~~  » 840px  |
+| lg         | ~~1280px~~ » 1145px |
+| xl         | ~~1920px~~ » 1545px |
+| xxl        | ~~2560px~~ » 2138px |
 
-## Features
-
-### Layout
-
-- Global styles previously included as `.v-application p` or `.v-application ul` are no longer included. If you need margin for `p`, or padding-left for `ul` and `ol`, set it manually in your root component's `<style>` tag
-- `stateless`, `clipped`, `clipped-right` and `app` props have been removed from v-navigation-drawer, v-app-bar and v-system-bar. The position in the markup determines the appearance. Use the `order="number"` prop to influence it manually.
-- `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
-  - `*Only` properties have been removed, use `xs` instead of `xsOnly` etc.
-
-### Theme
-
-- Multiple themes are now supported, so `light` / `dark` props have been removed from components. Use `v-theme-provider` to set the theme for a specific component tree.
-  - Components that previously had a `dark` prop, such as v-app-bar, now accept `theme="dark"` prop
-- Theme colors set their foreground text color automatically, if you were using `light` / `dark` to get a different text color you probably don't need it anymore.
-- The variant naming scheme has changed slightly, it is now a single word instead of two. For example, `primary darken-1` is now `primary-darken-1`.
-  - To use variant namings as value for `color` props, the variant you intend to use needs to be enabled in the theme under `theme.variations.colors`. e.g: `colors: ['primary']`
-- Color classes have been renamed:
-  - Backgrounds have a `bg-` prefix, for example `.primary` is now `.bg-primary`.
-  - Text colors have a `text-` prefix, for example `.primary--text` is now `.text-primary`.
-  - Variants are no longer a separate class, for example `.primary--text.text--darken-1` is now `.text-primary-darken-1`.
-- The theme system now uses CSS variables internally, so `customProperties` is no longer required.
-  - If you were using `customProperties` in v2, the naming scheme has changed from `--v-primary-base` to `--v-theme-primary`.
-  - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
-- Theme colors in the theme config are now nested inside a `colors` property, e.g. `const myTheme = { theme: { themes: { light: { colors: { primary: '#ccc' } } } } }`
-
-### SASS variables
-
-- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map.get($typography, 'subtitle-2', 'size')`
-- If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
-- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too.
-- `$display-breakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map.get(v.$display-breakpoints, 'xs')}` instead.
-- The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
-- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look.
-- Too many component variables to list have been renamed or removed. There is no automated way to update these as the element structure has changed significantly, you will need to manually update these along with any custom styles.
-
-### Styles and utility classes
-
-- `.hidden-{breakpoint}-only` has been renamed to `.hidden-{breakpoint}`
-- `.text-xs-{alignment}` has been renamed to `.text-{alignment}` to reflect the fact that it applies to all breakpoints.
-- Typography classes have been renamed for consistency and are all prefixed with `text-`, for example `.display-4` is now `.text-h1`
-- Transition easing classes have been removed.
-
-:::info
-  An complete list of class changes will not be provided, please use [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/) to automatically fix them.
-:::
+One of the components specifically impacted by those changes is VContainer. See the detailed information about those changes [below](#vcontainer).
 
 ## Components
 
-### General changes
+### VBtn display
 
-- `value` prop has been replaced by `model-value` on components that support `v-model` usage. (Vue 3 requires this change)
-  - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
-- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage. (Vue 3 requires this change)
-- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.rounded-r` is now `.rounded-e`.
-- Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
-- `absolute` and `fixed` props have been combined into a single `position` prop.
-- `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
-- `background-color` prop has been renamed to `bg-color`.
-- `dense` prop on components such as v-select, v-btn-toggle, v-alert, v-text-field, v-list and v-list-item has been changed to `density` prop with the variants `default`, `comfortable`, `compact`
-- Activator slots work slightly different. Replace `#activator={ attrs, on }` with `#activator={ props }`, then remove `v-on="on"` and replace `v-bind="attrs"` with `v-bind="props"`
-- Some components have structural changes in their markup. Which means you may have to change how you query and assert them in tests. `v-switch` for example now uses an `<input type="checkbox" />` under the hood, which is why the `aria-checked` and `aria-role="switch"` attributes were removed.
+In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
-### Input components
+The **$button-stacked-icon-margin** Sass variable has been removed and replaced with **$button-stacked-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
 
-- Affix slots are consistent now:
-  - `prepend` and `prepend-inner` are the same.
-  - `append` has been renamed to `append-inner`.
-  - `append-outer` has been renamed to `append`.
-- Variant props `filled`/`outlined`/`solo` have been combined into a single `variant` prop.
-  - Allowed values are `'underlined'`, `'outlined'`, `'filled'`, `'solo'`, or `'plain'`.
-- `success` and `success-messages` props have been removed.
-- `validate-on-blur` prop has been renamed to `validate-on="blur"`.
-
-### v-alert
-
-- `border` prop values `left` and `right` have been renamed to `start` and `end`.
-- `colored-border` prop has been renamed to `border-color`.
-- `dismissable` prop has been renamed to `closable`.
-- `outlined` and `text` props have been combined into a single `variant` prop.
-  - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
-- `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
-
-### v-badge
-
-- `overlap` has been removed and is now the default style, use `floating` to restore the v2 default.
-- Transition props `mode` and `origin` have been removed.
-- `avatar` prop is no longer needed and has been removed.
-
-### v-banner
-
-- The `actions` slot no longer provides a dismiss function.
-- `shaped` prop has been removed.
-- `icon-color` has been removed.
-- `single-line` has been replaced with `lines="one"`.
-- `color` now applies to the icon and action text. Use `bg-color` to change the background color.
-
-### v-btn/v-btn-toggle
-
-- `active-class` prop has been renamed to `selected-class`
-- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class.
-- `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
-- `depressed` has been renamed to `variant="flat"`
-- `retain-focus-on-click` has been removed, buttons use [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) instead.
-- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2.
-- Disabled buttons use a faded variant of the specified `color` instead of grey ([#15147](https://github.com/vuetifyjs/vuetify/issues/15147))
-  - The `$button-colored-disabled` sass variable can be set to false to use grey instead.
-
-### v-calendar
-
-- The first emit argument is now the native event, custom data has been moved to the second argument.
-  - `onClickEvent ({ nativeEvent, event, day })` should be changed to `onClickDate (nativeEvent, { event, day })`.
-
-### v-checkbox/v-radio/v-switch
-
-- `input-value` prop has been renamed to `model-value`. (Vue 3 requires this change)
-- `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
-- `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
-- `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
-
-### v-date-picker
-
-- Uses `Date` objects instead of strings. Some utility functions are included to help convert between the two, see [dates](/features/dates/).
-- `locale`, `locale-first-day-of-year`, `first-day-of-week`, `day-format`, `weekday-format`, `month-format`, `year-format`, `header-date-format`, and `title-date-format` are now part of the date adapter and use the globally configured [locale](/features/internationalization/) instead of being passed as props.
-- `active-picker` has been renamed to `view-mode`.
-- `picker-date` has been replaced with separate `month` and `year` props.
-- `range` is not currently implemented, will be added as a separate component in the future.
-
-### v-form
-
-- `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state.
-
-### v-list
-
-- `two-line` and `three-line` props have been combined into a single `lines` prop with allowed values `'two'` or `'three'`.
-- `v-list-item-group` has been removed, assign the item's key to the `value` prop of each `v-list-item` and bind `v-model:selected` on the `v-list` to get the selected value.
-- `v-list-item-icon` and `v-list-item-avatar` have been removed, use `v-list-item` with `icon` or `avatar` props, or put an icon or avatar in the append or prepend slot.
-- `v-list-item-content` has been removed, lists use CSS grid for layout now instead.
-- `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
-- `v-list-item` `input-value` prop has been replaced with `active`.
-- `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
-- `v-subheader`  has been renamed to `v-list-subheader`.
-- `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
-
-### v-menu/v-tooltip
-
-- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
-- `internal-activator` prop has been removed, use `activator` with a ref or unique selector instead.
-- `absolute`, `offset-y` and `offset-x` props have been removed. Manual positioning is now done by passing a `[x, y]` array to the `target` prop.
-- `nudge-*` props have been removed. There is no direct replacement but `offset` can be used to achieve similar results.
-- Content is now destroyed after closing, use `eager` to keep it.
-
-### v-navigation-drawer
-
-- `stateless` prop has been removed, manually control state using `model-value` or `v-model` instead.
-
-### v-rating
-
-- `color` has been renamed to `active-color`.
-- `background-color` has been renamed to `color`.
-
-### v-select/v-combobox/v-autocomplete
-
-- v-model values not present in `items` will now be rendered instead of being ignored.
-- `return-object` no longer matches primitive values in v-model, the initial value must have the same structure as `items` objects.
-- `cache-items` prop has been removed, caching should be handled externally.
-- `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
-- `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
-  - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
-- The `item` object in slots is now an `ListItem` object, the original item object is available as `item.raw`.
-- The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
-
-```html
-  <template #item="{ props }">
-    <v-list-item v-bind="props"></v-list-item>
-  </template>
+```diff { resource="styles/styles.scss"}
+  @use 'vuetify/settings' with (
+-   $button-stacked-icon-margin: 8px,
++   $button-stacked-gap,
+  );
 ```
 
-- The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
-- Non-`multiple` combobox will now update its model as you type (like a text field) instead of only on blur.
+### VBtn text-transform
 
-### v-simple-table
+The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
-- `v-simple-table` has been renamed to `v-table`
+- Set it in the Sass variables for typography:
 
-### v-stepper (vertical)
+```scss
+@use 'vuetify/settings' with (
+  $typography: (
+    'button': (
+      'text-transform': 'uppercase',
+    ),
+  ),
+)
+```
 
-- `v-stepper-step` has been renamed to `v-stepper-vertical-item`. Move content into the **title** slot.
-- `v-stepper-content` has been removed. Move content to the default slot of `v-stepper-vertical-item`.
+- Or set it in the Sass variables for buttons:
 
-### v-data-table
+```scss
+@use 'vuetify/settings' with (
+  $button-text-transform: 'uppercase',
+)
+```
 
-- Headers objects:
-  - `text` property has been renamed to `title`.
-  - `data-table-select` and `data-table-expand` must be defined as `key` instead of `value`.
-  - `class` has been replaced with `headerProps`.
-  - `cellClass` has been replaced with `cellProps` and now accepts either a function or an object.
-  - `filter` function requires `search` to be used in order for it to be triggered.
-- Tables requires `search` prop to trigger filtering. `items` array can be pre-filter with a computed.
-- Server side tables using `server-items-length` must be replaced with `<v-data-table-server items-length />`.
-- Argument order for `@click:*` events is now consistently `(event, data)`.
-  - `onRowClick (item, data, event)` should be changed to `onRowClick (event, { item })`.
-- `item-class` and `item-style` have been combined into `row-props`, and `cell-props` has been added.
-- `sort-desc` and `group-desc` have been combined into `sort-by` and `group-by`. These properties now take an array of `{ key: string, order: 'asc' | 'desc' }` objects instead of strings.
-- `current-items` event has been renamed to `update:current-items`.
-- `custom-sort` can now be done using the **sort** key in the headers object or by using the `custom-key-sort` prop.
+- Set it as a global default:
 
-### v-slider/v-range-slider
+```js
+import { createVuetify } from 'vuetify'
 
-- `ticks` has been renamed to `show-ticks`.
-- `tick-labels` has been renamed to `ticks`.
-- `vertical` has been renamed to `direction="vertical"`.
-- `step` default value is now 0 instead of 1.
+const vuetify = createVuetify({
+  defaults: {
+    VBtn: {
+      class: 'text-uppercase',
+      // or if you are using $utilities: false
+      style: 'text-transform: uppercase;',
+    },
+  },
+})
+```
 
-### v-tabs
+- Manually type uppercase letters:
 
-- `v-tab-item` has been removed, use `v-window-item`
-- `optional` has been replaced with `:mandatory="false"`
-- `<v-tab href="#foo">` no longer sets the v-tabs model to "foo" when selected, use `value="foo"` instead
+```diff
+- <v-btn>button</v-btn>
++ <v-btn>BUTTON</v-btn>
+```
 
-### v-img
+### VContainer
 
-- `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
+Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
 
-### v-snackbar
+```diff
+<v-container
+-  class="fill-height"
++  class="fill-height d-flex align-center flex-wrap"
+/>
+```
 
-- `action` slot was renamed to `actions`
+#### Max widths
 
-### v-expansion-panel
+The calculation for `$container-max-widths` has changed to round values down to the nearest 100px for more predictable sizing. With the default breakpoints, this results in the following container widths:
 
-- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
-- `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
-- `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
+| Breakpoint | Change              |
+|------------|---------------------|
+| md         | ~~900px~~  » 700px  |
+| lg         | ~~1200px~~ » 1000px |
+| xl         | ~~1800px~~ » 1400px |
+| xxl        | ~~2400px~~ » 2000px |
 
-### v-card
+### VCounter (hint under VTextField, VTextarea and VFieldInput)
 
-- `v-card` does not allow content to overflow or use higher `z-index` values to display on top of elements outside it. To disable this behavior, use `<v-card style="overflow: initial; z-index: initial">` ([#17593](https://github.com/vuetifyjs/vuetify/issues/17593), [#17628](https://github.com/vuetifyjs/vuetify/issues/17628))
+The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
 
-### v-sparkline
+```scss { resource="styles/styles.scss"}
+.v-counter {
+  opacity: 1;
+  color: /* your $counter-color */;
+}
+```
 
-- `value` is now `model-value`
+### VField
 
-## Directives
+In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
 
-### v-intersect
+The **$field-clearable-margin** Sass variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
 
-- Handler argument order has changed from `entries, observer, isIntersecting` to `isIntersecting, entries, observer`
+```diff { resource="styles/styles.scss"}
+  @use 'vuetify/settings' with (
+-   $field-clearable-margin: 8px,
++   $field-gap: 8px,
+```
+
+### VFileInput
+
+Removed the **$file-input-details-padding-inline** Sass variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $file-input-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VForm
+
+Slot variables are no longer refs, read-only values passed to slots are now unwrapped:
+
+```diff
+  <VForm>
+    <template #default="{ isValid, validate }">
+      <VBtn @click="validate" text="validate" />
+-     Form is {{ isValid.value ? 'valid' : 'invalid' }}
++     Form is {{ isValid ? 'valid' : 'invalid' }}
+    </template>
+  </VForm>
+```
+
+The following properties are affected:
+  - errors
+  - isDisabled
+  - isReadonly
+  - isValidating
+  - isValid
+  - items
+
+### VRadioGroup
+
+Removed the **$radio-group-details-padding-inline** Sass variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $radio-group-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
+
+### VSelect/VCombobox/VAutocomplete
+
+#### `item` in slots has been renamed to `internalItem`
+
+For consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
+
+You can rename:
+
+```diff
+  <VSelect item-title="name">
+-   <template #item="{ item, props }">
+-     <VListItem v-bind="props" :title="item.title" />
++   <template #item="{ internalItem, props }">
++     <VListItem v-bind="props" :title="internalItem.title" />
+    </template>
+  </VSelect>
+```
+
+Or alias:
+
+```diff
+  <VSelect>
+-   <template #item="{ item, props }">
++   <template #item="{ internalItem: item, props }">
+      <VListItem v-bind="props" :title="item.raw.name" />
+    </template>
+  </VSelect>
+```
+
+Or remove `.raw`:
+
+```diff
+  <VSelect>
+    <template #item="{ item, props }">
+-     <VListItem v-bind="props" :title="item.raw.name" />
++     <VListItem v-bind="props" :title="item.name" />
+    </template>
+  </VSelect>
+```
+
+### VSnackbar
+
+Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
+
+```diff
+  <VSnackbar
+    v-model="visible"
+-    multi-line
++    min-height="68"
+    :text="message"
+  />
+```
+
+### VTextField
+
+Removed the **$text-field-details-padding-inline** Sass variable.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $text-field-details-padding-inline: <value>
++  $input-details-padding-inline: <value>
+);
+```
