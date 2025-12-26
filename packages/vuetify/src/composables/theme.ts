@@ -222,18 +222,7 @@ function parseThemeOptions (options: ThemeOptions = genDefaults()): InternalThem
 
   if (!options) return { ...defaults, isDisabled: true } as any
 
-  const themes: Record<string, InternalThemeDefinition> = {}
-  for (const [key, theme] of Object.entries(options.themes ?? {})) {
-    const defaultTheme = theme.dark || key === 'dark'
-      ? defaults.themes?.dark
-      : defaults.themes?.light
-    themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition
-  }
-
-  return mergeDeep(
-    defaults,
-    { ...options, themes },
-  ) as InternalThemeOptions
+  return mergeDeep(defaults, options) as InternalThemeOptions
 }
 
 function createCssClass (lines: string[], selector: string, content: string[], scope?: string) {
@@ -365,17 +354,23 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
-    for (const [name, original] of Object.entries(themes.value)) {
+    for (const [name, original] of Object.entries(parsedOptions.themes)) {
+      const defaultTheme = original.dark || name === 'dark'
+        ? parsedOptions.themes.dark
+        : parsedOptions.themes.light
+
+      const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
+
       const colors = {
-        ...original.colors,
-        ...genVariations(original.colors, parsedOptions.variations),
+        ...merged.colors,
+        ...genVariations(merged.colors, parsedOptions.variations),
       }
 
       acc[name] = {
-        ...original,
+        ...merged,
         colors: {
           ...colors,
-          ...genOnColors(colors, original.variables),
+          ...genOnColors(colors, merged.variables),
         },
       }
     }
