@@ -354,10 +354,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
-    for (const [name, original] of Object.entries(parsedOptions.themes)) {
+    for (const [name, original] of Object.entries(themes.value)) {
       const defaultTheme = original.dark || name === 'dark'
-        ? parsedOptions.themes.dark
-        : parsedOptions.themes.light
+        ? themes.value.dark
+        : themes.value.light
 
       const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
 
