@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Treeview
   title: Treeview component

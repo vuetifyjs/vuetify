@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Entry points
   description: Vuetify style entry points
