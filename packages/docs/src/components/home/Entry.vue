@@ -115,11 +115,10 @@
         </v-col>
 
         <v-col class="d-md-block d-none" cols="12" md="6">
-          <v-sheet class="rounded-lg bg-surface elevation-10">
+          <v-sheet class="rounded-lg elevation-10" theme="dark">
             <AppMarkup
               :code="code"
-              class="bg-black rounded-lg pa-5"
-              open-in-playground
+              class="rounded-lg pa-5"
             />
           </v-sheet>
         </v-col>
