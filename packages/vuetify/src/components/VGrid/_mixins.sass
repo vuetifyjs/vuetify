@@ -80,17 +80,17 @@
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           // Avoid emitting useless .offset-0
-          :where(.v-row.v-row--density-default) > .offset#{$infix}-#{$i}
+          :where(.v-row.v-row--density-default) > .v-col-offset#{$infix}-#{$i}
             @include make-col-offset($i, $columns, settings.$grid-gutter)
 
       // Dense row offsets
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
-          .v-row--density-comfortable > .offset#{$infix}-#{$i}
+          .v-row--density-comfortable > .v-col-offset#{$infix}-#{$i}
             @include make-col-offset($i, $columns, settings.$form-grid-gutter)
 
       // No-gutters offsets
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
-          .v-row--density-compact > .offset#{$infix}-#{$i}
+          .v-row--density-compact > .v-col-offset#{$infix}-#{$i}
             @include make-col-offset($i, $columns, 0px)

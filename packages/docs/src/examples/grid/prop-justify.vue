@@ -1,6 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row justify="start">
+    <v-row class="justify-start">
       <v-col
         v-for="k in 2"
         :key="k"
@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col
         v-for="k in 2"
         :key="k"
@@ -24,7 +24,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="end">
+    <v-row class="justify-end">
       <v-col
         v-for="k in 2"
         :key="k"
@@ -36,7 +36,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col
         v-for="k in 2"
         :key="k"
@@ -48,7 +48,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="space-between">
+    <v-row class="justify-space-between">
       <v-col
         v-for="k in 2"
         :key="k"

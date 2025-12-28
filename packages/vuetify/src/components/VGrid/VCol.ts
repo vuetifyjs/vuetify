@@ -11,11 +11,10 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
+import type { Prop } from 'vue'
 import type { Breakpoint } from '@/composables/display'
 
 type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
-type BreakpointOrder = `order${Capitalize<Breakpoint>}`
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
@@ -38,21 +37,9 @@ const offsetProps = (() => {
   }, {} as Record<BreakpointOffset, Prop<string | number, null>>)
 })()
 
-const orderProps = (() => {
-  return breakpoints.reduce((props, val) => {
-    const orderKey = ('order' + capitalize(val)) as BreakpointOrder
-    props[orderKey] = {
-      type: [String, Number],
-      default: null,
-    }
-    return props
-  }, {} as Record<BreakpointOrder, Prop<string | number, null>>)
-})()
-
 const propMap = {
   col: Object.keys(breakpointProps),
   offset: Object.keys(offsetProps),
-  order: Object.keys(orderProps),
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
@@ -66,6 +53,8 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   }
   if (type === 'col') {
     className = 'v-' + className
+  } else if (type === 'offset') {
+    className = 'v-col-' + className
   }
   // Handling the boolean style prop when accepting [Boolean, String, Number]
   // means Vue will not convert <v-col sm></v-col> to sm: true for us.
@@ -79,8 +68,6 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
-
 export const makeVColProps = propsFactory({
   cols: {
     type: [Boolean, String, Number],
@@ -92,16 +79,6 @@ export const makeVColProps = propsFactory({
     default: null,
   },
   ...offsetProps,
-  order: {
-    type: [String, Number],
-    default: null,
-  },
-  ...orderProps,
-  alignSelf: {
-    type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
-    default: null,
-    validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
-  },
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -116,7 +93,7 @@ export const VCol = genericComponent()({
     const classes = computed(() => {
       const classList: any[] = []
 
-      // Loop through `col`, `offset`, `order` breakpoint props
+      // Loop through `col`, `offset` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
         propMap[type].forEach(prop => {
@@ -132,9 +109,7 @@ export const VCol = genericComponent()({
         // Default to .v-col if no other col-{bp}-* classes generated nor `cols` specified.
         'v-col': !hasColClasses || !props.cols,
         [`v-col-${props.cols}`]: props.cols,
-        [`offset-${props.offset}`]: props.offset,
-        [`v-col--order-${props.order}`]: props.order,
-        [`v-col--align-self-${props.alignSelf}`]: props.alignSelf,
+        [`v-col-offset-${props.offset}`]: props.offset,
       })
 
       return classList
