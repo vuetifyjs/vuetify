@@ -69,9 +69,8 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 ## Caveats
 
 ::: info
-  Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset**, **justify**, **align**, and single breakpoint props on `v-col`
+  Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset** and single breakpoint props on `v-col`
 
-- Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
 - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
 :::
 
@@ -81,7 +80,7 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 
 #### Align
 
-Change the vertical alignment of flex items and their parents using the **align** and **align-self** properties.
+Change the vertical alignment of flex items and their parents using the **align** and **align-self** utility classes.
 
 <ExamplesExample file="grid/prop-align" />
 
@@ -93,7 +92,7 @@ Columns will automatically take up an equal amount of space within their parent 
 
 #### Justify
 
-Change the horizontal alignment of flex items using the **justify** property.
+Change the horizontal alignment of flex items using the **justify** utility classes.
 
 <ExamplesExample file="grid/prop-justify" />
 
@@ -117,13 +116,13 @@ Offset can also be applied on a per breakpoint basis.
 
 #### Order
 
-You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.
+You can control the ordering of grid items. As with offsets, you can set different orders for different sizes using the **order** utility classes. Design specialized screen layouts that accommodate to any application.
 
 <ExamplesExample file="grid/prop-order" />
 
 #### Order first and last
 
-You can also designate explicitly **first** or **last** which will assign **-1** or **13** values respectively to the `order` CSS property.
+You can also designate explicitly **first** or **last** using the **order-first** and **order-last** utility classes.
 
 <ExamplesExample file="grid/prop-order-first-and-last" />
 

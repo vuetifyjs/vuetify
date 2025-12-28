@@ -30,14 +30,3 @@
   //
   // Common styles for small and large grid columns
   @include make-grid-columns
-
-  @each $breakpoint in map.keys(settings.$grid-breakpoints)
-    // Generate media query
-    @include tools.media-breakpoint-up($breakpoint)
-      $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
-      // Loop over each v-row property
-      @each $key, $utility in utilities.$v-row-utils
-         @include tools.generate-utility($utility, $infix, 'bidi')
-      // Loop over each v-col property
-      @each $key, $utility in utilities.$v-col-utils
-         @include tools.generate-utility($utility, $infix, 'bidi')
