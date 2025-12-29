@@ -45,7 +45,7 @@ export const VListSubheader = genericComponent()({
         >
           { hasText ? (
             <div class="v-list-subheader__text">
-              { renderSlot(slots.default, undefined, () => props.title) }
+              { renderSlot(slots.default, () => props.title) }
             </div>
           ) : undefined }
         </props.tag>

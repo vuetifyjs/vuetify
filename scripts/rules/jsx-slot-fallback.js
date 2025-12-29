@@ -4,17 +4,13 @@ export default {
   },
   create (context) {
     return {
-      JSXExpressionContainer (node) {
-        if (!(
-          ['JSXElement', 'JSXFragment'].includes(node.parent.type) &&
-          node.expression.type === 'LogicalExpression' &&
-          ['??', '||'].includes(node.expression.operator)
-        )) return
+      LogicalExpression (node) {
+        if (!['??', '||'].includes(node.operator)) return
 
         const sourceCode = context.getSourceCode()
-        const fallback = sourceCode.getText(node.expression.right)
+        const fallback = sourceCode.getText(node.right)
 
-        const left = unwrap(node.expression.left)
+        const left = unwrap(node.left)
         if (!left || !['CallExpression', 'ChainExpression'].includes(left.type)) return
 
         const callee = unwrap(left.callee)
@@ -27,18 +23,16 @@ export default {
           ? `slots.${callee.property.name}`
           : `slots[${sourceCode.getText(callee.property)}]`
 
-        const slotProps = left.arguments && left.arguments.length
-          ? sourceCode.getText(left.arguments[0])
-          : 'undefined'
-
         context.report({
-          node: node.expression,
+          node,
           message: `Use renderSlot for slot fallback instead of "??"`,
           fix (fixer) {
-            return fixer.replaceText(
-              node.expression,
-              `renderSlot(${slotAccess}, ${slotProps}, () => ${fallback})`
-            )
+            let result = `renderSlot(${slotAccess}, `
+            if (left.arguments && left.arguments.length) {
+              result += sourceCode.getText(left.arguments[0]) + ', '
+            }
+            result += `() => ${fallback})`
+            return fixer.replaceText(node, result)
           },
         })
       },

@@ -333,7 +333,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               modelValue={ !!props.loading }
               persistent
             >
-              { renderSlot(slots.loader, undefined, () => (
+              { renderSlot(slots.loader, () => (
                 <VProgressCircular
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate

@@ -223,7 +223,7 @@ export const VCard = genericComponent<VCardSlots>()({
 
           { hasText ? (
             <VCardText key="text">
-              { renderSlot(slots.text, undefined, () => props.text) }
+              { renderSlot(slots.text, () => props.text) }
             </VCardText>
           ) : undefined }
 

@@ -161,7 +161,7 @@ export const VDataTableRow = genericComponent<new <T>(
               {{
                 default: () => {
                   if (column.key === 'data-table-select') {
-                    return slots['item.data-table-select']?.({
+                    return renderSlot(slots['item.data-table-select'], {
                       ...slotProps,
                       props: {
                         color: props.color,
@@ -169,7 +169,7 @@ export const VDataTableRow = genericComponent<new <T>(
                         modelValue: isSelected([item]),
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
-                    }) ?? (
+                    }, () => (
                       <VCheckboxBtn
                         color={ props.color }
                         disabled={ !item.selectable }
@@ -180,11 +180,11 @@ export const VDataTableRow = genericComponent<new <T>(
                           ['stop']
                         )}
                       />
-                    )
+                    ))
                   }
 
                   if (column.key === 'data-table-expand') {
-                    return slots['item.data-table-expand']?.({
+                    return renderSlot(slots['item.data-table-expand'], {
                       ...slotProps,
                       props: {
                         icon: isExpanded(item) ? props.collapseIcon : props.expandIcon,
@@ -192,14 +192,9 @@ export const VDataTableRow = genericComponent<new <T>(
                         variant: 'text',
                         onClick: withModifiers(() => toggleExpand(item), ['stop']),
                       },
-                    }) ?? (
-                      <VBtn
-                        icon={ isExpanded(item) ? props.collapseIcon : props.expandIcon }
-                        size="small"
-                        variant="text"
-                        onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
-                      />
-                    )
+                    }, ({ props }) => (
+                      <VBtn { ...props } />
+                    ))
                   }
 
                   if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)

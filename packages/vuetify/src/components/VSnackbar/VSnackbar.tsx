@@ -262,7 +262,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
-              { renderSlot(slots.text, undefined, () => props.text) }
+              { renderSlot(slots.text, () => props.text) }
 
               { slots.default?.() }
             </div>

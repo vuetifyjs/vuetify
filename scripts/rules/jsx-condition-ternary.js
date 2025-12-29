@@ -4,20 +4,21 @@ export default {
   },
   create (context) {
     return {
-      JSXExpressionContainer (node) {
+      LogicalExpression (node) {
         if (!(
-          ['JSXElement', 'JSXFragment'].includes(node.parent.type) &&
-          node.expression.type === 'LogicalExpression' &&
-          node.expression.operator === '&&'
+          node.operator === '&&' &&
+          node.right.type === 'JSXElement'
         )) return
 
         context.report({
-          node: node.expression,
+          node,
           message: 'Conditional JSX elements must use a ternary expression "a ? b : undefined" not "a && b"',
           fix (fixer) {
             const sourceCode = context.getSourceCode()
-            const operator = sourceCode.getTokenAfter(node.expression.left)
-            const last = sourceCode.getLastToken(node.expression)
+            const operator = sourceCode.getTokenAfter(node.left, token => (
+              token.type === 'Punctuator' && token.value === '&&'
+            ))
+            const last = sourceCode.getLastToken(node)
             return [
               fixer.replaceText(operator, '?'),
               fixer.insertTextAfter(last, ' : undefined'),

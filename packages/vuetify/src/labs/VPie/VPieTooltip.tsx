@@ -8,7 +8,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import { toRef } from 'vue'
 import { formatTextTemplate } from './utils'
-import { genericComponent, pick, propsFactory } from '@/util'
+import { genericComponent, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -64,21 +64,21 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
         contentClass="v-pie__tooltip-content"
       >
         { props.item ? (
-          slots.default?.({ item: props.item }) ?? (
+          renderSlot(slots.default, { item: props.item }, ({ item }) => (
             <MaybeTransition transition={ props.transition } mode="out-in">
               <VListItem
-                key={ props.item.key }
+                key={ item.key }
                 density="compact"
-                title={ tooltipTitleFormatFunction.value(props.item) }
-                subtitle={ tooltipSubtitleFormatFunction.value(props.item) }
+                title={ tooltipTitleFormatFunction.value(item) }
+                subtitle={ tooltipSubtitleFormatFunction.value(item) }
                 v-slots={{
                   prepend: slots.prepend
-                    ? () => slots.prepend!({ item: props.item! })
+                    ? () => slots.prepend!({ item })
                     : undefined,
                 }}
               />
             </MaybeTransition>
-          )
+          ))
         ) : undefined }
       </VTooltip>
     )

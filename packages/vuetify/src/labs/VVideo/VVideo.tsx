@@ -439,7 +439,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }
               >
-                { renderSlot(slots.sources, undefined, () => <source src={ props.src } type={ props.type } />) }
+                { renderSlot(slots.sources, () => <source src={ props.src } type={ props.type } />) }
               </video>
             ) : undefined }
             <Transition name="fade-transition">

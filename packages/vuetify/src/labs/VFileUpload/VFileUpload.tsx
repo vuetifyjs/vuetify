@@ -256,14 +256,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
             { hasTitle ? (
               <div key="title" class="v-file-upload-title">
-                { renderSlot(slots.title, undefined, () => t(props.title)) }
+                { renderSlot(slots.title, () => t(props.title)) }
               </div>
             ) : undefined }
 
             { props.density === 'default' ? (
               <>
                 <div key="upload-divider" class="v-file-upload-divider">
-                  { renderSlot(slots.divider, undefined, () => (
+                  { renderSlot(slots.divider, () => (
                     <VDivider { ...dividerProps }>
                       { t(props.dividerText) }
                     </VDivider>

@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { VSliderThumbSlots } from './VSliderThumb'
@@ -137,14 +137,13 @@ export const VSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { renderSlot(slots.label, slotProps, () => props.label
-                  ? (
-                      <VLabel
-                        id={ slotProps.id.value }
-                        class="v-slider__label"
-                        text={ props.label }
-                      />
-                  ) : undefined)}
+                { renderSlot(slots.label, slotProps, () => props.label ? (
+                  <VLabel
+                    id={ slotProps.id.value }
+                    class="v-slider__label"
+                    text={ props.label }
+                  />
+                ) : undefined)}
 
                 { slots.prepend?.(slotProps) }
               </>

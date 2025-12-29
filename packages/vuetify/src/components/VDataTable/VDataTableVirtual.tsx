@@ -20,7 +20,7 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -251,7 +251,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                               onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                             >
                               { ({ itemRef }) => (
-                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
+                                renderSlot(slots.item, { ...itemSlotProps, itemRef }, () => (
                                   <VDataTableRow
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
@@ -259,7 +259,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     index={ itemSlotProps.index }
                                     v-slots={ slots }
                                   />
-                                )
+                                ))
                               )}
                             </VVirtualScrollItem>
                           ),

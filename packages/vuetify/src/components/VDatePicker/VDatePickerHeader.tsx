@@ -74,7 +74,7 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
           { hasContent ? (
             <MaybeTransition key="content" name={ props.transition }>
               <div key={ props.header } class="v-date-picker-header__content">
-                { renderSlot(slots.default, undefined, () => props.header) }
+                { renderSlot(slots.default, () => props.header) }
               </div>
             </MaybeTransition>
           ) : undefined }

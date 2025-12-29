@@ -194,7 +194,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 disabled={ !icon }
                 defaults={{ VIcon: { ...iconProps } }}
                 v-slots={{
-                  default: () => slots.default?.() ?? toDisplayString(props.text),
+                  default: () => renderSlot(slots.default, () => toDisplayString(props.text)),
                 }}
               />
             )}
@@ -202,7 +202,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
           { props.loading ? (
             <span key="loader" class="v-icon-btn__loader">
-              { renderSlot(slots.loader, undefined, () => (
+              { renderSlot(slots.loader, () => (
                 <VProgressCircular
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate="disable-shrink"

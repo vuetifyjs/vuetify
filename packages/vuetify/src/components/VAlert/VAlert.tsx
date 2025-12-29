@@ -151,7 +151,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
           : undefined,
       }
 
-      return isActive.value && (
+      return isActive.value ? (
         <props.tag
           class={[
             'v-alert',
@@ -210,11 +210,11 @@ export const VAlert = genericComponent<VAlertSlots>()({
           <div class="v-alert__content">
             { hasTitle ? (
               <VAlertTitle key="title">
-                { renderSlot(slots.title, undefined, () => props.title) }
+                { renderSlot(slots.title, () => props.title) }
               </VAlertTitle>
             ) : undefined }
 
-            { renderSlot(slots.text, undefined, () => props.text) }
+            { renderSlot(slots.text, () => props.text) }
 
             { slots.default?.() }
           </div>
@@ -252,7 +252,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
             </div>
           ) : undefined }
         </props.tag>
-      )
+      ) : undefined
     }
   },
 })

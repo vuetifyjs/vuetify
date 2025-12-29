@@ -70,7 +70,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
             >
               { hasTitle ? (
                 <VPickerTitle key="picker-title">
-                  { renderSlot(slots.title, undefined, () => props.title) }
+                  { renderSlot(slots.title, () => props.title) }
                 </VPickerTitle>
               ) : undefined }
 

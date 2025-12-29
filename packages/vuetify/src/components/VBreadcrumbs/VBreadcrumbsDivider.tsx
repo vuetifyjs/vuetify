@@ -25,7 +25,7 @@ export const VBreadcrumbsDivider = genericComponent()({
         ]}
         style={ props.style }
       >
-        { renderSlot(slots.default, undefined, () => props.divider) }
+        { renderSlot(slots.default, () => props.divider) }
       </li>
     ))
 

@@ -317,11 +317,9 @@ export const VPie = genericComponent<VPieSlots>()({
             '--v-pie-size': convertToUnit(props.size),
           }}
         >
-          { renderSlot(
-            slots.title,
-            undefined,
-            () => props.title ? (<div class="v-pie__title">{ props.title }</div>) : undefined
-          )}
+          { renderSlot(slots.title, () => props.title ? (
+            <div class="v-pie__title">{ props.title }</div>
+          ) : undefined)}
           <div
             class={[
               'v-pie__content',

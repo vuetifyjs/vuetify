@@ -149,13 +149,13 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
 
           { hasHeadline ? (
             <div key="headline" class="v-empty-state__headline">
-              { renderSlot(slots.headline, undefined, () => props.headline) }
+              { renderSlot(slots.headline, () => props.headline) }
             </div>
           ) : undefined }
 
           { hasTitle ? (
             <div key="title" class="v-empty-state__title">
-              { renderSlot(slots.title, undefined, () => props.title) }
+              { renderSlot(slots.title, () => props.title) }
             </div>
           ) : undefined }
 
@@ -167,7 +167,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 maxWidth: convertToUnit(props.textWidth),
               }}
             >
-              { renderSlot(slots.text, undefined, () => props.text) }
+              { renderSlot(slots.text, () => props.text) }
             </div>
           ) : undefined }
 

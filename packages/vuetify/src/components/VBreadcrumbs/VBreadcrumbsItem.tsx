@@ -57,13 +57,13 @@ export const VBreadcrumbsItem = genericComponent()({
           ]}
           aria-current={ isActive.value ? 'page' : undefined }
         >
-          { !link.isLink.value ? slots.default?.() ?? props.title : (
+          { !link.isLink.value ? renderSlot(slots.default, () => props.title) : (
             <a
               class="v-breadcrumbs-item--link"
               onClick={ link.navigate }
               { ...link.linkProps }
             >
-              { renderSlot(slots.default, undefined, () => props.title) }
+              { renderSlot(slots.default, () => props.title) }
             </a>
           )}
         </props.tag>

@@ -205,13 +205,13 @@ export const VSwitch = genericComponent<new <T>(
                           ) : (
                             <VScaleTransition>
                               { !props.loading ? (
-                                (icon && (
+                                (icon ? (
                                   <VIcon
                                     key={ String(icon) }
                                     icon={ icon }
                                     size="x-small"
                                   />
-                                ))) : (
+                                ) : undefined)) : (
                                 <LoaderSlot
                                   name="v-switch"
                                   active

@@ -125,7 +125,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
     }
 
-    return () => slots.default?.() ?? props.items?.map((item, index, items) => {
+    return () => renderSlot(slots.default, () => props.items?.map((item, index, items) => {
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const nextItemHasChildren = !!items.at(index + 1)?.children
@@ -281,6 +281,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             />
           )
         })
-    })
+    }))
   },
 })

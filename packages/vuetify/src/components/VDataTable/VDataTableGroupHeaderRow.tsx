@@ -12,7 +12,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -67,7 +67,11 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const icon = isGroupOpen(props.item) ? props.groupCollapseIcon : props.groupExpandIcon
             const onClick = () => toggleGroup(props.item)
 
-            return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
+            return renderSlot(slots['data-table-group'], {
+              item: props.item,
+              count: rows.value.length,
+              props: { icon, onClick },
+            }, () => (
               <VDataTableColumn
                 class="v-data-table-group-header-row__column"
                 colspan={ colspan.value }
@@ -81,13 +85,15 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
                 <span>{ props.item.value }</span>
                 <span>({ rows.value.length })</span>
               </VDataTableColumn>
-            )
+            ))
           } else if (column.key === 'data-table-select') {
             const selectableRows = rows.value.filter(x => x.selectable)
             const modelValue = selectableRows.length > 0 && isSelected(selectableRows)
             const indeterminate = isSomeSelected(selectableRows) && !modelValue
             const selectGroup = (v: boolean) => select(selectableRows, v)
-            return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
+            return renderSlot(slots['data-table-select'], {
+              props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup },
+            }, () => (
               <VDataTableColumn class="v-data-table__td--select-row" noPadding>
                 <VCheckboxBtn
                   density={ props.density }
@@ -97,7 +103,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
                   onUpdate:modelValue={ selectGroup }
                 />
               </VDataTableColumn>
-            )
+            ))
           }
 
           return ''

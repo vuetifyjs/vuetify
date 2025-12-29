@@ -122,11 +122,11 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
             <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
               { slots.default?.() }
             </div>
-            ) : isOpen.value && (
+            ) : isOpen.value ? (
             <div class="v-list-group__items" role="group" aria-labelledby={ id.value }>
               { slots.default?.() }
             </div>
-            )}
+            ) : undefined }
         </MaybeTransition>
       </props.tag>
     ))

@@ -13,7 +13,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, shallowRef, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, propsFactory, renderSlot, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -131,33 +131,31 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
           tabindex={ hasFocusedItem.value ? -1 : 0 }
         >
           { years.value.map((year, i) => {
-            const btnProps = {
-              ref: model.value === year.value ? yearRef : undefined,
-              active: model.value === year.value,
-              color: model.value === year.value ? props.color : undefined,
-              rounded: true,
-              text: year.text,
-              disabled: year.isDisabled,
-              variant: model.value === year.value ? 'flat' : 'text',
-              onClick: () => {
-                if (model.value === year.value) {
-                  emit('update:modelValue', model.value)
-                  return
-                }
-                model.value = year.value
-              },
-            } as const
-
-            return slots.year?.({
+            return renderSlot(slots.year, {
               year,
               i,
-              props: btnProps,
-            }) ?? (
+              props: {
+                ref: model.value === year.value ? yearRef : undefined,
+                active: model.value === year.value,
+                color: model.value === year.value ? props.color : undefined,
+                rounded: true,
+                text: year.text,
+                disabled: year.isDisabled,
+                variant: model.value === year.value ? 'flat' : 'text',
+                onClick: () => {
+                  if (model.value === year.value) {
+                    emit('update:modelValue', model.value)
+                    return
+                  }
+                  model.value = year.value
+                },
+              },
+            }, ({ props }) => (
               <VBtn
                 key="month"
-                { ...btnProps }
+                { ...props }
               />
-            )
+            ))
           })}
         </div>
       </div>

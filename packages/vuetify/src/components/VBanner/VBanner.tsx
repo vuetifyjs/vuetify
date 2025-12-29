@@ -146,7 +146,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           <div class="v-banner__content">
             { hasText ? (
               <VBannerText key="text">
-                { renderSlot(slots.text, undefined, () => props.text) }
+                { renderSlot(slots.text, () => props.text) }
               </VBannerText>
             ) : undefined }
 

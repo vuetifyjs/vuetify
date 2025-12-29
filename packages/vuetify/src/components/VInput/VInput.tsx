@@ -208,13 +208,13 @@ export const VInput = genericComponent<new <T>(
             <div key="prepend" class="v-input__prepend">
               { slots.prepend
                 ? slots.prepend(slotProps.value)
-                : (props.prependIcon && (
+                : (props.prependIcon ? (
                   <InputIcon
                     key="prepend-icon"
                     name="prepend"
                     color={ iconColor.value }
                   />
-                ))
+                ) : undefined)
               }
             </div>
           ) : undefined }
@@ -229,13 +229,13 @@ export const VInput = genericComponent<new <T>(
             <div key="append" class="v-input__append">
               { slots.append
                 ? slots.append(slotProps.value)
-                : (props.appendIcon && (
+                : (props.appendIcon ? (
                   <InputIcon
                     key="append-icon"
                     name="append"
                     color={ iconColor.value }
                   />
-                ))
+                ) : undefined)
               }
             </div>
           ) : undefined }

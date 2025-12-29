@@ -13,7 +13,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, shallowRef, watch } from 'vue'
-import { convertToUnit, defineComponent, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, defineComponent, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -226,25 +226,21 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
 
       if (status === 'error') return slots.error?.(slotProps)
 
-      if (status === 'empty') return slots.empty?.(slotProps) ?? <div>{ t(props.emptyText) }</div>
+      if (status === 'empty') return renderSlot(slots.empty, slotProps, () => <div>{ t(props.emptyText) }</div>)
 
       if (props.mode === 'manual') {
         if (status === 'loading') {
-          return slots.loading?.(slotProps) ?? (
-            <VProgressCircular indeterminate color={ props.color } />
-          )
+          return renderSlot(slots.loading, slotProps, () => <VProgressCircular indeterminate color={ props.color } />)
         }
 
-        return slots['load-more']?.(slotProps) ?? (
+        return renderSlot(slots['load-more'], slotProps, () => (
           <VBtn variant="outlined" color={ props.color } onClick={ onClick }>
             { t(props.loadMoreText) }
           </VBtn>
-        )
+        ))
       }
 
-      return slots.loading?.(slotProps) ?? (
-        <VProgressCircular indeterminate color={ props.color } />
-      )
+      return renderSlot(slots.loading, slotProps, () => <VProgressCircular indeterminate color={ props.color } />)
     }
 
     const { dimensionStyles } = useDimension(props)

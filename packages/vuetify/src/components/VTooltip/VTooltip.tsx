@@ -12,7 +12,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { computed, mergeProps, ref, toRef, useId } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
@@ -115,7 +115,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
         >
           {{
             activator: slots.activator,
-            default: (...args) => slots.default?.(...args) ?? props.text,
+            default: args => renderSlot(slots.default, args, () => props.text),
           }}
         </VOverlay>
       )

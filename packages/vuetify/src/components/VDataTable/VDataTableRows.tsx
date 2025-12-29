@@ -85,7 +85,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots.loading, undefined, () => t(props.loadingText)) }
+              { renderSlot(slots.loading, () => t(props.loadingText)) }
             </td>
           </tr>
         )
@@ -98,7 +98,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="no-data"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots['no-data'], undefined, () => t(props.noDataText)) }
+              { renderSlot(slots['no-data'], () => t(props.noDataText)) }
             </td>
           </tr>
         )
@@ -139,7 +139,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 toggleGroup,
               } satisfies GroupSummarySlot
 
-              return slots['group-summary']?.(slotProps) ?? ''
+              return renderSlot(slots['group-summary'], slotProps, () => '')
             }
 
             const slotProps = {

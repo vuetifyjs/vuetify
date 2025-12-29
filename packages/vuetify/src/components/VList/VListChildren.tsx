@@ -7,7 +7,7 @@ import { VDivider } from '@/components/VDivider'
 // Utilities
 import { mergeProps } from 'vue'
 import { createList } from './list'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -44,17 +44,13 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
   setup (props, { slots }) {
     createList()
 
-    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
+    return () => renderSlot(slots.default, () => props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
       if (type === 'divider') {
-        return slots.divider?.({ props: itemProps }) ?? (
-          <VDivider { ...itemProps } />
-        )
+        return renderSlot(slots.divider, { props: itemProps }, () => <VDivider { ...itemProps } />)
       }
 
       if (type === 'subheader') {
-        return slots.subheader?.({ props: itemProps }) ?? (
-          <VListSubheader { ...itemProps } />
-        )
+        return renderSlot(slots.subheader, { props: itemProps }, () => <VListSubheader { ...itemProps } />)
       }
 
       const slotsWithItem = {
@@ -105,6 +101,6 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
           />
         )
       )
-    })
+    }))
   },
 })

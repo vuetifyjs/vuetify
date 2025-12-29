@@ -107,13 +107,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle ? (
               <VCardTitle key="title">
-                { renderSlot(slots.title, undefined, () => toDisplayString(props.title)) }
+                { renderSlot(slots.title, () => toDisplayString(props.title)) }
               </VCardTitle>
             ) : undefined }
 
             { hasSubtitle ? (
               <VCardSubtitle key="subtitle">
-                { renderSlot(slots.subtitle, undefined, () => toDisplayString(props.subtitle)) }
+                { renderSlot(slots.subtitle, () => toDisplayString(props.subtitle)) }
               </VCardSubtitle>
             ) : undefined }
 

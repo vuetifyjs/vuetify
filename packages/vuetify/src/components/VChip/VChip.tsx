@@ -201,7 +201,7 @@ export const VChip = genericComponent<VChipSlots>()({
       const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
-      return isActive.value && (
+      return isActive.value ? (
         <Tag
           { ...link.linkProps }
           class={[
@@ -383,7 +383,7 @@ export const VChip = genericComponent<VChipSlots>()({
             </button>
           ) : undefined }
         </Tag>
-      )
+      ) : undefined
     }
   },
 })

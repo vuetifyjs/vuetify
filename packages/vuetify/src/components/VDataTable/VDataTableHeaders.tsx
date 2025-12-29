@@ -18,7 +18,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
@@ -203,7 +203,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (isEmpty) return ''
 
               if (column.key === 'data-table-select') {
-                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
+                return renderSlot(slots['header.data-table-select'], columnSlotProps, () => showSelectAll.value ? (
                   <VCheckboxBtn
                     color={ props.color }
                     density={ props.density }
@@ -211,7 +211,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
                   />
-                ))
+                ) : undefined)
               }
 
               return (

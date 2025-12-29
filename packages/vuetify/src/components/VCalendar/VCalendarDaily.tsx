@@ -101,11 +101,11 @@ export const VCalendarDaily = defineComponent({
     }
 
     function genDayHeader (day: CalendarTimestamp, index: number) {
-      return slots['day-header']?.({
+      return renderSlot(slots['day-header'], {
         week: base.days.value,
         ...day,
         index,
-      }) ?? []
+      }, () => [])
     }
 
     function genHeadWeekday (day: CalendarTimestamp) {
@@ -178,7 +178,7 @@ export const VCalendarDaily = defineComponent({
       return (
         <div class="v-calendar-daily__day-container">
           { genBodyIntervals() }
-          { renderSlot(slots.days, undefined, genDays) }
+          { renderSlot(slots.days, genDays) }
         </div>
       )
     }
@@ -203,7 +203,7 @@ export const VCalendarDaily = defineComponent({
     }
 
     function genDayBody (day: CalendarTimestamp) {
-      return slots['day-body']?.(base.getSlotScope(day)) ?? []
+      return renderSlot(slots['day-body'], base.getSlotScope(day), () => [])
     }
 
     function genDayIntervals (index: number) {

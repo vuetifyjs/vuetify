@@ -287,13 +287,13 @@ export const VField = genericComponent<new <T>(
             <div key="prepend" class="v-field__prepend-inner">
               { slots['prepend-inner']
                 ? slots['prepend-inner'](slotProps.value)
-                : (props.prependInnerIcon && (
+                : (props.prependInnerIcon ? (
                   <InputIcon
                     key="prepend-icon"
                     name="prependInner"
                     color={ iconColor.value }
                   />
-                ))
+                ) : undefined)
               }
             </div>
           ) : undefined }
@@ -389,13 +389,13 @@ export const VField = genericComponent<new <T>(
             <div key="append" class="v-field__append-inner">
               { slots['append-inner']
                 ? slots['append-inner'](slotProps.value)
-                : (props.appendInnerIcon && (
+                : (props.appendInnerIcon ? (
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
                     color={ iconColor.value }
                   />
-                ))
+                ) : undefined)
               }
             </div>
           ) : undefined }
