@@ -167,17 +167,17 @@ export const VSwitch = genericComponent<new <T>(
                         style={ backgroundColorStyles.value }
                         onClick={ onTrackClick }
                       >
-                        { slots['track-true'] && (
+                        { slots['track-true'] ? (
                           <div key="prepend" class="v-switch__track-true">
                             { slots['track-true'](slotProps) }
                           </div>
-                        )}
+                        ) : undefined }
 
-                        { slots['track-false'] && (
+                        { slots['track-false'] ? (
                           <div key="append" class="v-switch__track-false">
                             { slots['track-false'](slotProps) }
                           </div>
-                        )}
+                        ) : undefined }
                       </div>
                     ),
                     input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (

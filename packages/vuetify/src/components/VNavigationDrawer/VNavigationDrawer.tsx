@@ -255,7 +255,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             { ...scopeId }
             { ...attrs }
           >
-            { hasImage && (
+            { hasImage ? (
               <div key="image" class="v-navigation-drawer__img">
                 { !slots.image ? (
                   <VImg
@@ -281,27 +281,27 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                   />
                 )}
               </div>
-            )}
+            ) : undefined }
 
-            { slots.prepend && (
+            { slots.prepend ? (
               <div class="v-navigation-drawer__prepend">
                 { slots.prepend?.() }
               </div>
-            )}
+            ) : undefined }
 
             <div class="v-navigation-drawer__content">
               { slots.default?.() }
             </div>
 
-            { slots.append && (
+            { slots.append ? (
               <div class="v-navigation-drawer__append">
                 { slots.append?.() }
               </div>
-            )}
+            ) : undefined }
           </props.tag>
 
           <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
+            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim ? (
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
@@ -311,7 +311,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 }}
                 { ...scopeId }
               />
-            )}
+            ) : undefined }
           </Transition>
         </>
       )

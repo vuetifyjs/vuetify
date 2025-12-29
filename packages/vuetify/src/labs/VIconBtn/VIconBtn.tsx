@@ -200,7 +200,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             )}
           </div>
 
-          { !!props.loading && (
+          { props.loading ? (
             <span key="loader" class="v-icon-btn__loader">
               { slots.loader?.() ?? (
                 <VProgressCircular
@@ -211,7 +211,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
                 />
               )}
             </span>
-          )}
+          ) : undefined }
         </props.tag>
       )
     })

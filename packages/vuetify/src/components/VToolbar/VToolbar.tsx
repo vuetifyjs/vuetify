@@ -144,7 +144,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             props.style,
           ]}
         >
-          { hasImage && (
+          { hasImage ? (
             <div key="image" class="v-toolbar__image">
               { !slots.image ? (
                 <VImg
@@ -166,7 +166,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 />
               )}
             </div>
-          )}
+          ) : undefined }
 
           <VDefaultsProvider
             defaults={{
@@ -179,25 +179,25 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
               class="v-toolbar__content"
               style={{ height: convertToUnit(contentHeight.value) }}
             >
-              { slots.prepend && (
+              { slots.prepend ? (
                 <div class="v-toolbar__prepend">
                   { slots.prepend?.() }
                 </div>
-              )}
+              ) : undefined }
 
-              { hasTitle && (
+              { hasTitle ? (
                 <VToolbarTitle key="title" text={ props.title }>
                   {{ text: slots.title }}
                 </VToolbarTitle>
-              )}
+              ) : undefined }
 
               { slots.default?.() }
 
-              { slots.append && (
+              { slots.append ? (
                 <div class="v-toolbar__append">
                   { slots.append?.() }
                 </div>
-              )}
+              ) : undefined }
             </div>
           </VDefaultsProvider>
 
@@ -209,14 +209,14 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             }}
           >
             <VExpandTransition>
-              { isExtended.value && (
+              { isExtended.value ? (
                 <div
                   class="v-toolbar__extension"
                   style={{ height: convertToUnit(extensionHeight.value) }}
                 >
                   { extension }
                 </div>
-              )}
+              ) : undefined }
             </VExpandTransition>
           </VDefaultsProvider>
         </props.tag>

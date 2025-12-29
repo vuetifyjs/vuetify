@@ -414,7 +414,7 @@ export const VSlideGroup = genericComponent<new <T>(
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >
-        { hasAffixes.value && (
+        { hasAffixes.value ? (
           <div
             key="prev"
             class={[
@@ -430,7 +430,7 @@ export const VSlideGroup = genericComponent<new <T>(
               </VFadeTransition>
             )}
           </div>
-        )}
+        ) : undefined }
 
         <div
           key="container"
@@ -452,7 +452,7 @@ export const VSlideGroup = genericComponent<new <T>(
           </div>
         </div>
 
-        { hasAffixes.value && (
+        { hasAffixes.value ? (
           <div
             key="next"
             class={[
@@ -468,7 +468,7 @@ export const VSlideGroup = genericComponent<new <T>(
               </VFadeTransition>
             )}
           </div>
-        )}
+        ) : undefined }
       </props.tag>
     ))
 

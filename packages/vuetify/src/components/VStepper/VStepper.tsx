@@ -179,7 +179,7 @@ export const VStepper = genericComponent<new <TModel>(
           ]}
           style={ props.style }
         >
-          { hasHeader && (
+          { hasHeader ? (
             <VStepperHeader key="stepper-header">
               { items.value.map(({ raw, ...item }, index) => (
                 <>
@@ -197,9 +197,9 @@ export const VStepper = genericComponent<new <TModel>(
                 </>
               ))}
             </VStepperHeader>
-          )}
+          ) : undefined }
 
-          { hasWindow && (
+          { hasWindow ? (
             <VStepperWindow key="stepper-window">
               { items.value.map(item => (
                 <VStepperWindowItem
@@ -210,11 +210,11 @@ export const VStepper = genericComponent<new <TModel>(
                 />
               ))}
             </VStepperWindow>
-          )}
+          ) : undefined }
 
           { slots.default?.({ prev, next }) }
 
-          { hasActions && (
+          { hasActions ? (
             slots.actions?.({ next, prev }) ?? (
               <VStepperActions
                 key="stepper-actions"
@@ -223,7 +223,7 @@ export const VStepper = genericComponent<new <TModel>(
                 v-slots={ slots }
               />
             )
-          )}
+          ) : undefined }
         </VSheet>
       )
     })

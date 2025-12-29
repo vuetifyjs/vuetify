@@ -65,21 +65,21 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
           style={ backgroundColorStyles.value }
           onClick={ onClick }
         >
-          { slots.prepend && (
+          { slots.prepend ? (
             <div key="prepend" class="v-date-picker-header__prepend">
               { slots.prepend() }
             </div>
-          )}
+          ) : undefined }
 
-          { hasContent && (
+          { hasContent ? (
             <MaybeTransition key="content" name={ props.transition }>
               <div key={ props.header } class="v-date-picker-header__content">
                 { slots.default?.() ?? props.header }
               </div>
             </MaybeTransition>
-          )}
+          ) : undefined }
 
-          { hasAppend && (
+          { hasAppend ? (
             <div class="v-date-picker-header__append">
               { !slots.append ? (
                 <VBtn
@@ -103,7 +103,7 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          )}
+          ) : undefined }
         </div>
       )
     })

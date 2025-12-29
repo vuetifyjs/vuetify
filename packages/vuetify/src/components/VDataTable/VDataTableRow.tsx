@@ -89,7 +89,7 @@ export const VDataTableRow = genericComponent<new <T>(
         onContextmenu={ props.onContextmenu as any }
         onDblclick={ props.onDblclick as any }
       >
-        { props.item && columns.value.map((column, i) => {
+        { props.item ? columns.value.map((column, i) => {
           const item = props.item!
           const slotName = `item.${column.key}` as const
           const headerSlotName = `header.${column.key}` as const
@@ -221,7 +221,7 @@ export const VDataTableRow = genericComponent<new <T>(
               }}
             </VDataTableColumn>
           )
-        })}
+        }) : undefined }
       </tr>
     ))
   },

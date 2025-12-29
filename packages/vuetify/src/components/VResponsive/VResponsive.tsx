@@ -60,9 +60,9 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
 
         { slots.additional?.() }
 
-        { slots.default && (
+        { slots.default ? (
           <div class={['v-responsive__content', props.contentClass]}>{ slots.default() }</div>
-        )}
+        ) : undefined }
       </div>
     ))
 

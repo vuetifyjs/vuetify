@@ -322,7 +322,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-list-item__prepend">
               { !slots.prepend ? (
                 <>
@@ -366,25 +366,25 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
               <div class="v-list-item__spacer" />
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-list-item__content" data-no-activator="">
-            { hasTitle && (
+            { hasTitle ? (
               <VListItemTitle key="title">
                 { slots.title?.({ title: props.title }) ?? toDisplayString(props.title) }
               </VListItemTitle>
-            )}
+            ) : undefined }
 
-            { hasSubtitle && (
+            { hasSubtitle ? (
               <VListItemSubtitle key="subtitle">
                 { slots.subtitle?.({ subtitle: props.subtitle }) ?? toDisplayString(props.subtitle) }
               </VListItemSubtitle>
-            )}
+            ) : undefined }
 
             { slots.default?.(slotProps.value) }
           </div>
 
-          { hasAppend && (
+          { hasAppend ? (
             <div key="append" class="v-list-item__append">
               { !slots.append ? (
                 <>
@@ -428,7 +428,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
               <div class="v-list-item__spacer" />
             </div>
-          )}
+          ) : undefined }
         </Tag>
       )
     })

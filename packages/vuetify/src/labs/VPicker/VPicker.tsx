@@ -57,7 +57,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
           ]}
           style={ props.style }
         >
-          { !props.hideHeader && (
+          { !props.hideHeader ? (
             <div
               key="header"
               class={[
@@ -68,25 +68,25 @@ export const VPicker = genericComponent<VPickerSlots>()({
                 backgroundColorStyles.value,
               ]}
             >
-              { hasTitle && (
+              { hasTitle ? (
                 <VPickerTitle key="picker-title">
                   { slots.title?.() ?? props.title }
                 </VPickerTitle>
-              )}
+              ) : undefined }
 
-              { slots.header && (
+              { slots.header ? (
                 <div class="v-picker__header">
                   { slots.header() }
                 </div>
-              )}
+              ) : undefined }
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-picker__body">
             { slots.default?.() }
           </div>
 
-          { slots.actions && (
+          { slots.actions ? (
             <VDefaultsProvider
               defaults={{
                 VBtn: {
@@ -99,7 +99,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
                 { slots.actions() }
               </div>
             </VDefaultsProvider>
-          )}
+          ) : undefined }
         </VSheet>
       )
     })

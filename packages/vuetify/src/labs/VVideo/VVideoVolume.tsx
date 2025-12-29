@@ -84,7 +84,7 @@ export const VVideoVolume = genericComponent()({
               { ...attrs }
             >
               <VIcon />
-              { !props.inline && (
+              { !props.inline ? (
                 <VMenu
                   offset="8"
                   activator="parent"
@@ -108,10 +108,10 @@ export const VVideoVolume = genericComponent()({
                     />
                   </div>
                 </VMenu>
-              )}
+              ) : undefined }
             </VIconBtn>
 
-            { props.inline && (
+            { props.inline ? (
               <VSlider
                 class="v-video-volume-inline__slider"
                 minWidth="50"
@@ -122,7 +122,7 @@ export const VVideoVolume = genericComponent()({
                 { ...sliderDefaults }
                 { ...props.sliderProps }
               />
-            )}
+            ) : undefined }
         </div>
       )
     })

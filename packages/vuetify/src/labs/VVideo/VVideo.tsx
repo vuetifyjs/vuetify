@@ -417,7 +417,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               props.variant === 'background' ? [] : dimensionStyles.value,
             ]}
           >
-            { (props.eager || triggered.value) && (
+            { (props.eager || triggered.value) ? (
               <video
                 key="video-element"
                 class={[
@@ -441,24 +441,23 @@ export const VVideo = genericComponent<VVideoSlots>()({
               >
                 { slots.sources?.() ?? <source src={ props.src } type={ props.type } /> }
               </video>
-            )}
+            ) : undefined }
             <Transition name="fade-transition">
-              { activeOverlays.playIcon && (
+              { activeOverlays.playIcon ? (
                 <div class="v-video__overlay-fill">
                   { overlayPlayIcon }
                 </div>
-              )}
+              ) : undefined }
             </Transition>
             { props.variant === 'player' &&
-              !!slots.header &&
-              (
+              !!slots.header ? (
                 <div key="header" class="v-video__header">
                   { slots.header() }
                 </div>
-              )
+              ) : undefined
             }
             <MaybeTransition transition={ posterTransition }>
-              { activeOverlays.poster && (
+              { activeOverlays.poster ? (
                 <div class="v-video__overlay-fill">
                   <VImg cover src={ props.image }>
                     <div
@@ -467,20 +466,20 @@ export const VVideo = genericComponent<VVideoSlots>()({
                         ...roundedContainerClasses.value,
                       ]}
                     >
-                      { props.variant === 'player' && overlayPlayIcon }
+                      { props.variant === 'player' ? overlayPlayIcon : undefined }
                     </div>
                   </VImg>
                 </div>
-              )}
+              ) : undefined }
             </MaybeTransition>
-            { activeOverlays.loading && (
+            { activeOverlays.loading ? (
               <div class="v-video__overlay-fill">
                 { loadingIndicator }
               </div>
-            )}
+            ) : undefined }
           </div>
           <MaybeTransition key="actions" transition={ props.controlsTransition }>
-            { showControls && (
+            { showControls ? (
               <VVideoControls
                 ref={ controlsRef }
                 class={ roundedControlsClasses.value }
@@ -493,7 +492,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                   append: slots.append,
                 }}
               </VVideoControls>
-            )}
+            ) : undefined }
           </MaybeTransition>
         </div>
       )

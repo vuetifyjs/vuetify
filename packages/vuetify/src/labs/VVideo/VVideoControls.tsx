@@ -341,7 +341,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     class={ pillClasses }
                     style={ pillStyles }
                   >
-                    { !props.hideVolume && (
+                    { !props.hideVolume ? (
                       <VVideoVolume
                         key="volume-control"
                         sliderProps={{ color: props.color }}
@@ -351,16 +351,16 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         onClick={ () => props.volumeProps?.inline && toggleMuted() }
                         { ...props.volumeProps }
                       />
-                    )}
+                    ) : undefined }
                     { slots.append?.(slotProps) }
-                    { !props.hideFullscreen && (
+                    { !props.hideFullscreen ? (
                       <VIconBtn
                         icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
                         aria-label={ labels.value.fullscreenAction }
                         v-tooltip={[labels.value.fullscreenAction, 'top']}
                         onClick={ toggleFullscreen }
                       />
-                    )}
+                    ) : undefined }
                   </div>
                 )}
 

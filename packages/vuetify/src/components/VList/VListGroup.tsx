@@ -108,13 +108,13 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         ]}
         style={ props.style }
       >
-        { slots.activator && (
+        { slots.activator ? (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
               { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
-        )}
+        ) : undefined }
 
         <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
           { renderWhenClosed.value

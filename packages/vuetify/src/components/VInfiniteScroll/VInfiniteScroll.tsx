@@ -272,25 +272,25 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             { renderSide('start', startStatus.value) }
           </div>
 
-          { hasStartIntersect && intersectMode && (
+          { hasStartIntersect && intersectMode ? (
             <VInfiniteScrollIntersect
               key="start"
               side="start"
               onIntersect={ handleIntersect }
               rootMargin={ margin.value }
             />
-          )}
+          ) : undefined }
 
           { slots.default?.() }
 
-          { hasEndIntersect && intersectMode && (
+          { hasEndIntersect && intersectMode ? (
             <VInfiniteScrollIntersect
               key="end"
               side="end"
               onIntersect={ handleIntersect }
               rootMargin={ margin.value }
             />
-          )}
+          ) : undefined }
 
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }

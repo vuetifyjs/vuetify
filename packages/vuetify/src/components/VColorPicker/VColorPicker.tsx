@@ -166,7 +166,7 @@ export const VColorPicker = defineComponent({
 
                 { (!props.hideSliders || !props.hideInputs) && (
                   <div key="controls" class="v-color-picker__controls">
-                    { !props.hideSliders && (
+                    { !props.hideSliders ? (
                       <VColorPickerPreview
                         key="preview"
                         color={ currentColor.value }
@@ -176,9 +176,9 @@ export const VColorPicker = defineComponent({
                         hideEyeDropper={ props.hideEyeDropper }
                         eyeDropperIcon={ props.eyeDropperIcon }
                       />
-                    )}
+                    ) : undefined }
 
-                    { !props.hideInputs && (
+                    { !props.hideInputs ? (
                       <VColorPickerEdit
                         key="edit"
                         modes={ props.modes }
@@ -188,7 +188,7 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
                       />
-                    )}
+                    ) : undefined }
                   </div>
                 )}
 

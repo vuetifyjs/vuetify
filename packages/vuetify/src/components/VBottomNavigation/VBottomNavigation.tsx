@@ -135,11 +135,11 @@ export const VBottomNavigation = genericComponent<new <T>(
             props.style,
           ]}
         >
-          { slots.default && (
+          { slots.default ? (
             <div class="v-bottom-navigation__content">
               { slots.default() }
             </div>
-          )}
+          ) : undefined }
         </props.tag>
       )
     })

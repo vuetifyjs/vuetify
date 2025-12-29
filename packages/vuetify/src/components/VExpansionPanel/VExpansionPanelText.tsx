@@ -37,11 +37,11 @@ export const VExpansionPanelText = genericComponent()({
           style={ props.style }
           v-show={ expansionPanel.isSelected.value }
         >
-          { slots.default && hasContent.value && (
+          { slots.default && hasContent.value ? (
             <div class="v-expansion-panel-text__wrapper">
               { slots.default?.() }
             </div>
-          )}
+          ) : undefined }
         </div>
       </VExpandTransition>
     ))

@@ -112,13 +112,11 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             ]}
             style={{ [startDir.value]: directionValue }}
           >
-            {
-              (tick.label || slots['tick-label']) && (
-                <div class="v-slider-track__tick-label">
-                  { slots['tick-label']?.({ tick, index }) ?? tick.label }
-                </div>
-              )
-            }
+            { (tick.label || slots['tick-label']) ? (
+              <div class="v-slider-track__tick-label">
+                { slots['tick-label']?.({ tick, index }) ?? tick.label }
+              </div>
+            ) : undefined }
           </div>
         )
       })
@@ -164,7 +162,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             }}
           />
 
-          { showTicks.value && (
+          { showTicks.value ? (
             <div
               class={[
                 'v-slider-track__ticks',
@@ -175,7 +173,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             >
               { computedTicks.value }
             </div>
-          )}
+          ) : undefined }
         </div>
       )
     })

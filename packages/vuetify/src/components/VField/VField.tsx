@@ -282,7 +282,7 @@ export const VField = genericComponent<new <T>(
             v-slots={{ default: slots.loader }}
           />
 
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-field__prepend-inner">
               { slots['prepend-inner']
                 ? slots['prepend-inner'](slotProps.value)
@@ -295,10 +295,10 @@ export const VField = genericComponent<new <T>(
                 ))
               }
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value ? (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -310,9 +310,9 @@ export const VField = genericComponent<new <T>(
               >
                 { label() }
               </VFieldLabel>
-            )}
+            ) : undefined}
 
-            { hasLabel.value && (
+            { hasLabel.value ? (
               <VFieldLabel
                 key="label"
                 ref={ labelRef }
@@ -322,7 +322,7 @@ export const VField = genericComponent<new <T>(
               >
                 { label() }
               </VFieldLabel>
-            )}
+            ) : undefined }
 
             { slots.default?.({
               ...slotProps.value,
@@ -342,7 +342,7 @@ export const VField = genericComponent<new <T>(
             )}
           </div>
 
-          { hasClear && (
+          { hasClear ? (
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
@@ -380,9 +380,9 @@ export const VField = genericComponent<new <T>(
                 </VDefaultsProvider>
               </div>
             </VExpandXTransition>
-          )}
+          ) : undefined }
 
-          { hasAppend && (
+          { hasAppend ? (
             <div key="append" class="v-field__append-inner">
               { slots['append-inner']
                 ? slots['append-inner'](slotProps.value)
@@ -395,7 +395,7 @@ export const VField = genericComponent<new <T>(
                 ))
               }
             </div>
-          )}
+          ) : undefined }
 
           <div
             class={[
@@ -404,7 +404,7 @@ export const VField = genericComponent<new <T>(
             ]}
             style={ textColorStyles.value }
           >
-            { isOutlined && (
+            { isOutlined ? (
               <>
                 <div class="v-field__outline__start" />
 
@@ -418,13 +418,13 @@ export const VField = genericComponent<new <T>(
 
                 <div class="v-field__outline__end" />
               </>
-            )}
+            ) : undefined }
 
-            { isPlainOrUnderlined.value && hasFloatingLabel.value && (
+            { isPlainOrUnderlined.value && hasFloatingLabel.value ? (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                 { label() }
               </VFieldLabel>
-            )}
+            ) : undefined }
           </div>
         </div>
       )

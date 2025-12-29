@@ -190,7 +190,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   />
                 )}
 
-                { isExpanded(item) && slots['expanded-row']?.(slotProps) }
+                { isExpanded(item) ? slots['expanded-row']?.(slotProps) : undefined }
               </Fragment>
             )
           })}

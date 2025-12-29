@@ -204,7 +204,7 @@ export const VInput = genericComponent<new <T>(
             props.style,
           ]}
         >
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-input__prepend">
               { slots.prepend
                 ? slots.prepend(slotProps.value)
@@ -217,15 +217,15 @@ export const VInput = genericComponent<new <T>(
                 ))
               }
             </div>
-          )}
+          ) : undefined }
 
-          { slots.default && (
+          { slots.default ? (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          )}
+          ) : undefined }
 
-          { hasAppend && (
+          { hasAppend ? (
             <div key="append" class="v-input__append">
               { slots.append
                 ? slots.append(slotProps.value)
@@ -238,9 +238,9 @@ export const VInput = genericComponent<new <T>(
                 ))
               }
             </div>
-          )}
+          ) : undefined }
 
-          { hasDetails.value && (
+          { hasDetails.value ? (
             <div
               id={ messagesId.value }
               class="v-input__details"
@@ -255,7 +255,7 @@ export const VInput = genericComponent<new <T>(
 
               { slots.details?.(slotProps.value) }
             </div>
-          )}
+          ) : undefined }
         </div>
       )
     })

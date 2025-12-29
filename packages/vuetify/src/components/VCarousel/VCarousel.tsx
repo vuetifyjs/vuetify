@@ -158,7 +158,7 @@ export const VCarousel = genericComponent<new <T>(
                       right: props.verticalDelimiters === 'right' ? 0 : 'auto',
                     }}
                   >
-                    { group.items.value.length > 0 && (
+                    { group.items.value.length > 0 ? (
                       <VDefaultsProvider
                         defaults={{
                           VBtn: {
@@ -187,7 +187,7 @@ export const VCarousel = genericComponent<new <T>(
                             : (<VBtn { ...item } { ...props } />)
                         })}
                       </VDefaultsProvider>
-                    )}
+                    ) : undefined }
                   </div>
                 )}
 

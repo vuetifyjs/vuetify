@@ -217,14 +217,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { column.sortable && !props.disableSort && (
+                  { column.sortable && !props.disableSort ? (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
                       icon={ getSortIcon(column) }
                     />
-                  )}
-                  { props.multiSort && isSorted(column) && (
+                  ) : undefined }
+                  { props.multiSort && isSorted(column) ? (
                     <div
                       key="badge"
                       class={[
@@ -235,7 +235,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     >
                       { sortBy.value.findIndex(x => x.key === column.key) + 1 }
                     </div>
-                  )}
+                  ) : undefined }
                 </div>
               )
             },

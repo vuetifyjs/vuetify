@@ -108,7 +108,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
             props.style,
           ]}
         >
-          { hasMedia && (
+          { hasMedia ? (
             <div key="media" class="v-empty-state__media">
               { !slots.media ? (
                 <>
@@ -145,21 +145,21 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          )}
+          ) : undefined }
 
-          { hasHeadline && (
+          { hasHeadline ? (
             <div key="headline" class="v-empty-state__headline">
               { slots.headline?.() ?? props.headline }
             </div>
-          )}
+          ) : undefined }
 
-          { hasTitle && (
+          { hasTitle ? (
             <div key="title" class="v-empty-state__title">
               { slots.title?.() ?? props.title }
             </div>
-          )}
+          ) : undefined }
 
-          { hasText && (
+          { hasText ? (
             <div
               key="text"
               class="v-empty-state__text"
@@ -169,15 +169,15 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
             >
               { slots.text?.() ?? props.text }
             </div>
-          )}
+          ) : undefined }
 
-          { slots.default && (
+          { slots.default ? (
             <div key="content" class="v-empty-state__content">
               { slots.default() }
             </div>
-          )}
+          ) : undefined }
 
-          { hasActions && (
+          { hasActions ? (
             <div key="actions" class="v-empty-state__actions">
               <VDefaultsProvider
                 defaults={{
@@ -197,7 +197,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 }
               </VDefaultsProvider>
             </div>
-          )}
+          ) : undefined }
         </div>
       )
     })

@@ -219,7 +219,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
               >
                 <table>
                   { slots.colgroup?.(slotProps.value) }
-                  { !props.hideDefaultHeader && (
+                  { !props.hideDefaultHeader ? (
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
@@ -227,9 +227,9 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         v-slots={ slots }
                       />
                     </thead>
-                  )}
+                  ) : undefined }
                   { slots.thead?.(slotProps.value) }
-                  { !props.hideDefaultBody && (
+                  { !props.hideDefaultBody ? (
                     <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
@@ -272,7 +272,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
                     </tbody>
-                  )}
+                  ) : undefined }
                   { slots.tbody?.(slotProps.value) }
                   { slots.tfoot?.(slotProps.value) }
                 </table>

@@ -545,7 +545,7 @@ export const VCombobox = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  { hasList && (
+                  { hasList ? (
                     <VList
                       ref={ listRef }
                       filterable
@@ -566,9 +566,9 @@ export const VCombobox = genericComponent<new <
                     >
                       { slots['prepend-item']?.() }
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                      { !displayItems.value.length && !props.hideNoData ? (slots['no-data']?.() ?? (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                      )) : undefined }
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
@@ -636,7 +636,7 @@ export const VCombobox = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  )}
+                  ) : undefined }
                 </VMenu>
 
                 { model.value.map((item, index) => {
@@ -716,9 +716,9 @@ export const VCombobox = genericComponent<new <
                         slotContent ?? (
                           <span class="v-combobox__selection-text">
                             { item.title }
-                            { props.multiple && (index < model.value.length - 1) && (
+                            { props.multiple && (index < model.value.length - 1) ? (
                               <span class="v-combobox__selection-comma">,</span>
-                            )}
+                            ) : undefined }
                           </span>
                         )
                       )}

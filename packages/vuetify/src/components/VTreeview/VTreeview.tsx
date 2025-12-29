@@ -193,9 +193,9 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
-          { visibleIds.value?.size === 0 && !props.hideNoData && (
+          { visibleIds.value?.size === 0 && !props.hideNoData ? (
             slots['no-data']?.() ?? (<VListItem key="no-data" title={ t(props.noDataText) } />)
-          )}
+          ) : undefined }
           <VTreeviewChildren
             { ...treeviewChildrenProps }
             density={ props.density }

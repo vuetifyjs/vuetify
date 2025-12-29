@@ -244,7 +244,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
         >
           { genOverlays(false, 'v-snackbar') }
 
-          { props.timer && !isHovering.value && (
+          { props.timer && !isHovering.value ? (
             <div key="timer" class="v-snackbar__timer">
               <VProgressLinear
                 ref={ timerRef }
@@ -253,9 +253,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 modelValue={ countdown.time.value }
               />
             </div>
-          )}
+          ) : undefined }
 
-          { hasContent && (
+          { hasContent ? (
             <div
               key="content"
               class="v-snackbar__content"
@@ -266,9 +266,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
               { slots.default?.() }
             </div>
-          )}
+          ) : undefined }
 
-          { slots.actions && (
+          { slots.actions ? (
             <VDefaultsProvider
               defaults={{
                 VBtn: {
@@ -282,7 +282,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 { slots.actions({ isActive }) }
               </div>
             </VDefaultsProvider>
-          )}
+          ) : undefined }
         </VOverlay>
       )
     })

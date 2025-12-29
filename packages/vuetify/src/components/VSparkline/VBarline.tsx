@@ -163,7 +163,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     rx={ smooth.value }
                     ry={ smooth.value }
                 >
-                  { props.autoDraw && !PREFERS_REDUCED_MOTION() && (
+                  { props.autoDraw && !PREFERS_REDUCED_MOTION() ? (
                     <>
                       <animate
                         attributeName="y"
@@ -180,13 +180,13 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                         fill="freeze"
                       />
                     </>
-                  )}
+                  ) : undefined }
                 </rect>
               ))
             }
           </clipPath>
 
-          { hasLabels.value && (
+          { hasLabels.value ? (
             <g
               key="labels"
               style={{
@@ -207,7 +207,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                 ))
               }
             </g>
-          )}
+          ) : undefined }
 
           <g
             clip-path={ `url(#${id.value}-clip)` }

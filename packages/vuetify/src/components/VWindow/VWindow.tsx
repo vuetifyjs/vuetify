@@ -320,7 +320,7 @@ export const VWindow = genericComponent<new <T>(
         >
           { slots.default?.({ group }) }
 
-          { props.showArrows !== false && (
+          { props.showArrows !== false ? (
             <div
               class={[
                 'v-window__controls',
@@ -331,7 +331,7 @@ export const VWindow = genericComponent<new <T>(
             >
               { arrows.value }
             </div>
-          )}
+          ) : undefined }
         </div>
 
         { slots.additional?.({ group }) }

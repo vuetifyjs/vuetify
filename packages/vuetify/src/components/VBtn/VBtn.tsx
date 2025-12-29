@@ -233,7 +233,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && hasPrepend && (
+          { !props.icon && hasPrepend ? (
             <span key="prepend" class="v-btn__prepend">
               { !slots.prepend ? (
                 <VIcon
@@ -253,7 +253,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 />
               )}
             </span>
-          )}
+          ) : undefined }
 
           <span class="v-btn__content" data-no-activator="">
             { (!slots.default && hasIcon) ? (
@@ -276,7 +276,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             )}
           </span>
 
-          { !props.icon && hasAppend && (
+          { !props.icon && hasAppend ? (
             <span key="append" class="v-btn__append">
               { !slots.append ? (
                 <VIcon
@@ -296,9 +296,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 />
               )}
             </span>
-          )}
+          ) : undefined }
 
-          { !!props.loading && (
+          { props.loading ? (
             <span key="loader" class="v-btn__loader">
               { slots.loader?.() ?? (
                 <VProgressCircular
@@ -308,7 +308,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 />
               )}
             </span>
-          )}
+          ) : undefined }
         </Tag>,
         [[
           vRipple,

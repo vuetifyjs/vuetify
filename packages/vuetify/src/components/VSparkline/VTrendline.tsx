@@ -189,7 +189,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             </linearGradient>
           </defs>
 
-          { hasLabels.value && (
+          { hasLabels.value ? (
             <g
               key="labels"
               style={{
@@ -210,7 +210,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                 ))
               }
             </g>
-          )}
+          ) : undefined }
 
           <path
             ref={ path }
@@ -219,13 +219,13 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
           />
 
-          { props.fill && (
+          { props.fill ? (
             <path
               d={ genPath(false) }
               fill="none"
               stroke={ props.color ?? props.gradient?.[0] }
             />
-          )}
+          ) : undefined }
         </svg>
       )
     })

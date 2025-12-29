@@ -299,11 +299,11 @@ export const VPie = genericComponent<VPieSlots>()({
 
       const avatarSlot = ({ item }: { item: PieItem }) => (
         <VAvatar color={ item.color } start>
-          { item.pattern && (
+          { item.pattern ? (
             <svg height="40" width="40">
               <rect width="40" height="40" fill={ item.pattern } />
             </svg>
-          )}
+          ) : undefined }
         </VAvatar>
       )
 
@@ -375,7 +375,7 @@ export const VPie = genericComponent<VPieSlots>()({
             </div>
           </div>
 
-          { legendConfig.value.visible && (
+          { legendConfig.value.visible ? (
             <VDefaultsProvider key="legend" defaults={ legendDefaults }>
               <div class="v-pie__legend">
                 { slots.legend?.({ isActive: isVisible, toggle, items: arcs.value, total: total.value }) ?? (
@@ -401,8 +401,8 @@ export const VPie = genericComponent<VPieSlots>()({
                 )}
               </div>
             </VDefaultsProvider>
-          )}
-          { !!props.tooltip && (
+          ) : undefined }
+          { props.tooltip ? (
             <VDefaultsProvider defaults={ tooltipDefaults }>
               <VPieTooltip
                 { ...tooltipProps }
@@ -412,7 +412,7 @@ export const VPie = genericComponent<VPieSlots>()({
                 }}
               />
             </VDefaultsProvider>
-          )}
+          ) : undefined }
         </div>
       )
     }

@@ -154,11 +154,11 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           />
         </svg>
 
-        { slots.default && (
+        { slots.default ? (
           <div class="v-progress-circular__content">
             { slots.default({ value: normalizedValue.value }) }
           </div>
-        )}
+        ) : undefined }
       </props.tag>
     ))
 

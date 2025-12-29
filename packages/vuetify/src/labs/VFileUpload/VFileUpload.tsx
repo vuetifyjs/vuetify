@@ -232,7 +232,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             onClick={ !hasBrowse ? onClick : undefined }
             { ...rootAttrs }
           >
-            { hasIcon && (
+            { hasIcon ? (
               <div key="icon" class="v-file-upload-icon">
                 { !slots.icon ? (
                   <VIcon
@@ -252,15 +252,15 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   </VDefaultsProvider>
                 )}
               </div>
-            )}
+            ) : undefined }
 
-            { hasTitle && (
+            { hasTitle ? (
               <div key="title" class="v-file-upload-title">
                 { slots.title?.() ?? t(props.title) }
               </div>
-            )}
+            ) : undefined }
 
-            { props.density === 'default' && (
+            { props.density === 'default' ? (
               <>
                 <div key="upload-divider" class="v-file-upload-divider">
                   { slots.divider?.() ?? (
@@ -303,7 +303,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   </div>
                 )}
               </>
-            )}
+            ) : undefined }
 
             <VOverlay
               modelValue={ isDragging.value }

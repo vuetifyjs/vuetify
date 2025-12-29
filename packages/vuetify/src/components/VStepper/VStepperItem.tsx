@@ -150,7 +150,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           ]}
           onClick={ onClick }
         >
-          { isClickable.value && genOverlays(true, 'v-stepper-item') }
+          { isClickable.value ? genOverlays(true, 'v-stepper-item') : undefined }
 
           <VAvatar
             key="stepper-avatar"
@@ -166,23 +166,23 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           </VAvatar>
 
           <div class="v-stepper-item__content">
-            { hasTitle && (
+            { hasTitle ? (
               <div
                 key="title"
                 class="v-stepper-item__title"
               >
                 { slots.title?.(slotProps.value) ?? props.title }
               </div>
-            )}
+            ) : undefined }
 
-            { hasSubtitle && (
+            { hasSubtitle ? (
               <div
                 key="subtitle"
                 class="v-stepper-item__subtitle"
               >
                 { slots.subtitle?.(slotProps.value) ?? props.subtitle }
               </div>
-            )}
+            ) : undefined }
 
             { slots.default?.(slotProps.value) }
           </div>

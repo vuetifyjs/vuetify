@@ -238,7 +238,7 @@ export const VChip = genericComponent<VChipSlots>()({
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
-          { hasFilter && (
+          { hasFilter ? (
             <VExpandXTransition key="filter">
               <div
                 class="v-chip__filter"
@@ -261,9 +261,9 @@ export const VChip = genericComponent<VChipSlots>()({
                 )}
               </div>
             </VExpandXTransition>
-          )}
+          ) : undefined }
 
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-chip__prepend">
               { !slots.prepend ? (
                 <>
@@ -301,20 +301,20 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-chip__content" data-no-activator="">
-            { slots.default?.({
+            { renderSlot(slots.default, {
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
               select: group?.select,
               toggle: group?.toggle,
               value: group?.value.value,
               disabled: props.disabled,
-            }) ?? toDisplayString(props.text)}
+            }, toDisplayString(props.text))}
           </div>
 
-          { hasAppend && (
+          { hasAppend ? (
             <div key="append" class="v-chip__append">
               { !slots.append ? (
                 <>
@@ -352,9 +352,9 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </div>
-          )}
+          ) : undefined }
 
-          { hasClose && (
+          { hasClose ? (
             <button
               key="close"
               class="v-chip__close"
@@ -381,7 +381,7 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </button>
-          )}
+          ) : undefined }
         </Tag>
       )
     }

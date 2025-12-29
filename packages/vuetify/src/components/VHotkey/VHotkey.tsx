@@ -380,9 +380,9 @@ export const VHotkey = genericComponent()({
                   ? renderKey(key, keyIndex)
                   : renderDivider(key, keyIndex)
               )}
-              { comboIndex < keyCombinations.value.length - 1 && (
+              { comboIndex < keyCombinations.value.length - 1 ? (
                 <span aria-hidden="true">&nbsp;</span>
-              )}
+              ) : undefined }
             </span>
           ))}
 

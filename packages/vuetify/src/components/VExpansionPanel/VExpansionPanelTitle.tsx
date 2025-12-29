@@ -109,7 +109,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
         { slots.default?.(slotProps.value) }
 
-        { !props.hideActions && (
+        { !props.hideActions ? (
           <VDefaultsProvider
             defaults={{
               VIcon: {
@@ -121,7 +121,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
               { slots.actions?.(slotProps.value) ?? <VIcon /> }
             </span>
           </VDefaultsProvider>
-        )}
+        ) : undefined }
       </button>
     ))
 

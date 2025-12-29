@@ -63,7 +63,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
         target={ props.target }
         contentClass="v-pie__tooltip-content"
       >
-        { !!props.item && (
+        { props.item ? (
           slots.default?.({ item: props.item }) ?? (
             <MaybeTransition transition={ props.transition } mode="out-in">
               <VListItem
@@ -79,7 +79,7 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
               />
             </MaybeTransition>
           )
-        )}
+        ) : undefined }
       </VTooltip>
     )
   },

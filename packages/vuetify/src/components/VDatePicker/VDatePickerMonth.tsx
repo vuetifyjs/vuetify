@@ -226,11 +226,11 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         class="v-date-picker-month"
         style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
       >
-        { props.showWeek && (
+        { props.showWeek ? (
           <div key="weeks" class="v-date-picker-month__weeks">
-            { !props.hideWeekdays && (
+            { !props.hideWeekdays ? (
               <div key="hide-week-days" class="v-date-picker-month__day">&nbsp;</div>
-            )}
+            ) : undefined }
             { weekNumbers.value.map(week => (
               <div
                 class={[
@@ -240,7 +240,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
               >{ week }</div>
             ))}
           </div>
-        )}
+        ) : undefined }
 
         <MaybeTransition name={ transition.value }>
           <div
@@ -248,14 +248,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
           >
-            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
+            { !props.hideWeekdays ? weekdayLabels.value.map(weekDay => (
               <div
                 class={[
                   'v-date-picker-month__day',
                   'v-date-picker-month__weekday',
                 ]}
               >{ weekDay }</div>
-            ))}
+            )) : undefined }
 
             { daysInMonth.value.map((item, i) => {
               const slotProps = {
@@ -297,14 +297,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >
-                  { (props.showAdjacentMonths || !item.isAdjacent) && (
+                  { (props.showAdjacentMonths || !item.isAdjacent) ? (
                     slots.day?.(slotProps) ?? (
                       <VBtn { ...slotProps.props }>
                         { item.localized }
                         { genEvents(item.isoDate) }
                       </VBtn>
                     )
-                  )}
+                  ) : undefined }
                 </div>
               )
             })}

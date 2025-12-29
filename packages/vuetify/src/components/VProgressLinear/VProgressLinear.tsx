@@ -174,7 +174,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         aria-valuenow={ props.indeterminate ? undefined : Math.min(parseFloat(progress.value), max.value) }
         onClick={ props.clickable && handleClick }
       >
-        { props.stream && (
+        { props.stream ? (
           <div
             key="stream"
             class={[
@@ -191,7 +191,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />
-        )}
+        ) : undefined }
 
         <div
           class={[
@@ -250,11 +250,11 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           )}
         </Transition>
 
-        { slots.default && (
+        { slots.default ? (
           <div class="v-progress-linear__content">
             { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
-        )}
+        ) : undefined }
       </props.tag>
     ))
 

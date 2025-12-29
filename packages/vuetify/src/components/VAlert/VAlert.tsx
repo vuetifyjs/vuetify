@@ -181,7 +181,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
         >
           { genOverlays(false, 'v-alert') }
 
-          { props.border && (
+          { props.border ? (
             <div
               key="border"
               class={[
@@ -190,9 +190,9 @@ export const VAlert = genericComponent<VAlertSlots>()({
               ]}
               style={ textColorStyles.value }
             />
-          )}
+          ) : undefined }
 
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-alert__prepend">
               { !slots.prepend ? (
                 <VIcon key="prepend-icon" { ...iconProps } />
@@ -205,27 +205,27 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 />
               )}
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-alert__content">
-            { hasTitle && (
+            { hasTitle ? (
               <VAlertTitle key="title">
                 { slots.title?.() ?? props.title }
               </VAlertTitle>
-            )}
+            ) : undefined }
 
             { slots.text?.() ?? props.text }
 
             { slots.default?.() }
           </div>
 
-          { slots.append && (
+          { slots.append ? (
             <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
-          )}
+          ) : undefined }
 
-          { hasClose && (
+          { hasClose ? (
             <div key="close" class="v-alert__close">
               { !slots.close ? (
                 <VBtn
@@ -250,7 +250,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          )}
+          ) : undefined }
         </props.tag>
       )
     }

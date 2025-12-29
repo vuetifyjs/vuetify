@@ -64,7 +64,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           ]}
           style={ props.style }
         >
-          { hasPrepend && (
+          { hasPrepend ? (
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (
                 <>
@@ -102,25 +102,25 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                 />
               )}
             </div>
-          )}
+          ) : undefined }
 
           <div class="v-card-item__content">
-            { hasTitle && (
+            { hasTitle ? (
               <VCardTitle key="title">
                 { slots.title?.() ?? toDisplayString(props.title) }
               </VCardTitle>
-            )}
+            ) : undefined }
 
-            { hasSubtitle && (
+            { hasSubtitle ? (
               <VCardSubtitle key="subtitle">
                 { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
               </VCardSubtitle>
-            )}
+            ) : undefined }
 
             { slots.default?.() }
           </div>
 
-          { hasAppend && (
+          { hasAppend ? (
             <div key="append" class="v-card-item__append">
               { !slots.append ? (
                 <>
@@ -158,7 +158,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                 />
               )}
            </div>
-          )}
+          ) : undefined }
         </props.tag>
       )
     })

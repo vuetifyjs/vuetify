@@ -61,7 +61,7 @@ function Scrim (props: ScrimProps) {
   const { modelValue, color, ...rest } = props
   return (
     <Transition name="fade-transition" appear>
-      { props.modelValue && (
+      { props.modelValue ? (
         <div
           class={[
             'v-overlay__scrim',
@@ -70,7 +70,7 @@ function Scrim (props: ScrimProps) {
           style={ props.color.backgroundColorStyles.value }
           { ...rest }
         />
-      )}
+      ) : undefined }
     </Transition>
   )
 }

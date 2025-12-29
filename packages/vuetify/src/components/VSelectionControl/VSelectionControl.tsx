@@ -311,11 +311,11 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
+          { label ? (
             <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
-          )}
+          ) : undefined }
         </div>
       )
     })
