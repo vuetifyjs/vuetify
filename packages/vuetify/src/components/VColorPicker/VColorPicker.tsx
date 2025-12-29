@@ -152,7 +152,7 @@ export const VColorPicker = defineComponent({
             ...slots,
             default: () => (
               <>
-                { !props.hideCanvas && (
+                { !props.hideCanvas ? (
                   <VColorPickerCanvas
                     key="canvas"
                     color={ currentColor.value }
@@ -162,9 +162,9 @@ export const VColorPicker = defineComponent({
                     width={ props.width }
                     height={ props.canvasHeight }
                   />
-                )}
+                ) : undefined }
 
-                { (!props.hideSliders || !props.hideInputs) && (
+                { (!props.hideSliders || !props.hideInputs) ? (
                   <div key="controls" class="v-color-picker__controls">
                     { !props.hideSliders ? (
                       <VColorPickerPreview
@@ -190,9 +190,9 @@ export const VColorPicker = defineComponent({
                       />
                     ) : undefined }
                   </div>
-                )}
+                ) : undefined }
 
-                { props.showSwatches && (
+                { props.showSwatches ? (
                   <VColorPickerSwatches
                     key="swatches"
                     color={ currentColor.value }
@@ -201,7 +201,7 @@ export const VColorPicker = defineComponent({
                     swatches={ props.swatches }
                     disabled={ props.disabled }
                   />
-                )}
+                ) : undefined }
               </>
             ),
           }}

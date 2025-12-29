@@ -20,7 +20,7 @@ import vTooltip from '@/directives/tooltip'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
-import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
+import { formatTime, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -235,11 +235,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
-            { slots.default?.(slotProps) ?? (
+            { renderSlot(slots.default, slotProps, () => (
               <>
-                { props.variant !== 'mini' && (
+                { props.variant !== 'mini' ? (
                   <>
-                    { !props.hidePlay && (
+                    { !props.hidePlay ? (
                       <div
                         class={[pillClasses, 'v-video__action-play']}
                         style={ pillStyles }
@@ -252,15 +252,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
-                    )}
-                    { slots.prepend && (
+                    ) : undefined }
+                    { slots.prepend ? (
                       <div
                         class={ pillClasses }
                         style={ pillStyles }
                       >
                         { slots.prepend(slotProps) }
                       </div>
-                    )}
+                    ) : undefined }
                     { props.splitTime
                       ? (
                         <span
@@ -295,7 +295,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         'thumb-label': () => currentTime.value.elapsed,
                       }}
                     </VSlider>
-                    { props.variant === 'tube' && <VSpacer /> }
+                    { props.variant === 'tube' ? <VSpacer /> : undefined }
                     { props.splitTime
                       ? (
                         <span
@@ -308,19 +308,19 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       : ''
                     }
                   </>
-                )}
-                { props.variant === 'mini' && (
+                ) : undefined }
+                { props.variant === 'mini' ? (
                   <>
                     <VSpacer />
-                    { slots.prepend && (
+                    { slots.prepend ? (
                       <div
                         class={ pillClasses }
                         style={ pillStyles }
                       >
                         { slots.prepend(slotProps) }
                       </div>
-                    )}
-                    { !props.hidePlay && (
+                    ) : undefined }
+                    { !props.hidePlay ? (
                       <div
                         class={[pillClasses, 'v-video__action-play']}
                         style={ pillStyles }
@@ -333,10 +333,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
-                    )}
+                    ) : undefined }
                   </>
-                )}
-                { (!props.hideVolume || !props.hideFullscreen || slots.append) && (
+                ) : undefined }
+                { (!props.hideVolume || !props.hideFullscreen || slots.append) ? (
                   <div
                     class={ pillClasses }
                     style={ pillStyles }
@@ -362,11 +362,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       />
                     ) : undefined }
                   </div>
-                )}
+                ) : undefined }
 
-                { props.variant === 'mini' && (<VSpacer />) }
+                { props.variant === 'mini' ? (<VSpacer />) : undefined }
               </>
-            )}
+            ))}
           </VDefaultsProvider>
         </div>
       )

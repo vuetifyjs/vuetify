@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, watch } from 'vue'
-import { EventProp, genericComponent, propsFactory } from '@/util'
+import { EventProp, genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -267,21 +267,21 @@ export const VChip = genericComponent<VChipSlots>()({
             <div key="prepend" class="v-chip__prepend">
               { !slots.prepend ? (
                 <>
-                  { props.prependIcon && (
+                  { props.prependIcon ? (
                     <VIcon
                       key="prepend-icon"
                       icon={ props.prependIcon }
                       start
                     />
-                  )}
+                  ) : undefined }
 
-                  { props.prependAvatar && (
+                  { props.prependAvatar ? (
                     <VAvatar
                       key="prepend-avatar"
                       image={ props.prependAvatar }
                       start
                     />
-                  )}
+                  ) : undefined }
                 </>
               ) : (
                 <VDefaultsProvider
@@ -311,28 +311,28 @@ export const VChip = genericComponent<VChipSlots>()({
               toggle: group?.toggle,
               value: group?.value.value,
               disabled: props.disabled,
-            }, toDisplayString(props.text))}
+            }, () => toDisplayString(props.text))}
           </div>
 
           { hasAppend ? (
             <div key="append" class="v-chip__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon && (
+                  { props.appendIcon ? (
                     <VIcon
                       key="append-icon"
                       end
                       icon={ props.appendIcon }
                     />
-                  )}
+                  ) : undefined }
 
-                  { props.appendAvatar && (
+                  { props.appendAvatar ? (
                     <VAvatar
                       key="append-avatar"
                       end
                       image={ props.appendAvatar }
                     />
-                  )}
+                  ) : undefined }
                 </>
               ) : (
                 <VDefaultsProvider

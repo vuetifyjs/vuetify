@@ -25,7 +25,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -146,7 +146,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           <div class="v-banner__content">
             { hasText ? (
               <VBannerText key="text">
-                { slots.text?.() ?? props.text }
+                { renderSlot(slots.text, undefined, () => props.text) }
               </VBannerText>
             ) : undefined }
 

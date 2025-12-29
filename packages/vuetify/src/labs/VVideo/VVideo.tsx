@@ -22,7 +22,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
+import { createRange, genericComponent, omit, pick, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { Component, PropType, TransitionProps } from 'vue'
@@ -439,7 +439,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }
               >
-                { slots.sources?.() ?? <source src={ props.src } type={ props.type } /> }
+                { renderSlot(slots.sources, undefined, () => <source src={ props.src } type={ props.type } />) }
               </video>
             ) : undefined }
             <Transition name="fade-transition">

@@ -13,7 +13,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { toDisplayString } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export type VCardItemSlots = {
   default: never
@@ -68,21 +68,21 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (
                 <>
-                  { props.prependAvatar && (
+                  { props.prependAvatar ? (
                     <VAvatar
                       key="prepend-avatar"
                       density={ props.density }
                       image={ props.prependAvatar }
                     />
-                  )}
+                  ) : undefined }
 
-                  { props.prependIcon && (
+                  { props.prependIcon ? (
                     <VIcon
                       key="prepend-icon"
                       density={ props.density }
                       icon={ props.prependIcon }
                     />
-                  )}
+                  ) : undefined }
                 </>
               ) : (
                 <VDefaultsProvider
@@ -107,13 +107,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle ? (
               <VCardTitle key="title">
-                { slots.title?.() ?? toDisplayString(props.title) }
+                { renderSlot(slots.title, undefined, () => toDisplayString(props.title)) }
               </VCardTitle>
             ) : undefined }
 
             { hasSubtitle ? (
               <VCardSubtitle key="subtitle">
-                { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
+                { renderSlot(slots.subtitle, undefined, () => toDisplayString(props.subtitle)) }
               </VCardSubtitle>
             ) : undefined }
 
@@ -124,21 +124,21 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
             <div key="append" class="v-card-item__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon && (
+                  { props.appendIcon ? (
                     <VIcon
                       key="append-icon"
                       density={ props.density }
                       icon={ props.appendIcon }
                     />
-                  )}
+                  ) : undefined }
 
-                  { props.appendAvatar && (
+                  { props.appendAvatar ? (
                     <VAvatar
                       key="append-avatar"
                       density={ props.density }
                       image={ props.appendAvatar }
                     />
-                  )}
+                  ) : undefined }
                 </>
               ) : (
                 <VDefaultsProvider

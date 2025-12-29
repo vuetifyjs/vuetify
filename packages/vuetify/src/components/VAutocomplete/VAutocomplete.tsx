@@ -551,13 +551,13 @@ export const VAutocomplete = genericComponent<new <
                                     />
                                   ) : undefined }
 
-                                  { item.props.prependAvatar && (
+                                  { item.props.prependAvatar ? (
                                     <VAvatar image={ item.props.prependAvatar } />
-                                  )}
+                                  ) : undefined }
 
-                                  { item.props.prependIcon && (
+                                  { item.props.prependIcon ? (
                                     <VIcon icon={ item.props.prependIcon } />
-                                  )}
+                                  ) : undefined }
                                 </>
                               ),
                               title: () => {
@@ -678,13 +678,13 @@ export const VAutocomplete = genericComponent<new <
                     tabindex="-1"
                   />
                 ) : undefined }
-                { props.appendInnerIcon && (
+                { props.appendInnerIcon ? (
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
                     color={ args[0].iconColor.value }
                   />
-                )}
+                ) : undefined }
               </>
             ),
           }}

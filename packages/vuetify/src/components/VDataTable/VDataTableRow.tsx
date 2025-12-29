@@ -14,7 +14,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
-import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getObjectValueByPath, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -209,11 +209,11 @@ export const VDataTableRow = genericComponent<new <T>(
                   return !mobile.value ? displayValue : (
                     <>
                       <div class="v-data-table__td-title">
-                        { slots[headerSlotName]?.(columnSlotProps) ?? column.title }
+                        { renderSlot(slots[headerSlotName], columnSlotProps, () => column.title) }
                       </div>
 
                       <div class="v-data-table__td-value">
-                        { slots[slotName]?.(slotProps) ?? displayValue }
+                        { renderSlot(slots[slotName], slotProps, () => displayValue) }
                       </div>
                     </>
                   )

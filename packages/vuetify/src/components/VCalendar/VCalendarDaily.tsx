@@ -10,7 +10,7 @@ import vResize from '@/directives/resize'
 
 // Utilities
 import { nextTick, onMounted, ref } from 'vue'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, noop, renderSlot, useRender } from '@/util'
 
 // Types
 import type { CalendarTimestamp } from './types'
@@ -123,7 +123,7 @@ export const VCalendarDaily = defineComponent({
     function genHeadDayLabel (day: CalendarTimestamp) {
       return (
         <div class="v-calendar-daily_head-day-label">
-          { slots['day-label-header']?.(day) ?? genHeadDayButton(day) }
+          { renderSlot(slots['day-label-header'], day, genHeadDayButton) }
         </div>
       )
     }
@@ -178,7 +178,7 @@ export const VCalendarDaily = defineComponent({
       return (
         <div class="v-calendar-daily__day-container">
           { genBodyIntervals() }
-          { slots.days?.() ?? genDays() }
+          { renderSlot(slots.days, undefined, genDays) }
         </div>
       )
     }

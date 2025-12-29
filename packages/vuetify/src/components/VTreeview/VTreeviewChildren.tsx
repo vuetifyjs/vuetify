@@ -157,7 +157,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           : undefined,
         prepend: slotProps => (
           <>
-            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
+            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) ? (
               <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
@@ -179,7 +179,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   }}
                 />
               </VListItemAction>
-            )}
+            ) : undefined }
 
             { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
           </>

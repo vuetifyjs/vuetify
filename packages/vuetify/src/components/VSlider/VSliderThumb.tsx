@@ -16,7 +16,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -200,7 +200,11 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
                 style={ backgroundColorStyles.value }
               >
                 <div>
-                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(step.value ? decimals.value : 1) }
+                  { renderSlot(
+                    slots['thumb-label'],
+                    { modelValue: props.modelValue },
+                    () => props.modelValue.toFixed(step.value ? decimals.value : 1)
+                  )}
                 </div>
                 <div class="v-slider-thumb__label-wedge" />
               </div>

@@ -178,7 +178,7 @@ export const VTabs = genericComponent<new <TModel, T = TabItem>(
             }}
           </VSlideGroup>
 
-          { hasWindow && (
+          { hasWindow ? (
             <VTabsWindow
               v-model={ model.value }
               key="tabs-window"
@@ -195,7 +195,7 @@ export const VTabs = genericComponent<new <TModel, T = TabItem>(
 
               { slots.window?.() }
             </VTabsWindow>
-          )}
+          ) : undefined }
         </>
       )
     })

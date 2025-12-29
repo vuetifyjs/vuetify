@@ -6,7 +6,7 @@ import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Utilities
 import { computed, ref, watchEffect } from 'vue'
-import { genericComponent, humanReadableFileSize, propsFactory, useRender } from '@/util'
+import { genericComponent, humanReadableFileSize, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -95,16 +95,14 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                       },
                     }}
                   >
-                    { slots.prepend?.(slotProps) ?? (
-                      <VAvatar />
-                    )}
+                    { renderSlot(slots.prepend, slotProps, () => <VAvatar />) }
                   </VDefaultsProvider>
                 )}
               </>
             ),
             append: slotProps => (
               <>
-                { props.clearable && (
+                { props.clearable ? (
                   <>
                     { !slots.clear ? (
                       <VBtn
@@ -123,14 +121,14 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                           },
                         }}
                       >
-                        { slots.clear?.({
+                        { renderSlot(slots.clear, {
                           ...slotProps,
                           props: { onClick: onClickRemove },
-                        }) ?? (<VBtn />)}
+                        }, () => <VBtn />)}
                       </VDefaultsProvider>
                     )}
                   </>
-                )}
+                ) : undefined }
 
                 { slots.append?.(slotProps) }
               </>

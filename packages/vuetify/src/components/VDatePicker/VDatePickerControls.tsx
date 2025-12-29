@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -314,12 +314,12 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
               '--v-date-picker-controls-height': convertToUnit(props.controlHeight),
             }}
           >
-            { slots.default?.(slotProps) ?? (
+            { renderSlot(slots.default, slotProps, () => (
               <>
-                { props.controlVariant === 'modal' && modalControls }
-                { props.controlVariant === 'docked' && dockedControls }
+                { props.controlVariant === 'modal' ? modalControls : undefined }
+                { props.controlVariant === 'docked' ? dockedControls : undefined }
               </>
-            )}
+            ))}
           </div>
         </VDefaultsProvider>
       )

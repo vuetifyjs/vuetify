@@ -6,7 +6,7 @@ export default {
     return {
       JSXExpressionContainer (node) {
         if (!(
-          node.parent.type === 'JSXElement' &&
+          ['JSXElement', 'JSXFragment'].includes(node.parent.type) &&
           node.expression.type === 'LogicalExpression' &&
           node.expression.operator === '&&'
         )) return

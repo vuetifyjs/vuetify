@@ -107,11 +107,11 @@ export const VRadioGroup = genericComponent<new <T>(
               isReadonly,
             }) => (
               <>
-                { label && (
+                { label ? (
                   <VLabel id={ id.value }>
                     { label }
                   </VLabel>
-                )}
+                ) : undefined }
 
                 <VSelectionControlGroup
                   { ...controlProps }

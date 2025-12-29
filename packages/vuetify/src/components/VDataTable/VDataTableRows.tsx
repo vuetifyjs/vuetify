@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -85,7 +85,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { slots.loading?.() ?? t(props.loadingText) }
+              { renderSlot(slots.loading, undefined, () => t(props.loadingText)) }
             </td>
           </tr>
         )
@@ -98,7 +98,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="no-data"
           >
             <td colspan={ columns.value.length }>
-              { slots['no-data']?.() ?? t(props.noDataText) }
+              { renderSlot(slots['no-data'], undefined, () => t(props.noDataText)) }
             </td>
           </tr>
         )

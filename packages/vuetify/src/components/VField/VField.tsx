@@ -27,6 +27,7 @@ import {
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
+  renderSlot,
   standardEasing,
   useRender,
 } from '@/util'
@@ -324,22 +325,24 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             ) : undefined }
 
-            { slots.default?.({
-              ...slotProps.value,
-              props: {
-                id: id.value,
-                class: 'v-field__input',
-                'aria-describedby': messagesId.value,
+            { renderSlot<VFieldSlot>(slots.default,
+              {
+                ...slotProps.value,
+                props: {
+                  id: id.value,
+                  class: 'v-field__input',
+                  'aria-describedby': messagesId.value,
+                },
+                focus,
+                blur,
               },
-              focus,
-              blur,
-            } as VFieldSlot) ?? (
-              <div
-                id={ id.value }
-                class="v-field__input"
-                aria-describedby={ messagesId.value }
-              />
-            )}
+              () => (
+                <div
+                  id={ id.value }
+                  class="v-field__input"
+                  aria-describedby={ messagesId.value }
+                />
+              ))}
           </div>
 
           { hasClear ? (
@@ -408,13 +411,13 @@ export const VField = genericComponent<new <T>(
               <>
                 <div class="v-field__outline__start" />
 
-                { hasFloatingLabel.value && (
+                { hasFloatingLabel.value ? (
                   <div class="v-field__outline__notch">
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
-                )}
+                ) : undefined }
 
                 <div class="v-field__outline__end" />
               </>

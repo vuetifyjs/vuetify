@@ -161,9 +161,9 @@ export const VTab = genericComponent<VBtnSlots>()({
             ...slots,
             default: () => (
               <>
-                { slots.default?.() ?? props.text }
+                { renderSlot(slots.default, undefined, () => props.text) }
 
-                { !props.hideSlider && (
+                { !props.hideSlider ? (
                   <div
                     ref={ sliderEl }
                     class={[
@@ -172,7 +172,7 @@ export const VTab = genericComponent<VBtnSlots>()({
                     ]}
                     style={ sliderColorStyles.value }
                   />
-                )}
+                ) : undefined }
               </>
             ),
           }}

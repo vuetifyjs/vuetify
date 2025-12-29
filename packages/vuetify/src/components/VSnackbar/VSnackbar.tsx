@@ -22,7 +22,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, refElement, renderSlot, useRender } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -262,7 +262,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
-              { slots.text?.() ?? props.text }
+              { renderSlot(slots.text, undefined, () => props.text) }
 
               { slots.default?.() }
             </div>

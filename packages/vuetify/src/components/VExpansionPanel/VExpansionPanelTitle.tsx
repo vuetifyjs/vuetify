@@ -14,7 +14,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -118,7 +118,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             }}
           >
             <span class="v-expansion-panel-title__icon">
-              { slots.actions?.(slotProps.value) ?? <VIcon /> }
+              { renderSlot(slots.actions, slotProps.value, () => <VIcon />) }
             </span>
           </VDefaultsProvider>
         ) : undefined }

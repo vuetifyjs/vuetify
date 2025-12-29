@@ -16,7 +16,7 @@ import vRipple from '@/directives/ripple'
 // Utilities
 import { computed } from 'vue'
 import { VStepperSymbol } from './shared'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -158,11 +158,9 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             color={ hasColor ? props.color : undefined }
             size={ 24 }
           >
-            { slots.icon?.(slotProps.value) ?? (
-              icon.value ? (
+            { renderSlot(slots.icon, slotProps.value, () => icon.value ? (
                 <VIcon icon={ icon.value }></VIcon>
-              ) : step.value
-            )}
+            ) : step.value)}
           </VAvatar>
 
           <div class="v-stepper-item__content">
@@ -171,7 +169,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
                 key="title"
                 class="v-stepper-item__title"
               >
-                { slots.title?.(slotProps.value) ?? props.title }
+                { renderSlot(slots.title, slotProps.value, () => props.title) }
               </div>
             ) : undefined }
 
@@ -180,7 +178,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
                 key="subtitle"
                 class="v-stepper-item__subtitle"
               >
-                { slots.subtitle?.(slotProps.value) ?? props.subtitle }
+                { renderSlot(slots.subtitle, slotProps.value, () => props.subtitle) }
               </div>
             ) : undefined }
 

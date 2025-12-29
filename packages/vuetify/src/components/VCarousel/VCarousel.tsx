@@ -150,7 +150,7 @@ export const VCarousel = genericComponent<new <T>(
             default: slots.default,
             additional: ({ group }: { group: GroupProvide }) => (
               <>
-                { !props.hideDelimiters && (
+                { !props.hideDelimiters ? (
                   <div
                     class="v-carousel__controls"
                     style={{
@@ -189,16 +189,16 @@ export const VCarousel = genericComponent<new <T>(
                       </VDefaultsProvider>
                     ) : undefined }
                   </div>
-                )}
+                ) : undefined }
 
-                { props.progress && (
+                { props.progress ? (
                   <VProgressLinear
                     absolute
                     class="v-carousel__progress"
                     color={ typeof props.progress === 'string' ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                   />
-                )}
+                ) : undefined }
               </>
             ),
             prev: slots.prev,

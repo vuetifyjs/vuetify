@@ -232,6 +232,7 @@ module.exports = {
           children: true,
         }],
         'local-rules/jsx-prop-casing': 'error',
+        'local-rules/jsx-slot-fallback': 'error',
 
         'react/jsx-equals-spacing': 'error',
         'react/jsx-first-prop-new-line': 'error',

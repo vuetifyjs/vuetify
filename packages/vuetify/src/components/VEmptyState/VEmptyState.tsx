@@ -17,7 +17,7 @@ import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -149,13 +149,13 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
 
           { hasHeadline ? (
             <div key="headline" class="v-empty-state__headline">
-              { slots.headline?.() ?? props.headline }
+              { renderSlot(slots.headline, undefined, () => props.headline) }
             </div>
           ) : undefined }
 
           { hasTitle ? (
             <div key="title" class="v-empty-state__title">
-              { slots.title?.() ?? props.title }
+              { renderSlot(slots.title, undefined, () => props.title) }
             </div>
           ) : undefined }
 
@@ -167,7 +167,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 maxWidth: convertToUnit(props.textWidth),
               }}
             >
-              { slots.text?.() ?? props.text }
+              { renderSlot(slots.text, undefined, () => props.text) }
             </div>
           ) : undefined }
 
@@ -190,11 +190,11 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                   },
                 }}
               >
-                {
-                  slots.actions?.({ props: { onClick: onClickAction } }) ?? (
-                    <VBtn onClick={ onClickAction } />
-                  )
-                }
+                { renderSlot(
+                  slots.actions,
+                  { props: { onClick: onClickAction } },
+                  () => <VBtn onClick={ onClickAction } />
+                )}
               </VDefaultsProvider>
             </div>
           ) : undefined }

@@ -122,7 +122,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
 
       return (
         <>
-          { isVisible.value && !!current.value && (
+          { isVisible.value && !!current.value ? (
             slots.default
               ? (
                 <VDefaultsProvider defaults={{ VSnackbar: current.value }}>
@@ -161,7 +161,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   }}
                 </VSnackbar>
               )
-          )}
+          ) : undefined }
         </>
       )
     })

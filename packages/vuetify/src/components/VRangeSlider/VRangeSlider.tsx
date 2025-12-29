@@ -173,15 +173,13 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label?.(slotProps) ?? (
-                  props.label
-                    ? (
+                { renderSlot(slots.label, slotProps, () => props.label
+                  ? (
                       <VLabel
                         class="v-slider__label"
                         text={ props.label }
                       />
-                    ) : undefined
-                )}
+                  ) : undefined)}
 
                 { slots.prepend?.(slotProps) }
               </>

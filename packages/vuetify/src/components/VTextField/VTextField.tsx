@@ -250,13 +250,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
                     return (
                       <>
-                        { props.prefix && (
+                        { props.prefix ? (
                           <span class="v-text-field__prefix">
                             <span class="v-text-field__prefix__text">
                               { props.prefix }
                             </span>
                           </span>
-                        )}
+                        ) : undefined }
 
                         { withDirectives(
                           slots.default ? (
@@ -271,13 +271,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                           [[vIntersect, onIntersect, null, { once: true }]],
                         )}
 
-                        { props.suffix && (
+                        { props.suffix ? (
                           <span class="v-text-field__suffix">
                             <span class="v-text-field__suffix__text">
                               { props.suffix }
                             </span>
                           </span>
-                        )}
+                        ) : undefined }
                       </>
                     )
                   },
@@ -288,7 +288,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               <>
                 { slots.details?.(slotProps) }
 
-                { hasCounter && (
+                { hasCounter ? (
                   <>
                     <span />
 
@@ -300,7 +300,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       v-slots:default={ slots.counter }
                     />
                   </>
-                )}
+                ) : undefined }
               </>
             ) : undefined,
           }}

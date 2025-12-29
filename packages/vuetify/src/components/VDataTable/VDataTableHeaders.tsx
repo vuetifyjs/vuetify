@@ -325,7 +325,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               </tr>
             ))}
 
-          { props.loading && (
+          { props.loading ? (
             <tr class="v-data-table-progress">
               <th colspan={ columns.value.length }>
                 <LoaderSlot
@@ -340,7 +340,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                 />
               </th>
             </tr>
-          )}
+          ) : undefined }
         </>
       )
     })

@@ -11,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 export type VDatePickerHeaderSlots = {
@@ -74,7 +74,7 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
           { hasContent ? (
             <MaybeTransition key="content" name={ props.transition }>
               <div key={ props.header } class="v-date-picker-header__content">
-                { slots.default?.() ?? props.header }
+                { renderSlot(slots.default, undefined, () => props.header) }
               </div>
             </MaybeTransition>
           ) : undefined }

@@ -183,7 +183,7 @@ export const VStepper = genericComponent<new <TModel>(
             <VStepperHeader key="stepper-header">
               { items.value.map(({ raw, ...item }, index) => (
                 <>
-                  { !!index && (<VDivider />) }
+                  { index ? (<VDivider />) : undefined }
 
                   <VStepperItem
                     { ...item.props }

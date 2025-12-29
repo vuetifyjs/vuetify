@@ -120,9 +120,9 @@ describe('VDivider', () => {
             <VList class="bg-transparent py-0">
               {[1, 2, 3].map(idx => (
                 <>
-                  { idx > 1 && (
+                  { idx > 1 ? (
                     <VDivider class="my-2 opacity-100 text-red"></VDivider>
-                  )}
+                  ) : undefined }
                   <VListItem
                     rounded="lg"
                     class="bg-grey"
@@ -152,12 +152,12 @@ describe('VDivider', () => {
             <VRow class="align-content-start">
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
                 <>
-                  { idx % 4 !== 0 && (
+                  { idx % 4 !== 0 ? (
                     <VDivider
                       vertical
                       class="opacity-100 text-red"
                     ></VDivider>
-                  )}
+                  ) : undefined }
                   <VCol cols="3">
                     <VCard color="grey" height="80"></VCard>
                   </VCol>

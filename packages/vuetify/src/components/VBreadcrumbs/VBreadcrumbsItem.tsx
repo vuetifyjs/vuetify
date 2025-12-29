@@ -7,7 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVBreadcrumbsItemProps = propsFactory({
   active: Boolean,
@@ -63,7 +63,7 @@ export const VBreadcrumbsItem = genericComponent()({
               onClick={ link.navigate }
               { ...link.linkProps }
             >
-              { slots.default?.() ?? props.title }
+              { renderSlot(slots.default, undefined, () => props.title) }
             </a>
           )}
         </props.tag>

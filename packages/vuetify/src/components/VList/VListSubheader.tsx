@@ -4,7 +4,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVListSubheaderProps = propsFactory({
   color: String,
@@ -45,7 +45,7 @@ export const VListSubheader = genericComponent()({
         >
           { hasText ? (
             <div class="v-list-subheader__text">
-              { slots.default?.() ?? props.title }
+              { renderSlot(slots.default, undefined, () => props.title) }
             </div>
           ) : undefined }
         </props.tag>

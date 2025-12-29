@@ -531,13 +531,13 @@ export const VSelect = genericComponent<new <
                                       />
                                     ) : undefined }
 
-                                    { camelizedProps.prependAvatar && (
+                                    { camelizedProps.prependAvatar ? (
                                       <VAvatar image={ camelizedProps.prependAvatar } />
-                                    )}
+                                    ) : undefined }
 
-                                    { camelizedProps.prependIcon && (
+                                    { camelizedProps.prependIcon ? (
                                       <VIcon icon={ camelizedProps.prependIcon } />
-                                    )}
+                                    ) : undefined }
                                   </>
                                 ),
                               }}
@@ -640,13 +640,13 @@ export const VSelect = genericComponent<new <
                     aria-hidden
                   />
                 ) : undefined }
-                { props.appendInnerIcon && (
+                { props.appendInnerIcon ? (
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
                     color={ args[0].iconColor.value }
                   />
-                )}
+                ) : undefined }
               </>
             ),
           }}

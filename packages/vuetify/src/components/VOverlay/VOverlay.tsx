@@ -297,7 +297,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { isMounted.value && hasContent.value && (
+        { isMounted.value && hasContent.value ? (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -361,7 +361,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               </MaybeTransition>
             </div>
           </Teleport>
-        )}
+        ) : undefined }
       </>
     ))
 

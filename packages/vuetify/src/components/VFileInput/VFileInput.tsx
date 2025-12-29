@@ -347,7 +347,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               <>
                 { slots.details?.(slotProps) }
 
-                { hasCounter && (
+                { hasCounter ? (
                   <>
                     <span />
 
@@ -358,7 +358,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       v-slots:default={ slots.counter }
                     />
                   </>
-                )}
+                ) : undefined }
               </>
             ) : undefined,
           }}
