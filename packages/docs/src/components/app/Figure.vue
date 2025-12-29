@@ -30,3 +30,9 @@
     inheritAttrs: false,
   }
 </script>
+
+<style scoped>
+figure {
+  margin: 0;
+}
+</style>
