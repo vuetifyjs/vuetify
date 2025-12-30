@@ -23,7 +23,7 @@
                   class="d-flex flex-column align-center justify-center"
                 >
                   <v-avatar
-                    :color="config.theme.colors.primary"
+                    :color="config.theme.colors.primary as string"
                     class="d-flex align-center justify-center cursor-pointer"
                     height="32"
                     size="32"
@@ -184,12 +184,12 @@
   const theme = useTheme()
 
   const themeConfigs = {
-    light: { theme: theme.themes.value.light, density: 'default' as Density },
-    dark: { theme: theme.themes.value.dark, density: 'default' as Density },
-    blackguard: { theme: theme.themes.value.blackguard, density: 'comfortable' as Density },
-    polaris: { theme: theme.themes.value.polaris, density: 'comfortable' as Density },
-    nebula: { theme: theme.themes.value.nebula, density: 'compact' as Density },
-    odyssey: { theme: theme.themes.value.odyssey, density: 'compact' as Density },
+    light: { theme: theme.computedThemes.value.light, density: 'default' as Density },
+    dark: { theme: theme.computedThemes.value.dark, density: 'default' as Density },
+    blackguard: { theme: theme.computedThemes.value.blackguard, density: 'comfortable' as Density },
+    polaris: { theme: theme.computedThemes.value.polaris, density: 'comfortable' as Density },
+    nebula: { theme: theme.computedThemes.value.nebula, density: 'compact' as Density },
+    odyssey: { theme: theme.computedThemes.value.odyssey, density: 'compact' as Density },
   }
 
   const drawer = ref(true)
