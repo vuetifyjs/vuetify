@@ -6,7 +6,7 @@ import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
 
 // Types
@@ -18,6 +18,7 @@ export const makeVColorPickerCanvasProps = propsFactory({
     type: Object as PropType<HSV | null>,
   },
   disabled: Boolean,
+  readonly: Boolean,
   dotSize: {
     type: [Number, String],
     default: 10,
@@ -51,6 +52,8 @@ export const VColorPickerCanvas = defineComponent({
     const canvasHeight = shallowRef(parseFloat(props.height))
 
     const _dotPosition = ref({ x: 0, y: 0 })
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
     const dotPosition = computed({
       get: () => _dotPosition.value,
       set (val) {
@@ -102,7 +105,7 @@ export const VColorPickerCanvas = defineComponent({
         e.preventDefault()
       }
 
-      if (props.disabled) return
+      if (!isInteractive.value) return
 
       handleMouseMove(e)
 
@@ -113,7 +116,7 @@ export const VColorPickerCanvas = defineComponent({
     }
 
     function handleMouseMove (e: MouseEvent | TouchEvent) {
-      if (props.disabled || !canvasRef.value) return
+      if (!isInteractive.value || !canvasRef.value) return
 
       isInteracting.value = true
 

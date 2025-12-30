@@ -11,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { onUnmounted } from 'vue'
+import { onUnmounted, toRef } from 'vue'
 import { nullColor } from './util'
 import {
   defineComponent,
@@ -32,6 +32,7 @@ export const makeVColorPickerPreviewProps = propsFactory({
     type: Object as PropType<HSV | null>,
   },
   disabled: Boolean,
+  readonly: Boolean,
   hideAlpha: Boolean,
   hideEyeDropper: Boolean,
   eyeDropperIcon: {
@@ -56,10 +57,12 @@ export const VColorPickerPreview = defineComponent({
 
     const abortController = new AbortController()
 
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
     onUnmounted(() => abortController.abort())
 
     async function openEyeDropper () {
-      if (!SUPPORTS_EYE_DROPPER || props.disabled) return
+      if (!SUPPORTS_EYE_DROPPER || !isInteractive.value) return
 
       const eyeDropper = new window.EyeDropper()
       try {
@@ -86,6 +89,7 @@ export const VColorPickerPreview = defineComponent({
               aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }
               density="comfortable"
               disabled={ props.disabled }
+              readonly={ props.readonly }
               icon={ props.eyeDropperIcon }
               variant="plain"
               onClick={ openEyeDropper }
@@ -107,6 +111,7 @@ export const VColorPickerPreview = defineComponent({
             min={ 0 }
             max={ 360 }
             disabled={ props.disabled }
+            readonly={ props.readonly }
             thumbSize={ 14 }
             trackSize={ 8 }
             trackFillColor="white"
@@ -123,6 +128,7 @@ export const VColorPickerPreview = defineComponent({
               min={ 0 }
               max={ 1 }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               thumbSize={ 14 }
               trackSize={ 8 }
               trackFillColor="white"
