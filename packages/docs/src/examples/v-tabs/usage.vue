@@ -102,7 +102,7 @@
   </v-tabs-window>
 </v-sheet>`
   })
-  
+
   const script = computed(() => {
     return `<script setup>
   import { ref } from 'vue'
@@ -110,5 +110,4 @@
   const tab = ref('one')
 <` + '/script>'
   })
-  
 </script>
