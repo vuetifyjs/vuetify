@@ -245,9 +245,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     if (targetDate && typeof time === 'object' && 'day' in time) {
       const a = getDayIdentifier(time)
       const b = getDayIdentifier(targetDate)
-      if (a > b) {
-        minutes += (a - b) * gap
-      }
+      minutes += (a - b) * gap
     }
 
     const min: number = firstMinute.value
