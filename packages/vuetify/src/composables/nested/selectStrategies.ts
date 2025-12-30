@@ -192,7 +192,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
       return selected
     },
-    in: (v, children, parents, disabled) => {
+    in: (v, children, parents) => {
       let map = new Map()
 
       for (const id of (v || [])) {
@@ -202,7 +202,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
           selected: map,
           children,
           parents,
-          disabled,
+          disabled: new Set<unknown>(),
         })
       }
 

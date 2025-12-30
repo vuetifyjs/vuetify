@@ -153,10 +153,10 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           modelValue={ display.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prependInner={ isInteractive.value ? onClick : undefined }
+          onClick:control={ !props.disabled ? onClick : undefined }
+          onClick:prependInner={ !props.disabled ? onClick : undefined }
           onUpdate:focused={ event => isFocused.value = event }
-          onClick:appendInner={ isInteractive.value ? onClick : undefined }
+          onClick:appendInner={ !props.disabled ? onClick : undefined }
           onUpdate:modelValue={ val => {
             model.value = val
           }}
