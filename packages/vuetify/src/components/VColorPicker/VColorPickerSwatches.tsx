@@ -102,7 +102,12 @@ export const VColorPickerSwatches = defineComponent({
 
                 return (
                   <div
-                    class="v-color-picker-swatches__color"
+                    class={[
+                      'v-color-picker-swatches__color',
+                      {
+                        'v-color-picker-swatches__color--disabled': props.disabled,
+                      },
+                    ]}
                     onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
