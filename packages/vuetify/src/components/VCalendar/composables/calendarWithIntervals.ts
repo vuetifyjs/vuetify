@@ -211,7 +211,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
 
   function timeToY (
     time: VTime | CalendarTimestamp,
-    targetDateOrClamp: CalendarTimestamp | boolean = true
+    targetDateOrClamp: CalendarTimestamp | boolean = false
   ): number | false {
     const clamp = targetDateOrClamp !== false
     const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
@@ -224,9 +224,14 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     if (clamp) {
       if (y < 0) {
         y = 0
-      }
-      if (y > bodyHeight.value) {
+      } else if (y > bodyHeight.value) {
         y = bodyHeight.value
+      }
+    } else {
+      if (y < 0) {
+        y = y + bodyHeight.value
+      } else if (y > bodyHeight.value) {
+        y = y - bodyHeight.value
       }
     }
 
