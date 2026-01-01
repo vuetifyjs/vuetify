@@ -152,7 +152,7 @@ export const VColorPicker = defineComponent({
             ...slots,
             default: () => (
               <>
-                { !props.hideCanvas ? (
+                { !props.hideCanvas && (
                   <VColorPickerCanvas
                     key="canvas"
                     color={ currentColor.value }
@@ -162,11 +162,11 @@ export const VColorPicker = defineComponent({
                     width={ props.width }
                     height={ props.canvasHeight }
                   />
-                ) : undefined }
+                )}
 
-                { (!props.hideSliders || !props.hideInputs) ? (
+                { (!props.hideSliders || !props.hideInputs) && (
                   <div key="controls" class="v-color-picker__controls">
-                    { !props.hideSliders ? (
+                    { !props.hideSliders && (
                       <VColorPickerPreview
                         key="preview"
                         color={ currentColor.value }
@@ -176,9 +176,9 @@ export const VColorPicker = defineComponent({
                         hideEyeDropper={ props.hideEyeDropper }
                         eyeDropperIcon={ props.eyeDropperIcon }
                       />
-                    ) : undefined }
+                    )}
 
-                    { !props.hideInputs ? (
+                    { !props.hideInputs && (
                       <VColorPickerEdit
                         key="edit"
                         modes={ props.modes }
@@ -188,11 +188,11 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
                       />
-                    ) : undefined }
+                    )}
                   </div>
-                ) : undefined }
+                )}
 
-                { props.showSwatches ? (
+                { props.showSwatches && (
                   <VColorPickerSwatches
                     key="swatches"
                     color={ currentColor.value }
@@ -201,7 +201,7 @@ export const VColorPicker = defineComponent({
                     swatches={ props.swatches }
                     disabled={ props.disabled }
                   />
-                ) : undefined }
+                )}
               </>
             ),
           }}

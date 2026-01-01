@@ -11,7 +11,7 @@ import { makeStepperItemProps } from '@/components/VStepper/VStepperItem'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
@@ -150,27 +150,29 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                   size={ 24 }
                   start
                 >
-                  { renderSlot(slots.icon, slotProps.value, () => icon.value ? (
-                    <VIcon icon={ icon.value }></VIcon>
-                  ) : step.value)}
+                  { slots.icon?.(slotProps.value) ?? (
+                    icon.value ? (
+                      <VIcon icon={ icon.value }></VIcon>
+                    ) : step.value
+                  )}
                 </VAvatar>
 
                 <div>
                   <div class="v-stepper-vertical-item__title">
-                    { renderSlot(slots.title, slotProps.value, () => props.title) }
+                    { slots.title?.(slotProps.value) ?? props.title }
                   </div>
 
                   <div class="v-stepper-vertical-item__subtitle">
-                    { renderSlot(slots.subtitle, slotProps.value, () => props.subtitle) }
+                    { slots.subtitle?.(slotProps.value) ?? props.subtitle }
                   </div>
                 </div>
               </>
             ),
             text: () => (
               <>
-                { renderSlot(slots.default, slotProps.value, () => props.text) }
+                { slots.default?.(slotProps.value) ?? props.text }
 
-                { hasActions ? (
+                { hasActions && (
                   <VDefaultsProvider
                     defaults={{
                       VStepperVerticalActions: {
@@ -179,7 +181,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                       },
                     }}
                   >
-                    { renderSlot(slots.actions, actionProps.value, () => (
+                    { slots.actions?.(actionProps.value) ?? (
                       <VStepperVerticalActions
                         onClick:next={ onClickNext }
                         onClick:prev={ onClickPrev }
@@ -188,9 +190,9 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                           next: slots.next ? () => slots.next?.(actionProps.value) : undefined,
                         }}
                       />
-                    ))}
+                    )}
                   </VDefaultsProvider>
-                ) : undefined }
+                )}
               </>
             ),
           }}

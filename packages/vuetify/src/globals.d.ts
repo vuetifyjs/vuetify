@@ -101,11 +101,8 @@ declare module 'vue' {
     _: ComponentInternalInstance
   }
 
-  export interface GenericComponentInstance {
-    provides: Record<string, unknown>
-  }
-
   export interface ComponentInternalInstance {
+    provides: Record<string, unknown>
     setupState: any
   }
 

@@ -6,7 +6,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -75,7 +75,9 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
               },
             }}
           >
-            { renderSlot(slots.prev, { props: prevSlotProps }, () => <VBtn { ...prevSlotProps } />) }
+            { slots.prev?.({ props: prevSlotProps }) ?? (
+              <VBtn { ...prevSlotProps } />
+            )}
           </VDefaultsProvider>
 
           <VDefaultsProvider
@@ -88,7 +90,9 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
               },
             }}
           >
-            { renderSlot(slots.next, { props: nextSlotProps }, () => <VBtn { ...nextSlotProps } />) }
+            { slots.next?.({ props: nextSlotProps }) ?? (
+              <VBtn { ...nextSlotProps } />
+            )}
           </VDefaultsProvider>
         </div>
       )

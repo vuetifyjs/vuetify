@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, watch } from 'vue'
-import { EventProp, genericComponent, propsFactory, renderSlot } from '@/util'
+import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -201,7 +201,7 @@ export const VChip = genericComponent<VChipSlots>()({
       const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
-      return isActive.value ? (
+      return isActive.value && (
         <Tag
           { ...link.linkProps }
           class={[
@@ -238,7 +238,7 @@ export const VChip = genericComponent<VChipSlots>()({
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
-          { hasFilter ? (
+          { hasFilter && (
             <VExpandXTransition key="filter">
               <div
                 class="v-chip__filter"
@@ -261,27 +261,27 @@ export const VChip = genericComponent<VChipSlots>()({
                 )}
               </div>
             </VExpandXTransition>
-          ) : undefined }
+          )}
 
-          { hasPrepend ? (
+          { hasPrepend && (
             <div key="prepend" class="v-chip__prepend">
               { !slots.prepend ? (
                 <>
-                  { props.prependIcon ? (
+                  { props.prependIcon && (
                     <VIcon
                       key="prepend-icon"
                       icon={ props.prependIcon }
                       start
                     />
-                  ) : undefined }
+                  )}
 
-                  { props.prependAvatar ? (
+                  { props.prependAvatar && (
                     <VAvatar
                       key="prepend-avatar"
                       image={ props.prependAvatar }
                       start
                     />
-                  ) : undefined }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -301,38 +301,38 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </div>
-          ) : undefined }
+          )}
 
           <div class="v-chip__content" data-no-activator="">
-            { renderSlot(slots.default, {
+            { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
               select: group?.select,
               toggle: group?.toggle,
               value: group?.value.value,
               disabled: props.disabled,
-            }, () => toDisplayString(props.text))}
+            }) ?? toDisplayString(props.text)}
           </div>
 
-          { hasAppend ? (
+          { hasAppend && (
             <div key="append" class="v-chip__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon ? (
+                  { props.appendIcon && (
                     <VIcon
                       key="append-icon"
                       end
                       icon={ props.appendIcon }
                     />
-                  ) : undefined }
+                  )}
 
-                  { props.appendAvatar ? (
+                  { props.appendAvatar && (
                     <VAvatar
                       key="append-avatar"
                       end
                       image={ props.appendAvatar }
                     />
-                  ) : undefined }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -352,9 +352,9 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </div>
-          ) : undefined }
+          )}
 
-          { hasClose ? (
+          { hasClose && (
             <button
               key="close"
               class="v-chip__close"
@@ -381,9 +381,9 @@ export const VChip = genericComponent<VChipSlots>()({
                 />
               )}
             </button>
-          ) : undefined }
+          )}
         </Tag>
-      ) : undefined
+      )
     }
   },
 })

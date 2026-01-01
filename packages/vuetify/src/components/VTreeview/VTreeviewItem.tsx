@@ -120,7 +120,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                       ))}
                     </div>
                   ) : '' }
-                  { !props.hideActions ? (
+                  { !props.hideActions && (
                     <VListItemAction start>
                       { props.toggleIcon ? (
                         <>
@@ -174,26 +174,26 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                         <div class="v-treeview-item__level" />
                       )}
                     </VListItemAction>
-                  ) : undefined }
+                  )}
 
                   { !props.hasCustomPrepend ? (
                     <>
                       { slots.prepend?.(slotProps) }
-                      { props.prependAvatar ? (
+                      { props.prependAvatar && (
                         <VAvatar
                           key="prepend-avatar"
                           density={ props.density }
                           image={ props.prependAvatar }
                         />
-                      ) : undefined }
+                      )}
 
-                      { props.prependIcon ? (
+                      { props.prependIcon && (
                         <VIcon
                           key="prepend-icon"
                           density={ props.density }
                           icon={ props.prependIcon }
                         />
-                      ) : undefined }
+                      )}
                     </>
                   ) : (
                     <VDefaultsProvider

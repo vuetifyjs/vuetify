@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, onMounted, ref, toRef, watch } from 'vue'
 import { convert12to24, convert24to12, pad } from './util'
-import { createRange, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { createRange, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -340,11 +340,11 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
           hideHeader={ props.hideHeader && props.variant !== 'input' }
           style={ props.style }
           v-slots={{
-            title: () => renderSlot(slots.title, () => (
+            title: () => slots.title?.() ?? (
               <div class="v-time-picker__title">
                 { t(props.title) }
               </div>
-            )),
+            ),
             header: () => (
               <VTimePickerControls
                 { ...timePickerControlsProps }

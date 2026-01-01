@@ -112,17 +112,17 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
               },
             }}
           >
-            { hasTitle ? (
+            { hasTitle && (
               <VExpansionPanelTitle key="title">
                 { slots.title ? slots.title() : props.title }
               </VExpansionPanelTitle>
-            ) : undefined }
+            )}
 
-            { hasText ? (
+            { hasText && (
               <VExpansionPanelText key="text">
                 { slots.text ? slots.text() : props.text }
               </VExpansionPanelText>
-            ) : undefined }
+            )}
 
             { slots.default?.() }
           </VDefaultsProvider>

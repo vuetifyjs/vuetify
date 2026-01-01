@@ -19,7 +19,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -179,11 +179,11 @@ export const VStepper = genericComponent<new <TModel>(
           ]}
           style={ props.style }
         >
-          { hasHeader ? (
+          { hasHeader && (
             <VStepperHeader key="stepper-header">
               { items.value.map(({ raw, ...item }, index) => (
                 <>
-                  { index ? (<VDivider />) : undefined }
+                  { !!index && (<VDivider />) }
 
                   <VStepperItem
                     { ...item.props }
@@ -197,33 +197,33 @@ export const VStepper = genericComponent<new <TModel>(
                 </>
               ))}
             </VStepperHeader>
-          ) : undefined }
+          )}
 
-          { hasWindow ? (
+          { hasWindow && (
             <VStepperWindow key="stepper-window">
               { items.value.map(item => (
                 <VStepperWindowItem
                   value={ item.value }
                   v-slots={{
-                    default: () => renderSlot(slots[`item.${item.value}`], item, () => slots.item?.(item)),
+                    default: () => slots[`item.${item.value}`]?.(item) ?? slots.item?.(item),
                   }}
                 />
               ))}
             </VStepperWindow>
-          ) : undefined }
+          )}
 
           { slots.default?.({ prev, next }) }
 
-          { hasActions ? (
-            renderSlot(slots.actions, { next, prev }, () => (
+          { hasActions && (
+            slots.actions?.({ next, prev }) ?? (
               <VStepperActions
                 key="stepper-actions"
                 onClick:prev={ prev }
                 onClick:next={ next }
                 v-slots={ slots }
               />
-            ))
-          ) : undefined }
+            )
+          )}
         </VSheet>
       )
     })

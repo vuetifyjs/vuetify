@@ -97,7 +97,7 @@ export const VColorPickerEdit = defineComponent({
         { inputs.value?.map(props => (
           <VColorPickerInput { ...props } />
         ))}
-        { enabledModes.value.length > 1 ? (
+        { enabledModes.value.length > 1 && (
           <VBtn
             icon="$unfold"
             size="x-small"
@@ -109,7 +109,7 @@ export const VColorPickerEdit = defineComponent({
               emit('update:mode', enabledModes.value[(mi + 1) % enabledModes.value.length].name)
             }}
           />
-        ) : undefined }
+        )}
       </div>
     ))
 

@@ -8,7 +8,7 @@ import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './comp
 // Utilities
 import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, renderSlot, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +68,7 @@ export const VCalendarCategory = defineComponent({
           class="v-calendar-category__column-header"
           { ...events }
         >
-          { renderSlot(slots.category, scope, () => genDayHeaderCategoryTitle(headerTitle)) }
+          { slots.category?.(scope) ?? genDayHeaderCategoryTitle(headerTitle) }
           { slots['day-header']?.(scope) }
         </div>
       )

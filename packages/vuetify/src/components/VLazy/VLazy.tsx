@@ -74,11 +74,11 @@ export const VLazy = genericComponent()({
           props.style,
         ]}
       >
-        { isActive.value ? (
+        { isActive.value && (
           <MaybeTransition transition={ props.transition } appear>
             { slots.default?.() }
           </MaybeTransition>
-        ) : undefined }
+        )}
       </props.tag>
     ))
 

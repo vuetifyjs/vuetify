@@ -369,9 +369,9 @@ export const VHotkey = genericComponent()({
     useRender(() => {
       const content = (
         <>
-          { props.prefix ? (
+          { props.prefix && (
             <span key="prefix" class="v-hotkey__prefix">{ props.prefix }</span>
-          ) : undefined }
+          )}
 
           { keyCombinations.value.map((combination, comboIndex) => (
             <span class="v-hotkey__combination" key={ comboIndex }>
@@ -380,15 +380,15 @@ export const VHotkey = genericComponent()({
                   ? renderKey(key, keyIndex)
                   : renderDivider(key, keyIndex)
               )}
-              { comboIndex < keyCombinations.value.length - 1 ? (
+              { comboIndex < keyCombinations.value.length - 1 && (
                 <span aria-hidden="true">&nbsp;</span>
-              ) : undefined }
+              )}
             </span>
           ))}
 
-          { props.suffix ? (
+          { props.suffix && (
             <span key="suffix" class="v-hotkey__suffix">{ props.suffix }</span>
-          ) : undefined }
+          )}
         </>
       )
 

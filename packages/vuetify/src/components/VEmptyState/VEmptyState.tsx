@@ -17,7 +17,7 @@ import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -108,7 +108,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
             props.style,
           ]}
         >
-          { hasMedia ? (
+          { hasMedia && (
             <div key="media" class="v-empty-state__media">
               { !slots.media ? (
                 <>
@@ -145,21 +145,21 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          ) : undefined }
+          )}
 
-          { hasHeadline ? (
+          { hasHeadline && (
             <div key="headline" class="v-empty-state__headline">
-              { renderSlot(slots.headline, () => props.headline) }
+              { slots.headline?.() ?? props.headline }
             </div>
-          ) : undefined }
+          )}
 
-          { hasTitle ? (
+          { hasTitle && (
             <div key="title" class="v-empty-state__title">
-              { renderSlot(slots.title, () => props.title) }
+              { slots.title?.() ?? props.title }
             </div>
-          ) : undefined }
+          )}
 
-          { hasText ? (
+          { hasText && (
             <div
               key="text"
               class="v-empty-state__text"
@@ -167,17 +167,17 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 maxWidth: convertToUnit(props.textWidth),
               }}
             >
-              { renderSlot(slots.text, () => props.text) }
+              { slots.text?.() ?? props.text }
             </div>
-          ) : undefined }
+          )}
 
-          { slots.default ? (
+          { slots.default && (
             <div key="content" class="v-empty-state__content">
               { slots.default() }
             </div>
-          ) : undefined }
+          )}
 
-          { hasActions ? (
+          { hasActions && (
             <div key="actions" class="v-empty-state__actions">
               <VDefaultsProvider
                 defaults={{
@@ -190,14 +190,14 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                   },
                 }}
               >
-                { renderSlot(
-                  slots.actions,
-                  { props: { onClick: onClickAction } },
-                  () => <VBtn onClick={ onClickAction } />
-                )}
+                {
+                  slots.actions?.({ props: { onClick: onClickAction } }) ?? (
+                    <VBtn onClick={ onClickAction } />
+                  )
+                }
               </VDefaultsProvider>
             </div>
-          ) : undefined }
+          )}
         </div>
       )
     })

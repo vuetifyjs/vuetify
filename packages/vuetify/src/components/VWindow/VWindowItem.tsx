@@ -138,7 +138,7 @@ export const VWindowItem = genericComponent()({
           style={ props.style }
           v-show={ groupItem.isSelected.value }
         >
-          { hasContent.value ? slots.default?.() : undefined }
+          { hasContent.value && slots.default?.() }
         </div>
       </MaybeTransition>
     ))

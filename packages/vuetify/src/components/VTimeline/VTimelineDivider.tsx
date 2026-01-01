@@ -61,7 +61,7 @@ export const VTimelineDivider = genericComponent()({
           style={ lineColorStyles.value }
         />
 
-        { !props.hideDot ? (
+        { !props.hideDot && (
           <div
             key="dot"
             class={[
@@ -103,7 +103,7 @@ export const VTimelineDivider = genericComponent()({
               )}
             </div>
           </div>
-        ) : undefined }
+        )}
 
         <div
           class={[

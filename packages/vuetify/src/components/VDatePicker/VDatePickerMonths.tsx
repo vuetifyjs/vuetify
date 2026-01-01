@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -92,14 +92,6 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       return true
     }
 
-    function onClick (i: number) {
-      if (model.value === i) {
-        emit('update:modelValue', model.value)
-        return
-      }
-      model.value = i
-    }
-
     useRender(() => (
       <div
         class="v-date-picker-months"
@@ -109,25 +101,35 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       >
         <div class="v-date-picker-months__content">
           { months.value.map((month, i) => {
-            return renderSlot(slots.month, {
+            const btnProps = {
+              active: model.value === i,
+              ariaLabel: month.label,
+              color: model.value === i ? props.color : undefined,
+              disabled: month.isDisabled,
+              rounded: true,
+              text: month.text,
+              variant: model.value === month.value ? 'flat' : 'text',
+              onClick: () => onClick(i),
+            } as const
+
+            function onClick (i: number) {
+              if (model.value === i) {
+                emit('update:modelValue', model.value)
+                return
+              }
+              model.value = i
+            }
+
+            return slots.month?.({
               month,
               i,
-              props: {
-                active: model.value === i,
-                ariaLabel: month.label,
-                color: model.value === i ? props.color : undefined,
-                disabled: month.isDisabled,
-                rounded: true,
-                text: month.text,
-                variant: model.value === month.value ? 'flat' : 'text',
-                onClick: () => onClick(i),
-              },
-            }, ({ props }) => (
+              props: btnProps,
+            }) ?? (
               <VBtn
                 key="month"
-                { ...props }
+                { ...btnProps }
               />
-            ))
+            )
           })}
         </div>
       </div>

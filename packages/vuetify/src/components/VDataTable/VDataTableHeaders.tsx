@@ -18,7 +18,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
@@ -203,7 +203,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (isEmpty) return ''
 
               if (column.key === 'data-table-select') {
-                return renderSlot(slots['header.data-table-select'], columnSlotProps, () => showSelectAll.value ? (
+                return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
                     color={ props.color }
                     density={ props.density }
@@ -211,20 +211,20 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
                   />
-                ) : undefined)
+                ))
               }
 
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { column.sortable && !props.disableSort ? (
+                  { column.sortable && !props.disableSort && (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
                       icon={ getSortIcon(column) }
                     />
-                  ) : undefined }
-                  { props.multiSort && isSorted(column) ? (
+                  )}
+                  { props.multiSort && isSorted(column) && (
                     <div
                       key="badge"
                       class={[
@@ -235,7 +235,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     >
                       { sortBy.value.findIndex(x => x.key === column.key) + 1 }
                     </div>
-                  ) : undefined }
+                  )}
                 </div>
               )
             },
@@ -325,7 +325,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               </tr>
             ))}
 
-          { props.loading ? (
+          { props.loading && (
             <tr class="v-data-table-progress">
               <th colspan={ columns.value.length }>
                 <LoaderSlot
@@ -340,7 +340,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                 />
               </th>
             </tr>
-          ) : undefined }
+          )}
         </>
       )
     })

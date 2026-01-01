@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, isObject, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -109,7 +109,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
             props.style,
           ]}
         >
-          { hasPrepend ? (
+          { hasPrepend && (
             <li key="prepend" class="v-breadcrumbs__prepend">
               { !slots.prepend ? (
                 <VIcon
@@ -131,11 +131,11 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                 />
               )}
             </li>
-          ) : undefined }
+          )}
 
           { items.value.map(({ item, raw }, index, array) => (
             <>
-              { renderSlot(slots.item, { item, index }, () => (
+              { slots.item?.({ item, index }) ?? (
                 <VBreadcrumbsItem
                   key={ index }
                   disabled={ index >= array.length - 1 }
@@ -145,15 +145,15 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                     default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                   }}
                 />
-              ))}
+              )}
 
-              { index < array.length - 1 ? (
+              { index < array.length - 1 && (
                 <VBreadcrumbsDivider
                   v-slots={{
                     default: slots.divider ? () => slots.divider?.({ item: raw, index }) : undefined,
                   }}
                 />
-              ) : undefined }
+              )}
             </>
           ))}
 

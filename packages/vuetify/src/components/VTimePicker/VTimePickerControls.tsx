@@ -246,11 +246,11 @@ export const VTimePickerControls = genericComponent()({
               onFocus={ () => emit('update:viewMode', 'minute') }
             />
 
-            { props.useSeconds ? (
+            { props.useSeconds && (
               <span key="secondsDivider" class="v-time-picker-controls__time__separator">:</span>
-            ) : undefined }
+            )}
 
-            { props.useSeconds ? (
+            { props.useSeconds && (
               <VTimePickerField
                 key="secondsVal"
                 ref={ secondInputRef }
@@ -264,9 +264,9 @@ export const VTimePickerControls = genericComponent()({
                 onBeforeinput={ secondInputFilter }
                 onFocus={ () => emit('update:viewMode', 'second') }
               />
-            ) : undefined }
+            )}
 
-            { props.ampm ? (
+            { props.ampm && (
               <div class="v-time-picker-controls__ampm">
                 <VBtn
                   active={ props.period === 'am' }
@@ -296,7 +296,7 @@ export const VTimePickerControls = genericComponent()({
                   onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
                 />
               </div>
-            ) : undefined }
+            )}
           </div>
         </div>
       )

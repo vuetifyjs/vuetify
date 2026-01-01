@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -171,7 +171,7 @@ export const VCard = genericComponent<VCardSlots>()({
           v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >
-          { hasImage ? (
+          { hasImage && (
             <div key="image" class="v-card__image">
               { !slots.image ? (
                 <VImg
@@ -193,7 +193,7 @@ export const VCard = genericComponent<VCardSlots>()({
                 />
               )}
             </div>
-          ) : undefined }
+          )}
 
           <LoaderSlot
             name="v-card"
@@ -202,7 +202,7 @@ export const VCard = genericComponent<VCardSlots>()({
             v-slots={{ default: slots.loader }}
           />
 
-          { hasCardItem ? (
+          { hasCardItem && (
             <VCardItem
               key="item"
               prependAvatar={ props.prependAvatar }
@@ -211,27 +211,28 @@ export const VCard = genericComponent<VCardSlots>()({
               subtitle={ props.subtitle }
               appendAvatar={ props.appendAvatar }
               appendIcon={ props.appendIcon }
-              v-slots={{
+            >
+              {{
                 default: slots.item,
                 prepend: slots.prepend,
                 title: slots.title,
                 subtitle: slots.subtitle,
                 append: slots.append,
               }}
-            />
-          ) : undefined }
+            </VCardItem>
+          )}
 
-          { hasText ? (
+          { hasText && (
             <VCardText key="text">
-              { renderSlot(slots.text, () => props.text) }
+              { slots.text?.() ?? props.text }
             </VCardText>
-          ) : undefined }
+          )}
 
           { slots.default?.() }
 
-          { slots.actions ? (
+          { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
-          ) : undefined }
+          )}
 
           { genOverlays(isClickable, 'v-card') }
         </Tag>

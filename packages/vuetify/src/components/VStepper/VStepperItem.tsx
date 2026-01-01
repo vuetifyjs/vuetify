@@ -16,7 +16,7 @@ import vRipple from '@/directives/ripple'
 // Utilities
 import { computed } from 'vue'
 import { VStepperSymbol } from './shared'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -150,7 +150,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           ]}
           onClick={ onClick }
         >
-          { isClickable.value ? genOverlays(true, 'v-stepper-item') : undefined }
+          { isClickable.value && genOverlays(true, 'v-stepper-item') }
 
           <VAvatar
             key="stepper-avatar"
@@ -158,29 +158,31 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             color={ hasColor ? props.color : undefined }
             size={ 24 }
           >
-            { renderSlot(slots.icon, slotProps.value, () => icon.value ? (
+            { slots.icon?.(slotProps.value) ?? (
+              icon.value ? (
                 <VIcon icon={ icon.value }></VIcon>
-            ) : step.value)}
+              ) : step.value
+            )}
           </VAvatar>
 
           <div class="v-stepper-item__content">
-            { hasTitle ? (
+            { hasTitle && (
               <div
                 key="title"
                 class="v-stepper-item__title"
               >
-                { renderSlot(slots.title, slotProps.value, () => props.title) }
+                { slots.title?.(slotProps.value) ?? props.title }
               </div>
-            ) : undefined }
+            )}
 
-            { hasSubtitle ? (
+            { hasSubtitle && (
               <div
                 key="subtitle"
                 class="v-stepper-item__subtitle"
               >
-                { renderSlot(slots.subtitle, slotProps.value, () => props.subtitle) }
+                { slots.subtitle?.(slotProps.value) ?? props.subtitle }
               </div>
-            ) : undefined }
+            )}
 
             { slots.default?.(slotProps.value) }
           </div>

@@ -22,7 +22,6 @@ import {
   genericComponent,
   matchesSelector,
   propsFactory,
-  renderSlot,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -289,7 +288,7 @@ export const VSelectionControl = genericComponent<new <T>(
                 ['center', 'circle'],
               ]}
             >
-              { renderSlot<SelectionControlSlot>(slots.input, {
+              { slots.input?.({
                 model,
                 textColorClasses,
                 textColorStyles,
@@ -302,21 +301,21 @@ export const VSelectionControl = genericComponent<new <T>(
                   onBlur,
                   id: id.value,
                 },
-              }, () => (
+              } satisfies SelectionControlSlot) ?? (
                 <>
-                  { icon.value ? <VIcon key="icon" icon={ icon.value } /> : undefined }
+                  { icon.value && <VIcon key="icon" icon={ icon.value } /> }
 
                   { inputNode }
                 </>
-              ))}
+              )}
             </div>
           </div>
 
-          { label ? (
+          { label && (
             <VLabel for={ id.value } onClick={ onClickLabel }>
               { label }
             </VLabel>
-          ) : undefined }
+          )}
         </div>
       )
     })

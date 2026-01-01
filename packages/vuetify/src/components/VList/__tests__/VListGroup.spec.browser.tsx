@@ -49,7 +49,7 @@ describe('VListGroup', () => {
     render(() => (
         <VList opened={ opened.value }>
           {
-            visible.value ? (
+            visible.value && (
               <VListGroup value="Users">
                 {{
                   default: () => (
@@ -60,7 +60,7 @@ describe('VListGroup', () => {
                   ),
                 }}
               </VListGroup>
-            ) : undefined
+            )
           }
         </VList>
     ))

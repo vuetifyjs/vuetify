@@ -80,7 +80,7 @@ export const VColorPickerPreview = defineComponent({
         ]}
         style={ props.style }
       >
-        { SUPPORTS_EYE_DROPPER && !props.hideEyeDropper ? (
+        { SUPPORTS_EYE_DROPPER && !props.hideEyeDropper && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
             <VBtn
               aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }
@@ -91,7 +91,7 @@ export const VColorPickerPreview = defineComponent({
               onClick={ openEyeDropper }
             />
           </div>
-        ) : undefined }
+        )}
 
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
@@ -113,7 +113,7 @@ export const VColorPickerPreview = defineComponent({
             hideDetails
           />
 
-          { !props.hideAlpha ? (
+          { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
               aria-label={ t('$vuetify.colorPicker.ariaLabel.alphaSlider') }
@@ -128,7 +128,7 @@ export const VColorPickerPreview = defineComponent({
               trackFillColor="white"
               hideDetails
             />
-          ) : undefined }
+          )}
         </div>
       </div>
     ))

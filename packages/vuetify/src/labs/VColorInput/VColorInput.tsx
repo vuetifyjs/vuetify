@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -196,9 +196,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                             onUpdate:modelValue={ value => onUpdateModel(value) }
                           >
                             {{
-                              actions: !props.hideActions
-                                ? () => renderSlot(slots.actions, { save, cancel, isPristine }, () => actions())
-                                : undefined,
+                              actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
                             }}
                           </VColorPicker>
                         )

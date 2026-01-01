@@ -25,7 +25,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -115,7 +115,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           ]}
           role="banner"
         >
-          { hasPrepend ? (
+          { hasPrepend && (
             <div key="prepend" class="v-banner__prepend">
               { !slots.prepend ? (
                 <VAvatar
@@ -141,21 +141,21 @@ export const VBanner = genericComponent<VBannerSlots>()({
                 />
               )}
             </div>
-          ) : undefined }
+          )}
 
           <div class="v-banner__content">
-            { hasText ? (
+            { hasText && (
               <VBannerText key="text">
-                { renderSlot(slots.text, () => props.text) }
+                { slots.text?.() ?? props.text }
               </VBannerText>
-            ) : undefined }
+            )}
 
             { slots.default?.() }
           </div>
 
-          { slots.actions ? (
+          { slots.actions && (
             <VBannerActions key="actions" v-slots:default={ slots.actions } />
-          ) : undefined }
+          )}
         </props.tag>
       )
     })

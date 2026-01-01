@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
+import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -232,7 +232,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             onClick={ !hasBrowse ? onClick : undefined }
             { ...rootAttrs }
           >
-            { hasIcon ? (
+            { hasIcon && (
               <div key="icon" class="v-file-upload-icon">
                 { !slots.icon ? (
                   <VIcon
@@ -252,25 +252,25 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   </VDefaultsProvider>
                 )}
               </div>
-            ) : undefined }
+            )}
 
-            { hasTitle ? (
+            { hasTitle && (
               <div key="title" class="v-file-upload-title">
-                { renderSlot(slots.title, () => t(props.title)) }
+                { slots.title?.() ?? t(props.title) }
               </div>
-            ) : undefined }
+            )}
 
-            { props.density === 'default' ? (
+            { props.density === 'default' && (
               <>
                 <div key="upload-divider" class="v-file-upload-divider">
-                  { renderSlot(slots.divider, () => (
+                  { slots.divider?.() ?? (
                     <VDivider { ...dividerProps }>
                       { t(props.dividerText) }
                     </VDivider>
-                  ))}
+                  )}
                 </div>
 
-                { hasBrowse ? (
+                { hasBrowse && (
                   <>
                     { !slots.browse ? (
                       <VBtn
@@ -295,15 +295,15 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       </VDefaultsProvider>
                     )}
                   </>
-                ) : undefined }
+                )}
 
-                { props.subtitle ? (
+                { props.subtitle && (
                   <div class="v-file-upload-subtitle">
                     { props.subtitle }
                   </div>
-                ) : undefined }
+                )}
               </>
-            ) : undefined }
+            )}
 
             <VOverlay
               modelValue={ isDragging.value }
@@ -311,10 +311,10 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               scrim={ props.scrim }
             />
 
-            { renderSlot(slots.input, { inputNode }, () => inputNode) }
+            { slots.input?.({ inputNode }) ?? inputNode }
           </VSheet>
 
-          { model.value.length > 0 ? (
+          { model.value.length > 0 && (
             <div class="v-file-upload-items">
               { model.value.map((file, i) => {
                 const slotProps = {
@@ -336,18 +336,18 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       },
                     }}
                   >
-                    { renderSlot(slots.item, slotProps, () => (
+                    { slots.item?.(slotProps) ?? (
                       <VFileUploadItem
                         key={ i }
                         onClick:remove={ () => onClickRemove(i) }
                         v-slots={ slots }
                       />
-                    ))}
+                    )}
                   </VDefaultsProvider>
                 )
               })}
             </div>
-          ) : undefined }
+          )}
         </>
       )
     })

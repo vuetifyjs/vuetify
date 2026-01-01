@@ -40,7 +40,6 @@ import {
   noop,
   omit,
   propsFactory,
-  renderSlot,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -546,7 +545,7 @@ export const VCombobox = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  { hasList ? (
+                  { hasList && (
                     <VList
                       ref={ listRef }
                       filterable
@@ -567,10 +566,9 @@ export const VCombobox = genericComponent<new <
                     >
                       { slots['prepend-item']?.() }
 
-                      { !displayItems.value.length && !props.hideNoData ? (
-                        renderSlot(slots['no-data'], () => (
-                          <VListItem key="no-data" title={ t(props.noDataText) } />
-                        ))) : undefined }
+                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                        <VListItem key="no-data" title={ t(props.noDataText) } />
+                      ))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
@@ -584,61 +582,61 @@ export const VCombobox = genericComponent<new <
                           })
 
                           if (item.type === 'divider') {
-                            return renderSlot(slots.divider, { props: item.raw, index }, () => (
+                            return slots.divider?.({ props: item.raw, index }) ?? (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
-                            ))
+                            )
                           }
 
                           if (item.type === 'subheader') {
-                            return renderSlot(slots.subheader, { props: item.raw, index }, () => (
+                            return slots.subheader?.({ props: item.raw, index }) ?? (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            ))
+                            )
                           }
 
-                          return renderSlot(slots.item, {
+                          return slots.item?.({
                             item: item.raw,
                             internalItem: item,
                             index,
                             props: itemProps,
-                          }, () => (
+                          }) ?? (
                             <VListItem { ...itemProps } role="option">
-                              {{
-                                prepend: ({ isSelected }) => (
-                                  <>
-                                    { props.multiple && !props.hideSelected ? (
-                                      <VCheckboxBtn
-                                        key={ item.value }
-                                        modelValue={ isSelected }
-                                        ripple={ false }
-                                        tabindex="-1"
-                                        aria-hidden
-                                        onClick={ (event: MouseEvent) => event.preventDefault() }
-                                      />
-                                    ) : undefined }
+                            {{
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      key={ item.value }
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                      aria-hidden
+                                      onClick={ (event: MouseEvent) => event.preventDefault() }
+                                    />
+                                  ) : undefined }
 
-                                    { item.props.prependAvatar ? (
-                                      <VAvatar image={ item.props.prependAvatar } />
-                                    ) : undefined }
+                                  { item.props.prependAvatar && (
+                                    <VAvatar image={ item.props.prependAvatar } />
+                                  )}
 
-                                    { item.props.prependIcon ? (
-                                      <VIcon icon={ item.props.prependIcon } />
-                                    ) : undefined }
-                                  </>
-                                ),
-                                title: () => {
-                                  return isPristine.value
-                                    ? item.title
-                                    : highlightResult('v-combobox', item.title, getMatches(item)?.title)
-                                },
-                              }}
-                            </VListItem>
-                          ))
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
+                              title: () => {
+                                return isPristine.value
+                                  ? item.title
+                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                              },
+                            }}
+                          </VListItem>
+                          )
                         }}
                       </VVirtualScroll>
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) : undefined }
+                  )}
                 </VMenu>
 
                 { model.value.map((item, index) => {
@@ -718,9 +716,9 @@ export const VCombobox = genericComponent<new <
                         slotContent ?? (
                           <span class="v-combobox__selection-text">
                             { item.title }
-                            { props.multiple && (index < model.value.length - 1) ? (
+                            { props.multiple && (index < model.value.length - 1) && (
                               <span class="v-combobox__selection-comma">,</span>
-                            ) : undefined }
+                            )}
                           </span>
                         )
                       )}
@@ -743,13 +741,13 @@ export const VCombobox = genericComponent<new <
                     tabindex="-1"
                   />
                 ) : undefined }
-                { props.appendInnerIcon ? (
+                { props.appendInnerIcon && (
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
                     color={ args[0].iconColor.value }
                   />
-                ) : undefined }
+                )}
               </>
             ),
           }}

@@ -25,7 +25,7 @@ import {
   getScrollPosition,
   getScrollSize,
 } from './helpers'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, renderSlot, useRender } from '@/util'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -414,7 +414,7 @@ export const VSlideGroup = genericComponent<new <T>(
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >
-        { hasAffixes.value ? (
+        { hasAffixes.value && (
           <div
             key="prev"
             class={[
@@ -424,13 +424,13 @@ export const VSlideGroup = genericComponent<new <T>(
             onMousedown={ onFocusAffixes }
             onClick={ () => hasPrev.value && scrollTo('prev') }
           >
-            { renderSlot(slots.prev, slotProps.value, () => (
+            { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ))}
+            )}
           </div>
-        ) : undefined }
+        )}
 
         <div
           key="container"
@@ -452,7 +452,7 @@ export const VSlideGroup = genericComponent<new <T>(
           </div>
         </div>
 
-        { hasAffixes.value ? (
+        { hasAffixes.value && (
           <div
             key="next"
             class={[
@@ -462,13 +462,13 @@ export const VSlideGroup = genericComponent<new <T>(
             onMousedown={ onFocusAffixes }
             onClick={ () => hasNext.value && scrollTo('next') }
           >
-            { renderSlot(slots.next, slotProps.value, () => (
+            { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ))}
+            )}
           </div>
-        ) : undefined }
+        )}
       </props.tag>
     ))
 

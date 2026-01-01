@@ -716,8 +716,8 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
 
 type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
 
-export function renderSlot <const T extends {}> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
-export function renderSlot <const T extends {}> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
 export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
   // TODO: check if slot returns elements: #18308
   return slot?.(props) ?? fallback?.(props)

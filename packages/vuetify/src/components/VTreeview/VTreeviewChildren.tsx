@@ -125,7 +125,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
     }
 
-    return () => renderSlot(slots.default, () => props.items?.map((item, index, items) => {
+    return () => slots.default?.() ?? props.items?.map((item, index, items) => {
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const nextItemHasChildren = !!items.at(index + 1)?.children
@@ -157,7 +157,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           : undefined,
         prepend: slotProps => (
           <>
-            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) ? (
+            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
               <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
@@ -179,7 +179,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   }}
                 />
               </VListItemAction>
-            ) : undefined }
+            )}
 
             { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
           </>
@@ -281,6 +281,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             />
           )
         })
-    }))
+    })
   },
 })

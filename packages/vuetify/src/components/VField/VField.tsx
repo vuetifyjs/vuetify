@@ -27,7 +27,6 @@ import {
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
-  renderSlot,
   standardEasing,
   useRender,
 } from '@/util'
@@ -283,23 +282,23 @@ export const VField = genericComponent<new <T>(
             v-slots={{ default: slots.loader }}
           />
 
-          { hasPrepend ? (
+          { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { slots['prepend-inner']
                 ? slots['prepend-inner'](slotProps.value)
-                : (props.prependInnerIcon ? (
+                : (props.prependInnerIcon && (
                   <InputIcon
                     key="prepend-icon"
                     name="prependInner"
                     color={ iconColor.value }
                   />
-                ) : undefined)
+                ))
               }
             </div>
-          ) : undefined }
+          )}
 
           <div class="v-field__field" data-no-activator="">
-            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value ? (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasFloatingLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -311,9 +310,9 @@ export const VField = genericComponent<new <T>(
               >
                 { label() }
               </VFieldLabel>
-            ) : undefined}
+            )}
 
-            { hasLabel.value ? (
+            { hasLabel.value && (
               <VFieldLabel
                 key="label"
                 ref={ labelRef }
@@ -323,29 +322,27 @@ export const VField = genericComponent<new <T>(
               >
                 { label() }
               </VFieldLabel>
-            ) : undefined }
+            )}
 
-            { renderSlot<VFieldSlot>(slots.default,
-              {
-                ...slotProps.value,
-                props: {
-                  id: id.value,
-                  class: 'v-field__input',
-                  'aria-describedby': messagesId.value,
-                },
-                focus,
-                blur,
+            { slots.default?.({
+              ...slotProps.value,
+              props: {
+                id: id.value,
+                class: 'v-field__input',
+                'aria-describedby': messagesId.value,
               },
-              () => (
-                <div
-                  id={ id.value }
-                  class="v-field__input"
-                  aria-describedby={ messagesId.value }
-                />
-              ))}
+              focus,
+              blur,
+            } as VFieldSlot) ?? (
+              <div
+                id={ id.value }
+                class="v-field__input"
+                aria-describedby={ messagesId.value }
+              />
+            )}
           </div>
 
-          { hasClear ? (
+          { hasClear && (
             <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
@@ -383,22 +380,22 @@ export const VField = genericComponent<new <T>(
                 </VDefaultsProvider>
               </div>
             </VExpandXTransition>
-          ) : undefined }
+          )}
 
-          { hasAppend ? (
+          { hasAppend && (
             <div key="append" class="v-field__append-inner">
               { slots['append-inner']
                 ? slots['append-inner'](slotProps.value)
-                : (props.appendInnerIcon ? (
+                : (props.appendInnerIcon && (
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
                     color={ iconColor.value }
                   />
-                ) : undefined)
+                ))
               }
             </div>
-          ) : undefined }
+          )}
 
           <div
             class={[
@@ -407,27 +404,27 @@ export const VField = genericComponent<new <T>(
             ]}
             style={ textColorStyles.value }
           >
-            { isOutlined ? (
+            { isOutlined && (
               <>
                 <div class="v-field__outline__start" />
 
-                { hasFloatingLabel.value ? (
+                { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
                     <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                       { label() }
                     </VFieldLabel>
                   </div>
-                ) : undefined }
+                )}
 
                 <div class="v-field__outline__end" />
               </>
-            ) : undefined }
+            )}
 
-            { isPlainOrUnderlined.value && hasFloatingLabel.value ? (
+            { isPlainOrUnderlined.value && hasFloatingLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
                 { label() }
               </VFieldLabel>
-            ) : undefined }
+            )}
           </div>
         </div>
       )

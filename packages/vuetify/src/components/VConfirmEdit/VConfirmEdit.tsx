@@ -138,7 +138,7 @@ export const VConfirmEdit = genericComponent<new <T> (
             })
           }
 
-          { !props.hideActions && !actionsUsed ? actions() : undefined }
+          { !props.hideActions && !actionsUsed && actions() }
         </>
       )
     })

@@ -106,11 +106,11 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           v-slots={{ default: slots.icon }}
         />
 
-        { props.density !== 'compact' ? (
+        { props.density !== 'compact' && (
           <div class="v-timeline-item__opposite">
-            { !props.hideOpposite ? slots.opposite?.() : undefined }
+            { !props.hideOpposite && slots.opposite?.() }
           </div>
-        ) : undefined }
+        )}
       </div>
     ))
 

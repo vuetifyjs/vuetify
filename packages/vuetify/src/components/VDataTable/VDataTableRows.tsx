@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -85,7 +85,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots.loading, () => t(props.loadingText)) }
+              { slots.loading?.() ?? t(props.loadingText) }
             </td>
           </tr>
         )
@@ -98,7 +98,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="no-data"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots['no-data'], () => t(props.noDataText)) }
+              { slots['no-data']?.() ?? t(props.noDataText) }
             </td>
           </tr>
         )
@@ -139,7 +139,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 toggleGroup,
               } satisfies GroupSummarySlot
 
-              return renderSlot(slots['group-summary'], slotProps, () => '')
+              return slots['group-summary']?.(slotProps) ?? ''
             }
 
             const slotProps = {
@@ -190,7 +190,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   />
                 )}
 
-                { isExpanded(item) ? slots['expanded-row']?.(slotProps) : undefined }
+                { isExpanded(item) && slots['expanded-row']?.(slotProps) }
               </Fragment>
             )
           })}

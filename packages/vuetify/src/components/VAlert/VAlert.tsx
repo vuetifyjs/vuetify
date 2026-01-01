@@ -26,7 +26,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory, renderSlot } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -151,7 +151,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
           : undefined,
       }
 
-      return isActive.value ? (
+      return isActive.value && (
         <props.tag
           class={[
             'v-alert',
@@ -181,7 +181,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
         >
           { genOverlays(false, 'v-alert') }
 
-          { props.border ? (
+          { props.border && (
             <div
               key="border"
               class={[
@@ -190,9 +190,9 @@ export const VAlert = genericComponent<VAlertSlots>()({
               ]}
               style={ textColorStyles.value }
             />
-          ) : undefined }
+          )}
 
-          { hasPrepend ? (
+          { hasPrepend && (
             <div key="prepend" class="v-alert__prepend">
               { !slots.prepend ? (
                 <VIcon key="prepend-icon" { ...iconProps } />
@@ -205,27 +205,27 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 />
               )}
             </div>
-          ) : undefined }
+          )}
 
           <div class="v-alert__content">
-            { hasTitle ? (
+            { hasTitle && (
               <VAlertTitle key="title">
-                { renderSlot(slots.title, () => props.title) }
+                { slots.title?.() ?? props.title }
               </VAlertTitle>
-            ) : undefined }
+            )}
 
-            { renderSlot(slots.text, () => props.text) }
+            { slots.text?.() ?? props.text }
 
             { slots.default?.() }
           </div>
 
-          { slots.append ? (
+          { slots.append && (
             <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
-          ) : undefined }
+          )}
 
-          { hasClose ? (
+          { hasClose && (
             <div key="close" class="v-alert__close">
               { !slots.close ? (
                 <VBtn
@@ -250,9 +250,9 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          ) : undefined }
+          )}
         </props.tag>
-      ) : undefined
+      )
     }
   },
 })

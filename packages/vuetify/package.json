@@ -200,7 +200,7 @@
     "vitest": "^4.0.13",
     "vue": "^3.6.0-beta.1",
     "vue-i18n": "^11.1.12",
-    "vue-jsx-vapor": "^3.1.2",
+    "vue-jsx-vapor": "^3.1.7",
     "vue-router": "^4.6.3"
   },
   "peerDependencies": {

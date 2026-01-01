@@ -115,22 +115,22 @@ export const VPieSegment = genericComponent()({
           shape-rendering="geometricPrecision"
           d={ outerSlicePath.value }
         />
-        { props.pattern ? (
+        { props.pattern && (
           <path
             key="pattern-overlay"
             shape-rendering="geometricPrecision"
             fill={ props.pattern }
             d={ outerSlicePath.value }
           />
-        ) : undefined }
-        { !props.hideSlice && normalizedInnerCut.value > 0 ? (
+        )}
+        { !props.hideSlice && normalizedInnerCut.value > 0 && (
           <path
             key="inner-slice"
             fill="oklch(from currentColor l c h / calc(alpha / 2))"
             d={ innerSlicePath.value }
           />
-        ) : undefined }
-        {['disabled', 'done'].includes(revealState.value) ? (
+        )}
+        {['disabled', 'done'].includes(revealState.value) && (
           <path
             transform={ `rotate(${currentAngle.value} 50 50)` }
             class="v-pie-segment__overlay"
@@ -138,7 +138,7 @@ export const VPieSegment = genericComponent()({
             onMouseenter={ () => isActive.value = true }
             onMouseleave={ () => isActive.value = false }
           />
-        ) : undefined}
+        )}
       </g>
     )
   },

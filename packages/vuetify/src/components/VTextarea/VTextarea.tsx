@@ -316,11 +316,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                     controlRef,
                   }) => (
                     <>
-                      { props.prefix ? (
+                      { props.prefix && (
                         <span class="v-text-field__prefix">
                           { props.prefix }
                         </span>
-                      ) : undefined }
+                      )}
 
                       <textarea
                         ref={ val => textareaRef.value = controlRef.value = val as HTMLTextAreaElement }
@@ -344,7 +344,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         { ...inputAttrs }
                       />
 
-                      { props.autoGrow ? (
+                      { props.autoGrow && (
                         <textarea
                           class={[
                             fieldClass,
@@ -356,13 +356,13 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                           readonly
                           aria-hidden="true"
                         />
-                      ) : undefined }
+                      )}
 
-                      { props.suffix ? (
+                      { props.suffix && (
                         <span class="v-text-field__suffix">
                           { props.suffix }
                         </span>
-                      ) : undefined }
+                      )}
                     </>
                   ),
                 }}
@@ -372,7 +372,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               <>
                 { slots.details?.(slotProps) }
 
-                { hasCounter ? (
+                { hasCounter && (
                   <>
                     <span />
 
@@ -384,7 +384,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) : undefined }
+                )}
               </>
             ) : undefined,
           }}

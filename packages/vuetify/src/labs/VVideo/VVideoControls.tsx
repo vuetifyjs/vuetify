@@ -20,7 +20,7 @@ import vTooltip from '@/directives/tooltip'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
-import { formatTime, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -235,11 +235,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
-            { renderSlot(slots.default, slotProps, () => (
+            { slots.default?.(slotProps) ?? (
               <>
-                { props.variant !== 'mini' ? (
+                { props.variant !== 'mini' && (
                   <>
-                    { !props.hidePlay ? (
+                    { !props.hidePlay && (
                       <div
                         class={[pillClasses, 'v-video__action-play']}
                         style={ pillStyles }
@@ -252,15 +252,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
-                    ) : undefined }
-                    { slots.prepend ? (
+                    )}
+                    { slots.prepend && (
                       <div
                         class={ pillClasses }
                         style={ pillStyles }
                       >
                         { slots.prepend(slotProps) }
                       </div>
-                    ) : undefined }
+                    )}
                     { props.splitTime
                       ? (
                         <span
@@ -295,7 +295,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         'thumb-label': () => currentTime.value.elapsed,
                       }}
                     </VSlider>
-                    { props.variant === 'tube' ? <VSpacer /> : undefined }
+                    { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
                       ? (
                         <span
@@ -308,19 +308,19 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                       : ''
                     }
                   </>
-                ) : undefined }
-                { props.variant === 'mini' ? (
+                )}
+                { props.variant === 'mini' && (
                   <>
                     <VSpacer />
-                    { slots.prepend ? (
+                    { slots.prepend && (
                       <div
                         class={ pillClasses }
                         style={ pillStyles }
                       >
                         { slots.prepend(slotProps) }
                       </div>
-                    ) : undefined }
-                    { !props.hidePlay ? (
+                    )}
+                    { !props.hidePlay && (
                       <div
                         class={[pillClasses, 'v-video__action-play']}
                         style={ pillStyles }
@@ -333,15 +333,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                           onClick={ () => playing.value = !playing.value }
                         />
                       </div>
-                    ) : undefined }
+                    )}
                   </>
-                ) : undefined }
-                { (!props.hideVolume || !props.hideFullscreen || slots.append) ? (
+                )}
+                { (!props.hideVolume || !props.hideFullscreen || slots.append) && (
                   <div
                     class={ pillClasses }
                     style={ pillStyles }
                   >
-                    { !props.hideVolume ? (
+                    { !props.hideVolume && (
                       <VVideoVolume
                         key="volume-control"
                         sliderProps={{ color: props.color }}
@@ -351,22 +351,22 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         onClick={ () => props.volumeProps?.inline && toggleMuted() }
                         { ...props.volumeProps }
                       />
-                    ) : undefined }
+                    )}
                     { slots.append?.(slotProps) }
-                    { !props.hideFullscreen ? (
+                    { !props.hideFullscreen && (
                       <VIconBtn
                         icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
                         aria-label={ labels.value.fullscreenAction }
                         v-tooltip={[labels.value.fullscreenAction, 'top']}
                         onClick={ toggleFullscreen }
                       />
-                    ) : undefined }
+                    )}
                   </div>
-                ) : undefined }
+                )}
 
-                { props.variant === 'mini' ? (<VSpacer />) : undefined }
+                { props.variant === 'mini' && (<VSpacer />) }
               </>
-            ))}
+            )}
           </VDefaultsProvider>
         </div>
       )

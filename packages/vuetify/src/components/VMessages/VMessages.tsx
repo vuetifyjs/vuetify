@@ -65,7 +65,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
           props.style,
         ]}
       >
-        { props.active ? (
+        { props.active && (
           messages.value.map((message, i) => (
             <div
               class="v-messages__message"
@@ -74,7 +74,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
               { slots.message ? slots.message({ message }) : message }
             </div>
           ))
-        ) : undefined }
+        )}
       </MaybeTransition>
     ))
 

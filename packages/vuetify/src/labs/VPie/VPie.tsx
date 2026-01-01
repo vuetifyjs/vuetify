@@ -19,7 +19,7 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { convertToUnit, genericComponent, pick, propsFactory, renderSlot } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'
@@ -299,11 +299,11 @@ export const VPie = genericComponent<VPieSlots>()({
 
       const avatarSlot = ({ item }: { item: PieItem }) => (
         <VAvatar color={ item.color } start>
-          { item.pattern ? (
+          { item.pattern && (
             <svg height="40" width="40">
               <rect width="40" height="40" fill={ item.pattern } />
             </svg>
-          ) : undefined }
+          )}
         </VAvatar>
       )
 
@@ -317,9 +317,7 @@ export const VPie = genericComponent<VPieSlots>()({
             '--v-pie-size': convertToUnit(props.size),
           }}
         >
-          { renderSlot(slots.title, () => props.title ? (
-            <div class="v-pie__title">{ props.title }</div>
-          ) : undefined)}
+          { slots.title?.() ?? (props.title && (<div class="v-pie__title">{ props.title }</div>)) }
           <div
             class={[
               'v-pie__content',
@@ -377,41 +375,34 @@ export const VPie = genericComponent<VPieSlots>()({
             </div>
           </div>
 
-          { legendConfig.value.visible ? (
+          { legendConfig.value.visible && (
             <VDefaultsProvider key="legend" defaults={ legendDefaults }>
               <div class="v-pie__legend">
-                { renderSlot(
-                  slots.legend,
-                  { isActive: isVisible, toggle, items: arcs.value, total: total.value },
-                  () => (
-                    <VChipGroup
-                      column
-                      multiple
-                      v-model={ visibleItemsKeys.value }
-                    >
-                      { arcs.value.map(item => (
-                        <VChip
-                          value={ item.key }
-                          v-slots={{
-                            prepend: () => avatarSlot({ item }),
-                            default: () => (
-                              <div class="v-pie__legend__text">
-                                { renderSlot(
-                                  slots['legend-text'],
-                                  { item, total: total.value },
-                                  () => legendTextFormatFunction.value(item)
-                                )}
-                              </div>
-                            ),
-                          }}
-                        />
-                      ))}
-                    </VChipGroup>
-                  ))}
+                { slots.legend?.({ isActive: isVisible, toggle, items: arcs.value, total: total.value }) ?? (
+                  <VChipGroup
+                    column
+                    multiple
+                    v-model={ visibleItemsKeys.value }
+                  >
+                    { arcs.value.map(item => (
+                      <VChip
+                        value={ item.key }
+                        v-slots={{
+                          prepend: () => avatarSlot({ item }),
+                          default: () => (
+                            <div class="v-pie__legend__text">
+                              { slots['legend-text']?.({ item, total: total.value }) ?? legendTextFormatFunction.value(item) }
+                            </div>
+                          ),
+                        }}
+                      />
+                    ))}
+                  </VChipGroup>
+                )}
               </div>
             </VDefaultsProvider>
-          ) : undefined }
-          { props.tooltip ? (
+          )}
+          { !!props.tooltip && (
             <VDefaultsProvider defaults={ tooltipDefaults }>
               <VPieTooltip
                 { ...tooltipProps }
@@ -421,7 +412,7 @@ export const VPie = genericComponent<VPieSlots>()({
                 }}
               />
             </VDefaultsProvider>
-          ) : undefined }
+          )}
         </div>
       )
     }

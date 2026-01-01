@@ -1,14 +1,7 @@
 // Utilities
 import { computed, useId } from 'vue'
 import { makeLineProps } from './util/line'
-import {
-  genericComponent,
-  getPropertyFromItem,
-  PREFERS_REDUCED_MOTION,
-  propsFactory,
-  renderSlot,
-  useRender,
-} from '@/util'
+import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 export type VBarlineSlots = {
@@ -170,7 +163,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     rx={ smooth.value }
                     ry={ smooth.value }
                 >
-                  { props.autoDraw && !PREFERS_REDUCED_MOTION() ? (
+                  { props.autoDraw && !PREFERS_REDUCED_MOTION() && (
                     <>
                       <animate
                         attributeName="y"
@@ -187,13 +180,13 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                         fill="freeze"
                       />
                     </>
-                  ) : undefined }
+                  )}
                 </rect>
               ))
             }
           </clipPath>
 
-          { hasLabels.value ? (
+          { hasLabels.value && (
             <g
               key="labels"
               style={{
@@ -209,12 +202,12 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     y={ (parseInt(props.height, 10) - 2) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
                     font-size={ Number(props.labelSize) || 7 }
                   >
-                    { renderSlot(slots.label, { index: i, value: item.value }, () => item.value) }
+                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
                   </text>
                 ))
               }
             </g>
-          ) : undefined }
+          )}
 
           <g
             clip-path={ `url(#${id.value}-clip)` }

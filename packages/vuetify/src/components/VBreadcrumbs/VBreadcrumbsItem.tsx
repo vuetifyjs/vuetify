@@ -7,7 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 export const makeVBreadcrumbsItemProps = propsFactory({
   active: Boolean,
@@ -57,13 +57,13 @@ export const VBreadcrumbsItem = genericComponent()({
           ]}
           aria-current={ isActive.value ? 'page' : undefined }
         >
-          { !link.isLink.value ? renderSlot(slots.default, () => props.title) : (
+          { !link.isLink.value ? slots.default?.() ?? props.title : (
             <a
               class="v-breadcrumbs-item--link"
               onClick={ link.navigate }
               { ...link.linkProps }
             >
-              { renderSlot(slots.default, () => props.title) }
+              { slots.default?.() ?? props.title }
             </a>
           )}
         </props.tag>

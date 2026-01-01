@@ -290,7 +290,7 @@ export const VImg = genericComponent<VImgSlots>()({
 
     const __preloadImage = () => (
       <MaybeTransition transition={ props.transition }>
-        { normalisedSrc.value.lazySrc && state.value !== 'loaded' ? (
+        { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
@@ -300,7 +300,7 @@ export const VImg = genericComponent<VImgSlots>()({
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />
-        ) : undefined }
+        )}
       </MaybeTransition>
     )
 
@@ -309,9 +309,9 @@ export const VImg = genericComponent<VImgSlots>()({
 
       return (
         <MaybeTransition transition={ props.transition } appear>
-          { (state.value === 'loading' || (state.value === 'error' && !slots.error)) ? (
-            <div class="v-img__placeholder">{ slots.placeholder() }</div>
-          ) : undefined }
+          { (state.value === 'loading' || (state.value === 'error' && !slots.error)) &&
+          <div class="v-img__placeholder">{ slots.placeholder() }</div>
+          }
         </MaybeTransition>
       )
     }
@@ -321,9 +321,9 @@ export const VImg = genericComponent<VImgSlots>()({
 
       return (
         <MaybeTransition transition={ props.transition } appear>
-          { state.value === 'error' ? (
+          { state.value === 'error' &&
             <div class="v-img__error">{ slots.error() }</div>
-          ) : undefined }
+          }
         </MaybeTransition>
       )
     }

@@ -20,7 +20,7 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -219,7 +219,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
               >
                 <table>
                   { slots.colgroup?.(slotProps.value) }
-                  { !props.hideDefaultHeader ? (
+                  { !props.hideDefaultHeader && (
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
@@ -227,9 +227,9 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         v-slots={ slots }
                       />
                     </thead>
-                  ) : undefined }
+                  )}
                   { slots.thead?.(slotProps.value) }
-                  { !props.hideDefaultBody ? (
+                  { !props.hideDefaultBody && (
                     <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
@@ -251,7 +251,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                               onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                             >
                               { ({ itemRef }) => (
-                                renderSlot(slots.item, { ...itemSlotProps, itemRef }, () => (
+                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
                                   <VDataTableRow
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
@@ -259,7 +259,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     index={ itemSlotProps.index }
                                     v-slots={ slots }
                                   />
-                                ))
+                                )
                               )}
                             </VVirtualScrollItem>
                           ),
@@ -272,7 +272,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
                     </tbody>
-                  ) : undefined }
+                  )}
                   { slots.tbody?.(slotProps.value) }
                   { slots.tfoot?.(slotProps.value) }
                 </table>

@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
-import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -322,25 +322,25 @@ export const VListItem = genericComponent<VListItemSlots>()({
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
-          { hasPrepend ? (
+          { hasPrepend && (
             <div key="prepend" class="v-list-item__prepend">
               { !slots.prepend ? (
                 <>
-                  { props.prependAvatar ? (
+                  { props.prependAvatar && (
                     <VAvatar
                       key="prepend-avatar"
                       density={ props.density }
                       image={ props.prependAvatar }
                     />
-                  ) : undefined }
+                  )}
 
-                  { props.prependIcon ? (
+                  { props.prependIcon && (
                     <VIcon
                       key="prepend-icon"
                       density={ props.density }
                       icon={ props.prependIcon }
                     />
-                  ) : undefined }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -366,43 +366,43 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
               <div class="v-list-item__spacer" />
             </div>
-          ) : undefined }
+          )}
 
           <div class="v-list-item__content" data-no-activator="">
-            { hasTitle ? (
+            { hasTitle && (
               <VListItemTitle key="title">
-                { renderSlot(slots.title, { title: props.title }, () => toDisplayString(props.title)) }
+                { slots.title?.({ title: props.title }) ?? toDisplayString(props.title) }
               </VListItemTitle>
-            ) : undefined }
+            )}
 
-            { hasSubtitle ? (
+            { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
-                { renderSlot(slots.subtitle, { subtitle: props.subtitle }, () => toDisplayString(props.subtitle)) }
+                { slots.subtitle?.({ subtitle: props.subtitle }) ?? toDisplayString(props.subtitle) }
               </VListItemSubtitle>
-            ) : undefined }
+            )}
 
             { slots.default?.(slotProps.value) }
           </div>
 
-          { hasAppend ? (
+          { hasAppend && (
             <div key="append" class="v-list-item__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon ? (
+                  { props.appendIcon && (
                     <VIcon
                       key="append-icon"
                       density={ props.density }
                       icon={ props.appendIcon }
                     />
-                  ) : undefined }
+                  )}
 
-                  { props.appendAvatar ? (
+                  { props.appendAvatar && (
                     <VAvatar
                       key="append-avatar"
                       density={ props.density }
                       image={ props.appendAvatar }
                     />
-                  ) : undefined }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -428,7 +428,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
               <div class="v-list-item__spacer" />
             </div>
-          ) : undefined }
+          )}
         </Tag>
       )
     })

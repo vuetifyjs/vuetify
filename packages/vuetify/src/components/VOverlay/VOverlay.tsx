@@ -61,7 +61,7 @@ function Scrim (props: ScrimProps) {
   const { modelValue, color, ...rest } = props
   return (
     <Transition name="fade-transition" appear>
-      { props.modelValue ? (
+      { props.modelValue && (
         <div
           class={[
             'v-overlay__scrim',
@@ -70,7 +70,7 @@ function Scrim (props: ScrimProps) {
           style={ props.color.backgroundColorStyles.value }
           { ...rest }
         />
-      ) : undefined }
+      )}
     </Transition>
   )
 }
@@ -297,7 +297,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           }, activatorEvents.value, props.activatorProps),
         })}
 
-        { isMounted.value && hasContent.value ? (
+        { isMounted.value && hasContent.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -361,7 +361,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               </MaybeTransition>
             </div>
           </Teleport>
-        ) : undefined }
+        )}
       </>
     ))
 

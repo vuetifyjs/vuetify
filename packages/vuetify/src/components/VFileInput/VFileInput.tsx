@@ -322,7 +322,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       />
 
                       <div class={ fieldClass }>
-                        { !!model.value?.length && !props.hideInput ? (
+                        { !!model.value?.length && !props.hideInput && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
@@ -336,7 +336,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                             />
                           ))
                           : fileNames.value.join(', ')
-                        ) : undefined }
+                        )}
                       </div>
                     </>
                   ),
@@ -347,7 +347,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               <>
                 { slots.details?.(slotProps) }
 
-                { hasCounter ? (
+                { hasCounter && (
                   <>
                     <span />
 
@@ -358,7 +358,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) : undefined }
+                )}
               </>
             ) : undefined,
           }}
