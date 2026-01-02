@@ -252,6 +252,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               'v-file-input--chips': !!props.chips,
               'v-file-input--dragging': isDragging.value,
               'v-file-input--hide': props.hideInput,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
