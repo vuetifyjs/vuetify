@@ -46,6 +46,7 @@
     "update:month": "Emitted when the month changes.",
     "update:year": "Emitted when the year changes.",
     "update:viewMode": "Emitted when the view mode changes.",
+    "[`${string}:day`]": "Any event on the day button.",
     "<domevent>:date": "Emitted when the specified DOM event occurs on the date button.",
     "<domevent>:month": "Emitted when the specified DOM event occurs on the month button.",
     "<domevent>:year": "Emitted when the specified DOM event occurs on the year button.",
