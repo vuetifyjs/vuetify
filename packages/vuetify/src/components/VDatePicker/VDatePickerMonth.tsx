@@ -13,11 +13,10 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarDay } from '@/composables/calendar'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -31,7 +30,7 @@ export type DatePickerEvents = string[] |
 export type VDatePickerMonthSlots = {
   day: {
     props: {
-      onClick: () => void
+      onClick: (e: PointerEvent) => void
     }
     item: any
     i: number
@@ -78,11 +77,9 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'update:modelValue': (date: unknown) => true,
     'update:month': (date: number) => true,
     'update:year': (date: number) => true,
-    'click:day': (day: CalendarDay) => true,
-    'dblclick:day': (day: CalendarDay) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const daysRef = ref()
     const { t } = useLocale()
 
@@ -166,24 +163,15 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
-    function onClick (day: CalendarDay) {
-      const { date } = day
-
+    function onClick (value: unknown) {
       if (props.multiple === 'range') {
-        onRangeClick(date)
+        onRangeClick(value)
       } else if (props.multiple) {
-        onMultipleClick(date)
+        onMultipleClick(value)
       } else {
-        model.value = [date]
+        model.value = [value]
       }
-
-      emit('click:day', day)
     }
-
-    function onDblclick (day: CalendarDay) {
-      emit('dblclick:day', day)
-    }
-
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
@@ -269,6 +257,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ))}
 
             { daysInMonth.value.map((item, i) => {
+              const events = getPrefixedEventHandlers(attrs, ':day', nativeEvent => ({ nativeEvent, ...item }))
+
               const slotProps = {
                 props: {
                   class: 'v-date-picker-month__day-btn',
@@ -280,8 +270,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   'aria-label': getDateAriaLabel(item),
                   'aria-current': item.isToday ? 'date' : undefined,
-                  onClick: () => onClick(item),
-                  onDblclick: () => onDblclick(item),
+                  ...events,
+                  onClick: (e: PointerEvent) => { onClick(item.date); events.onClick?.(e) },
                 },
                 item,
                 i,

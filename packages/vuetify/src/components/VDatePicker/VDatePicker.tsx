@@ -30,7 +30,7 @@ import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { CalendarDay } from '@/composables/calendar'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots =
@@ -99,6 +99,7 @@ export const VDatePicker = genericComponent<new <
     : T,
 > (
   props: {
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDay]>
     modelValue?: TModel
     'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
@@ -115,11 +116,9 @@ export const VDatePicker = genericComponent<new <
     'update:year': (date: any) => true,
     // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
-    'click:day': (day: CalendarDay) => true,
-    'dblclick:day': (day: CalendarDay) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const adapter = useDate()
     const { t } = useLocale()
     const { rtlClasses } = useRtl()
@@ -328,14 +327,6 @@ export const VDatePicker = genericComponent<new <
       onUpdateYear()
     }
 
-    function onClickDay (day: CalendarDay) {
-      emit('click:day', day)
-    }
-
-    function onDblclickDay (day: CalendarDay) {
-      emit('dblclick:day', day)
-    }
-
     function onClickDate () {
       viewMode.value = 'month'
     }
@@ -489,14 +480,13 @@ export const VDatePicker = genericComponent<new <
                   ) : (
                     <VDatePickerMonth
                       key="date-picker-month"
+                      { ...attrs }
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
-                      onClick:day={ onClickDay }
-                      onDblclick:day={ onDblclickDay }
                       min={ minDate.value }
                       max={ maxDate.value }
                     >
