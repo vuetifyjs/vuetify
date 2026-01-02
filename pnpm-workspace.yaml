@@ -23,6 +23,9 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/cli@0.21.1'
+  - 'vue-jsx-vapor@3.1.7'
+  - '@vue-jsx-vapor/*'
+  - '@napi-rs/wasm-runtime@1.1.1'
 
 nodeLinker: hoisted
 
