@@ -56,7 +56,7 @@
 
     <v-form>
       <v-container>
-        <v-row dense>
+        <v-row density="comfortable">
           <v-col cols="12" md="6">
             <v-text-field
               v-model="name"

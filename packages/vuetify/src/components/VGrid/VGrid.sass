@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
@@ -7,28 +8,22 @@
   //
   // Rows contain and clear the floats of your columns.
   .v-row
-    @include make-row
+    @include make-row(settings.$grid-gutter)
 
     & + .v-row
-      margin-top: settings.$grid-gutter * .5
+      margin-top: settings.$grid-gutter
 
-      &--dense
-        margin-top: settings.$form-grid-gutter * .5
+      &--density-comfortable
+        margin-top: settings.$form-grid-gutter
 
-    &--dense
-      margin: -(settings.$form-grid-gutter) * .5
+    &.v-row--density-compact
+      margin-top: 0
 
-      > .v-col,
-      > [class*="v-col-"]
-        padding: settings.$form-grid-gutter * .5
+    &--density-comfortable
+      @include make-row(settings.$form-grid-gutter)
 
-    // Remove the negative margin from default .v-row, then the horizontal padding
-    // from all immediate children columns (to prevent runaway style inheritance).
-    &.v-row--no-gutters
-      margin: 0
-      > .v-col,
-      > [class*="v-col-"]
-        padding: 0
+    &.v-row--density-compact
+      @include make-row(0)
 
   // Columns
   //
