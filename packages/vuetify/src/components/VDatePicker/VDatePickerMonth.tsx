@@ -17,6 +17,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 
 // Types
 import type { PropType } from 'vue'
+import type { CalendarDay } from '@/composables/calendar'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -77,6 +78,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'update:modelValue': (date: unknown) => true,
     'update:month': (date: number) => true,
     'update:year': (date: number) => true,
+    'click:day': (day: CalendarDay) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -163,14 +165,18 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
-    function onClick (value: unknown) {
+    function onClick (day: CalendarDay) {
+      const { date } = day
+
       if (props.multiple === 'range') {
-        onRangeClick(value)
+        onRangeClick(date)
       } else if (props.multiple) {
-        onMultipleClick(value)
+        onMultipleClick(date)
       } else {
-        model.value = [value]
+        model.value = [date]
       }
+
+      emit('click:day', day)
     }
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
@@ -268,7 +274,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   'aria-label': getDateAriaLabel(item),
                   'aria-current': item.isToday ? 'date' : undefined,
-                  onClick: () => onClick(item.date),
+                  onClick: () => onClick(item),
                 },
                 item,
                 i,
