@@ -129,7 +129,7 @@ export const makeVListProps = propsFactory({
   ...makeElevationProps(),
   ...makeItemsProps(),
   ...makeRoundedProps(),
-  ...makeTagProps(),
+  ...makeTagProps({ tag: 'ul' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VList')
@@ -178,7 +178,13 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
+    const tags = computed(() => ({
+      item: props.tag === 'ol' || props.tag === 'ul' ? 'li' : undefined,
+      group: String(props.tag),
+    }))
+
     const { children, open, parents, select, getPath } = useNested(props, {
+      tags,
       items,
       returnObject: toRef(() => props.returnObject),
       scrollToActive: toRef(() => props.navigationStrategy === 'track'),

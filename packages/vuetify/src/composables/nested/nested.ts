@@ -81,6 +81,7 @@ export interface NestedProps {
 type NestedProvide = {
   id: Ref<unknown>
   isGroupActivator?: boolean
+  tags: Ref<{ item: string | undefined, group: string }>
   root: {
     children: Ref<Map<unknown, unknown[]>>
     parents: Ref<Map<unknown, unknown>>
@@ -108,6 +109,7 @@ export const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:ne
 
 export const emptyNested: NestedProvide = {
   id: shallowRef(),
+  tags: computed(() => ({ item: undefined, group: 'div' })),
   root: {
     itemsRegistration: ref('render'),
     register: () => null,
@@ -150,10 +152,12 @@ export const makeNestedProps = propsFactory({
 export const useNested = (
   props: NestedProps,
   {
+    tags,
     items,
     returnObject,
     scrollToActive,
   }: {
+    tags: MaybeRefOrGetter<{ item: string | undefined, group: string }>
     items: Ref<ListItem[]>
     returnObject: MaybeRefOrGetter<boolean>
     scrollToActive: MaybeRefOrGetter<boolean>
@@ -298,6 +302,7 @@ export const useNested = (
 
   const nested: NestedProvide = {
     id: shallowRef(),
+    tags: toRef(() => toValue(tags)),
     root: {
       opened,
       activatable: toRef(() => props.activatable),
