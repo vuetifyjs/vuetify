@@ -6,9 +6,9 @@
     <v-card-text>
       <div>Word of the Day</div>
 
-      <p class="text-headline-large font-weight-black">be•nev•o•lent</p>
+      <div class="text-headline-large font-weight-black mb-4">be•nev•o•lent</div>
 
-      <p>adjective</p>
+      <div class="mb-4">adjective</div>
 
       <div class="text-medium-emphasis">
         well meaning and kindly.<br>

@@ -45,7 +45,7 @@
       >
         <v-card-item>
           <div>
-            <div class="text-label-medium text-uppercase mb-1">
+            <div class="text-label-medium text-uppercase mt-2 mb-3">
               {{ variant }}
             </div>
             <div class="text-title-large mb-1">

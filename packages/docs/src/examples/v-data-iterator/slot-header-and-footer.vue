@@ -64,7 +64,7 @@
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
-                <strong class="text-title-large">
+                <strong class="d-block text-title-large py-2 text-truncate">
                   {{ item.raw.name }}
                 </strong>
               </template>

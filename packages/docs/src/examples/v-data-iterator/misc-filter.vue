@@ -34,7 +34,7 @@
 
                 <v-list-item :subtitle="item.raw.subtitle" class="mb-2">
                   <template v-slot:title>
-                    <strong class="text-title-large mb-2">{{ item.raw.title }}</strong>
+                    <strong class="d-block text-title-large py-2 text-truncate">{{ item.raw.title }}</strong>
                   </template>
                 </v-list-item>
 

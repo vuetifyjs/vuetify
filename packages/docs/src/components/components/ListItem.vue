@@ -29,7 +29,7 @@
       </template>
     </v-card>
 
-    <h2 class="text-title-large">
+    <h2 class="text-title-large mt-4 mb-n3 font-weight-medium">
       <span class="text-capitalize">{{ name?.replace(/-/g, ' ') }}</span>
     </h2>
 
