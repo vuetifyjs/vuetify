@@ -5,7 +5,7 @@
     v-resize="onResize"
   >
     <v-col class="text-center">
-      <div class="text-subtitle-2">Window Size</div>
+      <div class="text-title-small">Window Size</div>
       {{ windowSize }}
     </v-col>
   </v-row>

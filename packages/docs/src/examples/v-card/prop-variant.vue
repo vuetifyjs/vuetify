@@ -19,7 +19,7 @@
         </template>
       </v-card>
 
-      <div class="text-center text-caption">{{ variant }}</div>
+      <div class="text-center text-body-small">{{ variant }}</div>
     </v-col>
   </v-row>
 </template>

@@ -106,7 +106,7 @@
             />
           </div>
 
-          <figcaption class="text-caption font-weight-bold text-center text-medium-emphasis mb-2">
+          <figcaption class="text-body-small font-weight-bold text-center text-medium-emphasis mb-2">
             {{ icon.title }}
           </figcaption>
 

@@ -26,7 +26,7 @@
         height="200"
       >
         <h1
-          class="text-h2"
+          class="text-display-large"
         >
           Slide {{ n }}
         </h1>

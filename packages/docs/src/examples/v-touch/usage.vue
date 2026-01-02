@@ -12,7 +12,7 @@
     }"
   >
     <v-col class="text-center">
-      <div class="text-subtitle-2">Swipe Direction</div>
+      <div class="text-title-small">Swipe Direction</div>
       {{ swipeDirection }}
     </v-col>
   </v-row>
