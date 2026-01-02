@@ -16,7 +16,8 @@
   "events": {
     "update:month": "Emitted when the month changes.",
     "update:year": "Emitted when the year changes.",
-    "click:day": "Emitted when a day is clicked."
+    "click:day": "Emitted when a day is clicked.",
+    "dblclick:day": "Emitted when a day is double clicked."
   },
   "slots": {
     "year": "Slot for the year.",

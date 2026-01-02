@@ -116,6 +116,7 @@ export const VDatePicker = genericComponent<new <
     // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
     'click:day': (day: CalendarDay) => true,
+    'dblclick:day': (day: CalendarDay) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -331,6 +332,10 @@ export const VDatePicker = genericComponent<new <
       emit('click:day', day)
     }
 
+    function onDblclickDay (day: CalendarDay) {
+      emit('dblclick:day', day)
+    }
+
     function onClickDate () {
       viewMode.value = 'month'
     }
@@ -491,6 +496,7 @@ export const VDatePicker = genericComponent<new <
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
                       onClick:day={ onClickDay }
+                      onDblclick:day={ onDblclickDay }
                       min={ minDate.value }
                       max={ maxDate.value }
                     >

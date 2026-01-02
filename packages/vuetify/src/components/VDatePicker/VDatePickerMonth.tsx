@@ -79,6 +79,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'update:month': (date: number) => true,
     'update:year': (date: number) => true,
     'click:day': (day: CalendarDay) => true,
+    'dblclick:day': (day: CalendarDay) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -178,6 +179,11 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
 
       emit('click:day', day)
     }
+
+    function onDblclick (day: CalendarDay) {
+      emit('dblclick:day', day)
+    }
+
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
@@ -275,6 +281,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   'aria-label': getDateAriaLabel(item),
                   'aria-current': item.isToday ? 'date' : undefined,
                   onClick: () => onClick(item),
+                  onDblclick: () => onDblclick(item),
                 },
                 item,
                 i,
