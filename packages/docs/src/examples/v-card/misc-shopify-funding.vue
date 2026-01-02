@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title class="text-label-medium text-uppercase">
-        Progress
+      <v-card-title>
+        <div class="text-label-medium text-uppercase my-1">Progress</div>
 
         <div class="text-green-darken-3 text-display-medium font-weight-bold">90%</div>
 
@@ -10,8 +10,7 @@
           $2,938.00 remaining
         </div>
       </v-card-title>
-      <br>
-      <v-card-text>
+      <v-card-text class="pt-2 mt-8">
         <div
           :style="`right: calc(${review} - 32px)`"
           class="position-absolute mt-n8 text-body-small text-green-darken-3"

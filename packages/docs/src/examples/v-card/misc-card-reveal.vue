@@ -6,9 +6,9 @@
     <v-card-text>
       <div>Word of the Day</div>
 
-      <p class="text-headline-large font-weight-black">el·ee·mos·y·nar·y</p>
+      <div class="text-headline-large font-weight-black mb-4">el·ee·mos·y·nar·y</div>
 
-      <p>adjective</p>
+      <div class="mb-4">adjective</div>
 
       <div class="text-medium-emphasis">
         relating to or dependent on charity; charitable; charitable donations. Pertaining to alms.<br>
