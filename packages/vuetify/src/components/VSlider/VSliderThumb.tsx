@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/locale'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -88,6 +88,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       decimals,
       indexFromEnd,
     } = slider
+
+    const isHovered = ref(false)
 
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
@@ -170,6 +172,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
+          onMouseenter={ () => { isHovered.value = true } }
+          onMouseleave={ () => { isHovered.value = false } }
         >
           <div
             class={[
@@ -190,7 +194,11 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={ (thumbLabel.value && props.focused) || thumbLabel.value === 'always' }
+              v-show={
+                thumbLabel.value === 'always' ||
+                (thumbLabel.value === true && props.focused) ||
+                (thumbLabel.value === 'hover' && isHovered.value)
+              }
             >
               <div
                 class={[
