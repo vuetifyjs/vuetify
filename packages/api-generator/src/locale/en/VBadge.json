@@ -3,6 +3,7 @@
     "bordered": "Applies a **2px** by default and **1.5px** border around the badge when using the **dot** property.",
     "content": "Text content to show in the badge.",
     "dot": "Reduce the size of the badge and hide its contents.",
+    "dotSize": "Sets the size of the **dot** variant (includes border when using with **bordered**)",
     "floating": "Move the badge further away from the slotted content. Equivalent to an 8px offset.",
     "inline": "Display as an inline block instead of absolute position. **location**, **floating**, and **offset** will have no effect.",
     "label": "The **aria-label** used for the badge.",
