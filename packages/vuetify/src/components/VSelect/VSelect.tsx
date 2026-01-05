@@ -12,6 +12,7 @@ import { VIcon } from '@/components/VIcon'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
@@ -34,6 +35,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -60,6 +62,12 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject> | null
+
+type FocusableGroups = {
+  header: HTMLElement[]
+  list: HTMLElement[]
+  footer: HTMLElement[]
+}
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -128,6 +136,8 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'list-header': never
+    'list-footer': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -144,6 +154,8 @@ export const VSelect = genericComponent<new <
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -218,11 +230,95 @@ export const VSelect = genericComponent<new <
 
       menu.value = !menu.value
     }
-    function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e)) {
+
+    function onMenuKeydown (e: KeyboardEvent) {
+      const target = e.target as Element
+
+      const eventOrigin = headerRef.value?.contains(target) ? 'header'
+        : footerRef.value?.contains(target) ? 'footer'
+        : 'list'
+
+      if (e.key === 'Tab') {
+        handleTab(eventOrigin, e)
+      }
+
+      if (eventOrigin === 'list' && checkPrintable(e)) {
         onKeydown(e)
       }
     }
+
+    async function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
+      const direction = e.shiftKey ? 'backward' : 'forward'
+      const focusable = {
+        header: headerRef.value ? focusableChildren(headerRef.value) : [],
+        list: listRef.value ? focusableChildren(listRef.value.$el) : [],
+        footer: footerRef.value ? focusableChildren(footerRef.value) : [],
+      }
+
+      const nextSlot = nextFocusSlot(focusable, origin, direction, e.target as Element)
+
+      if (nextSlot) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if (nextSlot === 'header') {
+          focusable.header.at(-1)!.focus()
+        } else if (nextSlot === 'footer') {
+          focusable.footer.at(0)!.focus()
+        } else if (nextSlot === 'list') {
+          if (displayItems.value.length > 0) {
+            // focusing first or last is just as bad when it does not take virtualization into account
+            // ideally we would send `undefined` and it should re-focus last item
+            listRef.value?.focus(0)
+          } else {
+            focusable.list.at(origin === 'header' ? 0 : -1)!.focus()
+          }
+        }
+        return
+      }
+
+      if (
+        (origin === 'header' && direction === 'backward' && focusable.header.at(0) === e.target) ||
+        (origin === 'list' && direction === 'backward' && focusable.header.length === 0) ||
+        (origin === 'footer' && direction === 'forward' && focusable.footer.at(-1) === e.target) ||
+        (origin === 'list' && direction === 'forward' && focusable.footer.length === 0)
+      ) {
+        // We did not need this previously... needs some investigation
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+    }
+
+    function nextFocusSlot (
+      focusable: FocusableGroups,
+      origin: string,
+      direction: 'forward' | 'backward',
+      target: Element
+    ): keyof FocusableGroups | null {
+      if (origin === 'header' && direction === 'forward' && focusable.header.at(-1) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.footer.length > 0) {
+          return 'footer'
+        }
+      }
+      if (origin === 'list') {
+        if (direction === 'forward' && focusable.footer.length > 0) {
+          return 'footer'
+        }
+        if (direction === 'backward' && focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      if (origin === 'footer' && direction === 'backward' && focusable.footer.at(0) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      return null
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || form.isReadonly.value) return
 
@@ -332,7 +428,8 @@ export const VSelect = genericComponent<new <
       }
     }
     function onBlur (e: FocusEvent) {
-      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      const target = e.target as Element
+      if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
       }
     }
@@ -463,91 +560,106 @@ export const VSelect = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      tabindex="-1"
-                      selectable
-                      aria-live="polite"
-                      aria-labelledby={ `${id.value}-label` }
-                      aria-multiselectable={ props.multiple }
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
-                      { slots['prepend-item']?.() }
+                  <VSheet
+                    onFocusin={ onFocusin }
+                    onKeydown={ onMenuKeydown }
+                  >
+                    { slots['list-header'] && (
+                      <header ref={ headerRef }>
+                        { slots['list-header']() }
+                      </header>
+                    )}
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                    { hasList && (
+                      <VList
+                        key="select-list"
+                        ref={ listRef }
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        tabindex="-1"
+                        selectable
+                        aria-live="polite"
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
+                        { slots['prepend-item']?.() }
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
-                        { ({ item, index, itemRef }) => {
-                          const camelizedProps = camelizeProps(item.props)
+                        { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                          <VListItem key="no-data" title={ t(props.noDataText) } />
+                        ))}
 
-                          const itemProps = mergeProps(item.props, {
-                            ref: itemRef,
-                            key: item.value,
-                            onClick: () => select(item, null),
-                            'aria-posinset': index + 1,
-                            'aria-setsize': displayItems.value.length,
-                          })
+                        <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
+                          { ({ item, index, itemRef }) => {
+                            const camelizedProps = camelizeProps(item.props)
 
-                          if (item.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                            const itemProps = mergeProps(item.props, {
+                              ref: itemRef,
+                              key: item.value,
+                              onClick: () => select(item, null),
+                              'aria-posinset': index + 1,
+                              'aria-setsize': displayItems.value.length,
+                            })
+
+                            if (item.type === 'divider') {
+                              return slots.divider?.({ props: item.raw, index }) ?? (
+                                <VDivider { ...item.props } key={ `divider-${index}` } />
+                              )
+                            }
+
+                            if (item.type === 'subheader') {
+                              return slots.subheader?.({ props: item.raw, index }) ?? (
+                                <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                              )
+                            }
+
+                            return slots.item?.({
+                              item,
+                              index,
+                              props: itemProps,
+                            }) ?? (
+                              <VListItem { ...itemProps } role="option">
+                                {{
+                                  prepend: ({ isSelected }) => (
+                                    <>
+                                      { props.multiple && !props.hideSelected ? (
+                                        <VCheckboxBtn
+                                          key={ item.value }
+                                          modelValue={ isSelected }
+                                          ripple={ false }
+                                          tabindex="-1"
+                                          aria-hidden
+                                          onClick={ (event: MouseEvent) => event.preventDefault() }
+                                        />
+                                      ) : undefined }
+
+                                      { camelizedProps.prependAvatar && (
+                                        <VAvatar image={ camelizedProps.prependAvatar } />
+                                      )}
+
+                                      { camelizedProps.prependIcon && (
+                                        <VIcon icon={ camelizedProps.prependIcon } />
+                                      )}
+                                    </>
+                                  ),
+                                }}
+                              </VListItem>
                             )
-                          }
+                          }}
+                        </VVirtualScroll>
 
-                          if (item.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            )
-                          }
+                        { slots['append-item']?.() }
+                      </VList>
+                    )}
 
-                          return slots.item?.({
-                            item,
-                            index,
-                            props: itemProps,
-                          }) ?? (
-                            <VListItem { ...itemProps } role="option">
-                              {{
-                                prepend: ({ isSelected }) => (
-                                  <>
-                                    { props.multiple && !props.hideSelected ? (
-                                      <VCheckboxBtn
-                                        key={ item.value }
-                                        modelValue={ isSelected }
-                                        ripple={ false }
-                                        tabindex="-1"
-                                        aria-hidden
-                                        onClick={ (event: MouseEvent) => event.preventDefault() }
-                                      />
-                                    ) : undefined }
-
-                                    { camelizedProps.prependAvatar && (
-                                      <VAvatar image={ camelizedProps.prependAvatar } />
-                                    )}
-
-                                    { camelizedProps.prependIcon && (
-                                      <VIcon icon={ camelizedProps.prependIcon } />
-                                    )}
-                                  </>
-                                ),
-                              }}
-                            </VListItem>
-                          )
-                        }}
-                      </VVirtualScroll>
-
-                      { slots['append-item']?.() }
-                    </VList>
-                  )}
+                    { slots['list-footer'] && (
+                      <footer ref={ footerRef }>
+                        { slots['list-footer']() }
+                      </footer>
+                    )}
+                  </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
