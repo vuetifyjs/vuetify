@@ -25,6 +25,11 @@
       "border": "3.7.0"
     }
   },
+  "VBadge": {
+    "props": {
+      "dotSize": "4.0.0"
+    }
+  },
   "VBanner": {
     "props": {
       "bgColor": "3.4.0"
