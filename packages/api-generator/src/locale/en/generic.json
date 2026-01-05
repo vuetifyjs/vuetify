@@ -68,6 +68,7 @@
     "valueComparator": "Apply a custom comparison algorithm to compare **model-value** and values contains in the **items** prop.",
     "variant": "Applies a distinct style to the component.",
     "weekdayFormat": "Allows you to customize the format of the weekday string that appears in the body of the calendar. Uses `'narrow'` by default. (Note: not guaranteed to work when using custom date adapters.)",
+    "weekdays": "An array of weekdays to display. Does not affect the order.",
     "width": "Sets the width for the component."
   },
   "slots": {
