@@ -36,13 +36,19 @@ export const makeVCommandPaletteProps = propsFactory({
     type: Array as PropType<VCommandPaletteItemType[]>,
     default: () => [],
   },
-  placeholder: String,
+  placeholder: {
+    type: String,
+    default: '$vuetify.command.search',
+  },
   inputIcon: {
     type: String,
     default: '$search',
   },
   hotkey: String,
-  noDataText: String,
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
   listProps: Object as PropType<VList['$props']>,
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
@@ -63,8 +69,6 @@ export type VCommandPaletteSlots = {
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
 
-  inheritAttrs: false,
-
   props: makeVCommandPaletteProps(),
 
   emits: {
@@ -73,7 +77,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     'click:item': (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
@@ -245,7 +249,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       <VDialog
         ref={ dialogRef }
         { ...dialogProps.value }
-        { ...attrs }
         class="v-command-palette"
       >
         {{
@@ -264,7 +267,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   <VTextField
                     ref={ searchInputRef }
                     v-model={ searchQuery.value }
-                    placeholder={ props.placeholder || t('$vuetify.command.search') }
+                    placeholder={ t(props.placeholder) }
                     prependInnerIcon={ props.inputIcon }
                     singleLine
                     hideDetails
@@ -302,7 +305,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   />
                 ) : (
                   <div key="no-data" class="v-command-palette__no-data">
-                    { slots['no-data']?.() || (props.noDataText || t('$vuetify.noDataText')) }
+                    { slots['no-data']?.() || t(props.noDataText) }
                   </div>
                 )}
               </div>
