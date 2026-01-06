@@ -269,6 +269,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     v-model={ searchQuery.value }
                     placeholder={ t(props.placeholder) }
                     prependInnerIcon={ props.inputIcon }
+                    autocomplete="off"
+                    autofocus
                     singleLine
                     hideDetails
                     variant="solo"
