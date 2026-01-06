@@ -51,9 +51,9 @@
 
         <v-command-palette
           v-model="dialogs.custom"
-          :dialog-props="{ persistent: true }"
           :items="items"
           placeholder="Search..."
+          persistent
           @click:item="handleClick"
         ></v-command-palette>
       </v-col>

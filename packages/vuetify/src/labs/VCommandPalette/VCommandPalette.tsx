@@ -20,7 +20,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
-import { computed, nextTick, onUnmounted, provide, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
@@ -43,8 +43,6 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   hotkey: String,
   noDataText: String,
-  activator: [String, Object],
-  dialogProps: Object as PropType<Record<string, any>>,
   listProps: Object as PropType<VList['$props']>,
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
@@ -65,6 +63,8 @@ export type VCommandPaletteSlots = {
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',
 
+  inheritAttrs: false,
+
   props: makeVCommandPaletteProps(),
 
   emits: {
@@ -73,7 +73,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     'click:item': (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
@@ -122,13 +122,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       setSelectedIndex: navigation.setSelectedIndex,
     })
 
-    // Register main hotkey with cleanup
-    let hotkeyUnsubscribe: (() => void) | undefined
-    if (props.hotkey) {
-      hotkeyUnsubscribe = useHotkey(props.hotkey, () => {
-        isOpen.value = !isOpen.value
-      })
-    }
+    // Register main hotkey with cleanup - using toRef for reactivity
+    const hotkeyUnsubscribe = useHotkey(toRef(props, 'hotkey'), () => {
+      isOpen.value = !isOpen.value
+    })
 
     watchEffect(onCleanup => {
       if (!isOpen.value) {
@@ -231,32 +228,24 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
     }, { immediate: true })
 
-    const computedDialogProps = computed(() => {
-      const baseProps: Record<string, any> = {
-        modelValue: isOpen.value,
-        'onUpdate:modelValue': (v: boolean) => {
-          isOpen.value = v
-        },
-        scrollable: true,
-        ...(props.dialogProps || {}),
-      }
-
-      if (props.activator) {
-        baseProps.activator = props.activator
-      }
-
-      return baseProps
-    })
+    const dialogProps = computed(() => ({
+      modelValue: isOpen.value,
+      'onUpdate:modelValue': (v: boolean) => {
+        isOpen.value = v
+      },
+      scrollable: true,
+    }))
 
     onUnmounted(() => {
-      hotkeyUnsubscribe?.()
+      hotkeyUnsubscribe()
       previouslyFocusedElement.value = null
     })
 
     useRender((): VNode => (
       <VDialog
         ref={ dialogRef }
-        { ...computedDialogProps.value }
+        { ...dialogProps.value }
+        { ...attrs }
         class="v-command-palette"
       >
         {{
