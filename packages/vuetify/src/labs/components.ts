@@ -1,6 +1,7 @@
 export * from './VColorInput'
 export * from './VDateInput'
 export * from './VFileUpload'
+export * from './VHeatmap'
 export * from './VIconBtn'
 export * from './VMaskInput'
 export * from './VPicker'
