@@ -43,7 +43,6 @@ export const makeVCommandPaletteProps = propsFactory({
   },
   hotkey: String,
   noDataText: String,
-  location: String,
   activator: [String, Object],
   dialogProps: Object as PropType<Record<string, any>>,
   listProps: Object as PropType<VList['$props']>,
@@ -242,9 +241,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         ...(props.dialogProps || {}),
       }
 
-      if (props.location) {
-        baseProps.location = props.location
-      }
       if (props.activator) {
         baseProps.activator = props.activator
       }

@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-card>
           <v-card-title>Default (Center)</v-card-title>
           <v-card-text>
@@ -19,26 +19,7 @@
         ></v-command-palette>
       </v-col>
 
-      <v-col cols="12" md="4">
-        <v-card>
-          <v-card-title>Top Position</v-card-title>
-          <v-card-text>
-            <v-btn block @click="dialogs.top = true">
-              Open at Top
-            </v-btn>
-          </v-card-text>
-        </v-card>
-
-        <v-command-palette
-          v-model="dialogs.top"
-          :items="items"
-          location="top"
-          placeholder="Search..."
-          @click:item="handleClick"
-        ></v-command-palette>
-      </v-col>
-
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-card>
           <v-card-title>Parent Activator</v-card-title>
           <v-card-text>
@@ -89,7 +70,6 @@
 
   const dialogs = ref({
     default: false,
-    top: false,
     activator: false,
     custom: false,
   })
@@ -149,7 +129,6 @@
       return {
         dialogs: {
           default: false,
-          top: false,
           activator: false,
           custom: false,
         },

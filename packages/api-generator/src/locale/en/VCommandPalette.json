@@ -6,7 +6,6 @@
     "inputIcon": "Icon to display at the start of the search input field. Defaults to `'mdi-magnify'`.",
     "items": "Array of command palette items. Objects should have **title** and optionally **subtitle**, **prependIcon**, **appendIcon**, **prependAvatar**, **appendAvatar**, **hotkey**, **onClick**, **to**, **href**, and **value** properties. Use `type: 'subheader'` with a **title** for section headers, or `type: 'divider'` for visual separators between groups.",
     "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
-    "location": "Controls the position of the dialog. Supports values like `'top'`, `'bottom'`, `'center'` and combinations. Passed to the underlying **v-dialog**.",
     "modelValue": "Controls the visibility of the command palette dialog. Use `v-model` for two-way binding.",
     "noDataText": "Text displayed when no items match the current search query. Defaults to `$vuetify.noDataText`.",
     "placeholder": "Placeholder text displayed in the search input. Defaults to the `$vuetify.command.search` locale string.",
