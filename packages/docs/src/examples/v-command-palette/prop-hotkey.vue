@@ -51,13 +51,6 @@
       hotkey: 'meta+s',
     },
     {
-      title: 'Save All',
-      subtitle: 'Save all open files',
-      prependIcon: 'mdi-content-save-all',
-      value: 'save-all',
-      hotkey: 'meta+alt+s',
-    },
-    {
       title: 'Open File',
       subtitle: 'Open a file from disk',
       prependIcon: 'mdi-folder-open',
@@ -109,14 +102,14 @@
     {
       title: 'Zoom In',
       subtitle: 'Increase font size',
-      prependIcon: 'mdi-magnify-plus',
+      prependIcon: 'mdi-magnify-plus-outline',
       value: 'zoom-in',
       hotkey: 'meta+plus',
     },
     {
       title: 'Zoom Out',
       subtitle: 'Decrease font size',
-      prependIcon: 'mdi-magnify-minus',
+      prependIcon: 'mdi-magnify-minus-outline',
       value: 'zoom-out',
       hotkey: 'meta+minus',
     },
@@ -142,13 +135,6 @@
             prependIcon: 'mdi-content-save',
             value: 'save',
             hotkey: 'meta+s',
-          },
-          {
-            title: 'Save All',
-            subtitle: 'Save all open files',
-            prependIcon: 'mdi-content-save-all',
-            value: 'save-all',
-            hotkey: 'meta+alt+s',
           },
           {
             title: 'Open File',
@@ -202,14 +188,14 @@
           {
             title: 'Zoom In',
             subtitle: 'Increase font size',
-            prependIcon: 'mdi-magnify-plus',
+            prependIcon: 'mdi-magnify-plus-outline',
             value: 'zoom-in',
             hotkey: 'meta+plus',
           },
           {
             title: 'Zoom Out',
             subtitle: 'Decrease font size',
-            prependIcon: 'mdi-magnify-minus',
+            prependIcon: 'mdi-magnify-minus-outline',
             value: 'zoom-out',
             hotkey: 'meta+minus',
           },

@@ -104,7 +104,7 @@
     {
       title: 'Keyboard Shortcuts',
       subtitle: 'View and edit shortcuts',
-      prependIcon: 'mdi-keyboard',
+      prependIcon: 'mdi-keyboard-outline',
       value: 'shortcuts',
     },
   ]
@@ -195,7 +195,7 @@
           {
             title: 'Keyboard Shortcuts',
             subtitle: 'View and edit shortcuts',
-            prependIcon: 'mdi-keyboard',
+            prependIcon: 'mdi-keyboard-outline',
             value: 'shortcuts',
           },
         ],
