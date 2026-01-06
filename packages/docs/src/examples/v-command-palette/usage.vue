@@ -8,7 +8,6 @@
   >
     <div class="text-center">
       <v-command-palette
-        v-model="dialog"
         v-model:search="search"
         :hotkey="hotkey"
         :items="items"
@@ -49,7 +48,6 @@
 <script setup>
   const name = 'v-command-palette'
   const model = ref('default')
-  const dialog = ref(false)
   const search = ref('')
   const snackbar = ref(false)
   const selectedItem = ref('')
@@ -87,7 +85,6 @@
 
   const code = computed(() => {
     return `<v-command-palette
-  v-model="dialog"
   v-model:search="search"
   :items="items"
   hotkey="${hotkey.value}"
