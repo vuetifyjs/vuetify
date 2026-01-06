@@ -70,6 +70,7 @@ const aliases: IconAliases = {
   volumeMedium: 'mdi-volume-medium',
   volumeLow: 'mdi-volume-low',
   volumeOff: 'mdi-volume-variant-off',
+  search: 'mdi-magnify',
 }
 
 const mdi: IconSet = {

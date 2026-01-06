@@ -39,7 +39,7 @@ export const makeVCommandPaletteProps = propsFactory({
   placeholder: String,
   inputIcon: {
     type: String,
-    default: 'mdi-magnify',
+    default: '$search',
   },
   hotkey: String,
   noDataText: String,
