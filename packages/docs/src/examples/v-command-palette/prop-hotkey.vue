@@ -15,6 +15,7 @@
       v-model:search="search"
       :items="items"
       hotkey="ctrl+shift+p"
+      max-width="500"
       placeholder="Type a command or search..."
       @click:item="handleItemClick"
     ></v-command-palette>
