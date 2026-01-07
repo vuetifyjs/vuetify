@@ -5,27 +5,25 @@ import './VCommandPalette.scss'
 import { VCommandPaletteSymbol } from './shared'
 import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
 import { VDialog } from '@/components/VDialog'
+import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VList } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
-import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useHotkey } from '@/composables/hotkey'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
@@ -52,9 +50,7 @@ export const makeVCommandPaletteProps = propsFactory({
   listProps: Object as PropType<VList['$props']>,
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
-  ...makeThemeProps(),
-  ...makeDensityProps(),
-  ...makeTransitionProps(),
+  ...omit(makeVDialogProps({ maxWidth: 500 }), ['modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
@@ -81,8 +77,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const { t } = useLocale()
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
-    const { themeClasses } = provideTheme(props)
-    const { densityClasses } = useDensity(props)
     const searchInputRef = ref<VTextField>()
     const dialogRef = ref<VDialog>()
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
@@ -232,92 +226,88 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }
     }, { immediate: true })
 
-    const dialogProps = computed(() => ({
-      modelValue: isOpen.value,
-      'onUpdate:modelValue': (v: boolean) => {
-        isOpen.value = v
-      },
-      scrollable: true,
-    }))
-
     onUnmounted(() => {
       hotkeyUnsubscribe()
       previouslyFocusedElement.value = null
     })
 
-    useRender((): VNode => (
-      <VDialog
-        ref={ dialogRef }
-        { ...dialogProps.value }
-        class="v-command-palette"
-      >
-        {{
-          activator: slots.activator,
-          default: () => (
-            <VSheet
-              class={[
-                themeClasses.value,
-                densityClasses.value,
-              ]}
-            >
-              { slots.prepend?.() }
+    useRender(() => {
+      const dialogProps = VDialog.filterProps(omit(props, ['modelValue', 'class', 'style']))
 
-              <div class="v-command-palette__input-container">
-                { slots.input?.() ?? (
-                  <VTextField
-                    ref={ searchInputRef }
-                    v-model={ searchQuery.value }
-                    placeholder={ t(props.placeholder) }
-                    prependInnerIcon={ props.inputIcon }
-                    autocomplete="off"
-                    autofocus
-                    singleLine
-                    hideDetails
-                    variant="solo"
-                    flat
-                    bgColor="transparent"
-                    onKeydown={ handleSearchKeydown }
-                  />
-                )}
-              </div>
+      return (
+        <VDialog
+          ref={ dialogRef }
+          class="v-command-palette"
+          v-model={ isOpen.value }
+          scrollable
+          { ...dialogProps }
+        >
+          {{
+            activator: slots.activator,
+            default: () => (
+              <VSheet
+                class={ props.class }
+                style={ props.style }
+              >
+                { slots.prepend?.() }
 
-              <div class="v-command-palette__content">
-                { filteredItems.value.length > 0 ? (
-                  <VList
-                    key="list"
-                    class="v-command-palette__list"
-                    items={ itemsForList.value }
-                    itemType="type"
-                    itemProps
-                    activatable
-                    { ...props.listProps }
-                    navigationStrategy="track"
-                    navigationIndex={ navigation.selectedIndex.value }
-                    onUpdate:navigationIndex={ navigation.setSelectedIndex }
-                    v-slots={{
-                      item: ({ props }: { props: any }) => (
-                        <VCommandPaletteItemComponent
-                          key={ `item-${props.index}` }
-                          item={ props }
-                          index={ props.index }
-                          onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(props.index, event) }
-                        />
-                      ),
-                    }}
-                  />
-                ) : (
-                  <div key="no-data" class="v-command-palette__no-data">
-                    { slots['no-data']?.() || t(props.noDataText) }
-                  </div>
-                )}
-              </div>
+                <div class="v-command-palette__input-container">
+                  { slots.input?.() ?? (
+                    <VTextField
+                      ref={ searchInputRef }
+                      v-model={ searchQuery.value }
+                      placeholder={ t(props.placeholder) }
+                      prependInnerIcon={ props.inputIcon }
+                      autocomplete="off"
+                      autofocus
+                      singleLine
+                      hideDetails
+                      variant="solo"
+                      flat
+                      bgColor="transparent"
+                      onKeydown={ handleSearchKeydown }
+                    />
+                  )}
+                </div>
 
-              { slots.append?.() }
-            </VSheet>
-          ),
-        }}
-      </VDialog>
-    ))
+                <div class="v-command-palette__content">
+                  { filteredItems.value.length > 0 ? (
+                    <VList
+                      key="list"
+                      class="v-command-palette__list"
+                      items={ itemsForList.value }
+                      itemType="type"
+                      itemProps
+                      activatable
+                      { ...props.listProps }
+                      navigationStrategy="track"
+                      navigationIndex={ navigation.selectedIndex.value }
+                      onUpdate:navigationIndex={ navigation.setSelectedIndex }
+                      v-slots={{
+                        item: ({ props }: { props: any }) => (
+                          <VCommandPaletteItemComponent
+                            key={ `item-${props.index}` }
+                            item={ props }
+                            index={ props.index }
+                            onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(props.index, event) }
+                          />
+                        ),
+                      }}
+                    />
+                  ) : (
+                    <div key="no-data" class="v-command-palette__no-data">
+                      { slots['no-data']?.() || t(props.noDataText) }
+                    </div>
+                  )}
+                </div>
+
+                { slots.append?.() }
+              </VSheet>
+            ),
+          }}
+        </VDialog>
+      )
+    })
   },
 })
 

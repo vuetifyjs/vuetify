@@ -62,7 +62,7 @@ Use the **hotkey** prop to register a global keyboard shortcut that toggles the 
 
 #### Dialog configuration
 
-The command palette is built on `v-dialog`. Any props not recognized by the command palette are passed through to the underlying dialog, such as **activator**, **persistent**, **width**, and **max-width**.
+The command palette is built on `v-dialog` and accepts most of the props while passing **class** and **style** values to the `v-sheet` content container.
 
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
