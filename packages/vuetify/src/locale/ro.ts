@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
   },
+  command: {
+    search: 'Tastați o comandă sau căutați...',
+  },
   hotkey: {
     then: 'apoi',
     ctrl: 'Ctrl',
