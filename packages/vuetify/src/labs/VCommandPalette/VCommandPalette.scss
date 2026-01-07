@@ -9,8 +9,13 @@
       flex-direction: column;
     }
 
-    &__input-container {
-      padding: $command-palette-input-padding;
+    @at-root {
+      @include tools.density('v-command-palette', $command-palette-density) using ($modifier) {
+        .v-command-palette__input-container {
+          padding-block: $command-palette-input-padding-block + $modifier;
+          padding-inline: $command-palette-input-padding-inline + $modifier;
+        }
+      }
     }
 
     &__content {

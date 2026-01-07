@@ -1,4 +1,6 @@
-$command-palette-input-padding: 8px 16px !default;
+$command-palette-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$command-palette-input-padding-block: 8px !default;
+$command-palette-input-padding-inline: 16px !default;
 $command-palette-no-data-padding: 16px !default;
 $command-palette-no-data-opacity: 0.6 !default;
 $command-palette-subheader-opacity: 0.7 !default;

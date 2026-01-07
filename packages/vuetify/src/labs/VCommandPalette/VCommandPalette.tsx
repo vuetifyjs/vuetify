@@ -12,6 +12,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { useCommandPaletteNavigation } from './composables/useCommandPaletteNavigation'
+import { makeDensityProps } from '@/composables/density'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useHotkey } from '@/composables/hotkey'
 import { useLocale } from '@/composables/locale'
@@ -50,6 +51,7 @@ export const makeVCommandPaletteProps = propsFactory({
   listProps: Object as PropType<VList['$props']>,
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
+  ...makeDensityProps(),
   ...omit(makeVDialogProps({ maxWidth: 500 }), ['modelValue']),
 }, 'VCommandPalette')
 
@@ -251,30 +253,32 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               >
                 { slots.prepend?.() }
 
-                <div class="v-command-palette__input-container">
-                  { slots.input?.() ?? (
-                    <VTextField
-                      ref={ searchInputRef }
-                      v-model={ searchQuery.value }
-                      placeholder={ t(props.placeholder) }
-                      prependInnerIcon={ props.inputIcon }
-                      autocomplete="off"
-                      autofocus
-                      singleLine
-                      hideDetails
-                      variant="solo"
-                      flat
-                      bgColor="transparent"
-                      onKeydown={ handleSearchKeydown }
-                    />
-                  )}
-                </div>
+              <div class="v-command-palette__input-container">
+                { slots.input?.() ?? (
+                  <VTextField
+                    ref={ searchInputRef }
+                    v-model={ searchQuery.value }
+                    density={ props.density }
+                    placeholder={ t(props.placeholder) }
+                    prependInnerIcon={ props.inputIcon }
+                    autocomplete="off"
+                    autofocus
+                    singleLine
+                    hideDetails
+                    variant="solo"
+                    flat
+                    bgColor="transparent"
+                    onKeydown={ handleSearchKeydown }
+                  />
+                )}
+              </div>
 
                 <div class="v-command-palette__content">
                   { filteredItems.value.length > 0 ? (
                     <VList
                       key="list"
                       class="v-command-palette__list"
+                      density={ props.density }
                       items={ itemsForList.value }
                       itemType="type"
                       itemProps
