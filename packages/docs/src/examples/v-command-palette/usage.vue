@@ -12,7 +12,6 @@
         :hotkey="hotkey"
         :items="items"
         :placeholder="placeholder"
-        max-width="500"
         @click:item="onItemClick"
       >
         <template v-slot:activator="{ props: activatorProps }">
@@ -88,7 +87,6 @@
   v-model:search="search"
   :items="items"
   hotkey="${hotkey.value}"
-  max-width="500"
   placeholder="${placeholder.value}"
   @click:item="onItemClick"
 >

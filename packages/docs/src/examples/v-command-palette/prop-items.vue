@@ -10,7 +10,6 @@
       v-model="dialog"
       v-model:search="search"
       :items="items"
-      max-width="500"
       placeholder="Search commands..."
       @click:item="handleItemClick"
     ></v-command-palette>

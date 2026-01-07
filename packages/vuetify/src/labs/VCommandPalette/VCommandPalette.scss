@@ -1,4 +1,5 @@
 @use '../../styles/tools';
+@use './variables' as *;
 
 @include tools.layer('components') {
   .v-command-palette {
@@ -9,7 +10,7 @@
     }
 
     &__input-container {
-      padding: 8px 16px;
+      padding: $command-palette-input-padding;
     }
 
     &__content {
@@ -17,19 +18,19 @@
     }
 
     &__no-data {
-      padding: 16px;
+      opacity: $command-palette-no-data-opacity;
+      padding: $command-palette-no-data-padding;
       text-align: center;
-      opacity: 0.6;
     }
 
     &__list {
       .v-list-subheader {
-        opacity: 0.7;
+        opacity: $command-palette-subheader-opacity;
         user-select: none;
       }
 
       .v-divider {
-        margin-block: 4px;
+        margin-block: $command-palette-divider-margin;
       }
     }
   }

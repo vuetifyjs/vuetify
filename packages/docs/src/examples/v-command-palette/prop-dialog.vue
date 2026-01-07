@@ -14,7 +14,6 @@
         <v-command-palette
           v-model="dialogs.default"
           :items="items"
-          max-width="500"
           placeholder="Search..."
           @click:item="handleClick"
         ></v-command-palette>
@@ -30,7 +29,6 @@
                 v-model="dialogs.activator"
                 :items="items"
                 activator="parent"
-                max-width="500"
                 placeholder="Search..."
                 @click:item="handleClick"
               ></v-command-palette>
@@ -54,7 +52,6 @@
         <v-command-palette
           v-model="dialogs.custom"
           :items="items"
-          max-width="500"
           placeholder="Search..."
           persistent
           @click:item="handleClick"
