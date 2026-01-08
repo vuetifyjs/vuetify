@@ -1,12 +1,15 @@
 // Components
-import { VMenu } from '@/components/VMenu/VMenu'
+import { VBtn } from '@/components/VBtn'
+import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
+import { VSpacer } from '@/components/VGrid/VSpacer'
+import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
-import { makeVConfirmEditProps, VConfirmEdit } from '@/labs/VConfirmEdit/VConfirmEdit'
-import { makeVTimePickerProps, VTimePicker } from '@/labs/VTimePicker/VTimePicker'
+import { makeVTimePickerProps, VTimePicker } from '@/components/VTimePicker/VTimePicker'
 
 // Composables
 import { useDate } from '@/composables/date'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -14,42 +17,68 @@ import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-export interface VTimeInputSlots {
+import type { PropType } from 'vue'
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+
+export type VTimeInputActionsSlot = {
+  save: () => void
+  cancel: () => void
+  isPristine: boolean
+}
+
+export type VTimeInputSlots = Omit<VTextFieldSlots, 'default'> & {
+  actions: VTimeInputActionsSlot
   default: never
 }
 
 export const makeVTimeInputProps = propsFactory({
-  hideActions: Boolean,
+  pickerProps: Object as PropType<VTimePicker['$props']>,
 
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps({
-    placeholder: 'hh:mm',
+    placeholder: '--:--',
     prependIcon: '$clock',
   }),
   ...omit(makeVTimePickerProps({
+    variant: 'dial',
     hideHeader: true,
-  }), ['active']),
+  }), [
+    'location',
+    'rounded',
+    'height',
+    'minHeight',
+    'maxHeight',
+    'variant',
+  ]),
 }, 'VTimeInput')
 
-export const VTimeInput = genericComponent()({
+export const VTimeInput = genericComponent<VTimeInputSlots>()({
   name: 'VTimeInput',
 
   props: makeVTimeInputProps(),
 
   emits: {
     'update:modelValue': (val: string) => true,
+    'update:period': (val: string) => true,
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(props, 'modelValue', null)
+    const period = useProxiedModel(props, 'period', 'am')
     const menu = shallowRef(false)
 
-    const display = computed(() => adapter.isValid(model.value)
-      ? adapter.format(model.value, props.format === '24hr' ? 'fullTime24h' : 'fullTime12h')
-      : '')
+    const display = computed(() => {
+      if (!model.value) return ''
+      const isoDate = `2000-01-01T${model.value}`
+
+      return model.value && adapter.isValid(isoDate)
+        ? adapter.format(isoDate, props.format === '24hr' ? 'fullTime24h' : 'fullTime12h')
+        : ''
+    })
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
@@ -77,9 +106,22 @@ export const VTimeInput = genericComponent()({
     }
 
     useRender(() => {
-      const confirmEditProps = VConfirmEdit.filterProps(props)
-      const timePickerProps = VTimePicker.filterProps(omit(props, ['active']))
       const textFieldProps = VTextField.filterProps(props)
+      const confirmEditProps = VConfirmEdit.filterProps(props)
+      const timePickerProps = {
+        ...VTimePicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'period',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+          'variant',
+        ])),
+        ...props.pickerProps,
+      }
 
       return (
         <VTextField
@@ -95,7 +137,7 @@ export const VTimeInput = genericComponent()({
           <VMenu
             v-model={ menu.value }
             activator="parent"
-            min-width="0"
+            minWidth="0"
             closeOnContentClick={ false }
             openOnClick={ false }
           >
@@ -105,9 +147,10 @@ export const VTimeInput = genericComponent()({
               onSave={ onSave }
             >
               {{
-                default: ({ actions, model: proxyModel }) => {
+                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
                   return (
                     <VTimePicker
+                      v-model:period={ period.value }
                       { ...timePickerProps }
                       modelValue={ props.hideActions ? model.value : proxyModel.value }
                       onUpdate:modelValue={ val => {
@@ -120,7 +163,33 @@ export const VTimeInput = genericComponent()({
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     >
                       {{
-                        actions: !props.hideActions ? () => actions : undefined,
+                        actions: () => (
+                          <>
+                            <div class="d-flex">
+                              <VBtn
+                                class="mr-0"
+                                active={ period.value === 'am' }
+                                color={ period.value === 'am' ? props.color : undefined }
+                                disabled={ props.disabled }
+                                text={ t('$vuetify.timePicker.am') }
+                                variant={ props.disabled && period.value === 'am' ? 'elevated' : 'tonal' }
+                                onClick={ () => period.value !== 'am' ? period.value = 'am' : null }
+                              />
+                              <VBtn
+                                active={ period.value === 'pm' }
+                                color={ period.value === 'pm' ? props.color : undefined }
+                                disabled={ props.disabled }
+                                text={ t('$vuetify.timePicker.pm') }
+                                variant={ props.disabled && period.value === 'pm' ? 'elevated' : 'tonal' }
+                                onClick={ () => period.value !== 'pm' ? period.value = 'pm' : null }
+                              />
+                            </div>
+                            <VSpacer />
+                            { !props.hideActions
+                              ? slots.actions?.({ save, cancel, isPristine }) ?? actions()
+                              : undefined }
+                          </>
+                        ),
                       }}
                     </VTimePicker>
                   )
