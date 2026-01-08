@@ -6,6 +6,7 @@ import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -36,6 +37,7 @@ export const makeVProgressCircularProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeRevealProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
@@ -62,8 +64,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
     const { resizeRef, contentRect } = useResizeObserver()
+    const { state: revealState, duration: revealDuration } = useReveal(props)
 
-    const normalizedValue = toRef(() => clamp(parseFloat(props.modelValue), 0, 100))
+    const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
     const width = toRef(() => Number(props.width))
     const size = toRef(() => {
       // Get size from element if size prop value is small, large etc
@@ -103,6 +106,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             'v-progress-circular--visible': isIntersecting.value,
             'v-progress-circular--disable-shrink': props.indeterminate &&
               (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
+            'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),
           },
           themeClasses.value,
           sizeClasses.value,
@@ -112,6 +116,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         style={[
           sizeStyles.value,
           textColorStyles.value,
+          {
+            '--progress-reveal-duration': `${revealDuration.value}ms`,
+          },
           props.style,
         ]}
         role="progressbar"
