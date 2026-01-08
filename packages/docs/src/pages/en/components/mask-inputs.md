@@ -114,6 +114,12 @@ You can also define custom tokens for more specific input requirements:
 
 <ExamplesExample file="v-mask-input/custom-token" />
 
+#### Multi-Mask with Dynamic Resolution
+
+You can provide an array of masks to allow dynamic mask selection based on user input. The component automatically selects the best matching mask as the user types:
+
+<ExamplesExample file="v-mask-input/multi-mask" />
+
 #### IP Address
 
 This example shows how to create a mask for IP addresses with validation:
