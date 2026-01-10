@@ -7,13 +7,13 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { makeVTimePickerProps, VTimePicker } from '@/components/VTimePicker/VTimePicker'
 
 // Composables
-import { useDate } from '@/composables/date'
+import { useTimeInput } from './time-input'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -59,39 +59,64 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
   props: makeVTimeInputProps(),
 
   emits: {
-    'update:modelValue': (val: string) => true,
-    'update:period': (val: string) => true,
+    'update:modelValue': (_val: string) => true,
+    'update:period': (_val: string) => true,
   },
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const adapter = useDate()
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(props, 'modelValue', null)
     const period = useProxiedModel(props, 'period', 'am')
     const menu = shallowRef(false)
+    const controlRef = shallowRef<HTMLInputElement>()
+    const textFieldRef = shallowRef<VTextField>()
 
-    const display = computed(() => {
-      if (!model.value) return ''
-      const isoDate = `2000-01-01T${model.value}`
+    const timeInput = useTimeInput(
+      {
+        modelValue: model.value,
+        format: props.format,
+        useSeconds: props.useSeconds,
+        period: period.value,
+        readonly: props.readonly,
+        disabled: props.disabled,
+      },
+      { controlRef }
+    )
 
-      return model.value && adapter.isValid(isoDate)
-        ? adapter.format(isoDate, props.format === '24hr' ? 'fullTime24h' : 'fullTime12h')
-        : ''
+    // Sync composable model with component model (bidirectional)
+    watch(() => model.value, val => {
+      if (val !== timeInput.model.value) {
+        timeInput.model.value = val
+      }
+    })
+    watch(() => timeInput.model.value, val => {
+      if (val !== model.value) {
+        model.value = val
+      }
+    })
+
+    // Sync composable period with component period (bidirectional)
+    watch(() => period.value, val => {
+      if (val !== timeInput.period.value) {
+        timeInput.period.value = val
+      }
+    })
+    watch(() => timeInput.period.value, val => {
+      if (val && val !== period.value) {
+        period.value = val
+      }
     })
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key !== 'Enter') return
-
-      if (!menu.value || !isFocused.value) {
+      // Handle Enter to open menu
+      if (e.key === 'Enter' && (!menu.value || !isFocused.value)) {
         menu.value = true
-
         return
       }
 
-      const target = e.target as HTMLInputElement
-
-      model.value = adapter.date(target.value)
+      // Delegate to time input composable
+      timeInput.onKeydown(e)
     }
 
     function onClick (e: MouseEvent) {
@@ -104,6 +129,14 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
     function onSave () {
       menu.value = false
     }
+
+    // Get the input element from VTextField after mount
+    watch(textFieldRef, tf => {
+      if (tf?.$el) {
+        controlRef.value = tf.controlRef as HTMLInputElement
+        controlRef.value?.addEventListener('keydown', onKeydown)
+      }
+    }, { flush: 'post' })
 
     useRender(() => {
       const textFieldProps = VTextField.filterProps(props)
@@ -125,13 +158,14 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
 
       return (
         <VTextField
+          ref={ textFieldRef }
           { ...textFieldProps }
-          modelValue={ display.value }
-          onKeydown={ onKeydown }
+          modelValue={ timeInput.displayValue.value }
+          onInput={ timeInput.onInput }
           focused={ menu.value || isFocused.value }
-          onFocus={ focus }
-          onBlur={ blur }
-          onClick:control={ onClick }
+          onFocus={ () => { focus(); timeInput.onFocus() } }
+          onBlur={ () => { blur(); timeInput.onBlur() } }
+          onClick:control={ e => { onClick(e); timeInput.onClick(e) } }
           onClick:prepend={ onClick }
         >
           <VMenu
