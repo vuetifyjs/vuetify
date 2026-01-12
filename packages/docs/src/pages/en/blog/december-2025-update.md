@@ -508,35 +508,35 @@ With these additions, v0 now provides production-ready primitives for building a
 
 December added five composables covering pagination, virtualization, and UI utilities:
 
-**[usePagination](https://0.vuetifyjs.com/composables/use-pagination/)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
+**[usePagination](https://0.vuetifyjs.com/composables/utilities/use-pagination/)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
 
-**[useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
+**[useVirtual](https://0.vuetifyjs.com/composables/utilities/use-virtual/)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
 
-**[useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
+**[useOverflow](https://0.vuetifyjs.com/composables/utilities/use-overflow/)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
 
-**[useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)** — Click outside detection for closing menus, dialogs, and popovers. Handles edge cases like portaled content and nested overlays.
+**[useClickOutside](https://0.vuetifyjs.com/composables/system/use-click-outside/)** — Click outside detection for closing menus, dialogs, and popovers. Handles edge cases like portaled content and nested overlays.
 
-**[useToggleScope](https://0.vuetifyjs.com/composables/use-toggle-scope/)** — Manages Vue effect scopes based on a reactive boolean. Automatically cleans up effects when the condition becomes false—useful for conditional side effects and feature flags.
+**[useToggleScope](https://0.vuetifyjs.com/composables/system/use-toggle-scope/)** — Manages Vue effect scopes based on a reactive boolean. Automatically cleans up effects when the condition becomes false—useful for conditional side effects and feature flags.
 
 ### New Components
 
-**[PaginationStatus](https://0.vuetifyjs.com/components/pagination/)** — An accessibility-focused component that provides `aria-live` announcements when pagination state changes. Screen readers automatically announce the current page, helping users who rely on assistive technology stay oriented. Style it with `sr-only` CSS to keep it visually hidden while remaining accessible.
+**[PaginationStatus](https://0.vuetifyjs.com/components/semantic/pagination/)** — An accessibility-focused component that provides `aria-live` announcements when pagination state changes. Screen readers automatically announce the current page, helping users who rely on assistive technology stay oriented. Style it with `sr-only` CSS to keep it visually hidden while remaining accessible.
 
 ### Observer Improvements
 
-All three observer composables—[useResizeObserver](https://0.vuetifyjs.com/composables/use-resize-observer/), [useMutationObserver](https://0.vuetifyjs.com/composables/use-mutation-observer/), and [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/)—received enhancements:
+All three observer composables—[useResizeObserver](https://0.vuetifyjs.com/composables/system/use-resize-observer/), [useMutationObserver](https://0.vuetifyjs.com/composables/system/use-mutation-observer/), and [useIntersectionObserver](https://0.vuetifyjs.com/composables/system/use-intersection-observer/)—received enhancements:
 
 | Feature | Description |
 |---------|-------------|
 | `once` option | Automatically stops observing after first callback execution |
 | `isActive` return | Exposes whether the observer is currently monitoring |
-| Broader targets | [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/) accepts additional target types |
+| Broader targets | [useIntersectionObserver](https://0.vuetifyjs.com/composables/system/use-intersection-observer/) accepts additional target types |
 
 The `once` option is particularly useful for lazy-loading images or triggering one-time animations when elements enter the viewport.
 
 ### Registry Enhancements
 
-[useRegistry](https://0.vuetifyjs.com/composables/use-registry/) powers component coordination patterns like tabs, accordions, and steppers. December brought performance improvements for complex component trees:
+[createRegistry](https://0.vuetifyjs.com/composables/registration/create-registry/) powers component coordination patterns like tabs, accordions, and steppers. December brought performance improvements for complex component trees:
 
 | Feature | Description |
 |---------|-------------|
