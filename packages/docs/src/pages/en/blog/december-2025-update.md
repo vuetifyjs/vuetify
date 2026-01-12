@@ -50,12 +50,6 @@ Welcome to the December 2025 Vuetify update! The year closes with a bang—**v4.
 
 December was our most productive month of 2025. With **522 commits** across 16 active repositories and **82 merged PRs**, the team shipped at an incredible pace. The release of v4.0.0-alpha.0 represents months of architectural planning finally landing for public testing—CSS layers, reduced breakpoints, and theme system improvements that set the stage for Vuetify 4.0 stable. Meanwhile, [J-Sek](https://github.com/J-Sek) continued his remarkable contribution streak with 16 PRs to the main framework, and [ikushum](https://github.com/ikushum) delivered 9 PRs across components. The CLI reached public release status just in time for the new year, and every ecosystem product now supports PWA installation.
 
-::: success
-
-Cool example of the month: [Pagination with v0](https://play.vuetifyjs.com/playgrounds/QVoXrPxU) by [johnleider](https://github.com/johnleider)
-
-:::
-
 ---
 
 ## Table of Contents
