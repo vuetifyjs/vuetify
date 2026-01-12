@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: December 2025 Update
-  description: December delivered Vuetify 4.0.0-alpha.0 with CSS layers and theme improvements, six v3.11.x patch releases, the Vuetify CLI public release, PWA rollout across all ecosystem products, and significant Vuetify0 progress.
+  description: December delivered Vuetify 4.0.0-alpha.0 with CSS layers and theme improvements, five v3.11.x patch releases, the Vuetify CLI public release, PWA rollout across all ecosystem products, and significant Vuetify0 progress.
   keywords: Vuetify December 2025, v4.0.0-alpha.0, Vuetify CLI, PWA, CSS layers, Vuetify0, MCP
 ---
 
@@ -10,6 +10,10 @@ meta:
   import { useTheme } from 'vuetify'
 
   const theme = useTheme()
+
+  const clilogo = computed(() => {
+    return `https://cdn.vuetifyjs.com/docs/images/one/logos/vcli-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
+  })
   const mcplogo = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/vmcp-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
@@ -19,15 +23,24 @@ meta:
   const vuetifylogo = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
+  const binlogo = computed(() => {
+    return `https://cdn.vuetifyjs.com/docs/images/one/logos/vbin-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
+  })
+  const playlogo = computed(() => {
+    return `https://cdn.vuetifyjs.com/docs/images/one/logos/vplay-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
+  })
+  const issueslogo = computed(() => {
+    return `https://cdn.vuetifyjs.com/docs/images/one/logos/vissues-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
+  })
 </script>
 
 # December 2025 Update
 
-Welcome to the December 2025 Vuetify update! The year closes with a bang—**v4.0.0-alpha.0** marks the beginning of Vuetify 4's public development, while six v3.11.x patch releases keep the stable branch polished. The **Vuetify CLI** shipped its first public release, PWA support rolled out across all ecosystem products, and Vuetify0 continued its rapid evolution with 6 releases.
+Welcome to the December 2025 Vuetify update! The year closes with a bang—**v4.0.0-alpha.0** marks the beginning of Vuetify 4's public development, while five v3.11.x patch releases keep the stable branch polished. The **Vuetify CLI** shipped its first public release, PWA support rolled out across all ecosystem products, and Vuetify0 continued its rapid evolution with 6 releases.
 
 ![Hero image for December update](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/december-hero.png "December hero image"){ height=112 }
 
-🖊️ John Leider • 📅 January 6th, 2026
+🖊️ John Leider • 📅 January 12th, 2026
 
 <PromotedEntry />
 
@@ -35,7 +48,7 @@ Welcome to the December 2025 Vuetify update! The year closes with a bang—**v4.
 
 ## Closing the Year Strong
 
-December was our most productive month of 2025. With **522 commits** across 16 active repositories and **82 merged PRs**, the team shipped at an incredible pace. The release of v4.0.0-alpha.0 represents months of architectural planning finally landing for public testing—CSS layers, reduced breakpoints, and theme system improvements that set the stage for Vuetify 4.0 stable. Meanwhile, [J-Sek](https://github.com/J-Sek) continued his remarkable contribution streak with 15 PRs to the main framework, and [ikushum](https://github.com/ikushum) delivered 10 PRs across components. The CLI reached public release status just in time for the new year, and every ecosystem product now supports PWA installation.
+December was our most productive month of 2025. With **522 commits** across 16 active repositories and **82 merged PRs**, the team shipped at an incredible pace. The release of v4.0.0-alpha.0 represents months of architectural planning finally landing for public testing—CSS layers, reduced breakpoints, and theme system improvements that set the stage for Vuetify 4.0 stable. Meanwhile, [J-Sek](https://github.com/J-Sek) continued his remarkable contribution streak with 16 PRs to the main framework, and [ikushum](https://github.com/ikushum) delivered 9 PRs across components. The CLI reached public release status just in time for the new year, and every ecosystem product now supports PWA installation.
 
 ::: success
 
@@ -55,8 +68,6 @@ Cool example of the month: [Pagination with v0](https://play.vuetifyjs.com/playg
 * [Framework Updates](#framework-updates)
   * [New Features](#new-features)
   * [Accessibility & Compatibility](#accessibility-compatibility)
-  * [In Development](#in-development)
-* [Vuetify One](#vuetify-one)
 * [Product Updates](#product-updates)
   * [Vuetify Bin](#vuetify-bin)
   * [Vuetify Play](#vuetify-play)
@@ -71,9 +82,9 @@ Cool example of the month: [Pagination with v0](https://play.vuetifyjs.com/playg
 
 ## Releases
 
-December delivered seven Vuetify releases—six v3.11.x patches maintaining stability and the landmark **v4.0.0-alpha.0** kicking off the next major version. The v3.x branch continues receiving attention with accessibility improvements, bug fixes, and new props across multiple components.
+December delivered six Vuetify releases—five v3.11.x patches maintaining stability and the landmark **v4.0.0-alpha.0** kicking off the next major version. The v3.x branch continues receiving attention with accessibility improvements, bug fixes, and new props across multiple components.
 
-![December Releases Banner](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/releases.png "December Releases Banner"){ height=135 }
+![December Releases Banner](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/releases.png "December Releases Banner")
 
 ### Key Improvements
 
@@ -109,21 +120,18 @@ The first alpha of **Vuetify 4.0** landed on December 30th, marking the start of
 
 **CSS Layers**: Vuetify 4 uses CSS layers throughout, flattening layer names and replacing `!important` declarations with proper cascade management. This makes customization cleaner and reduces specificity conflicts.
 
-<!-- TODO: Video showing CSS layers in browser devtools - how overrides work without !important -->
-<video width="100%" height="auto" loop controls class="mb-4">
-  <source src="https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/css-layers.mp4" type="video/mp4"></source>
-</video>
-
 **Theme System**: The default theme changes from `light` to `system`, respecting user preferences. Transparent color support enables more sophisticated design patterns. The `unimportant` option has been removed in favor of layers.
 
 **Reduced Breakpoints**: Default breakpoint sizes have been adjusted for modern viewport distributions.
 
 **Style Architecture**:
+
 * Separate entry points allow opting out of misc styles
 * CSS reset has been streamlined (removed overflow-y)
 * [VRow](/api/v-row/)/[VCol](/api/v-col/) styles can be skipped when only using [VContainer](/api/v-container/) or [VSpacer](/api/v-spacer/)
 
 **Component Updates**:
+
 * **[VBtn](/components/buttons/)**: Default text transform removed, display converted from grid to flex
 * **[VField](/api/v-field/)**: Display converted from grid to flex, append/prepend fills height
 * **[VSnackbar](/components/snackbars/)**: `multi-line` prop removed in favor of CSS
@@ -151,59 +159,130 @@ v4.0.0-alpha.0 is for testing and feedback only. Production applications should 
 
 ## Ecosystem Spotlight: Vuetify CLI
 
-The **Vuetify CLI** reached its first public release in December with **40 commits** across versions v0.0.5 through v0.0.7. This new tool streamlines project scaffolding and integrates with the broader Vuetify ecosystem.
+<AppFigure :src="clilogo" alt="Vuetify CLI Logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify CLI Logo" />
+
+<br>
+
+The **Vuetify CLI** reached its first public release in December with **25 commits** across versions v0.0.5 through v0.0.7. This new tooling ecosystem streamlines project scaffolding and integrates with the broader Vuetify ecosystem.
 
 ![Vuetify CLI](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/cli.png "Vuetify CLI")
 
-### Key Features
+### CLI Ecosystem Overview
 
-**Project Creation**: The `create-vuetify-v0` package scaffolds new v0 projects with [Vue](https://vuejs.org/) or [Nuxt](https://nuxt.com/) templates, including feature selection for i18n, ESLint, and more.
+The Vuetify CLI ecosystem consists of three packages that share logic via `@vuetify/cli-shared`:
 
-**MCP Integration**: The `mcp` command (formerly `ruler`) sets up Vuetify MCP integration in your development environment.
+**create-vuetify0** (`npm create vuetify0`) — Scaffolds new Vuetify0 projects with support for [Vue](https://vuejs.org/) or [Nuxt](https://nuxt.com/) platforms. Includes feature selection for router, pinia, and eslint. TypeScript by default.
 
-**Update Command**: Check for and apply package updates across your Vuetify dependencies.
+**@vuetify/cli** (`vuetify` command) — The main CLI with multiple commands:
 
-**[VSCode](https://code.visualstudio.com/) Extension**: A companion extension provides project creation via the command palette with template selection.
+* `vuetify init` — Same as create-vuetify, scaffolds new projects (supports `--type vuetify0`)
+* `vuetify add eslint` — Adds ESLint + [eslint-config-vuetify](https://github.com/vuetifyjs/eslint-config-vuetify) to existing projects
+* `vuetify add mcp` — Adds [Vuetify MCP](https://github.com/vuetifyjs/mcp) server config for [Cursor](https://cursor.sh/)/[VS Code](https://code.visualstudio.com/)
+* `vuetify update` — Smart updates Vuetify + related packages
+* `vuetify docs` — Opens vuetifyjs.com (version-aware)
+* `vuetify upgrade` — Self-upgrades the CLI
 
-```bash
+::: tabs
+
+```bash [pnpm]
+# Install the CLI globally
+pnpm add -g @vuetify/cli
+
+# Initialize a new project
+vuetify init my-app
+
+# Or create a v0 project directly
+pnpm create vuetify0@latest
+
+# Add ESLint to an existing project
+vuetify add eslint
+
+# Add MCP server configuration
+vuetify add mcp
+
+# Update Vuetify packages
+vuetify update
+```
+
+```bash [yarn]
+# Install the CLI globally
+yarn global add @vuetify/cli
+
+# Initialize a new project
+vuetify init my-app
+
+# Or create a v0 project directly
+yarn create vuetify0
+
+# Add ESLint to an existing project
+vuetify add eslint
+
+# Add MCP server configuration
+vuetify add mcp
+
+# Update Vuetify packages
+vuetify update
+```
+
+```bash [npm]
 # Install the CLI globally
 npm install -g @vuetify/cli
 
-# Create a new v0 project
-vuetify create my-app
+# Initialize a new project
+vuetify init my-app
 
-# Set up MCP integration
-vuetify mcp
+# Or create a v0 project directly
+npm create vuetify0@latest
+
+# Add ESLint to an existing project
+vuetify add eslint
+
+# Add MCP server configuration
+vuetify add mcp
+
+# Update Vuetify packages
+vuetify update
 ```
 
-<!-- TODO: Terminal recording showing `vuetify create` interactive prompts -->
-<video width="100%" height="auto" loop controls class="mb-4">
-  <source src="https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/cli-demo.mp4" type="video/mp4"></source>
-</video>
+```bash [bun]
+# Install the CLI globally
+bun add -g @vuetify/cli
+
+# Initialize a new project
+vuetify init my-app
+
+# Or create a v0 project directly
+bun create vuetify0
+
+# Add ESLint to an existing project
+vuetify add eslint
+
+# Add MCP server configuration
+vuetify add mcp
+
+# Update Vuetify packages
+vuetify update
+```
+
+:::
 
 ### create-vuetify Updates
 
 The **create-vuetify** scaffolding tool received **12 commits** and 4 releases in December:
 
 **v2.8.0-beta.1** (December 30th):
+
 * **Vuetify 4 Alpha Support**: Templates now support bootstrapping projects with Vuetify 4.0.0-alpha.0
 * **Dynamic Version Replacement**: Vuetify version is now dynamically replaced in templates, making it easier to stay current
-* **useFeatures Adapters**: New adapters for feature selection during project creation
 
 **v2.7.3** (December 20th):
+
 * **[Volar](https://volarjs.dev/) Rich Hover Hints**: Enabled by default for better IDE experience with component prop documentation
 
 **v2.7.1-v2.7.2** (December 16th):
+
 * **Nuxt Styles Fix**: Corrected styles loading when not using the Nuxt module
 * Various maintenance updates
-
-```bash
-# Create a new Vuetify 4 alpha project
-npm create vuetify@latest -- --preset vuetify4
-
-# Create a standard Vuetify 3 project
-npm create vuetify@latest
-```
 
 **Details:**
 
@@ -215,7 +294,9 @@ npm create vuetify@latest
 
 ## Framework Updates
 
-<AppFigure :src="vuetifylogo" alt="Vuetify logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify Logo" />
+<AppFigure :src="vuetifylogo" alt="Vuetify logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Logo" />
+
+<br>
 
 December's framework work balanced new features with stability improvements. The team merged 49 PRs addressing everything from keyboard accessibility to field validation.
 
@@ -224,11 +305,6 @@ December's framework work balanced new features with stability improvements. The
 **[VWindow](/components/windows/) Keyboard Controls**
 
 The [VWindow](/components/windows/) component now supports keyboard navigation, enabling users to move between slides with arrow keys—essential for accessibility and power users.
-
-<!-- TODO: Short video showing keyboard navigation through VWindow slides -->
-<video width="100%" height="auto" loop controls class="mb-4">
-  <source src="https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/vwindow-keyboard.mp4" type="video/mp4"></source>
-</video>
 
 **[VList](/components/lists/) Navigation Strategy**
 
@@ -241,9 +317,6 @@ Attributes passed to [VImg](/components/images/) now flow through to the underly
 **[VOtpInput](/components/otp-input/) Density**
 
 The [OTP input](/components/otp-input/) component now supports the `density` prop for compact layouts, and the `rounded` prop is properly applied to inner fields.
-
-<!-- TODO: Screenshot comparing VOtpInput at different density levels (default, comfortable, compact) -->
-![VOtpInput Density Comparison](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/votp-density.png "VOtpInput density comparison")
 
 **Details:**
 
@@ -282,49 +355,6 @@ All field components received ARIA attribute cleanup for better screen reader co
 * [VTooltip dismissable PR#22419](https://github.com/vuetifyjs/vuetify/pull/22419)
 * [Fields ARIA cleanup PR#22418](https://github.com/vuetifyjs/vuetify/pull/22418)
 
-### In Development
-
-**VCommandPalette**
-
-Work continues on the command palette component, bringing spotlight-style search to Vuetify applications. December saw progress on keyboard navigation and fuzzy search integration.
-
-![VCommandPalette Preview](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/vcommandpalette.png "VCommandPalette Preview")
-
-**Details:**
-
-* [VCommandPalette Draft PR](https://github.com/vuetifyjs/vuetify/pull/22350)
-
----
-
-## Vuetify One
-
-The **@vuetify/one** subscriber package received **51 commits** and 8 releases (v2.6.3 through v2.10.1) in December.
-
-### Google Authentication
-
-December introduced **Google OAuth** as a new authentication option. Subscribers can now sign in with their Google accounts for a streamlined login experience, complementing the existing GitHub and email authentication methods.
-
-<!-- TODO: Screenshot of login page showing Google auth option alongside GitHub and email -->
-![Google Authentication](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/google-auth.png "Google OAuth login option")
-
-### Ecosystem Pinning
-
-Users can now **pin ecosystem items** for quick access. Pin your most-used tools like [Bin](https://bin.vuetifyjs.com/), [Play](https://play.vuetifyjs.com/), or [Snips](https://snips.vuetifyjs.com/) to keep them readily available in navigation.
-
-<!-- TODO: Screenshot showing ecosystem navigation with pinned items -->
-![Ecosystem Pinning](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/ecosystem-pinning.png "Pinned ecosystem items in navigation")
-
-### MCP Status Indicators
-
-New visual indicators help subscribers identify their MCP access status throughout the ecosystem with profile badges and navigation markers.
-
-<!-- TODO: Screenshot showing MCP badge on user profile/avatar -->
-![MCP Status Indicator](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/mcp-badge.png "MCP status badge on profile")
-
-**Details:**
-
-* [Vuetify One](https://one.vuetifyjs.com/)
-
 ---
 
 ## Product Updates
@@ -333,11 +363,14 @@ December saw significant updates across all Vuetify ecosystem products, with **P
 
 ### Vuetify Bin
 
+<AppFigure :src="binlogo" alt="Vuetify Bin logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Bin Logo" />
+
+<br>
+
 **41 commits** made December [Bin](https://bin.vuetifyjs.com/)'s most active month:
 
-* **Embeddable Bins**: New feature for embedding bins in external documentation and blogs using [Shiki](https://shiki.style/) for lighter bundles
+* **Embeddable Bins**: New feature in testing for embedding bins in external documentation and blogs using [Shiki](https://shiki.style/) for lighter bundles. Available to Vuetify One subscribers.
 
-<!-- TODO: Screenshot or embed example showing a bin embedded in external documentation -->
 ![Embeddable Bins](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/embeddable-bins.png "Bin embedded in documentation")
 
 * **18 Language Support**: Expanded language support with auto-detection for pasted code
@@ -349,11 +382,14 @@ December saw significant updates across all Vuetify ecosystem products, with **P
 
 ### Vuetify Play
 
+<AppFigure :src="playlogo" alt="Vuetify Play logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Play Logo" />
+
+<br>
+
 **23 commits** delivered key improvements to [Play](https://play.vuetifyjs.com/):
 
 * **Multiple Templates**: Switch between project templates without losing work, with proper preservation of changes to system files
 
-<!-- TODO: Screenshot or video showing template switcher dropdown with available templates -->
 ![Play Template Switcher](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/play-templates.png "Template selection in Vuetify Play")
 
 * **Editor Settings**: Customizable editor preferences
@@ -362,14 +398,18 @@ December saw significant updates across all Vuetify ecosystem products, with **P
 * **v0 Template**: Updated to presetWind4
 * **PWA Support**: Install Play as a standalone app
 
-### Vuetify Issues Reporter
+### Vuetify Issues
 
-The **Vuetify Issues Reporter** (vissues) received **31 commits** with significant improvements to the issue creation workflow:
+<AppFigure :src="issueslogo" alt="Vuetify Issues logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Issues Logo" />
 
-<!-- TODO: Screenshot of the improved issue creation form showing ecosystem project selection -->
-![Issues Reporter Form](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/vissues-form.png "Improved issue creation form")
+<br>
+
+The **Vuetify Issues** reporter received **31 commits** with significant improvements to the issue creation workflow:
+
+![Issues Form](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/vissues-form.png "Improved issue creation form")
 
 **Ecosystem Projects Support**:
+
 * Now supports non-library repositories (create-vuetify, admin, etc.)
 * Repo and type query parameters for direct linking
 * Project name displayed in title for ecosystem issues
@@ -377,11 +417,13 @@ The **Vuetify Issues Reporter** (vissues) received **31 commits** with significa
 * Shows repo name instead of versions for ecosystem review
 
 **Form Validation Improvements**:
+
 * Required expected/actual behavior fields before save
 * Steps require content before adding new ones
 * New step auto-focus for better UX
 
 **Other Updates**:
+
 * **PWA Support**: Install as standalone app
 * **"Used to work" Switch**: Available for all repos, not just Vuetify
 * **New Favicon**: Fresh vissues branding
@@ -389,7 +431,7 @@ The **Vuetify Issues Reporter** (vissues) received **31 commits** with significa
 
 **Details:**
 
-* [Vuetify Issues Reporter](https://issues.vuetifyjs.com/)
+* [Vuetify Issues](https://issues.vuetifyjs.com/)
 
 ### Other Products
 
@@ -402,13 +444,15 @@ The **Vuetify Issues Reporter** (vissues) received **31 commits** with significa
 * [Vuetify Bin](https://bin.vuetifyjs.com/)
 * [Vuetify Play](https://play.vuetifyjs.com/)
 * [Vuetify Snips](https://snips.vuetifyjs.com/)
-* [Vuetify Issues Reporter](https://issues.vuetifyjs.com/)
+* [Vuetify Issues](https://issues.vuetifyjs.com/)
 
 ---
 
 ## Vuetify MCP: Rate Limiting & CLI Support
 
-<AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify MCP Logo" />
+<AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
+
+<br>
 
 December brought four releases to the Vuetify MCP server (v0.2.4 through v0.4.1), adding important infrastructure improvements and new capabilities.
 
@@ -456,82 +500,69 @@ Or run locally:
 
 ## Vuetify0: Progress Update
 
-<AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify0 Logo" />
+<AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
-December was another strong month for Vuetify0, with **100 commits** and 6 releases (v0.0.15 through v0.0.21). The focus was on expanding composables, improving observer utilities, and enhancing documentation.
+<br>
+
+December was another strong month for Vuetify0, with **322 commits** and 6 releases (v0.0.15–v0.0.18, v0.0.20–v0.0.21). The headless meta-framework gained five new composables—including virtual scrolling and pagination primitives—along with accessibility improvements, observer enhancements, and significant documentation updates.
 
 ![Vuetify0 Progress](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/v0.png "Vuetify0 Progress")
 
+With these additions, v0 now provides production-ready primitives for building accessible, high-performance UI components without the styling opinions of a traditional component library.
+
 ### New Composables
 
-* **[useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)**: Click outside detection for menus, dialogs, and popovers
-* **[usePagination](https://0.vuetifyjs.com/composables/use-pagination/)**: Pagination logic with locale support and customizable page sizes
-* **[useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)**: Virtual scrolling composable for large lists
-* **[useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)**: Overflow detection for responsive layouts
-* **[useToggleScope](https://0.vuetifyjs.com/composables/use-toggle-scope/)**: Scoped toggle functionality for conditional rendering
+December added five composables covering pagination, virtualization, and UI utilities:
+
+**[usePagination](https://0.vuetifyjs.com/composables/use-pagination/)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
+
+**[useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
+
+**[useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
+
+**[useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)** — Click outside detection for closing menus, dialogs, and popovers. Handles edge cases like portaled content and nested overlays.
+
+**[useToggleScope](https://0.vuetifyjs.com/composables/use-toggle-scope/)** — Manages Vue effect scopes based on a reactive boolean. Automatically cleans up effects when the condition becomes false—useful for conditional side effects and feature flags.
 
 ### New Components
 
-* **[PaginationStatus](https://0.vuetifyjs.com/components/pagination/)**: Aria-live announcements for pagination state changes, improving accessibility
-
-<!-- TODO: Video showing Pagination component with screen reader announcing page changes -->
-<video width="100%" height="auto" loop controls class="mb-4">
-  <source src="https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/pagination-a11y.mp4" type="video/mp4"></source>
-</video>
+**[PaginationStatus](https://0.vuetifyjs.com/components/pagination/)** — An accessibility-focused component that provides `aria-live` announcements when pagination state changes. Screen readers automatically announce the current page, helping users who rely on assistive technology stay oriented. Style it with `sr-only` CSS to keep it visually hidden while remaining accessible.
 
 ### Observer Improvements
 
-All observer composables received enhancements:
+All three observer composables—[useResizeObserver](https://0.vuetifyjs.com/composables/use-resize-observer/), [useMutationObserver](https://0.vuetifyjs.com/composables/use-mutation-observer/), and [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/)—received enhancements:
 
-* **once option**: [useResizeObserver](https://0.vuetifyjs.com/composables/use-resize-observer/), [useMutationObserver](https://0.vuetifyjs.com/composables/use-mutation-observer/), and [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/) now support a `once` option for single-execution scenarios
-* **isActive return**: All observers now expose `isActive` in their return value
-* **Broader target types**: [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/) accepts more target types
+| Feature | Description |
+|---------|-------------|
+| `once` option | Automatically stops observing after first callback execution |
+| `isActive` return | Exposes whether the observer is currently monitoring |
+| Broader targets | [useIntersectionObserver](https://0.vuetifyjs.com/composables/use-intersection-observer/) accepts additional target types |
+
+The `once` option is particularly useful for lazy-loading images or triggering one-time animations when elements enter the viewport.
 
 ### Registry Enhancements
 
-* **batch() method**: New method in [useRegistry](https://0.vuetifyjs.com/composables/use-registry/) for bulk register/unregister operations, improving performance for complex component trees
-* **ReadonlyMap collection**: `collection` type changed from `Map` to `ReadonlyMap` for safer access
-* **Deferred reindexing**: Optimized unregister operations for better performance
+[useRegistry](https://0.vuetifyjs.com/composables/use-registry/) powers component coordination patterns like tabs, accordions, and steppers. December brought performance improvements for complex component trees:
+
+| Feature | Description |
+|---------|-------------|
+| `batch()` method | Bulk register/unregister operations in a single call, reducing reindexing overhead |
+| `ReadonlyMap` collection | Type changed from `Map` to `ReadonlyMap` to prevent accidental mutations |
+| Deferred reindexing | Unregister operations now batch index recalculations for better performance |
+
+These changes particularly benefit applications with deeply nested or dynamically generated component hierarchies.
 
 ### Documentation Updates
 
-* **AI Q&A feature**: Intelligent documentation search at [0.vuetifyjs.com](https://0.vuetifyjs.com/)
+The [0.vuetifyjs.com](https://0.vuetifyjs.com/) documentation site received substantial improvements:
 
-<!-- TODO: Screenshot showing the AI Q&A interface with a sample question and response -->
+**AI Q&A** — An intelligent search feature that answers questions about v0 composables, patterns, and usage. Ask natural language questions like "How do I implement infinite scroll?" and get contextual answers with code examples.
+
 ![v0 AI Q&A](https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/v0-ai-qa.png "AI-powered Q&A in Vuetify0 docs")
 
-* **PWA support**: Install the docs as a standalone app
-* **Improved mobile layout**: Better navigation and iOS safe area support
-* **Code block enhancements**: Fence titles and improved syntax highlighting
-* **[Storybook](https://storybook.js.org/)**: Component stories added for interactive exploration
-
-```ts { resource="src/main.ts" }
-import { createVuetify } from 'vuetify'
-import { Pagination } from '@vuetify/v0'
-
-export default createVuetify({
-  plugins: [Pagination]
-})
-```
-
-```html { resource="src/components/Example.vue" }
-<script lang="ts" setup>
-  import { usePagination } from '@vuetify/v0'
-
-  const pagination = usePagination({ length: 10 })
-</script>
-
-<template>
-  <Pagination.Root v-model="pagination.page">
-    <Pagination.First />
-    <Pagination.Prev />
-    <Pagination.Items />
-    <Pagination.Next />
-    <Pagination.Last />
-    <PaginationStatus />
-  </Pagination.Root>
-</template>
-```
+* **PWA support** — Install the documentation as a standalone app for offline access. Useful when working in environments with limited connectivity.
+* **Mobile improvements** — Redesigned navigation for smaller screens with proper iOS safe area support, making it easier to browse documentation on mobile devices.
+* **Code blocks** — Fence titles now display file paths above code examples, and syntax highlighting was improved across all supported languages.
 
 ::: info
 
@@ -542,9 +573,11 @@ The v0 documentation at [0.vuetifyjs.com](https://0.vuetifyjs.com/) now includes
 **Details:**
 
 * [Vuetify0 Documentation](https://0.vuetifyjs.com/)
+* [useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)
 * [usePagination](https://0.vuetifyjs.com/composables/use-pagination/)
+* [useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)
 * [useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)
-* [Release Notes v0.0.21](https://github.com/vuetifyjs/0/releases/tag/v0.0.21)
+* [v0.0.15](https://github.com/vuetifyjs/0/releases/tag/v0.0.15)–[v0.0.18](https://github.com/vuetifyjs/0/releases/tag/v0.0.18), [v0.0.20](https://github.com/vuetifyjs/0/releases/tag/v0.0.20)–[v0.0.21](https://github.com/vuetifyjs/0/releases/tag/v0.0.21)
 
 ---
 
@@ -568,7 +601,7 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v3.11.2
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **VDataTable:** hide checkbox for `mobile` without `show-select` ([d297f3f](https://github.com/vuetifyjs/vuetify/commit/d297f3f)), closes [#22375](https://github.com/vuetifyjs/vuetify/issues/22375)
 * **VDataTable:** hover icon should match `initial-sort-order` ([7a1ae83](https://github.com/vuetifyjs/vuetify/commit/7a1ae83))
@@ -580,7 +613,7 @@ The following section provides an overview of the changes made in December 2025,
 * **VTabs:** keep slider narrow when used without inset ([eb9477c](https://github.com/vuetifyjs/vuetify/commit/eb9477c)), closes [#22363](https://github.com/vuetifyjs/vuetify/issues/22363)
 * **VTextField:** check autofocus intersection on input wrapper element ([0409cde](https://github.com/vuetifyjs/vuetify/commit/0409cde)), closes [#22373](https://github.com/vuetifyjs/vuetify/issues/22373)
 
-#### :test_tube: Labs
+**:test_tube: Labs**
 
 * **VStepperVertical:** avoid semi-transparent items with `non-linear` ([99a68e5](https://github.com/vuetifyjs/vuetify/commit/99a68e5)), closes [#22369](https://github.com/vuetifyjs/vuetify/issues/22369)
 
@@ -588,7 +621,7 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v3.11.3
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **fields:** clean up aria attributes ([#22418](https://github.com/vuetifyjs/vuetify/issues/22418)) ([054dbf4](https://github.com/vuetifyjs/vuetify/commit/054dbf4))
 * **types:** support strict TS checks in templates ([#22395](https://github.com/vuetifyjs/vuetify/issues/22395)) ([02710a6](https://github.com/vuetifyjs/vuetify/commit/02710a6))
@@ -618,7 +651,7 @@ The following section provides an overview of the changes made in December 2025,
 * **VVirtualScroll:** show more than 1 element when min height is 0 ([#22420](https://github.com/vuetifyjs/vuetify/issues/22420)) ([08550fd](https://github.com/vuetifyjs/vuetify/commit/08550fd))
 * **VWindow:** set transition-duration css variable ([4676b6d](https://github.com/vuetifyjs/vuetify/commit/4676b6d))
 
-#### :test_tube: Labs
+**:test_tube: Labs**
 
 * **VVideo:** clean up listeners on unmount ([0d37af0](https://github.com/vuetifyjs/vuetify/commit/0d37af0))
 
@@ -626,18 +659,18 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v3.11.4
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **fields:** keep `inert` on root element ([8dea3bc](https://github.com/vuetifyjs/vuetify/commit/8dea3bc))
 * **VSelect:** clear on backspace ([#22435](https://github.com/vuetifyjs/vuetify/issues/22435)) ([f90f8ab](https://github.com/vuetifyjs/vuetify/commit/f90f8ab)), closes [#22422](https://github.com/vuetifyjs/vuetify/issues/22422)
 * **VSelects:** restore `appendInnerIcon` rendering ([#22431](https://github.com/vuetifyjs/vuetify/issues/22431)) ([5e9fa29](https://github.com/vuetifyjs/vuetify/commit/5e9fa29)), closes [#22429](https://github.com/vuetifyjs/vuetify/issues/22429)
 * **VSlider:** pass `aria-` attributes to thumb element ([#22444](https://github.com/vuetifyjs/vuetify/issues/22444)) ([83b55f5](https://github.com/vuetifyjs/vuetify/commit/83b55f5)), closes [#22432](https://github.com/vuetifyjs/vuetify/issues/22432)
 
-#### :microscope: Code Refactoring
+**:microscope: Code Refactoring**
 
 * **styles:** replace `if()` with `@if` ([5391930](https://github.com/vuetifyjs/vuetify/commit/5391930)), closes [#22421](https://github.com/vuetifyjs/vuetify/issues/22421)
 
-#### :test_tube: Labs
+**:test_tube: Labs**
 
 * **VColorInput, VDateInput:** add `picker-props` ([#22437](https://github.com/vuetifyjs/vuetify/issues/22437)) ([ea6d861](https://github.com/vuetifyjs/vuetify/commit/ea6d861)), closes [#22436](https://github.com/vuetifyjs/vuetify/issues/22436)
 * **VDateInput,VMaskInput:** add specific classes ([#22447](https://github.com/vuetifyjs/vuetify/issues/22447)) ([f539630](https://github.com/vuetifyjs/vuetify/commit/f539630)), closes [#22334](https://github.com/vuetifyjs/vuetify/issues/22334)
@@ -647,7 +680,7 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v3.11.5
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **VDataTableVirtual:** show index from virtualized items ([#22324](https://github.com/vuetifyjs/vuetify/issues/22324)) ([29e3f09](https://github.com/vuetifyjs/vuetify/commit/29e3f09)), closes [#19108](https://github.com/vuetifyjs/vuetify/issues/19108)
 * **VList, VTreeview:** item should be selectable when `disabled` changes ([#22464](https://github.com/vuetifyjs/vuetify/issues/22464)) ([d6ca166](https://github.com/vuetifyjs/vuetify/commit/d6ca166)), closes [#22366](https://github.com/vuetifyjs/vuetify/issues/22366)
@@ -656,7 +689,7 @@ The following section provides an overview of the changes made in December 2025,
 * **VTreeview:** bypass disabled when loading selection state ([#22465](https://github.com/vuetifyjs/vuetify/issues/22465)) ([70dd313](https://github.com/vuetifyjs/vuetify/commit/70dd313)), closes [#22353](https://github.com/vuetifyjs/vuetify/issues/22353)
 * **VTreeview:** prevent selection of disabled nodes ([0de4599](https://github.com/vuetifyjs/vuetify/commit/0de4599)), closes [#22352](https://github.com/vuetifyjs/vuetify/issues/22352)
 
-#### :test_tube: Labs
+**:test_tube: Labs**
 
 * **VDateInput:** keep focus on input when opened with year view ([b58e361](https://github.com/vuetifyjs/vuetify/commit/b58e361)), closes [#22323](https://github.com/vuetifyjs/vuetify/issues/22323)
 * **VDateInput:** hide empty prepend slot ([28fe71e](https://github.com/vuetifyjs/vuetify/commit/28fe71e)), closes [#22456](https://github.com/vuetifyjs/vuetify/issues/22456)
@@ -667,7 +700,7 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v3.11.6
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **VCalendar:** wrap unclamped timeToY ([3b4b5e6](https://github.com/vuetifyjs/vuetify/commit/3b4b5e6)), closes [#22413](https://github.com/vuetifyjs/vuetify/issues/22413)
 * **VCalendar:** extend start of event on following day ([4f7cc6a](https://github.com/vuetifyjs/vuetify/commit/4f7cc6a)), closes [#22480](https://github.com/vuetifyjs/vuetify/issues/22480)
@@ -678,7 +711,7 @@ The following section provides an overview of the changes made in December 2025,
 
 ### v4.0.0-alpha.0
 
-#### :rocket: Features
+**:rocket: Features**
 
 * **display:** reduce default breakpoint sizes ([#19759](https://github.com/vuetifyjs/vuetify/issues/19759)) ([853ce33](https://github.com/vuetifyjs/vuetify/commit/853ce33))
 * **nested:** add branch select strategy ([4fcb72c](https://github.com/vuetifyjs/vuetify/commit/4fcb72c)), closes [#22404](https://github.com/vuetifyjs/vuetify/issues/22404)
@@ -704,7 +737,7 @@ The following section provides an overview of the changes made in December 2025,
 * **VSnackbar:** remove `multi-line` prop ([#22212](https://github.com/vuetifyjs/vuetify/issues/22212)) ([1371aba](https://github.com/vuetifyjs/vuetify/commit/1371aba)), closes [#15996](https://github.com/vuetifyjs/vuetify/issues/15996)
 * **VWindow:** add support for keyboard controls ([#22430](https://github.com/vuetifyjs/vuetify/issues/22430)) ([ab5b671](https://github.com/vuetifyjs/vuetify/commit/ab5b671)), closes [#11544](https://github.com/vuetifyjs/vuetify/issues/11544)
 
-#### :wrench: Bug Fixes
+**:wrench: Bug Fixes**
 
 * **styles:** skip VRow/VCol styles when using only VContainer or VSpacer ([f899803](https://github.com/vuetifyjs/vuetify/commit/f899803))
 * **theme:** re-merge default variables when themes is set ([a14c763](https://github.com/vuetifyjs/vuetify/commit/a14c763))
@@ -716,7 +749,7 @@ The following section provides an overview of the changes made in December 2025,
 * **VField:** append/prepend should fill height ([add5d2d](https://github.com/vuetifyjs/vuetify/commit/add5d2d))
 * **VOverlay:** apply scrollbar offset to body and VNavigationDrawer ([ec926d7](https://github.com/vuetifyjs/vuetify/commit/ec926d7))
 
-#### :microscope: Code Refactoring
+**:microscope: Code Refactoring**
 
 * **styles:** replace !important with layers ([7484c81](https://github.com/vuetifyjs/vuetify/commit/7484c81))
 * **VBtn:** remove default text transform ([#21079](https://github.com/vuetifyjs/vuetify/issues/21079)) ([712bdd6](https://github.com/vuetifyjs/vuetify/commit/712bdd6))
