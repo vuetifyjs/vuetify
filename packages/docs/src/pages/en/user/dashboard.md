@@ -7,7 +7,7 @@ meta:
   keywords: user dashboard
 ---
 <script setup>
-  import DashboardDashboardEmptyState from '@/components/dashboard/DashboardEmptyState.vue'
+  import DashboardActivityTable from '@/components/dashboard/DashboardActivityTable.vue'
 </script>
 
-<DashboardDashboardEmptyState />
+<DashboardActivityTable />
