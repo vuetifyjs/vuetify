@@ -34,7 +34,8 @@ describe('VDatePicker', () => {
     await userEvent.click(await within(yearsContainer).getByText('2025'))
     await userEvent.click(await screen.findByTestId('month-btn'))
     await commands.waitStable('.v-date-picker-months')
-    await userEvent.click(await screen.findByText('Jan'))
+    const monthsContainer = await screen.getByCSS('.v-date-picker-months__content')
+    await userEvent.click(await within(monthsContainer).findByText('Jan'))
     await commands.waitStable('.v-date-picker-month__days')
     await userEvent.click(await screen.findByText(7))
 
