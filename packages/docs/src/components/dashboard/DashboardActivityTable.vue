@@ -10,7 +10,7 @@
     >
       <template #item.title="{ item }">
         <a
-          :href="properties[item.property].url"
+          :href="properties[item.property].url + '/' + item.slug"
           class="text-decoration-none"
           target="_blank"
         >
