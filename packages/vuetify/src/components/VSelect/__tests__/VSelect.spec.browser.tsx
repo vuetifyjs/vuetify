@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, waitForClickable, wait } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -933,6 +933,96 @@ describe('VSelect', () => {
       expect(select).toHaveLength(2)
       expect(select).toContain('1')
       expect(select).toContain('2')
+    })
+  })
+
+  describe('menuProps.closeOnContentClick', () => {
+    it.each([
+      { menuProps: { closeOnContentClick: false }, shouldClose: false },
+      { menuProps: { closeOnContentClick: true }, shouldClose: true },
+      { menuProps: undefined, shouldClose: true },
+    ])('should close=$shouldClose when menuProps=$menuProps', async ({ menuProps, shouldClose }) => {
+      const selectedItem = ref<string | null>(null)
+
+      const { element } = render(() => (
+        <VSelect
+          v-model={ selectedItem.value }
+          items={['California', 'Colorado', 'Florida']}
+          menuProps={ menuProps }
+        />
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      const options = await screen.findAllByRole('option')
+      await userEvent.click(options[0])
+      await wait(150)
+
+      if (shouldClose) {
+        await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+      } else {
+        await expect.element(screen.getByRole('listbox')).toBeVisible()
+      }
+    })
+  })
+
+  describe('menuProps.persistent', () => {
+    it.each([
+      { menuProps: { persistent: true }, shouldClose: false },
+      { menuProps: { persistent: false }, shouldClose: true },
+      { menuProps: undefined, shouldClose: true },
+    ])('should close=$shouldClose on Escape when menuProps=$menuProps', async ({ menuProps, shouldClose }) => {
+      const { element } = render(() => (
+        <VSelect
+          items={['California', 'Colorado', 'Florida']}
+          menuProps={ menuProps }
+        />
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+      expect(await screen.findByRole('listbox')).toBeVisible()
+
+      await userEvent.keyboard('{Escape}')
+      await wait(150)
+
+      if (shouldClose) {
+        await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+      } else {
+        await expect.element(screen.getByRole('listbox')).toBeVisible()
+      }
+    })
+
+    it.each([
+      { menuProps: { persistent: true }, shouldClose: false },
+      { menuProps: { persistent: false }, shouldClose: true },
+      { menuProps: undefined, shouldClose: true },
+    ])('should close=$shouldClose on focus out when menuProps=$menuProps', async ({ menuProps, shouldClose }) => {
+      const { element } = render(() => (
+        <div>
+          <VSelect
+            items={['California', 'Colorado', 'Florida']}
+            menuProps={ menuProps }
+          />
+          <input data-testid="other-input" />
+        </div>
+      ))
+
+      const select = element.querySelector('.v-select') as HTMLElement
+      await userEvent.click(select)
+      await commands.waitStable('.v-list')
+      expect(await screen.findByRole('listbox')).toBeVisible()
+
+      const otherInput = screen.getByTestId('other-input')
+      await userEvent.click(otherInput, { force: true })
+      await wait(150)
+
+      if (shouldClose) {
+        await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+      } else {
+        await expect.element(screen.getByRole('listbox')).toBeVisible()
+      }
     })
   })
 

@@ -212,7 +212,7 @@ export const VAutocomplete = genericComponent<new <
         e.preventDefault()
         e.stopPropagation()
       }
-      menu.value = !menu.value
+      menu.value = !menu.value || !!props.menuProps?.persistent
     }
     function onListKeydown (e: KeyboardEvent) {
       if (checkPrintable(e) || e.key === 'Backspace') {
@@ -235,7 +235,7 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['Escape'].includes(e.key)) {
-        menu.value = false
+        menu.value = !!props.menuProps?.persistent
       }
 
       if (
@@ -368,7 +368,7 @@ export const VAutocomplete = genericComponent<new <
 
         // watch for search watcher to trigger
         nextTick(() => {
-          menu.value = false
+          if (props.menuProps?.closeOnContentClick !== false) menu.value = !!props.menuProps?.persistent
           isPristine.value = true
         })
       }
@@ -385,7 +385,7 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
+        menu.value = !!props.menuProps?.persistent
         if (!isPristine.value && search.value) {
           _searchLock.value = search.value
         }

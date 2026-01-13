@@ -201,8 +201,9 @@ export const VCombobox = genericComponent<new <
     })
 
     const menuDisabled = computed(() => (
-      (props.hideNoData && !displayItems.value.length) ||
-      form.isReadonly.value || form.isDisabled.value
+      props.menuProps?.persistent ? false :
+        (props.hideNoData && !displayItems.value.length) ||
+        form.isReadonly.value || form.isDisabled.value
     ))
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -269,7 +270,7 @@ export const VCombobox = genericComponent<new <
         e.preventDefault()
         e.stopPropagation()
       }
-      menu.value = !menu.value
+      menu.value = !menu.value || !!props.menuProps?.persistent
     }
     function onListKeydown (e: KeyboardEvent) {
       if (checkPrintable(e) || e.key === 'Backspace') {
@@ -292,7 +293,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['Escape'].includes(e.key)) {
-        menu.value = false
+        menu.value = !!props.menuProps?.persistent
       }
 
       if (
@@ -414,7 +415,7 @@ export const VCombobox = genericComponent<new <
 
         // watch for search watcher to trigger
         nextTick(() => {
-          menu.value = keepMenu
+          if (props.menuProps?.closeOnContentClick !== false) menu.value =  !!props.menuProps?.persistent || keepMenu
           isPristine.value = true
         })
       }
@@ -447,7 +448,7 @@ export const VCombobox = genericComponent<new <
       if (val || val === oldVal) return
 
       selectionIndex.value = -1
-      menu.value = false
+      menu.value = !!props.menuProps?.persistent
 
       if (search.value) {
         if (props.multiple) {
