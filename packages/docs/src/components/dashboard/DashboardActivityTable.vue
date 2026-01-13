@@ -5,7 +5,7 @@
     <v-data-table
       :headers="headers"
       :items="items"
-      :loading="isLoading"
+      :loading="one.isLoading"
       item-value="id"
     >
       <template #item.title="{ item }">
@@ -69,11 +69,10 @@
     property: string
   }
 
-  const http = useHttpStore()
+  const one = useOneStore()
   const adapter = useDate()
 
   const items = ref<Activity[]>([])
-  const isLoading = shallowRef(false)
 
   const headers = [
     { title: 'Title', key: 'title' },
@@ -111,15 +110,7 @@
   }
 
   async function load () {
-    try {
-      isLoading.value = true
-
-      const res = await http.get<{ items: Activity[] }>('/one/activity')
-
-      items.value = res.items
-    } catch { } finally {
-      isLoading.value = false
-    }
+    items.value = await one.recentActivity()
   }
 
   onMounted(load)
