@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent, waitForClickable, wait } from '@test'
+import { commands, render, screen, showcase, userEvent, wait, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -982,7 +982,7 @@ describe('VSelect', () => {
 
       await userEvent.click(element)
       await commands.waitStable('.v-list')
-      expect(await screen.findByRole('listbox')).toBeVisible()
+      await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
       await userEvent.keyboard('{Escape}')
       await wait(150)
@@ -1012,7 +1012,7 @@ describe('VSelect', () => {
       const select = element.querySelector('.v-select') as HTMLElement
       await userEvent.click(select)
       await commands.waitStable('.v-list')
-      expect(await screen.findByRole('listbox')).toBeVisible()
+      await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
       const otherInput = screen.getByTestId('other-input')
       await userEvent.click(otherInput, { force: true })

@@ -3,7 +3,7 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle, wait } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
@@ -756,7 +756,7 @@ describe('VAutocomplete', () => {
 
       await userEvent.click(element)
       await commands.waitStable('.v-list')
-      expect(await screen.findByRole('listbox')).toBeVisible()
+      await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
       await userEvent.keyboard('{Escape}')
       await wait(150)
@@ -786,7 +786,7 @@ describe('VAutocomplete', () => {
       const autocomplete = element.querySelector('.v-autocomplete') as HTMLElement
       await userEvent.click(autocomplete)
       await commands.waitStable('.v-list')
-      expect(await screen.findByRole('listbox')).toBeVisible()
+      await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
       const otherInput = screen.getByTestId('other-input')
       await userEvent.click(otherInput, { force: true })

@@ -201,8 +201,8 @@ export const VCombobox = genericComponent<new <
     })
 
     const menuDisabled = computed(() => (
-      props.menuProps?.persistent ? false :
-        (props.hideNoData && !displayItems.value.length) ||
+      props.menuProps?.persistent ? false
+      : (props.hideNoData && !displayItems.value.length) ||
         form.isReadonly.value || form.isDisabled.value
     ))
     const _menu = useProxiedModel(props, 'menu')
@@ -415,7 +415,7 @@ export const VCombobox = genericComponent<new <
 
         // watch for search watcher to trigger
         nextTick(() => {
-          if (props.menuProps?.closeOnContentClick !== false) menu.value =  !!props.menuProps?.persistent || keepMenu
+          if (props.menuProps?.closeOnContentClick !== false) menu.value = !!props.menuProps?.persistent || keepMenu
           isPristine.value = true
         })
       }
