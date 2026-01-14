@@ -45,21 +45,7 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-## Themes
-
-The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
-
-```diff { resource="src/plugins/vuetify.ts" }
-export default createVuetify({
-+ theme: {
-+   defaultTheme: 'light',
-+ },
-})
-```
-
-Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
-
-## Breakpoints
+### Breakpoints
 
 The default breakpoints have been reduced to better match modern device sizes:
 
@@ -73,6 +59,46 @@ The default breakpoints have been reduced to better match modern device sizes:
 | xxl        | ~~2560px~~ » 2138px |
 
 One of the components specifically impacted by those changes is VContainer. See the detailed information about those changes [below](#vcontainer).
+
+v3 breakpoints can be restored with the following configuration:
+
+```js { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  display: {
+    thresholds: {
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2560,
+    },
+  },
+})
+```
+
+```scss { resource="src/styles/_settings.scss" }
+@use 'vuetify/settings' with (
+  $grid-breakpoints: (
+    'md': 960px,
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
+  ),
+);
+```
+
+## Themes
+
+The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+
+```diff { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
++ theme: {
++   defaultTheme: 'light',
++ },
+})
+```
+
+Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
 
 ## Components
 
