@@ -30,6 +30,7 @@
     "algoliasearch": "^4.24.0",
     "fflate": "^0.8.2",
     "isomorphic-fetch": "^3.0.0",
+    "jdenticon": "^3.3.0",
     "markdown-it-multimd-table": "^4.2.3",
     "pinia": "^3.0.4",
     "prism-theme-vars": "^0.2.5",

@@ -9,9 +9,10 @@
       item-value="id"
     >
       <template #item.title="{ item }">
+        <Jdenticon :value="item.id" />
         <a
           :href="properties[item.property].url + '/' + item.slug"
-          class="text-decoration-none"
+          class="text-decoration-none ml-2"
           target="_blank"
         >
           {{ item.title || item.slug }}
