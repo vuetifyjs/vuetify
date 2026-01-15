@@ -22,7 +22,7 @@ minimumReleaseAgeExclude:
   - '@vuetify/testing-library-dom'
   - playwright
   - playwright-core
-  - '@vizzly-testing/cli@0.21.1'
+  - '@vizzly-testing/vitest@0.1.1'
 
 nodeLinker: hoisted
 
