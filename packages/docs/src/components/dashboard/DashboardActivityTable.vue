@@ -110,7 +110,7 @@
   }
 
   async function load () {
-    items.value = await one.recentActivity()
+    items.value = await one.recentActivity() ?? []
   }
 
   onMounted(load)
