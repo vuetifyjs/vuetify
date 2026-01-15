@@ -5,6 +5,7 @@
     <v-data-table
       :headers="headers"
       :items="items"
+      :items-per-page-options="itemsPerPageOptions"
       :loading="one.isLoading"
       item-value="id"
     >
@@ -12,7 +13,7 @@
         <Jdenticon :value="item.id" />
         <a
           :href="properties[item.property].url + '/' + item.slug"
-          class="text-decoration-none ml-2"
+          class="text-decoration-none ml-2 on-surface"
           target="_blank"
         >
           {{ item.title || item.slug }}
@@ -80,6 +81,8 @@
     { title: 'Property', key: 'property' },
     { title: 'Updated', key: 'updatedAt' },
   ]
+
+  const itemsPerPageOptions = [{ value: 10, title: '10' }, { value: 25, title: '25' }]
 
   const properties: Record<string, { name: string, url: string, img: string }> = {
     'default::Bin': {
