@@ -26,6 +26,14 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 :::
 
+::: info
+
+Need assistance with your Vuetify 2 → 3 upgrade?\
+**Epicmax** — Vue.js experts and longtime Vuetify partners — help teams migrate complex projects from Vuetify 2 to 3 with minimal risk and predictable results.\
+[Learn more about Vuetify 2 → 3 migration support](https://epicmax.co/vue-3-migration?utm_source=vuetify-landing&utm_medium=banner&utm_campaign=vue-migrations&utm_id=vuetify)
+
+:::
+
 ::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
