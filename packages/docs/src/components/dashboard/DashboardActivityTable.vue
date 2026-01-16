@@ -1,8 +1,27 @@
 <template>
-  <v-card class="mx-auto mt-10" max-width="800" rounded>
-    <v-card-title>Recent Activity</v-card-title>
+  <v-card class="mx-auto mt-10" max-width="800" rounded="xl">
+    <v-card-title class="d-flex justify-space-between align-center">
+      <div>
+        <v-icon icon="mdi-history" start />
+        Recent Activity
+      </div>
+
+      <v-text-field
+        v-model="search"
+        class="pt-2"
+        density="compact"
+        label="Search"
+        max-width="250"
+        prepend-inner-icon="mdi-magnify"
+        rounded="lg"
+        variant="outlined"
+        flat
+        hide-details
+      />
+    </v-card-title>
 
     <v-data-table
+      v-model:search="search"
       :headers="headers"
       :items="items"
       :items-per-page-options="itemsPerPageOptions"
@@ -74,6 +93,7 @@
   const one = useOneStore()
   const adapter = useDate()
 
+  const search = shallowRef('')
   const items = ref<Activity[]>([])
 
   const headers = [
