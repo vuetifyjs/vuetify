@@ -185,7 +185,8 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     function onFocus (e: FocusEvent) {
-      if (!isInteractive.value) return
+      // Readonly controls remain focusable and should retain focus-visible styles
+      if (props.disabled) return
 
       isFocused.value = true
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
