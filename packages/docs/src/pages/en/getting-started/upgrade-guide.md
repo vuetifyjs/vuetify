@@ -19,12 +19,64 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Styles
 
+### Style entry points
+
 There are now pre-compiled entry points for the most common style changes. If you have a Sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
-The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
+### CSS reset
 
-- `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
-- `<ul>`, `<ol>` and headings have padding and margins.
+The CSS reset has been mostly removed, with style normalisation being moved to individual components instead. You can inspect the exact [changes](https://github.com/vuetifyjs/vuetify/pull/20960/changes#diff-87996fc432835581ad883bedbc1975ad3a3f44b5747b2b831e3fa03dfdabb91f) to learn more. Here is the high level overview:
+
+- global `* { padding: 0; margin: 0; }` is gone - no longer resets all elements
+- `<button>`, `<input>`, `<select>` have their browser-native borders and background colors.
+
+If you notice browser styles adding unnecessary spaces and impact text size, it is recommended to assess the scope of visual regression and selectively apply spacing resets:
+
+```css
+ul, ol, figure, details, summary {
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+```
+
+Restoring most of the previous reset styles would be heavy-handed, but will get the job done as well.
+
+```css
+* { padding: 0; margin: 0; }
+a:active, a:hover { outline-width: 0; }
+code, kbd, pre, samp { font-family: monospace; }
+pre { font-size: 1em; }
+small { font-size: 80%; }
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+textarea { resize: vertical; }
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border-style: none;
+}
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+legend {
+  display: table;
+  max-width: 100%;
+  white-space: normal;
+}
+```
 
 ### Layers
 
