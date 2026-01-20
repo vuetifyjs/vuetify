@@ -16,7 +16,7 @@
     "piscina": "^4.9.2",
     "prettier": "^3.6.2",
     "ts-morph": "^25.0.1",
-    "vue": "^3.6.0-beta.1",
+    "vue": "^3.6.0-beta.3",
     "vuetify": "workspace:*"
   },
   "devDependencies": {
