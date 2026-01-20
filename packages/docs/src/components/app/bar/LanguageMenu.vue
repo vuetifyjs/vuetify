@@ -9,6 +9,7 @@
         color="medium-emphasis"
         icon="mdi-translate"
         v-bind="props"
+        v-tooltip:bottom="t('languages')"
       />
     </template>
   </AppMenuMenu>

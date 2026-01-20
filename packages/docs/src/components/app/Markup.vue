@@ -3,9 +3,9 @@
     <v-sheet
       v-bind="{ ...hoverProps, ...$attrs }"
       ref="root"
-      :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
+      :color="theme.name.value === 'light' && !user.ecosystem.docs.mixedTheme ? 'surface-bright' : undefined"
       :rounded="rounded"
-      :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
+      :theme="theme.name.value === 'light' && user.ecosystem.docs.mixedTheme ? 'dark' : theme.name.value"
       class="app-markup overflow-hidden"
       dir="ltr"
     >
@@ -151,7 +151,7 @@
   async function copy () {
     const el = root.value?.$el.querySelector('code')
 
-    navigator.clipboard.writeText(props.code || el?.innerText || '')
+    await navigator.clipboard.writeText(props.code || el?.innerText || '')
 
     clicked.value = true
 

@@ -17,6 +17,7 @@ $alert-plain-opacity: .62 !default;
 $alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed sticky !default;
 $alert-prepend-margin-inline-end: 16px !default;
+$alert-prepend-icon-size: 1.75rem !default;
 $alert-append-margin-inline-start: 16px !default;
 $alert-append-close-margin-inline-start: 16px !default;
 
@@ -25,7 +26,6 @@ $alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !
 $alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
 $alert-title-hyphens: auto !default;
 $alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
-// $alert-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $alert-title-line-height: 1.75rem !default;
 $alert-title-overflow-wrap: normal !default;
 $alert-title-text-transform: none !default;

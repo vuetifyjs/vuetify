@@ -5,7 +5,6 @@
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
     "month": "Sets the month.",
-    "weekdays": "Sets the weekdays of the month.",
     "year": "Sets the year.",
     "day": "The current day of the selected date.",
     "multiple": "Sets the multiple of the month.",

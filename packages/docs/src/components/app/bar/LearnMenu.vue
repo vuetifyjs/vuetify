@@ -70,6 +70,11 @@
     { divider: true },
     { subheader: t('documentation') },
     {
+      title: 'Vuetify0',
+      href: 'https://0.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-0-box',
+    },
+    {
       title: '3.x (latest)',
       href: 'https://vuetifyjs.com/',
       appendIcon: 'mdi-numeric-3-box',

@@ -25,7 +25,7 @@ Get direct access to the Vuetify team through our private [Discord server](https
 
 ## Consulting Services
 
-Take your software projects to the next level with the expert consulting services of our trusted partner, [Epicmax](https://www.epicmax.co/?ref=vuetify). With extensive experience in delivering Vuetify-based projects, Epicmax provides specialized guidance to ensure your project is efficient, innovative, and tailored to your unique requirements.
+[Epicmax](https://www.epicmax.co/?ref=vuetify) is a leading Vue.js development company and an official Vuetify partner. With over 8 years of experience and more than 60 successful projects, we help companies worldwide build, modernize, and scale applications using Vue.js and Vuetify.
 
 <IntroductionConsultingServices />
 

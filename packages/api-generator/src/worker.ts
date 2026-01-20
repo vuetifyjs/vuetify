@@ -1,4 +1,4 @@
-import { generateComponentDataFromTypes } from './types'
+import { generateComponentDataFromTypes } from './types.ts'
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'

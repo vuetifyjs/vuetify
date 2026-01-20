@@ -6,6 +6,7 @@
     "plain": "Removes the default background change applied when hovering over the button.",
     "readonly": "Puts the button in a readonly state. Cannot be clicked or navigated to by keyboard.",
     "stacked": "Displays the button as a flex-column.",
+    "spaced": "Extends content to the edges to move main content from prepend and append slots.",
     "slim": "Reduces padding to 0 8px."
   },
   "exposed": {

@@ -6,7 +6,6 @@ meta:
   keywords: table, simple table, vuetify table component, vue simple table component, table component
 related:
   - /components/data-tables/basics/
-  - /components/data-tables/headers/
   - /components/lists/
 features:
   github: /components/VTable/
@@ -66,3 +65,9 @@ Use the **height** prop to set the height of the table.
 Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
 
 <ExamplesExample file="v-table/prop-fixed-header" />
+
+#### Striped
+
+By applying the **striped** prop, you can have a background applied to either the **even** or **odd** rows of the table. Color can be further adjusted using sass variables.
+
+<ExamplesExample file="v-table/prop-striped" />

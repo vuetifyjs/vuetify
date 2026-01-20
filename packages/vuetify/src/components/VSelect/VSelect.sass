@@ -23,10 +23,13 @@
           opacity: 1
           flex: 0 0
           position: absolute
+          left: 0
+          right: 0
           width: 100%
           transition: none
           pointer-events: none
           caret-color: transparent
+          padding-inline: inherit
 
     .v-field--dirty
       .v-select__selection
@@ -39,9 +42,10 @@
 
     &__content
       overflow: hidden
-
       @include tools.elevation($select-content-elevation)
-      @include tools.rounded($select-content-border-radius)
+
+      @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
+        @include tools.rounded($select-content-border-radius)
 
     &__selection
       display: inline-flex

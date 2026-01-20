@@ -1,7 +1,7 @@
 import { VOtpInput } from '../VOtpInput'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { commands, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -126,8 +126,10 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const inputs = screen.getAllByCSS('.v-otp-input input')
     await userEvent.click(inputs[0])
+    const lock = await commands.getLock()
     await navigator.clipboard.writeText('123456')
     await userEvent.paste()
+    await commands.releaseLock(lock)
 
     expect(inputs[0]).toHaveValue('1')
     expect(inputs[1]).toHaveValue('2')
@@ -142,8 +144,10 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const inputs = screen.getAllByCSS('.v-otp-input input')
     await userEvent.click(inputs[0])
+    const lock = await commands.getLock()
     await navigator.clipboard.writeText('  123456     ')
     await userEvent.paste()
+    await commands.releaseLock(lock)
 
     expect(inputs[0]).toHaveValue('1')
     expect(inputs[1]).toHaveValue('2')
@@ -158,7 +162,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const inputs = screen.getAllByCSS('.v-otp-input input')
 
-    await userEvent.fill(inputs[0], '123456')
+    await userEvent.type(inputs[0], '123456')
 
     expect(inputs[0]).toHaveValue('1')
     expect(inputs[1]).toHaveValue('2')
@@ -169,7 +173,5 @@ describe('VOtpInput', () => {
     expect(inputs[5]).toHaveFocus()
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

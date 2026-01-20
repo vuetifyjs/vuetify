@@ -13,6 +13,7 @@
       .v-text-field__prefix,
       .v-text-field__suffix,
       .v-field__input,
+      .v-field__input > input,
       &.v-field
         cursor: text
 
@@ -41,9 +42,10 @@
   .v-combobox
     &__content
       overflow: hidden
-
       @include tools.elevation($combobox-content-elevation)
-      @include tools.rounded($combobox-content-border-radius)
+
+      @at-root #{selector.append('.v-menu > .v-overlay__content', &)}
+        @include tools.rounded($combobox-content-border-radius)
 
     &__mask
       background: rgb(var(--v-theme-surface-light))

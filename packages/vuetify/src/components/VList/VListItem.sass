@@ -78,12 +78,12 @@
     > .v-icon,
     > .v-tooltip
       ~ .v-list-item__spacer
-        width: $list-item-icon-margin-start
+        width: var(--v-list-prepend-gap, $list-item-icon-margin-start)
 
     > .v-avatar,
     > .v-badge:is(:has(.v-avatar))
       ~ .v-list-item__spacer
-        width: $list-item-avatar-margin-start
+        width: var(--v-list-prepend-gap, $list-item-avatar-margin-start)
 
 
     .v-list-item--slim &
@@ -91,15 +91,15 @@
       > .v-icon,
       > .v-tooltip
         ~ .v-list-item__spacer
-          width: $list-item-slim-spacer-width
+          width: var(--v-list-prepend-gap, $list-item-slim-spacer-width)
 
       > .v-avatar,
       > .v-badge:is(:has(.v-avatar))
         ~ .v-list-item__spacer
-          width: $list-item-slim-avatar-spacer-width
+          width: var(--v-list-prepend-gap, $list-item-slim-avatar-spacer-width)
 
       > .v-list-item-action ~ .v-list-item__spacer
-        width: $list-item-slim-action-spacer-width
+        width: var(--v-list-prepend-gap, $list-item-slim-action-spacer-width)
 
     .v-list-item--three-line &
       align-self: start
@@ -118,30 +118,30 @@
     > .v-icon,
     > .v-tooltip
       ~ .v-list-item__spacer
-        width: $list-item-icon-margin-end
+        width: var(--v-list-prepend-gap, $list-item-icon-margin-end)
 
     > .v-avatar,
     > .v-badge:is(:has(.v-avatar))
       ~ .v-list-item__spacer
-        width: $list-item-avatar-margin-end
+        width: var(--v-list-prepend-gap, $list-item-avatar-margin-end)
 
     > .v-list-item-action ~ .v-list-item__spacer
-      width: $list-item-action-spacer-width
+      width: var(--v-list-prepend-gap, $list-item-action-spacer-width)
 
     .v-list-item--slim &
       > .v-badge,
       > .v-icon,
       > .v-tooltip
         ~ .v-list-item__spacer
-          width: $list-item-slim-spacer-width
+          width: var(--v-list-slim-spacer-width, $list-item-slim-spacer-width)
 
       > .v-avatar,
       > .v-badge:is(:has(.v-avatar))
         ~ .v-list-item__spacer
-          width: $list-item-slim-avatar-spacer-width
+          width: var(--v-list-prepend-gap, $list-item-slim-avatar-spacer-width)
 
       > .v-list-item-action ~ .v-list-item__spacer
-        width: $list-item-slim-action-spacer-width
+        width: var(--v-list-prepend-gap, $list-item-slim-action-spacer-width)
 
     .v-list-item--three-line &
       align-self: start
@@ -274,10 +274,6 @@
     &--nav
       padding-inline: $list-nav-padding
 
-      .v-list &
-        &:not(:only-child)
-          margin-bottom: $list-item-nav-margin-top
-
   .v-list-item__underlay
     position: absolute
 
@@ -306,10 +302,10 @@
   .v-list-group
     --list-indent-size: #{$list-indent-size}
     --parent-padding: var(--indent-padding)
-    --prepend-width: #{$list-item-prepend-size}
+    --prepend-width: var(--v-list-group-prepend, #{$list-item-prepend-size})
 
     .v-list--slim &
-      --prepend-width: #{$list-item-slim-prepend-size}
+      --prepend-width: var(--v-list-group-prepend, #{$list-item-slim-prepend-size})
 
     &--fluid
       --list-indent-size: 0px
@@ -321,8 +317,11 @@
       --parent-padding: var(--indent-padding)
 
   .v-list-group__items
-    --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
+    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent, var(--list-indent-size)))
     min-width: min-content
+
+    .v-navigation-drawer--rail &
+      min-width: 0
 
   .v-list-group__items .v-list-item
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
@@ -335,3 +334,34 @@
     &:hover
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  @media (forced-colors: active)
+    .v-list-item
+      &--link:not(&--active)
+        color: buttontext
+
+      &--link[href]:not(&--active)
+        color: unset
+
+      &--active:not(&--disabled)
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          color: highlight !important
+
+      &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
+        background: highlight !important
+
+        [class*="v-list-item-"],
+        [class*="v-list-item-"] > *,
+        .v-icon
+          opacity: 1
+          color: highlighttext !important
+          forced-color-adjust: preserve-parent-color
+
+      @supports selector(:focus-visible)
+        &::after
+          color: buttontext
+
+        &:focus-visible::after
+          opacity: 1

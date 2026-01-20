@@ -8,8 +8,11 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import vIntersect from '@/directives/intersect'
+
 // Utilities
-import { computed, nextTick, onMounted, watchEffect } from 'vue'
+import { computed, shallowRef, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
@@ -48,6 +51,8 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
   props: makeVDatePickerYearsProps(),
 
+  directives: { vIntersect },
+
   emits: {
     'update:modelValue': (year: number) => true,
   },
@@ -55,6 +60,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const hasFocusedItem = shallowRef(false)
     const years = computed(() => {
       const year = adapter.getYear(adapter.date())
 
@@ -91,10 +97,9 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
     const yearRef = templateRef()
 
-    onMounted(async () => {
-      await nextTick()
-      yearRef.el?.focus()
-    })
+    function focusSelectedYear () {
+      yearRef.el?.scrollIntoView({ block: 'center' })
+    }
 
     function isYearAllowed (year: number) {
       if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
@@ -111,11 +116,20 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
+        v-intersect={[{
+          handler: focusSelectedYear,
+        }, null, ['once']]}
         style={{
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-years__content">
+        <div
+          class="v-date-picker-years__content"
+          onFocus={ () => yearRef.el?.focus() }
+          onFocusin={ () => hasFocusedItem.value = true }
+          onFocusout={ () => hasFocusedItem.value = false }
+          tabindex={ hasFocusedItem.value ? -1 : 0 }
+        >
           { years.value.map((year, i) => {
             const btnProps = {
               ref: model.value === year.value ? yearRef : undefined,

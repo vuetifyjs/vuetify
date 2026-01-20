@@ -88,6 +88,26 @@ Specify allowed dates using objects or functions. When using objects, accepts a 
 
 <ExamplesExample file="v-date-picker/prop-allowed-dates" />
 
+#### Landscape
+
+Using `landscape` moves header to the side. You can customize it further using custom width and date format.
+
+<ExamplesExample file="v-date-picker/prop-landscape" />
+
+#### Date events
+
+You can specify events using arrays, objects or functions. To change the default color of the event use **event-color** prop. Your **events** function or object can return an array of colors (material or css) in case you want to display multiple event indicators.
+
+<ExamplesExample file="v-date-picker/prop-events" />
+
+### Slots
+
+#### Controls
+
+Replace main controls to adapt behavior and/or visual appearance beyond CSS styling.
+
+<ExamplesExample file="v-date-picker/slots-controls" />
+
 ### Internationalization
 
 Vuetify components can localize date formats by utilizing the [i18n](/features/internationalization) feature. This determines the appropriate locale for date display. When the default date adapter is in use, localization is managed automatically.

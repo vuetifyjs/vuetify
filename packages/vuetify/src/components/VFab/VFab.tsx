@@ -31,7 +31,7 @@ export const makeVFabProps = propsFactory({
     default: true,
   },
 
-  ...omit(makeVBtnProps({ active: true }), ['location']),
+  ...omit(makeVBtnProps({ active: true }), ['location', 'spaced']),
   ...makeLayoutItemProps(),
   ...makeLocationProps(),
   ...makeTransitionProps({ transition: 'fab-transition' }),

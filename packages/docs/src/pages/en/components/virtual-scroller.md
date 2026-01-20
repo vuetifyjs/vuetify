@@ -78,6 +78,12 @@ If your items are not of a uniform size, omit the **item-height** prop to have `
 
 <ExamplesExample file="v-virtual-scroll/prop-dynamic-item-height" />
 
+#### Renderless
+
+Renderless mode does not generate DOM nodes automatically, so you must bind `itemRef` yourself for virtual scrolling to work properly.
+
+<ExamplesExample file="v-virtual-scroll/prop-renderless" />
+
 ### Examples
 
 The following is a collection of `v-virtual-scroll` examples that demonstrate how different the properties work in an application.

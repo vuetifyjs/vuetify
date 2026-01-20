@@ -42,7 +42,7 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
-type VSlideGroupSlots = {
+export type VSlideGroupSlots = {
   default: SlideGroupSlot
   prev: SlideGroupSlot
   next: SlideGroupSlot
@@ -50,6 +50,11 @@ type VSlideGroupSlots = {
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
+  scrollToActive: {
+    type: Boolean,
+    default: true,
+  },
+  contentClass: null,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -73,6 +78,7 @@ export const makeVSlideGroupProps = propsFactory({
         'always',
         'desktop',
         'mobile',
+        'never',
       ].includes(v)
     ),
   },
@@ -148,7 +154,7 @@ export const VSlideGroup = genericComponent<new <T>(
             isOverflowing.value = containerSize.value + 1 < contentSize.value
           }
 
-          if (firstSelectedIndex.value >= 0 && contentRef.el) {
+          if (props.scrollToActive && firstSelectedIndex.value >= 0 && contentRef.el) {
             // TODO: Is this too naive? Should we store element references in group composable?
             const selectedElement = contentRef.el.children[lastSelectedIndex.value] as HTMLElement
 
@@ -343,8 +349,12 @@ export const VSlideGroup = genericComponent<new <T>(
       isSelected: group.isSelected,
     }))
 
+    const hasOverflowOrScroll = computed(() => isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+
     const hasAffixes = computed(() => {
       switch (props.showArrows) {
+        case 'never': return false
+
         // Always show arrows on desktop & mobile
         case 'always': return true
 
@@ -353,12 +363,12 @@ export const VSlideGroup = genericComponent<new <T>(
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return isOverflowing.value || Math.abs(scrollOffset.value) > 0
+        case true: return hasOverflowOrScroll.value
 
         // Always show on mobile
         case 'mobile': return (
           mobile.value ||
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -366,7 +376,7 @@ export const VSlideGroup = genericComponent<new <T>(
         // overflowed on desktop
         default: return (
           !mobile.value &&
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
       }
     })
@@ -377,7 +387,7 @@ export const VSlideGroup = genericComponent<new <T>(
     })
 
     const hasNext = computed(() => {
-      if (!containerRef.value) return false
+      if (!containerRef.value || !hasOverflowOrScroll.value) return false
 
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
       const clientSize = getClientSize(isHorizontal.value, containerRef.el)
@@ -425,7 +435,10 @@ export const VSlideGroup = genericComponent<new <T>(
         <div
           key="container"
           ref={ containerRef }
-          class="v-slide-group__container"
+          class={[
+            'v-slide-group__container',
+            props.contentClass,
+          ]}
           onScroll={ onScroll }
         >
           <div

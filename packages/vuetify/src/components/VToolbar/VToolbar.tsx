@@ -32,13 +32,20 @@ export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
+  collapsePosition: {
+    type: String as PropType<'start' | 'end'>,
+    default: 'start',
+  },
   color: String,
   density: {
     type: String as PropType<Density>,
     default: 'default',
     validator: (v: any) => allowedDensities.includes(v),
   },
-  extended: Boolean,
+  extended: {
+    type: Boolean,
+    default: null,
+  },
   extensionHeight: {
     type: [Number, String],
     default: 48,
@@ -82,7 +89,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
 
-    const isExtended = shallowRef(!!(props.extended || slots.extension?.()))
+    const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
@@ -110,12 +117,13 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
       const hasImage = !!(slots.image || props.image)
 
       const extension = slots.extension?.()
-      isExtended.value = !!(props.extended || extension)
+      isExtended.value = props.extended === null ? !!extension : props.extended
 
       return (
         <props.tag
           class={[
             'v-toolbar',
+            `v-toolbar--collapse-${props.collapsePosition}`,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,

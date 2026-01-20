@@ -10,12 +10,13 @@ import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
@@ -36,6 +37,8 @@ export const makeVRangeSliderProps = propsFactory({
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
+  inheritAttrs: false,
+
   props: makeVRangeSliderProps(),
 
   emits: {
@@ -45,7 +48,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     start: (value: [number, number]) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, attrs }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
@@ -86,20 +89,30 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      disabled,
       readonly,
     } = useSlider({
       props,
       steps,
       onSliderStart: () => {
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+          return
+        }
         emit('start', model.value)
       },
       onSliderEnd: ({ value }) => {
-        const newValue: [number, number] = activeThumbRef.value === startThumbRef.value?.$el
-          ? [value, model.value[1]]
-          : [model.value[0], value]
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+        } else {
+          const newValue: [number, number] =
+            activeThumbRef.value === startThumbRef.value?.$el
+              ? [value, model.value[1]]
+              : [model.value[0], value]
 
-        if (!props.strict && newValue[0] < newValue[1]) {
-          model.value = newValue
+          if (!props.strict && newValue[0] < newValue[1]) {
+            model.value = newValue
+          }
         }
 
         emit('end', model.value)
@@ -107,8 +120,14 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderMove: ({ value }) => {
         const [start, stop] = model.value
 
+        if (disabled.value || readonly.value) {
+          activeThumbRef.value?.blur()
+          return
+        }
+
         if (!props.strict && start === stop && start !== min.value) {
-          activeThumbRef.value = value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
+          activeThumbRef.value =
+            value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
           activeThumbRef.value?.focus()
         }
 
@@ -127,6 +146,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
 
     useRender(() => {
       const inputProps = VInput.filterProps(props)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -138,7 +158,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
-              'v-slider--disabled': props.disabled,
+              'v-slider--disabled': disabled.value,
             },
             rtlClasses.value,
             props.class,
@@ -146,6 +166,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
           style={ props.style }
           ref={ inputRef }
           { ...inputProps }
+          { ...rootAttrs }
           focused={ isFocused.value }
         >
           {{
@@ -174,8 +195,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_start` }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value[0] }
                 />
@@ -183,8 +204,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_stop` }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value[1] }
                 />
@@ -229,6 +250,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ model.value[1] }
                   position={ trackStart.value }
                   ripple={ props.ripple }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -265,6 +287,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ max.value }
                   position={ trackStop.value }
                   ripple={ props.ripple }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -275,7 +298,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({
+      focus: () => startThumbRef.value?.$el.focus(),
+    }, inputRef)
   },
 })
 

@@ -1,0 +1,26 @@
+diff --git a/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js b/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
+index a22a3b0d0e13e08a34bce430bc284d998de8528b..00c0722cb008a9a6d527ecfd50844d92f2674a60 100644
+--- a/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
++++ b/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
+@@ -290,18 +290,9 @@ async function setIframeViewport(iframe, width, height) {
+       [{ width, height }]
+     );
+   } else {
+-    const scale = Math.min(
+-      1,
+-      iframe.parentElement.parentElement.clientWidth / width,
+-      iframe.parentElement.parentElement.clientHeight / height
+-    );
+-    iframe.parentElement.style.cssText = `
+-      width: ${width}px;
+-      height: ${height}px;
+-      transform: scale(${scale});
+-      transform-origin: left top;
+-    `;
+-    (_b = iframe.parentElement) == null ? void 0 : _b.setAttribute("data-scale", String(scale));
++    iframe.style.width = `${width}px`
++    iframe.style.height = `${height}px`
++    iframe.parentElement?.setAttribute('data-scale', '1')
+     await new Promise((r) => requestAnimationFrame(r));
+   }
+ }

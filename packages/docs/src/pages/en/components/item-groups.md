@@ -61,12 +61,6 @@ Item groups can have **multiple** items selected.
 
 ### Misc
 
-#### Chips
-
-Easily hook up a custom chip group.
-
-<ExamplesExample file="v-item-group/misc-chips" />
-
 #### Selection
 
 Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.

@@ -76,9 +76,14 @@ async function getShims (useImport) {
       .map(name => `    ${name}: ${name}`).join('\n')
   }
 
+  const directives = importMap.directives.map(name => (
+    `    v${name}: typeof import('vuetify/directives')['${name}']`
+  )).join('\n')
+
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
     .replaceAll(/^\s*\/\/ @skip-build\s[\s\S]*?\s$/gm, '')
     .replace(/^\s*\/\/ @generate-components$/gm, components)
+    .replace(/^\s*\/\/ @generate-directives$/gm, directives)
 }
 
 /** @type {import("rollup").RollupOptions[]} */

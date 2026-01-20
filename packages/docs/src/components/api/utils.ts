@@ -1,7 +1,7 @@
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*?>(.*?)<\/a>/g
+  const regexp = /<a .+?>(.+?)<\/a>/g
 
   let matches = regexp.exec(str)
 

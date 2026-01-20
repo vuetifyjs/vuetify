@@ -1,0 +1,31 @@
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-time-picker
+    &.v-picker
+      min-width: $time-picker-width
+
+    .v-picker__body,
+    &-controls__field-label,
+    .v-field
+      transition-duration: .25s
+      transition-timing-function: settings.$standard-easing
+      transition-property: transform, max-height, opacity, font-size
+
+      @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    .v-picker__body
+      transition-behavior: allow-discrete
+      max-height: calc-size(max-content, size)
+
+    &--variant-dial
+      .v-time-picker-controls__field-label
+        opacity: 0
+
+    &--variant-input
+      .v-picker__body
+        transform: scale(0)
+        max-height: 0

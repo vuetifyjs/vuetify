@@ -1,0 +1,180 @@
+@use 'sass:map'
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-time-picker-controls
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: .875rem
+    margin-inline: $time-picker-padding
+    margin-bottom: 12px
+
+    &__text
+      padding-bottom: 12px
+
+    &__time
+      display: flex
+      white-space: nowrap
+      direction: ltr
+      justify-content: center
+      align-items: start
+
+  .v-time-picker-controls__time__separator
+    width: $time-picker-controls-separator-width
+    text-align: center
+
+    .v-time-picker--density-compact &
+      font-weight: bold
+
+    @at-root
+      @include tools.density('v-time-picker', $time-picker-controls-field-density) using ($modifier)
+        .v-time-picker-controls__time__separator
+          font-size: $time-picker-controls-btn-font + $modifier
+          line-height: $time-picker-controls-separator-line-height + $modifier
+
+          .v-time-picker--variant-input &
+            line-height: $time-picker-controls-input-separator-line-height + $modifier
+
+          .v-time-picker-controls__time--with-seconds &
+            height: $time-picker-controls-seconds-btn-height + $modifier
+            font-size: $time-picker-controls-btn-font + $modifier
+
+  .v-time-picker-controls__time__field
+    width: $time-picker-controls-field-width
+
+    .v-field
+      width: $time-picker-controls-field-width
+      background-color: $time-picker-controls-field-background
+      color: inherit
+      transition: color .25s settings.$standard-easing
+
+      > .v-field__overlay
+        opacity: $time-picker-controls-field-overlay-opacity
+
+    &--active .v-field > .v-field__overlay
+      opacity: calc((#{$time-picker-controls-field-overlay-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+    .v-time-picker--variant-input &
+      width: $time-picker-controls-input-field-width
+
+      .v-field
+        width: $time-picker-controls-input-field-width
+
+    .v-time-picker-controls__time--with-seconds &
+      width: $time-picker-controls-seconds-field-width
+
+      .v-time-picker--variant-input &
+        width: $time-picker-controls-input-seconds-field-width
+
+    .v-field__input
+      padding: 0
+      font-weight: 500
+      text-align: center
+      line-height: 1
+      align-self: center
+
+      &:focus::placeholder
+        opacity: 0
+
+  .v-time-picker-controls__field-label
+    font-size: $time-picker-field-label-font-size
+    letter-spacing: $time-picker-field-label-letter-spacing
+    padding-top: 6px
+
+  .v-time-picker-controls__ampm
+    margin-left: 12px
+    display: flex
+    flex-direction: column
+    text-transform: uppercase
+
+    &--readonly
+      pointer-events: none
+
+    &--readonly
+      .v-picker__title__btn.v-picker__title__btn--active
+        opacity: $picker-inactive-btn-opacity
+
+    &__btn.v-btn
+      min-width: 52px
+      padding: 0 8px
+
+      &.v-time-picker-controls__ampm__am
+        border-radius: $time-picker-controls-ampm-am-border-radius
+        border: 1px solid
+
+      &.v-time-picker-controls__ampm__pm
+        border-radius: $time-picker-controls-ampm-pm-border-radius
+        border: 1px solid
+        border-top: none
+
+      &__active
+        background: rgb(var(--v-theme-primary))
+
+  @at-root
+    @include tools.density('v-time-picker', $time-picker-controls-field-density) using ($modifier)
+      .v-time-picker-controls__time__field
+        height: $time-picker-controls-field-height + $modifier
+
+        .v-field
+          font-size: $time-picker-controls-field-font + $modifier
+
+          .v-field__input
+            min-height: $time-picker-controls-field-height + $modifier
+
+      &.v-time-picker--variant-input .v-time-picker-controls__time__field
+        height: $time-picker-controls-input-field-height + $modifier
+
+        .v-field
+          font-size: $time-picker-controls-input-field-font + $modifier * .75
+
+          .v-field__input
+            min-height: $time-picker-controls-input-field-height + $modifier
+
+      .v-time-picker-controls__time--with-seconds .v-time-picker-controls__time__field .v-field
+        font-size: $time-picker-controls-seconds-field-font + $modifier * .5
+
+      .v-time-picker-controls__ampm__btn.v-btn
+        font-size: $time-picker-ampm-title-font-size + $modifier * .25
+        height: $time-picker-controls-ampm-height + $modifier * .5
+
+      &.v-time-picker--variant-input .v-time-picker-controls__ampm__btn.v-btn
+        height: $time-picker-controls-input-ampm-height + $modifier * .5
+
+  .v-picker__title--landscape
+    .v-time-picker-controls
+      flex-direction: column
+      justify-content: center
+      height: 100%
+
+    .v-time-picker-controls__time
+      text-align: right
+
+      .v-picker__title__btn,
+      span
+        height: $time-picker-landscape-title-btn-height
+        font-size: $time-picker-landscape-title-btn-height
+
+    .v-time-picker-controls__ampm
+      margin: $time-picker-landscape-ampm-title-margin
+      align-self: initial
+      text-align: center
+
+  .v-picker--time .v-picker__title--landscape
+    padding: 0
+
+    .v-time-picker-controls__time
+      text-align: center
+
+
+  .v-time-picker-controls
+    @media (forced-colors: active)
+      .v-time-picker-controls__time__field:has(input:focus-visible)
+        outline: 2px solid highlight
+        outline-offset: 2px
+
+      .v-time-picker-controls__ampm__btn.v-btn--active
+        color: highlight !important
+        forced-color-adjust: preserve-parent-color

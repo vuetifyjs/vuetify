@@ -116,7 +116,7 @@
   function load () {
     if (breweries.value.length) return
 
-    return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
+    return fetch('https://api.openbrewerydb.org/v1/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
   }
 
   function getChildren (type) {

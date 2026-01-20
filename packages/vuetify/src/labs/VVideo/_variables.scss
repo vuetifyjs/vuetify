@@ -1,0 +1,59 @@
+@use 'sass:math';
+@use '../../styles/settings';
+
+// Defaults
+$video-player-width: 100% !default;
+$video-aspect-ratio: math.div(16, 9) !default;
+
+$video-elevation: 4 !default;
+$video-padding: 0px !default;
+$video-rounded-border-radius: settings.$border-radius-root !default;
+$video-controls-floating-margin: 12px !default;
+$video-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+
+$video-center-icon-border: 5px solid currentColor !default;
+$video-center-icon-opacity: .6 !default;
+$video-center-icon-hover-transform: scale(1.05) !default;
+
+$video-tube-track-top: -8px !default;
+$video-tube-track-hover-offset: 10px !default;
+
+$video-time-font-size: 0.875rem !default;
+$video-time-line-height: 1 !default;
+$video-time-letter-spacing: 0.02em !default;
+$video-time-pill-padding: 0 16px !default;
+
+$video-controls-height: 58px !default;
+$video-controls-padding: 8px !default;
+$video-controls-gap: 16px !default;
+$video-controls-pill-gap: 8px !default;
+$video-controls-pill-padding: 0 6px !default;
+$video-controls-pill-border-radius: 99px !default;
+$video-controls-pill-backdrop-filter: blur(5px) !default;
+$video-controls-default-background-opacity: .8 !default;
+$video-controls-default-background-color: var(--v-theme-surface) !default;
+$video-controls-default-color: rgb(var(--v-theme-on-surface)) !default;
+$video-controls-default-backdrop-filter: blur(5px) !default;
+$video-controls-split-time-padding-inline: 20px !default;
+$video-controls-detached-offset: 12px !default;
+$video-controls-detached-padding-inline: 12px !default;
+
+$video-volume-menu-elevation: 2 !default;
+$video-volume-menu-border-radius: settings.$border-radius-root !default;
+$video-volume-horizontal-margin: 0 16px !default;
+$video-volume-horizontal-menu-width: 100px !default;
+$video-volume-horizontal-menu-height: 40px !default;
+$video-volume-vertical-margin: 16px 0 !default;
+$video-volume-vertical-menu-width: 40px !default;
+$video-volume-vertical-menu-height: 100px !default;
+
+$video-volume-menu-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$video-volume-menu-border-style: solid !default;
+$video-volume-menu-border-width: thin !default;
+$video-volume-menu-border-thin-width: thin !default;
+$video-volume-menu-border: (
+  $video-volume-menu-border-color,
+  $video-volume-menu-border-style,
+  $video-volume-menu-border-width,
+  $video-volume-menu-border-thin-width
+) !default;

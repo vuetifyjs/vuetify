@@ -6,7 +6,7 @@ meta:
   keywords: data iterators, vuetify data iterator component, vue data iterator component
 related:
   - /components/data-tables/basics/
-  - /components/simple-tables/
+  - /components/tables/
   - /components/toolbars/
 features:
   github: /components/VDataIterator/

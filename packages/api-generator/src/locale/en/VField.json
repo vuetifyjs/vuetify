@@ -11,6 +11,7 @@
     "flat": "Removes box shadow when using a variant with elevation.",
     "iconColor": "Sets the color of the prepend/append icons.",
     "id": "Sets the DOM id on the component.",
+    "details": "Controls whether the field generates an `aria-describedby` attribute for accessibility.",
     "persistentClear": "Always show the clearable icon when the input is dirty (By default it only shows on hover).",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend-inner** slot.",
     "reverse": "Reverses the orientation.",
