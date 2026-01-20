@@ -45,7 +45,7 @@ export const makeVTextFieldProps = propsFactory({
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeAutocompleteProps(),
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextField')
 

@@ -493,7 +493,7 @@ export const VAutocomplete = genericComponent<new <
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                       tabindex="-1"
-                      selectable
+                      selectable={ !!displayItems.value.length }
                       aria-live="polite"
                       aria-labelledby={ `${id.value}-label` }
                       aria-multiselectable={ props.multiple }
