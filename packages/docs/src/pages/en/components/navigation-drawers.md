@@ -75,6 +75,13 @@ Places the component in **rail** mode and expands once hovered. This **does not*
 
 <ExamplesExample file="v-navigation-drawer/prop-expand-on-hover" />
 
+#### Force Expand
+
+Allows the drawer to remain visually expanded even when the user is not hovering, without disabling **rail** mode.
+Only applies when **expand-on-hover** is enabled.
+
+<ExamplesExample file="v-navigation-drawer/prop-force-expand" />
+
 #### Background images
 
 Apply a custom background to your drawer via the **image** prop. If you need to customize it further, you can use the `image` slot and render your own `v-img`.
