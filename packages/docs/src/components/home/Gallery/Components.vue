@@ -83,7 +83,7 @@
                   <template #append>
                     <v-btn class="text-none me-1 px-3" height="48" slim>
                       <template #prepend>
-                        <v-avatar color="surface-light" image="https://avatars.githubusercontent.com/u/9064066?v=4" size="32" start />
+                        <v-avatar color="surface-light" image="https://cdn.vuetifyjs.com/docs/images/team/john.png" size="32" start />
                       </template>
 
                       <span class="hidden-sm-and-down">John Leider</span>

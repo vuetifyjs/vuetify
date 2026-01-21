@@ -6,7 +6,7 @@
           class="mx-auto mb-4"
           height="60"
           max-width="60"
-          src="https://vuetifyjs.b-cdn.net/docs/images/logos/v.svg"
+          src="https://cdn.vuetifyjs.com/docs/images/logos/v.svg"
         />
 
         <div class="text-h5 text-center mb-8 font-weight-medium">Log into your account</div>

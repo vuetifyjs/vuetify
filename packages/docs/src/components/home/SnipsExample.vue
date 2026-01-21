@@ -48,37 +48,37 @@
   const items = [
     {
       title: 'Misty Mountains',
-      image: 'https://images.unsplash.com/photo-1485470733090-0aae1788d5af',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/mountain.jpg',
       createdAt: '1st Dec 2025',
     },
     {
       title: 'Lake Reflection',
-      image: 'https://images.unsplash.com/photo-1475070929565-c985b496cb9f',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/sky.jpg',
       createdAt: '2nd Dec 2025',
     },
     {
       title: 'Forest Sunrise',
-      image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/forest.jpg',
       createdAt: '3rd Dec 2025',
     },
     {
       title: 'Mountain Vista',
-      image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/desert.jpg',
       createdAt: '4th Dec 2025',
     },
     {
       title: 'Lava Dripping',
-      image: 'https://images.unsplash.com/photo-1475598322381-f1b499717dda',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/forest-art.jpg',
       createdAt: '5th Dec 2025',
     },
     {
       title: 'Lightning Storm',
-      image: 'https://images.unsplash.com/photo-1431440869543-efaf3388c585',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/hands.jpg',
       createdAt: '6th Dec 2025',
     },
     {
       title: 'Rock Monolith',
-      image: 'https://images.unsplash.com/photo-1496347646636-ea47f7d6b37b',
+      image: 'https://cdn.vuetifyjs.com/docs/images/cards/sunshine.jpg',
       creator: 'Natalie Smith',
       avatar: 'https://randomuser.me/api/portraits/women/24.jpg',
       createdAt: '7th Dec 2025',

@@ -34,27 +34,36 @@
 
         <v-col cols="12" md="6">
           <v-card color="transparent" rounded="lg" flat>
-            <v-list
-              :items="supportServices"
-              :lines="false"
-              class="py-3 bg-transparent text-left"
-              item-props
+            <v-defaults-provider
+              :defaults="{
+                'VListItem': {
+                  rounded: 'lg'
+                }
+              }"
             >
-              <template #prepend="{ item }">
-                <v-avatar :image="item.avatar" size="small" />
-              </template>
+              <v-list
+                :items="supportServices"
+                class="py-3 bg-transparent text-left"
+                lines="two"
+                item-props
+                rounded
+              >
+                <template #prepend="{ item }">
+                  <v-avatar :image="item.avatar" size="small" />
+                </template>
 
-              <template #append>
-                <v-icon-btn
-                  class="text-none mt-3 ml-2"
-                  color="primary"
-                  icon="mdi-open-in-new"
-                  roundeed="circle"
-                  size="small"
-                  variant="text"
-                />
-              </template>
-            </v-list>
+                <template #append>
+                  <v-icon-btn
+                    class="text-none ml-2"
+                    color="primary"
+                    icon="mdi-open-in-new"
+                    roundeed="circle"
+                    size="small"
+                    variant="text"
+                  />
+                </template>
+              </v-list>
+            </v-defaults-provider>
           </v-card>
         </v-col>
       </v-row>
@@ -65,25 +74,32 @@
 <script setup lang="ts">
   const supportServices = [
     {
-      // TODO: Use proper image URL
-      avatar: 'https://avatars.githubusercontent.com/u/22138497',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/logos/v.svg',
       title: 'Single Developer Support',
       subtitle: 'Get professional support from the experts behind Vuetify.',
+      href: rpath('introduction/enterprise-support/'),
+      target: '_blank',
+      rel: 'noopener noreferrer',
     },
     { type: 'divider', class: 'my-4', inset: true },
     {
-      // TODO: Use proper image URL
-      avatar: 'https://avatars.githubusercontent.com/u/30595047',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/affiliates/epic-max.jpg',
       title: 'Consulting Services',
       subtitle: 'Epicmax provides consulting services for your project.',
+      to: rpath('/introduction/enterprise-support/#consulting-services'),
+      target: '_blank',
+      rel: 'noopener noreferrer',
     },
     { type: 'divider', class: 'my-4', inset: true },
     {
       // TODO: Use proper image URL
-      avatar: 'https://avatars.githubusercontent.com/u/35441165',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/affiliates/hero-devs.png',
       title: 'Extended LTS support',
       class: 'mb-2',
       subtitle: 'HeroDevs provides extended long-term support for Vuetify 2 users.',
+      href: 'https://v2.vuetifyjs.com/about/eol/#consider-herodevs-extended-lts-support',
+      target: '_blank',
+      rel: 'noopener noreferrer',
     },
   ]
 </script>

@@ -18,7 +18,7 @@
           <v-row>
             <v-col cols="12">
               <div class="d-flex align-center ga-4">
-                <v-avatar image="https://cdn.vuetifyjs.com/images/john.jpg" rounded="lg" size="80" />
+                <v-avatar image="https://cdn.vuetifyjs.com/docs/images/team/john.png" rounded="lg" size="80" />
 
                 <div>
                   <v-btn
@@ -61,6 +61,7 @@
                 v-model="profile.email"
                 color="primary"
                 label="Email address"
+                prepend-inner-icon="mdi-email"
                 type="email"
                 variant="outlined"
                 hide-details
@@ -70,11 +71,27 @@
             <v-col cols="12">
               <v-text-field
                 v-model="profile.username"
+                append-inner-icon="mdi-open-in-new"
                 color="primary"
                 label="Username"
                 prefix="github.com/"
+                prepend-inner-icon="mdi-github"
                 variant="outlined"
                 hide-details
+                @click:append-inner="onClickUsername"
+              />
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                v-model="profile.x"
+                append-inner-icon="mdi-open-in-new"
+                color="primary"
+                label="Socials"
+                prepend-inner-icon="$x"
+                variant="outlined"
+                hide-details
+                @click:append-inner="onClickSocials"
               />
             </v-col>
 
@@ -84,6 +101,7 @@
                 :items="timezones"
                 color="primary"
                 label="Timezone"
+                prepend-inner-icon="mdi-earth"
                 variant="outlined"
                 hide-details
               />
@@ -260,6 +278,7 @@
     last: 'Leider',
     email: 'john@vuetifyjs.com',
     username: 'johnleider',
+    x: 'zeroskillz',
     timezone: 'Central Standard Time',
   })
 
@@ -282,5 +301,13 @@
     setTimeout(() => {
       saving.value = ''
     }, 2000)
+  }
+
+  function onClickUsername () {
+    window.open('https://github.com/johnleider')
+  }
+
+  function onClickSocials () {
+    window.open('https://x.com/zeroskillz')
   }
 </script>

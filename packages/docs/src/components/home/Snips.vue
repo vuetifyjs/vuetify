@@ -1,5 +1,5 @@
 <template>
-  <v-img position="top" src="https://vuetifyjs.b-cdn.net/docs/images/one/snips/hero.svg">
+  <v-img position="top" src="https://cdn.vuetifyjs.com/docs/images/one/snips/hero.svg">
     <HomeCommonGradient color="primary" opacity-class="opacity-10" />
 
     <v-container class="text-center text-md-left py-16">

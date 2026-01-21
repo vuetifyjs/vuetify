@@ -36,8 +36,20 @@
   const theme = useTheme()
   const features = computed(() => [
     {
-      href: 'https://play.vuetifyjs.com',
-      image: 'vplay',
+      href: 'https://issues.vuetifyjs.com',
+      image: 'vissues',
+    },
+    {
+      href: 'https://github.com/vuetifyjs/vuetify-loader',
+      image: 'vloader',
+    },
+    {
+      href: 'https://store.vuetifyjs.com',
+      image: 'vstore',
+    },
+    {
+      href: 'https://studio.vuetifyjs.com',
+      image: 'vstudio',
     },
     {
       href: 'https://bin.vuetifyjs.com',
@@ -48,32 +60,24 @@
       image: 'vlink',
     },
     {
-      href: 'https://studio.vuetifyjs.com',
-      image: 'vstudio',
+      href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
+      image: 'vuikit',
+    },
+    {
+      href: 'https://play.vuetifyjs.com',
+      image: 'vplay',
     },
     {
       href: 'https://snips.vuetifyjs.com',
       image: 'vsnips',
     },
     {
-      href: 'https://store.vuetifyjs.com',
-      image: 'vstore',
-    },
-    {
-      href: 'https://issues.vuetifyjs.com',
-      image: 'vissues',
-    },
-    {
       href: 'https://github.com/vuetifyjs/mcp/',
       image: 'vmcp',
     },
     {
-      href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
-      image: 'vuikit',
-    },
-    {
-      href: 'https://github.com/vuetifyjs/vuetify-loader',
-      image: 'vloader',
+      href: 'https://github.com/vuetifyjs/cli/',
+      image: 'vcli',
     },
   ])
 </script>
