@@ -183,6 +183,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}

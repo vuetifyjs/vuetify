@@ -23,7 +23,7 @@
 }
 
 @if (settings.$color-pack) {
-  @include tools.layer('utilities.theme.background') {
+  @include tools.layer('utilities.theme-background') {
     @each $color_name, $color_value in colors.$shades {
       .bg-#{$color_name} {
         @include background-color($color_value);
@@ -57,7 +57,7 @@
     }
   }
 
-  @include tools.layer('utilities.theme.foreground') {
+  @include tools.layer('utilities.theme-foreground') {
     @each $color_name, $color_value in colors.$shades {
       .text-#{$color_name} {
         @include text-color($color_value);

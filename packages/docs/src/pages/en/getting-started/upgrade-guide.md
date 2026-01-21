@@ -19,12 +19,64 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Styles
 
+### Style entry points
+
 There are now pre-compiled entry points for the most common style changes. If you have a Sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
-The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
+### CSS reset
 
-- `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
-- `<ul>`, `<ol>` and headings have padding and margins.
+The CSS reset has been mostly removed, with style normalisation being moved to individual components instead. You can inspect the exact [changes](https://github.com/vuetifyjs/vuetify/pull/20960/changes#diff-87996fc432835581ad883bedbc1975ad3a3f44b5747b2b831e3fa03dfdabb91f) to learn more. Here is the high level overview:
+
+- global `* { padding: 0; margin: 0; }` is gone - no longer resets all elements
+- `<button>`, `<input>`, `<select>` have their browser-native borders and background colors.
+
+If you notice browser styles adding unnecessary spaces and impact text size, it is recommended to assess the scope of visual regression and selectively apply spacing resets:
+
+```css
+ul, ol, figure, details, summary {
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+```
+
+Restoring most of the previous reset styles would be heavy-handed, but will get the job done as well.
+
+```css
+* { padding: 0; margin: 0; }
+a:active, a:hover { outline-width: 0; }
+code, kbd, pre, samp { font-family: monospace; }
+pre { font-size: 1em; }
+small { font-size: 80%; }
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+textarea { resize: vertical; }
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border-style: none;
+}
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+legend {
+  display: table;
+  max-width: 100%;
+  white-space: normal;
+}
+```
 
 ### Layers
 
@@ -45,21 +97,7 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-## Themes
-
-The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
-
-```diff { resource="src/plugins/vuetify.ts" }
-export default createVuetify({
-+ theme: {
-+   defaultTheme: 'light',
-+ },
-})
-```
-
-Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
-
-## Breakpoints
+### Breakpoints
 
 The default breakpoints have been reduced to better match modern device sizes:
 
@@ -73,6 +111,46 @@ The default breakpoints have been reduced to better match modern device sizes:
 | xxl        | ~~2560px~~ » 2138px |
 
 One of the components specifically impacted by those changes is VContainer. See the detailed information about those changes [below](#vcontainer).
+
+v3 breakpoints can be restored with the following configuration:
+
+```js { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  display: {
+    thresholds: {
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2560,
+    },
+  },
+})
+```
+
+```scss { resource="src/styles/_settings.scss" }
+@use 'vuetify/settings' with (
+  $grid-breakpoints: (
+    'md': 960px,
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
+  ),
+);
+```
+
+## Themes
+
+The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+
+```diff { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
++ theme: {
++   defaultTheme: 'light',
++ },
+})
+```
+
+Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
 
 ## Components
 
