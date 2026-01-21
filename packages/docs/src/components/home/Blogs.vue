@@ -28,7 +28,9 @@
             </v-card-subtitle>
 
             <v-card-title class="text-pre-wrap pl-0 pt-0">
-              {{ blog.title }}
+              <router-link :to="blog.to" class="text-high-emphasis d-inline-flex">
+                {{ blog.title }}
+              </router-link>
             </v-card-title>
 
             <div class="text-medium-emphasis text-subtitle-1 pl-0">
@@ -79,8 +81,10 @@
               <v-icon icon="mdi-calendar" size="16" /> {{ item.date }}
             </v-card-subtitle>
 
-            <v-card-title class="text-subtitle-1 pt-1">
-              {{ item.title }}
+            <v-card-title class="d-inline-block text-subtitle-1 pt-1">
+              <router-link :to="item.to" class="text-high-emphasis d-inline-flex">
+                {{ item.title }}
+              </router-link>
             </v-card-title>
 
             <v-card-text
