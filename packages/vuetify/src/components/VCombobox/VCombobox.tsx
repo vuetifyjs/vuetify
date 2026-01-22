@@ -444,23 +444,29 @@ export const VCombobox = genericComponent<new <
     }
 
     watch(isFocused, (val, oldVal) => {
-      if (val || val === oldVal) return
+      if (val === oldVal) return
 
-      selectionIndex.value = -1
-      menu.value = false
+      if (val) {
+        nextTick(() => {
+          vTextFieldRef.value?.select()
+        })
+      } else {
+        selectionIndex.value = -1
+        menu.value = false
 
-      if (search.value) {
-        if (props.multiple) {
-          select(transformItem(props, search.value))
-          return
-        }
+        if (search.value) {
+          if (props.multiple) {
+            select(transformItem(props, search.value))
+            return
+          }
 
-        if (!hasSelectionSlot.value) return
+          if (!hasSelectionSlot.value) return
 
-        if (model.value.some(({ title }) => title === search.value)) {
-          _search.value = ''
-        } else {
-          select(transformItem(props, search.value))
+          if (model.value.some(({ title }) => title === search.value)) {
+            _search.value = ''
+          } else {
+            select(transformItem(props, search.value))
+          }
         }
       }
     })

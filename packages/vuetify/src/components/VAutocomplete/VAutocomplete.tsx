@@ -382,7 +382,10 @@ export const VAutocomplete = genericComponent<new <
         search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
-        nextTick(() => isSelecting.value = false)
+        nextTick(() => {
+          isSelecting.value = false
+          vTextFieldRef.value?.select()
+        })
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
