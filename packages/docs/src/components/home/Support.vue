@@ -5,11 +5,11 @@
     <v-container class="text-center text-md-left py-16">
       <v-row align="end">
         <v-col class="pr-md-15" cols="12" md="6">
-          <p class="font-weight-medium text-primary mb-4">
+          <p class="font-weight-medium text-primary">
             Vuetify Support Services
           </p>
 
-          <h4 class="text-h4 font-weight-bold mb-5">
+          <h4 class="text-h4 font-weight-bold my-5">
             Need support with your Vuetify project?
           </h4>
 

@@ -118,7 +118,7 @@
           <v-sheet class="rounded-lg elevation-10" theme="dark">
             <AppMarkup
               :code="code"
-              class="rounded-lg pa-5"
+              class="rounded-lg pa-5 bg-black"
             />
           </v-sheet>
         </v-col>
@@ -172,8 +172,13 @@
   }
 </script>
 
-<style scoped>
-  .code-shadow {
-    box-shadow: 10px 10px 100px -5px #00000044;
-  }
+<style lang="sass" scoped>
+@use 'sass:map'
+@use 'vuetify/settings'
+
+.code-shadow
+  box-shadow: 10px 10px 100px -5px #00000044
+
+.font-weight-bold
+  font-weight: map.get(settings.$font-weights, 'bold') !important
 </style>

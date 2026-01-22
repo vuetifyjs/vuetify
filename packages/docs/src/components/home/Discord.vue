@@ -10,7 +10,7 @@
             mdi-discord
           </v-icon>
 
-          <h4 class="text-h4 font-weight-bold mb-5">
+          <h4 class="text-h4 font-weight-bold mb-5 mt-0">
             Join our community of 40k+ developers
           </h4>
 

@@ -19,7 +19,7 @@
             Beautiful UI snippets,<br>built with Vuetify
           </h4>
 
-          <h6 class="text-h6 font-weight-regular text-medium-emphasis mb-5">
+          <h6 class="text-h6 font-weight-regular text-medium-emphasis mt-0 mb-5">
             Vuetify Snips is a collection of over 560 beautifully crafted UI snippets, built with Vuetify,
             aimed at making your development process easier and faster.
           </h6>
