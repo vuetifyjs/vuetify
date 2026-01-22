@@ -7,9 +7,9 @@
     <v-container class="pt-10">
 
       <HomeCommonTitle
+        :description="t('home.sponsors.description')"
+        :title="t('home.sponsors.title')"
         class="mb-9"
-        description="Vuetify is proudly supported by these amazing companies and individuals. If you'd like to join them, please consider sponsoring Vuetify's development."
-        title="Sponsors & Backers"
       >
         <template #subtitle>
           <v-icon
@@ -47,11 +47,11 @@
         <v-btn
           v-bind="hoverProps"
           :append-icon="isHovering ? 'mdi-heart' : 'mdi-heart-outline'"
+          :text="t('home.sponsors.become-sponsor')"
           class="text-none mt-9"
           color="primary"
           rounded="lg"
           size="large"
-          text="Become a Sponsor"
           flat
         />
       </v-hover>
@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+  const { t } = useI18n()
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 

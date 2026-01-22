@@ -4,10 +4,10 @@
 
     <v-container class="pt-0">
       <HomeCommonTitle
+        :description="t('home.store.description')"
+        :subtitle="t('home.store.subtitle')"
+        :title="t('home.store.title')"
         class="mb-10"
-        description="Browse our collection of premium templates, themes and UI kits. All themes are built with Vuetify and are available for everyone."
-        subtitle="Premium Templates & Themes"
-        title="Vuetify Store"
       >
         <template #top>
           <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vstore.png`" class="mb-4" height="64" />
@@ -69,8 +69,9 @@
       </v-slide-group>
 
       <v-btn
+        :aria-label="t('home.store.see-more')"
+        :text="t('home.store.see-more')"
         append-icon="mdi-open-in-new"
-        aria-label="See More Templates"
         class="text-none"
         color="primary"
         href="https://store.vuetifyjs.com"
@@ -78,7 +79,6 @@
         rounded="lg"
         size="large"
         target="_blank"
-        text="See More Templates"
         variant="flat"
       />
     </v-container>
@@ -88,6 +88,7 @@
 <script setup lang="ts">
   import type { ShopifyProduct } from '@vuetify/one'
 
+  const { t } = useI18n()
   const products = useProductsStore()
 
   const items = shallowRef<ShopifyProduct[]>([])

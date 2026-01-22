@@ -6,19 +6,20 @@
       <v-row align="end">
         <v-col class="pr-md-15" cols="12" md="6">
           <p class="font-weight-medium text-primary">
-            Vuetify Support Services
+            {{ t('home.support.subtitle') }}
           </p>
 
           <h4 class="text-h4 font-weight-bold my-5">
-            Need support with your Vuetify project?
+            {{ t('home.support.title') }}
           </h4>
 
           <h6 class="text-h6 font-weight-regular text-medium-emphasis my-5">
-            We've got you covered. We offer a range of support options to help you get the most out of Vuetify.
+            {{ t('home.support.description') }}
           </h6>
 
           <div class="my-5">
             <v-btn
+              :text="t('home.support.get-support')"
               :to="rpath('introduction/enterprise-support/')"
               append-icon="mdi-open-in-new"
               class="mr-4 text-none"
@@ -26,7 +27,6 @@
               rounded="lg"
               size="large"
               target="_blank"
-              text="Get Support Now"
               variant="flat"
             />
           </div>
@@ -72,11 +72,13 @@
 </template>
 
 <script setup lang="ts">
-  const supportServices = [
+  const { t } = useI18n()
+
+  const supportServices = computed(() => [
     {
       avatar: 'https://cdn.vuetifyjs.com/docs/images/logos/v.svg',
-      title: 'Single Developer Support',
-      subtitle: 'Get professional support from the experts behind Vuetify.',
+      title: t('home.support.services.developer.title'),
+      subtitle: t('home.support.services.developer.subtitle'),
       href: rpath('introduction/enterprise-support/'),
       target: '_blank',
       rel: 'noopener noreferrer',
@@ -84,8 +86,8 @@
     { type: 'divider', class: 'my-4', inset: true },
     {
       avatar: 'https://cdn.vuetifyjs.com/docs/images/affiliates/epic-max.jpg',
-      title: 'Consulting Services',
-      subtitle: 'Epicmax provides consulting services for your project.',
+      title: t('home.support.services.consulting.title'),
+      subtitle: t('home.support.services.consulting.subtitle'),
       to: rpath('/introduction/enterprise-support/#consulting-services'),
       target: '_blank',
       rel: 'noopener noreferrer',
@@ -94,12 +96,12 @@
     {
       // TODO: Use proper image URL
       avatar: 'https://cdn.vuetifyjs.com/docs/images/affiliates/hero-devs.png',
-      title: 'Extended LTS support',
+      title: t('home.support.services.lts.title'),
       class: 'mb-2',
-      subtitle: 'HeroDevs provides extended long-term support for Vuetify 2 users.',
+      subtitle: t('home.support.services.lts.subtitle'),
       href: 'https://v2.vuetifyjs.com/about/eol/#consider-herodevs-extended-lts-support',
       target: '_blank',
       rel: 'noopener noreferrer',
     },
-  ]
+  ])
 </script>

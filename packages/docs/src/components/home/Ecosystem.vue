@@ -4,10 +4,10 @@
 
     <v-container>
       <HomeCommonTitle
+        :description="t('home.ecosystem.description')"
+        :subtitle="t('home.ecosystem.subtitle')"
+        :title="t('home.ecosystem.title')"
         class="mb-10"
-        description="Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications."
-        subtitle="A complete Vue ecosystem"
-        title="More than just Components"
       >
 
         <template #top>
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+  const { t } = useI18n()
   const theme = useTheme()
   const features = computed(() => [
     {

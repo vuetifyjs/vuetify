@@ -11,14 +11,15 @@
           </v-icon>
 
           <h4 class="text-h4 font-weight-bold mb-5 mt-0">
-            Join our community of 40k+ developers
+            {{ t('home.discord.title') }}
           </h4>
 
           <p class="text-h6 font-weight-regular mb-6 w-100 w-md-50 mx-auto">
-            Join us to get help with your Vuetify projects, share your work, and connect with other developers on Discord.
+            {{ t('home.discord.description') }}
           </p>
 
           <v-btn
+            :text="t('home.discord.join')"
             append-icon="mdi-open-in-new"
             class="mr-4 text-none"
             href="https://community.vuetifyjs.com/"
@@ -26,7 +27,6 @@
             rounded="lg"
             size="large"
             target="_blank"
-            text="Join Our Discord"
             variant="outlined"
           />
         </v-col>
@@ -36,5 +36,5 @@
 </template>
 
 <script setup lang="ts">
-  //
+  const { t } = useI18n()
 </script>

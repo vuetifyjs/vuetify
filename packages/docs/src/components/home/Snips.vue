@@ -12,20 +12,20 @@
           />
 
           <p class="font-weight-medium d-none d-md-block text-primary">
-            Premium Examples
+            {{ t('home.snips.subtitle') }}
           </p>
 
           <h4 class="text-h4 font-weight-bold my-4">
-            Beautiful UI snippets,<br>built with Vuetify
+            {{ t('home.snips.title-line1') }}<br>{{ t('home.snips.title-line2') }}
           </h4>
 
           <h6 class="text-h6 font-weight-regular text-medium-emphasis mt-0 mb-5">
-            Vuetify Snips is a collection of over 560 beautifully crafted UI snippets, built with Vuetify,
-            aimed at making your development process easier and faster.
+            {{ t('home.snips.description') }}
           </h6>
 
           <div>
             <v-btn
+              :text="t('home.snips.browse')"
               append-icon="mdi-open-in-new"
               class="mr-4 text-none"
               color="primary"
@@ -33,18 +33,17 @@
               rounded="lg"
               size="large"
               target="_blank"
-              text="Browse Vuetify Snips"
               variant="flat"
             />
 
             <v-btn
+              :text="t('faq')"
               class="mr-4 text-none"
               color="primary"
               href="https://snips.vuetifyjs.com/#faqs"
               rounded="lg"
               size="large"
               target="_blank"
-              text="FAQs"
               variant="text"
             />
           </div>
@@ -65,6 +64,8 @@
 
 <script setup lang="ts">
   import SnipsExample from './SnipsExample.vue'
+
+  const { t } = useI18n()
   const src = computed(() => `https://cdn.vuetifyjs.com/docs/images/one/logos/vsnips.png`)
 </script>
 

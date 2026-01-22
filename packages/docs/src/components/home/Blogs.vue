@@ -4,10 +4,10 @@
 
     <v-container class="pt-0">
       <HomeCommonTitle
+        :description="t('home.blogs.description')"
+        :subtitle="t('home.blogs.subtitle')"
+        :title="t('home.blogs.title')"
         class="mb-16"
-        description="Stay up to date with the latest news and updates from the Vuetify team."
-        subtitle="Latest news and updates"
-        title="Vuetify Blog"
       />
 
       <v-row align="center" class="text-left" justify="space-between">
@@ -56,11 +56,11 @@
                 <v-spacer />
 
                 <v-btn
+                  :text="t('home.blogs.read-more')"
                   :to="blog.to"
                   append-icon="mdi-page-next"
                   class="text-none px-0 ml-5"
                   color="primary"
-                  text="Read more"
                   variant="plain"
                 />
               </div>
@@ -103,12 +103,12 @@
                 <v-spacer />
 
                 <v-btn
+                  :text="t('home.blogs.read-more')"
                   :to="item.to"
                   append-icon="mdi-page-next"
                   class="text-none px-0 ml-5"
                   color="primary"
                   size="small"
-                  text="Read more"
                   variant="plain"
                 />
               </div>
@@ -120,16 +120,16 @@
       </v-row>
 
       <v-btn
+        :aria-label="t('home.blogs.read-more-posts')"
+        :text="t('home.blogs.read-more-posts')"
         :to="rpath('/blog/')"
         append-icon="mdi-open-in-new"
-        aria-label="See More Templates"
         class="text-none mt-10"
         color="primary"
         rel="noopener noreferrer"
         rounded="lg"
         size="large"
         target="_blank"
-        text="Read More Posts"
         variant="flat"
       />
     </v-container>
@@ -137,6 +137,7 @@
 </template>
 
 <script setup lang="ts">
+  const { t } = useI18n()
   const { smAndDown } = useDisplay()
 
   const items = [

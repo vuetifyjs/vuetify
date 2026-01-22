@@ -4,9 +4,9 @@
       <v-card class="py-16" color="background" elevation="0">
         <v-container class="pt-0">
           <HomeCommonTitle
+            :description="t('home.gallery.description')"
+            :title="t('home.gallery.title')"
             class="mb-10"
-            description="Vuetify provides a comprehensive collection of components that can be used to build your application."
-            title="Component Gallery"
           />
 
           <v-sheet class="mx-auto" color="transparent" max-width="1200">
@@ -59,7 +59,7 @@
 
                   <v-icon class="mx-2" icon="mdi-earth" />
 
-                  <span>Vuetify Gallery</span>
+                  <span>{{ t('home.gallery.system-bar') }}</span>
                 </v-system-bar>
 
                 <v-app-bar
@@ -90,9 +90,9 @@
 
                       <v-menu activator="parent">
                         <v-list density="compact" nav>
-                          <v-list-item title="Settings" link @click="selectedComponent = settingsComponent" />
+                          <v-list-item :title="t('home.gallery.settings')" link @click="selectedComponent = settingsComponent" />
 
-                          <v-list-item title="Logout" @click="selectedComponent = loginComponent" />
+                          <v-list-item :title="t('home.gallery.logout')" @click="selectedComponent = loginComponent" />
                         </v-list>
                       </v-menu>
 
@@ -115,7 +115,7 @@
                     slim
                   >
                     <v-list-subheader v-if="!selectedComponent.hasRailsDrawer">
-                      Application
+                      {{ t('home.gallery.application') }}
                     </v-list-subheader>
 
                     <v-list-item
@@ -132,10 +132,10 @@
                   <template #append>
                     <v-list-item
                       :active="selectedComponent.title === 'Settings'"
+                      :title="t('home.gallery.settings')"
                       active-class="text-primary"
                       class="ma-2"
                       prepend-icon="mdi-cog-outline"
-                      title="Settings"
                       link
                       nav
                       slim
@@ -163,6 +163,8 @@
 
 <script setup lang="ts">
   import { defineAsyncComponent } from 'vue'
+
+  const { t } = useI18n()
 
   interface SelectedComponent {
     title: string

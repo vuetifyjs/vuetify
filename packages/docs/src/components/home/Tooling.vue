@@ -4,10 +4,10 @@
 
     <v-container>
       <HomeCommonTitle
+        :description="t('home.tooling.description')"
+        :subtitle="t('home.tooling.subtitle')"
+        :title="t('home.tooling.title')"
         class="mb-10"
-        description="Vuetify provides a suite of tools for managing your Vuetify projects."
-        subtitle="Tools & Resources"
-        title="Vuetify Tooling"
       >
 
         <template #top>
@@ -19,9 +19,9 @@
         <v-table density="comfortable" hover>
           <thead>
             <tr>
-              <th class="text-left">Tool</th>
-              <th class="text-left">Type</th>
-              <th class="text-left d-none d-sm-table-cell">Description</th>
+              <th class="text-left">{{ t('home.tooling.headers.tool') }}</th>
+              <th class="text-left">{{ t('home.tooling.headers.type') }}</th>
+              <th class="text-left d-none d-sm-table-cell">{{ t('home.tooling.headers.description') }}</th>
             </tr>
           </thead>
 
@@ -68,56 +68,58 @@
 </template>
 
 <script setup lang="ts">
-  const tools = [
+  const { t } = useI18n()
+
+  const tools = computed(() => [
     {
-      title: 'Vuetify Create',
+      title: t('home.tooling.tools.create.title'),
       icon: '$vuetify-create',
-      type: 'Scaffolding',
+      type: t('home.tooling.tools.create.type'),
       color: 'info',
-      description: 'Scaffold your next Vuetify application with just a few commands.',
+      description: t('home.tooling.tools.create.description'),
       href: 'https://github.com/vuetifyjs/create/',
     },
     {
-      title: 'Vuetify CLI',
+      title: t('home.tooling.tools.cli.title'),
       // TODO: update once cli icon added to @vuetify/one
       // icon: '$vuetify-cli',
       icon: 'mdi-console',
-      type: 'CLI',
+      type: t('home.tooling.tools.cli.type'),
       color: 'info',
-      description: 'Command-line interface for managing Vuetify projects.',
+      description: t('home.tooling.tools.cli.description'),
       href: 'https://github.com/vuetifyjs/cli/',
     },
     {
-      title: 'Vuetify UI Kit',
+      title: t('home.tooling.tools.uikit.title'),
       icon: '$vuetify-figma',
-      type: 'Design',
+      type: t('home.tooling.tools.uikit.type'),
       color: 'purple',
-      description: 'Figma UI Kit based on Material Design for creating custom components.',
+      description: t('home.tooling.tools.uikit.description'),
       href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
     },
     {
-      title: 'Vuetify ESLint Config',
+      title: t('home.tooling.tools.eslint-config.title'),
       icon: 'mdi-code-tags-check',
-      type: 'Linting',
+      type: t('home.tooling.tools.eslint-config.type'),
       color: 'success',
-      description: 'Opinionated ESLint config to keep your code clean and consistent.',
+      description: t('home.tooling.tools.eslint-config.description'),
       href: 'https://github.com/vuetifyjs/eslint-config-vuetify',
     },
     {
-      title: 'Vuetify ESLint Plugin',
+      title: t('home.tooling.tools.eslint-plugin.title'),
       icon: 'mdi-arrow-up-bold-circle-outline',
-      type: 'Migration',
+      type: t('home.tooling.tools.eslint-plugin.type'),
       color: 'info',
-      description: 'Automated version upgrade plugin for seamless migrations.',
+      description: t('home.tooling.tools.eslint-plugin.description'),
       href: 'https://github.com/vuetifyjs/eslint-plugin-vuetify',
     },
     {
-      title: 'Vuetify Loader',
+      title: t('home.tooling.tools.loader.title'),
       icon: 'mdi-package-variant-closed',
-      type: 'Build',
+      type: t('home.tooling.tools.loader.type'),
       color: 'warning',
-      description: 'Vite and Webpack loader for automatic component imports.',
+      description: t('home.tooling.tools.loader.description'),
       href: 'https://github.com/vuetifyjs/vuetify-loader',
     },
-  ]
+  ])
 </script>

@@ -8,36 +8,36 @@
       >
         <v-col cols="12" md="6">
           <v-chip color="primary">
-            #1 Vue UI Library
+            {{ t('home.entry.chip') }}
           </v-chip>
 
           <h1 class="text-h3 text-md-h2 font-weight-bold my-5">
-            A complete <br class="d-none d-md-block"> <span class="text-primary">design system</span> that works.
+            {{ t('home.entry.title-prefix') }} <br class="d-none d-md-block"> <span class="text-primary">{{ t('home.entry.title-highlight') }}</span> {{ t('home.entry.title-suffix') }}
           </h1>
 
           <h2 class="text-h6 font-weight-regular text-medium-emphasis my-5">
-            Built by the Vue Community, Backed by Sponsors.
+            {{ t('home.entry.subtitle') }}
           </h2>
 
           <div class="d-flex flex-wrap ga-4 justify-start my-5">
             <v-btn
+              :text="t('home.get-started')"
               :to="rpath('/getting-started/installation/')"
               class="text-none"
               color="primary"
               rounded="lg"
               size="large"
-              text="Get started"
               flat
             />
 
             <v-btn
+              :text="t('home.why-vuetify')"
               :to="rpath('/getting-started/why-vuetify')"
               append-icon="$vuetify-outline"
               class="text-none"
               color="primary"
               rounded="lg"
               size="large"
-              text="Why Vuetify?"
               variant="tonal"
               flat
             />
@@ -106,7 +106,7 @@
               rounded="lg"
               border
             >
-              <span class="text-body-2 me-2">Latest</span>
+              <span class="text-body-2 me-2">{{ t('home.entry.latest') }}</span>
 
               <AppVersionBtn />
             </v-sheet>
@@ -130,23 +130,23 @@
 </template>
 
 <script setup lang="ts">
-  const codeContent = `<template>
+  const { t } = useI18n()
+
+  const code = computed(() => [
+    {
+      name: 'template',
+      content: `<template>
   <v-app>
     <v-container>
       <v-btn color="primary">
-        Hello Vuetify!
+        ${t('home.entry.hello-vuetify')}
       </v-btn>
     </v-container>
   </v-app>
-</template>`
-
-  const code = [
-    {
-      name: 'template',
-      content: codeContent,
+</template>`,
       language: 'html',
     },
-  ]
+  ])
 
   const packageManagers = ['npm', 'pnpm', 'yarn', 'bun']
   const randomPackageManager = packageManagers[Math.floor(Math.random() * packageManagers.length)]
@@ -173,12 +173,12 @@
 </script>
 
 <style lang="sass" scoped>
-@use 'sass:map'
-@use 'vuetify/settings'
+  @use 'sass:map'
+  @use 'vuetify/settings'
 
-.code-shadow
-  box-shadow: 10px 10px 100px -5px #00000044
+  .code-shadow
+    box-shadow: 10px 10px 100px -5px #00000044
 
-.font-weight-bold
-  font-weight: map.get(settings.$font-weights, 'bold') !important
+  .font-weight-bold
+    font-weight: map.get(settings.$font-weights, 'bold') !important
 </style>

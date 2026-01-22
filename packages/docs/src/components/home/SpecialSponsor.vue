@@ -8,7 +8,7 @@
     />
 
     <div class="d-flex align-center justify-center my-1 px-4">
-      <small class="font-weight-bold text-no-wrap">Special Sponsor</small>
+      <small class="font-weight-bold text-no-wrap">{{ t('home.special-sponsor') }}</small>
 
       <SponsorCard
         :slug="specialSponsor.slug"
@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+  const { t } = useI18n()
   const theme = useTheme()
   const store = useSponsorsStore()
 

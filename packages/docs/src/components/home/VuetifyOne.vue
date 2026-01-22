@@ -4,9 +4,9 @@
 
     <v-container>
       <HomeCommonTitle
-        description="A unified platform providing powerful all Ecosystem Tools in one place. Build faster, collaborate better, and create stunning Vuetify applications."
-        subtitle="Everything in One Place"
-        title="Vuetify One"
+        :description="t('home.one.description')"
+        :subtitle="t('home.one.subtitle')"
+        :title="t('home.one.title')"
       >
         <template #top>
           <v-img :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/vone.png`" class="mb-4" height="88" />
@@ -31,13 +31,13 @@
 
         <v-col class="text-center mt-6" cols="12">
           <v-btn
+            :text="t('home.one.see-benefits')"
             :to="rpath('/one/')"
             append-icon="mdi-page-next"
             class="mr-4 text-none"
             color="primary"
             rounded="lg"
             size="large"
-            text="See Subscription Benefits"
             variant="flat"
           />
         </v-col>
@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+  const { t } = useI18n()
   const theme = useTheme()
   const isDark = computed(() => theme.current.value.dark)
 
@@ -54,37 +55,37 @@
     {
       name: 'Vuetify Play',
       image: 'vplay',
-      description: 'An interactive playground to experiment with Vuetify components and features in real-time.',
+      description: t('home.one.tools.play'),
       href: 'https://play.vuetifyjs.com',
     },
     {
       name: 'Vuetify Bin',
       image: 'vbin',
-      description: 'A code sharing platform tailored for Vuetify projects, enabling easy collaboration and sharing of code snippets.',
+      description: t('home.one.tools.bin'),
       href: 'https://bin.vuetifyjs.com',
     },
     {
       name: 'Vuetify Studio',
       image: 'vstudio',
-      description: 'A visual development environment for building Vuetify applications with drag-and-drop components and real-time previews.',
+      description: t('home.one.tools.studio'),
       href: 'https://studio.vuetifyjs.com',
     },
     {
       name: 'Vuetify Link',
       image: 'vlink',
-      description: 'A URL shortening service designed for Vuetify developers to create and manage short links efficiently.',
+      description: t('home.one.tools.link'),
       href: 'https://link.vuetifyjs.com',
     },
     {
       name: 'Vuetify MCP',
       image: 'vmcp',
-      description: 'Model Context Protocol (MCP) server providing Vuetify component information and documentation.',
+      description: t('home.one.tools.mcp'),
       href: 'https://github.com/vuetifyjs/mcp/',
     },
     {
       name: 'Vuetify Issues',
       image: 'vissues',
-      description: 'Easily report issues and request features for projects in the Vuetify Ecosystem.',
+      description: t('home.one.tools.issues'),
       href: 'https://issues.vuetifyjs.com',
     },
   ])
