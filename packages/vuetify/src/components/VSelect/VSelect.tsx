@@ -472,7 +472,7 @@ export const VSelect = genericComponent<new <
                       onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       tabindex="-1"
-                      selectable
+                      selectable={ !!displayItems.value.length }
                       aria-live="polite"
                       aria-labelledby={ `${id.value}-label` }
                       aria-multiselectable={ props.multiple }

@@ -129,7 +129,7 @@ Vuetify uses [Vitest](https://vitest.dev/) for unit tests, [Vitest browser mode]
 - `pnpm test:browser` - run only browser tests
 - `pnpm test:open` - run browser tests in a chrome window
   - use this if you need devtools to debug a failing test
-- `pnpm test:screen` - run only screenshot tests, saves a report to `.vizzly/report/index.html` or http://localhost:47392 in TDD mode
+- `pnpm test:screen` - run only screenshot tests, saves a report to http://localhost:47392/
 - `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:screen`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
   - run `pnpm tdd:stop` when you're done to kill the background process
 

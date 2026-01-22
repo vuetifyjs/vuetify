@@ -12,7 +12,6 @@
     "landscape": "Changes the picker to landscape mode.",
     "landscapeHeaderWidth": "Sets header width when in landscape mode.",
     "month": "Sets the month.",
-    "weekdays": "Array of weekdays.",
     "year": "Sets the year.",
     "flat": "Removes  elevation.",
     "format": "Takes a date object and returns it in a specified format.",
