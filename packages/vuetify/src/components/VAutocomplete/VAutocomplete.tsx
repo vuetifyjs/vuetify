@@ -12,6 +12,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
@@ -32,6 +33,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -103,6 +105,8 @@ export const VAutocomplete = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'menu-header': never
+    'menu-footer': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
@@ -192,6 +196,8 @@ export const VAutocomplete = genericComponent<new <
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
@@ -214,10 +220,89 @@ export const VAutocomplete = genericComponent<new <
       }
       menu.value = !menu.value
     }
-    function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e) || e.key === 'Backspace') {
+    function onMenuKeydown (e: KeyboardEvent) {
+      const target = e.target as Element
+
+      const eventOrigin = headerRef.value?.contains(target) ? 'header'
+        : footerRef.value?.contains(target) ? 'footer'
+        : 'list'
+
+      if (e.key === 'Tab') {
+        handleTab(eventOrigin, e)
+      }
+
+      if (eventOrigin === 'list' && (checkPrintable(e) || e.key === 'Backspace')) {
         vTextFieldRef.value?.focus()
       }
+    }
+
+    function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
+      const direction = e.shiftKey ? 'backward' : 'forward'
+      const focusable = {
+        header: headerRef.value ? focusableChildren(headerRef.value) : [],
+        list: listRef.value ? focusableChildren(listRef.value.$el) : [],
+        footer: footerRef.value ? focusableChildren(footerRef.value) : [],
+      }
+
+      const nextSlot = nextFocusSlot(focusable, origin, direction, e.target as Element)
+
+      if (nextSlot) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if (nextSlot === 'header') {
+          focusable.header.at(-1)!.focus()
+        } else if (nextSlot === 'footer') {
+          focusable.footer.at(0)!.focus()
+        } else if (nextSlot === 'list') {
+          if (displayItems.value.length > 0) {
+            listRef.value?.focus(0)
+          } else {
+            focusable.list.at(origin === 'header' ? 0 : -1)!.focus()
+          }
+        }
+        return
+      }
+
+      if (
+        (origin === 'header' && direction === 'backward' && focusable.header.at(0) === e.target) ||
+        (origin === 'list' && direction === 'backward' && focusable.header.length === 0) ||
+        (origin === 'footer' && direction === 'forward' && focusable.footer.at(-1) === e.target) ||
+        (origin === 'list' && direction === 'forward' && focusable.footer.length === 0)
+      ) {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      }
+    }
+
+    function nextFocusSlot (
+      focusable: { header: HTMLElement[], list: HTMLElement[], footer: HTMLElement[] },
+      origin: string,
+      direction: 'forward' | 'backward',
+      target: Element
+    ): 'header' | 'list' | 'footer' | null {
+      if (origin === 'header' && direction === 'forward' && focusable.header.at(-1) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.footer.length > 0) {
+          return 'footer'
+        }
+      }
+      if (origin === 'list') {
+        if (direction === 'forward' && focusable.footer.length > 0) {
+          return 'footer'
+        }
+        if (direction === 'backward' && focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      if (origin === 'footer' && direction === 'backward' && focusable.footer.at(0) === target) {
+        if (focusable.list.length > 0 || displayItems.value.length > 0) {
+          return 'list'
+        } else if (focusable.header.length > 0) {
+          return 'header'
+        }
+      }
+      return null
     }
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
@@ -482,25 +567,33 @@ export const VAutocomplete = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      filterable
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
-                      tabindex="-1"
-                      selectable={ !!displayItems.value.length }
-                      aria-live="polite"
-                      aria-labelledby={ `${id.value}-label` }
-                      aria-multiselectable={ props.multiple }
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
+                  <VSheet
+                    onFocusin={ onFocusin }
+                    onKeydown={ onMenuKeydown }
+                  >
+                    { slots['menu-header'] && (
+                      <header ref={ headerRef }>
+                        { slots['menu-header']() }
+                      </header>
+                    )}
+
+                    { hasList && (
+                      <VList
+                        key="autocomplete-list"
+                        ref={ listRef }
+                        filterable
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onFocusout={ onFocusout }
+                        tabindex="-1"
+                        selectable={ !!displayItems.value.length }
+                        aria-live="polite"
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
@@ -572,7 +665,14 @@ export const VAutocomplete = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  )}
+                    )}
+
+                    { slots['menu-footer'] && (
+                      <footer ref={ footerRef }>
+                        { slots['menu-footer']() }
+                      </footer>
+                    )}
+                  </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
