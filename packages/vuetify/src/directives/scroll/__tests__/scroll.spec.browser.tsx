@@ -13,7 +13,7 @@ describe('v-scroll', () => {
       setup () {
         return () => (
           <div data-testid="root" style="overflow: auto; height: 500px; margin-block: 500px">
-            <div style="margin-block: 500px" v-scroll={[callback, selector]}>el</div>
+            <div style="margin-block: 500px" vScroll={[callback, selector]}>el</div>
           </div>
         )
       },

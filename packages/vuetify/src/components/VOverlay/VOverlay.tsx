@@ -344,7 +344,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  vClickOutside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,

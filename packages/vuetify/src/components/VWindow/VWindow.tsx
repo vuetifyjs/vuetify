@@ -310,7 +310,7 @@ export const VWindow = genericComponent<new <T>(
               : null,
           },
         ]}
-        v-touch={ touchOptions.value }
+        vTouch={ touchOptions.value }
       >
         <div
           class="v-window__container"

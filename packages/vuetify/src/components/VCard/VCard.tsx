@@ -168,7 +168,7 @@ export const VCard = genericComponent<VCardSlots>()({
             props.style,
           ]}
           onClick={ isClickable && link.navigate }
-          v-ripple={ isClickable && props.ripple }
+          vRipple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (

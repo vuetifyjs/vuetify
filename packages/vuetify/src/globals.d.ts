@@ -1,6 +1,7 @@
 import 'vue/jsx'
 
 // Types
+import { upperCase } from 'lodash-es'
 import type { ComponentInjectOptions, ComponentOptionsMixin, EmitsOptions, SlotsType } from 'vue'
 import type { ComputedOptions, Events, MethodOptions, VNode } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
@@ -101,8 +102,11 @@ declare module 'vue' {
     _: ComponentInternalInstance
   }
 
+  export interface GenericComponentInstance {
+    provides?: Record<string, unknown>
+  }
+
   export interface ComponentInternalInstance {
-    provides: Record<string, unknown>
     setupState: any
   }
 
@@ -156,7 +160,11 @@ declare module 'vue' {
     [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
   }
 
-  export interface HTMLAttributes extends EventHandlers<ModifiedEvents> {
+  type DirectiveProps = {
+    [k in `v${Capitalize<string>}`]: any
+  }
+
+  export interface HTMLAttributes extends EventHandlers<ModifiedEvents>, DirectiveProps {
     onScrollend?: (e: Event) => void
   }
 

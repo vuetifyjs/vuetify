@@ -44,6 +44,7 @@ describe('framework', () => {
       const TestComponent = {
         name: 'TestComponent',
         props: {},
+        // eslint-disable-next-line local-rules/jsx-prop-casing
         render: () => (<div v-foo />),
       }
 

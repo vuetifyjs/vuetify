@@ -116,7 +116,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
-        v-intersect={[{
+        vIntersect={[{
           handler: focusSelectedYear,
         }, null, ['once']]}
         style={{

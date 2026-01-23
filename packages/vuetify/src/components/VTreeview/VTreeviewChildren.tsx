@@ -151,7 +151,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         variant: props.indentLinesVariant,
       })
 
-      function renderItem (itemProps: Record<string, unknown>) {
+      function renderItem (itemProps: Record<string, any>) {
         return (
           <VTreeviewItem { ...itemProps }>
             {{
