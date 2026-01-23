@@ -136,8 +136,8 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
-    'list-header': never
-    'list-footer': never
+    'menu-header': never
+    'menu-footer': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -564,9 +564,9 @@ export const VSelect = genericComponent<new <
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
                   >
-                    { slots['list-header'] && (
+                    { slots['menu-header'] && (
                       <header ref={ headerRef }>
-                        { slots['list-header']() }
+                        { slots['menu-header']() }
                       </header>
                     )}
 
@@ -654,9 +654,9 @@ export const VSelect = genericComponent<new <
                       </VList>
                     )}
 
-                    { slots['list-footer'] && (
+                    { slots['menu-footer'] && (
                       <footer ref={ footerRef }>
-                        { slots['list-footer']() }
+                        { slots['menu-footer']() }
                       </footer>
                     )}
                   </VSheet>

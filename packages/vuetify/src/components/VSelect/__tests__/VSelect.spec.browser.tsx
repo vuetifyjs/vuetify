@@ -936,15 +936,15 @@ describe('VSelect', () => {
     })
   })
 
-  describe('list-header and list-footer slots', () => {
-    it('should render list-header and list-footer slots', async () => {
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
       const { element } = render(() => (
         <VSelect menu items={['Item #1', 'Item #2']}>
           {{
-            'list-header': () => (
+            'menu-header': () => (
               <div data-testid="header-content">My Header</div>
             ),
-            'list-footer': () => (
+            'menu-footer': () => (
               <div data-testid="footer-content">My Footer</div>
             ),
           }}
@@ -962,13 +962,13 @@ describe('VSelect', () => {
       const { element } = render(() => (
         <VSelect menu items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
           {{
-            'list-header': () => (
+            'menu-header': () => (
               <div>
                 <button data-testid="button-1">Button 1</button>
                 <button data-testid="button-2">Button 2</button>
               </div>
             ),
-            'list-footer': () => (
+            'menu-footer': () => (
               <div class="d-flex justify-between">
                 <button data-testid="button-3">Button 3</button>
                 <button data-testid="button-4">Button 4</button>
