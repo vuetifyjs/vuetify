@@ -647,6 +647,7 @@ export const VCombobox = genericComponent<new <
                         filterable
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         selectable={ !!displayItems.value.length }
                         onFocusout={ onFocusout }
                         tabindex="-1"

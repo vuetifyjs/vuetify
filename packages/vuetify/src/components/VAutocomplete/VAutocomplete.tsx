@@ -584,6 +584,7 @@ export const VAutocomplete = genericComponent<new <
                         filterable
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onFocusout={ onFocusout }
                         tabindex="-1"
                         selectable={ !!displayItems.value.length }
