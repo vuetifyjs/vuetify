@@ -4,6 +4,7 @@
     :code="code"
     :name="name"
     :options="options"
+    :script="script"
   >
     <v-card :class="direction === 'vertical' ? 'd-flex' : ''" elevation="4">
       <v-tabs
@@ -80,7 +81,7 @@
   const code = computed(() => {
     return `
 <v-sheet${direction.value === 'vertical' ? 'class="d-flex"' : ''} elevation="4">
-  <${name}${propsToString(props.value, [], 2)}>
+  <${name}${propsToString(props.value, [], 2)} v-model="tab">
     <v-tab value="one">Item One</v-tab>
     <v-tab value="two">Item Two</v-tab>
     <v-tab value="three">Item Three</v-tab>
@@ -100,5 +101,13 @@
     </v-tabs-window-item>
   </v-tabs-window>
 </v-sheet>`
+  })
+
+  const script = computed(() => {
+    return `<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('one')
+<` + '/script>'
   })
 </script>
