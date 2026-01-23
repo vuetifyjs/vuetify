@@ -51,7 +51,7 @@
       price: 180,
       duration: 60,
       link: 'https://l.kintell.com/M9y7D7',
-      image: 'https://avatars.githubusercontent.com/u/9064066?v=4',
+      image: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
     },
   ]
 </script>

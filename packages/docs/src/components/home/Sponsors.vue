@@ -1,40 +1,66 @@
 <template>
-  <v-sheet
-    id="home-sponsors"
-    class="mx-auto pa-3"
-    color="transparent"
-    max-width="700"
-  >
-    <v-responsive min-height="500">
-      <v-row
-        justify="center"
-        dense
+  <v-responsive class="pb-16">
+    <HomeCommonGradient opacity-class="opacity-10" />
+
+    <HomeCommonGradient opacity-class="opacity-40" position="center" />
+
+    <v-container class="pt-10">
+
+      <HomeCommonTitle
+        :description="t('home.sponsors.description')"
+        :title="t('home.sponsors.title')"
+        class="mb-9"
       >
-        <v-col
-          v-for="sponsor in sponsors"
-          :key="sponsor.slug"
-          class="d-flex align-center justify-center"
-          cols="auto"
-        >
-          <SponsorCard
-            :comfortable="Number(sponsor.metadata.tier) === 2"
-            :compact="Number(sponsor.metadata.tier) > 2"
-            :sponsor="sponsor"
-            v-bind="$attrs"
-            :width="Number(sponsor.metadata.tier) > 1 && smAndDown ? 90 : undefined"
+        <template #subtitle>
+          <v-icon
+            class="mb-5"
+            color="red-lighten-2"
+            icon="mdi-heart-outline"
+            size="60"
           />
-        </v-col>
-      </v-row>
-    </v-responsive>
+        </template>
+      </HomeCommonTitle>
 
-    <br>
-    <br>
+      <v-responsive class="mx-auto" max-width="800">
+        <v-row
+          justify="center"
+          dense
+        >
+          <v-col
+            v-for="sponsor in sponsors"
+            :key="sponsor.slug"
+            class="d-flex align-center justify-center ma-1"
+            cols="auto"
+          >
+            <SponsorCard
+              :comfortable="Number(sponsor.metadata.tier) === 2"
+              :compact="Number(sponsor.metadata.tier) > 2"
+              :sponsor="sponsor"
+              v-bind="$attrs"
+              :width="Number(sponsor.metadata.tier) > 1 && smAndDown ? 90 : undefined"
+            />
+          </v-col>
+        </v-row>
+      </v-responsive>
 
-    <SponsorLink append-icon="mdi-page-next" size="large" />
-  </v-sheet>
+      <v-hover v-slot="{ props: hoverProps, isHovering }">
+        <v-btn
+          v-bind="hoverProps"
+          :append-icon="isHovering ? 'mdi-heart' : 'mdi-heart-outline'"
+          :text="t('home.sponsors.become-sponsor')"
+          class="text-none mt-9"
+          color="primary"
+          rounded="lg"
+          size="large"
+          flat
+        />
+      </v-hover>
+    </v-container>
+  </v-responsive>
 </template>
 
-<script setup>
+<script setup lang="ts">
+  const { t } = useI18n()
   const { smAndDown } = useDisplay()
   const sponsorStore = useSponsorsStore()
 
@@ -50,10 +76,4 @@
         return tiers
       }, [])
   })
-</script>
-
-<script>
-  export default {
-    inheritAttrs: false,
-  }
 </script>
