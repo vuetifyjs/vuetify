@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Text and typography
   description: View the various typography styles. From display to labels, with various weights, sizes and italics.

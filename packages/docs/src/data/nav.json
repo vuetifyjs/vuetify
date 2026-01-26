@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "typography",
+        "subfolder": "components"
+      },
+      {
         "title": "videos",
         "subfolder": "components"
       },

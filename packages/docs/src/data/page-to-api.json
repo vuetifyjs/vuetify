@@ -166,6 +166,7 @@
     "VTreeviewChildren",
     "VTreeviewGroup"
   ],
+  "components/typography": ["VTypography"],
   "components/vertical-steppers": ["VStepperVertical", "VStepperVerticalActions", "VStepperVerticalItem"],
   "components/videos": ["VVideo", "VVideoControls", "VVideoVolume"],
   "components/virtual-scroller": ["VVirtualScroll"],

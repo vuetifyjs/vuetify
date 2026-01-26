@@ -1,30 +1,21 @@
 <template>
-  <div class="d-flex flex-column gap-4">
+  <div class="d-flex flex-wrap align-center justify-center ga-2">
     <VTypography
-      v-for="color in colors"
+      v-for="color in ['primary', 'success', 'error']"
       :key="color"
       :color="color"
+      class="pa-2 border"
       variant="body-large"
     >
       Text in {{ color }} color
     </VTypography>
 
     <VTypography
-      color="#FF9800"
+      class="pa-3 border"
+      color="#7b1fa2"
       variant="body-large"
     >
       Custom color (hex)
     </VTypography>
   </div>
 </template>
-
-<script setup>
-  const colors = [
-    'primary',
-    'secondary',
-    'success',
-    'error',
-    'warning',
-    'info',
-  ]
-</script>
