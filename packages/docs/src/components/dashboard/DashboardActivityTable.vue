@@ -122,7 +122,7 @@
     },
     'default::Studios': {
       name: 'Studio',
-      url: 'https://studios.vuetifyjs.com/projects',
+      url: 'https://studio.vuetifyjs.com/projects',
       img: 'vstudio.svg',
     },
   }
