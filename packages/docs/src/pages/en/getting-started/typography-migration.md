@@ -93,6 +93,26 @@ export default createVuetify({
 })
 ```
 
+#### Detached Sass variables
+
+Default typography configuration does not cover `text-transform`. So some of the Sass variables are now detached from typography and default to `none`.
+
+| Sass Variable                | Legacy value                                          |
+|------------------------------|-------------------------------------------------------|
+| `$button-text-transform`     | `settings.$typography` » `button` » `text-transform`  |
+| `$card-text-text-transform`  | `settings.$typography` » `body-2` » `text-transform`  |
+| `$system-bar-text-transform` | `settings.$typography` » `caption` » `text-transform` |
+
+In order to restore the customized values, pass them directly to the specific variables:
+
+```scss { resource="src/settings.scss" }
+@use 'vuetify/settings' with (
+  $button-text-transform: none,
+  $card-text-text-transform: none,
+  $system-bar-text-transform: none,
+);
+```
+
 ### 2. Custom Variants
 
 If you had custom typography variants in Sass:
@@ -185,111 +205,61 @@ The format is `text-{breakpoint}-{variant}`, for example:
 
 ### Restoring MD2 typography
 
-If you want to avoid visual regression entirely, you can restore MD2 typography using the following configuration snippet:
+If you want to avoid visual regression entirely, you can restore MD2 typography using 2 configuration snippets bellow.
+
+```scss { resource="src/settings.scss" }
+@use 'vuetify/settings' with (
+  $button-text-transform: uppercase,
+  $card-text-text-transform: none,
+  $system-bar-text-transform: none,
+);
+```
+
+::: info
+Components depending on Typography will get CSS variables remapped using wildcard mapping.
+:::
 
 ```ts { resource="src/plugins/vuetify.ts" }
 createVuetify({
   typography: {
-    merge: false, // <- do not merge variants and variables from MD3
+    merge: false, // <- fully override
+    variables: {
     variables: {
       'font-heading': '"Roboto", sans-serif',
       'font-body': '"Roboto", sans-serif',
+
+      /* display-large <- h2 (used by VEmptyState) */
+      'display-large': 'var:h2-*',
+      /* headline-large <- h4 (used by VEmptyState) */
+      'headline-large': 'var:h4-*',
+      /* headline-medium <- h5 (used by VAppBar) */
+      'headline-medium': 'var:h5-*',
+      /* headline-small <- h6 (used by VAlert) */
+      'headline-small': 'var:h6-*',
+      /* title-large <- h6 (used by VCard, VEmptyState) */
+      'title-large': 'var:h6-*',
+      /* body-large <- body-1 (used by VBreadcrumbs, VDialog, VInput, VList) */
+      'body-large': 'var:body-1-*',
+      /* body-medium <- body-2 (used by VBanner, VCard, VEmptyState, VList, VSnackbar, VTable) */
+      'body-medium': 'var:body-2-*',
+      /* label-large <- button (used by VBanner, VBreadcrumbs, VBtn, VChip, VFab, VIconBtn, VTable) */
+      'label-large': 'var:button-*',
+      /* label-small <- caption (used by VBottomNavigation, VSlider, VSystemBar, VTable) */
+      'label-small': 'var:caption-*',
     },
     variants: {
-      'h1': {
-        fontFamily: 'var:font-heading',
-        fontSize: '6rem',
-        lineHeight: 1,
-        fontWeight: 300,
-        letterSpacing: '-.015625em'
-      },
-      'h2': {
-        fontFamily: 'var:font-heading',
-        fontSize: '3.75rem',
-        lineHeight: 1,
-        fontWeight: 300,
-        letterSpacing: '-.0083333333em'
-      },
-      'h3': {
-        fontFamily: 'var:font-heading',
-        fontSize: '3rem',
-        lineHeight: 1.05,
-        fontWeight: 400,
-        letterSpacing: 'normal'
-      },
-      'h4': {
-        fontFamily: 'var:font-heading',
-        fontSize: '2.125rem',
-        lineHeight: 1.175,
-        fontWeight: 400,
-        letterSpacing: '.0073529412em'
-      },
-      'h5': {
-        fontFamily: 'var:font-heading',
-        fontSize: '1.5rem',
-        lineHeight: 1.333,
-        fontWeight: 400,
-        letterSpacing: 'normal'
-      },
-      'h6': {
-        fontFamily: 'var:font-heading',
-        fontSize: '1.25rem',
-        lineHeight: 1.6,
-        fontWeight: 500,
-        letterSpacing: '.0125em'
-      },
-      'subtitle-1': {
-        fontFamily: 'var:font-body',
-        fontSize: '1rem',
-        lineHeight: 1.75,
-        fontWeight: 400,
-        letterSpacing: '.009375em'
-      },
-      'subtitle-2': {
-        fontFamily: 'var:font-body',
-        fontSize: '.875rem',
-        lineHeight: 1.6,
-        fontWeight: 500,
-        letterSpacing: '.0071428571em'
-      },
-      'body-1': {
-        fontFamily: 'var:font-body',
-        fontSize: '1rem',
-        lineHeight: 1.5,
-        fontWeight: 400,
-        letterSpacing: '.03125em'
-      },
-      'body-2': {
-        fontFamily: 'var:font-body',
-        fontSize: '.875rem',
-        lineHeight: 1.425,
-        fontWeight: 400,
-        letterSpacing: '.0178571429em'
-      },
-      'button': {
-        fontFamily: 'var:font-body',
-        fontSize: '.875rem',
-        lineHeight: 2.6,
-        fontWeight: 500,
-        letterSpacing: '.0892857143em',
-        textTransform: 'uppercase'
-      },
-      'caption': {
-        fontFamily: 'var:font-body',
-        fontSize: '.75rem',
-        lineHeight: 1.667,
-        fontWeight: 400,
-        letterSpacing: '.0333333333em'
-      },
-      'overline': {
-        fontFamily: 'var:font-body',
-        fontSize: '.75rem',
-        lineHeight: 2.667,
-        fontWeight: 500,
-        letterSpacing: '.1666666667em',
-        textTransform: 'uppercase'
-      },
-    }
-  }
-})
+      h1: { fontFamily: 'var:font-heading', fontSize: '6rem', lineHeight: 1, fontWeight: 300, letterSpacing: '-.015625em' },
+      h2: { fontFamily: 'var:font-heading', fontSize: '3.75rem', lineHeight: 1, fontWeight: 300, letterSpacing: '-.0083333333em' },
+      h3: { fontFamily: 'var:font-heading', fontSize: '3rem', lineHeight: 1.05, fontWeight: 400, letterSpacing: 'normal' },
+      h4: { fontFamily: 'var:font-heading', fontSize: '2.125rem', lineHeight: 1.175, fontWeight: 400, letterSpacing: '.0073529412em' },
+      h5: { fontFamily: 'var:font-heading', fontSize: '1.5rem', lineHeight: 1.333, fontWeight: 400, letterSpacing: 'normal' },
+      h6: { fontFamily: 'var:font-heading', fontSize: '1.25rem', lineHeight: 1.6, fontWeight: 500, letterSpacing: '.0125em' },
+      'subtitle-1': { fontFamily: 'var:font-body', fontSize: '1rem', lineHeight: 1.75, fontWeight: 400, letterSpacing: '.009375em' },
+      'subtitle-2': { fontFamily: 'var:font-body', fontSize: '.875rem', lineHeight: 1.6, fontWeight: 500, letterSpacing: '.0071428571em' },
+      'body-1': { fontFamily: 'var:font-body', fontSize: '1rem', lineHeight: 1.5, fontWeight: 400, letterSpacing: '.03125em' },
+      'body-2': { fontFamily: 'var:font-body', fontSize: '.875rem', lineHeight: 1.425, fontWeight: 400, letterSpacing: '.0178571429em' },
+      button: { fontFamily: 'var:font-body', fontSize: '.875rem', lineHeight: 2.6, fontWeight: 500, letterSpacing: '.0892857143em', textTransform: 'uppercase' },
+      caption: { fontFamily: 'var:font-body', fontSize: '.75rem', lineHeight: 1.667, fontWeight: 400, letterSpacing: '.0333333333em' },
+      overline: { fontFamily: 'var:font-body', fontSize: '.75rem', lineHeight: 2.667, fontWeight: 500, letterSpacing: '.1666666667em', textTransform: 'uppercase' },
+    },
 ```

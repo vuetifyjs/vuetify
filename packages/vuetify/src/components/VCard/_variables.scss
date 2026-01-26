@@ -84,7 +84,7 @@ $card-text-opacity: var(--v-card-text-opacity, 1) !default;
 $card-text-letter-spacing: var(--v-text--body-medium-letter-spacing) !default;
 $card-text-line-height: var(--v-text--body-medium-line-height) !default;
 $card-text-padding: 1rem !default;
-$card-text-text-transform: var(--v-text--body-medium-text-transform) !default;
+$card-text-text-transform: none !default;
 
 // Lists
 $card-border: (

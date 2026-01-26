@@ -11,12 +11,12 @@ import { computed } from 'vue'
 import { consoleWarn, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { TypographyStyle, TypographyVariant } from '@/composables/typography'
+import type { TypographyStyle } from '@/composables/typography'
 
 function isTypographyVariant (
   value: string,
   available: Record<string, TypographyStyle>,
-): value is TypographyVariant {
+) {
   return value in available
 }
 

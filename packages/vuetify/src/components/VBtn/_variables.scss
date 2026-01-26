@@ -44,7 +44,7 @@ $button-margin-end: calc(var(--v-btn-height) / #{$button-margin-end-multiplier})
 $button-max-width: 100% !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: var(--v-text--label-large-letter-spacing) !default;
-$button-text-transform: var(--v-text--label-large-text-transform) !default;
+$button-text-transform: none !default;
 $button-transition-property: box-shadow, transform, opacity, background !default;
 $button-vertical-align: middle !default;
 $button-width-ratio: math.div(16, 9) !default;

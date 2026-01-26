@@ -7,7 +7,6 @@ import { IN_BROWSER } from '@/util/globals'
 import type { App, ComputedRef, CSSProperties, InjectionKey, Ref } from 'vue'
 import type { DisplayThresholds } from './display'
 
-export type TypographyVariant = `${string}-${string}`
 export type TypographyStyle = CSSProperties
 
 function genDefaults (merge = true): TypographyOptions {
@@ -61,7 +60,7 @@ export interface TypographyOptions {
   responsive?: boolean
   propertiesForVariables?: string[]
   stylesheetId?: string
-  variants?: Record<TypographyVariant, TypographyStyle | null>
+  variants?: Record<string, TypographyStyle | null>
   variables?: Record<string, string>
 }
 
@@ -74,21 +73,39 @@ export interface InternalTypographyOptions {
   responsive: boolean
   propertiesForVariables: string[]
   stylesheetId: string
-  variants: Record<TypographyVariant, TypographyStyle>
+  variants: Record<string, TypographyStyle>
   variables?: Record<string, string>
 }
 
-function genTypographyVariables (prefix: string, variables: Record<string, string>): string[] {
+function toValue (prefix: string, val: string) {
+  return String(val).startsWith('var:')
+    ? val.replace('var:', `var(--${prefix}text--`) + ')'
+    : val
+}
+
+function genTypographyVariables (
+  prefix: string,
+  variables: Record<string, string>,
+  propertiesForVariables: string[]
+): string[] {
   const lines: string[] = []
   for (const [key, value] of Object.entries(variables)) {
-    lines.push(`  --${prefix}text--${key}:${value};`)
+    if (value.endsWith('-*')) {
+      const sourceVariant = value.slice(0, -2)
+      for (const prop of propertiesForVariables) {
+        const sourceValue = `${sourceVariant}-${prop}`
+        lines.push(`  --${prefix}text--${key}-${prop}:${toValue(prefix, sourceValue)};`)
+      }
+    } else {
+      lines.push(`  --${prefix}text--${key}:${toValue(prefix, value)};`)
+    }
   }
   return [':root {', ...lines, '}']
 }
 
 function genVariantVariables (
   prefix: string,
-  variants: Record<TypographyVariant, TypographyStyle | null>,
+  variants: Record<string, TypographyStyle | null>,
   propertiesForVariables: string[]
 ): string[] {
   const lines: string[] = []
@@ -105,14 +122,8 @@ function genVariantVariables (
 }
 
 function stringifyStyle (prefix: string, style: TypographyStyle): string {
-  function toValue (val: string) {
-    return String(val).startsWith('var:')
-      ? val.replace('var:', `var(--${prefix}text--`) + ')'
-      : val
-  }
-
   return Object.entries(style)
-    .map(([key, val]) => `${toKebabCase(key)}:${toValue(val)}`)
+    .map(([key, val]) => `${toKebabCase(key)}:${toValue(prefix, val)}`)
     .join('; ')
 }
 
@@ -120,7 +131,7 @@ function genTypographyCss (
   prefix: string,
   scoped: boolean,
   resetStyles: CSSProperties,
-  variants: Record<TypographyVariant, TypographyStyle | null>,
+  variants: Record<string, TypographyStyle | null>,
   propertiesForVariables: string[],
   variables?: Record<string, string>,
   responsive = false,
@@ -131,7 +142,7 @@ function genTypographyCss (
   content.push(...genVariantVariables(prefix, variants, propertiesForVariables))
 
   if (variables && Object.keys(variables).length > 0) {
-    content.push(...genTypographyVariables(prefix, variables))
+    content.push(...genTypographyVariables(prefix, variables, propertiesForVariables))
   }
 
   content.push(`.${prefix}typography{${stringifyStyle(prefix, resetStyles)}}`)
@@ -173,7 +184,7 @@ function upsertStyles (id: string, cspNonce: string | undefined, styles: string)
 }
 
 export interface TypographyInstance {
-  variants: Ref<Record<TypographyVariant, TypographyStyle>>
+  variants: Ref<Record<string, TypographyStyle>>
 }
 
 export const TypographySymbol: InjectionKey<TypographyInstance> = Symbol.for('vuetify:typography')
