@@ -20,7 +20,10 @@
       pointer-events: auto
 
       &--variant-elevated
-        @include tools.elevation(2)
+        @include tools.elevation($fab-elevation)
+
+        &:hover
+          @include tools.elevation($fab-hover-elevation)
 
     &--app,
     &--absolute
