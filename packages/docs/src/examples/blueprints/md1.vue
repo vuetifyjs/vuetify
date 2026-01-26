@@ -43,3 +43,10 @@
 
   const color = md1.theme.themes.light.colors.primary
 </script>
+
+<style scoped>
+.v-btn {
+  /* for demo, normally handled by global typography */
+  letter-spacing: normal;
+}
+</style>
