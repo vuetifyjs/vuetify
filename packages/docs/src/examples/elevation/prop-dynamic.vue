@@ -17,7 +17,7 @@
     <v-hover v-slot="{ isHovering, props }">
       <div
         v-bind="props"
-        :class="`elevation-${isHovering ? 5 : 1}`"
+        :class="`bg-surface elevation-${isHovering ? 5 : 1}`"
         class="mx-auto pa-6"
       >
         Class based elevation

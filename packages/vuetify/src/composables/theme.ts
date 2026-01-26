@@ -170,6 +170,8 @@ function genDefaults () {
           'theme-on-code': '#000000',
           'theme-on-dark': '#FFF',
           'theme-on-light': '#000',
+          'elevation-overlay-color': 'black',
+          'elevation-overlay-opacity-step': '2%',
         },
       },
       dark: {
@@ -210,6 +212,8 @@ function genDefaults () {
           'theme-on-code': '#CCCCCC',
           'theme-on-dark': '#FFF',
           'theme-on-light': '#000',
+          'elevation-overlay-color': 'white',
+          'elevation-overlay-opacity-step': '2%',
         },
       },
     },

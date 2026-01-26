@@ -7,7 +7,8 @@
         cols="auto"
       >
         <v-card
-          :class="['d-flex justify-center align-center bg-surface-light', `elevation-${n}`]"
+          :elevation="n"
+          class="d-flex justify-center align-center elevation-overlay"
           height="100"
           rounded="xl"
           width="100"
