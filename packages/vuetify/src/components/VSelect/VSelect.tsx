@@ -343,7 +343,11 @@ export const VSelect = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        // Don't steal focus if it's already on the clear button or another element within the field
+        const fieldEl = vTextFieldRef.value?.$el
+        if (fieldEl && !fieldEl.contains(document.activeElement)) {
+          vTextFieldRef.value?.focus()
+        }
       }
     }
     function onFocusin (e: FocusEvent) {
