@@ -367,3 +367,21 @@ Removed the **$text-field-details-padding-inline** Sass variable.
 +  $input-details-padding-inline: <value>
 );
 ```
+
+## Defaults
+
+`undefined` values are now skipped when merging prop defaults. This button would have been grey in v3, but is now green:
+
+```jsx
+createVuetify({
+  defaults: {
+    VBtn: { color: 'green' },
+  },
+})
+
+<VDefaultsProvider :defaults="{ VBtn: { color: undefined }}">
+  <VBtn />
+</VDefaultsProvider>
+```
+
+Replace `undefined` with `null` if you do actually want it to override the global default value.
