@@ -1,5 +1,5 @@
 <template>
-  <div :ref="containerResizeRef" class="marquee">
+  <div :ref="containerResizeRef" class="marquee" @focusout="onFocusOut">
     <div :ref="contentResizeRef" class="marquee-content">
       <div
         v-for="(item, index) in props.items"
@@ -40,6 +40,10 @@
     const shiftExact = contentWidth - containerWidth
     shiftTime.value = Math.max(0, Math.round(shiftExact / shiftSpeed))
   }
+
+  function onFocusOut (e: FocusEvent) {
+    (e.currentTarget as HTMLElement).scrollLeft = 0
+  }
 </script>
 
 <style scoped>
@@ -77,6 +81,17 @@
   align-items: center;
   animation: scroll calc(v-bind(shiftTime) * 1s) linear infinite alternate;
   gap: 2rem;
+}
+
+.marquee:has(.marquee-content:focus-within) {
+  .marquee-content {
+    animation: none;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
 }
 
 .marquee-item {
