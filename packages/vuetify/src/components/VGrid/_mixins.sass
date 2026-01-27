@@ -15,24 +15,18 @@
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       max-width: $container-max-width
 
-@mixin make-row($gap: settings.$grid-gutter)
-  display: flex
-  flex-wrap: wrap
-  flex: 1 1 auto
-  gap: $gap
+@function col-span-width($size, $columns: settings.$grid-columns)
+  @return calc((#{$size} * (100% - #{$columns - 1} * var(--v-col-gap-x)) / #{$columns}) + #{$size - 1} * var(--v-col-gap-x))
 
-@function col-span-width($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
-  @return calc((#{$size} * (100% - #{$columns - 1} * #{$gap}) / #{$columns}) + #{$size - 1} * #{$gap})
+@function col-span-offset($size, $columns: settings.$grid-columns)
+  @return calc((#{$size} * (100% - #{$columns - 1} * var(--v-col-gap-x)) / #{$columns}) + #{$size} * var(--v-col-gap-x))
 
-@function col-span-offset($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
-  @return calc((#{$size} * (100% - #{$columns - 1} * #{$gap}) / #{$columns}) + #{$size} * #{$gap})
-
-@mixin make-col($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
-  flex: 0 0 col-span-width($size, $columns, $gap)
+@mixin make-col($size, $columns: settings.$grid-columns)
+  flex: 0 0 col-span-width($size, $columns)
   min-width: 0
 
-@mixin make-col-offset($size, $columns: settings.$grid-columns, $gap: settings.$grid-gutter)
-  margin-inline-start: col-span-offset($size, $columns, $gap)
+@mixin make-col-offset($size, $columns: settings.$grid-columns)
+  margin-inline-start: col-span-offset($size, $columns)
 
 @mixin make-grid-columns($columns: settings.$grid-columns, $breakpoints: settings.$grid-breakpoints)
   // Common properties for all breakpoints
@@ -64,33 +58,33 @@
       // Standard columns with default gap
       @for $i from 1 through $columns
         :where(.v-row.v-row--density-default) > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns, settings.$grid-gutter)
+          @include make-col($i, $columns)
 
       // Dense row columns
       @for $i from 1 through $columns
         .v-row--density-comfortable > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns, settings.$form-grid-gutter)
+          @include make-col($i, $columns)
 
       // No-gutters columns
       @for $i from 1 through $columns
         .v-row--density-compact > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns, 0px)
+          @include make-col($i, $columns)
 
       // Standard offsets with default gap
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           // Avoid emitting useless .offset-0
           :where(.v-row.v-row--density-default) > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns, settings.$grid-gutter)
+            @include make-col-offset($i, $columns)
 
       // Dense row offsets
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           .v-row--density-comfortable > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns, settings.$form-grid-gutter)
+            @include make-col-offset($i, $columns)
 
       // No-gutters offsets
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           .v-row--density-compact > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns, 0px)
+            @include make-col-offset($i, $columns)

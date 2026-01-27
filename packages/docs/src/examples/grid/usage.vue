@@ -1,6 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row>
+    <v-row gap="16">
       <v-col
         v-for="n in 3"
         :key="n"
