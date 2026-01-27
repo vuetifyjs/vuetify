@@ -268,14 +268,16 @@ export const VTimePickerClock = genericComponent()({
             {
               genChildren.value.map(value => {
                 const isActive = value === displayedValue.value
+                const isDisabled = props.disabled || !isAllowed(value)
 
                 return (
                   <div
+                    aria-disabled={ isDisabled || undefined }
                     class={[
                       {
                         'v-time-picker-clock__item': true,
                         'v-time-picker-clock__item--active': isActive,
-                        'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value),
+                        'v-time-picker-clock__item--disabled': isDisabled,
                       },
                       isActive && backgroundColorClasses.value,
                     ]}
