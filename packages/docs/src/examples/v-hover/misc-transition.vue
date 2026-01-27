@@ -15,7 +15,7 @@
           <v-expand-transition>
             <div
               v-if="isHovering"
-              class="d-flex bg-orange-darken-2 v-card--reveal text-h2"
+              class="d-flex bg-orange-darken-2 v-card--reveal text-display-large"
               style="height: 100%;"
             >
               $14.99
@@ -24,15 +24,15 @@
         </v-img>
 
         <v-card-text class="pt-6">
-          <div class="font-weight-light text-grey text-h6 mb-2">
+          <div class="font-weight-light text-grey text-title-large mb-2">
             For the perfect meal
           </div>
 
-          <h3 class="text-h4 font-weight-light text-orange mt-0 mb-2">
+          <h3 class="text-headline-large font-weight-light text-orange mt-0 mb-2">
             QW cooking utensils
           </h3>
 
-          <div class="font-weight-light text-h6 mb-2">
+          <div class="font-weight-light text-title-large mb-2">
             Our Vintage kitchen utensils delight any chef.<br>
             Made of bamboo by hand
           </div>

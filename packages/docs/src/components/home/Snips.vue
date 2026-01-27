@@ -15,11 +15,11 @@
             {{ t('home.snips.subtitle') }}
           </p>
 
-          <h4 class="text-h4 font-weight-bold my-4">
+          <h4 class="text-headline-large font-weight-bold my-4">
             {{ t('home.snips.title-line1') }}<br>{{ t('home.snips.title-line2') }}
           </h4>
 
-          <h6 class="text-h6 font-weight-regular text-medium-emphasis mt-0 mb-5">
+          <h6 class="text-title-large font-weight-regular text-medium-emphasis mt-0 mb-5">
             {{ t('home.snips.description') }}
           </h6>
 

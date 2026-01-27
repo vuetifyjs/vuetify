@@ -9,7 +9,7 @@
           src="https://cdn.vuetifyjs.com/docs/images/logos/v.svg"
         />
 
-        <div class="text-h5 text-center mb-8 font-weight-medium">Log into your account</div>
+        <div class="text-headline-small text-center mb-8 font-weight-medium">Log into your account</div>
 
         <v-sheet border="opacity-25 thin" class="overflow-hidden" rounded="lg">
           <v-text-field
@@ -35,12 +35,12 @@
           <div class="d-flex justify-space-between align-center">
             <v-checkbox-btn class="ms-n3" color="primary" label="Remember me">
               <template #label>
-                <span class="text-body-2">Remember me</span>
+                <span class="text-body-medium">Remember me</span>
               </template>
             </v-checkbox-btn>
 
             <a
-              class="text-decoration-none text-primary text-body-2 font-weight-medium cursor-pointer"
+              class="text-decoration-none text-primary text-body-medium font-weight-medium cursor-pointer"
               @click="emit('login')"
             >
               Forgot password?
@@ -58,7 +58,7 @@
           @click="emit('login')"
         />
 
-        <div class="text-center text-body-2">
+        <div class="text-center text-body-medium">
           Don't have an account?
           <a
             class="text-decoration-none text-primary font-weight-medium cursor-pointer"

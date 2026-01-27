@@ -24,7 +24,7 @@
 
         <span
           v-else-if="index === 2"
-          class="text-overline text-grey-darken-3 mx-2"
+          class="text-label-medium text-grey-darken-3 mx-2"
         >
           +{{ files.length - 2 }} File(s)
         </span>

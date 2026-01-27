@@ -14,7 +14,7 @@
       <span
         :class="[
           smAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
-          'border rounded text-disabled text-caption'
+          'border rounded text-disabled text-body-small'
         ]"
       >
         <span v-if="mdAndUp">

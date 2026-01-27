@@ -22,7 +22,7 @@
         <v-img :src="chat.avatar" />
       </v-avatar>
 
-      <div class="text-body-1 font-weight-medium">
+      <div class="text-body-large font-weight-medium">
         {{ chat.name }}
       </div>
 

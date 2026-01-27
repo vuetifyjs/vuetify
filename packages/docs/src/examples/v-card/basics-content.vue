@@ -7,7 +7,7 @@
         title="This is a title"
       ></v-card>
 
-      <div class="text-center text-caption">Using Props Only</div>
+      <div class="text-center text-body-small">Using Props Only</div>
     </v-col>
 
     <v-col cols="12" md="4">
@@ -25,7 +25,7 @@
         </template>
       </v-card>
 
-      <div class="text-center text-caption">Using Slots Only</div>
+      <div class="text-center text-body-small">Using Slots Only</div>
     </v-col>
 
     <v-col cols="12" md="4">
@@ -41,7 +41,7 @@
         </v-card-text>
       </v-card>
 
-      <div class="text-center text-caption">Using Markup Only</div>
+      <div class="text-center text-body-small">Using Markup Only</div>
     </v-col>
   </v-row>
 </template>
