@@ -56,6 +56,7 @@ export const makeVFieldProps = propsFactory({
   appendInnerIcon: IconValue,
   bgColor: String,
   clearable: Boolean,
+  clearFocusable: Boolean,
   clearIcon: {
     type: IconValue,
     default: '$clear',
@@ -380,7 +381,7 @@ export const VField = genericComponent<new <T>(
                       onFocus: focus,
                       onBlur: blur,
                       onClick: props['onClick:clear'],
-                      tabindex: -1,
+                      tabindex: props.clearFocusable ? 0 : -1,
                     },
                   })
                   : (
@@ -388,7 +389,7 @@ export const VField = genericComponent<new <T>(
                       name="clear"
                       onFocus={ focus }
                       onBlur={ blur }
-                      tabindex={ -1 }
+                      tabindex={ props.clearFocusable ? 0 : -1 }
                     />
                   )}
                 </VDefaultsProvider>
