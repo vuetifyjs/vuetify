@@ -44,21 +44,21 @@
   const tab = ref('md3')
 
   const md3Variants: Record<string, CSSProperties> = {
-    'display-large': { fontSize: '57px', lineHeight: '64px', fontWeight: 400, letterSpacing: '-0.25px' },
-    'display-medium': { fontSize: '45px', lineHeight: '52px', fontWeight: 400, letterSpacing: '0px' },
-    'display-small': { fontSize: '36px', lineHeight: '44px', fontWeight: 400, letterSpacing: '0px' },
-    'headline-large': { fontSize: '32px', lineHeight: '40px', fontWeight: 400, letterSpacing: '0px' },
-    'headline-medium': { fontSize: '28px', lineHeight: '36px', fontWeight: 400, letterSpacing: '0px' },
-    'headline-small': { fontSize: '24px', lineHeight: '32px', fontWeight: 400, letterSpacing: '0px' },
-    'title-large': { fontSize: '22px', lineHeight: '28px', fontWeight: 400, letterSpacing: '0px' },
-    'title-medium': { fontSize: '16px', lineHeight: '24px', fontWeight: 500, letterSpacing: '0.15px' },
-    'title-small': { fontSize: '14px', lineHeight: '20px', fontWeight: 500, letterSpacing: '0.1px' },
-    'body-large': { fontSize: '16px', lineHeight: '24px', fontWeight: 400, letterSpacing: '0.5px' },
-    'body-medium': { fontSize: '14px', lineHeight: '20px', fontWeight: 400, letterSpacing: '0.25px' },
-    'body-small': { fontSize: '12px', lineHeight: '16px', fontWeight: 400, letterSpacing: '0.4px' },
-    'label-large': { fontSize: '14px', lineHeight: '20px', fontWeight: 500, letterSpacing: '0.1px' },
-    'label-medium': { fontSize: '12px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.5px' },
-    'label-small': { fontSize: '11px', lineHeight: '16px', fontWeight: 500, letterSpacing: '0.5px' },
+    'display-large': { fontSize: '3.5625rem', lineHeight: 1.1228070175, fontWeight: 400, letterSpacing: '-.0043859649em' },
+    'display-medium': { fontSize: '2.8125rem', lineHeight: 1.1555555556, fontWeight: 400, letterSpacing: 'normal' },
+    'display-small': { fontSize: '2.25rem', lineHeight: 1.2222222222, fontWeight: 400, letterSpacing: 'normal' },
+    'headline-large': { fontSize: '2rem', lineHeight: 1.25, fontWeight: 400, letterSpacing: 'normal' },
+    'headline-medium': { fontSize: '1.75rem', lineHeight: 1.2857142857, fontWeight: 400, letterSpacing: 'normal' },
+    'headline-small': { fontSize: '1.5rem', lineHeight: 1.3333333333, fontWeight: 400, letterSpacing: 'normal' },
+    'title-large': { fontSize: '1.375rem', lineHeight: 1.2727272727, fontWeight: 400, letterSpacing: 'normal' },
+    'title-medium': { fontSize: '1rem', lineHeight: 1.5, fontWeight: 500, letterSpacing: '.009375em' },
+    'title-small': { fontSize: '.875rem', lineHeight: 1.4285714286, fontWeight: 500, letterSpacing: '.0071428571em' },
+    'body-large': { fontSize: '1rem', lineHeight: 1.5, fontWeight: 400, letterSpacing: '.03125em' },
+    'body-medium': { fontSize: '.875rem', lineHeight: 1.4285714286, fontWeight: 400, letterSpacing: '.0178571429em' },
+    'body-small': { fontSize: '.75rem', lineHeight: 1.3333333333, fontWeight: 400, letterSpacing: '.0333333333em' },
+    'label-large': { fontSize: '.875rem', lineHeight: 1.4285714286, fontWeight: 500, letterSpacing: '.0071428571em' },
+    'label-medium': { fontSize: '.75rem', lineHeight: 1.3333333333, fontWeight: 500, letterSpacing: '.0416666667em' },
+    'label-small': { fontSize: '.6875rem', lineHeight: 1.4545454545, fontWeight: 500, letterSpacing: '.0454545455em' },
   }
 
   const md2Variants: Record<string, CSSProperties> = {
