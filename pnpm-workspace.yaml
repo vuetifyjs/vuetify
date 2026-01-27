@@ -23,6 +23,8 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: lodash-es@4.17.23
+  - lodash-es@4.17.23
 
 nodeLinker: hoisted
 
