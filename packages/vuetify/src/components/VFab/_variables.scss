@@ -6,8 +6,8 @@
 $fab-border-radius: map.get(settings.$rounded, 'circle') !default;
 $fab-border-radius-multiplier: 0 !default; // 2.4 for MD3
 $fab-height: 56px !default;
-$fab-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !default;
-$fab-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
+$fab-font-size: tools.map-deep-get(settings.$typography, 'label-large', 'size') !default;
+$fab-font-weight: tools.map-deep-get(settings.$typography, 'label-large', 'weight') !default;
 $fab-transition-duration: 0.2s !default;
 $fab-transition-timing-function: settings.$standard-easing !default;
 $fab-width-ratio: math.div(16, 9) !default;
