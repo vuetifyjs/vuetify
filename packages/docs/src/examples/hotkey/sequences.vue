@@ -57,7 +57,7 @@
             <v-divider class="my-4"></v-divider>
 
             <div class="activity-log pa-3 border rounded">
-              <h4 class="text-subtitle-1 mb-2">Activity Log:</h4>
+              <h4 class="text-subtitle-1 mt-0 mb-2">Activity Log:</h4>
               <div v-if="messages.length === 0" class="text-grey">
                 No sequences triggered yet...
               </div>

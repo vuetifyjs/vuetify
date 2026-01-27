@@ -5,7 +5,7 @@
     max-width="400"
     width="100%"
   >
-    <h3 class="text-h6 mb-4">Verify Your Account</h3>
+    <h3 class="text-h6 mt-0 mb-4">Verify Your Account</h3>
 
     <div class="text-body-2">
       We sent a verification code to john..@gmail.com <br>

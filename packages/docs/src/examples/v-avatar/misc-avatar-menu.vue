@@ -26,7 +26,7 @@
               >
                 <span class="text-h5">{{ user.initials }}</span>
               </v-avatar>
-              <h3>{{ user.fullName }}</h3>
+              <h3 class="my-0">{{ user.fullName }}</h3>
               <p class="text-caption mt-1">
                 {{ user.email }}
               </p>

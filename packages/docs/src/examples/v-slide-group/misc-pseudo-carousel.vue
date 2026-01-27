@@ -42,7 +42,7 @@
         height="200"
       >
         <div class="d-flex fill-height align-center justify-center">
-          <h3 class="text-h6">
+          <h3 class="text-h6 my-0">
             Selected {{ model }}
           </h3>
         </div>

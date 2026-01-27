@@ -5,7 +5,7 @@
     show-actions
   >
     <template v-slot:item.1>
-      <h3 class="text-h6">Order</h3>
+      <h3 class="text-h6 my-0">Order</h3>
 
       <br>
 
@@ -39,7 +39,7 @@
     </template>
 
     <template v-slot:item.2>
-      <h3 class="text-h6">Shipping</h3>
+      <h3 class="text-h6 my-0">Shipping</h3>
 
       <br>
 
@@ -51,7 +51,7 @@
     </template>
 
     <template v-slot:item.3>
-      <h3 class="text-h6">Confirm</h3>
+      <h3 class="text-h6 my-0">Confirm</h3>
 
       <br>
 

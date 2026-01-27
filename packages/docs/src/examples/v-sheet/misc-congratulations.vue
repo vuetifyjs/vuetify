@@ -8,7 +8,7 @@
     rounded
   >
     <div>
-      <h2 class="text-h4 font-weight-black text-orange">Congratulations!</h2>
+      <h2 class="text-h4 font-weight-black text-orange my-0">Congratulations!</h2>
 
       <div class="text-h5 font-weight-medium mb-2">
         You are officially a part of the Vuetify Community!

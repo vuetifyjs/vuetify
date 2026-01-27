@@ -6,7 +6,7 @@
     rounded="lg"
     width="100%"
   >
-    <h3 class="text-h5">Verification Code</h3>
+    <h3 class="text-h5 my-0">Verification Code</h3>
 
     <div class="text-subtitle-2 font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
 

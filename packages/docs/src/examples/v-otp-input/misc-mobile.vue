@@ -5,7 +5,7 @@
     width="100%"
     border
   >
-    <h3 class="text-h6 mb-1">Mobile phone verification</h3>
+    <h3 class="text-h6 mt-0 mb-1">Mobile phone verification</h3>
 
     <div class="text-body-2 font-weight-light">
       Enter the code we just sent to your mobile phone <span class="font-weight-black text-primary">+1 408 555 1212</span>

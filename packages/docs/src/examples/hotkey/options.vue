@@ -11,7 +11,7 @@
 
             <v-row>
               <v-col cols="12" md="6">
-                <h4 class="text-subtitle-1 mb-3">Options Configuration</h4>
+                <h4 class="text-subtitle-1 mt-0 mb-3">Options Configuration</h4>
 
                 <v-select
                   v-model="eventType"
@@ -51,7 +51,7 @@
               </v-col>
 
               <v-col cols="12" md="6">
-                <h4 class="text-subtitle-1 mb-3">Test Hotkeys</h4>
+                <h4 class="text-subtitle-1 mt-0 mb-3">Test Hotkeys</h4>
                 <v-table density="compact">
                   <thead>
                     <tr>
@@ -91,7 +91,7 @@
 
             <v-divider class="my-4"></v-divider>
 
-            <h4 class="text-subtitle-1 mb-3">Current Configuration</h4>
+            <h4 class="text-subtitle-1 mt-0 mb-3">Current Configuration</h4>
             <v-table density="compact">
               <thead>
                 <tr>
@@ -131,7 +131,7 @@
             <v-divider class="my-4"></v-divider>
 
             <div class="activity-log pa-3 border rounded">
-              <h4 class="text-subtitle-1 mb-2">Activity Log:</h4>
+              <h4 class="text-subtitle-1 mt-0 mb-2">Activity Log:</h4>
               <div v-if="messages.length === 0" class="text-grey">
                 No hotkeys with options triggered yet...
               </div>

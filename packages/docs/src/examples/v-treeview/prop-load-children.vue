@@ -36,7 +36,7 @@
             <template v-else>
               <v-avatar :image="`https://avataaars.io/${avatar}`" class="mb-2" size="88"></v-avatar>
 
-              <h3 class="text-h5">{{ selected.name }}</h3>
+              <h3 class="text-h5 my-0">{{ selected.name }}</h3>
 
               <div class="text-medium-emphasis">{{ selected.email }}</div>
 

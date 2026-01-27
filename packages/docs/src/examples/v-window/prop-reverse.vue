@@ -13,9 +13,7 @@
         elevation="2"
         height="200"
       >
-        <h1
-          class="text-h2"
-        >
+        <h1 class="text-h2 my-0">
           Slide {{ n }}
         </h1>
       </v-card>

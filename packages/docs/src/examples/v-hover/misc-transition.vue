@@ -28,7 +28,7 @@
             For the perfect meal
           </div>
 
-          <h3 class="text-h4 font-weight-light text-orange mb-2">
+          <h3 class="text-h4 font-weight-light text-orange mt-0 mb-2">
             QW cooking utensils
           </h3>
 

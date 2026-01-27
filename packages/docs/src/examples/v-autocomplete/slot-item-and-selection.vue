@@ -46,7 +46,7 @@
 
         <v-row>
           <v-col class="text-center">
-            <h3 class="text-h5">{{ name }}</h3>
+            <h3 class="text-h5 my-0">{{ name }}</h3>
 
             <span class="text-grey-lighten-1">{{ title }}</span>
           </v-col>
