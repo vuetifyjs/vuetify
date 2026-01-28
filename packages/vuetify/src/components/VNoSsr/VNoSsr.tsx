@@ -2,7 +2,7 @@
 import { useHydration } from '@/composables/hydration'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, renderSlot } from '@/util'
 
 export const VNoSsr = defineComponent({
   name: 'VNoSsr',
@@ -10,7 +10,7 @@ export const VNoSsr = defineComponent({
   setup (_, { slots }) {
     const show = useHydration()
 
-    return () => show.value && slots.default?.()
+    return () => show.value && renderSlot(slots, 'default')
   },
 })
 

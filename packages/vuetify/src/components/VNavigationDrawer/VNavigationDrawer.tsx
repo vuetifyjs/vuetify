@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, omit, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -285,17 +285,17 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
             { slots.prepend && (
               <div class="v-navigation-drawer__prepend">
-                { slots.prepend?.() }
+                { renderSlot(slots, 'prepend') }
               </div>
             )}
 
             <div class="v-navigation-drawer__content">
-              { slots.default?.() }
+              { renderSlot(slots, 'default') }
             </div>
 
             { slots.append && (
               <div class="v-navigation-drawer__append">
-                { slots.append?.() }
+                { renderSlot(slots, 'append') }
               </div>
             )}
           </props.tag>

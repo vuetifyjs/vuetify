@@ -13,13 +13,20 @@ import {
   getDayIdentifier,
   validateNumber,
 } from './util/timestamp'
-import { defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, noop, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarFormatter, CalendarTimestamp } from './types'
+import type { CalendarFormatter, CalendarTimestamp, DaySlotScope } from './types'
+import type { GenericProps } from '@/util'
 
-export const VCalendarWeekly = defineComponent({
+export const VCalendarWeekly = genericComponent<new (
+  props: {},
+  slots: {
+    'day': DaySlotScope
+    'day-label': CalendarTimestamp
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCalendarWeekly',
 
   props: {
@@ -197,7 +204,7 @@ export const VCalendarWeekly = defineComponent({
           { ...events }
         >
           { genDayLabel(day) }
-          { slots.day?.({ outside, index, week, ...day }) }
+          { renderSlot(slots, 'day', { outside, index, week, ...day }) }
         </div>
       )
     }
@@ -205,7 +212,7 @@ export const VCalendarWeekly = defineComponent({
     function genDayLabel (day: CalendarTimestamp) {
       return (
         <div class="v-calendar-weekly__day-label">
-          { slots['day-label']?.(day) ?? genDayLabelButton(day) }
+          { renderSlot(slots, 'day-label', day, () => genDayLabelButton(day)) }
         </div>
       )
     }

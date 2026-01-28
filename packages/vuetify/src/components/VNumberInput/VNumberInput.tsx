@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
-import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -396,7 +396,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               },
             }}
           >
-            { slots.increment(incrementSlotProps) }
+            { renderSlot(slots, 'increment', incrementSlotProps) }
           </VDefaultsProvider>
         )
       }
@@ -431,7 +431,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
               },
             }}
           >
-            { slots.decrement(decrementSlotProps) }
+            { renderSlot(slots, 'decrement', decrementSlotProps) }
           </VDefaultsProvider>
         )
       }
@@ -513,14 +513,14 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             ...slots,
             'append-inner': hasAppendInner ? (...args) => (
               <>
-                { slots['append-inner']?.(...args) }
+                { renderSlot(slots, 'append-inner', ...args) }
                 { appendInnerControl }
               </>
             ) : undefined,
             'prepend-inner': hasPrependInner ? (...args) => (
               <>
                 { prependInnerControl }
-                { slots['prepend-inner']?.(...args) }
+                { renderSlot(slots, 'prepend-inner', ...args) }
               </>
             ) : undefined,
           }}

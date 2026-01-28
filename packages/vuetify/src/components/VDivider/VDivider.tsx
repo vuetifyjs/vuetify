@@ -8,7 +8,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -122,7 +122,7 @@ export const VDivider = genericComponent()({
             class="v-divider__content"
             style={ contentStyles.value }
           >
-            { slots.default() }
+            { renderSlot(slots, 'default') }
           </div>
 
           { divider }

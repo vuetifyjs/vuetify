@@ -716,9 +716,9 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
     : null
 }
 
-type Slot<T> = [T] extends [never] ? () => VNode | VNode[] : (arg: T) => VNode | VNode[]
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
 type ContextualRenderFn = {
-  (...args: unknown[]): VNode | VNode[]
+  (...args: unknown[]): VNodeChild
   _n: boolean /* already normalized */
   _c: boolean /* compiled */
   _d: boolean /* disableTracking */
@@ -731,7 +731,7 @@ export function renderSlot<
   A extends S[N] extends Slot<never> | undefined
     ? [] | [fallback: Slot<never> | undefined]
     : S[N] extends Slot<infer T> | undefined
-      ? [props: T, fallback?: Slot<T> | undefined]
+      ? [props: T, fallback?: NoInfer<Slot<T>> | undefined]
       : never
 > (slots: S, name: N, ...[propsOrFallback, maybeFallback]: NoInfer<A>): VNode {
   const props = typeof propsOrFallback === 'function' ? undefined : propsOrFallback

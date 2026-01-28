@@ -18,7 +18,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   propsFactory,
-  useRender,
+  renderSlot, useRender,
 } from '@/util'
 
 // Types
@@ -100,7 +100,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
           renderless={ props.renderless }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >
-          { slotProps => slots.default?.({ item: item.raw, index: item.index, ...slotProps }) }
+          { slotProps => renderSlot(slots, 'default', { item: item.raw, index: item.index, ...slotProps }) }
         </VVirtualScrollItem>
       ))
 

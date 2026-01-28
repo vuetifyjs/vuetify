@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -224,11 +224,11 @@ export const VCard = genericComponent<VCardSlots>()({
 
           { hasText && (
             <VCardText key="text">
-              { slots.text?.() ?? props.text }
+              { renderSlot(slots, 'text', () => props.text) }
             </VCardText>
           )}
 
-          { slots.default?.() }
+          { renderSlot(slots, 'default') }
 
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />

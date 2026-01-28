@@ -10,7 +10,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, shallowRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
@@ -138,7 +138,7 @@ export const VWindowItem = genericComponent()({
           style={ props.style }
           v-show={ groupItem.isSelected.value }
         >
-          { hasContent.value && slots.default?.() }
+          { hasContent.value && renderSlot(slots, 'default') }
         </div>
       </MaybeTransition>
     ))

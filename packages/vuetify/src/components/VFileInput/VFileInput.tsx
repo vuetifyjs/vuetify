@@ -24,8 +24,8 @@ import {
   genericComponent,
   humanReadableFileSize,
   propsFactory,
-  useRender,
-  wrapInArray,
+  renderSlot,
+  useRender, wrapInArray,
 } from '@/util'
 
 // Types
@@ -323,7 +323,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                       <div class={ fieldClass }>
                         { !!model.value?.length && !props.hideInput && (
-                          slots.selection ? slots.selection({
+                          slots.selection ? renderSlot(slots, 'selection', {
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
                             totalBytesReadable: totalBytesReadable.value,
@@ -345,7 +345,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
             ),
             details: hasDetails ? slotProps => (
               <>
-                { slots.details?.(slotProps) }
+                { renderSlot(slots, 'details', slotProps) }
 
                 { hasCounter && (
                   <>

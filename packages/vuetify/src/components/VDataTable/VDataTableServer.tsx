@@ -19,7 +19,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef, toRefs } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -165,10 +165,10 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
           fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
-            top: () => slots.top?.(slotProps.value),
-            default: () => slots.default ? slots.default(slotProps.value) : (
+            top: () => renderSlot(slots, 'top', slotProps.value),
+            default: () => slots.default ? renderSlot(slots, 'default', slotProps.value) : (
               <>
-                { slots.colgroup?.(slotProps.value) }
+                { renderSlot(slots, 'colgroup', slotProps.value) }
                 { !props.hideDefaultHeader && (
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
@@ -178,11 +178,11 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                     />
                   </thead>
                 )}
-                { slots.thead?.(slotProps.value) }
+                { renderSlot(slots, 'thead', slotProps.value) }
                 { !props.hideDefaultBody && (
                   <tbody class="v-data-table__tbody" role="rowgroup">
-                    { slots['body.prepend']?.(slotProps.value) }
-                    { slots.body ? slots.body(slotProps.value) : (
+                    { renderSlot(slots, 'body.prepend', slotProps.value) }
+                    { slots.body ? renderSlot(slots, 'body', slotProps.value) : (
                       <VDataTableRows
                         { ...attrs }
                         { ...dataTableRowsProps }
@@ -190,14 +190,14 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                         v-slots={ slots }
                       />
                     )}
-                    { slots['body.append']?.(slotProps.value) }
+                    { renderSlot(slots, 'body.append', slotProps.value) }
                   </tbody>
                 )}
-                { slots.tbody?.(slotProps.value) }
-                { slots.tfoot?.(slotProps.value) }
+                { renderSlot(slots, 'tbody', slotProps.value) }
+                { renderSlot(slots, 'tfoot', slotProps.value) }
               </>
             ),
-            bottom: () => slots.bottom ? slots.bottom(slotProps.value) : !props.hideDefaultFooter && (
+            bottom: () => slots.bottom ? renderSlot(slots, 'bottom', slotProps.value) : !props.hideDefaultFooter && (
               <>
                 <VDivider />
 

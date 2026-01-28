@@ -32,8 +32,8 @@ import {
   genericComponent,
   getCurrentInstance,
   propsFactory,
-  SUPPORTS_INTERSECTION,
-  useRender,
+  renderSlot,
+  SUPPORTS_INTERSECTION, useRender,
 } from '@/util'
 
 // Types
@@ -272,7 +272,7 @@ export const VImg = genericComponent<VImgSlots>()({
         />
       )
 
-      const sources = slots.sources?.()
+      const sources = renderSlot(slots, 'sources')
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -310,7 +310,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return (
         <MaybeTransition transition={ props.transition } appear>
           { (state.value === 'loading' || (state.value === 'error' && !slots.error)) &&
-          <div class="v-img__placeholder">{ slots.placeholder() }</div>
+          <div class="v-img__placeholder">{ renderSlot(slots, 'placeholder') }</div>
           }
         </MaybeTransition>
       )
@@ -322,7 +322,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return (
         <MaybeTransition transition={ props.transition } appear>
           { state.value === 'error' &&
-            <div class="v-img__error">{ slots.error() }</div>
+            <div class="v-img__error">{ renderSlot(slots, 'error') }</div>
           }
         </MaybeTransition>
       )

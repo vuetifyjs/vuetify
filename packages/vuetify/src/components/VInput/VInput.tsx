@@ -16,7 +16,7 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed, toRef, useId } from 'vue'
-import { EventProp, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, pick, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -207,7 +207,7 @@ export const VInput = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
               { slots.prepend
-                ? slots.prepend(slotProps.value)
+                ? renderSlot(slots, 'prepend', slotProps.value)
                 : (props.prependIcon && (
                   <InputIcon
                     key="prepend-icon"
@@ -221,14 +221,14 @@ export const VInput = genericComponent<new <T>(
 
           { slots.default && (
             <div class="v-input__control">
-              { slots.default?.(slotProps.value) }
+              { renderSlot(slots, 'default', slotProps.value) }
             </div>
           )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
               { slots.append
-                ? slots.append(slotProps.value)
+                ? renderSlot(slots, 'append', slotProps.value)
                 : (props.appendIcon && (
                   <InputIcon
                     key="append-icon"
@@ -253,7 +253,7 @@ export const VInput = genericComponent<new <T>(
                 v-slots={{ message: slots.message }}
               />
 
-              { slots.details?.(slotProps.value) }
+              { renderSlot(slots, 'details', slotProps.value) }
             </div>
           )}
         </div>

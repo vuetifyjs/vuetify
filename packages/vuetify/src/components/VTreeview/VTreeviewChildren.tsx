@@ -125,7 +125,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       }
     }
 
-    return () => slots.default?.() ?? props.items?.map((item, index, items) => {
+    return () => renderSlot(slots, 'default', () => props.items?.map((item, index, items) => {
       const { children, props: itemProps } = item
       const loading = isLoading.has(item.value)
       const nextItemHasChildren = !!items.at(index + 1)?.children
@@ -156,7 +156,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           <VTreeviewItem { ...itemProps }>
             {{
               toggle: slots.toggle
-                ? slotProps => slots.toggle?.({
+                ? slotProps => renderSlot(slots, 'toggle', {
                   ...slotProps,
                   ...treeItemProps,
                   item: item.raw,
@@ -190,14 +190,24 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     </VListItemAction>
                   )}
 
-                  { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
+                  { renderSlot(
+                    slots, 'prepend',
+                    { ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }
+                  )}
                 </>
               ),
               append: slots.append
-                ? slotProps => slots.append?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item })
+                ? slotProps => renderSlot(
+                  slots, 'append',
+                  { ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }
+                )
                 : undefined,
-              title: slots.title ? slotProps => slots.title?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
-              subtitle: slots.subtitle ? slotProps => slots.subtitle?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
+              title: slots.title
+                ? slotProps => renderSlot(slots, 'title', { ...slotProps, item: item.raw, internalItem: item })
+                : undefined,
+              subtitle: slots.subtitle
+                ? slotProps => renderSlot(slots, 'subtitle', { ...slotProps, item: item.raw, internalItem: item })
+                : undefined,
             }}
           </VTreeviewItem>
         )
@@ -255,7 +265,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   returnObject={ props.returnObject }
                   v-slots={ slots }
                 />
-                { slots.footer?.({ props: footerProps, item: item.raw, internalItem: item, loading }) }
+                { renderSlot(slots, 'footer', { props: footerProps, item: item.raw, internalItem: item, loading }) }
               </>
             ),
           }}
@@ -287,6 +297,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             value: props.returnObject ? toRaw(item.raw) : itemProps.value,
           })
         })
-    })
+    }))
   },
 })

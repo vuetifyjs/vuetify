@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
-import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -360,7 +360,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { slots.prepend?.(slotProps.value) }
+                  { renderSlot(slots, 'prepend', slotProps.value) }
                 </VDefaultsProvider>
               )}
 
@@ -371,17 +371,17 @@ export const VListItem = genericComponent<VListItemSlots>()({
           <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
-                { slots.title?.({ title: props.title }) ?? toDisplayString(props.title) }
+                { renderSlot(slots, 'title', { title: props.title }, () => toDisplayString(props.title)) }
               </VListItemTitle>
             )}
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
-                { slots.subtitle?.({ subtitle: props.subtitle }) ?? toDisplayString(props.subtitle) }
+                { renderSlot(slots, 'subtitle', { subtitle: props.subtitle }, () => toDisplayString(props.subtitle)) }
               </VListItemSubtitle>
             )}
 
-            { slots.default?.(slotProps.value) }
+            { renderSlot(slots, 'default', slotProps.value) }
           </div>
 
           { hasAppend && (
@@ -422,7 +422,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { slots.append?.(slotProps.value) }
+                  { renderSlot(slots, 'append', slotProps.value) }
                 </VDefaultsProvider>
               )}
 

@@ -8,7 +8,7 @@ import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
 import { inject } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVExpansionPanelTextProps = propsFactory({
   ...makeComponentProps(),
@@ -39,7 +39,7 @@ export const VExpansionPanelText = genericComponent()({
         >
           { slots.default && hasContent.value && (
             <div class="v-expansion-panel-text__wrapper">
-              { slots.default?.() }
+              { renderSlot(slots, 'default') }
             </div>
           )}
         </div>

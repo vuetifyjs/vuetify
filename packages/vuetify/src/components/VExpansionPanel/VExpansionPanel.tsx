@@ -13,7 +13,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVExpansionPanelProps = propsFactory({
   title: String,
@@ -114,17 +114,17 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
           >
             { hasTitle && (
               <VExpansionPanelTitle key="title">
-                { slots.title ? slots.title() : props.title }
+                { slots.title ? renderSlot(slots, 'title') : props.title }
               </VExpansionPanelTitle>
             )}
 
             { hasText && (
               <VExpansionPanelText key="text">
-                { slots.text ? slots.text() : props.text }
+                { slots.text ? renderSlot(slots, 'text') : props.text }
               </VExpansionPanelText>
             )}
 
-            { slots.default?.() }
+            { renderSlot(slots, 'default') }
           </VDefaultsProvider>
         </props.tag>
       )

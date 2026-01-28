@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterInputAttrs, genericComponent, pick, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -248,7 +248,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       },
                     }}
                   >
-                    { slots.icon() }
+                    { renderSlot(slots, 'icon') }
                   </VDefaultsProvider>
                 )}
               </div>
@@ -256,18 +256,18 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
             { hasTitle && (
               <div key="title" class="v-file-upload-title">
-                { slots.title?.() ?? t(props.title) }
+                { renderSlot(slots, 'title', () => t(props.title)) }
               </div>
             )}
 
             { props.density === 'default' && (
               <>
                 <div key="upload-divider" class="v-file-upload-divider">
-                  { slots.divider?.() ?? (
+                  { renderSlot(slots, 'divider', () => (
                     <VDivider { ...dividerProps }>
                       { t(props.dividerText) }
                     </VDivider>
-                  )}
+                  ))}
                 </div>
 
                 { hasBrowse && (
@@ -291,7 +291,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                           },
                         }}
                       >
-                        { slots.browse({ props: { onClick } }) }
+                        { renderSlot(slots, 'browse', { props: { onClick } }) }
                       </VDefaultsProvider>
                     )}
                   </>
@@ -311,7 +311,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
               scrim={ props.scrim }
             />
 
-            { slots.input?.({ inputNode }) ?? inputNode }
+            { renderSlot(slots, 'input', { inputNode }, () => inputNode) }
           </VSheet>
 
           { model.value.length > 0 && (
@@ -336,13 +336,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       },
                     }}
                   >
-                    { slots.item?.(slotProps) ?? (
+                    { renderSlot(slots, 'item', slotProps, () => (
                       <VFileUploadItem
                         key={ i }
                         onClick:remove={ () => onClickRemove(i) }
                         v-slots={ slots }
                       />
-                    )}
+                    ))}
                   </VDefaultsProvider>
                 )
               })}

@@ -3,7 +3,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { toRefs } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,7 +32,7 @@ export const VDefaultsProvider = genericComponent(false)({
       disabled,
     })
 
-    return () => slots.default?.()
+    return () => renderSlot(slots, 'default')
   },
 })
 

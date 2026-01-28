@@ -17,7 +17,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 // Utilities
 import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
-import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 type VProgressLinearSlots = {
   default: { value: number, buffer: number }
@@ -252,7 +252,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
         { slots.default && (
           <div class="v-progress-linear__content">
-            { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
+            { renderSlot(slots, 'default', { value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
         )}
       </props.tag>
