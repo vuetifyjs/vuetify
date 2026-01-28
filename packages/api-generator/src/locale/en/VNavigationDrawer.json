@@ -1,4 +1,5 @@
 {
+  "description": "The `v-navigation-drawer` component is what your users will utilize to navigate through the application.",
   "props": {
     "bottom": "Expands from the bottom of the screen on mobile devices.",
     "clipped": "A clipped drawer rests under the application toolbar. **Note:** requires the **clipped-left** or **clipped-right** prop on `v-app-bar` to work as intended.",

@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-pie` that represents the tooltip displayed when hovering over chart segments.",
   "props": {
     "item": "Data item related to hovered segment",
     "titleFormat": "Formatter definition or function. When passed as String macros for `[title]` and `[value]` get replaced dynamically.",

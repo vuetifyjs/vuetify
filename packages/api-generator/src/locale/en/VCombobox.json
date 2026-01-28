@@ -1,4 +1,5 @@
 {
+  "description": "The `v-combobox` component is a `v-text-field` that allows the user to select values from a provided items array, or to enter their own value.",
   "props": {
     "alwaysFilter": "When enabled, dropdown list will always show items matching non-empty value within the field. Recommended when the list is meant to show suggestions rather than options to choose from. For optimal UX, should be combined with `:menu-icon=\"false\"` and `hide-selected`.",
     "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",

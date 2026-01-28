@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-list-item` used to display an avatar within a list item.",
   "props": {
     "horizontal": "Uses an alternative horizontal style."
   }

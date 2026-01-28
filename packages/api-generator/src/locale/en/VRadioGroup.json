@@ -1,4 +1,5 @@
 {
+  "description": "`v-radio-group` is a group of `v-radio` components. It manages the state of its children and provides a way to select a single option from a set.",
   "props": {
     "column": "Displays radio buttons in column.",
     "inline": "Displays radio buttons in row."

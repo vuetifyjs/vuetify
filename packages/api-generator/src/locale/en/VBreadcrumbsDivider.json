@@ -1,4 +1,5 @@
 {
+  "description": "The `v-breadcrumbs-divider` component is used to define a divider between items in a `v-breadcrumbs` component.",
   "props": {
     "divider": "Specifies the dividing character between items."
   }

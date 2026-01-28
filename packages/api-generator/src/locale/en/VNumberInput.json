@@ -1,4 +1,5 @@
 {
+  "description": "The `v-number-input` extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type=\"number\">`.",
   "props": {
     "controlVariant": "The color of the control. It defaults to the value of `variant` prop.",
     "decimalSeparator": "Expects single character to be used as decimal separator.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-locale-provider` allows you to provide specific default prop values to components in a section of your application.",
   "props": {
     "fallbackLocale": "Specify a fallback locale to use when a locale is not found.",
     "locale": "Specify a locale to use.",

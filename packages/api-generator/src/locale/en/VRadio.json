@@ -1,4 +1,5 @@
 {
+  "description": "The `v-radio` component is a simple radio button. When combined with the `v-radio-group` component you can provide grouping functionality to allow users to select from a predefined set of options.",
   "props": {
     "falseIcon": "The icon used when inactive.",
     "trueIcon": "The icon used when active."

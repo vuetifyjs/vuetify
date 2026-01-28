@@ -1,4 +1,5 @@
 {
+  "description": "The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, *icons* and *text*, and *shift*.",
   "props": {
     "grow": "Force all [v-btn](/components/buttons) children to take up all available horizontal space.",
     "mode": "Changes the orientation and active state styling of the component."

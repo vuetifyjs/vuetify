@@ -61,7 +61,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         symbol: component.displayName,
       },
       aliases: undefined, // TODO: are we using this? deprecated name changes?
-      description: '', // TODO: we should probably include component description in locale files
+      description: component.description.en || '',
       'doc-url': getDocUrl(component.pathName),
       attributes: Object.entries(component.props ?? {}).map(createTagAttribute),
       events: Object.entries(component.events ?? {}).map(createTagEvent),

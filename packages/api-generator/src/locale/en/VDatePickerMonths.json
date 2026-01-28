@@ -1,4 +1,5 @@
 {
+  "description": "`v-date-picker-months` component displays a list of months for the `v-date-picker` component.",
   "props": {
     "min": "Sets the minimum selectable date. Months before this date will be disabled.",
     "max": "Sets the maximum selectable date. Months after this date will be disabled.",

@@ -1,4 +1,5 @@
 {
+  "description": "the `v-date-picker-controls` component provides navigation controls for the v-date-picker` component.",
   "props": {
     "controlHeight": "Sets the height of the controls.",
     "controlVariant": "- **docked:** Separate control groups for month and year.\n- **modal:** Month and year are displayed together, clicking the text opens a month picker, clicking the dropdown arrow opens a year picker. There are also arrow buttons to scroll between months.",

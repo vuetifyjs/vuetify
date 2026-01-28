@@ -1,4 +1,5 @@
 {
+  "description": "The `v-video` component is useful for background video or as a customizable player for self-hosted content.",
   "props": {
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "src": "Media file URL",
