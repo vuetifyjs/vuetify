@@ -21,12 +21,18 @@ export const makeVCommandPaletteItemProps = propsFactory({
   onExecute: Function as PropType<(event: MouseEvent | KeyboardEvent) => void>,
 }, 'VCommandPaletteItem')
 
-export const VCommandPaletteItemComponent = genericComponent()({
+export type VCommandPaletteItemSlots = {
+  prepend: never
+  title: never
+  append: never
+}
+
+export const VCommandPaletteItemComponent = genericComponent<VCommandPaletteItemSlots>()({
   name: 'VCommandPaletteItem',
 
   props: makeVCommandPaletteItemProps(),
 
-  setup (props) {
+  setup (props, { slots }) {
     useRender(() => (
       <VListItem
         index={ props.index }
@@ -39,7 +45,9 @@ export const VCommandPaletteItemComponent = genericComponent()({
         appendAvatar={ props.item.appendAvatar }
         onClick={ props.onExecute }
         v-slots={{
-          append: props.item.hotkey ? () => <VHotkey keys={ props.item.hotkey } /> : undefined,
+          prepend: slots.prepend,
+          title: slots.title,
+          append: slots.append ?? (props.item.hotkey ? () => <VHotkey keys={ props.item.hotkey } /> : undefined),
         }}
       />
     ))

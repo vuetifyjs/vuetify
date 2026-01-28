@@ -66,6 +66,22 @@ The command palette is built on `v-dialog` and accepts most of the props while p
 
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
+### Slots
+
+The command palette provides several slots for customizing the display of items and other elements.
+
+#### Item prepend
+
+Use the **#item.prepend** slot to customize the prepend area of each item. This slot receives the current **item** and **index** as slot props.
+
+<ExamplesExample file="v-command-palette/slot-item-prepend" />
+
+#### Item append
+
+Similarly **#item.append** slot and allows you to include supplemental information (replaces hotkey).
+
+<ExamplesExample file="v-command-palette/slot-item-append" />
+
 ### Filtering
 
 The search input automatically filters items based on their **title** and **subtitle** properties. Use **v-model:search** to control or monitor the search query. The **filter-keys** prop can customize which item properties are searched.

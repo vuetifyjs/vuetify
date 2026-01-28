@@ -26,6 +26,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType, Ref } from 'vue'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
+import type { VListChildrenSlots } from '@/components/VList/VListChildren'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVCommandPaletteProps = propsFactory({
@@ -61,7 +62,14 @@ export type VCommandPaletteSlots = {
   prepend: never
   append: never
   input: never
+  'input.append-inner': never
   'no-data': never
+  'list.prepend': never
+  'list.subheader': VListChildrenSlots<any>['subheader']
+  item: { item: VCommandPaletteItemType, index: number }
+  'item.prepend': { item: VCommandPaletteItemType, index: number }
+  'item.title': { item: VCommandPaletteItemType, index: number }
+  'item.append': { item: VCommandPaletteItemType, index: number }
 }
 
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
@@ -270,6 +278,9 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     flat
                     bgColor="transparent"
                     onKeydown={ handleSearchKeydown }
+                    v-slots={{
+                      'append-inner': slots['input.append-inner'],
+                    }}
                   />
                 )}
               </div>
@@ -289,13 +300,28 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }
                       v-slots={{
-                        item: ({ props }: { props: any }) => (
-                          <VCommandPaletteItemComponent
-                            key={ `item-${props.index}` }
-                            item={ props }
-                            index={ props.index }
-                            onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(props.index, event) }
-                          />
+                        prepend: slots['list.prepend'],
+                        subheader: slots['list.subheader'],
+                        item: ({ props: itemProps }: { props: any }) => (
+                          slots.item?.({ item: itemProps, index: itemProps.index }) ?? (
+                            <VCommandPaletteItemComponent
+                              key={ `item-${itemProps.index}` }
+                              item={ itemProps }
+                              index={ itemProps.index }
+                              onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(itemProps.index, event) }
+                              v-slots={{
+                                prepend: slots['item.prepend']
+                                  ? () => slots['item.prepend']?.({ item: itemProps, index: itemProps.index })
+                                  : undefined,
+                                title: slots['item.title']
+                                  ? () => slots['item.title']?.({ item: itemProps, index: itemProps.index })
+                                  : undefined,
+                                append: slots['item.append']
+                                  ? () => slots['item.append']?.({ item: itemProps, index: itemProps.index })
+                                  : undefined,
+                              }}
+                            />
+                          )
                         ),
                       }}
                     />
