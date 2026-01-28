@@ -1,39 +1,41 @@
 <template>
-  <div>
-    <div class="text-center mb-4">
-      <v-btn text="Open" @click="model = !model"></v-btn>
-      <v-command-palette
-        v-model="model"
-        :items="items"
-        :search-props="{ autocomplete: 'off' }"
-        hotkey="ctrl+/"
-        max-width="500"
-        placeholder="Remind me..."
-      >
-        <template v-slot:input.append-inner>
-          <v-kbd class="opacity-70 align-self-center py-1">Esc</v-kbd>
-        </template>
-        <template v-slot:item.append="{ item }">
-          <span class="text-caption opacity-70">{{ item.hint }}</span>
-        </template>
-        <template v-slot:append>
-          <div class="d-flex pa-3 ga-1 text-caption align-center border-t opacity-70">
-            <v-kbd><v-icon
+  <div class="text-center my-3">
+    <v-btn text="Open" @click="model = true"></v-btn>
+    <v-command-palette
+      v-model="model"
+      :items="items"
+      :search-props="{ autocomplete: 'off' }"
+      hotkey="ctrl+/"
+      max-width="500"
+      placeholder="Remind me..."
+    >
+      <template v-slot:input.append-inner>
+        <v-kbd class="opacity-70 align-self-center py-1">Esc</v-kbd>
+      </template>
+
+      <template v-slot:item.append="{ item }">
+        <span class="text-caption opacity-70">{{ item.hint }}</span>
+      </template>
+
+      <template v-slot:append>
+        <div class="d-flex pa-3 ga-1 text-caption align-center border-t opacity-70">
+          <v-kbd>
+            <v-icon
               :icon="['M16.018 3.815L15.232 8h-4.966l.716-3.815l-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805l1.965.369L8.766 16h4.966l-.714 3.805l1.965.369l.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815zM14.106 14H9.141l.751-4h4.966z']"
               size="14"
-            ></v-icon></v-kbd>
-            <div class="mr-3">tags</div>
-            <v-kbd><v-icon icon="$arrowup" size="14"></v-icon></v-kbd>
-            <v-kbd><v-icon icon="$arrowdown" size="14"></v-icon></v-kbd>
-            <div class="mr-3">navigate</div>
-            <v-kbd><v-icon icon="$enter" size="14"></v-icon></v-kbd>
-            <div class="mr-3">open</div>
-            <v-kbd>esc</v-kbd>
-            <div class="mr-3">close</div>
-          </div>
-        </template>
-      </v-command-palette>
-    </div>
+            ></v-icon>
+          </v-kbd>
+          <div class="mr-3">tags</div>
+          <v-kbd><v-icon icon="$arrowup" size="14"></v-icon></v-kbd>
+          <v-kbd><v-icon icon="$arrowdown" size="14"></v-icon></v-kbd>
+          <div class="mr-3">navigate</div>
+          <v-kbd><v-icon icon="$enter" size="14"></v-icon></v-kbd>
+          <div class="mr-3">open</div>
+          <v-kbd>esc</v-kbd>
+          <div class="mr-3">close</div>
+        </div>
+      </template>
+    </v-command-palette>
   </div>
 </template>
 

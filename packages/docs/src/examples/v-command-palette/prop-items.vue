@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <div class="text-center mb-4">
-      <v-btn @click="dialog = true">
-        Open Command Palette
-      </v-btn>
-    </div>
+  <div class="text-center my-3">
+    <v-btn text="Open Command Palette" @click="dialog = true"></v-btn>
 
     <v-command-palette
       v-model="dialog"

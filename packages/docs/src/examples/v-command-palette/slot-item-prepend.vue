@@ -1,54 +1,61 @@
 <template>
-  <v-btn text="Open" @click="model = !model"></v-btn>
-  <v-command-palette
-    v-model="model"
-    :filter-keys="['raw.name', 'raw.username']"
-    :items="items"
-    hotkey="alt+g"
-    item-title="name"
-    item-value="name"
-    max-height="800"
-    placeholder="Search by name"
-  >
-    <template v-slot:prepend>
-      <div class="ma-2 text-subtitle-2">
-        What are you looking for?
-      </div>
-      <v-chip-group class="pl-2 mt-n1 mb-1">
-        <v-chip
-          v-for="c in ['People', 'Files', 'Actions']"
-          :key="c"
-          :text="c"
-          size="small"
-          closable
-          label
-        >
-          <template v-slot:close>
-            <v-icon icon="$close" size="14"></v-icon>
-          </template>
-        </v-chip>
-      </v-chip-group>
-    </template>
-    <template v-slot:item.prepend="{ item }">
-      <v-avatar :image="`https://avataaars.io/${item.avatar}`" size="small"></v-avatar>
-    </template>
-    <template v-slot:list.subheader="{ props: { title } }">
-      <div class="d-flex align-center">
-        <v-list-subheader>{{ title }}</v-list-subheader>
-        <v-btn
-          class="ml-auto my-n1 text-none"
-          size="small"
-          tabindex="-1"
-          text="See all"
-          variant="text"
-        ></v-btn>
-      </div>
-    </template>
-    <template v-slot:item.title="{ item }">
-      {{ item.name }}
-      <v-chip :text="item.username" class="opacity-70 ml-1" size="small"></v-chip>
-    </template>
-  </v-command-palette>
+  <div class="text-center my-3">
+    <v-btn text="Open" @click="model = !model"></v-btn>
+
+    <v-command-palette
+      v-model="model"
+      :filter-keys="['raw.name', 'raw.username']"
+      :items="items"
+      hotkey="alt+g"
+      item-title="name"
+      item-value="name"
+      max-height="800"
+      placeholder="Search by name"
+    >
+      <template v-slot:prepend>
+        <div class="ma-2 text-subtitle-2">
+          What are you looking for?
+        </div>
+
+        <v-chip-group class="pl-2 mt-n1 mb-1">
+          <v-chip
+            v-for="c in ['People', 'Files', 'Actions']"
+            :key="c"
+            :text="c"
+            size="small"
+            closable
+            label
+          >
+            <template v-slot:close>
+              <v-icon icon="$close" size="14"></v-icon>
+            </template>
+          </v-chip>
+        </v-chip-group>
+      </template>
+
+      <template v-slot:item.prepend="{ item }">
+        <v-avatar :image="`https://avataaars.io/${item.avatar}`" size="small"></v-avatar>
+      </template>
+
+      <template v-slot:list.subheader="{ props: { title } }">
+        <div class="d-flex align-center">
+          <v-list-subheader>{{ title }}</v-list-subheader>
+          <v-btn
+            class="ml-auto my-n1 text-none"
+            size="small"
+            tabindex="-1"
+            text="See all"
+            variant="text"
+          ></v-btn>
+        </div>
+      </template>
+
+      <template v-slot:item.title="{ item }">
+        {{ item.name }}
+        <v-chip :text="item.username" class="opacity-70 ml-1" size="small"></v-chip>
+      </template>
+    </v-command-palette>
+  </div>
 </template>
 
 <script setup>
