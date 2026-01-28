@@ -1,5 +1,4 @@
 @use 'sass:map'
-@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 
@@ -15,34 +14,17 @@
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       max-width: $container-max-width
 
-@function col-span-width($size, $columns: settings.$grid-columns)
-  @return calc((#{$size} * (100% - #{$columns - 1} * var(--v-col-gap-x)) / #{$columns}) + #{$size - 1} * var(--v-col-gap-x))
-
-@function col-span-offset($size, $columns: settings.$grid-columns)
-  @return calc((#{$size} * (100% - #{$columns - 1} * var(--v-col-gap-x)) / #{$columns}) + #{$size} * var(--v-col-gap-x))
-
-@mixin make-col($size, $columns: settings.$grid-columns)
-  flex: 0 0 col-span-width($size, $columns)
-  min-width: 0
-
-@mixin make-col-offset($size, $columns: settings.$grid-columns)
-  margin-inline-start: col-span-offset($size, $columns)
-
 @mixin make-grid-columns($columns: settings.$grid-columns, $breakpoints: settings.$grid-breakpoints)
-  // Common properties for all breakpoints
-  %grid-column
+  .v-row > [class*='v-col-']
+    flex: 0 0 calc((var(--v-col-size) * (100% - (var(--v-row-columns) - 1) * var(--v-col-gap-x)) / var(--v-row-columns)) + (var(--v-col-size) - 1) * var(--v-col-gap-x))
+    min-width: 0
     width: 100%
 
-  // Define column classes for each breakpoint
+  .v-row > [class*='v-col-offset-']
+    margin-inline-start: calc((var(--v-col-offset) * (100% - (var(--v-row-columns) - 1) * var(--v-col-gap-x)) / var(--v-row-columns)) + var(--v-col-offset) * var(--v-col-gap-x))
+
   @each $breakpoint in map.keys($breakpoints)
     $infix: tools.breakpoint-infix($breakpoint, $breakpoints)
-    // Allow columns to stretch full width below their breakpoints
-    @for $i from 1 through $columns
-      .v-col#{$infix}-#{$i}
-        @extend %grid-column
-    .v-col#{$infix},
-    .v-col#{$infix}-auto
-      @extend %grid-column
 
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
@@ -55,14 +37,11 @@
         width: auto
         max-width: 100% // Reset earlier grid tiers
 
-      // Standard columns with default gap
       @for $i from 1 through $columns
-        .v-row > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns)
+        .v-col#{$infix}-#{$i}
+          --v-col-size: #{$i}
 
-      // Standard offsets with default gap
-      @for $i from 0 through $columns - 1
-        @if not ($infix == "" and $i == 0)
-          // Avoid emitting useless .offset-0
-          .v-row > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns)
+      @for $i from 1 through $columns - 1
+        @if not ($infix == "")
+          .v-col-offset#{$infix}-#{$i}
+            --v-col-offset: #{$i}
