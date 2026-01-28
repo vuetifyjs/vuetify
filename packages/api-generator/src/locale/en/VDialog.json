@@ -1,4 +1,5 @@
 {
+  "description": "The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.",
   "props": {
     "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "fullWidth": "Forces the dialog to expand 100% of available width.",

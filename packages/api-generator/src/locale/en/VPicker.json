@@ -1,4 +1,5 @@
 {
+  "description": "`v-picker` is a base component for building various picker components such as date pickers and time pickers.",
   "props": {
     "divided": "Adds a divider between the header and controls.",
     "landscape": "Puts the picker into landscape mode.",

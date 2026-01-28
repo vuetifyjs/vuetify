@@ -1,4 +1,5 @@
 {
+  "description": "subcomponent of `v-list-item` used to group list items.",
   "props": {
     "value": "Sets the active list-item inside the list-group."
   },

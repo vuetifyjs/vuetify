@@ -1,4 +1,5 @@
 {
+  "description": "The `v-breadcrumbs` component is used as a navigational helper and hierarchy for pages.",
   "props": {
     "divider": "Specifies the dividing character between items.",
     "icons": "Specifies that the dividers between items are [v-icon](/components/icons)s.",

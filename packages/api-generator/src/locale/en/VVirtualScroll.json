@@ -1,4 +1,5 @@
 {
+  "description": "The `v-virtual-scroll` component displays a virtual, infinite list. It supports dynamic height and scrolling vertically and is a good alternative to pagination.",
   "props": {
     "height": "Height of the component as a css value/",
     "itemKey": "Should point to a property with a unique value for each item, if not set then item index will be used as a key which may result in unnecessary re-renders.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-banner` component is used as a middle-interrupting message to the user with one to two actions.",
   "props": {
     "avatar": "Designates a specific src image to pass to the thumbnail.",
     "lines": "The amount of visible lines of text before it truncates.",

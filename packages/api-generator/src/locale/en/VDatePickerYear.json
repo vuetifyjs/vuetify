@@ -1,4 +1,5 @@
 {
+  "description": "`v-date-picker-year` component displays a year view for the `v-date-picker` component.",
   "props": {
     "allowedDates": "Sets the allowed dates of the month.",
     "hideWeekdays": "Hide the days of the week letters.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-data-table-footer` component is used to display the footer of a `v-data-table`.",
   "props": {
     "firstIcon": "First icon.",
     "firstPageLabel": "Label for first page.",

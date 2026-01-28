@@ -1,4 +1,5 @@
 {
+  "description": "Sub-component for `v-expansion-panels` that wraps the content to be expanded or collapsed.",
   "props": {
     "disabled": "Disables the expansion-panel content.",
     "readonly": "Makes the expansion panel content read only.",

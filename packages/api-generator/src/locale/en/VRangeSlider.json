@@ -1,7 +1,7 @@
 {
+  "description": "The `v-range-slider` component complements the `v-slider` component nicely when you are in need of representing a range of values.",
   "props": {
     "strict": "Disallows dragging the ending thumb past the starting thumb and vice versa."
-
   },
   "slots": {
     "thumb-label": "Slot for the thumb label.",

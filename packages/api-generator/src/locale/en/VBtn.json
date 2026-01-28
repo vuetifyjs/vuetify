@@ -1,4 +1,5 @@
 {
+  "description": "The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color.",
   "props": {
     "block": "Expands the button to 100% of available space.",
     "flat": "Removes the button box shadow. This is different than using the 'flat' variant.",

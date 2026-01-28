@@ -1,4 +1,5 @@
 {
+  "description": "The `v-form` component makes it easy to add validation to form inputs. All input components have a rules prop that can be used to specify conditions in which the input is either valid or invalid.",
   "events": {
     "submit": "Emitted when form is submitted.",
     "update:modelValue": "Event emitted when the form's validity changes."

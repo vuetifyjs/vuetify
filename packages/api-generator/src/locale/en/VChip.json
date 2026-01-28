@@ -1,4 +1,5 @@
 {
+  "description": "The `v-chip` component is used to convey small pieces of information.",
   "props": {
     "active": "Determines whether the chip is visible or not.",
     "closable": "Adds remove button and then a chip can be closed.",

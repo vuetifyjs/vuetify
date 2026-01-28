@@ -1,4 +1,5 @@
 {
+  "description": "The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.",
   "props": {
     "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
     "extensionHeight": "Designate an explicit height for the `extension` slot.",

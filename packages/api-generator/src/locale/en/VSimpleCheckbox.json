@@ -1,4 +1,5 @@
 {
+  "description": "The `v-simple-checkbox` component is a lightweight version of the `v-checkbox` component, used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.",
   "props": {
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "indeterminate": "Sets an indeterminate state for the simple checkbox.",

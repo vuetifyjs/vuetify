@@ -1,4 +1,5 @@
 {
+  "description": "The `v-divider` component is used to separate sections of lists or layouts.",
   "props": {
     "contentOffset": "Increases content spacing from the lines. When passed as an array, the second value shifts slot content down (or right in vertical mode).",
     "gradient": "Adds fading effect for both sides.",

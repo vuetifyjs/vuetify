@@ -1,4 +1,5 @@
 {
+  "description": "The `v-card` component is a versatile and enhanced version of `v-sheet` that provides a simple interface for headings, text, images, icons, and more.",
   "props": {
     "flat": "Removes the card's elevation.",
     "hover": "Applies **4dp** of elevation when hovered (default 2dp). You can find more information on the [elevation page](/styles/elevation).",

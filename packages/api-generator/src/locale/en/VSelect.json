@@ -1,4 +1,5 @@
 {
+  "description": "The `v-select` components are used for collecting user provided information from a list of options.",
   "props": {
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips.",

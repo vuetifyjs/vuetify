@@ -1,4 +1,5 @@
 {
+  "description": "The v-form component makes it easy to add validation to form inputs. All input components have a rules prop that can be used to specify conditions in which the input is either valid or invalid.",
   "props": {
     "keys": "String representing keyboard shortcuts to display. Supports multiple formats:\n- **Single keys:** `\"k\"`, `\"enter\"`, `\"escape\"`\n- **Key combinations:** `\"ctrl+k\"`, `\"meta+shift+p\"`, `\"alt+arrowup\"`\n- **Sequential actions:** `\"ctrl+k-then-p\"` (use dash for 'then' relationships)\n- **Multiple shortcuts:** `\"ctrl+k meta+p\"` (space-separated for alternative shortcuts)\n\nSupports platform-aware key names like `meta` (becomes Cmd on Mac, Ctrl on PC) and `alt` (becomes Option on Mac).",
     "displayMode": "Controls how keyboard keys are visually represented. Affects the entire component's appearance:\n- **icon:** Uses SVG icons for keys when appropriate (default)\n- **symbol:** Uses Unicode symbols (⌘, ⌃, ⇧, ⌥) - Allows you to manage presentation of modifier keys with fonts\n- **text:** Uses full text labels (Command, Control, Shift, Alt) - most accessible and descriptive",
