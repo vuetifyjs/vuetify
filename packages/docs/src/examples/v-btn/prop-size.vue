@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col cols="auto">
         <v-btn size="x-small">Extra small Button</v-btn>
       </v-col>

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="auto">
         <div class="text-center">
           <v-sheet border="primary thin" class="mx-auto" height="64" width="64" rounded></v-sheet>

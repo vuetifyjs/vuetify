@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="auto">
         <div class="text-center">
           <v-btn text="Button A" variant="text" border></v-btn>

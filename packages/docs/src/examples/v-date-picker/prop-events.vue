@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-between">
+    <v-row class="justify-space-between">
       <div>
         <div class="subheading mb-5 font-weight-medium">
           Defined by array

@@ -138,8 +138,8 @@
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-row
+          class="justify-space-around"
           density="compact"
-          justify="space-around"
         >
           <v-col cols="3">
             <v-text-field

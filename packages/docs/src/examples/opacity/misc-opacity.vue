@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="auto">
         <div class="text-center">
           <div class="bg-primary opacity-100" style="height: 64px; width: 64px;"></div>

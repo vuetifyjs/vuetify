@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col cols="auto">
         <v-number-input variant="outlined" hide-details hide-input></v-number-input>
       </v-col>

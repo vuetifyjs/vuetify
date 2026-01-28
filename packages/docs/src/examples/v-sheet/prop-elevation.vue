@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col
         v-for="elevation in [0, 1, 2, 3, 4, 5]"
         :key="elevation"

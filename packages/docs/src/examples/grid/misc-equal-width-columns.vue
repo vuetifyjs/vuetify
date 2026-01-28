@@ -1,28 +1,28 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row :gap="[16, 8]">
+    <v-row gap="0">
       <v-col>
-        <v-sheet class="pa-2">
-          v-col-auto
+        <v-sheet class="pa-2 ma-2">
+          v-col
         </v-sheet>
       </v-col>
       <v-col>
-        <v-sheet class="pa-2">
-          v-col-auto
+        <v-sheet class="pa-2 ma-2">
+          v-col
         </v-sheet>
       </v-col>
 
-      <v-divider></v-divider>
+      <v-responsive width="100%"></v-responsive>
 
       <v-col>
-        <v-sheet class="pa-2">
-          v-col-auto
+        <v-sheet class="pa-2 ma-2">
+          v-col
         </v-sheet>
       </v-col>
 
       <v-col>
-        <v-sheet class="pa-2">
-          v-col-auto
+        <v-sheet class="pa-2 ma-2">
+          v-col
         </v-sheet>
       </v-col>
     </v-row>

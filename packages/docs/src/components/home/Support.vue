@@ -3,7 +3,7 @@
     <HomeCommonGradient color="primary" opacity-class="opacity-10" />
 
     <v-container class="text-center text-md-left py-16">
-      <v-row align="end">
+      <v-row class="align-end">
         <v-col class="pr-md-15" cols="12" md="6">
           <p class="font-weight-medium text-primary">
             {{ t('home.support.subtitle') }}

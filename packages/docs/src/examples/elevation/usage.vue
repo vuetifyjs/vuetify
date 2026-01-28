@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col
         v-for="(_, n) in 6"
         :key="n"

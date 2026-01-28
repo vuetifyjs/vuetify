@@ -19,10 +19,7 @@
     </v-toolbar>
 
     <v-container>
-      <v-row
-        align="center"
-        justify="start"
-      >
+      <v-row class="align-center justify-start">
         <v-col
           v-for="(selection, i) in selections"
           :key="selection.text"

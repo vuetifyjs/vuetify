@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-btn
       color="primary"
       @click.stop="dialog = true"

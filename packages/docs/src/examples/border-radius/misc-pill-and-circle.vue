@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="auto">
         <div class="text-center">
           <div class="bg-surface-variant rounded-pill mx-auto" style="height: 64px; width: 164px;"></div>

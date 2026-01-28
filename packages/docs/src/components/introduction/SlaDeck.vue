@@ -12,7 +12,7 @@
     />
 
     <v-container class="py-9 px-5" fluid>
-      <v-row density="comfortable" justify="space-around">
+      <v-row class="justify-space-around" density="comfortable">
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col
             :class="i === 1 && 'bg-primary'"

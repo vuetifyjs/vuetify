@@ -1,6 +1,6 @@
 <template>
   <v-container class="h-100 pa-4" fluid>
-    <v-row align="center" class="h-100" justify="center">
+    <v-row class="h-100 align-center justify-center">
       <v-sheet class="flex-1-1 px-4" color="transparent" max-width="420">
         <v-img
           class="mx-auto mb-4"

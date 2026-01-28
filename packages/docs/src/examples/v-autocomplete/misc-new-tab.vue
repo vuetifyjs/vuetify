@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-8 d-flex justify-center flex-wrap" theme="dark">
     <v-container class="text-center">
-      <v-row density="comfortable" justify="center">
+      <v-row class="justify-center" density="comfortable">
         <v-col cols="12">
           <v-img
             class="mx-auto mt-12 mb-16"

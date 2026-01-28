@@ -1,8 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row
-      class="mb-6 justify-center"
-    >
+    <v-row class="mb-6 justify-center">
       <v-col lg="2">
         <v-card
           class="pa-2"

@@ -23,8 +23,8 @@
 
       <v-responsive class="mx-auto" max-width="800">
         <v-row
+          class="justify-center"
           density="comfortable"
-          justify="center"
         >
           <v-col
             v-for="sponsor in sponsors"

@@ -1,6 +1,6 @@
 <template>
   <v-container class="bg-surface-light overflow-hidden" height="100%" fluid>
-    <v-row class="fill-height my-0">
+    <v-row class="fill-height">
       <template v-if="!mobile">
         <v-col class="fill-height" cols="4">
           <VChatList

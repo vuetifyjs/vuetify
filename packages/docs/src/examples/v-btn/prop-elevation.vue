@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col class="text-center" cols="12">
         <v-btn size="x-large">Default Elevation (2)</v-btn>
       </v-col>

@@ -29,10 +29,7 @@
 
     <v-divider class="mt-4"></v-divider>
 
-    <v-row
-      align="center"
-      class="my-1"
-    >
+    <v-row class="my-1 align-center">
       <strong class="mx-4 text-info-darken-2">
         Remaining: {{ remainingTasks }}
       </strong>

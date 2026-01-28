@@ -1,8 +1,6 @@
 <template>
   <v-container class="bg-surface-variant">
-    <v-row
-      class="mb-6"
-    >
+    <v-row class="mb-6">
       <v-col :cols="cols[0]">
         <v-sheet class="pa-2">
           v-col-{{ cols[0] }}

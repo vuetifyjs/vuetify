@@ -1,7 +1,7 @@
 <template>
   <v-sheet color="#5662f6">
     <v-container class="pa-6 text-left">
-      <v-row justify="center">
+      <v-row class="justify-center">
         <v-col
           class="pa-6 pa-md-12 text-center"
           cols="12"

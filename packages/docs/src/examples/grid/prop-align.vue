@@ -55,9 +55,7 @@
     </v-container>
 
     <v-container class="bg-surface-variant">
-      <v-row
-        style="height: 150px;"
-      >
+      <v-row style="height: 150px;">
         <v-col class="align-self-start">
           <v-sheet class="pa-2">
             align-self-start

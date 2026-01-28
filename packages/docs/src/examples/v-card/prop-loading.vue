@@ -35,10 +35,7 @@
     </v-card-item>
 
     <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
+      <v-row class="align-center">
         <v-rating
           :model-value="4.5"
           color="amber"

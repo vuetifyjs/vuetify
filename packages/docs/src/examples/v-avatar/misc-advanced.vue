@@ -7,8 +7,7 @@
     >
       <v-expansion-panel-title>
         <v-row
-          align="center"
-          class="spacer"
+          class="spacer align-center"
           density="compact"
         >
           <v-col
