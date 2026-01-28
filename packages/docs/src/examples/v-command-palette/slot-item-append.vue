@@ -67,3 +67,37 @@
     { title: 'Next week', hint: futureDay(7), value: '+7d' },
   ])
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      model: false,
+    }),
+    computed: {
+      items () {
+        return [
+          { title: 'In 15 minutes', hint: this.futureTime(15), value: '+15m' },
+          { title: 'In 30 minutes', hint: this.futureTime(30), value: '+30m' },
+          { title: 'In 1 hour', hint: this.futureTime(60), value: '+60m' },
+          { title: 'Tomorrow', hint: this.futureDay(1), value: '+1d' },
+          { title: 'Next week', hint: this.futureDay(7), value: '+7d' },
+        ]
+      },
+    },
+    methods: {
+      futureTime (minutes) {
+        const d = new Date()
+        d.setMinutes(d.getMinutes() + minutes)
+        return new Intl.DateTimeFormat(this.$vuetify.date.locale, { hour: 'numeric', minute: 'numeric' }).format(d)
+      },
+      futureDay (days, hour = 9) {
+        const d = new Date()
+        d.setDate(d.getDate() + days)
+        d.setHours(hour)
+        d.setMinutes(0)
+        d.setMilliseconds(0)
+        return new Intl.DateTimeFormat(this.$vuetify.date.locale, { weekday: 'long', hour: 'numeric', minute: 'numeric' }).format(d)
+      },
+    },
+  }
+</script>

@@ -54,7 +54,6 @@
 <script setup>
   import { ref } from 'vue'
 
-  // https://github.com/mhshariatipour1378/Avatars-Placeholder
   const avatars = [
     '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
     '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
@@ -83,4 +82,38 @@
     { type: 'subheader', title: 'Other results', childrenCount: 4 },
     ...people.slice(2).map(x => ({ ...x, type: 'item' })),
   ]
+</script>
+
+<script>
+  const avatars = [
+    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
+    '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
+    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=White&clotheType=GraphicShirt&eyeType=Dizzy&eyebrowType=RaisedExcitedNatural&facialHairColor=Brown&facialHairType=BeardLight&hairColor=Platinum&mouthType=Serious&skinColor=Tanned&topType=ShortHairShortCurly',
+    '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
+    '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
+    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
+  ]
+
+  const people = [
+    { value: 1, username: '@james', name: 'James Brown', avatar: avatars[0] },
+    { value: 2, username: '@sophia', name: 'Sophia Williams', avatar: avatars[1] },
+    { value: 3, username: '@taylor', name: 'Arthur Taylor', avatar: avatars[2] },
+    { value: 4, username: '@emma', name: 'Emma Wright', avatar: avatars[3] },
+    { value: 5, username: '@matt', name: 'Matthew Johnson', avatar: avatars[4] },
+    { value: 6, username: '@laura', name: 'Laura Perez', avatar: avatars[5] },
+  ]
+
+  export default {
+    data: () => ({
+      model: false,
+      items: [
+        { type: 'divider' },
+        { type: 'subheader', title: 'Recently open', childrenCount: 2 },
+        ...people.slice(0, 2).map(x => ({ ...x, type: 'item' })),
+        { type: 'divider' },
+        { type: 'subheader', title: 'Other results', childrenCount: 4 },
+        ...people.slice(2).map(x => ({ ...x, type: 'item' })),
+      ],
+    }),
+  }
 </script>
