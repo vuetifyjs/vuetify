@@ -86,6 +86,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const internalItems = computed(() =>
       props.items.map((item, index) => ({
         value: index,
+        type: item.type,
         raw: item,
         ...('title' in item && { title: item.title }),
         ...('subtitle' in item && { subtitle: item.subtitle }),
