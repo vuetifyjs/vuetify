@@ -57,34 +57,12 @@
 
       // Standard columns with default gap
       @for $i from 1 through $columns
-        :where(.v-row.v-row--density-default) > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns)
-
-      // Dense row columns
-      @for $i from 1 through $columns
-        .v-row--density-comfortable > .v-col#{$infix}-#{$i}
-          @include make-col($i, $columns)
-
-      // No-gutters columns
-      @for $i from 1 through $columns
-        .v-row--density-compact > .v-col#{$infix}-#{$i}
+        .v-row > .v-col#{$infix}-#{$i}
           @include make-col($i, $columns)
 
       // Standard offsets with default gap
       @for $i from 0 through $columns - 1
         @if not ($infix == "" and $i == 0)
           // Avoid emitting useless .offset-0
-          :where(.v-row.v-row--density-default) > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns)
-
-      // Dense row offsets
-      @for $i from 0 through $columns - 1
-        @if not ($infix == "" and $i == 0)
-          .v-row--density-comfortable > .v-col-offset#{$infix}-#{$i}
-            @include make-col-offset($i, $columns)
-
-      // No-gutters offsets
-      @for $i from 0 through $columns - 1
-        @if not ($infix == "" and $i == 0)
-          .v-row--density-compact > .v-col-offset#{$infix}-#{$i}
+          .v-row > .v-col-offset#{$infix}-#{$i}
             @include make-col-offset($i, $columns)
