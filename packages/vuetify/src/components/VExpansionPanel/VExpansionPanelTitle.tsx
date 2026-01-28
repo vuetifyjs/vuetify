@@ -14,7 +14,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -103,11 +103,11 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
         disabled={ expansionPanel.disabled.value }
         aria-expanded={ expansionPanel.isSelected.value }
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
-        v-ripple={ props.ripple }
+        vRipple={ props.ripple }
       >
         <span class="v-expansion-panel-title__overlay" />
 
-        { slots.default?.(slotProps.value) }
+        { renderSlot(slots, 'default', slotProps.value) }
 
         { !props.hideActions && (
           <VDefaultsProvider
@@ -118,7 +118,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             }}
           >
             <span class="v-expansion-panel-title__icon">
-              { slots.actions?.(slotProps.value) ?? <VIcon /> }
+              { renderSlot(slots, 'actions', slotProps.value, () => <VIcon />) }
             </span>
           </VDefaultsProvider>
         )}

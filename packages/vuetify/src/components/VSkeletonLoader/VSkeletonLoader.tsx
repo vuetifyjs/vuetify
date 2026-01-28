@@ -10,7 +10,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -173,7 +173,7 @@ export const VSkeletonLoader = genericComponent()({
             { items.value }
           </div>
         )
-        : <>{ slots.default?.() }</>
+        : <>{ renderSlot(slots, 'default') }</>
     })
 
     return {}

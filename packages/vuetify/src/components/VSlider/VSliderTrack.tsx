@@ -11,7 +11,7 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { Tick } from './slider'
@@ -115,7 +115,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             {
               (tick.label || slots['tick-label']) && (
                 <div class="v-slider-track__tick-label">
-                  { slots['tick-label']?.({ tick, index }) ?? tick.label }
+                  { renderSlot(slots, 'tick-label', { tick, index }, () => tick.label) }
                 </div>
               )
             }

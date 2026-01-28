@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, pick, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -347,7 +347,9 @@ export const VDateInput = genericComponent<new <
                           >
                             {{
                               ...datePickerSlots,
-                              actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
+                              actions: !props.hideActions
+                                ? () => renderSlot(slots, 'actions', { save, cancel, isPristine }, () => actions())
+                                : undefined,
                             }}
                           </VDatePicker>
                         )
@@ -356,13 +358,12 @@ export const VDateInput = genericComponent<new <
                   </VConfirmEdit>
                 </VMenu>
 
-                { slots.default?.() }
+                { renderSlot(slots, 'default') }
               </>
             ),
             prepend: hasPrepend ? prependSlotProps => (
-              slots.prepend
-                ? slots.prepend(prependSlotProps)
-                : (props.prependIcon && (
+              renderSlot(slots, 'prepend', prependSlotProps, () => (
+                props.prependIcon && (
                   <InputIcon
                     key="prepend-icon"
                     name="prepend"
@@ -370,7 +371,7 @@ export const VDateInput = genericComponent<new <
                     onClick={ isInteractive.value ? onClick : undefined }
                   />
                 ))
-            ) : undefined,
+              )) : undefined,
           }}
         </VTextField>
       )

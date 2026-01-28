@@ -12,7 +12,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -156,7 +156,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
 
         { slots.default && (
           <div class="v-progress-circular__content">
-            { slots.default({ value: normalizedValue.value }) }
+            { renderSlot(slots, 'default', { value: normalizedValue.value }) }
           </div>
         )}
       </props.tag>

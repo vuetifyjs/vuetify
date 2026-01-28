@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRaw, toRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -194,7 +194,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
           v-model:selected={ selected.value }
         >
           { visibleIds.value?.size === 0 && !props.hideNoData && (
-            slots['no-data']?.() ?? (<VListItem key="no-data" title={ t(props.noDataText) } />)
+            renderSlot(slots, 'no-data', () => (<VListItem key="no-data" title={ t(props.noDataText) } />))
           )}
           <VTreeviewChildren
             { ...treeviewChildrenProps }

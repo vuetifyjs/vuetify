@@ -10,12 +10,23 @@ import vResize from '@/directives/resize'
 
 // Utilities
 import { nextTick, onMounted, ref } from 'vue'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, noop, renderSlot, useRender } from '@/util'
 
 // Types
-import type { CalendarTimestamp } from './types'
+import type { CalendarDayBodySlotScope, CalendarDayCategorySlotScope, CalendarTimestamp, DayHeaderSlotScope } from './types'
+import type { GenericProps } from '@/util'
 
-export const VCalendarDaily = defineComponent({
+export const VCalendarDaily = genericComponent<new (
+  props: {},
+  slots: {
+    'days': never
+    'day-body': CalendarDayBodySlotScope
+    'day-header': DayHeaderSlotScope
+    'day-label-header': CalendarTimestamp
+    'interval': CalendarDayCategorySlotScope
+    'interval-header': never
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCalendarDaily',
 
   directives: { vResize },
@@ -74,7 +85,7 @@ export const VCalendarDaily = defineComponent({
           class="v-calendar-daily__intervals-head"
           style={{ width }}
         >
-          { slots['interval-header']?.() }
+          { renderSlot(slots, 'interval-header') }
         </div>
       )
     }
@@ -101,11 +112,11 @@ export const VCalendarDaily = defineComponent({
     }
 
     function genDayHeader (day: CalendarTimestamp, index: number) {
-      return slots['day-header']?.({
+      return renderSlot(slots, 'day-header', {
         week: base.days.value,
         ...day,
         index,
-      }) ?? []
+      })
     }
 
     function genHeadWeekday (day: CalendarTimestamp) {
@@ -123,7 +134,7 @@ export const VCalendarDaily = defineComponent({
     function genHeadDayLabel (day: CalendarTimestamp) {
       return (
         <div class="v-calendar-daily_head-day-label">
-          { slots['day-label-header']?.(day) ?? genHeadDayButton(day) }
+          { renderSlot(slots, 'day-label-header', day, () => genHeadDayButton(day)) }
         </div>
       )
     }
@@ -178,7 +189,7 @@ export const VCalendarDaily = defineComponent({
       return (
         <div class="v-calendar-daily__day-container">
           { genBodyIntervals() }
-          { slots.days?.() ?? genDays() }
+          { renderSlot(slots, 'days', () => genDays()) }
         </div>
       )
     }
@@ -203,7 +214,7 @@ export const VCalendarDaily = defineComponent({
     }
 
     function genDayBody (day: CalendarTimestamp) {
-      return slots['day-body']?.(base.getSlotScope(day)) ?? []
+      return renderSlot(slots, 'day-body', base.getSlotScope(day))
     }
 
     function genDayIntervals (index: number) {
@@ -219,7 +230,7 @@ export const VCalendarDaily = defineComponent({
           key={ interval.time }
           style={[{ height }, styler(interval)]}
         >
-          { slots.interval?.(base.getSlotScope(interval)) }
+          { renderSlot(slots, 'interval', base.getSlotScope(interval)) }
         </div>
       )
     }
@@ -270,7 +281,7 @@ export const VCalendarDaily = defineComponent({
       <div
         class={['v-calendar-daily', attrs.class]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
-        v-resize_quiet={ onResize }
+        vResize_quiet={ onResize }
       >
         { !props.hideHeader ? genHead() : undefined }
         { genBody() }

@@ -11,7 +11,7 @@ import { makeStepperItemProps } from '@/components/VStepper/VStepperItem'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
@@ -150,27 +150,27 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                   size={ 24 }
                   start
                 >
-                  { slots.icon?.(slotProps.value) ?? (
+                  { renderSlot(slots, 'icon', slotProps.value, () => (
                     icon.value ? (
                       <VIcon icon={ icon.value }></VIcon>
                     ) : step.value
-                  )}
+                  ))}
                 </VAvatar>
 
                 <div>
                   <div class="v-stepper-vertical-item__title">
-                    { slots.title?.(slotProps.value) ?? props.title }
+                    { renderSlot(slots, 'title', slotProps.value, () => props.title) }
                   </div>
 
                   <div class="v-stepper-vertical-item__subtitle">
-                    { slots.subtitle?.(slotProps.value) ?? props.subtitle }
+                    { renderSlot(slots, 'subtitle', slotProps.value, () => props.subtitle) }
                   </div>
                 </div>
               </>
             ),
             text: () => (
               <>
-                { slots.default?.(slotProps.value) ?? props.text }
+                { renderSlot(slots, 'default', slotProps.value, () => props.text) }
 
                 { hasActions && (
                   <VDefaultsProvider
@@ -181,16 +181,16 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
                       },
                     }}
                   >
-                    { slots.actions?.(actionProps.value) ?? (
+                    { renderSlot(slots, 'actions', actionProps.value, () => (
                       <VStepperVerticalActions
                         onClick:next={ onClickNext }
                         onClick:prev={ onClickPrev }
                         v-slots={{
-                          prev: slots.prev ? () => slots.prev?.(actionProps.value) : undefined,
-                          next: slots.next ? () => slots.next?.(actionProps.value) : undefined,
+                          prev: slots.prev ? () => renderSlot(slots, 'prev', actionProps.value) : undefined,
+                          next: slots.next ? () => renderSlot(slots, 'next', actionProps.value) : undefined,
                         }}
                       />
-                    )}
+                    ))}
                   </VDefaultsProvider>
                 )}
               </>

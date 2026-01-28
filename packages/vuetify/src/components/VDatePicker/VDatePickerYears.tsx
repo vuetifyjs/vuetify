@@ -13,7 +13,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, shallowRef, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, propsFactory, renderSlot, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -116,7 +116,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
-        v-intersect={[{
+        vIntersect={[{
           handler: focusSelectedYear,
         }, null, ['once']]}
         style={{
@@ -148,16 +148,16 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               },
             } as const
 
-            return slots.year?.({
+            return renderSlot(slots, 'year', {
               year,
               i,
               props: btnProps,
-            }) ?? (
+            }, () => (
               <VBtn
                 key="month"
                 { ...btnProps }
               />
-            )
+            ))
           })}
         </div>
       </div>

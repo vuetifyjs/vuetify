@@ -6,7 +6,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVLabelProps = propsFactory({
   text: String,
@@ -37,7 +37,7 @@ export const VLabel = genericComponent()({
       >
         { props.text }
 
-        { slots.default?.() }
+        { renderSlot(slots, 'default') }
       </label>
     ))
 

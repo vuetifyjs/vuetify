@@ -8,7 +8,7 @@ import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 import { makeGroupProps, useGroup } from '@/composables/group'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -59,7 +59,7 @@ export const VBtnToggle = genericComponent<new <T>(
           { ...btnGroupProps }
           style={ props.style }
         >
-          { slots.default?.({
+          { renderSlot(slots, 'default', {
             isSelected,
             next,
             prev,

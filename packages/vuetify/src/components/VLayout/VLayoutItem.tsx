@@ -7,7 +7,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -54,7 +54,7 @@ export const VLayoutItem = genericComponent()({
           props.style,
         ]}
       >
-        { slots.default?.() }
+        { renderSlot(slots, 'default') }
       </div>
     )
   },

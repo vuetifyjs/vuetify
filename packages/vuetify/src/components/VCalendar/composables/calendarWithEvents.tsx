@@ -435,7 +435,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         { ...data }
         ref_for
         ref={ eventsRef }
-        v-ripple={ props.eventRipple ?? true }
+        vRipple={ props.eventRipple ?? true }
       >
         { slot?.(scope) ?? genName(eventSummary) }
       </div>
@@ -479,7 +479,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         }}
         ref_for
         ref={ eventsRef }
-        v-ripple={ props.eventRipple ?? true }
+        vRipple={ props.eventRipple ?? true }
         { ...events }
       />
     )
@@ -575,6 +575,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
           children.push(genMore(day) as VNode)
         }
         if (slots.day) {
+          // eslint-disable-next-line local-rules/jsx-render-slot
           const slot = slots.day(day)
           if (slot) {
             children = children ? children.concat(slot) : slot
@@ -586,6 +587,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         let children = getSlotChildren(day, getEventsForDayAll, genDayEvent, false)
 
         if (slots['day-header']) {
+          // eslint-disable-next-line local-rules/jsx-render-slot
           const slot = slots['day-header'](day)
           if (slot) {
             children = children ? children.concat(slot) : slot
@@ -600,6 +602,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         ]
 
         if (slots['day-body']) {
+          // eslint-disable-next-line local-rules/jsx-render-slot
           const slot = slots['day-body'](day)
           if (slot) {
             children = children.concat(slot)

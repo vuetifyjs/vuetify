@@ -26,7 +26,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -210,18 +210,18 @@ export const VAlert = genericComponent<VAlertSlots>()({
           <div class="v-alert__content">
             { hasTitle && (
               <VAlertTitle key="title">
-                { slots.title?.() ?? props.title }
+                { renderSlot(slots, 'title', () => props.title) }
               </VAlertTitle>
             )}
 
-            { slots.text?.() ?? props.text }
+            { renderSlot(slots, 'text', () => props.text) }
 
-            { slots.default?.() }
+            { renderSlot(slots, 'default') }
           </div>
 
           { slots.append && (
             <div key="append" class="v-alert__append">
-              { slots.append() }
+              { renderSlot(slots, 'append') }
             </div>
           )}
 
@@ -246,7 +246,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                     },
                   }}
                 >
-                  { slots.close?.({ props: closeProps.value }) }
+                  { renderSlot(slots, 'close', { props: closeProps.value }) }
                 </VDefaultsProvider>
               )}
             </div>

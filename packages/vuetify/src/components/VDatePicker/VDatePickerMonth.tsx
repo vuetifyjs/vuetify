@@ -13,7 +13,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -298,12 +298,12 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
                 >
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
-                    slots.day?.(slotProps) ?? (
+                    renderSlot(slots, 'day', slotProps, () => (
                       <VBtn { ...slotProps.props }>
                         { item.localized }
                         { genEvents(item.isoDate) }
                       </VBtn>
-                    )
+                    ))
                   )}
                 </div>
               )

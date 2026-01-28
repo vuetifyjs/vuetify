@@ -11,17 +11,17 @@ describe('framework', () => {
     })
 
     it('should install provided components', () => {
-      const Foo = { name: 'Foo', render: () => (<div />) }
+      const VFoo = { name: 'Foo', render: () => (<div />) }
       const vuetify = createVuetify({
         components: {
-          Foo,
+          VFoo,
         },
       })
 
       const TestComponent = {
         name: 'TestComponent',
         props: {},
-        render: () => (<foo />),
+        render: () => (<v-foo />),
       }
 
       mount(TestComponent, {
@@ -44,6 +44,7 @@ describe('framework', () => {
       const TestComponent = {
         name: 'TestComponent',
         props: {},
+        // eslint-disable-next-line local-rules/jsx-prop-casing
         render: () => (<div v-foo />),
       }
 

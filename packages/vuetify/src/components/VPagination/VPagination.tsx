@@ -24,7 +24,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef } from 'vue'
-import { createRange, genericComponent, keyValues, propsFactory, useRender } from '@/util'
+import { createRange, genericComponent, keyValues, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
@@ -341,14 +341,14 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         <ul class="v-pagination__list">
           { props.showFirstLastPage && (
             <li key="first" class="v-pagination__first" data-test="v-pagination-first">
-              { slots.first ? slots.first(controls.value.first!) : (
+              { slots.first ? renderSlot(slots, 'first', controls.value.first!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.first } />
               )}
             </li>
           )}
 
           <li key="prev" class="v-pagination__prev" data-test="v-pagination-prev">
-            { slots.prev ? slots.prev(controls.value.prev) : (
+            { slots.prev ? renderSlot(slots, 'prev', controls.value.prev) : (
               <VBtn _as="VPaginationBtn" { ...controls.value.prev } />
             )}
           </li>
@@ -364,7 +364,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               ]}
               data-test="v-pagination-item"
             >
-              { slots.item ? slots.item(item) : (
+              { slots.item ? renderSlot(slots, 'item', item) : (
                 <VBtn _as="VPaginationBtn" { ...item.props }>{ item.page }</VBtn>
               )}
             </li>
@@ -375,7 +375,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             class="v-pagination__next"
             data-test="v-pagination-next"
           >
-            { slots.next ? slots.next(controls.value.next) : (
+            { slots.next ? renderSlot(slots, 'next', controls.value.next) : (
               <VBtn _as="VPaginationBtn" { ...controls.value.next } />
             )}
           </li>
@@ -386,7 +386,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               class="v-pagination__last"
               data-test="v-pagination-last"
             >
-              { slots.last ? slots.last(controls.value.last!) : (
+              { slots.last ? renderSlot(slots, 'last', controls.value.last!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.last } />
               )}
             </li>

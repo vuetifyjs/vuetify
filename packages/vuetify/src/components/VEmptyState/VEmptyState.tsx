@@ -17,7 +17,7 @@ import { makeSizeProps } from '@/composables/size'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -141,7 +141,7 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                     },
                   }}
                 >
-                  { slots.media() }
+                  { renderSlot(slots, 'media') }
                 </VDefaultsProvider>
               )}
             </div>
@@ -149,13 +149,13 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
 
           { hasHeadline && (
             <div key="headline" class="v-empty-state__headline">
-              { slots.headline?.() ?? props.headline }
+              { renderSlot(slots, 'headline', () => props.headline) }
             </div>
           )}
 
           { hasTitle && (
             <div key="title" class="v-empty-state__title">
-              { slots.title?.() ?? props.title }
+              { renderSlot(slots, 'title', () => props.title) }
             </div>
           )}
 
@@ -167,13 +167,13 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 maxWidth: convertToUnit(props.textWidth),
               }}
             >
-              { slots.text?.() ?? props.text }
+              { renderSlot(slots, 'text', () => props.text) }
             </div>
           )}
 
           { slots.default && (
             <div key="content" class="v-empty-state__content">
-              { slots.default() }
+              { renderSlot(slots, 'default') }
             </div>
           )}
 
@@ -191,9 +191,9 @@ export const VEmptyState = genericComponent<VEmptyStateSlots>()({
                 }}
               >
                 {
-                  slots.actions?.({ props: { onClick: onClickAction } }) ?? (
+                  renderSlot(slots, 'actions', { props: { onClick: onClickAction } }, () => (
                     <VBtn onClick={ onClickAction } />
-                  )
+                  ))
                 }
               </VDefaultsProvider>
             </div>

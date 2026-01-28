@@ -4,7 +4,7 @@ import { makeVListGroupProps, VListGroup } from '@/components/VList/VListGroup'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { VListGroupSlots } from '@/components/VList/VListGroup'
@@ -49,11 +49,9 @@ export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
           {{
             ...slots,
             activator: slots.activator ? slotProps => (
-              <>
-                <VDefaultsProvider defaults={ activatorDefaults.value }>
-                  { slots.activator?.(slotProps) }
-                </VDefaultsProvider>
-              </>
+              <VDefaultsProvider defaults={ activatorDefaults.value }>
+                { renderSlot(slots, 'activator', slotProps) }
+              </VDefaultsProvider>
             ) : undefined,
           }}
         </VListGroup>

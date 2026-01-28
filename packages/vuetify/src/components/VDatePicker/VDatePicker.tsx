@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
@@ -413,18 +413,18 @@ export const VDatePicker = genericComponent<new <
             props.style,
           ]}
           v-slots={{
-            title: () => slots.title?.() ?? (
+            title: () => renderSlot(slots, 'title', () => (
               <div class="v-date-picker__title">
                 { t(props.title) }
               </div>
-            ),
+            )),
             header: () => slots.header ? (
               <VDefaultsProvider
                 defaults={{
                   VDatePickerHeader: { ...headerProps },
                 }}
               >
-                { slots.header?.(headerProps) }
+                { renderSlot(slots, 'header', headerProps) }
               </VDefaultsProvider>
             ) : (
               <VDatePickerHeader

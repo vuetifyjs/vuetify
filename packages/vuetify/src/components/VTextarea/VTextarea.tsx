@@ -21,7 +21,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -328,7 +328,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }
-                        v-intersect={[{
+                        vIntersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
                         autofocus={ props.autofocus }
@@ -371,7 +371,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
             ),
             details: hasDetails ? slotProps => (
               <>
-                { slots.details?.(slotProps) }
+                { renderSlot(slots, 'details', slotProps) }
 
                 { hasCounter && (
                   <>

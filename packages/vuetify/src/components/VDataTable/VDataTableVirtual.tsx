@@ -20,7 +20,7 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -206,7 +206,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
           fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
-            top: () => slots.top?.(slotProps.value),
+            top: () => renderSlot(slots, 'top', slotProps.value),
             wrapper: () => (
               <div
                 ref={ containerRef }
@@ -218,7 +218,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                 }}
               >
                 <table>
-                  { slots.colgroup?.(slotProps.value) }
+                  { renderSlot(slots, 'colgroup', slotProps.value) }
                   { !props.hideDefaultHeader && (
                     <thead key="thead">
                       <VDataTableHeaders
@@ -228,14 +228,14 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                       />
                     </thead>
                   )}
-                  { slots.thead?.(slotProps.value) }
+                  { renderSlot(slots, 'thead', slotProps.value) }
                   { !props.hideDefaultBody && (
                     <tbody key="tbody">
                       <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
 
-                      { slots['body.prepend']?.(slotProps.value) }
+                      { renderSlot(slots, 'body.prepend', slotProps.value) }
 
                       <VDataTableRows
                         { ...attrs }
@@ -251,7 +251,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                               onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                             >
                               { ({ itemRef }) => (
-                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
+                                renderSlot(slots, 'item', { ...itemSlotProps, itemRef }, () => (
                                   <VDataTableRow
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
@@ -259,26 +259,26 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     index={ itemSlotProps.index }
                                     v-slots={ slots }
                                   />
-                                )
+                                ))
                               )}
                             </VVirtualScrollItem>
                           ),
                         }}
                       </VDataTableRows>
 
-                      { slots['body.append']?.(slotProps.value) }
+                      { renderSlot(slots, 'body.append', slotProps.value) }
 
                       <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
                         <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
                       </tr>
                     </tbody>
                   )}
-                  { slots.tbody?.(slotProps.value) }
-                  { slots.tfoot?.(slotProps.value) }
+                  { renderSlot(slots, 'tbody', slotProps.value) }
+                  { renderSlot(slots, 'tfoot', slotProps.value) }
                 </table>
               </div>
             ),
-            bottom: () => slots.bottom?.(slotProps.value),
+            bottom: () => renderSlot(slots, 'bottom', slotProps.value),
           }}
         </VTable>
       )

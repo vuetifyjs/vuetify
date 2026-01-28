@@ -9,7 +9,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { StepperVerticalItemActionSlot } from './VStepperVerticalItem'
@@ -137,7 +137,7 @@ export const VStepperVertical = genericComponent<new <T = number>(
                     </VStepperVerticalItem>
                   ))}
 
-                  { slots.default?.({ prev, next, step: model.value }) }
+                  { renderSlot(slots, 'default', { prev, next, step: model.value }) }
                 </>
               )
             },

@@ -22,8 +22,8 @@ import {
   genericComponent,
   matchesSelector,
   propsFactory,
-  useRender,
-  wrapInArray,
+  renderSlot,
+  useRender, wrapInArray,
 } from '@/util'
 
 // Types
@@ -222,7 +222,7 @@ export const VSelectionControl = genericComponent<new <T>(
 
     useRender(() => {
       const label = slots.label
-        ? slots.label({
+        ? renderSlot(slots, 'label', {
           label: props.label,
           props: { for: id.value },
         })
@@ -273,7 +273,7 @@ export const VSelectionControl = genericComponent<new <T>(
             ]}
             style={ textColorStyles.value }
           >
-            { slots.default?.({
+            { renderSlot(slots, 'default', {
               backgroundColorClasses,
               backgroundColorStyles,
             })}
@@ -282,13 +282,13 @@ export const VSelectionControl = genericComponent<new <T>(
               class={[
                 'v-selection-control__input',
               ]}
-              v-ripple={[
+              vRipple={[
                 !props.disabled && !props.readonly && props.ripple,
                 null,
                 ['center', 'circle'],
               ]}
             >
-              { slots.input?.({
+              { renderSlot(slots, 'input', {
                 model,
                 textColorClasses,
                 textColorStyles,
@@ -301,13 +301,13 @@ export const VSelectionControl = genericComponent<new <T>(
                   onBlur,
                   id: id.value,
                 },
-              } satisfies SelectionControlSlot) ?? (
+              } satisfies SelectionControlSlot, () => (
                 <>
                   { icon.value && <VIcon key="icon" icon={ icon.value } /> }
 
                   { inputNode }
                 </>
-              )}
+              ))}
             </div>
           </div>
 

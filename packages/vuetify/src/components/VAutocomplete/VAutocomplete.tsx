@@ -38,6 +38,7 @@ import {
   noop,
   omit,
   propsFactory,
+  renderSlot,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -501,11 +502,11 @@ export const VAutocomplete = genericComponent<new <
                       { ...listEvents }
                       { ...props.listProps }
                     >
-                      { slots['prepend-item']?.() }
+                      { renderSlot(slots, 'prepend-item') }
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                      { !displayItems.value.length && !props.hideNoData && (renderSlot(slots, 'no-data', () => (
                         <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                      )))}
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
@@ -519,23 +520,23 @@ export const VAutocomplete = genericComponent<new <
                           })
 
                           if (item.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
+                            return renderSlot(slots, 'divider', { props: item.raw, index }, () => (
                               <VDivider { ...item.props } key={ `divider-${index}` } />
-                            )
+                            ))
                           }
 
                           if (item.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
+                            return renderSlot(slots, 'subheader', { props: item.raw, index }, () => (
                               <VListSubheader { ...item.props } key={ `subheader-${index}` } />
-                            )
+                            ))
                           }
 
-                          return slots.item?.({
+                          return renderSlot(slots, 'item', {
                             item: item.raw,
                             internalItem: item,
                             index,
                             props: itemProps,
-                          }) ?? (
+                          }, () => (
                             <VListItem { ...itemProps } role="option">
                             {{
                               prepend: ({ isSelected }) => (
@@ -567,11 +568,11 @@ export const VAutocomplete = genericComponent<new <
                               },
                             }}
                           </VListItem>
-                          )
+                          ))
                         }}
                       </VVirtualScroll>
 
-                      { slots['append-item']?.() }
+                      { renderSlot(slots, 'append-item') }
                     </VList>
                   )}
                 </VMenu>
@@ -664,9 +665,9 @@ export const VAutocomplete = genericComponent<new <
                 })}
               </>
             ),
-            'append-inner': (...args) => (
+            'append-inner': args => (
               <>
-                { slots['append-inner']?.(...args) }
+                { renderSlot(slots, 'append-inner', args) }
                 { props.menuIcon ? (
                   <VIcon
                     class="v-autocomplete__menu-icon"
@@ -682,7 +683,7 @@ export const VAutocomplete = genericComponent<new <
                   <InputIcon
                     key="append-icon"
                     name="appendInner"
-                    color={ args[0].iconColor.value }
+                    color={ args.iconColor.value }
                   />
                 )}
               </>

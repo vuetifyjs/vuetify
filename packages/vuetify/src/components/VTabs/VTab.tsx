@@ -11,7 +11,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 // Utilities
 import { computed, ref } from 'vue'
 import { VTabsSymbol } from './shared'
-import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
+import { animate, genericComponent, omit, propsFactory, renderSlot, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -161,7 +161,7 @@ export const VTab = genericComponent<VBtnSlots>()({
             ...slots,
             default: () => (
               <>
-                { slots.default?.() ?? props.text }
+                { renderSlot(slots, 'default', () => props.text) }
 
                 { !props.hideSlider && (
                   <div

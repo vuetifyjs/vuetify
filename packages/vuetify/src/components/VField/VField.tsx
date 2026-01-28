@@ -27,8 +27,8 @@ import {
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
-  standardEasing,
-  useRender,
+  renderSlot,
+  standardEasing, useRender,
 } from '@/util'
 
 // Types
@@ -229,7 +229,7 @@ export const VField = genericComponent<new <T>(
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = () => (
         slots.label
-          ? slots.label({
+          ? renderSlot(slots, 'label', {
             ...slotProps.value,
             label: props.label,
             props: { for: id.value },
@@ -285,7 +285,7 @@ export const VField = genericComponent<new <T>(
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { slots['prepend-inner']
-                ? slots['prepend-inner'](slotProps.value)
+                ? renderSlot(slots, 'prepend-inner', slotProps.value)
                 : (props.prependInnerIcon && (
                   <InputIcon
                     key="prepend-icon"
@@ -324,7 +324,7 @@ export const VField = genericComponent<new <T>(
               </VFieldLabel>
             )}
 
-            { slots.default?.({
+            { renderSlot(slots, 'default', {
               ...slotProps.value,
               props: {
                 id: id.value,
@@ -333,13 +333,13 @@ export const VField = genericComponent<new <T>(
               },
               focus,
               blur,
-            } as VFieldSlot) ?? (
+            } as VFieldSlot, () => (
               <div
                 id={ id.value }
                 class="v-field__input"
                 aria-describedby={ messagesId.value }
               />
-            )}
+            ))}
           </div>
 
           { hasClear && (
@@ -360,7 +360,7 @@ export const VField = genericComponent<new <T>(
                 }}
               >
                 { slots.clear
-                  ? slots.clear({
+                  ? renderSlot(slots, 'clear', {
                     ...slotProps.value,
                     props: {
                       onFocus: focus,
@@ -385,7 +385,7 @@ export const VField = genericComponent<new <T>(
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
               { slots['append-inner']
-                ? slots['append-inner'](slotProps.value)
+                ? renderSlot(slots, 'append-inner', slotProps.value)
                 : (props.appendInnerIcon && (
                   <InputIcon
                     key="append-icon"

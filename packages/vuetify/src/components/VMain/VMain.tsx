@@ -9,7 +9,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export const makeVMainProps = propsFactory({
   scrollable: Boolean,
@@ -46,10 +46,10 @@ export const VMain = genericComponent()({
         { props.scrollable
           ? (
             <div class="v-main__scroller">
-              { slots.default?.() }
+              { renderSlot(slots, 'default') }
             </div>
           )
-          : slots.default?.()
+          : renderSlot(slots, 'default')
         }
       </props.tag>
     ))

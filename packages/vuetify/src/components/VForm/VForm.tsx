@@ -5,7 +5,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { FieldValidationResult, FormField, FormValidationResult, SubmitEventPromise } from '@/composables/form'
@@ -81,7 +81,7 @@ export const VForm = genericComponent<VFormSlots>()({
         onReset={ onReset }
         onSubmit={ onSubmit }
       >
-        { slots.default?.({
+        { renderSlot(slots, 'default', {
           errors: form.errors.value,
           isDisabled: form.isDisabled.value,
           isReadonly: form.isReadonly.value,

@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, useId } from 'vue'
-import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -79,7 +79,7 @@ export const VRadioGroup = genericComponent<new <T>(
       const inputProps = VInput.filterProps(props)
       const controlProps = VSelectionControl.filterProps(props)
       const label = slots.label
-        ? slots.label({
+        ? renderSlot(slots, 'label', {
           label: props.label,
           props: { for: id.value },
         })

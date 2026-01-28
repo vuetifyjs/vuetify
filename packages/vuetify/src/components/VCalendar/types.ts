@@ -98,3 +98,33 @@ export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
 export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
 export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string | VNode
+
+export interface EventSlotScope {
+  event: CalendarEvent
+  outside: boolean
+  singline: boolean
+  overlapsNoon: boolean
+  formatTime: (withTime: CalendarTimestamp, ampm: boolean) => string
+  timeSummary: () => string
+  eventSummary: () => JSX.Element
+  eventParsed: CalendarEventParsed
+  day: CalendarDaySlotScope
+  start: boolean
+  end: boolean
+  timed: boolean
+}
+
+export interface DaySlotScope extends CalendarTimestamp {
+  outside: boolean
+  index: number
+  week: CalendarTimestamp[]
+}
+
+export interface DayHeaderSlotScope extends CalendarTimestamp {
+  index: number
+  week: CalendarTimestamp[]
+}
+
+export interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
+  category: CalendarCategory
+}

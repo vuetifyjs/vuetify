@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -111,7 +111,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
             activator: slots.activator,
             default: (...args) => (
               <VDefaultsProvider root="VDialog">
-                { slots.default?.(...args) }
+                { renderSlot(slots, 'default', ...args) }
               </VDefaultsProvider>
             ),
           }}
