@@ -32,7 +32,7 @@
 
             <div
               v-else-if="user.one.devmode && file"
-              class="text-body-2 ma-1 text-medium-emphasis"
+              class="text-body-medium ma-1 text-medium-emphasis"
             >
               <v-icon icon="mdi-file-tree" />
 

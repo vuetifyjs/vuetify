@@ -1,20 +1,20 @@
 <template>
   <v-sheet
     class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4"
-    elevation="4"
+    elevation="2"
     height="250"
     max-width="800"
     width="100%"
     rounded
   >
     <div>
-      <h2 class="text-h4 font-weight-black text-orange my-0">Congratulations!</h2>
+      <h2 class="text-headline-large font-weight-black text-orange my-0">Congratulations!</h2>
 
-      <div class="text-h5 font-weight-medium mb-2">
+      <div class="text-headline-small font-weight-medium mb-2">
         You are officially a part of the Vuetify Community!
       </div>
 
-      <p class="text-body-2 mb-4">
+      <p class="text-body-medium mb-4">
         Please head over to your inbox/spam or others folder to find our verification email.
       </p>
 

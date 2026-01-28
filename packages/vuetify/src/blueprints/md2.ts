@@ -19,6 +19,7 @@ export const md2: Blueprint = {
       color: 'primary',
     },
     VBtn: {
+      class: 'text-uppercase',
       color: 'primary',
     },
     VCheckbox: {

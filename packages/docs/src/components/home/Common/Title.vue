@@ -8,12 +8,12 @@
       </p>
     </slot>
 
-    <h4 class="text-h4 font-weight-bold mb-5 mt-0">
+    <h4 class="text-headline-large font-weight-bold mb-5 mt-0">
       {{ props.title }}
     </h4>
 
     <v-responsive class="mx-auto" max-width="700">
-      <h6 class="text-h6 font-weight-regular text-medium-emphasis my-0">
+      <h6 class="text-title-large font-weight-regular text-medium-emphasis my-0">
         {{ props.description }}
       </h6>
     </v-responsive>

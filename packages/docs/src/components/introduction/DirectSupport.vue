@@ -11,15 +11,15 @@
       <AppSheet class="text-center px-10 py-8">
         <v-avatar :image="person.image" size="x-large" />
 
-        <div class="text-h6 text-high-emphasis mb-8">
+        <div class="text-title-large text-high-emphasis mb-8">
           {{ person.name }}
 
-          <small class="text-caption d-block text-medium-emphasis">
+          <small class="text-body-small d-block text-medium-emphasis">
             {{ person.title }}
           </small>
         </div>
 
-        <div class="text-h5 font-weight-black">
+        <div class="text-headline-small font-weight-black">
           <span class="text-high-emphasis">${{ person.price }}</span>
 
           <small class="font-weight-regular"> / {{ person.duration }}mins</small>

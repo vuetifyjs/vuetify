@@ -30,9 +30,10 @@
     "update:selected": "Emitted when the list item is selected."
   },
   "slots": {
-    "divider": "Slot for the divider.",
-    "header": "Slot for the header.",
-    "subheader": "Removes the top padding from `v-list-subheader` components. When used as a **String**, renders a subheader for you.",
+    "item": "Slot for rendering custom list items. Receives `{ props }` where `props` contains item data (`title`, `subtitle`, `value`, etc.) plus `index` (the item's position in the list). Use this to completely customize item rendering while still using VList's navigation and selection features.",
+    "divider": "Slot for rendering custom dividers. Receives `{ props }` containing divider item data including `value`. Note: dividers do not receive `index` since they are not navigable items.",
+    "subheader": "Slot for rendering custom subheaders. Receives `{ props }` containing subheader item data including `title` and `value`. Note: subheaders do not receive `index` since they are not navigable items.",
+    "header": "Slot for rendering custom group headers when using nested items. Receives `{ props }` containing the group's header item data plus activator props for expand/collapse functionality.",
     "children": "Slot for the children.",
     "focus": "Slot for the focus.",
     "open": "Slot for the open.",

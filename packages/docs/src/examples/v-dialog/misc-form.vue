@@ -114,7 +114,7 @@
             </v-col>
           </v-row>
 
-          <small class="text-caption text-medium-emphasis">*indicates required field</small>
+          <small class="text-body-small text-medium-emphasis">*indicates required field</small>
         </v-card-text>
 
         <v-divider></v-divider>

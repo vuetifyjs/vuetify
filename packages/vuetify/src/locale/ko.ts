@@ -130,6 +130,9 @@ export default {
     notEmpty: '최소 하나의 값을 선택해주세요',
     pattern: '형식이 유효하지 않습니다',
   },
+  command: {
+    search: '명령을 입력하거나 검색하세요...',
+  },
   hotkey: {
     then: '그 다음',
     ctrl: 'Ctrl',

@@ -97,6 +97,22 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
+## Typography
+
+The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
+
+| MD2 (Legacy)           | MD3 (New)                                             |
+|------------------------|-------------------------------------------------------|
+| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
+| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
+| `subtitle-1`, `body-1` | `body-large`                                          |
+| `body-2`               | `body-medium`                                         |
+| `caption`              | `body-small`                                          |
+| `button`, `subtitle-2` | `label-large`                                         |
+| `overline`             | `label-small`                                         |
+
+For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
+
 ### Breakpoints
 
 The default breakpoints have been reduced to better match modern device sizes:
@@ -138,6 +154,10 @@ export default createVuetify({
 );
 ```
 
+### Elevation
+
+Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24). See [Elevation migration](/getting-started/elevation-migration) for details and tips to restore legacy MD2 levels if needed.
+
 ## Themes
 
 The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
@@ -171,19 +191,7 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
 
 The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
-- Set it in the Sass variables for typography:
-
-```scss
-@use 'vuetify/settings' with (
-  $typography: (
-    'button': (
-      'text-transform': 'uppercase',
-    ),
-  ),
-)
-```
-
-- Or set it in the Sass variables for buttons:
+- Set it in the Sass variables for buttons:
 
 ```scss
 @use 'vuetify/settings' with (
@@ -245,18 +253,6 @@ The **$counter-color** and `color` was replaced in favor of opacity. If you modi
   opacity: 1;
   color: /* your $counter-color */;
 }
-```
-
-### VField
-
-In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
-
-The **$field-clearable-margin** Sass variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
-
-```diff { resource="styles/styles.scss"}
-  @use 'vuetify/settings' with (
--   $field-clearable-margin: 8px,
-+   $field-gap: 8px,
 ```
 
 ### VFileInput

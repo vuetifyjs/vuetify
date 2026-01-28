@@ -15,7 +15,7 @@
         </template>
       </HomeCommonTitle>
 
-      <HomeCommonMarquee :items="features" class="my-5">
+      <HomeCommonMarquee :items="features" class="my-4">
         <template #default="{ item }">
           <a :href="item.href" :title="`Visit ${item.href}`" target="_blank">
             <v-img

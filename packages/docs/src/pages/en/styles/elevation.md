@@ -13,37 +13,20 @@ features:
 
 # Elevation
 
-The elevation helpers control the relative depth between surfaces along the **z-axis**.
+The elevation helpers control the relative depth between surfaces along the **z-axis**. Following Material Design 3 guidelines, Vuetify uses 6 elevation levels (0-5). Elevation values are measured in **dp** (density-independent pixels), a unit that ensures consistent sizing across different screen densities.
 
 <PageFeatures />
 
-| Class | Properties |
-| - | - |
-| **elevation-0** | elevation: 0px; |
-| **elevation-1** | elevation: 1px; |
-| **elevation-2** | elevation: 2px; |
-| **elevation-3** | elevation: 3px; |
-| **elevation-4** | elevation: 4px; |
-| **elevation-5** | elevation: 5px; |
-| **elevation-6** | elevation: 6px; |
-| **elevation-7** | elevation: 7px; |
-| **elevation-8** | elevation: 8px; |
-| **elevation-9** | elevation: 9px; |
-| **elevation-10** | elevation: 10px; |
-| **elevation-11** | elevation: 11px; |
-| **elevation-12** | elevation: 12px; |
-| **elevation-13** | elevation: 13px; |
-| **elevation-14** | elevation: 14px; |
-| **elevation-15** | elevation: 15px; |
-| **elevation-16** | elevation: 16px; |
-| **elevation-17** | elevation: 17px; |
-| **elevation-18** | elevation: 18px; |
-| **elevation-19** | elevation: 19px; |
-| **elevation-20** | elevation: 20px; |
-| **elevation-21** | elevation: 21px; |
-| **elevation-22** | elevation: 22px; |
-| **elevation-23** | elevation: 23px; |
-| **elevation-24** | elevation: 24px; { style="max-height: 420px;" fixed-header }|
+| Class           | Level (dp) | Usage                                 |
+|-----------------|------------|---------------------------------------|
+| **elevation-0** | 0dp        | No shadow - flat surfaces             |
+| **elevation-1** | 1dp        | Cards, buttons (elevated)             |
+| **elevation-2** | 3dp        | Menus, rich tooltip, floating app bar |
+| **elevation-3** | 6dp        | Dialogs, snackbars, FABs              |
+| **elevation-4** | 8dp        | Dragged elements                      |
+| **elevation-5** | 12dp       |                                       |
+
+In MD3, elevation changes are commonly used to indicate interactive states. For example, a card at rest might use `elevation-1`, rising to `elevation-2` on hover and `elevation-3` when pressed or dragged.
 
 <PromotedEntry />
 

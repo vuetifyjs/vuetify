@@ -136,7 +136,7 @@ export const makeSliderProps = propsFactory({
 
   ...makeRoundedProps(),
   ...makeElevationProps({
-    elevation: 2,
+    elevation: 1,
   }),
   ripple: {
     type: Boolean,

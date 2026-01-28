@@ -16,14 +16,14 @@
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col cols="12" md="4">
             <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
-              <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
+              <h3 class="d-flex align-center text-title-large font-weight-medium mb-4">
                 <v-avatar :image="tier.src" class="me-3" />
 
                 <div>
                   {{ tier.name }}
 
-                  <div class="text-h5 font-weight-bold">
-                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium text-medium-emphasis text-body-2">{{ tier.suffix }}</span>
+                  <div class="text-headline-small font-weight-bold">
+                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium text-medium-emphasis text-body-medium">{{ tier.suffix }}</span>
                   </div>
                 </div>
               </h3>
@@ -39,12 +39,12 @@
                 block
               />
 
-              <div class="text-caption">{{ tier.text }}</div>
+              <div class="text-body-small">{{ tier.text }}</div>
             </v-responsive>
 
             <v-divider class="mb-4" />
 
-            <ul class="text-caption ps-1" style="list-style-type: none;">
+            <ul class="text-body-small ps-1" style="list-style-type: none;">
               <li v-for="(benefit, k) in tier.benefits" :key="k" class="mb-2 d-flex">
                 <div class="me-2">{{ benefit.emoji }}</div>
 
@@ -62,7 +62,7 @@
       </v-row>
     </v-container>
 
-    <div class="px-4 pb-3 text-medium-emphasis text-caption">
+    <div class="px-4 pb-3 text-medium-emphasis text-body-small">
       *View more detailed information on our <AppLink
         href="https://discord.com/servers/vuetify-340160225338195969"
       >

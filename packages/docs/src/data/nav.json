@@ -257,6 +257,10 @@
         "subfolder": "components"
       },
       {
+        "title": "command-palettes",
+        "subfolder": "components"
+      },
+      {
         "title": "date-inputs",
         "subfolder": "components"
       },

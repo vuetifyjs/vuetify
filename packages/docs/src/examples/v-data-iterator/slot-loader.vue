@@ -28,13 +28,13 @@
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
-                <strong class="text-h6">
+                <strong class="text-title-large">
                   {{ item.raw.name }}
                 </strong>
               </template>
             </v-list-item>
 
-            <v-table class="text-caption" density="compact">
+            <v-table class="text-body-small" density="compact">
               <tbody>
                 <tr align="right">
                   <th>DPI:</th>

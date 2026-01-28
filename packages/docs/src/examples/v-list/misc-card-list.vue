@@ -20,7 +20,7 @@
         <v-spacer></v-spacer>
 
         <v-card-title class="pb-6 text-center">
-          <div class="text-h4">Ali Conners</div>
+          <div class="text-headline-large">Ali Conners</div>
         </v-card-title>
       </div>
     </v-img>

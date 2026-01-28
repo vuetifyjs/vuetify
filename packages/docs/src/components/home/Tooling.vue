@@ -46,7 +46,7 @@
 
                           <v-icon :class="isHovering ? 'opacity-100' : 'opacity-0'" icon="mdi-open-in-new" size="xs" />
                         </a>
-                        <div class="text-caption text-medium-emphasis d-sm-none">{{ item.type }}</div>
+                        <div class="text-body-small text-medium-emphasis d-sm-none">{{ item.type }}</div>
                       </div>
                     </div>
                   </td>

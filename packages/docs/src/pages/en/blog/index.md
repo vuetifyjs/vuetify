@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## December 2025 Update
+
+🖊️ John Leider • 📅 January 12th, 2026
+
+December was our most productive month of 2025 with 522 commits across 16 repositories. The month delivered Vuetify 4.0.0-alpha.0 with CSS layers, six v3.11.x patches, the Vuetify CLI public release, Google OAuth for Vuetify One, PWA support across all ecosystem products, and 6 Vuetify0 releases with new composables including usePagination, useClickOutside, and useVirtual... { .text-medium-emphasis }
+
+[Read More](/blog/december-2025-update/) { .text-end }
+
 ## Vuetify Project baseline with Nuxt and UnoCSS
 
 🖊️ Jacek Czarniecki • 📅 December 22th, 2025

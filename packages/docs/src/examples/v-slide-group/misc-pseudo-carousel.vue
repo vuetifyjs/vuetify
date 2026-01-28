@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="3"
     max-width="800"
   >
     <v-slide-group
@@ -42,7 +42,7 @@
         height="200"
       >
         <div class="d-flex fill-height align-center justify-center">
-          <h3 class="text-h6 my-0">
+          <h3 class="text-title-large my-0">
             Selected {{ model }}
           </h3>
         </div>

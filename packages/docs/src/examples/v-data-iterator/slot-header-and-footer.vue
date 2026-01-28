@@ -4,7 +4,7 @@
     :items-per-page="itemsPerPage"
   >
     <template v-slot:header="{ page, pageCount, prevPage, nextPage }">
-      <h1 class="text-h4 font-weight-bold d-flex justify-space-between mt-0 mb-4 align-center">
+      <h1 class="text-headline-large font-weight-bold d-flex justify-space-between mt-0 mb-4 align-center">
         <div class="text-truncate">
           Most popular mice
         </div>
@@ -64,13 +64,13 @@
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
-                <strong class="text-h6">
+                <strong class="d-block text-title-large py-2 text-truncate">
                   {{ item.raw.name }}
                 </strong>
               </template>
             </v-list-item>
 
-            <v-table class="text-caption" density="compact">
+            <v-table class="text-body-small" density="compact">
               <tbody>
                 <tr align="right">
                   <th>DPI:</th>
@@ -110,7 +110,7 @@
 
     <template v-slot:footer="{ page, pageCount }">
       <v-footer
-        class="justify-space-between text-body-2 mt-4"
+        class="justify-space-between text-body-medium mt-4"
         color="surface-variant"
       >
         Total mice: {{ mice.length }}

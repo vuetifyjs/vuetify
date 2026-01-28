@@ -4,7 +4,7 @@
     max-width="420"
     width="100%"
   >
-    <h3 class="text-h6 mt-0 mb-2">
+    <h3 class="text-title-large mt-0 mb-2">
       Please enter the one time password to verify your account
     </h3>
 

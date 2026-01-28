@@ -9,7 +9,7 @@
     <v-card
       class="mt-n12 mx-auto"
       color="secondary"
-      elevation="12"
+      elevation="4"
       height="200"
       max-width="300"
     >

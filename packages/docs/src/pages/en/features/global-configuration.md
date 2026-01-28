@@ -23,7 +23,7 @@ Vuetify allows you to set default prop values globally or per component when set
 
 ## Setup
 
-Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `4` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
+Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `2` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -35,7 +35,7 @@ export default createVuetify({
       ripple: false,
     },
     VBtn: {
-      elevation: 4,
+      elevation: 2,
       prependIcon: "$vuetify",
     },
   },
