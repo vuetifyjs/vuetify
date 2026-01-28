@@ -41,5 +41,6 @@
           --v-col-size: #{$i}
 
       @for $i from 0 through $columns - 1
-        .v-col-offset#{$infix}-#{$i}
-          --v-col-offset: #{$i}
+        @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
+          .v-col-offset#{$infix}-#{$i}
+            --v-col-offset: #{$i}
