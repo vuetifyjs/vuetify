@@ -416,7 +416,7 @@ describe('VAutocomplete', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
       const selectedItems = ['Item 1', 'Item 2']
 
-      render(() => (
+      const { element } = render(() => (
         <VAutocomplete
           items={ items }
           modelValue={ selectedItems }
@@ -425,8 +425,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      const menuIcon = screen.getByRole('button', { name: /open/i })
-      await userEvent.click(menuIcon)
+      await userEvent.click(element)
       await commands.waitStable('.v-list')
 
       const listItems = screen.getAllByRole('option')

@@ -17,6 +17,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
 
@@ -41,6 +42,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   hideWeekdays: Boolean,
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
   showWeek: Boolean,
+  readonly: Boolean,
   transition: {
     type: String,
     default: 'picker-transition',
@@ -60,7 +62,13 @@ export const makeVDatePickerMonthProps = propsFactory({
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
-export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
+export const VDatePickerMonth = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VDatePickerMonthSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDatePickerMonth',
 
   props: makeVDatePickerMonthProps(),
@@ -254,6 +262,7 @@ export const VDatePickerMonth = genericComponent<VDatePickerMonthSlots>()({
                   class: 'v-date-picker-month__day-btn',
                   color: item.isSelected || item.isToday ? props.color : undefined,
                   disabled: item.isDisabled,
+                  readonly: props.readonly,
                   icon: true,
                   ripple: false,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',

@@ -113,13 +113,18 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  return describe('Showcase', () => {
-    it.each([
+  // Save time by only rendering variants if we're taking screenshots
+  const matrix = (globalThis as any).__VIZZLY_SERVER_URL__
+    ? [
       ['light', 'mobile'],
       ['light', 'desktop'],
       ['dark', 'mobile'],
       ['dark', 'desktop'],
-    ] as const)('%s %s', async (theme, device) => {
+    ] as const
+    : [['light', 'desktop']] as const
+
+  return describe('Showcase', () => {
+    it.each(matrix)('%s %s', async (theme, device) => {
       const style = document.createElement('style')
       style.innerHTML = `
         *, *::before, *::after {
@@ -160,7 +165,7 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
 
       await page.viewport({ mobile: 600, desktop: 1280 }[device], document.body.scrollHeight)
       await waitIdle()
-      await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
+      await expect.soft(page).toMatchScreenshot(name.trim(), {
         properties: { device, theme },
       })
     })
