@@ -14,4 +14,3 @@ meta:
 
 <DashboardActivityTable v-if="auth.user" />
 <VoAuthCard class="mt-10" v-else />
-
