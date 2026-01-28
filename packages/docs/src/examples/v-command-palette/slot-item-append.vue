@@ -37,20 +37,20 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { ref } from 'vue'
   import { useDate } from 'vuetify'
 
   const model = ref(false)
   const adapter = useDate()
 
-  function futureTime (minutes: number) {
+  function futureTime (minutes) {
     const d = new Date()
     d.setMinutes(d.getMinutes() + minutes)
     return new Intl.DateTimeFormat(adapter.locale, { hour: 'numeric', minute: 'numeric' }).format(d)
   }
 
-  function futureDay (days: number, hour = 9) {
+  function futureDay (days, hour = 9) {
     const d = new Date()
     d.setDate(d.getDate() + days)
     d.setHours(hour)
