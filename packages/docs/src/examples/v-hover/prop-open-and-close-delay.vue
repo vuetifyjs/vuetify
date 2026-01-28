@@ -10,7 +10,7 @@
       >
         <v-card
           :class="{ 'on-hover': isHovering }"
-          :elevation="isHovering ? 16 : 2"
+          :elevation="isHovering ? 4 : 1"
           class="mx-auto"
           height="350"
           max-width="350"
@@ -33,7 +33,7 @@
       >
         <v-card
           :class="{ 'on-hover': isHovering }"
-          :elevation="isHovering ? 16 : 2"
+          :elevation="isHovering ? 4 : 1"
           class="mx-auto"
           height="350"
           max-width="350"

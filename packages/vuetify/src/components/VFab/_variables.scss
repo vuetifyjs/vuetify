@@ -12,6 +12,8 @@ $fab-transition-duration: 0.2s !default;
 $fab-transition-timing-function: settings.$standard-easing !default;
 $fab-width-ratio: math.div(16, 9) !default;
 $fab-padding-ratio: 2.25 !default;
+$fab-elevation: 3 !default;
+$fab-hover-elevation: 4 !default;
 
 $fab-size-scales: (
   'x-small': -2,

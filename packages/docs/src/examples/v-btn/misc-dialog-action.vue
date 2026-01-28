@@ -18,7 +18,7 @@
         v-if="dialog"
         append-icon="$close"
         class="mx-auto"
-        elevation="16"
+        elevation="4"
         max-width="500"
         title="Send a receipt"
       >

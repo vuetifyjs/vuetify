@@ -3,7 +3,7 @@
     <v-date-picker
       :max="new Date()"
       class="weekdays-primary"
-      elevation="24"
+      elevation="5"
       weekday-format="short"
       hide-header
     >
@@ -18,7 +18,7 @@
         <v-btn :disabled="disabled.includes('next-month')" color="primary" icon="$next" @click="nextMonth"></v-btn>
       </template>
     </v-date-picker>
-    <v-date-picker :max="new Date()" elevation="24" min="2000-09-15" hide-header>
+    <v-date-picker :max="new Date()" elevation="5" min="2000-09-15" hide-header>
       <template v-slot:controls="{ monthText, yearText, openMonths, openYears }">
         <v-sheet class="w-100 d-flex align-center rounded-lg pa-1 ga-1" color="rgba(var(--v-theme-on-surface), .2)">
           <v-btn :text="monthText" append-icon="$dropdown" class="bg-surface px-2" @click="openMonths"></v-btn>

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex my-6 justify-center">
-    <v-card class="pa-6" elevation="6" rounded="xl">
+    <v-card class="pa-6" elevation="2" rounded="xl">
       <v-card-title class="d-flex align-center justify-space-between">
         <div class="text-truncate mr-6">Expenses</div>
         <v-select

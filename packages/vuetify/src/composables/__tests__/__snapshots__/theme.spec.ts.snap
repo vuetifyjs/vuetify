@@ -50,6 +50,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -66,6 +67,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   .v-theme--light {
     color-scheme: normal;
@@ -110,6 +113,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -126,6 +130,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   .v-theme--dark {
     color-scheme: dark;
@@ -170,6 +176,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
     --v-disabled-opacity: 0.5;
@@ -186,6 +193,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 204, 204, 204;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: white;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   }
   @layer theme-background {
@@ -425,6 +434,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -441,6 +451,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   :where(#my-app) .v-theme--light {
     color-scheme: normal;
@@ -485,6 +497,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -501,6 +514,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   :where(#my-app) .v-theme--dark {
     color-scheme: dark;
@@ -545,6 +560,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
     --v-disabled-opacity: 0.5;
@@ -561,6 +577,8 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-code: 204, 204, 204;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: white;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   }
   @layer theme-background {
@@ -805,6 +823,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -821,6 +840,8 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   .v-theme--light {
     color-scheme: normal;
@@ -865,6 +886,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
     --v-disabled-opacity: 0.38;
@@ -881,6 +903,8 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-code: 0, 0, 0;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: black;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   .v-theme--dark {
     color-scheme: dark;
@@ -925,6 +949,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
     --v-disabled-opacity: 0.5;
@@ -941,6 +966,8 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-code: 204, 204, 204;
     --v-theme-on-dark: 255, 255, 255;
     --v-theme-on-light: 0, 0, 0;
+    --v-elevation-overlay-color: white;
+    --v-elevation-overlay-opacity-step: 2%;
   }
   }
   @layer theme-background {
