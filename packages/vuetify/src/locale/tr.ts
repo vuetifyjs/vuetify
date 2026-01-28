@@ -130,6 +130,9 @@ export default {
     notEmpty: 'Lütfen en az bir değer seçin',
     pattern: 'Geçersiz biçim',
   },
+  command: {
+    search: 'Komut yazın veya arayın...',
+  },
   hotkey: {
     then: 'sonra',
     ctrl: 'Ctrl',
