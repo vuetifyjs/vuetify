@@ -20,14 +20,14 @@ export default {
         if (!obj || obj.type !== 'Identifier' || obj.name !== 'slots') return
 
         const slotAccess = (!callee.computed && callee.property && callee.property.type === 'Identifier')
-          ? `slots.${callee.property.name}`
-          : `slots[${sourceCode.getText(callee.property)}]`
+          ? `'${callee.property.name}'`
+          : sourceCode.getText(callee.property)
 
         context.report({
           node,
           message: `Use renderSlot for slot fallback instead of "??"`,
           fix (fixer) {
-            let result = `renderSlot(${slotAccess}, `
+            let result = `renderSlot(slots, ${slotAccess}, `
             if (left.arguments && left.arguments.length) {
               result += sourceCode.getText(left.arguments[0]) + ', '
             }

@@ -235,7 +235,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               }
 
               return renderSlot(
-                slots.header,
+                slots, 'header',
                 { props: listItemProps, item: item.raw, internalItem: item, loading },
                 () => renderItem({
                   ...listItemProps,
@@ -261,19 +261,19 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           }}
         </VTreeviewGroup>
       ) : renderSlot(
-        slots.item,
+        slots, 'item',
         { props: itemProps, item: item.raw, internalItem: item },
         () => {
           if (item.type === 'divider') {
             return renderSlot(
-              slots.divider,
+              slots, 'divider',
               { props: item.raw },
               () => <VDivider { ...item.props } />,
             )
           }
           if (item.type === 'subheader') {
             return renderSlot(
-              slots.subheader,
+              slots, 'subheader',
               { props: item.raw },
               () => <VListSubheader { ...item.props } />,
             )

@@ -7,7 +7,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
 
 export type VResponsiveSlots = {
   default: never
@@ -58,10 +58,10 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
       >
         <div class="v-responsive__sizer" style={ aspectStyles.value } />
 
-        { slots.additional?.() }
+        { renderSlot(slots, 'additional') }
 
         { slots.default && (
-          <div class={['v-responsive__content', props.contentClass]}>{ slots.default() }</div>
+          <div class={['v-responsive__content', props.contentClass]}>{ renderSlot(slots, 'default') }</div>
         )}
       </div>
     ))

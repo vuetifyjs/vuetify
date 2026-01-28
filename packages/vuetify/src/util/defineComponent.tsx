@@ -154,7 +154,7 @@ export type SlotsToProps<
 
 type RawSlots = Record<string, unknown>
 type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
-type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
+export type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
 type MakeInternalSlots<T extends RawSlots> = {
   [K in keyof T]: Slot<T[K]>
 }

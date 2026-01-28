@@ -3,11 +3,13 @@ import {
   camelize,
   capitalize,
   Comment,
+  createBlock,
   Fragment,
   isProxy,
   isReactive,
   isRef,
   isVNode,
+  openBlock,
   reactive,
   shallowRef,
   toRaw,
@@ -714,13 +716,59 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
     : null
 }
 
-type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+type Slot<T> = [T] extends [never] ? () => VNode | VNode[] : (arg: T) => VNode | VNode[]
+type ContextualRenderFn = {
+  (...args: unknown[]): VNode | VNode[]
+  _n: boolean /* already normalized */
+  _c: boolean /* compiled */
+  _d: boolean /* disableTracking */
+  _ns: boolean /* nonScoped */
+}
 
-export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
-export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
-export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
-  // TODO: check if slot returns elements: #18308
-  return slot?.(props) ?? fallback?.(props)
+export function renderSlot<
+  N extends string,
+  S extends { [k in N]?: Slot<any> },
+  A extends S[N] extends Slot<never> | undefined
+    ? [] | [fallback: Slot<never> | undefined]
+    : S[N] extends Slot<infer T> | undefined
+      ? [props: T, fallback?: Slot<T> | undefined]
+      : never
+> (slots: S, name: N, ...[propsOrFallback, maybeFallback]: NoInfer<A>): VNode {
+  const props = typeof propsOrFallback === 'function' ? undefined : propsOrFallback
+  const fallback = typeof propsOrFallback === 'function' ? propsOrFallback : maybeFallback
+  const slot = slots[name] as ContextualRenderFn | undefined
+
+  // a compiled slot disables block tracking by default to avoid manual
+  // invocation interfering with template-based block tracking, but in
+  // `renderSlot` we can be sure that it's template-based so we can force
+  // enable it.
+  if (slot && slot._c) {
+    slot._d = false
+  }
+  openBlock()
+  // TODO: use ensureValidVNode: #18308
+  const validSlotContent = slot && slot(props)
+  const slotKey =
+    // slot content array of a dynamic conditional slot may have a branch
+    // key attached in the `createSlots` helper, respect that
+    (validSlotContent && (validSlotContent as any).key)
+  const rendered = createBlock(
+    Fragment,
+    {
+      key: slotKey +
+        // vuejs/core#7256 force differentiate fallback content from actual content
+        (!validSlotContent && fallback ? '_fb' : ''),
+    },
+    validSlotContent || (fallback ? fallback(props) : []),
+    validSlotContent && (slots as any)._ === 1 /* STABLE */
+      ? 64 /* STABLE_FRAGMENT */
+      : -2 /* BAIL */,
+  )
+  if (slot && slot._c) {
+    (slot as ContextualRenderFn)._d = true
+  }
+
+  return rendered
 }
 
 export function defer (timeout: number, cb: () => void) {
