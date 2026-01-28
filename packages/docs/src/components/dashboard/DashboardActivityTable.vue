@@ -29,9 +29,9 @@
       item-value="id"
     >
       <template #item.title="{ item }">
-        <Jdenticon :value="item.id" />
+        <Jdenticon :value="item.slug" />
         <a
-          :href="properties[item.property].url + '/' + item.slug"
+          :href="properties[item.property].urlPrefix + '/' + item.slug"
           class="text-decoration-none ml-2 on-surface"
           target="_blank"
         >
@@ -55,7 +55,6 @@
 
       <template #item.property="{ item }">
         <v-chip
-          :href="properties[item.property].url"
           size="small"
           target="_blank"
         >
@@ -104,25 +103,25 @@
 
   const itemsPerPageOptions = [{ value: 10, title: '10' }, { value: 25, title: '25' }]
 
-  const properties: Record<string, { name: string, url: string, img: string }> = {
+  const properties: Record<string, { name: string, urlPrefix: string, img: string }> = {
     'default::Bin': {
       name: 'Bin',
-      url: 'https://bin.vuetifyjs.com/bins',
+      urlPrefix: 'https://bin.vuetifyjs.com/bins',
       img: 'vbin.svg',
     },
     'default::Playground': {
       name: 'Play',
-      url: 'https://play.vuetifyjs.com/playgrounds',
+      urlPrefix: 'https://play.vuetifyjs.com/playgrounds',
       img: 'vplay.svg',
     },
     'default::Link': {
       name: 'Link',
-      url: 'https://link.vuetifyjs.com/links',
+      urlPrefix: 'https://link.vuetifyjs.com/links',
       img: 'vlink.svg',
     },
     'default::Studios': {
       name: 'Studio',
-      url: 'https://studio.vuetifyjs.com/projects',
+      urlPrefix: 'https://studio.vuetifyjs.com/projects',
       img: 'vstudio.svg',
     },
   }
