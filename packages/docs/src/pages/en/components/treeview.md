@@ -67,11 +67,17 @@ You can control the text and background color of the active treeview node.
 
 <ExamplesExample file="v-treeview/prop-color" />
 
-#### Dense mode
+#### Density
 
 Dense mode provides more compact layout with decreased heights of the items.
 
 <ExamplesExample file="v-treeview/prop-dense" />
+
+#### Items registration
+
+When working with large trees it is recommended to include `items-registration="props"` to ensure faster loading and interactions.
+
+<ExamplesExample file="v-treeview/prop-items-registration" />
 
 <!-- #### Hoverable
 

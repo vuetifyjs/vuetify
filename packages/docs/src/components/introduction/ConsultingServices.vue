@@ -13,7 +13,7 @@
 
     <v-container class="pt-9 px-5" fluid>
       <v-row justify="space-around" dense>
-        <template v-for="({ text, href, name, btnText, notes }, i) in cards" :key="i">
+        <template v-for="({ text, href, name, btnText, notes, extra }, i) in cards" :key="i">
           <v-col cols="12" md="6">
             <v-responsive class="h-100" content-class="d-flex flex-column">
               <h3 class="d-flex align-center text-title-large font-weight-medium mb-4">
@@ -25,6 +25,10 @@
                 <ul v-if="notes && notes.length" class="mb-0 ml-5">
                   <li v-for="(item, j) in notes" :key="j">{{ item }}</li>
                 </ul>
+              </div>
+
+              <div v-if="extra" class="mb-auto text-caption mt-4">
+                {{ extra }}
               </div>
 
               <v-btn
@@ -80,6 +84,18 @@
       href: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1ICL1_pVx87WpbxCeAKPNljw8Wr8Og4-NuzbUV-RHlxs-c_B8s2nYZ0RAWPcVqTx4Dn568c5OA',
       text: 'Scale your team with Epicmax’s senior Vue.js and Vuetify developers. Our engineers seamlessly integrate into your workflow, modernize legacy Vue.js applications, optimize frontend performance, and build scalable web applications with clean, reliable UI/UX.',
       btnText: 'Hire Developers',
+    },
+    {
+      name: '🤔 Not Sure if You Should Migrate?',
+      href: 'https://calendar.app.google/XwRzASZitZRSVLxq6',
+      text: 'If you\'re unsure about migrating from Vuetify 2 to Vuetify 3, Epicmax offers a free consultation with our technical lead to help you decide:',
+      notes: [
+        'Is now the best time to migrate?',
+        'What’s the real effort and cost?',
+        'What risks should you prepare for?',
+      ],
+      extra: 'You’ll get a complete technical and business roadmap — so you can migrate now or later with confidence.',
+      btnText: 'Get Free Expert Advice',
     },
   ]
 </script>

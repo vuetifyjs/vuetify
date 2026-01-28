@@ -26,39 +26,41 @@ The following is a list of all planned components for the year 2025.
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
-| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q4 2025         |
+| [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
 | [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
 
 ### New form components and features
 
-| Name                                                            | Entering Labs | Production Release |
-|-----------------------------------------------------------------|---------------|--------------------|
-| [validation rules](/features/rules)                             | *             | Q4 2025            |
-| [v-file-upload](/components/file-upload/)                       | *             | Q4 2025            |
-| [v-date-input](/components/date-inputs/)                        | *             | Q4 2025            |
-| [v-color-input](/components/color-inputs/)                      | *             | Q1 2026            |
-| [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | Q3 2025       | Q2 2026            |
-| [v-editor](https://github.com/vuetifyjs/vuetify/pull/21653)     | Q3 2025       | TBD                |
-| v-month-picker                                                  | Q4 2025       | TBD                |
-| v-date-range-picker                                             | Q4 2025       | TBD                |
-| v-date-time-picker                                              | Q4 2025       | TBD                |
+| Name                                                              | Entering Labs | Production Release |
+|-------------------------------------------------------------------|---------------|--------------------|
+| [validation rules](/features/rules)                               | *             | Q1 2026            |
+| [v-file-upload](/components/file-upload/)                         | *             | Q1 2026            |
+| [v-date-input](/components/date-inputs/)                          | *             | Q1 2026            |
+| [v-color-input](/components/color-inputs/)                        | *             | Q1 2026            |
+| [v-mask-input](/components/mask-inputs/)                          | *             | Q2 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)   | Q1 2026       | Q3 2026            |
+| [v-month-picker](https://github.com/vuetifyjs/vuetify/pull/22534) | Q1 2026       | TBD                |
+| v-date-time-picker                                                | Q1 2026       | TBD                |
+| v-date-range-picker                                               | Q2 2026       | TBD                |
+| v-password-input                                                  | Q2 2026       | TBD                |
+| [v-editor](https://github.com/vuetifyjs/vuetify/pull/21653)       | TBD           | TBD                |
 
 \* Already in Labs { .text-body-small }
 
 ### Other components and features
 
-| Name                                                       | Entering Labs | Production Release |
-|------------------------------------------------------------|---------------|--------------------|
-| [v-icon-btn](/components/icon-buttons/)                    | *             | Q4 2025            |
-| [v-video](https://github.com/vuetifyjs/vuetify/pull/21460) | *             | TBD                |
-| [v-pie](https://github.com/vuetifyjs/vuetify/pull/21176)   | *             | TBD                |
-| v-command-palette                                          | TBD           | TBD                |
-| v-feature-discovery                                        | TBD           | TBD                |
-| v-split-btn                                                | TBD           | TBD                |
-| v-heatmap                                                  | TBD           | TBD                |
-| v-drag (directive)                                         | TBD           | TBD                |
-| v-chat                                                     | TBD           | TBD                |
+| Name                                                                 | Entering Labs | Production Release |
+|----------------------------------------------------------------------|---------------|--------------------|
+| [v-icon-btn](/components/icon-buttons/)                              | *             | Q1 2026            |
+| [v-video](/components/videos)                                        | *             | TBD                |
+| [v-pie](/components/pie-charts)                                      | *             | TBD                |
+| [v-command-palette](https://github.com/vuetifyjs/vuetify/pull/22403) | Q1 2026       | TBD                |
+| [v-avatar-group](https://github.com/vuetifyjs/vuetify/pull/22495)    | Q1 2026       | TBD                |
+| [v-heatmap](https://github.com/vuetifyjs/vuetify/pull/22535)         | Q2 2026       | TBD                |
+| v-split-btn                                                          | Q2 2026       | TBD                |
+| v-feature-discovery                                                  | TBD           | TBD                |
+| v-drag (directive)                                                   | TBD           | TBD                |
+| v-chat                                                               | TBD           | TBD                |
 
 \* Already in Labs { .text-body-small }
 

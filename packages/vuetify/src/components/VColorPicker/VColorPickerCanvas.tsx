@@ -87,8 +87,8 @@ export const VColorPickerCanvas = defineComponent({
 
       const { width, height } = entries[0].contentRect
 
-      canvasWidth.value = width
-      canvasHeight.value = height
+      canvasWidth.value = Math.round(width)
+      canvasHeight.value = Math.round(height)
     })
 
     function updateDotPosition (x: number, y: number, rect: DOMRect) {
