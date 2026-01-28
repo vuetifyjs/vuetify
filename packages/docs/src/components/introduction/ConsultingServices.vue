@@ -27,7 +27,7 @@
                 </ul>
               </div>
 
-              <div v-if="extra" class="mb-auto text-caption mt-4">
+              <div v-if="extra" class="mb-auto text-body-small mt-4">
                 {{ extra }}
               </div>
 

@@ -13,7 +13,7 @@
       placeholder="Search by name"
     >
       <template v-slot:prepend>
-        <div class="ma-2 text-subtitle-2">
+        <div class="ma-2 text-title-small">
           What are you looking for?
         </div>
 
@@ -41,7 +41,7 @@
         <div class="d-flex align-center">
           <v-list-subheader>{{ title }}</v-list-subheader>
           <v-btn
-            class="ml-auto my-n1 text-none"
+            class="ml-auto my-n1"
             size="small"
             tabindex="-1"
             text="See all"
