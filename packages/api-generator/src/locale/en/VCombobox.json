@@ -8,7 +8,9 @@
     "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props."
   },
   "slots": {
-    "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."
+    "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`.",
+    "menu-header": "Define a custom sticky header placed inside the menu.",
+    "menu-footer": "Define a custom sticky footer placed inside the menu."
   },
   "exposed": {
     "selectionIndex": "The index of the currently selected item."
