@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar color="transparent">
-      <v-toolbar-title class="text-h6">Settings</v-toolbar-title>
+      <v-toolbar-title class="text-title-large">Settings</v-toolbar-title>
     </v-toolbar>
 
     <v-tabs v-model="tab" color="primary">
@@ -31,7 +31,7 @@
                     @click="save('avatar')"
                   />
 
-                  <p class="text-body-2 text-medium-emphasis">JPG, GIF or PNG. 1MB max.</p>
+                  <p class="text-body-medium text-medium-emphasis">JPG, GIF or PNG. 1MB max.</p>
                 </div>
               </div>
             </v-col>
@@ -125,9 +125,9 @@
         <v-container class="px-md-6 py-5" fluid>
           <v-row>
             <v-col cols="12">
-              <h6 class="text-subtitle-1 font-weight-medium mb-1">Change password</h6>
+              <h6 class="text-body-large font-weight-medium mb-1">Change password</h6>
 
-              <p class="text-body-2 text-medium-emphasis">Update your password associated with your account.</p>
+              <p class="text-body-medium text-medium-emphasis">Update your password associated with your account.</p>
             </v-col>
 
             <v-col cols="12">
@@ -176,9 +176,9 @@
 
           <v-row>
             <v-col cols="12">
-              <h6 class="text-subtitle-1 font-weight-medium mb-1">Two-factor authentication</h6>
+              <h6 class="text-body-large font-weight-medium mb-1">Two-factor authentication</h6>
 
-              <p class="text-body-2 text-medium-emphasis">Add an extra layer of security to your account.</p>
+              <p class="text-body-medium text-medium-emphasis">Add an extra layer of security to your account.</p>
             </v-col>
 
             <v-col cols="12">
@@ -195,9 +195,9 @@
 
           <v-row>
             <v-col cols="12">
-              <h6 class="text-subtitle-1 font-weight-medium text-error mb-1">Danger zone</h6>
+              <h6 class="text-body-large font-weight-medium text-error mb-1">Danger zone</h6>
 
-              <p class="text-body-2 text-medium-emphasis mb-4">Permanently delete your account and all associated data.</p>
+              <p class="text-body-medium text-medium-emphasis mb-4">Permanently delete your account and all associated data.</p>
 
               <v-btn
                 :loading="saving === 'delete'"
@@ -217,9 +217,9 @@
         <v-container class="px-md-6 py-5" fluid>
           <v-row>
             <v-col cols="12">
-              <h6 class="text-subtitle-1 font-weight-medium mb-1">Email notifications</h6>
+              <h6 class="text-body-large font-weight-medium mb-1">Email notifications</h6>
 
-              <p class="text-body-2 text-medium-emphasis">Manage your email notification preferences.</p>
+              <p class="text-body-medium text-medium-emphasis">Manage your email notification preferences.</p>
 
               <v-list lines="two">
                 <v-list-item>

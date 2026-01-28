@@ -17,13 +17,13 @@
     />
 
     <div>
-      <h6 v-if="props.title" class="text-subtitle-1 font-weight-bold mb-2">
+      <h6 v-if="props.title" class="text-body-large font-weight-bold mb-2">
         {{ props.title }}
       </h6>
 
       <p
         v-if="props.description"
-        class="text-medium-emphasis text-body-2 text-center mb-0 mt-3 my-md-0"
+        class="text-medium-emphasis text-body-medium text-center mb-0 mt-3 my-md-0"
         style="line-height: 1.6;"
       >
         {{ props.description }}

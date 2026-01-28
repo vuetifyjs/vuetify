@@ -13,9 +13,9 @@
       size="112"
     ></v-icon>
 
-    <h2 class="text-h5 mt-0 mb-6">You reconciled this account</h2>
+    <h2 class="text-headline-small mt-0 mb-6">You reconciled this account</h2>
 
-    <p class="mb-4 text-medium-emphasis text-body-2">
+    <p class="mb-4 text-medium-emphasis text-body-medium">
       To see a report on this reconciliation, click <a class="text-decoration-none text-info" href="#">View reconciliation report.</a>
 
       <br>

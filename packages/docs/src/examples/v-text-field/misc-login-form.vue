@@ -12,7 +12,7 @@
       max-width="448"
       rounded="lg"
     >
-      <div class="text-subtitle-1 text-medium-emphasis">Account</div>
+      <div class="text-body-large text-medium-emphasis">Account</div>
 
       <v-text-field
         density="compact"
@@ -21,11 +21,11 @@
         variant="outlined"
       ></v-text-field>
 
-      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+      <div class="text-body-large text-medium-emphasis d-flex align-center justify-space-between">
         Password
 
         <a
-          class="text-caption text-decoration-none text-blue"
+          class="text-body-small text-decoration-none text-blue"
           href="#"
           rel="noopener noreferrer"
           target="_blank"
@@ -48,7 +48,7 @@
         color="surface-variant"
         variant="tonal"
       >
-        <v-card-text class="text-medium-emphasis text-caption">
+        <v-card-text class="text-medium-emphasis text-body-small">
           Warning: After 3 consecutive failed login attempts, you account will be temporarily locked for three hours. If you must login now, you can also click "Forgot login password?" below to reset the login password.
         </v-card-text>
       </v-card>

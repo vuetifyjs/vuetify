@@ -19,7 +19,7 @@
               <v-scroll-y-transition>
                 <div
                   v-if="isSelected"
-                  class="text-h2 flex-grow-1 text-center"
+                  class="text-display-large flex-grow-1 text-center"
                 >
                   Selected
                 </div>

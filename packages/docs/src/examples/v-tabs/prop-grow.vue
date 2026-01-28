@@ -1,7 +1,7 @@
 <template>
   <v-card color="basil">
     <v-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold text-h2 text-basil my-0">
+      <h1 class="font-weight-bold text-display-large text-basil my-0">
         BASiL
       </h1>
     </v-card-title>

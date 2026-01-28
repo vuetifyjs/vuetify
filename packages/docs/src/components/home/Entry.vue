@@ -11,11 +11,11 @@
             {{ t('home.entry.chip') }}
           </v-chip>
 
-          <h1 class="text-h3 text-md-h2 font-weight-bold my-5">
+          <h1 class="text-display-medium text-md-display-large font-weight-bold my-5">
             {{ t('home.entry.title-prefix') }} <br class="d-none d-md-block"> <span class="text-primary">{{ t('home.entry.title-highlight') }}</span> {{ t('home.entry.title-suffix') }}
           </h1>
 
-          <h2 class="text-h6 font-weight-regular text-medium-emphasis my-5">
+          <h2 class="text-title-large font-weight-regular text-medium-emphasis my-5">
             {{ t('home.entry.subtitle') }}
           </h2>
 
@@ -46,7 +46,7 @@
           <div class="d-flex flex-wrap ga-4 align-center">
             <v-hover v-slot="{ isHovering, props }">
               <v-sheet
-                class="px-2 py-2 d-inline-flex align-center text-mono text-body-2 text-no-wrap"
+                class="px-2 py-2 d-inline-flex align-center text-mono text-body-medium text-no-wrap"
                 color="surface"
                 rounded="lg"
                 border
@@ -106,7 +106,7 @@
               rounded="lg"
               border
             >
-              <span class="text-body-2 me-2">{{ t('home.entry.latest') }}</span>
+              <span class="text-body-medium me-2">{{ t('home.entry.latest') }}</span>
 
               <AppVersionBtn />
             </v-sheet>

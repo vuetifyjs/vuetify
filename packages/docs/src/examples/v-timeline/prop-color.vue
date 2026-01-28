@@ -8,7 +8,7 @@
         <strong class="me-4">5pm</strong>
         <div>
           <strong>New Icon</strong>
-          <div class="text-caption">
+          <div class="text-body-small">
             Mobile App
           </div>
         </div>
@@ -23,7 +23,7 @@
         <strong class="me-4">3-4pm</strong>
         <div>
           <strong>Design Stand Up</strong>
-          <div class="text-caption mb-2">
+          <div class="text-body-small mb-2">
             Hangouts
           </div>
         </div>
@@ -50,7 +50,7 @@
         <strong class="me-4">9-11am</strong>
         <div>
           <strong>Finish Home Screen</strong>
-          <div class="text-caption">
+          <div class="text-body-small">
             Web App
           </div>
         </div>

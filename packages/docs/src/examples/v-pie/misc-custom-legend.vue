@@ -32,7 +32,7 @@
       >
         <template v-slot:center>
           <div class="text-center">
-            <div class="text-h3">130</div>
+            <div class="text-display-medium">130</div>
             <div class="opacity-70 mt-1 mb-n1">Total</div>
           </div>
         </template>

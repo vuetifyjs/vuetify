@@ -10,11 +10,11 @@
             mdi-discord
           </v-icon>
 
-          <h4 class="text-h4 font-weight-bold mb-5 mt-0">
+          <h4 class="text-headline-large font-weight-bold mb-5 mt-0">
             {{ t('home.discord.title') }}
           </h4>
 
-          <p class="text-h6 font-weight-regular mb-6 w-100 w-md-50 mx-auto">
+          <p class="text-title-large font-weight-regular mb-6 w-100 w-md-50 mx-auto">
             {{ t('home.discord.description') }}
           </p>
 

@@ -97,6 +97,22 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
+## Typography
+
+The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
+
+| MD2 (Legacy)           | MD3 (New)                                             |
+|------------------------|-------------------------------------------------------|
+| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
+| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
+| `subtitle-1`, `body-1` | `body-large`                                          |
+| `body-2`               | `body-medium`                                         |
+| `caption`              | `body-small`                                          |
+| `button`, `subtitle-2` | `label-large`                                         |
+| `overline`             | `label-small`                                         |
+
+For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
+
 ### Breakpoints
 
 The default breakpoints have been reduced to better match modern device sizes:
@@ -175,19 +191,7 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
 
 The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
-- Set it in the Sass variables for typography:
-
-```scss
-@use 'vuetify/settings' with (
-  $typography: (
-    'button': (
-      'text-transform': 'uppercase',
-    ),
-  ),
-)
-```
-
-- Or set it in the Sass variables for buttons:
+- Set it in the Sass variables for buttons:
 
 ```scss
 @use 'vuetify/settings' with (

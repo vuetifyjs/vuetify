@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-space-around align-center">
     <div class="ma-4">
-      <div class="text-subtitle-2">Default</div>
+      <div class="text-title-small">Default</div>
       <v-img
         :aspect-ratio="1"
         class="bg-surface elevation-3"
@@ -11,7 +11,7 @@
     </div>
 
     <div class="ma-4">
-      <div class="text-subtitle-2">Cover</div>
+      <div class="text-title-small">Cover</div>
       <v-img
         :aspect-ratio="1"
         class="bg-surface elevation-3"

@@ -36,7 +36,7 @@
       <v-divider></v-divider>
     </v-card>
 
-    <v-footer class="justify-center text-caption" color="surface-variant">
+    <v-footer class="justify-center text-body-small" color="surface-variant">
       {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
     </v-footer>
   </v-card>

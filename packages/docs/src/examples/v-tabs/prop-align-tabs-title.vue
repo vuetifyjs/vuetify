@@ -43,13 +43,7 @@
 
   const tab = ref(null)
 
-  const items = [
-    'web',
-    'shopping',
-    'videos',
-    'images',
-    'news',
-  ]
+  const items = ['Web', 'Shopping', 'Videos', 'Images', 'News']
   const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 </script>
 
@@ -58,9 +52,7 @@
     data () {
       return {
         tab: null,
-        items: [
-          'web', 'shopping', 'videos', 'images', 'news',
-        ],
+        items: ['Web', 'Shopping', 'Videos', 'Images', 'News'],
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       }
     },

@@ -10,7 +10,7 @@
     </v-toolbar>
 
     <v-card-text>
-      <h2 class="text-h6 mt-0 mb-2">Choose amenities</h2>
+      <h2 class="text-title-large mt-0 mb-2">Choose amenities</h2>
 
       <v-chip-group
         v-model="amenities"
@@ -56,7 +56,7 @@
     </v-card-text>
 
     <v-card-text>
-      <h2 class="text-h6 mt-0 mb-2">Choose neighborhoods</h2>
+      <h2 class="text-title-large mt-0 mb-2">Choose neighborhoods</h2>
 
       <v-chip-group
         v-model="neighborhoods"

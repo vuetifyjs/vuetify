@@ -20,7 +20,7 @@
     </v-sheet>
 
     <v-card-text class="pt-0">
-      <div class="text-h6 font-weight-light mb-2">
+      <div class="text-title-large font-weight-light mb-2">
         User Registrations
       </div>
       <div class="subheading font-weight-light text-grey">
@@ -33,7 +33,7 @@
       >
         mdi-clock
       </v-icon>
-      <span class="text-caption text-grey font-weight-light">last registration 26 minutes ago</span>
+      <span class="text-body-small text-grey font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
   </v-card>
 </template>

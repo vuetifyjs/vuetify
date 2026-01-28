@@ -22,7 +22,7 @@
 
             <div class="d-flex flex-column ga-4">
               <div>
-                <h4 class="text-subtitle-1 mt-0 mb-2">Standard Display (Block-level)</h4>
+                <h4 class="text-body-large mt-0 mb-2">Standard Display (Block-level)</h4>
                 <div class="pa-3 border rounded">
                   <p class="mb-2">
                     Save your work with <v-hotkey :display-mode="displayMode" :platform="platform" keys="cmd+s"></v-hotkey>
@@ -36,9 +36,9 @@
               </div>
 
               <div>
-                <h4 class="text-subtitle-1 mt-0 mb-2">Inline Display (Text-integrated)</h4>
+                <h4 class="text-body-large mt-0 mb-2">Inline Display (Text-integrated)</h4>
                 <div class="pa-4 border rounded" style="line-height: 1.7;">
-                  <h4 class="text-h6 mt-0 mb-3">Getting Started with Code Editor</h4>
+                  <h4 class="text-title-large mt-0 mb-3">Getting Started with Code Editor</h4>
 
                   <p class="mb-3">
                     Welcome to your new development environment! Here are the essential keyboard shortcuts

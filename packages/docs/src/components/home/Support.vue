@@ -9,11 +9,11 @@
             {{ t('home.support.subtitle') }}
           </p>
 
-          <h4 class="text-h4 font-weight-bold my-5">
+          <h4 class="text-headline-large font-weight-bold my-5">
             {{ t('home.support.title') }}
           </h4>
 
-          <h6 class="text-h6 font-weight-regular text-medium-emphasis my-5">
+          <h6 class="text-title-large font-weight-regular text-medium-emphasis my-5">
             {{ t('home.support.description') }}
           </h6>
 

@@ -5,8 +5,8 @@
         class="justify-center align-center flex-column-reverse flex-md-row"
       >
         <v-col cols="12" md="6">
-          <h1 class="text-h1 mt-0 mb-8">John Doe</h1>
-          <h3 class="text-h3 mt-0 mb-8 font-weight-thin">Web Developer</h3>
+          <h1 class="text-display-large mt-0 mb-8">John Doe</h1>
+          <h3 class="text-display-medium mt-0 mb-8 font-weight-thin">Web Developer</h3>
           <v-btn class="elevation-2 rounded-xl mb-4" color="primary">
             Contact Me
           </v-btn>

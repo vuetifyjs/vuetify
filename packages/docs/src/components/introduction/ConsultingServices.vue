@@ -16,11 +16,11 @@
         <template v-for="({ text, href, name, btnText, notes }, i) in cards" :key="i">
           <v-col cols="12" md="6">
             <v-responsive class="h-100" content-class="d-flex flex-column">
-              <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
+              <h3 class="d-flex align-center text-title-large font-weight-medium mb-4">
                 {{ name }}
               </h3>
 
-              <div class="mb-auto text-caption">
+              <div class="mb-auto text-body-small">
                 <div class="mb-4">{{ text }}</div>
                 <ul v-if="notes && notes.length" class="mb-0 ml-5">
                   <li v-for="(item, j) in notes" :key="j">{{ item }}</li>
@@ -43,7 +43,7 @@
         </template>
       </v-row>
 
-      <div class="text-medium-emphasis text-caption">
+      <div class="text-medium-emphasis text-body-small">
         *View more detailed information on
         <AppLink href="https://www.epicmax.co/">
           Epicmax.co

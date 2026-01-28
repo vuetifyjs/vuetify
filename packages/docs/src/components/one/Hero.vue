@@ -8,11 +8,11 @@
         class="mb-8 mx-auto"
       />
 
-      <h1 class="text-h4 text-md-h2 font-weight-bold mb-4">
+      <h1 class="text-headline-large text-md-display-large font-weight-bold mb-4">
         Power the Future of Vuetify
       </h1>
 
-      <p class="text-body-1 text-md-h6 text-medium-emphasis mb-8">
+      <p class="text-body-large text-md-title-large text-medium-emphasis mb-8">
         Your subscription directly funds Vuetify development. Get premium tools, an ad-free experience, and early access to what's next—while keeping the framework free for everyone.
       </p>
 

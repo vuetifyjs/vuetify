@@ -1,26 +1,26 @@
 <template>
   <v-container class="pa-md-12 pa-4 mx-auto" max-width="700" fluid>
-    <h2 class="text-h4 text-md-h3 font-weight-bold mb-2 text-center">
+    <h2 class="text-headline-large text-md-display-medium font-weight-bold mb-2 text-center">
       Questions?
     </h2>
 
-    <p class="text-body-1 text-medium-emphasis mb-8 text-center">
+    <p class="text-body-large text-medium-emphasis mb-8 text-center">
       Everything you need to know about Vuetify One
     </p>
 
     <v-expansion-panels class="border rounded-xl" rounded="xl" variant="accordion">
       <v-expansion-panel v-for="item in faq" :key="item.question" elevation="0">
-        <v-expansion-panel-title class="text-subtitle-1 font-weight-medium">
+        <v-expansion-panel-title class="text-body-large font-weight-medium">
           {{ item.question }}
         </v-expansion-panel-title>
 
-        <v-expansion-panel-text class="text-body-2 text-medium-emphasis">
+        <v-expansion-panel-text class="text-body-medium text-medium-emphasis">
           {{ item.answer }}
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <p class="text-body-2 text-medium-emphasis text-center mt-6">
+    <p class="text-body-medium text-medium-emphasis text-center mt-6">
       Have other questions? Email us at
       <AppLink href="mailto:hello@vuetifyjs.com">hello@vuetifyjs.com</AppLink>
     </p>
