@@ -14,7 +14,7 @@ $snackbar-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weigh
 $snackbar-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
 $snackbar-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
 $snackbar-content-padding: 14px 16px !default;
-$snackbar-elevation: 6 !default;
+$snackbar-elevation: 2 !default;
 $snackbar-transition-scale: .8 !default;
 $snackbar-vertical-action-margin-bottom: 8px !default;
 $snackbar-wrapper-margin: 8px !default;

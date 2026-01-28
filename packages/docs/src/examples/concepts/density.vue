@@ -74,7 +74,7 @@
         <v-toolbar
           :density="density"
           class="mb-2"
-          elevation="2"
+          elevation="1"
           title="Daily Reports"
         ></v-toolbar>
 

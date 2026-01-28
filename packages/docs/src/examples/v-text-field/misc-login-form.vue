@@ -8,7 +8,7 @@
 
     <v-card
       class="mx-auto pa-12 pb-8"
-      elevation="8"
+      elevation="3"
       max-width="448"
       rounded="lg"
     >

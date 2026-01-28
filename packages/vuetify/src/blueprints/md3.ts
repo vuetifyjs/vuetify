@@ -48,7 +48,7 @@ export const md3: Blueprint = {
       color: 'primary',
       divided: true,
       headerColor: '',
-      elevation: 3,
+      elevation: 1,
       rounded: 'xl',
 
       VBtn: {

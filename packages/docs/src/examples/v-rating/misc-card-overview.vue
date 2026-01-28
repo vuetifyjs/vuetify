@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="d-flex flex-column mx-auto py-8"
-    elevation="10"
+    elevation="3"
     height="500"
     width="360"
   >

@@ -6,7 +6,7 @@
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="cyan"
-      elevation="12"
+      elevation="4"
       max-width="calc(100% - 32px)"
       rounded="lg"
     >
