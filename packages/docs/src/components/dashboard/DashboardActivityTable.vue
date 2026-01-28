@@ -119,7 +119,7 @@
       urlPrefix: 'https://link.vuetifyjs.com/links',
       img: 'vlink.svg',
     },
-    'default::Studios': {
+    'default::StudioProject': {
       name: 'Studio',
       urlPrefix: 'https://studio.vuetifyjs.com/projects',
       img: 'vstudio.svg',
