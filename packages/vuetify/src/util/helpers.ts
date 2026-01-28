@@ -759,7 +759,7 @@ export function renderSlot<
         // vuejs/core#7256 force differentiate fallback content from actual content
         (!validSlotContent && fallback ? '_fb' : ''),
     },
-    validSlotContent || (fallback ? fallback(props) : []),
+    validSlotContent || (fallback ? wrapInArray(fallback(props)) : []),
     validSlotContent && (slots as any)._ === 1 /* STABLE */
       ? 64 /* STABLE_FRAGMENT */
       : -2 /* BAIL */,
