@@ -27,21 +27,19 @@
     $infix: tools.breakpoint-infix($breakpoint, $breakpoints)
 
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
-      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
-      .v-col#{$infix}
+      .v-row > .v-col#{$infix}
         flex-basis: 0
         flex-grow: 1
         max-width: 100%
-      .v-col#{$infix}-auto
+      .v-row > .v-col#{$infix}-auto
         flex: 0 0 auto
         width: auto
-        max-width: 100% // Reset earlier grid tiers
+        max-width: 100%
 
       @for $i from 1 through $columns
         .v-col#{$infix}-#{$i}
           --v-col-size: #{$i}
 
-      @for $i from 1 through $columns - 1
-        @if not ($infix == "")
-          .v-col-offset#{$infix}-#{$i}
-            --v-col-offset: #{$i}
+      @for $i from 0 through $columns - 1
+        .v-col-offset#{$infix}-#{$i}
+          --v-col-offset: #{$i}
