@@ -9,38 +9,17 @@
   margin-left: auto
 
 // For each breakpoint, define the maximum width of the container in a media query
-@mixin make-container-max-widths($max-widths: settings.$container-max-widths, $breakpoints: settings.$grid-breakpoints)
+@mixin make-container-max-widths
+  $max-widths: settings.$container-max-widths
+  $breakpoints: settings.$grid-breakpoints
   @each $breakpoint, $container-max-width in $max-widths
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
       max-width: $container-max-width
 
-@mixin make-grid-columns($columns: settings.$grid-columns, $breakpoints: settings.$grid-breakpoints)
-  .v-row > [class*='v-col-']
-    flex: 0 0 calc((var(--v-col-size) * (100% - (var(--v-row-columns) - 1) * var(--v-col-gap-x)) / var(--v-row-columns)) + (var(--v-col-size) - 1) * var(--v-col-gap-x))
-    min-width: 0
-    width: 100%
-
-  .v-row > [class*='v-col-offset-']
-    margin-inline-start: calc((var(--v-col-offset) * (100% - (var(--v-row-columns) - 1) * var(--v-col-gap-x)) / var(--v-row-columns)) + var(--v-col-offset) * var(--v-col-gap-x))
-
+@mixin make-grid-columns
+  $breakpoints: settings.$grid-breakpoints
   @each $breakpoint in map.keys($breakpoints)
     $infix: tools.breakpoint-infix($breakpoint, $breakpoints)
 
     @include tools.media-breakpoint-up($breakpoint, $breakpoints)
-      .v-row > .v-col#{$infix}
-        flex-basis: 0
-        flex-grow: 1
-        max-width: 100%
-      .v-row > .v-col#{$infix}-auto
-        flex: 0 0 auto
-        width: auto
-        max-width: 100%
-
-      @for $i from 1 through $columns
-        .v-col#{$infix}-#{$i}
-          --v-col-size: #{$i}
-
-      @for $i from 0 through $columns - 1
-        @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
-          .v-col-offset#{$infix}-#{$i}
-            --v-col-offset: #{$i}
+      @content($infix)

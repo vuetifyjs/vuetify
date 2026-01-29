@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
@@ -29,4 +30,34 @@
   // Columns
   //
   // Common styles for small and large grid columns
-  @include make-grid-columns
+  @include make-grid-columns using ($infix)
+    .v-col#{$infix}
+      flex-basis: 0
+      flex-grow: 1
+      max-width: 100%
+    .v-col#{$infix}-auto
+      flex: 0 0 auto
+      width: auto
+      max-width: 100%
+
+    @for $i from 1 through settings.$grid-columns
+      .v-col#{$infix}-#{$i}
+        --v-col-size: #{$i}
+
+    @for $i from 0 through settings.$grid-columns - 1
+      @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
+        .v-col-offset#{$infix}-#{$i}
+          --v-col-offset: #{$i}
+
+  .v-col
+    $size: var(--v-col-size)
+    $cols: var(--v-row-columns)
+    $gap: var(--v-col-gap-x)
+    $offset: var(--v-col-offset)
+    &:where([class*='v-col-'])
+      flex: 0 0 calc(($size * (100% - ($cols - 1) * $gap) / $cols) + ($size - 1) * $gap)
+      min-width: 0
+      width: 100%
+
+    &:where([class*='v-col-offset-'])
+      margin-inline-start: calc(($offset * (100% - ($cols - 1) * $gap) / $cols) + $offset * $gap)
