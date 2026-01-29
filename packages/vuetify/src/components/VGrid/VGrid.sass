@@ -55,9 +55,9 @@
     $gap: var(--v-col-gap-x)
     $offset: var(--v-col-offset)
     &:where([class*='v-col-'])
-      flex: 0 0 calc(($size * (100% - ($cols - 1) * $gap) / $cols) + ($size - 1) * $gap)
+      flex: 0 0 calc(($size * (100% + $gap)) / $cols - $gap)
       min-width: 0
       width: 100%
 
     &:where([class*='v-col-offset-'])
-      margin-inline-start: calc(($offset * (100% - ($cols - 1) * $gap) / $cols) + $offset * $gap)
+      margin-inline-start: calc($offset * (100% + $gap) / $cols)
