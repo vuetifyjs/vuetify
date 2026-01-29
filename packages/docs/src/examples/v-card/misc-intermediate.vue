@@ -11,7 +11,7 @@
         </v-col>
 
         <v-col
-          class="text-center ps-0"
+          class="text-center"
           cols="auto"
         >
           <v-row class="flex-column fill-height justify-center" gap="0">
