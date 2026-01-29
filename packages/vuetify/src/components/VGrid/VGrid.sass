@@ -30,24 +30,15 @@
   // Columns
   //
   // Common styles for small and large grid columns
-  @include make-grid-columns using ($infix)
-    .v-col#{$infix}
-      flex-basis: 0
-      flex-grow: 1
-      max-width: 100%
-    .v-col#{$infix}-auto
-      flex: 0 0 auto
-      width: auto
-      max-width: 100%
+  .v-col
+    flex-basis: 0
+    flex-grow: 1
+    max-width: 100%
 
-    @for $i from 1 through settings.$grid-columns
-      .v-col#{$infix}-#{$i}
-        --v-col-size: #{$i}
-
-    @for $i from 0 through settings.$grid-columns - 1
-      @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
-        .v-col-offset#{$infix}-#{$i}
-          --v-col-offset: #{$i}
+  .v-col-auto
+    flex: 0 0 auto
+    width: auto
+    max-width: 100%
 
   .v-col
     $size: var(--v-col-size)
@@ -61,3 +52,24 @@
 
     &:where([class*='v-col-offset-'])
       margin-inline-start: calc($offset * (100% + $gap) / $cols)
+
+  @include make-grid-columns using ($infix)
+    @if $infix != ''
+      .v-col#{$infix}
+        flex-basis: 0
+        flex-grow: 1
+        max-width: 100%
+
+      .v-col#{$infix}-auto
+        flex: 0 0 auto
+        width: auto
+        max-width: 100%
+
+    @for $i from 1 through settings.$grid-columns
+      .v-col#{$infix}-#{$i}
+        --v-col-size: #{$i}
+
+    @for $i from 0 through settings.$grid-columns - 1
+      @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
+        .v-col-offset#{$infix}-#{$i}
+          --v-col-offset: #{$i}
