@@ -39,6 +39,12 @@
     transition: $progress-circular-overlay-transition
     z-index: 2
 
+  .v-progress-circular--revealing
+    --progress-reveal-duration: $progress-circular-reveal-duration
+
+    .v-progress-circular__overlay
+      transition-duration: var(--progress-reveal-duration), 0s
+
   // Modifiers
   .v-progress-circular
     @each $name, $multiplier in $progress-circular-sizes
