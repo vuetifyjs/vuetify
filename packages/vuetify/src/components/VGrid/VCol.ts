@@ -8,10 +8,9 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, keys, propsFactory } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
 import type { Breakpoint } from '@/composables/display'
 
 type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
@@ -23,7 +22,10 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Record<Breakpoint, Prop<boolean | string | number, false>>)
+  }, {} as Record<Breakpoint, {
+    type: [BooleanConstructor, StringConstructor, NumberConstructor]
+    default: false
+  }>)
 })()
 
 const offsetProps = (() => {
@@ -34,12 +36,15 @@ const offsetProps = (() => {
       default: null,
     }
     return props
-  }, {} as Record<BreakpointOffset, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOffset, {
+    type: [StringConstructor, NumberConstructor]
+    default: null
+  }>)
 })()
 
 const propMap = {
-  col: Object.keys(breakpointProps),
-  offset: Object.keys(offsetProps),
+  col: keys(breakpointProps),
+  offset: keys(offsetProps),
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
@@ -91,23 +96,19 @@ export const VCol = genericComponent()({
 
   setup (props, { slots }) {
     const classes = computed(() => {
-      const classList: any[] = []
+      const classList: any[] = ['v-col']
 
       // Loop through `col`, `offset` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
         propMap[type].forEach(prop => {
-          const value: string | number | boolean = (props as any)[prop]
+          const value: string | number | boolean = props[prop]
           const className = breakpointClass(type, prop, value)
-          if (className) classList!.push(className)
+          if (className) classList.push(className)
         })
       }
 
-      const hasColClasses = classList.some(className => className.startsWith('v-col-'))
-
       classList.push({
-        // Default to .v-col if no other col-{bp}-* classes generated nor `cols` specified.
-        'v-col': !hasColClasses || !props.cols,
         [`v-col-${props.cols}`]: props.cols,
         [`v-col-offset-${props.offset}`]: props.offset,
       })
