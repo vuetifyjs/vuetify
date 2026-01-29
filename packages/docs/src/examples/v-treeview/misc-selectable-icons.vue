@@ -7,7 +7,7 @@
       flat
     ></v-toolbar>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col class="d-flex align-center" cols="12" sm="6">
         <v-treeview
           v-model:selected="tree"

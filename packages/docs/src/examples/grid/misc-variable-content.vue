@@ -1,9 +1,7 @@
 <template>
   <v-container class="bg-surface-variant">
     <v-row
-      class="mb-6"
-      justify="center"
-      no-gutters
+      class="mb-6 justify-center"
     >
       <v-col lg="2">
         <v-card
@@ -33,7 +31,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row no-gutters>
+    <v-row>
       <v-col>
         <v-card
           class="pa-2"

@@ -8,14 +8,12 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, keys, propsFactory } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
 import type { Breakpoint } from '@/composables/display'
 
 type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
-type BreakpointOrder = `order${Capitalize<Breakpoint>}`
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
@@ -24,7 +22,10 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Record<Breakpoint, Prop<boolean | string | number, false>>)
+  }, {} as Record<Breakpoint, {
+    type: [BooleanConstructor, StringConstructor, NumberConstructor]
+    default: false
+  }>)
 })()
 
 const offsetProps = (() => {
@@ -35,24 +36,15 @@ const offsetProps = (() => {
       default: null,
     }
     return props
-  }, {} as Record<BreakpointOffset, Prop<string | number, null>>)
-})()
-
-const orderProps = (() => {
-  return breakpoints.reduce((props, val) => {
-    const orderKey = ('order' + capitalize(val)) as BreakpointOrder
-    props[orderKey] = {
-      type: [String, Number],
-      default: null,
-    }
-    return props
-  }, {} as Record<BreakpointOrder, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOffset, {
+    type: [StringConstructor, NumberConstructor]
+    default: null
+  }>)
 })()
 
 const propMap = {
-  col: Object.keys(breakpointProps),
-  offset: Object.keys(offsetProps),
-  order: Object.keys(orderProps),
+  col: keys(breakpointProps),
+  offset: keys(offsetProps),
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
@@ -66,6 +58,8 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   }
   if (type === 'col') {
     className = 'v-' + className
+  } else if (type === 'offset') {
+    className = 'v-col-' + className
   }
   // Handling the boolean style prop when accepting [Boolean, String, Number]
   // means Vue will not convert <v-col sm></v-col> to sm: true for us.
@@ -79,8 +73,6 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
-
 export const makeVColProps = propsFactory({
   cols: {
     type: [Boolean, String, Number],
@@ -92,16 +84,6 @@ export const makeVColProps = propsFactory({
     default: null,
   },
   ...offsetProps,
-  order: {
-    type: [String, Number],
-    default: null,
-  },
-  ...orderProps,
-  alignSelf: {
-    type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
-    default: null,
-    validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
-  },
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -114,27 +96,21 @@ export const VCol = genericComponent()({
 
   setup (props, { slots }) {
     const classes = computed(() => {
-      const classList: any[] = []
+      const classList: any[] = ['v-col']
 
-      // Loop through `col`, `offset`, `order` breakpoint props
+      // Loop through `col`, `offset` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
         propMap[type].forEach(prop => {
-          const value: string | number | boolean = (props as any)[prop]
+          const value: string | number | boolean = props[prop]
           const className = breakpointClass(type, prop, value)
-          if (className) classList!.push(className)
+          if (className) classList.push(className)
         })
       }
 
-      const hasColClasses = classList.some(className => className.startsWith('v-col-'))
-
       classList.push({
-        // Default to .v-col if no other col-{bp}-* classes generated nor `cols` specified.
-        'v-col': !hasColClasses || !props.cols,
         [`v-col-${props.cols}`]: props.cols,
-        [`offset-${props.offset}`]: props.offset,
-        [`order-${props.order}`]: props.order,
-        [`align-self-${props.alignSelf}`]: props.alignSelf,
+        [`v-col-offset-${props.offset}`]: props.offset,
       })
 
       return classList
