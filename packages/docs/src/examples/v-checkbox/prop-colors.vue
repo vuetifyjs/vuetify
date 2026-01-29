@@ -131,7 +131,9 @@
 </template>
 
 <script setup>
-  const ex4 = ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red darken-3', 'indigo darken-3', 'orange darken-3']
+  import { ref } from 'vue'
+
+  const ex4 = ref(['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red darken-3', 'indigo darken-3', 'orange darken-3'])
 </script>
 
 <script>
