@@ -48,25 +48,24 @@ const propMap = {
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
-  let className: string = type
   if (val == null || val === false) {
     return undefined
   }
+  let className = ''
   if (prop) {
     const breakpoint = prop.replace(type, '')
-    className += `-${breakpoint}`
+    className += `${breakpoint}`
   }
   if (type === 'col') {
-    className = 'v-' + className
+    if (val === '' || val === true) {
+      // Handling the boolean style prop when accepting [Boolean, String, Number]
+      // means Vue will not convert <v-col sm></v-col> to sm: true for us.
+      // Since the default is false, an empty string indicates the prop's presence.
+      return 'v-col--' + className.toLowerCase()
+    }
+    className = 'v-col--cols-' + className
   } else if (type === 'offset') {
-    className = 'v-col-' + className
-  }
-  // Handling the boolean style prop when accepting [Boolean, String, Number]
-  // means Vue will not convert <v-col sm></v-col> to sm: true for us.
-  // Since the default is false, an empty string indicates the prop's presence.
-  if (type === 'col' && (val === '' || val === true)) {
-    // .v-col-md
-    return className.toLowerCase()
+    className = 'v-col--offset-' + className
   }
   // .order-md-6
   className += `-${val}`
@@ -109,8 +108,8 @@ export const VCol = genericComponent()({
       }
 
       classList.push({
-        [`v-col-${props.cols}`]: props.cols,
-        [`v-col-offset-${props.offset}`]: props.offset,
+        [`v-col--cols-${props.cols}`]: props.cols,
+        [`v-col--offset-${props.offset}`]: props.offset,
       })
 
       return classList

@@ -3,6 +3,10 @@
 @use '../../styles/tools'
 @use './mixins' as *
 
+// https://lea.verou.me/blog/2020/10/the-var-space-hack-to-toggle-multiple-values-with-one-custom-property/
+$true: initial
+$false: ' '
+
 @include tools.layer('components')
   // Row
   //
@@ -31,45 +35,42 @@
   //
   // Common styles for small and large grid columns
   .v-col
-    flex-basis: 0
-    flex-grow: 1
-    max-width: 100%
-
-  .v-col-auto
-    flex: 0 0 auto
-    width: auto
-    max-width: 100%
-
-  .v-col
     $size: var(--v-col-size)
     $cols: var(--v-row-columns)
     $gap: var(--v-col-gap-x)
     $offset: var(--v-col-offset)
-    &:where([class*='v-col-'])
-      flex: 0 0 calc(($size * (100% + $gap)) / $cols - $gap)
-      min-width: 0
-      width: 100%
+    flex-grow: var(--v-col-is-size, 0) var(--v-col-is-auto, 0) var(--v-col-is-grow, 1)
+    flex-shrink: 0
+    flex-basis: var(--v-col-is-size, calc(($size * (100% + $gap)) / $cols - $gap)) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0)
+    max-width: 100%
+    min-width: 0
+    --v-col-is-size: #{$false}
+    --v-col-is-auto: #{$false}
+    --v-col-is-grow: #{$true}
 
-    &:where([class*='v-col-offset-'])
+    &:where([class*='v-col--offset-'])
       margin-inline-start: calc($offset * (100% + $gap) / $cols)
 
   @include make-grid-columns using ($infix)
     @if $infix != ''
-      .v-col#{$infix}
-        flex-basis: 0
-        flex-grow: 1
-        max-width: 100%
+      .v-col-#{$infix}
+        --v-col-is-size: #{$false}
+        --v-col-is-auto: #{$false}
+        --v-col-is-grow: #{$true}
 
-      .v-col#{$infix}-auto
-        flex: 0 0 auto
-        width: auto
-        max-width: 100%
+    .v-col--cols#{$infix}-auto
+      --v-col-is-size: #{$false}
+      --v-col-is-auto: #{$true}
+      --v-col-is-grow: #{$false}
 
     @for $i from 1 through settings.$grid-columns
-      .v-col#{$infix}-#{$i}
+      .v-col--cols#{$infix}-#{$i}
         --v-col-size: #{$i}
+        --v-col-is-size: #{$true}
+        --v-col-is-auto: #{$false}
+        --v-col-is-grow: #{$false}
 
     @for $i from 0 through settings.$grid-columns - 1
       @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
-        .v-col-offset#{$infix}-#{$i}
+        .v-col--offset#{$infix}-#{$i}
           --v-col-offset: #{$i}
