@@ -43,7 +43,7 @@ $false: ' '
     flex-shrink: 0
     flex-basis: var(--v-col-is-size, calc(($size * (100% + $gap)) / $cols - $gap)) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0)
     max-width: 100%
-    min-width: 0
+    min-width: var(--v-col-is-size, 0) var(--v-col-is-auto, auto) var(--v-col-is-grow, auto)
     --v-col-is-size: #{$false}
     --v-col-is-auto: #{$false}
     --v-col-is-grow: #{$true}
