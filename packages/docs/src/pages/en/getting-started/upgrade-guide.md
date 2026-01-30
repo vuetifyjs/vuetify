@@ -315,11 +315,7 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 
 ### VSelect/VCombobox/VAutocomplete
 
-:: warning
-`item` in slots has been renamed to `internalItem`
-::
-
-For consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
+`item` in slots has been renamed to `internalItem` for consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
 You can rename:
 
