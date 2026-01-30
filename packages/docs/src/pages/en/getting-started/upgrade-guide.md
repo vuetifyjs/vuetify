@@ -97,7 +97,7 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-## Typography
+### Typography
 
 The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
 
@@ -156,7 +156,20 @@ export default createVuetify({
 
 ### Elevation
 
-Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24). See [Elevation migration](/getting-started/elevation-migration) for details and tips to restore legacy MD2 levels if needed.
+Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24).
+
+| MD3 elevation levels |
+|----------------------|
+| `elevation-0` (0dp)  |
+| `elevation-1` (1dp)  |
+| `elevation-2` (3dp)  |
+| `elevation-3` (6dp)  |
+| `elevation-4` (8dp)  |
+| `elevation-5` (12dp) |
+
+\* "dp" (density-independent pixels) is a relative unit from Material Design
+
+See [Elevation migration](/getting-started/elevation-migration) for details and tips to restore legacy MD2 levels if needed.
 
 ## Themes
 
@@ -244,9 +257,9 @@ The calculation for `$container-max-widths` has changed to round values down to 
 | xl         | ~~1800px~~ » 1400px |
 | xxl        | ~~2400px~~ » 2000px |
 
-### VCounter (hint under VTextField, VTextarea and VFieldInput)
+### VCounter
 
-The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
+VCounter is used to display the counter hint under VTextField, VTextarea and VFieldInput. The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
 
 ```scss { resource="styles/styles.scss"}
 .v-counter {
@@ -302,7 +315,9 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 
 ### VSelect/VCombobox/VAutocomplete
 
-#### `item` in slots has been renamed to `internalItem`
+:: warning
+`item` in slots has been renamed to `internalItem`
+::
 
 For consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
