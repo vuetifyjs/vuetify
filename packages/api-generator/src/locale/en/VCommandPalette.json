@@ -1,0 +1,29 @@
+{
+  "props": {
+    "hotkey": "Global keyboard shortcut to toggle the palette. Accepts hotkey strings like `'ctrl+shift+p'` or `'meta+j'`. The shortcut is automatically registered on mount and cleaned up on unmount.",
+    "inputIcon": "Icon to display at the start of the search input field.",
+    "items": "Array of command palette items. Objects should have **title** and optionally **subtitle**, **prependIcon**, **appendIcon**, **prependAvatar**, **appendAvatar**, **hotkey**, **onClick**, **to**, **href**, and **value** properties. Use `type: 'subheader'` with a **title** for section headers, or `type: 'divider'` for visual separators between groups.",
+    "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
+    "modelValue": "Controls the visibility of the command palette dialog. Use `v-model` for two-way binding.",
+    "noDataText": "Text displayed when no items match the current search query.",
+    "placeholder": "Placeholder text displayed in the search input.",
+    "search": "The current search query. Use `v-model:search` to control or monitor the search input value."
+  },
+  "events": {
+    "click:item": "Emitted when an item is clicked or activated via Enter key. The payload includes the selected item object and the triggering event (MouseEvent or KeyboardEvent). The palette automatically closes after this event.",
+    "update:modelValue": "Emitted when the dialog visibility changes.",
+    "update:search": "Emitted when the search query changes."
+  },
+  "slots": {
+    "prepend": "Content to render above the search input, inside the command palette card. Useful for headers, breadcrumbs, or instructions.",
+    "input": "Custom search input field. Replaces the default **v-text-field**. Useful for providing a completely custom search implementation.",
+    "input.append-inner": "Content appended inside the search input field. Useful for adding icons or buttons within the input.",
+    "append": "Content to render below the items list, inside the command palette card. Useful for footers, keyboard shortcut hints, or additional actions.",
+    "no-data": "Custom content to display when no items match the search query. Replaces the default no-data message.",
+    "list.prepend": "Content to prepend to the list component.",
+    "list.subheader": "Slot for customizing the rendering of subheader items in the list.",
+    "item.prepend": "Content to display before each item's title.",
+    "item.title": "Slot for customizing the title of each item.",
+    "item.append": "Content to display after each item's title, replaces hotkey (if provided)."
+  }
+}
