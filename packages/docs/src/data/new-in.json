@@ -349,6 +349,8 @@
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
       "indentLines": "3.9.0",
+      "indentLinesColor": "3.12.0",
+      "indentLinesOpacity": "3.12.0",
       "itemsRegistration": "3.11.0"
     },
     "slots": {
