@@ -29,7 +29,7 @@ Internal class names changed as well
 | `.v-row--no-gutters`      | `.v-row--density-compact`       |
 | `.v-col-{n}`              | `.v-col--cols-{n}`              |
 | `.v-col-{breakpoint}-{n}` | `.v-col--cols-{breakpoint}-{n}` |
-| `.offset-{n}`             | `.v-col--offset-{n}`             |
+| `.offset-{n}`             | `.v-col--offset-{n}`            |
 
 ## CSS Override
 
@@ -46,11 +46,9 @@ Add the following CSS to your application to restore the legacy grid behavior.
   }
   .v-col {
     padding: calc(var(--v-col-gap-y) * .5) calc(var(--v-col-gap-x) * .5);
+    flex-basis: var(--v-col-is-size, calc(100% * var(--v-col-size) / var(--v-row-columns))) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0);
   }
-  .v-col {
-    flex-basis: var(--v-col-is-size, calc(100% * var(--v-col-size) / var(--v-row-columns))) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0)
-  }
-  &:where([class*='v-col--offset-']) {
+  .v-col:where([class*='v-col--offset-']) {
     margin-inline-start: calc(100% * var(--v-col-offset) / var(--v-row-columns))
   }
 }
