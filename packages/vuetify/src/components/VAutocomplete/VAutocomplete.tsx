@@ -424,6 +424,13 @@ export const VAutocomplete = genericComponent<new <
       if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
+    function onBlur (e: FocusEvent) {
+      const menuContent = vMenuRef.value?.contentEl
+      if (menuContent?.contains(e.relatedTarget as Node)) {
+        isFocused.value = true
+      }
+    }
+
     const isSelecting = shallowRef(false)
 
     /** @param set - null means toggle */
@@ -545,6 +552,7 @@ export const VAutocomplete = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          onBlur={ onBlur }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >

@@ -528,6 +528,13 @@ export const VCombobox = genericComponent<new <
       listHasFocus.value = false
     }
 
+    function onBlur (e: FocusEvent) {
+      const menuContent = vMenuRef.value?.contentEl
+      if (menuContent?.contains(e.relatedTarget as Node)) {
+        isFocused.value = true
+      }
+    }
+
     watch(isFocused, (val, oldVal) => {
       if (val || val === oldVal) return
 
@@ -608,6 +615,7 @@ export const VCombobox = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
           onPaste={ onPaste }
+          onBlur={ onBlur }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >
