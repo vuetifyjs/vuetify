@@ -9,7 +9,7 @@
       </v-btn>
     </div>
 
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col
         class="mb-12"
         cols="12"

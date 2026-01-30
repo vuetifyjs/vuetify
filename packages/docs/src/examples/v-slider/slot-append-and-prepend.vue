@@ -14,10 +14,7 @@
     </v-toolbar>
 
     <v-card-text>
-      <v-row
-        class="mb-4"
-        justify="space-between"
-      >
+      <v-row class="mb-4 justify-space-between">
         <v-col class="text-left">
           <span
             class="text-display-large font-weight-light"

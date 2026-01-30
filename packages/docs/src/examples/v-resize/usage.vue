@@ -1,7 +1,6 @@
 <template>
   <v-row
-    align="center"
-    justify="center"
+    class="align-center justify-center"
     v-resize="onResize"
   >
     <v-col class="text-center">

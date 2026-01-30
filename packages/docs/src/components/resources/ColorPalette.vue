@@ -1,8 +1,8 @@
 <template>
   <v-container class="px-0">
-    <v-row>
-      <v-col class="pb-0 font-weight-bold" cols="12">{{ t('colors') }}</v-col>
+    <div class="font-weight-bold mb-3">{{ t('colors') }}</div>
 
+    <v-row>
       <v-col v-for="(color, i) in colors" :key="i" cols="3">
         <v-sheet
           :color="color"

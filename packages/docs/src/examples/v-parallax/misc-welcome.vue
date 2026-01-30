@@ -1,9 +1,7 @@
 <template>
   <v-parallax src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
     <v-container class="fill-height">
-      <v-row
-        class="justify-center align-center flex-column-reverse flex-md-row"
-      >
+      <v-row class="flex-column-reverse flex-md-row align-center justify-center">
         <v-col cols="12" md="6">
           <h1 class="text-display-large mt-0 mb-8">John Doe</h1>
           <h3 class="text-display-medium mt-0 mb-8 font-weight-thin">Web Developer</h3>

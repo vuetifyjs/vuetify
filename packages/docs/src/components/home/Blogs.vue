@@ -10,7 +10,7 @@
         class="mb-16"
       />
 
-      <v-row align="center" class="text-left" justify="space-between">
+      <v-row class="text-left align-center justify-space-between">
         <v-col v-if="latestBlogs.length" cols="12" md="7">
           <v-card
             v-for="(blog, index) in latestBlogs"

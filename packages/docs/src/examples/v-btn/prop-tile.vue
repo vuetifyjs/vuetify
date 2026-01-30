@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    align="center"
-    justify="space-around"
-  >
+  <v-row class="align-center justify-space-around">
     <v-btn
       color="success"
       tile

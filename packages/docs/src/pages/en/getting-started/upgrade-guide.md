@@ -364,6 +364,109 @@ Removed the **$text-field-details-padding-inline** Sass variable.
 );
 ```
 
+### Grid System (VRow and VCol)
+
+The grid system has been refactored to use CSS `gap` instead of negative margins on rows and padding on columns. This change provides more flexibility and predictable spacing behavior.
+
+#### Layout mechanism changes
+
+| Previous                                                      | New                                    |
+|---------------------------------------------------------------|----------------------------------------|
+| Negative margins (`margin: -12px`)                            | No margins on VRow                     |
+| Gaps from padding                                             | No default padding, utilizes CSS `gap` |
+| Widths from hardcoded percentage (e.g., `75%` for `.v-col-9`) | Calculated width accounting for gaps   |
+
+#### Prop changes on VRow
+
+| Previous                         | New                                              |
+|----------------------------------|--------------------------------------------------|
+| `dense`                          | `density="comfortable"` or `gap="8"`             |
+| `no-gutters`                     | `density="compact"` or `gap="0"`                 |
+| `align` prop on VRow             | use utility class (e.g., `align-start`)          |
+| `justify` prop on VRow           | use utility class (e.g., `justify-center`)       |
+| `align-content` prop on VRow     | use utility class (e.g., `align-content-center`) |
+| `align-sm`, `justify-md`, etc.   | use responsive utility classes                   |
+| no fine-grained control over gap | `gap` prop accepts number, string, or `[x, y]`   |
+
+#### Prop changes on VCol
+
+| Previous                                | New                                                 |
+|-----------------------------------------|-----------------------------------------------------|
+| `order` prop on VCol                    | use utility class (e.g., `order-1`)                 |
+| props like `order-sm`, `order-md`, etc. | use responsive utility classes (e.g., `order-sm-1`) |
+| `align-self` prop on VCol               | use utility class (e.g., `align-self-center`)       |
+| `.offset-{n}` (offset classes)          | `offset` prop                                       |
+
+<v-expansion-panels class="mb-4" flat>
+<v-expansion-panel title="Migration examples" bg-color="surface-variant-alt">
+<v-expansion-panel-text>
+
+**Alignment (VRow):**
+
+```diff
+- <v-row align="center" justify="space-between">
++ <v-row class="align-center justify-space-between">
+```
+
+**Responsive alignment:**
+
+```diff
+- <v-row align-sm="start" align-md="center" justify-lg="end">
++ <v-row class="align-sm-start align-md-center justify-lg-end">
+```
+
+**Order (VCol):**
+
+```diff
+- <v-col order="2" order-md="1">
++ <v-col class="order-2 order-md-1">
+```
+
+**Align self (VCol):**
+
+```diff
+- <v-col align-self="center">
++ <v-col class="align-self-center">
+```
+
+**Dense rows:**
+
+```diff
+- <v-row dense>
++ <v-row density="comfortable">
+```
+
+**No gutters:**
+
+```diff
+- <v-row no-gutters>
++ <v-row density="compact">
+```
+
+</v-expansion-panel-text>
+</v-expansion-panel>
+</v-expansion-panels>
+
+#### Offset class changes
+
+Offset classes have been renamed from `.offset-*` to `.v-col-offset-*` for namespace consistency:
+
+```diff
+- <v-col offset="3" offset-md="2">
++ <v-col offset="3" offset-md="2">  <!-- Props still work the same -->
+```
+
+The component props (`offset`, `offset-sm`, etc.) continue to work unchanged, but if you were using the CSS classes directly, update them:
+
+```diff
+- <div class="v-col offset-6">
++ <div class="v-col v-col-offset-6">
+```
+
+#### Restoring the legacy grid behavior
+
+If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
 ## Defaults
 
 `undefined` values are now skipped when merging prop defaults. This button would have been grey in v3, but is now green:

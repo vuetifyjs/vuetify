@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <v-container :style="{ minHeight: '100%' }" class="d-flex">
-      <v-row align="center" justify="center">
+      <v-row class="align-center justify-center">
         <v-col cols="auto">
           <h1 class="text-h3 text-primary">
             Whoops, 404

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-col cols="auto">
       <v-radio-group
         v-model="color"

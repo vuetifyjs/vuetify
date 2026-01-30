@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
-  >
+  <v-row class="align-center justify-center">
     <v-col cols="12">
       <v-hover
         v-slot="{ isHovering, props }"

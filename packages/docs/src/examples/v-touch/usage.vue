@@ -1,8 +1,6 @@
 <template>
   <v-row
-    align="center"
-    class="bg-grey-lighten-2"
-    justify="center"
+    class="bg-grey-lighten-2 align-center justify-center"
     style="height: 500px"
     v-touch="{
       left: () => swipe('Left'),

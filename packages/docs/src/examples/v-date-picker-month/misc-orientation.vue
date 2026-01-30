@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center">
+  <v-row class="align-center">
     <v-checkbox
       v-model="landscape"
       label="Landscape"

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="12" md="6">
         <v-dialog
           transition="dialog-bottom-transition"

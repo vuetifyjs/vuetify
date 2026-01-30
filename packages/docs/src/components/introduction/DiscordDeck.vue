@@ -12,7 +12,7 @@
     />
 
     <v-container class="pt-9 px-5" fluid>
-      <v-row justify="space-around" dense>
+      <v-row class="justify-space-around" density="comfortable">
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col cols="12" md="4">
             <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">

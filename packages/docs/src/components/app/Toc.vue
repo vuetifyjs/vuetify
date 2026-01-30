@@ -57,7 +57,7 @@
           tag="router-link"
         />
 
-        <v-row dense>
+        <v-row density="comfortable">
           <template v-if="sponsors.length">
             <v-col
               v-for="sponsor of sponsors"

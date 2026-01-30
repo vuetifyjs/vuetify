@@ -3,7 +3,7 @@
     <HomeCommonGradient color="primary" opacity-class="opacity-10" />
 
     <v-container class="text-center text-md-left py-16">
-      <v-row align="center">
+      <v-row class="align-center">
         <v-col cols="12" md="6">
           <v-img
             :src="src"

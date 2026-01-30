@@ -2,9 +2,7 @@
   <v-responsive class="pb-5">
     <v-container class="text-left position-relative">
       <v-row
-        align="center"
-        class="py-16"
-        justify="center"
+        class="py-16 align-center justify-center"
       >
         <v-col cols="12" md="6">
           <v-chip color="primary">

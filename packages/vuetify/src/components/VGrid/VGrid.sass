@@ -1,36 +1,76 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
+
+// https://lea.verou.me/blog/2020/10/the-var-space-hack-to-toggle-multiple-values-with-one-custom-property/
+$true: initial
+$false: ' '
 
 @include tools.layer('components')
   // Row
   //
   // Rows contain and clear the floats of your columns.
   .v-row
-    @include make-row
+    --v-col-gap-x: #{settings.$grid-gutter}
+    --v-col-gap-y: #{settings.$grid-gutter}
+    --v-row-columns: #{settings.$grid-columns}
+    display: flex
+    flex-wrap: wrap
+    flex: 1 1 auto
+    gap: var(--v-col-gap-x) var(--v-col-gap-y)
 
     & + .v-row
-      margin-top: settings.$grid-gutter * .5
+      margin-top: var(--v-col-gap-y)
 
-      &--dense
-        margin-top: settings.$form-grid-gutter * .5
+    &--density-comfortable
+      --v-col-gap-x: #{settings.$form-grid-gutter}
+      --v-col-gap-y: #{settings.$form-grid-gutter}
 
-    &--dense
-      margin: -(settings.$form-grid-gutter) * .5
-
-      > .v-col,
-      > [class*="v-col-"]
-        padding: settings.$form-grid-gutter * .5
-
-    // Remove the negative margin from default .v-row, then the horizontal padding
-    // from all immediate children columns (to prevent runaway style inheritance).
-    &.v-row--no-gutters
-      margin: 0
-      > .v-col,
-      > [class*="v-col-"]
-        padding: 0
+    &.v-row--density-compact
+      --v-col-gap-x: 0px
+      --v-col-gap-y: 0px
 
   // Columns
   //
   // Common styles for small and large grid columns
-  @include make-grid-columns
+  .v-col
+    $size: var(--v-col-size)
+    $cols: var(--v-row-columns)
+    $gap: var(--v-col-gap-x)
+    $offset: var(--v-col-offset)
+    flex-grow: var(--v-col-is-size, 0) var(--v-col-is-auto, 0) var(--v-col-is-grow, 1)
+    flex-shrink: 0
+    flex-basis: var(--v-col-is-size, calc(($size * (100% + $gap)) / $cols - $gap)) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0)
+    max-width: 100%
+    min-width: var(--v-col-is-size, 0) var(--v-col-is-auto, auto) var(--v-col-is-grow, auto)
+    --v-col-is-size: #{$false}
+    --v-col-is-auto: #{$false}
+    --v-col-is-grow: #{$true}
+
+    &:where([class*='v-col--offset-'])
+      margin-inline-start: calc($offset * (100% + $gap) / $cols)
+
+  @include make-grid-columns using ($infix)
+    @if $infix != ''
+      .v-col-#{$infix}
+        --v-col-is-size: #{$false}
+        --v-col-is-auto: #{$false}
+        --v-col-is-grow: #{$true}
+
+    .v-col--cols#{$infix}-auto
+      --v-col-is-size: #{$false}
+      --v-col-is-auto: #{$true}
+      --v-col-is-grow: #{$false}
+
+    @for $i from 1 through settings.$grid-columns
+      .v-col--cols#{$infix}-#{$i}
+        --v-col-size: #{$i}
+        --v-col-is-size: #{$true}
+        --v-col-is-auto: #{$false}
+        --v-col-is-grow: #{$false}
+
+    @for $i from 0 through settings.$grid-columns - 1
+      @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
+        .v-col--offset#{$infix}-#{$i}
+          --v-col-offset: #{$i}

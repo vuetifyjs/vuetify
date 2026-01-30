@@ -1,10 +1,7 @@
 <template>
   <div>
     <h1 class="my-0">Plan your event:</h1>
-    <v-row
-      align="center"
-      justify="space-around"
-    >
+    <v-row class="align-center justify-space-around">
       <v-col style="width: 350px; flex: 0 1 auto;">
         <h2 class="my-0">Start:</h2>
         <v-time-picker

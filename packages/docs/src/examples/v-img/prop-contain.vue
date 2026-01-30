@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="5">
         <div class="text-title-large mb-1">
           Default (cover)

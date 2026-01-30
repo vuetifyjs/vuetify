@@ -3,7 +3,7 @@
     style="height: 300px"
     fluid
   >
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-menu min-width="200px">
         <template v-slot:activator="{ props }">
           <v-btn

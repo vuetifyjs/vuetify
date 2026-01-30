@@ -12,7 +12,7 @@
     />
 
     <v-container class="pt-9 px-5" fluid>
-      <v-row justify="space-around" dense>
+      <v-row class="justify-space-around" density="comfortable">
         <template v-for="({ text, href, name, btnText, notes, extra }, i) in cards" :key="i">
           <v-col cols="12" md="6">
             <v-responsive class="h-100" content-class="d-flex flex-column">

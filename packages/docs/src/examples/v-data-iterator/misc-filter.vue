@@ -22,7 +22,7 @@
 
       <template v-slot:default="{ items }">
         <v-container class="pa-2" fluid>
-          <v-row dense>
+          <v-row density="comfortable">
             <v-col
               v-for="item in items"
               :key="item.title"
