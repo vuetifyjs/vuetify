@@ -11,6 +11,7 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent, keys, propsFactory } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { Breakpoint } from '@/composables/display'
 
 type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
@@ -45,6 +46,7 @@ const offsetProps = (() => {
 const propMap = {
   col: keys(breakpointProps),
   offset: keys(offsetProps),
+  order: ['order', 'orderSm', 'orderMd', 'orderLg', 'orderXl', 'orderXxl'],
 }
 
 function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
@@ -66,11 +68,16 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
     className = 'v-col--cols-' + className
   } else if (type === 'offset') {
     className = 'v-col--offset-' + className
+  } else if (type === 'order') {
+    className = 'order-' + className
   }
   // .order-md-6
   className += `-${val}`
   return className.toLowerCase()
 }
+
+const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
+const alignSelfValidator = (str: any) => ALIGN_SELF_VALUES.includes(str)
 
 export const makeVColProps = propsFactory({
   cols: {
@@ -83,6 +90,31 @@ export const makeVColProps = propsFactory({
     default: null,
   },
   ...offsetProps,
+
+  /** @deprecated use order-* class instead */
+  order: { type: [String, Number], default: null },
+  /** @deprecated use order-sm-* class instead */
+  orderSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  /** @deprecated use order-md-* class instead */
+  orderMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  /** @deprecated use order-lg-* class instead */
+  orderLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  /** @deprecated use order-xl-* class instead */
+  orderXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  /** @deprecated use order-xxl-* class instead */
+  orderXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  /** @deprecated use align-self-* class instead */
+  alignSelf: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
+  /** @deprecated use align-self-sm-* class instead */
+  alignSelfSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
+  /** @deprecated use align-self-md-* class instead */
+  alignSelfMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
+  /** @deprecated use align-self-lg-* class instead */
+  alignSelfLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
+  /** @deprecated use align-self-xl-* class instead */
+  alignSelfXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
+  /** @deprecated use align-self-xxl-* class instead */
+  alignSelfXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -97,11 +129,11 @@ export const VCol = genericComponent()({
     const classes = computed(() => {
       const classList: any[] = ['v-col']
 
-      // Loop through `col`, `offset` breakpoint props
+      // Loop through `col`, `offset`, `order` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
         propMap[type].forEach(prop => {
-          const value: string | number | boolean = props[prop]
+          const value: string | number | boolean = (props as any)[prop]
           const className = breakpointClass(type, prop, value)
           if (className) classList.push(className)
         })
@@ -110,6 +142,8 @@ export const VCol = genericComponent()({
       classList.push({
         [`v-col--cols-${props.cols}`]: props.cols,
         [`v-col--offset-${props.offset}`]: props.offset,
+        [`order-${props.order}`]: props.order,
+        [`align-self-${props.alignSelf}`]: props.alignSelf,
       })
 
       return classList

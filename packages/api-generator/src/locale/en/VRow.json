@@ -1,7 +1,25 @@
 {
   "props": {
+    "align": "Deprecated, use **align-\\*** class. Available options are: **start**, **center**, **end**, **baseline** and **stretch**.",
+    "alignLg": "Deprecated, use **align-lg-\\*** class",
+    "alignMd": "Deprecated, use **align-md-\\*** class",
+    "alignSm": "Deprecated, use **align-sm-\\*** class",
+    "alignXl": "Deprecated, use **align-xl-\\*** class",
+    "alignXxl": "Deprecated, use **align-xxl-\\*** class",
+    "alignContent": "Deprecated, use **align-content-\\***. Available options are: **start**, **center**, **end**, **space-between**, **space-around** and **stretch**.",
+    "alignContentLg": "Deprecated, use **align-content-lg-\\*** class",
+    "alignContentMd": "Deprecated, use **align-content-md-\\*** class",
+    "alignContentSm": "Deprecated, use **align-content-sm-\\*** class",
+    "alignContentXl": "Deprecated, use **align-content-xl-\\*** class",
+    "alignContentXxl": "Deprecated, use **align-content-xxl-\\*** class",
     "dense": "Deprecated, use `density` with **comfortable** instead.",
     "density": "Adjusts the spacing between `v-col`s. Available options are: **default**, **comfortable**, **compact**.",
+    "justify": "Deprecated, use **justify-\\***. Available options are: **start**, **center**, **end**, **space-between** and **space-around**.",
+    "justifyLg": "Deprecated, use **justify-lg-\\*** class",
+    "justifyMd": "Deprecated, use **justify-md-\\*** class",
+    "justifySm": "Deprecated, use **justify-sm-\\*** class",
+    "justifyXl": "Deprecated, use **justify-xl-\\*** class",
+    "justifyXxl": "Deprecated, use **justify-xxl-\\*** class",
     "noGutters": "Deprecated, use `density` with **compact** instead."
   }
 }
