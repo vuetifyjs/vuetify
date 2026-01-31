@@ -96,6 +96,7 @@ export const makeVRowProps = propsFactory({
   alignContentXxl: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
 
   gap: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  size: [Number, String],
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeTagProps(),
@@ -161,6 +162,7 @@ export const VRow = genericComponent()({
         {
           '--v-col-gap-x': horizontalGap.value,
           '--v-col-gap-y': verticalGap.value,
+          '--v-row-columns': props.size,
         },
         props.style,
       ],

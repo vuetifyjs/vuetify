@@ -20,6 +20,7 @@
     "justifySm": "Deprecated, use **justify-sm-\\*** class",
     "justifyXl": "Deprecated, use **justify-xl-\\*** class",
     "justifyXxl": "Deprecated, use **justify-xxl-\\*** class",
-    "noGutters": "Deprecated, use `density` with **compact** instead."
+    "noGutters": "Deprecated, use `density` with **compact** instead.",
+    "size": "Sets the number of columns."
   }
 }

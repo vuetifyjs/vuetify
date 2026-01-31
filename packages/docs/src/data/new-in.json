@@ -263,6 +263,11 @@
       "chunkWidth": "3.10.0"
     }
   },
+  "VRow": {
+    "props": {
+      "size": "4.0.0"
+    }
+  },
   "VSelect": {
     "props": {
       "autocomplete": "3.10.0",
