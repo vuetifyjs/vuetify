@@ -137,6 +137,15 @@
       }
     }
 
+    .expand-both-transition {
+      @include transition-default();
+
+      &-enter-active,
+      &-leave-active {
+        transition-property: height, width !important;
+      }
+    }
+
     .scale-transition {
       @include transition-default();
       @include fade-out();
