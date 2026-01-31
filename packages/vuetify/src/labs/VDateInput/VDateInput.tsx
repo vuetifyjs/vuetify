@@ -50,6 +50,7 @@ export const makeVDateInputProps = propsFactory({
     default: 'bottom start',
   },
   menu: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
@@ -312,6 +313,7 @@ export const VDateInput = genericComponent<new <
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  { ...props.menuProps }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }

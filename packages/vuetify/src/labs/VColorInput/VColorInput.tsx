@@ -37,6 +37,7 @@ export type PipLocation = typeof availablePipLocations[number]
 export const makeVColorInputProps = propsFactory({
   hidePip: Boolean,
   colorPip: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
   pipIcon: {
     type: String,
     default: '$color',
@@ -172,6 +173,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   minWidth="0"
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  { ...props.menuProps }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
