@@ -257,6 +257,7 @@
   },
   "VProgressCircular": {
     "props": {
+      "reveal": "3.12.0",
       "rounded": "3.11.0"
     }
   },
