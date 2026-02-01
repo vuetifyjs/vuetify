@@ -232,6 +232,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                     value={ props.returnObject ? item.raw : itemProps.value }
                     loading={ loading }
                     v-slots={ slotsWithItem }
+                    aria-label={ slotsWithItem?.title }
                   />
                 )
               )
