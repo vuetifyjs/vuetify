@@ -466,6 +466,31 @@ The component props (`offset`, `offset-sm`, etc.) continue to work unchanged, bu
 + <div class="v-col v-col-offset-6">
 ```
 
+#### Sass variables cleanup
+
+`$form-grid-gutter` was replaced with `$grid-density`. New values substract values from the default gutter
+
+```diff
+- $form-grid-gutter: $spacer * 2 !default;
++ $grid-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+```
+
+Sass variable `$grid-gutters` was removed. If your existing project had some custom definition set for this variable, you might want to adjust the variables below:
+
+```scss { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+  $avatar-margin-end: 8px;
+  $avatar-margin-start: 8px;
+
+  $icon-left-margin-left: 8px;
+  $icon-margin-end: 8px;
+  $icon-margin-start: 8px;
+
+  $icon-btn-margin-start: 8px;
+  $icon-btn-margin-end: 8px;
+}
+```
+
 #### Restoring the legacy grid behavior
 
 If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.

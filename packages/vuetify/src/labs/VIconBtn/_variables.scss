@@ -17,8 +17,8 @@ $icon-btn-font-weight: tools.map-deep-get(settings.$typography, 'label-large', '
 $icon-btn-line-height: normal !default;
 $icon-btn-height: var(--v-icon-btn-height) !default;
 $icon-btn-width: var(--v-icon-btn-width) !default;
-$icon-btn-margin-start: map.get(settings.$grid-gutters, 'md') !default;
-$icon-btn-margin-end: map.get(settings.$grid-gutters, 'md') !default;
+$icon-btn-margin-start: 8px !default;
+$icon-btn-margin-end: 8px !default;
 $icon-btn-plain-opacity: .62 !default;
 
 $icon-btn-border: (
