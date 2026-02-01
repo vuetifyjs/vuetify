@@ -391,8 +391,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 
 | Previous                         | New                                              |
 |----------------------------------|--------------------------------------------------|
-| `dense`                          | `density="comfortable"` or `gap="8"`             |
-| `no-gutters`                     | `density="compact"` or `gap="0"`                 |
+| `dense`                          | `density="compact"` or `gap="8"`             |
 | `align` prop on VRow             | use utility class (e.g., `align-start`)          |
 | `justify` prop on VRow           | use utility class (e.g., `justify-center`)       |
 | `align-content` prop on VRow     | use utility class (e.g., `align-content-center`) |
@@ -444,13 +443,6 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 
 ```diff
 - <v-row dense>
-+ <v-row density="comfortable">
-```
-
-**No gutters:**
-
-```diff
-- <v-row no-gutters>
 + <v-row density="compact">
 ```
 

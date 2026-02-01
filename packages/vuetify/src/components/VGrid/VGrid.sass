@@ -23,13 +23,14 @@ $false: ' '
     & + .v-row
       margin-top: var(--v-col-gap-y)
 
-    &--density-comfortable
-      --v-col-gap-x: #{settings.$form-grid-gutter}
-      --v-col-gap-y: #{settings.$form-grid-gutter}
+    @at-root
+      @include tools.density('v-row', settings.$grid-density) using ($modifier)
+        --v-col-gap-x: #{settings.$grid-gutter + $modifier * 1.5}
+        --v-col-gap-y: #{settings.$grid-gutter + $modifier * 1.5}
 
-    &.v-row--density-compact
-      --v-col-gap-x: 0px
-      --v-col-gap-y: 0px
+  .v-row--no-gutter
+    --v-col-gap-x: 0px
+    --v-col-gap-y: 0px
 
   // Columns
   //
