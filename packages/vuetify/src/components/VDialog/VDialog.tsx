@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
+import { mergeProps, ref } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -64,13 +64,6 @@ export const VDialog = genericComponent<OverlaySlots>()({
     function onAfterLeave () {
       emit('afterLeave')
     }
-
-    watch(isActive, async val => {
-      if (!val) {
-        await nextTick()
-        overlay.value!.activatorEl?.focus({ preventScroll: true })
-      }
-    })
 
     useRender(() => {
       const overlayProps = VOverlay.filterProps(props)
