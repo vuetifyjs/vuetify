@@ -50,6 +50,7 @@ The `vuetify-utilities` layer itself contains nested sublayers to control the or
 ```css
 @layer vuetify-utilities {
   @layer theme-base;
+  @layer typography;
   @layer helpers;
   @layer theme-background;
   @layer theme-foreground;
@@ -57,6 +58,7 @@ The `vuetify-utilities` layer itself contains nested sublayers to control the or
 ```
 
 - **theme-base**: CSS custom properties for theme colors and other variables, applied to `:root` or a scoped selector.
+- **typography**: Typography classes (`.text-headline-large`, `.text-body-small`, etc.)
 - **helpers**: Utility classes like spacing (`.pa-4`, `.ma-2`), display (`.d-flex`), and text alignment (`.text-center`).
 - **theme-background**: Background color utilities such as `.bg-primary` and `.bg-surface`.
 - **theme-foreground**: Text color utilities such as `.text-primary` and `.text-error`.
