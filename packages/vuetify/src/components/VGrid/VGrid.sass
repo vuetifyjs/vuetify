@@ -12,8 +12,6 @@ $false: ' '
   //
   // Rows contain and clear the floats of your columns.
   .v-row
-    --v-col-gap-x: #{settings.$grid-gutter}
-    --v-col-gap-y: #{settings.$grid-gutter}
     --v-row-columns: #{settings.$grid-columns}
     display: flex
     flex-wrap: wrap
@@ -25,8 +23,8 @@ $false: ' '
 
     @at-root
       @include tools.density('v-row', settings.$grid-density) using ($modifier)
-        --v-col-gap-x: #{settings.$grid-gutter + $modifier * 1.5}
-        --v-col-gap-y: #{settings.$grid-gutter + $modifier * 1.5}
+        --v-col-gap-x: #{settings.$grid-gutter + $modifier * 2}
+        --v-col-gap-y: #{settings.$grid-gutter + $modifier * 2}
 
   .v-row--no-gutter
     --v-col-gap-x: 0px
