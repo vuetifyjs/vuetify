@@ -171,12 +171,6 @@
 </script>
 
 <style lang="sass" scoped>
-  @use 'sass:map'
-  @use 'vuetify/settings'
-
   .code-shadow
     box-shadow: 10px 10px 100px -5px #00000044
-
-  .font-weight-bold
-    font-weight: map.get(settings.$font-weights, 'bold') !important
 </style>
