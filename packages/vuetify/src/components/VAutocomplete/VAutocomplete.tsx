@@ -276,7 +276,7 @@ export const VAutocomplete = genericComponent<new <
 
     function nextFocusSlot (
       focusable: { header: HTMLElement[], list: HTMLElement[], footer: HTMLElement[] },
-      origin: string,
+      origin: 'header' | 'list' | 'footer',
       direction: 'forward' | 'backward',
       target: Element
     ): 'header' | 'list' | 'footer' | null {

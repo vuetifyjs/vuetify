@@ -247,7 +247,7 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    async function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
+    function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
       const direction = e.shiftKey ? 'backward' : 'forward'
       const focusable = {
         header: headerRef.value ? focusableChildren(headerRef.value) : [],
@@ -290,7 +290,7 @@ export const VSelect = genericComponent<new <
 
     function nextFocusSlot (
       focusable: FocusableGroups,
-      origin: string,
+      origin: 'header' | 'list' | 'footer',
       direction: 'forward' | 'backward',
       target: Element
     ): keyof FocusableGroups | null {
