@@ -391,8 +391,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 
 | Previous                         | New                                              |
 |----------------------------------|--------------------------------------------------|
-| `dense`                          | `density="comfortable"` or `gap="8"`             |
-| `no-gutters`                     | `density="compact"` or `gap="0"`                 |
+| `dense`                          | `density="compact"` or `gap="8"`             |
 | `align` prop on VRow             | use utility class (e.g., `align-start`)          |
 | `justify` prop on VRow           | use utility class (e.g., `justify-center`)       |
 | `align-content` prop on VRow     | use utility class (e.g., `align-content-center`) |
@@ -444,13 +443,6 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 
 ```diff
 - <v-row dense>
-+ <v-row density="comfortable">
-```
-
-**No gutters:**
-
-```diff
-- <v-row no-gutters>
 + <v-row density="compact">
 ```
 
@@ -472,6 +464,31 @@ The component props (`offset`, `offset-sm`, etc.) continue to work unchanged, bu
 ```diff
 - <div class="v-col offset-6">
 + <div class="v-col v-col-offset-6">
+```
+
+#### Sass variables cleanup
+
+`$form-grid-gutter` was replaced with `$grid-density`. New values substract values from the default gutter
+
+```diff
+- $form-grid-gutter: $spacer * 2 !default;
++ $grid-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+```
+
+Sass variable `$grid-gutters` was removed. If your existing project had some custom definition set for this variable, you might want to adjust the variables below:
+
+```scss { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+  $avatar-margin-end: 8px;
+  $avatar-margin-start: 8px;
+
+  $icon-left-margin-left: 8px;
+  $icon-margin-end: 8px;
+  $icon-margin-start: 8px;
+
+  $icon-btn-margin-start: 8px;
+  $icon-btn-margin-end: 8px;
+}
 ```
 
 #### Restoring the legacy grid behavior
