@@ -138,12 +138,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const item = sortBy.value.find(item => item.key === column.key)
 
       if (!item) {
-        return `${column.title}. ${t('$vuetify.dataTable.ariaLabel.sortNone')} ${t('$vuetify.dataTable.ariaLabel.activateAscending')}`
+        return `${column.title}. ${t('$vuetify.dataTable.ariaLabel.activateAscending')}`
       }
 
       return item.order === 'asc'
-        ? `${column.title}. ${t('$vuetify.dataTable.ariaLabel.sortAscending')} ${t('$vuetify.dataTable.ariaLabel.activateDescending')}`
-        : `${column.title}. ${t('$vuetify.dataTable.ariaLabel.sortDescending')} ${t('$vuetify.dataTable.ariaLabel.activateAscending')}`
+        ? `${column.title}. ${t('$vuetify.dataTable.ariaLabel.activateDescending')}`
+        : `${column.title}. ${t('$vuetify.dataTable.ariaLabel.activateAscending')}`
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
