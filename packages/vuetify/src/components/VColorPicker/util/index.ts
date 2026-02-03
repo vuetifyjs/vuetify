@@ -31,7 +31,7 @@ export function extractColor (color: HSV, input: any) {
         : `rgb(${r} ${g} ${b})`
     } else if (input?.startsWith('hsl(')) {
       const { h, s, l, a } = HSVtoHSL(color)
-      return typeof a === 'number'
+      return typeof a === 'number' && a < 1
         ? `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)} / ${a})`
         : `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)})`
     }
