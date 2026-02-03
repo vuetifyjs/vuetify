@@ -211,7 +211,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://bin.vuetifyjs.com/">
+        <a href="https://github.com/vuetifyjs/create-vuetify">
           🫧&nbsp;Vuetify&nbsp;Create
         </a>
       </td>
