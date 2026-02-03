@@ -24,13 +24,16 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 
 export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
-    const hasA = color.a !== 1
     if (input?.startsWith('rgb(')) {
       const { r, g, b, a } = HSVtoRGB(color)
-      return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
+      return typeof a === 'number'
+        ? `rgb(${r} ${g} ${b} / ${a})`
+        : `rgb(${r} ${g} ${b})`
     } else if (input?.startsWith('hsl(')) {
       const { h, s, l, a } = HSVtoHSL(color)
-      return `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)}` + (hasA ? ` / ${a})` : ')')
+      return typeof a === 'number'
+        ? `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)} / ${a})`
+        : `hsl(${h} ${Math.round(s * 100)} ${Math.round(l * 100)})`
     }
 
     const hex = HSVtoHex(color)
