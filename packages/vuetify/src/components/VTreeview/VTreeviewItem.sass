@@ -20,23 +20,17 @@
       .v-treeview--fluid &
         width: 0
 
+    .v-list-item-action--start
+      margin-inline-end: 4px
+      margin-inline-start: -4px
+
   .v-treeview
     --v-treeview-indent-line-color: #{$treeview-indent-line-color}
     --v-treeview-indent-line-opacity: #{$treeview-indent-lines-opacity}
 
-    &.v-list
-      --indent-padding: #{$treeview-indent-padding}
-
     &.v-list--disabled .v-list-item__prepend
       pointer-events: auto
 
-    .v-list-item--slim > .v-list-item__prepend
-      > .v-icon ~ .v-list-item__spacer
-        width: var(--v-list-prepend-gap, $treeview-item-spacer-width)
-
-      &:not(:has(.v-list-item-action))
-        > .v-icon
-          margin-inline-start: $treeview-item-first-icon-margin-start
 
     &:has(.v-treeview-indent-lines)
       .v-list-item-action:first-child,
@@ -51,7 +45,7 @@
     display: grid
     padding-inline-start: $treeview-indent-lines-padding-left
     padding-block: $treeview-indent-lines-gap
-    grid-template-columns: repeat(var(--v-indent-parts, 1), var(--prepend-width))
+    grid-template-columns: repeat(var(--v-indent-parts, 1), var(--v-list-indent))
     opacity: var(--v-treeview-indent-line-opacity)
     pointer-events: none
 
@@ -102,9 +96,8 @@
 
   .v-treeview-group.v-list-group
     --list-indent-size: 0px
+    .v-list-group__items > .v-list-item
+      --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
 
-    & > .v-treeview-item__level
-      width: 0px
-
-    .v-list-group__items .v-list-item
-      padding-inline-start: calc(var(--indent-padding)) !important
+    &:has(> .v-list-item .v-list-item-action > .v-btn) > .v-list-group__items > .v-list-item
+      --indent-padding: calc(var(--parent-padding) + var(--v-list-indent) + 28px)
