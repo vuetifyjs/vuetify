@@ -54,7 +54,7 @@ function breakpointClass (type: keyof typeof classMap, prop: string, val: string
 }
 
 export const makeVRowProps = propsFactory({
-  /** @deprecated use density="comfortable" instead */
+  /** @deprecated use density="compact" instead */
   dense: Boolean,
   /** @deprecated use align-* class instead */
   align: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
