@@ -24,7 +24,6 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 
 export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
-  if (input == null || typeof input === 'string') {
     const hasA = typeof color.a === 'number' && color.a < 1
     if (input?.startsWith('rgb(')) {
       const { r, g, b, a } = HSVtoRGB(color)
