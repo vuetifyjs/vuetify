@@ -60,6 +60,7 @@
   "components/color-inputs": ["VColorInput", "VColorPicker"],
   "components/color-pickers": ["VColorPicker"],
   "components/combobox": ["VCombobox"],
+  "components/command-palettes": ["VCommandPalette"],
   "components/confirm-edit": ["VConfirmEdit"],
   "components/data-iterators": ["VDataIterator"],
   "components/date-inputs": ["VDateInput", "VDatePicker"],
