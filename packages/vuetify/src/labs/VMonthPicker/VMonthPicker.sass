@@ -1,0 +1,23 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-month-picker
+    width: $month-picker-width
+
+    .v-date-picker-months
+      height: auto
+
+
+    .v-date-picker-months__content
+      width: 100%
+      grid-template-columns: repeat(4, 1fr)
+      padding: $month-picker-content-padding
+      grid-gap: $month-picker-content-gap
+
+    .v-date-picker-years__content
+      width: 100%
+      grid-template-columns: repeat(4, 1fr)
+      padding: $month-picker-content-padding
+      grid-gap: $month-picker-content-gap

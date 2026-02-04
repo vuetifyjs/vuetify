@@ -1,6 +1,7 @@
 export * from './VColorInput'
 export * from './VCommandPalette'
 export * from './VDateInput'
+export * from './VMonthPicker'
 export * from './VFileUpload'
 export * from './VIconBtn'
 export * from './VMaskInput'
