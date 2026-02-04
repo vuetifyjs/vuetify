@@ -49,31 +49,40 @@ const propMap = {
   order: ['order', 'orderSm', 'orderMd', 'orderLg', 'orderXl', 'orderXxl'],
 }
 
-function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
+function parseCols (val: boolean | string | number) {
+  if (typeof val === 'string' && val.includes('/')) {
+    const [cols, size] = val.split('/')
+    return { cols: Number(cols), size: Number(size) }
+  }
+  return { cols: val }
+}
+
+function parseBreakpoint (type: keyof typeof propMap, prop: string, val: boolean | string | number) {
   if (val == null || val === false) {
-    return undefined
+    return {}
   }
-  let className = ''
-  if (prop) {
-    const breakpoint = prop.replace(type, '')
-    className += `${breakpoint}`
-  }
-  if (type === 'col') {
-    if (val === '' || val === true) {
-      // Handling the boolean style prop when accepting [Boolean, String, Number]
-      // means Vue will not convert <v-col sm></v-col> to sm: true for us.
-      // Since the default is false, an empty string indicates the prop's presence.
-      return 'v-col--' + className.toLowerCase()
+  const { cols, size } = parseCols(val)
+
+  const breakpoint = prop.replace(type, '').toLowerCase()
+
+  if (type === 'offset') {
+    return {
+      className: `v-col--offset-${breakpoint}-${cols}`,
+      variables: [{ [`--v-col-offset-base-${breakpoint}`]: size }],
     }
-    className = 'v-col--cols-' + className
-  } else if (type === 'offset') {
-    className = 'v-col--offset-' + className
   } else if (type === 'order') {
-    className = 'order-' + className
+    return { className: `order-${breakpoint}-${cols}` }
   }
-  // .order-md-6
-  className += `-${val}`
-  return className.toLowerCase()
+
+  // Handling the boolean style prop when accepting [Boolean, String, Number]
+  // means Vue will not convert <v-col sm></v-col> to sm: true for us.
+  // Since the default is false, an empty string indicates the prop's presence.
+  return {
+    className: cols === '' || cols === true
+      ? `v-col--${breakpoint}`
+      : `v-col--cols-${breakpoint}-${cols}`,
+    variables: [{ [`--v-col-size-base-${breakpoint}`]: size }],
+  }
 }
 
 const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
@@ -126,35 +135,51 @@ export const VCol = genericComponent()({
   props: makeVColProps(),
 
   setup (props, { slots }) {
-    const classes = computed(() => {
+    const sizeBaseOverride = computed(() => parseCols(props.cols).size)
+    const offsetBaseOverride = computed(() => parseCols(props.offset).size)
+
+    const responsive = computed(() => {
       const classList: any[] = ['v-col']
+      const variablesList: any[] = []
 
       // Loop through `col`, `offset`, `order` breakpoint props
       let type: keyof typeof propMap
       for (type in propMap) {
         propMap[type].forEach(prop => {
-          const value: string | number | boolean = (props as any)[prop]
-          const className = breakpointClass(type, prop, value)
+          const value = (props as any)[prop]
+          const { className, variables } = parseBreakpoint(type, prop, value)
           if (className) classList.push(className)
+          if (variables) variablesList.push(...variables)
         })
       }
 
+      const { cols } = parseCols(props.cols)
+      const { cols: offset } = parseCols(props.offset)
+
       classList.push({
-        [`v-col--cols-${props.cols}`]: props.cols,
-        [`v-col--offset-${props.offset}`]: props.offset,
+        [`v-col--cols-${cols}`]: cols,
+        [`v-col--offset-${offset}`]: offset,
         [`order-${props.order}`]: props.order,
         [`align-self-${props.alignSelf}`]: props.alignSelf,
       })
 
-      return classList
+      return {
+        classes: classList,
+        variables: variablesList,
+      }
     })
 
     return () => h(props.tag, {
       class: [
-        classes.value,
+        responsive.value.classes,
         props.class,
       ],
-      style: props.style,
+      style: [
+        { '--v-col-size-base': sizeBaseOverride.value },
+        { '--v-col-offset-base': offsetBaseOverride.value },
+        responsive.value.variables,
+        props.style,
+      ],
     }, slots.default?.())
   },
 })

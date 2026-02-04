@@ -1,10 +1,10 @@
 {
   "props": {
     "alignSelf": "Deprecated, use **align-self-\\*** class. Available options are: **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
-    "cols": "Sets the default number of columns the component extends. Available options are: **1 -> 12** and **auto**.",
+    "cols": "Sets the default number of columns the component extends. Available options are: **1 -> 12** and **auto**. It accepts `{n}/{size}` syntax (e.g. 1/5 or 3/24) that overrides grid columns count for size calculation.",
     "lg": "Changes the number of columns on large and greater breakpoints.",
     "md": "Changes the number of columns on medium and greater breakpoints.",
-    "offset": "Sets the default offset for the column.",
+    "offset": "Sets the default offset for the column. Similarly to **cols**, accepts `{n}/{size}` syntax (e.g. 1/5 or 3/24).",
     "offsetLg": "Changes the offset of the component on large and greater breakpoints.",
     "offsetMd": "Changes the offset of the component on medium and greater breakpoints.",
     "offsetSm": "Changes the offset of the component on small and greater breakpoints.",

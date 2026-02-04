@@ -35,9 +35,10 @@ $false: ' '
   // Common styles for small and large grid columns
   .v-col
     $size: var(--v-col-size)
-    $cols: var(--v-row-columns)
+    $cols: var(--v-col-size-columns)
     $gap: var(--v-col-gap-x)
     $offset: var(--v-col-offset)
+    $offsetCols: var(--v-col-offset-columns)
     flex-grow: var(--v-col-is-size, 0) var(--v-col-is-auto, 0) var(--v-col-is-grow, 1)
     flex-shrink: 0
     flex-basis: var(--v-col-is-size, calc(($size * (100% + $gap)) / $cols - $gap)) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0)
@@ -47,8 +48,22 @@ $false: ' '
     --v-col-is-auto: #{$false}
     --v-col-is-grow: #{$true}
 
+    --v-col-size-base: initial
+    --v-col-size-base-sm: initial
+    --v-col-size-base-md: initial
+    --v-col-size-base-lg: initial
+    --v-col-size-base-xl: initial
+    --v-col-size-base-xxl: initial
+
+    --v-col-offset-base: initial
+    --v-col-offset-base-sm: initial
+    --v-col-offset-base-md: initial
+    --v-col-offset-base-lg: initial
+    --v-col-offset-base-xl: initial
+    --v-col-offset-base-xxl: initial
+
     &:where([class*='v-col--offset-'])
-      margin-inline-start: calc($offset * (100% + $gap) / $cols)
+      margin-inline-start: calc($offset * (100% + $gap) / $offsetCols)
 
   @include make-grid-columns using ($infix)
     @if $infix != ''
@@ -68,8 +83,10 @@ $false: ' '
         --v-col-is-size: #{$true}
         --v-col-is-auto: #{$false}
         --v-col-is-grow: #{$false}
+        --v-col-size-columns: var(--v-col-size-base#{$infix}, var(--v-row-columns))
 
     @for $i from 0 through settings.$grid-columns - 1
       @if not ($infix == "" and $i == 0) // skip useless .v-col-offset-0
         .v-col--offset#{$infix}-#{$i}
           --v-col-offset: #{$i}
+          --v-col-offset-columns: var(--v-col-offset-base#{$infix}, var(--v-row-columns))

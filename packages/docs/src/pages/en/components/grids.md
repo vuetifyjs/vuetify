@@ -78,6 +78,10 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 
 ### Props
 
+#### Size
+
+The **size** prop on `v-row` defines the number of columns for the columns placed directly within. The example below sets it to 5 instead of 12.
+
 #### Align
 
 Change the vertical alignment of flex items and their parents using the **align** and **align-self** utility classes.
@@ -89,6 +93,7 @@ Change the vertical alignment of flex items and their parents using the **align*
 Columns will automatically take up an equal amount of space within their parent container. This can be modified using the **cols** prop. You can also utilize the **sm**, **md**, **lg**, and **xl** props to further define how the column will be sized in different viewport sizes.
 
 <ExamplesExample file="grid/prop-breakpoint-sizing" />
+<ExamplesExample file="grid/prop-size" />
 
 #### Justify
 
@@ -171,6 +176,12 @@ When using the auto-layout, you can define the width of only one column and stil
 Dynamically change your layout based upon resolution. Resize your screen and watch the row layout change on sm, md, and lg breakpoints.
 
 <ExamplesExample file="grid/misc-row-and-column-breakpoints" />
+
+#### Size overrides
+
+The `v-col` component can override the row's **size** using a fraction syntax like `cols="2/5"`. This means the column takes 2 parts of a 5-column grid. You can also use responsive props like **md** and **lg** or **offset** with the same syntax.
+
+<ExamplesExample file="grid/misc-size-overrides" />
 
 #### Spacers
 

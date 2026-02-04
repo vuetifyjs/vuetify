@@ -46,10 +46,10 @@ Add the following CSS to your application to restore the legacy grid behavior.
   }
   .v-col {
     padding: calc(var(--v-col-gap-y) * .5) calc(var(--v-col-gap-x) * .5);
-    flex-basis: var(--v-col-is-size, calc(100% * var(--v-col-size) / var(--v-row-columns))) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0);
+    flex-basis: var(--v-col-is-size, calc(100% * var(--v-col-size) / var(--v-col-size-columns))) var(--v-col-is-auto, auto) var(--v-col-is-grow, 0);
   }
   .v-col:where([class*='v-col--offset-']) {
-    margin-inline-start: calc(100% * var(--v-col-offset) / var(--v-row-columns))
+    margin-inline-start: calc(100% * var(--v-col-offset) / var(--v-col-size-columns))
   }
 }
 ```

@@ -95,6 +95,7 @@ export const makeVRowProps = propsFactory({
 
   noGutters: Boolean,
   gap: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  size: [Number, String],
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeTagProps(),
@@ -160,6 +161,7 @@ export const VRow = genericComponent()({
         {
           '--v-col-gap-x': horizontalGap.value,
           '--v-col-gap-y': verticalGap.value,
+          '--v-row-columns': props.size,
         },
         props.style,
       ],
