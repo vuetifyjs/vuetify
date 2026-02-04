@@ -54,10 +54,8 @@ function breakpointClass (type: keyof typeof classMap, prop: string, val: string
 }
 
 export const makeVRowProps = propsFactory({
-  /** @deprecated use density="comfortable" instead */
-  dense: Boolean,
   /** @deprecated use density="compact" instead */
-  noGutters: Boolean,
+  dense: Boolean,
   /** @deprecated use align-* class instead */
   align: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
   /** @deprecated use align-sm-* class instead */
@@ -95,6 +93,7 @@ export const makeVRowProps = propsFactory({
   /** @deprecated use align-content-xxl-* class instead */
   alignContentXxl: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
 
+  noGutters: Boolean,
   gap: [Number, String, Array] as PropType<number | string | (string | number)[]>,
   size: [Number, String],
   ...makeComponentProps(),

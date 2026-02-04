@@ -20,7 +20,7 @@
     "justifySm": "Deprecated, use **justify-sm-\\*** class",
     "justifyXl": "Deprecated, use **justify-xl-\\*** class",
     "justifyXxl": "Deprecated, use **justify-xxl-\\*** class",
-    "noGutters": "Deprecated, use `density` with **compact** instead.",
+    "noGutters": "Removes the gutter between `v-col`s (same as `gap='0'`).",
     "size": "Sets the number of columns."
   }
 }
