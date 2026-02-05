@@ -6,7 +6,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Utilities
 import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
-import { getAllByRole } from '@testing-library/vue'
+import { getAllByRole, waitFor } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -986,6 +986,10 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getByPlaceholderText('Search...')).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
+
+      await waitFor(() => {
+        expect(screen.getByRole('listbox')).toBeInTheDocument()
+      }, { timeout: 3000 })
 
       const menu = await screen.findByRole('listbox')
       await expect.element(menu).toBeVisible()
