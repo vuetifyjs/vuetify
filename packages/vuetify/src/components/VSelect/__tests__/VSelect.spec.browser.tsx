@@ -986,7 +986,10 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getByPlaceholderText('Search...')).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
-      await commands.waitStable('.v-list')
+
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
       await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
