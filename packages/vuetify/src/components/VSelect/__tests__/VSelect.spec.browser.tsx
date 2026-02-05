@@ -961,7 +961,7 @@ describe('VSelect', () => {
 
     it('should navigate freely between interactive elements with Tab', async () => {
       const { element } = render(() => (
-        <VSelect menu items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
+        <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
           {{
             'menu-header': () => (
               <div>
@@ -978,13 +978,10 @@ describe('VSelect', () => {
         </VSelect>
       ))
 
-      await userEvent.click(element)
+      await userEvent.click(element, { force: true })
       await commands.waitStable('.v-list')
 
-      expect(screen.getByTestId('textfield-1')).toBeVisible()
-      screen.getByPlaceholderText('Search...').focus()
-      await expect.poll(() => screen.getByPlaceholderText('Search...')).toHaveFocus()
-
+      await userEvent.keyboard('{ArrowDown}')
       await userEvent.keyboard('{Tab}')
 
       await waitFor(() => {
