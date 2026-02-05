@@ -17,7 +17,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
   default: never
@@ -29,6 +29,7 @@ export const makeVBadgeProps = propsFactory({
   color: String,
   content: [Number, String],
   dot: Boolean,
+  dotSize: [Number, String],
   floating: Boolean,
   icon: IconValue,
   inline: Boolean,
@@ -71,7 +72,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     const { locationStyles } = useLocation(props, true, side => {
       const base = props.floating
         ? (props.dot ? 2 : 4)
-        : (props.dot ? 8 : 12)
+        : (props.dot ? (Number(props.dotSize) ?? 8) : 12)
 
       return base + (
         ['top', 'bottom'].includes(side) ? Number(props.offsetY ?? 0)
@@ -129,6 +130,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                   textColorStyles.value,
                   dimensionStyles.value,
                   props.inline ? {} : locationStyles.value,
+                  props.dot && props.dotSize ? {
+                    width: convertToUnit(props.dotSize),
+                    height: convertToUnit(props.dotSize),
+                  } : {},
                 ]}
                 aria-atomic="true"
                 aria-label={ t(props.label, value) }
