@@ -8,8 +8,6 @@
     "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side."
   },
   "slots": {
-    "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`.",
-    "menu-header": "Define a custom sticky header placed inside the menu.",
-    "menu-footer": "Define a custom sticky footer placed inside the menu."
+    "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."
   }
 }
