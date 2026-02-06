@@ -2,10 +2,11 @@
 import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+import { VTextField } from '@/components/VTextField'
 
 // Utilities
 import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
-import { getAllByRole } from '@testing-library/vue'
+import { getAllByRole, waitFor } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -933,6 +934,74 @@ describe('VSelect', () => {
       expect(select).toHaveLength(2)
       expect(select).toContain('1')
       expect(select).toContain('2')
+    })
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate freely between interactive elements with Tab', async () => {
+      const { element } = render(() => (
+        <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
+          {{
+            'menu-header': () => (
+              <div>
+                <VTextField data-testid="textfield-1" placeholder="Search..." />
+              </div>
+            ),
+            'menu-footer': () => (
+              <div class="d-flex justify-between">
+                <button data-testid="button-1">Button 1</button>
+                <button data-testid="button-2">Button 2</button>
+              </div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element, { force: true })
+      await commands.waitStable('.v-list')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{Tab}')
+
+      await waitFor(() => {
+        expect(screen.getByRole('listbox')).toBeInTheDocument()
+      }, { timeout: 3000 })
+
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-1')).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-2')).toHaveFocus()
+
+      // Tab past footer closes menu
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
     })
   })
 

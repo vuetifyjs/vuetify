@@ -10,5 +10,9 @@
     "multiple": "Changes select to multiple. Accepts array for value.",
     "openOnClear": "Open's the menu whenever the clear icon is clicked.",
     "openText": "Text set to the inputs **aria-label** and **title** when input menu is open."
+  },
+  "slots": {
+    "menu-header": "Defines a header above the items list.",
+    "menu-footer": "Defines a footer below the items list."
   }
 }
