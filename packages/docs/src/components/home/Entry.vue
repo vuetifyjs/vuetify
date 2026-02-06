@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="pb-5">
-    <v-container class="text-left position-relative">
+    <v-container class="text-left position-relative" max-width="1300">
       <v-row
         class="py-16 align-center justify-center"
       >
