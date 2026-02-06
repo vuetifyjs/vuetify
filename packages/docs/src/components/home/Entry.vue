@@ -10,7 +10,11 @@
           </v-chip>
 
           <h1 class="text-display-medium text-md-display-large font-weight-bold my-5">
-            {{ t('home.entry.title-prefix') }} <br class="d-none d-md-block"> <span class="text-primary">{{ t('home.entry.title-highlight') }}</span> {{ t('home.entry.title-suffix') }}
+            {{ t('home.entry.title-prefix') }}
+            <br class="d-none d-md-block">
+            <span class="text-primary">{{ t('home.entry.title-highlight') }}</span>
+            <br class="d-none d-md-block">
+            {{ t('home.entry.title-suffix') }}
           </h1>
 
           <h2 class="text-title-large font-weight-regular text-medium-emphasis mt-5 mb-7">
