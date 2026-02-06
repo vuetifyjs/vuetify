@@ -22,7 +22,7 @@ The `v-avatar-group` component is used to display a collection of avatars in a s
 
 ::: warning
 
-This feature requires [v4.0.0](/getting-started/release-notes/?version=v4.0.0)
+This feature requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0)
 
 :::
 
