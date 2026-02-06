@@ -10,6 +10,9 @@
     margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
     padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
+    transition: .35s settings.$standard-easing
+    transition-property: margin, transform
+
     &:not(.v-snackbar--center):not(.v-snackbar--top)
       align-items: flex-end
 

@@ -22,7 +22,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -71,6 +71,8 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  title: String,
+  offset: Number,
   text: String,
   timer: [Boolean, String],
   timeout: {
@@ -89,6 +91,7 @@ export const makeVSnackbarProps = propsFactory({
   }), [
     'persistent',
     'noClickAnimation',
+    'offset',
     'retainFocus',
     'captureFocus',
     'disableInitialFocus',
@@ -193,8 +196,30 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }, {} as Record<string, any>)
     })
 
+    const offsetStyles = computed(() => {
+      const [side, align] = props.location.split(' ')
+      const direction = side === 'bottom' || align === 'end' ? -1 : 1
+
+      return {
+        transform: `translateY(calc(${direction} * ${convertToUnit(props.offset)}))`,
+      }
+    })
+
+    const transition = computed(() => {
+      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+        return props.transition
+      }
+
+      const [side, align] = props.location.split(' ')
+      const direction = ['start', 'end', 'left', 'right'].includes(align) || ['left', 'right'].includes(side) ? 'x' : 'y'
+      const reverse = ['end', 'right'].includes(align) || ['bottom', 'right'].includes(side) ? '-reverse' : ''
+      const prefix = props.transition.replace('-auto', '')
+
+      return `${prefix}-${direction}${reverse}-transition`
+    })
+
     useRender(() => {
-      const overlayProps = VOverlay.filterProps(props)
+      const overlayProps = omit(VOverlay.filterProps(props), ['offset', 'transition'])
       const hasContent = !!(slots.default || slots.text || props.text)
 
       return (
@@ -213,9 +238,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           ]}
           style={[
             mainStyles.value,
+            offsetStyles.value,
             props.style,
           ]}
           { ...overlayProps }
+          transition={ transition.value }
           v-model={ isActive.value }
           contentProps={ mergeProps({
             class: [
@@ -262,6 +289,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
+              { props.title ? (<div style="font-weight: bold" key="title">{ props.title }</div>) : '' }
               { slots.text?.() ?? props.text }
 
               { slots.default?.() }

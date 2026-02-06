@@ -1,17 +1,18 @@
 // Components
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VOverlay } from '@/components/VOverlay'
 import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
 // Composables
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, nextTick, shallowRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, VNodeProps } from 'vue'
+import type { PropType, Ref, VNodeProps } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
@@ -45,6 +46,12 @@ export type SnackbarMessage =
     | keyof VNodeProps
   > & { style?: any })
 
+export type SnackbarQueueItem = {
+  id: number
+  item: Exclude<SnackbarMessage, string>
+  active: Ref<boolean>
+}
+
 export const makeVSnackbarQueueProps = propsFactory({
   // TODO: Port this to Snackbar on dev
   closable: [Boolean, String],
@@ -56,7 +63,10 @@ export const makeVSnackbarQueueProps = propsFactory({
     type: Array as PropType<readonly SnackbarMessage[]>,
     default: () => [],
   },
-
+  totalVisible: {
+    type: [Number, String],
+    default: 1,
+  },
   ...omit(makeVSnackbarProps(), ['modelValue']),
 }, 'VSnackbarQueue')
 
@@ -69,46 +79,39 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSnackbarQueue',
 
+  inheritAttrs: false,
+
   props: makeVSnackbarQueueProps(),
 
   emits: {
     'update:modelValue': (val: SnackbarMessage[]) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
 
-    const isActive = shallowRef(false)
-    const isVisible = shallowRef(false)
-    const current = shallowRef<Exclude<SnackbarMessage, string>>()
+    let _lastId = 0
+    const current = shallowRef<SnackbarQueueItem[]>([]) // model proxy?
+    const limit = toRef(() => Number(props.totalVisible))
+    const isVisible = toRef(() => current.value.length > 0)
 
-    watch(() => props.modelValue.length, (val, oldVal) => {
-      if (!isVisible.value && val > oldVal) {
-        showNext()
-      }
-    })
-    watch(isActive, val => {
-      if (val) isVisible.value = true
-    })
+    watch(() => props.modelValue.length, showNext)
 
-    function onAfterLeave () {
-      if (props.modelValue.length) {
-        showNext()
-      } else {
-        current.value = undefined
-        isVisible.value = false
-      }
-    }
     function showNext () {
+      current.value = current.value.filter(x => x.active.value)
+
+      if (current.value.length >= limit.value || !props.modelValue.length) return
+
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
-      current.value = typeof next === 'string' ? { text: next } : next
-      nextTick(() => {
-        isActive.value = true
-      })
-    }
-    function onClickClose () {
-      isActive.value = false
+
+      const newItem: SnackbarQueueItem = {
+        id: _lastId++,
+        item: typeof next === 'string' ? { text: next } : next,
+        active: shallowRef(true),
+      }
+      current.value.unshift(newItem)
+      nextTick(() => newItem.active.value = true)
     }
 
     const btnProps = computed(() => ({
@@ -121,38 +124,48 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const { modelValue: _, ...snackbarProps } = VSnackbar.filterProps(props as any)
 
       return (
-        <>
-          { isVisible.value && !!current.value && (
+        <VOverlay
+          v-model={ isVisible.value }
+          contentClass="v-snackbar-queue"
+          persistent
+          noClickAnimation
+          scrim={ false }
+          scrollStrategy="none"
+          location={ props.location }
+          _disableGlobalStack
+        >
+          { current.value.map(({ id, item, active }, index) => (
             slots.default
               ? (
-                <VDefaultsProvider defaults={{ VSnackbar: current.value }}>
-                  { slots.default({ item: current.value }) }
+                <VDefaultsProvider defaults={{ VSnackbar: item }}>
+                  { slots.default({ item }) }
                 </VDefaultsProvider>
               ) : (
                 <VSnackbar
+                  key={ id }
+                  { ...attrs }
                   { ...snackbarProps }
-                  { ...current.value }
-                  v-model={ isActive.value }
-                  onAfterLeave={ onAfterLeave }
+                  { ...item }
+                  timer
+                  title={ `Message #${id}` }
+                  offset={ index * 80 }
+                  v-model={ active.value }
+                  onAfterLeave={ showNext }
                 >
                   {{
-                    text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
+                    text: slots.text ? () => slots.text?.({ item }) : undefined,
                     actions: hasActions ? () => (
                       <>
                         { !slots.actions ? (
                           <VBtn
                             { ...btnProps.value }
-                            onClick={ onClickClose }
+                            onClick={ () => active.value = false }
                           />
                         ) : (
-                          <VDefaultsProvider
-                            defaults={{
-                              VBtn: btnProps.value,
-                            }}
-                          >
+                          <VDefaultsProvider defaults={{ VBtn: btnProps.value }}>
                             { slots.actions({
-                              item: current.value!,
-                              props: { onClick: onClickClose },
+                              item,
+                              props: { onClick: () => active.value = false },
                             })}
                           </VDefaultsProvider>
                         )}
@@ -161,8 +174,8 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   }}
                 </VSnackbar>
               )
-          )}
-        </>
+          ))}
+        </VOverlay>
       )
     })
   },

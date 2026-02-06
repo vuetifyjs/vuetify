@@ -293,6 +293,11 @@
       "text": "3.4.0"
     }
   },
+  "VSnackbarQueue": {
+    "props": {
+      "totalVisible": "3.11.0"
+    }
+  },
   "VStepper": {
     "props": {
       "itemProps": "3.11.0"

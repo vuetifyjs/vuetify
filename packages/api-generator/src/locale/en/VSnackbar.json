@@ -5,6 +5,7 @@
     "multiLine": "Deprecated, use `min-height` instead. Increases minimum height.",
     "timer": "Display a progress bar that counts down until the snackbar closes. Pass a string to set a custom color, otherwise uses `info`.",
     "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use `-1` to keep open indefinitely (`0` in version < 2.3 ). It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the timeout.",
+    "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition. Supports special location-aware mode with **slide-auto** and **scroll-auto**",
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "slots": {

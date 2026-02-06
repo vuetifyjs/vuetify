@@ -1,6 +1,7 @@
 {
   "props": {
     "closable": "Adds a dismiss button that closes the active snackbar.",
-    "closeText": "The text used in the close button when using the **closable** prop."
+    "closeText": "The text used in the close button when using the **closable** prop.",
+    "totalVisible": "Specify the total visible snackbars."
   }
 }
