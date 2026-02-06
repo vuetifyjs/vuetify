@@ -48,6 +48,3 @@ meta:
 
 <HomeBlogs />
 
-<script setup>
-  const theme = useTheme()
-</script>
