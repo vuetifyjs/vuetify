@@ -57,7 +57,7 @@
                     <v-avatar class="mx-1" color="success" size="12" />
                   </div>
 
-                  <v-icon class="mx-2" icon="mdi-earth" />
+                  <v-icon class="mx-2" color="primary" icon="$vuetify" size="14" />
 
                   <span>{{ t('home.gallery.system-bar') }}</span>
                 </v-system-bar>
