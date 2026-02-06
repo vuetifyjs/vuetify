@@ -48,7 +48,7 @@
               </div>
             </v-card>
 
-            <v-card class="text-left" elevation="5" rounded="lg">
+            <v-card class="text-left" elevation="1" rounded="lg">
               <v-layout height="700">
                 <v-system-bar class="justify-center" theme="dark" window>
                   <div class="position-absolute left-0 ml-3">
