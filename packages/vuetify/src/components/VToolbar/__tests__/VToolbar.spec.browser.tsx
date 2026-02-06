@@ -16,6 +16,7 @@ const stories = {
       }}
     </VToolbar>
   ),
+  'With location': <VToolbar absolute location="top right" title="Positioned toolbar" />,
 }
 
 describe('VToolbar', () => {
