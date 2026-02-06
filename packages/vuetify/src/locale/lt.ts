@@ -91,6 +91,7 @@ export default {
     hour: 'Valanda',
     minute: 'Minutės',
     second: 'Sekundės',
+    notAllowed: 'Reikšmė neleidžiama',
   },
   pagination: {
     ariaLabel: {

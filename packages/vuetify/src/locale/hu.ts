@@ -91,6 +91,7 @@ export default {
     hour: 'Óra',
     minute: 'Perc',
     second: 'Másodperc',
+    notAllowed: 'Az érték nem engedélyezett',
   },
   pagination: {
     ariaLabel: {

@@ -91,6 +91,7 @@ export default {
     hour: '시간',
     minute: '분',
     second: '초',
+    notAllowed: '값이 허용되지 않습니다',
   },
   pagination: {
     ariaLabel: {

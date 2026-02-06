@@ -91,6 +91,7 @@ export default {
     hour: 'Stunda',
     minute: 'Minūtes',
     second: 'Sekundes',
+    notAllowed: 'Vērtība nav atļauta',
   },
   pagination: {
     ariaLabel: {

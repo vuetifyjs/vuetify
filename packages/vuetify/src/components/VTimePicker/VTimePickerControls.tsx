@@ -10,8 +10,9 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, watch } from 'vue'
-import { convert12to24, convert24to12, extractInteger, incrementHour, incrementMinuteOrSecond, pad } from './util'
+import { computed, nextTick, ref, watch } from 'vue'
+import { makeTimeValidationProps, useTimeValidation } from './useTimeValidation'
+import { convert12to24, convert24to12, extractInteger, pad } from './util'
 import { clamp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -22,6 +23,7 @@ export const makeVTimePickerControlsProps = propsFactory({
   ampm: Boolean,
   color: String,
   disabled: Boolean,
+  inputHints: Boolean,
   hour: [Number, String] as PropType<number | string | null>,
   minute: [Number, String] as PropType<number | string | null>,
   second: [Number, String] as PropType<number | string | null>,
@@ -30,6 +32,7 @@ export const makeVTimePickerControlsProps = propsFactory({
   useSeconds: Boolean,
   value: Number,
   viewMode: String as PropType<VTimePickerViewMode>,
+  ...makeTimeValidationProps(),
 }, 'VTimePickerControls')
 
 export const VTimePickerControls = genericComponent()({
@@ -45,8 +48,37 @@ export const VTimePickerControls = genericComponent()({
     'update:second': (v: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit }) {
     const { t } = useLocale()
+
+    const {
+      isAllowedHour,
+      isAllowedMinute,
+      isAllowedSecond,
+      findNextAllowed,
+    } = useTimeValidation(props)
+
+    const currentHour = computed(() =>
+      props.hour !== null
+        ? props.ampm
+          ? convert12to24(Number(props.hour), props.period ?? 'am')
+          : Number(props.hour)
+        : null
+    )
+    const currentMinute = computed(() => props.minute !== null ? Number(props.minute) : null)
+
+    const isHourValid = computed(() => {
+      if (props.hour === null) return true
+      return isAllowedHour.value?.(Number(currentHour.value)) ?? true
+    })
+    const isMinuteValid = computed(() => {
+      if (props.minute === null) return true
+      return isAllowedMinute.value?.(currentHour.value, Number(props.minute)) ?? true
+    })
+    const isSecondValid = computed(() => {
+      if (props.second === null) return true
+      return isAllowedSecond.value?.(currentHour.value, currentMinute.value, Number(props.second)) ?? true
+    })
 
     const transformHours = {
       in: (v?: number | string | null) => {
@@ -99,12 +131,20 @@ export const VTimePickerControls = genericComponent()({
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      const current = Number(hour.value ?? 0)
-      const period = props.ampm ? (props.period ?? 'am') : null
-      const { value, togglePeriod } = incrementHour(current, e.key === 'ArrowUp', period)
-      hour.value = pad(value)
-      if (togglePeriod) {
+
+      const isAm = props.period === 'am'
+      const current = props.ampm
+        ? convert12to24(Number(hour.value ?? 0), isAm ? 'am' : 'pm')
+        : Number(hour.value ?? 0)
+
+      const next = findNextAllowed('hour', current, e.key === 'ArrowUp')
+      const togglePeriod = (isAm && next >= 12) || (!isAm && next < 12)
+
+      if (props.ampm && togglePeriod) {
         emit('update:period', props.period === 'am' ? 'pm' : 'am')
+        nextTick(() => hour.value = pad(next))
+      } else {
+        hour.value = pad(next)
       }
     }
 
@@ -112,14 +152,20 @@ export const VTimePickerControls = genericComponent()({
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      minute.value = incrementMinuteOrSecond(Number(minute.value), e.key === 'ArrowUp')
+
+      const current = Number(minute.value ?? 0)
+      const next = findNextAllowed('minute', current, e.key === 'ArrowUp', currentHour.value)
+      minute.value = pad(next)
     }
 
     function onSecondFieldKeydown (e: KeyboardEvent) {
       if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
-      second.value = incrementMinuteOrSecond(Number(second.value), e.key === 'ArrowUp')
+
+      const current = Number(second.value ?? 0)
+      const next = findNextAllowed('second', current, e.key === 'ArrowUp', currentHour.value, currentMinute.value)
+      second.value = pad(next)
     }
 
     function createInputInterceptor (
@@ -178,6 +224,12 @@ export const VTimePickerControls = genericComponent()({
       }
     }
 
+    function setPeriod (val: Period) {
+      emit('update:period', val)
+      const next = findNextAllowed('hour', val === 'am' ? 23 : 11, true)
+      nextTick(() => hour.value = pad(next))
+    }
+
     const hourInputRef = ref<VTimePickerField>()
     const minuteInputRef = ref<VTimePickerField>()
     const secondInputRef = ref<VTimePickerField>()
@@ -224,6 +276,8 @@ export const VTimePickerControls = genericComponent()({
               color={ props.color }
               disabled={ props.disabled }
               label={ t('$vuetify.timePicker.hour') }
+              showHint={ props.inputHints }
+              error={ isHourValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
               modelValue={ hour.value }
               onUpdate:modelValue={ v => hour.value = v }
               onKeydown={ onHourFieldKeydown }
@@ -239,6 +293,8 @@ export const VTimePickerControls = genericComponent()({
               color={ props.color }
               disabled={ props.disabled }
               label={ t('$vuetify.timePicker.minute') }
+              showHint={ props.inputHints }
+              error={ isMinuteValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
               modelValue={ minute.value }
               onUpdate:modelValue={ v => minute.value = v }
               onKeydown={ onMinuteFieldKeydown }
@@ -251,19 +307,23 @@ export const VTimePickerControls = genericComponent()({
             )}
 
             { props.useSeconds && (
-              <VTimePickerField
-                key="secondsVal"
-                ref={ secondInputRef }
-                active={ props.viewMode === 'second' }
-                color={ props.color }
-                disabled={ props.disabled }
-                label={ t('$vuetify.timePicker.second') }
-                modelValue={ second.value }
-                onUpdate:modelValue={ v => second.value = v }
-                onKeydown={ onSecondFieldKeydown }
-                onBeforeinput={ secondInputFilter }
-                onFocus={ () => emit('update:viewMode', 'second') }
-              />
+              <>
+                <VTimePickerField
+                  key="secondsVal"
+                  ref={ secondInputRef }
+                  active={ props.viewMode === 'second' }
+                  color={ props.color }
+                  disabled={ props.disabled }
+                  label={ t('$vuetify.timePicker.second') }
+                  showHint={ props.inputHints }
+                  error={ isSecondValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
+                  modelValue={ second.value }
+                  onUpdate:modelValue={ v => second.value = v }
+                  onKeydown={ onSecondFieldKeydown }
+                  onBeforeinput={ secondInputFilter }
+                  onFocus={ () => emit('update:viewMode', 'second') }
+                />
+              </>
             )}
 
             { props.ampm && (
@@ -279,7 +339,7 @@ export const VTimePickerControls = genericComponent()({
                   disabled={ props.disabled }
                   text={ t('$vuetify.timePicker.am') }
                   variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
-                  onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
+                  onClick={ () => props.period !== 'am' ? setPeriod('am') : null }
                 />
 
                 <VBtn
@@ -293,7 +353,7 @@ export const VTimePickerControls = genericComponent()({
                   disabled={ props.disabled }
                   text={ t('$vuetify.timePicker.pm') }
                   variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
-                  onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
+                  onClick={ () => props.period !== 'pm' ? setPeriod('pm') : null }
                 />
               </div>
             )}

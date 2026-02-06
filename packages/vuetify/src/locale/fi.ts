@@ -91,6 +91,7 @@ export default {
     hour: 'Tunti',
     minute: 'Minuutit',
     second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {

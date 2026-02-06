@@ -1,6 +1,7 @@
 @use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
+@use '../../styles/utilities'
 @use './variables' as *
 
 @include tools.layer('components')
@@ -79,10 +80,17 @@
       &:focus::placeholder
         opacity: 0
 
-  .v-time-picker-controls__field-label
-    font-size: $time-picker-field-label-font-size
-    letter-spacing: $time-picker-field-label-letter-spacing
-    padding-top: 6px
+    &.v-input > .v-input__details
+      font-size: $time-picker-field-label-font-size
+      letter-spacing: $time-picker-field-label-letter-spacing
+      padding-inline: 0
+      white-space: normal
+
+      > .v-messages
+        opacity: 1
+
+    &.v-input--error .v-field__input
+      color: rgb(var(--v-theme-error))
 
   .v-time-picker-controls__ampm
     margin-left: 12px
@@ -115,7 +123,7 @@
 
   @at-root
     @include tools.density('v-time-picker', $time-picker-controls-field-density) using ($modifier)
-      .v-time-picker-controls__time__field
+      .v-time-picker-controls__time__field .v-input__control
         height: $time-picker-controls-field-height + $modifier
 
         .v-field
@@ -124,7 +132,7 @@
           .v-field__input
             min-height: $time-picker-controls-field-height + $modifier
 
-      &.v-time-picker--variant-input .v-time-picker-controls__time__field
+      &.v-time-picker--variant-input .v-time-picker-controls__time__field .v-input__control
         height: $time-picker-controls-input-field-height + $modifier
 
         .v-field

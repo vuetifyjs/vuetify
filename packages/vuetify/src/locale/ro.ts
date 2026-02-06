@@ -91,6 +91,7 @@ export default {
     hour: 'Oră',
     minute: 'Minute',
     second: 'Secunde',
+    notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
     ariaLabel: {

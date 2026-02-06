@@ -91,6 +91,7 @@ export default {
     hour: 'Hodina',
     minute: 'Minuty',
     second: 'Sekundy',
+    notAllowed: 'Hodnota není povolena',
   },
   pagination: {
     ariaLabel: {

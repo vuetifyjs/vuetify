@@ -91,6 +91,7 @@ export default {
     hour: '小时',
     minute: '分钟',
     second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {

@@ -91,6 +91,7 @@ export default {
     hour: 'Ώρα',
     minute: 'Λεπτά',
     second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {

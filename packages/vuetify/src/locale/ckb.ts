@@ -91,6 +91,7 @@ export default {
     hour: 'کاتژمێر',
     minute: 'خولەک',
     second: 'چرکە',
+    notAllowed: 'بەهاکە ڕێگەپێدراو نییە',
   },
   pagination: {
     ariaLabel: {
