@@ -157,7 +157,10 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           : undefined,
         prepend: slotProps => (
           <>
-            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
+            { props.selectable &&
+              !item.props.detached &&
+              (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) &&
+            (
               <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
