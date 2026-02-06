@@ -1,6 +1,6 @@
 <template>
   <v-responsive class="pb-5">
-    <v-container class="text-left position-relative" max-width="1300">
+    <v-container class="text-left position-relative">
       <v-row
         class="py-16 align-center justify-center"
       >
@@ -113,7 +113,11 @@
         </v-col>
 
         <v-col class="d-md-block d-none" cols="12" md="6">
-          <v-sheet class="rounded-lg overflow-hidden elevation-5" theme="dark">
+          <v-sheet
+            border="sm surface-variant-alt"
+            class="rounded-lg overflow-hidden elevation-5"
+            theme="dark"
+          >
             <v-toolbar class="justify-center" color="surface-variant-alt" height="25" theme="dark">
               <div class="position-absolute left-0 ml-3">
                 <v-avatar class="mx-1" color="error" size="10" />
