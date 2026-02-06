@@ -47,4 +47,3 @@ meta:
 <v-divider />
 
 <HomeBlogs />
-
