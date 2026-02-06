@@ -6,7 +6,7 @@
   .v-avatar-group {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: $avatar-group-container-gap;
 
     &--hoverable {
       .v-avatar {
@@ -14,8 +14,12 @@
         transition: transform 0.25s settings.$standard-easing;
 
         &:hover {
-          transform: translateY(-8px);
+          transform: $avatar-group-hoverable-horizontal-transform;
         }
+      }
+
+      &.v-avatar-group--vertical .v-avatar:hover {
+        transform: $avatar-group-hoverable-vertical-transform;
       }
     }
 
