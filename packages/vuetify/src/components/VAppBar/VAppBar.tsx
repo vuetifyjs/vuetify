@@ -25,16 +25,16 @@ export const makeVAppBarProps = propsFactory({
     type: Boolean,
     default: true,
   },
-  location: {
-    type: String as PropType<'top' | 'bottom'>,
-    default: 'top',
-    validator: (value: any) => ['top', 'bottom'].includes(value),
-  },
 
   ...makeVToolbarProps(),
   ...makeLayoutItemProps(),
   ...makeScrollProps(),
 
+  location: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'top',
+    validator: (value: any) => ['top', 'bottom'].includes(value),
+  },
   height: {
     type: [Number, String],
     default: 64,
