@@ -113,7 +113,7 @@
         </v-col>
 
         <v-col class="d-md-block d-none" cols="12" md="6">
-          <v-sheet class="rounded-lg elevation-10" theme="dark">
+          <v-sheet class="rounded-lg elevation-5" theme="dark">
             <AppMarkup
               :code="code"
               class="rounded-lg pa-5 bg-black"
