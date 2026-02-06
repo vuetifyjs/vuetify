@@ -1,4 +1,5 @@
 {
+  "description": "The `v-color-input` component combines a text field with a color picker.",
   "props": {
     "hidePip": "Hide pip icon",
     "colorPip": "Synchronize pip color with current value",

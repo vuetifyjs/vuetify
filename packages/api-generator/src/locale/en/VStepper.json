@@ -1,4 +1,5 @@
 {
+  "description": "The `v-stepper` component displays progress through numbered steps.",
   "props": {
     "completeIcon": "Icon to display when step is marked as completed.",
     "editIcon": "Icon to display when step is editable.",

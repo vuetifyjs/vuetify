@@ -1,4 +1,5 @@
 {
+  "description": "The `v-hover` component provides a simple interface for handling hover states for any component.",
   "props": {
     "disabled": "Removes hover functionality."
   }

@@ -1,4 +1,5 @@
 {
+  "description": "Specialized `v-data-table` for use with server-side data operations.",
   "props": {
     "itemsLength": "Number of all items.",
     "headerProps": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."

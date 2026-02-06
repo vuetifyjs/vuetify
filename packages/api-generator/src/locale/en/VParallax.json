@@ -1,4 +1,5 @@
 {
+  "description": "The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.",
   "props": {
     "alt": "Attaches an alt property to the parallax image.",
     "src": "The image to parallax.",

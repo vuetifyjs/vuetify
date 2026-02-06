@@ -1,4 +1,5 @@
 {
+  "description": "The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.",
   "props": {
     "direction": "Specifies if scroller is **vertical** or **horizontal**.",
     "emptyText": "Text shown when there is no more content to load.",

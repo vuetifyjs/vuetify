@@ -1,4 +1,5 @@
 {
+  "description": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "props": {
     "color": "Applies a color to the navigation dots - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "continuous": "Determines whether carousel is continuous.",

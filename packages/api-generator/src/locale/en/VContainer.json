@@ -1,4 +1,5 @@
 {
+  "description": "`v-container` provides the ability to center and horizontally pad your site’s contents.",
   "props": {
     "fluid": "Removes viewport maximum-width size breakpoints."
   }

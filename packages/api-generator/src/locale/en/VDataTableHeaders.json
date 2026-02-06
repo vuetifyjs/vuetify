@@ -1,4 +1,5 @@
 {
+  "description": "The `v-data-table-headers` component is used to define the headers for a `v-data-table`.",
   "props": {
     "color": "Applies a color to checkboxes, page size dropdown and sort badges in the table header.",
     "sortAscIcon": "Icon used for ascending sort button.",

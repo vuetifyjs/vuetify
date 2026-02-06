@@ -1,4 +1,5 @@
 {
+  "description": "The `v-pull-to-refresh` component allows users to update content with a simple downward swipe on their screen. Works for Mobile and Desktop.",
   "props": {
     "pullDownThreshold": "The distance the user must pull down to trigger a refresh."
   },

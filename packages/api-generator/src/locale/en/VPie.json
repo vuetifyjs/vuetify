@@ -1,4 +1,5 @@
 {
+  "description": "The `v-pie` component is design to display either pie or a donut chart with integrated tooltips and legend.",
   "props": {
     "gaugeCut": "Allows removing bottom part of the chart to make it into a gauge. Expects angle (0-180).",
     "hoverScale": "Enables interactive behavior by reducing segment size until it gets hovered. Expects fraction value (0-0.25).",

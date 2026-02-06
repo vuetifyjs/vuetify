@@ -1,4 +1,5 @@
 {
+  "description": "`v-date-picker` is a fully featured date selection component that lets users select a date.",
   "props": {
     "allowedDates": "Restricts which dates can be selected.",
     "calendarIcon": "The icon shown in the header when in 'input' **input-mode**.",

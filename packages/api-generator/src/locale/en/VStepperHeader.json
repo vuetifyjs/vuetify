@@ -1,3 +1,4 @@
 {
+  "description": "Subcomponent for `v-stepper` that provides the step header.",
   "props": {}
 }

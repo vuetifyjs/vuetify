@@ -1,4 +1,5 @@
 {
+  "description": "The `v-icon-btn` component is a lightweight button component for iconography.",
   "props": {
     "active": "When undefined (default), the component utilizes its default variant, otherwise it will use the activeVariant if active is true, or the baseVariant if active is false.",
     "activeIcon": "When active is a boolean, this icon is used when active is true.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, and a default slot.",
   "props": {
     "backgroundColor": "Changes the background-color of the input.",
     "baseColor": "Sets the color of the input when it is not focused.",
