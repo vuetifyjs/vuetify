@@ -2,7 +2,7 @@
   <v-responsive class="py-16">
     <HomeCommonGradient opacity-class="opacity-10" />
 
-    <v-container class="pt-0">
+    <v-container class="pt-0" fluid>
       <HomeCommonTitle
         :description="t('home.store.description')"
         :subtitle="t('home.store.subtitle')"
