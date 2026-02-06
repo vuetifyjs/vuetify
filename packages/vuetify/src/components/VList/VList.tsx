@@ -256,10 +256,8 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     }
 
     useRender(() => {
-      const indent = props.indent ??
-        (props.prependGap
-          ? Number(props.prependGap) + 24
-          : undefined)
+      const prependGap = Number(props.prependGap ?? (props.slim ? 20 : 32))
+      const indent = props.indent ?? (prependGap + 24)
 
       return (
         <props.tag
@@ -283,7 +281,6 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           style={[
             {
               '--v-list-indent': convertToUnit(indent),
-              '--v-list-group-prepend': indent ? '0px' : undefined,
               '--v-list-prepend-gap': convertToUnit(props.prependGap),
             },
             backgroundColorStyles.value,
