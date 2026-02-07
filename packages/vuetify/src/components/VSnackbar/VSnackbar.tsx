@@ -7,6 +7,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { VProgressCircular } from '@/components/VProgressCircular'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { useSnackbarItem } from '@/components/VSnackbarQueue/queue'
 
@@ -25,11 +26,11 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect, type PropType } from 'vue'
+import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
@@ -76,6 +77,7 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  loading: Boolean,
   prependAvatar: String,
   prependIcon: IconValue,
   title: String,
@@ -254,7 +256,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     useRender(() => {
       const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
-      const hasPrepend = !!(hasPrependMedia || slots.prepend)
+      const hasPrepend = !!(hasPrependMedia || props.loading || slots.prepend)
       const hasContent = !!(slots.default || slots.text || props.text)
 
       return (
@@ -328,40 +330,36 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           )}
 
           { hasPrepend && (
-            <div key="prepend" class="v-snackbar__prepend">
-              { !slots.prepend ? (
-                <>
-                  { props.prependAvatar && (
-                    <VAvatar
-                      key="prepend-avatar"
-                      image={ props.prependAvatar }
-                    />
-                  )}
-
-                  { props.prependIcon && (
-                    <VIcon
-                      key="prepend-icon"
-                      icon={ props.prependIcon }
-                    />
-                  )}
-                </>
-              ) : (
-                <VDefaultsProvider
-                  key="prepend-defaults"
-                  disabled={ !hasPrependMedia }
-                  defaults={{
-                    VAvatar: {
-                      image: props.prependAvatar,
-                    },
-                    VIcon: {
-                      icon: props.prependIcon,
-                    },
-                  }}
-                >
-                  { slots.prepend?.() }
-                </VDefaultsProvider>
-              )}
-            </div>
+            <VDefaultsProvider
+              key="prepend-defaults"
+              disabled={ !hasPrependMedia && !props.loading }
+              defaults={{
+                VAvatar: {
+                  image: props.prependAvatar,
+                },
+                VIcon: {
+                  icon: props.prependIcon,
+                },
+                VProgressCircular: {
+                  indeterminate: true,
+                  size: 24,
+                  width: 3,
+                },
+              }}
+            >
+              <div class="v-snackbar__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : (
+                    <>
+                      { props.loading && <VProgressCircular /> }
+                      { !props.loading && props.prependAvatar && <VAvatar /> }
+                      { !props.loading && props.prependIcon && <VIcon /> }
+                    </>
+                  )
+                }
+              </div>
+            </VDefaultsProvider>
           )}
 
           { hasContent && (
