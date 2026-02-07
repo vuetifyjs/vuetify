@@ -336,9 +336,18 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function getSelectedIndex () {
+      return displayItems.value.findIndex(
+        item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
+      )
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (listRef.value) {
+        const index = getSelectedIndex()
+        listRef.value.focus(index >= 0 ? index : 'first')
       }
     }
     function onAfterLeave () {
@@ -363,9 +372,7 @@ export const VSelect = genericComponent<new <
 
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
-        )
+        const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
