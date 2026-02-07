@@ -10,10 +10,6 @@
     &:after
       color: rgb(var(--v-theme-primary))
 
-    .v-time-picker-clock__item--active
-      background-color: rgb(var(--v-theme-surface-variant))
-      color: rgb(var(--v-theme-on-surface-variant))
-
   .v-time-picker-clock
     margin: $time-picker-padding
     background: rgb(var(--v-theme-surface-light))
@@ -74,9 +70,6 @@
     &--readonly
       pointer-events: none
 
-    .v-time-picker-clock__item--disabled
-      opacity: var(--v-disabled-opacity)
-
   .v-picker--full-width
     .v-time-picker-clock__container
       max-width: $time-picker-clock-max-width
@@ -90,41 +83,23 @@
 
   .v-time-picker-clock__item
     align-items: center
-    border-radius: 100%
+    border-radius: 100% !important
     cursor: default
     display: flex
-    font-size: $time-picker-number-font-size
+    font-size: $time-picker-number-font-size !important
     justify-content: center
-    height: $time-picker-indicator-size
-    position: absolute
+    position: absolute !important
     text-align: center
-    width: $time-picker-indicator-size
+    height: $time-picker-indicator-size !important
+    width: $time-picker-indicator-size !important
+    min-width: $time-picker-indicator-size !important
     user-select: none
     transform: translate(-50%, -50%)
-
-    > span
-      z-index: 1
-
-    &:before, &:after
-      content: ''
-      border-radius: 100%
-      position: absolute
-      top: 50%
-      left: 50%
-      height: 14px
-      width: 14px
-      transform: translate(-50%, -50%)
-
-    &:after, &:before
-      height: $time-picker-indicator-size
-      width: $time-picker-indicator-size
+    z-index: 1
 
     &--active
       cursor: default
       z-index: 2
-
-    &--disabled
-      pointer-events: none
 
   .v-picker--landscape
     .v-time-picker-clock
@@ -139,6 +114,3 @@
           border-color: highlight
         &:after
           background-color: highlight
-
-      &__item--active
-        outline: 2px solid highlight !important
