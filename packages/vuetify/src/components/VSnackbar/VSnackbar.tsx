@@ -80,6 +80,7 @@ export const makeVSnackbarProps = propsFactory({
   prependIcon: IconValue,
   title: String,
   text: String,
+  reverseTimer: Boolean,
   timer: [Boolean, String],
   timeout: {
     type: [Number, String],
@@ -311,7 +312,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 ref={ timerRef }
                 color={ typeof props.timer === 'string' ? props.timer : 'info' }
                 max={ props.timeout }
-                modelValue={ countdown.time.value }
+                modelValue={ props.reverseTimer ? Number(props.timeout) - countdown.time.value : countdown.time.value }
               />
             </div>
           )}
