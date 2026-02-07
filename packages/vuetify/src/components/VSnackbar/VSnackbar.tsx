@@ -6,6 +6,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
+import { useSnackbarItem } from '@/components/VSnackbarQueue/queue'
 
 // Composables
 import { useLayout } from '@/composables'
@@ -25,7 +26,7 @@ import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref,
 import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
@@ -121,6 +122,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
+    const queueItem = useSnackbarItem(isActive, () => overlay.value?.contentEl)
+    let _offsetSnapshot: CSSProperties | null = null
+
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
     const startY = shallowRef(0)
@@ -197,11 +201,23 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const offsetStyles = computed(() => {
+      const baseOffset = convertToUnit(props.offset ?? 0)
       const [side, align] = props.location.split(' ')
-      const direction = side === 'bottom' || align === 'end' ? -1 : 1
+      const direction = side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
 
-      return {
-        transform: `translateY(calc(${direction} * ${convertToUnit(props.offset)}))`,
+      if (!queueItem) {
+        return {
+          transform: `translateY(calc(${direction} * ${baseOffset})`,
+        }
+      }
+
+      if (queueItem.offset.value === null) {
+        return _offsetSnapshot // keep last offset when dismissing
+      }
+
+      const queueOffset = convertToUnit(queueItem.offset.value)
+      return _offsetSnapshot = {
+        transform: `translateY(calc(${direction} * (${baseOffset} + ${queueOffset}))`,
       }
     })
 
