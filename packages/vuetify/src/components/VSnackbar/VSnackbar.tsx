@@ -25,7 +25,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect, type PropType } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
@@ -81,7 +81,11 @@ export const makeVSnackbarProps = propsFactory({
   title: String,
   text: String,
   reverseTimer: Boolean,
-  timer: [Boolean, String],
+  timer: {
+    type: [Boolean, String] as PropType<boolean | 'top' | 'bottom'>,
+    default: false,
+  },
+  timerColor: String,
   timeout: {
     type: [Number, String],
     default: 5000,
@@ -307,10 +311,16 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { genOverlays(false, 'v-snackbar') }
 
           { props.timer && !isHovering.value && (
-            <div key="timer" class="v-snackbar__timer">
+            <div
+              key="timer"
+              class={[
+                'v-snackbar__timer',
+                `v-snackbar__timer--${props.timer === 'bottom' ? 'bottom' : 'top'}`,
+              ]}
+            >
               <VProgressLinear
                 ref={ timerRef }
-                color={ typeof props.timer === 'string' ? props.timer : 'info' }
+                color={ props.timerColor ?? 'info' }
                 max={ props.timeout }
                 modelValue={ props.reverseTimer ? Number(props.timeout) - countdown.time.value : countdown.time.value }
               />
