@@ -20,6 +20,7 @@ import { createRange, genericComponent, omit, propsFactory, useRender } from '@/
 import type { PropType } from 'vue'
 import type { Period, VTimePickerViewMode } from './shared'
 import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { EventProp, GenericProps } from '@/util'
 
 type AllowFunction = (val: number) => boolean
 
@@ -64,7 +65,15 @@ export const makeVTimePickerProps = propsFactory({
   ...makeDensityProps(),
 }, 'VTimePicker')
 
-export const VTimePicker = genericComponent<VTimePickerSlots>()({
+export const VTimePicker = genericComponent<new (
+  props: {
+    [key: `on${Capitalize<string>}:hour`]: EventProp<[Event, { value: number | string | null }]>
+    [key: `on${Capitalize<string>}:minute`]: EventProp<[Event, { value: number | string | null }]>
+    [key: `on${Capitalize<string>}:second`]: EventProp<[Event, { value: number | string | null }]>
+    [key: `on${Capitalize<string>}:period`]: EventProp<[Event, { value: Period }]>
+  },
+  slots: VTimePickerSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTimePicker',
 
   props: makeVTimePickerProps(),
@@ -78,7 +87,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     'update:viewMode': (val: VTimePickerViewMode) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
     const inputHour = ref(null as number | null)
@@ -301,11 +310,13 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
 
       const emitChange = inputHour.value !== null && inputMinute.value !== null && (props.useSeconds ? inputSecond.value !== null : true)
-      if (viewMode.value === 'hour') {
-        viewMode.value = 'minute'
-      } else if (props.useSeconds && viewMode.value === 'minute') {
-        viewMode.value = 'second'
-      }
+      setTimeout(() => {
+        if (viewMode.value === 'hour') {
+          viewMode.value = 'minute'
+        } else if (props.useSeconds && viewMode.value === 'minute') {
+          viewMode.value = 'second'
+        }
+      }, 0)
 
       if (inputHour.value === lazyInputHour.value &&
         inputMinute.value === lazyInputMinute.value &&
@@ -348,6 +359,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             header: () => (
               <VTimePickerControls
                 { ...timePickerControlsProps }
+                { ...attrs }
                 ampm={ isAmPm.value }
                 hour={ inputHour.value as number }
                 minute={ inputMinute.value as number }
@@ -365,6 +377,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
             default: () => (
               <VTimePickerClock
                 { ...timePickerClockProps }
+                { ...attrs }
+                viewMode={ viewMode.value }
                 allowedValues={
                   viewMode.value === 'hour'
                     ? isAllowedHourCb.value

@@ -6,10 +6,11 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, onScopeDispose, ref, watch } from 'vue'
-import { debounce, genericComponent, propsFactory, useRender } from '@/util'
+import { debounce, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VTimePickerViewMode } from './shared'
 interface Point {
   x: number
   y: number
@@ -47,6 +48,7 @@ export const makeVTimePickerClockProps = propsFactory({
   modelValue: {
     type: Number,
   },
+  viewMode: String as PropType<VTimePickerViewMode>,
 }, 'VTimePickerClock')
 
 export const VTimePickerClock = genericComponent()({
@@ -59,7 +61,7 @@ export const VTimePickerClock = genericComponent()({
     input: (val: number) => true,
   },
 
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     const clockRef = ref<HTMLElement | null>(null)
     const innerClockRef = ref<HTMLElement | null>(null)
     const inputValue = ref<number | undefined>(undefined)
@@ -177,10 +179,11 @@ export const VTimePickerClock = genericComponent()({
       update(value)
     }
 
-    function onDragMove (e: MouseEvent | TouchEvent) {
-      e.preventDefault()
-      if ((!isDragging.value && e.type !== 'click') || !clockRef.value) return
-      const { width, top, left } = clockRef.value?.getBoundingClientRect()
+    function getValueByEvent (e: Event) {
+      if (!(e instanceof MouseEvent) && !(e instanceof TouchEvent)) return undefined
+      if (!clockRef.value) return undefined
+
+      const { width, top, left } = clockRef.value.getBoundingClientRect()
       const { width: innerWidth }: DOMRect = innerClockRef.value?.getBoundingClientRect() ?? { width: 0 } as DOMRect
       const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
       const center = { x: width / 2, y: -width / 2 }
@@ -192,10 +195,22 @@ export const VTimePickerClock = genericComponent()({
 
       for (let i = 0; i < checksCount; i++) {
         value = angleToValue(handAngle + i * degreesPerUnit.value, insideClick)
-        if (isAllowed(value)) return setMouseDownValue(value)
+        if (isAllowed(value)) return value
 
         value = angleToValue(handAngle - i * degreesPerUnit.value, insideClick)
-        if (isAllowed(value)) return setMouseDownValue(value)
+        if (isAllowed(value)) return value
+      }
+
+      return value
+    }
+
+    function onDragMove (e: MouseEvent | TouchEvent) {
+      e.preventDefault()
+      if ((!isDragging.value && e.type !== 'click') || !clockRef.value) return
+
+      const value = getValueByEvent(e)
+      if (value != null && isAllowed(value)) {
+        setMouseDownValue(value)
       }
     }
 
@@ -234,6 +249,8 @@ export const VTimePickerClock = genericComponent()({
     onScopeDispose(removeListeners)
 
     useRender(() => {
+      const events = getPrefixedEventHandlers(attrs, `:${props.viewMode}`, nativeEvent => getValueByEvent(nativeEvent))
+
       return (
         <div
           class={[
@@ -243,6 +260,7 @@ export const VTimePickerClock = genericComponent()({
               'v-time-picker-clock--readonly': props.readonly,
             },
           ]}
+          { ...events }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
           onWheel={ wheel }
