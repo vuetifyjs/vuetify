@@ -35,11 +35,19 @@
       @media (forced-colors: active)
         border: thick solid
 
+    &__prepend
+      align-self: center
+      display: flex
+      margin-inline: $snackbar-prepend-margin-inline
+
+    &__prepend + &__content
+      padding-inline-start: 0
+
     &__title
       font-weight: $snackbar-title-font-weight
 
     &__content
-      flex-grow: 1
+      flex: 1 1
       font-size: $snackbar-font-size
       font-weight: $snackbar-font-weight
       letter-spacing: $snackbar-letter-spacing
@@ -71,11 +79,17 @@
       z-index: $snackbar-absolute-z-index
 
     &--vertical &__wrapper
-      flex-direction: column
+      flex-wrap: wrap
 
       .v-snackbar__actions
-        align-self: flex-end
+        flex-basis: 100%
+        justify-content: end
         margin-bottom: $snackbar-vertical-action-margin-bottom
+
+        &:before
+          content: ''
+          display: block
+          flex-basis: 100%
 
     &--center
       align-items: center

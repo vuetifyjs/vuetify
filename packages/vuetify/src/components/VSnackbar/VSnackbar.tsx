@@ -2,7 +2,9 @@
 import './VSnackbar.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VProgressLinear } from '@/components/VProgressLinear'
@@ -11,6 +13,7 @@ import { useSnackbarItem } from '@/components/VSnackbarQueue/queue'
 // Composables
 import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { IconValue } from '@/composables/icons'
 import { VuetifyLayoutKey } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -31,6 +34,7 @@ import type { Ref } from 'vue'
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
+  prepend: never
   actions: { isActive: Ref<boolean> }
   text: never
 }
@@ -72,6 +76,8 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  prependAvatar: String,
+  prependIcon: IconValue,
   title: String,
   text: String,
   timer: [Boolean, String],
@@ -242,6 +248,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     useRender(() => {
       const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
       const hasContent = !!(slots.default || slots.text || props.text)
 
       return (
@@ -305,6 +313,43 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
                 max={ props.timeout }
                 modelValue={ countdown.time.value }
               />
+            </div>
+          )}
+
+          { hasPrepend && (
+            <div key="prepend" class="v-snackbar__prepend">
+              { !slots.prepend ? (
+                <>
+                  { props.prependAvatar && (
+                    <VAvatar
+                      key="prepend-avatar"
+                      image={ props.prependAvatar }
+                    />
+                  )}
+
+                  { props.prependIcon && (
+                    <VIcon
+                      key="prepend-icon"
+                      icon={ props.prependIcon }
+                    />
+                  )}
+                </>
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      image: props.prependAvatar,
+                    },
+                    VIcon: {
+                      icon: props.prependIcon,
+                    },
+                  }}
+                >
+                  { slots.prepend?.() }
+                </VDefaultsProvider>
+              )}
             </div>
           )}
 
