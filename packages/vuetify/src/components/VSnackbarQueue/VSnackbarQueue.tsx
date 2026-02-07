@@ -9,7 +9,7 @@ import { useDocumentVisibility } from '@/composables/documentVisibility'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, triggerRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -45,7 +45,12 @@ export type SnackbarMessage =
     | 'v-slots'
     | `v-slot:${string}`
     | keyof VNodeProps
-  > & { style?: any })
+  > & {
+    style?: any
+    promise?: Promise<unknown>
+    success?: (val?: unknown) => Exclude<SnackbarMessage, string>
+    error?: (val?: Error) => Exclude<SnackbarMessage, string>
+  })
 
 export type SnackbarQueueItem = {
   id: number
@@ -111,13 +116,33 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
 
+      const item = typeof next === 'string' ? { text: next } : next
+      const { promise, success, error, ...itemProps } = item
+
+      console.log('itemProps :', itemProps);
       const newItem: SnackbarQueueItem = {
         id: _lastId++,
-        item: typeof next === 'string' ? { text: next } : next,
+        item: {
+          ...promise ? { timeout: -1, loading: true } : {},
+          ...itemProps,
+        },
         active: shallowRef(true),
       }
       visibleItems.value.unshift(newItem)
       nextTick(() => newItem.active.value = true)
+
+      promise?.then(
+        (data: any) => {
+          if (!newItem.active.value) return
+          newItem.item = success?.(data) ?? { ...newItem.item, timeout: 1 }
+          triggerRef(visibleItems)
+        },
+        (data: any) => {
+          if (!newItem.active.value) return
+          newItem.item = error?.(data) ?? { ...newItem.item, timeout: 1 }
+          triggerRef(visibleItems)
+        }
+      )
     }
 
     const btnProps = computed(() => ({

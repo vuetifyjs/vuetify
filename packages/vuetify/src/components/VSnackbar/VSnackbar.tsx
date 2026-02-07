@@ -37,6 +37,7 @@ type VSnackbarSlots = {
   default: never
   prepend: never
   actions: { isActive: Ref<boolean> }
+  title: never
   text: never
 }
 
@@ -257,7 +258,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
       const hasPrepend = !!(hasPrependMedia || props.loading || slots.prepend)
-      const hasContent = !!(slots.default || slots.text || props.text)
+      const hasContent = !!(slots.default || slots.text || slots.title || props.text || props.title)
 
       return (
         <VOverlay
@@ -369,7 +370,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
-              { props.title ? (<div class="v-snackbar__title" key="title">{ props.title }</div>) : '' }
+              { slots.title?.() ?? (
+                props.title
+                  ? (<div class="v-snackbar__title" key="title">{ props.title }</div>)
+                  : ''
+              )}
               { slots.text?.() ?? props.text }
 
               { slots.default?.() }
