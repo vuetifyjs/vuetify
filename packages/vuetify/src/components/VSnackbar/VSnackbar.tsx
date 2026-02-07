@@ -126,6 +126,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
+    const isFocused = shallowRef(false)
     const startY = shallowRef(0)
     const mainStyles = ref()
     const hasLayout = inject(VuetifyLayoutKey, undefined)
@@ -174,7 +175,21 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     function onPointerleave () {
       isHovering.value = false
-      startTimeout()
+      if (!isFocused.value) startTimeout()
+    }
+
+    function onFocusin () {
+      isFocused.value = true
+      clearTimeout()
+    }
+
+    function onFocusout (event: FocusEvent) {
+      const contentEl = overlay.value?.contentEl
+      if (contentEl?.contains(event.relatedTarget as Node)) {
+        return
+      }
+      isFocused.value = false
+      if (!isHovering.value) startTimeout()
     }
 
     function onTouchstart (event: TouchEvent) {
@@ -189,6 +204,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     function onAfterLeave () {
       if (isHovering.value) onPointerleave()
+      isFocused.value = false
     }
 
     const locationClasses = computed(() => {
@@ -265,6 +281,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             onPointerenter,
             onPointerleave,
+            onFocusin,
+            onFocusout,
           }, overlayProps.contentProps)}
           persistent
           noClickAnimation
