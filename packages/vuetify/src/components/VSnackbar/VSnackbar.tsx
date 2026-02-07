@@ -297,7 +297,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
-              { props.title ? (<div style="font-weight: bold" key="title">{ props.title }</div>) : '' }
+              { props.title ? (<div class="v-snackbar__title" key="title">{ props.title }</div>) : '' }
               { slots.text?.() ?? props.text }
 
               { slots.default?.() }
