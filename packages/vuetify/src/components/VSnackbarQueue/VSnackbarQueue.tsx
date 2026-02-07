@@ -119,7 +119,6 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const item = typeof next === 'string' ? { text: next } : next
       const { promise, success, error, ...itemProps } = item
 
-      console.log('itemProps :', itemProps);
       const newItem: SnackbarQueueItem = {
         id: _lastId++,
         item: {
