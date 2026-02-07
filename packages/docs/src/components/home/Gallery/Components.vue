@@ -48,7 +48,7 @@
               </div>
             </v-card>
 
-            <v-card class="text-left" elevation="5" rounded="lg">
+            <v-card class="text-left" elevation="1" rounded="lg">
               <v-layout height="700">
                 <v-system-bar class="justify-center" theme="dark" window>
                   <div class="position-absolute left-0 ml-3">
@@ -57,7 +57,7 @@
                     <v-avatar class="mx-1" color="success" size="12" />
                   </div>
 
-                  <v-icon class="mx-2" icon="mdi-earth" />
+                  <v-icon class="mx-2" color="primary" icon="$vuetify" size="14" />
 
                   <span>{{ t('home.gallery.system-bar') }}</span>
                 </v-system-bar>
@@ -106,15 +106,16 @@
                 <v-navigation-drawer
                   v-if="!selectedComponent.isNavigationHiden"
                   v-model="drawer"
-                  :rail="selectedComponent.hasRailsDrawer"
+                  :rail="hasRailsDrawer"
                   color="surface"
+                  width="250"
                 >
                   <v-list
                     :items="components"
                     nav
                     slim
                   >
-                    <v-list-subheader v-if="!selectedComponent.hasRailsDrawer">
+                    <v-list-subheader v-if="!hasRailsDrawer">
                       {{ t('home.gallery.application') }}
                     </v-list-subheader>
 
@@ -125,7 +126,7 @@
                       :active="item.title === selectedComponent.title"
                       active-class="text-primary"
                       nav
-                      @click="selectedComponent = item"
+                      @click="selectComponent(item)"
                     />
                   </v-list>
 
@@ -184,6 +185,7 @@
   type Density = 'default' | 'comfortable' | 'compact'
 
   const theme = useTheme()
+  const { mobile } = useDisplay()
 
   const themeConfigs = {
     light: { theme: theme.computedThemes.value.light, density: 'default' as Density },
@@ -194,7 +196,7 @@
     odyssey: { theme: theme.computedThemes.value.odyssey, density: 'compact' as Density },
   }
 
-  const drawer = ref(true)
+  const drawer = ref()
   const currentTheme = ref(theme.name.value)
   const density = shallowRef<Density>('default')
 
@@ -259,7 +261,16 @@
     },
   ]
 
+  const hasRailsDrawer = computed(() => {
+    return selectedComponent.value.hasRailsDrawer && !mobile.value
+  })
+
   const selectedComponent = shallowRef<SelectedComponent>(components[0])
+
+  function selectComponent (item: SelectedComponent) {
+    selectedComponent.value = item
+    drawer.value = !mobile.value
+  }
 </script>
 
 <style scoped>

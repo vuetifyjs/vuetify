@@ -10,10 +10,14 @@
           </v-chip>
 
           <h1 class="text-display-medium text-md-display-large font-weight-bold my-5">
-            {{ t('home.entry.title-prefix') }} <br class="d-none d-md-block"> <span class="text-primary">{{ t('home.entry.title-highlight') }}</span> {{ t('home.entry.title-suffix') }}
+            {{ t('home.entry.title-prefix') }}
+            <br class="d-none d-md-block">
+            <span class="text-primary">{{ t('home.entry.title-highlight') }}</span>
+            <br class="d-none d-md-block">
+            {{ t('home.entry.title-suffix') }}
           </h1>
 
-          <h2 class="text-title-large font-weight-regular text-medium-emphasis my-5">
+          <h2 class="text-title-large font-weight-regular text-medium-emphasis mt-5 mb-7">
             {{ t('home.entry.subtitle') }}
           </h2>
 
@@ -113,10 +117,22 @@
         </v-col>
 
         <v-col class="d-md-block d-none" cols="12" md="6">
-          <v-sheet class="rounded-lg elevation-10" theme="dark">
+          <v-sheet
+            border="sm surface-variant-alt"
+            class="rounded-lg overflow-hidden elevation-5"
+            theme="dark"
+          >
+            <v-toolbar class="justify-center" color="surface-variant-alt" height="25" theme="dark">
+              <div class="position-absolute left-0 ml-3">
+                <v-avatar class="mx-1" color="error" size="10" />
+                <v-avatar class="mx-1" color="warning" size="10" />
+                <v-avatar class="mx-1" color="success" size="10" />
+              </div>
+            </v-toolbar>
+
             <AppMarkup
               :code="code"
-              class="rounded-lg pa-5 bg-black"
+              class="pa-5 bg-black"
             />
           </v-sheet>
         </v-col>
@@ -137,7 +153,7 @@
   <v-app>
     <v-container>
       <v-btn color="primary">
-        ${t('home.entry.hello-vuetify')}
+        ${t('home.entry.hello-vuetify')}!
       </v-btn>
     </v-container>
   </v-app>
@@ -173,4 +189,9 @@
 <style lang="sass" scoped>
   .code-shadow
     box-shadow: 10px 10px 100px -5px #00000044
+
+  .code-toolbar
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
 </style>

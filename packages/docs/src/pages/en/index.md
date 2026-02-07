@@ -47,7 +47,3 @@ meta:
 <v-divider />
 
 <HomeBlogs />
-
-<script setup>
-  const theme = useTheme()
-</script>
