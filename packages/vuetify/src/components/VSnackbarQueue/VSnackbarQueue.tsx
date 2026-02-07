@@ -1,7 +1,6 @@
 // Components
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VOverlay } from '@/components/VOverlay'
 import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
 // Composables
@@ -99,7 +98,6 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     let _lastId = 0
     const visibleItems = shallowRef<SnackbarQueueItem[]>([])
     const limit = toRef(() => Number(props.totalVisible))
-    const isActive = toRef(() => visibleItems.value.length > 0)
 
     watch(() => props.modelValue.length, showNext)
 
@@ -130,16 +128,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const { modelValue: _, ...snackbarProps } = VSnackbar.filterProps(props as any)
 
       return (
-        <VOverlay
-          v-model={ isActive.value }
-          contentClass="v-snackbar-queue"
-          persistent
-          noClickAnimation
-          scrim={ false }
-          scrollStrategy="none"
-          location={ props.location }
-          _disableGlobalStack
-        >
+        <>
           { visibleItems.value.map(({ id, item, active }) => (
             slots.item
               ? (
@@ -178,7 +167,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                 </VSnackbar>
               )
           ))}
-        </VOverlay>
+        </>
       )
     })
   },
