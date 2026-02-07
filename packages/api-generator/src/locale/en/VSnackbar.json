@@ -2,9 +2,14 @@
   "props": {
     "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
     "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
+    "loading": "Displays a loading spinner in the prepend area.",
     "multiLine": "Deprecated, use `min-height` instead. Increases minimum height.",
-    "timer": "Display a progress bar that counts down until the snackbar closes. Pass a string to set a custom color, otherwise uses `info`.",
-    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden.  Use `-1` to keep open indefinitely (`0` in version < 2.3 ). It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the timeout.",
+    "prependAvatar": "Displays an avatar in the prepend area using the provided image source.",
+    "prependIcon": "Displays an icon in the prepend area.",
+    "reverseTimer": "Reverses the direction of the timer progress bar, filling up instead of depleting.",
+    "timer": "Display a progress bar that counts down until the snackbar closes. Use `bottom` to change the default placement.",
+    "timerColor": "Sets the color of the timer progress bar.",
+    "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden. Use `-1` to keep open indefinitely. It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the countdown.",
     "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition. Supports special location-aware mode with **slide-auto** and **scroll-auto**",
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },

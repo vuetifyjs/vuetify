@@ -289,12 +289,23 @@
   },
   "VSnackbar": {
     "props": {
+      "loading": "4.0.0",
+      "prependAvatar": "4.0.0",
+      "prependIcon": "4.0.0",
+      "reverseTimer": "4.0.0",
       "timer": "3.4.0",
+      "timerColor": "4.0.0",
       "text": "3.4.0"
+    },
+    "slots": {
+      "prepend": "4.0.0"
     }
   },
   "VSnackbarQueue": {
     "props": {
+      "closable": "4.0.0",
+      "closeText": "4.0.0",
+      "gap": "4.0.0",
       "totalVisible": "3.11.0"
     }
   },
