@@ -26,6 +26,10 @@
     "update:minute": "Emitted when user selects the minute.",
     "update:second": "Emitted when user selects the second.",
     "update:period": "Emitted when user clicks the AM/PM button.",
-    "update:viewMode": "Emitted when the view mode changes."
+    "update:viewMode": "Emitted when the view mode changes.",
+    "<domevent>:hour": "Emitted when the specified DOM event occurs on hours.",
+    "<domevent>:minute": "Emitted when the specified DOM event occurs on minutes.",
+    "<domevent>:second": "Emitted when the specified DOM event occurs on seconds.",
+    "<domevent>:period": "Emitted when the specified DOM event occurs on the period button."
   }
 }

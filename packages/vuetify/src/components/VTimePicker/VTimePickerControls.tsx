@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { ref, watch } from 'vue'
 import { convert12to24, convert24to12, extractInteger, incrementHour, incrementMinuteOrSecond, pad } from './util'
-import { clamp, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -45,7 +45,7 @@ export const VTimePickerControls = genericComponent()({
     'update:second': (v: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const { t } = useLocale()
 
     const transformHours = {
@@ -209,6 +209,8 @@ export const VTimePickerControls = genericComponent()({
     )
 
     useRender(() => {
+      const prefixEvents = (value: Period) => getPrefixedEventHandlers(attrs, ':period', () => value)
+
       return (
         <div class="v-time-picker-controls">
           <div
@@ -279,6 +281,7 @@ export const VTimePickerControls = genericComponent()({
                   disabled={ props.disabled }
                   text={ t('$vuetify.timePicker.am') }
                   variant={ props.disabled && props.period === 'am' ? 'elevated' : 'tonal' }
+                  { ...prefixEvents('am') }
                   onClick={ () => props.period !== 'am' ? emit('update:period', 'am') : null }
                 />
 
@@ -293,6 +296,7 @@ export const VTimePickerControls = genericComponent()({
                   disabled={ props.disabled }
                   text={ t('$vuetify.timePicker.pm') }
                   variant={ props.disabled && props.period === 'pm' ? 'elevated' : 'tonal' }
+                  { ...prefixEvents('pm') }
                   onClick={ () => props.period !== 'pm' ? emit('update:period', 'pm') : null }
                 />
               </div>
