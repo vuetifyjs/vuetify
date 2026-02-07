@@ -179,8 +179,11 @@ export const VTimePickerClock = genericComponent()({
       update(value)
     }
 
-    function getValueByEvent (e: MouseEvent | TouchEvent) {
-      const { width, top, left } = clockRef.value?.getBoundingClientRect()
+    function getValueByEvent (e: Event) {
+      if (!(e instanceof MouseEvent) && !(e instanceof TouchEvent)) return undefined
+      if (!clockRef.value) return undefined
+
+      const { width, top, left } = clockRef.value.getBoundingClientRect()
       const { width: innerWidth }: DOMRect = innerClockRef.value?.getBoundingClientRect() ?? { width: 0 } as DOMRect
       const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
       const center = { x: width / 2, y: -width / 2 }
