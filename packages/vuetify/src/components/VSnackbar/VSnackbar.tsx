@@ -2,14 +2,19 @@
 import './VSnackbar.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { VProgressCircular } from '@/components/VProgressCircular'
 import { VProgressLinear } from '@/components/VProgressLinear'
+import { useSnackbarItem } from '@/components/VSnackbarQueue/queue'
 
 // Composables
 import { useLayout } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { IconValue } from '@/composables/icons'
 import { VuetifyLayoutKey } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -22,15 +27,18 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
   default: never
+  prepend: never
   actions: { isActive: Ref<boolean> }
+  header: never
+  title: never
   text: never
 }
 
@@ -71,8 +79,17 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  loading: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  title: String,
   text: String,
-  timer: [Boolean, String],
+  reverseTimer: Boolean,
+  timer: {
+    type: [Boolean, String] as PropType<boolean | 'top' | 'bottom'>,
+    default: false,
+  },
+  timerColor: String,
   timeout: {
     type: [Number, String],
     default: 5000,
@@ -89,6 +106,7 @@ export const makeVSnackbarProps = propsFactory({
   }), [
     'persistent',
     'noClickAnimation',
+    'offset',
     'retainFocus',
     'captureFocus',
     'disableInitialFocus',
@@ -118,8 +136,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
+    const queueItem = useSnackbarItem(isActive, () => overlay.value?.contentEl)
+    let _lastOffset: string
+
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
+    const isFocused = shallowRef(false)
     const startY = shallowRef(0)
     const mainStyles = ref()
     const hasLayout = inject(VuetifyLayoutKey, undefined)
@@ -149,7 +171,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
       const element = refElement(timerRef.value)
 
-      countdown.start(element)
+      nextTick(() => countdown.start(element))
 
       activeTimeout = window.setTimeout(() => {
         isActive.value = false
@@ -168,7 +190,21 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     function onPointerleave () {
       isHovering.value = false
-      startTimeout()
+      if (!isFocused.value) startTimeout()
+    }
+
+    function onFocusin () {
+      isFocused.value = true
+      clearTimeout()
+    }
+
+    function onFocusout (event: FocusEvent) {
+      const contentEl = overlay.value?.contentEl
+      if (contentEl?.contains(event.relatedTarget as Node)) {
+        return
+      }
+      isFocused.value = false
+      if (!isHovering.value) startTimeout()
     }
 
     function onTouchstart (event: TouchEvent) {
@@ -183,6 +219,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     function onAfterLeave () {
       if (isHovering.value) onPointerleave()
+      isFocused.value = false
     }
 
     const locationClasses = computed(() => {
@@ -193,9 +230,36 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }, {} as Record<string, any>)
     })
 
+    const offset = computed(() => {
+      if (!queueItem) return {}
+      const [side, align] = props.location.split(' ')
+      const direction = side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
+
+      if (queueItem.offset.value === null) {
+        return _lastOffset
+      }
+
+      return _lastOffset = convertToUnit(direction * queueItem.offset.value)
+    })
+
+    const transition = computed(() => {
+      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+        return props.transition
+      }
+
+      const [side, align] = props.location.split(' ')
+      const direction = ['start', 'end', 'left', 'right'].includes(align) || ['left', 'right'].includes(side) ? 'x' : 'y'
+      const reverse = ['end', 'right'].includes(align) || ['bottom', 'right'].includes(side) ? '-reverse' : ''
+      const prefix = props.transition.replace('-auto', '')
+
+      return `${prefix}-${direction}${reverse}-transition`
+    })
+
     useRender(() => {
-      const overlayProps = VOverlay.filterProps(props)
-      const hasContent = !!(slots.default || slots.text || props.text)
+      const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasPrepend = !!(hasPrependMedia || props.loading || slots.prepend)
+      const hasContent = !!(slots.default || slots.text || slots.title || props.text || props.title)
 
       return (
         <VOverlay
@@ -213,9 +277,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           ]}
           style={[
             mainStyles.value,
+            {
+              '--v-snackbar-offset': offset.value,
+            },
             props.style,
           ]}
           { ...overlayProps }
+          transition={ transition.value }
           v-model={ isActive.value }
           contentProps={ mergeProps({
             class: [
@@ -230,6 +298,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             onPointerenter,
             onPointerleave,
+            onFocusin,
+            onFocusout,
           }, overlayProps.contentProps)}
           persistent
           noClickAnimation
@@ -244,15 +314,58 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
         >
           { genOverlays(false, 'v-snackbar') }
 
+          { slots.header && (
+            <div class="v-snackbar__header">{ slots.header?.() }</div>
+          )}
+
           { props.timer && !isHovering.value && (
-            <div key="timer" class="v-snackbar__timer">
+            <div
+              key="timer"
+              class={[
+                'v-snackbar__timer',
+                `v-snackbar__timer--${props.timer === 'bottom' ? 'bottom' : 'top'}`,
+              ]}
+            >
               <VProgressLinear
                 ref={ timerRef }
-                color={ typeof props.timer === 'string' ? props.timer : 'info' }
+                color={ props.timerColor ?? 'info' }
                 max={ props.timeout }
-                modelValue={ countdown.time.value }
+                modelValue={ props.reverseTimer ? Number(props.timeout) - countdown.time.value : countdown.time.value }
               />
             </div>
+          )}
+
+          { hasPrepend && (
+            <VDefaultsProvider
+              key="prepend-defaults"
+              disabled={ !hasPrependMedia && !props.loading }
+              defaults={{
+                VAvatar: {
+                  image: props.prependAvatar,
+                },
+                VIcon: {
+                  icon: props.prependIcon,
+                },
+                VProgressCircular: {
+                  indeterminate: true,
+                  size: 24,
+                  width: 3,
+                },
+              }}
+            >
+              <div class="v-snackbar__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : (
+                    <>
+                      { props.loading && <VProgressCircular /> }
+                      { !props.loading && props.prependAvatar && <VAvatar /> }
+                      { !props.loading && props.prependIcon && <VIcon /> }
+                    </>
+                  )
+                }
+              </div>
+            </VDefaultsProvider>
           )}
 
           { hasContent && (
@@ -262,6 +375,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               role="status"
               aria-live="polite"
             >
+              { slots.title?.() ?? (
+                props.title
+                  ? (<div class="v-snackbar__title" key="title">{ props.title }</div>)
+                  : ''
+              )}
               { slots.text?.() ?? props.text }
 
               { slots.default?.() }

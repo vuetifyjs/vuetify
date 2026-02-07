@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
@@ -10,12 +11,17 @@
     margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
     padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
+    transform: translateY(var(--v-snackbar-offset))
+    transition: .35s settings.$standard-easing
+    transition-property: margin, transform
+
     &:not(.v-snackbar--center):not(.v-snackbar--top)
       align-items: flex-end
 
     &__wrapper
       align-items: center
       display: flex
+      flex-wrap: wrap
       max-width: $snackbar-wrapper-max-width
       min-height: $snackbar-wrapper-min-height
       min-width: $snackbar-wrapper-min-width
@@ -30,8 +36,27 @@
       @media (forced-colors: active)
         border: thick solid
 
+    &__header
+      flex-basis: 100%
+
+      &:after
+        content: ''
+        display: block
+        flex-basis: 100%
+
+    &__prepend
+      align-self: center
+      display: flex
+      margin-inline: $snackbar-prepend-margin-inline
+
+    &__prepend + &__content
+      padding-inline-start: 0
+
+    &__title
+      font-weight: $snackbar-title-font-weight
+
     &__content
-      flex-grow: 1
+      flex: 1 1
       font-size: $snackbar-font-size
       font-weight: $snackbar-font-weight
       letter-spacing: $snackbar-letter-spacing
@@ -53,7 +78,12 @@
     &__timer
       width: 100%
       position: absolute
-      top: 0
+
+      &--top
+        top: 0
+
+      &--bottom
+        bottom: 0
 
       .v-progress-linear
         transition: .2s linear
@@ -62,12 +92,15 @@
       position: absolute
       z-index: $snackbar-absolute-z-index
 
-    &--vertical &__wrapper
-      flex-direction: column
+    &--vertical .v-snackbar__actions
+      flex-basis: 100%
+      justify-content: end
+      margin-bottom: $snackbar-vertical-action-margin-bottom
 
-      .v-snackbar__actions
-        align-self: flex-end
-        margin-bottom: $snackbar-vertical-action-margin-bottom
+      &:before
+        content: ''
+        display: block
+        flex-basis: 100%
 
     &--center
       align-items: center
@@ -76,8 +109,14 @@
     &--top
       align-items: flex-start
 
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
+
     &--bottom
       align-items: flex-end
+
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
 
     &--left,
     &--start
@@ -86,6 +125,9 @@
     &--right,
     &--end
       justify-content: flex-end
+
+    .v-avatar
+      background: transparent
 
 @include tools.layer('transitions')
   .v-snackbar-transition
