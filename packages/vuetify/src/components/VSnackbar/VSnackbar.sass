@@ -21,6 +21,7 @@
     &__wrapper
       align-items: center
       display: flex
+      flex-wrap: wrap
       max-width: $snackbar-wrapper-max-width
       min-height: $snackbar-wrapper-min-height
       min-width: $snackbar-wrapper-min-width
@@ -34,6 +35,14 @@
 
       @media (forced-colors: active)
         border: thick solid
+
+    &__header
+      flex-basis: 100%
+
+      &:after
+        content: ''
+        display: block
+        flex-basis: 100%
 
     &__prepend
       align-self: center
@@ -83,18 +92,15 @@
       position: absolute
       z-index: $snackbar-absolute-z-index
 
-    &--vertical &__wrapper
-      flex-wrap: wrap
+    &--vertical .v-snackbar__actions
+      flex-basis: 100%
+      justify-content: end
+      margin-bottom: $snackbar-vertical-action-margin-bottom
 
-      .v-snackbar__actions
+      &:before
+        content: ''
+        display: block
         flex-basis: 100%
-        justify-content: end
-        margin-bottom: $snackbar-vertical-action-margin-bottom
-
-        &:before
-          content: ''
-          display: block
-          flex-basis: 100%
 
     &--center
       align-items: center
@@ -119,6 +125,9 @@
     &--right,
     &--end
       justify-content: flex-end
+
+    .v-avatar
+      background: transparent
 
 @include tools.layer('transitions')
   .v-snackbar-transition

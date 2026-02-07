@@ -14,7 +14,8 @@
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "slots": {
-    "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification."
+    "actions": "Used to bind styles to [v-btn](/components/buttons) to match MD2 specification.",
+    "header": "Slot for custom content above the snackbar body."
   },
   "exposed": {
     "activatorEl": "Ref to the current activator element.",

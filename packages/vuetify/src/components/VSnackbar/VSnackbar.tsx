@@ -37,6 +37,7 @@ type VSnackbarSlots = {
   default: never
   prepend: never
   actions: { isActive: Ref<boolean> }
+  header: never
   title: never
   text: never
 }
@@ -312,6 +313,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           v-slots={{ activator: slots.activator }}
         >
           { genOverlays(false, 'v-snackbar') }
+
+          { slots.header && (
+            <div class="v-snackbar__header">{ slots.header?.() }</div>
+          )}
 
           { props.timer && !isHovering.value && (
             <div

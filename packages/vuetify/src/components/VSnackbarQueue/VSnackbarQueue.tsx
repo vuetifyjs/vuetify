@@ -17,6 +17,7 @@ import type { PropType, Ref, VNodeProps } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
+  header: { item: T }
   item: { item: T }
   text: { item: T }
   actions: {
@@ -172,6 +173,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   onAfterLeave={ showNext }
                 >
                   {{
+                    header: slots.header ? () => slots.header?.({ item }) : undefined,
                     text: slots.text ? () => slots.text?.({ item }) : undefined,
                     actions: hasActions ? () => (
                       <>
