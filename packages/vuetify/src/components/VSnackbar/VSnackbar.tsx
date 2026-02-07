@@ -155,7 +155,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
       const element = refElement(timerRef.value)
 
-      countdown.start(element)
+      nextTick(() => countdown.start(element))
 
       activeTimeout = window.setTimeout(() => {
         isActive.value = false

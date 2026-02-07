@@ -5,6 +5,7 @@ import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
 // Composables
 import { useSnackbarQueue } from './queue'
+import { useDocumentVisibility } from '@/composables/documentVisibility'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -93,6 +94,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const documentVisibility = useDocumentVisibility()
     useSnackbarQueue(props)
 
     let _lastId = 0
@@ -141,6 +143,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   { ...attrs }
                   { ...snackbarProps }
                   { ...item }
+                  { ...(documentVisibility.value === 'hidden' ? { timeout: -1 } : {}) }
                   v-model={ active.value }
                   onAfterLeave={ showNext }
                 >
