@@ -26,7 +26,7 @@ import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref,
 import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
-import type { CSSProperties, Ref } from 'vue'
+import type { Ref } from 'vue'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
@@ -73,7 +73,6 @@ function useCountdown (milliseconds: () => number) {
 
 export const makeVSnackbarProps = propsFactory({
   title: String,
-  offset: Number,
   text: String,
   timer: [Boolean, String],
   timeout: {
@@ -123,7 +122,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     const overlay = ref<VOverlay>()
     const queueItem = useSnackbarItem(isActive, () => overlay.value?.contentEl)
-    let _offsetSnapshot: CSSProperties | null = null
+    let _lastOffset: string
 
     const timerRef = ref<VProgressLinear>()
     const isHovering = shallowRef(false)
@@ -200,25 +199,16 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }, {} as Record<string, any>)
     })
 
-    const offsetStyles = computed(() => {
-      const baseOffset = convertToUnit(props.offset ?? 0)
+    const offset = computed(() => {
+      if (!queueItem) return {}
       const [side, align] = props.location.split(' ')
       const direction = side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
 
-      if (!queueItem) {
-        return {
-          transform: `translateY(calc(${direction} * ${baseOffset})`,
-        }
-      }
-
       if (queueItem.offset.value === null) {
-        return _offsetSnapshot // keep last offset when dismissing
+        return _lastOffset
       }
 
-      const queueOffset = convertToUnit(queueItem.offset.value)
-      return _offsetSnapshot = {
-        transform: `translateY(calc(${direction} * (${baseOffset} + ${queueOffset}))`,
-      }
+      return _lastOffset = convertToUnit(direction * queueItem.offset.value)
     })
 
     const transition = computed(() => {
@@ -235,7 +225,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     useRender(() => {
-      const overlayProps = omit(VOverlay.filterProps(props), ['offset', 'transition'])
+      const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
       const hasContent = !!(slots.default || slots.text || props.text)
 
       return (
@@ -254,7 +244,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           ]}
           style={[
             mainStyles.value,
-            offsetStyles.value,
+            {
+              '--v-snackbar-offset': offset.value,
+            },
             props.style,
           ]}
           { ...overlayProps }

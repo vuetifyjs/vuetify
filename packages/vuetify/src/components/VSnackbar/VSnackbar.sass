@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
@@ -10,6 +11,7 @@
     margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
     padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
+    transform: translateY(var(--v-snackbar-offset))
     transition: .35s settings.$standard-easing
     transition-property: margin, transform
 
@@ -79,8 +81,14 @@
     &--top
       align-items: flex-start
 
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
+
     &--bottom
       align-items: flex-end
+
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
 
     &--left,
     &--start
