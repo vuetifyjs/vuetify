@@ -70,6 +70,10 @@ export const makeVSnackbarQueueProps = propsFactory({
     default: '$vuetify.dismiss',
   },
   collapsed: Boolean,
+  displayStrategy: {
+    type: String as PropType<'overflow' | 'hold'>,
+    default: 'hold',
+  },
   modelValue: {
     type: Array as PropType<readonly SnackbarMessage[]>,
     default: () => [],
@@ -125,7 +129,16 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     function showNext () {
       visibleItems.value = visibleItems.value.filter(x => x.active)
 
-      if (visibleItems.value.length >= limit.value || !props.modelValue.length) return
+      if (!props.modelValue.length) return
+      if (visibleItems.value.length >= limit.value) {
+        if (props.displayStrategy !== 'overflow') return
+
+        // Dismiss oldest active items to make room
+        visibleItems.value
+          .filter(x => x.active)
+          .slice(limit.value - 1)
+          .forEach(x => x.active = false)
+      }
 
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
