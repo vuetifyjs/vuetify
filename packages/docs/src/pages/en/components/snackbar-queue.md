@@ -42,6 +42,22 @@ Messages are passed as an array of strings to `v-model`, when a message is displ
 
 ## Examples
 
+### Props
+
+#### Total visible
+
+The **total-visible** prop controls how many snackbars are shown simultaneously, stacked vertically with automatic offset. The **display-strategy** prop determines what happens when the queue exceeds this limit: `"hold"` (default) pauses the queue until a visible slot opens, while `"overflow"` immediately shows new messages and dismisses the oldest ones. Enable the **collapsed** prop to visually compress the stack into a single snackbar with a counter badge.
+
+<ExamplesExample file="v-snackbar-queue/prop-total-visible" />
+
+### Misc
+
+#### Promise
+
+Messages can include a **promise** property along with **success** and **error** callbacks. The snackbar shows a loading state until the promise resolves or rejects, then updates accordingly.
+
+<ExamplesExample file="v-snackbar-queue/misc-promise" />
+
 ### Additional props
 
 Snackbar props can be set either on the queue to apply to all messages:

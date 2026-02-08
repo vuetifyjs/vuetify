@@ -51,7 +51,7 @@
         clearable
       ></v-select>
 
-      <v-number-input v-model="timeout" min="-1"></v-number-input>
+      <v-number-input v-model="timeout" :min="-1"></v-number-input>
     </template>
   </ExamplesUsageExample>
 </template>
