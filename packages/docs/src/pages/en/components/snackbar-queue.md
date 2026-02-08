@@ -13,7 +13,7 @@ features:
   github: /components/VSnackbarQueue/
   label: 'C: VSnackbarQueue'
   report: true
-  spec: https://m2.material.io/components/snackbars
+  spec: https://m3.material.io/components/snackbar
 ---
 
 # Snackbar Queue

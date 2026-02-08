@@ -13,7 +13,7 @@ features:
   github: /components/VSnackbar/
   label: 'C: VSnackbar'
   report: true
-  spec: https://m2.material.io/components/snackbars
+  spec: https://m3.material.io/components/snackbar
 ---
 
 # Snackbars
