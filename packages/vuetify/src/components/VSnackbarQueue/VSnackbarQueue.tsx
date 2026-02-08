@@ -128,6 +128,9 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
 
     function removeItem (id: number) {
       visibleItems.value = visibleItems.value.filter(x => x.id !== id)
+      if (visibleItems.value.length === 0) {
+        isHovered.value = false
+      }
       showNext()
     }
 
