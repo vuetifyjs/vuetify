@@ -10,7 +10,7 @@ import { useDocumentVisibility } from '@/composables/documentVisibility'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, mergeProps, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, mergeProps, ref, shallowRef, toRef, triggerRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -149,11 +149,13 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
           if (!newItem.active) return
           newItem.item = success?.(data) ?? { ...newItem.item, timeout: 1 }
           updateDynamicProps()
+          triggerRef(visibleItems)
         },
         (data: any) => {
           if (!newItem.active) return
           newItem.item = error?.(data) ?? { ...newItem.item, timeout: 1 }
           updateDynamicProps()
+          triggerRef(visibleItems)
         }
       )
     }
