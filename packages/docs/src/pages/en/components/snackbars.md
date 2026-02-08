@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Snackbars
   title: Snackbar component
@@ -39,6 +40,10 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 <ApiInline hide-links />
 
 ## Examples
+
+::: info
+Some examples below use the **contained** prop to keep snackbars scoped within the example preview. In a real application you typically don't need it — snackbars render in the application overlay by default.
+:::
 
 ### Props
 

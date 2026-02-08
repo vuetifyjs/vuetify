@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Snackbar Queue
   title: Snackbar Queue component
@@ -41,6 +42,10 @@ Messages are passed as an array of strings to `v-model`, when a message is displ
 <ApiInline hide-links />
 
 ## Examples
+
+::: info
+Some examples below use the **contained** prop and direct **z-index** values to keep snackbars scoped within the example preview. In a real application you typically don't need either — snackbars render in the application overlay by default.
+:::
 
 ### Props
 
