@@ -5,11 +5,12 @@ import { makeVSnackbarProps, VSnackbar } from '@/components/VSnackbar/VSnackbar'
 
 // Composables
 import { useSnackbarQueue } from './queue'
+import { useDelay } from '@/composables/delay'
 import { useDocumentVisibility } from '@/composables/documentVisibility'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, mergeProps, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -106,6 +107,15 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     const documentVisibility = useDocumentVisibility()
     const queue = useSnackbarQueue(props)
 
+    const isHovered = shallowRef(false)
+    const { runOpenDelay, runCloseDelay } = useDelay(
+      { openDelay: 0, closeDelay: 500 },
+      val => {
+        isHovered.value = val
+        updateDynamicProps()
+      }
+    )
+
     let _lastId = 0
     const visibleItems = ref<SnackbarQueueItem[]>([])
     const limit = toRef(() => Number(props.totalVisible))
@@ -167,7 +177,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
         if (active) activeIndex++
       })
 
-      if (!props.collapsed) {
+      if (!props.collapsed || isHovered.value) {
         visibleItems.value.forEach(({ item }) => item.collapsed = undefined)
         return
       }
@@ -202,6 +212,10 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   { ...item }
                   { ...(documentVisibility.value === 'hidden' ? { timeout: -1 } : {}) }
                   queueGap={ Number(props.gap) }
+                  contentProps={ mergeProps(snackbarProps.contentProps, {
+                    onMouseenter: runOpenDelay,
+                    onMouseleave: () => runCloseDelay(),
+                  })}
                   modelValue={ active }
                   onUpdate:modelValue={ () => dismiss(id) }
                   onAfterLeave={ showNext }
