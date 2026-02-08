@@ -99,3 +99,39 @@
     queue2.value.clear()
   }
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      messages1: [],
+      messages2: [],
+      collapsed: false,
+      count: 0,
+      typeIndex: 1,
+    }),
+    methods: {
+      addMessage1 () {
+        this.messages1.push({
+          text: `Message #${++this.count}`,
+          colors: this.typeIndex++ % 3 === 1 ? 'success'
+            : this.typeIndex++ % 3 === 2 ? 'error'
+              : 'info',
+          zIndex: this.count,
+        })
+      },
+      addMessage2 () {
+        this.messages2.push({
+          text: `Message #${++this.count}`,
+          colors: this.typeIndex++ % 3 === 1 ? 'success'
+            : this.typeIndex++ % 3 === 2 ? 'error'
+              : 'info',
+          zIndex: this.count,
+        })
+      },
+      clearAll () {
+        this.$refs.queue1.clear()
+        this.$refs.queue2.clear()
+      },
+    },
+  }
+</script>

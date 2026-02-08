@@ -95,6 +95,67 @@
   replay()
 </script>
 
+<script>
+  export default {
+    data: () => ({
+      messages: [],
+      locationIndex: 0,
+      timeouts: [],
+    }),
+    computed: {
+      currentLocation () {
+        const locations = [
+          'top start',
+          'top end',
+          'bottom start',
+          'bottom end',
+        ]
+        return locations[this.locationIndex % 4]
+      },
+    },
+    mounted () {
+      this.replay()
+    },
+    methods: {
+      async replay () {
+        this.timeouts.forEach(clearTimeout)
+        this.$refs.queue?.clear()
+
+        await new Promise(resolve => setTimeout(resolve, 500))
+
+        this.timeouts = []
+        this.locationIndex++
+        this.messages = []
+
+        this.timeouts.push(setTimeout(() => {
+          this.messages.push({
+            text: 'Inbox check... please wait.',
+            color: 'info',
+          })
+        }, 300))
+        this.timeouts.push(setTimeout(() => {
+          this.messages.push({
+            text: 'You have 3 new messages in your Inbox.',
+            color: 'primary',
+          })
+        }, 700))
+        this.timeouts.push(setTimeout(() => {
+          this.messages.push({
+            text: 'Task submitted.',
+            color: 'success',
+          })
+        }, 1200))
+        this.timeouts.push(setTimeout(() => {
+          this.messages.push({
+            text: 'Your session will expire in 5 minutes.',
+            color: 'warning',
+          })
+        }, 1700))
+      },
+    },
+  }
+</script>
+
 <style>
 .bouncy-slide-x-transition-enter-active,
 .bouncy-slide-x-transition-leave-active,

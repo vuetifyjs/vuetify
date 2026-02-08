@@ -61,3 +61,47 @@
     }
   }
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      messages: [],
+    }),
+    methods: {
+      addSuccess () {
+        this.messages.push({
+          text: 'Saving...',
+          promise: new Promise(resolve => setTimeout(() => resolve('Done'), 1500)),
+          success: this.onSuccess,
+          error: this.onError,
+        })
+      },
+      addError () {
+        this.messages.push({
+          text: 'Deleting...',
+          promise: new Promise((resolve, reject) => setTimeout(() => reject(new Error('500')), 1500)),
+          success: this.onSuccess,
+          error: this.onError,
+        })
+      },
+      onSuccess () {
+        return {
+          text: 'Saved successfully!',
+          color: 'success',
+          prependIcon: '$success',
+          timeout: 1500,
+        }
+      },
+      onError (data) {
+        return {
+          text: `Failed to save. Error code: ${data.message}`,
+          color: 'error',
+          prependIcon: '$error',
+          timeout: 3000,
+          timer: 'bottom',
+          reverseTimer: true,
+        }
+      },
+    },
+  }
+</script>

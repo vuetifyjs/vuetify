@@ -37,3 +37,29 @@
     }
   }, { immediate: true })
 </script>
+
+<script>
+  export default {
+    data: () => ({
+      loadingSnackbar: true,
+      successSnackbar: false,
+    }),
+    watch: {
+      loadingSnackbar: {
+        handler (val) {
+          if (val) {
+            setTimeout(() => {
+              this.loadingSnackbar = false
+              this.successSnackbar = true
+            }, 2000)
+          } else {
+            setTimeout(() => {
+              this.loadingSnackbar = true
+            }, 3000)
+          }
+        },
+        immediate: true,
+      },
+    },
+  }
+</script>

@@ -50,5 +50,13 @@
 <script setup>
   import { shallowRef } from 'vue'
 
-  const current = ref(-1)
+  const current = shallowRef(-1)
+</script>
+
+<script>
+  export default {
+    data: () => ({
+      current: -1,
+    }),
+  }
 </script>
