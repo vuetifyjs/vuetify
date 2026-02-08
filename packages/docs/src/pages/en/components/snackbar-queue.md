@@ -55,6 +55,12 @@ The **total-visible** prop controls how many snackbars are shown simultaneously,
 
 <ExamplesExample file="v-snackbar-queue/prop-total-visible" />
 
+#### Transition
+
+Use the **transition** prop to change the enter/leave animation. If you pass CSS-based animation with suffix `*-auto` (e.g. `"slide-auto"`, `"scroll-auto"`) the effective transition will be location-aware. To present it more clearly, the example below uses custom "bouncy-slide" transition.
+
+<ExamplesExample file="v-snackbar-queue/prop-transition" />
+
 ### Misc
 
 #### Promise
