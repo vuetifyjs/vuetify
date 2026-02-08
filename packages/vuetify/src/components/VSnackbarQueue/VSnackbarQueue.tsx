@@ -221,6 +221,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     }
 
     watch(queue.lastItemSize, updateDynamicProps)
+    watch(() => props.collapsed, updateDynamicProps)
 
     useRender(() => {
       const hasActions = !!(props.closable || slots.actions)
