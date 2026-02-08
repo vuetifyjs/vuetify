@@ -321,7 +321,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             <div class="v-snackbar__header">{ slots.header?.() }</div>
           )}
 
-          { props.timer && !isHovering.value && (
+          { props.timer && countdown.time.value > 0 && !isHovering.value && (
             <div
               key="timer"
               class={[
