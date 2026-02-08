@@ -11,9 +11,9 @@
     margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
     padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
-    transform: translateY(var(--v-snackbar-offset))
-    transition: .35s settings.$standard-easing
-    transition-property: margin, transform
+    --v-snackbar-current-offset: var(--v-snackbar-offset)
+    transform: translateY(calc(var(--v-snackbar-direction) * (var(--v-snackbar-current-offset) + var(--v-snackbar-mobile-notch, 0px))))
+    transition: transform .2s settings.$standard-easing
 
     &:not(.v-snackbar--center):not(.v-snackbar--top)
       align-items: flex-end
@@ -27,6 +27,9 @@
       min-width: $snackbar-wrapper-min-width
       overflow: hidden
       padding: $snackbar-wrapper-padding
+
+      transition: .35s settings.$standard-easing
+      transition-property: height, width
 
       @include tools.rounded($snackbar-border-radius)
 
@@ -110,13 +113,13 @@
       align-items: flex-start
 
       @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
-        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-top), 0px)
 
     &--bottom
       align-items: flex-end
 
       @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
-        transform: translateY(calc(var(--v-snackbar-offset) + max(env(safe-area-inset-top), 0px)))
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-bottom), 0px)
 
     &--left,
     &--start
@@ -125,6 +128,30 @@
     &--right,
     &--end
       justify-content: flex-end
+
+    &--collapsed
+      --v-snackbar-current-offset: calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
+
+      .v-snackbar__wrapper
+        min-width: 0
+        width: calc(var(--v-snackbar-collapsed-width) - 2 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
+        height: var(--v-snackbar-collapsed-height)
+
+        > *
+          opacity: 0
+
+      &.v-snackbar--start,
+      &.v-snackbar--left
+        .v-snackbar__wrapper
+          transform: translateX(calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      &.v-snackbar--end,
+      &.v-snackbar--right
+        .v-snackbar__wrapper
+          transform: translateX(calc(-1 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      .v-progress-linear
+        opacity: 0
 
     .v-avatar
       background: transparent

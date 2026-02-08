@@ -9,11 +9,11 @@ import { useDocumentVisibility } from '@/composables/documentVisibility'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, nextTick, shallowRef, toRef, triggerRef, watch } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref, VNodeProps } from 'vue'
+import type { PropType, VNodeProps } from 'vue'
 import type { GenericProps } from '@/util'
 
 export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
@@ -41,6 +41,7 @@ export type SnackbarMessage =
     | 'openOnClick'
     | 'openOnFocus'
     | 'openOnHover'
+    | 'collapsed'
     | 'style'
     | '$children'
     | 'v-slots'
@@ -48,6 +49,7 @@ export type SnackbarMessage =
     | keyof VNodeProps
   > & {
     style?: any
+    collapsed?: { width: number, height: number }
     promise?: Promise<unknown>
     success?: (val?: unknown) => Exclude<SnackbarMessage, string>
     error?: (val?: Error) => Exclude<SnackbarMessage, string>
@@ -56,7 +58,7 @@ export type SnackbarMessage =
 export type SnackbarQueueItem = {
   id: number
   item: Exclude<SnackbarMessage, string>
-  active: Ref<boolean>
+  active: boolean
 }
 
 export const makeVSnackbarQueueProps = propsFactory({
@@ -66,6 +68,7 @@ export const makeVSnackbarQueueProps = propsFactory({
     type: String,
     default: '$vuetify.dismiss',
   },
+  collapsed: Boolean,
   modelValue: {
     type: Array as PropType<readonly SnackbarMessage[]>,
     default: () => [],
@@ -78,7 +81,7 @@ export const makeVSnackbarQueueProps = propsFactory({
     type: [Number, String],
     default: 8,
   },
-  ...omit(makeVSnackbarProps(), ['modelValue']),
+  ...omit(makeVSnackbarProps(), ['modelValue', 'collapsed']),
 }, 'VSnackbarQueue')
 
 export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarMessage[]> (
@@ -101,16 +104,16 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const documentVisibility = useDocumentVisibility()
-    useSnackbarQueue(props)
+    const queue = useSnackbarQueue(props)
 
     let _lastId = 0
-    const visibleItems = shallowRef<SnackbarQueueItem[]>([])
+    const visibleItems = ref<SnackbarQueueItem[]>([])
     const limit = toRef(() => Number(props.totalVisible))
 
     watch(() => props.modelValue.length, showNext)
 
     function showNext () {
-      visibleItems.value = visibleItems.value.filter(x => x.active.value)
+      visibleItems.value = visibleItems.value.filter(x => x.active)
 
       if (visibleItems.value.length >= limit.value || !props.modelValue.length) return
 
@@ -126,23 +129,30 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
           ...promise ? { timeout: -1, loading: true } : {},
           ...itemProps,
         },
-        active: shallowRef(true),
+        active: true,
       }
       visibleItems.value.unshift(newItem)
-      nextTick(() => newItem.active.value = true)
+      updateDynamicProps()
 
       promise?.then(
         (data: any) => {
-          if (!newItem.active.value) return
+          if (!newItem.active) return
           newItem.item = success?.(data) ?? { ...newItem.item, timeout: 1 }
-          triggerRef(visibleItems)
+          updateDynamicProps()
         },
         (data: any) => {
-          if (!newItem.active.value) return
+          if (!newItem.active) return
           newItem.item = error?.(data) ?? { ...newItem.item, timeout: 1 }
-          triggerRef(visibleItems)
+          updateDynamicProps()
         }
       )
+    }
+
+    function dismiss (id: number) {
+      const item = visibleItems.value.find(x => x.id === id)
+      if (!item) return
+      item.active = false
+      updateDynamicProps()
     }
 
     const btnProps = computed(() => ({
@@ -150,9 +160,31 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       text: t(props.closeText),
     }))
 
+    function updateDynamicProps () {
+      let activeIndex = 0
+      visibleItems.value.forEach(({ item, active }) => {
+        item.queueIndex = activeIndex
+        if (active) activeIndex++
+      })
+
+      if (!props.collapsed) {
+        visibleItems.value.forEach(({ item }) => item.collapsed = undefined)
+        return
+      }
+
+      for (const { item } of visibleItems.value) {
+        item.collapsed = item.queueIndex! > 0 ? {
+          width: queue.lastItemSize.value.width,
+          height: queue.lastItemSize.value.height,
+        } : undefined
+      }
+    }
+
+    watch(queue.lastItemSize, updateDynamicProps)
+
     useRender(() => {
       const hasActions = !!(props.closable || slots.actions)
-      const { modelValue: _, ...snackbarProps } = VSnackbar.filterProps(props as any)
+      const snackbarProps = omit(VSnackbar.filterProps(props as any), ['modelValue', 'collapsed'])
 
       return (
         <>
@@ -169,7 +201,9 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   { ...snackbarProps }
                   { ...item }
                   { ...(documentVisibility.value === 'hidden' ? { timeout: -1 } : {}) }
-                  v-model={ active.value }
+                  queueGap={ Number(props.gap) }
+                  modelValue={ active }
+                  onUpdate:modelValue={ () => dismiss(id) }
                   onAfterLeave={ showNext }
                 >
                   {{
@@ -180,13 +214,13 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                         { !slots.actions ? (
                           <VBtn
                             { ...btnProps.value }
-                            onClick={ () => active.value = false }
+                            onClick={ () => dismiss(id) }
                           />
                         ) : (
                           <VDefaultsProvider defaults={{ VBtn: btnProps.value }}>
                             { slots.actions({
                               item,
-                              props: { onClick: () => active.value = false },
+                              props: { onClick: () => dismiss(id) },
                             })}
                           </VDefaultsProvider>
                         )}

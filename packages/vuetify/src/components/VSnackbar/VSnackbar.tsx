@@ -79,9 +79,12 @@ function useCountdown (milliseconds: () => number) {
 }
 
 export const makeVSnackbarProps = propsFactory({
+  collapsed: Object as PropType<{ width: number, height: number }>,
   loading: Boolean,
   prependAvatar: String,
   prependIcon: IconValue,
+  queueGap: Number,
+  queueIndex: Number,
   title: String,
   text: String,
   reverseTimer: Boolean,
@@ -230,16 +233,27 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }, {} as Record<string, any>)
     })
 
+    const queueDirection = computed(() => {
+      const [side, align] = props.location.split(' ')
+      return side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
+    })
+
+    const collapsedStyles = computed(() => {
+      if (!props.collapsed) return null
+      return {
+        '--v-snackbar-collapsed-height': convertToUnit(props.collapsed.height),
+        '--v-snackbar-collapsed-width': convertToUnit(props.collapsed.width),
+      }
+    })
+
     const offset = computed(() => {
       if (!queueItem) return {}
-      const [side, align] = props.location.split(' ')
-      const direction = side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
 
       if (queueItem.offset.value === null) {
         return _lastOffset
       }
 
-      return _lastOffset = convertToUnit(direction * queueItem.offset.value)
+      return _lastOffset = convertToUnit(queueItem.offset.value)
     })
 
     const transition = computed(() => {
@@ -271,6 +285,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             'v-snackbar',
             {
               'v-snackbar--active': isActive.value,
+              'v-snackbar--collapsed': !!props.collapsed,
               'v-snackbar--timer': !!props.timer,
               'v-snackbar--vertical': props.vertical,
             },
@@ -282,7 +297,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             mainStyles.value,
             {
               '--v-snackbar-offset': offset.value,
+              '--v-snackbar-gap': convertToUnit(props.queueGap),
+              '--v-snackbar-index': props.queueIndex,
+              '--v-snackbar-direction': queueDirection.value,
             },
+            collapsedStyles.value,
             props.style,
           ]}
           { ...overlayProps }
