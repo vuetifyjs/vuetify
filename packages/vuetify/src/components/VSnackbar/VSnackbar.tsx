@@ -247,12 +247,15 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
         return props.transition
       }
 
-      const [side, align] = props.location.split(' ')
-      const direction = ['start', 'end', 'left', 'right'].includes(align) || ['left', 'right'].includes(side) ? 'x' : 'y'
-      const reverse = ['end', 'right'].includes(align) || ['bottom', 'right'].includes(side) ? '-reverse' : ''
       const prefix = props.transition.replace('-auto', '')
+      const [side, align] = props.location.split(' ')
+      const axis = ['start', 'end', 'left', 'right'].includes(align) || ['left', 'right'].includes(side) ? 'x' : 'y'
+      const reverse = ['end', 'right'].includes(align) ||
+        (!['start', 'left'].includes(align) && ['bottom', 'right'].includes(side))
+        ? '-reverse'
+        : ''
 
-      return `${prefix}-${direction}${reverse}-transition`
+      return `${prefix}-${axis}${reverse}-transition`
     })
 
     useRender(() => {
