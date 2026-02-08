@@ -5,5 +5,8 @@
     "closeText": "The text used in the close button when using the **closable** prop.",
     "gap": "Sets the gap between stacked snackbars. Requires value in pixels.",
     "totalVisible": "Specify the total visible snackbars."
+  },
+  "exposed": {
+    "clear": "Dismisses all visible snackbars and clears the queue."
   }
 }

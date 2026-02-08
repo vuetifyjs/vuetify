@@ -126,11 +126,16 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
 
     watch(() => props.modelValue.length, showNext)
 
-    function showNext () {
-      visibleItems.value = visibleItems.value.filter(x => x.active)
+    function removeItem (id: number) {
+      visibleItems.value = visibleItems.value.filter(x => x.id !== id)
+      showNext()
+    }
 
+    function showNext () {
       if (!props.modelValue.length) return
-      if (visibleItems.value.length >= limit.value) {
+
+      const activeCount = visibleItems.value.filter(x => x.active).length
+      if (activeCount >= limit.value) {
         if (props.displayStrategy !== 'overflow') return
 
         // Dismiss oldest active items to make room
@@ -178,6 +183,13 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       if (!item) return
       item.active = false
       updateDynamicProps()
+    }
+
+    function clear () {
+      emit('update:modelValue', [])
+      visibleItems.value
+        .toReversed()
+        .forEach((item, i) => setTimeout(() => item.active = false, 100 * i))
     }
 
     const btnProps = computed(() => ({
@@ -233,7 +245,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   })}
                   modelValue={ active }
                   onUpdate:modelValue={ () => dismiss(id) }
-                  onAfterLeave={ showNext }
+                  onAfterLeave={ () => removeItem(id) }
                 >
                   {{
                     header: slots.header ? () => slots.header?.({ item }) : undefined,
@@ -262,6 +274,10 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
         </>
       )
     })
+
+    return {
+      clear,
+    }
   },
 })
 
