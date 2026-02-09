@@ -16,7 +16,10 @@ const stories = {
       }}
     </VToolbar>
   ),
-  'With location': <VToolbar absolute location="top right" title="Positioned toolbar" />,
+  'With location': <div style="position: relative; height: 100px; border: 1px dashed #ccc">
+    <VToolbar absolute floating class="pr-5" location="top right" title="top right" />
+    <VToolbar absolute floating class="pr-5" location="bottom center" title="bottom center" />
+  </div>,
 }
 
 describe('VToolbar', () => {

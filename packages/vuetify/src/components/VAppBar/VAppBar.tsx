@@ -13,7 +13,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,16 +25,16 @@ export const makeVAppBarProps = propsFactory({
     type: Boolean,
     default: true,
   },
-
-  ...makeVToolbarProps(),
-  ...makeLayoutItemProps(),
-  ...makeScrollProps(),
-
   location: {
     type: String as PropType<'top' | 'bottom'>,
     default: 'top',
     validator: (value: any) => ['top', 'bottom'].includes(value),
   },
+
+  ...omit(makeVToolbarProps(), ['location']),
+  ...makeLayoutItemProps(),
+  ...makeScrollProps(),
+
   height: {
     type: [Number, String],
     default: 64,
@@ -171,7 +171,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     useRender(() => {
-      const toolbarProps = VToolbar.filterProps(props)
+      const toolbarProps = omit(VToolbar.filterProps(props), ['location'])
 
       return (
         <VToolbar
