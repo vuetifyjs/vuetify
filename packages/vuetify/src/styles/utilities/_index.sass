@@ -10,11 +10,12 @@
 
 @include tools.layer('utilities.typography')
   $typography: map.get(settings.$utilities, 'typography')
-  @each $breakpoint in map.keys(settings.$grid-breakpoints)
-    @include tools.media-breakpoint-up($breakpoint)
-      $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
-      @if map.get($typography, responsive) or $infix == ""
-        @include tools.generate-utility($typography, $infix, 'bidi')
+  @if not ($typography == null or $typography == false)
+    @each $breakpoint in map.keys(settings.$grid-breakpoints)
+      @include tools.media-breakpoint-up($breakpoint)
+        $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
+        @if map.get($typography, responsive) or $infix == ""
+          @include tools.generate-utility($typography, $infix, 'bidi')
 
 @include tools.layer('utilities.helpers')
   @each $breakpoint in map.keys(settings.$grid-breakpoints)
