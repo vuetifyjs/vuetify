@@ -7,23 +7,13 @@
     :script="script"
   >
     <div style="height: 188px">
-      <v-text-field
-        v-model="text"
-        label="Queue a message"
-        hide-details
-        @keydown.enter="onClick"
-      >
-        <template v-slot:append-inner>
-          <v-btn
-            :disabled="!text"
-            append-icon="mdi-arrow-right"
-            text="Queue"
-            variant="flat"
-            slim
-            @click="onClick"
-          ></v-btn>
-        </template>
-      </v-text-field>
+      <div class="d-flex ga-2">
+        <v-btn color="success" @click="addMessage('success')">Success</v-btn>
+        <v-btn color="info" @click="addMessage('info')">Info</v-btn>
+        <v-btn color="error" @click="addMessage('error')">Error</v-btn>
+        <v-btn color="surface-variant" @click="addMessage()">Default</v-btn>
+        <v-btn prepend-icon="mdi-refresh" variant="outlined" @click="snackbarQueue?.clear()">Clear</v-btn>
+      </div>
 
       <v-list density="compact" variant="tonal" nav>
         <v-list-subheader>Queue:</v-list-subheader>
@@ -38,20 +28,53 @@
             :title="message.text"
           ></v-list-item>
         </v-fade-transition>
+
+        <v-list-subheader>Logs:</v-list-subheader>
+        <v-list-item>
+          <pre
+            v-if="logs.length"
+            class="overflow-y-auto text-caption text-pre-wrap my-0"
+            style="max-height: 80px"
+          >{{ logs.join('\n') }}</pre>
+        </v-list-item>
       </v-list>
 
-      <v-snackbar-queue v-model="queue" :color="color" :timeout="timeout"></v-snackbar-queue>
+      <v-snackbar-queue
+        ref="snackbarQueue"
+        v-model="queue"
+        :collapsed="collapsed"
+        :display-strategy="displayStrategy"
+        :timeout="timeout"
+        :total-visible="totalVisible"
+        closable
+      ></v-snackbar-queue>
     </div>
 
     <template v-slot:configuration>
       <v-select
-        v-model="color"
-        :items="['primary', 'secondary', 'success', 'info', 'warning', 'error']"
-        label="Color"
-        clearable
+        v-model="displayStrategy"
+        :items="['hold', 'overflow']"
+        label="Display strategy"
       ></v-select>
-
-      <v-number-input v-model="timeout" :min="-1"></v-number-input>
+      <v-checkbox v-model="collapsed" label="Collapsed" hide-details></v-checkbox>
+      <v-slider
+        v-model="totalVisible"
+        :max="10"
+        :min="1"
+        :step="1"
+        label="Total visible"
+        hide-details
+        thumb-label
+      ></v-slider>
+      <v-slider
+        v-model="timeout"
+        :max="9000"
+        :min="2000"
+        :step="500"
+        label="Timeout"
+        hide-details
+        thumb-label
+      ></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -60,25 +83,35 @@
   const name = 'v-snackbar-queue'
   const model = ref('default')
   const options = []
-  const color = shallowRef()
   const timeout = shallowRef(5000)
+  const displayStrategy = shallowRef('hold')
+  const collapsed = shallowRef(false)
+  const totalVisible = shallowRef(5)
+  const snackbarQueue = ref()
   const queue = ref([])
-  const text = shallowRef('')
+  const logs = ref([])
+  let messageCount = 0
 
-  function onClick () {
+  function addMessage (color) {
+    const id = ++messageCount
     queue.value.push({
-      text: text.value,
+      text: `Message #${id}`,
       timeout: timeout.value,
-      color: color.value,
+      color,
+      onDismiss (reason) {
+        logs.value.unshift(`Message #${id}: Closed (${reason})`)
+      },
     })
-    text.value = ''
   }
 
   const props = computed(() => {
     return {
       'v-model': 'messages',
-      color: color.value ?? undefined,
+      'display-strategy': displayStrategy.value !== 'hold' ? displayStrategy.value : undefined,
+      collapsed: collapsed.value || undefined,
+      'total-visible': totalVisible.value > 1 ? totalVisible.value : undefined,
       timeout: timeout.value !== 5000 ? timeout.value : undefined,
+      closable: true,
     }
   })
 
@@ -87,16 +120,36 @@
   })
 
   const code = computed(() => {
-    return `<v-snackbar-queue${propsToString(props.value)}>${slots.value}</v-snackbar-queue>`
+    return `<div class="d-flex ga-2">
+  <v-btn color="success" @click="addMessage('success')">Success</v-btn>
+  <v-btn color="info" @click="addMessage('info')">Info</v-btn>
+  <v-btn color="error" @click="addMessage('error')">Error</v-btn>
+  <v-btn color="surface-variant" @click="addMessage()">Default</v-btn>
+  <v-btn prepend-icon="mdi-refresh" variant="outlined" @click="snackbarQueue?.clear()">Clear</v-btn>
+</div>
+
+<pre>{{ logs.join('\\n') }}</pre>
+
+<v-snackbar-queue${propsToString(props.value)}>${slots.value}</v-snackbar-queue>`
   })
 
   const script = computed(() => {
     return `<script setup>
-  const text = ref('')
-  const messages = ref([])
+  import { ref } from 'vue'
 
-  function onClick () {
-    messages.value.push(text.value)
+  const messages = ref([])
+  const logs = ref([])
+  let messageCount = 0
+
+  function addMessage (color) {
+    const id = ++messageCount
+    messages.value.push({
+      text: \`Message #\${id}\`,
+      color,
+      onDismiss (reason) {
+        logs.value.unshift(\`Message #\${id}: Closed (\${reason})\`)
+      },
+    })
   }
 <` + '/script>'
   })

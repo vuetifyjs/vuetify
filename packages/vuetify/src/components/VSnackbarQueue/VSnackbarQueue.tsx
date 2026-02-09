@@ -29,6 +29,12 @@ export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
   }
 }
 
+export type SnackbarMessageDismissType =
+  | 'dismissed'
+  | 'cleared'
+  | 'overflow'
+  | 'auto'
+
 export type SnackbarMessage =
   | string
   | (Omit<
@@ -54,12 +60,14 @@ export type SnackbarMessage =
     promise?: Promise<unknown>
     success?: (val?: unknown) => Exclude<SnackbarMessage, string>
     error?: (val?: Error) => Exclude<SnackbarMessage, string>
+    onDismiss?: (reason: SnackbarMessageDismissType) => void
   })
 
 export type SnackbarQueueItem = {
   id: number
   item: Exclude<SnackbarMessage, string>
   active: boolean
+  onDismiss?: (reason: SnackbarMessageDismissType) => void
 }
 
 export const makeVSnackbarQueueProps = propsFactory({
@@ -145,14 +153,17 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
         visibleItems.value
           .filter(x => x.active)
           .slice(limit.value - 1)
-          .forEach(x => x.active = false)
+          .forEach(item => {
+            item.active = false
+            item.onDismiss?.('overflow')
+          })
       }
 
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
 
       const item = typeof next === 'string' ? { text: next } : next
-      const { promise, success, error, ...itemProps } = item
+      const { promise, success, error, onDismiss, ...itemProps } = item
 
       const newItem: SnackbarQueueItem = {
         id: _lastId++,
@@ -161,6 +172,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
           ...itemProps,
         },
         active: true,
+        onDismiss,
       }
       visibleItems.value.unshift(newItem)
       updateDynamicProps()
@@ -181,10 +193,11 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       )
     }
 
-    function dismiss (id: number) {
+    function dismiss (id: number, reason: SnackbarMessageDismissType) {
       const item = visibleItems.value.find(x => x.id === id)
       if (!item) return
       item.active = false
+      item.onDismiss?.(reason)
       updateDynamicProps()
     }
 
@@ -192,7 +205,10 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       emit('update:modelValue', [])
       visibleItems.value
         .toReversed()
-        .forEach((item, i) => setTimeout(() => item.active = false, 100 * i))
+        .forEach((item, i) => setTimeout(() => {
+          item.active = false
+          item.onDismiss?.('cleared')
+        }, 100 * i))
     }
 
     const btnProps = computed(() => ({
@@ -248,7 +264,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                     onMouseleave: () => runCloseDelay(),
                   })}
                   modelValue={ active }
-                  onUpdate:modelValue={ () => dismiss(id) }
+                  onUpdate:modelValue={ () => dismiss(id, 'auto') }
                   onAfterLeave={ () => removeItem(id) }
                 >
                   {{
@@ -259,13 +275,13 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                         { !slots.actions ? (
                           <VBtn
                             { ...btnProps.value }
-                            onClick={ () => dismiss(id) }
+                            onClick={ () => dismiss(id, 'dismissed') }
                           />
                         ) : (
                           <VDefaultsProvider defaults={{ VBtn: btnProps.value }}>
                             { slots.actions({
                               item,
-                              props: { onClick: () => dismiss(id) },
+                              props: { onClick: () => dismiss(id, 'dismissed') },
                             })}
                           </VDefaultsProvider>
                         )}
