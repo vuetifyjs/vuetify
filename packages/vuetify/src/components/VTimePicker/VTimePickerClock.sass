@@ -102,7 +102,6 @@
     z-index: 1
 
     &--active
-      cursor: default
       z-index: 2
 
   .v-picker--landscape
@@ -118,3 +117,7 @@
           border-color: highlight
         &:after
           background-color: highlight
+
+      &__item--active.v-btn.v-btn
+        border-width: $time-picker-clock-end-border-width
+        border-color: highlight

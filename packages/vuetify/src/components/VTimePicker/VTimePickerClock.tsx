@@ -330,6 +330,7 @@ export const VTimePickerClock = genericComponent()({
 
                 return (
                   <VBtn
+                    _as="VTimePickerClockBtn"
                     aria-hidden="true"
                     tabindex={ -1 }
                     class={[
@@ -342,6 +343,7 @@ export const VTimePickerClock = genericComponent()({
                     disabled={ isDisabled }
                     style={[getTransform(value)]}
                     variant={ isActive ? 'flat' : 'text' }
+                    ripple={ false }
                   >
                     { props.format(value) }
                   </VBtn>
