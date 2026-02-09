@@ -375,7 +375,8 @@
   },
   "VToolbar": {
     "props": {
-      "collapsePosition": "3.11.0"
+      "collapsePosition": "3.11.0",
+      "location": "3.12.0"
     }
   },
   "VTooltip": {
