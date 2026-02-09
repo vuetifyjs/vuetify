@@ -255,7 +255,7 @@ export const VTimePickerClock = genericComponent()({
       return current
     }
 
-    function onSpinbuttonKeydown (e: KeyboardEvent) {
+    function onKeydown (e: KeyboardEvent) {
       if (props.disabled || props.readonly) return
 
       let newValue: number | null = null
@@ -300,7 +300,7 @@ export const VTimePickerClock = genericComponent()({
               'v-time-picker-clock--readonly': props.readonly,
             },
           ]}
-          onKeydown={ onSpinbuttonKeydown }
+          onKeydown={ onKeydown }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
           onWheel={ wheel }
