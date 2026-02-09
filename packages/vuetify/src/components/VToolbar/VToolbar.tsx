@@ -144,7 +144,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
           ]}
           style={[
             backgroundColorStyles.value,
-            props.absolute ? locationStyles.value : {},
+            locationStyles.value,
             props.style,
           ]}
         >
