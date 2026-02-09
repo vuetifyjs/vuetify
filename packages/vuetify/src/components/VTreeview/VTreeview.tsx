@@ -32,6 +32,8 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 export const makeVTreeviewProps = propsFactory({
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
+  indentLinesColor: String,
+  indentLinesOpacity: [String, Number],
   search: String,
   hideNoData: Boolean,
   noDataText: {
@@ -56,9 +58,17 @@ export const makeVTreeviewProps = propsFactory({
   modelValue: Array,
 }, 'VTreeview')
 
-export const VTreeview = genericComponent<new <T>(
+export const VTreeview = genericComponent<new <T, O, A, S, M>(
   props: {
     items?: T[]
+    opened?: O
+    activated?: A
+    selected?: S
+    modelValue?: M
+    'onUpdate:opened'?: (value: O) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:selected'?: (value: S) => void
+    'onUpdate:modelValue'?: (value: M) => void
   },
   slots: VTreeviewChildrenSlots<T> & {
     'no-data': never
@@ -180,7 +190,13 @@ export const VTreeview = genericComponent<new <T>(
             props.class,
           ]}
           openStrategy="multiple"
-          style={ props.style }
+          style={[
+            {
+              '--v-treeview-indent-line-color': props.indentLinesColor,
+              '--v-treeview-indent-line-opacity': props.indentLinesOpacity,
+            },
+            props.style,
+          ]}
           opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }

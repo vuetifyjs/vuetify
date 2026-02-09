@@ -3,8 +3,8 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
-import { commands } from '@vitest/browser/context'
+import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -93,7 +93,7 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
       await expect.poll(() => search.value).toBe(items[0].title)
@@ -101,7 +101,7 @@ describe('VCombobox', () => {
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
       await userEvent.click(element)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 2')
       expect(model.value).toBe('Item 2')
       expect(search.value).toBe('Item 2')
@@ -109,7 +109,7 @@ describe('VCombobox', () => {
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('item3')
       expect(model.value).toBe('item3')
       expect(search.value).toBe('item3')
@@ -143,7 +143,7 @@ describe('VCombobox', () => {
       const input = screen.getByCSS('input')
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
       await userEvent.click(screen.getAllByRole('option')[0])
       expect(model.value).toStrictEqual([items[0]])
       expect(search.value).toBeUndefined()
@@ -182,10 +182,10 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await userEvent.keyboard('Item')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 1')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
     })
@@ -205,10 +205,10 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await userEvent.keyboard('Item')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 1')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
     })
@@ -237,7 +237,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('test')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Test1')
 
-      await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('antonsen')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
     })
@@ -369,7 +369,7 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
-      await wait(100)
+      await commands.waitStable('.v-list')
 
       const options = await screen.findAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
@@ -477,7 +477,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
@@ -493,18 +493,18 @@ describe('VCombobox', () => {
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
     expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
@@ -727,6 +727,7 @@ describe('VCombobox', () => {
     await userEvent.click(element)
     expect(input).toHaveValue('')
     await userEvent.keyboard('Item 1')
+    await commands.waitStable('.v-list')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
   })
@@ -751,7 +752,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
     await expect.poll(() => model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
 
@@ -765,7 +766,7 @@ describe('VCombobox', () => {
       <VCombobox onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
@@ -784,8 +785,10 @@ describe('VCombobox', () => {
       />
     ))
     await userEvent.tab()
-    navigator.clipboard.writeText(text)
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText(text)
     await userEvent.paste()
+    await commands.releaseLock(lock)
     expect(model.value).toEqual(expected)
   })
 
@@ -816,12 +819,12 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.tab()
-    navigator.clipboard.writeText('foo,\nbar')
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('foo,\nbar')
     await userEvent.paste()
+    await commands.releaseLock(lock)
     expect(model.value).toEqual(['foo', 'bar'])
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

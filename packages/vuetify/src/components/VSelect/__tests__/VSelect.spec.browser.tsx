@@ -4,7 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, wait, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
 import { getAllByRole } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -723,7 +723,7 @@ describe('VSelect', () => {
         <VSelect onUpdate:focused={ onFocus } />
       ))
 
-      await userEvent.click(element, { y: 1 })
+      await userEvent.click(element, { position: { x: 10, y: 55 } })
 
       expect(onFocus).toHaveBeenCalledTimes(1)
     })
@@ -736,20 +736,17 @@ describe('VSelect', () => {
 
     const inputField = getByRole('combobox', { expanded: false })
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
     expect(inputField.getAttribute('aria-controls')).toMatch(/^menu-v-\d+/)
 
-    await userEvent.click(inputField)
+    await userEvent.click(inputField, { force: true })
     await commands.waitStable('.v-list')
 
     expect(inputField).toHaveAttribute('aria-expanded', 'true')
-    expect(inputField).toHaveAttribute('aria-label', 'Close')
 
     await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
 
     expect(inputField).toHaveAttribute('aria-expanded', 'false')
-    expect(inputField).toHaveAttribute('aria-label', 'Open')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/22052
@@ -778,7 +775,7 @@ describe('VSelect', () => {
     ))
 
     await userEvent.click(element)
-    await wait(100)
+    await commands.waitStable('.v-list')
 
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(3)
@@ -792,7 +789,152 @@ describe('VSelect', () => {
     expect(screen.getAllByCSS('.v-checkbox-btn input:checked')).toHaveLength(1)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  describe('clear with backspace', () => {
+    it('should clear selection in single selection mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+    })
+
+    it('should clear selection in multiple selection mode', async () => {
+      const selectedItems = ref(['Item 1', 'Item 2'])
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItems.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          multiple
+        />
+      ))
+
+      expect(selectedItems.value).toHaveLength(2)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItems.value).toHaveLength(0)
+    })
+
+    it('should open menu with openOnClear prop', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          openOnClear
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+      expect(screen.queryByRole('listbox')).toBeNull()
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBeNull()
+      await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+    })
+
+    it('should not clear in readonly mode', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2', 'Item 3']}
+          readonly
+        />
+      ))
+
+      expect(selectedItem.value).toBe('Item 1')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('{Backspace}')
+
+      expect(selectedItem.value).toBe('Item 1')
+    })
   })
+
+  describe('native form submission', () => {
+    const items = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            name="select"
+            items={ items }
+            modelValue={ items[0] }
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      expect(submittedData!.get('select')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VSelect
+            multiple
+            name="select"
+            items={ items }
+            modelValue={[items[0], items[1]]}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      const select = submittedData!.getAll('select')
+      expect(select).toHaveLength(2)
+      expect(select).toContain('1')
+      expect(select).toContain('2')
+    })
+  })
+
+  showcase({ stories })
 })

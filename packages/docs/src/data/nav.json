@@ -251,7 +251,15 @@
     "items": [
       "introduction",
       {
+        "title": "avatar-groups",
+        "subfolder": "components"
+      },
+      {
         "title": "color-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "command-palettes",
         "subfolder": "components"
       },
       {

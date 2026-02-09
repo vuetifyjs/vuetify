@@ -71,7 +71,7 @@ The **center-active** prop will make the active tab always centered.
 
 #### Fixed tabs
 
-The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px), and centers them.
+The **fixed-tabs** prop forces `v-tab` items to take up all available space up to 300px width, and centers them.
 
 <ExamplesExample file="v-tabs/prop-fixed-tabs" />
 

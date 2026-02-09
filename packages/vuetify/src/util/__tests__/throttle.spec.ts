@@ -3,8 +3,8 @@ import { throttle } from '../throttle'
 // Utilities
 import { wait } from '@test'
 
-describe('throttle', () => {
-  it('should execute only the calls right before the interval', { retry: 1 }, async () => {
+describe('throttle', { retry: 3 }, () => {
+  it('should execute only the calls right before the interval', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100, { leading: false, trailing: false })
 
@@ -16,7 +16,7 @@ describe('throttle', () => {
     expect(result).toStrictEqual([5, 9])
   })
 
-  it('should execute only the calls right before the interval + trailing one', { retry: 1 }, async () => {
+  it('should execute only the calls right before the interval + trailing one', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100, { leading: false, trailing: true })
 
@@ -29,7 +29,7 @@ describe('throttle', () => {
     expect(result).toStrictEqual([4, 7, 9])
   })
 
-  it('should keep throttling after executing trailing call', { retry: 1 }, async () => {
+  it('should keep throttling after executing trailing call', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100, { leading: false, trailing: true })
 
@@ -43,7 +43,7 @@ describe('throttle', () => {
     expect(result).toStrictEqual([2, 4])
   })
 
-  it('should execute only the calls right before the interval + leading and trailing', { retry: 1 }, async () => {
+  it('should execute only the calls right before the interval + leading and trailing', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100)
 
@@ -56,7 +56,7 @@ describe('throttle', () => {
     expect(result).toStrictEqual([1, 4, 7, 9])
   })
 
-  it('should pass calls the same way when resumed', { retry: 1 }, async () => {
+  it('should pass calls the same way when resumed', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100)
 

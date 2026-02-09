@@ -3,7 +3,7 @@ import { VRating } from '../VRating'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { click, render, screen, showcase, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 const stories = {
@@ -81,12 +81,12 @@ describe('VRating', () => {
 
     const buttons = screen.getAllByCSS('.v-rating__item .v-btn')
 
-    await userEvent.click(buttons[1])
+    await click(buttons[1])
     await nextTick()
     expect(model.value).toBeUndefined()
 
     model.value = 4
-    await userEvent.click(buttons[0])
+    await click(buttons[0])
     await nextTick()
     expect(model.value).toBe(4)
   })
@@ -169,7 +169,5 @@ describe('VRating', () => {
     expect(model.value).toBe(2)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

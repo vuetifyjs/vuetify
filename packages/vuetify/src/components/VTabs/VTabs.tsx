@@ -85,9 +85,11 @@ export const makeVTabsProps = propsFactory({
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent<new <T = TabItem>(
+export const VTabs = genericComponent<new <TModel, T = TabItem>(
   props: {
     items?: T[]
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
   },
   slots: VTabsSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -112,6 +114,7 @@ export const VTabs = genericComponent<new <T = TabItem>(
         direction: toRef(props, 'direction'),
         stacked: toRef(props, 'stacked'),
         fixed: toRef(props, 'fixedTabs'),
+        inset: toRef(props, 'inset'),
         sliderColor: toRef(props, 'sliderColor'),
         sliderTransition: toRef(props, 'sliderTransition'),
         sliderTransitionDuration: toRef(props, 'sliderTransitionDuration'),

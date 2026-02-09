@@ -20,7 +20,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { clamp, genericComponent, isObject, noop, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, noop, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -59,7 +59,6 @@ export const makeVBreadcrumbsProps = propsFactory({
     type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
-  itemProps: Boolean,
   listProps: Object as PropType<VList['$props']>,
   menuProps: Object as PropType<VMenu['$props']>,
   totalVisible: [Number, String],
@@ -258,7 +257,6 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
                     disabled={ index >= array.length - 1 }
                     active={ index === array.length - 1 }
                     { ...(typeof item === 'string' ? { title: item } : item) }
-                    { ...(props.itemProps && isObject(raw) ? raw : {}) }
                     v-slots={{
                       default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                     }}

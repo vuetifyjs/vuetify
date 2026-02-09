@@ -293,6 +293,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         transform (code, id) {
           const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
             : id.includes('vue&type=playground-setup') ? 'playgroundSetup'
+            : id.includes('vue&type=example-meta') ? 'exampleMeta'
             : null
           if (!type) return
 
@@ -372,6 +373,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         'markdown-it-emoji/bare.js',
         'markdown-it-container',
         'markdown-it/lib/token.mjs',
+        'markdown-it-multimd-table',
         'lodash-es',
         'fflate',
         '@cosmicjs/sdk',

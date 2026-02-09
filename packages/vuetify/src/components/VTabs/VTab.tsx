@@ -24,6 +24,7 @@ export const makeVTabProps = propsFactory({
   sliderTransition: String as PropType<'shift' | 'grow' | 'fade'>,
   sliderTransitionDuration: [String, Number],
   hideSlider: Boolean,
+  inset: Boolean,
 
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
@@ -140,11 +141,11 @@ export const VTab = genericComponent<VBtnSlots>()({
           class={[
             'v-tab',
             props.class,
-            isSelected.value ? insetColorClasses.value : [],
+            isSelected.value && props.inset ? insetColorClasses.value : [],
           ]}
           style={[
             props.style,
-            isSelected.value ? insetColorStyles.value : [],
+            isSelected.value && props.inset ? insetColorStyles.value : [],
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"

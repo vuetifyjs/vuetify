@@ -79,7 +79,7 @@ export interface CalendarBaseProps {
 }
 
 export function useCalendarBase (props: CalendarBaseProps) {
-  const { times } = useTimes({ now: props.now })
+  const { times, updateTimes } = useTimes({ now: props.now })
   const locale = provideLocale(props)
 
   const adapter = useDate()
@@ -223,5 +223,6 @@ export function useCalendarBase (props: CalendarBaseProps) {
     getStartOfWeek: _getStartOfWeek,
     getEndOfWeek: _getEndOfWeek,
     getFormatter,
+    updateTimes,
   }
 }

@@ -174,7 +174,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isOutOfRange = computed(() => {
       if (_lastParsedValue.value === null) return false
-      const numberFromText = Number(_inputText.value)
+      const numberFromText = Number(_inputText.value?.replace(decimalSeparator.value, '.'))
       return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
@@ -493,7 +493,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           v-model={ inputText.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.value }
-          error={ isOutOfRange.value || undefined }
+          error={ props.error || isOutOfRange.value || undefined }
           onBeforeinput={ onBeforeinput }
           onFocus={ onFocus }
           onBlur={ onBlur }

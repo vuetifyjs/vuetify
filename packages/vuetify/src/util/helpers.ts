@@ -348,7 +348,7 @@ export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
 export function filterInputAttrs (attrs: Record<string, unknown>) {
   const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', 'inert', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]
@@ -517,7 +517,7 @@ export function findChildrenWithProvide (
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)

@@ -2,10 +2,10 @@
 import { VDatePicker } from '..'
 
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { render, screen, userEvent, waitIdle } from '@test'
 import { within } from '@testing-library/vue'
-import { commands } from '@vitest/browser/context'
-import { ref } from 'vue'
+import { commands } from 'vitest/browser'
+import { nextTick, ref } from 'vue'
 
 describe('VDatePicker', () => {
   it('selects a range of dates', async () => {
@@ -34,7 +34,8 @@ describe('VDatePicker', () => {
     await userEvent.click(await within(yearsContainer).getByText('2025'))
     await userEvent.click(await screen.findByTestId('month-btn'))
     await commands.waitStable('.v-date-picker-months')
-    await userEvent.click(await screen.findByText('Jan'))
+    const monthsContainer = await screen.getByCSS('.v-date-picker-months__content')
+    await userEvent.click(await within(monthsContainer).findByText('Jan'))
     await commands.waitStable('.v-date-picker-month__days')
     await userEvent.click(await screen.findByText(7))
 
@@ -61,7 +62,8 @@ describe('VDatePicker', () => {
     await commands.abortAfter(5000, 'VDatePicker infinite loop detection')
 
     firstDay.value = -1.5
-    await wait(100)
+    await nextTick()
+    await waitIdle()
 
     await userEvent.click(await screen.findByText(21))
     await userEvent.click(await screen.findByText(7))

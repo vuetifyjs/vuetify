@@ -1,5 +1,6 @@
-@use '../VKbd/variables' as vkbd;
+@forward '../VKbd/variables';
 @use '../../styles/settings';
+@use '../VKbd/variables' as vkbd;
 
 $hotkey-gap: 4px !default;
 $hotkey-icon-size: 0.75rem !default;

@@ -156,16 +156,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: [
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    },
-    //...
-  ],
   vite: {
+    plugins: [
+      // @ts-expect-error
+      vuetify({ autoImport: true }),
+    ],
     vue: {
       template: {
         transformAssetUrls,
@@ -265,19 +260,45 @@ We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.j
 
 `https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
 
-```js
-const { createApp } = Vue
-const { createVuetify } = Vuetify
+Rememeber to include additional script for Vue.js. See full example below:
 
-const vuetify = createVuetify()
-
-const app = createApp()
-app.use(vuetify).mount('#app')
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- ... -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }]/dist/vuetify.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-container>
+          <v-text-field label="My field" />
+        </v-container>
+      </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js"></script>
+    <script>
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
+      const vuetify = createVuetify()
+      const app = createApp()
+      app.use(vuetify).mount('#app')
+    </script>
+  </body>
+</html>
 ```
 
 ## Using as ES Module with CDN
 
 To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
+
+::: info
+  Unlike regular CDN links, import map expects `.../vuetify.esm.js` (**\*esm.js** instead of **\*.min.js**)
+:::
 
 ```html
 <head>

@@ -31,11 +31,6 @@
       "bgColor": "3.4.0"
     }
   },
-  "VBreadcrumbs": {
-    "props": {
-      "itemProps": "3.11.0"
-    }
-  },
   "VBreadcrumbsItem": {
     "props": {
       "width": "3.11.0",
@@ -117,7 +112,8 @@
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -129,7 +125,8 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -141,7 +138,8 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -239,6 +237,11 @@
       "autocomplete": "3.10.0"
     }
   },
+  "VOtpInput": {
+    "props": {
+      "density": "3.12.0"
+    }
+  },
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
@@ -254,6 +257,7 @@
   },
   "VProgressCircular": {
     "props": {
+      "reveal": "3.12.0",
       "rounded": "3.11.0"
     }
   },
@@ -303,6 +307,7 @@
   },
   "VTab": {
     "props": {
+      "inset": "3.11.2",
       "text": "3.2.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
@@ -348,6 +353,8 @@
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
       "indentLines": "3.9.0",
+      "indentLinesColor": "3.12.0",
+      "indentLinesOpacity": "3.12.0",
       "itemsRegistration": "3.11.0"
     },
     "slots": {
@@ -376,7 +383,8 @@
       "eager": "3.2.0",
       "interactive": "3.8.0",
       "stickToTarget": "3.10.0",
-      "viewportMargin": "3.11.0"
+      "viewportMargin": "3.11.0",
+      "persistent": "3.11.3"
     }
   },
   "VVirtualScroll": {

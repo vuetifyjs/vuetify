@@ -93,7 +93,7 @@ export function useMarkdown () {
     }
 
     try {
-      navigator.clipboard.writeText(markdownContent)
+      await navigator.clipboard.writeText(markdownContent)
       copied.value = true
       setTimeout(() => (copied.value = false), 2000)
     } catch (err) {
