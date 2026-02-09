@@ -70,6 +70,10 @@
     &--readonly
       pointer-events: none
 
+    &:focus-visible
+      outline: none
+      background: rgba(var(--v-theme-on-surface), var(--v-focus-opacity))
+
   .v-picker--full-width
     .v-time-picker-clock__container
       max-width: $time-picker-clock-max-width

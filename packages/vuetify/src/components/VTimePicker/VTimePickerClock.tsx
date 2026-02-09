@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, onScopeDispose, ref, watch } from 'vue'
@@ -13,6 +14,7 @@ import { debounce, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VTimePickerViewMode } from './shared'
 interface Point {
   x: number
   y: number
@@ -53,6 +55,10 @@ export const makeVTimePickerClockProps = propsFactory({
   modelValue: {
     type: Number,
   },
+  viewMode: {
+    type: String as PropType<VTimePickerViewMode>,
+    default: 'hour',
+  },
 }, 'VTimePickerClock')
 
 export const VTimePickerClock = genericComponent()({
@@ -66,6 +72,7 @@ export const VTimePickerClock = genericComponent()({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
     const clockRef = ref<HTMLElement | null>(null)
     const innerClockRef = ref<HTMLElement | null>(null)
     const inputValue = ref<number | undefined>(undefined)
@@ -238,9 +245,54 @@ export const VTimePickerClock = genericComponent()({
 
     onScopeDispose(removeListeners)
 
+    function findNextAllowed (current: number, delta: number): number {
+      let value = current
+      const maxIterations = count.value
+      for (let i = 0; i < maxIterations; i++) {
+        value = ((value - props.min + delta + count.value) % count.value) + props.min
+        if (isAllowed(value)) return value
+      }
+      return current
+    }
+
+    function onSpinbuttonKeydown (e: KeyboardEvent) {
+      if (props.disabled || props.readonly) return
+
+      let newValue: number | null = null
+      const current = displayedValue.value
+
+      switch (e.key) {
+        case 'ArrowUp':
+        case 'ArrowRight':
+          newValue = findNextAllowed(current, 1)
+          break
+        case 'ArrowDown':
+        case 'ArrowLeft':
+          newValue = findNextAllowed(current, -1)
+          break
+        case 'Enter':
+          e.preventDefault()
+          emit('change', current)
+          return
+      }
+
+      if (newValue !== null && newValue !== current) {
+        e.preventDefault()
+        update(newValue)
+      }
+    }
+
     useRender(() => {
       return (
         <div
+          role="spinbutton"
+          tabindex={ props.disabled || props.readonly ? -1 : 0 }
+          aria-label={ t(`$vuetify.timePicker.${props.viewMode}`) }
+          aria-valuemin={ props.min }
+          aria-valuemax={ props.max }
+          aria-valuenow={ displayedValue.value }
+          aria-disabled={ props.disabled || undefined }
+          aria-readonly={ props.readonly || undefined }
           class={[
             {
               'v-time-picker-clock': true,
@@ -248,6 +300,7 @@ export const VTimePickerClock = genericComponent()({
               'v-time-picker-clock--readonly': props.readonly,
             },
           ]}
+          onKeydown={ onSpinbuttonKeydown }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
           onWheel={ wheel }
@@ -277,6 +330,8 @@ export const VTimePickerClock = genericComponent()({
 
                 return (
                   <VBtn
+                    aria-hidden="true"
+                    tabindex={ -1 }
                     class={[
                       'v-time-picker-clock__item',
                       {
