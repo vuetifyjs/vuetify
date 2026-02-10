@@ -345,7 +345,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
               ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
-                  disabled={ !hasPrependMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -357,6 +356,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                     VListItemAction: {
                       start: true,
+                    },
+                    VCheckboxBtn: {
+                      density: props.density,
                     },
                   }}
                 >
@@ -407,7 +409,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
               ) : (
                 <VDefaultsProvider
                   key="append-defaults"
-                  disabled={ !hasAppendMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -419,6 +420,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                     VListItemAction: {
                       end: true,
+                    },
+                    VCheckboxBtn: {
+                      density: props.density,
                     },
                   }}
                 >
