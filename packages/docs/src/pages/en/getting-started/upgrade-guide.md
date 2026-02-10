@@ -353,6 +353,10 @@ Or remove `.raw`:
 
 ### VSnackbar
 
+::: warning
+This component has it's internal HTML structure overhauled to incorporate **header** and **prepend** slots
+:::
+
 Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
 
 ```diff
@@ -362,6 +366,23 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
 +    min-height="68"
     :text="message"
   />
+```
+
+### VSnackbarQueue
+
+::: warning
+This component has been rewritten to enable showing multiple snackbars at once
+:::
+
+The `default` slot has been renamed to `item`. The slot props remain the same.
+
+```diff
+<v-snackbar-queue v-model="messages">
+-  <template v-slot:default="{ item }">
++  <template v-slot:item="{ item }">
+    <v-snackbar v-bind="item" />
+  </template>
+</v-snackbar-queue>
 ```
 
 ### VTextField

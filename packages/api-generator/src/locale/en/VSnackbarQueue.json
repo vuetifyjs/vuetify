@@ -1,6 +1,12 @@
 {
   "props": {
     "closable": "Adds a dismiss button that closes the active snackbar.",
-    "closeText": "The text used in the close button when using the **closable** prop."
+    "displayStrategy": "Determines how new snackbars are handled when the queue is full. **hold** (default) keeps new messages queued until a slot opens. **overflow** dismisses the oldest snackbar to make room for the new one.",
+    "closeText": "The text used in the close button when using the **closable** prop.",
+    "gap": "Sets the gap between stacked snackbars. Requires value in pixels.",
+    "totalVisible": "Specify the total visible snackbars."
+  },
+  "exposed": {
+    "clear": "Dismisses all visible snackbars and clears the queue."
   }
 }
