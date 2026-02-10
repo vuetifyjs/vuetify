@@ -47,6 +47,7 @@ export const makeVAvatarProps = propsFactory({
 }, 'VAvatar')
 
 export type VAvatarSlots = {
+  default: never
   badge: never
 }
 
