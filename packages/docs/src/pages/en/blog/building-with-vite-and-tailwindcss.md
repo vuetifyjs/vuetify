@@ -313,6 +313,11 @@ Now we can configure TailwindCSS theme variables. These will generate utility cl
 
   /* ...breakpoints, radius, colors... */
 }
+
+/* ensure the variables are not skipped */
+@source inline('font-body');
+@source inline('font-heading');
+@source inline('font-mono');
 ```
 
 Then we pass them to Vuetify through Sass variables so component typography picks them up too:
