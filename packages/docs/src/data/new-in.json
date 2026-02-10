@@ -22,7 +22,11 @@
   "VAvatar": {
     "props": {
       "text": "3.4.0",
-      "border": "3.7.0"
+      "border": "3.7.0",
+      "badge": "4.0.0"
+    },
+    "slots": {
+      "badge": "4.0.0"
     }
   },
   "VBadge": {

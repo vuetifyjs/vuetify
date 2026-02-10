@@ -235,6 +235,17 @@ const vuetify = createVuetify({
 + <v-btn>BUTTON</v-btn>
 ```
 
+### VBadge
+
+The **$badge-dot-border-radius** Sass variable has been changed from `4.5px` to `50%`. Both values produce the same result for the default dot size. If your app increases dot size and prefer them square-ish, you might want to undo the change.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $badge-dot-border-radius: 4.5px,
++  $badge-dot-border-radius: 50%,
+);
+```
+
 ### VContainer
 
 Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
