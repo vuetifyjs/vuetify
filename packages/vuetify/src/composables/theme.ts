@@ -43,6 +43,7 @@ export type ThemeOptions = false | {
   themes?: Record<string, ThemeDefinition>
   stylesheetId?: string
   scope?: string
+  utilities?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
