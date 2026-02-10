@@ -242,6 +242,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     useRender(() => {
       const hasActions = !!(props.closable || slots.actions)
       const snackbarProps = omit(VSnackbar.filterProps(props as any), ['modelValue', 'collapsed'])
+      const pauseAll = documentVisibility.value === 'hidden' || (props.collapsed && isHovered.value)
 
       return (
         <>
@@ -257,7 +258,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   { ...attrs }
                   { ...snackbarProps }
                   { ...item }
-                  { ...(documentVisibility.value === 'hidden' ? { timeout: -1 } : {}) }
+                  { ...(pauseAll ? { timeout: -1 } : {}) }
                   queueGap={ Number(props.gap) }
                   contentProps={ mergeProps(snackbarProps.contentProps, {
                     onMouseenter: runOpenDelay,
