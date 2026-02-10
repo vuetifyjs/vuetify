@@ -23,13 +23,13 @@ We will go through the following steps:
 
 ## Table of Contents
 
-* [Scaffold and install](#scaffold-and-install)
+* [Scaffold and install TailwindCSS](#scaffold-and-install-tailwindcss)
   * [Create the project](#create-the-project)
   * [Add TailwindCSS v4 via the Vite plugin](#add-tailwindcss-v4-via-the-vite-plugin)
   * [Disable Vuetify utilities](#disable-vuetify-utilities)
   * [Migrate HelloWorld.vue and AppFooter.vue](#migrate-helloworldvue-and-appfootervue)
-  * [Restore `rounded-*` classes](#restore-rounded--classes)
-* [Custom fonts](#custom-fonts)
+* [Restore classes for rounded corners](#restore-classes-for-rounded-corners)
+* [Customize fonts](#customize-fonts)
 * [Avoid conflicting color utilities](#avoid-conflicting-color-utilities)
 * [Configure class-based light/dark variants](#configure-class-based-lightdark-variants)
 * [Breakpoints](#breakpoints)
@@ -37,7 +37,7 @@ We will go through the following steps:
 
 ---
 
-## Scaffold and install
+## Scaffold and install TailwindCSS
 
 ### Create the project
 
@@ -190,7 +190,7 @@ With utilities disabled, some classes used in the scaffolded template will stop 
 
 VRow/VCol can also be replaced with `grid md:grid-cols-2 gap-3` and `md:col-span-2` for the first VCard. However, you might be surprised to learn that Vuetify's grid engine got a major overhaul in v4.0.0 and is much leaner and more flexible than ever.
 
-### Restore `rounded-*` classes
+## Restore classes for rounded corners
 
 Something that is not really noticeable at first glance is the card rounding. Vuetify's `rounded` prop values (`rounded="lg"`, etc.) emit classes like `.rounded-lg` that collide with Tailwind's naming but use different values.
 
@@ -277,7 +277,7 @@ If you'd rather use the original TailwindCSS `rounded-*` utilities, it is recomm
 
 ---
 
-## Custom fonts
+## Customize fonts
 
 The `create-vuetify` utility we used at the beginning to scaffold the project uses `unplugin-fonts` to load Roboto. Let's update the configuration to make sure the target fonts are available.
 
