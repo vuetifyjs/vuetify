@@ -107,6 +107,30 @@ Register `tailwindcss()` in the `plugins` array of `vite.config.ts` and create `
 @import "tailwindcss/utilities" layer(tailwind.utilities);
 ```
 
+```ts { resource="src/main.ts" }
+import { registerPlugins } from '@/plugins'
+import App from './App.vue'
+import { createApp } from 'vue'
+
+import 'unfonts.css'
+import './styles/tailwind.css' // <-- include new file
+
+const app = createApp(App)
+registerPlugins(app)
+app.mount('#app')
+```
+
+```ts { resource="vite.config.mts" }
+import tailwindcss from '@tailwindcss/vite'
+// ...
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(), // <-- register the plugin
+    // ...
+  ],
+```
+
 In order for Vuetify transitions to work properly, we have to ensure `tailwind.*` layers are placed before `vuetify-final`. Go ahead and add a new file called `layers.scss`:
 
 ```css { resource="src/styles/layers.scss" }
@@ -114,7 +138,7 @@ In order for Vuetify transitions to work properly, we have to ensure `tailwind.*
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
-@layer tailwind;
+@layer tailwind; /* <-- our new utilities */
 @layer vuetify-final;
 ```
 
@@ -130,7 +154,6 @@ Then reference it from `settings.scss`.
 
 ![CSS Layers preview in browser DevTools](./screenshots/layers-preview.png)
 
-
 ### Disable Vuetify utilities
 
 Let's adjust `src/styles/settings.scss`:
@@ -145,9 +168,9 @@ Let's adjust `src/styles/settings.scss`:
 
 If you run the build again, you should observe that the CSS bundle shrinks noticeably:
 
-```diff
-- 659.96 kB │ gzip: 142.26 kB
-+ 482.80 kB │ gzip: 116.26 kB
+```md
+before: 658.40 kB │ gzip: 141.74 kB
+after:  481.24 kB │ gzip: 115.70 kB
 ```
 
 The expected difference is substantial, but we still pay the tax of using the full MDI icon font. Switching to SVG icons (`@mdi/js`) is not a big deal, but we will keep this guide focused on integrating TailwindCSS. If you need to optimize the bundle size further, Vuetify documentation already covers [how to switch to SVG icon set](/features/icon-fonts/#mdi-js-svg).
@@ -157,10 +180,13 @@ The expected difference is substantial, but we still pay the tax of using the fu
 With utilities disabled, some classes used in the scaffolded template will stop working. Here are the replacements:
 
 * replace `fill-height` with `h-full`
+* replace `d-flex` with `flex`
 * replace `align-center` with `items-center`
 * replace `font-weight-*` with `font-*`
 * replace `mb-n1` with `-mb-1`
 * replace typography `text-*` classes with native TailwindCSS utilities to achieve similar font size and weight
+  * `text-body-2` » `text-sm`
+  * `text-h2` » `text-7xl`
 
 VRow/VCol can also be replaced with `grid md:grid-cols-2 gap-3` and `md:col-span-2` for the first VCard. However, you might be surprised to learn that Vuetify's grid engine got a major overhaul in v4.0.0 and is much leaner and more flexible than ever.
 
@@ -201,7 +227,7 @@ Looking at the default TailwindCSS configuration side-by-side with the default V
 .rounded-shaped { border-radius: 24px 0 }
 ```
 
-In order to resolve this, we need to use `blocklist` and suppress certain utilities from TailwindCSS. Create a config file:
+In order to resolve this, we need to use `blocklist` and suppress certain utilities from TailwindCSS. Create a config file `tailwind.config.ts`:
 
 ```ts { resource="tailwind.config.ts" }
 import type { Config } from 'tailwindcss'
@@ -255,30 +281,25 @@ If you'd rather use the original TailwindCSS `rounded-*` utilities, it is recomm
 
 The `create-vuetify` utility we used at the beginning to scaffold the project uses `unplugin-fonts` to load Roboto. Let's update the configuration to make sure the target fonts are available.
 
-```diff { resource="vite.config.mts" }
+```ts { resource="vite.config.mts" }
     Fonts({
       fontsource: {
         families: [
--          {
--            name: 'Roboto',
--            weights: [100, 300, 400, 500, 700, 900],
--            styles: ['normal', 'italic'],
-+          {
-+            name: 'Bricolage Grotesque',
-+            weights: [300, 400, 500, 700],
-+          },
-+          {
-+            name: 'Sen',
-+            weights: [400, 500, 700],
-+          },
-+          {
-+            name: 'Sometype Mono',
-+            weights: [400, 700],
-+          },
+          {
+            name: 'Bricolage Grotesque',
+            weights: [300, 400, 500, 700],
+          },
+          {
+            name: 'Sen',
+            weights: [400, 500, 700],
+          },
+          {
+            name: 'Sometype Mono',
+            weights: [400, 700],
+          },
         ],
       },
     }),
-  ],
 ```
 
 Next step is to add them as dependencies:
