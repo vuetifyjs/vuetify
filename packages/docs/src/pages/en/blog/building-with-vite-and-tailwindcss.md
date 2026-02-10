@@ -15,7 +15,7 @@ We will go through the following steps:
 * Scaffold a starter project and wire up TailwindCSS
 * Restore `rounded-*` utilities
 * Customize fonts
-* Discuss strategy to for theme colors management
+* Discuss strategy for theme colors management
 * Ensure Vuetify's light/dark themes work with TailwindCSS `light:*` and `dark:*` prefixes
 * Align breakpoints configuration
 
@@ -63,9 +63,9 @@ bun create vuetify
 
 ...choose the "Recommended" preset for Vite and select Vuetify 4.
 
-Verify the boilerplate by building it with standard NPM build script (e.g. `pnpm run build`).
+Verify the boilerplate by building it with the standard NPM build script (e.g. `pnpm run build`).
 
-Add a few generated files to `.gitignore`, so they won't annoy as when inspecting applied changes.
+Add a few generated files to `.gitignore`, so they won't annoy us when inspecting applied changes.
 
 ```sh { resource=".gitignore" }
 # Generated files
@@ -107,7 +107,7 @@ Register `tailwindcss()` in the `plugins` array of `vite.config.ts` and create `
 @import "tailwindcss/utilities" layer(tailwind.utilities);
 ```
 
-In order for Vuetify transitions to work properly, we have to ensure `tailwind.*` layers are placed before `vuetify-final`. Go ahead and add new file called `layers.scss`:
+In order for Vuetify transitions to work properly, we have to ensure `tailwind.*` layers are placed before `vuetify-final`. Go ahead and add a new file called `layers.scss`:
 
 ```css { resource="src/styles/layers.scss" }
 @layer vuetify-core;
@@ -160,9 +160,9 @@ With utilities disabled, some classes used in the scaffolded template will stop 
 * replace `align-center` with `items-center`
 * replace `font-weight-*` with `font-*`
 * replace `mb-n1` with `-mb-1`
-* replace typography `text-*` classes with native TailwindCSS utilities to achieve similar font size and width
+* replace typography `text-*` classes with native TailwindCSS utilities to achieve similar font size and weight
 
-VRow/VCol can also be replaced with `grid md:grid-cols-2 gap-3` and `md:col-span-2` for the first VCard. However, you might be surprised to learn that Vuetify grid engine got major overhaul in v4.0.0 and is much leaner and more flexible then ever.
+VRow/VCol can also be replaced with `grid md:grid-cols-2 gap-3` and `md:col-span-2` for the first VCard. However, you might be surprised to learn that Vuetify's grid engine got a major overhaul in v4.0.0 and is much leaner and more flexible than ever.
 
 ### Restore `rounded-*` classes
 
@@ -176,7 +176,7 @@ TailwindCSS lets us define rounding using CSS variables that are later applied b
 }
 ```
 
-Looking at the default TailwindCSS configuration side-by-side with default Vuetify classes generated from Sass, it is clear that those are not compatible and we will need some stitching.
+Looking at the default TailwindCSS configuration side-by-side with the default Vuetify classes generated from Sass, it is clear that those are not compatible and we will need some stitching.
 
 ```css
 @theme {
@@ -331,7 +331,7 @@ Then we pass them to Vuetify through Sass variables so component typography pick
 );
 ```
 
-At this point, I usually like to cover components that need a monospace font. We can also create `/assets/main.scss` to set it globally. It is not strictly necessary, but apps usually need some custom global styles anyway.
+At this point, I usually like to cover components that need a monospace font. We can also create `/styles/main.scss` to set it globally. It is not strictly necessary, but apps usually need some custom global styles anyway.
 
 ```scss { resource="src/styles/main.scss" }
 @layer vuetify-overrides {
@@ -359,7 +359,7 @@ New file has to be imported in `main.ts` alongside the Tailwind stylesheet.
 
 When working with TailwindCSS, it is normal to split background and text colors into separate classes, and the responsibility of ensuring readability is on the developer writing the code.
 
-In order to avoid the mental overhead of remembering where each `bg-*` is comming from, let's instruct Vuetify theme to generate only CSS variables and skip the classes:
+In order to avoid the mental overhead of remembering where each `bg-*` is coming from, let's instruct Vuetify theme to generate only CSS variables and skip the classes:
 
 ```diff { resource="src/plugins/vuetify.ts" }
 export default createVuetify({
@@ -506,7 +506,7 @@ Compared to the UnoCSS path, most of the setup lands in `tailwind.css` instead o
 
 * **Utilities**: we disabled Vuetify's built-in utilities to replace them with TailwindCSS utilities while keeping an eye on the correct order of CSS layers
 * **Rounded classes**: Vuetify's `rounded` prop and Tailwind's `rounded-*` utilities use the same class names with different values. It was a challenge, but we were able to bridge the gap
-* **Theme colors**: Vuetify theme can also be configured to skip utility classes and generate only CSS properties. We have passed them inside `@theme` directive and "safelisted" global colors we intend to use with `color` prop on cards, buttons and icons
+* **Theme colors**: Vuetify theme can also be configured to skip utility classes and generate only CSS properties. We have passed them inside the `@theme` directive and "safelisted" global colors we intend to use with the `color` prop on cards, buttons and icons
 * **Dark mode**: Tailwind is flexible enough to accept Vuetify theme classes
 * **Typography**: `text-*` classes were skipped for simplicity - you can introduce your own classes with the `@utility` directive if needed
 * **Breakpoints**: we aligned configuration across three definitions (SCSS, Vuetify config, Tailwind `@theme`) to prevent layout bugs
