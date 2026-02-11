@@ -142,14 +142,15 @@ In order for Vuetify transitions to work properly, we have to ensure `tailwind.*
 @layer vuetify-final;
 ```
 
-Then reference it from `settings.scss`.
+Then reference it from `vuetify.ts` before importing `vuetify/styles`.
 
-```scss { resource="src/styles/settings.scss" }
-@use './layers';
+```ts { resource="src/plugins/vuetify.ts" }
+// Styles
+import '../styles/layers.css'
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
 
-/* @use 'vuetify/settings' with (
-  ... we will fill it up later ...
-) */
+// followed by createVuetify({ ... })
 ```
 
 ![CSS Layers preview in browser DevTools](https://vuetifyjs.b-cdn.net/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
