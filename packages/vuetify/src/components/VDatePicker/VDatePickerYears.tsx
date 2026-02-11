@@ -95,11 +95,11 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearsRef = templateRef()
+    const containerRef = templateRef()
     const yearRef = templateRef()
 
     function focusSelectedYear () {
-      const container = yearsRef.el
+      const container = containerRef.el
       const target = yearRef.el
       if (!container || !target) return
 
@@ -124,7 +124,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
-        ref={ yearsRef }
+        ref={ containerRef }
         v-intersect={[{
           handler: focusSelectedYear,
         }, null, ['once']]}
