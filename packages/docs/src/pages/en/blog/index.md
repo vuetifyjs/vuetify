@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## January 2026 Update
+
+🖊️ John Leider • 📅 February 11th, 2026
+
+January delivered Vuetify 4.0.0-beta.0 with MD3 typography and elevation systems, VCommandPalette in labs, grid system overhaul, and the Vuetify CLI reaching 100 commits with analyze command and tab completion. Vuetify0 hit v0.1.0 with Tabs, Radio, and Checkbox components, while Snips gained 11 new snippets from J-Sek... { .text-medium-emphasis }
+
+[Read More](/blog/january-2026-update/) { .text-end }
+
 ## December 2025 Update
 
 🖊️ John Leider • 📅 January 12th, 2026
