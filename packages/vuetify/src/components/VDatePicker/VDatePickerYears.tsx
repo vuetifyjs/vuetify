@@ -95,10 +95,18 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
+    const yearsRef = templateRef()
     const yearRef = templateRef()
 
     function focusSelectedYear () {
-      yearRef.el?.scrollIntoView({ block: 'center' })
+      const container = yearsRef.el
+      const target = yearRef.el
+      if (!container || !target) return
+
+      const containerRect = container.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+
+      container.scrollTop += (targetRect.top - containerRect.top) - (container.clientHeight / 2) + (targetRect.height / 2)
     }
 
     function isYearAllowed (year: number) {
@@ -116,6 +124,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
+        ref={ yearsRef }
         v-intersect={[{
           handler: focusSelectedYear,
         }, null, ['once']]}
