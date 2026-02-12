@@ -91,6 +91,7 @@ export default {
     hour: 'Giờ',
     minute: 'Phút',
     second: 'Giây',
+    notAllowed: 'Giá trị không được phép',
   },
   pagination: {
     ariaLabel: {

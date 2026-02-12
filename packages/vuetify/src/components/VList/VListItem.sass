@@ -74,6 +74,9 @@
     display: flex
     grid-area: prepend
 
+    * ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
+
     > .v-badge,
     > .v-icon,
     > .v-tooltip
@@ -113,6 +116,9 @@
     .v-list-item__spacer
       order: -1
       transition: 150ms width settings.$standard-easing
+
+    * ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
 
     > .v-badge,
     > .v-icon,
