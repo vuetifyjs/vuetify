@@ -9,7 +9,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { ClassValue, makeComponentProps } from '@/composables/component'
+import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -33,6 +33,7 @@ import {
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ClassValue } from '@/composables/component'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
