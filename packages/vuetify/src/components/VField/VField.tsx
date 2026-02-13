@@ -9,7 +9,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { makeComponentProps } from '@/composables/component'
+import { ClassValue, makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
@@ -49,7 +49,9 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown>
+  props: Record<string, unknown> & {
+    class?: ClassValue
+  }
 }
 
 export const makeVFieldProps = propsFactory({
