@@ -133,6 +133,18 @@ describe('VTextField', () => {
     expect(element).toHaveTextContent('0')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19998
+  it('hides details when using hide-details="auto" and counter without focus', async () => {
+    const { element, queryByCSS } = render(() => (
+      <VTextField hideDetails="auto" counter></VTextField>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toBeNull()
+
+    await userEvent.click(element)
+    expect(queryByCSS('.v-input__details')).not.toBeNull()
+  })
+
   it('keeps -0 with v-model.number', async () => {
     const model = ref()
     const { element } = render(() => (

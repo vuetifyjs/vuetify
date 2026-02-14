@@ -179,7 +179,8 @@ describe('VTextField', () => {
       expect(details.attributes('id')).toBe('input-4-messages')
     })
 
-    it('should have aria-describedby when hide-details is "auto" and has counter', () => {
+    // https://github.com/vuetifyjs/vuetify/issues/19998
+    it('should not have details when hide-details is "auto" and has counter without focus', async () => {
       const wrapper = mountFunction(
         <VTextField
           id="input-5"
@@ -188,13 +189,15 @@ describe('VTextField', () => {
         />
       )
 
-      const input = wrapper.find('input')
-      expect(input.attributes('aria-describedby')).toBe('input-5-messages')
+      // Should not have details section without focus
+      expect(wrapper.find('.v-input__details').exists()).toBe(false)
+      expect(wrapper.find('input').attributes('aria-describedby')).toBeUndefined()
 
-      // Should have details section with counter
-      const details = wrapper.find('.v-input__details')
-      expect(details.exists()).toBe(true)
-      expect(details.attributes('id')).toBe('input-5-messages')
+      // Should have details section with counter when focused
+      wrapper.find('input').trigger('focus')
+      await wrapper.vm.$nextTick()
+      expect(wrapper.find('.v-input__details').exists()).toBe(true)
+      expect(wrapper.find('.v-input__details').attributes('id')).toBe('input-5-messages')
     })
 
     it('should have aria-describedby when hide-details is "auto" and has details slot', () => {
