@@ -53,6 +53,18 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 <ExamplesExample file="v-img/prop-cover" />
 
+#### Rounded
+
+::: warning
+
+The `width="fit-content"` requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0) in order to correctly adapt to actual image ratio.
+
+:::
+
+Use the **rounded** prop to control the border radius of the image container.
+
+<ExamplesExample file="v-img/prop-rounded" />
+
 #### Height
 
 `v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
