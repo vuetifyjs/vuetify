@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Elevation
   description: Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.
@@ -40,8 +41,22 @@ The `elevation` helper classes allow you to assign a custom **z-depth** to any e
 
 ### Props
 
-#### Dynamic elevation
+#### Hover elevation
 
-Numerous components utilize the **elevatable** mixin and are given an **elevation** prop. For components that are not supported, you can dynamically change the class
+Use the `hover-elevation` prop to change a component's elevation on hover. For regular HTML elements or components without `elevation` prop, the `hover-elevation-*` utility classes helps achieve the same effect.
 
 <ExamplesExample file="elevation/prop-dynamic" />
+
+### Misc
+
+#### Elevation overlay
+
+The `elevation-overlay` class adds a translucent layer whose opacity scales with the elevation level. This is especially useful in **dark themes** where shadows are less visible — the overlay provides a visual cue for surface depth.
+
+<ExamplesExample file="elevation/misc-elevation-overlay" />
+
+#### CSS custom properties
+
+You can customize `--v-shadow-color` for each theme or use it directly on the component to change the shadow color (expects an RGB value) and `--v-elevation-overlay-color` to customize the overlay tint.
+
+<ExamplesExample file="elevation/misc-css-custom-properties" />
