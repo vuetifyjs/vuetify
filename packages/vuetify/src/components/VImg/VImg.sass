@@ -16,15 +16,14 @@
       z-index: -1
 
     &.v-img--fit-content
-      display: inline-block
-      flex: 0 1 auto
+      max-width: fit-content
+      max-height: fit-content
 
-      .v-img__img
+      > .v-img__img
         position: relative
-        width: auto
 
-      .v-responsive__sizer
-        padding-bottom: 0 !important
+      > .v-responsive__sizer
+        display: none
 
     &--booting .v-responsive__sizer
       transition: none
