@@ -53,15 +53,15 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 <ExamplesExample file="v-img/prop-cover" />
 
-#### Fit Content
-
-The **fit-content** prop ensures that the size of the `v-img` component adjusts to the natural dimensions of the image.
-
-<ExamplesExample file="v-img/prop-fit-content" />
-
 #### Rounded
 
-The **rounded** prop will apply a rounded border on the image. The values can be `0`, `xs`, `sm`, `true`, `lg`, `xl`, `pill`, `circle`, and `shaped`. More information on the [Border Radius page](https://vuetifyjs.com/en/styles/border-radius).
+::: warning
+
+The `width="fit-content"` requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0) in order to correctly adapt to actual image ratio.
+
+:::
+
+Use the **rounded** prop to control the border radius of the image container.
 
 <ExamplesExample file="v-img/prop-rounded" />
 

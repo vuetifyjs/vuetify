@@ -57,7 +57,6 @@ export const makeVImgProps = propsFactory({
   absolute: Boolean,
   alt: String,
   cover: Boolean,
-  fitContent: Boolean,
   color: String,
   draggable: {
     type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
@@ -356,7 +355,7 @@ export const VImg = genericComponent<VImgSlots>()({
             {
               'v-img--absolute': props.absolute,
               'v-img--booting': !isBooted.value,
-              'v-img--fit-content': props.fitContent,
+              'v-img--fit-content': props.width === 'fit-content',
             },
             backgroundColorClasses.value,
             roundedClasses.value,
