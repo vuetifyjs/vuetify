@@ -23,6 +23,8 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: ajv@8.18.0
+  - ajv@8.18.0
 
 nodeLinker: hoisted
 
