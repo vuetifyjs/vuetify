@@ -13,12 +13,10 @@
       <v-progress-linear
         :active="loading"
         :indeterminate="loading"
-        absolute
-        bottom
         color="deep-purple-accent-4"
+        location="bottom"
+        absolute
       ></v-progress-linear>
-
-      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -31,8 +29,8 @@
 
     <v-container style="height: 282px;">
       <v-row
-        class="fill-height"
         align="center"
+        class="fill-height"
         justify="center"
       >
         <v-scale-transition>

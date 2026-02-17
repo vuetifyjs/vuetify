@@ -13,27 +13,24 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { mergeProps, nextTick, ref, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
   fullscreen: Boolean,
-  retainFocus: {
-    type: Boolean,
-    default: true,
-  },
   scrollable: Boolean,
 
-  ...makeVOverlayProps({
+  ...omit(makeVOverlayProps({
+    captureFocus: true,
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
     zIndex: 2400,
-  }),
+    retainFocus: true,
+  }), ['disableInitialFocus']),
 }, 'VDialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
@@ -43,68 +40,46 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
 
+    function onAfterEnter () {
+      emit('afterEnter')
       if (
-        before !== after &&
+        (props.scrim || props.retainFocus) &&
         overlay.value?.contentEl &&
-        // We're the topmost dialog
-        overlay.value?.globalTop &&
-        // It isn't the document or the dialog body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the dialog body
-        !overlay.value.contentEl.contains(after)
+        !overlay.value.contentEl.contains(document.activeElement)
       ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-
-        if (!focusable.length) return
-
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
-
-        if (before === firstElement) {
-          lastElement.focus()
-        } else {
-          firstElement.focus()
-        }
+        overlay.value.contentEl.focus({ preventScroll: true })
       }
     }
 
-    if (IN_BROWSER) {
-      watch(() => isActive.value && props.retainFocus, val => {
-        val
-          ? document.addEventListener('focusin', onFocusin)
-          : document.removeEventListener('focusin', onFocusin)
-      }, { immediate: true })
+    function onAfterLeave () {
+      emit('afterLeave')
     }
 
     watch(isActive, async val => {
-      await nextTick()
-      if (val) {
-        overlay.value!.contentEl?.focus({ preventScroll: true })
-      } else {
+      if (!val) {
+        await nextTick()
         overlay.value!.activatorEl?.focus({ preventScroll: true })
       }
     })
 
-    const activatorProps = computed(() =>
-      mergeProps({
-        'aria-haspopup': 'dialog',
-        'aria-expanded': String(isActive.value),
-      }, props.activatorProps)
-    )
-
     useRender(() => {
-      const [overlayProps] = VOverlay.filterProps(props)
+      const overlayProps = VOverlay.filterProps(props)
+      const activatorProps = mergeProps({
+        'aria-haspopup': 'dialog',
+      }, props.activatorProps)
+      const contentProps = mergeProps({
+        tabindex: -1,
+      }, props.contentProps)
 
       return (
         <VOverlay
@@ -121,8 +96,15 @@ export const VDialog = genericComponent<OverlaySlots>()({
           { ...overlayProps }
           v-model={ isActive.value }
           aria-modal="true"
-          activatorProps={ activatorProps.value }
+          activatorProps={ activatorProps }
+          contentProps={ contentProps }
+          height={ !props.fullscreen ? props.height : undefined }
+          width={ !props.fullscreen ? props.width : undefined }
+          maxHeight={ !props.fullscreen ? props.maxHeight : undefined }
+          maxWidth={ !props.fullscreen ? props.maxWidth : undefined }
           role="dialog"
+          onAfterEnter={ onAfterEnter }
+          onAfterLeave={ onAfterLeave }
           { ...scopeId }
         >
           {{

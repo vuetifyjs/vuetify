@@ -16,11 +16,10 @@
       </v-card-title>
 
       <v-img
-        contain
+        class="flex-grow-0"
         height="125px"
         src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
         style="flex-basis: 125px"
-        class="flex-grow-0"
       ></v-img>
     </div>
 
@@ -37,11 +36,11 @@
 
       <v-rating
         v-model="rating"
-        color="white"
         active-color="yellow-accent-4"
+        color="white"
+        size="18"
         half-increments
         hover
-        size="18"
       ></v-rating>
     </v-card-actions>
   </v-card>

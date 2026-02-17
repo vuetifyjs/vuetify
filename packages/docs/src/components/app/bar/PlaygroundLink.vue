@@ -1,29 +1,15 @@
 <template>
-  <app-btn
-    href="https://play.vuetifyjs.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="ms-1"
+  <AppBtn
     color="medium-emphasis"
-    variant="text"
+    href="https://play.vuetifyjs.com"
+    rel="noopener noreferrer"
+    target="_blank"
     text="playground"
-    @click="onClick"
+    variant="text"
+    @click="sweClick('app-bar', 'playground', name)"
   />
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute } from 'vue-router'
-
-  const { event } = useGtag()
   const { name } = useRoute()
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'playground',
-      value: name,
-    })
-  }
 </script>

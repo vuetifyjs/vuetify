@@ -1,5 +1,5 @@
 <template>
-  <app-sheet>
+  <AppSheet>
     <v-table class="api-table" density="comfortable">
       <thead>
         <tr>
@@ -22,16 +22,16 @@
             name="row"
             v-bind="{
               props: {
-                class: 'bg-surface-bright'
+                style: 'background: rgba(0,0,0,.1)'
               },
               item,
             }"
           />
 
-          <tr v-if="item.description || (user.dev && item.source)">
-            <td colspan="3" class="text-mono pt-4">
+          <tr v-if="item.description || (user.one.devmode && item.source)">
+            <td class="text-mono pt-4" colspan="3">
               <template v-if="item.description">
-                <app-markdown
+                <AppMarkdown
                   v-if="localeStore.locale !== 'eo-UY'"
                   :content="item.description"
                   class="mb-0"
@@ -39,9 +39,9 @@
                 <span v-else>{{ item.description }}</span>
               </template>
 
-              <p v-if="user.dev && item.source">
+              <p v-if="user.one.devmode && item.source">
                 <strong>source: {{ item.source }}</strong>
-                <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
+                <template v-if="user.one.devmode && item.descriptionSource && item.source !== item.descriptionSource">
                   <br>
                   <strong>description source: {{ item.descriptionSource }}</strong>
                 </template>
@@ -51,26 +51,18 @@
         </template>
 
         <tr v-if="!filtered.length">
-          <td colspan="4" class="text-center text-disabled text-body-2">
+          <td class="text-center text-disabled text-body-2" colspan="4">
             {{ t('search.no-results') }}
           </td>
         </tr>
       </tbody>
     </v-table>
-  </app-sheet>
+  </AppSheet>
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed, PropType } from 'vue'
-
-  // Stores
-  import { useAppStore } from '@/store/app'
-  import { useLocaleStore } from '@/store/locale'
-  import { useUserStore } from '@/store/user'
+  // Types
+  import type { PropType } from 'vue'
 
   const props = defineProps({
     headers: {
@@ -90,11 +82,11 @@
 
   const filtered = computed(() => {
     const items = props.items.filter((item: any) => {
-      return user.dev || item.description !== '**FOR INTERNAL USE ONLY**'
+      return user.one.devmode || item.description !== '**FOR INTERNAL USE ONLY**'
     })
     if (!appStore.apiSearch) return items
 
-    const query = appStore.apiSearch.toLowerCase()
+    const query = camelCase(appStore.apiSearch).toLowerCase()
 
     return items.filter((item: any) => {
       return item.name.toLowerCase().includes(query)

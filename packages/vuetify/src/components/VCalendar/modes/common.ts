@@ -1,7 +1,5 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { CalendarEventParsed, CalendarEventVisual, CalendarTimestamp } from 'vuetify/types'
+// Types
+import type { CalendarEventParsed, CalendarEventVisual, CalendarTimestamp } from '../types'
 import { getTimestampIdentifier } from '../util/timestamp'
 
 const MILLIS_IN_DAY = 86400000
@@ -18,8 +16,9 @@ export function getVisuals (events: CalendarEventParsed[], minStart = 0): Calend
   }))
 
   visuals.sort((a, b) => {
-    return (Math.max(minStart, a.event.startTimestampIdentifier) - Math.max(minStart, b.event.startTimestampIdentifier)) ||
-           (b.event.endTimestampIdentifier - a.event.endTimestampIdentifier)
+    return (
+      Math.max(minStart, a.event.startTimestampIdentifier) - Math.max(minStart, b.event.startTimestampIdentifier)
+    ) || (b.event.endTimestampIdentifier - a.event.endTimestampIdentifier)
   })
 
   return visuals

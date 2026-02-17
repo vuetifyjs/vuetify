@@ -1,12 +1,9 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// import { parseEvent } from '../../util/events'
+import { parseEvent } from '../../util/events'
 import {
   getVisuals, hasOverlap,
 } from '../common'
 
-describe.skip('common.ts', () => {
+describe('common.ts', () => {
   it('should get visuals 1', () => {
     expect(getVisuals([])).toEqual([])
     expect(parseEvent({

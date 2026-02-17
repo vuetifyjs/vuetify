@@ -1,9 +1,9 @@
 <template>
   <v-switch
     v-model="model"
-    hide-details
-    flat
     :label="`Switch: ${model.toString()}`"
+    flat
+    hide-details
   ></v-switch>
 </template>
 

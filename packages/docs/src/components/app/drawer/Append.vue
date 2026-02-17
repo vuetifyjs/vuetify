@@ -1,28 +1,17 @@
 <template>
   <v-divider />
 
-  <v-hover>
-    <template #default="{ props: hoverProps, isHovering }">
-      <div v-bind="hoverProps">
-        <v-expand-transition v-if="user.railDrawer || auth.isSubscriber">
-          <drawer-toggle-rail v-if="isHovering" />
-        </v-expand-transition>
+  <div class="d-flex align-center text-caption text-medium-emphasis pa-2">
+    <AppDrawerDrawerToggleRail v-if="one.isSubscriber" class="me-2" />
 
-        <AuthBox />
-      </div>
-    </template>
-  </v-hover>
+    <div class="d-flex ms-auto overflow-hidden">
+      <AppCommitBtn class="me-2" />
+
+      <AppVersionBtn />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import DrawerToggleRail from '@/components/app/drawer/DrawerToggleRail.vue'
-  import AuthBox from '@/components/app/drawer/AuthBox.vue'
-
-  // Stores
-  import { useAuthStore } from '@/store/auth'
-  import { useUserStore } from '@/store/user'
-
-  const auth = useAuthStore()
-  const user = useUserStore()
+  const one = useOneStore()
 </script>

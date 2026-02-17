@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
     <v-textarea
-      label="Text"
-      no-resize
-      rows="1"
       :model-value="value"
+      label="Text"
+      rows="1"
+      no-resize
     ></v-textarea>
   </v-container>
 </template>

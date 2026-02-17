@@ -1,8 +1,16 @@
+import { StringDateAdapter } from '@/composables/date/adapters/string'
 // import DateFnsAdapter from '@date-io/date-fns'
 // import { enAU, enUS, ja, sv } from 'date-fns/locale'
 
+// import DayJsAdapter from '@date-io/dayjs'
+
+// import LuxonAdapter from '@date-io/luxon'
+
+// import MomentAdapter from '@date-io/moment'
+
 export default {
   // adapter: DateFnsAdapter,
+  // adapter: StringDateAdapter,
   formats: {
     // dayOfMonth: date => date.getDate(),
   },

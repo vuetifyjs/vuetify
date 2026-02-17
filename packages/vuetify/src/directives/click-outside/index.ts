@@ -58,6 +58,9 @@ function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): b
 function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
   const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
 
+  // Clicks in the Shadow DOM change their target while using setTimeout, so the original target is saved here
+  e.shadowTarget = e.target
+
   el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
     checkIsActive(e, binding) && handler && handler(e)
   }, 0)
@@ -89,7 +92,6 @@ export const ClickOutside = {
       app.addEventListener('click', onClick, true)
       app.addEventListener('mousedown', onMousedown, true)
     })
-
     if (!el._clickOutside) {
       el._clickOutside = {
         lastMousedownWasOutside: false,
@@ -102,7 +104,7 @@ export const ClickOutside = {
     }
   },
 
-  unmounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
+  beforeUnmount (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     if (!el._clickOutside) return
 
     handleShadow(el, (app: HTMLElement) => {

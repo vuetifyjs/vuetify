@@ -1,16 +1,16 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
-import { defaultRtl } from '@/locale'
+import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
 export interface LocaleMessages {
   [key: string]: LocaleMessages | string
 }
 
 export interface LocaleOptions {
+  decimalSeparator?: string
   messages?: LocaleMessages
   locale?: string
   fallback?: string
@@ -19,6 +19,7 @@ export interface LocaleOptions {
 
 export interface LocaleInstance {
   name: string
+  decimalSeparator: ShallowRef<string>
   messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
@@ -81,14 +82,61 @@ export interface RtlInstance {
 
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
+function genDefaults () {
+  return {
+    af: false,
+    ar: true,
+    bg: false,
+    ca: false,
+    ckb: false,
+    cs: false,
+    de: false,
+    el: false,
+    en: false,
+    es: false,
+    et: false,
+    fa: true,
+    fi: false,
+    fr: false,
+    hr: false,
+    hu: false,
+    he: true,
+    id: false,
+    it: false,
+    ja: false,
+    km: false,
+    ko: false,
+    lv: false,
+    lt: false,
+    nl: false,
+    no: false,
+    pl: false,
+    pt: false,
+    ro: false,
+    ru: false,
+    sk: false,
+    sl: false,
+    srCyrl: false,
+    srLatn: false,
+    sv: false,
+    th: false,
+    tr: false,
+    az: false,
+    uk: false,
+    vi: false,
+    zhHans: false,
+    zhHant: false,
+  }
+}
+
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = ref<Record<string, boolean>>(options?.rtl ?? defaultRtl)
+  const rtl = ref<Record<string, boolean>>(options?.rtl ?? genDefaults())
   const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
 
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 
@@ -98,7 +146,7 @@ export function provideRtl (locale: LocaleInstance, rtl: RtlInstance['rtl'], pro
   return {
     isRtl,
     rtl,
-    rtlClasses: computed(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 

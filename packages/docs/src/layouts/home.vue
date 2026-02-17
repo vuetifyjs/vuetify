@@ -1,29 +1,18 @@
 <template>
   <v-app>
-    <app-banner />
+    <VoNotificationsBanner order="-1" />
 
-    <app-settings-drawer />
+    <AppSettingsDrawer />
 
-    <app-bar />
-
-    <app-snackbar-queue />
+    <AppBarBar />
 
     <v-main class="text-center font-weight-light">
       <router-view />
     </v-main>
 
-    <home-footer />
+    <HomeFooter />
   </v-app>
 </template>
-
-<script setup>
-  // Components
-  import AppBanner from '@/components/app/Banner.vue'
-  import AppBar from '@/components/app/bar/Bar.vue'
-  import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import HomeFooter from '@/components/home/Footer.vue'
-  import AppSnackbarQueue from '@/components/app/SnackbarQueue.vue'
-</script>
 
 <style lang="sass">
 #vue-component-framework

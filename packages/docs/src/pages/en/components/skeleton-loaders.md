@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Skeleton loaders
   title: Skeleton loader component
@@ -20,23 +19,17 @@ features:
 
 Skeleton loaders provide a simple way to display loading placeholders in your application.
 
-![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
+<PageFeatures />
 
-<page-features />
-
-::: success
-
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.
 
-<usage name="v-skeleton-loader" />
+<ExamplesUsage name="v-skeleton-loader" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -44,7 +37,7 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 | - | - |
 | [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Anatomy
 
@@ -74,7 +67,7 @@ The `v-skeleton-loader` component has a small API mainly used to configure the r
 
 The **type** property is used to define the type of skeleton loader. Types can be combined to create more complex skeletons. For example, the **card** type is a combination of the **image** and **heading** types.
 
-<example file="v-skeleton-loader/prop-type" />
+<ExamplesExample file="v-skeleton-loader/prop-type" />
 
 The following built-in types are available:
 
@@ -108,7 +101,7 @@ The following built-in types are available:
 | **table-thead** | heading@6 |
 | **table-tbody** | table-row-divider@6 |
 | **table-row-divider** | table-row, divider |
-| **table-row** | table-cell@6 |
+| **table-row** | text@6 |
 | **table-tfoot** | text@2, avatar@2 |
 | **text** | text |
 
@@ -121,19 +114,19 @@ A skeleton loader is considered to be in a loading state if one of the following
 
 If either condition is met, the skeleton loader returns the type structure in place of the default slot and applies dimensions values; e.g. **height**, **width**, **min-height**, etc. If the condition is not met, the default slot is returned.
 
-<example file="v-skeleton-loader/prop-loading" />
+<ExamplesExample file="v-skeleton-loader/prop-loading" />
 
 #### Elevation
 
 The **elevation** property makes it easy to match the elevation of the skeleton loader to the content it is replacing.
 
-<example file="v-skeleton-loader/prop-elevation" />
+<ExamplesExample file="v-skeleton-loader/prop-elevation" />
 
 #### Boilerplate
 
 The `v-skeleton-loader` can be used as boilerplate designs when creating mockups. Mix and match various pre-defined options or create your own unique implementations. In this example, we use a custom **data** property to apply the same props to multiple `v-skeleton-loader`'s at once.
 
-<example file="v-skeleton-loader/prop-boilerplate" />
+<ExamplesExample file="v-skeleton-loader/prop-boilerplate" />
 
 ## Examples
 
@@ -143,7 +136,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 The following example demonstrates how the `v-skeleton-loader` component can be used to create a placeholder loading state for when content is being fetched from a server or loaded asynchronously.
 
-<example file="v-skeleton-loader/misc-ice-cream" />
+<ExamplesExample file="v-skeleton-loader/misc-ice-cream" />
 
 ## SASS Variables
 

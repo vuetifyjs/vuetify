@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" class="d-flex flex-column align-center">
+      <v-col class="d-flex flex-column align-center" cols="12">
         <code>{{ code }}</code>
 
         <v-tooltip
@@ -19,41 +19,41 @@
 
       <v-col>
         <v-radio-group v-model="locationSide" label="Location side">
-          <v-radio value="top" label="top"></v-radio>
-          <v-radio value="end" label="end"></v-radio>
-          <v-radio value="bottom" label="bottom"></v-radio>
-          <v-radio value="start" label="start"></v-radio>
+          <v-radio label="top" value="top"></v-radio>
+          <v-radio label="end" value="end"></v-radio>
+          <v-radio label="bottom" value="bottom"></v-radio>
+          <v-radio label="start" value="start"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="locationAlign" label="Location alignment">
-          <v-radio value="top" label="top" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
-          <v-radio value="start" label="start" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
-          <v-radio value="center" label="center"></v-radio>
-          <v-radio value="end" label="end" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
-          <v-radio value="bottom" label="bottom" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
+          <v-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="top" value="top"></v-radio>
+          <v-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="start" value="start"></v-radio>
+          <v-radio label="center" value="center"></v-radio>
+          <v-radio :disabled="!(locationSide === 'top' || locationSide === 'bottom')" label="end" value="end"></v-radio>
+          <v-radio :disabled="locationSide === 'top' || locationSide === 'bottom'" label="bottom" value="bottom"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="originSide" label="Origin side">
-          <v-radio value="auto" label="auto"></v-radio>
-          <v-radio value="overlap" label="overlap"></v-radio>
-          <v-radio value="top" label="top"></v-radio>
-          <v-radio value="end" label="end"></v-radio>
-          <v-radio value="bottom" label="bottom"></v-radio>
-          <v-radio value="start" label="start"></v-radio>
+          <v-radio label="auto" value="auto"></v-radio>
+          <v-radio label="overlap" value="overlap"></v-radio>
+          <v-radio label="top" value="top"></v-radio>
+          <v-radio label="end" value="end"></v-radio>
+          <v-radio label="bottom" value="bottom"></v-radio>
+          <v-radio label="start" value="start"></v-radio>
         </v-radio-group>
       </v-col>
 
       <v-col>
         <v-radio-group v-model="originAlign" label="Origin alignment">
-          <v-radio value="top" label="top" :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'"></v-radio>
-          <v-radio value="start" label="start" :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')"></v-radio>
-          <v-radio value="center" label="center" :disabled="originDisabled"></v-radio>
-          <v-radio value="end" label="end" :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')"></v-radio>
-          <v-radio value="bottom" label="bottom" :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'"></v-radio>
+          <v-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="top" value="top"></v-radio>
+          <v-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="start" value="start"></v-radio>
+          <v-radio :disabled="originDisabled" label="center" value="center"></v-radio>
+          <v-radio :disabled="originDisabled || !(originSide === 'top' || originSide === 'bottom')" label="end" value="end"></v-radio>
+          <v-radio :disabled="originDisabled || originSide === 'top' || originSide === 'bottom'" label="bottom" value="bottom"></v-radio>
         </v-radio-group>
       </v-col>
     </v-row>

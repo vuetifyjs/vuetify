@@ -1,34 +1,38 @@
 // Components
-import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
-import { VDataTableRow } from './VDataTableRow'
+import { makeVDataTableGroupHeaderRowProps, VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
+import { makeVDataTableRowProps, VDataTableRow } from './VDataTableRow'
 
 // Composables
 import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Group } from './composables/group'
-import type { CellProps, DataTableItem, GroupHeaderSlot, ItemSlot, RowProps } from './types'
+import type { Group, GroupSummary } from './composables/group'
+import type { CellProps, DataTableItem, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
+import type { GenericProps } from '@/util'
 
-export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & VDataTableRowSlots & {
-  item: ItemSlot & { props: Record<string, any> }
+export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableRowSlots<T> & {
+  item: ItemSlot<T> & { props: Record<string, any> }
   loading: never
   'group-header': GroupHeaderSlot
+  'group-summary': GroupSummarySlot
   'no-data': never
-  'expanded-row': ItemSlot
+  'expanded-row': ItemSlot<T>
 }
 
 export const makeVDataTableRowsProps = propsFactory({
+  color: String,
   loading: [Boolean, String],
   loadingText: {
     type: String,
@@ -36,19 +40,27 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<readonly (DataTableItem | Group)[]>,
+    type: Array as PropType<readonly (DataTableItem | Group | GroupSummary)[]>,
     default: () => ([]),
   },
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
   },
-  rowHeight: Number,
-  rowProps: [Object, Function] as PropType<RowProps>,
-  cellProps: [Object, Function] as PropType<CellProps>,
+  rowProps: [Object, Function] as PropType<RowProps<any>>,
+  cellProps: [Object, Function] as PropType<CellProps<any>>,
+
+  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon', 'density']),
+  ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon', 'density']),
+  ...makeDisplayProps(),
 }, 'VDataTableRows')
 
-export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
+export const VDataTableRows = genericComponent<new <T>(
+  props: {
+    items?: readonly (DataTableItem<T> | Group<T> | GroupSummary<T>)[]
+  },
+  slots: VDataTableRowsSlots<T>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableRows',
 
   inheritAttrs: false,
@@ -61,9 +73,12 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
+    const { mobile } = useDisplay(props)
 
     useRender(() => {
-      if (props.loading) {
+      const groupHeaderRowProps = pick(props, ['groupCollapseIcon', 'groupExpandIcon', 'density'])
+
+      if (props.loading && (!props.items.length || slots.loading)) {
         return (
           <tr
             class="v-data-table-rows-loading"
@@ -109,14 +124,26 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
                   item={ item }
-                  { ...getPrefixedEventHandlers(attrs, ':group-header', () => slotProps) }
+                  { ...getPrefixedEventHandlers(attrs, ':groupHeader', () => slotProps) }
+                  { ...groupHeaderRowProps }
                   v-slots={ slots }
                 />
               )
             }
 
+            if (item.type === 'group-summary') {
+              const slotProps = {
+                index,
+                item,
+                columns: columns.value,
+                toggleGroup,
+              } satisfies GroupSummarySlot
+
+              return slots['group-summary']?.(slotProps) ?? ''
+            }
+
             const slotProps = {
-              index,
+              index: item.virtualIndex ?? index,
               item: item.raw,
               internalItem: item,
               columns: columns.value,
@@ -124,7 +151,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
               toggleExpand,
               isSelected,
               toggleSelect,
-            } satisfies ItemSlot
+            } satisfies ItemSlot<any>
 
             const itemSlotProps = {
               ...slotProps,
@@ -136,7 +163,12 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                   } : undefined,
                   index,
                   item,
+                  color: props.color,
                   cellProps: props.cellProps,
+                  collapseIcon: props.collapseIcon,
+                  expandIcon: props.expandIcon,
+                  density: props.density,
+                  mobile: mobile.value,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'

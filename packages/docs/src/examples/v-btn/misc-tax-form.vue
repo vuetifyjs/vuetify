@@ -15,29 +15,29 @@
 
       <v-text-field
         label="Enter value here"
-        single-line
         variant="outlined"
+        single-line
       ></v-text-field>
 
       <v-btn
         :disabled="loading"
         :loading="loading"
-        block
         class="text-none mb-4"
         color="indigo-darken-3"
         size="x-large"
         variant="flat"
+        block
         @click="loading = !loading"
       >
         Verify and continue
       </v-btn>
 
       <v-btn
-        block
         class="text-none"
         color="grey-lighten-3"
         size="x-large"
         variant="flat"
+        block
       >
         Cancel
       </v-btn>
@@ -71,3 +71,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1479-92504&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

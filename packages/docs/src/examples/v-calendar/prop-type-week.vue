@@ -4,9 +4,9 @@
       <v-sheet height="400">
         <v-calendar
           ref="calendar"
-          :now="today"
-          :value="today"
           :events="events"
+          :model-value="today"
+          :now="today"
           color="primary"
           type="week"
         ></v-calendar>
@@ -20,6 +20,7 @@
 
   const calendar = ref()
 
+  const today = ref('2019-01-08')
   const events = [
     {
       name: 'Weekly Meeting',
@@ -36,8 +37,6 @@
       end: '2019-01-09 15:30',
     },
   ]
-
-  const today = ref('2019-01-08')
 
   onMounted(() => {
     calendar.value.scrollToTime('08:00')

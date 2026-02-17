@@ -1,3 +1,6 @@
+// Styles
+import './VSpacer.sass'
+
 // Utilities
 import { createSimpleFunctional } from '@/util'
 

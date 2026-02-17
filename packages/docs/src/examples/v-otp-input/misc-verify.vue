@@ -13,19 +13,19 @@
     <v-otp-input
       v-model="otp"
       :disabled="validating"
-      variant="plain"
       color="primary"
+      variant="plain"
     ></v-otp-input>
 
     <v-btn
       :loading="validating"
-      border
       class="mt-6 text-none bg-surface-variant"
-      rounded
-      variant="plain"
-      text="Validate"
       height="40"
+      text="Validate"
+      variant="plain"
       width="135"
+      border
+      rounded
       @click="onClick"
     ></v-btn>
   </v-card>
@@ -64,3 +64,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2063-78016&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

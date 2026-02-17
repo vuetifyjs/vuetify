@@ -8,9 +8,12 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
+// Directives
+import vIntersect from '@/directives/intersect'
+
 // Utilities
-import { computed, nextTick, onMounted, ref, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, watchEffect } from 'vue'
+import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -40,6 +43,7 @@ export const makeVDatePickerYearsProps = propsFactory({
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
   modelValue: Number,
+  allowedYears: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerYears')
 
 export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
@@ -47,13 +51,16 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
   props: makeVDatePickerYearsProps(),
 
+  directives: { vIntersect },
+
   emits: {
     'update:modelValue': (year: number) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const hasFocusedItem = shallowRef(false)
     const years = computed(() => {
       const year = adapter.getYear(adapter.date())
 
@@ -74,11 +81,12 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
 
       return createRange(max - min + 1, min).map(i => {
         const text = adapter.format(date, 'year')
-        date = adapter.getNextYear(date)
+        date = adapter.setYear(date, adapter.getYear(date) + 1)
 
         return {
           text,
           value: i,
+          isDisabled: !isYearAllowed(i),
         }
       })
     })
@@ -87,20 +95,50 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const yearRef = ref<VBtn>()
-    onMounted(async () => {
-      await nextTick()
-      yearRef.value?.$el.scrollIntoView({ block: 'center' })
-    })
+    const containerRef = templateRef()
+    const yearRef = templateRef()
+
+    function focusSelectedYear () {
+      const container = containerRef.el
+      const target = yearRef.el
+      if (!container || !target) return
+
+      const containerRect = container.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+
+      container.scrollTop += (targetRect.top - containerRect.top) - (container.clientHeight / 2) + (targetRect.height / 2)
+    }
+
+    function isYearAllowed (year: number) {
+      if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
+        return props.allowedYears.includes(year)
+      }
+
+      if (typeof props.allowedYears === 'function') {
+        return props.allowedYears(year)
+      }
+
+      return true
+    }
 
     useRender(() => (
       <div
         class="v-date-picker-years"
+        ref={ containerRef }
+        v-intersect={[{
+          handler: focusSelectedYear,
+        }, null, ['once']]}
         style={{
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-years__content">
+        <div
+          class="v-date-picker-years__content"
+          onFocus={ () => yearRef.el?.focus() }
+          onFocusin={ () => hasFocusedItem.value = true }
+          onFocusout={ () => hasFocusedItem.value = false }
+          tabindex={ hasFocusedItem.value ? -1 : 0 }
+        >
           { years.value.map((year, i) => {
             const btnProps = {
               ref: model.value === year.value ? yearRef : undefined,
@@ -108,8 +146,15 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               color: model.value === year.value ? props.color : undefined,
               rounded: true,
               text: year.text,
+              disabled: year.isDisabled,
               variant: model.value === year.value ? 'flat' : 'text',
-              onClick: () => model.value = year.value,
+              onClick: () => {
+                if (model.value === year.value) {
+                  emit('update:modelValue', model.value)
+                  return
+                }
+                model.value = year.value
+              },
             } as const
 
             return slots.year?.({

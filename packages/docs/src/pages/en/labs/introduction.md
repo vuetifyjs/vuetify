@@ -14,11 +14,7 @@ related:
 
 Experiment and use in-development components before they're released.
 
-![Labs Entry](https://cdn.vuetifyjs.com/docs/images/entry/labs-entry.png)
-
-----
-
-<entry />
+<PageFeatures />
 
 ## What is Labs? { id=what-is-labs }
 
@@ -30,15 +26,15 @@ Components available through Labs are considered **NOT** production ready and on
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-data-table` in your component:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-picker` in your component:
 
 ```html
 <template>
-  <v-data-table />
+  <v-picker />
 </template>
 
 <script setup>
-  import { VDataTable } from 'vuetify/labs/VDataTable'
+  import { VPicker } from 'vuetify/labs/VPicker'
 </script>
 ```
 
@@ -46,16 +42,16 @@ Alternatively you can make the component available globally by importing it in y
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VPicker } from 'vuetify/labs/VPicker'
 
 export default createVuetify({
   components: {
-    VDataTable,
+    VPicker,
   },
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates.
+When Vuetify instantiates it will register `VPicker` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 
@@ -72,20 +68,20 @@ export default createVuetify({
 })
 ```
 
-<promoted slug="vuetify-discord" />
+<PromotedEntry />
 
 ## Available Components
 
 The following is a list of available and up-and-coming components for use with Labs:
 
-| Component | Description | Min Version |
-| - | - | - |
-
-### Up Next
-
-| Component | Release Target |
-| - | - |
-| v-calendar | ~~Q1~~ ~~Q2~~ Soon™️ 2023 |
+| Component                                            | Description                                                | Min Version                                                |
+|------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
+| [v-color-input](/components/color-inputs/)           | A color input component                                    | [vTBD](/getting-started/release-notes/?version=vTBD)       |
+| [v-date-input](/components/date-inputs/)             | A date input component                                     | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
+| [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
+| [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper                              | [v3.6.5](/getting-started/release-notes/?version=v3.6.5)   |
+| [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
+| [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

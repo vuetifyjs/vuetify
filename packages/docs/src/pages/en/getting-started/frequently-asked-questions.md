@@ -13,7 +13,9 @@ related:
 
 Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, you can submit an [issue](https://issues.vuetifyjs.com/) on GitHub or ask in our [community](https://community.vuetifyjs.com/).
 
-<promoted slug="discord-subscriber-help" />
+<PageFeatures />
+
+<VoPromotionsCardHighlight class="mb-4" slug="vuetify-discord-subscriber-help" />
 
 ## Questions
 
@@ -25,11 +27,11 @@ The following responses are a collection of common questions asked by the Vuetif
 
 * **Does Vuetify provide support?** { #does-vuetify-provide-support }
 
-  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+  Vuetify is a free to use Open Source project released under the [MIT](https://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
 
   * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
   * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
-  * Get [Direct Support](/introduction/enterprise-support/) from Vuetify - (Paid)
+  * Get [Chat Support](/introduction/enterprise-support/) from Vuetify - (Paid)
 
 * **What is the difference between Vuetify and Vue?** { #what-is-the-difference-between-vuetify-and-vue }
 
@@ -38,6 +40,10 @@ The following responses are a collection of common questions asked by the Vuetif
 * **What versions of Vue.js are compatible with Vuetify?** { #what-versions-of-vuejs-are-compatible-with-vuetify }
 
   Vuetify is compatible with Vue.js 3.0.0 and above.
+
+* **Is Vuetify 2 still supported?** { #is-vuetify-2-still-supported }
+
+  Vuetify 2 reached End of Life (EOL) on [January 25th, 2025](/introduction/long-term-support/). For security and commercial support, see our partner, [HeroDevs](https://www.herodevs.com/support/vuetify-nes?utm_source=partnership&utm_medium=partnership&utm_campaign=partnership&utm_id=vuetify2).
 
 * **Can I use Vuetify with other CSS frameworks?** { #can-i-use-vuetify-with-other-css-frameworks }
 
@@ -95,4 +101,8 @@ The following responses are a collection of common questions asked by the Vuetif
 
   The `value` prop was changed in Vue 3 to support a new `v-model` syntax. See the official Vue docs for more information on [Component v-model](https://vuejs.org/guide/components/v-model.html).
 
-<promoted type="theme" />
+* **Is Vuetify 3 compatible with `@vue/compat`?**
+
+  Not directly, you have to set `configureCompat({ MODE: 3 })` globally and `MODE: 2` in each of your components that you want to run in compatibility mode. There will still be some incorrect warnings that can be ignored with the `-ATTR_FALSE_VALUE` filter in devtools.
+
+<PromotedPromoted type="theme" />

@@ -6,7 +6,7 @@ import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
 
 // Types
@@ -18,6 +18,7 @@ export const makeVColorPickerCanvasProps = propsFactory({
     type: Object as PropType<HSV | null>,
   },
   disabled: Boolean,
+  readonly: Boolean,
   dotSize: {
     type: [Number, String],
     default: 10,
@@ -51,6 +52,8 @@ export const VColorPickerCanvas = defineComponent({
     const canvasHeight = shallowRef(parseFloat(props.height))
 
     const _dotPosition = ref({ x: 0, y: 0 })
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
     const dotPosition = computed({
       get: () => _dotPosition.value,
       set (val) {
@@ -80,12 +83,12 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.value?.offsetParent) return
+      if (!resizeRef.el?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 
-      canvasWidth.value = width
-      canvasHeight.value = height
+      canvasWidth.value = Math.round(width)
+      canvasHeight.value = Math.round(height)
     })
 
     function updateDotPosition (x: number, y: number, rect: DOMRect) {
@@ -102,7 +105,7 @@ export const VColorPickerCanvas = defineComponent({
         e.preventDefault()
       }
 
-      if (props.disabled) return
+      if (!isInteractive.value) return
 
       handleMouseMove(e)
 
@@ -113,7 +116,7 @@ export const VColorPickerCanvas = defineComponent({
     }
 
     function handleMouseMove (e: MouseEvent | TouchEvent) {
-      if (props.disabled || !canvasRef.value) return
+      if (!isInteractive.value || !canvasRef.value) return
 
       isInteracting.value = true
 
@@ -144,7 +147,7 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       const valueGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      valueGradient.addColorStop(0, 'hsla(0, 0%, 100%, 0)') // transparent
+      valueGradient.addColorStop(0, 'hsla(0, 0%, 0%, 0)') // transparent
       valueGradient.addColorStop(1, 'hsla(0, 0%, 0%, 1)') // black
       ctx.fillStyle = valueGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)

@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -15,23 +15,22 @@
       <!-- <v-checkbox v-model="hideActions" label="Hide actions"></v-checkbox> -->
       <v-checkbox v-model="adjacent" label="Show adjacent months"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-date-picker'
   const model = ref('default')
   const date = ref()
-  const options = []
+  const options = ['modal']
   // const hideActions = ref(false)
   const adjacent = ref(false)
 
+  const controlVariant = toRef(() => model.value !== 'default' ? model.value : undefined)
+
   const props = computed(() => {
     return {
+      'control-variant': controlVariant.value,
       // 'hide-actions': hideActions.value || undefined,
       'show-adjacent-months': adjacent.value || undefined,
     }

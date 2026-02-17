@@ -11,10 +11,10 @@
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
         :items="states"
-        :readonly="!isEditing"
         :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
-        persistent-hint
+        :readonly="!isEditing"
         prepend-icon="mdi-city"
+        persistent-hint
       >
         <template v-slot:append>
           <v-slide-x-reverse-transition mode="out-in">
@@ -126,3 +126,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2039-72488&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

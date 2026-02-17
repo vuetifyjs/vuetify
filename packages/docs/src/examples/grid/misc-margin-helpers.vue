@@ -7,8 +7,8 @@
         </v-sheet>
       </v-col>
       <v-col
-        md="4"
         class="ms-auto"
+        md="4"
       >
         <v-sheet class="pa-2 ma-2">
           .v-col-md-4 .ms-auto
@@ -18,16 +18,16 @@
 
     <v-row>
       <v-col
-        md="4"
         class="ms-md-auto"
+        md="4"
       >
         <v-sheet class="pa-2 ma-2">
           .v-col-md-4 .ms-md-auto
         </v-sheet>
       </v-col>
       <v-col
-        md="4"
         class="ms-md-auto"
+        md="4"
       >
         <v-sheet class="pa-2 ma-2">
           .v-col-md-4 .ms-md-auto
@@ -37,8 +37,8 @@
 
     <v-row>
       <v-col
-        cols="auto"
         class="me-auto"
+        cols="auto"
       >
         <v-sheet class="pa-2 ma-2">
           .v-col-auto .me-auto

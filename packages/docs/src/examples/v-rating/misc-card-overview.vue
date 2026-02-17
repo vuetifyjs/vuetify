@@ -39,7 +39,7 @@
 
         <template v-slot:prepend>
           <span>{{ rating }}</span>
-          <v-icon icon="mdi-star" class="mx-3"></v-icon>
+          <v-icon class="mx-3" icon="mdi-star"></v-icon>
         </template>
 
         <template v-slot:append>
@@ -57,3 +57,8 @@
    width: 25px;
 }
 </style>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2263-61824&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

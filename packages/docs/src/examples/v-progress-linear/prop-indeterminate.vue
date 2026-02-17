@@ -1,23 +1,23 @@
 <template>
   <div>
     <v-progress-linear
-      indeterminate
       color="yellow-darken-2"
+      indeterminate
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      indeterminate
       color="green"
+      indeterminate
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      indeterminate
       color="teal"
+      indeterminate
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      indeterminate
       color="cyan"
+      indeterminate
     ></v-progress-linear>
   </div>
 </template>

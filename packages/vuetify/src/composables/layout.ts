@@ -12,14 +12,15 @@ import {
   provide,
   reactive,
   ref,
-  shallowRef,
+  shallowRef, toRef,
+  useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
+import { consoleWarn, convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
-type Position = 'top' | 'left' | 'right' | 'bottom'
+export type Position = 'top' | 'left' | 'right' | 'bottom'
 
 interface Layer {
   top: number
@@ -112,7 +113,7 @@ export function useLayoutItem (options: {
 
   if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
-  const id = options.id ?? `layout-item-${getUid()}`
+  const id = options.id ?? `layout-item-${useId()}`
 
   const vm = getCurrentInstance('useLayoutItem')
 
@@ -216,14 +217,14 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return layers.value[layers.value.length - 1].layer
   })
 
-  const mainStyles = computed<CSSProperties>(() => {
+  const mainStyles = toRef(() => {
     return {
       '--v-layout-left': convertToUnit(mainRect.value.left),
       '--v-layout-right': convertToUnit(mainRect.value.right),
       '--v-layout-top': convertToUnit(mainRect.value.top),
       '--v-layout-bottom': convertToUnit(mainRect.value.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
-    }
+    } satisfies CSSProperties
   })
 
   const items = computed(() => {
@@ -285,11 +286,13 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
+        const size = elementSize.value ?? layoutSize.value
+        const unit = size === 0 ? '%' : 'px'
 
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
+          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -(size === 0 ? 100 : size)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}${unit})`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
@@ -298,7 +301,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         const item = items.value[index.value]
 
-        if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
+        if (!item) consoleWarn(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {
@@ -321,7 +324,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
             : undefined,
         }
       })
-
       const layoutItemScrimStyles = computed<CSSProperties>(() => ({
         zIndex: zIndex.value - 1,
       }))
@@ -344,12 +346,12 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     rootZIndex,
   })
 
-  const layoutClasses = computed(() => [
+  const layoutClasses = toRef(() => [
     'v-layout',
     { 'v-layout--full-height': props.fullHeight },
   ])
 
-  const layoutStyles = computed(() => ({
+  const layoutStyles = toRef(() => ({
     zIndex: parentLayout ? rootZIndex.value : undefined,
     position: parentLayout ? 'relative' as const : undefined,
     overflow: parentLayout ? 'hidden' : undefined,

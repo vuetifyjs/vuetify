@@ -13,37 +13,51 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, ref, shallowRef, toRef } from 'vue'
-import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
+import { computed, ref, shallowRef, toRef, useId, watch } from 'vue'
+import {
+  convertToUnit,
+  EventProp,
+  focusChild,
+  genericComponent,
+  getPropertyFromItem,
+  isPrimitive,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VListChildrenSlots } from './VListChildren'
 import type { ItemProps, ListItem } from '@/composables/list-items'
-import type { GenericProps } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
-export interface InternalListItem<T = any> extends ListItem<T> {
-  type?: 'item' | 'subheader' | 'divider'
-}
+export interface InternalListItem<T = any> extends ListItem<T> {}
 
-function isPrimitive (value: unknown): value is string | number | boolean {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean'
-}
+const itemTypes = new Set(['item', 'divider', 'subheader'])
 
-function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
+function transformItem (props: ItemProps, item: any): ListItem {
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
-  const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const value = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemValue, undefined)
   const children = getPropertyFromItem(item, props.itemChildren)
-  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
+  const itemProps = props.itemProps === true
+    ? omit(item, ['children'])
+    : getPropertyFromItem(item, props.itemProps)
+
+  let type = getPropertyFromItem(item, props.itemType, 'item')
+  if (!itemTypes.has(type)) {
+    type = 'item'
+  }
 
   const _props = {
     title,
@@ -61,7 +75,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   }
 }
 
-function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -71,7 +85,7 @@ function transformItems (props: ItemProps & { itemType: string }, items: (string
   return array
 }
 
-function useListItems (props: ItemProps & { itemType: string }) {
+export function useListItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -84,13 +98,26 @@ export const makeVListProps = propsFactory({
   activeClass: String,
   bgColor: String,
   disabled: Boolean,
+  filterable: Boolean,
+  expandIcon: IconValue,
+  collapseIcon: IconValue,
   lines: {
     type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
     default: 'one',
   },
   slim: Boolean,
+  prependGap: [Number, String],
+  indent: [Number, String],
   nav: Boolean,
+  navigationStrategy: {
+    type: String as PropType<'focus' | 'track'>,
+    default: 'focus',
+  },
+  navigationIndex: Number,
 
+  'onClick:open': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onClick:select': EventProp<[{ id: unknown, value: boolean, path: unknown[] }]>(),
+  'onUpdate:opened': EventProp<[unknown]>(),
   ...makeNestedProps({
     selectStrategy: 'single-leaf' as const,
     openStrategy: 'list' as const,
@@ -100,10 +127,6 @@ export const makeVListProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
-  itemType: {
-    type: String,
-    default: 'type',
-  },
   ...makeItemsProps(),
   ...makeRoundedProps(),
   ...makeTagProps(),
@@ -111,62 +134,110 @@ export const makeVListProps = propsFactory({
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'VList')
 
-export const VList = genericComponent<new <T>(
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
   props: {
-    items?: T[]
+    items?: T
+    itemTitle?: SelectItemKey<ItemType<T>>
+    itemValue?: SelectItemKey<ItemType<T>>
+    itemChildren?: SelectItemKey<ItemType<T>>
+    itemProps?: SelectItemKey<ItemType<T>>
+    selected?: S
+    activated?: A
+    opened?: O
+    'onUpdate:selected'?: (value: S) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:opened'?: (value: O) => void
+    'onClick:open'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
+    'onClick:select'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
   },
-  slots: VListChildrenSlots<T>
+  slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
   props: makeVListProps(),
 
   emits: {
-    'update:selected': (val: unknown[]) => true,
-    'update:opened': (val: unknown[]) => true,
+    'update:selected': (value: unknown) => true,
+    'update:activated': (value: unknown) => true,
+    'update:opened': (value: unknown) => true,
+    'update:navigationIndex': (value: number) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    'click:activate': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select } = useNested(props)
-    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
-    const activeColor = toRef(props, 'activeColor')
-    const baseColor = toRef(props, 'baseColor')
-    const color = toRef(props, 'color')
 
-    createList()
+    const { children, open, parents, select, getPath } = useNested(props, {
+      items,
+      returnObject: toRef(() => props.returnObject),
+      scrollToActive: toRef(() => props.navigationStrategy === 'track'),
+    })
+
+    const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
+    const activeColor = toRef(() => props.activeColor)
+    const baseColor = toRef(() => props.baseColor)
+    const color = toRef(() => props.color)
+    const isSelectable = toRef(() => (props.selectable || props.activatable))
+
+    const navigationIndex = useProxiedModel(
+      props,
+      'navigationIndex',
+      -1,
+      v => v ?? -1
+    )
+
+    const uid = useId()
+
+    createList({
+      filterable: props.filterable,
+      trackingIndex: navigationIndex,
+      navigationStrategy: toRef(() => props.navigationStrategy),
+      uid,
+    })
+
+    watch(items, () => {
+      if (props.navigationStrategy === 'track') {
+        navigationIndex.value = -1
+      }
+    })
 
     provideDefaults({
       VListGroup: {
         activeColor,
         baseColor,
         color,
+        expandIcon: toRef(() => props.expandIcon),
+        collapseIcon: toRef(() => props.collapseIcon),
       },
       VListItem: {
-        activeClass: toRef(props, 'activeClass'),
+        activeClass: toRef(() => props.activeClass),
         activeColor,
         baseColor,
         color,
-        density: toRef(props, 'density'),
-        disabled: toRef(props, 'disabled'),
-        lines: toRef(props, 'lines'),
-        nav: toRef(props, 'nav'),
-        slim: toRef(props, 'slim'),
-        variant: toRef(props, 'variant'),
+        density: toRef(() => props.density),
+        disabled: toRef(() => props.disabled),
+        lines: toRef(() => props.lines),
+        nav: toRef(() => props.nav),
+        slim: toRef(() => props.slim),
+        variant: toRef(() => props.variant),
+        tabindex: toRef(() => props.navigationStrategy === 'track' ? -1 : undefined),
       },
     })
 
     const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
@@ -176,37 +247,110 @@ export const VList = genericComponent<new <T>(
     }
 
     function onFocus (e: FocusEvent) {
-      if (
+      if (props.navigationStrategy === 'track') {
+        if (!~navigationIndex.value) {
+          navigationIndex.value = getNextIndex('first')
+        }
+      } else if (
         !isFocused.value &&
         !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
       ) focus()
     }
 
-    function onKeydown (e: KeyboardEvent) {
-      if (!contentRef.value) return
+    function onBlur () {
+      if (props.navigationStrategy === 'track') {
+        navigationIndex.value = -1
+      }
+    }
 
-      if (e.key === 'ArrowDown') {
-        focus('next')
-      } else if (e.key === 'ArrowUp') {
-        focus('prev')
-      } else if (e.key === 'Home') {
-        focus('first')
-      } else if (e.key === 'End') {
-        focus('last')
+    function getNavigationDirection (key: string): 'next' | 'prev' | 'first' | 'last' | null {
+      switch (key) {
+        case 'ArrowDown': return 'next'
+        case 'ArrowUp': return 'prev'
+        case 'Home': return 'first'
+        case 'End': return 'last'
+        default: return null
+      }
+    }
+
+    function getNextIndex (direction: 'next' | 'prev' | 'first' | 'last'): number {
+      const itemCount = items.value.length
+      if (itemCount === 0) return -1
+
+      let nextIndex: number
+
+      if (direction === 'first') {
+        nextIndex = 0
+      } else if (direction === 'last') {
+        nextIndex = itemCount - 1
       } else {
+        nextIndex = navigationIndex.value + (direction === 'next' ? 1 : -1)
+
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
+      }
+
+      const startIndex = nextIndex
+      let attempts = 0
+      while (attempts < itemCount) {
+        const item = items.value[nextIndex]
+        if (item && item.type !== 'divider' && item.type !== 'subheader') {
+          return nextIndex
+        }
+        nextIndex += direction === 'next' || direction === 'first' ? 1 : -1
+        if (nextIndex < 0) nextIndex = itemCount - 1
+        if (nextIndex >= itemCount) nextIndex = 0
+        if (nextIndex === startIndex) return -1
+        attempts++
+      }
+
+      return -1
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      const target = e.target as HTMLElement
+
+      if (!contentRef.value ||
+        (target.tagName === 'INPUT' && ['Home', 'End'].includes(e.key)) ||
+        target.tagName === 'TEXTAREA') {
         return
       }
 
-      e.preventDefault()
+      const direction = getNavigationDirection(e.key)
+
+      if (direction !== null) {
+        e.preventDefault()
+        if (props.navigationStrategy === 'track') {
+          const nextIndex = getNextIndex(direction)
+          if (nextIndex !== -1) {
+            navigationIndex.value = nextIndex
+          }
+        } else {
+          focus(direction)
+        }
+      }
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function onMousedown (e: MouseEvent) {
+      isFocused.value = true
+    }
+
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
       if (contentRef.value) {
         return focusChild(contentRef.value, location)
       }
     }
 
     useRender(() => {
+      const indent = props.indent ??
+        (props.prependGap
+          ? Number(props.prependGap) + 24
+          : undefined)
+
+      const ariaMultiselectable = isSelectable.value
+        ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
+        : undefined
+
       return (
         <props.tag
           ref={ contentRef }
@@ -215,6 +359,7 @@ export const VList = genericComponent<new <T>(
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
+              'v-list--slim': props.slim,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -226,17 +371,29 @@ export const VList = genericComponent<new <T>(
             props.class,
           ]}
           style={[
+            {
+              '--v-list-indent': convertToUnit(indent),
+              '--v-list-group-prepend': indent ? '0px' : undefined,
+              '--v-list-prepend-gap': convertToUnit(props.prependGap),
+            },
             backgroundColorStyles.value,
             dimensionStyles.value,
             props.style,
           ]}
-          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
-          role="listbox"
-          aria-activedescendant={ undefined }
+          tabindex={ props.disabled ? -1 : 0 }
+          role={ isSelectable.value ? 'listbox' : 'list' }
+          aria-activedescendant={
+            props.navigationStrategy === 'track' && navigationIndex.value >= 0
+              ? `v-list-item-${uid}-${navigationIndex.value}`
+              : undefined
+          }
+          aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
+          onMousedown={ onMousedown }
         >
           <VListChildren
             items={ items.value }
@@ -251,6 +408,10 @@ export const VList = genericComponent<new <T>(
       open,
       select,
       focus,
+      children,
+      parents,
+      getPath,
+      navigationIndex,
     }
   },
 })

@@ -1,5 +1,5 @@
 <template>
-  <app-table>
+  <AppTable>
     <thead>
       <tr>
         <th>Alias</th>
@@ -23,7 +23,7 @@
         </td>
       </tr>
     </tbody>
-  </app-table>
+  </AppTable>
 </template>
 
 <script setup>

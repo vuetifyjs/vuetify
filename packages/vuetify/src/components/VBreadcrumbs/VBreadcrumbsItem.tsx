@@ -1,12 +1,13 @@
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 export const makeVBreadcrumbsItemProps = propsFactory({
   active: Boolean,
@@ -17,6 +18,7 @@ export const makeVBreadcrumbsItemProps = propsFactory({
   title: String,
 
   ...makeComponentProps(),
+  ...pick(makeDimensionProps(), ['width', 'maxWidth']),
   ...makeRouterProps(),
   ...makeTagProps({ tag: 'li' }),
 }, 'VBreadcrumbsItem')
@@ -29,9 +31,11 @@ export const VBreadcrumbsItem = genericComponent()({
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)
     const isActive = computed(() => props.active || link.isActive?.value)
-    const color = computed(() => isActive.value ? props.activeColor : props.color)
+    const { dimensionStyles } = useDimension(props)
 
-    const { textColorClasses, textColorStyles } = useTextColor(color)
+    const { textColorClasses, textColorStyles } = useTextColor(
+      () => isActive.value ? props.activeColor : props.color
+    )
 
     useRender(() => {
       return (
@@ -48,6 +52,7 @@ export const VBreadcrumbsItem = genericComponent()({
           ]}
           style={[
             textColorStyles.value,
+            dimensionStyles.value,
             props.style,
           ]}
           aria-current={ isActive.value ? 'page' : undefined }
@@ -55,9 +60,8 @@ export const VBreadcrumbsItem = genericComponent()({
           { !link.isLink.value ? slots.default?.() ?? props.title : (
             <a
               class="v-breadcrumbs-item--link"
-              href={ link.href.value }
-              aria-current={ isActive.value ? 'page' : undefined }
               onClick={ link.navigate }
+              { ...link.linkProps }
             >
               { slots.default?.() ?? props.title }
             </a>

@@ -1,18 +1,18 @@
 <template>
   <v-card
     class="mx-auto"
-    color="grey-lighten-3"
+    color="surface-light"
     max-width="400"
   >
     <v-card-text>
       <v-text-field
         :loading="loading"
-        density="compact"
-        variant="solo"
-        label="Search templates"
         append-inner-icon="mdi-magnify"
-        single-line
+        density="compact"
+        label="Search templates"
+        variant="solo"
         hide-details
+        single-line
         @click:append-inner="onClick"
       ></v-text-field>
     </v-card-text>
@@ -53,3 +53,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2103-37391&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

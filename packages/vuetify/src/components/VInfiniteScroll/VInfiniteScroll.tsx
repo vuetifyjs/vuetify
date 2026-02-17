@@ -73,7 +73,6 @@ export const VInfiniteScrollIntersect = defineComponent({
       type: String as PropType<InfiniteScrollSide>,
       required: true,
     },
-    rootRef: null,
     rootMargin: String,
   },
 
@@ -82,17 +81,20 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
-    }, props.rootMargin ? {
-      rootMargin: props.rootMargin,
-    } : undefined)
+    const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     watch(isIntersecting, async val => {
       emit('intersect', props.side, val)
     })
 
     useRender(() => (
-      <div class="v-infinite-scroll-intersect" ref={ intersectionRef }>&nbsp;</div>
+      <div
+        class="v-infinite-scroll-intersect"
+        style={{
+          '--v-infinite-margin-size': props.rootMargin,
+        }}
+        ref={ intersectionRef }
+      >&nbsp;</div>
     ))
 
     return {}
@@ -158,6 +160,9 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         startStatus.value = status
       } else if (side === 'end') {
         endStatus.value = status
+      } else if (side === 'both') {
+        startStatus.value = status
+        endStatus.value = status
       }
     }
 
@@ -177,7 +182,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       if (props.mode !== 'manual' && !isIntersecting.value) return
 
       const status = getStatus(side)
-      if (!rootEl.value || status === 'loading') return
+      if (!rootEl.value || ['empty', 'loading'].includes(status)) return
 
       previousScrollSize = getScrollSize()
       setStatus(side, 'loading')
@@ -193,6 +198,9 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           }
           if (props.mode !== 'manual') {
             nextTick(() => {
+              // Browser takes 2 - 3 animation frames to trigger IntersectionObserver after
+              // VInfiniteScrollIntersect leaves the viewpoint. So far I couldn't come up
+              // with a better solution than using 3 nested window.requestAnimationFrame. (#17475)
               window.requestAnimationFrame(() => {
                 window.requestAnimationFrame(() => {
                   window.requestAnimationFrame(() => {
@@ -264,24 +272,22 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             { renderSide('start', startStatus.value) }
           </div>
 
-          { rootEl.value && hasStartIntersect && intersectMode && (
+          { hasStartIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="start"
               side="start"
               onIntersect={ handleIntersect }
-              rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
           )}
 
           { slots.default?.() }
 
-          { rootEl.value && hasEndIntersect && intersectMode && (
+          { hasEndIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="end"
               side="end"
               onIntersect={ handleIntersect }
-              rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
           )}
@@ -292,6 +298,38 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
         </Tag>
       )
     })
+
+    function reset (side?: InfiniteScrollSide) {
+      const effectiveSide = side ?? props.side
+      setStatus(effectiveSide, 'ok')
+
+      nextTick(() => {
+        if (effectiveSide !== 'end') {
+          setScrollAmount(
+            getScrollSize() - previousScrollSize + getScrollAmount(),
+          )
+        }
+        if (props.mode !== 'manual') {
+          nextTick(() => {
+            // See #17475
+            window.requestAnimationFrame(() => {
+              window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                  if (effectiveSide === 'both') {
+                    intersecting('start')
+                    intersecting('end')
+                  } else {
+                    intersecting(effectiveSide)
+                  }
+                })
+              })
+            })
+          })
+        }
+      })
+    }
+
+    return { reset }
   },
 })
 

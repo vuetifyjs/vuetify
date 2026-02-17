@@ -23,12 +23,17 @@
     <br>
 
     <v-alert
-      variant="outlined"
-      type="warning"
-      prominent
       border="top"
+      type="warning"
+      variant="outlined"
+      prominent
     >
       Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Suspendisse non nisl sit amet velit hendrerit rutrum. Nullam vel sem. Pellentesque dapibus hendrerit tortor.
     </v-alert>
   </div>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2747-66101&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

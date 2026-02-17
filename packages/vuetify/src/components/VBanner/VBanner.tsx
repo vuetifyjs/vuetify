@@ -51,7 +51,7 @@ export const makeVBannerProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
-  ...makeDisplayProps(),
+  ...makeDisplayProps({ mobile: null }),
   ...makeElevationProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
@@ -66,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   props: makeVBannerProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { displayClasses, mobile } = useDisplay(props)
@@ -78,8 +78,8 @@ export const VBanner = genericComponent<VBannerSlots>()({
 
     const { themeClasses } = provideTheme(props)
 
-    const color = toRef(props, 'color')
-    const density = toRef(props, 'density')
+    const color = toRef(() => props.color)
+    const density = toRef(() => props.density)
 
     provideDefaults({ VBannerActions: { color, density } })
 

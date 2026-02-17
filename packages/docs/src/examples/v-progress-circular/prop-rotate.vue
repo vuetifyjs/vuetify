@@ -1,40 +1,40 @@
 <template>
   <div class="text-center">
     <v-progress-circular
+      :model-value="value"
       :rotate="360"
       :size="100"
       :width="15"
-      :model-value="value"
       color="teal"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="-90"
       :size="100"
       :width="15"
-      :model-value="value"
       color="primary"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="90"
       :size="100"
       :width="15"
-      :model-value="value"
       color="red"
     >
       {{ value }}
     </v-progress-circular>
 
     <v-progress-circular
+      :model-value="value"
       :rotate="180"
       :size="100"
       :width="15"
-      :model-value="value"
       color="pink"
     >
       {{ value }}
@@ -88,3 +88,9 @@
   margin: 1rem;
 }
 </style>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2747-79337&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

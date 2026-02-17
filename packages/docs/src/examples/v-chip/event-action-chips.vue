@@ -4,9 +4,9 @@
     max-width="450"
   >
     <v-img
+      :aspect-ratio="16/9"
       src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
       cover
-      :aspect-ratio="16/9"
     >
     </v-img>
     <v-card-title class="flex-column align-start">
@@ -18,13 +18,10 @@
       </div>
       <div class="d-flex align-center">
         <v-avatar
-          size="24"
           class="me-4"
+          size="24"
         >
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"
-            contain
-          ></v-img>
+          <v-img src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"></v-img>
         </v-avatar>
 
         <span class="text-body-2 text-grey">81° / 62°</span>
@@ -71,3 +68,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1632-99053&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

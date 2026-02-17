@@ -2,29 +2,20 @@
   <v-badge
     :model-value="newJobs.length > 0"
     color="#ED561B"
-    dot
     location="top end"
+    dot
   >
-    <app-btn
+    <AppBtn
+      :icon="icon"
       :to="rpath('/resources/jobs-for-vue/')"
       class="jobs-link"
-      :icon="icon"
-      @click="onClick"
+      @click="sweClick('app-bar', 'jobs', name)"
     />
   </v-badge>
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useRoute, useRouter } from 'vue-router'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { currentRoute } = useRouter()
-  const { event } = useGtag()
   const { name } = useRoute()
   const newJobs = []
 
@@ -33,14 +24,6 @@
       ? 'mdi-briefcase-variant'
       : 'mdi-briefcase-variant-outline'
   })
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'jobs',
-      value: name,
-    })
-  }
 </script>
 
 <style lang="sass">

@@ -13,11 +13,13 @@ related:
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
-<promoted slug="vuetify-discord" />
+<PromotedPromoted slug="vuetify-discord" />
 
 ## Reporting Issues
 
@@ -25,7 +27,7 @@ The issue list of this repo is exclusively for bug reports and feature requests.
 
 - Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
@@ -46,11 +48,13 @@ The Vuetify repository is a [lerna](https://github.com/lerna/lerna) monorepo tha
 
 ### Setting up your environment
 
+We recommend using [FNM](https://github.com/Schniz/fnm#installation) (with all four [options](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) enabled) to automatically set up and use the exect node and pnpm versions specified in package.json.
+
 Required software:
 
 - [Git](https://git-scm.com/) >v2.20
-- [Node.js](https://nodejs.org/) LTS
-- [Yarn](https://classic.yarnpkg.com/)
+- [Node.js](https://nodejs.org/) 24
+- [pnpm](https://pnpm.io/)
 
 Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#installation) to build themselves. You don't need to install node-gyp itself but may require additional tools, especially on windows. See the node-gyp documentation for more details.
 
@@ -75,27 +79,28 @@ Then install dependencies and perform an initial build to link all the packages 
 cd vuetify
 
 # Install all project dependencies
-yarn
+pnpm i
 
 # Build the packages
-yarn build vuetify
-yarn build api
+pnpm build vuetify
+pnpm build api
 ```
 
 The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `pnpm dev` from the project root will start a dev server on **localhost:8090** with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
-You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
+You can also test Vuetify in your own project using [`pnpm link`](https://pnpm.io/cli/link):
 
 - Navigate to `packages/vuetify`
-- Run `yarn link`
+- Run `pnpm link --global`
 - Navigate to your project's directory
-- Run `yarn link vuetify`
+- Run `pnpm link --global vuetify`
+- Clear Vite's cache by deleting  `node_modules/.vite` folder
 
-If your project is using vuetify-loader you will have to run `yarn build:lib` in the vuetify package to see changes, otherwise you can use `yarn watch` for incremental builds.
+If your project is using vuetify-loader you will have to run `pnpm build:lib` in the vuetify package to see changes, otherwise you can use `pnpm watch` for incremental builds.
 
 #### Playground.vue
 
@@ -115,11 +120,37 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 </script>
 ```
 
+#### Automated testing
+
+Vuetify uses [Vitest](https://vitest.dev/) for unit tests, [Vitest browser mode](https://vitest.dev/guide/browser/why.html) with Playwright for component interaction tests, and [Vizzly](https://vizzly.dev/) for visual regression tests.
+
+- `pnpm test` - run all tests
+- `pnpm test:unit` - run only unit tests
+- `pnpm test:browser` - run only browser tests
+- `pnpm test:open` - run browser tests in a chrome window
+  - use this if you need devtools to debug a failing test
+- `pnpm test:screen` - run only screenshot tests, saves a report to http://localhost:47392/
+- `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:screen`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
+  - run `pnpm tdd:stop` when you're done to kill the background process
+
+The `test:*` commands all accept a list of test names to filter by, eg. `pnpm test textfield textarea` to only run VTextField and VTextarea tests.
+
+##### Visual regression workflow
+
+- Checkout the base branch (`master` or `dev`)
+- Run `pnpm tdd`
+- Visit http://localhost:47392/stats and click "Reset baselines"
+- Run `pnpm test:screen`
+- Click "Accept all changes"
+- Checkout your PR branch
+- Run `pnpm test:screen` again
+- Any visual differences will be shown on http://localhost:47392
+
 ### Documentation
 
-The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `yarn dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
+The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `pnpm dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
 
-If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
+If you want to see changes from Vuetify in the documentation you need to run `pnpm build:lib` in the vuetify package before starting the documentation server.
 
 ### API Generator
 
@@ -131,6 +162,15 @@ All api descriptions are managed via the api-generator package. This package mus
 - Description keys should be in camelCase, except for `slot` keys which should be kebab-case.
 - Put keys in alphabetical order.
 - Descriptions utilize a hierarchy of `generic.json` < `Source.json` < `Component.json` to reduce duplication. Source can be viewed using the **Developer Mode** in docs settings.
+
+#### Adding API Documentation
+
+When creating a new component (or composable, though this is typically done by the Vuetify team), you need to add a corresponding JSON file named `ComponentName.json` in `packages/api-generator/src/locale/en/`. This file should contain descriptions for props, slots, events, and exposed methods. After adding or updating JSON files, run `pnpm build api` to regenerate the dist language files. Keep in mind:
+
+- Changes to Vuetify require a rebuild before building the API
+- The API must be built before running the documentation server
+
+Enabling **developer mode** in the documentation settings will allow you to see the source of truth on API description pages.
 
 ### Submitting Changes / Pull Requests
 
@@ -199,7 +239,7 @@ Some of the more notable links within these services include:
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 
-<promoted slug="vue-jobs" />
+<PromotedPromoted slug="vue-jobs" />
 
 ### Issue triage
 
@@ -272,7 +312,7 @@ The following is a list of **commit types** used in the _angular_ preset:
 - **chore:** Other commits that don't modify src or test files.
 - **revert:** Commits that revert previous commits.
 
-<promoted slug="vuetify-reddit" />
+<PromotedPromoted slug="vuetify-reddit" />
 
 [community]: https://community.vuetifyjs.com/
 [core team]: /about/meet-the-team/

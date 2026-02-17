@@ -18,20 +18,19 @@
         <v-card-title>
           <v-rating
             :model-value="4"
-            dense
-            color="orange"
-            background-color="orange"
-            hover
             class="me-2"
+            color="orange"
+            density="compact"
+            hover
           ></v-rating>
           <span class="text-primary text-subtitle-2">64 Reviews</span>
         </v-card-title>
 
         <v-overlay
-          :model-value="isHovering"
-          contained
-          scrim="#036358"
+          :model-value="!!isHovering"
           class="align-center justify-center"
+          scrim="#036358"
+          contained
         >
           <v-btn variant="flat">See more info</v-btn>
         </v-overlay>
@@ -39,3 +38,9 @@
     </v-hover>
   </div>
 </template>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1646-137446&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

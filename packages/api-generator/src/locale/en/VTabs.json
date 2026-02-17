@@ -2,18 +2,21 @@
   "props": {
     "alignTabs": "Aligns the tabs to the `start`, `center`, or `end` of container. Also accepts `title` to align with the `v-toolbar-title` component.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title.",
-    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "centered": "Centers the tabs.",
     "centerActive": "Forces the selected tab to be centered.",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes.",
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
-    "fixedTabs": "`v-tabs-item` min-width 160px, max-width 360px.",
-    "grow": "Force `v-tab`'s to take up all available space.",
+    "fixedTabs": "Tabs will be centered and each tab item will grow up to 300px width.",
+    "grow": "Forces tabs to take up all available space.",
     "height": "Sets the height of the tabs bar.",
     "hideSlider": "Hide's the generated `v-tabs-slider`.",
     "iconsAndText": "Will stack icon and text vertically.",
-    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`.",
+    "inset": "Changes the slider to take full height. Tabs will also get some spacing and customizable rounding.",
+    "insetPadding": "Sets custom spacing between tabs for `inset` mode.",
+    "insetRadius": "Sets custom border radius for the tabs container `inset` mode. Rounding for individual tabs is calculated by subtracting the padding.",
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `text`.",
     "light": "Applies the light theme variant to the component.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "optional": "Does not require an active item. Useful when using `v-tab` as a `router-link`.",
@@ -24,8 +27,16 @@
     "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`.",
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
+    "sliderTransition": "Changes slider transition to one of the predefined animation presets.",
+    "sliderTransitionDuration": "Applies custom slider transition duration. Default duration depends on transition type (fade: 400, grow: 350, shift: 225).",
     "stacked": "Apply the stacked prop to all children v-tab components.",
     "touchless": "Disable mobile touch functionality.",
     "vertical": "Stacks tabs on top of each other vertically."
+  },
+  "slots": {
+    "[`item.${string}`]": "Dynamic slot to define custom slots for specific tab window items",
+    "[`tab.${string}`]": "Dynamic slot to define custom slots for specific tab headers in the slide group",
+    "tab": "Slot for custom tab header content.",
+    "window": "Slot for custom tab window content."
   }
 }

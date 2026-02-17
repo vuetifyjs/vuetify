@@ -4,19 +4,17 @@
     max-width="450"
   >
     <v-toolbar color="cyan-lighten-1">
-      <v-btn variant="text" icon="mdi-menu"></v-btn>
+      <v-btn icon="mdi-menu" variant="text"></v-btn>
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn variant="text" icon="mdi-magnify"></v-btn>
+      <v-btn icon="mdi-magnify" variant="text"></v-btn>
     </v-toolbar>
 
     <v-list
       :items="items"
-      item-props
       lines="three"
+      item-props
     >
       <template v-slot:subtitle="{ subtitle }">
         <div v-html="subtitle"></div>
@@ -98,3 +96,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1632-112421&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

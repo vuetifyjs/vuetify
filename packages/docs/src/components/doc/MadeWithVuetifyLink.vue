@@ -3,9 +3,10 @@
     :aria-label="t('see-more-projects')"
     :size="size"
     :to="rpath('/resources/made-with-vuetify/')"
+    append-icon="mdi-page-next"
     color="primary"
     variant="outlined"
-    @click="onClick"
+    @click="sweClick('button', 'made-with-vuetify', name)"
   >
     <span
       class="text-capitalize font-weight-regular"
@@ -15,14 +16,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useGtag } from 'vue-gtag-next'
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-
-  // Utilities
-  import { rpath } from '@/util/routes'
-
   defineProps({
     size: {
       type: String,
@@ -30,15 +23,6 @@
     },
   })
 
-  const { event } = useGtag()
   const { name } = useRoute()
   const { t } = useI18n()
-
-  function onClick () {
-    event('click', {
-      event_category: 'button',
-      event_label: 'sponsors',
-      value: name,
-    })
-  }
 </script>

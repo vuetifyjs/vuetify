@@ -18,7 +18,7 @@
       <div
         v-bind="props"
         :class="`elevation-${isHovering ? 24 : 6}`"
-        class="mx-auto pa-6 transition-swing"
+        class="mx-auto pa-6"
       >
         Class based elevation
       </div>

@@ -5,14 +5,16 @@
     <v-autocomplete
       v-model="select"
       v-model:search="search"
-      :loading="loading"
       :items="items"
+      :loading="loading"
+      autocomplete="off"
       class="mx-4"
       density="comfortable"
-      hide-no-data
-      hide-details
       label="What state are you from?"
-      style="max-width: 300px;"
+      placeholder="Start typing..."
+      style="max-width: 300px"
+      hide-details
+      hide-no-data
     ></v-autocomplete>
 
     <v-btn icon="mdi-dots-vertical"></v-btn>
@@ -89,13 +91,21 @@
   const search = ref(null)
   const select = ref(null)
 
+  // recommended to use debounce here
   watch(search, val => {
-    val && val !== select.value && querySelections(val)
+    if (!val) {
+      setTimeout(() => items.value = [], 300)
+    } else {
+      val !== select.value && querySelections(val)
+    }
   })
 
   function querySelections (v) {
     loading.value = true
     setTimeout(() => {
+      if (v !== search.value) {
+        return // drop responce, avoid race condition
+      }
       items.value = states.filter(e => {
         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
       })
@@ -176,8 +186,13 @@
       }
     },
     watch: {
+      // recommended to use debounce here
       search (val) {
-        val && val !== this.select && this.querySelections(val)
+        if (!val) {
+          setTimeout(() => this.items = [], 300)
+        } else {
+          val !== this.select && querySelections(val)
+        }
       },
     },
     methods: {
@@ -185,6 +200,9 @@
         this.loading = true
         // Simulated ajax query
         setTimeout(() => {
+          if (v !== this.search) {
+            return // drop responce, avoid race condition
+          }
           this.items = this.states.filter(e => {
             return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
           })

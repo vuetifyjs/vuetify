@@ -7,7 +7,7 @@
     "persistentPlaceholder": "Forces placeholder to always be visible.",
     "placeholder": "Sets the input’s placeholder text.",
     "prefix": "Displays prefix text.",
-    "prependIcon": "Prepends an icon to the outnside the component's input, uses the same syntax as `v-icon`.",
+    "prependIcon": "Prepends an icon to the outside the component's input, uses the same syntax as `v-icon`.",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`.",
     "reverse": "Reverses the input orientation.",
     "role": "The role attribute applied to the input.",
@@ -27,6 +27,10 @@
     "click:prepend-inner": "Emitted when prepended inner icon is clicked.",
     "click:prependInner": "Emitted when prepended inner icon is clicked.",
     "focus": "Emitted when component is focused.",
-    "keydown": "Emitted when **any** key is pressed."
+    "keydown": "Emitted when **any** key is pressed.",
+    "mousedown:control": "Event that is emitted when using mousedown on the main control area."
+  },
+  "slots": {
+    "counter": "Slot for the input’s counter text."
   }
 }

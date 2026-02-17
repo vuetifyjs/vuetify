@@ -3,23 +3,25 @@ import './VTextField.sass'
 
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
-import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { makeAutocompleteProps, useAutocomplete } from '@/composables/autocomplete'
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
+import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -42,19 +44,20 @@ export const makeVTextFieldProps = propsFactory({
   },
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
-  ...makeVInputProps(),
+  ...makeAutocompleteProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: never
+  default: { id: Readonly<Ref<string>> }
   counter: VCounterSlot
 }
 
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -68,8 +71,12 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', undefined, v => {
+      if (Object.is(v, -0)) return '-0'
+      return v
+    })
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function' ? props.counterValue(model.value)
         : typeof props.counterValue === 'number' ? props.counterValue
@@ -89,18 +96,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
-
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
@@ -108,11 +107,17 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       props.active
     ))
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
-        inputRef.value?.focus()
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
       }
 
       if (!isFocused.value) focus()
+
+      nextTick(() => {
+        if (inputRef.value !== document.activeElement) {
+          inputRef.value?.focus()
+        }
+      })
     }
     function onControlMousedown (e: MouseEvent) {
       emit('mousedown:control', e)
@@ -123,42 +128,54 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
-      onFocus()
-
       emit('click:control', e)
     }
-    function onClear (e: MouseEvent) {
+    function onClear (e: MouseEvent, reset: () => void) {
       e.stopPropagation()
 
       onFocus()
 
       nextTick(() => {
-        model.value = null
+        reset()
 
         callEvent(props['onClick:clear'], e)
       })
     }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
-      model.value = el.value
-      if (
+
+      if (!(
         props.modelModifiers?.trim &&
         ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
-      ) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
+      )) {
+        model.value = el.value
+        return
       }
+
+      const value = el.value
+      const start = el.selectionStart
+      const end = el.selectionEnd
+
+      model.value = value
+
+      nextTick(() => {
+        let offset = 0
+        if (value.trimStart().length === el.value.length) {
+          // #22307 - Whitespace has been removed from the
+          // start, offset the caret position to compensate
+          offset = value.length - el.value.length
+        }
+        if (start != null) el.selectionStart = start - offset
+        if (end != null) el.selectionEnd = end - offset
+      })
     }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = VField.filterProps(props)
 
       return (
         <VInput
@@ -187,45 +204,48 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
+              reset,
             }) => (
               <VField
                 ref={ vFieldRef }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
-                onClick:prependInner={ props['onClick:prependInner'] }
-                onClick:appendInner={ props['onClick:appendInner'] }
+                onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
                 role={ props.role }
-                { ...fieldProps }
+                { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
+                labelId={ `${id.value}-label` }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
               >
                 {{
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => {
                     const inputNode = (
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
-                        v-intersect={[{
-                          handler: onIntersect,
-                        }, null, ['once']]}
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         placeholder={ props.placeholder }
                         size={ 1 }
+                        role={ props.role }
                         type={ props.type }
-                        onFocus={ onFocus }
+                        onFocus={ focus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -241,15 +261,18 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                           </span>
                         )}
 
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
+                        { withDirectives(
+                          slots.default ? (
+                            <div
+                              class={ fieldClass }
+                              data-no-activator=""
+                            >
+                              { slots.default({ id }) }
+                              { inputNode }
+                            </div>
+                          ) : cloneVNode(inputNode, { class: fieldClass }),
+                          [[vIntersect, onIntersect, null, { once: true }]],
+                        )}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
@@ -276,6 +299,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

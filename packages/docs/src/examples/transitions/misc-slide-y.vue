@@ -5,8 +5,8 @@
     <v-menu transition="slide-y-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="primary"
           class="ma-2"
+          color="primary"
           v-bind="props"
         >
           Slide Y Transition
@@ -28,8 +28,8 @@
     <v-menu transition="slide-y-reverse-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="secondary"
           class="ma-2"
+          color="secondary"
           v-bind="props"
         >
           Slide Y Reverse Transition

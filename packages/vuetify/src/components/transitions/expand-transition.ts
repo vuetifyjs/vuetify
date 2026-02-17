@@ -1,6 +1,3 @@
-// Utilities
-import { camelize } from 'vue'
-
 interface HTMLExpandElement extends HTMLElement {
   _parent?: (Node & ParentNode & HTMLElement) | null
   _initialStyle?: {
@@ -11,29 +8,30 @@ interface HTMLExpandElement extends HTMLElement {
   }
 }
 
-export default function (expandedParentClass = '', x = false) {
-  const sizeProperty = x ? 'width' : 'height' as 'width' | 'height'
-  const offsetProperty = camelize(`offset-${sizeProperty}`) as 'offsetHeight' | 'offsetWidth'
-
+export default function (expandedParentClass = '', type: 'x' | 'y' | 'both' = 'y') {
   return {
     onBeforeEnter (el: HTMLExpandElement) {
       el._parent = el.parentNode as (Node & ParentNode & HTMLElement) | null
       el._initialStyle = {
         transition: el.style.transition,
         overflow: el.style.overflow,
-        [sizeProperty]: el.style[sizeProperty],
+        width: el.style.width,
+        height: el.style.height,
       }
     },
 
     onEnter (el: HTMLExpandElement) {
-      const initialStyle = el._initialStyle!
+      const initialStyle = el._initialStyle
+      if (!initialStyle) return
 
       el.style.setProperty('transition', 'none', 'important')
       // Hide overflow to account for collapsed margins in the calculated height
       el.style.overflow = 'hidden'
-      const offset = `${el[offsetProperty]}px`
+      const offsetWidth = `${el.offsetWidth}px`
+      const offsetHeight = `${el.offsetHeight}px`
 
-      el.style[sizeProperty] = '0'
+      if (['x', 'both'].includes(type)) el.style.width = '0'
+      if (['y', 'both'].includes(type)) el.style.height = '0'
 
       void el.offsetHeight // force reflow
 
@@ -44,7 +42,8 @@ export default function (expandedParentClass = '', x = false) {
       }
 
       requestAnimationFrame(() => {
-        el.style[sizeProperty] = offset
+        el.style.width = offsetWidth
+        el.style.height = offsetHeight
       })
     },
 
@@ -55,14 +54,19 @@ export default function (expandedParentClass = '', x = false) {
       el._initialStyle = {
         transition: '',
         overflow: el.style.overflow,
-        [sizeProperty]: el.style[sizeProperty],
+        width: el.style.width,
+        height: el.style.height,
       }
 
       el.style.overflow = 'hidden'
-      el.style[sizeProperty] = `${el[offsetProperty]}px`
+      if (['x', 'both'].includes(type)) el.style.width = `${el.offsetWidth}px`
+      if (['y', 'both'].includes(type)) el.style.height = `${el.offsetHeight}px`
       void el.offsetHeight // force reflow
 
-      requestAnimationFrame(() => (el.style[sizeProperty] = '0'))
+      requestAnimationFrame(() => {
+        el.style.width = '0'
+        el.style.height = '0'
+      })
     },
 
     onAfterLeave,
@@ -77,9 +81,12 @@ export default function (expandedParentClass = '', x = false) {
   }
 
   function resetStyles (el: HTMLExpandElement) {
-    const size = el._initialStyle![sizeProperty]
-    el.style.overflow = el._initialStyle!.overflow
-    if (size != null) el.style[sizeProperty] = size
+    if (!el._initialStyle) return
+
+    const { width: w, height: h } = el._initialStyle
+    el.style.overflow = el._initialStyle.overflow
+    if (w != null && ['x', 'both'].includes(type)) el.style.width = w
+    if (h != null && ['y', 'both'].includes(type)) el.style.height = h
     delete el._initialStyle
   }
 }

@@ -1,28 +1,28 @@
 <template>
   <div class="text-center">
     <v-progress-circular
-      model-value="100"
       color="blue-grey"
+      model-value="100"
     ></v-progress-circular>
 
     <v-progress-circular
-      model-value="80"
       color="deep-orange-lighten-2"
+      model-value="80"
     ></v-progress-circular>
 
     <v-progress-circular
-      model-value="60"
       color="brown"
+      model-value="60"
     ></v-progress-circular>
 
     <v-progress-circular
-      model-value="40"
       color="lime"
+      model-value="40"
     ></v-progress-circular>
 
     <v-progress-circular
-      model-value="20"
       color="indigo-darken-2"
+      model-value="20"
     ></v-progress-circular>
   </div>
 </template>

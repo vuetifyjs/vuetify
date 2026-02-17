@@ -100,30 +100,56 @@ function getDepth (item: InternalDataTableHeader, depth = 0): number {
 
 function parseFixedColumns (items: InternalDataTableHeader[]) {
   let seenFixed = false
-  function setFixed (item: InternalDataTableHeader, parentFixed = false) {
+
+  function setFixed (
+    item: InternalDataTableHeader,
+    side: 'start' | 'end',
+    parentFixedSide: 'start' | 'end' | 'none' = 'none'
+  ) {
     if (!item) return
 
-    if (parentFixed) {
-      item.fixed = true
+    if (parentFixedSide !== 'none') {
+      item.fixed = parentFixedSide
     }
 
-    if (item.fixed) {
+    // normalize to simplify logic below
+    if (item.fixed === true) {
+      item.fixed = 'start'
+    }
+
+    if (item.fixed === side) {
       if (item.children) {
-        for (let i = item.children.length - 1; i >= 0; i--) {
-          setFixed(item.children[i], true)
+        if (side === 'start') {
+          for (let i = item.children.length - 1; i >= 0; i--) {
+            setFixed(item.children[i], side, side)
+          }
+        } else {
+          for (let i = 0; i < item.children.length; i++) {
+            setFixed(item.children[i], side, side)
+          }
         }
       } else {
-        if (!seenFixed) {
+        if (!seenFixed && side === 'start') {
           item.lastFixed = true
-        } else if (isNaN(+item.width!)) {
+        } else if (!seenFixed && side === 'end') {
+          item.firstFixedEnd = true
+        } else if (isNaN(Number(item.width))) {
           consoleError(`Multiple fixed columns should have a static width (key: ${item.key})`)
+        } else {
+          item.minWidth = Math.max(Number(item.width) || 0, Number(item.minWidth) || 0)
         }
         seenFixed = true
       }
     } else {
       if (item.children) {
-        for (let i = item.children.length - 1; i >= 0; i--) {
-          setFixed(item.children[i])
+        if (side === 'start') {
+          for (let i = item.children.length - 1; i >= 0; i--) {
+            setFixed(item.children[i], side)
+          }
+        } else {
+          for (let i = 0; i < item.children.length; i++) {
+            setFixed(item.children[i], side)
+          }
         }
       } else {
         seenFixed = false
@@ -132,29 +158,54 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
   }
 
   for (let i = items.length - 1; i >= 0; i--) {
-    setFixed(items[i])
+    setFixed(items[i], 'start')
   }
 
-  function setFixedOffset (item: InternalDataTableHeader, fixedOffset = 0) {
-    if (!item) return fixedOffset
-
-    if (item.children) {
-      item.fixedOffset = fixedOffset
-      for (const child of item.children) {
-        fixedOffset = setFixedOffset(child, fixedOffset)
-      }
-    } else if (item.fixed) {
-      item.fixedOffset = fixedOffset
-      fixedOffset += parseFloat(item.width || '0') || 0
-    }
-
-    return fixedOffset
+  for (let i = 0; i < items.length; i++) {
+    setFixed(items[i], 'end')
   }
 
   let fixedOffset = 0
-  for (const item of items) {
-    fixedOffset = setFixedOffset(item, fixedOffset)
+  for (let i = 0; i < items.length; i++) {
+    fixedOffset = setFixedOffset(items[i], fixedOffset)
   }
+
+  let fixedEndOffset = 0
+  for (let i = items.length - 1; i >= 0; i--) {
+    fixedEndOffset = setFixedEndOffset(items[i], fixedEndOffset)
+  }
+}
+
+function setFixedOffset (item: InternalDataTableHeader, offset = 0) {
+  if (!item) return offset
+
+  if (item.children) {
+    item.fixedOffset = offset
+    for (const child of item.children) {
+      offset = setFixedOffset(child, offset)
+    }
+  } else if (item.fixed && item.fixed !== 'end') {
+    item.fixedOffset = offset
+    offset += parseFloat(item.width || '0') || 0
+  }
+
+  return offset
+}
+
+function setFixedEndOffset (item: InternalDataTableHeader, offset = 0) {
+  if (!item) return offset
+
+  if (item.children) {
+    item.fixedEndOffset = offset
+    for (const child of item.children) {
+      offset = setFixedEndOffset(child, offset)
+    }
+  } else if (item.fixed === 'end') {
+    item.fixedEndOffset = offset
+    offset += parseFloat(item.width || '0') || 0
+  }
+
+  return offset
 }
 
 function parse (items: InternalDataTableHeader[], maxDepth: number) {
@@ -179,7 +230,7 @@ function parse (items: InternalDataTableHeader[], maxDepth: number) {
       if (item.children) {
         for (const child of item.children) {
           // This internally sorts items that are on the same priority "row"
-          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 1))
+          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 2))
           queue.enqueue(child, currentDepth + diff + sort)
         }
       }
@@ -226,8 +277,9 @@ export function createHeaders (
 ) {
   const headers = ref<InternalDataTableHeader[][]>([])
   const columns = ref<InternalDataTableHeader[]>([])
-  const sortFunctions = ref<Record<string, DataTableCompareFunction>>()
-  const filterFunctions = ref<FilterKeyFunctions>()
+  const sortFunctions = ref<Record<string, DataTableCompareFunction>>({})
+  const sortRawFunctions = ref<Record<string, DataTableCompareFunction>>({})
+  const filterFunctions = ref<FilterKeyFunctions>({})
 
   watchEffect(() => {
     const _headers = props.headers ||
@@ -260,22 +312,26 @@ export function createHeaders (
 
     const flatHeaders = parsed.headers.flat(1)
 
-    sortFunctions.value = flatHeaders.reduce((acc, header) => {
-      if (header.sortable && header.key && header.sort) {
-        acc[header.key] = header.sort
-      }
-      return acc
-    }, {} as Record<string, DataTableCompareFunction>)
+    for (const header of flatHeaders) {
+      if (!header.key) continue
 
-    filterFunctions.value = flatHeaders.reduce((acc, header) => {
-      if (header.key && header.filter) {
-        acc[header.key] = header.filter
+      if (header.sortable) {
+        if (header.sort) {
+          sortFunctions.value[header.key] = header.sort
+        }
+
+        if (header.sortRaw) {
+          sortRawFunctions.value[header.key] = header.sortRaw
+        }
       }
-      return acc
-    }, {} as FilterKeyFunctions)
+
+      if (header.filter) {
+        filterFunctions.value[header.key] = header.filter
+      }
+    }
   })
 
-  const data = { headers, columns, sortFunctions, filterFunctions }
+  const data = { headers, columns, sortFunctions, sortRawFunctions, filterFunctions }
 
   provide(VDataTableHeadersSymbol, data)
 

@@ -14,8 +14,8 @@
           v-model="select"
           :items="items"
           label="I use chips"
-          multiple
           chips
+          multiple
         ></v-combobox>
       </v-col>
       <v-col cols="12">
@@ -29,8 +29,8 @@
             <v-chip
               :key="JSON.stringify(data.item)"
               v-bind="data.attrs"
-              :model-value="data.selected"
               :disabled="data.disabled"
+              :model-value="data.selected"
               size="small"
               @click:close="data.parent.selectItem(data.item)"
             >

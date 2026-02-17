@@ -9,9 +9,9 @@ const aliases = faAliases
 
 const fa: IconSet = {
   component: props => {
-    const { icon, ...rest } = props
+    const { icon, tag, ...rest } = props
     const stringIcon = icon as string
-    return h(props.tag, rest, [
+    return h(tag, rest, [
       h(resolveComponent('font-awesome-icon'), {
         key: stringIcon, // TODO: https://github.com/FortAwesome/vue-fontawesome/issues/250
         icon: stringIcon.includes(' fa-') ? stringIcon.split(' fa-') : stringIcon,

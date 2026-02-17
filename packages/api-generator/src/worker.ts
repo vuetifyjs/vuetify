@@ -1,4 +1,4 @@
-import { generateComponentDataFromTypes } from './types'
+import { generateComponentDataFromTypes } from './types.ts'
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
@@ -9,7 +9,7 @@ export default async (componentName: string) => {
 
   try {
     return await generateComponentDataFromTypes(componentName)
-  } catch (err) {
+  } catch (err: any) {
     console.error(red, `${componentName}: ${err}`, err.stack, reset)
     return null
   }

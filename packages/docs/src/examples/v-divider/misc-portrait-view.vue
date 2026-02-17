@@ -57,9 +57,9 @@
     </v-list>
 
     <v-img
-      cover
       height="200"
       src="https://picsum.photos/700?image=996"
+      cover
     ></v-img>
   </v-card>
 </template>

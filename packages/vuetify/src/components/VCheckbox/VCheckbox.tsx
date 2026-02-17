@@ -7,24 +7,32 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { ref, useId } from 'vue'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { GenericProps } from '@/util'
 
 export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
 
 export const makeVCheckboxProps = propsFactory({
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...omit(makeVCheckboxBtnProps(), ['inline']),
 }, 'VCheckbox')
 
-export const VCheckbox = genericComponent<VCheckboxSlots>()({
+export const VCheckbox = genericComponent<new <T>(
+  props: {
+    modelValue?: T | null
+    'onUpdate:modelValue'?: (value: T | null) => void
+  },
+  slots: VCheckboxSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
@@ -32,24 +40,25 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
   props: makeVCheckboxProps(),
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:modelValue': (value: any) => true,
     'update:focused': (focused: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const inputRef = ref<VInput>()
 
-    const uid = getUid()
-    const id = computed(() => props.id || `checkbox-${uid}`)
+    const uid = useId()
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = VInput.filterProps(props)
-      const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
+      const inputProps = VInput.filterProps(props)
+      const checkboxProps = VCheckboxBtn.filterProps(props)
 
       return (
         <VInput
+          ref={ inputRef }
           class={[
             'v-checkbox',
             props.class,
@@ -57,7 +66,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           { ...rootAttrs }
           { ...inputProps }
           v-model={ model.value }
-          id={ id.value }
+          id={ props.id || `checkbox-${uid}` }
           focused={ isFocused.value }
           style={ props.style }
         >
@@ -68,6 +77,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
               messagesId,
               isDisabled,
               isReadonly,
+              isValid,
             }) => (
               <VCheckboxBtn
                 { ...checkboxProps }
@@ -76,6 +86,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                error={ isValid.value === false }
                 v-model={ model.value }
                 onFocus={ focus }
                 onBlur={ blur }
@@ -87,7 +98,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, inputRef)
   },
 })
 

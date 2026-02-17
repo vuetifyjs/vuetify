@@ -11,9 +11,9 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
-            label="Normal with hint text"
             hint="At least 8 characters"
+            label="Normal with hint text"
+            name="input-10-1"
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
@@ -27,10 +27,10 @@
             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show2 ? 'text' : 'password'"
-            name="input-10-2"
-            label="Visible"
-            hint="At least 8 characters"
             class="input-group--focused"
+            hint="At least 8 characters"
+            label="Visible"
+            name="input-10-2"
             @click:append="show2 = !show2"
           ></v-text-field>
         </v-col>

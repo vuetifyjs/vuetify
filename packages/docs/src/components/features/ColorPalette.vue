@@ -1,6 +1,6 @@
 <template>
   <section id="material-colors" class="mb-4">
-    <app-text-field
+    <AppTextField
       v-model="search"
       class="mb-4"
     />
@@ -13,8 +13,8 @@
           v-for="(color, key) in computedColors"
           :key="key"
           cols="12"
-          md="6"
           lg="4"
+          md="6"
         >
           <v-card
             :color="key"
@@ -39,15 +39,15 @@
             <v-card-text>
               <v-row>
                 <v-col
-                  cols="7"
                   class="text-caption"
+                  cols="7"
                 >
                   {{ convertToClass(key, key2) }}
                 </v-col>
 
                 <v-col
-                  cols="5"
                   class="text-right"
+                  cols="5"
                 >
                   <span
                     v-if="subColor !== 'transparent'"
@@ -63,54 +63,33 @@
   </section>
 </template>
 
-<script>
-  // Utilities
-  import kebabCase from 'lodash/kebabCase'
+<script setup>
   import colors from 'vuetify/util/colors'
 
-  export default {
-    name: 'ColorPalette',
+  const search = shallowRef('')
 
-    data: () => ({
-      colors,
-      search: '',
-    }),
+  const computedColors = computed(() => {
+    const _colors = {}
+    const _search = search.value.toLowerCase()
 
-    computed: {
-      computedColors () {
-        const colors = {}
-        const search = this.search.toLowerCase()
+    Object.keys(colors).forEach(key => {
+      const kebabKey = kebabCase(key).toLowerCase()
 
-        Object.keys(this.colors).forEach(key => {
-          const kebabKey = kebabCase(key).toLowerCase()
+      if (kebabKey.indexOf(_search) > -1) {
+        _colors[kebabKey] = colors[key]
+      }
+    })
 
-          if (kebabKey.indexOf(search) > -1) {
-            colors[kebabKey] = this.colors[key]
-          }
-        })
+    return _colors
+  })
 
-        return colors
-      },
-    },
+  function convertToClass (base, variant) {
+    if (variant === 'base') return base
 
-    methods: {
-      convertToClass (base, variant) {
-        if (variant === 'base') return base
+    const lastChar = variant.at(-1)
 
-        const lastChar = variant.at(-1)
+    if (isNaN(Number(lastChar))) return variant
 
-        if (isNaN(Number(lastChar))) return variant
-
-        return `${base}-${variant.slice(0, -1)}-${lastChar}`
-      },
-      getColorClass (key) {
-        if (['white', 'transparent'].includes(key) ||
-          key.indexOf('light') > -1 ||
-          key.indexOf('accent') > -1
-        ) return 'black--text'
-
-        return 'white--text'
-      },
-    },
+    return `${base}-${variant.slice(0, -1)}-${lastChar}`
   }
 </script>

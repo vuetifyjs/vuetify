@@ -1,38 +1,42 @@
+// Composables
+import { useLocale } from '@/composables/locale'
+
 // Utilities
 import { inject, reactive, watch } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Types
+import type { InjectionKey } from 'vue'
 import type { DateAdapter } from './DateAdapter'
 import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
-// Types
-import type { InjectionKey } from 'vue'
-
-export interface DateInstance<T = DateInstanceType['instanceType']> extends DateAdapter<T> {
+export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
 }
 
-/** Supports module augmentation to specify date object types */
-export interface DateInstanceType {
-  instanceType: unknown
+/** Supports module augmentation to specify date adapter types */
+export namespace DateModule {
+  interface Adapter {}
+
+  export type InternalAdapter = {} extends Adapter ? DateAdapter : Adapter
 }
 
-export type InternalDateOptions<T = unknown> = {
-  adapter: (new (options: { locale: any, formats?: any }) => DateInstance<T>) | DateInstance<T>
+export type InternalDateOptions = {
+  adapter: (new (options: { locale: any, formats?: any }) => DateInstance) | DateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
 }
 
-export type DateOptions<T = any> = Partial<InternalDateOptions<T>>
+export type DateOptions = Partial<InternalDateOptions>
 
+export const DateOptionsSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-options')
 export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
 
 export function createDate (options: DateOptions | undefined, locale: LocaleInstance) {
-  const date = mergeDeep({
+  const _options = mergeDeep({
     adapter: VuetifyDateAdapter,
     locale: {
       af: 'af-ZA',
@@ -40,7 +44,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
       bg: 'bg-BG',
       ca: 'ca-ES',
       ckb: '',
-      cs: '',
+      cs: 'cs-CZ',
       de: 'de-DE',
       el: 'el-GR',
       en: 'en-US',
@@ -79,51 +83,62 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
     },
   }, options) as InternalDateOptions
 
+  return {
+    options: _options,
+    instance: createInstance(_options, locale),
+  }
+}
+
+export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
+  const diff = daysDiff(adapter, start, stop)
+  const datesInRange = [start]
+
+  for (let i = 1; i < diff; i++) {
+    const nextDate = adapter.addDays(start, i)
+    datesInRange.push(nextDate)
+  }
+
+  if (stop) {
+    datesInRange.push(adapter.endOfDay(stop))
+  }
+
+  return datesInRange
+}
+
+export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
+  const iso = [
+    `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
+    `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
+  ]
+  return typeof adapter.date() === 'string'
+    ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
+    : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
+}
+
+function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
-    typeof date.adapter === 'function'
-    // eslint-disable-next-line new-cap
-      ? new date.adapter({
-        locale: date.locale?.[locale.current.value] ?? locale.current.value,
-        formats: date.formats,
+    typeof options.adapter === 'function'
+      // eslint-disable-next-line new-cap
+      ? new options.adapter({
+        locale: options.locale[locale.current.value] ?? locale.current.value,
+        formats: options.formats,
       })
-      : date.adapter
+      : options.adapter
   )
 
   watch(locale.current, value => {
-    const newLocale = date.locale ? date.locale[value] : value
-    instance.locale = newLocale ?? instance.locale
+    instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
   return instance
 }
 
-export function useDate () {
-  const instance = inject(DateAdapterSymbol)
+export function useDate (): DateInstance {
+  const options = inject(DateOptionsSymbol)
 
-  if (!instance) throw new Error('[Vuetify] Could not find injected date adapter')
+  if (!options) throw new Error('[Vuetify] Could not find injected date options')
 
-  return instance
-}
+  const locale = useLocale()
 
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-  let year = adapter.getYear(date)
-  let d1w1 = adapter.startOfYear(date)
-
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = adapter.startOfYear(adapter.setYear(date, year))
-  } else {
-    const tv = adapter.startOfYear(adapter.setYear(date, year + 1))
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
-    }
-  }
-
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-  return Math.floor(diffDays / 7) + 1
+  return createInstance(options, locale)
 }

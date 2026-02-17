@@ -12,9 +12,9 @@
         v-slot="{ isSelected, toggle }"
       >
         <v-btn
+          :color="isSelected ? 'primary' : undefined"
           class="ma-2"
           rounded
-          :color="isSelected ? 'primary' : undefined"
           @click="toggle"
         >
           Options {{ n }}

@@ -1,6 +1,6 @@
 // Utilities
 import { h, Transition, TransitionGroup } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, PREFERS_REDUCED_MOTION, propsFactory } from '@/util'
 
 // Types
 import type { FunctionalComponent, PropType } from 'vue'
@@ -95,12 +95,18 @@ export function createJavascriptTransition (
         type: String as PropType<'in-out' | 'out-in' | 'default'>,
         default: mode,
       },
-      disabled: Boolean,
+      disabled: {
+        type: Boolean,
+        default: PREFERS_REDUCED_MOTION(),
+      },
+      group: Boolean,
     },
 
     setup (props, { slots }) {
+      const tag = props.group ? TransitionGroup : Transition
+
       return () => {
-        return h(Transition, {
+        return h(tag as FunctionalComponent, {
           name: props.disabled ? '' : name,
           css: !props.disabled,
           // mode: props.mode, // TODO: vuejs/vue-next#3104

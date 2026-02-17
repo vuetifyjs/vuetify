@@ -1,5 +1,5 @@
 // Utilities
-import { IN_BROWSER, propsFactory } from '@/util'
+import { defer, propsFactory } from '@/util'
 
 // Types
 export interface DelayProps {
@@ -14,31 +14,37 @@ export const makeDelayProps = propsFactory({
 }, 'delay')
 
 export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
-  const delays: Partial<Record<keyof DelayProps, number>> = {}
-  const runDelayFactory = (prop: keyof DelayProps) => (): Promise<boolean> => {
-    // istanbul ignore next
-    if (!IN_BROWSER) return Promise.resolve(true)
+  let clearDelay: (() => void) = () => {}
 
-    const active = prop === 'openDelay'
+  function runDelay (isOpening: boolean, options?: { minDelay: number }) {
+    clearDelay?.()
 
-    delays.closeDelay && window.clearTimeout(delays.closeDelay)
-    delete delays.closeDelay
+    const delay = isOpening ? props.openDelay : props.closeDelay
 
-    delays.openDelay && window.clearTimeout(delays.openDelay)
-    delete delays.openDelay
+    const normalizedDelay = Math.max(
+      options?.minDelay ?? 0,
+      Number(delay ?? 0)
+    )
 
     return new Promise(resolve => {
-      const delay = parseInt(props[prop] ?? 0, 10)
-
-      delays[prop] = window.setTimeout(() => {
-        cb?.(active)
-        resolve(active)
-      }, delay)
+      clearDelay = defer(normalizedDelay, () => {
+        cb?.(isOpening)
+        resolve(isOpening)
+      })
     })
   }
 
+  function runOpenDelay () {
+    return runDelay(true)
+  }
+
+  function runCloseDelay (options?: { minDelay: number }) {
+    return runDelay(false, options)
+  }
+
   return {
-    runCloseDelay: runDelayFactory('closeDelay'),
-    runOpenDelay: runDelayFactory('openDelay'),
+    clearDelay,
+    runOpenDelay,
+    runCloseDelay,
   }
 }

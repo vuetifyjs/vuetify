@@ -1,28 +1,18 @@
 <template>
-  <app-btn>
+  <AppBtn>
     {{ title }}
 
-    <chevron-down />
+    <IconsChevronDown />
 
-    <app-menu
+    <AppMenuMenu
       :items="items"
       activator="parent"
       width="200"
     />
-  </app-btn>
+  </AppBtn>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { t } = useI18n()
   const title = t('learn')
   const items = computed(() => ([
@@ -58,6 +48,11 @@
       appendIcon: 'mdi-beaker-outline',
     },
     {
+      title: t('licensing'),
+      to: rpath('/about/licensing/'),
+      appendIcon: 'mdi-file-document-outline',
+    },
+    {
       title: t('roadmap'),
       to: rpath('/introduction/roadmap/'),
       appendIcon: 'mdi-compass-outline',
@@ -74,6 +69,11 @@
     },
     { divider: true },
     { subheader: t('documentation') },
+    {
+      title: 'Vuetify0',
+      href: 'https://0.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-0-box',
+    },
     {
       title: '3.x (latest)',
       href: 'https://vuetifyjs.com/',

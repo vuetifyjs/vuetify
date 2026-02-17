@@ -7,8 +7,8 @@
     <v-slide-group
       v-model="model"
       class="pa-4"
-      prev-icon="mdi-minus"
       next-icon="mdi-plus"
+      prev-icon="mdi-minus"
       selected-class="bg-primary"
       show-arrows
     >
@@ -18,8 +18,8 @@
         v-slot="{ isSelected, toggle, selectedClass }"
       >
         <v-card
-          color="grey-lighten-1"
           :class="['ma-4', selectedClass]"
+          color="grey-lighten-1"
           height="200"
           width="100"
           @click="toggle"
@@ -29,8 +29,8 @@
               <v-icon
                 v-if="isSelected"
                 color="white"
-                size="48"
                 icon="mdi-close-circle-outline"
+                size="48"
               ></v-icon>
             </v-scale-transition>
           </div>

@@ -1,6 +1,6 @@
 <template>
   <v-slider
-    disabled
     model-value="30"
+    disabled
   ></v-slider>
 </template>

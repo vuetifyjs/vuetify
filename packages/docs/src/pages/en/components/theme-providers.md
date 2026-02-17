@@ -18,9 +18,9 @@ features:
 
 The theme provider allows you to style a section of your application in a different theme from the default
 
-<page-features />
+<PageFeatures />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -28,7 +28,7 @@ The theme provider allows you to style a section of your application in a differ
 | - | - |
 | [v-theme-provider](/api/v-theme-provider/) | Primary Component |
 
-<api-inline hide-links />
+<ApiInline hide-links />
 
 ## Examples
 
@@ -36,4 +36,4 @@ The theme provider allows you to style a section of your application in a differ
 
 By default, `v-theme-provider` is a renderless component that allows you to change the applied theme for all of its children. When using the **with-background** prop, the `v-theme-provider` wraps its children in an element and applies the selected theme's background color to it.
 
-<example file="v-theme-provider/prop-with-background" />
+<ExamplesExample file="v-theme-provider/prop-with-background" />

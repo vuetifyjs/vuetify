@@ -8,32 +8,37 @@
     <h4 class="text-h5 font-weight-bold mb-4">Your Privacy</h4>
 
     <p class="mb-8">
-      This business determines the use of personal data collectied on our media properties and across the internet. We may collect data that you submit to us directly or data that we collect automatically including from cookies (such as device information or IP address).
+      This business determines the use of personal data collected on our media properties and across the internet. We may collect data that you submit to us directly or data that we collect automatically including from cookies (such as device information or IP address).
 
       <br>
       <br>
 
-      Please read our <a href="#" class="text-red-accent-2">Privacy Policy</a> to learn about our privacy practices or click "Your Preferences" to exercise control over your data.
+      Please read our <a class="text-red-accent-2" href="#">Privacy Policy</a> to learn about our privacy practices or click "Your Preferences" to exercise control over your data.
     </p>
 
     <v-btn
-      block
       class="text-none text-black mb-4"
       color="red-accent-2"
       size="x-large"
       variant="flat"
+      block
     >
       Accept
     </v-btn>
 
     <v-btn
-      block
       class="text-none text-black"
       color="red-accent-2"
       size="x-large"
       variant="outlined"
+      block
     >
       Your Preferences
     </v-btn>
   </v-sheet>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1646-137533&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

@@ -1,8 +1,8 @@
 <template>
   <v-card
+    rounded="0"
     theme="dark"
     flat
-    rounded="0"
   >
     <v-window v-model="onboarding">
       <v-window-item
@@ -11,8 +11,8 @@
         :value="n"
       >
         <v-card
-          height="200"
           class="d-flex justify-center align-center"
+          height="200"
         >
           <span class="text-h2">
             Card {{ n }}
@@ -23,8 +23,8 @@
 
     <v-card-actions class="justify-space-between">
       <v-btn
-        variant="plain"
         icon="mdi-chevron-left"
+        variant="plain"
         @click="prev"
       ></v-btn>
       <v-item-group
@@ -46,8 +46,8 @@
         </v-item>
       </v-item-group>
       <v-btn
-        variant="plain"
         icon="mdi-chevron-right"
+        variant="plain"
         @click="next"
       ></v-btn>
     </v-card-actions>

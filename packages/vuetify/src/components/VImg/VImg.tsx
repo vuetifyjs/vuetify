@@ -5,19 +5,23 @@ import './VImg.sass'
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
+  toRef,
   vShow,
   watch,
   withDirectives,
@@ -25,6 +29,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  getCurrentInstance,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -49,14 +54,17 @@ export type VImgSlots = {
 }
 
 export const makeVImgProps = propsFactory({
+  absolute: Boolean,
   alt: String,
   cover: Boolean,
+  color: String,
   draggable: {
     type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
     default: undefined,
   },
   eager: Boolean,
   gradient: String,
+  imageClass: null,
   lazySrc: String,
   options: {
     type: Object as PropType<IntersectionObserverInit>,
@@ -89,13 +97,14 @@ export const makeVImgProps = propsFactory({
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
+  ...makeRoundedProps(),
   ...makeTransitionProps(),
 }, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
-  directives: { intersect },
+  directives: { vIntersect },
 
   props: makeVImgProps(),
 
@@ -106,6 +115,10 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
+    const { roundedClasses } = useRounded(props)
+    const vm = getCurrentInstance('VImg')
+
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
@@ -165,6 +178,8 @@ export const VImg = genericComponent<VImgSlots>()({
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
         setTimeout(() => {
+          if (vm.isUnmounted) return
+
           if (image.value?.complete) {
             if (!image.value.naturalWidth) {
               onError()
@@ -183,6 +198,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onLoad () {
+      if (vm.isUnmounted) return
+
       getSrc()
       pollForSize(image.value!)
       state.value = 'loaded'
@@ -190,6 +207,8 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -200,9 +219,16 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
@@ -219,7 +245,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))
@@ -229,12 +255,12 @@ export const VImg = genericComponent<VImgSlots>()({
 
       const img = (
         <img
-          class={['v-img__img', containClasses.value]}
+          class={['v-img__img', containClasses.value, props.imageClass]}
           style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
-          crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
@@ -266,9 +292,9 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
-            crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />
@@ -322,16 +348,23 @@ export const VImg = genericComponent<VImgSlots>()({
     }
 
     useRender(() => {
-      const [responsiveProps] = VResponsive.filterProps(props)
+      const responsiveProps = VResponsive.filterProps(props)
       return (
         <VResponsive
           class={[
             'v-img',
-            { 'v-img--booting': !isBooted.value },
+            {
+              'v-img--absolute': props.absolute,
+              'v-img--booting': !isBooted.value,
+              'v-img--fit-content': props.width === 'fit-content',
+            },
+            backgroundColorClasses.value,
+            roundedClasses.value,
             props.class,
           ]}
           style={[
             { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            backgroundColorStyles.value,
             props.style,
           ]}
           { ...responsiveProps }

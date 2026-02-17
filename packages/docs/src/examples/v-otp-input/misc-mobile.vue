@@ -1,9 +1,9 @@
 <template>
   <v-sheet
-    border
     class="pt-8 pb-12 px-6 ma-4 mx-auto"
     max-width="350"
     width="100%"
+    border
   >
     <h3 class="text-h6 mb-1">Mobile phone verification</h3>
 
@@ -14,8 +14,8 @@
     <v-otp-input
       v-model="otp"
       class="mt-3 ms-n2"
-      placeholder="0"
       length="4"
+      placeholder="0"
       variant="underlined"
     ></v-otp-input>
 
@@ -48,3 +48,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2063-36830&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

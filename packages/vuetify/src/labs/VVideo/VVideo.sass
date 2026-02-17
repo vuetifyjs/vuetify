@@ -1,0 +1,306 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-video
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    --v-video-aspect-ratio: #{$video-aspect-ratio}
+    --v-video-controls-height: #{$video-controls-height}
+    --v-video-controls-pill-border-radius: #{$video-controls-pill-border-radius}
+
+    @at-root
+      @include tools.density('v-video', $video-density) using ($modifier)
+        --v-video-controls-height: #{$video-controls-height + $modifier * 2}
+
+    &__video
+      position: absolute
+      width: 100%
+      height: 100%
+      object-fit: cover
+      z-index: 0
+
+      &::-webkit-media-controls
+        display: none !important
+
+      & ~ *
+        z-index: 1
+
+    &__header
+      position: relative
+      opacity: 0
+      transition: opacity .6s ease-in-out
+      pointer-events: none
+      > *
+        pointer-events: auto
+
+    &__content
+      position: relative
+      cursor: pointer
+      border-radius: inherit
+      z-index: 0
+      @include tools.elevation($video-elevation)
+
+    &:not(.v-video--idle)
+      .v-video__content .v-video__overlay-fill
+        &, > *
+          pointer-events: none
+
+    &__overlay-fill
+      position: absolute
+      inset: 0
+      display: flex
+      align-items: center
+      justify-content: center
+      border-radius: inherit
+
+      > .v-img
+        position: absolute
+        border-radius: inherit
+        inset: 0
+
+    &:has(.v-video-controls:not(.v-video-controls--detached))
+      .v-video__content .v-video__overlay-fill
+        padding-bottom: var(--v-video-controls-height) // controls size
+
+    &__center-icon.v-icon-btn
+      border: $video-center-icon-border
+      opacity: $video-center-icon-opacity
+      transition-property: transform, opacity
+      transition-duration: 0.28s
+      transition-timing-function: settings.$standard-easing
+
+    &__content:hover &__center-icon
+      transform: $video-center-icon-hover-transform
+      opacity: 1
+
+    &-volume--inline
+      display: flex
+      align-items: center
+
+    &-volume__menu
+      background: rgb(var(--v-theme-surface))
+      color: rgb(var(--v-theme-on-surface))
+      overflow: hidden
+      display: flex
+      align-items: center
+      justify-content: center
+
+      @include tools.border($video-volume-menu-border...)
+      @include tools.elevation($video-volume-menu-elevation)
+      @include tools.rounded($video-volume-menu-border-radius)
+
+      &:has(.v-input--horizontal)
+        height: $video-volume-horizontal-menu-height
+
+      &:has(.v-input--vertical)
+        width: $video-volume-vertical-menu-width
+
+      .v-slider.v-input--horizontal
+        margin: $video-volume-horizontal-margin
+        width: $video-volume-horizontal-menu-width
+        height: $video-volume-horizontal-menu-height
+
+      .v-slider.v-input--vertical
+        margin: $video-volume-vertical-margin
+        height: $video-volume-vertical-menu-height
+        width: $video-volume-vertical-menu-width
+
+        > .v-input__control
+          // just smaller than 300px default
+          min-height: 50px
+
+    &__track
+      position: relative
+      z-index: 1
+
+      &.v-slider.v-input--horizontal > .v-input__control
+        min-height: 4px
+
+      .v-slider-thumb:not(:hover)
+        .v-slider-thumb__label
+          opacity: 0
+          transition-delay: .2s
+
+      .v-slider-thumb__label
+        color: rgb(var(--v-theme-on-surface-variant)) !important
+
+    &__time
+      font-size: $video-time-font-size
+      line-height: $video-time-line-height
+      letter-spacing: $video-time-letter-spacing
+
+    &--variant-player
+      width: $video-player-width
+
+      > .v-video__content
+        width: 100%
+        aspect-ratio: var(--v-video-aspect-ratio)
+
+    &--variant-background
+      outline: none
+      position: absolute
+      inset: 0
+      pointer-events: none
+
+      > .v-video__content
+        width: 100%
+        height: 100%
+
+    &-controls
+      --v-background-opacity: #{$video-controls-default-background-opacity}
+      --v-video-controls-gap: #{$video-controls-gap}
+
+      // override by density logic
+      --v-video-controls-pill-height: 42px
+
+      flex: 1 0 100%
+      align-self: stretch
+      padding: $video-controls-padding
+      display: flex
+      align-items: center
+      position: relative
+      gap: var(--v-video-controls-gap)
+      min-height: var(--v-video-controls-height)
+      backdrop-filter: $video-controls-default-backdrop-filter
+      background-color: rgba($video-controls-default-background-color, var(--v-background-opacity))
+      color: $video-controls-default-color
+      width: 100%
+      opacity: 0
+
+      @at-root
+        @include tools.density('v-video-controls', $video-density) using ($modifier)
+          --v-video-controls-gap: #{$video-controls-gap + $modifier}
+
+      &, &--pills > .v-video-control__pill
+        transition: .6s ease-in-out
+        transition-property: opacity, background-color
+
+      &--pills > .v-video-control__pill
+        @include tools.elevation($video-elevation)
+
+      &:hover
+        --v-background-opacity: 1
+
+      .v-video__track
+        width: auto
+
+      .v-video-control__pill
+        display: flex
+        align-items: center
+        gap: $video-controls-pill-gap
+
+      &--pills
+        --v-background-opacity: 1
+        --v-video-controls-height: calc(var(--v-video-controls-pill-height) + 24px)
+        backdrop-filter: none
+        pointer-events: none
+
+        > *
+          pointer-events: auto
+
+        &:not(:empty)
+          background: transparent
+
+        > .v-video-control__pill
+          backdrop-filter: $video-controls-pill-backdrop-filter
+          background: rgba($video-controls-default-background-color, var(--v-background-opacity))
+          border-radius: var(--v-video-controls-pill-border-radius)
+          min-height: var(--v-video-controls-pill-height)
+          min-width: var(--v-video-controls-pill-height)
+          padding: $video-controls-pill-padding
+          z-index: 1
+
+          > .v-icon-btn
+            border-radius: inherit
+
+          &:empty
+            display: none
+
+          &:has(> *:only-child)
+            padding-inline: 0
+            justify-content: center
+            border-radius: var(--v-video-controls-pill-border-radius)
+
+        > .v-video__time
+          padding: $video-time-pill-padding
+
+      &--variant-tube
+        .v-slider.v-video__track
+          position: absolute
+          top: $video-tube-track-top
+          left: 0
+          right: 0
+
+          .v-slider-track
+            height: calc(var(--v-slider-track-size) + #{$video-tube-track-hover-offset})
+
+          .v-slider-track__fill
+            height: var(--v-slider-track-size)
+
+      &--split-time
+        padding-inline: $video-controls-split-time-padding-inline
+
+      &:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height))
+
+      &:not(.v-video-controls--floating)
+        border-bottom-left-radius: inherit
+        border-bottom-right-radius: inherit
+
+      &:not(.v-video-controls--floating):not(.v-video-controls--pills)
+        border-top: thin solid rgba(var(--v-theme-surface-variant), .2)
+
+      &--floating
+        --v-background-opacity: 1
+        border-radius: inherit
+        margin-inline: $video-controls-floating-margin
+        width: calc(100% - 2 * #{$video-controls-floating-margin})
+
+      &--floating:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height) - $video-controls-floating-margin)
+        margin-bottom: $video-controls-floating-margin
+
+      &--detached
+        --v-background-opacity: 1
+        position: relative
+        margin-block-start: $video-controls-detached-offset
+        padding-inline: $video-controls-detached-padding-inline
+        backdrop-filter: none
+        border-top: none
+        border-radius: inherit
+        opacity: 1
+
+        &:not(.v-video-controls--pills)
+          @include tools.elevation($video-elevation)
+
+    &:not(.v-video--playing),
+    &:hover
+      .v-video__header,
+      .v-video-controls
+        opacity: 1
+
+    &--rounded
+      border-radius: $video-rounded-border-radius
+
+    &:fullscreen
+      .v-video__content
+        min-height: 100% !important
+        min-width: 100% !important
+
+      .v-video-controls
+        position: absolute
+        bottom: 0
+        z-index: 2147483647
+
+        &--floating
+          bottom: $video-controls-floating-margin
+
+  .poster-fade-out
+    &-leave-active
+      transition: opacity 1s linear 0.3s
+    &-leave-to
+      opacity: 0

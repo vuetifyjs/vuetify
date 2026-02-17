@@ -4,29 +4,29 @@
     :max="10"
     :min="-10"
     :step="1"
-    hide-details
     class="align-center"
+    hide-details
   >
     <template v-slot:prepend>
       <v-text-field
         v-model="range[0]"
-        hide-details
-        single-line
-        type="number"
-        variant="outlined"
         density="compact"
         style="width: 70px"
+        type="number"
+        variant="outlined"
+        hide-details
+        single-line
       ></v-text-field>
     </template>
     <template v-slot:append>
       <v-text-field
         v-model="range[1]"
-        hide-details
-        single-line
+        density="compact"
+        style="width: 70px"
         type="number"
         variant="outlined"
-        style="width: 70px"
-        density="compact"
+        hide-details
+        single-line
       ></v-text-field>
     </template>
   </v-range-slider>

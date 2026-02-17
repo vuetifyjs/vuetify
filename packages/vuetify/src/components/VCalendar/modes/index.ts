@@ -1,9 +1,7 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { CalendarEventOverlapMode } from 'vuetify/types'
-import { stack } from './stack'
+// Types
 import { column } from './column'
+import { stack } from './stack'
+import type { CalendarEventOverlapMode } from '../types'
 
 export const CalendarEventOverlapModes: Record<string, CalendarEventOverlapMode> = {
   stack,

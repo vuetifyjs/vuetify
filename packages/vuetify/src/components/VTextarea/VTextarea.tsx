@@ -5,20 +5,23 @@ import '../VTextField/VTextField.sass'
 // Components
 import { VCounter } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { useDisplay } from '@/composables'
+import { makeAutocompleteProps, useAutocomplete } from '@/composables/autocomplete'
+import { useAutofocus } from '@/composables/autofocus'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import Intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -41,6 +44,10 @@ export const makeVTextareaProps = propsFactory({
     default: 5,
     validator: (v: any) => !isNaN(parseFloat(v)),
   },
+  maxHeight: {
+    type: [Number, String],
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
   maxRows: {
     type: [Number, String],
     validator: (v: any) => !isNaN(parseFloat(v)),
@@ -48,7 +55,8 @@ export const makeVTextareaProps = propsFactory({
   suffix: String,
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
-  ...makeVInputProps(),
+  ...makeAutocompleteProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextarea')
 
@@ -59,7 +67,7 @@ type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
 export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
 
-  directives: { Intersect },
+  directives: { vIntersect },
 
   inheritAttrs: false,
 
@@ -70,11 +78,13 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
+    'update:rows': (rows: number) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
+    const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -92,19 +102,13 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       return props.counter
     })
 
-    function onIntersect (
-      isIntersecting: boolean,
-      entries: IntersectionObserverEntry[]
-    ) {
-      if (!props.autofocus || !isIntersecting) return
-
-      (entries[0].target as HTMLInputElement)?.focus?.()
-    }
-
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const controlHeight = shallowRef('')
-    const textareaRef = ref<HTMLInputElement>()
+    const textareaRef = ref<HTMLTextAreaElement>()
+    const scrollbarWidth = ref(0)
+    const { platform } = useDisplay()
+    const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       props.persistentPlaceholder ||
       isFocused.value ||
@@ -112,6 +116,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     ))
 
     function onFocus () {
+      if (autocomplete.isSuppressing.value) {
+        autocomplete.update()
+      }
+
       if (textareaRef.value !== document.activeElement) {
         textareaRef.value?.focus()
       }
@@ -139,23 +147,46 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
     function onInput (e: Event) {
       const el = e.target as HTMLTextAreaElement
-      model.value = el.value
-      if (props.modelModifiers?.trim) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
+      if (!props.modelModifiers?.trim) {
+        model.value = el.value
+        return
       }
+
+      const value = el.value
+      const start = el.selectionStart
+      const end = el.selectionEnd
+
+      model.value = value
+
+      nextTick(() => {
+        let offset = 0
+        if (value.trimStart().length === el.value.length) {
+          // #22307 - Whitespace has been removed from the
+          // start, offset the caret position to compensate
+          offset = value.length - el.value.length
+        }
+        if (start != null) el.selectionStart = start - offset
+        if (end != null) el.selectionEnd = end - offset
+      })
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
-    const rows = ref(+props.rows)
+    const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
-      if (!props.autoGrow) rows.value = +props.rows
+      if (!props.autoGrow) rows.value = Number(props.rows)
     })
     function calculateInputHeight () {
+      nextTick(() => {
+        if (!textareaRef.value) return
+        if (platform.value.firefox) {
+          scrollbarWidth.value = 12
+          return
+        }
+        const { offsetWidth, clientWidth } = textareaRef.value
+        scrollbarWidth.value = Math.max(0, offsetWidth - clientWidth)
+      })
+
       if (!props.autoGrow) return
 
       nextTick(() => {
@@ -174,7 +205,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           parseFloat(props.rows) * lineHeight + padding,
           parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
         )
-        const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+
+        const maxHeight = props.maxHeight
+          ? parseFloat(props.maxHeight!)
+          : parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+
         const newHeight = clamp(height ?? 0, minHeight, maxHeight)
         rows.value = Math.floor((newHeight - padding) / lineHeight)
 
@@ -185,8 +220,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     onMounted(calculateInputHeight)
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
+    watch(() => props.maxHeight, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
+    watch(rows, val => {
+      emit('update:rows', val)
+    })
 
     let observer: ResizeObserver | undefined
     watch(sizerRef, val => {
@@ -205,8 +244,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
-      const [fieldProps] = filterFieldProps(props)
+      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
 
       return (
         <VInput
@@ -225,7 +267,13 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
             },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            {
+              '--v-textarea-max-height': props.maxHeight ? convertToUnit(props.maxHeight) : undefined,
+              '--v-textarea-scroll-bar-width': convertToUnit(scrollbarWidth.value),
+            },
+            props.style,
+          ]}
           { ...rootAttrs }
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
@@ -234,10 +282,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
               isValid,
+              hasDetails,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -246,21 +296,24 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 }}
                 onClick={ onControlClick }
                 onMousedown={ onControlMousedown }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
+                labelId={ `${id.value}-label` }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
+                details={ hasDetails.value }
                 error={ isValid.value === false }
               >
                 {{
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       { props.prefix && (
@@ -270,7 +323,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                       )}
 
                       <textarea
-                        ref={ textareaRef }
+                        ref={ val => textareaRef.value = controlRef.value = val as HTMLTextAreaElement }
                         class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }
@@ -282,9 +335,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
-                        name={ props.name }
+                        name={ autocomplete.fieldName.value }
+                        autocomplete={ autocomplete.fieldAutocomplete.value }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -325,6 +380,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
+                      disabled={ props.disabled }
                       v-slots:default={ slots.counter }
                     />
                   </>

@@ -18,21 +18,18 @@
         v-model="menuActive"
         v-model:return-value="dates"
         :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
         min-width="auto"
+        transition="scale-transition"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-combobox
             v-model="dates"
-            multiple
-            chips
-            small-chips
             label="Multiple picker in menu"
             prepend-icon="mdi-calendar"
+            chips
+            multiple
             readonly
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           ></v-combobox>
         </template>
         <v-date-picker
@@ -43,15 +40,15 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            variant="text"
             color="primary"
+            variant="text"
             @click="menu.save(dates)"
           >
             OK

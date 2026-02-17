@@ -1,31 +1,12 @@
 <template>
-  <v-card
-    color="grey-lighten-4"
-    flat
-    height="200px"
-    rounded="0"
-  >
-    <v-toolbar
-      extended
-      extension-height="100"
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-card height="200">
+    <v-toolbar extension-height="100" title="Toolbar" extended>
 
-      <v-toolbar-title>Title</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <template v-slot:append>
+        <v-btn icon="mdi-magnify"></v-btn>
+        <v-btn icon="mdi-heart"></v-btn>
+        <v-btn icon="mdi-dots-vertical"></v-btn>
+      </template>
     </v-toolbar>
   </v-card>
 </template>

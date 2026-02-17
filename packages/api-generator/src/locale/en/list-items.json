@@ -1,5 +1,6 @@
 {
   "props": {
+    "items": "Can be an array of objects or strings. By default objects should have a **title** property, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props), a **value** property to allow selection, and a **children** property containing more item objects. Keys to use for these can be changed with the **item-title**, **item-value**, **item-props**, and **item-children** props.",
     "itemChildren": "Property on supplied `items` that contains its children.",
     "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
     "itemTitle": "Property on supplied `items` that contains its title.",

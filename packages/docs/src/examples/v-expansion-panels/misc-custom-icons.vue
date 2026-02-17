@@ -14,7 +14,7 @@
 
     <v-expansion-panels>
       <v-expansion-panel>
-        <v-expansion-panel-title expand-icon="mdi-plus" collapse-icon="mdi-minus">
+        <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus">
           Item
         </v-expansion-panel-title>
         <v-expansion-panel-text>
@@ -49,3 +49,8 @@
     </v-expansion-panels>
   </div>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2790-117689&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

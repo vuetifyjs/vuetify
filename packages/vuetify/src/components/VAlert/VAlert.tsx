@@ -14,6 +14,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { IconValue } from '@/composables/icons'
+import { makeIconSizeProps, useIconSizes } from '@/composables/iconSizes'
 import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
@@ -24,7 +25,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -76,6 +77,7 @@ export const makeVAlertProps = propsFactory({
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
+  ...makeIconSizeProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
   ...makeRoundedProps(),
@@ -105,29 +107,29 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const icon = computed(() => {
+    const icon = toRef(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
 
       return props.icon ?? `$${props.type}`
     })
-    const variantProps = computed(() => ({
+
+    const { iconSize } = useIconSizes(props, () => props.prominent ? 44 : undefined)
+    const { themeClasses } = provideTheme(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: props.color ?? props.type,
       variant: props.variant,
     }))
-
-    const { themeClasses } = provideTheme(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.borderColor)
     const { t } = useLocale()
 
-    const closeProps = computed(() => ({
+    const closeProps = toRef(() => ({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
         isActive.value = false
@@ -140,6 +142,14 @@ export const VAlert = genericComponent<VAlertSlots>()({
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
       const hasClose = !!(slots.close || props.closable)
+
+      const iconProps = {
+        density: props.density,
+        icon: icon.value,
+        size: props.iconSize || props.prominent
+          ? iconSize.value
+          : undefined,
+      }
 
       return isActive.value && (
         <props.tag
@@ -185,23 +195,12 @@ export const VAlert = genericComponent<VAlertSlots>()({
           { hasPrepend && (
             <div key="prepend" class="v-alert__prepend">
               { !slots.prepend ? (
-                <VIcon
-                  key="prepend-icon"
-                  density={ props.density }
-                  icon={ icon.value }
-                  size={ props.prominent ? 44 : 28 }
-                />
+                <VIcon key="prepend-icon" { ...iconProps } />
               ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !icon.value }
-                  defaults={{
-                    VIcon: {
-                      density: props.density,
-                      icon: icon.value,
-                      size: props.prominent ? 44 : 28,
-                    },
-                  }}
+                  defaults={{ VIcon: { ...iconProps } }}
                   v-slots:default={ slots.prepend }
                 />
               )}

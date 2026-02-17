@@ -19,36 +19,62 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, toRef, toRefs } from 'vue'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
+import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
 
-type VDataTableVirtualSlotProps = Omit<VDataTableSlotProps, 'setItemsPerPage' | 'page' | 'pageCount' | 'itemsPerPage'>
+type VDataTableVirtualSlotProps<T> = Omit<
+  VDataTableSlotProps<T>,
+  | 'setItemsPerPage'
+  | 'page'
+  | 'pageCount'
+  | 'itemsPerPage'
+>
 
-export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
-  top: VDataTableVirtualSlotProps
+export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
+  colgroup: VDataTableVirtualSlotProps<T>
+  top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
-  bottom: VDataTableVirtualSlotProps
-  'body.prepend': VDataTableVirtualSlotProps
-  'body.append': VDataTableVirtualSlotProps
+  tbody: VDataTableVirtualSlotProps<T>
+  thead: VDataTableVirtualSlotProps<T>
+  tfoot: VDataTableVirtualSlotProps<T>
+  bottom: VDataTableVirtualSlotProps<T>
+  'body.prepend': VDataTableVirtualSlotProps<T>
+  'body.append': VDataTableVirtualSlotProps<T>
   item: {
-    itemRef: Ref<HTMLElement | undefined>
+    itemRef: TemplateRef
   }
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
-  ...makeDataTableProps(),
+  ...omit(makeDataTableProps(), ['hideDefaultFooter']),
   ...makeDataTableGroupProps(),
   ...makeVirtualProps(),
   ...makeFilterProps(),
 }, 'VDataTableVirtual')
 
-export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
+type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+export const VDataTableVirtual = genericComponent<new <T extends readonly any[], V>(
+  props: {
+    items?: T
+    itemValue?: SelectItemKey<ItemType<T>>
+    rowProps?: RowProps<ItemType<T>>
+    cellProps?: CellProps<ItemType<T>>
+    itemSelectable?: SelectItemKey<ItemType<T>>
+    headers?: DeepReadonly<DataTableHeader<ItemType<T>>[]>
+    modelValue?: V
+    'onUpdate:modelValue'?: (value: V) => void
+  },
+  slots: VDataTableVirtualSlots<ItemType<T>>,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableVirtual',
 
   props: makeVDataTableVirtualProps(),
@@ -61,28 +87,39 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:expanded': (value: any) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
+    const { disableSort } = toRefs(props)
 
-    const { columns, headers, sortFunctions, filterFunctions } = createHeaders(props, {
+    const {
+      columns,
+      headers,
+      filterFunctions,
+      sortFunctions,
+      sortRawFunctions,
+    } = createHeaders(props, {
       groupBy,
-      showSelect: toRef(props, 'showSelect'),
-      showExpand: toRef(props, 'showExpand'),
+      showSelect: toRef(() => props.showSelect),
+      showExpand: toRef(() => props.showExpand),
     })
     const { items } = useDataTableItems(props, columns)
 
-    const search = toRef(props, 'search')
+    const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
-    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, sortFunctions)
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
+      transform: item => ({ ...item.raw, ...item.columns }),
+      sortFunctions,
+      sortRawFunctions,
+    })
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
 
     const allItems = computed(() => extractRows(flatItems.value))
 
@@ -101,8 +138,17 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       handleItemResize,
       handleScroll,
       handleScrollend,
+      calculateVisibleItems,
+      scrollToIndex,
     } = useVirtual(props, flatItems)
-    const displayItems = computed(() => computedItems.value.map(item => item.raw))
+
+    const displayItems = computed(() =>
+      computedItems.value
+        .map(item => ({
+          ...item.raw,
+          virtualIndex: item.index,
+        }))
+    )
 
     useOptions({
       sortBy,
@@ -114,14 +160,14 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
     provideDefaults({
       VDataTableRows: {
-        hideNoData: toRef(props, 'hideNoData'),
-        noDataText: toRef(props, 'noDataText'),
-        loading: toRef(props, 'loading'),
-        loadingText: toRef(props, 'loadingText'),
+        hideNoData: toRef(() => props.hideNoData),
+        noDataText: toRef(() => props.noDataText),
+        loading: toRef(() => props.loading),
+        loadingText: toRef(() => props.loadingText),
       },
     })
 
-    const slotProps = computed<VDataTableVirtualSlotProps>(() => ({
+    const slotProps = computed<VDataTableVirtualSlotProps<any>>(() => ({
       sortBy: sortBy.value,
       toggleSort,
       someSelected: someSelected.value,
@@ -134,16 +180,17 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: allItems.value,
+      items: allItems.value.map(item => item.raw),
+      internalItems: allItems.value,
       groupedItems: flatItems.value,
       columns: columns.value,
       headers: headers.value,
     }))
 
     useRender(() => {
-      const [dataTableHeadersProps] = VDataTableHeaders.filterProps(props)
-      const [dataTableRowsProps] = VDataTableRows.filterProps(props)
-      const [tableProps] = VTable.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
+      const dataTableRowsProps = VDataTableRows.filterProps(props)
+      const tableProps = VTable.filterProps(props)
 
       return (
         <VTable
@@ -156,6 +203,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
           ]}
           style={ props.style }
           { ...tableProps }
+          fixedHeader={ props.fixedHeader || props.sticky }
         >
           {{
             top: () => slots.top?.(slotProps.value),
@@ -170,53 +218,63 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                 }}
               >
                 <table>
-                  <thead>
-                    <VDataTableHeaders
-                      { ...dataTableHeadersProps }
-                      sticky={ props.fixedHeader }
-                      v-slots={ slots }
-                    />
-                  </thead>
-                  <tbody>
-                    <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
-                    </tr>
+                  { slots.colgroup?.(slotProps.value) }
+                  { !props.hideDefaultHeader && (
+                    <thead key="thead">
+                      <VDataTableHeaders
+                        { ...dataTableHeadersProps }
+                        multiSort={ !!props.multiSort }
+                        v-slots={ slots }
+                      />
+                    </thead>
+                  )}
+                  { slots.thead?.(slotProps.value) }
+                  { !props.hideDefaultBody && (
+                    <tbody key="tbody">
+                      <tr ref={ markerRef } style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
+                        <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
+                      </tr>
 
-                    { slots['body.prepend']?.(slotProps.value) }
+                      { slots['body.prepend']?.(slotProps.value) }
 
-                    <VDataTableRows
-                      { ...dataTableRowsProps }
-                      items={ displayItems.value }
-                    >
-                      {{
-                        ...slots,
-                        item: itemSlotProps => (
-                          <VVirtualScrollItem
-                            key={ itemSlotProps.internalItem.index }
-                            renderless
-                            onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
-                          >
-                            { ({ itemRef }) => (
-                              slots.item?.({ ...itemSlotProps, itemRef }) ?? (
-                                <VDataTableRow
-                                  { ...itemSlotProps.props }
-                                  ref={ itemRef }
-                                  key={ itemSlotProps.internalItem.index }
-                                  v-slots={ slots }
-                                />
-                              )
-                            )}
-                          </VVirtualScrollItem>
-                        ),
-                      }}
-                    </VDataTableRows>
+                      <VDataTableRows
+                        { ...attrs }
+                        { ...dataTableRowsProps }
+                        items={ displayItems.value }
+                      >
+                        {{
+                          ...slots,
+                          item: itemSlotProps => (
+                            <VVirtualScrollItem
+                              key={ itemSlotProps.internalItem.index }
+                              renderless
+                              onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
+                            >
+                              { ({ itemRef }) => (
+                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
+                                  <VDataTableRow
+                                    { ...itemSlotProps.props }
+                                    ref={ itemRef }
+                                    key={ itemSlotProps.internalItem.index }
+                                    index={ itemSlotProps.index }
+                                    v-slots={ slots }
+                                  />
+                                )
+                              )}
+                            </VVirtualScrollItem>
+                          ),
+                        }}
+                      </VDataTableRows>
 
-                    { slots['body.append']?.(slotProps.value) }
+                      { slots['body.append']?.(slotProps.value) }
 
-                    <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
-                      <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
-                    </tr>
-                  </tbody>
+                      <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
+                        <td colspan={ columns.value.length } style={{ height: 0, border: 0 }}></td>
+                      </tr>
+                    </tbody>
+                  )}
+                  { slots.tbody?.(slotProps.value) }
+                  { slots.tfoot?.(slotProps.value) }
                 </table>
               </div>
             ),
@@ -225,6 +283,11 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
         </VTable>
       )
     })
+
+    return {
+      calculateVisibleItems,
+      scrollToIndex,
+    }
   },
 })
 

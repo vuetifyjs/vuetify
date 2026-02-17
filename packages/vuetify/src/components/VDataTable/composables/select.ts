@@ -2,12 +2,13 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
-import { deepEqual, propsFactory, wrapInArray } from '@/util'
+import { computed, inject, provide, shallowRef, toRef } from 'vue'
+import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
+import type { EventProp, ValueComparator } from '@/util'
 
 export interface SelectableItem {
   value: any
@@ -36,8 +37,8 @@ export interface DataTableSelectStrategy {
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
-  valueComparator: typeof deepEqual
-  'onUpdate:modelValue': ((value: any[]) => void) | undefined
+  valueComparator?: ValueComparator
+  'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
 
 const singleSelectStrategy: DataTableSelectStrategy = {
@@ -74,7 +75,9 @@ const allSelectStrategy: DataTableSelectStrategy = {
 
     return selected
   },
-  selectAll: ({ value, allItems, selected }) => allSelectStrategy.select({ items: allItems, value, selected }),
+  selectAll: ({ value, allItems }) => {
+    return new Set(value ? allItems.map(item => item.value) : [])
+  },
 }
 
 export const makeDataTableSelectProps = propsFactory({
@@ -87,10 +90,7 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-  valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
-    default: deepEqual,
-  },
+  valueComparator: Function as PropType<ValueComparator>,
 }, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
@@ -100,8 +100,16 @@ export function provideSelection (
   { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
+    const customComparator = props.valueComparator
+    if (customComparator) {
+      return new Set(wrapInArray(v).map(v => {
+        return allItems.value.find(item => customComparator(v, item.value))?.value ?? v
+      }))
+    }
     return new Set(wrapInArray(v).map(v => {
-      return allItems.value.find(item => props.valueComparator(v, item.value))?.value ?? v
+      return isPrimitive(v)
+        ? allItems.value.find(item => v === item.value)?.value ?? v
+        : allItems.value.find(item => deepEqual(v, item.value))?.value ?? v
     }))
   }, v => {
     return [...v.values()]
@@ -121,6 +129,8 @@ export function provideSelection (
     }
   })
 
+  const lastSelectedIndex = shallowRef<number | null>(null)
+
   function isSelected (items: SelectableItem | SelectableItem[]) {
     return wrapInArray(items).every(item => selected.value.has(item.value))
   }
@@ -139,8 +149,20 @@ export function provideSelection (
     selected.value = newSelected
   }
 
-  function toggleSelect (item: SelectableItem) {
-    select([item], !isSelected([item]))
+  function toggleSelect (item: SelectableItem, index?: number, event?: MouseEvent) {
+    const items = []
+    index = index ?? currentPage.value.findIndex(i => i.value === item.value)
+
+    if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
+      const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
+
+      items.push(...currentPage.value.slice(start, end + 1).filter(item => item.selectable))
+    } else {
+      items.push(item)
+      lastSelectedIndex.value = index
+    }
+
+    select(items, !isSelected([item]))
   }
 
   function selectAll (value: boolean) {
@@ -162,6 +184,7 @@ export function provideSelection (
     })
     return !!items.length && isSelected(items)
   })
+  const showSelectAll = toRef(() => selectStrategy.value.showSelectAll)
 
   const data = {
     toggleSelect,
@@ -171,7 +194,9 @@ export function provideSelection (
     isSomeSelected,
     someSelected,
     allSelected,
-    showSelectAll: selectStrategy.value.showSelectAll,
+    showSelectAll,
+    lastSelectedIndex,
+    selectStrategy,
   }
 
   provide(VDataTableSelectionSymbol, data)

@@ -1,32 +1,12 @@
 <template>
-  <v-row
-    justify="space-around"
-    align="center"
-  >
-    <v-time-picker
-      v-model="picker"
-      use-seconds
-    ></v-time-picker>
-    <v-time-picker
-      v-model="picker"
-      :landscape="$vuetify.breakpoint.smAndUp"
-      use-seconds
-    ></v-time-picker>
-  </v-row>
+  <v-container>
+    <v-row justify="center">
+      <v-time-picker use-seconds></v-time-picker>
+    </v-row>
+  </v-container>
 </template>
-
-<script setup>
-  import { ref } from 'vue'
-
-  const picker = ref(null)
-</script>
-
-<script>
-  export default {
-    data () {
-      return {
-        picker: null,
-      }
-    },
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2268-64361&t=tC3y53U3XKPv8ZyJ-4"
   }
-</script>
+</example-meta>

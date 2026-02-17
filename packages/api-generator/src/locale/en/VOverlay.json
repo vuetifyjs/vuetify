@@ -5,12 +5,25 @@
     "closeOnBack": "Closes the overlay content when the browser's back button is pressed or `$router.back()` is called, cancelling the original navigation. `persistent` overlays will cancel navigation and animate as if they were clicked outside instead of closing.",
     "contained": "Limits the size of the component and scrim to its offset parent. Implies `absolute` and `attach`. (Note: The parent element must have position: relative.).",
     "noClickAnimation": "Disables the bounce effect when clicking outside of the content element when using the persistent prop.",
-    "opacity": "Sets the overlay opacity.",
+    "opacity": "Sets the opacity of the scrim element. Only applies if `scrim` is enabled.",
     "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
     "scrim": "Accepts true/false to enable background, and string to define color.",
     "zIndex": "The z-index used for the component."
   },
   "events": {
-    "click:outside": "Event that fires when clicking outside an active overlay."
+    "click:outside": "Event that fires when clicking outside an active overlay.",
+    "afterLeave": "Event that fires after the overlay has finished transitioning out.",
+    "afterEnter": "Event that fires after the overlay has finished transitioning in.",
+    "keydown": "Emitted when **any** key is pressed."
+  },
+  "exposed": {
+    "activatorEl": "Ref to the current activator element.",
+    "animateClick": "Function invoked when user clicks outside.",
+    "contentEl": "Ref to the current content element.",
+    "globalTop": "Used by activator to determine a components position in the global stack order.",
+    "localTop": "Used by activator to determine a components position in the local stack order.",
+    "scrimEl": "Ref to the current scrim element.",
+    "target": "Ref to the current target element.",
+    "updateLocation": "Function used for locationStrategy positioning."
   }
 }

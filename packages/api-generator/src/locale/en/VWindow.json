@@ -1,6 +1,7 @@
 {
   "props": {
     "continuous": "If `true`, window will \"wrap around\" from the last item to the first, and from the first item to the last.",
+    "crossfade": "Enables crossfade transition.",
     "direction": "The transition direction when changing windows.",
     "nextIcon": "Icon used for the \"next\" button if `show-arrows` is `true`.",
     "prevIcon": "Icon used for the \"prev\" button if `show-arrows` is `true`.",
@@ -10,6 +11,7 @@
     "showArrowsOnHover": "Display the \"next\" and \"prev\" buttons on hover. `show-arrows` MUST ALSO be set.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "touchless": "Disable touch support.",
+    "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
     "vertical": "Uses a vertical transition when changing windows."
   },
   "events": {

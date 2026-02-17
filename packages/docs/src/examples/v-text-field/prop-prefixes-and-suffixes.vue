@@ -51,8 +51,8 @@
         <v-text-field
           label="Label Text"
           model-value="12:30:00"
-          type="time"
           suffix="PST"
+          type="time"
         ></v-text-field>
       </v-col>
     </v-row>

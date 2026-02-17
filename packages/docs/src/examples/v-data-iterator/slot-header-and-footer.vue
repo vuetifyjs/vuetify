@@ -21,10 +21,10 @@
           <div class="d-inline-flex">
             <v-btn
               :disabled="page === 1"
+              class="me-2"
               icon="mdi-arrow-left"
               size="small"
               variant="tonal"
-              class="me-2"
               @click="prevPage"
             ></v-btn>
 
@@ -53,14 +53,14 @@
             <v-img
               :gradient="`to top right, rgba(255, 255, 255, .1), rgba(${item.raw.color}, .15)`"
               :src="item.raw.src"
-              cover
               height="150"
+              cover
             ></v-img>
 
             <v-list-item
               :title="item.raw.name"
-              lines="two"
               density="comfortable"
+              lines="two"
               subtitle="Lorem ipsum dil orei namdie dkaf"
             >
               <template v-slot:title>
@@ -70,7 +70,7 @@
               </template>
             </v-list-item>
 
-            <v-table density="compact" class="text-caption">
+            <v-table class="text-caption" density="compact">
               <tbody>
                 <tr align="right">
                   <th>DPI:</th>
@@ -110,8 +110,8 @@
 
     <template v-slot:footer="{ page, pageCount }">
       <v-footer
-        color="surface-variant"
         class="justify-space-between text-body-2 mt-4"
+        color="surface-variant"
       >
         Total mice: {{ mice.length }}
 
@@ -137,7 +137,7 @@
       wireless: true,
       price: 149.99,
       description: 'Logitech G Pro X',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/1.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/3.png',
     },
     {
       name: 'Razer DeathAdder V2',
@@ -159,7 +159,7 @@
       wireless: true,
       price: 89.99,
       description: 'Corsair Dark Core RGB',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/3.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/1.png',
     },
     {
       name: 'SteelSeries Rival 3',
@@ -181,7 +181,7 @@
       wireless: false,
       price: 44.99,
       description: 'HyperX Pulsefire FPS Pro',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/5.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/6.png',
     },
     {
       name: 'Zowie EC2',
@@ -192,7 +192,7 @@
       wireless: false,
       price: 69.99,
       description: 'Zowie EC2',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/6.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/7.png',
     },
     {
       name: 'Roccat Kone AIMO',
@@ -203,7 +203,7 @@
       wireless: false,
       price: 79.99,
       description: 'Roccat Kone AIMO',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/7.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/8.png',
     },
     {
       name: 'Logitech G903',
@@ -214,7 +214,7 @@
       wireless: true,
       price: 129.99,
       description: 'Logitech G903',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/8.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/9.png',
     },
     {
       name: 'Cooler Master MM711',
@@ -225,7 +225,7 @@
       wireless: false,
       price: 49.99,
       description: 'Cooler Master MM711',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/9.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/5.png',
     },
     {
       name: 'Glorious Model O',
@@ -236,7 +236,7 @@
       wireless: false,
       price: 49.99,
       description: 'Glorious Model O',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/10.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/15.png',
     },
     {
       name: 'HP Omen Photon',
@@ -247,7 +247,7 @@
       wireless: true,
       price: 99.99,
       description: 'HP Omen Photon',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/11.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/10.png',
     },
     {
       name: 'Asus ROG Chakram',
@@ -258,7 +258,7 @@
       wireless: true,
       price: 159.99,
       description: 'Asus ROG Chakram',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/12.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/11.png',
     },
     {
       name: 'Razer Naga X',
@@ -269,7 +269,7 @@
       wireless: false,
       price: 79.99,
       description: 'Razer Naga X',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/13.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/12.png',
     },
     {
       name: 'Mad Catz R.A.T. 8+',
@@ -280,7 +280,7 @@
       wireless: false,
       price: 99.99,
       description: 'Mad Catz R.A.T. 8+',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/14.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/13.png',
     },
     {
       name: 'Alienware 610M',
@@ -291,7 +291,7 @@
       wireless: true,
       price: 99.99,
       description: 'Alienware 610M',
-      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/15.png',
+      src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/14.png',
     },
   ]
 
@@ -315,7 +315,7 @@
             wireless: true,
             price: 149.99,
             description: 'Logitech G Pro X',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/1.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/3.png',
           },
           {
             name: 'Razer DeathAdder V2',
@@ -337,7 +337,7 @@
             wireless: true,
             price: 89.99,
             description: 'Corsair Dark Core RGB',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/3.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/1.png',
           },
           {
             name: 'SteelSeries Rival 3',
@@ -359,7 +359,7 @@
             wireless: false,
             price: 44.99,
             description: 'HyperX Pulsefire FPS Pro',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/5.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/6.png',
           },
           {
             name: 'Zowie EC2',
@@ -370,7 +370,7 @@
             wireless: false,
             price: 69.99,
             description: 'Zowie EC2',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/6.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/7.png',
           },
           {
             name: 'Roccat Kone AIMO',
@@ -381,7 +381,7 @@
             wireless: false,
             price: 79.99,
             description: 'Roccat Kone AIMO',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/7.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/8.png',
           },
           {
             name: 'Logitech G903',
@@ -392,7 +392,7 @@
             wireless: true,
             price: 129.99,
             description: 'Logitech G903',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/8.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/9.png',
           },
           {
             name: 'Cooler Master MM711',
@@ -403,7 +403,7 @@
             wireless: false,
             price: 49.99,
             description: 'Cooler Master MM711',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/9.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/5.png',
           },
           {
             name: 'Glorious Model O',
@@ -414,7 +414,7 @@
             wireless: false,
             price: 49.99,
             description: 'Glorious Model O',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/10.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/15.png',
           },
           {
             name: 'HP Omen Photon',
@@ -425,7 +425,7 @@
             wireless: true,
             price: 99.99,
             description: 'HP Omen Photon',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/11.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/10.png',
           },
           {
             name: 'Asus ROG Chakram',
@@ -436,7 +436,7 @@
             wireless: true,
             price: 159.99,
             description: 'Asus ROG Chakram',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/12.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/11.png',
           },
           {
             name: 'Razer Naga X',
@@ -447,7 +447,7 @@
             wireless: false,
             price: 79.99,
             description: 'Razer Naga X',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/13.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/12.png',
           },
           {
             name: 'Mad Catz R.A.T. 8+',
@@ -458,7 +458,7 @@
             wireless: false,
             price: 99.99,
             description: 'Mad Catz R.A.T. 8+',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/14.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/13.png',
           },
           {
             name: 'Alienware 610M',
@@ -469,7 +469,7 @@
             wireless: true,
             price: 99.99,
             description: 'Alienware 610M',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/15.png',
+            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/14.png',
           },
         ],
       }

@@ -7,17 +7,18 @@ related:
   - /styles/colors/
   - /features/theme/
   - /features/treeshaking/
+features:
+  label: 'sass'
+  report: true
 ---
-
-<script setup>
-  import SassApi from '@/components/features/SassApi.vue'
-</script>
 
 # SASS variables
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ::: info
 
@@ -33,6 +34,10 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 ::: tabs
 
+```bash [pnpm]
+  pnpm install -D sass-loader sass
+```
+
 ```bash [yarn]
   yarn add -D sass
 ```
@@ -41,34 +46,41 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
   npm install -D sass-loader sass
 ```
 
-```bash [pnpm]
-  pnpm install -D sass-loader sass
-```
-
 ```bash [bun]
   bun add -D sass-loader sass
 ```
 
 :::
 
-For additional details about css-pre-processors, please refer to the official vite page at: https://vitejs.dev/guide/features.html#css-pre-processors or official vue-cli-page at: https://cli.vuejs.org/guide/css.html#pre-processors
+For additional details about css-pre-processors, please refer to the official vite page at: <https://vitejs.dev/guide/features.html#css-pre-processors> or official vue-cli-page at: <https://cli.vuejs.org/guide/css.html#pre-processors>
 
-## Basic usage
+## Usage
 
-Create a **main.scss** file in your **src/styles** directory and update the style import within your **vuetify.js** file:
+There are many SASS variables such as **font size**, **font family**, and **line height** that can be configured globally. An extensive list of configurable global SASS variables can be found [here](/api/globals/). To start, follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
 
-```scss { resource="src/styles/main.scss" }
-@use 'vuetify' with (
-  $variable: false,
+```js { resource="vite.config.js" }
+vuetify({
+  styles: {
+    configFile: 'src/styles/settings.scss',
+  },
+})
+```
+
+`configFile` will be resolved relative to the project root, and loaded before each of vuetify's stylesheets. Next, create a **settings.scss** file in your **src/styles** directory:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  // variables go here
 );
 ```
 
-```diff { resource="src/plugins/vuetify.js" }
-- import 'vuetify/styles'
-+ import '@/styles/main.scss'
-```
+Within your style file, specify the variables you want to override, and that's it.
 
-Within your style file, import the Vuetify styles and specify the variables you want to override, that's it.
+::: info
+
+`'@use 'vuetify'` should only be used for the [`$utilities`](/features/sass-variables/#disabling-utility-classes), [`$color-pack`](/features/sass-variables/#disabling-color-packs), and [`$reset`](/styles/css-reset/#css-reset) settings.
+
+:::
 
 ::: warning
 
@@ -76,27 +88,17 @@ Within your style file, import the Vuetify styles and specify the variables you 
 
 :::
 
-## Component specific variables
+::: warning
 
-Customising variables used in components is a bit more complex and requires the use of a special build plugin.
+If your values contain commas, such as if you are setting `$body-font-family` with multiple fonts, you must surround the value with parentheses, like this: `$body-font-family: ('Roboto', sans-serif)`. Otherwise the commas will be reported as a syntax error.
 
-Follow the plugin setup guide from [treeshaking](/features/treeshaking/) then add `styles.configFile` to the plugin options:
-
-```scss { resource="src/styles/settings.scss" }
-@use 'vuetify/settings' with (
-  $button-height: 40px,
-);
-```
-
-`configFile` will be resolved relative to the project root, and loaded before each of vuetify's stylesheets.
-If you were using the basic technique from above, make sure to remove it and switch back to `import 'vuetify/styles'`.
-You can keep `main.scss` for other style overrides but don't do both or you'll end up with duplicated styles.
+:::
 
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
 
-<sass-api />
+<FeaturesSassApi />
 
 Available SASS variables are located on each component's API page.
 
@@ -104,7 +106,7 @@ Available SASS variables are located on each component's API page.
 
 ## Usage in templates
 
-You can access [global](/api/vuetify/) and per-component variables in Vue templates simply by importing the settings file:
+You can access [global](/api/globals/) and per-component variables in Vue templates simply by importing the settings file:
 
 ```html { resource="Comp1.vue" }
 <style lang="scss">
@@ -125,33 +127,58 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 ## Disabling utility classes
 
-Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selecively keeping only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
 
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
+  $utilities: false,
+);
+```
+
+Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`.
+
+::: info
+
+Vuetify includes several utility classes that are not covered by the `$utilities` map: `elevation`, `hidden`, `sr-only`, and `pointer-events`. If you want to disable these styles while keeping some utilities enabled, you can use the `$misc` variable. See the example at the end of the snippet below.
+
+:::
+
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
   $utilities: (
     "align-content": false,
     "align-items": false,
     "align-self": false,
     "border-bottom": false,
+    "border-current": false,
     "border-end": false,
     "border-opacity": false,
     "border-start": false,
     "border-style": false,
     "border-top": false,
     "border": false,
+    "bottom": false,
+    "cursor": false,
     "display": false,
+    "fill-height": false,
     "flex-direction": false,
     "flex-grow": false,
     "flex-shrink": false,
     "flex-wrap": false,
     "flex": false,
-    "float-ltr": false,
-    "float-rtl": false,
+    "float:ltr": false,
+    "float:rtl": false,
     "float": false,
     "font-italic": false,
     "font-weight": false,
+    "gap-column": false,
+    "gap-row": false,
+    "gap": false,
+    "height-screen": false,
+    "height": false,
     "justify-content": false,
+    "justify-items": false,
+    "left": false,
     "margin-bottom": false,
     "margin-end": false,
     "margin-left": false,
@@ -170,6 +197,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "negative-margin-x": false,
     "negative-margin-y": false,
     "negative-margin": false,
+    "opacity": false,
     "order": false,
     "overflow-wrap": false,
     "overflow-x": false,
@@ -184,6 +212,8 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "padding-x": false,
     "padding-y": false,
     "padding": false,
+    "position": false,
+    "right": false,
     "rounded-bottom-end": false,
     "rounded-bottom-start": false,
     "rounded-bottom": false,
@@ -199,29 +229,64 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "text-opacity": false,
     "text-overflow": false,
     "text-transform": false,
+    "top": false,
     "typography": false,
     "white-space": false,
+    "width": false,
+  ),
+  $misc: (
+    'pointer-events': false,
+    'sr-only': false,
+    "elevation": false,
+    "hidden": false,
   ),
 );
 ```
 
-To disable all utility classes, set the entire `$utilities` variable to `false`:
-
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
-  $utilities: false,
-);
-```
+This is useful when you want to use your own implementation of these styles. For example, if your design system uses standardized shadow levels instead of Vuetify's elevation classes, you can disable the built-in elevation styles and define your own.
 
 ## Disabling color packs
 
 Color packs are handy for quickly applying a color to a component but mostly unused in production. To disable them, set the `$color-pack` variable to `false`:
 
-```scss { resource="src/styles/settings.scss" }
-@forward 'vuetify/settings' with (
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
   $color-pack: false,
 );
 ```
+
+## Enabling CSS cascade layers
+
+<DocIntroduced version="3.6.0" />
+
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
+
+```scss { resource="src/styles/settings.scss" }
+@forward 'vuetify/settings' with (
+  $layers: true,
+);
+```
+
+```ts { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  theme: {
+    layers: true,
+  },
+})
+```
+
+Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything.
+
+- If you have separate plugin files make sure to import vuetify's before `App.vue`.
+- Imports generated by `import.meta.glob(..., { eager: true })` are hoisted, if you use this for components or files that import components it should be in another file separate from any style imports to ensure `vuetify/styles` is always first.
+
+Your own styles will always<sup>*</sup> override vuetify's if you don't use `@layer` yourself, or you can specify an order for custom layers in a stylesheet loaded before vuetify.
+
+```css { resource="src/styles/layers.css" }
+@layer base, vuetify, overrides;
+```
+
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
 
 ## Caveats
 
@@ -234,8 +299,10 @@ Only put variables, mixins, and functions in the settings file, styles should be
 
 ### Build performance
 
-Vuetify loads precompiled CSS by default, enabling variable customisation will switch to the base SASS files instead which must be recompiled with your project.
+Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
+
+Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vitejs.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
 
 ### Symlinks
 

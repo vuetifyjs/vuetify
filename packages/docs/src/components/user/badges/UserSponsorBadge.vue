@@ -1,14 +1,19 @@
 <template>
-  <v-icon
-    v-if="auth.isSubscriber"
-    color="#e98b20"
-    icon="mdi-crown"
-  />
+  <v-tooltip
+    v-if="one.isSubscriber"
+    location="bottom"
+    text="Sponsor"
+  >
+    <template #activator="{ props: activatorProps }">
+      <v-icon
+        v-bind="activatorProps"
+        color="#e98b20"
+        icon="mdi-crown"
+      />
+    </template>
+  </v-tooltip>
 </template>
 
 <script setup>
-  // Stores
-  import { useAuthStore } from '@/store/auth'
-
-  const auth = useAuthStore()
+  const one = useOneStore()
 </script>

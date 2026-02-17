@@ -1,20 +1,27 @@
 @use '../../styles/tools'
+@use './variables' as *
 
-.v-date-picker__input
-  padding-top: 16px
-  padding-left: 24px
-  padding-right: 24px
+@include tools.layer('components')
+  .v-date-picker
+    overflow: hidden
+    width: $date-picker-width
+    --v-date-picker-landscape-header-width: #{$date-picker-landscape-header-width}
 
-.v-date-picker
-  overflow: hidden
+    &--show-week
+      width: $date-picker-show-week-width
 
-.v-date-picker-month
-  padding: 0 12px 12px
+    &.v-picker--landscape:has(.v-picker__header-wrapper)
+      width: calc(#{$date-picker-width} + var(--v-date-picker-landscape-header-width))
 
-.v-date-picker-month__day
-  height: 48px
-  width: 48px
+      .v-picker__header-wrapper
+        width: var(--v-date-picker-landscape-header-width)
 
-  .v-btn
-    --v-btn-height: 28px
-    --v-btn-size: 0.85rem
+        .v-date-picker-header
+          height: auto
+          padding-inline: 24px
+
+      &.v-picker--show-week
+        width: calc(#{$date-picker-show-week-width} + var(--v-date-picker-landscape-header-width))
+
+    > .v-picker__body
+      flex-direction: column

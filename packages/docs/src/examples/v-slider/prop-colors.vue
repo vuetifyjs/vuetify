@@ -8,14 +8,14 @@
 
     <v-slider
       v-model="slider2"
-      track-color="green"
       label="track-color"
+      track-color="green"
     ></v-slider>
 
     <v-slider
       v-model="slider3"
-      thumb-color="purple"
       label="thumb-color"
+      thumb-color="purple"
     ></v-slider>
   </div>
 </template>
@@ -37,3 +37,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2723-45045&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

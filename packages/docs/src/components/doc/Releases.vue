@@ -7,13 +7,15 @@
       :items="releases"
       :menu-props="menuProps"
       :placeholder="tag"
-      hide-details
-      hide-no-data
       density="comfortable"
       item-title="name"
       label="Select Release Version"
-      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
+      rounded="b-0"
+      variant="solo-filled"
+      hide-details
+      hide-no-data
+      persistent-placeholder
       return-object
     >
       <template #selection>
@@ -68,37 +70,33 @@
     </v-autocomplete>
 
     <v-card
-      variant="flat"
       rounded="t-0 b"
+      variant="flat"
     >
       <div
         v-if="model?.author"
-        class="d-flex justify-space-between"
+        class="d-flex align-center justify-space-between pa-4 bg-surface-light border-y"
       >
-        <v-list-item v-if="publishedOn" lines="two">
-          <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published" scope="global">
-              <template #date>
-                <v-chip
-                  :text="publishedOn"
-                  class="ms-2 text-caption"
-                  density="comfortable"
-                  label
-                  variant="flat"
-                />
-              </template>
-            </i18n-t>
-          </v-list-item-title>
-        </v-list-item>
+        <div class="d-flex align-center text-caption">
+          <i18n-t v-if="publishedOn" keypath="published" scope="global">
+            <template #date>
+              <border-chip
+                :text="publishedOn"
+                class="ms-1"
+                prepend-icon="mdi-calendar"
+              />
+            </template>
+          </i18n-t>
+        </div>
 
-        <div class="pe-3 d-flex align-center flex-1-0-auto">
-          <app-tooltip-btn
+        <div class="d-flex align-center">
+          <AppTooltipBtn
             v-for="(tooltip, i) in tooltips"
             :key="i"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
-            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
             class="text-white ms-2"
             density="comfortable"
@@ -113,17 +111,49 @@
         <v-divider />
 
         <div class="px-4 pt-4">
-          <app-markdown
+          <AppMarkdown
             :content="model.body"
             class="releases"
           />
         </div>
+
+        <template v-if="model.zipball_url && model.tarball_url">
+          <v-divider class="my-2" />
+
+          <div class="px-4 pb-4">
+            <h2 class="text-h6 font-weight-bold">Assets</h2>
+
+            <AppSheet>
+              <v-list-item
+                :href="model.zipball_url"
+                append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (zip)"
+                nav
+                slim
+              />
+
+              <v-divider />
+
+              <v-list-item
+                :href="model.tarball_url"
+                append-icon="mdi-download-box-outline"
+                prepend-icon="mdi-folder-zip-outline"
+                target="_blank"
+                title="Source code (tar.gz)"
+                nav
+                slim
+              />
+            </AppSheet>
+          </div>
+        </template>
       </template>
 
       <v-skeleton-loader
         v-if="!model && store.isLoading"
-        type="heading, article, heading, subtitle, text, sentences"
         class="pa-4"
+        type="heading, article, heading, subtitle, text, sentences"
       />
     </v-card>
   </div>
@@ -131,16 +161,10 @@
 
 <script setup lang="ts">
   // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useDate, useDisplay, version } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
+  import { version } from 'vuetify'
 
-  // Stores
-  import { Release, useReleasesStore } from '@/store/releases'
-
-  // Utilities
-  import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
-  import { wait } from '@/util/helpers'
+  // Types
+  import type { Release } from '@/stores/releases'
 
   const reactions = {
     '+1': '👍',
@@ -153,14 +177,14 @@
 
   const { smAndUp } = useDisplay()
   const { t } = useI18n()
-  const date = useDate()
+  const adapter = useDate()
   const route = useRoute()
   const router = useRouter()
   const store = useReleasesStore()
 
-  const autocomplete = ref()
-  const clicked = ref('copy-link')
-  const model = ref<Release>()
+  const autocomplete = shallowRef()
+  const clicked = shallowRef('copy-link')
+  const model = shallowRef<Release>()
   const search = shallowRef('')
   let timeout = -1 as any
 
@@ -177,7 +201,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
+          await navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
 
           clicked.value = 'copied'
 
@@ -215,7 +239,7 @@
   const publishedOn = computed(() => {
     if (!model.value?.published_at) return undefined
 
-    return date.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
+    return adapter.format(new Date(model.value.published_at), smAndUp.value ? 'fullDateWithWeekday' : 'normalDateWithWeekday')
   })
 
   onBeforeMount(async () => {
@@ -250,6 +274,29 @@
 
     timeout = setTimeout(() => store.find(val), 500)
   }
+
+  // function timeAgo (string: string): string {
+  //   const date = adapter.toJsDate(adapter.date(string))
+  //   const now = new Date()
+  //   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  //   let interval = seconds / 31536000
+  //   if (interval > 1) return `${Math.floor(interval)} years ago`
+
+  //   interval = seconds / 2592000
+  //   if (interval > 1) return `${Math.floor(interval)} months ago`
+
+  //   interval = seconds / 86400
+  //   if (interval > 1) return `${Math.floor(interval)} days ago`
+
+  //   interval = seconds / 3600
+  //   if (interval > 1) return `${Math.floor(interval)} hours ago`
+
+  //   interval = seconds / 60
+  //   if (interval > 1) return `${Math.floor(interval)} minutes ago`
+
+  //   return `${Math.floor(seconds)} seconds ago`
+  // }
 </script>
 
 <style lang="sass">

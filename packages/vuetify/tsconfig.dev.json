@@ -3,10 +3,19 @@
   "include": [
     "src",
     "dev",
-    "cypress"
+    "test",
+    "cypress",
+    "./cypress.config.ts",
+    "./vite.config.ts",
+    "./vitest.config.ts",
+    "./vitest.workspace.ts"
   ],
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "types": [
+      "@vitest/browser/providers/webdriverio"
+    ]
   },
   "vueCompilerOptions": {
     "strictTemplates": true

@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-alert
-      prominent
       type="error"
+      prominent
     >
       <template v-slot:text>
         Nunc nonummy metus. Nunc interdum lacus sit amet orci Nullam dictum felis eu pede.
@@ -28,8 +28,8 @@
 
     <v-alert
       icon="mdi-shield-lock-outline"
-      prominent
       type="info"
+      prominent
     >
       Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Sed in libero ut nibh placerat accumsan.. Curabitur blandit mollis lacus. Curabitur blandit mollis lacus.
     </v-alert>

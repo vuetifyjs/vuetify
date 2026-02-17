@@ -6,13 +6,14 @@ import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -21,6 +22,7 @@ export const makeVProgressCircularProps = propsFactory({
   bgColor: String,
   color: String,
   indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
+  rounded: Boolean,
   modelValue: {
     type: [Number, String],
     default: 0,
@@ -35,6 +37,7 @@ export const makeVProgressCircularProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeRevealProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
@@ -57,14 +60,15 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
-    const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
+    const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
     const { resizeRef, contentRect } = useResizeObserver()
+    const { state: revealState, duration: revealDuration } = useReveal(props)
 
-    const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
-    const width = computed(() => Number(props.width))
-    const size = computed(() => {
+    const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
+    const width = toRef(() => Number(props.width))
+    const size = toRef(() => {
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
         ? Number(props.size)
@@ -72,9 +76,20 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           ? contentRect.value.width
           : Math.max(width.value, 32)
     })
-    const diameter = computed(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
-    const strokeWidth = computed(() => width.value / size.value * diameter.value)
-    const strokeDashOffset = computed(() => convertToUnit(((100 - normalizedValue.value) / 100) * CIRCUMFERENCE))
+    const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
+    const strokeWidth = toRef(() => width.value / size.value * diameter.value)
+    const strokeDashOffset = toRef(() => {
+      const baseLength = ((100 - normalizedValue.value) / 100) * CIRCUMFERENCE
+      return props.rounded && normalizedValue.value > 0 && normalizedValue.value < 100
+        ? convertToUnit(Math.min(CIRCUMFERENCE - 0.01, baseLength + strokeWidth.value))
+        : convertToUnit(baseLength)
+    })
+    const startAngle = computed(() => {
+      const baseAngle = Number(props.rotate)
+      return props.rounded
+        ? baseAngle + (strokeWidth.value / 2) / CIRCUMFERENCE * 360
+        : baseAngle
+    })
 
     watchEffect(() => {
       intersectionRef.value = root.value
@@ -89,7 +104,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           {
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
-            'v-progress-circular--disable-shrink': props.indeterminate === 'disable-shrink',
+            'v-progress-circular--disable-shrink': props.indeterminate &&
+              (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
+            'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),
           },
           themeClasses.value,
           sizeClasses.value,
@@ -99,6 +116,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         style={[
           sizeStyles.value,
           textColorStyles.value,
+          {
+            '--progress-reveal-duration': `${revealDuration.value}ms`,
+          },
           props.style,
         ]}
         role="progressbar"
@@ -108,7 +128,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
       >
         <svg
           style={{
-            transform: `rotate(calc(-90deg + ${Number(props.rotate)}deg))`,
+            transform: `rotate(calc(-90deg + ${startAngle.value}deg))`,
           }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox={ `0 0 ${diameter.value} ${diameter.value}` }
@@ -137,6 +157,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             stroke-width={ strokeWidth.value }
             stroke-dasharray={ CIRCUMFERENCE }
             stroke-dashoffset={ strokeDashOffset.value }
+            stroke-linecap={ props.rounded ? 'round' : undefined }
           />
         </svg>
 
