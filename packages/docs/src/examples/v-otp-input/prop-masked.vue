@@ -14,13 +14,13 @@
 <script setup>
   import { ref } from 'vue'
 
-  const otp = ref('')
+  const otp = ref('3216')
 </script>
 
 <script>
   export default {
     data: () => ({
-      otp: '',
+      otp: '3216',
     }),
   }
 </script>
