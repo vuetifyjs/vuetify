@@ -91,6 +91,7 @@ export default {
     hour: 'Timme',
     minute: 'Minuter',
     second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
