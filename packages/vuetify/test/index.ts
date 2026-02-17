@@ -4,11 +4,12 @@ import { render as _render } from '@testing-library/vue'
 import { createVuetify } from '../src/framework'
 import { mergeDeep } from '../src/util'
 import { aliases } from '../src/iconsets/mdi-svg'
+import { commands, page } from 'vitest/browser'
 
 import type { RenderOptions, RenderResult } from '@testing-library/vue'
 import type { VuetifyOptions } from '../src/framework'
 
-export { userEvent } from '@vitest/browser/context'
+export { userEvent, page, commands } from 'vitest/browser'
 export { screen } from '@testing-library/vue'
 export * from './templates'
 
@@ -43,6 +44,14 @@ export const waitIdle = () => {
   return new Promise(resolve => requestIdleCallback(resolve, { timeout: 500 }))
 }
 
+export const click = (el: Element) => {
+  return commands.click(page.elementLocator(el).selector)
+}
+
+export const waitForClickable = (el: Element) => {
+  return commands.waitForClickable(page.elementLocator(el).selector)
+}
+
 export const scroll = (options: ScrollToOptions, el: Element | Window = window) => {
   return Promise.race([
     wait(500),
@@ -73,4 +82,11 @@ export function render<C> (
   const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
 
   return _render(component, mountOptions)
+}
+
+export function unfill (o: Record<string, any>) {
+  return Object.keys(o).reduce((result, key) => {
+    result[key] = typeof o[key] === 'object' ? unfill(o[key]) : typeof o[key]
+    return result
+  }, {} as Record<string, any>)
 }

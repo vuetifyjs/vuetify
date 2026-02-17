@@ -1,0 +1,225 @@
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-hotkey {
+    align-items: center;
+    display: inline-flex;
+    gap: $hotkey-gap;
+    vertical-align: middle;
+    line-height: $hotkey-line-height;
+
+    &--disabled {
+      opacity: $hotkey-disabled-opacity;
+    }
+
+    &--inline {
+      max-height: 1lh;
+      vertical-align: baseline;
+      font-size: $hotkey-inline-font-size;
+      line-height: inherit;
+    }
+
+    &__prefix {
+      opacity: $hotkey-prefix-suffix-opacity;
+      font-weight: $hotkey-prefix-suffix-font-weight;
+      vertical-align: baseline;
+    }
+
+    &__suffix {
+      opacity: $hotkey-prefix-suffix-opacity;
+      font-weight: $hotkey-prefix-suffix-font-weight;
+      vertical-align: baseline;
+    }
+
+    // Contained variant
+    &--contained {
+      .v-hotkey__contained-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: $hotkey-combination-gap;
+        padding: $hotkey-contained-padding;
+        box-sizing: border-box;
+        background: unset;
+        box-shadow: unset;
+        min-height: 1em;
+        font-size: $hotkey-font-size;
+        line-height: $hotkey-line-height;
+        .v-hotkey__prefix, .v-hotkey__suffix {
+          opacity: $hotkey-prefix-suffix-contained-opacity;
+        }
+        .v-hotkey__prefix {
+          margin-right: $hotkey-contained-prefix-margin-right;
+        }
+        .v-hotkey__suffix {
+          margin-left: $hotkey-contained-suffix-margin-left;
+        }
+      }
+
+      .v-hotkey__divider {
+        opacity: $hotkey-divider-opacity;
+        font-size: inherit;
+      }
+
+      .v-hotkey__combination {
+        display: inline-flex;
+        align-items: center;
+        gap: $hotkey-combination-gap;
+      }
+
+      &.v-hotkey--inline .v-hotkey__contained-wrapper.v-kbd {
+        align-self: baseline;
+        align-items: baseline;
+        font-size: $hotkey-inline-font-size;
+        line-height: inherit;
+        padding: $hotkey-inline-padding;
+        gap: $hotkey-combination-gap;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      &.v-hotkey--inline .v-hotkey__divider {
+        font-size: $hotkey-inline-divider-font-size;
+        align-self: baseline;
+      }
+
+      &.v-hotkey--inline .v-hotkey__combination {
+        gap: $hotkey-combination-gap;
+        align-items: baseline;
+      }
+    }
+
+    &__key {
+      &.v-kbd {
+        min-height: unset;
+        font-size: $hotkey-font-size;
+        line-height: $hotkey-line-height;
+        padding: $hotkey-padding;
+        min-width: $hotkey-min-width;
+        @include tools.variant($hotkey-variants...);
+      }
+
+      &-symbol.v-kbd {
+        line-height: normal;
+        font-size: 1em;
+      }
+
+      &-icon .v-icon {
+        min-width: unset;
+
+        &:has(svg) {
+          max-width: $hotkey-icon-size;
+        }
+        &:not(:has(svg)) {
+          font-size: $hotkey-icon-size;
+          line-height: inherit;
+          height: inherit;
+        }
+      }
+
+      &--nested {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        display: inline-flex;
+        align-items: center;
+        min-width: auto;
+        min-height: auto;
+        align-self: baseline;
+
+        &.v-hotkey__key-icon {
+          align-self: center;
+        }
+      }
+    }
+
+    &__divider {
+      align-items: center;
+      display: inline-flex;
+      opacity: $hotkey-divider-opacity;
+      font-size: $hotkey-divider-font-size;
+    }
+
+    &__combination {
+      display: flex;
+      gap: $hotkey-combination-gap;
+    }
+
+    &--inline &__key {
+      align-self: center;
+      padding: $hotkey-inline-padding;
+      min-width: $hotkey-inline-min-width;
+      height: calc(1lh - 2px);
+      line-height: calc(1lh - 2px);
+
+      &-icon {
+        &.v-kbd {
+          padding-block: 0;
+        }
+
+        .v-icon {
+          width: min-content;
+          min-width: fit-content;
+          max-height: $hotkey-inline-icon-max-height;
+
+          .v-icon__svg {
+            height: 100%;
+            width: unset;
+          }
+        }
+      }
+    }
+
+    &--inline &__combination {
+      align-items: baseline;
+      gap: 1px;
+    }
+
+    &--inline &__divider {
+      font-size: $hotkey-inline-divider-font-size;
+    }
+
+    &--inline &__prefix,
+    &--inline &__suffix {
+      align-self: baseline;
+      font-size: inherit;
+    }
+
+    &--variant-elevated &__key.v-kbd {
+      @include tools.elevation($hotkey-elevation);
+    }
+
+    &--variant-flat &__key.v-kbd {
+      box-shadow: none;
+    }
+
+    &--variant-outlined &__key.v-kbd {
+      background: none;
+
+      @include tools.elevation(0);
+    }
+
+    &--variant-text {
+      .v-hotkey__key.v-kbd {
+        background: transparent !important;
+        border: none !important;
+        padding-inline: 0;
+        min-width: auto;
+
+        @include tools.elevation(0);
+      }
+
+      .v-hotkey__combination {
+        gap: 1px;
+      }
+    }
+
+    &--variant-tonal &__key.v-kbd {
+      border: unset;
+      box-shadow: unset;
+    }
+  }
+}

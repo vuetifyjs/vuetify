@@ -1,8 +1,16 @@
 import { VColorPicker } from '../VColorPicker'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { within } from '@testing-library/vue'
+
+const stories = {
+  'Without canvas': <VColorPicker hideCanvas />,
+  'Without inputs': <VColorPicker hideInputs />,
+  'Without sliders': <VColorPicker hideSliders />,
+  Swatches: <VColorPicker showSwatches />,
+  'Without eyedropper': <VColorPicker hideEyeDropper />,
+}
 
 describe('VColorPicker', () => {
   it('should default to emitting hex value if no value is provided', async () => {
@@ -149,7 +157,7 @@ describe('VColorPicker', () => {
     })
 
     await userEvent.click(screen.getByCSS('canvas'))
-    expect(screen.getByCSS('.v-color-picker-canvas__dot')).toBeInTheDocument()
+    expect(screen.getByCSS('.v-color-picker-canvas__dot')).toBeVisible()
     screen.getAllByCSS('.v-color-picker-edit__input input').forEach(el => {
       expect(el).toHaveValue()
     })
@@ -167,4 +175,6 @@ describe('VColorPicker', () => {
     expect(update).toHaveBeenCalledTimes(1)
     expect(update).toHaveBeenCalledWith('#FF00CC')
   })
+
+  showcase({ stories })
 })

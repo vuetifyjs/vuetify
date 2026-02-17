@@ -81,7 +81,7 @@ The headers array is the core of the table. It defines which properties to displ
 All properties are optional, but at least one of **title**, **value**, or **key** should be present to display more than just an empty column:
 
 ```js
-headers = [
+const headers = [
   { title: 'No data, just a label' },
   { key: 'quantity' },
   { value: 'price' },
@@ -107,16 +107,17 @@ The **key** property is used to identify the column in slots, events, filters, a
 **key** and **value** both support dot notation to access properties of nested objects, and **value** can also be a function to combine multiple properties or do other custom formatting. If **value** is not a string then **key** must be defined.
 
 ```js
-items = [
+const items = [
   {
     id: 1,
     name: {
       first: 'John',
       last: 'Doe',
     },
-  }
+  },
 ]
-headers = [
+
+const headers = [
   { title: 'First Name', value: 'name.first' },
   { title: 'Last Name', key: 'name.last' },
   {
@@ -137,7 +138,7 @@ Other options are available for setting **width**, **align**, **fixed**, or pass
 
 ### Props
 
-There are no shortable of properties available for customizing various aspects of the Data table components.
+There is no shortage of properties available for customizing various aspects of the Data table components.
 
 #### Density
 
@@ -157,6 +158,18 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
+#### Sort icons
+
+You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
+
+::: warning
+
+The `sort-icon` (for unsorted columns) and new variables for opacity and spacing require [v3.12.0](/getting-started/release-notes/?version=v3.12.0).
+
+:::
+
+<ExamplesExample file="v-data-table/prop-sort-icon" />
+
 #### Selection
 
 The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
@@ -167,9 +180,15 @@ For more information and examples, see the [selection examples](/components/data
 
 #### Simple checkbox
 
-When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component. The `v-checkbox-btn` component is used internally and will respect header alignment.
+When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component.
 
 <ExamplesExample file="v-data-table/slot-simple-checkbox" />
+
+#### Group by
+
+The **group-by** prop makes it possible to group rows by one or more attributes.
+
+<ExamplesExample file="v-data-table/prop-grouping" />
 
 ### Slots
 
@@ -203,15 +222,33 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 
 #### Group header slot
 
-When using the **group-by** prop, you can customize the group header with the `group-header` slot.
+When using the **group-by** prop, you can customize the group header with the `group-header` slot. Example below makes the whole row clickable.
 
 <ExamplesExample file="v-data-table/slot-group-header" />
+
+#### Group summary slot
+
+::: info
+This feature requires [v3.9.4](/getting-started/release-notes/?version=v3.9.4)
+:::
+
+By default grouping with **group-by** shows only the header slot. When you define `group-summary` slot, additional summary row will appear below the group rows.
+
+<ExamplesExample file="v-data-table/slot-group-summary" />
 
 #### Loading slot
 
 The `loading` slot allows you to customize your table's display state when fetching data. In this example we utilize the [v-skeleton-loader](/components/skeleton-loaders) component to display a loading animation.
 
 <ExamplesExample file="v-data-table/slot-loading" />
+
+### Misc
+
+#### Select All
+
+The example below shows how to use the `@keydown` event to quickly select all rows in the data table using the `Ctrl+A` or `Cmd+A` keyboard shortcut. To begin using the shortcut, click anywhere inside the table first.
+
+<ExamplesExample file="v-data-table/misc-select-all" />
 
 ## Examples
 
@@ -226,6 +263,8 @@ The following are a collection of examples that demonstrate more advanced and re
 ### Expandable rows
 
 The **show-expand** prop will render an expand icon on each row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be changed by adding a column with `key: 'data-table-expand'` to the headers array.
+
+You can override the rows expand icon via the `item.data-table-expand` slot. To call upon the expand functionality, pass the slots provided `internalItem` to the `toggleExpand` function and add it to a click handler to perform the expand functionality. You can also check the current state of the rows expansion by passing the `internalItem` to the `isExpanded` function.
 
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
 

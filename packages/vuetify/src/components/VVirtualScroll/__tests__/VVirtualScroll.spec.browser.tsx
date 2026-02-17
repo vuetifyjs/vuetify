@@ -2,14 +2,14 @@
 import { VVirtualScroll } from '../VVirtualScroll'
 
 // Utilities
-import { render, scroll, waitIdle } from '@test'
+import { render, screen, scroll, waitIdle } from '@test'
 import { createRange } from '@/util'
 
 describe('VVirtualScroll', () => {
   it('only renders visible items', async () => {
     const items = createRange(1000)
 
-    const { container } = render(() => (
+    render(() => (
       <VVirtualScroll height="400" items={ items } itemHeight="24">
         {{
           default: ({ index }) => (
@@ -19,8 +19,8 @@ describe('VVirtualScroll', () => {
       </VVirtualScroll>
     ))
 
-    const elements = container.querySelectorAll('.v-virtual-scroll__item')
-    expect(elements.length).toBeGreaterThan(10)
+    const elements = screen.getAllByCSS('.v-virtual-scroll__item')
+    expect(elements.length).toBeGreaterThan(16) // 400/24=16.6
     expect(elements.length).toBeLessThan(50)
   })
 
@@ -37,15 +37,15 @@ describe('VVirtualScroll', () => {
       </VVirtualScroll>
     ))
 
-    const root = result.container.querySelector('.v-virtual-scroll')!
+    const root = screen.getByCSS('.v-virtual-scroll')
 
     await waitIdle()
     const el = await result.findByText(16)
     await scroll({ top: 400, behavior: 'smooth' }, root)
-    expect(await result.findByText(16)).toBe(el)
+    await expect(result.findByText(16)).resolves.toBe(el)
 
     await scroll({ top: 800, behavior: 'smooth' }, root)
     await scroll({ top: 200, behavior: 'smooth' }, root)
-    expect(await result.findByText(16)).not.toBe(el)
+    await expect(result.findByText(16)).resolves.not.toBe(el)
   })
 })

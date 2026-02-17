@@ -11,7 +11,6 @@
         v-bind="props"
         :items="cards"
         :page="page"
-        items-per-page="3"
       >
         <template v-slot:default="{ items }">
           <template
@@ -46,8 +45,7 @@
 
   const props = computed(() => {
     return {
-      ':items': 'items',
-      ':page': 'page',
+      'items-per-page': 3,
     }
   })
 
@@ -63,11 +61,14 @@
       <br>
     </template>
   </template>
+  <template v-slot:footer="{ pageCount }">
+    <v-pagination v-model="page" :length="pageCount"></v-pagination>
+  </template>
 `
   })
 
   const code = computed(() => {
-    return `<v-data-iterator${propsToString(props.value)}>${slots.value}</v-data-iterator>`
+    return `<v-data-iterator :items="items" :page="page"${propsToString(props.value, ['items'])}>${slots.value}</v-data-iterator>`
   })
 
   const script = computed(() => {

@@ -1,7 +1,4 @@
 module.exports = {
-  parserOptions: {
-    project: './packages/vuetify/tsconfig.dev.json',
-  },
   globals: {
     __VUETIFY_VERSION__: true,
     __REQUIRED_VUE__: true,
@@ -12,6 +9,7 @@ module.exports = {
   rules: {
     'no-console': 'error',
     'no-debugger': 'error',
+    'no-labels': 'off',
 
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
@@ -23,8 +21,8 @@ module.exports = {
       paths: [{
         name: 'vue',
         importNames: ['defineComponent'],
-        message: 'Please use wrapped function from @/util instead'
-      }]
+        message: 'Please use wrapped function from @/util instead',
+      }],
     }],
 
     // 'import/no-cycle': 'warn',
@@ -46,18 +44,27 @@ module.exports = {
     {
       files: '**/*.spec.?(browser.){ts,tsx}',
       plugins: ['vitest'],
-      extends: ['plugin:vitest/recommended'],
+      extends: ['plugin:vitest/legacy-all'],
       rules: {
         'local-rules/vitest-global-imports': 'error',
 
         'no-restricted-imports': 'off',
 
         'vitest/no-commented-out-tests': 'off',
-        'vitest/no-large-snapshots': 'warn',
-        'vitest/prefer-spy-on': 'warn',
-        'vitest/prefer-to-be': 'warn',
-        'vitest/prefer-to-contain': 'warn',
-        'vitest/prefer-to-have-length': 'warn',
+        'vitest/prefer-expect-assertions': 'off',
+        'vitest/max-expects': 'off',
+        'vitest/consistent-test-filename': 'off',
+        'vitest/prefer-to-be-truthy': 'off',
+        'vitest/prefer-to-be-falsy': 'off',
+        'vitest/no-hooks': 'off',
+        'vitest/prefer-lowercase-title': 'off',
+        'vitest/require-hook': 'off',
+        'vitest/prefer-snapshot-hint': 'off',
+        'vitest/no-disabled-tests': 'off',
+        'vitest/prefer-strict-equal': 'off',
+        'vitest/prefer-called-with': 'off',
+
+        'vitest/no-focused-tests': ['error', { fixable: false }],
       },
     },
   ],

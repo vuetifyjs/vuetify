@@ -76,7 +76,7 @@
     },
   })
 
-  const page = ref(1)
+  const page = shallowRef(1)
 
   const products = useProductsStore()
 

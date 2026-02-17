@@ -3,6 +3,7 @@
 
 @include tools.layer('components')
   .v-divider
+    color: inherit
     display: block
     flex: $divider-flex
     height: 0px
@@ -33,6 +34,12 @@
         margin-top: $divider-vertical-inset-margin-top
         max-height: $divider-vertical-inset-max-height
 
+    &--gradient
+      mask-image: $divider-gradient-mask
+
+      &.v-divider--vertical
+        mask-image: $divider-vertical-gradient-mask
+
   .v-divider__content
     padding: $divider-content-padding
     text-wrap: nowrap
@@ -45,9 +52,16 @@
     align-items: center
     justify-content: center
 
+
     &--vertical
       flex-direction: column
       height: 100%
 
       .v-divider
         margin: 0 auto
+
+    &--gradient
+      mask-image: $divider-gradient-mask
+
+      &.v-divider__wrapper--vertical
+        mask-image: $divider-vertical-gradient-mask

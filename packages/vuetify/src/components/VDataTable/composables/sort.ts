@@ -1,10 +1,10 @@
 // Composables
-import { useLocale } from '@/composables'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
-import { getObjectValueByPath, isEmpty, propsFactory } from '@/util'
+import { getObjectValueByPath, isEmpty, isObject, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -12,63 +12,111 @@ import type { DataTableCompareFunction, InternalDataTableHeader } from '../types
 import type { InternalItem } from '@/composables/filter'
 
 export const makeDataTableSortProps = propsFactory({
+  initialSortOrder: {
+    type: String as PropType<'asc' | 'desc'>,
+    default: 'asc',
+    validator: (v: any) => !v || ['asc', 'desc'].includes(v),
+  },
   sortBy: {
     type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
-  multiSort: Boolean,
+  multiSort: {
+    type: [Boolean, Object] as PropType<boolean | MultiSortProps>,
+    default: false,
+  },
   mustSort: Boolean,
 }, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
-  toggleSort: (column: InternalDataTableHeader) => void
+  toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
+export type MultiSortProps = {
+  key?: 'ctrl'
+  mode?: MultiSortMode
+  modifier?: 'alt' | 'shift'
+}
+
+export type MultiSortMode = 'append' | 'prepend'
 
 type SortProps = {
+  initialSortOrder: 'asc' | 'desc'
   sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
+  multiSort: boolean | MultiSortProps
   mustSort: boolean
-  multiSort: boolean
 }
 
 export function createSort (props: SortProps) {
+  const initialSortOrder = toRef(() => props.initialSortOrder)
   const sortBy = useProxiedModel(props, 'sortBy')
-  const mustSort = toRef(props, 'mustSort')
-  const multiSort = toRef(props, 'multiSort')
+  const mustSort = toRef(() => props.mustSort)
+  const multiSort = toRef(() => props.multiSort)
+  return { initialSortOrder, sortBy, multiSort, mustSort }
+}
 
-  return { sortBy, mustSort, multiSort }
+function resolveMultiSort (
+  multiSort: boolean | MultiSortProps,
+  event?: KeyboardEvent | PointerEvent
+): {
+    active: boolean
+    mode?: MultiSortMode
+  } {
+  if (!isObject(multiSort)) {
+    return { active: !!multiSort }
+  }
+
+  const { key, mode, modifier } = multiSort
+  const reverseMode = (modifier === 'alt' && event?.altKey) ||
+    (modifier === 'shift' && event?.shiftKey)
+
+  return {
+    active: !key || event?.ctrlKey || event?.metaKey || false,
+    mode: reverseMode ? (mode === 'append' ? 'prepend' : 'append') : mode,
+  }
 }
 
 export function provideSort (options: {
+  initialSortOrder: Ref<'asc' | 'desc'>
   sortBy: Ref<readonly SortItem[]>
+  multiSort: Ref<boolean | MultiSortProps>
   mustSort: Ref<boolean>
-  multiSort: Ref<boolean>
   page?: Ref<number>
 }) {
-  const { sortBy, mustSort, multiSort, page } = options
+  const { initialSortOrder, sortBy, mustSort, multiSort, page } = options
 
-  const toggleSort = (column: InternalDataTableHeader) => {
+  const toggleSort = (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => {
     if (column.key == null) return
 
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === column.key)
 
+    const initialOrder = initialSortOrder.value
+    const secondaryOrder = initialSortOrder.value === 'desc' ? 'asc' : 'desc'
     if (!item) {
-      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: 'asc' }]
-      else newSortBy = [{ key: column.key, order: 'asc' }]
-    } else if (item.order === 'desc') {
-      if (mustSort.value) {
-        item.order = 'asc'
+      const { active, mode } = resolveMultiSort(multiSort.value, event)
+      if (active) {
+        if (mode === 'prepend') {
+          newSortBy.unshift({ key: column.key, order: initialOrder })
+        } else {
+          newSortBy.push({ key: column.key, order: initialOrder })
+        }
+      } else {
+        newSortBy = [{ key: column.key, order: initialOrder }]
+      }
+    } else if (item.order === secondaryOrder) {
+      if (mustSort.value && newSortBy.length === 1) {
+        item.order = initialSortOrder.value
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)
       }
     } else {
-      item.order = 'desc'
+      item.order = secondaryOrder
     }
 
     sortBy.value = newSortBy
@@ -178,7 +226,8 @@ export function sortItems<T extends InternalItem> (
 
       // Dates should be compared numerically
       if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
+        sortA = sortA.getTime()
+        sortB = sortB.getTime()
       }
 
       [sortA, sortB] = [sortA, sortB].map(s => s != null ? s.toString().toLocaleLowerCase() : s)

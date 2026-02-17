@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": false,
@@ -13,13 +12,14 @@
     "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "target": "esnext",
     "types": [
       "vite/client",

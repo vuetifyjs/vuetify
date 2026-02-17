@@ -29,7 +29,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-subtitle-1** | font-size: 1rem;<br>font-weight: normal;<br>line-height: 1.75;<br>letter-spacing: 0.009375em; |
 | **text-subtitle-2** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 1.6;<br>letter-spacing: 0.0071428571em; |
 | **text-body-1** | font-size: 1rem;<br>font-weight: 400;<br>line-height: 1.5;<br>letter-spacing: 0.03125em; |
-| **text-body-2** | font-size: font-size: 0.875rem;<br>font-weight: 400;<br>line-height: 1.425;<br>letter-spacing: 0.0178571429em; |
+| **text-body-2** | font-size: 0.875rem;<br>font-weight: 400;<br>line-height: 1.425;<br>letter-spacing: 0.0178571429em; |
 | **text-button** | font-size: 0.875rem;<br>font-weight: 500;<br>line-height: 2.6;<br>letter-spacing: 0.0892857143em;<br>text-transform: uppercase; |
 | **text-caption** | font-size: 0.75rem;<br>font-weight: 400;<br>line-height: 1.667;<br>letter-spacing: 0.0333333333em; |
 | **text-overline** | font-size: 0.75rem;<br>font-weight: 500;<br>line-height: 2.667;<br>letter-spacing: 0.1666666667em;<br>text-transform: uppercase; |
@@ -39,6 +39,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-uppercase** | text-transform: uppercase; |
 | **text-lowercase** | text-transform: lowercase; |
 | **text-capitalize** | text-transform: capitalize; |
+| **text-none** | text-transform: none; |
 | **text-start** | text-align: start; |
 | **text-center** | text-align: center; |
 | **text-end** | text-align: end; |
@@ -47,6 +48,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-right** | text-align: right; |
 | **text-truncate** | overflow: hidden;<br>text-overflow: ellipsis;<br>white-space: nowrap; |
 | **text-no-wrap** | white-space: nowrap; |
+| **text-pre-wrap** | white-space: pre-wrap; |
 | **text-break** | overflow-wrap: break-word; |
 | **text-decoration-none** | text-decoration: none; |
 | **text-decoration-overline** | text-decoration: overline; |
@@ -54,6 +56,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-decoration-line-through** | text-decoration: line-through; |
 | **font-weight-black** | font-weight: 900; |
 | **font-weight-bold** | font-weight: 700; |
+| **font-weight-semibold** | font-weight: 600; |
 | **font-weight-medium** | font-weight: 500; |
 | **font-weight-regular** | font-weight: 400; |
 | **font-weight-light** | font-weight: 300; |
@@ -75,7 +78,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 
 <PromotedEntry />
 
-## Typography
+## Usage
 
 Control the size and style of text using the Typography helper classes. These values are based upon the [Material Design type specification](https://material.io/design/typography/the-type-system.html).
 
@@ -142,6 +145,44 @@ Longer content can be truncated with a text ellipsis using the `.text-truncate` 
 :::
 
 <ExamplesExample file="text-and-typography/text-truncate" />
+
+## Customizing Fonts
+
+By default, Vuetify uses **Roboto** as font family for regular text and headings. You can customize the font-family by overriding the following SASS variables:
+
+- `$body-font-family` — Used for body text and most components
+- `$heading-font-family` — Used for headings. (defaults to `$body-font-family`)
+
+### Loading Custom Fonts
+
+Before configuring Vuetify, ensure your chosen font is available in your application. There are several ways to load fonts:
+
+- **Fonts from CDN** — Add an `@import` in your CSS or a `<link>` tag in your HTML
+- **Local font files** — Use `@font-face` declarations
+- **NPM packages** — Install packages like `@fontsource/open-sans`
+
+### Configuring Vuetify
+
+Ensure you have [SASS Variables](/features/sass-variables) configured in your project, then set the font-family variables:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'sass:string';
+@use 'vuetify/settings' with (
+  $body-font-family: string.unquote('"Open Sans", sans-serif'),
+  $heading-font-family: string.unquote('"Montserrat", sans-serif')
+);
+```
+
+### Using CSS Variables
+
+You can use CSS custom properties for font-family values, allowing runtime changes or integration with theming systems:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $body-font-family: var(--font-sans)
+  // $heading-font-family inherits the same font in this example
+);
+```
 
 ## RTL Alignment
 

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Pull To Refresh
   description: The PullToRefresh allows users to update content with a simple downward swipe on their screen.
@@ -24,7 +23,7 @@ This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
 
 ## Installation
 
-Labs components require a manual import and installation of the component.
+Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { VPullToRefresh } from 'vuetify/labs/VPullToRefresh'

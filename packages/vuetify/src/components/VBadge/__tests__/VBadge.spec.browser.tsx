@@ -3,7 +3,7 @@ import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { generate, gridOn, render, screen } from '@test'
+import { gridOn, render, screen, showcase } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 const location = ['bottom start', 'bottom end', 'top start', 'top end']
@@ -54,7 +54,7 @@ describe('VBadge', () => {
   describe('label', () => {
     it('should have the designated aria label', async () => {
       render(<VBadge label="label-badge">label</VBadge>)
-      expect(await screen.findByLabelText('label-badge')).toBeDefined()
+      await expect(screen.findByLabelText('label-badge')).resolves.toBeDefined()
     })
   })
 
@@ -73,7 +73,5 @@ describe('VBadge', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories, props, component: VBadge })
-  })
+  showcase({ stories, props, component: VBadge })
 })

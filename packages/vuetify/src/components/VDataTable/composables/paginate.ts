@@ -7,7 +7,7 @@ import { clamp, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import type { Group } from './group'
+import type { Group, GroupSummary } from './group'
 import type { EventProp } from '@/util'
 
 export const makeDataTablePaginateProps = propsFactory({
@@ -43,8 +43,8 @@ type PaginationProps = {
 }
 
 export function createPagination (props: PaginationProps) {
-  const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
-  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
+  const page = useProxiedModel(props, 'page', undefined, value => Number(value ?? 1))
+  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => Number(value ?? 10))
 
   return { page, itemsPerPage }
 }
@@ -113,7 +113,7 @@ export function usePagination () {
 }
 
 export function usePaginatedItems <T> (options: {
-  items: Ref<readonly (T | Group<T>)[]>
+  items: Ref<readonly (T | Group<T> | GroupSummary<T>)[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>

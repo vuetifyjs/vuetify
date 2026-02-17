@@ -36,7 +36,7 @@ describe('VDataIterator', () => {
 
     const listItems = screen.getAllByRole('listitem')
     expect(listItems).toHaveLength(5)
-    expect.element(listItems[0]).toContain('Frozen Yogurt - 159 calories')
-    expect.element(listItems[4]).toContain('Gingerbread - 356 calories')
+    await expect.element(listItems[0]).toHaveTextContent('Frozen Yogurt - 159 calories')
+    await expect.element(listItems[4]).toHaveTextContent('Gingerbread - 356 calories')
   })
 })

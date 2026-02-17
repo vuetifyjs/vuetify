@@ -37,7 +37,7 @@ describe('VDataTableVirtual', () => {
 
     const rows = screen.getAllByRole('row')
     expect(rows.length).toBeLessThan(items.length)
-    expect.element(rows[0]).not.toHaveStyle({ height: '0px' })
-    expect.element(rows[rows.length - 1]).toHaveStyle({ height: '0px' })
+    await expect.element(rows[0]).not.toHaveStyle({ height: '0px' })
+    await expect.element(rows[rows.length - 1]).toHaveStyle({ height: '0px' })
   })
 })

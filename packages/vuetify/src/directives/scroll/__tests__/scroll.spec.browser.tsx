@@ -1,5 +1,5 @@
 // Directives
-import Scroll from '../'
+import vScroll from '../'
 
 // Utilities
 import { render, scroll } from '@test'
@@ -9,7 +9,7 @@ describe('v-scroll', () => {
   function setup (selector = '') {
     const callback = vi.fn()
     const result = render(defineComponent({
-      directives: { Scroll },
+      directives: { vScroll },
       setup () {
         return () => (
           <div data-testid="root" style="overflow: auto; height: 500px; margin-block: 500px">
@@ -29,7 +29,7 @@ describe('v-scroll', () => {
     const { callback, root } = setup()
 
     await scroll({ top: 100 })
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
 
     callback.mockClear()
     await scroll({ top: 100 }, root)
@@ -40,7 +40,7 @@ describe('v-scroll', () => {
     const { callback, root } = setup('[data-testid="root"]')
 
     await scroll({ top: 100 }, root)
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
 
     callback.mockClear()
     await scroll({ top: 100 })

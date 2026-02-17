@@ -23,20 +23,21 @@ Being a component framework, Vuetify will always grow horizontally. Depending on
 
 Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle. Vuetify comes with plugins for both [Webpack](https://webpack.js.org/) and [vite](https://vitejs.dev/) that enable automatic treeshaking.
 
-Install [`webpack-plugin-vuetify`](https://www.npmjs.com/package/webpack-plugin-vuetify) or [`vite-plugin-vuetify`](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
+Install [webpack-plugin-vuetify](https://www.npmjs.com/package/webpack-plugin-vuetify) or [vite-plugin-vuetify](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 
 ::: tabs
 
 ```js [Vite] { resource="vite.config.js" }
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
-export default {
+export default defineConfig({
   plugins: [
     vue(),
     vuetify(),
   ],
-}
+})
 ```
 
 ```js [Webpack] { resource="webpack.config.js" }
@@ -62,19 +63,18 @@ module.exports = {
 ```
 
 ::: tab Nuxt
-<p class="ma-4">Nuxt also uses the vite plugin but needs some extra configuration to load it in the correct order:</p>
+<p class="ma-4">Nuxt also uses the vite plugin:</p>
 
 ```js { resource="nuxt.config.js" }
 import vuetify from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  modules: [
-    async (options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
-        vuetify()
-      ))
-    },
-  ],
+  //...
+  vite: {
+    plugins: [
+      vuetify(),
+    ]
+  },
 })
 ```
 
@@ -167,11 +167,11 @@ export default new Vuetify(opts)
 ```
 -->
 
-Dynamic components using `<component>` can be registered locally:
+Dynamic components using `<component>` can just be imported in setup components:
 
 ```html { resource="Component.vue" }
 <template>
-  <component :is="button ? 'v-btn' : 'v-chip'" />
+  <component :is="button ? VBtn : VChip" />
 </template>
 
 <script setup>
@@ -180,6 +180,24 @@ Dynamic components using `<component>` can be registered locally:
   import { shallowRef } from 'vue'
 
   const button = shallowRef(false)
+</script>
+```
+
+Or registered locally in options components:
+
+```html { resource="Component.vue" }
+<template>
+  <component :is="button ? 'v-btn' : 'v-chip'" />
+</template>
+
+<script>
+  import { VBtn } from 'vuetify/components/VBtn'
+  import { VChip } from 'vuetify/components/VChip'
+
+  export default {
+    components: { VBtn, VChip },
+    data: () => ({ button: false }),
+  }
 </script>
 ```
 

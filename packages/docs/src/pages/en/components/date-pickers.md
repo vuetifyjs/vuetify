@@ -18,15 +18,9 @@ features:
 
 `v-date-picker` is a fully featured date selection component that lets users select a date.
 
-![Date picker Entry](https://cdn.vuetifyjs.com/docs/images/components/v-date-picker/v-date-picker-entry.png)
-
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.4.0 (Blackguard)](/getting-started/release-notes/?version=v3.4.0)
-
-:::
+<DocIntroduced version="3.4.0" />
 
 ## Usage
 
@@ -93,6 +87,26 @@ Date picker colors can be set using the **color** props.
 Specify allowed dates using objects or functions. When using objects, accepts a date string in the format of YYYY-MM-DD. When using functions, accepts a date object as a parameter and should return a boolean.
 
 <ExamplesExample file="v-date-picker/prop-allowed-dates" />
+
+#### Landscape
+
+Using `landscape` moves header to the side. You can customize it further using custom width and date format.
+
+<ExamplesExample file="v-date-picker/prop-landscape" />
+
+#### Date events
+
+You can specify events using arrays, objects or functions. To change the default color of the event use **event-color** prop. Your **events** function or object can return an array of colors (material or css) in case you want to display multiple event indicators.
+
+<ExamplesExample file="v-date-picker/prop-events" />
+
+### Slots
+
+#### Controls
+
+Replace main controls to adapt behavior and/or visual appearance beyond CSS styling.
+
+<ExamplesExample file="v-date-picker/slots-controls" />
 
 ### Internationalization
 

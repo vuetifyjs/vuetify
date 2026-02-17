@@ -1,22 +1,22 @@
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 import dts from 'rollup-plugin-dts'
 import fg from 'fast-glob'
 import mm from 'micromatch'
 import MagicString from 'magic-string'
+import { codeTransform } from './types-code-transform.js'
 
 import importMap from '../dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from '../dist/json/importMap-labs.json' with { type: 'json' }
 
-export function codeTransform (code) {
-  return code
-    // ignore missing vue-router
-    .replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
-    // tsc adds extra export statements to namespaces that break module augmentation
-    .replaceAll(/^\s*export \{\s*\};?$/gm, '')
-}
-
+/**
+ * @param input {string}
+ * @param output {string}
+ * @param renderChunk {import("rollup").RenderChunkHook | undefined}
+ * @param filter {(files: string[]) => string[] | undefined}
+ * @returns {import("rollup").RollupOptions[]}
+ */
 function createTypesConfig (input, output, renderChunk, filter) {
   input = 'lib/' + input
   let files = fg.sync(input)
@@ -25,7 +25,8 @@ function createTypesConfig (input, output, renderChunk, filter) {
 
   return files.map(file => {
     const outputFile = output.replace('*', mm.capture(input, file)[0])
-    return {
+    /** @type {import("rollup").RollupOptions} */
+    const options = {
       input: file,
       output: [{ file: outputFile, format: 'es', sourcemap: false }],
       plugins: [
@@ -51,9 +52,14 @@ function createTypesConfig (input, output, renderChunk, filter) {
         },
       ],
     }
+    return options
   })
 }
 
+/**
+ * @param useImport {boolean|undefined}
+ * @returns {Promise<string>}
+ */
 async function getShims (useImport) {
   let components
   if (useImport) {
@@ -70,12 +76,18 @@ async function getShims (useImport) {
       .map(name => `    ${name}: ${name}`).join('\n')
   }
 
+  const directives = importMap.directives.map(name => (
+    `    v${name}: typeof import('vuetify/directives')['${name}']`
+  )).join('\n')
+
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
     .replaceAll(/^\s*\/\/ @skip-build\s[\s\S]*?\s$/gm, '')
     .replace(/^\s*\/\/ @generate-components$/gm, components)
+    .replace(/^\s*\/\/ @generate-directives$/gm, directives)
 }
 
-export default [
+/** @type {import("rollup").RollupOptions[]} */
+const options = [
   createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts', async code => {
     code.replaceAll(/type index_d\$1_V(\w+) = V(\w+);/gm, 'declare const index_d$$1_V$1: typeof V$2;')
     code.append('\n\n')
@@ -91,3 +103,5 @@ export default [
     code.append(await getShims(true))
   }),
 ].flat()
+
+export default options

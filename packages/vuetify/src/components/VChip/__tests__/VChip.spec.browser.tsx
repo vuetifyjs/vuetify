@@ -19,8 +19,8 @@ describe('VChip', () => {
     ))
 
     await userEvent.click(screen.getByTestId('close-chip'))
-    expect(close).toHaveBeenCalled()
-    expect(update).toHaveBeenCalled()
+    expect(close).toHaveBeenCalledTimes(1)
+    expect(update).toHaveBeenCalledTimes(1)
   })
 
   it('should have aria-label', async () => {

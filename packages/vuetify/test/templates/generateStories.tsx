@@ -1,12 +1,14 @@
+/// <reference types="@vizzly-testing/vitest" />
+
 /**
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
 import type { FunctionalComponent } from 'vue'
-import type { JSXComponent } from '@/composables'
-import { it } from 'vitest'
-import { commands, page } from '@vitest/browser/context'
-import { render } from '@test'
+import type { JSXComponent } from '@/util'
+import { describe, expect, it } from 'vitest'
+import { page } from 'vitest/browser'
+import { render, waitIdle } from '@test'
 
 type Stories = Record<string, JSX.Element>
 type Props = Record<string, boolean | any[]>
@@ -99,7 +101,7 @@ export const makeExamplesFromProps = (props: Props, Component: JSXComponent): Ex
  * @param configuration
  * @returns
  */
-export const generate = ({ props, stories, component }: GenerateConfiguration) => {
+export const showcase = ({ props, stories, component }: GenerateConfiguration) => {
   let exampleStories: Example[]
   let exampleProps: Example[]
   if (stories) {
@@ -111,35 +113,62 @@ export const generate = ({ props, stories, component }: GenerateConfiguration) =
     exampleProps = makeExamplesFromProps(props, component)
   }
 
-  return it('renders everything', async () => {
-    await page.viewport(1280, 825)
+  // Save time by only rendering variants if we're taking screenshots
+  const matrix = (globalThis as any).__VIZZLY_SERVER_URL__
+    ? [
+      ['light', 'mobile'],
+      ['light', 'desktop'],
+      ['dark', 'mobile'],
+      ['dark', 'desktop'],
+    ] as const
+    : [['light', 'desktop']] as const
 
-    render(() => (
-      <>
-        { exampleStories && (
-          <>
-            <h2 class="mx-4 mt-10 mb-4">Stories</h2>
-            { exampleStories.map(s => s.mount()) }
-          </>
-        )}
-        { exampleProps && (
-          <>
-            <h2 class="mx-4 mt-10 mb-4">Props</h2>
-            { exampleProps.map(s => s.mount()) }
-          </>
-        )}
-      </>
-    ))
+  return describe('Showcase', () => {
+    it.each(matrix)('%s %s', async (theme, device) => {
+      const style = document.createElement('style')
+      style.innerHTML = `
+        *, *::before, *::after {
+          animation-duration: 0s !important;
+          animation-delay: 0s !important;
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+        }`
+      document.head.append(style)
 
-    let suite = (globalThis as any).__vitest_worker__.current
-    let name = ''
-    while (suite) {
-      name = suite.name + ' ' + name
-      suite = suite.suite
-    }
+      render(() => (
+        <>
+          { exampleStories && (
+            <>
+              <h2 class="mx-4 mt-10 mb-4">Stories</h2>
+              { exampleStories.map(s => s.mount()) }
+            </>
+          )}
+          { exampleProps && (
+            <>
+              <h2 class="mx-4 mt-10 mb-4">Props</h2>
+              { exampleProps.map(s => s.mount()) }
+            </>
+          )}
+        </>
+      ), null, {
+        theme: {
+          defaultTheme: theme,
+        },
+      })
 
-    await commands.percySnapshot(name.trim())
-    await page.screenshot()
+      let suite = (globalThis as any).__vitest_worker__.current.suite.suite
+      let name = ''
+      while (suite) {
+        name = suite.name + ' ' + name
+        suite = suite.suite
+      }
+
+      await page.viewport({ mobile: 600, desktop: 1280 }[device], document.body.scrollHeight)
+      await waitIdle()
+      await expect.soft(page).toMatchScreenshot(name.trim(), {
+        properties: { device, theme },
+      })
+    })
   })
 }
 

@@ -13,11 +13,12 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
@@ -62,7 +63,13 @@ export const makeVExpansionPanelsProps = propsFactory({
   },
 }, 'VExpansionPanels')
 
-export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
+export const VExpansionPanels = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VExpansionPanelSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VExpansionPanels',
 
   props: makeVExpansionPanelsProps(),
@@ -76,22 +83,22 @@ export const VExpansionPanels = genericComponent<VExpansionPanelSlots>()({
 
     const { themeClasses } = provideTheme(props)
 
-    const variantClass = computed(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
+    const variantClass = toRef(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
     provideDefaults({
       VExpansionPanel: {
-        bgColor: toRef(props, 'bgColor'),
-        collapseIcon: toRef(props, 'collapseIcon'),
-        color: toRef(props, 'color'),
-        eager: toRef(props, 'eager'),
-        elevation: toRef(props, 'elevation'),
-        expandIcon: toRef(props, 'expandIcon'),
-        focusable: toRef(props, 'focusable'),
-        hideActions: toRef(props, 'hideActions'),
-        readonly: toRef(props, 'readonly'),
-        ripple: toRef(props, 'ripple'),
-        rounded: toRef(props, 'rounded'),
-        static: toRef(props, 'static'),
+        bgColor: toRef(() => props.bgColor),
+        collapseIcon: toRef(() => props.collapseIcon),
+        color: toRef(() => props.color),
+        eager: toRef(() => props.eager),
+        elevation: toRef(() => props.elevation),
+        expandIcon: toRef(() => props.expandIcon),
+        focusable: toRef(() => props.focusable),
+        hideActions: toRef(() => props.hideActions),
+        readonly: toRef(() => props.readonly),
+        ripple: toRef(() => props.ripple),
+        rounded: toRef(() => props.rounded),
+        static: toRef(() => props.static),
       },
     })
 

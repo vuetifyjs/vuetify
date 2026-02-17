@@ -9,6 +9,7 @@
     align-items: center
     display: inline-flex
     justify-content: center
+    overflow: hidden
     position: relative
     vertical-align: middle
 
@@ -37,6 +38,12 @@
     stroke: currentColor
     transition: $progress-circular-overlay-transition
     z-index: 2
+
+  .v-progress-circular--revealing
+    --progress-reveal-duration: $progress-circular-reveal-duration
+
+    .v-progress-circular__overlay
+      transition-duration: var(--progress-reveal-duration), 0s
 
   // Modifiers
   .v-progress-circular

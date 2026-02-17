@@ -5,7 +5,6 @@
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
     "month": "Sets the month.",
-    "weekdays": "Sets the weekdays of the month.",
     "year": "Sets the year.",
     "multiple": "Sets the multiple of the month.",
     "showAdjacentMonths": "Show adjacent months.",
@@ -17,5 +16,9 @@
     "update:month": "Fired when the month changes.",
     "update:year": "Fired when the year changes.",
     "day": "Fired when a day is clicked."
+  },
+  "slots": {
+    "year": "Slot for the year.",
+    "day": "Slot for a day in the month."
   }
 }

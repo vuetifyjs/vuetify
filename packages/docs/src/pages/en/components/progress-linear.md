@@ -48,6 +48,12 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 <ExamplesExample file="v-progress-linear/prop-buffer-value" />
 
+#### Chunks
+
+The component can be split into chunks using `chunk-count` or `chunk-width`. Visible progress is snapped to the last filled chunk.
+
+<ExamplesExample file="v-progress-linear/prop-chunks" />
+
 #### Colors
 
 You can set the colors of the progress bar using the props **color** and **bg-color**.
@@ -118,11 +124,7 @@ Using the **absolute** prop we are able to position the `v-progress-linear` comp
 
 #### Buffer color and opacity
 
-::: success
-
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 The buffer color and opacity can be controlled using the **buffer-color** and **buffer-opacity** props. This enables you to make multi colored progress bars.
 

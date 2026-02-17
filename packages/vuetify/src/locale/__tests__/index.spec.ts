@@ -1,6 +1,7 @@
 // Utilities
-import fs from 'fs'
-import path from 'path'
+import { unfill } from '@test'
+import fs from 'node:fs'
+import path from 'node:path'
 import * as locales from '../'
 
 describe('locales', () => {
@@ -15,12 +16,11 @@ describe('locales', () => {
   })
 
   it('should have same structure for all translations', () => {
-    const unfill = (o: Record<string, any>) => Object.keys(o).reduce((result, key) => {
-      result[key] = typeof o[key] === 'object' ? unfill(o[key]) : typeof o[key]
-      return result
-    }, {} as Record<string, any>)
+    /** replace all values of deeply nested objects with their types */
     const enUnfilled = unfill(locales.en)
 
-    Object.entries(locales).forEach(([locale, messages]) => locale !== 'default' && expect(unfill(messages)).toStrictEqual(enUnfilled))
+    for (const [locale, messages] of Object.entries(locales)) {
+      expect({ [locale]: unfill(messages) }).toStrictEqual(expect.objectContaining({ [locale]: enUnfilled }))
+    }
   })
 })

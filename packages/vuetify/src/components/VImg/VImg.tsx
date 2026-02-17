@@ -11,7 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -64,6 +64,7 @@ export const makeVImgProps = propsFactory({
   },
   eager: Boolean,
   gradient: String,
+  imageClass: null,
   lazySrc: String,
   options: {
     type: Object as PropType<IntersectionObserverInit>,
@@ -103,7 +104,7 @@ export const makeVImgProps = propsFactory({
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
-  directives: { intersect },
+  directives: { vIntersect },
 
   props: makeVImgProps(),
 
@@ -114,7 +115,7 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 
@@ -244,7 +245,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))
@@ -254,7 +255,7 @@ export const VImg = genericComponent<VImgSlots>()({
 
       const img = (
         <img
-          class={['v-img__img', containClasses.value]}
+          class={['v-img__img', containClasses.value, props.imageClass]}
           style={{ objectPosition: props.position }}
           crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
@@ -355,6 +356,7 @@ export const VImg = genericComponent<VImgSlots>()({
             {
               'v-img--absolute': props.absolute,
               'v-img--booting': !isBooted.value,
+              'v-img--fit-content': props.width === 'fit-content',
             },
             backgroundColorClasses.value,
             roundedClasses.value,

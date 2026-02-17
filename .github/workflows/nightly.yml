@@ -1,0 +1,122 @@
+name: Nightly Release
+on:
+  schedule:
+    - cron: '0 12 * * *' # 1200 UTC
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull Request number'
+        required: false
+        type: string
+
+jobs:
+  nightly-schedule:
+    runs-on: ubuntu-24.04
+    if: ${{ github.event_name == 'schedule' && github.repository_owner == 'vuetifyjs' }}
+    environment: preview
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        branch: [ 'master', 'dev', 'next', 'v2-stable', 'v2-dev' ]
+        include:
+          - branch: 'master'
+            tag: 'latest'
+          - branch: 'dev'
+            tag: 'dev'
+          - branch: 'next'
+            tag: 'next'
+          - branch: 'v2-stable'
+            tag: 'v2-stable'
+          - branch: 'v2-dev'
+            tag: 'v2-dev'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 0
+      - run: |
+          last=$(git show -s --format=%ct HEAD)
+          now=$(date +%s)
+          diff=$(($now - $last))
+          if [ $diff -gt 86400 ]; then
+              echo "Last commit was more than 24 hours ago, skipping release"
+              exit 1
+          fi
+      - run: echo "RELEASE_ID=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - uses: ./.github/actions/nightly-release
+        with:
+          checkout-repo: ${{ github.repository }}
+          checkout-ref: ${{ matrix.branch }}
+          release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
+          npm-tag: ${{ matrix.tag }}
+      - uses: actions/checkout@v4
+
+  nightly-pr:
+    runs-on: ubuntu-24.04
+    if: ${{ github.event_name == 'workflow_dispatch' && github.repository_owner == 'vuetifyjs' }}
+    environment: preview
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.inputs.pr }}
+            })
+            core.exportVariable('CHECKOUT_REPO', pr.data.head.repo.full_name)
+            core.exportVariable('CHECKOUT_REF', pr.data.head.ref)
+            core.exportVariable('SHORT_SHA', pr.data.head.sha.slice(0, 7))
+      - id: nightly-release
+        uses: ./.github/actions/nightly-release
+        with:
+          checkout-repo: ${{ env.CHECKOUT_REPO }}
+          checkout-ref: ${{ env.CHECKOUT_REF }}
+          release-id: pr-${{ github.event.inputs.pr }}.${{ env.SHORT_SHA }}
+          npm-tag: pr
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fullVersion = process.env.FULL_VERSION
+            const pr = await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ github.event.inputs.pr }},
+              body: `:rocket: Nightly release published to [@vuetify/nightly@${fullVersion}](https://www.npmjs.com/package/@vuetify/nightly/v/${fullVersion}).`
+            })
+        env:
+          FULL_VERSION: ${{ steps.nightly-release.outputs.full-version }}
+
+  vizzly:
+    name: Visual regression tests
+    runs-on: ubuntu-24.04
+    if: ${{ github.event_name == 'schedule' && github.repository_owner == 'vuetifyjs' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      - run: |
+          last=$(git show -s --format=%ct HEAD)
+          now=$(date +%s)
+          diff=$(($now - $last))
+          if [ $diff -gt 86400 ]; then
+              echo "Last commit was more than 24 hours ago, skipping tests"
+              exit 1
+          fi
+      - uses: vuetifyjs/setup-action@master
+      - run: pnpm exec playwright install chromium
+      - run: pnpm vizzly run "pnpm test:browser"
+        working-directory: ./packages/vuetify
+        env:
+          VIZZLY_TOKEN: ${{ secrets.VIZZLY_TOKEN }}
+          TEST_TDD_ONLY: 1

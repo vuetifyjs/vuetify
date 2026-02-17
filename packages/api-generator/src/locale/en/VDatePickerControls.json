@@ -1,7 +1,10 @@
 {
   "props": {
+    "controlHeight": "Sets the height of the controls.",
+    "controlVariant": "- **docked:** Separate control groups for month and year.\n- **modal:** Month and year are displayed together, clicking the text opens a month picker, clicking the dropdown arrow opens a year picker. There are also arrow buttons to scroll between months.",
     "modeIcon": "Icon used for the mode button.",
     "nextIcon": "Icon used for the next button.",
+    "noMonthPicker": "Only applies to `controlVariant=\"modal\"`, the month and year picker buttons are combined into one that only opens the year picker.",
     "prevIcon": "Icon used for the previous button.",
     "viewMode": "Sets the view mode of the date picker."
   },

@@ -16,7 +16,7 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify slug="vuetify-snips" />
+<PromotedEntry slug="vuetify-snips" />
 
 ## What is Vuetify?
 
@@ -27,8 +27,6 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" class="mb-4" />
-
 The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
@@ -37,7 +35,7 @@ Vuetify is a powerful Vue Component Framework built from the ground up to be eas
 
 ### It's free { id="its-free" }
 
-Vuetify is an Open Source project available for free under the [MIT licensed](http://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
+Vuetify is an Open Source project available for free under the [MIT licensed](https://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
 
 ### Flexible components
 
@@ -101,5 +99,6 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
 | [Blueprints](/features/blueprints/) | Advanced | 10 min |
 | [Treeshaking](/features/treeshaking/) | Advanced | 15 min |
+| [Hotkeys](/features/hotkey/) | Advanced | 10 min |
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).

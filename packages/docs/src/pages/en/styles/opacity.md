@@ -4,7 +4,7 @@ meta:
   description: Use opacity utilities to quickly style the opacity of any element.
   keywords: opacity classes, opacity utilities, vuetify opacity helper classes
 related:
-  - /styles/opacity-radius/
+  - /styles/border-radius/
   - /styles/display/
   - /styles/content/
 features:
@@ -17,11 +17,7 @@ Utilities for controlling the opacity of elements in your application.
 
 <PageFeatures />
 
-::: success
-
-This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/?version=v3.6.0)
-
-:::
+<DocIntroduced version="3.6.0" />
 
 | Class | Properties |
 | - | - |

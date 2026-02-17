@@ -27,6 +27,18 @@ export const md2: Blueprint = {
     VCombobox: {
       variant: 'filled',
     },
+    VDatePicker: {
+      color: 'primary',
+      controlHeight: 56,
+      elevation: 2,
+      rounded: 'md',
+      controlVariant: 'modal',
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
+    },
     VSelect: {
       variant: 'filled',
     },

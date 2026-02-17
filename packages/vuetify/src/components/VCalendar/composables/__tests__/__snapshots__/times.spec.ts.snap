@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`times.ts should parse timestamp 1`] = `
+Object {
+  "date": "2019-02-08",
+  "day": 8,
+  "future": false,
+  "hasDay": true,
+  "hasTime": false,
+  "hour": 0,
+  "minute": 0,
+  "month": 2,
+  "past": false,
+  "present": false,
+  "time": "",
+  "weekday": 5,
+  "year": 2019,
+}
+`;

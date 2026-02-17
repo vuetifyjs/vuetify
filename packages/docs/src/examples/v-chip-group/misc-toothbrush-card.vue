@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-card-title>
+    <v-card-title class="d-flex">
       <h2 class="text-h4">Toothbrush</h2>
 
       <v-spacer></v-spacer>
@@ -23,13 +23,14 @@
 
       <v-chip-group
         v-model="selection"
-        variant="flat"
+        selected-class="v-chip--selected v-chip--variant-flat"
+        variant="outlined"
         mandatory
       >
-        <v-chip text="Extra Soft" border></v-chip>
-        <v-chip text="Soft" border></v-chip>
-        <v-chip text="Medium" border></v-chip>
-        <v-chip text="Hard" border></v-chip>
+        <v-chip text="Extra Soft"></v-chip>
+        <v-chip text="Soft"></v-chip>
+        <v-chip text="Medium"></v-chip>
+        <v-chip text="Hard"></v-chip>
       </v-chip-group>
     </v-card-text>
 
@@ -57,3 +58,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2226-48225&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

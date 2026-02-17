@@ -13,7 +13,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -50,7 +50,7 @@ export const makeVCarouselProps = propsFactory({
   }),
 }, 'VCarousel')
 
-type VCarouselSlots = VWindowSlots & {
+type VCarouselSlots = Omit<VWindowSlots, 'additional'> & {
   item: {
     props: Record<string, any>
     item: {
@@ -94,12 +94,35 @@ export const VCarousel = genericComponent<new <T>(
     function startTimeout () {
       if (!props.cycle || !windowRef.value) return
 
-      slideTimeout = window.setTimeout(windowRef.value.group.next, +props.interval > 0 ? +props.interval : 6000)
+      slideTimeout = window.setTimeout(
+        windowRef.value.group.next,
+        Number(props.interval) > 0 ? Number(props.interval) : 6000
+      )
     }
 
     function restartTimeout () {
       window.clearTimeout(slideTimeout)
       window.requestAnimationFrame(startTimeout)
+    }
+
+    function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
+        group.prev()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
+      }
+
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
+        group.next()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
+      }
     }
 
     useRender(() => {
@@ -156,6 +179,7 @@ export const VCarousel = genericComponent<new <T>(
                               group.isSelected(item.id) && 'v-btn--active',
                             ],
                             onClick: () => group.select(item.id, true),
+                            onKeydown: (e: KeyboardEvent) => onDelimiterKeyDown(e, group),
                           }
 
                           return slots.item
@@ -169,6 +193,7 @@ export const VCarousel = genericComponent<new <T>(
 
                 { props.progress && (
                   <VProgressLinear
+                    absolute
                     class="v-carousel__progress"
                     color={ typeof props.progress === 'string' ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }

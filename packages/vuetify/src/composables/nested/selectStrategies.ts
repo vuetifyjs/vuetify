@@ -2,31 +2,33 @@
 // Utilities
 import { toRaw } from 'vue'
 
-export type SelectStrategyFn = (data: {
+type SelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
   children: Map<unknown, unknown[]>
   parents: Map<unknown, unknown>
+  disabled: Set<unknown>
   event?: Event
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformInFn = (
+type SelectStrategyTransformInFunction = (
   v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
+  disabled: Set<unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
-export type SelectStrategyTransformOutFn = (
+type SelectStrategyTransformOutFunction = (
   v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => unknown[]
 
 export type SelectStrategy = {
-  select: SelectStrategyFn
-  in: SelectStrategyTransformInFn
-  out: SelectStrategyTransformOutFn
+  select: SelectStrategyFunction
+  in: SelectStrategyTransformInFunction
+  out: SelectStrategyTransformOutFunction
 }
 
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
@@ -49,16 +51,17 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
 
       return selected
     },
-    in: (v, children, parents) => {
-      let map = new Map()
+    in: (v, children, parents, disabled) => {
+      const map = new Map()
 
       for (const id of (v || [])) {
-        map = strategy.select({
+        strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
+          disabled,
         })
       }
 
@@ -87,14 +90,12 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
       const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
-    in: (v, children, parents) => {
-      let map = new Map()
-
+    in: (v, children, parents, disabled) => {
       if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
+        return parentStrategy.in(v.slice(0, 1), children, parents, disabled)
       }
 
-      return map
+      return new Map()
     },
     out: (v, children, parents) => {
       return parentStrategy.out(v, children, parents)
@@ -140,7 +141,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 
 export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
-    select: ({ id, value, selected, children, parents }) => {
+    select: ({ id, value, selected, children, parents, disabled }) => {
       id = toRaw(id)
       const original = new Map(selected)
 
@@ -149,7 +150,9 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       while (items.length) {
         const item = items.shift()!
 
-        selected.set(toRaw(item), value ? 'on' : 'off')
+        if (!disabled.has(item)) {
+          selected.set(toRaw(item), value ? 'on' : 'off')
+        }
 
         if (children.has(item)) {
           items.push(...children.get(item)!)
@@ -159,9 +162,17 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       let parent = toRaw(parents.get(id))
 
       while (parent) {
-        const childrenIds = children.get(parent)!
-        const everySelected = childrenIds.every(cid => selected.get(toRaw(cid)) === 'on')
-        const noneSelected = childrenIds.every(cid => !selected.has(toRaw(cid)) || selected.get(toRaw(cid)) === 'off')
+        let everySelected = true
+        let noneSelected = true
+
+        for (const child of children.get(parent)!) {
+          const cid = toRaw(child)
+
+          if (disabled.has(cid)) continue
+          if (selected.get(cid) !== 'on') everySelected = false
+          if (selected.has(cid) && selected.get(cid) !== 'off') noneSelected = false
+          if (!everySelected && !noneSelected) break
+        }
 
         selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
 
@@ -188,9 +199,10 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
         map = strategy.select({
           id,
           value: true,
-          selected: new Map(map),
+          selected: map,
           children,
           parents,
+          disabled: new Set<unknown>(),
         })
       }
 
@@ -225,6 +237,44 @@ export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
             const parent = parents.get(key)
             if (v.get(parent) === 'on') continue
           }
+          arr.push(key)
+        }
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
+
+export const branchSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: (v, children, parents, disabled) => {
+      let map = new Map()
+
+      for (const id of (v || [])) {
+        if (children.has(id)) continue
+        map = strategy.select({
+          id,
+          value: true,
+          selected: map,
+          children,
+          parents,
+          disabled,
+        })
+      }
+
+      return map
+    },
+    out: v => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on' || value === 'indeterminate') {
           arr.push(key)
         }
       }

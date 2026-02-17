@@ -31,7 +31,7 @@
       <v-main>
         <div class="pt-4 pb-16">
           <v-window v-model="tabs">
-            <v-window-item class="pa-2" value="0">
+            <v-window-item :value="0" class="pa-2">
               <v-card>
                 <v-empty-state
                   class="pa-0"
@@ -65,7 +65,7 @@
               </v-card>
             </v-window-item>
 
-            <v-window-item class="pa-2" value="0">
+            <v-window-item :value="1" class="pa-2">
               <v-card>
                 <v-empty-state
                   class="pa-0"

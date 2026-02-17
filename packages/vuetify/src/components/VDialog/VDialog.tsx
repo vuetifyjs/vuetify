@@ -13,27 +13,24 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { mergeProps, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { mergeProps, nextTick, ref, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
   fullscreen: Boolean,
-  retainFocus: {
-    type: Boolean,
-    default: true,
-  },
   scrollable: Boolean,
 
-  ...makeVOverlayProps({
+  ...omit(makeVOverlayProps({
+    captureFocus: true,
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition as Component },
+    transition: { component: VDialogTransition },
     zIndex: 2400,
-  }),
+    retainFocus: true,
+  }), ['disableInitialFocus']),
 }, 'VDialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
@@ -52,50 +49,14 @@ export const VDialog = genericComponent<OverlaySlots>()({
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
-    function onFocusin (e: FocusEvent) {
-      const before = e.relatedTarget as HTMLElement | null
-      const after = e.target as HTMLElement | null
-
-      if (
-        before !== after &&
-        overlay.value?.contentEl &&
-        // We're the topmost dialog
-        overlay.value?.globalTop &&
-        // It isn't the document or the dialog body
-        ![document, overlay.value.contentEl].includes(after!) &&
-        // It isn't inside the dialog body
-        !overlay.value.contentEl.contains(after)
-      ) {
-        const focusable = focusableChildren(overlay.value.contentEl)
-
-        if (!focusable.length) return
-
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
-
-        if (before === firstElement) {
-          lastElement.focus()
-        } else {
-          firstElement.focus()
-        }
-      }
-    }
-
-    onBeforeUnmount(() => {
-      document.removeEventListener('focusin', onFocusin)
-    })
-
-    if (IN_BROWSER) {
-      watch(() => isActive.value && props.retainFocus, val => {
-        val
-          ? document.addEventListener('focusin', onFocusin)
-          : document.removeEventListener('focusin', onFocusin)
-      }, { immediate: true })
-    }
 
     function onAfterEnter () {
       emit('afterEnter')
-      if (overlay.value?.contentEl && !overlay.value.contentEl.contains(document.activeElement)) {
+      if (
+        (props.scrim || props.retainFocus) &&
+        overlay.value?.contentEl &&
+        !overlay.value.contentEl.contains(document.activeElement)
+      ) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }
     }
