@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
@@ -201,6 +202,71 @@ export default createVuetify({
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
 <DocIconList />
+
+#### MDI - UnoCSS
+
+::: info
+This feature requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0)
+:::
+
+You can use Vuetify's MDI icon set with [UnoCSS Preset Icon](https://unocss.dev/presets/icons) by installing the `@unocss/preset-icons` package, all your icons will be tree-shaken and only the icons you use will be included in your final CSS bundle.
+
+You need to install `unocss` and `@iconify-json/mdi` dev dependencies first:
+
+::: tabs
+
+```bash [pnpm]
+pnpm add unocss @iconify-json/mdi -D
+```
+
+```bash [yarn]
+yarn add unocss @iconify-json/mdi -D
+```
+
+```bash [npm]
+npm install unocss @iconify-json/mdi -D
+```
+
+```bash [bun]
+bun add unocss @iconify-json/mdi -D
+```
+
+:::
+
+then, configure UnoCSS in your project adding the preset (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
+
+::: warning
+
+Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify's MDI icon set relies on it.
+
+:::
+
+```js { resource="unocss.config.js" }
+import { presetIcons, defineConfig } from 'unocss'
+
+export default defineConfig({
+  presets: [
+    presetIcons(),
+  ],
+})
+```
+
+To register the icon set, use the following code:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-unocss'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+})
+```
 
 ### Material Icons
 
