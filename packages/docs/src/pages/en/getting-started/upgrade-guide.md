@@ -26,6 +26,14 @@ Before upgrading, make sure to consult the Official [Vue 3 Migration Guide](http
 
 :::
 
+::: info
+
+Need assistance with your Vuetify 2 → 3 upgrade?\
+**Epicmax** — Vue.js experts and longtime Vuetify partners — help teams migrate complex projects from Vuetify 2 to 3 with minimal risk and predictable results.\
+[Learn more about Vuetify 2 → 3 migration support](https://epicmax.co/vue-3-migration?utm_source=vuetify-landing&utm_medium=banner&utm_campaign=vue-migrations&utm_id=vuetify)
+
+:::
+
 ::: warning
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
@@ -223,6 +231,7 @@ app.use(vuetify)
 ### v-select/v-combobox/v-autocomplete
 
 - v-model values not present in `items` will now be rendered instead of being ignored.
+- `return-object` no longer matches primitive values in v-model, the initial value must have the same structure as `items` objects.
 - `cache-items` prop has been removed, caching should be handled externally.
 - `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
 - `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.

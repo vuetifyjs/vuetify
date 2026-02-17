@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Edellinen kuukausi',
       nextMonth: 'Seuraava kuukausi',
       selectYear: 'Valitse vuosi',
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectMonth: 'Valitse kuukausi',
       selectDate: '{0}',
       currentDate: 'Tänään, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'ap.',
     pm: 'ip.',
     title: 'Valitse aika',
+    hour: 'Tunti',
+    minute: 'Minuutit',
+    second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Välilyönti',
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
+    or: 'tai',
   },
   video: {
     play: 'Toista',

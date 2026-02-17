@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Prethodni mjesec',
       nextMonth: 'Sljedeći mjesec',
       selectYear: 'Odaberite godinu',
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectMonth: 'Odaberite mjesec',
       selectDate: '{0}',
       currentDate: 'Danas, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Odaberite vrijeme',
+    hour: 'Sat',
+    minute: 'Minute',
+    second: 'Sekunde',
+    notAllowed: 'Vrijednost nije dopuštena',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Razmak',
     plus: 'plus',
     shortcut: 'Tipkovnička prečica: {0}',
+    or: 'ili',
   },
   video: {
     play: 'Reproduciraj',

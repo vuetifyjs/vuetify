@@ -1,44 +1,41 @@
 import 'roboto-fontface'
 import '@/styles/main.sass'
-import { beforeAll, beforeEach, expect } from 'vitest'
+import { afterEach, beforeAll, beforeEach } from 'vitest'
 import { cleanup } from '@testing-library/vue'
-import { commands, page } from '@vitest/browser/context'
+import { commands, page } from 'vitest/browser'
 
 beforeAll(async () => {
   await commands.setFocusEmulationEnabled()
+
+  // contextOptions.reducedMotion doesn't seem to do anything for some reason
   await commands.setReduceMotionEnabled()
 })
 
-beforeEach(async () => {
+beforeEach(async ctx => {
   // Cleanup before not after, so if the test
   // fails we can inspect what has happened
   cleanup()
   await page.viewport(1280, 800)
+
+  if (process.env.TEST_TDD_ONLY) {
+    let suite = ctx.task.suite
+    while (suite) {
+      if (suite.name === 'Showcase') {
+        return
+      }
+      suite = suite.suite
+    }
+    ctx.skip()
+  }
 })
 
-expect.extend({
-  /** .toBeVisible but using wdio's isDisplayed */
-  async toBeDisplayed (received: Element) {
-    const isDisplayed = await commands.isDisplayed(page.elementLocator(received).selector)
-
-    return {
-      pass: isDisplayed,
-      message: () => {
-        const element = this.utils.printReceived(received.cloneNode(false))
-        return `Expected element${this.isNot ? ' not' : ''} to be displayed:\n${element}`
-      },
-    }
-  },
-  /** .toBeDisplayed, also checking if in viewport */
-  async toBeOnScreen (received: Element) {
-    const isDisplayed = await commands.isDisplayed(page.elementLocator(received).selector, true)
-
-    return {
-      pass: isDisplayed,
-      message: () => {
-        const element = this.utils.printReceived(received.cloneNode(false))
-        return `Expected element${this.isNot ? ' not' : ''} to be displayed on screen:\n${element}`
-      },
-    }
-  },
+afterEach(async ctx => {
+  if (
+    ctx.task.result?.state === 'fail' &&
+    ctx.task.name !== 'Showcase' &&
+    !ctx.task.result.errors?.every(e => e.message.startsWith('Visual difference detected'))
+  ) {
+    // vizzly disables screenshotOnFailure
+    await page.screenshot()
+  }
 })

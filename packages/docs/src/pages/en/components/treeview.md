@@ -68,11 +68,17 @@ You can control the text and background color of the active treeview node.
 
 <ExamplesExample file="v-treeview/prop-color" />
 
-#### Dense mode
+#### Density
 
 Dense mode provides more compact layout with decreased heights of the items.
 
 <ExamplesExample file="v-treeview/prop-dense" />
+
+#### Items registration
+
+When working with large trees it is recommended to include `items-registration="props"` to ensure faster loading and interactions.
+
+<ExamplesExample file="v-treeview/prop-items-registration" />
 
 <!-- #### Hoverable
 
@@ -135,6 +141,12 @@ Using the the **prepend** slot we are able to create an intuitive file explorer.
 Both **append**, and **prepend** slots get additional information about the item: `depth`, `path` (from indexes), `isFirst`, `isLast` and the `index` within the children list.
 
 <ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
+
+#### No data
+
+When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
+
+<ExamplesExample file="v-treeview/slot-no-data" />
 
 #### Title
 

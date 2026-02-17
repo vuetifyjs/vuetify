@@ -22,12 +22,15 @@
   const name = 'v-date-picker'
   const model = ref('default')
   const date = ref()
-  const options = []
+  const options = ['modal']
   // const hideActions = ref(false)
   const adjacent = ref(false)
 
+  const controlVariant = toRef(() => model.value !== 'default' ? model.value : undefined)
+
   const props = computed(() => {
     return {
+      'control-variant': controlVariant.value,
       // 'hide-actions': hideActions.value || undefined,
       'show-adjacent-months': adjacent.value || undefined,
     }

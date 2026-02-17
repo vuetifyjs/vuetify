@@ -8,6 +8,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VSlideGroupSymbol } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -29,7 +30,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, toDisplayString, toRef } from 'vue'
+import { computed, toDisplayString, toRef, watch } from 'vue'
 import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -133,7 +134,10 @@ export const VChip = genericComponent<VChipSlots>()({
     const { themeClasses } = provideTheme(props)
 
     const isActive = useProxiedModel(props, 'modelValue')
+
     const group = useGroupItem(props, VChipGroupSymbol, false)
+    const slideGroup = useGroupItem(props, VSlideGroupSymbol, false)
+
     const link = useLink(props, attrs)
     const isLink = toRef(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
@@ -153,6 +157,16 @@ export const VChip = genericComponent<VChipSlots>()({
         emit('click:close', e)
       },
     }))
+
+    watch(isActive, val => {
+      if (val) {
+        group?.register()
+        slideGroup?.register()
+      } else {
+        group?.unregister()
+        slideGroup?.unregister()
+      }
+    })
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => {
       const showColor = !group || group.isSelected.value
@@ -189,6 +203,7 @@ export const VChip = genericComponent<VChipSlots>()({
 
       return isActive.value && (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-chip',
             {
@@ -220,7 +235,6 @@ export const VChip = genericComponent<VChipSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={[isClickable.value && props.ripple, null]}
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 

@@ -35,6 +35,7 @@ export interface LinkProps {
   replace: boolean | undefined
   to: RouteLocationRaw | undefined
   exact: boolean | undefined
+  disabled: boolean | undefined
 }
 
 export interface LinkListeners {
@@ -98,6 +99,8 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     linkProps: reactive({
       href,
       'aria-current': toRef(() => isActive.value ? 'page' : undefined),
+      'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
   }
 }

@@ -1,8 +1,11 @@
 {
   "props": {
+    "contentOffset": "Increases content spacing from the lines. When passed as an array, the second value shifts slot content down (or right in vertical mode).",
+    "gradient": "Adds fading effect for both sides.",
     "inset": "Adds indentation (72px) for **normal** dividers, reduces max height for **vertical**.",
     "length": "Sets the dividers length. Default unit is px.",
     "thickness": "Sets the dividers thickness. Default unit is px.",
+    "variant": "Applies `border-style`.",
     "vertical": "Displays dividers vertically."
   }
 }

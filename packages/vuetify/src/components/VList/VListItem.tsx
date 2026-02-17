@@ -27,8 +27,8 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
-import { deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onBeforeMount, toDisplayString, toRef, watch } from 'vue'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -88,6 +88,7 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   slim: Boolean,
+  prependGap: [Number, String],
   subtitle: {
     type: [String, Number, Boolean],
     default: undefined,
@@ -152,7 +153,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       props.link !== false &&
       (props.link || link.isClickable.value || isSelectable.value)
     )
-    const role = computed(() => list ? (isSelectable.value ? 'option' : 'listitem') : undefined)
+    const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
       return root.activatable.value ? isActivated.value
@@ -174,7 +175,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       handleActiveLink()
     })
     onBeforeMount(() => {
-      if (link.isActive?.value) handleActiveLink()
+      if (link.isActive?.value) {
+        nextTick(() => handleActiveLink())
+      }
     })
     function handleActiveLink () {
       if (parent.value != null) {
@@ -257,6 +260,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       return (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-list-item',
             {
@@ -264,7 +268,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable.value,
               'v-list-item--nav': props.nav,
-              'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               'v-list-item--slim': props.slim,
               [`${props.activeClass}`]: props.activeClass && isActive.value,
             },
@@ -279,6 +282,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
             props.class,
           ]}
           style={[
+            {
+              '--v-list-prepend-gap': convertToUnit(props.prependGap),
+            },
             colorStyles.value,
             dimensionStyles.value,
             props.style,
@@ -289,7 +295,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
-          { ...link.linkProps }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
@@ -316,7 +321,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
               ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
-                  disabled={ !hasPrependMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -328,6 +332,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                     VListItemAction: {
                       start: true,
+                    },
+                    VCheckboxBtn: {
+                      density: props.density,
                     },
                   }}
                 >
@@ -378,7 +385,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
               ) : (
                 <VDefaultsProvider
                   key="append-defaults"
-                  disabled={ !hasAppendMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -390,6 +396,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                     VListItemAction: {
                       end: true,
+                    },
+                    VCheckboxBtn: {
+                      density: props.density,
                     },
                   }}
                 >

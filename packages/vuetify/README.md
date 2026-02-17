@@ -65,7 +65,7 @@ For more information on how to get started, such as using Nuxt or Laravel, check
 
 ### 💖 Supporting Vuetify
 
-Vuetify is a [MIT licensed](http://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a [MIT licensed](https://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
@@ -136,11 +136,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
         </a>
       </td>
       <td>
-        <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
-        </a>
-      </td>
-      <td>
         <a href="https://views4you.com/buy-instagram-followers/">
           <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
@@ -164,7 +159,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
           <img height="30px" src="https://cdn.cosmicjs.com/ba1af160-1a27-11f0-a229-dfe84053cfeb-hcof-logo-light-1.png">
         </a>
       </td>
-      <td></td>
       <td></td>
     </tr>
   </tbody>
@@ -217,7 +211,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://bin.vuetifyjs.com/">
+        <a href="https://github.com/vuetifyjs/create/">
           🫧&nbsp;Vuetify&nbsp;Create
         </a>
       </td>
@@ -320,7 +314,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 ### 📑 License
 
-Vuetify is available under the [MIT](http://opensource.org/licenses/MIT) software license.
+Vuetify is available under the [MIT](https://opensource.org/licenses/MIT) software license.
 
 Copyright (c) 2016-present Vuetify, LLC
 

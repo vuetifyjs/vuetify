@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Vorige maand',
       nextMonth: 'Volgende maand',
       selectYear: 'Kies jaar',
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectMonth: 'Kies maand',
       selectDate: '{0}',
       currentDate: 'Vandag, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'VM',
     pm: 'NM',
     title: 'Kies tyd',
+    hour: 'Uur',
+    minute: 'Minute',
+    second: 'Sekondes',
+    notAllowed: 'Waarde word nie toegelaat nie',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Spasie',
     plus: 'plus',
     shortcut: 'Sleutelbordkortpad: {0}',
+    or: 'of',
   },
   video: {
     play: 'Speel',

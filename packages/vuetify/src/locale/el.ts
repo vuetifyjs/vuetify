@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Προηγούμενος μήνας',
       nextMonth: 'Επόμενος μήνας',
       selectYear: 'Επιλέξτε έτος',
+      previousYear: 'Προηγούμενο έτος',
+      nextYear: 'Επόμενο έτος',
+      selectMonth: 'Επιλέξτε μήνα',
       selectDate: '{0}',
       currentDate: 'Σήμερα, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'ΠΜ',
     pm: 'ΜΜ',
     title: 'Επιλέξτε ώρα',
+    hour: 'Ώρα',
+    minute: 'Λεπτά',
+    second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Διάστημα',
     plus: 'συν',
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
+    or: 'ή',
   },
   video: {
     play: 'Αναπαραγωγή',

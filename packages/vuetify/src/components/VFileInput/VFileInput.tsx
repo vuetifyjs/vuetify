@@ -23,6 +23,7 @@ import {
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
+  omit,
   propsFactory,
   useRender,
   wrapInArray,
@@ -70,7 +71,7 @@ export const makeVFileInputProps = propsFactory({
     default: 22,
   },
 
-  ...makeVInputProps({ prependIcon: '$file' }),
+  ...omit(makeVInputProps({ prependIcon: '$file' }), ['direction']),
 
   modelValue: {
     type: [Array, Object] as PropType<File[] | File | null>,
@@ -239,7 +240,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       }
 
       const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
-      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? String(attrs.accept))
+      const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
+      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
 
       return (
         <VInput
@@ -294,10 +296,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         type="file"
                         accept={ inputAccept }
                         readonly={ isReadonly.value }

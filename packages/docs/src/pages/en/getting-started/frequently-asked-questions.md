@@ -27,7 +27,7 @@ The following responses are a collection of common questions asked by the Vuetif
 
 * **Does Vuetify provide support?** { #does-vuetify-provide-support }
 
-  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+  Vuetify is a free to use Open Source project released under the [MIT](https://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
 
   * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
   * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)

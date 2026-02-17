@@ -117,6 +117,16 @@ $utilities: () !default;
           space-evenly: space-evenly,
         )
       ),
+      "justify-items": (
+        responsive: true,
+        property: justify-items,
+        values: (
+          start: flex-start,
+          end: flex-end,
+          center: center,
+          stretch: stretch,
+        )
+      ),
       "align-items": (
         responsive: true,
         property: align-items,

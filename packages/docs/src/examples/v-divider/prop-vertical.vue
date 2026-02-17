@@ -39,3 +39,15 @@
     <v-app-bar-nav-icon class="ms-2"></v-app-bar-nav-icon>
   </v-toolbar>
 </template>
+
+<style scoped>
+.v-toolbar .v-divider {
+  --v-border-opacity: .7
+}
+</style>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2418-7463&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Tháng trước',
       nextMonth: 'Tháng sau',
       selectYear: 'Chọn năm',
+      previousYear: 'Năm trước',
+      nextYear: 'Năm sau',
+      selectMonth: 'Chọn tháng',
       selectDate: '{0}',
       currentDate: 'Hôm nay, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'SA',
     pm: 'CH',
     title: 'Chọn thời gian',
+    hour: 'Giờ',
+    minute: 'Phút',
+    second: 'Giây',
+    notAllowed: 'Giá trị không được phép',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Khoảng trắng',
     plus: 'cộng',
     shortcut: 'Phím tắt: {0}',
+    or: 'hoặc',
   },
   video: {
     play: 'Phát',

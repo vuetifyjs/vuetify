@@ -30,7 +30,8 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { shallowRef, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -111,6 +112,15 @@ export const VCard = genericComponent<VCardSlots>()({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
+    const loadingColor = shallowRef<string | undefined>(undefined)
+
+    watch(() => props.loading, (val, old) => {
+      loadingColor.value = !val && typeof old === 'string'
+        ? old
+        : typeof val === 'boolean'
+          ? undefined
+          : val
+    }, { immediate: true })
 
     useRender(() => {
       const isLink = props.link !== false && link.isLink.value
@@ -131,6 +141,7 @@ export const VCard = genericComponent<VCardSlots>()({
 
       return (
         <Tag
+          { ...link.linkProps }
           class={[
             'v-card',
             {
@@ -154,12 +165,14 @@ export const VCard = genericComponent<VCardSlots>()({
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            {
+              '--v-card-height': convertToUnit(props.height),
+            },
             props.style,
           ]}
           onClick={ isClickable && link.navigate }
           v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
-          { ...link.linkProps }
         >
           { hasImage && (
             <div key="image" class="v-card__image">
@@ -188,7 +201,7 @@ export const VCard = genericComponent<VCardSlots>()({
           <LoaderSlot
             name="v-card"
             active={ !!props.loading }
-            color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+            color={ loadingColor.value }
             v-slots={{ default: slots.loader }}
           />
 

@@ -16,6 +16,7 @@
       flex: none;
       font-size: $icon-btn-font-size;
       font-weight: $icon-btn-font-weight;
+      line-height: $icon-btn-line-height;
       height: #{$icon-btn-height};
       justify-content: center;
       outline: none;
@@ -105,6 +106,38 @@
 
     .v-icon-btn--active:not(:hover) & {
       --v-activated-opacity: 0;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .v-icon-btn {
+      &:focus-visible {
+        outline: 2px solid;
+        outline-offset: 2px;
+      }
+
+      &:not(&--active):hover,
+      &:not(&--active):focus {
+        color: highlight !important;
+      }
+
+      &--active:not(&--disabled),
+      &--active:not(&--disabled)[class*="bg-"]
+      {
+        outline-color: canvastext !important;
+        background: highlight !important;
+        color: highlighttext !important;
+      }
+
+      &--disabled {
+        color: graytext;
+      }
+
+      &__overlay,
+      &__underlay,
+      .v-icon {
+        forced-color-adjust: preserve-parent-color;
+      }
     }
   }
 }

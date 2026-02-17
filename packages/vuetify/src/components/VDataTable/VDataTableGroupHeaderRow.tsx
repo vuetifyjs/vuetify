@@ -7,6 +7,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
@@ -35,6 +36,7 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
     type: IconValue,
     default: '$tableGroupExpand',
   },
+  ...makeDensityProps(),
 }, 'VDataTableGroupHeaderRow')
 
 export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
@@ -81,12 +83,15 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
               </VDataTableColumn>
             )
           } else if (column.key === 'data-table-select') {
-            const modelValue = isSelected(rows.value)
-            const indeterminate = isSomeSelected(rows.value) && !modelValue
-            const selectGroup = (v: boolean) => select(rows.value, v)
+            const selectableRows = rows.value.filter(x => x.selectable)
+            const modelValue = selectableRows.length > 0 && isSelected(selectableRows)
+            const indeterminate = isSomeSelected(selectableRows) && !modelValue
+            const selectGroup = (v: boolean) => select(selectableRows, v)
             return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
               <VDataTableColumn class="v-data-table__td--select-row" noPadding>
                 <VCheckboxBtn
+                  density={ props.density }
+                  disabled={ selectableRows.length === 0 }
                   modelValue={ modelValue }
                   indeterminate={ indeterminate }
                   onUpdate:modelValue={ selectGroup }

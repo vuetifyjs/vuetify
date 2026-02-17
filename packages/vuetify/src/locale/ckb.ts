@@ -50,6 +50,9 @@ export default {
       previousMonth: 'مانگی پێشوو',
       nextMonth: 'مانگی داهاتوو',
       selectYear: 'ساڵ هەڵبژێرە',
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectMonth: 'مانگ هەڵبژێرە',
       selectDate: '{0}',
       currentDate: 'ئەمڕو، {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
     title: 'کات دیاریبکە',
+    hour: 'کاتژمێر',
+    minute: 'خولەک',
+    second: 'چرکە',
+    notAllowed: 'بەهاکە ڕێگەپێدراو نییە',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'بۆشایی',
     plus: 'زیادکردن',
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+    or: 'یان',
   },
   video: {
     play: 'لێدان',

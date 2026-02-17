@@ -2,7 +2,6 @@
   <VoAppBar
     id="app-bar"
     border="b"
-    class="px-md-3"
     logo="vuetify"
     flat
   >
@@ -19,7 +18,7 @@
     </template>
 
     <template #append>
-      <div v-if="mdAndUp" class="d-flex ga-1">
+      <div v-if="mdAndUp" class="d-flex ga-1 pe-2">
         <AppBarBlogLink />
 
         <AppBarLearnMenu />
@@ -30,7 +29,7 @@
 
         <AppBarPlaygroundLink v-if="lgAndUp" />
 
-        <AppBarSponsorLink />
+        <AppBarOneLink />
       </div>
 
       <AppVerticalDivider v-if="mdAndUp" />

@@ -2,8 +2,8 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { inject, provide, toRef } from 'vue'
-import { isObject, propsFactory } from '@/util'
+import { inject, provide, toRaw, toRef } from 'vue'
+import { propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -40,24 +40,23 @@ export function provideExpanded (props: ExpandProps) {
     return [...v.values()]
   })
 
-  function getItemKey (item: DataTableItem) {
-    return isObject(item.value) ? item.key : item.value
-  }
-
   function expand (item: DataTableItem, value: boolean) {
     const newExpanded = new Set(expanded.value)
+    const rawValue = toRaw(item.value)
 
     if (!value) {
-      newExpanded.delete(getItemKey(item))
+      const item = [...expanded.value].find(x => toRaw(x) === rawValue)!
+      newExpanded.delete(item)
     } else {
-      newExpanded.add(getItemKey(item))
+      newExpanded.add(rawValue)
     }
 
     expanded.value = newExpanded
   }
 
   function isExpanded (item: DataTableItem) {
-    return expanded.value.has(getItemKey(item))
+    const rawValue = toRaw(item.value)
+    return [...expanded.value].some(x => toRaw(x) === rawValue)
   }
 
   function toggleExpand (item: DataTableItem) {

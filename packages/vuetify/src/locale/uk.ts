@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Попередній місяць',
       nextMonth: 'Наступний місяць',
       selectYear: 'Виберіть рік',
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectMonth: 'Виберіть місяць',
       selectDate: '{0}',
       currentDate: 'Сьогодні, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Оберіть час',
+    hour: 'Година',
+    minute: 'Хвилини',
+    second: 'Секунди',
+    notAllowed: 'Значення не дозволено',
   },
   pagination: {
     ariaLabel: {
@@ -141,6 +148,7 @@ export default {
     space: 'Пробіл',
     plus: 'плюс',
     shortcut: 'Комбінація клавіш: {0}',
+    or: 'або',
   },
   video: {
     play: 'Відтворити',

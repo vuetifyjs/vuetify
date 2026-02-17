@@ -8,6 +8,7 @@ import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { useHydration } from '@/composables/hydration'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
@@ -40,6 +41,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  omit,
   propsFactory,
   standardEasing,
   useRender,
@@ -108,6 +110,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeLazyProps(),
   ...makeLocationStrategyProps(),
   ...makeScrollStrategyProps(),
+  ...makeFocusTrapProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
 }, 'VOverlay')
@@ -122,7 +125,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
   props: {
     _disableGlobalStack: Boolean,
 
-    ...makeVOverlayProps(),
+    ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
 
   emits: {
@@ -197,11 +200,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     function closeConditional (e: Event) {
-      return isActive.value && globalTop.value && (
+      return isActive.value && localTop.value && (
         // If using scrim, only close if clicking on it rather than anything opened on top
         !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
       )
     }
+
+    useFocusTrap(props, { isActive, localTop, contentEl, activatorEl })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {
@@ -366,6 +371,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       target,
       animateClick,
       contentEl,
+      rootEl: root,
       globalTop,
       localTop,
       updateLocation,

@@ -2,6 +2,6 @@
 
 @if (settings.$layers) {
   @layer vuetify {
-    @layer reset, transitions, base, components, overrides, colors, theme, utilities;
+    @layer reset, transitions, base, components, overrides, theme.background, theme.foreground, utilities;
   }
 }

@@ -1,10 +1,12 @@
 // Components
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
 import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
@@ -52,6 +54,7 @@ export const makeVDateInputProps = propsFactory({
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
   },
+  pickerProps: Object as PropType<VDatePicker['$props']>,
 
   ...makeDateFormatProps(),
   ...makeDisplayProps({
@@ -67,7 +70,13 @@ export const makeVDateInputProps = propsFactory({
   ...omit(makeVDatePickerProps({
     hideHeader: true,
     showAdjacentMonths: true,
-  }), ['active', 'location', 'rounded']),
+  }), [
+    'location',
+    'rounded',
+    'height',
+    'minHeight',
+    'maxHeight',
+  ]),
 }, 'VDateInput')
 
 export const VDateInput = genericComponent<new <
@@ -102,6 +111,9 @@ export const VDateInput = genericComponent<new <
     const adapter = useDate()
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
+    const { InputIcon } = useInputIcon(props)
+
+    const { clampDate, isInAllowedRange } = useCalendarRange(props)
 
     const emptyModelValue = () => props.multiple ? [] : null
 
@@ -179,7 +191,7 @@ export const VDateInput = genericComponent<new <
         menu.value = true
       }
 
-      if (props.updateOn.includes('enter')) {
+      if (props.updateOn.includes('enter') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
     }
@@ -213,7 +225,7 @@ export const VDateInput = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
-      if (props.updateOn.includes('blur')) {
+      if (props.updateOn.includes('blur') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
 
@@ -229,24 +241,42 @@ export const VDateInput = genericComponent<new <
         model.value = emptyModelValue()
       } else if (!props.multiple) {
         if (isValid(value)) {
-          model.value = parseDate(value)
+          model.value = clampDate(parseDate(value))
         }
       } else {
         const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
-            const [start, stop] = parts.map(parseDate).toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
+            const [start, stop] = parts
+              .map(parseDate)
+              .map(clampDate)
+              .toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
             model.value = createDateRange(adapter, start, stop)
           } else {
-            model.value = parts.map(parseDate)
+            model.value = parts
+              .map(parseDate)
+              .filter(isInAllowedRange)
           }
         }
       }
     }
 
     useRender(() => {
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, ['active', 'location', 'rounded']))
+      const datePickerProps = {
+        ...VDatePicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'location',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+        ])),
+        ...props.pickerProps,
+      }
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
@@ -254,7 +284,7 @@ export const VDateInput = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          class={ props.class }
+          class={['v-date-input', props.class]}
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
@@ -265,7 +295,6 @@ export const VDateInput = genericComponent<new <
           onBlur={ onBlur }
           validationValue={ model.value }
           onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prepend={ isInteractive.value ? onClick : undefined }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
         >
@@ -328,6 +357,18 @@ export const VDateInput = genericComponent<new <
                 { slots.default?.() }
               </>
             ),
+            prepend: hasPrepend ? prependSlotProps => (
+              slots.prepend
+                ? slots.prepend(prependSlotProps)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    tabindex={ props['onClick:prepend'] ? undefined : -1 }
+                    onClick={ isInteractive.value ? onClick : undefined }
+                  />
+                ))
+            ) : undefined,
           }}
         </VTextField>
       )

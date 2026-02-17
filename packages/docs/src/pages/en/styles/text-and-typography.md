@@ -56,6 +56,7 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 | **text-decoration-line-through** | text-decoration: line-through; |
 | **font-weight-black** | font-weight: 900; |
 | **font-weight-bold** | font-weight: 700; |
+| **font-weight-semibold** | font-weight: 600; |
 | **font-weight-medium** | font-weight: 500; |
 | **font-weight-regular** | font-weight: 400; |
 | **font-weight-light** | font-weight: 300; |
@@ -144,6 +145,44 @@ Longer content can be truncated with a text ellipsis using the `.text-truncate` 
 :::
 
 <ExamplesExample file="text-and-typography/text-truncate" />
+
+## Customizing Fonts
+
+By default, Vuetify uses **Roboto** as font family for regular text and headings. You can customize the font-family by overriding the following SASS variables:
+
+- `$body-font-family` — Used for body text and most components
+- `$heading-font-family` — Used for headings. (defaults to `$body-font-family`)
+
+### Loading Custom Fonts
+
+Before configuring Vuetify, ensure your chosen font is available in your application. There are several ways to load fonts:
+
+- **Fonts from CDN** — Add an `@import` in your CSS or a `<link>` tag in your HTML
+- **Local font files** — Use `@font-face` declarations
+- **NPM packages** — Install packages like `@fontsource/open-sans`
+
+### Configuring Vuetify
+
+Ensure you have [SASS Variables](/features/sass-variables) configured in your project, then set the font-family variables:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'sass:string';
+@use 'vuetify/settings' with (
+  $body-font-family: string.unquote('"Open Sans", sans-serif'),
+  $heading-font-family: string.unquote('"Montserrat", sans-serif')
+);
+```
+
+### Using CSS Variables
+
+You can use CSS custom properties for font-family values, allowing runtime changes or integration with theming systems:
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $body-font-family: var(--font-sans)
+  // $heading-font-family inherits the same font in this example
+);
+```
 
 ## RTL Alignment
 

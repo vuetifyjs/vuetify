@@ -26,17 +26,15 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 | [v-fade-transition](/api/v-fade-transition/) | An example of the fade transition can be found on the Carousel component. |
 | [v-scale-transition](/api/v-scale-transition/) | Many of Vuetify's components contain a **transition** prop which allows you to specify your own. |
 | [v-scroll-x-transition](/api/v-scroll-x-transition/) | Scroll X transitions continue along the horizontal axis. |
+| [v-scroll-x-reverse-transition](/api/v-scroll-x-reverse-transition/) | Scroll X reverse transitions continue along the horizontal axis. |
 | [v-scroll-y-transition](/api/v-scroll-y-transition/) | Scroll Y transitions continue along the vertical axis. |
-| [v-slide-x-reverse-transition](/api/v-slide-x-reverse-transition/) | Slide X reverse transitions slide in from the right. |
+| [v-scroll-y-reverse-transition](/api/v-scroll-y-reverse-transition/) | Scroll Y reverse transitions continue along the vertical axis. |
 | [v-slide-x-transition](/api/v-slide-x-transition/) | Slide X transitions slide in from the left. |
-| [v-slide-y-reverse-transition](/api/v-slide-y-reverse-transition/) | Slide Y reverse transitions slide in from the bottom. |
+| [v-slide-x-reverse-transition](/api/v-slide-x-reverse-transition/) | Slide X reverse transitions slide in from the right. |
 | [v-slide-y-transition](/api/v-slide-y-transition/) | Slide Y transitions slide in from the top. |
-| [v-tab-reverse-transition](/api/v-tab-reverse-transition/) | Tab reverse transitions slide in from the right. |
-| [v-tab-transition](/api/v-tab-transition/) | Tab transitions slide in from the left. |
-| [v-toggle-slide-x-reverse-transition](/api/v-toggle-slide-x-reverse-transition/) | Toggle Slide X reverse transitions slide in from the right. |
-| [v-toggle-slide-x-transition](/api/v-toggle-slide-x-transition/) | Toggle Slide X transitions slide in from the left. |
-| [v-toggle-slide-y-reverse-transition](/api/v-toggle-slide-y-reverse-transition/) | Toggle Slide Y reverse transitions slide in from the bottom. |
-| [v-toggle-slide-y-transition](/api/v-toggle-slide-y-transition/) | Toggle Slide Y transitions slide in from the top. |
+| [v-slide-y-reverse-transition](/api/v-slide-y-reverse-transition/) | Slide Y reverse transitions slide in from the bottom. |
+| [v-dialog-top-transition](/api/v-dialog-top-transition/) | Dialog transitions slide in from the top. |
+| [v-dialog-bottom-transition](/api/v-dialog-bottom-transition/) | Dialog transitions slide in from the bottom. |
 
 <ApiInline hide-links />
 
@@ -59,6 +57,12 @@ Programmatically control the transition origin with a simple prop.
 The expand transition is used in Expansion Panels and List Groups. There is also a horizontal version available with `v-expand-x-transition`.
 
 <ExamplesExample file="transitions/misc-expand-x" />
+
+When using `v-expand-transition` or `v-expand-x-transition`, the transition works by animating an element’s height or width between `0` and its natural size. Because of this, applying **padding directly to the transitioning element** (such as `v-alert`) can cause jittery or uneven animations.
+
+If you need padding, wrap your content in a container element (like a `div` or `v-card`) and apply the transition to that container instead. This ensures the expand transition runs smoothly, since the wrapper div has no conflicting padding or margin.
+
+<ExamplesExample file="transitions/misc-expand-x-padding" />
 
 #### Fab
 

@@ -17,11 +17,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -45,12 +45,12 @@ export const makeVTextFieldProps = propsFactory({
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeAutocompleteProps(),
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: never
+  default: { id: Readonly<Ref<string>> }
   counter: VCounterSlot
 }
 
@@ -71,7 +71,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', undefined, v => {
+      if (Object.is(v, -0)) return '-0'
+      return v
+    })
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
@@ -133,7 +136,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       onFocus()
 
       nextTick(() => {
-        model.value = null
         reset()
 
         callEvent(props['onClick:clear'], e)
@@ -141,17 +143,31 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
-      model.value = el.value
-      if (
+
+      if (!(
         props.modelModifiers?.trim &&
         ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
-      ) {
-        const caretPosition = [el.selectionStart, el.selectionEnd]
-        nextTick(() => {
-          el.selectionStart = caretPosition[0]
-          el.selectionEnd = caretPosition[1]
-        })
+      )) {
+        model.value = el.value
+        return
       }
+
+      const value = el.value
+      const start = el.selectionStart
+      const end = el.selectionEnd
+
+      model.value = value
+
+      nextTick(() => {
+        let offset = 0
+        if (value.trimStart().length === el.value.length) {
+          // #22307 - Whitespace has been removed from the
+          // start, offset the caret position to compensate
+          offset = value.length - el.value.length
+        }
+        if (start != null) el.selectionStart = start - offset
+        if (end != null) el.selectionEnd = end - offset
+      })
     }
 
     useRender(() => {
@@ -196,11 +212,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
-                onClick:prependInner={ props['onClick:prependInner'] }
-                onClick:appendInner={ props['onClick:appendInner'] }
                 role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
+                labelId={ `${id.value}-label` }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
@@ -212,15 +227,13 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => {
                     const inputNode = (
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         value={ model.value }
                         onInput={ onInput }
-                        v-intersect={[{
-                          handler: onIntersect,
-                        }, null, ['once']]}
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
@@ -232,6 +245,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         type={ props.type }
                         onFocus={ focus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -247,15 +261,18 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                           </span>
                         )}
 
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            data-no-activator=""
-                          >
-                            { slots.default() }
-                            { inputNode }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass })}
+                        { withDirectives(
+                          slots.default ? (
+                            <div
+                              class={ fieldClass }
+                              data-no-activator=""
+                            >
+                              { slots.default({ id }) }
+                              { inputNode }
+                            </div>
+                          ) : cloneVNode(inputNode, { class: fieldClass }),
+                          [[vIntersect, onIntersect, null, { once: true }]],
+                        )}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">

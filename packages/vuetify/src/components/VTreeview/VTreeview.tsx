@@ -1,8 +1,10 @@
 // Components
 import { makeVTreeviewChildrenProps, VTreeviewChildren } from './VTreeviewChildren'
 import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
+import { VListItem } from '@/components/VList/VListItem'
 
 // Composables
+import { useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -31,6 +33,11 @@ export const makeVTreeviewProps = propsFactory({
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
   search: String,
+  hideNoData: Boolean,
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...omit(makeVTreeviewChildrenProps(), [
@@ -49,11 +56,21 @@ export const makeVTreeviewProps = propsFactory({
   modelValue: Array,
 }, 'VTreeview')
 
-export const VTreeview = genericComponent<new <T>(
+export const VTreeview = genericComponent<new <T, O, A, S, M>(
   props: {
     items?: T[]
+    opened?: O
+    activated?: A
+    selected?: S
+    modelValue?: M
+    'onUpdate:opened'?: (value: O) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:selected'?: (value: S) => void
+    'onUpdate:modelValue'?: (value: M) => void
   },
-  slots: VTreeviewChildrenSlots<T>
+  slots: VTreeviewChildrenSlots<T> & {
+    'no-data': never
+  }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTreeview',
 
@@ -69,6 +86,7 @@ export const VTreeview = genericComponent<new <T>(
   },
 
   setup (props, { slots, emit }) {
+    const { t } = useLocale()
     const { items } = useListItems(props)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -169,12 +187,16 @@ export const VTreeview = genericComponent<new <T>(
             },
             props.class,
           ]}
+          role="tree"
           openStrategy="multiple"
           style={ props.style }
           opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
+          { visibleIds.value?.size === 0 && !props.hideNoData && (
+            slots['no-data']?.() ?? (<VListItem key="no-data" title={ t(props.noDataText) } />)
+          )}
           <VTreeviewChildren
             { ...treeviewChildrenProps }
             density={ props.density }
