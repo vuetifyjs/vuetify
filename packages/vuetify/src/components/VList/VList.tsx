@@ -161,7 +161,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -261,6 +261,10 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           ? Number(props.prependGap) + 24
           : undefined)
 
+      const ariaMultiselectable = isSelectable.value
+        ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
+        : undefined
+
       return (
         <props.tag
           ref={ contentRef }
@@ -293,6 +297,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           tabindex={ props.disabled ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={ undefined }
+          aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }
