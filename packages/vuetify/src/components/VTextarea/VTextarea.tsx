@@ -21,7 +21,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -56,7 +56,7 @@ export const makeVTextareaProps = propsFactory({
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeAutocompleteProps(),
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextarea')
 
@@ -301,6 +301,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 { ...fieldProps }
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
+                labelId={ `${id.value}-label` }
                 centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
@@ -338,6 +339,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         autocomplete={ autocomplete.fieldAutocomplete.value }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

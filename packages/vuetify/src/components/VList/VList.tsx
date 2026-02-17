@@ -130,11 +130,7 @@ export const makeVListProps = propsFactory({
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
-export const VList = genericComponent<new <
-  T extends readonly any[],
-  S = unknown,
-  O = unknown
->(
+export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
   props: {
     items?: T
     itemTitle?: SelectItemKey<ItemType<T>>
@@ -142,11 +138,13 @@ export const VList = genericComponent<new <
     itemChildren?: SelectItemKey<ItemType<T>>
     itemProps?: SelectItemKey<ItemType<T>>
     selected?: S
+    activated?: A
+    opened?: O
     'onUpdate:selected'?: (value: S) => void
+    'onUpdate:activated'?: (value: A) => void
+    'onUpdate:opened'?: (value: O) => void
     'onClick:open'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
     'onClick:select'?: (value: { id: unknown, value: boolean, path: unknown[] }) => void
-    opened?: O
-    'onUpdate:opened'?: (value: O) => void
   },
   slots: VListChildrenSlots<ItemType<T>>
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -163,7 +161,7 @@ export const VList = genericComponent<new <
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -263,6 +261,10 @@ export const VList = genericComponent<new <
           ? Number(props.prependGap) + 24
           : undefined)
 
+      const ariaMultiselectable = isSelectable.value
+        ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
+        : undefined
+
       return (
         <props.tag
           ref={ contentRef }
@@ -295,6 +297,7 @@ export const VList = genericComponent<new <
           tabindex={ props.disabled ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={ undefined }
+          aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }

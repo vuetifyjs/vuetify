@@ -69,6 +69,14 @@ export const VColorPickerSwatches = defineComponent({
   },
 
   setup (props, { emit }) {
+    function onSwatchClick (hsva: HSV) {
+      if (props.disabled || !hsva) {
+        return
+      }
+
+      emit('update:color', hsva)
+    }
+
     useRender(() => (
       <div
         class={[
@@ -90,8 +98,13 @@ export const VColorPickerSwatches = defineComponent({
 
                 return (
                   <div
-                    class="v-color-picker-swatches__color"
-                    onClick={ () => hsva && emit('update:color', hsva) }
+                    class={[
+                      'v-color-picker-swatches__color',
+                      {
+                        'v-color-picker-swatches__color--disabled': props.disabled,
+                      },
+                    ]}
+                    onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
                       { props.color && deepEqual(props.color, hsva)

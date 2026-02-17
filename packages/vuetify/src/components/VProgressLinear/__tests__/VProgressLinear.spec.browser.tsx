@@ -3,7 +3,7 @@ import { VProgressLinear } from '../VProgressLinear'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { generate, render, screen, userEvent, wait } from '@test'
+import { render, screen, showcase, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -48,7 +48,5 @@ describe('VProgressLinear', () => {
     expect(screen.getByCSS('.v-progress-linear__determinate').clientWidth).toBe(50)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

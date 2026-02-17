@@ -92,6 +92,7 @@ type NestedProvide = {
     itemsRegistration: Ref<ItemsRegistrationType>
     register: (id: unknown, parentId: unknown, isDisabled: boolean, isGroup?: boolean) => void
     unregister: (id: unknown) => void
+    updateDisabled: (id: unknown, isDisabled: boolean) => void
     open: (id: unknown, value: boolean, event?: Event) => void
     activate: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
@@ -108,6 +109,7 @@ export const emptyNested: NestedProvide = {
     itemsRegistration: ref('render'),
     register: () => null,
     unregister: () => null,
+    updateDisabled: () => null,
     children: ref(new Map()),
     parents: ref(new Map()),
     disabled: ref(new Set()),
@@ -330,6 +332,19 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
         parents.value.delete(id)
         itemsUpdatePropagation()
       },
+      updateDisabled: (id, isDisabled) => {
+        if (isDisabled) {
+          disabled.value.add(id)
+        } else {
+          disabled.value.delete(id)
+        }
+        // classic selection requires refresh to re-evaluate on/off/indeterminate but
+        // currently it is only run for selection interactions, so it will set new disabled
+        // to "off" and the visual state becomes out of sync
+        // -- selected.value = new Map(selected.value)
+        // it is not clear if the framework should un-select when disabled changed to true
+        // more discussion is needed
+      },
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
 
@@ -460,6 +475,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
     nextTick(() => {
       parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
     })
+  })
+
+  watch(() => toValue(isDisabled), val => {
+    parent.root.updateDisabled(computedId.value, val)
   })
 
   isGroup && provide(VNestedSymbol, item)

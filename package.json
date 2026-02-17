@@ -77,8 +77,8 @@
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-sass": "^1.15.3",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "sass": "^1.94.2",
-    "sass-embedded": "^1.93.3",
+    "sass": "1.93.3",
+    "sass-embedded": "1.93.3",
     "semver": "^7.7.3",
     "shelljs": "^0.10.0",
     "stringify-object": "^5.0.0",
@@ -92,5 +92,5 @@
     "vuetify": "workspace:*",
     "yargs": "^17.7.2"
   },
-  "packageManager": "pnpm@10.23.0"
+  "packageManager": "pnpm@10.26.1"
 }

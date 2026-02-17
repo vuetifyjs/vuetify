@@ -21,7 +21,7 @@ import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -45,12 +45,12 @@ export const makeVTextFieldProps = propsFactory({
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeAutocompleteProps(),
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextField')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: never
+  default: { id: Readonly<Ref<string>> }
   counter: VCounterSlot
 }
 
@@ -71,7 +71,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', undefined, v => {
+      if (Object.is(v, -0)) return '-0'
+      return v
+    })
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
@@ -212,6 +215,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
+                labelId={ `${id.value}-label` }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
@@ -241,6 +245,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         type={ props.type }
                         onFocus={ focus }
                         onBlur={ blur }
+                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -262,7 +267,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                               class={ fieldClass }
                               data-no-activator=""
                             >
-                              { slots.default() }
+                              { slots.default({ id }) }
                               { inputNode }
                             </div>
                           ) : cloneVNode(inputNode, { class: fieldClass }),

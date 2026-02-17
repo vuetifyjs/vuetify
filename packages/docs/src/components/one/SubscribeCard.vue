@@ -1,119 +1,218 @@
 <template>
-  <v-container class="pa-md-12 pa-4 mx-auto text-center" max-width="700" fluid>
-    <v-card
-      id="subscribe"
-      class="pa-2"
-      elevation="0"
-      rounded="xl"
-      border
-    >
-      <v-card-title class="text-h4 text-md-h3 font-weight-bold mb-4">
-        Unlock Vuetify One
-      </v-card-title>
+  <v-container id="features" class="pa-md-12 pa-4 mx-auto" max-width="900" fluid>
+    <h2 class="text-h4 text-md-h3 font-weight-bold mb-2 text-center">
+      What You Get
+    </h2>
 
-      <v-card-text class="text-body-2 text-medium-emphasis mb-6">
-        <div class="text-h6 font-weight-bold text-high-emphasis mb-2">
-          {{ team ? 'Team Access' : 'Solo Developer' }}
-        </div>
+    <p class="text-body-1 text-medium-emphasis mb-8 text-center">
+      Choose the plan that fits your needs
+    </p>
 
-        Get priority support, advanced themes, and the future of Vuetify UI<span v-if="team">, for your entire team, all</span> in one subscription.
-      </v-card-text>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card
+          :class="{ 'border-primary border-opacity-100': type === 'solo' }"
+          class="pa-6 h-100 d-flex flex-column"
+          elevation="0"
+          rounded="xl"
+          border
+          @click="type = 'solo'"
+        >
+          <div class="d-flex align-center mb-4">
+            <v-icon class="mr-3" color="primary" icon="mdi-account" size="32" />
 
-      <v-list class="mb-6 px-0 text-start" density="compact" slim>
-        <v-list-item v-for="item in items" :key="item">
-          <template #prepend>
-            <v-icon color="primary" icon="mdi-check" />
-          </template>
+            <div>
+              <div class="text-h6 font-weight-bold">Solo Developer</div>
 
-          <v-list-item-title :class="$vuetify.display.smAndDown ? 'text-caption' : ''" class="text-wrap">
-            {{ item }}
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
+              <div class="text-body-2 text-medium-emphasis">For individual developers</div>
+            </div>
+          </div>
 
+          <div class="mb-6">
+            <span class="text-h4 font-weight-bold">${{ prices.solo[interval].split(' ')[0] }}</span>
+
+            <span class="text-body-2 text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
+          </div>
+
+          <v-list
+            id="subscribe-now"
+            bg-color="transparent"
+            class="flex-grow-1 px-0"
+            density="compact"
+            slim
+          >
+            <v-list-item v-for="item in features.solo" :key="item.text" class="px-0">
+              <template #prepend>
+                <v-icon
+                  :color="item.new ? 'success' : item.soon ? 'warning' : 'info-lighten-3'"
+                  :icon="item.new ? 'mdi-new-box' : item.soon ? 'mdi-clock-outline' : 'mdi-check-circle'"
+                  size="20"
+                />
+              </template>
+
+              <v-list-item-title class="text-wrap text-body-2">
+                {{ item.text }}
+              </v-list-item-title>
+
+              <template v-if="item.soon" #append>
+                <v-chip
+                  color="warning"
+                  size="x-small"
+                  text="Soon"
+                  variant="tonal"
+                />
+              </template>
+            </v-list-item>
+          </v-list>
+
+          <v-btn
+            :loading="one.isLoading && type === 'solo'"
+            :text="type === 'solo' ? 'Subscribe Now' : 'Select Plan'"
+            :variant="type === 'solo' ? 'flat' : 'outlined'"
+            class="mt-4 text-none"
+            color="primary"
+            rounded="lg"
+            size="large"
+            block
+            @click.stop="type = 'solo'; subscribe()"
+          />
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="6">
+        <v-card
+          :class="{ 'border-primary border-opacity-100': type === 'team' }"
+          class="pa-6 h-100 d-flex flex-column"
+          elevation="0"
+          rounded="xl"
+          border
+          @click="type = 'team'"
+        >
+          <div class="d-flex align-center mb-4">
+            <v-icon
+              class="mr-3"
+              color="primary"
+              icon="mdi-account-group"
+              size="32"
+            />
+
+            <div>
+              <div class="text-h6 font-weight-bold">
+                Team
+
+                <v-chip
+                  class="ml-2"
+                  color="primary"
+                  size="x-small"
+                  text="Best Value"
+                  variant="tonal"
+                />
+              </div>
+
+              <div class="text-body-2 text-medium-emphasis">For teams up to 25 members</div>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <span class="text-h4 font-weight-bold">${{ prices.team[interval].split(' ')[0] }}</span>
+
+            <span class="text-body-2 text-medium-emphasis">{{ interval === 'year' ? '/year' : '/month' }}</span>
+          </div>
+
+          <v-list bg-color="transparent" class="flex-grow-1 px-0" density="compact" slim>
+            <v-list-item v-for="item in features.team" :key="item.text" class="px-0">
+              <template #prepend>
+                <v-icon
+                  :color="item.new ? 'success' : item.soon ? 'warning' : 'info-lighten-3'"
+                  :icon="item.new ? 'mdi-new-box' : item.soon ? 'mdi-clock-outline' : 'mdi-check-circle'"
+                  size="20"
+                />
+              </template>
+
+              <v-list-item-title class="text-wrap text-body-2">
+                {{ item.text }}
+              </v-list-item-title>
+
+              <template v-if="item.soon" #append>
+                <v-chip
+                  color="warning"
+                  size="x-small"
+                  text="Soon"
+                  variant="tonal"
+                />
+              </template>
+            </v-list-item>
+          </v-list>
+
+          <v-btn
+            :loading="one.isLoading && type === 'team'"
+            :text="type === 'team' ? 'Subscribe Now' : 'Select Plan'"
+            :variant="type === 'team' ? 'flat' : 'outlined'"
+            class="mt-4 text-none"
+            color="primary"
+            max-height="44"
+            rounded="lg"
+            size="large"
+            block
+            @click.stop="type = 'team'; subscribe()"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <div class="d-flex justify-center align-center ga-4 mt-10">
       <v-btn-toggle
-        v-model="type"
-        class="mb-6"
-        rounded="lg"
+        v-model="interval"
+        color="primary"
+        rounded="pill"
         variant="outlined"
         mandatory
       >
-        <v-btn class="text-none" prepend-icon="mdi-account-outline" text="Solo Developer" value="solo" />
-        <v-btn append-icon="mdi-account-group-outline" class="text-none" text="Team Access" value="team" />
+        <v-btn class="text-none" min-width="137" text="Monthly" value="month" />
+
+        <v-btn class="text-none" min-width="137" value="year">
+          Annual
+
+          <v-chip
+            class="ml-2"
+            color="success"
+            size="x-small"
+            text="-20%"
+            variant="flat"
+          />
+        </v-btn>
       </v-btn-toggle>
+    </div>
 
-      <div class="mb-6">
-        <div class="text-overline text-medium-emphasis">
-          {{ interval === 'year' ? 'ANNUAL' : 'MONTHLY' }}
-        </div>
-        <div class="text-h3 font-weight-bold text-primary mb-2">
-          ${{ prices[type][interval] }}
-        </div>
-      </div>
-
-      <v-btn
-        :loading="one.isLoading"
-        class="mb-4 text-none"
-        color="primary"
-        rounded="lg"
-        size="x-large"
-        text="Subscribe Now"
-        variant="flat"
-        block
-        @click="subscribe"
-      />
-
-      <v-sheet
-        class="d-flex justify-center align-center pa-2 mb-4"
-        color="transparent"
-        rounded="lg"
-      >
-        <v-switch
-          v-model="interval"
-          color="primary"
-          density="compact"
-          false-value="month"
-          label="Annual Billing (Save 20%)"
-          true-value="year"
-          hide-details
-          inset
-        />
-      </v-sheet>
-
-      <div class="text-caption text-medium-emphasis">
-        Cancel any time. No long‑term commitment.
-      </div>
-    </v-card>
+    <p class="text-caption text-medium-emphasis text-center mt-4">
+      Cancel anytime. Secure payment via Stripe.
+    </p>
   </v-container>
 </template>
 
 <script setup lang="ts">
   const features = {
     solo: [
-      'Access for a Single Developer',
-      'Ad Free Experience on all Vuetify properties',
-      'Premium tools on our platforms; VPlay, VBin, VLink, and VStudio',
-      'Pinned Navigation Items and Rail drawer in Documentation',
-      'Customize Navigation components with Page Suits',
-      'Custom Vuetify One menu avatar',
+      { text: 'Ad-free experience across all Vuetify properties' },
+      { text: 'Private playgrounds, bins, links, and studios with cloud sync' },
+      { text: 'Premium documentation features (pinned nav, rail menu, copy page as markdown)' },
+      { text: 'Early access to new tools and features' },
+      { text: 'Vuetify MCP API (access to your one data anywhere that supports MCP)', new: true },
+      { text: 'Share live updates on Bins and Playgrounds', soon: true },
+      { text: 'Embed playgrounds in your own documentation', soon: true },
     ],
     team: [
-      'Access for up to 25 team members',
-      'Ad Free Experience on all Vuetify properties',
-      'Premium tools on our platforms; VPlay, VBin, VLink, and VStudio',
-      'Pinned Navigation Items and Rail drawer in Documentation',
-      'Customize Navigation components with Page Suits',
-      'Custom Vuetify One menu avatar',
+      { text: 'Everything in Solo, for up to 25 members' },
+      { text: 'Centralized team billing and member management' },
+      { text: 'Shared playgrounds and code snippets', new: false },
+      { text: 'Team shared Private Bins and Playgrounds', soon: true },
+      { text: 'Usage analytics dashboard', soon: true },
     ],
   }
 
   const one = useOneStore()
-  const type = ref <'solo' | 'team'>('solo')
-  const interval = ref<'month' | 'year'>('month')
-
-  const team = computed(() => type.value === 'team')
-
-  const items = computed(() => features[type.value])
+  const type = shallowRef<'solo' | 'team'>('solo')
+  const interval = shallowRef<'month' | 'year'>('year')
 
   const prices = {
     solo: {

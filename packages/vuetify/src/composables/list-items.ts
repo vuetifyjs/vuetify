@@ -5,7 +5,7 @@ import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory }
 // Types
 import type { PropType } from 'vue'
 import type { InternalItem } from '@/composables/filter'
-import type { Primitive, SelectItemKey } from '@/util'
+import type { Primitive, SelectItemKey, ValueComparator } from '@/util'
 
 export interface ListItem<T = any> extends InternalItem<T> {
   title: string
@@ -26,7 +26,7 @@ export interface ItemProps {
   itemProps: SelectItemKey
   itemType: SelectItemKey
   returnObject: boolean
-  valueComparator: typeof deepEqual | undefined
+  valueComparator: ValueComparator | undefined
 }
 
 // Composables
@@ -56,7 +56,7 @@ export const makeItemsProps = propsFactory({
     default: 'type',
   },
   returnObject: Boolean,
-  valueComparator: Function as PropType<typeof deepEqual>,
+  valueComparator: Function as PropType<ValueComparator>,
 }, 'list-items')
 
 const itemTypes = new Set(['item', 'divider', 'subheader'])

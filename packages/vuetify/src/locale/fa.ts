@@ -91,6 +91,7 @@ export default {
     hour: 'ساعت',
     minute: 'دقیقه',
     second: 'ثانیه',
+    notAllowed: 'مقدار مجاز نیست',
   },
   pagination: {
     ariaLabel: {
