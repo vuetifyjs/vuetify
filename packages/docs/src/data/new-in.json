@@ -201,7 +201,8 @@
       "draggable": "3.4.0",
       "referrerpolicy": "3.4.0",
       "crossorigin": "3.4.0",
-      "absolute": "3.7.0"
+      "absolute": "3.7.0",
+      "imageClass": "3.12.0"
     }
   },
   "VInput": {

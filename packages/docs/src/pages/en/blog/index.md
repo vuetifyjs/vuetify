@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Vuetify Project baseline with Vite and TailwindCSS
+
+🖊️ Jacek Czarniecki • 📅 February 16th, 2026
+
+Ever wondered what does it really take to make Vuetify project play in harmony with TailwindCSS? This article is about to lay it out in a consise step-by-step guide. With CSS layers enabled by default in Vuetify v4, the two frameworks coexist smoothly while sharing aligned breakpoints, theme colors, and custom fonts. We cover disabling Vuetify's built-in utilities in favor of Tailwind's, resolving conflicting classes and more. { .text-medium-emphasis }
+
+[Read More](/blog/building-with-vite-and-tailwindcss/) { .text-end }
+
 ## January 2026 Update
 
 🖊️ John Leider • 📅 February 11th, 2026
