@@ -86,6 +86,12 @@ The `v-otp-input` component supports the same variants as `v-field`, `v-text-fie
 
 <ExamplesExample file="v-otp-input/prop-variant" />
 
+#### Masked
+
+Using `masked` prop you can hide the entered characters. It is similar to a `type="password"`, but makes it possible to also restrict characters to digits with `type="number"`.
+
+<ExamplesExample file="v-otp-input/prop-masked" />
+
 #### Loader
 
 The `loader` prop displays a loader when the `v-otp-input` component is in a loading state. When complete, emits a `finish` event.
