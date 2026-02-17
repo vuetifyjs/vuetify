@@ -12,7 +12,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, ref, toRef, watchEffect } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -52,9 +52,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
 
   setup (props, { slots }) {
     const vToolbarRef = ref<VToolbar>()
+
     const isActive = useProxiedModel(props, 'modelValue')
     const scrollBehavior = computed(() => {
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
+
       return {
         hide: behavior.has('hide'),
         fullyHide: behavior.has('fully-hide'),
@@ -160,12 +162,13 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     const { ssrBootStyles } = useSsrBoot()
+
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(() => props.location),
       layoutSize: height,
-      elementSize: shallowRef(undefined),
+      elementSize: height, // This tells layout system to use actual DOM measurements
       active: isActive,
       absolute: toRef(() => props.absolute),
     })
