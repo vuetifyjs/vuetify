@@ -531,14 +531,23 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       return
     }
 
-    if (options.origin) {
-      document.documentElement.style.setProperty('--v-theme-transition-origin', options.origin)
-    }
-    if (options.duration) {
-      document.documentElement.style.setProperty('--v-theme-transition-duration', options.duration)
-    }
+    const origin = options.origin ?? '50% 0%'
+    const duration = options.duration ?? '500ms'
 
-    document.startViewTransition(() => callback())
+    const style = document.createElement('style')
+    style.textContent =
+      `::view-transition-old(root) { animation: none; }` +
+      `::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
+      `@keyframes v-circle-in {` +
+      `  from { clip-path: circle(0% at ${origin}); }` +
+      `  to { clip-path: circle(150% at ${origin}); }` +
+      `}`
+    document.head.appendChild(style)
+
+    const transition = document.startViewTransition(() => callback())
+    transition.finished.then(() => {
+      style.remove()
+    })
   }
 
   function change (themeName: string, transition?: boolean | ThemeTransitionOptions) {

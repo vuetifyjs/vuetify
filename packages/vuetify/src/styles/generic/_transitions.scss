@@ -367,16 +367,4 @@
     }
   }
 
-  ::view-transition-old(root) {
-    animation: none;
-  }
-
-  ::view-transition-new(root) {
-    animation: v-theme-transition-circle-in var(--v-theme-transition-duration, 500ms) settings.$standard-easing;
-  }
-
-  @keyframes v-theme-transition-circle-in {
-    from { clip-path: circle(0% at var(--v-theme-transition-origin, 50% 0%)); }
-    to { clip-path: circle(150% at var(--v-theme-transition-origin, 50% 0%)); }
-  }
 }
