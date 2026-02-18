@@ -1,21 +1,10 @@
 <template>
-  <v-navigation-drawer
-    id="app-drawer"
-    v-model="app.drawer"
-    :expand-on-hover="railEnabled"
-    :image="settings.suit['drawer']"
-    :order="mobile ? -1 : undefined"
-    :rail="railEnabled"
-    width="300"
-    @update:rail="onUpdateRail"
-  >
+  <v-navigation-drawer id="app-drawer" v-model="app.drawer" :expand-on-hover="railEnabled"
+    :image="settings.suit['drawer']" :order="mobile ? -1 : undefined" :rail="railEnabled" width="300"
+    @update:rail="onUpdateRail" permanent>
     <AppDrawerPinnedItems :rail="rail" />
 
-    <AppListList
-      v-model:opened="opened"
-      :items="app.items"
-      nav
-    >
+    <AppListList v-model:opened="opened" :items="app.items" nav>
       <template #divider>
         <v-divider class="my-3 mb-4 ms-10" />
       </template>
@@ -28,69 +17,69 @@
 </template>
 
 <script setup>
-  // Composables
-  import { scrollTo } from 'vuetify/lib/composables/goto'
+// Composables
+import { scrollTo } from 'vuetify/lib/composables/goto'
 
-  const app = useAppStore()
-  const pins = usePinsStore()
-  const settings = useSettingsStore()
-  const user = useUserStore()
+const app = useAppStore()
+const pins = usePinsStore()
+const settings = useSettingsStore()
+const user = useUserStore()
 
-  const { mobile } = useDisplay()
+const { mobile } = useDisplay()
 
-  const rail = shallowRef(user.ecosystem.docs.railDrawer)
-  const _opened = shallowRef([])
-  const opened = computed({
-    get: () => rail.value ? [] : _opened.value,
-    set: val => {
-      if (pins.isPinning) return
+const rail = shallowRef(user.ecosystem.docs.railDrawer)
+const _opened = shallowRef([])
+const opened = computed({
+  get: () => rail.value ? [] : _opened.value,
+  set: val => {
+    if (pins.isPinning) return
 
-      _opened.value = val
-    },
-  })
-  const railEnabled = computed(() => user.ecosystem.docs.railDrawer)
+    _opened.value = val
+  },
+})
+const railEnabled = computed(() => user.ecosystem.docs.railDrawer)
 
-  // Restore scroll position when drawer is expanded
-  let scrollingElement
-  let lastScroll = 0
-  watch(rail, val => {
-    if (val) {
-      lastScroll = scrollingElement.scrollTop
-    } else {
-      scrollTo(lastScroll, {
-        container: scrollingElement,
-      })
-    }
-  })
-
-  watch(railEnabled, val => {
-    rail.value = val
-  })
-
-  onMounted(async () => {
-    scrollingElement = document.querySelector('#app-drawer .v-navigation-drawer__content')
-
-    if (pins.pageIsPinned) {
-      _opened.value = []
-
-      return
-    }
-
-    await wait(1000)
-
-    const element = document.querySelector('#app-drawer .v-list-item--active:not(.v-list-group__header)')
-
-    if (!element) return
-
-    element.scrollIntoView({
-      block: 'center',
-      inline: 'center',
+// Restore scroll position when drawer is expanded
+let scrollingElement
+let lastScroll = 0
+watch(rail, val => {
+  if (val) {
+    lastScroll = scrollingElement.scrollTop
+  } else {
+    scrollTo(lastScroll, {
+      container: scrollingElement,
     })
-  })
-
-  function onUpdateRail (val) {
-    if (railEnabled.value) {
-      rail.value = val
-    }
   }
+})
+
+watch(railEnabled, val => {
+  rail.value = val
+})
+
+onMounted(async () => {
+  scrollingElement = document.querySelector('#app-drawer .v-navigation-drawer__content')
+
+  if (pins.pageIsPinned) {
+    _opened.value = []
+
+    return
+  }
+
+  await wait(1000)
+
+  const element = document.querySelector('#app-drawer .v-list-item--active:not(.v-list-group__header)')
+
+  if (!element) return
+
+  element.scrollIntoView({
+    block: 'center',
+    inline: 'center',
+  })
+})
+
+function onUpdateRail(val) {
+  if (railEnabled.value) {
+    rail.value = val
+  }
+}
 </script>
