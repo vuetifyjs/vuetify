@@ -11,6 +11,7 @@ describe('useLink', () => {
       replace: Boolean,
       to: [String, Object],
       exact: Boolean,
+      disabled: Boolean,
     },
     setup (props, { attrs }) {
       return useLink(props, attrs)
