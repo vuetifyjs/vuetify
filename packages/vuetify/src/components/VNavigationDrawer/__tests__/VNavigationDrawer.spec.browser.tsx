@@ -1,8 +1,7 @@
 // Components
 import { VNavigationDrawer } from '..'
 import { VLayout } from '@/components/VLayout'
-import { VList } from '@/components/VList'
-import { VListItem } from '@/components/VList'
+import { VList, VListItem } from '@/components/VList'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
 
@@ -204,8 +203,8 @@ describe('VNavigationDrawer', () => {
       <VLayout>
         <VNavigationDrawer permanent rail style={{ '--v-list-prepend-gap': '0px' }}>
           <VList>
-            <VListItem prepend-icon="mdi-home" title="Home"></VListItem>
-            <VListItem prepend-icon="mdi-account" title="Account"></VListItem>
+            <VListItem prependIcon="mdi-home" title="Home"></VListItem>
+            <VListItem prependIcon="mdi-account" title="Account"></VListItem>
           </VList>
         </VNavigationDrawer>
 
@@ -214,9 +213,9 @@ describe('VNavigationDrawer', () => {
     ))
 
     await commands.waitStable('.v-navigation-drawer')
-    
+
     const listItems = screen.getAllByCSS('.v-list-item__content')
-    
+
     // Verify that content area has min-width: 0 in rail mode
     for (const content of listItems) {
       const computedStyle = window.getComputedStyle(content)

@@ -2,9 +2,9 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
+        style="--v-list-prepend-gap: 0px"
         permanent
         rail
-        style="--v-list-prepend-gap: 0px"
       >
         <v-list>
           <v-list-item
@@ -15,34 +15,34 @@
               <v-btn
                 icon="mdi-chevron-right"
                 variant="text"
-              ></v-btn>
+              />
             </template>
           </v-list-item>
         </v-list>
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-list density="compact" nav>
           <v-list-item
             prepend-icon="mdi-home-city"
             title="Home"
             value="home"
-          ></v-list-item>
+          />
           <v-list-item
             prepend-icon="mdi-account"
             title="My Account"
             value="account"
-          ></v-list-item>
+          />
           <v-list-item
             prepend-icon="mdi-account-group-outline"
             title="Users"
             value="users"
-          ></v-list-item>
+          />
           <v-list-item
             prepend-icon="mdi-file-document-outline"
             title="Files"
             value="files"
-          ></v-list-item>
+          />
         </v-list>
       </v-navigation-drawer>
 
