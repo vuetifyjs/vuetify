@@ -9,7 +9,7 @@ import {
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
+import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
@@ -50,8 +50,8 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
-  route: ComputedRef<RouteLocation & { href: string} | undefined>
-  navigate: ComputedRef<ReturnType<typeof _useLink>['navigate'] | undefined>
+  route: Readonly<Ref<RouteLocation & { href: string} | undefined>>
+  navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -70,8 +70,8 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
       isClickable,
       href,
       linkProps: reactive({ href }),
-      route: computed(() => undefined),
-      navigate: computed(() => undefined),
+      route: toRef(() => undefined),
+      navigate: toRef(() => undefined),
     }
   }
 
@@ -98,8 +98,8 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     isRouterLink,
     isClickable,
     isActive,
-    route: computed(() => link.value?.route.value),
-    navigate: computed(() => link.value?.navigate),
+    route: toRef(() => link.value?.route.value),
+    navigate: toRef(() => link.value?.navigate),
     href,
     linkProps: reactive({
       href,
