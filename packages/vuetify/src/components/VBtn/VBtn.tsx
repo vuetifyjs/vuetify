@@ -165,13 +165,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
+
       if (link.isRouterLink.value) {
-        link.navigate?.(e)
+        link.navigate.value?.(e)
       } else {
         // Group active state for links is handled by useSelectLink
         group?.toggle()
       }
-    }
 
     useSelectLink(link, group?.select)
 
