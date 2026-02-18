@@ -216,7 +216,7 @@ export const VSelect = genericComponent<new <
     function onMousedownControl () {
       if (menuDisabled.value) return
 
-      menu.value = !menu.value
+      menu.value = !menu.value || !!props.menuProps?.persistent
     }
     function onListKeydown (e: KeyboardEvent) {
       if (checkPrintable(e)) {
@@ -235,7 +235,7 @@ export const VSelect = genericComponent<new <
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
-        menu.value = false
+        menu.value = !!props.menuProps?.persistent
       }
 
       if (props.clearable && e.key === 'Backspace') {
@@ -327,13 +327,13 @@ export const VSelect = genericComponent<new <
         model.value = add ? [item] : []
 
         nextTick(() => {
-          menu.value = false
+          if (props.menuProps?.closeOnContentClick !== false) menu.value = !!props.menuProps?.persistent
         })
       }
     }
     function onBlur (e: FocusEvent) {
       if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
-        menu.value = false
+        menu.value = !!props.menuProps?.persistent
       }
     }
     function onAfterEnter () {
