@@ -1,6 +1,8 @@
 // Components
 import { VNavigationDrawer } from '..'
 import { VLayout } from '@/components/VLayout'
+import { VList } from '@/components/VList'
+import { VListItem } from '@/components/VList'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
 
@@ -195,6 +197,31 @@ describe('VNavigationDrawer', () => {
 
     await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
     await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
+  })
+
+  it('should hide list item text in rail mode with reduced prepend gap', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer permanent rail style={{ '--v-list-prepend-gap': '0px' }}>
+          <VList>
+            <VListItem prepend-icon="mdi-home" title="Home"></VListItem>
+            <VListItem prepend-icon="mdi-account" title="Account"></VListItem>
+          </VList>
+        </VNavigationDrawer>
+
+        <VMain />
+      </VLayout>
+    ))
+
+    await commands.waitStable('.v-navigation-drawer')
+    
+    const listItems = screen.getAllByCSS('.v-list-item__content')
+    
+    // Verify that content area has min-width: 0 in rail mode
+    for (const content of listItems) {
+      const computedStyle = window.getComputedStyle(content)
+      expect(computedStyle.minWidth).toBe('0px')
+    }
   })
 
   showcase({ stories })

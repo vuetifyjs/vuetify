@@ -1,17 +1,52 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <v-fade-transition appear>
-      <component :is="Component" />
-    </v-fade-transition>
-  </router-view>
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer expand-on-hover permanent :rail="true" width="260">
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            subtitle="sandra_a88@gmailcom"
+            title="Sandra Adams"
+          ></v-list-item>
+        </v-list>
 
-  <PromotedScript
-    id="bitterbrainsads-script"
-    script-id="_bitterbrainsads_js"
-    src="//media.bitterbrains.com/main.js?from=VUETIFY&type=top"
-    async
-  />
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <v-list-item
+            prepend-icon="mdi-folder"
+            title="My Files"
+            value="myfiles"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-account-multiple"
+            title="Shared with me"
+            value="shared"
+          ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-star"
+            title="Starred"
+            value="starred"
+          ></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
+  </v-card>
 </template>
+
+<style>
+  :root {
+    --v-list-prepend-gap: 12px;
+  }
+
+  /* reverting https://github.com/vuetifyjs/vuetify/commit/5c9dcb333a751582e5ecae7ea40b49d395d327b1 */
+  .v-list-item__content {
+    /*min-width: auto;*/
+  }
+</style>
+
 
 <script setup lang="ts">
   // Composables

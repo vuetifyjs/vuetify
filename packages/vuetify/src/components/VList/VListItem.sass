@@ -158,6 +158,10 @@
     overflow: hidden
     min-width: $list-item-content-min-width
 
+    .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
+    .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+      min-width: 0
+
   .v-list-item-action
     align-self: center
     display: flex
