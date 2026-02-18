@@ -19,6 +19,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 // Composables
 import { useScrolling } from './useScrolling'
 import { useAutocomplete } from '@/composables/autocomplete'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -46,7 +47,7 @@ import {
 } from '@/util'
 
 // Types
-import type { Component, PropType } from 'vue'
+import type { Component, PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
@@ -100,6 +101,9 @@ export const makeSelectProps = propsFactory({
 }, 'Select')
 
 export const makeVSelectProps = propsFactory({
+  search: String,
+
+  ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
     modelValue: null,
@@ -136,8 +140,8 @@ export const VSelect = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
-    'menu-header': never
-    'menu-footer': never
+    'menu-header': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
+    'menu-footer': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
@@ -148,6 +152,7 @@ export const VSelect = genericComponent<new <
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (value: any) => true,
     'update:menu': (ue: boolean) => true,
+    'update:search': (value: string) => true,
   },
 
   setup (props, { slots }) {
@@ -158,6 +163,8 @@ export const VSelect = genericComponent<new <
     const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const { items, transformIn, transformOut } = useItems(props)
+    const search = useProxiedModel(props, 'search', '')
+    const { filteredItems, getMatches } = useFilter(props, items, () => search.value)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -185,10 +192,11 @@ export const VSelect = genericComponent<new <
     let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
+      const baseItems = search.value ? filteredItems.value : items.value
       if (props.hideSelected) {
-        return items.value.filter(item => !model.value.some(s => (props.valueComparator || deepEqual)(s, item)))
+        return baseItems.filter(item => !model.value.some(s => (props.valueComparator || deepEqual)(s, item)))
       }
-      return items.value
+      return baseItems
     })
 
     const menuDisabled = computed(() => (
@@ -439,6 +447,7 @@ export const VSelect = genericComponent<new <
       }
     }
     function onAfterLeave () {
+      search.value = ''
       if (isFocused.value) {
         vTextFieldRef.value?.focus()
       }
@@ -493,6 +502,11 @@ export const VSelect = genericComponent<new <
         props.label &&
         !props.persistentPlaceholder
       ) ? undefined : props.placeholder
+
+      const menuSlotProps = {
+        search,
+        filteredItems: filteredItems.value,
+      }
 
       return (
         <VTextField
@@ -566,7 +580,7 @@ export const VSelect = genericComponent<new <
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>
-                        { slots['menu-header']() }
+                        { slots['menu-header'](menuSlotProps) }
                       </header>
                     )}
 
@@ -644,6 +658,11 @@ export const VSelect = genericComponent<new <
                                       )}
                                     </>
                                   ),
+                                  title: () => {
+                                    return search.value
+                                      ? highlightResult('v-select', item.title, getMatches(item)?.title)
+                                      : item.title
+                                  },
                                 }}
                               </VListItem>
                             )
@@ -656,7 +675,7 @@ export const VSelect = genericComponent<new <
 
                     { slots['menu-footer'] && (
                       <footer ref={ footerRef }>
-                        { slots['menu-footer']() }
+                        { slots['menu-footer'](menuSlotProps) }
                       </footer>
                     )}
                   </VSheet>
@@ -768,6 +787,8 @@ export const VSelect = genericComponent<new <
     return forwardRefs({
       isFocused,
       menu,
+      search,
+      filteredItems,
       select,
     }, vTextFieldRef)
   },
