@@ -47,7 +47,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
@@ -111,8 +111,8 @@ export const VCombobox = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
-    'menu-header': never
-    'menu-footer': never
+    'menu-header': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
+    'menu-footer': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCombobox',
@@ -588,6 +588,11 @@ export const VCombobox = genericComponent<new <
       const isDirty = model.value.length > 0
       const textFieldProps = VTextField.filterProps(props)
 
+      const menuSlotProps = {
+        search,
+        filteredItems: filteredItems.value,
+      }
+
       return (
         <VTextField
           ref={ vTextFieldRef }
@@ -644,7 +649,7 @@ export const VCombobox = genericComponent<new <
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>
-                        { slots['menu-header']() }
+                        { slots['menu-header'](menuSlotProps) }
                       </header>
                     )}
 
@@ -741,7 +746,7 @@ export const VCombobox = genericComponent<new <
 
                     { slots['menu-footer'] && (
                       <footer ref={ footerRef }>
-                        { slots['menu-footer']() }
+                        { slots['menu-footer'](menuSlotProps) }
                       </footer>
                     )}
                   </VSheet>
