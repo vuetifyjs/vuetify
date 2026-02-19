@@ -50,6 +50,7 @@
   .v-tabs--inset
     --v-tabs-inset-radius: #{$tab-inset-radius}
     --v-tabs-inset-padding: #{$tab-inset-padding}
+    --v-tabs-slider-background: rgba(var(--v-theme-on-surface), .2)
 
     background: rgba(var(--v-theme-on-surface), 0.06)
     box-shadow: inset 0 0 0 2px rgba(var(--v-border-color), var(--v-border-opacity))
@@ -76,6 +77,7 @@
       padding-inline: var(--v-tabs-inset-padding)
 
     .v-tab__slider
+      background: var(--v-tabs-slider-background)
       inset: 0
       border-radius: var(--v-tabs-inset-radius)
       z-index: -1

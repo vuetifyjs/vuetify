@@ -79,6 +79,9 @@
     display: flex
     grid-area: prepend
 
+    *:not(.v-treeview-indent-lines) ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
+
     > .v-badge,
     > .v-icon,
     > .v-tooltip
@@ -89,7 +92,6 @@
     > .v-badge:is(:has(.v-avatar))
       ~ .v-list-item__spacer
         width: var(--v-list-prepend-gap, $list-item-avatar-margin-start)
-
 
     .v-list-item--slim &
       > .v-badge,
@@ -118,6 +120,9 @@
     .v-list-item__spacer
       order: -1
       transition: 150ms width settings.$standard-easing
+
+    * ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
 
     > .v-badge,
     > .v-icon,
@@ -306,24 +311,13 @@
       --indent-padding: -#{$list-nav-padding}
 
   .v-list-group
-    --list-indent-size: #{$list-indent-size}
     --parent-padding: var(--indent-padding)
-    --prepend-width: var(--v-list-group-prepend, #{$list-item-prepend-size})
 
-    .v-list--slim &
-      --prepend-width: var(--v-list-group-prepend, #{$list-item-slim-prepend-size})
-
-    &--fluid
-      --list-indent-size: 0px
-
-    &--prepend
-      --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
-
-    &--fluid.v-list-group--prepend
-      --parent-padding: var(--indent-padding)
+    &--fluid > .v-list-group__items
+      --indent-padding: 0px
 
   .v-list-group__items
-    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent, var(--list-indent-size)))
+    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
     min-width: min-content
 
     .v-navigation-drawer--rail &

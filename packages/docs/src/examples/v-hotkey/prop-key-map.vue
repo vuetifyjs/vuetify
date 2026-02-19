@@ -73,10 +73,19 @@
         <v-card title="Platform Comparison with Custom Mapping">
           <template v-slot:text>
             <div class="mb-4 text-center">
-              <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
-                <v-btn value="pc">PC Platform</v-btn>
-                <v-btn value="mac">Mac Platform</v-btn>
-              </v-btn-toggle>
+              <div class="mb-2">
+                <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
+                  <v-btn value="icon">Icon</v-btn>
+                  <v-btn value="symbol">Symbol</v-btn>
+                  <v-btn value="text">Text</v-btn>
+                </v-btn-toggle>
+              </div>
+              <div>
+                <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                  <v-btn value="pc">PC Platform</v-btn>
+                  <v-btn value="mac">Mac Platform</v-btn>
+                </v-btn-toggle>
+              </div>
             </div>
 
             <v-table>
@@ -94,52 +103,58 @@
                   <td><code>ctrl+s</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
-                  <td>Uses "Control" instead of "Ctrl"</td>
+                  <td>Uses "Control" instead of "Ctrl" in Text mode</td>
                 </tr>
                 <tr>
                   <td><code>alt+f</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
-                  <td>Different symbols: ⎇ vs ⌥/Alt</td>
+                  <td>Different symbols: ⎇ vs ⌥/Alt in Symbol mode</td>
                 </tr>
                 <tr>
                   <td><code>enter</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
-                  <td>Uses "Return" and ⏎ symbol</td>
+                  <td>Uses "Return" and ⏎ symbol in Text mode and Symbol mode respectively</td>
                 </tr>
               </tbody>
             </v-table>
@@ -182,6 +197,7 @@ const customKeyMap = {
   import { ref } from 'vue'
 
   const platform = ref('mac')
+  const displayMode = ref('icon')
 
   const customKeyMap = {
     // Include common keys that we're not customizing
@@ -251,6 +267,7 @@ const customKeyMap = {
     data () {
       return {
         platform: 'mac',
+        displayMode: 'icon',
         customKeyMap: {
           // Include common keys that we're not customizing
           shift: {

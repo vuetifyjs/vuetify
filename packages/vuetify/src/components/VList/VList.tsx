@@ -168,7 +168,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -342,10 +342,9 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     }
 
     useRender(() => {
-      const indent = props.indent ??
-        (props.prependGap
-          ? Number(props.prependGap) + 24
-          : undefined)
+      const ariaMultiselectable = isSelectable.value
+        ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
+        : undefined
 
       return (
         <props.tag
@@ -368,8 +367,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           ]}
           style={[
             {
-              '--v-list-indent': convertToUnit(indent),
-              '--v-list-group-prepend': indent ? '0px' : undefined,
+              '--v-list-indent': convertToUnit(props.indent),
               '--v-list-prepend-gap': convertToUnit(props.prependGap),
             },
             backgroundColorStyles.value,
@@ -383,6 +381,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
               ? `v-list-item-${uid}-${navigationIndex.value}`
               : undefined
           }
+          aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }
