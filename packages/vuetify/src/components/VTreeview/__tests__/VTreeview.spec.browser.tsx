@@ -317,9 +317,9 @@ describe.each([
           />
         ))
 
-        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.parentElement!.querySelector('.v-btn')!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
-        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.parentElement!.querySelector('.v-btn')!)
         // eslint-disable-next-line vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
           // eslint-disable-next-line vitest/no-conditional-expect
@@ -360,13 +360,13 @@ describe.each([
           />
         ))
 
-        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.parentElement!.querySelector('.v-btn')!)
         await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
         ])
 
         await waitAnimationFrame()
-        await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Core/).parentElement!.parentElement!.querySelector('.v-btn')!)
         await expect.poll(() => opened.value).toEqual([
           expect.objectContaining({ id: 1 }),
           expect.objectContaining({ id: 2 }),
@@ -648,9 +648,9 @@ describe.each([
           expect.objectContaining({ id: 301 }),
           expect.objectContaining({ id: 302 }),
         ])
-        await userEvent.click(screen.getByText(/Administrators/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Administrators/).parentElement!.parentElement!.querySelector('.v-checkbox-btn')!)
         expect(selected.value).toStrictEqual([])
-        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
+        await userEvent.click(screen.getByText(/Vuetify/).parentElement!.parentElement!.querySelector('.v-checkbox-btn')!)
         expect(selected.value).toStrictEqual([
           expect.objectContaining({ id: 4 }),
           expect.objectContaining({ id: 201 }),
