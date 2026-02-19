@@ -177,8 +177,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
       const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
       const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
-      const prependGap = Number(props.prependGap ?? 10)
-      const indent = props.indent ?? (props.fluid ? 28 : 24)
 
       return (
         <VList
@@ -201,8 +199,8 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             props.style,
           ]}
           opened={ opened.value }
-          indent={ indent }
-          prependGap={ prependGap }
+          indent={ props.indent }
+          prependGap={ props.prependGap }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >

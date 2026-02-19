@@ -4,6 +4,9 @@
 
 @include tools.layer('components')
   .v-list
+    --v-list-prepend-gap: #{$list-item-prepend-size}
+    --v-list-indent: calc(var(--v-list-prepend-gap) + #{$list-item-prepend-icon-size})
+
     overflow: auto
     padding: $list-padding
     position: relative
@@ -13,6 +16,9 @@
     @include tools.elevation($list-elevation)
     @include tools.rounded($list-border-radius)
     @include tools.theme($list-theme...)
+
+    &--slim
+      --v-list-prepend-gap: #{$list-item-slim-prepend-size}
 
     &--disabled
       pointer-events: none

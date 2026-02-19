@@ -3,7 +3,7 @@
 
 @include tools.layer('components')
   .v-treeview-item
-    --list-indent-size: #{$treeview-indent-size}
+
     &.v-treeview-item--filtered
       display: none
 
@@ -13,14 +13,17 @@
       .v-selection-control
         pointer-events: none
 
-
-
     .v-list-item-action--start
       margin-inline: -4px 4px
 
   .v-treeview
     --v-treeview-indent-line-color: #{$treeview-indent-line-color}
     --v-treeview-indent-line-opacity: #{$treeview-indent-lines-opacity}
+    --v-list-prepend-gap: #{$treeview-prepend-gap}
+    --v-list-indent: #{$treeview-indent-size}
+
+    &.v-list--slim
+      --v-list-indent: #{$treeview-slim-indent-size}
 
     &.v-list--disabled .v-list-item__prepend
       pointer-events: auto
@@ -89,7 +92,6 @@
         margin-inline-end: $treeview-indent-line-leaf-margin-right
 
   .v-treeview-group.v-list-group
-    --list-indent-size: 0px
     .v-list-group__items > .v-list-item
       --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
 
