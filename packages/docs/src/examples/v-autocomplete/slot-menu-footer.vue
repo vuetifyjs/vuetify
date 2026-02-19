@@ -1,21 +1,22 @@
 <template>
-  <v-autocomplete
-    v-model="model"
-    v-model:menu="menu"
-    :items="items"
-    item-title="value"
-    item-value="id"
-    chips
-    closable-chips
-    multiple
-  >
-    <template v-slot:menu-footer>
-      <div class="d-flex justify-space-between pa-2 border-t">
-        <v-btn text="Clear" variant="text" @click="model = []"></v-btn>
-        <v-btn text="Done" variant="tonal" @click="menu = false"></v-btn>
-      </div>
-    </template>
-  </v-autocomplete>
+  <v-container>
+    <v-autocomplete
+      v-model="model"
+      v-model:menu="menu"
+      :items="items"
+      item-title="value"
+      item-value="id"
+      hide-details
+      multiple
+    >
+      <template v-slot:menu-footer>
+        <div class="d-flex justify-space-between pa-2 border-t">
+          <v-btn text="Clear" variant="text" @click="model = []"></v-btn>
+          <v-btn text="Done" variant="tonal" @click="menu = false"></v-btn>
+        </div>
+      </template>
+    </v-autocomplete>
+  </v-container>
 </template>
 
 <script setup>

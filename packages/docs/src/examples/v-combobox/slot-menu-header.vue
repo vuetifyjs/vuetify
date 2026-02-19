@@ -1,27 +1,27 @@
 <template>
-  <v-combobox
-    v-model="model"
-    v-model:menu="menu"
-    :items="filteredItems"
-    item-title="value"
-    item-value="id"
-    chips
-    closable-chips
-    multiple
-  >
-    <template v-slot:menu-header>
-      <v-tabs
-        v-model="tab"
-        class="mt-2"
-        slider-color="primary"
-        grow
-        @keydown.enter.stop
-      >
-        <v-tab value="fruits">Fruits</v-tab>
-        <v-tab value="vegetables">Vegetables</v-tab>
-      </v-tabs>
-    </template>
-  </v-combobox>
+  <v-container>
+    <v-combobox
+      v-model="model"
+      v-model:menu="menu"
+      :items="filteredItems"
+      item-title="value"
+      item-value="id"
+      multiple
+    >
+      <template v-slot:menu-header>
+        <v-tabs
+          v-model="tab"
+          class="mt-2"
+          slider-color="primary"
+          grow
+          @keydown.enter.stop
+        >
+          <v-tab value="fruits">Fruits</v-tab>
+          <v-tab value="vegetables">Vegetables</v-tab>
+        </v-tabs>
+      </template>
+    </v-combobox>
+  </v-container>
 </template>
 
 <script setup>
