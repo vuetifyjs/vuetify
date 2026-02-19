@@ -99,6 +99,12 @@ This is required for virtual scrolling to work properly — without it, only par
 
 <ExamplesExample file="v-autocomplete/slot-item-and-vbind-props" />
 
+#### Menu footer
+
+The **menu-footer** slot allows you to add custom content at the bottom of the dropdown menu, such as action buttons for clearing the selection or closing the menu.
+
+<ExamplesExample file="v-autocomplete/slot-menu-footer" />
+
 ### Misc
 
 #### Asynchronous items
