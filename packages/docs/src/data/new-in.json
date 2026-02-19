@@ -18,6 +18,10 @@
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VAvatar": {
@@ -75,6 +79,10 @@
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VConfirmEdit": {
@@ -273,6 +281,10 @@
       "autocomplete": "3.10.0",
       "listProps": "3.5.0",
       "noAutoScroll": "3.9.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VSlider": {
