@@ -35,6 +35,8 @@
         > .v-selection-control
           margin-inline: min(0px, calc(-1 * (var(--v-selection-control-size) - var(--v-list-indent)) / 2))
 
+    // complex selector to keep showing spacer when fluid is used in basic scenario (no checkboxes, no icons)
+    // it is a heacache to understand because it describes conditions to hide the spacer (counter intuitive)
     .v-list-group > .v-list-group__header:not(:has(.v-list-item-action + .v-list-item__spacer)),
     &:not(&--fluid) .v-list-group > .v-list-group__header:has(.v-list-item-action + .v-list-item__spacer)
       + .v-list-group__items > .v-list-item > .v-list-item__prepend
@@ -105,7 +107,7 @@
         --indent-padding: var(--v-list-indent)
 
     &:has(> .v-list-item .v-list-item-action > .v-btn) > .v-list-group__items > .v-list-item
-      --indent-padding: calc(var(--parent-padding) + var(--v-list-indent) + 28px)
+      --indent-padding: calc(var(--parent-padding) + var(--v-list-indent) + #{$treeview-action-width})
 
       .v-treeview--fluid &
-        --indent-padding: calc(var(--parent-padding) + 28px)
+        --indent-padding: calc(var(--parent-padding) + #{$treeview-action-width})
