@@ -20,7 +20,7 @@ export const makeDataTablePaginateProps = propsFactory({
     default: 10,
   },
   pageBy: {
-    type: String as PropType<'item' | 'group' | 'any' | 'auto'>,
+    type: String as PropType<'item' | 'any' | 'auto'>,
     default: 'any',
   },
 }, 'DataTable-paginate')
