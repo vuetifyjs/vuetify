@@ -20,20 +20,26 @@
     --v-treeview-indent-line-color: #{$treeview-indent-line-color}
     --v-treeview-indent-line-opacity: #{$treeview-indent-lines-opacity}
     --v-list-prepend-gap: #{$treeview-prepend-gap}
-    --v-list-indent: #{$treeview-indent-size}
-
-    &.v-list--slim
-      --v-list-indent: #{$treeview-slim-indent-size}
 
     &.v-list--disabled .v-list-item__prepend
       pointer-events: auto
 
+    .v-list-item--slim > .v-list-item__prepend
+      &:not(:has(.v-list-item-action))
+        > .v-icon
+          margin-inline-start: $treeview-item-first-icon-margin-start
 
     &:has(.v-treeview-indent-lines)
       .v-list-item-action:first-child,
       .v-treeview-indent-lines + .v-list-item-action
         > .v-selection-control
-          margin-inline: min(0px, calc(-1 * (var(--v-selection-control-size) - #{$treeview-indent-size}) / 2))
+          margin-inline: min(0px, calc(-1 * (var(--v-selection-control-size) - var(--v-list-indent)) / 2))
+
+    .v-list-group > .v-list-group__header:not(:has(.v-list-item-action + .v-list-item__spacer)),
+    &:not(&--fluid) .v-list-group > .v-list-group__header:has(.v-list-item-action + .v-list-item__spacer)
+      + .v-list-group__items > .v-list-item > .v-list-item__prepend
+        > .v-list-item-action:has(.v-treeview-item__level) + .v-list-item__spacer
+            width: 0
 
   .v-treeview-indent-lines
     position: absolute

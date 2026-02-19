@@ -2,12 +2,10 @@
 @use 'sass:math';
 
 $treeview-item-spacer-width: 10px !default;
-$treeview-item-first-icon-margin-start: -6px !default;
+$treeview-item-first-icon-margin-start: -2px !default;
 
 $treeview-prepend-gap: 10px !default;
 $treeview-action-width: 28px !default; // expand toggle VBtn
-$treeview-indent-size: 28px !default; // matches the expand toggle VBtn
-$treeview-slim-indent-size: 24px !default;
 
 $treeview-indent-lines-padding-left: 12px !default;
 $treeview-indent-lines-gap: 0 !default;

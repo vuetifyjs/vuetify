@@ -199,8 +199,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             props.style,
           ]}
           opened={ opened.value }
-          indent={ props.indent }
-          prependGap={ props.prependGap }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
