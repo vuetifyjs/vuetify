@@ -14,15 +14,9 @@
         pointer-events: none
 
 
-    &__level
-      width: #{$treeview-indent-size}
-
-      .v-treeview--fluid &
-        width: 0
 
     .v-list-item-action--start
-      margin-inline-end: 4px
-      margin-inline-start: -4px
+      margin-inline: -4px 4px
 
   .v-treeview
     --v-treeview-indent-line-color: #{$treeview-indent-line-color}
@@ -99,5 +93,11 @@
     .v-list-group__items > .v-list-item
       --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
 
+      .v-treeview--fluid &
+        --indent-padding: var(--v-list-indent)
+
     &:has(> .v-list-item .v-list-item-action > .v-btn) > .v-list-group__items > .v-list-item
       --indent-padding: calc(var(--parent-padding) + var(--v-list-indent) + 28px)
+
+      .v-treeview--fluid &
+        --indent-padding: calc(var(--parent-padding) + 28px)

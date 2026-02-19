@@ -315,6 +315,9 @@
     --list-indent-size: #{$list-indent-size}
     --parent-padding: var(--indent-padding)
 
+    &--fluid > .v-list-group__items
+      --indent-padding: 0px
+
   .v-list-group__items
     --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
     min-width: min-content

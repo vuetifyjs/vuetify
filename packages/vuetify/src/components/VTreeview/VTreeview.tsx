@@ -178,7 +178,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
       const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
       const prependGap = Number(props.prependGap ?? 10)
-      const indent = props.indent ?? (prependGap + 24)
+      const indent = props.indent ?? (props.fluid ? 28 : 24)
 
       return (
         <VList
