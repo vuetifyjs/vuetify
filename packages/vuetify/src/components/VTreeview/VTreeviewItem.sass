@@ -58,7 +58,7 @@
     &--line
       border-inline-start-width: $treeview-indent-line-width
       height: 100%
-      width: calc(50% + #{$treeview-indent-line-width-half})
+      width: calc(100% - #{$treeview-action-width} / 2 + #{$treeview-indent-line-width-half})
       justify-self: end
 
     &--leaf
@@ -78,13 +78,13 @@
       border-bottom-width: $treeview-indent-line-width
       height: calc(50% + #{$treeview-indent-line-width-half})
       margin-inline-start: $treeview-indent-lines-gap
-      margin-inline-end: $treeview-indent-line-leaf-link-margin-right
+      margin-inline-end: calc(100% - #{$treeview-indent-line-leaf-link-width})
 
     &--last-leaf
       border-inline-start-width: $treeview-indent-line-width
       border-bottom-width: $treeview-indent-line-width
       height: calc(50% + #{$treeview-indent-line-width-half})
-      margin-inline-start: calc(50% - #{$treeview-indent-line-width-half})
+      margin-inline-start: calc(#{$treeview-indent-line-leaf-link-width} / 2 + #{$treeview-indent-line-width-half})
       border-bottom-left-radius: $treeview-indent-line-border-radius
 
       @include tools.rtl()
