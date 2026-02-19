@@ -31,6 +31,7 @@ export const makeVTreeviewItemProps = propsFactory({
   hasCustomPrepend: Boolean,
   indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
+  toggleExpanded: Boolean,
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
@@ -132,6 +133,8 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               icon={ props.toggleIcon }
                               loading={ props.loading }
                               variant="text"
+                              aria-expanded={ props.toggleExpanded }
+                              aria-label={ props.toggleExpanded ? 'Collapse' : 'Expand' }
                               onClick={ onClickAction }
                             >
                               {{
@@ -153,6 +156,8 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                   icon: props.toggleIcon,
                                   variant: 'text',
                                   loading: props.loading,
+                                  'aria-expanded': props.toggleExpanded,
+                                  'aria-label': props.toggleExpanded ? 'Collapse' : 'Expand',
                                 },
                                 VProgressCircular: {
                                   indeterminate: 'disable-shrink',
