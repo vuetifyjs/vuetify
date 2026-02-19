@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from './useScrolling'
+import { useFocusGroups } from '../../composables/focusGroups'
 import { useAutocomplete } from '@/composables/autocomplete'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
@@ -36,7 +37,6 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
-  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -63,12 +63,6 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject> | null
-
-type FocusableGroups = {
-  header: HTMLElement[]
-  list: HTMLElement[]
-  footer: HTMLElement[]
-}
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -227,6 +221,17 @@ export const VSelect = genericComponent<new <
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const { onTabKeydown } = useFocusGroups({
+      groups: [
+        { type: 'element' as const, contentRef: headerRef },
+        { type: 'list' as const, contentRef: listRef, displayItemsCount: () => displayItems.value.length },
+        { type: 'element' as const, contentRef: footerRef },
+      ],
+      onLeave: () => {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      },
+    })
 
     function onClear (e: MouseEvent | KeyboardEvent) {
       if (props.openOnClear) {
@@ -240,91 +245,13 @@ export const VSelect = genericComponent<new <
     }
 
     function onMenuKeydown (e: KeyboardEvent) {
-      const target = e.target as Element
-
-      const eventOrigin = headerRef.value?.contains(target) ? 'header'
-        : footerRef.value?.contains(target) ? 'footer'
-        : 'list'
-
       if (e.key === 'Tab') {
-        handleTab(eventOrigin, e)
+        onTabKeydown(e)
       }
 
-      if (eventOrigin === 'list' && checkPrintable(e)) {
+      if (listRef.value?.$el.contains(e.target) && checkPrintable(e)) {
         onKeydown(e)
       }
-    }
-
-    function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
-      const direction = e.shiftKey ? 'backward' : 'forward'
-      const focusable = {
-        header: headerRef.value ? focusableChildren(headerRef.value) : [],
-        list: listRef.value ? focusableChildren(listRef.value.$el) : [],
-        footer: footerRef.value ? focusableChildren(footerRef.value) : [],
-      }
-
-      const nextSlot = nextFocusSlot(focusable, origin, direction, e.target as Element)
-
-      if (nextSlot) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        if (nextSlot === 'header') {
-          focusable.header.at(-1)!.focus()
-        } else if (nextSlot === 'footer') {
-          focusable.footer.at(0)!.focus()
-        } else if (nextSlot === 'list') {
-          if (displayItems.value.length > 0) {
-            // focusing first or last is just as bad when it does not take virtualization into account
-            // ideally we would send `undefined` and it should re-focus last item
-            listRef.value?.focus(0)
-          } else {
-            focusable.list.at(origin === 'header' ? 0 : -1)!.focus()
-          }
-        }
-        return
-      }
-
-      if (
-        (origin === 'header' && direction === 'backward' && focusable.header.at(0) === e.target) ||
-        (origin === 'list' && direction === 'backward' && focusable.header.length === 0) ||
-        (origin === 'footer' && direction === 'forward' && focusable.footer.at(-1) === e.target) ||
-        (origin === 'list' && direction === 'forward' && focusable.footer.length === 0)
-      ) {
-        // We did not need this previously... needs some investigation
-        menu.value = false
-        vTextFieldRef.value?.focus()
-      }
-    }
-
-    function nextFocusSlot (
-      focusable: FocusableGroups,
-      origin: 'header' | 'list' | 'footer',
-      direction: 'forward' | 'backward',
-      target: Element
-    ): keyof FocusableGroups | null {
-      if (origin === 'header' && direction === 'forward' && focusable.header.at(-1) === target) {
-        if (focusable.list.length > 0 || displayItems.value.length > 0) {
-          return 'list'
-        } else if (focusable.footer.length > 0) {
-          return 'footer'
-        }
-      }
-      if (origin === 'list') {
-        if (direction === 'forward' && focusable.footer.length > 0) {
-          return 'footer'
-        }
-        if (direction === 'backward' && focusable.header.length > 0) {
-          return 'header'
-        }
-      }
-      if (origin === 'footer' && direction === 'backward' && focusable.footer.at(0) === target) {
-        if (focusable.list.length > 0 || displayItems.value.length > 0) {
-          return 'list'
-        } else if (focusable.header.length > 0) {
-          return 'header'
-        }
-      }
-      return null
     }
 
     function onKeydown (e: KeyboardEvent) {

@@ -21,6 +21,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { transformItem, useItems } from '@/composables/list-items'
@@ -35,7 +36,6 @@ import {
   deepEqual,
   ensureValidVNode,
   escapeForRegex,
-  focusableChildren,
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
@@ -255,6 +255,17 @@ export const VCombobox = genericComponent<new <
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const { onTabKeydown } = useFocusGroups({
+      groups: [
+        { type: 'element' as const, contentRef: headerRef },
+        { type: 'list' as const, contentRef: listRef, displayItemsCount: () => displayItems.value.length },
+        { type: 'element' as const, contentRef: footerRef },
+      ],
+      onLeave: () => {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      },
+    })
     function onClear (e: MouseEvent) {
       cleared = true
       nextTick(() => (cleared = false))
@@ -278,89 +289,15 @@ export const VCombobox = genericComponent<new <
       menu.value = !menu.value
     }
     function onMenuKeydown (e: KeyboardEvent) {
-      const target = e.target as Element
-
-      const eventOrigin = headerRef.value?.contains(target) ? 'header'
-        : footerRef.value?.contains(target) ? 'footer'
-        : 'list'
-
       if (e.key === 'Tab') {
-        handleTab(eventOrigin, e)
+        onTabKeydown(e)
       }
 
-      if (eventOrigin === 'list' && (checkPrintable(e) || e.key === 'Backspace')) {
+      if (listRef.value?.$el.contains(e.target) && (checkPrintable(e) || e.key === 'Backspace')) {
         vTextFieldRef.value?.focus()
       }
     }
 
-    function handleTab (origin: 'header' | 'list' | 'footer', e: KeyboardEvent) {
-      const direction = e.shiftKey ? 'backward' : 'forward'
-      const focusable = {
-        header: headerRef.value ? focusableChildren(headerRef.value) : [],
-        list: listRef.value ? focusableChildren(listRef.value.$el) : [],
-        footer: footerRef.value ? focusableChildren(footerRef.value) : [],
-      }
-
-      const nextSlot = nextFocusSlot(focusable, origin, direction, e.target as Element)
-
-      if (nextSlot) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        if (nextSlot === 'header') {
-          focusable.header.at(-1)!.focus()
-        } else if (nextSlot === 'footer') {
-          focusable.footer.at(0)!.focus()
-        } else if (nextSlot === 'list') {
-          if (displayItems.value.length > 0) {
-            listRef.value?.focus(0)
-          } else {
-            focusable.list.at(origin === 'header' ? 0 : -1)!.focus()
-          }
-        }
-        return
-      }
-
-      if (
-        (origin === 'header' && direction === 'backward' && focusable.header.at(0) === e.target) ||
-        (origin === 'list' && direction === 'backward' && focusable.header.length === 0) ||
-        (origin === 'footer' && direction === 'forward' && focusable.footer.at(-1) === e.target) ||
-        (origin === 'list' && direction === 'forward' && focusable.footer.length === 0)
-      ) {
-        menu.value = false
-        vTextFieldRef.value?.focus()
-      }
-    }
-
-    function nextFocusSlot (
-      focusable: { header: HTMLElement[], list: HTMLElement[], footer: HTMLElement[] },
-      origin: 'header' | 'list' | 'footer',
-      direction: 'forward' | 'backward',
-      target: Element
-    ): 'header' | 'list' | 'footer' | null {
-      if (origin === 'header' && direction === 'forward' && focusable.header.at(-1) === target) {
-        if (focusable.list.length > 0 || displayItems.value.length > 0) {
-          return 'list'
-        } else if (focusable.footer.length > 0) {
-          return 'footer'
-        }
-      }
-      if (origin === 'list') {
-        if (direction === 'forward' && focusable.footer.length > 0) {
-          return 'footer'
-        }
-        if (direction === 'backward' && focusable.header.length > 0) {
-          return 'header'
-        }
-      }
-      if (origin === 'footer' && direction === 'backward' && focusable.footer.at(0) === target) {
-        if (focusable.list.length > 0 || displayItems.value.length > 0) {
-          return 'list'
-        } else if (focusable.header.length > 0) {
-          return 'header'
-        }
-      }
-      return null
-    }
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (isComposingIgnoreKey(e) || form.isReadonly.value) return
