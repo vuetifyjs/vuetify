@@ -201,7 +201,8 @@
       "draggable": "3.4.0",
       "referrerpolicy": "3.4.0",
       "crossorigin": "3.4.0",
-      "absolute": "3.7.0"
+      "absolute": "3.7.0",
+      "imageClass": "3.12.0"
     }
   },
   "VInput": {
@@ -247,7 +248,8 @@
   },
   "VOtpInput": {
     "props": {
-      "density": "3.12.0"
+      "density": "3.12.0",
+      "masked": "3.12.0"
     }
   },
   "VOverlay": {
@@ -387,7 +389,8 @@
   },
   "VToolbar": {
     "props": {
-      "collapsePosition": "3.11.0"
+      "collapsePosition": "3.11.0",
+      "location": "3.12.0"
     }
   },
   "VTooltip": {

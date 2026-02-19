@@ -91,6 +91,7 @@ export default {
     hour: 'Jam',
     minute: 'Menit',
     second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
