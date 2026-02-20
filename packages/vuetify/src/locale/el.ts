@@ -91,6 +91,7 @@ export default {
     hour: 'Ώρα',
     minute: 'Λεπτά',
     second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Ο χαρακτήρας {0} δεν επιτρέπεται',
     notEmpty: 'Παρακαλώ επιλέξτε τουλάχιστον μία τιμή',
     pattern: 'Μη έγκυρη μορφή',
+  },
+  command: {
+    search: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
   },
   hotkey: {
     then: 'στη συνέχεια',

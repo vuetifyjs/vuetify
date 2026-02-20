@@ -91,6 +91,7 @@ export default {
     hour: 'Час',
     minute: 'Минуты',
     second: 'Секунды',
+    notAllowed: 'Значение не разрешено',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Символ {0} не разрешен',
     notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
     pattern: 'Недопустимый формат',
+  },
+  command: {
+    search: 'Введите команду или введите...',
   },
   hotkey: {
     then: 'затем',

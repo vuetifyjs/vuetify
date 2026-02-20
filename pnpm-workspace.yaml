@@ -6,6 +6,8 @@ autoInstallPeers: false
 ignoreWorkspaceRootCheck: true
 
 ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
   - edgedriver
   - geckodriver
   - unrs-resolver
@@ -20,14 +22,9 @@ minimumReleaseAgeExclude:
   - '@vuetify/testing-library-dom'
   - playwright
   - playwright-core
-  - '@vizzly-testing/vitest@0.0.3'
-  - '@vizzly-testing/cli@0.16.4'
-  - '@vizzly-testing/honeydiff@0.4.3'
+  - '@vizzly-testing/vitest@0.1.1'
 
 nodeLinker: hoisted
-
-onlyBuiltDependencies:
-  - esbuild@0.25.9
 
 overrides:
   '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.3

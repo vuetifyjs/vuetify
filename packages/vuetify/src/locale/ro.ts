@@ -91,6 +91,7 @@ export default {
     hour: 'Oră',
     minute: 'Minute',
     second: 'Secunde',
+    notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Caracterele {0} nu sunt permise',
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
+  },
+  command: {
+    search: 'Tastați o comandă sau căutați...',
   },
   hotkey: {
     then: 'apoi',

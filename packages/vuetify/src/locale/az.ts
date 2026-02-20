@@ -91,6 +91,7 @@ export default {
     hour: 'Saat',
     minute: 'Dəqiqə',
     second: 'Saniyə',
+    notAllowed: 'Dəyərə icazə verilmir',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: '{0} simvoluna icazə verilmir',
     notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
     pattern: 'Yanlış format',
+  },
+  command: {
+    search: 'Əmr yazın və ya axtarış edin...',
   },
   hotkey: {
     then: 'sonra',

@@ -8,9 +8,11 @@ import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
 import { VIcon } from '@/components/VIcon'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
@@ -18,6 +20,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
@@ -26,7 +29,7 @@ import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
   checkPrintable,
   deepEqual,
@@ -42,7 +45,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
@@ -71,7 +74,7 @@ export const makeVAutocompleteProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: null,
     role: 'combobox',
-  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  }), ['validationValue', 'dirty']),
 }, 'VAutocomplete')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
@@ -102,6 +105,8 @@ export const VAutocomplete = genericComponent<new <
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'menu-header': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
+    'menu-footer': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
@@ -127,6 +132,7 @@ export const VAutocomplete = genericComponent<new <
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
+    const { InputIcon } = useInputIcon(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -156,14 +162,17 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
+    const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
+    const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
+
     const highlightFirst = computed(() => {
       const selectFirst = props.autoSelectFirst === true ||
-        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+        (props.autoSelectFirst === 'exact' && search.value === firstSelectableItem.value?.title)
       return selectFirst &&
         displayItems.value.length > 0 &&
         !isPristine.value &&
@@ -184,10 +193,23 @@ export const VAutocomplete = genericComponent<new <
       },
     })
 
-    const { menuId, ariaExpanded, ariaControls, ariaLabel } = useMenuActivator(props, menu)
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
     const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const { onTabKeydown } = useFocusGroups({
+      groups: [
+        { type: 'element' as const, contentRef: headerRef },
+        { type: 'list' as const, contentRef: listRef, displayItemsCount: () => displayItems.value.length },
+        { type: 'element' as const, contentRef: footerRef },
+      ],
+      onLeave: () => {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      },
+    })
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -209,11 +231,17 @@ export const VAutocomplete = genericComponent<new <
       }
       menu.value = !menu.value
     }
-    function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e) || e.key === 'Backspace') {
+    function onMenuKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        onTabKeydown(e)
+      }
+
+      if (listRef.value?.$el.contains(e.target) && (checkPrintable(e) || e.key === 'Backspace')) {
         vTextFieldRef.value?.focus()
       }
     }
+
+    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (form.isReadonly.value) return
 
@@ -235,9 +263,10 @@ export const VAutocomplete = genericComponent<new <
       if (
         highlightFirst.value &&
         ['Enter', 'Tab'].includes(e.key) &&
-        !model.value.some(({ value }) => value === displayItems.value[0].value)
+        firstSelectableItem.value &&
+        !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
       ) {
-        select(displayItems.value[0])
+        select(firstSelectableItem.value)
       }
 
       if (e.key === 'ArrowDown' && highlightFirst.value) {
@@ -330,6 +359,13 @@ export const VAutocomplete = genericComponent<new <
     }
     function onUpdateModelValue (v: any) {
       if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
+    }
+
+    function onBlur (e: FocusEvent) {
+      const menuContent = vMenuRef.value?.contentEl
+      if (menuContent?.contains(e.relatedTarget as Node)) {
+        isFocused.value = true
+      }
     }
 
     const isSelecting = shallowRef(false)
@@ -425,6 +461,11 @@ export const VAutocomplete = genericComponent<new <
       const isDirty = model.value.length > 0
       const textFieldProps = VTextField.filterProps(props)
 
+      const menuSlotProps = {
+        search,
+        filteredItems: filteredItems.value,
+      }
+
       return (
         <VTextField
           ref={ vTextFieldRef }
@@ -453,12 +494,13 @@ export const VAutocomplete = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
+          onBlur={ onBlur }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ id }) => (
               <>
                 <VMenu
                   id={ menuId.value }
@@ -475,23 +517,34 @@ export const VAutocomplete = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      filterable
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
-                      tabindex="-1"
-                      selectable
-                      aria-live="polite"
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
+                  <VSheet
+                    onFocusin={ onFocusin }
+                    onKeydown={ onMenuKeydown }
+                  >
+                    { slots['menu-header'] && (
+                      <header ref={ headerRef }>
+                        { slots['menu-header'](menuSlotProps) }
+                      </header>
+                    )}
+
+                    { hasList && (
+                      <VList
+                        key="autocomplete-list"
+                        ref={ listRef }
+                        filterable
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                        onFocusout={ onFocusout }
+                        tabindex="-1"
+                        selectable={ !!displayItems.value.length }
+                        aria-live="polite"
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
@@ -503,8 +556,10 @@ export const VAutocomplete = genericComponent<new <
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
-                            active: (highlightFirst.value && index === 0) ? true : undefined,
+                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
                             onClick: () => select(item, null),
+                            'aria-posinset': index + 1,
+                            'aria-setsize': displayItems.value.length,
                           })
 
                           if (item.type === 'divider') {
@@ -534,6 +589,7 @@ export const VAutocomplete = genericComponent<new <
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
+                                      aria-hidden
                                       onClick={ (event: MouseEvent) => event.preventDefault() }
                                     />
                                   ) : undefined }
@@ -560,7 +616,14 @@ export const VAutocomplete = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  )}
+                    )}
+
+                    { slots['menu-footer'] && (
+                      <footer ref={ footerRef }>
+                        { slots['menu-footer'](menuSlotProps) }
+                      </footer>
+                    )}
+                  </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
@@ -616,7 +679,7 @@ export const VAutocomplete = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            closable={ props.closableChips }
+                            closable={ closableChips.value }
                             size="small"
                             text={ item.title }
                             disabled={ item.props.disabled }
@@ -627,7 +690,7 @@ export const VAutocomplete = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                closable: props.closableChips,
+                                closable: closableChips.value,
                                 size: 'small',
                                 text: item.title,
                               },
@@ -661,11 +724,17 @@ export const VAutocomplete = genericComponent<new <
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
-                    aria-label={ ariaLabel.value }
-                    title={ ariaLabel.value }
+                    aria-hidden
                     tabindex="-1"
                   />
                 ) : undefined }
+                { props.appendInnerIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ args[0].iconColor.value }
+                  />
+                )}
               </>
             ),
           }}

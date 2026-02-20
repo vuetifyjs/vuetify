@@ -194,18 +194,20 @@ function flattenItems <T extends GroupableItem> (
 }
 
 export function useGroupedItems <T extends GroupableItem> (
-  items: Ref<T[]>,
+  items: MaybeRefOrGetter<readonly T[]>,
   groupBy: Ref<readonly SortItem[]>,
   opened: Ref<Set<string>>,
   hasSummary: MaybeRefOrGetter<boolean>,
 ) {
-  const flatItems = computed(() => {
-    if (!groupBy.value.length) return items.value
-
-    const groupedItems = groupItems(items.value, groupBy.value.map(item => item.key))
-
-    return flattenItems(groupedItems, opened.value, toValue(hasSummary))
+  const groups = computed(() => {
+    if (!groupBy.value.length) return []
+    return groupItems(toValue(items), groupBy.value.map(item => item.key))
   })
 
-  return { flatItems }
+  const flatItems = computed(() => {
+    if (!groupBy.value.length) return toValue(items)
+    return flattenItems(groups.value, opened.value, toValue(hasSummary))
+  })
+
+  return { groups, flatItems }
 }

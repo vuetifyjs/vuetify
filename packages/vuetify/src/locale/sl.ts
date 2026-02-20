@@ -91,6 +91,7 @@ export default {
     hour: 'Ura',
     minute: 'Minute',
     second: 'Sekunde',
+    notAllowed: 'Vrednost ni dovoljena',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Znak {0} ni dovoljen',
     notEmpty: 'Izberite vsaj eno vrednost',
     pattern: 'Neveljaven format',
+  },
+  command: {
+    search: 'Vnesite ukaz ali iščite...',
   },
   hotkey: {
     then: 'nato',

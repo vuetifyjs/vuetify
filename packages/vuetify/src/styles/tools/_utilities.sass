@@ -43,10 +43,13 @@
 =generate-utility-body($utility, $properties, $value, $infix)
   // Use custom class if present
   $property-class: map.get($utility, class)
-  $property-class: if($property-class, $property-class, list.nth($properties, 1))
+  @if not $property-class
+    $property-class: list.nth($properties, 1)
 
   // Don't prefix if value key is null (eg. with shadow class)
-  $property-class-modifier: if(list.nth($value, 1), "-" + list.nth($value, 1), "")
+  $property-class-modifier: ''
+  @if list.nth($value, 1)
+    $property-class-modifier: '-' + list.nth($value, 1)
 
   $value: list.nth($value, 2)
 
@@ -60,5 +63,8 @@
         // Check if unimportant property exists.
         // This allows you to conditional skip
         // defining a property as important.
-        $unimportant: map.get($utility, unimportant)
-        #{$property}: #{meta.inspect($val) if(list.index($unimportant, $property), null, !important)}
+        $unimportant: list.index(map.get($utility, unimportant), $property)
+        $important: !important
+        @if $unimportant
+          $important: null
+        #{$property}: #{meta.inspect($val)} #{$important}

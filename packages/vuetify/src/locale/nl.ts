@@ -91,6 +91,7 @@ export default {
     hour: 'Uur',
     minute: 'Minuten',
     second: 'Seconden',
+    notAllowed: 'Waarde is niet toegestaan',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Het teken {0} is niet toegestaan',
     notEmpty: 'Kies ten minste één waarde',
     pattern: 'Ongeldig formaat',
+  },
+  command: {
+    search: 'Typ een opdracht of zoek...',
   },
   hotkey: {
     then: 'dan',

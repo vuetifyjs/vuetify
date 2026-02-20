@@ -91,6 +91,7 @@ export default {
     hour: 'ساعت',
     minute: 'دقیقه',
     second: 'ثانیه',
+    notAllowed: 'مقدار مجاز نیست',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'کاراکتر {0} مجاز نیست',
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
+  },
+  command: {
+    search: 'دستور را تایپ کنید یا جستجو کنید...',
   },
   hotkey: {
     then: 'سپس',

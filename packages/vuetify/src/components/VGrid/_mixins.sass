@@ -37,7 +37,10 @@
 
 @mixin make-col-offset($size, $columns: settings.$grid-columns)
   $num: math.div($size, $columns)
-  margin-inline-start: if($num == 0, 0, math.percentage($num))
+  @if $num == 0
+    margin-inline-start: 0
+  @else
+    margin-inline-start: math.percentage($num)
 
 @mixin make-grid-columns($columns: settings.$grid-columns, $gutter: settings.$grid-gutter, $breakpoints: settings.$grid-breakpoints)
   // Common properties for all breakpoints

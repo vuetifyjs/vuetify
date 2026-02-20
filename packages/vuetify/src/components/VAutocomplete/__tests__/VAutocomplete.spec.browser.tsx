@@ -416,7 +416,7 @@ describe('VAutocomplete', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
       const selectedItems = ['Item 1', 'Item 2']
 
-      render(() => (
+      const { element } = render(() => (
         <VAutocomplete
           items={ items }
           modelValue={ selectedItems }
@@ -425,8 +425,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      const menuIcon = screen.getByRole('button', { name: /open/i })
-      await userEvent.click(menuIcon)
+      await userEvent.click(element)
       await commands.waitStable('.v-list')
 
       const listItems = screen.getAllByRole('option')
@@ -702,6 +701,71 @@ describe('VAutocomplete', () => {
     await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate between header, list, and footer with Tab', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'menu-header': () => (
+              <div>
+                <button data-testid="header-btn">Header Button</button>
+              </div>
+            ),
+            'menu-footer': () => (
+              <div>
+                <button data-testid="footer-btn">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      // Navigate to list first
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      // Tab to list
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Tab to footer
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('footer-btn')).toHaveFocus()
+
+      // Shift+Tab back to list
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Shift+Tab back to header
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
   })
 
   showcase({ stories })

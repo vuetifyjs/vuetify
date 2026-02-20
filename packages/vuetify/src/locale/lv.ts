@@ -91,6 +91,7 @@ export default {
     hour: 'Stunda',
     minute: 'Minūtes',
     second: 'Sekundes',
+    notAllowed: 'Vērtība nav atļauta',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Rakstzīme {0} nav atļauta',
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
+  },
+  command: {
+    search: 'Ierakstiet komandu vai meklējiet...',
   },
   hotkey: {
     then: 'tad',

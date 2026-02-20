@@ -91,6 +91,7 @@ export default {
     hour: 'Час',
     minute: 'Минути',
     second: 'Секунди',
+    notAllowed: 'Стойността не е разрешена',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Символът {0} не е позволен',
     notEmpty: 'Моля, изберете поне една стойност',
     pattern: 'Невалиден формат',
+  },
+  command: {
+    search: 'Въведете команда или търсете...',
   },
   hotkey: {
     then: 'след това',

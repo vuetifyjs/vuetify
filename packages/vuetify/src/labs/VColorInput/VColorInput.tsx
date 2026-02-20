@@ -37,6 +37,7 @@ export type PipLocation = typeof availablePipLocations[number]
 export const makeVColorInputProps = propsFactory({
   hidePip: Boolean,
   colorPip: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
   pipIcon: {
     type: String,
     default: '$color',
@@ -50,6 +51,7 @@ export const makeVColorInputProps = propsFactory({
     type: String as PropType<VAvatar['$props']['variant']>,
     default: 'text',
   },
+  pickerProps: Object as PropType<VColorPicker['$props']>,
 
   ...makeFocusProps(),
   ...makeVConfirmEditProps(),
@@ -111,15 +113,18 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
 
     useRender(() => {
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const colorPickerProps = VColorPicker.filterProps(omit(props, [
-        'active',
-        'bgColor',
-        'color',
-        'rounded',
-        'maxWidth',
-        'minWidth',
-        'width',
-      ]))
+      const colorPickerProps = {
+        ...VColorPicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+        ])),
+        ...props.pickerProps,
+      }
       const textFieldProps = VTextField.filterProps(props)
 
       const slotWithPip = props.hidePip
@@ -149,10 +154,10 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           modelValue={ display.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prependInner={ isInteractive.value ? onClick : undefined }
+          onClick:control={ !props.disabled ? onClick : undefined }
+          onClick:prependInner={ !props.disabled ? onClick : undefined }
           onUpdate:focused={ event => isFocused.value = event }
-          onClick:appendInner={ isInteractive.value ? onClick : undefined }
+          onClick:appendInner={ !props.disabled ? onClick : undefined }
           onUpdate:modelValue={ val => {
             model.value = val
           }}
@@ -168,6 +173,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
                   minWidth="0"
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  { ...props.menuProps }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
