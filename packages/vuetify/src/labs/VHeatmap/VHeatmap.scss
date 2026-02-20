@@ -1,0 +1,125 @@
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-heatmap {
+    --v-heatmap-cell-size: 26px;
+    --v-heatmap-cell-gap: 6px;
+    --v-heatmap-area-spacing: 20px;
+    --v-heatmap-month-limit: 12;
+
+    --v-heatmap-cell-border: #dddee4;
+    --v-heatmap-day-bg: #ecedf3;
+
+    &.v-theme--dark {
+      --v-heatmap-cell-border: #33363a;
+      --v-heatmap-day-bg: #1b1f22;
+    }
+
+    &.v-heatmap--merged-months {
+      .v-heatmap-month--shifted {
+        width: calc(
+          (var(--v-heatmap-cell-columns) - 1) * var(--v-heatmap-cell-size) +
+          (var(--v-heatmap-cell-columns) - 2) * var(--v-heatmap-cell-gap)
+        );
+        transform: translateX(calc(-1 * (var(--v-heatmap-cell-size) + var(--v-heatmap-cell-gap))));
+      }
+    }
+
+    &.v-heatmap--separated-months {
+      .v-heatmap-month--aligned {
+        padding-left: calc((var(--v-heatmap-cell-size) + var(--v-heatmap-cell-gap)));
+      }
+    }
+
+    display: grid;
+    grid-template-columns: 1fr max-content repeat(var(--v-heatmap-month-limit), auto) 1fr;
+    grid-template-rows: auto repeat(7, var(--v-heatmap-cell-size)) auto;
+    gap: var(--v-heatmap-cell-gap);
+    line-height: 1;
+    overflow-x: auto;
+
+    .v-heatmap__cell {
+      width: var(--v-heatmap-cell-size);
+      height: var(--v-heatmap-cell-size);
+      border-radius: 5px;
+      transition: box-shadow .2s linear;
+    }
+  }
+
+  .v-heatmap__weekdays {
+    grid-row: 2 / 9;
+    grid-column: 2;
+    display: grid;
+    gap: var(--v-heatmap-cell-gap);
+    grid-template-rows: repeat(7, var(--v-heatmap-cell-size));
+    align-items: center;
+    padding-right: calc(2 * var(--v-heatmap-area-spacing));
+  }
+
+  .v-heatmap__months {
+    grid-row: 1;
+    grid-column: 3 / -2;
+    display: grid;
+    grid-template-columns: subgrid;
+    justify-items: center;
+    padding-bottom: var(--v-heatmap-area-spacing);
+  }
+
+  .v-heatmap__squares {
+    grid-row: 2 / 9;
+    grid-column: 3 / -2;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+  }
+
+  .v-heatmap__month-days {
+    grid-row: 1 / 8;
+    display: grid;
+    gap: var(--v-heatmap-cell-gap);
+    grid-template-columns: repeat(var(--v-heatmap-cell-columns), var(--v-heatmap-cell-size));
+    grid-template-rows: repeat(7, var(--v-heatmap-cell-size));
+    grid-auto-flow: column;
+    pointer-events: none;
+    transition: background .3s;
+
+    &.v-heatmap-month--shift {
+      width: calc(
+        (var(--v-heatmap-cell-columns) + 1) * var(--v-heatmap-cell-size) +
+        (var(--v-heatmap-cell-columns) - 2) * var(--v-heatmap-cell-gap)
+      );
+    }
+
+    > .v-heatmap__cell {
+      pointer-events: all;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: inset 0 0 0 2px currentColor;
+      }
+    }
+  }
+
+  .v-heatmap__cell {
+    background-color: var(--v-heatmap-day-bg);
+
+    &.v-heatmap__cell--empty {
+      box-shadow: inset 0 0 0 2px var(--v-heatmap-cell-border);
+    }
+  }
+
+  .v-heatmap__legend {
+    grid-row: 9;
+    grid-column: 3 / -2;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: var(--v-heatmap-cell-gap);
+    padding-top: calc(2 * var(--v-heatmap-area-spacing));
+
+    > .v-heatmap__legend-label {
+      opacity: .6;
+      padding: 0 8px;
+    }
+  }
+}
