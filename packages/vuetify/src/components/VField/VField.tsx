@@ -33,6 +33,7 @@ import {
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ClassValue } from '@/composables/component'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -49,7 +50,9 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown>
+  props: Record<string, unknown> & {
+    class?: ClassValue
+  }
 }
 
 export const makeVFieldProps = propsFactory({
