@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/locale'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { computed, inject, shallowRef } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -89,7 +89,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       indexFromEnd,
     } = slider
 
-    const isHovered = ref(false)
+    const isHovered = shallowRef(false)
 
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
@@ -145,6 +145,10 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
 
+      const thumbLabelVisible = thumbLabel.value === 'always' ||
+        (thumbLabel.value === true && props.focused) ||
+        (thumbLabel.value === 'hover' && (isHovered.value || props.focused))
+
       return (
         <div
           class={[
@@ -194,11 +198,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={
-                thumbLabel.value === 'always' ||
-                (thumbLabel.value === true && props.focused) ||
-                (thumbLabel.value === 'hover' && isHovered.value)
-              }
+              v-show={ thumbLabelVisible }
             >
               <div
                 class={[
