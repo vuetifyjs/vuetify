@@ -24,6 +24,7 @@ export const keyAliasMap: Record<string, string> = {
   del: 'delete',
 
   // Symbol aliases (existing from hotkey-parsing.ts)
+  plus: '+',
   minus: '-',
   hyphen: '-',
 }

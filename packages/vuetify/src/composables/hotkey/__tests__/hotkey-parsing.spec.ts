@@ -103,6 +103,7 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('option+tab').keys).toEqual(['alt', 'tab'])
       expect(splitKeyCombination('up').keys).toEqual(['arrowup'])
       expect(splitKeyCombination('esc').keys).toEqual(['escape'])
+      expect(splitKeyCombination('plus').keys).toEqual(['+'])
       expect(splitKeyCombination('minus').keys).toEqual(['-'])
       expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
@@ -127,6 +128,7 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('spacebar').keys).toEqual([' '])
 
       // Symbol aliases
+      expect(splitKeyCombination('plus').keys).toEqual(['+'])
       expect(splitKeyCombination('minus').keys).toEqual(['-'])
       expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
@@ -136,6 +138,7 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('command+shift+esc').keys).toEqual(['cmd', 'shift', 'escape'])
       expect(splitKeyCombination('control+return').keys).toEqual(['ctrl', 'enter'])
       expect(splitKeyCombination('alt+del').keys).toEqual(['alt', 'delete'])
+      expect(splitKeyCombination('shift+plus').keys).toEqual(['shift', '+'])
       expect(splitKeyCombination('shift+minus').keys).toEqual(['shift', '-'])
     })
 
@@ -145,6 +148,7 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('OPTION+TAB').keys).toEqual(['alt', 'tab'])
       expect(splitKeyCombination('UP').keys).toEqual(['arrowup'])
       expect(splitKeyCombination('ESC').keys).toEqual(['escape'])
+      expect(splitKeyCombination('PLUS').keys).toEqual(['+'])
       expect(splitKeyCombination('MINUS').keys).toEqual(['-'])
     })
 
@@ -190,6 +194,10 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeySequence('ctrl+a-shift+-')).toEqual(['ctrl+a', 'shift+-'])
     })
 
+    it('should handle standalone literal minus in a sequence', () => {
+      expect(splitKeySequence('-')).toEqual(['-'])
+    })
+
     it('should correctly parse meta+--k', () => {
       expect(splitKeySequence('meta+--k')).toEqual(['meta+-', 'k'])
     })
@@ -206,6 +214,11 @@ describe('hotkey-parsing.ts', () => {
     it('should treat shift---alt++ as invalid', () => {
       expect(splitKeySequence('shift---alt++')).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "shift---alt++" contains invalid combinations').toHaveBeenTipped()
+    })
+
+    it('should treat alt+++b+h as invalid', () => {
+      expect(splitKeySequence('alt+++b+h')).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey sequence: "alt+++b+h" contains invalid combinations').toHaveBeenTipped()
     })
 
     // Invalid sequences

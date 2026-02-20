@@ -103,7 +103,7 @@ export function splitKeySequence (str: string): string[] {
 
   // A sequence is invalid if it starts or ends with a separator,
   // unless it is part of a combination (e.g., `shift+-`).
-  const hasInvalidStart = str.startsWith('-') && !['---', '--+'].includes(str)
+  const hasInvalidStart = str.startsWith('-') && str !== '-' && !['---', '--+'].includes(str)
   const hasInvalidEnd = str.endsWith('-') && !str.endsWith('+-') && !str.endsWith('_-') && str !== '-' && str !== '---'
 
   if (hasInvalidStart || hasInvalidEnd) {

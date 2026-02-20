@@ -55,6 +55,10 @@ The component provides several props to customize how keyboard shortcuts are dis
 
 The **keys** prop accepts a string representing keyboard shortcuts in various formats:
 
+- Use `+`, `_`, or `/` for keys pressed together in a combination
+- Use `-` for key sequences ("then")
+- Use aliases for literal delimiter keys: `plus`, `minus`, `hyphen`
+
 <ExamplesExample file="v-hotkey/prop-keys" />
 
 #### Display modes

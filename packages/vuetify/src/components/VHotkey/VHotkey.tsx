@@ -151,6 +151,9 @@ export const hotkeyMap: KeyMapConfig = {
   '-': {
     default: { text: '-' },
   },
+  '+': {
+    default: { text: '+' },
+  },
 }
 
 export const makeVHotkeyProps = propsFactory({

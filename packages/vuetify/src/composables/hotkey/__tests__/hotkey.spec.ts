@@ -23,6 +23,9 @@ describe('hotkey.ts', () => {
     ['f1', { key: 'f1' }],
     ['enter', { key: 'enter' }],
     ['space', { key: ' ' }],
+    ['plus', { key: '+' }],
+    ['shift+plus', { shiftKey: true, key: '+' }],
+    ['ctrl+plus', { ctrlKey: true, key: '+' }],
     ['alt+-', { altKey: true, key: '-' }],
   ])('fires on %s', (combo, props) => {
     const cb = vi.fn()

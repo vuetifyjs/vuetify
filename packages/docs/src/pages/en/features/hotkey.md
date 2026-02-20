@@ -189,12 +189,15 @@ The hotkey string supports various modifiers and special keys:
 - <v-kbd>arrowup</v-kbd>, <v-kbd>arrowdown</v-kbd>, <v-kbd>arrowleft</v-kbd>, <v-kbd>arrowright</v-kbd>
 - <v-kbd>home</v-kbd>, <v-kbd>end</v-kbd>, <v-kbd>pageup</v-kbd>, <v-kbd>pagedown</v-kbd>
 - <v-kbd>f1</v-kbd> through <v-kbd>f12</v-kbd>
+- <v-kbd>plus</v-kbd> and <v-kbd>minus</v-kbd>/<v-kbd>hyphen</v-kbd> for literal <v-kbd>+</v-kbd> and <v-kbd>-</v-kbd>
 
 ### Syntax rules
 
 - Parsing is performed left to right, so `ctrl+s-a` will produce "`ctrl+s` and then `a`"
 - Use `+` to combine modifiers with keys: `ctrl+s`
+- Use `_` and `/` as alternative combination delimiters: `ctrl_s`, `up/down`
 - Use `-` to create sequences: `ctrl+k-p` (press Ctrl+K, then P)
+- To bind delimiter characters as literal keys, use aliases (`plus`, `minus`, `hyphen`) instead of raw symbols in combinations
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
 - Spaces are ignored: `ctrl + s` equals `ctrl+s`
 
