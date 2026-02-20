@@ -34,9 +34,12 @@ describe('hotkey-parsing.ts', () => {
       // '-' is the only reachable literal key
       expect(splitKeyCombination('-').keys).toEqual(['-'])
 
-      // '+' and '_' are not reachable literal keys and should be invalid
+      // '+', '/', and '_' are not reachable literal keys and should be invalid
       expect(splitKeyCombination('+').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "+" has invalid structure').toHaveBeenTipped()
+
+      expect(splitKeyCombination('/').keys).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "/" has invalid structure').toHaveBeenTipped()
 
       expect(splitKeyCombination('_').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "_" has invalid structure').toHaveBeenTipped()
@@ -51,6 +54,11 @@ describe('hotkey-parsing.ts', () => {
     it('should treat doubled literal _ as invalid', () => {
       expect(splitKeyCombination('ctrl__').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl__" has invalid structure').toHaveBeenTipped()
+    })
+
+    it('should treat doubled literal / as invalid', () => {
+      expect(splitKeyCombination('ctrl//').keys).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "ctrl//" has invalid structure').toHaveBeenTipped()
     })
 
     it('should handle doubled literal -', () => {
@@ -70,6 +78,8 @@ describe('hotkey-parsing.ts', () => {
     it('should return empty array for leading separators', () => {
       expect(splitKeyCombination('+a').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "+a" has invalid structure').toHaveBeenTipped()
+      expect(splitKeyCombination('/a').keys).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "/a" has invalid structure').toHaveBeenTipped()
       expect(splitKeyCombination('_a').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "_a" has invalid structure').toHaveBeenTipped()
     })
@@ -77,6 +87,8 @@ describe('hotkey-parsing.ts', () => {
     it('should return empty array for trailing separators', () => {
       expect(splitKeyCombination('a+').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "a+" has invalid structure').toHaveBeenTipped()
+      expect(splitKeyCombination('a/').keys).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "a/" has invalid structure').toHaveBeenTipped()
       expect(splitKeyCombination('a_').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "a_" has invalid structure').toHaveBeenTipped()
     })
@@ -84,6 +96,8 @@ describe('hotkey-parsing.ts', () => {
     it('should return empty array for standalone doubled separators', () => {
       expect(splitKeyCombination('++').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "++" has invalid structure').toHaveBeenTipped()
+      expect(splitKeyCombination('//').keys).toEqual([])
+      expect('[Vue warn]: Vuetify: Invalid hotkey combination: "//" has invalid structure').toHaveBeenTipped()
       expect(splitKeyCombination('--').keys).toEqual([])
       expect('[Vue warn]: Vuetify: Invalid hotkey combination: "--" has invalid structure').toHaveBeenTipped()
       expect(splitKeyCombination('__').keys).toEqual([])
@@ -104,6 +118,8 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('up').keys).toEqual(['arrowup'])
       expect(splitKeyCombination('esc').keys).toEqual(['escape'])
       expect(splitKeyCombination('plus').keys).toEqual(['+'])
+      expect(splitKeyCombination('slash').keys).toEqual(['/'])
+      expect(splitKeyCombination('underscore').keys).toEqual(['_'])
       expect(splitKeyCombination('minus').keys).toEqual(['-'])
       expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
@@ -129,6 +145,8 @@ describe('hotkey-parsing.ts', () => {
 
       // Symbol aliases
       expect(splitKeyCombination('plus').keys).toEqual(['+'])
+      expect(splitKeyCombination('slash').keys).toEqual(['/'])
+      expect(splitKeyCombination('underscore').keys).toEqual(['_'])
       expect(splitKeyCombination('minus').keys).toEqual(['-'])
       expect(splitKeyCombination('hyphen').keys).toEqual(['-'])
     })
@@ -139,6 +157,8 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('control+return').keys).toEqual(['ctrl', 'enter'])
       expect(splitKeyCombination('alt+del').keys).toEqual(['alt', 'delete'])
       expect(splitKeyCombination('shift+plus').keys).toEqual(['shift', '+'])
+      expect(splitKeyCombination('shift+slash').keys).toEqual(['shift', '/'])
+      expect(splitKeyCombination('shift+underscore').keys).toEqual(['shift', '_'])
       expect(splitKeyCombination('shift+minus').keys).toEqual(['shift', '-'])
     })
 
@@ -149,6 +169,8 @@ describe('hotkey-parsing.ts', () => {
       expect(splitKeyCombination('UP').keys).toEqual(['arrowup'])
       expect(splitKeyCombination('ESC').keys).toEqual(['escape'])
       expect(splitKeyCombination('PLUS').keys).toEqual(['+'])
+      expect(splitKeyCombination('SLASH').keys).toEqual(['/'])
+      expect(splitKeyCombination('UNDERSCORE').keys).toEqual(['_'])
       expect(splitKeyCombination('MINUS').keys).toEqual(['-'])
     })
 

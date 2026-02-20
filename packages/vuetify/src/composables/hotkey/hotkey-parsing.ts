@@ -29,12 +29,13 @@ export function splitKeyCombination (combination: string, isInternal = false): {
 
   const hasInvalidStructure = (
     hasInvalidLeadingSeparator ||
-    // Disallow literal + or _ keys (they require shift)
-    combination.includes('++') || combination.includes('__') || combination === '+' || combination === '_' ||
+    // Disallow literal +, / or _ keys (they are delimiters)
+    combination.includes('++') || combination.includes('//') || combination.includes('__') ||
+    combination === '+' || combination === '/' || combination === '_' ||
     // Ends with a separator that is not part of a doubled literal
-    (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
+    (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('/') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
     // Stand-alone doubled separators (dangling)
-    combination === '++' || combination === '--' || combination === '__'
+    combination === '++' || combination === '//' || combination === '--' || combination === '__'
   )
 
   if (hasInvalidStructure) {

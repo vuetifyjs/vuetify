@@ -25,6 +25,8 @@ export const keyAliasMap: Record<string, string> = {
 
   // Symbol aliases (existing from hotkey-parsing.ts)
   plus: '+',
+  slash: '/',
+  underscore: '_',
   minus: '-',
   hyphen: '-',
 }

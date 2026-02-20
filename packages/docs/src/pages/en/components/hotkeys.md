@@ -57,7 +57,7 @@ The **keys** prop accepts a string representing keyboard shortcuts in various fo
 
 - Use `+`, `_`, or `/` for keys pressed together in a combination
 - Use `-` for key sequences ("then")
-- Use aliases for literal delimiter keys: `plus`, `minus`, `hyphen`
+- Use aliases for literal delimiter keys: `plus`, `slash`, `underscore`, `minus`, `hyphen`
 
 <ExamplesExample file="v-hotkey/prop-keys" />
 
