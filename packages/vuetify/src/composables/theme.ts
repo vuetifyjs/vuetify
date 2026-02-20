@@ -23,6 +23,7 @@ import {
   lighten,
   mergeDeep,
   parseColor,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
@@ -36,11 +37,17 @@ import type { Color } from '@/util'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
+export interface ThemeTransitionOptions {
+  origin?: string
+  duration?: string
+}
+
 export type ThemeOptions = false | {
   cspNonce?: string
   defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
+  transition?: boolean | ThemeTransitionOptions
   stylesheetId?: string
   scope?: string
   utilities?: boolean
@@ -54,6 +61,7 @@ interface InternalThemeOptions {
   prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
+  transition: boolean | ThemeTransitionOptions
   stylesheetId: string
   scope?: string
   scoped: boolean
@@ -99,9 +107,9 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
-  change: (themeName: string) => void
-  cycle: (themeArray?: string[]) => void
-  toggle: (themeArray?: [string, string]) => void
+  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => void
+  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => void
+  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => void
 
   readonly isDisabled: boolean
   readonly isSystem: Readonly<Ref<boolean>>
@@ -221,6 +229,7 @@ function genDefaults () {
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
     utilities: true,
+    transition: false,
   }
 }
 
@@ -503,24 +512,69 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  function change (themeName: string) {
+  function resolveTransitionOptions (
+    transition?: boolean | ThemeTransitionOptions
+  ): ThemeTransitionOptions | false {
+    const opt = transition ?? parsedOptions.transition
+    if (!opt) return false
+    const global = typeof parsedOptions.transition === 'object' ? parsedOptions.transition : {}
+    const local = typeof transition === 'object' ? transition : {}
+    return {
+      origin: local.origin ?? global.origin,
+      duration: local.duration ?? global.duration,
+    }
+  }
+
+  function withPageTransition (callback: () => void, options: ThemeTransitionOptions) {
+    if (!IN_BROWSER || !document.startViewTransition || !PREFERS_REDUCED_MOTION) {
+      callback()
+      return
+    }
+
+    const origin = options.origin ?? '50% 0%'
+    const duration = options.duration ?? '500ms'
+
+    const style = document.createElement('style')
+    style.textContent =
+      `::view-transition-old(root) { animation: none; }` +
+      `::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
+      `@keyframes v-circle-in {` +
+      `  from { clip-path: circle(0% at ${origin}); }` +
+      `  to { clip-path: circle(150% at ${origin}); }` +
+      `}`
+    document.head.appendChild(style)
+
+    const transition = document.startViewTransition(() => callback())
+    transition.finished.then(() => {
+      style.remove()
+    })
+  }
+
+  function change (themeName: string, transition?: boolean | ThemeTransitionOptions) {
     if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
       consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
       return
     }
 
-    name.value = themeName
+    const apply = () => { name.value = themeName }
+    const transitionOptions = resolveTransitionOptions(transition)
+
+    if (transitionOptions) {
+      withPageTransition(apply, transitionOptions)
+    } else {
+      apply()
+    }
   }
 
-  function cycle (themeArray: string[] = themeNames.value) {
+  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions) {
     const currentIndex = themeArray.indexOf(name.value)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
 
-    change(themeArray[nextIndex])
+    change(themeArray[nextIndex], transition)
   }
 
-  function toggle (themeArray: [string, string] = ['light', 'dark']) {
-    cycle(themeArray)
+  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions) {
+    cycle(themeArray, transition)
   }
 
   const globalName = new Proxy(name, {
