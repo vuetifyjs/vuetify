@@ -6,7 +6,6 @@
     "closeIcon": "Change the default icon used for **closable** alerts.",
     "closeLabel": "Text used for *aria-label* on **closable** alerts. Can also be customized globally in [Internationalization](/customization/internationalization).",
     "dense": "Decreases component's height.",
-    "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).",
     "height": "Sets the height for the component.",
     "maxHeight": "Sets the maximum height for the component.",
     "maxWidth": "Sets the maximum width for the component.",
