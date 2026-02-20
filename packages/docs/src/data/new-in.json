@@ -17,6 +17,10 @@
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VAvatar": {
@@ -83,6 +87,10 @@
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VConfirmEdit": {
@@ -121,6 +129,7 @@
       "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0",
       "initialSortOrder": "3.11.0",
+      "pageBy": "3.12.0",
       "sortIcon": "3.12.0"
     },
     "slots": {
@@ -134,6 +143,7 @@
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "initialSortOrder": "3.11.0",
+      "pageBy": "3.12.0",
       "sortIcon": "3.12.0"
     },
     "slots": {
@@ -248,7 +258,8 @@
   },
   "VOtpInput": {
     "props": {
-      "density": "3.12.0"
+      "density": "3.12.0",
+      "masked": "3.12.0"
     }
   },
   "VOverlay": {
@@ -287,6 +298,10 @@
       "autocomplete": "3.10.0",
       "listProps": "3.5.0",
       "noAutoScroll": "3.9.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VSlider": {

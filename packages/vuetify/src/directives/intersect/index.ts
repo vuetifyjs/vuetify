@@ -75,8 +75,10 @@ export const Intersect = {
   mounted,
   unmounted,
   updated: (el: HTMLElement, binding: ObserveDirectiveBinding) => {
-    unmounted(el, binding)
-    mounted(el, binding)
+    if (el._observe?.[binding.instance!.$.uid]) {
+      unmounted(el, binding)
+      mounted(el, binding)
+    }
   },
 }
 

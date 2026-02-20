@@ -42,8 +42,8 @@ export default function (expandedParentClass = '', type: 'x' | 'y' | 'both' = 'y
       }
 
       requestAnimationFrame(() => {
-        el.style.width = offsetWidth
-        el.style.height = offsetHeight
+        if (['x', 'both'].includes(type)) el.style.width = offsetWidth
+        if (['y', 'both'].includes(type)) el.style.height = offsetHeight
       })
     },
 
@@ -64,8 +64,8 @@ export default function (expandedParentClass = '', type: 'x' | 'y' | 'both' = 'y
       void el.offsetHeight // force reflow
 
       requestAnimationFrame(() => {
-        el.style.width = '0'
-        el.style.height = '0'
+        if (['x', 'both'].includes(type)) el.style.width = '0'
+        if (['y', 'both'].includes(type)) el.style.height = '0'
       })
     },
 
