@@ -1,8 +1,12 @@
 // Styles
 import './VTimePickerClock.sass'
 
+// Components
+import { VBtn } from '@/components/VBtn'
+
 // Composables
-import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, onScopeDispose, ref, watch } from 'vue'
@@ -10,6 +14,7 @@ import { debounce, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VTimePickerViewMode } from './shared'
 interface Point {
   x: number
   y: number
@@ -18,7 +23,10 @@ interface Point {
 export const makeVTimePickerClockProps = propsFactory({
   allowedValues: Function as PropType<(value: number) => boolean>,
   ampm: Boolean,
-  color: String,
+  color: {
+    type: String,
+    default: 'surface-variant',
+  },
   disabled: Boolean,
   displayedValue: null,
   double: Boolean,
@@ -47,6 +55,10 @@ export const makeVTimePickerClockProps = propsFactory({
   modelValue: {
     type: Number,
   },
+  viewMode: {
+    type: String as PropType<VTimePickerViewMode>,
+    default: 'hour',
+  },
 }, 'VTimePickerClock')
 
 export const VTimePickerClock = genericComponent()({
@@ -60,6 +72,7 @@ export const VTimePickerClock = genericComponent()({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
     const clockRef = ref<HTMLElement | null>(null)
     const innerClockRef = ref<HTMLElement | null>(null)
     const inputValue = ref<number | undefined>(undefined)
@@ -69,7 +82,6 @@ export const VTimePickerClock = genericComponent()({
     const emitChangeDebounced = debounce((value: number) => emit('change', value), 750)
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const count = computed(() => props.max - props.min + 1)
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
@@ -233,9 +245,54 @@ export const VTimePickerClock = genericComponent()({
 
     onScopeDispose(removeListeners)
 
+    function findNextAllowed (current: number, delta: number): number {
+      let value = current
+      const maxIterations = count.value
+      for (let i = 0; i < maxIterations; i++) {
+        value = ((value - props.min + delta + count.value) % count.value) + props.min
+        if (isAllowed(value)) return value
+      }
+      return current
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (props.disabled || props.readonly) return
+
+      let newValue: number | null = null
+      const current = displayedValue.value
+
+      switch (e.key) {
+        case 'ArrowUp':
+        case 'ArrowRight':
+          newValue = findNextAllowed(current, 1)
+          break
+        case 'ArrowDown':
+        case 'ArrowLeft':
+          newValue = findNextAllowed(current, -1)
+          break
+        case 'Enter':
+          e.preventDefault()
+          emit('change', current)
+          return
+      }
+
+      if (newValue !== null && newValue !== current) {
+        e.preventDefault()
+        update(newValue)
+      }
+    }
+
     useRender(() => {
       return (
         <div
+          role="spinbutton"
+          tabindex={ props.disabled || props.readonly ? -1 : 0 }
+          aria-label={ t(`$vuetify.timePicker.${props.viewMode}`) }
+          aria-valuemin={ props.min }
+          aria-valuemax={ props.max }
+          aria-valuenow={ displayedValue.value }
+          aria-disabled={ props.disabled || undefined }
+          aria-readonly={ props.readonly || undefined }
           class={[
             {
               'v-time-picker-clock': true,
@@ -243,6 +300,7 @@ export const VTimePickerClock = genericComponent()({
               'v-time-picker-clock--readonly': props.readonly,
             },
           ]}
+          onKeydown={ onKeydown }
           onMousedown={ onMouseDown }
           onTouchstart={ onMouseDown }
           onWheel={ wheel }
@@ -268,24 +326,27 @@ export const VTimePickerClock = genericComponent()({
             {
               genChildren.value.map(value => {
                 const isActive = value === displayedValue.value
+                const isDisabled = props.disabled || !isAllowed(value)
 
                 return (
-                  <div
+                  <VBtn
+                    _as="VTimePickerClockBtn"
+                    aria-hidden="true"
+                    tabindex={ -1 }
                     class={[
+                      'v-time-picker-clock__item',
                       {
-                        'v-time-picker-clock__item': true,
                         'v-time-picker-clock__item--active': isActive,
-                        'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value),
                       },
-                      isActive && backgroundColorClasses.value,
                     ]}
-                    style={[
-                      getTransform(value),
-                      isActive && backgroundColorStyles.value,
-                    ]}
+                    color={ isActive ? props.color : '' }
+                    disabled={ isDisabled }
+                    style={[getTransform(value)]}
+                    variant={ isActive ? 'flat' : 'text' }
+                    ripple={ false }
                   >
-                    <span>{ props.format(value) }</span>
-                  </div>
+                    { props.format(value) }
+                  </VBtn>
                 )
               })
             }
