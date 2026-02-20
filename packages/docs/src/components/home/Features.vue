@@ -19,7 +19,7 @@
             flat
           >
             <v-img
-              :alt="feature.title"
+              :alt="$t(feature.title)"
               :aspect-ratio="2.6"
               :src="feature.src"
               width="100%"
@@ -28,11 +28,11 @@
             <v-card-text>
               <h3
                 class="text-subheading-1 font-weight-bold mb-2"
-                v-text="feature.title"
+                v-text="$t(feature.title)"
               />
               <p
                 class="mb-2"
-                v-text="feature.text"
+                v-text="$t(feature.text)"
               />
             </v-card-text>
           </v-card>
@@ -45,20 +45,20 @@
 <script setup>
   const features = [
     {
-      text: 'When you run into a roadblock, you need assistance right away. Vuetify offers support in our massive community on Discord.',
-      title: 'Vibrant Community',
+      text: 'home.features.community-message',
+      title: 'home.features.community',
       src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-1.png',
       href: 'https://community.vuetifyjs.com',
     },
     {
-      text: 'Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution to any situation.',
-      title: 'Semantic Vue Components',
+      text: 'home.features.components-message',
+      title: 'home.features.components',
       src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-2.png',
       to: rpath('/components/all/'),
     },
     {
-      text: 'Vuetify supports the future of Vite tooling through its create plugin. This allows you to scaffold a new project in seconds.',
-      title: 'Ready-Made Project Scaffolding',
+      text: 'home.features.scaffolding-message',
+      title: 'home.features.scaffolding',
       src: 'https://cdn.vuetifyjs.com/docs/images/featured/feature-3.png',
       href: 'https://tryvuetify.com',
     },
