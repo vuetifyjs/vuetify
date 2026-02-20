@@ -5,6 +5,7 @@
   .v-breadcrumbs
     display: flex
     align-items: center
+    flex-wrap: wrap
     line-height: $breadcrumbs-line-height
     padding: $breadcrumbs-padding-y $breadcrumbs-padding-x
 
@@ -27,6 +28,9 @@
     padding: $breadcrumbs-item-padding
     text-decoration: none
     vertical-align: $breadcrumbs-vertical-align
+
+    &--ellipsis
+      cursor: pointer
 
     &--disabled
       opacity: $breadcrumbs-item-disabled-opacity
