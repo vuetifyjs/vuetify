@@ -55,6 +55,7 @@ export const makeVVideoControlsProps = propsFactory({
   hidePlay: Boolean,
   hideVolume: Boolean,
   hideFullscreen: Boolean,
+  hideSeek: Boolean,
   fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
@@ -281,20 +282,25 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         )
                         : ''
                     }
-                    <VSlider
-                      modelValue={ props.progress }
-                      noKeyboard
-                      color={ trackColor.value ?? 'surface-variant' }
-                      trackColor={ props.variant === 'tube' ? 'white' : undefined }
-                      class="v-video__track"
-                      thumbLabel="always"
-                      aria-label={ labels.value.seek }
-                      onUpdate:modelValue={ skipTo }
-                    >
-                      {{
-                        'thumb-label': () => currentTime.value.elapsed,
-                      }}
-                    </VSlider>
+                    { props.hideSeek
+                      ? <VSpacer />
+                      : (
+                          <VSlider
+                            modelValue={ props.progress }
+                            noKeyboard
+                            color={ trackColor.value ?? 'surface-variant' }
+                            trackColor={ props.variant === 'tube' ? 'white' : undefined }
+                            class="v-video__track"
+                            thumbLabel="always"
+                            aria-label={ labels.value.seek }
+                            onUpdate:modelValue={ skipTo }
+                          >
+                            {{
+                              'thumb-label': () => currentTime.value.elapsed,
+                            }}
+                          </VSlider>
+                        )
+                    }
                     { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
                       ? (
