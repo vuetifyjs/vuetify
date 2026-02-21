@@ -392,6 +392,7 @@ export const VField = genericComponent<new <T>(
                       onFocus={ focus }
                       onBlur={ blur }
                       tabindex={ -1 }
+                      color={ iconColor.value }
                     />
                   )}
                 </VDefaultsProvider>
