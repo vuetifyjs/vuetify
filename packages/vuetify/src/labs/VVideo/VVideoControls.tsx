@@ -299,7 +299,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                               'thumb-label': () => currentTime.value.elapsed,
                             }}
                           </VSlider>
-                        )
+                      )
                     }
                     { props.variant === 'tube' && <VSpacer /> }
                     { props.splitTime
