@@ -25,11 +25,14 @@ export const VTreeviewGroup = genericComponent<VListGroupSlots>()({
     const vListGroupRef = ref<VListGroup>()
     const toggleIcon = computed(() => vListGroupRef.value?.isOpen ? props.collapseIcon : props.expandIcon)
 
+    const isGroupOpen = computed(() => !!vListGroupRef.value?.isOpen)
+
     const activatorDefaults = computed(() => ({
       VTreeviewItem: {
         prependIcon: undefined,
         appendIcon: undefined,
         toggleIcon: toggleIcon.value,
+        toggleExpanded: isGroupOpen.value,
       },
     }))
 
