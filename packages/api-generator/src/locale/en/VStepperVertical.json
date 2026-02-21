@@ -1,4 +1,5 @@
 {
+  "description": "The `v-stepper-vertical` component can be used as a navigation element that guides users through a sequence of steps.",
   "props": {
     "completeIcon": "Icon to display when step is marked as completed.",
     "editIcon": "Icon to display when step is editable.",

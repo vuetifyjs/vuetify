@@ -1,4 +1,5 @@
 {
+  "description": "The `v-slide-group` component is used to display pseudo paginated information. It uses `v-item-group` at its core and provides a baseline for components such as `v-tabs` and `v-chip-group`.",
   "props": {
     "centerActive": "Forces the selected component to be centered.",
     "contentClass": "Adds classes to the slide group item.",

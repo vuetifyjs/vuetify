@@ -1,4 +1,5 @@
 {
+  "description": "The `v-app` component is an optional feature that serves as the root layout component as well as providing an easy way to control the theme used at the root level.",
   "exposed": {
     "theme": "The instance of the injected active theme."
   }

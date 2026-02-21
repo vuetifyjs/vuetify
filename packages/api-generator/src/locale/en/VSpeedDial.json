@@ -1,4 +1,5 @@
 {
+  "description": "The `v-speed-dial` component can be used as a floating action button that can reveal additional actions when clicked.",
   "props": {
     "direction": "Direction in which speed-dial content will show. Possible values are `top`, `bottom`, `left`, `right`.",
     "openOnHover": "Opens speed-dial on hover."

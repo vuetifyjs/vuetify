@@ -1,4 +1,5 @@
 {
+  "description": "`v-field` is a low level component that provides common input field features such as labels, icons, and validation messages.",
   "props": {
     "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **append-inner** slot.",
     "baseColor": "Sets the color of the input when it is not focused.",

@@ -1,4 +1,5 @@
 {
+  "description": "subcomponent of `v-list` used to separate groups of items.",
   "props": {
     "tag": "Specify a custom tag used on the root element.",
     "title": "Specify a title text for the component.",

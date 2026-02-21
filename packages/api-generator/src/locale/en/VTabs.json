@@ -1,4 +1,5 @@
 {
+  "description": "The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.",
   "props": {
     "alignTabs": "Aligns the tabs to the `start`, `center`, or `end` of container. Also accepts `title` to align with the `v-toolbar-title` component.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title.",

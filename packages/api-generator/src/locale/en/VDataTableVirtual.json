@@ -1,4 +1,5 @@
 {
+  "description": "Specialized `v-data-table` with built-in row virtualization.",
   "props": {
     "headerProps": "Pass props to the default header.",
     "itemKey": "The property on each item that is used as a unique key."

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-data-table-rows` component is used to define the rows for a `v-data-table`.",
   "props": {
     "cellProps": "An object of additional props to be passed to each `<td>` in the table body. Also accepts a function that will be called for each cell. If the same prop is defined both here and in `cellProps` in a headers object, the value from the headers object will be used.",
     "loading": "Displays `loading` slot if set to `true`",

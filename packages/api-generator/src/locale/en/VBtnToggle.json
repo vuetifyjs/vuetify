@@ -1,4 +1,5 @@
 {
+  "description": "The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "props": {
     "backgroundColor": "Changes the background-color for the component.",
     "borderless": "Removes the group's border.",

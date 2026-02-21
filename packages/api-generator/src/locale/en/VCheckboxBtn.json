@@ -1,4 +1,5 @@
 {
+  "description": "The `v-checkbox-btn` component is a lightweight alternative to the `v-checkbox` component that is designed to be used inside of `v-data-table`to select rows or display inline boolean data.",
   "props": {
     "indeterminate": "Puts the control in an indeterminate state. Used with the [indeterminate-icon](#props-indeterminate-icon) property.",
     "indeterminateIcon": "Icon used when the component is in an indeterminate state."

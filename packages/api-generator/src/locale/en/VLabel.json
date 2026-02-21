@@ -1,4 +1,5 @@
 {
+  "description": "`v-label` component is used to display a label for form fields.",
   "props": {
     "clickable": "Changes the cursor to a pointer when the mouse is over the element."
   }

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information.",
   "props": {
     "ariaLabel": "Label for the root element.",
     "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
