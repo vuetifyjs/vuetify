@@ -3,6 +3,10 @@
 @use './variables' as *
 
 @include tools.layer('components')
+  .v-file-upload-input
+    .v-input__control
+      flex-direction: column
+
   .v-file-upload
     padding: $file-upload-padding
     flex-direction: column
@@ -34,6 +38,12 @@
 
     &--clickable
       cursor: pointer
+
+    &--has-files:not(&--clickable)
+      cursor: default
+
+    &--error
+      border-color: rgb(var(--v-theme-error))
 
     input[type="file"]
       left: 0
@@ -70,6 +80,9 @@
 
     .v-divider__wrapper
       max-width: 100%
+
+  .v-file-upload-inset
+    width: 100%
 
   .v-file-upload-items
     margin: $file-upload-items-margin
