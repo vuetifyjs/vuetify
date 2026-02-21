@@ -18,6 +18,10 @@
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VAvatar": {
@@ -75,6 +79,10 @@
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VConfirmEdit": {
@@ -112,7 +120,9 @@
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "headerProps": "3.5.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "pageBy": "3.12.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -124,7 +134,9 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "pageBy": "3.12.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -136,7 +148,8 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
-      "initialSortOrder": "3.11.0"
+      "initialSortOrder": "3.11.0",
+      "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -190,7 +203,8 @@
       "draggable": "3.4.0",
       "referrerpolicy": "3.4.0",
       "crossorigin": "3.4.0",
-      "absolute": "3.7.0"
+      "absolute": "3.7.0",
+      "imageClass": "3.12.0"
     }
   },
   "VInput": {
@@ -234,6 +248,12 @@
       "autocomplete": "3.10.0"
     }
   },
+  "VOtpInput": {
+    "props": {
+      "density": "3.12.0",
+      "masked": "3.12.0"
+    }
+  },
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
@@ -249,6 +269,7 @@
   },
   "VProgressCircular": {
     "props": {
+      "reveal": "3.12.0",
       "rounded": "3.11.0"
     }
   },
@@ -264,6 +285,10 @@
       "autocomplete": "3.10.0",
       "listProps": "3.5.0",
       "noAutoScroll": "3.9.0"
+    },
+    "slots": {
+      "menu-header": "3.12.0",
+      "menu-footer": "3.12.0"
     }
   },
   "VSlider": {
@@ -344,6 +369,8 @@
       "noDataText": "3.10.0",
       "separateRoots": "3.9.0",
       "indentLines": "3.9.0",
+      "indentLinesColor": "3.12.0",
+      "indentLinesOpacity": "3.12.0",
       "itemsRegistration": "3.11.0"
     },
     "slots": {
@@ -364,7 +391,8 @@
   },
   "VToolbar": {
     "props": {
-      "collapsePosition": "3.11.0"
+      "collapsePosition": "3.11.0",
+      "location": "3.12.0"
     }
   },
   "VTooltip": {

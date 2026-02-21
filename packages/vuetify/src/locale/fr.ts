@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Veuillez choisir au moins une valeur',
     pattern: 'Format invalide',
   },
+  command: {
+    search: 'Tapez une commande ou recherchez...',
+  },
   hotkey: {
     then: 'puis',
     ctrl: 'Ctrl',

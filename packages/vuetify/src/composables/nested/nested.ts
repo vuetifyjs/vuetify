@@ -24,6 +24,7 @@ import {
 } from './activeStrategies'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
+  branchSelectStrategy,
   classicSelectStrategy,
   independentSelectStrategy,
   independentSingleSelectStrategy,
@@ -55,6 +56,7 @@ export type SelectStrategyProp =
   | 'single-independent'
   | 'classic'
   | 'trunk'
+  | 'branch'
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -87,6 +89,7 @@ type NestedProvide = {
     selectable: Ref<boolean>
     opened: Ref<Set<unknown>>
     activated: Ref<Set<unknown>>
+    scrollToActive: Ref<boolean>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
     selectedValues: Ref<unknown[]>
     itemsRegistration: Ref<ItemsRegistrationType>
@@ -118,6 +121,7 @@ export const emptyNested: NestedProvide = {
     activate: () => null,
     select: () => null,
     activatable: ref(false),
+    scrollToActive: ref(false),
     selectable: ref(false),
     opened: ref(new Set()),
     activated: ref(new Set()),
@@ -143,7 +147,18 @@ export const makeNestedProps = propsFactory({
   },
 }, 'nested')
 
-export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObject: MaybeRefOrGetter<boolean>) => {
+export const useNested = (
+  props: NestedProps,
+  {
+    items,
+    returnObject,
+    scrollToActive,
+  }: {
+    items: Ref<ListItem[]>
+    returnObject: MaybeRefOrGetter<boolean>
+    scrollToActive: MaybeRefOrGetter<boolean>
+  },
+) => {
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
@@ -180,6 +195,7 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
       case 'independent': return independentSelectStrategy(props.mandatory)
       case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
       case 'trunk': return trunkSelectStrategy(props.mandatory)
+      case 'branch': return branchSelectStrategy(props.mandatory)
       case 'classic':
       default: return classicSelectStrategy(props.mandatory)
     }
@@ -285,6 +301,7 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
     root: {
       opened,
       activatable: toRef(() => props.activatable),
+      scrollToActive: toRef(() => toValue(scrollToActive)),
       selectable: toRef(() => props.selectable),
       activated,
       selected,
@@ -450,6 +467,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
     isActivated: computed(() => parent.root.activated.value.has(computedId.value)),
+    scrollToActive: parent.root.scrollToActive,
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),

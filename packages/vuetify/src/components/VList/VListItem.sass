@@ -23,6 +23,10 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--focus-visible
+      .v-list-item__overlay
+        opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+
     @supports selector(:focus-visible)
       &::after
         pointer-events: none
@@ -32,7 +36,8 @@
         transition: opacity .2s ease-in-out
         @include tools.absolute(true)
 
-      &:focus-visible::after
+      &:focus-visible::after,
+      &--focus-visible::after
         opacity: calc(.15 * var(--v-theme-overlay-multiplier))
 
     &__prepend,
@@ -74,7 +79,7 @@
     display: flex
     grid-area: prepend
 
-    * ~ .v-list-item__spacer
+    *:not(.v-treeview-indent-lines) ~ .v-list-item__spacer
       width: var(--v-list-prepend-gap)
 
     > .v-badge,
@@ -87,7 +92,6 @@
     > .v-badge:is(:has(.v-avatar))
       ~ .v-list-item__spacer
         width: var(--v-list-prepend-gap, $list-item-avatar-margin-start)
-
 
     .v-list-item--slim &
       > .v-badge,
@@ -307,24 +311,13 @@
       --indent-padding: -#{$list-nav-padding}
 
   .v-list-group
-    --list-indent-size: #{$list-indent-size}
     --parent-padding: var(--indent-padding)
-    --prepend-width: var(--v-list-group-prepend, #{$list-item-prepend-size})
 
-    .v-list--slim &
-      --prepend-width: var(--v-list-group-prepend, #{$list-item-slim-prepend-size})
-
-    &--fluid
-      --list-indent-size: 0px
-
-    &--prepend
-      --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
-
-    &--fluid.v-list-group--prepend
-      --parent-padding: var(--indent-padding)
+    &--fluid > .v-list-group__items
+      --indent-padding: 0px
 
   .v-list-group__items
-    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent, var(--list-indent-size)))
+    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
     min-width: min-content
 
     .v-navigation-drawer--rail &
@@ -365,6 +358,9 @@
           opacity: 1
           color: highlighttext !important
           forced-color-adjust: preserve-parent-color
+
+      &--focus-visible::after
+        opacity: 1
 
       @supports selector(:focus-visible)
         &::after

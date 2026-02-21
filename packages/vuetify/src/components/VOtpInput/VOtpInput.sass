@@ -1,4 +1,4 @@
-// Imports
+@use 'sass:math';
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -35,7 +35,6 @@
     align-items: center
     display: flex
     gap: $otp-input-content-gap
-    height: $otp-input-content-height
     padding: $otp-input-content-padding
     justify-content: center
     max-width: $otp-input-content-max-width
@@ -44,6 +43,11 @@
 
     .v-otp-input--divided &
       max-width: $otp-input-divided-content-max-width
+
+  @at-root
+    @include tools.density('v-otp-input', $input-density) using ($modifier)
+      .v-otp-input__content
+        height: #{$otp-input-content-height + math.div($modifier, 2)}
 
   .v-otp-input__field
     color: inherit

@@ -72,6 +72,12 @@ Toolbars can display a background as opposed to a solid color using the **src** 
 
 <ExamplesExample file="v-toolbar/prop-background" />
 
+#### Location
+
+You can use **location** prop to control how the toolbar is positioned within a relative container. It can also be used with **position-fixed** class instead of **absolute** prop.
+
+<ExamplesExample file="v-toolbar/prop-location" />
+
 #### Extended
 
 Toolbars can be extended without using the `extension` slot.

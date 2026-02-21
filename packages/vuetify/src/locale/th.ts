@@ -131,6 +131,9 @@ export default {
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
   },
+  command: {
+    search: 'พิมพ์คำสั่งหรือค้นหา...',
+  },
   hotkey: {
     then: 'จากนั้น',
     ctrl: 'Ctrl',

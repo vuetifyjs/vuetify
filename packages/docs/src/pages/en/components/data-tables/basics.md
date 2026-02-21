@@ -158,6 +158,18 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
+#### Sort icons
+
+You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
+
+::: warning
+
+The `sort-icon` (for unsorted columns) and new variables for opacity and spacing require [v3.12.0](/getting-started/release-notes/?version=v3.12.0).
+
+:::
+
+<ExamplesExample file="v-data-table/prop-sort-icon" />
+
 #### Selection
 
 The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.

@@ -100,6 +100,7 @@ export function createJavascriptTransition (
         default: PREFERS_REDUCED_MOTION(),
       },
       group: Boolean,
+      hideOnLeave: Boolean,
     },
 
     setup (props, { slots }) {
@@ -110,7 +111,16 @@ export function createJavascriptTransition (
           name: props.disabled ? '' : name,
           css: !props.disabled,
           // mode: props.mode, // TODO: vuejs/vue-next#3104
-          ...(props.disabled ? {} : functions),
+          ...(props.disabled ? {} : {
+            ...functions,
+            onLeave: (el: HTMLElement) => {
+              if (props.hideOnLeave) {
+                el.style.setProperty('display', 'none', 'important')
+              } else {
+                functions.onLeave?.(el)
+              }
+            },
+          }),
         }, slots.default)
       }
     },

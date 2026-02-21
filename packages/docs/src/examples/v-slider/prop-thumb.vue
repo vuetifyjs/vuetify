@@ -22,6 +22,16 @@
 
     <div>
       <div class="text-caption">
+        Show thumb label on hover and focus
+      </div>
+      <v-slider
+        v-model="slider5"
+        thumb-label="hover"
+      ></v-slider>
+    </div>
+
+    <div>
+      <div class="text-caption">
         Custom thumb size
       </div>
       <v-slider
@@ -54,6 +64,7 @@
   const slider2 = ref(50)
   const slider3 = ref(50)
   const slider4 = ref(50)
+  const slider5 = ref(50)
 
   const satisfactionEmojis = ['\uD83D\uDE2D', '\uD83D\uDE22', '\u2639\uFE0F', '\uD83D\uDE41', '\uD83D\uDE10', '\uD83D\uDE42', '\uD83D\uDE0A', '\uD83D\uDE01', '\uD83D\uDE04', '\uD83D\uDE0D']
 </script>
@@ -66,6 +77,7 @@
         slider2: 50,
         slider3: 50,
         slider4: 50,
+        slider5: 50,
         satisfactionEmojis: ['😭', '😢', '☹️', '🙁', '😐', '🙂', '😊', '😁', '😄', '😍'],
       }
     },
