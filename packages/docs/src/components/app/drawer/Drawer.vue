@@ -7,6 +7,7 @@
     :order="mobile ? -1 : undefined"
     :rail="railEnabled"
     width="300"
+    permanent
     @update:rail="onUpdateRail"
   >
     <AppDrawerPinnedItems :rail="rail" />
@@ -41,7 +42,7 @@
   const rail = shallowRef(user.ecosystem.docs.railDrawer)
   const _opened = shallowRef([])
   const opened = computed({
-    get: () => rail.value ? [] : _opened.value,
+    get: () => (rail.value ? [] : _opened.value),
     set: val => {
       if (pins.isPinning) return
 
