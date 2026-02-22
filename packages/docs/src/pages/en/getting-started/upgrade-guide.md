@@ -19,7 +19,7 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Quick Start with Vuetify MCP
 
-The fastest way to check your project for breaking changes is with [Vuetify MCP](https://mcp.vuetifyjs.com). To get started, run the following in your terminal:
+The fastest way to check your project for breaking changes is with [Vuetify MCP](https://github.com/vuetifyjs/mcp/). To get started, run the following in your terminal:
 
 ```bash
 # Claude Code
@@ -44,6 +44,8 @@ Using the vuetify-mcp server, scan this project for Vuetify 3 to 4 breaking chan
 ```
 
 This will automatically analyze your codebase and provide a tailored list of changes you need to make.
+
+If you have any questions about the upgrade process, come visit us at [community.vuetifyjs.com](https://community.vuetifyjs.com/).
 
 ## Styles
 
