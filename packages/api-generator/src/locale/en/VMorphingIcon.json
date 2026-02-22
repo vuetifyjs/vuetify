@@ -1,0 +1,5 @@
+{
+  "props": {
+    "dark": "Forces the dark background blend-mode strategy. When not set, the component auto-detects based on the current theme."
+  }
+}

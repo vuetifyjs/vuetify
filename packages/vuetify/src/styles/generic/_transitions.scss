@@ -374,5 +374,23 @@
         transition-property: transform;
       }
     }
+
+    .morphing-transition {
+      &-leave-to,
+      &-enter-from {
+        opacity: 0;
+        filter: blur(10px);
+      }
+      &-enter-active {
+        transition:
+          opacity 150ms linear,
+          filter 400ms linear;
+      }
+      &-leave-active {
+        transition:
+          filter 400ms linear,
+          opacity 150ms linear 300ms;
+      }
+    }
   }
 }
