@@ -63,48 +63,52 @@ The CSS reset has been mostly removed, with style normalisation being moved to i
 If you notice browser styles adding unnecessary spaces and impact text size, it is recommended to assess the scope of visual regression and selectively apply spacing resets:
 
 ```css
-ul, ol, figure, details, summary {
-  padding: 0;
-  margin: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+@layer vuetify-core.reset {
+  ul, ol, figure, details, summary {
+    padding: 0;
+    margin: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
 }
 ```
 
 Restoring most of the previous reset styles would be heavy-handed, but will get the job done as well.
 
 ```css
-* { padding: 0; margin: 0; }
-a:active, a:hover { outline-width: 0; }
-code, kbd, pre, samp { font-family: monospace; }
-pre { font-size: 1em; }
-small { font-size: 80%; }
-sub, sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sub { bottom: -0.25em; }
-sup { top: -0.5em; }
-textarea { resize: vertical; }
-button,
-input,
-select,
-textarea {
-  background-color: transparent;
-  border-style: none;
-}
-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-legend {
-  display: table;
-  max-width: 100%;
-  white-space: normal;
+@layer vuetify-core.reset {
+  * { padding: 0; margin: 0; }
+  a:active, a:hover { outline-width: 0; }
+  code, kbd, pre, samp { font-family: monospace; }
+  pre { font-size: 1em; }
+  small { font-size: 80%; }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub { bottom: -0.25em; }
+  sup { top: -0.5em; }
+  textarea { resize: vertical; }
+  button,
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    border-style: none;
+  }
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  legend {
+    display: table;
+    max-width: 100%;
+    white-space: normal;
+  }
 }
 ```
 
