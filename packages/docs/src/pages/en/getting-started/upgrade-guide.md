@@ -17,6 +17,16 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## Quick Start with Vuetify MCP
+
+The fastest way to check your project for breaking changes is with [Vuetify MCP](https://mcp.vuetifyjs.com). Connect the MCP server to your AI coding agent, then copy and paste the following prompt:
+
+```text
+Connect to the Vuetify MCP server at https://mcp.vuetifyjs.com/mcp and scan this project for Vuetify 3 to 4 breaking changes. List each issue found with the file, line number, and recommended fix.
+```
+
+This will automatically analyze your codebase and provide a tailored list of changes you need to make.
+
 ## Styles
 
 ### Style entry points
