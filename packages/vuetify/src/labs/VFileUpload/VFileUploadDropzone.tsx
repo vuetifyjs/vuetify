@@ -193,7 +193,12 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           onDrop={ onDrop }
           onClick={ !hasBrowse && !hasFiles ? onClickBrowse : undefined }
         >
-          { slots.default?.({ isDragging: isDragging.value, hasFiles, files: modelValue, props: { onClick: onClickBrowse } }) ?? (isInset ? (
+          { slots.default?.({
+            isDragging: isDragging.value,
+            hasFiles,
+            files: modelValue,
+            props: { onClick: onClickBrowse },
+          }) ?? (isInset ? (
             <div key="inset" class="v-file-upload-inset">
               { modelValue.length === 1 && !props.multiple ? (
                 slots.single?.({
