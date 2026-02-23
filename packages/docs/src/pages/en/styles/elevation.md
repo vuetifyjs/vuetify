@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Elevation
   description: Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.
