@@ -21,7 +21,7 @@
     </div>
 
     <div>
-      <div class="text-caption">
+      <div class="text-body-small">
         Show thumb label on hover and focus
       </div>
       <v-slider
