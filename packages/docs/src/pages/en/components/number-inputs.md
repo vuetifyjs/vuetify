@@ -19,8 +19,6 @@ The VNumberInput extends the standard HTML number-type input, ensuring style con
 
 <page-features />
 
-<DocIntroduced version="3.8.0" />
-
 ## Usage
 
 Here we display a list of settings that could be applied within an application.

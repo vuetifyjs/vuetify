@@ -21,12 +21,6 @@ The rules composable provide a multitude of validation rules to be used with for
 
 <PromotedEntry />
 
-::: warning
-
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
-
-:::
-
 ## Installation
 
 To use the Rules plugin, you'll need to import and register it with your Vuetify instance:

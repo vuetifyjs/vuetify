@@ -20,8 +20,6 @@ The `v-empty-state` component is used to indicate that a list is empty or that n
 
 <PageFeatures />
 
-<DocIntroduced version="3.6.0" />
-
 ## Usage
 
 A basic empty state is composed of a title and a description. It can also include an icon and a button.

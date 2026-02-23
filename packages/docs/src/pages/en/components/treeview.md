@@ -19,8 +19,6 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 <PageFeatures />
 
-<DocIntroduced version="3.9.0" />
-
 ## Usage
 
 A basic example of the treeview component.

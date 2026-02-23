@@ -22,8 +22,6 @@ The `v-snackbar-queue` component is used to display a sequence of messages to th
 
 <PageFeatures />
 
-<DocIntroduced version="3.8.0" />
-
 ## Usage
 
 Messages are passed as an array of strings to `v-model`, when a message is displayed it will be removed from the start of the array.

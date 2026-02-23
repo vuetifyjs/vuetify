@@ -20,8 +20,6 @@ The `v-hotkey` component renders keyboard shortcuts in a visually consistent and
 
 <PageFeatures />
 
-<DocIntroduced version="3.11.0" />
-
 ## Usage
 
 Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> on PC.

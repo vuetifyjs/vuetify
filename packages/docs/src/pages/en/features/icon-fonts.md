@@ -205,10 +205,6 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 
 #### MDI - UnoCSS
 
-::: info
-This feature requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0)
-:::
-
 You can use Vuetify's MDI icon set with [UnoCSS Preset Icon](https://unocss.dev/presets/icons) by installing the `@unocss/preset-icons` package, all your icons will be tree-shaken and only the icons you use will be included in your final CSS bundle.
 
 You need to install `unocss` and `@iconify-json/mdi` dev dependencies first:

@@ -21,8 +21,6 @@ Easily hook up date libraries that are used for components such as Date Picker a
 
 <PromotedEntry />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.
@@ -405,8 +403,6 @@ declare module 'vuetify' {
 ```
 
 ## String adapter
-
-<DocIntroduced version="3.9.0" />
 
 Date objects can be inconvenient to work with, especially if you're just passing the value straight to a fetch request. Vuetify also exports a StringDateAdapter that will cause date components to emit strings instead.
 

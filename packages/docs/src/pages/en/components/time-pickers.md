@@ -16,8 +16,6 @@ The `v-time-picker` is stand-alone component that can be utilized in many existi
 
 <PageFeatures />
 
-<DocIntroduced version="3.9.0" />
-
 ## Usage
 
 Time pickers have the light theme enabled by default.

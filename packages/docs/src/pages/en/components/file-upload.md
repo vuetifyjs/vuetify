@@ -17,12 +17,6 @@ features:
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.

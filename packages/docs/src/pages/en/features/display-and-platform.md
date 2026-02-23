@@ -247,8 +247,6 @@ Using the *dynamic* display values, we are able to adjust the minimum height of 
 
 ## Component Mobile Breakpoints
 
-<DocIntroduced version="3.4.0" />
-
 Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file.
 
 The following components have built in support for the **mobile-breakpoint** property:

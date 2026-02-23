@@ -124,15 +124,9 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 
 Using the **multi-sort** prop will allow user to sort on multiple columns at the same time. You can specify whether new columns should be added first or last to the **sort-by** array. By specifying optional **modifier** key, you can support both modes.
 
-::: warning
-`multi-sort` with object parameter requires at least [v3.11.0](/getting-started/release-notes/?version=v3.11.0)
-:::
-
 <ExamplesExample file="v-data-table/prop-multi-sort" />
 
 ### Sort by raw
-
-<DocIntroduced version="3.5.0" />
 
 Using a *sortRaw* key in your headers object gives you access to all values on the item. This is useful if you want to sort by a value that is not displayed in the table or a combination of multiple values.
 

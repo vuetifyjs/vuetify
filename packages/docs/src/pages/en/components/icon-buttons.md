@@ -21,12 +21,6 @@ The `v-icon-btn` component is a lightweight button component for iconography.
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.
