@@ -270,6 +270,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                     ? inputMinute.value as number
                     : inputSecond.value as number)
                 }
+                viewMode={ viewMode.value }
                 onChange={ onChange }
                 onInput={ onInput }
                 ref={ clockRef }
