@@ -74,6 +74,7 @@ export const makeSelectProps = propsFactory({
     type: Object as PropType<VList['$props']>,
   },
   menu: Boolean,
+  menuElevation: [Number, String],
   menuIcon: {
     type: IconValue,
     default: '$dropdown',
@@ -502,6 +503,7 @@ export const VSelect = genericComponent<new <
                   { ...computedMenuProps.value }
                 >
                   <VSheet
+                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
                   >

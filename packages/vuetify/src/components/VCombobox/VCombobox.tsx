@@ -581,6 +581,7 @@ export const VCombobox = genericComponent<new <
                   { ...props.menuProps }
                 >
                   <VSheet
+                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
                   >
