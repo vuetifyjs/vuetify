@@ -47,6 +47,23 @@ This will automatically analyze your codebase and provide a tailored list of cha
 
 If you have any questions about the upgrade process, come visit us at [community.vuetifyjs.com](https://community.vuetifyjs.com/).
 
+## Multi-step migration
+
+Several breaking changes in Vuetify 4 can be temporarily reverted by pasting short CSS or configuration snippets — notably [CSS reset](#css-reset), [typography](#typography), [elevation](#elevation), and [grid](#grid-system-vrow-and-vcol). This means you can migrate incrementally: restore the legacy behavior first, then update each area at your own pace.
+
+Even though these migrations mostly come down to adjusting CSS classes, manually reviewing every affected template can be time-consuming without automated visual regression tests. For large projects (typically over 200 components), we recommend scanning your codebase for relevant usage before starting:
+
+- **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset and typography changes)
+- **Grid usage** — `<v-row>` and `<v-col>` as well as how much often those elements include ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
+- **Attributes** — `elevation`, `dense`, `align`, `justify`, `order`, `align-self` (affected by elevation and grid changes)
+- **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography, elevation, and grid changes)
+
+Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
+
+::: info
+The dedciated ESLint plugin will soon be released to aid in this process - allowing you to use specific rules to perform migration step by step.
+:::
+
 ## Styles
 
 ### Style entry points
@@ -68,7 +85,7 @@ If you notice browser styles adding unnecessary spaces and impact text size, it 
     padding: 0;
     margin: 0;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
   }
