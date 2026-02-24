@@ -16,6 +16,11 @@
         @include tools.elevation($z);
       }
     }
+    @for $z from 0 through 5 {
+      .hover-elevation-#{$z}:hover {
+        @include tools.elevation($z);
+      }
+    }
 
     .elevation-overlay {
       background-image: linear-gradient(var(--v-elevation-overlay), var(--v-elevation-overlay));
