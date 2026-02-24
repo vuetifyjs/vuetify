@@ -75,6 +75,7 @@ export const makeVListItemProps = propsFactory({
   appendAvatar: String,
   appendIcon: IconValue,
   baseColor: String,
+  detached: Boolean,
   disabled: Boolean,
   lines: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
   link: {
@@ -145,14 +146,23 @@ export const VListItem = genericComponent<VListItemSlots>()({
       openOnSelect,
       scrollToActive,
       id: uid,
-    } = useNestedItem(id, () => props.disabled, false)
+    } = useNestedItem(
+      id,
+      () => props.disabled,
+      () => props.detached,
+      false
+    )
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
       (props.active || link.isActive?.value || (root.activatable.value ? isActivated.value : isSelected.value))
     )
     const isLink = toRef(() => props.link !== false && link.isLink.value)
-    const isSelectable = computed(() => (!!list && (root.selectable.value || root.activatable.value || props.value != null)))
+    const isSelectable = computed(() => (
+      !!list &&
+      !props.detached &&
+      (root.selectable.value || root.activatable.value || props.value != null))
+    )
     const isClickable = computed(() =>
       !props.disabled &&
       props.link !== false &&
