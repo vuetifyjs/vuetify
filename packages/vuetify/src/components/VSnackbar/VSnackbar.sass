@@ -36,6 +36,11 @@
       @at-root .v-snackbar
         @include tools.variant($snackbar-variants...)
 
+        &--variant-outlined,
+        &--variant-text,
+        &--variant-tonal
+          background: rgb(var(--v-theme-surface))
+
       @media (forced-colors: active)
         border: thick solid
 
