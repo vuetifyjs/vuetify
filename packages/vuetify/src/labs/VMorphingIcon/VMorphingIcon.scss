@@ -16,6 +16,7 @@
     &__stack {
       overflow: hidden;
       filter: contrast(200) blur(0.2px);
+      margin: -.5px; // hides glow bleading when zoomed in
       isolation: isolate;
       display: grid;
       place-items: center;

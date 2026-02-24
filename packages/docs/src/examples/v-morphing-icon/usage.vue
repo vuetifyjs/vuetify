@@ -7,16 +7,19 @@
     :script="script"
   >
     <div class="d-flex flex-column justify-center align-center ga-3">
-      <v-btn :color="color" icon @click="next">
+      <v-btn :color="color" size="x-large" icon @click="next">
         <v-morphing-icon :icon="icon" v-bind="props"></v-morphing-icon>
       </v-btn>
-      <span class="text-caption">Click to change icon</span>
+      <span>☝️</span>
+      <span class="text-body-medium">Click to change icon</span>
     </div>
 
     <template v-slot:configuration>
       <v-select
         v-model="color"
         :items="colors"
+        item-title="title"
+        item-value="hex"
         label="Color"
         clearable
       ></v-select>
@@ -29,19 +32,22 @@
   const name = 'v-morphing-icon'
   const model = shallowRef('default')
   const options = []
-  import { getForeground, parseColor } from 'vuetify/lib/util/colorUtils'
-  import { useTheme } from 'vuetify'
-
-  const theme = useTheme()
-  const colors = ['primary', 'secondary', 'success', 'error', 'warning', 'info', 'surface-variant']
+  const colors = [
+    { title: 'Red', hex: '#f44336', isDark: true },
+    { title: 'Purple', hex: '#9c27b0', isDark: true },
+    { title: 'Blue', hex: '#2196f3', isDark: true },
+    { title: 'Lime', hex: '#cddc39', isDark: false },
+    { title: 'Orange', hex: '#ff9800', isDark: false },
+  ]
   const color = shallowRef()
   const dark = shallowRef(false)
 
   watch(color, val => {
-    if (!val) return
-    const hex = theme.current.value.colors[color.value]
-    if (!hex) return
-    dark.value = getForeground(parseColor(hex)) === '#fff'
+    if (!val) {
+      dark.value = false
+      return
+    }
+    dark.value = colors.find(c => c.hex === val)?.isDark ?? false
   })
 
   const icons = [
@@ -55,7 +61,7 @@
 
   const props = computed(() => {
     return {
-      dark: dark.value || undefined,
+      dark: dark.value || (color.value ? false : undefined),
     }
   })
 
@@ -84,7 +90,7 @@
 
   const code = computed(() => {
     const btnProps = color.value ? ` color="${color.value}"` : ''
-    return `<v-btn${btnProps} icon @click="next">
+    return `<v-btn${btnProps} size="x-large" icon @click="next">
   <${name} :icon="icon"${propsToString(props.value)}></${name}>
 </v-btn>`
   })

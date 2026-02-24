@@ -22,7 +22,7 @@ The `v-morphing-icon` component provides smooth animated transitions between ico
 
 ::: warning
 
-This feature requires [v4.0.0](/getting-started/release-notes/?version=v4.0.0)
+This feature requires [v4.0.1](/getting-started/release-notes/?version=v4.0.1)
 
 :::
 
