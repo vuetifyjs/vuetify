@@ -32,7 +32,7 @@ npx -y @vuetify/mcp config --remote
 npx -y @vuetify/mcp config
 ```
 
-Once the MCP server is setup and loaded you will gain access to new tools such as:
+Once the MCP server is set up and loaded you will gain access to new tools such as:
 
 - `get_upgrade_guide`: Get a list of all breaking changes in the upgrade guide.
 - `get_v4_breaking_changes`: Get a list of all breaking changes in Vuetify 4.
@@ -53,15 +53,16 @@ Several breaking changes in Vuetify 4 can be temporarily reverted by pasting sho
 
 Even though these migrations mostly come down to adjusting CSS classes, manually reviewing every affected template can be time-consuming without automated visual regression tests. For large projects (typically over 200 components), we recommend scanning your codebase for relevant usage before starting:
 
-- **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset and typography changes)
-- **Grid usage** — `<v-row>` and `<v-col>` as well as how much often those elements include ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
-- **Attributes** — `elevation`, `dense`, `align`, `justify`, `order`, `align-self` (affected by elevation and grid changes)
-- **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography, elevation, and grid changes)
+- **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset)
+- **Grid usage** — `<v-row>` and `<v-col>`, with specific focus on ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
+- **Grid attributes** — `dense`, `no-gutters`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
+- **Shadows** — `elevation-*` classes and `elevation` attributes or CSS overrides (affected by elevation changes)
+- **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography)
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
 ::: info
-The dedciated ESLint plugin will soon be released to aid in this process - allowing you to use specific rules to perform migration step by step.
+The dedicated ESLint plugin will soon be released to aid in this process - allowing you to use specific rules to perform migration step by step.
 :::
 
 ## Styles
@@ -416,7 +417,7 @@ Or remove `.raw`:
 ### VSnackbar
 
 ::: warning
-This component has it's internal HTML structure overhauled to incorporate **header** and **prepend** slots
+This component has its internal HTML structure overhauled to incorporate **header** and **prepend** slots
 :::
 
 Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
@@ -551,7 +552,7 @@ The component props (`offset`, `offset-sm`, etc.) continue to work unchanged, bu
 
 #### Sass variables cleanup
 
-`$form-grid-gutter` was replaced with `$grid-density`. New values substract values from the default gutter
+`$form-grid-gutter` was replaced with `$grid-density`. New values subtract values from the default gutter
 
 ```diff
 - $form-grid-gutter: $spacer * 2 !default;
