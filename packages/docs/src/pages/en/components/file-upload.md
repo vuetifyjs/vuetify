@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: File upload
   description: The file upload component is a drag and drop area for uploading files.
@@ -16,6 +17,12 @@ features:
 # File upload
 
 <PageFeatures />
+
+::: warning
+
+This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
+
+:::
 
 ## Installation
 
@@ -44,7 +51,9 @@ The `v-file-upload` component is a drag and drop area for uploading files. It ca
 | Component | Description |
 | - | - |
 | [v-file-upload](/api/v-file-upload/) | Primary Component |
+| [v-file-upload-dropzone](/api/v-file-upload-dropzone/) | Dropzone Component |
 | [v-file-upload-item](/api/v-file-upload-item/) | Item Component |
+| [v-file-upload-list](/api/v-file-upload-list/) | List Component |
 | [v-file-input](/api/v-file-input/) | File input component |
 
 <ApiInline hide-links />
@@ -69,6 +78,12 @@ Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** 
 
 <ExamplesExample file="v-file-upload/prop-content" />
 
+#### Inset file list
+
+The **inset-file-list** prop renders the file list inside the dropzone instead of below it.
+
+<ExamplesExample file="v-file-upload/prop-inset-file-list" />
+
 #### Disabled
 
 The **disabled** property reduces the opacity of the component and prevents interaction.
@@ -90,3 +105,11 @@ The `v-file-upload` component has several slots that can be used to customize th
 The **item** slot is used to customize the appearance of the file item.
 
 <ExamplesExample file="v-file-upload/slot-item" />
+
+### Misc
+
+#### List
+
+Use `v-file-upload-list` with the **default** slot to compose `v-file-upload-item` components directly. The slot provides `files` and `onClickRemove` for wiring up removal.
+
+<ExamplesExample file="v-file-upload/misc-list" />
