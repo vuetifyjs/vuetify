@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'January 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/january-2026-update/january-hero.png',
+      shortDescription: 'January delivered Vuetify 4.0.0-beta.0—the first beta of our next major version—featuring MD3 typography, elevation levels, and a complete grid system overhaul. VCommandPalette lands in labs, Vuetify0 hits v0.1.0 with new Tabs, Radio, and Checkbox components, and the CLI shipped 31 releases with a new analyze command...',
+      date: 'February 11, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/january-2026-update'),
+    },
+    {
       title: 'December 2025 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/december-hero.png',
       shortDescription: 'December was our most productive month of 2025 with 522 commits across 16 repositories. The month delivered Vuetify 4.0.0-alpha.0 with CSS layers, six v3.11.x patches, the Vuetify CLI public release, Google OAuth for Vuetify One, PWA support across all ecosystem products, and 6 Vuetify0 releases with new composables including usePagination, useClickOutside, and useVirtual...',
