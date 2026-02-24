@@ -16,7 +16,7 @@ export function installPinia (app: App, router: Router) {
 
   pinia.use(
     one(
-      ['docs', 'home'],
+      ['v3'],
       import.meta.env.VITE_API_SERVER_URL,
     )
   )
