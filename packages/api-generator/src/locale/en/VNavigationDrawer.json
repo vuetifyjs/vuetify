@@ -6,6 +6,7 @@
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes.",
     "expandOnHover": "Collapses the drawer to a **rail-variant** until hovering with the mouse.",
     "floating": "A floating drawer has no visible container (no border-right).",
+    "forceExpand": "Forces the drawer to remain expanded even when the user is not hovering. Only applies when **expand-on-hover** is enabled.",
     "height": "Sets the height of the navigation drawer.",
     "image": "Apply a specific background image to the component.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices such as the `temporary` prop, or activate the `bottom` prop when the breakpoint value is met. Setting the value to `0` will disable this functionality.",
