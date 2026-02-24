@@ -6,7 +6,7 @@ concurrency:
 on:
   push:
     branches:
-      - 'master'
+      - 'v3-stable'
     paths:
     - 'packages/api-generator/src/locale/en/**'
     - 'packages/docs/src/i18n/messages/en.json'
