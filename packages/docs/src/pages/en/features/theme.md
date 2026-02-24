@@ -141,6 +141,47 @@ export default createVuetify({
 })
 ```
 
+### Theme transition
+
+The **transition** option enables an expanding circle animation when changing themes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API). In browsers that do not support the View Transition API, the theme change is applied instantly.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    transition: true, // default origin: top center
+    // or provide options:
+    // transition: { origin: '100% 0%' }, // right corner
+  },
+})
+```
+
+You can also override the transition per-call by passing a second argument to `change`, `toggle`, or `cycle`. This is useful for originating the circle from the click position:
+
+```html
+<template>
+  <v-container class="d-flex justify-center">
+    <v-btn
+      icon="mdi-theme-light-dark"
+      @click="toggleTheme"
+    />
+  </v-container>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
+
+  function toggleTheme (e) {
+    const x = e.clientX
+    const y = e.clientY
+    theme.toggle(undefined, { origin: `${x}px ${y}px` })
+  }
+</script>
+```
+
 ## Custom themes
 
 Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
