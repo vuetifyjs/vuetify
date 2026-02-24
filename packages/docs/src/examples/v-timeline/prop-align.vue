@@ -5,7 +5,7 @@
         Opposite content
       </template>
       <div>
-        <div class="text-h6">Content title</div>
+        <div class="text-title-large">Content title</div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
@@ -17,7 +17,7 @@
         Opposite content
       </template>
       <div>
-        <div class="text-h6">Content title</div>
+        <div class="text-title-large">Content title</div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
@@ -29,7 +29,7 @@
         Opposite content
       </template>
       <div>
-        <div class="text-h6">Content title</div>
+        <div class="text-title-large">Content title</div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>

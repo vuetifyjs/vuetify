@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Snackbars
   title: Snackbar component
@@ -12,7 +13,7 @@ features:
   github: /components/VSnackbar/
   label: 'C: VSnackbar'
   report: true
-  spec: https://m2.material.io/components/snackbars
+  spec: https://m3.material.io/components/snackbar
 ---
 
 # Snackbars
@@ -40,13 +41,11 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 ## Examples
 
+::: info
+Some examples below use the **contained** prop to keep snackbars scoped within the example preview. In a real application you typically don't need it — snackbars render in the application overlay by default.
+:::
+
 ### Props
-
-#### Multi line
-
-The **multi-line** property extends the height of the `v-snackbar` to give you a little more room for content.
-
-<ExamplesExample file="v-snackbar/prop-multi-line" />
 
 #### Timeout
 
@@ -60,8 +59,46 @@ Apply different styles to the snackbar using props such as **text**, **shaped**,
 
 <ExamplesExample file="v-snackbar/prop-variants" />
 
+#### Prepend icon
+
+The **prepend-icon** prop adds an icon to the start of the snackbar.
+
+<ExamplesExample file="v-snackbar/prop-prepend-icon" />
+
+#### Prepend avatar
+
+The **prepend-avatar** prop adds an avatar image to the start of the snackbar.
+
+<ExamplesExample file="v-snackbar/prop-prepend-avatar" />
+
+#### Loading
+
+The **loading** prop displays a circular progress indicator in the prepend area, useful for indicating an ongoing process.
+
+<ExamplesExample file="v-snackbar/prop-loading" />
+
+#### Timer position
+
+The **timer** prop accepts `'top'` or `'bottom'` to control where the progress bar is rendered. Use **timer-color** to change its color and **reverse-timer** to invert the direction.
+
+<ExamplesExample file="v-snackbar/prop-timer-position" />
+
 #### Vertical
 
 The **vertical** property allows you to stack the content of your `v-snackbar`.
 
 <ExamplesExample file="v-snackbar/prop-vertical" />
+
+### Slots
+
+#### Header
+
+The **header** slot renders content above the snackbar wrapper, useful for metadata like a provider name or timestamp.
+
+<ExamplesExample file="v-snackbar/slot-header" />
+
+#### Prepend
+
+The **prepend** slot overrides the default prepend area, allowing you to customize the content beyond what is possible with simple props.
+
+<ExamplesExample file="v-snackbar/slot-prepend" />

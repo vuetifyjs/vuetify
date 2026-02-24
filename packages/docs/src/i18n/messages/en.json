@@ -1,7 +1,136 @@
 {
   "home": {
     "get-started": "Get Started",
-    "why-vuetify": "Why Vuetify?"
+    "why-vuetify": "Why Vuetify?",
+    "entry": {
+      "chip": "#1 Vue UI Library",
+      "title-prefix": "A complete",
+      "title-highlight": "design system",
+      "title-suffix": "that works.",
+      "subtitle": "Built by the Vue Community, Backed by Sponsors.",
+      "latest": "Latest",
+      "hello-vuetify": "Hello Vuetify"
+    },
+    "special-sponsor": "Special Sponsor",
+    "sponsors": {
+      "title": "Sponsors & Backers",
+      "description": "Vuetify is proudly supported by these amazing companies and individuals. If you'd like to join them, please consider sponsoring Vuetify's development.",
+      "become-sponsor": "Become a Sponsor"
+    },
+    "ecosystem": {
+      "title": "More than just Components",
+      "subtitle": "A complete Vue ecosystem",
+      "description": "Vuetify is a complete Vue ecosystem that provides you with all of the tools necessary to create beautiful content rich web applications."
+    },
+    "one": {
+      "title": "Vuetify One",
+      "subtitle": "Everything in One Place",
+      "description": "A unified platform providing powerful all Ecosystem Tools in one place. Build faster, collaborate better, and create stunning Vuetify applications.",
+      "see-benefits": "See Subscription Benefits",
+      "tools": {
+        "play": "An interactive playground to experiment with Vuetify components and features in real-time.",
+        "bin": "A code sharing platform tailored for Vuetify projects, enabling easy collaboration and sharing of code snippets.",
+        "studio": "A visual development environment for building Vuetify applications with drag-and-drop components and real-time previews.",
+        "link": "A URL shortening service designed for Vuetify developers to create and manage short links efficiently.",
+        "mcp": "Model Context Protocol (MCP) server providing Vuetify component information and documentation.",
+        "issues": "Easily report issues and request features for projects in the Vuetify Ecosystem."
+      }
+    },
+    "tooling": {
+      "title": "Vuetify Tooling",
+      "subtitle": "Tools & Resources",
+      "description": "Vuetify provides a suite of tools for managing your Vuetify projects.",
+      "headers": {
+        "tool": "Tool",
+        "type": "Type",
+        "description": "Description"
+      },
+      "tools": {
+        "create": {
+          "title": "Vuetify Create",
+          "type": "Scaffolding",
+          "description": "Scaffold your next Vuetify application with just a few commands."
+        },
+        "cli": {
+          "title": "Vuetify CLI",
+          "type": "CLI",
+          "description": "Command-line interface for managing Vuetify projects."
+        },
+        "uikit": {
+          "title": "Vuetify UI Kit",
+          "type": "Design",
+          "description": "Figma UI Kit based on Material Design for creating custom components."
+        },
+        "eslint-config": {
+          "title": "Vuetify ESLint Config",
+          "type": "Linting",
+          "description": "Opinionated ESLint config to keep your code clean and consistent."
+        },
+        "eslint-plugin": {
+          "title": "Vuetify ESLint Plugin",
+          "type": "Migration",
+          "description": "Automated version upgrade plugin for seamless migrations."
+        },
+        "loader": {
+          "title": "Vuetify Loader",
+          "type": "Build",
+          "description": "Vite and Webpack loader for automatic component imports."
+        }
+      }
+    },
+    "snips": {
+      "subtitle": "Premium Examples",
+      "title-line1": "Beautiful UI snippets,",
+      "title-line2": "built with Vuetify",
+      "description": "Vuetify Snips is a collection of over 560 beautifully crafted UI snippets, built with Vuetify, aimed at making your development process easier and faster.",
+      "browse": "Browse Vuetify Snips"
+    },
+    "store": {
+      "title": "Vuetify Store",
+      "subtitle": "Premium Templates & Themes",
+      "description": "Browse our collection of premium templates, themes and UI kits. All themes are built with Vuetify and are available for everyone.",
+      "see-more": "See More Templates"
+    },
+    "support": {
+      "title": "Need support with your Vuetify project?",
+      "subtitle": "Vuetify Support Services",
+      "description": "We've got you covered. We offer a range of support options to help you get the most out of Vuetify.",
+      "get-support": "Get Support Now",
+      "services": {
+        "developer": {
+          "title": "Single Developer Support",
+          "subtitle": "Get professional support from the experts behind Vuetify."
+        },
+        "consulting": {
+          "title": "Consulting Services",
+          "subtitle": "Epicmax provides consulting services for your project."
+        },
+        "lts": {
+          "title": "Extended LTS support",
+          "subtitle": "HeroDevs provides extended long-term support for Vuetify 2 users."
+        }
+      }
+    },
+    "discord": {
+      "title": "Join our community of 40k+ developers",
+      "description": "Join us to get help with your Vuetify projects, share your work, and connect with other developers on Discord.",
+      "join": "Join Our Discord"
+    },
+    "blogs": {
+      "title": "Vuetify Blog",
+      "subtitle": "Latest news and updates",
+      "description": "Stay up to date with the latest news and updates from the Vuetify team.",
+      "read-more": "Read more",
+      "read-more-posts": "Read More Posts"
+    },
+    "gallery": {
+      "title": "Component Gallery",
+      "description": "Vuetify provides a comprehensive collection of components that can be used to build your application.",
+      "system-bar": "Vuetify Gallery",
+      "application": "Application",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
   },
   "about": "About",
   "accessibility": "Accessibility (a11y)",
@@ -138,6 +267,7 @@
   "discord": "Discord",
   "done": "All done",
   "edit-in-playground": "Edit in Vuetify Playground",
+  "open-in-playground": "Open in Vuetify Playground",
   "view-in-figma": "View in Figma",
   "edit-this-page": "Edit this page on",
   "edit": "Edit",

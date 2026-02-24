@@ -23,7 +23,7 @@
             :key="i"
             class="log-entry pa-2 border rounded"
           >
-            <span class="text-caption text-grey">{{ log.timestamp }}</span>
+            <span class="text-body-small text-grey">{{ log.timestamp }}</span>
             <span class="ml-2">{{ log.message }}</span>
           </div>
         </v-sheet>
@@ -40,7 +40,7 @@
 
     <template v-slot:configuration>
       <v-checkbox v-model="allowInputs" label="Allow inputs"></v-checkbox>
-      <div class="text-subtitle-1 mt-3">Sequence Timeout <span class="text-caption text-medium-emphasis">({{ sequenceTimeout }}ms)</span></div>
+      <div class="text-body-large mt-3">Sequence Timeout <span class="text-body-small text-medium-emphasis">({{ sequenceTimeout }}ms)</span></div>
       <v-slider
         v-model="sequenceTimeout"
         max="3000"

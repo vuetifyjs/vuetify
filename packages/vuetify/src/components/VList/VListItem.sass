@@ -79,7 +79,7 @@
     display: flex
     grid-area: prepend
 
-    *:not(.v-treeview-indent-lines) ~ .v-list-item__spacer
+    * ~ .v-list-item__spacer
       width: var(--v-list-prepend-gap)
 
     > .v-badge,
@@ -92,6 +92,7 @@
     > .v-badge:is(:has(.v-avatar))
       ~ .v-list-item__spacer
         width: var(--v-list-prepend-gap, $list-item-avatar-margin-start)
+
 
     .v-list-item--slim &
       > .v-badge,
@@ -311,20 +312,32 @@
       --indent-padding: -#{$list-nav-padding}
 
   .v-list-group
+    --list-indent-size: #{$list-indent-size}
     --parent-padding: var(--indent-padding)
+    --prepend-width: var(--v-list-group-prepend, #{$list-item-prepend-size})
 
-    &--fluid > .v-list-group__items
-      --indent-padding: 0px
+    .v-list--slim &
+      --prepend-width: var(--v-list-group-prepend, #{$list-item-slim-prepend-size})
+
+    &--fluid
+      --list-indent-size: 0px
+
+    &--prepend
+      --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
+
+    &--fluid.v-list-group--prepend
+      --parent-padding: var(--indent-padding)
 
   .v-list-group__items
-    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent))
+    --indent-padding: calc(var(--parent-padding) + var(--v-list-indent, var(--list-indent-size)))
     min-width: min-content
 
     .v-navigation-drawer--rail &
       min-width: 0
 
   .v-list-group__items .v-list-item
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+    @include tools.layer('overrides')
+      padding-inline-start: calc(#{$base-padding} + var(--indent-padding))
 
   .v-list-group__header:not(.v-treeview-item--activatable-group-activator).v-list-item--active
     &:not(:focus-visible)
@@ -335,6 +348,7 @@
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
+@include tools.layer('trumps')
   @media (forced-colors: active)
     .v-list-item
       &--link:not(&--active)
@@ -347,16 +361,16 @@
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
-          color: highlight !important
+          color: highlight
 
       &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
-        background: highlight !important
+        background: highlight
 
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
           opacity: 1
-          color: highlighttext !important
+          color: highlighttext
           forced-color-adjust: preserve-parent-color
 
       &--focus-visible::after

@@ -1,4 +1,5 @@
 // Styles
+import './main.scss'
 import 'prism-theme-vars/base.css'
 
 // Plugins
@@ -53,7 +54,7 @@ if (IN_BROWSER) {
   userStore.$subscribe(() => {
     userStore.save()
   })
-  Swetrix.init('ycvR7fW63FFz', {
+  Swetrix.init('ZMrLolxUmS0l', {
     apiURL: 'https://swetrix-api.vuetifyjs.com/log',
   })
   Swetrix.trackViews()

@@ -1,10 +1,6 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-row
-      align="center"
-      class="fill-height"
-      justify="center"
-    >
+    <v-row class="fill-height align-center justify-center">
       <template v-for="(item, i) in items" :key="i">
         <v-col
           cols="12"
@@ -21,16 +17,16 @@
                 height="225px"
                 cover
               >
-                <v-card-title class="text-h6 text-white d-flex flex-column">
+                <v-card-title class="text-title-large text-white d-flex flex-column">
                   <p class="mt-4">
                     {{ item.title }}
                   </p>
 
                   <div>
-                    <p class="ma-0 text-body-1 font-weight-bold">
+                    <p class="ma-0 text-body-large font-weight-bold">
                       {{ item.text }}
                     </p>
-                    <p class="text-caption font-weight-medium">
+                    <p class="text-body-small font-weight-medium">
                       {{ item.subtext }}
                     </p>
                   </div>

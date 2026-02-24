@@ -59,7 +59,7 @@
       >
         <v-card flat>
           <v-card-text>
-            <h2>{{ item }}</h2>
+            <h2 class="my-0">{{ item }}</h2>
             {{ text }}
           </v-card-text>
         </v-card>

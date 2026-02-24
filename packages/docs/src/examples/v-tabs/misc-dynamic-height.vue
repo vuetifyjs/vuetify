@@ -35,7 +35,7 @@
       </v-tabs-window-item>
       <v-tabs-window-item>
         <v-card flat>
-          <v-card-title class="text-h5">
+          <v-card-title class="text-headline-small">
             An awesome title
           </v-card-title>
           <v-card-text>
@@ -55,7 +55,7 @@
       </v-tabs-window-item>
       <v-tabs-window-item>
         <v-card flat>
-          <v-card-title class="text-h5">
+          <v-card-title class="text-headline-small">
             An even better title
           </v-card-title>
           <v-card-text>

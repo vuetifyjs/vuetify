@@ -20,8 +20,6 @@ The `v-confirm-edit` component is used to allow the user to verify their changes
 
 <PageFeatures />
 
-<DocIntroduced version="3.6.0" />
-
 ## Usage
 
 <ExamplesUsage name="v-confirm-edit" />

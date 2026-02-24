@@ -17,17 +17,12 @@
         cols="12"
         md="6"
       >
-        <v-row
-          align="center"
-          class="fill-height"
-        >
+        <v-row class="fill-height align-center">
           <v-item-group
             v-model="selectedGradient"
             mandatory
           >
-            <v-row
-              class="pt-6 pl-6"
-            >
+            <v-row class="pt-6 pl-6">
               <v-item
                 v-for="(gradient, i) in gradients"
                 :key="i"
@@ -54,9 +49,7 @@
       </v-col>
     </v-row>
 
-    <v-row
-      class="mt-5"
-    >
+    <v-row class="mt-5">
       <v-col
         cols="2"
       >

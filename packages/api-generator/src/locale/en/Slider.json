@@ -7,7 +7,7 @@
     "showTicks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "step": "If greater than 0, sets step interval for ticks.",
     "thumbColor": "Sets the thumb and thumb label color.",
-    "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label. (since [v3.12.0](/getting-started/release-notes/?version=v3.12.0) it supports `'hover'` to show label when hovering over the thumb.",
+    "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label. Use `'hover'` to show label when hovering over the thumb.",
     "thumbSize": "Controls the size of the thumb label.",
     "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order.",

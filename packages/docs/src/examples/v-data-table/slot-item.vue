@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="employees"
-    class="text-caption"
+    class="text-body-small"
     density="compact"
     item-value="name"
     hide-default-footer

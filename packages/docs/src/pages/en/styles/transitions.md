@@ -22,7 +22,7 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 | Name | Description |
 | - | - |
 | [v-expand-transition](/api/v-expand-transition/) | The expand transition is used in Expansion Panels and List Groups. There is also a horizontal version available with `v-expand-x-transition`. |
-| [v-expand-both-transition](/api/v-both-expand-transition/) | (requires **v3.12.0**) Used to expand content in both directions. |
+| [v-expand-both-transition](/api/v-both-expand-transition/) | Used to expand content in both directions. |
 | [v-fab-transition](/api/v-fab-transition/) | An example of the fab transition can be found in the `v-speed-dial` component. |
 | [v-fade-transition](/api/v-fade-transition/) | An example of the fade transition can be found on the Carousel component. |
 | [v-scale-transition](/api/v-scale-transition/) | Many of Vuetify's components contain a **transition** prop which allows you to specify your own. |

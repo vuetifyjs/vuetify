@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.12.0",
+  "version": "4.0.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -61,6 +61,18 @@
     "./styles": {
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
+    },
+    "./styles/core": {
+      "sass": "./lib/styles/core.scss",
+      "default": "./lib/styles/core.css"
+    },
+    "./styles/colors": {
+      "sass": "./lib/styles/colors.scss",
+      "default": "./lib/styles/colors.css"
+    },
+    "./styles/utilities": {
+      "sass": "./lib/styles/utilities.scss",
+      "default": "./lib/styles/utilities.css"
     },
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.js",

@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="text-caption">Show ticks when using slider</div>
+    <div class="text-body-small">Show ticks when using slider</div>
 
     <v-slider
       step="10"
       show-ticks
     ></v-slider>
 
-    <div class="text-caption">Always show ticks</div>
+    <div class="text-body-small">Always show ticks</div>
 
     <v-slider
       show-ticks="always"
       step="10"
     ></v-slider>
 
-    <div class="text-caption">Tick size</div>
+    <div class="text-body-small">Tick size</div>
 
     <v-slider
       show-ticks="always"
@@ -22,7 +22,7 @@
       tick-size="4"
     ></v-slider>
 
-    <div class="text-caption">Tick labels</div>
+    <div class="text-body-small">Tick labels</div>
 
     <v-slider
       :max="3"

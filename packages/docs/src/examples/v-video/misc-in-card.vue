@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center">
-    <v-card elevation="4" rounded="xl" width="400">
+    <v-card elevation="2" rounded="xl" width="400">
       <v-card-item class="py-4">
         <v-skeleton-loader type="list-item-avatar-two-line"></v-skeleton-loader>
       </v-card-item>

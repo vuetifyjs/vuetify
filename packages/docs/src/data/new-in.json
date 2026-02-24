@@ -3,8 +3,7 @@
     "exposed": {
       "change": "3.9.0",
       "toggle": "3.9.0",
-      "cycle": "3.9.0",
-      "unimportant": "3.9.0"
+      "cycle": "3.9.0"
     }
   },
   "VAppBar": {
@@ -17,7 +16,8 @@
       "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
-      "listProps": "3.5.0"
+      "listProps": "3.5.0",
+      "menuElevation": "4.0.0"
     },
     "slots": {
       "menu-header": "3.12.0",
@@ -27,7 +27,16 @@
   "VAvatar": {
     "props": {
       "text": "3.4.0",
-      "border": "3.7.0"
+      "border": "3.7.0",
+      "badge": "4.0.0"
+    },
+    "slots": {
+      "badge": "4.0.0"
+    }
+  },
+  "VBadge": {
+    "props": {
+      "dotSize": "4.0.0"
     }
   },
   "VBanner": {
@@ -78,7 +87,8 @@
       "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
-      "listProps": "3.5.0"
+      "listProps": "3.5.0",
+      "menuElevation": "4.0.0"
     },
     "slots": {
       "menu-header": "3.12.0",
@@ -280,10 +290,16 @@
       "chunkWidth": "3.10.0"
     }
   },
+  "VRow": {
+    "props": {
+      "size": "4.0.0"
+    }
+  },
   "VSelect": {
     "props": {
       "autocomplete": "3.10.0",
       "listProps": "3.5.0",
+      "menuElevation": "4.0.0",
       "noAutoScroll": "3.9.0"
     },
     "slots": {
@@ -305,8 +321,25 @@
   },
   "VSnackbar": {
     "props": {
+      "loading": "4.0.0",
+      "prependAvatar": "4.0.0",
+      "prependIcon": "4.0.0",
+      "reverseTimer": "4.0.0",
       "timer": "3.4.0",
+      "timerColor": "4.0.0",
       "text": "3.4.0"
+    },
+    "slots": {
+      "header": "4.0.0",
+      "prepend": "4.0.0"
+    }
+  },
+  "VSnackbarQueue": {
+    "props": {
+      "closable": "4.0.0",
+      "closeText": "4.0.0",
+      "gap": "4.0.0",
+      "totalVisible": "3.11.0"
     }
   },
   "VStepper": {

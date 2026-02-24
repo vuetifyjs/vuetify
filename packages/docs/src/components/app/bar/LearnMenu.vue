@@ -75,9 +75,14 @@
       appendIcon: 'mdi-numeric-0-box',
     },
     {
-      title: '3.x (latest)',
+      title: '4.x (latest)',
       href: 'https://vuetifyjs.com/',
       appendIcon: 'mdi-numeric-3-box',
+    },
+    {
+      title: '3.x (v3-stable)',
+      href: 'https://v3.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-2-box',
     },
     {
       title: '2.6.x (v2-stable)',

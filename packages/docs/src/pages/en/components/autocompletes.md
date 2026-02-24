@@ -121,8 +121,6 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 
 #### New tab
 
-<DocIntroduced version="3.3.0" />
-
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 
 <ExamplesExample file="v-autocomplete/misc-new-tab" />

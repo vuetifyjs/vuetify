@@ -31,7 +31,7 @@
       ></v-checkbox>
 
       <div v-if="model !== 'inline'">
-        <h5 class="pl-2">Location</h5>
+        <h5 class="pl-2 my-0">Location</h5>
         <v-radio-group
           v-model="location"
           class="pa-1 mb-2"

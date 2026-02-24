@@ -9,7 +9,7 @@ $alert-border-radius: settings.$border-radius-root !default;
 $alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
-$alert-color: rgba(var(--v-theme-on-surface-light), var(--v-high-emphasis-opacity)) !default;
+$alert-color: tools.theme-color('on-surface-light', var(--v-high-emphasis-opacity)) !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $alert-elevation: 1 !default;
 $alert-padding: 16px !default;
@@ -22,10 +22,10 @@ $alert-append-margin-inline-start: 16px !default;
 $alert-append-close-margin-inline-start: 16px !default;
 
 // VAlertTitle
-$alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !default;
-$alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
+$alert-title-font-size: tools.map-deep-get(settings.$typography, 'headline-small', 'size') !default;
+$alert-title-font-weight: tools.map-deep-get(settings.$typography, 'headline-small', 'weight') !default;
 $alert-title-hyphens: auto !default;
-$alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
+$alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'headline-small', 'letter-spacing') !default;
 $alert-title-line-height: 1.75rem !default;
 $alert-title-overflow-wrap: normal !default;
 $alert-title-text-transform: none !default;
