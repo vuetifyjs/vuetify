@@ -148,11 +148,11 @@ app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   if (to.meta.locale !== from.meta.locale) {
     localeStore.locale = to.meta.locale as string
   }
-  return to.path.endsWith('/') ? next() : next(`${trailingSlash(to.path)}` + to.hash)
+  if (!to.path.endsWith('/')) return `${trailingSlash(to.path)}` + to.hash
 })
 router.afterEach((to, from) => {
   if (to.meta.locale !== from.meta.locale && from.meta.locale === 'eo-UY') {
