@@ -117,7 +117,7 @@ jobs:
       needs.pre_job.outputs.should_skip != 'true' &&
       github.event_name == 'push' &&
       github.repository_owner == 'vuetifyjs' &&
-      contains(toJSON('["master", "dev", "next"]'), github.ref_name)
+      contains(toJSON('["master", "dev", "next", "v3-stable"]'), github.ref_name)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
