@@ -241,7 +241,17 @@ presetVuetify({
 })
 ```
 
-You can also pass a custom object to define your own typography styles:
+You can easily pass the generated CSS variables to Sass
+
+```scss { resource="settings.scss" }
+@use 'vuetify/settings' with (
+  $heading-font-family: var(--v-font-heading),
+  $body-font-family: var(--v-font-body),
+  // ...
+);
+```
+
+The `typography` field accepts a custom object in case your project uses custom typography scale.
 
 ```ts
 presetVuetify({
