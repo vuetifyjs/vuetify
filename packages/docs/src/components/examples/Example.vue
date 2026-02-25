@@ -5,7 +5,7 @@
     }"
     scoped
   >
-    <AppSheet class="mb-9">
+    <AppSheet class="mb-9 position-relative">
       <v-lazy v-model="hasRendered" min-height="44">
         <v-toolbar
           border="b"
@@ -97,6 +97,16 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
+      <new-in-chip
+        v-if="props.newIn"
+        :text="t('new-in', { version: props.newIn })"
+        :to="rpath(`/getting-started/release-notes/?version=v${props.newIn}`)"
+        class="text-mono rounded-t-0 rounded-b position-absolute bottom-0"
+        color="success"
+        size="x-small"
+        style="transform: translateY(calc(100% + 1px)); right: 10px;"
+        variant="tonal"
+      />
     </AppSheet>
   </v-defaults-provider>
 </template>
@@ -122,6 +132,7 @@
       type: String,
       required: true,
     },
+    newIn: String,
     open: Boolean,
     preview: Boolean,
   })
