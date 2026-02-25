@@ -301,9 +301,9 @@ Then point Vuetify's Sass variables at the same CSS custom properties:
 ```
 
 <details>
-<summary>Typography shortcuts (aligned with Vuetify defaults)</summary>
+<summary>MD2 typography shortcuts (text-h1 … text-overline)</summary>
 
-Add the `shortcuts` below to your UnoCSS configuration. The values are matched to Vuetify's built-in typography scale:
+Add the `shortcuts` below to your UnoCSS configuration. The values are matched to Vuetify's MD2 typography scale:
 
 ```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
 shortcuts: {
@@ -324,6 +324,33 @@ shortcuts: {
 ```
 
 Because these are UnoCSS shortcuts (composed from real utilities), responsive prefixes work automatically — `sm:text-h3` or `lg:text-body-1` will generate correctly without any extra configuration.
+
+</details>
+
+<details>
+<summary>MD3 typography shortcuts (text-display-large … text-label-small)</summary>
+
+These match Vuetify's MD3 defaults (the current default typography scale). None of the MD3 classes use `text-transform`.
+
+```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
+shortcuts: {
+  'text-display-large':   'font-heading normal-case text-[3.5625rem] font-[400] leading-[1.1228] tracking-[-.0044em]',
+  'text-display-medium':  'font-heading normal-case text-[2.8125rem] font-[400] leading-[1.1556] tracking-[normal]',
+  'text-display-small':   'font-heading normal-case text-[2.25rem]   font-[400] leading-[1.2222] tracking-[normal]',
+  'text-headline-large':  'font-heading normal-case text-[2rem]      font-[400] leading-[1.25]   tracking-[normal]',
+  'text-headline-medium': 'font-heading normal-case text-[1.75rem]   font-[400] leading-[1.2857] tracking-[normal]',
+  'text-headline-small':  'font-heading normal-case text-[1.5rem]    font-[400] leading-[1.3333] tracking-[normal]',
+  'text-title-large':     'font-heading normal-case text-[1.375rem]  font-[400] leading-[1.2727] tracking-[normal]',
+  'text-title-medium':    'font-body    normal-case text-[1rem]      font-[500] leading-[1.5]    tracking-[.0094em]',
+  'text-title-small':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
+  'text-body-large':      'font-body    normal-case text-[1rem]      font-[400] leading-[1.5]    tracking-[.0313em]',
+  'text-body-medium':     'font-body    normal-case text-[.875rem]   font-[400] leading-[1.4286] tracking-[.0179em]',
+  'text-body-small':      'font-body    normal-case text-[.75rem]    font-[400] leading-[1.3333] tracking-[.0333em]',
+  'text-label-large':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
+  'text-label-medium':    'font-body    normal-case text-[.75rem]    font-[500] leading-[1.3333] tracking-[.0417em]',
+  'text-label-small':     'font-body    normal-case text-[.6875rem]  font-[500] leading-[1.4545] tracking-[.0455em]',
+},
+```
 
 </details>
 
@@ -458,6 +485,42 @@ You have two options:
 );
 ```
 
+## Forward Vuetify theme colors to UnoCSS { id="theme-colors" }
+
+Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `--v-theme-primary`). Wrapping them in `rgb()` inside the UnoCSS `theme.colors` block makes them available as standard TailwindCSS-style color utilities (`bg-primary`, `text-error`, etc.):
+
+```ts
+// uno.config.ts (Vite) or unocss key (Nuxt)
+theme: {
+  colors: {
+    background:      'rgb(var(--v-theme-background))',
+    surface:         'rgb(var(--v-theme-surface))',
+    'surface-variant': 'rgb(var(--v-theme-surface-variant))',
+    primary:         'rgb(var(--v-theme-primary))',
+    success:         'rgb(var(--v-theme-success))',
+    warning:         'rgb(var(--v-theme-warning))',
+    error:           'rgb(var(--v-theme-error))',
+    info:            'rgb(var(--v-theme-info))',
+  },
+},
+```
+
+Because `presetWind4` generates utilities on demand, also add `safelist` entries for any color classes that are bound dynamically via `color="..."` prop:
+
+```ts
+safelist: [
+  'bg-primary', 'text-primary',
+  'bg-success', 'text-success',
+  'bg-error',   'text-error',
+],
+```
+
+::: warning
+
+Vuetify's original `bg-*` utilities automatically set a contrasting foreground color via `--v-theme-on-*`. Replacing them with UnoCSS utilities removes this safeguard — you are responsible for choosing legible text colors. See [Limitations](/features/css-utilities/#limitations).
+
+:::
+
 ## Complete Nuxt example
 
 Below is a consolidated `nuxt.config.ts` combining all sections above:
@@ -487,6 +550,9 @@ export default defineNuxtConfig({
         mobileBreakpoint: 'md',
         thresholds: breakpoints.forVuetify,
       },
+      theme: {
+        defaultTheme: 'dark', // 'system' requires ssr: false
+      },
     },
   },
 
@@ -508,11 +574,34 @@ export default defineNuxtConfig({
         body: "'Your Body Font', sans-serif",
       },
       breakpoint: breakpoints.forUnoCSS,
+      colors: {
+        background:        'rgb(var(--v-theme-background))',
+        surface:           'rgb(var(--v-theme-surface))',
+        'surface-variant': 'rgb(var(--v-theme-surface-variant))',
+        primary:           'rgb(var(--v-theme-primary))',
+        success:           'rgb(var(--v-theme-success))',
+        warning:           'rgb(var(--v-theme-warning))',
+        error:             'rgb(var(--v-theme-error))',
+        info:              'rgb(var(--v-theme-info))',
+      },
     },
     shortcuts: {
-      'text-h1': 'font-heading normal-case text-[6rem] font-[300] leading-[1] tracking-[-.015625em]',
-      'text-h2': 'font-heading normal-case text-[3.75rem] font-[300] leading-[1] tracking-[-.0083333333em]',
-      // ... remaining typography shortcuts
+      // MD3 typography (Vuetify default scale)
+      'text-display-large':   'font-heading normal-case text-[3.5625rem] font-[400] leading-[1.1228] tracking-[-.0044em]',
+      'text-display-medium':  'font-heading normal-case text-[2.8125rem] font-[400] leading-[1.1556] tracking-[normal]',
+      'text-display-small':   'font-heading normal-case text-[2.25rem]   font-[400] leading-[1.2222] tracking-[normal]',
+      'text-headline-large':  'font-heading normal-case text-[2rem]      font-[400] leading-[1.25]   tracking-[normal]',
+      'text-headline-medium': 'font-heading normal-case text-[1.75rem]   font-[400] leading-[1.2857] tracking-[normal]',
+      'text-headline-small':  'font-heading normal-case text-[1.5rem]    font-[400] leading-[1.3333] tracking-[normal]',
+      'text-title-large':     'font-heading normal-case text-[1.375rem]  font-[400] leading-[1.2727] tracking-[normal]',
+      'text-title-medium':    'font-body    normal-case text-[1rem]      font-[500] leading-[1.5]    tracking-[.0094em]',
+      'text-title-small':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
+      'text-body-large':      'font-body    normal-case text-[1rem]      font-[400] leading-[1.5]    tracking-[.0313em]',
+      'text-body-medium':     'font-body    normal-case text-[.875rem]   font-[400] leading-[1.4286] tracking-[.0179em]',
+      'text-body-small':      'font-body    normal-case text-[.75rem]    font-[400] leading-[1.3333] tracking-[.0333em]',
+      'text-label-large':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
+      'text-label-medium':    'font-body    normal-case text-[.75rem]    font-[500] leading-[1.3333] tracking-[.0417em]',
+      'text-label-small':     'font-body    normal-case text-[.6875rem]  font-[500] leading-[1.4545] tracking-[.0455em]',
     },
     outputToCssLayers: {
       cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,

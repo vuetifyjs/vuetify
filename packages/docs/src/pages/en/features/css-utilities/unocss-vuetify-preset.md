@@ -100,6 +100,21 @@ export default defineConfig({
   presets: [
     presetVuetify(),
   ],
+  preflights: [
+    {
+      getCSS: () => `
+        :root {
+          --font-heading: 'Roboto', sans-serif;
+          --font-body: 'Roboto', sans-serif;
+        }`,
+    },
+  ],
+  layers: {
+    theme: 0,
+    typography: 1,
+    shortcuts: 2,
+    utilities: 3,
+  },
   outputToCssLayers: {
     cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
   },
@@ -156,12 +171,32 @@ export default defineNuxtConfig({
       disableVuetifyStyles: true,
       styles: { configFile: 'assets/styles/settings.scss' },
     },
+    vuetifyOptions: {
+      theme: {
+        defaultTheme: 'dark', // 'system' requires ssr: false
+      },
+    },
   },
 
   unocss: {
     presets: [
       presetVuetify(),
     ],
+    preflights: [
+      {
+        getCSS: () => `
+          :root {
+            --font-heading: 'Roboto', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+          }`,
+      },
+    ],
+    layers: {
+      theme: 0,
+      typography: 1,
+      shortcuts: 2,
+      utilities: 3,
+    },
     outputToCssLayers: {
       cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
     },
@@ -242,20 +277,7 @@ Instead of `<v-card border="primary">`, write `<v-card class="border border-prim
 <details>
 <summary>Typography rules (aligned with Vuetify defaults)</summary>
 
-Add the rules below to your UnoCSS configuration. The values are matched to Vuetify's built-in typography scale and reference `--font-heading` / `--font-body` CSS variables — define them via a UnoCSS `preflight` so they are available globally:
-
-```ts
-preflights: [
-  {
-    getCSS: () => `
-      :root {
-        --font-heading: 'Your Heading Font', sans-serif;
-        --font-body: 'Your Body Font', sans-serif;
-      }
-    `,
-  },
-],
-```
+Add the rules below to your UnoCSS configuration. The values are matched to Vuetify's built-in typography scale and reference the `--font-heading` / `--font-body` CSS custom properties defined in the `preflights` block shown in the [Vite](#vite) and [Nuxt](#nuxt) setup sections above.
 
 Customizing those variables in one place automatically applies to both the typography rules and to any Vuetify component that inherits them through Sass variables (`$heading-font-family`, `$body-font-family`).
 

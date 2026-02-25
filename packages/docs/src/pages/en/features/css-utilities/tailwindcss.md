@@ -259,7 +259,18 @@ In a **Nuxt** project you can define breakpoints in a shared TypeScript file and
 
 The `@custom-variant` declarations in `tailwind.css` above rewire Tailwind's `dark:` and `light:` prefixes to Vuetify's theme selectors. After that, classes like `dark:bg-sky-900` and `light:text-gray-700` toggle correctly when switching themes with `$vuetify.theme.cycle()` or programmatically.
 
-No additional configuration is needed beyond what is already in the [Configure TailwindCSS](#configure-tailwindcss) section.
+::: warning Nuxt SSR and `defaultTheme: 'system'`
+
+Vuetify's `system` theme reads the browser's `prefers-color-scheme` media query at runtime. In a Nuxt project with SSR enabled (the default), this detection runs on the server where no browser preference is available, so the theme always falls back to `light`. Either add `ssr: false` to `nuxt.config.ts`, or start with a fixed default theme:
+
+```ts
+// vuetifyOptions in nuxt.config.ts
+theme: {
+  defaultTheme: 'dark', // or 'light' — 'system' requires ssr: false
+},
+```
+
+:::
 
 ## Typography { id="typography" }
 
@@ -529,7 +540,7 @@ Disable Vuetify's own theme utility classes to avoid duplicate `bg-*` / `text-*`
 ```ts
 // Vuetify plugin (Vite) or vuetifyOptions (Nuxt)
 theme: {
-  defaultTheme: 'system',
+  defaultTheme: 'light', // 'system' requires ssr: false in Nuxt
   utilities: false, // skip .bg-primary, .text-error, etc.
 },
 ```
