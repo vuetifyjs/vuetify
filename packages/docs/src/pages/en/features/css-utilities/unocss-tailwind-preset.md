@@ -426,27 +426,7 @@ Some Vuetify convenience props (`elevation`, `rounded`) add CSS classes at runti
 `presetWind4` does not generate Vuetify-specific classes like `elevation-*` or `rounded-shaped` by default. If you need these, consider adding them as static [UnoCSS rules](https://unocss.dev/config/rules) or keeping a minimal set of Vuetify utilities enabled in your Sass configuration.
 :::
 
-## The `border` prop
-
-The `border` prop on many Vuetify components accepts values like `"primary"`, `"opacity-50"`, `"t-sm"`, etc., producing a large matrix of possible class names. Adding all combinations to `safelist` is impractical.
-
-A cleaner alternative is to **migrate `border` usage to explicit classes** and keep teammates from re-introducing the prop. This can be enforced with `eslint-plugin-vuetify`:
-
-```js { resource="eslint.config.js" }
-import vuetify from 'eslint-plugin-vuetify'
-
-export default [
-  ...vuetify.configs['flat/base'],
-  {
-    rules: {
-      'vuetify/no-deprecated-props': 'warn',
-      // add a custom rule or note discouraging `border="..."` prop
-    },
-  },
-]
-```
-
-Instead of `<v-card border="primary">`, write `<v-card class="border border-primary">` — the literal class names are scanned by UnoCSS normally and no safelist entry is needed.
+<!-- TODO: cover approach to border prop after releasing ESLint plugin -->
 
 ## VRow and VCol utility classes
 
