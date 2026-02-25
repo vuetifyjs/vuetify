@@ -25,7 +25,7 @@ This is the lowest-friction path for adopting on-demand utilities without switch
 If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
 
 ```bash
-pnpm dlx @vuetify/cli@latest init --css=unocss-vuetify
+npx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 :::

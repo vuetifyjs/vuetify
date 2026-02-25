@@ -23,7 +23,7 @@ Integrate TailwindCSS v4 into an existing Vuetify project. The result is a small
 If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
 
 ```bash
-pnpm dlx @vuetify/cli@latest init --css=tailwindcss
+npx @vuetify/cli@latest init --css=tailwindcss
 ```
 
 :::

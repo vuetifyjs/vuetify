@@ -25,7 +25,7 @@ This gives you TailwindCSS-compatible utilities while keeping configuration in J
 If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
 
 ```bash
-pnpm dlx @vuetify/cli@latest init --css=unocss-wind4
+npx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 :::
