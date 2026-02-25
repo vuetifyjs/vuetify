@@ -14,6 +14,8 @@ related:
 
 Integrate TailwindCSS v4 into an existing Vuetify project for a smaller CSS bundle, on-demand utility generation, and variants like `hover:`, `dark:`, and responsive prefixes.
 
+<PageFeatures />
+
 <PromotedEntry />
 
 ---
@@ -152,13 +154,10 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
 /* @import "tailwindcss/preflight" layer(tailwind.reset); — skipped, Vuetify provides its own reset */
 @import "tailwindcss/utilities" layer(tailwind.utilities);
 
-/* --- Dark/light mode ---------------------------------------------------- */
-/* Vuetify uses .v-theme--dark / .v-theme--light instead of .dark           */
+/* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
 
 @custom-variant light (&:where(.v-theme--light, .v-theme--light *));
 @custom-variant dark  (&:where(.v-theme--dark,  .v-theme--dark  *));
-
-/* --- Theme overrides ---------------------------------------------------- */
 
 @theme {
   --breakpoint-*: initial; /* reset Tailwind defaults */
@@ -171,8 +170,7 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
   --breakpoint-xxl: 2560px;
 }
 
-/* --- Rounded (for Vuetify's rounded prop) ------------------------------- */
-/* The prop generates class names at runtime — force Tailwind to emit them  */
+/* rounded — prop generates classes at runtime, force Tailwind to emit them */
 
 @source inline('rounded-none');
 @source inline('rounded-sm');
@@ -188,7 +186,7 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
 @source inline('rounded-circle');
 @source inline('rounded-shaped');
 
-/* --- Elevation (for Vuetify's elevation prop) --------------------------- */
+/* elevation */
 
 @utility elevation-0 { box-shadow: none }
 @utility elevation-1 { box-shadow: var(--shadow-xs) }
@@ -251,7 +249,7 @@ Sass variables:
 In a **Nuxt** project you can define breakpoints in a shared TypeScript file and feed them to both Vuetify and the Sass variables from a single source of truth. See the [UnoCSS presetWind4 guide](/features/css-utilities/unocss-tailwind-preset/#breakpoints) for an example of this pattern.
 :::
 
-## Configure dark/light variants { id="dark-mode" }
+## Dark mode { id="dark-mode" }
 
 The `@custom-variant` declarations in `tailwind.css` above rewire Tailwind's `dark:` and `light:` prefixes to Vuetify's theme selectors. Classes like `dark:bg-sky-900` and `light:text-gray-700` then toggle correctly when switching themes via `$vuetify.theme.cycle()` or programmatically.
 
@@ -259,8 +257,7 @@ The `@custom-variant` declarations in `tailwind.css` above rewire Tailwind's `da
 
 Vuetify's `system` theme reads the browser's `prefers-color-scheme` media query at runtime. In a Nuxt project with SSR enabled (the default), this detection runs on the server where no browser preference is available, so the theme always falls back to `light`. Either add `ssr: false` to `nuxt.config.ts`, or start with a fixed default theme:
 
-```ts
-// vuetifyOptions in nuxt.config.ts
+```ts { resource="nuxt.config.ts" }
 theme: {
   defaultTheme: 'dark', // or 'light' — 'system' requires ssr: false
 },
@@ -505,7 +502,7 @@ These match Vuetify's MD3 defaults (the current default typography scale). None 
 
 </details>
 
-## Forward Vuetify theme colors to TailwindCSS { id="theme-colors" }
+## Theme colors { id="theme-colors" }
 
 Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `--v-theme-primary`). Wrapping them in `rgb()` inside a `@theme` block makes them available as standard Tailwind color utilities (`bg-primary`, `text-error`, etc.):
 
@@ -533,8 +530,7 @@ Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `
 
 Disable Vuetify's own theme utility classes to avoid duplicate `bg-*` / `text-*` rules that can't be used with variants:
 
-```ts
-// Vuetify plugin (Vite) or vuetifyOptions (Nuxt)
+```ts { resource="vuetify.ts" }
 theme: {
   defaultTheme: 'light', // 'system' requires ssr: false in Nuxt
   utilities: false, // skip .bg-primary, .text-error, etc.

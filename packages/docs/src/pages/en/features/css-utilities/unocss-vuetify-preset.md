@@ -16,6 +16,8 @@ Generate Vuetify's built-in utility classes on demand with `unocss-preset-vuetif
 
 No class-naming convention change required — use the same Vuetify class names you already know, generated on demand instead of shipped in full.
 
+<PageFeatures />
+
 <PromotedEntry />
 
 ---
@@ -24,9 +26,25 @@ No class-naming convention change required — use the same Vuetify class names 
 
 If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
 
-```bash
+:::: tabs
+
+```bash [npx]
 npx @vuetify/cli@latest init --css=unocss-vuetify
 ```
+
+```bash [pnpm]
+pnpm dlx @vuetify/cli@latest init --css=unocss-vuetify
+```
+
+```bash [yarn]
+yarn dlx @vuetify/cli@latest init --css=unocss-vuetify
+```
+
+```bash [bun]
+bunx @vuetify/cli@latest init --css=unocss-vuetify
+```
+
+::::
 
 :::
 
@@ -195,7 +213,7 @@ The `safelist` option solves this: it specifies classes (or patterns) that UnoCS
 
 Add `safelist` entries for convenience props (e.g. `elevation` and `rounded`) that just add CSS classes. Because these class names are generated at runtime by Vuetify components, UnoCSS cannot detect them by scanning source files.
 
-```ts
+```ts { resource="uno.config.ts" }
 {
   // presets: ...
   // outputToCssLayers: ...

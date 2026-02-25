@@ -16,6 +16,8 @@ Use [`@unocss/preset-wind4`](https://unocss.dev/presets/wind4) for TailwindCSS v
 
 Unlike TailwindCSS v4 directly (which requires pure CSS `@theme` declarations), everything stays in JavaScript/TypeScript — breakpoints, typography, dark mode, all in one shared config file.
 
+<PageFeatures />
+
 <PromotedEntry />
 
 ---
@@ -24,9 +26,25 @@ Unlike TailwindCSS v4 directly (which requires pure CSS `@theme` declarations), 
 
 If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
 
-```bash
+:::: tabs
+
+```bash [npx]
 npx @vuetify/cli@latest init --css=unocss-wind4
 ```
+
+```bash [pnpm]
+pnpm dlx @vuetify/cli@latest init --css=unocss-wind4
+```
+
+```bash [yarn]
+yarn dlx @vuetify/cli@latest init --css=unocss-wind4
+```
+
+```bash [bun]
+bunx @vuetify/cli@latest init --css=unocss-wind4
+```
+
+::::
 
 :::
 
@@ -196,7 +214,7 @@ By default UnoCSS generates dark-mode utilities scoped to a `.dark` class (e.g. 
 
 Add the `dark` option inside `presetWind4()` to align both systems:
 
-```ts
+```ts { resource="uno.config.ts" }
 presetWind4({
   preflights: {
     reset: false,
@@ -281,7 +299,7 @@ Finally, keep the SCSS variables in sync:
 
 First, define custom font families in the UnoCSS theme so the `font-heading` and `font-body` utilities are available:
 
-```ts
+```ts { resource="uno.config.ts" }
 theme: {
   font: {
     heading: "'Your Heading Font', sans-serif",
@@ -471,8 +489,7 @@ You have two options:
 
 Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `--v-theme-primary`). Wrapping them in `rgb()` inside the UnoCSS `theme.colors` block makes them available as standard TailwindCSS-style color utilities (`bg-primary`, `text-error`, etc.):
 
-```ts
-// uno.config.ts (Vite) or unocss key (Nuxt)
+```ts { resource="uno.config.ts" }
 theme: {
   colors: {
     background:      'rgb(var(--v-theme-background))',
