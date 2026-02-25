@@ -47,8 +47,6 @@ This file must be loaded **before** any other styles. In a **Vite** project, sav
 
 ### Vite
 
-A working reference project is available at [J-Sek/vuetify-vite-and-tailwind](https://github.com/J-Sek/vuetify-vite-and-tailwind).
-
 Import the layers file at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`:
 
 ```ts { resource="src/plugins/vuetify.ts" }
@@ -99,8 +97,6 @@ import './styles/tailwind.css'
 ```
 
 ### Nuxt
-
-A working reference project is available at [J-Sek/vuetify-preset-nuxt-tailwind](https://github.com/J-Sek/vuetify-preset-nuxt-tailwind).
 
 ::: tabs
 
