@@ -52,7 +52,7 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 The component can be split into chunks using `chunk-count` or `chunk-width`. Visible progress is snapped to the last filled chunk.
 
-<ExamplesExample file="v-progress-linear/prop-chunks" />
+<ExamplesExample file="v-progress-linear/prop-chunks" new-in="3.10.0" />
 
 #### Colors
 

@@ -91,7 +91,7 @@ Using **stacked** increases the `v-tabs` height to 72px to allow for both icons 
 
 With **slider-transition** you can change default animation of the slider so it better fits with the app design.
 
-<ExamplesExample file="v-tabs/prop-slider-transition" />
+<ExamplesExample file="v-tabs/prop-slider-transition" new-in="3.11.0" />
 
 #### Pagination
 
@@ -109,7 +109,7 @@ The **direction** prop allows for `v-tab` components to stack vertically.
 
 Vertical tabs can be customized with **spaced** prop to move the text away from the icon.
 
-<ExamplesExample file="v-tabs/prop-spaced" />
+<ExamplesExample file="v-tabs/prop-spaced" new-in="3.10.0" />
 
 ### Misc
 

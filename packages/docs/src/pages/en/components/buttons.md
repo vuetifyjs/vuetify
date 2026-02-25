@@ -163,7 +163,7 @@ When you use the **prepend-icon** and **append-icon** props in conjunction with 
 
 By default icons stick to the button content, but you can space them out with `spaced` prop.
 
-<ExamplesExample file="v-btn/prop-spaced" />
+<ExamplesExample file="v-btn/prop-spaced" new-in="3.10.0" />
 
 #### Custom loader
 
@@ -211,7 +211,7 @@ In this example we use a [v-banner](/components/banners/) component to display a
 
 In this example, we change the properties of the `v-btn` based upon a "subscription" state. When the user is subscribed, we want to disable interaction with the button, but not change its appearance; which is what occurs when using the **disabled** property.
 
-<ExamplesExample file="v-btn/misc-readonly" />
+<ExamplesExample file="v-btn/misc-readonly" new-in="3.6.0" />
 
 ## Global Configuration
 

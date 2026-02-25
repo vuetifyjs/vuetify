@@ -95,7 +95,7 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 Menus with other menus inside them will not close until their children are closed. The **submenu** prop changes keyboard behaviour to open and close with left/right arrow keys instead of up/down.
 
-<ExamplesExample file="v-menu/prop-submenu" />
+<ExamplesExample file="v-menu/prop-submenu" new-in="3.7.0" />
 
 #### Positioning Menus with Coordinates
 

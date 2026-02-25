@@ -57,7 +57,7 @@ Inset dividers are moved 72px to the right. This will cause them to line up with
 
 Easily enable fading effect with **gradient** prop for a modern look.
 
-<ExamplesExample file="v-divider/prop-gradient" />
+<ExamplesExample file="v-divider/prop-gradient" new-in="3.11.0" />
 
 #### Vertical
 

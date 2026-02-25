@@ -55,7 +55,7 @@ The `v-carousel-item` component can have its **transition/reverse-transition** c
 Crossfade transition using `crossfade` prop requires **3.10.0**.
 :::
 
-<ExamplesExample file="v-carousel/prop-custom-transition" />
+<ExamplesExample file="v-carousel/prop-custom-transition" new-in="3.10.0" />
 
 #### Cycle
 
