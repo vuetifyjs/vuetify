@@ -100,21 +100,6 @@ export default defineConfig({
   presets: [
     presetVuetify(),
   ],
-  preflights: [
-    {
-      getCSS: () => `
-        :root {
-          --font-heading: 'Roboto', sans-serif;
-          --font-body: 'Roboto', sans-serif;
-        }`,
-    },
-  ],
-  layers: {
-    theme: 0,
-    typography: 1,
-    shortcuts: 2,
-    utilities: 3,
-  },
   outputToCssLayers: {
     cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
   },
@@ -182,21 +167,6 @@ export default defineNuxtConfig({
     presets: [
       presetVuetify(),
     ],
-    preflights: [
-      {
-        getCSS: () => `
-          :root {
-            --font-heading: 'Roboto', sans-serif;
-            --font-body: 'Roboto', sans-serif;
-          }`,
-      },
-    ],
-    layers: {
-      theme: 0,
-      typography: 1,
-      shortcuts: 2,
-      utilities: 3,
-    },
     outputToCssLayers: {
       cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
     },
@@ -248,76 +218,37 @@ Add `safelist` entries for convenience props (e.g. `elevation` and `rounded`) th
   <v-card color="text-lime-darken-3" variant="tonal" />
 -->
 
-## The `border` prop
-
-The `border` prop on many Vuetify components accepts values like `"primary"`, `"opacity-50"`, `"t-sm"`, etc., producing a large matrix of possible class names. Adding all combinations to `safelist` is impractical.
-
-A cleaner alternative is to **migrate `border` usage to explicit classes** and keep teammates from re-introducing the prop. This can be enforced with `eslint-plugin-vuetify`:
-
-```js { resource="eslint.config.js" }
-import vuetify from 'eslint-plugin-vuetify'
-
-export default [
-  ...vuetify.configs['flat/base'],
-  {
-    rules: {
-      'vuetify/no-deprecated-props': 'warn',
-      // add a custom rule or note discouraging `border="..."` prop
-    },
-  },
-]
-```
-
-Instead of `<v-card border="primary">`, write `<v-card class="border border-primary">` — the literal class names are scanned by UnoCSS normally and no safelist entry is needed.
+<!-- TODO: cover approach to border prop after releasing ESLint plugin -->
 
 ## Typography
 
-`unocss-preset-vuetify` does not generate Vuetify's typography classes (`text-h1` through `text-overline`). You can restore them by adding static UnoCSS rules matching Vuetify's defaults.
+Vuetify preset configuration options give us full control over typography helper classes. There are 2 built-in sets available, but you can also pass custom styles definition.
 
-<details>
-<summary>Typography rules (aligned with Vuetify defaults)</summary>
+| Value   | Design system                                            |
+|---------|----------------------------------------------------------|
+| `'md3'` | Material Design 3 — matches Vuetify v4 defaults          |
+| `'md2'` | Material Design 2 — matches the legacy Vuetify v2 and v3 |
 
-Add the rules below to your UnoCSS configuration. The values are matched to Vuetify's built-in typography scale and reference the `--font-heading` / `--font-body` CSS custom properties defined in the `preflights` block shown in the [Vite](#vite) and [Nuxt](#nuxt) setup sections above.
+The underlying definitions do not depend on `$heading-font-family` and `$body-font-family`, but rely on CSS variables `--v-font-heading` and `--v-font-body` instead. You can see the complete usage example below:
 
-Customizing those variables in one place automatically applies to both the typography rules and to any Vuetify component that inherits them through Sass variables (`$heading-font-family`, `$body-font-family`).
-
-```ts { resource="app/theme/typography.ts" }
-export const typographyRules = Object.entries({
-  'text-h1': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '6rem',     'font-weight': '300', 'line-height': '1',     'letter-spacing': '-.015625em' },
-  'text-h2': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '3.75rem',  'font-weight': '300', 'line-height': '1',     'letter-spacing': '-.00833333333em' },
-  'text-h3': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '3rem',     'font-weight': '400', 'line-height': '1.05',  'letter-spacing': 'normal' },
-  'text-h4': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '2.125rem', 'font-weight': '400', 'line-height': '1.175', 'letter-spacing': '.00735294112em' },
-  'text-h5': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '1.5rem',   'font-weight': '400', 'line-height': '1.333', 'letter-spacing': 'normal' },
-  'text-h6': { 'font-family': 'var(--font-heading)', 'text-transform': 'none', 'font-size': '1.25rem',  'font-weight': '500', 'line-height': '1.6',   'letter-spacing': '.0125em' },
-
-  'text-subtitle-1': { 'font-family': 'var(--font-body)', 'text-transform': 'none',      'font-size': '1rem',    'font-weight': '400', 'line-height': '1.75',  'letter-spacing': '.009375em' },
-  'text-subtitle-2': { 'font-family': 'var(--font-body)', 'text-transform': 'none',      'font-size': '.875rem', 'font-weight': '500', 'line-height': '1.6',   'letter-spacing': '.00714285714em' },
-  'text-body-1':     { 'font-family': 'var(--font-body)', 'text-transform': 'none',      'font-size': '1rem',    'font-weight': '400', 'line-height': '1.5',   'letter-spacing': '.03125em' },
-  'text-body-2':     { 'font-family': 'var(--font-body)', 'text-transform': 'none',      'font-size': '.875rem', 'font-weight': '400', 'line-height': '1.425', 'letter-spacing': '.01785714286em' },
-  'text-button':     { 'font-family': 'var(--font-body)', 'text-transform': 'uppercase', 'font-size': '.875rem', 'font-weight': '500', 'line-height': '2.6',   'letter-spacing': '.0892857143em' },
-  'text-caption':    { 'font-family': 'var(--font-body)', 'text-transform': 'none',      'font-size': '.75rem',  'font-weight': '400', 'line-height': '1.667', 'letter-spacing': '.0333333333em' },
-  'text-overline':   { 'font-family': 'var(--font-body)', 'text-transform': 'uppercase', 'font-size': '.75rem',  'font-weight': '500', 'line-height': '2.667', 'letter-spacing': '.1666666667em' },
+```ts
+presetVuetify({
+  typography: 'md3',
+  font: {
+    heading: 'K2D, sans-serif',
+    body: '"Work Sans", sans-serif',
+  },
 })
 ```
 
-For Vite, reference it in `uno.config.ts`:
+You can also pass a custom object to define your own typography styles:
 
-```ts { resource="uno.config.ts" }
-export default defineConfig({
-  presets: [/* ... */],
-  rules: typographyRules,
-  // ...
+```ts
+presetVuetify({
+  typography: {
+    h1: { 'font-size': '4rem', 'font-weight': '700', 'line-height': '1.2' },
+    h2: { 'font-size': '3rem', 'font-weight': '600', 'line-height': '1.25' },
+    // generates .text-h1, .text-h2, etc.
+  },
 })
 ```
-
-For Nuxt, add it alongside the other UnoCSS options in `nuxt.config.ts`:
-
-```ts { resource="nuxt.config.ts" }
-unocss: {
-  presets: [/* ... */],
-  rules: typographyRules,
-  // ...
-},
-```
-
-</details>
