@@ -101,8 +101,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -112,8 +112,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -140,8 +140,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -151,8 +151,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',

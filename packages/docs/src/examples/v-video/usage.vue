@@ -12,7 +12,7 @@
     <template v-slot:configuration>
       <v-select v-model="theme" :items="['light', 'dark']" label="Theme" clearable></v-select>
       <v-select v-model="color" :items="colorOptions" label="Color" clearable></v-select>
-      <v-select v-model="elevation" :items="[4, 8, 12]" label="Elevation" clearable></v-select>
+      <v-select v-model="elevation" :items="[1, 3, 5]" label="Elevation" clearable></v-select>
       <v-select v-model="aspectRatio" :items="['16/9', '3/2', '1']" label="Aspect ratio" clearable></v-select>
       <v-checkbox v-if="!isHidden" v-model="hidePlay" label="Hide play"></v-checkbox>
       <v-checkbox v-if="!isHidden" v-model="hideVolume" label="Hide volume"></v-checkbox>

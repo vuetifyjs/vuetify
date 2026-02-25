@@ -12,7 +12,7 @@ related:
 
 # Browser support
 
-Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
+Vuetify 4 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
 
 <PageFeatures />
 
@@ -24,18 +24,18 @@ This is not an exhaustive list of compatible browsers, but the main targeted one
 
 | Browser                 | Version | Status                           |
 |-------------------------|:--------|----------------------------------|
-| Chromium (Chrome, Edge) | 105     | ✅ Supported <sup>*</sup>         |
-| ^^                      | 90      | ⚠️ Partial support <sup>**</sup> |
-| Firefox                 | 121     | ✅ Supported <sup>*</sup>         |
-| ^^                      | 88      | ⚠️ Partial support <sup>**</sup> |
-| Safari                  | 15.4    | ✅ Supported                      |
+| Chromium (Chrome, Edge) | 119     | ✅ Supported <sup>*</sup>         |
+| ^^                      | 99      | ⚠️ Partial support <sup>**</sup> |
+| Firefox                 | 128     | ✅ Supported <sup>*</sup>         |
+| ^^                      | 97      | ⚠️ Partial support <sup>**</sup> |
+| Safari                  | 16.4    | ✅ Supported                      |
 | Internet Explorer       |         | ⛔ Not supported                  |
 | Other Browsers          |         | ❓ Not officially supported       |
 
-<p class="text-caption">* All browsers on iOS use WebKit and have the same support as Safari</p>
-<p class="text-caption">** Some components may have missing padding due to lack of support for CSS <v-code>:has()</v-code></p>
+<p class="text-body-small">* All browsers on iOS use WebKit and have the same support as Safari</p>
+<p class="text-body-small">** Some components may have incorrect colors due to lack of support for <AppLink href="https://www.w3.org/TR/css-color-5/#relative-colors">relative color syntax</AppLink> (e.g. <v-code>rgb(from ...)</v-code>)</p>
 
 This table is updated with minor releases of Vuetify. Chrome, Firefox, and Safari will be supported at least two years back from the Vuetify x.x.0 release date.
-Current start date is September 2022.
+Current start date is December 2023.
 
-Support for older browsers may be possible with additional [polyfills](https://cdnjs.cloudflare.com/polyfill/) and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2.
+Support for older browsers may be possible with additional [polyfills](https://cdnjs.cloudflare.com/polyfill/) and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2 or 3.

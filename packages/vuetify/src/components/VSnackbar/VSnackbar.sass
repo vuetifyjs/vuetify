@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
@@ -10,28 +11,59 @@
     margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
     padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
+    --v-snackbar-current-offset: var(--v-snackbar-offset)
+    transform: translateY(calc(var(--v-snackbar-direction) * (var(--v-snackbar-current-offset) + var(--v-snackbar-mobile-notch, 0px))))
+    transition: transform .2s settings.$standard-easing
+
     &:not(.v-snackbar--center):not(.v-snackbar--top)
       align-items: flex-end
 
     &__wrapper
       align-items: center
       display: flex
+      flex-wrap: wrap
       max-width: $snackbar-wrapper-max-width
       min-height: $snackbar-wrapper-min-height
       min-width: $snackbar-wrapper-min-width
       overflow: hidden
       padding: $snackbar-wrapper-padding
 
+      transition: .35s settings.$standard-easing
+      transition-property: height, width
+
       @include tools.rounded($snackbar-border-radius)
 
       @at-root .v-snackbar
         @include tools.variant($snackbar-variants...)
 
+        &--variant-outlined,
+        &--variant-tonal
+          background: $snackbar-fallback-background
+
       @media (forced-colors: active)
         border: thick solid
 
+    &__header
+      flex-basis: 100%
+
+      &:after
+        content: ''
+        display: block
+        flex-basis: 100%
+
+    &__prepend
+      align-self: center
+      display: flex
+      margin-inline: $snackbar-prepend-margin-inline
+
+    &__prepend + &__content
+      padding-inline-start: 0
+
+    &__title
+      font-weight: $snackbar-title-font-weight
+
     &__content
-      flex-grow: 1
+      flex: 1 1
       font-size: $snackbar-font-size
       font-weight: $snackbar-font-weight
       letter-spacing: $snackbar-letter-spacing
@@ -53,7 +85,12 @@
     &__timer
       width: 100%
       position: absolute
-      top: 0
+
+      &--top
+        top: 0
+
+      &--bottom
+        bottom: 0
 
       .v-progress-linear
         transition: .2s linear
@@ -62,15 +99,15 @@
       position: absolute
       z-index: $snackbar-absolute-z-index
 
-    &--multi-line &__wrapper
-      min-height: $snackbar-multi-line-wrapper-min-height
+    &--vertical .v-snackbar__actions
+      flex-basis: 100%
+      justify-content: end
+      margin-bottom: $snackbar-vertical-action-margin-bottom
 
-    &--vertical &__wrapper
-      flex-direction: column
-
-      .v-snackbar__actions
-        align-self: flex-end
-        margin-bottom: $snackbar-vertical-action-margin-bottom
+      &:before
+        content: ''
+        display: block
+        flex-basis: 100%
 
     &--center
       align-items: center
@@ -79,8 +116,14 @@
     &--top
       align-items: flex-start
 
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-top), 0px)
+
     &--bottom
       align-items: flex-end
+
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-bottom), 0px)
 
     &--left,
     &--start
@@ -89,6 +132,33 @@
     &--right,
     &--end
       justify-content: flex-end
+
+    &--collapsed
+      --v-snackbar-current-offset: calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
+
+      .v-snackbar__wrapper
+        min-width: 0
+        width: calc(var(--v-snackbar-collapsed-width) - 2 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
+        height: var(--v-snackbar-collapsed-height)
+
+        > *
+          opacity: 0
+
+      &.v-snackbar--start,
+      &.v-snackbar--left
+        .v-snackbar__wrapper
+          transform: translateX(calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      &.v-snackbar--end,
+      &.v-snackbar--right
+        .v-snackbar__wrapper
+          transform: translateX(calc(-1 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      .v-progress-linear
+        opacity: 0
+
+    .v-avatar
+      background: transparent
 
 @include tools.layer('transitions')
   .v-snackbar-transition

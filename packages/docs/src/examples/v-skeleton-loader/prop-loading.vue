@@ -9,13 +9,13 @@
       </v-btn>
     </div>
 
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col
         class="mb-12"
         cols="12"
         md="6"
       >
-        <div class="text-h5 text-center">
+        <div class="text-headline-small text-center">
           Using slot
         </div>
 
@@ -36,7 +36,7 @@
         cols="12"
         md="6"
       >
-        <div class="text-h5 text-center">
+        <div class="text-headline-small text-center">
           Using if
         </div>
 

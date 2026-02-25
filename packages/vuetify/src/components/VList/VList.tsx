@@ -342,6 +342,11 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     }
 
     useRender(() => {
+      const indent = props.indent ??
+        (props.prependGap
+          ? Number(props.prependGap) + 24
+          : undefined)
+
       const ariaMultiselectable = isSelectable.value
         ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
         : undefined
@@ -367,7 +372,8 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           ]}
           style={[
             {
-              '--v-list-indent': convertToUnit(props.indent),
+              '--v-list-indent': convertToUnit(indent),
+              '--v-list-group-prepend': indent ? '0px' : undefined,
               '--v-list-prepend-gap': convertToUnit(props.prependGap),
             },
             backgroundColorStyles.value,

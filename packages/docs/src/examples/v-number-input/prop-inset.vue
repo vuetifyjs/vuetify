@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="6">
-        <h5>Default</h5>
+        <h5 class="my-0">Default</h5>
 
         <v-number-input
           control-variant="default"
@@ -11,7 +11,7 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-        <h5>Stacked</h5>
+        <h5 class="my-0">Stacked</h5>
 
         <v-number-input
           control-variant="stacked"
@@ -20,7 +20,7 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-        <h5>Split</h5>
+        <h5 class="my-0">Split</h5>
 
         <v-number-input
           control-variant="split"
@@ -29,7 +29,7 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-        <h5>Hide-input</h5>
+        <h5 class="my-0">Hide-input</h5>
 
         <v-number-input
           hide-input

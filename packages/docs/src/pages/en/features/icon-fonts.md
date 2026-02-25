@@ -51,7 +51,7 @@ In the above examples we import the default `mdi` icon set and its corresponding
 
 ::: info
 
-While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
+While it is still possible to supply the icon value through the default slot in Vuetify 3+ (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
 :::
 
@@ -204,10 +204,6 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 <DocIconList />
 
 #### MDI - UnoCSS
-
-::: info
-This feature requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0)
-:::
 
 You can use Vuetify's MDI icon set with [UnoCSS Preset Icon](https://unocss.dev/presets/icons) by installing the `@unocss/preset-icons` package, all your icons will be tree-shaken and only the icons you use will be included in your final CSS bundle.
 

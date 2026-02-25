@@ -12,17 +12,8 @@ export interface ElevationProps {
 export const makeElevationProps = propsFactory({
   elevation: {
     type: [Number, String],
-    validator (v: any) {
-      const value = parseInt(v)
-
-      return (
-        !isNaN(value) &&
-        value >= 0 &&
-        // Material Design has a maximum elevation of 24
-        // https://material.io/design/environment/elevation.html#default-elevations
-        value <= 24
-      )
-    },
+    // no limit to allow both 0-6 (MD3) and legacy 0-24 (MD2)
+    validator: (value: string | number) => parseInt(value) >= 0,
   },
 }, 'elevation')
 
@@ -34,7 +25,7 @@ export function useElevation (props: ElevationProps | Ref<number | string | unde
   const elevationClasses = toRef(() => {
     const elevation = isRef(props) ? props.value : props.elevation
     if (elevation == null) return []
-    return [`elevation-${elevation}`]
+    return [`elevation-${parseInt(elevation)}`]
   })
 
   return { elevationClasses }
