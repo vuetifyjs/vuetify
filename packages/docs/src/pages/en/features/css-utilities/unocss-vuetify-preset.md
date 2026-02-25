@@ -14,7 +14,7 @@ related:
 
 Generate Vuetify's built-in utility classes on demand with `unocss-preset-vuetify`, maintained by the Vuetify team.
 
-This is the lowest-friction path for adopting on-demand utilities without switching to TailwindCSS class conventions — only the classes actually used in your project end up in the output CSS.
+No class-naming convention change required — use the same Vuetify class names you already know, generated on demand instead of shipped in full.
 
 <PromotedEntry />
 
@@ -32,7 +32,7 @@ npx @vuetify/cli@latest init --css=unocss-vuetify
 
 ## Establish CSS layer order
 
-Create a `layers.css` file that declares the cascade layers in the order they should be applied. Placing `uno` between Vuetify's layers and `vuetify-final` ensures UnoCSS utilities override component styles while Vuetify transitions (which live in `vuetify-final`) always win:
+Create a `layers.css` file that declares the cascade layers in order. `uno` goes above component styles but below `vuetify-final`, where Vuetify keeps its transitions:
 
 ```css
 @layer vuetify-core;
@@ -43,7 +43,7 @@ Create a `layers.css` file that declares the cascade layers in the order they sh
 @layer vuetify-final;
 ```
 
-This file must be loaded **before** any other styles. In a **Vite** project, save it as `src/styles/layers.css` and import it at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`. You can find the exact configuration snippets in the sections for Vite and Nuxt below.
+This file must be loaded **before** any other styles. In a **Vite** project, save it as `src/styles/layers.css` and import it at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`.
 
 ## Setup dependencies
 
@@ -134,7 +134,7 @@ bun add -D unocss unocss-preset-vuetify @unocss/nuxt
 
 :::
 
-Register the module and wire up layer ordering in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`. Set `disableVuetifyStyles: true` so the Vuetify module does not inject styles on its own and the explicit order is respected:
+Register the module in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
 
 ```ts { resource="nuxt.config.ts" }
 import { presetVuetify } from 'unocss-preset-vuetify'
@@ -222,14 +222,14 @@ Add `safelist` entries for convenience props (e.g. `elevation` and `rounded`) th
 
 ## Typography
 
-Vuetify preset configuration options give us full control over typography helper classes. There are 2 built-in sets available, but you can also pass custom styles definition.
+Pass `typography` to `presetVuetify()` to generate Vuetify's typography classes. Two built-in scales are available, or pass a custom object.
 
 | Value   | Design system                                            |
 |---------|----------------------------------------------------------|
 | `'md3'` | Material Design 3 — matches Vuetify v4 defaults          |
 | `'md2'` | Material Design 2 — matches the legacy Vuetify v2 and v3 |
 
-The underlying definitions do not depend on `$heading-font-family` and `$body-font-family`, but rely on CSS variables `--v-font-heading` and `--v-font-body` instead. You can see the complete usage example below:
+The generated classes use `--v-font-heading` and `--v-font-body` CSS variables rather than `$heading-font-family` / `$body-font-family` directly. Use the `font` option to set them:
 
 ```ts
 presetVuetify({
@@ -241,7 +241,7 @@ presetVuetify({
 })
 ```
 
-You can easily pass the generated CSS variables to Sass
+To pick up the same fonts in Vuetify components, pass the variables to Sass:
 
 ```scss { resource="settings.scss" }
 @use 'vuetify/settings' with (
@@ -251,7 +251,7 @@ You can easily pass the generated CSS variables to Sass
 );
 ```
 
-The `typography` field accepts a custom object in case your project uses custom typography scale.
+For a fully custom scale, pass an object instead:
 
 ```ts
 presetVuetify({

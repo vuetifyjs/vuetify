@@ -23,7 +23,7 @@ Integrate TailwindCSS or UnoCSS with Vuetify to reduce bundle size and unlock mo
 
 ## Introduction
 
-While integrating third-party CSS utility libraries was technically possible with Vuetify v3, it required fighting specificity battles between Vuetify's own utility classes (generated with `!important`) and the incoming utilities. CSS layers — enabled by default in Vuetify v4 — fundamentally change this dynamic. Layers establish an explicit cascade order between groups of styles, making it straightforward to place utility-first CSS on top of component styles without any hacks or `!important` overrides.
+While integrating third-party CSS utility libraries was technically possible with Vuetify v3, it required fighting specificity battles between Vuetify's own utility classes (generated with `!important`) and the incoming utilities. CSS layers — enabled by default in Vuetify v4 — change the picture. Layers give you an explicit cascade order between groups of styles, so utility-first CSS can sit above component styles without hacks or `!important` overrides.
 
 ### Why integrate a CSS utility library?
 
@@ -69,7 +69,7 @@ vuetify init
 
 :::
 
-The wizard will walk you through selecting a project name, base framework (Vite or Nuxt), desired Vuetify version, and optional integrations including TailwindCSS or UnoCSS. Once complete, you will have a fully working project with all wiring already in place.
+The wizard will walk you through selecting a project name, base framework (Vite or Nuxt), desired Vuetify version, and optional integrations including TailwindCSS or UnoCSS. You end up with a ready-to-run project.
 
 <!-- TODO: screenshot or terminal snippet -->
 

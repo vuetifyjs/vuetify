@@ -14,7 +14,7 @@ related:
 
 Use [`@unocss/preset-wind4`](https://unocss.dev/presets/wind4) for TailwindCSS v4 class names powered by UnoCSS's on-demand engine.
 
-This gives you TailwindCSS-compatible utilities while keeping configuration in JavaScript/TypeScript — a convenience not available when using TailwindCSS v4 directly, which requires pure CSS `@theme` declarations. Use this approach if you prefer the TailwindCSS v4 naming convention and want to configure breakpoints, typography, and dark mode in a single shared file.
+Unlike TailwindCSS v4 directly (which requires pure CSS `@theme` declarations), everything stays in JavaScript/TypeScript — breakpoints, typography, dark mode, all in one shared config file.
 
 <PromotedEntry />
 
@@ -32,7 +32,7 @@ npx @vuetify/cli@latest init --css=unocss-wind4
 
 ## Establish CSS layer order
 
-Create a `layers.css` file that declares the cascade layers in the order they should be applied. Placing `uno` between Vuetify's layers and `vuetify-final` ensures UnoCSS utilities override component styles while Vuetify transitions (which live in `vuetify-final`) always win:
+Create a `layers.css` file that declares the cascade layers in order. `uno` goes above component styles but below `vuetify-final`, where Vuetify keeps its transitions:
 
 ```css
 @layer vuetify-core;
@@ -43,7 +43,7 @@ Create a `layers.css` file that declares the cascade layers in the order they sh
 @layer vuetify-final;
 ```
 
-This file must be loaded **before** any other styles. In a **Vite** project, save it as `src/styles/layers.css` and import it at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`. You can find the exact configuration snippets in the sections for Vite and Nuxt below.
+This file must be loaded **before** any other styles. In a **Vite** project, save it as `src/styles/layers.css` and import it at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`.
 
 ## Setup dependencies
 
@@ -110,7 +110,7 @@ export default defineConfig({
 })
 ```
 
-Setting `preflights.reset` to `false` ensures we use only the CSS reset from Vuetify and avoid conflicts.
+Setting `preflights.reset` to `false` skips UnoCSS's built-in reset so Vuetify's takes over.
 
 Add the UnoCSS virtual import to your entry point:
 
@@ -140,7 +140,7 @@ bun add -D unocss @unocss/preset-wind4 @unocss/nuxt
 
 :::
 
-Register the module and wire up layer ordering in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`. Set `disableVuetifyStyles: true` so the Vuetify module does not inject styles on its own and the explicit order is respected:
+Register the module in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
 
 ```ts { resource="nuxt.config.ts" }
 import presetWind4 from '@unocss/preset-wind4'
@@ -208,7 +208,7 @@ presetWind4({
 }),
 ```
 
-After this change, classes like `dark:bg-sky-900` and `light:text-gray-700` will be scoped to Vuetify's theme selectors and toggle correctly when switching themes with `$vuetify.theme.cycle()` or programmatically.
+Classes like `dark:bg-sky-900` and `light:text-gray-700` are now scoped to Vuetify's theme selectors and toggle correctly via `$vuetify.theme.cycle()` or programmatically.
 
 ## Align breakpoints { id="breakpoints" }
 
@@ -323,7 +323,7 @@ shortcuts: {
 },
 ```
 
-Because these are UnoCSS shortcuts (composed from real utilities), responsive prefixes work automatically — `sm:text-h3` or `lg:text-body-1` will generate correctly without any extra configuration.
+Because these are shortcuts composed from real utilities, responsive prefixes like `sm:text-h3` work automatically.
 
 </details>
 

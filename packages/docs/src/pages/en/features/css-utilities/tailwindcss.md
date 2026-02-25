@@ -12,7 +12,7 @@ related:
 
 # TailwindCSS
 
-Integrate TailwindCSS v4 into an existing Vuetify project. The result is a smaller CSS bundle, on-demand utility generation, and full support for variants like `hover:`, `dark:`, and responsive prefixes.
+Integrate TailwindCSS v4 into an existing Vuetify project for a smaller CSS bundle, on-demand utility generation, and variants like `hover:`, `dark:`, and responsive prefixes.
 
 <PromotedEntry />
 
@@ -30,7 +30,7 @@ npx @vuetify/cli@latest init --css=tailwindcss
 
 ## Establish CSS layer order
 
-Create a `layers.css` file that declares the cascade layers in the order they should be applied. Placing `tailwind` between Vuetify's layers and `vuetify-final` ensures TailwindCSS utilities override component styles while Vuetify transitions (which live in `vuetify-final`) always win:
+Create a `layers.css` file that declares the cascade layers in order. `tailwind` goes above component styles but below `vuetify-final`, where Vuetify keeps its transitions:
 
 ```css
 @layer vuetify-core;
@@ -122,7 +122,7 @@ bun add -D tailwindcss @nuxtjs/tailwindcss
 
 :::
 
-Register the module and wire up layer ordering in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`, then `tailwind.css`. Set `disableVuetifyStyles: true` so the Vuetify module does not inject styles on its own and the explicit order is respected:
+Register the module in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`, then `tailwind.css`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
 
 ```ts { resource="nuxt.config.ts" }
 export default defineNuxtConfig({
@@ -149,7 +149,7 @@ export default defineNuxtConfig({
 
 ## Configure TailwindCSS
 
-Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). Vuetify already provides its own CSS reset, so Tailwind's preflight is skipped. The `@custom-variant` declarations wire Tailwind's `dark:` and `light:` prefixes to Vuetify's theme classes. Breakpoints are reset and redefined to match Vuetify's defaults:
+Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). Tailwind's preflight is skipped because Vuetify ships its own reset. The `@custom-variant` declarations wire `dark:` and `light:` prefixes to Vuetify's theme classes, and breakpoints are overridden to match Vuetify's defaults:
 
 ```css { resource="tailwind.css" }
 @import "tailwindcss/theme" layer(tailwind.theme);
@@ -257,7 +257,7 @@ In a **Nuxt** project you can define breakpoints in a shared TypeScript file and
 
 ## Configure dark/light variants { id="dark-mode" }
 
-The `@custom-variant` declarations in `tailwind.css` above rewire Tailwind's `dark:` and `light:` prefixes to Vuetify's theme selectors. After that, classes like `dark:bg-sky-900` and `light:text-gray-700` toggle correctly when switching themes with `$vuetify.theme.cycle()` or programmatically.
+The `@custom-variant` declarations in `tailwind.css` above rewire Tailwind's `dark:` and `light:` prefixes to Vuetify's theme selectors. Classes like `dark:bg-sky-900` and `light:text-gray-700` then toggle correctly when switching themes via `$vuetify.theme.cycle()` or programmatically.
 
 ::: warning Nuxt SSR and `defaultTheme: 'system'`
 
@@ -274,9 +274,9 @@ theme: {
 
 ## Typography { id="typography" }
 
-TailwindCSS provides its own type-scale utilities (`text-sm`, `text-base`, `text-2xl`, etc.) that work well with responsive prefixes. When adopting TailwindCSS it is generally best to **migrate to this convention** rather than trying to preserve Vuetify's typography classes (`text-h1` through `text-overline` for MD2, or `text-display-large` through `text-label-small` for MD3).
+TailwindCSS provides its own type-scale utilities (`text-sm`, `text-base`, `text-2xl`, etc.) that work well with responsive prefixes. When adopting TailwindCSS, **migrate to this convention** rather than trying to preserve Vuetify's typography classes (`text-h1` through `text-overline` for MD2, or `text-display-large` through `text-label-small` for MD3).
 
-TailwindCSS utilities give you finer control — `text-2xl font-light tracking-tight` lets you mix and match size, weight, and spacing freely, instead of relying on a predefined bundle. The trade-off is that your team needs to agree on which combinations to use, but that is typically handled through shared components or a design system.
+TailwindCSS utilities give you finer control — `text-2xl font-light tracking-tight` lets you mix size, weight, and spacing freely instead of relying on a predefined bundle. The trade-off is that your team needs to agree on which combinations to use, usually enforced through shared components or a design token system.
 
 If you are integrating TailwindCSS into an **existing project** that already uses Vuetify's typography classes extensively, you can define `@utility` rules to keep them working during the migration. Below are drop-in snippets for both the MD2 (legacy) and MD3 (default) typography scales.
 
