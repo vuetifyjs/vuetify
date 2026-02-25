@@ -492,14 +492,14 @@ Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `
 ```ts { resource="uno.config.ts" }
 theme: {
   colors: {
-    background:      'rgb(var(--v-theme-background))',
-    surface:         'rgb(var(--v-theme-surface))',
+    background:        'rgb(var(--v-theme-background))',
+    surface:           'rgb(var(--v-theme-surface))',
     'surface-variant': 'rgb(var(--v-theme-surface-variant))',
-    primary:         'rgb(var(--v-theme-primary))',
-    success:         'rgb(var(--v-theme-success))',
-    warning:         'rgb(var(--v-theme-warning))',
-    error:           'rgb(var(--v-theme-error))',
-    info:            'rgb(var(--v-theme-info))',
+    primary:           'rgb(var(--v-theme-primary))',
+    success:           'rgb(var(--v-theme-success))',
+    warning:           'rgb(var(--v-theme-warning))',
+    error:             'rgb(var(--v-theme-error))',
+    info:              'rgb(var(--v-theme-info))',
   },
 },
 ```
