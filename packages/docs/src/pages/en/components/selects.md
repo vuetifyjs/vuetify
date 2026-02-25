@@ -104,7 +104,7 @@ Custom props can be passed directly to `v-menu` using **menu-props** prop. In th
 
 Custom props can be passed directly to `v-list` using **list-props** prop. In this example a background color is added to the list.
 
-<ExamplesExample file="v-select/prop-list-props" />
+<ExamplesExample file="v-select/prop-list-props" new-in="3.5.0" />
 
 #### Custom item props
 
@@ -163,4 +163,4 @@ The **selection** slot can be used to customize the way selected values are show
 
 The **menu-header** and **menu-footer** slots allow you to add custom content at the top and bottom of the dropdown menu. This is useful for adding search fields, action buttons, or any other controls.
 
-<ExamplesExample file="v-select/slot-menu-header-and-footer" />
+<ExamplesExample file="v-select/slot-menu-header-and-footer" new-in="3.12.0" />

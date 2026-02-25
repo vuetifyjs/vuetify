@@ -162,7 +162,7 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
 
-<ExamplesExample file="v-data-table/prop-sort-icon" />
+<ExamplesExample file="v-data-table/prop-sort-icon" new-in="3.12.0" />
 
 #### Selection
 
@@ -224,7 +224,7 @@ When using the **group-by** prop, you can customize the group header with the `g
 
 By default grouping with **group-by** shows only the header slot. When you define `group-summary` slot, additional summary row will appear below the group rows.
 
-<ExamplesExample file="v-data-table/slot-group-summary" />
+<ExamplesExample file="v-data-table/slot-group-summary" new-in="3.10.0" />
 
 #### Loading slot
 

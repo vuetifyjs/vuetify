@@ -51,7 +51,7 @@ Some examples below use the **contained** prop and direct **z-index** values to 
 
 The **total-visible** prop controls how many snackbars are shown simultaneously, stacked vertically with automatic offset. The **display-strategy** prop determines what happens when the queue exceeds this limit: `"hold"` (default) pauses the queue until a visible slot opens, while `"overflow"` immediately shows new messages and dismisses the oldest ones. Enable the **collapsed** prop to visually compress the stack into a single snackbar with a counter badge.
 
-<ExamplesExample file="v-snackbar-queue/prop-total-visible" />
+<ExamplesExample file="v-snackbar-queue/prop-total-visible" new-in="3.11.0" />
 
 #### Transition
 
