@@ -51,11 +51,17 @@ bunx @vuetify/cli@latest init --css=unocss-wind4
 Create a `layers.css` file that declares the cascade layers in order. `uno` goes above component styles but below `vuetify-final`, where Vuetify keeps its transitions:
 
 ```css
+@layer uno-base;
+@layer uno-theme;
+
 @layer vuetify-core;
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
-@layer uno;
+
+@layer uno-shortcuts;
+@layer uno-default;
+
 @layer vuetify-final;
 ```
 
@@ -114,14 +120,10 @@ import presetWind4 from '@unocss/preset-wind4'
 
 export default defineConfig({
   presets: [
-    presetWind4({
-      preflights: {
-        reset: false,
-      },
-    }),
+    presetWind4(),
   ],
   outputToCssLayers: {
-    cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
+    cssLayerName: (layer) => layer === 'properties' ? null : `uno-${layer}`,
   },
 })
 ```
@@ -182,14 +184,10 @@ export default defineNuxtConfig({
 
   unocss: {
     presets: [
-      presetWind4({
-        preflights: {
-          reset: false,
-        },
-      }),
+      presetWind4(),
     ],
     outputToCssLayers: {
-      cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
+      cssLayerName: (layer) => layer === 'properties' ? null : `uno-${layer}`,
     },
   },
 })

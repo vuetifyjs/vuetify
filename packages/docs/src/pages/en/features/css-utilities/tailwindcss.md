@@ -49,11 +49,16 @@ bunx @vuetify/cli@latest init --css=tailwindcss
 Create a `layers.css` file that declares the cascade layers in order. `tailwind` goes above component styles but below `vuetify-final`, where Vuetify keeps its transitions:
 
 ```css
+@layer tailwind-theme;
+@layer tailwind-reset;
+
 @layer vuetify-core;
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
-@layer tailwind;
+
+@layer tailwind-utilities;
+
 @layer vuetify-final;
 ```
 
@@ -164,9 +169,9 @@ export default defineNuxtConfig({
 Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). Tailwind's preflight is skipped because Vuetify ships its own reset. The `@custom-variant` declarations wire `dark:` and `light:` prefixes to Vuetify's theme classes, and breakpoints are overridden to match Vuetify's defaults:
 
 ```css { resource="tailwind.css" }
-@import "tailwindcss/theme" layer(tailwind.theme);
-/* @import "tailwindcss/preflight" layer(tailwind.reset); — skipped, Vuetify provides its own reset */
-@import "tailwindcss/utilities" layer(tailwind.utilities);
+@import "tailwindcss/theme" layer(tailwind-theme);
+@import "tailwindcss/preflight" layer(tailwind-reset);
+@import "tailwindcss/utilities" layer(tailwind-utilities);
 
 /* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
 @custom-variant light (&:where(.v-theme--light, .v-theme--light *));
