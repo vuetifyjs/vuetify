@@ -29,7 +29,7 @@
       </template>
 
       <template v-slot:item.image="{ item }">
-        <v-card class="my-2" elevation="2" rounded>
+        <v-card class="my-2" elevation="1" rounded>
           <v-img
             :src="`https://cdn.vuetifyjs.com/docs/images/graphics/gpus/${item.image}`"
             height="64"

@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
     <v-container :style="{ minHeight: '100%' }" class="d-flex">
-      <v-row align="center" justify="center">
+      <v-row class="align-center justify-center">
         <v-col cols="auto">
           <h1 class="text-h3 text-primary">
             Whoops, 404
@@ -20,7 +20,7 @@
           </p>
 
           <p>
-            <AppLink :href="'https://v2.vuetifyjs.com' + route.fullPath">Looking for Vuetify 2?</AppLink>
+            <AppLink :href="'https://v3.vuetifyjs.com' + route.fullPath">Looking for Vuetify 3?</AppLink>
           </p>
         </v-col>
       </v-row>

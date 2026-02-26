@@ -3,6 +3,12 @@ import { strFromU8, strToU8, zlibSync } from 'fflate'
 import { version as vuetifyVersion } from 'vuetify'
 import { version as vueVersion } from 'vue'
 
+export type CodeSection = {
+  name: string
+  content: string
+  language: string
+}
+
 // This is copied directly from playground
 function utoa (data: string): string {
   const buffer = strToU8(data)
@@ -12,7 +18,7 @@ function utoa (data: string): string {
 }
 
 export function usePlayground (
-  sections: ({ name: string, content: string, language: string})[] = [],
+  sections: CodeSection[] = [],
   css: string[] = [],
   imports: Record<string, string> = {},
   setup?: string,

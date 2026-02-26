@@ -28,6 +28,7 @@ import {
 } from 'vue'
 import {
   convertToUnit,
+  filterInputAttrs,
   genericComponent,
   getCurrentInstance,
   propsFactory,
@@ -106,6 +107,8 @@ export const VImg = genericComponent<VImgSlots>()({
 
   directives: { vIntersect },
 
+  inheritAttrs: false,
+
   props: makeVImgProps(),
 
   emits: {
@@ -114,7 +117,7 @@ export const VImg = genericComponent<VImgSlots>()({
     error: (value: string | undefined) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
     const vm = getCurrentInstance('VImg')
@@ -349,6 +352,8 @@ export const VImg = genericComponent<VImgSlots>()({
 
     useRender(() => {
       const responsiveProps = VResponsive.filterProps(props)
+      const [rootAttrs, imageAttrs] = filterInputAttrs(attrs)
+
       return (
         <VResponsive
           class={[
@@ -368,6 +373,7 @@ export const VImg = genericComponent<VImgSlots>()({
             props.style,
           ]}
           { ...responsiveProps }
+          { ...rootAttrs }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }
           role={ props.alt ? 'img' : undefined }
@@ -378,7 +384,7 @@ export const VImg = genericComponent<VImgSlots>()({
         >{{
           additional: () => (
             <>
-              <__image />
+              <__image { ...imageAttrs } />
               <__preloadImage />
               <__gradient />
               <__placeholder />

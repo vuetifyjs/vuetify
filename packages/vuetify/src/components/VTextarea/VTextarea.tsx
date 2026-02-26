@@ -278,6 +278,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,

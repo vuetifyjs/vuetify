@@ -1,13 +1,12 @@
 @use 'sass:map'
 @use '../settings'
 
-@mixin elevation($z, $important: false)
-  $value: map.get(settings.$shadow-key-umbra, $z), map.get(settings.$shadow-key-penumbra, $z), map.get(settings.$shadow-key-ambient, $z)
-  @if $important
-    $value: $value !important
+@mixin elevation($z)
   &
-    box-shadow: $value
+    box-shadow: map.get(settings.$shadow-key, $z), map.get(settings.$shadow-ambient, $z)
+    --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) #{$z * settings.$elevation-overlay-step}, transparent)
 
 @mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1))
   &
-    transition: box-shadow $duration $easing
+    transition: $duration $easing
+    transition-property: box-shadow, --v-elevation-overlay

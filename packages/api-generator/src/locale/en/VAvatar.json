@@ -1,0 +1,8 @@
+{
+  "props": {
+    "badge": "Wraps the avatar in a [VBadge](/api/v-badge/). When set to `true`, displays a dot badge. Accepts an object of VBadge props for further customization."
+  },
+  "slots": {
+    "badge": "Slot for custom badge content. When used, the badge **dot** mode is disabled."
+  }
+}

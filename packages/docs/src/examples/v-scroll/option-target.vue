@@ -1,11 +1,8 @@
 <template>
   <div>
-    <v-row
-      align="center"
-      justify="center"
-    >
+    <v-row class="align-center justify-center">
       <v-col class="text-center">
-        <div class="text-subtitle-2">Offset Top</div>
+        <div class="text-title-small">Offset Top</div>
         {{ offsetTop }}
       </v-col>
     </v-row>
@@ -15,8 +12,7 @@
       style="max-height: 400px"
     >
       <v-row
-        align="center"
-        justify="center"
+        class="align-center justify-center"
         style="height: 1000px"
         v-scroll:#scroll-target="onScroll"
       >

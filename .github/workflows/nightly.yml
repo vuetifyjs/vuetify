@@ -21,7 +21,7 @@ jobs:
       max-parallel: 1
       fail-fast: false
       matrix:
-        branch: [ 'master', 'dev', 'next', 'v2-stable', 'v2-dev' ]
+        branch: [ 'master', 'dev', 'next', 'v3-stable', 'v2-stable', 'v2-dev' ]
         include:
           - branch: 'master'
             tag: 'latest'
@@ -29,6 +29,8 @@ jobs:
             tag: 'dev'
           - branch: 'next'
             tag: 'next'
+          - branch: 'v3-stable'
+            tag: 'v3-stable'
           - branch: 'v2-stable'
             tag: 'v2-stable'
           - branch: 'v2-dev'

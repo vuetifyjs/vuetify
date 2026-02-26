@@ -35,10 +35,7 @@
     </v-card-item>
 
     <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
+      <v-row class="align-center">
         <v-rating
           :model-value="4.5"
           color="amber"
@@ -53,7 +50,7 @@
         </div>
       </v-row>
 
-      <div class="my-4 text-subtitle-1">
+      <div class="my-4 text-body-large">
         $ • Italian, Cafe
       </div>
 

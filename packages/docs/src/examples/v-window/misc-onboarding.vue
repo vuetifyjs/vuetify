@@ -14,7 +14,7 @@
           class="d-flex justify-center align-center"
           height="200"
         >
-          <span class="text-h2">
+          <span class="text-display-large">
             Card {{ n }}
           </span>
         </v-card>

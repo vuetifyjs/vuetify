@@ -7,7 +7,7 @@
       flat
     ></v-toolbar>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col class="d-flex align-center" cols="12" sm="6">
         <v-treeview
           v-model:selected="tree"
@@ -31,7 +31,7 @@
         <v-card-text>
           <div
             v-if="tree.length === 0"
-            class="text-h6 font-weight-light text-grey pa-4 text-center"
+            class="text-title-large font-weight-light text-grey pa-4 text-center"
           >
             Select your favorite breweries
           </div>

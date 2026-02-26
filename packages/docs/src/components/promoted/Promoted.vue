@@ -32,7 +32,7 @@
             <AppMarkdown
               v-if="description"
               :content="description"
-              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
+              class="text-title-small text-sm-title-large font-weight-light text-white"
             />
           </div>
         </v-img>
