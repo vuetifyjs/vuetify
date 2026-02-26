@@ -1,8 +1,8 @@
 // Composables
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementSize } from '@vuetify/v0'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, toRef, useId, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRef, useId, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -91,10 +91,11 @@ export function useSnackbarItem (
   onBeforeUnmount(() => queue.unregister(id))
   watch(isActive, val => !val && queue.unregister(id), { flush: 'sync' })
 
-  const { resizeRef, contentRect } = useResizeObserver()
-  watch(contentEl, el => { resizeRef.value = el ?? null })
-  watch(contentRect, rect => {
-    if (rect?.width) queue.setSize(id, rect.height, rect.width)
+  const el = shallowRef<HTMLElement | null>(null)
+  const { width, height } = useElementSize(el as any) as any
+  watch(contentEl, target => { el.value = target ?? null })
+  watch(width, w => {
+    if (w) queue.setSize(id, height.value, w)
   })
 
   const offset = computed(() => queue.getOffset(id))

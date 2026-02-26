@@ -2,20 +2,19 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { useElementIntersection, useResizeObserver } from '@vuetify/v0'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
+import { computed, shallowRef, Transition } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
 import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
@@ -76,7 +75,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement | null>(null)
 
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
@@ -96,7 +95,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { isIntersecting } = useElementIntersection(root as any)
 
     const max = computed(() => parseFloat(props.max))
     const height = computed(() => parseFloat(props.height))
@@ -108,8 +107,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const containerWidth = shallowRef(0)
     const { hasChunks, chunksMaskStyles, snapValueToChunk } = useChunks(props, containerWidth)
     useToggleScope(hasChunks, () => {
-      const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
-      watchEffect(() => resizeRef.value = root.value)
+      useResizeObserver(root as any, entries => { containerWidth.value = entries[0].contentRect.width })
     })
 
     const bufferWidth = computed(() => {
@@ -125,17 +123,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     })
 
     function handleClick (e: MouseEvent) {
-      if (!intersectionRef.value) return
+      if (!root.value) return
 
-      const { left, right, width } = intersectionRef.value.getBoundingClientRect()
+      const { left, right, width } = root.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
       progress.value = Math.round(value / width * max.value)
     }
-
-    watchEffect(() => {
-      intersectionRef.value = root.value
-    })
 
     useRender(() => (
       <props.tag

@@ -1,13 +1,13 @@
 // Composables
+import { useResizeObserver } from '@vuetify/v0'
 import { makeComponentProps } from '@/composables/component'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { watch } from 'vue'
+import { shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GenericProps, TemplateRef } from '@/util'
+import type { GenericProps } from '@/util'
 
 export const makeVVirtualScrollItemProps = propsFactory({
   renderless: Boolean,
@@ -21,7 +21,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
   },
   slots: {
     default: Renderless extends true ? {
-      itemRef: TemplateRef
+      itemRef: ReturnType<typeof shallowRef<HTMLElement | null>>
     } : never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -36,19 +36,21 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
   },
 
   setup (props, { attrs, emit, slots }) {
-    const { resizeRef, contentRect } = useResizeObserver(undefined, 'border')
+    const el = shallowRef<HTMLElement | null>(null)
+    const height = shallowRef(0)
+    useResizeObserver(el as any, entries => { height.value = entries[0]?.contentRect.height ?? 0 }, { box: 'border-box' })
 
-    watch(() => contentRect.value?.height, height => {
-      if (height != null) emit('update:height', height)
+    watch(height, val => {
+      if (val) emit('update:height', val)
     })
 
     useRender(() => props.renderless ? (
       <>
-        { slots.default?.({ itemRef: resizeRef }) }
+        { slots.default?.({ itemRef: el }) }
       </>
     ) : (
       <div
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-virtual-scroll__item',
           props.class,

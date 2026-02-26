@@ -1,6 +1,6 @@
 <template>
-  <div :ref="containerResizeRef" class="marquee" @focusout="onFocusOut">
-    <div :ref="contentResizeRef" class="marquee-content">
+  <div :ref="containerEl" class="marquee" @focusout="onFocusOut">
+    <div :ref="contentEl" class="marquee-content">
       <div
         v-for="(item, index) in props.items"
         :key="index"
@@ -13,9 +13,6 @@
 </template>
 
 <script setup lang="ts">
-  // @ts-expect-error
-  import { useResizeObserver } from 'vuetify/lib/composables/resizeObserver'
-
   const props = defineProps({
     items: {
       type: Array as PropType<any[]>,
@@ -24,15 +21,27 @@
   })
 
   const shadowSize = 60 // px
-  const { resizeRef: containerResizeRef } = useResizeObserver(onResize)
-  const { resizeRef: contentResizeRef } = useResizeObserver(onResize)
+  const containerEl = shallowRef<HTMLElement | null>(null)
+  const contentEl = shallowRef<HTMLElement | null>(null)
   const shift = shallowRef(-50) // percentage
   const shiftTime = shallowRef(30) // seconds
   const shiftSpeed = 35 // px per second
 
+  let observer: ResizeObserver | undefined
+
+  onMounted(() => {
+    observer = new ResizeObserver(onResize)
+    if (containerEl.value) observer.observe(containerEl.value)
+    if (contentEl.value) observer.observe(contentEl.value)
+  })
+
+  onBeforeUnmount(() => {
+    observer?.disconnect()
+  })
+
   function onResize () {
-    const containerWidth = containerResizeRef.value.offsetWidth - 2 * shadowSize
-    const contentWidth = contentResizeRef.value.offsetWidth
+    const containerWidth = (containerEl.value?.offsetWidth ?? 0) - 2 * shadowSize
+    const contentWidth = contentEl.value?.offsetWidth ?? 0
 
     const shiftPercentage = containerWidth / contentWidth - 1
     shift.value = Math.min(0, Math.round(shiftPercentage * 100))

@@ -2,8 +2,8 @@
 import './VColorPickerCanvas.sass'
 
 // Composables
+import { useResizeObserver } from '@vuetify/v0'
 import { makeComponentProps } from '@/composables/component'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, onMounted, ref, shallowRef, toRef, watch } from 'vue'
@@ -82,8 +82,9 @@ export const VColorPickerCanvas = defineComponent({
       }
     })
 
-    const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.el?.offsetParent) return
+    const el = shallowRef<HTMLElement | null>(null)
+    useResizeObserver(el as any, entries => {
+      if (!el.value?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 
@@ -178,7 +179,7 @@ export const VColorPickerCanvas = defineComponent({
 
     useRender(() => (
       <div
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-color-picker-canvas',
           props.class,

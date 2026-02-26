@@ -5,10 +5,10 @@ import './VFab.sass'
 import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
+import { useResizeObserver } from '@vuetify/v0'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
@@ -51,9 +51,10 @@ export const VFab = genericComponent()({
     const height = shallowRef(56)
     const layoutItemStyles = ref()
 
-    const { resizeRef } = useResizeObserver(entries => {
+    const el = shallowRef<HTMLElement | null>(null)
+    useResizeObserver(el as any, entries => {
       if (!entries.length) return
-      height.value = entries[0].target.clientHeight
+      height.value = entries[0].contentRect.height
     })
 
     const hasPosition = toRef(() => props.app || props.absolute)
@@ -124,7 +125,7 @@ export const VFab = genericComponent()({
             >
               <VBtn
                 v-show={ props.active }
-                ref={ resizeRef }
+                ref={ el }
                 { ...btnProps }
                 active={ undefined }
                 location={ undefined }

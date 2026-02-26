@@ -2,12 +2,12 @@
 import './VFooter.sass'
 
 // Composables
+import { useResizeObserver } from '@vuetify/v0'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -49,9 +49,10 @@ export const VFooter = genericComponent()({
     const { roundedClasses } = useRounded(props)
 
     const autoHeight = shallowRef(32)
-    const { resizeRef } = useResizeObserver(entries => {
+    const el = shallowRef<HTMLElement | null>(null)
+    useResizeObserver(el as any, entries => {
       if (!entries.length) return
-      autoHeight.value = entries[0].target.clientHeight
+      autoHeight.value = entries[0].contentRect.height
     })
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
 
@@ -73,7 +74,7 @@ export const VFooter = genericComponent()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-footer',
           themeClasses.value,

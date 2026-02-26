@@ -5,6 +5,7 @@ import './VPagination.sass'
 import { VBtn } from '../VBtn'
 
 // Composables
+import { useResizeObserver } from '@vuetify/v0'
 import { useDisplay } from '@/composables'
 import { makeBorderProps } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
@@ -15,7 +16,6 @@ import { IconValue } from '@/composables/icons'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
-import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
@@ -153,7 +153,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults(undefined, { scoped: true })
 
-    const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
+    const el = shallowRef<HTMLElement | null>(null)
+    useResizeObserver(el as any, entries => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]
@@ -326,7 +327,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-pagination',
           themeClasses.value,
