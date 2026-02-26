@@ -246,6 +246,7 @@ describe('VCommandPalette', () => {
         expect.objectContaining({ title: 'Folder', value: 'folder' }),
         expect.any(MouseEvent)
       )
+      expect(model.value).toBe(false)
     })
 
     it('should call item onClick handler when executed', async () => {
@@ -270,6 +271,82 @@ describe('VCommandPalette', () => {
       await wait(100)
 
       expect(handleClick).toHaveBeenCalled()
+    })
+
+    it('should keep palette open when closeOnSelect is false', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          closeOnSelect={ false }
+          items={ testItems }
+          onClick:item={ onClickItem }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'File', value: 'file' }),
+        expect.any(KeyboardEvent)
+      )
+      expect(model.value).toBe(true)
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('should support drill-in by preventing close in before-select', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      const items = ref([
+        { title: 'Files', value: 'files' },
+        { title: 'Settings', value: 'settings' },
+      ])
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ items.value }
+          onClick:item={ onClickItem }
+          onBeforeSelect={ (payload: any) => {
+            const { item, preventDefault } = payload
+            if ('value' in item && item.value === 'files') {
+              preventDefault()
+              items.value = [
+                { title: 'New File', value: 'new-file' },
+                { title: 'Open File', value: 'open-file' },
+              ]
+            }
+          }}
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(model.value).toBe(true)
+      expect(screen.getByText('New File')).toBeInTheDocument()
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Files', value: 'files' }),
+        expect.any(KeyboardEvent)
+      )
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'New File', value: 'new-file' }),
+        expect.any(KeyboardEvent)
+      )
+      expect(model.value).toBe(false)
     })
   })
 

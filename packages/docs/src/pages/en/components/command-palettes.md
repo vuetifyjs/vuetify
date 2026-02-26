@@ -22,7 +22,7 @@ The `v-command-palette` component provides a keyboard-driven command interface t
 <PageFeatures />
 
 ::: success
-This feature was introduced as a labs component and is available for testing and feedback.
+This feature was introduced in v4.0, is a labs component and is available for testing and feedback.
 :::
 
 ## Usage
@@ -59,6 +59,12 @@ The **items** prop accepts an array of command palette items. Items support acti
 Use the **hotkey** prop to register a global keyboard shortcut that toggles the command palette. Individual items can also have their own **hotkey** property for quick access.
 
 <ExamplesExample file="v-command-palette/prop-hotkey" />
+
+#### Controlled close behavior
+
+By default, selecting an actionable item closes the palette. Use **close-on-select** to disable that behavior globally, or handle **@before-select** and call `preventDefault()` to keep the palette open for external drill-in flows.
+
+<ExamplesExample file="v-command-palette/prop-close-on-select" />
 
 #### Dialog configuration
 
