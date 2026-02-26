@@ -22,31 +22,29 @@ Unlike TailwindCSS v4 directly (which requires pure CSS `@theme` declarations), 
 
 ---
 
-::: tip Scaffold a working project
-
-If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
-
 :::: tabs
 
 ```bash [npx]
+# generate working project for reference
 npx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 ```bash [pnpm]
+# generate working project for reference
 pnpm dlx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 ```bash [yarn]
+# generate working project for reference
 yarn dlx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 ```bash [bun]
+# generate working project for reference
 bunx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 ::::
-
-:::
 
 ## Establish CSS layer order
 

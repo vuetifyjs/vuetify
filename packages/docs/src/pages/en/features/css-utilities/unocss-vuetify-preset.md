@@ -29,18 +29,22 @@ If you get stuck or need a reference point, scaffold a pre-configured project wi
 :::: tabs
 
 ```bash [npx]
+# generate working project for reference
 npx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 ```bash [pnpm]
+# generate working project for reference
 pnpm dlx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 ```bash [yarn]
+# generate working project for reference
 yarn dlx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 ```bash [bun]
+# generate working project for reference
 bunx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 

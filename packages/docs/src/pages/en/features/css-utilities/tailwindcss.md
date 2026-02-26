@@ -20,15 +20,29 @@ Integrate TailwindCSS v4 into an existing Vuetify project for a smaller CSS bund
 
 ---
 
-::: tip Scaffold a working project
+:::: tabs
 
-If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
-
-```bash
+```bash [npx]
+# generate working project for reference
 npx @vuetify/cli@latest init --css=tailwindcss
 ```
 
-:::
+```bash [pnpm]
+# generate working project for reference
+pnpm dlx @vuetify/cli@latest init --css=tailwindcss
+```
+
+```bash [yarn]
+# generate working project for reference
+yarn dlx @vuetify/cli@latest init --css=tailwindcss
+```
+
+```bash [bun]
+# generate working project for reference
+bunx @vuetify/cli@latest init --css=tailwindcss
+```
+
+::::
 
 ## Establish CSS layer order
 
