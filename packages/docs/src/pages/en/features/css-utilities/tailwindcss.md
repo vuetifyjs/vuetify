@@ -169,7 +169,6 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
 @import "tailwindcss/utilities" layer(tailwind.utilities);
 
 /* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
-
 @custom-variant light (&:where(.v-theme--light, .v-theme--light *));
 @custom-variant dark  (&:where(.v-theme--dark,  .v-theme--dark  *));
 
@@ -184,24 +183,19 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
   --breakpoint-xxl: 2560px;
 }
 
-/* rounded — prop generates classes at runtime, force Tailwind to emit them */
-
-@source inline('rounded-none');
-@source inline('rounded-sm');
-@source inline('rounded');
-@source inline('rounded-lg');
-@source inline('rounded-xl');
-
+/*
+  note: adopt and extend values from TailwindCSS
+*/
 @utility rounded-pill   { border-radius: 9999px }
-@utility rounded-circle { border-radius: 50% }
+@utility rounded-circle { border-radius: 50%    }
 @utility rounded-shaped { border-radius: 24px 0 }
 
-@source inline('rounded-pill');
-@source inline('rounded-circle');
-@source inline('rounded-shaped');
+@source inline('rounded'); /* .25rem */
+@source inline('rounded-{none,sm,md,lg,xl,2xl,3xl,full,pill,circle,shaped}');
 
-/* elevation */
-
+/*
+  note: adopt elevation shadows from TailwindCSS
+*/
 @utility elevation-0 { box-shadow: none }
 @utility elevation-1 { box-shadow: var(--shadow-xs) }
 @utility elevation-2 { box-shadow: var(--shadow-sm) }
@@ -556,3 +550,42 @@ theme: {
 Vuetify's original `bg-*` utilities automatically set a contrasting foreground color via `--v-theme-on-*`. Replacing them with TailwindCSS utilities removes this safeguard — you are responsible for choosing legible text colors. See [Limitations](/features/css-utilities/#limitations).
 
 :::
+
+## Using MD3 elevation
+
+The elevation approach in [Configure TailwindCSS](#configure-tailwindcss) maps `elevation-*` to TailwindCSS's generic shadow tokens. If you need Vuetify's exact Material Design 3 shadow values — including the surface overlay tint that shifts with depth — replace those rules with the full MD3 definitions:
+
+<details>
+<summary>MD3 elevation utilities (elevation-0 … elevation-5)</summary>
+
+```css { resource="tailwind.css" }
+@utility elevation-0 {
+  box-shadow: 0px 0px 0px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 0px 0px 0px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 0%, transparent);
+}
+@utility elevation-1 {
+  box-shadow: 0px 1px 2px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 1px 3px 1px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 2%, transparent);
+}
+@utility elevation-2 {
+  box-shadow: 0px 1px 2px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 2px 6px 2px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 4%, transparent);
+}
+@utility elevation-3 {
+  box-shadow: 0px 1px 3px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 4px 8px 3px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 6%, transparent);
+}
+@utility elevation-4 {
+  box-shadow: 0px 2px 3px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 6px 10px 4px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 8%, transparent);
+}
+@utility elevation-5 {
+  box-shadow: 0px 4px 4px 0px rgba(var(--v-shadow-color), var(--v-shadow-key-opacity, 0.3)), 0px 8px 12px 6px rgba(var(--v-shadow-color), var(--v-shadow-ambient-opacity, 0.15));
+  --v-elevation-overlay: color-mix(in srgb, var(--v-elevation-overlay-color) 10%, transparent);
+}
+@utility elevation-overlay {
+  background-image: linear-gradient(var(--v-elevation-overlay), var(--v-elevation-overlay));
+}
+```
+
+</details>

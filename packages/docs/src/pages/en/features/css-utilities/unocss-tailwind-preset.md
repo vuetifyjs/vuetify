@@ -291,7 +291,7 @@ Finally, keep the SCSS variables in sync:
 );
 ```
 
-## Typography shortcuts { id="typography" }
+## Typography
 
 `presetWind4` does not include Vuetify's typography classes (`text-h1` through `text-overline`). You can recreate them as UnoCSS **shortcuts** so they compose from native TailwindCSS utilities and gain responsive prefix support (e.g. `md:text-h3`).
 
@@ -323,19 +323,19 @@ Add the `shortcuts` below to your UnoCSS configuration. The values are matched t
 
 ```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
 shortcuts: {
-  'text-h1': 'font-heading normal-case text-[6rem] font-[300] leading-[1] tracking-[-.015625em]',
-  'text-h2': 'font-heading normal-case text-[3.75rem] font-[300] leading-[1] tracking-[-.0083333333em]',
-  'text-h3': 'font-heading normal-case text-[3rem] font-[400] leading-[1.05] tracking-[normal]',
-  'text-h4': 'font-heading normal-case text-[2.125rem] font-[400] leading-[1.175] tracking-[.0073529412em]',
-  'text-h5': 'font-heading normal-case text-[1.5rem] font-[400] leading-[1.333] tracking-[normal]',
-  'text-h6': 'font-heading normal-case text-[1.25rem] font-[500] leading-[1.6] tracking-[.0125em]',
-  'text-subtitle-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.75] tracking-[.009375em]',
-  'text-subtitle-2': 'font-body normal-case text-[.875rem] font-[500] leading-[1.6] tracking-[.0071428571em]',
-  'text-body-1': 'font-body normal-case text-[1rem] font-[400] leading-[1.5] tracking-[.03125em]',
-  'text-body-2': 'font-body normal-case text-[.875rem] font-[400] leading-[1.425] tracking-[.0178571429em]',
-  'text-button': 'font-body uppercase text-[.875rem] font-[500] leading-[2.6] tracking-[.0892857143em]',
-  'text-caption': 'font-body normal-case text-[.75rem] font-[400] leading-[1.667] tracking-[.0333333333em]',
-  'text-overline': 'font-body uppercase text-[.75rem] font-[500] leading-[2.667] tracking-[.1666666667em]',
+  'text-h1': '        font-heading normal-case text-[6rem]     font-[300] leading-[1]     tracking-[-.015625em]    ',
+  'text-h2': '        font-heading normal-case text-[3.75rem]  font-[300] leading-[1]     tracking-[-.0083333333em]',
+  'text-h3': '        font-heading normal-case text-[3rem]     font-[400] leading-[1.05]  tracking-[normal]        ',
+  'text-h4': '        font-heading normal-case text-[2.125rem] font-[400] leading-[1.175] tracking-[.0073529412em] ',
+  'text-h5': '        font-heading normal-case text-[1.5rem]   font-[400] leading-[1.333] tracking-[normal]        ',
+  'text-h6': '        font-heading normal-case text-[1.25rem]  font-[500] leading-[1.6]   tracking-[.0125em]       ',
+  'text-subtitle-1': 'font-body    normal-case text-[1rem]     font-[400] leading-[1.75]  tracking-[.009375em]     ',
+  'text-subtitle-2': 'font-body    normal-case text-[.875rem]  font-[500] leading-[1.6]   tracking-[.0071428571em] ',
+  'text-body-1': '    font-body    normal-case text-[1rem]     font-[400] leading-[1.5]   tracking-[.03125em]      ',
+  'text-body-2': '    font-body    normal-case text-[.875rem]  font-[400] leading-[1.425] tracking-[.0178571429em] ',
+  'text-button': '    font-body    uppercase   text-[.875rem]  font-[500] leading-[2.6]   tracking-[.0892857143em] ',
+  'text-caption': '   font-body    normal-case text-[.75rem]   font-[400] leading-[1.667] tracking-[.0333333333em] ',
+  'text-overline': '  font-body    uppercase   text-[.75rem]   font-[500] leading-[2.667] tracking-[.1666666667em] ',
 },
 ```
 
@@ -350,27 +350,27 @@ These match Vuetify's MD3 defaults (the current default typography scale). None 
 
 ```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
 shortcuts: {
-  'text-display-large':   'font-heading normal-case text-[3.5625rem] font-[400] leading-[1.1228] tracking-[-.0044em]',
-  'text-display-medium':  'font-heading normal-case text-[2.8125rem] font-[400] leading-[1.1556] tracking-[normal]',
-  'text-display-small':   'font-heading normal-case text-[2.25rem]   font-[400] leading-[1.2222] tracking-[normal]',
-  'text-headline-large':  'font-heading normal-case text-[2rem]      font-[400] leading-[1.25]   tracking-[normal]',
-  'text-headline-medium': 'font-heading normal-case text-[1.75rem]   font-[400] leading-[1.2857] tracking-[normal]',
-  'text-headline-small':  'font-heading normal-case text-[1.5rem]    font-[400] leading-[1.3333] tracking-[normal]',
-  'text-title-large':     'font-heading normal-case text-[1.375rem]  font-[400] leading-[1.2727] tracking-[normal]',
-  'text-title-medium':    'font-body    normal-case text-[1rem]      font-[500] leading-[1.5]    tracking-[.0094em]',
-  'text-title-small':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
-  'text-body-large':      'font-body    normal-case text-[1rem]      font-[400] leading-[1.5]    tracking-[.0313em]',
-  'text-body-medium':     'font-body    normal-case text-[.875rem]   font-[400] leading-[1.4286] tracking-[.0179em]',
-  'text-body-small':      'font-body    normal-case text-[.75rem]    font-[400] leading-[1.3333] tracking-[.0333em]',
-  'text-label-large':     'font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em]',
-  'text-label-medium':    'font-body    normal-case text-[.75rem]    font-[500] leading-[1.3333] tracking-[.0417em]',
-  'text-label-small':     'font-body    normal-case text-[.6875rem]  font-[500] leading-[1.4545] tracking-[.0455em]',
+  'text-display-large': '  font-heading normal-case text-[3.5625rem] font-[400] leading-[1.1228] tracking-[-.0044em]',
+  'text-display-medium': ' font-heading normal-case text-[2.8125rem] font-[400] leading-[1.1556] tracking-[normal]  ',
+  'text-display-small': '  font-heading normal-case text-[2.25rem]   font-[400] leading-[1.2222] tracking-[normal]  ',
+  'text-headline-large': ' font-heading normal-case text-[2rem]      font-[400] leading-[1.25]   tracking-[normal]  ',
+  'text-headline-medium': 'font-heading normal-case text-[1.75rem]   font-[400] leading-[1.2857] tracking-[normal]  ',
+  'text-headline-small': ' font-heading normal-case text-[1.5rem]    font-[400] leading-[1.3333] tracking-[normal]  ',
+  'text-title-large': '    font-heading normal-case text-[1.375rem]  font-[400] leading-[1.2727] tracking-[normal]  ',
+  'text-title-medium': '   font-body    normal-case text-[1rem]      font-[500] leading-[1.5]    tracking-[.0094em] ',
+  'text-title-small': '    font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em] ',
+  'text-body-large': '     font-body    normal-case text-[1rem]      font-[400] leading-[1.5]    tracking-[.0313em] ',
+  'text-body-medium': '    font-body    normal-case text-[.875rem]   font-[400] leading-[1.4286] tracking-[.0179em] ',
+  'text-body-small': '     font-body    normal-case text-[.75rem]    font-[400] leading-[1.3333] tracking-[.0333em] ',
+  'text-label-large': '    font-body    normal-case text-[.875rem]   font-[500] leading-[1.4286] tracking-[.0071em] ',
+  'text-label-medium': '   font-body    normal-case text-[.75rem]    font-[500] leading-[1.3333] tracking-[.0417em] ',
+  'text-label-small': '    font-body    normal-case text-[.6875rem]  font-[500] leading-[1.4545] tracking-[.0455em] ',
 },
 ```
 
 </details>
 
-## Rounded shortcuts { id="rounded" }
+## Rounded corners
 
 Vuetify's `rounded` prop generates classes like `rounded-lg` and `rounded-pill` that don't map to TailwindCSS equivalents. Define them as UnoCSS shortcuts so they work with responsive prefixes and don't need safelisting:
 
@@ -423,24 +423,68 @@ shortcuts: {
 
 </details>
 
+## Elevation utilities
+
+`presetWind4` does not generate Vuetify's `elevation-*` classes. Choose one of the two approaches below depending on whether you want a TailwindCSS-native shadow scale or Vuetify's exact Material Design shadows.
+
+### Align with shadows from TailwindCSS
+
+Map each elevation level to `presetWind4`'s built-in shadow tokens, which use the same scale as TailwindCSS v4:
+
+```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
+rules: [
+  ['elevation-0', { 'box-shadow': 'none' }],
+  ['elevation-1', { 'box-shadow': 'var(--shadow-xs)' }],
+  ['elevation-2', { 'box-shadow': 'var(--shadow-sm)' }],
+  ['elevation-3', { 'box-shadow': 'var(--shadow-md)' }],
+  ['elevation-4', { 'box-shadow': 'var(--shadow-xl)' }],
+  ['elevation-5', { 'box-shadow': 'var(--shadow-2xl)' }],
+],
+```
+
+Many Vuetify components include default shadows that are not aligned with TailwindCSS. You may want to extend `settings.scss` with all variables `*-elevation`.
+
+```scss { resource="settings.scss" }
+@use 'vuetify/settings' with (
+  // ...
+  $alert-elevation: 0,
+  $avatar-elevation: 0,
+  $card-elevation: 0,
+  $card-hover-elevation: 0,
+  // etc.
+);
+```
+
+### Restore Vuetify elevation shadows
+
+If you find TailwindCSS shadows do not align with the app design and wish to use Material Design shadows, the easiest way is to use `unocss-preset-vuetify` package. Make sure you install the library as dependency and import `elevationPresets` which can be translated into UnoCSS "rules".
+
+```ts { resource="uno.config.ts or nuxt.config.ts » unocss" }
+import { elevationPresets } from 'unocss-preset-vuetify'
+
+// ...
+rules: [
+  ...Object.entries(elevationPresets.md3)
+    .map(([level, css]) => [`elevation-${level}`, css]),
+],
+```
+
+These rules let you control shadows with CSS variables bound to theme configuration (notably `--v-shadow-color`). You can also easily swap to `md2` for legacy 24-levels of elevation.
+
 ## Safelist prop-driven classes
 
-Some Vuetify convenience props (`elevation`, `rounded`) add CSS classes at runtime. Because these class names never appear literally in your source files, UnoCSS cannot detect them by scanning. Add `safelist` entries for the ones you use:
+Some Vuetify convenience props (`elevation`, `rounded`) add CSS classes at runtime. This means that these class names may never appear in your source files and if UnoCSS cannot detect them by scanning, they won't appear in the CSS bundle file. Add `safelist` entries for the ones you use:
 
 ```ts
 {
   // presets: ...
   // outputToCssLayers: ...
   safelist: [
-    ...Array.from({ length: 6 }, (_, i) => `elevation-${i}`),
+    ...Array.from({ length: 6 /* or 25 for MD2 */ }, (_, i) => `elevation-${i}`),
     ['', '-0', '-sm', '-lg', '-xl', '-pill', '-circle', '-shaped'].map(suffix => `rounded${suffix}`),
   ],
 }
 ```
-
-::: info
-`presetWind4` does not generate Vuetify-specific classes like `elevation-*` or `rounded-shaped` by default. If you need these, consider adding them as static [UnoCSS rules](https://unocss.dev/config/rules) or keeping a minimal set of Vuetify utilities enabled in your Sass configuration.
-:::
 
 <!-- TODO: cover approach to border prop after releasing ESLint plugin -->
 
