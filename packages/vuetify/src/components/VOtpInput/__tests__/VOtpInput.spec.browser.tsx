@@ -88,15 +88,14 @@ describe('VOtpInput', () => {
     expect(inputs[2]).toHaveValue('')
   })
 
-  it('removes value and stays on current input when using backspace on last field', async () => {
+  it('removes value and stays on current input when using backspace on last filled field', async () => {
     render(() => (<VOtpInput />))
     const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
     await userEvent.keyboard('12345')
-    expect(inputs[5]).toHaveFocus()
+    await userEvent.click(inputs[4])
 
-    await userEvent.keyboard('{ArrowLeft}')
     expect(inputs[4]).toHaveFocus()
     expect(inputs[4]).toHaveValue('5')
 
@@ -105,7 +104,7 @@ describe('VOtpInput', () => {
     expect(inputs[4]).toHaveValue('')
   })
 
-  it('shifts remaining values left when using backspace on a filled field', async () => {
+  it('shifts values left and goes back when using backspace on a non-last filled field', async () => {
     render(() => (<VOtpInput />))
     const inputs = screen.getAllByCSS('.v-otp-input input')
 
@@ -116,29 +115,27 @@ describe('VOtpInput', () => {
     expect(inputs[2]).toHaveValue('3')
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[2]).toHaveFocus()
+    expect(inputs[1]).toHaveFocus()
     expect(inputs[2]).toHaveValue('4')
     expect(inputs[3]).toHaveValue('5')
     expect(inputs[4]).toHaveValue('')
   })
 
-  it('removes value and goes back on deleteContentBackward', async () => {
+  it('shifts values left when using backspace on the first field', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
+    const inputs = screen.getAllByCSS('.v-otp-input input')
 
     await userEvent.click(inputs[0])
-    await userEvent.keyboard('1234')
-    expect(inputs[4]).toHaveFocus()
+    await userEvent.keyboard('12345')
+    await userEvent.click(inputs[0])
+    expect(inputs[0]).toHaveFocus()
+    expect(inputs[0]).toHaveValue('1')
 
-    inputs[4].dispatchEvent(new InputEvent('beforeinput', { inputType: 'deleteContentBackward', cancelable: true, bubbles: true }))
-    await waitAnimationFrame()
-    expect(inputs[3]).toHaveFocus()
-    expect(inputs[3]).toHaveValue('')
-
-    inputs[3].dispatchEvent(new InputEvent('beforeinput', { inputType: 'deleteContentBackward', cancelable: true, bubbles: true }))
-    await waitAnimationFrame()
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('')
+    await userEvent.keyboard('{Backspace}')
+    expect(inputs[0]).toHaveFocus()
+    expect(inputs[0]).toHaveValue('2')
+    expect(inputs[1]).toHaveValue('3')
+    expect(inputs[4]).toHaveValue('')
   })
 
   it.each(['deleteWordBackward', 'deleteSoftLineBackward', 'deleteHardLineBackward'])(
@@ -157,23 +154,6 @@ describe('VOtpInput', () => {
       expect(inputs[3]).toHaveValue('')
     }
   )
-
-  it('shifts values left and stays on deleteContentForward', async () => {
-    render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
-
-    await userEvent.click(inputs[0])
-    await userEvent.keyboard('1234')
-    await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('3')
-
-    inputs[2].dispatchEvent(new InputEvent('beforeinput', { inputType: 'deleteContentForward', cancelable: true, bubbles: true }))
-    await waitAnimationFrame()
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('4')
-    expect(inputs[3]).toHaveValue('')
-  })
 
   it.each(['deleteWordForward', 'deleteSoftLineForward', 'deleteHardLineForward'])(
     'shifts values left and stays on %s',

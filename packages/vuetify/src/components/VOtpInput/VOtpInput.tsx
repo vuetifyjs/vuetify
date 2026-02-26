@@ -182,15 +182,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             model.value = array
             target = 'prev'
           }
-        } else if (index === length.value - 1) {
-          array[index] = ''
-          model.value = array
         } else {
+          const isLastFilledField = !array.slice(index + 1).some(v => v)
           for (let i = index; i < length.value - 1; i++) {
             array[i] = array[i + 1]
           }
           array[length.value - 1] = ''
           model.value = array
+          if (!isLastFilledField && index > 0) target = 'prev'
         }
       } else {
         for (let i = index; i < length.value - 1; i++) {
