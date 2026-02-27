@@ -7,7 +7,7 @@
       </v-avatar>
 
       <div class="ps-6 font-weight-medium">
-        <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
+        <div class="text-headline-small mb-1 font-weight-bold d-flex align-center">
           <span
             class="me-3"
             v-text="member.name"
@@ -59,7 +59,7 @@
           class="d-flex align-center flex-wrap"
         >
           <h3
-            class="text-uppercase text-caption font-weight-regular"
+            class="text-uppercase text-body-small font-weight-regular"
           >{{ t('focus') }}</h3>
 
           <div class="mx-2">
@@ -84,7 +84,7 @@
           class="d-flex align-center flex-wrap mt-1"
         >
           <h3
-            class="text-uppercase text-caption font-weight-regular"
+            class="text-uppercase text-body-small font-weight-regular"
           >{{ t('funding') }}</h3>
 
           <div class="mx-2">

@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
   },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
+  },
   hotkey: {
     then: 'sedan',
     ctrl: 'Ctrl',

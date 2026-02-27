@@ -21,8 +21,6 @@ The bottom sheet is a modified `v-dialog` that slides from the bottom of the scr
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.

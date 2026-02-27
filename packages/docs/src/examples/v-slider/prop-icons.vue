@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="text-caption">Media volume</div>
+    <div class="text-body-small">Media volume</div>
 
     <v-slider
       v-model="media"
       prepend-icon="mdi-volume-high"
     ></v-slider>
 
-    <div class="text-caption">Alarm volume</div>
+    <div class="text-body-small">Alarm volume</div>
 
     <v-slider
       v-model="alarm"
       append-icon="mdi-alarm"
     ></v-slider>
 
-    <div class="text-caption">Icon click callback</div>
+    <div class="text-body-small">Icon click callback</div>
 
     <v-slider
       v-model="zoom"

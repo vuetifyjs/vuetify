@@ -11,14 +11,16 @@
     .v-timeline-divider__dot
       background: $timeline-dot-divider-background
 
-      @media (forced-colors: active)
-        border: 2px solid
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          border: 2px solid
 
     .v-timeline-divider__inner-dot
       background: $timeline-inner-dot-divider-background
 
-      @media (forced-colors: active)
-        background-color: transparent !important
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          background-color: transparent
 
   .v-timeline
     display: grid

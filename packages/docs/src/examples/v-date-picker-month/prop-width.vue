@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="space-around">
+  <v-row class="justify-space-around">
     <v-date-picker
       v-model="date"
       class="mt-4"

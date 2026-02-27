@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col
         v-for="rounded in [false, true, 'xl']"
         :key="String(rounded)"

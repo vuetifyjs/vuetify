@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Palun vali vähemalt üks väärtus',
     pattern: 'Vale vorming',
   },
+  command: {
+    search: 'Sisestage käsk või otsige...',
+  },
   hotkey: {
     then: 'siis',
     ctrl: 'Ctrl',

@@ -67,6 +67,7 @@ const aliases: IconAliases = {
   volumeMedium: 'fas fa-volume-low',
   volumeLow: 'fas fa-volume-off',
   volumeOff: 'fas fa-volume-off',
+  search: 'fas fa-magnifying-glass',
 }
 
 const fa: IconSet = {

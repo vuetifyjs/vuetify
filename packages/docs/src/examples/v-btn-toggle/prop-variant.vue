@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-center flex-column pa-6">
-    <div class="text-subtitle-2">Default</div>
+    <div class="text-title-small">Default</div>
     <v-btn-toggle
       v-model="toggle"
       color="primary"
@@ -11,7 +11,7 @@
       <v-btn icon="mdi-format-align-justify"></v-btn>
     </v-btn-toggle>
 
-    <div class="mt-6 text-subtitle-2">Text</div>
+    <div class="mt-6 text-title-small">Text</div>
     <v-btn-toggle
       v-model="toggle"
       color="primary"
@@ -23,7 +23,7 @@
       <v-btn icon="mdi-format-align-justify"></v-btn>
     </v-btn-toggle>
 
-    <div class="mt-6 text-subtitle-2">Plain</div>
+    <div class="mt-6 text-title-small">Plain</div>
     <v-btn-toggle
       v-model="toggle"
       color="primary"
@@ -35,7 +35,7 @@
       <v-btn icon="mdi-format-align-justify"></v-btn>
     </v-btn-toggle>
 
-    <div class="mt-6 text-subtitle-2">Outlined</div>
+    <div class="mt-6 text-title-small">Outlined</div>
     <v-btn-toggle
       v-model="toggle"
       color="primary"

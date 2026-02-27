@@ -1,14 +1,14 @@
 <template>
   <v-sheet
     class="py-8 px-6 mx-auto ma-4 text-center"
-    elevation="4"
+    elevation="2"
     max-width="500"
     rounded="lg"
     width="100%"
   >
-    <h3 class="text-h5">Verification Code</h3>
+    <h3 class="text-headline-small my-0">Verification Code</h3>
 
-    <div class="text-subtitle-2 font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
+    <div class="text-title-small font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
 
     <v-otp-input
       v-model="otp"
@@ -18,7 +18,7 @@
       variant="outlined"
     ></v-otp-input>
 
-    <div class="text-caption">
+    <div class="text-body-small">
       <v-btn
         color="primary"
         size="x-small"

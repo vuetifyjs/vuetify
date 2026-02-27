@@ -131,6 +131,9 @@ export default {
     notEmpty: '少なくとも1つの値を選んでください',
     pattern: '無効な形式です',
   },
+  command: {
+    search: 'コマンドを入力するか検索...',
+  },
   hotkey: {
     then: '次に',
     ctrl: 'Ctrl',
