@@ -45,6 +45,9 @@
     &--error
       border-color: rgb(var(--v-theme-error))
 
+    &--inset
+      padding: 16px
+
     input[type="file"]
       left: 0
       opacity: 0
@@ -83,6 +86,12 @@
 
   .v-file-upload-inset
     width: 100%
+
+  .v-file-upload-inset__action
+    display: flex
+    justify-content: center
+    width: 100%
+    padding: $file-upload-inset-action-padding
 
   .v-file-upload-list
     margin: $file-upload-items-margin

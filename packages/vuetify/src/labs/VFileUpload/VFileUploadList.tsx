@@ -61,6 +61,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
             props.class,
           ]}
           style={ props.style }
+          bgColor="transparent"
         >
           { slots.default?.({ files, onClickRemove: (i: number) => context?.onClickRemove(i) }) ?? files.map((file, index) => {
             const slotProps = {
@@ -79,6 +80,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
                     clearable: props.clearable,
                     disabled,
                     showSize: props.showSize,
+                    variant: 'flat',
                   },
                 }}
               >

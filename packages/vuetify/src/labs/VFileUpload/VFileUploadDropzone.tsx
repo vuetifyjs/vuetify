@@ -182,6 +182,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
               'v-file-upload--disabled': disabled,
               'v-file-upload--dragging': isDragging.value,
               'v-file-upload--has-files': hasFiles,
+              'v-file-upload--inset': isInset,
               'v-file-upload--error': error,
             },
             densityClasses.value,
@@ -200,42 +201,15 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
             props: { onClick: onClickBrowse },
           }) ?? (isInset ? (
             <div key="inset" class="v-file-upload-inset">
-              { modelValue.length === 1 && !props.multiple ? (
-                slots.single?.({
-                  file: modelValue[0],
-                  props: { 'onClick:remove': () => onClickRemove(0) },
-                }) ?? (
-                  <VDefaultsProvider
-                    defaults={{
-                      VFileUploadItem: {
-                        file: modelValue[0],
-                        clearable: props.clearable,
-                        disabled,
-                        showSize: props.showSize,
-                        border: false,
-                      },
-                    }}
-                  >
-                    <VFileUploadItem
-                      onClick:remove={ () => onClickRemove(0) }
-                    />
-                  </VDefaultsProvider>
-                )
-              ) : (
-                modelValue.map((file, i) => {
-                  const slotProps = {
-                    file,
-                    props: {
-                      'onClick:remove': () => onClickRemove(i),
-                    },
-                  }
-
-                  return (
+                { modelValue.length === 1 && !props.multiple ? (
+                  slots.single?.({
+                    file: modelValue[0],
+                    props: { 'onClick:remove': () => onClickRemove(0) },
+                  }) ?? (
                     <VDefaultsProvider
-                      key={ i }
                       defaults={{
                         VFileUploadItem: {
-                          file,
+                          file: modelValue[0],
                           clearable: props.clearable,
                           disabled,
                           showSize: props.showSize,
@@ -243,16 +217,68 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                         },
                       }}
                     >
-                      { slots.item?.(slotProps) ?? (
-                        <VFileUploadItem
-                          key={ i }
-                          onClick:remove={ () => onClickRemove(i) }
-                        />
-                      )}
+                      <VFileUploadItem
+                        onClick:remove={ () => onClickRemove(0) }
+                      />
                     </VDefaultsProvider>
                   )
-                })
-              )}
+                ) : (
+                  modelValue.map((file, i) => {
+                    const slotProps = {
+                      file,
+                      props: {
+                        'onClick:remove': () => onClickRemove(i),
+                      },
+                    }
+
+                    return (
+                      <VDefaultsProvider
+                        key={ i }
+                        defaults={{
+                          VFileUploadItem: {
+                            file,
+                            clearable: props.clearable,
+                            disabled,
+                            showSize: props.showSize,
+                            border: false,
+                          },
+                        }}
+                      >
+                        { slots.item?.(slotProps) ?? (
+                          <VFileUploadItem
+                            key={ i }
+                            onClick:remove={ () => onClickRemove(i) }
+                          />
+                        )}
+                      </VDefaultsProvider>
+                    )
+                  })
+                )}
+
+              <VDivider />
+
+              <div class="v-file-upload-inset__action">
+                { !slots.browse ? (
+                  <VBtn
+                    readonly={ disabled }
+                    text={ t(props.browseText) }
+                    variant="text"
+                    onClick={ onClickBrowse }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    defaults={{
+                      VBtn: {
+                        readonly: disabled,
+                        text: t(props.browseText),
+                        variant: 'text',
+                      },
+                    }}
+                  >
+                    { slots.browse({ props: { onClick: onClickBrowse } }) }
+                  </VDefaultsProvider>
+                )}
+              </div>
             </div>
           ) : (
             <>
