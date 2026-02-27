@@ -36,7 +36,10 @@ describe('VList', () => {
     })
 
   it('should give link items role=listitem to satisfy ARIA requirements', async () => {
-    const wrapper = mount({ template: '<VList><VListItem href="/test">Link</VListItem></VList>' }, { global: { plugins: [vuetify], components: { VList, VListItem } } })
+    const wrapper = mount(
+      { template: '<VList><VListItem href="/test">Link</VListItem></VList>' },
+      { global: { plugins: [vuetify], components: { VList, VListItem } } }
+    )
     const item = wrapper.find('.v-list-item')
     expect(item.attributes('role')).toBe('listitem')
   })
