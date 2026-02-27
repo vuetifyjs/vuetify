@@ -1,8 +1,9 @@
-<p align="center">
-  <a href="https://vuetifyjs.com" target="_blank">
-    <img alt="Vuetify Logo" width="100" src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
-  </a>
-</p>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-dark.png">
+    <img alt="Vuetify Logo" src="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-light.png" height="100">
+  </picture>
+</div>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/vuetify">
