@@ -20,6 +20,7 @@
     "group-summary": "Slot for custom rendering of a group summary.",
     "item.data-table-expand": "Slot for custom rendering of a row cell with the expand icon.",
     "item.data-table-select": "Slot for custom rendering of a row cell with the select checkbox.",
+    "item.prepend": "Slot to add content before each row.",
     "loading": "Slot for custom rendering of the loading state."
   }
 }
