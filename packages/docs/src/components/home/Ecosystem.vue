@@ -80,5 +80,29 @@
       href: 'https://github.com/vuetifyjs/cli/',
       image: 'vcli',
     },
+    {
+      href: 'https://github.com/vuetifyjs/eslint-config-vuetify',
+      image: 'veslconfig',
+    },
+    {
+      href: 'https://github.com/vuetifyjs/eslint-plugin-vuetify',
+      image: 'veslplugin',
+    },
+    {
+      href: 'https://github.com/vuetifyjs/unocss-preset-vuetify',
+      image: 'vunocsspreset',
+    },
+    {
+      href: 'https://vuetifyjs.com/one',
+      image: 'vone',
+    },
+    {
+      href: 'https://github.com/vuetifyjs/create',
+      image: 'vcreate',
+    },
+    {
+      href: 'https://0.vuetifyjs.com',
+      image: 'vzero',
+    },
   ])
 </script>
