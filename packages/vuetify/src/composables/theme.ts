@@ -473,6 +473,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
             textContent: styles.value,
             id: parsedOptions.stylesheetId,
             nonce: parsedOptions.cspNonce || false as never,
+            tagPosition: 'bodyOpen' as const,
           }],
         }
       }
