@@ -49,8 +49,8 @@ export const VFooter = genericComponent()({
     const { roundedClasses } = useRounded(props)
 
     const autoHeight = shallowRef(32)
-    const el = shallowRef<HTMLElement | null>(null)
-    useResizeObserver(el as any, entries => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].contentRect.height
     })

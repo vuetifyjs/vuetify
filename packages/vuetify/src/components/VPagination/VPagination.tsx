@@ -153,8 +153,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults(undefined, { scoped: true })
 
-    const el = shallowRef<HTMLElement | null>(null)
-    useResizeObserver(el as any, entries => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]

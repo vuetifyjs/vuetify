@@ -21,8 +21,8 @@
   })
 
   const shadowSize = 60 // px
-  const containerEl = shallowRef<HTMLElement | null>(null)
-  const contentEl = shallowRef<HTMLElement | null>(null)
+  const containerEl = shallowRef<HTMLElement>()
+  const contentEl = shallowRef<HTMLElement>()
   const shift = shallowRef(-50) // percentage
   const shiftTime = shallowRef(30) // seconds
   const shiftSpeed = 35 // px per second

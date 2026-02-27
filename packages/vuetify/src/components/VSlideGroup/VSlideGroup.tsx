@@ -116,15 +116,15 @@ export const VSlideGroup = genericComponent<new <T>(
     const contentSize = shallowRef(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
-    const containerRef = shallowRef<HTMLElement | null>(null)
-    const contentRef = shallowRef<HTMLElement | null>(null)
-    const { width: containerWidth, height: containerHeight } = useElementSize(containerRef as any)
-    const { width: contentWidth, height: contentHeight } = useElementSize(contentRef as any)
+    const containerRef = shallowRef<HTMLElement>()
+    const contentRef = shallowRef<HTMLElement>()
+    const { width: containerWidth, height: containerHeight } = useElementSize(containerRef)
+    const { width: contentWidth, height: contentHeight } = useElementSize(contentRef)
 
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {
       return {
-        container: containerRef.value ?? undefined,
+        container: containerRef.value,
         duration: 200,
         easing: 'easeOutQuart',
       }

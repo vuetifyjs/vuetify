@@ -251,7 +251,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                               onUpdate:height={ height => handleItemResize(itemSlotProps.internalItem.index, height) }
                             >
                               { ({ itemRef }) => (
-                                slots.item?.({ ...itemSlotProps, itemRef: itemRef as any }) ?? (
+                                slots.item?.({ ...itemSlotProps, itemRef }) ?? (
                                   <VDataTableRow
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }

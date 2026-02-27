@@ -75,7 +75,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
-    const root = shallowRef<HTMLElement | null>(null)
+    const root = shallowRef<HTMLElement>()
 
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
@@ -95,7 +95,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
     const { roundedClasses } = useRounded(props)
-    const { isIntersecting } = useElementIntersection(root as any)
+    const { isIntersecting } = useElementIntersection(root)
 
     const max = computed(() => parseFloat(props.max))
     const height = computed(() => parseFloat(props.height))
@@ -107,7 +107,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const containerWidth = shallowRef(0)
     const { hasChunks, chunksMaskStyles, snapValueToChunk } = useChunks(props, containerWidth)
     useToggleScope(hasChunks, () => {
-      useResizeObserver(root as any, entries => { containerWidth.value = entries[0].contentRect.width })
+      useResizeObserver(root, entries => { containerWidth.value = entries[0].contentRect.width })
     })
 
     const bufferWidth = computed(() => {
