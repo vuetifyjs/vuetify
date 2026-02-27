@@ -2,7 +2,7 @@
 import { useElementSize } from '@vuetify/v0'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRef, useId, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, toRef, useId, watch } from 'vue'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -91,10 +91,8 @@ export function useSnackbarItem (
   onBeforeUnmount(() => queue.unregister(id))
   watch(isActive, val => !val && queue.unregister(id), { flush: 'sync' })
 
-  const el = shallowRef<HTMLElement | null>(null)
-  const { width, height } = useElementSize(el)
-  watch(contentEl, target => { el.value = target ?? null })
-  watch(() => width.value, w => {
+  const { width, height } = useElementSize(toRef(contentEl))
+  watch(width, w => {
     if (w) queue.setSize(id, height.value, w)
   })
 

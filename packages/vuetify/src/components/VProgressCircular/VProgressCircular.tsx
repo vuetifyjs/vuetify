@@ -55,7 +55,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const root = shallowRef<HTMLElement | null>(null)
+    const root = shallowRef<HTMLElement>()
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)

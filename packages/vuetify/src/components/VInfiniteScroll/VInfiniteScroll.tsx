@@ -81,10 +81,10 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   setup (props, { emit }) {
-    const el = shallowRef<HTMLElement | null>(null)
+    const el = shallowRef<HTMLElement>()
     const { isIntersecting } = useElementIntersection(el)
 
-    watch(() => isIntersecting.value, async (val: boolean) => {
+    watch(isIntersecting, async val => {
       emit('intersect', props.side, val)
     })
 

@@ -107,12 +107,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
       intersectScope.run(() => {
-        const el = shallowRef<HTMLElement | null>(null)
+        const el = shallowRef<HTMLElement>()
         const { isIntersecting } = useElementIntersection(el)
         watchEffect(() => {
           el.value = inputRef.value[0]
         })
-        watch(() => isIntersecting.value, v => {
+        watch(isIntersecting, v => {
           if (!v) return
           el.value?.focus()
           intersectScope.stop()

@@ -10,7 +10,7 @@ import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { computed, onBeforeUnmount, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, shallowRef, toRef, watch } from 'vue'
 import { clamp, genericComponent, getScrollParent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
@@ -37,19 +37,15 @@ export const VParallax = genericComponent<VImgSlots>()({
   setup (props, { slots }) {
     const { height: displayHeight } = useDisplay()
 
-    const root = ref<VImg>()
-    const el = shallowRef<HTMLElement | null>(null)
+    const root = shallowRef<VImg>()
+    const el = toRef(() => root.value?.$el as HTMLElement | undefined)
     const { height } = useElementSize(el)
     const { isIntersecting } = useElementIntersection(el)
-
-    watchEffect(() => {
-      el.value = (root.value?.$el as HTMLElement) ?? null
-    })
 
     let scrollParent: Element | Document
     watch(isIntersecting, val => {
       if (val) {
-        scrollParent = getScrollParent(el.value ?? undefined)
+        scrollParent = getScrollParent(el.value)
         scrollParent = scrollParent === document.scrollingElement ? document : scrollParent
         scrollParent.addEventListener('scroll', onScroll, { passive: true })
         onScroll()
@@ -75,12 +71,13 @@ export const VParallax = genericComponent<VImgSlots>()({
 
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        const img: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
+        if (!el.value) return
+        const img = el.value.querySelector('.v-img__img') as HTMLElement | null
         if (!img) return
 
         const scrollHeight = scrollParent instanceof Document ? document.documentElement.clientHeight : scrollParent.clientHeight
         const scrollPos = scrollParent instanceof Document ? window.scrollY : scrollParent.scrollTop
-        const top = el.value!.getBoundingClientRect().top + scrollPos
+        const top = el.value.getBoundingClientRect().top + scrollPos
         const h = height.value
 
         const center = top + (h - scrollHeight) / 2

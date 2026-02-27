@@ -75,7 +75,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
-    const root = shallowRef<HTMLElement | null>(null)
+    const root = shallowRef<HTMLElement>()
 
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()

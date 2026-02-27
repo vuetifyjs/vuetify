@@ -51,7 +51,7 @@ export const VFab = genericComponent()({
     const height = shallowRef(56)
     const layoutItemStyles = ref()
 
-    const el = shallowRef<HTMLElement | null>(null)
+    const el = shallowRef<HTMLElement>()
     useResizeObserver(el, entries => {
       if (!entries.length) return
       height.value = entries[0].contentRect.height
