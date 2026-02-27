@@ -139,6 +139,9 @@
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
+  "dependencies": {
+    "@vuetify/v0": "^0.1.2"
+  },
   "devDependencies": {
     "@date-io/core": "3.2.0",
     "@date-io/date-fns": "3.2.1",
