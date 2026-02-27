@@ -90,7 +90,7 @@
     },
     {
       href: 'https://github.com/vuetifyjs/unocss-preset-vuetify',
-      image: 'vunocsspreset',
+      image: 'vunopreset',
     },
     {
       href: 'https://vuetifyjs.com/one',
