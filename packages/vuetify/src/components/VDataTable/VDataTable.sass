@@ -112,8 +112,13 @@
         padding-left: 5px
 
   .v-data-table--loading
-    .v-data-table__td
-      opacity: $data-table-loading-opacity
+    &:not(.v-table--fixed-header) > .v-table__wrapper > table > thead,
+    &:not(.v-table--fixed-footer) > .v-table__wrapper > table > tfoot,
+    > .v-table__wrapper > table > tbody
+      > tr > .v-data-table__td
+        &:not(.v-data-table-column--fixed),
+        &:not(.v-data-table-column--fixed-end)
+          opacity: $data-table-loading-opacity
 
   .v-data-table-group-header-row__column
     padding-inline-start: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
