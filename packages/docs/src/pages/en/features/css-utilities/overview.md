@@ -71,7 +71,119 @@ vuetify init
 
 The wizard will walk you through selecting a project name, base framework (Vite or Nuxt), desired Vuetify version, and optional integrations including TailwindCSS or UnoCSS. You end up with a ready-to-run project.
 
-<!-- TODO: screenshot or terminal snippet -->
+Here is what each combination looks like after scaffolding (static assets and boilerplate files are omitted for brevity):
+
+::: tabs
+
+```bash [Vite + TailwindCSS]
+vite-tailwindcss/
+├── src/
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── plugins/
+│   │   ├── index.ts
+│   │   └── vuetify.ts              # Vuetify configuration entrypoint
+│   ├── styles/
+│   │   ├── layers.css              # cascade layer order
+│   │   ├── settings.scss           # disables Vuetify's built-in utilities
+│   │   └── tailwind.css            # breakpoints, dark/light variants
+│   ├── App.vue
+│   └── main.ts                     # loads Tailwind stylesheet
+├── index.html
+├── package.json
+└── vite.config.mts                 # registers Tailwind CSS Vite plugin
+```
+
+```bash [Vite + UnoCSS Vuetify]
+vite-unocss-vuetify/
+├── src/
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── plugins/
+│   │   └── vuetify.ts              # Vuetify configuration entrypoint
+│   ├── styles/
+│   │   ├── layers.css              # cascade layer order
+│   │   └── settings.scss           # disables Vuetify's built-in utilities
+│   ├── App.vue
+│   └── main.ts                     # loads UnoCSS generated styles
+├── index.html
+├── package.json
+├── uno.config.ts                   # Vuetify preset and layer mapping
+└── vite.config.mts                 # UnoCSS Vite plugin
+```
+
+```bash [Vite + UnoCSS Wind4]
+vite-unocss-wind4/
+├── src/
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── plugins/
+│   │   └── vuetify.ts              # Vuetify configuration entrypoint
+│   ├── styles/
+│   │   ├── layers.css              # cascade layer order
+│   │   └── settings.scss           # disables Vuetify's built-in utilities
+│   ├── theme/
+│   │   └── breakpoints.ts          # shared breakpoints for Vuetify and UnoCSS
+│   ├── App.vue
+│   └── main.ts                     # loads UnoCSS generated styles
+├── index.html
+├── package.json
+├── uno.config.ts                   # Wind4 preset, dark mode, breakpoints
+└── vite.config.mts                 # UnoCSS Vite plugin
+```
+
+```bash [Nuxt + TailwindCSS]
+nuxt-tailwindcss/
+├── app/
+│   ├── assets/
+│   │   └── styles/
+│   │       ├── layers.css          # cascade layer order
+│   │       ├── settings.scss       # disables Vuetify's built-in utilities
+│   │       └── tailwind.css        # breakpoints, dark/light variants
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── pages/
+│   │   └── index.vue
+│   └── app.vue
+├── nuxt.config.ts                  # modules and style load order
+└── package.json
+```
+
+```bash [Nuxt + UnoCSS Vuetify]
+nuxt-unocss-vuetify/
+├── app/
+│   ├── assets/
+│   │   └── styles/
+│   │       ├── layers.css          # cascade layer order
+│   │       └── settings.scss       # disables Vuetify's built-in utilities
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── pages/
+│   │   └── index.vue
+│   └── app.vue
+├── nuxt.config.ts                  # modules, style order, Vuetify preset
+└── package.json
+```
+
+```bash [Nuxt + UnoCSS Wind4]
+nuxt-unocss-wind4/
+├── app/
+│   ├── assets/
+│   │   └── styles/
+│   │       ├── layers.css          # cascade layer order
+│   │       └── settings.scss       # disables Vuetify's built-in utilities
+│   ├── components/
+│   │   └── HelloWorld.vue
+│   ├── pages/
+│   │   └── index.vue
+│   ├── theme/
+│   │   └── breakpoints.ts          # shared breakpoints for Vuetify and UnoCSS
+│   └── app.vue
+├── nuxt.config.ts                  # modules, style order, Wind4 preset
+└── package.json
+```
+
+:::
 
 ## Integration with existing projects
 
