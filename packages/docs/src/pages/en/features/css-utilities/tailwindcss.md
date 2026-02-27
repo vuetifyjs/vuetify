@@ -122,29 +122,28 @@ import './styles/tailwind.css'
 ::: tabs
 
 ```bash [pnpm]
-pnpm add -D tailwindcss @nuxtjs/tailwindcss
+pnpm add -D tailwindcss @tailwindcss/postcss
 ```
 
 ```bash [yarn]
-yarn add -D tailwindcss @nuxtjs/tailwindcss
+yarn add -D tailwindcss @tailwindcss/postcss
 ```
 
 ```bash [npm]
-npm i -D tailwindcss @nuxtjs/tailwindcss
+npm i -D tailwindcss @tailwindcss/postcss
 ```
 
 ```bash [bun]
-bun add -D tailwindcss @nuxtjs/tailwindcss
+bun add -D tailwindcss @tailwindcss/postcss
 ```
 
 :::
 
-Register the module in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`, then `tailwind.css`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
+Register `@tailwindcss/postcss` as a PostCSS plugin in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`, then `tailwind.css`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
 
 ```ts { resource="nuxt.config.ts" }
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/tailwindcss',
     'vuetify-nuxt-module',
     // ...
   ],
@@ -154,6 +153,12 @@ export default defineNuxtConfig({
     'vuetify/styles',
     'assets/styles/tailwind.css',
   ],
+
+  postcss: {
+    plugins: {
+      '@tailwindcss/postcss': {},
+    },
+  },
 
   vuetify: {
     moduleOptions: {
