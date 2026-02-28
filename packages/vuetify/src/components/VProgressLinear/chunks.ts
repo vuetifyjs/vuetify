@@ -31,6 +31,7 @@ export function useChunks (
   props: ChunksProps,
   containerWidth: MaybeRefOrGetter<number | undefined>,
   value: MaybeRefOrGetter<number>,
+  bufferValue: MaybeRefOrGetter<number>,
   height: MaybeRefOrGetter<number>,
   rounded: MaybeRefOrGetter<boolean>,
 ) {
@@ -68,23 +69,32 @@ export function useChunks (
   const splitStyles = computed(() => {
     if (!isSplit.value) return undefined
 
-    const val = toValue(value)
-    if (val <= 0 || val >= 100) return undefined
-
     const h = toValue(height)
     const isRounded = toValue(rounded)
     const halfGap = convertToUnit(chunkGap.value / 2)
-    const split = convertToUnit(val, '%')
     const r = isRounded ? convertToUnit(h / 2) : undefined
+
+    const val = toValue(value)
+    if (val <= 0 || val >= 100) return undefined
+
+    const buf = toValue(bufferValue)
+    const split = convertToUnit(val, '%')
+    const hasBuffer = buf > val && buf < 100
+    const bufSplit = convertToUnit(buf, '%')
 
     return {
       bar: {
         width: `calc(${split} - ${halfGap})`,
         borderRadius: r,
       },
-      background: {
+      buffer: hasBuffer ? {
         left: `calc(${split} + ${halfGap})`,
-        width: `calc(100% - ${split} - ${halfGap})`,
+        width: `calc(${bufSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
+        borderRadius: r,
+      } : undefined,
+      background: {
+        left: `calc(${hasBuffer ? bufSplit : split} + ${halfGap})`,
+        width: `calc(100% - ${hasBuffer ? bufSplit : split} - ${halfGap})`,
         borderRadius: r,
       },
     }

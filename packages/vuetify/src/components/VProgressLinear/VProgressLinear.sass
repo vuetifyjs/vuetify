@@ -1,6 +1,23 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+@property --v-progress-indeterminate-long-left
+  syntax: "<percentage>"
+  inherits: true
+  initial-value: 0%
+@property --v-progress-indeterminate-long-right
+  syntax: "<percentage>"
+  inherits: true
+  initial-value: 0%
+@property --v-progress-indeterminate-short-left
+  syntax: "<percentage>"
+  inherits: true
+  initial-value: 0%
+@property --v-progress-indeterminate-short-right
+  syntax: "<percentage>"
+  inherits: true
+  initial-value: 0%
+
 @include tools.layer('components')
   // Block
   .v-progress-linear
@@ -65,10 +82,12 @@
     transition-property: width, left, right
 
   .v-progress-linear__indeterminate
+    animation-play-state: paused
+    animation-duration: $progress-linear-indeterminate-animation-duration
+    animation-iteration-count: infinite
+    animation-name: indeterminate-ltr
+
     .long, .short
-      animation-play-state: paused
-      animation-duration: $progress-linear-indeterminate-animation-duration
-      animation-iteration-count: infinite
       bottom: 0
       height: inherit
       left: 0
@@ -78,10 +97,18 @@
       width: auto
 
     .long
-      animation-name: indeterminate-ltr
+      left: var(--v-progress-indeterminate-long-left)
+      right: var(--v-progress-indeterminate-long-right)
 
     .short
-      animation-name: indeterminate-short-ltr
+      left: var(--v-progress-indeterminate-short-left)
+      right: var(--v-progress-indeterminate-short-right)
+
+  .v-progress-linear__split
+    height: inherit
+    position: absolute
+    top: 0
+    bottom: 0
 
   .v-progress-linear__stream
     animation: $progress-linear-stream-animation
@@ -103,15 +130,11 @@
       right: 0
 
     .v-progress-linear__indeterminate
+      animation-name: indeterminate-rtl
+
       .long, .short
         left: auto
         right: 0
-
-      .long
-        animation-name: indeterminate-rtl
-
-      .short
-        animation-name: indeterminate-short-rtl
 
     .v-progress-linear__stream
       right: auto
@@ -144,11 +167,29 @@
 
   .v-progress-linear--active
     .v-progress-linear__indeterminate
-      .long, .short
-        animation-play-state: running
+      animation-play-state: running
 
     .v-progress-linear__stream
       animation-play-state: running
+
+  .v-progress-linear__indeterminate
+    > .v-progress-linear__background
+      height: 100%
+      border-radius: inherit
+      transition: none
+
+      &:nth-child(1)
+        left: 0
+        width: clamp(0%, calc(var(--v-progress-indeterminate-long-left) - var(--v-progress-chunk-gap)), 100%)
+
+      &:nth-child(2)
+        left: clamp(0%, calc(100% - var(--v-progress-indeterminate-long-right) + var(--v-progress-chunk-gap)), 100%)
+        width: clamp(0%, calc(var(--v-progress-indeterminate-short-left) - var(--v-progress-chunk-gap)), 100%)
+
+      &:nth-child(3)
+        right: 0
+        left: unset
+        width: clamp(0%, calc(var(--v-progress-indeterminate-short-right) - var(--v-progress-chunk-gap)), 100%)
 
   .v-progress-linear--rounded-bar
     .v-progress-linear__determinate,
@@ -163,47 +204,37 @@
   // Keyframes
   @keyframes indeterminate-ltr
     0%
-      left: -90%
-      right: 100%
+      --v-progress-indeterminate-long-left: -90%
+      --v-progress-indeterminate-long-right: 107%
+      --v-progress-indeterminate-short-left: -200%
+      --v-progress-indeterminate-short-right: 107%
     60%
-      left: -90%
-      right: 100%
+      --v-progress-indeterminate-long-left: -90%
+      --v-progress-indeterminate-long-right: 107%
+      --v-progress-indeterminate-short-left: 107%
+      --v-progress-indeterminate-short-right: -8%
     100%
-      left: 100%
-      right: -35%
+      --v-progress-indeterminate-long-left: 107%
+      --v-progress-indeterminate-long-right: -35%
+      --v-progress-indeterminate-short-left: 107%
+      --v-progress-indeterminate-short-right: -8%
 
   @keyframes indeterminate-rtl
     0%
-      left: 100%
-      right: -90%
+      --v-progress-indeterminate-long-left: 107%
+      --v-progress-indeterminate-long-right: -90%
+      --v-progress-indeterminate-short-left: 107%
+      --v-progress-indeterminate-short-right: -200%
     60%
-      left: 100%
-      right: -90%
+      --v-progress-indeterminate-long-left: 107%
+      --v-progress-indeterminate-long-right: -90%
+      --v-progress-indeterminate-short-left: -8%
+      --v-progress-indeterminate-short-right: 107%
     100%
-      left: -35%
-      right: 100%
-
-  @keyframes indeterminate-short-ltr
-    0%
-      left: -200%
-      right: 100%
-    60%
-      left: 107%
-      right: -8%
-    100%
-      left: 107%
-      right: -8%
-
-  @keyframes indeterminate-short-rtl
-    0%
-      left: 100%
-      right: -200%
-    60%
-      left: -8%
-      right: 107%
-    100%
-      left: -8%
-      right: 107%
+      --v-progress-indeterminate-long-left: -35%
+      --v-progress-indeterminate-long-right: 107%
+      --v-progress-indeterminate-short-left: -8%
+      --v-progress-indeterminate-short-right: 107%
 
   @keyframes stream
     to
