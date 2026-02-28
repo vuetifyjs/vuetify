@@ -30,29 +30,30 @@ export const makeChunksProps = propsFactory({
 export function useChunks (
   props: ChunksProps,
   containerWidth: MaybeRefOrGetter<number | undefined>,
+  value: MaybeRefOrGetter<number>,
+  height: MaybeRefOrGetter<number>,
+  rounded: MaybeRefOrGetter<boolean>,
 ) {
-  const hasChunks = toRef(() => !!props.chunkCount || !!props.chunkWidth)
+  const isSplit = toRef(() => props.chunkCount === 'split')
+  const hasChunks = toRef(() => !isSplit.value && (!!props.chunkCount || !!props.chunkWidth))
 
   const chunkWidth = computed(() => {
     const containerSize = toValue(containerWidth)
-    if (!containerSize) {
-      return 0
+    if (!containerSize) return 0
+
+    if (props.chunkCount) {
+      const count = Number(props.chunkCount)
+      const availableWidth = containerSize - Number(props.chunkGap) * (count - 1)
+      return availableWidth / count
     }
 
-    if (!props.chunkCount) {
-      return Number(props.chunkWidth)
-    }
-
-    const count = Number(props.chunkCount)
-    const availableWidth = containerSize - Number(props.chunkGap) * (count - 1)
-    return availableWidth / count
+    return Number(props.chunkWidth)
   })
 
   const chunkGap = toRef(() => Number(props.chunkGap))
+
   const chunksMaskStyles = computed(() => {
-    if (!hasChunks.value) {
-      return {}
-    }
+    if (!hasChunks.value) return {}
 
     const chunkGapPx = convertToUnit(chunkGap.value)
     const chunkWidthPx = convertToUnit(chunkWidth.value)
@@ -64,11 +65,36 @@ export function useChunks (
     }
   })
 
-  function snapValueToChunk (val: number) {
-    const containerSize = toValue(containerWidth)
-    if (!containerSize) {
-      return val
+  const splitStyles = computed(() => {
+    if (!isSplit.value) return undefined
+
+    const val = toValue(value)
+    if (val <= 0 || val >= 100) return undefined
+
+    const h = toValue(height)
+    const isRounded = toValue(rounded)
+    const halfGap = convertToUnit(chunkGap.value / 2)
+    const split = convertToUnit(val, '%')
+    const r = isRounded ? convertToUnit(h / 2) : undefined
+
+    return {
+      bar: {
+        width: `calc(${split} - ${halfGap})`,
+        borderRadius: r,
+      },
+      background: {
+        left: `calc(${split} + ${halfGap})`,
+        width: `calc(100% - ${split} - ${halfGap})`,
+        borderRadius: r,
+      },
     }
+  })
+
+  function snapValueToChunk (val: number) {
+    if (isSplit.value) return val
+
+    const containerSize = toValue(containerWidth)
+    if (!containerSize) return val
 
     const gapRelativeSize = 100 * chunkGap.value / containerSize
     const chunkRelativeSize = 100 * (chunkWidth.value + chunkGap.value) / containerSize
@@ -77,8 +103,10 @@ export function useChunks (
   }
 
   return {
-    hasChunks,
+    hasChunks: toRef(() => hasChunks.value || isSplit.value),
+    isSplit,
     chunksMaskStyles,
+    splitStyles,
     snapValueToChunk,
   }
 }

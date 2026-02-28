@@ -106,7 +106,9 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
     const containerWidth = shallowRef(0)
-    const { hasChunks, chunksMaskStyles, snapValueToChunk } = useChunks(props, containerWidth)
+    const { hasChunks, splitStyles, chunksMaskStyles, snapValueToChunk } = useChunks(
+      props, containerWidth, normalizedValue, height, () => !!props.rounded
+    )
     useToggleScope(hasChunks, () => {
       const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
       watchEffect(() => resizeRef.value = root.value)
@@ -204,6 +206,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               opacity: parseFloat(props.bgOpacity!),
               width: props.stream ? 0 : undefined,
             },
+            splitStyles.value?.background,
           ]}
         />
 
@@ -231,6 +234,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               style={[
                 barColorStyles.value,
                 { width: convertToUnit(barWidth.value, '%') },
+                splitStyles.value?.bar,
               ]}
             />
           ) : (
