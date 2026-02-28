@@ -142,6 +142,23 @@
 
   const items = [
     {
+      title: 'Build with Vite and TailwindCSS v4',
+      shortDescription: `In the previous article we explored integrating UnoCSS with Vuetify v3 and Nuxt. This time we take a more direct route: pairing Vuetify v4 with TailwindCSS v4 on a plain Vite setup with both running as Vite plugins. Vuetify v4 ships with CSS layers enabled by default, which makes integrating TailwindCSS significantly smoother than before...`,
+      date: 'February 16, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/building-with-vite-and-tailwindcss'),
+    },
+    {
+      title: 'January 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/january-2026-update/january-hero.png',
+      shortDescription: 'January delivered Vuetify 4.0.0-beta.0—the first beta of our next major version—featuring MD3 typography, elevation levels, and a complete grid system overhaul. VCommandPalette lands in labs, Vuetify0 hits v0.1.0 with new Tabs, Radio, and Checkbox components, and the CLI shipped 31 releases with a new analyze command...',
+      date: 'February 11, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/january-2026-update'),
+    },
+    {
       title: 'December 2025 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/december-2025-update/december-hero.png',
       shortDescription: 'December was our most productive month of 2025 with 522 commits across 16 repositories. The month delivered Vuetify 4.0.0-alpha.0 with CSS layers, six v3.11.x patches, the Vuetify CLI public release, Google OAuth for Vuetify One, PWA support across all ecosystem products, and 6 Vuetify0 releases with new composables including usePagination, useClickOutside, and useVirtual...',

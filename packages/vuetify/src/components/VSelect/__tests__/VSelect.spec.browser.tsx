@@ -994,10 +994,10 @@ describe('VSelect', () => {
       await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
-      expect(screen.getByTestId('button-1')).toHaveFocus()
+      await expect.poll(() => screen.getByTestId('button-1')).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
-      expect(screen.getByTestId('button-2')).toHaveFocus()
+      await expect.poll(() => screen.getByTestId('button-2')).toHaveFocus()
 
       // Tab past footer closes menu
       await userEvent.keyboard('{Tab}')

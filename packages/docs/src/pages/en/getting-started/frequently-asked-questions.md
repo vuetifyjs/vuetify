@@ -77,10 +77,6 @@ The following responses are a collection of common questions asked by the Vuetif
   })
   ```
 
-* **Is there still support for IE11 in Vuetify 3?** { #is-there-still-support-for-ie11-in-vuetify-3 }
-
-  No. If you need to support IE11, use [Vuetify 2](https://v2.vuetifyjs.com/).
-
 * **Is there support for Nuxt 3?** { #is-there-support-for-nuxt-3 }
 
   Yes, Vuetify 3 is compatible with Nuxt 3 but does not currently have a community Nuxt module.

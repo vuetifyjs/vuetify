@@ -20,7 +20,7 @@
           </p>
 
           <p>
-            <AppLink :href="'https://v2.vuetifyjs.com' + route.fullPath">Looking for Vuetify 2?</AppLink>
+            <AppLink :href="'https://v3.vuetifyjs.com' + route.fullPath">Looking for Vuetify 3?</AppLink>
           </p>
         </v-col>
       </v-row>
