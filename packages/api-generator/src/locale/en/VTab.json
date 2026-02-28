@@ -1,4 +1,5 @@
 {
+  "description": "Subcompoent of `v-tabs` used for modifying its state.",
   "props": {
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
     "hideSlider": "Hides the active tab slider component (no exit or enter animation).",

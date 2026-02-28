@@ -1,4 +1,5 @@
 {
+  "description": "The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.",
   "props": {
     "indeterminate": "Constantly animates, use when loading progress is unknown. If set to the string `'disable-shrink'` it will use a simpler animation that does not run on the main thread.",
     "reveal": "Animates the progress circle from 0 to its model value when the component mounts.",

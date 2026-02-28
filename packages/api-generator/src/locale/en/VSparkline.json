@@ -1,4 +1,5 @@
 {
+  "description": "The `v-sparkline` component can be used to create simple graphs, like GitHub’s contribution chart.",
   "props": {
     "autoDraw": "Trace the length of the line when first rendered.",
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation.",

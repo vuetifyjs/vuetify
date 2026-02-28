@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-tabs` used for defining a single tab item.",
   "props": {
     "value": "Sets the value of the tab. If not provided, the index will be used."
   }

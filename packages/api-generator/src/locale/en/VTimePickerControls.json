@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-time-picker` that provides the controls for selecting hours, minutes, seconds, and AM/PM.",
   "props": {
     "ampm": "Enables AM/PM mode.",
     "ampmInTitle": "Displays AM/PM in the title.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-data-table` component is used for displaying tabular data.",
   "props": {
     "calculateWidths": "Enables calculation of column widths. `widths` property will be available in select scoped slots.",
     "checkboxColor": "Set the color of the checkboxes (showSelect must be used).",

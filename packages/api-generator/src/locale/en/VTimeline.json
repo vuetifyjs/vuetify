@@ -1,4 +1,5 @@
 {
+  "description": "The `v-timeline` is useful for stylistically displaying chronological information.",
   "props": {
     "align": "Places the timeline dot at the top or center of the timeline item.",
     "direction": "Display timeline in a **vertical** or **horizontal** direction.",

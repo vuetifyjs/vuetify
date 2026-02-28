@@ -1,4 +1,5 @@
 {
+  "description": "The `v-data-table-row` component is used to define a row for a `v-data-table`.",
   "props": {
     "cellProps": "Props to be applied to the cell.",
     "index": "Row index.",

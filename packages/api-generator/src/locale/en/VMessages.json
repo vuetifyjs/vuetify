@@ -1,4 +1,5 @@
 {
+  "description": "`v-messages` component displays a list of messages, commonly used for form validation feedback.",
   "props": {
     "active": "Determines whether the messages are visible or not.",
     "message": "Display a single message."

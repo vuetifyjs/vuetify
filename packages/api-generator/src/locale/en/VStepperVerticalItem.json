@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-stepper-vertical` that set an individual step item.",
   "events": {
     "click:finish": "Event emitted when clicking the finish button",
     "click:next": "Event emitted when clicking the next button",

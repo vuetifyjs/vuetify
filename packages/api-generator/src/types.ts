@@ -227,6 +227,7 @@ export type BaseData = {
   pathName: string // kebab-case name for use in urls
 }
 export type ComponentData = BaseData & {
+  description: Record<string, string>
   sass: Record<string, { default: string }>
   props: Record<string, Definition>
   slots: Record<string, Definition>

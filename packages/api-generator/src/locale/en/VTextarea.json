@@ -1,4 +1,5 @@
 {
+  "description": "`v-textarea` components are used for collecting large amounts of textual data.",
   "props": {
     "autoGrow": "Automatically grow the textarea depending on amount of text.",
     "counterValue": "Display the input length but do not provide any validation.",

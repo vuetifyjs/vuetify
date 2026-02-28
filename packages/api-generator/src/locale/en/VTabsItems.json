@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-tabs` used for defining tab items.",
   "events": {
     "change": "Emitted when user swipes between tabs."
   }

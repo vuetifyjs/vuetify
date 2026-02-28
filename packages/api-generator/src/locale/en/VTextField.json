@@ -1,4 +1,5 @@
 {
+  "description": "`v-text-field` components are used for collecting user provided information.",
   "props": {
     "autofocus": "Enables autofocus.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",

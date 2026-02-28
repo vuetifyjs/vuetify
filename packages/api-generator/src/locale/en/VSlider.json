@@ -1,4 +1,5 @@
 {
+  "description": "The `v-slider` component can be used as an alternative visualization instead of a number input.",
   "props": {
     "alwaysDirty": "When used with the **thumb-label** prop will always show the thumb label.",
     "inverseLabel": "Reverse the label position. Works with **rtl**.",

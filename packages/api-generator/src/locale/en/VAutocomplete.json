@@ -1,4 +1,5 @@
 {
+  "description": "The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
   "props": {
     "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",
     "clearOnSelect": "Reset the search text when a selection is made while using the **multiple** prop.",

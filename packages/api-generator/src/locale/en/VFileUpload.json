@@ -1,4 +1,5 @@
 {
+  "description": "The `v-file-upload` component is a drag and drop area for uploading files.",
   "props": {
     "browseText": "Text for the browse button.",
     "dividerText": "Text in the divider.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-confirm-edit` component is used to allow the user to verify their changes before they are committed.",
   "props": {
     "modelValue": "Represents the committed v-model value",
     "cancelText": "Text for the cancel button",

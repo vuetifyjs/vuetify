@@ -1,4 +1,5 @@
 {
+  "description": "subcomponent for `v-pie` that represents a single segment of the pie chart.",
   "props": {
     "animation": "Controls duration and easing of the expand/collapse and hover effect. Defaults to `easeInOutCubic` over 400ms.",
     "color": "Sets segment color to be passed straight to CSS style attribute.",

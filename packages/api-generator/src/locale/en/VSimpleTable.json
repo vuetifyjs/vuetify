@@ -1,4 +1,5 @@
 {
+  "description": "The `v-simple-table` component is a simple wrapper component around the <table> element. Inside the component you can use all the regular table elements such as <thead>, <tbody>, <tr>, etc.",
   "props": {
     "dense": "Decreases paddings to render a dense table.",
     "fixedHeader": "Sets table header to fixed mode."
