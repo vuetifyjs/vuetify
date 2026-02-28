@@ -127,3 +127,9 @@ Using the **absolute** prop we are able to position the `v-progress-linear` comp
 The buffer color and opacity can be controlled using the **buffer-color** and **buffer-opacity** props. This enables you to make multi colored progress bars.
 
 <ExamplesExample file="v-progress-linear/misc-buffer-color" />
+
+#### Normalized values
+
+JavaScript uses **binary floating-point numbers (IEEE 754)**, which can’t exactly store some decimal values. This can lead to small rounding errors, even in simple math. For example, normalizing `28` or `29` can give slightly inaccurate results. We recommend using `Math.round()` to mitigate this in your projects.
+
+<ExamplesExample file="v-progress-linear/misc-normalized" />
