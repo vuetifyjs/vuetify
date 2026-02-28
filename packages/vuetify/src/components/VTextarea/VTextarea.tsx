@@ -242,7 +242,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const hasDetails = !!(hasCounter || slots.details)
+      const hasDetails = !!(
+        (hasCounter && (props.hideDetails !== 'auto' || props.persistentCounter || isFocused.value)) ||
+        slots.details
+      )
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
