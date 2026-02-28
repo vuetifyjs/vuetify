@@ -34,6 +34,7 @@ export function useChunks (
   bufferValue: MaybeRefOrGetter<number>,
   height: MaybeRefOrGetter<number>,
   rounded: MaybeRefOrGetter<boolean>,
+  reversed: MaybeRefOrGetter<boolean>,
 ) {
   const isSplit = toRef(() => props.chunkCount === 'split')
   const hasChunks = toRef(() => !isSplit.value && (!!props.chunkCount || !!props.chunkWidth))
@@ -71,8 +72,10 @@ export function useChunks (
 
     const h = toValue(height)
     const isRounded = toValue(rounded)
+    const isReversed = toValue(reversed)
     const halfGap = convertToUnit(chunkGap.value / 2)
     const r = isRounded ? convertToUnit(h / 2) : undefined
+    const pos = isReversed ? 'right' : 'left'
 
     const val = toValue(value)
     if (val <= 0 || val >= 100) return undefined
@@ -88,12 +91,12 @@ export function useChunks (
         borderRadius: r,
       },
       buffer: hasBuffer ? {
-        left: `calc(${split} + ${halfGap})`,
+        [pos]: `calc(${split} + ${halfGap})`,
         width: `calc(${bufSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
         borderRadius: r,
       } : undefined,
       background: {
-        left: `calc(${hasBuffer ? bufSplit : split} + ${halfGap})`,
+        [pos]: `calc(${hasBuffer ? bufSplit : split} + ${halfGap})`,
         width: `calc(100% - ${hasBuffer ? bufSplit : split} - ${halfGap})`,
         borderRadius: r,
       },

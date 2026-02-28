@@ -107,8 +107,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
     const containerWidth = shallowRef(0)
     const { hasChunks, splitStyles, chunksMaskStyles, snapValueToChunk } = useChunks(
-      props, containerWidth, normalizedValue, normalizedBuffer, height,
-      () => !!props.rounded
+      props,
+      containerWidth,
+      normalizedValue,
+      normalizedBuffer,
+      height,
+      () => !!props.rounded,
+      isReversed
     )
     useToggleScope(hasChunks, () => {
       const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
@@ -252,7 +257,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                 <>
                   { renderBackgroundBar() }
                   { renderBackgroundBar() }
-                  { renderBackgroundBar()}
+                  { renderBackgroundBar() }
                 </>
               )}
               {['long', 'short'].map(bar => (

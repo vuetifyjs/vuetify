@@ -90,9 +90,7 @@
     .long, .short
       bottom: 0
       height: inherit
-      left: 0
       position: absolute
-      right: auto
       top: 0
       width: auto
 
@@ -103,6 +101,24 @@
     .short
       left: var(--v-progress-indeterminate-short-left)
       right: var(--v-progress-indeterminate-short-right)
+
+    > .v-progress-linear__background
+      height: 100%
+      border-radius: inherit
+      transition: none
+
+      &:nth-child(1)
+        left: 0
+        width: clamp(0%, calc(var(--v-progress-indeterminate-long-left) - var(--v-progress-chunk-gap)), 100%)
+
+      &:nth-child(2)
+        left: clamp(0%, calc(100% - var(--v-progress-indeterminate-long-right) + var(--v-progress-chunk-gap)), 100%)
+        width: clamp(0%, calc(var(--v-progress-indeterminate-short-left) - var(--v-progress-chunk-gap)), 100%)
+
+      &:nth-child(3)
+        right: 0
+        left: unset
+        width: clamp(0%, calc(var(--v-progress-indeterminate-short-right) - var(--v-progress-chunk-gap)), 100%)
 
   .v-progress-linear__split
     height: inherit
@@ -132,9 +148,21 @@
     .v-progress-linear__indeterminate
       animation-name: indeterminate-rtl
 
-      .long, .short
-        left: auto
-        right: 0
+      > .v-progress-linear__background
+        &:nth-child(1)
+          left: unset
+          right: 0
+          width: clamp(0%, calc(var(--v-progress-indeterminate-long-right) - var(--v-progress-chunk-gap)), 100%)
+
+        &:nth-child(2)
+          left: unset
+          right: clamp(0%, calc(100% - var(--v-progress-indeterminate-long-left) + var(--v-progress-chunk-gap)), 100%)
+          width: clamp(0%, calc(var(--v-progress-indeterminate-short-right) - var(--v-progress-chunk-gap)), 100%)
+
+        &:nth-child(3)
+          right: unset
+          left: 0
+          width: clamp(0%, calc(var(--v-progress-indeterminate-short-left) - var(--v-progress-chunk-gap)), 100%)
 
     .v-progress-linear__stream
       right: auto
@@ -171,25 +199,6 @@
 
     .v-progress-linear__stream
       animation-play-state: running
-
-  .v-progress-linear__indeterminate
-    > .v-progress-linear__background
-      height: 100%
-      border-radius: inherit
-      transition: none
-
-      &:nth-child(1)
-        left: 0
-        width: clamp(0%, calc(var(--v-progress-indeterminate-long-left) - var(--v-progress-chunk-gap)), 100%)
-
-      &:nth-child(2)
-        left: clamp(0%, calc(100% - var(--v-progress-indeterminate-long-right) + var(--v-progress-chunk-gap)), 100%)
-        width: clamp(0%, calc(var(--v-progress-indeterminate-short-left) - var(--v-progress-chunk-gap)), 100%)
-
-      &:nth-child(3)
-        right: 0
-        left: unset
-        width: clamp(0%, calc(var(--v-progress-indeterminate-short-right) - var(--v-progress-chunk-gap)), 100%)
 
   .v-progress-linear--rounded-bar
     .v-progress-linear__determinate,
