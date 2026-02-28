@@ -3,6 +3,7 @@ node_modules/
 .env
 .knit
 knit.lock
+.history/
 
 # IDE user config
 .vscode/
