@@ -3,6 +3,9 @@
 
 @include tools.layer('components')
   .v-btn-toggle
+    > .v-btn
+      --v-theme-overlay-multiplier: 0
+
     > .v-btn.v-btn--active:not(.v-btn--disabled)
       @include tools.active-states('> .v-btn__overlay', $btn-toggle-selected-opacity)
 
