@@ -436,9 +436,11 @@ export const VAutocomplete = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
-        })
+        if (index >= 0 && IN_BROWSER) {
+          window.requestAnimationFrame(() => {
+            vVirtualScrollRef.value?.scrollToIndex(index)
+          })
+        }
       }
       if (val) _searchLock.value = null
     })

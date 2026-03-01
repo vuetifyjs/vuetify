@@ -96,8 +96,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   const unwatch = watch(hasInitialRender, v => {
     if (!v) return
-    // First render is complete, update offsets and visible
-    // items in case our assumed item height was incorrect
 
     unwatch()
     markerOffset = markerRef.value!.offsetTop
@@ -119,16 +117,27 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   function handleItemResize (index: number, height: number) {
-    const prevHeight = sizes[index]
-    const prevMinHeight = itemHeight.value
+  const prevHeight = sizes[index]
+  const prevMinHeight = itemHeight.value
 
-    itemHeight.value = prevMinHeight ? Math.min(itemHeight.value, height) : height
+  itemHeight.value = prevMinHeight ? itemHeight.value : height
 
-    if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
-      sizes[index] = height
-      updateOffsets()
+  if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
+    sizes[index] = height
+    updateOffsets()
+
+    // After offsets recalculate, restore scroll position
+    if (lastScrollTop > 0 && containerRef.value) {
+      const newOffset = calculateOffset(targetScrollIndex >= 0 ? targetScrollIndex : calculateIndex(lastScrollTop))
+      nextTick(() => {
+        if (containerRef.value && newOffset > 0) {
+          containerRef.value.scrollTop = newOffset
+          lastScrollTop = newOffset
+        }
+      })
     }
   }
+}
 
   function calculateOffset (index: number) {
     index = clamp(index, 0, items.value.length)
@@ -167,10 +176,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const scrollDeltaT = scrollTime - lastScrollTime
 
     if (scrollDeltaT > 500) {
-      scrollVelocity = Math.sign(scrollTop - lastScrollTop)
-
-      // Not super important, only update at the
-      // start of a scroll sequence to avoid reflows
+      // FIX: use 0 instead of Math.sign to ensure both first and last
+      // are updated correctly after a long pause (e.g. after programmatic scroll)
+      scrollVelocity = 0
       markerOffset = markerRef.value.offsetTop
     } else {
       scrollVelocity = scrollTop - lastScrollTop
@@ -184,6 +192,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     calculateVisibleItems()
   }
+
   function handleScrollend () {
     if (!containerRef.value || !markerRef.value) return
 
@@ -224,7 +233,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
         first.value = start
         last.value = end
       } else {
-        // Only update the side that's reached its limit if there's still buffer left
         if (start <= 0) first.value = start
         if (end >= items.value.length) last.value = end
       }
@@ -235,13 +243,20 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function scrollToIndex (index: number) {
-    const offset = calculateOffset(index)
-    if (!containerRef.value || (index && !offset)) {
-      targetScrollIndex = index
-    } else {
-      containerRef.value.scrollTop = offset
-    }
+  const offset = calculateOffset(index)
+
+  if (!containerRef.value || (index && !offset)) {
+    targetScrollIndex = index
+  } else {
+    containerRef.value.scrollTop = offset
+    lastScrollTop = offset
+    scrollVelocity = 0
+    lastScrollTime = performance.now()
+    targetScrollIndex = -1
+    cancelAnimationFrame(raf)
+    _calculateVisibleItems()
   }
+}
 
   const computedItems = computed(() => {
     return items.value.slice(first.value, last.value).map((item, index) => {
