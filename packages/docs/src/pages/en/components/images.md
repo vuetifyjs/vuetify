@@ -69,7 +69,7 @@ Use the **rounded** prop to control the border radius of the image container.
 
 The `image-class` prop allows you to apply CSS classes directly to the inner `<img>` element. This is useful for adding hover effects or styles that should target the image itself rather than the container.
 
-<ExamplesExample file="v-img/prop-image-class" />
+<ExamplesExample file="v-img/prop-image-class" new-in="3.12.0" />
 
 #### Gradient
 

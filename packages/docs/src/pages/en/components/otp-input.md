@@ -88,7 +88,7 @@ The `v-otp-input` component supports the same variants as `v-field`, `v-text-fie
 
 Using `masked` prop you can hide the entered characters. It is similar to a `type="password"`, but makes it possible to also restrict characters to digits with `type="number"`.
 
-<ExamplesExample file="v-otp-input/prop-masked" />
+<ExamplesExample file="v-otp-input/prop-masked" new-in="3.12.0" />
 
 #### Loader
 
