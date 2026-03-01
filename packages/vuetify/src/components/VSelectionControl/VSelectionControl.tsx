@@ -282,11 +282,7 @@ export const VSelectionControl = genericComponent<new <T>(
               class={[
                 'v-selection-control__input',
               ]}
-              v-ripple={[
-                !props.disabled && !props.readonly && props.ripple,
-                null,
-                ['center', 'circle'],
-              ]}
+              v-ripple_center_circle={ !props.disabled && !props.readonly && props.ripple }
             >
               { slots.input?.({
                 model,

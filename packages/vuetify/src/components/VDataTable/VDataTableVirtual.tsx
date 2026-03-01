@@ -218,7 +218,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                 }}
               >
                 <table>
-                  { slots.thead?.(slotProps.value) }
+                  { slots.colgroup?.(slotProps.value) }
                   { !props.hideDefaultHeader && (
                     <thead key="thead">
                       <VDataTableHeaders
