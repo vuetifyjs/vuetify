@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, renderSlot, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -169,13 +169,13 @@ export const VSwitch = genericComponent<new <T>(
                       >
                         { slots['track-true'] && (
                           <div key="prepend" class="v-switch__track-true">
-                            { renderSlot(slots, 'track-true', slotProps) }
+                            { slots['track-true'](slotProps) }
                           </div>
                         )}
 
                         { slots['track-false'] && (
                           <div key="append" class="v-switch__track-false">
-                            { renderSlot(slots, 'track-false', slotProps) }
+                            { slots['track-false'](slotProps) }
                           </div>
                         )}
                       </div>
@@ -200,7 +200,7 @@ export const VSwitch = genericComponent<new <T>(
                                 },
                               }}
                             >
-                              { renderSlot(slots, 'thumb', { ...slotProps, icon }) }
+                              { slots.thumb({ ...slotProps, icon }) }
                             </VDefaultsProvider>
                           ) : (
                             <VScaleTransition>
@@ -219,7 +219,7 @@ export const VSwitch = genericComponent<new <T>(
                                 >
                                   { slotProps => (
                                     slots.loader
-                                      ? renderSlot(slots, 'loader', slotProps)
+                                      ? slots.loader(slotProps)
                                       : (
                                         <VProgressCircular
                                           active={ slotProps.isActive }

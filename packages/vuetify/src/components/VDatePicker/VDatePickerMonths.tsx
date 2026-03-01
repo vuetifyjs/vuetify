@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -120,16 +120,16 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
               model.value = i
             }
 
-            return renderSlot(slots, 'month', {
+            return slots.month?.({
               month,
               i,
               props: btnProps,
-            }, () => (
+            }) ?? (
               <VBtn
                 key="month"
                 { ...btnProps }
               />
-            ))
+            )
           })}
         </div>
       </div>

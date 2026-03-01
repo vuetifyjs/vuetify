@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, toValue } from 'vue'
-import { consoleWarn, defineComponent, genericComponent, propsFactory, renderSlot } from '@/util'
+import { consoleWarn, defineComponent, genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType } from 'vue'
@@ -117,7 +117,7 @@ export const VComponentIcon = genericComponent()({
       const Icon = props.icon as JSXComponent
       return (
         <props.tag>
-          { props.icon ? <Icon /> : renderSlot(slots, 'default') }
+          { props.icon ? <Icon /> : slots.default?.() }
         </props.tag>
       )
     }

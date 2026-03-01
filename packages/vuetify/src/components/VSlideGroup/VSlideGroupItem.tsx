@@ -3,7 +3,7 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
 import { VSlideGroupSymbol } from './VSlideGroup'
-import { genericComponent, renderSlot } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { UnwrapRef } from 'vue'
@@ -30,7 +30,7 @@ export const VSlideGroupItem = genericComponent<VSlideGroupItemSlots>()({
   setup (props, { slots }) {
     const slideGroupItem = useGroupItem(props, VSlideGroupSymbol)
 
-    return () => renderSlot(slots, 'default', {
+    return () => slots.default?.({
       isSelected: slideGroupItem.isSelected.value,
       select: slideGroupItem.select,
       toggle: slideGroupItem.toggle,

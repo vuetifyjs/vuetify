@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -85,7 +85,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="loading"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots, 'loading', () => t(props.loadingText)) }
+              { slots.loading?.() ?? t(props.loadingText) }
             </td>
           </tr>
         )
@@ -98,7 +98,7 @@ export const VDataTableRows = genericComponent<new <T>(
             key="no-data"
           >
             <td colspan={ columns.value.length }>
-              { renderSlot(slots, 'no-data', () => t(props.noDataText)) }
+              { slots['no-data']?.() ?? t(props.noDataText) }
             </td>
           </tr>
         )
@@ -120,7 +120,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 isGroupOpen,
               } satisfies GroupHeaderSlot
 
-              return slots['group-header'] ? renderSlot(slots, 'group-header', slotProps) : (
+              return slots['group-header'] ? slots['group-header'](slotProps) : (
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
                   item={ item }
@@ -139,7 +139,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 toggleGroup,
               } satisfies GroupSummarySlot
 
-              return renderSlot(slots, 'group-summary', slotProps, () => '')
+              return slots['group-summary']?.(slotProps) ?? ''
             }
 
             const slotProps = {
@@ -183,14 +183,14 @@ export const VDataTableRows = genericComponent<new <T>(
 
             return (
               <Fragment key={ itemSlotProps.props.key as string }>
-                { slots.item ? renderSlot(slots, 'item', itemSlotProps) : (
+                { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
                     { ...itemSlotProps.props }
                     v-slots={ slots }
                   />
                 )}
 
-                { isExpanded(item) && renderSlot(slots, 'expanded-row', slotProps) }
+                { isExpanded(item) && slots['expanded-row']?.(slotProps) }
               </Fragment>
             )
           })}

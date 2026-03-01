@@ -3,10 +3,10 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 
 // Utilities
 import { toRef } from 'vue'
-import { getCurrentInstanceName, propsFactory, renderSlot } from '@/util'
+import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
-import type { ExtractPropTypes, SetupContext, SlotsType } from 'vue'
+import type { ExtractPropTypes, SetupContext } from 'vue'
 import type { SlotsToProps } from '@/util'
 
 export interface LoaderSlotProps {
@@ -43,14 +43,14 @@ export function LoaderSlot (
   } & ExtractPropTypes<SlotsToProps<{
     default: LoaderSlotProps
   }>>,
-  { slots }: SetupContext<{}, SlotsType<{ default: LoaderSlotProps }>>,
+  { slots }: SetupContext,
 ) {
   return (
     <div class={ `${props.name}__loader` }>
-      { renderSlot(slots, 'default', {
+      { slots.default?.({
         color: props.color,
         isActive: props.active,
-      }, () => (
+      } satisfies LoaderSlotProps) || (
         <VProgressLinear
           absolute={ props.absolute }
           active={ props.active }
@@ -58,7 +58,7 @@ export function LoaderSlot (
           height="2"
           indeterminate
         />
-      ))}
+      )}
     </div>
   )
 }

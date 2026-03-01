@@ -8,7 +8,7 @@ import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './comp
 // Utilities
 import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
-import { convertToUnit, genericComponent, getPrefixedEventHandlers, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -84,8 +84,8 @@ export const VCalendarCategory = genericComponent<new (
           class="v-calendar-category__column-header"
           { ...events }
         >
-          { renderSlot(slots, 'category', scope, () => genDayHeaderCategoryTitle(headerTitle)) }
-          { renderSlot(slots, 'day-header', scope) }
+          { slots.category?.(scope) ?? genDayHeaderCategoryTitle(headerTitle) }
+          { slots['day-header']?.(scope) }
         </div>
       )
     }
@@ -139,7 +139,9 @@ export const VCalendarCategory = genericComponent<new (
           class="v-calendar-daily__day-interval"
           style={[{ height }, styler({ ...interval, category })]}
         >
-          { renderSlot(slots, 'interval', getCategoryScope(base.getSlotScope(interval), category)) }
+          { slots.interval?.(
+            getCategoryScope(base.getSlotScope(interval), category)
+          )}
         </div>
       )
     }
@@ -162,7 +164,7 @@ export const VCalendarCategory = genericComponent<new (
 
       return (
         <div class="v-calendar-category__column" { ...events }>
-          { renderSlot(slots, 'day-body', getCategoryScope(base.getSlotScope(day), category)) }
+          { slots['day-body']?.(getCategoryScope(base.getSlotScope(day), category)) }
         </div>
       )
     }

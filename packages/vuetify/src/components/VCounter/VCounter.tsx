@@ -10,7 +10,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -67,7 +67,7 @@ export const VCounter = genericComponent<VCounterSlots>()({
           style={ props.style }
         >
           { slots.default
-            ? renderSlot(slots, 'default', {
+            ? slots.default({
               counter: counter.value,
               max: props.max,
               value: props.value,

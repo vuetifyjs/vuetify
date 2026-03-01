@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
@@ -173,7 +173,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { renderSlot(slots, 'label', slotProps, () => (
+                { slots.label?.(slotProps) ?? (
                   props.label
                     ? (
                       <VLabel
@@ -181,9 +181,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                         text={ props.label }
                       />
                     ) : undefined
-                ))}
+                )}
 
-                { renderSlot(slots, 'prepend', slotProps) }
+                { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
             default: ({ id, messagesId }) => (

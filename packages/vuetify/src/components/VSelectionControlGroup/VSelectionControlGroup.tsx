@@ -11,7 +11,7 @@ import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { onScopeDispose, provide, toRef, useId } from 'vue'
-import { deepEqual, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -133,7 +133,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
         style={ props.style }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }
       >
-        { renderSlot(slots, 'default') }
+        { slots.default?.() }
       </div>
     ))
 

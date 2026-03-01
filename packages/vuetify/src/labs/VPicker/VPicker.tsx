@@ -10,7 +10,7 @@ import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 export type VPickerSlots = {
@@ -70,20 +70,20 @@ export const VPicker = genericComponent<VPickerSlots>()({
             >
               { hasTitle && (
                 <VPickerTitle key="picker-title">
-                  { renderSlot(slots, 'title', () => props.title) }
+                  { slots.title?.() ?? props.title }
                 </VPickerTitle>
               )}
 
               { slots.header && (
                 <div class="v-picker__header">
-                  { renderSlot(slots, 'header') }
+                  { slots.header() }
                 </div>
               )}
             </div>
           )}
 
           <div class="v-picker__body">
-            { renderSlot(slots, 'default') }
+            { slots.default?.() }
           </div>
 
           { slots.actions && (
@@ -96,7 +96,7 @@ export const VPicker = genericComponent<VPickerSlots>()({
               }}
             >
               <div class="v-picker__actions">
-                { renderSlot(slots, 'actions') }
+                { slots.actions() }
               </div>
             </VDefaultsProvider>
           )}

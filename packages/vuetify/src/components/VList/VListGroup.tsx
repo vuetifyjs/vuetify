@@ -13,7 +13,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, inject, toRef } from 'vue'
-import { defineComponent, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
   default: never
@@ -26,7 +26,7 @@ const VListGroupActivator = defineComponent({
   setup (_, { slots }) {
     useNestedGroupActivator()
 
-    return () => renderSlot(slots, 'default')
+    return () => slots.default?.()
   },
 })
 
@@ -110,11 +110,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       >
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
-            { () => ( // mark as dynamic
-              <VListGroupActivator>
-                { renderSlot(slots, 'activator', { props: activatorProps.value, isOpen: isOpen.value }) }
-              </VListGroupActivator>
-            )}
+            <VListGroupActivator>
+              <slot name="activator" props={ activatorProps.value } isOpen={ isOpen.value } />
+            </VListGroupActivator>
           </VDefaultsProvider>
         )}
 
@@ -122,11 +120,11 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
           { renderWhenClosed.value
             ? (
             <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-              { renderSlot(slots, 'default') }
+              { slots.default?.() }
             </div>
             ) : isOpen.value && (
             <div class="v-list-group__items" role="group" aria-labelledby={ id.value }>
-              { renderSlot(slots, 'default') }
+              { slots.default?.() }
             </div>
             )}
         </MaybeTransition>

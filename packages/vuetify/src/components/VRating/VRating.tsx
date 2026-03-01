@@ -16,7 +16,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, nextTick, ref, shallowRef, useId } from 'vue'
-import { clamp, createRange, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -204,7 +204,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
             {
               !showStar ? undefined
-              : slots.item ? renderSlot(slots, 'item', {
+              : slots.item ? slots.item({
                 ...itemState.value[index],
                 props: btnProps,
                 value,
@@ -236,7 +236,7 @@ export const VRating = genericComponent<VRatingSlots>()({
     }
 
     function createLabel (labelProps: { value: number, index: number, label?: string }) {
-      if (slots['item-label']) return renderSlot(slots, 'item-label', labelProps)
+      if (slots['item-label']) return slots['item-label'](labelProps)
 
       if (labelProps.label) return <span>{ labelProps.label }</span>
 

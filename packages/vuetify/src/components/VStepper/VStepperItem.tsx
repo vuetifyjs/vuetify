@@ -16,7 +16,7 @@ import vRipple from '@/directives/ripple'
 // Utilities
 import { computed } from 'vue'
 import { VStepperSymbol } from './shared'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -143,11 +143,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           ]}
           disabled={ !props.editable }
           type="button"
-          v-ripple={[
-            props.editable && props.ripple,
-            null,
-            null,
-          ]}
+          v-ripple={ props.editable && props.ripple }
           onClick={ onClick }
         >
           { isClickable.value && genOverlays(true, 'v-stepper-item') }
@@ -158,11 +154,11 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             color={ hasColor ? props.color : undefined }
             size={ 24 }
           >
-            { renderSlot(slots, 'icon', slotProps.value, () => (
+            { slots.icon?.(slotProps.value) ?? (
               icon.value ? (
                 <VIcon icon={ icon.value }></VIcon>
               ) : step.value
-            ))}
+            )}
           </VAvatar>
 
           <div class="v-stepper-item__content">
@@ -171,7 +167,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
                 key="title"
                 class="v-stepper-item__title"
               >
-                { renderSlot(slots, 'title', slotProps.value, () => props.title) }
+                { slots.title?.(slotProps.value) ?? props.title }
               </div>
             )}
 
@@ -180,11 +176,11 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
                 key="subtitle"
                 class="v-stepper-item__subtitle"
               >
-                { renderSlot(slots, 'subtitle', slotProps.value, () => props.subtitle) }
+                { slots.subtitle?.(slotProps.value) ?? props.subtitle }
               </div>
             )}
 
-            { renderSlot(slots, 'default', slotProps.value) }
+            { slots.default?.(slotProps.value) }
           </div>
         </button>
       )

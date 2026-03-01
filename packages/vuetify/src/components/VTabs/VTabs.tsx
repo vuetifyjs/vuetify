@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { computed, toRef } from 'vue'
 import { VTabsSymbol } from './shared'
-import { convertToUnit, genericComponent, isObject, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -161,17 +161,17 @@ export const VTabs = genericComponent<new <TModel, T = TabItem>(
           >
             {{
               default: slots.default ?? (() => items.value.map(item => (
-                renderSlot(slots, 'tab', { item }, () => (
+                slots.tab?.({ item }) ?? (
                   <VTab
                     { ...item }
                     key={ item.text }
                     value={ item.value }
                     spaced={ props.spaced }
                     v-slots={{
-                      default: slots[`tab.${item.value}`] ? () => renderSlot(slots, `tab.${item.value}`, { item }) : undefined,
+                      default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
                     }}
                   />
-                ))
+                )
               ))),
               prev: slots.prev,
               next: slots.next,
@@ -184,16 +184,16 @@ export const VTabs = genericComponent<new <TModel, T = TabItem>(
               key="tabs-window"
               { ...scopeId }
             >
-              { items.value.map(item => renderSlot(slots, 'item', { item }, () => (
+              { items.value.map(item => slots.item?.({ item }) ?? (
                 <VTabsWindowItem
                   value={ item.value }
                   v-slots={{
-                    default: () => renderSlot(slots, `item.${item.value}`, { item }),
+                    default: () => slots[`item.${item.value}`]?.({ item }),
                   }}
                 />
-              )))}
+              ))}
 
-              { renderSlot(slots, 'window') }
+              { slots.window?.() }
             </VTabsWindow>
           )}
         </>

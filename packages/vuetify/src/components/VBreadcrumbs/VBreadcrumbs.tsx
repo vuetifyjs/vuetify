@@ -18,7 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, isObject, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -135,29 +135,29 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 
           { items.value.map(({ item, raw }, index, array) => (
             <>
-              { renderSlot(slots, 'item', { item, index }, () => (
+              { slots.item?.({ item, index }) ?? (
                 <VBreadcrumbsItem
                   key={ index }
                   disabled={ index >= array.length - 1 }
                   { ...(typeof item === 'string' ? { title: item } : item) }
                   { ...(props.itemProps && isObject(raw) ? raw : {}) }
                   v-slots={{
-                    default: slots.title ? () => renderSlot(slots, 'title', { item, index }) : undefined,
+                    default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                   }}
                 />
-              ))}
+              )}
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider
                   v-slots={{
-                    default: slots.divider ? () => renderSlot(slots, 'divider', { item: raw, index }) : undefined,
+                    default: slots.divider ? () => slots.divider?.({ item: raw, index }) : undefined,
                   }}
                 />
               )}
             </>
           ))}
 
-          { renderSlot(slots, 'default') }
+          { slots.default?.() }
         </props.tag>
       )
     })

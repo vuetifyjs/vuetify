@@ -7,7 +7,7 @@ import { VDivider } from '@/components/VDivider'
 // Utilities
 import { mergeProps } from 'vue'
 import { createList } from './list'
-import { genericComponent, propsFactory, renderSlot } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -44,24 +44,24 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
   setup (props, { slots }) {
     createList()
 
-    return () => renderSlot(slots, 'default', () => props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
+    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
       if (type === 'divider') {
-        return renderSlot(slots, 'divider', { props: itemProps }, () => (
+        return slots.divider?.({ props: itemProps }) ?? (
           <VDivider { ...itemProps } />
-        ))
+        )
       }
 
       if (type === 'subheader') {
-        return renderSlot(slots, 'subheader', { props: itemProps }, () => (
+        return slots.subheader?.({ props: itemProps }) ?? (
           <VListSubheader { ...itemProps } />
-        ))
+        )
       }
 
       const slotsWithItem = {
-        subtitle: slots.subtitle ? (slotProps: any) => renderSlot(slots, 'subtitle', { ...slotProps, item }) : undefined,
-        prepend: slots.prepend ? (slotProps: any) => renderSlot(slots, 'prepend', { ...slotProps, item }) : undefined,
-        append: slots.append ? (slotProps: any) => renderSlot(slots, 'append', { ...slotProps, item }) : undefined,
-        title: slots.title ? (slotProps: any) => renderSlot(slots, 'title', { ...slotProps, item }) : undefined,
+        subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
+        prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
+        append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
+        title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
       }
 
       const listGroupProps = VListGroup.filterProps(itemProps)
@@ -81,7 +81,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
               ) as typeof itemProps
 
               return slots.header
-                ? renderSlot(slots, 'header', { props: listItemProps })
+                ? slots.header({ props: listItemProps })
                 : (
                   <VListItem { ...listItemProps } index={ index } v-slots={ slotsWithItem } />
                 )
@@ -96,7 +96,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
           }}
         </VListGroup>
       ) : (
-        slots.item ? renderSlot(slots, 'item', { props: { ...itemProps, index } }) : (
+        slots.item ? slots.item({ props: { ...itemProps, index } }) : (
           <VListItem
             { ...itemProps }
             index={ index }
@@ -105,6 +105,6 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(
           />
         )
       )
-    }))
+    })
   },
 })

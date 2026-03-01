@@ -6,7 +6,7 @@ import { makeComponentProps } from '@/composables/component'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVLocaleProviderProps = propsFactory({
   locale: String,
@@ -37,7 +37,7 @@ export const VLocaleProvider = genericComponent()({
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'default') }
+        { slots.default?.() }
       </div>
     ))
 

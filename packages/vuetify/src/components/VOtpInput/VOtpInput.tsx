@@ -18,7 +18,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -333,17 +333,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               modelValue={ !!props.loading }
               persistent
             >
-              { renderSlot(slots, 'loader', () => (
+              { slots.loader?.() ?? (
                 <VProgressCircular
                   color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
                   size="24"
                   width="2"
                 />
-              ))}
+              )}
             </VOverlay>
 
-            { renderSlot(slots, 'default') }
+            { slots.default?.() }
           </div>
         </div>
       )

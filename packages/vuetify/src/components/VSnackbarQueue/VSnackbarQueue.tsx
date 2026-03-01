@@ -8,7 +8,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, nextTick, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, VNodeProps } from 'vue'
@@ -126,7 +126,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
             slots.default
               ? (
                 <VDefaultsProvider defaults={{ VSnackbar: current.value }}>
-                  { renderSlot(slots, 'default', { item: current.value }) }
+                  { slots.default({ item: current.value }) }
                 </VDefaultsProvider>
               ) : (
                 <VSnackbar
@@ -136,7 +136,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                   onAfterLeave={ onAfterLeave }
                 >
                   {{
-                    text: slots.text ? () => renderSlot(slots, 'text', { item: current.value! }) : undefined,
+                    text: slots.text ? () => slots.text?.({ item: current.value! }) : undefined,
                     actions: hasActions ? () => (
                       <>
                         { !slots.actions ? (
@@ -150,7 +150,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
                               VBtn: btnProps.value,
                             }}
                           >
-                            { renderSlot(slots, 'actions', {
+                            { slots.actions({
                               item: current.value!,
                               props: { onClick: onClickClose },
                             })}

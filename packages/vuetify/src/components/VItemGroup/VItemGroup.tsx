@@ -8,7 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
@@ -62,7 +62,7 @@ export const VItemGroup = genericComponent<new <T>(
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'default', {
+        { slots.default?.({
           isSelected,
           select,
           next,

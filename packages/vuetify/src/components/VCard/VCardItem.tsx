@@ -13,7 +13,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { toDisplayString } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
   default: never
@@ -107,17 +107,17 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { renderSlot(slots, 'title', () => toDisplayString(props.title)) }
+                { slots.title?.() ?? toDisplayString(props.title) }
               </VCardTitle>
             )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
-                { renderSlot(slots, 'subtitle', () => toDisplayString(props.subtitle)) }
+                { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
               </VCardSubtitle>
             )}
 
-            { renderSlot(slots, 'default') }
+            { slots.default?.() }
           </div>
 
           { hasAppend && (

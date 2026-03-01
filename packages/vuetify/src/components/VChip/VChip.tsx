@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, watch } from 'vue'
-import { EventProp, genericComponent, propsFactory, renderSlot } from '@/util'
+import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -304,14 +304,14 @@ export const VChip = genericComponent<VChipSlots>()({
           )}
 
           <div class="v-chip__content" data-no-activator="">
-            { renderSlot(slots, 'default', {
+            { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
               select: group?.select,
               toggle: group?.toggle,
               value: group?.value.value,
               disabled: props.disabled,
-            }, () => toDisplayString(props.text))}
+            }) ?? toDisplayString(props.text)}
           </div>
 
           { hasAppend && (

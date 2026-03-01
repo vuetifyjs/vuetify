@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { ref, shallowRef, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop, PropType } from 'vue'
@@ -90,7 +90,7 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           class="v-timeline-item__body"
           style={ dimensionStyles.value }
         >
-          { renderSlot(slots, 'default') }
+          { slots.default?.() }
         </div>
 
         <VTimelineDivider
@@ -108,7 +108,7 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
 
         { props.density !== 'compact' && (
           <div class="v-timeline-item__opposite">
-            { !props.hideOpposite && renderSlot(slots, 'opposite') }
+            { !props.hideOpposite && slots.opposite?.() }
           </div>
         )}
       </div>

@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -104,7 +104,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
       return (
         <div class="v-data-table-footer">
-          { renderSlot(slots, 'prepend') }
+          { slots.prepend?.() }
 
           <div class="v-data-table-footer__items-per-page">
             <span>{ t(props.itemsPerPageText) }</span>

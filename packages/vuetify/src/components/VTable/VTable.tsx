@@ -8,7 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +68,7 @@ export const VTable = genericComponent<VTableSlots>()({
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'top') }
+        { slots.top?.() }
 
         { slots.default ? (
           <div
@@ -76,12 +76,12 @@ export const VTable = genericComponent<VTableSlots>()({
             style={{ height: convertToUnit(props.height) }}
           >
             <table>
-              { renderSlot(slots, 'default') }
+              { slots.default() }
             </table>
           </div>
-        ) : renderSlot(slots, 'wrapper')}
+        ) : slots.wrapper?.()}
 
-        { renderSlot(slots, 'bottom') }
+        { slots.bottom?.() }
       </props.tag>
     ))
 

@@ -14,7 +14,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { toRef } from 'vue'
-import { deepEqual, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -94,7 +94,7 @@ export const VChipGroup = genericComponent<new <T>(
           ]}
           style={ props.style }
         >
-          { renderSlot(slots, 'default', {
+          { slots.default?.({
             isSelected,
             select,
             next,

@@ -4,7 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { watch } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GenericProps, TemplateRef } from '@/util'
@@ -44,7 +44,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
 
     useRender(() => props.renderless ? (
       <>
-        { renderSlot(slots, 'default', { itemRef: resizeRef }) }
+        <slot itemRef={ resizeRef }></slot>
       </>
     ) : (
       <div

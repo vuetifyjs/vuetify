@@ -5,7 +5,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVToolbarItemsProps = propsFactory({
   ...makeComponentProps(),
@@ -34,7 +34,7 @@ export const VToolbarItems = genericComponent()({
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'default') }
+        { slots.default?.() }
       </div>
     ))
 
