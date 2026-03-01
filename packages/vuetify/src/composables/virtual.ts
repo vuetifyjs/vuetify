@@ -117,27 +117,16 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   function handleItemResize (index: number, height: number) {
-  const prevHeight = sizes[index]
-  const prevMinHeight = itemHeight.value
+    const prevHeight = sizes[index]
+    const prevMinHeight = itemHeight.value
 
-  itemHeight.value = prevMinHeight ? itemHeight.value : height
+    itemHeight.value = prevMinHeight ? itemHeight.value : height
 
-  if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
-    sizes[index] = height
-    updateOffsets()
-
-    // After offsets recalculate, restore scroll position
-    if (lastScrollTop > 0 && containerRef.value) {
-      const newOffset = calculateOffset(targetScrollIndex >= 0 ? targetScrollIndex : calculateIndex(lastScrollTop))
-      nextTick(() => {
-        if (containerRef.value && newOffset > 0) {
-          containerRef.value.scrollTop = newOffset
-          lastScrollTop = newOffset
-        }
-      })
+    if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
+      sizes[index] = height
+      updateOffsets()
     }
   }
-}
 
   function calculateOffset (index: number) {
     index = clamp(index, 0, items.value.length)
@@ -243,20 +232,20 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function scrollToIndex (index: number) {
-  const offset = calculateOffset(index)
+    const offset = calculateOffset(index)
 
-  if (!containerRef.value || (index && !offset)) {
-    targetScrollIndex = index
-  } else {
-    containerRef.value.scrollTop = offset
-    lastScrollTop = offset
-    scrollVelocity = 0
-    lastScrollTime = performance.now()
-    targetScrollIndex = -1
-    cancelAnimationFrame(raf)
-    _calculateVisibleItems()
+    if (!containerRef.value || (index && !offset)) {
+      targetScrollIndex = index
+    } else {
+      containerRef.value.scrollTop = offset
+      lastScrollTop = offset
+      scrollVelocity = 0
+      lastScrollTime = performance.now()
+      targetScrollIndex = -1
+      cancelAnimationFrame(raf)
+      _calculateVisibleItems()
+    }
   }
-}
 
   const computedItems = computed(() => {
     return items.value.slice(first.value, last.value).map((item, index) => {
