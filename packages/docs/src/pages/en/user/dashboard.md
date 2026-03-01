@@ -7,7 +7,10 @@ meta:
   keywords: user dashboard
 ---
 <script setup>
-  import DashboardDashboardEmptyState from '@/components/dashboard/DashboardEmptyState.vue'
+  import DashboardActivityTable from '@/components/dashboard/DashboardActivityTable.vue';
+  import { useAuthStore } from '@vuetify/one';
+  const auth = useAuthStore()
 </script>
 
-<DashboardDashboardEmptyState />
+<DashboardActivityTable v-if="auth.user" />
+<VoAuthCard class="mt-10" v-else />
