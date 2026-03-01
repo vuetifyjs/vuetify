@@ -35,6 +35,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const inputAction = shallowRef()
     const caretPosition = shallowRef(0)
+    const previousMaskPattern = shallowRef<string | null>(null)
 
     const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
@@ -54,10 +55,15 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           const newMaskedValue = mask.mask(valueWithoutDelimiters)
           const newUnmaskedValue = mask.unmask(newMaskedValue)
 
+          const currentMaskPattern = mask.getMask(valueWithoutDelimiters)
+          const hasMaskChanged = Array.isArray(props.mask) && previousMaskPattern.value !== currentMaskPattern
+          previousMaskPattern.value = currentMaskPattern
+
           const newCaretPosition = getNewCaretPosition({
             oldValue: model.value,
             newValue: newMaskedValue,
             oldCaret: caretPosition.value,
+            hasMaskChanged,
           })
 
           vTextFieldRef.value!.value = newMaskedValue
@@ -75,32 +81,55 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
     }
 
+    function countNonDelimiters (str: string, upTo: number): number {
+      let count = 0
+      for (let i = 0; i < Math.min(upTo, str.length); i++) {
+        if (!isMaskDelimiter(str[i])) count++
+      }
+      return count
+    }
+
+    function findPositionByNonDelimiterCount (str: string, targetCount: number): number {
+      let count = 0
+      let pos = 0
+      while (pos < str.length && count < targetCount) {
+        if (!isMaskDelimiter(str[pos])) count++
+        pos++
+      }
+      return pos
+    }
+
     function getNewCaretPosition ({
       oldValue,
       newValue,
       oldCaret,
+      hasMaskChanged,
     }: {
       oldValue: string
       newValue: string
       oldCaret: number
+      hasMaskChanged: boolean
     }): number {
       if (!newValue) return 0
       if (!oldValue) return newValue.length
 
       let newCaret: number
+      const effectiveOldCaret = hasMaskChanged ? countNonDelimiters(oldValue, oldCaret) : oldCaret
 
       if (inputAction.value === 'Backspace') {
-        newCaret = oldCaret - 1
-        while (newCaret > 0 && isMaskDelimiter(newValue[newCaret - 1])) newCaret--
+        newCaret = effectiveOldCaret - 1
+        if (!hasMaskChanged) while (newCaret > 0 && isMaskDelimiter(newValue[newCaret - 1])) newCaret--
       } else if (inputAction.value === 'Delete') {
-        newCaret = oldCaret
+        newCaret = effectiveOldCaret
       } else { // insertion
-        newCaret = oldCaret + 1
-        while (isMaskDelimiter(newValue[newCaret])) newCaret++
-        if (isMaskDelimiter(newValue[oldCaret])) newCaret++
+        newCaret = effectiveOldCaret + 1
+        if (!hasMaskChanged) {
+          while (isMaskDelimiter(newValue[newCaret])) newCaret++
+          if (isMaskDelimiter(newValue[effectiveOldCaret])) newCaret++
+        }
       }
 
-      return newCaret
+      return hasMaskChanged ? findPositionByNonDelimiterCount(newValue, newCaret) : newCaret
     }
 
     onBeforeMount(() => {
@@ -171,11 +200,12 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     async function simulateBackspace (inputElement: HTMLInputElement) {
       inputAction.value = 'Backspace'
+      const oldModelValue = model.value
       model.value = inputElement.value.slice(0, caretPosition.value - 1) + inputElement.value.slice(caretPosition.value)
       inputAction.value = ''
-      if (caretPosition.value === inputElement.selectionEnd) return false
-      caretPosition.value = inputElement.selectionEnd || 0
       await nextTick()
+      if (caretPosition.value === inputElement.selectionEnd && oldModelValue === model.value) return false
+      caretPosition.value = inputElement.selectionEnd || 0
       return true
     }
 
