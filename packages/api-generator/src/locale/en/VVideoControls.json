@@ -5,6 +5,7 @@
     "trackColor": "Passed to the main slider `color` prop.",
     "playing": "Applies correct icon of the default play button.",
     "hidePlay": "Hides default play button.",
+    "hideSeekbar": "Hides default seek bar",
     "hideVolume": "Hides default volume control.",
     "hideFullscreen": "Hides default fullscreen button.",
     "fullscreen": "Applies correct icon on the default fullscreen button.",
