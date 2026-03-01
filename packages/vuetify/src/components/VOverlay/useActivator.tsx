@@ -73,9 +73,15 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop, contentEl }: {
+  {
+    isActive,
+    isTop,
+    reopenLock,
+    contentEl,
+  }: {
     isActive: Ref<boolean>
     isTop: Ref<boolean>
+    reopenLock: Ref<boolean>
     contentEl: Ref<HTMLElement | undefined>
   }
 ) {
@@ -122,7 +128,8 @@ export function useActivator (
       isHovered = false
       runCloseDelay()
     },
-    onFocus: (e: FocusEvent) => {
+    onFocusin: (e: FocusEvent) => {
+      if (reopenLock.value) return
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
@@ -150,7 +157,7 @@ export function useActivator (
       events.onMouseleave = availableEvents.onMouseleave
     }
     if (openOnFocus.value) {
-      events.onFocus = availableEvents.onFocus
+      events.onFocusin = availableEvents.onFocusin
       events.onBlur = availableEvents.onBlur
     }
 

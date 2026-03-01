@@ -17,8 +17,8 @@
 
     <v-menu
       v-model="showMenu"
+      :activator="menuTarget"
       :offset="[-8,-12]"
-      :target="menuTarget"
       location="bottom end"
       scroll-strategy="close"
     >
