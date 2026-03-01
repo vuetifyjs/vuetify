@@ -1,0 +1,6 @@
+{
+  "props": {
+    "hideToolbar": "Hides the formatting toolbar.",
+    "formats": "Items to display in the toolbar."
+  }
+}
