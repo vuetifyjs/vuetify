@@ -13,7 +13,7 @@ import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
-  NavigationGuardNext,
+  NavigationGuardReturn,
   RouteLocation,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
@@ -118,7 +118,7 @@ export const makeRouterProps = propsFactory({
 }, 'router')
 
 let inTransition = false
-export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
+export function useBackButton (router: Router | undefined, cb: () => NavigationGuardReturn) {
   let popped = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
@@ -126,13 +126,15 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
-      removeBefore = router.beforeEach((to, from, next) => {
+      removeBefore = router.beforeEach(() => {
+        const isPopped = popped // capture before any async gap
         if (!inTransition) {
-          setTimeout(() => popped ? cb(next) : next())
+          inTransition = true
+          return new Promise<NavigationGuardReturn>(resolve => setTimeout(() => resolve(isPopped ? cb() : undefined)))
         } else {
-          popped ? cb(next) : next()
+          inTransition = true
+          return isPopped ? cb() : undefined
         }
-        inTransition = true
       })
       removeAfter = router?.afterEach(() => {
         inTransition = false

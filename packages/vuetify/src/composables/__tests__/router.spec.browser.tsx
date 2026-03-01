@@ -1,8 +1,8 @@
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
-import { defineComponent, h, nextTick, ref, shallowRef } from 'vue'
+import { defineComponent, effectScope, h, nextTick, ref, shallowRef } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { useLink } from '../router'
+import { useBackButton, useLink } from '../router'
 
 describe('useLink', () => {
   const TestComponent = defineComponent({
@@ -147,5 +147,125 @@ describe('useLink', () => {
     to.value = { name: 'page2' }
     await wait()
     expect(link.isActive?.value).toBe(false)
+  })
+})
+
+describe('useBackButton', () => {
+  function createTestRouter () {
+    return createRouter({
+      history: createWebHistory(),
+      routes: [
+        { path: '/', component: { setup: () => () => h('div', 'home') } },
+        { path: '/page1', component: { setup: () => () => h('div', 'page1') } },
+      ],
+    })
+  }
+
+  it('should call cb when popstate fires before navigation', async () => {
+    const router = createTestRouter()
+    const cb = vi.fn(() => false as const)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    window.dispatchEvent(new PopStateEvent('popstate', { state: {} }))
+    await router.push('/page1').catch(() => {})
+    await wait()
+
+    scope.stop()
+
+    expect(cb).toHaveBeenCalled()
+  })
+
+  it('should allow navigation when popstate has not fired', async () => {
+    const router = createTestRouter()
+    const cb = vi.fn(() => false as const)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    await router.push('/page1')
+
+    scope.stop()
+
+    expect(cb).not.toHaveBeenCalled()
+    expect(router.currentRoute.value.path).toBe('/page1')
+  })
+
+  it('should return false from cb to cancel navigation on back button', async () => {
+    const router = createTestRouter()
+    await router.push('/page1')
+
+    const cb = vi.fn(() => false as const)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    window.dispatchEvent(new PopStateEvent('popstate', { state: {} }))
+    await router.push('/').catch(() => {})
+    await wait()
+
+    scope.stop()
+
+    expect(cb).toHaveBeenCalled()
+    expect(router.currentRoute.value.path).toBe('/page1')
+  })
+
+  it('should allow navigation when cb returns undefined', async () => {
+    const router = createTestRouter()
+    await router.push('/page1')
+
+    const cb = vi.fn(() => undefined)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    window.dispatchEvent(new PopStateEvent('popstate', { state: {} }))
+    await router.push('/')
+    await wait()
+
+    scope.stop()
+
+    expect(cb).toHaveBeenCalled()
+    expect(router.currentRoute.value.path).toBe('/')
+  })
+
+  it('should not fire cb for replaced states', async () => {
+    const router = createTestRouter()
+    const cb = vi.fn(() => false as const)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    window.dispatchEvent(new PopStateEvent('popstate', { state: { replaced: true } }))
+    await router.push('/page1')
+    await wait()
+
+    scope.stop()
+
+    expect(cb).not.toHaveBeenCalled()
+  })
+
+  it('should clean up guards when scope is disposed', async () => {
+    const router = createTestRouter()
+    const cb = vi.fn(() => false as const)
+    const scope = effectScope()
+
+    scope.run(() => useBackButton(router, cb))
+    await nextTick()
+
+    scope.stop()
+
+    window.dispatchEvent(new PopStateEvent('popstate', { state: {} }))
+    await router.push('/page1')
+    await wait()
+
+    expect(cb).not.toHaveBeenCalled()
+    expect(router.currentRoute.value.path).toBe('/page1')
   })
 })
