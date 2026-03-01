@@ -2,7 +2,7 @@
 import { computed, nextTick, ref, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath as _genPath } from './util/path'
-import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 export type VTrendlineSlots = {
@@ -205,7 +205,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                     y={ (parseInt(props.height, 10) - 4) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
                     font-size={ Number(props.labelSize) || 7 }
                   >
-                    { renderSlot(slots, 'label', { index: i, value: item.value }, () => item.value) }
+                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
                   </text>
                 ))
               }

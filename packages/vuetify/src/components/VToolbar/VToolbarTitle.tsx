@@ -3,7 +3,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVToolbarTitleProps = propsFactory({
   text: String,
@@ -36,9 +36,9 @@ export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({
         >
           { hasText && (
             <div class="v-toolbar-title__placeholder">
-              { slots.text ? renderSlot(slots, 'text') : props.text }
+              { slots.text ? slots.text() : props.text }
 
-              { renderSlot(slots, 'default') }
+              { slots.default?.() }
             </div>
           )}
         </props.tag>

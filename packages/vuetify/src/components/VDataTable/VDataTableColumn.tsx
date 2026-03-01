@@ -1,5 +1,5 @@
 // Utilities
-import { convertToUnit, defineFunctionalComponent, renderSlot } from '@/util'
+import { convertToUnit, defineFunctionalComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -58,7 +58,7 @@ export const VDataTableColumn = defineFunctionalComponent({
         paddingInlineStart: props.indent ? convertToUnit(props.indent) : undefined,
       }}
     >
-      { renderSlot(slots, 'default') }
+      { slots.default?.() }
     </Tag>
   )
 })

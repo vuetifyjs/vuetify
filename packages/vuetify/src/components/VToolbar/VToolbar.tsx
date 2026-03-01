@@ -20,7 +20,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, shallowRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -89,7 +89,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
 
-    const isExtended = shallowRef(props.extended === null ? !!(renderSlot(slots, 'extension')) : props.extended)
+    const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
@@ -116,7 +116,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
 
-      const extension = renderSlot(slots, 'extension')
+      const extension = slots.extension?.()
       isExtended.value = props.extended === null ? !!extension : props.extended
 
       return (
@@ -181,7 +181,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             >
               { slots.prepend && (
                 <div class="v-toolbar__prepend">
-                  { renderSlot(slots, 'prepend') }
+                  { slots.prepend?.() }
                 </div>
               )}
 
@@ -191,11 +191,11 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 </VToolbarTitle>
               )}
 
-              { renderSlot(slots, 'default') }
+              { slots.default?.() }
 
               { slots.append && (
                 <div class="v-toolbar__append">
-                  { renderSlot(slots, 'append') }
+                  { slots.append?.() }
                 </div>
               )}
             </div>

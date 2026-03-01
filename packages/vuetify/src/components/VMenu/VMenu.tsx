@@ -35,7 +35,7 @@ import {
   isClickInsideElement,
   omit,
   propsFactory,
-  renderSlot, useRender,
+  useRender,
 } from '@/util'
 
 // Types
@@ -207,7 +207,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
             activator: slots.activator,
             default: (...args) => (
               <VDefaultsProvider root="VMenu">
-                { renderSlot(slots, 'default', ...args) }
+                { slots.default?.(...args) }
               </VDefaultsProvider>
             ),
           }}

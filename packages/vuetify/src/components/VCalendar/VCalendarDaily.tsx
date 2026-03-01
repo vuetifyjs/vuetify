@@ -10,7 +10,7 @@ import vResize from '@/directives/resize'
 
 // Utilities
 import { nextTick, onMounted, ref } from 'vue'
-import { convertToUnit, genericComponent, getPrefixedEventHandlers, noop, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
 
 // Types
 import type { CalendarDayBodySlotScope, CalendarDayCategorySlotScope, CalendarTimestamp, DayHeaderSlotScope } from './types'
@@ -85,7 +85,7 @@ export const VCalendarDaily = genericComponent<new (
           class="v-calendar-daily__intervals-head"
           style={{ width }}
         >
-          { renderSlot(slots, 'interval-header') }
+          { slots['interval-header']?.() }
         </div>
       )
     }
@@ -112,11 +112,11 @@ export const VCalendarDaily = genericComponent<new (
     }
 
     function genDayHeader (day: CalendarTimestamp, index: number) {
-      return renderSlot(slots, 'day-header', {
+      return slots['day-header']?.({
         week: base.days.value,
         ...day,
         index,
-      })
+      }) ?? []
     }
 
     function genHeadWeekday (day: CalendarTimestamp) {
@@ -134,7 +134,7 @@ export const VCalendarDaily = genericComponent<new (
     function genHeadDayLabel (day: CalendarTimestamp) {
       return (
         <div class="v-calendar-daily_head-day-label">
-          { renderSlot(slots, 'day-label-header', day, () => genHeadDayButton(day)) }
+          { slots['day-label-header']?.(day) ?? genHeadDayButton(day) }
         </div>
       )
     }
@@ -189,7 +189,7 @@ export const VCalendarDaily = genericComponent<new (
       return (
         <div class="v-calendar-daily__day-container">
           { genBodyIntervals() }
-          { renderSlot(slots, 'days', () => genDays()) }
+          { slots.days?.() ?? genDays() }
         </div>
       )
     }
@@ -214,7 +214,7 @@ export const VCalendarDaily = genericComponent<new (
     }
 
     function genDayBody (day: CalendarTimestamp) {
-      return renderSlot(slots, 'day-body', base.getSlotScope(day))
+      return slots['day-body']?.(base.getSlotScope(day)) ?? []
     }
 
     function genDayIntervals (index: number) {
@@ -230,7 +230,7 @@ export const VCalendarDaily = genericComponent<new (
           key={ interval.time }
           style={[{ height }, styler(interval)]}
         >
-          { renderSlot(slots, 'interval', base.getSlotScope(interval)) }
+          { slots.interval?.(base.getSlotScope(interval)) }
         </div>
       )
     }
@@ -281,7 +281,7 @@ export const VCalendarDaily = genericComponent<new (
       <div
         class={['v-calendar-daily', attrs.class]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
-        vResize_quiet={ onResize }
+        v-resize_quiet={ onResize }
       >
         { !props.hideHeader ? genHead() : undefined }
         { genBody() }

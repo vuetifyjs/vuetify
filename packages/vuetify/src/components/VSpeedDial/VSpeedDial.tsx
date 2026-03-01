@@ -12,7 +12,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -87,7 +87,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
                   group
                   transition={ props.transition }
                 >
-                  { renderSlot(slots, 'default', slotProps) }
+                  { slots.default?.(slotProps) }
                 </MaybeTransition>
               </VDefaultsProvider>
             ),

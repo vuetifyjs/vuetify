@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
@@ -217,7 +217,7 @@ export const VWindow = genericComponent<new <T>(
 
       arrows.push(canMoveBack.value
         ? slots.prev
-          ? renderSlot(slots, 'prev', { props: prevProps })
+          ? slots.prev({ props: prevProps })
           : <VBtn { ...prevProps } />
         : <div />
       )
@@ -231,7 +231,7 @@ export const VWindow = genericComponent<new <T>(
 
       arrows.push(canMoveForward.value
         ? slots.next
-          ? renderSlot(slots, 'next', { props: nextProps })
+          ? slots.next({ props: nextProps })
           : <VBtn { ...nextProps } />
         : <div />
       )
@@ -310,7 +310,7 @@ export const VWindow = genericComponent<new <T>(
               : null,
           },
         ]}
-        vTouch={ touchOptions.value }
+        v-touch={ touchOptions.value }
       >
         <div
           class="v-window__container"
@@ -318,7 +318,7 @@ export const VWindow = genericComponent<new <T>(
             height: transitionHeight.value,
           }}
         >
-          { renderSlot(slots, 'default', { group }) }
+          { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
             <div
@@ -334,7 +334,7 @@ export const VWindow = genericComponent<new <T>(
           )}
         </div>
 
-        { renderSlot(slots, 'additional', { group }) }
+        { slots.additional?.({ group }) }
       </props.tag>
     ))
 

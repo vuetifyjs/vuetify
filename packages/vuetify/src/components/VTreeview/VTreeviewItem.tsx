@@ -17,7 +17,7 @@ import { IconValue } from '@/composables/icons'
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
 import { VTreeviewSymbol } from './shared'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -160,7 +160,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                 },
                               }}
                             >
-                              { renderSlot(slots, 'toggle', {
+                              { slots.toggle({
                                 ...slotProps,
                                 loading: props.loading,
                                 props: {
@@ -178,7 +178,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
 
                   { !props.hasCustomPrepend ? (
                     <>
-                      { renderSlot(slots, 'prepend', slotProps) }
+                      { slots.prepend?.(slotProps) }
                       { props.prependAvatar && (
                         <VAvatar
                           key="prepend-avatar"
@@ -212,7 +212,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                         },
                       }}
                     >
-                      { renderSlot(slots, 'prepend', slotProps) }
+                      { slots.prepend?.(slotProps) }
                     </VDefaultsProvider>
                   )}
                 </>

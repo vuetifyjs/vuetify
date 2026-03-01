@@ -9,7 +9,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -61,14 +61,10 @@ export const VLazy = genericComponent()({
           'v-lazy',
           props.class,
         ]}
-        vIntersect={[
-          {
-            handler: onIntersect,
-            options: props.options,
-          },
-          null,
-          isActive.value ? [] : ['once'],
-        ]}
+        v-intersect_once={{
+          handler: onIntersect,
+          options: props.options,
+        }}
         style={[
           dimensionStyles.value,
           props.style,
@@ -76,7 +72,7 @@ export const VLazy = genericComponent()({
       >
         { isActive.value && (
           <MaybeTransition transition={ props.transition } appear>
-            { renderSlot(slots, 'default') }
+            { slots.default?.() }
           </MaybeTransition>
         )}
       </props.tag>

@@ -7,7 +7,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Utilities
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
-import { clamp, convertToUnit, genericComponent, getScrollParents, renderSlot, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
 export type VPullToRefreshSlots = {
   default: never
@@ -122,7 +122,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
             }}
           >
             { slots.pullDownPanel
-              ? renderSlot(slots, 'pullDownPanel', {
+              ? slots.pullDownPanel({
                 canRefresh: canRefresh.value,
                 goingUp: goingUp.value,
                 refreshing: refreshing.value,
@@ -157,7 +157,7 @@ export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
             ]}
             style={{ top: convertToUnit(topOffset.value) }}
           >
-            { renderSlot(slots, 'default') }
+            { slots.default?.() }
           </div>
         </div>
       )

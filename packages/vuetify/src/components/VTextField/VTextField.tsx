@@ -18,7 +18,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -264,7 +264,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                               class={ fieldClass }
                               data-no-activator=""
                             >
-                              { renderSlot(slots, 'default', { id }) }
+                              { slots.default({ id }) }
                               { inputNode }
                             </div>
                           ) : cloneVNode(inputNode, { class: fieldClass }),
@@ -286,7 +286,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
             ),
             details: hasDetails ? slotProps => (
               <>
-                { renderSlot(slots, 'details', slotProps) }
+                { slots.details?.(slotProps) }
 
                 { hasCounter && (
                   <>

@@ -8,7 +8,7 @@ import { useRtl } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent, omit, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 export const makeVAppProps = propsFactory({
   ...makeComponentProps(),
@@ -41,7 +41,7 @@ export const VApp = genericComponent()({
         ]}
       >
         <div class="v-application__wrap">
-          { renderSlot(slots, 'default') }
+          { slots.default?.() }
         </div>
       </div>
     ))

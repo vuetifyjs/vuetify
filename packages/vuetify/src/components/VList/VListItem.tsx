@@ -28,7 +28,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
-import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -318,7 +318,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           role={ role.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          vRipple={ isClickable.value && rippleOptions.value }
+          v-ripple={ isClickable.value && rippleOptions.value }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
@@ -360,7 +360,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { renderSlot(slots, 'prepend', slotProps.value) }
+                  { slots.prepend?.(slotProps.value) }
                 </VDefaultsProvider>
               )}
 
@@ -371,17 +371,17 @@ export const VListItem = genericComponent<VListItemSlots>()({
           <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
-                { renderSlot(slots, 'title', { title: props.title }, () => toDisplayString(props.title)) }
+                { slots.title?.({ title: props.title }) ?? toDisplayString(props.title) }
               </VListItemTitle>
             )}
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
-                { renderSlot(slots, 'subtitle', { subtitle: props.subtitle }, () => toDisplayString(props.subtitle)) }
+                { slots.subtitle?.({ subtitle: props.subtitle }) ?? toDisplayString(props.subtitle) }
               </VListItemSubtitle>
             )}
 
-            { renderSlot(slots, 'default', slotProps.value) }
+            { slots.default?.(slotProps.value) }
           </div>
 
           { hasAppend && (
@@ -422,7 +422,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { renderSlot(slots, 'append', slotProps.value) }
+                  { slots.append?.(slotProps.value) }
                 </VDefaultsProvider>
               )}
 

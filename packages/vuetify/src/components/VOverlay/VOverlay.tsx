@@ -43,8 +43,8 @@ import {
   IN_BROWSER,
   omit,
   propsFactory,
-  renderSlot,
-  standardEasing, useRender,
+  standardEasing,
+  useRender,
 } from '@/util'
 
 // Types
@@ -289,7 +289,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     useRender(() => (
       <>
-        { renderSlot(slots, 'activator', {
+        { slots.activator?.({
           isActive: isActive.value,
           targetRef,
           props: mergeProps({
@@ -344,7 +344,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  vClickOutside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,
@@ -356,7 +356,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   { ...contentEvents.value }
                   { ...props.contentProps }
                 >
-                  { renderSlot(slots, 'default', { isActive }) }
+                  { slots.default?.({ isActive }) }
                 </div>
               </MaybeTransition>
             </div>

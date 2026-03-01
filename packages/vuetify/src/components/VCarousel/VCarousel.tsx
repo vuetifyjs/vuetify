@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -183,7 +183,7 @@ export const VCarousel = genericComponent<new <T>(
                           }
 
                           return slots.item
-                            ? renderSlot(slots, 'item', { props, item })
+                            ? slots.item({ props, item })
                             : (<VBtn { ...item } { ...props } />)
                         })}
                       </VDefaultsProvider>

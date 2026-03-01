@@ -21,7 +21,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
@@ -137,7 +137,7 @@ export const VBottomNavigation = genericComponent<new <T>(
         >
           { slots.default && (
             <div class="v-bottom-navigation__content">
-              { renderSlot(slots, 'default') }
+              { slots.default() }
             </div>
           )}
         </props.tag>

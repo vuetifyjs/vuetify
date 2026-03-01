@@ -24,7 +24,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, shallowRef, toRef, watchEffect } from 'vue'
-import { genericComponent, isEmpty, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, isEmpty, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -200,24 +200,24 @@ export const VDataIterator = genericComponent<new <T> (
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'header', slotProps.value) }
+        { slots.header?.(slotProps.value) }
 
         <MaybeTransition transition={ props.transition }>
           { props.loading ? (
             <LoaderSlot key="loader" name="v-data-iterator" active>
-              { slotProps => renderSlot(slots, 'loader', slotProps) }
+              { slotProps => slots.loader?.(slotProps) }
             </LoaderSlot>
           ) : (
             <div key="items">
               { !currentItems.value.length
-                ? renderSlot(slots, 'no-data')
-                : renderSlot(slots, 'default', slotProps.value)
+                ? slots['no-data']?.()
+                : slots.default?.(slotProps.value)
               }
             </div>
           )}
         </MaybeTransition>
 
-        { renderSlot(slots, 'footer', slotProps.value) }
+        { slots.footer?.(slotProps.value) }
       </props.tag>
     ))
 

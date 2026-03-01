@@ -7,7 +7,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVLayoutProps = propsFactory({
   ...makeComponentProps(),
@@ -37,7 +37,7 @@ export const VLayout = genericComponent()({
           props.style,
         ]}
       >
-        { renderSlot(slots, 'default') }
+        { slots.default?.() }
       </div>
     ))
 

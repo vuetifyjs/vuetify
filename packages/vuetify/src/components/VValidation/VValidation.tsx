@@ -2,7 +2,7 @@
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { genericComponent, renderSlot } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
@@ -29,7 +29,7 @@ export const VValidation = genericComponent<new <T>(
   setup (props, { slots }) {
     const validation = useValidation(props, 'validation')
 
-    return () => renderSlot(slots, 'default', validation)
+    return () => slots.default?.(validation)
   },
 })
 

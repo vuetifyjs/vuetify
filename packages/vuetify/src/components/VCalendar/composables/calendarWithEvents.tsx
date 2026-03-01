@@ -435,7 +435,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         { ...data }
         ref_for
         ref={ eventsRef }
-        vRipple={ props.eventRipple ?? true }
+        v-ripple={ props.eventRipple ?? true }
       >
         { slot?.(scope) ?? genName(eventSummary) }
       </div>
@@ -479,7 +479,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         }}
         ref_for
         ref={ eventsRef }
-        vRipple={ props.eventRipple ?? true }
+        v-ripple={ props.eventRipple ?? true }
         { ...events }
       />
     )

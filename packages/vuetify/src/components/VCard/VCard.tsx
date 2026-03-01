@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -168,7 +168,7 @@ export const VCard = genericComponent<VCardSlots>()({
             props.style,
           ]}
           onClick={ isClickable && link.navigate }
-          vRipple={ isClickable && props.ripple }
+          v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (
@@ -224,11 +224,11 @@ export const VCard = genericComponent<VCardSlots>()({
 
           { hasText && (
             <VCardText key="text">
-              { renderSlot(slots, 'text', () => props.text) }
+              { slots.text?.() ?? props.text }
             </VCardText>
           )}
 
-          { renderSlot(slots, 'default') }
+          { slots.default?.() }
 
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />

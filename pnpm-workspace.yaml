@@ -23,7 +23,7 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/cli@0.21.1'
-  - 'vue-jsx-vapor@3.1.16'
+  - 'vue-jsx-vapor@3.2.1'
   - '@vue-jsx-vapor/*'
   - '@napi-rs/wasm-runtime@1.1.1'
 

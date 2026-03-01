@@ -11,7 +11,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, renderSlot, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
@@ -71,7 +71,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
               class="v-messages__message"
               key={ `${i}-${messages.value}` }
             >
-              { slots.message ? renderSlot(slots, 'message', { message }) : message }
+              { slots.message ? slots.message({ message }) : message }
             </div>
           ))
         )}

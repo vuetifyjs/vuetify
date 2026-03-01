@@ -19,7 +19,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRefs } from 'vue'
-import { genericComponent, getPropertyFromItem, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -205,24 +205,24 @@ export const VStepper = genericComponent<new <TModel>(
                 <VStepperWindowItem
                   value={ item.value }
                   v-slots={{
-                    default: () => renderSlot(slots, `item.${item.value}`, item, () => renderSlot(slots, 'item', item)),
+                    default: () => slots[`item.${item.value}`]?.(item) ?? slots.item?.(item),
                   }}
                 />
               ))}
             </VStepperWindow>
           )}
 
-          { renderSlot(slots, 'default', { prev, next }) }
+          { slots.default?.({ prev, next }) }
 
           { hasActions && (
-            renderSlot(slots, 'actions', { next, prev }, () => (
+            slots.actions?.({ next, prev }) ?? (
               <VStepperActions
                 key="stepper-actions"
                 onClick:prev={ prev }
                 onClick:next={ next }
                 v-slots={ slots }
               />
-            ))
+            )
           )}
         </VSheet>
       )

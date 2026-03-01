@@ -3,7 +3,7 @@ import { VItemGroupSymbol } from './VItemGroup'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
-import { genericComponent, renderSlot } from '@/util'
+import { genericComponent } from '@/util'
 
 type VItemSlots = {
   default: {
@@ -27,7 +27,7 @@ export const VItem = genericComponent<VItemSlots>()({
 
   setup (props, { slots }) {
     const { isSelected, select, toggle, selectedClass, value, disabled } = useGroupItem(props, VItemGroupSymbol)
-    return () => renderSlot(slots, 'default', {
+    return () => slots.default?.({
       isSelected: isSelected.value,
       selectedClass: selectedClass.value,
       select,

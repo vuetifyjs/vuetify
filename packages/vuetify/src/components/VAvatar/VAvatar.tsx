@@ -18,7 +18,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVAvatarProps = propsFactory({
   start: Boolean,
@@ -92,7 +92,7 @@ export const VAvatar = genericComponent()({
               },
             }}
           >
-            { renderSlot(slots, 'default') }
+            { slots.default() }
           </VDefaultsProvider>
         )}
 

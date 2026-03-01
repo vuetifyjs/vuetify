@@ -14,10 +14,8 @@ export default {
         const name = node.name.name
 
         if (
-          name === 'v-slots' ||
-          name === 'v-show' ||
           !hyphenatedRe.test(name) ||
-          name.startsWith('v-model') ||
+          name.startsWith('v-') ||
           name.startsWith('aria-') ||
           name.startsWith('data-') ||
           svgTags.has(node.parent.name.name)
@@ -27,11 +25,7 @@ export default {
           node,
           message: 'JSX props should be camelCase',
           fix (fixer) {
-            const parts = name.split(/(_)/)
-            const newName = name.startsWith('v-')
-              ? camelCase(parts[0]) + parts.slice(1).join('')
-              : camelCase(name)
-            return fixer.replaceText(node.name, newName)
+            return fixer.replaceText(node.name, camelCase(name))
           },
         })
       },

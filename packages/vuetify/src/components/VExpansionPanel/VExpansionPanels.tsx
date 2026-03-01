@@ -14,7 +14,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, pick, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -116,7 +116,7 @@ export const VExpansionPanels = genericComponent<new <TModel>(
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'default', { prev, next }) }
+        { slots.default?.({ prev, next }) }
       </props.tag>
     ))
 

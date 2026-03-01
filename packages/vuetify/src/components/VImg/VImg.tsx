@@ -32,8 +32,8 @@ import {
   genericComponent,
   getCurrentInstance,
   propsFactory,
-  renderSlot,
-  SUPPORTS_INTERSECTION, useRender,
+  SUPPORTS_INTERSECTION,
+  useRender,
 } from '@/util'
 
 // Types
@@ -272,7 +272,7 @@ export const VImg = genericComponent<VImgSlots>()({
         />
       )
 
-      const sources = renderSlot(slots, 'sources')
+      const sources = slots.sources?.()
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -310,7 +310,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return (
         <MaybeTransition transition={ props.transition } appear>
           { (state.value === 'loading' || (state.value === 'error' && !slots.error)) &&
-          <div class="v-img__placeholder">{ renderSlot(slots, 'placeholder') }</div>
+          <div class="v-img__placeholder">{ slots.placeholder() }</div>
           }
         </MaybeTransition>
       )
@@ -322,7 +322,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return (
         <MaybeTransition transition={ props.transition } appear>
           { state.value === 'error' &&
-            <div class="v-img__error">{ renderSlot(slots, 'error') }</div>
+            <div class="v-img__error">{ slots.error() }</div>
           }
         </MaybeTransition>
       )
@@ -375,10 +375,10 @@ export const VImg = genericComponent<VImgSlots>()({
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }
           role={ props.alt ? 'img' : undefined }
-          vIntersect={[{
+          v-intersect_once={{
             handler: init,
             options: props.options,
-          }, null, ['once']]}
+          }}
         >{{
           additional: () => (
             <>

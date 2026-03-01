@@ -20,7 +20,7 @@ import vTooltip from '@/directives/tooltip'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
-import { formatTime, genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -235,7 +235,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
-            { renderSlot(slots, 'default', slotProps, () => (
+            { slots.default?.(slotProps) ?? (
               <>
                 { props.variant !== 'mini' && (
                   <>
@@ -258,7 +258,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         class={ pillClasses }
                         style={ pillStyles }
                       >
-                        { renderSlot(slots, 'prepend', slotProps) }
+                        { slots.prepend(slotProps) }
                       </div>
                     )}
                     { props.splitTime
@@ -317,7 +317,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         class={ pillClasses }
                         style={ pillStyles }
                       >
-                        { renderSlot(slots, 'prepend', slotProps) }
+                        { slots.prepend(slotProps) }
                       </div>
                     )}
                     { !props.hidePlay && (
@@ -352,7 +352,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         { ...props.volumeProps }
                       />
                     )}
-                    { renderSlot(slots, 'append', slotProps) }
+                    { slots.append?.(slotProps) }
                     { !props.hideFullscreen && (
                       <VIconBtn
                         icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
@@ -366,7 +366,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
                 { props.variant === 'mini' && (<VSpacer />) }
               </>
-            ))}
+            )}
           </VDefaultsProvider>
         </div>
       )

@@ -16,7 +16,7 @@ const TestComponent = defineComponent({
   },
   setup (props) {
     return () => (
-      <div vTouch={ props.value } style="width: 200px; height: 200px; background: red;" />
+      <div v-touch={ props.value } style="width: 200px; height: 200px; background: red;" />
     )
   },
 })

@@ -3,7 +3,7 @@ import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVBannerActionsProps = propsFactory({
   color: String,
@@ -35,7 +35,7 @@ export const VBannerActions = genericComponent()({
         ]}
         style={ props.style }
       >
-        { renderSlot(slots, 'default') }
+        { slots.default?.() }
       </div>
     ))
 

@@ -3,7 +3,7 @@ import { makeDelayProps, useDelay } from '@/composables/delay'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { genericComponent, propsFactory, renderSlot } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 type VHoverSlots = {
   default: {
@@ -35,7 +35,7 @@ export const VHover = genericComponent<VHoverSlots>()({
     const isHovering = useProxiedModel(props, 'modelValue')
     const { runOpenDelay, runCloseDelay } = useDelay(props, value => !props.disabled && (isHovering.value = value))
 
-    return () => renderSlot(slots, 'default', {
+    return () => slots.default?.({
       isHovering: isHovering.value,
       props: {
         onMouseenter: runOpenDelay,

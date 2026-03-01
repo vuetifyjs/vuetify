@@ -25,7 +25,7 @@ import {
   getScrollPosition,
   getScrollSize,
 } from './helpers'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, renderSlot, useRender } from '@/util'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -424,11 +424,11 @@ export const VSlideGroup = genericComponent<new <T>(
             onMousedown={ onFocusAffixes }
             onClick={ () => hasPrev.value && scrollTo('prev') }
           >
-            { renderSlot(slots, 'prev', slotProps.value, () => (
+            { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ))}
+            )}
           </div>
         )}
 
@@ -448,7 +448,7 @@ export const VSlideGroup = genericComponent<new <T>(
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
           >
-            { renderSlot(slots, 'default', slotProps.value) }
+            { slots.default?.(slotProps.value) }
           </div>
         </div>
 
@@ -462,11 +462,11 @@ export const VSlideGroup = genericComponent<new <T>(
             onMousedown={ onFocusAffixes }
             onClick={ () => hasNext.value && scrollTo('next') }
           >
-            { renderSlot(slots, 'next', slotProps.value, () => (
+            { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ))}
+            )}
           </div>
         )}
       </props.tag>
