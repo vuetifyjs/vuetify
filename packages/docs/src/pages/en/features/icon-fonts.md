@@ -16,7 +16,7 @@ features:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports many popular icon libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome](https://fontawesome.com/), [Phosphor](https://phosphoricons.com/), [Lucide](https://lucide.dev/), [Tabler](https://tabler.io/icons), [Remix Icon](https://remixicon.com/), [BoxIcons](https://boxicons.com/), and [Carbon](https://carbondesignsystem.com/elements/icons/library/).
 
 <PageFeatures />
 
@@ -203,37 +203,48 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 
 <DocIconList />
 
-#### MDI - UnoCSS
+#### UnoCSS icon sets
 
-You can use Vuetify's MDI icon set with [UnoCSS Preset Icon](https://unocss.dev/presets/icons) by installing the `@unocss/preset-icons` package, all your icons will be tree-shaken and only the icons you use will be included in your final CSS bundle.
+Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](https://unocss.dev/presets/icons). All icons are tree-shaken so only the icons you use are included in your final CSS bundle.
 
-You need to install `unocss` and `@iconify-json/mdi` dev dependencies first:
+| Icon library | Iconify package | Vuetify import | Default set name |
+|---|---|---|---|
+| [Material Design Icons](https://pictogrammers.com/library/mdi/) | `@iconify-json/mdi` | `vuetify/iconsets/mdi-unocss` | `mdi` |
+| [Font Awesome 6](https://fontawesome.com/) | `@iconify-json/fa6-solid`<br>`@iconify-json/fa6-regular` | `vuetify/iconsets/fa6` | `fa6` |
+| [Phosphor](https://phosphoricons.com/) | `@iconify-json/ph` | `vuetify/iconsets/ph` | `ph` |
+| [Lucide](https://lucide.dev/) | `@iconify-json/lucide` | `vuetify/iconsets/lucide` | `lucide` |
+| [Tabler](https://tabler.io/icons) | `@iconify-json/tabler` | `vuetify/iconsets/tabler` | `tabler` |
+| [Remix Icon](https://remixicon.com/) | `@iconify-json/ri` | `vuetify/iconsets/ri` | `ri` |
+| [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
+| [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
+
+Install `unocss` and the Iconify package for your chosen library:
 
 ::: tabs
 
 ```bash [pnpm]
-pnpm add unocss @iconify-json/mdi -D
+pnpm add unocss @iconify-json/ph -D
 ```
 
 ```bash [yarn]
-yarn add unocss @iconify-json/mdi -D
+yarn add unocss @iconify-json/ph -D
 ```
 
 ```bash [npm]
-npm install unocss @iconify-json/mdi -D
+npm install unocss @iconify-json/ph -D
 ```
 
 ```bash [bun]
-bun add unocss @iconify-json/mdi -D
+bun add unocss @iconify-json/ph -D
 ```
 
 :::
 
-then, configure UnoCSS in your project adding the preset (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
+Then configure UnoCSS in your project (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
 
 ::: warning
 
-Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify's MDI icon set relies on it.
+Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify icon sets rely on it.
 
 :::
 
@@ -247,18 +258,18 @@ export default defineConfig({
 })
 ```
 
-To register the icon set, use the following code:
+Register the icon set in your Vuetify configuration. The following example uses Phosphor, but you can substitute any set from the table above:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-unocss'
+import { aliases, ph } from 'vuetify/iconsets/ph'
 
 export default createVuetify({
   icons: {
-    defaultSet: 'mdi',
+    defaultSet: 'ph',
     aliases,
     sets: {
-      mdi,
+      ph,
     },
   },
 })
