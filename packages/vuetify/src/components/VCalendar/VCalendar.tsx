@@ -365,7 +365,7 @@ export const VCalendar = genericComponent<new (
         <Component
           ref={ root }
           class={['v-calendar', { 'v-calendar-events': !base.noEvents.value }]}
-          vResize_quiet={ base.updateEventVisibility }
+          v-resize_quiet={ base.updateEventVisibility }
           role="grid"
           { ...Component.filterProps(props) }
           start={ start.date }

@@ -281,7 +281,7 @@ export const VCalendarDaily = genericComponent<new (
       <div
         class={['v-calendar-daily', attrs.class]}
         onDragstart={ (e: MouseEvent) => e.preventDefault() }
-        vResize_quiet={ onResize }
+        v-resize_quiet={ onResize }
       >
         { !props.hideHeader ? genHead() : undefined }
         { genBody() }

@@ -103,7 +103,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
         disabled={ expansionPanel.disabled.value }
         aria-expanded={ expansionPanel.isSelected.value }
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
-        vRipple={ props.ripple }
+        v-ripple={ props.ripple }
       >
         <span class="v-expansion-panel-title__overlay" />
 

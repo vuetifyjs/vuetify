@@ -327,9 +327,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         class={ fieldClass }
                         value={ model.value }
                         onInput={ onInput }
-                        vIntersect={[{
+                        v-intersect_once={{
                           handler: onIntersect,
-                        }, null, ['once']]}
+                        }}
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }

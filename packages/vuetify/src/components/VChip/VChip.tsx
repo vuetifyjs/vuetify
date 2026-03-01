@@ -234,7 +234,7 @@ export const VChip = genericComponent<VChipSlots>()({
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          vRipple={[isClickable.value && props.ripple, null]}
+          v-ripple={ isClickable.value && props.ripple }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 

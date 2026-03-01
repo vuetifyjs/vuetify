@@ -110,9 +110,11 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       >
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>
-            <VListGroupActivator>
-              { renderSlot(slots, 'activator', { props: activatorProps.value, isOpen: isOpen.value }) }
-            </VListGroupActivator>
+            { () => ( // mark as dynamic
+              <VListGroupActivator>
+                { renderSlot(slots, 'activator', { props: activatorProps.value, isOpen: isOpen.value }) }
+              </VListGroupActivator>
+            )}
           </VDefaultsProvider>
         )}
 

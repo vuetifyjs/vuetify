@@ -163,8 +163,8 @@
     "@vitest/ui": "^4.0.13",
     "@vizzly-testing/cli": "^0.21.1",
     "@vizzly-testing/vitest": "^0.0.3",
-    "@vue/reactivity": "^3.6.0-beta.3",
-    "@vue/shared": "^3.6.0-beta.3",
+    "@vue/reactivity": "^3.5.25",
+    "@vue/shared": "^3.5.25",
     "@vue/test-utils": "^2.4.6",
     "@vuetify/babel-plugin-jsx": "^1.7.0",
     "acorn-walk": "^8.3.4",
@@ -198,9 +198,9 @@
     "vite-live-preview": "^0.4.0",
     "vite-ssr": "^0.17.2",
     "vitest": "^4.0.13",
-    "vue": "^3.6.0-beta.3",
+    "vue": "^3.5.25",
     "vue-i18n": "^11.1.12",
-    "vue-jsx-vapor": "^3.1.16",
+    "vue-jsx-vapor": "^3.2.1",
     "vue-router": "^4.6.3"
   },
   "peerDependencies": {

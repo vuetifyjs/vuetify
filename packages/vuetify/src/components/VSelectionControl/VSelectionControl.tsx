@@ -282,7 +282,7 @@ export const VSelectionControl = genericComponent<new <T>(
               class={[
                 'v-selection-control__input',
               ]}
-              vRipple={[
+              v-ripple={[
                 !props.disabled && !props.readonly && props.ripple,
                 null,
                 ['center', 'circle'],

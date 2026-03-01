@@ -318,7 +318,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           role={ role.value }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          vRipple={ isClickable.value && rippleOptions.value }
+          v-ripple={ isClickable.value && rippleOptions.value }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
