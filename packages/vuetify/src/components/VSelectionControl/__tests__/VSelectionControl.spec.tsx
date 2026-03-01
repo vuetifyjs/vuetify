@@ -1,5 +1,5 @@
 // Components
-import { makeVSelectionControlProps, useSelectionControl } from '../VSelectionControl'
+import { makeVSelectionControlProps, useSelectionControl, VSelectionControl } from '../VSelectionControl'
 
 // Utilities
 import { mount } from '@vue/test-utils'
@@ -65,5 +65,24 @@ describe('VSelectionControl', () => {
     await nextTick()
     expect(update).toHaveBeenCalledTimes(1)
     expect(update).toHaveBeenCalledWith('off')
+  })
+
+  it('should apply focus classes when readonly and focused', async () => {
+    const wrapper = mount(VSelectionControl, {
+      global: { plugins: [vuetify] },
+      attachTo: document.body,
+      props: {
+        readonly: true,
+      },
+    })
+    const input = wrapper.find('input')
+    await input.trigger('keydown', { key: 'Tab' })
+    input.element.focus()
+    await nextTick()
+    expect(wrapper.classes()).toContain('v-selection-control--focused')
+    expect(wrapper.classes()).toContain('v-selection-control--focus-visible')
+    await input.trigger('blur')
+    await nextTick()
+    expect(wrapper.classes()).not.toContain('v-selection-control--focused')
   })
 })
