@@ -5,7 +5,7 @@ import { VListItem } from '@/components/VList'
 import { VTextField } from '@/components/VTextField'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
+import { commands, render, screen, showcase, userEvent, wait, waitForClickable } from '@test'
 import { getAllByRole, waitFor } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
@@ -981,23 +981,19 @@ describe('VSelect', () => {
       await userEvent.click(element, { force: true })
       await commands.waitStable('.v-list')
 
-      await userEvent.keyboard('{ArrowDown}')
-      await userEvent.keyboard('{Tab}')
-
-      await waitFor(() => {
-        expect(screen.getByRole('listbox')).toBeInTheDocument()
-      }, { timeout: 3000 })
-
       const menu = await screen.findByRole('listbox')
       await expect.element(menu).toBeVisible()
 
-      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+      await waitFor(() => {
+        expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+      }, { timeout: 3000 })
+
+      await wait(400)
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-1')).toHaveFocus()
 
       await userEvent.keyboard('{Tab}')
-      await expect.poll(() => screen.getByTestId('button-1')).toHaveFocus()
-
-      await userEvent.keyboard('{Tab}')
-      await expect.poll(() => screen.getByTestId('button-2')).toHaveFocus()
+      expect(screen.getByTestId('button-2')).toHaveFocus()
 
       // Tab past footer closes menu
       await userEvent.keyboard('{Tab}')
