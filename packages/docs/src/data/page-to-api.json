@@ -120,6 +120,7 @@
   "components/locale-providers": ["VLocaleProvider"],
   "components/mask-inputs": ["VMaskInput"],
   "components/menus": ["VMenu"],
+  "components/morphing-icons": ["VMorphingIcon"],
   "components/navigation-drawers": ["VNavigationDrawer"],
   "components/no-ssr": ["VNoSsr"],
   "components/number-inputs": ["VNumberInput"],
