@@ -175,6 +175,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SponsorCard: typeof import('./src/components/sponsor/Card.vue')['default']
     SponsorLink: typeof import('./src/components/sponsor/Link.vue')['default']
+    SponsorSnackbarPopup: typeof import('./src/components/sponsor/SnackbarPopup.vue')['default']
     SponsorSponsors: typeof import('./src/components/sponsor/Sponsors.vue')['default']
     UserBadgesUserAdminBadge: typeof import('./src/components/user/badges/UserAdminBadge.vue')['default']
     UserBadgesUserOneBadge: typeof import('./src/components/user/badges/UserOneBadge.vue')['default']
