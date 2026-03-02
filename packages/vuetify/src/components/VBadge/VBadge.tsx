@@ -72,7 +72,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     const { locationStyles } = useLocation(props, true, side => {
       const base = props.floating
         ? (props.dot ? 2 : 4)
-        : (props.dot ? (Number(props.dotSize) ?? 8) : 12)
+        : (props.dot ? Number(props.dotSize ?? 8) : 12)
 
       return base + (
         ['top', 'bottom'].includes(side) ? Number(props.offsetY ?? 0)

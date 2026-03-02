@@ -369,9 +369,29 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function getSelectedIndex () {
+      return displayItems.value.findIndex(
+        item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
+      )
+    }
+    function getSelectedFocusableIndex () {
+      if (!model.value.length) return -1
+      const comparator = props.valueComparator || deepEqual
+      let focusableIndex = 0
+      for (const item of displayItems.value) {
+        const isSelected = model.value.some(s => comparator(s.value, item.value))
+        if (isSelected) return item.props.disabled ? -1 : focusableIndex
+        if (!item.props.disabled) focusableIndex++
+      }
+      return -1
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (listRef.value) {
+        const index = getSelectedFocusableIndex()
+        listRef.value.focus(index >= 0 ? index : 'first')
       }
     }
     function onAfterLeave () {
@@ -397,9 +417,7 @@ export const VSelect = genericComponent<new <
 
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
-        )
+        const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
