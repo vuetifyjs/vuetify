@@ -1,6 +1,6 @@
 @use '../tools';
 
-@include tools.layer('base') {
+@include tools.layer('core.base') {
   .v-locale {
     &--is-rtl {
       direction: rtl;

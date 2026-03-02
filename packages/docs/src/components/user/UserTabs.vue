@@ -3,7 +3,7 @@
     <v-tab
       v-for="(tab, i) in tabs"
       :key="i"
-      class="text-none text-body-2 font-weight-regular"
+      class="text-none text-body-medium font-weight-regular"
       v-bind="tab"
     />
   </v-tabs>

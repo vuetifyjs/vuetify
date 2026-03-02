@@ -75,5 +75,79 @@ describe('VTimePicker', () => {
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe('01:00')
     })
+
+    describe('allowed values', () => {
+      it('skips over disallowed values when using arrows up/down', async () => {
+        const model = ref<string | null>('10:30')
+        render(() => (
+          <VTimePicker
+            v-model={ model.value }
+            variant="input"
+            allowedHours={[8, 10, 12, 14]}
+            allowedMinutes={[0, 15, 30, 45]}
+          />
+        ))
+
+        const input = screen.getAllByCSS('input')
+
+        await userEvent.click(input[0])
+        await userEvent.keyboard('{ArrowUp}')
+        expect(model.value).toBe('12:30') // up, skip over 11
+        await userEvent.keyboard('{ArrowUp}')
+        expect(model.value).toBe('14:30') // up, skip over 13
+        await userEvent.keyboard('{ArrowDown}')
+        expect(model.value).toBe('12:30') // down, skip over 13
+
+        await userEvent.click(input[1])
+        await userEvent.keyboard('{ArrowUp}')
+        expect(model.value).toBe('12:45') // up, 30 -> 45
+        await userEvent.keyboard('{ArrowUp}')
+        expect(model.value).toBe('12:00') // up, 45 -> 00
+        await userEvent.keyboard('{ArrowDown}')
+        expect(model.value).toBe('12:45') // down, 00 -> 45
+      })
+
+      it('highlights invalid input when typing', async () => {
+        const model = ref<string | null>('10:30')
+        render(() => (
+          <VTimePicker
+            v-model={ model.value }
+            variant="input"
+            allowedHours={[8, 10, 12, 14]}
+            allowedMinutes={[0, 15, 30, 45]}
+          />
+        ))
+
+        const inputs = screen.getAllByCSS('.v-input')
+        const hourInput = inputs[0]
+        const minuteInput = inputs[1]
+
+        expect(hourInput).not.toHaveClass('v-input--error')
+        expect(minuteInput).not.toHaveClass('v-input--error')
+
+        // typing disallowed hour
+        await userEvent.click(hourInput.querySelector('input')!)
+        await userEvent.keyboard('1')
+        expect(hourInput).toHaveClass('v-input--error')
+        expect(minuteInput).not.toHaveClass('v-input--error')
+
+        await userEvent.keyboard('8')
+        expect(hourInput).not.toHaveClass('v-input--error')
+
+        // typing disallowed minute
+        await userEvent.click(minuteInput.querySelector('input')!)
+        await userEvent.keyboard('19')
+        expect(minuteInput).toHaveClass('v-input--error')
+
+        await userEvent.keyboard('30')
+        expect(minuteInput).not.toHaveClass('v-input--error')
+
+        // typing disallowed hour again, should keep minute valid
+        await userEvent.click(hourInput.querySelector('input')!)
+        await userEvent.keyboard('1')
+        expect(hourInput).toHaveClass('v-input--error')
+        expect(minuteInput).not.toHaveClass('v-input--error')
+      })
+    })
   })
 })

@@ -18,9 +18,6 @@
     &__subtitle
       font-size: .75rem
 
-    .v-expansion-panel-title
-      opacity: var(--v-medium-emphasis-opacity)
-
     .v-expansion-panel-text
       padding-inline-start: 32px
 
@@ -48,7 +45,7 @@
           opacity: 0
 
   .v-stepper-vertical-item__avatar.v-avatar
-    background: rgba(var(--v-theme-surface-variant), var(--v-medium-emphasis-opacity))
+    background: tools.theme-color('surface-variant', var(--v-medium-emphasis-opacity))
     color: rgb(var(--v-theme-on-surface-variant))
     transition-property: background
     align-self: start

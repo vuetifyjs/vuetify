@@ -91,6 +91,7 @@ export default {
     hour: '小时',
     minute: '分钟',
     second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: '字符{0}是不允许的',
     notEmpty: '请至少选择一个值',
     pattern: '格式无效',
+  },
+  command: {
+    search: '输入命令或搜索...',
   },
   hotkey: {
     then: '然后',

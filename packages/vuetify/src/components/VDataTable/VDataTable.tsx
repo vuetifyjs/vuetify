@@ -14,14 +14,20 @@ import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
+import {
+  createPagination,
+  makeDataTablePaginateProps,
+  providePagination,
+  usePaginatedGroups,
+  usePaginatedItems,
+} from './composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
-import { computed, toRef, toRefs } from 'vue'
+import { computed, toRef, toRefs, toValue } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -38,7 +44,7 @@ export type VDataTableSlotProps<T> = {
   sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
   pageCount: number
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage']
+  setItemsPerPage: (value: number) => void
   someSelected: boolean
   allSelected: boolean
   isSelected: ReturnType<typeof provideSelection>['isSelected']
@@ -160,11 +166,29 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
-    const itemsLength = computed(() => flatItems.value.length)
 
-    const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
-    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
+    const pageBy = computed(() => {
+      if (props.pageBy === 'auto') {
+        return props.groupBy.length ? 'group' : 'item'
+      }
+      return props.pageBy
+    })
+
+    const {
+      pageCount,
+      setItemsPerPage,
+      paginatedItems,
+    } = usePaginatedGroups({
+      pageBy,
+      sortedItems,
+      paginate: items => {
+        const itemsLength = computed(() => toValue(items).length)
+        const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
+        const { paginatedItems } = usePaginatedItems({ items, startIndex, stopIndex, itemsPerPage })
+        return { paginatedItems, pageCount, setItemsPerPage }
+      },
+      group: items => useGroupedItems(items, groupBy, opened, () => !!slots['group-summary']),
+    })
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 

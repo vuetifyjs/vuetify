@@ -8,6 +8,7 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
@@ -40,6 +41,7 @@ export const makeVOtpInputProps = propsFactory({
     type: [Number, String],
     default: 6,
   },
+  masked: Boolean,
   modelValue: {
     type: [Number, String],
     default: undefined,
@@ -50,6 +52,7 @@ export const makeVOtpInputProps = propsFactory({
     default: 'number',
   },
 
+  ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeFocusProps(),
   ...pick(makeVFieldProps({
@@ -81,6 +84,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
@@ -257,6 +261,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             {
               'v-otp-input--divided': !!props.divider,
             },
+            densityClasses.value,
             props.class,
           ]}
           style={[
@@ -299,7 +304,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           min={ props.type === 'number' ? 0 : undefined }
                           maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
-                          type={ props.type === 'number' ? 'text' : props.type }
+                          type={ props.masked ? 'password' : props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }
                           onInput={ onInput }
                           onFocus={ e => onFocus(e, i) }

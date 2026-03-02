@@ -91,6 +91,7 @@ export default {
     hour: 'Valanda',
     minute: 'Minutės',
     second: 'Sekundės',
+    notAllowed: 'Reikšmė neleidžiama',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Simbolis {0} nėra leidžiamas',
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
+  },
+  command: {
+    search: 'Įveskite komandą arba ieškokite...',
   },
   hotkey: {
     then: 'tada',

@@ -57,9 +57,8 @@
         z-index: 1
         @include tools.absolute(true)
 
-      @media (forced-colors: active)
-        @media (pointer: fine)
-          cursor: progress
+      @media (forced-colors: active) and (pointer: fine)
+        cursor: progress
 
     &__avatar
       border-radius: 50%

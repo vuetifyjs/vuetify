@@ -3,67 +3,33 @@ import './VGrid.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { breakpoints } from '@/composables/display'
+import { makeDensityProps } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { capitalize, computed, h } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { computed, h } from 'vue'
+import { convertToUnit, deprecate, genericComponent, propsFactory } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
-import type { Breakpoint } from '@/composables/display'
+import type { PropType } from 'vue'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
-type BreakpointAlign = `align${Capitalize<Breakpoint>}`
-type BreakpointJustify = `justify${Capitalize<Breakpoint>}`
-type BreakpointAlignContent = `alignContent${Capitalize<Breakpoint>}`
-
 const SPACE = ['space-between', 'space-around', 'space-evenly'] as const
 
-function makeRowProps <
-  Name extends BreakpointAlign | BreakpointJustify | BreakpointAlignContent,
-  Type,
-> (prefix: string, def: () => Prop<Type, null>) {
-  return breakpoints.reduce((props, val) => {
-    const prefixKey = prefix + capitalize(val) as Name
-    props[prefixKey] = def()
-    return props
-  }, {} as Record<Name, Prop<Type, null>>)
-}
-
 const ALIGN_VALUES = [...ALIGNMENT, 'baseline', 'stretch'] as const
-type AlignValue = typeof ALIGN_VALUES[number]
 const alignValidator = (str: any) => ALIGN_VALUES.includes(str)
-const alignProps = makeRowProps<BreakpointAlign, AlignValue>('align', () => ({
-  type: String as PropType<AlignValue>,
-  default: null,
-  validator: alignValidator,
-}))
 
 const JUSTIFY_VALUES = [...ALIGNMENT, ...SPACE] as const
-type JustifyValue = typeof JUSTIFY_VALUES[number]
 const justifyValidator = (str: any) => JUSTIFY_VALUES.includes(str)
-const justifyProps = makeRowProps<BreakpointJustify, JustifyValue>('justify', () => ({
-  type: String as PropType<JustifyValue>,
-  default: null,
-  validator: justifyValidator,
-}))
 
 const ALIGN_CONTENT_VALUES = [...ALIGNMENT, ...SPACE, 'stretch'] as const
-type AlignContentValue = typeof ALIGN_CONTENT_VALUES[number]
 const alignContentValidator = (str: any) => ALIGN_CONTENT_VALUES.includes(str)
-const alignContentProps = makeRowProps<BreakpointAlignContent, AlignContentValue>('alignContent', () => ({
-  type: String as PropType<AlignContentValue>,
-  default: null,
-  validator: alignContentValidator,
-}))
 
 const propMap = {
-  align: Object.keys(alignProps),
-  justify: Object.keys(justifyProps),
-  alignContent: Object.keys(alignContentProps),
+  align: ['align', 'alignSm', 'alignMd', 'alignLg', 'alignXl', 'alignXxl'],
+  justify: ['justify', 'justifySm', 'justifyMd', 'justifyLg', 'justifyXl', 'justifyXxl'],
+  alignContent: ['alignContent', 'alignContentSm', 'alignContentMd', 'alignContentLg', 'alignContentXl', 'alignContentXxl'],
 }
 
 const classMap = {
@@ -72,7 +38,7 @@ const classMap = {
   alignContent: 'align-content',
 }
 
-function breakpointClass (type: keyof typeof propMap, prop: string, val: string) {
+function breakpointClass (type: keyof typeof classMap, prop: string, val: string) {
   let className = classMap[type]
   if (val == null) {
     return undefined
@@ -88,28 +54,50 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
 }
 
 export const makeVRowProps = propsFactory({
+  /** @deprecated use density="compact" instead */
   dense: Boolean,
-  noGutters: Boolean,
-  align: {
-    type: String as PropType<typeof ALIGN_VALUES[number]>,
-    default: null,
-    validator: alignValidator,
-  },
-  ...alignProps,
-  justify: {
-    type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
-    default: null,
-    validator: justifyValidator,
-  },
-  ...justifyProps,
-  alignContent: {
-    type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
-    default: null,
-    validator: alignContentValidator,
-  },
+  /** @deprecated use align-* class instead */
+  align: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use align-sm-* class instead */
+  alignSm: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use align-md-* class instead */
+  alignMd: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use align-lg-* class instead */
+  alignLg: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use align-xl-* class instead */
+  alignXl: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use align-xxl-* class instead */
+  alignXxl: { type: String as PropType<typeof ALIGN_VALUES[number]>, default: null, validator: alignValidator },
+  /** @deprecated use justify-* class instead */
+  justify: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use justify-sm-* class instead */
+  justifySm: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use justify-md-* class instead */
+  justifyMd: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use justify-lg-* class instead */
+  justifyLg: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use justify-xl-* class instead */
+  justifyXl: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use justify-xxl-* class instead */
+  justifyXxl: { type: String as PropType<typeof JUSTIFY_VALUES[number]>, default: null, validator: justifyValidator },
+  /** @deprecated use align-content-* class instead */
+  alignContent: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
+  /** @deprecated use align-content-sm-* class instead */
+  alignContentSm: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
+  /** @deprecated use align-content-md-* class instead */
+  alignContentMd: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
+  /** @deprecated use align-content-lg-* class instead */
+  alignContentLg: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
+  /** @deprecated use align-content-xl-* class instead */
+  alignContentXl: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
+  /** @deprecated use align-content-xxl-* class instead */
+  alignContentXxl: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
 
-  ...alignContentProps,
+  noGutters: Boolean,
+  gap: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  size: [Number, String],
   ...makeComponentProps(),
+  ...makeDensityProps(),
   ...makeTagProps(),
 }, 'VRow')
 
@@ -119,6 +107,13 @@ export const VRow = genericComponent()({
   props: makeVRowProps(),
 
   setup (props, { slots }) {
+    if (props.dense) {
+      deprecate('dense', 'density="comfortable"')
+    }
+    if (props.noGutters) {
+      deprecate('noGutters', 'density="compact"')
+    }
+
     const classes = computed(() => {
       const classList: any[] = []
 
@@ -133,8 +128,9 @@ export const VRow = genericComponent()({
       }
 
       classList.push({
-        'v-row--no-gutters': props.noGutters,
-        'v-row--dense': props.dense,
+        'v-row--density-default': props.density === 'default' && !props.noGutters && !props.dense,
+        'v-row--density-compact': props.density === 'compact' || props.noGutters,
+        'v-row--density-comfortable': props.density === 'comfortable' || props.dense,
         [`align-${props.align}`]: props.align,
         [`justify-${props.justify}`]: props.justify,
         [`align-content-${props.alignContent}`]: props.alignContent,
@@ -143,13 +139,32 @@ export const VRow = genericComponent()({
       return classList
     })
 
+    const horizontalGap = computed(() => {
+      return (Array.isArray(props.gap))
+        ? convertToUnit(props.gap[0] || 0)
+        : convertToUnit(props.gap)
+    })
+
+    const verticalGap = computed(() => {
+      return (Array.isArray(props.gap))
+        ? convertToUnit(props.gap[1] || 0)
+        : horizontalGap.value
+    })
+
     return () => h(props.tag, {
       class: [
         'v-row',
         classes.value,
         props.class,
       ],
-      style: props.style,
+      style: [
+        {
+          '--v-col-gap-x': horizontalGap.value,
+          '--v-col-gap-y': verticalGap.value,
+          '--v-row-columns': props.size,
+        },
+        props.style,
+      ],
     }, slots.default?.())
   },
 })

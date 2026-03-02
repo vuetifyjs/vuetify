@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: File upload
   description: The file upload component is a drag and drop area for uploading files.
@@ -17,12 +16,6 @@ features:
 # File upload
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
-
-:::
 
 ## Installation
 

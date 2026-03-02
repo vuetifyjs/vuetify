@@ -2,13 +2,13 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, shallowRef, toRef } from 'vue'
+import { computed, inject, provide, shallowRef, toRef, toValue } from 'vue'
 import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
-import type { EventProp } from '@/util'
+import type { EventProp, ValueComparator } from '@/util'
 
 export interface SelectableItem {
   value: any
@@ -37,7 +37,7 @@ export interface DataTableSelectStrategy {
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   selectStrategy: 'single' | 'page' | 'all'
-  valueComparator?: typeof deepEqual
+  valueComparator?: ValueComparator
   'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
 
@@ -90,14 +90,14 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-  valueComparator: Function as PropType<typeof deepEqual>,
+  valueComparator: Function as PropType<ValueComparator>,
 }, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
 
 export function provideSelection (
   props: SelectionProps,
-  { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: Ref<SelectableItem[]> }
+  { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: MaybeRefOrGetter<readonly SelectableItem[]> }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     const customComparator = props.valueComparator
@@ -116,7 +116,7 @@ export function provideSelection (
   })
 
   const allSelectable = computed(() => allItems.value.filter(item => item.selectable))
-  const currentPageSelectable = computed(() => currentPage.value.filter(item => item.selectable))
+  const currentPageSelectable = computed(() => toValue(currentPage).filter(item => item.selectable))
 
   const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
@@ -151,12 +151,13 @@ export function provideSelection (
 
   function toggleSelect (item: SelectableItem, index?: number, event?: MouseEvent) {
     const items = []
-    index = index ?? currentPage.value.findIndex(i => i.value === item.value)
+    const pageItems = toValue(currentPage)
+    index = index ?? pageItems.findIndex(i => i.value === item.value)
 
     if (props.selectStrategy !== 'single' && event?.shiftKey && lastSelectedIndex.value !== null) {
       const [start, end] = [lastSelectedIndex.value, index].sort((a, b) => a - b)
 
-      items.push(...currentPage.value.slice(start, end + 1).filter(item => item.selectable))
+      items.push(...pageItems.slice(start, end + 1).filter(item => item.selectable))
     } else {
       items.push(item)
       lastSelectedIndex.value = index

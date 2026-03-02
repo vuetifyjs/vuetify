@@ -91,6 +91,7 @@ export default {
     hour: 'ម៉ោង',
     minute: 'នាទី',
     second: 'វិនាទី',
+    notAllowed: 'តម្លៃមិនត្រូវបានអនុញ្ញាតទេ',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'តួអក្សរ {0} មិនត្រូវបានអនុញ្ញាតទេ',
     notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
     pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
+  },
+  command: {
+    search: 'វាយបញ្ចូលពាក្យបញ្ជា ឬស្វាគមន៍...',
   },
   hotkey: {
     then: 'បន្ទាប់មក',

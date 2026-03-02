@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'text-medium-emphasis text-caption py-2 px-3 d-flex align-center',
+      'text-medium-emphasis text-body-small py-2 px-3 d-flex align-center',
       $attrs.class,
     ]"
   >
