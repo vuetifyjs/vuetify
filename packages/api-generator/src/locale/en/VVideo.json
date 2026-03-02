@@ -2,6 +2,7 @@
   "props": {
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "src": "Media file URL",
+    "srcObject": "Sets the source of the video to a MediaStream, MediaSource, or Blob object. Useful for WebRTC streaming.",
     "type": "Media file type (optional)",
     "image": "Apply a specific image as cover before the video is loaded.",
     "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",

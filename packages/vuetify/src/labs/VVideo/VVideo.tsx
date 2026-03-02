@@ -47,6 +47,7 @@ export const makeVVideoProps = propsFactory({
   muted: Boolean,
   eager: Boolean,
   src: String,
+  srcObject: Object as PropType<MediaStream | MediaSource | Blob>,
   type: String, // e.g. video/mp4
   image: String,
   hideOverlay: Boolean,
@@ -221,6 +222,16 @@ export const VVideo = genericComponent<VVideoSlots>()({
     watch(() => props.src, v => {
       progress.value = 0
     })
+
+    watch(() => props.srcObject, async v => {
+      if (v) triggered.value = true
+      await nextTick()
+      if (videoRef.value) videoRef.value.srcObject = v ?? null
+    })
+
+    watch(videoRef, v => {
+      if (v && props.srcObject) v.srcObject = props.srcObject
+    }, { immediate: false })
 
     watch(playing, v => {
       if (!videoRef.value) return
