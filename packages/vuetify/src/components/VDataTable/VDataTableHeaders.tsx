@@ -278,6 +278,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               clearable
               density="default"
               items={ displayItems.value }
+              aria-label={ t('$vuetify.dataTable.sortBy') }
               label={ t('$vuetify.dataTable.sortBy') }
               multiple={ props.multiSort }
               variant="underlined"
