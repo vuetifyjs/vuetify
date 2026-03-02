@@ -17,7 +17,7 @@ $misc: map-deep-merge(
   $misc
 );
 
-$body-font-family: 'Roboto', sans-serif !default;
+$body-font-family: var(--v-font-body, 'Roboto', sans-serif) !default;
 $font-size-root: 1rem !default;
 $line-height-root: 1.5 !default;
 $border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
@@ -199,7 +199,7 @@ $font-weights: map-deep-merge(
   $font-weights
 );
 
-$heading-font-family: $body-font-family !default;
+$heading-font-family: var(--v-font-heading, #{$body-font-family}) !default;
 
 $typography: () !default;
 $typography: map-deep-merge(
