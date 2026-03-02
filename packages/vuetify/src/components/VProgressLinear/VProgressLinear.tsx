@@ -221,7 +221,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           />
         )}
 
-        { (props.chunkCount !== 'split' || !props.indeterminate) && renderBackgroundBar() }
+        { (props.variant !== 'split' || !props.indeterminate) && renderBackgroundBar() }
 
         <div
           class={[
@@ -253,7 +253,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
-              { props.chunkCount === 'split' && (
+              { props.variant === 'split' && (
                 <>
                   { renderBackgroundBar() }
                   { renderBackgroundBar() }

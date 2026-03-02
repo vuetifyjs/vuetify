@@ -3,12 +3,13 @@ import { computed, toRef, toValue } from 'vue'
 import { clamp, convertToUnit, propsFactory } from '@/util'
 
 // Types
-import type { MaybeRefOrGetter } from 'vue'
+import type { MaybeRefOrGetter, PropType } from 'vue'
 
 export interface ChunksProps {
   chunkCount: number | string
   chunkWidth: number | string
   chunkGap: number | string
+  variant: 'split' | undefined
 }
 
 // Composables
@@ -25,6 +26,11 @@ export const makeChunksProps = propsFactory({
     type: [Number, String],
     default: 4,
   },
+  variant: {
+    type: String as PropType<'split'>,
+    default: undefined,
+    validator: (v: string) => ['split'].includes(v),
+  },
 }, 'chunks')
 
 export function useChunks (
@@ -36,17 +42,17 @@ export function useChunks (
   rounded: MaybeRefOrGetter<boolean>,
   reversed: MaybeRefOrGetter<boolean>,
 ) {
-  const isSplit = toRef(() => props.chunkCount === 'split')
-  const hasChunks = toRef(() => !isSplit.value && (!!props.chunkCount || !!props.chunkWidth))
+  const isSplit = toRef(() => props.variant === 'split')
+  const chunkCount = toRef(() => isSplit.value ? 2 : Number(props.chunkCount) || 0)
+  const hasChunks = toRef(() => !isSplit.value && (!!chunkCount.value || !!props.chunkWidth))
 
   const chunkWidth = computed(() => {
     const containerSize = toValue(containerWidth)
     if (!containerSize) return 0
 
-    if (props.chunkCount) {
-      const count = Number(props.chunkCount)
-      const availableWidth = containerSize - Number(props.chunkGap) * (count - 1)
-      return availableWidth / count
+    if (chunkCount.value) {
+      const availableWidth = containerSize - Number(props.chunkGap) * (chunkCount.value - 1)
+      return availableWidth / chunkCount.value
     }
 
     return Number(props.chunkWidth)
@@ -118,6 +124,7 @@ export function useChunks (
   return {
     hasChunks: toRef(() => hasChunks.value || isSplit.value),
     isSplit,
+    chunkCount,
     chunksMaskStyles,
     splitStyles,
     snapValueToChunk,
