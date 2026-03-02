@@ -95,4 +95,18 @@ describe('VFileInput', () => {
     expect(onClickPrependInner).toHaveBeenCalledTimes(1)
     expect(onClickAppendInner).toHaveBeenCalledTimes(1)
   })
+
+  it('renders prefix and suffix', () => {
+    const wrapper = mountFunction(
+      <VFileInput
+        prefix="prefix"
+        suffix="suffix"
+      />
+    )
+
+    expect(wrapper.find('.v-file-input').classes()).toContain('v-file-input--prefixed')
+    expect(wrapper.find('.v-file-input').classes()).toContain('v-file-input--suffixed')
+    expect(wrapper.find('.v-text-field__prefix').text()).toBe('prefix')
+    expect(wrapper.find('.v-text-field__suffix').text()).toBe('suffix')
+  })
 })

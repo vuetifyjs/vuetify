@@ -56,6 +56,7 @@ export const makeVFileInputProps = propsFactory({
   },
   hideInput: Boolean,
   multiple: Boolean,
+  prefix: String,
   showSize: {
     type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
     default: false,
@@ -66,6 +67,7 @@ export const makeVFileInputProps = propsFactory({
       )
     },
   },
+  suffix: String,
   truncateLength: {
     type: [Number, String],
     default: 22,
@@ -253,6 +255,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               'v-file-input--chips': !!props.chips,
               'v-file-input--dragging': isDragging.value,
               'v-file-input--hide': props.hideInput,
+              'v-file-input--prefixed': props.prefix,
+              'v-file-input--suffixed': props.suffix,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
@@ -300,6 +304,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     controlRef,
                   }) => (
                     <>
+                      { props.prefix && (
+                        <span class="v-text-field__prefix">
+                            <span class="v-text-field__prefix__text">
+                              { props.prefix }
+                            </span>
+                        </span>
+                      )}
+
                       <input
                         ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         type="file"
@@ -340,6 +352,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           : fileNames.value.join(', ')
                         )}
                       </div>
+
+                      { props.suffix && (
+                        <span class="v-text-field__suffix">
+                            <span class="v-text-field__suffix__text">
+                              { props.suffix }
+                            </span>
+                        </span>
+                      )}
                     </>
                   ),
                 }}

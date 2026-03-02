@@ -1,4 +1,5 @@
 @use './variables' as *
+@use '../VTextField/variables' as *
 @use '../../styles/tools'
 @use 'sass:math'
 @use 'sass:selector'
@@ -24,6 +25,23 @@
           &--floating
             top: 0px
 
+    .v-field
+      &:not(.v-field--reverse)
+        .v-field__input
+          @at-root #{selector.append('.v-file-input--prefixed', &)}
+            --v-field-padding-start: #{$text-field-input-padding-start}
+
+          @at-root #{selector.append('.v-file-input--suffixed', &)}
+            --v-field-padding-end: #{$text-field-input-padding-end}
+
+      &.v-field--reverse
+        .v-field__input
+          @at-root #{selector.append('.v-file-input--prefixed', &)}
+            --v-field-padding-end: #{$text-field-input-padding-start}
+
+          @at-root #{selector.append('.v-file-input--suffixed', &)}
+            --v-field-padding-start: #{$text-field-input-padding-end}
+
     .v-field__input
       word-break: break-word
 
@@ -38,3 +56,34 @@
 
     &--dragging input[type="file"]
       z-index: 1
+
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      align-items: center
+      color: $text-field-affix-color
+      cursor: default
+      display: flex
+      opacity: 0
+      transition: inherit
+      white-space: nowrap
+      min-height: $field-input-min-height
+      padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
+      padding-bottom: var(--v-field-padding-bottom, 6px)
+
+      .v-field--active &
+        opacity: 1
+
+      .v-field--disabled &
+        color: $text-field-disabled-affix-color
+
+    .v-text-field__prefix
+      @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
+        padding-inline-start: var(--v-field-padding-start)
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
+        padding-inline-end: var(--v-field-padding-end)
+
+    .v-text-field__suffix
+      @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
+        padding-inline-end: var(--v-field-padding-end)
+      @at-root #{selector.nest('.v-field.v-field--reverse', &)}
+        padding-inline-start: var(--v-field-padding-start)
