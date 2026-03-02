@@ -10,7 +10,7 @@ import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, reactive, ref, toRaw } from 'vue'
+import { computed, mergeProps, reactive, ref, toRaw } from 'vue'
 import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
@@ -208,8 +208,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           {{
             activator: ({ props: activatorProps, isOpen }) => {
               const listItemProps = {
-                ...itemProps,
-                ...activatorProps,
+                ...mergeProps(activatorProps, itemProps),
                 value: itemProps?.value,
                 hideActions: props.hideActions,
                 indentLines: indentLines.node,
