@@ -72,6 +72,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
           v-model={ model.value }
           class={[
             'v-checkbox-btn',
+            { 'v-checkbox-btn--indeterminate': indeterminate.value },
             props.class,
           ]}
           style={ props.style }
