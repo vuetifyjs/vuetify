@@ -2,17 +2,16 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { useElementIntersection, useElementSize } from '@vuetify/v0'
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watchEffect } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
@@ -56,14 +55,14 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement | null>(null)
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, contentRect } = useResizeObserver()
+    const { width: elWidth } = useElementSize(root as any)
+    const { isIntersecting } = useElementIntersection(root as any)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
@@ -72,8 +71,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
         ? Number(props.size)
-        : contentRect.value
-          ? contentRect.value.width
+        : elWidth.value
+          ? elWidth.value
           : Math.max(width.value, 32)
     })
     const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
@@ -89,11 +88,6 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
       return props.rounded
         ? baseAngle + (strokeWidth.value / 2) / CIRCUMFERENCE * 360
         : baseAngle
-    })
-
-    watchEffect(() => {
-      intersectionRef.value = root.value
-      resizeRef.value = root.value
     })
 
     useRender(() => (

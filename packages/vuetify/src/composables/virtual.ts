@@ -1,6 +1,6 @@
 // Composables
+import { useElementSize } from '@vuetify/v0'
 import { useDisplay } from '@/composables/display'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
@@ -61,14 +61,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   /** markerRef's offsetTop, lazily evaluated */
   let markerOffset = 0
 
-  const { resizeRef, contentRect } = useResizeObserver()
-  watchEffect(() => {
-    resizeRef.value = containerRef.value
-  })
+  const { height: observedHeight } = useElementSize(containerRef as any)
   const viewportHeight = computed(() => {
     return containerRef.value === document.documentElement
       ? display.height.value
-      : contentRect.value?.height || parseInt(props.height!) || 0
+      : observedHeight.value || parseInt(props.height!) || 0
   })
   /** All static elements have been rendered and we have an assumed item height */
   const hasInitialRender = computed(() => {

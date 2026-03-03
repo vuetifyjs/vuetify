@@ -139,6 +139,9 @@
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
+  "dependencies": {
+    "@vuetify/v0": "^0.1.4"
+  },
   "devDependencies": {
     "@date-io/core": "3.2.0",
     "@date-io/date-fns": "3.2.1",
@@ -156,7 +159,6 @@
     "@testing-library/dom": "npm:@vuetify/testing-library-dom@1.0.3",
     "@testing-library/user-event": "^14.6.1",
     "@testing-library/vue": "^8.1.0",
-    "@types/resize-observer-browser": "^0.1.11",
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",

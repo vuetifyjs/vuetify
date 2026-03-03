@@ -1,5 +1,5 @@
 // Composables
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementSize } from '@vuetify/v0'
 
 // Utilities
 import {
@@ -58,7 +58,7 @@ interface LayoutProvide {
   mainStyles: Ref<CSSProperties>
   getLayoutItem: (id: string) => LayoutItem | undefined
   items: Ref<LayoutItem[]>
-  layoutRect: Ref<DOMRectReadOnly | undefined>
+  layoutRect: Ref<number>
   rootZIndex: Ref<number>
 }
 
@@ -176,7 +176,8 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const priorities = reactive(new Map<string, Ref<number>>())
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
-  const { resizeRef, contentRect: layoutRect } = useResizeObserver()
+  const el = shallowRef<HTMLElement | null>(null)
+  const { width: layoutRect } = useElementSize(el as any)
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -342,7 +343,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     mainStyles,
     getLayoutItem,
     items,
-    layoutRect,
+    layoutRect: layoutRect as unknown as Ref<number>,
     rootZIndex,
   })
 
@@ -363,6 +364,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     getLayoutItem,
     items,
     layoutRect,
-    layoutRef: resizeRef,
+    layoutRef: el,
   }
 }

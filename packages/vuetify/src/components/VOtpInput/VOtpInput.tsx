@@ -7,17 +7,17 @@ import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 
 // Composables
+import { useElementIntersection } from '@vuetify/v0'
 import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
+import { computed, effectScope, nextTick, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -107,13 +107,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
       intersectScope.run(() => {
-        const { intersectionRef, isIntersecting } = useIntersectionObserver()
+        const el = shallowRef<HTMLElement | null>(null)
+        const { isIntersecting } = useElementIntersection(el as any)
         watchEffect(() => {
-          intersectionRef.value = inputRef.value[0]
+          el.value = inputRef.value[0]
         })
-        watch(isIntersecting, v => {
+        watch(() => isIntersecting.value, v => {
           if (!v) return
-          intersectionRef.value?.focus()
+          el.value?.focus()
           intersectScope.stop()
         })
       })

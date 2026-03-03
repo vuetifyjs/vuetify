@@ -5,13 +5,12 @@ import './VParallax.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { useElementIntersection, useElementSize } from '@vuetify/v0'
 import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, ref, shallowRef, watch, watchEffect } from 'vue'
 import { clamp, genericComponent, getScrollParent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
@@ -36,20 +35,21 @@ export const VParallax = genericComponent<VImgSlots>()({
   props: makeVParallaxProps(),
 
   setup (props, { slots }) {
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, contentRect } = useResizeObserver()
     const { height: displayHeight } = useDisplay()
 
     const root = ref<VImg>()
+    const el = shallowRef<HTMLElement | null>(null)
+    const { height } = useElementSize(el as any)
+    const { isIntersecting } = useElementIntersection(el as any)
 
     watchEffect(() => {
-      intersectionRef.value = resizeRef.value = root.value?.$el
+      el.value = (root.value?.$el as HTMLElement) ?? null
     })
 
     let scrollParent: Element | Document
     watch(isIntersecting, val => {
       if (val) {
-        scrollParent = getScrollParent(intersectionRef.value)
+        scrollParent = getScrollParent(el.value ?? undefined)
         scrollParent = scrollParent === document.scrollingElement ? document : scrollParent
         scrollParent.addEventListener('scroll', onScroll, { passive: true })
         onScroll()
@@ -63,7 +63,7 @@ export const VParallax = genericComponent<VImgSlots>()({
     })
 
     watch(displayHeight, onScroll)
-    watch(() => contentRect.value?.height, onScroll)
+    watch(height, onScroll)
 
     const scale = computed(() => {
       return 1 - clamp(Number(props.scale))
@@ -75,19 +75,19 @@ export const VParallax = genericComponent<VImgSlots>()({
 
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        const el: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
-        if (!el) return
+        const img: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
+        if (!img) return
 
         const scrollHeight = scrollParent instanceof Document ? document.documentElement.clientHeight : scrollParent.clientHeight
         const scrollPos = scrollParent instanceof Document ? window.scrollY : scrollParent.scrollTop
-        const top = intersectionRef.value!.getBoundingClientRect().top + scrollPos
-        const height = contentRect.value!.height
+        const top = el.value!.getBoundingClientRect().top + scrollPos
+        const h = height.value
 
-        const center = top + (height - scrollHeight) / 2
+        const center = top + (h - scrollHeight) / 2
         const translate = floor((scrollPos - center) * scale.value)
-        const sizeScale = Math.max(1, (scale.value * (scrollHeight - height) + height) / height)
+        const sizeScale = Math.max(1, (scale.value * (scrollHeight - h) + h) / h)
 
-        el.style.setProperty('transform', `translateY(${translate}px) scale(${sizeScale})`)
+        img.style.setProperty('transform', `translateY(${translate}px) scale(${sizeScale})`)
       })
     }
 
