@@ -1,0 +1,27 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-progress
+    display: flex
+    flex-direction: column
+
+  .v-progress__header
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  .v-progress__label,
+  .v-progress__value
+    font-size: 24px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .v-progress__value
+    margin-inline-start: auto
+
+  .v-progress__footer
+    padding-top: 10px;
+    display: flex
+    align-items: center
+    justify-content: flex-end
