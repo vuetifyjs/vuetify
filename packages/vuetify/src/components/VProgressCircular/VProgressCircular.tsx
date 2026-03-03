@@ -61,8 +61,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
-    const { width: elWidth } = useElementSize(root as any)
-    const { isIntersecting } = useElementIntersection(root as any)
+    const { width: elWidth } = useElementSize(root)
+    const { isIntersecting } = useElementIntersection(root)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))

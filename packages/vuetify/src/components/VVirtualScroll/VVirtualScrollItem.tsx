@@ -38,7 +38,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
   setup (props, { attrs, emit, slots }) {
     const el = shallowRef<HTMLElement | null>(null)
     const height = shallowRef(0)
-    useResizeObserver(el as any, entries => { height.value = entries[0]?.contentRect.height ?? 0 }, { box: 'border-box' })
+    useResizeObserver(el, entries => { height.value = entries[0]?.contentRect.height ?? 0 }, { box: 'border-box' })
 
     watch(height, val => {
       if (val) emit('update:height', val)

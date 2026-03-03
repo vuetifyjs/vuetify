@@ -83,7 +83,7 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const el = shallowRef<HTMLElement | null>(null)
-    useResizeObserver(el as any, entries => {
+    useResizeObserver(el, entries => {
       if (!el.value?.offsetParent) return
 
       const { width, height } = entries[0].contentRect

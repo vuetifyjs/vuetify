@@ -39,8 +39,8 @@ export const VParallax = genericComponent<VImgSlots>()({
 
     const root = ref<VImg>()
     const el = shallowRef<HTMLElement | null>(null)
-    const { height } = useElementSize(el as any)
-    const { isIntersecting } = useElementIntersection(el as any)
+    const { height } = useElementSize(el)
+    const { isIntersecting } = useElementIntersection(el)
 
     watchEffect(() => {
       el.value = (root.value?.$el as HTMLElement) ?? null

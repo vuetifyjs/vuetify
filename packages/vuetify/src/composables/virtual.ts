@@ -61,7 +61,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   /** markerRef's offsetTop, lazily evaluated */
   let markerOffset = 0
 
-  const { height: observedHeight } = useElementSize(containerRef as any)
+  const { height: observedHeight } = useElementSize(containerRef)
   const viewportHeight = computed(() => {
     return containerRef.value === document.documentElement
       ? display.height.value

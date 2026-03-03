@@ -108,7 +108,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const intersectScope = effectScope()
       intersectScope.run(() => {
         const el = shallowRef<HTMLElement | null>(null)
-        const { isIntersecting } = useElementIntersection(el as any)
+        const { isIntersecting } = useElementIntersection(el)
         watchEffect(() => {
           el.value = inputRef.value[0]
         })

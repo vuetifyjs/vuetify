@@ -50,7 +50,7 @@ export const VFooter = genericComponent()({
 
     const autoHeight = shallowRef(32)
     const el = shallowRef<HTMLElement | null>(null)
-    useResizeObserver(el as any, entries => {
+    useResizeObserver(el, entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].contentRect.height
     })

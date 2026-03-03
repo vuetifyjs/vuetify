@@ -118,8 +118,8 @@ export const VSlideGroup = genericComponent<new <T>(
 
     const containerRef = shallowRef<HTMLElement | null>(null)
     const contentRef = shallowRef<HTMLElement | null>(null)
-    const { width: containerWidth, height: containerHeight } = useElementSize(containerRef as any)
-    const { width: contentWidth, height: contentHeight } = useElementSize(contentRef as any)
+    const { width: containerWidth, height: containerHeight } = useElementSize(containerRef)
+    const { width: contentWidth, height: contentHeight } = useElementSize(contentRef)
 
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {

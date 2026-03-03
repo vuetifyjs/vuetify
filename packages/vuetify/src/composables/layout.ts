@@ -177,7 +177,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const el = shallowRef<HTMLElement | null>(null)
-  const { width: layoutRect } = useElementSize(el as any)
+  const { width: layoutRect } = useElementSize(el)
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
