@@ -120,7 +120,14 @@ import { presetVuetify } from 'unocss-preset-vuetify'
 
 export default defineConfig({
   presets: [
-    presetVuetify(),
+    presetVuetify({
+      typography: 'md3',     // accepts 'md2' or custom object
+      elevation: 'md3',      // accepts 'md2' or custom object
+      font: {                // your custom fonts
+        heading: 'K2D, sans-serif',
+        body: '"Work Sans", sans-serif',
+      },
+    }),
   ],
   outputToCssLayers: {
     cssLayerName: (layer) => layer === 'properties' ? null : `uno.${layer}`,
@@ -241,46 +248,3 @@ Add `safelist` entries for convenience props (e.g. `elevation` and `rounded`) th
 -->
 
 <!-- TODO: cover approach to border prop after releasing ESLint plugin -->
-
-## Typography
-
-Pass `typography` to `presetVuetify()` to generate Vuetify's typography classes. Two built-in scales are available, or pass a custom object.
-
-| Value   | Design system                                            |
-|---------|----------------------------------------------------------|
-| `'md3'` | Material Design 3 — matches Vuetify v4 defaults          |
-| `'md2'` | Material Design 2 — matches the legacy Vuetify v2 and v3 |
-
-The generated classes use `--v-font-heading` and `--v-font-body` CSS variables rather than `$heading-font-family` / `$body-font-family` directly. Use the `font` option to set them:
-
-```ts
-presetVuetify({
-  typography: 'md3',
-  font: {
-    heading: 'K2D, sans-serif',
-    body: '"Work Sans", sans-serif',
-  },
-})
-```
-
-To pick up the same fonts in Vuetify components, pass the variables to Sass:
-
-```scss { resource="settings.scss" }
-@use 'vuetify/settings' with (
-  $heading-font-family: var(--v-font-heading),
-  $body-font-family: var(--v-font-body),
-  // ...
-);
-```
-
-For a fully custom scale, pass an object instead:
-
-```ts
-presetVuetify({
-  typography: {
-    h1: { 'font-size': '4rem', 'font-weight': '700', 'line-height': '1.2' },
-    h2: { 'font-size': '3rem', 'font-weight': '600', 'line-height': '1.25' },
-    // generates .text-h1, .text-h2, etc.
-  },
-})
-```

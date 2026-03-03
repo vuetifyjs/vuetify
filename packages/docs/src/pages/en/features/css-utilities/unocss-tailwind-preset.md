@@ -224,6 +224,19 @@ presetWind4({
 
 Classes like `dark:bg-sky-900` and `light:text-gray-700` are now scoped to Vuetify's theme selectors and toggle correctly via `$vuetify.theme.cycle()` or programmatically.
 
+### Custom themes
+
+TailwindCSS only supports the `light` and `dark` themes to align with `prefers-color-scheme` options. If your app registers additional custom themes and you want variant prefixes for each of them, use `createThemeVariants` from `unocss-preset-vuetify` instead:
+
+```ts { resource="uno.config.ts" }
+import { createThemeVariants } from 'unocss-preset-vuetify'
+
+export default defineConfig({
+  // ...
+  variants: createThemeVariants(['light', 'dark', 'high-contrast']),
+})
+```
+
 ## Align breakpoints { id="breakpoints" }
 
 Default breakpoints from TailwindCSS do not match Vuetify's. This mismatch can lead to confusing layout bugs when mixing responsive utilities (`sm:`, `md:`, …) with Vuetify's grid system (`v-col`, `v-row`) or `useDisplay()`.
