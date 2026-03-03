@@ -61,9 +61,7 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
-::: info
-The dedicated ESLint plugin will soon be released to aid in this process - allowing you to use specific rules to perform migration step by step.
-:::
+[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
 
 ## Styles
 
