@@ -457,8 +457,8 @@ importers:
   packages/vuetify:
     dependencies:
       '@vuetify/v0':
-        specifier: ^0.1.4
-        version: 0.1.4(vue@3.5.25(typescript@5.8.3))
+        specifier: ^0.1.5
+        version: 0.1.5(vue@3.5.25(typescript@5.8.3))
     devDependencies:
       '@date-io/core':
         specifier: 3.2.0
@@ -3796,8 +3796,8 @@ packages:
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
     engines: {node: '>=18'}
 
-  '@vuetify/v0@0.1.4':
-    resolution: {integrity: sha512-MIc+TkONskVMq5Uz8CWXLncvv4rDNJMVlV0kLarQRyriL7eZjir66oIpJN1uehy+1ICI0+RIHTdQJlk31gd+LQ==}
+  '@vuetify/v0@0.1.5':
+    resolution: {integrity: sha512-ZWKRUVrmuPbH8DFEJtYTJx31j4QCgrtk/TIjBWY4oZ5FEpeQHGC+0Vd8CQruaFlHBO+I25xQD+tkEwAnbiRwvg==}
     peerDependencies:
       flagsmith: ^10.0.0
       launchdarkly-js-client-sdk: ^3.0.0
@@ -9113,7 +9113,7 @@ snapshots:
 
   '@babel/helper-member-expression-to-functions@7.28.5':
     dependencies:
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.29.0
       '@babel/types': 7.29.0
     transitivePeerDependencies:
       - supports-color
@@ -9192,7 +9192,7 @@ snapshots:
   '@babel/helper-wrap-function@7.27.1':
     dependencies:
       '@babel/template': 7.28.6
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.29.0
       '@babel/types': 7.29.0
     transitivePeerDependencies:
       - supports-color
@@ -11495,7 +11495,7 @@ snapshots:
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.29.0
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
       '@types/babel__generator': 7.27.0
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.28.0
@@ -11507,11 +11507,11 @@ snapshots:
   '@types/babel__template@7.4.4':
     dependencies:
       '@babel/parser': 7.29.0
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
 
   '@types/babel__traverse@7.28.0':
     dependencies:
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
 
   '@types/chai@5.2.3':
     dependencies:
@@ -12274,7 +12274,7 @@ snapshots:
       '@babel/template': 7.28.6
       '@babel/traverse': 7.29.0
       '@babel/types': 7.29.0
-      '@vue/shared': 3.5.25
+      '@vue/shared': 3.5.29
       '@vuetify/babel-helper-vue-transform-on': 1.6.0
       '@vuetify/babel-plugin-resolve-type': 1.6.0(@babel/core@7.28.5)
     optionalDependencies:
@@ -12371,7 +12371,7 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@vuetify/v0@0.1.4(vue@3.5.25(typescript@5.8.3))':
+  '@vuetify/v0@0.1.5(vue@3.5.25(typescript@5.8.3))':
     dependencies:
       vue: 3.5.25(typescript@5.8.3)
     optionalDependencies:
