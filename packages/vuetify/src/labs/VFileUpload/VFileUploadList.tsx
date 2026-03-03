@@ -25,10 +25,7 @@ export type VFileUploadListSlots = {
 export const makeVFileUploadListProps = propsFactory({
   clearable: Boolean,
   showSize: Boolean,
-  files: {
-    type: Array as PropType<File[]>,
-    default: undefined,
-  },
+  files: Array as PropType<File[]>,
 
   ...makeVListProps({
     border: false,

@@ -1,6 +1,4 @@
 export { VFileUpload } from './VFileUpload'
 export { VFileUploadDropzone } from './VFileUploadDropzone'
-export { VFileUploadKey } from './VFileUploadDropzone'
 export { VFileUploadItem } from './VFileUploadItem'
 export { VFileUploadList } from './VFileUploadList'
-export type { VFileUploadContext } from './VFileUploadDropzone'

@@ -127,7 +127,10 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
     function onDragleave (e: DragEvent) {
       e.preventDefault()
-      isDragging.value = false
+      const container = e.currentTarget as HTMLElement
+      if (!container.contains(e.relatedTarget as Node)) {
+        isDragging.value = false
+      }
     }
 
     async function onDrop (e: DragEvent) {
@@ -162,7 +165,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     useRender(() => {
       const modelValue = context?.files.value ?? props.modelValue
       const disabled = context?.disabled.value ?? props.disabled
-      const error = context?.error.value ?? props.error
+      const error = context?.error.value || props.error
       const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
       const hasBrowse = !!(!props.hideBrowse && (slots.browse || props.density === 'default'))
@@ -176,14 +179,14 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           ref={ vSheetRef }
           { ...sheetProps }
           class={[
-            'v-file-upload',
+            'v-file-upload-dropzone',
             {
-              'v-file-upload--clickable': !hasBrowse && !hasFiles,
-              'v-file-upload--disabled': disabled,
-              'v-file-upload--dragging': isDragging.value,
-              'v-file-upload--has-files': hasFiles,
-              'v-file-upload--inset': isInset,
-              'v-file-upload--error': error,
+              'v-file-upload-dropzone--clickable': !hasBrowse && !hasFiles,
+              'v-file-upload-dropzone--disabled': disabled,
+              'v-file-upload-dropzone--dragging': isDragging.value,
+              'v-file-upload-dropzone--has-files': hasFiles,
+              'v-file-upload-dropzone--inset': isInset,
+              'v-file-upload-dropzone--error': error,
             },
             densityClasses.value,
             props.class,
@@ -201,15 +204,42 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
             props: { onClick: onClickBrowse },
           }) ?? (isInset ? (
             <div key="inset" class="v-file-upload-inset">
-                { modelValue.length === 1 && !props.multiple ? (
-                  slots.single?.({
-                    file: modelValue[0],
-                    props: { 'onClick:remove': () => onClickRemove(0) },
-                  }) ?? (
+              { modelValue.length === 1 && !props.multiple ? (
+                slots.single?.({
+                  file: modelValue[0],
+                  props: { 'onClick:remove': () => onClickRemove(0) },
+                }) ?? (
+                  <VDefaultsProvider
+                    defaults={{
+                      VFileUploadItem: {
+                        file: modelValue[0],
+                        clearable: props.clearable,
+                        disabled,
+                        showSize: props.showSize,
+                        border: false,
+                      },
+                    }}
+                  >
+                    <VFileUploadItem
+                      onClick:remove={ () => onClickRemove(0) }
+                    />
+                  </VDefaultsProvider>
+                )
+              ) : (
+                modelValue.map((file, i) => {
+                  const slotProps = {
+                    file,
+                    props: {
+                      'onClick:remove': () => onClickRemove(i),
+                    },
+                  }
+
+                  return (
                     <VDefaultsProvider
+                      key={ i }
                       defaults={{
                         VFileUploadItem: {
-                          file: modelValue[0],
+                          file,
                           clearable: props.clearable,
                           disabled,
                           showSize: props.showSize,
@@ -217,43 +247,16 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                         },
                       }}
                     >
-                      <VFileUploadItem
-                        onClick:remove={ () => onClickRemove(0) }
-                      />
+                      { slots.item?.(slotProps) ?? (
+                        <VFileUploadItem
+                          key={ i }
+                          onClick:remove={ () => onClickRemove(i) }
+                        />
+                      )}
                     </VDefaultsProvider>
                   )
-                ) : (
-                  modelValue.map((file, i) => {
-                    const slotProps = {
-                      file,
-                      props: {
-                        'onClick:remove': () => onClickRemove(i),
-                      },
-                    }
-
-                    return (
-                      <VDefaultsProvider
-                        key={ i }
-                        defaults={{
-                          VFileUploadItem: {
-                            file,
-                            clearable: props.clearable,
-                            disabled,
-                            showSize: props.showSize,
-                            border: false,
-                          },
-                        }}
-                      >
-                        { slots.item?.(slotProps) ?? (
-                          <VFileUploadItem
-                            key={ i }
-                            onClick:remove={ () => onClickRemove(i) }
-                          />
-                        )}
-                      </VDefaultsProvider>
-                    )
-                  })
-                )}
+                })
+              )}
 
               <VDivider />
 

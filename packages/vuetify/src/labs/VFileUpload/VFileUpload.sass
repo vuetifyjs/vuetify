@@ -3,11 +3,11 @@
 @use './variables' as *
 
 @include tools.layer('components')
-  .v-file-upload-input
+  .v-file-upload
     .v-input__control
       flex-direction: column
 
-  .v-file-upload
+  .v-file-upload-dropzone
     padding: $file-upload-padding
     flex-direction: column
     justify-content: center
@@ -20,7 +20,7 @@
       border-style: dashed
       border-width: 2px
 
-    &.v-file-upload--density-compact
+    &.v-file-upload-dropzone--density-compact
       padding: 32px 0
       flex-direction: row
       gap: 1rem
@@ -42,7 +42,7 @@
     &--has-files:not(&--clickable)
       cursor: default
 
-    &--error
+    &--error.v-sheet
       border-color: rgb(var(--v-theme-error))
 
     &--inset
@@ -66,11 +66,11 @@
     font-size: $file-upload-icon-font-size
     margin-bottom: $file-upload-icon-margin-bottom
 
-    .v-file-upload--density-comfortable &
+    .v-file-upload-dropzone--density-comfortable &
       font-size: $file-upload-icon-font-size - .5rem
       margin-bottom: $file-upload-icon-margin-bottom - .5rem
 
-    .v-file-upload--density-compact &
+    .v-file-upload-dropzone--density-compact &
       font-size: $file-upload-icon-font-size - 1rem
       margin-bottom: $file-upload-icon-margin-bottom - 1rem
 

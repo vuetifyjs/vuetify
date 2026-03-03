@@ -18,12 +18,6 @@ features:
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.
@@ -66,12 +60,6 @@ The v-file-upload component is a more visual counterpart to the [v-file-input](/
 
 Utilize various properties to customize the look and feel of the `v-file-upload` component.
 
-#### Density
-
-The **density** prop is used to control the vertical space the upload takes up.
-
-<ExamplesExample file="v-file-upload/prop-density" />
-
 #### Content
 
 Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** props to customize the text displayed in the component.
@@ -83,12 +71,6 @@ Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** 
 The **inset-file-list** prop renders the file list inside the dropzone instead of below it.
 
 <ExamplesExample file="v-file-upload/prop-inset-file-list" />
-
-#### Disabled
-
-The **disabled** property reduces the opacity of the component and prevents interaction.
-
-<ExamplesExample file="v-file-upload/prop-disabled" />
 
 #### Scrim
 

@@ -204,8 +204,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         <VInput
           ref={ vInputRef }
           modelValue={ props.multiple ? model.value : model.value[0] }
+          onUpdate:modelValue={ val => {
+            if (val == null || (Array.isArray(val) && !val.length)) {
+              model.value = []
+            }
+          }}
           class={[
-            'v-file-upload-input',
+            'v-file-upload',
             props.class,
           ]}
           style={ props.style }
