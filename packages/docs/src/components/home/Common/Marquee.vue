@@ -1,6 +1,6 @@
 <template>
-  <div :ref="containerEl" class="marquee" @focusout="onFocusOut">
-    <div :ref="contentEl" class="marquee-content">
+  <div ref="container" class="marquee" @focusout="onFocusOut">
+    <div ref="content" class="marquee-content">
       <div
         v-for="(item, index) in props.items"
         :key="index"
@@ -21,8 +21,8 @@
   })
 
   const shadowSize = 60 // px
-  const containerEl = shallowRef<HTMLElement | null>(null)
-  const contentEl = shallowRef<HTMLElement | null>(null)
+  const containerEl = useTemplateRef<HTMLElement>('container')
+  const contentEl = useTemplateRef<HTMLElement>('content')
   const shift = shallowRef(-50) // percentage
   const shiftTime = shallowRef(30) // seconds
   const shiftSpeed = 35 // px per second
