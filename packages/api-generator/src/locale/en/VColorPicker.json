@@ -7,6 +7,7 @@
     "hideCanvas": "Hides canvas.",
     "hideEyeDropper": "Hides eyedropper icon.",
     "hideSliders": "Hides sliders.",
+    "hideInputLabels": "Hides input labels.",
     "hideInputs": "Hides inputs.",
     "hideModeSwitch": "Hides mode switch.",
     "mode": "The current selected input type. Syncable with `v-model:mode`.",
