@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-window` used to display a single window item.",
   "props": {
     "disabled": "Prevents the item from becoming active when using the \"next\" and \"prev\" buttons or the `toggle` method.",
     "reverseTransition": "Sets the reverse transition.",

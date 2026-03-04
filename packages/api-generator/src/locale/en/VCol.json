@@ -1,4 +1,5 @@
 {
+  "description": "`v-col` is a content holder that must be a direct child of `v-row`. This is the 2.x replacement for `v-flex` in 1.x.",
   "props": {
     "alignSelf": "Deprecated, use **align-self-\\*** class. Available options are: **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
     "cols": "Sets the default number of columns the component extends. Available options are: **1 -> 12** and **auto**. It accepts `{n}/{size}` syntax (e.g. 1/5 or 3/24) that overrides grid columns count for size calculation.",

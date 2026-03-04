@@ -1,4 +1,5 @@
 {
+  "description": "The `v-snackbar-queue` component is used to display a sequence of messages to the user.",
   "props": {
     "closable": "Adds a dismiss button that closes the active snackbar.",
     "displayStrategy": "Determines how new snackbars are handled when the queue is full. **hold** (default) keeps new messages queued until a slot opens. **overflow** dismisses the oldest snackbar to make room for the new one.",

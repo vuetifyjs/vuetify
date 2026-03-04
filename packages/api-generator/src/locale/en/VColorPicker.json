@@ -1,4 +1,5 @@
 {
+  "description": "The `v-color-picker` allows you to select a color using a variety of input methods.",
   "props": {
     "canvasHeight": "Height of canvas.",
     "dotSize": "Changes the size of the selection dot on the canvas.",

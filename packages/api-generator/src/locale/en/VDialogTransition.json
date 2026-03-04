@@ -1,4 +1,5 @@
 {
+  "description": "`v-dialog-transition` component provides a transition effect for `v-dialog` component.",
   "props": {
     "target": "Sets the target element for the transition."
   }

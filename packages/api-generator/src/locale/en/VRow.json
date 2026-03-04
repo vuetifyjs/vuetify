@@ -1,4 +1,5 @@
 {
+  "description": "`v-row` is a layout component used to create a horizontal group of columns. It is a part of Vuetify's grid system and is used in conjunction with the `v-col` component to create responsive layouts.",
   "props": {
     "align": "Deprecated, use **align-\\*** class. Available options are: **start**, **center**, **end**, **baseline** and **stretch**.",
     "alignLg": "Deprecated, use **align-lg-\\*** class",

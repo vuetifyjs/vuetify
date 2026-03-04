@@ -1,4 +1,5 @@
 {
+  "description": "The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.",
   "props": {
     "continuous": "If `true`, window will \"wrap around\" from the last item to the first, and from the first item to the last.",
     "crossfade": "Enables crossfade transition.",

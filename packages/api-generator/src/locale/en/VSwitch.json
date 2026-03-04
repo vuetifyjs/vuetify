@@ -1,4 +1,5 @@
 {
+  "description": "The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.",
   "props": {
     "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it.",
     "inputValue": "The **v-model** bound value.",

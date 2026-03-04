@@ -1,4 +1,5 @@
 {
+  "description": "The `v-expansion-panels` component is useful for reducing vertical space with large amounts of information.",
   "props": {
     "accordion": "Removes the margin around open panels.",
     "expand": "Leaves the expansion-panel open while selecting another.",

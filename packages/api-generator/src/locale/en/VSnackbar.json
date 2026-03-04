@@ -1,4 +1,5 @@
 {
+  "description": "The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.",
   "props": {
     "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
     "centered": "Positions the snackbar in the center of the screen, (x and y axis).",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-toolbar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "bottom": "Aligns the component towards the bottom.",

@@ -1,4 +1,5 @@
 {
+  "description": "The `v-calendar` component is used to display information in a daily, weekly, monthly, or category view.",
   "props": {
     "categories": "Specifies what categories to display in the `category` view. This controls the order of the categories as well. If the calendar uses events any categories specified in those events not specified in this value are dynamically rendered in the view unless `category-hide-dynamic` is true.",
     "categoryHideDynamic": "Sets whether categories specified in an event should be hidden if it's not defined in `categories`.",
