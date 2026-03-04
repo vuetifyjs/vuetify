@@ -315,16 +315,15 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
               { props.density === 'default' && (
                 <>
-                  <div key="upload-divider" class="v-file-upload-divider">
-                    { slots.divider?.() ?? (
-                      <VDivider { ...dividerProps }>
-                        { t(props.dividerText) }
-                      </VDivider>
-                    )}
-                  </div>
-
                   { hasBrowse && (
                     <>
+                      <div key="upload-divider" class="v-file-upload-divider">
+                        { slots.divider?.() ?? (
+                          <VDivider { ...dividerProps }>
+                            { t(props.dividerText) }
+                          </VDivider>
+                        )}
+                      </div>
                       { !slots.browse ? (
                         <VBtn
                           readonly={ disabled }
