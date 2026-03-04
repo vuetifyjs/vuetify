@@ -2,9 +2,7 @@
   "command": {
     "publish": {
       "allowBranch": [
-        "master",
-        "dev",
-        "next"
+        "v3-stable"
       ],
       "message": "chore(release): publish %s"
     },
