@@ -279,7 +279,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       )
     })
 
-    return forwardRefs({}, vInputRef, vDropzoneRef)
+    return forwardRefs({
+      controlRef: inputRef,
+    }, vInputRef, vDropzoneRef)
   },
 })
 
