@@ -13,7 +13,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,7 +30,7 @@ export type DatePickerEvents = string[] |
 export type VDatePickerMonthSlots = {
   day: {
     props: {
-      onClick: () => void
+      onClick: (e: PointerEvent) => void
     }
     item: any
     i: number
@@ -79,7 +79,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'update:year': (date: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const daysRef = ref()
     const { t } = useLocale()
 
@@ -258,6 +258,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ))}
 
             { daysInMonth.value.map((item, i) => {
+              const events = getPrefixedEventHandlers(attrs, ':day', nativeEvent => ({ nativeEvent, ...item }))
+
               const slotProps = {
                 props: {
                   class: 'v-date-picker-month__day-btn',
@@ -269,7 +271,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   'aria-label': getDateAriaLabel(item),
                   'aria-current': item.isToday ? 'date' : undefined,
-                  onClick: () => onClick(item.date),
+                  ...events,
+                  onClick: (e: PointerEvent) => { onClick(item.date); events.onClick?.(e) },
                 },
                 item,
                 i,
