@@ -1,6 +1,3 @@
-// Composables
-import { useElementSize } from '@vuetify/v0'
-
 // Utilities
 import {
   computed,
@@ -58,7 +55,6 @@ interface LayoutProvide {
   mainStyles: Ref<CSSProperties>
   getLayoutItem: (id: string) => LayoutItem | undefined
   items: Ref<LayoutItem[]>
-  layoutRect: Ref<number>
   rootZIndex: Ref<number>
 }
 
@@ -134,7 +130,7 @@ export function useLayoutItem (options: {
 
   onBeforeUnmount(() => layout.unregister(id))
 
-  return { layoutItemStyles, layoutRect: layout.layoutRect, layoutItemScrimStyles }
+  return { layoutItemStyles, layoutItemScrimStyles }
 }
 
 const generateLayers = (
@@ -176,8 +172,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const priorities = reactive(new Map<string, Ref<number>>())
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
-  const el = shallowRef<HTMLElement>()
-  const { width: layoutRect } = useElementSize(el)
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -343,7 +337,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     mainStyles,
     getLayoutItem,
     items,
-    layoutRect: layoutRect as unknown as Ref<number>,
     rootZIndex,
   })
 
@@ -363,7 +356,5 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     layoutStyles,
     getLayoutItem,
     items,
-    layoutRect,
-    layoutRef: el,
   }
 }

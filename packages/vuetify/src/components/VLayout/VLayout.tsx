@@ -21,12 +21,11 @@ export const VLayout = genericComponent()({
   props: makeVLayoutProps(),
 
   setup (props, { slots }) {
-    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
+    const { layoutClasses, layoutStyles, getLayoutItem, items } = createLayout(props)
     const { dimensionStyles } = useDimension(props)
 
     useRender(() => (
       <div
-        ref={ layoutRef }
         class={[
           layoutClasses.value,
           props.class,
