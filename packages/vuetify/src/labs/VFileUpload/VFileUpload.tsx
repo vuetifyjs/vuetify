@@ -139,7 +139,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
       if (!props.filterByType) {
         const target = e.target as HTMLInputElement
-        model.value = [...target.files ?? []]
+        const newFiles = [...target.files ?? []]
+        model.value = props.multiple ? [...model.value, ...newFiles] : newFiles
       } else {
         selectAccepted([...(e as any).target.files])
       }
@@ -158,7 +159,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       }
 
       inputRef.value!.files = dataTransfer.files
-      model.value = [...dataTransfer.files]
+      const newFiles = [...dataTransfer.files]
+      model.value = props.multiple ? [...model.value, ...newFiles] : newFiles
 
       const event = new Event('change', { bubbles: true }) as any
       event.repack = true
