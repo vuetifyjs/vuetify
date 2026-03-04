@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: UnoCSS + Vuetify preset
   title: Vuetify + UnoCSS (Vuetify preset)
@@ -22,10 +23,6 @@ No class-naming convention change required — use the same Vuetify class names 
 
 ---
 
-::: tip Scaffold a working project
-
-If you get stuck or need a reference point, scaffold a pre-configured project with all the wiring already in place:
-
 :::: tabs
 
 ```bash [npx]
@@ -35,7 +32,7 @@ npx @vuetify/cli@latest init --css=unocss-vuetify
 
 ```bash [pnpm]
 # generate working project for reference
-pnpm dlx @vuetify/cli@latest init --css=unocss-vuetify
+pnpx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 ```bash [yarn]
@@ -49,8 +46,6 @@ bunx @vuetify/cli@latest init --css=unocss-vuetify
 ```
 
 ::::
-
-:::
 
 ## Establish CSS layer order
 

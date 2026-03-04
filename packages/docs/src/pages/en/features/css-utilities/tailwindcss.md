@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: TailwindCSS
   title: Vuetify + TailwindCSS
@@ -29,7 +30,7 @@ npx @vuetify/cli@latest init --css=tailwindcss
 
 ```bash [pnpm]
 # generate working project for reference
-pnpm dlx @vuetify/cli@latest init --css=tailwindcss
+pnpx @vuetify/cli@latest init --css=tailwindcss
 ```
 
 ```bash [yarn]

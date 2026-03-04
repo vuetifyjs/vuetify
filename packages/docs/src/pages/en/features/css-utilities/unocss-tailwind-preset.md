@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: UnoCSS + presetWind4
   title: Vuetify + UnoCSS (presetWind4)
@@ -31,7 +32,7 @@ npx @vuetify/cli@latest init --css=unocss-wind4
 
 ```bash [pnpm]
 # generate working project for reference
-pnpm dlx @vuetify/cli@latest init --css=unocss-wind4
+pnpx @vuetify/cli@latest init --css=unocss-wind4
 ```
 
 ```bash [yarn]
