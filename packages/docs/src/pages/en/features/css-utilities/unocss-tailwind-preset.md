@@ -27,22 +27,22 @@ Unlike TailwindCSS v4 directly (which requires pure CSS `@theme` declarations), 
 
 ```bash [npx]
 # generate working project for reference
-npx @vuetify/cli@latest init --css=unocss-wind4
+npx @vuetify/cli@latest init --type=vuetify --css=unocss-wind4
 ```
 
 ```bash [pnpm]
 # generate working project for reference
-pnpx @vuetify/cli@latest init --css=unocss-wind4
+pnpx @vuetify/cli@latest init --type=vuetify --css=unocss-wind4
 ```
 
 ```bash [yarn]
 # generate working project for reference
-yarn dlx @vuetify/cli@latest init --css=unocss-wind4
+yarn dlx @vuetify/cli@latest init --type=vuetify --css=unocss-wind4
 ```
 
 ```bash [bun]
 # generate working project for reference
-bunx @vuetify/cli@latest init --css=unocss-wind4
+bunx @vuetify/cli@latest init --type=vuetify --css=unocss-wind4
 ```
 
 ::::

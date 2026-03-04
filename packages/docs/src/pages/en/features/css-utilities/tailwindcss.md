@@ -25,22 +25,22 @@ Integrate TailwindCSS v4 into an existing Vuetify project for a smaller CSS bund
 
 ```bash [npx]
 # generate working project for reference
-npx @vuetify/cli@latest init --css=tailwindcss
+npx @vuetify/cli@latest init --type=vuetify --css=tailwindcss
 ```
 
 ```bash [pnpm]
 # generate working project for reference
-pnpx @vuetify/cli@latest init --css=tailwindcss
+pnpx @vuetify/cli@latest init --type=vuetify --css=tailwindcss
 ```
 
 ```bash [yarn]
 # generate working project for reference
-yarn dlx @vuetify/cli@latest init --css=tailwindcss
+yarn dlx @vuetify/cli@latest init --type=vuetify --css=tailwindcss
 ```
 
 ```bash [bun]
 # generate working project for reference
-bunx @vuetify/cli@latest init --css=tailwindcss
+bunx @vuetify/cli@latest init --type=vuetify --css=tailwindcss
 ```
 
 ::::

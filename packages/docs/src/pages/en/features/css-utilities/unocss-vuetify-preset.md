@@ -27,22 +27,22 @@ No class-naming convention change required — use the same Vuetify class names 
 
 ```bash [npx]
 # generate working project for reference
-npx @vuetify/cli@latest init --css=unocss-vuetify
+npx @vuetify/cli@latest init --type=vuetify --css=unocss-vuetify
 ```
 
 ```bash [pnpm]
 # generate working project for reference
-pnpx @vuetify/cli@latest init --css=unocss-vuetify
+pnpx @vuetify/cli@latest init --type=vuetify --css=unocss-vuetify
 ```
 
 ```bash [yarn]
 # generate working project for reference
-yarn dlx @vuetify/cli@latest init --css=unocss-vuetify
+yarn dlx @vuetify/cli@latest init --type=vuetify --css=unocss-vuetify
 ```
 
 ```bash [bun]
 # generate working project for reference
-bunx @vuetify/cli@latest init --css=unocss-vuetify
+bunx @vuetify/cli@latest init --type=vuetify --css=unocss-vuetify
 ```
 
 ::::
