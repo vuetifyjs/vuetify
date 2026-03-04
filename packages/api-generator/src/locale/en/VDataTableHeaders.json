@@ -1,6 +1,7 @@
 {
   "props": {
-    "color": "Applies a color to sort badges in the table header.",
+    "color": "Applies a color to checkboxes, page size dropdown and sort badges in the table header.",
+    "sortIcon": "Icon used for unsorted columns. By default it uses either **sortAscIcon** or **sortDescIcon** depending on **initialSortOrder**, but can be customized to show a neutral icon instead.",
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Deprecated, use `fixed-header` instead.",

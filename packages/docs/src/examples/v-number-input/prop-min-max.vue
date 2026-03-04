@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h5>min:10/max:20</h5>
+        <h5 class="my-0">min:10/max:20</h5>
 
         <v-number-input
           :max="20"

@@ -6,7 +6,7 @@
     :options="options"
   >
     <v-layout
-      class="elevation-2 rounded mx-auto bg-white"
+      class="elevation-1 rounded mx-auto bg-white"
       style="max-width: 448px; height: 150px"
     >
       <v-system-bar v-bind="props">

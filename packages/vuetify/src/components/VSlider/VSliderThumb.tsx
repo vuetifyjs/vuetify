@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/locale'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, inject, shallowRef, watch } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -89,6 +89,9 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       indexFromEnd,
     } = slider
 
+    const isHovered = shallowRef(false)
+    const isHidden = shallowRef(false)
+
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
@@ -137,8 +140,22 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     function onKeydown (e: KeyboardEvent) {
       const newValue = parseKeydown(e, props.modelValue)
 
-      newValue != null && emit('update:modelValue', newValue)
+      if (newValue != null) {
+        isHidden.value = false
+
+        emit('update:modelValue', newValue)
+      }
     }
+
+    watch(() => props.focused, val => {
+      if (val) {
+        isHidden.value = false
+      }
+    })
+
+    const thumbLabelVisible = computed(() => thumbLabel.value === 'always' ||
+        (thumbLabel.value === true && props.focused) ||
+        (thumbLabel.value === 'hover' && (isHovered.value || (props.focused && !isHidden.value))))
 
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
@@ -170,6 +187,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
+          onMouseenter={ () => { isHovered.value = true } }
+          onMouseleave={ () => { isHovered.value = false; isHidden.value = true } }
         >
           <div
             class={[
@@ -190,7 +209,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={ (thumbLabel.value && props.focused) || thumbLabel.value === 'always' }
+              v-show={ thumbLabelVisible.value }
             >
               <div
                 class={[

@@ -296,7 +296,6 @@ describe('createTheme', () => {
   })
 
   it('should not generate utility classes if disabled', async () => {
-    // @ts-expect-error next-line
     const theme = createTheme({ utilities: false })
 
     theme.install(app)

@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.11.5",
+  "version": "4.0.1",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -161,10 +161,10 @@
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
     "@vitest/ui": "^4.0.13",
-    "@vizzly-testing/cli": "^0.21.1",
-    "@vizzly-testing/vitest": "^0.0.3",
-    "@vue/reactivity": "^3.5.25",
-    "@vue/shared": "^3.5.25",
+    "@vizzly-testing/cli": "^0.22.2",
+    "@vizzly-testing/vitest": "^0.1.1",
+    "@vue/reactivity": "^3.6.0-beta.3",
+    "@vue/shared": "^3.6.0-beta.3",
     "@vue/test-utils": "^2.4.6",
     "@vuetify/babel-plugin-jsx": "^1.7.0",
     "acorn-walk": "^8.3.4",

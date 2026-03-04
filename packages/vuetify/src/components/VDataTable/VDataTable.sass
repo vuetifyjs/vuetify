@@ -68,12 +68,12 @@
 
             > th:not(.v-data-table__th--sorted)
                 .v-data-table-header__sort-icon
-                  opacity: 0
+                  opacity: $data-table-header-sort-icon-default-opacity
 
                 &:hover,
-                &:focus
+                &:focus-visible
                   .v-data-table-header__sort-icon
-                    opacity: 0.5
+                    opacity: $data-table-header-sort-icon-hover-opacity
 
             &.v-data-table__tr--mobile
               > td
@@ -118,8 +118,13 @@
         padding-left: 5px
 
   .v-data-table--loading
-    .v-data-table__td
-      opacity: $data-table-loading-opacity
+    &:not(.v-table--fixed-header) > .v-table__wrapper > table > thead,
+    &:not(.v-table--fixed-footer) > .v-table__wrapper > table > tfoot,
+    > .v-table__wrapper > table > tbody
+      > tr > .v-data-table__td
+        &:not(.v-data-table-column--fixed),
+        &:not(.v-data-table-column--fixed-end)
+          opacity: $data-table-loading-opacity
 
   @include tools.layer('overrides')
     // Again, needs to beat all the child combinators
@@ -129,6 +134,9 @@
   .v-data-table-header__content
     display: flex
     align-items: center
+
+  .v-data-table-header__sort-icon
+    margin-inline: $data-table-header-sort-icon-margin-inline
 
   .v-data-table-header__sort-badge
     display: inline-flex

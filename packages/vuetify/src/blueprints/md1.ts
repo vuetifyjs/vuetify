@@ -19,6 +19,7 @@ export const md1: Blueprint = {
       color: 'primary',
     },
     VBtn: {
+      class: 'text-uppercase',
       color: 'primary',
       rounded: 0,
     },

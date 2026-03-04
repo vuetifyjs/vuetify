@@ -26,14 +26,14 @@
 
     <v-snackbar
       :timeout="2000"
-      class="elevation-24"
+      class="elevation-5"
       color="deep-purple-accent-4"
     >
       <template v-slot:activator="{ props }">
         <v-btn class="ma-2" color="deep-purple-accent-4" v-bind="props">open</v-btn>
       </template>
 
-      Snackbar with <strong>elevation="24"</strong>.
+      Snackbar with <strong>elevation="2"</strong>.
     </v-snackbar>
 
     <v-snackbar

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-time-picker
         v-model="time"
         :allowed-hours="allowedHours"

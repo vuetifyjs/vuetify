@@ -17,14 +17,116 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## Quick Start with Vuetify MCP
+
+The fastest way to check your project for breaking changes is with [Vuetify MCP](https://github.com/vuetifyjs/mcp/). To get started, run the following in your terminal:
+
+```bash
+# Claude Code
+claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
+
+# Configure for hosted remote server
+npx -y @vuetify/mcp config --remote
+
+# Or configure for local installation
+npx -y @vuetify/mcp config
+```
+
+Once the MCP server is set up and loaded you will gain access to new tools such as:
+
+- `get_upgrade_guide`: Get a list of all breaking changes in the upgrade guide.
+- `get_v4_breaking_changes`: Get a list of all breaking changes in Vuetify 4.
+
+Now, prompt your agent with the following:
+
+```text
+Using the vuetify-mcp server, scan this project for Vuetify 3 to 4 breaking changes. List each issue found with the file, line number, and recommended fix.
+```
+
+This will automatically analyze your codebase and provide a tailored list of changes you need to make.
+
+If you have any questions about the upgrade process, come visit us at [community.vuetifyjs.com](https://community.vuetifyjs.com/).
+
+## Multi-step migration
+
+Several breaking changes in Vuetify 4 can be temporarily reverted by pasting short CSS or configuration snippets — notably [CSS reset](#css-reset), [typography](#typography), [elevation](#elevation), and [grid](#grid-system-vrow-and-vcol). This means you can migrate incrementally: restore the legacy behavior first, then update each area at your own pace.
+
+Even though these migrations mostly come down to adjusting CSS classes, manually reviewing every affected template can be time-consuming without automated visual regression tests. For large projects (typically over 200 components), we recommend scanning your codebase for relevant usage before starting:
+
+- **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset)
+- **Grid usage** — `<v-row>` and `<v-col>`, with specific focus on ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
+- **Grid attributes** — `dense`, `no-gutters`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
+- **Shadows** — `elevation-*` classes and `elevation` attributes or CSS overrides (affected by elevation changes)
+- **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography)
+
+Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
+
+[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
+
 ## Styles
+
+### Style entry points
 
 There are now pre-compiled entry points for the most common style changes. If you have a Sass file that only sets `$color-pack: false` or `$utilities: false` you can replace it with `import 'vuetify/styles/core'`. See [Style entry points](/styles/entry-points) for more information.
 
-The CSS reset has been mostly removed, with style normalisation being moved to individual components instead.
+### CSS reset
 
-- `<button>`, `<input>`, `<select>` have their browser native borders and background colors.
-- `<ul>`, `<ol>` and headings have padding and margins.
+The CSS reset has been mostly removed, with style normalisation being moved to individual components instead. You can inspect the exact [changes](https://github.com/vuetifyjs/vuetify/pull/20960/changes#diff-87996fc432835581ad883bedbc1975ad3a3f44b5747b2b831e3fa03dfdabb91f) to learn more. Here is the high level overview:
+
+- global `* { padding: 0; margin: 0; }` is gone - no longer resets all elements
+- `<button>`, `<input>`, `<select>` have their browser-native borders and background colors.
+
+If you notice browser styles adding unnecessary spaces and impact text size, it is recommended to assess the scope of visual regression and selectively apply spacing resets:
+
+```css
+@layer vuetify-core.reset {
+  ul, ol, figure, details, summary {
+    padding: 0;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+```
+
+Restoring most of the previous reset styles would be heavy-handed, but will get the job done as well.
+
+```css
+@layer vuetify-core.reset {
+  * { padding: 0; margin: 0; }
+  a:active, a:hover { outline-width: 0; }
+  code, kbd, pre, samp { font-family: monospace; }
+  pre { font-size: 1em; }
+  small { font-size: 80%; }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub { bottom: -0.25em; }
+  sup { top: -0.5em; }
+  textarea { resize: vertical; }
+  button,
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    border-style: none;
+  }
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  legend {
+    display: table;
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+```
 
 ### Layers
 
@@ -45,21 +147,23 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-## Themes
+### Typography
 
-The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
 
-```diff { resource="src/plugins/vuetify.ts" }
-export default createVuetify({
-+ theme: {
-+   defaultTheme: 'light',
-+ },
-})
-```
+| MD2 (Legacy)           | MD3 (New)                                             |
+|------------------------|-------------------------------------------------------|
+| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
+| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
+| `subtitle-1`, `body-1` | `body-large`                                          |
+| `body-2`               | `body-medium`                                         |
+| `caption`              | `body-small`                                          |
+| `button`, `subtitle-2` | `label-large`                                         |
+| `overline`             | `label-small`                                         |
 
-Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
+For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
 
-## Breakpoints
+### Breakpoints
 
 The default breakpoints have been reduced to better match modern device sizes:
 
@@ -73,6 +177,63 @@ The default breakpoints have been reduced to better match modern device sizes:
 | xxl        | ~~2560px~~ » 2138px |
 
 One of the components specifically impacted by those changes is VContainer. See the detailed information about those changes [below](#vcontainer).
+
+v3 breakpoints can be restored with the following configuration:
+
+```js { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  display: {
+    thresholds: {
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+      xxl: 2560,
+    },
+  },
+})
+```
+
+```scss { resource="src/styles/_settings.scss" }
+@use 'vuetify/settings' with (
+  $grid-breakpoints: (
+    'md': 960px,
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
+  ),
+);
+```
+
+### Elevation
+
+Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24).
+
+| MD3 elevation levels |
+|----------------------|
+| `elevation-0` (0dp)  |
+| `elevation-1` (1dp)  |
+| `elevation-2` (3dp)  |
+| `elevation-3` (6dp)  |
+| `elevation-4` (8dp)  |
+| `elevation-5` (12dp) |
+
+\* "dp" (density-independent pixels) is a relative unit from Material Design
+
+See [Elevation migration](/getting-started/elevation-migration) for details and tips to restore legacy MD2 levels if needed.
+
+## Themes
+
+The default theme has been changed from **light** to **system**. This means that the default theme will now be the same as the user's system preference. You can change this by setting the **defaultTheme** theme option:
+
+```diff { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
++ theme: {
++   defaultTheme: 'light',
++ },
+})
+```
+
+Theme colors now support transparency. `rgb(var(--v-theme-color))` will continue to work the same as before, but `rgba(var(--v-theme-color), 0.8)` should be changed to either `color-mix(in srgb, rgb(var(--v-theme-color)) 80%, transparent)` or `rgb(from rgb(var(--v-theme-color)) / 0.8)` when used with a transparent theme color.
 
 ## Components
 
@@ -93,19 +254,7 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
 
 The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.
 
-- Set it in the Sass variables for typography:
-
-```scss
-@use 'vuetify/settings' with (
-  $typography: (
-    'button': (
-      'text-transform': 'uppercase',
-    ),
-  ),
-)
-```
-
-- Or set it in the Sass variables for buttons:
+- Set it in the Sass variables for buttons:
 
 ```scss
 @use 'vuetify/settings' with (
@@ -136,6 +285,17 @@ const vuetify = createVuetify({
 + <v-btn>BUTTON</v-btn>
 ```
 
+### VBadge
+
+The **$badge-dot-border-radius** Sass variable has been changed from `4.5px` to `50%`. Both values produce the same result for the default dot size. If your app increases dot size and prefer them square-ish, you might want to undo the change.
+
+```diff { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+-  $badge-dot-border-radius: 4.5px,
++  $badge-dot-border-radius: 50%,
+);
+```
+
 ### VContainer
 
 Container component won't center the content vertically when paired with `fill-height`. If you depend on this behavior, you can supplement the missing styles with utility classes:
@@ -158,27 +318,15 @@ The calculation for `$container-max-widths` has changed to round values down to 
 | xl         | ~~1800px~~ » 1400px |
 | xxl        | ~~2400px~~ » 2000px |
 
-### VCounter (hint under VTextField, VTextarea and VFieldInput)
+### VCounter
 
-The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
+VCounter is used to display the counter hint under VTextField, VTextarea and VFieldInput. The **$counter-color** and `color` was replaced in favor of opacity. If you modified this value, move it to target CSS class directly:
 
 ```scss { resource="styles/styles.scss"}
 .v-counter {
   opacity: 1;
   color: /* your $counter-color */;
 }
-```
-
-### VField
-
-In Vuetify 3, VField's layout was changed from `display: flex` to `display: grid` to better handle its internal elements. However, the grid implementation had limitations with gap control, so in Vuetify 4 we've reverted back to using `display: flex`.
-
-The **$field-clearable-margin** Sass variable has been removed and replaced with **$field-gap**. This change allows for more consistent and flexible spacing between elements within the field. If you modified this value, update its variable target:
-
-```diff { resource="styles/styles.scss"}
-  @use 'vuetify/settings' with (
--   $field-clearable-margin: 8px,
-+   $field-gap: 8px,
 ```
 
 ### VFileInput
@@ -228,9 +376,7 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 
 ### VSelect/VCombobox/VAutocomplete
 
-#### `item` in slots has been renamed to `internalItem`
-
-For consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
+`item` in slots has been renamed to `internalItem` for consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
 You can rename:
 
@@ -268,6 +414,10 @@ Or remove `.raw`:
 
 ### VSnackbar
 
+::: warning
+This component has its internal HTML structure overhauled to incorporate **header** and **prepend** slots
+:::
+
 Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height** Sass variable. It can be replaced with `min-height` equivalent.
 
 ```diff
@@ -277,6 +427,23 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
 +    min-height="68"
     :text="message"
   />
+```
+
+### VSnackbarQueue
+
+::: warning
+This component has been rewritten to enable showing multiple snackbars at once
+:::
+
+The `default` slot has been renamed to `item`. The slot props remain the same.
+
+```diff
+<v-snackbar-queue v-model="messages">
+-  <template v-slot:default="{ item }">
++  <template v-slot:item="{ item }">
+    <v-snackbar v-bind="item" />
+  </template>
+</v-snackbar-queue>
 ```
 
 ### VTextField
@@ -289,3 +456,141 @@ Removed the **$text-field-details-padding-inline** Sass variable.
 +  $input-details-padding-inline: <value>
 );
 ```
+
+### Grid System (VRow and VCol)
+
+The grid system has been refactored to use CSS `gap` instead of negative margins on rows and padding on columns. This change provides more flexibility and predictable spacing behavior.
+
+#### Layout mechanism changes
+
+| Previous                                                      | New                                    |
+|---------------------------------------------------------------|----------------------------------------|
+| Negative margins (`margin: -12px`)                            | No margins on VRow                     |
+| Gaps from padding                                             | No default padding, utilizes CSS `gap` |
+| Widths from hardcoded percentage (e.g., `75%` for `.v-col-9`) | Calculated width accounting for gaps   |
+
+#### Prop changes on VRow
+
+| Previous                         | New                                              |
+|----------------------------------|--------------------------------------------------|
+| `dense`                          | `density="compact"` or `gap="8"`             |
+| `align` prop on VRow             | use utility class (e.g., `align-start`)          |
+| `justify` prop on VRow           | use utility class (e.g., `justify-center`)       |
+| `align-content` prop on VRow     | use utility class (e.g., `align-content-center`) |
+| `align-sm`, `justify-md`, etc.   | use responsive utility classes                   |
+| no fine-grained control over gap | `gap` prop accepts number, string, or `[x, y]`   |
+
+#### Prop changes on VCol
+
+| Previous                                | New                                                 |
+|-----------------------------------------|-----------------------------------------------------|
+| `order` prop on VCol                    | use utility class (e.g., `order-1`)                 |
+| props like `order-sm`, `order-md`, etc. | use responsive utility classes (e.g., `order-sm-1`) |
+| `align-self` prop on VCol               | use utility class (e.g., `align-self-center`)       |
+| `.offset-{n}` (offset classes)          | `offset` prop                                       |
+
+<v-expansion-panels class="mb-4" flat>
+<v-expansion-panel title="Migration examples" bg-color="surface-variant-alt">
+<v-expansion-panel-text>
+
+**Alignment (VRow):**
+
+```diff
+- <v-row align="center" justify="space-between">
++ <v-row class="align-center justify-space-between">
+```
+
+**Responsive alignment:**
+
+```diff
+- <v-row align-sm="start" align-md="center" justify-lg="end">
++ <v-row class="align-sm-start align-md-center justify-lg-end">
+```
+
+**Order (VCol):**
+
+```diff
+- <v-col order="2" order-md="1">
++ <v-col class="order-2 order-md-1">
+```
+
+**Align self (VCol):**
+
+```diff
+- <v-col align-self="center">
++ <v-col class="align-self-center">
+```
+
+**Dense rows:**
+
+```diff
+- <v-row dense>
++ <v-row density="compact">
+```
+
+</v-expansion-panel-text>
+</v-expansion-panel>
+</v-expansion-panels>
+
+#### Offset class changes
+
+Offset classes have been renamed from `.offset-*` to `.v-col-offset-*` for namespace consistency:
+
+```diff
+- <v-col offset="3" offset-md="2">
++ <v-col offset="3" offset-md="2">  <!-- Props still work the same -->
+```
+
+The component props (`offset`, `offset-sm`, etc.) continue to work unchanged, but if you were using the CSS classes directly, update them:
+
+```diff
+- <div class="v-col offset-6">
++ <div class="v-col v-col-offset-6">
+```
+
+#### Sass variables cleanup
+
+`$form-grid-gutter` was replaced with `$grid-density`. New values subtract values from the default gutter
+
+```diff
+- $form-grid-gutter: $spacer * 2 !default;
++ $grid-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+```
+
+Sass variable `$grid-gutters` was removed. If your existing project had some custom definition set for this variable, you might want to adjust the variables below:
+
+```scss { resource="src/styles/settings/_variables.scss" }
+@use 'vuetify/settings' with (
+  $avatar-margin-end: 8px;
+  $avatar-margin-start: 8px;
+
+  $icon-left-margin-left: 8px;
+  $icon-margin-end: 8px;
+  $icon-margin-start: 8px;
+
+  $icon-btn-margin-start: 8px;
+  $icon-btn-margin-end: 8px;
+}
+```
+
+#### Restoring the legacy grid behavior
+
+If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
+## Defaults
+
+`undefined` values are now skipped when merging prop defaults. This button would have been grey in v3, but is now green:
+
+```jsx
+createVuetify({
+  defaults: {
+    VBtn: { color: 'green' },
+  },
+})
+
+<VDefaultsProvider :defaults="{ VBtn: { color: undefined }}">
+  <VBtn />
+</VDefaultsProvider>
+```
+
+Replace `undefined` with `null` if you do actually want it to override the global default value.

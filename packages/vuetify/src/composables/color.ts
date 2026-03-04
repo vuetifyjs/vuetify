@@ -51,8 +51,20 @@ export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): Backgr
   return { backgroundColorClasses, backgroundColorStyles }
 }
 
+function normalizeColors (colors: { background?: ColorValue, text?: ColorValue }) {
+  return {
+    text: typeof colors.text === 'string'
+      ? colors.text.replace(/^text-/, '')
+      : colors.text,
+    background: typeof colors.background === 'string'
+      ? colors.background.replace(/^bg-/, '')
+      : colors.background,
+  }
+}
+
 export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue, text?: ColorValue }>) {
-  const _colors = toValue(colors)
+  const _colors = normalizeColors(toValue(colors))
+
   const classes: string[] = []
   const styles: CSSProperties = {}
 

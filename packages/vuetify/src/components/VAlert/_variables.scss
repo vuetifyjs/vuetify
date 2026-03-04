@@ -22,10 +22,10 @@ $alert-append-margin-inline-start: 16px !default;
 $alert-append-close-margin-inline-start: 16px !default;
 
 // VAlertTitle
-$alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !default;
-$alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
+$alert-title-font-size: tools.map-deep-get(settings.$typography, 'headline-small', 'size') !default;
+$alert-title-font-weight: tools.map-deep-get(settings.$typography, 'headline-small', 'weight') !default;
 $alert-title-hyphens: auto !default;
-$alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
+$alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'headline-small', 'letter-spacing') !default;
 $alert-title-line-height: 1.75rem !default;
 $alert-title-overflow-wrap: normal !default;
 $alert-title-text-transform: none !default;

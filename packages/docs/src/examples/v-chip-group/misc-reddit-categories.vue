@@ -6,9 +6,9 @@
     border
   >
     <div class="pa-4">
-      <div class="text-h6">What are you into?</div>
+      <div class="text-title-large">What are you into?</div>
 
-      <div class="text-subtitle-1">Select topics to continue</div>
+      <div class="text-body-large">Select topics to continue</div>
 
       <v-responsive class="overflow-y-auto" max-height="280">
         <v-chip-group class="mt-3" column>

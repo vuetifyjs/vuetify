@@ -11,7 +11,7 @@
     selectable
   >
     <template v-slot:title="{ item }">
-      <span :class="['text-caption', model.includes(item.value) && 'text-decoration-line-through']">
+      <span :class="['text-body-small', model.includes(item.value) && 'text-decoration-line-through']">
         {{ item.title }}
       </span>
     </template>

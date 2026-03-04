@@ -18,6 +18,7 @@ describe('color.ts', () => {
       [{ bg: null }, [[], {}]],
       [{ bg: '' }, [[], {}]],
       [{ bg: 'primary' }, [['bg-primary'], {}]],
+      [{ bg: 'bg-primary' }, [['bg-primary'], {}]],
       [{ bg: '#FF00FF' }, [['v-theme-on-dark'], { backgroundColor: '#FF00FF' }]],
     ])('should return correct color classes and styles', (value, [classes, styles]) => {
       const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => value.bg)
@@ -32,10 +33,12 @@ describe('color.ts', () => {
       [{ background: null }, [[], {}]],
       [{ background: '' }, [[], {}]],
       [{ background: 'primary' }, [['bg-primary'], {}]],
+      [{ background: 'bg-primary' }, [['bg-primary'], {}]],
       [{ background: '#FF00FF' }, [['v-theme-on-dark'], { backgroundColor: '#FF00FF' }]],
       [{ text: null }, [[], {}]],
       [{ text: '' }, [[], {}]],
       [{ text: 'primary' }, [['text-primary'], {}]],
+      [{ text: 'text-primary' }, [['text-primary'], {}]],
       [{ text: '#FF00FF' }, [[], { caretColor: '#FF00FF', color: '#FF00FF' }]],
     ])('should return correct color classes and styles', (value, [classes, styles]) => {
       const { colorClasses, colorStyles } = useColor(value)
@@ -58,6 +61,7 @@ describe('color.ts', () => {
       [{ color: '' }, [[], {}]],
       [{ color: null }, [[], {}]],
       [{ color: 'primary' }, [['text-primary'], {}]],
+      [{ color: 'text-primary' }, [['text-primary'], {}]],
       [{ color: '#FF00FF' }, [[], { caretColor: '#FF00FF', color: '#FF00FF' }]],
     ])('should return correct data', (value, [classes, styles]) => {
       const { textColorClasses, textColorStyles } = useTextColor(() => value.color)

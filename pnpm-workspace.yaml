@@ -22,7 +22,7 @@ minimumReleaseAgeExclude:
   - '@vuetify/testing-library-dom'
   - playwright
   - playwright-core
-  - '@vizzly-testing/cli@0.21.1'
+  - '@vizzly-testing/vitest@0.1.1'
   - 'vue-jsx-vapor@3.2.1'
   - '@vue-jsx-vapor/*'
   - '@napi-rs/wasm-runtime@1.1.1'

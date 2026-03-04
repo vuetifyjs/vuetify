@@ -27,7 +27,7 @@
       >
         <li
           :class="[
-            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-medium py-1 font-weight-regular',
             {
               'text-primary router-link-active': activeItem === to.slice(1),
               'ps-6': level === 3,
@@ -57,7 +57,7 @@
           tag="router-link"
         />
 
-        <v-row dense>
+        <v-row density="comfortable">
           <template v-if="sponsors.length">
             <v-col
               v-for="sponsor of sponsors"

@@ -158,3 +158,9 @@ The `v-select` component can be optionally expanded with prepended and appended 
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <ExamplesExample file="v-select/slot-selection" />
+
+#### Menu header and footer
+
+The **menu-header** and **menu-footer** slots allow you to add custom content at the top and bottom of the dropdown menu. This is useful for adding search fields, action buttons, or any other controls.
+
+<ExamplesExample file="v-select/slot-menu-header-and-footer" />

@@ -160,7 +160,7 @@ export default defineNuxtConfig({
     plugins: [
       // @ts-expect-error
       vuetify({ autoImport: true }),
-    ]
+    ],
     vue: {
       template: {
         transformAssetUrls,

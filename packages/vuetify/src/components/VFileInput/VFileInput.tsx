@@ -23,6 +23,7 @@ import {
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
+  omit,
   propsFactory,
   useRender,
   wrapInArray,
@@ -70,7 +71,7 @@ export const makeVFileInputProps = propsFactory({
     default: 22,
   },
 
-  ...makeVInputProps({ prependIcon: '$file' }),
+  ...omit(makeVInputProps({ prependIcon: '$file' }), ['direction']),
 
   modelValue: {
     type: [Array, Object] as PropType<File[] | File | null>,
@@ -252,6 +253,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
               'v-file-input--chips': !!props.chips,
               'v-file-input--dragging': isDragging.value,
               'v-file-input--hide': props.hideInput,
+              'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}

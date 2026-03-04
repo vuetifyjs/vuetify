@@ -20,8 +20,6 @@ The `v-speed-dial` component can be used as a floating action button that can re
 
 <PageFeatures />
 
-<DocIntroduced version="3.6.0" />
-
 ## Usage
 
 Speed dials can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the `small` variant can be used to maintain continuity with similar sized elements.

@@ -18,12 +18,6 @@ The `v-stepper-vertical` component can be used as a navigation element that guid
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.6.5](/getting-started/release-notes/?version=v3.6.5)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.

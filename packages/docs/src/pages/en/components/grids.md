@@ -56,7 +56,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ### v-row
 
-`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be reduced with the **dense** prop or removed completely with **no-gutters**. This is the 2.x replacement for `v-layout` in 1.x.
+`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be modified using the **density** prop - use **comfortable** for reduced gutters or **compact** to remove them completely. This is the 2.x replacement for `v-layout` in 1.x.
 
 ### v-spacer
 
@@ -69,9 +69,8 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 ## Caveats
 
 ::: info
-  Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset**, **justify**, **align**, and single breakpoint props on `v-col`
+  Breakpoints based props on grid components work in an `andUp` fashion. With this in mind the **xs** breakpoint is assumed and has been removed from the props context. This applies to **offset** and single breakpoint props on `v-col`
 
-- Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
 - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
 :::
 
@@ -79,9 +78,13 @@ The class `fill-height` applies `height: 100%` to an element. When applied to `v
 
 ### Props
 
+#### Size
+
+The **size** prop on `v-row` defines the number of columns for the columns placed directly within. The example below sets it to 5 instead of 12.
+
 #### Align
 
-Change the vertical alignment of flex items and their parents using the **align** and **align-self** properties.
+Change the vertical alignment of flex items and their parents using the **align** and **align-self** utility classes.
 
 <ExamplesExample file="grid/prop-align" />
 
@@ -90,18 +93,19 @@ Change the vertical alignment of flex items and their parents using the **align*
 Columns will automatically take up an equal amount of space within their parent container. This can be modified using the **cols** prop. You can also utilize the **sm**, **md**, **lg**, and **xl** props to further define how the column will be sized in different viewport sizes.
 
 <ExamplesExample file="grid/prop-breakpoint-sizing" />
+<ExamplesExample file="grid/prop-size" />
 
 #### Justify
 
-Change the horizontal alignment of flex items using the **justify** property.
+Change the horizontal alignment of flex items using the **justify** utility classes.
 
 <ExamplesExample file="grid/prop-justify" />
 
 #### No gutters
 
-You can remove the negative margins from `v-row` and the padding from its direct `v-col` children using the **no-gutters** property.
+You can remove the negative margins from `v-row` and the padding from its direct `v-col` children using the **density** property.
 
-<ExamplesExample file="grid/prop-no-gutters" />
+<ExamplesExample file="grid/prop-density-compact" />
 
 #### Offset
 
@@ -117,13 +121,13 @@ Offset can also be applied on a per breakpoint basis.
 
 #### Order
 
-You can control the ordering of grid items. As with offsets, you can set different orders for different sizes. Design specialized screen layouts that accommodate to any application.
+You can control the ordering of grid items. As with offsets, you can set different orders for different sizes using the **order** utility classes. Design specialized screen layouts that accommodate to any application.
 
 <ExamplesExample file="grid/prop-order" />
 
 #### Order first and last
 
-You can also designate explicitly **first** or **last** which will assign **-1** or **13** values respectively to the `order` CSS property.
+You can also designate explicitly **first** or **last** using the **order-first** and **order-last** utility classes.
 
 <ExamplesExample file="grid/prop-order-first-and-last" />
 
@@ -172,6 +176,12 @@ When using the auto-layout, you can define the width of only one column and stil
 Dynamically change your layout based upon resolution. Resize your screen and watch the row layout change on sm, md, and lg breakpoints.
 
 <ExamplesExample file="grid/misc-row-and-column-breakpoints" />
+
+#### Size overrides
+
+The `v-col` component can override the row's **size** using a fraction syntax like `cols="2/5"`. This means the column takes 2 parts of a 5-column grid. You can also use responsive props like **md** and **lg** or **offset** with the same syntax.
+
+<ExamplesExample file="grid/misc-size-overrides" />
 
 #### Spacers
 

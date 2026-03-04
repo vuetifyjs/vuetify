@@ -46,7 +46,7 @@
 
         <v-row>
           <v-col class="text-center">
-            <h3 class="text-h5">{{ name }}</h3>
+            <h3 class="text-headline-small my-0">{{ name }}</h3>
 
             <span class="text-grey-lighten-1">{{ title }}</span>
           </v-col>
@@ -56,7 +56,7 @@
 
     <v-form>
       <v-container>
-        <v-row dense>
+        <v-row density="comfortable">
           <v-col cols="12" md="6">
             <v-text-field
               v-model="name"

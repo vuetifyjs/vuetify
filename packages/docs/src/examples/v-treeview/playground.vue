@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-switch
         v-model="dense"
         label="Dense"
