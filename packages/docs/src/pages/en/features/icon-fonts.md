@@ -16,7 +16,7 @@ features:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports many popular icon libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome](https://fontawesome.com/), [Phosphor](https://phosphoricons.com/), [Lucide](https://lucide.dev/), [Tabler](https://tabler.io/icons), [Remix Icon](https://remixicon.com/), [BoxIcons](https://boxicons.com/), and [Carbon](https://carbondesignsystem.com/elements/icons/library/).
+Out of the box, Vuetify supports many popular icon libraries - [Material Design Icons](https://pictogrammers.com/library/mdi/), [Font Awesome](https://fontawesome.com/), [Phosphor](https://phosphoricons.com/), [Lucide](https://lucide.dev/), [Tabler](https://tabler.io/icons), and more.
 
 <PageFeatures />
 
@@ -217,6 +217,7 @@ Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](h
 | [Remix Icon](https://remixicon.com/) | `@iconify-json/ri` | `vuetify/iconsets/ri` | `ri` |
 | [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
 | [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
+| [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
 
 Install `unocss` and the Iconify package for your chosen library:
 
