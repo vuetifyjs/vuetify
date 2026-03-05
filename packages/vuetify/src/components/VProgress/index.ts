@@ -1,1 +1,1 @@
-export { VProgress } from './VProgress'
+export { VProgress, makeVProgressProps } from './VProgress'

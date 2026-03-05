@@ -13,11 +13,7 @@ import { clamp, genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 type VProgressSlots = {
-  default: { value: number, buffer?: number }
-  header: { value: number }
   label: { value: number }
-  value: { value: number }
-  footer: { value: number }
 }
 
 export const makeVProgressProps = propsFactory({
@@ -26,7 +22,10 @@ export const makeVProgressProps = propsFactory({
     default: 'linear',
   },
   label: String,
-  footer: String,
+  labelPosition: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'top',
+  },
 
   ...makeVProgressLinearProps(),
   ...makeVProgressCircularProps(),
@@ -44,38 +43,11 @@ export const VProgress = genericComponent<VProgressSlots>()({
 
     useRender(() => {
       const hasLabel = !!(props.label || slots.label)
-      const hasValue = !!slots.value
-      const hasHeader = !!(hasLabel || hasValue || slots.header)
-      const hasFooter = !!(props.footer || slots.footer)
-
       const scopeProps = { value: normalizedValue.value }
 
-      const header = hasHeader && (
-        <div class="v-progress__header">
-          { slots.header
-            ? slots.header(scopeProps)
-            : (
-              <>
-                { hasLabel && (
-                  <span class="v-progress__label">
-                    { slots.label?.(scopeProps) ?? props.label }
-                  </span>
-                )}
-
-                { hasValue && (
-                  <span class="v-progress__value">
-                    { slots.value!(scopeProps) }
-                  </span>
-                )}
-              </>
-            )
-          }
-        </div>
-      )
-
-      const footer = hasFooter && (
-        <div class="v-progress__footer">
-          { slots.footer?.(scopeProps) ?? props.footer }
+      const label = hasLabel && (
+        <div class="v-progress__label">
+          { slots.label?.(scopeProps) ?? props.label }
         </div>
       )
 
@@ -83,9 +55,9 @@ export const VProgress = genericComponent<VProgressSlots>()({
         const linearProps = VProgressLinear.filterProps(props)
         return (
           <div class={['v-progress', props.class]} style={ props.style }>
-            { header }
+            { props.labelPosition === 'top' && label }
             <VProgressLinear { ...linearProps } />
-            { footer }
+            { props.labelPosition === 'bottom' && label }
           </div>
         )
       }
@@ -93,9 +65,9 @@ export const VProgress = genericComponent<VProgressSlots>()({
       const circularProps = VProgressCircular.filterProps(props)
       return (
         <div class={['v-progress', props.class]} style={ props.style }>
-          { header }
+          { props.labelPosition === 'top' && label }
           <VProgressCircular { ...circularProps } />
-          { footer }
+          { props.labelPosition === 'bottom' && label }
         </div>
       )
     })
