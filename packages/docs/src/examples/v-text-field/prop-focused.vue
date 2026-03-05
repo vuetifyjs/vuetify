@@ -1,9 +1,7 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-text-field v-model="msg" :focused="true" @update:focused=""></v-text-field>
-    </v-container>
-  </v-app>
+  <v-container>
+    <v-text-field v-model="msg" :focused="true" @update:focused=""></v-text-field>
+  </v-container>
 </template>
 
 <script setup>

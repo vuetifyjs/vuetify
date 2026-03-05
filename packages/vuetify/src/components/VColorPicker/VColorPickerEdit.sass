@@ -22,15 +22,22 @@
       margin-inline-end: $color-picker-input-margin
 
     input
+      padding: 0
+      font: inherit
+      border-style: none
       border-radius: $color-picker-border-radius
-      margin-bottom: $color-picker-input-margin-bottom
+      margin: 0 0 $color-picker-input-margin-bottom
       min-width: 0
       outline: none
       text-align: center
       width: 100%
       height: $color-picker-input-height
-      background: rgba(var(--v-theme-surface-variant), .2)
+      background: tools.theme-color('surface-variant', .2)
       color: rgba(var(--v-theme-on-surface))
+      -moz-appearance: textfield
+
+      @media (forced-colors: active)
+        border-style: solid
 
     span
       font-size: $color-picker-input-font-size

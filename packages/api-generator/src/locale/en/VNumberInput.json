@@ -8,7 +8,8 @@
     "min": "Specifies the minimum allowable value for the input.",
     "minFractionDigits": "Specifies the minimum fraction digits to be displayed (capped to `precision`). Defaults to `precision` when not explicitly set.",
     "precision": "Enforces strict precision. It is expected to be an integer value in range between `0` and `15`, or null for unrestricted.",
-    "step": "Defines the interval between allowed values when the user increments or decrements the input"
+    "step": "Defines the interval between allowed values when the user increments or decrements the input",
+    "type": "**IGNORED** underlying input is always of type 'text'"
   },
   "slots": {
     "decrement": "Slot for customizing the decrement button or icon used to decrease the value of the input.",

@@ -35,6 +35,7 @@ export const makeVColorPickerProps = propsFactory({
   hideCanvas: Boolean,
   hideSliders: Boolean,
   hideInputs: Boolean,
+  hideInputLabels: Boolean,
   mode: {
     type: String as PropType<keyof typeof modes>,
     default: 'rgba',
@@ -46,6 +47,7 @@ export const makeVColorPickerProps = propsFactory({
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },
   showSwatches: Boolean,
+  readonly: Boolean,
   swatches: Array as PropType<DeepReadonly<Color[][]>>,
   swatchesMaxHeight: {
     type: [Number, String],
@@ -125,9 +127,9 @@ export const VColorPicker = defineComponent({
 
     provideDefaults({
       VSlider: {
-        color: undefined,
-        trackColor: undefined,
-        trackFillColor: undefined,
+        color: null,
+        trackColor: null,
+        trackFillColor: null,
       },
     })
 
@@ -158,6 +160,7 @@ export const VColorPicker = defineComponent({
                     color={ currentColor.value }
                     onUpdate:color={ updateColor }
                     disabled={ props.disabled }
+                    readonly={ props.readonly }
                     dotSize={ props.dotSize }
                     width={ props.width }
                     height={ props.canvasHeight }
@@ -173,6 +176,7 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         hideAlpha={ !mode.value.endsWith('a') }
                         disabled={ props.disabled }
+                        readonly={ props.readonly }
                         hideEyeDropper={ props.hideEyeDropper }
                         eyeDropperIcon={ props.eyeDropperIcon }
                       />
@@ -187,6 +191,8 @@ export const VColorPicker = defineComponent({
                         color={ currentColor.value }
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
+                        readonly={ props.readonly }
+                        hideInputLabels={ props.hideInputLabels }
                       />
                     )}
                   </div>
@@ -200,6 +206,7 @@ export const VColorPicker = defineComponent({
                     maxHeight={ props.swatchesMaxHeight }
                     swatches={ props.swatches }
                     disabled={ props.disabled }
+                    readonly={ props.readonly }
                   />
                 )}
               </>

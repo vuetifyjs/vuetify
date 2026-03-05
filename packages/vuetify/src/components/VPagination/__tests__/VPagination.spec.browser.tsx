@@ -3,7 +3,7 @@ import { VPagination } from '../VPagination'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { generate, page, render, screen, userEvent } from '@test'
+import { page, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -217,7 +217,5 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

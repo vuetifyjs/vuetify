@@ -2,7 +2,7 @@
 import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '..'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -79,7 +79,5 @@ describe('VExpansionPanels', () => {
     expect(model.value).toBe('foo')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

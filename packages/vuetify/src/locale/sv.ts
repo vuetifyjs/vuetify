@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Föregående månad',
       nextMonth: 'Nästa månad',
       selectYear: 'Välj år',
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectMonth: 'Välj månad',
       selectDate: '{0}',
       currentDate: 'Idag, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'FM',
     pm: 'EM',
     title: 'Välj tid',
+    hour: 'Timme',
+    minute: 'Minuter',
+    second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
   },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
+  },
   hotkey: {
     then: 'sedan',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Mellanslag',
     plus: 'plus',
     shortcut: 'Tangentbordsgenväg: {0}',
+    or: 'eller',
   },
   video: {
     play: 'Spela upp',

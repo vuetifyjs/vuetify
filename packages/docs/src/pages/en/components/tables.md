@@ -6,7 +6,6 @@ meta:
   keywords: table, simple table, vuetify table component, vue simple table component, table component
 related:
   - /components/data-tables/basics/
-  - /components/data-tables/headers/
   - /components/lists/
 features:
   github: /components/VTable/

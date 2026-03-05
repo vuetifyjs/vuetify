@@ -59,6 +59,7 @@ describe('icons.tsx', () => {
       md: await import('@/iconsets/md').then(m => m.aliases),
       mdi: await import('@/iconsets/mdi').then(m => m.aliases),
       mdiSvg: await import('@/iconsets/mdi-svg').then(m => m.aliases),
+      mdiUnoCss: await import('@/iconsets/mdi-unocss').then(m => m.aliases),
     }
     const mdi = unfill(sets.mdi)
 

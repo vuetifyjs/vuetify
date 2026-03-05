@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Hotkeys
   title: Hotkey component
@@ -10,7 +9,7 @@ related:
   - /components/icons/
   - /components/toolbars/
 features:
-  github: /labs/VHotkey/
+  github: /components/VHotkey/
   label: 'C: VHotkey'
   report: true
 ---
@@ -20,10 +19,6 @@ features:
 The `v-hotkey` component renders keyboard shortcuts in a visually consistent and accessible way. It handles complex key combination parsing, platform-specific differences (Mac vs PC), and provides multiple display modes for different design needs.
 
 <PageFeatures />
-
-::: success
-This feature was introduced in [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
-:::
 
 ## Usage
 

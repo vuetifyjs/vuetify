@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Videos
   title: Video component
@@ -16,12 +15,6 @@ features:
 The `v-video` component is useful for background video or as a customizable player for self-hosted content.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.9.3](/getting-started/release-notes/?version=v3.9.3)
-
-:::
 
 ## Installation
 

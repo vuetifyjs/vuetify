@@ -1,6 +1,8 @@
 {
   "props": {
     "indeterminate": "Constantly animates, use when loading progress is unknown. If set to the string `'disable-shrink'` it will use a simpler animation that does not run on the main thread.",
+    "reveal": "Animates the progress circle from 0 to its model value when the component mounts.",
+    "rounded": "Rounds the ends of the progress arc for a softer appearance. When enabled, the progress stroke will have rounded caps instead of square ends.",
     "modelValue": "The percentage value for current progress.",
     "query": "Animates like **indeterminate** prop but inverse.",
     "rotate": "Rotates the circle start point in degrees.",

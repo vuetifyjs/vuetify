@@ -16,7 +16,7 @@
               @click="toggle"
             >
               <div
-                class="text-h3 flex-grow-1 text-center"
+                class="text-display-medium flex-grow-1 text-center"
               >
                 {{ isSelected ? 'Selected' : 'Click Me!' }}
               </div>

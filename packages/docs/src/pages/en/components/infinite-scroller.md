@@ -20,8 +20,6 @@ The `v-infinite-scroll` component displays a potentially infinite list, by loadi
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.
@@ -144,7 +142,7 @@ The **error** slot is shown if the status `'error'` is returned from the `done` 
 The `v-infinite-scroll` component exposes the `reset()` method, allowing to programatically reset the status to the default after reaching the `empty` state. This makes it possible for load to be called again.
 An optional 'side' parameter can also be provided to the method for cases where only one of the two sides needs to be reset.
 
-<ExamplesExample file="v-infinite-scroll/status-reset" />
+<ExamplesExample file="v-infinite-scroll/misc-reset" />
 
 ### Examples
 

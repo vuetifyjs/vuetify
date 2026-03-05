@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue'
+  import { onMounted, onUnmounted, ref } from 'vue'
 
   const calendar = ref()
 
@@ -87,7 +87,7 @@
   }
 </script>
 
-<style lang="scss">
+<style>
 .v-current-time {
   height: 2px;
   background-color: #ea4335;

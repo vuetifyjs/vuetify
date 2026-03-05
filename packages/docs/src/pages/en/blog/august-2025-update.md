@@ -149,7 +149,11 @@ The redesigned issues experience is now live at [issues.vuetifyjs.com](https://i
   <source src="https://cdn.vuetifyjs.com/docs/images/blog/august-2025-update/issues.mp4" type="video/mp4"></source>
 </video>
 
-The previous issues page was originally built with Vuetify v1.5 back in 2018.
+::: info
+
+The previous issues page was originally built with Vuetify v1.5 in 2018
+
+:::
 
 **Details:**
 

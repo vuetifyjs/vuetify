@@ -19,10 +19,12 @@ export const md2: Blueprint = {
       color: 'primary',
     },
     VBtn: {
+      class: 'text-uppercase',
       color: 'primary',
     },
     VCheckbox: {
       color: 'secondary',
+      indentDetails: true,
     },
     VCombobox: {
       variant: 'filled',
@@ -32,17 +34,28 @@ export const md2: Blueprint = {
       controlHeight: 56,
       elevation: 2,
       rounded: 'md',
+      controlVariant: 'modal',
 
       VBtn: {
         color: 'high-emphasis',
         rounded: 'circle',
       },
     },
+    VRadioGroup: {
+      indentDetails: true,
+    },
     VSelect: {
       variant: 'filled',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: true,
+    },
+    VRangeSlider: {
+      indentDetails: true,
+    },
+    VSwitch: {
+      indentDetails: true,
     },
     VTabs: {
       color: 'primary',

@@ -23,6 +23,8 @@ export function useAutocomplete (props: InputAutocompleteProps) {
   const isSuppressing = toRef(() => props.autocomplete === 'suppress')
 
   const fieldName = toRef(() => {
+    if (!props.name) return undefined
+
     return isSuppressing.value
       ? `${props.name}-${uniqueId}-${reloadTrigger.value}`
       : props.name

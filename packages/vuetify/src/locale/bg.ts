@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Предишен месец',
       nextMonth: 'Следващ месец',
       selectYear: 'Изберете година',
+      previousYear: 'Предишна година',
+      nextYear: 'Следваща година',
+      selectMonth: 'Изберете месец',
       selectDate: '{0}',
       currentDate: 'Днес, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'пр. обяд',
     pm: 'сл. обяд',
     title: 'Изберете време',
+    hour: 'Час',
+    minute: 'Минути',
+    second: 'Секунди',
+    notAllowed: 'Стойността не е разрешена',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Моля, изберете поне една стойност',
     pattern: 'Невалиден формат',
   },
+  command: {
+    search: 'Въведете команда или търсете...',
+  },
   hotkey: {
     then: 'след това',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Интервал',
     plus: 'плюс',
     shortcut: 'Клавиатурна комбинация: {0}',
+    or: 'или',
   },
   video: {
     play: 'Пусни',

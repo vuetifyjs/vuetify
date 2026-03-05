@@ -1,7 +1,7 @@
 <template>
   <v-fade-transition hide-on-leave>
     <AppSheet v-if="results.length" class="pa-3 flex-1-1-100" border>
-      <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
+      <div class="text-high-emphasis font-weight-bold d-flex align-center text-title-large mb-2">
         <v-icon
           class="me-2"
           color="medium-emphasis"

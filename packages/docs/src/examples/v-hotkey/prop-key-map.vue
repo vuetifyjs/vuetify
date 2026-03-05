@@ -10,7 +10,7 @@
       </div>
     </v-alert>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12" md="6">
         <v-card subtitle="Standard Vuetify key representations" title="Default Key Mapping">
           <template v-slot:text>
@@ -68,15 +68,24 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Platform Comparison with Custom Mapping">
           <template v-slot:text>
             <div class="mb-4 text-center">
-              <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
-                <v-btn value="pc">PC Platform</v-btn>
-                <v-btn value="mac">Mac Platform</v-btn>
-              </v-btn-toggle>
+              <div class="mb-2">
+                <v-btn-toggle v-model="displayMode" density="compact" border divided mandatory>
+                  <v-btn value="icon">Icon</v-btn>
+                  <v-btn value="symbol">Symbol</v-btn>
+                  <v-btn value="text">Text</v-btn>
+                </v-btn-toggle>
+              </div>
+              <div>
+                <v-btn-toggle v-model="platform" density="compact" border divided mandatory>
+                  <v-btn value="pc">PC Platform</v-btn>
+                  <v-btn value="mac">Mac Platform</v-btn>
+                </v-btn-toggle>
+              </div>
             </div>
 
             <v-table>
@@ -94,52 +103,58 @@
                   <td><code>ctrl+s</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="ctrl+s"
                     ></v-hotkey>
                   </td>
-                  <td>Uses "Control" instead of "Ctrl"</td>
+                  <td>Uses "Control" instead of "Ctrl" in Text mode</td>
                 </tr>
                 <tr>
                   <td><code>alt+f</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="alt+f"
                     ></v-hotkey>
                   </td>
-                  <td>Different symbols: ⎇ vs ⌥/Alt</td>
+                  <td>Different symbols: ⎇ vs ⌥/Alt in Symbol mode</td>
                 </tr>
                 <tr>
                   <td><code>enter</code></td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
                   <td>
                     <v-hotkey
+                      :display-mode="displayMode"
                       :key-map="customKeyMap"
                       :platform="platform"
                       keys="enter"
                     ></v-hotkey>
                   </td>
-                  <td>Uses "Return" and ⏎ symbol</td>
+                  <td>Uses "Return" and ⏎ symbol in Text mode and Symbol mode respectively</td>
                 </tr>
               </tbody>
             </v-table>
@@ -148,7 +163,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Code Example">
           <template v-slot:text>
@@ -182,9 +197,10 @@ const customKeyMap = {
   import { ref } from 'vue'
 
   const platform = ref('mac')
+  const displayMode = ref('icon')
 
   const customKeyMap = {
-          // Include common keys that we're not customizing
+    // Include common keys that we're not customizing
     shift: {
       mac: { symbol: '⇧', icon: '$shift', text: '$vuetify.hotkey.shift' },
       default: { text: 'Shift' },
@@ -198,7 +214,7 @@ const customKeyMap = {
       default: { text: 'Ctrl' },
     },
 
-          // Custom key overrides
+    // Custom key overrides
     ctrl: {
       mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
       default: { symbol: '⌃', icon: '$ctrl', text: 'Control' },
@@ -211,7 +227,7 @@ const customKeyMap = {
       default: { symbol: '⏎', icon: '$enter', text: 'Return' },
     },
 
-          // Include other keys for completeness
+    // Include other keys for completeness
     arrowup: {
       default: { symbol: '↑', icon: '$arrowup', text: '$vuetify.hotkey.upArrow' },
     },
@@ -251,6 +267,7 @@ const customKeyMap = {
     data () {
       return {
         platform: 'mac',
+        displayMode: 'icon',
         customKeyMap: {
           // Include common keys that we're not customizing
           shift: {

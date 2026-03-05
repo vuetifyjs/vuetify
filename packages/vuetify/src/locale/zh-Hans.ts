@@ -50,6 +50,9 @@ export default {
       previousMonth: '上个月',
       nextMonth: '下个月',
       selectYear: '选择年份',
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectMonth: '选择月份',
       selectDate: '{0}',
       currentDate: '今天，{0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: '上午',
     pm: '下午',
     title: '选择时间',
+    hour: '小时',
+    minute: '分钟',
+    second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: '请至少选择一个值',
     pattern: '格式无效',
   },
+  command: {
+    search: '输入命令或搜索...',
+  },
   hotkey: {
     then: '然后',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
+    or: '或',
   },
   video: {
     play: '播放',

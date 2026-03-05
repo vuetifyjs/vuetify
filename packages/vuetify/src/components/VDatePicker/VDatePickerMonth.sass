@@ -22,6 +22,8 @@
     display: grid
     grid-template-columns: repeat(var(--v-date-picker-days-in-week), min-content)
     column-gap: $date-picker-month-column-gap
+    justify-content: space-around
+    width: 100%
 
   .v-date-picker-month__day
     align-items: center
@@ -48,3 +50,25 @@
 
   .v-date-picker-month__day--hide-adjacent
     opacity: 0
+  .v-date-picker-month__events
+    height: $date-picker-event-size
+    left: 0
+    text-indent: 0
+    position: absolute
+    text-align: center
+    white-space: pre
+    width: 100%
+
+    > div
+      height: $date-picker-event-size
+      margin: $date-picker-event-margin
+      width: $date-picker-event-size
+      margin-bottom: -1px
+
+    .v-badge--dot .v-badge__badge
+      border-radius: $date-picker-event-border-radius
+      height: $date-picker-event-size
+      width: $date-picker-event-size
+
+  .v-date-picker-month__day .v-date-picker-month__events
+    bottom: $date-picker-event-date-bottom

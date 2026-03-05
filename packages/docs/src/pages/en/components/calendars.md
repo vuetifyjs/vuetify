@@ -9,7 +9,7 @@ related:
   - /components/time-pickers
   - /components/cards
 features:
-  github: /labs/VCalendar/
+  github: /components/VCalendar/
   label: 'C: VCalendar'
   report: true
 ---
@@ -19,24 +19,6 @@ features:
 The `v-calendar` component is used to display information in a daily, weekly, monthly, or category view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. The category view has a slot for each category in the day and timed sections based on the categories given or the categories in the given events. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.
 
 <PageFeatures />
-
-::: warning
-This feature requires [v3.10.0](/getting-started/release-notes/?version=v3.4.9)
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VCalendar } from 'vuetify/labs/VCalendar'
-
-export default createVuetify({
-  components: {
-    VCalendar,
-  },
-})
-```
 
 ## Usage
 

@@ -1,7 +1,7 @@
 import { VColorPicker } from '../VColorPicker'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { within } from '@testing-library/vue'
 
 const stories = {
@@ -176,7 +176,5 @@ describe('VColorPicker', () => {
     expect(update).toHaveBeenCalledWith('#FF00CC')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

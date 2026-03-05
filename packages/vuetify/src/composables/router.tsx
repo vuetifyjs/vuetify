@@ -14,6 +14,7 @@ import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
   NavigationGuardNext,
+  RouteLocation,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
@@ -35,6 +36,7 @@ export interface LinkProps {
   replace: boolean | undefined
   to: RouteLocationRaw | undefined
   exact: boolean | undefined
+  disabled: boolean | undefined
 }
 
 export interface LinkListeners {
@@ -42,11 +44,14 @@ export interface LinkListeners {
   onClickOnce?: EventProp | undefined
 }
 
-export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
+export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'|'route'|'navigate'> {
   isLink: Readonly<Ref<boolean>>
+  isRouterLink: Readonly<Ref<boolean>>
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
+  route: Readonly<Ref<RouteLocation & { href: string} | undefined>>
+  navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -61,9 +66,12 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     const href = toRef(() => props.href)
     return {
       isLink,
+      isRouterLink: toRef(() => false),
       isClickable,
       href,
       linkProps: reactive({ href }),
+      route: toRef(() => undefined),
+      navigate: toRef(() => undefined),
     }
   }
 
@@ -83,17 +91,21 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
   })
   const href = computed(() => props.to ? link.value?.route.value.href : props.href)
+  const isRouterLink = toRef(() => !!props.to)
 
   return {
     isLink,
+    isRouterLink,
     isClickable,
     isActive,
-    route: link.value?.route,
-    navigate: link.value?.navigate,
+    route: toRef(() => link.value?.route.value),
+    navigate: toRef(() => link.value?.navigate),
     href,
     linkProps: reactive({
       href,
       'aria-current': toRef(() => isActive.value ? 'page' : undefined),
+      'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
   }
 }

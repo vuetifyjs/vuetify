@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Treeview
   title: Treeview component
@@ -19,8 +18,6 @@ features:
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
 <PageFeatures />
-
-<DocIntroduced version="3.9.0" />
 
 ## Usage
 
@@ -68,11 +65,17 @@ You can control the text and background color of the active treeview node.
 
 <ExamplesExample file="v-treeview/prop-color" />
 
-#### Dense mode
+#### Density
 
 Dense mode provides more compact layout with decreased heights of the items.
 
 <ExamplesExample file="v-treeview/prop-dense" />
+
+#### Items registration
+
+When working with large trees it is recommended to include `items-registration="props"` to ensure faster loading and interactions.
+
+<ExamplesExample file="v-treeview/prop-items-registration" />
 
 <!-- #### Hoverable
 
@@ -112,7 +115,16 @@ You can control the color of the selected node checkbox.
 
 #### Selection type
 
-Treeview now supports two different selection types. The default type is **'leaf'**, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is **'independent'**, which allows one to select parent nodes, but each node is independent of its parent and children.
+Treeview supports several selection modes:
+
+- **leaf** (default): Limits selection to items without children.
+- **independent**: Lets you select any node, with no parent-child linkage at all.
+- **classic**: Selecting a parent selects all descendants, and parent nodes show as selected only when all their descendants are selected. Only leaf nodes are added to the model.
+
+Classic has two variants that are displayed the same way but with slightly different v-model behavior:
+
+- **branch**: Any parent node with at least one selected descendant is also added to the model.
+- **trunk**: If all children are selected only the parent node is added to the model.
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 
@@ -135,6 +147,12 @@ Using the the **prepend** slot we are able to create an intuitive file explorer.
 Both **append**, and **prepend** slots get additional information about the item: `depth`, `path` (from indexes), `isFirst`, `isLast` and the `index` within the children list.
 
 <ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
+
+#### No data
+
+When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
+
+<ExamplesExample file="v-treeview/slot-no-data" />
 
 #### Title
 

@@ -54,7 +54,9 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -148,6 +150,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "calendars",
       "confirm-edit",
       "data-iterators",
       {
@@ -165,6 +168,7 @@
           "virtual-tables"
         ]
       },
+      "hotkeys",
       "sparklines",
       "infinite-scroller",
       "tables",
@@ -249,11 +253,15 @@
     "items": [
       "introduction",
       {
-        "title": "calendars",
+        "title": "avatar-groups",
         "subfolder": "components"
       },
       {
         "title": "color-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "command-palettes",
         "subfolder": "components"
       },
       {
@@ -282,10 +290,6 @@
       },
       {
         "title": "mask-inputs",
-        "subfolder": "components"
-      },
-      {
-        "title": "hotkeys",
         "subfolder": "components"
       },
       {

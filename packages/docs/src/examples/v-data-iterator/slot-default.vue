@@ -21,7 +21,7 @@
                 start
               ></v-icon>
 
-              <h4>{{ item.raw.name }}</h4>
+              <h4 class="my-0 text-title-large font-weight-medium">{{ item.raw.name }}</h4>
             </v-card-title>
 
             <v-card-text>

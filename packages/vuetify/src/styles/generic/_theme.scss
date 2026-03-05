@@ -1,0 +1,10 @@
+@use '../tools';
+
+@include tools.layer('utilities.theme-base') {
+  .v-theme-on-light {
+    color: rgb(var(--v-theme-on-light));
+  }
+  .v-theme-on-dark {
+    color: rgb(var(--v-theme-on-dark));
+  }
+}

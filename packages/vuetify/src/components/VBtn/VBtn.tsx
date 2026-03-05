@@ -121,7 +121,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return props.active
       }
 
-      if (link.isLink.value) {
+      if (link.isRouterLink.value) {
         return link.isActive?.value
       }
 
@@ -165,8 +165,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      link.navigate?.(e)
-      group?.toggle()
+      if (link.isRouterLink.value) {
+        link.navigate.value?.(e)
+      } else {
+        // Group active state for links is handled by useSelectLink
+        group?.toggle()
+      }
     }
 
     useSelectLink(link, group?.select)
@@ -179,6 +183,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
       return withDirectives(
         <Tag
+          { ...link.linkProps }
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
@@ -221,11 +226,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
             props.style,
           ]}
           aria-busy={ props.loading ? true : undefined }
-          disabled={ isDisabled.value || undefined }
+          disabled={ (isDisabled.value && Tag !== 'a') || undefined }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
           value={ valueAttr.value }
-          { ...link.linkProps }
         >
           { genOverlays(true, 'v-btn') }
 

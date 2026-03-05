@@ -11,7 +11,7 @@
     "showArrowsOnHover": "Display the \"next\" and \"prev\" buttons on hover. `show-arrows` MUST ALSO be set.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "touchless": "Disable touch support.",
-    "transitionDuration": "Overrides transition duration.",
+    "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
     "vertical": "Uses a vertical transition when changing windows."
   },
   "events": {

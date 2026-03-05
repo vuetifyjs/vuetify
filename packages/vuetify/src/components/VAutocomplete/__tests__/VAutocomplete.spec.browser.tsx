@@ -3,8 +3,9 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
+import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -34,7 +35,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VAutocomplete>
@@ -82,6 +83,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 
@@ -128,6 +130,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 
@@ -179,6 +182,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(container)
+    await commands.waitStable('.v-list')
 
     const menu = await screen.findByRole('listbox')
 
@@ -325,7 +329,7 @@ describe('VAutocomplete', () => {
     await userEvent.click(options[0])
 
     await userEvent.click(element)
-    await userEvent.keyboard('{Ctrl>}a{/Ctrl}{Backspace}')
+    await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
     await userEvent.click(document.body)
 
     expect(element).not.toHaveTextContent('Item 1')
@@ -354,6 +358,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
 
     await userEvent.click(screen.getAllByRole('option')[0])
     expect(selectedItems.value).toBe(1)
@@ -411,7 +416,7 @@ describe('VAutocomplete', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
       const selectedItems = ['Item 1', 'Item 2']
 
-      render(() => (
+      const { element } = render(() => (
         <VAutocomplete
           items={ items }
           modelValue={ selectedItems }
@@ -420,8 +425,8 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      const menuIcon = screen.getByRole('button', { name: /open/i })
-      await userEvent.click(menuIcon)
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
 
       const listItems = screen.getAllByRole('option')
       expect(listItems).toHaveLength(2)
@@ -443,9 +448,9 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    await userEvent.type(element, 'f')
-    const listItems = screen.getAllByRole('option')
-    expect(listItems).toHaveLength(2)
+    await userEvent.click(element)
+    await userEvent.keyboard('f')
+    await expect.poll(() => screen.findAllByRole('option')).toHaveLength(2)
     expect(selectedItems.value).toBeUndefined()
   })
 
@@ -458,17 +463,20 @@ describe('VAutocomplete', () => {
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     input.focus()
     await waitAnimationFrame()
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     input.blur()
     await rerender({ persistentPlaceholder: true })
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
     expect(input).not.toHaveAttribute('placeholder')
@@ -494,14 +502,14 @@ describe('VAutocomplete', () => {
 
   it('should not open menu when closing a chip', async () => {
     const { element } = render(() => (
-        <VAutocomplete
-          chips
-          closableChips
-          items={['foo', 'bar']}
-          label="Autocomplete"
-          modelValue={['foo', 'bar']}
-          multiple
-        />
+      <VAutocomplete
+        chips
+        closableChips
+        items={['foo', 'bar']}
+        label="Autocomplete"
+        modelValue={['foo', 'bar']}
+        multiple
+      />
     ))
 
     expect(screen.queryByRole('listbox')).toBeNull()
@@ -535,6 +543,7 @@ describe('VAutocomplete', () => {
       const getItems = () => screen.queryAllByRole('option')
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
       await expect.poll(getItems).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
@@ -615,7 +624,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(element)
-
+    await commands.waitStable('.v-list')
     const items = await screen.findAllByRole('option')
     expect(items).toHaveLength(2)
 
@@ -633,7 +642,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryByRole('listbox')).toBeNull()
 
     await rerender({ items: ['Foo', 'Bar'] })
-    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
+    await expect(screen.findByRole('listbox')).resolves.toBeVisible()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/19346
@@ -643,7 +652,7 @@ describe('VAutocomplete', () => {
     })
 
     await userEvent.click(element)
-    await expect(screen.findByRole('listbox')).resolves.toBeDisplayed()
+    await expect.poll(() => screen.findByRole('listbox')).toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
     await rerender({ items: ['Foo', 'Bar', 'test', 'test 2'] })
@@ -689,12 +698,75 @@ describe('VAutocomplete', () => {
       <VAutocomplete onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate between header, list, and footer with Tab', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'menu-header': () => (
+              <div>
+                <button data-testid="header-btn">Header Button</button>
+              </div>
+            ),
+            'menu-footer': () => (
+              <div>
+                <button data-testid="footer-btn">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      // Navigate to list first
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      // Tab to list
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Tab to footer
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('footer-btn')).toHaveFocus()
+
+      // Shift+Tab back to list
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Shift+Tab back to header
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
   })
+
+  showcase({ stories })
 })
