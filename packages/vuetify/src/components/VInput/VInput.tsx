@@ -221,7 +221,7 @@ export const VInput = genericComponent<new <T>(
 
           { slots.default && (
             <div class="v-input__control">
-               <slot { ...slotProps.value }></slot>
+              <slot { ...slotProps.value }></slot>
             </div>
           )}
 

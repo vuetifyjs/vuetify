@@ -268,7 +268,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             top: () => slots.top?.(slotProps.value),
             default: () => slots.default ? slots.default(slotProps.value)
             : (
-<>
+              <>
                 { slots.colgroup?.(slotProps.value) }
                 { !props.hideDefaultHeader && (
                   <thead key="thead">

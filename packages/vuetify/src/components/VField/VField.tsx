@@ -342,16 +342,17 @@ export const VField = genericComponent<new <T>(
             )}
 
             { slots.default ? (
-              <slot { ...{
-                ...slotProps.value,
-                props: {
-                  id: id.value,
-                  class: 'v-field__input',
-                  'aria-describedby': messagesId.value,
-                },
-                focus,
-                blur,
-              } as VFieldSlot }
+              <slot
+                { ...{
+                  ...slotProps.value,
+                  props: {
+                    id: id.value,
+                    class: 'v-field__input',
+                    'aria-describedby': messagesId.value,
+                  },
+                  focus,
+                  blur,
+                } as VFieldSlot }
               />
             ) : (
               <div
