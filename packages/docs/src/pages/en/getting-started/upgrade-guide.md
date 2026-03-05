@@ -55,7 +55,7 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 - **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset)
 - **Grid usage** — `<v-row>` and `<v-col>`, with specific focus on ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
-- **Grid attributes** — `dense`, `no-gutters`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
+- **Grid attributes** — `dense`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
 - **Shadows** — `elevation-*` classes and `elevation` attributes or CSS overrides (affected by elevation changes)
 - **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography)
 
