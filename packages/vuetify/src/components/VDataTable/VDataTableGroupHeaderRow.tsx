@@ -68,19 +68,19 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const onClick = () => toggleGroup(props.item)
 
             return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
-                <VDataTableColumn
-                  class="v-data-table-group-header-row__column"
-                  colspan={ colspan.value }
-                >
-                  <VBtn
-                    size="small"
-                    variant="text"
-                    icon={ icon }
-                    onClick={ onClick }
-                  />
-                  <span>{ props.item.value }</span>
-                  <span>({ rows.value.length })</span>
-                </VDataTableColumn>
+              <VDataTableColumn
+                class="v-data-table-group-header-row__column"
+                colspan={ colspan.value }
+              >
+                <VBtn
+                  size="small"
+                  variant="text"
+                  icon={ icon }
+                  onClick={ onClick }
+                />
+                <span>{ props.item.value }</span>
+                <span>({ rows.value.length })</span>
+              </VDataTableColumn>
             )
           } else if (column.key === 'data-table-select') {
             const selectableRows = rows.value.filter(x => x.selectable)
@@ -88,15 +88,15 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             const indeterminate = isSomeSelected(selectableRows) && !modelValue
             const selectGroup = (v: boolean) => select(selectableRows, v)
             return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
-                <VDataTableColumn class="v-data-table__td--select-row" noPadding>
-                  <VCheckboxBtn
-                    density={ props.density }
-                    disabled={ selectableRows.length === 0 }
-                    modelValue={ modelValue }
-                    indeterminate={ indeterminate }
-                    onUpdate:modelValue={ selectGroup }
-                  />
-                </VDataTableColumn>
+              <VDataTableColumn class="v-data-table__td--select-row" noPadding>
+                <VCheckboxBtn
+                  density={ props.density }
+                  disabled={ selectableRows.length === 0 }
+                  modelValue={ modelValue }
+                  indeterminate={ indeterminate }
+                  onUpdate:modelValue={ selectGroup }
+                />
+              </VDataTableColumn>
             )
           }
 
