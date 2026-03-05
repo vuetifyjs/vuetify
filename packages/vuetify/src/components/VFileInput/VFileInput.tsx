@@ -368,7 +368,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       )
     })
 
-    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({ controlRef: inputRef }, vInputRef, vFieldRef, inputRef)
   },
 })
 

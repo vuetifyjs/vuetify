@@ -17,5 +17,8 @@
   "events": {
     "counter": "Creates counter for selected files length. Does not apply any validation.",
     "mousedown:control": "Event that is emitted when using mousedown on the main control area."
+  },
+  "exposed": {
+    "controlRef": "Reference to the underlying input element."
   }
 }
