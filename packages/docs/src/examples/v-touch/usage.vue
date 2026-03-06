@@ -1,8 +1,6 @@
 <template>
   <v-row
-    align="center"
-    class="bg-grey-lighten-2"
-    justify="center"
+    class="bg-grey-lighten-2 align-center justify-center"
     style="height: 500px"
     v-touch="{
       left: () => swipe('Left'),
@@ -12,7 +10,7 @@
     }"
   >
     <v-col class="text-center">
-      <div class="text-subtitle-2">Swipe Direction</div>
+      <div class="text-title-small">Swipe Direction</div>
       {{ swipeDirection }}
     </v-col>
   </v-row>

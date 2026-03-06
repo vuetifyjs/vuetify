@@ -17,8 +17,8 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, mergeProps } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, mergeProps, nextTick } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
@@ -64,6 +64,10 @@ export const makeVDataTableHeadersProps = propsFactory({
   fixedHeader: Boolean,
   multiSort: Boolean,
   initialSortOrder: String as PropType<'asc' | 'desc'>,
+  sortIcon: {
+    type: IconValue,
+    // default: '$sort', // maybe in v4
+  },
   sortAscIcon: {
     type: IconValue,
     default: '$sortAsc',
@@ -118,9 +122,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     function getSortIcon (column: InternalDataTableHeader) {
       const item = sortBy.value.find(item => item.key === column.key)
 
-      return (!item && props.initialSortOrder === 'asc') || item?.order === 'asc'
-        ? props.sortAscIcon
-        : props.sortDescIcon
+      switch (item?.order) {
+        case 'asc': return props.sortAscIcon
+        case 'desc': return props.sortDescIcon
+        default: return props.sortIcon ||
+          (
+            props.initialSortOrder === 'asc'
+              ? props.sortAscIcon
+              : props.sortDescIcon
+          )
+      }
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
@@ -245,10 +256,21 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const VDataTableMobileHeaderCell = () => {
-      const displayItems = computed<ItemProps['items']>(() => {
+      const sortableColumns = computed<ItemProps['items']>(() => {
         return columns.value.filter(column => column?.sortable && !props.disableSort)
       })
       const showSelectColumn = columns.value.find(column => column.key === 'data-table-select')
+      const sortingChips = computed<InternalDataTableHeader | InternalDataTableHeader[] | null>({
+        get: () => sortableColumns.value.filter(({ key }) => sortBy.value.some(v => v.key === key)),
+        set: val => {
+          const sortedColumns = wrapInArray(val)
+          const activeSortKeys = sortBy.value.map(v => v.key)
+          const newColumnsToSort = sortedColumns.filter(({ key }) => !activeSortKeys.includes(key!))
+          newColumnsToSort.forEach(column => toggleSort(column))
+          // sortBy is proxied model, needs nextTick after toggleSort
+          nextTick(() => sortBy.value = sortBy.value.filter(({ key }) => sortedColumns.some(c => c.key === key)))
+        },
+      })
 
       return (
         <VDataTableColumn
@@ -261,15 +283,17 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           <div class="v-data-table-header__content">
             <VSelect
+              v-model={ sortingChips.value }
               chips
               color={ props.color }
               class="v-data-table__td-sort-select"
               clearable
               density="default"
-              items={ displayItems.value }
+              items={ sortableColumns.value }
               label={ t('$vuetify.dataTable.sortBy') }
               multiple={ props.multiSort }
               variant="underlined"
+              returnObject
               onClick:clear={ () => sortBy.value = [] }
             >
               {{
@@ -282,21 +306,21 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                     onUpdate:modelValue={ () => selectAll(!allSelected.value) }
                   />
                 ) : undefined,
-                chip: props => (
+                chip: ({ internalItem }) => (
                   <VChip
-                    onClick={ props.item.raw?.sortable ? () => toggleSort(props.item.raw) : undefined }
+                    onClick={ internalItem.raw.sortable ? () => toggleSort(internalItem.raw, undefined, true) : undefined }
                     onMousedown={ (e: MouseEvent) => {
                       e.preventDefault()
                       e.stopPropagation()
                     }}
                   >
-                    { props.item.title }
+                    { internalItem.title }
                     <VIcon
                       class={[
                         'v-data-table__td-sort-icon',
-                        isSorted(props.item.raw) && 'v-data-table__td-sort-icon-active',
+                        isSorted(internalItem.raw) && 'v-data-table__td-sort-icon-active',
                       ]}
-                      icon={ getSortIcon(props.item.raw) }
+                      icon={ getSortIcon(internalItem.raw) }
                       size="small"
                     />
                   </VChip>

@@ -19,8 +19,6 @@ The OTP input is used for MFA procedure of authenticating users by a one-time pa
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 Here we display a list of settings that could be applied within an application.
@@ -85,6 +83,12 @@ The `error` prop puts the `v-otp-input` into an error state. This is useful for 
 The `v-otp-input` component supports the same variants as `v-field`, `v-text-field` and other inputs.
 
 <ExamplesExample file="v-otp-input/prop-variant" />
+
+#### Masked
+
+Using `masked` prop you can hide the entered characters. It is similar to a `type="password"`, but makes it possible to also restrict characters to digits with `type="number"`.
+
+<ExamplesExample file="v-otp-input/prop-masked" />
 
 #### Loader
 

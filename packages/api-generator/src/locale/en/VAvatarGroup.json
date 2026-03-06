@@ -1,0 +1,18 @@
+{
+  "props": {
+    "border": "Applies border styles to the child [v-avatar](/components/avatars) components.",
+    "gap": "Sets the overlap gap between avatars. Negative values cause avatars to overlap.",
+    "hoverable": "Enables a hover animation on child avatars.",
+    "limit": "Limits the number of visible avatars. Remaining items are represented by an overflow indicator.",
+    "overflowText": "Custom text to display in the overflow avatar. Defaults to `+N` where N is the number of hidden items.",
+    "reverse": "Reverses the stacking order of the avatars.",
+    "size": "Sets the size of all child avatars.",
+    "vertical": "Stacks avatars vertically instead of horizontally."
+  },
+  "slots": {
+    "prepend": "Custom content to be displayed before the avatar list.",
+    "append": "Custom content to be displayed after the avatar list.",
+    "item": "Customize each avatar item. Receives `props` and `index`.",
+    "overflow": "Customize the overflow indicator. Receives the count of hidden items."
+  }
+}

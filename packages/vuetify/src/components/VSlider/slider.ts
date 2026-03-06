@@ -99,9 +99,9 @@ export const makeSliderProps = propsFactory({
   },
   thumbColor: String,
   thumbLabel: {
-    type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
+    type: [Boolean, String] as PropType<boolean | 'always' | 'hover' | undefined>,
     default: undefined,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => typeof v === 'boolean' || v === 'always' || v === 'hover',
   },
   thumbSize: {
     type: [Number, String],
@@ -136,7 +136,7 @@ export const makeSliderProps = propsFactory({
 
   ...makeRoundedProps(),
   ...makeElevationProps({
-    elevation: 2,
+    elevation: 1,
   }),
   ripple: {
     type: Boolean,

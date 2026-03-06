@@ -131,7 +131,9 @@
 </template>
 
 <script setup>
-  const ex4 = ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red darken-3', 'indigo darken-3', 'orange darken-3']
+  import { ref } from 'vue'
+
+  const ex4 = ref(['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red darken-3', 'indigo darken-3', 'orange darken-3'])
 </script>
 
 <script>
@@ -143,3 +145,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2043-81380&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

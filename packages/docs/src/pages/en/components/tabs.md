@@ -143,6 +143,4 @@ You can use a menu to hold additional tabs, swapping them out on the fly.
 
 Use the **tab** and **item** slots with the **items** prop to reduce the markup required to build tabs.
 
-<DocIntroduced version="3.6.0" />
-
 <ExamplesExample file="v-tabs/slot-tabs" />

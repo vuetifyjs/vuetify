@@ -1,6 +1,6 @@
 <template>
   <v-container max-width="800">
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="12" sm="auto">
         <v-tabs
           :items="example1"

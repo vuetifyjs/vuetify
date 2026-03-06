@@ -1,6 +1,7 @@
 // Components
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
@@ -49,10 +50,12 @@ export const makeVDateInputProps = propsFactory({
     default: 'bottom start',
   },
   menu: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
   },
+  pickerProps: Object as PropType<VDatePicker['$props']>,
 
   ...makeDateFormatProps(),
   ...makeDisplayProps({
@@ -109,6 +112,7 @@ export const VDateInput = genericComponent<new <
     const adapter = useDate()
     const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
     const { mobile } = useDisplay(props)
+    const { InputIcon } = useInputIcon(props)
 
     const { clampDate, isInAllowedRange } = useCalendarRange(props)
 
@@ -194,11 +198,13 @@ export const VDateInput = genericComponent<new <
     }
 
     function onClick (e: MouseEvent) {
+      if (props.disabled) return
+
       e.preventDefault()
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        isEditingInput.value = true
+        isEditingInput.value = !props.readonly
       } else {
         menu.value = true
       }
@@ -259,17 +265,21 @@ export const VDateInput = genericComponent<new <
     }
 
     useRender(() => {
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
       const confirmEditProps = VConfirmEdit.filterProps(props)
-      const datePickerProps = VDatePicker.filterProps(omit(props, [
-        'active',
-        'bgColor',
-        'color',
-        'location',
-        'rounded',
-        'maxWidth',
-        'minWidth',
-        'width',
-      ]))
+      const datePickerProps = {
+        ...VDatePicker.filterProps(omit(props, [
+          'active',
+          'bgColor',
+          'color',
+          'location',
+          'rounded',
+          'maxWidth',
+          'minWidth',
+          'width',
+        ])),
+        ...props.pickerProps,
+      }
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
@@ -277,7 +287,7 @@ export const VDateInput = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          class={ props.class }
+          class={['v-date-input', props.class]}
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
@@ -287,8 +297,7 @@ export const VDateInput = genericComponent<new <
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
-          onClick:control={ isInteractive.value ? onClick : undefined }
-          onClick:prepend={ isInteractive.value ? onClick : undefined }
+          onClick:control={ onClick }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
         >
@@ -304,6 +313,7 @@ export const VDateInput = genericComponent<new <
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  { ...props.menuProps }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }
@@ -351,6 +361,18 @@ export const VDateInput = genericComponent<new <
                 { slots.default?.() }
               </>
             ),
+            prepend: hasPrepend ? prependSlotProps => (
+              slots.prepend
+                ? slots.prepend(prependSlotProps)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    tabindex={ props['onClick:prepend'] ? undefined : -1 }
+                    onClick={ isInteractive.value ? onClick : undefined }
+                  />
+                ))
+            ) : undefined,
           }}
         </VTextField>
       )

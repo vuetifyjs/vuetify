@@ -5,6 +5,7 @@
     "focusAll": "Puts all inputs into a focus state when any are focused",
     "length": "The OTP field's length.",
     "placeholder": "Sets the input’s placeholder text.",
+    "masked": "Hides the entered characters with bullets, similar to a password input, but makes it possible to also restrict characters to digits with `type=\"number\"`.",
     "type": "Supported types: `text`, `password`, `number`."
   },
   "events": {

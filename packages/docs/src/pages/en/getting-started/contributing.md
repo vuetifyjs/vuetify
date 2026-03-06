@@ -129,8 +129,8 @@ Vuetify uses [Vitest](https://vitest.dev/) for unit tests, [Vitest browser mode]
 - `pnpm test:browser` - run only browser tests
 - `pnpm test:open` - run browser tests in a chrome window
   - use this if you need devtools to debug a failing test
-- `pnpm test:screen` - run only screenshot tests, saves a report to `.vizzly/report/index.html`
-- `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
+- `pnpm test:screen` - run only screenshot tests, saves a report to http://localhost:47392/
+- `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:screen`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
   - run `pnpm tdd:stop` when you're done to kill the background process
 
 The `test:*` commands all accept a list of test names to filter by, eg. `pnpm test textfield textarea` to only run VTextField and VTextarea tests.
@@ -140,10 +140,10 @@ The `test:*` commands all accept a list of test names to filter by, eg. `pnpm te
 - Checkout the base branch (`master` or `dev`)
 - Run `pnpm tdd`
 - Visit http://localhost:47392/stats and click "Reset baselines"
-- Run `pnpm test:browser`
+- Run `pnpm test:screen`
 - Click "Accept all changes"
 - Checkout your PR branch
-- Run `pnpm test:browser` again
+- Run `pnpm test:screen` again
 - Any visual differences will be shown on http://localhost:47392
 
 ### Documentation
@@ -190,22 +190,22 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Version | Type of change | Branch |
-| - | - | - |
-| Vuetify 3 | Documentation | `master` |
-| Vuetify 3 | Bug fixes | `master` |
-| Vuetify 3 | New features | `dev` |
-| Vuetify 3 | Features with breaking changes| `next` |
-| Vuetify 2 | Documentation|  `v2-stable` |
-| Vuetify 2 | Bug fixes | `v2-stable` |
-| Vuetify 2 | New features | `v2-dev` |
+| Version   | Type of change                 | Branch      |
+|-----------|--------------------------------|-------------|
+| Vuetify 4 | Documentation                  | `master`    |
+| Vuetify 4 | Bug fixes                      | `master`    |
+| Vuetify 4 | New features                   | `dev`       |
+| Vuetify 5 | Features with breaking changes | `next`      |
+| Vuetify 3 | Documentation                  | `v3-stable` |
+| Vuetify 3 | Bug fixes                      | `v3-stable` |
+| Vuetify 2 | Documentation                  | `v2-stable` |
 
 ```bash
 # Switch to the desired branch
-# v3
+# v4
 git switch master
-# v2
-git switch v2-stable
+# v3
+git switch v3-stable
 
 # Pull down any upstream changes
 git pull

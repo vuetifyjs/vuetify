@@ -1,5 +1,5 @@
 // Styles
-import './VGrid.sass'
+import './VSpacer.sass'
 
 // Utilities
 import { createSimpleFunctional } from '@/util'

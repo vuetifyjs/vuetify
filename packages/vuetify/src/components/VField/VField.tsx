@@ -32,7 +32,8 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ClassValue } from '@/composables/component'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -42,13 +43,16 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
   isFocused: Ref<boolean>
+  iconColor: ComputedRef<string | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown>
+  props: Record<string, unknown> & {
+    class?: ClassValue
+  }
 }
 
 export const makeVFieldProps = propsFactory({
@@ -210,9 +214,26 @@ export const VField = genericComponent<new <T>(
       isActive,
       isFocused,
       controlRef,
+      iconColor,
       blur,
       focus,
     }))
+
+    const floatingLabelProps = toRef(() => {
+      const ariaHidden = !isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
+
+    const mainLabelProps = toRef(() => {
+      const ariaHidden = hasFloatingLabel.value && isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
 
     function onClick (e: MouseEvent) {
       if (e.target !== document.activeElement) {
@@ -302,8 +323,7 @@ export const VField = genericComponent<new <T>(
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
-                for={ id.value }
-                aria-hidden={ !isActive.value }
+                { ...floatingLabelProps.value }
                 style={ textColorStyles.value }
               >
                 { label() }
@@ -315,8 +335,7 @@ export const VField = genericComponent<new <T>(
                 key="label"
                 ref={ labelRef }
                 id={ props.labelId }
-                for={ id.value }
-                aria-hidden={ hasFloatingLabel.value && isActive.value }
+                { ...mainLabelProps.value }
               >
                 { label() }
               </VFieldLabel>
@@ -408,7 +427,11 @@ export const VField = genericComponent<new <T>(
 
                 { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+                    <VFieldLabel
+                      ref={ floatingLabelRef }
+                      floating
+                      { ...floatingLabelProps.value }
+                    >
                       { label() }
                     </VFieldLabel>
                   </div>
@@ -419,7 +442,7 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+              <VFieldLabel ref={ floatingLabelRef } floating { ...floatingLabelProps.value }>
                 { label() }
               </VFieldLabel>
             )}
