@@ -9,7 +9,7 @@
     <template #default>
       <div class="pl-4">
         <div class="d-flex flex-row justify-space-between w-100 mb-6">
-          <h5 class="text-headline-medium">Love Vuetify?</h5>
+          <h5 class="my-0 text-headline-medium">Love Vuetify?</h5>
         </div>
         <p style="text-wrap: pretty;">
           This project is maintained in the spare time of our core team.
