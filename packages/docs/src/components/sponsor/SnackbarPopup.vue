@@ -82,6 +82,11 @@
 
   const supportLinks =
     [{
+      title: 'Github',
+      subtitle: 'Become a sponsor',
+      link: 'https://github.com/sponsors/johnleider',
+      icon: 'mdi-github',
+    }, {
       title: 'Open Collective',
       subtitle: 'Monthly donation',
       link: 'https://opencollective.com/vuetify',
@@ -91,10 +96,5 @@
       subtitle: 'Sponsor channel',
       link: 'https://discord.com/servers/vuetify-340160225338195969',
       icon: 'mdi-discord',
-    }, {
-      title: 'Github',
-      subtitle: 'Become a sponsor',
-      link: 'https://github.com/sponsors/johnleider',
-      icon: 'mdi-github',
     }]
 </script>
