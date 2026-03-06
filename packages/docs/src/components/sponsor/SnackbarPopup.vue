@@ -60,6 +60,7 @@
     if (
       !dismissed.value &&
       !one.isSubscriber &&
+      Math.random() > 0.5 &&
       Number(window.localStorage.getItem('userSessions')) >= 5 &&
       !window.localStorage.getItem('sponsorPopupDismissed')
     ) {
