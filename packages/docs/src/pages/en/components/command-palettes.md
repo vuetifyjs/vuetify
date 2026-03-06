@@ -25,6 +25,20 @@ The `v-command-palette` component provides a keyboard-driven command interface t
 This feature was introduced as a labs component and is available for testing and feedback.
 :::
 
+## Installation
+
+Labs components require manual import and registration with the Vuetify instance.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VCommandPalette } from 'vuetify/labs/VCommandPalette'
+
+export default createVuetify({
+  components: {
+    VCommandPalette,
+  },
+})
+```
+
 ## Usage
 
 The command palette displays a searchable list of commands in a dialog. Users can type to filter items and press Enter or click to execute commands.
