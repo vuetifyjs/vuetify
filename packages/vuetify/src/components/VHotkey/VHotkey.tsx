@@ -366,8 +366,8 @@ export const VHotkey = genericComponent()({
       )
     }
 
-    function renderContent () {
-      return (
+    useRender(() => {
+      const content = (
         <>
           { props.prefix && (
             <span key="prefix" class="v-hotkey__prefix">{ props.prefix }</span>
@@ -391,9 +391,7 @@ export const VHotkey = genericComponent()({
           )}
         </>
       )
-    }
 
-    useRender(() => {
       return (
         <div
           class={[
@@ -412,7 +410,7 @@ export const VHotkey = genericComponent()({
           role="img"
           aria-label={ accessibleLabel.value }
         >
-          { props.variant !== 'contained' ? renderContent() : (
+          { props.variant !== 'contained' ? content : (
             <VKbd
               key="contained"
               class={[
@@ -425,7 +423,7 @@ export const VHotkey = genericComponent()({
               style={ colorStyles.value }
               aria-hidden="true"
             >
-              { renderContent() }
+              { content }
             </VKbd>
           )}
         </div>
