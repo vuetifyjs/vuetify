@@ -64,6 +64,9 @@
       !window.localStorage.getItem('sponsorPopupDismissed')
     ) {
       showSnackbar.value = true
+      track({
+        ev: 'sponsorPopupShown',
+      })
     }
   })
 
