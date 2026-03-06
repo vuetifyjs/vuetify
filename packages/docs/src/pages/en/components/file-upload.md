@@ -23,11 +23,19 @@ features:
 Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VFileUpload } from 'vuetify/labs/VFileUpload'
+import {
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
+} from 'vuetify/labs/VFileUpload'
 
 export default createVuetify({
   components: {
     VFileUpload,
+    VFileUploadDropzone,
+    VFileUploadItem,
+    VFileUploadList,
   },
 })
 ```
