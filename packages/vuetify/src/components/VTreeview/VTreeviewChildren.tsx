@@ -151,57 +151,45 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         variant: props.indentLinesVariant,
       })
 
-      function renderItem (itemProps: Record<string, any>) {
-        return (
-          <VTreeviewItem { ...itemProps }>
-            {{
-              toggle: slots.toggle
-                ? slotProps => slots.toggle?.({
-                  ...slotProps,
-                  ...treeItemProps,
-                  item: item.raw,
-                  internalItem: item,
-                  loading: itemProps.loading,
-                })
-                : undefined,
-              prepend: slotProps => (
-                <>
-                  { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
-                    <VListItemAction start>
-                      <VCheckboxBtn
-                        key={ item.value }
-                        modelValue={ slotProps.isSelected }
-                        disabled={ props.disabled || itemProps.disabled }
-                        loading={ itemProps.loading }
-                        color={ props.selectedColor }
-                        density={ props.density }
-                        indeterminate={ slotProps.isIndeterminate }
-                        indeterminateIcon={ props.indeterminateIcon }
-                        falseIcon={ props.falseIcon }
-                        trueIcon={ props.trueIcon }
-                        onUpdate:modelValue={ v => selectItem(slotProps.select, v) }
-                        onClick={ (e: PointerEvent) => e.stopPropagation() }
-                        onKeydown={ (e: KeyboardEvent) => {
-                          if (!['Enter', 'Space'].includes(e.key)) return
-                          e.stopPropagation()
-                          selectItem(slotProps.select, slotProps.isSelected)
-                        }}
-                      />
-                    </VListItemAction>
-                  )}
+      const slotsWithItem = {
+        toggle: slots.toggle
+          ? slotProps => slots.toggle?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item, loading })
+          : undefined,
+        prepend: slotProps => (
+          <>
+            { props.selectable && (!children || (children && !['leaf', 'single-leaf'].includes(props.selectStrategy as string))) && (
+              <VListItemAction start>
+                <VCheckboxBtn
+                  key={ item.value }
+                  modelValue={ slotProps.isSelected }
+                  disabled={ props.disabled || itemProps.disabled }
+                  loading={ loading }
+                  color={ props.selectedColor }
+                  density={ props.density }
+                  indeterminate={ slotProps.isIndeterminate }
+                  indeterminateIcon={ props.indeterminateIcon }
+                  falseIcon={ props.falseIcon }
+                  trueIcon={ props.trueIcon }
+                  onUpdate:modelValue={ v => selectItem(slotProps.select, v) }
+                  onClick={ (e: PointerEvent) => e.stopPropagation() }
+                  onKeydown={ (e: KeyboardEvent) => {
+                    if (!['Enter', 'Space'].includes(e.key)) return
+                    e.stopPropagation()
+                    selectItem(slotProps.select, slotProps.isSelected)
+                  }}
+                />
+              </VListItemAction>
+            )}
 
-                  { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
-                </>
-              ),
-              append: slots.append
-                ? slotProps => slots.append?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item })
-                : undefined,
-              title: slots.title ? slotProps => slots.title?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
-              subtitle: slots.subtitle ? slotProps => slots.subtitle?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
-            }}
-          </VTreeviewItem>
-        )
-      }
+            { slots.prepend?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item }) }
+          </>
+        ),
+        append: slots.append
+          ? slotProps => slots.append?.({ ...slotProps, ...treeItemProps, item: item.raw, internalItem: item })
+          : undefined,
+        title: slots.title ? slotProps => slots.title?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
+        subtitle: slots.subtitle ? slotProps => slots.subtitle?.({ ...slotProps, item: item.raw, internalItem: item }) : undefined,
+      } satisfies VTreeviewItem['$props']['$children']
 
       const treeviewGroupProps = VTreeviewGroup.filterProps(itemProps)
       const treeviewChildrenProps = VTreeviewChildren.filterProps({ ...props, ...treeItemProps })
@@ -222,10 +210,9 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               const listItemProps = {
                 ...itemProps,
                 ...activatorProps,
-                loading,
+                value: itemProps?.value,
                 hideActions: props.hideActions,
                 indentLines: indentLines.node,
-                value: props.returnObject ? item.raw : itemProps.value,
                 ariaExpanded: isOpen,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: props.disabled || itemProps.disabled
@@ -236,13 +223,18 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               }
 
               return renderSlot(
-                slots, 'header',
+                slots.header,
                 { props: listItemProps, item: item.raw, internalItem: item, loading },
-                () => renderItem({
-                  ...listItemProps,
-                  ref: (el: VTreeviewItem) => activatorItems.value[index] = el,
-                  hasCustomPrepend: !!slots.prepend,
-                })
+                () => (
+                  <VTreeviewItem
+                    ref={ el => activatorItems.value[index] = el as VTreeviewItem }
+                    { ...listItemProps }
+                    hasCustomPrepend={ !!slots.prepend }
+                    value={ props.returnObject ? item.raw : itemProps.value }
+                    loading={ loading }
+                    v-slots={ slotsWithItem }
+                  />
+                )
               )
             },
             default: () => (
@@ -262,31 +254,33 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           }}
         </VTreeviewGroup>
       ) : renderSlot(
-        slots, 'item',
+        slots.item,
         { props: itemProps, item: item.raw, internalItem: item },
         () => {
           if (item.type === 'divider') {
             return renderSlot(
-              slots, 'divider',
+              slots.divider,
               { props: item.raw },
               () => <VDivider { ...item.props } />,
             )
           }
           if (item.type === 'subheader') {
             return renderSlot(
-              slots, 'subheader',
+              slots.subheader,
               { props: item.raw },
               () => <VListSubheader { ...item.props } />,
             )
           }
-          return renderItem({
-            ...itemProps,
-            loading,
-            hasCustomPrepend: !!slots.prepend,
-            hideActions: props.hideActions,
-            indentLines: indentLines.leaf,
-            value: props.returnObject ? toRaw(item.raw) : itemProps.value,
-          })
+          return (
+            <VTreeviewItem
+              { ...itemProps }
+              hasCustomPrepend={ !!slots.prepend }
+              hideActions={ props.hideActions }
+              indentLines={ indentLines.leaf }
+              value={ props.returnObject ? toRaw(item.raw) : itemProps.value }
+              v-slots={ slotsWithItem }
+            />
+          )
         })
     })
   },
