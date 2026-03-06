@@ -14,7 +14,8 @@
         <p style="text-wrap: pretty;">
           This project is maintained in the spare time of our core team.
           If it is useful to you or your team, consider sponsoring to
-          help support ongoing development and new features.</p>
+          help support ongoing development and new features.
+        </p>
       </div>
     </template>
 
@@ -42,15 +43,38 @@
             <v-icon size="24" />
           </template>
         </v-btn>
-        <v-btn class="text-none border" text="Dismiss" @click="showSnackbar = false" />
+        <v-btn class="text-none border" text="Dismiss" @click="dismiss" />
       </div>
     </template>
 
   </v-snackbar>
 </template>
 <script setup lang="ts">
+  import { track } from 'swetrix'
+
   const one = useOneStore()
-  const showSnackbar = ref(!one.isSubscriber)
+  const showSnackbar = shallowRef(false)
+  const dismissed = shallowRef(false)
+  const route = useRoute()
+  watch(() => route.path, () => {
+    if (
+      !dismissed.value &&
+      !one.isSubscriber &&
+      Number(window.localStorage.getItem('userSessions')) >= 5 &&
+      !window.localStorage.getItem('sponsorPopupDismissed')
+    ) {
+      showSnackbar.value = true
+    }
+  })
+
+  function dismiss () {
+    showSnackbar.value = false
+    dismissed.value = true
+    window.localStorage.setItem('sponsorPopupDismissed', new Date().toISOString())
+    track({
+      ev: 'sponsorPopupDismissed',
+    })
+  }
 
   const supportLinks =
     [{
