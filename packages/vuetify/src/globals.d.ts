@@ -102,7 +102,7 @@ declare module 'vue' {
   }
 
   export interface ComponentInternalInstance {
-    provides?: Record<string, unknown>
+    provides: Record<string, unknown>
     setupState: any
   }
 
