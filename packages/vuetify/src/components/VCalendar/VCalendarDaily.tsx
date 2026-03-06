@@ -10,23 +10,12 @@ import vResize from '@/directives/resize'
 
 // Utilities
 import { nextTick, onMounted, ref } from 'vue'
-import { convertToUnit, genericComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
 
 // Types
-import type { CalendarDayBodySlotScope, CalendarDayCategorySlotScope, CalendarTimestamp, DayHeaderSlotScope } from './types'
-import type { GenericProps } from '@/util'
+import type { CalendarTimestamp } from './types'
 
-export const VCalendarDaily = genericComponent<new (
-  props: {},
-  slots: {
-    'days': never
-    'day-body': CalendarDayBodySlotScope
-    'day-header': DayHeaderSlotScope
-    'day-label-header': CalendarTimestamp
-    'interval': CalendarDayCategorySlotScope
-    'interval-header': never
-  }
-) => GenericProps<typeof props, typeof slots>>()({
+export const VCalendarDaily = defineComponent({
   name: 'VCalendarDaily',
 
   directives: { vResize },

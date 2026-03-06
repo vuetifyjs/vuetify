@@ -8,29 +8,13 @@ import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './comp
 // Utilities
 import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
-import { convertToUnit, genericComponent, getPrefixedEventHandlers, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type {
-  CalendarCategory,
-  CalendarCategoryTextFunction,
-  CalendarDayBodySlotScope,
-  CalendarDayCategorySlotScope,
-  CalendarTimestamp,
-  DayHeaderSlotScope,
-} from './types'
-import type { GenericProps } from '@/util'
+import type { CalendarCategory, CalendarCategoryTextFunction, CalendarTimestamp } from './types'
 
-export const VCalendarCategory = genericComponent<new (
-  props: {},
-  slots: {
-    'category': CalendarDayCategorySlotScope
-    'day-body': CalendarDayBodySlotScope
-    'day-header': DayHeaderSlotScope
-    'interval': CalendarDayCategorySlotScope
-  }
-) => GenericProps<typeof props, typeof slots>>()({
+export const VCalendarCategory = defineComponent({
   name: 'VCalendarCategory',
 
   props: {

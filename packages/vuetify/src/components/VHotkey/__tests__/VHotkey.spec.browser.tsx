@@ -3,7 +3,7 @@ import { VHotkey } from '../VHotkey'
 
 // Utilities
 import { render, screen } from '@test'
-import { defineComponent, nextTick, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 describe('VHotkey.tsx', () => {
   describe('Key Parsing', () => {
@@ -45,18 +45,16 @@ describe('VHotkey.tsx', () => {
       expect(keys[1]).toHaveTextContent('-')
     })
 
-    it('should handle minus key with alternative names', async () => {
+    it('should handle minus key with alternative names', () => {
       // Test both variations in a single isolated render
-      const prop = ref('alt+minus')
-      render(() => <VHotkey keys={ prop.value } displayMode="text" />)
+      const { rerender } = render(() => <VHotkey keys="alt+minus" displayMode="text" />)
 
       let keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
       expect(keys[1]).toHaveTextContent('-')
 
-      prop.value = 'ctrl+hyphen'
-      await nextTick()
-
+      // Rerender with different keys
+      rerender(() => <VHotkey keys="ctrl+hyphen" displayMode="text" />)
       keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
       expect(keys[1]).toHaveTextContent('-')
@@ -515,16 +513,25 @@ describe('VHotkey.tsx', () => {
       expect(keys[0]).toHaveClass('v-hotkey__key-text') // Should use text CSS class when fallback occurs
     })
 
-    it.each(
-      ['text', 'symbol', 'icon'] as const
-    )('should handle custom key with only text config in %s mode', displayMode => {
+    it('should handle custom key with only text config in all display modes', () => {
       const customKeyMap = {
         customkey: {
           default: { text: 'CUSTOM' },
         },
       }
 
-      render(<VHotkey keys="customkey" displayMode={ displayMode } keyMap={ customKeyMap } />)
+      // Test all modes in sequence using rerender to avoid interference
+      const { rerender } = render(() => <VHotkey keys="customkey" displayMode="text" keyMap={ customKeyMap } />)
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
+
+      // Test symbol mode - should fallback to text since custom key only provides text
+      rerender(() => <VHotkey keys="customkey" displayMode="symbol" keyMap={ customKeyMap } />)
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
+
+      // Test icon mode - should fallback to text since custom key only provides text
+      rerender(() => <VHotkey keys="customkey" displayMode="icon" keyMap={ customKeyMap } />)
       expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
       expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
     })
@@ -1214,29 +1221,26 @@ describe('VHotkey.tsx', () => {
       })
     })
 
-    describe('should apply correct CSS classes for different display modes', () => {
-      it('text', () => {
-        render(<VHotkey keys="ctrl+k" displayMode="text" />)
-        const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-        expect(textKeys.length).toBeGreaterThan(0)
-      })
-      it('symbol', () => {
-        // Keys that have symbols should render with symbol class
-        // For ctrl+k, ctrl has a symbol but k doesn't, so k will fallback to text
-        render(<VHotkey keys="shift+k" displayMode="symbol" />)
-        const shiftSymbolKeys = screen.queryAllByCSS('.v-hotkey__key-symbol')
-        const textFallbackKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-        // Either we have symbol keys or text fallback keys (or both)
-        expect(shiftSymbolKeys.length + textFallbackKeys.length).toBeGreaterThan(0)
-      })
-      it('icon', () => {
-        // Use keys that have icon representations
-        render(<VHotkey keys="shift+enter" displayMode="icon" />)
-        const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
-        const iconTextKeys = screen.queryAllByCSS('.v-hotkey__key-text')
-        // Should have either icon keys or fallback to text keys
-        expect(iconKeys.length + iconTextKeys.length).toBeGreaterThan(0)
-      })
+    it('should apply correct CSS classes for different display modes', () => {
+      // Test all modes in sequence using rerender
+      const { rerender } = render(() => <VHotkey keys="ctrl+k" displayMode="text" />)
+      const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
+      expect(textKeys.length).toBeGreaterThan(0)
+
+      // Test symbol mode - keys that have symbols should render with symbol class
+      // For ctrl+k, ctrl has a symbol but k doesn't, so k will fallback to text
+      rerender(() => <VHotkey keys="shift+k" displayMode="symbol" />)
+      const shiftSymbolKeys = screen.queryAllByCSS('.v-hotkey__key-symbol')
+      const textFallbackKeys = screen.queryAllByCSS('.v-hotkey__key-text')
+      // Either we have symbol keys or text fallback keys (or both)
+      expect(shiftSymbolKeys.length + textFallbackKeys.length).toBeGreaterThan(0)
+
+      // Test icon mode - use keys that have icon representations
+      rerender(() => <VHotkey keys="shift+enter" displayMode="icon" />)
+      const iconKeys = screen.queryAllByCSS('.v-hotkey__key-icon')
+      const iconTextKeys = screen.queryAllByCSS('.v-hotkey__key-text')
+      // Should have either icon keys or fallback to text keys
+      expect(iconKeys.length + iconTextKeys.length).toBeGreaterThan(0)
     })
 
     it('should handle sequence separators correctly in visual output', () => {
@@ -1456,10 +1460,17 @@ describe('VHotkey.tsx', () => {
         configurable: true,
       })
 
-      const platform = ref<'auto' | 'pc' | 'mac'>('auto')
-      render(() => (
-        <VHotkey keys="cmd+k" platform={ platform.value } />
-      ))
+      const TestWrapper = defineComponent({
+        setup () {
+          const platform = ref<'auto' | 'pc' | 'mac'>('auto')
+          return { platform }
+        },
+        render () {
+          return <VHotkey keys="cmd+k" platform={ this.platform } />
+        },
+      })
+
+      const wrapper = render(TestWrapper)
 
       // Initially should show Ctrl (Windows auto-detection)
       let textKeys = screen.getAllByCSS('.v-hotkey__key-text')
@@ -1467,8 +1478,8 @@ describe('VHotkey.tsx', () => {
       expect(hasCtrlText).toBe(true)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
 
-      platform.value = 'mac'
-      await nextTick()
+      // Change to mac
+      await wrapper.rerender({ platform: 'mac' })
 
       // Should now show command icon (forced Mac behavior)
       const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
@@ -1477,8 +1488,8 @@ describe('VHotkey.tsx', () => {
       hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
       expect(hasCtrlText).toBe(false)
 
-      platform.value = 'pc'
-      await nextTick()
+      // Change to pc
+      await wrapper.rerender({ platform: 'pc' })
 
       // Should go back to Ctrl text (forced PC behavior)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
@@ -1486,8 +1497,8 @@ describe('VHotkey.tsx', () => {
       hasCtrlText = textKeys.some(key => key.textContent?.includes('Ctrl'))
       expect(hasCtrlText).toBe(true)
 
-      platform.value = 'auto'
-      await nextTick()
+      // Change back to auto (auto-detection)
+      await wrapper.rerender({ platform: 'auto' })
 
       // Should show Ctrl again (Windows auto-detection)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)
@@ -1503,16 +1514,25 @@ describe('VHotkey.tsx', () => {
         configurable: true,
       })
 
-      const displayMode = ref<'icon' | 'symbol' | 'text'>('icon')
-      const platform = ref<'auto' | 'pc' | 'mac'>('mac')
-      render(() => <VHotkey keys="cmd+k" displayMode={ displayMode.value } platform={ platform.value } />)
+      const TestWrapper = defineComponent({
+        setup () {
+          const displayMode = ref<'icon' | 'symbol' | 'text'>('icon')
+          const platform = ref<'auto' | 'pc' | 'mac'>('mac')
+          return { displayMode, platform }
+        },
+        render () {
+          return <VHotkey keys="cmd+k" displayMode={ this.displayMode } platform={ this.platform } />
+        },
+      })
+
+      const wrapper = render(TestWrapper)
 
       // Initially should show command icon
       const iconKeys = screen.getAllByCSS('.v-hotkey__key-icon')
       expect(iconKeys.length).toBeGreaterThan(0)
 
-      displayMode.value = 'symbol'
-      await nextTick()
+      // Change to symbol mode
+      await wrapper.rerender({ displayMode: 'symbol', platform: 'mac' })
 
       // Should show command symbol
       const symbolKeys = screen.getAllByCSS('.v-hotkey__key-symbol')
@@ -1521,8 +1541,7 @@ describe('VHotkey.tsx', () => {
       expect(hasCommandSymbol).toBe(true)
 
       // Change platform to PC while keeping symbol mode
-      platform.value = 'pc'
-      await nextTick()
+      await wrapper.rerender({ displayMode: 'symbol', platform: 'pc' })
 
       // Should show Ctrl text (PC doesn't have command symbols)
       expect(screen.queryAllByCSS('.v-hotkey__key-symbol')).toHaveLength(0)
@@ -1531,8 +1550,7 @@ describe('VHotkey.tsx', () => {
       expect(hasCtrlText).toBe(true)
 
       // Change back to icon mode while on PC
-      displayMode.value = 'icon'
-      await nextTick()
+      await wrapper.rerender({ displayMode: 'icon', platform: 'pc' })
 
       // Should still show Ctrl text (PC doesn't use icons for modifiers)
       expect(screen.queryAllByCSS('.v-hotkey__key-icon')).toHaveLength(0)

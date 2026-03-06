@@ -41,7 +41,6 @@ export const VIcon = genericComponent()({
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     useRender(() => {
-      // eslint-disable-next-line local-rules/jsx-render-slot
       const slotValue = slots.default?.()
       if (slotValue) {
         slotIcon.value = flattenFragments(slotValue).filter(node =>

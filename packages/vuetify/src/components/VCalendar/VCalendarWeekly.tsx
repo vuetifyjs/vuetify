@@ -13,20 +13,13 @@ import {
   getDayIdentifier,
   validateNumber,
 } from './util/timestamp'
-import { genericComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
+import { defineComponent, getPrefixedEventHandlers, noop, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarFormatter, CalendarTimestamp, DaySlotScope } from './types'
-import type { GenericProps } from '@/util'
+import type { CalendarFormatter, CalendarTimestamp } from './types'
 
-export const VCalendarWeekly = genericComponent<new (
-  props: {},
-  slots: {
-    'day': DaySlotScope
-    'day-label': CalendarTimestamp
-  }
-) => GenericProps<typeof props, typeof slots>>()({
+export const VCalendarWeekly = defineComponent({
   name: 'VCalendarWeekly',
 
   props: {

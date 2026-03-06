@@ -42,7 +42,8 @@ import {
   noop,
   omit,
   propsFactory,
-  useRender, wrapInArray,
+  useRender,
+  wrapInArray,
 } from '@/util'
 
 // Types
