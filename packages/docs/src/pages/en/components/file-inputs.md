@@ -76,6 +76,12 @@ The `v-file-input` has a default **prepend-icon** that can be set on the compone
 
 <ExamplesExample file="v-file-input/prop-prepend-icon" />
 
+#### Prefix and suffix
+
+You can add affixes to the input text using the **prefix** and **suffix** props.
+
+<ExamplesExample file="v-file-input/prop-prefix-suffix" />
+
 #### Show size
 
 The displayed size of the selected file(s) can be configured with the **show-size** property. Display sizes can be either _1024_ (the default used when providing **true**) or _1000_.
