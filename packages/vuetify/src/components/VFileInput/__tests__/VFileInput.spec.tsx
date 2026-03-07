@@ -106,7 +106,7 @@ describe('VFileInput', () => {
 
     expect(wrapper.find('.v-file-input').classes()).toContain('v-file-input--prefixed')
     expect(wrapper.find('.v-file-input').classes()).toContain('v-file-input--suffixed')
-    expect(wrapper.find('.v-text-field__prefix').text()).toBe('prefix')
-    expect(wrapper.find('.v-text-field__suffix').text()).toBe('suffix')
+    expect(wrapper.find('.v-file-input__prefix').text()).toBe('prefix')
+    expect(wrapper.find('.v-file-input__suffix').text()).toBe('suffix')
   })
 })

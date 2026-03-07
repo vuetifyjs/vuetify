@@ -57,8 +57,8 @@
     &--dragging input[type="file"]
       z-index: 1
 
-    .v-text-field__prefix,
-    .v-text-field__suffix
+    .v-file-input__prefix,
+    .v-file-input__suffix
       align-items: center
       color: $text-field-affix-color
       cursor: default
@@ -76,13 +76,13 @@
       .v-field--disabled &
         color: $text-field-disabled-affix-color
 
-    .v-text-field__prefix
+    .v-file-input__prefix
       @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
         padding-inline-start: var(--v-field-padding-start)
       @at-root #{selector.nest('.v-field.v-field--reverse', &)}
         padding-inline-end: var(--v-field-padding-end)
 
-    .v-text-field__suffix
+    .v-file-input__suffix
       @at-root #{selector.nest('.v-field:not(.v-field--reverse)', &)}
         padding-inline-end: var(--v-field-padding-end)
       @at-root #{selector.nest('.v-field.v-field--reverse', &)}

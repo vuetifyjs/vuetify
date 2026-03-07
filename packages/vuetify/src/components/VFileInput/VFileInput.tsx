@@ -305,10 +305,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                   }) => (
                     <>
                       { props.prefix && (
-                        <span class="v-text-field__prefix">
-                            <span class="v-text-field__prefix__text">
-                              { props.prefix }
-                            </span>
+                        <span class="v-file-input__prefix">
+                          <span class="v-file-input__prefix__text">
+                            { props.prefix }
+                          </span>
                         </span>
                       )}
 
@@ -354,10 +354,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       </div>
 
                       { props.suffix && (
-                        <span class="v-text-field__suffix">
-                            <span class="v-text-field__suffix__text">
-                              { props.suffix }
-                            </span>
+                        <span class="v-file-input__suffix">
+                          <span class="v-file-input__suffix__text">
+                            { props.suffix }
+                          </span>
                         </span>
                       )}
                     </>
