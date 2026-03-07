@@ -6,6 +6,8 @@
     "nextIcon": "Icon used for the next button.",
     "noMonthPicker": "Only applies to `controlVariant=\"modal\"`, the month and year picker buttons are combined into one that only opens the year picker.",
     "prevIcon": "Icon used for the previous button.",
+    "monthText": "Text displayed for the current month.",
+    "yearText": "Text displayed for the current year.",
     "viewMode": "Sets the view mode of the date picker."
   },
   "events": {

@@ -7,6 +7,7 @@
     "month": "Sets the month.",
     "year": "Sets the year.",
     "multiple": "Sets the multiple of the month.",
+    "readonly": "Puts the picker in a readonly state.",
     "showAdjacentMonths": "Show adjacent months.",
     "showWeek": "Show the week number.",
     "transition": "The transition used when changing months into the future",

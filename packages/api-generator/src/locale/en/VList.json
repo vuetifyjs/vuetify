@@ -1,7 +1,6 @@
 {
   "props": {
     "activeColor": "Deprecated, use `color` instead.",
-    "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
     "activatable": "Designates whether the list items are activatable. Additionally, sets necessary accessibility attributes internally.",
     "disabled": "Puts all children inputs into a disabled state.",
     "filterable": "**FOR INTERNAL USE ONLY** Prevents list item selection using [space] key and pass it back to the text input. Used internally for VAutocomplete and VCombobox.",
@@ -31,8 +30,6 @@
   },
   "slots": {
     "item": "Slot for rendering custom list items. Receives `{ props }` where `props` contains item data (`title`, `subtitle`, `value`, etc.) plus `index` (the item's position in the list). Use this to completely customize item rendering while still using VList's navigation and selection features.",
-    "divider": "Slot for rendering custom dividers. Receives `{ props }` containing divider item data including `value`. Note: dividers do not receive `index` since they are not navigable items.",
-    "subheader": "Slot for rendering custom subheaders. Receives `{ props }` containing subheader item data including `title` and `value`. Note: subheaders do not receive `index` since they are not navigable items.",
     "header": "Slot for rendering custom group headers when using nested items. Receives `{ props }` containing the group's header item data plus activator props for expand/collapse functionality.",
     "children": "Slot for the children.",
     "focus": "Slot for the focus.",

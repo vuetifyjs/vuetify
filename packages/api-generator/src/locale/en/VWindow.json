@@ -12,7 +12,8 @@
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "touchless": "Disable touch support.",
     "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
-    "vertical": "Uses a vertical transition when changing windows."
+    "vertical": "Uses a vertical transition when changing windows.",
+    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally."
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction."

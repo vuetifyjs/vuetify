@@ -10,6 +10,7 @@
     "readonly": "Makes the timepicker readonly.",
     "useSeconds": "Enables the display and selection of seconds in the timepicker.",
     "value": "The current value of the timepicker.",
+    "inputHints": "Displays labels below the time input controls.",
     "viewMode": "The current view mode of the timepicker. Can be either `hour`, `minute`, or `second`."
   },
   "events": {

@@ -14,6 +14,7 @@
     "progressColor": "Applies specified color to progress bar.",
     "showArrows": "Displays arrows for next/previous navigation.",
     "showArrowsOnHover": "Displays navigation arrows only when the carousel is hovered over.",
+    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally.",
     "verticalDelimiters": "Displays carousel delimiters vertically."
   }
 }
