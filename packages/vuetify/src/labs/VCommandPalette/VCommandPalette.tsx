@@ -3,7 +3,7 @@ import './VCommandPalette.scss'
 
 // Components
 import { VCommandPaletteSymbol } from './shared'
-import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
+import { VCommandPaletteItem } from './VCommandPaletteItem'
 import { VDialog } from '@/components/VDialog'
 import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VList } from '@/components/VList'
@@ -304,7 +304,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                         subheader: slots['list.subheader'],
                         item: ({ props: itemProps }: { props: any }) => (
                           slots.item?.({ item: itemProps, index: itemProps.index }) ?? (
-                            <VCommandPaletteItemComponent
+                            <VCommandPaletteItem
                               key={ `item-${itemProps.index}` }
                               item={ itemProps }
                               index={ itemProps.index }
