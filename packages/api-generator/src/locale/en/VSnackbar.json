@@ -21,12 +21,9 @@
     "header": "Slot for custom content above the snackbar body."
   },
   "exposed": {
-    "activatorEl": "Ref to the current activator element.",
     "animateClick": "Function invoked when user clicks outside.",
-    "contentEl": "Ref to the current content element.",
     "globalTop": "Used by activator to determine a components position in the global stack order.",
     "localTop": "Used by activator to determine a components position in the local stack order.",
-    "scrimEl": "Ref to the current scrim element.",
     "updateLocation": "Function used for locationStrategy positioning."
   }
 }

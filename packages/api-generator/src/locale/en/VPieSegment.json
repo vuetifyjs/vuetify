@@ -11,5 +11,8 @@
     "value": "The value used for calculate segment/arc angle size.",
     "hoverScale": "Reduces outer radius until segment is hovered. Expects fraction value (0-0.25)",
     "reveal": "Enables and controls duration for initial reveal animation. Easing function is shared with `animation` prop."
+  },
+  "events": {
+    "update:active": "Emitted when the segment's active (hovered) state changes."
   }
 }

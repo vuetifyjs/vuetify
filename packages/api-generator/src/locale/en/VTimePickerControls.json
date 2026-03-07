@@ -15,6 +15,9 @@
   },
   "events": {
     "update:period": "Emitted when the period is changed. The event payload is either `am` or `pm`.",
+    "update:hour": "Emitted when the hour value changes.",
+    "update:minute": "Emitted when the minute value changes.",
+    "update:second": "Emitted when the second value changes.",
     "update:viewMode": "Emitted when the view mode is changed. The event payload is either `hour`, `minute`, or `second`."
   }
 }
