@@ -1,8 +1,6 @@
 {
   "props": {
     "ampm": "Enables AM/PM mode.",
-    "ampmInTitle": "Displays AM/PM in the title.",
-    "ampmReadonly": "Makes AM/PM controls readonly.",
     "hour": "The current hour value.",
     "minute": "The current minute value.",
     "second": "The current second value.",

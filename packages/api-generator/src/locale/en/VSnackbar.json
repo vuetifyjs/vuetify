@@ -1,9 +1,6 @@
 {
   "props": {
-    "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
-    "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
     "loading": "Displays a loading spinner in the prepend area.",
-    "multiLine": "Deprecated, use `min-height` instead. Increases minimum height.",
     "prependAvatar": "Displays an avatar in the prepend area using the provided image source.",
     "prependIcon": "Displays an icon in the prepend area.",
     "reverseTimer": "Reverses the direction of the timer progress bar, filling up instead of depleting.",

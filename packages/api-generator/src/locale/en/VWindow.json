@@ -6,17 +6,10 @@
     "nextIcon": "Icon used for the \"next\" button if `show-arrows` is `true`.",
     "prevIcon": "Icon used for the \"prev\" button if `show-arrows` is `true`.",
     "reverse": "Reverse the normal transition direction.",
-    "reverseTransition": "The transition used when the component is reversing items. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "showArrows": "Display the \"next\" and \"prev\" buttons.",
-    "showArrowsOnHover": "Display the \"next\" and \"prev\" buttons on hover. `show-arrows` MUST ALSO be set.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
-    "touchless": "Disable touch support.",
     "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
-    "vertical": "Uses a vertical transition when changing windows.",
     "verticalArrows": "Displays the navigation arrows vertically instead of horizontally."
-  },
-  "events": {
-    "change": "Emitted when the component value is changed by user interaction."
   },
   "slots": {
     "next": "Slot displaying the arrow switching to the next item.",

@@ -15,7 +15,6 @@
     "click:next": "Event fired when clicking the next button.",
     "click:prev": "Event fired when clicking the previous button.",
     "click:year": "Event fired when clicking the date text.",
-    "click:text": "Event fired when clicking the year.",
     "click:prev-year": "Event fired when clicking the previous year button.",
     "click:next-year": "Event fired when clicking the next year button."
   }
