@@ -48,6 +48,7 @@ export const makeVProgressProps = propsFactory({
     type: [Number, String],
     default: 100,
   },
+  absolute: Boolean,
   hideLabel: Boolean,
   hideValue: Boolean,
   indeterminate: Boolean,
@@ -128,6 +129,9 @@ export const VProgress = genericComponent<VProgressSlots>()({
         <div
           class={[
             'v-progress',
+            {
+              'v-progress--absolute': props.absolute,
+            },
             props.class,
           ]}
           style={ props.style }
@@ -155,6 +159,13 @@ export const VProgress = genericComponent<VProgressSlots>()({
             </div>
           )}
           { slots.default?.(scopeProps) ?? progressComponent() }
+          { props.absolute && hasDetails && (
+            <div
+              key="spacer"
+              class="v-progress__spacer"
+              style={{ order: props.detailsPosition === 'bottom' ? -1 : 2 }}
+            />
+          )}
         </div>
       )
     })

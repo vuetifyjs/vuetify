@@ -80,4 +80,3 @@ Use the **#label** and **#value** slots to fully customize the content displayed
 Use the **#default** slot to replace the built-in progress indicator with your own. The slot exposes `percent` and other scoped props for custom rendering.
 
 <ExamplesExample file="v-progress/misc-card-loader" />
-

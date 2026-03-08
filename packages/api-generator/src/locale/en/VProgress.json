@@ -1,5 +1,6 @@
 {
   "props": {
+    "absolute": "Positions the component absolutely within its parent, centering the progress indicator and placing details without affecting layout.",
     "type": "Determines which progress indicator to render.",
     "label": "Text displayed alongside the progress indicator.",
     "detailsPosition": "Controls the position of the details (label and value) relative to the progress indicator.",

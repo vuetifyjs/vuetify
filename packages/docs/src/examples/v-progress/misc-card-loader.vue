@@ -1,7 +1,7 @@
 <template>
   <v-card
+    border="sm opacity-50"
     class="mx-auto pa-1"
-    color="green-darken-2"
     height="300"
     rounded="xl"
     variant="outlined"
@@ -19,28 +19,30 @@
 
       <v-progress
         v-else
-        key="progress"
         :model-value="progress"
-        class="justify-center"
         details-position="bottom"
         label="Loading application"
-        style="position: absolute; inset: 0"
+        absolute
         hide-label
       >
         <template v-slot:default="{ percent }">
           <v-progress-circular
             :model-value="percent"
-            class="mt-6"
             color="lime-darken-2"
             rotate="180"
             size="140"
           ></v-progress-circular>
         </template>
 
-        <template v-slot:value="{ formattedValue }">
-          <div class="text-body-medium text-medium-emphasis">
-            {{ formattedValue }} loaded
-          </div>
+        <template v-slot:value="{ formattedValue, percent }">
+          <v-scroll-y-transition mode="out-in">
+            <div v-if="percent > 75" key="finalizing" class="text-body-medium">
+              Finalizing...
+            </div>
+            <div v-else key="loading" class="text-body-medium text-medium-emphasis">
+              {{ formattedValue }} loaded
+            </div>
+          </v-scroll-y-transition>
         </template>
       </v-progress>
     </v-fade-transition>
