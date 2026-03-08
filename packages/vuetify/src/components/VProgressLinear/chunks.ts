@@ -76,35 +76,35 @@ export function useChunks (
   const splitStyles = computed(() => {
     if (!isSplit.value) return undefined
 
-    const h = toValue(height)
+    const heightValue = toValue(height)
     const isRounded = toValue(rounded)
     const isReversed = toValue(reversed)
     const halfGap = convertToUnit(chunkGap.value / 2)
-    const r = isRounded ? convertToUnit(h / 2) : undefined
-    const pos = isReversed ? 'right' : 'left'
+    const radius = isRounded ? convertToUnit(heightValue / 2) : undefined
+    const position = isReversed ? 'right' : 'left'
 
     const val = toValue(value)
     if (val <= 0 || val >= 100) return undefined
 
-    const buf = toValue(bufferValue)
+    const buffer = toValue(bufferValue)
     const split = convertToUnit(val, '%')
-    const hasBuffer = buf > val && buf < 100
-    const bufSplit = convertToUnit(buf, '%')
+    const hasBuffer = buffer > val && buffer < 100
+    const bufferSplit = convertToUnit(buffer, '%')
 
     return {
       bar: {
         width: `calc(${split} - ${halfGap})`,
-        borderRadius: r,
+        borderRadius: radius,
       },
       buffer: hasBuffer ? {
-        [pos]: `calc(${split} + ${halfGap})`,
-        width: `calc(${bufSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
-        borderRadius: r,
+        [position]: `calc(${split} + ${halfGap})`,
+        width: `calc(${bufferSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
+        borderRadius: radius,
       } : undefined,
       background: {
-        [pos]: `calc(${hasBuffer ? bufSplit : split} + ${halfGap})`,
-        width: `calc(100% - ${hasBuffer ? bufSplit : split} - ${halfGap})`,
-        borderRadius: r,
+        [position]: `calc(${hasBuffer ? bufferSplit : split} + ${halfGap})`,
+        width: `calc(100% - ${hasBuffer ? bufferSplit : split} - ${halfGap})`,
+        borderRadius: radius,
       },
     }
   })
