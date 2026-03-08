@@ -23,11 +23,17 @@ The `v-stepper-vertical` component can be used as a navigation element that guid
 Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VStepperVertical } from 'vuetify/labs/VStepperVertical'
+import {
+  VStepperVertical,
+  VStepperVerticalItem,
+  VStepperVerticalActions,
+} from 'vuetify/labs/VStepperVertical'
 
 export default createVuetify({
   components: {
     VStepperVertical,
+    VStepperVerticalItem,
+    VStepperVerticalActions,
   },
 })
 ```

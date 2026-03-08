@@ -26,7 +26,6 @@ Internal class names changed as well
 | Previous                  | New                             |
 |---------------------------|---------------------------------|
 | `.v-row--dense`           | `.v-row--density-comfortable`   |
-| `.v-row--no-gutters`      | `.v-row--density-compact`       |
 | `.v-col-{n}`              | `.v-col--cols-{n}`              |
 | `.v-col-{breakpoint}-{n}` | `.v-col--cols-{breakpoint}-{n}` |
 | `.offset-{n}`             | `.v-col--offset-{n}`            |

@@ -94,7 +94,7 @@ export const makeVSnackbarQueueProps = propsFactory({
     type: [Number, String],
     default: 8,
   },
-  ...omit(makeVSnackbarProps(), ['modelValue', 'collapsed']),
+  ...omit(makeVSnackbarProps(), ['modelValue', 'collapsed', 'queueIndex', 'queueGap']),
 }, 'VSnackbarQueue')
 
 export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarMessage[]> (

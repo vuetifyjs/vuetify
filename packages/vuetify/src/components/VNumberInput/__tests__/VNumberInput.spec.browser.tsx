@@ -85,6 +85,25 @@ describe('VNumberInput', () => {
       expect(model.value).toBe(1)
     })
 
+    // https://github.com/vuetifyjs/vuetify/issues/22677
+    it('does not mutate model when typing non-digit chars while readonly', async () => {
+      const model = ref(42)
+
+      const { element } = render(() => (
+        <VNumberInput v-model={ model.value } readonly />
+      ))
+
+      await userEvent.click(element)
+      // Select all text and type a non-digit character
+      await userEvent.keyboard('{Control>}a{/Control}')
+      await userEvent.keyboard(' ')
+      expect(model.value).toBe(42)
+
+      // Type arbitrary non-digit chars
+      await userEvent.keyboard('abc')
+      expect(model.value).toBe(42)
+    })
+
     it('prevents mutation in readonly form', async () => {
       const model = ref(1)
 
