@@ -45,6 +45,10 @@ export const makeVCommandPaletteProps = propsFactory({
     default: '$search',
   },
   hotkey: String,
+  closeOnSelect: {
+    type: Boolean,
+    default: true,
+  },
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
@@ -81,6 +85,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     'update:modelValue': (value: boolean) => true,
     'update:search': (value: string) => true,
     'click:item': (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) => true,
+    'before-select': (payload: {
+      item: VCommandPaletteItemType
+      event: MouseEvent | KeyboardEvent
+      preventDefault: () => void
+    }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -112,14 +121,33 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }))
     })
 
+    function executeItem (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) {
+      if ('onClick' in item && item.onClick) {
+        item.onClick(event, item.value)
+      }
+
+      emit('click:item', item, event)
+
+      if (!isActionItem(item) || !props.closeOnSelect) return
+
+      let shouldClose = true
+      emit('before-select', {
+        item,
+        event,
+        preventDefault: () => {
+          shouldClose = false
+        },
+      })
+
+      if (shouldClose) {
+        isOpen.value = false
+      }
+    }
+
     const navigation = useCommandPaletteNavigation({
       filteredItems,
       onItemClick: (item, event) => {
-        if ('onClick' in item && item.onClick) {
-          item.onClick(event, item.value)
-        }
-        emit('click:item', item, event)
-        isOpen.value = false
+        executeItem(item, event)
       },
     })
 
@@ -148,11 +176,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           if (isActionItem(item) && item.hotkey) {
             const unsubscribe = useHotkey(item.hotkey, event => {
               event.preventDefault()
-              if (item.onClick) {
-                item.onClick(event as KeyboardEvent, item.value)
-              }
-              emit('click:item', item, event as KeyboardEvent)
-              isOpen.value = false
+              executeItem(item, event as KeyboardEvent)
             }, { inputs: true })
             hotkeyUnsubscribes.push(unsubscribe)
           }
