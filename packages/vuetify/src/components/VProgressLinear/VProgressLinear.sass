@@ -30,6 +30,12 @@
     &--rounded
       @include tools.rounded($progress-linear-border-radius)
 
+    &--variant-split.v-progress-linear--rounded
+      .v-progress-linear__determinate,
+      .v-progress-linear__background,
+      .v-progress-linear__buffer
+        @include tools.rounded($progress-linear-border-radius)
+
     @media (forced-colors: active)
       border: thin solid buttontext
 
@@ -119,12 +125,6 @@
         right: 0
         left: unset
         width: clamp(0%, calc(var(--v-progress-indeterminate-short-right) - var(--v-progress-chunk-gap)), 100%)
-
-  .v-progress-linear__split
-    height: inherit
-    position: absolute
-    top: 0
-    bottom: 0
 
   .v-progress-linear__stream
     animation: $progress-linear-stream-animation

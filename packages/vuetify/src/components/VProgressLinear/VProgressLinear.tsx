@@ -111,8 +111,6 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       containerWidth,
       normalizedValue,
       normalizedBuffer,
-      height,
-      () => !!props.rounded,
       isReversed
     )
     useToggleScope(hasChunks, () => {
@@ -177,6 +175,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--clickable': props.clickable,
+            'v-progress-linear--variant-split': props.variant === 'split',
           },
           roundedClasses.value,
           themeClasses.value,

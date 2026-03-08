@@ -38,8 +38,6 @@ export function useChunks (
   containerWidth: MaybeRefOrGetter<number | undefined>,
   value: MaybeRefOrGetter<number>,
   bufferValue: MaybeRefOrGetter<number>,
-  height: MaybeRefOrGetter<number>,
-  rounded: MaybeRefOrGetter<boolean>,
   reversed: MaybeRefOrGetter<boolean>,
 ) {
   const isSplit = toRef(() => props.variant === 'split')
@@ -76,12 +74,8 @@ export function useChunks (
   const splitStyles = computed(() => {
     if (!isSplit.value) return undefined
 
-    const heightValue = toValue(height)
-    const isRounded = toValue(rounded)
-    const isReversed = toValue(reversed)
     const halfGap = convertToUnit(chunkGap.value / 2)
-    const radius = isRounded ? convertToUnit(heightValue / 2) : undefined
-    const position = isReversed ? 'right' : 'left'
+    const position = toValue(reversed) ? 'right' : 'left'
 
     const val = toValue(value)
     if (val <= 0 || val >= 100) return undefined
@@ -94,17 +88,14 @@ export function useChunks (
     return {
       bar: {
         width: `calc(${split} - ${halfGap})`,
-        borderRadius: radius,
       },
       buffer: hasBuffer ? {
         [position]: `calc(${split} + ${halfGap})`,
         width: `calc(${bufferSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
-        borderRadius: radius,
       } : undefined,
       background: {
         [position]: `calc(${hasBuffer ? bufferSplit : split} + ${halfGap})`,
         width: `calc(100% - ${hasBuffer ? bufferSplit : split} - ${halfGap})`,
-        borderRadius: radius,
       },
     }
   })
