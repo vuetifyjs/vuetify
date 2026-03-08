@@ -129,7 +129,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       else return t(props.counterString, fileCount)
     })
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))

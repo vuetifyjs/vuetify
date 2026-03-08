@@ -110,9 +110,6 @@ export const VRow = genericComponent()({
     if (props.dense) {
       deprecate('dense', 'density="comfortable"')
     }
-    if (props.noGutters) {
-      deprecate('noGutters', 'density="compact"')
-    }
 
     const classes = computed(() => {
       const classList: any[] = []
