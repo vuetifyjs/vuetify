@@ -4,9 +4,12 @@
   .v-progress
     display: flex
     flex-direction: column
+    gap: 2px
 
   .v-progress__label
-    font-size: var(--v-progress-label-font-size, 24px)
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
+
+    .v-progress__label--location-bottom
+      order: 1

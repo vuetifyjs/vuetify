@@ -2,12 +2,15 @@
 import './VProgress.sass'
 
 // Components
-import { makeVProgressCircularProps, VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
+import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 import { makeVProgressLinearProps, VProgressLinear } from '@/components/VProgressLinear/VProgressLinear'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { clamp, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,10 +35,17 @@ export const makeVProgressProps = propsFactory({
     type: [String, Function] as PropType<ValueFormat>,
     default: '[value]%',
   },
-
-  ...makeVProgressLinearProps(),
-  ...makeVProgressCircularProps(),
   indeterminate: Boolean,
+  rounded: Boolean,
+
+  ...pick(makeVProgressLinearProps(), [
+    // relevant props shared between linear and circular
+    'modelValue',
+    'color',
+    'bgColor',
+    'theme',
+  ]),
+  ...makeComponentProps(),
 }, 'VProgress')
 
 function formatValue (format: ValueFormat, value: number): string {
@@ -57,15 +67,6 @@ export const VProgress = genericComponent<VProgressSlots>()({
       const hasLabel = !!(props.label || slots.label)
       const scopeProps = { value: normalizedValue.value, formattedValue: formattedValue.value }
 
-      const label = hasLabel && (
-        <div
-          class="v-progress__label"
-          aria-hidden="true"
-        >
-          { slots.label?.(scopeProps) ?? props.label }
-        </div>
-      )
-
       const progressProps = {
         role: 'progressbar' as const,
         'aria-label': props.label,
@@ -75,23 +76,38 @@ export const VProgress = genericComponent<VProgressSlots>()({
         'aria-valuetext': props.indeterminate ? undefined : formattedValue.value,
       }
 
-      if (isLinear.value) {
-        const linearProps = VProgressLinear.filterProps(props)
-        return (
-          <div class={['v-progress', props.class]} style={ props.style } { ...progressProps }>
-            { props.labelPosition === 'top' && label }
-            <VProgressLinear { ...linearProps } aria-hidden="true" />
-            { props.labelPosition === 'bottom' && label }
-          </div>
-        )
+      function progressComponent () {
+        if (isLinear.value) {
+          const linearProps = VProgressLinear.filterProps(props)
+          return <VProgressLinear { ...linearProps } aria-hidden="true" />
+        }
+
+        const circularProps = VProgressCircular.filterProps(omit(props, ['indeterminate']))
+        return <VProgressCircular { ...circularProps } aria-hidden="true" indeterminate={ props.indeterminate } />
       }
 
-      const circularProps = VProgressCircular.filterProps(props)
       return (
-        <div class={['v-progress', props.class]} style={ props.style } { ...progressProps }>
-          { props.labelPosition === 'top' && label }
-          <VProgressCircular { ...circularProps } aria-hidden="true" />
-          { props.labelPosition === 'bottom' && label }
+        <div
+          class={[
+            'v-progress',
+            props.class,
+          ]}
+          style={ props.style }
+          { ...progressProps }
+        >
+          { hasLabel && (
+            <div
+              key="label"
+              class={[
+                'v-progress__label',
+                `v-progress__label--location-${props.labelPosition}`,
+              ]}
+              aria-hidden="true"
+            >
+              { slots.label?.(scopeProps) ?? props.label }
+            </div>
+          )}
+          { progressComponent() }
         </div>
       )
     })
