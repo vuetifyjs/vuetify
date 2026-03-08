@@ -177,6 +177,21 @@
   p :is(a, a:visited)
     color: rgb(var(--v-theme-primary))
 
+  details
+    padding-inline-start: 1rem
+    margin-bottom: 1rem
+    border: 1px solid color-mix(currentColor, transparent 80%)
+    border-radius: .4rem
+
+    > summary
+      padding: .3rem .6rem .3rem 0
+
+      &::marker
+        margin-inline-end: .5rem
+
+    &[open] > summary
+      margin-bottom: 1rem
+
   // Theme transition
   .app-copy
     position: fixed !important

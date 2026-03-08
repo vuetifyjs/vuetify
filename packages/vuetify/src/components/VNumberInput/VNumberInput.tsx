@@ -240,6 +240,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onBeforeinput (e: InputEvent) {
+      if (controlsDisabled.value) return
       if (!e.data) return
       const inputElement = e.target as HTMLInputElement
       const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
