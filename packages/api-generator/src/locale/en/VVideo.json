@@ -20,7 +20,8 @@
     "loaded": "Emitted when the video has loaded and is ready to be played.",
     "update:playing": "Emitted when playing state changes.",
     "update:progress": "Emitted when the internal playback progress changes.",
-    "update:volume": "Emitted when the volume changes."
+    "update:volume": "Emitted when the volume changes.",
+    "error": "Emitted when the video fails to load."
   },
   "slots": {
     "header": "Slot for additional content placed on top of the video.",

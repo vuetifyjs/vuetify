@@ -89,6 +89,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
   props: makeVVideoProps(),
 
   emits: {
+    error: (event: Event) => true,
     loaded: (element: HTMLVideoElement) => true,
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
@@ -156,7 +157,18 @@ export const VVideo = genericComponent<VVideoSlots>()({
       emit('loaded', videoRef.value!)
     }
 
+    function onVideoError (e: Event) {
+      state.value = 'error'
+      emit('error', e)
+    }
+
     function onClick () {
+      if (state.value === 'error') {
+        // Retry: reload the video element
+        state.value = 'loading'
+        videoRef.value?.load()
+        return
+      }
       if (state.value !== 'loaded') {
         triggered.value = true
         startAfterLoad.value = !startAfterLoad.value
@@ -390,12 +402,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
           state.value === 'loaded' &&
           !props.hideOverlay &&
           !playing.value,
-        poster: state.value !== 'loaded',
+        poster: state.value !== 'loaded' && state.value !== 'error',
         loading: props.variant === 'player' &&
+          state.value !== 'error' &&
           (
             state.value === 'loading' ||
             waiting.value
           ),
+        error: props.variant === 'player' && state.value === 'error',
       }
 
       return (
@@ -442,6 +456,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onVideoLoaded }
+                onError={ onVideoError }
                 onPlay={ () => playing.value = true }
                 onPause={ () => playing.value = false }
                 onWaiting={ () => waiting.value = true }
@@ -487,6 +502,18 @@ export const VVideo = genericComponent<VVideoSlots>()({
             { activeOverlays.loading && (
               <div class="v-video__overlay-fill">
                 { loadingIndicator }
+              </div>
+            )}
+            { activeOverlays.error && (
+              <div class="v-video__overlay-fill">
+                <VIconBtn
+                  icon="$error"
+                  size="80"
+                  color="error"
+                  variant="text"
+                  iconSize="50"
+                  class="v-video__center-icon"
+                />
               </div>
             )}
           </div>
