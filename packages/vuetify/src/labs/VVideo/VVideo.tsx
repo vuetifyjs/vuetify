@@ -46,6 +46,7 @@ export const makeVVideoProps = propsFactory({
   autoplay: Boolean,
   muted: Boolean,
   eager: Boolean,
+  error: Boolean,
   src: String,
   srcObject: Object as PropType<MediaStream | MediaSource | Blob>,
   type: String, // e.g. video/mp4
@@ -90,6 +91,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
   emits: {
     error: (event: Event) => true,
+    retry: () => true,
     loaded: (element: HTMLVideoElement) => true,
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
@@ -162,11 +164,19 @@ export const VVideo = genericComponent<VVideoSlots>()({
       emit('error', e)
     }
 
+    watch(() => props.error, v => {
+      if (v && state.value !== 'error') {
+        videoRef.value?.pause()
+        state.value = 'error'
+      }
+    }, { immediate: true })
+
     function onClick () {
       if (state.value === 'error') {
         // Retry: reload the video element
         state.value = 'loading'
         videoRef.value?.load()
+        emit('retry')
         return
       }
       if (state.value !== 'loaded') {
