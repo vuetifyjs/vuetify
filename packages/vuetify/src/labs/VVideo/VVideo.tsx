@@ -500,7 +500,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               )}
             </MaybeTransition>
             { activeOverlays.loading && (
-              <div class="v-video__overlay-fill">
+              <div key="loading-overlay" class="v-video__overlay-fill">
                 { loadingIndicator }
               </div>
             )}
