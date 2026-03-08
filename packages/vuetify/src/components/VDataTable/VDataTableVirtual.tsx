@@ -36,6 +36,9 @@ type VDataTableVirtualSlotProps<T> = Omit<
   | 'page'
   | 'pageCount'
   | 'itemsPerPage'
+  | 'prevPage'
+  | 'nextPage'
+  | 'setPage'
 >
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
