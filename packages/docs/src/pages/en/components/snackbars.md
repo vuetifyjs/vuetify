@@ -55,7 +55,7 @@ The **timeout** property lets you customize the delay before the `v-snackbar` is
 
 #### Variants
 
-Apply different styles to the snackbar using props such as **text**, **shaped**, **outlined**, and more.
+Use the **variant** and **rounded** prop to apply distinct look and shape to the snackbar. Transparent variants such as `tonal` and `outlined` render with a surface background to remain legible against the page.
 
 <ExamplesExample file="v-snackbar/prop-variants" />
 

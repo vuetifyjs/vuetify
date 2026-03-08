@@ -114,16 +114,6 @@ export const makeVColProps = propsFactory({
   orderXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
   /** @deprecated use align-self-* class instead */
   alignSelf: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-sm-* class instead */
-  alignSelfSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-md-* class instead */
-  alignSelfMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-lg-* class instead */
-  alignSelfLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-xl-* class instead */
-  alignSelfXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-xxl-* class instead */
-  alignSelfXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
 
   ...makeComponentProps(),
   ...makeTagProps(),
