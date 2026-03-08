@@ -1,0 +1,11 @@
+{
+  "props": {
+    "type": "Determines which progress indicator to render. Can be `linear` or `circular`.",
+    "label": "Text label displayed alongside the progress indicator.",
+    "labelPosition": "Controls the position of the label relative to the progress indicator. Can be `top` or `bottom`.",
+    "valueFormat": "Format string or function for the aria-valuetext. Use `[value]` as a placeholder in strings, or pass a function that receives the current value and returns a string."
+  },
+  "slots": {
+    "label": "Slot for custom label content. Receives `{ value, formattedValue }` as scoped props."
+  }
+}
