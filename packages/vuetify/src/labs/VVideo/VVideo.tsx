@@ -505,7 +505,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               </div>
             )}
             { activeOverlays.error && (
-              <div class="v-video__overlay-fill">
+              <div key="error-overlay" class="v-video__overlay-fill">
                 <VIconBtn
                   icon="$error"
                   size="80"
