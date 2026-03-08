@@ -15,10 +15,19 @@ import { clamp, genericComponent, omit, pick, propsFactory, useRender } from '@/
 // Types
 import type { PropType } from 'vue'
 
-export type ValueFormat = string | ((value: number) => string)
+export type ValueFormat = string | ((ctx: { value: number, max: number, percent: number }) => string)
+
+type VProgressSlotsProps = {
+  max: number
+  percent: number
+  value: number
+  formattedValue: string
+}
 
 type VProgressSlots = {
-  label: { value: number, formattedValue: string }
+  default: VProgressSlotsProps
+  label: VProgressSlotsProps
+  value: VProgressSlotsProps
 }
 
 export const makeVProgressProps = propsFactory({
@@ -27,14 +36,20 @@ export const makeVProgressProps = propsFactory({
     default: 'linear',
   },
   label: String,
-  labelPosition: {
+  detailsPosition: {
     type: String as PropType<'top' | 'bottom'>,
     default: 'top',
   },
   valueFormat: {
     type: [String, Function] as PropType<ValueFormat>,
-    default: '[value]%',
+    default: '[percent]%',
   },
+  max: {
+    type: [Number, String],
+    default: 100,
+  },
+  hideLabel: Boolean,
+  hideValue: Boolean,
   indeterminate: Boolean,
   rounded: Boolean,
 
@@ -48,9 +63,12 @@ export const makeVProgressProps = propsFactory({
   ...makeComponentProps(),
 }, 'VProgress')
 
-function formatValue (format: ValueFormat, value: number): string {
-  if (typeof format === 'function') return format(value)
-  return format.replaceAll('[value]', String(Math.round(value)))
+function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
+  if (typeof format === 'function') return format({ value, max, percent })
+  return format
+    .replaceAll('[value]', String(value))
+    .replaceAll('[max]', String(max))
+    .replaceAll('[percent]', String(Math.round(percent)))
 }
 
 export const VProgress = genericComponent<VProgressSlots>()({
@@ -60,30 +78,50 @@ export const VProgress = genericComponent<VProgressSlots>()({
 
   setup (props, { slots }) {
     const isLinear = toRef(() => props.type === 'linear')
-    const normalizedValue = computed(() => clamp(parseFloat(props.modelValue), 0, 100))
-    const formattedValue = toRef(() => formatValue(props.valueFormat, normalizedValue.value))
+    const max = toRef(() => parseFloat(props.max as string) || 100)
+    const normalizedValue = computed(() => clamp(parseFloat(props.modelValue), 0, max.value))
+    const percent = computed(() => normalizedValue.value / max.value * 100)
+    const formattedValue = toRef(() => formatValue(props.valueFormat, normalizedValue.value, max.value, percent.value))
 
     useRender(() => {
-      const hasLabel = !!(props.label || slots.label)
-      const scopeProps = { value: normalizedValue.value, formattedValue: formattedValue.value }
+      const hasDetails = !!(props.label || slots.label) && !(props.hideLabel && props.hideValue)
+      const scopeProps = {
+        max: max.value,
+        percent: percent.value,
+        value: normalizedValue.value,
+        formattedValue: formattedValue.value,
+      }
 
       const progressProps = {
         role: 'progressbar' as const,
         'aria-label': props.label,
         'aria-valuenow': props.indeterminate ? undefined : normalizedValue.value,
         'aria-valuemin': 0,
-        'aria-valuemax': 100,
+        'aria-valuemax': max.value,
         'aria-valuetext': props.indeterminate ? undefined : formattedValue.value,
       }
 
       function progressComponent () {
         if (isLinear.value) {
           const linearProps = VProgressLinear.filterProps(props)
-          return <VProgressLinear { ...linearProps } aria-hidden="true" />
+          return (
+            <VProgressLinear
+              { ...linearProps }
+              modelValue={ props.modelValue }
+              aria-hidden="true"
+            />
+          )
         }
 
         const circularProps = VProgressCircular.filterProps(omit(props, ['indeterminate']))
-        return <VProgressCircular { ...circularProps } aria-hidden="true" indeterminate={ props.indeterminate } />
+        return (
+          <VProgressCircular
+            { ...circularProps }
+            modelValue={ percent.value }
+            aria-hidden="true"
+            indeterminate={ props.indeterminate }
+          />
+        )
       }
 
       return (
@@ -95,19 +133,28 @@ export const VProgress = genericComponent<VProgressSlots>()({
           style={ props.style }
           { ...progressProps }
         >
-          { hasLabel && (
+          { hasDetails && (
             <div
-              key="label"
+              key="details"
               class={[
-                'v-progress__label',
-                `v-progress__label--location-${props.labelPosition}`,
+                'v-progress__details',
+                `v-progress__details--location-${props.detailsPosition}`,
               ]}
               aria-hidden="true"
             >
-              { slots.label?.(scopeProps) ?? props.label }
+              { !props.hideLabel && (
+                <div key="label" class="v-progress__label">
+                  { slots.label?.(scopeProps) ?? props.label }
+                </div>
+              )}
+              { !props.hideValue && (
+                <div key="value" class="v-progress__value">
+                  { slots.value?.(scopeProps) ?? formattedValue.value }
+                </div>
+              )}
             </div>
           )}
-          { progressComponent() }
+          { slots.default?.(scopeProps) ?? progressComponent() }
         </div>
       )
     })

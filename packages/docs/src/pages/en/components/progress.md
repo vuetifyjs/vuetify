@@ -61,7 +61,23 @@ The **label** prop displays text alongside the progress indicator. Use the **lab
 
 #### Value format
 
-The **value-format** prop formats the `aria-valuetext` for screen readers. Use `[value]` as a placeholder in strings, or pass a function for custom formatting.
+The **value-format** prop formats the `aria-valuetext` for screen readers. Use `[value]`, `[max]`, or `[percent]` as placeholders in strings, or pass a function for custom formatting.
 
 <ExamplesExample file="v-progress/prop-value-format" />
+
+### Slots
+
+#### Label and value
+
+Use the **#label** and **#value** slots to fully customize the content displayed alongside the progress indicator. Both slots receive `value`, `max`, `percent`, and `formattedValue` as scoped props.
+
+<ExamplesExample file="v-progress/slot-label-and-value" />
+
+### Misc
+
+#### Card loader
+
+Use the **#default** slot to replace the built-in progress indicator with your own. The slot exposes `percent` and other scoped props for custom rendering.
+
+<ExamplesExample file="v-progress/misc-card-loader" />
 

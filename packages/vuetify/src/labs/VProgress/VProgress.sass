@@ -4,12 +4,27 @@
   .v-progress
     display: flex
     flex-direction: column
-    gap: 2px
+    gap: 8px
 
-  .v-progress__label
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
+    > .v-progress-circular
+      align-self: center
 
-    .v-progress__label--location-bottom
-      order: 1
+    &:has(> .v-progress-circular) > .v-progress__details > *:only-child
+      margin-inline: auto
+
+    &__label
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+      + .v-progress__value
+        margin-inline-start: auto
+
+    &__details
+      display: flex
+      align-items: flex-end
+      gap: 8px
+
+      &--location-bottom
+        align-items: flex-start
+        order: 1
