@@ -62,7 +62,7 @@ Use the **hotkey** prop to register a global keyboard shortcut that toggles the 
 
 #### Controlled close behavior
 
-By default, selecting an actionable item closes the palette. Use **close-on-select** to disable that behavior globally, or handle **@before-select** and call `preventDefault()` to keep the palette open for external drill-in flows.
+By default, selecting an actionable item closes the palette. Use **close-on-select** to disable that behavior, or handle **@before-select** and call **preventDefault()** to keep the palette open for external drill-in flows.
 
 <ExamplesExample file="v-command-palette/prop-close-on-select" />
 
