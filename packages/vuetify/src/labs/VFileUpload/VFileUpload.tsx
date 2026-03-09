@@ -22,8 +22,8 @@ import { filterInputAttrs, genericComponent, omit, propsFactory, useRender, wrap
 
 // Types
 import type { PropType, VNode } from 'vue'
-import type { LoaderSlotProps } from '@/composables/loader'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
   browse: {
