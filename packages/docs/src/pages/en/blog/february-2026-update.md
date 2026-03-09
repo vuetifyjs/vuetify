@@ -377,11 +377,6 @@ Vuetify One completed a **monorepo conversion**, extracting `@vuetify/auth` as a
 
 [Henry Aviles](https://github.com/Haviles04) shipped the **team dashboard** feature across 5 merged PRs—enabling team bin management, role-based permissions, and team switching.
 
-**Details:**
-
-* [Team Dashboard PR#135](https://github.com/vuetifyjs/bin/pull/135)
-* [Team Actions PR#137](https://github.com/vuetifyjs/bin/pull/137)
-
 ### Vuetify Snips
 
 [Kael](https://github.com/KaelWD) set up **visual regression testing** for Snips, and [J-Sek](https://github.com/J-Sek) fixed import and TypeScript issues for Vuetify Play compatibility.
