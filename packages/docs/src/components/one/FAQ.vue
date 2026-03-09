@@ -8,7 +8,7 @@
       Everything you need to know about Vuetify One
     </p>
 
-    <v-expansion-panels class="border rounded-xl" rounded="xl" variant="accordion">
+    <v-expansion-panels class="border rounded-xl overflow-hidden" variant="accordion">
       <v-expansion-panel v-for="item in faq" :key="item.question" elevation="0">
         <v-expansion-panel-title class="text-body-large font-weight-medium">
           {{ item.question }}

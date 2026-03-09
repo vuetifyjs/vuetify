@@ -1,6 +1,6 @@
 <template>
   <div class="py-6">
-    <v-row align="end" class="ga-6" justify="center">
+    <v-row class="ga-6 align-end justify-center">
       <v-avatar
         v-for="(img, i) in users"
         :key="i"
@@ -10,7 +10,7 @@
       ></v-avatar>
     </v-row>
 
-    <v-row align="end" class="ga-6 mt-6" justify="center">
+    <v-row class="ga-6 mt-6 align-end justify-center">
       <v-avatar
         v-for="(img, i) in users"
         :key="i"
@@ -21,7 +21,7 @@
       ></v-avatar>
     </v-row>
 
-    <v-row align="end" class="ga-6 mt-6" justify="center">
+    <v-row class="ga-6 mt-6 align-end justify-center">
       <v-avatar
         v-for="(img, i) in users"
         :key="i"

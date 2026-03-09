@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Avatar groups
   title: Avatar group component
@@ -19,12 +20,6 @@ features:
 The `v-avatar-group` component is used to display a collection of avatars in a stacked or grouped layout, commonly used for showing collaborators, team members, or user lists.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.12.0](/getting-started/release-notes/?version=v3.12.0)
-
-:::
 
 ## Installation
 

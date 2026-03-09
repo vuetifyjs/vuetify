@@ -216,6 +216,7 @@
   "copy-source": "Copy source",
   "copyright": "Copyright {0}",
   "create": "Create",
+  "css-utilities": "CSS Utilities",
   "customization": "Customization",
   "dark": "Dark",
   "dashboard": {
@@ -315,6 +316,7 @@
   "groups": "Groups",
   "guide": "Guide",
   "guides": "Guides",
+  "help-translate": "Help translate",
   "help-and-support": "Help and support",
   "hide-source": "Hide source",
   "homepage": "Vuetify Home Page",

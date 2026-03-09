@@ -68,6 +68,32 @@ The following is a list of all planned components for the year 2025.
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
+### v4.0 (Revisionist)
+
+- **Released:** February 2026
+- **Target Release:** Q1 2026
+- **Notes:** [v4.0 Release](/getting-started/release-notes/?version=v4.0.0)
+- **Overview:**
+  - enables CSS layers and drops all `!important`
+  - elevation and typography aligned with MD3
+  - overhaul of Grid system and VSnackbarQueue
+  - reduced CSS reset - respecting browser defaults
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
+
+### v3.12 (Warden)
+
+- **Released:** February 2026
+- **Target Release:** Q1 2026
+- **Notes:** [v3.12 Release](/getting-started/release-notes/?version=v3.12.0)
+- **Overview:**
+  - VSelect/VAutocomplete/VCombobox — new `menu-header` and `menu-footer` slots
+  - VDataTable — control over paging strategy with `page-by` prop
+  - `mdi-unocss` icon set
+  - Introduced 2 new components to the main framework from Labs:
+    - [v-command-palette](/components/command-palettes/)
+    - [v-avatar-group](/components/avatar-groups/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/86)
+
 ### v3.11 (Harbinger)
 
 - **Released:** November 2025

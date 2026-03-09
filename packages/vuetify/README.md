@@ -1,8 +1,9 @@
-<p align="center">
-  <a href="https://vuetifyjs.com" target="_blank">
-    <img alt="Vuetify Logo" width="100" src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
-  </a>
-</p>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-dark.png">
+    <img alt="Vuetify Logo" src="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-light.png" height="100">
+  </picture>
+</div>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/vuetify">
@@ -135,32 +136,8 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
           <img height="30px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
         </a>
       </td>
-      <td>
-        <a href="https://views4you.com/buy-instagram-followers/">
-          <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://word.tips/">
-          <img height="30px" src="https://cdn.cosmicjs.com/5b16bd20-afab-11ef-bee4-3bb1d3c55332-wordtips-light.svg">
-        </a>
-      </td>
     </tr>
     <tr></tr>
-    <tr>
-      <td>
-        <a href="https://www.vso.org.uk/">
-          <img height="30px" src="https://cdn.cosmicjs.com/64287760-e7c2-11ef-b333-e101bec29f3d-horizontal_logo.svg">
-        </a>
-      </td>
-      </td>
-      <td style="text-align: center;">
-        <a href="https://haircenterofturkey.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/ba1af160-1a27-11f0-a229-dfe84053cfeb-hcof-logo-light-1.png">
-        </a>
-      </td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
 

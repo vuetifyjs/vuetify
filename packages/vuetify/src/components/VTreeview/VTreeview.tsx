@@ -189,6 +189,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             },
             props.class,
           ]}
+          role="tree"
           openStrategy="multiple"
           style={[
             {

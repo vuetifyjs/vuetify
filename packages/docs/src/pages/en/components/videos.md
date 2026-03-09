@@ -16,12 +16,6 @@ The `v-video` component is useful for background video or as a customizable play
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.9.3](/getting-started/release-notes/?version=v3.9.3)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.

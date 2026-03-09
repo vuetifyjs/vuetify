@@ -65,6 +65,7 @@ export const makeVImgProps = propsFactory({
   },
   eager: Boolean,
   gradient: String,
+  imageClass: null,
   lazySrc: String,
   options: {
     type: Object as PropType<IntersectionObserverInit>,
@@ -257,7 +258,7 @@ export const VImg = genericComponent<VImgSlots>()({
 
       const img = (
         <img
-          class={['v-img__img', containClasses.value]}
+          class={['v-img__img', containClasses.value, props.imageClass]}
           style={{ objectPosition: props.position }}
           crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
@@ -360,6 +361,7 @@ export const VImg = genericComponent<VImgSlots>()({
             {
               'v-img--absolute': props.absolute,
               'v-img--booting': !isBooted.value,
+              'v-img--fit-content': props.width === 'fit-content',
             },
             backgroundColorClasses.value,
             roundedClasses.value,

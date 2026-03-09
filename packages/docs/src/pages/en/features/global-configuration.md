@@ -70,8 +70,6 @@ This is used internally by some components already:
 
 ## Global class and styles
 
-<DocIntroduced version="3.2.0" />
-
 Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
 Let's say that you want to set the **text-transform** of all [v-btn](/components/buttons/) components to `none`, but are not interested in using [SASS variables](/features/sass-variables/). By simply adding the **style** property to a component's default values, you are able to apply custom values to all instances of said component.
@@ -219,8 +217,6 @@ There are some cases where a default class or style could be unintentionally pas
 :::
 
 ## Using in custom components
-
-<DocIntroduced version="3.2.0" />
 
 Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
 

@@ -1,2 +1,2 @@
 export { VCommandPalette } from './VCommandPalette'
-export { VCommandPaletteItemComponent } from './VCommandPaletteItem'
+export { VCommandPaletteItem } from './VCommandPaletteItem'

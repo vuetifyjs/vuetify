@@ -31,6 +31,7 @@ const VColorPickerInput = ({ label, ...rest }: any) => {
 export const makeVColorPickerEditProps = propsFactory({
   color: Object as PropType<HSV | null>,
   disabled: Boolean,
+  hideInputLabels: Boolean,
   readonly: Boolean,
   mode: {
     type: String as PropType<keyof typeof modes>,
@@ -96,8 +97,11 @@ export const VColorPickerEdit = defineComponent({
         ]}
         style={ props.style }
       >
-        { inputs.value?.map(props => (
-          <VColorPickerInput { ...props } />
+        { inputs.value?.map(inputProps => (
+          <VColorPickerInput
+            { ...inputProps }
+            label={ props.hideInputLabels ? undefined : inputProps.label }
+          />
         ))}
         { enabledModes.value.length > 1 && (
           <VBtn

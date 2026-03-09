@@ -27,7 +27,7 @@ export type VCommandPaletteItemSlots = {
   append: never
 }
 
-export const VCommandPaletteItemComponent = genericComponent<VCommandPaletteItemSlots>()({
+export const VCommandPaletteItem = genericComponent<VCommandPaletteItemSlots>()({
   name: 'VCommandPaletteItem',
 
   props: makeVCommandPaletteItemProps(),
@@ -54,4 +54,4 @@ export const VCommandPaletteItemComponent = genericComponent<VCommandPaletteItem
   },
 })
 
-export type VCommandPaletteItemComponent = InstanceType<typeof VCommandPaletteItemComponent>
+export type VCommandPaletteItem = InstanceType<typeof VCommandPaletteItem>
