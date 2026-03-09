@@ -57,7 +57,13 @@ export const makeVCommandPaletteProps = propsFactory({
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
   ...makeDensityProps(),
-  ...omit(makeVDialogProps({ maxWidth: 500 }), ['modelValue']),
+  ...omit(makeVDialogProps({
+    location: 'top center' as const,
+    locationStrategy: 'viewport' as const,
+    maxWidth: 500,
+    origin: 'top center' as const,
+    viewportMargin: 0,
+  }), ['modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {

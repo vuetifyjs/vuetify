@@ -84,6 +84,24 @@ By default, selecting an actionable item closes the palette. Use **close-on-sele
 
 The command palette is built on `v-dialog` and accepts most of the props while passing **class** and **style** values to the `v-sheet` content container.
 
+By default it uses a viewport-based location strategy with top anchoring so the palette position stays stable while the list height changes.
+
+Use `location-strategy`, `location`, and `origin` to customize placement behavior. For top offset and content spacing, you can override CSS variables through `content-props`.
+
+```vue
+<v-command-palette
+  :content-props="{
+    style: {
+      '--v-command-palette-content-top-offset': '88px',   /* default: 13vh */
+      '--v-command-palette-content-inline-padding': '20px', /* default: 16px */
+      '--v-command-palette-content-bottom-padding': '24px', /* default: 16px */
+    },
+  }"
+/>
+```
+
+The following example demonstrates additional dialog customization options.
+
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
 ### Slots

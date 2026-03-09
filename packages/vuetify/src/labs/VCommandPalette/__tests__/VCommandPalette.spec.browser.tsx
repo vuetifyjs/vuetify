@@ -91,6 +91,70 @@ describe('VCommandPalette', () => {
 
       expect(screen.getByText('No data available')).toBeInTheDocument()
     })
+
+    it('should keep the overlay top position stable when filtered results change height', async () => {
+      const model = ref(true)
+      const items = Array.from({ length: 16 }, (_, index) => ({
+        title: `Command ${index}`,
+        subtitle: `Description ${index}`,
+        value: `command-${index}`,
+      }))
+
+      items.push({
+        title: 'Special Command',
+        subtitle: 'A unique entry for filtering',
+        value: 'special-command',
+      })
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ items } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content')
+      expect(content).toBeInTheDocument()
+
+      const initialTop = content!.getBoundingClientRect().top
+      const input = screen.getByRole('textbox')
+
+      await userEvent.type(input, 'special')
+      await wait(100)
+
+      const filteredTop = content!.getBoundingClientRect().top
+
+      expect(Math.abs(filteredTop - initialTop)).toBeLessThanOrEqual(1)
+    })
+
+    it('should override dialog margins so .v-overlay__content has no margin and offset is applied to .v-sheet', async () => {
+      const model = ref(true)
+      const style = document.createElement('style')
+      style.textContent = '.v-dialog > .v-overlay__content { margin: 24px; }'
+      document.head.appendChild(style)
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(50)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content') as HTMLElement
+      expect(content).toBeInTheDocument()
+
+      const sheet = content.querySelector('.v-sheet') as HTMLElement
+      expect(sheet).toBeInTheDocument()
+
+      // .v-overlay__content should have margin: 0, not the injected 24px
+      expect(getComputedStyle(content).marginTop).toBe('0px')
+
+      // the top offset is applied to .v-sheet, not .v-overlay__content
+      const sheetMarginTop = parseFloat(getComputedStyle(sheet).marginTop)
+      expect(sheetMarginTop).toBeGreaterThan(0)
+
+      style.remove()
+    })
   })
 
   describe('Search & Filtering', () => {
