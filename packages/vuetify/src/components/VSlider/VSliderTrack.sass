@@ -86,12 +86,17 @@
       touch-action: pan-y
 
       &__background
+        inset-inline-start: 0
+        width: 100%
         height: var(--v-slider-track-size)
 
       &__fill
+        inset-inline-start: var(--v-slider-value-start)
+        width: calc(var(--v-slider-value-stop) - var(--v-slider-value-start))
         height: inherit
 
     .v-slider-track__tick
+      inset-inline-start: var(--v-slider-tick-position)
       margin-top: calc(#{$slider-track-active-size} / 2)
 
       @include tools.rtl()
@@ -136,15 +141,20 @@
       touch-action: pan-x
 
       &__background
+        top: 0
+        height: 100%
         width: var(--v-slider-track-size)
 
       &__fill
+        top: calc(100% - var(--v-slider-value-stop))
+        height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start))
         width: inherit
 
     .v-slider-track__ticks
       height: 100%
 
     .v-slider-track__tick
+      bottom: var(--v-slider-tick-position)
       margin-inline-start: calc(#{$slider-track-active-size} / 2)
       transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / 2))
 
@@ -167,3 +177,114 @@
 
   .v-slider-track__background--opacity
     opacity: 0.38
+
+  // Pill variant
+  .v-slider--variant-pill
+    --v-slider-pill-gap: #{$slider-pill-gap}
+    --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
+
+    .v-slider-track
+      border-radius: $slider-pill-track-outer-radius
+
+    .v-slider-track__background,
+    .v-slider-track__fill
+      border-radius: $slider-pill-track-outer-radius
+
+    .v-slider-track__background--opacity
+      opacity: 0.24
+
+    &.v-input--horizontal
+      .v-slider-track
+        height: var(--v-slider-track-size)
+
+        &__background
+          height: var(--v-slider-track-size)
+
+        &__fill
+          inset-inline-start: calc(var(--v-slider-value-start) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+          width: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) - var(--v-slider-pill-gap) * 2)
+          height: var(--v-slider-track-size)
+
+      .v-slider-track__inactive--before
+        inset-inline-start: 0
+        width: calc(var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
+        border-radius: $slider-pill-track-outer-radius $slider-pill-track-inner-radius $slider-pill-track-inner-radius $slider-pill-track-outer-radius
+
+        ~ .v-slider-track__fill
+          border-top-left-radius: $slider-pill-track-inner-radius
+          border-bottom-left-radius: $slider-pill-track-inner-radius
+
+      .v-slider-track__inactive--after
+        inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+        width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
+        border-radius: $slider-pill-track-inner-radius $slider-pill-track-outer-radius $slider-pill-track-outer-radius $slider-pill-track-inner-radius
+
+        ~ .v-slider-track__fill
+          border-top-right-radius: $slider-pill-track-inner-radius
+          border-bottom-right-radius: $slider-pill-track-inner-radius
+
+      .v-slider-track__inactive--before,
+      .v-slider-track__inactive--after
+        &::before
+          content: ''
+          position: absolute
+          width: $slider-pill-stop-indicator-size
+          height: $slider-pill-stop-indicator-size
+          border-radius: $slider-pill-stop-indicator-border-radius
+          background: currentColor
+          top: 50%
+          transform: translateY(-50%)
+
+      .v-slider-track__inactive--before::before
+        left: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+
+      .v-slider-track__inactive--after::before
+        right: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+
+    &.v-input--vertical
+      .v-slider-track
+        width: var(--v-slider-track-size)
+
+        &__background
+          width: var(--v-slider-track-size)
+
+        &__fill
+          top: calc(100% - var(--v-slider-value-stop) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+          height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) - var(--v-slider-pill-gap) * 2)
+          width: var(--v-slider-track-size)
+
+      .v-slider-track__inactive--before
+        top: calc(100% - var(--v-slider-value-start) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+        height: calc(var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
+        border-radius: $slider-pill-track-inner-radius $slider-pill-track-inner-radius $slider-pill-track-outer-radius $slider-pill-track-outer-radius
+
+        ~ .v-slider-track__fill
+          border-bottom-left-radius: $slider-pill-track-inner-radius
+          border-bottom-right-radius: $slider-pill-track-inner-radius
+
+      .v-slider-track__inactive--after
+        top: 0
+        height: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
+        border-radius: $slider-pill-track-outer-radius $slider-pill-track-outer-radius $slider-pill-track-inner-radius $slider-pill-track-inner-radius
+
+        ~ .v-slider-track__fill
+          border-top-left-radius: $slider-pill-track-inner-radius
+          border-top-right-radius: $slider-pill-track-inner-radius
+
+      .v-slider-track__inactive--before,
+      .v-slider-track__inactive--after
+        &::before
+          content: ''
+          position: absolute
+          width: $slider-pill-stop-indicator-size
+          height: $slider-pill-stop-indicator-size
+          border-radius: $slider-pill-stop-indicator-border-radius
+          background: currentColor
+          left: 50%
+          transform: translateX(-50%)
+
+      .v-slider-track__inactive--before::before
+        bottom: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+
+      .v-slider-track__inactive--after::before
+        top: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
