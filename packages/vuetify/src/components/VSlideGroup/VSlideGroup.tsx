@@ -20,7 +20,6 @@ import { computed, shallowRef, watch } from 'vue'
 import {
   calculateCenteredTarget,
   calculateUpdatedTarget,
-  getClientSize,
   getOffsetSize,
   getScrollPosition,
   getScrollSize,
@@ -391,12 +390,12 @@ export const VSlideGroup = genericComponent<new <T>(
     })
 
     const hasNext = computed(() => {
-      if (!containerRef.value || !hasOverflowOrScroll.value) return false
+      if (!hasOverflowOrScroll.value) return false
 
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
       const clientSize = getClientSize(isHorizontal.value, containerRef.value)
 
-      const scrollSizeMax = scrollSize - clientSize
+      const scrollSizeMax = contentSize.value - containerSize.value
 
       // 1 pixel in reserve, may be lost after rounding
       return scrollSizeMax - Math.abs(scrollOffset.value) > 1

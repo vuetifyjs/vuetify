@@ -76,7 +76,7 @@
           v-else
           :search-client="searchClient"
           class="flex-grow-1"
-          index-name="vuetifyjs-v3"
+          index-name="vuetifyjs-v4"
           @state-change="searchFunction"
         >
           <ais-configure
@@ -159,7 +159,7 @@
   function transformItems (items: any[]) {
     // const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], locale)
     items = items.map(item => {
-      const url = new URL(item.url_without_variables)
+      const url = new URL(item.url)
 
       return {
         ...item,

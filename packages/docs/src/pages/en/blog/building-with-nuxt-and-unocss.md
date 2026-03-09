@@ -12,6 +12,10 @@ Although traditionally we tend to think about Vuetify as a great fit for large p
 
 The article will walk through scaffolding a starter project, installing and wiring UnoCSS, customizing fonts, handling light/dark mode and aligning breakpoints. Finally, "CSS layers" section shows how to order Vuetify, UnoCSS, and app‑specific styles to avoid specificity conflicts.
 
+🖊️ Jacek Czarniecki • 📅 December 22nd, 2025
+
+<PromotedEntry />
+
 ---
 
 ## Table of Contents

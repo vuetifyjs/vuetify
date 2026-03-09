@@ -155,7 +155,8 @@ describe('VDivider', () => {
                   { idx % 4 !== 0 && (
                     <VDivider
                       vertical
-                      class="opacity-100 text-red my-n3"
+                      style="margin: -12px -6px -12px -7px"
+                      class="opacity-100 text-red"
                     ></VDivider>
                   )}
                   <VCol cols="3">

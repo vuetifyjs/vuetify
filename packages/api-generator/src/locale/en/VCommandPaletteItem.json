@@ -1,0 +1,6 @@
+{
+  "props": {
+    "item": "The command palette item data object.",
+    "index": "The index of the item within the command palette list."
+  }
+}

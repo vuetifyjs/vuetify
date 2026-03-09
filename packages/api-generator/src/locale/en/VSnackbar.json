@@ -1,9 +1,6 @@
 {
   "props": {
-    "app": "Respects boundaries of—and will not overlap with—other `app` components like `v-app-bar`, `v-navigation-drawer`, and `v-footer`.",
-    "centered": "Positions the snackbar in the center of the screen, (x and y axis).",
     "loading": "Displays a loading spinner in the prepend area.",
-    "multiLine": "Deprecated, use `min-height` instead. Increases minimum height.",
     "prependAvatar": "Displays an avatar in the prepend area using the provided image source.",
     "prependIcon": "Displays an icon in the prepend area.",
     "reverseTimer": "Reverses the direction of the timer progress bar, filling up instead of depleting.",
@@ -11,6 +8,9 @@
     "timerColor": "Sets the color of the timer progress bar.",
     "timeout": "Time (in milliseconds) to wait until snackbar is automatically hidden. Use `-1` to keep open indefinitely. It is recommended for this number to be between `4000` and `10000`. Changes to this property will reset the countdown.",
     "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition. Supports special location-aware mode with **slide-auto** and **scroll-auto**",
+    "collapsed": "Alters the element size fit behind front snackbar in the queue.",
+    "queueGap": "Sets the offset to show collapsed snackbars as a stack. Requires value in pixels.",
+    "queueIndex": "The index position of this snackbar within a queue.",
     "vertical": "Stacks snackbar content on top of the actions (button)."
   },
   "slots": {
@@ -18,12 +18,9 @@
     "header": "Slot for custom content above the snackbar body."
   },
   "exposed": {
-    "activatorEl": "Ref to the current activator element.",
     "animateClick": "Function invoked when user clicks outside.",
-    "contentEl": "Ref to the current content element.",
     "globalTop": "Used by activator to determine a components position in the global stack order.",
     "localTop": "Used by activator to determine a components position in the local stack order.",
-    "scrimEl": "Ref to the current scrim element.",
     "updateLocation": "Function used for locationStrategy positioning."
   }
 }

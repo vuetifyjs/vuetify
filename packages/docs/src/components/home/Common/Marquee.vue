@@ -94,7 +94,7 @@
 
 .marquee:has(.marquee-content:focus-within) {
   .marquee-content {
-    animation: none;
+    animation-play-state: paused;
   }
 
   &::before,

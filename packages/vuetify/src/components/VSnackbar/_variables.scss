@@ -8,6 +8,7 @@ $snackbar-border-radius: settings.$border-radius-root !default;
 $snackbar-plain-opacity: .62 !default;
 $snackbar-btn-padding: 0 8px !default;
 $snackbar-background: rgb(var(--v-theme-surface-variant)) !default;
+$snackbar-fallback-background: rgb(var(--v-theme-surface)) !default;
 $snackbar-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $snackbar-font-size: tools.map-deep-get(settings.$typography, 'body-medium', 'size') !default;
 $snackbar-font-weight: tools.map-deep-get(settings.$typography, 'body-medium', 'weight') !default;
