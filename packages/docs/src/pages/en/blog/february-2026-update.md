@@ -379,8 +379,7 @@ Vuetify One completed a **monorepo conversion**, extracting `@vuetify/auth` as a
 
 **Details:**
 
-* [Team Dashboard PR#135](https://github.com/vuetifyjs/bin/pull/135)
-* [Team Actions PR#137](https://github.com/vuetifyjs/bin/pull/137)
+* [Vuetify Bin](https://bin.vuetifyjs.com/)
 
 ### Vuetify Snips
 
