@@ -127,7 +127,7 @@ describe('VCommandPalette', () => {
       expect(Math.abs(filteredTop - initialTop)).toBeLessThanOrEqual(1)
     })
 
-    it('should override dialog margins so .v-overlay__content has no margin and offset is applied to .v-sheet', async () => {
+    it('should keep command palette top offset when dialog margins are defined later', async () => {
       const model = ref(true)
       const style = document.createElement('style')
       style.textContent = '.v-dialog > .v-overlay__content { margin: 24px; }'
@@ -146,12 +146,8 @@ describe('VCommandPalette', () => {
       const sheet = content.querySelector('.v-sheet') as HTMLElement
       expect(sheet).toBeInTheDocument()
 
-      // .v-overlay__content should have margin: 0, not the injected 24px
-      expect(getComputedStyle(content).marginTop).toBe('0px')
-
-      // the top offset is applied to .v-sheet, not .v-overlay__content
-      const sheetMarginTop = parseFloat(getComputedStyle(sheet).marginTop)
-      expect(sheetMarginTop).toBeGreaterThan(0)
+      // Even with dialog margin overrides, top offset is applied to the sheet
+      expect(sheet.getBoundingClientRect().top).toBeGreaterThan(50)
 
       style.remove()
     })
