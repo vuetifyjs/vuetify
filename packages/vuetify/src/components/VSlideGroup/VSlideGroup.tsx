@@ -392,9 +392,6 @@ export const VSlideGroup = genericComponent<new <T>(
     const hasNext = computed(() => {
       if (!hasOverflowOrScroll.value) return false
 
-      const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
-      const clientSize = getClientSize(isHorizontal.value, containerRef.value)
-
       const scrollSizeMax = contentSize.value - containerSize.value
 
       // 1 pixel in reserve, may be lost after rounding
