@@ -43,6 +43,7 @@ export const makeVAvatarGroupProps = propsFactory({
   overflowText: String,
   reverse: Boolean,
   size: [Number, String],
+  strictLimit: Boolean,
   vertical: Boolean,
 
   ...makeComponentProps(),
@@ -57,8 +58,12 @@ export const VAvatarGroup = genericComponent<VAvatarGroupSlots>()({
   setup (props, { slots }) {
     const items = computed(() => {
       const visibleItems = props.limit
-        ? props.items.slice(0, props.limit)
-        : props.items
+          ? (props.strictLimit
+              ? (props.items.length > props.limit
+                  ? props.items.slice(0, props.limit - 1)
+                  : props.items)
+              : props.items.slice(0, props.limit))
+          : props.items
 
       const orderedItems = props.reverse
         ? visibleItems.toReversed()
@@ -77,7 +82,12 @@ export const VAvatarGroup = genericComponent<VAvatarGroupSlots>()({
       })
     })
 
-    const overflow = computed(() => props.limit ? Math.max(props.items.length - props.limit, 0) : 0)
+    const overflow = computed(() => {
+      if (!props.limit) return 0
+      return props.strictLimit && props.items.length > props.limit
+          ? Math.max(props.items.length - (props.limit - 1), 0)
+          : Math.max(props.items.length - props.limit, 0)
+    })
     const overflowText = computed(() => props.overflowText ?? (overflow.value ? `+${overflow.value}` : ''))
 
     const overflowItem = () => (

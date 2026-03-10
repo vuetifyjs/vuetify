@@ -70,7 +70,7 @@ Use the **size** prop to control avatar dimensions and the **gap** prop to adjus
 
 #### Limit
 
-Use the **limit** prop to restrict the number of visible avatars. Overflow is indicated with a "+N" avatar.
+Use the **limit** prop to restrict the number of items rendered into avatars. Overflow is indicated with an additional "+N" avatar.
 
 <ExamplesExample file="v-avatar-group/prop-limit" />
 
