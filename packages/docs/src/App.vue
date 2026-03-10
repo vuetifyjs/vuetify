@@ -20,7 +20,6 @@
   const user = useUserStore()
   const router = useRouter()
   const route = useRoute()
-  const theme = useTheme()
   const { locale } = useI18n()
   const auth = useAuthStore()
   const frontmatter = useFrontmatter()
