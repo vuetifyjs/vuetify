@@ -110,6 +110,7 @@ export interface ThemeInstance {
   change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => void
   cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => void
   toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => void
+  setTransitionOrigin: (e: PointerEvent | null) => void
 
   readonly isDisabled: boolean
   readonly isSystem: Readonly<Ref<boolean>>
@@ -512,15 +513,27 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
+  let _transitionOrigin: string | null
+  function setTransitionOrigin (e: PointerEvent | null) {
+    if (!e) {
+      _transitionOrigin = null
+      return
+    }
+
+    const y = 100 * e.clientY / window.innerHeight
+    const x = Math.min(99, 100 * e.clientX / window.innerWidth)
+    _transitionOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`
+  }
+
   function resolveTransitionOptions (
     transition?: boolean | ThemeTransitionOptions
   ): ThemeTransitionOptions | false {
     const opt = transition ?? parsedOptions.transition
-    if (!opt) return false
+    if (!opt && !_transitionOrigin) return false
     const global = typeof parsedOptions.transition === 'object' ? parsedOptions.transition : {}
     const local = typeof transition === 'object' ? transition : {}
     return {
-      origin: local.origin ?? global.origin,
+      origin: local.origin ?? _transitionOrigin ?? global.origin,
       duration: local.duration ?? global.duration,
     }
   }
@@ -546,6 +559,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     const transition = document.startViewTransition(() => callback())
     transition.finished.then(() => {
+      _transitionOrigin = null
       style.remove()
     })
   }
@@ -594,6 +608,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     change,
     cycle,
     toggle,
+    setTransitionOrigin,
     isDisabled: parsedOptions.isDisabled,
     isSystem,
     name,
