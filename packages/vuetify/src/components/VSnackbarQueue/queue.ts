@@ -92,7 +92,7 @@ export function useSnackbarItem (
   watch(isActive, val => !val && queue.unregister(id), { flush: 'sync' })
 
   const { width, height } = useElementSize(toRef(contentEl))
-  watch([width, height], ([w, h]) => {
+  watch([() => width.value, () => height.value], ([w, h]) => {
     if (w) queue.setSize(id, h, w)
   })
 
