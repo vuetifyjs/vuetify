@@ -28,6 +28,7 @@ import {
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { VueHeadClient } from '@unhead/vue/client'
@@ -110,7 +111,7 @@ export interface ThemeInstance {
   change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => void
   cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => void
   toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => void
-  setTransitionOrigin: (e: PointerEvent | null) => void
+  setTransitionOrigin: (e: PointerEvent | Element | null) => void
 
   readonly isDisabled: boolean
   readonly isSystem: Readonly<Ref<boolean>>
@@ -514,15 +515,27 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   let _transitionOrigin: string | null
-  function setTransitionOrigin (e: PointerEvent | null) {
+  function setTransitionOrigin (e: PointerEvent | Element | null) {
     if (!e) {
       _transitionOrigin = null
       return
     }
 
-    const y = 100 * e.clientY / window.innerHeight
-    const x = Math.min(98.9, 100 * e.clientX / window.innerWidth) // clip to avoid glitches
-    _transitionOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`
+    let x: number
+    let y: number
+
+    if (e instanceof Element) {
+      const box = new Box(e)
+      x = box.left + box.width / 2
+      y = box.top + box.height / 2
+    } else {
+      x = e.clientX
+      y = e.clientY
+    }
+
+    const originX = Math.min(98.9, 100 * x / window.innerWidth) // clip to avoid glitches
+    const originY = 100 * y / window.innerHeight
+    _transitionOrigin = `${originX.toFixed(2)}% ${originY.toFixed(2)}%`
   }
 
   function resolveTransitionOptions (

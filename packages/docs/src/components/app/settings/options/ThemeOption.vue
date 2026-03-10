@@ -10,7 +10,7 @@
       v-for="(item, i) in items"
       :key="i"
       :value="item.value"
-      @click="theme.setTransitionOrigin"
+      @click="theme.setTransitionOrigin($event.target)"
     >
       <template #label>
         <v-icon :icon="item.icon" start />
