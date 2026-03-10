@@ -173,6 +173,14 @@ export default createVuetify({
 
 The **transition** option enables an expanding circle animation when changing themes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API). In browsers that do not support the View Transition API, the theme change is applied instantly.
 
+| Browser                 | minimal version for View Transition |
+|-------------------------|:------------------------------------|
+| Chromium (Chrome, Edge) | 111                                 |
+| Firefox                 | 144                                 |
+| Safari                  | 18.0                                |
+
+To enable theme transitions, set the **transition** option to `true` or pass an options object with default origin of the expanding circle:
+
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 
@@ -180,7 +188,7 @@ export default createVuetify({
   theme: {
     transition: true, // default origin: top center
     // or provide options:
-    // transition: { origin: '100% 0%' }, // right corner
+    transition: { origin: '100% 0%' }, // right corner
   },
 })
 ```
@@ -199,13 +207,12 @@ You can also override the transition per-call by passing a second argument to `c
 
 <script setup>
   import { useTheme } from 'vuetify'
-
   const theme = useTheme()
 
   function toggleTheme (e) {
-    const x = e.clientX
-    const y = e.clientY
-    theme.toggle(undefined, { origin: `${x}px ${y}px` })
+    // passing target element will make it work for both clicks and keyboard interactions
+    theme.setTransitionOrigin(e.target)
+    theme.toggle()
   }
 </script>
 ```
