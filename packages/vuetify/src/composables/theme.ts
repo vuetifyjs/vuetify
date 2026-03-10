@@ -521,7 +521,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
 
     const y = 100 * e.clientY / window.innerHeight
-    const x = Math.min(99, 100 * e.clientX / window.innerWidth)
+    const x = Math.min(98.9, 100 * e.clientX / window.innerWidth) // clip to avoid glitches
     _transitionOrigin = `${x.toFixed(2)}% ${y.toFixed(2)}%`
   }
 
@@ -539,7 +539,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   }
 
   function withPageTransition (callback: () => void, options: ThemeTransitionOptions) {
-    if (!IN_BROWSER || !document.startViewTransition || !PREFERS_REDUCED_MOTION) {
+    if (!IN_BROWSER || !document.startViewTransition || PREFERS_REDUCED_MOTION()) {
       callback()
       return
     }
@@ -549,15 +549,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     const style = document.createElement('style')
     style.textContent =
-      `::view-transition-old(root) { animation: none; }` +
-      `::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
+      `html:active-view-transition-type(vuetify-theme)::view-transition-old(root) { animation: none; }` +
+      `html:active-view-transition-type(vuetify-theme)::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
       `@keyframes v-circle-in {` +
       `  from { clip-path: circle(0% at ${origin}); }` +
       `  to { clip-path: circle(150% at ${origin}); }` +
       `}`
     document.head.appendChild(style)
 
-    const transition = document.startViewTransition(() => callback())
+    const transition = document.startViewTransition({ update: () => callback(), types: ['vuetify-theme'] })
     transition.finished.then(() => {
       _transitionOrigin = null
       style.remove()
