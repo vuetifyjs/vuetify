@@ -1,6 +1,14 @@
 // Types
 import type { DirectiveBinding } from 'vue'
-import type { MutationOptions } from '@/composables/mutationObserver'
+
+export interface MutationOptions {
+  attr?: boolean
+  char?: boolean
+  child?: boolean
+  sub?: boolean
+  once?: boolean
+  immediate?: boolean
+}
 
 export interface MutationDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
   value: MutationCallback | { handler: MutationCallback, options?: MutationObserverInit }

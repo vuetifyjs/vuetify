@@ -23,12 +23,11 @@ export const VApp = genericComponent()({
 
   setup (props, { slots }) {
     const theme = provideTheme(props)
-    const { layoutClasses, getLayoutItem, items, layoutRef } = createLayout({ ...props, fullHeight: true })
+    const { layoutClasses, getLayoutItem, items } = createLayout({ ...props, fullHeight: true })
     const { rtlClasses } = useRtl()
 
     useRender(() => (
       <div
-        ref={ layoutRef }
         class={[
           'v-application',
           theme.themeClasses.value,

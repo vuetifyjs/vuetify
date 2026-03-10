@@ -6,8 +6,8 @@ import { VBtn } from '@/components/VBtn'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
+import { useElementIntersection } from '@vuetify/v0'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 
@@ -81,9 +81,10 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const el = shallowRef<HTMLElement>()
+    const { isIntersecting } = useElementIntersection(el)
 
-    watch(isIntersecting, async val => {
+    watch(() => isIntersecting.value, async val => {
       emit('intersect', props.side, val)
     })
 
@@ -93,7 +94,7 @@ export const VInfiniteScrollIntersect = defineComponent({
         style={{
           '--v-infinite-margin-size': props.rootMargin,
         }}
-        ref={ intersectionRef }
+        ref={ el }
       >&nbsp;</div>
     ))
 
