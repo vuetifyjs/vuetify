@@ -33,7 +33,7 @@
           spaced="end"
           target="_blank"
           variant="tonal"
-          @click="showSnackbar = false"
+          @click="linkClick"
         >
           <span>
             <div class="mb-1">{{ link.title }}</div>
@@ -70,6 +70,14 @@
       })
     }
   })
+
+  function linkClick () {
+    showSnackbar.value = false
+    dismissed.value = true // for this session only
+    track({
+      ev: 'sponsorPopupClick',
+    })
+  }
 
   function dismiss () {
     showSnackbar.value = false
