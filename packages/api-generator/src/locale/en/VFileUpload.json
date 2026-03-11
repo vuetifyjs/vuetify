@@ -14,5 +14,8 @@
     "icon": "Slot for a custom appearance in icon section.",
     "input": "Define a custom native input.",
     "single": "Slot for customizing the appearance of a single file when using inset file list mode."
+  },
+  "exposed": {
+    "controlRef": "Reference to the underlying input control element."
   }
 }

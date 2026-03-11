@@ -29,12 +29,17 @@ export function splitKeyCombination (combination: string, isInternal = false): {
 
   const hasInvalidStructure = (
     hasInvalidLeadingSeparator ||
-    // Disallow literal + or _ keys (they require shift)
-    combination.includes('++') || combination.includes('__') || combination === '+' || combination === '_' ||
+    // Disallow literal +, / or _ keys (they are delimiters)
+    combination.includes('++') || combination.includes('//') || combination.includes('__') ||
+    combination === '+' || combination === '/' || combination === '_' ||
     // Ends with a separator that is not part of a doubled literal
-    (combination.length > 1 && (combination.endsWith('+') || combination.endsWith('_')) && combination.at(-2) !== combination.at(-1)) ||
+    (
+      combination.length > 1 &&
+      (combination.endsWith('+') || combination.endsWith('/') || combination.endsWith('_')) &&
+      combination.at(-2) !== combination.at(-1)
+    ) ||
     // Stand-alone doubled separators (dangling)
-    combination === '++' || combination === '--' || combination === '__'
+    combination === '++' || combination === '//' || combination === '--' || combination === '__'
   )
 
   if (hasInvalidStructure) {
@@ -103,7 +108,7 @@ export function splitKeySequence (str: string): string[] {
 
   // A sequence is invalid if it starts or ends with a separator,
   // unless it is part of a combination (e.g., `shift+-`).
-  const hasInvalidStart = str.startsWith('-') && !['---', '--+'].includes(str)
+  const hasInvalidStart = str.startsWith('-') && str !== '-' && !['---', '--+'].includes(str)
   const hasInvalidEnd = str.endsWith('-') && !str.endsWith('+-') && !str.endsWith('_-') && str !== '-' && str !== '---'
 
   if (hasInvalidStart || hasInvalidEnd) {
