@@ -415,7 +415,7 @@ February was Vuetify0's highest-commit month with **152 commits** and **10 merge
 
 * **[createNested](https://0.vuetifyjs.com/composables/selection/create-nested/)** — Gained active state management for hierarchical tree structures, enabling treeview, file browser, and nested navigation patterns with `activate()`, `deactivate()`, and `activeIds` tracking.
 
-* **[createStack](https://0.vuetifyjs.com/composables/system/create-stack/)** — Overlay z-index management composable for coordinating dialogs, menus, and drawers. Ensures correct stacking order without manual z-index management.
+* **[useStack](https://0.vuetifyjs.com/composables/plugins/use-stack/)** — Overlay z-index management plugin for coordinating dialogs, menus, and drawers. Ensures correct stacking order without manual z-index management.
 
 * **[Breadcrumbs](https://0.vuetifyjs.com/components/navigation/breadcrumbs/)** — Composable and component for accessible breadcrumb navigation with automatic ARIA attributes.
 
