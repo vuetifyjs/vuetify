@@ -185,10 +185,9 @@ The hotkey string supports various modifiers and special keys:
 ### Syntax rules
 
 - Parsing is performed left to right, so `ctrl+s-a` will produce "`ctrl+s` and then `a`"
-- Use `+` to combine modifiers with keys: `ctrl+s`
-- Use `_` and `/` as alternative combination delimiters: `ctrl_s`, `up/down`
-- Use `-` to create sequences: `ctrl+k-p` (press Ctrl+K, then P)
-- To bind delimiter characters as literal keys, use aliases (`plus`, `slash`, `underscore`, `minus`, `hyphen`) instead of raw symbols in combinations
+- Use `+` or `_` to combine modifiers with keys: `ctrl+s`, `ctrl_s`
+- Use `/` to separate alternative keys or combinations: `ctrl+k/ctrl+f`, `up/down`
+- Use `-` to create sequences: `ctrl+k-p` (Ctrl+K, then P) `ctrl+k/ctrl+f-p` (Ctrl+K or Ctrl+F, then P)
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
 - Spaces are ignored: `ctrl + s` equals `ctrl+s`
 
