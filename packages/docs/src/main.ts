@@ -48,6 +48,10 @@ const userStore = useUserStore(pinia)
 const app = createApp(App)
 
 if (IN_BROWSER) {
+  window.localStorage.setItem(
+    'userSessions',
+    String(Number(window.localStorage.getItem('userSessions') || 0) + 1)
+  )
   localeStore.$subscribe((_, state) => {
     window.localStorage.setItem('currentLocale', state.locale)
   })
