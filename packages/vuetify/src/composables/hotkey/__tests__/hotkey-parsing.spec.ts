@@ -62,21 +62,21 @@ describe('hotkey-parsing', () => {
     })
 
     // Combinations with doubled literals
-    it('should treat doubled literal + as invalid', () => {
+    it('should handle doubled literal +', () => {
       expect(parseKeyCombination('ctrl++')).toEqual({
         type: 'combo',
         parts: ['ctrl', '+'],
       })
     })
 
-    it('should treat doubled literal _ as invalid', () => {
+    it('should handle doubled literal _', () => {
       expect(parseKeyCombination('ctrl__')).toEqual({
         type: 'combo',
         parts: ['ctrl', '_'],
       })
     })
 
-    it('should treat doubled literal / as invalid', () => {
+    it('should handle doubled literal /', () => {
       expect(parseKeyCombination('ctrl//')).toEqual({
         type: 'alternate',
         parts: ['ctrl', '/'],
@@ -100,45 +100,45 @@ describe('hotkey-parsing', () => {
     })
 
     // Invalid combinations
-    it('should return empty array for empty string', () => {
+    it('should return empty string for empty string', () => {
       expect(parseKeyCombination('')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
     })
 
-    it('should return empty array for leading separators', () => {
+    it('should return empty string for leading separators', () => {
       expect(parseKeyCombination('+a')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected separator \'+\' at position 0').toHaveBeenTipped()
+      expect('Unexpected separator \'+\' at position 0').toHaveBeenTipped()
 
       expect(parseKeyCombination('/a')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected separator \'/\' at position 0').toHaveBeenTipped()
+      expect('Unexpected separator \'/\' at position 0').toHaveBeenTipped()
 
       expect(parseKeyCombination('_a')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected separator \'_\' at position 0').toHaveBeenTipped()
+      expect('Unexpected separator \'_\' at position 0').toHaveBeenTipped()
     })
 
-    it('should return empty array for trailing separators', () => {
+    it('should return empty string for trailing separators', () => {
       expect(parseKeyCombination('a+')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
 
       expect(parseKeyCombination('a/')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
 
       expect(parseKeyCombination('a_')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
     })
 
-    it('should return empty array for standalone doubled separators', () => {
+    it('should return empty string for standalone doubled separators', () => {
       expect(parseKeyCombination('++')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
 
       expect(parseKeyCombination('//')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
 
       expect(parseKeyCombination('--')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
 
       expect(parseKeyCombination('__')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
     })
 
     // Combinations starting with doubled literal separators
@@ -374,22 +374,22 @@ describe('hotkey-parsing', () => {
     // Invalid sequences
     it('should return empty string for empty string', () => {
       expect(parseKeyCombination('')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
     })
 
     it('should return empty string for leading sequence separator', () => {
       expect(parseKeyCombination('-a')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected separator \'-\' at position 0').toHaveBeenTipped()
+      expect('Unexpected separator \'-\' at position 0').toHaveBeenTipped()
     })
 
     it('should return empty string for trailing sequence separator', () => {
       expect(parseKeyCombination('a-')).toBe('')
-      expect('[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected end of input').toHaveBeenTipped()
+      expect('Unexpected end of input').toHaveBeenTipped()
     })
 
     it('should return empty string for invalid parts', () => {
       expect(parseKeyCombination('a-ctrl+-b')).toBe('')
-      expect(`[Vue warn]: Vuetify: Invalid hotkey combination: Unexpected separator '-' at position 7`).toHaveBeenTipped()
+      expect(`Unexpected separator '-' at position 7`).toHaveBeenTipped()
     })
 
     // Sequences with combinations that start with doubled literal
