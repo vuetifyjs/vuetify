@@ -4,6 +4,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 
 // Composables
 import { useLocale } from '@/composables/locale'
+import type { Variant } from '@/composables/variant'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -33,6 +34,14 @@ export const makeVStepperActionsProps = propsFactory({
   nextText: {
     type: String,
     default: '$vuetify.stepper.next',
+  },
+  prevVariant: {
+    type: String as PropType<Variant>,
+    default: 'text',
+  },
+  nextVariant: {
+    type: String as PropType<Variant>,
+    default: 'tonal',
   },
 }, 'VStepperActions')
 
@@ -71,7 +80,7 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
               VBtn: {
                 disabled: ['prev', true].includes(props.disabled),
                 text: t(props.prevText),
-                variant: 'text',
+                variant: props.prevVariant,
               },
             }}
           >
@@ -86,7 +95,7 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
                 color: props.color,
                 disabled: ['next', true].includes(props.disabled),
                 text: t(props.nextText),
-                variant: 'tonal',
+                variant: props.nextVariant,
               },
             }}
           >

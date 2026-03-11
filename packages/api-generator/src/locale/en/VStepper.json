@@ -3,7 +3,9 @@
     "completeIcon": "Icon to display when step is marked as completed.",
     "editIcon": "Icon to display when step is editable.",
     "errorIcon": "Icon to display when step has an error.",
-    "flat": "Removes the stepper's elevation."
+    "flat": "Removes the stepper's elevation.",
+    "nextVariant": "The variant style applied to the Next button.",
+    "prevVariant": "The variant style applied to the Prev button."
   },
   "exposed": {
     "next": "Move to the next step.",

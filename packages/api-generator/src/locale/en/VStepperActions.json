@@ -1,7 +1,9 @@
 {
   "props": {
     "nextText": "The text used for the Next button.",
-    "prevText": "The text used for the Prev button."
+    "nextVariant": "The variant style applied to the Next button.",
+    "prevText": "The text used for the Prev button.",
+    "prevVariant": "The variant style applied to the Prev button."
   },
   "events": {
     "click:next": "Event emitted when clicking the next button.",
