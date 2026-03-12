@@ -1,5 +1,6 @@
 // Utilities
 import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
+import { isNullOrUndefined, isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
@@ -121,13 +122,13 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 }
 
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
-  const ssrOptions = typeof ssr === 'object'
+  const ssrOptions = isObject(ssr)
     ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight }
     : undefined
 
   const breakpoint = createBreakpoints({
-    ...options?.mobileBreakpoint != null && { mobileBreakpoint: options.mobileBreakpoint },
-    ...options?.thresholds != null && { breakpoints: options.thresholds },
+    ...!isNullOrUndefined(options?.mobileBreakpoint) && { mobileBreakpoint: options.mobileBreakpoint },
+    ...!isNullOrUndefined(options?.thresholds) && { breakpoints: options.thresholds },
     ssr: ssrOptions,
   })
 
