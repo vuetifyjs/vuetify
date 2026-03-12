@@ -253,7 +253,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(videoRef, v => {
       if (v && props.srcObject) v.srcObject = props.srcObject
-    }, { immediate: false })
+    })
 
     watch(playing, v => {
       if (!videoRef.value) return
