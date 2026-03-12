@@ -71,14 +71,14 @@ These ranges power the various additional `AndUp` / `AndDown` properties accessi
 
 ```ts
 {
-  smAndDown: boolean // < 840px
-  smAndUp: boolean // > 599px
-  mdAndDown: boolean // < 1145px
-  mdAndUp: boolean // > 839px
-  lgAndDown: boolean // < 1545px
-  lgAndUp: boolean // > 1144px
-  xlAndDown: boolean // < 2138px
-  xlAndUp: boolean // > 1544px
+  smAndDown: boolean // < 960px
+  smAndUp: boolean // > 600px
+  mdAndDown: boolean // < 1280px
+  mdAndUp: boolean // > 960px
+  lgAndDown: boolean // < 1919px
+  lgAndUp: boolean // > 1280px
+  xlAndDown: boolean // < 2559px
+  xlAndUp: boolean // > 1920px
   xxlAndDown: boolean // always true
   xxlAndUp: boolean // >= 2138px
 }
