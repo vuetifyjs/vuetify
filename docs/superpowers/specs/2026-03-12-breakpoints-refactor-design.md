@@ -55,7 +55,7 @@ framework.ts
 **Kept:**
 
 - `getPlatform(ssr)` — UA/platform detection (not in v0)
-- `parseDisplayOptions` — simplified to map Vuetify's `DisplayOptions` to v0's `BreakpointsOptions`
+- `parseDisplayOptions` — can be simplified or removed since v0's `createBreakpoints` has identical defaults. If kept, avoid double-merging defaults (Vuetify merges, then v0 merges again). Simplest: pass `options?.thresholds` and `options?.mobileBreakpoint` directly to `createBreakpoints` and let v0 handle defaults.
 - `DisplaySymbol` injection key
 - `useDisplay(props, name)` — injects display, computes component-level `mobile` override + `displayClasses`
 - `makeDisplayProps` — props factory for `mobile`/`mobileBreakpoint`
@@ -70,10 +70,14 @@ import type { BreakpointsContext } from '@vuetify/v0'
 export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
+  const ssrOptions = typeof ssr === 'object'
+    ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight }
+    : undefined
+
   const bp = createBreakpoints({
     mobileBreakpoint,
     breakpoints: thresholds,
-    ssr: typeof ssr === 'object' ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight } : undefined,
+    ssr: ssrOptions,
   })
 
   const platform = shallowRef(getPlatform(ssr))
@@ -83,9 +87,20 @@ export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): Displ
     platform.value = getPlatform()
   }
 
+  // v0's raw createBreakpoints() does NOT set up resize listeners or
+  // flush initial values — that's the plugin's job. We must do both.
   if (IN_BROWSER) {
-    window.addEventListener('resize', () => bp.update(), { passive: true })
-    // Platform doesn't change on resize, only on SSR→client transition
+    bp.update() // flush real viewport dimensions immediately
+
+    function onResize() {
+      bp.update()
+    }
+
+    window.addEventListener('resize', onResize, { passive: true })
+
+    onScopeDispose(() => {
+      window.removeEventListener('resize', onResize)
+    }, true)
   }
 
   return {
@@ -119,14 +134,27 @@ export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): Displ
     thresholds: toRef(() => thresholds),
 
     update,
-    ssr: bp.ssr,
+    // Keep Vuetify's ssr semantics (true when SSR was configured, even on client)
+    // v0's bp.ssr is only true on the server. useHydration depends on this
+    // being true on the client when SSR mode is active.
+    ssr: !!ssr,
   }
 }
 ```
 
-**Note:** The resize listener setup may need adjustment. v0's `createBreakpoints` does NOT set up its own resize listener (that's in the plugin's `setup` callback). So Vuetify must still call `bp.update()` on resize. The current `onScopeDispose` cleanup pattern should be preserved.
+**Key lifecycle notes:**
+
+1. v0's `createBreakpoints()` initializes all refs to `0`/`xs` defaults on the client (it only uses SSR values on the server). We call `bp.update()` immediately after construction to flush real viewport dimensions.
+
+2. The resize listener uses a named function (`onResize`) for proper cleanup via `onScopeDispose`, matching the existing pattern.
+
+3. `ssr` is set to `!!ssr` (Vuetify's semantics) rather than `bp.ssr` (v0's semantics). Vuetify's `useHydration` depends on `ssr` being `true` on the client when SSR mode was configured. v0's `bp.ssr` is only `true` on the server.
+
+4. **SSR hydration note:** The current implementation preserves SSR-provided dimensions until mount via `getClientWidth(ssr)` which returns SSR values when `ssr` is truthy on the client. With v0, calling `bp.update()` immediately reads real viewport dimensions. This is acceptable because `framework.ts` already calls `display.update()` after mount/suspense-resolve for the same purpose — the window between construction and mount is negligible since `createDisplay` runs during `createVuetify()` (before any component mounts).
 
 ### `DisplayInstance` type
+
+The interface keeps `Ref<T>` types to avoid a public API type break. Internally, v0 returns `Readonly<ShallowRef<T>>` which is assignable to `Ref<T>` at runtime (both have `.value`), but `Readonly<ShallowRef<T>>` does not satisfy `Ref<T>` at the TypeScript level because `Ref<T>` includes a setter. We keep the interface as `Ref<T>` and the implementation naturally satisfies it since `ShallowRef<T> extends Ref<T>`.
 
 ```ts
 import type { BreakpointName } from '@vuetify/v0'
@@ -134,31 +162,31 @@ import type { BreakpointName } from '@vuetify/v0'
 export type DisplayBreakpoint = BreakpointName
 
 export interface DisplayInstance {
-  // From v0 — Readonly<ShallowRef<boolean>>
-  xs: Readonly<ShallowRef<boolean>>
-  sm: Readonly<ShallowRef<boolean>>
-  md: Readonly<ShallowRef<boolean>>
-  lg: Readonly<ShallowRef<boolean>>
-  xl: Readonly<ShallowRef<boolean>>
-  xxl: Readonly<ShallowRef<boolean>>
-  smAndUp: Readonly<ShallowRef<boolean>>
-  mdAndUp: Readonly<ShallowRef<boolean>>
-  lgAndUp: Readonly<ShallowRef<boolean>>
-  xlAndUp: Readonly<ShallowRef<boolean>>
-  smAndDown: Readonly<ShallowRef<boolean>>
-  mdAndDown: Readonly<ShallowRef<boolean>>
-  lgAndDown: Readonly<ShallowRef<boolean>>
-  xlAndDown: Readonly<ShallowRef<boolean>>
-  xxlAndUp: Readonly<ShallowRef<boolean>>
-  xxlAndDown: Readonly<ShallowRef<boolean>>
-  name: Readonly<ShallowRef<DisplayBreakpoint>>
-  width: Readonly<ShallowRef<number>>
-  height: Readonly<ShallowRef<number>>
+  // Breakpoints (delegated to v0 internally)
+  xs: Ref<boolean>
+  sm: Ref<boolean>
+  md: Ref<boolean>
+  lg: Ref<boolean>
+  xl: Ref<boolean>
+  xxl: Ref<boolean>
+  smAndUp: Ref<boolean>
+  mdAndUp: Ref<boolean>
+  lgAndUp: Ref<boolean>
+  xlAndUp: Ref<boolean>
+  smAndDown: Ref<boolean>
+  mdAndDown: Ref<boolean>
+  lgAndDown: Ref<boolean>
+  xlAndDown: Ref<boolean>
+  xxlAndUp: Ref<boolean>
+  xxlAndDown: Ref<boolean>
+  name: Ref<DisplayBreakpoint>
+  width: Ref<number>
+  height: Ref<number>
 
   // Vuetify-owned
-  mobile: Readonly<ShallowRef<boolean>>
+  mobile: Ref<boolean>
   mobileBreakpoint: Ref<number | DisplayBreakpoint>
-  platform: Readonly<ShallowRef<DisplayPlatform>>
+  platform: Ref<DisplayPlatform>
   thresholds: Ref<DisplayThresholds>
 
   /** @internal */
@@ -167,6 +195,8 @@ export interface DisplayInstance {
   update(): void
 }
 ```
+
+**Note on `shims.d.ts`:** The Options API `$vuetify.display` type uses `UnwrapNestedRefs<DisplayInstance>`. Since we keep `Ref<T>` in the interface, `UnwrapNestedRefs` behavior is unchanged — all ref properties unwrap to their value types as before.
 
 ### `framework.ts`
 
@@ -211,30 +241,37 @@ All consumer components continue calling `useDisplay()` with no import or usage 
 - `VCol.ts` — `breakpoints` constant + `Breakpoint` type
 - `composables/index.ts` — re-exports `useDisplay`
 - `types.ts` — re-exports `DisplayBreakpoint`, `DisplayInstance`, `DisplayThresholds`
+- `shims.d.ts` — `UnwrapNestedRefs<DisplayInstance>` (unchanged since `DisplayInstance` keeps `Ref<T>` types)
+- `display.spec.browser.ts` — tests `createDisplay` directly
+- `display-components.spec.browser.tsx` — imports `DisplayBreakpoint` type
 
 ## Type Compatibility
 
-| Property | Before | After | `.value` compat? |
-|----------|--------|-------|-------------------|
-| `xs`–`xxl` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | Yes |
-| `smAndUp`–`xlAndDown` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | Yes |
-| `name` | `Ref<DisplayBreakpoint>` | `Readonly<ShallowRef<DisplayBreakpoint>>` | Yes |
-| `width`, `height` | `Ref<number>` | `Readonly<ShallowRef<number>>` | Yes |
-| `mobile` | Computed `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | Yes |
-| `platform` | `Ref<DisplayPlatform>` | `Readonly<ShallowRef<DisplayPlatform>>` | Yes |
-| `xxlAndUp`, `xxlAndDown` | N/A | `Readonly<ShallowRef<boolean>>` | New addition |
+The `DisplayInstance` interface keeps `Ref<T>` types — no public API type break. The internal implementation uses v0's `Readonly<ShallowRef<T>>`, which at runtime has `.value` and works identically. Since `ShallowRef<T> extends Ref<T>` in Vue's type system, the implementation satisfies the interface. The `readonly()` wrapper is not reflected in `DisplayInstance`'s types — consumers can still read `.value` but cannot write (enforced at runtime by v0's `readonly()`, not by the type).
 
-`Readonly<ShallowRef<T>>` satisfies `Ref<T>` for read access. No consumer breakage.
+| Property | Interface type | Runtime type | Breaking? |
+|----------|---------------|--------------|-----------|
+| `xs`–`xxl` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | No |
+| `smAndUp`–`xlAndDown` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | No |
+| `name` | `Ref<DisplayBreakpoint>` | `Readonly<ShallowRef<BreakpointName>>` | No |
+| `width`, `height` | `Ref<number>` | `Readonly<ShallowRef<number>>` | No |
+| `mobile` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | No |
+| `platform` | `Ref<DisplayPlatform>` | `Readonly<ShallowRef<DisplayPlatform>>` | No |
+| `xxlAndUp`, `xxlAndDown` | `Ref<boolean>` | `Readonly<ShallowRef<boolean>>` | Addition |
 
-## Risks
+## Risks & Mitigations
 
-1. **Resize listener ownership:** v0's raw `createBreakpoints()` does NOT set up a resize listener. Vuetify must call `bp.update()` on resize. If this is missed, breakpoints won't react to window resizes.
+1. **Resize listener ownership:** v0's raw `createBreakpoints()` does NOT set up a resize listener (that's in the plugin's `setup` callback). Vuetify must call `bp.update()` on resize and clean up via `onScopeDispose`. **Mitigated:** Spec code includes named `onResize` function with proper cleanup.
 
-2. **SSR initial values:** v0's `createBreakpoints` handles SSR initial values when `ssr` option is provided. Vuetify's `SSROptions` type (`boolean | { clientWidth, clientHeight? }`) needs to be mapped to v0's `{ clientWidth, clientHeight? }` format — the `boolean` case maps to no SSR options.
+2. **Initial value flush:** v0's `createBreakpoints()` initializes all refs to `0`/`xs` on the client. Without an immediate `bp.update()` call, breakpoints are wrong until the first resize. **Mitigated:** Spec code calls `bp.update()` immediately after construction when `IN_BROWSER`.
 
-3. **`mobileBreakpoint` prop override:** `useDisplay` computes a local `mobile` that can override the global one based on component props. This logic stays in Vuetify and is unaffected — it reads `display.width` and `display.thresholds` which are still available.
+3. **SSR semantics divergence:** v0's `bp.ssr` is `!IN_BROWSER && !!ssr` (server-only). Vuetify's `useHydration` expects `display.ssr` to be `true` on the client when SSR mode is configured. **Mitigated:** Return `ssr: !!ssr` instead of `bp.ssr`.
 
-4. **Test coverage:** The existing `display.spec.browser.ts` tests `createDisplay` directly. These tests should pass with minimal changes since the API surface is the same.
+4. **SSR initial values:** Vuetify's `SSROptions` type (`boolean | { clientWidth, clientHeight? }`) maps to v0's `{ clientWidth, clientHeight? }`. The `boolean` case (SSR enabled without dimensions) maps to `undefined` — v0 will use zero defaults, same as current behavior.
+
+5. **`mobileBreakpoint` prop override:** `useDisplay` computes a component-level `mobile` override via props. Unaffected — it reads `display.width` and `display.thresholds` which are still available.
+
+6. **Test coverage:** Existing `display.spec.browser.ts` tests `createDisplay` directly. Tests should pass since the API surface is preserved. May need minor adjustments if tests assert on internal reactive structure.
 
 ## Verification Plan
 
