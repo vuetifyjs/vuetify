@@ -106,7 +106,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
     const containerWidth = shallowRef(0)
-    const { hasChunks, chunksMaskStyles, snapValueToChunk } = useChunks(props, containerWidth)
+    const { hasChunks, splitStyles, chunksMaskStyles, snapValueToChunk } = useChunks(
+      props,
+      containerWidth,
+      normalizedValue,
+      normalizedBuffer,
+      isReversed
+    )
     useToggleScope(hasChunks, () => {
       const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
       watchEffect(() => resizeRef.value = root.value)
@@ -137,6 +143,25 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       intersectionRef.value = root.value
     })
 
+    function renderBackgroundBar () {
+      return (
+        <div
+          class={[
+            'v-progress-linear__background',
+            backgroundColorClasses.value,
+          ]}
+          style={[
+            backgroundColorStyles.value,
+            {
+              opacity: parseFloat(props.bgOpacity!),
+              width: props.stream ? 0 : undefined,
+            },
+            props.indeterminate ? {} : splitStyles.value?.background,
+          ]}
+        />
+      )
+    }
+
     useRender(() => (
       <props.tag
         ref={ root }
@@ -150,6 +175,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--clickable': props.clickable,
+            'v-progress-linear--variant-split': props.variant === 'split',
           },
           roundedClasses.value,
           themeClasses.value,
@@ -162,6 +188,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             top: props.location === 'top' ? 0 : undefined,
             height: props.active ? convertToUnit(height.value) : 0,
             '--v-progress-linear-height': convertToUnit(height.value),
+            '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
             ...(props.absolute ? locationStyles.value : {}),
           },
           chunksMaskStyles.value,
@@ -193,19 +220,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           />
         )}
 
-        <div
-          class={[
-            'v-progress-linear__background',
-            backgroundColorClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            {
-              opacity: parseFloat(props.bgOpacity!),
-              width: props.stream ? 0 : undefined,
-            },
-          ]}
-        />
+        { (props.variant !== 'split' || !props.indeterminate) && renderBackgroundBar() }
 
         <div
           class={[
@@ -218,6 +233,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               opacity: parseFloat(props.bufferOpacity!),
               width: convertToUnit(bufferWidth.value, '%'),
             },
+            splitStyles.value?.buffer,
           ]}
         />
 
@@ -231,10 +247,18 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               style={[
                 barColorStyles.value,
                 { width: convertToUnit(barWidth.value, '%') },
+                splitStyles.value?.bar,
               ]}
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
+              { props.variant === 'split' && (
+                <>
+                  { renderBackgroundBar() }
+                  { renderBackgroundBar() }
+                  { renderBackgroundBar() }
+                </>
+              )}
               {['long', 'short'].map(bar => (
                 <div
                   key={ bar }
