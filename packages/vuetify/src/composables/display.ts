@@ -1,16 +1,20 @@
+// Composables
+import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
+
 // Utilities
-import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
+import { computed, inject, readonly, shallowRef, toRef } from 'vue'
+import { getCurrentInstanceName, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { BreakpointName } from '@vuetify/v0'
 
 export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
 export type Breakpoint = typeof breakpoints[number]
 
-export type DisplayBreakpoint = 'xs' | Breakpoint
+export type DisplayBreakpoint = BreakpointName
 
 export type DisplayThresholds = {
   [key in DisplayBreakpoint]: number
@@ -24,11 +28,6 @@ export interface DisplayProps {
 export interface DisplayOptions {
   mobileBreakpoint?: number | DisplayBreakpoint
   thresholds?: Partial<DisplayThresholds>
-}
-
-export interface InternalDisplayOptions {
-  mobileBreakpoint: number | DisplayBreakpoint
-  thresholds: DisplayThresholds
 }
 
 export type SSROptions = boolean | {
@@ -67,6 +66,8 @@ export interface DisplayInstance {
   mdAndDown: Ref<boolean>
   lgAndDown: Ref<boolean>
   xlAndDown: Ref<boolean>
+  xxlAndUp: Ref<boolean>
+  xxlAndDown: Ref<boolean>
   name: Ref<DisplayBreakpoint>
   height: Ref<number>
   width: Ref<number>
@@ -82,34 +83,6 @@ export interface DisplayInstance {
 }
 
 export const DisplaySymbol: InjectionKey<DisplayInstance> = Symbol.for('vuetify:display')
-
-const defaultDisplayOptions: DisplayOptions = {
-  mobileBreakpoint: 'lg',
-  thresholds: {
-    xs: 0,
-    sm: 600,
-    md: 840,
-    lg: 1145,
-    xl: 1545,
-    xxl: 2138,
-  },
-}
-
-const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) => {
-  return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
-}
-
-function getClientWidth (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerWidth
-    : (typeof ssr === 'object' && ssr.clientWidth) || 0
-}
-
-function getClientHeight (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerHeight
-    : (typeof ssr === 'object' && ssr.clientHeight) || 0
-}
 
 function getPlatform (ssr?: SSROptions): DisplayPlatform {
   const userAgent = IN_BROWSER && !ssr
@@ -150,72 +123,62 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 }
 
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
-  const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
+  const ssrOptions = typeof ssr === 'object'
+    ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight }
+    : undefined
 
-  const height = shallowRef(getClientHeight(ssr))
+  const breakpoint = createBreakpoints({
+    mobileBreakpoint: options?.mobileBreakpoint,
+    breakpoints: options?.thresholds,
+    ssr: ssrOptions,
+  })
+
   const platform = shallowRef(getPlatform(ssr))
-  const state = reactive({} as DisplayInstance)
-  const width = shallowRef(getClientWidth(ssr))
 
-  function updateSize () {
-    height.value = getClientHeight()
-    width.value = getClientWidth()
-  }
   function update () {
-    updateSize()
+    breakpoint.update()
     platform.value = getPlatform()
   }
 
-  // eslint-disable-next-line max-statements
-  watchEffect(() => {
-    const xs = width.value < thresholds.sm
-    const sm = width.value < thresholds.md && !xs
-    const md = width.value < thresholds.lg && !(sm || xs)
-    const lg = width.value < thresholds.xl && !(md || sm || xs)
-    const xl = width.value < thresholds.xxl && !(lg || md || sm || xs)
-    const xxl = width.value >= thresholds.xxl
-    const name =
-      xs ? 'xs'
-      : sm ? 'sm'
-      : md ? 'md'
-      : lg ? 'lg'
-      : xl ? 'xl'
-      : 'xxl'
-    const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = width.value < breakpointValue
-
-    state.xs = xs
-    state.sm = sm
-    state.md = md
-    state.lg = lg
-    state.xl = xl
-    state.xxl = xxl
-    state.smAndUp = !xs
-    state.mdAndUp = !(xs || sm)
-    state.lgAndUp = !(xs || sm || md)
-    state.xlAndUp = !(xs || sm || md || lg)
-    state.smAndDown = !(md || lg || xl || xxl)
-    state.mdAndDown = !(lg || xl || xxl)
-    state.lgAndDown = !(xl || xxl)
-    state.xlAndDown = !xxl
-    state.name = name
-    state.height = height.value
-    state.width = width.value
-    state.mobile = mobile
-    state.mobileBreakpoint = mobileBreakpoint
-    state.platform = platform.value
-    state.thresholds = thresholds
-  })
-
   if (IN_BROWSER) {
-    window.addEventListener('resize', updateSize, { passive: true })
+    breakpoint.update()
 
-    onScopeDispose(() => {
-      window.removeEventListener('resize', updateSize)
-    }, true)
+    useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
   }
 
-  return { ...toRefs(state), update, ssr: !!ssr }
+  // v0 returns Readonly<ShallowRef<T>> which doesn't satisfy Ref<T> at the
+  // type level (Readonly removes the setter). ShallowRef extends Ref at runtime
+  // so the cast is safe. DisplayInstance keeps Ref<T> to avoid public API break.
+  type R<T> = Ref<T>
+  const r = <T>(v: unknown) => v as R<T>
+
+  return {
+    xs: r<boolean>(breakpoint.xs),
+    sm: r<boolean>(breakpoint.sm),
+    md: r<boolean>(breakpoint.md),
+    lg: r<boolean>(breakpoint.lg),
+    xl: r<boolean>(breakpoint.xl),
+    xxl: r<boolean>(breakpoint.xxl),
+    smAndUp: r<boolean>(breakpoint.smAndUp),
+    mdAndUp: r<boolean>(breakpoint.mdAndUp),
+    lgAndUp: r<boolean>(breakpoint.lgAndUp),
+    xlAndUp: r<boolean>(breakpoint.xlAndUp),
+    smAndDown: r<boolean>(breakpoint.smAndDown),
+    mdAndDown: r<boolean>(breakpoint.mdAndDown),
+    lgAndDown: r<boolean>(breakpoint.lgAndDown),
+    xlAndDown: r<boolean>(breakpoint.xlAndDown),
+    xxlAndUp: r<boolean>(breakpoint.xxlAndUp),
+    xxlAndDown: r<boolean>(breakpoint.xxlAndDown),
+    name: r<DisplayBreakpoint>(breakpoint.name),
+    height: r<number>(breakpoint.height),
+    width: r<number>(breakpoint.width),
+    mobile: r<boolean>(breakpoint.isMobile),
+    mobileBreakpoint: toRef(() => options?.mobileBreakpoint ?? 'lg'), // 'lg' matches v0's default
+    platform: readonly(platform) as Ref<DisplayPlatform>,
+    thresholds: toRef(() => breakpoint.breakpoints as DisplayThresholds),
+    update,
+    ssr: !!ssr,
+  }
 }
 
 export const makeDisplayProps = propsFactory({
