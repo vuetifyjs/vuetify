@@ -356,6 +356,9 @@ export const VAutocomplete = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
+      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        isFocused.value = false
+      }
     }
     function onUpdateModelValue (v: any) {
       if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []

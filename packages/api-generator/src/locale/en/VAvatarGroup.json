@@ -4,7 +4,7 @@
     "gap": "Sets the overlap gap between avatars. Negative values cause avatars to overlap.",
     "hoverable": "Enables a hover animation on child avatars.",
     "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
-    "limit": "Limits the number of visible avatars. Remaining items are represented by an overflow indicator.",
+    "limit": "The total number of avatars to display, including the overflow indicator. E.g. a limit of `3` with 5 items renders 2 avatars and a `+3` overflow indicator.",
     "overflowText": "Custom text to display in the overflow avatar. Defaults to `+N` where N is the number of hidden items.",
     "reverse": "Reverses the stacking order of the avatars.",
     "size": "Sets the size of all child avatars.",
