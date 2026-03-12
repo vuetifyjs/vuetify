@@ -13,9 +13,9 @@ import type { IconAliases, IconSet } from '@/composables/icons'
 
 const aliases: IconAliases = {
   collapse: 'i-solar:alt-arrow-up-linear',
-  complete: 'i-solar:check-circle-linear',
+  complete: mdiAliases.complete, // v-chip, v-stepper, [v-switch]
   cancel: 'i-solar:close-circle-linear',
-  close: 'i-solar:close-circle-linear',
+  close: mdiAliases.close, // v-alert, [v-switch]
   delete: 'i-solar:close-circle-linear', // delete (e.g. v-chip close), alternative: i-solar:trash-bin-minimalistic-linear
   clear: 'i-solar:close-circle-linear',
   success: 'i-solar:check-circle-linear',
