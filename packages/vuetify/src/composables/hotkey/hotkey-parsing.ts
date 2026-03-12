@@ -31,7 +31,7 @@ class ParseError extends Error {}
  * sequence   = alternate *('-' alternate)
  * alternate  = combo *('/' combo)
  * combo      = key *(('+' | '_') key)
- * key        = /[^ ]/ *(/[^-/+_ ]/)
+ * key        = /./ *(/[^-/+_ ]/)
  *
  */
 export function parseKeyCombination (input: string) {
@@ -105,7 +105,7 @@ export function parseKeyCombination (input: string) {
     }
   }
 
-  // key = /./ *(/[^-/+_]/)
+  // key = /./ *(/[^-/+_ ]/)
   function parseKey (): Key {
     const ch = peek()
     if (ch == null) {
@@ -119,7 +119,7 @@ export function parseKeyCombination (input: string) {
     // separator keys are always a single character
     if (isSep(first)) return first
     const chars: Key[] = [first]
-    while (!atEnd() && !isSep(peek())) {
+    while (!atEnd() && !isSep(peek()) && peek() !== ' ') {
       chars.push(consume())
     }
     return normalizeKey(chars.join(''))

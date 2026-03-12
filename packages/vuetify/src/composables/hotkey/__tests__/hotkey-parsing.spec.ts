@@ -136,6 +136,11 @@ describe('hotkey-parsing', () => {
       expect('Unexpected end of input').toHaveBeenTipped()
     })
 
+    it('should return empty string for extraneous spaces', () => {
+      expect(parseKeyCombination('shift + ')).toBe('')
+      expect('Unexpected character \' \' at position 5').toHaveBeenTipped()
+    })
+
     it('should return empty string for standalone doubled separators', () => {
       expect(parseKeyCombination('++')).toBe('')
       expect('Unexpected end of input').toHaveBeenTipped()
