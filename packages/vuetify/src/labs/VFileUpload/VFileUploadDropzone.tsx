@@ -366,6 +366,8 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           />
 
           { slots.input?.() }
+
+          { slots.loader?.() }
         </VSheet>
       )
     })

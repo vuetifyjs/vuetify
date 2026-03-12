@@ -17,7 +17,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { provide, ref, toRef, watch } from 'vue'
+import { provide, ref, shallowRef, toRef, watch } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -118,10 +118,20 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const vDropzoneRef = ref<VFileUploadDropzone>()
     const inputRef = ref<HTMLInputElement | null>(null)
     const isError = toRef(() => vInputRef.value?.isValid === false)
+    const isDisabled = toRef(() => form.isDisabled.value || !!props.loading)
+    const loadingColor = shallowRef<string | undefined>(undefined)
+
+    watch(() => props.loading, (val, old) => {
+      loadingColor.value = !val && typeof old === 'string'
+        ? old
+        : typeof val === 'boolean'
+          ? undefined
+          : val
+    }, { immediate: true })
 
     provide(VFileUploadKey, {
       files: model,
-      disabled: form.isDisabled,
+      disabled: isDisabled,
       error: isError,
       onDrop,
       onClickBrowse: onClick,
@@ -259,6 +269,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       single: slots.single,
                       item: slots.item,
                       input: () => slots.input?.({ inputNode }) ?? inputNode,
+                      loader: () => (
+                        <LoaderSlot
+                          name="v-file-upload"
+                          active={ !!props.loading }
+                          color={ loadingColor.value }
+                          v-slots={{ default: slots.loader }}
+                        />
+                      ),
                     }}
                   </VFileUploadDropzone>
                 )}
@@ -277,13 +295,6 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                     </VFileUploadList>
                   </VDefaultsProvider>
                 )}
-
-                <LoaderSlot
-                  name="v-file-upload"
-                  active={ !!props.loading }
-                  color={ typeof props.loading === 'string' ? props.loading : undefined }
-                  v-slots={{ default: slots.loader }}
-                />
               </>
               )
             },
