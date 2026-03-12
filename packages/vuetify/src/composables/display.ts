@@ -1,14 +1,12 @@
-// Composables
-import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
-
 // Utilities
+import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
 import type { BreakpointName } from '@vuetify/v0'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
 export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
