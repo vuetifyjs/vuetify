@@ -4,13 +4,13 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 
 // Composables
 import { useLocale } from '@/composables/locale'
-import type { Variant } from '@/composables/variant'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { Variant } from '@/composables/variant'
 
 export type VStepperActionsSlots = {
   prev: {
