@@ -58,12 +58,6 @@ The component can be split into chunks using `chunk-count` or `chunk-width`. Vis
 
 <ExamplesExample file="v-progress-linear/prop-chunks" />
 
-#### Variant
-
-The **variant** prop changes the visual style of the progress bar. The **split** variant divides the bar into two segments at the current value, with a gap separating the filled and unfilled portions. It supports both determinate and indeterminate states.
-
-<ExamplesExample file="v-progress-linear/prop-variant" />
-
 #### Colors
 
 You can set the colors of the progress bar using the props **color** and **bg-color**.
