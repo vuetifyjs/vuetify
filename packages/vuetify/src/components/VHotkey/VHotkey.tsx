@@ -253,7 +253,7 @@ export const VHotkey = genericComponent()({
 
       // Split by spaces to handle multiple key combinations
       // Example: "ctrl+k meta+p" -> ["ctrl+k", "meta+p"]
-      return props.keys.split(' ').map(combination => {
+      return props.keys.split(/\b \b/).map(combination => {
         const result: Array<Key | Delineator> = []
 
         function visit (node: KeyCombination) {

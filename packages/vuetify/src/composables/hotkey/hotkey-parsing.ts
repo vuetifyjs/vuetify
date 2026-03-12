@@ -28,10 +28,9 @@ class ParseError extends Error {}
  * Splits a single combination string into individual key parts.
  * Grammar:
  *
- * WS         = *' '
- * sequence   = WS alternate *(WS '-' WS alternate) WS
- * alternate  = combo *(WS '/' WS combo)
- * combo      = key *(WS ('+' | '_') WS key)
+ * sequence   = alternate *('-' alternate)
+ * alternate  = combo *('/' combo)
+ * combo      = key *(('+' | '_') key)
  * key        = /[^ ]/ *(/[^-/+_ ]/)
  *
  */
@@ -39,7 +38,6 @@ export function parseKeyCombination (input: string) {
   let pos = 0
 
   try {
-    skipWs()
     const result = parseSequence()
     if (!atEnd()) {
       throw new ParseError(`Unexpected character '${peek()}' at position ${pos}`)
@@ -71,19 +69,12 @@ export function parseKeyCombination (input: string) {
     return pos >= input.length
   }
 
-  function skipWs (): void {
-    while (peek() === ' ') consume()
-  }
-
   // sequence = alternate *('-' alternate)
   function parseSequence (): KeyCombination {
     const parts: (Alternate | Combo | Key)[] = [parseAlternate()]
-    skipWs()
     while (peek() === '-') {
       consume()
-      skipWs()
       parts.push(parseAlternate())
-      skipWs()
     }
     if (parts.length === 1) return parts[0]
     return { type: 'sequence', parts }
@@ -92,12 +83,9 @@ export function parseKeyCombination (input: string) {
   // alternate = combo *('/' combo)
   function parseAlternate (): Alternate | Combo | Key {
     const parts: (Combo | Key)[] = [parseCombo()]
-    skipWs()
     while (peek() === '/') {
       consume()
-      skipWs()
       parts.push(parseCombo())
-      skipWs()
     }
     if (parts.length === 1) return parts[0]
     return { type: 'alternate', parts }
@@ -106,12 +94,9 @@ export function parseKeyCombination (input: string) {
   // combo = key *(('+' | '_') key)
   function parseCombo (): Combo | Key {
     const keys: Key[] = [parseKey()]
-    skipWs()
     while (includes(['+', '_'], peek())) {
       consume()
-      skipWs()
       keys.push(parseKey())
-      skipWs()
     }
     if (keys.length === 1) return keys[0]
     return {
@@ -120,21 +105,21 @@ export function parseKeyCombination (input: string) {
     }
   }
 
-  // key = /./ *(/[^-/+_ ]/)
+  // key = /./ *(/[^-/+_]/)
   function parseKey (): Key {
     const ch = peek()
     if (ch == null) {
       throw new ParseError('Unexpected end of input')
     }
     const next = peek(1)
-    if (isSep(ch) && next != null && !isSep(next) && !isWs(next)) {
+    if (isSep(ch) && next != null && !isSep(next)) {
       throw new ParseError(`Unexpected separator '${ch}' at position ${pos}`)
     }
     const first = consume()
     // separator keys are always a single character
     if (isSep(first)) return first
     const chars: Key[] = [first]
-    while (!atEnd() && !isSep(peek()) && !isWs(peek())) {
+    while (!atEnd() && !isSep(peek())) {
       chars.push(consume())
     }
     return normalizeKey(chars.join(''))
@@ -143,8 +128,4 @@ export function parseKeyCombination (input: string) {
 
 function isSep (char: string | null) {
   return includes(['-', '/', '+', '_'], char)
-}
-
-function isWs (char: string | null) {
-  return char === ' '
 }

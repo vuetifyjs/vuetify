@@ -189,7 +189,6 @@ The hotkey string supports various modifiers and special keys:
 - Use `/` to separate alternative keys or combinations: `ctrl+k/ctrl+f`, `up/down`
 - Use `-` to create sequences: `ctrl+k-p` (Ctrl+K, then P) `ctrl+k/ctrl+f-p` (Ctrl+K or Ctrl+F, then P)
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
-- Spaces are ignored: `ctrl + s` equals `ctrl+s`
 
 Check out [all possible keycodes](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values).
 

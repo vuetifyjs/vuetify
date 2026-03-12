@@ -59,6 +59,7 @@ describe('hotkey-parsing', () => {
       expect(parseKeyCombination('+')).toBe('+')
       expect(parseKeyCombination('/')).toBe('/')
       expect(parseKeyCombination('_')).toBe('_')
+      expect(parseKeyCombination(' ')).toBe(' ')
     })
 
     // Combinations with doubled literals
@@ -96,6 +97,14 @@ describe('hotkey-parsing', () => {
       expect(result).toEqual({
         type: 'combo',
         parts: ['ctrl', '-'],
+      })
+    })
+
+    it('should handle combination with literal space', () => {
+      const result = parseKeyCombination('ctrl+ ')
+      expect(result).toEqual({
+        type: 'combo',
+        parts: ['ctrl', ' '],
       })
     })
 
