@@ -48,6 +48,10 @@ const userStore = useUserStore(pinia)
 const app = createApp(App)
 
 if (IN_BROWSER) {
+  window.localStorage.setItem(
+    'userSessions',
+    String(Number(window.localStorage.getItem('userSessions') || 0) + 1)
+  )
   localeStore.$subscribe((_, state) => {
     window.localStorage.setItem('currentLocale', state.locale)
   })
@@ -148,11 +152,11 @@ app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   if (to.meta.locale !== from.meta.locale) {
     localeStore.locale = to.meta.locale as string
   }
-  return to.path.endsWith('/') ? next() : next(`${trailingSlash(to.path)}` + to.hash)
+  if (!to.path.endsWith('/')) return `${trailingSlash(to.path)}` + to.hash
 })
 router.afterEach((to, from) => {
   if (to.meta.locale !== from.meta.locale && from.meta.locale === 'eo-UY') {

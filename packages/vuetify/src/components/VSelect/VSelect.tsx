@@ -389,7 +389,7 @@ export const VSelect = genericComponent<new <
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
-      if (listRef.value) {
+      if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
         listRef.value.focus(index >= 0 ? index : 'first')
       }
@@ -402,6 +402,11 @@ export const VSelect = genericComponent<new <
     }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+    }
+    function onFocusout (e: FocusEvent) {
+      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        isFocused.value = false
+      }
     }
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
@@ -523,6 +528,7 @@ export const VSelect = genericComponent<new <
                   <VSheet
                     elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
+                    onFocusout={ onFocusout }
                     onKeydown={ onMenuKeydown }
                   >
                     { slots['menu-header'] && (
