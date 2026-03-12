@@ -49,7 +49,7 @@ framework.ts
 
 - `getClientWidth()` / `getClientHeight()` helpers — v0 handles window dimensions
 - The `watchEffect` block (~40 lines) that computes `xs`/`sm`/.../`xxl`, all `AndUp`/`AndDown` variants, `name`, and `mobile`
-- The manual `window.addEventListener('resize', ...)` and its `onScopeDispose` cleanup
+- The manual `window.addEventListener('resize', ...)` and its `onScopeDispose` cleanup — replaced by v0's `useWindowEventListener`
 - The `defaultDisplayOptions` object (thresholds/mobileBreakpoint defaults) — v0 owns these defaults now
 
 **Kept:**
@@ -64,8 +64,7 @@ framework.ts
 **New `createDisplay` implementation:**
 
 ```ts
-import { createBreakpoints } from '@vuetify/v0'
-import type { BreakpointsContext } from '@vuetify/v0'
+import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
 
 export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
@@ -74,7 +73,7 @@ export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): Displ
     ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight }
     : undefined
 
-  const bp = createBreakpoints({
+  const breakpoint = createBreakpoints({
     mobileBreakpoint,
     breakpoints: thresholds,
     ssr: ssrOptions,
@@ -83,59 +82,51 @@ export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): Displ
   const platform = shallowRef(getPlatform(ssr))
 
   function update() {
-    bp.update()
+    breakpoint.update()
     platform.value = getPlatform()
   }
 
   // v0's raw createBreakpoints() does NOT set up resize listeners or
   // flush initial values — that's the plugin's job. We must do both.
   if (IN_BROWSER) {
-    bp.update() // flush real viewport dimensions immediately
+    breakpoint.update() // flush real viewport dimensions immediately
 
-    function onResize() {
-      bp.update()
-    }
-
-    window.addEventListener('resize', onResize, { passive: true })
-
-    onScopeDispose(() => {
-      window.removeEventListener('resize', onResize)
-    }, true)
+    useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
   }
 
   return {
     // Breakpoint state from v0
-    xs: bp.xs,
-    sm: bp.sm,
-    md: bp.md,
-    lg: bp.lg,
-    xl: bp.xl,
-    xxl: bp.xxl,
-    smAndUp: bp.smAndUp,
-    mdAndUp: bp.mdAndUp,
-    lgAndUp: bp.lgAndUp,
-    xlAndUp: bp.xlAndUp,
-    smAndDown: bp.smAndDown,
-    mdAndDown: bp.mdAndDown,
-    lgAndDown: bp.lgAndDown,
-    xlAndDown: bp.xlAndDown,
-    name: bp.name,
-    width: bp.width,
-    height: bp.height,
+    xs: breakpoint.xs,
+    sm: breakpoint.sm,
+    md: breakpoint.md,
+    lg: breakpoint.lg,
+    xl: breakpoint.xl,
+    xxl: breakpoint.xxl,
+    smAndUp: breakpoint.smAndUp,
+    mdAndUp: breakpoint.mdAndUp,
+    lgAndUp: breakpoint.lgAndUp,
+    xlAndUp: breakpoint.xlAndUp,
+    smAndDown: breakpoint.smAndDown,
+    mdAndDown: breakpoint.mdAndDown,
+    lgAndDown: breakpoint.lgAndDown,
+    xlAndDown: breakpoint.xlAndDown,
+    name: breakpoint.name,
+    width: breakpoint.width,
+    height: breakpoint.height,
 
     // New from v0
-    xxlAndUp: bp.xxlAndUp,
-    xxlAndDown: bp.xxlAndDown,
+    xxlAndUp: breakpoint.xxlAndUp,
+    xxlAndDown: breakpoint.xxlAndDown,
 
     // Vuetify-owned
-    mobile: bp.isMobile,
+    mobile: breakpoint.isMobile,
     mobileBreakpoint: toRef(() => mobileBreakpoint),
     platform: readonly(platform),
     thresholds: toRef(() => thresholds),
 
     update,
     // Keep Vuetify's ssr semantics (true when SSR was configured, even on client)
-    // v0's bp.ssr is only true on the server. useHydration depends on this
+    // v0's breakpoint.ssr is only true on the server. useHydration depends on this
     // being true on the client when SSR mode is active.
     ssr: !!ssr,
   }
@@ -144,13 +135,13 @@ export function createDisplay(options?: DisplayOptions, ssr?: SSROptions): Displ
 
 **Key lifecycle notes:**
 
-1. v0's `createBreakpoints()` initializes all refs to `0`/`xs` defaults on the client (it only uses SSR values on the server). We call `bp.update()` immediately after construction to flush real viewport dimensions.
+1. v0's `createBreakpoints()` initializes all refs to `0`/`xs` defaults on the client (it only uses SSR values on the server). We call `breakpoint.update()` immediately after construction to flush real viewport dimensions.
 
-2. The resize listener uses a named function (`onResize`) for proper cleanup via `onScopeDispose`, matching the existing pattern.
+2. The resize listener uses `useWindowEventListener` from v0, which handles cleanup automatically on scope disposal.
 
-3. `ssr` is set to `!!ssr` (Vuetify's semantics) rather than `bp.ssr` (v0's semantics). Vuetify's `useHydration` depends on `ssr` being `true` on the client when SSR mode was configured. v0's `bp.ssr` is only `true` on the server.
+3. `ssr` is set to `!!ssr` (Vuetify's semantics) rather than `breakpoint.ssr` (v0's semantics). Vuetify's `useHydration` depends on `ssr` being `true` on the client when SSR mode was configured. v0's `breakpoint.ssr` is only `true` on the server.
 
-4. **SSR hydration note:** The current implementation preserves SSR-provided dimensions until mount via `getClientWidth(ssr)` which returns SSR values when `ssr` is truthy on the client. With v0, calling `bp.update()` immediately reads real viewport dimensions. This is acceptable because `framework.ts` already calls `display.update()` after mount/suspense-resolve for the same purpose — the window between construction and mount is negligible since `createDisplay` runs during `createVuetify()` (before any component mounts).
+4. **SSR hydration note:** The current implementation preserves SSR-provided dimensions until mount via `getClientWidth(ssr)` which returns SSR values when `ssr` is truthy on the client. With v0, calling `breakpoint.update()` immediately reads real viewport dimensions. This is acceptable because `framework.ts` already calls `display.update()` after mount/suspense-resolve for the same purpose — the window between construction and mount is negligible since `createDisplay` runs during `createVuetify()` (before any component mounts).
 
 ### `DisplayInstance` type
 
@@ -204,7 +195,7 @@ Minimal changes:
 
 - `createDisplay` call stays in the same location (inside `effectScope`)
 - Options mapping unchanged — `options.display` and `options.ssr` passed through
-- SSR hydration hooks remain — `display.update()` delegates to v0's `bp.update()` + platform re-detect
+- SSR hydration hooks remain — `display.update()` delegates to v0's `breakpoint.update()` + platform re-detect
 - `$vuetify.display` in Options API mixin stays as-is
 
 ### Type aliasing
@@ -261,11 +252,11 @@ The `DisplayInstance` interface keeps `Ref<T>` types — no public API type brea
 
 ## Risks & Mitigations
 
-1. **Resize listener ownership:** v0's raw `createBreakpoints()` does NOT set up a resize listener (that's in the plugin's `setup` callback). Vuetify must call `bp.update()` on resize and clean up via `onScopeDispose`. **Mitigated:** Spec code includes named `onResize` function with proper cleanup.
+1. **Resize listener ownership:** v0's raw `createBreakpoints()` does NOT set up a resize listener (that's in the plugin's `setup` callback). Vuetify must call `breakpoint.update()` on resize. **Mitigated:** Spec code uses `useWindowEventListener` from v0, which handles cleanup automatically.
 
-2. **Initial value flush:** v0's `createBreakpoints()` initializes all refs to `0`/`xs` on the client. Without an immediate `bp.update()` call, breakpoints are wrong until the first resize. **Mitigated:** Spec code calls `bp.update()` immediately after construction when `IN_BROWSER`.
+2. **Initial value flush:** v0's `createBreakpoints()` initializes all refs to `0`/`xs` on the client. Without an immediate `breakpoint.update()` call, breakpoints are wrong until the first resize. **Mitigated:** Spec code calls `breakpoint.update()` immediately after construction when `IN_BROWSER`.
 
-3. **SSR semantics divergence:** v0's `bp.ssr` is `!IN_BROWSER && !!ssr` (server-only). Vuetify's `useHydration` expects `display.ssr` to be `true` on the client when SSR mode is configured. **Mitigated:** Return `ssr: !!ssr` instead of `bp.ssr`.
+3. **SSR semantics divergence:** v0's `breakpoint.ssr` is `!IN_BROWSER && !!ssr` (server-only). Vuetify's `useHydration` expects `display.ssr` to be `true` on the client when SSR mode is configured. **Mitigated:** Return `ssr: !!ssr` instead of `breakpoint.ssr`.
 
 4. **SSR initial values:** Vuetify's `SSROptions` type (`boolean | { clientWidth, clientHeight? }`) maps to v0's `{ clientWidth, clientHeight? }`. The `boolean` case (SSR enabled without dimensions) maps to `undefined` — v0 will use zero defaults, same as current behavior.
 
