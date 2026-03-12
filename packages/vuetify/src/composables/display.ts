@@ -126,8 +126,8 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     : undefined
 
   const breakpoint = createBreakpoints({
-    mobileBreakpoint: options?.mobileBreakpoint,
-    breakpoints: options?.thresholds,
+    ...options?.mobileBreakpoint != null && { mobileBreakpoint: options.mobileBreakpoint },
+    ...options?.thresholds != null && { breakpoints: options.thresholds },
     ssr: ssrOptions,
   })
 
