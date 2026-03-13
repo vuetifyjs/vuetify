@@ -1,6 +1,6 @@
 <template>
   <v-card
-    border="sm opacity-50"
+    border="md opacity-30"
     class="mx-auto pa-1"
     height="300"
     rounded="xl"
@@ -11,9 +11,9 @@
       <v-img
         v-if="done"
         key="image"
-        height="300"
+        height="292"
         src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-        style="border-radius: 20px;"
+        style="border-radius: 18px;"
         cover
       ></v-img>
 
@@ -31,18 +31,25 @@
             color="lime-darken-2"
             rotate="180"
             size="140"
-          ></v-progress-circular>
+            width="6"
+            rounded
+          >
+            <div class="d-flex align-baseline mr-n3">
+              <div class="text-headline-large text-medium-emphasis">
+                {{ percent.toFixed() }}
+              </div>
+              <span class="ml-1">%</span>
+            </div>
+          </v-progress-circular>
         </template>
 
-        <template v-slot:value="{ formattedValue, percent }">
-          <v-scroll-y-transition mode="out-in">
-            <div v-if="percent > 75" key="finalizing" class="text-body-medium">
-              Finalizing...
-            </div>
-            <div v-else key="loading" class="text-body-medium text-medium-emphasis">
-              {{ formattedValue }} loaded
-            </div>
-          </v-scroll-y-transition>
+        <template v-slot:value="{ percent }">
+          <div class="text-body-medium">
+            <v-scroll-y-transition mode="out-in">
+              <div v-if="percent > 75" key="finalizing">Finalizing...</div>
+              <div v-else key="loading">Loading...</div>
+            </v-scroll-y-transition>
+          </div>
         </template>
       </v-progress>
     </v-fade-transition>
@@ -60,13 +67,13 @@
     done.value = false
     progress.value = 0
     timer = setInterval(() => {
-      progress.value += 1.5
+      progress.value += progress.value > 70 ? 4 : 7.5
       if (progress.value >= 100) {
         clearInterval(timer)
         done.value = true
         setTimeout(startLoading, 4000)
       }
-    }, 100)
+    }, 600)
   }
 
   startLoading()
