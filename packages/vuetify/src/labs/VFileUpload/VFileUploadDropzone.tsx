@@ -55,6 +55,7 @@ export type VFileUploadDropzoneSlots = {
     props: { 'onClick:remove': () => void }
   }
   input: never
+  loader: never
 }
 
 export const makeVFileUploadDropzoneProps = propsFactory({
