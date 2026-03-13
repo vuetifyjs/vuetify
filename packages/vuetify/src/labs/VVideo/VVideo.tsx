@@ -93,6 +93,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     error: (event: Event) => true,
     retry: () => true,
     loaded: (element: HTMLVideoElement) => true,
+    'update:error': (val: boolean) => true,
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
     'update:volume': (val: number) => true,
@@ -122,6 +123,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const waiting = shallowRef(false)
     const triggered = shallowRef(false)
     const startAfterLoad = shallowRef(false)
+    const errorModel = useProxiedModel(props, 'error')
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
     const duration = shallowRef(0)
 
@@ -161,10 +163,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onVideoError (e: Event) {
       state.value = 'error'
+      errorModel.value = true
       emit('error', e)
     }
 
-    watch(() => props.error, v => {
+    watch(errorModel, v => {
       if (v && state.value !== 'error') {
         videoRef.value?.pause()
         state.value = 'error'
@@ -175,6 +178,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (state.value === 'error') {
         // Retry: reload the video element
         state.value = 'loading'
+        errorModel.value = false
         videoRef.value?.load()
         emit('retry')
         return
