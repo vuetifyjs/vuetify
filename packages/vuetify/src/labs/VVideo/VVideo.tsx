@@ -4,6 +4,8 @@ import './VVideo.sass'
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
 import { VFadeTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg/VImg'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
@@ -36,6 +38,7 @@ export type VVideoSlots = {
   append: VVideoControlsActionsSlot
   loader: LoaderSlotProps
   sources: never
+  error: { error?: MediaError | boolean }
 }
 
 const allowedVariants = ['background', 'player'] as const
@@ -46,7 +49,7 @@ export const makeVVideoProps = propsFactory({
   autoplay: Boolean,
   muted: Boolean,
   eager: Boolean,
-  error: Boolean,
+  error: [Object, Boolean] as PropType<MediaError | boolean>,
   src: String,
   srcObject: Object as PropType<MediaStream | MediaSource | Blob>,
   type: String, // e.g. video/mp4
@@ -90,8 +93,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
   props: makeVVideoProps(),
 
   emits: {
-    error: (event: Event) => true,
-    retry: () => true,
+    error: (val: MediaError | boolean) => true,
     loaded: (element: HTMLVideoElement) => true,
     'update:error': (val: boolean) => true,
     'update:playing': (val: boolean) => true,
@@ -123,7 +125,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const waiting = shallowRef(false)
     const triggered = shallowRef(false)
     const startAfterLoad = shallowRef(false)
-    const errorModel = useProxiedModel(props, 'error')
+    const error = useProxiedModel(props, 'error')
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
     const duration = shallowRef(0)
 
@@ -163,30 +165,34 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onVideoError (e: Event) {
       state.value = 'error'
-      errorModel.value = true
-      emit('error', e)
+      error.value = videoRef.value!.error as MediaError
     }
 
-    watch(errorModel, v => {
+    watch(error, v => {
       if (v && state.value !== 'error') {
         videoRef.value?.pause()
         state.value = 'error'
       }
     }, { immediate: true })
 
+    function retry () {
+      if (state.value !== 'error') return
+
+      error.value = false
+      state.value = 'loading'
+      triggered.value = true
+
+      videoRef.value?.load()
+      if (!props.srcObject) {
+        videoRef.value?.play()
+      }
+    }
+
     function onClick () {
-      if (state.value === 'error') {
-        // Retry: reload the video element
-        state.value = 'loading'
-        errorModel.value = false
-        videoRef.value?.load()
-        emit('retry')
-        return
-      }
-      if (state.value !== 'loaded') {
-        triggered.value = true
-        startAfterLoad.value = !startAfterLoad.value
-      }
+      if (['loaded', 'error'].includes(state.value)) return
+
+      triggered.value = true
+      startAfterLoad.value = !startAfterLoad.value
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -406,10 +412,18 @@ export const VVideo = genericComponent<VVideoSlots>()({
           color="#fff"
           variant="outlined"
           iconSize="50"
-          class="v-video__center-icon"
+          class={[
+            'v-video__center-icon',
+            'v-video__center-icon--play',
+          ]}
           onClick={ onVideoClick }
         />
       )
+
+      const errorIconProps = {
+        icon: '$warning',
+        size: '70',
+      }
 
       const activeOverlays = {
         playIcon: props.variant === 'player' &&
@@ -520,14 +534,15 @@ export const VVideo = genericComponent<VVideoSlots>()({
             )}
             { activeOverlays.error && (
               <div key="error-overlay" class="v-video__overlay-fill">
-                <VIconBtn
-                  icon="$error"
-                  size="80"
-                  color="error"
-                  variant="text"
-                  iconSize="50"
-                  class="v-video__center-icon"
-                />
+                {
+                  slots.error
+                    ? (
+                      <VDefaultsProvider defaults={{ VIcon: errorIconProps }}>
+                        { slots.error?.({ error: error.value }) }
+                      </VDefaultsProvider>
+                    )
+                    : <VIcon { ...errorIconProps } />
+                }
               </div>
             )}
           </div>
@@ -554,6 +569,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     return {
       video: videoRef,
       ...forwardRefs({
+        retry,
         skipTo,
         toggleFullscreen,
       }, controlsRef),
