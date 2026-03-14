@@ -2,7 +2,7 @@
 import { VList, VListItem } from '..'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen } from '@test'
 
 describe('VListItem', () => {
   // https://github.com/vuetifyjs/vuetify/issues/22172
