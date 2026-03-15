@@ -688,4 +688,83 @@ describe('hotkey.ts', () => {
     document.body.removeChild(input)
     stop()
   })
+
+  // -----------------------------------------------------------------------
+  // Alternate (/) separator — fixes #22712
+  // -----------------------------------------------------------------------
+  describe('alternate (/) combinations', () => {
+    it.each([
+      // Each alternative should independently trigger the callback
+      ['1/2', '1', {}],
+      ['1/2', '2', {}],
+      ['up/down', 'ArrowUp', {}],
+      ['up/down', 'ArrowDown', {}],
+      ['ctrl+a/ctrl+b', 'a', { ctrlKey: true }],
+      ['ctrl+a/ctrl+b', 'b', { ctrlKey: true }],
+      ['shift+tab/tab', 'Tab', { shiftKey: true }],
+      ['shift+tab/tab', 'Tab', {}],
+    ])('fires for %s when key %s pressed', (combo, key, extraProps) => {
+      const cb = vi.fn()
+      const stop = useHotkey(combo, cb)
+
+      window.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          ctrlKey: false,
+          shiftKey: false,
+          altKey: false,
+          metaKey: false,
+          key,
+          ...extraProps,
+        })
+      )
+
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      stop()
+    })
+
+    it('fires once per matching keypress (not twice)', () => {
+      const cb = vi.fn()
+      const stop = useHotkey('a/b', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+
+      // Each key press counts independently — two presses → two fires
+      expect(cb).toHaveBeenCalledTimes(2)
+
+      stop()
+    })
+
+    it('does not fire for an unrelated key', () => {
+      const cb = vi.fn()
+      const stop = useHotkey('a/b', cb)
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c' }))
+
+      expect(cb).not.toHaveBeenCalled()
+
+      stop()
+    })
+
+    it('works when alternate is embedded in a sequence', () => {
+      // 'a/b-c' means "(a OR b), then c"
+      const cb = vi.fn()
+      const stop = useHotkey('a/b-c', cb)
+
+      // First part via 'a', then 'c'
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }))
+      expect(cb).toHaveBeenCalledTimes(0) // Not yet — waiting for 'c'
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c' }))
+      expect(cb).toHaveBeenCalledTimes(1)
+
+      // First part via 'b', then 'c'
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'b' }))
+      expect(cb).toHaveBeenCalledTimes(1) // Not yet
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c' }))
+      expect(cb).toHaveBeenCalledTimes(2)
+
+      stop()
+    })
+  })
 })
