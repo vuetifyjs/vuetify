@@ -84,6 +84,7 @@
     "vite-plugin-pwa": "^1.1.0",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-plugin-vuetify": "^2.1.2",
+    "vue-jsx-vapor": "^3.2.4",
     "vue-tsc": "^3.1.5"
   },
   "publishConfig": {
