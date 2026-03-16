@@ -38,7 +38,7 @@ import { VKbd } from '@/components/VKbd'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
+import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -50,6 +50,7 @@ import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { KeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import type { IconValue } from '@/composables/icons'
 
 // Display mode types for different visual representations
@@ -191,10 +192,10 @@ export const makeVHotkeyProps = propsFactory({
   color: String,
 }, 'VHotkey')
 
-const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For + separators
-const SLASH_DELINEATOR = Symbol('VHotkey:SLASH_DELINEATOR') // For / separators
+const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For +_ separators
+const OR_DELINEATOR = Symbol('VHotkey:OR_DELINEATOR') // For / separators
 const THEN_DELINEATOR = Symbol('VHotkey:THEN_DELINEATOR') // For - separators
-type Delineator = typeof AND_DELINEATOR | typeof SLASH_DELINEATOR | typeof THEN_DELINEATOR
+type Delineator = typeof AND_DELINEATOR | typeof OR_DELINEATOR | typeof THEN_DELINEATOR
 
 function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
   const lowerKey = key.toLowerCase()
@@ -252,28 +253,33 @@ export const VHotkey = genericComponent()({
 
       // Split by spaces to handle multiple key combinations
       // Example: "ctrl+k meta+p" -> ["ctrl+k", "meta+p"]
-      return props.keys.split(' ').map(combination => {
+      return props.keys.split(/\b \b/).map(combination => {
         const result: Array<Key | Delineator> = []
 
-        const sequenceGroups = splitKeySequence(combination)
-        for (let i = 0; i < sequenceGroups.length; i++) {
-          const group = sequenceGroups[i]
-
-          // Add THEN delineator between sequence groups
-          if (i > 0) result.push(THEN_DELINEATOR)
-
-          const { keys: keyParts, separators } = splitKeyCombination(group)
-          for (let j = 0; j < keyParts.length; j++) {
-            const part = keyParts[j]
-
-            // Add AND delineator between keys
-            if (j > 0) {
-              result.push(separators[j - 1] === '/' ? SLASH_DELINEATOR : AND_DELINEATOR)
+        function visit (node: KeyCombination) {
+          if (typeof node === 'string') {
+            if (node !== '') {
+              result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, node, isMac.value))
             }
-            result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, part, isMac.value))
+          } else {
+            for (let i = 0; i < node.parts.length; i++) {
+              if (i > 0) {
+                if (node.type === 'sequence') {
+                  result.push(THEN_DELINEATOR)
+                } else if (node.type === 'alternate') {
+                  result.push(OR_DELINEATOR)
+                } else if (node.type === 'combo') {
+                  result.push(AND_DELINEATOR)
+                } else {
+                  void (node satisfies never)
+                }
+              }
+              visit(node.parts[i])
+            }
           }
         }
 
+        visit(parseKeyCombination(combination))
         return result
       })
     })
@@ -295,7 +301,7 @@ export const VHotkey = genericComponent()({
           } else {
             if (key === AND_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.plus'))
-            } else if (key === SLASH_DELINEATOR) {
+            } else if (key === OR_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.or'))
             } else if (key === THEN_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.then'))
@@ -363,7 +369,7 @@ export const VHotkey = genericComponent()({
           aria-hidden="true"
         >
           { key === AND_DELINEATOR ? '+'
-          : key === SLASH_DELINEATOR ? '/'
+          : key === OR_DELINEATOR ? t('$vuetify.hotkey.or')
           : t('$vuetify.hotkey.then')}
         </span>
       )

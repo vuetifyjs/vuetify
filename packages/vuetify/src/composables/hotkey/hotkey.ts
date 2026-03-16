@@ -1,12 +1,21 @@
 // Composables
-import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
+import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 
 // Utilities
 import { onScopeDispose, toValue, watch } from 'vue'
 import { IN_BROWSER } from '@/util'
 
 // Types
+import type { Combo, Key, KeyCombination, Sequence } from '@/composables/hotkey/hotkey-parsing'
 import type { MaybeRef } from '@/util'
+
+const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd'] as const
+const modifiersSet = new Set(MODIFIERS)
+type Modifier = typeof MODIFIERS[number]
+function isModifier (key: string): key is Modifier {
+  return modifiersSet.has(key as Modifier)
+}
+const emptyModifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<Modifier, boolean>
 
 interface HotkeyOptions {
   event?: MaybeRef<'keydown' | 'keyup'>
@@ -31,7 +40,7 @@ export function useHotkey (
 
   const isMac = navigator?.userAgent?.includes('Macintosh') ?? false
   let timeout = 0
-  let keyGroups: string[]
+  let keyGroups: (Exclude<KeyCombination, Sequence>)[]
   let isSequence = false
   let groupIndex = 0
 
@@ -91,11 +100,16 @@ export function useHotkey (
     cleanup()
 
     if (newKeys) {
-      const groups = splitKeySequence(newKeys.toLowerCase())
-      isSequence = groups.length > 1
-      keyGroups = groups
-      resetSequence()
-      window.addEventListener(toValue(event), handler)
+      const parsed = parseKeyCombination(newKeys.toLowerCase())
+      if (parsed) {
+        const parts = typeof parsed !== 'string' && parsed.type === 'sequence'
+          ? parsed.parts
+          : [parsed]
+        isSequence = parts.length > 1
+        keyGroups = parts
+        resetSequence()
+        window.addEventListener(toValue(event), handler)
+      }
     }
   }, { immediate: true })
 
@@ -112,7 +126,11 @@ export function useHotkey (
   return cleanup
 }
 
-function matchesKeyGroup (e: KeyboardEvent, group: string, isMac: boolean) {
+function matchesKeyGroup (e: KeyboardEvent, group: Exclude<KeyCombination, Sequence>, isMac: boolean): boolean {
+  if (typeof group !== 'string' && group.type === 'alternate') {
+    return group.parts.some(part => matchesKeyGroup(e, part, isMac))
+  }
+
   const { modifiers, actualKey } = parseKeyGroup(group)
 
   const expectCtrl = modifiers.ctrl || (!isMac && (modifiers.cmd || modifiers.meta))
@@ -127,24 +145,19 @@ function matchesKeyGroup (e: KeyboardEvent, group: string, isMac: boolean) {
   )
 }
 
-function parseKeyGroup (group: string) {
-  const MODIFIERS = ['ctrl', 'shift', 'alt', 'meta', 'cmd']
-
-  // Use the shared combination splitting logic
-  const { keys: parts } = splitKeyCombination(group.toLowerCase())
-
-  // If the combination is invalid, return empty result
-  if (parts.length === 0) {
-    return { modifiers: Object.fromEntries(MODIFIERS.map(m => [m, false])), actualKey: undefined }
-  }
-
-  const modifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<string, boolean>
+function parseKeyGroup (group: Combo | Key): {
+  modifiers: Record<Modifier, boolean>
+  actualKey: string | undefined
+} {
+  const parts = typeof group === 'string' ? [group] : group.parts
+  const modifiers = { ...emptyModifiers }
   let actualKey: string | undefined
 
   for (const part of parts) {
-    if (MODIFIERS.includes(part)) {
+    if (isModifier(part)) {
       modifiers[part] = true
     } else {
+      // TODO: handle multiple keys
       actualKey = part
     }
   }
