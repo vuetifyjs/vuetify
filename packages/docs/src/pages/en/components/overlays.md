@@ -38,7 +38,7 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 ## Activator
 
-Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected locationLocation strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's location instead of the middle of the screen.
+Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected location strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's location instead of the middle of the screen.
 
 Related props:
 
@@ -92,6 +92,15 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 `location` selects a point on the activator, and `origin` a point on the overlay content. The content element will be positioned so the two points overlap.
 
 <ExamplesExample file="v-overlay/connected-playground" />
+
+### Viewport
+
+`location-strategy="viewport"`
+
+The viewport strategy positions overlay content relative to the browser viewport.
+`location` selects a point on the viewport, and `origin` a point on the overlay
+content. The content is positioned so the two points overlap, similar to the
+connected strategy but using the viewport instead of an activator element.
 
 ## Scroll Strategies
 

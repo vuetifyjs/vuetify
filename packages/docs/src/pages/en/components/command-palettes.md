@@ -84,6 +84,10 @@ By default, selecting an actionable item closes the palette. Use **close-on-sele
 
 The command palette is built on `v-dialog` and accepts most of the props while passing **class** and **style** values to the `v-sheet` content container.
 
+By default it uses a viewport-based location strategy with top anchoring so the search input does not change position while typing. You can use `top-offset` to control the distance from the top of the viewport.
+
+The following example demonstrates additional dialog customization options.
+
 <ExamplesExample file="v-command-palette/prop-dialog" />
 
 ### Slots

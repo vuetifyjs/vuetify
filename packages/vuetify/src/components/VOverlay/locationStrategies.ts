@@ -44,6 +44,7 @@ export type LocationStrategyFunction = (
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
   connected: connectedLocationStrategy, // connected to a certain element
+  viewport: viewportLocationStrategy, // connected to viewport using location/origin
 }
 
 export interface StrategyProps {
@@ -130,6 +131,42 @@ export function useLocationStrategies (
 
 function staticLocationStrategy () {
   // TODO
+}
+
+function viewportLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  const target = ref<[x: number, y: number]>()
+  const connected = connectedLocationStrategy({
+    ...data,
+    target,
+  }, props, contentStyles)
+
+  function updateTarget () {
+    const viewport = visualViewport
+    const viewportBox = new Box({
+      x: viewport?.offsetLeft ?? 0,
+      y: viewport?.offsetTop ?? 0,
+      width: viewport?.width ?? window.innerWidth,
+      height: viewport?.height ?? window.innerHeight,
+    })
+
+    const point = anchorToPoint(parseAnchor(props.location, data.isRtl.value), viewportBox)
+    target.value = [point.x, point.y]
+  }
+
+  function updateLocation (_e?: Event) {
+    updateTarget()
+    connected.updateLocation()
+  }
+
+  watch(() => [props.location, data.isRtl.value], () => {
+    updateLocation()
+  })
+
+  nextTick(() => {
+    updateLocation()
+  })
+
+  return { updateLocation }
 }
 
 /** Get size of element ignoring max-width/max-height */
