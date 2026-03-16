@@ -3,21 +3,16 @@
 
 @include tools.layer('components') {
   .v-command-palette {
-    --v-command-palette-content-top-offset: #{$command-palette-content-top-offset};
-    --v-command-palette-content-inline-padding: #{$command-palette-content-inline-padding};
-    --v-command-palette-content-bottom-padding: #{$command-palette-content-bottom-padding};
 
     &.v-dialog > .v-overlay__content {
       margin: 0;
-      width: calc(100% - (var(--v-command-palette-content-inline-padding) * 2));
     }
 
     > .v-overlay__content > .v-sheet {
       display: flex;
       flex: 1 1 100%;
       flex-direction: column;
-      margin-block-start: calc(var(--v-command-palette-content-top-offset) + env(safe-area-inset-top, 0px));
-      margin-block-end: var(--v-command-palette-content-bottom-padding);
+      margin-block-start: calc(var(--v-command-palette-top-offset) + env(safe-area-inset-top, 0px));
     }
 
     @at-root {

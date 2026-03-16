@@ -9,7 +9,8 @@
     "modelValue": "Controls the visibility of the command palette dialog. Use `v-model` for two-way binding.",
     "noDataText": "Text displayed when no items match the current search query.",
     "placeholder": "Placeholder text displayed in the search input.",
-    "search": "The current search query. Use `v-model:search` to control or monitor the search input value."
+    "search": "The current search query. Use `v-model:search` to control or monitor the search input value.",
+    "topOffset": "Distance from the top of the viewport to the command palette sheet."
   },
   "events": {
     "before-select": "Emitted before the default auto-close behavior for actionable item selection. The payload includes the selected item, the triggering event, and a **preventDefault** callback. Call **preventDefault()** to keep the palette open.",
