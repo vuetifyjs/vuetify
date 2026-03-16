@@ -81,7 +81,9 @@ For more manual control, the slot can be used instead. `props` is an object cont
 
 `location-strategy="static"`
 
-Overlay content is absolutely positioned to the center of its container by default.
+Overlay content is positioned relative to the browser viewport. `location` selects a side and alignment
+while `origin` helps control transition - e.g. you may want the dialog to appear from the left when snapped
+to the left edge.
 
 ### Connected
 
@@ -92,15 +94,6 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 `location` selects a point on the activator, and `origin` a point on the overlay content. The content element will be positioned so the two points overlap.
 
 <ExamplesExample file="v-overlay/connected-playground" />
-
-### Viewport
-
-`location-strategy="viewport"`
-
-The viewport strategy positions overlay content relative to the browser viewport.
-`location` selects a point on the viewport, and `origin` a point on the overlay
-content. The content is positioned so the two points overlap, similar to the
-connected strategy but using the viewport instead of an activator element.
 
 ## Scroll Strategies
 

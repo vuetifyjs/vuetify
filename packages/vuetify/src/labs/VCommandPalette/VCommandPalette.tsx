@@ -63,7 +63,6 @@ export const makeVCommandPaletteProps = propsFactory({
   ...makeDensityProps(),
   ...omit(makeVDialogProps({
     location: 'top center' as const,
-    locationStrategy: 'viewport' as const,
     maxWidth: 500,
     origin: 'top center' as const,
     viewportMargin: 16,

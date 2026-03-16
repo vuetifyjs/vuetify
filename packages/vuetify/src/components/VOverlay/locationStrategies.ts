@@ -44,7 +44,6 @@ export type LocationStrategyFunction = (
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
   connected: connectedLocationStrategy, // connected to a certain element
-  viewport: viewportLocationStrategy, // connected to viewport using location/origin
 }
 
 export interface StrategyProps {
@@ -129,31 +128,40 @@ export function useLocationStrategies (
   }
 }
 
-function staticLocationStrategy () {
-  // TODO
-}
-
-function viewportLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+function staticLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const target = ref<[x: number, y: number]>()
-  const connected = connectedLocationStrategy({
-    ...data,
-    target,
-  }, props, contentStyles)
+  const connectedStyles = ref<Record<string, string>>({})
+  const connected = connectedLocationStrategy(
+    { ...data, target },
+    { ...props, origin: 'auto' },
+    connectedStyles
+  )
+
+  function updateStyles () {
+    if (props.origin !== 'auto' && props.origin !== 'overlap') {
+      const { side, align } = parseAnchor(props.origin, data.isRtl.value)
+      contentStyles.value = { ...connectedStyles.value, transformOrigin: `${side} ${align}` }
+    } else {
+      contentStyles.value = connectedStyles.value
+    }
+  }
+
+  watch(connectedStyles, updateStyles, { deep: true })
+  watch([() => props.origin, data.isRtl], updateStyles)
 
   function updateTarget () {
-    const viewport = visualViewport
     const viewportBox = new Box({
-      x: viewport?.offsetLeft ?? 0,
-      y: viewport?.offsetTop ?? 0,
-      width: viewport?.width ?? window.innerWidth,
-      height: viewport?.height ?? window.innerHeight,
+      x: visualViewport?.offsetLeft ?? 0,
+      y: visualViewport?.offsetTop ?? 0,
+      width: visualViewport?.width ?? window.innerWidth,
+      height: visualViewport?.height ?? window.innerHeight,
     })
 
     const point = anchorToPoint(parseAnchor(props.location, data.isRtl.value), viewportBox)
     target.value = [point.x, point.y]
   }
 
-  function updateLocation (_e?: Event) {
+  function updateLocation () {
     updateTarget()
     connected.updateLocation()
   }
@@ -485,10 +493,13 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     const axis = getAxis(placement.anchor)
+    const transformOrigin = props.origin !== 'auto' && props.origin !== 'overlap'
+      ? parseAnchor(props.origin, data.isRtl.value)
+      : placement.origin
 
     Object.assign(contentStyles.value, {
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
-      transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
+      transformOrigin: `${transformOrigin.side} ${transformOrigin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y)),
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
@@ -509,6 +520,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     () => [
       preferredAnchor.value,
       preferredOrigin.value,
+      props.origin,
       props.offset,
       props.minWidth,
       props.minHeight,
