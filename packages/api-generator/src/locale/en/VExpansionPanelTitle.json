@@ -5,7 +5,8 @@
     "hideActions": "Hide the expand icon in the content title.",
     "static": "Remove title size expansion when selected.",
     "focusable": "Makes the expansion panel headers focusable.",
-    "readonly": "Makes the expansion panel content read only."
+    "readonly": "Makes the expansion panel content read only.",
+    "hover": "Enables the hover effect on the expansion panel title."
   },
   "slots": {
     "actions": "Slot for the actions."
