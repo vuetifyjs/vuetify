@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress
   title: Progress component
@@ -18,6 +19,12 @@ features:
 The `v-progress` component is a unified wrapper for linear and circular progress indicators with built-in label and accessible value formatting.
 
 <PageFeatures />
+
+::: warning
+
+This feature requires [v4.0.3](/getting-started/release-notes/?version=v4.0.3)
+
+:::
 
 ## Installation
 
