@@ -183,7 +183,9 @@
   },
   "VExpansionPanels": {
     "props": {
-      "static": "3.4.0"
+      "static": "3.4.0",
+      "gap": "4.1.0",
+      "noDivider": "4.1.0"
     }
   },
   "VField": {
