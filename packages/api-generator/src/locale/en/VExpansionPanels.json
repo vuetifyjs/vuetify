@@ -2,10 +2,12 @@
   "props": {
     "focusable": "Makes the expansion-panel headers focusable.",
     "flat": "Removes the expansion-panel's elevation and borders.",
+    "gap": "Sets the gap between panels. Hides the divider automatically.",
     "modelValue": "Controls expanded panel(s). Defaults to an empty array when using **multiple** prop. It is recommended to set unique `value` prop for the panels inside, otherwise index is used instead.",
+    "noDivider": "Hides the dividers between adjacent panels.",
     "readonly": "Makes the entire expansion panel read only.",
-    "static": "Remove title size expansion when selected.",
-    "tile": "Removes the border-radius."
+    "rounded": "Applies a border radius to the first and last panel. Since v4.1.0 accepts array of two values to customize inner radius.",
+    "static": "Remove title size expansion when selected."
   },
   "exposed": {
     "prev": "Open the previous panel from the currently selected panel.",
