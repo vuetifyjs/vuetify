@@ -50,16 +50,16 @@ export function useRounded (
 
   const roundedStyles = computed<CSSProperties>(() => {
     const rounded = isRef(props) ? props.value : props.rounded
+    const roundedText = String(rounded)
 
-    if (typeof rounded === 'number' && rounded !== 0) {
-      return { borderRadius: convertToUnit(rounded) }
+    if (!/[0-9]/.test(roundedText) ||
+      roundedText.includes('xl') ||
+      roundedText === '0'
+    ) {
+      return {}
     }
 
-    if (typeof rounded === 'string' && rounded !== '0' && /[0-9%]/.test(rounded)) {
-      return { borderRadius: convertToUnit(rounded) ?? rounded }
-    }
-
-    return {}
+    return { borderRadius: convertToUnit(roundedText) }
   })
 
   return { roundedClasses, roundedStyles }

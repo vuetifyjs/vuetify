@@ -73,6 +73,7 @@ describe('rounded.ts', () => {
     [{ rounded: 0 }, {}],
     [{ rounded: '0' }, {}],
     [{ rounded: 'xl' }, {}],
+    [{ rounded: '2xl' }, {}],
     [{ rounded: 'pill' }, {}],
     [{ rounded: 'te-xl be-lg' }, {}],
     // Arbitrary numeric values
