@@ -3,7 +3,7 @@ import { makeRoundedProps, useRounded } from '../rounded'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { toRef } from 'vue'
+import { ref, toRef } from 'vue'
 
 // Types
 import type { RoundedProps } from '../rounded'
@@ -61,5 +61,67 @@ describe('rounded.ts', () => {
     const { roundedClasses } = useRounded(toRef(() => rounded), 'foo')
 
     expect(roundedClasses.value).toStrictEqual(expected)
+  })
+
+  it.each([
+    // No style for falsy/named values
+    [{}, {}],
+    [{ rounded: null }, {}],
+    [{ rounded: true }, {}],
+    [{ rounded: false }, {}],
+    [{ rounded: '' }, {}],
+    [{ rounded: 0 }, {}],
+    [{ rounded: '0' }, {}],
+    [{ rounded: 'xl' }, {}],
+    [{ rounded: 'pill' }, {}],
+    [{ rounded: 'te-xl be-lg' }, {}],
+    // Arbitrary numeric values
+    [{ rounded: 8 }, { borderRadius: '8px' }],
+    [{ rounded: 16 }, { borderRadius: '16px' }],
+    // Arbitrary CSS string values
+    [{ rounded: '8px' }, { borderRadius: '8px' }],
+    [{ rounded: '50%' }, { borderRadius: '50%' }],
+    [{ rounded: '1em' }, { borderRadius: '1em' }],
+    [{ rounded: '4px 8px' }, { borderRadius: '4px 8px' }],
+  ] as RoundedProps[])('should return correct rounded styles', (props: RoundedProps, expected: any) => {
+    const { roundedStyles } = useRounded(props, 'foo')
+
+    expect(roundedStyles.value).toStrictEqual(expected)
+  })
+
+  it('should react to ref changes for both classes and styles', () => {
+    const rounded = ref<RoundedProps['rounded']>(null)
+    const { roundedClasses, roundedStyles } = useRounded(toRef(() => rounded.value), 'foo')
+
+    expect(roundedClasses.value).toStrictEqual([])
+    expect(roundedStyles.value).toStrictEqual({})
+
+    rounded.value = 'xl'
+    expect(roundedClasses.value).toStrictEqual(['rounded-xl'])
+    expect(roundedStyles.value).toStrictEqual({})
+
+    rounded.value = true
+    expect(roundedClasses.value).toStrictEqual(['foo--rounded'])
+    expect(roundedStyles.value).toStrictEqual({})
+
+    rounded.value = 11
+    expect(roundedClasses.value).toStrictEqual([])
+    expect(roundedStyles.value).toStrictEqual({ borderRadius: '11px' })
+
+    rounded.value = false
+    expect(roundedClasses.value).toStrictEqual(['rounded-0'])
+    expect(roundedStyles.value).toStrictEqual({})
+
+    rounded.value = '50%'
+    expect(roundedClasses.value).toStrictEqual([])
+    expect(roundedStyles.value).toStrictEqual({ borderRadius: '50%' })
+
+    rounded.value = '7px'
+    expect(roundedClasses.value).toStrictEqual([])
+    expect(roundedStyles.value).toStrictEqual({ borderRadius: '7px' })
+
+    rounded.value = 0
+    expect(roundedClasses.value).toStrictEqual(['rounded-0'])
+    expect(roundedStyles.value).toStrictEqual({})
   })
 })

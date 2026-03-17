@@ -1,9 +1,9 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { getCurrentInstanceName, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 
 type RoundedValue = boolean | string | number | null | undefined
 
@@ -14,6 +14,7 @@ export interface RoundedProps {
 
 type RoundedData = {
   roundedClasses: Ref<string[]>
+  roundedStyles: Ref<CSSProperties>
 }
 
 // Composables
@@ -38,7 +39,7 @@ export function useRounded (
       classes.push('rounded-0')
     } else if (rounded === true || rounded === '') {
       classes.push(`${name}--rounded`)
-    } else if (typeof rounded === 'string' || rounded === 0) {
+    } else if (rounded === 0 || (typeof rounded === 'string' && (rounded === '0' || !/[0-9%]/.test(rounded)))) {
       for (const value of String(rounded).split(' ')) {
         classes.push(`rounded-${value}`)
       }
@@ -47,5 +48,19 @@ export function useRounded (
     return classes
   })
 
-  return { roundedClasses }
+  const roundedStyles = computed<CSSProperties>(() => {
+    const rounded = isRef(props) ? props.value : props.rounded
+
+    if (typeof rounded === 'number' && rounded !== 0) {
+      return { borderRadius: convertToUnit(rounded) }
+    }
+
+    if (typeof rounded === 'string' && rounded !== '0' && /[0-9%]/.test(rounded)) {
+      return { borderRadius: convertToUnit(rounded) ?? rounded }
+    }
+
+    return {}
+  })
+
+  return { roundedClasses, roundedStyles }
 }

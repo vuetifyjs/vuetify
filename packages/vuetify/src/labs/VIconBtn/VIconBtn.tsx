@@ -99,7 +99,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
       color: (() => {
@@ -175,6 +175,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               '--v-icon-btn-width': convertToUnit(btnWidth),
             },
             colorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           tabindex={ props.disabled || props.readonly ? -1 : 0 }

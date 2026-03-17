@@ -234,7 +234,7 @@ export const VHotkey = genericComponent()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { borderClasses } = useBorder(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
@@ -345,7 +345,7 @@ export const VHotkey = genericComponent()({
         <KeyComponent
           key={ keyIndex }
           class={ keyClasses }
-          style={ isContained ? undefined : colorStyles.value }
+          style={ isContained ? undefined : [colorStyles.value, roundedStyles.value] }
           aria-hidden="true"
           title={ getKeyTooltip(key) }
         >
@@ -429,7 +429,7 @@ export const VHotkey = genericComponent()({
                 elevationClasses.value,
                 colorClasses.value,
               ]}
-              style={ colorStyles.value }
+              style={[colorStyles.value, roundedStyles.value]}
               aria-hidden="true"
             >
               { content }

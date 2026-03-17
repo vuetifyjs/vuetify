@@ -35,7 +35,7 @@ export const VTimelineDivider = genericComponent()({
   setup (props, { slots }) {
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')
     const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(() => props.dotColor)
-    const { roundedClasses } = useRounded(props, 'v-timeline-divider__dot')
+    const { roundedClasses, roundedStyles } = useRounded(props, 'v-timeline-divider__dot')
     const { elevationClasses } = useElevation(props)
     const {
       backgroundColorClasses: lineColorClasses,
@@ -70,7 +70,7 @@ export const VTimelineDivider = genericComponent()({
               roundedClasses.value,
               sizeClasses.value,
             ]}
-            style={ sizeStyles.value }
+            style={[sizeStyles.value, roundedStyles.value]}
           >
             <div
               class={[
@@ -78,7 +78,7 @@ export const VTimelineDivider = genericComponent()({
                 backgroundColorClasses.value,
                 roundedClasses.value,
               ]}
-              style={ backgroundColorStyles.value }
+              style={[backgroundColorStyles.value, roundedStyles.value]}
             >
               { !slots.default ? (
                 <VIcon
