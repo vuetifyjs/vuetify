@@ -65,19 +65,19 @@
 
       &--variant-accordion
         > :first-child:not(:last-child)
-          border-bottom-left-radius: 0
-          border-bottom-right-radius: 0
+          border-bottom-left-radius: var(--v-expansion-panels-inner-radius, inherit)
+          border-bottom-right-radius: var(--v-expansion-panels-inner-radius, inherit)
 
         > :last-child:not(:first-child)
-          border-top-left-radius: 0
-          border-top-right-radius: 0
+          border-top-left-radius: var(--v-expansion-panels-inner-radius, inherit)
+          border-top-right-radius: var(--v-expansion-panels-inner-radius, inherit)
 
           .v-expansion-panel-title--active
             border-bottom-left-radius: initial
             border-bottom-right-radius: initial
 
         > :not(:first-child):not(:last-child)
-          border-radius: 0
+          border-radius: var(--v-expansion-panels-inner-radius, inherit)
 
     &--variant-accordion
       .v-expansion-panel-title__overlay
@@ -90,7 +90,7 @@
     position: relative
     transition: .3s all settings.$standard-easing
     transition-property: margin-top, border-radius, border, max-width
-    border-radius: $expansion-panel-border-radius
+    border-radius: var(--v-expansion-panels-outer-radius, $expansion-panel-border-radius)
 
     @media (prefers-reduced-motion: reduce)
       transition-property: border-radius, border
@@ -180,6 +180,10 @@
 
   // Variants
   .v-expansion-panels--variant-accordion
+    &.v-expansion-panels--no-divider
+      > .v-expansion-panel::after
+        opacity: 0
+
     > .v-expansion-panel
       margin-top: 0
 
