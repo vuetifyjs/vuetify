@@ -2,7 +2,9 @@
   "props": {
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "src": "Media file URL",
+    "srcObject": "Sets the source of the video to a MediaStream, MediaSource, or Blob object. Useful for WebRTC streaming.",
     "type": "Media file type (optional)",
+    "error": "Puts the component in the manual error state.",
     "image": "Apply a specific image as cover before the video is loaded.",
     "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",
     "muted": "Hides volume control and disables the playback sound.",
@@ -19,7 +21,8 @@
     "loaded": "Emitted when the video has loaded and is ready to be played.",
     "update:playing": "Emitted when playing state changes.",
     "update:progress": "Emitted when the internal playback progress changes.",
-    "update:volume": "Emitted when the volume changes."
+    "update:volume": "Emitted when the volume changes.",
+    "error": "Emits `true` when the video fails to load or `false` when user triggered retry."
   },
   "slots": {
     "header": "Slot for additional content placed on top of the video.",
