@@ -340,7 +340,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         autocomplete={ autocomplete.fieldAutocomplete.value }
                         onFocus={ onFocus }
                         onBlur={ blur }
-                        aria-labelledby={ `${id.value}-label` }
+                        aria-labelledby={ (props.label || slots.label) ? `${id.value}-label` : undefined }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
