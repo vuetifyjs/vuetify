@@ -55,7 +55,7 @@ export const makeVVideoControlsProps = propsFactory({
   hidePlay: Boolean,
   hideVolume: Boolean,
   hideFullscreen: Boolean,
-  hideSeekbar: Boolean,
+  hideProgressBar: { type: Boolean, default: true },
   fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
@@ -282,7 +282,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                         )
                         : ''
                     }
-                    { props.hideSeekbar
+                    { props.hideProgressBar
                       ? <VSpacer />
                       : (
                           <VSlider
