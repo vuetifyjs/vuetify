@@ -6,10 +6,11 @@
 // Transition
 @include tools.layer('transitions')
   .bottom-sheet-transition
-    &-enter-from
-      transform: translateY(100%)
+    &-enter-active, &-leave-active
+      transition-property: transform
+      pointer-events: none
 
-    &-leave-to
+    &-enter-from, &-leave-to
       transform: translateY(100%)
 
 // Block
