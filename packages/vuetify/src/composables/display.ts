@@ -1,13 +1,13 @@
 // Utilities
 import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
-import { isNullOrUndefined, isObject } from '@vuetify/v0/utilities'
+import { isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { BreakpointName } from '@vuetify/v0'
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref, ShallowRef } from 'vue'
 
 export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
@@ -51,28 +51,28 @@ export interface DisplayPlatform {
 }
 
 export interface DisplayInstance {
-  xs: Ref<boolean>
-  sm: Ref<boolean>
-  md: Ref<boolean>
-  lg: Ref<boolean>
-  xl: Ref<boolean>
-  xxl: Ref<boolean>
-  smAndUp: Ref<boolean>
-  mdAndUp: Ref<boolean>
-  lgAndUp: Ref<boolean>
-  xlAndUp: Ref<boolean>
-  smAndDown: Ref<boolean>
-  mdAndDown: Ref<boolean>
-  lgAndDown: Ref<boolean>
-  xlAndDown: Ref<boolean>
-  xxlAndUp: Ref<boolean>
-  xxlAndDown: Ref<boolean>
-  name: Ref<DisplayBreakpoint>
-  height: Ref<number>
-  width: Ref<number>
-  mobile: Ref<boolean>
+  xs: Readonly<ShallowRef<boolean>>
+  sm: Readonly<ShallowRef<boolean>>
+  md: Readonly<ShallowRef<boolean>>
+  lg: Readonly<ShallowRef<boolean>>
+  xl: Readonly<ShallowRef<boolean>>
+  xxl: Readonly<ShallowRef<boolean>>
+  smAndUp: Readonly<ShallowRef<boolean>>
+  mdAndUp: Readonly<ShallowRef<boolean>>
+  lgAndUp: Readonly<ShallowRef<boolean>>
+  xlAndUp: Readonly<ShallowRef<boolean>>
+  smAndDown: Readonly<ShallowRef<boolean>>
+  mdAndDown: Readonly<ShallowRef<boolean>>
+  lgAndDown: Readonly<ShallowRef<boolean>>
+  xlAndDown: Readonly<ShallowRef<boolean>>
+  xxlAndUp: Readonly<ShallowRef<boolean>>
+  xxlAndDown: Readonly<ShallowRef<boolean>>
+  name: Readonly<ShallowRef<DisplayBreakpoint>>
+  height: Readonly<ShallowRef<number>>
+  width: Readonly<ShallowRef<number>>
+  mobile: Readonly<ShallowRef<boolean>>
   mobileBreakpoint: Ref<number | DisplayBreakpoint>
-  platform: Ref<DisplayPlatform>
+  platform: Readonly<Ref<DisplayPlatform>>
   thresholds: Ref<DisplayThresholds>
 
   /** @internal */
@@ -122,14 +122,10 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 }
 
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
-  const ssrOptions = isObject(ssr)
-    ? { clientWidth: ssr.clientWidth, clientHeight: ssr.clientHeight }
-    : undefined
-
   const breakpoint = createBreakpoints({
-    ...!isNullOrUndefined(options?.mobileBreakpoint) && { mobileBreakpoint: options.mobileBreakpoint },
-    ...!isNullOrUndefined(options?.thresholds) && { breakpoints: options.thresholds },
-    ssr: ssrOptions,
+    mobileBreakpoint: options?.mobileBreakpoint,
+    breakpoints: options?.thresholds,
+    ssr: isObject(ssr) ? ssr : undefined,
   })
 
   const platform = shallowRef(getPlatform(ssr))
@@ -145,35 +141,29 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
   }
 
-  // v0 returns Readonly<ShallowRef<T>> which doesn't satisfy Ref<T> at the
-  // type level (Readonly removes the setter). ShallowRef extends Ref at runtime
-  // so the cast is safe. DisplayInstance keeps Ref<T> to avoid public API break.
-  type R<T> = Ref<T>
-  const r = <T>(v: unknown) => v as R<T>
-
   return {
-    xs: r<boolean>(breakpoint.xs),
-    sm: r<boolean>(breakpoint.sm),
-    md: r<boolean>(breakpoint.md),
-    lg: r<boolean>(breakpoint.lg),
-    xl: r<boolean>(breakpoint.xl),
-    xxl: r<boolean>(breakpoint.xxl),
-    smAndUp: r<boolean>(breakpoint.smAndUp),
-    mdAndUp: r<boolean>(breakpoint.mdAndUp),
-    lgAndUp: r<boolean>(breakpoint.lgAndUp),
-    xlAndUp: r<boolean>(breakpoint.xlAndUp),
-    smAndDown: r<boolean>(breakpoint.smAndDown),
-    mdAndDown: r<boolean>(breakpoint.mdAndDown),
-    lgAndDown: r<boolean>(breakpoint.lgAndDown),
-    xlAndDown: r<boolean>(breakpoint.xlAndDown),
-    xxlAndUp: r<boolean>(breakpoint.xxlAndUp),
-    xxlAndDown: r<boolean>(breakpoint.xxlAndDown),
-    name: r<DisplayBreakpoint>(breakpoint.name),
-    height: r<number>(breakpoint.height),
-    width: r<number>(breakpoint.width),
-    mobile: r<boolean>(breakpoint.isMobile),
-    mobileBreakpoint: toRef(() => options?.mobileBreakpoint ?? 'lg'), // 'lg' matches v0's default
-    platform: readonly(platform) as Ref<DisplayPlatform>,
+    xs: breakpoint.xs,
+    sm: breakpoint.sm,
+    md: breakpoint.md,
+    lg: breakpoint.lg,
+    xl: breakpoint.xl,
+    xxl: breakpoint.xxl,
+    smAndUp: breakpoint.smAndUp,
+    mdAndUp: breakpoint.mdAndUp,
+    lgAndUp: breakpoint.lgAndUp,
+    xlAndUp: breakpoint.xlAndUp,
+    smAndDown: breakpoint.smAndDown,
+    mdAndDown: breakpoint.mdAndDown,
+    lgAndDown: breakpoint.lgAndDown,
+    xlAndDown: breakpoint.xlAndDown,
+    xxlAndUp: breakpoint.xxlAndUp,
+    xxlAndDown: breakpoint.xxlAndDown,
+    name: breakpoint.name,
+    height: breakpoint.height,
+    width: breakpoint.width,
+    mobile: breakpoint.isMobile,
+    mobileBreakpoint: toRef(() => breakpoint.mobileBreakpoint),
+    platform: readonly(platform),
     thresholds: toRef(() => breakpoint.breakpoints as DisplayThresholds),
     update,
     ssr: !!ssr,
