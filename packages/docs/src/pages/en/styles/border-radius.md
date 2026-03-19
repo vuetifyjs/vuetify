@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Border radius
   description: Use border utilities to quickly style the border-radius of any element.
@@ -148,6 +149,18 @@ When using the **rounded** property on components, omit the `rounded-` prefix. F
 Setting the **rounded** property applies a component specific border-radius class, such as `v-sheet--rounded`. This is to ensure that basic rounded usage persists even if the utility classes are disabled.
 
 <ExamplesExample file="border-radius/misc-components" />
+
+## Arbitrary border radius
+
+<DocIntroduced version="4.1.0" />
+
+In addition to the named sizes, the **rounded** prop accepts any valid CSS value or a plain number (converted to `px`):
+
+```html
+<v-sheet rounded="8" />       <!-- border-radius: 8px -->
+<v-sheet rounded="1.5rem" />  <!-- border-radius: 1.5rem -->
+<v-sheet rounded="50%" />     <!-- border-radius: 50% -->
+```
 
 ## SASS variables
 
