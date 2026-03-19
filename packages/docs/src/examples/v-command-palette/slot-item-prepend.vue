@@ -6,7 +6,6 @@
       v-model="model"
       :filter-keys="['raw.name', 'raw.username']"
       :items="items"
-      class="pa-2"
       hotkey="alt+g"
       item-title="name"
       item-value="name"
@@ -18,7 +17,7 @@
           What are you looking for?
         </div>
 
-        <v-chip-group class="pl-2 mt-n1 mb-1 flex-1-0">
+        <v-chip-group class="pl-2 mt-n1 mb-1">
           <v-chip
             v-for="c in ['People', 'Files', 'Actions']"
             :key="c"

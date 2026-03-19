@@ -5,7 +5,7 @@
       v-model="model"
       :items="items"
       :search-props="{ autocomplete: 'off' }"
-      hotkey="ctrl+slash"
+      hotkey="ctrl+/"
       max-width="500"
       placeholder="Remind me..."
     >
