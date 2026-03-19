@@ -84,7 +84,7 @@ export const makeVStepperProps = propsFactory({
     selectedClass: 'v-stepper-item--selected',
   }),
   ...makeVSheetProps(),
-  ...pick(makeVStepperActionsProps(), ['prevText', 'nextText']),
+  ...pick(makeVStepperActionsProps(), ['prevText', 'nextText', 'prevVariant', 'nextVariant']),
 }, 'VStepper')
 
 export const VStepper = genericComponent<new <TModel>(
@@ -105,7 +105,7 @@ export const VStepper = genericComponent<new <TModel>(
   setup (props, { slots }) {
     const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
     const { displayClasses, mobile } = useDisplay(props)
-    const { completeIcon, editIcon, errorIcon, color, editable, prevText, nextText } = toRefs(props)
+    const { completeIcon, editIcon, errorIcon, color, editable, prevText, nextText, prevVariant, nextVariant } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -152,6 +152,8 @@ export const VStepper = genericComponent<new <TModel>(
         disabled,
         prevText,
         nextText,
+        prevVariant,
+        nextVariant,
       },
     })
 
