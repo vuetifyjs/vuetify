@@ -19,6 +19,8 @@ export type Tick = {
   label?: string
 }
 
+export type SliderVariant = 'default' | 'pill'
+
 type SliderProvide = {
   activeThumbRef: Ref<HTMLElement | undefined>
   color: Ref<string | undefined>
@@ -51,6 +53,7 @@ type SliderProvide = {
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
+  variant: Ref<SliderVariant>
   vertical: Ref<boolean>
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
@@ -133,6 +136,11 @@ export const makeSliderProps = propsFactory({
   },
   reverse: Boolean,
   noKeyboard: Boolean,
+  variant: {
+    type: String as PropType<SliderVariant>,
+    default: 'default',
+    validator: (v: any) => ['default', 'pill'].includes(v),
+  },
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -385,6 +393,7 @@ export const useSlider = ({
     trackContainerRef,
     trackFillColor,
     trackSize,
+    variant: toRef(() => props.variant ?? 'default') as Ref<SliderVariant>,
     vertical,
   }
 

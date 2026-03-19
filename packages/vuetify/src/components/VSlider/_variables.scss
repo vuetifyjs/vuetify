@@ -33,3 +33,16 @@ $slider-vertical-margin-top: 12px !default;
 $slider-vertical-min-height: 300px !default;
 
 $slider-track-active-size: calc(var(--v-slider-track-size) + #{$slider-track-active-size-offset}) !default;
+
+// Pill variant
+$slider-pill-track-size: 16px !default;
+$slider-pill-track-outer-radius: 16px !default;
+$slider-pill-track-inner-radius: 2px !default;
+$slider-pill-thumb-width: 4px !default;
+$slider-pill-focused-thumb-width: 2px !default;
+$slider-pill-thumb-min-height: 44px !default;
+$slider-pill-thumb-border-radius: 4px !default;
+$slider-pill-thumb-pressed-width: 2px !default;
+$slider-pill-gap: 6px !default;
+$slider-pill-stop-indicator-size: 4px !default;
+$slider-pill-stop-indicator-border-radius: 50% !default;

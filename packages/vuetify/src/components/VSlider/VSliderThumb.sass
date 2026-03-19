@@ -148,6 +148,45 @@
       .v-slider-thumb__surface::before
         transform: scale(2)
 
-    .v-slider-thumb:hover:not(.v-slider-thumb--focused)
-      .v-slider-thumb__surface::before
-        opacity: $slider-thumb-hover-opacity
+  .v-slider--variant-pill
+    .v-slider-thumb__surface
+      border-radius: $slider-pill-thumb-border-radius
+
+      &::before,
+      &::after
+        display: none
+
+    &.v-input--horizontal .v-slider-thumb
+      inset-inline-start: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
+
+      > .v-slider-thumb__surface
+        width: $slider-pill-thumb-width
+        min-height: $slider-pill-thumb-min-height
+
+      &:focus-visible,
+      &.v-slider-thumb--focused
+        > .v-slider-thumb__surface
+          width: $slider-pill-focused-thumb-width
+          margin-inline-start: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
+
+    &.v-input--vertical .v-slider-thumb
+      top: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
+
+      > .v-slider-thumb__surface
+        height: $slider-pill-thumb-width
+        min-width: $slider-pill-thumb-min-height
+
+      &:focus-visible,
+      &.v-slider-thumb--focused
+        > .v-slider-thumb__surface
+          height: $slider-pill-focused-thumb-width
+          margin-top: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
+
+    .v-slider-thumb__ripple
+      display: none
+
+    .v-slider-thumb:focus-visible,
+    .v-slider-thumb--focused
+      .v-slider-thumb__surface
+        outline: 3px solid currentColor
+        outline-offset: 2px

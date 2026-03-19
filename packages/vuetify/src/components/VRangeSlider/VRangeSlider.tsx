@@ -159,6 +159,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': disabled.value,
+              [`v-slider--variant-${props.variant}`]: props.variant !== 'default',
             },
             rtlClasses.value,
             props.class,

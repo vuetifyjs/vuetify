@@ -78,6 +78,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       step,
       disabled,
       thumbSize,
+      trackSize,
       thumbLabel,
       direction,
       isReversed,
@@ -87,10 +88,12 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       mousePressed,
       decimals,
       indexFromEnd,
+      variant,
     } = slider
 
     const isHovered = shallowRef(false)
     const isHidden = shallowRef(false)
+    const isPill = computed(() => variant.value === 'pill')
 
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
@@ -174,7 +177,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           style={[
             {
               '--v-slider-thumb-position': positionPercentage,
-              '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+              '--v-slider-thumb-size': convertToUnit(isPill.value ? (trackSize.value + 8) : thumbSize.value),
             },
             props.style,
           ]}
