@@ -12,13 +12,12 @@ import { VIcon } from '@/components/VIcon'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
-import { useDate } from '@/composables/date'
+import { useMonthPicker } from './useMonthPicker'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, shallowRef, watch } from 'vue'
-import { clamp, genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -48,61 +47,24 @@ export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
   props: makeVMonthPickerProps(),
 
   emits: {
-    'update:modelValue': (value: string | null) => true,
+    'update:modelValue': (_value: string | null) => true,
   },
 
-  setup (props, { emit, slots }) {
-    const adapter = useDate()
-
+  setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
 
-    const viewMode = shallowRef<'months' | 'years'>('months')
-    const month = shallowRef<number | null>(null)
-    const year = shallowRef<number>(adapter.getYear(adapter.date()))
-    const yearTransition = shallowRef<string | undefined>(undefined)
-
-    const headerText = computed(() => {
-      if (!model.value) return ''
-      return adapter.format(adapter.parseISO(`${model.value}-01`), 'monthAndYear')
-    })
-
-    function setYear (v: number, withTransition?: boolean) {
-      yearTransition.value = withTransition
-        ? `scroll-x-${v < year.value ? 'reverse-' : ''}transition`
-        : undefined
-      year.value = v
-      updateModel()
-    }
-
-    function setMonth (v: number) {
-      month.value = v
-      updateModel()
-    }
-
-    function toggleYears () {
-      viewMode.value = viewMode.value === 'years' ? 'months' : 'years'
-    }
-
-    watch(year, () => {
-      setTimeout(() => { viewMode.value = 'months' }, 100)
-    })
-
-    watch(model, val => {
-      if (!val) {
-        year.value = adapter.getYear(adapter.date())
-        month.value = null
-        return
-      }
-      const [y, m] = val.split('-').map(v => parseInt(v))
-      year.value = y
-      month.value = clamp(m - 1, 0, 11)
-    }, { immediate: true })
-
-    function updateModel () {
-      if (year.value && month.value !== null) {
-        model.value = `${year.value}-${String(month.value + 1).padStart(2, '0')}`
-      }
-    }
+    const {
+      viewMode,
+      month,
+      year,
+      yearTransitionName,
+      headerText,
+      prevYear,
+      nextYear,
+      toggleViewMode,
+      setYear,
+      setMonth,
+    } = useMonthPicker(props, model)
 
     useRender(() => {
       return (
@@ -121,14 +83,14 @@ export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
                   <div class="v-month-picker__controls pa-3 pb-0 d-flex justify-space-between align-center flex-grow-1">
                     <VBtn
                       icon="$prev"
-                      onClick={ () => setYear(year.value - 1, true) }
+                      onClick={ prevYear }
                     />
                     <VBtn
                       rounded
-                      onClick={ toggleYears }
+                      onClick={ toggleViewMode }
                       v-slots={{
                         default: () => (
-                          <MaybeTransition name={ yearTransition.value } mode="out-in">
+                          <MaybeTransition name={ yearTransitionName.value } mode="out-in">
                             <span key={ year.value }>{ year.value }</span>
                           </MaybeTransition>
                         ),
@@ -145,7 +107,7 @@ export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
                     />
                     <VBtn
                       icon="$next"
-                      onClick={ () => setYear(year.value + 1, true) }
+                      onClick={ nextYear }
                     />
                   </div>
                 </VDefaultsProvider>
