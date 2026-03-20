@@ -873,6 +873,58 @@ describe('VSelect', () => {
     })
   })
 
+  describe('clearFocusable', () => {
+    it('should have tabindex="-1" on clear button by default', async () => {
+      render(() => (
+        <VSelect
+          clearable
+          items={['Item 1', 'Item 2']}
+          modelValue="Item 1"
+        />
+      ))
+
+      const clearBtn = screen.getByCSS('.v-field__clearable .v-icon')
+      expect(clearBtn).toHaveAttribute('tabindex', '-1')
+    })
+
+    it('should have tabindex="0" on clear button when clearFocusable is true', async () => {
+      render(() => (
+        <VSelect
+          clearable
+          clearFocusable
+          items={['Item 1', 'Item 2']}
+          modelValue="Item 1"
+        />
+      ))
+
+      const clearBtn = screen.getByCSS('.v-field__clearable .v-icon')
+      expect(clearBtn).toHaveAttribute('tabindex', '0')
+    })
+
+    it('should clear selection when pressing Enter on focused clear button', async () => {
+      const selectedItem = ref('Item 1')
+
+      const { element } = render(() => (
+        <VSelect
+          clearable
+          clearFocusable
+          v-model={ selectedItem.value }
+          items={['Item 1', 'Item 2']}
+        />
+      ))
+
+      // Focus the select
+      await userEvent.click(element)
+      // Close menu and tab to clear button
+      await userEvent.keyboard('{Escape}')
+      await userEvent.keyboard('{Tab}')
+      // Press Enter to clear
+      await userEvent.keyboard('{Enter}')
+
+      expect(selectedItem.value).toBeNull()
+    })
+  })
+
   describe('native form submission', () => {
     const items = [
       { title: 'Item 1', value: 1 },
