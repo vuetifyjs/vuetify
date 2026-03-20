@@ -186,5 +186,18 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/19998
+  it('hides details when using hide-details="auto" and counter without files', async () => {
+    const model = ref<File[]>([])
+    const { queryByCSS } = render(() => (
+      <VFileInput hideDetails="auto" counter v-model={ model.value }></VFileInput>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toBeNull()
+
+    model.value = [oneMBFile]
+    await expect.poll(() => queryByCSS('.v-input__details')).not.toBeNull()
+  })
+
   showcase({ stories })
 })
