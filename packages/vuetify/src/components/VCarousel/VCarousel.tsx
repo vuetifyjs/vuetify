@@ -108,19 +108,11 @@ export const VCarousel = genericComponent<new <T>(
       window.requestAnimationFrame(startTimeout)
     }
 
-    function onMouseenter () {
-      if (props.stopOnHover) {
-        isHovered.value = true
-        window.clearTimeout(slideTimeout)
-      }
-    }
-
-    function onMouseleave () {
-      if (props.stopOnHover) {
-        isHovered.value = false
-        restartTimeout()
-      }
-    }
+    watch(isHovered, val => {
+      if (!props.stopOnHover) return
+      if (val) window.clearTimeout(slideTimeout)
+      else restartTimeout()
+    })
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
       if (
@@ -162,8 +154,8 @@ export const VCarousel = genericComponent<new <T>(
             { height: convertToUnit(props.height) },
             props.style,
           ]}
-          onMouseenter={ onMouseenter }
-          onMouseleave={ onMouseleave }
+          onMouseenter={ () => isHovered.value = true }
+          onMouseleave={ () => isHovered.value = false }
         >
           {{
             default: slots.default,
