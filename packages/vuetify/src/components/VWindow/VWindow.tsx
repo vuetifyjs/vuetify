@@ -15,8 +15,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -139,20 +140,51 @@ export const VWindow = genericComponent<new <T>(
       return group.items.value.findIndex(item => group.selected.value.includes(item.id))
     })
 
+    // Fix for https://github.com/vuetifyjs/vuetify/issues/18447
     watch(activeIndex, (newVal, oldVal) => {
+      let scrollableParent: HTMLElement | undefined
+      const savedScrollPosition = { left: 0, top: 0 }
+
+      if (IN_BROWSER && oldVal >= 0) {
+        scrollableParent = getScrollParent(rootRef.value)
+
+        savedScrollPosition.left = scrollableParent?.scrollLeft
+        savedScrollPosition.top = scrollableParent?.scrollTop
+      }
+
       const itemsLength = group.items.value.length
       const lastIndex = itemsLength - 1
 
       if (itemsLength <= 2) {
         isReversed.value = newVal < oldVal
       } else if (newVal === lastIndex && oldVal === 0) {
-        isReversed.value = true
-      } else if (newVal === 0 && oldVal === lastIndex) {
         isReversed.value = false
+      } else if (newVal === 0 && oldVal === lastIndex) {
+        isReversed.value = true
       } else {
         isReversed.value = newVal < oldVal
       }
-    })
+
+      nextTick(() => {
+        if (!IN_BROWSER || !scrollableParent) return
+
+        const currentScrollY = scrollableParent.scrollTop
+
+        if (currentScrollY !== savedScrollPosition.top) {
+          scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
+        }
+
+        requestAnimationFrame(() => {
+          if (!scrollableParent) return
+
+          const rafScrollY = scrollableParent.scrollTop
+
+          if (rafScrollY !== savedScrollPosition.top) {
+            scrollableParent.scrollTo({ ...savedScrollPosition, behavior: 'instant' })
+          }
+        })
+      })
+    }, { flush: 'sync' }) // Run synchronously before DOM updates
 
     provide(VWindowSymbol, {
       transition,
@@ -228,6 +260,35 @@ export const VWindow = genericComponent<new <T>(
       }
     })
 
+    function onKeyDown (e: KeyboardEvent) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
+        prev()
+        nextTick(() => { canMoveBack.value ? focusArrow(0) : focusArrow(1) })
+      }
+
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
+        next()
+        nextTick(() => { canMoveForward.value ? focusArrow(1) : focusArrow(0) })
+      }
+    }
+
+    function focusArrow (index: number) {
+      const arrow = arrows.value[index]
+
+      if (!arrow) return
+
+      const arrowEl = Array.isArray(arrow) ? arrow[0] : arrow
+      arrowEl.el?.focus()
+    }
+
     useRender(() => (
       <props.tag
         ref={ rootRef }
@@ -243,9 +304,11 @@ export const VWindow = genericComponent<new <T>(
         ]}
         style={[
           props.style,
-          props.transitionDuration && !PREFERS_REDUCED_MOTION
-            ? { '--v-window-transition-duration': convertToUnit(props.transitionDuration, 'ms') }
-            : undefined,
+          {
+            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
+              ? convertToUnit(props.transitionDuration, 'ms')
+              : null,
+          },
         ]}
         v-touch={ touchOptions.value }
       >
@@ -264,6 +327,7 @@ export const VWindow = genericComponent<new <T>(
                 { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
                 { 'v-window__controls--right': props.verticalArrows === 'right' },
               ]}
+              onKeydown={ onKeyDown }
             >
               { arrows.value }
             </div>

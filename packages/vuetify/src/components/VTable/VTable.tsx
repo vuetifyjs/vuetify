@@ -12,7 +12,6 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import { VDefaultsProvider } from '../VDefaultsProvider'
 
 export type VTableSlots = {
   default: never
@@ -49,51 +48,42 @@ export const VTable = genericComponent<VTableSlots>()({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    useRender(() => {
-      const tableContentDefaults = {
-        VCheckboxBtn: {
-          density: props.density,
-        },
-      }
+    useRender(() => (
+      <props.tag
+        class={[
+          'v-table',
+          {
+            'v-table--fixed-height': !!props.height,
+            'v-table--fixed-header': props.fixedHeader,
+            'v-table--fixed-footer': props.fixedFooter,
+            'v-table--has-top': !!slots.top,
+            'v-table--has-bottom': !!slots.bottom,
+            'v-table--hover': props.hover,
+            'v-table--striped-even': props.striped === 'even',
+            'v-table--striped-odd': props.striped === 'odd',
+          },
+          themeClasses.value,
+          densityClasses.value,
+          props.class,
+        ]}
+        style={ props.style }
+      >
+        { slots.top?.() }
 
-      return (
-        <props.tag
-          class={[
-            'v-table',
-            {
-              'v-table--fixed-height': !!props.height,
-              'v-table--fixed-header': props.fixedHeader,
-              'v-table--fixed-footer': props.fixedFooter,
-              'v-table--has-top': !!slots.top,
-              'v-table--has-bottom': !!slots.bottom,
-              'v-table--hover': props.hover,
-              'v-table--striped-even': props.striped === 'even',
-              'v-table--striped-odd': props.striped === 'odd',
-            },
-            themeClasses.value,
-            densityClasses.value,
-            props.class,
-          ]}
-          style={ props.style }
-        >
-          { slots.top?.() }
-          <VDefaultsProvider defaults={ tableContentDefaults }>
-            { slots.default ? (
-              <div
-                class="v-table__wrapper"
-                style={{ height: convertToUnit(props.height) }}
-              >
-                <table>
-                  { slots.default() }
-                </table>
-              </div>
-            ) : slots.wrapper?.()}
-          </VDefaultsProvider>
+        { slots.default ? (
+          <div
+            class="v-table__wrapper"
+            style={{ height: convertToUnit(props.height) }}
+          >
+            <table>
+              { slots.default() }
+            </table>
+          </div>
+        ) : slots.wrapper?.()}
 
-          { slots.bottom?.() }
-        </props.tag>
-      )
-    })
+        { slots.bottom?.() }
+      </props.tag>
+    ))
 
     return {}
   },

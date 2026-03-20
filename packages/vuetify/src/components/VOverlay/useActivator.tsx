@@ -114,8 +114,6 @@ export function useActivator (
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
-      if (e.sourceCapabilities?.firesTouchEvents) return
-
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       runOpenDelay()
@@ -137,7 +135,7 @@ export function useActivator (
       isFocused = false
       e.stopPropagation()
 
-      runCloseDelay()
+      runCloseDelay({ minDelay: 1 })
     },
   }
 
@@ -174,13 +172,14 @@ export function useActivator (
     }
 
     if (openOnFocus.value) {
-      events.onFocusin = () => {
+      events.onFocusin = (e: Event) => {
+        if (!(e.target as HTMLElement).matches(':focus-visible')) return
         isFocused = true
         runOpenDelay()
       }
       events.onFocusout = () => {
         isFocused = false
-        runCloseDelay()
+        runCloseDelay({ minDelay: 1 })
       }
     }
 

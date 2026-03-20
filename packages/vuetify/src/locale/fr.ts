@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Mois précédent',
       nextMonth: 'Mois suivant',
       selectYear: 'Sélectionner une année',
+      previousYear: 'Année précédente',
+      nextYear: 'Année suivante',
+      selectMonth: 'Sélectionner un mois',
       selectDate: '{0}',
       currentDate: 'Aujourd\'hui, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Sélectionner une heure',
+    hour: 'Heure',
+    minute: 'Minute',
+    second: 'Seconde',
+    notAllowed: 'La valeur n\'est pas autorisée',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Veuillez choisir au moins une valeur',
     pattern: 'Format invalide',
   },
+  command: {
+    search: 'Tapez une commande ou recherchez...',
+  },
   hotkey: {
     then: 'puis',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Espace',
     plus: 'plus',
     shortcut: 'Raccourci clavier : {0}',
+    or: 'ou',
   },
   video: {
     play: 'Lire',

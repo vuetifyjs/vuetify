@@ -6,24 +6,28 @@ autoInstallPeers: false
 ignoreWorkspaceRootCheck: true
 
 ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+  - edgedriver
+  - geckodriver
+  - unrs-resolver
   - vue-demi
 
 linkWorkspacePackages: deep
 
-minimumReleaseAge: 4320 # 3 days
+minimumReleaseAge: 4320
+
 minimumReleaseAgeExclude:
   - '@vuetify/one'
+  - '@vuetify/testing-library-dom'
+  - playwright
+  - playwright-core
+  - '@vizzly-testing/vitest@0.1.1'
 
 nodeLinker: hoisted
 
-onlyBuiltDependencies:
-  - '@percy/core'
-  - edgedriver
-  - esbuild
-  - geckodriver
-
 overrides:
-  '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.2
+  '@testing-library/dom': npm:@vuetify/testing-library-dom@1.0.3
   '@types/node': $@types/node
   '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.6.0
   brilliant-errors>bumpp: '-'
@@ -34,6 +38,8 @@ overrides:
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
+  '@vitest/browser': patches/@vitest__browser.patch
+  playwright-core: patches/playwright-core.patch
 
 peerDependencyRules:
   allowedVersions:

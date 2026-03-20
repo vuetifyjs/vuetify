@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Bulan sebelumnya',
       nextMonth: 'Bulan berikutnya',
       selectYear: 'Pilih tahun',
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectMonth: 'Pilih bulan',
       selectDate: '{0}',
       currentDate: 'Hari ini, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pilih Waktu',
+    hour: 'Jam',
+    minute: 'Menit',
+    second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
   },
+  command: {
+    search: 'Ketik perintah atau cari...',
+  },
   hotkey: {
     then: 'kemudian',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
+    or: 'atau',
   },
   video: {
     play: 'Putar',

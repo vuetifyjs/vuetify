@@ -50,6 +50,9 @@ export default {
       previousMonth: '上個月',
       nextMonth: '下個月',
       selectYear: '選擇年份',
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectMonth: '選擇月份',
       selectDate: '{0}',
       currentDate: '今天，{0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: '上午',
     pm: '下午',
     title: '選擇時間',
+    hour: '小時',
+    minute: '分鐘',
+    second: '秒',
+    notAllowed: '值不允許',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: '請至少選擇一個值',
     pattern: '格式無效',
   },
+  command: {
+    search: '輸入指令或搜尋...',
+  },
   hotkey: {
     then: '然後',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '鍵盤快捷鍵：{0}',
+    or: '或',
   },
   video: {
     play: '播放',

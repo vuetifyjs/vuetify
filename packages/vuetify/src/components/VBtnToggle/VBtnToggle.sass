@@ -8,3 +8,27 @@
 
       &.v-btn--variant-plain
         opacity: 1
+
+@include tools.layer('trumps')
+  @media (forced-colors: active)
+    .v-btn-toggle
+      > .v-btn:not(.v-btn--disabled)
+        border-color: buttontext
+
+        &:focus-visible
+          outline: 0
+
+        &:not(.v-btn--active)
+          &:hover,
+          &:focus-visible
+            color: highlight
+            border-color: currentColor
+
+      > .v-btn--active
+        color: highlight
+        forced-color-adjust: preserve-parent-color
+
+        &:not(.v-btn--variant-text, .v-btn--variant-plain)
+          background-color: highlight
+          color: highlighttext
+          border-color: highlight

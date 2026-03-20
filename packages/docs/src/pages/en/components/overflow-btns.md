@@ -6,7 +6,6 @@ meta:
   keywords: overflow buttons, vuetify overflow button component, vue overflow button component
 related:
   - /components/forms/
-  - /components/selection-controls/
   - /components/selects/
 ---
 

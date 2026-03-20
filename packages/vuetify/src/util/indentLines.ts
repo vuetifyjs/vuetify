@@ -16,6 +16,7 @@ export type IndentLines = {
   leaf: IndentLineType[] | undefined
   node: IndentLineType[] | undefined
   children: IndentLineType[] | undefined
+  footer: IndentLineType[] | undefined
 }
 
 export function getIndentLines ({
@@ -27,11 +28,16 @@ export function getIndentLines ({
   parentIndentLines,
   variant,
 }: IndentLinesOptions): IndentLines {
+  const isLastLeaf = isLast && (!isLastGroup || separateRoots || depth > 1)
+
   if (!parentIndentLines || !depth) {
     return {
       leaf: undefined,
       node: undefined,
       children: parentIndentLines,
+      footer: parentIndentLines && (!isLastLeaf || variant === 'simple')
+        ? [...parentIndentLines, separateRoots ? 'none' : 'line']
+        : ['none'],
     }
   }
 
@@ -40,10 +46,9 @@ export function getIndentLines ({
       leaf: [...parentIndentLines, 'line'],
       node: [...parentIndentLines, 'line'],
       children: [...parentIndentLines, 'line'],
+      footer: [...parentIndentLines, 'line', 'line'],
     }
   }
-
-  const isLastLeaf = isLast && (!isLastGroup || separateRoots || depth > 1)
 
   return {
     leaf: [
@@ -56,6 +61,10 @@ export function getIndentLines ({
       isLastLeaf ? 'last-leaf' : 'leaf',
     ],
     children: [
+      ...parentIndentLines,
+      isLastLeaf ? 'none' : 'line',
+    ],
+    footer: [
       ...parentIndentLines,
       isLastLeaf ? 'none' : 'line',
     ],

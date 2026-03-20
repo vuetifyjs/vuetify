@@ -1,0 +1,24 @@
+{
+  "props": {
+    "browseText": "Text for the browse button.",
+    "dividerText": "Text in the divider.",
+    "error": "Puts the dropzone in an error state, changing the border color.",
+    "hideBrowse": "Hides the browse button.",
+    "insetFileList": "Renders the file list inside the dropzone container instead of below it.",
+    "multiple": "Allows multiple files to be uploaded.",
+    "scrim": "Determines whether an overlay is used when hovering over the component with files. Accepts true/false to enable background, and string to define color.",
+    "showSize": "Shows the size of the file."
+  },
+  "slots": {
+    "browse": "Slot for the browse button.",
+    "divider": "Slot for the divider between icon and the browse button.",
+    "icon": "Slot to replace the default upload icon.",
+    "input": "Slot to replace the native file input.",
+    "single": "Slot for customizing the appearance of a single file when using inset file list mode."
+  },
+  "events": {
+    "drop": "Emitted when files are dropped onto the dropzone.",
+    "click:browse": "Emitted when the browse button is clicked.",
+    "click:remove": "Emitted when a file's remove button is clicked."
+  }
+}

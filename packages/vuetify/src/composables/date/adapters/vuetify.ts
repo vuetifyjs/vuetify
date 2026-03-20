@@ -334,7 +334,7 @@ function calculateWeekWithFirstDayOfYear (date: Date, locale: string, weekStart:
     return (7 + new Date(year, 0, 1).getDay() - weekStart) % 7
   }
 
-  let year = getYear(date)
+  let year = getYear(currentWeekStart)
   if (year < getYear(currentWeekEnd) && yearStartWeekdayOffset(year + 1) <= firstDayOfYearOffset) {
     year++
   }
@@ -345,10 +345,11 @@ function calculateWeekWithFirstDayOfYear (date: Date, locale: string, weekStart:
     ? addDays(yearStart, -offset)
     : addDays(yearStart, 7 - offset)
 
-  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
+  return 1 + getDiff(endOfDay(currentWeekStart), startOfDay(d1w1), 'weeks')
 }
 
 function calculateWeekWithMinWeekSize (date: Date, locale: string, weekStart: number, minWeekSize: number) {
+  const currentWeekStart = startOfWeek(date, locale, weekStart)
   const currentWeekEnd = addDays(startOfWeek(date, locale, weekStart), 6)
 
   function firstWeekSize (year: number) {
@@ -356,7 +357,7 @@ function calculateWeekWithMinWeekSize (date: Date, locale: string, weekStart: nu
     return 7 - getDiff(yearStart, startOfWeek(yearStart, locale, weekStart), 'days')
   }
 
-  let year = getYear(date)
+  let year = getYear(currentWeekStart)
   if (year < getYear(currentWeekEnd) && firstWeekSize(year + 1) >= minWeekSize) {
     year++
   }
@@ -366,7 +367,7 @@ function calculateWeekWithMinWeekSize (date: Date, locale: string, weekStart: nu
   const d1w1 = size >= minWeekSize
     ? addDays(yearStart, size - 7)
     : addDays(yearStart, size)
-  return 1 + getDiff(endOfDay(date), startOfDay(d1w1), 'weeks')
+  return 1 + getDiff(endOfDay(currentWeekStart), startOfDay(d1w1), 'weeks')
 }
 
 function getDate (date: Date) {
@@ -397,7 +398,10 @@ function endOfYear (date: Date) {
 }
 
 function isWithinRange (date: Date, range: [Date, Date]) {
-  return isAfter(date, range[0]) && isBefore(date, range[1])
+  return (
+    isEqual(date, range[0]) || isEqual(date, range[1]) ||
+    (isAfter(date, range[0]) && isBefore(date, range[1]))
+  )
 }
 
 function isValid (date: any) {

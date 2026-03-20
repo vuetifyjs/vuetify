@@ -6,10 +6,10 @@
       class="mx-auto"
       controls-variant="mini"
       height="300"
-      image="https://jsek.work/cdn/vt-sunflowers.jpg"
+      image="https://cdn.jsek.work/cdn/vt-sunflowers.jpg"
       max-width="500"
       rounded="lg"
-      src="https://jsek.work/cdn/vt-sunflowers.mp4"
+      src="https://cdn.jsek.work/cdn/vt-sunflowers.mp4"
       eager
       hide-overlay
       pills

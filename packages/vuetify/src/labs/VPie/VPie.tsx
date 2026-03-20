@@ -293,7 +293,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
       const tooltipDefaults = {
         VAvatar: {
-          size: typeof props.tooltip === 'object' ? props.tooltip.avatarSize : 28,
+          size: typeof props.tooltip === 'object' ? (props.tooltip.avatarSize ?? 28) : 28,
         },
       }
 

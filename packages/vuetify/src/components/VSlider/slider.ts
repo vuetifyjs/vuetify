@@ -6,7 +6,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, nextTick, provide, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 
 // Types
@@ -24,7 +24,7 @@ type SliderProvide = {
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
-  disabled: Ref<boolean | null | undefined>
+  disabled: Ref<boolean>
   elevation: Ref<number | string | undefined>
   min: Ref<number>
   max: Ref<number>
@@ -35,7 +35,7 @@ type SliderProvide = {
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number | void
   position: (val: number) => number
-  readonly: Ref<boolean | null | undefined>
+  readonly: Ref<boolean>
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
@@ -99,9 +99,9 @@ export const makeSliderProps = propsFactory({
   },
   thumbColor: String,
   thumbLabel: {
-    type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
+    type: [Boolean, String] as PropType<boolean | 'always' | 'hover' | undefined>,
     default: undefined,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => typeof v === 'boolean' || v === 'always' || v === 'hover',
   },
   thumbSize: {
     type: [Number, String],
@@ -136,7 +136,7 @@ export const makeSliderProps = propsFactory({
 
   ...makeRoundedProps(),
   ...makeElevationProps({
-    elevation: 2,
+    elevation: 1,
   }),
   ripple: {
     type: Boolean,
@@ -314,6 +314,12 @@ export const useSlider = ({
     window.addEventListener('mousemove', onMouseMove, moveListenerOptions)
     window.addEventListener('mouseup', onSliderMouseUp, { passive: false })
   }
+
+  onScopeDispose(() => {
+    window.removeEventListener('touchmove', onMouseMove)
+    window.removeEventListener('mousemove', onMouseMove)
+    window.removeEventListener('mouseup', onSliderMouseUp)
+  })
 
   const position = (val: number) => {
     const percentage = (val - min.value) / (max.value - min.value) * 100

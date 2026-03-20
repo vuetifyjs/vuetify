@@ -33,7 +33,6 @@
     "intervalMinutes": "The number of minutes the intervals are in the `day` view. A common interval is 60 minutes so the intervals are an hour.",
     "intervalStyle": "Returns CSS styling to apply to the interval.",
     "locale": "The locale of the calendar.",
-    "localeFirstDayOfYear": "Sets the day that determines the first week of the year, starting with 0 for **Sunday**. For ISO 8601 this should be 4.",
     "maxDays": "The maximum number of days to display in the custom calendar if an `end` day is not set.",
     "minWeeks": "The minimum number of weeks to display in the `month` or `week` view.",
     "monthFormat": "Formats month string that appears in a day to specified locale",
@@ -48,8 +47,7 @@
     "type": "A string which is one of `month`, `week`, `day`, `4day`, `custom-weekly`, `custom-daily`, and `category`. The custom types look at the `start` and `end` dates passed to the component as opposed to the `value`.",
     "v-model": "Sets the `value` property but also updates it when the link of a day is clicked.",
     "value": "A date in the format of `YYYY-MM-DD` which determines what span of time for the calendar.",
-    "weekdayFormat": "Formats day of the week string that appears in the header to specified locale",
-    "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used."
+    "weekdayFormat": "Formats day of the week string that appears in the header to specified locale"
   },
   "slots": {
     "category": "The content placed in a category header for the `category` type. The category variable is null for events with invalid (non-string) categories.",

@@ -19,7 +19,7 @@
           <template v-slot:default="{ isActive }">
             <v-card rounded="lg">
               <v-card-title class="d-flex justify-space-between align-center">
-                <div class="text-h5 text-medium-emphasis ps-2">
+                <div class="text-headline-small text-medium-emphasis ps-2">
                   Invite John to connect
                 </div>
 
@@ -47,7 +47,7 @@
                   persistent-counter
                 ></v-textarea>
 
-                <div class="text-overline mb-2">💎 PREMIUM</div>
+                <div class="text-label-medium mb-2">💎 PREMIUM</div>
 
                 <div class="text-medium-emphasis mb-1">
                   Share with unlimited people and get more insights about your network. Try Premium Free for 30 days.
@@ -112,7 +112,7 @@
 
             <v-list-item min-height="24">
               <template v-slot:subtitle>
-                <div class="text-caption">
+                <div class="text-body-small">
                   Shared with John + 1 more
                 </div>
               </template>

@@ -2,7 +2,7 @@
 import { VSlider } from '../VSlider'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent, wait } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -77,8 +77,7 @@ describe('VSlider', () => {
 
     expect(screen.getByCSS('.v-slider-thumb__label')).not.toBeVisible()
     await userEvent.click(screen.getByCSS('.v-slider-thumb'))
-    await wait(100)
-    expect(screen.getByCSS('.v-slider-thumb__label')).toBeVisible()
+    await expect.element(screen.getByCSS('.v-slider-thumb__label')).toBeVisible()
   })
 
   it('should respect step prop', async () => {
@@ -132,7 +131,7 @@ describe('VSlider', () => {
       />
     ))
 
-    await commands.drag([15, 15], [250, 15])
+    await commands.drag([8, 16], [250, 16])
 
     expect(onStart).toHaveBeenCalledExactlyOnceWith(0)
     expect(onEnd).toHaveBeenCalledOnce()
@@ -166,7 +165,5 @@ describe('VSlider', () => {
     expect(new Set(values)).toEqual(new Set([2.0011, 6.0051, 10]))
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

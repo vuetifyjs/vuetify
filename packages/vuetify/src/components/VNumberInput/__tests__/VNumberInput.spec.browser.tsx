@@ -3,8 +3,8 @@ import { VNumberInput } from '../VNumberInput'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { click, commands, render, screen, userEvent } from '@test'
+import { nextTick, ref } from 'vue'
 
 describe('VNumberInput', () => {
   it.each([
@@ -71,18 +71,37 @@ describe('VNumberInput', () => {
         <VNumberInput v-model={ model.value } readonly />
       ))
 
-      await userEvent.click(screen.getByTestId('increment'))
+      await click(screen.getByTestId('increment'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(screen.getByTestId('decrement'))
+      await click(screen.getByTestId('decrement'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(element)
+      await click(element)
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe(1)
 
       await userEvent.keyboard('{ArrowDown}')
       expect(model.value).toBe(1)
+    })
+
+    // https://github.com/vuetifyjs/vuetify/issues/22677
+    it('does not mutate model when typing non-digit chars while readonly', async () => {
+      const model = ref(42)
+
+      const { element } = render(() => (
+        <VNumberInput v-model={ model.value } readonly />
+      ))
+
+      await userEvent.click(element)
+      // Select all text and type a non-digit character
+      await userEvent.keyboard('{Control>}a{/Control}')
+      await userEvent.keyboard(' ')
+      expect(model.value).toBe(42)
+
+      // Type arbitrary non-digit chars
+      await userEvent.keyboard('abc')
+      expect(model.value).toBe(42)
     })
 
     it('prevents mutation in readonly form', async () => {
@@ -94,13 +113,13 @@ describe('VNumberInput', () => {
         </VForm>
       ))
 
-      await userEvent.click(screen.getByTestId('increment'))
+      await click(screen.getByTestId('increment'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(screen.getByTestId('decrement'))
+      await click(screen.getByTestId('decrement'))
       expect(model.value).toBe(1)
 
-      await userEvent.click(element)
+      await click(element)
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe(1)
 
@@ -157,24 +176,52 @@ describe('VNumberInput', () => {
   })
 
   describe('native number input quirks', () => {
-    it('should not bypass min', async () => {
+    it('should auto-clamp after interaction', async () => {
       const model = ref(1)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
+      await expect.element(screen.getByCSS('input')).toHaveValue('1')
+      expect(model.value).toBe(1)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.tab()
+
       await expect.element(screen.getByCSS('input')).toHaveValue('5')
       expect(model.value).toBe(5)
     })
 
-    it('should not bypass max', async () => {
+    it('should apply increments within the range', async () => {
       const model = ref(20)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      await expect.element(screen.getByCSS('input')).toHaveValue('15')
-      expect(model.value).toBe(15)
+      await expect.element(screen.getByCSS('input')).toHaveValue('20')
+      expect(model.value).toBe(20)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{arrowDown}')
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('14')
+      expect(model.value).toBe(14)
+    })
+
+    it('should auto-correct when incrementing against the limit', async () => {
+      const model = ref(-33)
+      render(() =>
+        <VNumberInput min={ -10 } max={ 20 } v-model={ model.value } precision={ 2 } step={ 0.5 } />
+      )
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('-33.00')
+      expect(model.value).toBe(-33)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{arrowDown}')
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('-10')
+      expect(model.value).toBe(-10)
     })
 
     it('supports decimal step', async () => {
@@ -239,7 +286,7 @@ describe('VNumberInput', () => {
       <VNumberInput onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
@@ -253,7 +300,7 @@ describe('VNumberInput', () => {
       { precision: 1, text: '200.99', expected: 200.9 },
       { precision: 2, text: ' 1,250.32\n', expected: 1250.32 },
       { precision: 0, text: '1\'024.00 meters', expected: 1024 },
-      { precision: 0, text: '- 1123.', expected: -1123 },
+      { precision: 0, text: '-1123.', expected: -1123 },
     ])('should parse numbers correctly', async ({ precision, text, expected }) => {
       const model = ref(null)
       const { element } = render(() => (
@@ -264,9 +311,10 @@ describe('VNumberInput', () => {
       ))
       const input = element.querySelector('input') as HTMLInputElement
       input.focus()
-      navigator.clipboard.writeText(text)
+      const lock = await commands.getLock()
+      await navigator.clipboard.writeText(text)
       await userEvent.paste()
-      input.blur()
+      await commands.releaseLock(lock)
       expect(model.value).toBe(expected)
     })
 
@@ -291,8 +339,10 @@ describe('VNumberInput', () => {
       ))
       const input = element.querySelector('input') as HTMLInputElement
       input.focus()
-      navigator.clipboard.writeText(text)
+      const lock = await commands.getLock()
+      await navigator.clipboard.writeText(text)
       await userEvent.paste()
+      await commands.releaseLock(lock)
       input.blur()
       expect(model.value).toBe(expected)
     })
@@ -339,6 +389,79 @@ describe('VNumberInput', () => {
       await userEvent.keyboard(typing)
       await userEvent.click(document.body)
       expect(screen.getByCSS('input')).toHaveValue(expected)
+    })
+  })
+
+  describe('should indicate range error', () => {
+    // enable in 4.0.0
+    it.todo('on mount', async () => {
+      const model = ref(-13)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          min={ 5 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      await nextTick()
+      expect(model.value).toBe(-13)
+      expect(onChange).not.toHaveBeenCalled()
+      expect(screen.getByCSS('.v-input')).toHaveClass('v-input--error')
+    })
+
+    it('while typing', async () => {
+      const model = ref(null)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          min={ 5 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      const vInput = screen.getByCSS('.v-input')
+
+      await userEvent.tab()
+      await userEvent.keyboard('1')
+      expect(vInput).toHaveClass('v-input--error')
+
+      await userEvent.keyboard('2')
+      expect(vInput).not.toHaveClass('v-input--error')
+      expect(model.value).toBe(12)
+
+      await userEvent.keyboard('{arrowLeft}{arrowLeft}-')
+      expect(vInput).toHaveClass('v-input--error')
+    })
+
+    it('while typing', async () => {
+      const model = ref(0)
+      const onChange = vi.fn()
+      render(() => (
+        <VNumberInput
+          v-model={ model.value }
+          max={ 50 }
+          onUpdate:modelValue={ onChange }
+        />
+      ))
+
+      await nextTick()
+      const vInput = screen.getByCSS('.v-input')
+      expect(vInput).not.toHaveClass('v-input--error')
+
+      model.value = 50.55 // will be rounded to 51
+      await nextTick()
+      expect(vInput).toHaveClass('v-input--error')
+
+      model.value = 99
+      await nextTick()
+      expect(vInput).toHaveClass('v-input--error')
+
+      model.value = 45
+      await nextTick()
+      expect(vInput).not.toHaveClass('v-input--error')
     })
   })
 })

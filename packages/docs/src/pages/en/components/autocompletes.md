@@ -99,15 +99,19 @@ This is required for virtual scrolling to work properly — without it, only par
 
 <ExamplesExample file="v-autocomplete/slot-item-and-vbind-props" />
 
+#### Menu footer
+
+The **menu-footer** slot allows you to add custom content at the bottom of the dropdown menu, such as action buttons for clearing the selection or closing the menu.
+
+<ExamplesExample file="v-autocomplete/slot-menu-footer" />
+
 ### Misc
 
-<!--
 #### Asynchronous items
 
-Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
+Sometimes you need to load data externally based upon a search query. Simply bind to the `search` prop with the **v-model** and watch for the changes to the reactive variable. Make sure to apply debounce and avoid race conditions.
 
 <ExamplesExample file="v-autocomplete/misc-asynchronous-items" />
--->
 
 #### State selector
 
@@ -116,8 +120,6 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 <ExamplesExample file="v-autocomplete/misc-state-selector" />
 
 #### New tab
-
-<DocIntroduced version="3.3.0" />
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 

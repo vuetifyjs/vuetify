@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Előző hónap',
       nextMonth: 'Következő hónap',
       selectYear: 'Év kiválasztása',
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectMonth: 'Hónap kiválasztása',
       selectDate: '{0}',
       currentDate: 'Ma, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'de',
     pm: 'du',
     title: 'Válassza ki az időpontot',
+    hour: 'Óra',
+    minute: 'Perc',
+    second: 'Másodperc',
+    notAllowed: 'Az érték nem engedélyezett',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
   },
+  command: {
+    search: 'Írjon be parancsot vagy keressen...',
+  },
   hotkey: {
     then: 'majd',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Szóköz',
     plus: 'plusz',
     shortcut: 'Billentyűparancs: {0}',
+    or: 'vagy',
   },
   video: {
     play: 'Lejátszás',

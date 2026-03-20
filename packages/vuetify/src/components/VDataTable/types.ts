@@ -19,7 +19,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   minWidth?: number | string
   maxWidth?: number | string
   nowrap?: boolean
-  intent?: number
+  indent?: number
 
   headerProps?: Record<string, any>
   cellProps?: HeaderCellProps
@@ -49,6 +49,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
 export interface DataTableItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   key: any
   index: number
+  virtualIndex?: number
   columns: {
     [key: string]: any
   }

@@ -3,7 +3,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
-import { isMaskDelimiter, makeMaskProps, useMask } from '@/composables/mask'
+import { makeMaskProps, useMask } from '@/composables/mask'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -47,11 +47,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       val => props.mask ? mask.mask(mask.unmask(val)) : val,
       val => {
         if (props.mask) {
-          const valueWithoutDelimiters = removeMaskDelimiters(val)
-
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const newMaskedValue = mask.mask(valueWithoutDelimiters)
+          const newMaskedValue = mask.mask(mask.unmask(val))
           const newUnmaskedValue = mask.unmask(newMaskedValue)
 
           const newCaretPosition = getNewCaretPosition({
@@ -71,10 +69,6 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
-    function removeMaskDelimiters (val: string): string {
-      return val.split('').filter(ch => !isMaskDelimiter(ch)).join('')
-    }
-
     function getNewCaretPosition ({
       oldValue,
       newValue,
@@ -91,13 +85,13 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
       if (inputAction.value === 'Backspace') {
         newCaret = oldCaret - 1
-        while (newCaret > 0 && isMaskDelimiter(newValue[newCaret - 1])) newCaret--
+        while (newCaret > 0 && mask.isDelimiter(newValue, newCaret - 1)) newCaret--
       } else if (inputAction.value === 'Delete') {
         newCaret = oldCaret
       } else { // insertion
         newCaret = oldCaret + 1
-        while (isMaskDelimiter(newValue[newCaret])) newCaret++
-        if (isMaskDelimiter(newValue[oldCaret])) newCaret++
+        while (mask.isDelimiter(newValue, newCaret)) newCaret++
+        if (mask.isDelimiter(newValue, oldCaret)) newCaret++
       }
 
       return newCaret
@@ -127,15 +121,15 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     async function onCut (e: Event) {
       e.preventDefault()
 
-      copySelectionToClipboard(e)
-      deleteSelection(e)
+      await copySelectionToClipboard(e)
+      await deleteSelection(e)
     }
 
     async function onPaste (e: ClipboardEvent) {
       e.preventDefault()
 
       const inputElement = e.target as HTMLInputElement
-      const pastedString = removeMaskDelimiters(e.clipboardData?.getData('text') || '')
+      const pastedString = e.clipboardData?.getData('text') || ''
 
       if (!pastedString) return
 
@@ -150,12 +144,12 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     }
 
-    function copySelectionToClipboard (e: Event) {
+    async function copySelectionToClipboard (e: Event) {
       const inputElement = e.target as HTMLInputElement
       const start = inputElement.selectionStart || 0
       const end = inputElement.selectionEnd || 0
       const selectedText = inputElement.value.substring(start, end)
-      navigator.clipboard.writeText(selectedText)
+      await navigator.clipboard.writeText(selectedText)
     }
 
     async function deleteSelection (e: Event) {
@@ -194,8 +188,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     async function replaceSelection (inputElement: HTMLInputElement, pastedCharacters: string[]) {
       caretPosition.value = inputElement.selectionStart || 0
       for (let i = 0; i < pastedCharacters.length; i++) {
-        await replaceCharacter(caretPosition.value, pastedCharacters[i])
-        caretPosition.value++
+        if (await replaceCharacter(caretPosition.value, pastedCharacters[i])) {
+          caretPosition.value++
+        }
       }
     }
 
@@ -203,10 +198,18 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       let targetIndex = index
 
       // Find next non-delimiter position
-      while (targetIndex < model.value.length && isMaskDelimiter(model.value[targetIndex])) targetIndex++
+      while (targetIndex < model.value.length && mask.isDelimiter(model.value, targetIndex)) {
+        targetIndex++
+      }
 
-      model.value = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
-      await nextTick()
+      const newValue = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
+
+      if (mask.isValid(newValue)) {
+        model.value = newValue
+        await nextTick()
+        return true
+      }
+      return false
     }
 
     useRender(() => {
@@ -217,6 +220,8 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           { ...textFieldProps }
           v-model={ model.value }
           ref={ vTextFieldRef }
+          class={['v-mask-input', props.class]}
+          style={ props.style }
           validationValue={ validationValue.value }
           onCut={ onCut }
           onPaste={ onPaste }

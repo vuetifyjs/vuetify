@@ -1,35 +1,33 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-chip-group v-model="selectedSize" class="mb-4" mandatory row>
-        <v-chip
-          v-for="size in sizes"
-          :key="size"
-          :value="size"
-          color="primary"
-          variant="outlined"
-        >
-          {{ size }} items
-        </v-chip>
-      </v-chip-group>
-
-      <v-data-table-virtual
-        :headers="headers"
-        :items="items"
-        height="400"
-        item-key="id"
-        fixed-header
+  <v-container>
+    <v-chip-group v-model="selectedSize" class="mb-4" mandatory row>
+      <v-chip
+        v-for="size in sizes"
+        :key="size"
+        :value="size"
+        color="primary"
+        variant="outlined"
       >
-        <template v-slot:item="{ columns, internalItem, props, itemRef }">
-          <tr v-bind="props" :ref="itemRef">
-            <td v-for="column in columns" :key="column.key">
-              {{ internalItem.raw[column.key] }}
-            </td>
-          </tr>
-        </template>
-      </v-data-table-virtual>
-    </v-container>
-  </v-app>
+        {{ size }} items
+      </v-chip>
+    </v-chip-group>
+
+    <v-data-table-virtual
+      :headers="headers"
+      :items="items"
+      height="400"
+      item-key="id"
+      fixed-header
+    >
+      <template v-slot:item="{ columns, internalItem, props, itemRef }">
+        <tr v-bind="props" :ref="itemRef">
+          <td v-for="column in columns" :key="column.key">
+            {{ internalItem.raw[column.key] }}
+          </td>
+        </tr>
+      </template>
+    </v-data-table-virtual>
+  </v-container>
 </template>
 
 <script setup>

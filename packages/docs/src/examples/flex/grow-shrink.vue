@@ -2,7 +2,7 @@
   <v-container>
     <v-row
       class="flex-nowrap bg-surface-variant"
-      no-gutters
+      density="compact"
     >
       <v-col
         class="flex-grow-0 flex-shrink-0"
