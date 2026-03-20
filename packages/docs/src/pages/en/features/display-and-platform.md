@@ -79,6 +79,8 @@ These ranges power the various additional `AndUp` / `AndDown` properties accessi
   lgAndUp: boolean // > 1280px
   xlAndDown: boolean // < 2559px
   xlAndUp: boolean // > 1920px
+  xxlAndDown: boolean // always true
+  xxlAndUp: boolean // >= 2138px
 }
 ```
 
@@ -162,6 +164,8 @@ In the following example, we use a switch statement and the current breakpoint n
   lgAndUp: boolean // > 1144
   xlAndDown: boolean // < 2138
   xlAndUp: boolean // > 1544
+  xxlAndDown: boolean // >= 0 (always true)
+  xxlAndUp: boolean // >= 2138
 
   // true if screen width < mobileBreakpoint
   mobile: boolean

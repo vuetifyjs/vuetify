@@ -140,7 +140,7 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "dependencies": {
-    "@vuetify/v0": "^0.1.5"
+    "@vuetify/v0": "^0.1.8"
   },
   "devDependencies": {
     "@date-io/core": "3.2.0",
