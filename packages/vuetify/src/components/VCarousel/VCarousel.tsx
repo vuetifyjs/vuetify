@@ -13,7 +13,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, shallowRef, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -41,6 +41,7 @@ export const makeVCarouselProps = propsFactory({
     validator: (value: string | number) => Number(value) > 0,
   },
   progress: [Boolean, String],
+  stopOnHover: Boolean,
   verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
 
   ...makeVWindowProps({
@@ -82,6 +83,8 @@ export const VCarousel = genericComponent<new <T>(
     const windowRef = ref<VWindow>()
 
     let slideTimeout = -1
+    const isHovered = shallowRef(false)
+
     watch(model, restartTimeout)
     watch(() => props.interval, restartTimeout)
     watch(() => props.cycle, val => {
@@ -92,7 +95,7 @@ export const VCarousel = genericComponent<new <T>(
     onMounted(startTimeout)
 
     function startTimeout () {
-      if (!props.cycle || !windowRef.value) return
+      if (!props.cycle || !windowRef.value || isHovered.value) return
 
       slideTimeout = window.setTimeout(
         windowRef.value.group.next,
@@ -104,6 +107,12 @@ export const VCarousel = genericComponent<new <T>(
       window.clearTimeout(slideTimeout)
       window.requestAnimationFrame(startTimeout)
     }
+
+    watch(isHovered, val => {
+      if (!props.stopOnHover) return
+      if (val) window.clearTimeout(slideTimeout)
+      else restartTimeout()
+    })
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
       if (
@@ -145,6 +154,8 @@ export const VCarousel = genericComponent<new <T>(
             { height: convertToUnit(props.height) },
             props.style,
           ]}
+          onMouseenter={ () => isHovered.value = true }
+          onMouseleave={ () => isHovered.value = false }
         >
           {{
             default: slots.default,

@@ -10,6 +10,7 @@
     "nextIcon": "The displayed icon for forcing pagination to the next item.",
     "prevIcon": "The displayed icon for forcing pagination to the previous item.",
     "progress": "Displays a carousel progress bar. Requires the **cycle** prop and **interval**.",
+    "stopOnHover": "Pauses the cycle when the cursor is hovering over the carousel. Requires the **cycle** prop.",
     "showArrows": "Displays arrows for next/previous navigation.",
     "verticalArrows": "Displays the navigation arrows vertically instead of horizontally.",
     "verticalDelimiters": "Displays carousel delimiters vertically."
