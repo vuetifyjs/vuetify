@@ -37,6 +37,7 @@
     "update:sortBy": "Emits when the **sortBy** prop is updated."
   },
   "exposed": {
-    "calculateVisibleItems": "Trigger updating the currently rendered items based on scroll position."
+    "calculateVisibleItems": "Trigger updating the currently rendered items based on scroll position.",
+    "containerRef": "Reference to the internal scroll container element (`.v-table__wrapper`). Use this to attach `IntersectionObserver`, scroll listeners, or implement infinite scroll without relying on internal class names."
   }
 }
