@@ -28,6 +28,7 @@ export const rootTypes = {
   card: 'image, heading',
   'card-avatar': 'image, list-item-avatar',
   chip: 'chip',
+  'chip-group': 'chip@4',
   'date-picker': 'list-item, heading, divider, date-picker-options, date-picker-days, actions',
   'date-picker-options': 'text, avatar@2',
   'date-picker-days': 'avatar@28',
