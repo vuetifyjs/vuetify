@@ -49,6 +49,14 @@ export const makeVMonthPickerProps = propsFactory({
   max: String,
   multiple: [Boolean, String] as PropType<boolean | 'range'>,
   allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
+  monthsColumns: {
+    type: [Number, String],
+    default: 4,
+  },
+  yearsColumns: {
+    type: [Number, String],
+    default: 4,
+  },
   transition: {
     type: String,
     default: 'picker-transition',
@@ -172,6 +180,10 @@ export const VMonthPicker = genericComponent<new <
           class="v-month-picker"
           color={ props.color }
           title={ props.title }
+          style={{
+            '--v-month-picker-months-columns': props.monthsColumns,
+            '--v-month-picker-years-columns': props.yearsColumns,
+          }}
         >
           {{
             header: () => (

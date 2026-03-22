@@ -8,7 +8,7 @@
 
     .v-date-picker-years__content
       width: 100%
-      grid-template-columns: repeat(4, 1fr)
+      grid-template-columns: repeat(var(--v-month-picker-years-columns, 4), 1fr)
       padding: $month-picker-content-padding
 
       > *
@@ -24,7 +24,7 @@
   .v-month-picker__months-content
     display: grid
     width: 100%
-    grid-template-columns: repeat(4, 1fr)
+    grid-template-columns: repeat(var(--v-month-picker-months-columns, 4), 1fr)
     padding: $month-picker-content-padding
 
     > *
