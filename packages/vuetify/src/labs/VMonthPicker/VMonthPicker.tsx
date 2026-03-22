@@ -19,7 +19,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, type Ref, shallowRef, toRef, watch } from 'vue'
-import { createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -164,6 +164,11 @@ export const VMonthPicker = genericComponent<new <
       })
     })
 
+    const monthRows = computed(() => {
+      const cols = Number(props.monthsColumns) || 4
+      return chunkArray(months.value, cols)
+    })
+
     function isMonthAllowed (month: number) {
       if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
         return props.allowedMonths.includes(month)
@@ -246,60 +251,68 @@ export const VMonthPicker = genericComponent<new <
                           class="v-month-picker__months-content"
                           onMouseleave={ clearPreview }
                         >
-                          { months.value.map((month, i) => {
-                            const selected = isMonthSelected(i)
-                            const rangeStart = isMonthRangeStart(i)
-                            const rangeEnd = isMonthRangeEnd(i)
-                            const rangeMiddle = isMonthRangeMiddle(i)
-                            const previewStart = isMonthPreviewStart(i)
-                            const previewEnd = isMonthPreviewEnd(i)
-                            const previewMiddle = isMonthPreviewMiddle(i)
-                            const previewed = isMonthPreviewed(i)
-
-                            const btnProps = {
-                              active: selected && !rangeMiddle,
-                              color: (selected || month.isCurrent) ? props.color : undefined,
-                              disabled: month.isDisabled,
-                              rounded: true,
-                              text: month.text,
-                              variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
-                              'aria-label': month.isCurrent
-                                ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
-                                : month.label,
-                              'aria-current': month.isCurrent ? 'date' : undefined,
-                              'aria-selected': selected,
-                              onClick: () => selectMonth(i),
-                              onMouseenter: () => previewMonth(i),
-                              onFocus: () => previewMonth(i),
-                              onBlur: clearPreview,
-                            } as const
-
+                          { monthRows.value.map((row, rowIndex) => {
+                            const cols = Number(props.monthsColumns) || 4
                             return (
-                              <div
-                                class={[
-                                  'v-month-picker__month',
-                                  {
-                                    'v-month-picker__month--current': month.isCurrent,
-                                    'v-month-picker__month--selected': selected,
-                                    'v-month-picker__month--range-start': rangeStart,
-                                    'v-month-picker__month--range-end': rangeEnd,
-                                    'v-month-picker__month--range-middle': rangeMiddle,
-                                    'v-month-picker__month--preview-start': previewStart,
-                                    'v-month-picker__month--preview-end': previewEnd,
-                                    'v-month-picker__month--preview-middle': previewMiddle,
-                                    'v-month-picker__month--previewed': previewed,
-                                  },
-                                ]}
-                              >
-                                { slots.month?.({
-                                  month,
-                                  i,
-                                  props: btnProps,
-                                }) ?? (
-                                  <VBtn
-                                    { ...btnProps }
-                                  />
-                                )}
+                              <div class="v-month-picker__months-row">
+                                { row.map((month, colIndex) => {
+                                  const i = rowIndex * cols + colIndex
+                                  const selected = isMonthSelected(i)
+                                  const rangeStart = isMonthRangeStart(i)
+                                  const rangeEnd = isMonthRangeEnd(i)
+                                  const rangeMiddle = isMonthRangeMiddle(i)
+                                  const previewStart = isMonthPreviewStart(i)
+                                  const previewEnd = isMonthPreviewEnd(i)
+                                  const previewMiddle = isMonthPreviewMiddle(i)
+                                  const previewed = isMonthPreviewed(i)
+
+                                  const btnProps = {
+                                    active: selected && !rangeMiddle,
+                                    color: (selected || month.isCurrent) ? props.color : undefined,
+                                    disabled: month.isDisabled,
+                                    rounded: true,
+                                    text: month.text,
+                                    variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
+                                    'aria-label': month.isCurrent
+                                      ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
+                                      : month.label,
+                                    'aria-current': month.isCurrent ? 'date' : undefined,
+                                    'aria-selected': selected,
+                                    onClick: () => selectMonth(i),
+                                    onMouseenter: () => previewMonth(i),
+                                    onFocus: () => previewMonth(i),
+                                    onBlur: clearPreview,
+                                  } as const
+
+                                  return (
+                                    <div
+                                      class={[
+                                        'v-month-picker__month',
+                                        {
+                                          'v-month-picker__month--current': month.isCurrent,
+                                          'v-month-picker__month--selected': selected,
+                                          'v-month-picker__month--range-start': rangeStart,
+                                          'v-month-picker__month--range-end': rangeEnd,
+                                          'v-month-picker__month--range-middle': rangeMiddle,
+                                          'v-month-picker__month--preview-start': previewStart,
+                                          'v-month-picker__month--preview-end': previewEnd,
+                                          'v-month-picker__month--preview-middle': previewMiddle,
+                                          'v-month-picker__month--previewed': previewed,
+                                        },
+                                      ]}
+                                    >
+                                      { slots.month?.({
+                                        month,
+                                        i,
+                                        props: btnProps,
+                                      }) ?? (
+                                        <VBtn
+                                          { ...btnProps }
+                                        />
+                                      )}
+                                    </div>
+                                  )
+                                })}
                               </div>
                             )
                           })}

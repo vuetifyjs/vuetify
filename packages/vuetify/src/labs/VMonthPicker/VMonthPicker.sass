@@ -22,23 +22,23 @@
     overflow: hidden
 
   .v-month-picker__months-content
-    display: grid
     width: 100%
-    grid-template-columns: repeat(var(--v-month-picker-months-columns, 4), 1fr)
     padding: $month-picker-content-padding
 
-    > *
-      padding: $month-picker-cell-padding
-
-      > .v-btn
-        width: 100%
+  .v-month-picker__months-row
+    display: grid
+    grid-template-columns: repeat(var(--v-month-picker-months-columns, 4), 1fr)
 
   .v-month-picker__month
     display: flex
     align-items: center
     justify-content: center
     position: relative
+    padding: $month-picker-cell-padding
     --range-selection-rounding: #{$month-picker-range-selection-border-radius}
+
+    > .v-btn
+      width: 100%
 
     &--selected
       .v-btn--active
@@ -53,11 +53,12 @@
 
     &--range-start::after,
     &--range-end::after,
-    &--range-middle::before
+    &--range-middle::after
       content: ''
       position: absolute
       inset: $month-picker-range-selection-inset 0
       background-color: rgba(var(--v-theme-surface-variant), .1)
+      pointer-events: none
 
     &--range-start::after
       left: $month-picker-range-selection-inset
@@ -76,11 +77,12 @@
 
     &--preview-start::after,
     &--preview-end::after,
-    &--preview-middle::before
+    &--preview-middle::after
       content: ''
       position: absolute
       inset: $month-picker-range-selection-inset 0
       background-color: rgba(var(--v-theme-surface-variant), .06)
+      pointer-events: none
 
     &--preview-start::after
       left: $month-picker-range-selection-inset
@@ -89,3 +91,21 @@
     &--preview-end::after
       right: $month-picker-range-selection-inset
       border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--range-middle,
+    &--range-start,
+    &--preview-middle,
+    &--preview-start
+      &:last-of-type::after
+        right: $month-picker-range-selection-inset
+        border-top-right-radius: var(--range-selection-rounding)
+        border-bottom-right-radius: var(--range-selection-rounding)
+
+    &--range-middle,
+    &--range-end,
+    &--preview-middle,
+    &--preview-end
+      &:first-of-type::after
+        left: $month-picker-range-selection-inset
+        border-top-left-radius: var(--range-selection-rounding)
+        border-bottom-left-radius: var(--range-selection-rounding)
