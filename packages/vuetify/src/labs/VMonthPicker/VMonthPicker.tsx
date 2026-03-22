@@ -20,6 +20,7 @@ import { MaybeTransition } from '@/composables/transition'
 // Utilities
 import { computed, type Ref, shallowRef, toRef, watch } from 'vue'
 import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { isCssColor } from '@/util/colorUtils'
 
 // Types
 import type { PropType } from 'vue'
@@ -55,7 +56,7 @@ export const makeVMonthPickerProps = propsFactory({
   },
   yearsColumns: {
     type: [Number, String],
-    default: 4,
+    default: 3,
   },
   transition: {
     type: String,
@@ -188,6 +189,9 @@ export const VMonthPicker = genericComponent<new <
           style={{
             '--v-month-picker-months-columns': props.monthsColumns,
             '--v-month-picker-years-columns': props.yearsColumns,
+            '--v-month-picker-range-color': props.color
+              ? isCssColor(props.color) ? props.color : `rgb(var(--v-theme-${props.color}))`
+              : undefined,
           }}
         >
           {{
@@ -235,6 +239,7 @@ export const VMonthPicker = genericComponent<new <
                     <VDatePickerYears
                       key="years"
                       class="flex-grow-1"
+                      color={ props.color }
                       modelValue={ year.value }
                       min={ props.min }
                       max={ props.max }

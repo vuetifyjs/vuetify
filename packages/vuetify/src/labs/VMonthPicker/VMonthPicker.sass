@@ -42,8 +42,8 @@
 
     &--selected
       .v-btn--active
-        background-color: rgb(var(--v-theme-surface-variant))
-        color: rgb(var(--v-theme-on-surface-variant))
+        background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 12%, transparent)
+        color: var(--v-month-picker-range-color, rgb(var(--v-theme-on-surface-variant)))
 
     &--range-start,
     &--range-end
@@ -57,7 +57,7 @@
       content: ''
       position: absolute
       inset: $month-picker-range-selection-inset 0
-      background-color: rgba(var(--v-theme-surface-variant), .1)
+      background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 10%, transparent)
       pointer-events: none
 
     &--range-start::after
@@ -81,7 +81,7 @@
       content: ''
       position: absolute
       inset: $month-picker-range-selection-inset 0
-      background-color: rgba(var(--v-theme-surface-variant), .06)
+      background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 6%, transparent)
       pointer-events: none
 
     &--preview-start::after
