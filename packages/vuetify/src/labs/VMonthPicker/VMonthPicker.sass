@@ -6,18 +6,54 @@
   .v-month-picker
     width: $month-picker-width
 
-    .v-date-picker-months
-      height: auto
-
-
-    .v-date-picker-months__content
-      width: 100%
-      grid-template-columns: repeat(4, 1fr)
-      padding: $month-picker-content-padding
-      grid-gap: $month-picker-content-gap
-
     .v-date-picker-years__content
       width: 100%
       grid-template-columns: repeat(4, 1fr)
       padding: $month-picker-content-padding
-      grid-gap: $month-picker-content-gap
+
+      > *
+        padding: $month-picker-cell-padding
+
+        > .v-btn
+          width: 100%
+
+  .v-month-picker__months-content
+    display: grid
+    width: 100%
+    grid-template-columns: repeat(4, 1fr)
+    padding: $month-picker-content-padding
+
+    > *
+      padding: $month-picker-cell-padding
+
+      > .v-btn
+        width: 100%
+
+  .v-month-picker__month
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+    --range-selection-rounding: #{$month-picker-range-selection-border-radius}
+
+    &--range-start,
+    &--range-end
+      .v-btn
+        position: relative
+        z-index: 1
+
+    &--range-start::after,
+    &--range-end::after,
+    &--range-middle::before
+      content: ''
+      position: absolute
+      inset: $month-picker-range-selection-inset 0
+      background-color: rgba(var(--v-theme-surface-variant), .1)
+
+    &--range-start::after
+      left: $month-picker-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--range-end::after
+      right: $month-picker-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0

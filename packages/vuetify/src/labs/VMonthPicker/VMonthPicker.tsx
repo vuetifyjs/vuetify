@@ -5,7 +5,6 @@ import './VMonthPicker.sass'
 import { VFadeTransition } from '@/components/transitions'
 import { VBtn } from '@/components/VBtn'
 import { VDatePickerHeader } from '@/components/VDatePicker/VDatePickerHeader'
-import { VDatePickerMonths } from '@/components/VDatePicker/VDatePickerMonths'
 import { VDatePickerYears } from '@/components/VDatePicker/VDatePickerYears'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
@@ -13,49 +12,79 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useMonthPicker } from './useMonthPicker'
+import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, type Ref } from 'vue'
+import { createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 
 export type VMonthPickerSlots = {
   header: never
   title: never
   actions: never
+  month: {
+    month: {
+      text: string
+      label: string
+      value: number
+    }
+    i: number
+    props: Record<string, unknown>
+  }
 }
 
 export const makeVMonthPickerProps = propsFactory({
   modelValue: {
-    type: String as PropType<string | null>,
+    type: null as any as PropType<string | string[] | null>,
     default: null,
   },
   min: String,
   max: String,
+  multiple: [Boolean, String] as PropType<boolean | 'range'>,
   allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
   ...makeVPickerProps({
     title: 'Select month', // later: '$vuetify.monthPicker.title'
   }),
 }, 'VMonthPicker')
 
-export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
+export const VMonthPicker = genericComponent<new <
+  Multiple extends boolean | 'range' = false,
+  TModel = Multiple extends true | 'range' ? string[] : string | null,
+> (
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+    multiple?: Multiple
+  },
+  slots: VMonthPickerSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VMonthPicker',
 
   props: makeVMonthPickerProps(),
 
   emits: {
-    'update:modelValue': (_value: string | null) => true,
+    'update:modelValue': (_value: any) => true,
   },
 
   setup (props, { slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      undefined,
+      v => (props.multiple ? wrapInArray(v) : v) as string | string[] | null,
+      v => (props.multiple ? v : v) as string | string[] | null,
+    )
+
+    const adapter = useDate()
 
     const {
       viewMode,
-      month,
       year,
       yearTransitionName,
       headerText,
@@ -63,8 +92,46 @@ export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
       nextYear,
       toggleViewMode,
       setYear,
-      setMonth,
-    } = useMonthPicker(props, model)
+      selectMonth,
+      isMonthSelected,
+      isMonthRangeStart,
+      isMonthRangeEnd,
+      isMonthRangeMiddle,
+    } = useMonthPicker(props, model as Ref<string | string[] | null>)
+
+    const months = computed(() => {
+      let date = adapter.startOfYear(adapter.date())
+      date = adapter.setYear(date, year.value)
+
+      return createRange(12).map(i => {
+        const text = adapter.format(date, 'monthShort')
+        const label = adapter.format(date, 'month')
+        const isDisabled =
+          !!(
+            !isMonthAllowed(i) ||
+            (props.min && adapter.isAfter(adapter.startOfMonth(adapter.date(props.min + '-01')), date)) ||
+            (props.max && adapter.isAfter(date, adapter.startOfMonth(adapter.date(props.max + '-01'))))
+          )
+        date = adapter.getNextMonth(date)
+
+        return {
+          isDisabled,
+          text,
+          label,
+          value: i,
+        }
+      })
+    })
+
+    function isMonthAllowed (month: number) {
+      if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
+        return props.allowedMonths.includes(month)
+      }
+      if (typeof props.allowedMonths === 'function') {
+        return props.allowedMonths(month)
+      }
+      return true
+    }
 
     useRender(() => {
       return (
@@ -123,16 +190,53 @@ export const VMonthPicker = genericComponent<VMonthPickerSlots>()({
                       onUpdate:modelValue={ setYear }
                     />
                   ) : (
-                    <VDatePickerMonths
+                    <div
                       key="months"
-                      class="flex-grow-1"
-                      modelValue={ month.value ?? undefined }
-                      year={ year.value }
-                      min={ props.min }
-                      max={ props.max }
-                      allowedMonths={ props.allowedMonths }
-                      onUpdate:modelValue={ setMonth }
-                    />
+                      class="v-month-picker__months flex-grow-1"
+                    >
+                      <div class="v-month-picker__months-content">
+                        { months.value.map((month, i) => {
+                          const selected = isMonthSelected(i)
+                          const rangeStart = isMonthRangeStart(i)
+                          const rangeEnd = isMonthRangeEnd(i)
+                          const rangeMiddle = isMonthRangeMiddle(i)
+
+                          const btnProps = {
+                            active: selected && !rangeMiddle,
+                            color: selected ? props.color : undefined,
+                            disabled: month.isDisabled,
+                            rounded: true,
+                            text: month.text,
+                            variant: (selected && !rangeMiddle) ? 'flat' : 'text',
+                            onClick: () => selectMonth(i),
+                          } as const
+
+                          return (
+                            <div
+                              class={[
+                                'v-month-picker__month',
+                                {
+                                  'v-month-picker__month--selected': selected,
+                                  'v-month-picker__month--range-start': rangeStart,
+                                  'v-month-picker__month--range-end': rangeEnd,
+                                  'v-month-picker__month--range-middle': rangeMiddle,
+                                },
+                              ]}
+                            >
+                              { slots.month?.({
+                                month,
+                                i,
+                                props: btnProps,
+                              }) ?? (
+                                <VBtn
+                                  { ...btnProps }
+                                />
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
                   )}
                 </VFadeTransition>
               </>

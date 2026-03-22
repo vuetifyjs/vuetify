@@ -1,0 +1,15 @@
+{
+  "props": {
+    "allowedMonths": "Restricts which months can be selected. Accepts an array of month numbers (0-11) or a function that receives a month number and returns a boolean.",
+    "min": "Minimum selectable date in `YYYY-MM` format.",
+    "max": "Maximum selectable date in `YYYY-MM` format.",
+    "modelValue": "The selected month in `YYYY-MM` format, or null if no month is selected. When `multiple` is set, expects an array of strings.",
+    "multiple": "Allows multiple month selections. When set to `true`, enables multi-select. When set to `'range'`, enables range selection where the first and last selected months define the range boundaries.",
+    "title": "Specify a title text for the component."
+  },
+  "slots": {
+    "header": "Slot for customizing the header area of the picker.",
+    "title": "Slot for customizing the title area of the picker.",
+    "actions": "Slot for adding action buttons at the bottom of the picker."
+  }
+}
