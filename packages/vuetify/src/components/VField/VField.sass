@@ -397,8 +397,10 @@
 
         @at-root
           #{selector.append('.v-field--rounded', &)},
-          #{selector.append('[class^="rounded-"]', &)},
-          #{selector.append('[class*=" rounded-"]', &)}
+          #{selector.append('[class*="rounded-xl"]', &)},
+          #{selector.append('[class*="rounded-pill"]', &)},
+          #{selector.append('[class*="rounded-circle"]', &)},
+          #{selector.append('[class*="rounded-shaped"]', &)}
             flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
         @at-root #{selector.append('.v-field--reverse', &)}
@@ -416,8 +418,10 @@
 
         @at-root
           #{selector.append('.v-field--rounded', &)},
-          #{selector.append('[class^="rounded-"]', &)},
-          #{selector.append('[class*=" rounded-"]', &)}
+          #{selector.append('[class*="rounded-xl"]', &)},
+          #{selector.append('[class*="rounded-pill"]', &)},
+          #{selector.append('[class*="rounded-circle"]', &)},
+          #{selector.append('[class*="rounded-shaped"]', &)}
             max-width: calc(100% - var(--v-input-control-height))
 
         &::before,
