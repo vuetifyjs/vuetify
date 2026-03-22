@@ -12,31 +12,36 @@
   .v-date-picker-month__weeks
     display: flex
     flex-direction: column
-    column-gap: $date-picker-month-column-gap
     font-size: $date-picker-month-font-size
 
   .v-date-picker-month__weekday
     font-size: $date-picker-month-font-size
 
   .v-date-picker-month__days
-    display: grid
-    grid-template-columns: repeat(var(--v-date-picker-days-in-week), min-content)
-    column-gap: $date-picker-month-column-gap
-    justify-content: space-around
     width: 100%
+
+  .v-date-picker-month__days-row
+    display: grid
+    grid-template-columns: repeat(var(--v-date-picker-days-in-week), 1fr)
+    justify-items: center
 
   .v-date-picker-month__day
     align-items: center
     display: flex
     justify-content: center
     position: relative
-    height: $date-picker-month-day-size
-    width: $date-picker-month-day-size
+    height: calc(#{$date-picker-month-day-size} + 2 * #{$date-picker-month-cell-padding})
+    padding: $date-picker-month-cell-padding
+    --range-selection-rounding: #{$date-picker-month-range-selection-border-radius}
+    width: 100%
 
-    &--selected
-      .v-btn
-        background-color: rgb(var(--v-theme-surface-variant))
-        color: rgb(var(--v-theme-on-surface-variant))
+    &--range-start,
+    &--range-end,
+    &--preview-start,
+    &--preview-end
+      > .v-btn
+        position: relative
+        z-index: 1
 
     .v-btn.v-date-picker-month__day-btn
       --v-btn-height: #{$date-picker-month-btn-height}
@@ -45,11 +50,58 @@
     &--week
       font-size: var(--v-btn-size)
 
+  .v-date-picker-month__range-bg
+    position: absolute
+    inset: $date-picker-month-range-selection-inset 0
+    pointer-events: none
+
+    &--range
+      opacity: 0.1
+
+    &--preview
+      opacity: 0.06
+
+  .v-date-picker-month__day
+    &--range-start > .v-date-picker-month__range-bg
+      left: $date-picker-month-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--range-end > .v-date-picker-month__range-bg
+      right: $date-picker-month-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--preview-start > .v-date-picker-month__range-bg
+      left: $date-picker-month-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--preview-end > .v-date-picker-month__range-bg
+      right: $date-picker-month-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--range-middle,
+    &--range-start,
+    &--preview-middle,
+    &--preview-start
+      &:last-of-type > .v-date-picker-month__range-bg
+        right: 1px
+        border-top-right-radius: var(--range-selection-rounding)
+        border-bottom-right-radius: var(--range-selection-rounding)
+
+    &--range-middle,
+    &--range-end,
+    &--preview-middle,
+    &--preview-end
+      &:first-of-type > .v-date-picker-month__range-bg
+        left: 1px
+        border-top-left-radius: var(--range-selection-rounding)
+        border-bottom-left-radius: var(--range-selection-rounding)
+
   .v-date-picker-month__day--adjacent
     opacity: 0.5
 
   .v-date-picker-month__day--hide-adjacent
     opacity: 0
+
   .v-date-picker-month__events
     height: $date-picker-event-size
     left: 0

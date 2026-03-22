@@ -11,7 +11,7 @@ $date-picker-header-height: 70px !default;
 
 $date-picker-month-btn-height: 24px !default;
 $date-picker-month-btn-size: 0.875rem !default;
-$date-picker-month-column-gap: 4px !default;
+$date-picker-month-cell-padding: 2px !default;
 $date-picker-month-day-size: 40px !default;
 $date-picker-month-font-size: 0.875rem !default;
 $date-picker-month-padding: 0 12px 8px !default;
@@ -21,6 +21,9 @@ $date-picker-months-height: 288px !default;
 
 $date-picker-years-height: 288px !default;
 $date-picker-years-padding-inline: 32px !default;
+
+$date-picker-month-range-selection-inset: 2px !default;
+$date-picker-month-range-selection-border-radius: 999px !default;
 
 $date-picker-event-size: 8px !default;
 $date-picker-event-border-radius: 4px !default;
