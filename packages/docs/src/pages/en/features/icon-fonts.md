@@ -218,6 +218,7 @@ Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](h
 | [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
 | [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
 | [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
+| [Solar](https://icon-sets.iconify.design/solar/) | `@iconify-json/solar` | `vuetify/iconsets/solar` | `solar` |
 
 Install `unocss` and the Iconify package for your chosen library:
 
