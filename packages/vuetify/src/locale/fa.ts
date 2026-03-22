@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'تا',
   },
+  monthPicker: {
+    itemsSelected: '{0} انتخاب‌شده',
+    header: 'ماه را وارد کنید',
+    range: {
+      title: 'ماه‌ها را وارد کنید',
+    },
+    ariaLabel: {
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectYear: 'انتخاب سال',
+      currentMonth: 'ماه جاری، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} انتخاب‌شده',
     range: {

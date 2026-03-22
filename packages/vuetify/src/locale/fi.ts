@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: '–',
   },
+  monthPicker: {
+    itemsSelected: '{0} valittu',
+    header: 'Syötä kuukausi',
+    range: {
+      title: 'Syötä kuukaudet',
+    },
+    ariaLabel: {
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectYear: 'Valitse vuosi',
+      currentMonth: 'Nykyinen kuukausi, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valittu',
     range: {

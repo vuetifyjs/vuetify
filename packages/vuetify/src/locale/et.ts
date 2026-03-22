@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'kuni',
   },
+  monthPicker: {
+    itemsSelected: '{0} valitud',
+    header: 'Sisesta kuu',
+    range: {
+      title: 'Sisesta kuud',
+    },
+    ariaLabel: {
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectYear: 'Vali aasta',
+      currentMonth: 'Praegune kuu, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valitud',
     range: {

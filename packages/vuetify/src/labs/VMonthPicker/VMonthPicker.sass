@@ -1,0 +1,91 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-month-picker
+    width: $month-picker-width
+
+    .v-date-picker-years__content
+      width: 100%
+      grid-template-columns: repeat(var(--v-month-picker-years-columns, 4), 1fr)
+      padding: $month-picker-content-padding
+
+      > .v-btn
+        padding: $month-picker-cell-padding
+
+  .v-month-picker__months
+    position: relative
+    overflow: hidden
+
+  .v-month-picker__months-content
+    width: 100%
+    padding: $month-picker-content-padding
+
+  .v-month-picker__months-row
+    display: grid
+    grid-template-columns: repeat(var(--v-month-picker-months-columns, 4), 1fr)
+
+  .v-month-picker__month
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+    padding: $month-picker-cell-padding
+    --range-selection-rounding: #{$month-picker-range-selection-border-radius}
+
+    > .v-btn
+      width: 100%
+
+    &--range-start,
+    &--range-end,
+    &--preview-start,
+    &--preview-end
+      > .v-btn
+        position: relative
+        z-index: 1
+
+    .v-month-picker__range-bg
+      position: absolute
+      inset: $month-picker-range-selection-inset 0
+      pointer-events: none
+
+      &--range
+        opacity: 0.1
+
+      &--preview
+        opacity: 0.06
+
+    &--range-start > .v-month-picker__range-bg
+      left: $month-picker-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--range-end > .v-month-picker__range-bg
+      right: $month-picker-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--preview-start > .v-month-picker__range-bg
+      left: $month-picker-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--preview-end > .v-month-picker__range-bg
+      right: $month-picker-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--range-middle,
+    &--range-start,
+    &--preview-middle,
+    &--preview-start
+      &:last-of-type > .v-month-picker__range-bg
+        right: $month-picker-range-selection-inset
+        border-top-right-radius: var(--range-selection-rounding)
+        border-bottom-right-radius: var(--range-selection-rounding)
+
+    &--range-middle,
+    &--range-end,
+    &--preview-middle,
+    &--preview-end
+      &:first-of-type > .v-month-picker__range-bg
+        left: $month-picker-range-selection-inset
+        border-top-left-radius: var(--range-selection-rounding)
+        border-bottom-left-radius: var(--range-selection-rounding)

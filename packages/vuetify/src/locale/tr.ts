@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'ile',
   },
+  monthPicker: {
+    itemsSelected: '{0} seçildi',
+    header: 'Ay girin',
+    range: {
+      title: 'Ayları girin',
+    },
+    ariaLabel: {
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectYear: 'Yıl seçin',
+      currentMonth: 'Bu ay, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seçildi',
     range: {

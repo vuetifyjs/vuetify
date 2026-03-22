@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'til',
   },
+  monthPicker: {
+    itemsSelected: '{0} valgt',
+    header: 'Indtast måned',
+    range: {
+      title: 'Indtast måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Næste år',
+      selectYear: 'Vælg år',
+      currentMonth: 'Denne måned, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valgt',
     range: {
