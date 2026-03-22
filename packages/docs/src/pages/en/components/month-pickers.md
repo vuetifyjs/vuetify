@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Month pickers
   description: The month picker component allows users to select a specific month and year.
@@ -18,7 +19,7 @@ The `v-month-picker` component is a standalone picker that allows users to selec
 
 <page-features />
 
-<DocIntroduced version="4.0.4" />
+<DocIntroduced version="4.1.0" />
 
 ## Installation
 
@@ -67,3 +68,11 @@ The `multiple` prop enables selecting more than one month. Set it to `true` for 
 The `min` and `max` props restrict the selectable range. Both accept strings in `YYYY-MM` format.
 
 <ExamplesExample file="v-month-picker/prop-min-max" />
+
+### Misc
+
+#### Dialog and menu
+
+The month picker can be integrated into a `v-menu` or `v-dialog`, allowing users to pick a month from a text field activator.
+
+<ExamplesExample file="v-month-picker/misc-dialog-and-menu" />

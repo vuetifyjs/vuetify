@@ -184,15 +184,24 @@ export const VMonthPicker = genericComponent<new <
     }
 
     useRender(() => {
+      const pickerProps = VPicker.filterProps(props)
+
       return (
         <VPicker
-          class="v-month-picker"
+          { ...pickerProps }
+          class={[
+            'v-month-picker',
+            props.class,
+          ]}
           color={ props.color }
           title={ props.title }
-          style={{
-            '--v-month-picker-months-columns': props.monthsColumns,
-            '--v-month-picker-years-columns': props.yearsColumns,
-          }}
+          style={[
+            {
+              '--v-month-picker-months-columns': props.monthsColumns,
+              '--v-month-picker-years-columns': props.yearsColumns,
+            },
+            props.style,
+          ]}
         >
           {{
             header: () => (

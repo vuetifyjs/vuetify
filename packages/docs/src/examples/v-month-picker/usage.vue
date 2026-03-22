@@ -5,12 +5,28 @@
     :name="name"
     :options="options"
   >
-    <div class="text-center">
-      <v-month-picker v-bind="props"></v-month-picker>
-    </div>
+    <v-month-picker
+      v-bind="props"
+      class="mx-auto"
+    ></v-month-picker>
 
     <template v-slot:configuration>
-      <v-text-field v-model="title" label="Title" clearable></v-text-field>
+      <v-slider
+        v-model="columns"
+        :max="4"
+        :min="2"
+        :step="1"
+        label="Columns"
+        thumb-label
+      ></v-slider>
+
+      <v-select
+        v-model="color"
+        :items="colorItems"
+        class="mt-3"
+        label="Color"
+        clearable
+      ></v-select>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -19,12 +35,19 @@
   const name = ref('v-month-picker')
   const model = ref('default')
   const options = []
-  const title = ref('Select month')
+  const columns = ref(4)
+  const color = ref(undefined)
+  const colorItems = [
+    { title: 'Primary', value: 'primary' },
+    { title: 'Success', value: 'success' },
+    { title: 'Purple', value: 'purple' },
+    { title: 'Custom (#ffaa00)', value: '#fa0' },
+  ]
 
   const props = computed(() => {
     return {
-      title: title.value || undefined,
-      color: model.value !== 'default' ? model.value : undefined,
+      color: color.value || undefined,
+      'months-columns': columns.value !== 4 ? columns.value : undefined,
     }
   })
 
