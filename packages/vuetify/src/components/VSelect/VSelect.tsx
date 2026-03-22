@@ -368,6 +368,10 @@ export const VSelect = genericComponent<new <
       if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
       }
+      const menuContent = vMenuRef.value?.contentEl
+      if (menuContent?.contains(e.relatedTarget as Node)) {
+        isFocused.value = true
+      }
     }
     function getSelectedIndex () {
       return displayItems.value.findIndex(
