@@ -63,6 +63,14 @@ $list-item-slim-avatar-spacer-width: 4px !default;
 $list-item-action-margin-end: 8px !default;
 $list-item-action-margin-start: 8px !default;
 
+// Action margins adjusted per density level to keep the selection-control icon
+// visually aligned with the list item's inline padding.
+// Values match (selection-control-size - icon-size) / 2 for each density level:
+//   default: (40px - 24px) / 2 = 8px
+//   comfortable: (36px - 24px) / 2 = 6px
+//   compact: (28px - 24px) / 2 = 2px
+$list-item-action-margin-density: ('default': 8px, 'comfortable': 6px, 'compact': 2px) !default;
+
 $list-item-icon-margin-end: 32px !default;
 $list-item-icon-margin-start: 32px !default;
 

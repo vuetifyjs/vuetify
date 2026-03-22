@@ -289,6 +289,18 @@
     &--nav
       padding-inline: $list-nav-padding
 
+    @at-root
+      @each $density, $margin in $list-item-action-margin-density
+        .v-list-item--density-#{$density}
+          .v-list-item-action
+            &--start
+              margin-inline-end: $margin
+              margin-inline-start: -$margin
+
+            &--end
+              margin-inline-start: $margin
+              margin-inline-end: -$margin
+
   .v-list-item__underlay
     position: absolute
 
