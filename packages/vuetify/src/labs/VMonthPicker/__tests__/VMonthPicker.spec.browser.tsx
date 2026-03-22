@@ -19,11 +19,10 @@ describe('VMonthPicker', () => {
     // Should render 12 month buttons inside the months grid
     const monthButtons = screen.getByCSS('.v-month-picker__months-content')
       .querySelectorAll('.v-btn')
-    expect(monthButtons.length).toBe(12)
+    expect(monthButtons).toHaveLength(12)
 
     // Click the first month (January)
     await userEvent.click(monthButtons[0])
-    expect(model.value).toBeTruthy()
     // Model should be in YYYY-MM format, ending with -01 for January
     expect(model.value).toMatch(/-01$/)
 

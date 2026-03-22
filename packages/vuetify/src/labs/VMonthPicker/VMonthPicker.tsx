@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, type Ref, shallowRef, toRef, watch } from 'vue'
+import { computed, shallowRef, toRef, watch } from 'vue'
 import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -95,8 +95,8 @@ export const VMonthPicker = genericComponent<new <
       props,
       'modelValue',
       undefined,
-      v => (props.multiple ? wrapInArray(v) : v) as string | string[] | null,
-      v => (props.multiple ? v : v) as string | string[] | null,
+      v => wrapInArray(v),
+      v => props.multiple ? v : v[0],
     )
 
     const adapter = useDate()
@@ -132,7 +132,7 @@ export const VMonthPicker = genericComponent<new <
       isMonthPreviewEnd,
       isMonthPreviewMiddle,
       isMonthPreviewed,
-    } = useMonthPicker(props, model as Ref<string | string[] | null>)
+    } = useMonthPicker(props, model)
 
     const selectionColor = toRef(() => props.color || 'surface-variant')
     const { backgroundColorClasses: rangeColorClasses, backgroundColorStyles: rangeColorStyles } = useBackgroundColor(selectionColor)
@@ -320,6 +320,7 @@ export const VMonthPicker = genericComponent<new <
                                     >
                                       { (hasRangeBg || hasPreviewBg) && (
                                         <div
+                                          key="range-background"
                                           class={[
                                             'v-month-picker__range-bg',
                                             hasRangeBg ? 'v-month-picker__range-bg--range' : 'v-month-picker__range-bg--preview',

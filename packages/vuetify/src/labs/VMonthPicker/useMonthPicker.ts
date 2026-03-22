@@ -5,7 +5,6 @@ import { useRangePicker } from '@/composables/rangePicker'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { wrapInArray } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -23,36 +22,21 @@ export function useMonthPicker (props: {
   max?: string
   multiple?: boolean | 'range'
   allowedMonths?: number[] | ((date: number) => boolean)
-}, model: Ref<string | string[] | null>) {
+}, model: Ref<readonly string[]>) {
   const adapter = useDate()
   const { t } = useLocale()
 
   const viewMode = shallowRef<'months' | 'years'>('months')
   const year = shallowRef<number>(adapter.getYear(adapter.date()))
 
-  // Internal array model for range picker
-  const arrayModel: Ref<string[]> = computed({
-    get () {
-      if (model.value == null) return []
-      return wrapInArray(model.value)
-    },
-    set (v: string[]) {
-      if (!props.multiple) {
-        model.value = v[0] ?? null
-      } else {
-        model.value = v
-      }
-    },
-  })
-
   const range = useRangePicker({
     multiple: toRef(() => props.multiple),
-    model: arrayModel,
+    model,
     compare: compareYearMonth,
   })
 
   const headerText = computed(() => {
-    const values = arrayModel.value
+    const values = model.value
     if (values.length === 0) {
       return props.multiple === 'range'
         ? t('$vuetify.monthPicker.range.title')
@@ -109,7 +93,7 @@ export function useMonthPicker (props: {
   }
 
   // Sync displayed year from model
-  watch(() => arrayModel.value, val => {
+  watch(() => model.value, val => {
     if (val.length === 0) return
     const last = val[val.length - 1]
     const [y] = last.split('-').map((v: string) => parseInt(v))

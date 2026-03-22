@@ -17,7 +17,7 @@ import type { Ref } from 'vue'
  */
 export function useRangePicker <T> (options: {
   multiple: Ref<boolean | 'range' | undefined>
-  model: Ref<T[]>
+  model: Ref<readonly T[]>
   compare: (a: T, b: T) => number
 }) {
   const { multiple, model, compare } = options
