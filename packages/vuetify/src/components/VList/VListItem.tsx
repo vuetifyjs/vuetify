@@ -233,6 +233,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {
+      if (props.disabled) e.preventDefault()
       emit('click', e)
       if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
 
