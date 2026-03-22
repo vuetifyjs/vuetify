@@ -125,6 +125,8 @@ export const VMonthPicker = genericComponent<new <
       isMonthPreviewed,
     } = useMonthPicker(props, model as Ref<string | string[] | null>)
 
+    const headerTransition = toRef(() => `date-picker-header${isReverse.value ? '-reverse' : ''}-transition`)
+
     watch(year, (newVal, oldVal) => {
       isReverse.value = newVal < oldVal
     })
@@ -173,7 +175,7 @@ export const VMonthPicker = genericComponent<new <
         >
           {{
             header: () => (
-              <VDatePickerHeader header={ headerText.value } />
+              <VDatePickerHeader header={ headerText.value } transition={ headerTransition.value } />
             ),
             default: () => (
               <>
