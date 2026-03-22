@@ -25,6 +25,22 @@ export function useRangePicker <T> (options: {
   const rangeStart = shallowRef<T>()
   const rangeStop = shallowRef<T>()
 
+  // Preview: tracks the hovered/focused item while building a range
+  const previewValue = shallowRef<T>()
+
+  // The effective preview range [start, end] when one anchor is set and user is hovering
+  const previewRange = computed<[T, T] | null>(() => {
+    if (multiple.value !== 'range') return null
+    if (!rangeStart.value || rangeStop.value) return null
+    if (!previewValue.value) return null
+    const start = rangeStart.value
+    const preview = previewValue.value
+    if (compare(start, preview) === 0) return null
+    return compare(start, preview) < 0
+      ? [start, preview]
+      : [preview, start]
+  })
+
   // Sync range anchors when model changes externally
   watch(model, val => {
     if (multiple.value !== 'range') return
@@ -113,6 +129,36 @@ export function useRangePicker <T> (options: {
     }
   }
 
+  function setPreview (value: T | undefined): void {
+    previewValue.value = value
+  }
+
+  function clearPreview (): void {
+    previewValue.value = undefined
+  }
+
+  function isPreviewStart (value: T): boolean {
+    const range = previewRange.value
+    if (!range) return false
+    return compare(value, range[0]) === 0
+  }
+
+  function isPreviewEnd (value: T): boolean {
+    const range = previewRange.value
+    if (!range) return false
+    return compare(value, range[1]) === 0
+  }
+
+  function isPreviewMiddle (value: T): boolean {
+    const range = previewRange.value
+    if (!range) return false
+    return compare(value, range[0]) > 0 && compare(value, range[1]) < 0
+  }
+
+  function isPreviewedRange (value: T): boolean {
+    return isPreviewStart(value) || isPreviewEnd(value) || isPreviewMiddle(value)
+  }
+
   function onMultipleSelect (value: T): void {
     const index = model.value.findIndex(v => compare(v, value) === 0)
     if (index === -1) {
@@ -132,5 +178,11 @@ export function useRangePicker <T> (options: {
     isRangeEnd,
     isRangeMiddle,
     select,
+    setPreview,
+    clearPreview,
+    isPreviewStart,
+    isPreviewEnd,
+    isPreviewMiddle,
+    isPreviewedRange,
   }
 }

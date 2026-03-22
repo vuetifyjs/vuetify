@@ -17,6 +17,10 @@
         > .v-btn
           width: 100%
 
+  .v-month-picker__months
+    position: relative
+    overflow: hidden
+
   .v-month-picker__months-content
     display: grid
     width: 100%
@@ -35,6 +39,11 @@
     justify-content: center
     position: relative
     --range-selection-rounding: #{$month-picker-range-selection-border-radius}
+
+    &--selected
+      .v-btn--active
+        background-color: rgb(var(--v-theme-surface-variant))
+        color: rgb(var(--v-theme-on-surface-variant))
 
     &--range-start,
     &--range-end
@@ -55,5 +64,28 @@
       border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
 
     &--range-end::after
+      right: $month-picker-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    // Preview range (hover/focus while building a range)
+    &--preview-start,
+    &--preview-end
+      .v-btn
+        position: relative
+        z-index: 1
+
+    &--preview-start::after,
+    &--preview-end::after,
+    &--preview-middle::before
+      content: ''
+      position: absolute
+      inset: $month-picker-range-selection-inset 0
+      background-color: rgba(var(--v-theme-surface-variant), .06)
+
+    &--preview-start::after
+      left: $month-picker-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--preview-end::after
       right: $month-picker-range-selection-inset
       border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0

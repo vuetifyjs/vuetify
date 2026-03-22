@@ -5,7 +5,9 @@
     "max": "Maximum selectable date in `YYYY-MM` format.",
     "modelValue": "The selected month in `YYYY-MM` format, or null if no month is selected. When `multiple` is set, expects an array of strings.",
     "multiple": "Allows multiple month selections. When set to `true`, enables multi-select. When set to `'range'`, enables range selection where the first and last selected months define the range boundaries.",
-    "title": "Specify a title text for the component."
+    "reverseTransition": "The transition used when changing year into the past",
+    "title": "Specify a title text for the component.",
+    "transition": "The transition used when changing year into the future"
   },
   "slots": {
     "header": "Slot for customizing the header area of the picker.",

@@ -27,7 +27,6 @@ export function useMonthPicker (props: {
 
   const viewMode = shallowRef<'months' | 'years'>('months')
   const year = shallowRef<number>(adapter.getYear(adapter.date()))
-  const yearTransitionName = shallowRef<string | undefined>(undefined)
 
   // Internal array model for range picker
   const arrayModel: Ref<string[]> = computed({
@@ -54,18 +53,20 @@ export function useMonthPicker (props: {
     const values = arrayModel.value
     if (values.length === 0) return ''
     if (props.multiple === 'range' && values.length === 2) {
-      const start = adapter.format(adapter.parseISO(`${values[0]}-01`), 'monthAndYear')
-      const end = adapter.format(adapter.parseISO(`${values[1]}-01`), 'monthAndYear')
-      return `${start} – ${end}`
+      const startDate = adapter.parseISO(`${values[0]}-01`)
+      const endDate = adapter.parseISO(`${values[1]}-01`)
+      const start = `${adapter.format(startDate, 'monthShort')} ${adapter.format(startDate, 'year')}`
+      const end = `${adapter.format(endDate, 'monthShort')} ${adapter.format(endDate, 'year')}`
+      return `${start} - ${end}`
+    }
+    if (props.multiple && values.length > 1) {
+      return `${values.length} selected`
     }
     const last = values[values.length - 1]
     return adapter.format(adapter.parseISO(`${last}-01`), 'monthAndYear')
   })
 
-  function setYear (v: number, withTransition?: boolean) {
-    yearTransitionName.value = withTransition
-      ? `scroll-x-${v < year.value ? 'reverse-' : ''}transition`
-      : undefined
+  function setYear (v: number) {
     year.value = v
     setTimeout(() => { viewMode.value = 'months' }, 100)
   }
@@ -75,12 +76,26 @@ export function useMonthPicker (props: {
     range.select(value)
   }
 
+  const disablePrevYear = computed(() => {
+    if (!props.min) return false
+    const minYear = parseInt(props.min.split('-')[0])
+    return year.value <= minYear
+  })
+
+  const disableNextYear = computed(() => {
+    if (!props.max) return false
+    const maxYear = parseInt(props.max.split('-')[0])
+    return year.value >= maxYear
+  })
+
   function prevYear () {
-    setYear(year.value - 1, true)
+    if (disablePrevYear.value) return
+    setYear(year.value - 1)
   }
 
   function nextYear () {
-    setYear(year.value + 1, true)
+    if (disableNextYear.value) return
+    setYear(year.value + 1)
   }
 
   function toggleViewMode () {
@@ -119,11 +134,36 @@ export function useMonthPicker (props: {
     return range.isRangeMiddle(getMonthValue(monthIndex))
   }
 
+  function previewMonth (monthIndex: number) {
+    range.setPreview(getMonthValue(monthIndex))
+  }
+
+  function clearPreview () {
+    range.clearPreview()
+  }
+
+  function isMonthPreviewStart (monthIndex: number): boolean {
+    return range.isPreviewStart(getMonthValue(monthIndex))
+  }
+
+  function isMonthPreviewEnd (monthIndex: number): boolean {
+    return range.isPreviewEnd(getMonthValue(monthIndex))
+  }
+
+  function isMonthPreviewMiddle (monthIndex: number): boolean {
+    return range.isPreviewMiddle(getMonthValue(monthIndex))
+  }
+
+  function isMonthPreviewed (monthIndex: number): boolean {
+    return range.isPreviewedRange(getMonthValue(monthIndex))
+  }
+
   return {
     viewMode,
     year,
-    yearTransitionName,
     headerText,
+    disablePrevYear,
+    disableNextYear,
     setYear,
     selectMonth,
     prevYear,
@@ -133,5 +173,11 @@ export function useMonthPicker (props: {
     isMonthRangeStart,
     isMonthRangeEnd,
     isMonthRangeMiddle,
+    previewMonth,
+    clearPreview,
+    isMonthPreviewStart,
+    isMonthPreviewEnd,
+    isMonthPreviewMiddle,
+    isMonthPreviewed,
   }
 }

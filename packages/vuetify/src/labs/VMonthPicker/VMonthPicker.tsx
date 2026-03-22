@@ -13,11 +13,12 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 // Composables
 import { useMonthPicker } from './useMonthPicker'
 import { useDate } from '@/composables/date'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, type Ref } from 'vue'
+import { computed, type Ref, shallowRef, toRef, watch } from 'vue'
 import { createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -48,6 +49,14 @@ export const makeVMonthPickerProps = propsFactory({
   max: String,
   multiple: [Boolean, String] as PropType<boolean | 'range'>,
   allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
+  transition: {
+    type: String,
+    default: 'picker-transition',
+  },
+  reverseTransition: {
+    type: String,
+    default: 'picker-reverse-transition',
+  },
   ...makeVPickerProps({
     title: 'Select month', // later: '$vuetify.monthPicker.title'
   }),
@@ -82,12 +91,23 @@ export const VMonthPicker = genericComponent<new <
     )
 
     const adapter = useDate()
+    const { t } = useLocale()
+
+    const now = adapter.date()
+    const currentYear = adapter.getYear(now)
+    const currentMonth = adapter.getMonth(now)
+
+    const isReverse = shallowRef(false)
+    const transition = toRef(() => {
+      return !isReverse.value ? props.transition : props.reverseTransition
+    })
 
     const {
       viewMode,
       year,
-      yearTransitionName,
       headerText,
+      disablePrevYear,
+      disableNextYear,
       prevYear,
       nextYear,
       toggleViewMode,
@@ -97,7 +117,17 @@ export const VMonthPicker = genericComponent<new <
       isMonthRangeStart,
       isMonthRangeEnd,
       isMonthRangeMiddle,
+      previewMonth,
+      clearPreview,
+      isMonthPreviewStart,
+      isMonthPreviewEnd,
+      isMonthPreviewMiddle,
+      isMonthPreviewed,
     } = useMonthPicker(props, model as Ref<string | string[] | null>)
+
+    watch(year, (newVal, oldVal) => {
+      isReverse.value = newVal < oldVal
+    })
 
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
@@ -115,6 +145,7 @@ export const VMonthPicker = genericComponent<new <
         date = adapter.getNextMonth(date)
 
         return {
+          isCurrent: year.value === currentYear && i === currentMonth,
           isDisabled,
           text,
           label,
@@ -149,18 +180,17 @@ export const VMonthPicker = genericComponent<new <
                 <VDefaultsProvider defaults={{ VBtn: { variant: 'text' } }}>
                   <div class="v-month-picker__controls pa-3 pb-0 d-flex justify-space-between align-center flex-grow-1">
                     <VBtn
+                      disabled={ disablePrevYear.value }
                       icon="$prev"
+                      aria-label={ t('$vuetify.datePicker.ariaLabel.previousYear') }
                       onClick={ prevYear }
                     />
                     <VBtn
                       rounded
+                      aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
                       onClick={ toggleViewMode }
+                      text={ year.value }
                       v-slots={{
-                        default: () => (
-                          <MaybeTransition name={ yearTransitionName.value } mode="out-in">
-                            <span key={ year.value }>{ year.value }</span>
-                          </MaybeTransition>
-                        ),
                         append: () => (
                           <VIcon
                             icon="$dropdown"
@@ -173,7 +203,9 @@ export const VMonthPicker = genericComponent<new <
                       }}
                     />
                     <VBtn
+                      disabled={ disableNextYear.value }
                       icon="$next"
+                      aria-label={ t('$vuetify.datePicker.ariaLabel.nextYear') }
                       onClick={ nextYear }
                     />
                   </div>
@@ -194,48 +226,71 @@ export const VMonthPicker = genericComponent<new <
                       key="months"
                       class="v-month-picker__months flex-grow-1"
                     >
-                      <div class="v-month-picker__months-content">
-                        { months.value.map((month, i) => {
-                          const selected = isMonthSelected(i)
-                          const rangeStart = isMonthRangeStart(i)
-                          const rangeEnd = isMonthRangeEnd(i)
-                          const rangeMiddle = isMonthRangeMiddle(i)
+                      <MaybeTransition name={ transition.value }>
+                        <div
+                          key={ year.value }
+                          class="v-month-picker__months-content"
+                          onMouseleave={ clearPreview }
+                        >
+                          { months.value.map((month, i) => {
+                            const selected = isMonthSelected(i)
+                            const rangeStart = isMonthRangeStart(i)
+                            const rangeEnd = isMonthRangeEnd(i)
+                            const rangeMiddle = isMonthRangeMiddle(i)
+                            const previewStart = isMonthPreviewStart(i)
+                            const previewEnd = isMonthPreviewEnd(i)
+                            const previewMiddle = isMonthPreviewMiddle(i)
+                            const previewed = isMonthPreviewed(i)
 
-                          const btnProps = {
-                            active: selected && !rangeMiddle,
-                            color: selected ? props.color : undefined,
-                            disabled: month.isDisabled,
-                            rounded: true,
-                            text: month.text,
-                            variant: (selected && !rangeMiddle) ? 'flat' : 'text',
-                            onClick: () => selectMonth(i),
-                          } as const
+                            const btnProps = {
+                              active: selected && !rangeMiddle,
+                              color: (selected || month.isCurrent) ? props.color : undefined,
+                              disabled: month.isDisabled,
+                              rounded: true,
+                              text: month.text,
+                              variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
+                              'aria-label': month.isCurrent
+                                ? t('$vuetify.datePicker.ariaLabel.currentDate', month.label)
+                                : month.label,
+                              'aria-current': month.isCurrent ? 'date' : undefined,
+                              'aria-selected': selected,
+                              onClick: () => selectMonth(i),
+                              onMouseenter: () => previewMonth(i),
+                              onFocus: () => previewMonth(i),
+                              onBlur: clearPreview,
+                            } as const
 
-                          return (
-                            <div
-                              class={[
-                                'v-month-picker__month',
-                                {
-                                  'v-month-picker__month--selected': selected,
-                                  'v-month-picker__month--range-start': rangeStart,
-                                  'v-month-picker__month--range-end': rangeEnd,
-                                  'v-month-picker__month--range-middle': rangeMiddle,
-                                },
-                              ]}
-                            >
-                              { slots.month?.({
-                                month,
-                                i,
-                                props: btnProps,
-                              }) ?? (
-                                <VBtn
-                                  { ...btnProps }
-                                />
-                              )}
-                            </div>
-                          )
-                        })}
-                      </div>
+                            return (
+                              <div
+                                class={[
+                                  'v-month-picker__month',
+                                  {
+                                    'v-month-picker__month--current': month.isCurrent,
+                                    'v-month-picker__month--selected': selected,
+                                    'v-month-picker__month--range-start': rangeStart,
+                                    'v-month-picker__month--range-end': rangeEnd,
+                                    'v-month-picker__month--range-middle': rangeMiddle,
+                                    'v-month-picker__month--preview-start': previewStart,
+                                    'v-month-picker__month--preview-end': previewEnd,
+                                    'v-month-picker__month--preview-middle': previewMiddle,
+                                    'v-month-picker__month--previewed': previewed,
+                                  },
+                                ]}
+                              >
+                                { slots.month?.({
+                                  month,
+                                  i,
+                                  props: btnProps,
+                                }) ?? (
+                                  <VBtn
+                                    { ...btnProps }
+                                  />
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </MaybeTransition>
                     </div>
                   )}
                 </VFadeTransition>
