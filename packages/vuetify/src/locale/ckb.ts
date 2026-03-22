@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'بۆ',
   },
+  monthPicker: {
+    itemsSelected: '{0} هەڵبژێردراوە',
+    header: 'مانگ بنووسە',
+    range: {
+      title: 'مانگەکان بنووسە',
+    },
+    ariaLabel: {
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      currentMonth: 'مانگی ئێستا، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
     range: {

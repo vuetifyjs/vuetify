@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'până la',
   },
+  monthPicker: {
+    itemsSelected: '{0} selectate',
+    header: 'Introduceți luna',
+    range: {
+      title: 'Introduceți lunile',
+    },
+    ariaLabel: {
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectYear: 'Selectați anul',
+      currentMonth: 'Luna curentă, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selectate',
     range: {

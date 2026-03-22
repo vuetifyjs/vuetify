@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'έως',
   },
+  monthPicker: {
+    itemsSelected: '{0} επιλεγμένα',
+    header: 'Εισαγάγετε μήνα',
+    range: {
+      title: 'Εισαγάγετε μήνες',
+    },
+    ariaLabel: {
+      previousYear: 'Προηγούμενο έτος',
+      nextYear: 'Επόμενο έτος',
+      selectYear: 'Επιλέξτε έτος',
+      currentMonth: 'Τρέχων μήνας, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
     range: {

@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    itemsSelected: '{0} izabrano',
+    header: 'Unesite mesec',
+    range: {
+      title: 'Unesite mesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sledeća godina',
+      selectYear: 'Izaberi godinu',
+      currentMonth: 'Trenutni mesec, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} izabrano',
     range: {

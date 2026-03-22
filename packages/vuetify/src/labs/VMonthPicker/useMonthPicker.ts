@@ -1,5 +1,6 @@
 // Composables
 import { useDate } from '@/composables/date'
+import { useLocale } from '@/composables/locale'
 import { useRangePicker } from '@/composables/rangePicker'
 
 // Utilities
@@ -24,6 +25,7 @@ export function useMonthPicker (props: {
   allowedMonths?: number[] | ((date: number) => boolean)
 }, model: Ref<string | string[] | null>) {
   const adapter = useDate()
+  const { t } = useLocale()
 
   const viewMode = shallowRef<'months' | 'years'>('months')
   const year = shallowRef<number>(adapter.getYear(adapter.date()))
@@ -51,7 +53,11 @@ export function useMonthPicker (props: {
 
   const headerText = computed(() => {
     const values = arrayModel.value
-    if (values.length === 0) return ''
+    if (values.length === 0) {
+      return props.multiple === 'range'
+        ? t('$vuetify.monthPicker.range.title')
+        : t('$vuetify.monthPicker.header')
+    }
     if (props.multiple === 'range' && values.length === 2) {
       const startDate = adapter.parseISO(`${values[0]}-01`)
       const endDate = adapter.parseISO(`${values[1]}-01`)
@@ -60,7 +66,7 @@ export function useMonthPicker (props: {
       return `${start} - ${end}`
     }
     if (props.multiple && values.length > 1) {
-      return `${values.length} selected`
+      return t('$vuetify.monthPicker.itemsSelected', values.length)
     }
     const last = values[values.length - 1]
     return adapter.format(adapter.parseISO(`${last}-01`), 'monthAndYear')

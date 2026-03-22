@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'iki',
   },
+  monthPicker: {
+    itemsSelected: '{0} parinkta',
+    header: 'Įveskite mėnesį',
+    range: {
+      title: 'Įveskite mėnesius',
+    },
+    ariaLabel: {
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectYear: 'Pasirinkite metus',
+      currentMonth: 'Šis mėnuo, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} parinkta',
     range: {

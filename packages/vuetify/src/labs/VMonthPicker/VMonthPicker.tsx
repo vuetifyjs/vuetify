@@ -182,12 +182,12 @@ export const VMonthPicker = genericComponent<new <
                     <VBtn
                       disabled={ disablePrevYear.value }
                       icon="$prev"
-                      aria-label={ t('$vuetify.datePicker.ariaLabel.previousYear') }
+                      aria-label={ t('$vuetify.monthPicker.ariaLabel.previousYear') }
                       onClick={ prevYear }
                     />
                     <VBtn
                       rounded
-                      aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
+                      aria-label={ t('$vuetify.monthPicker.ariaLabel.selectYear') }
                       onClick={ toggleViewMode }
                       text={ year.value }
                       v-slots={{
@@ -205,7 +205,7 @@ export const VMonthPicker = genericComponent<new <
                     <VBtn
                       disabled={ disableNextYear.value }
                       icon="$next"
-                      aria-label={ t('$vuetify.datePicker.ariaLabel.nextYear') }
+                      aria-label={ t('$vuetify.monthPicker.ariaLabel.nextYear') }
                       onClick={ nextYear }
                     />
                   </div>
@@ -250,7 +250,7 @@ export const VMonthPicker = genericComponent<new <
                               text: month.text,
                               variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
                               'aria-label': month.isCurrent
-                                ? t('$vuetify.datePicker.ariaLabel.currentDate', month.label)
+                                ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
                                 : month.label,
                               'aria-current': month.isCurrent ? 'date' : undefined,
                               'aria-selected': selected,

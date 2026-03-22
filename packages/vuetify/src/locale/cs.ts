@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    itemsSelected: '{0} vybráno',
+    header: 'Zadejte měsíc',
+    range: {
+      title: 'Zadejte měsíce',
+    },
+    ariaLabel: {
+      previousYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuální měsíc, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} vybráno',
     range: {

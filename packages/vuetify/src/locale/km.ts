@@ -35,6 +35,19 @@ export default {
   dateRangeInput: {
     divider: 'ដល់',
   },
+  monthPicker: {
+    itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
+    header: 'បញ្ចូលខែ',
+    range: {
+      title: 'បញ្ចូលខែ',
+    },
+    ariaLabel: {
+      previousYear: 'ឆ្នាំមុន',
+      nextYear: 'ឆ្នាំក្រោយ',
+      selectYear: 'Select year',
+      currentMonth: 'ខែបច្ចុប្បន្ន, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
     range: {
