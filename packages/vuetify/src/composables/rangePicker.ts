@@ -8,9 +8,10 @@ export interface RangePickerOptions<T> {
   multiple: Readonly<Ref<boolean | 'range' | undefined>>
   model: Ref<readonly T[]>
   compare: (a: T, b: T) => number
+  normalizeEnd?: (value: T) => T
 }
 
-export function useRangePicker <T> ({ multiple, model, compare }: RangePickerOptions<T>) {
+export function useRangePicker <T> ({ multiple, model, compare, normalizeEnd = (v: T) => v }: RangePickerOptions<T>) {
   const rangeStart = computed(() => model.value.length >= 1 ? model.value[0] : undefined)
   const rangeEnd = computed(() => model.value.length >= 2 ? model.value[model.value.length - 1] : undefined)
   const previewValue = shallowRef<T>()
@@ -75,9 +76,9 @@ export function useRangePicker <T> ({ multiple, model, compare }: RangePickerOpt
       if (compare(value, start) === 0) {
         model.value = []
       } else if (compare(value, start) < 0) {
-        model.value = [value, start]
+        model.value = [value, normalizeEnd(start)]
       } else {
-        model.value = [start, value]
+        model.value = [start, normalizeEnd(value)]
       }
     } else {
       model.value = [value]
