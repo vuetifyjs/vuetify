@@ -64,7 +64,7 @@ The `size` prop allows you to change the height and width of the avatar.
 
 The `badge` prop wraps the avatar in a [v-badge](/components/badges/) to display a status indicator. Set it to `true` for a default dot badge, a color string, or an object of VBadge props for full customization. Use the **badge** slot to render custom content inside the badge.
 
-<ExamplesExample file="v-avatar/prop-badge" />
+<ExamplesExample file="v-avatar/prop-badge" new-in="4.0.0" />
 
 #### Tile
 

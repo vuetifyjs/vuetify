@@ -57,7 +57,7 @@ Using the `indeterminate` prop, a `v-progress-circular` continues to animate ind
 
 The `reveal` prop animates the progress circle from 0 to its model value when the component mounts.
 
-<ExamplesExample file="v-progress-circular/prop-reveal" />
+<ExamplesExample file="v-progress-circular/prop-reveal" new-in="3.12.0" />
 
 #### Rotate
 

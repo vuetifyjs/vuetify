@@ -75,7 +75,7 @@ Dense mode provides more compact layout with decreased heights of the items.
 
 When working with large trees it is recommended to include `items-registration="props"` to ensure faster loading and interactions.
 
-<ExamplesExample file="v-treeview/prop-items-registration" />
+<ExamplesExample file="v-treeview/prop-items-registration" new-in="3.11.0" />
 
 <!-- #### Hoverable
 
@@ -152,7 +152,7 @@ Both **append**, and **prepend** slots get additional information about the item
 
 When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
 
-<ExamplesExample file="v-treeview/slot-no-data" />
+<ExamplesExample file="v-treeview/slot-no-data" new-in="3.11.0" />
 
 #### Title
 
@@ -164,7 +164,7 @@ In this example we use a custom **title** slot to apply a line-through the treev
 
 Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
 
-<ExamplesExample file="v-treeview/slot-toggle" />
+<ExamplesExample file="v-treeview/slot-toggle" new-in="3.10.0" />
 
 ## Examples
 
@@ -186,4 +186,4 @@ Customize the **on**, **off** and **indeterminate** icons for your selectable tr
 
 The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
 
-<ExamplesExample file="v-treeview/misc-indent-lines" />
+<ExamplesExample file="v-treeview/misc-indent-lines" new-in="3.9.0" />

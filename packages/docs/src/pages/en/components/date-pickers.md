@@ -90,13 +90,13 @@ Specify allowed dates using objects or functions. When using objects, accepts a 
 
 Using `landscape` moves header to the side. You can customize it further using custom width and date format.
 
-<ExamplesExample file="v-date-picker/prop-landscape" />
+<ExamplesExample file="v-date-picker/prop-landscape" new-in="3.11.0" />
 
 #### Date events
 
 You can specify events using arrays, objects or functions. To change the default color of the event use **event-color** prop. Your **events** function or object can return an array of colors (material or css) in case you want to display multiple event indicators.
 
-<ExamplesExample file="v-date-picker/prop-events" />
+<ExamplesExample file="v-date-picker/prop-events" new-in="3.11.0" />
 
 ### Slots
 
@@ -104,7 +104,7 @@ You can specify events using arrays, objects or functions. To change the default
 
 Replace main controls to adapt behavior and/or visual appearance beyond CSS styling.
 
-<ExamplesExample file="v-date-picker/slots-controls" />
+<ExamplesExample file="v-date-picker/slots-controls" new-in="3.11.0" />
 
 ### Internationalization
 
