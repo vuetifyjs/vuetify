@@ -546,7 +546,7 @@ export const VSelect = genericComponent<new <
                         tabindex="-1"
                         selectable={ !!displayItems.value.length }
                         aria-live="polite"
-                        aria-labelledby={ `${id.value}-label` }
+                        aria-labelledby={ (props.label || slots.label) ? `${id.value}-label` : undefined }
                         aria-multiselectable={ props.multiple }
                         color={ props.itemColor ?? props.color }
                         { ...listEvents }
