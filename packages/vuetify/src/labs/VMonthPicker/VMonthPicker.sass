@@ -42,6 +42,11 @@
 
     &--selected
       .v-btn--active
+        background-color: var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant)))
+        color: var(--v-month-picker-range-color, rgb(var(--v-theme-on-surface-variant)))
+
+    &--range-middle
+      .v-btn--active
         background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 12%, transparent)
         color: var(--v-month-picker-range-color, rgb(var(--v-theme-on-surface-variant)))
 
