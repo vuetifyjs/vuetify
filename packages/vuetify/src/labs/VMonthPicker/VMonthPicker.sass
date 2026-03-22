@@ -37,60 +37,38 @@
     > .v-btn
       width: 100%
 
-    &--selected
-      .v-btn--active
-        background-color: var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant)))
-        color: var(--v-month-picker-range-color, rgb(var(--v-theme-on-surface-variant)))
-
-    &--range-middle
-      .v-btn--active
-        background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 12%, transparent)
-        color: var(--v-month-picker-range-color, rgb(var(--v-theme-on-surface-variant)))
-
     &--range-start,
-    &--range-end
-      .v-btn
+    &--range-end,
+    &--preview-start,
+    &--preview-end
+      > .v-btn
         position: relative
         z-index: 1
 
-    &--range-start::after,
-    &--range-end::after,
-    &--range-middle::after
-      content: ''
+    .v-month-picker__range-bg
       position: absolute
       inset: $month-picker-range-selection-inset 0
-      background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 10%, transparent)
       pointer-events: none
 
-    &--range-start::after
+      &--range
+        opacity: 0.1
+
+      &--preview
+        opacity: 0.06
+
+    &--range-start > .v-month-picker__range-bg
       left: $month-picker-range-selection-inset
       border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
 
-    &--range-end::after
+    &--range-end > .v-month-picker__range-bg
       right: $month-picker-range-selection-inset
       border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
 
-    // Preview range (hover/focus while building a range)
-    &--preview-start,
-    &--preview-end
-      .v-btn
-        position: relative
-        z-index: 1
-
-    &--preview-start::after,
-    &--preview-end::after,
-    &--preview-middle::after
-      content: ''
-      position: absolute
-      inset: $month-picker-range-selection-inset 0
-      background-color: color-mix(in srgb, var(--v-month-picker-range-color, rgb(var(--v-theme-surface-variant))) 6%, transparent)
-      pointer-events: none
-
-    &--preview-start::after
+    &--preview-start > .v-month-picker__range-bg
       left: $month-picker-range-selection-inset
       border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
 
-    &--preview-end::after
+    &--preview-end > .v-month-picker__range-bg
       right: $month-picker-range-selection-inset
       border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
 
@@ -98,7 +76,7 @@
     &--range-start,
     &--preview-middle,
     &--preview-start
-      &:last-of-type::after
+      &:last-of-type > .v-month-picker__range-bg
         right: $month-picker-range-selection-inset
         border-top-right-radius: var(--range-selection-rounding)
         border-bottom-right-radius: var(--range-selection-rounding)
@@ -107,7 +85,7 @@
     &--range-end,
     &--preview-middle,
     &--preview-end
-      &:first-of-type::after
+      &:first-of-type > .v-month-picker__range-bg
         left: $month-picker-range-selection-inset
         border-top-left-radius: var(--range-selection-rounding)
         border-bottom-left-radius: var(--range-selection-rounding)

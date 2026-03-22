@@ -63,7 +63,7 @@ export function useMonthPicker (props: {
       const endDate = adapter.parseISO(`${values[1]}-01`)
       const start = `${adapter.format(startDate, 'monthShort')} ${adapter.format(startDate, 'year')}`
       const end = `${adapter.format(endDate, 'monthShort')} ${adapter.format(endDate, 'year')}`
-      return `${start} - ${end}`
+      return `${start} – ${end}`
     }
     if (props.multiple && values.length > 1) {
       return t('$vuetify.monthPicker.itemsSelected', values.length)
@@ -110,10 +110,7 @@ export function useMonthPicker (props: {
 
   // Sync displayed year from model
   watch(() => arrayModel.value, val => {
-    if (val.length === 0) {
-      year.value = adapter.getYear(adapter.date())
-      return
-    }
+    if (val.length === 0) return
     const last = val[val.length - 1]
     const [y] = last.split('-').map((v: string) => parseInt(v))
     year.value = y
