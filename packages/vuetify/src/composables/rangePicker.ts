@@ -19,8 +19,9 @@ export function useRangePicker <T> (options: {
   multiple: Ref<boolean | 'range' | undefined>
   model: Ref<readonly T[]>
   compare: (a: T, b: T) => number
+  normalizeEnd?: (value: T) => T
 }) {
-  const { multiple, model, compare } = options
+  const { multiple, model, compare, normalizeEnd = (v: T) => v } = options
 
   const rangeStart = shallowRef<T>()
   const rangeStop = shallowRef<T>()
@@ -115,10 +116,10 @@ export function useRangePicker <T> (options: {
         model.value = []
         return
       } else if (compare(value, rangeStart.value as T) < 0) {
-        rangeStop.value = rangeStart.value
+        rangeStop.value = normalizeEnd(rangeStart.value as T)
         rangeStart.value = value
       } else {
-        rangeStop.value = value
+        rangeStop.value = normalizeEnd(value)
       }
       model.value = [rangeStart.value as T, rangeStop.value as T]
     } else {

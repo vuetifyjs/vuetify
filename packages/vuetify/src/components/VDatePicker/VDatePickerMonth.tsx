@@ -7,13 +7,15 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
+import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date/date'
 import { useLocale } from '@/composables/locale'
+import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -86,25 +88,38 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
 
-    const rangeStart = shallowRef()
-    const rangeStop = shallowRef()
     const isReverse = shallowRef(false)
 
     const transition = toRef(() => {
       return !isReverse.value ? props.transition : props.reverseTransition
     })
 
-    if (props.multiple === 'range' && model.value.length > 0) {
-      rangeStart.value = model.value[0]
-      if (model.value.length > 1) {
-        rangeStop.value = model.value[model.value.length - 1]
-      }
+    function compareDays (a: unknown, b: unknown): number {
+      if (adapter.isSameDay(a, b)) return 0
+      return adapter.isBefore(a, b) ? -1 : 1
     }
+
+    const range = useRangePicker({
+      multiple: computed(() => {
+        if (props.multiple === 'range') return 'range'
+        return !!props.multiple
+      }),
+      model,
+      compare: compareDays,
+      normalizeEnd: (value: unknown) => adapter.endOfDay(value),
+    })
+
+    const selectionColor = toRef(() => props.color || 'surface-variant')
+    const { backgroundColorClasses: rangeColorClasses, backgroundColorStyles: rangeColorStyles } = useBackgroundColor(selectionColor)
 
     const atMax = computed(() => {
       const max = ['number', 'string'].includes(typeof props.multiple) ? Number(props.multiple) : Infinity
 
       return model.value.length >= max
+    })
+
+    const dayRows = computed(() => {
+      return chunkArray(daysInMonth.value, props.weekdays.length)
     })
 
     watch(daysInMonth, (val, oldVal) => {
@@ -113,65 +128,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       isReverse.value = adapter.isBefore(val[0].date, oldVal[0].date)
     })
 
-    function onRangeClick (value: unknown) {
-      const _value = adapter.startOfDay(value)
-
-      if (model.value.length === 0) {
-        rangeStart.value = undefined
-      } else if (model.value.length === 1) {
-        rangeStart.value = model.value[0]
-        rangeStop.value = undefined
-      }
-
-      if (!rangeStart.value) {
-        rangeStart.value = _value
-        model.value = [rangeStart.value]
-      } else if (!rangeStop.value) {
-        if (adapter.isSameDay(_value, rangeStart.value)) {
-          rangeStart.value = undefined
-          model.value = []
-          return
-        } else if (adapter.isBefore(_value, rangeStart.value)) {
-          rangeStop.value = adapter.endOfDay(rangeStart.value)
-          rangeStart.value = _value
-        } else {
-          rangeStop.value = adapter.endOfDay(_value)
-        }
-
-        model.value = [rangeStart.value, rangeStop.value]
-      } else {
-        rangeStart.value = value
-        rangeStop.value = undefined
-        model.value = [rangeStart.value]
-      }
-    }
-
     function getDateAriaLabel (item: any) {
       const fullDate = adapter.format(item.date, 'fullDateWithWeekday')
       const localeKey = item.isToday ? 'currentDate' : 'selectDate'
       return t(`$vuetify.datePicker.ariaLabel.${localeKey}`, fullDate)
     }
 
-    function onMultipleClick (value: unknown) {
-      const index = model.value.findIndex(selection => adapter.isSameDay(selection, value))
-
-      if (index === -1) {
-        model.value = [...model.value, value]
-      } else {
-        const value = [...model.value]
-        value.splice(index, 1)
-        model.value = value
-      }
-    }
-
     function onClick (value: unknown) {
-      if (props.multiple === 'range') {
-        onRangeClick(value)
-      } else if (props.multiple) {
-        onMultipleClick(value)
-      } else {
-        model.value = [value]
-      }
+      range.select(adapter.startOfDay(value))
     }
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
@@ -247,67 +211,105 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ref={ daysRef }
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
+            onMouseleave={ range.clearPreview }
           >
-            { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
-              <div
-                class={[
-                  'v-date-picker-month__day',
-                  'v-date-picker-month__weekday',
-                ]}
-              >{ weekDay }</div>
-            ))}
+            { !props.hideWeekdays && (
+              <div class="v-date-picker-month__days-row">
+                { weekdayLabels.value.map(weekDay => (
+                  <div
+                    class={[
+                      'v-date-picker-month__day',
+                      'v-date-picker-month__weekday',
+                    ]}
+                  >{ weekDay }</div>
+                ))}
+              </div>
+            )}
 
-            { daysInMonth.value.map((item, i) => {
-              const slotProps = {
-                props: {
-                  class: 'v-date-picker-month__day-btn',
-                  color: item.isSelected || item.isToday ? props.color : undefined,
-                  disabled: item.isDisabled,
-                  readonly: props.readonly,
-                  icon: true,
-                  ripple: false,
-                  variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
-                  'aria-label': getDateAriaLabel(item),
-                  'aria-current': item.isToday ? 'date' : undefined,
-                  onClick: () => onClick(item.date),
-                },
-                item,
-                i,
-              } as const
+            { dayRows.value.map((row, rowIndex) => (
+              <div class="v-date-picker-month__days-row">
+                { row.map((item, colIndex) => {
+                  const i = rowIndex * props.weekdays.length + colIndex
+                  const isSelected = range.isSelected(item.date)
+                  const rangeStart = range.isRangeStart(item.date)
+                  const rangeEnd = range.isRangeEnd(item.date)
+                  const rangeMiddle = range.isRangeMiddle(item.date)
+                  const previewStart = range.isPreviewStart(item.date)
+                  const previewEnd = range.isPreviewEnd(item.date)
+                  const previewMiddle = range.isPreviewMiddle(item.date)
+                  const previewed = range.isPreviewedRange(item.date)
 
-              const isSelected = props.multiple === 'range' && model.value.length === 2
-                ? adapter.isWithinRange(item.date, model.value as [Date, Date])
-                : model.value.some(selectedDate => adapter.isSameDay(selectedDate, item.date))
+                  if (atMax.value && !isSelected) {
+                    item.isDisabled = true
+                  }
 
-              if (atMax.value && !isSelected) {
-                item.isDisabled = true
-              }
-
-              return (
-                <div
-                  class={[
-                    'v-date-picker-month__day',
-                    {
-                      'v-date-picker-month__day--adjacent': item.isAdjacent,
-                      'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                      'v-date-picker-month__day--selected': isSelected,
-                      'v-date-picker-month__day--week-end': item.isWeekEnd,
-                      'v-date-picker-month__day--week-start': item.isWeekStart,
+                  const slotProps = {
+                    props: {
+                      class: 'v-date-picker-month__day-btn',
+                      color: ((isSelected && !rangeMiddle) || item.isToday) ? props.color : undefined,
+                      disabled: item.isDisabled,
+                      readonly: props.readonly,
+                      icon: true,
+                      ripple: false,
+                      variant: (isSelected && !rangeMiddle) ? 'flat' : item.isToday ? 'outlined' : 'text',
+                      'aria-label': getDateAriaLabel(item),
+                      'aria-current': item.isToday ? 'date' : undefined,
+                      onClick: () => onClick(item.date),
+                      onMouseenter: () => range.setPreview(item.date),
+                      onFocus: () => range.setPreview(item.date),
+                      onBlur: range.clearPreview,
                     },
-                  ]}
-                  data-v-date={ !item.isDisabled ? item.isoDate : undefined }
-                >
-                  { (props.showAdjacentMonths || !item.isAdjacent) && (
-                    slots.day?.(slotProps) ?? (
-                      <VBtn { ...slotProps.props }>
-                        { item.localized }
-                        { genEvents(item.isoDate) }
-                      </VBtn>
-                    )
-                  )}
-                </div>
-              )
-            })}
+                    item,
+                    i,
+                  } as const
+
+                  const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
+                  const hasPreviewBg = previewStart || previewEnd || previewMiddle
+
+                  return (
+                    <div
+                      class={[
+                        'v-date-picker-month__day',
+                        {
+                          'v-date-picker-month__day--adjacent': item.isAdjacent,
+                          'v-date-picker-month__day--hide-adjacent': item.isHidden,
+                          'v-date-picker-month__day--selected': isSelected,
+                          'v-date-picker-month__day--week-end': item.isWeekEnd,
+                          'v-date-picker-month__day--week-start': item.isWeekStart,
+                          'v-date-picker-month__day--range-start': rangeStart,
+                          'v-date-picker-month__day--range-end': rangeEnd,
+                          'v-date-picker-month__day--range-middle': rangeMiddle,
+                          'v-date-picker-month__day--preview-start': previewStart,
+                          'v-date-picker-month__day--preview-end': previewEnd,
+                          'v-date-picker-month__day--preview-middle': previewMiddle,
+                          'v-date-picker-month__day--previewed': previewed,
+                        },
+                      ]}
+                      data-v-date={ !item.isDisabled ? item.isoDate : undefined }
+                    >
+                      { (hasRangeBg || hasPreviewBg) && (
+                        <div
+                          class={[
+                            'v-date-picker-month__range-bg',
+                            hasRangeBg ? 'v-date-picker-month__range-bg--range' : 'v-date-picker-month__range-bg--preview',
+                            rangeColorClasses.value,
+                          ]}
+                          style={ rangeColorStyles.value }
+                        />
+                      )}
+                      { (props.showAdjacentMonths || !item.isAdjacent) && (
+                        slots.day?.(slotProps) ?? (
+                          <VBtn { ...slotProps.props }>
+                            { item.localized }
+                            { genEvents(item.isoDate) }
+                          </VBtn>
+                        )
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ))}
           </div>
         </MaybeTransition>
       </div>
