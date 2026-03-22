@@ -30,6 +30,12 @@
     pointer-events: auto
     contain: layout
 
+  @supports (-webkit-touch-callout: none)
+    .v-overlay__content
+      -webkit-transform: translateZ(0)
+      transform: translateZ(0)
+      backface-visibility: hidden
+
   .v-overlay__scrim
     pointer-events: auto
     background: $overlay-scrim-background
