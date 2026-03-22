@@ -51,6 +51,10 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
+  hover: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
@@ -89,6 +93,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
             'v-expansion-panel-title--focusable': props.focusable,
             'v-expansion-panel-title--static': props.static,
+            'v-expansion-panel-title--no-hover': !props.hover,
           },
           backgroundColorClasses.value,
           props.class,

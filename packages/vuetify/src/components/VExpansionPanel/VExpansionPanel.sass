@@ -157,6 +157,10 @@
     &--focusable.v-expansion-panel-title--active
       @include tools.active-states('.v-expansion-panel-title__overlay')
 
+    &--no-hover
+      .v-expansion-panel-title__overlay
+        opacity: 0 !important
+
   .v-expansion-panel-title__overlay
     background-color: currentColor
     border-radius: inherit
