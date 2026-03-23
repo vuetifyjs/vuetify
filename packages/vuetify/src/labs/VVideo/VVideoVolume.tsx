@@ -1,3 +1,6 @@
+// Styles
+import './VVideo.sass'
+
 // Components
 import { VIcon } from '@/components/VIcon/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'

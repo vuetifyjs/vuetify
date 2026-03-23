@@ -1,5 +1,8 @@
 /* eslint-disable complexity */
 
+// Styles
+import './VVideo.sass'
+
 // Components
 import { VVideoVolume } from './VVideoVolume'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
