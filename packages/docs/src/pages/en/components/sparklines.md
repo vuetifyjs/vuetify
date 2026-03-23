@@ -23,7 +23,7 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.
 
-<ExamplesExample file="v-sparkline/usage" />
+<ExamplesUsage name="v-sparkline" />
 
 <PromotedEntry />
 
@@ -45,6 +45,12 @@ You can create a `v-sparkline` with fill using the `fill` property.
 
 <ExamplesExample file="v-sparkline/prop-fill" />
 
+#### Inset
+
+The **inset** prop extends the line beyond the chart boundary for edge-to-edge rendering. It is useful when combined with **interactive**, so that edge points are not clipped by SVG boundaries.
+
+<ExamplesExample file="v-sparkline/prop-inset" />
+
 ### Misc
 
 #### Custom labels
@@ -58,6 +64,12 @@ By providing a **label** slot, we are able to modify the displayed content by ad
 The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline.
 
 <ExamplesExample file="v-sparkline/misc-dashboard-card" />
+
+#### Interactive
+
+The **interactive** prop enables hover tracking, keyboard navigation, and focus support. Use the `@update:current-index` event to react to the active data point. This example fetches weekly npm download data and displays the hovered week's value and date range.
+
+<ExamplesExample file="v-sparkline/misc-interactive" />
 
 #### Heart rate
 

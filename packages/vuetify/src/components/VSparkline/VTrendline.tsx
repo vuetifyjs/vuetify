@@ -58,7 +58,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
     const lastLength = ref(0)
-    const path = ref<SVGPathElement | null>(null)
+    const fillPath = ref<SVGPathElement | null>(null)
     const strokePath = ref<SVGPathElement | null>(null)
 
     function genPoints (
@@ -153,41 +153,33 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     watch(() => props.modelValue, async () => {
       await nextTick()
 
-      if (!props.autoDraw || !path.value || PREFERS_REDUCED_MOTION()) return
-
-      const pathRef = path.value
-      const length = pathRef.getTotalLength()
+      if (!props.autoDraw || !strokePath.value || PREFERS_REDUCED_MOTION()) return
 
       if (!props.fill) {
-        pathRef.style.transition = 'none'
-        pathRef.style.strokeDasharray = `${length}`
-        pathRef.style.strokeDashoffset = `${length}`
-        pathRef.getBoundingClientRect()
-        pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-        pathRef.style.strokeDashoffset = '0'
+        const el = strokePath.value
+        const length = el.getTotalLength()
+        el.style.transition = 'none'
+        el.style.strokeDasharray = `${length}`
+        el.style.strokeDashoffset = `${length}`
+        el.getBoundingClientRect()
+        el.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+        el.style.strokeDashoffset = '0'
+        lastLength.value = length
       } else {
-        pathRef.style.transformOrigin = 'bottom center'
-        pathRef.style.transition = 'none'
-        pathRef.style.transform = `scaleY(0)`
-        pathRef.getBoundingClientRect()
-        pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-        pathRef.style.transform = `scaleY(1)`
-
-        if (strokePath.value) {
-          strokePath.value.style.transformOrigin = 'bottom center'
-          strokePath.value.style.transition = 'none'
-          strokePath.value.style.transform = `scaleY(0)`
-          strokePath.value.getBoundingClientRect()
-          strokePath.value.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-          strokePath.value.style.transform = `scaleY(1)`
+        for (const el of [fillPath.value, strokePath.value]) {
+          if (!el) continue
+          el.style.transformOrigin = 'bottom center'
+          el.style.transition = 'none'
+          el.style.transform = `scaleY(0)`
+          el.getBoundingClientRect()
+          el.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          el.style.transform = `scaleY(1)`
         }
       }
-
-      lastLength.value = length
     }, { immediate: true })
 
     function genPath (fill: boolean) {
-      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth)
+      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth ?? 0)
 
       return _genPath(
         extendedPoints.value.slice(),
@@ -208,7 +200,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     function getPathLengthAtX (svgPath: SVGPathElement, targetX: number): number {
       const total = svgPath.getTotalLength()
-      let lo = 0, hi = total
+      let lo = 0
+      let hi = total
       for (let i = 0; i < 32; i++) {
         const mid = (lo + hi) / 2
         if (svgPath.getPointAtLength(mid).x < targetX) lo = mid
@@ -315,7 +308,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
       const markerRadius = (parseFloat(props.markerSize) || 8) / 2
-      const markerFill = props.color || props.gradient?.[0] || 'currentColor'
 
       return (
         <Fragment>
@@ -373,10 +365,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
           <path
             key="fill"
-            ref={ (el: SVGPathElement | null) => {
-              path.value = el
-              if (!props.fill) strokePath.value = el
-            }}
+            ref={ props.fill ? fillPath : strokePath }
             d={ genPath(props.fill) }
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
@@ -388,7 +377,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               ref={ strokePath }
               d={ genPath(false) }
               fill="none"
-              stroke={ props.color ?? props.gradient?.[0] }
+              stroke="currentColor"
             />
           )}
 
@@ -400,7 +389,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                   cx={ point.x }
                   cy={ point.y }
                   r={ markerRadius }
-                  fill={ markerFill }
+                  fill="currentColor"
                   stroke={ props.markerStroke }
                   stroke-width={ 2 }
                   pointer-events="none"
@@ -429,7 +418,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
                 cx={ markerCx.value }
                 cy={ markerCy.value }
                 r={ markerRadius }
-                fill={ markerFill }
+                fill="currentColor"
                 stroke={ props.markerStroke }
                 stroke-width={ 2 }
               />
@@ -444,6 +433,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             modelValue={ tooltipVisible.value }
             target={ tooltipTarget.value }
             offset={ tooltipConfig.value.offset }
+            contentClass={ tooltipConfig.value.class }
             onAfterLeave={ onTooltipAfterLeave }
           >
             { currentIndex.value !== null && (

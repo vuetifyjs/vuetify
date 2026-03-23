@@ -3,12 +3,14 @@ import { propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { ClassValue } from '@/composables/component'
 
 export type SparklineItem = string | number | { value: number }
 
 export type SparklineTooltipConfig = {
   titleFormat?: (item: { index: number, value: number }) => string
   offset?: number
+  class?: ClassValue
   showCrosshair?: boolean
 }
 

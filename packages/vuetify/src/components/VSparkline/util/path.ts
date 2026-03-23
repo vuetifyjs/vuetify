@@ -1,3 +1,4 @@
+// Types
 import type { Point } from '../VTrendline'
 
 /**
