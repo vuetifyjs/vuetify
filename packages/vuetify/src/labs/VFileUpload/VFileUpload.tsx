@@ -136,13 +136,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
 
     function onFileSelection (e: Event) {
       if (!e.target || (e as any).repack) return // prevent loop
+      const target = e.target as HTMLInputElement
+      const selectedFiles = [...target.files ?? []]
+      if (!selectedFiles.length) return
 
       if (!props.filterByType) {
-        const target = e.target as HTMLInputElement
-        const newFiles = [...target.files ?? []]
-        model.value = props.multiple ? [...model.value, ...newFiles] : newFiles
+        model.value = props.multiple ? [...model.value, ...selectedFiles] : selectedFiles
       } else {
-        selectAccepted([...(e as any).target.files])
+        selectAccepted(selectedFiles)
       }
     }
 
