@@ -8,17 +8,30 @@
     "gradient": "An array of colors to use as a linear-gradient.",
     "gradientDirection": "The direction the gradient should run.",
     "height": "Height of the SVG trendline or bars.",
+    "id": "The id of the component.",
+    "inset": "Extends the line beyond the chart boundary so it runs edge-to-edge.",
+    "interactive": "Enables hover tracking, keyboard navigation (arrow keys), and focus support. Required for **tooltip** to work.",
+    "itemValue": "The value of the item.",
     "labels": "An array of string labels that correspond to the same index as its data counterpart.",
     "labelSize": "The label font size.",
     "lineWidth": "The thickness of the line, in px.",
+    "markerSize": "The diameter of marker circles, in px.",
+    "markerStroke": "The stroke (border) color applied to marker circles.",
+    "max": "The maximum value of the sparkline.",
+    "min": "The minimum value of the sparkline.",
     "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate.",
     "showLabels": "Show labels below each data point.",
-    "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0.",
+    "showMarkers": "Show circle markers at each data point.",
+    "smooth": "Controls the curve tension. `true` defaults to 8, `false` or `0` gives straight lines. Higher values produce smoother curves.",
+    "tooltip": "Displays a tooltip on the active data point. Requires **interactive**. Can be `true` or an object with `titleFormat`, `offset`, and `showCrosshair` options.",
     "type": "Choose between a trendline or bars.",
-    "width": "Width of the SVG trendline or bars.",
-    "id": "The id of the component.",
-    "itemValue": "The value of the item.",
-    "max": "The maximum value of the sparkline.",
-    "min": "The minimum value of the sparkline."
+    "width": "Width of the SVG trendline or bars."
+  },
+  "events": {
+    "update:currentIndex": "Emitted when the active data point changes via mouse hover, keyboard navigation, or focus. The payload is the point index, or `null` when no point is active."
+  },
+  "slots": {
+    "label": "Custom content for data point labels. Receives `{ index: number, value: string }`.",
+    "tooltip": "Custom content for the tooltip. Receives `{ index: number, value: number }`."
   }
 }

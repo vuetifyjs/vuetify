@@ -35,7 +35,11 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
 
   props: makeVSparklineProps(),
 
-  setup (props, { slots }) {
+  emits: {
+    'update:currentIndex': (_index: number | null) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const hasLabels = computed(() => {
       return Boolean(
@@ -63,6 +67,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
           style={ textColorStyles.value }
           viewBox={ `0 0 ${props.width} ${parseInt(totalHeight.value, 10)}` }
           { ...lineProps }
+          onUpdate:currentIndex={ (v: number | null) => emit('update:currentIndex', v) }
           v-slots={ slots }
         />
       )

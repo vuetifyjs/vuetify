@@ -48,7 +48,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
   props: makeVTrendlineProps(),
 
-  setup (props, { slots, attrs }) {
+  emits: {
+    'update:currentIndex': (_index: number | null) => true,
+  },
+
+  setup (props, { slots, attrs, emit }) {
     const uid = useId()
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
@@ -195,11 +199,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     // Hover / tooltip state
     const svgRef = shallowRef<SVGSVGElement | null>(null)
-    const hoveredIndex = shallowRef<number | null>(null)
+    const currentIndex = shallowRef<number | null>(null)
     const tooltipVisible = shallowRef(false)
 
-    const hoveredPoint = computed(() =>
-      hoveredIndex.value !== null ? points.value[hoveredIndex.value] : null
+    const currentPoint = computed(() =>
+      currentIndex.value !== null ? points.value[currentIndex.value] : null
     )
 
     function getPathLengthAtX (svgPath: SVGPathElement, targetX: number): number {
@@ -214,7 +218,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     }
 
     const markerPathLength = shallowRef(0)
-    watch(hoveredPoint, p => {
+    watch(currentPoint, p => {
       if (!p || !strokePath.value) return
       markerPathLength.value = getPathLengthAtX(strokePath.value, p.x)
     })
@@ -224,7 +228,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const markerCy = computed(() => strokePath.value?.getPointAtLength(animatedLength.value).y ?? 0)
 
     const tooltipTarget = computed<[number, number] | undefined>(() => {
-      if (!hoveredPoint.value || !svgRef.value) return undefined
+      if (!currentPoint.value || !svgRef.value) return undefined
       const ctm = svgRef.value.getScreenCTM()
       if (!ctm) return undefined
       const pt = svgRef.value.createSVGPoint()
@@ -257,7 +261,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           if (dist < minDist) { minDist = dist; nearest = i }
         })
 
-        hoveredIndex.value = nearest
+        currentIndex.value = nearest
+        emit('update:currentIndex', nearest)
         tooltipVisible.value = true
       })
     }
@@ -265,10 +270,46 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     function onSvgMouseleave () {
       cancelAnimationFrame(frame)
       tooltipVisible.value = false
+      if (!props.tooltip) {
+        currentIndex.value = null
+        emit('update:currentIndex', null)
+      }
     }
 
     function onTooltipAfterLeave () {
-      hoveredIndex.value = null
+      currentIndex.value = null
+      emit('update:currentIndex', null)
+    }
+
+    function setIndex (index: number | null) {
+      currentIndex.value = index
+      emit('update:currentIndex', index)
+      tooltipVisible.value = index !== null
+    }
+
+    function onSvgFocus () {
+      if (!points.value.length) return
+      setIndex(points.value.length - 1)
+    }
+
+    function onSvgBlur () {
+      tooltipVisible.value = false
+      if (!props.tooltip) {
+        setIndex(null)
+      }
+    }
+
+    function onSvgKeydown (e: KeyboardEvent) {
+      if (!points.value.length) return
+      const len = points.value.length
+
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        const dir = e.key === 'ArrowLeft' ? -1 : 1
+        const current = currentIndex.value ?? (dir === 1 ? -1 : len)
+        const next = Math.max(0, Math.min(len - 1, current + dir))
+        setIndex(next)
+      }
     }
 
     useRender(() => {
@@ -282,8 +323,12 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           ref={ svgRef }
           display="block"
           stroke-width={ parseFloat(props.lineWidth) ?? 4 }
-          onMousemove={ props.tooltip ? onSvgMousemove : undefined }
-          onMouseleave={ props.tooltip ? onSvgMouseleave : undefined }
+          tabindex={ props.interactive ? 0 : undefined }
+          onMousemove={ props.interactive ? onSvgMousemove : undefined }
+          onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
+          onFocus={ props.interactive ? onSvgFocus : undefined }
+          onBlur={ props.interactive ? onSvgBlur : undefined }
+          onKeydown={ props.interactive ? onSvgKeydown : undefined }
           { ...attrs }
         >
           <defs>
@@ -364,7 +409,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             </g>
           )}
 
-          { !!props.tooltip && hoveredPoint.value && (
+          { props.interactive && currentPoint.value && (
             <g key="hover" pointer-events="none">
               { tooltipConfig.value.showCrosshair && (
                 <line
@@ -401,13 +446,13 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             offset={ tooltipConfig.value.offset }
             onAfterLeave={ onTooltipAfterLeave }
           >
-            { hoveredIndex.value !== null && (
+            { currentIndex.value !== null && (
               slots.tooltip?.({
-                index: hoveredIndex.value,
-                value: points.value[hoveredIndex.value].value,
+                index: currentIndex.value,
+                value: points.value[currentIndex.value].value,
               }) ?? tooltipConfig.value.titleFormat({
-                index: hoveredIndex.value,
-                value: points.value[hoveredIndex.value].value,
+                index: currentIndex.value,
+                value: points.value[currentIndex.value].value,
               })
             )}
           </VTooltip>
