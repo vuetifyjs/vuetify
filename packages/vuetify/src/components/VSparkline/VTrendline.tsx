@@ -2,7 +2,7 @@
 import { VTooltip } from '@/components/VTooltip/VTooltip'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, useId, watch } from 'vue'
+import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genPath as _genPath } from './util/path'
 import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
@@ -44,15 +44,18 @@ export const makeVTrendlineProps = propsFactory({
 export const VTrendline = genericComponent<VTrendlineSlots>()({
   name: 'VTrendline',
 
+  inheritAttrs: false,
+
   props: makeVTrendlineProps(),
 
-  setup (props, { slots }) {
+  setup (props, { slots, attrs }) {
     const uid = useId()
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
     const lastLength = ref(0)
     const path = ref<SVGPathElement | null>(null)
+    const strokePath = ref<SVGPathElement | null>(null)
 
     function genPoints (
       values: number[],
@@ -152,24 +155,28 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const length = pathRef.getTotalLength()
 
       if (!props.fill) {
-        // Initial setup to "hide" the line by using the stroke dash array
+        pathRef.style.transition = 'none'
         pathRef.style.strokeDasharray = `${length}`
         pathRef.style.strokeDashoffset = `${length}`
-
-        // Force reflow to ensure the transition starts from this state
         pathRef.getBoundingClientRect()
-
-        // Animate the stroke dash offset to "draw" the line
         pathRef.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
         pathRef.style.strokeDashoffset = '0'
       } else {
-        // Your existing logic for filled paths remains the same
         pathRef.style.transformOrigin = 'bottom center'
         pathRef.style.transition = 'none'
         pathRef.style.transform = `scaleY(0)`
         pathRef.getBoundingClientRect()
         pathRef.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
         pathRef.style.transform = `scaleY(1)`
+
+        if (strokePath.value) {
+          strokePath.value.style.transformOrigin = 'bottom center'
+          strokePath.value.style.transition = 'none'
+          strokePath.value.style.transform = `scaleY(0)`
+          strokePath.value.getBoundingClientRect()
+          strokePath.value.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          strokePath.value.style.transform = `scaleY(1)`
+        }
       }
 
       lastLength.value = length
@@ -187,18 +194,45 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     }
 
     // Hover / tooltip state
+    const svgRef = shallowRef<SVGSVGElement | null>(null)
     const hoveredIndex = shallowRef<number | null>(null)
     const tooltipVisible = shallowRef(false)
-    const tooltipTarget = shallowRef<[number, number]>([0, 0])
 
     const hoveredPoint = computed(() =>
       hoveredIndex.value !== null ? points.value[hoveredIndex.value] : null
     )
 
-    const markerPos = shallowRef({ x: 0, y: 0 })
-    watch(hoveredPoint, p => { if (p) markerPos.value = { x: p.x, y: p.y } })
-    const markerCx = useTransition(() => markerPos.value.x, { duration: 150, transition: easingPatterns.easeOutQuad })
-    const markerCy = useTransition(() => markerPos.value.y, { duration: 150, transition: easingPatterns.easeOutQuad })
+    function getPathLengthAtX (svgPath: SVGPathElement, targetX: number): number {
+      const total = svgPath.getTotalLength()
+      let lo = 0, hi = total
+      for (let i = 0; i < 32; i++) {
+        const mid = (lo + hi) / 2
+        if (svgPath.getPointAtLength(mid).x < targetX) lo = mid
+        else hi = mid
+      }
+      return (lo + hi) / 2
+    }
+
+    const markerPathLength = shallowRef(0)
+    watch(hoveredPoint, p => {
+      if (!p || !strokePath.value) return
+      markerPathLength.value = getPathLengthAtX(strokePath.value, p.x)
+    })
+
+    const animatedLength = useTransition(markerPathLength, { duration: 150, transition: easingPatterns.easeOutQuad })
+    const markerCx = computed(() => strokePath.value?.getPointAtLength(animatedLength.value).x ?? 0)
+    const markerCy = computed(() => strokePath.value?.getPointAtLength(animatedLength.value).y ?? 0)
+
+    const tooltipTarget = computed<[number, number] | undefined>(() => {
+      if (!hoveredPoint.value || !svgRef.value) return undefined
+      const ctm = svgRef.value.getScreenCTM()
+      if (!ctm) return undefined
+      const pt = svgRef.value.createSVGPoint()
+      pt.x = markerCx.value
+      pt.y = markerCy.value
+      const { x, y } = pt.matrixTransform(ctm)
+      return [x, y]
+    })
 
     const tooltipConfig = computed(() => ({
       showCrosshair: true,
@@ -213,7 +247,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const target = e.currentTarget as SVGSVGElement
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        tooltipTarget.value = [e.clientX, e.clientY]
         const rect = target.getBoundingClientRect()
         const svgX = (e.clientX - rect.left) / rect.width * Number(props.width)
 
@@ -232,6 +265,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     function onSvgMouseleave () {
       cancelAnimationFrame(frame)
       tooltipVisible.value = false
+    }
+
+    function onTooltipAfterLeave () {
       hoveredIndex.value = null
     }
 
@@ -241,11 +277,14 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const markerFill = props.color || props.gradient?.[0] || 'currentColor'
 
       return (
+        <Fragment>
         <svg
+          ref={ svgRef }
           display="block"
           stroke-width={ parseFloat(props.lineWidth) ?? 4 }
           onMousemove={ props.tooltip ? onSvgMousemove : undefined }
           onMouseleave={ props.tooltip ? onSvgMouseleave : undefined }
+          { ...attrs }
         >
           <defs>
             <linearGradient
@@ -289,7 +328,10 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
           <path
             key="fill"
-            ref={ path }
+            ref={ (el: SVGPathElement | null) => {
+              path.value = el
+              if (!props.fill) strokePath.value = el
+            }}
             d={ genPath(props.fill) }
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
@@ -298,6 +340,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           { props.fill && (
             <path
               key="trendline"
+              ref={ strokePath }
               d={ genPath(false) }
               fill="none"
               stroke={ props.color ?? props.gradient?.[0] }
@@ -348,24 +391,28 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             </g>
           )}
 
-          { !!props.tooltip && (
-            <VTooltip
-              modelValue={ tooltipVisible.value }
-              target={ tooltipTarget.value }
-              offset={ tooltipConfig.value.offset }
-            >
-              { hoveredIndex.value !== null && (
-                slots.tooltip?.({
-                  index: hoveredIndex.value,
-                  value: points.value[hoveredIndex.value].value,
-                }) ?? tooltipConfig.value.titleFormat({
-                  index: hoveredIndex.value,
-                  value: points.value[hoveredIndex.value].value,
-                })
-              )}
-            </VTooltip>
-          )}
         </svg>
+
+        { !!props.tooltip && (
+          <VTooltip
+            key="tooltip"
+            modelValue={ tooltipVisible.value }
+            target={ tooltipTarget.value }
+            offset={ tooltipConfig.value.offset }
+            onAfterLeave={ onTooltipAfterLeave }
+          >
+            { hoveredIndex.value !== null && (
+              slots.tooltip?.({
+                index: hoveredIndex.value,
+                value: points.value[hoveredIndex.value].value,
+              }) ?? tooltipConfig.value.titleFormat({
+                index: hoveredIndex.value,
+                value: points.value[hoveredIndex.value].value,
+              })
+            )}
+          </VTooltip>
+        )}
+        </Fragment>
       )
     })
   },
