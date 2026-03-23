@@ -27,6 +27,7 @@ export const makeVSparklineProps = propsFactory({
 export type VSparklineSlots = {
   default: void
   label: { index: number, value: string }
+  tooltip: { index: number, value: number }
 }
 
 export const VSparkline = genericComponent<VSparklineSlots>()({

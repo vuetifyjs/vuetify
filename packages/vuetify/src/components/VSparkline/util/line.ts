@@ -6,6 +6,12 @@ import type { PropType } from 'vue'
 
 export type SparklineItem = string | number | { value: number }
 
+export type SparklineTooltipConfig = {
+  titleFormat?: (item: { index: number, value: number }) => string
+  offset?: number
+  showCrosshair?: boolean
+}
+
 export const makeLineProps = propsFactory({
   autoDraw: Boolean,
   autoDrawDuration: [Number, String],
@@ -54,8 +60,22 @@ export const makeLineProps = propsFactory({
     type: [String, Number],
     default: 8,
   },
+  markerSize: {
+    type: [Number, String],
+    default: 8,
+  },
+  markerStroke: {
+    type: String,
+    default: '#fff',
+  },
+  inset: Boolean,
   showLabels: Boolean,
+  showMarkers: Boolean,
   smooth: [Boolean, String, Number],
+  tooltip: {
+    type: [Boolean, Object] as PropType<boolean | SparklineTooltipConfig>,
+    default: false,
+  },
   width: {
     type: [Number, String],
     default: 300,

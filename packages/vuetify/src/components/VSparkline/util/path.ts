@@ -1,72 +1,42 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { Point } from '../VSparkline'
-// import { checkCollinear, getDistance, moveTo } from './math'
+import type { Point } from '../VTrendline'
 
 /**
- * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
+ * Catmull-Rom spline converted to cubic Bezier.
+ * Unlike the previous corner-rounding approach, this passes through every
+ * data point, so markers placed at point positions are always on the line.
+ *
+ * `smooth` controls tension: 0 = straight lines, 8 (default true) = full curve.
  */
-export function genPath (points: Point[], radius: number, fill = false, height = 75) {
+export function genPath (points: Point[], smooth: number, fill = false, height = 75) {
   if (points.length === 0) return ''
-  const start = points.shift()!
+
+  const start = points[0]
   const end = points[points.length - 1]
 
-  return (
-    (fill ? `M${start.x} ${height - start.x + 2} L${start.x} ${start.y}` : `M${start.x} ${start.y}`) +
-    points
-      .map((point, index) => {
-        const next = points[index + 1]
-        const prev = points[index - 1] || start
-        const isCollinear = next && checkCollinear(next, point, prev)
+  const prefix = fill
+    ? `M${start.x} ${height - start.x + 2} L${start.x} ${start.y}`
+    : `M${start.x} ${start.y}`
 
-        if (!next || isCollinear) {
-          return `L${point.x} ${point.y}`
-        }
+  const suffix = fill ? `L${end.x} ${height - start.x + 2} Z` : ''
 
-        const threshold = Math.min(
-          getDistance(prev, point),
-          getDistance(next, point)
-        )
-        const isTooCloseForRadius = threshold / 2 < radius
-        const radiusForPoint = isTooCloseForRadius ? threshold / 2 : radius
-
-        const before = moveTo(prev, point, radiusForPoint)
-        const after = moveTo(next, point, radiusForPoint)
-
-        return `L${before.x} ${before.y}S${point.x} ${point.y} ${after.x} ${after.y}`
-      })
-      .join('') +
-    (fill ? `L${end.x} ${height - start.x + 2} Z` : '')
-  )
-}
-
-function int (value: string | number): number {
-  return parseInt(value, 10)
-}
-
-/**
- * https://en.wikipedia.org/wiki/Collinearity
- * x=(x1+x2)/2
- * y=(y1+y2)/2
- */
-export function checkCollinear (p0: Point, p1: Point, p2: Point): boolean {
-  return int(p0.x + p2.x) === int(2 * p1.x) && int(p0.y + p2.y) === int(2 * p1.y)
-}
-
-export function getDistance (p1: Point, p2: Point): number {
-  return Math.sqrt(
-    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
-  )
-}
-
-export function moveTo (to: Point, from: Point, radius: number) {
-  const vector = { x: to.x - from.x, y: to.y - from.y }
-  const length = Math.sqrt((vector.x * vector.x) + (vector.y * vector.y))
-  const unitVector = { x: vector.x / length, y: vector.y / length }
-
-  return {
-    x: from.x + unitVector.x * radius,
-    y: from.y + unitVector.y * radius,
+  if (smooth === 0 || points.length < 3) {
+    return prefix + points.slice(1).map(p => `L${p.x} ${p.y}`).join('') + suffix
   }
+
+  const tension = Math.min(smooth / 8, 1)
+
+  const curves = points.slice(1).map((curr, i) => {
+    const prev = points[i]
+    const prevPrev = points[Math.max(0, i - 1)]
+    const next = points[Math.min(points.length - 1, i + 2)]
+
+    const cp1x = prev.x + (curr.x - prevPrev.x) * tension / 6
+    const cp1y = prev.y + (curr.y - prevPrev.y) * tension / 6
+    const cp2x = curr.x - (next.x - prev.x) * tension / 6
+    const cp2y = curr.y - (next.y - prev.y) * tension / 6
+
+    return `C${cp1x} ${cp1y} ${cp2x} ${cp2y} ${curr.x} ${curr.y}`
+  })
+
+  return prefix + curves.join('') + suffix
 }
