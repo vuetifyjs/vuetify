@@ -195,7 +195,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           onDragleave={ onDragleave }
           onDragover={ onDragover }
           onDrop={ onDrop }
-          onClick={ !hasBrowse ? onClickBrowse : undefined }
+          onClick={ !hasBrowse && !(isInset && hasFiles) ? onClickBrowse : undefined }
         >
           { slots.default?.({
             isDragging: isDragging.value,
