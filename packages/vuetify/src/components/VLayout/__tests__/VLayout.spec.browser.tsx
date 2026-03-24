@@ -45,7 +45,8 @@ describe('VLayout', () => {
     ))
 
     await scroll({ top: 1000 })
-    await expect(screen.getByTestId('sticky')).toBeOnScreen()
+    await expect(screen.getByTestId('sticky')).toBeInViewport()
+    await expect.poll(() => screen.getByTestId('sticky').getBoundingClientRect().top).toBe(64)
   })
 
   it('should work with scrollable main', async () => {
@@ -67,10 +68,11 @@ describe('VLayout', () => {
     ))
 
     await scroll({ top: 1000 }, screen.getByCSS('.v-main__scroller'))
-    await expect(screen.getByTestId('sticky')).toBeOnScreen()
+    await expect(screen.getByTestId('sticky')).toBeInViewport()
+    await expect.poll(() => screen.getByTestId('sticky').getBoundingClientRect().top).toBe(64)
   })
 
-  it.todo('should work when nested inside another layout', async () => {
+  it('should work when nested inside another layout', async () => {
     await page.viewport(600, 600)
 
     const drawer = ref(false)
@@ -90,10 +92,9 @@ describe('VLayout', () => {
 
     const nestedNav = screen.getByCSS('#nested .v-navigation-drawer')
 
-    // TODO: this only checks bounding boxes not clipping
-    await expect(nestedNav).not.toBeOnScreen()
+    await expect(nestedNav).not.toBeInViewport()
 
     drawer.value = true
-    await expect(nestedNav).toBeOnScreen()
+    await expect(nestedNav).toBeInViewport()
   })
 })
