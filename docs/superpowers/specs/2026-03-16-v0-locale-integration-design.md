@@ -186,7 +186,7 @@ Thin wrapper — injects `LocaleSymbol`, returns `{ isRtl, rtlClasses }`.
 
 ### provideLocale()
 
-Replaced by v0's `Locale` provider component. Vuetify wraps it to add `rtlClasses` and provide via `LocaleSymbol`. See "VLocaleProvider" section.
+Retained as a thin wrapper. Creates a scoped v0 locale + RTL context pair, computes `rtlClasses`, and provides the combined object via `LocaleSymbol`. Used internally by `VLocaleProvider` and available for renderless composable patterns. Will migrate to wrap v0's `Locale` component when it ships.
 
 ## vue-i18n Adapter
 
@@ -226,8 +226,8 @@ Each `VLocaleProvider` instance maintains its own locale→RTL bridge watcher, i
 ## Breaking Changes
 
 - `LocaleInstance` type changes internally (backed by v0 refs)
-- `LocaleInstance.provide()` method removed — nested contexts use `VLocaleProvider` / v0's `Locale` component
-- `provideLocale()` composable removed — replaced by `VLocaleProvider` / v0's `Locale` component internally
+- `LocaleInstance.provide()` method removed — `provideLocale()` replaces this (see below)
+- `provideLocale()` retained as thin wrapper — creates scoped v0 locale + RTL contexts, provides via `LocaleSymbol`. Used internally by `VLocaleProvider`. Will migrate to wrap v0's `Locale` component when it ships.
 - `messages: Ref<LocaleMessages>` removed from public API — messages are managed by v0's token system; consumers register messages via `createVuetify()` options
 - `fallback: Ref<string>` removed from public API — fallback is configured at creation time, not mutated at runtime
 - `rtl: Ref<Record<string, boolean>>` (per-locale RTL map) removed from public API — the map is Vuetify-internal; consumers use `isRtl` (boolean) and `rtlClasses` (string). `VLocaleProvider` uses the internal map for locale→RTL lookup.
