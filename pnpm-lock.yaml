@@ -457,8 +457,8 @@ importers:
   packages/vuetify:
     dependencies:
       '@vuetify/v0':
-        specifier: ^0.1.7
-        version: 0.1.7(vue@3.5.25(typescript@5.8.3))
+        specifier: ^0.1.10
+        version: 0.1.10(vue-i18n@11.2.1(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))
     devDependencies:
       '@date-io/core':
         specifier: 3.2.0
@@ -3796,8 +3796,8 @@ packages:
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
     engines: {node: '>=18'}
 
-  '@vuetify/v0@0.1.7':
-    resolution: {integrity: sha512-07QrP5Yp9CsdWTuyMiW38PDJs54Lg95iCmqI80WBm130nd89nLk3KXt+pY3vhfSRbM4AM4hFp+zGPj59nf3xyw==}
+  '@vuetify/v0@0.1.10':
+    resolution: {integrity: sha512-mHITfo9KjQ1jcIBQ3dpEsfNa863xHx/JxZM7Kjtf+mrFhyyDMk/NagT2cGGrWLdU65wv2BJg7cNZmWpSqk3l+A==}
     peerDependencies:
       '@adobe/leonardo-contrast-colors': '>=1.0.0'
       '@ant-design/colors': '>=7.0.0'
@@ -3806,6 +3806,7 @@ packages:
       launchdarkly-js-client-sdk: ^3.0.0
       posthog-js: ^1.0.0
       vue: '>=3.5.0'
+      vue-i18n: '>=10.0.0'
     peerDependenciesMeta:
       '@adobe/leonardo-contrast-colors':
         optional: true
@@ -3818,6 +3819,8 @@ packages:
       launchdarkly-js-client-sdk:
         optional: true
       posthog-js:
+        optional: true
+      vue-i18n:
         optional: true
 
   '@vueuse/head@1.3.1':
@@ -9079,7 +9082,7 @@ snapshots:
 
   '@babel/helper-annotate-as-pure@7.27.3':
     dependencies:
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
 
   '@babel/helper-compilation-targets@7.27.2':
     dependencies:
@@ -9105,7 +9108,7 @@ snapshots:
       '@babel/helper-optimise-call-expression': 7.27.1
       '@babel/helper-replace-supers': 7.27.1(@babel/core@7.28.5)
       '@babel/helper-skip-transparent-expression-wrappers': 7.27.1
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.29.0
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -9121,7 +9124,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.5
       '@babel/helper-compilation-targets': 7.27.2
-      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/helper-plugin-utils': 7.28.6
       debug: 4.4.3
       lodash.debounce: 4.0.8
       resolve: 1.22.10
@@ -9182,7 +9185,7 @@ snapshots:
       '@babel/core': 7.28.5
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-wrap-function': 7.27.1
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.29.0
     transitivePeerDependencies:
       - supports-color
 
@@ -9191,14 +9194,14 @@ snapshots:
       '@babel/core': 7.28.5
       '@babel/helper-member-expression-to-functions': 7.28.5
       '@babel/helper-optimise-call-expression': 7.27.1
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.29.0
     transitivePeerDependencies:
       - supports-color
 
   '@babel/helper-skip-transparent-expression-wrappers@7.27.1':
     dependencies:
-      '@babel/traverse': 7.28.5
-      '@babel/types': 7.28.5
+      '@babel/traverse': 7.29.0
+      '@babel/types': 7.29.0
     transitivePeerDependencies:
       - supports-color
 
@@ -12390,11 +12393,12 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@vuetify/v0@0.1.7(vue@3.5.25(typescript@5.8.3))':
+  '@vuetify/v0@0.1.10(vue-i18n@11.2.1(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))':
     dependencies:
       vue: 3.5.25(typescript@5.8.3)
     optionalDependencies:
       '@js-temporal/polyfill': 0.5.1
+      vue-i18n: 11.2.1(vue@3.5.25(typescript@5.8.3))
 
   '@vueuse/head@1.3.1(vue@3.5.25(typescript@5.8.3))':
     dependencies:
@@ -15000,9 +15004,9 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
-      '@babel/plugin-syntax-jsx': 7.27.1(@babel/core@7.28.5)
+      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.28.5)
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.5)
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.0
       '@jest/expect-utils': 30.2.0
       '@jest/get-type': 30.1.0
       '@jest/snapshot-utils': 30.2.0
