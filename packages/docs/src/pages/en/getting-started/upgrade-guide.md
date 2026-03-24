@@ -338,7 +338,6 @@ VCounter is used to display the counter hint under VTextField, VTextarea and VFi
 + ['2023-09-28', '2023-10-02']
 ```
 
-
 ### VFileInput
 
 Removed the **$file-input-details-padding-inline** Sass variable.
