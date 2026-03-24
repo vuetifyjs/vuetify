@@ -229,9 +229,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         }
         if (!props.persistent) {
           isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
-            activatorEl.value?.focus()
-          }
+          activatorEl.value?.focus()
         } else animateClick()
       }
     }
