@@ -1,8 +1,6 @@
 // Utilities
 import { createLocale as createV0Locale, createRtl as createV0Rtl } from '@vuetify/v0'
 import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
-
-// Locales
 import en from '@/locale/en'
 
 // Types
@@ -42,7 +40,7 @@ export interface RtlInstance {
   rtlClasses: Ref<string>
 }
 
-/** @internal Carried on provided data so provideLocale can inherit context */
+/** @internal */
 export interface InternalLocaleData {
   _messages: Record<string, LocaleMessages>
   _fallback: string
@@ -137,10 +135,8 @@ function createRtlInstance (
   rtlMap: Ref<Record<string, boolean>>,
   v0Rtl: RtlContext
 ): RtlInstance {
-  // Local ref bridges v0's Ref (different @vue/reactivity copy) to Vuetify's
   const isRtl = shallowRef(v0Rtl.isRtl.value)
 
-  // Bridge: when locale changes, update RTL from per-locale map
   watch(() => locale.current.value, current => {
     const value = rtlMap.value[current] ?? false
     v0Rtl.isRtl.value = value
@@ -154,10 +150,7 @@ function createRtlInstance (
   }
 }
 
-// --- Public API ---
-
 export function createLocale (options?: LocaleOptions & RtlOptions) {
-  // If a custom adapter (e.g. vue-i18n) is passed, use it directly
   if (options?.adapter) {
     const rtl = createRtlFromAdapter(options.adapter, options)
     return { ...options.adapter, ...rtl }
@@ -175,8 +168,6 @@ export function createLocale (options?: LocaleOptions & RtlOptions) {
 
   const v0Rtl = createV0Rtl({
     default: false,
-    // Pass null to prevent v0 from managing document dir attribute —
-    // Vuetify manages this via VApp's rtlClasses
     target: null,
   })
 
@@ -211,7 +202,6 @@ export function provideLocale (props: LocaleOptions & RtlProps) {
 
   if (!parent) throw new Error('[Vuetify] Could not find injected locale instance')
 
-  // If the parent is using a custom adapter (e.g. vue-i18n), delegate to its provide
   if ('provide' in parent && typeof (parent as any).provide === 'function') {
     const i18n = (parent as any).provide(props)
     const rtl = provideRtl(i18n, parent.rtl, props)
@@ -220,7 +210,6 @@ export function provideLocale (props: LocaleOptions & RtlProps) {
     return data
   }
 
-  // Inherit root messages and fallback, merge with any child-provided overrides
   const parentData = parent as any as Partial<InternalLocaleData>
   const parentMessages = parentData._messages ?? {}
   const parentFallback = parentData._fallback ?? 'en'
