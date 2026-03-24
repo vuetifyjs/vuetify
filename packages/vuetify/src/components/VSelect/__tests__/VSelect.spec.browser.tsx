@@ -1027,5 +1027,15 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/22730
+  it('should pass title attribute to the root element', async () => {
+    const { element } = render(() => (
+      <VSelect title="Select a state" items={['California', 'Colorado']} />
+    ))
+
+    expect(element.querySelector('.v-field')).toHaveAttribute('title', 'Select a state')
+    expect(element.querySelector('input')).not.toHaveAttribute('title')
+  })
+
   showcase({ stories })
 })
