@@ -19,29 +19,25 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Locale
 
-Vuetify's locale system is now powered by `@vuetify/v0` under the hood. The consumer-facing API (`useLocale`, `useRtl`, `VLocaleProvider`) is unchanged, but some internal types and methods have been removed.
+Vuetify's locale system is now powered by `@vuetify/v0` under the hood. The consumer-facing API (`useLocale`, `useRtl`, `VLocaleProvider`) is unchanged for the majority of users. If you only use `t()`, `n()`, `current`, `isRtl`, `rtlClasses`, or `decimalSeparator`, no changes are needed.
 
-### Removed: `LocaleInstance.provide()`
+### LocaleInstance
 
-The `provide()` method on `LocaleInstance` has been removed. Scoped locale contexts are created via `VLocaleProvider` or the `provideLocale()` composable.
+Several properties have been removed from the `LocaleInstance` type:
+
+- `provide()` — use `VLocaleProvider` or the `provideLocale()` composable instead
+- `name` — adapter identity is no longer exposed
+- `messages` — messages are managed internally; register them via `createVuetify({ locale: { messages } })`
+- `fallback` — configure at creation time via `createVuetify({ locale: { fallback: 'en' } })`
 
 ```diff
-- const locale = useLocale()
+  const locale = useLocale()
+
 - const scoped = locale.provide({ locale: 'fr' })
-+ // Use VLocaleProvider in templates or provideLocale() in setup
+- console.log(locale.name) // 'vuetify'
+- console.log(locale.messages.value)
+- console.log(locale.fallback.value)
 ```
-
-### Removed: `LocaleInstance.name`
-
-The `name` field (`'vuetify'` or `'vue-i18n'`) has been removed. Adapter identity is now a `@vuetify/v0` concern.
-
-### Removed: `LocaleInstance.messages`
-
-The `messages` ref is no longer exposed on the public type. Messages are managed internally by `@vuetify/v0`'s token system. Register messages at creation time via `createVuetify({ locale: { messages } })`.
-
-### Removed: `LocaleInstance.fallback`
-
-The `fallback` ref is no longer exposed on the public type. Configure the fallback locale at creation time via `createVuetify({ locale: { fallback: 'en' } })`.
 
 ### vue-i18n adapter
 
