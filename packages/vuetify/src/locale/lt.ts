@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Įveskite datą',
     },
+    ariaLabel: {
+      previousMonth: 'Ankstesnis mėnuo',
+      nextMonth: 'Kitas mėnuo',
+      selectYear: 'Pasirinkite metus',
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectMonth: 'Pasirinkite mėnesį',
+      selectDate: '{0}',
+      currentDate: 'Šiandien, {0}',
+    },
   },
   noDataText: 'Nėra duomenų',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pasirinkite laiką',
+    hour: 'Valanda',
+    minute: 'Minutės',
+    second: 'Sekundės',
+    notAllowed: 'Reikšmė neleidžiama',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
   },
+  command: {
+    search: 'Įveskite komandą arba ieškokite...',
+  },
   hotkey: {
     then: 'tada',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Tarpas',
     plus: 'plius',
     shortcut: 'Klaviatūros trumpinys: {0}',
+    or: 'arba',
+  },
+  video: {
+    play: 'Groti',
+    pause: 'Pauzė',
+    seek: 'Ieškoti',
+    volume: 'Garsumas',
+    showVolume: 'Rodyti garso valdymą',
+    mute: 'Nutildyti',
+    unmute: 'Įjungti garsą',
+    enterFullscreen: 'Visas ekranas',
+    exitFullscreen: 'Išeiti iš viso ekrano',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pasirinkite spalvą iš ekrano',
+      hueSlider: 'Atspalvis',
+      alphaSlider: 'Skaidrumas',
+      redInput: 'Raudona',
+      greenInput: 'Žalia',
+      blueInput: 'Mėlyna',
+      alphaInput: 'Skaidrumas',
+      hueInput: 'Atspalvis',
+      saturationInput: 'Sodrumas',
+      lightnessInput: 'Šviesumas',
+      hexInput: 'HEX reikšmė',
+      hexaInput: 'HEX su skaidrumo reikšme',
+      changeFormat: 'Keisti spalvos formatą',
+    },
   },
 }

@@ -5,21 +5,26 @@
     </template>
 
     <template v-slot:headline>
-      <div class="text-h4">
+      <div class="text-headline-large">
         All Done For Now!
       </div>
     </template>
 
     <template v-slot:title>
-      <div class="text-h6">
+      <div class="text-title-large">
         You're all caught up.
       </div>
     </template>
 
     <template v-slot:text>
-      <div class="text-medium-emphasis text-caption">
+      <div class="text-medium-emphasis text-body-small">
         Great job on completing all your tasks! This might be a good time to relax or consider planning your next set of goals. If you think of something new, just hit the button below to add a new task.
       </div>
     </template>
   </v-empty-state>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2261-33467&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

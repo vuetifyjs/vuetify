@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Validation rules
   title: Validation rules composable
@@ -21,12 +20,6 @@ The rules composable provide a multitude of validation rules to be used with for
 <PageFeatures />
 
 <PromotedEntry />
-
-::: warning
-
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
-
-:::
 
 ## Installation
 
@@ -176,20 +169,23 @@ RuleBuilders parameters can also be passed using an Array:
 Vuetify comes with an existing set of validation rules but you can overwrite them or add yours.
 
 ```js { resource="src/plugins/vuetify.js" }
+import { createVue } from 'vue'
+import { createVuetify } from 'vuetify'
 import { createRulesPlugin } from 'vuetify/labs/rules'
 
-export default createRulesPlugin({
-  rules: {
-    aliases: {
-      // Create a new rule named "pinCode"
-      pinCode: err => {
-        return v => (/^[\d]{4}$/.test(v)) || err || 'Field must contain a 4-digit PIN'
-      },
-      // Overwrite an existing rule by redefining it
-      integer: err => {
-        return v => Number.isInteger(v) || err || 'Field must contain an integer value'
-      }
+const app = createVue()
+const vuetify = createVuetify()
+
+app.use(createRulesPlugin({
+  aliases: {
+    // Create a new rule named "pinCode"
+    pinCode: err => {
+      return v => (/^[\d]{4}$/.test(v)) || err || 'Field must contain a 4-digit PIN'
+    },
+    // Overwrite an existing rule by redefining it
+    integer: err => {
+      return v => Number.isInteger(v) || err || 'Field must contain an integer value'
     },
   },
-})
+}, vuetify.locale)
 ```

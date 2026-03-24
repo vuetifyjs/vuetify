@@ -144,7 +144,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       const iconProps = {
         icon,
         size: iconSize.value,
-        iconColor: props.iconColor,
+        color: props.iconColor,
         opacity: props.opacity,
       }
 

@@ -14,7 +14,7 @@ describe('VBottomSheet', () => {
     ))
 
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
-    await expect.element(bottomSheet).toBeOnScreen()
+    await expect.element(bottomSheet).toBeInViewport()
     await expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
     await expect.element(bottomSheet).toHaveTextContent('Content inside bottom sheet')
   })

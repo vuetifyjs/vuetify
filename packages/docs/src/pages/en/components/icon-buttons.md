@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Icon buttons
   title: Icon button component
@@ -10,7 +9,7 @@ related:
   - /components/buttons/
   - /components/floating-action-buttons/
 features:
-  github: /components/VIconBtn/
+  github: /labs/VIconBtn/
   label: 'C: VIconBtn'
   report: true
   spec: https://m3.material.io/components/icon-buttons/
@@ -21,12 +20,6 @@ features:
 The `v-icon-btn` component is a lightweight button component for iconography.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
-
-:::
 
 ## Installation
 

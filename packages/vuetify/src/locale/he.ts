@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'הזן תאריך',
     },
+    ariaLabel: {
+      previousMonth: 'החודש הקודם',
+      nextMonth: 'החודש הבא',
+      selectYear: 'בחר שנה',
+      previousYear: 'השנה הקודמת',
+      nextYear: 'השנה הבאה',
+      selectMonth: 'בחר חודש',
+      selectDate: '{0}',
+      currentDate: 'היום, {0}',
+    },
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'לפנה"צ',
     pm: 'אחה"צ',
     title: 'בחר שעה',
+    hour: 'שעה',
+    minute: 'דקות',
+    second: 'שניות',
+    notAllowed: 'הערך אינו מותר',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'נא לבחור לפחות ערך אחד',
     pattern: 'פורמט לא תקף',
   },
+  command: {
+    search: 'הקלד פקודה או חפש...',
+  },
   hotkey: {
     then: 'אז',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'רווח',
     plus: 'פלוס',
     shortcut: 'קיצור דרך במקלדת: {0}',
+    or: 'או',
+  },
+  video: {
+    play: 'נגן',
+    pause: 'השהה',
+    seek: 'חפש',
+    volume: 'עוצמת שמע',
+    showVolume: 'הצג בקרת עוצמת שמע',
+    mute: 'השתק',
+    unmute: 'בטל השתקה',
+    enterFullscreen: 'מסך מלא',
+    exitFullscreen: 'צא ממסך מלא',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'בחר צבע מהמסך',
+      hueSlider: 'גוון',
+      alphaSlider: 'אלפא',
+      redInput: 'אדום',
+      greenInput: 'ירוק',
+      blueInput: 'כחול',
+      alphaInput: 'אלפא',
+      hueInput: 'גוון',
+      saturationInput: 'רוויה',
+      lightnessInput: 'בהירות',
+      hexInput: 'ערך HEX',
+      hexaInput: 'HEX עם ערך אלפא',
+      changeFormat: 'שנה פורמט צבע',
+    },
   },
 }

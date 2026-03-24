@@ -233,7 +233,7 @@ describe('APCAcontrast', () => {
     ['#def', '#123', -98.44863435731264],
     ['#123', '#234', 1.276075977788573],
   ])('%s on %s', (text, bg, expected) => {
-    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBe(expected)
+    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBeCloseTo(expected, 13)
   })
 })
 

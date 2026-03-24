@@ -25,13 +25,15 @@ import {
   EventProp,
   genericComponent,
   nullifyTransforms,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   standardEasing,
   useRender,
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ClassValue } from '@/composables/component'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -41,13 +43,16 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
   isFocused: Ref<boolean>
+  iconColor: ComputedRef<string | undefined>
   controlRef: Ref<HTMLElement | undefined>
   focus: () => void
   blur: () => void
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown>
+  props: Record<string, unknown> & {
+    class?: ClassValue
+  }
 }
 
 export const makeVFieldProps = propsFactory({
@@ -65,7 +70,6 @@ export const makeVFieldProps = propsFactory({
   },
   color: String,
   baseColor: String,
-  details: Boolean,
   dirty: Boolean,
   disabled: {
     type: Boolean,
@@ -118,6 +122,8 @@ export const VField = genericComponent<new <T>(
 
   props: {
     id: String,
+    details: Boolean,
+    labelId: String,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),
@@ -163,7 +169,7 @@ export const VField = genericComponent<new <T>(
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
-      if (hasFloatingLabel.value) {
+      if (hasFloatingLabel.value && !PREFERS_REDUCED_MOTION()) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
 
@@ -208,9 +214,26 @@ export const VField = genericComponent<new <T>(
       isActive,
       isFocused,
       controlRef,
+      iconColor,
       blur,
       focus,
     }))
+
+    const floatingLabelProps = toRef(() => {
+      const ariaHidden = !isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
+
+    const mainLabelProps = toRef(() => {
+      const ariaHidden = hasFloatingLabel.value && isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
 
     function onClick (e: MouseEvent) {
       if (e.target !== document.activeElement) {
@@ -280,15 +303,16 @@ export const VField = genericComponent<new <T>(
 
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
-              { props.prependInnerIcon && (
-                <InputIcon
-                  key="prepend-icon"
-                  name="prependInner"
-                  color={ iconColor.value }
-                />
-              )}
-
-              { slots['prepend-inner']?.(slotProps.value) }
+              { slots['prepend-inner']
+                ? slots['prepend-inner'](slotProps.value)
+                : (props.prependInnerIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prependInner"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -299,8 +323,7 @@ export const VField = genericComponent<new <T>(
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
-                for={ id.value }
-                aria-hidden={ !isActive.value }
+                { ...floatingLabelProps.value }
                 style={ textColorStyles.value }
               >
                 { label() }
@@ -308,7 +331,12 @@ export const VField = genericComponent<new <T>(
             )}
 
             { hasLabel.value && (
-              <VFieldLabel key="label" ref={ labelRef } for={ id.value }>
+              <VFieldLabel
+                key="label"
+                ref={ labelRef }
+                id={ props.labelId }
+                { ...mainLabelProps.value }
+              >
                 { label() }
               </VFieldLabel>
             )}
@@ -373,15 +401,16 @@ export const VField = genericComponent<new <T>(
 
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
-              { slots['append-inner']?.(slotProps.value) }
-
-              { props.appendInnerIcon && (
-                <InputIcon
-                  key="append-icon"
-                  name="appendInner"
-                  color={ iconColor.value }
-                />
-              )}
+              { slots['append-inner']
+                ? slots['append-inner'](slotProps.value)
+                : (props.appendInnerIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="appendInner"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -398,7 +427,11 @@ export const VField = genericComponent<new <T>(
 
                 { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+                    <VFieldLabel
+                      ref={ floatingLabelRef }
+                      floating
+                      { ...floatingLabelProps.value }
+                    >
                       { label() }
                     </VFieldLabel>
                   </div>
@@ -409,7 +442,7 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+              <VFieldLabel ref={ floatingLabelRef } floating { ...floatingLabelProps.value }>
                 { label() }
               </VFieldLabel>
             )}

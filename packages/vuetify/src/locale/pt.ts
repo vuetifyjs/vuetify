@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Insira a data',
     },
+    ariaLabel: {
+      previousMonth: 'Mês anterior',
+      nextMonth: 'Próximo mês',
+      selectYear: 'Selecionar ano',
+      previousYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      selectMonth: 'Selecionar mês',
+      selectDate: '{0}',
+      currentDate: 'Hoje, {0}',
+    },
   },
   noDataText: 'Não há dados disponíveis',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecione o horário',
+    hour: 'Hora',
+    minute: 'Minuto',
+    second: 'Segundos',
+    notAllowed: 'O valor não é permitido',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Por favor, escolha pelo menos um valor',
     pattern: 'Formato inválido',
   },
+  command: {
+    search: 'Digite um comando ou pesquise...',
+  },
   hotkey: {
     then: 'então',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Espaço',
     plus: 'mais',
     shortcut: 'Atalho de teclado: {0}',
+    or: 'ou',
+  },
+  video: {
+    play: 'Reproduzir',
+    pause: 'Pausar',
+    seek: 'Buscar',
+    volume: 'Volume',
+    showVolume: 'Mostrar controle de volume',
+    mute: 'Silenciar',
+    unmute: 'Ativar som',
+    enterFullscreen: 'Tela cheia',
+    exitFullscreen: 'Sair da tela cheia',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Selecionar cor da tela',
+      hueSlider: 'Matiz',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermelho',
+      greenInput: 'Verde',
+      blueInput: 'Azul',
+      alphaInput: 'Alfa',
+      hueInput: 'Matiz',
+      saturationInput: 'Saturação',
+      lightnessInput: 'Luminosidade',
+      hexInput: 'Valor HEX',
+      hexaInput: 'HEX com valor alfa',
+      changeFormat: 'Alterar formato da cor',
+    },
   },
 }

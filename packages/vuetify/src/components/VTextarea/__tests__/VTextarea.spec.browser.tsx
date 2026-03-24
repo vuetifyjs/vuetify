@@ -19,7 +19,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -27,7 +27,7 @@ describe('VTextarea', () => {
     await userEvent.keyboard('sed d')
     await expect.poll(() => el.offsetHeight).toBe(56)
 
-    await userEvent.keyboard('o')
+    await userEvent.keyboard('{Enter}')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
 
@@ -43,7 +43,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 

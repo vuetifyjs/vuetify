@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
@@ -15,7 +16,7 @@ features:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports many popular icon libraries - [Material Design Icons](https://pictogrammers.com/library/mdi/), [Font Awesome](https://fontawesome.com/), [Phosphor](https://phosphoricons.com/), [Lucide](https://lucide.dev/), [Tabler](https://tabler.io/icons), and more.
 
 <PageFeatures />
 
@@ -50,7 +51,7 @@ In the above examples we import the default `mdi` icon set and its corresponding
 
 ::: info
 
-While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
+While it is still possible to supply the icon value through the default slot in Vuetify 3+ (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
 :::
 
@@ -201,6 +202,83 @@ export default createVuetify({
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
 <DocIconList />
+
+#### UnoCSS icon sets
+
+Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](https://unocss.dev/presets/icons). All icons are tree-shaken so only the icons you use are included in your final CSS bundle.
+
+| Icon library | Iconify package | Vuetify import | Default set name |
+|---|---|---|---|
+| [Material Design Icons](https://pictogrammers.com/library/mdi/) | `@iconify-json/mdi` | `vuetify/iconsets/mdi-unocss` | `mdi` |
+| [Font Awesome 6](https://fontawesome.com/) | `@iconify-json/fa6-solid`<br>`@iconify-json/fa6-regular` | `vuetify/iconsets/fa6` | `fa6` |
+| [Phosphor](https://phosphoricons.com/) | `@iconify-json/ph` | `vuetify/iconsets/ph` | `ph` |
+| [Lucide](https://lucide.dev/) | `@iconify-json/lucide` | `vuetify/iconsets/lucide` | `lucide` |
+| [Tabler](https://tabler.io/icons) | `@iconify-json/tabler` | `vuetify/iconsets/tabler` | `tabler` |
+| [Remix Icon](https://remixicon.com/) | `@iconify-json/ri` | `vuetify/iconsets/ri` | `ri` |
+| [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
+| [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
+| [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
+
+Install `unocss` and the Iconify package for your chosen library:
+
+::: tabs
+
+```bash [pnpm]
+pnpm add unocss @iconify-json/ph -D
+```
+
+```bash [yarn]
+yarn add unocss @iconify-json/ph -D
+```
+
+```bash [npm]
+npm install unocss @iconify-json/ph -D
+```
+
+```bash [bun]
+bun add unocss @iconify-json/ph -D
+```
+
+:::
+
+Then configure UnoCSS in your project (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
+
+::: warning
+
+Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify icon sets rely on it.
+
+:::
+
+```js { resource="unocss.config.js" }
+import { presetIcons, defineConfig } from 'unocss'
+
+export default defineConfig({
+  presets: [
+    presetIcons({
+      processor(props) {
+        delete props.color
+      },
+    }),
+  ],
+})
+```
+
+Register the icon set in your Vuetify configuration. The following example uses Phosphor, but you can substitute any set from the table above:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { aliases, ph } from 'vuetify/iconsets/ph'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'ph',
+    aliases,
+    sets: {
+      ph,
+    },
+  },
+})
+```
 
 ### Material Icons
 
@@ -439,11 +517,63 @@ app.mount('#app')
 </template>
 ```
 
-## Built-in aliases
+## Icon aliases
 
-The following icons are available as aliases for use in Vuetify components:
+Icon aliases allow you to define short, reusable names for icons that can map to different sources — such as icon names from a set, local Vue components, or raw SVG paths. Aliases are referenced with an initial `$` followed by the name of the alias, e.g. `$product`. The following icons are available as aliases for use in Vuetify components:
 
 <DocIconTable />
+
+### Custom aliases
+
+If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. This makes it easier to manage icons consistently throughout your project.
+
+Here’s an example:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import AccountIcon from './account-icon.vue'
+import ClosetIcon from './closet-icon.vue'
+
+export const customIcons = {
+  mdiCustomAlias: 'mdi-tag',
+  account: AccountIcon,
+  annotation: [
+    'M14 9.45h-1v-1a1 1 0 0 0-2 0v1h-1a1 1 0 0 0 0 2h1v1a1 1 0 0 0 2 0v-1h1a1 1 0 0 0 0-2Zm6.46.18A8.5 8.5 0 1 0 6 16.46l5.3 5.31a1 1 0 0 0 1.42 0L18 16.46a8.46 8.46 0 0 0 2.46-6.83Zm-3.86 5.42l-4.6 4.6l-4.6-4.6a6.49 6.49 0 0 1-1.87-5.22A6.57 6.57 0 0 1 8.42 5a6.47 6.47 0 0 1 7.16 0a6.57 6.57 0 0 1 2.89 4.81a6.49 6.49 0 0 1-1.87 5.24Z',
+  ],
+  closet: ClosetIcon,
+}
+
+export const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'light',
+    //
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases: {
+      ...customIcons,
+    },
+  },
+})
+```
+
+```html
+<template>
+  <v-btn prepend-icon="$account">Custom Icon 1</v-btn>
+  <v-btn prepend-icon="$mdiCustomAlias">Custom Icon 2</v-btn>
+  <v-btn prepend-icon="$closet">Custom Icon 3</v-btn>
+  <v-btn prepend-icon="$annotation">Custom Icon 4</v-btn>
+  <v-btn prepend-icon="mdi-close">Default MDI Icon</v-btn>
+</template>
+```
+
+In this setup:
+
+* `$account` and `$closet` render your own Vue component SVG icons.
+* `$mdiCustomAlias` references an alias for the `mdi-tag` icon.
+* `$annotation` references inline SVG path data.
+
+This approach gives you flexibility: you can mix external libraries with your own icons seamlessly, while keeping your templates cleaner and easier to maintain.
 
 ## Multiple icon sets
 
@@ -549,30 +679,4 @@ export default createVuetify({
     },
   },
 })
-```
-
-## Extending available aliases
-
-If you are developing custom Vuetify components, you can extend the `aliases` object to utilize the same functionality that internal Vuetify components use. Icon aliases are referenced with an initial `$` followed by the name of the alias, e.g. `$product`.
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
-export default createVuetify({
-  icons: {
-    aliases: {
-      ...aliases,
-      product: 'mdi-dropbox',
-      support: 'mdi-lifebuoy',
-    },
-  },
-})
-```
-
-```html
-<template>
-  <v-icon icon="$product" />
-  <v-icon icon="$support" />
-</template>
 ```

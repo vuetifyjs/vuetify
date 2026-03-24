@@ -48,10 +48,12 @@ The Vuetify repository is a [lerna](https://github.com/lerna/lerna) monorepo tha
 
 ### Setting up your environment
 
+We recommend using [FNM](https://github.com/Schniz/fnm#installation) (with all four [options](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) enabled) to automatically set up and use the exect node and pnpm versions specified in package.json.
+
 Required software:
 
 - [Git](https://git-scm.com/) >v2.20
-- [Node.js](https://nodejs.org/) LTS
+- [Node.js](https://nodejs.org/) 24
 - [pnpm](https://pnpm.io/)
 
 Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#installation) to build themselves. You don't need to install node-gyp itself but may require additional tools, especially on windows. See the node-gyp documentation for more details.
@@ -118,6 +120,32 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
 </script>
 ```
 
+#### Automated testing
+
+Vuetify uses [Vitest](https://vitest.dev/) for unit tests, [Vitest browser mode](https://vitest.dev/guide/browser/why.html) with Playwright for component interaction tests, and [Vizzly](https://vizzly.dev/) for visual regression tests.
+
+- `pnpm test` - run all tests
+- `pnpm test:unit` - run only unit tests
+- `pnpm test:browser` - run only browser tests
+- `pnpm test:open` - run browser tests in a chrome window
+  - use this if you need devtools to debug a failing test
+- `pnpm test:screen` - run only screenshot tests, saves a report to http://localhost:47392/
+- `pnpm tdd` - start the vizzly dev server, follow with `test`, `test:screen`, `test:browser`, or `test:open` to actually run tests. Screenshot baselines and diffs can be managed and viewed at http://localhost:47392/
+  - run `pnpm tdd:stop` when you're done to kill the background process
+
+The `test:*` commands all accept a list of test names to filter by, eg. `pnpm test textfield textarea` to only run VTextField and VTextarea tests.
+
+##### Visual regression workflow
+
+- Checkout the base branch (`master` or `dev`)
+- Run `pnpm tdd`
+- Visit http://localhost:47392/stats and click "Reset baselines"
+- Run `pnpm test:screen`
+- Click "Accept all changes"
+- Checkout your PR branch
+- Run `pnpm test:screen` again
+- Any visual differences will be shown on http://localhost:47392
+
 ### Documentation
 
 The documentation is located in `packages/docs` but also uses some files from `packages/api-generator`. A dev server for the documentation can be started by running `pnpm dev docs` from the project root and will be available on [localhost:8095](http://localhost:8095/) by default.
@@ -162,22 +190,22 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Version | Type of change | Branch |
-| - | - | - |
-| Vuetify 3 | Documentation | `master` |
-| Vuetify 3 | Bug fixes | `master` |
-| Vuetify 3 | New features | `dev` |
-| Vuetify 3 | Features with breaking changes| `next` |
-| Vuetify 2 | Documentation|  `v2-stable` |
-| Vuetify 2 | Bug fixes | `v2-stable` |
-| Vuetify 2 | New features | `v2-dev` |
+| Version   | Type of change                 | Branch      |
+|-----------|--------------------------------|-------------|
+| Vuetify 4 | Documentation                  | `master`    |
+| Vuetify 4 | Bug fixes                      | `master`    |
+| Vuetify 4 | New features                   | `dev`       |
+| Vuetify 5 | Features with breaking changes | `next`      |
+| Vuetify 3 | Documentation                  | `v3-stable` |
+| Vuetify 3 | Bug fixes                      | `v3-stable` |
+| Vuetify 2 | Documentation                  | `v2-stable` |
 
 ```bash
 # Switch to the desired branch
-# v3
+# v4
 git switch master
-# v2
-git switch v2-stable
+# v3
+git switch v3-stable
 
 # Pull down any upstream changes
 git pull

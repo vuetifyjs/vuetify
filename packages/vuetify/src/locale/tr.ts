@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Tarih girin',
     },
+    ariaLabel: {
+      previousMonth: 'Önceki ay',
+      nextMonth: 'Sonraki ay',
+      selectYear: 'Yıl seçin',
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectMonth: 'Ay seçin',
+      selectDate: '{0}',
+      currentDate: 'Bugün, {0}',
+    },
   },
   noDataText: 'Bu görünümde veri yok.',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'ÖÖ',
     pm: 'ÖS',
     title: 'Saat seçin',
+    hour: 'Saat',
+    minute: 'Dakika',
+    second: 'Saniye',
+    notAllowed: 'Değere izin verilmiyor',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Lütfen en az bir değer seçin',
     pattern: 'Geçersiz biçim',
   },
+  command: {
+    search: 'Komut yazın veya arayın...',
+  },
   hotkey: {
     then: 'sonra',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Boşluk',
     plus: 'artı',
     shortcut: 'Klavye kısayolu: {0}',
+    or: 'veya',
+  },
+  video: {
+    play: 'Oynat',
+    pause: 'Duraklat',
+    seek: 'Ara',
+    volume: 'Ses',
+    showVolume: 'Ses kontrolünü göster',
+    mute: 'Sesi kapat',
+    unmute: 'Sesi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çık',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Ekranda renk seç',
+      hueSlider: 'Ton',
+      alphaSlider: 'Alfa',
+      redInput: 'Kırmızı',
+      greenInput: 'Yeşil',
+      blueInput: 'Mavi',
+      alphaInput: 'Alfa',
+      hueInput: 'Ton',
+      saturationInput: 'Doygunluk',
+      lightnessInput: 'Parlaklık',
+      hexInput: 'HEX değeri',
+      hexaInput: 'Alfa değerli HEX',
+      changeFormat: 'Renk biçimini değiştir',
+    },
   },
 }

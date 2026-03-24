@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'បញ្ចូលកាលបរិច្ឆេទ',
     },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      previousYear: 'ឆ្នាំមុន',
+      nextYear: 'ឆ្នាំក្រោយ',
+      selectMonth: 'ជ្រើសរើសខែ',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
+    },
   },
   noDataText: 'គ្មានទិន្នន័យដែលមាន',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
     title: 'ជ្រើសរើសម៉ោង',
+    hour: 'ម៉ោង',
+    minute: 'នាទី',
+    second: 'វិនាទី',
+    notAllowed: 'តម្លៃមិនត្រូវបានអនុញ្ញាតទេ',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
     pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
   },
+  command: {
+    search: 'វាយបញ្ចូលពាក្យបញ្ជា ឬស្វាគមន៍...',
+  },
   hotkey: {
     then: 'បន្ទាប់មក',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'ដកឃ្លា',
     plus: 'បូក',
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+    or: 'ឬ',
+  },
+  video: {
+    play: 'លេង',
+    pause: 'ផ្អាក',
+    seek: 'ស្វែងរក',
+    volume: 'កម្រិតសំឡេង',
+    showVolume: 'បង្ហាញការគ្រប់គ្រងកម្រិតសំឡេង',
+    mute: 'បិទសំឡេង',
+    unmute: 'បើក​សំឡេង',
+    enterFullscreen: 'ពេញអេក្រង់',
+    exitFullscreen: 'ចេញពីអេក្រង់ពេ',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ជ្រើសរើសពណ៌ពីអេក្រង់',
+      hueSlider: 'ពណ៌',
+      alphaSlider: 'អាល់ហ្វា',
+      redInput: 'ក្រហម',
+      greenInput: 'បៃតង',
+      blueInput: 'ខៀវ',
+      alphaInput: 'អាល់ហ្វា',
+      hueInput: 'ពណ៌',
+      saturationInput: 'តិត្ថិភាព',
+      lightnessInput: 'ពន្លឺ',
+      hexInput: 'តម្លៃ HEX',
+      hexaInput: 'HEX ដែលមានតម្លៃអាល់ហ្វា',
+      changeFormat: 'ប្ដូរទម្រង់ពណ៌',
+    },
   },
 }

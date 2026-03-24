@@ -117,14 +117,16 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
       item.fixed = 'start'
     }
 
-    const orderedChildren = side === 'start'
-      ? item.children?.toReversed()
-      : item.children
-
     if (item.fixed === side) {
-      if (orderedChildren) {
-        for (const child of orderedChildren) {
-          setFixed(child, side, side)
+      if (item.children) {
+        if (side === 'start') {
+          for (let i = item.children.length - 1; i >= 0; i--) {
+            setFixed(item.children[i], side, side)
+          }
+        } else {
+          for (let i = 0; i < item.children.length; i++) {
+            setFixed(item.children[i], side, side)
+          }
         }
       } else {
         if (!seenFixed && side === 'start') {
@@ -139,9 +141,15 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
         seenFixed = true
       }
     } else {
-      if (orderedChildren) {
-        for (const child of orderedChildren) {
-          setFixed(child, side)
+      if (item.children) {
+        if (side === 'start') {
+          for (let i = item.children.length - 1; i >= 0; i--) {
+            setFixed(item.children[i], side)
+          }
+        } else {
+          for (let i = 0; i < item.children.length; i++) {
+            setFixed(item.children[i], side)
+          }
         }
       } else {
         seenFixed = false
@@ -149,55 +157,55 @@ function parseFixedColumns (items: InternalDataTableHeader[]) {
     }
   }
 
-  for (const item of items.toReversed()) {
-    setFixed(item, 'start')
+  for (let i = items.length - 1; i >= 0; i--) {
+    setFixed(items[i], 'start')
   }
 
-  for (const item of items) {
-    setFixed(item, 'end')
-  }
-
-  function setFixedOffset (item: InternalDataTableHeader, offset = 0) {
-    if (!item) return offset
-
-    if (item.children) {
-      item.fixedOffset = offset
-      for (const child of item.children) {
-        offset = setFixedOffset(child, offset)
-      }
-    } else if (item.fixed && item.fixed !== 'end') {
-      item.fixedOffset = offset
-      offset += parseFloat(item.width || '0') || 0
-    }
-
-    return offset
+  for (let i = 0; i < items.length; i++) {
+    setFixed(items[i], 'end')
   }
 
   let fixedOffset = 0
-  for (const item of items) {
-    fixedOffset = setFixedOffset(item, fixedOffset)
-  }
-
-  function setFixedEndOffset (item: InternalDataTableHeader, offset = 0) {
-    if (!item) return offset
-
-    if (item.children) {
-      item.fixedEndOffset = offset
-      for (const child of item.children) {
-        offset = setFixedEndOffset(child, offset)
-      }
-    } else if (item.fixed === 'end') {
-      item.fixedEndOffset = offset
-      offset += parseFloat(item.width || '0') || 0
-    }
-
-    return offset
+  for (let i = 0; i < items.length; i++) {
+    fixedOffset = setFixedOffset(items[i], fixedOffset)
   }
 
   let fixedEndOffset = 0
-  for (const item of items.toReversed()) {
-    fixedEndOffset = setFixedEndOffset(item, fixedEndOffset)
+  for (let i = items.length - 1; i >= 0; i--) {
+    fixedEndOffset = setFixedEndOffset(items[i], fixedEndOffset)
   }
+}
+
+function setFixedOffset (item: InternalDataTableHeader, offset = 0) {
+  if (!item) return offset
+
+  if (item.children) {
+    item.fixedOffset = offset
+    for (const child of item.children) {
+      offset = setFixedOffset(child, offset)
+    }
+  } else if (item.fixed && item.fixed !== 'end') {
+    item.fixedOffset = offset
+    offset += parseFloat(item.width || '0') || 0
+  }
+
+  return offset
+}
+
+function setFixedEndOffset (item: InternalDataTableHeader, offset = 0) {
+  if (!item) return offset
+
+  if (item.children) {
+    item.fixedEndOffset = offset
+    for (const child of item.children) {
+      offset = setFixedEndOffset(child, offset)
+    }
+  } else if (item.fixed === 'end') {
+    item.fixedEndOffset = offset
+    offset += parseFloat(item.width || '0') || 0
+  }
+
+  return offset
 }
 
 function parse (items: InternalDataTableHeader[], maxDepth: number) {

@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'تاریخ را وارد کنید',
     },
+    ariaLabel: {
+      previousMonth: 'ماه قبل',
+      nextMonth: 'ماه بعد',
+      selectYear: 'انتخاب سال',
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectMonth: 'انتخاب ماه',
+      selectDate: '{0}',
+      currentDate: 'امروز، {0}',
+    },
   },
   noDataText: 'داده‌ای موجود نیست',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
     title: 'انتخاب زمان',
+    hour: 'ساعت',
+    minute: 'دقیقه',
+    second: 'ثانیه',
+    notAllowed: 'مقدار مجاز نیست',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
   },
+  command: {
+    search: 'دستور را تایپ کنید یا جستجو کنید...',
+  },
   hotkey: {
     then: 'سپس',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'فاصله',
     plus: 'بعلاوه',
     shortcut: 'میانبر صفحه کلید: {0}',
+    or: 'یا',
+  },
+  video: {
+    play: 'پخش',
+    pause: 'مکث',
+    seek: 'جستجو',
+    volume: 'صدا',
+    showVolume: 'نمایش کنترل صدا',
+    mute: 'بی‌صدا',
+    unmute: 'با صدا',
+    enterFullscreen: 'تمام صفحه',
+    exitFullscreen: 'خروج از تمام صفحه',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'انتخاب رنگ از صفحه',
+      hueSlider: 'فام',
+      alphaSlider: 'آلفا',
+      redInput: 'قرمز',
+      greenInput: 'سبز',
+      blueInput: 'آبی',
+      alphaInput: 'آلفا',
+      hueInput: 'فام',
+      saturationInput: 'اشباع',
+      lightnessInput: 'روشنایی',
+      hexInput: 'مقدار HEX',
+      hexaInput: 'HEX با مقدار آلفا',
+      changeFormat: 'تغییر فرمت رنگ',
+    },
   },
 }

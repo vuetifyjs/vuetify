@@ -76,7 +76,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
         >
           {{
             ...slots,
-            title: () => props?.title ?? props.file?.name,
+            title: slots.title ?? (() => props?.title ?? props.file?.name),
             prepend: slotProps => (
               <>
                 { !slots.prepend ? (

@@ -13,7 +13,7 @@
       <template v-slot:selection="{ item, index }">
         <v-chip
           v-if="item === Object(item)"
-          :color="`${item.raw.color}-lighten-3`"
+          :color="`${item.color}-lighten-3`"
           :text="item.title"
           size="small"
           variant="flat"
@@ -23,21 +23,27 @@
         ></v-chip>
       </template>
       <template v-slot:item="{ props, item }">
-        <v-list-item v-if="item.raw.header && search">
-          <span class="mr-3">Create</span>
-          <v-chip
-            :color="`${colors[nonce - 1]}-lighten-3`"
-            size="small"
-            variant="flat"
-            label
-          >
-            {{ search }}
-          </v-chip>
-        </v-list-item>
-        <v-list-subheader v-else-if="item.raw.header" :title="item.title"></v-list-subheader>
+        <template v-if="item.header">
+          <v-list-item
+            v-if="alreadySelected"
+            title="Item is already selected"
+          ></v-list-item>
+          <v-list-item v-else-if="search">
+            <span class="mr-3">Create</span>
+            <v-chip
+              :color="`${colors[nonce - 1]}-lighten-3`"
+              size="small"
+              variant="flat"
+              label
+            >
+              {{ search }}
+            </v-chip>
+          </v-list-item>
+          <v-list-subheader v-else :title="item.title"></v-list-subheader>
+        </template>
         <v-list-item v-else @click="props.onClick">
           <v-text-field
-            v-if="editingItem === item.raw"
+            v-if="editingItem === item"
             v-model="editingItem.title"
             bg-color="transparent"
             class="mr-3"
@@ -47,22 +53,31 @@
             hide-details
             @click.stop
             @keydown.stop
-            @keyup.enter="edit(item.raw)"
+            @keyup.enter="edit(item)"
+            @mousedown.stop
           ></v-text-field>
           <v-chip
             v-else
-            :color="`${item.raw.color}-lighten-3`"
-            :text="item.raw.title"
+            :color="`${item.color}-lighten-3`"
+            :text="item.title"
             variant="flat"
             label
           ></v-chip>
           <template v-slot:append>
             <v-btn
-              :color="editingItem !== item.raw ? 'primary' : 'success'"
-              :icon="editingItem !== item.raw ? 'mdi-pencil' : 'mdi-check'"
+              :color="editingItem !== item ? 'primary' : 'success'"
+              :icon="editingItem !== item ? 'mdi-pencil' : 'mdi-check'"
               size="small"
               variant="text"
-              @click.stop.prevent="edit(item.raw)"
+              @click.stop.prevent="edit(item)"
+            ></v-btn>
+            <v-btn
+              v-if="editingItem !== item.raw"
+              color="error"
+              icon="mdi-trash-can"
+              size="small"
+              variant="text"
+              @click.stop.prevent="removeItem(item.raw)"
             ></v-btn>
           </template>
         </v-list-item>
@@ -72,7 +87,7 @@
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { ref, toRef, watch } from 'vue'
 
   const colors = ['green', 'purple', 'indigo', 'cyan', 'teal', 'orange']
   const editingItem = ref(null)
@@ -86,6 +101,8 @@
   ])
   const search = ref(null)
 
+  const alreadySelected = toRef(() => model.value.some(x => x.title === search.value))
+
   let nonce = 1
   watch(model, val => {
     const newValue = []
@@ -93,15 +110,18 @@
     for (const v of val) {
       if (typeof v === 'string') {
         changed = true
-        const item = {
-          title: v,
-          color: colors[nonce],
+        const existingItem = items.value.find(x => x.title === v)
+        if (existingItem) {
+          newValue.push(existingItem)
+        } else {
+          const newIitem = {
+            title: v,
+            color: colors[nonce],
+          }
+          newValue.push(newIitem)
+          items.value.push(newIitem)
+          nonce = (nonce + 1) % colors.length
         }
-
-        newValue.push(item)
-        items.value.push(item)
-
-        nonce = (nonce + 1) % colors.length
       } else {
         newValue.push(v)
       }
@@ -125,7 +145,8 @@
 
     const query = toLowerCaseString(queryText)
 
-    const availableOptions = items.value.filter(x => !model.value.includes(x))
+    const isSelected = text => model.value.some(x => x.title === text)
+    const availableOptions = items.value.filter(x => !isSelected(x.title))
     const hasAnyMatch = availableOptions.some(
       x => !x.header && toLowerCaseString(x.title).includes(query)
     )
@@ -138,6 +159,11 @@
 
   function removeSelection (index) {
     model.value.splice(index, 1)
+  }
+
+  function removeItem (item) {
+    const index = items.value.findIndex(x => x.title === item.title)
+    items.value.splice(index, 1)
   }
 </script>
 
@@ -164,6 +190,12 @@
       search: null,
     }),
 
+    computed: {
+      alreadySelected () {
+        return this.model.some(x => x.title === this.search)
+      },
+    },
+
     watch: {
       model (val) {
         const newValue = []
@@ -171,15 +203,18 @@
         for (const v of val) {
           if (typeof v === 'string') {
             changed = true
-            const item = {
-              title: v,
-              color: this.colors[this.nonce],
+            const existingItem = this.items.find(x => x.title === v)
+            if (existingItem) {
+              newValue.push(existingItem)
+            } else {
+              const newIitem = {
+                title: v,
+                color: this.colors[this.nonce],
+              }
+              newValue.push(newIitem)
+              this.items.push(newIitem)
+              this.nonce = (this.nonce + 1) % this.colors.length
             }
-
-            newValue.push(item)
-            this.items.push(item)
-
-            this.nonce = (this.nonce + 1) % this.colors.length
           } else {
             newValue.push(v)
           }
@@ -204,7 +239,8 @@
 
         const query = toLowerCaseString(queryText)
 
-        const availableOptions = this.items.filter(x => !this.model.includes(x))
+        const isSelected = text => this.model.some(x => x.title === text)
+        const availableOptions = this.items.filter(x => !isSelected(x.title))
         const hasAnyMatch = availableOptions.some(
           x => !x.header && toLowerCaseString(x.title).includes(query)
         )
@@ -217,6 +253,16 @@
       removeSelection (index) {
         this.model.splice(index, 1)
       },
+      removeItem (item) {
+        const index = this.items.findIndex(x => x.title === item.title)
+        this.items.splice(index, 1)
+      },
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2047-82949&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

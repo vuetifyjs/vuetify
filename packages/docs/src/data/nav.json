@@ -37,6 +37,18 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      {
+        "title": "css-utilities",
+        "subfolder": "features",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "overview",
+          "unocss-vuetify-preset",
+          "unocss-tailwind-preset",
+          "tailwindcss"
+        ]
+      },
       "dates",
       "display-and-platform",
       "global-configuration",
@@ -54,7 +66,9 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -148,6 +162,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "calendars",
       "confirm-edit",
       "data-iterators",
       {
@@ -165,6 +180,7 @@
           "virtual-tables"
         ]
       },
+      "hotkeys",
       "sparklines",
       "infinite-scroller",
       "tables",
@@ -249,11 +265,15 @@
     "items": [
       "introduction",
       {
-        "title": "calendars",
+        "title": "avatar-groups",
         "subfolder": "components"
       },
       {
         "title": "color-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "command-palettes",
         "subfolder": "components"
       },
       {
@@ -269,6 +289,14 @@
         "subfolder": "components"
       },
       {
+        "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "progress",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },
@@ -281,7 +309,7 @@
         "subfolder": "components"
       },
       {
-        "title": "hotkeys",
+        "title": "videos",
         "subfolder": "components"
       },
       {

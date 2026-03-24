@@ -2,7 +2,7 @@
 import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '..'
 
 // Utilities
-import { generate, render, screen, userEvent } from '@test'
+import { render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -47,6 +47,20 @@ const stories = {
 }
 
 describe('VExpansionPanels', () => {
+  it('responds to title click', async () => {
+    render(() => (
+      <VExpansionPanels>
+        <VExpansionPanel title="Header" text="Content" />
+      </VExpansionPanels>
+    ))
+
+    const title = screen.getByCSS('.v-expansion-panel-title')
+
+    await userEvent.click(title)
+
+    expect(title).toHaveClass('v-expansion-panel-title--active')
+  })
+
   it('supports v-model', async () => {
     const model = ref()
     render(() => (
@@ -65,7 +79,5 @@ describe('VExpansionPanels', () => {
     expect(model.value).toBe('foo')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

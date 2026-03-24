@@ -5,9 +5,9 @@
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
     "month": "Sets the month.",
-    "weekdays": "Sets the weekdays of the month.",
     "year": "Sets the year.",
     "multiple": "Sets the multiple of the month.",
+    "readonly": "Puts the picker in a readonly state.",
     "showAdjacentMonths": "Show adjacent months.",
     "showWeek": "Show the week number.",
     "transition": "The transition used when changing months into the future",
@@ -15,11 +15,9 @@
   },
   "events": {
     "update:month": "Fired when the month changes.",
-    "update:year": "Fired when the year changes.",
-    "day": "Fired when a day is clicked."
+    "update:year": "Fired when the year changes."
   },
   "slots": {
-    "year": "Slot for the year.",
     "day": "Slot for a day in the month."
   }
 }

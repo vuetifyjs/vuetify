@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Unesite datum',
     },
+    ariaLabel: {
+      previousMonth: 'Prethodni mesec',
+      nextMonth: 'Sledeći mesec',
+      selectYear: 'Izaberi godinu',
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sledeća godina',
+      selectMonth: 'Izaberi mesec',
+      selectDate: '{0}',
+      currentDate: 'Danas, {0}',
+    },
   },
   noDataText: 'Nema dostupnih podataka',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izaberite vreme',
+    hour: 'Sat',
+    minute: 'Minute',
+    second: 'Sekunde',
+    notAllowed: 'Vrednost nije dozvoljena',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Izaberite bar jednu vrednost',
     pattern: 'Nevažeći format',
   },
+  command: {
+    search: 'Unesite naredbu ili pretražite...',
+  },
   hotkey: {
     then: 'zatim',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Razmak',
     plus: 'plus',
     shortcut: 'Prečica na tastaturi: {0}',
+    or: 'ili',
+  },
+  video: {
+    play: 'Reprodukuj',
+    pause: 'Pauziraj',
+    seek: 'Traži',
+    volume: 'Jačina zvuka',
+    showVolume: 'Prikaži kontrolu jačine zvuka',
+    mute: 'Isključi zvuk',
+    unmute: 'Uključi zvuk',
+    enterFullscreen: 'Prikaz preko cijelog ekrana',
+    exitFullscreen: 'Izađi iz prikaza preko cijelog ekrana',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izaberite boju sa ekrana',
+      hueSlider: 'Nijansa',
+      alphaSlider: 'Alfa',
+      redInput: 'Crvena',
+      greenInput: 'Zelena',
+      blueInput: 'Plava',
+      alphaInput: 'Alfa',
+      hueInput: 'Nijansa',
+      saturationInput: 'Zasićenost',
+      lightnessInput: 'Svetlina',
+      hexInput: 'HEX vrednost',
+      hexaInput: 'HEX sa alfa vrednošću',
+      changeFormat: 'Promeni format boje',
+    },
   },
 }

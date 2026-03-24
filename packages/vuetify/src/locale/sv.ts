@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Välj datum',
     },
+    ariaLabel: {
+      previousMonth: 'Föregående månad',
+      nextMonth: 'Nästa månad',
+      selectYear: 'Välj år',
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectMonth: 'Välj månad',
+      selectDate: '{0}',
+      currentDate: 'Idag, {0}',
+    },
   },
   noDataText: 'Ingen data tillgänglig',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'FM',
     pm: 'EM',
     title: 'Välj tid',
+    hour: 'Timme',
+    minute: 'Minuter',
+    second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
   },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
+  },
   hotkey: {
     then: 'sedan',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Mellanslag',
     plus: 'plus',
     shortcut: 'Tangentbordsgenväg: {0}',
+    or: 'eller',
+  },
+  video: {
+    play: 'Spela upp',
+    pause: 'Pausa',
+    seek: 'Sök',
+    volume: 'Volym',
+    showVolume: 'Visa volymkontroll',
+    mute: 'Stäng av ljud',
+    unmute: 'Slå på ljud',
+    enterFullscreen: 'Helskärm',
+    exitFullscreen: 'Avsluta helskärm',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Välj färg från skärmen',
+      hueSlider: 'Nyans',
+      alphaSlider: 'Alfa',
+      redInput: 'Röd',
+      greenInput: 'Grön',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Nyans',
+      saturationInput: 'Mättnad',
+      lightnessInput: 'Ljushet',
+      hexInput: 'HEX-värde',
+      hexaInput: 'HEX med alfavärde',
+      changeFormat: 'Ändra färgformat',
+    },
   },
 }

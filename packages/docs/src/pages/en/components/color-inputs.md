@@ -20,12 +20,6 @@ The `v-color-input` component combines a text field with a color picker..
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
-
 ## Installation
 
 Labs components require a manual import and installation of the component.
@@ -66,14 +60,20 @@ The `v-color-input` component provides a clean interface for selecting colors.
 
 The `v-color-input` component extends the [v-text-field](/components/text-fields/) and [v-color-picker](/components/color-pickers/) component; and supports all of their props.
 
-#### Pip icon
+#### Pip location
 
-You can move the pip icon within the input or entirely by utilizing the **prepend-icon** and **prepend-inner-icon** properties.
+You can move the pip icon within the input by utilizing the `pip-location` or hide it entirely with `hide-pip`.
 
-<ExamplesExample file="v-color-input/prop-prepend-icon" />
+<ExamplesExample file="v-color-input/prop-pip-location" />
 
 #### Color Pip
 
 The `color-pip` is a boolean that determines whether the pip icon color matches the selected color.
 
 <ExamplesExample file="v-color-input/prop-color-pip" />
+
+#### Pip variant
+
+The `pip-variant` lets you further customize the pip icon.
+
+<ExamplesExample file="v-color-input/prop-pip-variant" />

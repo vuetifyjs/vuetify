@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: '输入日期',
     },
+    ariaLabel: {
+      previousMonth: '上个月',
+      nextMonth: '下个月',
+      selectYear: '选择年份',
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectMonth: '选择月份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
+    },
   },
   noDataText: '没有数据',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: '上午',
     pm: '下午',
     title: '选择时间',
+    hour: '小时',
+    minute: '分钟',
+    second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: '请至少选择一个值',
     pattern: '格式无效',
   },
+  command: {
+    search: '输入命令或搜索...',
+  },
   hotkey: {
     then: '然后',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
+    or: '或',
+  },
+  video: {
+    play: '播放',
+    pause: '暂停',
+    seek: '跳转',
+    volume: '音量',
+    showVolume: '显示音量控制',
+    mute: '静音',
+    unmute: '取消静音',
+    enterFullscreen: '全屏',
+    exitFullscreen: '退出全屏',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '从屏幕拾取颜色',
+      hueSlider: '色相',
+      alphaSlider: '不透明度',
+      redInput: '红色',
+      greenInput: '绿色',
+      blueInput: '蓝色',
+      alphaInput: '不透明度',
+      hueInput: '色相',
+      saturationInput: '饱和度',
+      lightnessInput: '亮度',
+      hexInput: 'HEX 值',
+      hexaInput: '带不透明度 HEX 值',
+      changeFormat: '更改颜色格式',
+    },
   },
 }

@@ -66,6 +66,12 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 
 <ExamplesExample file="v-autocomplete/prop-filter" />
 
+#### Filter keys
+
+When user is typing in the field to narrow the list of options, the input text is matched against the `title`. With `filter-keys` you can specify which properties should be used instead. Properties of original objects passed to `items` need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
+
+<ExamplesExample file="v-autocomplete/prop-filter-keys" />
+
 #### Subheaders and dividers
 
 The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.
@@ -88,15 +94,24 @@ With the power of slots, you can customize the visual output of the select. In t
 
 <ExamplesExample file="v-autocomplete/slot-item-and-selection" />
 
+When customizing v-autocomplete items with the #item slot, make sure to forward the slot props using v-bind="props".
+This is required for virtual scrolling to work properly — without it, only part of your items may be displayed.
+
+<ExamplesExample file="v-autocomplete/slot-item-and-vbind-props" />
+
+#### Menu footer
+
+The **menu-footer** slot allows you to add custom content at the bottom of the dropdown menu, such as action buttons for clearing the selection or closing the menu.
+
+<ExamplesExample file="v-autocomplete/slot-menu-footer" />
+
 ### Misc
 
-<!--
 #### Asynchronous items
 
-Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
+Sometimes you need to load data externally based upon a search query. Simply bind to the `search` prop with the **v-model** and watch for the changes to the reactive variable. Make sure to apply debounce and avoid race conditions.
 
 <ExamplesExample file="v-autocomplete/misc-asynchronous-items" />
--->
 
 #### State selector
 
@@ -105,8 +120,6 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 <ExamplesExample file="v-autocomplete/misc-state-selector" />
 
 #### New tab
-
-<DocIntroduced version="3.3.0" />
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 

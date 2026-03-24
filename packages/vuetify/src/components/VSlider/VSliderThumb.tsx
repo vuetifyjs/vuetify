@@ -6,7 +6,7 @@ import { VSliderSymbol } from './slider'
 import { VScaleTransition } from '../transitions'
 
 // Composables
-import { useTextColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
 import { useRtl } from '@/composables/locale'
@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/locale'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, inject, shallowRef, watch } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -49,6 +49,7 @@ export const makeVSliderThumbProps = propsFactory({
     default: true,
   },
   name: String,
+  noKeyboard: Boolean,
 
   ...makeComponentProps(),
 }, 'VSliderThumb')
@@ -73,6 +74,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       min,
       max,
       thumbColor,
+      thumbLabelColor,
       step,
       disabled,
       thumbSize,
@@ -87,9 +89,13 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       indexFromEnd,
     } = slider
 
+    const isHovered = shallowRef(false)
+    const isHidden = shallowRef(false)
+
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
     const { textColorClasses, textColorStyles } = useTextColor(thumbColor)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(thumbLabelColor)
 
     const { pageup, pagedown, end, home, left, right, down, up } = keyValues
     const relevantKeys = [pageup, pagedown, end, home, left, right, down, up]
@@ -100,6 +106,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     })
 
     function parseKeydown (e: KeyboardEvent, value: number) {
+      if (props.noKeyboard || disabled.value) return
       if (!relevantKeys.includes(e.key)) return
 
       e.preventDefault()
@@ -133,11 +140,25 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     function onKeydown (e: KeyboardEvent) {
       const newValue = parseKeydown(e, props.modelValue)
 
-      newValue != null && emit('update:modelValue', newValue)
+      if (newValue != null) {
+        isHidden.value = false
+
+        emit('update:modelValue', newValue)
+      }
     }
+
+    watch(() => props.focused, val => {
+      if (val) {
+        isHidden.value = false
+      }
+    })
 
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
+
+      const thumbLabelVisible = thumbLabel.value === 'always' ||
+        (thumbLabel.value === true && props.focused) ||
+        (thumbLabel.value === 'hover' && (isHovered.value || (props.focused && !isHidden.value)))
 
       return (
         <div
@@ -166,6 +187,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
+          onMouseenter={ () => { isHovered.value = true } }
+          onMouseleave={ () => { isHovered.value = false; isHidden.value = true } }
         >
           <div
             class={[
@@ -173,9 +196,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               textColorClasses.value,
               elevationClasses.value,
             ]}
-            style={{
-              ...textColorStyles.value,
-            }}
+            style={ textColorStyles.value }
           />
           <div
             class={[
@@ -188,17 +209,19 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           <VScaleTransition origin="bottom center">
             <div
               class="v-slider-thumb__label-container"
-              v-show={ (thumbLabel.value && props.focused) || thumbLabel.value === 'always' }
+              v-show={ thumbLabelVisible }
             >
               <div
                 class={[
                   'v-slider-thumb__label',
-                  textColorClasses.value,
+                  backgroundColorClasses.value,
                 ]}
+                style={ backgroundColorStyles.value }
               >
                 <div>
                   { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(step.value ? decimals.value : 1) }
                 </div>
+                <div class="v-slider-thumb__label-wedge" />
               </div>
             </div>
           </VScaleTransition>

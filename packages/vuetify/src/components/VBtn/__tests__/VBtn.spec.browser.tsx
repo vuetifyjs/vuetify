@@ -1,7 +1,7 @@
 import { VBtn } from '../VBtn'
 
 // Utilities
-import { generate, gridOn, render, screen, userEvent } from '@test'
+import { gridOn, render, screen, showcase, userEvent } from '@test'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -13,6 +13,7 @@ const colors = ['success', 'info', 'warning', 'error', 'invalid']
 const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
 const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'] as const
+const spaced = ['start', 'both', 'end'] as const
 const props = {
   color: colors,
   // variant: variants,
@@ -45,6 +46,10 @@ const stories = {
   Stacked: gridOn([undefined], variants, (_, variant) =>
     <VBtn stacked prependIcon="$vuetify" variant={ variant }>{ variant }</VBtn>
   ),
+  Spaced: gridOn([undefined], spaced, (_, spaced) =>
+    <VBtn spaced={ spaced } prependIcon="$prev" appendIcon="$next" width="200">{ spaced }</VBtn>
+  ),
+  'Block + spaced': <VBtn block spaced="both" prependIcon="$prev" appendIcon="$next">Spaced</VBtn>,
 }
 
 // Actual tests
@@ -79,9 +84,9 @@ describe('VBtn', () => {
 
   describe('elevation', () => {
     it('should have the correct elevation', async () => {
-      render(<VBtn elevation={ 24 } />)
+      render(<VBtn elevation={ 5 } />)
       const button = screen.getByCSS('button')
-      expect(button).toHaveClass('elevation-24')
+      expect(button).toHaveClass('elevation-5')
     })
   })
 
@@ -239,7 +244,5 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories, props, component: VBtn })
-  })
+  showcase({ stories, props, component: VBtn })
 })

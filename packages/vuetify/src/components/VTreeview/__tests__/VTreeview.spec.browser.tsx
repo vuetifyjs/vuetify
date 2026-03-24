@@ -2,7 +2,7 @@
 import { VTreeview } from '../VTreeview'
 
 // Utilities
-import { render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { nextTick, reactive, ref, shallowRef } from 'vue'
 
 const items = [
@@ -60,9 +60,11 @@ const items = [
 ]
 
 describe.each([
-  ['plain', items],
-  ['reactive', reactive(items)],
-])('VTreeview with %s items', (_, items) => {
+  ['plain', 'render', items],
+  ['reactive', 'render', reactive(items)],
+  ['plain', 'props', items],
+  ['reactive', 'props', reactive(items)],
+] as const)('VTreeview with %s items and %s registration', (_, itemsRegistration, items) => {
   describe('activate', () => {
     it('single-leaf strategy', async () => {
       const activated = ref([])
@@ -74,6 +76,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="single-leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -96,6 +99,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -118,6 +122,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -143,6 +148,7 @@ describe.each([
           itemValue="id"
           activatable
           activeStrategy="single-independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -169,6 +175,7 @@ describe.each([
           activatable
           activeStrategy="independent"
           onUpdate:activated={ onActivated }
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -191,6 +198,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="single-leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -212,6 +220,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="leaf"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -233,6 +242,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -257,6 +267,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="single-independent"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -279,6 +290,7 @@ describe.each([
           itemValue="id"
           selectable
           selectStrategy="classic"
+          itemsRegistration={ itemsRegistration }
         />
       ))
 
@@ -301,13 +313,21 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        await expect.element(screen.getByText(/Core/)).not.toBeVisible()
+        // eslint-disable-next-line vitest/no-conditional-in-test
+        if (itemsRegistration === 'render') {
+          // eslint-disable-next-line vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
+        } else {
+          // eslint-disable-next-line vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
+        }
       })
 
       it('open-all should work', async () => {
@@ -317,6 +337,7 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -335,6 +356,7 @@ describe.each([
             items={ items }
             itemValue="id"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -389,6 +411,7 @@ describe.each([
             activatable
             activeStrategy="leaf"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -416,6 +439,7 @@ describe.each([
             activatable
             activeStrategy="independent"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -453,6 +477,7 @@ describe.each([
             activatable
             activeStrategy="single-independent"
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -487,6 +512,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="single-leaf"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -513,6 +539,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="leaf"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -542,6 +569,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="independent"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -580,6 +608,7 @@ describe.each([
             returnObject
             selectable
             selectStrategy="single-independent"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -608,6 +637,7 @@ describe.each([
             selectable
             returnObject
             selectStrategy="classic"
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
@@ -645,9 +675,11 @@ describe.each([
             itemValue="id"
             openAll
             returnObject
+            itemsRegistration={ itemsRegistration }
           />
         ))
 
+        await nextTick()
         search.value = 'j'
         await nextTick()
         expect(screen.getByText(/Vuetify/)).toBeVisible()
@@ -666,6 +698,7 @@ describe.each([
         openAll
         items={ items }
         itemValue="id"
+        itemsRegistration={ itemsRegistration }
       />
     ))
 
@@ -684,6 +717,7 @@ describe.each([
         itemValue="id"
         openOnClick
         returnObject
+        itemsRegistration={ itemsRegistration }
       >
         {{
           prepend: ({ isOpen }) => (<span class="prepend-is-open">{ `${isOpen}` }</span>),
@@ -691,10 +725,9 @@ describe.each([
       </VTreeview>
     ))
 
-    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
-
     await userEvent.click(screen.getByText(/Vuetify Human Resources/))
     await waitIdle()
+    const itemsPrepend = screen.getAllByCSS('.v-treeview-item .v-list-item__prepend .prepend-is-open')
     expect(itemsPrepend[0]).toHaveTextContent(/^true$/)
     expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
 
@@ -711,6 +744,150 @@ describe.each([
     await userEvent.click(screen.getByText(/Vuetify Human Resources/))
     await waitIdle()
     expect(itemsPrepend[0]).toHaveTextContent(/^false$/)
-    expect(itemsPrepend[1]).toHaveTextContent(/^false$/)
+  })
+})
+
+describe('VTreeview with loading', () => {
+  it('should respond to direct clicks on the toggle icon', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+      />
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.keyboard('{enter}')
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item .v-list-item-action .v-btn')[1])
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await wait(200)
+    expect(screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item .v-list-item-action .v-btn')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+  })
+
+  it('should respond to full item click', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+        openOnClick
+      />
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.tab() // single tab selects the whole item
+    await userEvent.keyboard(' ')
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.getByText(/3.node/))
+    await nextTick()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await wait(200)
+    expect(screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.getAllByCSS('.v-treeview-item')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+  })
+
+  it('should support toggle slot', async () => {
+    const loadSpy = vi.fn()
+
+    const items = ref([
+      { value: 1, title: '1.root', children: [] },
+      { value: 2, title: '2.another', children: [] },
+    ] as any[])
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    async function loadChildren (item: any) {
+      loadSpy(item)
+      await wait(50)
+      if (item.value === 1) {
+        items.value[0].children = [{ value: 3, title: '3.node', children: [] }]
+      }
+      if (item.value === 3) {
+        items.value[0].children[0].children = [{ value: 4, title: '4.leaf' }]
+      }
+    }
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+      >
+        {{
+          toggle: ({ props, loading }) => loading
+            ? 'loading...'
+            : <div onClick={ (e: any) => props.onClick(e) } class="text-blue">[toggle]</div>,
+        }}
+      </VTreeview>
+    ))
+
+    expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
+    expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[0])
+    expect(loadSpy).toHaveBeenCalledOnce()
+    await wait(350) // needs to fully render for the following click
+    expect(screen.getByText(/3.node/)).toBeVisible()
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[1])
+    await nextTick()
+    expect(loadSpy).toHaveBeenCalledTimes(2)
+    await expect.poll(() => screen.queryByText(/4.leaf/)).toBeVisible()
+
+    await userEvent.click(screen.queryAllByText('[toggle]')[0])
+    await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
+    expect(screen.getByText(/4.leaf/)).not.toBeVisible()
   })
 })

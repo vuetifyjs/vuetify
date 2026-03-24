@@ -120,7 +120,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const options = value?.options ?? { passive: true }
   const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
-  if (!target || !uid) return
+  if (!target || uid === undefined) return
 
   const handlers = createHandlers(binding.value)
 
@@ -136,7 +136,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value?.parent ? el.parentElement : el
   const uid = binding.instance?.$.uid
 
-  if (!target?._touchHandlers || !uid) return
+  if (!target?._touchHandlers || uid === undefined) return
 
   const handlers = target._touchHandlers[uid]
 

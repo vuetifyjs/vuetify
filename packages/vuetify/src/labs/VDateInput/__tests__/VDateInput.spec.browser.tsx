@@ -2,7 +2,7 @@
 import { VDateInput } from '../VDateInput'
 
 // Utilities
-import { commands, render, screen, userEvent } from '@test'
+import { render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VDateInput', () => {
@@ -12,7 +12,7 @@ describe('VDateInput', () => {
       <VDateInput onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 92, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
@@ -22,13 +22,11 @@ describe('VDateInput', () => {
     const { element } = render(() => <VDateInput v-model={ model.value } />)
 
     await userEvent.click(element)
-    await commands.waitStable('.v-picker')
-    expect(screen.getByCSS('.v-picker')).toBeVisible()
+    await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
 
     await userEvent.keyboard('{Escape}') // hide picker, but keep the focus
 
-    await commands.waitStable('.v-picker')
-    expect(screen.getByCSS('.v-picker')).not.toBeVisible()
+    await expect.poll(() => screen.getByCSS('.v-picker')).not.toBeVisible()
 
     const input = screen.getByCSS('input')
     await userEvent.type(input, '02/20/2022{Enter}')
@@ -146,7 +144,7 @@ describe('VDateInput', () => {
     })
 
     it(`should reset if empty string is inputted`, async () => {
-      const { element, emitted, getByRole } = render(
+      const { emitted, getByRole } = render(
         <VDateInput
           modelValue={ new Date() }
         />
@@ -154,7 +152,6 @@ describe('VDateInput', () => {
 
       const input = getByRole('textbox')
       await userEvent.clear(input)
-      await userEvent.click(element)
       await userEvent.keyboard('{Enter}')
 
       const date = emitted<Date[]>('update:modelValue')![0][0]

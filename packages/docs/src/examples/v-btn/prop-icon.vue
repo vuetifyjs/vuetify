@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col cols="auto">
         <v-btn density="compact" icon="mdi-plus"></v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn density="comfortable" icon="$vuetify"></v-btn>
+        <v-btn density="comfortable" icon="mdi-tag"></v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -14,7 +14,7 @@
       </v-col>
     </v-row>
 
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col cols="auto">
         <v-btn icon="mdi-account" size="x-small"></v-btn>
       </v-col>
@@ -24,7 +24,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn icon="$vuetify"></v-btn>
+        <v-btn icon="mdi-tag"></v-btn>
       </v-col>
 
       <v-col cols="auto">

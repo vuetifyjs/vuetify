@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Hotkeys
   title: Hotkeys
@@ -19,17 +18,9 @@ features:
 
 Provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
 
-::: info
-This is a new feature! Be sure to [report any issues you may encounter](https://issues.vuetifyjs.com/).
-:::
-
 <PageFeatures />
 
 <PromotedEntry />
-
-::: success
-This feature was introduced in [v3.9.0](/getting-started/release-notes/?version=v3.9.0)
-:::
 
 ## Quick start
 
@@ -189,14 +180,15 @@ The hotkey string supports various modifiers and special keys:
 - <v-kbd>arrowup</v-kbd>, <v-kbd>arrowdown</v-kbd>, <v-kbd>arrowleft</v-kbd>, <v-kbd>arrowright</v-kbd>
 - <v-kbd>home</v-kbd>, <v-kbd>end</v-kbd>, <v-kbd>pageup</v-kbd>, <v-kbd>pagedown</v-kbd>
 - <v-kbd>f1</v-kbd> through <v-kbd>f12</v-kbd>
+- <v-kbd>plus</v-kbd>, <v-kbd>slash</v-kbd>, <v-kbd>underscore</v-kbd>, and <v-kbd>minus</v-kbd>/<v-kbd>hyphen</v-kbd> for literal <v-kbd>+</v-kbd>, <v-kbd>/</v-kbd>, <v-kbd>_</v-kbd>, and <v-kbd>-</v-kbd>
 
 ### Syntax rules
 
 - Parsing is performed left to right, so `ctrl+s-a` will produce "`ctrl+s` and then `a`"
-- Use `+` to combine modifiers with keys: `ctrl+s`
-- Use `-` to create sequences: `ctrl+k-p` (press Ctrl+K, then P)
+- Use `+` or `_` to combine modifiers with keys: `ctrl+s`, `ctrl_s`
+- Use `/` to separate alternative keys or combinations: `ctrl+k/ctrl+f`, `up/down`
+- Use `-` to create sequences: `ctrl+k-p` (Ctrl+K, then P) `ctrl+k/ctrl+f-p` (Ctrl+K or Ctrl+F, then P)
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
-- Spaces are ignored: `ctrl + s` equals `ctrl+s`
 
 Check out [all possible keycodes](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values).
 

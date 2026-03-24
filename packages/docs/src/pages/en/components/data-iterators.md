@@ -6,7 +6,7 @@ meta:
   keywords: data iterators, vuetify data iterator component, vue data iterator component
 related:
   - /components/data-tables/basics/
-  - /components/simple-tables/
+  - /components/tables/
   - /components/toolbars/
 features:
   github: /components/VDataIterator/
@@ -19,8 +19,6 @@ features:
 The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
 <PageFeatures />
-
-<DocIntroduced version="3.4.0" />
 
 ## Usage
 

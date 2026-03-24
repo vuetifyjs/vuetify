@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Sisesta kuupäev',
     },
+    ariaLabel: {
+      previousMonth: 'Eelmine kuu',
+      nextMonth: 'Järgmine kuu',
+      selectYear: 'Vali aasta',
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectMonth: 'Valige kuu',
+      selectDate: '{0}',
+      currentDate: 'Täna, {0}',
+    },
   },
   noDataText: 'Andmed puuduvad',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vali aeg',
+    hour: 'Tund',
+    minute: 'Minut',
+    second: 'Sekund',
+    notAllowed: 'Väärtus ei ole lubatud',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Palun vali vähemalt üks väärtus',
     pattern: 'Vale vorming',
   },
+  command: {
+    search: 'Sisestage käsk või otsige...',
+  },
   hotkey: {
     then: 'siis',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Tühik',
     plus: 'pluss',
     shortcut: 'Klaviatuuri otsetee: {0}',
+    or: 'või',
+  },
+  video: {
+    play: 'Esita',
+    pause: 'Peata',
+    seek: 'Otsi',
+    volume: 'Helitugevus',
+    showVolume: 'Näita helitugevuse regulaatorit',
+    mute: 'Vaigista',
+    unmute: 'Lülita vaigistus välja',
+    enterFullscreen: 'Täisekraan',
+    exitFullscreen: 'Välju täisekraanilt',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Võta värv ekraanilt',
+      hueSlider: 'Toon',
+      alphaSlider: 'Alfa',
+      redInput: 'Punane',
+      greenInput: 'Roheline',
+      blueInput: 'Sinine',
+      alphaInput: 'Alfa',
+      hueInput: 'Toon',
+      saturationInput: 'Küllastus',
+      lightnessInput: 'Heledus',
+      hexInput: 'HEKS väärtus',
+      hexaInput: 'HEKS koos alfa väärtusega',
+      changeFormat: 'Muuda värvi formaati',
+    },
   },
 }

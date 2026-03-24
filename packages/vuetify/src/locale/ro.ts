@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Introduceți data',
     },
+    ariaLabel: {
+      previousMonth: 'Luna anterioară',
+      nextMonth: 'Luna următoare',
+      selectYear: 'Selectați anul',
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectMonth: 'Selectați luna',
+      selectDate: '{0}',
+      currentDate: 'Astăzi, {0}',
+    },
   },
   noDataText: 'Nu există date disponibile',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selectați ora',
+    hour: 'Oră',
+    minute: 'Minute',
+    second: 'Secunde',
+    notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
   },
+  command: {
+    search: 'Tastați o comandă sau căutați...',
+  },
   hotkey: {
     then: 'apoi',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Spațiu',
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
+    or: 'sau',
+  },
+  video: {
+    play: 'Redare',
+    pause: 'Pauză',
+    seek: 'Căutare',
+    volume: 'Volum',
+    showVolume: 'Afișare control volum',
+    mute: 'Fără sunet',
+    unmute: 'Cu sunet',
+    enterFullscreen: 'Ecran complet',
+    exitFullscreen: 'Ieșire din ecran complet',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Alege culoarea de pe ecran',
+      hueSlider: 'Nuanță',
+      alphaSlider: 'Alfa',
+      redInput: 'Roșu',
+      greenInput: 'Verde',
+      blueInput: 'Albastru',
+      alphaInput: 'Alfa',
+      hueInput: 'Nuanță',
+      saturationInput: 'Saturație',
+      lightnessInput: 'Luminozitate',
+      hexInput: 'Valoare HEX',
+      hexaInput: 'Valoare HEX cu alfa',
+      changeFormat: 'Schimbă formatul culorii',
+    },
   },
 }

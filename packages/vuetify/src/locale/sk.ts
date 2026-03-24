@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Zadajte dátum',
     },
+    ariaLabel: {
+      previousMonth: 'Predchádzajúci mesiac',
+      nextMonth: 'Ďalší mesiac',
+      selectYear: 'Vyberte rok',
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectMonth: 'Vyberte mesiac',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
+    },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vyberte čas',
+    hour: 'Hodina',
+    minute: 'Minúty',
+    second: 'Sekundy',
+    notAllowed: 'Hodnota nie je povolená',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Vyberte aspoň jednu hodnotu',
     pattern: 'Neplatný formát',
   },
+  command: {
+    search: 'Zadajte príkaz alebo hľadajte...',
+  },
   hotkey: {
     then: 'potom',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Medzera',
     plus: 'plus',
     shortcut: 'Klávesová skratka: {0}',
+    or: 'alebo',
+  },
+  video: {
+    play: 'Prehrať',
+    pause: 'Pozastaviť',
+    seek: 'Vyhľadať',
+    volume: 'Hlasitosť',
+    showVolume: 'Zobraziť ovládanie hlasitosti',
+    mute: 'Stlmiť',
+    unmute: 'Zrušiť stlmenie',
+    enterFullscreen: 'Celá obrazovka',
+    exitFullscreen: 'Opustiť celú obrazovku',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrať farbu z obrazovky',
+      hueSlider: 'Odtieň',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odtieň',
+      saturationInput: 'Sýtosť',
+      lightnessInput: 'Svetlosť',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Zmeniť formát farby',
+    },
   },
 }

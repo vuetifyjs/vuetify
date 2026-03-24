@@ -10,6 +10,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFileDrop } from '@/composables/fileDrop'
+import { makeFileFilterProps, useFileFilter } from '@/composables/fileFilter'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -22,6 +23,7 @@ import {
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
+  omit,
   propsFactory,
   useRender,
   wrapInArray,
@@ -64,8 +66,12 @@ export const makeVFileInputProps = propsFactory({
       )
     },
   },
+  truncateLength: {
+    type: [Number, String],
+    default: 22,
+  },
 
-  ...makeVInputProps({ prependIcon: '$file' }),
+  ...omit(makeVInputProps({ prependIcon: '$file' }), ['direction']),
 
   modelValue: {
     type: [Array, Object] as PropType<File[] | File | null>,
@@ -75,6 +81,7 @@ export const makeVFileInputProps = propsFactory({
     },
   },
 
+  ...makeFileFilterProps(),
   ...makeVFieldProps({ clearable: true }),
 }, 'VFileInput')
 
@@ -90,10 +97,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File | File[]) => true,
+    rejected: (files: File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
+    const { filterAccepted } = useFileFilter(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -108,10 +117,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
     const fileNames = computed(() => (model.value ?? []).map(file => {
       const { name = '', size = 0 } = file
-
+      const truncatedText = truncateText(name)
       return !props.showSize
-        ? name
-        : `${name} (${humanReadableFileSize(size, base.value)})`
+        ? truncatedText
+        : `${truncatedText} (${humanReadableFileSize(size, base.value)})`
     }))
 
     const counterValue = computed(() => {
@@ -120,7 +129,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       else return t(props.counterString, fileCount)
     })
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
@@ -156,6 +165,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         callEvent(props['onClick:clear'], e)
       })
     }
+    function truncateText (str: string) {
+      if (str.length < Number(props.truncateLength)) return str
+      const charsKeepOneSide = Math.floor((Number(props.truncateLength) - 1) / 2)
+      return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
+    }
     function onDragover (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
@@ -172,13 +186,39 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
       if (!inputRef.value || !hasFilesOrFolders(e)) return
 
+      const allDroppedFiles = await handleDrop(e)
+      selectAccepted(allDroppedFiles)
+    }
+
+    function onFileSelection (e: Event) {
+      if (!e.target || (e as any).repack) return // prevent loop
+
+      if (!props.filterByType) {
+        const target = e.target as HTMLInputElement
+        model.value = [...target.files ?? []]
+      } else {
+        selectAccepted([...(e as any).target.files])
+      }
+    }
+
+    function selectAccepted (files: File[]) {
       const dataTransfer = new DataTransfer()
-      for (const file of await handleDrop(e)) {
+      const { accepted, rejected } = filterAccepted(files)
+
+      if (rejected.length) {
+        emit('rejected', rejected)
+      }
+
+      for (const file of accepted) {
         dataTransfer.items.add(file)
       }
 
-      inputRef.value.files = dataTransfer.files
-      inputRef.value.dispatchEvent(new Event('change', { bubbles: true }))
+      inputRef.value!.files = dataTransfer.files
+      model.value = [...dataTransfer.files]
+
+      const event = new Event('change', { bubbles: true }) as any
+      event.repack = true
+      inputRef.value!.dispatchEvent(event)
     }
 
     watch(model, newValue => {
@@ -194,7 +234,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const fieldProps = VField.filterProps(props)
+      const fieldProps = {
+        ...VField.filterProps(props),
+        'onClick:clear': onClear,
+      }
+
+      const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
+      const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
+      const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
 
       return (
         <VInput
@@ -216,6 +263,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,
@@ -232,7 +280,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 prependIcon={ props.prependIcon }
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
-                onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
@@ -250,11 +297,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                   ...slots,
                   default: ({
                     props: { class: fieldClass, ...slotProps },
+                    controlRef,
                   }) => (
                     <>
                       <input
-                        ref={ inputRef }
+                        ref={ val => inputRef.value = controlRef.value = val as HTMLInputElement }
                         type="file"
+                        accept={ inputAccept }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         multiple={ props.multiple }
@@ -266,12 +315,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
                           onFocus()
                         }}
-                        onChange={ e => {
-                          if (!e.target) return
-
-                          const target = e.target as HTMLInputElement
-                          model.value = [...target.files ?? []]
-                        }}
+                        onChange={ onFileSelection }
                         onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }

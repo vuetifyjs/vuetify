@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Εισαγάγετε ημερομηνία',
     },
+    ariaLabel: {
+      previousMonth: 'Προηγούμενος μήνας',
+      nextMonth: 'Επόμενος μήνας',
+      selectYear: 'Επιλέξτε έτος',
+      previousYear: 'Προηγούμενο έτος',
+      nextYear: 'Επόμενο έτος',
+      selectMonth: 'Επιλέξτε μήνα',
+      selectDate: '{0}',
+      currentDate: 'Σήμερα, {0}',
+    },
   },
   noDataText: 'Χωρίς δεδομένα',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'ΠΜ',
     pm: 'ΜΜ',
     title: 'Επιλέξτε ώρα',
+    hour: 'Ώρα',
+    minute: 'Λεπτά',
+    second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Παρακαλώ επιλέξτε τουλάχιστον μία τιμή',
     pattern: 'Μη έγκυρη μορφή',
   },
+  command: {
+    search: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
+  },
   hotkey: {
     then: 'στη συνέχεια',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Διάστημα',
     plus: 'συν',
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
+    or: 'ή',
+  },
+  video: {
+    play: 'Αναπαραγωγή',
+    pause: 'Παύση',
+    seek: 'Αναζήτηση',
+    volume: 'Ένταση',
+    showVolume: 'Εμφάνιση ελέγχου έντασης',
+    mute: 'Σίγαση',
+    unmute: 'Κατάργηση σίγασης',
+    enterFullscreen: 'Πλήρης οθόνη',
+    exitFullscreen: 'Έξοδος από πλήρη οθόνη',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Επιλογή χρώματος από την οθόνη',
+      hueSlider: 'Απόχρωση',
+      alphaSlider: 'Άλφα',
+      redInput: 'Κόκκινο',
+      greenInput: 'Πράσινο',
+      blueInput: 'Μπλε',
+      alphaInput: 'Άλφα',
+      hueInput: 'Απόχρωση',
+      saturationInput: 'Κορεσμός',
+      lightnessInput: 'Φωτεινότητα',
+      hexInput: 'Δεκαεξαδική τιμή',
+      hexaInput: 'Δεκαεξαδική τιμή με άλφα',
+      changeFormat: 'Αλλαγή μορφής χρώματος',
+    },
   },
 }

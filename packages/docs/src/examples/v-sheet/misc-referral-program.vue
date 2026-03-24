@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     border="lg opacity-12"
-    class="text-body-2 mx-auto"
+    class="text-body-medium mx-auto"
     max-width="550"
   >
     <v-container fluid>

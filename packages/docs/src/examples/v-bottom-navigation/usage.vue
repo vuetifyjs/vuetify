@@ -5,7 +5,8 @@
     :name="name"
     :options="options"
   >
-    <v-layout class="overflow-visible">
+    <v-layout class="border" style="height: 150px;">
+      <v-main></v-main>
       <v-bottom-navigation v-bind="props">
         <v-btn value="history">
           <v-icon>mdi-history</v-icon>

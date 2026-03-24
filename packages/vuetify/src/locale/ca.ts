@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Introdueix la data',
     },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes següent',
+      selectYear: 'Selecciona any',
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectMonth: 'Selecciona mes',
+      selectDate: '{0}',
+      currentDate: 'Avui, {0}',
+    },
   },
   noDataText: 'Sense dades',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecciona l’hora',
+    hour: 'Hora',
+    minute: 'Minuts',
+    second: 'Segons',
+    notAllowed: 'El valor no està permès',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
   },
+  command: {
+    search: 'Escriu una ordre o cerca...',
+  },
   hotkey: {
     then: 'després',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Espai',
     plus: 'més',
     shortcut: 'Drecera de teclat: {0}',
+    or: 'o',
+  },
+  video: {
+    play: 'Reproduir',
+    pause: 'Paura',
+    seek: 'Cercar',
+    volume: 'Volum',
+    showVolume: 'Mostrar control de volum',
+    mute: 'Silenciar',
+    unmute: 'Activar so',
+    enterFullscreen: 'Pantalla completa',
+    exitFullscreen: 'Sortir de pantalla completa',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'To',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermell',
+      greenInput: 'Verd',
+      blueInput: 'Blau',
+      alphaInput: 'Alfa',
+      hueInput: 'To',
+      saturationInput: 'Saturació',
+      lightnessInput: 'Lluminositat',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX amb alfa',
+      changeFormat: 'Canviar format de color',
+    },
   },
 }

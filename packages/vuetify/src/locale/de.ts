@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Datum eingeben',
     },
+    ariaLabel: {
+      previousMonth: 'Vorheriger Monat',
+      nextMonth: 'Nächster Monat',
+      selectYear: 'Jahr auswählen',
+      previousYear: 'Vorheriges Jahr',
+      nextYear: 'Nächstes Jahr',
+      selectMonth: 'Monat auswählen',
+      selectDate: '{0}',
+      currentDate: 'Heute, {0}',
+    },
   },
   noDataText: 'Keine Daten vorhanden',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Uhrzeit auswählen',
+    hour: 'Stunde',
+    minute: 'Minuten',
+    second: 'Sekunden',
+    notAllowed: 'Wert ist nicht erlaubt',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Bitte wählen Sie mindestens einen Wert aus',
     pattern: 'Ungültiges Format',
   },
+  command: {
+    search: 'Geben Sie einen Befehl ein oder suchen Sie...',
+  },
   hotkey: {
     then: 'dann',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Leertaste',
     plus: 'plus',
     shortcut: 'Tastenkürzel: {0}',
+    or: 'oder',
+  },
+  video: {
+    play: 'Abspielen',
+    pause: 'Pause',
+    seek: 'Suchen',
+    volume: 'Lautstärke',
+    showVolume: 'Lautstärkeregler anzeigen',
+    mute: 'Stummschalten',
+    unmute: 'Stummschaltung aufheben',
+    enterFullscreen: 'Vollbild',
+    exitFullscreen: 'Vollbild beenden',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Farbe vom Bildschirm auswählen',
+      hueSlider: 'Farbton',
+      alphaSlider: 'Transparenz',
+      redInput: 'Rot',
+      greenInput: 'Grün',
+      blueInput: 'Blau',
+      alphaInput: 'Transparenz',
+      hueInput: 'Farbton',
+      saturationInput: 'Sättigung',
+      lightnessInput: 'Helligkeit',
+      hexInput: 'HEX-Wert',
+      hexaInput: 'HEX-Wert mit Transparenz',
+      changeFormat: 'Farbformat ändern',
+    },
   },
 }

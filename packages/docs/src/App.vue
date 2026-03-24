@@ -4,6 +4,13 @@
       <component :is="Component" />
     </v-fade-transition>
   </router-view>
+
+  <PromotedScript
+    id="bitterbrainsads-script"
+    script-id="_bitterbrainsads_js"
+    src="//media.bitterbrains.com/main.js?from=VUETIFY&type=top"
+    async
+  />
 </template>
 
 <script setup lang="ts">
@@ -84,9 +91,7 @@
     }
 
     watchEffect(() => {
-      theme.global.name.value = (
-        user.one.theme === 'system' ? systemTheme.value : user.one.theme
-      )
+      theme.change(user.one.theme === 'system' ? systemTheme.value : user.one.theme)
     })
 
     watch(theme.global.name, themeTransition)
@@ -164,22 +169,28 @@
   a:not(:hover)
     text-decoration: none
 
-  p
+  h1 + p
+    font-size: 1.25rem
+    font-weight: 300
+    margin-top: 0
+
+  p :is(a, a:visited)
+    color: rgb(var(--v-theme-primary))
+
+  details
+    padding-inline-start: 1rem
     margin-bottom: 1rem
-    line-height: 1.8
+    border: 1px solid color-mix(currentColor, transparent 80%)
+    border-radius: .4rem
 
-    a, a:visited
-      color: rgb(var(--v-theme-primary))
+    > summary
+      padding: .3rem .6rem .3rem 0
 
-  h1
-    + p
-      font-size: 1.25rem
-      font-weight: 300
+      &::marker
+        margin-inline-end: .5rem
 
-  ul:not([class]),
-  ol:not([class])
-    padding-left: 20px
-    margin-bottom: 16px
+    &[open] > summary
+      margin-bottom: 1rem
 
   // Theme transition
   .app-copy

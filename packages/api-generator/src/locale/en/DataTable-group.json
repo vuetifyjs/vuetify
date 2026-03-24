@@ -1,5 +1,6 @@
 {
   "props": {
-    "groupBy": "Defines the grouping of the table items."
+    "groupBy": "Defines the grouping of the table items.",
+    "pageBy": "Controls how pagination counts items.\n- **item** paginates by individual items,\n- **auto** paginates by top-level groups and falls back to regular items if **group-by** is empty,\n- **any** paginates by both items and groups combined"
   }
 }

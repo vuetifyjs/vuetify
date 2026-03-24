@@ -4,7 +4,7 @@
     max-width="420"
     width="100%"
   >
-    <h3 class="text-h6 mb-2">
+    <h3 class="text-title-large mt-0 mb-2">
       Please enter the one time password to verify your account
     </h3>
 
@@ -64,3 +64,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2063-78016&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

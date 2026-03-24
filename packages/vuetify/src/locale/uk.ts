@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Введіть дату',
     },
+    ariaLabel: {
+      previousMonth: 'Попередній місяць',
+      nextMonth: 'Наступний місяць',
+      selectYear: 'Виберіть рік',
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectMonth: 'Виберіть місяць',
+      selectDate: '{0}',
+      currentDate: 'Сьогодні, {0}',
+    },
   },
   noDataText: 'Немає даних для відображення',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Оберіть час',
+    hour: 'Година',
+    minute: 'Хвилини',
+    second: 'Секунди',
+    notAllowed: 'Значення не дозволено',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Будь ласка, виберіть принаймні одне значення',
     pattern: 'Недійсний формат',
   },
+  command: {
+    search: 'Введіть команду або виконайте пошук...',
+  },
   hotkey: {
     then: 'потім',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Пробіл',
     plus: 'плюс',
     shortcut: 'Комбінація клавіш: {0}',
+    or: 'або',
+  },
+  video: {
+    play: 'Відтворити',
+    pause: 'Пауза',
+    seek: 'Пошук',
+    volume: 'Гучність',
+    showVolume: 'Показати регулятор гучності',
+    mute: 'Вимкнути звук',
+    unmute: 'Увімкнути звук',
+    enterFullscreen: 'На весь екран',
+    exitFullscreen: 'Вийти з повноекранного режиму',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вибрати колір з екрана',
+      hueSlider: 'Відтінок',
+      alphaSlider: 'Прозорість',
+      redInput: 'Червоний',
+      greenInput: 'Зелений',
+      blueInput: 'Синій',
+      alphaInput: 'Прозорість',
+      hueInput: 'Відтінок',
+      saturationInput: 'Насиченість',
+      lightnessInput: 'Яскравість',
+      hexInput: 'HEX значення',
+      hexaInput: 'HEX зі значенням прозорості',
+      changeFormat: 'Змінити формат кольору',
+    },
   },
 }

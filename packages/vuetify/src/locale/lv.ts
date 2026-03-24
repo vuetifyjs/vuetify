@@ -46,6 +46,16 @@ export default {
     input: {
       placeholder: 'Ievadiet datumu',
     },
+    ariaLabel: {
+      previousMonth: 'Iepriekšējais mēnesis',
+      nextMonth: 'Nākamais mēnesis',
+      selectYear: 'Izvēlieties gadu',
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectMonth: 'Izvēlieties mēnesi',
+      selectDate: '{0}',
+      currentDate: 'Šodien, {0}',
+    },
   },
   noDataText: 'Nav pieejamu datu',
   carousel: {
@@ -78,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izvēlieties laiku',
+    hour: 'Stunda',
+    minute: 'Minūtes',
+    second: 'Sekundes',
+    notAllowed: 'Vērtība nav atļauta',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +131,9 @@ export default {
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
   },
+  command: {
+    search: 'Ierakstiet komandu vai meklējiet...',
+  },
   hotkey: {
     then: 'tad',
     ctrl: 'Ctrl',
@@ -134,5 +151,34 @@ export default {
     space: 'Atstarpe',
     plus: 'plus',
     shortcut: 'Tastatūras saīsne: {0}',
+    or: 'vai',
+  },
+  video: {
+    play: 'Atskaņot',
+    pause: 'Pauzēt',
+    seek: 'Meklēt',
+    volume: 'Skaļums',
+    showVolume: 'Rādīt skaļuma kontroli',
+    mute: 'Izslēgt skaņu',
+    unmute: 'Ieslēgt skaņu',
+    enterFullscreen: 'Pilnekrāna režīms',
+    exitFullscreen: 'Iziet no pilnekrāna režīma',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Izvēlēties krāsu no ekrāna',
+      hueSlider: 'Tonis',
+      alphaSlider: 'Caurspīdīgums',
+      redInput: 'Sarkans',
+      greenInput: 'Zaļš',
+      blueInput: 'Zils',
+      alphaInput: 'Caurspīdīgums',
+      hueInput: 'Tonis',
+      saturationInput: 'Piesātinājums',
+      lightnessInput: 'Gaišums',
+      hexInput: 'HEX vērtība',
+      hexaInput: 'HEX ar caurspīdīguma vērtību',
+      changeFormat: 'Mainīt krāsas formātu',
+    },
   },
 }

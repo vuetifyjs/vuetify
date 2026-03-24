@@ -127,7 +127,21 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 ## Disabling utility classes
 
-Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`:
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selecively keeping only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
+
+```scss { resource="src/styles/main.scss" }
+@use 'vuetify' with (
+  $utilities: false,
+);
+```
+
+Each utility class is generated with a set of options that are defined [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_utilities.scss). Disable individual classes by setting their corresponding variable to `false`.
+
+::: info
+
+Vuetify includes several utility classes that are not covered by the `$utilities` map: `elevation`, `hidden`, `sr-only`, and `pointer-events`. If you want to disable these styles while keeping some utilities enabled, you can use the `$misc` variable. See the example at the end of the snippet below.
+
+:::
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
@@ -136,24 +150,35 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "align-items": false,
     "align-self": false,
     "border-bottom": false,
+    "border-current": false,
     "border-end": false,
     "border-opacity": false,
     "border-start": false,
     "border-style": false,
     "border-top": false,
     "border": false,
+    "bottom": false,
+    "cursor": false,
     "display": false,
+    "fill-height": false,
     "flex-direction": false,
     "flex-grow": false,
     "flex-shrink": false,
     "flex-wrap": false,
     "flex": false,
-    "float-ltr": false,
-    "float-rtl": false,
+    "float:ltr": false,
+    "float:rtl": false,
     "float": false,
     "font-italic": false,
     "font-weight": false,
+    "gap-column": false,
+    "gap-row": false,
+    "gap": false,
+    "height-screen": false,
+    "height": false,
     "justify-content": false,
+    "justify-items": false,
+    "left": false,
     "margin-bottom": false,
     "margin-end": false,
     "margin-left": false,
@@ -172,6 +197,7 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "negative-margin-x": false,
     "negative-margin-y": false,
     "negative-margin": false,
+    "opacity": false,
     "order": false,
     "overflow-wrap": false,
     "overflow-x": false,
@@ -186,6 +212,8 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "padding-x": false,
     "padding-y": false,
     "padding": false,
+    "position": false,
+    "right": false,
     "rounded-bottom-end": false,
     "rounded-bottom-start": false,
     "rounded-bottom": false,
@@ -201,19 +229,21 @@ Utility classes are a powerful feature of Vuetify, but they can also be unnecess
     "text-opacity": false,
     "text-overflow": false,
     "text-transform": false,
+    "top": false,
     "typography": false,
     "white-space": false,
+    "width": false,
+  ),
+  $misc: (
+    'pointer-events': false,
+    'sr-only': false,
+    "elevation": false,
+    "hidden": false,
   ),
 );
 ```
 
-To disable all utility classes, set the entire `$utilities` variable to `false`:
-
-```scss { resource="src/styles/main.scss" }
-@use 'vuetify' with (
-  $utilities: false,
-);
-```
+This is useful when you want to use your own implementation of these styles. For example, if your design system uses standardized shadow levels instead of Vuetify's elevation classes, you can disable the built-in elevation styles and define your own.
 
 ## Disabling color packs
 
@@ -227,14 +257,20 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 
 ## Enabling CSS cascade layers
 
-<DocIntroduced version="3.6.0" />
-
 [Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
 
 ```scss { resource="src/styles/settings.scss" }
 @forward 'vuetify/settings' with (
   $layers: true,
 );
+```
+
+```ts { resource="src/plugins/vuetify.ts" }
+export default createVuetify({
+  theme: {
+    layers: true,
+  },
+})
 ```
 
 Import order of stylesheets becomes much more important with layers enabled, `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything.
@@ -248,7 +284,7 @@ Your own styles will always<sup>*</sup> override vuetify's if you don't use `@la
 @layer base, vuetify, overrides;
 ```
 
-\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-body-small" }
 
 ## Caveats
 
