@@ -1,13 +1,13 @@
 // Utilities
-import { computed, inject, provide, ref, toRef, watch } from 'vue'
 import { createLocale as createV0Locale, createRtl as createV0Rtl } from '@vuetify/v0'
+import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
 
 // Locales
 import en from '@/locale/en'
 
 // Types
-import type { InjectionKey, Ref } from 'vue'
 import type { LocaleContext, RtlContext } from '@vuetify/v0'
+import type { InjectionKey, Ref } from 'vue'
 
 export interface LocaleMessages {
   [key: string]: LocaleMessages | string
@@ -42,8 +42,8 @@ export interface RtlInstance {
   rtlClasses: Ref<string>
 }
 
-// Internal: carried on provided data so provideLocale can inherit context
-interface InternalLocaleData {
+/** @internal Carried on provided data so provideLocale can inherit context */
+export interface InternalLocaleData {
   _messages: Record<string, LocaleMessages>
   _fallback: string
 }
@@ -137,15 +137,20 @@ function createRtlInstance (
   rtlMap: Ref<Record<string, boolean>>,
   v0Rtl: RtlContext
 ): RtlInstance {
-  // Bridge: when locale changes, update v0 RTL from per-locale map
+  // Local ref bridges v0's Ref (different @vue/reactivity copy) to Vuetify's
+  const isRtl = shallowRef(v0Rtl.isRtl.value)
+
+  // Bridge: when locale changes, update RTL from per-locale map
   watch(() => locale.current.value, current => {
-    v0Rtl.isRtl.value = rtlMap.value[current] ?? false
+    const value = rtlMap.value[current] ?? false
+    v0Rtl.isRtl.value = value
+    isRtl.value = value
   }, { immediate: true })
 
   return {
-    isRtl: v0Rtl.isRtl,
+    isRtl,
     rtl: rtlMap,
-    rtlClasses: toRef(() => `v-locale--is-${v0Rtl.isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 

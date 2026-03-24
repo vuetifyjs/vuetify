@@ -9,6 +9,13 @@ import type { Ref } from 'vue'
 import type { I18n, useI18n } from 'vue-i18n'
 import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
+export interface VueI18nLocaleInstance extends LocaleInstance {
+  name: string
+  fallback: Ref<string>
+  messages: Ref<LocaleMessages>
+  provide: (props: LocaleOptions) => VueI18nLocaleInstance
+}
+
 type VueI18nAdapterParams = {
   i18n: I18n<any, {}, {}, string, false>
   useI18n: typeof useI18n
@@ -38,7 +45,7 @@ function createProvideFunction (data: {
   messages: Ref<LocaleMessages>
   useI18n: typeof useI18n
 }) {
-  return (props: LocaleOptions): LocaleInstance => {
+  return (props: LocaleOptions): VueI18nLocaleInstance => {
     const current = useProvided(props, 'locale', data.current)
     const fallback = useProvided(props, 'fallback', data.fallback)
     const messages = useProvided(props, 'messages', data.messages)
@@ -69,7 +76,7 @@ function createProvideFunction (data: {
   }
 }
 
-export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): LocaleInstance {
+export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): VueI18nLocaleInstance {
   const current = i18n.global.locale
   const fallback = i18n.global.fallbackLocale as Ref<any>
   const messages = i18n.global.messages
