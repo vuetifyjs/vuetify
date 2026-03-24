@@ -469,9 +469,9 @@ export const VCombobox = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
-      const menuContent = vMenuRef.value?.contentEl
-      if (menuContent?.contains(e.relatedTarget as Node)) {
-        isFocused.value = true
+      const target = e.target as Element
+      if (!vTextFieldRef.value?.$el.contains(target)) {
+        menu.value = false
       }
     }
 
@@ -479,7 +479,6 @@ export const VCombobox = genericComponent<new <
       if (val || val === oldVal) return
 
       selectionIndex.value = -1
-      menu.value = false
 
       if (search.value) {
         if (props.multiple) {
@@ -601,7 +600,6 @@ export const VCombobox = genericComponent<new <
                         filterable
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         selectable={ !!displayItems.value.length }
                         onFocusout={ onFocusout }
                         tabindex="-1"
