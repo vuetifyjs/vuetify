@@ -191,12 +191,15 @@ export function useFocusTrap (
   onScopeDispose(() => {
     registry.delete(trapId)
     clearTimeout(focusTrapSuppressionTimeout)
-    document.removeEventListener('pointerdown', onPointerdown)
-    document.removeEventListener('focusin', captureOnFocus)
-    document.removeEventListener('keydown', captureOnKeydown)
 
-    if (--subscribers < 1) {
-      document.removeEventListener('keydown', onKeydown)
+    if (IN_BROWSER) {
+      document.removeEventListener('pointerdown', onPointerdown)
+      document.removeEventListener('focusin', captureOnFocus)
+      document.removeEventListener('keydown', captureOnKeydown)
+
+      if (--subscribers < 1) {
+        document.removeEventListener('keydown', onKeydown)
+      }
     }
   })
 }
