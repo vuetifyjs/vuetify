@@ -76,5 +76,8 @@
 
         return tiers
       }, [])
+      .filter(sponsor =>
+        sponsor.metadata.visibility?.key === 'all'
+      )
   })
 </script>
