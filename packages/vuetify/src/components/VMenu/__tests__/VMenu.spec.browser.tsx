@@ -1,6 +1,6 @@
 // Components
-import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '..'
+import { VList, VListItem } from '@/components/VList'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
@@ -9,8 +9,8 @@ describe('VMenu', () => {
   it('returns focus to activator on Escape', async () => {
     render(() => (
       <div>
-        <button data-test="activator">Open menu</button>
-        <VMenu activator="[data-test='activator']">
+        <button data-testid="activator">Open menu</button>
+        <VMenu activator="[data-testid='activator']">
           <VList>
             <VListItem title="Item 1" />
             <VListItem title="Item 2" />
