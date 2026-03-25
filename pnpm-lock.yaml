@@ -457,8 +457,8 @@ importers:
   packages/vuetify:
     dependencies:
       '@vuetify/v0':
-        specifier: ^0.1.8
-        version: 0.1.8(vue@3.5.25(typescript@5.8.3))
+        specifier: ^0.1.11
+        version: 0.1.11(vue-i18n@11.2.1(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))
     devDependencies:
       '@date-io/core':
         specifier: 3.2.0
@@ -3796,8 +3796,8 @@ packages:
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
     engines: {node: '>=18'}
 
-  '@vuetify/v0@0.1.8':
-    resolution: {integrity: sha512-aXKOBNorJbGho251jxzZ7dX8e4SUea7MQTnetoX4nx0lxwCyEs5U083oOYKuvkktwudTiSqe5N36Kz6CWWJohQ==}
+  '@vuetify/v0@0.1.11':
+    resolution: {integrity: sha512-+9Epz/TLrbjdt9dPMmjtcI6cNgDtFu33MSRUxMFzG04vH26eluDLvDeG0Leri2fOcZnNXJHA/I7D0is9Vorkpg==}
     peerDependencies:
       '@adobe/leonardo-contrast-colors': '>=1.0.0'
       '@ant-design/colors': '>=7.0.0'
@@ -3806,6 +3806,7 @@ packages:
       launchdarkly-js-client-sdk: ^3.0.0
       posthog-js: ^1.0.0
       vue: '>=3.5.0'
+      vue-i18n: '>=10.0.0'
     peerDependenciesMeta:
       '@adobe/leonardo-contrast-colors':
         optional: true
@@ -3818,6 +3819,8 @@ packages:
       launchdarkly-js-client-sdk:
         optional: true
       posthog-js:
+        optional: true
+      vue-i18n:
         optional: true
 
   '@vueuse/head@1.3.1':
@@ -12390,11 +12393,12 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@vuetify/v0@0.1.8(vue@3.5.25(typescript@5.8.3))':
+  '@vuetify/v0@0.1.11(vue-i18n@11.2.1(vue@3.5.25(typescript@5.8.3)))(vue@3.5.25(typescript@5.8.3))':
     dependencies:
       vue: 3.5.25(typescript@5.8.3)
     optionalDependencies:
       '@js-temporal/polyfill': 0.5.1
+      vue-i18n: 11.2.1(vue@3.5.25(typescript@5.8.3))
 
   '@vueuse/head@1.3.1(vue@3.5.25(typescript@5.8.3))':
     dependencies:
