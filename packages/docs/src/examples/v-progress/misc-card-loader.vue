@@ -56,12 +56,12 @@
   </v-card>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { onUnmounted, shallowRef } from 'vue'
 
   const progress = shallowRef(0)
   const done = shallowRef(false)
-  let timer: ReturnType<typeof setInterval>
+  let timer = -1
 
   function startLoading () {
     done.value = false

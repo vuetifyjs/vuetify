@@ -41,12 +41,12 @@
   </v-layout>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { ref } from 'vue'
 
   const menu = ref(false)
-  const activator = ref<Element>()
-  const menuItems = ref<any[]>([])
+  const activator = ref()
+  const menuItems = ref([])
   const menuMoving = ref(false)
 
   const groups = [
@@ -77,7 +77,7 @@
 
   let closeTimeout = -1
   let movingTimeout = -1
-  function activate ({ currentTarget }: MouseEvent, group: { name: string, submenu: any[] }) {
+  function activate ({ currentTarget }, group) {
     clearTimeout(closeTimeout)
 
     clearTimeout(movingTimeout)
@@ -86,7 +86,7 @@
       movingTimeout = window.setTimeout(() => menuMoving.value = false, 300)
     }
 
-    activator.value = currentTarget as Element
+    activator.value = currentTarget
     menuItems.value = group.submenu
     menu.value = true
   }
