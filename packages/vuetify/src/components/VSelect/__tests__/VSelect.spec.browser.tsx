@@ -1033,7 +1033,7 @@ describe('VSelect', () => {
       <VSelect title="Select a state" items={['California', 'Colorado']} />
     ))
 
-    expect(element.querySelector('.v-field')).toHaveAttribute('title', 'Select a state')
+    expect(element).toHaveAttribute('title', 'Select a state')
     expect(element.querySelector('input')).not.toHaveAttribute('title')
   })
 
