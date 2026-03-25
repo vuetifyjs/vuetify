@@ -22,7 +22,7 @@ export interface LocaleOptions {
 export interface LocaleInstance {
   current: Ref<string>
   t: (key: string, ...params: unknown[]) => string
-  n: (value: number) => string
+  n: (value: number, options?: Intl.NumberFormatOptions) => string
   decimalSeparator: Ref<string>
 }
 
@@ -112,7 +112,10 @@ function createLocaleInstance (
     return v0Locale.t(stripped, ...params)
   }
 
-  function n (value: number): string {
+  function n (value: number, options?: Intl.NumberFormatOptions): string {
+    if (options) {
+      return new Intl.NumberFormat([current.value], options).format(value)
+    }
     return v0Locale.n(value)
   }
 
