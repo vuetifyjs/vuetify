@@ -48,6 +48,7 @@
           v-bind="hoverProps"
           :append-icon="isHovering ? 'mdi-heart' : 'mdi-heart-outline'"
           :text="t('home.sponsors.become-sponsor')"
+          :to="rpath('/introduction/sponsors-and-backers/')"
           class="text-none mt-9"
           color="primary"
           rounded="lg"

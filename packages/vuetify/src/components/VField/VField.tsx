@@ -30,6 +30,7 @@ import {
   standardEasing,
   useRender,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -175,7 +176,7 @@ export const VField = genericComponent<new <T>(
 
         requestAnimationFrame(() => {
           const rect = nullifyTransforms(el)
-          const targetRect = targetEl.getBoundingClientRect()
+          const targetRect = new Box(targetEl)
 
           const x = targetRect.x - rect.x
           const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
