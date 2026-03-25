@@ -139,7 +139,7 @@ export const VField = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { rtlClasses } = useRtl()
 
     const isActive = toRef(() => props.dirty || props.active)
@@ -287,6 +287,7 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           onClick={ onClick }

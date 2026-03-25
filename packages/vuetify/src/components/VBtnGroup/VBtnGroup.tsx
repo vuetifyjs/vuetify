@@ -47,7 +47,7 @@ export const VBtnGroup = genericComponent()({
     const { densityClasses } = useDensity(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     provideDefaults({
       VBtn: {
@@ -76,7 +76,7 @@ export const VBtnGroup = genericComponent()({
             roundedClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[roundedStyles.value, props.style]}
           v-slots={ slots }
         />
       )

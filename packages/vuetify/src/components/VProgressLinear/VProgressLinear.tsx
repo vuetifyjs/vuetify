@@ -95,7 +95,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorClasses: barColorClasses,
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
 
     const max = computed(() => parseFloat(props.max))
@@ -192,6 +192,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             ...(props.absolute ? locationStyles.value : {}),
           },
           chunksMaskStyles.value,
+          roundedStyles.value,
           props.style,
         ]}
         role="progressbar"
