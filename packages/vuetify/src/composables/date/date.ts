@@ -1,16 +1,16 @@
 // Utilities
-import { inject, watch } from 'vue'
-import { isUndefined } from '@vuetify/v0/utilities'
 import { createDate as createV0Date } from '@vuetify/v0/composables'
 import { Vuetify0DateAdapter } from '@vuetify/v0/date'
+import { isUndefined } from '@vuetify/v0/utilities'
+import { inject, watch } from 'vue'
 
 // Adapters
 import { VuetifyDateBridge } from './bridge'
 import { LegacyDateAdapterCompat } from './compat'
 
 // Types
-import type { App, InjectionKey } from 'vue'
 import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
+import type { App, InjectionKey } from 'vue'
 import type { DateAdapter } from './bridge'
 import type { LocaleInstance } from '@/composables/locale'
 

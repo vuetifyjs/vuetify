@@ -1,9 +1,11 @@
 // Utilities
-import type { Temporal } from '@js-temporal/polyfill'
 import { Vuetify0DateAdapter } from '@vuetify/v0/date'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateBridge } from '../bridge'
 import { createDateRange } from '../date'
+
+// Types
+import type { Temporal } from '@js-temporal/polyfill'
 
 type PlainDateTime = Temporal.PlainDateTime
 

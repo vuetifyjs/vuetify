@@ -7,7 +7,7 @@ export {
   DateAdapterSymbol, // deprecated compat
   DateOptionsSymbol, // deprecated compat
 } from './date'
-export type { DateOptions, DateInstance } from './date'
+export type { DateOptions, DateInstance, DateModule } from './date'
 export { VuetifyDateBridge } from './bridge'
 export { LegacyDateAdapterCompat } from './compat'
 export { StringDateAdapter } from './adapters/string'

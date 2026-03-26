@@ -236,13 +236,6 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
   // adapters don't have
   // ============================================
 
-  private unsupported (method: string): never {
-    throw new Error(
-      `${method}() is not available on legacy date adapters. ` +
-      `Migrate to @vuetify/v0's DateAdapter interface.`
-    )
-  }
-
   parse (value: string, format: string): T | null {
     return this.legacy.parse?.(value, format) ?? this.unsupported('parse')
   }
@@ -329,5 +322,12 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
 
   mergeDateAndTime (date: T, time: T): T {
     return this.legacy.mergeDateAndTime?.(date, time) ?? this.unsupported('mergeDateAndTime')
+  }
+
+  private unsupported (method: string): never {
+    throw new Error(
+      `${method}() is not available on legacy date adapters. ` +
+      `Migrate to @vuetify/v0's DateAdapter interface.`
+    )
   }
 }
