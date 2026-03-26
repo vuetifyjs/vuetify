@@ -2,14 +2,19 @@
 import { genCssVariables } from './colors'
 
 // Utilities
-import { IN_BROWSER } from '@/util'
-import { ThemeAdapter } from '@vuetify/v0'
+import { ThemeAdapter } from '@vuetify/v0/theme/adapters'
 import { watch } from 'vue'
+import { IN_BROWSER } from '@/util'
 
 // Types
-import type { ThemeAdapterSetupContext } from '@vuetify/v0'
-import type { App } from 'vue'
+import type { App, ComputedRef, Ref } from 'vue'
 import type { InternalThemeDefinition } from './colors'
+
+interface AdapterSetupContext {
+  colors: ComputedRef<Record<string, Record<string, string>>>
+  selectedId: Ref<string | null | undefined>
+  isDark: Readonly<Ref<boolean>>
+}
 
 export interface VuetifyThemeAdapterOptions {
   cspNonce?: string
@@ -132,7 +137,8 @@ export class VuetifyThemeAdapter extends ThemeAdapter {
     return '@layer vuetify-utilities {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   }
 
-  setup <T extends ThemeAdapterSetupContext>(
+  // @ts-expect-error Vue types mismatch between v0 and vuetify packages
+  setup <T extends AdapterSetupContext> (
     app: App,
     context: T,
     _target?: string | HTMLElement | null,

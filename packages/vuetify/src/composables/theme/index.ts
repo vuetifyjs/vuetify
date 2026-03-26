@@ -1,9 +1,11 @@
 // Utilities
 import {
+  createTheme as createV0Theme,
+  usePrefersDark,
+} from '@vuetify/v0'
+import {
   computed,
-  getCurrentScope,
   inject,
-  onScopeDispose,
   provide,
   ref,
   shallowRef,
@@ -12,20 +14,19 @@ import {
   watchEffect,
 } from 'vue'
 import {
+  genCssVariables,
+  genOnColors,
+  genVariations,
+  parseThemeOptions,
+} from './colors'
+import {
   consoleWarn,
   deprecate,
   getCurrentInstance,
   IN_BROWSER,
   mergeDeep,
   propsFactory,
-  SUPPORTS_MATCH_MEDIA,
 } from '@/util'
-import {
-  genCssVariables,
-  genOnColors,
-  genVariations,
-  parseThemeOptions,
-} from './colors'
 
 // Types
 import type { VueHeadClient } from '@unhead/vue/client'
@@ -109,23 +110,78 @@ function getOrCreateStyleElement (id: string, cspNonce?: string) {
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
-  const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
-  const systemName = shallowRef('light')
+
+  // Build processed themes with variations + on-colors for v0 registration
+  function buildV0Themes () {
+    const processed: Record<string, { dark: boolean, colors: Record<string, string> }> = {}
+    for (const [themeName, original] of Object.entries(themes.value)) {
+      const defaultTheme = original.dark || themeName === 'dark'
+        ? themes.value.dark
+        : themes.value.light
+
+      const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
+      const colors = {
+        ...merged.colors,
+        ...genVariations(merged.colors, parsedOptions.variations),
+      }
+      const fullColors = {
+        ...colors,
+        ...genOnColors(colors, merged.variables),
+      }
+
+      processed[themeName] = {
+        dark: merged.dark,
+        colors: fullColors as Record<string, string>,
+      }
+    }
+    return processed
+  }
+
+  // Resolve default theme — v0 doesn't understand 'system'
+  const isSystemDefault = parsedOptions.defaultTheme === 'system'
+  const { matches: prefersDark } = usePrefersDark()
+  const resolvedDefault = isSystemDefault
+    ? (prefersDark.value ? 'dark' : 'light')
+    : parsedOptions.defaultTheme
+
+  // Create v0 theme instance
+  const v0Theme = createV0Theme({
+    reactive: true,
+    foreground: false, // We handle on-colors ourselves via genOnColors
+    default: resolvedDefault,
+    themes: buildV0Themes(),
+  })
+
+  // Bridge v0's selectedId to Vuetify's name ref
+  const _name = shallowRef(parsedOptions.defaultTheme)
 
   const name = computed({
     get () {
-      return _name.value === 'system' ? systemName.value : _name.value
+      if (_name.value === 'system') {
+        return prefersDark.value ? 'dark' : 'light'
+      }
+      return String(v0Theme.selectedId.value ?? resolvedDefault)
     },
     set (val: string) {
       _name.value = val
+      if (val !== 'system') {
+        v0Theme.select(val)
+      }
     },
+  })
+
+  // When system preference changes and we're in system mode, update v0 selection
+  watch(prefersDark, dark => {
+    if (_name.value === 'system') {
+      v0Theme.select(dark ? 'dark' : 'light')
+    }
   })
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
-    for (const [name, original] of Object.entries(themes.value)) {
-      const defaultTheme = original.dark || name === 'dark'
+    for (const [themeName, original] of Object.entries(themes.value)) {
+      const defaultTheme = original.dark || themeName === 'dark'
         ? themes.value.dark
         : themes.value.light
 
@@ -136,7 +192,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ...genVariations(merged.colors, parsedOptions.variations),
       }
 
-      acc[name] = {
+      acc[themeName] = {
         ...merged,
         colors: {
           ...colors,
@@ -206,24 +262,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
   const themeNames = toRef(() => Object.keys(computedThemes.value))
-
-  if (SUPPORTS_MATCH_MEDIA) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-
-    function updateSystemName () {
-      systemName.value = media.matches ? 'dark' : 'light'
-    }
-
-    updateSystemName()
-
-    media.addEventListener('change', updateSystemName, { passive: true })
-
-    if (getCurrentScope()) {
-      onScopeDispose(() => {
-        media.removeEventListener('change', updateSystemName)
-      })
-    }
-  }
 
   function install (app: App) {
     if (parsedOptions.isDisabled) return
