@@ -6,15 +6,12 @@ import type { DateAdapter } from '@vuetify/v0/composables'
 export class StringDateAdapter implements DateAdapter<string> {
   private base: Vuetify0DateAdapter
 
-  get locale () { return this.base.locale }
-  set locale (v: string) { this.base.locale = v }
-
   constructor (options?: { locale?: string }) {
     this.base = new Vuetify0DateAdapter(options?.locale)
   }
 
-  private toBase (value: string) { return this.base.parseISO(value) }
-  private fromBase (value: any): string { return this.base.toISO(value) }
+  get locale () { return this.base.locale }
+  set locale (v: string) { this.base.locale = v }
 
   // ============================================
   // Construction & Conversion
@@ -322,4 +319,11 @@ export class StringDateAdapter implements DateAdapter<string> {
   mergeDateAndTime (date: string, time: string): string {
     return this.fromBase(this.base.mergeDateAndTime(this.toBase(date), this.toBase(time)))
   }
+
+  // ============================================
+  // Private helpers
+  // ============================================
+
+  private toBase (value: string) { return this.base.parseISO(value) }
+  private fromBase (value: any): string { return this.base.toISO(value) }
 }
