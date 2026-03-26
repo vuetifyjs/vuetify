@@ -15,3 +15,11 @@ related:
 This page contains a detailed list of breaking changes and the steps required to upgrade your application from Vuetify 4 to Vuetify 5.
 
 <PageFeatures />
+
+## Date
+
+The date system now uses `@vuetify/v0` under the hood. The consumer API (`useDate()`) is unchanged for most users.
+
+### Default date type changed
+
+The default adapter now uses `Temporal.PlainDateTime` instead of native `Date`. If your code handles date values from VDatePicker or VCalendar model values, update accordingly:
