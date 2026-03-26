@@ -3,17 +3,63 @@ import { isUndefined } from '@vuetify/v0/utilities'
 
 // Types
 import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
-import type { DateAdapter } from './DateAdapter'
 
-function withFirstDayOfWeek<T, R> (adapter: V0DateAdapter<T>, firstDayOfWeek: number | undefined, fn: () => R): R {
-  if (isUndefined(firstDayOfWeek)) return fn()
-  const saved = adapter.firstDayOfWeek
-  adapter.firstDayOfWeek = firstDayOfWeek
-  try {
-    return fn()
-  } finally {
-    adapter.firstDayOfWeek = saved
-  }
+/**
+ * Vuetify's public-facing DateAdapter interface.
+ * Accepts `number | string` for firstDayOfWeek params (legacy contract).
+ * v0's DateAdapter uses `number` only.
+ */
+export interface DateAdapter<T = unknown> {
+  date (value?: any): T | null
+  format (date: T, formatString: string): string
+  toJsDate (value: T): Date
+  parseISO (date: string): T
+  toISO (date: T): string
+
+  startOfDay (date: T): T
+  endOfDay (date: T): T
+  startOfWeek (date: T, firstDayOfWeek?: number | string): T
+  endOfWeek (date: T): T
+  startOfMonth (date: T): T
+  endOfMonth (date: T): T
+  startOfYear (date: T): T
+  endOfYear (date: T): T
+
+  isAfter (date: T, comparing: T): boolean
+  isAfterDay (date: T, comparing: T): boolean
+
+  isSameDay (date: T, comparing: T): boolean
+  isSameMonth (date: T, comparing: T): boolean
+  isSameYear (date: T, comparing: T): boolean
+
+  isBefore (date: T, comparing: T): boolean
+  isEqual (date: T, comparing: T): boolean
+  isValid (date: any): boolean
+  isWithinRange (date: T, range: [T, T]): boolean
+
+  addMinutes (date: T, amount: number): T
+  addHours (date: T, amount: number): T
+  addDays (date: T, amount: number): T
+  addWeeks (date: T, amount: number): T
+  addMonths (date: T, amount: number): T
+
+  getYear (date: T): number
+  setYear (date: T, year: number): T
+  getDiff (date: T, comparing: T | string, unit?: string): number
+  getWeekArray (date: T, firstDayOfWeek?: number | string): T[][]
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[]
+  getWeek (date: T, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number
+  getMonth (date: T): number
+  setMonth (date: T, month: number): T
+  getDate (date: T): number
+  setDate (date: T, day: number): T
+  getNextMonth (date: T): T
+  getPreviousMonth (date: T): T
+
+  getHours (date: T): number
+  setHours (date: T, hours: number): T
+  getMinutes (date: T): number
+  setMinutes (date: T, minutes: number): T
 }
 
 function calculateWeekWithFirstDayOfYear<T> (
@@ -25,7 +71,7 @@ function calculateWeekWithFirstDayOfYear<T> (
   const firstDayOfYearOffset = (7 + firstDayOfYear - weekStart) % 7
 
   function startOfWeek (d: T): T {
-    return withFirstDayOfWeek(adapter, weekStart, () => adapter.startOfWeek(d))
+    return adapter.startOfWeek(d, weekStart)
   }
 
   function addDays (d: T, amount: number): T {
@@ -53,23 +99,31 @@ function calculateWeekWithFirstDayOfYear<T> (
   return 1 + adapter.getDiff(adapter.endOfDay(currentWeekStart), adapter.startOfDay(d1w1), 'weeks')
 }
 
+/**
+ * Bridges v0's DateAdapter to Vuetify's public DateAdapter interface.
+ *
+ * The only translation needed is `number | string` → `number` for
+ * firstDayOfWeek/firstDayOfYear params, and the Vuetify-specific
+ * `getWeek(date, firstDayOfWeek, firstDayOfYear)` overload which
+ * v0 doesn't support directly.
+ */
 export class VuetifyDateBridge<T> implements DateAdapter<T> {
   constructor (public readonly adapter: V0DateAdapter<T>) {}
 
   // ============================================
-  // Translated methods (4)
+  // Translated methods — coerce string → number
   // ============================================
 
   startOfWeek (date: T, firstDayOfWeek?: number | string): T {
-    return withFirstDayOfWeek(this.adapter, toNumber(firstDayOfWeek), () => this.adapter.startOfWeek(date))
+    return this.adapter.startOfWeek(date, toNumber(firstDayOfWeek))
   }
 
   getWeekArray (date: T, firstDayOfWeek?: number | string): T[][] {
-    return withFirstDayOfWeek(this.adapter, toNumber(firstDayOfWeek), () => this.adapter.getWeekArray(date))
+    return this.adapter.getWeekArray(date, toNumber(firstDayOfWeek))
   }
 
   getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return withFirstDayOfWeek(this.adapter, toNumber(firstDayOfWeek), () => this.adapter.getWeekdays(weekdayFormat))
+    return this.adapter.getWeekdays(toNumber(firstDayOfWeek), weekdayFormat)
   }
 
   getWeek (date: T, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number {
@@ -77,11 +131,11 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
     const fdoy = toNumber(firstDayOfYear)
 
     if (!isUndefined(fdoy)) {
-      const weekStart = !isUndefined(fdow) ? fdow : (this.adapter.firstDayOfWeek ?? 0)
+      const weekStart = fdow ?? 0
       return calculateWeekWithFirstDayOfYear(this.adapter, date, weekStart, fdoy)
     }
 
-    return withFirstDayOfWeek(this.adapter, fdow, () => this.adapter.getWeek(date))
+    return this.adapter.getWeek(date, fdow)
   }
 
   // ============================================

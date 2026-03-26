@@ -5,52 +5,46 @@ import { consoleWarn } from '@/util'
 import type { DateAdapter } from '@vuetify/v0'
 
 /**
- * Wraps old Vuetify-style custom adapters (param-based firstDayOfWeek signatures)
- * to satisfy v0's DateAdapter interface.
+ * Wraps old Vuetify-style custom adapters to satisfy v0's DateAdapter interface.
  *
- * Legacy adapters pass firstDayOfWeek as a method parameter.
- * v0's interface uses a property-based approach instead.
- * This class bridges the gap by reading the property and forwarding it as a param.
+ * Both old Vuetify and v0 use param-based firstDayOfWeek, so this is mostly
+ * a passthrough. The main purpose is:
+ * 1. Emit a deprecation warning
+ * 2. Provide stub implementations for v0-only methods that legacy adapters lack
  */
 export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
   locale?: string
-  firstDayOfWeek?: number
 
   constructor (private legacy: any) {
     consoleWarn(
       'Custom date adapters should implement @vuetify/v0\'s DateAdapter interface. ' +
-      'Param-based firstDayOfWeek signatures are deprecated and will be removed in a future version.'
+      'Param-based signatures are deprecated and will be removed in a future version.'
     )
     this.locale = legacy.locale
-    this.firstDayOfWeek = legacy.firstDayOfWeek ?? 0
   }
 
   // ============================================
-  // Translated methods
-  // v0 uses property-based firstDayOfWeek,
-  // legacy adapters expect it as a parameter
+  // Week methods — passthrough (both APIs are param-based)
   // ============================================
 
-  startOfWeek (date: T): T {
-    return this.legacy.startOfWeek(date, this.firstDayOfWeek)
+  startOfWeek (date: T, firstDayOfWeek?: number): T {
+    return this.legacy.startOfWeek(date, firstDayOfWeek)
   }
 
-  endOfWeek (date: T): T {
-    return this.legacy.endOfWeek(date)
+  endOfWeek (date: T, firstDayOfWeek?: number): T {
+    return this.legacy.endOfWeek(date, firstDayOfWeek)
   }
 
-  getWeekArray (date: T): T[][] {
-    return this.legacy.getWeekArray(date, this.firstDayOfWeek)
+  getWeekArray (date: T, firstDayOfWeek?: number): T[][] {
+    return this.legacy.getWeekArray(date, firstDayOfWeek)
   }
 
-  getWeekdays (format?: string): string[] {
-    return this.legacy.getWeekdays(this.firstDayOfWeek, format)
+  getWeekdays (firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.legacy.getWeekdays(firstDayOfWeek, weekdayFormat)
   }
 
-  // v0's minimalDays has no equivalent in legacy adapters (they use firstDayOfYear instead).
-  // Silently ignored — legacy adapters only support firstDayOfWeek-based week calculation.
-  getWeek (date: T, _minimalDays?: number): number {
-    return this.legacy.getWeek(date, this.firstDayOfWeek)
+  getWeek (date: T, firstDayOfWeek?: number, minimalDays?: number): number {
+    return this.legacy.getWeek(date, firstDayOfWeek, minimalDays)
   }
 
   // ============================================
