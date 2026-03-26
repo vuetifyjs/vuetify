@@ -1,10 +1,13 @@
 // Utilities
+import type { Temporal } from '@js-temporal/polyfill'
 import { Vuetify0DateAdapter } from '@vuetify/v0/date'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateBridge } from '../bridge'
 import { createDateRange } from '../date'
 
-function createAdapter (locale: string) {
+type PlainDateTime = Temporal.PlainDateTime
+
+function createAdapter (locale: string): VuetifyDateBridge<PlainDateTime> {
   return new VuetifyDateBridge(new Vuetify0DateAdapter(locale))
 }
 
@@ -93,9 +96,13 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
   describe('createDateRange', () => {
     const adapter = createAdapter('en-US')
 
+    function range (...args: Parameters<typeof createDateRange>): PlainDateTime[] {
+      return createDateRange(...args) as PlainDateTime[]
+    }
+
     it('should create a single date array when only start date is provided', () => {
       const start = adapter.parseISO('2024-01-01')
-      const result = createDateRange(adapter, start)
+      const result = range(adapter, start)
 
       expect(result).toHaveLength(1)
       expect(adapter.isSameDay(result[0], start)).toBe(true)
@@ -103,7 +110,7 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
 
     it('should handle same start and stop date', () => {
       const date = adapter.parseISO('2024-01-01')
-      const result = createDateRange(adapter, date, date)
+      const result = range(adapter, date, date)
 
       expect(adapter.isSameDay(result[0], date)).toBe(true)
       expect(adapter.isSameDay(result[1], adapter.endOfDay(date))).toBe(true)
@@ -112,7 +119,7 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
     it('should create a range of dates between start and stop', () => {
       const start = adapter.parseISO('2024-01-01')
       const stop = adapter.parseISO('2024-01-03')
-      const result = createDateRange(adapter, start, stop)
+      const result = range(adapter, start, stop)
 
       expect(result).toHaveLength(3)
       expect(adapter.isSameDay(result[0], start)).toBe(true)
@@ -123,7 +130,7 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
     it('should handle dates in different months', () => {
       const start = adapter.parseISO('2024-01-30')
       const stop = adapter.parseISO('2024-02-02')
-      const result = createDateRange(adapter, start, stop)
+      const result = range(adapter, start, stop)
 
       expect(result).toHaveLength(4)
       expect(adapter.isSameDay(result[0], start)).toBe(true)
@@ -135,7 +142,7 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
     it('should handle dates in different years', () => {
       const start = adapter.parseISO('2024-12-30')
       const stop = adapter.parseISO('2025-01-02')
-      const result = createDateRange(adapter, start, stop)
+      const result = range(adapter, start, stop)
 
       expect(result).toHaveLength(4)
       expect(adapter.isSameDay(result[0], start)).toBe(true)
@@ -148,7 +155,7 @@ describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
       // Temporal is timezone-agnostic, so use plain dates
       const start = adapter.parseISO('2025-03-28')
       const stop = adapter.parseISO('2025-03-30')
-      const result = createDateRange(adapter, start, stop)
+      const result = range(adapter, start, stop)
 
       expect(result).toHaveLength(3)
     })
