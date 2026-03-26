@@ -60,18 +60,22 @@
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
+      "types": "./lib/styles/main.d.ts",
       "default": "./lib/styles/main.css"
     },
     "./styles/core": {
       "sass": "./lib/styles/core.scss",
+      "types": "./lib/styles/core.d.ts",
       "default": "./lib/styles/core.css"
     },
     "./styles/colors": {
       "sass": "./lib/styles/colors.scss",
+      "types": "./lib/styles/colors.d.ts",
       "default": "./lib/styles/colors.css"
     },
     "./styles/utilities": {
       "sass": "./lib/styles/utilities.scss",
+      "types": "./lib/styles/utilities.d.ts",
       "default": "./lib/styles/utilities.css"
     },
     "./styles/*": "./lib/styles/*",
