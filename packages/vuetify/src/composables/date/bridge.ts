@@ -1,5 +1,6 @@
 // Utilities
 import { isUndefined } from '@vuetify/v0/utilities'
+import { consoleWarn } from '@/util'
 
 // Types
 import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
@@ -301,5 +302,10 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
 
 function toNumber (value: number | string | undefined): number | undefined {
   if (isUndefined(value)) return undefined
-  return Number(value)
+  const n = Number(value)
+  if (!Number.isInteger(n) || n < 0 || n > 6) {
+    consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
+    return Math.max(0, Math.min(6, Math.round(n) || 0))
+  }
+  return n
 }
