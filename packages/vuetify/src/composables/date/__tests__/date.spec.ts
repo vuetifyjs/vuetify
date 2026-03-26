@@ -11,10 +11,13 @@ import { VuetifyDateBridge } from '../bridge'
 import { createDate } from '../date'
 
 // Types
+import type { Temporal } from '@js-temporal/polyfill'
 import type { DateOptions } from '../date'
 import type { LocaleInstance } from '@/composables/locale'
 
-function createAdapter (locale: string) {
+type PlainDateTime = Temporal.PlainDateTime
+
+function createAdapter (locale: string): VuetifyDateBridge<PlainDateTime> {
   return new VuetifyDateBridge(new Vuetify0DateAdapter(locale))
 }
 
