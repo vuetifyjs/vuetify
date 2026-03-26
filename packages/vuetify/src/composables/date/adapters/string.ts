@@ -8,8 +8,6 @@ export class StringDateAdapter implements DateAdapter<string> {
 
   get locale () { return this.base.locale }
   set locale (v: string) { this.base.locale = v }
-  get firstDayOfWeek () { return this.base.firstDayOfWeek }
-  set firstDayOfWeek (v: number) { this.base.firstDayOfWeek = v }
 
   constructor (options?: { locale?: string }) {
     this.base = new Vuetify0DateAdapter(options?.locale)
@@ -96,12 +94,12 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.fromBase(this.base.endOfDay(this.toBase(date)))
   }
 
-  startOfWeek (date: string): string {
-    return this.fromBase(this.base.startOfWeek(this.toBase(date)))
+  startOfWeek (date: string, firstDayOfWeek?: number): string {
+    return this.fromBase(this.base.startOfWeek(this.toBase(date), firstDayOfWeek))
   }
 
-  endOfWeek (date: string): string {
-    return this.fromBase(this.base.endOfWeek(this.toBase(date)))
+  endOfWeek (date: string, firstDayOfWeek?: number): string {
+    return this.fromBase(this.base.endOfWeek(this.toBase(date), firstDayOfWeek))
   }
 
   startOfMonth (date: string): string {
@@ -247,8 +245,8 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.base.getDiff(this.toBase(date), this.toBase(comparing), unit)
   }
 
-  getWeek (date: string, minimalDays?: number): number {
-    return this.base.getWeek(this.toBase(date), minimalDays)
+  getWeek (date: string, firstDayOfWeek?: number, minimalDays?: number): number {
+    return this.base.getWeek(this.toBase(date), firstDayOfWeek, minimalDays)
   }
 
   getDaysInMonth (date: string): number {
@@ -287,12 +285,12 @@ export class StringDateAdapter implements DateAdapter<string> {
   // Calendar Utilities
   // ============================================
 
-  getWeekdays (weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return this.base.getWeekdays(weekdayFormat)
+  getWeekdays (firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.base.getWeekdays(firstDayOfWeek, weekdayFormat)
   }
 
-  getWeekArray (date: string): string[][] {
-    return this.base.getWeekArray(this.toBase(date)).map(week =>
+  getWeekArray (date: string, firstDayOfWeek?: number): string[][] {
+    return this.base.getWeekArray(this.toBase(date), firstDayOfWeek).map(week =>
       week.map(day => this.fromBase(day))
     )
   }

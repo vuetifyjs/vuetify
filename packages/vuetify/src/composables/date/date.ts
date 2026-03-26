@@ -11,7 +11,7 @@ import { LegacyDateAdapterCompat } from './compat'
 // Types
 import type { App, InjectionKey } from 'vue'
 import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
-import type { DateAdapter } from './DateAdapter'
+import type { DateAdapter } from './bridge'
 import type { LocaleInstance } from '@/composables/locale'
 
 export interface DateInstance extends DateModule.InternalAdapter {
@@ -86,11 +86,10 @@ const defaultLocaleMap: Record<string, string> = {
 }
 
 /**
- * Detect whether an adapter is a v0 DateAdapter (property-based firstDayOfWeek)
- * vs an old Vuetify-style adapter (param-based firstDayOfWeek).
+ * Detect whether an adapter is a v0 DateAdapter.
  *
  * v0 adapters have `getCurrentLocaleCode`, `isNull`, `parse` as own methods.
- * Legacy adapters pass firstDayOfWeek as a method parameter to startOfWeek/getWeekArray.
+ * Old Vuetify-style adapters lack these methods.
  */
 function isV0Adapter (adapter: any): adapter is V0DateAdapter<any> {
   return (
