@@ -120,7 +120,7 @@ export const VAutocomplete = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -133,7 +133,13 @@ export const VAutocomplete = genericComponent<new <
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
-    const search = useProxiedModel(props, 'search', '')
+    const _search = shallowRef<string>(props.search ?? '')
+    const search = computed<string>({
+      get: () => _search.value,
+      set: (val: string | null) => {
+        _search.value = val ?? ''
+      },
+    })
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -424,6 +430,16 @@ export const VAutocomplete = genericComponent<new <
         search.value = ''
         selectionIndex.value = -1
       }
+    })
+
+    watch(_search, val => {
+      if (!isFocused.value || isSelecting.value) return
+
+      emit('update:search', val)
+    })
+
+    watch(() => props.search, val => {
+      _search.value = val ?? ''
     })
 
     watch(search, val => {
