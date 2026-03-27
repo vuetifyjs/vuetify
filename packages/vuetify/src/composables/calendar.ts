@@ -162,7 +162,7 @@ export function useCalendar (props: CalendarProps) {
     return days.filter(date => {
       return props.weekdays.includes(adapter.toJsDate(date).getDay())
     }).map((date, index) => {
-      const isoDate = adapter.toISO(date).split('T')[0]
+      const isoDate = adapter.toISO(date)
       const isAdjacent = !adapter.isSameMonth(date, month.value)
       const isStart = adapter.isSameDay(date, adapter.startOfMonth(month.value))
       const isEnd = adapter.isSameDay(date, adapter.endOfMonth(month.value))
