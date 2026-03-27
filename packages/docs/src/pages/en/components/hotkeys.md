@@ -50,7 +50,7 @@ The component provides several props to customize how keyboard shortcuts are dis
 
 #### Keys
 
-The **keys** prop accepts a string representing keyboard shortcuts in various formats:
+The **keys** prop accepts a string representing keyboard shortcuts in various formats. See [Hotkeys](/features/hotkey/#key-combination-syntax) for detailed parsing rules.
 
 <ExamplesExample file="v-hotkey/prop-keys" />
 

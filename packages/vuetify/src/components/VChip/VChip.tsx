@@ -129,7 +129,7 @@ export const VChip = genericComponent<VChipSlots>()({
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses } = useSize(props)
     const { themeClasses } = provideTheme(props)
 
@@ -227,6 +227,7 @@ export const VChip = genericComponent<VChipSlots>()({
           ]}
           style={[
             colorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           disabled={ props.disabled || undefined }

@@ -1,0 +1,1 @@
+export { VProgress } from './VProgress'
