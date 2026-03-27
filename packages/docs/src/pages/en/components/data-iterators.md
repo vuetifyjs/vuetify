@@ -74,6 +74,14 @@ The following code snippet is an example of a basic `v-data-iterator` component:
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-data-iterator` component.
 
+### Props
+
+#### Grouping
+
+Use the **group-by** prop to group items, and **v-model:opened** to control which groups are open. The **group-key** prop allows customizing group IDs, and **open-all-groups** opens all groups by default.
+
+<ExamplesExample file="v-data-iterator/prop-grouping" />
+
 ### Slots
 
 The `v-data-iterator` component has 4 main slots
