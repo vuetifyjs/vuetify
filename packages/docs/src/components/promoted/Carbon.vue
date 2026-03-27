@@ -5,7 +5,6 @@
   >
     <template v-if="!error1">
       <PromotedBase
-        ref="script"
         :class="[
           isDark ? 'theme--dark' : 'theme--light',
         ]"
@@ -27,7 +26,6 @@
 
 <script setup lang="ts">
   const error1 = shallowRef(false)
-  const script = shallowRef(null)
   let timer = -1 as any
 
   function checkForElement (id: string, cb?: () => void) {
