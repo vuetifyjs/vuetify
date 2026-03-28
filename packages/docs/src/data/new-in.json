@@ -200,7 +200,11 @@
   },
   "VFileUpload": {
     "props": {
-      "filterByType": "3.10.0"
+      "filterByType": "3.10.0",
+      "loading": "4.1.0"
+    },
+    "slots": {
+      "loader": "4.1.0"
     }
   },
   "VIcon": {

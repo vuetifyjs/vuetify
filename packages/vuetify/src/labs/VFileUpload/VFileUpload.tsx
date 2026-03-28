@@ -13,15 +13,17 @@ import { useFocus } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { provide, ref, toRef, watch } from 'vue'
+import { provide, ref, shallowRef, toRef, watch } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
   browse: {
@@ -42,6 +44,7 @@ export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
   }
   title: never
   divider: never
+  loader: LoaderSlotProps
 }
 
 export const makeVFileUploadProps = propsFactory({
@@ -73,6 +76,7 @@ export const makeVFileUploadProps = propsFactory({
   showSize: Boolean,
 
   ...makeFileFilterProps(),
+  ...makeLoaderProps(),
   ...omit(makeVInputProps(), ['direction']),
 
   modelValue: {
@@ -100,6 +104,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
   setup (props, { attrs, emit, slots }) {
     const { filterAccepted } = useFileFilter(props)
     const { isFocused } = useFocus(props)
+    const { loaderClasses } = useLoader(props)
     const form = useForm(props)
     const model = useProxiedModel(
       props,
@@ -113,6 +118,15 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const vDropzoneRef = ref<VFileUploadDropzone>()
     const inputRef = ref<HTMLInputElement | null>(null)
     const isError = toRef(() => vInputRef.value?.isValid === false)
+    const loadingColor = shallowRef<string | undefined>(undefined)
+
+    watch(() => props.loading, (val, old) => {
+      loadingColor.value = !val && typeof old === 'string'
+        ? old
+        : typeof val === 'boolean'
+          ? undefined
+          : val
+    }, { immediate: true })
 
     provide(VFileUploadKey, {
       files: model,
@@ -214,6 +228,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           }}
           class={[
             'v-file-upload',
+            loaderClasses.value,
             props.class,
           ]}
           style={ props.style }
@@ -254,6 +269,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       single: slots.single,
                       item: slots.item,
                       input: () => slots.input?.({ inputNode }) ?? inputNode,
+                      loader: () => (
+                        <LoaderSlot
+                          name="v-file-upload"
+                          active={ !!props.loading }
+                          color={ loadingColor.value }
+                          v-slots={{ default: slots.loader }}
+                        />
+                      ),
                     }}
                   </VFileUploadDropzone>
                 )}
