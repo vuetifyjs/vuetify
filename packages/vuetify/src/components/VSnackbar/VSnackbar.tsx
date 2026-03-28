@@ -112,6 +112,7 @@ export const makeVSnackbarProps = propsFactory({
     'offset',
     'retainFocus',
     'captureFocus',
+    'closeOnBack',
     'disableInitialFocus',
     'scrim',
     'scrollStrategy',
