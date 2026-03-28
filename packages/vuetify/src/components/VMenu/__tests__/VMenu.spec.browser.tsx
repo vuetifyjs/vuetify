@@ -3,7 +3,7 @@ import { VMenu } from '..'
 import { VList, VListItem } from '@/components/VList'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, waitFor } from '@test'
 
 describe('VMenu', () => {
   it('returns focus to activator on Escape', async () => {
@@ -29,8 +29,8 @@ describe('VMenu', () => {
     // Press Escape to close
     await userEvent.keyboard('{Escape}')
 
-    // Menu should be closed
-    expect(item1).not.toBeVisible()
+    // Menu should be closed (wait for animation/transition to complete)
+    await waitFor(() => expect(item1).not.toBeVisible())
 
     // Focus should have returned to the activator button
     expect(document.activeElement).toBe(activator)
