@@ -1,4 +1,5 @@
 // Utilities
+import { assertType } from 'vitest'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
 import { createDateRange } from '../date'
@@ -7,14 +8,12 @@ import { createDateRange } from '../date'
 import type { IUtils } from '@date-io/core/IUtils'
 import type { DateAdapter } from '../DateAdapter'
 
-function expectAssignable<T, T2 extends T = T> (value: T2): void {}
-
 describe('date', () => {
   it('types', () => {
     // Cannot define properties that don't exist in date-io
-    expectAssignable<DateAdapter>({} as IUtils<Date, string>)
+    assertType<DateAdapter>({} as IUtils<Date, string>)
     // @ts-expect-error Can implement a subset of date-io
-    expectAssignable<IUtils<Date>>({} as DateAdapter)
+    assertType<IUtils<Date, string>>({} as DateAdapter)
   })
 })
 

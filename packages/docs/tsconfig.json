@@ -20,6 +20,7 @@
     "strictNullChecks": true,
     "allowJs": true,
     "allowImportingTsExtensions": true,
+    "noUncheckedSideEffectImports": false,
     "target": "esnext",
     "types": [
       "vite/client",

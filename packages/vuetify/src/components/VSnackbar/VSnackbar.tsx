@@ -105,6 +105,7 @@ export const makeVSnackbarProps = propsFactory({
   ...makeVariantProps(),
   ...makeThemeProps(),
   ...omit(makeVOverlayProps({
+    closeOnBack: false,
     transition: 'v-snackbar-transition',
   }), [
     'persistent',
