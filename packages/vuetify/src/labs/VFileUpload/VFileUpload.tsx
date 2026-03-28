@@ -62,6 +62,7 @@ export const makeVFileUploadProps = propsFactory({
     type: IconValue,
     default: '$upload',
   },
+  allowPaste: Boolean,
   clearable: Boolean,
   insetFileList: Boolean,
   hideBrowse: Boolean,
@@ -181,6 +182,14 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       inputRef.value.value = ''
     }
 
+    function onPaste (e: ClipboardEvent) {
+      if (!props.allowPaste || props.disabled) return
+      const files = Array.from(e.clipboardData?.files ?? [])
+      if (!files.length) return
+      e.preventDefault()
+      selectAccepted(files)
+    }
+
     useRender(() => {
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const { modelValue: __, ...dropzoneProps } = VFileUploadDropzone.filterProps(props as any)
@@ -220,6 +229,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
           focused={ isFocused.value }
           { ...rootAttrs }
           { ...inputProps }
+          onPaste={ props.allowPaste ? onPaste : undefined }
         >
           {{
             ...slots,

@@ -1,5 +1,6 @@
 {
   "props": {
+    "allowPaste": "Enables pasting files directly into the dropzone via Ctrl+V / Cmd+V.",
     "browseText": "Text for the browse button.",
     "dividerText": "Text in the divider.",
     "hideBrowse": "Hides the browse button.",
