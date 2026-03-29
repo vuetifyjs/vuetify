@@ -34,6 +34,7 @@ import {
   checkPrintable,
   deepEqual,
   ensureValidVNode,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   matchesSelector,
@@ -231,9 +232,43 @@ export const VAutocomplete = genericComponent<new <
       }
       menu.value = !menu.value
     }
+    const listItemIndex = shallowRef(-1)
+
     function onMenuKeydown (e: KeyboardEvent) {
       if (e.key === 'Tab') {
         onTabKeydown(e)
+      }
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        const count = displayItems.value.length
+        if (!count) return
+
+        const direction = e.key === 'ArrowDown' ? 1 : -1
+        let nextIndex = listItemIndex.value + direction
+
+        // Wrap around
+        if (nextIndex < 0) nextIndex = count - 1
+        if (nextIndex >= count) nextIndex = 0
+
+        listItemIndex.value = nextIndex
+        vVirtualScrollRef.value?.scrollToIndex(nextIndex)
+
+        // Wait for scroll to settle, then focus the item
+        nextTick(() => {
+          const listEl = listRef.value?.$el as HTMLElement | undefined
+          if (!listEl) return
+
+          const item = displayItems.value[nextIndex]
+          if (!item) return
+
+          // Find the list item by aria-posinset which we set during render
+          const listItem = listEl.querySelector(`[aria-posinset="${nextIndex + 1}"]`) as HTMLElement | null
+          if (listItem) listItem.focus()
+        })
+
+        return
       }
 
       if (listRef.value?.$el.contains(e.target) && (checkPrintable(e) || e.key === 'Backspace')) {
@@ -435,6 +470,7 @@ export const VAutocomplete = genericComponent<new <
     })
 
     watch(menu, val => {
+      listItemIndex.value = -1
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
