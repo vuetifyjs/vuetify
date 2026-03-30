@@ -3,7 +3,8 @@ import { VMenu } from '..'
 import { VList, VListItem } from '@/components/VList'
 
 // Utilities
-import { render, screen, userEvent, waitFor } from '@test'
+import { render, screen, userEvent } from '@test'
+import { waitFor } from '@testing-library/vue'
 
 describe('VMenu', () => {
   it('returns focus to activator on Escape', async () => {
