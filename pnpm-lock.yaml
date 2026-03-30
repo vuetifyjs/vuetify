@@ -285,8 +285,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.25(typescript@6.0.2))
       '@vuetify/one':
-        specifier: ^2.12.0
-        version: 2.12.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.26)(lodash-es@4.17.22)(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
+        specifier: ^3.1.1
+        version: 3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3533,6 +3533,12 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  '@vuetify/auth@0.1.8':
+    resolution: {integrity: sha512-rf+wxtz2UfMKcJteXlXAMrwhieIFOy2qUw5MfzA5n6nuENYzprXdd1niWhVviqIJXE5ECm59W4nEZYTvB5rHEg==}
+    peerDependencies:
+      pinia: ^3.0.0
+      vue: ^3.5.0
+
   '@vuetify/babel-helper-vue-transform-on@1.6.0':
     resolution: {integrity: sha512-/2ocOtcTFoMt3cmHBNH0OE2AhE1Y2OHctQDsyyoHq2zjqUgwLUx/miA2zJyGtGNS5QcATCXfhJJ9dF2k5EGbpA==}
 
@@ -3576,13 +3582,15 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@2.12.0':
-    resolution: {integrity: sha512-u35d6PXXu7efBOhmRlXPeooEVNF6n9uzOwX4UaDwyG2uUdcFI5m6Cpgkl0is4P9IiMhBJDHtRPceCErF//e6gw==}
+  '@vuetify/one@3.1.1':
+    resolution: {integrity: sha512-WDGSAprdT0KBl3U47fAjcRCHhmzTIA+Fu/m/W/ZT0m8t35qaFx1x2IRYwhQo0lhoUEZrSa8YVkJP5kRiLACuuA==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
+      pinia: ^3.0.0
       vue: ^3.5.13
-      vuetify: ^3.8.0
+      vue-router: ^4.0.0
+      vuetify: ^4.0.0
 
   '@vuetify/testing-library-dom@1.0.3':
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
@@ -3960,6 +3968,9 @@ packages:
 
   caniuse-lite@1.0.30001757:
     resolution: {integrity: sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ==}
+
+  canvas-renderer@2.2.1:
+    resolution: {integrity: sha512-RrBgVL5qCEDIXpJ6NrzyRNoTnXxYarqm/cS/W6ERhUJts5UQtt/XPEosGN3rqUkZ4fjBArlnCbsISJ+KCFnIAg==}
 
   chai@6.2.1:
     resolution: {integrity: sha512-p4Z49OGG5W/WBCPSS/dH3jQ73kD6tiMmUM+bckNK6Jr5JHMG3k9bg/BvKR8lKmtVBKmOiuVaV2ws8s9oSbwysg==}
@@ -5600,6 +5611,11 @@ packages:
   jake@10.9.4:
     resolution: {integrity: sha512-wpHYzhxiVQL+IV05BLE2Xn34zW1S223hvjtqk0+gsPrwd/8JNLXJgZZM/iPFsYc1xyphF+6M6EvdE5E9MBGkDA==}
     engines: {node: '>=10'}
+    hasBin: true
+
+  jdenticon@3.3.0:
+    resolution: {integrity: sha512-DhuBRNRIybGPeAjMjdHbkIfiwZCCmf8ggu7C49jhp6aJ7DYsZfudnvnTY5/1vgUhrGA7JaDAx1WevnpjCPvaGg==}
+    engines: {node: '>=6.4.0'}
     hasBin: true
 
   jest-changed-files@30.2.0:
@@ -7984,13 +8000,6 @@ packages:
     peerDependenciesMeta:
       '@vite-pwa/assets-generator':
         optional: true
-
-  vite-plugin-vue-layouts-next@1.3.0:
-    resolution: {integrity: sha512-WDJNqYTSAjULDCbIZXqp575u2XmsuT1MFY9k1Hpv529TGkLZMnKY3wfTKJEJbY/qCkLEhBDIZTWC1/Y+5wGH5Q==}
-    peerDependencies:
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-      vue: ^3.2.4
-      vue-router: ^4.0.11
 
   vite-plugin-vue-layouts@0.11.0:
     resolution: {integrity: sha512-uh6NW7lt+aOXujK4eHfiNbeo55K9OTuB7fnv+5RVc4OBn/cZull6ThXdYH03JzKanUfgt6QZ37NbbtJ0og59qw==}
@@ -11727,6 +11736,11 @@ snapshots:
       vue: 3.5.25(typescript@6.0.2)
       vue-demi: 0.13.11(vue@3.5.25(typescript@6.0.2))
 
+  '@vuetify/auth@0.1.8(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))':
+    dependencies:
+      pinia: 3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2))
+      vue: 3.5.25(typescript@6.0.2)
+
   '@vuetify/babel-helper-vue-transform-on@1.6.0': {}
 
   '@vuetify/babel-helper-vue-transform-on@1.7.0': {}
@@ -11809,21 +11823,16 @@ snapshots:
       vue: 3.5.25(typescript@6.0.2)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@2.12.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(@vue/compiler-sfc@3.5.26)(lodash-es@4.17.22)(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
+  '@vuetify/one@3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
+      '@vuetify/auth': 0.1.8(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
+      jdenticon: 3.3.0
       lodash-es: 4.17.22
-      vite-plugin-pages: 0.33.1(@vue/compiler-sfc@3.5.26)(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))
-      vite-plugin-vue-layouts-next: 1.3.0(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
+      pinia: 3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2))
       vue: 3.5.25(typescript@6.0.2)
+      vue-router: 4.6.3(vue@3.5.25(typescript@6.0.2))
       vuetify: link:packages/vuetify
-    transitivePeerDependencies:
-      - '@solidjs/router'
-      - '@vue/compiler-sfc'
-      - react-router
-      - supports-color
-      - vite
-      - vue-router
 
   '@vuetify/testing-library-dom@1.0.3':
     dependencies:
@@ -12315,6 +12324,10 @@ snapshots:
       lodash.uniq: 4.5.0
 
   caniuse-lite@1.0.30001757: {}
+
+  canvas-renderer@2.2.1:
+    dependencies:
+      '@types/node': 24.10.1
 
   chai@6.2.1: {}
 
@@ -14150,6 +14163,10 @@ snapshots:
       async: 3.2.6
       filelist: 1.0.4
       picocolors: 1.1.1
+
+  jdenticon@3.3.0:
+    dependencies:
+      canvas-renderer: 2.2.1
 
   jest-changed-files@30.2.0:
     dependencies:
@@ -16849,16 +16866,6 @@ snapshots:
       workbox-window: 7.3.0
     transitivePeerDependencies:
       - '@types/babel__core'
-      - supports-color
-
-  vite-plugin-vue-layouts-next@1.3.0(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2)):
-    dependencies:
-      debug: 4.4.3
-      fast-glob: 3.3.3
-      vite: 7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
-      vue: 3.5.25(typescript@6.0.2)
-      vue-router: 4.6.3(vue@3.5.25(typescript@6.0.2))
-    transitivePeerDependencies:
       - supports-color
 
   vite-plugin-vue-layouts@0.11.0(vite@7.3.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2)):
