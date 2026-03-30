@@ -60,9 +60,13 @@
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/main.css"
     },
-    "./styles/*": "./lib/styles/*",
+    "./styles/*": {
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/*"
+    },
     "./framework": "./lib/framework.js",
     "./blueprints": "./lib/blueprints/index.js",
     "./blueprints/*": "./lib/blueprints/*.js",
