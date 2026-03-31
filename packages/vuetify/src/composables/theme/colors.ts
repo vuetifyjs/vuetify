@@ -3,7 +3,6 @@ import {
   createRange,
   darken,
   getLuma,
-  hasLightForeground,
   lighten,
   mergeDeep,
   parseColor,
@@ -235,19 +234,3 @@ export function genVariations (colors: InternalThemeDefinition['colors'], variat
   return variationColors
 }
 
-export function genOnColors (colors: InternalThemeDefinition['colors'], variables: InternalThemeDefinition['variables']) {
-  const onColors = {} as InternalThemeDefinition['colors']
-
-  for (const color of Object.keys(colors)) {
-    if (color.startsWith('on-') || colors[`on-${color}`]) continue
-
-    const onColor = `on-${color}` as keyof OnColors
-    const colorVal = parseColor(colors[color])
-
-    onColors[onColor] = hasLightForeground(colorVal)
-      ? variables['theme-on-dark']
-      : variables['theme-on-light']
-  }
-
-  return onColors
-}

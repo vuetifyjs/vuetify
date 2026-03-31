@@ -15,7 +15,6 @@ import {
 } from 'vue'
 import {
   genCssVariables,
-  genOnColors,
   genVariations,
   parseThemeOptions,
 } from './colors'
@@ -32,7 +31,7 @@ import {
 import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { InternalThemeDefinition, ThemeOptions } from './colors'
+import type { Colors, InternalThemeDefinition, ThemeOptions } from './colors'
 
 export type { Colors, ThemeDefinition, ThemeOptions } from './colors'
 
@@ -125,14 +124,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         ...merged.colors,
         ...genVariations(merged.colors, parsedOptions.variations),
       }
-      const fullColors = {
-        ...colors,
-        ...genOnColors(colors, merged.variables),
-      }
 
       processed[themeName] = {
         dark: merged.dark,
-        colors: fullColors as Record<string, string>,
+        colors: colors as Record<string, string>,
       }
     }
     return processed
@@ -148,7 +143,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   // Create v0 theme instance
   const v0Theme = createV0Theme({
     reactive: true,
-    foreground: false, // We handle on-colors ourselves via genOnColors
+    foreground: true,
     default: resolvedDefault,
     themes: buildV0Themes(),
   })
@@ -180,6 +175,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
+    const v0Colors = v0Theme.colors.value
+
     for (const [themeName, original] of Object.entries(themes.value)) {
       const defaultTheme = original.dark || themeName === 'dark'
         ? themes.value.dark
@@ -187,17 +184,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
       const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
 
-      const colors = {
-        ...merged.colors,
-        ...genVariations(merged.colors, parsedOptions.variations),
-      }
-
       acc[themeName] = {
-        ...merged,
-        colors: {
-          ...colors,
-          ...genOnColors(colors, merged.variables),
-        },
+        dark: merged.dark,
+        variables: merged.variables,
+        colors: (v0Colors[themeName] ?? merged.colors) as Colors,
       }
     }
     return acc
