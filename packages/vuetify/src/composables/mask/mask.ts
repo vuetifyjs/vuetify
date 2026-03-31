@@ -157,10 +157,6 @@ export function useMask (props: MaskProps) {
       } else if (maskValidates(mchar, tchar, tokens)) {
         newText += convert(mchar, tchar, tokens)
         textIndex++
-      } else if (textIndex < trimmedText.length) {
-        // No match, try the next input character
-        textIndex++
-        continue
       } else {
         break
       }
@@ -175,15 +171,53 @@ export function useMask (props: MaskProps) {
     }
   }
 
+  // Like applyMaskWithInfo but skips unmatched input chars instead of breaking.
+  // Used for text output after best mask is selected (handles escaped chars in input).
   function applyMask (text: string, pattern: string, tokens: Record<string, MaskItem>): string {
-    return applyMaskWithInfo(text, pattern, tokens).output
+    if (!pattern.length) return text
+    if (!text.length) return ''
+
+    let textIndex = 0
+    let maskIndex = 0
+    let newText = ''
+
+    while (maskIndex < pattern.length) {
+      const mchar = pattern[maskIndex]
+      const tchar = text[textIndex]
+
+      if (mchar === '\\') {
+        newText += pattern[maskIndex + 1]
+        maskIndex += 2
+        continue
+      }
+
+      if (!isMask(mchar, tokens)) {
+        newText += mchar
+        if (tchar === mchar) {
+          textIndex++
+        }
+      } else if (maskValidates(mchar, tchar, tokens)) {
+        newText += convert(mchar, tchar, tokens)
+        textIndex++
+      } else if (textIndex < text.length) {
+        // No match, try the next input character (handles escaped chars in input)
+        textIndex++
+        continue
+      } else {
+        break
+      }
+
+      maskIndex++
+    }
+
+    return newText
   }
 
   function applyUnmask (text: string, pattern: string, tokens: Record<string, MaskItem>): string {
     if (!pattern.length || !text.length) return text
 
     let result = ''
-    const unmaskMap = getUnmaskMap(text)
+    const unmaskMap = getUnmaskMap(text, pattern, tokens)
     for (let i = 0; i < text.length; i++) {
       if (!unmaskMap[i]) result += text[i]
     }
@@ -191,12 +225,14 @@ export function useMask (props: MaskProps) {
   }
 
   function isDelimiter (text: string, index: number): boolean {
-    if (!mask.value.length || !text.length) return false
-    return !!getUnmaskMap(text)[index]
+    if (!masks.value.length || !text.length) return false
+    const best = selectBestMask(text)
+    if (!best) return false
+    return !!getUnmaskMap(text, best.pattern, best.tokens)[index]
   }
 
-  function getUnmaskMap (text: string | null): boolean[] {
-    if (text == null || !mask.value.length || !text.length) return []
+  function getUnmaskMap (text: string, pattern: string, tokens: Record<string, MaskItem>): boolean[] {
+    if (!pattern.length || !text.length) return []
 
     let textIndex = 0
     let maskIndex = 0
@@ -230,10 +266,14 @@ export function useMask (props: MaskProps) {
         maskIndex++
         continue
       } else if (mchar !== tchar) {
-        // input doesn't match mask, skip forward until it does
+        // current mask position doesn't match — scan ahead for one that does
         while (true) {
           const mchar = pattern[maskIndex++]
           if (mchar == null || maskValidates(mchar, tchar, tokens)) break
+          if (!isMask(mchar, tokens) && mchar === tchar) {
+            textIndex++ // literal delimiter in mask matches text char — consume as delimiter
+            break
+          }
         }
         continue
       }
@@ -260,7 +300,7 @@ export function useMask (props: MaskProps) {
   }
 
   // based on: consumed > complete > first
-  function isBestMask (candidate: MaskResult, current: MaskResult): boolean {
+  function isBetterMask (candidate: MaskResult, current: MaskResult): boolean {
     return candidate.consumed > current.consumed ||
       (candidate.consumed === current.consumed && candidate.complete && !current.complete)
   }
@@ -272,7 +312,7 @@ export function useMask (props: MaskProps) {
 
     for (const { pattern, tokens } of masks.value) {
       const result = applyMaskWithInfo(text, pattern, tokens)
-      if (!best || isBestMask(result, best.result)) {
+      if (!best || isBetterMask(result, best.result)) {
         best = { result, pattern, tokens }
       }
     }
@@ -281,17 +321,17 @@ export function useMask (props: MaskProps) {
   }
 
   function maskText (text: string | null | undefined): string {
-    const trimmedText = text?.trim().replace(/\s+/g, ' ')
-    if (trimmedText == null) return ''
+    if (!text) return ''
+    const trimmedText = text.trim().replace(/\s+/g, ' ')
 
     const best = selectBestMask(trimmedText)
-    return best?.result.output ?? trimmedText
+    if (!best) return trimmedText
+    return applyMask(trimmedText, best.pattern, best.tokens)
   }
 
   function getBestMask (text: string | null | undefined): string | null {
-    const trimmedText = text?.trim().replace(/\s+/g, ' ')
-    if (trimmedText == null) return null
-
+    if (text == null) return null
+    const trimmedText = text.trim().replace(/\s+/g, ' ')
     return selectBestMask(trimmedText)?.pattern ?? null
   }
 
@@ -304,7 +344,7 @@ export function useMask (props: MaskProps) {
     for (const { pattern, tokens } of masks.value) {
       const unmasked = applyUnmask(text, pattern, tokens)
       const result = applyMaskWithInfo(unmasked, pattern, tokens)
-      if (!best || isBestMask(result, best.result)) {
+      if (!best || isBetterMask(result, best.result)) {
         best = { result, pattern, tokens }
       }
     }

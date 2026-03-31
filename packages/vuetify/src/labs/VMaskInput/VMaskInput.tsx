@@ -50,10 +50,11 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
         if (props.mask) {
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const newMaskedValue = mask.mask(mask.unmask(val))
+          const unmaskedVal = mask.unmask(val)
+          const newMaskedValue = mask.mask(unmaskedVal)
           const newUnmaskedValue = mask.unmask(newMaskedValue)
 
-          const currentMaskPattern = mask.getMask(valueWithoutDelimiters)
+          const currentMaskPattern = mask.getMask(mask.unmask(val))
           const hasMaskChanged = Array.isArray(props.mask) && previousMaskPattern.value !== currentMaskPattern
           previousMaskPattern.value = currentMaskPattern
 
@@ -194,12 +195,11 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     async function simulateBackspace (inputElement: HTMLInputElement) {
       inputAction.value = 'Backspace'
-      const oldModelValue = model.value
       model.value = inputElement.value.slice(0, caretPosition.value - 1) + inputElement.value.slice(caretPosition.value)
       inputAction.value = ''
-      await nextTick()
-      if (caretPosition.value === inputElement.selectionEnd && oldModelValue === model.value) return false
+      if (caretPosition.value === inputElement.selectionEnd) return false
       caretPosition.value = inputElement.selectionEnd || 0
+      await nextTick()
       return true
     }
 

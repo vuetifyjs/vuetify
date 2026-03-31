@@ -351,23 +351,23 @@ describe('VMaskInput', () => {
       })
     })
 
-    describe('Multi-Mask Caret Position when mask changes', () => {
+    describe('Multi-Mask caret position when mask changes', () => {
       // Insertion in middle causes mask switch from #### to ##-##-##
       it('should maintain correct caret position when insertion causes mask switch', async () => {
         const model = ref('1234')
         render(() => (
           <VMaskInput
             v-model={ model.value }
-            mask={['####', '##-##-##']}
+            mask={['##/##', '##-##-##']}
             returnMaskedValue
           />
         ))
 
         const input = screen.getByCSS('input') as HTMLInputElement
-        expect(input.value).toBe('1234')
+        expect(input.value).toBe('12/34')
 
         await userEvent.click(input)
-        input.setSelectionRange(2, 2)
+        input.setSelectionRange(3, 3)
 
         await userEvent.type(input, '5')
 
@@ -381,7 +381,7 @@ describe('VMaskInput', () => {
         render(() => (
           <VMaskInput
             v-model={ model.value }
-            mask={['####', '##-##-##']}
+            mask={['##/##', '##-##-##']}
             returnMaskedValue
           />
         ))
@@ -394,7 +394,7 @@ describe('VMaskInput', () => {
 
         await userEvent.keyboard('{Delete}')
 
-        expect(input.value).toBe('1245')
+        expect(input.value).toBe('12/45')
         expect(input.selectionStart).toBe(2)
       })
 
@@ -404,7 +404,7 @@ describe('VMaskInput', () => {
         render(() => (
           <VMaskInput
             v-model={ model.value }
-            mask={['####', '##-##-##']}
+            mask={['##/##', '##-##-##']}
             returnMaskedValue
           />
         ))
@@ -417,7 +417,32 @@ describe('VMaskInput', () => {
 
         await userEvent.keyboard('{Backspace}')
 
-        expect(input.value).toBe('1245')
+        expect(input.value).toBe('12/45')
+        expect(input.selectionStart).toBe(2)
+      })
+
+      // Backspace on a selection spanning a delimiter causes mask switch: ##-##-## → ####
+      it('should delete selected digits and switch mask correctly on backspace', async () => {
+        const model = ref('11-22-33')
+        render(() => (
+          <VMaskInput
+            v-model={ model.value }
+            mask={['####', '##-##-##']}
+            returnMaskedValue
+          />
+        ))
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input.value).toBe('11-22-33')
+
+        await userEvent.click(input)
+        // Select '22' (positions 3–5)
+        input.setSelectionRange(3, 5)
+
+        await userEvent.keyboard('{Backspace}')
+
+        // Remaining digits: 1133 → #### wins → '1133', caret at 2 (after the two '1's)
+        expect(input.value).toBe('1133')
         expect(input.selectionStart).toBe(2)
       })
     })

@@ -116,7 +116,7 @@ describe('mask', () => {
         // Input starts with numbers, second mask consumes more (5 vs 0)
         [{ mask: ['(AA)-###', '(##)-AAA'], modelValue: '12ABC' }, '(12)-ABC'],
         // Both consume 4, but #### is complete so it wins
-        [{ mask: ['####', '##-##-##'], modelValue: '1234' }, '1234'],
+        [{ mask: ['##/##', '##-##-##'], modelValue: '1234' }, '12/34'],
         // First mask consumes more (5 vs 4)
         [{ mask: ['#####', '##-##'], modelValue: '12345' }, '12345'],
         // Single-item array behaves like single mask
