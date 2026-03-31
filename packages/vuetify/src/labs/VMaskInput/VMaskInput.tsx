@@ -75,22 +75,22 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
-    function countNonDelimiters (str: string, upTo: number): number {
+    function countNonDelimiters (value: string, upTo: number): number {
       let count = 0
-      for (let i = 0; i < Math.min(upTo, str.length); i++) {
-        if (!mask.isDelimiter(str, i)) count++
+      for (let i = 0; i < Math.min(upTo, value.length); i++) {
+        if (!mask.isDelimiter(value, i)) count++
       }
       return count
     }
 
-    function findPositionByNonDelimiterCount (str: string, targetCount: number): number {
+    function findPositionByNonDelimiterCount (value: string, targetCount: number): number {
       let count = 0
-      let pos = 0
-      while (pos < str.length && count < targetCount) {
-        if (!mask.isDelimiter(str, pos)) count++
-        pos++
+      let index = 0
+      while (index < value.length && count < targetCount) {
+        if (!mask.isDelimiter(value, index)) count++
+        index++
       }
-      return pos
+      return index
     }
 
     function getNewCaretPosition ({
