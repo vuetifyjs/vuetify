@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.11.6",
+  "version": "4.0.4",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -61,6 +61,18 @@
     "./styles": {
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
+    },
+    "./styles/core": {
+      "sass": "./lib/styles/core.scss",
+      "default": "./lib/styles/core.css"
+    },
+    "./styles/colors": {
+      "sass": "./lib/styles/colors.scss",
+      "default": "./lib/styles/colors.css"
+    },
+    "./styles/utilities": {
+      "sass": "./lib/styles/utilities.scss",
+      "default": "./lib/styles/utilities.css"
     },
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.js",
@@ -148,9 +160,10 @@
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
+    "@vitest/eslint-plugin": "^1.6.13",
     "@vitest/ui": "^4.0.13",
-    "@vizzly-testing/cli": "^0.21.1",
-    "@vizzly-testing/vitest": "^0.0.3",
+    "@vizzly-testing/cli": "^0.22.2",
+    "@vizzly-testing/vitest": "^0.1.1",
     "@vue/reactivity": "^3.5.25",
     "@vue/shared": "^3.5.25",
     "@vue/test-utils": "^2.4.6",
@@ -167,7 +180,6 @@
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.19",
     "dotenv": "^16.5.0",
-    "eslint-plugin-vitest": "0.5.4",
     "expect": "^30.2.0",
     "fast-glob": "^3.3.3",
     "identity-obj-proxy": "^3.0.0",

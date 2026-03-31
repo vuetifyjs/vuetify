@@ -1,8 +1,16 @@
 import 'vue/jsx'
 
 // Types
-import type { ComponentInjectOptions, ComponentOptionsMixin, EmitsOptions, SlotsType } from 'vue'
-import type { ComputedOptions, Events, MethodOptions, VNode } from 'vue'
+import type {
+  ComponentInjectOptions,
+  ComponentOptionsMixin,
+  ComputedOptions,
+  EmitsOptions,
+  Events,
+  MethodOptions,
+  SlotsType,
+  VNode,
+} from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {

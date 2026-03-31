@@ -18,22 +18,24 @@ features:
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.7.6](/getting-started/release-notes/?version=v3.7.6)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { VFileUpload } from 'vuetify/labs/VFileUpload'
+import {
+  VFileUpload,
+  VFileUploadDropzone,
+  VFileUploadItem,
+  VFileUploadList,
+} from 'vuetify/labs/VFileUpload'
 
 export default createVuetify({
   components: {
     VFileUpload,
+    VFileUploadDropzone,
+    VFileUploadItem,
+    VFileUploadList,
   },
 })
 ```
@@ -51,7 +53,9 @@ The `v-file-upload` component is a drag and drop area for uploading files. It ca
 | Component | Description |
 | - | - |
 | [v-file-upload](/api/v-file-upload/) | Primary Component |
+| [v-file-upload-dropzone](/api/v-file-upload-dropzone/) | Dropzone Component |
 | [v-file-upload-item](/api/v-file-upload-item/) | Item Component |
+| [v-file-upload-list](/api/v-file-upload-list/) | List Component |
 | [v-file-input](/api/v-file-input/) | File input component |
 
 <ApiInline hide-links />
@@ -64,23 +68,23 @@ The v-file-upload component is a more visual counterpart to the [v-file-input](/
 
 Utilize various properties to customize the look and feel of the `v-file-upload` component.
 
-#### Density
-
-The **density** prop is used to control the vertical space the upload takes up.
-
-<ExamplesExample file="v-file-upload/prop-density" />
-
 #### Content
 
 Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** props to customize the text displayed in the component.
 
 <ExamplesExample file="v-file-upload/prop-content" />
 
-#### Disabled
+#### Loading
 
-The **disabled** property reduces the opacity of the component and prevents interaction.
+The **loading** prop displays a progress indicator on the component. Unlike other components, the loading state does not disable interactions; files can still be browsed and dropped.
 
-<ExamplesExample file="v-file-upload/prop-disabled" />
+<ExamplesExample file="v-file-upload/prop-loading" />
+
+#### Inset file list
+
+The **inset-file-list** prop renders the file list inside the dropzone instead of below it.
+
+<ExamplesExample file="v-file-upload/prop-inset-file-list" />
 
 #### Scrim
 
@@ -97,3 +101,11 @@ The `v-file-upload` component has several slots that can be used to customize th
 The **item** slot is used to customize the appearance of the file item.
 
 <ExamplesExample file="v-file-upload/slot-item" />
+
+### Misc
+
+#### List
+
+Use `v-file-upload-list` with the **default** slot to compose `v-file-upload-item` components directly. The slot provides `files` and `onClickRemove` for wiring up removal.
+
+<ExamplesExample file="v-file-upload/misc-list" />

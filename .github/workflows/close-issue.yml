@@ -4,6 +4,7 @@ on:
     branches:
     - dev
     - next
+    - v3-stable
     - v2-stable
     - v2-dev
 

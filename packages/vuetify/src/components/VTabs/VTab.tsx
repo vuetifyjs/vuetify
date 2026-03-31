@@ -115,14 +115,14 @@ export const VTab = genericComponent<VBtnSlots>()({
 
         if (!prevEl || !nextEl) return
 
-        const color = getComputedStyle(prevEl).color
+        const color = getComputedStyle(prevEl).backgroundColor
 
         const keyframes = { fade, grow, shift }[props.sliderTransition ?? 'shift'] ?? shift
         const duration = Number(props.sliderTransitionDuration) ||
           ({ fade: 400, grow: 350, shift: 225 }[props.sliderTransition ?? 'shift'] ?? 225)
 
         animate(nextEl, {
-          backgroundColor: [color, 'currentcolor'],
+          backgroundColor: [color, color],
           ...keyframes(nextEl, prevEl),
         }, {
           duration,
@@ -146,6 +146,7 @@ export const VTab = genericComponent<VBtnSlots>()({
           style={[
             props.style,
             isSelected.value && props.inset ? insetColorStyles.value : [],
+            { backgroundColor: isSelected.value && props.inset ? 'transparent !important' : undefined },
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
@@ -168,9 +169,12 @@ export const VTab = genericComponent<VBtnSlots>()({
                     ref={ sliderEl }
                     class={[
                       'v-tab__slider',
-                      sliderColorClasses.value,
+                      props.inset ? insetColorClasses.value : sliderColorClasses.value,
                     ]}
-                    style={ sliderColorStyles.value }
+                    style={[
+                      sliderColorStyles.value,
+                      props.inset ? insetColorStyles.value : sliderColorClasses.value,
+                    ]}
                   />
                 )}
               </>

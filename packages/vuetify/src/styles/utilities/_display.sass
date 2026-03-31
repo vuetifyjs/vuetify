@@ -4,7 +4,7 @@
 @use '../tools'
 
 @if (settings.$utilities != false and map.get(settings.$misc, 'hidden') != false and list.length(settings.$utilities) > 0)
-  @include tools.layer('utilities')
+  @include tools.layer('utilities.helpers')
     @each $size, $media_query in settings.$display-breakpoints
       .hidden
         &-#{$size}

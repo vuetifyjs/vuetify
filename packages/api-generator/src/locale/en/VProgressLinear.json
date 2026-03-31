@@ -3,7 +3,6 @@
     "absolute": "Applies position: absolute to the component.",
     "active": "Reduce the height to 0, hiding component.",
     "bgOpacity": "Background opacity, if null it defaults to 0.3 if background color is not specified or 1 otherwise.",
-    "bottom": "Aligns the component towards the bottom.",
     "bufferColor": "Sets the color of the buffer bar.",
     "bufferOpacity": "Set the opacity of the buffer bar.",
     "bufferValue": "The percentage value for the buffer.",
@@ -18,7 +17,7 @@
     "roundedBar": "Applies a border radius to the progress bar.",
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**.",
     "striped": "Adds a stripe background to the filled portion of the progress component.",
-    "top": "Aligns the content towards the top."
+    "variant": "Applies a distinct style to the component. **split** visually divides the progress bar at the current value, separating the filled and unfilled portions with a gap."
   },
   "slots": {
     "default": "Provides the current value of the component."

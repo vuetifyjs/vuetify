@@ -22,7 +22,7 @@ minimumReleaseAgeExclude:
   - '@vuetify/testing-library-dom'
   - playwright
   - playwright-core
-  - '@vizzly-testing/cli@0.21.1'
+  - '@vizzly-testing/vitest@0.1.1'
 
 nodeLinker: hoisted
 
@@ -38,6 +38,7 @@ overrides:
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
+  '@typescript-eslint/typescript-estree@8.57.2': patches/@typescript-eslint__typescript-estree@8.57.2.patch
   '@vitest/browser': patches/@vitest__browser.patch
   playwright-core: patches/playwright-core.patch
 

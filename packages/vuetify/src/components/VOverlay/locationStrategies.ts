@@ -48,6 +48,7 @@ const locationStrategies = {
 
 export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
+  contained?: boolean
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
@@ -128,8 +129,55 @@ export function useLocationStrategies (
   }
 }
 
-function staticLocationStrategy () {
-  // TODO
+function staticLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  if (props.contained) return
+
+  const target = ref<[x: number, y: number]>()
+  const connectedStyles = ref<Record<string, string>>({})
+  const connected = connectedLocationStrategy(
+    { ...data, target },
+    { ...props, origin: 'auto' },
+    connectedStyles
+  )
+
+  function updateStyles () {
+    if (props.origin !== 'auto' && props.origin !== 'overlap') {
+      const { side, align } = parseAnchor(props.origin, data.isRtl.value)
+      contentStyles.value = { ...connectedStyles.value, transformOrigin: `${side} ${align}` }
+    } else {
+      contentStyles.value = connectedStyles.value
+    }
+  }
+
+  watch(connectedStyles, updateStyles, { deep: true })
+  watch([() => props.origin, data.isRtl], updateStyles)
+
+  function updateTarget () {
+    const viewportBox = new Box({
+      x: visualViewport?.offsetLeft ?? 0,
+      y: visualViewport?.offsetTop ?? 0,
+      width: visualViewport?.width ?? window.innerWidth,
+      height: visualViewport?.height ?? window.innerHeight,
+    })
+
+    const point = anchorToPoint(parseAnchor(props.location, data.isRtl.value), viewportBox)
+    target.value = [point.x, point.y]
+  }
+
+  function updateLocation () {
+    updateTarget()
+    connected.updateLocation()
+  }
+
+  watch(() => [props.location, data.isRtl.value], () => {
+    updateLocation()
+  })
+
+  nextTick(() => {
+    updateLocation()
+  })
+
+  return { updateLocation }
 }
 
 /** Get size of element ignoring max-width/max-height */
@@ -448,10 +496,13 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     const axis = getAxis(placement.anchor)
+    const transformOrigin = props.origin !== 'auto' && props.origin !== 'overlap'
+      ? parseAnchor(props.origin, data.isRtl.value)
+      : placement.origin
 
     Object.assign(contentStyles.value, {
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
-      transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
+      transformOrigin: `${transformOrigin.side} ${transformOrigin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y)),
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
@@ -472,6 +523,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     () => [
       preferredAnchor.value,
       preferredOrigin.value,
+      props.origin,
       props.offset,
       props.minWidth,
       props.minHeight,

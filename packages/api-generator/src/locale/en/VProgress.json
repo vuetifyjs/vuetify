@@ -1,0 +1,16 @@
+{
+  "props": {
+    "absolute": "Positions the component absolutely within its parent, centering the progress indicator and placing details without affecting layout.",
+    "type": "Determines which progress indicator to render.",
+    "label": "Text displayed alongside the progress indicator and placed in `aria-label`.",
+    "detailsPosition": "Controls the position of the details (label and value) relative to the progress indicator.",
+    "max": "Sets the maximum value for the progress indicator.",
+    "hideLabel": "Hides the label text.",
+    "hideValue": "Hides the value text.",
+    "valueFormat": "Formatter for the visible value text and `aria-valuetext`. Use `[value]` and `[max]` as placeholders in strings, or pass a function that receives `{ value, max }` and returns a string."
+  },
+  "slots": {
+    "label": "Slot for custom label content.",
+    "value": "Slot for custom value content."
+  }
+}

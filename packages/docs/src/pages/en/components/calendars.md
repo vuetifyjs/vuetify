@@ -20,8 +20,6 @@ The `v-calendar` component is used to display information in a daily, weekly, mo
 
 <PageFeatures />
 
-<DocIntroduced version="3.11.0" />
-
 ## Usage
 
 A calendar has a type and a value which determines what type of calendar is shown over what span of time. This shows the bare minimum configuration, an array of events with **name**, **start** and **end** properties. **end** is optional, it defaults to the **start**. If the **start** has a time it's considered a timed event and will be shown accordingly in the day views. An event can span multiple days and will be rendered accordingly.

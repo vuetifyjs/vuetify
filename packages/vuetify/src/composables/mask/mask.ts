@@ -56,10 +56,6 @@ const presets: Record<string, string> = {
   'time-with-seconds': '##:##:##',
 }
 
-export function isMaskDelimiter (char: string): boolean {
-  return char ? defaultDelimiters.test(char) : false
-}
-
 const defaultTokens: Record<string, MaskItem> = {
   '#': {
     pattern: /[0-9]/,
@@ -161,6 +157,10 @@ export function useMask (props: MaskProps) {
       } else if (maskValidates(mchar, tchar, tokens)) {
         newText += convert(mchar, tchar, tokens)
         textIndex++
+      } else if (textIndex < trimmedText.length) {
+        // No match, try the next input character
+        textIndex++
+        continue
       } else {
         break
       }
@@ -182,9 +182,25 @@ export function useMask (props: MaskProps) {
   function applyUnmask (text: string, pattern: string, tokens: Record<string, MaskItem>): string {
     if (!pattern.length || !text.length) return text
 
+    let result = ''
+    const unmaskMap = getUnmaskMap(text)
+    for (let i = 0; i < text.length; i++) {
+      if (!unmaskMap[i]) result += text[i]
+    }
+    return result
+  }
+
+  function isDelimiter (text: string, index: number): boolean {
+    if (!mask.value.length || !text.length) return false
+    return !!getUnmaskMap(text)[index]
+  }
+
+  function getUnmaskMap (text: string | null): boolean[] {
+    if (text == null || !mask.value.length || !text.length) return []
+
     let textIndex = 0
     let maskIndex = 0
-    let newText = ''
+    const result = Array.from({ length: text.length }, () => true)
 
     while (true) {
       const mchar = pattern[maskIndex]
@@ -193,7 +209,7 @@ export function useMask (props: MaskProps) {
       if (tchar == null) break
 
       if (mchar == null) {
-        newText += tchar
+        result[textIndex] = false
         textIndex++
         continue
       }
@@ -209,7 +225,7 @@ export function useMask (props: MaskProps) {
 
       if (maskValidates(mchar, tchar, tokens)) {
         // masked char
-        newText += tchar
+        result[textIndex] = false
         textIndex++
         maskIndex++
         continue
@@ -225,7 +241,8 @@ export function useMask (props: MaskProps) {
       textIndex++
       maskIndex++
     }
-    return newText
+
+    return result
   }
 
   function isValidForMask (text: string, pattern: string, tokens: Record<string, MaskItem>): boolean {
@@ -316,6 +333,7 @@ export function useMask (props: MaskProps) {
   }
 
   return {
+    isDelimiter,
     isValid,
     isComplete,
     mask: maskText,

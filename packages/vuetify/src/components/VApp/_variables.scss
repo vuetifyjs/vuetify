@@ -3,4 +3,4 @@
 
 // VApp
 $application-background: rgb(var(--v-theme-background)) !default;
-$application-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
+$application-color: tools.theme-color('on-background', var(--v-high-emphasis-opacity)) !default;

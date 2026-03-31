@@ -89,6 +89,13 @@ describe('VMaskInput', () => {
         expect(input.selectionStart).toBe(input.value.length)
       })
 
+      it('should handle escaped characters', async () => {
+        const { input, model } = renderComponent({ defaultModel: '', defaultMask: '\\####' })
+        await userEvent.type(input, '123')
+        expect(model.value).toBe('#123')
+        expect(input.selectionStart).toBe(input.value.length)
+      })
+
       it.each([
         // when cursor before delimiter
         {

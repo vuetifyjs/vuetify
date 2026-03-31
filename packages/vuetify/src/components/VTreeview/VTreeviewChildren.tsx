@@ -206,13 +206,14 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           rawId={ treeviewGroupProps?.value }
         >
           {{
-            activator: ({ props: activatorProps }) => {
+            activator: ({ props: activatorProps, isOpen }) => {
               const listItemProps = {
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
                 hideActions: props.hideActions,
                 indentLines: indentLines.node,
+                ariaExpanded: isOpen,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: props.disabled || itemProps.disabled
                   ? undefined

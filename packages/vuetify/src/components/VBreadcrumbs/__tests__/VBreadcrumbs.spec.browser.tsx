@@ -76,6 +76,7 @@ describe('VBreadcrumbs', () => {
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
     await expect.element(items[0]).toHaveClass('text-primary')
   })
+
   it('should disable last item by default if using items prop', async () => {
     render(() => (
       <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>

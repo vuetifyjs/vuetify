@@ -91,6 +91,7 @@ export default {
     hour: 'Tunti',
     minute: 'Minuutit',
     second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Merkki {0} ei ole sallittu',
     notEmpty: 'Valitse ainakin yksi arvo',
     pattern: 'Virheellinen muoto',
+  },
+  command: {
+    search: 'Kirjoita komento tai hae...',
   },
   hotkey: {
     then: 'sitten',
