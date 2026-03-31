@@ -19,7 +19,6 @@ import {
 import { VuetifyThemeAdapter } from './adapter'
 import {
   consoleWarn,
-  deprecate,
   getCurrentInstance,
   mergeDeep,
   propsFactory,
@@ -36,8 +35,6 @@ export interface ThemeInstance {
   cycle: (themeArray?: string[]) => void
   toggle: (themeArray?: [string, string]) => void
 
-  readonly isDisabled: boolean
-  readonly isSystem: Readonly<Ref<boolean>>
   readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
   readonly name: Readonly<Ref<string>>
@@ -46,11 +43,6 @@ export interface ThemeInstance {
   readonly prefix: string
 
   readonly themeClasses: Readonly<Ref<string | undefined>>
-
-  readonly global: {
-    readonly name: Ref<string>
-    readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
-  }
 }
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -148,8 +140,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const current = toRef(() => computedThemes.value[name.value])
 
-  const isSystem = toRef(() => _name.value === 'system')
-
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
   const themeNames = toRef(() => Object.keys(computedThemes.value))
 
@@ -196,35 +186,17 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     cycle(themeArray)
   }
 
-  const globalName = new Proxy(name, {
-    get (target, prop) {
-      return Reflect.get(target, prop)
-    },
-    set (target, prop, val) {
-      if (prop === 'value') {
-        deprecate(`theme.global.name.value = ${val}`, `theme.change('${val}')`)
-      }
-      return Reflect.set(target, prop, val)
-    },
-  })
-
   return {
     install,
     change,
     cycle,
     toggle,
-    isDisabled: parsedOptions.isDisabled,
-    isSystem,
     name,
     themes,
     current,
     computedThemes,
     prefix: parsedOptions.prefix,
     themeClasses,
-    global: {
-      name: globalName,
-      current,
-    },
   }
 }
 
@@ -238,7 +210,7 @@ export function provideTheme (props: { theme?: string }) {
   const name = toRef(() => props.theme ?? theme.name.value)
   const current = toRef(() => theme.themes.value[name.value])
 
-  const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
+  const themeClasses = toRef(() => `${theme.prefix}theme--${name.value}`)
 
   const newTheme: ThemeInstance = {
     ...theme,
