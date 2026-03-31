@@ -12,11 +12,11 @@ import {
   toRef,
   watch,
 } from 'vue'
+import { VuetifyThemeAdapter } from './adapter'
 import {
   genVariations,
   parseThemeOptions,
 } from './colors'
-import { VuetifyThemeAdapter } from './adapter'
 import {
   consoleWarn,
   getCurrentInstance,
@@ -156,9 +156,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     adapter.setThemes(computedThemes.value)
     adapter.setup(app, {
-      colors: v0Theme.colors,
-      selectedId: v0Theme.selectedId as Ref<string | null | undefined>,
-      isDark: v0Theme.isDark,
+      colors: v0Theme.colors as any,
+      selectedId: v0Theme.selectedId as any,
+      isDark: v0Theme.isDark as any,
     })
 
     watch(computedThemes, val => {

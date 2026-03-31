@@ -233,4 +233,3 @@ export function genVariations (colors: InternalThemeDefinition['colors'], variat
   }
   return variationColors
 }
-
