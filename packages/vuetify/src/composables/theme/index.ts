@@ -11,25 +11,21 @@ import {
   shallowRef,
   toRef,
   watch,
-  watchEffect,
 } from 'vue'
 import {
-  genCssVariables,
   genVariations,
   parseThemeOptions,
 } from './colors'
+import { VuetifyThemeAdapter } from './adapter'
 import {
   consoleWarn,
   deprecate,
   getCurrentInstance,
-  IN_BROWSER,
   mergeDeep,
   propsFactory,
 } from '@/util'
 
 // Types
-import type { VueHeadClient } from '@unhead/vue/client'
-import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { Colors, InternalThemeDefinition, ThemeOptions } from './colors'
 
@@ -50,7 +46,6 @@ export interface ThemeInstance {
   readonly prefix: string
 
   readonly themeClasses: Readonly<Ref<string | undefined>>
-  readonly styles: Readonly<Ref<string>>
 
   readonly global: {
     readonly name: Ref<string>
@@ -63,48 +58,6 @@ export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:them
 export const makeThemeProps = propsFactory({
   theme: String,
 }, 'theme')
-
-function createCssClass (lines: string[], selector: string, content: string[], scope?: string) {
-  lines.push(
-    `${getScopedSelector(selector, scope)} {\n`,
-    ...content.map(line => `  ${line};\n`),
-    '}\n',
-  )
-}
-
-function getScopedSelector (selector: string, scope?: string) {
-  if (!scope) return selector
-
-  const scopeSelector = `:where(${scope})`
-
-  return selector === ':root' ? scopeSelector : `${scopeSelector} ${selector}`
-}
-
-function upsertStyles (id: string, cspNonce: string | undefined, styles: string) {
-  const styleEl = getOrCreateStyleElement(id, cspNonce)
-
-  if (!styleEl) return
-
-  styleEl.textContent = styles
-}
-
-function getOrCreateStyleElement (id: string, cspNonce?: string) {
-  if (!IN_BROWSER) return null
-
-  let style = document.getElementById(id) as HTMLStyleElement | null
-
-  if (!style) {
-    style = document.createElement('style')
-    style.id = id
-    style.type = 'text/css'
-
-    if (cspNonce) style.setAttribute('nonce', cspNonce)
-
-    document.head.appendChild(style)
-  }
-
-  return style
-}
 
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
@@ -197,102 +150,30 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const isSystem = toRef(() => _name.value === 'system')
 
-  const styles = computed(() => {
-    const lines: string[] = []
-    const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
-
-    lines.push('@layer theme-base {\n')
-
-    if (current.value?.dark) {
-      createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
-    }
-
-    createCssClass(lines, ':root', genCssVariables(current.value, parsedOptions.prefix), parsedOptions.scope)
-
-    for (const [themeName, theme] of Object.entries(computedThemes.value)) {
-      createCssClass(lines, `.${parsedOptions.prefix}theme--${themeName}`, [
-        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
-        ...genCssVariables(theme, parsedOptions.prefix),
-      ], parsedOptions.scope)
-    }
-
-    lines.push('}\n')
-
-    if (parsedOptions.utilities) {
-      const bgLines: string[] = []
-      const fgLines: string[] = []
-
-      const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
-      for (const key of colors) {
-        if (key.startsWith('on-')) {
-          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
-        } else {
-          createCssClass(bgLines, `.${scoped}bg-${key}`, [
-            `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
-            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))`,
-            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))`,
-          ], parsedOptions.scope)
-          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
-          createCssClass(fgLines, `.${scoped}border-${key}`, [`--${parsedOptions.prefix}border-color: var(--${parsedOptions.prefix}theme-${key})`], parsedOptions.scope)
-        }
-      }
-
-      lines.push(
-        '@layer theme-background {\n',
-        ...bgLines.map(v => `  ${v}`),
-        '}\n',
-        '@layer theme-foreground {\n',
-        ...fgLines.map(v => `  ${v}`),
-        '}\n',
-      )
-    }
-
-    return '@layer vuetify-utilities {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
-  })
-
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
   const themeNames = toRef(() => Object.keys(computedThemes.value))
+
+  const adapter = new VuetifyThemeAdapter({
+    cspNonce: parsedOptions.cspNonce,
+    scope: parsedOptions.scope,
+    stylesheetId: parsedOptions.stylesheetId,
+    prefix: parsedOptions.prefix,
+    utilities: parsedOptions.utilities,
+  })
 
   function install (app: App) {
     if (parsedOptions.isDisabled) return
 
-    const head = app._context.provides.usehead as HeadClient & VueHeadClient<any> | undefined
-    if (head) {
-      function getHead () {
-        return {
-          style: [{
-            textContent: styles.value,
-            id: parsedOptions.stylesheetId,
-            nonce: parsedOptions.cspNonce || false as never,
-            tagPosition: 'bodyOpen' as const,
-          }],
-        }
-      }
+    adapter.setThemes(computedThemes.value)
+    adapter.setup(app, {
+      colors: v0Theme.colors,
+      selectedId: v0Theme.selectedId as Ref<string | null | undefined>,
+      isDark: v0Theme.isDark,
+    })
 
-      if (head.push) {
-        const entry = head.push(getHead)
-        if (IN_BROWSER) {
-          watch(styles, () => { entry.patch(getHead) })
-        }
-      } else {
-        if (IN_BROWSER) {
-          head.addHeadObjs(toRef(getHead))
-          watchEffect(() => head.updateDOM())
-        } else {
-          head.addHeadObjs(getHead())
-        }
-      }
-    } else {
-      if (IN_BROWSER) {
-        watch(styles, updateStyles, { immediate: true })
-      } else {
-        updateStyles()
-      }
-
-      function updateStyles () {
-        upsertStyles(parsedOptions.stylesheetId, parsedOptions.cspNonce, styles.value)
-      }
-    }
+    watch(computedThemes, val => {
+      adapter.setThemes(val)
+    })
   }
 
   function change (themeName: string) {
@@ -340,7 +221,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     computedThemes,
     prefix: parsedOptions.prefix,
     themeClasses,
-    styles,
     global: {
       name: globalName,
       current,
