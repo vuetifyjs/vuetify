@@ -185,6 +185,7 @@ export const VSelect = genericComponent<new <
     let keyboardLookupPrefix = ''
     let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
+    let openedByKeyboard = false
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -242,6 +243,7 @@ export const VSelect = genericComponent<new <
     function onMousedownControl () {
       if (menuDisabled.value) return
 
+      openedByKeyboard = false
       menu.value = !menu.value
     }
 
@@ -263,6 +265,7 @@ export const VSelect = genericComponent<new <
       }
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+        openedByKeyboard = true
         menu.value = true
       }
 
@@ -391,7 +394,11 @@ export const VSelect = genericComponent<new <
       }
       if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
-        listRef.value.focus(index >= 0 ? index : 'first')
+        if (index >= 0) {
+          listRef.value.focus(index)
+        } else if (openedByKeyboard) {
+          listRef.value.focus('first')
+        }
       }
     }
     function onAfterLeave () {
