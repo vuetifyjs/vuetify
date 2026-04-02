@@ -1,6 +1,6 @@
 // Utilities
 import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
-import { isNullOrUndefined, isObject } from '@vuetify/v0/utilities'
+import { isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
@@ -123,9 +123,9 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const breakpoint = createBreakpoints({
-    ...!isNullOrUndefined(options?.mobileBreakpoint) && { mobileBreakpoint: options.mobileBreakpoint },
-    ...!isNullOrUndefined(options?.thresholds) && { breakpoints: options.thresholds },
-    ...isObject(ssr) && { ssr },
+    mobileBreakpoint: options?.mobileBreakpoint,
+    breakpoints: options?.thresholds,
+    ssr: isObject(ssr) ? ssr : undefined,
   })
 
   const platform = shallowRef(getPlatform(ssr))
