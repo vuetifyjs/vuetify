@@ -125,7 +125,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
   const breakpoint = createBreakpoints({
     mobileBreakpoint: options?.mobileBreakpoint,
     breakpoints: options?.thresholds,
-    ssr: isObject(ssr) ? ssr : undefined,
+    ssr: isObject(ssr) ? ssr : ssr === true ? { clientWidth: 0 } : undefined,
   })
 
   const platform = shallowRef(getPlatform(ssr))
@@ -136,8 +136,6 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
   }
 
   if (IN_BROWSER) {
-    breakpoint.update()
-
     useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
   }
 
