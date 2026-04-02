@@ -1,5 +1,5 @@
 // Utilities
-import { createLocale as createV0Locale, createRtl as createV0Rtl } from '@vuetify/v0'
+import { createLocale as createV0Locale, createRtl as createV0Rtl, isFunction } from '@vuetify/v0'
 import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
 import en from '@/locale/en'
 
@@ -205,8 +205,8 @@ export function provideLocale (props: LocaleOptions & RtlProps) {
 
   if (!parent) throw new Error('[Vuetify] Could not find injected locale instance')
 
-  if ('provide' in parent && typeof (parent as any).provide === 'function') {
-    const i18n = (parent as any).provide(props)
+  if ('provide' in parent && isFunction(parent.provide)) {
+    const i18n = parent.provide(props)
     const rtl = provideRtl(i18n, parent.rtl, props)
     const data = { ...i18n, ...rtl }
     provide(LocaleSymbol, data)
