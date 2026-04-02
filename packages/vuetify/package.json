@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -60,21 +60,28 @@
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/main.css"
     },
     "./styles/core": {
       "sass": "./lib/styles/core.scss",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/core.css"
     },
     "./styles/colors": {
       "sass": "./lib/styles/colors.scss",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/colors.css"
     },
     "./styles/utilities": {
       "sass": "./lib/styles/utilities.scss",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/utilities.css"
     },
-    "./styles/*": "./lib/styles/*",
+    "./styles/*": {
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/*"
+    },
     "./framework": "./lib/framework.js",
     "./blueprints": "./lib/blueprints/index.js",
     "./blueprints/*": "./lib/blueprints/*.js",
