@@ -65,8 +65,6 @@ export interface DisplayInstance {
   mdAndDown: Readonly<ShallowRef<boolean>>
   lgAndDown: Readonly<ShallowRef<boolean>>
   xlAndDown: Readonly<ShallowRef<boolean>>
-  xxlAndUp: Readonly<ShallowRef<boolean>>
-  xxlAndDown: Readonly<ShallowRef<boolean>>
   name: Readonly<ShallowRef<DisplayBreakpoint>>
   height: Readonly<ShallowRef<number>>
   width: Readonly<ShallowRef<number>>
@@ -147,7 +145,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     thresholds: toRef(() => breakpoint.breakpoints as DisplayThresholds),
     update,
     ssr: !!ssr,
-  } as unknown as DisplayInstance
+  }
 }
 
 export const makeDisplayProps = propsFactory({
