@@ -12,10 +12,11 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { makeVPaginationProps } from '../VPagination/VPagination'
 
 export const makeVDataTableFooterProps = propsFactory({
   color: String,
@@ -70,18 +71,8 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
-  showFirstPage: {
-    type: Boolean,
-    default: false,
-  },
-  showLastPage: {
-    type: Boolean,
-    default: false,
-  },
-  showFirstLastPage: {
-    type: Boolean,
-    default: true,
-  },
+
+  ...pick(makeVPaginationProps(), ['showFirstLastPage']),
 }, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({
@@ -149,8 +140,6 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               nextAriaLabel={ props.nextPageLabel }
               previousAriaLabel={ props.prevPageLabel }
               rounded
-              showFirstPage
-              showLastPage
               showFirstLastPage
               totalVisible={ props.showCurrentPage ? 1 : 0 }
               variant="plain"

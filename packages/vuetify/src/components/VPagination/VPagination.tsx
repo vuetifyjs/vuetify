@@ -27,7 +27,7 @@ import { computed, nextTick, shallowRef, toRef } from 'vue'
 import { createRange, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, PropType } from 'vue'
 
 type ItemSlot = {
   isActive: boolean
@@ -117,17 +117,9 @@ export const makeVPaginationProps = propsFactory({
     type: String,
     default: '...',
   },
-  showFirstPage: {
-    type: Boolean,
-    default: false,
-  },
-  showLastPage: {
-    type: Boolean,
-    default: false,
-  },
   showFirstLastPage: {
-    type: Boolean,
-    default: true,
+    type: [Boolean, String] as PropType<boolean | 'only-first'>,
+    default: false,
   },
 
   ...makeBorderProps(),
@@ -289,7 +281,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const nextDisabled = !!props.disabled || page.value >= start.value + length.value - 1
 
       return {
-        first: (props.showFirstPage || props.showFirstLastPage) ? {
+        first: [true, 'only-first'].includes(props.showFirstLastPage) ? {
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
@@ -310,7 +302,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
           'aria-label': t(props.nextAriaLabel),
           'aria-disabled': nextDisabled,
         },
-        last: (props.showLastPage || props.showFirstLastPage) ? {
+        last: props.showFirstLastPage === true ? {
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,
@@ -350,7 +342,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         data-test="v-pagination-root"
       >
         <ul class="v-pagination__list">
-          { (props.showFirstPage || props.showFirstLastPage) && (
+          {[true, 'only-first'].includes(props.showFirstLastPage) && (
             <li
               key="first"
               class="v-pagination__first"
@@ -396,7 +388,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             )}
           </li>
 
-          { (props.showLastPage || props.showFirstLastPage) && (
+          { props.showFirstLastPage === true && (
             <li
               key="last"
               class="v-pagination__last"
