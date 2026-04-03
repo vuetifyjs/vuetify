@@ -72,7 +72,9 @@ export const makeVDataTableFooterProps = propsFactory({
   },
   showCurrentPage: Boolean,
 
-  ...pick(makeVPaginationProps(), ['showFirstLastPage']),
+  ...pick(makeVPaginationProps({
+    showFirstLastPage: true,
+  }), ['showFirstLastPage']),
 }, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({
