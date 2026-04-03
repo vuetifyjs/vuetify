@@ -51,7 +51,7 @@ export default defineConfig(configEnv => {
         'process.env.TEST_TDD_ONLY': process.env.TEST_TDD_ONLY,
       },
       test: {
-        watch: false,
+        watch: true,
         slowTestThreshold: Infinity,
         setupFiles: ['../test/setup/to-have-been-warned.ts'],
         reporters: process.env.GITHUB_ACTIONS
@@ -104,8 +104,8 @@ export default defineConfig(configEnv => {
                     ].filter(v => v != null),
                   },
                 }),
-                ui: false,
-                headless: !process.env.TEST_BAIL,
+                ui: true,
+                headless: false, //! process.env.TEST_BAIL,
                 screenshotDirectory: '../test/__screenshots__',
                 commands,
                 instances: [{

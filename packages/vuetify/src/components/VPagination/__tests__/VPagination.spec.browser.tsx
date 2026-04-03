@@ -23,6 +23,33 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(3)
   })
 
+  it('should render with first and last page buttons', () => {
+    render(() => (
+      <VPagination length="3" />
+    ))
+
+    expect(page.getByTestId('v-pagination-first')).toBeInTheDocument()
+    expect(page.getByTestId('v-pagination-last')).toBeInTheDocument()
+  })
+
+  it('should render without first and last page buttons', () => {
+    render(() => (
+      <VPagination showFirstLastPage={ false } length="3" />
+    ))
+
+    expect(page.getByTestId('v-pagination-first')).not.toBeInTheDocument()
+    expect(page.getByTestId('v-pagination-last')).not.toBeInTheDocument()
+  })
+
+  it('should render without last page button', () => {
+    render(() => (
+      <VPagination showFirstLastPage={ false } showFirstPage showlength="3" />
+    ))
+
+    expect(page.getByTestId('v-pagination-first')).toBeInTheDocument()
+    expect(page.getByTestId('v-pagination-last')).not.toBeInTheDocument()
+  })
+
   it('should react to mouse navigation', async () => {
     render(() => (
       <VPagination length="3" />

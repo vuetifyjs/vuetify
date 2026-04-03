@@ -117,7 +117,18 @@ export const makeVPaginationProps = propsFactory({
     type: String,
     default: '...',
   },
-  showFirstLastPage: Boolean,
+  showFirstPage: {
+    type: Boolean,
+    default: false,
+  },
+  showLastPage: {
+    type: Boolean,
+    default: false,
+  },
+  showFirstLastPage: {
+    type: Boolean,
+    default: true,
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -278,7 +289,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const nextDisabled = !!props.disabled || page.value >= start.value + length.value - 1
 
       return {
-        first: props.showFirstLastPage ? {
+        first: (props.showFirstPage || props.showFirstLastPage) ? {
           icon: isRtl.value ? props.lastIcon : props.firstIcon,
           onClick: (e: Event) => setValue(e, start.value, 'first'),
           disabled: prevDisabled,
@@ -299,7 +310,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
           'aria-label': t(props.nextAriaLabel),
           'aria-disabled': nextDisabled,
         },
-        last: props.showFirstLastPage ? {
+        last: (props.showLastPage || props.showFirstLastPage) ? {
           icon: isRtl.value ? props.firstIcon : props.lastIcon,
           onClick: (e: Event) => setValue(e, start.value + length.value - 1, 'last'),
           disabled: nextDisabled,
@@ -339,8 +350,13 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         data-test="v-pagination-root"
       >
         <ul class="v-pagination__list">
-          { props.showFirstLastPage && (
-            <li key="first" class="v-pagination__first" data-test="v-pagination-first">
+          { (props.showFirstPage || props.showFirstLastPage) && (
+            <li
+              key="first"
+              class="v-pagination__first"
+              data-test="v-pagination-first"
+              data-testid="v-pagination-first"
+            >
               { slots.first ? slots.first(controls.value.first!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.first } />
               )}
@@ -380,11 +396,12 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             )}
           </li>
 
-          { props.showFirstLastPage && (
+          { (props.showLastPage || props.showFirstLastPage) && (
             <li
               key="last"
               class="v-pagination__last"
               data-test="v-pagination-last"
+              data-testid="v-pagination-last"
             >
               { slots.last ? slots.last(controls.value.last!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.last } />

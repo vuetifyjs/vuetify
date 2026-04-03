@@ -70,6 +70,18 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
+  showFirstPage: {
+    type: Boolean,
+    default: false,
+  },
+  showLastPage: {
+    type: Boolean,
+    default: false,
+  },
+  showFirstLastPage: {
+    type: Boolean,
+    default: true,
+  },
 }, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({
@@ -137,6 +149,8 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               nextAriaLabel={ props.nextPageLabel }
               previousAriaLabel={ props.prevPageLabel }
               rounded
+              showFirstPage
+              showLastPage
               showFirstLastPage
               totalVisible={ props.showCurrentPage ? 1 : 0 }
               variant="plain"
