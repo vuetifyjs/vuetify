@@ -251,6 +251,24 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(5)
   })
 
+  it('inserts paste content at current slot position', async () => {
+    render(() => (<VOtpInput />))
+    const input = getInput()
+
+    await userEvent.click(input)
+    await userEvent.keyboard('1234')
+    await clickSlot(input, 1)
+    expect(getActiveSlotIndex()).toBe(1)
+
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('9B*  8')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(input.value).toBe('19834')
+    expect(getActiveSlotIndex()).toBe(3)
+  })
+
   it('handles mobile OTP autofill', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()

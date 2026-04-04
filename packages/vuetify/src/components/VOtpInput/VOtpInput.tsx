@@ -307,15 +307,23 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     function onPaste (e: ClipboardEvent) {
       e.preventDefault()
+      const input = inputRef.value!
       const text = e.clipboardData?.getData('text/plain').trim() ?? ''
-      let filtered = props.type === 'number' ? text.replace(/[^0-9]/g, '') : text
-      filtered = filtered.slice(0, length.value)
-      model.value = filtered.split('')
-      if (inputRef.value) inputRef.value.value = filtered
-      const pos = Math.min(filtered.length, length.value - 1)
-      inputRef.value?.setSelectionRange(pos, filtered.length)
-      renderSelectionStart.value = pos
-      renderSelectionEnd.value = filtered.length
+      const filtered = props.type === 'number' ? text.replace(/[^0-9]/g, '') : text
+
+      const start = renderSelectionStart.value ?? 0
+      const end = renderSelectionEnd.value ?? input.value.length
+      const newVal = (input.value.slice(0, start) + filtered + input.value.slice(end)).slice(0, length.value)
+
+      model.value = newVal.split('')
+      input.value = newVal
+
+      const insertEnd = start + filtered.length
+      const newPos = Math.min(insertEnd, length.value - 1)
+      const newEnd = Math.min(insertEnd, newVal.length)
+      input.setSelectionRange(newPos, newEnd)
+      renderSelectionStart.value = newPos
+      renderSelectionEnd.value = newEnd
     }
 
     function reset () {
