@@ -27,7 +27,13 @@ interface StackProvide {
 
 const globalStack = reactive<[uid: number, zIndex: number][]>([])
 
-export function useStack (
+function getStackZIndex(zIndex: MaybeRefOrGetter<string | number>) {
+  const lastZIndex = globalStack.at(-1)?.[1]
+
+  return lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
+}
+
+export function useStack(
   isActive: Readonly<Ref<boolean>>,
   zIndex: MaybeRefOrGetter<string | number>,
   disableGlobalStack: boolean
@@ -43,8 +49,7 @@ export function useStack (
 
   const _zIndex = shallowRef(Number(toValue(zIndex)))
   useToggleScope(isActive, () => {
-    const lastZIndex = globalStack.at(-1)?.[1]
-    _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
+    _zIndex.value = getStackZIndex(zIndex)
 
     if (createStackEntry) {
       globalStack.push([vm.uid, _zIndex.value])
@@ -75,6 +80,6 @@ export function useStack (
   return {
     globalTop: readonly(globalTop),
     localTop,
-    stackStyles: toRef(() => ({ zIndex: _zIndex.value })),
+    stackStyles: toRef(() => ({ zIndex: createStackEntry ? _zIndex.value : getStackZIndex(zIndex) })),
   }
 }
