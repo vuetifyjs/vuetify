@@ -271,6 +271,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onBeforeinput (e: InputEvent) {
+      // Block invalid characters
+      if (e.inputType === 'insertText' && props.type === 'number' && e.data && /[^0-9]/.test(e.data)) {
+        e.preventDefault()
+        return
+      }
+
       // Keep selection at slot i after forward deletion
       if (e.inputType === 'deleteContentForward') {
         e.preventDefault()
