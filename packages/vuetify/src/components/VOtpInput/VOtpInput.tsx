@@ -287,8 +287,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         return
       }
 
-      // Since some IME keyboards don't fire proper key events, we need to check the input type
-      // This can be unreliable since browsers always trigger DeleteContentForward/Backward but some keyboards can force their own input type
+      // Since some IME keyboards don't fire proper key events, we need to check the input type.
+      // This can be unreliable since browsers always trigger DeleteContentForward/Backward,
+      // but some keyboards can force their own input type.
       const isBackward = [
         'deleteWordBackward',
         'deleteSoftLineBackward',
