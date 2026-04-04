@@ -20,16 +20,43 @@
         &__end
           flex: 1
 
-      input::placeholder
-        color: currentColor
-        opacity: var(--v-disabled-opacity)
-
-      &.v-field--focused
-        input::placeholder
-          opacity: 0
-
   .v-otp-input__divider
     margin: $otp-input-divider-margin
+
+  .v-otp-input__input-wrapper
+    position: absolute
+    inset: 0
+    pointer-events: none
+    overflow: hidden
+
+  .v-otp-input__input
+    position: absolute
+    inset: 0
+    width: 100%
+    height: 100%
+    opacity: 1
+    color: transparent
+    caret-color: transparent
+    background: transparent
+    border: none
+    outline: none
+    box-shadow: none
+    pointer-events: all
+    cursor: text
+    font-size: 64px
+    font-family: monospace
+    letter-spacing: -.5em
+    line-height: 1
+
+    &::selection
+      background: transparent
+      color: transparent
+
+    &:-webkit-autofill
+      background: transparent !important
+      color: transparent !important
+      -webkit-text-fill-color: transparent !important
+      box-shadow: none !important
 
   .v-otp-input__content
     align-items: center
@@ -37,7 +64,8 @@
     gap: $otp-input-content-gap
     padding: $otp-input-content-padding
     justify-content: center
-    max-width: $otp-input-content-max-width
+    width: $otp-input-content-max-width
+    max-width: 100%
     position: relative
     border-radius: inherit
 
@@ -50,26 +78,28 @@
         height: #{$otp-input-content-height + math.div($modifier, 2)}
 
   .v-otp-input__field
-    padding: 0
-    margin: 0
-    border-radius: 0
-    font: inherit
-    border-style: none
     color: inherit
-    background-color: transparent
     font-size: $otp-input-field-font-size
     height: 100%
-    outline: none
-    text-align: center
     width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
 
-    &[type=number]::-webkit-outer-spin-button,
-    &[type=number]::-webkit-inner-spin-button
-      -webkit-appearance: none
-      margin: 0
+  .v-otp-input__placeholder
+    color: currentColor
+    opacity: var(--v-disabled-opacity)
 
-    &[type=number]
-      -moz-appearance: textfield
+  .v-otp-input__caret
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    display: inline-block
+    width: 1px
+    height: 1.2em
+    background: currentColor
+    animation: v-otp-blink 1s step-end infinite
 
   .v-otp-input__loader
     align-items: center
@@ -80,3 +110,9 @@
 
     .v-progress-linear
       position: absolute
+
+  @keyframes v-otp-blink
+    0%, 100%
+      opacity: 1
+    50%
+      opacity: 0

@@ -17,169 +17,187 @@ const stories = {
 }
 
 describe('VOtpInput', () => {
+  function getInput () {
+    return screen.getByCSS('.v-otp-input__input') as HTMLInputElement
+  }
+
+  function getActiveSlotIndex () {
+    const vfields = screen.getAllByCSS('.v-otp-input__content .v-field')
+    return vfields.findIndex(f => f.classList.contains('v-field--focused'))
+  }
+
+  async function clickSlot (input: HTMLInputElement, index: number) {
+    if (document.activeElement !== input) {
+      await userEvent.click(input)
+    }
+    input.setSelectionRange(index, Math.min(index + 1, input.value.length))
+    await waitAnimationFrame()
+  }
+
   it('enters value and moves to next input', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('1')
-    expect(inputs[1]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(1)
 
     await userEvent.keyboard('2')
-    expect(inputs[2]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(2)
 
     await userEvent.keyboard('3')
-    expect(inputs[3]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(3)
 
     await userEvent.keyboard('4')
-    expect(inputs[4]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(4)
 
     await userEvent.keyboard('5')
-    expect(inputs[5]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(5)
 
     await userEvent.keyboard('6')
-    expect(inputs[5]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(5)
   })
 
   it('enters value and moves to next input when focused index is not next', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('1')
-    expect(inputs[1]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(1)
 
-    await userEvent.click(inputs[3])
+    await userEvent.click(input)
     await userEvent.keyboard('2')
-    expect(inputs[2]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(2)
   })
 
   it('removes value and stays on current input when using delete', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('1234')
-    expect(inputs[4]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(4)
 
     await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('3')
+    expect(getActiveSlotIndex()).toBe(2)
+    expect(input.value[2]).toBe('3')
 
     await userEvent.keyboard('{Delete}')
-    expect(inputs[2]).toHaveValue('4')
-    expect(inputs[2]).toHaveFocus()
+    expect(input.value[2]).toBe('4')
+    expect(getActiveSlotIndex()).toBe(2)
   })
 
   it('removes value and goes back when using backspace', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('1234')
-    expect(inputs[4]).toHaveFocus()
+    expect(getActiveSlotIndex()).toBe(4)
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[3]).toHaveFocus()
-    expect(inputs[3]).toHaveValue('')
+    expect(getActiveSlotIndex()).toBe(3)
+    expect(input.value[3] ?? '').toBe('')
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('')
+    expect(getActiveSlotIndex()).toBe(2)
+    expect(input.value[2] ?? '').toBe('')
   })
 
   it('removes value and stays on current input when using backspace on last filled field', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('12345')
-    await userEvent.click(inputs[4])
+    await clickSlot(input, 4)
 
-    expect(inputs[4]).toHaveFocus()
-    expect(inputs[4]).toHaveValue('5')
+    expect(getActiveSlotIndex()).toBe(4)
+    expect(input.value[4]).toBe('5')
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[4]).toHaveFocus()
-    expect(inputs[4]).toHaveValue('')
+    expect(getActiveSlotIndex()).toBe(4)
+    expect(input.value[4] ?? '').toBe('')
   })
 
   it('shifts values left and goes back when using backspace on a non-last filled field', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('12345')
-    await userEvent.click(inputs[2])
-    expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('3')
+    await clickSlot(input, 2)
+
+    expect(getActiveSlotIndex()).toBe(2)
+    expect(input.value[2]).toBe('3')
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[1]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('4')
-    expect(inputs[3]).toHaveValue('5')
-    expect(inputs[4]).toHaveValue('')
+    expect(getActiveSlotIndex()).toBe(1)
+    expect(input.value[2]).toBe('4')
+    expect(input.value[3]).toBe('5')
+    expect(input.value[4] ?? '').toBe('')
   })
 
   it('shifts values left when using backspace on the first field', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('12345')
-    await userEvent.click(inputs[0])
-    expect(inputs[0]).toHaveFocus()
-    expect(inputs[0]).toHaveValue('1')
+    await clickSlot(input, 0)
+
+    expect(getActiveSlotIndex()).toBe(0)
+    expect(input.value[0]).toBe('1')
 
     await userEvent.keyboard('{Backspace}')
-    expect(inputs[0]).toHaveFocus()
-    expect(inputs[0]).toHaveValue('2')
-    expect(inputs[1]).toHaveValue('3')
-    expect(inputs[4]).toHaveValue('')
+    expect(getActiveSlotIndex()).toBe(0)
+    expect(input.value[0]).toBe('2')
+    expect(input.value[1]).toBe('3')
+    expect(input.value[4] ?? '').toBe('')
   })
 
   it.each(['deleteWordBackward', 'deleteSoftLineBackward', 'deleteHardLineBackward'])(
-    'removes value and goes back on %s',
+    'clears all preceding characters on %s',
     async inputType => {
       render(() => (<VOtpInput />))
-      const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
+      const input = getInput()
 
-      await userEvent.click(inputs[0])
+      await userEvent.click(input)
       await userEvent.keyboard('1234')
-      expect(inputs[4]).toHaveFocus()
+      expect(getActiveSlotIndex()).toBe(4)
 
-      inputs[4].dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
+      input.dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
       await waitAnimationFrame()
-      expect(inputs[3]).toHaveFocus()
-      expect(inputs[3]).toHaveValue('')
+      expect(input.value).toBe('')
+      expect(getActiveSlotIndex()).toBe(0)
     }
   )
 
   it.each(['deleteWordForward', 'deleteSoftLineForward', 'deleteHardLineForward'])(
-    'shifts values left and stays on %s',
+    'clears all following characters on %s',
     async inputType => {
       render(() => (<VOtpInput />))
-      const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
+      const input = getInput()
 
-      await userEvent.click(inputs[0])
+      await userEvent.click(input)
       await userEvent.keyboard('1234')
       await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
-      expect(inputs[2]).toHaveFocus()
+      expect(getActiveSlotIndex()).toBe(2)
 
-      inputs[2].dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
+      input.dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
       await waitAnimationFrame()
-      expect(inputs[2]).toHaveFocus()
-      expect(inputs[2]).toHaveValue('4')
-      expect(inputs[3]).toHaveValue('')
+      expect(input.value).toBe('12')
+      expect(getActiveSlotIndex()).toBe(1)
     }
   )
 
   it('emits finish event when all inputs are filled', async () => {
     const onFinish = vi.fn()
     render(() => (<VOtpInput onFinish={ onFinish } />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('123456')
 
     expect(onFinish).toHaveBeenCalledWith('123456')
@@ -187,9 +205,8 @@ describe('VOtpInput', () => {
 
   it('respects custom length prop', async () => {
     render(() => (<VOtpInput length={ 4 } />))
-    const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
-
-    expect(inputs).toHaveLength(4)
+    const vfields = screen.getAllByCSS('.v-otp-input__content .v-field')
+    expect(vfields).toHaveLength(4)
   })
 
   it('handles model value updates', async () => {
@@ -200,9 +217,9 @@ describe('VOtpInput', () => {
         onUpdate:modelValue={ val => { modelValue.value = val } }
       />
     ))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.click(inputs[0])
+    await userEvent.click(input)
     await userEvent.keyboard('123')
 
     expect(modelValue.value).toBe('123')
@@ -210,53 +227,38 @@ describe('VOtpInput', () => {
 
   it('handles paste event', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
-    await userEvent.click(inputs[0])
+    const input = getInput()
+    await userEvent.click(input)
     const lock = await commands.getLock()
     await navigator.clipboard.writeText('123456')
     await userEvent.paste()
     await commands.releaseLock(lock)
 
-    expect(inputs[0]).toHaveValue('1')
-    expect(inputs[1]).toHaveValue('2')
-    expect(inputs[2]).toHaveValue('3')
-    expect(inputs[3]).toHaveValue('4')
-    expect(inputs[4]).toHaveValue('5')
-    expect(inputs[5]).toHaveValue('6')
-    expect(inputs[5]).toHaveFocus()
+    expect(input.value).toBe('123456')
+    expect(getActiveSlotIndex()).toBe(5)
   })
 
   it('trim paste event content', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
-    await userEvent.click(inputs[0])
+    const input = getInput()
+    await userEvent.click(input)
     const lock = await commands.getLock()
     await navigator.clipboard.writeText('  123456     ')
     await userEvent.paste()
     await commands.releaseLock(lock)
 
-    expect(inputs[0]).toHaveValue('1')
-    expect(inputs[1]).toHaveValue('2')
-    expect(inputs[2]).toHaveValue('3')
-    expect(inputs[3]).toHaveValue('4')
-    expect(inputs[4]).toHaveValue('5')
-    expect(inputs[5]).toHaveValue('6')
-    expect(inputs[5]).toHaveFocus()
+    expect(input.value).toBe('123456')
+    expect(getActiveSlotIndex()).toBe(5)
   })
 
   it('handles mobile OTP autofill', async () => {
     render(() => (<VOtpInput />))
-    const inputs = screen.getAllByCSS('.v-otp-input input')
+    const input = getInput()
 
-    await userEvent.type(inputs[0], '123456')
+    await userEvent.type(input, '123456')
 
-    expect(inputs[0]).toHaveValue('1')
-    expect(inputs[1]).toHaveValue('2')
-    expect(inputs[2]).toHaveValue('3')
-    expect(inputs[3]).toHaveValue('4')
-    expect(inputs[4]).toHaveValue('5')
-    expect(inputs[5]).toHaveValue('6')
-    expect(inputs[5]).toHaveFocus()
+    expect(input.value).toBe('123456')
+    expect(getActiveSlotIndex()).toBe(5)
   })
 
   showcase({ stories })
