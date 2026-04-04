@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Redaka po stranici:',
     ariaLabel: {
+      selectRow: 'Odaberi redak',
+      deselectRow: 'Poništi odabir retka',
+      selectAll: 'Odaberi sve retke',
+      deselectAll: 'Poništi odabir svih redaka ({0} odabrano)',
+      selectAllSelected: 'Odaberi sve retke ({0} odabrano)',
       sortDescending: 'Sortirano silazno.',
       sortAscending: 'Sortirano uzlazno.',
       sortNone: 'Nije sortirano.',

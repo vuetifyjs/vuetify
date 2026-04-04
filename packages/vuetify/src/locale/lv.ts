@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {
+      selectRow: 'Izvēlēties rindu',
+      deselectRow: 'Noņemt rindas izvēli',
+      selectAll: 'Izvēlēties visas rindas',
+      deselectAll: 'Noņemt visu rindu izvēli ({0} izvēlētas)',
+      selectAllSelected: 'Izvēlēties visas rindas ({0} izvēlētas)',
       sortDescending: 'Sakārtots dilstošā secībā.',
       sortAscending: 'Sakārtots augošā secībā.',
       sortNone: 'Nav sakārtots.',

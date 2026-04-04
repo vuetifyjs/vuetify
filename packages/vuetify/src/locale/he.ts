@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
+      selectRow: 'בחר שורה',
+      deselectRow: 'בטל בחירת שורה',
+      selectAll: 'בחר את כל השורות',
+      deselectAll: 'בטל בחירת כל השורות ({0} נבחרו)',
+      selectAllSelected: 'בחר את כל השורות ({0} נבחרו)',
       sortDescending: 'ממוין לפי סדר עולה. לחץ להספקת המיון.',
       sortAscending: 'ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
       sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',

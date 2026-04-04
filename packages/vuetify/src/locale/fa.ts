@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
+      selectRow: 'انتخاب سطر',
+      deselectRow: 'لغو انتخاب سطر',
+      selectAll: 'انتخاب همه سطرها',
+      deselectAll: 'لغو انتخاب همه سطرها ({0} انتخاب شده)',
+      selectAllSelected: 'انتخاب همه سطرها ({0} انتخاب شده)',
       sortDescending: 'مرتب‌سازی نزولی',
       sortAscending: 'مرتب‌سازی صعودی',
       sortNone: 'بدون مرتب‌سازی',

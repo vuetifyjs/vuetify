@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Počet riadkov na stránku:',
     ariaLabel: {
+      selectRow: 'Vybrať riadok',
+      deselectRow: 'Zrušiť výber riadka',
+      selectAll: 'Vybrať všetky riadky',
+      deselectAll: 'Zrušiť výber všetkých riadkov ({0} vybratých)',
+      selectAllSelected: 'Vybrať všetky riadky ({0} vybratých)',
       sortDescending: 'Zoradené zostupne.',
       sortAscending: 'Zoradené vzostupne.',
       sortNone: 'Nezoradené.',

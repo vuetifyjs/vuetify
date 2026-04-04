@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'ڕیزەکان بۆ هەر پەڕەیەک:',
     ariaLabel: {
+      selectRow: 'دیاریکردنی ڕیز',
+      deselectRow: 'لابردنی دیاریکردنی ڕیز',
+      selectAll: 'دیاریکردنی هەموو ڕیزەکان',
+      deselectAll: 'لابردنی دیاریکردنی هەموو ڕیزەکان ({0} دیاریکراوە)',
+      selectAllSelected: 'دیاریکردنی هەموو ڕیزەکان ({0} دیاریکراوە)',
       sortDescending: '.سەر بەرەو خوار ڕیزکراوە',
       sortAscending: '.سەر بەرەو ژوور ڕیزکراوە',
       sortNone: 'ڕیزنەکراوە.',

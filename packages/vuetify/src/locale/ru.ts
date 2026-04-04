@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Строк на странице:',
     ariaLabel: {
+      selectRow: 'Выбрать строку',
+      deselectRow: 'Отменить выбор строки',
+      selectAll: 'Выбрать все строки',
+      deselectAll: 'Отменить выбор всех строк (выбрано {0})',
+      selectAllSelected: 'Выбрать все строки (выбрано {0})',
       sortDescending: 'Упорядочено по убыванию.',
       sortAscending: 'Упорядочено по возрастанию.',
       sortNone: 'Не упорядочено.',

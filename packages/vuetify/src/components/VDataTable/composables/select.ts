@@ -114,6 +114,8 @@ export function provideSelection (
   }, v => {
     return [...v.values()]
   })
+  const selectedItemsCount = computed(() => selected.value.size)
+  const allItemsCount = computed(() => allItems.value.length)
 
   const allSelectable = computed(() => allItems.value.filter(item => item.selectable))
   const currentPageSelectable = computed(() => toValue(currentPage).filter(item => item.selectable))
@@ -198,6 +200,8 @@ export function provideSelection (
     showSelectAll,
     lastSelectedIndex,
     selectStrategy,
+    selectedItemsCount,
+    allItemsCount,
   }
 
   provide(VDataTableSelectionSymbol, data)

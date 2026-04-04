@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rækker pr. side:',
     ariaLabel: {
+      selectRow: 'Vælg række',
+      deselectRow: 'Fravælg række',
+      selectAll: 'Vælg alle rækker',
+      deselectAll: 'Fravælg alle rækker ({0} valgt)',
+      selectAllSelected: 'Vælg alle rækker ({0} valgt)',
       sortDescending: 'Sorteret faldende.',
       sortAscending: 'Sorteret stigende.',
       sortNone: 'Ikke sorteret.',

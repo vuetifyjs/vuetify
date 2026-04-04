@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rânduri pe pagină:',
     ariaLabel: {
+      selectRow: 'Selectează rândul',
+      deselectRow: 'Deselectează rândul',
+      selectAll: 'Selectează toate rândurile',
+      deselectAll: 'Deselectează toate rândurile ({0} selectate)',
+      selectAllSelected: 'Selectează toate rândurile ({0} selectate)',
       sortDescending: 'Sortate descendent.',
       sortAscending: 'Sortate ascendent.',
       sortNone: 'Nesortate.',

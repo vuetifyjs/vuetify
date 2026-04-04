@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rader per side:',
     ariaLabel: {
+      selectRow: 'Velg rad',
+      deselectRow: 'Fravelg rad',
+      selectAll: 'Velg alle rader',
+      deselectAll: 'Fravelg alle rader ({0} valgt)',
+      selectAllSelected: 'Velg alle rader ({0} valgt)',
       sortDescending: 'Sortert synkende.',
       sortAscending: 'Sortert stigende.',
       sortNone: 'Ikke sortert.',

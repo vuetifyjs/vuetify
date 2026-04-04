@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Səhifə başı sətir sayı:',
     ariaLabel: {
+      selectRow: 'Sətri seç',
+      deselectRow: 'Sətrin seçimini ləğv et',
+      selectAll: 'Bütün sətirləri seç',
+      deselectAll: 'Bütün sətirlərin seçimini ləğv et ({0} seçilib)',
+      selectAllSelected: 'Bütün sətirləri seç ({0} seçilib)',
       sortDescending: 'Azalan sıra ilə düzülmüş.',
       sortAscending: 'Artan sıra ilə düzülmüş.',
       sortNone: 'Sıralanmamışdır.',

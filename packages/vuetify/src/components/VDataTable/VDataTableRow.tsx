@@ -8,12 +8,13 @@ import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { useLocale } from '@/composables'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { toDisplayString, withModifiers } from 'vue'
+import { computed, toDisplayString, withModifiers } from 'vue'
 import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
 
 // Types
@@ -49,6 +50,14 @@ export const makeVDataTableRowProps = propsFactory({
     type: IconValue,
     default: '$expand',
   },
+  selectRowText: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.selectRow',
+  },
+  deselectRowText: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.deselectRow',
+  },
 
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
@@ -70,11 +79,15 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
     const { toggleSort, sortBy, isSorted } = useSort()
     const { columns } = useHeaders()
+
+    const selectedRow = computed(() => !!props.item && isSelected([props.item]))
+    const expandedRow = computed(() => !!props.item && isExpanded(props.item))
 
     useRender(() => (
       <tr
@@ -89,7 +102,7 @@ export const VDataTableRow = genericComponent<new <T>(
         onContextmenu={ props.onContextmenu as any }
         onDblclick={ props.onDblclick as any }
       >
-        { props.item && columns.value.map((column, i) => {
+        { props.item && columns.value.map(column => {
           const item = props.item!
           const slotName = `item.${column.key}` as const
           const headerSlotName = `header.${column.key}` as const
@@ -166,7 +179,7 @@ export const VDataTableRow = genericComponent<new <T>(
                       props: {
                         color: props.color,
                         disabled: !item.selectable,
-                        modelValue: isSelected([item]),
+                        modelValue: selectedRow.value,
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
                     }) ?? (
@@ -174,7 +187,8 @@ export const VDataTableRow = genericComponent<new <T>(
                         color={ props.color }
                         disabled={ !item.selectable }
                         density={ props.density }
-                        modelValue={ isSelected([item]) }
+                        aria-label={ selectedRow.value ? t(props.deselectRowText) : t(props.selectRowText) }
+                        modelValue={ selectedRow.value }
                         onClick={ withModifiers(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
                           ['stop']
@@ -187,14 +201,14 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-expand']?.({
                       ...slotProps,
                       props: {
-                        icon: isExpanded(item) ? props.collapseIcon : props.expandIcon,
+                        icon: expandedRow.value ? props.collapseIcon : props.expandIcon,
                         size: 'small',
                         variant: 'text',
                         onClick: withModifiers(() => toggleExpand(item), ['stop']),
                       },
                     }) ?? (
                       <VBtn
-                        icon={ isExpanded(item) ? props.collapseIcon : props.expandIcon }
+                        icon={ expandedRow.value ? props.collapseIcon : props.expandIcon }
                         size="small"
                         variant="text"
                         onClick={ withModifiers(() => toggleExpand(item), ['stop']) }

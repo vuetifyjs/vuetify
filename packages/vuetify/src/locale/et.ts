@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {
+      selectRow: 'Vali rida',
+      deselectRow: 'Tühista rea valik',
+      selectAll: 'Vali kõik read',
+      deselectAll: 'Tühista kõigi ridade valik ({0} valitud)',
+      selectAllSelected: 'Vali kõik read ({0} valitud)',
       sortDescending: 'Kahanevalt sorteeritud.',
       sortAscending: 'Kasvavalt sorteeritud.',
       sortNone: 'Ei ole sorteeritud.',

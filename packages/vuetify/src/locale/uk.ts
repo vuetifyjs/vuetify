@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Рядків на сторінці:',
     ariaLabel: {
+      selectRow: 'Вибрати рядок',
+      deselectRow: 'Скасувати вибір рядка',
+      selectAll: 'Вибрати всі рядки',
+      deselectAll: 'Скасувати вибір всіх рядків (вибрано {0})',
+      selectAllSelected: 'Вибрати всі рядки (вибрано {0})',
       sortDescending: 'Відсортовано за спаданням.',
       sortAscending: 'Відсортовано за зростанням.',
       sortNone: 'Не відсортовано.',

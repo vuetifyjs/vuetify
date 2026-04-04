@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: '1ページあたりの行数：',
     ariaLabel: {
+      selectRow: '行を選択',
+      deselectRow: '行の選択を解除',
+      selectAll: 'すべての行を選択',
+      deselectAll: 'すべての行の選択を解除 (選択済み {0})',
+      selectAllSelected: 'すべての行を選択 (選択済み {0})',
       sortDescending: '降順の並び替え。',
       sortAscending: '昇順の並び替え。',
       sortNone: 'ソートされていません。',
