@@ -90,7 +90,16 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { flatItems } = useGroupedItems(items, groupBy, opened, () => !!slots['group-summary'])
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
+    const {
+      isSelected,
+      select,
+      selectAll,
+      toggleSelect,
+      someSelected,
+      allSelected,
+      allItemsCount,
+      selectedItemsCount,
+    } = provideSelection(props, {
       allItems: items,
       currentPage: items,
     })
@@ -133,6 +142,8 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
+      allItemsCount: allItemsCount.value,
+      selectedItemsCount: selectedItemsCount.value,
       isSelected,
       select,
       selectAll,
@@ -147,6 +158,17 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       columns: columns.value,
       headers: headers.value,
     }))
+
+    const displayTableHeader = computed(() => {
+      if (props.hideDefaultHeader) {
+        return false
+      }
+      if (!props.mobile) {
+        return true
+      }
+      // display mobile table header if showSelect enabled, or sort enabled and some column is sortable
+      return props.showSelect || (!props.disableSort && columns.value.some(i => i.sortable))
+    })
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
@@ -172,7 +194,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                { !props.hideDefaultHeader && (
+                { displayTableHeader.value && (
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
