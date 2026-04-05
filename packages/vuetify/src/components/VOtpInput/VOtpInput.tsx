@@ -12,7 +12,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
@@ -106,6 +106,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       val => val.join('')
     )
     const { t } = useLocale()
+    const { isRtl } = useRtl()
 
     const length = computed(() => Number(props.length))
     const isMasked = computed(() => props.masked || props.type === 'password')
@@ -393,6 +394,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           <div
             class="v-otp-input__content"
             style={[dimensionStyles.value]}
+            dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
             { otpSlots.value.map((slot, i) => (
               <>
@@ -429,6 +431,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 class="v-otp-input__input"
                 type="text"
                 inputmode={ effectivePattern.value === OtpInputPatterns.numeric ? 'numeric' : 'text' }
+                dir={ isRtl.value ? 'rtl' : 'ltr' }
                 autocomplete="one-time-code"
                 maxlength={ length.value }
                 disabled={ props.disabled }
