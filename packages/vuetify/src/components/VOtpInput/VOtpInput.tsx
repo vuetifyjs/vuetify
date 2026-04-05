@@ -28,6 +28,14 @@ export type VOtpInputSlots = {
   loader: never
 }
 
+const OtpInputPatterns = {
+  numeric: /[0-9]/,
+  alpha: /[a-zA-Z]/,
+  alphanumeric: /[a-zA-Z0-9]/,
+} as const
+
+type OtpInputPattern = keyof typeof OtpInputPatterns
+
 export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
@@ -43,6 +51,10 @@ export const makeVOtpInputProps = propsFactory({
   masked: Boolean,
   modelValue: {
     type: [Number, String],
+    default: undefined,
+  },
+  pattern: {
+    type: [String, Object] as PropType<OtpInputPattern | RegExp>,
     default: undefined,
   },
   placeholder: String,
@@ -96,6 +108,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const { t } = useLocale()
 
     const length = computed(() => Number(props.length))
+    const isMasked = computed(() => props.masked || props.type === 'password')
+    const effectivePattern = computed(() => {
+      if (props.pattern instanceof RegExp) return props.pattern
+      if (props.pattern != null) return OtpInputPatterns[props.pattern as OtpInputPattern] ?? null
+      if (props.type === 'number') return OtpInputPatterns.numeric
+      return null
+    })
     const inputRef = ref<HTMLInputElement>()
 
     const renderSelectionStart = ref<number | null>(null)
@@ -186,7 +205,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const otpSlots = computed(() => {
       return Array.from({ length: length.value }, (_, i) => {
         const char = model.value[i] ?? null
-        const displayChar = char !== null && props.masked ? '•' : char
+        const displayChar = char !== null && isMasked.value ? '•' : char
 
         const isActive =
           isFocused.value &&
@@ -209,8 +228,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onInput (e: Event) {
       const target = e.target as HTMLInputElement
       let filtered = target.value
-      if (props.type === 'number') {
-        filtered = filtered.replace(/[^0-9]/g, '')
+      if (effectivePattern.value) {
+        filtered = filtered.split('').filter(c => effectivePattern.value!.test(c)).join('')
       }
       filtered = filtered.slice(0, length.value)
       target.value = filtered
@@ -271,8 +290,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onBeforeinput (e: InputEvent) {
-      // Block invalid characters
-      if (e.inputType === 'insertText' && props.type === 'number' && e.data && /[^0-9]/.test(e.data)) {
+      if (e.inputType === 'insertText' && e.data && effectivePattern.value && !effectivePattern.value.test(e.data)) {
         e.preventDefault()
         return
       }
@@ -315,7 +333,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       const input = inputRef.value!
       const text = e.clipboardData?.getData('text/plain').trim() ?? ''
-      const filtered = props.type === 'number' ? text.replace(/[^0-9]/g, '') : text
+      const filtered = effectivePattern.value
+        ? text.split('').filter(c => effectivePattern.value!.test(c)).join('')
+        : text
 
       const start = renderSelectionStart.value ?? 0
       const end = renderSelectionEnd.value ?? input.value.length
@@ -408,7 +428,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 ref={ inputRef }
                 class="v-otp-input__input"
                 type="text"
-                inputmode={ props.type === 'number' ? 'numeric' : 'text' }
+                inputmode={ effectivePattern.value === OtpInputPatterns.numeric ? 'numeric' : 'text' }
                 autocomplete="one-time-code"
                 maxlength={ length.value }
                 disabled={ props.disabled }
