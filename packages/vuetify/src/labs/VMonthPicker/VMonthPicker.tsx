@@ -23,6 +23,7 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { IconValue } from '@/composables/icons'
 import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 
@@ -44,6 +45,7 @@ export type VMonthPickerSlots = {
 export const makeVMonthPickerProps = propsFactory({
   disabled: Boolean,
   readonly: Boolean,
+  selectedIcon: [String, Function, Object] as PropType<IconValue>,
   modelValue: {
     type: null as any as PropType<string | string[] | null>,
     default: null,
@@ -170,6 +172,8 @@ export const VMonthPicker = genericComponent<new <
       })
     })
 
+    const isListView = computed(() => Number(props.monthsColumns) === 1)
+
     const monthRows = computed(() => {
       const cols = Number(props.monthsColumns) || 4
       return chunkArray(months.value, cols)
@@ -193,6 +197,9 @@ export const VMonthPicker = genericComponent<new <
           { ...pickerProps }
           class={[
             'v-month-picker',
+            {
+              'v-month-picker--list': isListView.value,
+            },
             props.class,
           ]}
           color={ props.color }
@@ -273,32 +280,40 @@ export const VMonthPicker = genericComponent<new <
                             return (
                               <div class="v-month-picker__months-row">
                                 { row.map((month, colIndex) => {
-                                  const i = rowIndex * cols + colIndex
-                                  const selected = isMonthSelected(i)
-                                  const rangeStart = isMonthRangeStart(i)
-                                  const rangeEnd = isMonthRangeEnd(i)
-                                  const rangeMiddle = isMonthRangeMiddle(i)
-                                  const previewStart = isMonthPreviewStart(i)
-                                  const previewEnd = isMonthPreviewEnd(i)
-                                  const previewMiddle = isMonthPreviewMiddle(i)
-                                  const previewed = isMonthPreviewed(i)
+                                  const index = rowIndex * cols + colIndex
+                                  const rangeStart = isMonthRangeStart(index)
+                                  const rangeEnd = isMonthRangeEnd(index)
+                                  const rangeMiddle = isMonthRangeMiddle(index)
+                                  const previewStart = isMonthPreviewStart(index)
+                                  const previewEnd = isMonthPreviewEnd(index)
+                                  const previewMiddle = isMonthPreviewMiddle(index)
+                                  const previewed = isMonthPreviewed(index)
+                                  const selected = isMonthSelected(index) && !rangeMiddle
+
+                                  const variant = isListView.value
+                                    ? (selected ? 'tonal' : 'text')
+                                    : (selected ? 'flat' : (month.isCurrent ? 'outlined' : 'text'))
+
+                                  const icon = isListView.value && selected ? (props.selectedIcon ?? '$complete') : undefined
 
                                   const btnProps = {
-                                    // active: selected && !rangeMiddle,
-                                    color: ((selected && !rangeMiddle) || month.isCurrent) ? selectionColor.value : undefined,
+                                    color: (selected || (month.isCurrent && !isListView.value))
+                                      ? selectionColor.value
+                                      : undefined,
                                     disabled: props.disabled || month.isDisabled,
                                     readonly: props.readonly,
-                                    rounded: true,
-                                    text: month.text,
-                                    variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
+                                    rounded: isListView.value ? 0 : true,
+                                    text: isListView.value ? month.label : month.text,
+                                    prependIcon: icon,
+                                    variant,
                                     'aria-label': month.isCurrent
                                       ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
                                       : month.label,
                                     'aria-current': month.isCurrent ? 'date' : undefined,
                                     'aria-selected': selected,
-                                    onClick: () => selectMonth(i),
-                                    onMouseenter: () => previewMonth(i),
-                                    onFocus: () => previewMonth(i),
+                                    onClick: () => selectMonth(index),
+                                    onMouseenter: () => previewMonth(index),
+                                    onFocus: () => previewMonth(index),
                                     onBlur: clearPreview,
                                   } as const
 
@@ -335,7 +350,7 @@ export const VMonthPicker = genericComponent<new <
                                       )}
                                       { slots.month?.({
                                         month,
-                                        i,
+                                        i: index,
                                         props: btnProps,
                                       }) ?? (
                                         <VBtn

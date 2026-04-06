@@ -14,7 +14,7 @@
       <v-slider
         v-model="columns"
         :max="4"
-        :min="2"
+        :min="1"
         :step="1"
         label="Columns"
         thumb-label
