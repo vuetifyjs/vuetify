@@ -42,6 +42,22 @@ export const makeVTrendlineProps = propsFactory({
   ...makeLineProps(),
 }, 'VTrendline')
 
+function resample (values: number[], targetCount: number): number[] {
+  const len = values.length
+  if (len === 0) return Array(targetCount).fill(0)
+  if (len === 1) return Array(targetCount).fill(values[0])
+
+  const result: number[] = []
+  for (let i = 0; i < targetCount; i++) {
+    const t = i / (targetCount - 1) * (len - 1)
+    const lo = Math.floor(t)
+    const hi = Math.min(lo + 1, len - 1)
+    const frac = t - lo
+    result.push(values[lo] + (values[hi] - values[lo]) * frac)
+  }
+  return result
+}
+
 export const VTrendline = genericComponent<VTrendlineSlots>()({
   name: 'VTrendline',
 
@@ -59,8 +75,15 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
     const lastLength = ref(0)
+    const hasDrawn = ref(false)
     const fillPath = ref<SVGPathElement | null>(null)
     const strokePath = ref<SVGPathElement | null>(null)
+    const animationDuration = computed(() =>
+      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+    )
+    const animationEasing = computed(() =>
+      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+    )
 
     function genPoints (
       values: number[],
@@ -110,16 +133,48 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     })
 
     const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
-    const points = computed(() => genPoints(items.value, boundary.value))
 
-    const extendedPoints = computed(() => {
-      if (!props.inset || points.value.length < 2) return points.value
+    // When animation is enabled, resample to a consistent point count
+    // so the SVG path always has the same number of commands for CSS d transitions
+    const sampleCount = ref(0)
 
-      const allPoints = points.value
-      const first = allPoints[0]
-      const second = allPoints[1]
-      const last = allPoints[allPoints.length - 1]
-      const secondLast = allPoints[allPoints.length - 2]
+    // When sampleCount grows (new dataset is longer than any seen before),
+    // manually patch the DOM path to old-data-at-new-count before Vue re-renders,
+    // so the browser sees same-structure paths and can CSS-transition between them.
+    watch(items, (newVal, oldVal) => {
+      if (!props.animation) return
+
+      const prevCount = sampleCount.value
+      if (newVal.length > prevCount) {
+        sampleCount.value = newVal.length
+
+        if (prevCount > 0 && oldVal) {
+          const oldResampled = resample(oldVal, sampleCount.value)
+          for (const [pathRef, fill] of [[strokePath, false], [fillPath, true]] as const) {
+            const path = pathRef.value
+            if (!path) continue
+            path.setAttribute('d', generatePathString(oldResampled, fill))
+          }
+        }
+      }
+    }, { immediate: true })
+
+    const normalizedItems = computed(() => {
+      if (!props.animation || !sampleCount.value || items.value.length === sampleCount.value) {
+        return items.value
+      }
+      return resample(items.value, sampleCount.value)
+    })
+
+    const points = computed(() => genPoints(normalizedItems.value, boundary.value))
+
+    function extendPoints (pts: Point[]): Point[] {
+      if (!props.inset || pts.length < 2) return pts
+
+      const first = pts[0]
+      const second = pts[1]
+      const last = pts[pts.length - 1]
+      const secondLast = pts[pts.length - 2]
 
       const slopeStart = (second.y - first.y) / (second.x - first.x)
       const slopeEnd = (last.y - secondLast.y) / (last.x - secondLast.x)
@@ -127,8 +182,24 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const ghostStart: Point = { x: 0, y: first.y - first.x * slopeStart, value: first.value }
       const ghostEnd: Point = { x: totalWidth.value, y: last.y + (totalWidth.value - last.x) * slopeEnd, value: last.value }
 
-      return [ghostStart, ...allPoints, ghostEnd]
-    })
+      return [ghostStart, ...pts, ghostEnd]
+    }
+
+    const extendedPoints = computed(() => extendPoints(points.value))
+
+    function generatePathString (values: number[], fill: boolean): string {
+      const pts = extendPoints(genPoints(values, boundary.value))
+      return buildPath(pts.slice(), fill)
+    }
+
+    function buildPath (pts: Point[], fill: boolean): string {
+      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth ?? 0)
+      const h = parseInt(props.height, 10)
+      if (props.smoothMode === 'monotone') {
+        return genMonotonePath(pts, smoothValue, fill, h)
+      }
+      return genRoundedPath(pts, smoothValue, fill, h, !!props.animation)
+    }
 
     const parsedLabels = computed(() => {
       const labels = []
@@ -151,10 +222,31 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       return labels
     })
 
+    function applyDTransition (path: SVGPathElement, duration: number, easing: string) {
+      path.style.transition = `d ${duration}ms ${easing}`
+    }
+
     watch(() => props.modelValue, async () => {
       await nextTick()
 
-      if (!props.autoDraw || !strokePath.value || PREFERS_REDUCED_MOTION()) return
+      if (PREFERS_REDUCED_MOTION()) return
+
+      // Animation-only mode (no auto-draw): just ensure d transition is set
+      if (!props.autoDraw) {
+        if (props.animation && strokePath.value) {
+          for (const path of [fillPath.value, strokePath.value]) {
+            if (path) applyDTransition(path, animationDuration.value, animationEasing.value)
+          }
+        }
+        return
+      }
+
+      if (!strokePath.value) return
+
+      if (props.autoDraw === 'once' && hasDrawn.value) return
+      hasDrawn.value = true
+
+      const shouldDrawOnce = props.autoDraw === 'once'
 
       if (!props.fill) {
         const path = strokePath.value
@@ -163,9 +255,25 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         path.style.strokeDasharray = `${length}`
         path.style.strokeDashoffset = `${length}`
         path.getBoundingClientRect()
-        path.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+        const dTransition = props.animation
+          ? `, d ${animationDuration.value}ms ${animationEasing.value}`
+          : ''
+        path.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}${dTransition}`
         path.style.strokeDashoffset = '0'
         lastLength.value = length
+
+        if (shouldDrawOnce) {
+          path.addEventListener('transitionend', e => {
+            if (e.propertyName !== 'stroke-dashoffset') return
+            path.style.strokeDasharray = ''
+            path.style.strokeDashoffset = ''
+            if (props.animation) {
+              applyDTransition(path, animationDuration.value, animationEasing.value)
+            } else {
+              path.style.transition = ''
+            }
+          }, { once: true })
+        }
       } else {
         for (const path of [fillPath.value, strokePath.value]) {
           if (!path) continue
@@ -173,24 +281,30 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           path.style.transition = 'none'
           path.style.transform = `scaleY(0)`
           path.getBoundingClientRect()
-          path.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          const dTransition = props.animation
+            ? `, d ${animationDuration.value}ms ${animationEasing.value}`
+            : ''
+          path.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}${dTransition}`
           path.style.transform = `scaleY(1)`
+
+          if (shouldDrawOnce) {
+            path.addEventListener('transitionend', e => {
+              if (e.propertyName !== 'transform') return
+              path.style.transform = ''
+              path.style.transformOrigin = ''
+              if (props.animation) {
+                applyDTransition(path, animationDuration.value, animationEasing.value)
+              } else {
+                path.style.transition = ''
+              }
+            }, { once: true })
+          }
         }
       }
     }, { immediate: true })
 
     function genPath (fill: boolean) {
-      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth ?? 0)
-      const pathGen = props.smoothMode === 'monotone'
-        ? genMonotonePath
-        : genRoundedPath
-
-      return pathGen(
-        extendedPoints.value.slice(),
-        smoothValue,
-        fill,
-        parseInt(props.height, 10)
-      )
+      return buildPath(extendedPoints.value.slice(), fill)
     }
 
     // Hover / tooltip state

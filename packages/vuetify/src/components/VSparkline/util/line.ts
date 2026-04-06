@@ -7,6 +7,11 @@ import type { ClassValue } from '@/composables/component'
 
 export type SparklineItem = string | number | { value: number }
 
+export type SparklineAnimationConfig = {
+  duration?: number
+  easing?: string
+}
+
 export type SparklineTooltipConfig = {
   titleFormat?: (item: { index: number, value: number }) => string
   offset?: number
@@ -15,7 +20,14 @@ export type SparklineTooltipConfig = {
 }
 
 export const makeLineProps = propsFactory({
-  autoDraw: Boolean,
+  animation: {
+    type: [Boolean, Object] as PropType<boolean | SparklineAnimationConfig>,
+    default: false,
+  },
+  autoDraw: {
+    type: [Boolean, String] as PropType<boolean | 'once'>,
+    default: false,
+  },
   autoDrawDuration: [Number, String],
   autoDrawEasing: {
     type: String,

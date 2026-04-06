@@ -352,6 +352,8 @@
   },
   "VSparkline": {
     "props": {
+      "animation": "4.1.0",
+      "autoDraw": "4.1.0",
       "inset": "4.1.0",
       "interactive": "4.1.0",
       "markerSize": "4.1.0",

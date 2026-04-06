@@ -1,6 +1,7 @@
 {
   "props": {
-    "autoDraw": "Trace the length of the line when first rendered.",
+    "animation": "Enables smooth transitions when values change. When `true`, uses default duration (300ms) and easing (`ease`). Can be an object with `duration` (ms) and `easing` (CSS easing) properties.",
+    "autoDraw": "Trace the length of the line when first rendered. Since 4.1.0 it accepts `'once'`, to make the animation play only on mount and make the subsequent value changes interpolate smoothly.",
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation.",
     "autoDrawEasing": "The easing function to use for the trace animation.",
     "autoLineWidth": "Automatically expand bars to use space efficiently.",

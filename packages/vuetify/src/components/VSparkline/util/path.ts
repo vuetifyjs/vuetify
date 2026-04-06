@@ -7,7 +7,7 @@ import { Point } from '../VSparkline'
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
  */
-export function genRoundedPath (points: Point[], radius: number, fill = false, height = 75) {
+export function genRoundedPath (points: Point[], radius: number, fill = false, height = 75, consistentStructure = false) {
   if (points.length === 0) return ''
   const start = points.shift()!
   const end = points[points.length - 1]
@@ -20,7 +20,13 @@ export function genRoundedPath (points: Point[], radius: number, fill = false, h
         const prev = points[index - 1] || start
         const isCollinear = next && checkCollinear(next, point, prev)
 
-        if (!next || isCollinear) {
+        if (!next) {
+          return consistentStructure
+            ? `L${point.x} ${point.y}S${point.x} ${point.y} ${point.x} ${point.y}`
+            : `L${point.x} ${point.y}`
+        }
+
+        if (isCollinear && !consistentStructure) {
           return `L${point.x} ${point.y}`
         }
 

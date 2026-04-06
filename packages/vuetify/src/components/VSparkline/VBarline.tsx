@@ -2,7 +2,7 @@
 import { VTooltip } from '@/components/VTooltip/VTooltip'
 
 // Utilities
-import { computed, Fragment, nextTick, shallowRef, useId, watch } from 'vue'
+import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
@@ -56,7 +56,14 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const uid = useId()
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
+    const hasDrawn = ref(false)
     const clipRects = shallowRef<SVGRectElement[]>([])
+    const animationDuration = computed(() =>
+      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+    )
+    const animationEasing = computed(() =>
+      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+    )
 
     const hasLabels = computed(() => {
       return Boolean(
@@ -68,7 +75,9 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
     const lineWidth = computed(() => parseFloat(props.lineWidth) || 4)
 
-    const totalWidth = computed(() => Math.max(props.modelValue.length * lineWidth.value, Number(props.width)))
+    const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
+
+    const totalWidth = computed(() => Math.max(items.value.length * lineWidth.value, Number(props.width)))
 
     const boundary = computed<Boundary>(() => {
       return {
@@ -78,7 +87,6 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         maxY: parseInt(props.height, 10),
       }
     })
-    const items = computed(() => props.modelValue.map(item => getPropertyFromItem(item, props.itemValue, item)))
 
     function genBars (
       values: number[],
@@ -111,12 +119,66 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     }
 
     const bars = computed(() => genBars(items.value, boundary.value))
+    const prevBarCount = ref(0)
+
+    function applyTransition (el: SVGRectElement, duration: number, easing: string) {
+      el.style.transition = `y ${duration}ms ${easing}, height ${duration}ms ${easing}`
+    }
+
+    function collapseNewBars (fromIndex: number, duration: number, easing: string) {
+      const barsData = bars.value
+      for (let i = fromIndex; i < barsData.length; i++) {
+        const el = clipRects.value[i]
+        if (!el) continue
+
+        // Snap to collapsed at bar's baseline
+        el.style.transition = 'none'
+        el.setAttribute('y', String(barsData[i].y + barsData[i].height))
+        el.setAttribute('height', '0')
+        el.getBoundingClientRect()
+
+        // Animate to final state
+        applyTransition(el, duration, easing)
+        el.setAttribute('y', String(barsData[i].y))
+        el.setAttribute('height', String(barsData[i].height))
+      }
+    }
 
     watch(() => props.modelValue, async () => {
       await nextTick()
 
-      if (!props.autoDraw || !clipRects.value.length || PREFERS_REDUCED_MOTION()) return
+      if (PREFERS_REDUCED_MOTION() || !clipRects.value.length) return
 
+      const oldCount = prevBarCount.value
+      prevBarCount.value = bars.value.length
+
+      // Animation-only mode (no auto-draw): just ensure transition is set
+      if (!props.autoDraw) {
+        if (props.animation) {
+          clipRects.value.forEach(el => {
+            if (el) applyTransition(el, animationDuration.value, animationEasing.value)
+          })
+          if (bars.value.length > oldCount && oldCount > 0) {
+            collapseNewBars(oldCount, animationDuration.value, animationEasing.value)
+          }
+        }
+        return
+      }
+
+      if (props.autoDraw === 'once' && hasDrawn.value) {
+        if (props.animation) {
+          clipRects.value.forEach(el => {
+            if (el) applyTransition(el, animationDuration.value, animationEasing.value)
+          })
+          if (bars.value.length > oldCount && oldCount > 0) {
+            collapseNewBars(oldCount, animationDuration.value, animationEasing.value)
+          }
+        }
+        return
+      }
+      hasDrawn.value = true
+
+      const shouldDrawOnce = props.autoDraw === 'once'
       const barsData = bars.value
       clipRects.value.forEach((el, i) => {
         const bar = barsData[i]
@@ -129,9 +191,16 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         el.getBoundingClientRect()
 
         // Animate to final state
-        el.style.transition = `y ${autoDrawDuration.value}ms ${props.autoDrawEasing}, height ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+        applyTransition(el, autoDrawDuration.value, props.autoDrawEasing)
         el.setAttribute('y', String(bar.y))
         el.setAttribute('height', String(bar.height))
+
+        // After initial draw, switch to animation timing for subsequent changes
+        if (shouldDrawOnce && props.animation) {
+          el.addEventListener('transitionend', () => {
+            applyTransition(el, animationDuration.value, animationEasing.value)
+          }, { once: true })
+        }
       })
     }, { immediate: true })
 
@@ -367,7 +436,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
             <rect
               x={ 0 }
               y={ 0 }
-              width={ Math.max(props.modelValue.length * lineWidth.value, Number(props.width)) }
+              width={ totalWidth.value }
               height={ props.height }
             ></rect>
           </g>

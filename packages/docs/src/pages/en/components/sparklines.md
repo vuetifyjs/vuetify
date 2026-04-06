@@ -39,6 +39,12 @@ A sparkline is a tiny chart that provides a visual representation of data. The s
 
 ### Props
 
+#### Animation
+
+The **animation** prop enables smooth transitions when values change. Combined with **auto-draw** set to **once**, the sparkline draws on mount then smoothly interpolates between datasets. Toggle between weekly, monthly, and yearly views to see the effect.
+
+<ExamplesExample file="v-sparkline/prop-animation" />
+
 #### Fill
 
 You can create a `v-sparkline` with fill using the `fill` property.
