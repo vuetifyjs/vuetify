@@ -339,18 +339,18 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         role="navigation"
         aria-label={ t(props.ariaLabel) }
         onKeydown={ onKeydown }
-        data-test="v-pagination-root"
+        data-testid="v-pagination-root"
       >
         <ul class="v-pagination__list">
           {[true, 'only-first'].includes(props.showFirstLastPage) && (
-            <li key="first" class="v-pagination__first" data-test="v-pagination-first">
+            <li key="first" class="v-pagination__first" data-testid="v-pagination-first">
               { slots.first ? slots.first(controls.value.first!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.first } />
               )}
             </li>
           )}
 
-          <li key="prev" class="v-pagination__prev" data-test="v-pagination-prev">
+          <li key="prev" class="v-pagination__prev" data-testid="v-pagination-prev">
             { slots.prev ? slots.prev(controls.value.prev) : (
               <VBtn _as="VPaginationBtn" { ...controls.value.prev } />
             )}
@@ -365,7 +365,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
                   'v-pagination__item--is-active': item.isActive,
                 },
               ]}
-              data-test="v-pagination-item"
+              data-testid="v-pagination-item"
             >
               { slots.item ? slots.item(item) : (
                 <VBtn _as="VPaginationBtn" { ...item.props }>{ item.page }</VBtn>
@@ -373,18 +373,14 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             </li>
           ))}
 
-          <li
-            key="next"
-            class="v-pagination__next"
-            data-test="v-pagination-next"
-          >
+          <li key="next" class="v-pagination__next" data-testid="v-pagination-next">
             { slots.next ? slots.next(controls.value.next) : (
               <VBtn _as="VPaginationBtn" { ...controls.value.next } />
             )}
           </li>
 
           { props.showFirstLastPage === true && (
-            <li key="last" class="v-pagination__last" data-test="v-pagination-last">
+            <li key="last" class="v-pagination__last" data-testid="v-pagination-last">
               { slots.last ? slots.last(controls.value.last!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.last } />
               )}

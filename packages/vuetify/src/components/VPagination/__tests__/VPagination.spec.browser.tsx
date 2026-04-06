@@ -28,8 +28,8 @@ describe('VPagination', () => {
       <VPagination showFirstLastPage={ false } length="3" />
     ))
 
-    expect(screen.queryByCSS('[data-test="v-pagination-first"]')).not.toBeInTheDocument()
-    expect(screen.queryByCSS('[data-test="v-pagination-last"]')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-first')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-last')).not.toBeInTheDocument()
   })
 
   it('should render without last page button', () => {
@@ -37,8 +37,8 @@ describe('VPagination', () => {
       <VPagination showFirstLastPage="only-first" showlength="3" />
     ))
 
-    expect(screen.queryByCSS('[data-test="v-pagination-first"]')).toBeInTheDocument()
-    expect(screen.queryByCSS('[data-test="v-pagination-last"]')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-first')).toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-last')).not.toBeInTheDocument()
   })
 
   it('should react to mouse navigation', async () => {
