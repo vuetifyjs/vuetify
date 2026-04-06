@@ -114,11 +114,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const extendedPoints = computed(() => {
       if (!props.inset || points.value.length < 2) return points.value
 
-      const pts = points.value
-      const first = pts[0]
-      const second = pts[1]
-      const last = pts[pts.length - 1]
-      const secondLast = pts[pts.length - 2]
+      const allPoints = points.value
+      const first = allPoints[0]
+      const second = allPoints[1]
+      const last = allPoints[allPoints.length - 1]
+      const secondLast = allPoints[allPoints.length - 2]
 
       const slopeStart = (second.y - first.y) / (second.x - first.x)
       const slopeEnd = (last.y - secondLast.y) / (last.x - secondLast.x)
@@ -126,7 +126,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const ghostStart: Point = { x: 0, y: first.y - first.x * slopeStart, value: first.value }
       const ghostEnd: Point = { x: totalWidth.value, y: last.y + (totalWidth.value - last.x) * slopeEnd, value: last.value }
 
-      return [ghostStart, ...pts, ghostEnd]
+      return [ghostStart, ...allPoints, ghostEnd]
     })
 
     const parsedLabels = computed(() => {
@@ -156,24 +156,24 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       if (!props.autoDraw || !strokePath.value || PREFERS_REDUCED_MOTION()) return
 
       if (!props.fill) {
-        const el = strokePath.value
-        const length = el.getTotalLength()
-        el.style.transition = 'none'
-        el.style.strokeDasharray = `${length}`
-        el.style.strokeDashoffset = `${length}`
-        el.getBoundingClientRect()
-        el.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-        el.style.strokeDashoffset = '0'
+        const path = strokePath.value
+        const length = path.getTotalLength()
+        path.style.transition = 'none'
+        path.style.strokeDasharray = `${length}`
+        path.style.strokeDashoffset = `${length}`
+        path.getBoundingClientRect()
+        path.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+        path.style.strokeDashoffset = '0'
         lastLength.value = length
       } else {
-        for (const el of [fillPath.value, strokePath.value]) {
-          if (!el) continue
-          el.style.transformOrigin = 'bottom center'
-          el.style.transition = 'none'
-          el.style.transform = `scaleY(0)`
-          el.getBoundingClientRect()
-          el.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
-          el.style.transform = `scaleY(1)`
+        for (const path of [fillPath.value, strokePath.value]) {
+          if (!path) continue
+          path.style.transformOrigin = 'bottom center'
+          path.style.transition = 'none'
+          path.style.transform = `scaleY(0)`
+          path.getBoundingClientRect()
+          path.style.transition = `transform ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+          path.style.transform = `scaleY(1)`
         }
       }
     }, { immediate: true })
@@ -200,20 +200,20 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     function getPathLengthAtX (svgPath: SVGPathElement, targetX: number): number {
       const total = svgPath.getTotalLength()
-      let lo = 0
-      let hi = total
+      let low = 0
+      let high = total
       for (let i = 0; i < 32; i++) {
-        const mid = (lo + hi) / 2
-        if (svgPath.getPointAtLength(mid).x < targetX) lo = mid
-        else hi = mid
+        const mid = (low + high) / 2
+        if (svgPath.getPointAtLength(mid).x < targetX) low = mid
+        else high = mid
       }
-      return (lo + hi) / 2
+      return (low + high) / 2
     }
 
     const markerPathLength = shallowRef(0)
-    watch(currentPoint, p => {
-      if (!p || !strokePath.value) return
-      markerPathLength.value = getPathLengthAtX(strokePath.value, p.x)
+    watch(currentPoint, point => {
+      if (!point || !strokePath.value) return
+      markerPathLength.value = getPathLengthAtX(strokePath.value, point.x)
     })
 
     const animatedLength = useTransition(markerPathLength, { duration: 150, transition: easingPatterns.easeOutQuad })
@@ -222,12 +222,12 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     const tooltipTarget = computed<[number, number] | undefined>(() => {
       if (!currentPoint.value || !svgRef.value) return undefined
-      const ctm = svgRef.value.getScreenCTM()
-      if (!ctm) return undefined
-      const pt = svgRef.value.createSVGPoint()
-      pt.x = markerCx.value
-      pt.y = markerCy.value
-      const { x, y } = pt.matrixTransform(ctm)
+      const matrix = svgRef.value.getScreenCTM()
+      if (!matrix) return undefined
+      const svgPoint = svgRef.value.createSVGPoint()
+      svgPoint.x = markerCx.value
+      svgPoint.y = markerCy.value
+      const { x, y } = svgPoint.matrixTransform(matrix)
       return [x, y]
     })
 
@@ -249,9 +249,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
         let nearest = 0
         let minDist = Infinity
-        points.value.forEach((p, i) => {
-          const dist = Math.abs(p.x - svgX)
-          if (dist < minDist) { minDist = dist; nearest = i }
+        points.value.forEach((point, index) => {
+          const dist = Math.abs(point.x - svgX)
+          if (dist < minDist) { minDist = dist; nearest = index }
         })
 
         currentIndex.value = nearest
@@ -294,13 +294,13 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     function onSvgKeydown (e: KeyboardEvent) {
       if (!points.value.length) return
-      const len = points.value.length
+      const length = points.value.length
 
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault()
-        const dir = e.key === 'ArrowLeft' ? -1 : 1
-        const current = currentIndex.value ?? (dir === 1 ? -1 : len)
-        const next = Math.max(0, Math.min(len - 1, current + dir))
+        const direction = e.key === 'ArrowLeft' ? -1 : 1
+        const current = currentIndex.value ?? (direction === 1 ? -1 : length)
+        const next = Math.max(0, Math.min(length - 1, current + direction))
         setIndex(next)
       }
     }

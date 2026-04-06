@@ -21,22 +21,22 @@ export function genPath (points: Point[], smooth: number, fill = false, height =
   const suffix = fill ? `L${end.x} ${height - start.x + 2} Z` : ''
 
   if (smooth === 0 || points.length < 3) {
-    return prefix + points.slice(1).map(p => `L${p.x} ${p.y}`).join('') + suffix
+    return prefix + points.slice(1).map(point => `L${point.x} ${point.y}`).join('') + suffix
   }
 
   const tension = Math.min(smooth / 8, 1)
 
-  const curves = points.slice(1).map((curr, i) => {
-    const prev = points[i]
-    const prevPrev = points[Math.max(0, i - 1)]
-    const next = points[Math.min(points.length - 1, i + 2)]
+  const curves = points.slice(1).map((curr, index) => {
+    const prev = points[index]
+    const prevPrev = points[Math.max(0, index - 1)]
+    const next = points[Math.min(points.length - 1, index + 2)]
 
-    const cp1x = prev.x + (curr.x - prevPrev.x) * tension / 6
-    const cp1y = prev.y + (curr.y - prevPrev.y) * tension / 6
-    const cp2x = curr.x - (next.x - prev.x) * tension / 6
-    const cp2y = curr.y - (next.y - prev.y) * tension / 6
+    const controlPoint1X = prev.x + (curr.x - prevPrev.x) * tension / 6
+    const controlPoint1Y = prev.y + (curr.y - prevPrev.y) * tension / 6
+    const controlPoint2X = curr.x - (next.x - prev.x) * tension / 6
+    const controlPoint2Y = curr.y - (next.y - prev.y) * tension / 6
 
-    return `C${cp1x} ${cp1y} ${cp2x} ${cp2y} ${curr.x} ${curr.y}`
+    return `C${controlPoint1X} ${controlPoint1Y} ${controlPoint2X} ${controlPoint2Y} ${curr.x} ${curr.y}`
   })
 
   return prefix + curves.join('') + suffix
