@@ -1,12 +1,17 @@
+// Components
+import { VTooltip } from '@/components/VTooltip/VTooltip'
+
 // Utilities
-import { computed, useId } from 'vue'
+import { computed, Fragment, nextTick, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
 import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
 export type VBarlineSlots = {
   default: void
   label: { index: number, value: string }
+  tooltip: { index: number, value: number }
 }
 
 export type SparklineItem = number | { value: number }
@@ -39,12 +44,19 @@ export const makeVBarlineProps = propsFactory({
 export const VBarline = genericComponent<VBarlineSlots>()({
   name: 'VBarline',
 
+  inheritAttrs: false,
+
   props: makeVBarlineProps(),
 
-  setup (props, { slots }) {
+  emits: {
+    'update:currentIndex': (_index: number | null) => true,
+  },
+
+  setup (props, { slots, attrs, emit }) {
     const uid = useId()
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
+    const clipRects = shallowRef<SVGRectElement[]>([])
 
     const hasLabels = computed(() => {
       return Boolean(
@@ -98,6 +110,31 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       })
     }
 
+    const bars = computed(() => genBars(items.value, boundary.value))
+
+    watch(() => props.modelValue, async () => {
+      await nextTick()
+
+      if (!props.autoDraw || !clipRects.value.length || PREFERS_REDUCED_MOTION()) return
+
+      const barsData = bars.value
+      clipRects.value.forEach((el, i) => {
+        const bar = barsData[i]
+        if (!el || !bar) return
+
+        // Snap to collapsed state
+        el.style.transition = 'none'
+        el.setAttribute('y', String(bar.y + bar.height))
+        el.setAttribute('height', '0')
+        el.getBoundingClientRect()
+
+        // Animate to final state
+        el.style.transition = `y ${autoDrawDuration.value}ms ${props.autoDrawEasing}, height ${autoDrawDuration.value}ms ${props.autoDrawEasing}`
+        el.setAttribute('y', String(bar.y))
+        el.setAttribute('height', String(bar.height))
+      })
+    }, { immediate: true })
+
     const parsedLabels = computed(() => {
       const labels = []
       const points = genBars(items.value, boundary.value)
@@ -122,18 +159,137 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       return labels
     })
 
-    const bars = computed(() => genBars(items.value, boundary.value))
     const offsetX = computed(() => bars.value.length === 1
       ? (boundary.value.maxX - lineWidth.value) / 2
       : (Math.abs(bars.value[0].x - (bars.value[1].x)) - lineWidth.value) / 2
     )
     const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
+    const columnWidth = computed(() => {
+      const len = bars.value.length
+      return totalWidth.value / (len === 1 ? 2 : len)
+    })
+
+    // Hover / tooltip state
+    const svgRef = shallowRef<SVGSVGElement | null>(null)
+    const currentIndex = shallowRef<number | null>(null)
+    const tooltipVisible = shallowRef(false)
+
+    const targetX = shallowRef(0)
+    const targetY = shallowRef(0)
+    const targetHeight = shallowRef(0)
+
+    watch(currentIndex, idx => {
+      if (idx === null) return
+      const bar = bars.value[idx]
+      if (!bar) return
+      targetX.value = bar.x + offsetX.value
+      targetY.value = bar.y
+      targetHeight.value = bar.height
+    })
+
+    const transitionOpts = { duration: 150, transition: easingPatterns.easeOutQuad }
+    const animatedX = useTransition(targetX, transitionOpts)
+    const animatedY = useTransition(targetY, transitionOpts)
+
+    const tooltipTarget = computed<[number, number] | undefined>(() => {
+      if (currentIndex.value === null || !svgRef.value) return undefined
+      const ctm = svgRef.value.getScreenCTM()
+      if (!ctm) return undefined
+      const pt = svgRef.value.createSVGPoint()
+      pt.x = animatedX.value + lineWidth.value / 2
+      pt.y = animatedY.value
+      const { x, y } = pt.matrixTransform(ctm)
+      return [x, y]
+    })
+
+    const tooltipConfig = computed(() => ({
+      showCrosshair: false,
+      titleFormat: (item: { index: number, value: number }) => String(item.value),
+      ...(typeof props.tooltip === 'object' ? props.tooltip : {}),
+    }))
+
+    let frame = -1
+
+    function onSvgMousemove (e: MouseEvent) {
+      const target = e.currentTarget as SVGSVGElement
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const rect = target.getBoundingClientRect()
+        const svgX = (e.clientX - rect.left) / rect.width * totalWidth.value
+
+        let nearest = 0
+        let minDist = Infinity
+        bars.value.forEach((bar, i) => {
+          const barCenter = bar.x + offsetX.value + lineWidth.value / 2
+          const dist = Math.abs(barCenter - svgX)
+          if (dist < minDist) { minDist = dist; nearest = i }
+        })
+
+        currentIndex.value = nearest
+        emit('update:currentIndex', nearest)
+        tooltipVisible.value = true
+      })
+    }
+
+    function onSvgMouseleave () {
+      cancelAnimationFrame(frame)
+      tooltipVisible.value = false
+      if (!props.tooltip) {
+        currentIndex.value = null
+        emit('update:currentIndex', null)
+      }
+    }
+
+    function onTooltipAfterLeave () {
+      currentIndex.value = null
+      emit('update:currentIndex', null)
+    }
+
+    function setIndex (index: number | null) {
+      currentIndex.value = index
+      emit('update:currentIndex', index)
+      tooltipVisible.value = index !== null
+    }
+
+    function onSvgFocus () {
+      if (!bars.value.length) return
+      setIndex(bars.value.length - 1)
+    }
+
+    function onSvgBlur () {
+      tooltipVisible.value = false
+      if (!props.tooltip) {
+        setIndex(null)
+      }
+    }
+
+    function onSvgKeydown (e: KeyboardEvent) {
+      if (!bars.value.length) return
+      const len = bars.value.length
+
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+        const dir = e.key === 'ArrowLeft' ? -1 : 1
+        const current = currentIndex.value ?? (dir === 1 ? -1 : len)
+        const next = Math.max(0, Math.min(len - 1, current + dir))
+        setIndex(next)
+      }
+    }
 
     useRender(() => {
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
       return (
+        <Fragment>
         <svg
+          ref={ svgRef }
           display="block"
+          tabindex={ props.interactive ? 0 : undefined }
+          onMousemove={ props.interactive ? onSvgMousemove : undefined }
+          onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
+          onFocus={ props.interactive ? onSvgFocus : undefined }
+          onBlur={ props.interactive ? onSvgBlur : undefined }
+          onKeydown={ props.interactive ? onSvgKeydown : undefined }
+          { ...attrs }
         >
           <defs>
             <linearGradient
@@ -154,34 +310,16 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
           <clipPath id={ `${id.value}-clip` }>
             {
-              bars.value.map(item => (
+              bars.value.map((item, i) => (
                 <rect
+                    ref={ (el: any) => { if (el) clipRects.value[i] = el } }
                     x={ item.x + offsetX.value }
                     y={ item.y }
                     width={ lineWidth.value }
                     height={ item.height }
                     rx={ smooth.value }
                     ry={ smooth.value }
-                >
-                  { props.autoDraw && !PREFERS_REDUCED_MOTION() && (
-                    <>
-                      <animate
-                        attributeName="y"
-                        from={ item.y + item.height }
-                        to={ item.y }
-                        dur={ `${autoDrawDuration.value}ms` }
-                        fill="freeze"
-                      />
-                      <animate
-                        attributeName="height"
-                        from="0"
-                        to={ item.height }
-                        dur={ `${autoDrawDuration.value}ms` }
-                        fill="freeze"
-                      />
-                    </>
-                  )}
-                </rect>
+                />
               ))
             }
           </clipPath>
@@ -209,6 +347,19 @@ export const VBarline = genericComponent<VBarlineSlots>()({
             </g>
           )}
 
+          { props.interactive && currentIndex.value !== null && (
+            <rect
+              key="highlight"
+              x={ animatedX.value - offsetX.value }
+              y={ 0 }
+              width={ columnWidth.value }
+              height={ props.height }
+              fill="currentColor"
+              opacity={ 0.1 }
+              pointer-events="none"
+            />
+          )}
+
           <g
             clip-path={ `url(#${id.value}-clip)` }
             fill={ `url(#${id.value})` }
@@ -221,6 +372,29 @@ export const VBarline = genericComponent<VBarlineSlots>()({
             ></rect>
           </g>
         </svg>
+
+        { !!props.tooltip && (
+          <VTooltip
+            key="tooltip"
+            modelValue={ tooltipVisible.value }
+            target={ tooltipTarget.value }
+            offset={ tooltipConfig.value.offset }
+            contentClass={ tooltipConfig.value.class }
+            location="top center"
+            onAfterLeave={ onTooltipAfterLeave }
+          >
+            { currentIndex.value !== null && (
+              slots.tooltip?.({
+                index: currentIndex.value,
+                value: bars.value[currentIndex.value].value,
+              }) ?? tooltipConfig.value.titleFormat({
+                index: currentIndex.value,
+                value: bars.value[currentIndex.value].value,
+              })
+            )}
+          </VTooltip>
+        )}
+        </Fragment>
       )
     })
   },

@@ -7,7 +7,7 @@
     "fill": "Using the **fill** property allows you to better customize the look and feel of your sparkline.",
     "gradient": "An array of colors to use as a linear-gradient.",
     "gradientDirection": "The direction the gradient should run.",
-    "height": "Height of the SVG trendline or bars.",
+    "height": "Height of the SVG container.",
     "id": "The id of the component.",
     "inset": "Extends the line beyond the chart boundary so it runs edge-to-edge.",
     "interactive": "Enables hover tracking, keyboard navigation (arrow keys), and focus support. Required for **tooltip** to work.",
@@ -25,7 +25,7 @@
     "smooth": "Controls the curve tension. `true` defaults to 8, `false` or `0` gives straight lines. Higher values produce smoother curves.",
     "tooltip": "Displays a tooltip on the active data point. Requires **interactive**. Can be `true` or an object with `titleFormat`, `offset`, and `showCrosshair` options.",
     "type": "Choose between a trendline or bars.",
-    "width": "Width of the SVG trendline or bars."
+    "width": "Width of the SVG container."
   },
   "events": {
     "update:currentIndex": "Emitted when the active data point changes via mouse hover, keyboard navigation, or focus. The payload is the point index, or `null` when no point is active."

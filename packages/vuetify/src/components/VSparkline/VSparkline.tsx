@@ -12,8 +12,6 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-// Types
-
 export const makeVSparklineProps = propsFactory({
   type: {
     type: String as PropType<'trend' | 'bar'>,
