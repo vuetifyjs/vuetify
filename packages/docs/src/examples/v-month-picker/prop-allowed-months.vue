@@ -7,6 +7,5 @@
 </template>
 
 <script setup>
-  // Only allow Q1 months (Jan, Feb, Mar)
-  const allowedMonths = [0, 1, 2]
+  const allowedMonths = [0, 1, 2, 9, 10, 11]
 </script>

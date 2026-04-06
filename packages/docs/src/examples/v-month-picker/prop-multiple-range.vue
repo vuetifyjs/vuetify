@@ -5,22 +5,33 @@
         <h5 class="mb-2">Multiple selection</h5>
 
         <v-month-picker
-          v-model="selection2"
+          v-model="selection1"
           multiple
         ></v-month-picker>
 
-        <code class="d-block pt-3">value: {{ selection2.join(',') }}</code>
+        <div class="d-flex ga-2 flex-wrap mt-2" style="max-width: 360px">
+          <v-chip v-for="v in selection1" :key="v" :text="v" size="small"></v-chip>
+        </div>
       </v-col>
 
       <v-col cols="auto">
         <h5 class="mb-2">Range selection</h5>
 
         <v-month-picker
-          v-model="selection1"
+          v-model="selection2"
           multiple="range"
         ></v-month-picker>
 
-        <code class="d-block pt-3">value: {{ selection1.join(',') }}</code>
+        <div class="d-flex ga-2 flex-wrap mt-2" style="max-width: 360px">
+          <template v-if="selection2.length">
+            <v-chip :text="selection2[0]" size="small"></v-chip>
+            <template v-if="selection2.length > 1">
+              ~
+              <v-chip :text="selection2[1]" size="small"></v-chip>
+            </template>
+          </template>
+          <v-chip v-else size="small" text="[]"></v-chip>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -29,6 +40,8 @@
 <script setup>
   import { shallowRef } from 'vue'
 
-  const selection1 = shallowRef([])
-  const selection2 = shallowRef([])
+  const currentYear = new Date().getFullYear()
+
+  const selection1 = shallowRef([`${currentYear}-02`, `${currentYear}-06`, `${currentYear}-10`])
+  const selection2 = shallowRef([`${currentYear}-05`, `${currentYear}-11`])
 </script>
