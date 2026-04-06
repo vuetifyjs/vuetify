@@ -36,6 +36,7 @@ export default {
     divider: '–',
   },
   monthPicker: {
+    title: 'Hónap kiválasztása',
     itemsSelected: '{0} kiválasztva',
     header: 'Adja meg a hónapot',
     range: {

@@ -36,6 +36,7 @@ export default {
     divider: 'から',
   },
   monthPicker: {
+    title: '月を選択',
     itemsSelected: '{0} 選択済',
     header: '月を入力',
     range: {

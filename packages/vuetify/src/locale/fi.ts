@@ -36,6 +36,7 @@ export default {
     divider: '–',
   },
   monthPicker: {
+    title: 'Valitse kuukausi',
     itemsSelected: '{0} valittu',
     header: 'Syötä kuukausi',
     range: {

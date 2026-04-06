@@ -36,6 +36,7 @@ export default {
     divider: 'έως',
   },
   monthPicker: {
+    title: 'Επιλέξτε μήνα',
     itemsSelected: '{0} επιλεγμένα',
     header: 'Εισαγάγετε μήνα',
     range: {

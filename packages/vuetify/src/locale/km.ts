@@ -36,6 +36,7 @@ export default {
     divider: 'ដល់',
   },
   monthPicker: {
+    title: 'ជ្រើសរើសខែ',
     itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
     header: 'បញ្ចូលខែ',
     range: {

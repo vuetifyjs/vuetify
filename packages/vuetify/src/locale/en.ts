@@ -36,6 +36,7 @@ export default {
     divider: 'to',
   },
   monthPicker: {
+    title: 'Select month',
     itemsSelected: '{0} selected',
     header: 'Enter month',
     range: {

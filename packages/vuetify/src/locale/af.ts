@@ -36,6 +36,7 @@ export default {
     divider: 'tot',
   },
   monthPicker: {
+    title: 'Kies maand',
     itemsSelected: '{0} gekies',
     header: 'Voer maand in',
     range: {

@@ -36,6 +36,7 @@ export default {
     divider: 'până la',
   },
   monthPicker: {
+    title: 'Selectați luna',
     itemsSelected: '{0} selectate',
     header: 'Introduceți luna',
     range: {

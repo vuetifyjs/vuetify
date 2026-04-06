@@ -36,6 +36,7 @@ export default {
     divider: 'עד',
   },
   monthPicker: {
+    title: 'בחר חודש',
     itemsSelected: '{0} נבחר',
     header: 'הזן חודש',
     range: {

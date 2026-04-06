@@ -36,6 +36,7 @@ export default {
     divider: 'đến',
   },
   monthPicker: {
+    title: 'Chọn tháng',
     itemsSelected: '{0} mục đã chọn',
     header: 'Nhập tháng',
     range: {

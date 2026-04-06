@@ -36,6 +36,7 @@ export default {
     divider: 'til',
   },
   monthPicker: {
+    title: 'Velg måned',
     itemsSelected: '{0} valgt',
     header: 'Velg måned',
     range: {

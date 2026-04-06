@@ -36,6 +36,7 @@ export default {
     divider: '至',
   },
   monthPicker: {
+    title: '选择月份',
     itemsSelected: '已选择 {0} 项',
     header: '输入月份',
     range: {

@@ -36,6 +36,7 @@ export default {
     divider: 'بۆ',
   },
   monthPicker: {
+    title: 'مانگ هەڵبژێرە',
     itemsSelected: '{0} هەڵبژێردراوە',
     header: 'مانگ بنووسە',
     range: {

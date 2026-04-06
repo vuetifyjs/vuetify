@@ -36,6 +36,7 @@ export default {
     divider: 'ile',
   },
   monthPicker: {
+    title: 'Ay seçin',
     itemsSelected: '{0} seçildi',
     header: 'Ay girin',
     range: {

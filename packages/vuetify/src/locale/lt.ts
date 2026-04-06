@@ -36,6 +36,7 @@ export default {
     divider: 'iki',
   },
   monthPicker: {
+    title: 'Pasirinkite mėnesį',
     itemsSelected: '{0} parinkta',
     header: 'Įveskite mėnesį',
     range: {

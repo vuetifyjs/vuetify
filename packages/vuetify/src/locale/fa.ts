@@ -36,6 +36,7 @@ export default {
     divider: 'تا',
   },
   monthPicker: {
+    title: 'انتخاب ماه',
     itemsSelected: '{0} انتخاب‌شده',
     header: 'ماه را وارد کنید',
     range: {

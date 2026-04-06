@@ -36,6 +36,7 @@ export default {
     divider: 'hingga',
   },
   monthPicker: {
+    title: 'Pilih bulan',
     itemsSelected: '{0} dipilih',
     header: 'Masukkan bulan',
     range: {

@@ -36,6 +36,7 @@ export default {
     divider: 'līdz',
   },
   monthPicker: {
+    title: 'Izvēlieties mēnesi',
     itemsSelected: '{0} izvēlēts',
     header: 'Ievadiet mēnesi',
     range: {

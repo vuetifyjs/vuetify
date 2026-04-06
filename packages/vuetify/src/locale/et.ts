@@ -36,6 +36,7 @@ export default {
     divider: 'kuni',
   },
   monthPicker: {
+    title: 'Valige kuu',
     itemsSelected: '{0} valitud',
     header: 'Sisesta kuu',
     range: {

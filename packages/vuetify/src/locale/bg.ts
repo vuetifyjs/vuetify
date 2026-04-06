@@ -36,6 +36,7 @@ export default {
     divider: 'до',
   },
   monthPicker: {
+    title: 'Изберете месец',
     itemsSelected: '{0} избрани',
     header: 'Въвеждане на месец',
     range: {

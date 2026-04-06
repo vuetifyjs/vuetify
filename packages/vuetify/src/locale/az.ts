@@ -36,6 +36,7 @@ export default {
     divider: 'ilə',
   },
   monthPicker: {
+    title: 'Ayı seçin',
     itemsSelected: '{0} seçilib',
     header: 'Ayı daxil edin',
     range: {

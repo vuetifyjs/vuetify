@@ -67,7 +67,7 @@ export const makeVMonthPickerProps = propsFactory({
     default: 'picker-reverse-transition',
   },
   ...makeVPickerProps({
-    title: 'Select month', // later: '$vuetify.monthPicker.title'
+    title: '$vuetify.monthPicker.title',
   }),
 }, 'VMonthPicker')
 
@@ -194,7 +194,7 @@ export const VMonthPicker = genericComponent<new <
             props.class,
           ]}
           color={ props.color }
-          title={ props.title }
+          title={ t(props.title) }
           style={[
             {
               '--v-month-picker-months-columns': props.monthsColumns,

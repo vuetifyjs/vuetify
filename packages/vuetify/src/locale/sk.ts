@@ -36,6 +36,7 @@ export default {
     divider: 'až',
   },
   monthPicker: {
+    title: 'Vyberte mesiac',
     itemsSelected: '{0} vybraných',
     header: 'Zadajte mesiac',
     range: {

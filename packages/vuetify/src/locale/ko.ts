@@ -36,6 +36,7 @@ export default {
     divider: '부터',
   },
   monthPicker: {
+    title: '월 선택',
     itemsSelected: '{0}개 선택됨',
     header: '월 입력',
     range: {
