@@ -106,6 +106,7 @@
 
   const props = computed(() => {
     return {
+      ref: 'snackbarQueue',
       'v-model': 'messages',
       'display-strategy': displayStrategy.value !== 'hold' ? displayStrategy.value : undefined,
       collapsed: collapsed.value || undefined,
@@ -137,6 +138,7 @@
     return `<script setup>
   import { ref } from 'vue'
 
+  const snackbarQueue = ref()
   const messages = ref([])
   const logs = ref([])
   let messageCount = 0

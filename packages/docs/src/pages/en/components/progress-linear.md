@@ -102,7 +102,7 @@ This applies a striped background over the value portion of the `v-progress-line
 
 #### Default
 
-The `v-progress-linear` component will be responsive to user input when using **v-model**. You can use the default slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders).
+Default slot exposes current value as **percentage** (0–100) in relation to `max` prop (100 by default). It is recommended to round it in order to avoid JavaScript floating point number representation with lots of decimal digits. You can use `Math.round()` or `.toFixed()` to render the value correctly.
 
 <ExamplesExample file="v-progress-linear/slot-default" />
 

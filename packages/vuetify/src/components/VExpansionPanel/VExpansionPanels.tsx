@@ -82,7 +82,7 @@ export const VExpansionPanels = genericComponent<new <TModel>(
     const { next, prev } = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const variantClass = toRef(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
@@ -115,7 +115,10 @@ export const VExpansionPanels = genericComponent<new <TModel>(
           variantClass.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          roundedStyles.value,
+          props.style,
+        ]}
       >
         { slots.default?.({ prev, next }) }
       </props.tag>

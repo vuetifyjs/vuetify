@@ -110,8 +110,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const roundedForContainer = toRef(() => Array.isArray(props.rounded) ? props.rounded[0] : props.rounded)
     const roundedForControls = toRef(() => Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded ?? false)
-    const { roundedClasses: roundedContainerClasses } = useRounded(roundedForContainer)
-    const { roundedClasses: roundedControlsClasses } = useRounded(roundedForControls)
+    const { roundedClasses: roundedContainerClasses, roundedStyles: roundedContainerStyles } = useRounded(roundedForContainer)
+    const { roundedClasses: roundedControlsClasses, roundedStyles: roundedControlsStyles } = useRounded(roundedForControls)
 
     const containerRef = ref<HTMLDivElement>()
     const videoRef = ref<HTMLVideoElement>()
@@ -456,6 +456,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
           style={[
             { '--v-video-aspect-ratio': props.aspectRatio },
             props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'minWidth', 'maxWidth']),
+            roundedContainerStyles.value,
             props.style,
           ]}
           onKeydown={ onKeydown }
@@ -551,6 +552,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
               <VVideoControls
                 ref={ controlsRef }
                 class={ roundedControlsClasses.value }
+                style={ roundedControlsStyles.value }
                 { ...controlsProps }
                 { ...controlsEventHandlers }
               >

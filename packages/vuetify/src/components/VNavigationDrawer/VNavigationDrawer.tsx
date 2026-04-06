@@ -114,7 +114,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
     const { displayClasses, mobile } = useDisplay(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const { ssrBootStyles } = useSsrBoot()
@@ -249,6 +249,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               layoutItemStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
+              roundedStyles.value,
               props.style,
             ]}
             inert={ !isActive.value }

@@ -48,6 +48,7 @@ const locationStrategies = {
 
 export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
+  contained?: boolean
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
@@ -129,6 +130,8 @@ export function useLocationStrategies (
 }
 
 function staticLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  if (props.contained) return
+
   const target = ref<[x: number, y: number]>()
   const connectedStyles = ref<Record<string, string>>({})
   const connected = connectedLocationStrategy(

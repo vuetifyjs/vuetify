@@ -21,16 +21,16 @@ const currentTheme = { primary: '#1976d2' }
 
 describe('isCssColor', () => {
   it('should return true if css color is passed', () => {
-    expect(isCssColor('#ff0000')).toBeTruthy()
-    expect(isCssColor('#fff')).toBeTruthy()
-    expect(isCssColor('rgb(255, 255, 255)')).toBeTruthy()
-    expect(isCssColor('rgba(255, 0, 0, 0.8)')).toBeTruthy()
-    expect(isCssColor('var(--my-color)')).toBeTruthy()
+    expect(isCssColor('#ff0000')).toBe(true)
+    expect(isCssColor('#fff')).toBe(true)
+    expect(isCssColor('rgb(255, 255, 255)')).toBe(true)
+    expect(isCssColor('rgba(255, 0, 0, 0.8)')).toBe(true)
+    expect(isCssColor('var(--my-color)')).toBe(true)
   })
 
   it('should return false if non-css color is passed', () => {
-    expect(isCssColor('red')).toBeFalsy()
-    expect(isCssColor('primary')).toBeFalsy()
+    expect(isCssColor('red')).toBe(false)
+    expect(isCssColor('primary')).toBe(false)
   })
 })
 

@@ -39,8 +39,7 @@ describe('VTextField', () => {
     ))
 
     expect(element).not.toHaveClass('v-input--error')
-    expect(rule).toHaveBeenCalledOnce()
-    expect(rule).toHaveBeenCalledWith(undefined)
+    expect(rule).toHaveBeenCalledExactlyOnceWith(undefined)
     await userEvent.click(element)
     await userEvent.keyboard('Hello')
     expect(rule).toHaveBeenCalledTimes(6)
@@ -119,7 +118,7 @@ describe('VTextField', () => {
     expect(rule).not.toHaveBeenCalled()
 
     await userEvent.click(document.body)
-    expect(rule).toHaveBeenCalledOnce()
+    expect(rule).toHaveBeenCalledTimes(1)
     expect(element).toHaveClass('v-input--error')
     expect(element).toHaveTextContent('Error!')
   })

@@ -404,7 +404,10 @@ export const VSelect = genericComponent<new <
       isFocused.value = true
     }
     function onFocusout (e: FocusEvent) {
-      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+      if (
+        !vTextFieldRef.value?.$el.contains(e.relatedTarget as Node) &&
+        !(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
+      ) {
         isFocused.value = false
       }
     }

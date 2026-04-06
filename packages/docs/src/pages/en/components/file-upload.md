@@ -74,6 +74,12 @@ Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** 
 
 <ExamplesExample file="v-file-upload/prop-content" />
 
+#### Loading
+
+The **loading** prop displays a progress indicator on the component. Unlike other components, the loading state does not disable interactions; files can still be browsed and dropped.
+
+<ExamplesExample file="v-file-upload/prop-loading" />
+
 #### Inset file list
 
 The **inset-file-list** prop renders the file list inside the dropzone instead of below it.

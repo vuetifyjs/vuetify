@@ -20,14 +20,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
-  const options = ['default', 'comfortable', 'compact'] as const
+<script setup>
+  const options = ['default', 'comfortable', 'compact']
 </script>
 
-<script lang="ts">
+<script>
   export default {
     data: () => ({
-      options: ['default', 'comfortable', 'compact'] as const,
+      options: ['default', 'comfortable', 'compact'],
     }),
   }
 </script>
