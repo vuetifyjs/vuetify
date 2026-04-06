@@ -51,6 +51,12 @@ The **inset** prop extends the line beyond the chart boundary for edge-to-edge r
 
 <ExamplesExample file="v-sparkline/prop-inset" />
 
+#### Smooth mode
+
+The **smooth-mode** prop controls the interpolation algorithm. The default mode rounds corners which can cause the line to appear away from the actual values. The **monotone** mode makes the line stick to the exact data points, but also limits the **smooth** to **8**.
+
+<ExamplesExample file="v-sparkline/prop-smooth-mode" />
+
 ### Misc
 
 #### Custom labels
