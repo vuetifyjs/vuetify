@@ -27,10 +27,11 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { LocationStrategyFunction } from '@/types'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }
@@ -99,12 +100,14 @@ export const makeVSnackbarProps = propsFactory({
   },
   vertical: Boolean,
 
-  ...makeLocationProps({ location: 'bottom' } as const),
+  ...makeLocationProps({ location: 'bottom center' } as const),
   ...makePositionProps(),
   ...makeRoundedProps(),
   ...makeVariantProps(),
   ...makeThemeProps(),
   ...omit(makeVOverlayProps({
+    closeOnBack: false,
+    locationStrategy: null,
     transition: 'v-snackbar-transition',
   }), [
     'persistent',
@@ -113,6 +116,7 @@ export const makeVSnackbarProps = propsFactory({
     'retainFocus',
     'captureFocus',
     'disableInitialFocus',
+    'location',
     'scrim',
     'scrollStrategy',
     'stickToTarget',
@@ -135,7 +139,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
@@ -226,7 +230,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     const locationClasses = computed(() => {
-      return props.location.split(' ').reduce((acc, loc) => {
+      return props.location!.split(' ').reduce((acc, loc) => {
         acc[`v-snackbar--${loc}`] = true
 
         return acc
@@ -234,7 +238,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const queueDirection = computed(() => {
-      const [side, align] = props.location.split(' ')
+      const [side, align] = props.location!.split(' ')
       return side === 'bottom' || (['left', 'right'].includes(side) && align === 'end') ? -1 : 1
     })
 
@@ -247,7 +251,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const offset = computed(() => {
-      if (!queueItem) return {}
+      if (!queueItem) return undefined
 
       if (queueItem.offset.value === null) {
         return _lastOffset
@@ -262,7 +266,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       }
 
       const prefix = props.transition.replace('-auto', '')
-      const [side, align] = props.location.split(' ')
+      const [side, align] = props.location!.split(' ')
       const axis = ['start', 'end', 'left', 'right'].includes(align) || ['left', 'right'].includes(side) ? 'x' : 'y'
       const reverse = ['end', 'right'].includes(align) ||
         (!['start', 'left'].includes(align) && ['bottom', 'right'].includes(side))
@@ -273,7 +277,11 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     useRender(() => {
-      const overlayProps = omit(VOverlay.filterProps(props), ['transition'])
+      const overlayProps = VOverlay.filterProps({
+        ...props,
+        location: props.location!,
+        locationStrategy: props.locationStrategy ?? (noop as LocationStrategyFunction),
+      })
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
       const hasPrepend = !!(hasPrependMedia || props.loading || slots.prepend)
       const hasContent = !!(slots.default || slots.text || slots.title || props.text || props.title)
@@ -317,6 +325,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             style: [
               colorStyles.value,
+              roundedStyles.value,
             ],
             onPointerenter,
             onPointerleave,

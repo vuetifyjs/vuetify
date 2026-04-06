@@ -12,10 +12,11 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { makeVPaginationProps } from '../VPagination/VPagination'
 
 export const makeVDataTableFooterProps = propsFactory({
   color: String,
@@ -70,6 +71,10 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
+
+  ...pick(makeVPaginationProps({
+    showFirstLastPage: true,
+  }), ['showFirstLastPage']),
 }, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({

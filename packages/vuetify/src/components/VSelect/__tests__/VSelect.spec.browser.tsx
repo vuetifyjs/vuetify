@@ -358,6 +358,7 @@ describe('VSelect', () => {
       ))
       expect(element).toHaveTextContent('Default Language')
     })
+
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
       const items = [
         { code: 'en-US', name: 'English' },

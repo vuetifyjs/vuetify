@@ -110,7 +110,7 @@ export const VCard = genericComponent<VCardSlots>()({
     const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const link = useLink(props, attrs)
     const loadingColor = shallowRef<string | undefined>(undefined)
 
@@ -168,6 +168,7 @@ export const VCard = genericComponent<VCardSlots>()({
             {
               '--v-card-height': convertToUnit(props.height),
             },
+            roundedStyles.value,
             props.style,
           ]}
           onClick={ isClickable && link.navigate.value }

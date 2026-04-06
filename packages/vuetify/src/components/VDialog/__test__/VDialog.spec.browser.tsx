@@ -128,7 +128,7 @@ describe('VDialog', () => {
 
       // 1st back: persistent dialog blocks navigation
       await simulateBackNavigation(router)
-      expect(model.value).toBeTruthy()
+      expect(model.value).toBe(true)
       expect(router.currentRoute.value.path).toBe('/page3')
 
       // close the dialog
@@ -147,7 +147,7 @@ describe('VDialog', () => {
 
       // 3rd back: persistent dialog blocks again
       await simulateBackNavigation(router)
-      expect(model.value).toBeTruthy()
+      expect(model.value).toBe(true)
       expect(router.currentRoute.value.path).toBe('/page2')
     })
 

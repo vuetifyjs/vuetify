@@ -180,7 +180,7 @@ describe.each([
       ))
 
       await userEvent.click(screen.getByText(/John/))
-      expect(onActivated).toHaveBeenCalledOnce()
+      expect(onActivated).toHaveBeenCalledTimes(1)
 
       await userEvent.click(screen.getByText(/Human Resources/))
       expect(onActivated).toHaveBeenCalledTimes(2)
@@ -320,12 +320,12 @@ describe.each([
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        // eslint-disable-next-line vitest/no-conditional-in-test
+        // eslint-disable-next-line @vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
         } else {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
         }
       })
@@ -779,7 +779,7 @@ describe('VTreeview with loading', () => {
     await userEvent.tab()
     await userEvent.tab()
     await userEvent.keyboard('{enter}')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -826,7 +826,7 @@ describe('VTreeview with loading', () => {
 
     await userEvent.tab() // single tab selects the whole item
     await userEvent.keyboard(' ')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -877,7 +877,7 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
     await userEvent.click(screen.queryAllByText('[toggle]')[0])
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 

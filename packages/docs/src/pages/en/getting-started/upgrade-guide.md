@@ -85,7 +85,7 @@ If you notice browser styles adding unnecessary spaces and impact text size, it 
     margin: 0;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 }
@@ -327,6 +327,15 @@ VCounter is used to display the counter hint under VTextField, VTextarea and VFi
   opacity: 1;
   color: /* your $counter-color */;
 }
+```
+
+### VDatePicker
+
+`multiple="range"` emits only the start and end dates instead of everything in between. Use something like [date-fns' `eachDayOfInterval`](https://date-fns.org/v4.1.0/docs/eachDayOfInterval) if you need all dates in the range.
+
+```diff
+- ['2023-09-28', '2023-09-29', '2023-09-30', '2023-10-01', '2023-10-02']
++ ['2023-09-28', '2023-10-02']
 ```
 
 ### VFileInput

@@ -14,7 +14,7 @@
     "pageAriaLabel": "Label for each page button.",
     "prevIcon": "The icon to use for the prev button.",
     "previousAriaLabel": "Label for the previous button.",
-    "showFirstLastPage": "Show buttons for going to first and last page.",
+    "showFirstLastPage": "Show buttons for going to first and last page. Since v4.1.0 it accepts `'only-first'`, to only the first page button.",
     "start": "Specify the starting page.",
     "totalVisible": "Specify the total visible pagination numbers."
   },
