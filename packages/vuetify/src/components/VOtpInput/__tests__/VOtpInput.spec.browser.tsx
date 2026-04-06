@@ -188,7 +188,7 @@ describe('VOtpInput', () => {
       input.dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
       await waitAnimationFrame()
       expect(input.value).toBe('12')
-      expect(getActiveSlotIndex()).toBe(1)
+      expect(getActiveSlotIndex()).toBe(2)
     }
   )
 

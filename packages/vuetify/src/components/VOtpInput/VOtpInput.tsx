@@ -273,7 +273,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         newStart = 0
         newEnd = 1
       } else {
-        newStart = newVal.length - 1
+        newStart = newVal.length
         newEnd = newVal.length
       }
       input.setSelectionRange(newStart, newEnd)
