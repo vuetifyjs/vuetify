@@ -4,7 +4,8 @@ import { VTooltip } from '@/components/VTooltip/VTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
-import { genPath as _genPath } from './util/path'
+import { genMonotonePath } from './util/monotone'
+import { genRoundedPath } from './util/path'
 import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
@@ -180,8 +181,11 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     function genPath (fill: boolean) {
       const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth ?? 0)
+      const pathGen = props.smoothMode === 'monotone'
+        ? genMonotonePath
+        : genRoundedPath
 
-      return _genPath(
+      return pathGen(
         extendedPoints.value.slice(),
         smoothValue,
         fill,

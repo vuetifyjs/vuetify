@@ -74,6 +74,10 @@ export const makeLineProps = propsFactory({
   showLabels: Boolean,
   showMarkers: Boolean,
   smooth: [Boolean, String, Number],
+  smoothMode: {
+    type: String as PropType<'default' | 'monotone'>,
+    default: 'default',
+  },
   interactive: Boolean,
   tooltip: {
     type: [Boolean, Object] as PropType<boolean | SparklineTooltipConfig>,

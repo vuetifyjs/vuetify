@@ -23,6 +23,7 @@
     "showLabels": "Show labels below each data point.",
     "showMarkers": "Show circle markers at each data point.",
     "smooth": "Controls the curve tension. `true` defaults to 8, `false` or `0` gives straight lines. Higher values produce smoother curves.",
+    "smoothMode": "The interpolation algorithm to use. `default` uses corner-rounding, `monotone` uses interpolation which prevents overshoot at local extrema. In `monotone` mode, **smooth** has value limit of 8 (larger values do not make the line any different).",
     "tooltip": "Displays a tooltip on the active data point. Requires **interactive**. Can be `true` or an object with `titleFormat`, `offset`, and `showCrosshair` options.",
     "type": "Choose between a trendline or bars.",
     "width": "Width of the SVG container."

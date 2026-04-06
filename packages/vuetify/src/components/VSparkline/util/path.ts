@@ -7,7 +7,7 @@ import { Point } from '../VSparkline'
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
  */
-export function genPath (points: Point[], radius: number, fill = false, height = 75) {
+export function genRoundedPath (points: Point[], radius: number, fill = false, height = 75) {
   if (points.length === 0) return ''
   const start = points.shift()!
   const end = points[points.length - 1]
