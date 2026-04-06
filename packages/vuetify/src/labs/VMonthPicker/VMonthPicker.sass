@@ -37,6 +37,19 @@
     > .v-btn
       width: 100%
 
+    @include tools.layer('trumps')
+      @media (forced-colors: active)
+        &--current
+          > .v-btn
+            border-color: buttontext !important
+
+        &--selected:not(&--range-middle),
+        &--range-start,
+        &--range-end
+          > .v-btn
+            border-color: highlight !important
+            background: none !important
+
     &--range-start,
     &--range-end,
     &--preview-start,
@@ -49,6 +62,11 @@
       position: absolute
       inset: $month-picker-range-selection-inset 0
       pointer-events: none
+
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          background-color: highlight !important
+          opacity: 0.2
 
       &--range
         opacity: 0.1
