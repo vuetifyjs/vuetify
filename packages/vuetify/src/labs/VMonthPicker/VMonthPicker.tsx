@@ -42,6 +42,8 @@ export type VMonthPickerSlots = {
 }
 
 export const makeVMonthPickerProps = propsFactory({
+  disabled: Boolean,
+  readonly: Boolean,
   modelValue: {
     type: null as any as PropType<string | string[] | null>,
     default: null,
@@ -212,12 +214,13 @@ export const VMonthPicker = genericComponent<new <
                 <VDefaultsProvider defaults={{ VBtn: { variant: 'text' } }}>
                   <div class="v-month-picker__controls pa-3 pb-0 d-flex justify-space-between align-center flex-grow-1">
                     <VBtn
-                      disabled={ disablePrevYear.value }
+                      disabled={ props.disabled || disablePrevYear.value }
                       icon="$prev"
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.previousYear') }
                       onClick={ prevYear }
                     />
                     <VBtn
+                      disabled={ props.disabled }
                       rounded
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.selectYear') }
                       onClick={ toggleViewMode }
@@ -235,7 +238,7 @@ export const VMonthPicker = genericComponent<new <
                       }}
                     />
                     <VBtn
-                      disabled={ disableNextYear.value }
+                      disabled={ props.disabled || disableNextYear.value }
                       icon="$next"
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.nextYear') }
                       onClick={ nextYear }
@@ -283,7 +286,8 @@ export const VMonthPicker = genericComponent<new <
                                   const btnProps = {
                                     // active: selected && !rangeMiddle,
                                     color: ((selected && !rangeMiddle) || month.isCurrent) ? selectionColor.value : undefined,
-                                    disabled: month.isDisabled,
+                                    disabled: props.disabled || month.isDisabled,
+                                    readonly: props.readonly,
                                     rounded: true,
                                     text: month.text,
                                     variant: (selected && !rangeMiddle) ? 'flat' : month.isCurrent ? 'outlined' : 'text',
