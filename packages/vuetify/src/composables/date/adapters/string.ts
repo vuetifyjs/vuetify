@@ -1,277 +1,329 @@
-// Composables
-import { VuetifyDateAdapter } from '@/composables/date/adapters/vuetify'
+import { Vuetify0DateAdapter } from '@vuetify/v0/date'
 
 // Types
-import type { DateAdapter } from '@/composables/date'
-
-type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: string, formatString: string, locale: string) => string)
+import type { DateAdapter } from '@vuetify/v0/composables'
 
 export class StringDateAdapter implements DateAdapter<string> {
-  base: VuetifyDateAdapter
+  private base: Vuetify0DateAdapter
 
-  constructor (options: { locale: string, formats?: Record<string, CustomDateFormat> }) {
-    this.base = new VuetifyDateAdapter({
-      locale: options.locale,
-      formats: options.formats && Object.fromEntries(
-        Object.entries(options.formats).map(([k, v]) => {
-          return [
-            k,
-            typeof v === 'function'
-              ? (date, ...args) => v(this.base.toISO(date), ...args)
-              : v,
-          ]
-        })
-      ),
-    })
+  constructor (options?: { locale?: string }) {
+    this.base = new Vuetify0DateAdapter(options?.locale)
   }
 
-  addDays (date: string, amount: number): string {
-    return this.base.toISO(
-      this.base.addDays(this.base.date(date)!, amount)
-    )
+  get locale () { return this.base.locale }
+  set locale (v: string) { this.base.locale = v }
+
+  // ============================================
+  // Construction & Conversion
+  // ============================================
+
+  date (value?: unknown): string | null {
+    const result = this.base.date(value)
+    return result ? this.fromBase(result) : null
   }
 
-  addHours (date: string, amount: number): string {
-    return this.base.toISO(
-      this.base.addHours(this.base.date(date)!, amount)
-    )
+  toJsDate (value: string): Date {
+    return this.base.toJsDate(this.toBase(value))
   }
 
-  addMinutes (date: string, amount: number): string {
-    return this.base.toISO(
-      this.base.addMinutes(this.base.date(date)!, amount)
-    )
+  parseISO (date: string): string {
+    return this.fromBase(this.base.parseISO(date))
   }
 
-  addMonths (date: string, amount: number): string {
-    return this.base.toISO(
-      this.base.addMonths(this.base.date(date)!, amount)
-    )
+  toISO (date: string): string {
+    return this.fromBase(this.toBase(date))
   }
 
-  addWeeks (date: string, amount: number): string {
-    return this.base.toISO(
-      this.base.addWeeks(this.base.date(date)!, amount)
-    )
+  parse (value: string, format: string): string | null {
+    const result = this.base.parse(value, format)
+    return result ? this.fromBase(result) : null
   }
 
-  date (value?: any): string | null {
-    return this.base.toISO(
-      this.base.date(value)!
-    )
+  isValid (date: unknown): date is string {
+    return this.base.isValid(date)
   }
 
-  endOfDay (date: string): string {
-    return this.base.toISO(
-      this.base.endOfDay(this.base.date(date)!)
-    )
+  isNull (value: string | null): value is null {
+    return this.base.isNull(value as any)
   }
 
-  endOfMonth (date: string): string {
-    return this.base.toISO(
-      this.base.endOfMonth(this.base.date(date)!)
-    )
+  // ============================================
+  // Locale & Formatting
+  // ============================================
+
+  getCurrentLocaleCode (): string {
+    return this.base.getCurrentLocaleCode()
   }
 
-  endOfWeek (date: string): string {
-    return this.base.toISO(
-      this.base.endOfWeek(this.base.date(date)!)
-    )
-  }
-
-  endOfYear (date: string): string {
-    return this.base.toISO(
-      this.base.endOfYear(this.base.date(date)!)
-    )
+  is12HourCycleInCurrentLocale (): boolean {
+    return this.base.is12HourCycleInCurrentLocale()
   }
 
   format (date: string, formatString: string): string {
-    return this.base.format(
-      this.base.date(date)!,
-      formatString
-    )
+    return this.base.format(this.toBase(date), formatString)
   }
 
-  getDate (date: string): number {
-    return this.base.getDate(this.base.date(date)!)
+  formatByString (date: string, formatString: string): string {
+    return this.base.formatByString(this.toBase(date), formatString)
   }
 
-  getDiff (date: string, comparing: string, unit?: string): number {
-    return this.base.getDiff(this.base.date(date)!, comparing, unit)
+  getFormatHelperText (format: string): string {
+    return this.base.getFormatHelperText(format)
   }
 
-  getHours (date: string): number {
-    return this.base.getHours(this.base.date(date)!)
+  formatNumber (numberToFormat: string): string {
+    return this.base.formatNumber(numberToFormat)
   }
 
-  getMinutes (date: string): number {
-    return this.base.getMinutes(this.base.date(date)!)
+  getMeridiemText (ampm: 'am' | 'pm'): string {
+    return this.base.getMeridiemText(ampm)
   }
 
-  getMonth (date: string): number {
-    return this.base.getMonth(this.base.date(date)!)
+  // ============================================
+  // Navigation - Start/End boundaries
+  // ============================================
+
+  startOfDay (date: string): string {
+    return this.fromBase(this.base.startOfDay(this.toBase(date)))
   }
 
-  getWeek (date: string, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number {
-    return this.base.getWeek(this.base.date(date)!, firstDayOfWeek, firstDayOfYear)
+  endOfDay (date: string): string {
+    return this.fromBase(this.base.endOfDay(this.toBase(date)))
   }
 
-  getNextMonth (date: string): string {
-    return this.base.toISO(
-      this.base.getNextMonth(this.base.date(date)!)
-    )
+  startOfWeek (date: string, firstDayOfWeek?: number): string {
+    return this.fromBase(this.base.startOfWeek(this.toBase(date), firstDayOfWeek))
   }
 
-  getPreviousMonth (date: string): string {
-    return this.base.toISO(
-      this.base.getPreviousMonth(this.base.date(date)!)
-    )
+  endOfWeek (date: string, firstDayOfWeek?: number): string {
+    return this.fromBase(this.base.endOfWeek(this.toBase(date), firstDayOfWeek))
   }
 
-  getWeekArray (date: string, firstDayOfWeek?: number | string): string[][] {
-    return this.base.getWeekArray(
-      this.base.date(date)!,
-      firstDayOfWeek,
-    ).map(week => {
-      return week.map(day => {
-        return this.base.toISO(day)
-      })
-    })
+  startOfMonth (date: string): string {
+    return this.fromBase(this.base.startOfMonth(this.toBase(date)))
   }
 
-  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return this.base.getWeekdays(firstDayOfWeek, weekdayFormat)
+  endOfMonth (date: string): string {
+    return this.fromBase(this.base.endOfMonth(this.toBase(date)))
   }
 
-  getYear (date: string): number {
-    return this.base.getYear(this.base.date(date)!)
+  startOfYear (date: string): string {
+    return this.fromBase(this.base.startOfYear(this.toBase(date)))
   }
+
+  endOfYear (date: string): string {
+    return this.fromBase(this.base.endOfYear(this.toBase(date)))
+  }
+
+  // ============================================
+  // Arithmetic
+  // ============================================
+
+  addSeconds (date: string, amount: number): string {
+    return this.fromBase(this.base.addSeconds(this.toBase(date), amount))
+  }
+
+  addMinutes (date: string, amount: number): string {
+    return this.fromBase(this.base.addMinutes(this.toBase(date), amount))
+  }
+
+  addHours (date: string, amount: number): string {
+    return this.fromBase(this.base.addHours(this.toBase(date), amount))
+  }
+
+  addDays (date: string, amount: number): string {
+    return this.fromBase(this.base.addDays(this.toBase(date), amount))
+  }
+
+  addWeeks (date: string, amount: number): string {
+    return this.fromBase(this.base.addWeeks(this.toBase(date), amount))
+  }
+
+  addMonths (date: string, amount: number): string {
+    return this.fromBase(this.base.addMonths(this.toBase(date), amount))
+  }
+
+  addYears (date: string, amount: number): string {
+    return this.fromBase(this.base.addYears(this.toBase(date), amount))
+  }
+
+  // ============================================
+  // Comparison
+  // ============================================
 
   isAfter (date: string, comparing: string): boolean {
-    return this.base.isAfter(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isAfter(this.toBase(date), this.toBase(comparing))
   }
 
   isAfterDay (date: string, comparing: string): boolean {
-    return this.base.isAfterDay(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isAfterDay(this.toBase(date), this.toBase(comparing))
+  }
+
+  isAfterMonth (date: string, comparing: string): boolean {
+    return this.base.isAfterMonth(this.toBase(date), this.toBase(comparing))
+  }
+
+  isAfterYear (date: string, comparing: string): boolean {
+    return this.base.isAfterYear(this.toBase(date), this.toBase(comparing))
   }
 
   isBefore (date: string, comparing: string): boolean {
-    return this.base.isBefore(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isBefore(this.toBase(date), this.toBase(comparing))
+  }
+
+  isBeforeDay (date: string, comparing: string): boolean {
+    return this.base.isBeforeDay(this.toBase(date), this.toBase(comparing))
+  }
+
+  isBeforeMonth (date: string, comparing: string): boolean {
+    return this.base.isBeforeMonth(this.toBase(date), this.toBase(comparing))
+  }
+
+  isBeforeYear (date: string, comparing: string): boolean {
+    return this.base.isBeforeYear(this.toBase(date), this.toBase(comparing))
   }
 
   isEqual (date: string, comparing: string): boolean {
-    return this.base.isEqual(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isEqual(this.toBase(date), this.toBase(comparing))
   }
 
   isSameDay (date: string, comparing: string): boolean {
-    return this.base.isSameDay(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isSameDay(this.toBase(date), this.toBase(comparing))
   }
 
   isSameMonth (date: string, comparing: string): boolean {
-    return this.base.isSameMonth(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isSameMonth(this.toBase(date), this.toBase(comparing))
   }
 
   isSameYear (date: string, comparing: string): boolean {
-    return this.base.isSameYear(
-      this.base.date(date)!,
-      this.base.date(comparing)!,
-    )
+    return this.base.isSameYear(this.toBase(date), this.toBase(comparing))
   }
 
-  isValid (date: any): boolean {
-    return this.base.isValid(date)
+  isSameHour (date: string, comparing: string): boolean {
+    return this.base.isSameHour(this.toBase(date), this.toBase(comparing))
   }
 
   isWithinRange (date: string, range: [string, string]): boolean {
     return this.base.isWithinRange(
-      this.base.date(date)!,
-      [this.base.date(range[0])!, this.base.date(range[1])!],
+      this.toBase(date),
+      [this.toBase(range[0]), this.toBase(range[1])],
     )
   }
 
-  parseISO (date: string): string {
-    return this.base.toISO(this.base.parseISO(date))
+  // ============================================
+  // Getters
+  // ============================================
+
+  getYear (date: string): number {
+    return this.base.getYear(this.toBase(date))
   }
 
-  setDate (date: string, day: number): string {
-    return this.base.toISO(
-      this.base.setDate(this.base.date(date)!, day)
-    )
+  getMonth (date: string): number {
+    return this.base.getMonth(this.toBase(date))
   }
 
-  setHours (date: string, hours: number): string {
-    return this.base.toISO(
-      this.base.setHours(this.base.date(date)!, hours)
-    )
+  getDate (date: string): number {
+    return this.base.getDate(this.toBase(date))
   }
 
-  setMinutes (date: string, minutes: number): string {
-    return this.base.toISO(
-      this.base.setMinutes(this.base.date(date)!, minutes)
-    )
+  getHours (date: string): number {
+    return this.base.getHours(this.toBase(date))
+  }
+
+  getMinutes (date: string): number {
+    return this.base.getMinutes(this.toBase(date))
+  }
+
+  getSeconds (date: string): number {
+    return this.base.getSeconds(this.toBase(date))
+  }
+
+  getDiff (date: string, comparing: string, unit?: string): number {
+    return this.base.getDiff(this.toBase(date), this.toBase(comparing), unit)
+  }
+
+  getWeek (date: string, firstDayOfWeek?: number, minimalDays?: number): number {
+    return this.base.getWeek(this.toBase(date), firstDayOfWeek, minimalDays)
+  }
+
+  getDaysInMonth (date: string): number {
+    return this.base.getDaysInMonth(this.toBase(date))
+  }
+
+  // ============================================
+  // Setters
+  // ============================================
+
+  setYear (date: string, year: number): string {
+    return this.fromBase(this.base.setYear(this.toBase(date), year))
   }
 
   setMonth (date: string, month: number): string {
-    return this.base.toISO(
-      this.base.setMonth(this.base.date(date)!, month)
+    return this.fromBase(this.base.setMonth(this.toBase(date), month))
+  }
+
+  setDate (date: string, day: number): string {
+    return this.fromBase(this.base.setDate(this.toBase(date), day))
+  }
+
+  setHours (date: string, hours: number): string {
+    return this.fromBase(this.base.setHours(this.toBase(date), hours))
+  }
+
+  setMinutes (date: string, minutes: number): string {
+    return this.fromBase(this.base.setMinutes(this.toBase(date), minutes))
+  }
+
+  setSeconds (date: string, seconds: number): string {
+    return this.fromBase(this.base.setSeconds(this.toBase(date), seconds))
+  }
+
+  // ============================================
+  // Calendar Utilities
+  // ============================================
+
+  getWeekdays (firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.base.getWeekdays(firstDayOfWeek, weekdayFormat)
+  }
+
+  getWeekArray (date: string, firstDayOfWeek?: number): string[][] {
+    return this.base.getWeekArray(this.toBase(date), firstDayOfWeek).map(week =>
+      week.map(day => this.fromBase(day))
     )
   }
 
-  setYear (date: string, year: number): string {
-    return this.base.toISO(
-      this.base.setYear(this.base.date(date)!, year)
-    )
+  getMonthArray (date: string): string[] {
+    return this.base.getMonthArray(this.toBase(date)).map(d => this.fromBase(d))
   }
 
-  startOfDay (date: string): string {
-    return this.base.toISO(
-      this.base.startOfDay(this.base.date(date)!)
-    )
+  getYearRange (start: string, end: string): string[] {
+    return this.base.getYearRange(this.toBase(start), this.toBase(end)).map(d => this.fromBase(d))
   }
 
-  startOfMonth (date: string): string {
-    return this.base.toISO(
-      this.base.startOfMonth(this.base.date(date)!)
-    )
+  // ============================================
+  // Month Navigation
+  // ============================================
+
+  getNextMonth (date: string): string {
+    return this.fromBase(this.base.getNextMonth(this.toBase(date)))
   }
 
-  startOfWeek (date: string, firstDayOfWeek?: number | string): string {
-    return this.base.toISO(
-      this.base.startOfWeek(this.base.date(date)!, firstDayOfWeek)
-    )
+  getPreviousMonth (date: string): string {
+    return this.fromBase(this.base.getPreviousMonth(this.toBase(date)))
   }
 
-  startOfYear (date: string): string {
-    return this.base.toISO(
-      this.base.startOfYear(this.base.date(date)!)
-    )
+  // ============================================
+  // Utility
+  // ============================================
+
+  mergeDateAndTime (date: string, time: string): string {
+    return this.fromBase(this.base.mergeDateAndTime(this.toBase(date), this.toBase(time)))
   }
 
-  toISO (date: string): string {
-    return this.base.toISO(
-      this.base.date(date)!
-    )
-  }
+  // ============================================
+  // Private helpers
+  // ============================================
 
-  toJsDate (value: string): Date {
-    return this.base.date(value)!
-  }
+  private toBase (value: string) { return this.base.parseISO(value) }
+  private fromBase (value: any): string { return this.base.toISO(value) }
 }

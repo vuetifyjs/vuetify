@@ -1,6 +1,6 @@
 // Composables
 import { createIcons } from './icons'
-import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
+import { createDate, DateSymbol } from '@/composables/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
@@ -90,8 +90,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.provide(ThemeSymbol, theme)
       app.provide(IconSymbol, icons)
       app.provide(LocaleSymbol, locale)
-      app.provide(DateOptionsSymbol, date.options)
-      app.provide(DateAdapterSymbol, date.instance)
+      date.install(app)
       app.provide(GoToSymbol, goTo)
 
       if (IN_BROWSER && options.ssr) {
@@ -120,7 +119,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
                 theme: inject.call(this, ThemeSymbol),
                 icons: inject.call(this, IconSymbol),
                 locale: inject.call(this, LocaleSymbol),
-                date: inject.call(this, DateAdapterSymbol),
+                date: inject.call(this, DateSymbol),
               })
             },
           },

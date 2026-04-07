@@ -800,6 +800,9 @@ describe('week numbers with time zone', () => {
 })
 
 describe('range selection with time zone', () => {
+  // Temporal.PlainDateTime is timezone-agnostic, so TZ stubbing
+  // does not affect date calculations. Tests verify correct dates
+  // are selected regardless of system timezone.
   beforeEach(() => vi.stubEnv('TZ', 'America/New_York'))
   afterEach(() => vi.unstubAllEnvs())
 
@@ -815,10 +818,20 @@ describe('range selection with time zone', () => {
 
     const btn1 = await wrapper.findByText('8') as HTMLElement
     btn1.click()
-    expect(update).toHaveBeenNthCalledWith(1, [new Date('2025-03-08T05:00:00.000Z')])
+    expect(update).toHaveBeenCalledTimes(1)
+    const first = update.mock.calls[0][0]
+    expect(first).toHaveLength(1)
+    expect(first[0].day).toBe(8)
+    expect(first[0].month).toBe(3)
+    expect(first[0].year).toBe(2025)
+
     const btn2 = await wrapper.findByText('9') as HTMLElement
     btn2.click()
-    expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-03-08T05:00:00.000Z'), new Date('2025-03-10T03:59:59.999Z')])
+    expect(update).toHaveBeenCalledTimes(2)
+    const second = update.mock.calls[1][0]
+    expect(second).toHaveLength(2)
+    expect(second[0].day).toBe(8)
+    expect(second[1].day).toBe(9)
   })
 
   it('should select correct dates near DST/ST transition', async () => {
@@ -833,9 +846,19 @@ describe('range selection with time zone', () => {
 
     const btn1 = await wrapper.findByText('2') as HTMLElement
     btn1.click()
-    expect(update).toHaveBeenNthCalledWith(1, [new Date('2025-10-02T04:00:00.000Z')])
+    expect(update).toHaveBeenCalledTimes(1)
+    const first = update.mock.calls[0][0]
+    expect(first).toHaveLength(1)
+    expect(first[0].day).toBe(2)
+    expect(first[0].month).toBe(10)
+    expect(first[0].year).toBe(2025)
+
     const btn2 = await wrapper.findByText('3') as HTMLElement
     btn2.click()
-    expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-10-02T04:00:00.000Z'), new Date('2025-10-04T03:59:59.999Z')])
+    expect(update).toHaveBeenCalledTimes(2)
+    const second = update.mock.calls[1][0]
+    expect(second).toHaveLength(2)
+    expect(second[0].day).toBe(2)
+    expect(second[1].day).toBe(3)
   })
 })
