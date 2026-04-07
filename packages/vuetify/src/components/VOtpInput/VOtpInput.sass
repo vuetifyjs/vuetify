@@ -23,6 +23,55 @@
   .v-otp-input__divider
     margin: $otp-input-divider-margin
 
+  .v-otp-group
+    display: contents
+
+    .v-field
+      flex: 1
+
+    &--merged
+      display: flex
+      gap: 0
+      align-items: center
+      height: 100%
+      border-radius: inherit
+
+      .v-field
+        flex: 1
+        border-radius: 0
+
+        .v-field__outline__start,
+        .v-field__outline__end
+          border-radius: 0
+
+        &:not(:first-child)
+          margin-inline-start: -1px
+
+          .v-field__outline__start
+            border-inline-start-width: 0
+
+        &.v-field--focused
+          z-index: 1
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &:first-child
+          border-start-start-radius: inherit
+          border-end-start-radius: inherit
+
+          .v-field__outline__start
+            border-start-start-radius: inherit
+            border-end-start-radius: inherit
+
+        &:last-child
+          border-start-end-radius: inherit
+          border-end-end-radius: inherit
+
+          .v-field__outline__end
+            border-start-end-radius: inherit
+            border-end-end-radius: inherit
+
   .v-otp-input__input-wrapper
     position: absolute
     inset: 0

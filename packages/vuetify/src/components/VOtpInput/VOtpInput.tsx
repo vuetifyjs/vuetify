@@ -2,7 +2,10 @@
 import './VOtpInput.sass'
 
 // Components
-import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { VOtpField } from './VOtpField'
+import { VOtpGroup } from './VOtpGroup'
+import { VOtpSeparator } from './VOtpSeparator'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 
@@ -17,11 +20,28 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, effectScope, ref, toRef, watch, watchEffect } from 'vue'
+import { computed, effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+
+export interface OtpSlotData {
+  char: string | null
+  placeholderChar: string | null
+  isActive: boolean
+  hasFakeCaret: boolean
+}
+
+export interface VOtpInputContext {
+  otpSlots: ComputedRef<OtpSlotData[]>
+  isFocused: Ref<boolean>
+  focusAll: Ref<boolean>
+  divider: Ref<string | undefined>
+  merged: Ref<boolean>
+}
+
+export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vuetify:v-otp-input')
 
 export type VOtpInputSlots = {
   default: never
@@ -40,6 +60,7 @@ export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
   focusAll: Boolean,
+  merged: Boolean,
   label: {
     type: String,
     default: '$vuetify.input.otp',
@@ -369,6 +390,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       },
     }, { scoped: true })
 
+    provide(VOtpInputSymbol, {
+      otpSlots,
+      isFocused,
+      focusAll: toRef(() => props.focusAll),
+      divider: toRef(() => props.divider),
+      merged: toRef(() => props.merged),
+    })
+
     watch(model, val => {
       if (val.length === length.value) {
         emit('finish', val.join(''))
@@ -396,34 +425,21 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             style={[dimensionStyles.value]}
             dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
-            { otpSlots.value.map((slot, i) => (
-              <>
-                { props.divider && i !== 0 && (
-                  <span class="v-otp-input__divider">{ props.divider }</span>
-                )}
-
-                <VField
-                  focused={ (isFocused.value && props.focusAll) || slot.isActive }
-                  key={ i }
-                >
-                  {{
-                    ...slots,
-                    loader: undefined,
-                    default: () => (
-                      <div class="v-otp-input__field">
-                        { slot.hasFakeCaret ? (
-                          <span class="v-otp-input__caret" />
-                        ) : (
-                          <span class={ !slot.char ? 'v-otp-input__placeholder' : undefined }>
-                            { slot.char ?? slot.placeholderChar ?? '' }
-                          </span>
-                        )}
-                      </div>
-                    ),
-                  }}
-                </VField>
-              </>
-            ))}
+            { slots.default ? slots.default() : props.merged
+              ? (
+                <VOtpGroup merged>
+                  { Array.from({ length: length.value }, (_, i) => (
+                    <VOtpField index={ i } key={ i } />
+                  ))}
+                </VOtpGroup>
+              )
+              : Array.from({ length: length.value }, (_, i) => (
+                <>
+                  { props.divider && i !== 0 && <VOtpSeparator key={ `d-${i}` } /> }
+                  <VOtpField index={ i } key={ i } />
+                </>
+              ))
+            }
 
             <div class="v-otp-input__input-wrapper">
               <input
@@ -462,8 +478,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 />
               )}
             </VOverlay>
-
-            { slots.default?.() }
           </div>
         </div>
       )
