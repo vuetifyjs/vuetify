@@ -149,5 +149,39 @@ describe('VTimePicker', () => {
         expect(minuteInput).not.toHaveClass('v-input--error')
       })
     })
+
+    describe('AM/PM period toggle', () => {
+      it('should preserve hour value when switching between AM and PM', async () => {
+        const model = ref<string | null>('09:45')
+        render(() => (
+          <VTimePicker
+            v-model={ model.value }
+            variant="input"
+          />
+        ))
+
+        expect(model.value).toBe('09:45')
+        await userEvent.click(screen.getByCSS('.v-time-picker-controls__ampm__pm'))
+        expect(model.value).toBe('21:45')
+        await userEvent.click(screen.getByCSS('.v-time-picker-controls__ampm__am'))
+        expect(model.value).toBe('09:45')
+      })
+
+      it('should preserve hour 12 when switching periods', async () => {
+        const model = ref<string | null>('00:15')
+        render(() => (
+          <VTimePicker
+            v-model={ model.value }
+            variant="input"
+          />
+        ))
+
+        expect(model.value).toBe('00:15')
+        await userEvent.click(screen.getByCSS('.v-time-picker-controls__ampm__pm'))
+        expect(model.value).toBe('12:15')
+        await userEvent.click(screen.getByCSS('.v-time-picker-controls__ampm__am'))
+        expect(model.value).toBe('00:15')
+      })
+    })
   })
 })

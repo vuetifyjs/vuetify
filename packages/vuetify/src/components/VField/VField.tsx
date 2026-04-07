@@ -30,6 +30,7 @@ import {
   standardEasing,
   useRender,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -139,7 +140,7 @@ export const VField = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { rtlClasses } = useRtl()
 
     const isActive = toRef(() => props.dirty || props.active)
@@ -175,7 +176,7 @@ export const VField = genericComponent<new <T>(
 
         requestAnimationFrame(() => {
           const rect = nullifyTransforms(el)
-          const targetRect = targetEl.getBoundingClientRect()
+          const targetRect = new Box(targetEl)
 
           const x = targetRect.x - rect.x
           const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
@@ -287,6 +288,7 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           onClick={ onClick }

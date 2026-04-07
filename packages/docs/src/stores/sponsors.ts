@@ -2,6 +2,7 @@
 export interface Sponsor {
   metadata: {
     tier: number
+    visibility: { key: string }
   }
   slug: string
   title: string
