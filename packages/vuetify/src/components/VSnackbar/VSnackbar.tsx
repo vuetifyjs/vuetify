@@ -336,7 +336,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           noClickAnimation
           scrim={ false }
           scrollStrategy="none"
-          _disableGlobalStack
           onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }
           onAfterLeave={ onAfterLeave }
