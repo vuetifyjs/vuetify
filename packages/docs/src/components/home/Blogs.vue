@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'February 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/february-2026-update/february-hero.png',
+      shortDescription: 'February marks Vuetify\'s most significant milestone—the stable release of Vuetify 4.0.0 (Revisionist) with CSS layers, MD3 design system, and unstyled component foundations. The Vuetify CLI hit v1.0.0, VAvatarGroup shipped as a new component, and Vuetify0 gained createDataTable and Breadcrumbs composables across 390 commits and 68 merged PRs...',
+      date: 'March 9, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/february-2026-update'),
+    },
+    {
       title: 'Build with Vite and TailwindCSS v4',
       shortDescription: `In the previous article we explored integrating UnoCSS with Vuetify v3 and Nuxt. This time we take a more direct route: pairing Vuetify v4 with TailwindCSS v4 on a plain Vite setup with both running as Vite plugins. Vuetify v4 ships with CSS layers enabled by default, which makes integrating TailwindCSS significantly smoother than before...`,
       date: 'February 16, 2026',

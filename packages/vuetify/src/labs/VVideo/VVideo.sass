@@ -39,15 +39,18 @@
 
     &__content
       position: relative
-      cursor: pointer
       border-radius: inherit
       z-index: 0
       @include tools.elevation($video-elevation)
 
-    &:not(.v-video--idle)
+    &:not(.v-video--idle):not(.v-video--error)
       .v-video__content .v-video__overlay-fill
         &, > *
           pointer-events: none
+
+    &:not(.v-video--error)
+      .v-video__content
+        cursor: pointer
 
     &__overlay-fill
       position: absolute
@@ -68,12 +71,14 @@
 
     &__center-icon.v-icon-btn
       border: $video-center-icon-border
-      opacity: $video-center-icon-opacity
       transition-property: transform, opacity
       transition-duration: 0.28s
       transition-timing-function: settings.$standard-easing
 
-    &__content:hover &__center-icon
+      &.v-video__center-icon--play
+        opacity: $video-center-icon-opacity
+
+    &__content:hover &__center-icon--play
       transform: $video-center-icon-hover-transform
       opacity: 1
 

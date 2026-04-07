@@ -60,7 +60,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       indexFromEnd,
     } = slider
 
-    const { roundedClasses } = useRounded(rounded)
+    const { roundedClasses, roundedStyles } = useRounded(rounded)
 
     const {
       backgroundColorClasses: trackFillColorClasses,
@@ -137,6 +137,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),
             },
+            roundedStyles.value,
             props.style,
           ]}
         >

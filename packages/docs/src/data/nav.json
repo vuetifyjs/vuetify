@@ -293,6 +293,10 @@
         "subfolder": "components"
       },
       {
+        "title": "progress",
+        "subfolder": "components"
+      },
+      {
         "title": "pull-to-refresh",
         "subfolder": "components"
       },

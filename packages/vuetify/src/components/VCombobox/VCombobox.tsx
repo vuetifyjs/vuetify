@@ -463,6 +463,9 @@ export const VCombobox = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
+      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        isFocused.value = false
+      }
     }
 
     function onBlur (e: FocusEvent) {
