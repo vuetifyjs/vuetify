@@ -9,6 +9,7 @@ import { makeVExpansionPanelProps } from './VExpansionPanel'
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
@@ -48,10 +49,9 @@ export const makeVExpansionPanelsProps = propsFactory({
     'hideActions',
     'readonly',
     'ripple',
-    'rounded',
-    'tile',
     'static',
   ]),
+  ...makeRoundedProps(),
   ...makeThemeProps(),
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -82,6 +82,7 @@ export const VExpansionPanels = genericComponent<new <TModel>(
     const { next, prev } = useGroup(props, VExpansionPanelSymbol)
 
     const { themeClasses } = provideTheme(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const variantClass = toRef(() => props.variant && `v-expansion-panels--variant-${props.variant}`)
 
@@ -97,7 +98,6 @@ export const VExpansionPanels = genericComponent<new <TModel>(
         hideActions: toRef(() => props.hideActions),
         readonly: toRef(() => props.readonly),
         ripple: toRef(() => props.ripple),
-        rounded: toRef(() => props.rounded),
         static: toRef(() => props.static),
       },
     })
@@ -111,10 +111,14 @@ export const VExpansionPanels = genericComponent<new <TModel>(
             'v-expansion-panels--tile': props.tile,
           },
           themeClasses.value,
+          roundedClasses.value,
           variantClass.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          roundedStyles.value,
+          props.style,
+        ]}
       >
         { slots.default?.({ prev, next }) }
       </props.tag>

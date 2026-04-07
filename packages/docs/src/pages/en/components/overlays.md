@@ -38,7 +38,7 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 ## Activator
 
-Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected locationLocation strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's location instead of the middle of the screen.
+Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected location strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's location instead of the middle of the screen.
 
 Related props:
 
@@ -81,7 +81,9 @@ For more manual control, the slot can be used instead. `props` is an object cont
 
 `location-strategy="static"`
 
-Overlay content is absolutely positioned to the center of its container by default.
+Overlay content is positioned relative to the browser viewport. `location` selects a side and alignment
+while `origin` helps control transition - e.g. you may want the dialog to appear from the left when snapped
+to the left edge.
 
 ### Connected
 

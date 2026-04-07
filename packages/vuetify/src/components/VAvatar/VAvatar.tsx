@@ -61,7 +61,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
 
     const badgeDotSize = computed(() => {
@@ -112,6 +112,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
           style={[
             colorStyles.value,
             sizeStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >
