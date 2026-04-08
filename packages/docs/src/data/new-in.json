@@ -263,8 +263,8 @@
   "VNumberInput": {
     "props": {
       "autocomplete": "3.10.0",
-      "grouping": "3.11.0",
-      "groupingSeparator": "3.11.0"
+      "grouping": "4.1.0",
+      "groupingSeparator": "4.1.0"
     }
   },
   "VOtpInput": {
