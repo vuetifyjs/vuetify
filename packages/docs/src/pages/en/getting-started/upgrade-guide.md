@@ -17,3 +17,6 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## `useDisplay`
+
+Returned Refs are now readonly.
