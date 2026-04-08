@@ -19,4 +19,5 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## `useDisplay`
 
-Returned Refs are now readonly.
+- Returned Refs are now readonly.
+- Breakpoints are matched with `window.matchMedia` instead of `window.innerWidth`. This may result in slightly different values at zoom levels other than 100%.
