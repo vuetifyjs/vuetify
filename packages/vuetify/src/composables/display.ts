@@ -7,7 +7,7 @@ import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { BreakpointName } from '@vuetify/v0'
-import type { InjectionKey, PropType, Ref, ShallowRef } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 
 export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
@@ -51,27 +51,27 @@ export interface DisplayPlatform {
 }
 
 export interface DisplayInstance {
-  xs: Readonly<ShallowRef<boolean>>
-  sm: Readonly<ShallowRef<boolean>>
-  md: Readonly<ShallowRef<boolean>>
-  lg: Readonly<ShallowRef<boolean>>
-  xl: Readonly<ShallowRef<boolean>>
-  xxl: Readonly<ShallowRef<boolean>>
-  smAndUp: Readonly<ShallowRef<boolean>>
-  mdAndUp: Readonly<ShallowRef<boolean>>
-  lgAndUp: Readonly<ShallowRef<boolean>>
-  xlAndUp: Readonly<ShallowRef<boolean>>
-  smAndDown: Readonly<ShallowRef<boolean>>
-  mdAndDown: Readonly<ShallowRef<boolean>>
-  lgAndDown: Readonly<ShallowRef<boolean>>
-  xlAndDown: Readonly<ShallowRef<boolean>>
-  name: Readonly<ShallowRef<DisplayBreakpoint>>
-  height: Readonly<ShallowRef<number>>
-  width: Readonly<ShallowRef<number>>
-  mobile: Readonly<ShallowRef<boolean>>
-  mobileBreakpoint: Ref<number | DisplayBreakpoint>
+  xs: Readonly<Ref<boolean>>
+  sm: Readonly<Ref<boolean>>
+  md: Readonly<Ref<boolean>>
+  lg: Readonly<Ref<boolean>>
+  xl: Readonly<Ref<boolean>>
+  xxl: Readonly<Ref<boolean>>
+  smAndUp: Readonly<Ref<boolean>>
+  mdAndUp: Readonly<Ref<boolean>>
+  lgAndUp: Readonly<Ref<boolean>>
+  xlAndUp: Readonly<Ref<boolean>>
+  smAndDown: Readonly<Ref<boolean>>
+  mdAndDown: Readonly<Ref<boolean>>
+  lgAndDown: Readonly<Ref<boolean>>
+  xlAndDown: Readonly<Ref<boolean>>
+  name: Readonly<Ref<DisplayBreakpoint>>
+  height: Readonly<Ref<number>>
+  width: Readonly<Ref<number>>
+  mobile: Readonly<Ref<boolean>>
+  mobileBreakpoint: Readonly<Ref<number | DisplayBreakpoint>>
   platform: Readonly<Ref<DisplayPlatform>>
-  thresholds: Ref<DisplayThresholds>
+  thresholds: Readonly<Ref<DisplayThresholds>>
 
   /** @internal */
   ssr: boolean
