@@ -8,6 +8,7 @@ import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { formatNumber, parseNumber } from './format'
 import { useHold } from './hold'
 import { processGroupedInput, processPlainInput } from './typing'
 import { useForm } from '@/composables/form'
@@ -113,21 +114,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
 
     function toNumber (val: string | null | undefined) {
-      const stripped = props.grouping ? val?.replaceAll(groupSeparator.value, '') : val
-      return Number(stripped?.replace(decimalSeparator.value, '.'))
+      return parseNumber(val, groupSeparator.value, decimalSeparator.value, !!props.grouping)
     }
 
     function correctPrecision (val: number, precision?: number | null, trim = true) {
       precision ??= isFocused.value && trim ? undefined : props.precision ?? undefined
-      return new Intl.NumberFormat(locale.value, {
-        minimumFractionDigits: props.minFractionDigits && precision != null
-          ? Math.min(props.minFractionDigits, precision)
-          : (props.minFractionDigits ?? precision),
-        maximumFractionDigits: precision,
+      return formatNumber(val, {
+        locale: locale.value,
+        precision,
+        minFractionDigits: props.minFractionDigits,
         useGrouping: props.grouping,
-      }).format(val)
-        .replaceAll(numericGroupSeparatorFromLocale.value, groupSeparator.value)
-        .replace(decimalSeparatorFromLocale.value, decimalSeparator.value)
+        localeDecimalSeparator: decimalSeparatorFromLocale.value,
+        localeGroupSeparator: numericGroupSeparatorFromLocale.value,
+        decimalSeparator: decimalSeparator.value,
+        groupSeparator: groupSeparator.value,
+      })
     }
 
     const model = useProxiedModel(props, 'modelValue', null,
