@@ -3,7 +3,7 @@ import { VMenu } from '..'
 import { VList, VListItem } from '@/components/VList'
 
 // Utilities
-import { render, screen, userEvent, waitIdle } from '@test'
+import { render, screen, userEvent, wait } from '@test'
 
 describe('VMenu', () => {
   it('returns focus to activator on Escape', async () => {
@@ -21,7 +21,8 @@ describe('VMenu', () => {
 
     const activator = screen.getByTestId('activator')
     await userEvent.click(activator)
-    await waitIdle()
+    // Wait for globalTop setTimeout in useStack to fire
+    await wait()
 
     // Menu should be open
     const item1 = screen.getByText('Item 1')
@@ -29,7 +30,6 @@ describe('VMenu', () => {
 
     // Press Escape to close
     await userEvent.keyboard('{Escape}')
-    await waitIdle()
 
     // Menu should be closed
     expect(item1).not.toBeVisible()
