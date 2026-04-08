@@ -1183,7 +1183,8 @@ The full DevKey source is on GitHub: [vuetifyjs/devkey](https://github.com/vueti
 
 To deploy to production, build the project and preview it locally:
 
-::: tabs
+::: code-group
+
 ```bash [pnpm]
 pnpm build
 npx http-server dist
@@ -1203,6 +1204,7 @@ npx http-server dist
 bun run build
 bunx http-server dist
 ```
+
 :::
 
 The `dist/` directory contains everything you need. Deploy it anywhere that serves static files — Vercel, Netlify, Cloudflare Pages, or your own server. The entire app, including all Vuetify0 primitives, builds to **~235 kB JS** (84 kB gzipped).
