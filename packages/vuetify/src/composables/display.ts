@@ -133,9 +133,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     platform.value = getPlatform()
   }
 
-  if (IN_BROWSER) {
-    useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
-  }
+  useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
 
   return {
     ...omit(breakpoint, ['breakpoints', 'isMobile']),
