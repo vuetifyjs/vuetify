@@ -2,7 +2,7 @@
 import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
 import { isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
-import { getCurrentInstanceName, omit, propsFactory } from '@/util'
+import { assertExact, getCurrentInstanceName, omit, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -135,7 +135,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 
   useWindowEventListener('resize', () => breakpoint.update(), { passive: true })
 
-  return {
+  return assertExact<DisplayInstance>()({
     ...omit(breakpoint, ['breakpoints', 'isMobile']),
     mobile: breakpoint.isMobile,
     mobileBreakpoint: toRef(() => breakpoint.mobileBreakpoint),
@@ -143,7 +143,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     thresholds: toRef(() => breakpoint.breakpoints),
     update,
     ssr: !!ssr,
-  }
+  })
 }
 
 export const makeDisplayProps = propsFactory({
