@@ -2,7 +2,7 @@
 import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
 import { isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
-import { getCurrentInstanceName, propsFactory } from '@/util'
+import { getCurrentInstanceName, omit, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -138,11 +138,11 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
   }
 
   return {
-    ...breakpoint,
+    ...omit(breakpoint, ['breakpoints', 'isMobile']),
     mobile: breakpoint.isMobile,
     mobileBreakpoint: toRef(() => breakpoint.mobileBreakpoint),
     platform: readonly(platform),
-    thresholds: toRef(() => breakpoint.breakpoints as DisplayThresholds),
+    thresholds: toRef(() => breakpoint.breakpoints),
     update,
     ssr: !!ssr,
   }
