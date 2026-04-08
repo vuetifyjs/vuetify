@@ -68,6 +68,11 @@ function inferDecimalSeparator (current: Ref<string>, fallback: Ref<string>) {
   return format(0.1).includes(',') ? ',' : '.'
 }
 
+function inferNumericGroupSeparator (current: Ref<string>, fallback: Ref<string>) {
+  const format = createNumberFunction(current, fallback)
+  return format(10000).at(2)!
+}
+
 function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
   const internal = useProxiedModel(props, prop, props[prop] ?? provided.value)
 
@@ -95,6 +100,7 @@ function createProvideFunction (state: { current: Ref<string>, fallback: Ref<str
       fallback,
       messages,
       decimalSeparator: toRef(() => inferDecimalSeparator(current, fallback)),
+      numericGroupSeparator: toRef(() => inferNumericGroupSeparator(current, fallback)),
       t: createTranslateFunction(current, fallback, messages),
       n: createNumberFunction(current, fallback),
       provide: createProvideFunction({ current, fallback, messages }),
@@ -113,6 +119,7 @@ export function createVuetifyAdapter (options?: LocaleOptions): LocaleInstance {
     fallback,
     messages,
     decimalSeparator: toRef(() => options?.decimalSeparator ?? inferDecimalSeparator(current, fallback)),
+    numericGroupSeparator: toRef(() => options?.numericGroupSeparator ?? inferNumericGroupSeparator(current, fallback)),
     t: createTranslateFunction(current, fallback, messages),
     n: createNumberFunction(current, fallback),
     provide: createProvideFunction({ current, fallback, messages }),
