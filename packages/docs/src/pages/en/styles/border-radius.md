@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Border radius
   description: Use border utilities to quickly style the border-radius of any element.
@@ -22,6 +23,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded** | border-radius: 4px; |
 | **rounded-0** | border-radius: 0; |
 | **rounded-sm** | border-radius: 2px; |
+| **rounded-md** | border-radius: 4px; |
 | **rounded-lg** | border-radius: 8px; |
 | **rounded-xl** | border-radius: 24px; |
 | **rounded-pill** | border-radius: 9999px; |
@@ -30,6 +32,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-t** | border-top-left-radius: 4px;<br>border-top-right-radius: 4px; |
 | **rounded-t-0** | border-top-left-radius: 0;<br>border-top-right-radius: 0; |
 | **rounded-t-sm** | border-top-left-radius: 2px;<br>border-top-right-radius: 2px; |
+| **rounded-t-md** | border-top-left-radius: 4px;<br>border-top-right-radius: 4px; |
 | **rounded-t-lg** | border-top-left-radius: 8px;<br>border-top-right-radius: 8px; |
 | **rounded-t-xl** | border-top-left-radius: 24px;<br>border-top-right-radius: 24px; |
 | **rounded-t-pill** | border-top-left-radius: 9999px;<br>border-top-right-radius: 9999px; |
@@ -38,6 +41,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-te** | border-top-right-radius: 4px; |
 | **rounded-te-0** | border-top-right-radius: 0; |
 | **rounded-te-sm** | border-top-right-radius: 2px; |
+| **rounded-te-md** | border-top-right-radius: 4px; |
 | **rounded-te-lg** | border-top-right-radius: 8px; |
 | **rounded-te-xl** | border-top-right-radius: 24px; |
 | **rounded-te-pill** | border-top-right-radius: 9999px; |
@@ -46,6 +50,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-ts** | border-top-left-radius: 4px; |
 | **rounded-ts-0** | border-top-left-radius: 0; |
 | **rounded-ts-sm** | border-top-left-radius: 2px; |
+| **rounded-ts-md** | border-top-left-radius: 4px; |
 | **rounded-ts-lg** | border-top-left-radius: 8px; |
 | **rounded-ts-xl** | border-top-left-radius: 24px; |
 | **rounded-ts-pill** | border-top-left-radius: 9999px; |
@@ -54,6 +59,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-e** | border-inline-end-radius: 4px; |
 | **rounded-e-0** | border-inline-end-radius: 0; |
 | **rounded-e-sm** | border-inline-end-radius: 2px; |
+| **rounded-e-md** | border-inline-end-radius: 4px; |
 | **rounded-e-lg** | border-inline-end-radius: 8px; |
 | **rounded-e-xl** | border-inline-end-radius: 24px; |
 | **rounded-e-pill** | border-inline-end-radius: 9999px; |
@@ -62,6 +68,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-b** | border-bottom-left-radius: 4px;<br>border-bottom-right-radius: 4px; |
 | **rounded-b-0** | border-bottom-left-radius: 0;<br>border-bottom-right-radius: 0; |
 | **rounded-b-sm** | border-bottom-left-radius: 2px;<br>border-bottom-right-radius: 2px; |
+| **rounded-b-md** | border-bottom-left-radius: 4px;<br>border-bottom-right-radius: 4px; |
 | **rounded-b-lg** | border-bottom-left-radius: 8px;<br>border-bottom-right-radius: 8px; |
 | **rounded-b-xl** | border-bottom-left-radius: 24px;<br>border-bottom-right-radius: 24px; |
 | **rounded-b-pill** | border-bottom-left-radius: 9999px;<br>border-bottom-right-radius: 9999px; |
@@ -70,6 +77,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-be** | border-bottom-right-radius: 4px; |
 | **rounded-be-0** | border-bottom-right-radius: 0; |
 | **rounded-be-sm** | border-bottom-right-radius: 2px; |
+| **rounded-be-md** | border-bottom-right-radius: 4px; |
 | **rounded-be-lg** | border-bottom-right-radius: 8px; |
 | **rounded-be-xl** | border-bottom-right-radius: 24px; |
 | **rounded-be-pill** | border-bottom-right-radius: 9999px; |
@@ -78,6 +86,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-bs** | border-inline-start-radius: 4px; |
 | **rounded-bs-0** | border-inline-start-radius: 0; |
 | **rounded-bs-sm** | border-inline-start-radius: 2px; |
+| **rounded-bs-md** | border-inline-start-radius: 4px; |
 | **rounded-bs-lg** | border-inline-start-radius: 8px; |
 | **rounded-bs-xl** | border-inline-start-radius: 24px; |
 | **rounded-bs-pill** | border-inline-start-radius: 9999px; |
@@ -86,6 +95,7 @@ Use border utilities to quickly style the border-radius of any element.
 | **rounded-s** | border-inline-start-radius: 4px; |
 | **rounded-s-0** | border-inline-start-radius: 0; |
 | **rounded-s-sm** | border-inline-start-radius: 2px; |
+| **rounded-s-md** | border-inline-start-radius: 4px; |
 | **rounded-s-lg** | border-inline-start-radius: 8px; |
 | **rounded-s-xl** | border-inline-start-radius: 24px; |
 | **rounded-s-pill** | border-inline-start-radius: 9999px; |
@@ -100,7 +110,7 @@ The `border-radius` utilities allow you to quickly style the border-radius of an
 
 ### Rounded corners
 
-Use the **rounded**, **rounded-0**, **rounded-sm**, **rounded-lg**, and **rounded-xl** classes to set the border-radius of an element.
+Use the **rounded**, **rounded-0**, **rounded-sm**, **rounded-md**, **rounded-lg**, and **rounded-xl** classes to set the border-radius of an element.
 
 <ExamplesExample file="border-radius/misc-rounded-corners" />
 
@@ -140,15 +150,28 @@ Setting the **rounded** property applies a component specific border-radius clas
 
 <ExamplesExample file="border-radius/misc-components" />
 
+## Arbitrary border radius
+
+<DocIntroduced version="4.1.0" />
+
+In addition to the named sizes, the **rounded** prop accepts any valid CSS value or a plain number (converted to `px`):
+
+```html
+<v-sheet rounded="8" />       <!-- border-radius: 8px -->
+<v-sheet rounded="1.5rem" />  <!-- border-radius: 1.5rem -->
+<v-sheet rounded="50%" />     <!-- border-radius: 50% -->
+```
+
 ## SASS variables
 
-You can also use the following SASS variables to customize the border color and width:
+You can also use the following SASS variables to customize the border radius:
 
 ```scss
 $rounded: (
   0: 0,
   'sm': $border-radius-root / 2,
   null: $border-radius-root,
+  'md': $border-radius-root,
   'lg': $border-radius-root * 2,
   'xl': $border-radius-root * 6,
   'pill': 9999px,

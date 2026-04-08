@@ -46,7 +46,7 @@ export const VFooter = genericComponent()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const autoHeight = shallowRef(32)
     const el = shallowRef<HTMLElement>()
@@ -89,6 +89,7 @@ export const VFooter = genericComponent()({
           props.app ? layoutItemStyles.value : {
             height: convertToUnit(props.height),
           },
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

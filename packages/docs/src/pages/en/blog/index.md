@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## February 2026 Update
+
+🖊️ John Leider • 📅 March 9th, 2026
+
+February marks Vuetify's most significant milestone—the stable release of **Vuetify 4.0.0** with CSS layers, MD3 design system, and unstyled component foundations. The Vuetify CLI hit v1.0.0, VAvatarGroup shipped as a new component, and Vuetify0 gained createDataTable and Breadcrumbs composables across 390 commits and 68 merged PRs... { .text-medium-emphasis }
+
+[Read More](/blog/february-2026-update/) { .text-end }
+
 ## Vuetify Project baseline with Vite and TailwindCSS
 
 🖊️ Jacek Czarniecki • 📅 February 16th, 2026

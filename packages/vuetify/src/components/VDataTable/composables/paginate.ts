@@ -147,6 +147,9 @@ export function usePaginatedGroups <T extends GroupableItem> (options: {
     paginatedItems: ComputedRef<readonly TItem[]>
     pageCount: ComputedRef<number>
     setItemsPerPage: (value: number) => void
+    prevPage: () => void
+    nextPage: () => void
+    setPage: (value: number) => void
   }
   group: (items: MaybeRefOrGetter<readonly T[]>) => {
     flatItems: ComputedRef<readonly (T | Group<T> | GroupSummary<T>)[]>
@@ -157,19 +160,22 @@ export function usePaginatedGroups <T extends GroupableItem> (options: {
   const pageBy = toValue(options.pageBy) // TODO: make reactive
 
   if (pageBy === 'item') {
-    const { paginatedItems, pageCount, setItemsPerPage } = paginate(sortedItems)
+    const { paginatedItems, pageCount, setItemsPerPage, prevPage, nextPage, setPage } = paginate(sortedItems)
     const { flatItems: paginatedItemsWithGroups } = group(paginatedItems)
 
     return {
       pageCount,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       paginatedItems: paginatedItemsWithGroups,
     }
   }
 
   if (pageBy === 'group') {
     const { flatItems, groups } = group(sortedItems)
-    const { paginatedItems: paginatedGroups, pageCount, setItemsPerPage } = paginate(groups)
+    const { paginatedItems: paginatedGroups, pageCount, setItemsPerPage, prevPage, nextPage, setPage } = paginate(groups)
     const paginatedItemsWithGroups = computed(() => {
       if (!paginatedGroups.value.length) return []
       const firstGroupId = paginatedGroups.value.at(0)!.id
@@ -183,17 +189,23 @@ export function usePaginatedGroups <T extends GroupableItem> (options: {
     return {
       pageCount,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       paginatedItems: paginatedItemsWithGroups,
     }
   }
 
   if (pageBy === 'any') {
     const { flatItems } = group(sortedItems)
-    const { paginatedItems: paginatedItemsWithGroups, pageCount, setItemsPerPage } = paginate(flatItems)
+    const { paginatedItems: paginatedItemsWithGroups, pageCount, setItemsPerPage, prevPage, nextPage, setPage } = paginate(flatItems)
 
     return {
       pageCount,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       paginatedItems: paginatedItemsWithGroups,
     }
   }

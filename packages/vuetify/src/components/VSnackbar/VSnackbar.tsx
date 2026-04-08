@@ -135,7 +135,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     const { scopeId } = useScopeId()
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const countdown = useCountdown(() => Number(props.timeout))
 
     const overlay = ref<VOverlay>()
@@ -317,6 +317,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             style: [
               colorStyles.value,
+              roundedStyles.value,
             ],
             onPointerenter,
             onPointerleave,

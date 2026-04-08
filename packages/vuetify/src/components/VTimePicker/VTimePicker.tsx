@@ -114,6 +114,15 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     watch(inputMinute, emitValue)
     watch(inputSecond, emitValue)
 
+    watch(period, (newPeriod, oldPeriod) => {
+      if (inputHour.value == null || newPeriod === oldPeriod) return
+      if (newPeriod === 'pm' && inputHour.value < 12) {
+        inputHour.value = inputHour.value + 12
+      } else if (newPeriod === 'am' && inputHour.value >= 12) {
+        inputHour.value = inputHour.value - 12
+      }
+    })
+
     watch(() => props.modelValue, val => setInputData(val))
 
     watch(() => props.useSeconds, (val, old) => {

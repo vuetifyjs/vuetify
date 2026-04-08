@@ -35,31 +35,34 @@ export type SnackbarMessageDismissType =
   | 'overflow'
   | 'auto'
 
+type SingleSnackbarProps = Omit<
+  VSnackbar['$props'],
+  | 'modelValue'
+  | 'onUpdate:modelValue'
+  | 'activator'
+  | 'activatorProps'
+  | 'closeDelay'
+  | 'openDelay'
+  | 'openOnClick'
+  | 'openOnFocus'
+  | 'openOnHover'
+  | 'collapsed'
+  | 'style'
+  | '$children'
+  | 'v-slots'
+  | `v-slot:${string}`
+  | keyof VNodeProps
+> & {
+  style?: any
+}
+
 export type SnackbarMessage =
   | string
-  | (Omit<
-    VSnackbar['$props'],
-    | 'modelValue'
-    | 'onUpdate:modelValue'
-    | 'activator'
-    | 'activatorProps'
-    | 'closeDelay'
-    | 'openDelay'
-    | 'openOnClick'
-    | 'openOnFocus'
-    | 'openOnHover'
-    | 'collapsed'
-    | 'style'
-    | '$children'
-    | 'v-slots'
-    | `v-slot:${string}`
-    | keyof VNodeProps
-  > & {
-    style?: any
+  | (SingleSnackbarProps & {
     collapsed?: { width: number, height: number }
     promise?: Promise<unknown>
-    success?: (val?: unknown) => Exclude<SnackbarMessage, string>
-    error?: (val?: Error) => Exclude<SnackbarMessage, string>
+    success?: (val?: unknown) => SingleSnackbarProps
+    error?: (val?: Error) => SingleSnackbarProps
     onDismiss?: (reason: SnackbarMessageDismissType) => void
   })
 

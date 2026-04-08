@@ -73,7 +73,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     provideDefaults({
       VBreadcrumbsDivider: {
@@ -105,6 +105,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
           ]}
           style={[
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >

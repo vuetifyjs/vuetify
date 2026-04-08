@@ -288,7 +288,8 @@
     "props": {
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
-      "chunkWidth": "3.10.0"
+      "chunkWidth": "3.10.0",
+      "variant": "4.1.0"
     }
   },
   "VRow": {
@@ -340,7 +341,7 @@
       "closable": "4.0.0",
       "closeText": "4.0.0",
       "gap": "4.0.0",
-      "totalVisible": "3.11.0"
+      "totalVisible": "4.0.0"
     }
   },
   "VStepper": {
