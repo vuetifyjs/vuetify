@@ -113,15 +113,16 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
 
     function toNumber (val: string | null | undefined) {
-      return Number(val
-        ?.replaceAll(groupSeparator.value, '')
-        .replace(decimalSeparator.value, '.'))
+      const stripped = props.grouping ? val?.replaceAll(groupSeparator.value, '') : val
+      return Number(stripped?.replace(decimalSeparator.value, '.'))
     }
 
     function correctPrecision (val: number, precision?: number | null, trim = true) {
       precision ??= isFocused.value && trim ? undefined : props.precision ?? undefined
       return new Intl.NumberFormat(locale.value, {
-        minimumFractionDigits: props.minFractionDigits ?? precision,
+        minimumFractionDigits: props.minFractionDigits && precision != null
+          ? Math.min(props.minFractionDigits, precision)
+          : (props.minFractionDigits ?? precision),
         maximumFractionDigits: precision,
         useGrouping: props.grouping,
       }).format(val)
