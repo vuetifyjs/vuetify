@@ -1183,7 +1183,7 @@ The full DevKey source is on GitHub: [vuetifyjs/devkey](https://github.com/vueti
 
 To deploy to production, build the project and preview it locally:
 
-::: code-group
+::: tabs
 
 ```bash [pnpm]
 pnpm build
