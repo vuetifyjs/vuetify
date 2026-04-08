@@ -6,7 +6,7 @@ import { toRef, watch } from 'vue'
 
 // Types
 import type { Ref } from 'vue'
-import type { I18n, useI18n } from 'vue-i18n'
+import type { I18n, NumberOptions, useI18n } from 'vue-i18n'
 import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
 type VueI18nAdapterParams = {
@@ -30,6 +30,10 @@ function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
 
 function inferDecimalSeparator (format: (v: number) => string) {
   return format(0.1).includes(',') ? ',' : '.'
+}
+
+function inferNumericGroupSeparator (format: (v: number, options: NumberOptions) => string) {
+  return format(10000, { useGrouping: true }).at(2)!
 }
 
 function createProvideFunction (data: {
@@ -62,6 +66,7 @@ function createProvideFunction (data: {
       fallback,
       messages,
       decimalSeparator: toRef(() => props.decimalSeparator ?? inferDecimalSeparator(i18n.n)),
+      numericGroupSeparator: toRef(() => inferNumericGroupSeparator(i18n.n)),
       t: (key: string, ...params: unknown[]) => i18n.t(key, params),
       n: i18n.n,
       provide: createProvideFunction({ current, fallback, messages, useI18n: data.useI18n }),
@@ -80,6 +85,7 @@ export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): 
     fallback,
     messages,
     decimalSeparator: toRef(() => inferDecimalSeparator(i18n.global.n)),
+    numericGroupSeparator: toRef(() => inferNumericGroupSeparator(i18n.global.n)),
     t: (key: string, ...params: unknown[]) => i18n.global.t(key, params),
     n: i18n.global.n,
     provide: createProvideFunction({ current, fallback, messages, useI18n }),

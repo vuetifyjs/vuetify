@@ -70,7 +70,7 @@ function inferDecimalSeparator (current: Ref<string>, fallback: Ref<string>) {
 
 function inferNumericGroupSeparator (current: Ref<string>, fallback: Ref<string>) {
   const format = createNumberFunction(current, fallback)
-  return format(10000).at(2)!
+  return format(10000, { useGrouping: true }).at(2)!
 }
 
 function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
