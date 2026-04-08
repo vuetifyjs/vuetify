@@ -238,7 +238,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         return
       }
 
-      let inferredPrecision = Math.max(inferPrecision(toNumber(inputText.value)), inferPrecision(props.step))
+      const inferredPrecision = Math.max(inferPrecision(toNumber(inputText.value)), inferPrecision(props.step))
       if (increment) {
         if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
       } else {
