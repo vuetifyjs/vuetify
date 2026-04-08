@@ -33,8 +33,7 @@ import {
 import { Box } from '@/util/box'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
-import type { ClassValue } from '@/composables/component'
+import type { ClassValue, ComputedRef, PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 

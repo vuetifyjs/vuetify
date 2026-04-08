@@ -29,3 +29,6 @@ __screenshots__/
 
 # Superpowers specs/plans
 /docs/
+
+# Generated files
+dist
