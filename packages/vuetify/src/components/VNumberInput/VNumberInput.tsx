@@ -9,6 +9,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { useHold } from './hold'
+import { processGroupedInput, processPlainInput } from './typing'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -16,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
-import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -245,43 +246,38 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     function onBeforeinput (e: InputEvent) {
       if (controlsDisabled.value) return
-      if (!e.data) return
       const inputElement = e.target as HTMLInputElement
-      const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
 
-      const potentialNewInputVal =
-        existingTxt
-          ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
-          : e.data
+      const result = props.grouping
+        ? processGroupedInput(
+          e.inputType,
+          e.data,
+          inputElement.value ?? '',
+          inputElement.selectionStart ?? 0,
+          inputElement.selectionEnd ?? 0,
+          {
+            groupSeparator: groupSeparator.value,
+            decimalSeparator: decimalSeparator.value,
+            precision: props.precision,
+            grouping: props.grouping,
+          }
+        )
+        : processPlainInput(
+          e.data,
+          inputElement.value ?? '',
+          inputElement.selectionStart ?? 0,
+          inputElement.selectionEnd ?? 0,
+          {
+            decimalSeparator: decimalSeparator.value,
+            precision: props.precision,
+          }
+        )
 
-      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision, decimalSeparator.value)
-
-      // Allow only numbers, "-" and {decimal separator}
-      // Allow "-" and {decimal separator} only once
-      // Allow "-" only at the start
-      if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-      }
-
-      if (props.precision == null) return
-
-      // Ignore decimal digits above precision limit
-      if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-
-        const cursorPosition = (selectionStart ?? 0) + e.data.length
-        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
-      }
-      // Ignore decimal separator when precision = 0
-      if (props.precision === 0 && potentialNewInputVal.endsWith(decimalSeparator.value)) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-      }
+      if (result === null) return
+      e.preventDefault()
+      inputElement.value = result.text
+      inputElement.setSelectionRange(result.cursor, result.cursor)
+      nextTick(() => inputText.value = result.text)
     }
 
     async function onKeydown (e: KeyboardEvent) {
