@@ -854,3 +854,10 @@ export function deepToRaw<T extends {}> (value: T): T {
 
   return objectIterator(value)
 }
+
+/**
+ * Ensures that the given object matches the exact type and does not include any extraneous properties
+ */
+export function assertExact<Target> () {
+  return <T extends Target>(obj: T & Record<Exclude<keyof T, keyof Target>, never>) => obj
+}

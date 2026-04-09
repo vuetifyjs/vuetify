@@ -17,6 +17,11 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## `useDisplay`
+
+- Returned Refs are now readonly.
+- Breakpoints are matched with `window.matchMedia` instead of `window.innerWidth`. This may result in slightly different values at zoom levels other than 100%.
+
 ## Theme
 
 The theme system now uses `@vuetify/v0` under the hood. The consumer API (`useTheme`, `VThemeProvider`) is unchanged for most users.
