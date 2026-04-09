@@ -46,7 +46,9 @@ export interface InternalLocaleData {
   _fallback: string
 }
 
-export const LocaleSymbol: InjectionKey<LocaleInstance & RtlInstance> = Symbol.for('vuetify:locale')
+export interface FullLocaleInstance extends LocaleInstance, RtlInstance, InternalLocaleData {}
+
+export const LocaleSymbol: InjectionKey<FullLocaleInstance> = Symbol.for('vuetify:locale')
 export const RtlSymbol: InjectionKey<RtlInstance> = Symbol.for('vuetify:rtl')
 
 const LANG_PREFIX = '$vuetify.'
@@ -178,7 +180,7 @@ export function createLocale (options?: LocaleOptions & RtlOptions) {
   const locale = createLocaleInstance(v0Locale, options)
   const rtl = createRtlInstance(locale, rtlMap, v0Rtl)
 
-  return { ...locale, ...rtl, _messages: messages, _fallback: fallback } as LocaleInstance & RtlInstance & InternalLocaleData
+  return { ...locale, ...rtl, _messages: messages, _fallback: fallback } satisfies FullLocaleInstance
 }
 
 function createRtlFromAdapter (adapter: LocaleInstance, options?: RtlOptions): RtlInstance {
@@ -189,7 +191,7 @@ function createRtlFromAdapter (adapter: LocaleInstance, options?: RtlOptions): R
     isRtl,
     rtl,
     rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
-  }
+  } satisfies RtlInstance
 }
 
 export function useLocale () {
@@ -213,7 +215,7 @@ export function provideLocale (props: LocaleOptions & RtlProps) {
     return data
   }
 
-  const parentData = parent as any as Partial<InternalLocaleData>
+  const parentData = parent
   const parentMessages = parentData._messages ?? {}
   const parentFallback = parentData._fallback ?? 'en'
   const messages = props.messages
@@ -230,7 +232,7 @@ export function provideLocale (props: LocaleOptions & RtlProps) {
   const locale = createLocaleInstance(v0Locale, props)
   const rtl = provideRtl(locale, parent.rtl, props)
 
-  const data = { ...locale, ...rtl, _messages: messages, _fallback: fallback } as LocaleInstance & RtlInstance & InternalLocaleData
+  const data = { ...locale, ...rtl, _messages: messages, _fallback: fallback } satisfies FullLocaleInstance
   provide(LocaleSymbol, data)
   return data
 }
