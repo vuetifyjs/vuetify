@@ -275,16 +275,30 @@ describe('display', () => {
   })
 
   it('should override default thresholds', async () => {
+    // Default sm is 600. Override to 400.
+    // At 500px, default would be xs but custom should be sm.
+    await page.viewport(500, 900)
+
     const scope = effectScope()
     const { name } = scope.run(() => createDisplay({
       thresholds: { sm: 400 },
     }))!
 
-    await page.viewport(400, 900)
-    await expect.poll(() => name.value).toBe('sm')
+    expect(name.value).toBe('sm')
 
-    await page.viewport(399, 900)
-    await expect.poll(() => name.value).toBe('xs')
+    scope.stop()
+
+    // At 300px, both default and custom are xs.
+    await page.viewport(300, 900)
+
+    const scope2 = effectScope()
+    const display2 = scope2.run(() => createDisplay({
+      thresholds: { sm: 400 },
+    }))!
+
+    expect(display2.name.value).toBe('xs')
+
+    scope2.stop()
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {

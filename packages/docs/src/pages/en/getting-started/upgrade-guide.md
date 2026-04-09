@@ -42,3 +42,8 @@ Several properties have been removed from the `LocaleInstance` type:
 ### vue-i18n adapter
 
 The vue-i18n adapter continues to work with the same import path and configuration. No changes required.
+
+## `useDisplay`
+
+- Returned Refs are now readonly.
+- Breakpoints are matched with `window.matchMedia` instead of `window.innerWidth`. This may result in slightly different values at zoom levels other than 100%.
