@@ -1,6 +1,9 @@
 // Styles
 import './VThemeProvider.sass'
 
+// Components
+import { Theme } from '@vuetify/v0/components'
+
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
@@ -26,19 +29,27 @@ export const VThemeProvider = genericComponent()({
     const { themeClasses } = provideTheme(props)
 
     return () => {
-      if (!props.withBackground) return slots.default?.()
+      if (!props.withBackground) {
+        return (
+          <Theme theme={ props.theme } renderless>
+            { slots.default?.() }
+          </Theme>
+        )
+      }
 
       return (
-        <props.tag
-          class={[
-            'v-theme-provider',
-            themeClasses.value,
-            props.class,
-          ]}
-          style={ props.style }
-        >
-          { slots.default?.() }
-        </props.tag>
+        <Theme theme={ props.theme } renderless>
+          <props.tag
+            class={[
+              'v-theme-provider',
+              themeClasses.value,
+              props.class,
+            ]}
+            style={ props.style }
+          >
+            { slots.default?.() }
+          </props.tag>
+        </Theme>
       )
     }
   },
