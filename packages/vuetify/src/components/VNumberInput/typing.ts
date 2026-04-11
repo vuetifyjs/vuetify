@@ -8,6 +8,7 @@ export interface GroupedInputOptions {
   decimalSeparator: string
   precision: number | null
   grouping: GroupingOption
+  locale: string
 }
 
 export interface InputResult {
@@ -15,17 +16,30 @@ export interface InputResult {
   cursor: number
 }
 
-/** Remove all group separator characters from text */
 export function stripGrouping (text: string, groupSeparator: string): string {
   return text.replaceAll(groupSeparator, '')
 }
 
-/** Insert group separators into the integer part of a raw number string */
+/** Fallback: fixed 3-digit groups */
+function formatWithoutLocale (digits: string, groupSeparator: string, grouping: GroupingOption): string {
+  if (grouping === 'min2' && digits.length <= 4) {
+    return digits
+  }
+
+  const groups: string[] = []
+  for (let i = digits.length; i > 0; i -= 3) {
+    groups.unshift(digits.slice(Math.max(0, i - 3), i))
+  }
+
+  return groups.join(groupSeparator)
+}
+
 export function addGrouping (
   raw: string,
   groupSeparator: string,
   decimalSeparator: string,
   grouping: GroupingOption,
+  locale?: string,
 ): string {
   if (!grouping) return raw
 
@@ -36,17 +50,22 @@ export function addGrouping (
   const sign = integerPart.startsWith('-') ? '-' : ''
   const digits = sign ? integerPart.slice(1) : integerPart
 
-  // min2 / auto: only group when there are at least 2 groups (>3 digits)
-  if ((grouping === 'min2' || grouping === 'auto') && digits.length <= 4) {
-    return raw
+  if (!digits) return raw
+
+  if (locale) {
+    const num = Number(digits)
+    if (!Number.isFinite(num)) return raw
+    const grouped = new Intl.NumberFormat(locale, {
+      useGrouping: grouping,
+      numberingSystem: 'latn',
+    })
+      .formatToParts(num)
+      .map(p => p.type === 'group' ? groupSeparator : p.value)
+      .join('')
+    return sign + grouped + rest
   }
 
-  const groups: string[] = []
-  for (let i = digits.length; i > 0; i -= 3) {
-    groups.unshift(digits.slice(Math.max(0, i - 3), i))
-  }
-
-  return sign + groups.join(groupSeparator) + rest
+  return sign + formatWithoutLocale(digits, groupSeparator, grouping) + rest
 }
 
 /** Count non-separator characters before displayPosition */
@@ -58,7 +77,6 @@ export function toLogicalPosition (text: string, groupSeparator: string, display
   return logical
 }
 
-/** Find display index where logicalPosition non-separator characters precede it */
 export function toDisplayPosition (text: string, groupSeparator: string, logicalPosition: number): number {
   let logical = 0
   for (let i = 0; i <= text.length; i++) {
@@ -110,7 +128,7 @@ export function processPlainInput (
 
 /**
  * Process a beforeinput event for grouped number input.
- * Returns { text, cursor } to apply, or null for unknown inputTypes (let browser handle).
+ * Returns { text, cursor } to apply, or null for interactions that do not need override
  */
 export function processGroupedInput (
   inputType: string,
@@ -120,7 +138,7 @@ export function processGroupedInput (
   selectionEnd: number,
   options: GroupedInputOptions,
 ): InputResult | null {
-  const { groupSeparator, decimalSeparator, precision, grouping } = options
+  const { groupSeparator, decimalSeparator, precision, grouping, locale } = options
   const raw = stripGrouping(value, groupSeparator)
   const logicalStart = toLogicalPosition(value, groupSeparator, selectionStart)
   const logicalEnd = toLogicalPosition(value, groupSeparator, selectionEnd)
@@ -219,14 +237,12 @@ export function processGroupedInput (
       return null
   }
 
-  // Validate: allow only digits, minus (at start, once), and decimal separator (once)
   const validPattern = new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator)}?\\d*$`)
   if (!validPattern.test(newRaw)) {
     newRaw = extractNumber(newRaw, precision, decimalSeparator)
     newLogicalCursor = Math.min(newLogicalCursor, newRaw.length)
   }
 
-  // Enforce precision limits
   if (precision != null) {
     const parts = newRaw.split(decimalSeparator)
     if (parts[1]?.length > precision) {
@@ -239,8 +255,7 @@ export function processGroupedInput (
     }
   }
 
-  // Reformat with grouping
-  const formatted = addGrouping(newRaw, groupSeparator, decimalSeparator, grouping)
+  const formatted = addGrouping(newRaw, groupSeparator, decimalSeparator, grouping, locale)
   const cursor = toDisplayPosition(formatted, groupSeparator, newLogicalCursor)
 
   return { text: formatted, cursor }

@@ -262,6 +262,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             decimalSeparator: decimalSeparator.value,
             precision: props.precision,
             grouping: props.grouping,
+            locale: locale.value,
           }
         )
         : processPlainInput(

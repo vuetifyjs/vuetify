@@ -15,6 +15,7 @@ const defaults: GroupedInputOptions = {
   decimalSeparator: '.',
   precision: 0,
   grouping: 'always',
+  locale: 'en-US',
 }
 
 function opts (overrides: Partial<GroupedInputOptions> = {}): GroupedInputOptions {
@@ -52,8 +53,6 @@ describe('typing', () => {
       // min2: only group when > 4 digits
       ['1234', ',', '.', 'min2', '1234'],
       ['12345', ',', '.', 'min2', '12,345'],
-      ['1234', ',', '.', 'auto', '1234'],
-      ['12345', ',', '.', 'auto', '12,345'],
       // false: no grouping
       ['1234567', ',', '.', false, '1234567'],
       // true: same as always
@@ -62,6 +61,22 @@ describe('typing', () => {
       ['1234,56', '.', ',', 'always', '1.234,56'],
     ] as const)('addGrouping(%s, %s, %s, %s) → %s', (raw, groupSep, decSep, grouping, expected) => {
       expect(addGrouping(raw, groupSep, decSep, grouping)).toBe(expected)
+    })
+
+    it.each([
+      // en-US: standard 3-digit groups
+      ['1234', ',', '.', 'always', 'en-US', '1,234'],
+      ['1234', ',', '.', 'auto', 'en-US', '1,234'],
+      ['1234', ',', '.', 'min2', 'en-US', '1234'],
+      ['12345', ',', '.', 'min2', 'en-US', '12,345'],
+      // hi-IN: 3-digit primary group, then 2-digit groups
+      ['1234567890', ',', '.', 'auto', 'hi-IN', '1,23,45,67,890'],
+      ['1234567890', ',', '.', 'always', 'hi-IN', '1,23,45,67,890'],
+      ['-1234567890.5', ',', '.', 'always', 'hi-IN', '-1,23,45,67,890.5'],
+      // custom separator with locale
+      ['1234567890', "'", '.', 'always', 'hi-IN', "1'23'45'67'890"],
+    ] as const)('addGrouping(%s, %s, %s, %s, %s) → %s', (raw, groupSep, decSep, grouping, locale, expected) => {
+      expect(addGrouping(raw, groupSep, decSep, grouping, locale)).toBe(expected)
     })
   })
 
