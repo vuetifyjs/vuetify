@@ -8,7 +8,7 @@
           v-model="example1"
           :precision="0"
           grouping="min2"
-        />
+        ></v-number-input>
       </v-col>
 
       <v-col cols="12" md="4" sm="6">
@@ -18,7 +18,7 @@
           :precision="2"
           group-separator="'"
           grouping
-        />
+        ></v-number-input>
       </v-col>
 
       <v-col cols="12" md="4" sm="6">
@@ -28,7 +28,7 @@
             v-model="example3"
             :precision="2"
             grouping
-          />
+          ></v-number-input>
         </v-locale-provider>
       </v-col>
 
