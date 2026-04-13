@@ -23,8 +23,8 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { IconValue } from '@/composables/icons'
 import type { PropType } from 'vue'
+import type { IconValue } from '@/composables/icons'
 import type { GenericProps } from '@/util'
 
 export type VMonthPickerSlots = {
