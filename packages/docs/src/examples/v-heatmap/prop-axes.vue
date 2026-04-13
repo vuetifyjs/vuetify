@@ -19,21 +19,18 @@
 </template>
 
 <script setup>
-  const rows = ['Avg (°C)', 'Max (°C)', 'Min (°C)']
+  const rows = ['Min (°C)', 'Avg (°C)', 'Max (°C)']
   const columns = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-  const thresholds = [
-    { min: -30, color: '#4a7ec1' },
-    { min: -15, color: '#7a96c7' },
-    { min: 0, color: '#a38fc4' },
-    { min: 5, color: '#c682a5' },
-    { min: 15, color: '#dc6b80' },
-  ]
+  const thresholds = {
+    from: { min: -30, color: '#4a7ec1' },
+    to: { min: 15, color: '#dc6b80' },
+  }
 
   const temperatures = {
+    'Min (°C)': [-29, -26, -20, -7, 2, 9, 10, 8, 2, -8, -20, -27],
     'Avg (°C)': [-24, -20, -12, -1, 8, 15, 16, 13, 7, -4, -15, -23],
     'Max (°C)': [-19, -14, -5, 5, 15, 21, 22, 19, 12, 0, -11, -20],
-    'Min (°C)': [-29, -26, -20, -7, 2, 9, 10, 8, 2, -8, -20, -27],
   }
 
   const items = rows.flatMap(row =>
@@ -48,13 +45,13 @@
 <script>
   export default {
     data () {
-      const rows = ['Avg (°C)', 'Max (°C)', 'Min (°C)']
+      const rows = ['Min (°C)', 'Avg (°C)', 'Max (°C)']
       const columns = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
       const temperatures = {
+        'Min (°C)': [-29, -26, -20, -7, 2, 9, 10, 8, 2, -8, -20, -27],
         'Avg (°C)': [-24, -20, -12, -1, 8, 15, 16, 13, 7, -4, -15, -23],
         'Max (°C)': [-19, -14, -5, 5, 15, 21, 22, 19, 12, 0, -11, -20],
-        'Min (°C)': [-29, -26, -20, -7, 2, 9, 10, 8, 2, -8, -20, -27],
       }
 
       return {

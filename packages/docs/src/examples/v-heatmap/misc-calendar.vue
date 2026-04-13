@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-card-title class="px-8 pt-6 pb-3">Documents uploaded</v-card-title>
-      <v-card-text class="px-6 pt-3 pb-8">
+      <v-card-text class="px-6 pt-3 pb-8 overflow-x-auto">
         <v-heatmap
           :group-by="(v) => v.date.substring(0, 7)"
           :item-row="(v) => new Date(v.date).getDay()"
@@ -22,7 +22,7 @@
           </template>
           <template v-slot:cell="{ item }">
             <v-menu
-              v-if="item"
+              v-if="item && item.value > 0"
               :close-delay="0"
               :open-delay="400"
               activator="parent"
@@ -60,16 +60,16 @@
 
   const thresholds = computed(() => theme.current.value.dark
     ? [
-      { min: 1, color: '#12334C' },
-      { min: 4, color: '#1D5783' },
-      { min: 8, color: '#2978B3' },
-      { min: 12, color: '#3BABFF' },
+      { min: 1, color: '#0E4429' },
+      { min: 4, color: '#006D32' },
+      { min: 8, color: '#26A641' },
+      { min: 12, color: '#39D353' },
     ]
     : [
-      { min: 1, color: '#ACD3F0' },
-      { min: 4, color: '#83BDE9' },
-      { min: 8, color: '#59A7E1' },
-      { min: 12, color: '#2674AE' },
+      { min: 1, color: '#9BE9A8' },
+      { min: 4, color: '#40C463' },
+      { min: 8, color: '#30A14E' },
+      { min: 12, color: '#216E39' },
     ])
 
   const currentYear = new Date().getFullYear()
