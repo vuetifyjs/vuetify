@@ -6,6 +6,7 @@
         :items="items"
         :rows="rows"
         :thresholds="thresholds"
+        legend
       >
         <template v-slot:legend="{ thresholds: legendThresholds, activeBuckets, toggle }">
           <div class="d-flex flex-wrap ga-2 justify-end pt-4">
