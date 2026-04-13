@@ -2,6 +2,7 @@
 import { VHeatmapCell } from './VHeatmapCell'
 
 // Composables
+import { useLocale } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
@@ -19,7 +20,7 @@ export const makeVHeatmapLegendProps = propsFactory({
   },
   labels: {
     type: Array as PropType<string[]>,
-    default: () => ['Less', 'More'],
+    default: () => ['$vuetify.heatmap.less', '$vuetify.heatmap.more'],
   },
   thresholds: {
     type: [Array, Object] as PropType<HeatmapThresholds>,
@@ -42,6 +43,8 @@ export const VHeatmapLegend = defineComponent({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
+
     useRender(() => {
       const cellWidth = Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize
       const cellHeight = Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize
@@ -59,7 +62,7 @@ export const VHeatmapLegend = defineComponent({
             <div
               key="legend-label-start"
               class="v-heatmap-legend__label"
-            >{ props.labels[0] }</div>
+            >{ t(props.labels[0]) }</div>
           )}
           { linear ? (
             <div
@@ -85,7 +88,7 @@ export const VHeatmapLegend = defineComponent({
             <div
               key="legend-label-end"
               class="v-heatmap-legend__label"
-            >{ props.labels[1] }</div>
+            >{ t(props.labels[1]) }</div>
           )}
         </div>
       )

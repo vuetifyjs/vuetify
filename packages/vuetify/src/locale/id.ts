@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} lagi',
     today: 'Hari ini',
   },
+  heatmap: {
+    less: 'Kurang',
+    more: 'Lebih',
+  },
   input: {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',

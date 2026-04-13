@@ -69,6 +69,10 @@ export default {
     moreEvents: 'Vēl {0}',
     today: 'Šodien',
   },
+  heatmap: {
+    less: 'Mazāk',
+    more: 'Vairāk',
+  },
   input: {
     clear: 'Notīrīt {0}',
     prependAction: '{0} pievienota darbība sākumā',

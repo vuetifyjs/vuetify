@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} veel',
     today: 'Täna',
   },
+  heatmap: {
+    less: 'Vähem',
+    more: 'Rohkem',
+  },
   input: {
     clear: 'Tühjenda {0}',
     prependAction: '{0} eelnev toiming',
