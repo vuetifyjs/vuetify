@@ -106,28 +106,34 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
     const { data } = useHeatmap(props)
     const activeBuckets = ref<number[]>([])
 
-    watch(() => props.thresholds, t => {
-      activeBuckets.value = Array.isArray(t) ? t.map((_, i) => i) : []
+    watch(() => props.thresholds, val => {
+      activeBuckets.value = Array.isArray(val) ? val.map((_, i) => i) : []
     }, { deep: 1, immediate: true })
 
     function toggle (index: number) {
-      const i = activeBuckets.value.indexOf(index)
-      if (i >= 0) activeBuckets.value.splice(i, 1)
+      const position = activeBuckets.value.indexOf(index)
+
+      if (position >= 0) activeBuckets.value.splice(position, 1)
       else activeBuckets.value.push(index)
     }
 
     function isDisabled (cell: HeatmapCell) {
-      const t = props.thresholds
-      if (!Array.isArray(t)) return false
-      const idx = t.findLastIndex(({ min }) => cell.value >= min)
-      if (idx < 0) return false
-      return !activeBuckets.value.includes(idx)
+      const thresholds = props.thresholds
+
+      if (!Array.isArray(thresholds)) return false
+
+      const bucketIndex = thresholds.findLastIndex(({ min }) => cell.value >= min)
+
+      if (bucketIndex < 0) return false
+
+      return !activeBuckets.value.includes(bucketIndex)
     }
 
     function renderCell (item: HeatmapCell, key: string) {
       const cellProps = typeof props.itemProps === 'function'
         ? props.itemProps(item)
         : props.itemProps
+
       return (
         <VHeatmapCell
           key={ key }
@@ -144,7 +150,9 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
     useRender(() => {
       const cellWidth = Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize
       const cellHeight = Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize
+
       const { rows, groups, rowItems, hasExplicitColumns } = data.value
+
       const hasGroupLabels = !props.hideColumnHeaders && (!!slots['group-header'] || groups.some(g => g.label))
       const hasColumnHeaders = !props.hideColumnHeaders && hasExplicitColumns
 
@@ -203,11 +211,11 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                     </div>
                   )}
                   <div class="v-heatmap__group-grid">
-                    { group.columns.flatMap((col, cIdx) =>
-                      col.cells.map((cell, rIdx) =>
+                    { group.columns.flatMap((col, columnIndex) =>
+                      col.cells.map((cell, rowIndex) =>
                         cell
-                          ? renderCell(cell, `${group.key}-${cIdx}-${rIdx}`)
-                          : <div key={ `blank-${group.key}-${cIdx}-${rIdx}` } class="v-heatmap__blank-cell" />
+                          ? renderCell(cell, `${group.key}-${columnIndex}-${rowIndex}`)
+                          : <div key={ `blank-${group.key}-${columnIndex}-${rowIndex}` } class="v-heatmap__blank-cell" />
                       )
                     )}
                   </div>

@@ -1,8 +1,8 @@
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, toValue } from 'vue'
 
 // Types
-import type { Ref } from 'vue'
+import type { MaybeRefOrGetter } from 'vue'
 
 export interface HeatmapThreshold {
   min: number
@@ -29,14 +29,11 @@ export interface HeatmapCell {
   groupKey: string
 }
 
-/** @deprecated Use HeatmapCell instead */
 export type HeatmapDay = HeatmapCell
 
 export interface HeatmapColumn {
   key: string
-  /** Row-indexed; null = blank cell */
   cells: (HeatmapCell | null)[]
-  /** Non-null cells in input order */
   items: HeatmapCell[]
 }
 
@@ -44,17 +41,14 @@ export interface HeatmapColumnGroup {
   key: string
   label: string
   columns: HeatmapColumn[]
-  /** All non-blank cells in this group, in input order */
   items: HeatmapCell[]
 }
 
 export interface HeatmapData {
   rows: any[]
   groups: HeatmapColumnGroup[]
-  /** Items indexed by row key (useful for row-header slot) */
   rowItems: Map<any, HeatmapCell[]>
-  /** True when the itemColumn accessor resolves to a value for at least one item */
-  hasExplicitColumns: boolean
+  hasExplicitColumns: boolean // itemColumn accessor resolves to a value for at least one item
 }
 
 export type HeatmapAccessor<T = any> = string | ((item: any) => T)
@@ -76,53 +70,67 @@ function readValue (item: any, accessor: HeatmapAccessor | undefined) {
   return item[accessor]
 }
 
-export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
-  const _props = toRef(props)
+export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
+  function colorFromValue (value: number) {
+    const thresholds = toValue(props).thresholds
 
-  function colorFromValue (v: number) {
-    const t = _props.value.thresholds
-    if (isLinearScale(t)) {
-      const { from, to } = t
+    if (isLinearScale(thresholds)) {
+      const { from, to } = thresholds
       const span = to.min - from.min
-      if (span === 0) return v >= to.min ? to.color : from.color
-      const ratio = Math.max(0, Math.min(1, (v - from.min) / span))
-      const pct = Number((ratio * 100).toFixed(2))
-      if (pct <= 0) return from.color
-      if (pct >= 100) return to.color
-      return `color-mix(in srgb, ${to.color} ${pct}%, ${from.color})`
+
+      if (span === 0) return value >= to.min ? to.color : from.color
+
+      const ratio = Math.max(0, Math.min(1, (value - from.min) / span))
+      const percent = Number((ratio * 100).toFixed(2))
+
+      if (percent <= 0) return from.color
+      if (percent >= 100) return to.color
+
+      return `color-mix(in srgb, ${to.color} ${percent}%, ${from.color})`
     }
-    return t.findLast(({ min }) => v >= min)?.color
+
+    return thresholds.findLast(({ min }) => value >= min)?.color
   }
 
   const data = computed<HeatmapData>(() => {
-    const _p = _props.value
+    const {
+      rows,
+      items,
+      itemRow,
+      itemColumn,
+      itemValue,
+      groupBy,
+      columns: columnsProp,
+    } = toValue(props)
 
     // 1. Resolve rows
     let rowKeys: any[]
-    if (_p.rows) {
-      rowKeys = [..._p.rows]
+    if (rows) {
+      rowKeys = [...rows]
     } else {
       const set = new Set<any>()
-      for (const item of _p.items) set.add(readValue(item, _p.itemRow))
+      for (const item of items) set.add(readValue(item, itemRow))
       rowKeys = [...set]
     }
-    const rowIndex = new Map<any, number>(rowKeys.map((k, i) => [k, i]))
+
+    const rowIndexByKey = new Map<any, number>(rowKeys.map((k, i) => [k, i]))
 
     // 2. Group items
     const groupMap = new Map<string, { label: string, items: Record<string, any>[] }>()
-    for (const item of _p.items) {
-      const rawKey = _p.groupBy != null ? readValue(item, _p.groupBy) : ''
+
+    for (const item of items) {
+      const rawKey = groupBy != null ? readValue(item, groupBy) : ''
       const key = String(rawKey ?? '')
+
       if (!groupMap.has(key)) groupMap.set(key, { label: key, items: [] })
+
       groupMap.get(key)!.items.push(item)
     }
 
-    // 3. Decide whether item-column is actually in effect — a default
-    //    accessor ("column") should still fall through to inferred mode
-    //    when items don't carry that field.
-    const hasExplicitColumns = _p.itemColumn != null && (
-      !!_p.columns?.length ||
-      _p.items.some(item => readValue(item, _p.itemColumn) != null)
+    // 3. Decide whether item-column is actually in effect
+    const hasExplicitColumns = itemColumn != null && (
+      !!columnsProp?.length ||
+      items.some(item => readValue(item, itemColumn) != null)
     )
 
     // 4. Build groups + columns
@@ -134,85 +142,111 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
       rowItems.get(cell.row)!.push(cell)
     }
 
-    for (const [groupKey, { label, items }] of groupMap) {
+    function buildExplicitColumns (sourceItems: Record<string, any>[], groupKey: string) {
       const columns: HeatmapColumn[] = []
       const groupItems: HeatmapCell[] = []
 
-      if (hasExplicitColumns) {
-        // Explicit column axis
-        let columnKeys: any[]
-        if (_p.columns) {
-          columnKeys = [..._p.columns]
-        } else {
-          const set = new Set<any>()
-          for (const item of items) set.add(readValue(item, _p.itemColumn))
-          columnKeys = [...set]
-        }
-        for (const colKey of columnKeys) {
-          columns.push({
-            key: String(colKey),
-            cells: Array(rowKeys.length).fill(null),
-            items: [],
-          })
-        }
-        const colIndex = new Map<any, number>(columnKeys.map((k, i) => [k, i]))
-
-        for (const item of items) {
-          const rKey = readValue(item, _p.itemRow)
-          const cKey = readValue(item, _p.itemColumn)
-          const rIdx = rowIndex.get(rKey)
-          const cIdx = colIndex.get(cKey)
-          if (rIdx === undefined || cIdx === undefined) continue
-          const value = Number(readValue(item, _p.itemValue)) || 0
-          const cell: HeatmapCell = {
-            value,
-            color: colorFromValue(value),
-            raw: item,
-            row: rKey,
-            column: cKey,
-            groupKey,
-          }
-          columns[cIdx].cells[rIdx] = cell
-          columns[cIdx].items.push(cell)
-          groupItems.push(cell)
-          pushToRow(cell)
-        }
+      let columnKeys: any[]
+      if (columnsProp) {
+        columnKeys = [...columnsProp]
       } else {
-        // Inferred columns: start a new column whenever the row key wraps
-        let current: (HeatmapCell | null)[] = Array(rowKeys.length).fill(null)
-        let currentItems: HeatmapCell[] = []
-        let colIdx = 0
-        let lastRowIdx = -1
-
-        for (const item of items) {
-          const rKey = readValue(item, _p.itemRow)
-          const rIdx = rowIndex.get(rKey)
-          if (rIdx === undefined) continue
-          if (rIdx <= lastRowIdx) {
-            columns.push({ key: String(colIdx), cells: current, items: currentItems })
-            colIdx++
-            current = Array(rowKeys.length).fill(null)
-            currentItems = []
-          }
-          const value = Number(readValue(item, _p.itemValue)) || 0
-          const cell: HeatmapCell = {
-            value,
-            color: colorFromValue(value),
-            raw: item,
-            row: rKey,
-            column: colIdx,
-            groupKey,
-          }
-          current[rIdx] = cell
-          currentItems.push(cell)
-          groupItems.push(cell)
-          pushToRow(cell)
-          lastRowIdx = rIdx
-        }
-        if (current.some(c => c !== null)) {
-          columns.push({ key: String(colIdx), cells: current, items: currentItems })
-        }
+        const set = new Set<any>()
+        for (const item of sourceItems) set.add(readValue(item, itemColumn))
+        columnKeys = [...set]
       }
+
+      for (const columnKey of columnKeys) {
+        columns.push({
+          key: String(columnKey),
+          cells: Array(rowKeys.length).fill(null),
+          items: [],
+        })
+      }
+
+      const columnIndexByKey = new Map<any, number>(columnKeys.map((k, i) => [k, i]))
+
+      for (const item of sourceItems) {
+        const rowKey = readValue(item, itemRow)
+        const columnKey = readValue(item, itemColumn)
+        const rowIndex = rowIndexByKey.get(rowKey)
+        const columnIndex = columnIndexByKey.get(columnKey)
+
+        if (rowIndex === undefined || columnIndex === undefined) {
+          continue // skip items
+        }
+
+        const value = Number(readValue(item, itemValue)) || 0
+
+        const cell: HeatmapCell = {
+          value,
+          color: colorFromValue(value),
+          raw: item,
+          row: rowKey,
+          column: columnKey,
+          groupKey,
+        }
+
+        columns[columnIndex].cells[rowIndex] = cell
+        columns[columnIndex].items.push(cell)
+        groupItems.push(cell)
+        pushToRow(cell)
+      }
+
+      return { columns, groupItems }
+    }
+
+    function buildInferredColumns (sourceItems: Record<string, any>[], groupKey: string) {
+      // Start a new column whenever the row key wraps
+      const columns: HeatmapColumn[] = []
+      const groupItems: HeatmapCell[] = []
+
+      let current: (HeatmapCell | null)[] = Array(rowKeys.length).fill(null)
+      let currentItems: HeatmapCell[] = []
+      let columnIndex = 0
+      let lastRowIndex = -1
+
+      for (const item of sourceItems) {
+        const rowKey = readValue(item, itemRow)
+        const rowIndex = rowIndexByKey.get(rowKey)
+
+        if (rowIndex === undefined) continue
+
+        if (rowIndex <= lastRowIndex) {
+          columns.push({ key: String(columnIndex), cells: current, items: currentItems })
+          columnIndex++
+          current = Array(rowKeys.length).fill(null)
+          currentItems = []
+        }
+
+        const value = Number(readValue(item, itemValue)) || 0
+
+        const cell: HeatmapCell = {
+          value,
+          color: colorFromValue(value),
+          raw: item,
+          row: rowKey,
+          column: columnIndex,
+          groupKey,
+        }
+
+        current[rowIndex] = cell
+        currentItems.push(cell)
+        groupItems.push(cell)
+        pushToRow(cell)
+        lastRowIndex = rowIndex
+      }
+
+      if (current.some(c => c !== null)) {
+        columns.push({ key: String(columnIndex), cells: current, items: currentItems })
+      }
+
+      return { columns, groupItems }
+    }
+
+    for (const [groupKey, { label, items: sourceItems }] of groupMap) {
+      const { columns, groupItems } = hasExplicitColumns
+        ? buildExplicitColumns(sourceItems, groupKey)
+        : buildInferredColumns(sourceItems, groupKey)
 
       groups.push({ key: groupKey, label, columns, items: groupItems })
     }
