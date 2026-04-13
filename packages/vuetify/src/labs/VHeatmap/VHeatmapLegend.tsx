@@ -1,13 +1,15 @@
 // Components
 import { VHeatmapCell } from './VHeatmapCell'
 
+// Composables
+import { makeRoundedProps } from '@/composables/rounded'
+
 // Utilities
 import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HeatmapThreshold } from './heatmap'
-import type { RoundedProps } from '@/composables/rounded'
 
 export const makeVHeatmapLegendProps = propsFactory({
   thresholds: {
@@ -18,10 +20,7 @@ export const makeVHeatmapLegendProps = propsFactory({
     type: Set as unknown as PropType<Set<string>>,
     required: true as const,
   },
-  rounded: {
-    type: [Boolean, Number, String] as PropType<RoundedProps['rounded']>,
-    default: undefined,
-  },
+  ...makeRoundedProps(),
 }, 'VHeatmapLegend')
 
 export const VHeatmapLegend = defineComponent({

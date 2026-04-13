@@ -205,8 +205,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
             ))}
           </div>
 
-          {(
-            <div class="v-heatmap__cells">
+          <div class="v-heatmap__cells">
               { visibleMonths.value.map((m, i) => (
                 <div
                   key={ i }
@@ -216,11 +215,10 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                   { Array.from({ length: m.weekOffset }).map((_, j) => (
                     <div key={ `o-${j}` } class="v-heatmap__offset-cell" />
                   ))}
-                  { m.days.map((d, j) => renderCell(d, `d-${j}`))}
+                  { m.days.map((d, j) => renderCell(d, `d-${j}`)) }
                 </div>
               ))}
             </div>
-          )}
         </>
       )
     }
