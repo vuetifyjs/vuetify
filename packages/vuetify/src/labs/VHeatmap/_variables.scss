@@ -1,4 +1,5 @@
 $heatmap-padding: 12px !default;
+$heatmap-body-padding: 0 0 12px !default;
 $heatmap-cell-width: 24px !default;
 $heatmap-cell-height: 24px !default;
 $heatmap-cell-gap: 6px !default;
@@ -9,3 +10,4 @@ $heatmap-cell-font-size: 0.75rem !default;
 $heatmap-header-font-size: 0.8125rem !default;
 $heatmap-cell-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $heatmap-cell-background: rgba(var(--v-theme-surface-variant), .05) !default;
+$heatmap-legend-padding: 12px 0 0 !default;

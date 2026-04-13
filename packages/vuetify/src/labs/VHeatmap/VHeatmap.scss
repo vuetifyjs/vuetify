@@ -15,29 +15,24 @@
 
     display: inline-block;
     line-height: 1;
-    overflow-x: auto;
-    padding: $heatmap-padding:
+    padding: $heatmap-padding;
   }
 
   .v-heatmap__body {
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    overflow-x: auto;
+    padding: $heatmap-body-padding;
   }
 
   .v-heatmap__row-headers {
+    grid-column: 1;
+    grid-row: 3;
     display: grid;
     grid-template-rows: repeat(var(--v-heatmap-rows-count), var(--v-heatmap-cell-height));
     row-gap: var(--v-heatmap-cell-gap);
     padding-right: var(--v-heatmap-row-header-padding);
-
-    .v-heatmap--has-group-labels &,
-    .v-heatmap--has-column-headers & {
-      padding-top: calc($heatmap-header-font-size + var(--v-heatmap-column-header-padding));
-    }
-
-    .v-heatmap--has-group-labels.v-heatmap--has-column-headers & {
-      padding-top: calc(2 * ($heatmap-header-font-size + var(--v-heatmap-column-header-padding)));
-    }
   }
 
   .v-heatmap__row-header {
@@ -48,23 +43,30 @@
   }
 
   .v-heatmap__groups {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--v-heatmap-group-gap);
+    grid-column: 2;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+    column-gap: var(--v-heatmap-group-gap);
   }
 
   .v-heatmap__group {
-    display: flex;
-    flex-direction: column;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-rows: subgrid;
   }
 
   .v-heatmap__group-label {
+    grid-row: 1;
     font-size: $heatmap-header-font-size;
     padding-bottom: var(--v-heatmap-column-header-padding);
     white-space: nowrap;
   }
 
   .v-heatmap__column-headers {
+    grid-row: 2;
     display: grid;
     grid-template-columns: repeat(var(--v-heatmap-group-columns), var(--v-heatmap-cell-width));
     column-gap: var(--v-heatmap-cell-gap);
@@ -78,6 +80,7 @@
   }
 
   .v-heatmap__group-grid {
+    grid-row: 3;
     display: grid;
     grid-template-rows: repeat(var(--v-heatmap-rows-count), var(--v-heatmap-cell-height));
     grid-template-columns: repeat(var(--v-heatmap-group-columns), var(--v-heatmap-cell-width));
@@ -143,7 +146,7 @@
     align-items: center;
     justify-content: end;
     gap: var(--v-heatmap-cell-gap);
-    padding-top: calc(2 * var(--v-heatmap-column-header-padding));
+    padding: $heatmap-legend-padding;
 
     > .v-heatmap-legend__label {
       opacity: .6;

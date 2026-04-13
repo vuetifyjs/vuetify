@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-6">
+  <v-container>
     <v-row justify="center">
       <v-heatmap
         :cell-size="[48, 40]"

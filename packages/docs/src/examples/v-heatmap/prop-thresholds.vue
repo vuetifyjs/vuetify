@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-6">
+  <v-container>
     <v-row class="ga-6" justify="center">
       <v-heatmap
         :items="items"

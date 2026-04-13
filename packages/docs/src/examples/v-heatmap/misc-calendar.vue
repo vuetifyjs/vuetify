@@ -2,13 +2,14 @@
   <v-container>
     <v-card>
       <v-card-title class="px-8 pt-6 pb-3">Documents uploaded</v-card-title>
-      <v-card-text class="px-6 pt-3 pb-8 overflow-x-auto">
+      <v-card-text class="px-6 pt-3 pb-8">
         <v-heatmap
-          :group-by="(v) => v.date.substring(0, 7)"
-          :item-row="(v) => new Date(v.date).getDay()"
+          :group-by="(v) => adapter.format(v.date, 'monthAndYear')"
+          :item-row="(v) => adapter.toJsDate(v.date).getDay()"
           :items="items"
           :rows="[0, 1, 2, 3, 4, 5, 6]"
           :thresholds="thresholds"
+          style="max-width: 100%"
           hover
           legend
         >
@@ -72,22 +73,18 @@
       { min: 12, color: '#216E39' },
     ])
 
-  const currentYear = new Date().getFullYear()
-  const startMonth = 3 * Math.floor(new Date().getMonth() / 3 - 1)
-  const monthCount = 4
+  const today = adapter.date()
+  const startDate = adapter.startOfMonth(adapter.addMonths(today, -6))
+  const endDate = adapter.endOfMonth(adapter.addMonths(today, 1))
+  const totalDays = adapter.getDiff(endDate, startDate, 'days') + 1
 
   const items = []
-  for (let i = 0; i < monthCount; i++) {
-    const month = startMonth + i
-    const daysCount = new Date(currentYear, month + 1, 0).getDate()
-    for (let day = 0; day < daysCount; day++) {
-      const date = new Date(currentYear, month, day + 1)
-      const isWeekend = date.getDay() === 0 || date.getDay() === 6
-      const isFuture = date > new Date()
-      const value = isWeekend || isFuture ? 0 : Math.floor(Math.random() * 14.99)
-      const m = String(date.getMonth() + 1).padStart(2, '0')
-      const d = String(date.getDate()).padStart(2, '0')
-      items.push({ date: `${currentYear}-${m}-${d}`, value })
-    }
+  for (let i = 0; i < totalDays; i++) {
+    const date = adapter.addDays(startDate, i)
+    const weekday = adapter.toJsDate(date).getDay()
+    const isWeekend = weekday === 0 || weekday === 6
+    const isFuture = adapter.isAfter(date, today)
+    const value = isWeekend || isFuture ? 0 : Math.floor(Math.random() * 14.99)
+    items.push({ date, value })
   }
 </script>
