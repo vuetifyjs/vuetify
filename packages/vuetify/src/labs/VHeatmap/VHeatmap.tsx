@@ -38,7 +38,9 @@ export const makeVHeatmapProps = propsFactory({
     type: [Number, String] as PropType<string | number>,
     default: undefined,
   },
+  hideColumnHeaders: Boolean,
   hideLegend: Boolean,
+  hideRowHeaders: Boolean,
   hover: Boolean,
   hoverScale: {
     type: [Number, String] as PropType<string | number>,
@@ -153,18 +155,24 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
 
       return (
         <div class="v-heatmap__grid">
-          <div class="v-heatmap__column-spacer" />
-          { columns.map(col => (
-            <span key={ col } class="v-heatmap__column-header">
-              { slots['column-header']?.({ column: col }) ?? col }
-            </span>
-          ))}
+          { !props.hideColumnHeaders && (
+            <>
+              { !props.hideRowHeaders && <div class="v-heatmap__column-spacer" /> }
+              { columns.map(col => (
+                <span key={ col } class="v-heatmap__column-header">
+                  { slots['column-header']?.({ column: col }) ?? col }
+                </span>
+              ))}
+            </>
+          )}
 
           { rows.map(row => (
             <>
-              <div class="v-heatmap__row-header" key={ `rh-${row}` }>
-                { slots['row-header']?.({ row }) ?? row }
-              </div>
+              { !props.hideRowHeaders && (
+                <div class="v-heatmap__row-header" key={ `rh-${row}` }>
+                  { slots['row-header']?.({ row }) ?? row }
+                </div>
+              )}
               { columns.map(col => {
                 const cell = cells.get(`${row}\0${col}`)
                 const item: HeatmapCell = cell ?? { value: 0, row, column: col }
@@ -229,6 +237,8 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
             `v-heatmap--${props.type}`,
             {
               'v-heatmap--hover': props.hover,
+              'v-heatmap--hide-column-headers': props.hideColumnHeaders,
+              'v-heatmap--hide-row-headers': props.hideRowHeaders,
               'v-heatmap--merged-months': !isGrid && !props.separateMonths,
               'v-heatmap--separated-months': !isGrid && props.separateMonths,
             },

@@ -76,6 +76,10 @@
       gap: var(--v-heatmap-cell-gap);
     }
 
+    &.v-heatmap--hide-row-headers .v-heatmap__grid {
+      grid-template-columns: repeat(var(--v-heatmap-grid-columns), var(--v-heatmap-cell-width));
+    }
+
     .v-heatmap__column-spacer,
     .v-heatmap__column-header {
       padding-bottom: var(--v-heatmap-column-header-padding);
