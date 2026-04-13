@@ -7,15 +7,15 @@
         :rows="rows"
         :thresholds="thresholds"
       >
-        <template v-slot:legend="{ thresholds: legendThresholds, disabledColors, toggle }">
+        <template v-slot:legend="{ thresholds: legendThresholds, activeBuckets, toggle }">
           <div class="d-flex flex-wrap ga-2 justify-end pt-4">
             <v-chip
-              v-for="threshold in legendThresholds"
-              :key="threshold.color"
+              v-for="(threshold, i) in legendThresholds"
+              :key="i"
               :color="threshold.color"
-              :variant="disabledColors.has(threshold.color) ? 'outlined' : 'flat'"
+              :variant="activeBuckets.includes(i) ? 'flat' : 'outlined'"
               size="small"
-              @click="toggle(threshold.color)"
+              @click="toggle(i)"
             >
               ≥ {{ threshold.min }}
             </v-chip>

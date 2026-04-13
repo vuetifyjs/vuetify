@@ -11,7 +11,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { reactive } from 'vue'
+import { ref, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -25,7 +25,7 @@ export interface HeatmapLegendOptions {
 
 export type VHeatmapSlots = {
   cell: { item: HeatmapCell }
-  legend: { thresholds: HeatmapThresholds, disabledColors: Set<string>, toggle: (color: string) => void }
+  legend: { thresholds: HeatmapThresholds, activeBuckets: number[], toggle: (index: number) => void }
   'row-header': { row: any, items: HeatmapCell[] }
   'column-header': { column: any, items: HeatmapCell[] }
   'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
@@ -104,18 +104,24 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { data } = useHeatmap(props)
-    const disabledColors = reactive(new Set<string>())
+    const activeBuckets = ref<number[]>([])
 
-    function toggle (color: string) {
-      if (disabledColors.has(color)) {
-        disabledColors.delete(color)
-      } else {
-        disabledColors.add(color)
-      }
+    watch(() => props.thresholds, t => {
+      activeBuckets.value = Array.isArray(t) ? t.map((_, i) => i) : []
+    }, { deep: 1, immediate: true })
+
+    function toggle (index: number) {
+      const i = activeBuckets.value.indexOf(index)
+      if (i >= 0) activeBuckets.value.splice(i, 1)
+      else activeBuckets.value.push(index)
     }
 
-    function isDisabled (color?: string) {
-      return !!color && disabledColors.has(color)
+    function isDisabled (cell: HeatmapCell) {
+      const t = props.thresholds
+      if (!Array.isArray(t)) return false
+      const idx = t.findLastIndex(({ min }) => cell.value >= min)
+      if (idx < 0) return false
+      return !activeBuckets.value.includes(idx)
     }
 
     function renderCell (item: HeatmapCell, key: string) {
@@ -126,7 +132,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
         <VHeatmapCell
           key={ key }
           color={ item.color }
-          disabled={ isDisabled(item.color) }
+          disabled={ isDisabled(item) }
           rounded={ props.rounded }
           { ...cellProps }
         >
@@ -211,11 +217,11 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
           </div>
 
           { props.legend && (
-            slots.legend?.({ thresholds: props.thresholds, disabledColors, toggle }) ?? (
+            slots.legend?.({ thresholds: props.thresholds, activeBuckets: activeBuckets.value, toggle }) ?? (
               <VHeatmapLegend
                 cellSize={ (typeof props.legend === 'object' ? props.legend.cellSize : undefined) ?? props.cellSize }
                 thresholds={ props.thresholds }
-                disabledColors={ disabledColors }
+                activeBuckets={ activeBuckets.value }
                 rounded={ props.rounded }
                 labels={ typeof props.legend === 'object' ? props.legend.labels : undefined }
                 onClick:threshold={ toggle }

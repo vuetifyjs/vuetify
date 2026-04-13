@@ -6,12 +6,12 @@ import { useLocale } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
+import { isLinearScale } from './heatmap'
 import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HeatmapThresholds } from './heatmap'
-import { isLinearScale } from './heatmap'
 
 export const makeVHeatmapLegendProps = propsFactory({
   cellSize: {
@@ -26,8 +26,8 @@ export const makeVHeatmapLegendProps = propsFactory({
     type: [Array, Object] as PropType<HeatmapThresholds>,
     default: () => [],
   },
-  disabledColors: {
-    type: Set as unknown as PropType<Set<string>>,
+  activeBuckets: {
+    type: Array as PropType<number[]>,
     required: true as const,
   },
   ...makeRoundedProps(),
@@ -39,7 +39,7 @@ export const VHeatmapLegend = defineComponent({
   props: makeVHeatmapLegendProps(),
 
   emits: {
-    'click:threshold': (_color: string) => true,
+    'click:threshold': (index: number) => true,
   },
 
   setup (props, { emit }) {
@@ -73,14 +73,14 @@ export const VHeatmapLegend = defineComponent({
               }}
             />
           ) : (
-            (props.thresholds as { min: number, color: string }[]).map(({ min, color }) => (
+            (props.thresholds as { min: number, color: string }[]).map(({ min, color }, i) => (
               <VHeatmapCell
                 key={ min }
                 class="v-heatmap-legend__cell"
                 color={ color }
-                disabled={ props.disabledColors.has(color) }
+                disabled={ !props.activeBuckets.includes(i) }
                 rounded={ props.rounded }
-                onClick={ () => emit('click:threshold', color) }
+                onClick={ () => emit('click:threshold', i) }
               />
             ))
           )}
