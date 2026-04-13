@@ -1,8 +1,8 @@
 {
   "props": {
-    "cellSize": "Sets size of each legend cell. A single number/string sets both width and height, or provide a `[width, height]` tuple.",
+    "cellSize": "Sets size of each legend cell. A single value sets both width and height. Accepts `[width, height]` tuple.",
     "disabledColors": "Set of color values currently disabled. Toggled by clicking a legend cell.",
-    "labels": "Tuple of text labels shown around the threshold cells: `[before, after]`. Pass empty strings to hide individual labels.",
+    "labels": "Tuple of text labels shown around the threshold cells. Pass empty strings to hide individual labels.",
     "thresholds": "Either a list of `{ min, color }` thresholds or a linear scale `{ from, to }`, shared with the parent `v-heatmap`. Linear scales render as a gradient bar."
   }
 }
