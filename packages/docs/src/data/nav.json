@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "heatmaps",
+        "subfolder": "components"
+      },
+      {
         "title": "icon-buttons",
         "subfolder": "components"
       },

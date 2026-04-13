@@ -76,7 +76,7 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component                                            | Description                                                | Min Version                                                |
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
-| [v-color-input](/components/color-inputs/)           | A color input component                                    | [vTBD](/getting-started/release-notes/?version=vTBD)       |
+| [v-color-input](/components/color-inputs/)           | A color input component                                    | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-date-input](/components/date-inputs/)             | A date input component                                     | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper                              | [v3.6.5](/getting-started/release-notes/?version=v3.6.5)   |
@@ -84,6 +84,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
+| [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
