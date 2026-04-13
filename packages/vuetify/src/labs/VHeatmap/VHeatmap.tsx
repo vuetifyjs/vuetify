@@ -16,7 +16,8 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { HeatmapAccessor, HeatmapCell, HeatmapColumnGroup, HeatmapThresholds } from './heatmap'
+import type { HeatmapCell, HeatmapColumnGroup, HeatmapThresholds } from './heatmap'
+import type { SelectItemKey } from '@/util'
 
 export interface HeatmapLegendOptions {
   labels?: string[]
@@ -60,19 +61,19 @@ export const makeVHeatmapProps = propsFactory({
     default: () => [],
   },
   itemValue: {
-    type: [String, Function] as PropType<HeatmapAccessor<number>>,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
   },
   itemRow: {
-    type: [String, Function] as PropType<HeatmapAccessor>,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'row',
   },
   itemColumn: {
-    type: [String, Function] as PropType<HeatmapAccessor | undefined>,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'column',
   },
   groupBy: {
-    type: [String, Function] as PropType<HeatmapAccessor | undefined>,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: undefined,
   },
   itemProps: {

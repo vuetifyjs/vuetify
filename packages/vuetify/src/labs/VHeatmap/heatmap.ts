@@ -1,8 +1,10 @@
 // Utilities
 import { computed, toValue } from 'vue'
+import { getPropertyFromItem } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter } from 'vue'
+import type { SelectItemKey } from '@/util'
 
 export interface HeatmapThreshold {
   min: number
@@ -51,23 +53,15 @@ export interface HeatmapData {
   hasExplicitColumns: boolean // itemColumn accessor resolves to a value for at least one item
 }
 
-export type HeatmapAccessor<T = any> = string | ((item: any) => T)
-
 export interface HeatmapProps {
   items: Record<string, any>[]
-  itemValue: HeatmapAccessor<number>
-  itemRow: HeatmapAccessor
-  itemColumn: HeatmapAccessor | undefined
-  groupBy: HeatmapAccessor | undefined
+  itemValue: SelectItemKey
+  itemRow: SelectItemKey
+  itemColumn: SelectItemKey
+  groupBy: SelectItemKey
   rows: any[] | undefined
   columns: any[] | undefined
   thresholds: HeatmapThresholds
-}
-
-function readValue (item: any, accessor: HeatmapAccessor | undefined) {
-  if (accessor == null) return undefined
-  if (typeof accessor === 'function') return accessor(item)
-  return item[accessor]
 }
 
 export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
@@ -109,7 +103,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
       rowKeys = [...rows]
     } else {
       const set = new Set<any>()
-      for (const item of items) set.add(readValue(item, itemRow))
+      for (const item of items) set.add(getPropertyFromItem(item, itemRow))
       rowKeys = [...set]
     }
 
@@ -119,7 +113,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
     const groupMap = new Map<string, { label: string, items: Record<string, any>[] }>()
 
     for (const item of items) {
-      const rawKey = groupBy != null ? readValue(item, groupBy) : ''
+      const rawKey = groupBy != null ? getPropertyFromItem(item, groupBy) : ''
       const key = String(rawKey ?? '')
 
       if (!groupMap.has(key)) groupMap.set(key, { label: key, items: [] })
@@ -130,7 +124,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
     // 3. Decide whether item-column is actually in effect
     const hasExplicitColumns = itemColumn != null && (
       !!columnsProp?.length ||
-      items.some(item => readValue(item, itemColumn) != null)
+      items.some(item => getPropertyFromItem(item, itemColumn) != null)
     )
 
     // 4. Build groups + columns
@@ -151,7 +145,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
         columnKeys = [...columnsProp]
       } else {
         const set = new Set<any>()
-        for (const item of sourceItems) set.add(readValue(item, itemColumn))
+        for (const item of sourceItems) set.add(getPropertyFromItem(item, itemColumn))
         columnKeys = [...set]
       }
 
@@ -166,8 +160,8 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
       const columnIndexByKey = new Map<any, number>(columnKeys.map((k, i) => [k, i]))
 
       for (const item of sourceItems) {
-        const rowKey = readValue(item, itemRow)
-        const columnKey = readValue(item, itemColumn)
+        const rowKey = getPropertyFromItem(item, itemRow)
+        const columnKey = getPropertyFromItem(item, itemColumn)
         const rowIndex = rowIndexByKey.get(rowKey)
         const columnIndex = columnIndexByKey.get(columnKey)
 
@@ -175,7 +169,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
           continue // skip items
         }
 
-        const value = Number(readValue(item, itemValue)) || 0
+        const value = Number(getPropertyFromItem(item, itemValue)) || 0
 
         const cell: HeatmapCell = {
           value,
@@ -206,7 +200,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
       let lastRowIndex = -1
 
       for (const item of sourceItems) {
-        const rowKey = readValue(item, itemRow)
+        const rowKey = getPropertyFromItem(item, itemRow)
         const rowIndex = rowIndexByKey.get(rowKey)
 
         if (rowIndex === undefined) continue
@@ -218,7 +212,7 @@ export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
           currentItems = []
         }
 
-        const value = Number(readValue(item, itemValue)) || 0
+        const value = Number(getPropertyFromItem(item, itemValue)) || 0
 
         const cell: HeatmapCell = {
           value,
