@@ -16,12 +16,18 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { HeatmapAccessor, HeatmapCell, HeatmapColumnGroup, HeatmapThreshold } from './heatmap'
+import type { HeatmapAccessor, HeatmapCell, HeatmapColumnGroup, HeatmapThresholds } from './heatmap'
+
+export interface HeatmapLegendOptions {
+  labels?: string[]
+  cellSize?: string | number | (string | number)[]
+}
 
 export type VHeatmapSlots = {
   cell: { item: HeatmapCell }
-  legend: { thresholds: HeatmapThreshold[], disabledColors: Set<string>, toggle: (color: string) => void }
+  legend: { thresholds: HeatmapThresholds, disabledColors: Set<string>, toggle: (color: string) => void }
   'row-header': { row: any, items: HeatmapCell[] }
+  'column-header': { column: any, items: HeatmapCell[] }
   'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
 }
 
@@ -30,17 +36,20 @@ export const makeVHeatmapProps = propsFactory({
     type: [Number, String, Array] as PropType<string | number | (string | number)[]>,
     default: 26,
   },
-  legendCellSize: {
-    type: [Number, String, Array] as PropType<string | number | (string | number)[]>,
-    default: undefined,
-  },
   gap: {
     type: [Number, String] as PropType<string | number>,
     default: undefined,
   },
+  groupGap: {
+    type: [Number, String] as PropType<string | number>,
+    default: undefined,
+  },
   hideColumnHeaders: Boolean,
-  hideLegend: Boolean,
   hideRowHeaders: Boolean,
+  legend: {
+    type: [Boolean, Object] as PropType<boolean | HeatmapLegendOptions>,
+    default: false,
+  },
   hover: Boolean,
   hoverScale: {
     type: [Number, String] as PropType<string | number>,
@@ -60,7 +69,7 @@ export const makeVHeatmapProps = propsFactory({
   },
   itemColumn: {
     type: [String, Function] as PropType<HeatmapAccessor | undefined>,
-    default: undefined,
+    default: 'column',
   },
   groupBy: {
     type: [String, Function] as PropType<HeatmapAccessor | undefined>,
@@ -71,7 +80,7 @@ export const makeVHeatmapProps = propsFactory({
     default: undefined,
   },
   thresholds: {
-    type: Array as PropType<HeatmapThreshold[]>,
+    type: [Array, Object] as PropType<HeatmapThresholds>,
     default: () => [],
   },
   rows: {
@@ -129,8 +138,9 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
     useRender(() => {
       const cellWidth = Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize
       const cellHeight = Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize
-      const { rows, groups, rowItems } = data.value
+      const { rows, groups, rowItems, hasExplicitColumns } = data.value
       const hasGroupLabels = !props.hideColumnHeaders && (!!slots['group-header'] || groups.some(g => g.label))
+      const hasColumnHeaders = !props.hideColumnHeaders && hasExplicitColumns
 
       return (
         <div
@@ -141,6 +151,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
               'v-heatmap--hide-column-headers': props.hideColumnHeaders,
               'v-heatmap--hide-row-headers': props.hideRowHeaders,
               'v-heatmap--has-group-labels': hasGroupLabels,
+              'v-heatmap--has-column-headers': hasColumnHeaders,
             },
             themeClasses.value,
           ]}
@@ -148,6 +159,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
             '--v-heatmap-cell-width': convertToUnit(cellWidth),
             '--v-heatmap-cell-height': convertToUnit(cellHeight),
             '--v-heatmap-cell-gap': convertToUnit(props.gap),
+            '--v-heatmap-group-gap': convertToUnit(props.groupGap),
             '--v-heatmap-hover-scale': props.hover ? Number(props.hoverScale) : undefined,
             '--v-heatmap-rows-count': rows.length,
           }}
@@ -175,6 +187,15 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                       { slots['group-header']?.({ group, items: group.items }) ?? group.label }
                     </div>
                   )}
+                  { hasColumnHeaders && (
+                    <div class="v-heatmap__column-headers" key="column-headers">
+                      { group.columns.map(col => (
+                        <div key={ `ch-${col.key}` } class="v-heatmap__column-header">
+                          { slots['column-header']?.({ column: col.key, items: col.items }) ?? col.key }
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div class="v-heatmap__group-grid">
                     { group.columns.flatMap((col, cIdx) =>
                       col.cells.map((cell, rIdx) =>
@@ -189,13 +210,14 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
             </div>
           </div>
 
-          { !props.hideLegend && (
+          { props.legend && (
             slots.legend?.({ thresholds: props.thresholds, disabledColors, toggle }) ?? (
               <VHeatmapLegend
-                cellSize={ props.legendCellSize ?? props.cellSize }
+                cellSize={ (typeof props.legend === 'object' ? props.legend.cellSize : undefined) ?? props.cellSize }
                 thresholds={ props.thresholds }
                 disabledColors={ disabledColors }
                 rounded={ props.rounded }
+                labels={ typeof props.legend === 'object' ? props.legend.labels : undefined }
                 onClick:threshold={ toggle }
               />
             )

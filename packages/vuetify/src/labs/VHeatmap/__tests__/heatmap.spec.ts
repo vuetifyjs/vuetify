@@ -235,6 +235,31 @@ describe('useHeatmap accessors', () => {
     expect(cell?.column).toBe('X')
   })
 
+  it('interpolates colors with color-mix when thresholds is a linear scale', () => {
+    const { data } = setup({
+      rows: [0],
+      itemColumn: 'col',
+      columns: ['A', 'B', 'C', 'D', 'E'],
+      items: [
+        { row: 0, col: 'A', value: 0 }, // below from.min → clamps to from.color
+        { row: 0, col: 'B', value: 1 }, // at from.min
+        { row: 0, col: 'C', value: 2 }, // midpoint
+        { row: 0, col: 'D', value: 3 }, // at to.min
+        { row: 0, col: 'E', value: 4 }, // above to.min → clamps to to.color
+      ],
+      thresholds: {
+        from: { min: 1, color: '#ff0000' },
+        to: { min: 3, color: '#00ff00' },
+      },
+    })
+    const cols = data.value.groups[0].columns
+    expect(cols[0].cells[0]?.color).toBe('#ff0000')
+    expect(cols[1].cells[0]?.color).toBe('#ff0000')
+    expect(cols[2].cells[0]?.color).toBe('color-mix(in srgb, #00ff00 50%, #ff0000)')
+    expect(cols[3].cells[0]?.color).toBe('#00ff00')
+    expect(cols[4].cells[0]?.color).toBe('#00ff00')
+  })
+
   it('applies threshold colors with findLast semantics', () => {
     const { data } = setup({
       rows: [0],

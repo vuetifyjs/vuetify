@@ -9,6 +9,17 @@ export interface HeatmapThreshold {
   color: string
 }
 
+export interface HeatmapLinearScale {
+  from: HeatmapThreshold
+  to: HeatmapThreshold
+}
+
+export type HeatmapThresholds = HeatmapThreshold[] | HeatmapLinearScale
+
+export function isLinearScale (t: HeatmapThresholds | undefined): t is HeatmapLinearScale {
+  return !!t && !Array.isArray(t) && 'from' in t && 'to' in t
+}
+
 export interface HeatmapCell {
   value: number
   color?: string
@@ -25,6 +36,8 @@ export interface HeatmapColumn {
   key: string
   /** Row-indexed; null = blank cell */
   cells: (HeatmapCell | null)[]
+  /** Non-null cells in input order */
+  items: HeatmapCell[]
 }
 
 export interface HeatmapColumnGroup {
@@ -40,6 +53,8 @@ export interface HeatmapData {
   groups: HeatmapColumnGroup[]
   /** Items indexed by row key (useful for row-header slot) */
   rowItems: Map<any, HeatmapCell[]>
+  /** True when the itemColumn accessor resolves to a value for at least one item */
+  hasExplicitColumns: boolean
 }
 
 export type HeatmapAccessor<T = any> = string | ((item: any) => T)
@@ -52,7 +67,7 @@ export interface HeatmapProps {
   groupBy: HeatmapAccessor | undefined
   rows: any[] | undefined
   columns: any[] | undefined
-  thresholds: HeatmapThreshold[]
+  thresholds: HeatmapThresholds
 }
 
 function readValue (item: any, accessor: HeatmapAccessor | undefined) {
@@ -65,7 +80,18 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
   const _props = toRef(props)
 
   function colorFromValue (v: number) {
-    return _props.value.thresholds.findLast(({ min }) => v >= min)?.color
+    const t = _props.value.thresholds
+    if (isLinearScale(t)) {
+      const { from, to } = t
+      const span = to.min - from.min
+      if (span === 0) return v >= to.min ? to.color : from.color
+      const ratio = Math.max(0, Math.min(1, (v - from.min) / span))
+      const pct = Number((ratio * 100).toFixed(2))
+      if (pct <= 0) return from.color
+      if (pct >= 100) return to.color
+      return `color-mix(in srgb, ${to.color} ${pct}%, ${from.color})`
+    }
+    return t.findLast(({ min }) => v >= min)?.color
   }
 
   const data = computed<HeatmapData>(() => {
@@ -91,7 +117,15 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
       groupMap.get(key)!.items.push(item)
     }
 
-    // 3. Build groups + columns
+    // 3. Decide whether item-column is actually in effect — a default
+    //    accessor ("column") should still fall through to inferred mode
+    //    when items don't carry that field.
+    const hasExplicitColumns = _p.itemColumn != null && (
+      !!_p.columns?.length ||
+      _p.items.some(item => readValue(item, _p.itemColumn) != null)
+    )
+
+    // 4. Build groups + columns
     const groups: HeatmapColumnGroup[] = []
     const rowItems = new Map<any, HeatmapCell[]>()
 
@@ -104,7 +138,7 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
       const columns: HeatmapColumn[] = []
       const groupItems: HeatmapCell[] = []
 
-      if (_p.itemColumn != null) {
+      if (hasExplicitColumns) {
         // Explicit column axis
         let columnKeys: any[]
         if (_p.columns) {
@@ -118,6 +152,7 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
           columns.push({
             key: String(colKey),
             cells: Array(rowKeys.length).fill(null),
+            items: [],
           })
         }
         const colIndex = new Map<any, number>(columnKeys.map((k, i) => [k, i]))
@@ -138,12 +173,14 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
             groupKey,
           }
           columns[cIdx].cells[rIdx] = cell
+          columns[cIdx].items.push(cell)
           groupItems.push(cell)
           pushToRow(cell)
         }
       } else {
         // Inferred columns: start a new column whenever the row key wraps
         let current: (HeatmapCell | null)[] = Array(rowKeys.length).fill(null)
+        let currentItems: HeatmapCell[] = []
         let colIdx = 0
         let lastRowIdx = -1
 
@@ -152,9 +189,10 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
           const rIdx = rowIndex.get(rKey)
           if (rIdx === undefined) continue
           if (rIdx <= lastRowIdx) {
-            columns.push({ key: String(colIdx), cells: current })
+            columns.push({ key: String(colIdx), cells: current, items: currentItems })
             colIdx++
             current = Array(rowKeys.length).fill(null)
+            currentItems = []
           }
           const value = Number(readValue(item, _p.itemValue)) || 0
           const cell: HeatmapCell = {
@@ -166,19 +204,20 @@ export function useHeatmap (props: HeatmapProps | Ref<HeatmapProps>) {
             groupKey,
           }
           current[rIdx] = cell
+          currentItems.push(cell)
           groupItems.push(cell)
           pushToRow(cell)
           lastRowIdx = rIdx
         }
         if (current.some(c => c !== null)) {
-          columns.push({ key: String(colIdx), cells: current })
+          columns.push({ key: String(colIdx), cells: current, items: currentItems })
         }
       }
 
       groups.push({ key: groupKey, label, columns, items: groupItems })
     }
 
-    return { rows: rowKeys, groups, rowItems }
+    return { rows: rowKeys, groups, rowItems, hasExplicitColumns }
   })
 
   return {
