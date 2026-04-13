@@ -26,25 +26,3 @@
     value: Math.floor(Math.random() * 15),
   }))
 </script>
-
-<script>
-  export default {
-    data () {
-      const rows = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-
-      return {
-        rows,
-        thresholds: [
-          { min: 1, color: '#e3f2fd' },
-          { min: 4, color: '#64b5f6' },
-          { min: 8, color: '#1976d2' },
-          { min: 12, color: '#0d47a1' },
-        ],
-        items: Array.from({ length: 25 }, (_, i) => ({
-          row: rows[i % 5],
-          value: Math.floor(Math.random() * 15),
-        })),
-      }
-    },
-  }
-</script>

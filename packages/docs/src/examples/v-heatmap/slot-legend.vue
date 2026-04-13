@@ -45,30 +45,3 @@
     }))
   )
 </script>
-
-<script>
-  export default {
-    data () {
-      const rows = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-      const columns = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6']
-
-      return {
-        rows,
-        columns,
-        thresholds: [
-          { min: 1, color: '#cfe0ff' },
-          { min: 3, color: '#89a7ff' },
-          { min: 6, color: '#4a76e8' },
-          { min: 9, color: '#1e47c2' },
-        ],
-        items: rows.flatMap(row =>
-          columns.map(column => ({
-            row,
-            column,
-            value: Math.floor(Math.random() * 12),
-          }))
-        ),
-      }
-    },
-  }
-</script>
