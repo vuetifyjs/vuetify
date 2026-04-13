@@ -16,23 +16,23 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { HeatmapCell, HeatmapThreshold } from './heatmap'
+import type { HeatmapAccessor, HeatmapCell, HeatmapColumnGroup, HeatmapThreshold } from './heatmap'
 
 export type VHeatmapSlots = {
   cell: { item: HeatmapCell }
   legend: { thresholds: HeatmapThreshold[], disabledColors: Set<string>, toggle: (color: string) => void }
-  'row-header': { row: string }
-  'column-header': { column: string }
+  'row-header': { row: any, items: HeatmapCell[] }
+  'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
 }
 
 export const makeVHeatmapProps = propsFactory({
-  type: {
-    type: String as PropType<'grid' | 'calendar'>,
-    default: 'grid',
-  },
   cellSize: {
     type: [Number, String, Array] as PropType<string | number | (string | number)[]>,
     default: 26,
+  },
+  legendCellSize: {
+    type: [Number, String, Array] as PropType<string | number | (string | number)[]>,
+    default: undefined,
   },
   gap: {
     type: [Number, String] as PropType<string | number>,
@@ -51,8 +51,20 @@ export const makeVHeatmapProps = propsFactory({
     default: () => [],
   },
   itemValue: {
-    type: [String, Number] as PropType<string>,
+    type: [String, Function] as PropType<HeatmapAccessor<number>>,
     default: 'value',
+  },
+  itemRow: {
+    type: [String, Function] as PropType<HeatmapAccessor>,
+    default: 'row',
+  },
+  itemColumn: {
+    type: [String, Function] as PropType<HeatmapAccessor | undefined>,
+    default: undefined,
+  },
+  groupBy: {
+    type: [String, Function] as PropType<HeatmapAccessor | undefined>,
+    default: undefined,
   },
   itemProps: {
     type: [Object, Function] as PropType<Record<string, any> | ((item: HeatmapCell) => Record<string, any>)>,
@@ -62,48 +74,12 @@ export const makeVHeatmapProps = propsFactory({
     type: Array as PropType<HeatmapThreshold[]>,
     default: () => [],
   },
-
-  // Calendar-specific
-  itemKey: {
-    type: String,
-    default: 'key',
-  },
-  year: {
-    type: Number,
-    default: () => new Date().getFullYear(),
-  },
-  startMonth: {
-    type: Number,
-    default: 0,
-  },
-  monthCount: {
-    type: Number,
-    default: 12,
-  },
-  firstDayOfWeek: {
-    type: Number,
-    default: 0,
-  },
-  separateMonths: {
-    type: Boolean,
-    default: true,
-  },
-
-  // Grid-specific
-  itemRow: {
-    type: String,
-    default: 'row',
-  },
-  itemColumn: {
-    type: String,
-    default: 'column',
-  },
   rows: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<any[]>,
     default: undefined,
   },
   columns: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<any[]>,
     default: undefined,
   },
 
@@ -118,7 +94,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { weekdayLabels, visibleMonths, gridData } = useHeatmap(props)
+    const { data } = useHeatmap(props)
     const disabledColors = reactive(new Set<string>())
 
     function toggle (color: string) {
@@ -150,95 +126,21 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
       )
     }
 
-    function renderGrid () {
-      const { rows, columns, cells } = gridData.value
-
-      return (
-        <div class="v-heatmap__grid">
-          { !props.hideColumnHeaders && (
-            <>
-              { !props.hideRowHeaders && <div class="v-heatmap__column-spacer" /> }
-              { columns.map(col => (
-                <span key={ col } class="v-heatmap__column-header">
-                  { slots['column-header']?.({ column: col }) ?? col }
-                </span>
-              ))}
-            </>
-          )}
-
-          { rows.map(row => (
-            <>
-              { !props.hideRowHeaders && (
-                <div class="v-heatmap__row-header" key={ `rh-${row}` }>
-                  { slots['row-header']?.({ row }) ?? row }
-                </div>
-              )}
-              { columns.map(col => {
-                const cell = cells.get(`${row}\0${col}`)
-                const item: HeatmapCell = cell ?? { value: 0, row, column: col }
-                return renderCell(item, `${row}-${col}`)
-              })}
-            </>
-          ))}
-        </div>
-      )
-    }
-
-    function renderCalendar () {
-      return (
-        <>
-          <div class="v-heatmap__weekdays">
-            { weekdayLabels.value.map(d => (
-              <span key={ d }>{ d }</span>
-            ))}
-          </div>
-
-          <div class="v-heatmap__months">
-            { visibleMonths.value.map((m, i) => (
-              <span
-                key={ i }
-                data-offset={ m.weekOffset }
-                class={ m.columnClass }
-              >
-                { m.label }
-              </span>
-            ))}
-          </div>
-
-          <div class="v-heatmap__cells">
-              { visibleMonths.value.map((m, i) => (
-                <div
-                  key={ i }
-                  class={['v-heatmap__month-days', m.columnClass]}
-                  style={{ '--v-heatmap-cell-columns': m.columns }}
-                >
-                  { Array.from({ length: m.weekOffset }).map((_, j) => (
-                    <div key={ `o-${j}` } class="v-heatmap__offset-cell" />
-                  ))}
-                  { m.days.map((d, j) => renderCell(d, `d-${j}`)) }
-                </div>
-              ))}
-            </div>
-        </>
-      )
-    }
-
     useRender(() => {
-      const isGrid = props.type === 'grid'
       const cellWidth = Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize
       const cellHeight = Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize
+      const { rows, groups, rowItems } = data.value
+      const hasGroupLabels = !props.hideColumnHeaders && (!!slots['group-header'] || groups.some(g => g.label))
 
       return (
         <div
           class={[
             'v-heatmap',
-            `v-heatmap--${props.type}`,
             {
               'v-heatmap--hover': props.hover,
               'v-heatmap--hide-column-headers': props.hideColumnHeaders,
               'v-heatmap--hide-row-headers': props.hideRowHeaders,
-              'v-heatmap--merged-months': !isGrid && !props.separateMonths,
-              'v-heatmap--separated-months': !isGrid && props.separateMonths,
+              'v-heatmap--has-group-labels': hasGroupLabels,
             },
             themeClasses.value,
           ]}
@@ -247,22 +149,50 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
             '--v-heatmap-cell-height': convertToUnit(cellHeight),
             '--v-heatmap-cell-gap': convertToUnit(props.gap),
             '--v-heatmap-hover-scale': props.hover ? Number(props.hoverScale) : undefined,
-            ...(isGrid
-              ? {
-                '--v-heatmap-grid-rows': gridData.value.rows.length,
-                '--v-heatmap-grid-columns': gridData.value.columns.length,
-              }
-              : {
-                '--v-heatmap-month-limit': props.monthCount,
-              }
-            ),
+            '--v-heatmap-rows-count': rows.length,
           }}
         >
-          { isGrid ? renderGrid() : renderCalendar() }
+          <div class="v-heatmap__body">
+            { !props.hideRowHeaders && (
+              <div class="v-heatmap__row-headers" key="row-headers">
+                { rows.map((row, i) => (
+                  <div key={ `rh-${i}` } class="v-heatmap__row-header">
+                    { slots['row-header']?.({ row, items: rowItems.get(row) ?? [] }) ?? row }
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div class="v-heatmap__groups">
+              { groups.map(group => (
+                <div
+                  key={ group.key }
+                  class="v-heatmap__group"
+                  style={{ '--v-heatmap-group-columns': group.columns.length }}
+                >
+                  { hasGroupLabels && (
+                    <div class="v-heatmap__group-label" key="group-label">
+                      { slots['group-header']?.({ group, items: group.items }) ?? group.label }
+                    </div>
+                  )}
+                  <div class="v-heatmap__group-grid">
+                    { group.columns.flatMap((col, cIdx) =>
+                      col.cells.map((cell, rIdx) =>
+                        cell
+                          ? renderCell(cell, `${group.key}-${cIdx}-${rIdx}`)
+                          : <div key={ `blank-${group.key}-${cIdx}-${rIdx}` } class="v-heatmap__blank-cell" />
+                      )
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           { !props.hideLegend && (
             slots.legend?.({ thresholds: props.thresholds, disabledColors, toggle }) ?? (
               <VHeatmapLegend
+                cellSize={ props.legendCellSize ?? props.cellSize }
                 thresholds={ props.thresholds }
                 disabledColors={ disabledColors }
                 rounded={ props.rounded }
