@@ -35,6 +35,8 @@ export const VOtpField = genericComponent()({
       return (
         <VField
           focused={ (otpInput.isFocused.value && otpInput.focusAll.value) || slot.value.isActive }
+          data-otp-index={ props.index }
+          onClick={ () => otpInput.focusAt(props.index) }
         >
           {{
             loader: undefined,

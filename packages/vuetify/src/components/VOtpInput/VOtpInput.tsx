@@ -39,6 +39,7 @@ export interface VOtpInputContext {
   focusAll: Ref<boolean>
   divider: Ref<string | undefined>
   merged: Ref<boolean>
+  focusAt: (index: number) => void
 }
 
 export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vuetify:v-otp-input')
@@ -258,8 +259,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       model.value = filtered.split('')
     }
 
+    let focusAtPending = false
+
     function onFocus () {
       focus()
+      if (focusAtPending) return
       const input = inputRef.value
       if (!input) return
       const start = Math.min(input.value.length, length.value - 1)
@@ -374,6 +378,32 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       renderSelectionEnd.value = newEnd
     }
 
+    function focusAt (index: number) {
+      const input = inputRef.value
+      if (!input) return
+      focusAtPending = true
+      input.focus()
+      focusAtPending = false
+      const clampedIndex = Math.min(index, input.value.length)
+      const end = Math.min(clampedIndex + 1, input.value.length)
+      input.setSelectionRange(clampedIndex, end)
+      renderSelectionStart.value = clampedIndex
+      renderSelectionEnd.value = end
+    }
+
+    function onInputMousedown (e: MouseEvent) {
+      if (e.button !== 0) return
+      const elements = document.elementsFromPoint(e.clientX, e.clientY)
+      const slotEl = elements.find(el => el.hasAttribute('data-otp-index'))
+      if (slotEl) {
+        e.preventDefault()
+        const index = Number(slotEl.getAttribute('data-otp-index'))
+        if (!Number.isNaN(index)) {
+          focusAt(index)
+        }
+      }
+    }
+
     function reset () {
       model.value = []
     }
@@ -396,6 +426,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       focusAll: toRef(() => props.focusAll),
       divider: toRef(() => props.divider),
       merged: toRef(() => props.merged),
+      focusAt,
     })
 
     watch(model, val => {
@@ -460,6 +491,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 onFocus={ onFocus }
                 onBlur={ onBlur }
                 onPaste={ onPaste }
+                onMousedown={ onInputMousedown }
               />
             </div>
 

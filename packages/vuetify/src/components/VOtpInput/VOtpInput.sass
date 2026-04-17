@@ -50,8 +50,14 @@
           .v-field__outline__start
             border-inline-start-width: 0
 
-        &.v-field--focused
+        &:hover
           z-index: 1
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &.v-field--focused
+          z-index: 2
 
           .v-field__outline__start
             border-inline-start-width: var(--v-field-border-width)
@@ -75,6 +81,7 @@
   .v-otp-input__input-wrapper
     position: absolute
     inset: 0
+    z-index: 10
     pointer-events: none
     overflow: hidden
 
@@ -90,8 +97,11 @@
     border: none
     outline: none
     box-shadow: none
-    pointer-events: all
+    pointer-events: none
     cursor: text
+
+  .v-otp-input:focus-within .v-otp-input__input
+    pointer-events: all
     font-size: 64px
     font-family: monospace
     letter-spacing: -.5em
