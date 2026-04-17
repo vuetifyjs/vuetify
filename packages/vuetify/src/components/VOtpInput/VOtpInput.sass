@@ -15,6 +15,11 @@
     .v-field
       height: 100%
 
+      &--variant-solo.v-field--focused .v-field__overlay,
+      &--variant-plain.v-field--focused .v-field__overlay
+        background-color: currentColor
+        opacity: calc(var(--v-theme-overlay-multiplier) * 0.12)
+
       .v-field__outline
         &__start,
         &__end
@@ -36,9 +41,15 @@
       height: 100%
       border-radius: inherit
 
+      &:has(.v-field--variant-solo),
+      &:has(.v-field--variant-solo-filled),
+      &:has(.v-field--variant-solo-inverted)
+        @include tools.elevation(1)
+
       .v-field
         flex: 1
         border-radius: 0
+        box-shadow: none
 
         .v-field__outline__start,
         .v-field__outline__end

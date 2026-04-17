@@ -1,4 +1,7 @@
 import { VOtpInput } from '../VOtpInput'
+import { VOtpField } from '../VOtpField'
+import { VOtpGroup } from '../VOtpGroup'
+import { VOtpSeparator } from '../VOtpSeparator'
 
 // Utilities
 import { commands, render, screen, showcase, userEvent, waitAnimationFrame } from '@test'
@@ -14,6 +17,8 @@ const stories = {
   'Error state': <VOtpInput error />,
   'With placeholder': <VOtpInput placeholder="0" />,
   'With focus all': <VOtpInput focusAll />,
+  Merged: <VOtpInput merged />,
+  'Merged with divider': <VOtpInput merged divider="-" />,
 }
 
 describe('VOtpInput', () => {
@@ -21,24 +26,33 @@ describe('VOtpInput', () => {
     return screen.getByCSS('.v-otp-input__input') as HTMLInputElement
   }
 
+  function getSlots () {
+    return screen.getAllByCSS('.v-otp-input__content .v-field')
+  }
+
   function getActiveSlotIndex () {
-    const vfields = screen.getAllByCSS('.v-otp-input__content .v-field')
-    return vfields.findIndex(f => f.classList.contains('v-field--focused'))
+    return getSlots().findIndex(f => f.classList.contains('v-field--focused'))
+  }
+
+  async function focusInput () {
+    await userEvent.click(getSlots()[0])
   }
 
   async function clickSlot (input: HTMLInputElement, index: number) {
     if (document.activeElement !== input) {
-      await userEvent.click(input)
+      await focusInput()
     }
-    input.setSelectionRange(index, Math.min(index + 1, input.value.length))
+    const clampedIndex = Math.min(index, input.value.length)
+    const end = Math.min(clampedIndex + 1, input.value.length)
+    input.setSelectionRange(clampedIndex, end)
+    input.dispatchEvent(new Event('selectionchange'))
     await waitAnimationFrame()
   }
 
   it('enters value and moves to next input', async () => {
     render(() => (<VOtpInput />))
-    const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('1')
     expect(getActiveSlotIndex()).toBe(1)
 
@@ -62,11 +76,11 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('1')
     expect(getActiveSlotIndex()).toBe(1)
 
-    await userEvent.click(input)
+    await clickSlot(input, 1)
     await userEvent.keyboard('2')
     expect(getActiveSlotIndex()).toBe(2)
   })
@@ -75,7 +89,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('1234')
     expect(getActiveSlotIndex()).toBe(4)
 
@@ -92,7 +106,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('1234')
     expect(getActiveSlotIndex()).toBe(4)
 
@@ -109,7 +123,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('12345')
     await clickSlot(input, 4)
 
@@ -125,7 +139,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('12345')
     await clickSlot(input, 2)
 
@@ -143,7 +157,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('12345')
     await clickSlot(input, 0)
 
@@ -163,7 +177,7 @@ describe('VOtpInput', () => {
       render(() => (<VOtpInput />))
       const input = getInput()
 
-      await userEvent.click(input)
+      await focusInput()
       await userEvent.keyboard('1234')
       expect(getActiveSlotIndex()).toBe(4)
 
@@ -180,7 +194,7 @@ describe('VOtpInput', () => {
       render(() => (<VOtpInput />))
       const input = getInput()
 
-      await userEvent.click(input)
+      await focusInput()
       await userEvent.keyboard('1234')
       await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
       expect(getActiveSlotIndex()).toBe(2)
@@ -195,9 +209,8 @@ describe('VOtpInput', () => {
   it('emits finish event when all inputs are filled', async () => {
     const onFinish = vi.fn()
     render(() => (<VOtpInput onFinish={ onFinish } />))
-    const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('123456')
 
     expect(onFinish).toHaveBeenCalledWith('123456')
@@ -217,9 +230,8 @@ describe('VOtpInput', () => {
         onUpdate:modelValue={ val => { modelValue.value = val } }
       />
     ))
-    const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('123')
 
     expect(modelValue.value).toBe('123')
@@ -228,7 +240,7 @@ describe('VOtpInput', () => {
   it('handles paste event', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()
-    await userEvent.click(input)
+    await focusInput()
     const lock = await commands.getLock()
     await navigator.clipboard.writeText('123456')
     await userEvent.paste()
@@ -241,7 +253,7 @@ describe('VOtpInput', () => {
   it('trim paste event content', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()
-    await userEvent.click(input)
+    await focusInput()
     const lock = await commands.getLock()
     await navigator.clipboard.writeText('  123456     ')
     await userEvent.paste()
@@ -255,7 +267,7 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.click(input)
+    await focusInput()
     await userEvent.keyboard('1234')
     await clickSlot(input, 1)
     expect(getActiveSlotIndex()).toBe(1)
@@ -273,10 +285,106 @@ describe('VOtpInput', () => {
     render(() => (<VOtpInput />))
     const input = getInput()
 
-    await userEvent.type(input, '123456')
+    await focusInput()
+    await userEvent.keyboard('123456')
 
     expect(input.value).toBe('123456')
     expect(getActiveSlotIndex()).toBe(5)
+  })
+
+  it('selects correct slot when clicking a filled slot', async () => {
+    render(() => (<VOtpInput />))
+    const input = getInput()
+
+    await focusInput()
+    await userEvent.keyboard('12345')
+    expect(getActiveSlotIndex()).toBe(5)
+
+    await clickSlot(input, 2)
+    expect(getActiveSlotIndex()).toBe(2)
+
+    await clickSlot(input, 0)
+    expect(getActiveSlotIndex()).toBe(0)
+
+    await clickSlot(input, 4)
+    expect(getActiveSlotIndex()).toBe(4)
+  })
+
+  it('redirects to caret position when clicking an empty slot', async () => {
+    render(() => (<VOtpInput />))
+    const input = getInput()
+
+    await focusInput()
+    await userEvent.keyboard('12')
+    expect(getActiveSlotIndex()).toBe(2)
+
+    await clickSlot(input, 5)
+    expect(getActiveSlotIndex()).toBe(2)
+
+    await clickSlot(input, 3)
+    expect(getActiveSlotIndex()).toBe(2)
+  })
+
+  it('renders merged layout with single group', async () => {
+    render(() => (<VOtpInput merged />))
+    const group = screen.getByCSS('.v-otp-group--merged')
+    expect(group).toBeTruthy()
+
+    const fields = screen.getAllByCSS('.v-otp-group--merged .v-field')
+    expect(fields).toHaveLength(6)
+  })
+
+  it('renders custom layout with sub-components', async () => {
+    render(() => (
+      <VOtpInput>
+        <VOtpGroup merged>
+          <VOtpField index={ 0 } />
+          <VOtpField index={ 1 } />
+          <VOtpField index={ 2 } />
+        </VOtpGroup>
+        <VOtpSeparator />
+        <VOtpGroup merged>
+          <VOtpField index={ 3 } />
+          <VOtpField index={ 4 } />
+          <VOtpField index={ 5 } />
+        </VOtpGroup>
+      </VOtpInput>
+    ))
+
+    const groups = screen.getAllByCSS('.v-otp-group--merged')
+    expect(groups).toHaveLength(2)
+
+    const separators = screen.getAllByCSS('.v-otp-input__divider')
+    expect(separators).toHaveLength(1)
+
+    const fields = screen.getAllByCSS('.v-field')
+    expect(fields).toHaveLength(6)
+  })
+
+  it('supports click-to-select in custom layout', async () => {
+    render(() => (
+      <VOtpInput>
+        <VOtpGroup merged>
+          <VOtpField index={ 0 } />
+          <VOtpField index={ 1 } />
+          <VOtpField index={ 2 } />
+        </VOtpGroup>
+        <VOtpSeparator />
+        <VOtpGroup merged>
+          <VOtpField index={ 3 } />
+          <VOtpField index={ 4 } />
+          <VOtpField index={ 5 } />
+        </VOtpGroup>
+      </VOtpInput>
+    ))
+    const input = getInput()
+
+    await focusInput()
+    await userEvent.keyboard('123456')
+    expect(getActiveSlotIndex()).toBe(5)
+
+    await clickSlot(input, 3)
+    expect(getActiveSlotIndex()).toBe(3)
   })
 
   showcase({ stories })
