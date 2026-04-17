@@ -486,7 +486,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 autocomplete="one-time-code"
                 maxlength={ length.value }
                 disabled={ props.disabled }
-                aria-label={ t(props.label, 1) }
+                aria-label={ t(props.label) }
                 value={ model.value.join('') }
                 { ...inputAttrs }
                 onInput={ onInput }
