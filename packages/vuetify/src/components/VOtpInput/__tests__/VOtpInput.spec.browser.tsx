@@ -387,5 +387,41 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(3)
   })
 
+  it('blocks non-numeric characters with numeric pattern', async () => {
+    render(() => (<VOtpInput pattern="numeric" />))
+    const input = getInput()
+
+    await focusInput()
+    await userEvent.keyboard('1a2b3c')
+
+    expect(input.value).toBe('123')
+    expect(getActiveSlotIndex()).toBe(3)
+  })
+
+  it('filters characters with custom RegExp pattern', async () => {
+    render(() => (<VOtpInput pattern={ /[A-F0-9]/ } />))
+    const input = getInput()
+
+    await focusInput()
+    await userEvent.keyboard('A1GZ3F')
+
+    expect(input.value).toBe('A13F')
+    expect(getActiveSlotIndex()).toBe(4)
+  })
+
+  it('filters pasted content with pattern', async () => {
+    render(() => (<VOtpInput pattern="alpha" />))
+    const input = getInput()
+
+    await focusInput()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('a1b2c3')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(input.value).toBe('abc')
+    expect(getActiveSlotIndex()).toBe(3)
+  })
+
   showcase({ stories })
 })
