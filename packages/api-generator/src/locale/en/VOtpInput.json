@@ -4,6 +4,8 @@
     "divider": "Specifies the dividing character between items.",
     "focusAll": "Puts all inputs into a focus state when any are focused",
     "length": "The OTP field's length.",
+    "merged": "Renders all fields in a single merged group with shared elevation and border radius.",
+    "pattern": "Restricts input to characters matching the given pattern. Accepts `’numeric’`, `’alpha’`, `’alphanumeric’`, or a custom `RegExp`. Defaults to `’numeric’` when `type=\"number\"`.",
     "placeholder": "Sets the input’s placeholder text.",
     "masked": "Hides the entered characters with bullets, similar to a password input, but makes it possible to also restrict characters to digits with `type=\"number\"`.",
     "type": "Supported types: `text`, `password`, `number`."
@@ -11,7 +13,10 @@
   "events": {
     "finish": "Emitted when the input is filled completely and cursor is blurred."
   },
+  "slots": {
+    "divider": "Slot for custom divider content between fields. Receives `{ index }` with the divider position."
+  },
   "exposed": {
-    "reset": "Reset's the input model to an empty array"
+    "reset": "Resets the input model to an empty string."
   }
 }

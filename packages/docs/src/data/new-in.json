@@ -268,7 +268,12 @@
   "VOtpInput": {
     "props": {
       "density": "3.12.0",
-      "masked": "3.12.0"
+      "masked": "3.12.0",
+      "merged": "4.1.0",
+      "pattern": "4.1.0"
+    },
+    "slots": {
+      "divider": "4.1.0"
     }
   },
   "VOverlay": {

@@ -1,0 +1,5 @@
+{
+  "props": {
+    "index": "The index of the OTP character this field represents."
+  }
+}
