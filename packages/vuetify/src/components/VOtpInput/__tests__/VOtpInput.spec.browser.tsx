@@ -354,7 +354,7 @@ describe('VOtpInput', () => {
     const groups = screen.getAllByCSS('.v-otp-group--merged')
     expect(groups).toHaveLength(2)
 
-    const separators = screen.getAllByCSS('.v-otp-input__divider')
+    const separators = screen.getAllByCSS('.v-otp-separator')
     expect(separators).toHaveLength(1)
 
     const fields = screen.getAllByCSS('.v-field')

@@ -25,8 +25,14 @@
         &__end
           flex: 1
 
-  .v-otp-input__divider
+  .v-otp-separator
+    display: flex
+    align-items: center
+    justify-content: center
     margin: $otp-input-divider-margin
+
+    &:has(> .v-icon)
+      margin: 0 -4px
 
   .v-otp-group
     display: contents

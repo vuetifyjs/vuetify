@@ -46,6 +46,7 @@ export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vueti
 
 export type VOtpInputSlots = {
   default: never
+  divider: { index: number }
   loader: never
 }
 
@@ -470,7 +471,11 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               )
               : Array.from({ length: length.value }, (_, i) => (
                 <>
-                  { props.divider && i !== 0 && <VOtpSeparator key={ `d-${i}` } /> }
+                  { (props.divider || slots.divider) && i !== 0 && (
+                    <VOtpSeparator key={ `d-${i}` }>
+                      { slots.divider?.({ index: i - 1 }) ?? props.divider }
+                    </VOtpSeparator>
+                  )}
                   <VOtpField index={ i } key={ i } />
                 </>
               ))
