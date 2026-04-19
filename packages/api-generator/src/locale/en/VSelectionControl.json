@@ -1,6 +1,8 @@
 {
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
+    "indeterminate": "Styles the control as an intermediate 'partially selected' state.",
+    "indeterminateIcon": "The icon used when the control is in the indeterminate state.",
     "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
   },
   "slots": {
