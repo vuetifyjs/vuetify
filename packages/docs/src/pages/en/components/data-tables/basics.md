@@ -158,6 +158,12 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
+#### Sort icons
+
+You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
+
+<ExamplesExample file="v-data-table/prop-sort-icon" />
+
 #### Selection
 
 The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
@@ -213,6 +219,12 @@ You can use the dynamic slots `item.<key>` to customize only certain columns. `<
 When using the **group-by** prop, you can customize the group header with the `group-header` slot. Example below makes the whole row clickable.
 
 <ExamplesExample file="v-data-table/slot-group-header" />
+
+#### Group summary slot
+
+By default grouping with **group-by** shows only the header slot. When you define `group-summary` slot, additional summary row will appear below the group rows.
+
+<ExamplesExample file="v-data-table/slot-group-summary" />
 
 #### Loading slot
 

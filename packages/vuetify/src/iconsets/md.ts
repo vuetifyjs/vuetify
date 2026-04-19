@@ -46,6 +46,8 @@ const aliases: IconAliases = {
   calendar: 'event',
   treeviewCollapse: 'arrow_drop_down',
   treeviewExpand: 'arrow_right',
+  tableGroupCollapse: 'chevron_down',
+  tableGroupExpand: 'chevron_right',
   eyeDropper: 'colorize',
   upload: 'cloud_upload',
   color: 'palette',
@@ -68,6 +70,7 @@ const aliases: IconAliases = {
   volumeMedium: 'volume_medium',
   volumeLow: 'volume_low',
   volumeOff: 'volume_variant_off',
+  search: 'search',
 }
 
 const md: IconSet = {

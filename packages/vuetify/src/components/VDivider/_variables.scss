@@ -7,6 +7,7 @@ $divider-border-width: thin 0 0 0 !default;
 $divider-content-padding: 0 16px !default;
 $divider-content-vertical-padding: 4px 0 !default;
 $divider-flex: 1 1 100% !default;
+$divider-gradient-mask: linear-gradient(90deg, transparent, #000, transparent) !default;
 $divider-inset-margin: 72px !default;
 $divider-inset-max-width: calc(100% - #{$divider-inset-margin}) !default;
 $divider-margin: 8px !default;
@@ -15,6 +16,7 @@ $divider-vertical-border-width: 0 thin 0 0 !default;
 $divider-vertical-inset-margin-bottom: $divider-margin !default;
 $divider-vertical-inset-margin-top: $divider-margin !default;
 $divider-vertical-inset-max-height: calc(100% - #{$divider-margin * 2}) !default;
+$divider-vertical-gradient-mask: linear-gradient(0deg, transparent, #000, transparent) !default;
 $divider-vertical-margin-left: -1px !default;
 
 

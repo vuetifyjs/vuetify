@@ -3,6 +3,7 @@ import './VRipple.sass'
 
 // Utilities
 import { isObject } from '@/util'
+import { Box, getTargetBox } from '@/util/box'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -53,11 +54,12 @@ const calculate = (
   let localY = 0
 
   if (!isKeyboardEvent(e)) {
-    const offset = el.getBoundingClientRect()
+    const offset = new Box(el)
     const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
+    const point = getTargetBox([target.clientX, target.clientY])
 
-    localX = target.clientX - offset.left
-    localY = target.clientY - offset.top
+    localX = point.x - offset.left
+    localY = point.y - offset.top
   }
 
   let radius = 0
@@ -308,7 +310,7 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
     el.addEventListener('mouseup', rippleHide)
     el.addEventListener('mouseleave', rippleHide)
 
-    el.addEventListener('keydown', e => keyboardRippleShow(e, allowedKeys))
+    el.addEventListener('keydown', el._ripple.keyDownHandler)
     el.addEventListener('keyup', keyboardRippleHide)
 
     el.addEventListener('blur', focusRippleHide)
@@ -321,19 +323,26 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
 }
 
 function removeListeners (el: HTMLElement) {
-  el.removeEventListener('mousedown', rippleShow)
+  el.removeEventListener('touchstart', rippleStop)
+  el.removeEventListener('mousedown', rippleStop)
+
   el.removeEventListener('touchstart', rippleShow)
   el.removeEventListener('touchend', rippleHide)
   el.removeEventListener('touchmove', rippleCancelShow)
   el.removeEventListener('touchcancel', rippleHide)
+
+  el.removeEventListener('mousedown', rippleShow)
   el.removeEventListener('mouseup', rippleHide)
   el.removeEventListener('mouseleave', rippleHide)
+
   if (el._ripple?.keyDownHandler) {
     el.removeEventListener('keydown', el._ripple.keyDownHandler)
   }
   el.removeEventListener('keyup', keyboardRippleHide)
-  el.removeEventListener('dragstart', rippleHide)
+
   el.removeEventListener('blur', focusRippleHide)
+
+  el.removeEventListener('dragstart', rippleHide)
 }
 
 function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {

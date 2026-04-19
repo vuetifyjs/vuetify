@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-card class="pa-6 mb-6" variant="flat">
-      <v-row dense>
+      <v-row density="comfortable">
         <v-col cols="12" sm="3">
-          <h5>FAB position</h5>
+          <h5 class="my-0">FAB position</h5>
 
           <v-radio-group v-model="fabPosition" density="compact" hide-details>
             <v-radio label="App (fixed)" value="fixed"></v-radio>
@@ -13,7 +13,7 @@
         </v-col>
 
         <v-col cols="12" sm="3">
-          <h5>FAB location</h5>
+          <h5 class="my-0">FAB location</h5>
 
           <v-radio-group v-model="fabLocation" :disabled="!fabPosition" density="compact" hide-details>
             <div class="d-flex">
@@ -39,7 +39,7 @@
         </v-col>
 
         <v-col cols="12" sm="3">
-          <h5>Menu location</h5>
+          <h5 class="my-0">Menu location</h5>
 
           <v-radio-group v-model="menuLocation" density="compact" hide-details>
             <div class="d-flex">
@@ -87,7 +87,7 @@
         </v-col>
 
         <v-col cols="12" sm="3">
-          <h5>Transition</h5>
+          <h5 class="my-0">Transition</h5>
 
           <v-radio-group v-model="transition" density="compact" hide-details>
             <v-radio label="Fade" value="fade-transition"></v-radio>

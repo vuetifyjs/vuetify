@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-subtitle-2 mb-2">Default</div>
+    <div class="text-title-small mb-2">Default</div>
     <v-expansion-panels>
       <v-expansion-panel
         v-for="i in 3"
@@ -10,7 +10,7 @@
       ></v-expansion-panel>
     </v-expansion-panels>
 
-    <div class="text-subtitle-2 mt-4 mb-2">Accordion</div>
+    <div class="text-title-small mt-4 mb-2">Accordion</div>
 
     <v-expansion-panels variant="accordion">
       <v-expansion-panel
@@ -21,7 +21,7 @@
       ></v-expansion-panel>
     </v-expansion-panels>
 
-    <div class="text-subtitle-2 mt-4 mb-2">Inset</div>
+    <div class="text-title-small mt-4 mb-2">Inset</div>
 
     <v-expansion-panels class="my-4" variant="inset">
       <v-expansion-panel
@@ -32,7 +32,7 @@
       ></v-expansion-panel>
     </v-expansion-panels>
 
-    <div class="text-subtitle-2 mt-4 mb-2">Popout</div>
+    <div class="text-title-small mt-4 mb-2">Popout</div>
 
     <v-expansion-panels class="my-4" variant="popout">
       <v-expansion-panel
@@ -44,3 +44,8 @@
     </v-expansion-panels>
   </div>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2791-123125&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

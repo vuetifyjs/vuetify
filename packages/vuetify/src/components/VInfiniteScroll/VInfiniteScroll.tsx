@@ -304,9 +304,11 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       setStatus(effectiveSide, 'ok')
 
       nextTick(() => {
-        setScrollAmount(
-          getScrollSize() - previousScrollSize + getScrollAmount(),
-        )
+        if (effectiveSide !== 'end') {
+          setScrollAmount(
+            getScrollSize() - previousScrollSize + getScrollAmount(),
+          )
+        }
         if (props.mode !== 'manual') {
           nextTick(() => {
             // See #17475

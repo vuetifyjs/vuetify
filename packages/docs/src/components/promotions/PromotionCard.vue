@@ -12,7 +12,7 @@
       target="_blank"
     >
       <v-container class="pa-2">
-        <v-row dense>
+        <v-row density="comfortable">
           <v-col cols="auto">
             <v-img
               :src="promotion.metadata.images.default.url"

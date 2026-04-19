@@ -51,6 +51,8 @@ export interface StrategyProps {
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
+  stickToTarget?: boolean
+  viewportMargin?: number | string
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -72,6 +74,11 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
+  stickToTarget: Boolean,
+  viewportMargin: {
+    type: [Number, String],
+    default: 12,
+  },
 }, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
@@ -277,7 +284,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
-    const viewportMargin = 12
+    const viewportMargin = Number(props.viewportMargin)
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
@@ -300,10 +307,24 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       }
       return scrollBox
     }, undefined!)
-    viewport.x += viewportMargin
-    viewport.y += viewportMargin
-    viewport.width -= viewportMargin * 2
-    viewport.height -= viewportMargin * 2
+
+    if (props.stickToTarget) {
+      viewport.x += Math.min(viewportMargin, targetBox.x)
+      viewport.y += Math.min(viewportMargin, targetBox.y)
+      viewport.width = Math.max(
+        viewport.width - viewportMargin * 2,
+        targetBox.x + targetBox.width - viewportMargin
+      )
+      viewport.height = Math.max(
+        viewport.height - viewportMargin * 2,
+        targetBox.y + targetBox.height - viewportMargin
+      )
+    } else {
+      viewport.x += viewportMargin
+      viewport.y += viewportMargin
+      viewport.width -= viewportMargin * 2
+      viewport.height -= viewportMargin * 2
+    }
 
     let placement = {
       anchor: preferredAnchor.value,

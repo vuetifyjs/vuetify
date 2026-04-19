@@ -23,6 +23,7 @@ export interface CalendarProps {
   year: number | string | undefined
   weeksInMonth: 'dynamic' | 'static'
   firstDayOfWeek: number | string | undefined
+  firstDayOfYear: number | string | undefined
   weekdayFormat: 'long' | 'short' | 'narrow' | undefined
 
   'onUpdate:modelValue': ((value: unknown[]) => void) | undefined
@@ -74,6 +75,10 @@ export const makeCalendarProps = propsFactory({
     default: 'dynamic',
   },
   firstDayOfWeek: {
+    type: [Number, String],
+    default: undefined,
+  },
+  firstDayOfYear: {
     type: [Number, String],
     default: undefined,
   },
@@ -206,17 +211,19 @@ export function useCalendar (props: CalendarProps) {
 
   const weekNumbers = computed(() => {
     return weeksInMonth.value.map(week => {
-      return week.length ? adapter.getWeek(week[0], props.firstDayOfWeek) : null
+      return week.length ? adapter.getWeek(week[0], props.firstDayOfWeek, props.firstDayOfYear) : null
     })
   })
+
+  const { minDate, maxDate } = useCalendarRange(props)
 
   function isDisabled (value: unknown) {
     if (props.disabled) return true
 
     const date = adapter.date(value)
 
-    if (props.min && adapter.isBefore(adapter.endOfDay(date), adapter.date(props.min))) return true
-    if (props.max && adapter.isAfter(date, adapter.date(props.max))) return true
+    if (minDate.value && adapter.isBefore(adapter.endOfDay(date), minDate.value)) return true
+    if (maxDate.value && adapter.isAfter(date, maxDate.value)) return true
 
     if (Array.isArray(props.allowedDates) && props.allowedDates.length > 0) {
       return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
@@ -238,5 +245,43 @@ export function useCalendar (props: CalendarProps) {
     weeksInMonth,
     weekdayLabels,
     weekNumbers,
+  }
+}
+
+export function useCalendarRange (props: Pick<CalendarProps, 'min' | 'max'>) {
+  const adapter = useDate()
+
+  const minDate = computed(() => {
+    if (!props.min) return null
+    const date = adapter.date(props.min)
+    return adapter.isValid(date) ? date : null
+  })
+
+  const maxDate = computed(() => {
+    if (!props.max) return null
+    const date = adapter.date(props.max)
+    return adapter.isValid(date) ? date : null
+  })
+
+  function clampDate (date: unknown) {
+    if (minDate.value && adapter.isBefore(date, minDate.value)) {
+      return minDate.value
+    }
+    if (maxDate.value && adapter.isAfter(date, maxDate.value)) {
+      return maxDate.value
+    }
+    return date
+  }
+
+  function isInAllowedRange (date: unknown) {
+    return (!minDate.value || adapter.isAfter(date, minDate.value)) &&
+      (!maxDate.value || adapter.isBefore(date, maxDate.value))
+  }
+
+  return {
+    minDate,
+    maxDate,
+    clampDate,
+    isInAllowedRange,
   }
 }

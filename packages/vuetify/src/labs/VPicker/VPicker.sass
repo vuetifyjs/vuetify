@@ -6,14 +6,21 @@
   .v-picker.v-sheet
     display: grid
     grid-auto-rows: min-content
-    grid-template-areas: "title" "header" "body"
+    grid-template-areas: "header" "body"
     grid-template-columns: minmax(0, 1fr)
     overflow: hidden
     @include tools.elevation($picker-elevation)
     @include tools.rounded($picker-border-radius)
 
     &.v-picker--with-actions
-      grid-template-areas: "title" "header" "body" "actions"
+      grid-template-areas: "header" "body" "actions"
+
+    &.v-picker--landscape
+      grid-template-columns: auto 1fr
+      grid-template-areas: "header body" "header body"
+
+      &.v-picker--with-actions
+        grid-template-areas: "header body" "header actions"
 
   .v-picker__body
     grid-area: body
@@ -23,7 +30,7 @@
     justify-content: center
     flex-wrap: wrap
 
-  .v-picker__header
+  .v-picker__header-wrapper
     grid-area: header
 
   .v-picker__actions
@@ -45,16 +52,9 @@
       border-bottom-style: $picker-border-style
       border-bottom-width: $picker-border-thin-width
 
-  .v-picker--landscape
-    grid-template-areas: "title" "header body" "header body"
-
-  .v-picker--landscape.v-picker--with-actions
-    grid-template-areas: "title" "header body" "header actions"
-
   .v-picker-title
     text-transform: uppercase
     font-size: .75rem
-    grid-area: title
     padding-inline: 24px 12px
     padding-top: 16px
     padding-bottom: 16px

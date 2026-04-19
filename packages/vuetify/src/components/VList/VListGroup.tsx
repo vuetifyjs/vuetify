@@ -6,13 +6,13 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useList } from './list'
 import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
-import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
+import { useNestedGroupActivator, useNestedItem, VNestedSymbol } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, inject, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
@@ -67,6 +67,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const list = useList()
     const { isBooted } = useSsrBoot()
 
+    const parent = inject(VNestedSymbol)
+    const renderWhenClosed = toRef(() => parent?.root?.itemsRegistration.value === 'render')
+
     function onClick (e: Event) {
       if (['INPUT', 'TEXTAREA'].includes((e.target as Element)?.tagName)) return
       open(!isOpen.value, e)
@@ -114,9 +117,16 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         )}
 
         <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
-          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { slots.default?.() }
-          </div>
+          { renderWhenClosed.value
+            ? (
+            <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+              { slots.default?.() }
+            </div>
+            ) : isOpen.value && (
+            <div class="v-list-group__items" role="group" aria-labelledby={ id.value }>
+              { slots.default?.() }
+            </div>
+            )}
         </MaybeTransition>
       </props.tag>
     ))

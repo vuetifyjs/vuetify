@@ -1,6 +1,6 @@
 import fs from 'node:fs'
-import { kebabCase } from './helpers/text'
-import type { ComponentData } from './types'
+import { kebabCase } from './helpers/text.ts'
+import type { ComponentData } from './types.ts'
 
 export function createVeturApi (componentData: ComponentData[]) {
   const tags = componentData.reduce((obj, component) => {

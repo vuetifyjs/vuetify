@@ -3,7 +3,8 @@ import { VWindow } from '../VWindow'
 import { VWindowItem } from '../VWindowItem'
 
 // Utilities
-import { commands, generate, page, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent } from '@test'
+import { ref } from 'vue'
 
 const stories = {
   'Without arrows': (
@@ -71,6 +72,8 @@ describe('VWindow', () => {
         </VWindowItem>
       </VWindow>
     ))
+
+    await commands.waitStable('.v-window')
 
     let arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     expect(arrows).toHaveLength(1)
@@ -216,6 +219,7 @@ describe('VWindow', () => {
       </VWindow>
     ))
 
+    await commands.waitStable('.v-window')
     const arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     await userEvent.click(arrows[0])
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('3. baz')
@@ -244,7 +248,85 @@ describe('VWindow', () => {
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  describe('keyboard controls', () => {
+    it('should support horizontal keyboard navigation', async () => {
+      const model = ref(1)
+
+      render(() => (
+        <VWindow v-model={ model.value } showArrows continuous>
+          <VWindowItem value={ 1 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>1. foo</h1>
+            </div>
+          </VWindowItem>
+          <VWindowItem value={ 2 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>2. bar</h1>
+            </div>
+          </VWindowItem>
+          <VWindowItem value={ 3 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>3. baz</h1>
+            </div>
+          </VWindowItem>
+        </VWindow>
+      ))
+
+      await commands.waitStable('.v-window')
+      const button = screen.getAllByCSS('.v-window__controls > .v-btn')[0]
+      await button.focus()
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(1)
+      await userEvent.keyboard('{ArrowRight}')
+      expect(model.value).toBe(2)
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(model.value).toBe(1)
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(model.value).toBe(3)
+      await userEvent.keyboard('{ArrowRight}')
+      expect(model.value).toBe(1)
+    })
+
+    it('should support vertical keyboard navigation', async () => {
+      const model = ref(1)
+
+      render(() => (
+        <VWindow v-model={ model.value } showArrows continuous direction="vertical">
+          <VWindowItem value={ 1 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>1. foo</h1>
+            </div>
+          </VWindowItem>
+          <VWindowItem value={ 2 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>2. bar</h1>
+            </div>
+          </VWindowItem>
+          <VWindowItem value={ 3 }>
+            <div class="bg-grey d-flex justify-center align-center">
+              <h1>3. baz</h1>
+            </div>
+          </VWindowItem>
+        </VWindow>
+      ))
+
+      await commands.waitStable('.v-window')
+      const button = screen.getAllByCSS('.v-window__controls > .v-btn')[0]
+      await button.focus()
+
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(model.value).toBe(1)
+      await userEvent.keyboard('{ArrowDown}')
+      expect(model.value).toBe(2)
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(1)
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(3)
+      await userEvent.keyboard('{ArrowDown}')
+      expect(model.value).toBe(1)
+    })
   })
+
+  showcase({ stories })
 })

@@ -20,10 +20,10 @@ describe('VHover', () => {
     expect(element).not.toHaveClass('bg-primary')
 
     await userEvent.hover(element)
-    expect(element).toHaveClass('bg-primary')
+    await expect.element(element).toHaveClass('bg-primary')
 
     await userEvent.unhover(element)
-    expect(element).not.toHaveClass('bg-primary')
+    await expect.element(element).not.toHaveClass('bg-primary')
   })
 
   it('should not react when disabled', async () => {
@@ -42,10 +42,10 @@ describe('VHover', () => {
     expect(element).not.toHaveClass('bg-primary')
 
     await userEvent.hover(element)
-    expect(element).not.toHaveClass('bg-primary')
+    await expect.element(element).not.toHaveClass('bg-primary')
 
     await userEvent.unhover(element)
-    expect(element).not.toHaveClass('bg-primary')
+    await expect.element(element).not.toHaveClass('bg-primary')
   })
 
   it('should respect delays', async () => {
@@ -64,11 +64,11 @@ describe('VHover', () => {
     await userEvent.hover(element)
     expect(element).not.toHaveClass('bg-primary')
     await wait(200)
-    expect(element).toHaveClass('bg-primary')
+    await expect.element(element).toHaveClass('bg-primary')
 
     await userEvent.unhover(element)
     expect(element).toHaveClass('bg-primary')
     await wait(200)
-    expect(element).not.toHaveClass('bg-primary')
+    await expect.element(element).not.toHaveClass('bg-primary')
   })
 })

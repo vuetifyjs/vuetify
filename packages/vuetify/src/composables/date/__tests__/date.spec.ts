@@ -1,4 +1,5 @@
 // Utilities
+import { assertType } from 'vitest'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
 import { createDateRange } from '../date'
@@ -7,14 +8,12 @@ import { createDateRange } from '../date'
 import type { IUtils } from '@date-io/core/IUtils'
 import type { DateAdapter } from '../DateAdapter'
 
-function expectAssignable<T, T2 extends T = T> (value: T2): void {}
-
 describe('date', () => {
   it('types', () => {
     // Cannot define properties that don't exist in date-io
-    expectAssignable<DateAdapter>({} as IUtils<Date, string>)
+    assertType<DateAdapter>({} as IUtils<Date, string>)
     // @ts-expect-error Can implement a subset of date-io
-    expectAssignable<IUtils<Date>>({} as DateAdapter)
+    assertType<IUtils<Date, string>>({} as DateAdapter)
   })
 })
 
@@ -176,6 +175,16 @@ describe('VuetifyDateAdapter', () => {
       expect(adapter.getWeek(adapter.parseISO('2025-11-01'))).toBe(44)
       expect(adapter.getWeek(adapter.parseISO('2025-11-02'))).toBe(45)
       expect(adapter.getWeek(adapter.parseISO('2025-11-03'))).toBe(45)
+    })
+  })
+
+  describe('week numbers with first-day-of-week', () => {
+    it('should calculate weeks correctly when adapting for UK', () => {
+      const adapterUS = new VuetifyDateAdapter({ locale: 'en-US' })
+      const adapterGB = new VuetifyDateAdapter({ locale: 'en-GB' })
+      expect(adapterUS.getWeek(adapterUS.parseISO('2025-03-16'))).toBe(12)
+      expect(adapterGB.getWeek(adapterGB.parseISO('2025-03-16'))).toBe(11)
+      expect(adapterUS.getWeek(adapterUS.parseISO('2025-03-16'), 1, 4)).toBe(11)
     })
   })
 })

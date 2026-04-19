@@ -1,7 +1,7 @@
 import { VSwitch } from '../VSwitch'
 
 // Utilities
-import { generate, gridOn } from '@test'
+import { gridOn, showcase } from '@test'
 
 const contextColor = 'rgb(0, 0, 255)'
 const color = 'rgb(255, 0, 0)'
@@ -27,7 +27,5 @@ const props = {
 }
 
 describe('VSwitch', () => {
-  describe('Showcase', () => {
-    generate({ stories, props, component: VSwitch })
-  })
+  showcase({ stories, props, component: VSwitch })
 })

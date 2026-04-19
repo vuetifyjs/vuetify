@@ -41,7 +41,7 @@ import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   theme: {
-    defaultTheme: 'dark', // 'light' | 'dark' | 'system'
+    defaultTheme: 'dark', // 'system' | 'light' | 'dark'
   },
 })
 ```
@@ -94,32 +94,6 @@ The theme instance has 3 functions to change the theme:
 </script>
 ```
 
-<details>
-<summary>Usage before v3.9</summary>
-
-In versions before v3.9, you manually change the global name value on the theme instance:
-
-```html { resource="src/App.vue" }
-<template>
-  <v-app>
-    <v-btn @click="toggleTheme">toggle theme</v-btn>
-    ...
-  </v-app>
-</template>
-
-<script setup>
-import { useTheme } from 'vuetify'
-
-const theme = useTheme()
-
-function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-}
-</script>
-```
-
-</details>
-
 <br>
 
 You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
@@ -153,8 +127,6 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
 ```
 
 ### System theme
-
-<DocIntroduced version="3.9.0" />
 
 The **system** theme uses the user's system preference for 'light' or 'dark' mode, based on the **prefers-color-scheme** media query. It is evaluated at run-time and reacts to changes in the user's system preference.
 
@@ -361,10 +333,8 @@ Content-Security-Policy: script-src 'self' 'nonce-dQw4w9WgXcQ'
 Content-Security-Policy: style-src 'self' 'nonce-dQw4w9WgXcQ'
 ```
 
-```ts
-// src/plugins/vuetify.js
-
-import {createVuetify} from 'vuetify'
+```ts { resource="src/plugins/vuetify.ts" }
+import { createVuetify } from 'vuetify'
 
 export const vuetify = createVuetify({
   theme: {

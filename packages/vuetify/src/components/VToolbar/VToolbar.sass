@@ -15,6 +15,9 @@
     transition-property: height, width, transform, max-width, left, right, top, bottom, box-shadow
     width: 100%
 
+    @media (prefers-reduced-motion: reduce)
+      transition-property: box-shadow
+
     @include tools.border($toolbar-border...)
     @include tools.elevation($toolbar-elevation)
     @include tools.rounded($toolbar-border-radius)
@@ -26,7 +29,15 @@
     &--collapse
       max-width: $toolbar-collapsed-max-width
       overflow: hidden
-      border-end-end-radius: $toolbar-collapsed-border-radius
+
+      &-end
+        margin-inline-start: auto
+
+      &.v-toolbar--collapse-start
+        border-end-end-radius: $toolbar-collapsed-border-radius
+
+      &.v-toolbar--collapse-end
+        border-end-start-radius: $toolbar-collapsed-border-radius
 
       .v-toolbar-title
         display: none

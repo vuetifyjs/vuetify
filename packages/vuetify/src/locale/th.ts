@@ -50,6 +50,9 @@ export default {
       previousMonth: 'เดือนก่อนหน้า',
       nextMonth: 'เดือนถัดไป',
       selectYear: 'เลือกปี',
+      previousYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      selectMonth: 'เลือกเดือน',
       selectDate: '{0}',
       currentDate: 'วันนี้, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'ช่วงเช้า',
     pm: 'ช่วงบ่าย',
     title: 'เลือกเวลา',
+    hour: 'ชั่วโมง',
+    minute: 'นาที',
+    second: 'วินาที',
+    notAllowed: 'ค่าไม่ได้รับอนุญาต',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
   },
+  command: {
+    search: 'พิมพ์คำสั่งหรือค้นหา...',
+  },
   hotkey: {
     then: 'จากนั้น',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'เว้นวรรค',
     plus: 'บวก',
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
+    or: 'หรือ',
   },
   video: {
     play: 'เล่น',

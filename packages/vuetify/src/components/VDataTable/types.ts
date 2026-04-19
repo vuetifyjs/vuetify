@@ -1,6 +1,6 @@
 // Types
 import type { provideExpanded } from './composables/expand'
-import type { Group, GroupableItem, provideGroupBy } from './composables/group'
+import type { Group, GroupableItem, GroupSummary, provideGroupBy } from './composables/group'
 import type { provideSelection, SelectableItem } from './composables/select'
 import type { FilterFunction, InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
@@ -19,6 +19,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   minWidth?: number | string
   maxWidth?: number | string
   nowrap?: boolean
+  indent?: number
 
   headerProps?: Record<string, any>
   cellProps?: HeaderCellProps
@@ -48,6 +49,7 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
 export interface DataTableItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   key: any
   index: number
+  virtualIndex?: number
   columns: {
     [key: string]: any
   }
@@ -63,6 +65,13 @@ export type GroupHeaderSlot = {
   toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
+}
+
+export type GroupSummarySlot = {
+  index: number
+  item: GroupSummary
+  columns: InternalDataTableHeader[]
+  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
 }
 
 type ItemSlotBase<T> = {

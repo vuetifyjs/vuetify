@@ -8,7 +8,7 @@ import packageJson from '../package.json' with { type: 'json' }
 import alias from '@rollup/plugin-alias'
 import sass from 'rollup-plugin-sass'
 import { babel } from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 import autoprefixer from 'autoprefixer'
@@ -302,6 +302,39 @@ const options = [
               ) + `'`
             }).sort().join('\n'),
           })
+        }
+      }
+    ],
+  },
+  {
+    input: 'src/entry-styles.ts',
+    output: [
+      { format: 'es', dir: 'dist' },
+    ],
+    onwarn (warning, defaultHandler) {
+      if (warning.code === 'EMPTY_BUNDLE') return
+      defaultHandler(warning)
+    },
+    plugins: [
+      sass({
+        options: {
+          charset: false,
+          silenceDeprecations: ['legacy-js-api'],
+        },
+        output (styles, styleNodes) {
+          // Individual CSS files
+          for (const { id, content } of styleNodes) {
+            const relativePath = path.relative(srcDir, id)
+            const out = path.parse(path.join(libDir, relativePath))
+            mkdirp(out.dir).then(() => {
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
+            })
+          }
+        },
+      }),
+      {
+        generateBundle (options, bundle) {
+          delete bundle['entry-styles.js']
         }
       }
     ],

@@ -3,7 +3,7 @@ import { VToolbar } from '..'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
-import { generate } from '@test'
+import { showcase } from '@test'
 
 const stories = {
   'With title': <VToolbar title="foo" />,
@@ -16,10 +16,12 @@ const stories = {
       }}
     </VToolbar>
   ),
+  'With location': <div class="position: relative; width: 100%; height: 100px; border: 1px dashed #ccc">
+    <VToolbar absolute floating class="pr-5" location="top right" title="top right" />
+    <VToolbar absolute floating class="pr-5" location="bottom center" title="bottom center" />
+  </div>,
 }
 
 describe('VToolbar', () => {
-  describe('Showcase', () => {
-    generate({ stories })
-  })
+  showcase({ stories })
 })

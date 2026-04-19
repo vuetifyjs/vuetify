@@ -36,6 +36,9 @@ type VDataTableVirtualSlotProps<T> = Omit<
   | 'page'
   | 'pageCount'
   | 'itemsPerPage'
+  | 'prevPage'
+  | 'nextPage'
+  | 'setPage'
 >
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
@@ -89,7 +92,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
   setup (props, { attrs, slots }) {
     const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { disableSort } = toRefs(props)
 
     const {
@@ -111,7 +114,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
@@ -119,7 +122,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
 
     const allItems = computed(() => extractRows(flatItems.value))
 
@@ -141,7 +144,14 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       calculateVisibleItems,
       scrollToIndex,
     } = useVirtual(props, flatItems)
-    const displayItems = computed(() => computedItems.value.map(item => item.raw))
+
+    const displayItems = computed(() =>
+      computedItems.value
+        .map(item => ({
+          ...item.raw,
+          virtualIndex: item.index,
+        }))
+    )
 
     useOptions({
       sortBy,
@@ -181,7 +191,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     }))
 
     useRender(() => {
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -216,6 +226,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }
+                        multiSort={ !!props.multiSort }
                         v-slots={ slots }
                       />
                     </thead>
@@ -248,7 +259,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     { ...itemSlotProps.props }
                                     ref={ itemRef }
                                     key={ itemSlotProps.internalItem.index }
-                                    index={ itemSlotProps.internalItem.index }
+                                    index={ itemSlotProps.index }
                                     v-slots={ slots }
                                   />
                                 )

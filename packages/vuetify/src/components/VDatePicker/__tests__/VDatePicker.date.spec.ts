@@ -116,7 +116,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        elevation: 15,
+        elevation: 4,
       },
     })
 
@@ -796,5 +796,46 @@ describe('week numbers with time zone', () => {
     const $weeks = await screen.findAllByCSS('.v-date-picker-month__weeks > div')
     expect($weeks[1].innerHTML).toBe('44')
     expect($weeks[2].innerHTML).toBe('45')
+  })
+})
+
+describe('range selection with time zone', () => {
+  beforeEach(() => vi.stubEnv('TZ', 'America/New_York'))
+  afterEach(() => vi.unstubAllEnvs())
+
+  it('should select correct dates near ST/DST transition', async () => {
+    const update = vi.fn()
+    const wrapper = render(VDatePicker, {
+      props: {
+        multiple: 'range',
+        modelValue: ['2025-03-01','2025-03-01'],
+        'onUpdate:modelValue': update,
+      },
+    })
+
+    const btn1 = await wrapper.findByText('8') as HTMLElement
+    btn1.click()
+    expect(update).toHaveBeenNthCalledWith(1, [new Date('2025-03-08T05:00:00.000Z')])
+    const btn2 = await wrapper.findByText('9') as HTMLElement
+    btn2.click()
+    expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-03-08T05:00:00.000Z'), new Date('2025-03-10T03:59:59.999Z')])
+  })
+
+  it('should select correct dates near DST/ST transition', async () => {
+    const update = vi.fn()
+    const wrapper = render(VDatePicker, {
+      props: {
+        multiple: 'range',
+        modelValue: ['2025-10-01','2025-10-01'],
+        'onUpdate:modelValue': update,
+      },
+    })
+
+    const btn1 = await wrapper.findByText('2') as HTMLElement
+    btn1.click()
+    expect(update).toHaveBeenNthCalledWith(1, [new Date('2025-10-02T04:00:00.000Z')])
+    const btn2 = await wrapper.findByText('3') as HTMLElement
+    btn2.click()
+    expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-10-02T04:00:00.000Z'), new Date('2025-10-04T03:59:59.999Z')])
   })
 })

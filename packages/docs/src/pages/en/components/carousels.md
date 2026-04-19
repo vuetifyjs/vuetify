@@ -52,7 +52,7 @@ Use any available icon as your carousel's slide delimiter.
 The `v-carousel-item` component can have its **transition/reverse-transition** changed.
 
 ::: info
-Crossfade transition will get significantly easier to apply with a dedicated `crossfade` prop planned for **3.10.0**.
+Crossfade transition using `crossfade` prop requires **3.10.0**.
 :::
 
 <ExamplesExample file="v-carousel/prop-custom-transition" />

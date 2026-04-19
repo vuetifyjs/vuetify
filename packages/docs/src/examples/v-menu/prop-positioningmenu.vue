@@ -45,11 +45,11 @@
   const menuTarget = ref(null)
 
   const menuItems = [
-    { title: 'Create', prependIcon: 'mdi-plus-circle-outline', code: 'add' },
+    { title: 'Create', prependIcon: 'mdi-plus-circle', code: 'add' },
     { type: 'divider' },
-    { title: 'Modify', prependIcon: 'mdi-pencil-outline', code: 'edit' },
+    { title: 'Modify', prependIcon: 'mdi-pencil', code: 'edit' },
     { type: 'divider' },
-    { title: 'Remove', prependIcon: 'mdi-trash-can-outline', code: 'delete' },
+    { title: 'Remove', prependIcon: 'mdi-trash-can', code: 'delete' },
   ]
 
   async function show (evt) {

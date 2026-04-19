@@ -32,7 +32,7 @@
             v-for="(c, ci) in palette"
             :key="ci"
             :color="c.color || c"
-            class="ma-2 elevation-2"
+            class="ma-2 elevation-1"
             rounded="lg"
             size="24"
           >

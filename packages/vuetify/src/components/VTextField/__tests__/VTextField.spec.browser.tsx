@@ -4,8 +4,8 @@ import { VBtn } from '@/components/VBtn'
 import { VMenu } from '@/components/VMenu'
 
 // Utilities
-import { commands, generate, render, screen, userEvent, wait } from '@test'
-import { cloneVNode } from 'vue'
+import { commands, render, screen, showcase, userEvent, wait } from '@test'
+import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -39,8 +39,7 @@ describe('VTextField', () => {
     ))
 
     expect(element).not.toHaveClass('v-input--error')
-    expect(rule).toHaveBeenCalledOnce()
-    expect(rule).toHaveBeenCalledWith(undefined)
+    expect(rule).toHaveBeenCalledExactlyOnceWith(undefined)
     await userEvent.click(element)
     await userEvent.keyboard('Hello')
     expect(rule).toHaveBeenCalledTimes(6)
@@ -119,7 +118,7 @@ describe('VTextField', () => {
     expect(rule).not.toHaveBeenCalled()
 
     await userEvent.click(document.body)
-    expect(rule).toHaveBeenCalledOnce()
+    expect(rule).toHaveBeenCalledTimes(1)
     expect(element).toHaveClass('v-input--error')
     expect(element).toHaveTextContent('Error!')
   })
@@ -133,7 +132,16 @@ describe('VTextField', () => {
     expect(element).toHaveTextContent('0')
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  it('keeps -0 with v-model.number', async () => {
+    const model = ref()
+    const { element } = render(() => (
+      <VTextField v-model_number={ model.value }></VTextField>
+    ))
+    await userEvent.click(element)
+    await userEvent.keyboard('-0.1')
+    await expect.element(await screen.findByRole('textbox')).toHaveValue('-0.1')
+    expect(model.value).toBe(-0.1)
   })
+
+  showcase({ stories })
 })

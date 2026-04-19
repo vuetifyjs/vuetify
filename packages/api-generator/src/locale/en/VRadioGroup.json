@@ -1,9 +1,5 @@
 {
   "props": {
-    "column": "Displays radio buttons in column.",
     "inline": "Displays radio buttons in row."
-  },
-  "events": {
-    "change": "Emitted when the input is changed by user interaction."
   }
 }

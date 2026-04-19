@@ -1,9 +1,13 @@
 {
   "props": {
     "controlHeight": "Sets the height of the controls.",
+    "controlVariant": "- **docked:** Separate control groups for month and year.\n- **modal:** Month and year are displayed together, clicking the text opens a month picker, clicking the dropdown arrow opens a year picker. There are also arrow buttons to scroll between months.",
     "modeIcon": "Icon used for the mode button.",
     "nextIcon": "Icon used for the next button.",
+    "noMonthPicker": "Only applies to `controlVariant=\"modal\"`, the month and year picker buttons are combined into one that only opens the year picker.",
     "prevIcon": "Icon used for the previous button.",
+    "monthText": "Text displayed for the current month.",
+    "yearText": "Text displayed for the current year.",
     "viewMode": "Sets the view mode of the date picker."
   },
   "events": {
@@ -11,6 +15,7 @@
     "click:next": "Event fired when clicking the next button.",
     "click:prev": "Event fired when clicking the previous button.",
     "click:year": "Event fired when clicking the date text.",
-    "click:text": "Event fired when clicking the year."
+    "click:prev-year": "Event fired when clicking the previous year button.",
+    "click:next-year": "Event fired when clicking the next year button."
   }
 }

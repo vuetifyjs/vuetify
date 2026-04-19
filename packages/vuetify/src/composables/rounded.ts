@@ -31,7 +31,7 @@ export function useRounded (
 ): RoundedData {
   const roundedClasses = computed(() => {
     const rounded = isRef(props) ? props.value : props.rounded
-    const tile = isRef(props) ? props.value : props.tile
+    const tile = isRef(props) ? false : props.tile
     const classes: string[] = []
 
     if (tile || rounded === false) {

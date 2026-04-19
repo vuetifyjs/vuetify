@@ -38,6 +38,12 @@ export interface InternalItem<T = any> {
   type?: string
 }
 
+type FilterResult = {
+  index: number
+  matches: Record<string, FilterMatchArrayMultiple | undefined>
+  type?: 'divider' | 'subheader'
+}
+
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
   if (value == null || query == null) return -1
@@ -75,6 +81,7 @@ export const makeFilterProps = propsFactory({
   noFilter: Boolean,
 }, 'filter')
 
+// eslint-disable-next-line complexity
 export function filterItems (
   items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
@@ -86,13 +93,15 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  const array: { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined> }[] = []
+  const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
   if (!items?.length) return array
+
+  let lookAheadItems: FilterResult[] = []
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -106,6 +115,12 @@ export function filterItems (
 
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
+          if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
+            // clear unless, divider appears before subheader
+            lookAheadItems = []
+          }
+
+          lookAheadItems.push({ index: i, matches: { }, type: item.type })
           continue
         }
 
@@ -152,6 +167,11 @@ export function filterItems (
           (!defaultMatchesLength && customFiltersLength > 0 && !hasOnlyCustomFilters)
         )
       ) continue
+    }
+
+    if (lookAheadItems.length) {
+      array.push(...lookAheadItems)
+      lookAheadItems = []
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })

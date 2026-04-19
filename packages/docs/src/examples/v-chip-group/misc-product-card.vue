@@ -4,11 +4,11 @@
     max-width="400"
   >
     <v-card-title class="d-flex">
-      <h2 class="text-h4">Shirt Blouse</h2>
+      <h2 class="text-headline-large my-0">Shirt Blouse</h2>
 
       <v-spacer></v-spacer>
 
-      <span class="text-h6">$44.50</span>
+      <span class="text-title-large">$44.50</span>
     </v-card-title>
 
     <v-card-text>
@@ -71,3 +71,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2226-46981&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

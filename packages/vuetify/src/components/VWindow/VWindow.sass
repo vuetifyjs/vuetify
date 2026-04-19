@@ -67,6 +67,16 @@
           .v-icon
             transform: rotate(90deg)
 
+    &--crossfade > .v-window__container
+      isolation: isolate
+
+      > .v-window-item
+        mix-blend-mode: $window-crossfade-blend-mode
+
+@include tools.layer('overrides')
+  .v-window-item
+    transition-duration: var(--v-window-transition-duration, revert-layer)
+
 @include tools.layer('transitions')
   .v-window
     &-x-transition,
@@ -77,9 +87,12 @@
       &-leave-active
         transition: $window-transition
 
+        @media (prefers-reduced-motion: reduce)
+          transition-duration: 0s
+
       &-leave-from,
       &-leave-to
-        position: absolute !important
+        position: absolute
         top: 0
         width: 100%
 
@@ -110,3 +123,19 @@
 
       &-leave-to
         transform: translateY(100%)
+
+  .v-window
+    &-crossfade-transition
+      &-enter-active,
+      &-leave-active
+        transition: $window-transition
+
+      &-leave-from,
+      &-leave-to
+        position: absolute
+        top: 0
+        width: 100%
+
+      &-enter-from,
+      &-leave-to
+        opacity: 0

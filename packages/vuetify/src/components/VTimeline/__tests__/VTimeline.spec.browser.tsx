@@ -2,7 +2,7 @@
 import { VTimeline, VTimelineItem } from '..'
 
 // Utilities
-import { generate, render, screen } from '@test'
+import { render, screen, showcase } from '@test'
 import { nextTick, ref } from 'vue'
 
 // Types
@@ -101,8 +101,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -112,8 +112,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -140,8 +140,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -151,8 +151,8 @@ describe('VTimeline', () => {
             {{
               default: () => (
                 <div>
-                  <div class="text-h6">Title</div>
-                  <div class="text-subtitle-2">Subtitle</div>
+                  <div class="headline-small">Title</div>
+                  <div class="label-large">Subtitle</div>
                 </div>
               ),
               opposite: () => 'Opposite',
@@ -171,7 +171,39 @@ describe('VTimeline', () => {
     })
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  it('should not fill dot when size is a number and fill-dot is false', async () => {
+    render(() => (
+      <VTimeline>
+        <VTimelineItem size={ 40 } fillDot={ false }>
+          {{ default: () => 'Content' }}
+        </VTimelineItem>
+      </VTimeline>
+    ))
+
+    const outerDot = screen.getByCSS('.v-timeline-divider__dot')
+    const innerDot = screen.getByCSS('.v-timeline-divider__inner-dot')
+
+    expect(outerDot.getBoundingClientRect().width).toBe(40)
+    expect(innerDot.getBoundingClientRect().width).toBe(32)
+    expect(innerDot.getBoundingClientRect().height).toBe(32)
   })
+
+  it('should fill dot when size is a number and fill-dot is true', async () => {
+    render(() => (
+      <VTimeline>
+        <VTimelineItem size={ 40 } fillDot>
+          {{ default: () => 'Content' }}
+        </VTimelineItem>
+      </VTimeline>
+    ))
+
+    const outerDot = screen.getByCSS('.v-timeline-divider__dot')
+    const innerDot = screen.getByCSS('.v-timeline-divider__inner-dot')
+
+    expect(outerDot.getBoundingClientRect().width).toBe(40)
+    expect(innerDot.getBoundingClientRect().width).toBe(40)
+    expect(innerDot.getBoundingClientRect().height).toBe(40)
+  })
+
+  showcase({ stories })
 })

@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Previous month',
       nextMonth: 'Next month',
       selectYear: 'Select year',
+      previousYear: 'ឆ្នាំមុន',
+      nextYear: 'ឆ្នាំក្រោយ',
+      selectMonth: 'ជ្រើសរើសខែ',
       selectDate: '{0}',
       currentDate: 'Today, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'ព្រឹក',
     pm: 'ល្ងាច',
     title: 'ជ្រើសរើសម៉ោង',
+    hour: 'ម៉ោង',
+    minute: 'នាទី',
+    second: 'វិនាទី',
+    notAllowed: 'តម្លៃមិនត្រូវបានអនុញ្ញាតទេ',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'សូមជ្រើសរើសយ៉ាងហោចណាស់តម្លៃមួយ',
     pattern: 'ទម្រង់មិនត្រឹមត្រូវ',
   },
+  command: {
+    search: 'វាយបញ្ចូលពាក្យបញ្ជា ឬស្វាគមន៍...',
+  },
   hotkey: {
     then: 'បន្ទាប់មក',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'ដកឃ្លា',
     plus: 'បូក',
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+    or: 'ឬ',
   },
   video: {
     play: 'លេង',

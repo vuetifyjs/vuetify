@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Предыдущий месяц',
       nextMonth: 'Следующий месяц',
       selectYear: 'Выбрать год',
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectMonth: 'Выбрать месяц',
       selectDate: '{0}',
       currentDate: 'Сегодня, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Выберите время',
+    hour: 'Час',
+    minute: 'Минуты',
+    second: 'Секунды',
+    notAllowed: 'Значение не разрешено',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
     pattern: 'Недопустимый формат',
   },
+  command: {
+    search: 'Введите команду или введите...',
+  },
   hotkey: {
     then: 'затем',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Пробел',
     plus: 'плюс',
     shortcut: 'Сочетание клавиш: {0}',
+    or: 'или',
   },
   video: {
     play: 'Воспроизвести',

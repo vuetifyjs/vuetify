@@ -8,12 +8,10 @@ import type { ValidationProps, ValidationRule } from '@/composables/validation'
 
 export type ValidationRuleBuilderWithoutOptions = (err?: string) => ValidationRule
 export type ValidationRuleBuilderWithOptions<T> = (options: T, err?: string) => ValidationRule
-export type ValidationRuleBuilder =
-  | ValidationRuleBuilderWithoutOptions
-  | ValidationRuleBuilderWithOptions<any>
+export type CustomValidationRuleBuilder = (...args: any[]) => ValidationRule
 
 export interface RuleAliases {
-  [name: string]: ValidationRuleBuilder
+  [name: string]: CustomValidationRuleBuilder
   required: ValidationRuleBuilderWithoutOptions
   email: ValidationRuleBuilderWithoutOptions
   number: ValidationRuleBuilderWithoutOptions
@@ -53,7 +51,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
     },
     number: (err?: string) => {
-      return (v: string) => !!Number(v) || t(err || '$vuetify.rules.number')
+      return (v: string) => !v || !isNaN(Number(v)) || t(err || '$vuetify.rules.number')
     },
     integer: (err?: string) => {
       return (v: string) => (/^[\d]*$/.test(v)) || t(err || '$vuetify.rules.integer')
@@ -62,13 +60,13 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       return (v: string) => (/^[A-Z]*$/.test(v)) || t(err || '$vuetify.rules.capital')
     },
     maxLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', [len])
+      return (v: any) => (!v || v.length <= len) || t(err || '$vuetify.rules.maxLength', len)
     },
     minLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', [len])
+      return (v: any) => (!v || v.length >= len) || t(err || '$vuetify.rules.minLength', len)
     },
     strictLength: (len: number, err?: string) => {
-      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', [len])
+      return (v: any) => (!v || v.length === len) || t(err || '$vuetify.rules.strictLength', len)
     },
     exclude: (forbiddenCharacters: string[], err?: string) => {
       return (v: string) => {

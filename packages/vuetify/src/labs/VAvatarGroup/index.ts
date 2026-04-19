@@ -1,0 +1,1 @@
+export { VAvatarGroup } from './VAvatarGroup'

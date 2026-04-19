@@ -31,6 +31,7 @@ const VColorPickerInput = ({ label, ...rest }: any) => {
 export const makeVColorPickerEditProps = propsFactory({
   color: Object as PropType<HSV | null>,
   disabled: Boolean,
+  readonly: Boolean,
   mode: {
     type: String as PropType<keyof typeof modes>,
     default: 'rgba',
@@ -74,6 +75,7 @@ export const VColorPickerEdit = defineComponent({
           ...inputProps,
           ariaLabel: t(`$vuetify.colorPicker.ariaLabel.${localeKey}`),
           disabled: props.disabled,
+          readonly: props.readonly,
           value: color && getValue(color),
           onChange: (e: InputEvent) => {
             const target = e.target as HTMLInputElement | null

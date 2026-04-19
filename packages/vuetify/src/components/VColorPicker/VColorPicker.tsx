@@ -4,7 +4,7 @@ import './VColorPicker.sass'
 // Components
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
-import { VColorPickerPreview } from './VColorPickerPreview'
+import { makeVColorPickerPreviewProps, VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, onBeforeMount, ref, watch } from 'vue'
 import { extractColor, modes, nullColor } from './util'
-import { consoleWarn, defineComponent, HSVtoCSS, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
+import { consoleWarn, defineComponent, HSVtoCSS, parseColor, pick, propsFactory, RGBtoHSV, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, PropType } from 'vue'
@@ -46,6 +46,7 @@ export const makeVColorPickerProps = propsFactory({
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },
   showSwatches: Boolean,
+  readonly: Boolean,
   swatches: Array as PropType<DeepReadonly<Color[][]>>,
   swatchesMaxHeight: {
     type: [Number, String],
@@ -56,6 +57,7 @@ export const makeVColorPickerProps = propsFactory({
   },
 
   ...makeVPickerProps({ hideHeader: true }),
+  ...pick(makeVColorPickerPreviewProps(), ['hideEyeDropper', 'eyeDropperIcon']),
 }, 'VColorPicker')
 
 export const VColorPicker = defineComponent({
@@ -124,9 +126,9 @@ export const VColorPicker = defineComponent({
 
     provideDefaults({
       VSlider: {
-        color: undefined,
-        trackColor: undefined,
-        trackFillColor: undefined,
+        color: null,
+        trackColor: null,
+        trackFillColor: null,
       },
     })
 
@@ -157,6 +159,7 @@ export const VColorPicker = defineComponent({
                     color={ currentColor.value }
                     onUpdate:color={ updateColor }
                     disabled={ props.disabled }
+                    readonly={ props.readonly }
                     dotSize={ props.dotSize }
                     width={ props.width }
                     height={ props.canvasHeight }
@@ -172,6 +175,9 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         hideAlpha={ !mode.value.endsWith('a') }
                         disabled={ props.disabled }
+                        readonly={ props.readonly }
+                        hideEyeDropper={ props.hideEyeDropper }
+                        eyeDropperIcon={ props.eyeDropperIcon }
                       />
                     )}
 
@@ -184,6 +190,7 @@ export const VColorPicker = defineComponent({
                         color={ currentColor.value }
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
+                        readonly={ props.readonly }
                       />
                     )}
                   </div>
@@ -197,6 +204,7 @@ export const VColorPicker = defineComponent({
                     maxHeight={ props.swatchesMaxHeight }
                     swatches={ props.swatches }
                     disabled={ props.disabled }
+                    readonly={ props.readonly }
                   />
                 )}
               </>

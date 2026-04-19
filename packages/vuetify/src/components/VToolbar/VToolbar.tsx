@@ -14,6 +14,7 @@ import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useRtl } from '@/composables/locale'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -32,6 +33,10 @@ export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
+  collapsePosition: {
+    type: String as PropType<'start' | 'end'>,
+    default: 'start',
+  },
   color: String,
   density: {
     type: String as PropType<Density>,
@@ -58,6 +63,7 @@ export const makeVToolbarProps = propsFactory({
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeElevationProps(),
+  ...makeLocationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
@@ -81,6 +87,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
+    const { locationStyles } = useLocation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
@@ -119,6 +126,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         <props.tag
           class={[
             'v-toolbar',
+            `v-toolbar--collapse-${props.collapsePosition}`,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,
@@ -136,6 +144,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
           ]}
           style={[
             backgroundColorStyles.value,
+            locationStyles.value,
             props.style,
           ]}
         >

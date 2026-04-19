@@ -1,7 +1,7 @@
 // Utilities
 import { inject, toRef } from 'vue'
 import { useRtl } from './locale'
-import { clamp, consoleWarn, easingPatterns, mergeDeep, refElement } from '@/util'
+import { clamp, consoleWarn, easingPatterns, mergeDeep, PREFERS_REDUCED_MOTION, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
@@ -81,7 +81,9 @@ export async function scrollTo (
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
-  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
+  const ease = PREFERS_REDUCED_MOTION() ? options.patterns.instant
+    : typeof options.easing === 'function' ? options.easing
+    : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 

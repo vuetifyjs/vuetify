@@ -29,6 +29,9 @@
     .v-skeleton-loader__text
       background: $skeleton-loader-text-background
 
+      @media (forced-colors: active)
+        background: canvastext
+
     .v-skeleton-loader__list-item,
     .v-skeleton-loader__list-item-avatar,
     .v-skeleton-loader__list-item-text,
@@ -51,8 +54,13 @@
         animation: $skeleton-loader-loading-animation
         background: $skeleton-loader-bone-background
         transform: $skeleton-loader-loading-transform
+        contain: content
+        will-change: transform
         z-index: 1
         @include tools.absolute(true)
+
+      @media (forced-colors: active) and (pointer: fine)
+        cursor: progress
 
     &__avatar
       border-radius: 50%

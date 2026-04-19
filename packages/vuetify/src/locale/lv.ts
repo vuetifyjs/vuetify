@@ -50,6 +50,9 @@ export default {
       previousMonth: 'Iepriekšējais mēnesis',
       nextMonth: 'Nākamais mēnesis',
       selectYear: 'Izvēlieties gadu',
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectMonth: 'Izvēlieties mēnesi',
       selectDate: '{0}',
       currentDate: 'Šodien, {0}',
     },
@@ -85,6 +88,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Izvēlieties laiku',
+    hour: 'Stunda',
+    minute: 'Minūtes',
+    second: 'Sekundes',
+    notAllowed: 'Vērtība nav atļauta',
   },
   pagination: {
     ariaLabel: {
@@ -124,6 +131,9 @@ export default {
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
   },
+  command: {
+    search: 'Ierakstiet komandu vai meklējiet...',
+  },
   hotkey: {
     then: 'tad',
     ctrl: 'Ctrl',
@@ -141,6 +151,7 @@ export default {
     space: 'Atstarpe',
     plus: 'plus',
     shortcut: 'Tastatūras saīsne: {0}',
+    or: 'vai',
   },
   video: {
     play: 'Atskaņot',

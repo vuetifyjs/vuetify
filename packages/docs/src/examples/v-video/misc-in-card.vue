@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center">
-    <v-card elevation="4" rounded="xl" width="400">
+    <v-card elevation="2" rounded="xl" width="400">
       <v-card-item class="py-4">
         <v-skeleton-loader type="list-item-avatar-two-line"></v-skeleton-loader>
       </v-card-item>
@@ -12,9 +12,9 @@
           color="orange"
           controls-transition="slide-y-transition"
           elevation="0"
-          image="https://jsek.work/vt-video-poster.jpg"
+          image="https://cdn.jsek.work/cdn/vt-video-poster.jpg"
           rounded="xl"
-          src="https://jsek.work/vt-video.mp4"
+          src="https://cdn.jsek.work/cdn/vt-video.mp4"
           width="100%"
           detached
           eager
