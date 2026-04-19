@@ -16,7 +16,7 @@ $false: ' '
     display: flex
     flex-wrap: wrap
     flex: 1 1 auto
-    gap: var(--v-col-gap-x) var(--v-col-gap-y)
+    gap: var(--v-col-gap-y) var(--v-col-gap-x)
 
     & + .v-row
       margin-top: var(--v-col-gap-y)
@@ -26,7 +26,7 @@ $false: ' '
         --v-col-gap-x: #{settings.$grid-gutter + $modifier * 2}
         --v-col-gap-y: #{settings.$grid-gutter + $modifier * 2}
 
-  .v-row--no-gutter
+  .v-row--no-gutters
     --v-col-gap-x: 0px
     --v-col-gap-y: 0px
 

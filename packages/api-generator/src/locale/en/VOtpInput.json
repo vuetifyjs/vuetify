@@ -12,8 +12,6 @@
     "finish": "Emitted when the input is filled completely and cursor is blurred."
   },
   "exposed": {
-    "blur": "Forces the input to lose focus.",
-    "focus": "Focuses the first field in the input",
     "reset": "Reset's the input model to an empty array"
   }
 }

@@ -12,11 +12,6 @@
     "next": "The next slot.",
     "prev": "The prev slot."
   },
-  "events": {
-    "change": "Emitted when the component value is changed by user interaction.",
-    "click:prev": "Emitted when the prev is clicked.",
-    "click:next": "Emitted when the next is clicked."
-  },
   "exposed": {
     "focus": "Focus the component.",
     "hasNext": "Returns true if there are items after current index.",

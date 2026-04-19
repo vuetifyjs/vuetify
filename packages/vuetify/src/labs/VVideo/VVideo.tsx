@@ -4,6 +4,8 @@ import './VVideo.sass'
 // Components
 import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
 import { VFadeTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg/VImg'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
@@ -36,6 +38,7 @@ export type VVideoSlots = {
   append: VVideoControlsActionsSlot
   loader: LoaderSlotProps
   sources: never
+  error: { error?: MediaError | boolean }
 }
 
 const allowedVariants = ['background', 'player'] as const
@@ -46,7 +49,9 @@ export const makeVVideoProps = propsFactory({
   autoplay: Boolean,
   muted: Boolean,
   eager: Boolean,
+  error: [Object, Boolean] as PropType<MediaError | boolean>,
   src: String,
+  srcObject: Object as PropType<MediaStream | MediaSource | Blob>,
   type: String, // e.g. video/mp4
   image: String,
   hideOverlay: Boolean,
@@ -88,7 +93,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
   props: makeVVideoProps(),
 
   emits: {
+    error: (val: MediaError | boolean) => true,
     loaded: (element: HTMLVideoElement) => true,
+    'update:error': (val: boolean) => true,
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
     'update:volume': (val: number) => true,
@@ -118,6 +125,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const waiting = shallowRef(false)
     const triggered = shallowRef(false)
     const startAfterLoad = shallowRef(false)
+    const error = useProxiedModel(props, 'error')
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.autoplay ? 'loading' : 'idle')
     const duration = shallowRef(0)
 
@@ -155,11 +163,36 @@ export const VVideo = genericComponent<VVideoSlots>()({
       emit('loaded', videoRef.value!)
     }
 
-    function onClick () {
-      if (state.value !== 'loaded') {
-        triggered.value = true
-        startAfterLoad.value = !startAfterLoad.value
+    function onVideoError (e: Event) {
+      state.value = 'error'
+      error.value = videoRef.value!.error as MediaError
+    }
+
+    watch(error, v => {
+      if (v && state.value !== 'error') {
+        videoRef.value?.pause()
+        state.value = 'error'
       }
+    }, { immediate: true })
+
+    function retry () {
+      if (state.value !== 'error') return
+
+      error.value = false
+      state.value = 'loading'
+      triggered.value = true
+
+      videoRef.value?.load()
+      if (!props.srcObject) {
+        videoRef.value?.play()
+      }
+    }
+
+    function onClick () {
+      if (['loaded', 'error'].includes(state.value)) return
+
+      triggered.value = true
+      startAfterLoad.value = !startAfterLoad.value
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -220,6 +253,16 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(() => props.src, v => {
       progress.value = 0
+    })
+
+    watch(() => props.srcObject, async v => {
+      if (v) triggered.value = true
+      await nextTick()
+      if (videoRef.value) videoRef.value.srcObject = v ?? null
+    })
+
+    watch(videoRef, v => {
+      if (v && props.srcObject) v.srcObject = props.srcObject
     })
 
     watch(playing, v => {
@@ -369,22 +412,32 @@ export const VVideo = genericComponent<VVideoSlots>()({
           color="#fff"
           variant="outlined"
           iconSize="50"
-          class="v-video__center-icon"
+          class={[
+            'v-video__center-icon',
+            'v-video__center-icon--play',
+          ]}
           onClick={ onVideoClick }
         />
       )
+
+      const errorIconProps = {
+        icon: '$warning',
+        size: '70',
+      }
 
       const activeOverlays = {
         playIcon: props.variant === 'player' &&
           state.value === 'loaded' &&
           !props.hideOverlay &&
           !playing.value,
-        poster: state.value !== 'loaded',
+        poster: state.value !== 'loaded' && state.value !== 'error',
         loading: props.variant === 'player' &&
+          state.value !== 'error' &&
           (
             state.value === 'loading' ||
             waiting.value
           ),
+        error: props.variant === 'player' && state.value === 'error',
       }
 
       return (
@@ -431,6 +484,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onVideoLoaded }
+                onError={ onVideoError }
                 onPlay={ () => playing.value = true }
                 onPause={ () => playing.value = false }
                 onWaiting={ () => waiting.value = true }
@@ -474,8 +528,21 @@ export const VVideo = genericComponent<VVideoSlots>()({
               )}
             </MaybeTransition>
             { activeOverlays.loading && (
-              <div class="v-video__overlay-fill">
+              <div key="loading-overlay" class="v-video__overlay-fill">
                 { loadingIndicator }
+              </div>
+            )}
+            { activeOverlays.error && (
+              <div key="error-overlay" class="v-video__overlay-fill">
+                {
+                  slots.error
+                    ? (
+                      <VDefaultsProvider defaults={{ VIcon: errorIconProps }}>
+                        { slots.error?.({ error: error.value }) }
+                      </VDefaultsProvider>
+                    )
+                    : <VIcon { ...errorIconProps } />
+                }
               </div>
             )}
           </div>
@@ -502,6 +569,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     return {
       video: videoRef,
       ...forwardRefs({
+        retry,
         skipTo,
         toggleFullscreen,
       }, controlsRef),

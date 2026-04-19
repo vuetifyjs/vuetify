@@ -142,6 +142,40 @@
 
   const items = [
     {
+      title: 'March 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/march-2026-update/march-hero.png',
+      shortDescription: 'March was Vuetify0\'s breakout month with 427 commits, 11 releases, and 7 new headless components reaching v0.2.0. The core framework shipped 7 patch releases stabilizing v4, the Nuxt Module hit v1.0.0-beta, the CLI continued with 10 releases, and the ESLint plugin gained automated v4 and TailwindCSS migration rules across 720 total commits and 69 merged PRs...',
+      date: 'April 16, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/march-2026-update'),
+    },
+    {
+      title: 'Announcing the Vuetify0 Alpha',
+      shortDescription: 'The Vuetify0 alpha is here — a headless meta-framework for Vue 3 with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. Includes a full tutorial building DevKey, a developer API dashboard, from scratch.',
+      date: 'April 7, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-alpha'),
+    },
+    {
+      title: 'February 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/february-2026-update/february-hero.png',
+      shortDescription: 'February marks Vuetify\'s most significant milestone—the stable release of Vuetify 4.0.0 (Revisionist) with CSS layers, MD3 design system, and unstyled component foundations. The Vuetify CLI hit v1.0.0, VAvatarGroup shipped as a new component, and Vuetify0 gained createDataTable and Breadcrumbs composables across 390 commits and 68 merged PRs...',
+      date: 'March 9, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/february-2026-update'),
+    },
+    {
+      title: 'Build with Vite and TailwindCSS v4',
+      shortDescription: `In the previous article we explored integrating UnoCSS with Vuetify v3 and Nuxt. This time we take a more direct route: pairing Vuetify v4 with TailwindCSS v4 on a plain Vite setup with both running as Vite plugins. Vuetify v4 ships with CSS layers enabled by default, which makes integrating TailwindCSS significantly smoother than before...`,
+      date: 'February 16, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/building-with-vite-and-tailwindcss'),
+    },
+    {
       title: 'January 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/january-2026-update/january-hero.png',
       shortDescription: 'January delivered Vuetify 4.0.0-beta.0—the first beta of our next major version—featuring MD3 typography, elevation levels, and a complete grid system overhaul. VCommandPalette lands in labs, Vuetify0 hits v0.1.0 with new Tabs, Radio, and Checkbox components, and the CLI shipped 31 releases with a new analyze command...',

@@ -55,15 +55,13 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 - **HTML elements** — `<h1>` through `<h6>` (affected by CSS reset)
 - **Grid usage** — `<v-row>` and `<v-col>`, with specific focus on ad-hoc spacing adjustments (i.e. classes like `mx-0`, `pa-0`)
-- **Grid attributes** — `dense`, `no-gutters`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
+- **Grid attributes** — `dense`, `align`, `justify`, `order`, `align-self` (affected by grid changes)
 - **Shadows** — `elevation-*` classes and `elevation` attributes or CSS overrides (affected by elevation changes)
 - **CSS classes** — `text-h1` … `text-h6`, `text-subtitle-1`, `text-body-2`, `text-caption`, `text-overline`, `elevation-*`, `offset-*` (affected by typography)
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
-::: info
-The dedicated ESLint plugin will soon be released to aid in this process - allowing you to use specific rules to perform migration step by step.
-:::
+[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
 
 ## Styles
 
@@ -87,7 +85,7 @@ If you notice browser styles adding unnecessary spaces and impact text size, it 
     margin: 0;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 }
@@ -329,6 +327,15 @@ VCounter is used to display the counter hint under VTextField, VTextarea and VFi
   opacity: 1;
   color: /* your $counter-color */;
 }
+```
+
+### VDatePicker
+
+`multiple="range"` emits only the start and end dates instead of everything in between. Use something like [date-fns' `eachDayOfInterval`](https://date-fns.org/v4.1.0/docs/eachDayOfInterval) if you need all dates in the range.
+
+```diff
+- ['2023-09-28', '2023-09-29', '2023-09-30', '2023-10-01', '2023-10-02']
++ ['2023-09-28', '2023-10-02']
 ```
 
 ### VFileInput

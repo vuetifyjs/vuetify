@@ -37,6 +37,18 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      {
+        "title": "css-utilities",
+        "subfolder": "features",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "overview",
+          "unocss-vuetify-preset",
+          "unocss-tailwind-preset",
+          "tailwindcss"
+        ]
+      },
       "dates",
       "display-and-platform",
       "global-configuration",
@@ -278,6 +290,10 @@
       },
       {
         "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "progress",
         "subfolder": "components"
       },
       {

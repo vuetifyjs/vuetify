@@ -103,27 +103,17 @@ export const makeVColProps = propsFactory({
   /** @deprecated use order-* class instead */
   order: { type: [String, Number], default: null },
   /** @deprecated use order-sm-* class instead */
-  orderSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderSm: { type: [String, Number], default: null },
   /** @deprecated use order-md-* class instead */
-  orderMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderMd: { type: [String, Number], default: null },
   /** @deprecated use order-lg-* class instead */
-  orderLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderLg: { type: [String, Number], default: null },
   /** @deprecated use order-xl-* class instead */
-  orderXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderXl: { type: [String, Number], default: null },
   /** @deprecated use order-xxl-* class instead */
-  orderXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderXxl: { type: [String, Number], default: null },
   /** @deprecated use align-self-* class instead */
   alignSelf: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-sm-* class instead */
-  alignSelfSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-md-* class instead */
-  alignSelfMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-lg-* class instead */
-  alignSelfLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-xl-* class instead */
-  alignSelfXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
-  /** @deprecated use align-self-xxl-* class instead */
-  alignSelfXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
 
   ...makeComponentProps(),
   ...makeTagProps(),

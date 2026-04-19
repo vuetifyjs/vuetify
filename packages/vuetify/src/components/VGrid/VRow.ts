@@ -110,9 +110,6 @@ export const VRow = genericComponent()({
     if (props.dense) {
       deprecate('dense', 'density="comfortable"')
     }
-    if (props.noGutters) {
-      deprecate('noGutters', 'density="compact"')
-    }
 
     const classes = computed(() => {
       const classList: any[] = []
@@ -128,8 +125,9 @@ export const VRow = genericComponent()({
       }
 
       classList.push({
+        'v-row--no-gutters': props.noGutters,
         'v-row--density-default': props.density === 'default' && !props.noGutters && !props.dense,
-        'v-row--density-compact': props.density === 'compact' || props.noGutters,
+        'v-row--density-compact': props.density === 'compact',
         'v-row--density-comfortable': props.density === 'comfortable' || props.dense,
         [`align-${props.align}`]: props.align,
         [`justify-${props.justify}`]: props.justify,
