@@ -131,6 +131,9 @@ export default {
     notEmpty: 'נא לבחור לפחות ערך אחד',
     pattern: 'פורמט לא תקף',
   },
+  command: {
+    search: 'הקלד פקודה או חפש...',
+  },
   hotkey: {
     then: 'אז',
     ctrl: 'Ctrl',

@@ -11,7 +11,7 @@
     <template v-slot:chip="{ props, item }">
       <v-chip v-bind="props" label>
         <template v-slot:prepend>
-          <div class="me-1">{{ item.raw.symbol }}</div>
+          <div class="me-1">{{ item.symbol }}</div>
         </template>
         <template v-slot:close>
           <v-icon icon="$close" size="14"></v-icon>

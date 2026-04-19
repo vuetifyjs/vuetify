@@ -131,6 +131,9 @@ export default {
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
   },
+  command: {
+    search: 'دستور را تایپ کنید یا جستجو کنید...',
+  },
   hotkey: {
     then: 'سپس',
     ctrl: 'Ctrl',

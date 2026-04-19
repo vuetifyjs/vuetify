@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
   },
+  command: {
+    search: 'Escriu una ordre o cerca...',
+  },
   hotkey: {
     then: 'després',
     ctrl: 'Ctrl',

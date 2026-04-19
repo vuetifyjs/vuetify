@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Моля, изберете поне една стойност',
     pattern: 'Невалиден формат',
   },
+  command: {
+    search: 'Въведете команда или търсете...',
+  },
   hotkey: {
     then: 'след това',
     ctrl: 'Ctrl',

@@ -161,8 +161,6 @@ When you use the **prepend-icon** and **append-icon** props in conjunction with 
 
 #### Spaced
 
-<DocIntroduced version="3.10.0" />
-
 By default icons stick to the button content, but you can space them out with `spaced` prop.
 
 <ExamplesExample file="v-btn/prop-spaced" />

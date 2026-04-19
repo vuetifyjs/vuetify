@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
   },
+  command: {
+    search: 'Įveskite komandą arba ieškokite...',
+  },
   hotkey: {
     then: 'tada',
     ctrl: 'Ctrl',

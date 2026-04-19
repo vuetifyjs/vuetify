@@ -151,7 +151,8 @@
           z-index: 2
           > tr
             > th
-              border-bottom: 0px !important
+              @include tools.layer('overrides')
+                border-bottom: 0px
 
   .v-table--fixed-footer
     > .v-table__wrapper
@@ -163,4 +164,5 @@
             z-index: 1
             > td,
             > th
-                border-top: 0px !important
+              @include tools.layer('overrides')
+                border-top: 0px

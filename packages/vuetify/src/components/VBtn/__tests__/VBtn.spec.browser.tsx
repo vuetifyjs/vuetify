@@ -84,9 +84,9 @@ describe('VBtn', () => {
 
   describe('elevation', () => {
     it('should have the correct elevation', async () => {
-      render(<VBtn elevation={ 24 } />)
+      render(<VBtn elevation={ 5 } />)
       const button = screen.getByCSS('button')
-      expect(button).toHaveClass('elevation-24')
+      expect(button).toHaveClass('elevation-5')
     })
   })
 

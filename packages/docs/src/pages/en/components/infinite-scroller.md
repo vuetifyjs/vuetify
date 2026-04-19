@@ -20,8 +20,6 @@ The `v-infinite-scroll` component displays a potentially infinite list, by loadi
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.

@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Vennligst velg minst én verdi',
     pattern: 'Ugyldig format',
   },
+  command: {
+    search: 'Skriv en kommando eller søk...',
+  },
   hotkey: {
     then: 'deretter',
     ctrl: 'Ctrl',

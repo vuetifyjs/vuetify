@@ -13,7 +13,8 @@ import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
-  NavigationGuardNext,
+  NavigationGuardReturn,
+  RouteLocation,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
@@ -43,12 +44,14 @@ export interface LinkListeners {
   onClickOnce?: EventProp | undefined
 }
 
-export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
+export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'|'route'|'navigate'> {
   isLink: Readonly<Ref<boolean>>
   isRouterLink: Readonly<Ref<boolean>>
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
+  route: Readonly<Ref<RouteLocation & { href: string} | undefined>>
+  navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
@@ -67,6 +70,8 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
       isClickable,
       href,
       linkProps: reactive({ href }),
+      route: toRef(() => undefined),
+      navigate: toRef(() => undefined),
     }
   }
 
@@ -93,8 +98,8 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     isRouterLink,
     isClickable,
     isActive,
-    route: link.value?.route,
-    navigate: link.value?.navigate,
+    route: toRef(() => link.value?.route.value),
+    navigate: toRef(() => link.value?.navigate),
     href,
     linkProps: reactive({
       href,
@@ -113,7 +118,7 @@ export const makeRouterProps = propsFactory({
 }, 'router')
 
 let inTransition = false
-export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
+export function useBackButton (router: Router | undefined, cb: () => NavigationGuardReturn) {
   let popped = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
@@ -121,13 +126,14 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
-      removeBefore = router.beforeEach((to, from, next) => {
+      removeBefore = router.beforeEach(() => {
         if (!inTransition) {
-          setTimeout(() => popped ? cb(next) : next())
-        } else {
-          popped ? cb(next) : next()
+          inTransition = true
+          return new Promise<NavigationGuardReturn>(resolve => {
+            setTimeout(() => resolve(popped ? cb() : undefined))
+          })
         }
-        inTransition = true
+        return popped ? cb() : undefined
       })
       removeAfter = router?.afterEach(() => {
         inTransition = false

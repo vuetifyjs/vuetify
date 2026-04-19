@@ -50,6 +50,7 @@ export const makeVDateInputProps = propsFactory({
     default: 'bottom start',
   },
   menu: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
@@ -197,11 +198,13 @@ export const VDateInput = genericComponent<new <
     }
 
     function onClick (e: MouseEvent) {
+      if (props.disabled) return
+
       e.preventDefault()
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        isEditingInput.value = true
+        isEditingInput.value = !props.readonly
       } else {
         menu.value = true
       }
@@ -294,7 +297,7 @@ export const VDateInput = genericComponent<new <
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
-          onClick:control={ isInteractive.value ? onClick : undefined }
+          onClick:control={ onClick }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
         >
@@ -310,6 +313,7 @@ export const VDateInput = genericComponent<new <
                   location={ props.location }
                   closeOnContentClick={ false }
                   openOnClick={ false }
+                  { ...props.menuProps }
                 >
                   <VConfirmEdit
                     { ...confirmEditProps }

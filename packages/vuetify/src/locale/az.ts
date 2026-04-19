@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
     pattern: 'Yanlış format',
   },
+  command: {
+    search: 'Əmr yazın və ya axtarış edin...',
+  },
   hotkey: {
     then: 'sonra',
     ctrl: 'Ctrl',

@@ -450,6 +450,7 @@ export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
+  targetCondition?: (k: string, v: unknown) => boolean,
 ) {
   const out: Record<string, any> = {}
 
@@ -458,13 +459,18 @@ export function mergeDeep (
   }
 
   for (const key in target) {
-    const sourceProperty = source[key]
     const targetProperty = target[key]
+
+    if (targetCondition && !targetCondition(key, targetProperty)) {
+      continue
+    }
+
+    const sourceProperty = source[key]
 
     // Only continue deep merging if
     // both properties are plain objects
     if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, targetCondition)
 
       continue
     }

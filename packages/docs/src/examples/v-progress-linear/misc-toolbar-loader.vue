@@ -28,11 +28,7 @@
     </v-toolbar>
 
     <v-container style="height: 282px;">
-      <v-row
-        align="center"
-        class="fill-height"
-        justify="center"
-      >
+      <v-row class="fill-height align-center justify-center">
         <v-scale-transition>
           <div
             v-if="!loading"

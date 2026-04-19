@@ -131,6 +131,9 @@ export default {
     notEmpty: 'Izaberite bar jednu vrednost',
     pattern: 'Nevažeći format',
   },
+  command: {
+    search: 'Unesite naredbu ili pretražite...',
+  },
   hotkey: {
     then: 'zatim',
     ctrl: 'Ctrl',

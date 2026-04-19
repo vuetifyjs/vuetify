@@ -16,7 +16,7 @@
       <v-list
         class="py-2"
         color="primary"
-        elevation="12"
+        elevation="4"
         rounded="lg"
       >
         <v-list-item

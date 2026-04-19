@@ -27,7 +27,7 @@ describe('VTextarea', () => {
     await userEvent.keyboard('sed d')
     await expect.poll(() => el.offsetHeight).toBe(56)
 
-    await userEvent.keyboard('o')
+    await userEvent.keyboard('{Enter}')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
 

@@ -131,6 +131,9 @@ export default {
     notEmpty: 'يرجى اختيار قيمة واحدة على الأقل',
     pattern: 'تنسيق غير صالح',
   },
+  command: {
+    search: 'اكتب أمراً أو ابحث...',
+  },
   hotkey: {
     then: 'ثم',
     ctrl: 'Ctrl',

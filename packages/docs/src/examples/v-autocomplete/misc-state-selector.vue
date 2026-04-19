@@ -1,11 +1,11 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 font-weight-regular bg-blue-grey">
+    <v-card-title class="font-weight-regular bg-blue-grey py-3">
       Profile
     </v-card-title>
 
     <v-card-text>
-      <div class="text-caption pa-3">Where do you live?</div>
+      <div class="text-body-small pa-3">Where do you live?</div>
 
       <v-autocomplete
         v-model="model"
