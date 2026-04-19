@@ -76,13 +76,16 @@ describe('VSelectionControl', () => {
       },
     })
     const input = wrapper.find('input')
-    await input.trigger('keydown', { key: 'Tab' })
+
     input.element.focus()
     await nextTick()
+
     expect(wrapper.classes()).toContain('v-selection-control--focused')
     expect(wrapper.classes()).toContain('v-selection-control--focus-visible')
+
     await input.trigger('blur')
     await nextTick()
+
     expect(wrapper.classes()).not.toContain('v-selection-control--focused')
   })
 })
