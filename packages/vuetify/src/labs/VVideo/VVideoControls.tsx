@@ -55,7 +55,7 @@ export const makeVVideoControlsProps = propsFactory({
   hidePlay: Boolean,
   hideVolume: Boolean,
   hideFullscreen: Boolean,
-  hideProgressBar: { type: Boolean, default: true },
+  hideProgressBar: Boolean,
   fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
