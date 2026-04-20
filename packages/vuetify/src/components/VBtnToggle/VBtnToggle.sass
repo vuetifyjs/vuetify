@@ -9,6 +9,9 @@
       &.v-btn--variant-plain
         opacity: 1
 
+      // Remove default opacity for all buttons in toggle groups to prevent theme inconsistency
+      opacity: 1
+
 @include tools.layer('trumps')
   @media (forced-colors: active)
     .v-btn-toggle
