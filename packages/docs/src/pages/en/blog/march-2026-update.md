@@ -63,15 +63,15 @@ meta:
 
 * [Releases](#releases)
   * [Key Improvements](#key-improvements)
-* [Ecosystem Spotlight: Nuxt Module v1.0.0 Beta](#ecosystem-spotlight-nuxt-module-v100-beta)
+* [Ecosystem Spotlight: Nuxt Module v1.0.0 Beta](#nuxt-module-beta)
 * [Framework Updates](#framework-updates)
   * [New Features](#new-features)
   * [Bug Fixes](#bug-fixes)
   * [In Development](#in-development)
-* [Tooling & Migration](#tooling--migration)
-* [Vuetify MCP: v0.6.0 & Playground Tools](#vuetify-mcp-v060--playground-tools)
+* [Tooling and Migration](#tooling-migration)
+* [Vuetify MCP v0.6.0 and Playground Tools](#vuetify-mcp)
 * [Product Updates](#product-updates)
-* [Vuetify0: Progress Update](#vuetify0-progress-update)
+* [Vuetify0 Progress Update](#vuetify0-progress)
 * [March 2026 Changelog](#march-2026-changelog)
 * [What's Next](#whats-next)
 
@@ -108,11 +108,11 @@ View the complete list of changes in the [Full Changelog](#march-2026-changelog)
 
 ---
 
-## Ecosystem Spotlight: Nuxt Module v1.0.0 Beta
+## Ecosystem Spotlight: Nuxt Module v1.0.0 Beta { #nuxt-module-beta }
 
 The Vuetify Nuxt Module received a **complete overhaul** in March—**86 commits** and 7 releases (v1.0.0-alpha.2 through v1.0.0-beta.2) driven primarily by [Andrei Elkin](https://github.com/AndreyYolkin). This is the module's biggest change since its initial release.
 
-### What's New
+### What's New { #nuxt-whats-new }
 
 **Monorepo Conversion** — The module was restructured as a monorepo, with cleaner package boundaries and improved maintainability.
 
@@ -203,7 +203,7 @@ March's 31 merged PRs focused on new features for the v4 branch, targeted bug fi
 
 Several PRs merged in March are pending their first release, alongside features still in active development:
 
-#### Merged, Pending Release
+#### Merged, Pending Release { #merged-pending-release }
 
 * **rounded: arbitrary values** — Accept any valid CSS border-radius value beyond predefined presets ([#22721](https://github.com/vuetifyjs/vuetify/pull/22721))
 * **VProgressLinear split variant** — MD3-aligned split variant for buffer/indeterminate states ([#22662](https://github.com/vuetifyjs/vuetify/pull/22662))
@@ -212,7 +212,7 @@ Several PRs merged in March are pending their first release, alongside features 
 * **SSR** — Avoid errors when rendering with latest Vue ([#22764](https://github.com/vuetifyjs/vuetify/pull/22764))
 * **CSS zoom** — Coordinate mismatch fix for VColorPicker, ripple, and VCalendar ([#22774](https://github.com/vuetifyjs/vuetify/pull/22774))
 
-#### VSparkline Markers & Tooltips
+#### VSparkline Markers and Tooltips
 
 Interactive markers and hover tooltips for data visualization.
 
@@ -224,7 +224,7 @@ A new `pill` variant for VSlider aligned with Material Design 3's rounded slider
 
 Animated icon transitions using SVG path morphing—carrying over from February, now nearing completion.
 
-#### V0 Migration: Core Composables
+#### V0 Migration Core Composables
 
 The Vuetify → Vuetify0 refactor is now migrating core systems. Open PRs cover:
 
@@ -247,7 +247,7 @@ Observer composables were already [migrated in March](https://github.com/vuetify
 
 ---
 
-## Tooling & Migration
+## Tooling and Migration { #tooling-migration }
 
 ### Vuetify CLI
 
@@ -319,7 +319,7 @@ The shared ESLint config—used internally across the ecosystem and by teams tha
 
 ---
 
-## Vuetify MCP: v0.6.0 & Playground Tools
+## Vuetify MCP v0.6.0 and Playground Tools { #vuetify-mcp }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
 
@@ -327,13 +327,13 @@ The shared ESLint config—used internally across the ecosystem and by teams tha
 
 The MCP server released **v0.6.0** on March 27th, keeping AI code generation current with the latest v0 APIs. March also saw a significant new feature land in the repository—playground management—pending the next release.
 
-### v0.6.0
+### v0.6.0 { #mcp-v060 }
 
 **v0 Sync** — Composables, components, and exports synced with v0.1.13. Any AI assistant using the MCP server now generates accurate code against the latest v0 API surface, including the new Switch, Slider, Treeview, Splitter, Input, and Button components. (Combobox shipped in v0.2.0 after this sync and will land in the next MCP release.)
 
 **Bug Fixes** — Corrected composable names and missing exports in v0 documentation; fixed GitHub URL branch references from `main` to `master`.
 
-### Playground CRUD (Pending Release)
+### Playground CRUD (Pending Release) { #mcp-playground-crud }
 
 [PR#19](https://github.com/vuetifyjs/mcp/pull/19) merged March 30th adds tools to create, read, update, and list Vuetify Play playgrounds directly from your AI assistant—build and iterate on component demos without leaving your editor. This will ship in the next MCP release.
 
@@ -427,7 +427,7 @@ Or configure manually:
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0 Progress Update { #vuetify0-progress }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
@@ -651,7 +651,7 @@ The following section provides an overview of the changes made in March 2026, in
 
 ---
 
-## What's Next{ .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 April will push forward on both fronts. On the framework side, VSparkline markers and tooltips, VSlider pill variant, and VMorphingIcon are nearing completion. The v0 migration of theme, locale, display, and date composables will continue landing, progressively shifting Vuetify's internals onto v0's headless layer.
 
