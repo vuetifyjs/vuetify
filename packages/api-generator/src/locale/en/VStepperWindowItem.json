@@ -1,3 +1,4 @@
 {
+  "description": "Item for the `v-stepper-window` component.",
   "props": {}
 }

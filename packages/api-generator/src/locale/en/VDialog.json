@@ -1,4 +1,5 @@
 {
+  "description": "Used to display popup forms, confirmation cards or any information that should block user from interacting with the rest of the page.",
   "props": {
     "fullscreen": "Changes layout for fullscreen display.",
     "maxWidth": "Sets the maximum width for the component.",

@@ -1,4 +1,5 @@
 {
+  "description": "Used to display scrollable items. Supports horizontal and vertical orientation.",
   "props": {
     "centerActive": "Forces the selected component to be centered.",
     "contentClass": "Adds classes to the slide group item.",

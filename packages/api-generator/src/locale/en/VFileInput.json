@@ -1,4 +1,5 @@
 {
+  "description": "A specialized form input for selecting files.",
   "props": {
     "chips": "Changes display of selections to chips.",
     "counter": "Displays the number of selected files.",

@@ -1,4 +1,5 @@
 {
+  "description": "(leftover to remove)",
   "props": {
     "editable": "Creates an editable button.",
     "overflow": "Creates an overflow button.",

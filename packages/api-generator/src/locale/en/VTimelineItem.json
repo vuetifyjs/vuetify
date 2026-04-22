@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-timeline` that provides an individual timeline item.",
   "props": {
     "dotColor": "Color of the item dot.",
     "fillDot": "Remove outer border of item dot, making the color fill the entire dot.",

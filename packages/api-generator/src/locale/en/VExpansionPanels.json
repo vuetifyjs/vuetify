@@ -1,4 +1,5 @@
 {
+  "description": "Useful for reducing vertical space with large amounts of information.",
   "props": {
     "focusable": "Makes the expansion-panel headers focusable.",
     "flat": "Removes the expansion-panel's elevation and borders.",

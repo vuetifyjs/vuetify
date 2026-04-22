@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-video` used to display a video player controls.",
   "props": {
     "color": "General color applied to icons and sliders.",
     "backgroundColor": "Container background color.",

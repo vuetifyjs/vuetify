@@ -1,4 +1,5 @@
 {
+  "description": "Creates a 3D effect that makes an image appear to scroll slower than the window.",
   "props": {
     "scale": "The scale of the parallax image."
   },

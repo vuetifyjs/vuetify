@@ -1,4 +1,5 @@
 {
+  "description": "A specialized input for showing sequence of icons for the user to express feedback.",
   "props": {
     "clearable": "Allows for the component to be cleared by clicking on the current value.",
     "emptyIcon": "The icon displayed when empty.",

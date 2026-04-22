@@ -1,4 +1,5 @@
 {
+  "description": "Displays a collection of avatars in a compact stacked row or column with an overflow indicator.",
   "props": {
     "border": "Applies border styles to the child [v-avatar](/components/avatars) components.",
     "gap": "Sets the overlap gap between avatars. Negative values cause avatars to overlap.",
