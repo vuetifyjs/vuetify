@@ -20,8 +20,6 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 The `v-data-iterator` allows you to customize exactly how to display your data. In this example we are using a grid with cards.

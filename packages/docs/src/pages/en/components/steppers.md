@@ -22,8 +22,6 @@ The `v-stepper` component displays progress through numbered steps.
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 A stepper can be used for a multitude of scenarios, including shopping carts, record creation and more.

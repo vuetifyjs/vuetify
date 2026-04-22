@@ -12,6 +12,7 @@
     "flat": "Removes box shadow when using a variant with elevation.",
     "iconColor": "Sets the color of the prepend/append icons.",
     "id": "Sets the DOM id on the component.",
+    "labelId": "Sets the DOM id on the inner label element. Useful for associating the label with custom input elements.",
     "details": "Controls whether the field generates an `aria-describedby` attribute for accessibility.",
     "persistentClear": "Always show the clearable icon when the input is dirty (By default it only shows on hover).",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend-inner** slot.",
@@ -19,13 +20,9 @@
     "singleLine": "Label does not move on focus/dirty."
   },
   "events": {
-    "click:append": "Emitted when append icon is clicked.",
     "click:appendInner": "Emitted when appended inner icon is clicked.",
     "click:clear": "Emitted when clearable icon clicked.",
-    "click:control": "Emitted when the main input is clicked.",
-    "click:prepend": "Emitted when prepended icon is clicked.",
     "click:prependInner": "Emitted when prepended inner icon is clicked.",
-    "group:selected": "Event that is emitted when an item is selected within a group.",
     "update:focused": "Emitted when the input is focused or blurred"
   },
   "slots": {

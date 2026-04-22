@@ -16,7 +16,7 @@
       >
         <v-sheet
           v-if="resource"
-          class="text-body-2 px-3 pt-3 text-medium-emphasis"
+          class="text-body-medium px-3 pt-3 text-medium-emphasis"
           color="transparent"
           height="44"
           rounded="tl"
@@ -53,18 +53,18 @@
             <v-btn
               v-if="isHovering"
               :key="icon"
+              :icon="needsPlaygroundLink ? '$vuetify-play' : '$vuetify-bin'"
               class="text-disabled me-12 mt-2 app-markup-btn position-absolute right-0 top-0"
               density="comfortable"
-              icon="$vuetify-bin"
               size="small"
               v-bind="activatorProps"
               variant="text"
-              @click="bin"
+              @click="openCode"
             />
           </v-fade-transition>
         </template>
 
-        <span>{{ t('open-in-vuetify-bin') }}</span>
+        <span>{{ t(needsPlaygroundLink ? 'open-in-playground' : 'open-in-vuetify-bin') }}</span>
       </v-tooltip>
 
       <div class="pa-4 pe-12">
@@ -97,7 +97,10 @@
 
   const props = defineProps({
     resource: String,
-    code: null,
+    code: {
+      type: [String, Array] as PropType<string | CodeSection[]>,
+      default: '',
+    },
     inline: Boolean,
     language: {
       type: String,
@@ -130,16 +133,35 @@
   const root = ref<ComponentPublicInstance>()
 
   const highlighted = shallowRef('')
-  watchEffect(async () => {
-    highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
-  })
 
   const className = computed(() => `language-${props.language}`)
   const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
 
-  async function bin () {
+  const needsPlaygroundLink = computed(() => Array.isArray(props.code))
+
+  const displayedCode = computed(() => {
+    if (typeof props.code === 'string') {
+      return props.code
+    }
+
+    return props.code.map((section: CodeSection) => section.content).join('\n\n')
+  })
+
+  watchEffect(async () => {
+    highlighted.value = displayedCode.value && props.language && Prism.highlight(await displayedCode.value, Prism.languages[props.language], props.language)
+  })
+
+  function openCode () {
+    if (needsPlaygroundLink.value) {
+      openPlayground()
+    } else {
+      openBin()
+    }
+  }
+
+  async function openBin () {
     const el = root.value?.$el.querySelector('code')
-    const code = props.code || el?.innerText || ''
+    const code = displayedCode.value || el?.innerText || ''
     const language = props.language || 'markdown'
     const title = props.resource
 
@@ -148,10 +170,18 @@
     window.open(compressed, '_blank')
   }
 
+  async function openPlayground () {
+    if (typeof props.code === 'string') return
+
+    const url = usePlayground(props.code)
+
+    window.open(url, '_blank')
+  }
+
   async function copy () {
     const el = root.value?.$el.querySelector('code')
 
-    await navigator.clipboard.writeText(props.code || el?.innerText || '')
+    await navigator.clipboard.writeText(displayedCode.value || el?.innerText || '')
 
     clicked.value = true
 

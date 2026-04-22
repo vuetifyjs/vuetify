@@ -121,7 +121,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
   const attributes = directiveData.map(createAttribute)
 
   const webTypes = {
-    $schema: 'http://json.schemastore.org/web-types',
+    $schema: 'https://json.schemastore.org/web-types',
     framework: 'vue',
     name: 'vuetify',
     version: pkg.version,

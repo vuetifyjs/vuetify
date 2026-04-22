@@ -1,13 +1,11 @@
 {
   "description": "The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.",
   "props": {
-    "ariaLabel": "The **aria-label** used for each item.",
     "clearable": "Allows for the component to be cleared by clicking on the current value.",
     "emptyIcon": "The icon displayed when empty.",
     "fullIcon": "The icon displayed when full.",
     "itemLabels": "Array of labels to display next to each item..",
     "itemLabelPosition": "Position of item labels. Accepts 'top' and 'bottom'.",
-    "halfIcon": "The icon displayed when half (requires **half-increments** prop).",
     "halfIncrements": "Allows the selection of half increments.",
     "hover": "Provides visual feedback when hovering over icons.",
     "length": "The amount of items to show.",

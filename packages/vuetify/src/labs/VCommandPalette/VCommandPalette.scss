@@ -1,0 +1,42 @@
+@use '../../styles/tools';
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-command-palette {
+    > .v-overlay__content > .v-sheet {
+      display: flex;
+      flex: 1 1 100%;
+      flex-direction: column;
+    }
+
+    @at-root {
+      @include tools.density('v-command-palette', $command-palette-density) using ($modifier) {
+        .v-command-palette__input-container {
+          padding-block: $command-palette-input-padding-block + $modifier;
+          padding-inline: $command-palette-input-padding-inline + $modifier;
+        }
+      }
+    }
+
+    &__content {
+      overflow-y: auto;
+    }
+
+    &__no-data {
+      opacity: $command-palette-no-data-opacity;
+      padding: $command-palette-no-data-padding;
+      text-align: center;
+    }
+
+    &__list {
+      .v-list-subheader {
+        opacity: $command-palette-subheader-opacity;
+        user-select: none;
+      }
+
+      .v-divider {
+        margin-block: $command-palette-divider-margin;
+      }
+    }
+  }
+}

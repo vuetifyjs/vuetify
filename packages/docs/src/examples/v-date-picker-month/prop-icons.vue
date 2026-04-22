@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-date-picker
       v-model="picker"
       next-icon="mdi-skip-next"

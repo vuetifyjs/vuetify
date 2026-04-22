@@ -6,12 +6,17 @@
     "hideBrowse": "Hides the browse button.",
     "multiple": "Allows multiple files to be uploaded.",
     "scrim": "Determines whether an overlay is used when hovering over the component with files. Accepts true/false to enable background, and string to define color.",
+    "insetFileList": "Renders the file list inside the dropzone container instead of below it.",
     "showSize": "Shows the size of the file."
   },
   "slots": {
     "browse": "Slot for the browse button.",
     "divider": "Slot for the divider between icon and the browse button.",
     "icon": "Slot for a custom appearance in icon section.",
-    "input": "Define a custom native input."
+    "input": "Define a custom native input.",
+    "single": "Slot for customizing the appearance of a single file when using inset file list mode."
+  },
+  "exposed": {
+    "controlRef": "Reference to the underlying input control element."
   }
 }

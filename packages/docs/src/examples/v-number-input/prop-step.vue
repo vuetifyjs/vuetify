@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h5>step 2; min:10; max:20</h5>
+        <h5 class="my-0">step 2; min:10; max:20</h5>
 
         <v-number-input
           :max="20"
@@ -12,7 +12,7 @@
         ></v-number-input>
       </v-col>
       <v-col>
-        <h5>step {{ step }}, rounding on blur</h5>
+        <h5 class="my-0">step {{ step }}, rounding on blur</h5>
         <v-number-input
           v-model="roundedValue"
           :step="step"

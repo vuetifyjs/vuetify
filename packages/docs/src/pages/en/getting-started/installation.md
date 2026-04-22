@@ -1,9 +1,9 @@
 ---
 meta:
   nav: Installation
-  title: Get started with Vuetify 3
-  description: Details for v3 release - faq, changes, and upgrading.
-  keywords: migration, releases, upgrading vuetify, beta, v3
+  title: Get started with Vuetify 4
+  description: Details for v4 release - faq, changes, and upgrading.
+  keywords: migration, releases, upgrading vuetify, beta, v4
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
@@ -14,7 +14,7 @@ related:
   import { version } from 'vuetify'
 </script>
 
-# Get started with Vuetify 3
+# Get started with Vuetify 4
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
@@ -33,7 +33,7 @@ For more information regarding supported package managers, please visit their of
 
 ## Using Vite
 
-To get started with Vuetify 3, simply paste the following code into your terminal:
+To get started with Vuetify 4, simply paste the following code into your terminal:
 
 ::: tabs
 
@@ -55,7 +55,7 @@ bun create vuetify
 
 :::
 
-This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
+This command prompts you with a few options before generating your scaffolded Vue / Vuetify 4 project.
 
 ```bash
 success Installed "create-vuetify@x.x.x" with binaries:
@@ -254,7 +254,7 @@ If font is defined at `resources/views/app.blade.php`, Vuetify's font settings w
 
 ## Using CDN
 
-We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+We recommend using the latest version of Vuetify 4 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
 
 `https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
 

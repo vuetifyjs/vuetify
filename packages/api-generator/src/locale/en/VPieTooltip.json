@@ -4,6 +4,7 @@
     "item": "Data item related to hovered segment",
     "titleFormat": "Formatter definition or function. When passed as String macros for `[title]` and `[value]` get replaced dynamically.",
     "subtitleFormat": "Formatter definition or function. When passed as String macros for `[title]` and `[value]` get replaced dynamically.",
+    "target": "The coordinates used to position the tooltip.",
     "transition": "The transition used when hovering between chart segments"
   }
 }

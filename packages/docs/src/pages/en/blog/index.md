@@ -1,7 +1,7 @@
 ---
 layout: blog
 meta:
-  title: Vuetify — Blog
+  title: Blog
   description: The Vuetify blog is a place where we share the latest news, updates, and stories about Vuetify. Stay up to date with the latest developments in the Vuetify ecosystem.
   keywords: vuetify, blog, news, updates, stories, ecosystem
 ---
@@ -17,6 +17,46 @@ Latest news, updates, and stories about Vuetify.
 ---
 
 <br>
+
+## March 2026 Update
+
+🖊️ John Leider • 📅 April 16th, 2026
+
+March delivered 7 Vuetify patch releases stabilizing v4, while Vuetify0 exploded with 427 commits reaching v0.2.0 with 7 new headless components including Switch, Slider, Treeview, and Combobox. The Nuxt Module hit v1.0.0-beta, the CLI shipped 10 releases with Vite 8 and Vue Router 5 support, and the ESLint plugin gained automated v4 migration rules across 720 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/march-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Alpha
+
+🖊️ John Leider • 📅 April 7th, 2026
+
+The Vuetify0 alpha is here — a headless meta-framework for Vue 3 with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. 100% TypeScript, zero styles. Includes a full tutorial building DevKey, a developer API dashboard, from scratch. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-alpha/) { .text-end }
+
+## February 2026 Update
+
+🖊️ John Leider • 📅 March 9th, 2026
+
+February marks Vuetify's most significant milestone—the stable release of **Vuetify 4.0.0** with CSS layers, MD3 design system, and unstyled component foundations. The Vuetify CLI hit v1.0.0, VAvatarGroup shipped as a new component, and Vuetify0 gained createDataTable and Breadcrumbs composables across 390 commits and 68 merged PRs... { .text-medium-emphasis }
+
+[Read More](/blog/february-2026-update/) { .text-end }
+
+## Vuetify Project baseline with Vite and TailwindCSS
+
+🖊️ Jacek Czarniecki • 📅 February 16th, 2026
+
+Ever wondered what does it really take to make Vuetify project play in harmony with TailwindCSS? This article is about to lay it out in a consise step-by-step guide. With CSS layers enabled by default in Vuetify v4, the two frameworks coexist smoothly while sharing aligned breakpoints, theme colors, and custom fonts. We cover disabling Vuetify's built-in utilities in favor of Tailwind's, resolving conflicting classes and more. { .text-medium-emphasis }
+
+[Read More](/blog/building-with-vite-and-tailwindcss/) { .text-end }
+
+## January 2026 Update
+
+🖊️ John Leider • 📅 February 11th, 2026
+
+January delivered Vuetify 4.0.0-beta.0 with MD3 typography and elevation systems, VCommandPalette in labs, grid system overhaul, and the Vuetify CLI reaching 100 commits with analyze command and tab completion. Vuetify0 hit v0.1.0 with Tabs, Radio, and Checkbox components, while Snips gained 11 new snippets from J-Sek... { .text-medium-emphasis }
+
+[Read More](/blog/january-2026-update/) { .text-end }
 
 ## December 2025 Update
 

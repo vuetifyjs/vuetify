@@ -16,8 +16,6 @@ The data table component is used for displaying tabular data in a way that is ea
 
 <PromotedEntry />
 
-<DocIntroduced version="3.4.0" />
-
 ## Components
 
 Before diving into the guides and examples, let's take a moment to understand the core components available for data tables. These are variations optimized for different scenarios.

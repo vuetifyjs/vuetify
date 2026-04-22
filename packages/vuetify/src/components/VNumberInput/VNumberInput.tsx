@@ -15,7 +15,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onMounted, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -216,10 +216,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     watch(() => props.precision, () => formatInputValue())
     watch(() => props.minFractionDigits, () => formatInputValue())
 
-    onMounted(() => {
-      clampModel()
-    })
-
     function inferPrecision (value: number | null) {
       if (value == null) return 0
       const str = value.toString()
@@ -244,6 +240,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     }
 
     function onBeforeinput (e: InputEvent) {
+      if (controlsDisabled.value) return
       if (!e.data) return
       const inputElement = e.target as HTMLInputElement
       const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}

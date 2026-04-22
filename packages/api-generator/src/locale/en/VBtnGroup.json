@@ -1,6 +1,7 @@
 {
   "description": "",
   "props": {
+    "direction": "Control how children components are arranged - in a row or column.",
     "divided": "Add dividers between children [v-btn](/components/buttons) components."
   }
 }

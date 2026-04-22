@@ -1,10 +1,7 @@
 {
   "description": "The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.",
   "props": {
-    "alt": "Attaches an alt property to the parallax image.",
-    "src": "The image to parallax.",
-    "scale": "The scale of the parallax image.",
-    "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)."
+    "scale": "The scale of the parallax image."
   },
   "slots": {
     "error": "Puts the input in a manual error state.",

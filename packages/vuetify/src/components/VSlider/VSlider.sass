@@ -1,8 +1,10 @@
 @use 'sass:map'
 @use 'sass:selector'
+@forward '../VInput/variables'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
+@use '../VInput/variables' as *
 
 @include tools.layer('components')
   // Block
@@ -38,9 +40,15 @@
   // Modifiers
   .v-slider.v-input--horizontal
     align-items: center
-    margin-inline: $slider-horizontal-start $slider-horizontal-end
+
+    > .v-input__prepend
+      margin-inline-end: max(0px, calc($input-affix-margin-inside - $slider-horizontal-start))
+
+    > .v-input__append
+      margin-inline-start: max(0px, calc($input-affix-margin-inside - $slider-horizontal-end))
 
     > .v-input__control
+      margin-inline: $slider-horizontal-start $slider-horizontal-end
       min-height: $slider-horizontal-min-height
       display: flex
       align-items: center

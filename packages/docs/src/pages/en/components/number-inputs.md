@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
   description: The number input component provides a clean interface for entering numeric values with increment and decrement controls.
@@ -19,8 +18,6 @@ features:
 The VNumberInput extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type="number">`
 
 <page-features />
-
-<DocIntroduced version="3.8.0" />
 
 ## Usage
 
