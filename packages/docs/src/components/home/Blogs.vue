@@ -142,6 +142,23 @@
 
   const items = [
     {
+      title: 'March 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/march-2026-update/march-hero.png',
+      shortDescription: 'March was Vuetify0\'s breakout month with 427 commits, 11 releases, and 7 new headless components reaching v0.2.0. The core framework shipped 7 patch releases stabilizing v4, the Nuxt Module hit v1.0.0-beta, the CLI continued with 10 releases, and the ESLint plugin gained automated v4 and TailwindCSS migration rules across 720 total commits and 69 merged PRs...',
+      date: 'April 16, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/march-2026-update'),
+    },
+    {
+      title: 'Announcing the Vuetify0 Alpha',
+      shortDescription: 'The Vuetify0 alpha is here — a headless meta-framework for Vue 3 with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. Includes a full tutorial building DevKey, a developer API dashboard, from scratch.',
+      date: 'April 7, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-alpha'),
+    },
+    {
       title: 'February 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/february-2026-update/february-hero.png',
       shortDescription: 'February marks Vuetify\'s most significant milestone—the stable release of Vuetify 4.0.0 (Revisionist) with CSS layers, MD3 design system, and unstyled component foundations. The Vuetify CLI hit v1.0.0, VAvatarGroup shipped as a new component, and Vuetify0 gained createDataTable and Breadcrumbs composables across 390 commits and 68 merged PRs...',

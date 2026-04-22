@@ -1,5 +1,8 @@
 /* eslint-disable complexity */
 
+// Styles
+import './VVideoControls.sass'
+
 // Components
 import { VVideoVolume } from './VVideoVolume'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
@@ -55,7 +58,7 @@ export const makeVVideoControlsProps = propsFactory({
   hidePlay: Boolean,
   hideVolume: Boolean,
   hideFullscreen: Boolean,
-  hideProgressBar: { type: Boolean, default: true },
+  hideProgressBar: Boolean,
   fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
@@ -224,6 +227,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             { 'v-video-controls--pills': props.pills },
             { 'v-video-controls--detached': props.detached },
             { 'v-video-controls--floating': props.floating },
+            { 'v-video-controls--fullscreen': props.fullscreen },
             { 'v-video-controls--split-time': props.splitTime },
             !props.pills ? backgroundColorClasses.value : [],
             props.detached && !props.pills ? elevationClasses.value : [],

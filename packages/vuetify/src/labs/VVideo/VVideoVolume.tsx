@@ -1,3 +1,6 @@
+// Styles
+import './VVideoVolume.sass'
+
 // Components
 import { VIcon } from '@/components/VIcon/VIcon'
 import { VMenu } from '@/components/VMenu/VMenu'
@@ -13,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { ref, toRef } from 'vue'
+import { ref, shallowRef, toRef } from 'vue'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -58,6 +61,7 @@ export const VVideoVolume = genericComponent()({
       : '$volumeOff')
 
     const containerRef = ref<HTMLElement>()
+    const menu = shallowRef(false)
 
     useRender(() => {
       const sliderDefaults = {
@@ -79,18 +83,23 @@ export const VVideoVolume = genericComponent()({
             <VIconBtn
               icon={ volumeIcon.value }
               aria-label={ props.label }
-              v-tooltip={[props.label, 'top']}
+              v-tooltip={[{
+                text: props.label,
+                location: 'top',
+                disabled: menu.value,
+              }]}
               onClick={ props.onClick as any }
               { ...attrs }
             >
               <VIcon />
               { !props.inline && (
                 <VMenu
-                  offset="8"
+                  v-model={ menu.value }
                   activator="parent"
                   attach={ containerRef.value }
-                  location={ props.menuProps?.location ?? 'top center' }
                   closeOnContentClick={ false }
+                  location={ props.menuProps?.location ?? 'top center' }
+                  offset="8"
                 >
                   <div
                     class={[
