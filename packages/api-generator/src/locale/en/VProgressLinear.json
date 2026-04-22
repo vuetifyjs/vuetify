@@ -1,5 +1,5 @@
 {
-  "description": "The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).",
+  "description": "Used to display progress (0-100 scale) or a loading state.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "active": "Reduce the height to 0, hiding component.",

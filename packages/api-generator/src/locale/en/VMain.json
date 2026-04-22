@@ -1,5 +1,5 @@
 {
-  "description": "subcomponent of `v-app` that defines the main content area of an application.",
+  "description": "Typically a main content wrapper in `v-app`.",
   "props": {
     "scrollable": "Specify a custom scrollable function."
   }

@@ -1,5 +1,5 @@
 {
-  "description": "`v-layout-item` component is used to define an item within a `v-layout` container.",
+  "description": "Abstract component to use within a `v-layout` or `v-app` container.",
   "props": {
     "position": "The position of the item."
   }

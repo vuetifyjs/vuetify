@@ -1,5 +1,5 @@
 {
-  "description": "The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, and a default slot.",
+  "description": "A baseline component for building custom field components to work inside `v-form` with validation rules, error messages, typical slots, and loading states.",
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
     "centerAffix": "Vertically align **appendInner**, **prependInner**, **clearIcon** and **label** in the center.",

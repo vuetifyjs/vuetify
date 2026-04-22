@@ -1,5 +1,5 @@
 {
-  "description": "`v-field-label` component is used to display a label for form fields.",
+  "description": "A label component used within `v-field`.",
   "props": {
     "floating": "Elevates the label above the slotted content."
   }

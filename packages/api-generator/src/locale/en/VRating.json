@@ -1,5 +1,5 @@
 {
-  "description": "The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.",
+  "description": "A specialized input for showing sequence of icons for the user to express feedback.",
   "props": {
     "clearable": "Allows for the component to be cleared by clicking on the current value.",
     "emptyIcon": "The icon displayed when empty.",

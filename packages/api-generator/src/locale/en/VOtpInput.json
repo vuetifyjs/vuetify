@@ -1,5 +1,5 @@
 {
-  "description": "The `v-otp-input` is used for MFA procedure of authenticating users by a one-time password.",
+  "description": "Used for short one-time codes - typically when authenticating users.",
   "props": {
     "autofocus": "Automatically focuses the first input on page load",
     "divider": "Specifies the dividing character between items.",

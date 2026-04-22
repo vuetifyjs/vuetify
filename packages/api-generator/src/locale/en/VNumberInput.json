@@ -1,5 +1,5 @@
 {
-  "description": "The `v-number-input` extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type=\"number\">`.",
+  "description": "Replacement for standard HTML number-type input.",
   "props": {
     "controlVariant": "Controls layout of the stepper buttons.",
     "decimalSeparator": "Expects single character to be used as decimal separator.",

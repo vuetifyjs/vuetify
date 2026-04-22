@@ -1,5 +1,5 @@
 {
-  "description": "The `v-img` component is packed with features to support rich media. Combined with the vuetify-loader, you can add dynamic progressive images to provide a better user experience.",
+  "description": "Standard replacement for `img` HTML element. Supports lazy-loading, blurred placeholders and gradient overlays.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "alt": "Alternate text for screen readers. Leave empty for decorative images.",
