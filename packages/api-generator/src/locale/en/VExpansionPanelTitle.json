@@ -1,5 +1,5 @@
 {
-  "description": "Subcomponent for `v-expansion-panels` that provides the clickable title for each panel.",
+  "description": "Clickable title wrapper for `v-expansion-panel`.",
   "props": {
     "collapseIcon": "Icon used when the expansion panel is in a collapsable state.",
     "expandIcon": "Icon used when the expansion panel is in a expandable state.",

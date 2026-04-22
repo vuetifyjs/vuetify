@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Represents characters count under the `v-text-field` and `v-textarea`. Not meant to be used as standalone component.",
   "props": {
     "active": "Determines whether the counter is visible or not.",
     "max": "Sets the maximum allowed value.",

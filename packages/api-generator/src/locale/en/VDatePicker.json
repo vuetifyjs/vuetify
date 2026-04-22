@@ -1,5 +1,5 @@
 {
-  "description": "`v-date-picker` is a fully featured date selection component that lets users select a date.",
+  "description": "A fully featured date selection component that lets users select a single date, date range, limit available selection.",
   "props": {
     "allowedDates": "Restricts which dates can be selected.",
     "eventColor": "Sets the color for event dots. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",

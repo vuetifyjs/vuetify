@@ -1,5 +1,5 @@
 {
-  "description": "The `v-empty-state` component is used to indicate that a list is empty or that no search results were found.",
+  "description": "Used to indicate that a section does not have any data to show yet or that a search yielded no results.",
   "props": {
     "actionText": "The text used for the action button.",
     "headline": "A large headline often used for 404 pages.",

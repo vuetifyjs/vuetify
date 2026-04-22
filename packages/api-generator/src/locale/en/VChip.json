@@ -1,5 +1,5 @@
 {
-  "description": "The `v-chip` component is used to convey small pieces of information.",
+  "description": "Used to style short contextual labels, tag-like selection within multi-select fields, or as an alternative to regular `v-btn`.",
   "props": {
     "closable": "Adds remove button and then a chip can be closed.",
     "closeIcon": "Change the default icon used for **close** chips.",

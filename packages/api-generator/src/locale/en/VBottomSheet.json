@@ -1,5 +1,5 @@
 {
-  "description": "The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`.",
+  "description": "A modified `v-dialog` that slides from the bottom.",
   "props": {
     "inset": "Reduces the sheet content maximum width to 70%."
   }

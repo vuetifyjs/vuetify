@@ -1,5 +1,5 @@
 {
-  "description": "The `v-color-picker` allows you to select a color using a variety of input methods.",
+  "description": "Allows users to select a color using canvas, sliders, eye-dropper, and inputs.",
   "props": {
     "canvasHeight": "Height of canvas.",
     "dotSize": "Changes the size of the selection dot on the canvas.",

@@ -1,5 +1,5 @@
 {
-  "description": "The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component.",
+  "description": "Used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component.",
   "props": {
     "customFilter": "Function to filter items.",
     "expanded": "Array of expanded items. Can be bound to external variable using **v-model:expanded**.",
