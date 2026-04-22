@@ -121,6 +121,7 @@ export async function generateComponentDataFromTypes (component: string): Promis
   }
 
   return {
+    description: {},
     props: props.properties,
     events: events.properties,
     slots: slots.properties,
