@@ -1,5 +1,5 @@
 {
-  "description": "The `v-select` components are used for collecting user provided information from a list of options.",
+  "description": "Replacement for native `<select>` HTML element. Forces selection from the dropdown list without type-ahead.",
   "props": {
     "chips": "Changes display of selections to chips.",
     "closableChips": "Enables the [closable](/api/v-chip/#props-closable) prop on all [v-chip](/components/chips/) components.",

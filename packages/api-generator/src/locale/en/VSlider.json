@@ -1,5 +1,5 @@
 {
-  "description": "The `v-slider` component can be used as an alternative visualization instead of a number input.",
+  "description": "Form input used to select single number from the linear range. A simple alternative to a standard number input.",
   "slots": {
     "thumb-label": "Slot for the thumb label.",
     "tick-label": "Slot for the tick label."

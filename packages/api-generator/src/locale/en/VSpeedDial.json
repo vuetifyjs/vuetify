@@ -1,5 +1,5 @@
 {
-  "description": "The `v-speed-dial` component can be used as a floating action button that can reveal additional actions when clicked.",
+  "description": "Typically combined with `v-fab` to reveal additional actions when clicked.",
   "props": {
     "openOnHover": "Opens speed-dial on hover."
   }

@@ -1,5 +1,5 @@
 {
-  "description": "The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a v-model.",
+  "description": "Displays brief informational text when users hover over or focus on an element.",
   "props": {
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true).",
     "id": "HTML id attribute of the tooltip overlay. If not set, a globally unique id will be used.",

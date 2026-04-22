@@ -1,5 +1,5 @@
 {
-  "description": "The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.",
+  "description": "Status bar representing Android system bar - used for UI mocks.",
   "props": {
     "height": "Sets the height for the component.",
     "window": "Increases the system bar height to 32px (24px default)."

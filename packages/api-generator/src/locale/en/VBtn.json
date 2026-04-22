@@ -1,5 +1,5 @@
 {
-  "description": "Replaces the standard html button with a useful variants for various use cases. Includes robust set of options to customize internal content (text and icons).",
+  "description": "Replaces the standard html button with useful variants for various use cases. Includes robust set of options to customize internal content (text and icons).",
   "props": {
     "block": "Expands the button to 100% of available space.",
     "flat": "Removes the button box shadow. This is different than using the 'flat' variant.",

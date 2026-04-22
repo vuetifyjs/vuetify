@@ -1,5 +1,5 @@
 {
-  "description": "Subcomponent for `v-stepper` that provides the step action controls.",
+  "description": "Subcomponent for `v-stepper` that represents the step action controls.",
   "props": {
     "nextText": "The text used for the Next button.",
     "prevText": "The text used for the Prev button."

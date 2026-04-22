@@ -1,5 +1,5 @@
 {
-  "description": "The `v-switch` component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.",
+  "description": "Provides users the ability to choose between two distinct values. Typically used as an on/off switch. Supports indeterminate and loading states.",
   "props": {
     "flat": "Display component without elevation. Default elevation for thumb is 4dp, `flat` resets it.",
     "indeterminate": "Sets an indeterminate state for the switch.",

@@ -1,5 +1,5 @@
 {
-  "description": "Subcomponent for `v-stepper` that provides an individual step.",
+  "description": "Subcomponent for `v-stepper` that represents an individual step.",
   "props": {},
   "events": {},
   "slots": {
