@@ -350,5 +350,152 @@ describe('VMaskInput', () => {
         expect(input.selectionStart).toBe(outputCaret)
       })
     })
+
+    describe('Multi-Mask caret position when mask changes', () => {
+      // Insertion in middle causes mask switch from #### to ##-##-##
+      it('should maintain correct caret position when insertion causes mask switch', async () => {
+        const model = ref('1234')
+        render(() => (
+          <VMaskInput
+            v-model={ model.value }
+            mask={['##/##', '##-##-##']}
+            returnMaskedValue
+          />
+        ))
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input.value).toBe('12/34')
+
+        await userEvent.click(input)
+        input.setSelectionRange(3, 3)
+
+        await userEvent.type(input, '5')
+
+        expect(input.value).toBe('12-53-4')
+        expect(input.selectionStart).toBe(4)
+      })
+
+      // Forward delete in middle causes mask switch from ##-##-## to ####
+      it('should maintain correct caret position when forward delete causes mask switch', async () => {
+        const model = ref('12345')
+        render(() => (
+          <VMaskInput
+            v-model={ model.value }
+            mask={['##/##', '##-##-##']}
+            returnMaskedValue
+          />
+        ))
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input.value).toBe('12-34-5')
+
+        await userEvent.click(input)
+        input.setSelectionRange(3, 3)
+
+        await userEvent.keyboard('{Delete}')
+
+        expect(input.value).toBe('12/45')
+        expect(input.selectionStart).toBe(2)
+      })
+
+      // Backspace in middle causes mask switch from ##-##-## to ####
+      it('should maintain correct caret position when backspace causes mask switch', async () => {
+        const model = ref('12345')
+        render(() => (
+          <VMaskInput
+            v-model={ model.value }
+            mask={['##/##', '##-##-##']}
+            returnMaskedValue
+          />
+        ))
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input.value).toBe('12-34-5')
+
+        await userEvent.click(input)
+        input.setSelectionRange(4, 4)
+
+        await userEvent.keyboard('{Backspace}')
+
+        expect(input.value).toBe('12/45')
+        expect(input.selectionStart).toBe(2)
+      })
+
+      // Backspace on a selection spanning a delimiter causes mask switch: ##-##-## → ####
+      it('should delete selected digits and switch mask correctly on backspace', async () => {
+        const model = ref('11-22-33')
+        render(() => (
+          <VMaskInput
+            v-model={ model.value }
+            mask={['####', '##-##-##']}
+            returnMaskedValue
+          />
+        ))
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input.value).toBe('11-22-33')
+
+        await userEvent.click(input)
+        // Select '22' (positions 3–5)
+        input.setSelectionRange(3, 5)
+
+        await userEvent.keyboard('{Backspace}')
+
+        // Remaining digits: 1133 → #### wins → '1133', caret at 2 (after the two '1's)
+        expect(input.value).toBe('1133')
+        expect(input.selectionStart).toBe(2)
+      })
+    })
+  })
+
+  describe('Multi-Mask Support', () => {
+    it('should dynamically switch to best matching mask when typing', async () => {
+      const inputValue = ref('')
+      render(() => (
+        <VMaskInput
+          v-model={ inputValue.value }
+          mask={['(AA)-###', '(##)-AAA']}
+        />
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      await userEvent.type(input, 'AB')
+      await expect.element(input).toHaveValue('(AB)-')
+
+      await userEvent.clear(input)
+      await userEvent.type(input, '12')
+      await expect.element(input).toHaveValue('(12)-')
+    })
+
+    it('should return masked value when returnMaskedValue is true with multiple masks', async () => {
+      const inputValue = ref('AB123')
+      render(() => (
+        <VMaskInput
+          v-model={ inputValue.value }
+          mask={['(AA)-###', '(##)-AAA']}
+          returnMaskedValue
+        />
+      ))
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('(AB)-123')
+      expect(inputValue.value).toBe('(AB)-123')
+    })
+
+    it('should select best mask using hybrid strategy (consumed > complete > first)', async () => {
+      const inputValue = ref('')
+      render(() => (
+        <VMaskInput
+          v-model={ inputValue.value }
+          mask={['####', '##-##-##']}
+          returnMaskedValue
+        />
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      await userEvent.type(input, '1234')
+      await expect.element(input).toHaveValue('1234')
+    })
   })
 })
