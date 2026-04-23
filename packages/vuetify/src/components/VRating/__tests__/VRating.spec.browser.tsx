@@ -169,5 +169,60 @@ describe('VRating', () => {
     expect(model.value).toBe(2)
   })
 
+  it('should pass activeColor to item slot', () => {
+    const slotProps = ref<any[]>([])
+    render(() => (
+      <VRating modelValue={ 3 } activeColor="blue" color="grey">
+        {{
+          item: (props) => {
+            slotProps.value[props.index] = props
+            return <span>{ props.value }</span>
+          },
+        }}
+      </VRating>
+    ))
+
+    // All items should receive the same activeColor
+    expect(slotProps.value[0]).toHaveProperty('activeColor', 'blue')
+    expect(slotProps.value[4]).toHaveProperty('activeColor', 'blue')
+
+    // Filled items (index 0,1,2) get activeColor as color; unfilled (3,4) get grey
+    expect(slotProps.value[0].color).toBe('blue')
+    expect(slotProps.value[4].color).toBe('grey')
+  })
+
+  it('should fallback activeColor to color when not provided', () => {
+    const slotProps = ref<any>()
+    render(() => (
+      <VRating modelValue={ 2 } color="red">
+        {{
+          item: (props) => {
+            slotProps.value = props
+            return <span>{ props.value }</span>
+          },
+        }}
+      </VRating>
+    ))
+
+    // activeColor falls back to color prop
+    expect(slotProps.value).toHaveProperty('activeColor', 'red')
+  })
+
+  it('should pass undefined activeColor when neither prop is set', () => {
+    const slotProps = ref<any>()
+    render(() => (
+      <VRating modelValue={ 1 }>
+        {{
+          item: (props) => {
+            slotProps.value = props
+            return <span>{ props.value }</span>
+          },
+        }}
+      </VRating>
+    ))
+
+    expect(slotProps.value).toHaveProperty('activeColor', undefined)
+  })
+
   showcase({ stories })
 })
