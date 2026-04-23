@@ -56,12 +56,12 @@
           border-top-right-radius: inherit
 
         > :not(:first-child):not(.v-expansion-panel--after-active):not(.v-expansion-panel--active)
-          border-top-left-radius: 0
-          border-top-right-radius: 0
+          border-top-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-top-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
         > :not(:last-child):not(.v-expansion-panel--before-active):not(.v-expansion-panel--active)
-          border-bottom-left-radius: 0
-          border-bottom-right-radius: 0
+          border-bottom-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-bottom-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
       &--variant-accordion
         > :first-child:not(:last-child)
