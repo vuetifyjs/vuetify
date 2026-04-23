@@ -1,24 +1,39 @@
 {
   "props": {
-    "autoDraw": "Trace the length of the line when first rendered.",
+    "animation": "Enables smooth transitions when values change. When `true`, uses default duration (300ms) and easing (`ease`). Can be an object with `duration` (ms) and `easing` (CSS easing) properties.",
+    "autoDraw": "Trace the length of the line when first rendered. Since 4.1.0 it accepts `'once'`, to make the animation play only on mount and make the subsequent value changes interpolate smoothly.",
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation.",
     "autoDrawEasing": "The easing function to use for the trace animation.",
     "autoLineWidth": "Automatically expand bars to use space efficiently.",
     "fill": "Using the **fill** property allows you to better customize the look and feel of your sparkline.",
     "gradient": "An array of colors to use as a linear-gradient.",
     "gradientDirection": "The direction the gradient should run.",
-    "height": "Height of the SVG trendline or bars.",
+    "height": "Height of the SVG container.",
+    "id": "The id of the component.",
+    "inset": "Extends the line beyond the chart boundary so it runs edge-to-edge.",
+    "interactive": "Enables hover tracking, keyboard navigation (arrow keys), and focus support. Required for **tooltip** to work.",
+    "itemValue": "The value of the item.",
     "labels": "An array of string labels that correspond to the same index as its data counterpart.",
     "labelSize": "The label font size.",
     "lineWidth": "The thickness of the line, in px.",
+    "markerSize": "The diameter of marker circles, in px.",
+    "markerStroke": "The stroke (border) color applied to marker circles.",
+    "max": "The maximum value of the sparkline.",
+    "min": "The minimum value of the sparkline.",
     "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate.",
     "showLabels": "Show labels below each data point.",
-    "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0.",
+    "showMarkers": "Show circle markers at each data point.",
+    "smooth": "Controls the curve tension. `true` defaults to 8, `false` or `0` gives straight lines. Higher values produce smoother curves.",
+    "smoothMode": "The interpolation algorithm to use. `default` uses corner-rounding which can cause the line to appear away from actual values. `monotone` makes the line stick to exact data points. In `monotone` mode, **smooth** is limited to 8.",
+    "tooltip": "Displays a tooltip on the active data point. Requires **interactive**. Can be `true` or an object with `titleFormat`, `offset`, and `showCrosshair` options.",
     "type": "Choose between a trendline or bars.",
-    "width": "Width of the SVG trendline or bars.",
-    "id": "The id of the component.",
-    "itemValue": "The value of the item.",
-    "max": "The maximum value of the sparkline.",
-    "min": "The minimum value of the sparkline."
+    "width": "Width of the SVG container."
+  },
+  "events": {
+    "update:currentIndex": "Emitted when the active data point changes via mouse hover, keyboard navigation, or focus. The payload is the point index, or `null` when no point is active."
+  },
+  "slots": {
+    "label": "Custom content for data point labels. Receives `{ index: number, value: string }`.",
+    "tooltip": "Custom content for the tooltip. Receives `{ index: number, value: number }`."
   }
 }

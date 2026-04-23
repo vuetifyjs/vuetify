@@ -12,8 +12,6 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-// Types
-
 export const makeVSparklineProps = propsFactory({
   type: {
     type: String as PropType<'trend' | 'bar'>,
@@ -27,6 +25,7 @@ export const makeVSparklineProps = propsFactory({
 export type VSparklineSlots = {
   default: void
   label: { index: number, value: string }
+  tooltip: { index: number, value: number }
 }
 
 export const VSparkline = genericComponent<VSparklineSlots>()({
@@ -34,7 +33,11 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
 
   props: makeVSparklineProps(),
 
-  setup (props, { slots }) {
+  emits: {
+    'update:currentIndex': (_index: number | null) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const hasLabels = computed(() => {
       return Boolean(
@@ -62,6 +65,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
           style={ textColorStyles.value }
           viewBox={ `0 0 ${props.width} ${parseInt(totalHeight.value, 10)}` }
           { ...lineProps }
+          onUpdate:currentIndex={ (v: number | null) => emit('update:currentIndex', v) }
           v-slots={ slots }
         />
       )

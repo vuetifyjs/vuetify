@@ -350,6 +350,22 @@
       "totalVisible": "4.0.0"
     }
   },
+  "VSparkline": {
+    "props": {
+      "animation": "4.1.0",
+      "autoDraw": "4.1.0",
+      "inset": "4.1.0",
+      "interactive": "4.1.0",
+      "markerSize": "4.1.0",
+      "markerStroke": "4.1.0",
+      "showMarkers": "4.1.0",
+      "smoothMode": "4.1.0",
+      "tooltip": "4.1.0"
+    },
+    "events": {
+      "update:currentIndex": "4.1.0"
+    }
+  },
   "VStepper": {
     "props": {
       "itemProps": "3.11.0"
