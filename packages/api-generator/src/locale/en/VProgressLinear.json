@@ -1,4 +1,5 @@
 {
+  "description": "Used to display progress (0-100 scale) or a loading state.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "active": "Reduce the height to 0, hiding component.",

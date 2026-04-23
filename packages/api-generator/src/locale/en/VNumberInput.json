@@ -1,4 +1,5 @@
 {
+  "description": "Replacement for standard HTML number-type input.",
   "props": {
     "controlVariant": "Controls layout of the stepper buttons.",
     "decimalSeparator": "Expects single character to be used as decimal separator.",

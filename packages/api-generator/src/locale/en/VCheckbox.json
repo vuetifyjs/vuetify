@@ -1,4 +1,5 @@
 {
+  "description": "Typical form item that provides the ability to select from distinct values, convey approval/acknowledgement. Similar to `v-switch`.",
   "props": {
     "falseIcon": "The icon used when inactive.",
     "indeterminate": "Sets an indeterminate state for the checkbox.",

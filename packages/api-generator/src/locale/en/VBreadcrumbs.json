@@ -1,4 +1,5 @@
 {
+  "description": "Used as a navigational helper and represent hierarchy for pages.",
   "props": {
     "divider": "Specifies the dividing character between items."
   },

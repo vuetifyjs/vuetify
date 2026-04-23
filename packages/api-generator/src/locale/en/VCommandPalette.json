@@ -1,4 +1,5 @@
 {
+  "description": "A searchable dialog for quick navigation and action execution, opened using configurable keyboard shortcut.",
   "props": {
     "closeOnSelect": "Controls whether the palette closes automatically after selecting an actionable item. Set to **false** to keep it open for external drill-in and nested navigation flows.",
     "hotkey": "Global keyboard shortcut to toggle the palette. Accepts hotkey strings like `'ctrl+shift+p'` or `'meta+j'`. The shortcut is automatically registered on mount and cleaned up on unmount.",

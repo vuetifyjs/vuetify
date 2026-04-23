@@ -1,4 +1,5 @@
 {
+  "description": "Typically used to show application sidebar with navigation.",
   "props": {
     "disableResizeWatcher": "Prevents the automatic opening or closing of the drawer when resized, based on whether the device is mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes.",

@@ -121,6 +121,7 @@ export async function generateComponentDataFromTypes (component: string): Promis
   }
 
   return {
+    description: {},
     props: props.properties,
     events: events.properties,
     slots: slots.properties,
@@ -227,6 +228,7 @@ export type BaseData = {
   pathName: string // kebab-case name for use in urls
 }
 export type ComponentData = BaseData & {
+  description: Record<string, string>
   sass: Record<string, { default: string }>
   props: Record<string, Definition>
   slots: Record<string, Definition>

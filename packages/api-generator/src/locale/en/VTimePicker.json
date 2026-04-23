@@ -1,4 +1,5 @@
 {
+  "description": "A picker for selecting time: hours, minutes and optionally seconds.",
   "props": {
     "allowedHours": "Restricts which hours can be selected.",
     "allowedMinutes": "Restricts which minutes can be selected.",

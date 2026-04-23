@@ -1,4 +1,5 @@
 {
+  "description": "Used to display list-like structures. Supports nested structures.",
   "props": {
     "activeColor": "Deprecated, use `color` instead.",
     "activatable": "Designates whether the list items are activatable. Additionally, sets necessary accessibility attributes internally.",

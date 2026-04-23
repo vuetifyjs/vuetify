@@ -1,4 +1,5 @@
 {
+  "description": "Represents single section inside `v-expansion-panels`.",
   "props": {
     "disabled": "Disables the expansion-panel content.",
     "readonly": "Makes the expansion panel content read only.",

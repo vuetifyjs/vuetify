@@ -1,4 +1,5 @@
 {
+  "description": "Used for background video or a standalone player for self-hosted media files.",
   "props": {
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "src": "Media file URL",

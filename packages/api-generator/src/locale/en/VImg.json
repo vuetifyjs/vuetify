@@ -1,4 +1,5 @@
 {
+  "description": "Standard replacement for `img` HTML element. Supports lazy-loading, blurred placeholders and gradient overlays.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "alt": "Alternate text for screen readers. Leave empty for decorative images.",
