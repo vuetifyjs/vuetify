@@ -174,7 +174,7 @@ describe('VRating', () => {
     render(() => (
       <VRating modelValue={ 3 } activeColor="blue" color="grey">
         {{
-          item: (props) => {
+          item: props => {
             slotProps.value[props.index] = props
             return <span>{ props.value }</span>
           },
@@ -196,7 +196,7 @@ describe('VRating', () => {
     render(() => (
       <VRating modelValue={ 2 } color="red">
         {{
-          item: (props) => {
+          item: props => {
             slotProps.value = props
             return <span>{ props.value }</span>
           },
@@ -213,7 +213,7 @@ describe('VRating', () => {
     render(() => (
       <VRating modelValue={ 1 }>
         {{
-          item: (props) => {
+          item: props => {
             slotProps.value = props
             return <span>{ props.value }</span>
           },
