@@ -88,6 +88,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
 
     const rangeStart = shallowRef()
     const rangeStop = shallowRef()
+    const hoverDate = shallowRef<Date | null>(null)
     const isReverse = shallowRef(false)
 
     const transition = toRef(() => {
@@ -144,6 +145,36 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         rangeStop.value = undefined
         model.value = [rangeStart.value]
       }
+    }
+
+    const isHoverRangeActive = computed(() => props.multiple === 'range' && !!rangeStart.value && !rangeStop.value && !!hoverDate.value)
+
+    function isInHoverRange (date: Date): boolean {
+      if (!isHoverRangeActive.value) return false
+      const start = rangeStart.value
+      const hover = hoverDate.value
+      const isAfterHover = adapter.isAfter(hover, start)
+      const rangeMin = isAfterHover ? start : hover
+      const rangeMax = isAfterHover ? hover : start
+      return !adapter.isBefore(date, rangeMin) && !adapter.isAfter(date, rangeMax)
+    }
+
+    function isHoverRangeStart (date: Date): boolean {
+      if (!isHoverRangeActive.value) return false
+      const start = rangeStart.value
+      const hover = hoverDate.value
+      return adapter.isAfter(hover, start)
+        ? adapter.isSameDay(date, start)
+        : adapter.isSameDay(date, hover)
+    }
+
+    function isHoverRangeEnd (date: Date): boolean {
+      if (!isHoverRangeActive.value) return false
+      const start = rangeStart.value
+      const hover = hoverDate.value
+      return adapter.isAfter(hover, start)
+        ? adapter.isSameDay(date, hover)
+        : adapter.isSameDay(date, start)
     }
 
     function getDateAriaLabel (item: any) {
@@ -247,6 +278,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ref={ daysRef }
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
+            onMouseleave={ props.multiple === 'range' ? () => { hoverDate.value = null } : undefined }
           >
             { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
@@ -293,9 +325,13 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                       'v-date-picker-month__day--selected': isSelected,
                       'v-date-picker-month__day--week-end': item.isWeekEnd,
                       'v-date-picker-month__day--week-start': item.isWeekStart,
+                      'v-date-picker-month__day--hover-range': isInHoverRange(item.date),
+                      'v-date-picker-month__day--hover-range-start': isHoverRangeStart(item.date),
+                      'v-date-picker-month__day--hover-range-end': isHoverRangeEnd(item.date),
                     },
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
+                  onMouseenter={ props.multiple === 'range' ? () => { hoverDate.value = item.date } : undefined }
                 >
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
                     slots.day?.(slotProps) ?? (

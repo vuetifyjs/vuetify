@@ -72,3 +72,32 @@
 
   .v-date-picker-month__day .v-date-picker-month__events
     bottom: $date-picker-event-date-bottom
+
+  .v-date-picker-month__day--hover-range
+    &::before
+      content: ''
+      position: absolute
+      top: 2px
+      bottom: 2px
+      left: calc($date-picker-month-column-gap / -2)
+      right: calc($date-picker-month-column-gap / -2)
+      background-color: rgba(var(--v-theme-primary), 0.12)
+      pointer-events: none
+
+  .v-date-picker-month__day--hover-range-start,
+  .v-date-picker-month__day--hover-range-end
+    .v-btn
+      background-color: rgb(var(--v-theme-primary))
+      color: rgb(var(--v-theme-on-primary))
+
+  .v-date-picker-month__day--hover-range-start
+    &::before
+      border-top-left-radius: 100%
+      border-bottom-left-radius: 100%
+      left: calc(var(--v-date-picker-month-day-diff) / 2)
+
+  .v-date-picker-month__day--hover-range-end
+    &::before
+      border-top-right-radius: 100%
+      border-bottom-right-radius: 100%
+      right: calc(var(--v-date-picker-month-day-diff) / 2)

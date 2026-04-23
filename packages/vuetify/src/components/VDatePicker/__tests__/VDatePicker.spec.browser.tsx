@@ -8,6 +8,67 @@ import { commands } from 'vitest/browser'
 import { nextTick, ref } from 'vue'
 
 describe('VDatePicker', () => {
+  it('shows hover range preview after selecting start date', async () => {
+    const model = ref<unknown[]>([])
+    render(() => (
+      <VDatePicker v-model={ model.value } multiple="range" />
+    ))
+
+    // Select the 10th as start date
+    await userEvent.click(await screen.findByText(10))
+    await expect.poll(() => model.value).toHaveLength(1)
+
+    // Hover over the 15th
+    const day15 = await screen.findByText(15)
+    await userEvent.hover(day15)
+
+    // Days between 10 and 15 (inclusive) should have the hover-range class
+    const hoverRangeDays = document.querySelectorAll('.v-date-picker-month__day--hover-range')
+    expect(hoverRangeDays).toHaveLength(6) // 10, 11, 12, 13, 14, 15
+
+    // The start day should have the hover-range-start class
+    const hoverStart = document.querySelectorAll('.v-date-picker-month__day--hover-range-start')
+    expect(hoverStart).toHaveLength(1)
+
+    // The hovered day should have the hover-range-end class
+    const hoverEnd = document.querySelectorAll('.v-date-picker-month__day--hover-range-end')
+    expect(hoverEnd).toHaveLength(1)
+  })
+
+  it('clears hover range preview when mouse leaves the calendar', async () => {
+    const model = ref<unknown[]>([])
+    render(() => (
+      <VDatePicker v-model={ model.value } multiple="range" />
+    ))
+
+    // Select the 10th as start date
+    await userEvent.click(await screen.findByText(10))
+
+    // Hover over the 15th
+    await userEvent.hover(await screen.findByText(15))
+    expect(document.querySelectorAll('.v-date-picker-month__day--hover-range').length).toBeGreaterThan(0)
+
+    // Move mouse out of the days container
+    await userEvent.unhover(document.querySelector('.v-date-picker-month__days')!)
+    expect(document.querySelectorAll('.v-date-picker-month__day--hover-range')).toHaveLength(0)
+  })
+
+  it('does not show hover range preview when range is already complete', async () => {
+    const model = ref<unknown[]>([])
+    render(() => (
+      <VDatePicker v-model={ model.value } multiple="range" />
+    ))
+
+    // Select full range: 10th to 15th
+    await userEvent.click(await screen.findByText(10))
+    await userEvent.click(await screen.findByText(15))
+    await expect.poll(() => model.value).toHaveLength(2)
+
+    // Hover over another day — no hover-range class should appear
+    await userEvent.hover(await screen.findByText(20))
+    expect(document.querySelectorAll('.v-date-picker-month__day--hover-range')).toHaveLength(0)
+  })
+
   it('selects a range of dates', async () => {
     const model = ref<unknown[]>([])
     render(() => (
