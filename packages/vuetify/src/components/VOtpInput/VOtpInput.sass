@@ -25,6 +25,23 @@
         &__end
           flex: 1
 
+  .v-otp-input__field--highlighted
+    .v-field__outline
+      opacity: 0.5
+
+    &.v-field--focused.v-field--variant-filled,
+    &.v-field--focused.v-field--variant-underlined
+      .v-field__outline::after
+        opacity: 0.5
+
+    &.v-field--focused.v-field--variant-plain .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo-filled .v-field__overlay
+      opacity: calc(var(--v-theme-overlay-multiplier) * 0.04)
+
+    &.v-field--focused.v-field--variant-solo-inverted .v-field__overlay
+      opacity: 0.5
+
   .v-otp-separator
     display: flex
     align-items: center

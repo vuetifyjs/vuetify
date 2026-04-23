@@ -29,12 +29,17 @@ export const VOtpField = genericComponent()({
 
     const slot = computed(() => otpInput.otpSlots.value[props.index])
 
+    const isHighlighted = computed(() =>
+      otpInput.isFocused.value && otpInput.focusAll.value && !slot.value?.isActive
+    )
+
     useRender(() => {
       if (!slot.value) return (<></>)
 
       return (
         <VField
-          focused={ (otpInput.isFocused.value && otpInput.focusAll.value) || slot.value.isActive }
+          focused={ slot.value.isActive || isHighlighted.value }
+          class={{ 'v-otp-input__field--highlighted': isHighlighted.value }}
           data-otp-index={ props.index }
           onClick={ () => otpInput.focusAt(props.index) }
         >
