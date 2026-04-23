@@ -116,10 +116,17 @@ export function useActivator (
     onMouseenter: (e: MouseEvent) => {
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (props.target === 'cursor') {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       runOpenDelay()
+    },
+    onMousemove: (e: MouseEvent) => {
+      cursorTarget.value = [e.clientX, e.clientY]
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
+      if (props.target === 'cursor') isFocused = false
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
@@ -148,6 +155,9 @@ export function useActivator (
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
       events.onMouseleave = availableEvents.onMouseleave
+      if (props.target === 'cursor' && !openOnClick.value) {
+        events.onMousemove = availableEvents.onMousemove
+      }
     }
     if (openOnFocus.value) {
       events.onFocus = availableEvents.onFocus
