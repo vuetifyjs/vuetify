@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -173,6 +173,43 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         model.value = [value]
       }
     }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        return
+      }
+
+      e.preventDefault()
+
+      let newValue
+
+      if (e.key === 'ArrowLeft') {
+        newValue = [adapter.addDays(model.value[0], -1)]
+      }
+
+      if (e.key === 'ArrowRight') {
+        newValue = [adapter.addDays(model.value[0], 1)]
+      }
+
+      if (e.key === 'ArrowUp') {
+        newValue = [adapter.addDays(model.value[0], -7)]
+      }
+
+      if (e.key === 'ArrowDown') {
+        newValue = [adapter.addDays(model.value[0], 7)]
+      }
+
+      if (!newValue) return
+
+      model.value = newValue
+
+      nextTick(() => {
+        const el = daysRef.value?.querySelector(`[data-v-date="${adapter.toISO(newValue[0])}"] > [type="button"]`)
+
+        el?.focus()
+      })
+    }
+
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
@@ -247,6 +284,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ref={ daysRef }
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
+            onKeydown={ onKeyDown }
           >
             { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
