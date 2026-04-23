@@ -126,6 +126,7 @@ export function useActivator (
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
+      if (props.target === 'cursor') isFocused = false
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
