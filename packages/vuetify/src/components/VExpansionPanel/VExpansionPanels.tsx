@@ -125,7 +125,6 @@ export const VExpansionPanels = genericComponent<new <TModel>(
         style={[
           roundedStyles.value,
           {
-            '--v-expansion-panels-outer-radius': roundedStyles.value.borderRadius,
             '--v-expansion-panels-inner-radius': convertToUnit(innerRounded.value),
             gap: props.gap ? convertToUnit(props.gap) : undefined,
           },
