@@ -150,7 +150,8 @@
     justify-content: space-between
 
     @media (prefers-reduced-motion: no-preference)
-      transition: .3s min-height settings.$standard-easing
+      transition: .3s settings.$standard-easing
+      transition-property: min-height, border-radius
 
     @include tools.states('.v-expansion-panel-title__overlay', false)
 
