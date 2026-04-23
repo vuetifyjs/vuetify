@@ -32,23 +32,26 @@ Here we display a list of settings that could be applied within an application.
 | Component | Description |
 | - | - |
 | [v-otp-input](/api/v-otp-input/) | Primary Component |
+| [v-otp-field](/api/v-otp-field/) | Sub-component used to render an individual OTP character field |
+| [v-otp-group](/api/v-otp-group/) | Sub-component used to group fields together, with optional merged styling |
+| [v-otp-separator](/api/v-otp-separator/) | Sub-component used to display a visual separator between fields or groups |
 
 <ApiInline hide-links />
 
 ## Anatomy
 
-The `v-otp-input` component is a collection of [v-field](/api/v-field/) components that combine to create a single input.
+The `v-otp-input` component uses a single hidden input element for keyboard interaction, and renders visual [v-field](/api/v-field/) components for each character slot.
 
 ![Otp input Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-anatomy.png "OTP input Anatomy")
 
 | Element / Area | Description |
 | - | - |
-| 1. Container | The OTP input container holds a number of `v-field` components  |
-| 2. Field | The `v-field` component is used to create a single input field |
+| 1. Container | The OTP input container holds the visual fields and the hidden input element  |
+| 2. Field | A `v-field` component representing a single character slot |
 
 ## Guide
 
-The `v-otp-input` component is a collection of `v-field` components that combine to create a single input. It is used to validate a one-time password (OTP) that is sent to the user via email or SMS.
+The `v-otp-input` component is used to validate a one-time password (OTP) that is sent to the user via email or SMS. It renders a configurable number of character fields and handles keyboard navigation, paste, and autofill automatically.
 
 The following code snippet is an example of a basic `v-otp-input` component.
 
@@ -96,6 +99,24 @@ The `loader` prop displays a loader when the `v-otp-input` component is in a loa
 
 <ExamplesExample file="v-otp-input/prop-loader" />
 
+#### Merged
+
+The `merged` prop renders all fields in a single connected group with shared elevation and border radius. Fields are joined visually without gaps between them.
+
+<ExamplesExample file="v-otp-input/prop-merged" />
+
+#### Pattern
+
+The `pattern` prop restricts which characters are accepted. It supports preset values (`numeric`, `alpha`, `alphanumeric`) or a custom `RegExp`. When `type="number"` is set, the pattern defaults to `numeric` automatically.
+
+<ExamplesExample file="v-otp-input/prop-pattern" />
+
+### Slots
+
+#### Divider
+
+The `divider` slot allows you to customize the separator content between fields. It receives the divider `index` as a slot prop. You can also use the `divider` string prop for simple text separators.
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-otp-input` component.
@@ -118,8 +139,14 @@ The following example is a detailed example of a `v-otp-input` component used to
 
 <ExamplesExample file="v-otp-input/misc-verify" />
 
-### Divider
+### Dividers
 
-The following example is a detailed example of a `v-otp-input` component used with a divider.
+Using the `divider` prop or the `#divider` slot, you can add visual separators between each field. The slot variant supports any content, such as icons.
 
 <ExamplesExample file="v-otp-input/misc-divider" />
+
+### Custom layout
+
+Using the `v-otp-field`, `v-otp-group`, and `v-otp-separator` sub-components, you can build custom layouts. Groups can be individually merged, and separators accept any content through their default slot.
+
+<ExamplesExample file="v-otp-input/misc-custom-layout" />
