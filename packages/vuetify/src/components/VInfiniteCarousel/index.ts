@@ -1,0 +1,1 @@
+export { VInfiniteCarousel } from './VInfiniteCarousel'
