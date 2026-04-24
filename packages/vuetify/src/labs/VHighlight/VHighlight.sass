@@ -1,0 +1,10 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-highlight
+    &__mark
+      background: $highlight-mark-background
+      border-radius: $highlight-mark-border-radius
+      color: $highlight-mark-color

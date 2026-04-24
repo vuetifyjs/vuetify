@@ -15,12 +15,13 @@ import { VMenu } from '@/components/VMenu'
 import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useScrolling } from './useScrolling'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { useAutocomplete } from '@/composables/autocomplete'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -617,7 +618,7 @@ export const VSelect = genericComponent<new <
                                   ),
                                   title: () => {
                                     return search.value
-                                      ? highlightResult('v-select', item.title, getMatches(item)?.title)
+                                      ? <VHighlight text={ item.title } matches={ getMatches(item)?.title } />
                                       : item.title
                                   },
                                 }}
