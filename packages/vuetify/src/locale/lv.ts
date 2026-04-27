@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'līdz',
   },
+  monthPicker: {
+    title: 'Izvēlieties mēnesi',
+    itemsSelected: '{0} izvēlēts',
+    header: 'Ievadiet mēnesi',
+    range: {
+      title: 'Ievadiet mēnešus',
+    },
+    ariaLabel: {
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectYear: 'Izvēlieties gadu',
+      currentMonth: 'Šis mēnesis, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
     range: {

@@ -1,0 +1,21 @@
+{
+  "props": {
+    "allowedMonths": "Restricts which months can be selected. Accepts an array of month numbers (0-11) or a function that receives a month number and returns a boolean.",
+    "min": "Minimum selectable date in `YYYY-MM` format.",
+    "max": "Maximum selectable date in `YYYY-MM` format.",
+    "modelValue": "The selected month in `YYYY-MM` format, or null if no month is selected. When `multiple` is set, expects an array of strings.",
+    "monthsColumns": "Number of columns to use when displaying months in grid view. When set to `1`, switches to list view.",
+    "multiple": "Allows multiple month selections. When set to `true`, enables multi-select. When set to `'range'`, enables range selection where the first and last selected months define the range boundaries.",
+    "selectedIcon": "Icon to display next to selected months in list view.",
+    "reverseTransition": "The transition used when changing year into the past",
+    "title": "Specify a title text for the component.",
+    "transition": "The transition used when changing year into the future",
+    "yearsColumns": "Number of columns to use when displaying years in year selection view."
+  },
+  "slots": {
+    "header": "Slot for customizing the header area of the picker.",
+    "title": "Slot for customizing the title area of the picker.",
+    "actions": "Slot for adding action buttons at the bottom of the picker.",
+    "month": "Slot for customizing the rendering of individual month items."
+  }
+}

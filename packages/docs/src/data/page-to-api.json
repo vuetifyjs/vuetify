@@ -122,6 +122,7 @@
   "components/menus": ["VMenu"],
   "components/navigation-drawers": ["VNavigationDrawer"],
   "components/no-ssr": ["VNoSsr"],
+  "components/month-pickers": ["VMonthPicker"],
   "components/number-inputs": ["VNumberInput"],
   "components/otp-input": ["VOtpInput"],
   "components/overflow-btns": ["VOverflowBtn"],

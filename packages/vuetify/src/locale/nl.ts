@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'tot',
   },
+  monthPicker: {
+    title: 'Selecteer maand',
+    itemsSelected: '{0} geselecteerd',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maanden in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectYear: 'Selecteer jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
     range: {

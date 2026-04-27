@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Изберете месец',
+    itemsSelected: '{0} избрани',
+    header: 'Въвеждане на месец',
+    range: {
+      title: 'Въвеждане на месеци',
+    },
+    ariaLabel: {
+      previousYear: 'Предишна година',
+      nextYear: 'Следваща година',
+      selectYear: 'Изберете година',
+      currentMonth: 'Текущ месец, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} избрани',
     range: {
