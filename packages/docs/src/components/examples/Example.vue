@@ -98,9 +98,9 @@
         </v-theme-provider>
       </div>
       <new-in-chip
-        v-if="props.newIn"
-        :text="t('new-in', { version: props.newIn })"
-        :to="rpath(`/getting-started/release-notes/?version=v${props.newIn}`)"
+        v-if="resolvedNewIn"
+        :text="t('new-in', { version: resolvedNewIn })"
+        :to="rpath(`/getting-started/release-notes/?version=v${resolvedNewIn}`)"
         class="text-mono rounded-t-0 rounded-b position-absolute bottom-0"
         color="success"
         size="x-small"
@@ -117,6 +117,7 @@
 
   // Utilities
   import { getExample } from 'virtual:examples'
+  import newInData from '@/data/new-in.json'
 
   // Types
   import type { Component } from 'vue'
@@ -132,9 +133,16 @@
       type: String,
       required: true,
     },
-    newIn: String,
     open: Boolean,
     preview: Boolean,
+  })
+
+  const resolvedNewIn = computed(() => {
+    const [componentPath, exampleName] = props.file.split('/')
+    const componentName = componentPath.split('-').map(part =>
+      part.charAt(0).toUpperCase() + part.slice(1)
+    ).join('') as keyof typeof newInData
+    return (newInData as any)[componentName]?.examples?.[exampleName] ?? null
   })
 
   function parseTemplate (target: string, template: string) {
