@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandaag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',

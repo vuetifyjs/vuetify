@@ -69,6 +69,10 @@ export default {
     moreEvents: 'Daugiau {0}',
     today: 'Šiandien',
   },
+  heatmap: {
+    less: 'Mažiau',
+    more: 'Daugiau',
+  },
   input: {
     clear: 'Išvalyti {0}',
     prependAction: '{0} pridėtas veiksmas',

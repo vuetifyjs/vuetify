@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} nữa',
     today: 'Hôm nay',
   },
+  heatmap: {
+    less: 'Ít hơn',
+    more: 'Nhiều hơn',
+  },
   input: {
     clear: 'Xóa {0}',
     prependAction: 'Hành động trước {0}',

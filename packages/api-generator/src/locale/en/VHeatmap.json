@@ -1,0 +1,27 @@
+{
+  "props": {
+    "cellSize": "Sets size of each cell. A single value sets both width and height. Accepts `[width, height]` tuple.",
+    "columns": "Explicit list of column keys. When omitted, columns are derived from the items.",
+    "gap": "Spacing between cells.",
+    "groupBy": "Property name or function used to split items into separate column groups (e.g. by month).",
+    "groupGap": "Spacing between column groups. Defaults to one cell width plus `gap`.",
+    "hideColumnHeaders": "Hides the column labels.",
+    "hideRowHeaders": "Hides the row labels.",
+    "legend": "Controls the legend rendered below the grid. Accepts boolean or an object allowing you to configure labels and legend cell size.",
+    "hover": "Enables the hover interaction that scales a cell when hovered.",
+    "hoverScale": "Controls the cell's scale factor applied on hover.",
+    "items": "Data items to render.",
+    "itemColumn": "Property name or function that returns the column key of an item.",
+    "itemProps": "Additional props to pass to each `v-heatmap-cell`.",
+    "itemRow": "Property name or function that returns the row key of an item.",
+    "itemValue": "Property name or function that returns the numeric value of an item, used for cell color matching.",
+    "rows": "Explicit list of row keys. When omitted, rows are derived from the items in insertion order.",
+    "thresholds": "Either a list of `{ min, color }` thresholds (highest matching wins) or a linear scale `{ from, to }` that interpolates cell colors between two stops using `color-mix`."
+  },
+  "slots": {
+    "cell": "Slot used to render custom content inside each cell.",
+    "group-header": "Slot used to customize the group label shown above each column group.",
+    "legend": "Slot used to fully override the legend.",
+    "row-header": "Slot used to customize the row label shown on the left."
+  }
+}

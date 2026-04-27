@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} tane daha',
     today: 'Bugün',
   },
+  heatmap: {
+    less: 'Az',
+    more: 'Çok',
+  },
   input: {
     clear: '{0} temizle',
     prependAction: '{0} ön işlem',

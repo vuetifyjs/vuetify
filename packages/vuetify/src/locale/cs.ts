@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} dalších',
     today: 'Dnes',
   },
+  heatmap: {
+    less: 'Méně',
+    more: 'Více',
+  },
   input: {
     clear: 'Vymazat {0}',
     prependAction: '{0} předřazená akce',

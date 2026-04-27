@@ -69,6 +69,10 @@ export default {
     moreEvents: 'încă {0}',
     today: 'Today',
   },
+  heatmap: {
+    less: 'Mai puțin',
+    more: 'Mai mult',
+  },
   input: {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
