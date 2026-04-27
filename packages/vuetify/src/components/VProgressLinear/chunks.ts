@@ -6,8 +6,8 @@ import { clamp, convertToUnit, propsFactory } from '@/util'
 import type { MaybeRefOrGetter } from 'vue'
 
 export interface ChunksProps {
-  chunkCount: number | string
-  chunkWidth: number | string
+  chunkCount: number | string | null
+  chunkWidth: number | string | null
   chunkGap: number | string
 }
 
@@ -72,8 +72,11 @@ export function useChunks (
 
     const gapRelativeSize = 100 * chunkGap.value / containerSize
     const chunkRelativeSize = 100 * (chunkWidth.value + chunkGap.value) / containerSize
-    const filledChunks = Math.floor((val + gapRelativeSize) / chunkRelativeSize)
-    return clamp(0, filledChunks * chunkRelativeSize - gapRelativeSize / 2, 100)
+
+    // low-effort workaround to floating-point rounding in the division
+    const filledChunks = Math.floor((val + gapRelativeSize) / chunkRelativeSize + 1e-9)
+
+    return clamp(filledChunks * chunkRelativeSize - gapRelativeSize / 2, 0, 100)
   }
 
   return {
