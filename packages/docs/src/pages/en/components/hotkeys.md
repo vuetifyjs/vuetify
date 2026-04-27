@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Hotkeys
   title: Hotkey component
@@ -20,8 +19,6 @@ features:
 The `v-hotkey` component renders keyboard shortcuts in a visually consistent and accessible way. It handles complex key combination parsing, platform-specific differences (Mac vs PC), and provides multiple display modes for different design needs.
 
 <PageFeatures />
-
-<DocIntroduced version="3.11.0" />
 
 ## Usage
 
@@ -53,7 +50,7 @@ The component provides several props to customize how keyboard shortcuts are dis
 
 #### Keys
 
-The **keys** prop accepts a string representing keyboard shortcuts in various formats:
+The **keys** prop accepts a string representing keyboard shortcuts in various formats. See [Hotkeys](/features/hotkey/#key-combination-syntax) for detailed parsing rules.
 
 <ExamplesExample file="v-hotkey/prop-keys" />
 

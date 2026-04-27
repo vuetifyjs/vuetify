@@ -37,6 +37,18 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      {
+        "title": "css-utilities",
+        "subfolder": "features",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "overview",
+          "unocss-vuetify-preset",
+          "unocss-tailwind-preset",
+          "tailwindcss"
+        ]
+      },
       "dates",
       "display-and-platform",
       "global-configuration",
@@ -54,7 +66,9 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -276,6 +290,10 @@
       },
       {
         "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "progress",
         "subfolder": "components"
       },
       {

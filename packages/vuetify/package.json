@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.12.0",
+  "version": "4.0.6",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -60,9 +60,28 @@
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
+      "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/main.css"
     },
-    "./styles/*": "./lib/styles/*",
+    "./styles/core": {
+      "sass": "./lib/styles/core.scss",
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/core.css"
+    },
+    "./styles/colors": {
+      "sass": "./lib/styles/colors.scss",
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/colors.css"
+    },
+    "./styles/utilities": {
+      "sass": "./lib/styles/utilities.scss",
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/utilities.css"
+    },
+    "./styles/*": {
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/*"
+    },
     "./framework": "./lib/framework.js",
     "./blueprints": "./lib/blueprints/index.js",
     "./blueprints/*": "./lib/blueprints/*.js",
@@ -148,6 +167,7 @@
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
+    "@vitest/eslint-plugin": "^1.6.13",
     "@vitest/ui": "^4.0.13",
     "@vizzly-testing/cli": "^0.22.2",
     "@vizzly-testing/vitest": "^0.1.1",
@@ -167,7 +187,6 @@
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.19",
     "dotenv": "^16.5.0",
-    "eslint-plugin-vitest": "0.5.4",
     "expect": "^30.2.0",
     "fast-glob": "^3.3.3",
     "identity-obj-proxy": "^3.0.0",

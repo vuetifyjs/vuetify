@@ -14,7 +14,7 @@
 
       <v-main>
         <v-container>
-          <h1>Main Content</h1>
+          <h1 class="my-0">Main Content</h1>
         </v-container>
       </v-main>
     </v-app>

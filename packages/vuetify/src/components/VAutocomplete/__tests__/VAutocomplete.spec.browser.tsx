@@ -35,7 +35,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VAutocomplete>

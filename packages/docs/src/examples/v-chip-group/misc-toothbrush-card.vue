@@ -4,11 +4,11 @@
     max-width="400"
   >
     <v-card-title class="d-flex">
-      <h2 class="text-h4">Toothbrush</h2>
+      <h2 class="text-headline-large my-0">Toothbrush</h2>
 
       <v-spacer></v-spacer>
 
-      <span class="text-h6">$4.99</span>
+      <span class="text-title-large">$4.99</span>
     </v-card-title>
 
     <v-card-text>

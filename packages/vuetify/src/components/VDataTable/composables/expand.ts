@@ -48,7 +48,7 @@ export function provideExpanded (props: ExpandProps) {
       const item = [...expanded.value].find(x => toRaw(x) === rawValue)!
       newExpanded.delete(item)
     } else {
-      newExpanded.add(rawValue)
+      newExpanded.add(item.value)
     }
 
     expanded.value = newExpanded

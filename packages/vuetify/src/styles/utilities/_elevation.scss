@@ -4,14 +4,21 @@
 @use '../settings';
 
 @if (settings.$utilities != false and map.get(settings.$misc, 'elevation') != false and list.length(settings.$utilities) > 0) {
-  @include tools.layer('utilities') {
-    $z: 24;
-    @while $z >= 0 {
-      .elevation-#{$z} {
-        @include tools.elevation($z, $important: true);
-      }
+  @property --v-elevation-overlay {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+  }
 
-      $z: $z - 1;
+  @include tools.layer('utilities.helpers') {
+    @for $z from 0 through 5 {
+      .elevation-#{$z} {
+        @include tools.elevation($z);
+      }
+    }
+
+    .elevation-overlay {
+      background-image: linear-gradient(var(--v-elevation-overlay), var(--v-elevation-overlay));
     }
   }
 }

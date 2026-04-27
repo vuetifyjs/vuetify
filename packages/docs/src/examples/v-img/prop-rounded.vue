@@ -1,5 +1,5 @@
 <template>
-  <v-row align="stretch">
+  <v-row class="align-stretch">
     <v-col cols="12" sm="6">
       <v-img
         color="red"

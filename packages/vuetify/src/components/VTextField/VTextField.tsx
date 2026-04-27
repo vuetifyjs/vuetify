@@ -195,6 +195,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,

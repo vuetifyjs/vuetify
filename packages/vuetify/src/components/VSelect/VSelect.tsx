@@ -74,6 +74,7 @@ export const makeSelectProps = propsFactory({
     type: Object as PropType<VList['$props']>,
   },
   menu: Boolean,
+  menuElevation: [Number, String],
   menuIcon: {
     type: IconValue,
     default: '$dropdown',
@@ -126,9 +127,9 @@ export const VSelect = genericComponent<new <
     'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    selection: { item: ListItem<Item>, index: number }
+    item: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: Item, internalItem: ListItem<Item>, index: number }
     subheader: { props: Record<string, unknown>, index: number }
     divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
@@ -368,9 +369,29 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function getSelectedIndex () {
+      return displayItems.value.findIndex(
+        item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
+      )
+    }
+    function getSelectedFocusableIndex () {
+      if (!model.value.length) return -1
+      const comparator = props.valueComparator || deepEqual
+      let focusableIndex = 0
+      for (const item of displayItems.value) {
+        const isSelected = model.value.some(s => comparator(s.value, item.value))
+        if (isSelected) return item.props.disabled ? -1 : focusableIndex
+        if (!item.props.disabled) focusableIndex++
+      }
+      return -1
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (listRef.value && isFocused.value) {
+        const index = getSelectedFocusableIndex()
+        listRef.value.focus(index >= 0 ? index : 'first')
       }
     }
     function onAfterLeave () {
@@ -381,6 +402,14 @@ export const VSelect = genericComponent<new <
     }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+    }
+    function onFocusout (e: FocusEvent) {
+      if (
+        !vTextFieldRef.value?.$el.contains(e.relatedTarget as Node) &&
+        !(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
+      ) {
+        isFocused.value = false
+      }
     }
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
@@ -396,9 +425,7 @@ export const VSelect = genericComponent<new <
 
     watch(menu, () => {
       if (!props.hideSelected && menu.value && model.value.length) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
-        )
+        const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
@@ -502,7 +529,9 @@ export const VSelect = genericComponent<new <
                   { ...computedMenuProps.value }
                 >
                   <VSheet
+                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
+                    onFocusout={ onFocusout }
                     onKeydown={ onMenuKeydown }
                   >
                     { slots['menu-header'] && (
@@ -557,7 +586,8 @@ export const VSelect = genericComponent<new <
                             }
 
                             return slots.item?.({
-                              item,
+                              item: item.raw,
+                              internalItem: item,
                               index,
                               props: itemProps,
                             }) ?? (
@@ -638,8 +668,8 @@ export const VSelect = genericComponent<new <
                   const slotContent = hasSlot
                     ? ensureValidVNode(
                       hasChips
-                        ? slots.chip!({ item, index, props: slotProps })
-                        : slots.selection!({ item, index })
+                        ? slots.chip!({ item: item.raw, internalItem: item, index, props: slotProps })
+                        : slots.selection!({ item: item.raw, internalItem: item, index })
                     )
                     : undefined
 

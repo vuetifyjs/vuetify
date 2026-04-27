@@ -126,9 +126,9 @@ export const VColorPicker = defineComponent({
 
     provideDefaults({
       VSlider: {
-        color: undefined,
-        trackColor: undefined,
-        trackFillColor: undefined,
+        color: null,
+        trackColor: null,
+        trackFillColor: null,
       },
     })
 

@@ -1,8 +1,8 @@
 {
+  "description": "Displays a list of years for the `v-date-picker` component.",
   "props": {
     "max": "Sets the maximum date of the month.",
     "min": "Sets the minimum date of the month.",
-    "year": "Sets the year.",
     "allowedYears": "Restricts which years can be selected."
   },
   "slots": {

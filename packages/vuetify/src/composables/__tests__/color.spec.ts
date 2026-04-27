@@ -19,8 +19,7 @@ describe('color.ts', () => {
       [{ bg: '' }, [[], {}]],
       [{ bg: 'primary' }, [['bg-primary'], {}]],
       [{ bg: 'bg-primary' }, [['bg-primary'], {}]],
-      [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF', color: '#fff', caretColor: '#fff' }]],
-      // [{ bg: '#FF00FF' }, [[], { backgroundColor: '#FF00FF' }]],
+      [{ bg: '#FF00FF' }, [['v-theme-on-dark'], { backgroundColor: '#FF00FF' }]],
     ])('should return correct color classes and styles', (value, [classes, styles]) => {
       const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => value.bg)
 
@@ -35,7 +34,7 @@ describe('color.ts', () => {
       [{ background: '' }, [[], {}]],
       [{ background: 'primary' }, [['bg-primary'], {}]],
       [{ background: 'bg-primary' }, [['bg-primary'], {}]],
-      [{ background: '#FF00FF' }, [[], { backgroundColor: '#FF00FF', color: '#fff', caretColor: '#fff' }]],
+      [{ background: '#FF00FF' }, [['v-theme-on-dark'], { backgroundColor: '#FF00FF' }]],
       [{ text: null }, [[], {}]],
       [{ text: '' }, [[], {}]],
       [{ text: 'primary' }, [['text-primary'], {}]],

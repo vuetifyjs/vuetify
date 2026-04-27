@@ -4,7 +4,7 @@
     "src",
     "dev",
   ],
-  "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx"],
+  "exclude": ["**/*.spec.cy.ts", "**/*.spec.cy.tsx", "dev/dist/**/*"],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],

@@ -149,12 +149,13 @@ describe('VDivider', () => {
             class="ma-2 pa-3"
             style="height: 370px; width: 940px; outline: 1px solid currentColor"
           >
-            <VRow class="align-content-start">
+            <VRow class="align-content-start" gap={[12, 24]}>
               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
                 <>
                   { idx % 4 !== 0 && (
                     <VDivider
                       vertical
+                      style="margin: -12px -6px -12px -7px"
                       class="opacity-100 text-red"
                     ></VDivider>
                   )}
@@ -168,7 +169,7 @@ describe('VDivider', () => {
         </>
       ))
       expect(screen.getAllByCSS('.v-divider')).toHaveLength(6)
-      // 80px + 2 * 12px (v-col)
+      // 80px + 2 * 12px (v-col + negative margin)
       for (const item of screen.getAllByCSS('.v-divider')) {
         expect(item).toHaveStyle({ height: '104px' })
       }

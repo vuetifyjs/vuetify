@@ -86,7 +86,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
 
-    const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
+    const { pageCount, setItemsPerPage, prevPage, nextPage, setPage } = providePagination({ page, itemsPerPage, itemsLength })
 
     const { flatItems } = useGroupedItems(items, groupBy, opened, () => !!slots['group-summary'])
 
@@ -128,6 +128,9 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       pageCount: pageCount.value,
       toggleSort,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
       isSelected,

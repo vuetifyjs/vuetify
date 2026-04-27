@@ -11,7 +11,7 @@
             icon="mdi-magnify"
             size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 1
           </h2>
         </v-card-title>
@@ -28,7 +28,7 @@
     >
       <v-card>
         <v-card-title class="bg-amber-lighten-1 justify-end">
-          <h2 class="me-4 font-weight-light">
+          <h2 class="mt-0 me-4 font-weight-light">
             Title 2
           </h2>
           <v-icon
@@ -53,7 +53,7 @@
             icon="mdi-email-outline"
             size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 3
           </h2>
         </v-card-title>
@@ -70,7 +70,7 @@
     >
       <v-card>
         <v-card-title class="bg-red-lighten-1 justify-end">
-          <h2 class="me-4 font-weight-light">
+          <h2 class="mt-0 me-4 font-weight-light">
             Title 4
           </h2>
           <v-icon
@@ -95,7 +95,7 @@
             icon="mdi-phone-in-talk"
             size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 5
           </h2>
         </v-card-title>

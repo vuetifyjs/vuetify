@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Treeview
   title: Treeview component
@@ -19,8 +18,6 @@ features:
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
 <PageFeatures />
-
-<DocIntroduced version="3.9.0" />
 
 ## Usage
 

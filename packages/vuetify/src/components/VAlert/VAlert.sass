@@ -84,6 +84,12 @@
     grid-area: content
     overflow: hidden
 
+    > :first-child
+      margin-top: 0
+
+    > :last-child
+      margin-bottom: 0
+
   .v-alert__append,
   .v-alert__close
     margin-inline-start: $alert-append-margin-inline-start
@@ -145,15 +151,15 @@
     word-break: $alert-title-word-break
     word-wrap: $alert-title-word-wrap
 
-@media (forced-colors: active)
-  .v-alert
-    &:not(&--variant-text, &--variant-plain)
-      border-style: solid
+  @media (forced-colors: active)
+    .v-alert
+      &:not(&--variant-text, &--variant-plain)
+        border-style: solid
 
-    &--variant-outlined,
-    &--variant-tonal
-      border-width: medium
+      &--variant-outlined,
+      &--variant-tonal
+        border-width: medium
 
-    &--variant-elevated,
-    &--variant-flat
-      border-width: thick
+      &--variant-elevated,
+      &--variant-flat
+        border-width: thick

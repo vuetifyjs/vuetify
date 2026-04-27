@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Icon buttons
   title: Icon button component
@@ -21,12 +20,6 @@ features:
 The `v-icon-btn` component is a lightweight button component for iconography.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.8.0](/getting-started/release-notes/?version=v3.8.0)
-
-:::
 
 ## Installation
 
