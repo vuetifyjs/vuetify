@@ -16,11 +16,12 @@ import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -674,7 +675,7 @@ export const VCombobox = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                                  : <VHighlight text={ item.title } matches={ getMatches(item)?.title } />
                               },
                             }}
                           </VListItem>
