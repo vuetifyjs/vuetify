@@ -19,7 +19,7 @@ const NUMERAL_ZEROS = [
   0xFF10, // Fullwidth
 ]
 
-export function normalizeDigits (str: string): string {
+function normalizeDigits (str: string): string {
   return str.replace(/[^\x20-\x7F]/g, char => {
     const code = char.codePointAt(0)!
     for (const zero of NUMERAL_ZEROS) {
@@ -31,30 +31,33 @@ export function normalizeDigits (str: string): string {
   })
 }
 
-export interface FormatNumberOptions {
+interface FormatNumberOptions {
   locale: string
   precision?: number | null
   minFractionDigits?: number | null
   useGrouping: Intl.NumberFormatOptions['useGrouping']
-  localeDecimalSeparator: string
-  localeGroupSeparator: string
   decimalSeparator: string
   groupSeparator: string
 }
 
 export function formatNumber (val: number, options: FormatNumberOptions): string {
   const { precision, minFractionDigits } = options
-  const formatted = new Intl.NumberFormat(options.locale, {
-    minimumFractionDigits: minFractionDigits && precision != null
-      ? Math.min(minFractionDigits, precision)
-      : (minFractionDigits ?? precision ?? undefined),
-    maximumFractionDigits: precision ?? undefined,
-    useGrouping: options.useGrouping,
-  }).format(val)
+  const formatter = new Intl.NumberFormat(
+    options.locale, {
+      minimumFractionDigits: minFractionDigits && precision != null
+        ? Math.min(minFractionDigits, precision)
+        : (minFractionDigits ?? precision ?? undefined),
+      maximumFractionDigits: precision ?? undefined,
+      useGrouping: options.useGrouping,
+    })
 
-  return normalizeDigits(formatted)
-    .replaceAll(options.localeGroupSeparator, options.groupSeparator)
-    .replace(options.localeDecimalSeparator, options.decimalSeparator)
+  return formatter.formatToParts(val)
+    .map(p => {
+      if (p.type === 'group') return options.groupSeparator
+      if (p.type === 'decimal') return options.decimalSeparator
+      return normalizeDigits(p.value)
+    })
+    .join('')
 }
 
 export function parseNumber (

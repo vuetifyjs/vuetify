@@ -3,7 +3,7 @@ import { escapeForRegex, extractNumber } from '@/util'
 
 type GroupingOption = 'always' | 'auto' | 'min2' | boolean
 
-export interface GroupedInputOptions {
+interface GroupedInputOptions {
   groupSeparator: string
   decimalSeparator: string
   precision: number | null
@@ -11,12 +11,12 @@ export interface GroupedInputOptions {
   locale: string
 }
 
-export interface InputResult {
+interface InputResult {
   text: string
   cursor: number
 }
 
-export function stripGrouping (text: string, groupSeparator: string): string {
+function stripGrouping (text: string, groupSeparator: string): string {
   return text.replaceAll(groupSeparator, '')
 }
 
@@ -34,7 +34,7 @@ function formatWithoutLocale (digits: string, groupSeparator: string, grouping: 
   return groups.join(groupSeparator)
 }
 
-export function addGrouping (
+function addGrouping (
   raw: string,
   groupSeparator: string,
   decimalSeparator: string,
@@ -69,7 +69,7 @@ export function addGrouping (
 }
 
 /** Count non-separator characters before displayPosition */
-export function toLogicalPosition (text: string, groupSeparator: string, displayPosition: number): number {
+function toLogicalPosition (text: string, groupSeparator: string, displayPosition: number): number {
   let logical = 0
   for (let i = 0; i < displayPosition && i < text.length; i++) {
     if (text[i] !== groupSeparator) logical++
@@ -77,7 +77,7 @@ export function toLogicalPosition (text: string, groupSeparator: string, display
   return logical
 }
 
-export function toDisplayPosition (text: string, groupSeparator: string, logicalPosition: number): number {
+function toDisplayPosition (text: string, groupSeparator: string, logicalPosition: number): number {
   let logical = 0
   for (let i = 0; i <= text.length; i++) {
     if (logical === logicalPosition) return i

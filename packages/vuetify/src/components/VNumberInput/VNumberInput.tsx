@@ -110,6 +110,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       decimalSeparator: decimalSeparatorFromLocale,
       numericGroupSeparator: numericGroupSeparatorFromLocale,
     } = useLocale()
+
     const decimalSeparator = computed(() => props.decimalSeparator?.[0] || decimalSeparatorFromLocale.value)
     const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
 
@@ -124,8 +125,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         precision,
         minFractionDigits: props.minFractionDigits,
         useGrouping: props.grouping,
-        localeDecimalSeparator: decimalSeparatorFromLocale.value,
-        localeGroupSeparator: numericGroupSeparatorFromLocale.value,
         decimalSeparator: decimalSeparator.value,
         groupSeparator: groupSeparator.value,
       })

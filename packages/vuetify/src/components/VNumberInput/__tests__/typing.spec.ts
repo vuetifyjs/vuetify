@@ -1,14 +1,12 @@
-import {
-  addGrouping,
-  processGroupedInput,
-  processPlainInput,
-  stripGrouping,
-  toDisplayPosition,
-  toLogicalPosition,
-} from '../typing'
+import { processGroupedInput, processPlainInput } from '../typing'
 
-// Types
-import type { GroupedInputOptions } from '../typing'
+interface GroupedInputOptions {
+  groupSeparator: string
+  decimalSeparator: string
+  precision: number | null
+  grouping: 'always' | 'auto' | 'min2' | boolean
+  locale: string
+}
 
 const defaults: GroupedInputOptions = {
   groupSeparator: ',',
@@ -23,99 +21,6 @@ function opts (overrides: Partial<GroupedInputOptions> = {}): GroupedInputOption
 }
 
 describe('typing', () => {
-  describe('stripGrouping', () => {
-    it.each([
-      ['1,234', ',', '1234'],
-      ['1,234,567', ',', '1234567'],
-      ['-1,234', ',', '-1234'],
-      ['1.234.567', '.', '1234567'],
-      ['1234', ',', '1234'],
-      ['', ',', ''],
-      ['-1,234.56', ',', '-1234.56'],
-    ])('stripGrouping(%s, %s) → %s', (text, sep, expected) => {
-      expect(stripGrouping(text, sep)).toBe(expected)
-    })
-  })
-
-  describe('addGrouping', () => {
-    it.each([
-      ['1234', ',', '.', 'always', '1,234'],
-      ['12345', ',', '.', 'always', '12,345'],
-      ['123', ',', '.', 'always', '123'],
-      ['1234567', ',', '.', 'always', '1,234,567'],
-      ['-1234', ',', '.', 'always', '-1,234'],
-      ['-1234567', ',', '.', 'always', '-1,234,567'],
-      ['1234.56', ',', '.', 'always', '1,234.56'],
-      ['-1234567.89', ',', '.', 'always', '-1,234,567.89'],
-      ['12', ',', '.', 'always', '12'],
-      ['', ',', '.', 'always', ''],
-      ['-', ',', '.', 'always', '-'],
-      // min2: only group when > 4 digits
-      ['1234', ',', '.', 'min2', '1234'],
-      ['12345', ',', '.', 'min2', '12,345'],
-      // false: no grouping
-      ['1234567', ',', '.', false, '1234567'],
-      // true: same as always
-      ['1234', ',', '.', true, '1,234'],
-      // custom separators
-      ['1234,56', '.', ',', 'always', '1.234,56'],
-    ] as const)('addGrouping(%s, %s, %s, %s) → %s', (raw, groupSep, decSep, grouping, expected) => {
-      expect(addGrouping(raw, groupSep, decSep, grouping)).toBe(expected)
-    })
-
-    it.each([
-      // en-US: standard 3-digit groups
-      ['1234', ',', '.', 'always', 'en-US', '1,234'],
-      ['1234', ',', '.', 'auto', 'en-US', '1,234'],
-      ['1234', ',', '.', 'min2', 'en-US', '1234'],
-      ['12345', ',', '.', 'min2', 'en-US', '12,345'],
-      // hi-IN: 3-digit primary group, then 2-digit groups
-      ['1234567890', ',', '.', 'auto', 'hi-IN', '1,23,45,67,890'],
-      ['1234567890', ',', '.', 'always', 'hi-IN', '1,23,45,67,890'],
-      ['-1234567890.5', ',', '.', 'always', 'hi-IN', '-1,23,45,67,890.5'],
-      // custom separator with locale
-      ['1234567890', "'", '.', 'always', 'hi-IN', "1'23'45'67'890"],
-    ] as const)('addGrouping(%s, %s, %s, %s, %s) → %s', (raw, groupSep, decSep, grouping, locale, expected) => {
-      expect(addGrouping(raw, groupSep, decSep, grouping, locale)).toBe(expected)
-    })
-  })
-
-  describe('toLogicalPosition', () => {
-    // "1,234" positions: 0=before "1", 1=after "1", 2=after ",", 3=after "2", 4=after "3", 5=after "4"
-    it.each([
-      ['1,234', ',', 0, 0],
-      ['1,234', ',', 1, 1],
-      ['1,234', ',', 2, 1], // after comma → same as after "1"
-      ['1,234', ',', 3, 2],
-      ['1,234', ',', 4, 3],
-      ['1,234', ',', 5, 4],
-      ['1,234,567', ',', 5, 4],
-      ['1,234,567', ',', 6, 4], // after second comma
-      ['1,234,567', ',', 9, 7],
-      ['', ',', 0, 0],
-    ])('toLogicalPosition(%s, %s, %d) → %d', (text, sep, displayPos, expected) => {
-      expect(toLogicalPosition(text, sep, displayPos)).toBe(expected)
-    })
-  })
-
-  describe('toDisplayPosition', () => {
-    it.each([
-      ['1,234', ',', 0, 0],
-      ['1,234', ',', 1, 1],
-      ['1,234', ',', 2, 3], // logical 2 = after "12" = display 3 (skips comma)
-      ['1,234', ',', 3, 4],
-      ['1,234', ',', 4, 5],
-      ['12,345', ',', 2, 2],
-      ['12,345', ',', 3, 4],
-      ['1,234,567', ',', 1, 1],
-      ['1,234,567', ',', 4, 5],
-      ['1,234,567', ',', 7, 9],
-      ['', ',', 0, 0],
-    ])('toDisplayPosition(%s, %s, %d) → %d', (text, sep, logicalPos, expected) => {
-      expect(toDisplayPosition(text, sep, logicalPos)).toBe(expected)
-    })
-  })
-
   describe('processGroupedInput', () => {
     describe('insertText', () => {
       it('appends digit at end, triggers grouping', () => {
@@ -313,6 +218,15 @@ describe('typing', () => {
         const o = opts({ grouping: 'min2' })
         const result = processGroupedInput('insertText', '5', '1234', 4, 4, o)
         expect(result).toEqual({ text: '12,345', cursor: 6 })
+      })
+    })
+
+    describe('locale-specific grouping', () => {
+      it('uses Indian numbering system for hi-IN', () => {
+        // hi-IN: 3-digit primary group, then 2-digit groups
+        const o = opts({ locale: 'hi-IN' })
+        const result = processGroupedInput('insertFromPaste', '1234567890', '', 0, 0, o)
+        expect(result?.text).toBe('1,23,45,67,890')
       })
     })
   })
