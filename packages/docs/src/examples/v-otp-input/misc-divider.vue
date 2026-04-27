@@ -10,13 +10,26 @@
 
     <div class="text-title-small font-weight-light mb-3">Please enter the verification code sent to your mobile</div>
 
+    <h5 class="my-2">Text divider</h5>
     <v-otp-input
       v-model="otp"
-      class="mb-8"
+      class="mb-4"
       divider="•"
       length="4"
       variant="outlined"
     ></v-otp-input>
+
+    <h5 class="my-2">Icon divider (slot)</h5>
+    <v-otp-input
+      v-model="otp"
+      class="mb-8"
+      length="4"
+      variant="outlined"
+    >
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-otp-input>
 
     <div class="text-body-small">
       <v-btn

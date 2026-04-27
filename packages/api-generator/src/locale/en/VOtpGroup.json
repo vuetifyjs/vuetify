@@ -1,0 +1,5 @@
+{
+  "props": {
+    "merged": "Merges the fields within this group into a single visual block with shared elevation and border radius. Inherits from the root VOtpInput `merged` prop when not set."
+  }
+}

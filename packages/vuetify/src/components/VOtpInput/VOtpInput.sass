@@ -15,21 +15,141 @@
     .v-field
       height: 100%
 
+      &--variant-solo.v-field--focused .v-field__overlay,
+      &--variant-plain.v-field--focused .v-field__overlay
+        background-color: currentColor
+        opacity: calc(var(--v-theme-overlay-multiplier) * 0.12)
+
       .v-field__outline
         &__start,
         &__end
           flex: 1
 
-      input::placeholder
-        color: currentColor
-        opacity: var(--v-disabled-opacity)
+  .v-otp-input__field--highlighted
+    .v-field__outline
+      opacity: 0.5
 
-      &.v-field--focused
-        input::placeholder
-          opacity: 0
+    &.v-field--focused.v-field--variant-filled,
+    &.v-field--focused.v-field--variant-underlined
+      .v-field__outline::after
+        opacity: 0.5
 
-  .v-otp-input__divider
+    &.v-field--focused.v-field--variant-plain .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo-filled .v-field__overlay
+      opacity: calc(var(--v-theme-overlay-multiplier) * 0.04)
+
+    &.v-field--focused.v-field--variant-solo-inverted .v-field__overlay
+      opacity: 0.5
+
+  .v-otp-separator
+    display: flex
+    align-items: center
+    justify-content: center
     margin: $otp-input-divider-margin
+
+    &:has(> .v-icon)
+      margin: 0 -4px
+
+  .v-otp-group
+    display: contents
+
+    .v-field
+      flex: 1
+
+    &--merged
+      display: flex
+      gap: 0
+      align-items: center
+      height: 100%
+      border-radius: inherit
+
+      &:has(.v-field--variant-solo),
+      &:has(.v-field--variant-solo-filled),
+      &:has(.v-field--variant-solo-inverted)
+        @include tools.elevation(1)
+
+      .v-field
+        flex: 1
+        border-radius: 0
+        box-shadow: none
+
+        .v-field__outline__start,
+        .v-field__outline__end
+          border-radius: 0
+
+        &:not(:first-child)
+          margin-inline-start: -1px
+
+          .v-field__outline__start
+            border-inline-start-width: 0
+
+        &:hover
+          z-index: 1
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &.v-field--focused
+          z-index: 2
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &:first-child
+          border-start-start-radius: inherit
+          border-end-start-radius: inherit
+
+          .v-field__outline__start
+            border-start-start-radius: inherit
+            border-end-start-radius: inherit
+
+        &:last-child
+          border-start-end-radius: inherit
+          border-end-end-radius: inherit
+
+          .v-field__outline__end
+            border-start-end-radius: inherit
+            border-end-end-radius: inherit
+
+  .v-otp-input__input-wrapper
+    position: absolute
+    inset: 0
+    z-index: 10
+    pointer-events: none
+    overflow: hidden
+
+  .v-otp-input__input
+    position: absolute
+    inset: 0
+    width: 100%
+    height: 100%
+    opacity: 1
+    color: transparent
+    caret-color: transparent
+    background: transparent
+    border: none
+    outline: none
+    box-shadow: none
+    pointer-events: none
+    cursor: text
+
+  .v-otp-input:focus-within .v-otp-input__input
+    pointer-events: all
+    font-size: 64px
+    font-family: monospace
+    letter-spacing: -.5em
+    line-height: 1
+
+    &::selection
+      background: transparent
+      color: transparent
+
+    &:-webkit-autofill
+      background: transparent !important
+      color: transparent !important
+      -webkit-text-fill-color: transparent !important
+      box-shadow: none !important
 
   .v-otp-input__content
     align-items: center
@@ -37,7 +157,8 @@
     gap: $otp-input-content-gap
     padding: $otp-input-content-padding
     justify-content: center
-    max-width: $otp-input-content-max-width
+    width: $otp-input-content-max-width
+    max-width: 100%
     position: relative
     border-radius: inherit
 
@@ -50,26 +171,28 @@
         height: #{$otp-input-content-height + math.div($modifier, 2)}
 
   .v-otp-input__field
-    padding: 0
-    margin: 0
-    border-radius: 0
-    font: inherit
-    border-style: none
     color: inherit
-    background-color: transparent
     font-size: $otp-input-field-font-size
     height: 100%
-    outline: none
-    text-align: center
     width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
 
-    &[type=number]::-webkit-outer-spin-button,
-    &[type=number]::-webkit-inner-spin-button
-      -webkit-appearance: none
-      margin: 0
+  .v-otp-input__placeholder
+    color: currentColor
+    opacity: var(--v-disabled-opacity)
 
-    &[type=number]
-      -moz-appearance: textfield
+  .v-otp-input__caret
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    display: inline-block
+    width: 1px
+    height: 1.2em
+    background: currentColor
+    animation: v-otp-blink 1s step-end infinite
 
   .v-otp-input__loader
     align-items: center
@@ -80,3 +203,9 @@
 
     .v-progress-linear
       position: absolute
+
+  @keyframes v-otp-blink
+    0%, 100%
+      opacity: 1
+    50%
+      opacity: 0

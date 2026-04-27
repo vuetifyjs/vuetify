@@ -73,7 +73,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Enter verification code',
   },
   fileInput: {
     counter: '{0} files',
