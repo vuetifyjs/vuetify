@@ -94,3 +94,9 @@ The `step` prop behaves the same as the `step` attribute in the `<input type="nu
 The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
 
 <ExamplesExample file="v-number-input/prop-precision" />
+
+#### Grouping
+
+The `grouping` prop enables digit grouping (e.g. thousands separators). It can be set to `"auto"` for locale-default grouping or `"min2"` for minimum 2-digit grouping. Use `group-separator` to override the separator character.
+
+<ExamplesExample file="v-number-input/prop-grouping" />
