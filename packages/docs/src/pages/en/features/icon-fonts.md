@@ -205,7 +205,14 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 
 #### UnoCSS icon sets
 
-Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](https://unocss.dev/presets/icons). All icons are tree-shaken so only the icons you use are included in your final CSS bundle.
+Vuetify integrates with [UnoCSS Preset Icons](https://unocss.dev/presets/icons), which supports [every icon set available on Iconify](https://icon-sets.iconify.design/). All icons are tree-shaken so only the icons you use are included in the production CSS bundle. You can register multiple icon sets simultaneously and freely mix icons from any of them across your components.
+
+```html
+<v-alert icon="i-solar:album-linear" title="Create new album" />
+<v-alert icon="i-devicon:gitlab" title="Login with GitLab" />
+```
+
+The icon sets listed below have a dedicated Vuetify import that includes **alias mappings** for built-in icons used by Vuetify components (e.g. close, dropdown, checkboxes). You must use one of these as your `defaultSet`, but the aliases can be overridden if needed. Additional sets without aliases can be installed alongside it and referenced freely in your own templates.
 
 | Icon library | Iconify package | Vuetify import | Default set name |
 |---|---|---|---|
@@ -219,7 +226,7 @@ Vuetify provides pre-configured icon sets that work with [UnoCSS Preset Icons](h
 | [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
 | [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
 
-Install `unocss` and the Iconify package for your chosen library:
+Install `unocss` and the Iconify package(s) for your chosen librar(ies):
 
 ::: tabs
 
