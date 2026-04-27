@@ -10,7 +10,7 @@
       />
 
       <h1 class="text-headline-large text-md-display-large font-weight-bold mb-4">
-        Enterprise sponsorship for teams running Vuetify in production.
+        Enterprise sponsorship for teams running Vuetify in production
       </h1>
 
       <p class="text-body-large text-md-title-large text-medium-emphasis mb-8">
@@ -19,7 +19,6 @@
 
       <div class="d-flex ga-4 justify-center flex-wrap">
         <v-btn
-          class="text-none"
           color="primary"
           href="mailto:sponsor@vuetifyjs.com"
           rounded="lg"
@@ -28,7 +27,6 @@
         />
 
         <v-btn
-          class="text-none"
           color="primary"
           rounded="lg"
           size="x-large"
