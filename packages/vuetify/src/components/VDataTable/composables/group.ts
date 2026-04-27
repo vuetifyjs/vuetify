@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, toValue } from 'vue'
+import { computed, inject, provide, ref, toRef, toValue } from 'vue'
 import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
@@ -33,11 +33,19 @@ export interface GroupSummary<T = any> {
   items: readonly (T | Group<T> | GroupSummary<T>)[]
 }
 
+export type GroupKeyFn = (options: { key: string, value: any, parentKey: string | null }) => string
+
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
     type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
+  opened: {
+    type: Array as PropType<readonly string[]>,
+    default: () => ([]),
+  },
+  openAllGroups: Boolean,
+  groupKey: Function as PropType<GroupKeyFn>,
 }, 'DataTable-group')
 
 const VDataTableGroupSymbol: InjectionKey<{
@@ -52,21 +60,41 @@ const VDataTableGroupSymbol: InjectionKey<{
 type GroupProps = {
   groupBy: readonly SortItem[]
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
+  opened: readonly string[]
+  'onUpdate:opened': ((value: string[]) => void) | undefined
+  openAllGroups: boolean
+  groupKey: GroupKeyFn | undefined
 }
 
 export function createGroupBy (props: GroupProps) {
   const groupBy = useProxiedModel(props, 'groupBy')
+  const opened = useProxiedModel(props, 'opened')
+  const openAllGroups = toRef(() => props.openAllGroups)
+  const groupKey = toRef(() => props.groupKey)
 
-  return { groupBy }
+  return { groupBy, opened, openAllGroups, groupKey }
 }
 
 export function provideGroupBy (options: {
   groupBy: Ref<readonly SortItem[]>
   sortBy: Ref<readonly SortItem[]>
   disableSort?: Ref<boolean>
+  opened?: Ref<readonly string[]>
+  openAllGroups?: MaybeRefOrGetter<boolean>
 }) {
-  const { disableSort, groupBy, sortBy } = options
-  const opened = ref(new Set<string>())
+  const { disableSort, groupBy, sortBy, openAllGroups } = options
+
+  const openedModel = options.opened ?? ref<readonly string[]>([])
+
+  const opened = computed<Set<string>>({
+    get: () => new Set(openedModel.value),
+    set: v => {
+      openedModel.value = [...v.values()]
+    },
+  })
+
+  // Track groups that have been explicitly closed when openAllGroups is active
+  const closedGroups = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
     return groupBy.value.map<SortItem>(val => ({
@@ -76,13 +104,28 @@ export function provideGroupBy (options: {
   })
 
   function isGroupOpen (group: Group) {
+    if (toValue(openAllGroups) && !closedGroups.value.has(group.id)) {
+      return true
+    }
     return opened.value.has(group.id)
   }
 
   function toggleGroup (group: Group) {
     const newOpened = new Set(opened.value)
-    if (!isGroupOpen(group)) newOpened.add(group.id)
-    else newOpened.delete(group.id)
+    if (toValue(openAllGroups)) {
+      const newClosed = new Set(closedGroups.value)
+      if (isGroupOpen(group)) {
+        newClosed.add(group.id)
+        newOpened.delete(group.id)
+      } else {
+        newClosed.delete(group.id)
+        newOpened.add(group.id)
+      }
+      closedGroups.value = newClosed
+    } else {
+      if (!isGroupOpen(group)) newOpened.add(group.id)
+      else newOpened.delete(group.id)
+    }
 
     opened.value = newOpened
   }
@@ -141,7 +184,15 @@ function groupItemsByProperty <T extends GroupableItem> (items: readonly T[], gr
   return groups
 }
 
-function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: readonly string[], depth = 0, prefix = 'root') {
+const defaultGroupId = (key: string, value: any, parentKey: string) => `${parentKey}_${key}_${value}`
+
+function groupItems <T extends GroupableItem> (
+  items: readonly T[],
+  groupBy: readonly string[],
+  groupKeyFn?: GroupKeyFn,
+  depth = 0,
+  parentKey = 'root',
+) {
   if (!groupBy.length) return []
 
   const groupedItems = groupItemsByProperty(items, groupBy[0])
@@ -150,13 +201,15 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
   const rest = groupBy.slice(1)
   groupedItems.forEach((items, value) => {
     const key = groupBy[0]
-    const id = `${prefix}_${key}_${value}`
+    const id = groupKeyFn
+      ? groupKeyFn({ key, value, parentKey: depth === 0 ? null : parentKey })
+      : defaultGroupId(key, value, parentKey)
     groups.push({
       depth,
       id,
       key,
       value,
-      items: rest.length ? groupItems(items, rest, depth + 1, id) : items,
+      items: rest.length ? groupItems(items, rest, groupKeyFn, depth + 1, id) : items,
       type: 'group',
     })
   })
@@ -166,7 +219,7 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
 
 function flattenItems <T extends GroupableItem> (
   items: readonly (T | Group<T> | GroupSummary<T>)[],
-  opened: Set<string>,
+  isOpen: (id: string) => boolean,
   hasSummary: boolean
 ): readonly (T | Group<T> | GroupSummary<T>)[] {
   const flatItems: (T | Group<T> | GroupSummary<T>)[] = []
@@ -178,8 +231,8 @@ function flattenItems <T extends GroupableItem> (
         flatItems.push(item)
       }
 
-      if (opened.has(item.id) || item.value == null) {
-        flatItems.push(...flattenItems(item.items, opened, hasSummary))
+      if (isOpen(item.id) || item.value == null) {
+        flatItems.push(...flattenItems(item.items, isOpen, hasSummary))
 
         if (hasSummary) {
           flatItems.push({ ...item, type: 'group-summary' })
@@ -198,15 +251,21 @@ export function useGroupedItems <T extends GroupableItem> (
   groupBy: Ref<readonly SortItem[]>,
   opened: Ref<Set<string>>,
   hasSummary: MaybeRefOrGetter<boolean>,
+  isGroupOpen?: (group: Group) => boolean,
+  groupKeyFn?: MaybeRefOrGetter<GroupKeyFn | undefined>,
 ) {
   const groups = computed(() => {
     if (!groupBy.value.length) return []
-    return groupItems(toValue(items), groupBy.value.map(item => item.key))
+    return groupItems(toValue(items), groupBy.value.map(item => item.key), toValue(groupKeyFn))
   })
+
+  const isOpen = isGroupOpen
+    ? (id: string) => isGroupOpen({ id } as Group)
+    : (id: string) => opened.value.has(id)
 
   const flatItems = computed(() => {
     if (!groupBy.value.length) return toValue(items)
-    return flattenItems(groups.value, opened.value, toValue(hasSummary))
+    return flattenItems(groups.value, isOpen, toValue(hasSummary))
   })
 
   return { groups, flatItems }

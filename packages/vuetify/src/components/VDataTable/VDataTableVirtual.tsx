@@ -88,10 +88,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, opened, openAllGroups, groupKey } = createGroupBy(props)
     const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { disableSort } = toRefs(props)
 
@@ -115,14 +116,20 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     })
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened, openAllGroups })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey)
 
     const allItems = computed(() => extractRows(flatItems.value))
 

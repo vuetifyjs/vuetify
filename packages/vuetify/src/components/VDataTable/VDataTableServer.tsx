@@ -65,10 +65,11 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:opened': (value: string[]) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, opened, openAllGroups, groupKey } = createGroupBy(props)
     const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
@@ -84,11 +85,16 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const {
+      opened: openedGroups,
+      isGroupOpen,
+      toggleGroup,
+      extractRows,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened, openAllGroups })
 
     const { pageCount, setItemsPerPage, prevPage, nextPage, setPage } = providePagination({ page, itemsPerPage, itemsLength })
 
-    const { flatItems } = useGroupedItems(items, groupBy, opened, () => !!slots['group-summary'])
+    const { flatItems } = useGroupedItems(items, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey)
 
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
       allItems: items,
