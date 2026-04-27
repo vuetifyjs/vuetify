@@ -71,7 +71,7 @@ function inferDecimalSeparator (current: Ref<string>, fallback: Ref<string>) {
 function inferNumericGroupSeparator (current: Ref<string>, fallback: Ref<string>) {
   return new Intl.NumberFormat([current.value, fallback.value], { useGrouping: true })
     .formatToParts(10000)
-    .find(p => p.type === 'group')?.value ?? ','
+    .find(p => p.type === 'group')?.value ?? ' '
 }
 
 function useProvided <T> (props: any, prop: string, provided: Ref<T>) {

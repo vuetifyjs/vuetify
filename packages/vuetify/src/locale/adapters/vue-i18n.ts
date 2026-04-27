@@ -35,7 +35,7 @@ function inferDecimalSeparator (format: (v: number) => string) {
 function inferNumericGroupSeparator (format: (v: number, options: NumberOptions) => string) {
   const maybeSeparator = format(10000, { useGrouping: true }).at(2)!
   const digits = format(9876543210, { useGrouping: false }).split('')
-  return !digits.includes(maybeSeparator) ? maybeSeparator : ','
+  return !digits.includes(maybeSeparator) ? maybeSeparator : ' '
 }
 
 function createProvideFunction (data: {
