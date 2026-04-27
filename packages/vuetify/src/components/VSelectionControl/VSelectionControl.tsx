@@ -56,6 +56,7 @@ export type VSelectionControlSlots = {
 }
 
 export const makeVSelectionControlProps = propsFactory({
+  indeterminate: Boolean,
   label: String,
   baseColor: String,
   trueValue: null,
@@ -112,19 +113,24 @@ export function useSelectionControl (
       }
     },
   })
+  const isActive = computed(() => model.value || props.indeterminate)
   const { textColorClasses, textColorStyles } = useTextColor(() => {
     if (props.error || props.disabled) return undefined
 
-    return model.value ? props.color : props.baseColor
+    return isActive.value ? props.color : props.baseColor
   })
   const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
     return (
-      model.value &&
+      isActive.value &&
       !props.error &&
       !props.disabled
     ) ? props.color : props.baseColor
   })
-  const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
+  const icon = computed(() => (
+    props.indeterminate ? props.indeterminateIcon
+    : model.value ? props.trueIcon
+    : props.falseIcon
+  ))
 
   return {
     group,
@@ -254,6 +260,7 @@ export const VSelectionControl = genericComponent<new <T>(
             'v-selection-control',
             {
               'v-selection-control--dirty': model.value,
+              'v-selection-control--indeterminate': props.indeterminate,
               'v-selection-control--disabled': props.disabled,
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,

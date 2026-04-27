@@ -317,6 +317,12 @@
       "menu-footer": "3.12.0"
     }
   },
+  "VSelectionControl": {
+    "props": {
+      "indeterminate": "4.1.0",
+      "indeterminateIcon": "4.1.0"
+    }
+  },
   "VSlider": {
     "events": {
       "start": "3.2.0",
