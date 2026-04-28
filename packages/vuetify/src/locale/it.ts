@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Righe per pagina:',
     ariaLabel: {
+      selectRow: 'Seleziona riga',
+      deselectRow: 'Deseleziona riga',
+      selectAll: 'Seleziona tutte le righe',
+      deselectAll: 'Deseleziona tutte le righe ({0} selezionate)',
+      selectAllSelected: 'Seleziona tutte le righe ({0} selezionate)',
       sortDescending: 'Ordinati in ordine decrescente.',
       sortAscending: 'Ordinati in ordine crescente.',
       sortNone: 'Non ordinato.',

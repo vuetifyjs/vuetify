@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Số hàng mỗi trang:',
     ariaLabel: {
+      selectRow: 'Chọn hàng',
+      deselectRow: 'Bỏ chọn hàng',
+      selectAll: 'Chọn tất cả các hàng',
+      deselectAll: 'Bỏ chọn tất cả các hàng (đã chọn {0})',
+      selectAllSelected: 'Chọn tất cả các hàng (đã chọn {0})',
       sortDescending: 'Sắp xếp giảm dần.',
       sortAscending: 'Sắp xếp tăng dần.',
       sortNone: 'Không sắp xếp.',

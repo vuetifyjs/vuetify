@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Filas por página:',
     ariaLabel: {
+      selectRow: 'Seleccionar fila',
+      deselectRow: 'Deseleccionar fila',
+      selectAll: 'Seleccionar todas las filas',
+      deselectAll: 'Deseleccionar todas las filas ({0} seleccionadas)',
+      selectAllSelected: 'Seleccionar todas las filas ({0} seleccionadas)',
       sortDescending: 'Orden descendente.',
       sortAscending: 'Orden ascendente.',
       sortNone: 'Sin ordenar.',

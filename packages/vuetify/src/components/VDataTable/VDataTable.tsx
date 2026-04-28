@@ -50,6 +50,8 @@ export type VDataTableSlotProps<T> = {
   setPage: (value: number) => void
   someSelected: boolean
   allSelected: boolean
+  selectedItemsCount: number
+  allItemsCount: number
   isSelected: ReturnType<typeof provideSelection>['isSelected']
   select: ReturnType<typeof provideSelection>['select']
   selectAll: ReturnType<typeof provideSelection>['selectAll']
@@ -207,6 +209,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleSelect,
       someSelected,
       allSelected,
+      allItemsCount,
+      selectedItemsCount,
     } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
@@ -240,6 +244,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
+      selectedItemsCount: selectedItemsCount.value,
+      allItemsCount: allItemsCount.value,
       isSelected,
       select,
       selectAll,
@@ -254,6 +260,17 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       columns: columns.value,
       headers: headers.value,
     }))
+
+    const displayTableHeader = computed(() => {
+      if (props.hideDefaultHeader) {
+        return false
+      }
+      if (!props.mobile) {
+        return true
+      }
+      // display mobile table header if showSelect enabled, or sort enabled and some column is sortable
+      return props.showSelect || (!props.disableSort && columns.value.some(i => i.sortable))
+    })
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
@@ -280,7 +297,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
-                { !props.hideDefaultHeader && (
+                { displayTableHeader.value && (
                   <thead key="thead">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }

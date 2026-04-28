@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Wierszy na stronie:',
     ariaLabel: {
+      selectRow: 'Wybierz wiersz',
+      deselectRow: 'Odznacz wiersz',
+      selectAll: 'Wybierz wszystkie wiersze',
+      deselectAll: 'Odznacz wszystkie wiersze ({0} wybrano)',
+      selectAllSelected: 'Wybierz wszystkie wiersze ({0} wybrano)',
       sortDescending: 'Sortowanie malejąco. Kliknij aby zmienić.',
       sortAscending: 'Sortowanie rosnąco. Kliknij aby zmienić.',
       sortNone: 'Bez sortowania. Kliknij aby posortować rosnąco.',

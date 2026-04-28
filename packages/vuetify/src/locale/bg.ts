@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Редове на страница:',
     ariaLabel: {
+      selectRow: 'Изберете ред',
+      deselectRow: 'Отменете избора на ред',
+      selectAll: 'Изберете всички редове',
+      deselectAll: 'Отменете избора на всички редове ({0} избрани)',
+      selectAllSelected: 'Изберете всички редове ({0} избрани)',
       sortDescending: 'Подреди в намаляващ ред.',
       sortAscending: 'Подреди в нарастващ ред.',
       sortNone: 'Без подредба.',

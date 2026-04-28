@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {
+      selectRow: 'Sor kiválasztása',
+      deselectRow: 'Sor kiválasztásának törlése',
+      selectAll: 'Összes sor kiválasztása',
+      deselectAll: 'Összes sor kiválasztásának törlése ({0} kiválasztva)',
+      selectAllSelected: 'Összes sor kiválasztása ({0} kiválasztva)',
       sortDescending: 'Csökkenő sorrendbe rendezve.',
       sortAscending: 'Növekvő sorrendbe rendezve.',
       sortNone: 'Rendezetlen.',

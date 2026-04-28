@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rye per bladsy:',
     ariaLabel: {
+      selectRow: 'Kies ry',
+      deselectRow: 'Ontkies ry',
+      selectAll: 'Kies alle rye',
+      deselectAll: 'Ontkies alle rye ({0} gekies)',
+      selectAllSelected: 'Kies alle rye ({0} gekies)',
       sortDescending: 'Gesorteer aflopend.',
       sortAscending: 'Gesorteer oplopend.',
       sortNone: 'Nie gesorteer nie.',

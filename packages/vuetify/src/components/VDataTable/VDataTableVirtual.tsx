@@ -126,7 +126,16 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
     const allItems = computed(() => extractRows(flatItems.value))
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
+    const {
+      isSelected,
+      select,
+      selectAll,
+      toggleSelect,
+      someSelected,
+      allSelected,
+      selectedItemsCount,
+      allItemsCount,
+    } = provideSelection(props, {
       allItems,
       currentPage: allItems,
     })
@@ -175,6 +184,8 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       toggleSort,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
+      allItemsCount: allItemsCount.value,
+      selectedItemsCount: selectedItemsCount.value,
       isSelected,
       select,
       selectAll,
@@ -189,6 +200,17 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       columns: columns.value,
       headers: headers.value,
     }))
+
+    const displayTableHeader = computed(() => {
+      if (props.hideDefaultHeader) {
+        return false
+      }
+      if (!props.mobile) {
+        return true
+      }
+      // display mobile table header if showSelect enabled, or sort enabled and some column is sortable
+      return props.showSelect || (!props.disableSort && columns.value.some(i => i.sortable))
+    })
 
     useRender(() => {
       const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
@@ -222,7 +244,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
               >
                 <table>
                   { slots.colgroup?.(slotProps.value) }
-                  { !props.hideDefaultHeader && (
+                  { displayTableHeader.value && (
                     <thead key="thead">
                       <VDataTableHeaders
                         { ...dataTableHeadersProps }

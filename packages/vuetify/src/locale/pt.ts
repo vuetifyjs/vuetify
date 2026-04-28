@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Linhas por página:',
     ariaLabel: {
+      selectRow: 'Selecionar linha',
+      deselectRow: 'Desmarcar linha',
+      selectAll: 'Selecionar todas as linhas',
+      deselectAll: 'Desmarcar todas as linhas ({0} selecionadas)',
+      selectAllSelected: 'Selecionar todas as linhas ({0} selecionadas)',
       sortDescending: 'Ordenado decrescente.',
       sortAscending: 'Ordenado crescente.',
       sortNone: 'Não ordenado.',

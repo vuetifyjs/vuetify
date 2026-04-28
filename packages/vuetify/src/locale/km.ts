@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'ជ្រើសរើសពត៌មានក្នុងមួយទំព័រ:',
     ariaLabel: {
+      selectRow: 'ជ្រើសរើសជួរដេក',
+      deselectRow: 'ដោះជម្រើសជួរដេក',
+      selectAll: 'ជ្រើសរើសជួរដេកទាំងអស់',
+      deselectAll: 'ដោះជម្រើសជួរដេកទាំងអស់ (បានជ្រើសរើស {0})',
+      selectAllSelected: 'ជ្រើសរើសជួរដេកទាំងអស់ (បានជ្រើសរើស {0})',
       sortDescending: 'តំណទំហំចុះរួម។',
       sortAscending: 'តំណទំហំឡើងរួម។',
       sortNone: 'មិនចុះរួម។',

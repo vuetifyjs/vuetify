@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Γραμμές ανά σελίδα:',
     ariaLabel: {
+      selectRow: 'Επιλογή σειράς',
+      deselectRow: 'Αποεπιλογή σειράς',
+      selectAll: 'Επιλογή όλων των σειρών',
+      deselectAll: 'Αποεπιλογή όλων των σειρών ({0} επιλεγμένες)',
+      selectAllSelected: 'Επιλογή όλων των σειρών ({0} επιλεγμένες)',
       sortDescending: 'Ταξινομημένο φθίνουσα.',
       sortAscending: 'Ταξινομημένο αύξουσα.',
       sortNone: 'Χωρίς ταξινόμηση.',

@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {
+      selectRow: 'Seleccionar fila',
+      deselectRow: 'Deseleccionar fila',
+      selectAll: 'Seleccionar totes les files',
+      deselectAll: 'Deseleccionar totes les files ({0} seleccionades)',
+      selectAllSelected: 'Seleccionar totes les files ({0} seleccionades)',
       sortDescending: 'Ordre descendent.',
       sortAscending: 'Ordre ascendent.',
       sortNone: 'Sense ordenar.',

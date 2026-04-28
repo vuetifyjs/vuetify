@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Vrstic na stran:',
     ariaLabel: {
+      selectRow: 'Izberi vrstico',
+      deselectRow: 'Počisti vrstico',
+      selectAll: 'Izberi vse vrstice',
+      deselectAll: 'Počisti vse vrstice ({0} izbranih)',
+      selectAllSelected: 'Izberi vse vrstice ({0} izbranih)',
       sortDescending: 'Razvrščeno padajoče.',
       sortAscending: 'Razvrščeno naraščajoče.',
       sortNone: 'Ni razvrščeno.',

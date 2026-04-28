@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rivejä sivulla:',
     ariaLabel: {
+      selectRow: 'Valitse rivi',
+      deselectRow: 'Poista rivin valinta',
+      selectAll: 'Valitse kaikki rivit',
+      deselectAll: 'Poista kaikkien rivien valinta ({0} valittu)',
+      selectAllSelected: 'Valitse kaikki rivit ({0} valittu)',
       sortDescending: ': Järjestetty laskevasti. Poista järjestäminen aktivoimalla.',
       sortAscending: ': Järjestetty nousevasti. Järjestä laskevasti aktivoimalla.',
       sortNone: ': Ei järjestetty. Järjestä nousevasti aktivoimalla.',

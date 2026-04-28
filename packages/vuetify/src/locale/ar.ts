@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'عدد الصفوف لكل صفحة:',
     ariaLabel: {
+      selectRow: 'تحديد صف',
+      deselectRow: 'إلغاء تحديد صف',
+      selectAll: 'تحديد جميع الصفوف',
+      deselectAll: 'إلغاء تحديد جميع الصفوف ({0} محددة)',
+      selectAllSelected: 'تحديد جميع الصفوف ({0} محددة)',
       sortDescending: 'مرتب تنازلياً.',
       sortAscending: 'مرتب تصاعدياً.',
       sortNone: 'غير مرتب.',

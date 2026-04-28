@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
+      selectRow: 'Satır seç',
+      deselectRow: 'Satır seçimini kaldır',
+      selectAll: 'Tüm satırları seç',
+      deselectAll: 'Tüm satırların seçimini kaldır ({0} seçildi)',
+      selectAllSelected: 'Tüm satırları seç ({0} seçildi)',
       sortDescending: 'Z den A ya sıralı.',
       sortAscending: 'A dan Z ye sıralı.',
       sortNone: 'Sıralı değil. ',

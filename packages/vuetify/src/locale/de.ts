@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Zeilen pro Seite:',
     ariaLabel: {
+      selectRow: 'Zeile auswählen',
+      deselectRow: 'Zeile abwählen',
+      selectAll: 'Alle Zeilen auswählen',
+      deselectAll: 'Alle Zeilen abwählen ({0} ausgewählt)',
+      selectAllSelected: 'Alle Zeilen auswählen ({0} ausgewählt)',
       sortDescending: 'Absteigend sortiert.',
       sortAscending: 'Aufsteigend sortiert.',
       sortNone: 'Nicht sortiert.',

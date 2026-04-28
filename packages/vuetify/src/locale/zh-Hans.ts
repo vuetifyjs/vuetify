@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: '每页数目：',
     ariaLabel: {
+      selectRow: '选择行',
+      deselectRow: '取消选择行',
+      selectAll: '选择所有行',
+      deselectAll: '取消选择所有行（已选择 {0}）',
+      selectAllSelected: '选择所有行（已选择 {0}）',
       sortDescending: '：降序排列。',
       sortAscending: '：升序排列。',
       sortNone: '：未排序。',

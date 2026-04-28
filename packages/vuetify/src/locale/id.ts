@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {
+      selectRow: 'Pilih baris',
+      deselectRow: 'Batal pilih baris',
+      selectAll: 'Pilih semua baris',
+      deselectAll: 'Batal pilih semua baris ({0} terpilih)',
+      selectAllSelected: 'Pilih semua baris ({0} terpilih)',
       sortDescending: 'Diurutkan kebawah.',
       sortAscending: 'Diurutkan keatas.',
       sortNone: 'Tidak diurutkan.',

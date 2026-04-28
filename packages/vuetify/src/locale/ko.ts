@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: '페이지 당 행 수:',
     ariaLabel: {
+      selectRow: '행 선택',
+      deselectRow: '행 선택 취소',
+      selectAll: '모든 행 선택',
+      deselectAll: '모든 행 선택 취소 ({0}개 선택됨)',
+      selectAllSelected: '모든 행 선택 ({0}개 선택됨)',
       sortDescending: '내림차순 정렬.',
       sortAscending: '오름차순 정렬.',
       sortNone: '정렬하지 않음.',

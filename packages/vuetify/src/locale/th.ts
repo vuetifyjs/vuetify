@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {
+      selectRow: 'เลือกแถว',
+      deselectRow: 'ยกเลิกการเลือกแถว',
+      selectAll: 'เลือกทุกแถว',
+      deselectAll: 'ยกเลิกการเลือกทุกแถว (เลือกแล้ว {0} แถว)',
+      selectAllSelected: 'เลือกทุกแถว (เลือกแล้ว {0} แถว)',
       sortDescending: 'เรียงจากมากไปน้อยอยู่',
       sortAscending: 'เรียงจากน้อยไปมากอยู่',
       sortNone: 'ไม่ได้เรียงลำดับ',

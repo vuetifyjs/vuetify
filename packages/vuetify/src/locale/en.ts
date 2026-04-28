@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rows per page:',
     ariaLabel: {
+      selectRow: 'Select row',
+      deselectRow: 'Deselect row',
+      selectAll: 'Select all rows',
+      deselectAll: 'Deselect all rows ({0} selected)',
+      selectAllSelected: 'Select all rows ({0} selected)',
       sortDescending: 'Sorted descending.',
       sortAscending: 'Sorted ascending.',
       sortNone: 'Not sorted.',

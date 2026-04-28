@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rader per sida:',
     ariaLabel: {
+      selectRow: 'Välj rad',
+      deselectRow: 'Avmarkera rad',
+      selectAll: 'Välj alla rader',
+      deselectAll: 'Avmarkera alla rader ({0} valda)',
+      selectAllSelected: 'Välj alla rader ({0} valda)',
       sortDescending: 'Fallande sortering.',
       sortAscending: 'Stigande sortering.',
       sortNone: 'Osorterat.',

@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Rijen per pagina:',
     ariaLabel: {
+      selectRow: 'Rij selecteren',
+      deselectRow: 'Rij deselecteren',
+      selectAll: 'Alle rijen selecteren',
+      deselectAll: 'Alle rijen deselecteren ({0} geselecteerd)',
+      selectAllSelected: 'Alle rijen selecteren ({0} geselecteerd)',
       sortDescending: 'Aflopend gesorteerd.',
       sortAscending: 'Oplopend gesorteerd.',
       sortNone: 'Niet gesorteerd.',

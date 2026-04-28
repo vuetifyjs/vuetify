@@ -14,6 +14,11 @@ export default {
   dataTable: {
     itemsPerPageText: 'Eilutės per puslapį:',
     ariaLabel: {
+      selectRow: 'Pasirinkti eilutę',
+      deselectRow: 'Atšaukti eilutės pasirinkimą',
+      selectAll: 'Pasirinkti visas eilutes',
+      deselectAll: 'Atšaukti visų eilučių pasirinkimą (pasirinkta {0})',
+      selectAllSelected: 'Pasirinkti visas eilutes (pasirinkta {0})',
       sortDescending: 'Išrikiuota mažėjimo tvarka.',
       sortAscending: 'Išrikiuota didėjimo tvarka.',
       sortNone: 'Nerikiuota.',
