@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useTextColor } from '@/composables/color'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
@@ -150,6 +151,7 @@ export const VAutocomplete = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
+    const autocomplete = useAutocomplete(props)
     const { filteredItems, getMatches } = useFilter(
       props,
       items,
@@ -474,6 +476,7 @@ export const VAutocomplete = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           v-model={ search.value }
+          name={ undefined }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -505,6 +508,20 @@ export const VAutocomplete = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                <select
+                  hidden
+                  multiple={ props.multiple }
+                  name={ autocomplete.fieldName.value }
+                >
+                  { items.value.map(item => (
+                    <option
+                      key={ item.value }
+                      value={ item.value }
+                      selected={ selectedValues.value.includes(item.value) }
+                    />
+                  ))}
+                </select>
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

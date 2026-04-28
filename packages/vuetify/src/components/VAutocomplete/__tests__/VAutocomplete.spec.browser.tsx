@@ -768,5 +768,69 @@ describe('VAutocomplete', () => {
     })
   })
 
+  describe('native form submission', () => {
+    const items = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete
+            name="autocomplete"
+            items={ items }
+            modelValue={ items[0] }
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      expect(submittedData!.get('autocomplete')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete
+            multiple
+            name="autocomplete"
+            items={ items }
+            modelValue={[items[0], items[1]]}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      const submitButton = screen.getByRole('button', { name: 'Submit' })
+      await userEvent.click(submitButton)
+
+      expect(submittedData).not.toBeNull()
+      const values = submittedData!.getAll('autocomplete')
+      expect(values).toHaveLength(2)
+      expect(values).toContain('1')
+      expect(values).toContain('2')
+    })
+  })
+
   showcase({ stories })
 })
