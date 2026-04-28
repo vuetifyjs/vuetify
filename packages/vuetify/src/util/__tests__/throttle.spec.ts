@@ -1,16 +1,21 @@
 import { throttle } from '../throttle'
 
-// Utilities
-import { wait } from '@test'
+describe('throttle', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
 
-describe('throttle', { retry: 3 }, () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should execute only the calls right before the interval', async () => {
     const result = [] as number[]
     const pushThrottled = throttle((v: number) => result.push(v), 100, { leading: false, trailing: false })
 
     let lastId = 0
     const interval = setInterval(() => pushThrottled(++lastId), 30)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
     clearInterval(interval)
 
     expect(result).toStrictEqual([5, 9])
@@ -22,9 +27,9 @@ describe('throttle', { retry: 3 }, () => {
 
     let lastId = 0
     const interval = setInterval(() => pushThrottled(++lastId), 30)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
     clearInterval(interval)
-    await wait(100)
+    await vi.advanceTimersByTimeAsync(100)
 
     expect(result).toStrictEqual([4, 7, 9])
   })
@@ -38,7 +43,7 @@ describe('throttle', { retry: 3 }, () => {
     setTimeout(() => pushThrottled(++lastId), 40)
     setTimeout(() => pushThrottled(++lastId), 180)
     setTimeout(() => pushThrottled(++lastId), 190)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
 
     expect(result).toStrictEqual([2, 4])
   })
@@ -49,9 +54,9 @@ describe('throttle', { retry: 3 }, () => {
 
     let lastId = 0
     const interval = setInterval(() => pushThrottled(++lastId), 30)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
     clearInterval(interval)
-    await wait(100)
+    await vi.advanceTimersByTimeAsync(100)
 
     expect(result).toStrictEqual([1, 4, 7, 9])
   })
@@ -62,15 +67,15 @@ describe('throttle', { retry: 3 }, () => {
 
     let lastId = 0
     let interval = setInterval(() => pushThrottled(++lastId), 30)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
     clearInterval(interval)
-    await wait(150)
+    await vi.advanceTimersByTimeAsync(150)
 
     lastId = 200
     interval = setInterval(() => pushThrottled(++lastId), 30)
-    await wait(280)
+    await vi.advanceTimersByTimeAsync(280)
     clearInterval(interval)
-    await wait(100)
+    await vi.advanceTimersByTimeAsync(100)
 
     expect(result).toStrictEqual([1, 4, 7, 9, 201, 204, 207, 209])
   })
