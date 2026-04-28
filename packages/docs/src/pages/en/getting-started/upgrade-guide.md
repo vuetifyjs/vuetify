@@ -149,17 +149,23 @@ If you had any usages of `@layer vuetify.*` in your styles they should be replac
 
 ### Typography {codemod-available}
 
-The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
+The typography system has been updated from Material Design 2 to Material Design 3. The following replacements will have some minor font size differences:
 
-| MD2 (Legacy)           | MD3 (New)                                             |
-|------------------------|-------------------------------------------------------|
-| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
-| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
-| `subtitle-1`, `body-1` | `body-large`                                          |
-| `body-2`               | `body-medium`                                         |
-| `caption`              | `body-small`                                          |
-| `button`, `subtitle-2` | `label-large`                                         |
-| `overline`             | `label-small`                                         |
+| MD2 (Legacy)      | MD3 (New)                          |
+|-------------------|------------------------------------|
+| `text-h1`         | `text-display-large` (96px → 60px) |
+| `text-h2`         | `text-display-large`               |
+| `text-h3`         | `text-display-medium`              |
+| `text-h4`         | `text-headline-large`              |
+| `text-h5`         | `text-headline-small`              |
+| `text-h6`         | `text-title-large`                 |
+| `text-subtitle-1` | `text-body-large`                  |
+| `text-subtitle-2` | `text-title-small`                 |
+| `text-body-1`     | `text-body-large`                  |
+| `text-body-2`     | `text-body-medium`                 |
+| `text-button`     | `text-label-large` (No uppercase)  |
+| `text-caption`    | `text-body-small`                  |
+| `text-overline`   | `text-label-medium` (No uppercase) |
 
 For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
 
