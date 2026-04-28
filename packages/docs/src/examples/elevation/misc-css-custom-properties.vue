@@ -7,12 +7,11 @@
         cols="auto"
       >
         <v-card
-          :elevation="0"
-          :hover-elevation="n"
-          border="thin dashed"
+          :elevation="n"
           class="d-flex justify-center align-center"
           height="70"
           rounded="xl"
+          style="--v-shadow-color: 0, 0, 255"
           width="100"
         >
           <div>{{ n }}</div>
@@ -26,13 +25,17 @@
         :key="n"
         cols="auto"
       >
-        <div
-          :class="`bg-surface elevation-0 hover-elevation-${n}`"
-          class="d-flex justify-center align-center rounded-xl border-thin border-dashed"
-          style="height: 70px; width: 100px"
+        <v-card
+          :elevation="n"
+          class="d-flex justify-center align-center elevation-overlay"
+          color="surface"
+          height="70"
+          rounded="xl"
+          style="--v-elevation-overlay-color: red"
+          width="100"
         >
           <div>{{ n }}</div>
-        </div>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
