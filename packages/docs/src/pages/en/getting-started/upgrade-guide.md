@@ -128,6 +128,23 @@ Restoring most of the previous reset styles would be heavy-handed, but will get 
 }
 ```
 
+#### Applying without a build step
+
+The snippets above are plain CSS and require no Sass toolchain — drop them into any stylesheet, or inline them as a `<style>` block when using the CDN build with an importmap:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@4/dist/vuetify.css">
+
+<style>
+  @layer vuetify-core.reset {
+    ul, ol, figure, details, summary { padding: 0; margin: 0; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; }
+  }
+</style>
+```
+
+Place the `<style>` block after Vuetify's stylesheet so the layer order declared in `vuetify.css` takes effect first; subsequent `@layer vuetify-core.reset { … }` rules append to the existing layer and won't override component styles.
+
 ### Layers
 
 Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
