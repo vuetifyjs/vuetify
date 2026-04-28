@@ -1,0 +1,60 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+@include tools.layer('components') {
+  .v-morphing-icon {
+    position: relative;
+    display: inline-flex;
+    transition: color 450ms linear;
+
+    &__underlay {
+      position: absolute;
+      inset: 0;
+      background-color: currentColor;
+    }
+
+    &__stack {
+      overflow: hidden;
+      filter: contrast(200) blur(0.2px);
+      margin: -.5px; // hides glow bleading when zoomed in
+      isolation: isolate;
+      display: grid;
+      place-items: center;
+
+      > .v-icon {
+        grid-area: 1/1;
+      }
+    }
+
+    // Light background blending
+    &--on-light {
+      mix-blend-mode: multiply;
+
+      .v-morphing-icon__content {
+        mix-blend-mode: screen;
+      }
+
+      .v-morphing-icon__stack {
+        color: #000;
+        background-color: #fff;
+        mix-blend-mode: darken;
+      }
+    }
+
+    // Dark background blending
+    &--on-dark {
+      mix-blend-mode: screen;
+
+      .v-morphing-icon__content {
+        mix-blend-mode: multiply;
+        isolation: isolate;
+      }
+
+      .v-morphing-icon__stack {
+        color: #fff;
+        background-color: #000;
+        mix-blend-mode: lighten;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export { VMorphingIcon } from './VMorphingIcon'
