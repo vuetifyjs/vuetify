@@ -220,8 +220,10 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       },
     }
 
-    watch(() => props.precision, () => formatInputValue())
-    watch(() => props.minFractionDigits, () => formatInputValue())
+    watch(
+      () => [locale.value, decimalSeparator.value, groupSeparator.value, props.precision, props.minFractionDigits],
+      () => formatInputValue()
+    )
 
     function inferPrecision (value: number | string | null) {
       if (value == null) return 0
@@ -276,9 +278,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         )
 
       if (result === null) return
+
       e.preventDefault()
+
       inputElement.value = result.text
       inputElement.setSelectionRange(result.cursor, result.cursor)
+
       nextTick(() => inputText.value = result.text)
     }
 
