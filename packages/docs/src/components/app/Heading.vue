@@ -16,6 +16,8 @@
     <slot>
       {{ content }}
     </slot>
+
+    <codemod-chip v-if="codemodAvailable" class="ms-2">{{ t('codemod-available') }}</codemod-chip>
   </component>
 </template>
 
@@ -32,7 +34,11 @@
     content: String,
     href: String,
     level: String,
+
+    codemodAvailable: Boolean,
   })
+
+  const { t } = useI18n()
 
   const component = computed(() => `h${props.level}`)
   const classes = computed(() => ['v-heading', 'mt-0', 'mb-2', HEADING_CLASSES[props.level]])

@@ -61,7 +61,7 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
-[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
+Sections tagged with <codemod-chip>Codemod Available</codemod-chip> can be automated using [vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods).
 
 ## Styles
 
@@ -147,7 +147,7 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-### Typography
+### Typography {codemod-available}
 
 The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
 
@@ -204,7 +204,7 @@ export default createVuetify({
 );
 ```
 
-### Elevation
+### Elevation {codemod-available}
 
 Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24).
 
@@ -349,7 +349,7 @@ Removed the **$file-input-details-padding-inline** Sass variable.
 );
 ```
 
-### VForm
+### VForm {codemod-available}
 
 Slot variables are no longer refs, read-only values passed to slots are now unwrapped:
 
@@ -383,7 +383,7 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 );
 ```
 
-### VSelect/VCombobox/VAutocomplete
+### VSelect/VCombobox/VAutocomplete {codemod-available}
 
 `item` in slots has been renamed to `internalItem` for consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
@@ -421,7 +421,7 @@ Or remove `.raw`:
   </VSelect>
 ```
 
-### VSnackbar
+### VSnackbar {codemod-available}
 
 ::: warning
 This component has its internal HTML structure overhauled to incorporate **header** and **prepend** slots
@@ -438,7 +438,7 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
   />
 ```
 
-### VSnackbarQueue
+### VSnackbarQueue {codemod-available}
 
 ::: warning
 This component has been rewritten to enable showing multiple snackbars at once
@@ -478,7 +478,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | Gaps from padding                                             | No default padding, utilizes CSS `gap` |
 | Widths from hardcoded percentage (e.g., `75%` for `.v-col-9`) | Calculated width accounting for gaps   |
 
-#### Prop changes on VRow
+#### Prop changes on VRow {codemod-available}
 
 | Previous                         | New                                              |
 |----------------------------------|--------------------------------------------------|
@@ -489,7 +489,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | `align-sm`, `justify-md`, etc.   | use responsive utility classes                   |
 | no fine-grained control over gap | `gap` prop accepts number, string, or `[x, y]`   |
 
-#### Prop changes on VCol
+#### Prop changes on VCol {codemod-available}
 
 | Previous                                | New                                                 |
 |-----------------------------------------|-----------------------------------------------------|
