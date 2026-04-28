@@ -365,9 +365,9 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
-      const menuContent = vMenuRef.value?.contentEl
-      if (menuContent?.contains(e.relatedTarget as Node)) {
-        isFocused.value = true
+      const target = e.target as Element
+      if (!vTextFieldRef.value?.$el.contains(target)) {
+        menu.value = false
       }
     }
 
@@ -417,7 +417,6 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
-        menu.value = false
         if (!isPristine.value && search.value) {
           _searchLock.value = search.value
         }
@@ -538,7 +537,6 @@ export const VAutocomplete = genericComponent<new <
                         filterable
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onFocusout={ onFocusout }
                         tabindex="-1"
                         selectable={ !!displayItems.value.length }
