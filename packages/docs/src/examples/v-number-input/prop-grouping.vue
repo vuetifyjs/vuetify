@@ -17,7 +17,7 @@
           v-model="example2"
           :precision="2"
           group-separator="'"
-          grouping
+          grouping="auto"
         ></v-number-input>
       </v-col>
 
@@ -27,7 +27,7 @@
           <v-number-input
             v-model="example3"
             :precision="2"
-            grouping
+            grouping="auto"
           ></v-number-input>
         </v-locale-provider>
       </v-col>

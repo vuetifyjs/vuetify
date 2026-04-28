@@ -97,6 +97,6 @@ The `precision` prop enforces strict precision. It is expected to be an integer 
 
 #### Grouping
 
-The `grouping` prop enables digit grouping (e.g. thousands separators). It can be set to `"auto"` for locale-default grouping or `"min2"` for minimum 2-digit grouping. Use `group-separator` to override the separator character.
+The `grouping` prop enables digit grouping (e.g. thousands separators). The value is passed to [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping) - `"auto"` should be preferred over `true`. Use `group-separator` to override the separator character.
 
 <ExamplesExample file="v-number-input/prop-grouping" />
