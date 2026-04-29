@@ -73,7 +73,7 @@ function onKeydown (e: KeyboardEvent) {
     )
   ) {
     e.preventDefault()
-    lastElement.focus()
+    lastElement.focus({ preventScroll: true })
   }
 
   if (
@@ -84,7 +84,7 @@ function onKeydown (e: KeyboardEvent) {
     )
   ) {
     e.preventDefault()
-    firstElement.focus()
+    firstElement.focus({ preventScroll: true })
   }
 }
 
@@ -131,7 +131,7 @@ export function useFocusTrap (
       !contentEl.value.contains(after)
     ) {
       const focusable = focusableChildren(contentEl.value)
-      focusable[0]?.focus()
+      focusable[0]?.focus({ preventScroll: true })
     }
   }
 
