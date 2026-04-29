@@ -66,5 +66,4 @@ describe('format', () => {
       expect(result).toBe('1,234')
     })
   })
-
 })
