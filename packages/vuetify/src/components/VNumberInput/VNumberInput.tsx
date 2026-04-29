@@ -8,7 +8,7 @@ import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { formatNumber, parseNumber } from './format'
+import { formatNumber } from './format'
 import { useHold } from './hold'
 import { processGroupedInput, processPlainInput } from './typing'
 import { useForm } from '@/composables/form'
@@ -76,7 +76,7 @@ const makeVNumberInputProps = propsFactory({
   },
   groupSeparator: {
     type: String,
-    validator: (v: any) => !v || v.length === 1,
+    validator: (v: any) => !v || (v.length === 1 && !/[0-9+-]/.test(v)),
   },
 
   ...omit(makeVTextFieldProps(), ['modelValue', 'validationValue']),
@@ -115,7 +115,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
 
     function toNumber (val: string | null | undefined) {
-      return parseNumber(val, groupSeparator.value, decimalSeparator.value, !!props.grouping)
+      return Number(val?.replace(decimalSeparator.value, '.').replace(/[^0-9.-]/g, ''))
     }
 
     function correctPrecision (val: number, precision?: number | null, trim = true) {

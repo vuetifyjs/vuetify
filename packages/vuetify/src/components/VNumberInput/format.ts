@@ -59,13 +59,3 @@ export function formatNumber (val: number, options: FormatNumberOptions): string
     })
     .join('')
 }
-
-export function parseNumber (
-  val: string | null | undefined,
-  groupSeparator: string,
-  decimalSeparator: string,
-  hasGrouping: boolean,
-): number {
-  const stripped = hasGrouping ? val?.replaceAll(groupSeparator, '') : val
-  return Number(stripped?.replace(decimalSeparator, '.'))
-}

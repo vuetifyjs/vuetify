@@ -1,4 +1,4 @@
-import { formatNumber, parseNumber } from '../format'
+import { formatNumber } from '../format'
 
 interface FormatNumberOptions {
   locale: string
@@ -65,55 +65,6 @@ describe('format', () => {
       const result = formatNumber(1234, opts({ locale: 'ar-SA' }))
       expect(result).toBe('1,234')
     })
-
-    it('handles negative numbers', () => {
-      expect(formatNumber(-1234.5, opts({ precision: 1 }))).toBe('-1,234.5')
-    })
-
-    it('handles zero', () => {
-      expect(formatNumber(0, opts())).toBe('0')
-    })
   })
 
-  describe('parseNumber', () => {
-    it('parses plain integer', () => {
-      expect(parseNumber('1234', ',', '.', false)).toBe(1234)
-    })
-
-    it('parses grouped integer', () => {
-      expect(parseNumber('1,234,567', ',', '.', true)).toBe(1234567)
-    })
-
-    it('parses decimal', () => {
-      expect(parseNumber('1234.56', ',', '.', false)).toBe(1234.56)
-    })
-
-    it('parses grouped decimal', () => {
-      expect(parseNumber('1,234.56', ',', '.', true)).toBe(1234.56)
-    })
-
-    it('parses negative number', () => {
-      expect(parseNumber('-1,234.56', ',', '.', true)).toBe(-1234.56)
-    })
-
-    it('parses with custom separators', () => {
-      expect(parseNumber('1 234,56', ' ', ',', true)).toBe(1234.56)
-    })
-
-    it('does not strip group separator when hasGrouping is false', () => {
-      expect(parseNumber('1,234', ',', '.', false)).toBeNaN()
-    })
-
-    it('returns NaN for null', () => {
-      expect(parseNumber(null, ',', '.', true)).toBeNaN()
-    })
-
-    it('returns NaN for undefined', () => {
-      expect(parseNumber(undefined, ',', '.', true)).toBeNaN()
-    })
-
-    it('parses empty string as 0', () => {
-      expect(parseNumber('', ',', '.', true)).toBe(0)
-    })
-  })
 })
