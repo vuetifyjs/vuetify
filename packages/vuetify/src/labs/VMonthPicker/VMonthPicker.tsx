@@ -64,6 +64,7 @@ export const makeVMonthPickerProps = propsFactory({
     type: null as any as PropType<string | string[] | null>,
     default: null,
   },
+  headerColor: String,
   min: String,
   max: String,
   multiple: [Boolean, String] as PropType<boolean | 'range'>,
@@ -154,6 +155,7 @@ export const VMonthPicker = genericComponent<new <
       isMonthPreviewed,
     } = useMonthPicker(props, model)
 
+    const headerColor = toRef(() => props.headerColor ?? props.color)
     const selectionColor = toRef(() => props.color || 'surface-variant')
     const { backgroundColorClasses: rangeColorClasses, backgroundColorStyles: rangeColorStyles } = useBackgroundColor(selectionColor)
 
@@ -219,7 +221,7 @@ export const VMonthPicker = genericComponent<new <
             },
             props.class,
           ]}
-          color={ props.color }
+          color={ headerColor.value }
           title={ t(props.title) }
           style={[
             {
@@ -231,7 +233,7 @@ export const VMonthPicker = genericComponent<new <
         >
           {{
             header: () => (
-              <VDatePickerHeader header={ headerText.value } transition={ headerTransition.value } />
+              <VDatePickerHeader color={ headerColor.value } header={ headerText.value } transition={ headerTransition.value } />
             ),
             default: () => (
               <>
