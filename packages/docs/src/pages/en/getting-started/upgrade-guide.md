@@ -130,7 +130,7 @@ Restoring most of the previous reset styles would be heavy-handed, but will get 
 
 #### Applying without a build step
 
-The snippets above are plain CSS and require no Sass toolchain — drop them into any stylesheet, or inline them as a `<style>` block when using the CDN build with an importmap:
+The snippets above are plain CSS and do not require Sass compiler — drop them into any stylesheet, or inline them within `<style>` block when using the CDN build:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@4/dist/vuetify.css">
@@ -143,7 +143,7 @@ The snippets above are plain CSS and require no Sass toolchain — drop them int
 </style>
 ```
 
-Place the `<style>` block after Vuetify's stylesheet so the layer order declared in `vuetify.css` takes effect first; subsequent `@layer vuetify-core.reset { … }` rules append to the existing layer and won't override component styles.
+Place the `<style>` block after Vuetify's stylesheet so the layer order declared in `vuetify.css` takes effect first. Subsequent `@layer vuetify-core.reset { … }` rules append to the existing layer and won't override component styles.
 
 ### Layers
 
