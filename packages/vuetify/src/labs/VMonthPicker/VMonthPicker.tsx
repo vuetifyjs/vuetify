@@ -10,7 +10,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
-import { useMonthPicker } from './useMonthPicker'
+import { useMonthPicker } from './month-picker'
 import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date'
 import { IconValue } from '@/composables/icons'

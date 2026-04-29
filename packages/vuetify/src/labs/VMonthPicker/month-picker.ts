@@ -67,12 +67,14 @@ export function useMonthPicker (props: {
   }
 
   const disablePrevYear = computed(() => {
+    if (viewMode.value === 'years') return true
     if (!props.min) return false
     const minYear = parseInt(props.min.split('-')[0])
     return year.value <= minYear
   })
 
   const disableNextYear = computed(() => {
+    if (viewMode.value === 'years') return true
     if (!props.max) return false
     const maxYear = parseInt(props.max.split('-')[0])
     return year.value >= maxYear
