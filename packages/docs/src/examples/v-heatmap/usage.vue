@@ -11,28 +11,33 @@
     </div>
 
     <template v-slot:configuration>
-      <div class="d-flex flex-column ga-2">
-        <v-checkbox v-model="hideColumnHeaders" label="Hide column headers" hide-details></v-checkbox>
-        <v-checkbox v-model="hideRowHeaders" label="Hide row headers" hide-details></v-checkbox>
-        <v-checkbox v-model="showLegend" label="Show legend" hide-details></v-checkbox>
-        <v-checkbox v-model="hover" label="Hover effect" hide-details></v-checkbox>
+      <v-checkbox v-model="hideColumnHeaders" label="Hide column headers" hide-details></v-checkbox>
+      <v-checkbox v-model="hideRowHeaders" label="Hide row headers" hide-details></v-checkbox>
+      <v-checkbox v-model="showLegend" label="Show legend" hide-details></v-checkbox>
+      <v-checkbox v-model="hover" label="Hover effect" hide-details></v-checkbox>
 
-        <v-slider
-          v-model="cellSize"
-          label="Cell size"
-          max="48"
-          min="24"
-        ></v-slider>
+      <v-slider
+        v-model="cellSize"
+        label="Cell size"
+        max="48"
+        min="24"
+      ></v-slider>
 
-        <v-slider
-          v-model="roundedIndex"
-          :ticks="Object.fromEntries(roundedOptions.map((v, i) => [i, v]))"
-          label="Rounded"
-          max="5"
-          min="0"
-          step="1"
-        ></v-slider>
-      </div>
+      <v-slider
+        v-model="gap"
+        label="Gap"
+        max="20"
+        min="0"
+      ></v-slider>
+
+      <v-slider
+        v-model="roundedIndex"
+        :ticks="Object.fromEntries(roundedOptions.map((v, i) => [i, v]))"
+        label="Rounded"
+        max="5"
+        min="0"
+        step="1"
+      ></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -71,9 +76,10 @@
 
   const hideColumnHeaders = ref(false)
   const hideRowHeaders = ref(false)
-  const showLegend = ref(false)
-  const hover = ref(true)
+  const showLegend = ref(true)
+  const hover = ref(false)
   const cellSize = ref(32)
+  const gap = ref(6)
   const roundedOptions = ['0', 'sm', 'md', 'lg', 'xl', 'pill']
   const roundedIndex = ref(2)
   const rounded = computed(() => roundedOptions[roundedIndex.value])
@@ -81,6 +87,7 @@
   const props = computed(() => {
     return {
       'cell-size': cellSize.value !== 26 ? cellSize.value : undefined,
+      gap: gap.value !== 6 ? gap.value : undefined,
       'hide-column-headers': hideColumnHeaders.value || undefined,
       'hide-row-headers': hideRowHeaders.value || undefined,
       legend: showLegend.value || undefined,

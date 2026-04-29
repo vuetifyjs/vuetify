@@ -13,8 +13,8 @@
           hover
           legend
         >
-          <template v-slot:row-header="{ items: rowItems }">
-            {{ adapter.format(rowItems[0].raw.date, 'weekdayShort') }}
+          <template v-slot:row-header="{ row, items: rowItems }">
+            {{ row % 2 ? adapter.format(rowItems[0].raw.date, 'weekdayShort') : '' }}
           </template>
           <template v-slot:group-header="{ items: groupItems }">
             <div class="text-center">

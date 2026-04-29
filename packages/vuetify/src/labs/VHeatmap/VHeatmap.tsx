@@ -27,8 +27,8 @@ export interface HeatmapLegendOptions {
 export type VHeatmapSlots = {
   cell: { item: HeatmapCell }
   legend: { thresholds: HeatmapThresholds, activeBuckets: number[], toggle: (index: number) => void }
-  'row-header': { row: any, items: HeatmapCell[] }
-  'column-header': { column: any, items: HeatmapCell[] }
+  'row-header': { row: any, index: number, items: HeatmapCell[] }
+  'column-header': { column: any, index: number, items: HeatmapCell[] }
   'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
 }
 
@@ -182,9 +182,9 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
           <div class="v-heatmap__body">
             { !props.hideRowHeaders && (
               <div class="v-heatmap__row-headers" key="row-headers">
-                { rows.map((row, i) => (
-                  <div key={ `rh-${i}` } class="v-heatmap__row-header">
-                    { slots['row-header']?.({ row, items: rowItems.get(row) ?? [] }) ?? row }
+                { rows.map((row, index) => (
+                  <div key={ `row-header-${index}` } class="v-heatmap__row-header">
+                    { slots['row-header']?.({ row, index, items: rowItems.get(row) ?? [] }) ?? row }
                   </div>
                 ))}
               </div>
@@ -204,9 +204,9 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                   )}
                   { hasColumnHeaders && (
                     <div class="v-heatmap__column-headers" key="column-headers">
-                      { group.columns.map(col => (
-                        <div key={ `ch-${col.key}` } class="v-heatmap__column-header">
-                          { slots['column-header']?.({ column: col.key, items: col.items }) ?? col.key }
+                      { group.columns.map((col, index) => (
+                        <div key={ `column-header-${col.key}` } class="v-heatmap__column-header">
+                          { slots['column-header']?.({ column: col.key, index, items: col.items }) ?? col.key }
                         </div>
                       ))}
                     </div>
