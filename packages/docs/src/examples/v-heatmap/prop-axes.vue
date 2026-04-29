@@ -10,6 +10,10 @@
         :thresholds="thresholds"
         rounded="circle"
       >
+        <template v-slot:row-header="{ row }">
+          <span class="text-capitalize font-weight-bold">{{ row }}</span>&nbsp;(°F)
+        </template>
+
         <template v-slot:cell="{ item }">
           <span class="v-heatmap-cell__text text-white">{{ item.value }}</span>
         </template>
@@ -19,18 +23,18 @@
 </template>
 
 <script setup>
-  const rows = ['Min (°C)', 'Avg (°C)', 'Max (°C)']
+  const rows = ['min', 'avg', 'max']
   const columns = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   const thresholds = {
-    from: { min: -30, color: '#4a7ec1' },
-    to: { min: 15, color: '#dc6b80' },
+    from: { min: 41, color: '#5c9fd6' },
+    to: { min: 82, color: '#e0522b' },
   }
 
   const temperatures = {
-    'Min (°C)': [-29, -26, -20, -7, 2, 9, 10, 8, 2, -8, -20, -27],
-    'Avg (°C)': [-24, -20, -12, -1, 8, 15, 16, 13, 7, -4, -15, -23],
-    'Max (°C)': [-19, -14, -5, 5, 15, 21, 22, 19, 12, 0, -11, -20],
+    min: [66, 66, 63, 57, 52, 48, 46, 48, 52, 57, 61, 64],
+    avg: [73, 73, 70, 64, 59, 55, 54, 55, 59, 64, 68, 72],
+    max: [79, 79, 75, 72, 66, 61, 61, 63, 66, 72, 75, 77],
   }
 
   const items = rows.flatMap(row =>
