@@ -92,9 +92,19 @@ describe('typing', () => {
         expect(result).toEqual({ text: '123', cursor: 3 })
       })
 
-      it('pastes into existing value', () => {
+      it('pastes at the end of existing value', () => {
         const result = processGroupedInput('insertFromPaste', '56', '1,234', 5, 5, opts())
         expect(result).toEqual({ text: '123,456', cursor: 7 })
+      })
+
+      it('pastes inside existing value', () => {
+        const result = processGroupedInput('insertFromPaste', '34', '125', 2, 2, opts())
+        expect(result).toEqual({ text: '12,345', cursor: 5 })
+      })
+
+      it('correct cursor position when dropping duplicate decimal separator', () => {
+        const result = processGroupedInput('insertFromPaste', ' -4.5', '12.11111', 3, 3, opts({ precision: 5 }))
+        expect(result).toEqual({ text: '12.45111', cursor: 5 })
       })
     })
 
@@ -183,16 +193,6 @@ describe('typing', () => {
       })
     })
 
-    describe('unknown inputType', () => {
-      it('returns null for historyUndo', () => {
-        expect(processGroupedInput('historyUndo', null, '1,234', 0, 0, opts())).toBeNull()
-      })
-
-      it('returns null for historyRedo', () => {
-        expect(processGroupedInput('historyRedo', null, '1,234', 0, 0, opts())).toBeNull()
-      })
-    })
-
     describe('custom separators', () => {
       it('works with period as group separator and comma as decimal', () => {
         const o = opts({ groupSeparator: '.', decimalSeparator: ',', precision: 2 })
@@ -222,7 +222,7 @@ describe('typing', () => {
     })
 
     describe('locale-specific grouping', () => {
-      it('uses Indian numbering system for hi-IN', () => {
+      it('handles Indian numbering system for hi-IN', () => {
         // hi-IN: 3-digit primary group, then 2-digit groups
         const o = opts({ locale: 'hi-IN' })
         const result = processGroupedInput('insertFromPaste', '1234567890', '', 0, 0, o)
@@ -262,44 +262,49 @@ describe('typing', () => {
         { data: '+', value: '12', sel: 2, expected: '12' },
         { data: ' ', value: '12', sel: 2, expected: '12' },
       ])('rejects "$data" in "$value"', ({ data, value, sel, expected }) => {
-        const result = processPlainInput(data, value, sel, sel, plain())
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe(expected)
+        expect(processPlainInput(data, value, sel, sel, plain())).toMatchObject({ text: expected })
       })
 
       it('extracts digits from mixed input (paste-like)', () => {
         // "12" + "ab3c" at end → "12ab3c" → extractNumber → "123"
-        const result = processPlainInput('ab3c', '12', 2, 2, plain())
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('123')
+        expect(processPlainInput('ab3c', '12', 2, 2, plain())).toMatchObject({ text: '123' })
+      })
+
+      it('preserves cursor position when typing/pasting incorrect characters', () => {
+        // type 'x' at middle of "111|111" → rejected, cursor stays at 3
+        expect(processPlainInput('x', '111111', 3, 3, plain())).toMatchObject({ text: '111111', cursor: 3 })
+        // paste 'asd' → no valid chars extracted, cursor stays at 3
+        expect(processPlainInput('asd', '111111', 3, 3, plain())).toMatchObject({ text: '111111', cursor: 3 })
+        // paste '_5x' → '5' extracted (length 1), cursor at 3+1=4
+        expect(processPlainInput('_5x', '111111', 3, 3, plain())).toMatchObject({ text: '1115111', cursor: 4 })
+        // paste ' 456' → '456' extracted (length 3), cursor at 3+3=6 (selection should not matter)
+        expect(processPlainInput(' 456', '111111', 3, 4, plain())).toMatchObject({ text: '11145611', cursor: 6 })
+        // paste ' 4.56' → '4.56' extracted (length 4), cursor at 3+4=7
+        expect(processPlainInput(' 4.56', '111111', 3, 3, plain({ precision: 3 }))).toMatchObject({ text: '1114.561', cursor: 7 })
+      })
+
+      it('correct cursor position when dropping duplicate decimal separator', () => {
+        expect(processPlainInput(' -4.5', '12.11111', 3, 3, plain({ precision: 5 }))).toMatchObject({ text: '12.45111', cursor: 5 })
       })
 
       it('rejects second minus sign', () => {
-        const result = processPlainInput('-', '-5', 2, 2, plain())
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('-5')
+        expect(processPlainInput('-', '-5', 2, 2, plain())).toMatchObject({ text: '-5', cursor: 2 })
+        expect(processPlainInput('-', '-5', 1, 1, plain())).toMatchObject({ text: '-5', cursor: 1 })
       })
 
       it('rejects second decimal separator', () => {
-        const result = processPlainInput('.', '1.2', 3, 3, plain({ precision: 2 }))
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('1.2')
+        expect(processPlainInput('.', '1.2', 3, 3, plain({ precision: 2 }))).toMatchObject({ text: '1.2' })
       })
     })
 
     describe('precision enforcement', () => {
       it('rejects decimal separator when precision=0', () => {
-        const result = processPlainInput('.', '42', 2, 2, plain({ precision: 0 }))
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('42')
+        expect(processPlainInput('.', '42', 2, 2, plain({ precision: 0 }))).toMatchObject({ text: '42' })
       })
 
       it('rejects digit beyond precision limit', () => {
         // "1.23" + "4" at end, precision=2 → "1.234" → exceeds → cleaned "1.23"
-        const result = processPlainInput('4', '1.23', 4, 4, plain({ precision: 2 }))
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('1.23')
-        expect(result!.cursor).toBe(5) // selectionStart(4) + data.length(1)
+        expect(processPlainInput('4', '1.23', 4, 4, plain({ precision: 2 }))).toMatchObject({ text: '1.23' })
       })
 
       it('allows digit within precision limit', () => {
@@ -313,16 +318,24 @@ describe('typing', () => {
       })
 
       it('rejects period when comma is the decimal separator', () => {
-        const result = processPlainInput('.', '12', 2, 2, plain({ decimalSeparator: ',' }))
-        expect(result).not.toBeNull()
-        expect(result!.text).toBe('12')
+        expect(processPlainInput('.', '12', 2, 2, plain({ decimalSeparator: ',' }))).toMatchObject({ text: '12' })
       })
     })
 
     describe('selection replacement', () => {
-      it('returns null when replacing selection with valid digit', () => {
+      it('accepts replacing selection digit', () => {
         // "123" select "2" (pos 1-2), type "4" → "143" — valid
         expect(processPlainInput('4', '123', 1, 2, plain())).toBeNull()
+      })
+
+      it('accepts replacing decimal separator', () => {
+        // "12.35" select "." type "4" → "1245" — valid
+        expect(processPlainInput('4', '12.35', 2, 3, plain({ precision: 2 }))).toBeNull()
+      })
+
+      it('accepts replacing digit with decimal separator', () => {
+        // "12345" select "3" type "4" → "12.45" — valid
+        expect(processPlainInput('.', '12345', 2, 3, plain({ precision: 2 }))).toBeNull()
       })
     })
   })

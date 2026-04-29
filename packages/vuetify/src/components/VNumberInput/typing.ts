@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Utilities
 import { escapeForRegex, extractNumber } from '@/util'
 
@@ -100,30 +102,38 @@ export function processPlainInput (
   if (!data) return null
 
   const { decimalSeparator, precision } = options
+  const beforePart = value.slice(0, selectionStart)
+  let cleanData = extractNumber(data, precision, decimalSeparator)
+  if (cleanData.startsWith('-') && beforePart.length > 0) cleanData = cleanData.slice(1)
+  if (cleanData.includes(decimalSeparator) && beforePart.includes(decimalSeparator)) {
+    cleanData = cleanData.replace(decimalSeparator, '')
+  }
 
-  const potentialNewInputVal = value
-    ? value.slice(0, selectionStart) + data + value.slice(selectionEnd)
-    : data
-
-  const cleaned = extractNumber(potentialNewInputVal, precision, decimalSeparator)
+  const candidate = beforePart + cleanData + value.slice(selectionEnd)
   const validPattern = new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator)}?\\d*$`)
 
-  if (!validPattern.test(potentialNewInputVal)) {
-    return { text: cleaned, cursor: cleaned.length }
+  if (!validPattern.test(candidate)) {
+    return {
+      text: extractNumber(candidate, precision, decimalSeparator),
+      cursor: selectionStart,
+    }
   }
 
-  if (precision == null) return null
-
-  if (potentialNewInputVal.split(decimalSeparator)[1]?.length > precision) {
-    const cursor = selectionStart + data.length
-    return { text: cleaned, cursor }
+  if (precision != null && (candidate.split(decimalSeparator)[1]?.length ?? 0) > precision) {
+    const text = extractNumber(candidate, precision, decimalSeparator)
+    return {
+      text,
+      cursor: text === beforePart + value.slice(selectionEnd)
+        ? selectionStart
+        : selectionStart + cleanData.length,
+    }
   }
 
-  if (precision === 0 && potentialNewInputVal.endsWith(decimalSeparator)) {
-    return { text: cleaned, cursor: cleaned.length }
+  if (cleanData === data) return null
+  return {
+    text: candidate,
+    cursor: selectionStart + cleanData.length,
   }
-
-  return null
 }
 
 /**
@@ -157,9 +167,16 @@ export function processGroupedInput (
     case 'insertFromPaste':
     case 'insertFromDrop': {
       if (!data) return null
-      const cleaned = extractNumber(data, precision, decimalSeparator)
-      newRaw = raw.slice(0, logicalStart) + cleaned + raw.slice(logicalEnd)
-      newLogicalCursor = logicalStart + cleaned.length
+      const rawBefore = raw.slice(0, logicalStart)
+      let cleanData = extractNumber(data, precision, decimalSeparator)
+      if (cleanData.startsWith('-') && rawBefore.length > 0) {
+        cleanData = cleanData.slice(1)
+      }
+      if (cleanData.includes(decimalSeparator) && rawBefore.includes(decimalSeparator)) {
+        cleanData = cleanData.replace(decimalSeparator, '')
+      }
+      newRaw = rawBefore + cleanData + raw.slice(logicalEnd)
+      newLogicalCursor = logicalStart + cleanData.length
       break
     }
     case 'deleteContentBackward': {
