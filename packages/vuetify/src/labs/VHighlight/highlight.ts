@@ -67,7 +67,7 @@ export function useHighlight (props: UseHighlightProps) {
     const matchAll = toValue(props.matchAll) ?? false
     const ignoreCase = toValue(props.ignoreCase) ?? false
 
-    if (matches?.length) return matchesToChunks(text, matchAll ? matches : matches.slice(0, 1))
+    if (matches?.length) return matchesToChunks(text, matches)
 
     if (query) {
       const queryMatches = queryToMatches(text, query, matchAll, ignoreCase)

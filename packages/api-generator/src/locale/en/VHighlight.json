@@ -2,7 +2,7 @@
   "props": {
     "query": "The search string or array of strings to highlight within the text.",
     "matches": "Pre-computed match ranges as `[start, end]` pairs. Takes priority over **query** when provided and non-empty.",
-    "matchAll": "When enabled, all occurrences of each query term are highlighted. When disabled, only the first occurrence of each term is highlighted.",
+    "matchAll": "When enabled, all occurrences of each query term are highlighted. When disabled, only the first occurrence of each term is highlighted. Has no effect when **matches** is provided.",
     "ignoreCase": "When enabled, matching is case-insensitive.",
     "markClass": "Additional CSS class(es) applied to each `<mark>` element wrapping a highlighted match."
   }

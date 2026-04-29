@@ -78,6 +78,16 @@ describe('useHighlight', () => {
     })
   })
 
+  describe('matchAll is ignored when matches are pre-computed', () => {
+    it('renders all provided spans regardless of matchAll: false', () => {
+      expect(run({ text: 'aa bb aa', matches: [[0, 2], [6, 8]], matchAll: false })).toStrictEqual([
+        { text: 'aa', match: true },
+        { text: ' bb ', match: false },
+        { text: 'aa', match: true },
+      ])
+    })
+  })
+
   describe('priority', () => {
     it('uses pre-computed matches over query when both are provided', () => {
       // query 'hello' would highlight all, but matches says only [1,3]
