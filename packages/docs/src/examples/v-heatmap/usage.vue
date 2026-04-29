@@ -101,8 +101,18 @@
   const items = [
     { row: 'W1', column: 'Mon', value: null },
     { row: 'W1', column: 'Tue', value: 0 },
-    { row: 'W1', column: 'Wed', value: 0 },
-    { row: 'W1', column: 'Thu', value: 2 },
+    { row: 'W1', column: 'Wed', value: 2 },
+    { row: 'W1', column: 'Thu', value: 5 },
+    { row: 'W1', column: 'Fri', value: 4 },
+    { row: 'W1', column: 'Sat', value: 1 },
+    { row: 'W1', column: 'Sun', value: 0 },
+    { row: 'W2', column: 'Mon', value: 1 },
+    { row: 'W2', column: 'Tue', value: 3 },
+    { row: 'W2', column: 'Wed', value: 4 },
+    { row: 'W2', column: 'Thu', value: 7 },
+    { row: 'W2', column: 'Fri', value: 2 },
+    { row: 'W2', column: 'Sat', value: 1 },
+    { row: 'W2', column: 'Sun', value: 0 },
     /* etc. */
   ]
 <` + '/script>'
