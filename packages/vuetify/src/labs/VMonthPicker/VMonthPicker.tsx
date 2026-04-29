@@ -266,8 +266,8 @@ export const VMonthPicker = genericComponent<new <
                       key="years"
                       color={ props.color }
                       modelValue={ year.value }
-                      min={ props.min }
-                      max={ props.max }
+                      min={ props.min ? `${props.min}-01` : undefined }
+                      max={ props.max ? `${props.max}-01` : undefined }
                       allowedYears={ props.allowedYears }
                       onUpdate:modelValue={ setYear }
                     />
