@@ -22,18 +22,19 @@ function matchesToChunks (text: string, matches: FilterMatchArrayMultiple): High
   return chunks
 }
 
-function queryToMatches (text: string, query: string | string[]): FilterMatchArrayMultiple {
+function queryToMatches (text: string, query: string | string[], matchAll: boolean, ignoreCase: boolean): FilterMatchArrayMultiple {
   const terms = (Array.isArray(query) ? query : [query]).filter(Boolean)
-  const lowerText = text.toLocaleLowerCase()
+  const haystack = ignoreCase ? text.toLocaleLowerCase() : text
   const spans: [number, number][] = []
 
   for (const term of terms) {
-    const lowerTerm = term.toLocaleLowerCase()
-    let i = lowerText.indexOf(lowerTerm)
+    const needle = ignoreCase ? term.toLocaleLowerCase() : term
+    let i = haystack.indexOf(needle)
 
     while (~i) {
       spans.push([i, i + term.length])
-      i = lowerText.indexOf(lowerTerm, i + term.length)
+      if (!matchAll) break
+      i = haystack.indexOf(needle, i + term.length)
     }
   }
 
@@ -54,6 +55,8 @@ interface UseHighlightProps {
   text: MaybeRefOrGetter<string>
   query?: MaybeRefOrGetter<string | string[] | undefined>
   matches?: MaybeRefOrGetter<FilterMatchArrayMultiple | undefined>
+  matchAll?: MaybeRefOrGetter<boolean | undefined>
+  ignoreCase?: MaybeRefOrGetter<boolean | undefined>
 }
 
 export function useHighlight (props: UseHighlightProps) {
@@ -61,11 +64,13 @@ export function useHighlight (props: UseHighlightProps) {
     const text = toValue(props.text)
     const matches = toValue(props.matches)
     const query = toValue(props.query)
+    const matchAll = toValue(props.matchAll) ?? false
+    const ignoreCase = toValue(props.ignoreCase) ?? false
 
-    if (matches?.length) return matchesToChunks(text, matches)
+    if (matches?.length) return matchesToChunks(text, matchAll ? matches : matches.slice(0, 1))
 
     if (query) {
-      const queryMatches = queryToMatches(text, query)
+      const queryMatches = queryToMatches(text, query, matchAll, ignoreCase)
       return queryMatches.length ? matchesToChunks(text, queryMatches) : [{ text, match: false }]
     }
 

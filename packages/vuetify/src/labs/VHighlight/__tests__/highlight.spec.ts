@@ -20,13 +20,19 @@ describe('useHighlight', () => {
   })
 
   describe('with query string', () => {
-    it('matches case-insensitively', () => {
-      const chunks = run({ text: 'Hello World', query: 'HELLO' })
+    it('is case-sensitive by default', () => {
+      expect(run({ text: 'Hello World', query: 'HELLO' })).toStrictEqual([
+        { text: 'Hello World', match: false },
+      ])
+    })
+
+    it('matches case-insensitively when ignoreCase is true', () => {
+      const chunks = run({ text: 'Hello World', query: 'HELLO', ignoreCase: true })
       expect(chunks[0]).toStrictEqual({ text: 'Hello', match: true })
     })
 
     it('finds every occurrence when the query appears multiple times', () => {
-      expect(run({ text: 'aa bb aa', query: 'aa' }).filter(c => c.match).map(c => c.text))
+      expect(run({ text: 'aa bb aa', query: 'aa', matchAll: true }).filter(c => c.match).map(c => c.text))
         .toStrictEqual(['aa', 'aa'])
     })
 
@@ -50,6 +56,24 @@ describe('useHighlight', () => {
         { text: 'h', match: false },
         { text: 'ell', match: true },
         { text: 'o', match: false },
+      ])
+    })
+  })
+
+  describe('matchAll: false', () => {
+    it('marks only the first occurrence of a single query', () => {
+      expect(run({ text: 'aa bb aa', query: 'aa', matchAll: false })).toStrictEqual([
+        { text: 'aa', match: true },
+        { text: ' bb aa', match: false },
+      ])
+    })
+
+    it('marks only the first occurrence per term in an array query', () => {
+      expect(run({ text: 'aa bb aa cc aa', query: ['aa', 'cc'], matchAll: false })).toStrictEqual([
+        { text: 'aa', match: true },
+        { text: ' bb aa ', match: false },
+        { text: 'cc', match: true },
+        { text: ' aa', match: false },
       ])
     })
   })

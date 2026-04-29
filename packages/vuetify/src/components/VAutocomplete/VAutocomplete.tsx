@@ -612,7 +612,7 @@ export const VAutocomplete = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : <VHighlight text={ item.title } matches={ getMatches(item)?.title } />
+                                  : <VHighlight text={ item.title } matches={ getMatches(item)?.title } matchAll ignoreCase />
                               },
                             }}
                           </VListItem>

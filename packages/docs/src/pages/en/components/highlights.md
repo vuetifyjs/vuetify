@@ -57,7 +57,7 @@ export default createVuetify({
 
 #### Query
 
-Pass a string or array of strings to **query** to be marked within text using case-insensitive matching. Multiple terms are matched independently and overlapping or adjacent ranges are merged.
+Pass a string or array of strings to **query** to be marked. Multiple terms are matched independently and overlapping or adjacent ranges are merged.
 
 <ExamplesExample file="v-highlight/prop-query" />
 

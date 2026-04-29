@@ -20,6 +20,8 @@ export const makeVHighlightProps = propsFactory({
   },
   query: [String, Array] as PropType<string | string[]>,
   matches: Array as PropType<FilterMatchArrayMultiple>,
+  matchAll: Boolean,
+  ignoreCase: Boolean,
   markClass: String,
   ...makeTagProps({ tag: 'span' }),
 }, 'VHighlight')
@@ -34,6 +36,8 @@ export const VHighlight = defineComponent({
       text: toRef(props, 'text'),
       query: toRef(props, 'query'),
       matches: toRef(props, 'matches'),
+      matchAll: toRef(props, 'matchAll'),
+      ignoreCase: toRef(props, 'ignoreCase'),
     })
 
     return () => (

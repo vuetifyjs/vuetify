@@ -9,6 +9,8 @@
       :text="text"
       class="selection-target text-body-2 pa-4 rounded border"
       tag="pre"
+      ignore-case
+      match-all
       @mouseup="onMouseUp"
     ></v-highlight>
   </div>
