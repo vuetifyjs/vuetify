@@ -29,12 +29,12 @@ function queryToMatches (text: string, query: string | string[], matchAll: boole
 
   for (const term of terms) {
     const needle = ignoreCase ? term.toLocaleLowerCase() : term
-    let i = haystack.indexOf(needle)
+    let index = haystack.indexOf(needle)
 
-    while (~i) {
-      spans.push([i, i + term.length])
+    while (index !== -1) {
+      spans.push([index, index + term.length])
       if (!matchAll) break
-      i = haystack.indexOf(needle, i + term.length)
+      index = haystack.indexOf(needle, index + term.length)
     }
   }
 
