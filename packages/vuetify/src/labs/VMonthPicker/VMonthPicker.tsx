@@ -68,6 +68,7 @@ export const makeVMonthPickerProps = propsFactory({
   max: String,
   multiple: [Boolean, String] as PropType<boolean | 'range'>,
   allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
+  allowedYears: [Array, Function] as PropType<VDatePickerYears['$props']['allowedYears']>,
   monthsColumns: {
     type: [Number, String],
     default: 4,
@@ -267,6 +268,7 @@ export const VMonthPicker = genericComponent<new <
                       modelValue={ year.value }
                       min={ props.min }
                       max={ props.max }
+                      allowedYears={ props.allowedYears }
                       onUpdate:modelValue={ setYear }
                     />
                   ) : (
