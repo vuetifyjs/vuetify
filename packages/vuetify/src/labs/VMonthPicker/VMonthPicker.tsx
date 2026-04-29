@@ -7,13 +7,13 @@ import { VBtn } from '@/components/VBtn'
 import { VDatePickerHeader } from '@/components/VDatePicker/VDatePickerHeader'
 import { VDatePickerYears } from '@/components/VDatePicker/VDatePickerYears'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 
 // Composables
 import { useMonthPicker } from './useMonthPicker'
 import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date'
+import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
@@ -24,7 +24,6 @@ import { chunkArray, createRange, genericComponent, propsFactory, useRender, wra
 
 // Types
 import type { PropType } from 'vue'
-import type { IconValue } from '@/composables/icons'
 import type { GenericProps } from '@/util'
 
 export type VMonthPickerSlots = {
@@ -45,7 +44,22 @@ export type VMonthPickerSlots = {
 export const makeVMonthPickerProps = propsFactory({
   disabled: Boolean,
   readonly: Boolean,
-  selectedIcon: [String, Function, Object] as PropType<IconValue>,
+  selectedIcon: {
+    type: IconValue,
+    default: '$complete',
+  },
+  nextIcon: {
+    type: IconValue,
+    default: '$next',
+  },
+  prevIcon: {
+    type: IconValue,
+    default: '$prev',
+  },
+  modeIcon: {
+    type: IconValue,
+    default: '$subgroup',
+  },
   modelValue: {
     type: null as any as PropType<string | string[] | null>,
     default: null,
@@ -70,6 +84,7 @@ export const makeVMonthPickerProps = propsFactory({
     type: String,
     default: 'picker-reverse-transition',
   },
+
   ...makeVPickerProps({
     title: '$vuetify.monthPicker.title',
   }),
@@ -199,6 +214,7 @@ export const VMonthPicker = genericComponent<new <
             'v-month-picker',
             {
               'v-month-picker--list': isListView.value,
+              'v-month-picker--years': viewMode.value === 'years',
             },
             props.class,
           ]}
@@ -219,34 +235,24 @@ export const VMonthPicker = genericComponent<new <
             default: () => (
               <>
                 <VDefaultsProvider defaults={{ VBtn: { variant: 'text' } }}>
-                  <div class="v-month-picker__controls pa-3 pb-0 d-flex justify-space-between align-center flex-grow-1">
+                  <div class="v-month-picker__controls">
                     <VBtn
                       disabled={ props.disabled || disablePrevYear.value }
-                      icon="$prev"
+                      icon={ props.prevIcon }
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.previousYear') }
                       onClick={ prevYear }
                     />
                     <VBtn
                       disabled={ props.disabled }
+                      text={ year.value }
+                      appendIcon={ props.modeIcon }
                       rounded
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.selectYear') }
                       onClick={ toggleViewMode }
-                      text={ year.value }
-                      v-slots={{
-                        append: () => (
-                          <VIcon
-                            icon="$dropdown"
-                            style={{
-                              transition: 'transform .2s ease-in-out',
-                              transform: `rotate(${viewMode.value === 'years' ? 180 : 0}deg)`,
-                            }}
-                          />
-                        ),
-                      }}
                     />
                     <VBtn
                       disabled={ props.disabled || disableNextYear.value }
-                      icon="$next"
+                      icon={ props.nextIcon }
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.nextYear') }
                       onClick={ nextYear }
                     />
@@ -257,7 +263,6 @@ export const VMonthPicker = genericComponent<new <
                   { viewMode.value === 'years' ? (
                     <VDatePickerYears
                       key="years"
-                      class="flex-grow-1"
                       color={ props.color }
                       modelValue={ year.value }
                       min={ props.min }
@@ -294,7 +299,7 @@ export const VMonthPicker = genericComponent<new <
                                     ? (selected ? 'tonal' : 'text')
                                     : (selected ? 'flat' : (month.isCurrent ? 'outlined' : 'text'))
 
-                                  const icon = isListView.value && selected ? (props.selectedIcon ?? '$complete') : undefined
+                                  const icon = isListView.value && selected ? props.selectedIcon : undefined
 
                                   const btnProps = {
                                     color: (selected || (month.isCurrent && !isListView.value))
@@ -306,6 +311,7 @@ export const VMonthPicker = genericComponent<new <
                                     text: isListView.value ? month.label : month.text,
                                     prependIcon: icon,
                                     variant,
+                                    ripple: false,
                                     'aria-label': month.isCurrent
                                       ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
                                       : month.label,

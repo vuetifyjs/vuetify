@@ -42,6 +42,7 @@ At its core, the month picker allows selecting a specific month and year. The mo
 | Component | Description |
 | - | - |
 | [v-month-picker](/api/v-month-picker/) | Primary Component |
+| [v-date-picker-years](/api/v-date-picker-years/) | Sub-component used to display years |
 
 <ApiInline hide-links />
 
