@@ -390,7 +390,7 @@ export const VSelect = genericComponent<new <
       }
       if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
-        listRef.value.focus(index >= 0 ? index : 'first')
+        listRef.value.focus(index >= 0 ? index : 'first', { focusVisible: false })
       }
     }
     function onAfterLeave () {
