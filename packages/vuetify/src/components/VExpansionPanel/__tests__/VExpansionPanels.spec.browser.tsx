@@ -27,6 +27,11 @@ const stories = {
       <VExpansionPanel hideActions title="Header" text="Content" />
     </VExpansionPanels>
   ),
+  'Without hover effect': (
+    <VExpansionPanels>
+      <VExpansionPanel hover={ false } title="Header" text="Content" />
+    </VExpansionPanels>
+  ),
   'With title & text props': (
     <VExpansionPanels>
       {['Header 1', 'Header 2'].map((title, i) => (
@@ -77,6 +82,39 @@ describe('VExpansionPanels', () => {
 
     expect(screen.getAllByCSS('.v-expansion-panel-title')[1]).toHaveClass('v-expansion-panel-title--active')
     expect(model.value).toBe('foo')
+  })
+
+  it('applies no-hover class when hover prop is false', () => {
+    render(() => (
+      <VExpansionPanels>
+        <VExpansionPanel hover={ false } title="Header" text="Content" />
+      </VExpansionPanels>
+    ))
+
+    expect(screen.getByCSS('.v-expansion-panel-title')).toHaveClass('v-expansion-panel-title--no-hover')
+  })
+
+  it('does not apply no-hover class by default', () => {
+    render(() => (
+      <VExpansionPanels>
+        <VExpansionPanel title="Header" text="Content" />
+      </VExpansionPanels>
+    ))
+
+    expect(screen.getByCSS('.v-expansion-panel-title')).not.toHaveClass('v-expansion-panel-title--no-hover')
+  })
+
+  it('cascades hover=false from VExpansionPanels to children', () => {
+    render(() => (
+      <VExpansionPanels hover={ false }>
+        <VExpansionPanel title="Header 1" text="Content" />
+        <VExpansionPanel title="Header 2" text="Content" />
+      </VExpansionPanels>
+    ))
+
+    const titles = screen.getAllByCSS('.v-expansion-panel-title')
+    expect(titles[0]).toHaveClass('v-expansion-panel-title--no-hover')
+    expect(titles[1]).toHaveClass('v-expansion-panel-title--no-hover')
   })
 
   showcase({ stories })
