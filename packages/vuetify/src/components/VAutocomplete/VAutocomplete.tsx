@@ -510,7 +510,6 @@ export const VAutocomplete = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-autocomplete__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -519,6 +518,7 @@ export const VAutocomplete = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
+                  contentClass={['v-autocomplete__content', props.menuProps?.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }
