@@ -154,8 +154,17 @@
 
     @include tools.states('.v-expansion-panel-title__overlay', false)
 
+    &:hover
+      > .v-expansion-panel-title__overlay
+        opacity: calc(#{$expansion-panel-title-hover-overlay} * var(--v-theme-overlay-multiplier))
+
     &--focusable.v-expansion-panel-title--active
       @include tools.active-states('.v-expansion-panel-title__overlay')
+
+    &--no-hover
+      &:hover
+        > .v-expansion-panel-title__overlay
+          opacity: 0
 
   .v-expansion-panel-title__overlay
     background-color: currentColor

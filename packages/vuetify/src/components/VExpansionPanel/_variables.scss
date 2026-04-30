@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../../styles/tools';
 
@@ -20,6 +21,7 @@ $expansion-panel-active-title-min-height: 64px !default;
 $expansion-panel-title-font-size: 0.9375rem !default;
 $expansion-panel-title-min-height: 48px !default;
 $expansion-panel-title-padding: 16px 24px !default;
+$expansion-panel-title-hover-overlay: map.get(settings.$states, 'hover') !default;
 
 // VExpansionPanelText
 $expansion-panel-text-padding: 8px 24px 16px !default;
