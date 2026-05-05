@@ -365,6 +365,12 @@ export const VSelect = genericComponent<new <
     }
     function onBlur (e: FocusEvent) {
       const target = e.target as Element
+      // If the blur originates from the text field itself, close the menu.
+      // However, when the blur originates from within the menu (e.g., clicking an option),
+      // we must keep the menu open to avoid emitting @blur on the VSelect component.
+      if (vMenuRef.value?.$el.contains(target)) {
+        return
+      }
       if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
       }
