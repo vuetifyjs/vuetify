@@ -133,7 +133,11 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
       if (!pastedString) return
 
-      const pastedCharacters = [...pastedString]
+      // Strip mask delimiters from pasted text to prevent character
+      // misalignment when pasting masked values (e.g. copy/paste
+      // "1234-5678-9012-3456" into the same field).
+      const unmaskedPaste = mask.unmask(pastedString)
+      const pastedCharacters = [...(unmaskedPaste ?? pastedString)]
 
       const hasSelection = inputElement.selectionStart !== inputElement.selectionEnd
 
