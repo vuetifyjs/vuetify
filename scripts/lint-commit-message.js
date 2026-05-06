@@ -1,10 +1,16 @@
 import fs from 'node:fs'
+import path from 'node:path'
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
 
 const [messageFile] = process.argv.slice(2)
-const currentMessage = fs.readFileSync(messageFile, 'utf8')
+const resolvedPath = path.resolve(messageFile)
+if (!resolvedPath.startsWith(path.resolve(process.cwd()) + path.sep) && resolvedPath !== path.resolve(process.cwd())) {
+  console.error(red + 'Invalid commit message file path' + reset)
+  process.exit(1)
+}
+const currentMessage = fs.readFileSync(resolvedPath, 'utf8')
   .replace(/^# ------------------------ >8 ------------------------[\s\S]*$|^#.*\n/gm, '')
 
 const errors = []
