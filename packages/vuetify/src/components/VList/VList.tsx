@@ -182,6 +182,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
       items,
       returnObject: toRef(() => props.returnObject),
       scrollToActive: toRef(() => props.navigationStrategy === 'track'),
+      valueComparator: toRef(() => props.valueComparator),
     })
 
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
