@@ -185,6 +185,35 @@ describe.each([
       await userEvent.click(screen.getByText(/Human Resources/))
       expect(onActivated).toHaveBeenCalledTimes(2)
     })
+
+    it('should apply value-comparator to initial activated', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+      ]
+      const activated = ref<string[]>(['beta'])
+
+      render(() => (
+        <VTreeview
+          v-model:activated={ activated.value }
+          items={ caseItems }
+          activatable
+          openAll
+          activeStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      expect(screen.getByText('Beta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Alpha').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
+    })
   })
 
   describe('select', () => {
@@ -302,6 +331,43 @@ describe.each([
       expect(selected.value).toStrictEqual([])
       await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
       expect(selected.value).toStrictEqual([4, 201, 202, 203, 204, 205, 301, 302])
+    })
+
+    it('should apply value-comparator to initial selected', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+        {
+          title: 'Group B',
+          value: 'GROUP_B',
+          children: [
+            { title: 'Gamma', value: 'GAMMA' },
+            { title: 'Delta', value: 'DELTA' },
+          ],
+        },
+      ]
+      const selected = ref<string[]>(['beta', 'delta'])
+
+      render(() => (
+        <VTreeview
+          v-model:selected={ selected.value }
+          items={ caseItems }
+          selectable
+          openAll
+          selectStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      const inputs = screen.getAllByCSS('.v-checkbox-btn input') as HTMLInputElement[]
+      expect(inputs.filter(el => el.checked)).toHaveLength(2)
     })
   })
 
