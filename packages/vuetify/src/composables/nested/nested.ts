@@ -218,7 +218,7 @@ export const useNested = (
     const flat: ListItem[] = []
     const stack = [...items.value]
     while (stack.length) {
-      const item = stack.shift()!
+      const item = stack.pop()!
       flat.push(item)
       if (item.children) stack.push(...item.children)
     }
