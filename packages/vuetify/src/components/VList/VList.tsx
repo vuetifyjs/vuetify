@@ -182,6 +182,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
       items,
       returnObject: toRef(() => props.returnObject),
       scrollToActive: toRef(() => props.navigationStrategy === 'track'),
+      valueComparator: toRef(() => props.valueComparator),
     })
 
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
@@ -335,9 +336,9 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number | null, options?: FocusOptions) {
       if (contentRef.value) {
-        return focusChild(contentRef.value, location)
+        return focusChild(contentRef.value, location, options)
       }
     }
 

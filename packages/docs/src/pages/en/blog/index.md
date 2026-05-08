@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## April 2026 Update
+
+🖊️ John Leider • 📅 May 4th, 2026
+
+April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives — alongside three Vuetify framework patch releases, MCP v0.7.0 with playground and link CRUD tools, and four ESLint Config releases including ESLint 10 support. Six new v0 components (Carousel, Image, NumberField, Progress, Toggle, Overflow) merged in April, the display composable became the first Vuetify internal to migrate to v0, and useTheme/useLocale/useFeatures became reactive-by-default across 847 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/april-2026-update/) { .text-end }
+
 ## March 2026 Update
 
 🖊️ John Leider • 📅 April 16th, 2026

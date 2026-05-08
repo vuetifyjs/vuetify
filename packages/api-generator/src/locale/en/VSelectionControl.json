@@ -1,4 +1,5 @@
 {
+  "description": "Low-level component used by `v-checkbox-btn` and `v-switch` for binary selection with support for indeterminate state as well.",
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
     "indeterminate": "Styles the control as an intermediate 'partially selected' state.",

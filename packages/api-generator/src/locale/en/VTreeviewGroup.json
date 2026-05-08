@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-treeview` used to display a single treeview node’s children.",
   "props": {
     "fluid": "Removes indentation from nested items."
   }
