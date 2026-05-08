@@ -11,11 +11,17 @@ export function copyElementContent (el: HTMLElement) {
 }
 
 export function getBranch () {
-  const branch = IN_BROWSER
+  const subdomain = IN_BROWSER
     ? window.location.hostname.split('.')[0]
     : 'master'
 
-  return ['master', 'dev', 'next'].includes(branch) ? branch : 'master'
+  if (subdomain === 'v3') {
+    return 'v3-stable'
+  }
+  if (subdomain === 'dev' || subdomain === 'next') {
+    return subdomain
+  }
+  return 'master'
 }
 
 export const wait = (timeout: number) => {
