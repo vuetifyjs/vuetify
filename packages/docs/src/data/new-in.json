@@ -218,6 +218,9 @@
       "static": "3.4.0",
       "gap": "4.1.0",
       "noDivider": "4.1.0"
+    },
+    "examples": {
+      "prop-rounded-gap": "4.1.0"
     }
   },
   "VField": {
@@ -239,6 +242,9 @@
     },
     "slots": {
       "loader": "4.1.0"
+    },
+    "examples": {
+      "prop-loading": "4.1.0"
     }
   },
   "VIcon": {
@@ -303,6 +309,9 @@
       "autocomplete": "3.10.0",
       "grouping": "4.1.0",
       "groupSeparator": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VOtpInput": {
