@@ -37,6 +37,7 @@ declare global {
     _observe?: Record<number, {
       init: boolean
       observer: IntersectionObserver
+      target?: HTMLElement
     } | undefined>
     _mutate?: Record<number, {
       observer: MutationObserver
