@@ -125,12 +125,12 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
-      const queue = ((vListRef.value?.children.get(id) ?? []).slice())
+      const queue = ((vListRef.value?.children.get(toRaw(id)) ?? []).slice())
       while (queue.length) {
         const child = queue.shift()
         if (!child) continue
         arr.push(child)
-        queue.push(...((vListRef.value?.children.get(child) ?? []).slice()))
+        queue.push(...((vListRef.value?.children.get(toRaw(child)) ?? []).slice()))
       }
       return arr
     }
