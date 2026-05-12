@@ -109,13 +109,13 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('opens all groups when openAllGroups is true', () => {
+  it('opens all groups when openAll is true', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
         headers={ DESSERT_HEADERS }
         groupBy={[{ key: 'category' }]}
-        openAllGroups
+        openAll
         itemsPerPage={ -1 }
       />
     ))
@@ -124,7 +124,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
   })
 
-  it('allows toggling individual groups closed after openAllGroups is set', async () => {
+  it('allows toggling individual groups closed after openAll is set', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -133,7 +133,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
         headers={ DESSERT_HEADERS }
         groupBy={[{ key: 'category' }]}
         v-model:opened={ opened.value }
-        openAllGroups
+        openAll
         itemsPerPage={ -1 }
       />
     ))

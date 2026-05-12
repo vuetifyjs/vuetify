@@ -11,7 +11,7 @@
       :group-key="({ value }) => value"
       :items="items"
       :items-per-page="-1"
-      :open-all-groups="openAll"
+      :open-all="openAll"
     >
       <template v-slot:default="{ groupedItems, toggleGroup, isGroupOpen }">
         <v-row>

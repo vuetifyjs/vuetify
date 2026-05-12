@@ -13,7 +13,7 @@
       :group-key="groupKey"
       :headers="headers"
       :items="desserts"
-      :open-all-groups="openAll"
+      :open-all="openAll"
       :sort-by="sortBy"
       item-value="name"
     ></v-data-table>

@@ -137,7 +137,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy, opened, openAllGroups, groupKey } = createGroupBy(props)
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
     const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
@@ -169,7 +169,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       extractRows,
       isGroupOpen,
       toggleGroup,
-    } = provideGroupBy({ groupBy, sortBy, disableSort, opened, openAllGroups })
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened, openAll })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),

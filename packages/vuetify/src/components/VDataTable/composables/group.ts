@@ -44,7 +44,7 @@ export const makeDataTableGroupProps = propsFactory({
     type: Array as PropType<readonly string[]>,
     default: () => ([]),
   },
-  openAllGroups: Boolean,
+  openAll: Boolean,
   groupKey: Function as PropType<GroupKeyFn>,
 }, 'DataTable-group')
 
@@ -62,17 +62,17 @@ type GroupProps = {
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
   opened: readonly string[]
   'onUpdate:opened': ((value: string[]) => void) | undefined
-  openAllGroups: boolean
+  openAll: boolean
   groupKey: GroupKeyFn | undefined
 }
 
 export function createGroupBy (props: GroupProps) {
   const groupBy = useProxiedModel(props, 'groupBy')
   const opened = useProxiedModel(props, 'opened')
-  const openAllGroups = toRef(() => props.openAllGroups)
+  const openAll = toRef(() => props.openAll)
   const groupKey = toRef(() => props.groupKey)
 
-  return { groupBy, opened, openAllGroups, groupKey }
+  return { groupBy, opened, openAll, groupKey }
 }
 
 export function provideGroupBy (options: {
@@ -80,9 +80,9 @@ export function provideGroupBy (options: {
   sortBy: Ref<readonly SortItem[]>
   disableSort?: Ref<boolean>
   opened?: Ref<readonly string[]>
-  openAllGroups?: MaybeRefOrGetter<boolean>
+  openAll?: MaybeRefOrGetter<boolean>
 }) {
-  const { disableSort, groupBy, sortBy, openAllGroups } = options
+  const { disableSort, groupBy, sortBy, openAll } = options
 
   const openedModel = options.opened ?? ref<readonly string[]>([])
 
@@ -93,7 +93,7 @@ export function provideGroupBy (options: {
     },
   })
 
-  // Track groups that have been explicitly closed when openAllGroups is active
+  // Track groups that have been explicitly closed when openAll is active
   const closedGroups = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
@@ -104,7 +104,7 @@ export function provideGroupBy (options: {
   })
 
   function isGroupOpen (group: Group) {
-    if (toValue(openAllGroups) && !closedGroups.value.has(group.id)) {
+    if (toValue(openAll) && !closedGroups.value.has(group.id)) {
       return true
     }
     return opened.value.has(group.id)
@@ -112,7 +112,7 @@ export function provideGroupBy (options: {
 
   function toggleGroup (group: Group) {
     const newOpened = new Set(opened.value)
-    if (toValue(openAllGroups)) {
+    if (toValue(openAll)) {
       const newClosed = new Set(closedGroups.value)
       if (isGroupOpen(group)) {
         newClosed.add(group.id)

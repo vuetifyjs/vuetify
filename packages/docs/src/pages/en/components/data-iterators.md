@@ -78,13 +78,13 @@ The following are a collection of examples that demonstrate more advanced and re
 
 #### Grouping
 
-Use the **group-by** prop to group items, and **v-model:opened** to control which groups are open. The **group-key** prop allows customizing group IDs, and **open-all-groups** opens all groups by default.
+Use the **group-by** prop to group items, and **v-model:opened** to control which groups are open. The **group-key** prop allows customizing group IDs, and **open-all** opens all groups by default.
 
 <ExamplesExample file="v-data-iterator/prop-grouping" />
 
 ::: warning
 
-When **open-all-groups** is enabled, the **v-model:opened** array does not represent the full open state — groups that the user closes are tracked separately and are not emitted through the model. Setting `opened = []` while **open-all-groups** is `true` will not collapse anything; disable **open-all-groups** first to programmatically close all groups.
+When **open-all** is enabled, the **v-model:opened** array does not represent the full open state — groups that the user closes are tracked separately and are not emitted through the model. Setting `opened = []` while **open-all** is `true` will not collapse anything; disable **open-all** first to programmatically close all groups.
 
 :::
 
