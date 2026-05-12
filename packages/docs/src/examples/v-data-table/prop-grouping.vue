@@ -29,7 +29,7 @@
   const sortBy = ref([{ key: 'name', order: 'asc' }])
   const groupBy = ref([{ key: 'category', order: 'asc' }, { key: 'status', order: 'asc' }])
 
-  const groupKey = ({ key, value, parentKey }) => `${parentKey}/${key}:${value}`
+  const groupKey = ({ key, value, parentKey }) => `${parentKey ?? 'root'}/${key}:${value}`
 
   const headers = [
     { key: 'data-table-group', title: 'Category' },
@@ -187,7 +187,7 @@
     }),
     methods: {
       groupKey ({ key, value, parentKey }) {
-        return `${parentKey}/${key}:${value}`
+        return `${parentKey ?? 'root'}/${key}:${value}`
       },
     },
   }
