@@ -219,7 +219,7 @@ function groupItems <T extends GroupableItem> (
 
 function flattenItems <T extends GroupableItem> (
   items: readonly (T | Group<T> | GroupSummary<T>)[],
-  isOpen: (id: string) => boolean,
+  isOpen: (group: Group) => boolean,
   hasSummary: boolean
 ): readonly (T | Group<T> | GroupSummary<T>)[] {
   const flatItems: (T | Group<T> | GroupSummary<T>)[] = []
@@ -231,7 +231,7 @@ function flattenItems <T extends GroupableItem> (
         flatItems.push(item)
       }
 
-      if (isOpen(item.id) || item.value == null) {
+      if (isOpen(item) || item.value == null) {
         flatItems.push(...flattenItems(item.items, isOpen, hasSummary))
 
         if (hasSummary) {
@@ -259,9 +259,7 @@ export function useGroupedItems <T extends GroupableItem> (
     return groupItems(toValue(items), groupBy.value.map(item => item.key), toValue(groupKeyFn))
   })
 
-  const isOpen = isGroupOpen
-    ? (id: string) => isGroupOpen({ id } as Group)
-    : (id: string) => opened.value.has(id)
+  const isOpen = isGroupOpen ?? ((group: Group) => opened.value.has(group.id))
 
   const flatItems = computed(() => {
     if (!groupBy.value.length) return toValue(items)
