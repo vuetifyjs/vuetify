@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex ga-4 mb-4 align-center flex-wrap">
       <v-switch v-model="openAll" label="Open all groups" hide-details></v-switch>
-      <v-btn size="small" variant="tonal" @click="opened = []">Close all</v-btn>
+      <v-btn :disabled="openAll" size="small" variant="tonal" @click="opened = []">Close all</v-btn>
     </div>
 
     <pre class="mb-4 pa-2 bg-surface-variant rounded text-body-2">opened: {{ opened }}</pre>
