@@ -16,6 +16,7 @@ import {
   validateTime,
 } from '../util/timestamp'
 import { propsFactory } from '@/util'
+import { Box, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, StyleValue } from 'vue'
@@ -165,13 +166,14 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
 
   function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
     const timestamp: CalendarTimestamp = copyTimestamp(day)
-    const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
+    const bounds = new Box(e.currentTarget as HTMLElement)
     const baseMinutes: number = firstMinute.value
     const touchEvent: TouchEvent = e as TouchEvent
     const mouseEvent: MouseEvent = e as MouseEvent
     const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
-    const clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
-    const addIntervals: number = (clientY - bounds.top) / parsedIntervalHeight.value
+    const target = touches && touches[0] ? touches[0] : mouseEvent
+    const point = getTargetBox([target.clientX, target.clientY])
+    const addIntervals: number = (point.y - bounds.top) / parsedIntervalHeight.value
     const addMinutes: number = Math.floor(addIntervals * parsedIntervalMinutes.value)
     const minutes: number = baseMinutes + addMinutes
 
@@ -211,7 +213,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
 
   function timeToY (
     time: VTime | CalendarTimestamp,
-    targetDateOrClamp: CalendarTimestamp | boolean = true
+    targetDateOrClamp: CalendarTimestamp | boolean = false
   ): number | false {
     const clamp = targetDateOrClamp !== false
     const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
@@ -224,9 +226,14 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     if (clamp) {
       if (y < 0) {
         y = 0
-      }
-      if (y > bodyHeight.value) {
+      } else if (y > bodyHeight.value) {
         y = bodyHeight.value
+      }
+    } else {
+      if (y < 0) {
+        y = y + bodyHeight.value
+      } else if (y > bodyHeight.value) {
+        y = y - bodyHeight.value
       }
     }
 
@@ -245,9 +252,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     if (targetDate && typeof time === 'object' && 'day' in time) {
       const a = getDayIdentifier(time)
       const b = getDayIdentifier(targetDate)
-      if (a > b) {
-        minutes += (a - b) * gap
-      }
+      minutes += (a - b) * gap
     }
 
     const min: number = firstMinute.value

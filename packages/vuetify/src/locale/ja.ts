@@ -91,6 +91,7 @@ export default {
     hour: '時',
     minute: '分',
     second: '秒',
+    notAllowed: '値は許可されていません',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: '{0}という文字は使用できません',
     notEmpty: '少なくとも1つの値を選んでください',
     pattern: '無効な形式です',
+  },
+  command: {
+    search: 'コマンドを入力するか検索...',
   },
   hotkey: {
     then: '次に',

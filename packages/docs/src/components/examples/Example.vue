@@ -5,7 +5,7 @@
     }"
     scoped
   >
-    <AppSheet class="mb-9">
+    <AppSheet class="mb-9 position-relative">
       <v-lazy v-model="hasRendered" min-height="44">
         <v-toolbar
           border="b"
@@ -32,7 +32,7 @@
 
             <div
               v-else-if="user.one.devmode && file"
-              class="text-body-2 ma-1 text-medium-emphasis"
+              class="text-body-medium ma-1 text-medium-emphasis"
             >
               <v-icon icon="mdi-file-tree" />
 
@@ -97,6 +97,16 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
+      <new-in-chip
+        v-if="resolvedNewIn"
+        :text="t('new-in', { version: resolvedNewIn })"
+        :to="rpath(`/getting-started/release-notes/?version=v${resolvedNewIn}`)"
+        class="text-mono rounded-t-0 rounded-b position-absolute bottom-0"
+        color="success"
+        size="x-small"
+        style="transform: translateY(calc(100% + 1px)); right: 10px;"
+        variant="tonal"
+      />
     </AppSheet>
   </v-defaults-provider>
 </template>
@@ -107,6 +117,10 @@
 
   // Utilities
   import { getExample } from 'virtual:examples'
+  import newInData from '@/data/new-in.json'
+
+  // Types
+  import type { Component } from 'vue'
 
   const { xs } = useDisplay()
   const { t } = useI18n()
@@ -121,6 +135,14 @@
     },
     open: Boolean,
     preview: Boolean,
+  })
+
+  const resolvedNewIn = computed(() => {
+    const [componentPath, exampleName] = props.file.split('/')
+    const componentName = componentPath.split('-').map(part =>
+      part.charAt(0).toUpperCase() + part.slice(1)
+    ).join('') as keyof typeof newInData
+    return (newInData as any)[componentName]?.examples?.[exampleName] ?? null
   })
 
   function parseTemplate (target: string, template: string) {
@@ -141,7 +163,13 @@
   const isEager = shallowRef(false)
   const copied = shallowRef(false)
 
-  const component = shallowRef()
+  type ExampleComponentType = Component & {
+    playgroundResources?: string
+    playgroundSetup?: string
+    exampleMeta?: string
+  }
+
+  const component = shallowRef<ExampleComponentType | undefined>()
   const code = shallowRef<string>()
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
@@ -196,8 +224,21 @@
     set: val => _theme.value = val,
   })
 
+  const exampleMeta = computed<Record<string, any>>(() => {
+    const meta = component.value?.exampleMeta
+
+    if (!meta) return {}
+
+    try {
+      return JSON.parse(meta)
+    } catch (e) {
+      console.error('Invalid example meta for', props.file, e)
+      return {}
+    }
+  })
+
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) return null
+    if (!isLoaded.value || isError.value || !component.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
     const setup = component.value.playgroundSetup?.trim()
@@ -207,6 +248,10 @@
       resources.imports,
       setup,
     )
+  })
+
+  const figmaLink = computed(() => {
+    return exampleMeta.value.figma
   })
 
   const actions = computed(() => [
@@ -220,7 +265,13 @@
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
-      hide: xs.value,
+    },
+    {
+      icon: '$vuetify-figma',
+      path: 'view-in-figma',
+      href: figmaLink.value,
+      target: '_blank',
+      hide: xs.value || !figmaLink.value,
     },
     {
       icon: 'mdi-github',

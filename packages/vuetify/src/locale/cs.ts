@@ -91,6 +91,7 @@ export default {
     hour: 'Hodina',
     minute: 'Minuty',
     second: 'Sekundy',
+    notAllowed: 'Hodnota není povolena',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Znak {0} není povolen',
     notEmpty: 'Vyberte alespoň jednu hodnotu',
     pattern: 'Neplatný formát',
+  },
+  command: {
+    search: 'Zadejte příkaz nebo hledejte...',
   },
   hotkey: {
     then: 'poté',

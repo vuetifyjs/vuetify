@@ -1,10 +1,12 @@
 {
+  "description": "Subcomponent for `v-treeview` used to display a single treeview node.",
   "props": {
     "hideActions": "Hide the expand icon and loading indicator next to each item title.",
     "indentLines": "Array of indent lines to render next to the item.",
     "loading": "Places the v-treeview-item into a loading state.",
     "nav": "Reduces the width of v-list-item takes and adds a border radius.",
     "slim": "Reduces the vertical padding or height of the v-treeview-item, making it more compact.",
+    "index": "The index of the item within the treeview list.",
     "toggleIcon": "Allows customization of the icon used to toggle the expansion and collapse of treeview branches."
   },
   "events": {

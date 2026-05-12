@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
+import { computed, shallowRef, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
@@ -60,6 +60,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const hasFocusedItem = shallowRef(false)
     const years = computed(() => {
       const year = adapter.getYear(adapter.date())
 
@@ -94,11 +95,18 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
+    const containerRef = templateRef()
     const yearRef = templateRef()
 
     function focusSelectedYear () {
-      yearRef.el?.focus()
-      yearRef.el?.scrollIntoView({ block: 'center' })
+      const container = containerRef.el
+      const target = yearRef.el
+      if (!container || !target) return
+
+      const containerRect = container.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+
+      container.scrollTop += (targetRect.top - containerRect.top) - (container.clientHeight / 2) + (targetRect.height / 2)
     }
 
     function isYearAllowed (year: number) {
@@ -116,6 +124,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     useRender(() => (
       <div
         class="v-date-picker-years"
+        ref={ containerRef }
         v-intersect={[{
           handler: focusSelectedYear,
         }, null, ['once']]}
@@ -123,7 +132,13 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-years__content">
+        <div
+          class="v-date-picker-years__content"
+          onFocus={ () => yearRef.el?.focus() }
+          onFocusin={ () => hasFocusedItem.value = true }
+          onFocusout={ () => hasFocusedItem.value = false }
+          tabindex={ hasFocusedItem.value ? -1 : 0 }
+        >
           { years.value.map((year, i) => {
             const btnProps = {
               ref: model.value === year.value ? yearRef : undefined,

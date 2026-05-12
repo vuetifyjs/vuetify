@@ -91,6 +91,7 @@ export default {
     hour: 'שעה',
     minute: 'דקות',
     second: 'שניות',
+    notAllowed: 'הערך אינו מותר',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'התו {0} אינו מותר',
     notEmpty: 'נא לבחור לפחות ערך אחד',
     pattern: 'פורמט לא תקף',
+  },
+  command: {
+    search: 'הקלד פקודה או חפש...',
   },
   hotkey: {
     then: 'אז',

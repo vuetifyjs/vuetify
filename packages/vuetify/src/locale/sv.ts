@@ -91,6 +91,7 @@ export default {
     hour: 'Timme',
     minute: 'Minuter',
     second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Tecknet {0} är inte tillåtet',
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
+  },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
   },
   hotkey: {
     then: 'sedan',

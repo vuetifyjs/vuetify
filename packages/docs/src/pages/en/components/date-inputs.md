@@ -20,12 +20,6 @@ The `v-date-input` component combines a text field with a date picker. It is mea
 
 <PageFeatures />
 
-::: warning
-
-This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
-
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.
@@ -102,11 +96,11 @@ You can move the calendar icon within the input or entirely by utilizing the **p
 
 <ExamplesExample file="v-date-input/prop-prepend-icon" />
 
-#### Display format
+#### Input format
 
-You can use the **display-format** prop in conjunction with the [date composable](/features/dates/) to change the displayed format of the date in the input.
+You can use the **input-format** prop to change the displayed format of the date in the input. This will make the field expect the same format when typing and pasting values.
 
-<ExamplesExample file="v-date-input/prop-display-format" />
+<ExamplesExample file="v-date-input/prop-input-format" />
 
 ## Examples
 

@@ -91,6 +91,7 @@ export default {
     hour: 'Óra',
     minute: 'Perc',
     second: 'Másodperc',
+    notAllowed: 'Az érték nem engedélyezett',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'A(z) {0} karakter nem engedélyezett',
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
+  },
+  command: {
+    search: 'Írjon be parancsot vagy keressen...',
   },
   hotkey: {
     then: 'majd',

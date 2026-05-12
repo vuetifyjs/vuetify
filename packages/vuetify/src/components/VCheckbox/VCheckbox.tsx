@@ -22,7 +22,7 @@ import type { GenericProps } from '@/util'
 export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
 
 export const makeVCheckboxProps = propsFactory({
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...omit(makeVCheckboxBtnProps(), ['inline']),
 }, 'VCheckbox')
 

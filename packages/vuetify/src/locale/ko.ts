@@ -91,6 +91,7 @@ export default {
     hour: '시간',
     minute: '분',
     second: '초',
+    notAllowed: '값이 허용되지 않습니다',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: '{0} 문자는 허용되지 않습니다',
     notEmpty: '최소 하나의 값을 선택해주세요',
     pattern: '형식이 유효하지 않습니다',
+  },
+  command: {
+    search: '명령을 입력하거나 검색하세요...',
   },
   hotkey: {
     then: '그 다음',

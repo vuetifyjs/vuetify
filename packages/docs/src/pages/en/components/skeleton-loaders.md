@@ -21,8 +21,6 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.

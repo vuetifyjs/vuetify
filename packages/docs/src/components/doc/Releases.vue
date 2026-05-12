@@ -28,10 +28,10 @@
 
           <template v-for="(value, key) in reactions" :key="key">
             <template v-if="model?.reactions?.[key]">
-              <span class="d-inline-flex align-center text-body-2 me-2">
+              <span class="d-inline-flex align-center text-body-medium me-2">
                 {{ value }}
 
-                <span class="text-caption">{{ model.reactions[key] }}</span>
+                <span class="text-body-small">{{ model.reactions[key] }}</span>
               </span>
             </template>
           </template>
@@ -40,11 +40,11 @@
 
       <template #item="{ item, props: itemProps }">
         <v-list-item
-          v-if="item?.title"
+          v-if="item.name"
           v-bind="itemProps"
         >
-          <template v-if="item.raw?.reactions" #append>
-            {{ genEmoji(item.raw.reactions.total_count) }}
+          <template v-if="item.reactions" #append>
+            {{ genEmoji(item.reactions.total_count) }}
           </template>
         </v-list-item>
 
@@ -77,7 +77,7 @@
         v-if="model?.author"
         class="d-flex align-center justify-space-between pa-4 bg-surface-light border-y"
       >
-        <div class="d-flex align-center text-caption">
+        <div class="d-flex align-center text-body-small">
           <i18n-t v-if="publishedOn" keypath="published" scope="global">
             <template #date>
               <border-chip
@@ -121,7 +121,7 @@
           <v-divider class="my-2" />
 
           <div class="px-4 pb-4">
-            <h2 class="text-h6 font-weight-bold">Assets</h2>
+            <h2 class="text-title-large font-weight-bold">Assets</h2>
 
             <AppSheet>
               <v-list-item

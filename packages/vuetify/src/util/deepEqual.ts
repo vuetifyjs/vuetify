@@ -23,6 +23,8 @@ function findCachedComparison (a: any, b: any, cache: WeakMap<any, any>): boolea
   return null
 }
 
+export type ValueComparator = (a: any, b: any) => boolean
+
 export function deepEqual (a: any, b: any, recursionCache = new WeakMap()): boolean {
   if (a === b) return true
 

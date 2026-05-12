@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
@@ -37,6 +37,8 @@ export const makeVRangeSliderProps = propsFactory({
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
+  inheritAttrs: false,
+
   props: makeVRangeSliderProps(),
 
   emits: {
@@ -46,7 +48,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     start: (value: [number, number]) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, attrs }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
@@ -144,6 +146,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
 
     useRender(() => {
       const inputProps = VInput.filterProps(props)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -163,6 +166,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
           style={ props.style }
           ref={ inputRef }
           { ...inputProps }
+          { ...rootAttrs }
           focused={ isFocused.value }
         >
           {{
@@ -246,6 +250,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ model.value[1] }
                   position={ trackStart.value }
                   ripple={ props.ripple }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -282,6 +287,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ max.value }
                   position={ trackStop.value }
                   ripple={ props.ripple }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

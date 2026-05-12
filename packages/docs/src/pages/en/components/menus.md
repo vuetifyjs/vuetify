@@ -134,6 +134,12 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <ExamplesExample file="v-menu/misc-popover" />
 
+#### Gliding navigation
+
+A single `v-menu` can be reused across multiple activators to create a gliding navigation bar. As the user hovers between buttons, the menu smoothly transitions to the new activator using a CSS transition on its position.
+
+<ExamplesExample file="v-menu/misc-gliding-nav" />
+
 #### Use In components
 
 Menus can be placed within almost any component.

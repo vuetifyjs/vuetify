@@ -1,4 +1,5 @@
 {
+  "description": "Used to display information in a daily, weekly, monthly, or category view.",
   "props": {
     "categories": "Specifies what categories to display in the `category` view. This controls the order of the categories as well. If the calendar uses events any categories specified in those events not specified in this value are dynamically rendered in the view unless `category-hide-dynamic` is true.",
     "categoryHideDynamic": "Sets whether categories specified in an event should be hidden if it's not defined in `categories`.",
@@ -47,8 +48,7 @@
     "type": "A string which is one of `month`, `week`, `day`, `4day`, `custom-weekly`, `custom-daily`, and `category`. The custom types look at the `start` and `end` dates passed to the component as opposed to the `value`.",
     "v-model": "Sets the `value` property but also updates it when the link of a day is clicked.",
     "value": "A date in the format of `YYYY-MM-DD` which determines what span of time for the calendar.",
-    "weekdayFormat": "Formats day of the week string that appears in the header to specified locale",
-    "weekdays": "Specifies which days of the week to display. To display Monday through Friday only, a value of `[1, 2, 3, 4, 5]` can be used. To display a week starting on Monday a value of `[1, 2, 3, 4, 5, 6, 0]` can be used."
+    "weekdayFormat": "Formats day of the week string that appears in the header to specified locale"
   },
   "slots": {
     "category": "The content placed in a category header for the `category` type. The category variable is null for events with invalid (non-string) categories.",

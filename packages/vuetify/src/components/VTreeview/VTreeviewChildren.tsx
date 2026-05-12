@@ -162,7 +162,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 <VCheckboxBtn
                   key={ item.value }
                   modelValue={ slotProps.isSelected }
-                  disabled={ props.disabled }
+                  disabled={ props.disabled || itemProps.disabled }
                   loading={ loading }
                   color={ props.selectedColor }
                   density={ props.density }
@@ -206,17 +206,20 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
           rawId={ treeviewGroupProps?.value }
         >
           {{
-            activator: ({ props: activatorProps }) => {
+            activator: ({ props: activatorProps, isOpen }) => {
               const listItemProps = {
                 ...itemProps,
                 ...activatorProps,
                 value: itemProps?.value,
                 hideActions: props.hideActions,
                 indentLines: indentLines.node,
+                ariaExpanded: isOpen,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
-                onClick: isClickOnOpen.value
-                  ? [() => checkChildren(item), activatorProps.onClick] as any
-                  : () => selectItem(activatorItems.value[index]?.select, !activatorItems.value[index]?.isSelected),
+                onClick: props.disabled || itemProps.disabled
+                  ? undefined
+                  : isClickOnOpen.value
+                    ? [() => checkChildren(item), activatorProps.onClick] as any
+                    : () => selectItem(activatorItems.value[index]?.select, !activatorItems.value[index]?.isSelected),
               }
 
               return renderSlot(

@@ -21,6 +21,9 @@
         width: 0
 
   .v-treeview
+    --v-treeview-indent-line-color: #{$treeview-indent-line-color}
+    --v-treeview-indent-line-opacity: #{$treeview-indent-lines-opacity}
+
     &.v-list
       --indent-padding: #{$treeview-indent-padding}
 
@@ -49,13 +52,13 @@
     padding-inline-start: $treeview-indent-lines-padding-left
     padding-block: $treeview-indent-lines-gap
     grid-template-columns: repeat(var(--v-indent-parts, 1), var(--prepend-width))
-    opacity: $treeview-indent-lines-opacity
+    opacity: var(--v-treeview-indent-line-opacity)
     pointer-events: none
 
   .v-treeview-indent-line
     &,
     &::before
-      border: 0px $treeview-indent-line-style $treeview-indent-line-color
+      border: 0px $treeview-indent-line-style var(--v-treeview-indent-line-color)
 
     &--leaf,
     &--line
@@ -104,4 +107,5 @@
       width: 0px
 
     .v-list-group__items .v-list-item
-      padding-inline-start: calc(var(--indent-padding)) !important
+      @include tools.layer('overrides')
+        padding-inline-start: calc(var(--indent-padding))

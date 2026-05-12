@@ -22,9 +22,9 @@
       appendIcon: '$vuetify-outline',
     },
     {
-      title: 'vuetify-create',
-      href: 'https://github.com/vuetifyjs/create/',
-      appendIcon: '$vuetify-create',
+      title: 'vuetify-play',
+      href: 'https://play.vuetifyjs.com/',
+      appendIcon: '$vuetify-play',
     },
     {
       title: 'vuetify-bin',
@@ -32,9 +32,9 @@
       appendIcon: '$vuetify-bin',
     },
     {
-      title: 'vuetify-play',
-      href: 'https://play.vuetifyjs.com/',
-      appendIcon: '$vuetify-play',
+      title: 'vuetify-create',
+      href: 'https://github.com/vuetifyjs/create/',
+      appendIcon: '$vuetify-create',
     },
     {
       title: 'vuetify-link',
@@ -42,9 +42,19 @@
       appendIcon: '$vuetify-link',
     },
     {
+      title: 'vuetify-studio',
+      href: 'https://studio.vuetifyjs.com/',
+      appendIcon: '$vuetify-studio',
+    },
+    {
       title: 'vuetify-snips',
       href: 'https://snips.vuetifyjs.com/',
       appendIcon: '$vuetify-snips',
+    },
+    {
+      title: 'vuetify-mcp',
+      href: 'https://mcp.vuetifyjs.com/',
+      appendIcon: '$vuetify-mcp',
     },
     {
       title: 'vuetify-store',
@@ -52,7 +62,7 @@
       appendIcon: '$vuetify-store',
     },
     {
-      title: 'ui-kits',
+      title: 'vuetify-figma',
       href: 'https://store.vuetifyjs.com/products/vuetify-ui-kit-figma',
       appendIcon: '$vuetify-figma',
     },

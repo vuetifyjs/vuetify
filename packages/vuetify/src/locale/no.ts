@@ -91,6 +91,7 @@ export default {
     hour: 'Time',
     minute: 'Minutter',
     second: 'Sekunder',
+    notAllowed: 'Verdien er ikke tillatt',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Tegnet {0} er ikke tillatt',
     notEmpty: 'Vennligst velg minst én verdi',
     pattern: 'Ugyldig format',
+  },
+  command: {
+    search: 'Skriv en kommando eller søk...',
   },
   hotkey: {
     then: 'deretter',

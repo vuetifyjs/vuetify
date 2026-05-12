@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-menu transition="slide-x-transition">
       <template v-slot:activator="{ props }">
         <v-btn

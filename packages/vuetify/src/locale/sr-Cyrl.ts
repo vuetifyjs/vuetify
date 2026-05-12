@@ -91,6 +91,7 @@ export default {
     hour: 'Сат',
     minute: 'Минути',
     second: 'Секунде',
+    notAllowed: 'Вредност није дозвољена',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Карактер {0} није дозвољен',
     notEmpty: 'Изаберите бар једну вредност',
     pattern: 'Неважећи формат',
+  },
+  command: {
+    search: 'Унесите команду или претражите...',
   },
   hotkey: {
     then: 'затим',

@@ -16,6 +16,8 @@
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
   const pullDownThreshold = ref(64)
 
   let items = [

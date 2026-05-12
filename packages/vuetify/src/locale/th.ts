@@ -91,6 +91,7 @@ export default {
     hour: 'ชั่วโมง',
     minute: 'นาที',
     second: 'วินาที',
+    notAllowed: 'ค่าไม่ได้รับอนุญาต',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'อักขระ {0} ไม่ได้รับอนุญาต',
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
+  },
+  command: {
+    search: 'พิมพ์คำสั่งหรือค้นหา...',
   },
   hotkey: {
     then: 'จากนั้น',

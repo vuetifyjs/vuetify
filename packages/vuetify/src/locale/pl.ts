@@ -91,6 +91,7 @@ export default {
     hour: 'Godzina',
     minute: 'Minuty',
     second: 'Sekudy',
+    notAllowed: 'Wartość jest niedozwolona',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Znak {0} nie jest dozwolony',
     notEmpty: 'Proszę wybrać co najmniej jedną wartość',
     pattern: 'Nieprawidłowy format',
+  },
+  command: {
+    search: 'Wpisz polecenie lub szukaj...',
   },
   hotkey: {
     then: 'następnie',

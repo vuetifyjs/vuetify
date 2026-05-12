@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSliderThumbSlots } from './VSliderThumb'
@@ -41,6 +41,8 @@ export const makeVSliderProps = propsFactory({
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
+  inheritAttrs: false,
+
   props: makeVSliderProps(),
 
   emits: {
@@ -50,7 +52,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
     end: (value: number) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, attrs }) {
     const thumbContainerRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
     const { rtlClasses } = useRtl()
@@ -109,6 +111,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
     useRender(() => {
       const inputProps = VInput.filterProps(props)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -127,6 +130,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
           ]}
           style={ props.style }
           { ...inputProps }
+          { ...rootAttrs }
           focused={ isFocused.value }
         >
           {{
@@ -185,6 +189,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   onBlur={ blur }
                   ripple={ props.ripple }
                   name={ props.name }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

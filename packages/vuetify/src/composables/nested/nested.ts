@@ -24,6 +24,7 @@ import {
 } from './activeStrategies'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
+  branchSelectStrategy,
   classicSelectStrategy,
   independentSelectStrategy,
   independentSingleSelectStrategy,
@@ -39,7 +40,7 @@ import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategy } from './selectStrategies'
 import type { ListItem } from '@/composables/list-items'
-import type { EventProp } from '@/util'
+import type { EventProp, ValueComparator } from '@/util'
 
 export type ActiveStrategyProp =
   | 'single-leaf'
@@ -55,6 +56,7 @@ export type SelectStrategyProp =
   | 'single-independent'
   | 'classic'
   | 'trunk'
+  | 'branch'
   | SelectStrategy
   | ((mandatory: boolean) => SelectStrategy)
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
@@ -87,11 +89,13 @@ type NestedProvide = {
     selectable: Ref<boolean>
     opened: Ref<Set<unknown>>
     activated: Ref<Set<unknown>>
+    scrollToActive: Ref<boolean>
     selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
     selectedValues: Ref<unknown[]>
     itemsRegistration: Ref<ItemsRegistrationType>
     register: (id: unknown, parentId: unknown, isDisabled: boolean, isGroup?: boolean) => void
     unregister: (id: unknown) => void
+    updateDisabled: (id: unknown, isDisabled: boolean) => void
     open: (id: unknown, value: boolean, event?: Event) => void
     activate: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
@@ -108,6 +112,7 @@ export const emptyNested: NestedProvide = {
     itemsRegistration: ref('render'),
     register: () => null,
     unregister: () => null,
+    updateDisabled: () => null,
     children: ref(new Map()),
     parents: ref(new Map()),
     disabled: ref(new Set()),
@@ -116,6 +121,7 @@ export const emptyNested: NestedProvide = {
     activate: () => null,
     select: () => null,
     activatable: ref(false),
+    scrollToActive: ref(false),
     selectable: ref(false),
     opened: ref(new Set()),
     activated: ref(new Set()),
@@ -141,7 +147,20 @@ export const makeNestedProps = propsFactory({
   },
 }, 'nested')
 
-export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObject: MaybeRefOrGetter<boolean>) => {
+export const useNested = (
+  props: NestedProps,
+  {
+    items,
+    returnObject,
+    scrollToActive,
+    valueComparator,
+  }: {
+    items: Ref<ListItem[]>
+    returnObject: MaybeRefOrGetter<boolean>
+    scrollToActive: MaybeRefOrGetter<boolean>
+    valueComparator?: MaybeRefOrGetter<ValueComparator | undefined>
+  },
+) => {
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
@@ -178,6 +197,7 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
       case 'independent': return independentSelectStrategy(props.mandatory)
       case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
       case 'trunk': return trunkSelectStrategy(props.mandatory)
+      case 'branch': return branchSelectStrategy(props.mandatory)
       case 'classic':
       default: return classicSelectStrategy(props.mandatory)
     }
@@ -194,18 +214,49 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
     }
   })
 
+  const flatItems = computed(() => {
+    const flat: ListItem[] = []
+    const stack = [...items.value]
+    while (stack.length) {
+      const item = stack.pop()!
+      flat.push(item)
+      if (item.children) stack.push(...item.children)
+    }
+    return flat
+  })
+
+  function resolveValue (value: unknown): unknown {
+    const comparator = toValue(valueComparator)
+    if (!comparator) return value
+    const _returnObject = toValue(returnObject)
+    for (const item of flatItems.value) {
+      const itemVal = _returnObject ? toRaw(item.raw) : item.value
+      if (comparator(value, itemVal)) return itemVal
+    }
+    return value
+  }
+
   const activated = useProxiedModel(
     props,
     'activated',
     props.activated,
-    v => activeStrategy.value.in(v, children.value, parents.value),
+    v => activeStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+    ),
     v => activeStrategy.value.out(v, children.value, parents.value),
   )
   const selected = useProxiedModel(
     props,
     'selected',
     props.selected,
-    v => selectStrategy.value.in(v, children.value, parents.value, disabled.value),
+    v => selectStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+      disabled.value,
+    ),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
@@ -283,6 +334,7 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
     root: {
       opened,
       activatable: toRef(() => props.activatable),
+      scrollToActive: toRef(() => toValue(scrollToActive)),
       selectable: toRef(() => props.selectable),
       activated,
       selected,
@@ -329,6 +381,19 @@ export const useNested = (props: NestedProps, items: Ref<ListItem[]>, returnObje
         }
         parents.value.delete(id)
         itemsUpdatePropagation()
+      },
+      updateDisabled: (id, isDisabled) => {
+        if (isDisabled) {
+          disabled.value.add(id)
+        } else {
+          disabled.value.delete(id)
+        }
+        // classic selection requires refresh to re-evaluate on/off/indeterminate but
+        // currently it is only run for selection interactions, so it will set new disabled
+        // to "off" and the visual state becomes out of sync
+        // -- selected.value = new Map(selected.value)
+        // it is not clear if the framework should un-select when disabled changed to true
+        // more discussion is needed
       },
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
@@ -435,6 +500,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     activate: (activated: boolean, e?: Event) => parent.root.activate(computedId.value, activated, e),
     isActivated: computed(() => parent.root.activated.value.has(computedId.value)),
+    scrollToActive: parent.root.scrollToActive,
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
@@ -460,6 +526,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
     nextTick(() => {
       parent.root.register(val, parent.id.value, toValue(isDisabled), isGroup)
     })
+  })
+
+  watch(() => toValue(isDisabled), val => {
+    parent.root.updateDisabled(computedId.value, val)
   })
 
   isGroup && provide(VNestedSymbol, item)

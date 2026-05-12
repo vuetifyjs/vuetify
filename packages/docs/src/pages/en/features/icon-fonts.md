@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.
@@ -15,7 +16,7 @@ features:
 
 # Icon Fonts
 
-Out of the box, Vuetify supports 4 popular icon font libraries—[Material Design Icons](https://pictogrammers.com/library/mdi/), [Material Icons](https://fonts.google.com/icons), [Font Awesome 4](https://fontawesome.com/v4.7.0/) and [Font Awesome 5](https://fontawesome.com/).
+Out of the box, Vuetify supports many popular icon libraries - [Material Design Icons](https://pictogrammers.com/library/mdi/), [Font Awesome](https://fontawesome.com/), [Phosphor](https://phosphoricons.com/), [Lucide](https://lucide.dev/), [Tabler](https://tabler.io/icons), and more.
 
 <PageFeatures />
 
@@ -50,7 +51,7 @@ In the above examples we import the default `mdi` icon set and its corresponding
 
 ::: info
 
-While it is still possible to supply the icon value through the default slot in Vuetify 3.0 (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
+While it is still possible to supply the icon value through the default slot in Vuetify 3+ (`<v-icon>mdi-home</v-icon>`), we recommend using the `icon` prop instead.
 
 :::
 
@@ -201,6 +202,90 @@ export default createVuetify({
 Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
 <DocIconList />
+
+#### UnoCSS icon sets
+
+Vuetify integrates with [UnoCSS Preset Icons](https://unocss.dev/presets/icons), which supports [every icon set available on Iconify](https://icon-sets.iconify.design/). All icons are tree-shaken so only the icons you use are included in the production CSS bundle. You can register multiple icon sets simultaneously and freely mix icons from any of them across your components.
+
+```html
+<v-alert icon="i-solar:album-linear" title="Create new album" />
+<v-alert icon="i-devicon:gitlab" title="Login with GitLab" />
+```
+
+The icon sets listed below have a dedicated Vuetify import that includes **alias mappings** for built-in icons used by Vuetify components (e.g. close, dropdown, checkboxes). You must use one of these as your `defaultSet`, but the aliases can be overridden if needed. Additional sets without aliases can be installed alongside it and referenced freely in your own templates.
+
+| Icon library | Iconify package | Vuetify import | Default set name |
+|---|---|---|---|
+| [Material Design Icons](https://pictogrammers.com/library/mdi/) | `@iconify-json/mdi` | `vuetify/iconsets/mdi-unocss` | `mdi` |
+| [Font Awesome 6](https://fontawesome.com/) | `@iconify-json/fa6-solid`<br>`@iconify-json/fa6-regular` | `vuetify/iconsets/fa6` | `fa6` |
+| [Phosphor](https://phosphoricons.com/) | `@iconify-json/ph` | `vuetify/iconsets/ph` | `ph` |
+| [Lucide](https://lucide.dev/) | `@iconify-json/lucide` | `vuetify/iconsets/lucide` | `lucide` |
+| [Tabler](https://tabler.io/icons) | `@iconify-json/tabler` | `vuetify/iconsets/tabler` | `tabler` |
+| [Remix Icon](https://remixicon.com/) | `@iconify-json/ri` | `vuetify/iconsets/ri` | `ri` |
+| [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
+| [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
+| [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
+
+Install `unocss` and the Iconify package(s) for your chosen librar(ies):
+
+::: tabs
+
+```bash [pnpm]
+pnpm add unocss @iconify-json/ph -D
+```
+
+```bash [yarn]
+yarn add unocss @iconify-json/ph -D
+```
+
+```bash [npm]
+npm install unocss @iconify-json/ph -D
+```
+
+```bash [bun]
+bun add unocss @iconify-json/ph -D
+```
+
+:::
+
+Then configure UnoCSS in your project (read the [UnoCSS integration section](https://unocss.dev/integrations/) for further details).
+
+::: warning
+
+Don't change the default prefix `i-` of UnoCSS preset-icons, Vuetify icon sets rely on it.
+
+:::
+
+```js { resource="unocss.config.js" }
+import { presetIcons, defineConfig } from 'unocss'
+
+export default defineConfig({
+  presets: [
+    presetIcons({
+      processor(props) {
+        delete props.color
+      },
+    }),
+  ],
+})
+```
+
+Register the icon set in your Vuetify configuration. The following example uses Phosphor, but you can substitute any set from the table above:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { aliases, ph } from 'vuetify/iconsets/ph'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'ph',
+    aliases,
+    sets: {
+      ph,
+    },
+  },
+})
+```
 
 ### Material Icons
 

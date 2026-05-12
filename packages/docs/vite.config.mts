@@ -20,6 +20,7 @@ import MagicString from 'magic-string'
 import { configureMarkdown } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
+import { generateOgImages } from './build/generate-og-images'
 import { genAppMetaInfo } from './src/utils/metadata'
 import { MdiJs } from './build/mdi-js'
 import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
@@ -293,6 +294,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         transform (code, id) {
           const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
             : id.includes('vue&type=playground-setup') ? 'playgroundSetup'
+            : id.includes('vue&type=example-meta') ? 'exampleMeta'
             : null
           if (!type) return
 
@@ -319,10 +321,12 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
               return route !== '/' &&
                 !['/eo-UY/', '/api/', '/user/', ':', '*'].some(v => route.includes(v))
             }).map(route => {
+              const ogPath = route.path.replace(/^\/en/, '').replace(/\/$/, '') || '/index'
               const meta = genAppMetaInfo({
                 title: `${route.meta.title}${route.path === '/en/' ? '' : ' — Vuetify'}`,
                 description: route.meta.description,
                 keywords: route.meta.keywords,
+                ogImage: `https://vuetifyjs.com/og${ogPath}.png`,
               })
               const metaContent = [
                 `<title>${meta.title}</title>`,
@@ -347,6 +351,8 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
               await fs.mkdir(path.dirname(filename), { recursive: true })
               await fs.writeFile(filename, route.content)
             }
+
+            await generateOgImages()
 
             return routes.find(r => r.path === '/en/')?.content
           }

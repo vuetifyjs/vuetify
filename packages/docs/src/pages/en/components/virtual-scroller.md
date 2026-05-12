@@ -20,8 +20,6 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 <PageFeatures />
 
-<DocIntroduced version="3.2.0" />
-
 ## Usage
 
 The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.

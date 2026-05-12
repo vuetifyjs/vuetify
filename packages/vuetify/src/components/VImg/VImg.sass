@@ -15,6 +15,15 @@
       width: 100%
       z-index: -1
 
+    &.v-img--fit-content
+      max-width: fit-content
+
+      > .v-img__img
+        position: relative
+
+      > .v-responsive__sizer
+        display: none
+
     &--booting .v-responsive__sizer
       transition: none
 

@@ -53,6 +53,10 @@ export const makeVInputProps = propsFactory({
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
   hint: String,
+  indentDetails: {
+    type: Boolean,
+    default: null,
+  },
   persistentHint: Boolean,
   messages: {
     type: [Array, String] as PropType<string | readonly string[]>,
@@ -187,6 +191,7 @@ export const VInput = genericComponent<new <T>(
               'v-input--focused': props.focused,
               'v-input--glow': props.glow,
               'v-input--hide-spin-buttons': props.hideSpinButtons,
+              'v-input--indent-details': props.indentDetails,
             },
             densityClasses.value,
             themeClasses.value,

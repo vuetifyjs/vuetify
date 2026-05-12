@@ -165,7 +165,7 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
 
       await page.viewport({ mobile: 600, desktop: 1280 }[device], document.body.scrollHeight)
       await waitIdle()
-      await expect.soft(page).toMatchScreenshot(name.trim() + ' ' + theme, {
+      await expect.soft(page).toMatchScreenshot(name.trim(), {
         properties: { device, theme },
       })
     })

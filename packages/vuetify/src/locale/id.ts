@@ -91,6 +91,7 @@ export default {
     hour: 'Jam',
     minute: 'Menit',
     second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Karakter {0} tidak diperbolehkan',
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
+  },
+  command: {
+    search: 'Ketik perintah atau cari...',
   },
   hotkey: {
     then: 'kemudian',

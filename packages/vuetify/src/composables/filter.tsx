@@ -101,7 +101,7 @@ export function filterItems (
 
   if (!items?.length) return array
 
-  let lookAheadItem: FilterResult | null = null
+  let lookAheadItems: FilterResult[] = []
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -115,11 +115,12 @@ export function filterItems (
 
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
-          if (lookAheadItem?.type === 'divider' && item.type === 'subheader') {
-            array.push(lookAheadItem) // divider before subheader
+          if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
+            // clear unless, divider appears before subheader
+            lookAheadItems = []
           }
 
-          lookAheadItem = { index: i, matches: { }, type: item.type }
+          lookAheadItems.push({ index: i, matches: { }, type: item.type })
           continue
         }
 
@@ -168,9 +169,9 @@ export function filterItems (
       ) continue
     }
 
-    if (lookAheadItem) {
-      array.push(lookAheadItem)
-      lookAheadItem = null
+    if (lookAheadItems.length) {
+      array.push(...lookAheadItems)
+      lookAheadItems = []
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })

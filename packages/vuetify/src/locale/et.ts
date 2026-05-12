@@ -91,6 +91,7 @@ export default {
     hour: 'Tund',
     minute: 'Minut',
     second: 'Sekund',
+    notAllowed: 'Väärtus ei ole lubatud',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +130,9 @@ export default {
     exclude: 'Märk {0} ei ole lubatud',
     notEmpty: 'Palun vali vähemalt üks väärtus',
     pattern: 'Vale vorming',
+  },
+  command: {
+    search: 'Sisestage käsk või otsige...',
   },
   hotkey: {
     then: 'siis',

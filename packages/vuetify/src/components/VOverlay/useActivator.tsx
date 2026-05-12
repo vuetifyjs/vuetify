@@ -219,7 +219,7 @@ export function useActivator (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
     ) && !contentEl.value?.contains(document.activeElement)) {
-      isActive.value = false
+      runCloseDelay()
     }
   })
 
