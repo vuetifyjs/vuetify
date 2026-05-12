@@ -544,6 +544,45 @@ describe('VDatePickerMonth — multiple mode', () => {
   })
 })
 
+describe('preserve focus when selecting day from adjacent month', () => {
+  // January 2026, Sun-start: Dec 28–31 appear as adjacent days in the first row.
+  // Jan 1 = index 4, Dec 31 = index 3.
+
+  it('selection transitions the month, while keeping focus the arrows working', async () => {
+    const model = ref<unknown>()
+    const month = ref(0)
+    const year = ref(2026)
+    render(() => (
+      <VDatePicker
+        v-model={ model.value }
+        v-model:month={ month.value }
+        v-model:year={ year.value }
+        showAdjacentMonths
+      />
+    ))
+
+    // Anchor virtual focus on Jan 1, then move to adjacent Dec 31.
+    // findByText('1') would be ambiguous — Feb 1 is also rendered as adjacent
+    // in the 6th static week row, so target by data-v-date instead.
+    await userEvent.click(await screen.findByCSS('[data-v-date="2026-01-01"] button'))
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(highlighted()?.textContent?.trim()).toBe('31')
+    expect(month.value).toBe(0)
+
+    // Enter selects Dec 31 → month transitions to December
+    await userEvent.keyboard('{Enter}')
+    expect(month.value).toBe(11)
+    expect(year.value).toBe(2025)
+
+    // Focus must be restored to Dec 31 in the new view
+    await expect.poll(() => document.querySelector('[data-highlighted]')?.textContent?.trim()).toBe('31')
+
+    // Arrow keys must work after the transition
+    await userEvent.keyboard('{ArrowLeft}')
+    await expect.poll(() => document.querySelector('[data-highlighted]')?.textContent?.trim()).toBe('30')
+  })
+})
+
 describe('VDatePickerMonth — range mode', () => {
   it('navigating and selecting with Enter, including cross-month', async () => {
     const model = ref<unknown[]>([])

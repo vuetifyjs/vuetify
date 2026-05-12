@@ -189,6 +189,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
+    function focusAfterTransition (isoDate: string) {
+      nextTick(() => {
+        virtualFocus.highlight(isoDate)
+        if (virtualFocus.highlightedId.value == null) virtualFocus.first()
+        virtualFocus.focusHighlighted()
+      })
+    }
+
     function focusGrid () {
       daysRef.value?.focus()
     }
@@ -210,18 +218,20 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
           const targetDate = adapter.date(rawTarget)
           emit('update:month', adapter.getMonth(targetDate))
           emit('update:year', adapter.getYear(targetDate))
-          nextTick(() => {
-            virtualFocus.highlight(targetIso)
-            if (virtualFocus.highlightedId.value == null) virtualFocus.first()
-            virtualFocus.focusHighlighted()
-          })
+          focusAfterTransition(targetIso)
         }
         return
       }
       if ((e.key === 'Enter' || e.key === ' ') && virtualFocus.highlightedId.value != null) {
         e.preventDefault()
         const item = daysInMonth.value.find(d => d.isoDate === virtualFocus.highlightedId.value)
-        if (item && !item.isDisabled) onClick(item.date)
+        if (item && !item.isDisabled) {
+          const isoDate = item.isoDate
+          onClick(item.date)
+          if (item.isAdjacent) {
+            focusAfterTransition(isoDate)
+          }
+        }
         return
       }
 
@@ -267,11 +277,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
               const targetDate = adapter.date(targetIsoDate)
               emit('update:month', adapter.getMonth(targetDate))
               emit('update:year', adapter.getYear(targetDate))
-              nextTick(() => {
-                virtualFocus.highlight(targetIsoDate)
-                if (virtualFocus.highlightedId.value == null) virtualFocus.first()
-                virtualFocus.focusHighlighted()
-              })
+              focusAfterTransition(targetIsoDate)
               return
             }
           }
@@ -421,9 +427,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   id: `${uid}-day-${item.isoDate}`,
                   onMousedown: (e: MouseEvent) => e.preventDefault(),
                   onClick: () => {
+                    const isoDate = item.isoDate
                     onClick(item.date)
-                    virtualFocus.highlight(item.isoDate)
-                    virtualFocus.focusHighlighted()
+                    if (item.isAdjacent) {
+                      focusAfterTransition(isoDate)
+                    } else {
+                      virtualFocus.highlight(isoDate)
+                      virtualFocus.focusHighlighted()
+                    }
                   },
                 },
                 item,
