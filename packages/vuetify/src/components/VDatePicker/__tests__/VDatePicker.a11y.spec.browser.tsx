@@ -487,6 +487,48 @@ describe('VDatePickerMonth — with custom weekdays', () => {
     expect(month.value).toBe(1)
     await expect.poll(() => document.querySelector('[data-highlighted]')?.textContent?.trim()).toBe('2')
   })
+
+  it('ArrowLeft from the first workday when the 1st is a weekend skips to the prev month', async () => {
+    // March 2026: March 1 = Sun (not shown), March 2 = Mon (first workday).
+    // ArrowLeft should skip Sun Mar 1 and Sat Feb 28, landing on Fri Feb 27.
+    const month = ref(2)
+    const year = ref(2026)
+    render(() => (
+      <VDatePicker
+        modelValue="2026-03-02"
+        v-model:month={ month.value }
+        v-model:year={ year.value }
+        weekdays={[1, 2, 3, 4, 5]}
+      />
+    ))
+
+    await userEvent.click(await screen.findByText('2'))
+    await userEvent.keyboard('{ArrowLeft}')
+
+    expect(month.value).toBe(1)
+    await expect.poll(() => document.querySelector('[data-highlighted]')?.textContent?.trim()).toBe('27')
+  })
+
+  it('ArrowLeft from the first workday when prev month ends on a weekend keeps focus', async () => {
+    // June 2026: June 1 = Mon (first workday).
+    // ArrowLeft should skip Sun May 31 and Sat May 30, landing on Fri May 29.
+    const month = ref(5)
+    const year = ref(2026)
+    render(() => (
+      <VDatePicker
+        modelValue="2026-06-01"
+        v-model:month={ month.value }
+        v-model:year={ year.value }
+        weekdays={[1, 2, 3, 4, 5]}
+      />
+    ))
+
+    await userEvent.click(await screen.findByText('1'))
+    await userEvent.keyboard('{ArrowLeft}')
+
+    expect(month.value).toBe(4)
+    await expect.poll(() => document.querySelector('[data-highlighted]')?.textContent?.trim()).toBe('29')
+  })
 })
 
 describe('VDatePickerMonth — edge cases', () => {

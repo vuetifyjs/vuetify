@@ -271,9 +271,17 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             // isHidden = isAdjacent && !showAdjacentMonths — no button in DOM for this day
             if (!targetItem || targetItem.isHidden) {
               e.preventDefault()
-              const targetIsoDate = targetItem
-                ? targetItem.isoDate
-                : adapter.toISO(adapter.addDays(adapter.date(curId), calendarDays))
+              let targetIsoDate: string
+              if (targetItem) {
+                targetIsoDate = targetItem.isoDate
+              } else {
+                const step = calendarDays < 0 ? -1 : 1
+                let candidate = adapter.addDays(adapter.date(curId), calendarDays)
+                while (!props.weekdays.includes(adapter.toJsDate(candidate as Date).getDay())) {
+                  candidate = adapter.addDays(candidate, step)
+                }
+                targetIsoDate = adapter.toISO(candidate)
+              }
               const targetDate = adapter.date(targetIsoDate)
               emit('update:month', adapter.getMonth(targetDate))
               emit('update:year', adapter.getYear(targetDate))

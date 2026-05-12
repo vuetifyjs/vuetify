@@ -89,5 +89,4 @@ describe('VDatePicker', () => {
 
     await commands.clearAbortTimeout()
   })
-
 })
