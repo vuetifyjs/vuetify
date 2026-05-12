@@ -10,9 +10,10 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useDate } from '@/composables/date/date'
 import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
+import { useVirtualFocus } from '@/composables/virtualFocus'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -80,7 +81,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
   },
 
   setup (props, { emit, slots }) {
-    const daysRef = ref()
+    const daysRef = ref<HTMLElement>()
+    const uid = useId()
     const { t } = useLocale()
 
     const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
@@ -107,10 +109,23 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       return model.value.length >= max
     })
 
+    const virtualFocus = useVirtualFocus(
+      () => daysInMonth.value.map(item => ({
+        id: item.isoDate,
+        disabled: item.isDisabled,
+        el: () => daysRef.value?.querySelector<HTMLElement>(`[data-v-date="${item.isoDate}"] button`),
+      })),
+      {
+        control: daysRef,
+        columns: () => props.weekdays.length,
+      }
+    )
+
     watch(daysInMonth, (val, oldVal) => {
-      if (!oldVal) return
+      if (!oldVal || val[0].isoDate === oldVal[0].isoDate) return
 
       isReverse.value = adapter.isBefore(val[0].date, oldVal[0].date)
+      virtualFocus.clear()
     })
 
     function onRangeClick (value: unknown) {
@@ -173,6 +188,134 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         model.value = [value]
       }
     }
+
+    function focusGrid () {
+      daysRef.value?.focus()
+    }
+
+    function onContainerKeydown (e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        // Target: first selected date, or today as fallback
+        const rawTarget = model.value[0] ?? adapter.date()
+        const targetIso = adapter.toISO(adapter.date(rawTarget))
+        const inCurrentMonth = daysInMonth.value.find(d => d.isoDate === targetIso && !d.isAdjacent)
+
+        if (inCurrentMonth) {
+          virtualFocus.highlight(targetIso)
+          if (virtualFocus.highlightedId.value == null) virtualFocus.first()
+          virtualFocus.focusHighlighted()
+        } else {
+          // Target is in a different month — navigate there
+          const targetDate = adapter.date(rawTarget)
+          emit('update:month', adapter.getMonth(targetDate))
+          emit('update:year', adapter.getYear(targetDate))
+          nextTick(() => {
+            virtualFocus.highlight(targetIso)
+            if (virtualFocus.highlightedId.value == null) virtualFocus.first()
+            virtualFocus.focusHighlighted()
+          })
+        }
+        return
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && virtualFocus.highlightedId.value != null) {
+        e.preventDefault()
+        const item = daysInMonth.value.find(d => d.isoDate === virtualFocus.highlightedId.value)
+        if (item && !item.isDisabled) onClick(item.date)
+        return
+      }
+
+      // Intercept arrow keys to handle month-boundary crossing
+      const curId = virtualFocus.highlightedId.value as string | undefined
+      if (curId != null) {
+        const cols = props.weekdays.length
+        const rtl = getComputedStyle(e.currentTarget as HTMLElement).direction === 'rtl'
+
+        // stride = array-index delta; calendarDays = actual date offset for boundary crossing
+        let stride: number
+        let calendarDays = 0
+
+        if (e.key === 'ArrowLeft') {
+          stride = rtl ? 1 : -1
+          calendarDays = rtl ? 1 : -1
+        } else if (e.key === 'ArrowRight') {
+          stride = rtl ? -1 : 1
+          calendarDays = rtl ? -1 : 1
+        } else if (e.key === 'ArrowUp') {
+          stride = -cols
+          calendarDays = -7
+        } else if (e.key === 'ArrowDown') {
+          stride = cols
+          calendarDays = 7
+        } else {
+          stride = 0
+        }
+
+        if (stride !== 0) {
+          const all = daysInMonth.value
+          const curIndex = all.findIndex(d => d.isoDate === curId)
+
+          if (curIndex >= 0) {
+            const targetItem = all[curIndex + stride]
+
+            // isHidden = isAdjacent && !showAdjacentMonths — no button in DOM for this day
+            if (!targetItem || targetItem.isHidden) {
+              e.preventDefault()
+              const targetIsoDate = targetItem
+                ? targetItem.isoDate
+                : adapter.toISO(adapter.addDays(adapter.date(curId), calendarDays))
+              const targetDate = adapter.date(targetIsoDate)
+              emit('update:month', adapter.getMonth(targetDate))
+              emit('update:year', adapter.getYear(targetDate))
+              nextTick(() => {
+                virtualFocus.highlight(targetIsoDate)
+                if (virtualFocus.highlightedId.value == null) virtualFocus.first()
+                virtualFocus.focusHighlighted()
+              })
+              return
+            }
+          }
+        }
+      }
+
+      virtualFocus.onKeydown(e)
+      virtualFocus.focusHighlighted()
+    }
+
+    function onFocusin (e: FocusEvent) {
+      const grid = daysRef.value
+      if (!grid || grid.contains(e.relatedTarget as Node)) return
+
+      grid.setAttribute('tabindex', '-1')
+
+      const isVisible = (d: (typeof daysInMonth.value)[0]) => !d.isAdjacent && !d.isDisabled
+
+      if (virtualFocus.highlightedId.value != null) {
+        const cur = daysInMonth.value.find(d => d.isoDate === virtualFocus.highlightedId.value)
+        if (cur && !cur.isAdjacent) {
+          virtualFocus.highlight(cur.isoDate)
+          virtualFocus.focusHighlighted()
+          return
+        }
+      }
+
+      const selected = daysInMonth.value.find(d =>
+        isVisible(d) && model.value.some(m => adapter.isSameDay(m, d.date))
+      )
+      const target = selected ?? daysInMonth.value.find(isVisible)
+      if (target) {
+        virtualFocus.highlight(target.isoDate)
+        virtualFocus.focusHighlighted()
+      }
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (!daysRef.value?.contains(e.relatedTarget as Node)) {
+        daysRef.value?.setAttribute('tabindex', '0')
+        virtualFocus.clear()
+      }
+    }
+
     function getEventColors (date: string): string[] {
       const { events, eventColor } = props
       let eventData: boolean | DatePickerEventColorValue
@@ -247,6 +390,11 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             ref={ daysRef }
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
+            tabindex="0"
+            role="grid"
+            onKeydown={ onContainerKeydown }
+            onFocusin={ onFocusin }
+            onFocusout={ onFocusout }
           >
             { !props.hideWeekdays && weekdayLabels.value.map(weekDay => (
               <div
@@ -266,10 +414,17 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   readonly: props.readonly,
                   icon: true,
                   ripple: false,
+                  tabindex: -1,
                   variant: item.isSelected ? 'flat' : item.isToday ? 'outlined' : 'text',
                   'aria-label': getDateAriaLabel(item),
                   'aria-current': item.isToday ? 'date' : undefined,
-                  onClick: () => onClick(item.date),
+                  id: `${uid}-day-${item.isoDate}`,
+                  onMousedown: (e: MouseEvent) => e.preventDefault(),
+                  onClick: () => {
+                    onClick(item.date)
+                    virtualFocus.highlight(item.isoDate)
+                    virtualFocus.focusHighlighted()
+                  },
                 },
                 item,
                 i,
@@ -296,6 +451,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                     },
                   ]}
                   data-v-date={ !item.isDisabled ? item.isoDate : undefined }
+                  role="gridcell"
                 >
                   { (props.showAdjacentMonths || !item.isAdjacent) && (
                     slots.day?.(slotProps) ?? (
@@ -312,6 +468,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         </MaybeTransition>
       </div>
     ))
+
+    return { focusGrid }
   },
 })
 

@@ -7,9 +7,10 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useVirtualFocus } from '@/composables/virtualFocus'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
+import { computed, ref, useId, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -30,6 +31,10 @@ export type VDatePickerMonthsSlots = {
 
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
+  columns: {
+    type: Number,
+    default: 2,
+  },
   height: [String, Number],
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
@@ -45,11 +50,14 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
 
   emits: {
     'update:modelValue': (date: any) => true,
+    escape: () => true,
   },
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const contentRef = ref<HTMLElement>()
+    const uid = useId()
 
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
@@ -80,6 +88,18 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       model.value = model.value ?? adapter.getMonth(adapter.date())
     })
 
+    const virtualFocus = useVirtualFocus(
+      () => months.value.map(month => ({
+        id: month.value,
+        disabled: month.isDisabled,
+        el: () => contentRef.value?.querySelector<HTMLElement>(`[data-v-month="${month.value}"]`),
+      })),
+      {
+        control: contentRef,
+        columns: () => props.columns,
+      }
+    )
+
     function isMonthAllowed (month: number) {
       if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
         return props.allowedMonths.includes(month)
@@ -92,6 +112,43 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       return true
     }
 
+    function onFocusin (e: FocusEvent) {
+      const grid = contentRef.value
+      if (!grid || grid.contains(e.relatedTarget as Node)) return
+
+      grid.setAttribute('tabindex', '-1')
+      const cur = model.value ?? adapter.getMonth(adapter.date())
+      virtualFocus.highlight(cur)
+      virtualFocus.focusHighlighted()
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (!contentRef.value?.contains(e.relatedTarget as Node)) {
+        contentRef.value?.setAttribute('tabindex', '0')
+        virtualFocus.clear()
+      }
+    }
+
+    function onContainerKeydown (e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        emit('escape')
+        return
+      }
+      if ((e.key === 'Enter' || e.key === ' ') && virtualFocus.highlightedId.value != null) {
+        e.preventDefault()
+        const id = virtualFocus.highlightedId.value as number
+        const month = months.value.find(m => m.value === id)
+        if (month && !month.isDisabled) {
+          if (model.value === id) emit('update:modelValue', model.value)
+          else model.value = id
+        }
+        return
+      }
+      virtualFocus.onKeydown(e)
+      virtualFocus.focusHighlighted()
+    }
+
     useRender(() => (
       <div
         class="v-date-picker-months"
@@ -99,26 +156,38 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-months__content">
+        <div
+          ref={ contentRef }
+          class="v-date-picker-months__content"
+          style={{ '--v-date-picker-months-columns': props.columns }}
+          tabindex="0"
+          onKeydown={ onContainerKeydown }
+          onFocusin={ onFocusin }
+          onFocusout={ onFocusout }
+        >
           { months.value.map((month, i) => {
             const btnProps = {
+              id: `${uid}-month-${i}`,
               active: model.value === i,
               ariaLabel: month.label,
               color: model.value === i ? props.color : undefined,
               disabled: month.isDisabled,
               rounded: true,
+              tabindex: -1,
               text: month.text,
               variant: model.value === month.value ? 'flat' : 'text',
-              onClick: () => onClick(i),
+              'data-v-month': i,
+              onMousedown: (e: MouseEvent) => e.preventDefault(),
+              onClick: () => {
+                virtualFocus.highlight(i)
+                virtualFocus.focusHighlighted()
+                if (model.value === i) {
+                  emit('update:modelValue', model.value)
+                  return
+                }
+                model.value = i
+              },
             } as const
-
-            function onClick (i: number) {
-              if (model.value === i) {
-                emit('update:modelValue', model.value)
-                return
-              }
-              model.value = i
-            }
 
             return slots.month?.({
               month,

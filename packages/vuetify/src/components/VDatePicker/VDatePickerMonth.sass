@@ -5,7 +5,9 @@
   .v-date-picker-month
     display: flex
     justify-content: center
+    overflow: hidden
     padding: $date-picker-month-padding
+    position: relative
 
     --v-date-picker-month-day-diff: 4px
 
@@ -24,6 +26,9 @@
     column-gap: $date-picker-month-column-gap
     justify-content: space-around
     width: 100%
+
+    &:focus
+      outline: none
 
   .v-date-picker-month__day
     align-items: center

@@ -89,4 +89,81 @@ describe('VDatePicker', () => {
 
     await commands.clearAbortTimeout()
   })
+
+  describe('keyboard navigation', () => {
+    it.each([
+      { key: 'ArrowLeft', description: 'left' },
+      { key: 'ArrowRight', description: 'right' },
+      { key: 'ArrowUp', description: 'up' },
+      { key: 'ArrowDown', description: 'down' },
+    ])('moves virtual focus $description with $key without changing selection', async ({ key }) => {
+      const model = ref()
+      render(() => (
+        <VDatePicker v-model={ model.value } />
+      ))
+
+      await userEvent.click(await screen.findByText(15))
+      const initialValue = model.value
+
+      const container = screen.getByCSS('.v-date-picker-month__days')
+      container.focus()
+      container.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }))
+
+      // selection must not change from arrow key alone
+      expect(model.value).toStrictEqual(initialValue)
+      // virtual focus cursor must have moved onto a button
+      const highlighted = container.querySelector('[data-highlighted]')
+      expect(highlighted).not.toBeNull()
+      expect(highlighted!.tagName.toLowerCase()).toBe('button')
+    })
+
+    it('selects the virtually-focused date on Enter', async () => {
+      const model = ref()
+      render(() => (
+        <VDatePicker v-model={ model.value } />
+      ))
+
+      await userEvent.click(await screen.findByText(15))
+      const initialDay = new Date(model.value).getDate()
+
+      const container = screen.getByCSS('.v-date-picker-month__days')
+      container.focus()
+
+      container.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }))
+      // still unchanged
+      expect(new Date(model.value).getDate()).toBe(initialDay)
+
+      container.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))
+      expect(new Date(model.value).getDate()).toBe(initialDay + 1)
+    })
+
+    it('does not throw when no date is selected and arrow key is pressed', async () => {
+      render(() => <VDatePicker />)
+
+      const container = screen.getByCSS('.v-date-picker-month__days')
+      container.focus()
+
+      expect(() => {
+        container.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }))
+      }).not.toThrow()
+    })
+
+    it('does not clear selection when using multiple mode', async () => {
+      const model = ref<unknown[]>([])
+      render(() => (
+        <VDatePicker v-model={ model.value } multiple />
+      ))
+
+      await userEvent.click(await screen.findByText(10))
+      await userEvent.click(await screen.findByText(15))
+      expect(model.value).toHaveLength(2)
+
+      const container = screen.getByCSS('.v-date-picker-month__days')
+      container.focus()
+      container.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }))
+
+      // both selections must remain intact
+      expect(model.value).toHaveLength(2)
+    })
+  })
 })
