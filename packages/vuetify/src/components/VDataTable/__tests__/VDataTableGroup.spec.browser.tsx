@@ -3,7 +3,7 @@ import { VDataTable } from '..'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert', key: 'name' },
@@ -172,6 +172,80 @@ describe('VDataTable - v-model:opened (group-by)', () => {
 
     // Inner groups are closed, so no item rows
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
+  })
+
+  it('reopens all groups when openAll is toggled off then back on', async () => {
+    const openAll = ref(true)
+    const opened = ref<string[]>([])
+
+    render(() => (
+      <VDataTable
+        items={ DESSERT_ITEMS }
+        headers={ DESSERT_HEADERS }
+        groupBy={[{ key: 'category' }]}
+        v-model:opened={ opened.value }
+        openAll={ openAll.value }
+        itemsPerPage={ -1 }
+      />
+    ))
+
+    // All 6 items visible; close Dairy
+    await userEvent.click(screen.getAllByCSS('.v-data-table-group-header-row .v-btn')[0])
+    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(4)
+
+    // Toggle openAll off then on — Dairy must reopen.
+    // nextTick lets Vue flush the first transition before the second is applied,
+    // so the allIds watcher sees two distinct deltas instead of a no-op batch.
+    openAll.value = false
+    await nextTick()
+    openAll.value = true
+    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
+  })
+
+  it('auto-opens new groups that appear while openAll is true', async () => {
+    const items = ref([...DESSERT_ITEMS])
+    const opened = ref<string[]>([])
+
+    render(() => (
+      <VDataTable
+        items={ items.value }
+        headers={ DESSERT_HEADERS }
+        groupBy={[{ key: 'category' }]}
+        v-model:opened={ opened.value }
+        openAll
+        itemsPerPage={ -1 }
+      />
+    ))
+
+    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
+
+    items.value = [...DESSERT_ITEMS, { name: 'Lollipop', calories: 392, category: 'Candy2' }]
+
+    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(7)
+    await expect.poll(() => opened.value).toContain('root_category_Candy2')
+  })
+
+  it('removes a dropped group from opened and emits update:opened', async () => {
+    const items = ref([...DESSERT_ITEMS])
+    const opened = ref<string[]>([])
+
+    render(() => (
+      <VDataTable
+        items={ items.value }
+        headers={ DESSERT_HEADERS }
+        groupBy={[{ key: 'category' }]}
+        v-model:opened={ opened.value }
+        openAll
+        itemsPerPage={ -1 }
+      />
+    ))
+
+    await expect.poll(() => opened.value).toContain('root_category_Dairy')
+
+    items.value = DESSERT_ITEMS.filter(i => i.category !== 'Dairy')
+
+    await expect.poll(() => opened.value).not.toContain('root_category_Dairy')
+    await expect.poll(() => screen.queryAllByCSS('.v-data-table-group-header-row')).toHaveLength(3)
   })
 
   it('uses custom groupKey function to generate group IDs', async () => {

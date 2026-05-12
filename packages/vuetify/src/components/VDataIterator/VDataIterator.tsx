@@ -1,7 +1,7 @@
 // Components
 import { VFadeTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
-import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
+import { makeDataTableGroupProps, provideGroupBy, syncOpenedWithGroups, useGroupedItems } from '@/components/VDataTable/composables/group'
 import { useOptions } from '@/components/VDataTable/composables/options'
 import {
   createPagination,
@@ -129,9 +129,10 @@ export const VDataIterator = genericComponent<new <T> (
       extractRows,
       isGroupOpen,
       toggleGroup,
-    } = provideGroupBy({ groupBy, sortBy, opened: openedModel, openAll })
+    } = provideGroupBy({ groupBy, sortBy, opened: openedModel })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
+    syncOpenedWithGroups(opened, openAll, sortedItems, groupBy, groupKeyFn)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, false, isGroupOpen, groupKeyFn)
 
     const manualPagination = toRef(() => !isEmpty(props.itemsLength))

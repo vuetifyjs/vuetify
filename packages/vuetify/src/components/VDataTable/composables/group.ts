@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, toRef, toValue } from 'vue'
+import { computed, inject, provide, ref, shallowRef, toRef, toValue, watch } from 'vue'
 import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
@@ -80,21 +80,24 @@ export function provideGroupBy (options: {
   sortBy: Ref<readonly SortItem[]>
   disableSort?: Ref<boolean>
   opened?: Ref<readonly string[]>
-  openAll?: MaybeRefOrGetter<boolean>
 }) {
-  const { disableSort, groupBy, sortBy, openAll } = options
+  const { disableSort, groupBy, sortBy } = options
 
   const openedModel = options.opened ?? ref<readonly string[]>([])
 
+  // Local mirror of opened for immediate (synchronous) rendering.
+  // In controlled (v-model) mode the proxied model only updates after a parent
+  // re-render, so reads from props.opened would be stale on the first render.
+  const localOpened = shallowRef(new Set<string>(openedModel.value))
+  watch(openedModel, val => { localOpened.value = new Set(val) })
+
   const opened = computed<Set<string>>({
-    get: () => new Set(openedModel.value),
+    get: () => localOpened.value,
     set: v => {
+      localOpened.value = v
       openedModel.value = [...v.values()]
     },
   })
-
-  // Track groups that have been explicitly closed when openAll is active
-  const closedGroups = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
     return groupBy.value.map<SortItem>(val => ({
@@ -104,29 +107,13 @@ export function provideGroupBy (options: {
   })
 
   function isGroupOpen (group: Group) {
-    if (toValue(openAll) && !closedGroups.value.has(group.id)) {
-      return true
-    }
     return opened.value.has(group.id)
   }
 
   function toggleGroup (group: Group) {
     const newOpened = new Set(opened.value)
-    if (toValue(openAll)) {
-      const newClosed = new Set(closedGroups.value)
-      if (isGroupOpen(group)) {
-        newClosed.add(group.id)
-        newOpened.delete(group.id)
-      } else {
-        newClosed.delete(group.id)
-        newOpened.add(group.id)
-      }
-      closedGroups.value = newClosed
-    } else {
-      if (!isGroupOpen(group)) newOpened.add(group.id)
-      else newOpened.delete(group.id)
-    }
-
+    if (isGroupOpen(group)) newOpened.delete(group.id)
+    else newOpened.add(group.id)
     opened.value = newOpened
   }
 
@@ -146,12 +133,6 @@ export function provideGroupBy (options: {
     }
     return dive({ type: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
   }
-
-  // onBeforeMount(() => {
-  //   for (const key of groupedItems.value.keys()) {
-  //     opened.value.add(key)
-  //   }
-  // })
 
   const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows, isGroupOpen }
 
@@ -215,6 +196,44 @@ function groupItems <T extends GroupableItem> (
   })
 
   return groups
+}
+
+function collectGroupIds <T extends GroupableItem> (groups: readonly Group<T>[]): string[] {
+  return groups.flatMap(g => [
+    g.id,
+    ...collectGroupIds(g.items.filter((item): item is Group<T> => 'type' in item && item.type === 'group')),
+  ])
+}
+
+export function syncOpenedWithGroups (
+  opened: Ref<Set<string>>,
+  openAll: MaybeRefOrGetter<boolean>,
+  items: MaybeRefOrGetter<readonly GroupableItem[]>,
+  groupBy: Ref<readonly SortItem[]>,
+  groupKeyFn?: MaybeRefOrGetter<GroupKeyFn | undefined>,
+) {
+  const allIds = computed(() => {
+    if (!toValue(openAll) || !groupBy.value.length) return new Set<string>()
+    return new Set(collectGroupIds(
+      groupItems(toValue(items), groupBy.value.map(g => g.key), toValue(groupKeyFn))
+    ))
+  })
+
+  watch(allIds, (newIds, oldIds) => {
+    if (!toValue(openAll)) return
+
+    const current = new Set(opened.value)
+    let changed = false
+
+    for (const id of newIds) {
+      if (!oldIds?.has(id) && !current.has(id)) { current.add(id); changed = true }
+    }
+    for (const id of oldIds ?? []) {
+      if (!newIds.has(id) && current.has(id)) { current.delete(id); changed = true }
+    }
+
+    if (changed) opened.value = current
+  }, { immediate: true })
 }
 
 function flattenItems <T extends GroupableItem> (

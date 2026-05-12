@@ -8,7 +8,7 @@ import { VVirtualScrollItem } from '@/components/VVirtualScroll/VVirtualScrollIt
 
 // Composables
 import { provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, syncOpenedWithGroups, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -122,13 +122,14 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       extractRows,
       isGroupOpen,
       toggleGroup,
-    } = provideGroupBy({ groupBy, sortBy, disableSort, opened, openAll })
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
+    syncOpenedWithGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey)
 
     const allItems = computed(() => extractRows(flatItems.value))
