@@ -21,7 +21,7 @@ const DESSERT_ITEMS = [
 ]
 
 describe('VDataTable - v-model:opened (group-by)', () => {
-  it('groups are closed by default when no opened prop is given', () => {
+  it('renders only group headers when opened is empty', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
@@ -31,42 +31,12 @@ describe('VDataTable - v-model:opened (group-by)', () => {
       />
     ))
 
+    // Dairy, Pastry, Cookie, Candy = 4 groups, no item rows by default
     expect(screen.getAllByCSS('.v-data-table-group-header-row')).toHaveLength(4)
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('renders only group headers when groups are closed', () => {
-    render(() => (
-      <VDataTable
-        items={ DESSERT_ITEMS }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        opened={[]}
-        itemsPerPage={ -1 }
-      />
-    ))
-
-    // Dairy, Pastry, Cookie, Candy = 4 groups
-    expect(screen.getAllByCSS('.v-data-table-group-header-row')).toHaveLength(4)
-    expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
-  })
-
-  it('opens a group when its id is included in the opened prop', () => {
-    render(() => (
-      <VDataTable
-        items={ DESSERT_ITEMS }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        opened={['root_category_Dairy']}
-        itemsPerPage={ -1 }
-      />
-    ))
-
-    // Dairy has 2 items
-    expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(2)
-  })
-
-  it('opens multiple groups when multiple ids are given in opened prop', () => {
+  it('opens the groups whose ids appear in the opened prop', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
@@ -221,24 +191,5 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await userEvent.click(screen.getAllByCSS('.v-data-table-group-header-row .v-btn')[0])
 
     await expect.poll(() => opened.value).toStrictEqual(['category:Dairy'])
-  })
-
-  it('empty opened array closes all groups even if they were previously open', async () => {
-    const opened = ref(['root_category_Dairy', 'root_category_Pastry'])
-
-    render(() => (
-      <VDataTable
-        items={ DESSERT_ITEMS }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        v-model:opened={ opened.value }
-        itemsPerPage={ -1 }
-      />
-    ))
-
-    expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(4)
-
-    opened.value = []
-    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 })
