@@ -8,7 +8,6 @@ meta:
 related:
   - /introduction/why-vuetify/
   - /introduction/enterprise-support/
-  - /introduction/enterprise/
 ---
 
 # Vue and Vuetify jobs

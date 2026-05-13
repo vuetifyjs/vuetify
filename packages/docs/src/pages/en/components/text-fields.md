@@ -19,8 +19,6 @@ features:
 
 Text field components are used for collecting user provided information.
 
-![Text-field Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-entry.png)
-
 <PageFeatures />
 
 ## Usage
@@ -223,6 +221,13 @@ Vuetify includes simple validation through the **rules** prop. The prop accepts 
 The **variant** prop provides an easy way to customize the style of your text field. The following values are valid options: **solo**, **filled**, **outlined**, **plain**, and **underlined**.
 
 <ExamplesExample file="v-text-field/prop-variant" />
+
+#### Focused
+
+The **focused** prop that sets the initial focus state of the component. It is a model prop, which handles 2 way binding with `focused` and `@update:focused`. This means its value sets the initial state but will be updated internally by focus/blur events.
+If you want to override this behavior (e.g., keep the input always focused), you can bind an empty `@update:focused` handler.
+
+<ExamplesExample file="v-text-field/prop-focused" />
 
 ### Events
 

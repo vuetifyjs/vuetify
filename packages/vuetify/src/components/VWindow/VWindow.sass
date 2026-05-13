@@ -1,3 +1,4 @@
+@use 'sass:selector'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -33,13 +34,48 @@
       .v-window__left
         transform: translateX(-200%)
 
+      @at-root #{selector.append(':has(.v-window__controls--right)', &)}
+        .v-window__left
+          transform: translateX(200%)
+
       .v-window__right
         transform: translateX(200%)
+
+      @at-root #{selector.append(':has(.v-window__controls--left)', &)}
+        .v-window__right
+          transform: translateX(-200%)
 
       &:hover
         .v-window__left,
         .v-window__right
           transform: translateX(0)
+
+    &--vertical-arrows
+      .v-window__controls
+        flex-direction: column
+        justify-content: center
+        gap: $window-controls-vertical-gap
+
+        &--left
+          align-items: start
+
+        &--right
+          align-items: end
+
+        .v-window__left,
+        .v-window__right
+          .v-icon
+            transform: rotate(90deg)
+
+    &--crossfade > .v-window__container
+      isolation: isolate
+
+      > .v-window-item
+        mix-blend-mode: $window-crossfade-blend-mode
+
+@include tools.layer('overrides')
+  .v-window-item
+    transition-duration: var(--v-window-transition-duration, revert-layer)
 
 @include tools.layer('transitions')
   .v-window
@@ -51,9 +87,12 @@
       &-leave-active
         transition: $window-transition
 
+        @media (prefers-reduced-motion: reduce)
+          transition-duration: 0s
+
       &-leave-from,
       &-leave-to
-        position: absolute !important
+        position: absolute
         top: 0
         width: 100%
 
@@ -84,3 +123,19 @@
 
       &-leave-to
         transform: translateY(100%)
+
+  .v-window
+    &-crossfade-transition
+      &-enter-active,
+      &-leave-active
+        transition: $window-transition
+
+      &-leave-from,
+      &-leave-to
+        position: absolute
+        top: 0
+        width: 100%
+
+      &-enter-from,
+      &-leave-to
+        opacity: 0

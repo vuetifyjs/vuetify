@@ -3,7 +3,7 @@
     :headers="headers"
     :items="items"
     item-key="name"
-    items-per-page="5"
+    hide-default-footer
   ></v-data-table>
 </template>
 
@@ -16,9 +16,9 @@
       title: 'Dimensions',
       align: 'center',
       children: [
-        { title: 'Height (m)', value: 'height' },
-        { title: 'Base (m)', value: 'base' },
-        { title: 'Volume (m³)', value: 'volume' },
+        { title: 'Height(m)', value: 'height' },
+        { title: 'Base(m)', value: 'base' },
+        { title: 'Volume(m³)', value: 'volume' },
       ],
     },
   ]
@@ -78,9 +78,9 @@
           title: 'Dimensions',
           align: 'center',
           children: [
-            { title: 'Height (m)', value: 'height' },
-            { title: 'Base (m)', value: 'base' },
-            { title: 'Volume (m³)', value: 'volume' },
+            { title: 'Height(m)', value: 'height' },
+            { title: 'Base(m)', value: 'base' },
+            { title: 'Volume(m³)', value: 'volume' },
           ],
         },
       ],

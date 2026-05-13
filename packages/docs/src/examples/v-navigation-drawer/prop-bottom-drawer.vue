@@ -1,15 +1,10 @@
 <template>
   <v-card>
     <v-layout>
-      <v-app-bar
-        color="primary"
-        prominent
-      >
+      <v-app-bar color="primary">
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>My files</v-toolbar-title>
-
-        <v-spacer></v-spacer>
 
         <template v-if="$vuetify.display.mdAndUp">
           <v-btn icon="mdi-magnify" variant="text"></v-btn>

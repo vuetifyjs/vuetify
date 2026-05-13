@@ -1,5 +1,5 @@
 <template>
-  <v-row dense>
+  <v-row density="comfortable">
     <v-col cols="12" md="6">
       <v-date-input
         label="Select a date"
@@ -7,7 +7,6 @@
         prepend-inner-icon="$calendar"
         variant="solo"
       ></v-date-input>
-
     </v-col>
 
     <v-col cols="12" md="6">
@@ -16,7 +15,6 @@
         prepend-icon=""
         variant="solo"
       ></v-date-input>
-
     </v-col>
   </v-row>
 </template>

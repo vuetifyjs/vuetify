@@ -5,11 +5,8 @@
     }"
     scoped
   >
-    <AppSheet class="mb-9">
-      <v-lazy
-        v-model="hasRendered"
-        min-height="44"
-      >
+    <AppSheet class="mb-9 position-relative">
+      <v-lazy v-model="hasRendered" min-height="44">
         <v-toolbar
           border="b"
           class="px-1"
@@ -17,12 +14,12 @@
           flat
         >
           <v-fade-transition hide-on-leave>
-            <div v-if="showCode">
+            <div v-if="showCode" class="d-flex ga-1 px-1">
               <v-btn
                 v-for="(section, i) of sections"
                 :key="section.name"
                 :active="template === i"
-                class="ma-1 text-none"
+                class="text-none"
                 size="small"
                 variant="text"
                 @click="template = i"
@@ -34,8 +31,8 @@
             </div>
 
             <div
-              v-else-if="user.dev && file"
-              class="text-body-2 ma-1 text-medium-emphasis"
+              v-else-if="user.one.devmode && file"
+              class="text-body-medium ma-1 text-medium-emphasis"
             >
               <v-icon icon="mdi-file-tree" />
 
@@ -49,15 +46,18 @@
             <v-tooltip
               v-for="({ path, ...action }, i) of actions"
               :key="i"
+              :disabled="xs"
               location="top"
+              open-delay="500"
             >
               <template #activator="{ props: tooltip }">
                 <v-fade-transition hide-on-leave>
                   <v-btn
                     v-show="!action.hide"
                     :key="action.icon"
-                    class="me-2 text-medium-emphasis"
+                    class="me-1 text-medium-emphasis"
                     density="comfortable"
+                    size="small"
                     variant="text"
                     v-bind="mergeProps(action as any, tooltip)"
                   />
@@ -97,6 +97,16 @@
           <component :is="ExampleComponent" v-if="isLoaded" />
         </v-theme-provider>
       </div>
+      <new-in-chip
+        v-if="resolvedNewIn"
+        :text="t('new-in', { version: resolvedNewIn })"
+        :to="rpath(`/getting-started/release-notes/?version=v${resolvedNewIn}`)"
+        class="text-mono rounded-t-0 rounded-b position-absolute bottom-0"
+        color="success"
+        size="x-small"
+        style="transform: translateY(calc(100% + 1px)); right: 10px;"
+        variant="tonal"
+      />
     </AppSheet>
   </v-defaults-provider>
 </template>
@@ -107,6 +117,10 @@
 
   // Utilities
   import { getExample } from 'virtual:examples'
+  import newInData from '@/data/new-in.json'
+
+  // Types
+  import type { Component } from 'vue'
 
   const { xs } = useDisplay()
   const { t } = useI18n()
@@ -123,6 +137,14 @@
     preview: Boolean,
   })
 
+  const resolvedNewIn = computed(() => {
+    const [componentPath, exampleName] = props.file.split('/')
+    const componentName = componentPath.split('-').map(part =>
+      part.charAt(0).toUpperCase() + part.slice(1)
+    ).join('') as keyof typeof newInData
+    return (newInData as any)[componentName]?.examples?.[exampleName] ?? null
+  })
+
   function parseTemplate (target: string, template: string) {
     const pattern = {
       composition: /(<script setup>[\w\W]*?<\/script>)/g,
@@ -133,24 +155,30 @@
     return parsed?.[1]
   }
 
-  const isLoaded = ref(false)
-  const isError = ref(false)
-  const showCode = ref(props.inline || props.open)
-  const template = ref(0)
-  const hasRendered = ref(false)
+  const isLoaded = shallowRef(false)
+  const isError = shallowRef(false)
+  const showCode = shallowRef(props.inline || props.open)
+  const template = shallowRef(0)
+  const hasRendered = shallowRef(false)
   const isEager = shallowRef(false)
   const copied = shallowRef(false)
 
-  const component = shallowRef()
-  const code = ref<string>()
+  type ExampleComponentType = Component & {
+    playgroundResources?: string
+    playgroundSetup?: string
+    exampleMeta?: string
+  }
+
+  const component = shallowRef<ExampleComponentType | undefined>()
+  const code = shallowRef<string>()
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
   })
   const sections = computed(() => {
     const _code = code.value
     if (!_code) return []
-    const scriptContent = parseTemplate(user.composition, _code) ??
-      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.composition], _code)
+    const scriptContent = parseTemplate(user.ecosystem.docs.composition, _code) ??
+      parseTemplate(({ composition: 'options', options: 'composition' } as any)[user.ecosystem.docs.composition], _code)
 
     return [
       {
@@ -196,8 +224,21 @@
     set: val => _theme.value = val,
   })
 
+  const exampleMeta = computed<Record<string, any>>(() => {
+    const meta = component.value?.exampleMeta
+
+    if (!meta) return {}
+
+    try {
+      return JSON.parse(meta)
+    } catch (e) {
+      console.error('Invalid example meta for', props.file, e)
+      return {}
+    }
+  })
+
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) return null
+    if (!isLoaded.value || isError.value || !component.value) return null
 
     const resources = JSON.parse(component.value.playgroundResources || '{}')
     const setup = component.value.playgroundSetup?.trim()
@@ -209,9 +250,13 @@
     )
   })
 
+  const figmaLink = computed(() => {
+    return exampleMeta.value.figma
+  })
+
   const actions = computed(() => [
     {
-      icon: 'mdi-theme-light-dark',
+      icon: theme.value === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-weather-night',
       path: 'invert-example-colors',
       onClick: toggleTheme,
     },
@@ -220,20 +265,26 @@
       path: 'edit-in-playground',
       href: playgroundLink.value,
       target: '_blank',
-      hide: xs.value,
+    },
+    {
+      icon: '$vuetify-figma',
+      path: 'view-in-figma',
+      href: figmaLink.value,
+      target: '_blank',
+      hide: xs.value || !figmaLink.value,
     },
     {
       icon: 'mdi-github',
       path: 'view-in-github',
       href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
       target: '_blank',
-      hide: xs.value,
+      hide: xs.value || !user.one.devmode,
     },
     {
       icon: copied.value ? 'mdi-check' : 'mdi-clipboard-multiple-outline',
       path: 'copy-example-source',
       onClick: async () => {
-        navigator.clipboard.writeText(
+        await navigator.clipboard.writeText(
           sections.value.map(section => section.content).join('\n')
         )
 

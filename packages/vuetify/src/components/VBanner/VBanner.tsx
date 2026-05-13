@@ -66,7 +66,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
   props: makeVBannerProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { displayClasses, mobile } = useDisplay(props)
@@ -74,12 +74,12 @@ export const VBanner = genericComponent<VBannerSlots>()({
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const { themeClasses } = provideTheme(props)
 
-    const color = toRef(props, 'color')
-    const density = toRef(props, 'density')
+    const color = toRef(() => props.color)
+    const density = toRef(() => props.density)
 
     provideDefaults({ VBannerActions: { color, density } })
 
@@ -111,6 +111,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
             backgroundColorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           role="banner"

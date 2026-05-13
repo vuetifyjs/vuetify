@@ -10,13 +10,13 @@
       >
         <v-card
           :class="{ 'on-hover': isHovering }"
-          :elevation="isHovering ? 16 : 2"
+          :elevation="isHovering ? 4 : 1"
           class="mx-auto"
           height="350"
           max-width="350"
           v-bind="props"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center text-subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center text-body-large">
             Open Delay (Mouse enter)
           </v-card-text>
         </v-card>
@@ -33,13 +33,13 @@
       >
         <v-card
           :class="{ 'on-hover': isHovering }"
-          :elevation="isHovering ? 16 : 2"
+          :elevation="isHovering ? 4 : 1"
           class="mx-auto"
           height="350"
           max-width="350"
           v-bind="props"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center text-subtitle-1">
+          <v-card-text class="font-weight-medium mt-12 text-center text-body-large">
             Close Delay (Mouse leave)
           </v-card-text>
         </v-card>

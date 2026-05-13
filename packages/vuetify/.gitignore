@@ -29,3 +29,4 @@ yarn-error.log*
 *.sw?
 
 .vercel
+.vizzly

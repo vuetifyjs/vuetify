@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     border="lg opacity-12"
-    class="text-body-2 mx-auto"
+    class="text-body-medium mx-auto"
     max-width="550"
   >
     <v-container fluid>
@@ -12,7 +12,7 @@
 
         <v-col cols="12" md="9">
           <p class="mb-4">
-            This is part of our <a href="#">Most Comprehenseive Guide to Referral Programs</a> > <a href="#">Do I Need A Referral Program?</a> section. You may enjoy other related articles:
+            This is part of our <a href="#">Most Comprehensive Guide to Referral Programs</a> > <a href="#">Do I Need A Referral Program?</a> section. You may enjoy other related articles:
           </p>
 
           <ul class="ps-4 mb-6">

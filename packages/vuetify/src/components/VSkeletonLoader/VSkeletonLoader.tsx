@@ -9,7 +9,7 @@ import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -130,10 +130,12 @@ export const makeVSkeletonLoaderProps = propsFactory({
 export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
 
+  inheritAttrs: false,
+
   props: makeVSkeletonLoaderProps(),
 
-  setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+  setup (props, { attrs, slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { themeClasses } = provideTheme(props)
@@ -149,26 +151,29 @@ export const VSkeletonLoader = genericComponent()({
         role: 'alert',
       }
 
-      return (
-        <div
-          class={[
-            'v-skeleton-loader',
-            {
-              'v-skeleton-loader--boilerplate': props.boilerplate,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            elevationClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            isLoading ? dimensionStyles.value : {},
-          ]}
-          { ...loadingProps }
-        >
-          { isLoading ? items.value : slots.default?.() }
-        </div>
-      )
+      return isLoading
+        ? (
+          <div
+            class={[
+              'v-skeleton-loader',
+              {
+                'v-skeleton-loader--boilerplate': props.boilerplate,
+              },
+              themeClasses.value,
+              backgroundColorClasses.value,
+              elevationClasses.value,
+            ]}
+            style={[
+              backgroundColorStyles.value,
+              dimensionStyles.value,
+            ]}
+            { ...loadingProps }
+            { ...attrs }
+          >
+            { items.value }
+          </div>
+        )
+        : <>{ slots.default?.() }</>
     })
 
     return {}

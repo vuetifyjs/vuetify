@@ -4,6 +4,7 @@ on:
     branches:
     - dev
     - next
+    - v3-stable
     - v2-stable
     - v2-dev
 
@@ -12,7 +13,7 @@ env:
 
 jobs:
   close:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.repository_owner == 'vuetifyjs'
     steps:
       - uses: vuetifyjs/close-action@master

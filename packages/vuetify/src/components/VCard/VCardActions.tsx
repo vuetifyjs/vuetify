@@ -1,14 +1,20 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVCardActionsProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'VCardActions')
 
 export const VCardActions = genericComponent()({
   name: 'VCardActions',
 
-  props: makeComponentProps(),
+  props: makeVCardActionsProps(),
 
   setup (props, { slots }) {
     provideDefaults({
@@ -19,15 +25,14 @@ export const VCardActions = genericComponent()({
     })
 
     useRender(() => (
-      <div
+      <props.tag
         class={[
           'v-card-actions',
           props.class,
         ]}
         style={ props.style }
-      >
-        { slots.default?.() }
-      </div>
+        v-slots={ slots }
+      />
     ))
 
     return {}

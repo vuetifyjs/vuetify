@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-date-picker
         v-model="date"
         :allowed-dates="allowedDates"

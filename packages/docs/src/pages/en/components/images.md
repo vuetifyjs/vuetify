@@ -53,11 +53,23 @@ If the provided aspect ratio doesn't match that of the actual image, the default
 
 <ExamplesExample file="v-img/prop-cover" />
 
+#### Rounded
+
+Use the **rounded** prop to control the border radius of the image container.
+
+<ExamplesExample file="v-img/prop-rounded" />
+
 #### Height
 
 `v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
 
 <ExamplesExample file="v-img/prop-max-height" />
+
+#### Image class
+
+The `image-class` prop allows you to apply CSS classes directly to the inner `<img>` element. This is useful for adding hover effects or styles that should target the image itself rather than the container.
+
+<ExamplesExample file="v-img/prop-image-class" />
 
 #### Gradient
 

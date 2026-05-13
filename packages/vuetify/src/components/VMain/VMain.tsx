@@ -26,7 +26,7 @@ export const VMain = genericComponent()({
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)
-    const { mainStyles, layoutIsReady } = useLayout()
+    const { mainStyles } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
     useRender(() => (
@@ -54,7 +54,7 @@ export const VMain = genericComponent()({
       </props.tag>
     ))
 
-    return layoutIsReady
+    return {}
   },
 })
 

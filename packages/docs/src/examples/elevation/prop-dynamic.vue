@@ -4,7 +4,7 @@
     <v-hover v-slot="{ isHovering, props }">
       <v-card
         v-bind="props"
-        :elevation="isHovering ? 24 : 6"
+        :elevation="isHovering ? 5 : 1"
         class="mx-auto pa-6"
       >
         Prop based elevation
@@ -17,8 +17,8 @@
     <v-hover v-slot="{ isHovering, props }">
       <div
         v-bind="props"
-        :class="`elevation-${isHovering ? 24 : 6}`"
-        class="mx-auto pa-6 transition-swing"
+        :class="`bg-surface elevation-${isHovering ? 5 : 1}`"
+        class="mx-auto pa-6"
       >
         Class based elevation
       </div>

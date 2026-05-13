@@ -15,7 +15,6 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { Anchor } from '@/util'
 
@@ -45,11 +44,11 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
 
     const menuRef = ref<VMenu>()
 
-    const location = computed(() => {
-      const [y, x = 'center'] = props.location.split(' ')
+    const location = computed<Anchor>(() => {
+      const [y, x = 'center'] = props.location?.split(' ') ?? []
 
-      return `${y} ${x}`
-    }) as ComputedRef<Anchor>
+      return `${y} ${x}` as Anchor
+    })
 
     const locationClasses = computed(() => ({
       [`v-speed-dial__content--${location.value.replace(' ', '-')}`]: true,
@@ -67,6 +66,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
           contentClass={[
             'v-speed-dial__content',
             locationClasses.value,
+            props.contentClass,
           ]}
           location={ location.value }
           ref={ menuRef }

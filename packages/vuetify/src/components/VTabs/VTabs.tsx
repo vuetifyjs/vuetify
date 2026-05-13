@@ -2,7 +2,7 @@
 import './VTabs.sass'
 
 // Components
-import { VTab } from './VTab'
+import { makeVTabProps, VTab } from './VTab'
 import { VTabsWindow } from './VTabsWindow'
 import { VTabsWindowItem } from './VTabsWindowItem'
 import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
@@ -17,26 +17,29 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { VTabsSymbol } from './shared'
+import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
+import type { GenericProps } from '@/util'
 
 export type TabItem = string | number | Record<string, any>
 
-export type VTabsSlot = {
-  item: TabItem
+export type VTabsSlot<T> = {
+  item: T
 }
 
-export type VTabsSlots = {
+export type VTabsSlots<T> = {
   default: never
-  tab: VTabsSlot
-  item: VTabsSlot
+  tab: VTabsSlot<T>
+  item: VTabsSlot<T>
   window: never
+  prev: never
+  next: never
 } & {
-  [key: `tab.${string}`]: VTabsSlot
-  [key: `item.${string}`]: VTabsSlot
+  [key: `tab.${string}`]: VTabsSlot<T>
+  [key: `item.${string}`]: VTabsSlot<T>
 }
 
 function parseItems (items: readonly TabItem[] | undefined) {
@@ -68,8 +71,12 @@ export const makeVTabsProps = propsFactory({
     default: undefined,
   },
   hideSlider: Boolean,
+  inset: Boolean,
+  insetPadding: [String, Number],
+  insetRadius: [String, Number],
   sliderColor: String,
 
+  ...pick(makeVTabProps(), ['spaced', 'sliderTransition', 'sliderTransitionDuration']),
   ...makeVSlideGroupProps({
     mandatory: 'force' as const,
     selectedClass: 'v-tab-item--selected',
@@ -78,7 +85,14 @@ export const makeVTabsProps = propsFactory({
   ...makeTagProps(),
 }, 'VTabs')
 
-export const VTabs = genericComponent<VTabsSlots>()({
+export const VTabs = genericComponent<new <TModel, T = TabItem>(
+  props: {
+    items?: T[]
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VTabsSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VTabs',
 
   props: makeVTabsProps(),
@@ -91,7 +105,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
     const model = useProxiedModel(props, 'modelValue')
     const items = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { scopeId } = useScopeId()
 
     provideDefaults({
@@ -100,7 +114,10 @@ export const VTabs = genericComponent<VTabsSlots>()({
         direction: toRef(props, 'direction'),
         stacked: toRef(props, 'stacked'),
         fixed: toRef(props, 'fixedTabs'),
+        inset: toRef(props, 'inset'),
         sliderColor: toRef(props, 'sliderColor'),
+        sliderTransition: toRef(props, 'sliderTransition'),
+        sliderTransitionDuration: toRef(props, 'sliderTransitionDuration'),
         hideSlider: toRef(props, 'hideSlider'),
       },
     })
@@ -121,6 +138,7 @@ export const VTabs = genericComponent<VTabsSlots>()({
               {
                 'v-tabs--fixed-tabs': props.fixedTabs,
                 'v-tabs--grow': props.grow,
+                'v-tabs--inset': props.inset,
                 'v-tabs--stacked': props.stacked,
               },
               densityClasses.value,
@@ -128,7 +146,11 @@ export const VTabs = genericComponent<VTabsSlots>()({
               props.class,
             ]}
             style={[
-              { '--v-tabs-height': convertToUnit(props.height) },
+              {
+                '--v-tabs-height': convertToUnit(props.height),
+                '--v-tabs-inset-padding': props.inset ? convertToUnit(props.insetPadding) : undefined,
+                '--v-tabs-inset-radius': props.inset ? convertToUnit(props.insetRadius) : undefined,
+              },
               backgroundColorStyles.value,
               props.style,
             ]}
@@ -137,18 +159,23 @@ export const VTabs = genericComponent<VTabsSlots>()({
             { ...scopeId }
             { ...attrs }
           >
-            { slots.default?.() ?? items.value.map(item => (
-              slots.tab?.({ item }) ?? (
-                <VTab
-                  { ...item }
-                  key={ item.text }
-                  value={ item.value }
-                  v-slots={{
-                    default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
-                  }}
-                />
-              )
-            ))}
+            {{
+              default: slots.default ?? (() => items.value.map(item => (
+                slots.tab?.({ item }) ?? (
+                  <VTab
+                    { ...item }
+                    key={ item.text }
+                    value={ item.value }
+                    spaced={ props.spaced }
+                    v-slots={{
+                      default: slots[`tab.${item.value}`] ? () => slots[`tab.${item.value}`]?.({ item }) : undefined,
+                    }}
+                  />
+                )
+              ))),
+              prev: slots.prev,
+              next: slots.next,
+            }}
           </VSlideGroup>
 
           { hasWindow && (

@@ -1,6 +1,6 @@
 <template>
   <border-chip
-    :prepend-icon="user.api === 'inline' ? 'mdi-flask-outline' : 'mdi-flask-empty-outline'"
+    :prepend-icon="user.ecosystem.docs.api === 'inline' ? 'mdi-flask-outline' : 'mdi-flask-empty-outline'"
     :text="t('toggle', [`${t('inline')} ${t('api')}`])"
     class="mb-2"
     @click="onClick"
@@ -29,7 +29,6 @@
         <ApiSection
           :name="name"
           :section="section"
-          show-headline
         />
       </template>
     </div>
@@ -48,8 +47,8 @@
   const route = useRoute()
   const { t, locale } = useI18n()
   const user = useUserStore()
-  const name = ref()
-  const sections = ['props', 'slots', 'events', 'functions']
+  const name = shallowRef()
+  const sections = ['props', 'slots', 'events', 'exposed'] as const
 
   const components = computed(() => {
     if (props.components) return props.components.split(/, ?/)
@@ -58,13 +57,13 @@
     return pageToApi[path as keyof typeof pageToApi]
   })
 
-  const showInline = computed(() => user.api === 'inline')
+  const showInline = computed(() => user.ecosystem.docs.api === 'inline')
 
   onBeforeMount(() => {
     name.value = components.value?.[0] ?? ''
   })
 
   function onClick () {
-    user.api = user.api === 'inline' ? 'link-only' : 'inline'
+    user.ecosystem.docs.api = user.ecosystem.docs.api === 'inline' ? 'link-only' : 'inline'
   }
 </script>

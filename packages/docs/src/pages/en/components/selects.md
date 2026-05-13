@@ -89,11 +89,22 @@ You can specify the specific properties within your items array that correspond 
 
 <ExamplesExample file="v-select/prop-custom-title-and-value" />
 
-<!-- #### Menu props
+When customizing items with the `item` slot, you should disable the default `title` prop rendering to avoid duplicate text.
+You can do this by setting `:title="null"` on `v-list-item`.
 
-Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
+<ExamplesExample file="v-select/prop-avoid-duplicate-text" />
 
-<ExamplesExample file="v-select/prop-menu-props" /> -->
+#### Menu props
+
+Custom props can be passed directly to `v-menu` using **menu-props** prop. In this example a scrim as added to the select and the menu closes when you scroll.
+
+<ExamplesExample file="v-select/prop-menu-props" />
+
+#### List props
+
+Custom props can be passed directly to `v-list` using **list-props** prop. In this example a background color is added to the list.
+
+<ExamplesExample file="v-select/prop-list-props" />
 
 #### Custom item props
 
@@ -147,3 +158,9 @@ The `v-select` component can be optionally expanded with prepended and appended 
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <ExamplesExample file="v-select/slot-selection" />
+
+#### Menu header and footer
+
+The **menu-header** and **menu-footer** slots allow you to add custom content at the top and bottom of the dropdown menu. This is useful for adding search fields, action buttons, or any other controls.
+
+<ExamplesExample file="v-select/slot-menu-header-and-footer" />

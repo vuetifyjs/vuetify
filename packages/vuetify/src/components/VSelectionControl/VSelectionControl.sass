@@ -18,15 +18,11 @@
       white-space: normal
       word-break: break-word
       height: 100%
+      opacity: 1
 
     &--disabled
       opacity: var(--v-disabled-opacity)
       pointer-events: none
-
-    &--error,
-    &--disabled
-      .v-label
-        opacity: 1
 
     &--error:not(.v-selection-control--disabled)
       .v-label
@@ -88,6 +84,7 @@
 
     .v-selection-control--disabled &,
     .v-selection-control--dirty &,
+    .v-selection-control--indeterminate &,
     .v-selection-control--error &
       > .v-icon
         opacity: 1

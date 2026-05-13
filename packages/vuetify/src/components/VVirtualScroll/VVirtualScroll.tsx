@@ -17,6 +17,7 @@ import {
   genericComponent,
   getCurrentInstance,
   getScrollParent,
+  IN_BROWSER,
   propsFactory,
   useRender,
 } from '@/util'
@@ -71,11 +72,13 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
       paddingTop,
       paddingBottom,
       computedItems,
-    } = useVirtual(props, toRef(props, 'items'))
+    } = useVirtual(props, toRef(() => props.items))
 
     useToggleScope(() => props.renderless, () => {
       function handleListeners (add = false) {
         const method = add ? 'addEventListener' : 'removeEventListener'
+
+        if (!IN_BROWSER) return
 
         if (containerRef.value === document.documentElement) {
           document[method]('scroll', handleScroll, { passive: true })
@@ -96,7 +99,7 @@ export const VVirtualScroll = genericComponent<new <T, Renderless extends boolea
     useRender(() => {
       const children = computedItems.value.map(item => (
         <VVirtualScrollItem
-          key={ item.index }
+          key={ item.key }
           renderless={ props.renderless }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >

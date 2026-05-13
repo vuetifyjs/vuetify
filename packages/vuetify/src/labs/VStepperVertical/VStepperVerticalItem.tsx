@@ -16,18 +16,20 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
 
-export type VStepperVerticalItemSlots = {
-  default: StepperItemSlot
-  icon: StepperItemSlot
-  subtitle: StepperItemSlot
-  title: StepperItemSlot
-  text: StepperItemSlot
-  prev: StepperItemSlot
-  next: StepperItemSlot
-  actions: StepperItemSlot & {
-    next: () => void
-    prev: () => void
-  }
+export type StepperVerticalItemActionSlot<T = any> = StepperItemSlot<T> & {
+  next: () => void
+  prev: () => void
+}
+
+export type VStepperVerticalItemSlots<T = any> = {
+  default: StepperItemSlot<T>
+  icon: StepperItemSlot<T>
+  subtitle: StepperItemSlot<T>
+  title: StepperItemSlot<T>
+  text: StepperItemSlot<T>
+  prev: StepperVerticalItemActionSlot<T>
+  next: StepperVerticalItemActionSlot<T>
+  actions: StepperVerticalItemActionSlot<T>
 }
 
 export const makeVStepperVerticalItemProps = propsFactory({
@@ -55,11 +57,10 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
     const vExpansionPanelRef = ref<typeof VExpansionPanel>()
     const step = computed(() => !isNaN(parseInt(props.value)) ? Number(props.value) : props.value)
     const groupItem = computed(() => vExpansionPanelRef.value?.groupItem)
-    const isSelected = computed(() => groupItem.value?.isSelected.value ?? false)
-    const isValid = computed(() => isSelected.value ? props.rules.every(handler => handler() === true) : null)
+    const isValid = computed(() => props.rules.every(handler => handler() === true))
     const canEdit = computed(() => !props.disabled && props.editable)
-    const hasError = computed(() => props.error || (isSelected.value && !isValid.value))
-    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value === true))
+    const hasError = computed(() => props.error || !isValid.value)
+    const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
 
     const disabled = computed(() => {
       if (props.disabled) return props.disabled
@@ -82,14 +83,13 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
       title: props.title,
       subtitle: props.subtitle,
       step: step.value,
-      value: props.value,
-    }))
+    } satisfies StepperItemSlot))
 
     const actionProps = computed(() => ({
       ...slotProps.value,
       prev: onClickPrev,
       next: onClickNext,
-    }))
+    } satisfies StepperVerticalItemActionSlot))
 
     function onClickNext () {
       emit('click:next')
@@ -107,8 +107,10 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
 
     useRender(() => {
       const hasColor = (
+        !groupItem.value ||
+        groupItem.value?.isSelected.value ||
         hasCompleted.value ||
-        groupItem.value?.isSelected.value
+        canEdit.value
       ) && (
         !hasError.value &&
         !props.disabled
@@ -135,7 +137,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
           readonly={ !props.editable }
           style={ props.style }
           color=""
-          hide-actions={ false }
+          hideActions={ false }
           value={ step.value }
         >
           {{

@@ -16,13 +16,18 @@ export const makeDelayProps = propsFactory({
 export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
   let clearDelay: (() => void) = () => {}
 
-  function runDelay (isOpening: boolean) {
+  function runDelay (isOpening: boolean, options?: { minDelay: number }) {
     clearDelay?.()
 
-    const delay = Number(isOpening ? props.openDelay : props.closeDelay)
+    const delay = isOpening ? props.openDelay : props.closeDelay
+
+    const normalizedDelay = Math.max(
+      options?.minDelay ?? 0,
+      Number(delay ?? 0)
+    )
 
     return new Promise(resolve => {
-      clearDelay = defer(delay, () => {
+      clearDelay = defer(normalizedDelay, () => {
         cb?.(isOpening)
         resolve(isOpening)
       })
@@ -33,8 +38,8 @@ export function useDelay (props: DelayProps, cb?: (value: boolean) => void) {
     return runDelay(true)
   }
 
-  function runCloseDelay () {
-    return runDelay(false)
+  function runCloseDelay (options?: { minDelay: number }) {
+    return runDelay(false, options)
   }
 
   return {

@@ -2,7 +2,6 @@
 import { useLocation } from '../location'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 
 // Types

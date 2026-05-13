@@ -8,7 +8,7 @@ import { ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { SubmitEventPromise } from '@/composables/form'
+import type { FieldValidationResult, FormField, FormValidationResult, SubmitEventPromise } from '@/composables/form'
 
 export const makeVFormProps = propsFactory({
   ...makeComponentProps(),
@@ -16,7 +16,17 @@ export const makeVFormProps = propsFactory({
 }, 'VForm')
 
 type VFormSlots = {
-  default: ReturnType<typeof createForm>
+  default: {
+    errors: FieldValidationResult[]
+    isDisabled: boolean
+    isReadonly: boolean
+    isValidating: boolean
+    isValid: boolean | null
+    items: FormField[]
+    validate: () => Promise<FormValidationResult>
+    reset: () => void
+    resetValidation: () => void
+  }
 }
 
 export const VForm = genericComponent<VFormSlots>()({
@@ -71,7 +81,17 @@ export const VForm = genericComponent<VFormSlots>()({
         onReset={ onReset }
         onSubmit={ onSubmit }
       >
-        { slots.default?.(form) }
+        { slots.default?.({
+          errors: form.errors.value,
+          isDisabled: form.isDisabled.value,
+          isReadonly: form.isReadonly.value,
+          isValidating: form.isValidating.value,
+          isValid: form.isValid.value,
+          items: form.items.value,
+          validate: form.validate,
+          reset: form.reset,
+          resetValidation: form.resetValidation,
+        })}
       </form>
     )))
 

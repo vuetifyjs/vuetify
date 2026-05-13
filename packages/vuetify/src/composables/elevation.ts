@@ -1,5 +1,5 @@
 // Utilities
-import { computed, isRef } from 'vue'
+import { isRef, toRef } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -12,17 +12,8 @@ export interface ElevationProps {
 export const makeElevationProps = propsFactory({
   elevation: {
     type: [Number, String],
-    validator (v: any) {
-      const value = parseInt(v)
-
-      return (
-        !isNaN(value) &&
-        value >= 0 &&
-        // Material Design has a maximum elevation of 24
-        // https://material.io/design/environment/elevation.html#default-elevations
-        value <= 24
-      )
-    },
+    // no limit to allow both 0-6 (MD3) and legacy 0-24 (MD2)
+    validator: (value: string | number) => parseInt(value) >= 0,
   },
 }, 'elevation')
 
@@ -31,15 +22,10 @@ type ElevationData = {
 }
 
 export function useElevation (props: ElevationProps | Ref<number | string | undefined>): ElevationData {
-  const elevationClasses = computed(() => {
+  const elevationClasses = toRef(() => {
     const elevation = isRef(props) ? props.value : props.elevation
-    const classes: string[] = []
-
-    if (elevation == null) return classes
-
-    classes.push(`elevation-${elevation}`)
-
-    return classes
+    if (elevation == null) return []
+    return [`elevation-${parseInt(elevation)}`]
   })
 
   return { elevationClasses }

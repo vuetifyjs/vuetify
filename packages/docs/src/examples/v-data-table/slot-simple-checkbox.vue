@@ -1,16 +1,18 @@
 <template>
-  <v-data-table :items="consoles">
+  <v-data-table :items="consoles" hide-default-footer>
     <template v-slot:item.exclusive="{ item }">
       <v-checkbox-btn
         v-model="item.exclusive"
-        readonly
+        :ripple="false"
       ></v-checkbox-btn>
     </template>
   </v-data-table>
 </template>
 
 <script setup>
-  const consoles = [
+  import { ref } from 'vue'
+
+  const consoles = ref([
     {
       name: 'PlayStation 5',
       manufacturer: 'Sony',
@@ -53,7 +55,7 @@
       sales: '101M',
       exclusive: true,
     },
-  ]
+  ])
 </script>
 
 <script>

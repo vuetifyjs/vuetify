@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Confirm Edit
   title: Confirm Edit
@@ -20,12 +19,6 @@ features:
 The `v-confirm-edit` component is used to allow the user to verify their changes before they are committed.
 
 <PageFeatures />
-
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
 
 ## Usage
 
@@ -50,3 +43,9 @@ The `v-confirm-edit` component is an intuitive way to capture a model's changes 
 It's easy to integrate pickers into the `v-confirm-edit` component. This allows you to provide a more user-friendly experience when selecting dates, times, or colors.
 
 <ExamplesExample file="v-confirm-edit/misc-date-picker" />
+
+### Disable actions
+
+You can control the disabled state of action buttons using **disabled** prop by either passing an array to disable targeted actions or a boolean value to disable all actions. If the **disabled** prop is not provided, the component will use internal logic to determine the disabled state.
+
+<ExamplesExample file="v-confirm-edit/misc-disable-actions" />

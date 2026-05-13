@@ -89,6 +89,32 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
+export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
+  const diff = daysDiff(adapter, start, stop)
+  const datesInRange = [start]
+
+  for (let i = 1; i < diff; i++) {
+    const nextDate = adapter.addDays(start, i)
+    datesInRange.push(nextDate)
+  }
+
+  if (stop) {
+    datesInRange.push(adapter.endOfDay(stop))
+  }
+
+  return datesInRange
+}
+
+export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
+  const iso = [
+    `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
+    `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
+  ]
+  return typeof adapter.date() === 'string'
+    ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
+    : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     typeof options.adapter === 'function'
@@ -115,27 +141,4 @@ export function useDate (): DateInstance {
   const locale = useLocale()
 
   return createInstance(options, locale)
-}
-
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-  let year = date.getFullYear()
-  let d1w1 = new Date(year, 0, 1)
-
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = new Date(year, 0, 1)
-  } else {
-    const tv = new Date(year + 1, 0, 1)
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
-    }
-  }
-
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-  return Math.floor(diffDays / 7) + 1
 }

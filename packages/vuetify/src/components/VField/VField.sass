@@ -15,7 +15,6 @@
     letter-spacing: $field-letter-spacing
     max-width: $field-max-width
     border-radius: $field-border-radius
-    contain: layout
     flex: 1 0
     grid-area: control
     position: relative
@@ -146,10 +145,13 @@
     input
       letter-spacing: inherit
 
-    @at-root
-      & input::placeholder,
-      input#{&}::placeholder,
-      textarea#{&}::placeholder
+    @at-root :where(& input, input#{&}, textarea#{&}, select#{&})
+      background-color: transparent
+      border-style: none
+      padding: 0
+      margin: 0
+
+      &::placeholder
         color: currentColor
         opacity: var(--v-disabled-opacity)
 
@@ -213,7 +215,8 @@
       opacity: var(--v-medium-emphasis-opacity)
 
     .v-field--disabled &,
-    .v-field--error &
+    .v-field--error &,
+    .v-field--glow.v-field--focused &
       > .v-icon
         opacity: 1
 
@@ -228,6 +231,9 @@
     margin-inline: $field-clearable-margin
     transition: $field-transition-timing
     transition-property: opacity, transform, width
+
+    @media (prefers-reduced-motion: reduce)
+      transition-property: opacity
 
     .v-field--focused &,
     .v-field--persistent-clear &
@@ -252,9 +258,11 @@
     position: absolute
     top: var(--v-input-padding-top)
     transform-origin: left center
-    transition: $field-transition-timing
-    transition-property: opacity, transform
     z-index: 1
+
+    @media (prefers-reduced-motion: no-preference)
+      transition: $field-transition-timing
+      transition-property: opacity, transform
 
     .v-field--variant-underlined &,
     .v-field--variant-plain &
@@ -278,7 +286,9 @@
       --v-field-label-scale: #{$field-label-floating-scale}em
       font-size: var(--v-field-label-scale)
       visibility: hidden
-      max-width: 100%
+
+      .v-field--variant-outlined &
+        max-width: 100%
 
       .v-field--center-affix &
         transform: none
@@ -370,7 +380,9 @@
       &__end
         border: 0 solid currentColor
         opacity: var(--v-field-border-opacity)
-        transition: opacity $field-subtle-transition-timing
+
+        @media (prefers-reduced-motion: no-preference)
+          transition: opacity $field-subtle-transition-timing
 
       &__start
         flex: 0 0 $field-control-affixed-padding
@@ -399,12 +411,17 @@
       &__notch
         flex: none
         position: relative
-        max-width: calc(100% - $field-control-affixed-padding)
+        max-width: calc(100% - $field-control-affixed-padding * 2)
+
+        @at-root
+          #{selector.append('.v-field--rounded', &)},
+          #{selector.append('[class^="rounded-"]', &)},
+          #{selector.append('[class*=" rounded-"]', &)}
+            max-width: calc(100% - var(--v-input-control-height))
 
         &::before,
         &::after
           opacity: var(--v-field-border-opacity)
-          transition: opacity $field-subtle-transition-timing
 
           @include tools.absolute(true)
 
@@ -531,3 +548,8 @@
       opacity: 0
 
   /* endregion */
+
+  @media (forced-colors: active)
+    .v-field
+      .v-progress-linear
+        border: none

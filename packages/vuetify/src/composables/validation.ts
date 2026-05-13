@@ -3,13 +3,15 @@ import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
+import { useRules } from '@/labs/rules'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
+import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { ValidationAlias } from '@/labs/rules'
 import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
@@ -38,7 +40,7 @@ export interface ValidationProps {
   name: string | undefined
   label: string | undefined
   readonly: boolean | null
-  rules: readonly ValidationRule[]
+  rules: readonly (ValidationRule | ValidationAlias)[]
   modelValue: any
   'onUpdate:modelValue': EventProp | undefined
   validateOn?: ValidateOn
@@ -66,7 +68,7 @@ export const makeValidationProps = propsFactory({
     default: null,
   },
   rules: {
-    type: Array as PropType<readonly ValidationRule[]>,
+    type: Array as PropType<readonly (ValidationRule | ValidationAlias)[]>,
     default: () => ([]),
   },
   modelValue: null,
@@ -79,26 +81,25 @@ export const makeValidationProps = propsFactory({
 export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
-  id: MaybeRef<string | number> = getUid(),
+  id: MaybeRef<string | number> = useId(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
-  const form = useForm()
+  const form = useForm(props)
+  const rules = useRules(() => props.rules)
   const internalErrorMessages = ref<string[]>([])
   const isPristine = shallowRef(true)
   const isDirty = computed(() => !!(
     wrapInArray(model.value === '' ? null : model.value).length ||
     wrapInArray(validationModel.value === '' ? null : validationModel.value).length
   ))
-  const isDisabled = computed(() => !!(props.disabled ?? form?.isDisabled.value))
-  const isReadonly = computed(() => !!(props.readonly ?? form?.isReadonly.value))
   const errorMessages = computed(() => {
     return props.errorMessages?.length
-      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, +props.maxErrors))
+      ? wrapInArray(props.errorMessages).concat(internalErrorMessages.value).slice(0, Math.max(0, Number(props.maxErrors)))
       : internalErrorMessages.value
   })
   const validateOn = computed(() => {
-    let value = (props.validateOn ?? form?.validateOn.value) || 'input'
+    let value = (props.validateOn ?? form.validateOn?.value) || 'input'
     if (value === 'lazy') value = 'input lazy'
     if (value === 'eager') value = 'input eager'
     const set = new Set(value?.split(' ') ?? [])
@@ -125,8 +126,8 @@ export function useValidation (
     return {
       [`${name}--error`]: isValid.value === false,
       [`${name}--dirty`]: isDirty.value,
-      [`${name}--disabled`]: isDisabled.value,
-      [`${name}--readonly`]: isReadonly.value,
+      [`${name}--disabled`]: form.isDisabled.value,
+      [`${name}--readonly`]: form.isReadonly.value,
     }
   })
 
@@ -134,7 +135,7 @@ export function useValidation (
   const uid = computed(() => props.name ?? unref(id))
 
   onBeforeMount(() => {
-    form?.register({
+    form.register?.({
       id: uid.value,
       vm,
       validate,
@@ -144,14 +145,14 @@ export function useValidation (
   })
 
   onBeforeUnmount(() => {
-    form?.unregister(uid.value)
+    form.unregister?.(uid.value)
   })
 
   onMounted(async () => {
     if (!validateOn.value.lazy) {
       await validate(!validateOn.value.eager)
     }
-    form?.update(uid.value, isValid.value, errorMessages.value)
+    form.update?.(uid.value, isValid.value, errorMessages.value)
   })
 
   useToggleScope(() => validateOn.value.input || (validateOn.value.invalidInput && isValid.value === false), () => {
@@ -175,7 +176,7 @@ export function useValidation (
   })
 
   watch([isValid, errorMessages], () => {
-    form?.update(uid.value, isValid.value, errorMessages.value)
+    form.update?.(uid.value, isValid.value, errorMessages.value)
   })
 
   async function reset () {
@@ -198,8 +199,8 @@ export function useValidation (
 
     isValidating.value = true
 
-    for (const rule of props.rules) {
-      if (results.length >= +(props.maxErrors ?? 1)) {
+    for (const rule of rules.value) {
+      if (results.length >= Number(props.maxErrors ?? 1)) {
         break
       }
 
@@ -228,8 +229,8 @@ export function useValidation (
   return {
     errorMessages,
     isDirty,
-    isDisabled,
-    isReadonly,
+    isDisabled: form.isDisabled,
+    isReadonly: form.isReadonly,
     isPristine,
     isValid,
     isValidating,

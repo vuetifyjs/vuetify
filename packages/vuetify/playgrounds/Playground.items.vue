@@ -59,7 +59,6 @@
       outlined
       dense
       chips
-      small-chips
       label="Outlined"
       multiple
     ></v-autocomplete>
@@ -71,7 +70,6 @@
       outlined
       dense
       chips
-      small-chips
       label="Outlined"
       multiple
       return-object

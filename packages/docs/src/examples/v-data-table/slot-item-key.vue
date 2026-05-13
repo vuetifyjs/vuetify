@@ -4,21 +4,24 @@
     :items="vegetables"
   >
     <template v-slot:item.calories="{ value }">
-      <v-chip :color="getColor(value)">
-        {{ value }}
-      </v-chip>
+      <v-chip
+        :border="`${getColor(value)} thin opacity-25`"
+        :color="getColor(value)"
+        :text="value"
+        size="x-small"
+      ></v-chip>
     </template>
   </v-data-table>
 </template>
 
 <script setup>
   const headers = [
-    { title: 'Vegetable (100g serving)', key: 'name' },
+    { title: 'Vegetable', key: 'name' },
     { title: 'Calories', key: 'calories' },
-    { title: 'Fat (g)', key: 'fat' },
-    { title: 'Carbs (g)', key: 'carbs' },
-    { title: 'Protein (g)', key: 'protein' },
-    { title: 'Iron (%)', key: 'iron' },
+    { title: 'Fat(g)', key: 'fat' },
+    { title: 'Carbs(g)', key: 'carbs' },
+    { title: 'Protein(g)', key: 'protein' },
+    { title: 'Iron(%)', key: 'iron' },
   ]
   const vegetables = [
     {
@@ -262,10 +265,11 @@
       iron: '2%',
     },
   ]
+
   function getColor (calories) {
-    if (calories > 100) return 'red'
-    else if (calories > 50) return 'orange'
-    else return 'green'
+    if (calories > 100) return 'error'
+    else if (calories > 50) return 'warning'
+    else return 'success'
   }
 </script>
 
@@ -273,12 +277,12 @@
   export default {
     data: () => ({
       headers: [
-        { title: 'Vegetable (100g serving)', key: 'name' },
+        { title: 'Vegetable', key: 'name' },
         { title: 'Calories', key: 'calories' },
-        { title: 'Fat (g)', key: 'fat' },
-        { title: 'Carbs (g)', key: 'carbs' },
-        { title: 'Protein (g)', key: 'protein' },
-        { title: 'Iron (%)', key: 'iron' },
+        { title: 'Fat(g)', key: 'fat' },
+        { title: 'Carbs(g)', key: 'carbs' },
+        { title: 'Protein(g)', key: 'protein' },
+        { title: 'Iron(%)', key: 'iron' },
       ],
       vegetables: [
         {
@@ -526,9 +530,9 @@
 
     methods: {
       getColor (calories) {
-        if (calories > 100) return 'red'
-        else if (calories > 50) return 'orange'
-        else return 'green'
+        if (calories > 100) return 'error'
+        else if (calories > 50) return 'warning'
+        else return 'success'
       },
     },
   }

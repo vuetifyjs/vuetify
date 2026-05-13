@@ -1,7 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import { prettifyType } from './utils'
-import { kebabCase } from './helpers/text'
+import { prettifyType } from './utils.ts'
+import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -20,7 +20,10 @@ async function inspect (project: Project, node?: Node<ts.Node>) {
           Object.entries(definition.properties)
             // Exclude private properties
             .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
-            .map(async ([name, prop]) => [name, await prettifyType(name, prop)])
+            .map(async ([name, prop]) => [
+              name.replace('Uncapitalize<Capitalize<string>>', 'string'),
+              await prettifyType(name, prop),
+            ])
         )
       )
     }
@@ -118,6 +121,7 @@ export async function generateComponentDataFromTypes (component: string): Promis
   }
 
   return {
+    description: {},
     props: props.properties,
     events: events.properties,
     slots: slots.properties,
@@ -224,6 +228,7 @@ export type BaseData = {
   pathName: string // kebab-case name for use in urls
 }
 export type ComponentData = BaseData & {
+  description: Record<string, string>
   sass: Record<string, { default: string }>
   props: Record<string, Definition>
   slots: Record<string, Definition>
@@ -316,21 +321,28 @@ const allowedRefs = [
   'FilterFunction',
   'FormValidationResult',
   'Group',
+  'GroupSummary',
   'InternalDataTableHeader',
   'ListItem',
-  'LocationStrategyFn',
-  'OpenSelectStrategyFn',
+  'LocationStrategyFunction',
+  'OpenSelectStrategyFunction',
   'OpenStrategy',
-  'OpenStrategyFn',
-  'ScrollStrategyFn',
+  'OpenStrategyFunction',
+  'ScrollStrategyFunction',
+  'SelectableItem',
   'SelectItemKey',
   'SelectStrategy',
-  'SelectStrategyFn',
+  'SelectStrategyFunction',
   'SortItem',
   'SubmitEventPromise',
+  'ItemKeySlot',
   'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
+  'CalendarTimestamp',
+  'CalendarDaySlotScope',
+  'CalendarEventParsed',
+  'CalendarEventVisual',
 ]
 
 // Types that displayed without their generic arguments
@@ -342,7 +354,10 @@ const plainRefs = [
   'DataTableItem',
   'ListItem',
   'Group',
+  'GroupSummary',
   'DataIteratorItem',
+  'ItemKeySlot',
+  'SelectItemKey',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -390,6 +405,9 @@ function formatDefinition (definition: Definition) {
       } else {
         formatted = definition.text
       }
+      if (allowedRefs.includes(definition.ref)) {
+        formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
+      }
       break
     case 'interface':
     case 'boolean':
@@ -402,10 +420,6 @@ function formatDefinition (definition: Definition) {
   }
 
   definition.formatted = formatted
-
-  if (allowedRefs.includes(formatted)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
-  }
 }
 
 // eslint-disable-next-line complexity

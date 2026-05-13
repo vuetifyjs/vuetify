@@ -2,8 +2,7 @@
 import ClickOutside from '../'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
-import { wait } from '../../../../test'
+import { wait } from '@test'
 
 function bootstrap (args?: object) {
   const el = document.createElement('div')
@@ -11,7 +10,7 @@ function bootstrap (args?: object) {
 
   const binding = {
     value: {
-      handler: jest.fn(),
+      handler: vi.fn(),
       ...args,
     },
     instance: {
@@ -21,11 +20,11 @@ function bootstrap (args?: object) {
 
   let clickHandler: any
   let mousedownHandler: any
-  jest.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
+  vi.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') clickHandler = eventHandler
     if (eventName === 'mousedown') mousedownHandler = eventHandler
   })
-  jest.spyOn(window.document, 'removeEventListener')
+  vi.spyOn(window.document, 'removeEventListener')
 
   ClickOutside.mounted(el as HTMLElement, binding)
 
@@ -44,7 +43,7 @@ describe('v-click-outside', () => {
     const { clickHandler, el, binding } = bootstrap()
     expect(window.document.addEventListener).toHaveBeenCalledWith('click', clickHandler, true)
 
-    ClickOutside.unmounted(el, binding)
+    ClickOutside.beforeUnmount(el, binding)
     expect(window.document.removeEventListener).toHaveBeenCalledWith('click', clickHandler, true)
   })
 

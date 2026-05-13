@@ -2,13 +2,12 @@
 import { useMutationObserver } from '../mutationObserver'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 
 describe('mutationObserver', () => {
   it('should invoke callback on mounted', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     mount({
       setup () {
         const { mutationRef } = useMutationObserver(callback, { immediate: true })
@@ -17,11 +16,11 @@ describe('mutationObserver', () => {
       },
     })
 
-    expect(callback).toHaveBeenCalled()
+    expect(callback).toHaveBeenCalledTimes(1)
   })
 
   it('should not invoke callback on mounted', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     mount({
       setup () {
         const { mutationRef } = useMutationObserver(callback)

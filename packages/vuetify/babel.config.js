@@ -1,6 +1,8 @@
-const vuetifyPackage = require('./package.json')
+import fs from 'node:fs/promises'
 
-module.exports = {
+const vuetifyPackage = JSON.parse(await fs.readFile('./package.json', 'utf8'))
+
+export default {
   assumptions: {
     noDocumentAll: true
   },
@@ -12,7 +14,7 @@ module.exports = {
     '@babel/preset-typescript',
   ],
   plugins: [
-    ['@vue/babel-plugin-jsx', { optimize: false, enableObjectSlots: false }],
+    ['@vuetify/babel-plugin-jsx', { optimize: false, enableObjectSlots: false }],
     ['transform-define', {
       __VUETIFY_VERSION__: vuetifyPackage.version,
       __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue,
@@ -36,7 +38,7 @@ module.exports = {
     lib: {
       ignore: ['**/__tests__'],
       plugins: [
-        ['babel-plugin-add-import-extension', { extension: 'mjs' }],
+        ['babel-plugin-add-import-extension', { extension: 'js' }],
         ['./build/babel-plugin-replace-import-extension', { extMapping: {
           '.sass': '.css',
           '.scss': '.css',

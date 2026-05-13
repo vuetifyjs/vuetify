@@ -1,9 +1,9 @@
 <template>
-  <PromotedCarbon v-if="!user.disableAds" />
+  <PromotedCarbon v-if="user.one.ads.enabled" />
 
-  <VoPromotionsCardVuetify v-else-if="user.showHouseAds" />
+  <VoPromotionsCardVuetify v-else-if="user.one.ads.house" />
 
-  <br v-if="!user.disableAds || user.showHouseAds">
+  <br v-if="user.one.ads.enabled || user.one.ads.house">
 </template>
 
 <script setup>

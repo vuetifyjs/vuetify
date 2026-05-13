@@ -24,7 +24,7 @@
 
 <script setup>
   function onClick () {
-        // Perform an action
+    // Perform an action
   }
 </script>
 

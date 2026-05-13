@@ -9,8 +9,9 @@ function addCodeRules (md: MarkdownIt) {
   md.renderer.rules.fence = function (tokens, idx, options, env, self) {
     const handler = fence || self.renderToken
     const token = tokens[idx]
+    const lang = extractLang(token.info || '')
 
-    return `<AppMarkup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</AppMarkup>`
+    return `<AppMarkup resource="${token?.attrs?.[0][1] ?? ''}" language="${lang}" class="mb-4">${handler(tokens, idx, options, env, self)}</AppMarkup>`
   }
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
@@ -19,10 +20,10 @@ function addCodeRules (md: MarkdownIt) {
       (token.attrs || []).reduce((acc, [key, value]) => {
         acc[key] = acc[key] ? acc[key] + ' ' + value : value
         return acc
-      }, { class: 'v-code' } as Record<string, string>)
+      }, {} as Record<string, string>)
     ).map(([key, value]) => `${key}="${value}"`).join(' ')
 
-    return `<code ${attrs}>${md.utils.escapeHtml(token.content)}</code>`
+    return `<v-code ${attrs}>${md.utils.escapeHtml(token.content)}</v-code>`
   }
 
   createContainer(md, 'error')
@@ -44,14 +45,12 @@ function addImageRules (md: MarkdownIt) {
     const height = token.attrGet('height') ?? ''
 
     return `
-<div>
-  <AppFigure
-    ${alt ? `alt="${alt}"` : ''}
-    ${src ? `src="${src}"` : ''}
-    ${title ? `title="${title}"` : ''}
-    ${height ? `height="${height}"` : ''}
-  />
-</div>
+<AppFigure
+  ${alt ? `alt="${alt}"` : ''}
+  ${src ? `src="${src}"` : ''}
+  ${title ? `title="${title}"` : ''}
+  ${height ? `height="${height}"` : ''}
+/>
 `
   }
 }

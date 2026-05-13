@@ -2,22 +2,22 @@
 import {
   computed,
   nextTick,
-  onScopeDispose,
+  onScopeDispose, reactive,
   resolveDynamicComponent,
   toRef,
 } from 'vue'
 import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref, SetupContext } from 'vue'
+import type { PropType, Ref, SetupContext } from 'vue'
 import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
-  NavigationGuardNext,
+  NavigationGuardReturn,
+  RouteLocation,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
-  UseLinkOptions,
 } from 'vue-router'
 import type { EventProp } from '@/util'
 
@@ -36,6 +36,7 @@ export interface LinkProps {
   replace: boolean | undefined
   to: RouteLocationRaw | undefined
   exact: boolean | undefined
+  disabled: boolean | undefined
 }
 
 export interface LinkListeners {
@@ -43,51 +44,69 @@ export interface LinkListeners {
   onClickOnce?: EventProp | undefined
 }
 
-export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
-  isLink: ComputedRef<boolean>
-  isClickable: ComputedRef<boolean>
+export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'|'route'|'navigate'> {
+  isLink: Readonly<Ref<boolean>>
+  isRouterLink: Readonly<Ref<boolean>>
+  isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
+  linkProps: Record<string, string | undefined>
+  route: Readonly<Ref<RouteLocation & { href: string} | undefined>>
+  navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
-  const isLink = computed(() => !!(props.href || props.to))
+  const isLink = toRef(() => !!(props.href || props.to))
   const isClickable = computed(() => {
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
   if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+    const href = toRef(() => props.href)
     return {
       isLink,
+      isRouterLink: toRef(() => false),
       isClickable,
-      href: toRef(props, 'href'),
+      href,
+      linkProps: reactive({ href }),
+      route: toRef(() => undefined),
+      navigate: toRef(() => undefined),
     }
   }
-  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
-  const linkProps = computed(() => ({
-    ...props,
-    to: toRef(() => props.to || ''),
-  }))
 
-  const routerLink = RouterLink.useLink(linkProps.value as UseLinkOptions)
+  // vue-router useLink `to` prop needs to be reactive and useLink will crash if undefined
+  const routerLink = RouterLink.useLink({
+    to: toRef(() => props.to || ''),
+    replace: toRef(() => props.replace),
+  })
   // Actual link needs to be undefined when to prop is not used
   const link = computed(() => props.to ? routerLink : undefined)
   const route = useRoute()
+  const isActive = computed(() => {
+    if (!link.value) return false
+    if (!props.exact) return link.value.isActive?.value ?? false
+    if (!route.value) return link.value.isExactActive?.value ?? false
+
+    return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
+  })
+  const href = computed(() => props.to ? link.value?.route.value.href : props.href)
+  const isRouterLink = toRef(() => !!props.to)
 
   return {
     isLink,
+    isRouterLink,
     isClickable,
-    route: link.value?.route,
-    navigate: link.value?.navigate,
-    isActive: computed(() => {
-      if (!link.value) return false
-      if (!props.exact) return link.value.isActive?.value ?? false
-      if (!route.value) return link.value.isExactActive?.value ?? false
-
-      return link.value.isExactActive?.value && deepEqual(link.value.route.value.query, route.value.query)
+    isActive,
+    route: toRef(() => link.value?.route.value),
+    navigate: toRef(() => link.value?.navigate),
+    href,
+    linkProps: reactive({
+      href,
+      'aria-current': toRef(() => isActive.value ? 'page' : undefined),
+      'aria-disabled': toRef(() => props.disabled && isLink.value ? 'true' : undefined),
+      tabindex: toRef(() => props.disabled && isLink.value ? '-1' : undefined),
     }),
-    href: computed(() => props.to ? link.value?.route.value.href : props.href),
   }
 }
 
@@ -99,21 +118,22 @@ export const makeRouterProps = propsFactory({
 }, 'router')
 
 let inTransition = false
-export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
+export function useBackButton (router: Router | undefined, cb: () => NavigationGuardReturn) {
   let popped = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
-  if (IN_BROWSER) {
+  if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
       window.addEventListener('popstate', onPopstate)
-      removeBefore = router?.beforeEach((to, from, next) => {
+      removeBefore = router.beforeEach(() => {
         if (!inTransition) {
-          setTimeout(() => popped ? cb(next) : next())
-        } else {
-          popped ? cb(next) : next()
+          inTransition = true
+          return new Promise<NavigationGuardReturn>(resolve => {
+            setTimeout(() => resolve(popped ? cb() : undefined))
+          })
         }
-        inTransition = true
+        return popped ? cb() : undefined
       })
       removeAfter = router?.afterEach(() => {
         inTransition = false

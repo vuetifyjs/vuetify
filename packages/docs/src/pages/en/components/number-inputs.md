@@ -1,8 +1,7 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
-  description: The Number input component is used for ...
+  description: The number input component provides a clean interface for entering numeric values with increment and decrement controls.
   keywords: Number, vuetify number input component, vue number component
 related:
   - /components/inputs/
@@ -19,26 +18,6 @@ features:
 The VNumberInput extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type="number">`
 
 <page-features />
-
-::: warning
-
-This feature requires [v3.5.10](/getting-started/release-notes/?version=v3.5.10)
-
-:::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VNumberInput } from 'vuetify/labs/VNumberInput'
-
-export default createVuetify({
-  components: {
-    VNumberInput,
-  },
-})
-```
 
 ## Usage
 
@@ -76,7 +55,7 @@ The `v-number-input` component has support for most of `v-field`'s props and is 
 
 #### Control-variant
 
-The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked** and **split**.
+The `control-variant` prop offers an easy way to customize steppers button layout. The following values are valid options: **default**, **stacked**, **split** and **hidden**.
 
 <ExamplesExample file="v-number-input/prop-control-variant" />
 
@@ -109,3 +88,15 @@ The `min` and `max` props specify the minimum and maximum values accepted by v-n
 The `step` prop behaves the same as the `step` attribute in the `<input type="number">`, it defines the incremental steps for adjusting the numeric value.
 
 <ExamplesExample file="v-number-input/prop-step" />
+
+#### Precision
+
+The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
+
+<ExamplesExample file="v-number-input/prop-precision" />
+
+#### Grouping
+
+The `grouping` prop enables digit grouping (e.g. thousands separators). The value is passed to [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping) - `"auto"` should be preferred over `true`. Use `group-separator` to override the separator character.
+
+<ExamplesExample file="v-number-input/prop-grouping" />

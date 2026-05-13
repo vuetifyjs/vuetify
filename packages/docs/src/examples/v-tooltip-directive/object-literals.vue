@@ -1,13 +1,17 @@
 <template>
   <div class="text-center py-10">
-    <v-btn text="Tooltip" v-tooltip="tooltip"></v-btn>
+    <v-btn text="Click me" v-tooltip="tooltip"></v-btn>
   </div>
 </template>
 
 <script setup>
   const tooltip = {
-    text: 'Tooltip using object literals',
-    scrollStrategy: 'block',
+    text: 'Scroll up ↑',
+    scrollStrategy: 'close',
+    scrim: true,
+    persistent: false,
+    openOnClick: true,
+    openOnHover: false,
   }
 </script>
 
@@ -15,8 +19,12 @@
   export default {
     data: () => ({
       tooltip: {
-        text: 'Tooltip',
-        scrollStrategy: 'block',
+        text: 'Scroll up ↑',
+        scrollStrategy: 'close',
+        scrim: true,
+        persistent: false,
+        openOnClick: true,
+        openOnHover: false,
       },
     }),
   }

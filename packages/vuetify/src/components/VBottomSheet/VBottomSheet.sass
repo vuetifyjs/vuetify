@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -5,10 +6,11 @@
 // Transition
 @include tools.layer('transitions')
   .bottom-sheet-transition
-    &-enter-from
-      transform: translateY(100%)
+    &-enter-active, &-leave-active
+      transition-property: transform
+      pointer-events: none
 
-    &-leave-to
+    &-enter-from, &-leave-to
       transform: translateY(100%)
 
 // Block
@@ -20,7 +22,7 @@
       flex: 0 1 auto
       left: 0
       right: 0
-      margin-inline: 0
+      margin-inline: auto
       margin-bottom: 0
       transition-duration: $bottom-sheet-transition-duration
       width: 100%
@@ -29,6 +31,9 @@
 
       @include tools.elevation($bottom-sheet-elevation)
 
+      @media (prefers-reduced-motion: reduce)
+        transition: none
+
       > .v-card,
       > .v-sheet
         border-radius: $bottom-sheet-border-radius
@@ -36,5 +41,5 @@
     &.v-bottom-sheet--inset
       max-width: none
 
-      @media #{map-get(settings.$display-breakpoints, 'sm-and-up')}
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-up')}
         max-width: $bottom-sheet-inset-width

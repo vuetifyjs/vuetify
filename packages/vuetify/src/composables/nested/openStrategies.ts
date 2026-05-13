@@ -1,7 +1,4 @@
-// Utilities
-import { toRaw } from 'vue'
-
-export type OpenStrategyFn = (data: {
+type OpenStrategyFunction = (data: {
   id: unknown
   value: boolean
   opened: Set<unknown>
@@ -10,7 +7,7 @@ export type OpenStrategyFn = (data: {
   event?: Event
 }) => Set<unknown>
 
-export type OpenSelectStrategyFn = (data: {
+type OpenSelectStrategyFunction = (data: {
   id: unknown
   value: boolean
   opened: Set<unknown>
@@ -21,8 +18,8 @@ export type OpenSelectStrategyFn = (data: {
 }) => Set<unknown> | null
 
 export type OpenStrategy = {
-  open: OpenStrategyFn
-  select: OpenSelectStrategyFn
+  open: OpenStrategyFunction
+  select: OpenSelectStrategyFunction
 }
 
 export const singleOpenStrategy: OpenStrategy = {
@@ -50,12 +47,12 @@ export const singleOpenStrategy: OpenStrategy = {
 export const multipleOpenStrategy: OpenStrategy = {
   open: ({ id, value, opened, parents }) => {
     if (value) {
-      let parent = toRaw(parents.get(id))
+      let parent = parents.get(id)
       opened.add(id)
 
       while (parent != null && parent !== id) {
         opened.add(parent)
-        parent = toRaw(parents.get(parent))
+        parent = parents.get(parent)
       }
 
       return opened

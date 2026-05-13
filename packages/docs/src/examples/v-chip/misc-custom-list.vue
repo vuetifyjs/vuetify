@@ -11,8 +11,6 @@
 
       <v-toolbar-title>Photo Info</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn
         icon="mdi-magnify"
         @click="searchField.focus()"
@@ -21,14 +19,10 @@
     </v-toolbar>
 
     <v-container>
-      <v-row
-        align="center"
-        justify="start"
-      >
+      <v-row class="align-center justify-start" gap="8">
         <v-col
           v-for="(selection, i) in selections"
           :key="selection.text"
-          class="py-1 pe-0"
           cols="auto"
         >
           <v-chip

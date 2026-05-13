@@ -20,7 +20,6 @@ import { computed, shallowRef, watch } from 'vue'
 import {
   calculateCenteredTarget,
   calculateUpdatedTarget,
-  getClientSize,
   getOffsetSize,
   getScrollPosition,
   getScrollSize,
@@ -42,7 +41,7 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
-type VSlideGroupSlots = {
+export type VSlideGroupSlots = {
   default: SlideGroupSlot
   prev: SlideGroupSlot
   next: SlideGroupSlot
@@ -50,6 +49,11 @@ type VSlideGroupSlots = {
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
+  scrollToActive: {
+    type: Boolean,
+    default: true,
+  },
+  contentClass: null,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -73,6 +77,7 @@ export const makeVSlideGroupProps = propsFactory({
         'always',
         'desktop',
         'mobile',
+        'never',
       ].includes(v)
     ),
   },
@@ -148,7 +153,7 @@ export const VSlideGroup = genericComponent<new <T>(
             isOverflowing.value = containerSize.value + 1 < contentSize.value
           }
 
-          if (firstSelectedIndex.value >= 0 && contentRef.el) {
+          if (props.scrollToActive && firstSelectedIndex.value >= 0 && contentRef.el) {
             // TODO: Is this too naive? Should we store element references in group composable?
             const selectedElement = contentRef.el.children[lastSelectedIndex.value] as HTMLElement
 
@@ -279,26 +284,39 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
+    function getSiblingElement (el: HTMLElement | null, location: 'next' | 'prev') {
+      if (!el) return undefined
+      let sibling: HTMLElement | null = el
+      do {
+        sibling = sibling?.[location === 'next' ? 'nextElementSibling' : 'previousElementSibling'] as HTMLElement | null
+      } while (sibling?.hasAttribute('disabled'))
+      return sibling
+    }
+
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.el) return
 
-      let el: HTMLElement | undefined
+      let el: HTMLElement | null | undefined
 
       if (!location) {
         const focusable = focusableChildren(contentRef.el)
         el = focusable[0]
       } else if (location === 'next') {
-        el = contentRef.el.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('first')
       } else if (location === 'prev') {
-        el = contentRef.el.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+        el = getSiblingElement(contentRef.el.querySelector(':focus'), location)
 
         if (!el) return focus('last')
       } else if (location === 'first') {
         el = (contentRef.el.firstElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'next')
       } else if (location === 'last') {
         el = (contentRef.el.lastElementChild as HTMLElement)
+
+        if (el?.hasAttribute('disabled')) el = getSiblingElement(el, 'prev')
       }
 
       if (el) {
@@ -330,8 +348,12 @@ export const VSlideGroup = genericComponent<new <T>(
       isSelected: group.isSelected,
     }))
 
+    const hasOverflowOrScroll = computed(() => isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+
     const hasAffixes = computed(() => {
       switch (props.showArrows) {
+        case 'never': return false
+
         // Always show arrows on desktop & mobile
         case 'always': return true
 
@@ -340,12 +362,12 @@ export const VSlideGroup = genericComponent<new <T>(
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return isOverflowing.value || Math.abs(scrollOffset.value) > 0
+        case true: return hasOverflowOrScroll.value
 
         // Always show on mobile
         case 'mobile': return (
           mobile.value ||
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -353,7 +375,7 @@ export const VSlideGroup = genericComponent<new <T>(
         // overflowed on desktop
         default: return (
           !mobile.value &&
-          (isOverflowing.value || Math.abs(scrollOffset.value) > 0)
+          hasOverflowOrScroll.value
         )
       }
     })
@@ -364,12 +386,9 @@ export const VSlideGroup = genericComponent<new <T>(
     })
 
     const hasNext = computed(() => {
-      if (!containerRef.value) return false
+      if (!hasOverflowOrScroll.value) return false
 
-      const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
-      const clientSize = getClientSize(isHorizontal.value, containerRef.el)
-
-      const scrollSizeMax = scrollSize - clientSize
+      const scrollSizeMax = contentSize.value - containerSize.value
 
       // 1 pixel in reserve, may be lost after rounding
       return scrollSizeMax - Math.abs(scrollOffset.value) > 1
@@ -412,7 +431,10 @@ export const VSlideGroup = genericComponent<new <T>(
         <div
           key="container"
           ref={ containerRef }
-          class="v-slide-group__container"
+          class={[
+            'v-slide-group__container',
+            props.contentClass,
+          ]}
           onScroll={ onScroll }
         >
           <div

@@ -1,0 +1,39 @@
+diff --git a/dist/render.js b/dist/render.js
+index 948b5b112ddb6a86516955d45d70791960e22676..47c757c2af9eab0cf9b66f96a7d5038751065551 100644
+--- a/dist/render.js
++++ b/dist/render.js
+@@ -43,6 +43,9 @@ function render(Component) {
+   return _objectSpread({
+     container,
+     baseElement,
++    wrapper,
++    element: wrapper.element,
++    vm: wrapper.vm,
+     debug: function debug() {
+       var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : baseElement;
+       var maxLength = arguments.length > 1 ? arguments[1] : undefined;
+diff --git a/types/index.d.ts b/types/index.d.ts
+index d4edc3bfe9aa77e5ffb39c20d172d0d56aa625b6..9e749cfc116ee78bc8250f28988027921e968f79 100644
+--- a/types/index.d.ts
++++ b/types/index.d.ts
+@@ -1,8 +1,8 @@
+ // Minimum TypeScript Version: 4.0
+ /* eslint-disable @typescript-eslint/no-explicit-any */
+ 
+-import {VNodeChild} from 'vue'
+-import {MountingOptions} from '@vue/test-utils'
++import {ComponentPublicInstance, VNodeChild} from 'vue'
++import {MountingOptions, VueWrapper} from '@vue/test-utils'
+ import {queries, EventType, BoundFunctions} from '@testing-library/dom'
+ // eslint-disable-next-line import/no-extraneous-dependencies
+ import {OptionsReceived as PrettyFormatOptions} from 'pretty-format'
+@@ -23,6 +23,9 @@ type Debug = (
+ export interface RenderResult extends BoundFunctions<typeof queries> {
+   container: Element
+   baseElement: Element
++  element: Element
++  wrapper: VueWrapper
++  vm: ComponentPublicInstance
+   debug: Debug
+   unmount(): void
+   html(): string

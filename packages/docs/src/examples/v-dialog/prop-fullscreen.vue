@@ -23,8 +23,6 @@
 
           <v-toolbar-title>Settings</v-toolbar-title>
 
-          <v-spacer></v-spacer>
-
           <v-toolbar-items>
             <v-btn
               text="Save"
@@ -34,10 +32,7 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <v-list
-          lines="two"
-          subheader
-        >
+        <v-list lines="two">
           <v-list-subheader>User Controls</v-list-subheader>
 
           <v-list-item

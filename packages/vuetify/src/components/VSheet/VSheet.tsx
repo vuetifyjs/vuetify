@@ -14,7 +14,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSheetProps = propsFactory({
@@ -38,13 +37,13 @@ export const VSheet = genericComponent()({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     useRender(() => (
       <props.tag
@@ -62,6 +61,7 @@ export const VSheet = genericComponent()({
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

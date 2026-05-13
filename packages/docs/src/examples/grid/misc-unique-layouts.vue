@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-grey-lighten-5">
+  <v-container class="bg-surface-variant">
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <v-row>
       <v-col
@@ -11,7 +11,7 @@
           rounded="0"
           variant="outlined"
         >
-          .col-12 .col-md-8
+          v-col-12 v-col-md-8
         </v-card>
       </v-col>
       <v-col
@@ -23,7 +23,7 @@
           rounded="0"
           variant="outlined"
         >
-          .col-6 .col-md-4
+          v-col-6 v-col-md-4
         </v-card>
       </v-col>
     </v-row>
@@ -41,7 +41,7 @@
           rounded="0"
           variant="outlined"
         >
-          .col-6 .col-md-4
+          v-col-6 v-col-md-4
         </v-card>
       </v-col>
     </v-row>
@@ -58,7 +58,7 @@
           rounded="0"
           variant="outlined"
         >
-          .col-6
+          v-col-6
         </v-card>
       </v-col>
     </v-row>

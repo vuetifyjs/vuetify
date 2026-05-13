@@ -5,7 +5,6 @@
   >
     <template v-if="!error1">
       <PromotedBase
-        ref="script"
         :class="[
           isDark ? 'theme--dark' : 'theme--light',
         ]"
@@ -13,7 +12,6 @@
         border
       >
         <PromotedScript
-          v-if="!error1"
           id="carbonads-script"
           script-id="_carbonads_js"
           src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
@@ -28,7 +26,6 @@
 
 <script setup lang="ts">
   const error1 = shallowRef(false)
-  const script = shallowRef(null)
   let timer = -1 as any
 
   function checkForElement (id: string, cb?: () => void) {

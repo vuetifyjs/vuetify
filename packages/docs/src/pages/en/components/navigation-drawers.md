@@ -9,7 +9,7 @@ related:
   - /components/icons/
   - /getting-started/wireframes/
 features:
-  label: 'C: VNavigationDrawer'
+  label: "C: VNavigationDrawer"
   report: true
   github: /components/VNavigationDrawer/
   spec: https://m2.material.io/components/navigation-drawer
@@ -23,7 +23,7 @@ The `v-navigation-drawer` component is what your users will utilize to navigate 
 
 ## Usage
 
-The navigation drawer is primarily used to house links to the pages in your application and is pre-configured to work with or without **vue-router** right out the box. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property.
+The navigation drawer is primarily used to house links to the pages in your application and is pre-configured to work with or without **vue-router** right out the box. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property. You can learn more by exploring [application layout](/features/application-layout) examples.
 
 <ExamplesUsage name="v-navigation-drawer" />
 
@@ -32,7 +32,7 @@ The navigation drawer is primarily used to house links to the pages in your appl
 ::: tip
 
 For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of
- `v-app`.
+`v-app`.
 
 :::
 
@@ -46,17 +46,17 @@ For the purpose of display, some examples are wrapped in a `v-card` element. Wit
 
 ## API
 
-| Component | Description |
-| - | - |
-| [v-navigation-drawer](/api/v-navigation-drawer/) | Primary Component |
-| [v-list-item](/api/v-list-item/) | Component used to create navigation links |
+| Component                                        | Description                               |
+| ------------------------------------------------ | ----------------------------------------- |
+| [v-navigation-drawer](/api/v-navigation-drawer/) | Primary Component                         |
+| [v-list-item](/api/v-list-item/)                 | Component used to create navigation links |
 
 <ApiInline hide-links />
 
 ## Caveats
 
 ::: info
-  The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **v-model:rail** to a data prop.
+The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **v-model:rail** to a data prop.
 :::
 
 ## Examples
@@ -85,7 +85,7 @@ Apply a custom background to your drawer via the **image** prop. If you need to 
 
 When using the **rail** prop, the drawer will shrink (default 56px) and hide everything inside of `v-list` except the first element.
 
-<ExamplesExample file="v-navigation-drawer/prop-mini-variant" />
+<ExamplesExample file="v-navigation-drawer/prop-rail-variant" />
 
 #### Floating
 

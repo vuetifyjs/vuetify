@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Programmatic scrolling
   description: Handle scrolling within your application by using the goTo function
@@ -21,12 +20,6 @@ Handle scrolling within your application by using the **goTo** function.
 <PageFeatures />
 
 <PromotedEntry />
-
-::: success
-
-This feature was introduced in [v3.5.0 (Polaris)](/getting-started/release-notes/?version=v3.5.0)
-
-:::
 
 ## Usage
 

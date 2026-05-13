@@ -1,59 +1,83 @@
 <template>
-  <v-sheet
-    ref="root"
-    :color="theme.name.value === 'light' && !user.mixedTheme ? 'surface-bright' : undefined"
-    :rounded="rounded"
-    :theme="theme.name.value === 'light' && user.mixedTheme ? 'dark' : theme.name.value"
-    class="app-markup overflow-hidden"
-    dir="ltr"
-  >
-    <v-toolbar
-      v-if="resource"
-      class="px-1"
-      height="44"
+  <v-hover v-slot="{ props: hoverProps, isHovering }">
+    <v-sheet
+      v-bind="{ ...hoverProps, ...$attrs }"
+      ref="root"
+      :color="theme.name.value === 'light' && !user.ecosystem.docs.mixedTheme ? 'surface-bright' : undefined"
+      :rounded="rounded"
+      :theme="theme.name.value === 'light' && user.ecosystem.docs.mixedTheme ? 'dark' : theme.name.value"
+      class="app-markup overflow-hidden"
+      dir="ltr"
     >
-      <v-sheet
+      <v-toolbar
         v-if="resource"
-        class="text-body-2 px-3 pt-3 text-medium-emphasis"
-        color="transparent"
+        class="px-1"
         height="44"
-        rounded="tl"
       >
-        <v-icon icon="mdi-file-tree" />
+        <v-sheet
+          v-if="resource"
+          class="text-body-medium px-3 pt-3 text-medium-emphasis"
+          color="transparent"
+          height="44"
+          rounded="tl"
+        >
+          <v-icon icon="mdi-file-tree" />
 
-        {{ resource }}
-      </v-sheet>
-    </v-toolbar>
+          {{ resource }}
+        </v-sheet>
+      </v-toolbar>
 
-    <v-tooltip location="start">
-      <template #activator="{ props: activatorProps }">
-        <v-fade-transition hide-on-leave>
-          <v-btn
-            :key="icon"
-            :icon="icon"
-            class="text-disabled me-3 mt-1 app-markup-btn"
-            density="comfortable"
-            style="position: absolute; right: 0; top: 0;"
-            v-bind="activatorProps"
-            variant="text"
-            @click="copy"
-          />
-        </v-fade-transition>
-      </template>
+      <v-tooltip location="start">
+        <template #activator="{ props: activatorProps }">
+          <v-fade-transition>
+            <v-btn
+              v-if="isHovering"
+              :key="icon"
+              :icon="icon"
+              class="text-disabled me-3 mt-2 app-markup-btn position-absolute right-0 top-0"
+              density="comfortable"
+              size="small"
+              v-bind="activatorProps"
+              variant="text"
+              @click="copy"
+            />
+          </v-fade-transition>
+        </template>
 
-      <span>{{ t('copy-source') }}</span>
-    </v-tooltip>
+        <span>{{ t('copy-source') }}</span>
+      </v-tooltip>
 
-    <div class="pa-4 pe-12">
-      <slot>
-        <pre v-if="inline" :class="className">
-          <code :class="className" v-html="highlighted" />
-        </pre>
+      <v-tooltip location="start">
+        <template #activator="{ props: activatorProps }">
+          <v-fade-transition>
+            <v-btn
+              v-if="isHovering"
+              :key="icon"
+              :icon="needsPlaygroundLink ? '$vuetify-play' : '$vuetify-bin'"
+              class="text-disabled me-12 mt-2 app-markup-btn position-absolute right-0 top-0"
+              density="comfortable"
+              size="small"
+              v-bind="activatorProps"
+              variant="text"
+              @click="openCode"
+            />
+          </v-fade-transition>
+        </template>
 
-        <code v-else :class="className" v-html="highlighted" />
-      </slot>
-    </div>
-  </v-sheet>
+        <span>{{ t(needsPlaygroundLink ? 'open-in-playground' : 'open-in-vuetify-bin') }}</span>
+      </v-tooltip>
+
+      <div class="pa-4 pe-12">
+        <slot>
+          <pre v-if="inline" :class="className">
+        <code :class="className" v-html="highlighted" />
+      </pre>
+
+          <code v-else :class="className" v-html="highlighted" />
+        </slot>
+      </div>
+    </v-sheet>
+  </v-hover>
 </template>
 
 <script setup lang="ts">
@@ -73,7 +97,10 @@
 
   const props = defineProps({
     resource: String,
-    code: null,
+    code: {
+      type: [String, Array] as PropType<string | CodeSection[]>,
+      default: '',
+    },
     inline: Boolean,
     language: {
       type: String,
@@ -102,21 +129,59 @@
   const user = useUserStore()
   const theme = useTheme()
   const { t } = useI18n()
-  const clicked = ref(false)
+  const clicked = shallowRef(false)
   const root = ref<ComponentPublicInstance>()
 
-  const highlighted = ref('')
-  watchEffect(async () => {
-    highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
-  })
+  const highlighted = shallowRef('')
 
   const className = computed(() => `language-${props.language}`)
   const icon = computed(() => clicked.value ? 'mdi-check' : 'mdi-clipboard-text-outline')
 
+  const needsPlaygroundLink = computed(() => Array.isArray(props.code))
+
+  const displayedCode = computed(() => {
+    if (typeof props.code === 'string') {
+      return props.code
+    }
+
+    return props.code.map((section: CodeSection) => section.content).join('\n\n')
+  })
+
+  watchEffect(async () => {
+    highlighted.value = displayedCode.value && props.language && Prism.highlight(await displayedCode.value, Prism.languages[props.language], props.language)
+  })
+
+  function openCode () {
+    if (needsPlaygroundLink.value) {
+      openPlayground()
+    } else {
+      openBin()
+    }
+  }
+
+  async function openBin () {
+    const el = root.value?.$el.querySelector('code')
+    const code = displayedCode.value || el?.innerText || ''
+    const language = props.language || 'markdown'
+    const title = props.resource
+
+    const compressed = useBin(code, language, title)
+
+    window.open(compressed, '_blank')
+  }
+
+  async function openPlayground () {
+    if (typeof props.code === 'string') return
+
+    const url = usePlayground(props.code)
+
+    window.open(url, '_blank')
+  }
+
   async function copy () {
     const el = root.value?.$el.querySelector('code')
 
-    navigator.clipboard.writeText(props.code || el?.innerText || '')
+    await navigator.clipboard.writeText(displayedCode.value || el?.innerText || '')
 
     clicked.value = true
 
@@ -126,16 +191,15 @@
   }
 </script>
 
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  }
+</script>
+
 <style lang="sass">
   .v-sheet.app-markup
     position: relative
-
-    &:not(:hover)
-      .app-markup-btn
-        opacity: 0 !important
-
-    &:not(:hover) .v-btn--copy .v-icon
-      opacity: .4
 
     code,
     pre

@@ -41,13 +41,12 @@ export const VFooter = genericComponent()({
 
   setup (props, { slots }) {
     const layoutItemStyles = ref()
-    const layoutIsReady = shallowRef()
 
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const autoHeight = shallowRef(32)
     const { resizeRef } = useResizeObserver(entries => {
@@ -60,16 +59,15 @@ export const VFooter = genericComponent()({
       const layout = useLayoutItem({
         id: props.name,
         order: computed(() => parseInt(props.order, 10)),
-        position: computed(() => 'bottom'),
+        position: toRef(() => 'bottom'),
         layoutSize: height,
         elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
-        active: computed(() => props.app),
-        absolute: toRef(props, 'absolute'),
+        active: toRef(() => props.app),
+        absolute: toRef(() => props.absolute),
       })
 
       watchEffect(() => {
         layoutItemStyles.value = layout.layoutItemStyles.value
-        layoutIsReady.value = layout.layoutIsReady
       })
     })
 
@@ -90,13 +88,14 @@ export const VFooter = genericComponent()({
           props.app ? layoutItemStyles.value : {
             height: convertToUnit(props.height),
           },
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }
       />
     ))
 
-    return props.app ? layoutIsReady.value : {}
+    return {}
   },
 })
 

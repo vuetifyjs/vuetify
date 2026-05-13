@@ -366,6 +366,27 @@ describe('VDataTable', () => {
       cy.get('.v-data-table').find('h2').should('exist')
       cy.get('.v-data-table').find('h3').should('exist')
     })
+
+    it('should have body slot and slot prop should show correct item count after group is expanded', () => {
+      cy.mount(() => (
+        <Application>
+          <VDataTable
+            items={ DESSERT_ITEMS }
+            headers={ DESSERT_HEADERS }
+            itemsPerPage={ -1 }
+            groupBy={[{ key: 'group', order: 'desc' }]}
+          >
+            {{
+              'body.append': ({ items }) => <div id="body-append">{ items.length }</div>,
+            }}
+          </VDataTable>
+        </Application>
+      ))
+
+      cy.get('.v-data-table').find('div#body-append').should('have.text', DESSERT_ITEMS.length)
+      cy.get(':nth-child(1) > .v-data-table__td > .v-btn').click()
+      cy.get('.v-data-table').find('div#body-append').should('have.text', DESSERT_ITEMS.length)
+    })
   })
 
   describe('sort', () => {

@@ -8,14 +8,17 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, ref, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, only, propsFactory, useRender } from '@/util'
+import { computed, effectScope, nextTick, ref, toRef, watch, watchEffect } from 'vue'
+import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -38,6 +41,7 @@ export const makeVOtpInputProps = propsFactory({
     type: [Number, String],
     default: 6,
   },
+  masked: Boolean,
   modelValue: {
     type: [Number, String],
     default: undefined,
@@ -48,9 +52,10 @@ export const makeVOtpInputProps = propsFactory({
     default: 'number',
   },
 
+  ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeFocusProps(),
-  ...only(makeVFieldProps({
+  ...pick(makeVFieldProps({
     variant: 'outlined' as const,
   }), [
     'baseColor',
@@ -79,6 +84,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { isFocused, focus, blur } = useFocus(props)
     const model = useProxiedModel(
@@ -96,6 +102,22 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const contentRef = ref<HTMLElement>()
     const inputRef = ref<HTMLInputElement[]>([])
     const current = computed(() => inputRef.value[focusIndex.value])
+    let _isComposing = false
+
+    useToggleScope(() => props.autofocus, () => {
+      const intersectScope = effectScope()
+      intersectScope.run(() => {
+        const { intersectionRef, isIntersecting } = useIntersectionObserver()
+        watchEffect(() => {
+          intersectionRef.value = inputRef.value[0]
+        })
+        watch(isIntersecting, v => {
+          if (!v) return
+          intersectionRef.value?.focus()
+          intersectScope.stop()
+        })
+      })
+    })
 
     function onInput () {
       // The maxlength attribute doesn't work for the number type input, so the text type is used.
@@ -104,6 +126,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         current.value.value = ''
         return
       }
+
+      if (_isComposing) return
 
       const array = model.value.slice()
       const value = current.value.value
@@ -123,17 +147,71 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       if (target) focusChild(contentRef.value!, target)
     }
 
-    function onKeydown (e: KeyboardEvent) {
+    function onCompositionend () {
+      _isComposing = false
+      onInput()
+    }
+
+    function onBeforeinput (e: InputEvent) {
+      const isBackwardDelete = [
+        'deleteContentBackward',
+        'deleteWordBackward',
+        'deleteSoftLineBackward',
+        'deleteHardLineBackward',
+      ].includes(e.inputType)
+
+      const isForwardDelete = [
+        'deleteContentForward',
+        'deleteWordForward',
+        'deleteSoftLineForward',
+        'deleteHardLineForward',
+      ].includes(e.inputType)
+
+      if (!isBackwardDelete && !isForwardDelete) return
+
+      e.preventDefault()
+
       const array = model.value.slice()
       const index = focusIndex.value
+      let target: 'prev' | null = null
+
+      if (isBackwardDelete) {
+        if (!array[index]) {
+          if (index > 0) {
+            array[index - 1] = ''
+            model.value = array
+            target = 'prev'
+          }
+        } else {
+          const isLastFilledField = !array.slice(index + 1).some(v => v)
+          for (let i = index; i < length.value - 1; i++) {
+            array[i] = array[i + 1]
+          }
+          array[length.value - 1] = ''
+          model.value = array
+          if (!isLastFilledField && index > 0) target = 'prev'
+        }
+      } else {
+        for (let i = index; i < length.value - 1; i++) {
+          array[i] = array[i + 1]
+        }
+        array[length.value - 1] = ''
+        model.value = array
+      }
+
+      requestAnimationFrame(() => {
+        if (target != null) {
+          focusChild(contentRef.value!, target)
+        } else {
+          inputRef.value[index]?.select()
+        }
+      })
+    }
+
+    function onKeydown (e: KeyboardEvent) {
       let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
 
-      if (![
-        'ArrowLeft',
-        'ArrowRight',
-        'Backspace',
-        'Delete',
-      ].includes(e.key)) return
+      if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return
 
       e.preventDefault()
 
@@ -141,18 +219,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         target = 'prev'
       } else if (e.key === 'ArrowRight') {
         target = 'next'
-      } else if (['Backspace', 'Delete'].includes(e.key)) {
-        array[focusIndex.value] = ''
-
-        model.value = array
-
-        if (focusIndex.value > 0 && e.key === 'Backspace') {
-          target = 'prev'
-        } else {
-          requestAnimationFrame(() => {
-            inputRef.value[index]?.select()
-          })
-        }
       }
 
       requestAnimationFrame(() => {
@@ -166,13 +232,14 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       e.preventDefault()
       e.stopPropagation()
 
-      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      const clipboardText = e?.clipboardData?.getData('Text').trim().slice(0, length.value) ?? ''
+      const finalIndex = clipboardText.length - 1 === -1 ? index : clipboardText.length - 1
 
       if (isValidNumber(clipboardText)) return
 
       model.value = clipboardText.split('')
 
-      inputRef.value?.[index].blur()
+      focusIndex.value = finalIndex
     }
 
     function reset () {
@@ -197,17 +264,20 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     provideDefaults({
       VField: {
-        color: computed(() => props.color),
-        bgColor: computed(() => props.color),
-        baseColor: computed(() => props.baseColor),
-        disabled: computed(() => props.disabled),
-        error: computed(() => props.error),
-        variant: computed(() => props.variant),
+        color: toRef(() => props.color),
+        bgColor: toRef(() => props.color),
+        baseColor: toRef(() => props.baseColor),
+        disabled: toRef(() => props.disabled),
+        error: toRef(() => props.error),
+        variant: toRef(() => props.variant),
+        rounded: toRef(() => props.rounded),
       },
     }, { scoped: true })
 
     watch(model, val => {
-      if (val.length === length.value) emit('finish', val.join(''))
+      if (val.length === length.value) {
+        emit('finish', val.join(''))
+      }
     }, { deep: true })
 
     watch(focusIndex, val => {
@@ -228,6 +298,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             {
               'v-otp-input--divided': !!props.divider,
             },
+            densityClasses.value,
             props.class,
           ]}
           style={[
@@ -268,14 +339,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           disabled={ props.disabled }
                           inputmode={ props.type === 'number' ? 'numeric' : 'text' }
                           min={ props.type === 'number' ? 0 : undefined }
-                          maxlength="1"
+                          maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
-                          type={ props.type === 'number' ? 'text' : props.type }
+                          type={ props.masked ? 'password' : props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }
                           onInput={ onInput }
+                          onBeforeinput={ onBeforeinput }
                           onFocus={ e => onFocus(e, i) }
                           onBlur={ onBlur }
                           onKeydown={ onKeydown }
+                          onCompositionstart={ () => _isComposing = true }
+                          onCompositionend={ onCompositionend }
                           onPaste={ event => onPaste(i, event) }
                         />
                       )
@@ -294,8 +368,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
             <VOverlay
               contained
-              content-class="v-otp-input__loader"
-              model-value={ !!props.loading }
+              contentClass="v-otp-input__loader"
+              modelValue={ !!props.loading }
               persistent
             >
               { slots.loader?.() ?? (

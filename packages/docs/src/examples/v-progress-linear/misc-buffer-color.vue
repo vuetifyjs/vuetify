@@ -6,7 +6,7 @@
     rounded="lg"
   >
     <v-progress-linear
-      :location="false"
+      :location="null"
       bg-color="#92aed9"
       buffer-color="#6a3e0b"
       buffer-opacity="1"
@@ -19,6 +19,6 @@
       rounded
     ></v-progress-linear>
 
-    <div class="ms-4 text-h6">3/9</div>
+    <div class="ms-4 text-title-large">3/9</div>
   </v-sheet>
 </template>

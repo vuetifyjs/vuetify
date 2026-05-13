@@ -19,25 +19,25 @@
       cols="12"
       sm="6"
     >
-      <div class="text-body-1 mb-2">
+      <div class="text-body-large mb-2">
         <v-icon size="small">
           {{ done[0] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
         Double click on any date
       </div>
 
-      <div class="text-body-1">
+      <div class="text-body-large">
         <v-icon size="small">
           {{ done[1] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
         Move mouse cursor over any month button
       </div>
 
-      <div class="text-h6 mb-2">
+      <div class="text-title-large mb-2">
         Mouse pointer is located on: {{ mouseMonth || '-' }}
       </div>
 
-      <div class="text-body-1">
+      <div class="text-body-large">
         <v-icon size="small">
           {{ done[2] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
@@ -82,19 +82,19 @@
 
     methods: {
       contextMenu (year, event) {
-        this.$set(this.done, 2, true)
+        this.done[2] = true
 
         event.preventDefault()
 
         alert(`You have activated context menu for year ${year}`)
       },
       dblClick (date) {
-        this.$set(this.done, 0, true)
+        this.done[0] = true
 
         alert(`You have just double clicked the following date: ${date}`)
       },
       mouseEnter (month) {
-        this.$set(this.done, 1, true)
+        this.done[1] = true
         this.mouseMonth = month
       },
       mouseLeave () {

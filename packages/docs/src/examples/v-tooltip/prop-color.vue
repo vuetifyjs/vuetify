@@ -1,10 +1,9 @@
 <template>
   <div class="text-center d-flex align-center justify-space-around">
-    <v-tooltip color="primary" bottom>
+    <v-tooltip color="primary" location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           primary
@@ -13,11 +12,10 @@
       <span>Primary tooltip</span>
     </v-tooltip>
 
-    <v-tooltip color="success" bottom>
+    <v-tooltip color="success" location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn
           color="success"
-          dark
           v-bind="props"
         >
           success
@@ -26,11 +24,10 @@
       <span>Success tooltip</span>
     </v-tooltip>
 
-    <v-tooltip color="warning" bottom>
+    <v-tooltip color="warning" location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn
           color="warning"
-          dark
           v-bind="props"
         >
           warning
@@ -39,11 +36,10 @@
       <span>Warning tooltip</span>
     </v-tooltip>
 
-    <v-tooltip color="error" bottom>
+    <v-tooltip color="error" location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn
           color="error"
-          dark
           v-bind="props"
         >
           error

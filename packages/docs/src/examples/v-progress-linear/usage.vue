@@ -12,7 +12,7 @@
     <template v-slot:configuration>
       <v-select
         v-model="color"
-        :items="['primary', 'blue-lighten-3', 'error', 'dark-blue']"
+        :items="['primary', 'blue-lighten-3', 'error', 'blue-darken-3']"
         label="Color"
         clearable
       ></v-select>
@@ -36,13 +36,14 @@
   const color = ref()
   const indeterminate = ref(false)
   const height = ref()
-  const options = []
+  const options = ['split']
   const props = computed(() => {
     return {
       color: color.value || undefined,
       indeterminate: indeterminate.value || undefined,
       'model-value': !indeterminate.value ? '20' : undefined,
       height: height.value !== 4 ? height.value : undefined,
+      variant: model.value === 'default' ? undefined : model.value,
     }
   })
 

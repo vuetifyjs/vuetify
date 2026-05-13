@@ -1,0 +1,16 @@
+diff --git a/lib/server/registry/dependencies.js b/lib/server/registry/dependencies.js
+index 6d24feae7024dd1d448e507d8dcb8a0ebb6a31c3..f4b3456bf992e53571687920ec6fb5b77f85ac65 100644
+--- a/lib/server/registry/dependencies.js
++++ b/lib/server/registry/dependencies.js
+@@ -221,6 +221,11 @@ async function validateDependenciesLinux(sdkLanguage, linuxLddDirectories, dlOpe
+       missingDeps.delete(missingDep);
+     }
+   }
++
++  // Ubuntu 25.04 has libicu76 instead but works fine
++  if (!missingDeps.size && missingPackages.size === 1 && missingPackages.has('libicu74'))
++    return;
++
+   const maybeSudo = process.getuid?.() && import_os.default.platform() !== "win32" ? "sudo " : "";
+   const dockerInfo = readDockerVersionSync();
+   const errorLines = [

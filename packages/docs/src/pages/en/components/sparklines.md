@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Sparklines
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.
@@ -19,12 +18,6 @@ features:
 The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
 
 <PageFeatures />
-
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
 
 ## Usage
 

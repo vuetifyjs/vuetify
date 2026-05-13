@@ -25,7 +25,7 @@
           tile
         >
           <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">
+            <div class="text-display-large">
               Slide {{ i + 1 }}
             </div>
           </div>

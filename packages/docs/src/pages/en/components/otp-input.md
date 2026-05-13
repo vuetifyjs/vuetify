@@ -17,13 +17,7 @@ features:
 
 The OTP input is used for MFA procedure of authenticating users by a one-time password.
 
-![Otp input Entry](https://cdn.vuetifyjs.com/docs/images/components/v-otp-input/v-otp-input-entry.png)
-
 <PageFeatures />
-
-::: success
-This feature was introduced in [v3.4.0 (Blackguard)](/introduction/roadmap/#v3-4-blackguard)
-:::
 
 ## Usage
 
@@ -89,6 +83,12 @@ The `error` prop puts the `v-otp-input` into an error state. This is useful for 
 The `v-otp-input` component supports the same variants as `v-field`, `v-text-field` and other inputs.
 
 <ExamplesExample file="v-otp-input/prop-variant" />
+
+#### Masked
+
+Using `masked` prop you can hide the entered characters. It is similar to a `type="password"`, but makes it possible to also restrict characters to digits with `type="number"`.
+
+<ExamplesExample file="v-otp-input/prop-masked" />
 
 #### Loader
 

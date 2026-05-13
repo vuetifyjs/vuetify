@@ -2,15 +2,15 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, watch } from 'vue'
-import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
+import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
+import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
 import type { EventProp } from '@/util'
 
 export interface GroupItem {
-  id: number
+  id: string
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   useIndexAsValue?: boolean
@@ -28,24 +28,24 @@ export interface GroupProps {
 
 export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
-  unregister: (id: number) => void
-  select: (id: number, value: boolean) => void
-  selected: Ref<Readonly<number[]>>
-  isSelected: (id: number) => boolean
+  unregister: (id: string) => void
+  select: (id: string, value: boolean) => void
+  selected: Ref<Readonly<string[]>>
+  isSelected: (id: string) => boolean
   prev: () => void
   next: () => void
   selectedClass: Ref<string | undefined>
-  items: ComputedRef<{
-    id: number
+  items: Readonly<Ref<{
+    id: string
     value: unknown
     disabled: boolean | undefined
-  }[]>
+  }[]>>
   disabled: Ref<boolean | undefined>
   getItemIndex: (value: unknown) => number
 }
 
 export interface GroupItemProvide {
-  id: number
+  id: string
   isSelected: Ref<boolean>
   isFirst: Ref<boolean>
   isLast: Ref<boolean>
@@ -55,6 +55,8 @@ export interface GroupItemProvide {
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
+  register: () => void
+  unregister: () => void
 }
 
 export const makeGroupProps = propsFactory({
@@ -103,7 +105,7 @@ export function useGroupItem (
     )
   }
 
-  const id = getUid()
+  const id = useId()
 
   provide(Symbol.for(`${injectKey.description}:id`), id)
 
@@ -115,18 +117,19 @@ export function useGroupItem (
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
-  const value = toRef(props, 'value')
+  const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
-  group.register({
-    id,
-    value,
-    disabled,
-  }, vm)
+  function register () {
+    group?.register({ id, value, disabled }, vm)
+  }
 
-  onBeforeUnmount(() => {
-    group.unregister(id)
-  })
+  function unregister () {
+    group?.unregister(id)
+  }
+
+  register()
+  onBeforeUnmount(() => unregister())
 
   const isSelected = computed(() => {
     return group.isSelected(id)
@@ -155,6 +158,8 @@ export function useGroupItem (
     value,
     disabled,
     group,
+    register,
+    unregister,
   }
 }
 
@@ -169,9 +174,9 @@ export function useGroup (
     'modelValue',
     [],
     v => {
-      if (v == null) return []
+      if (v === undefined) return []
 
-      return getIds(items, wrapInArray(v))
+      return getIds(items, v === null ? [null] : wrapInArray(v))
     },
     v => {
       const arr = getValues(items, v)
@@ -190,7 +195,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (unref(unwrapped.value) == null) {
+    if (unref(unwrapped.value) === undefined) {
       unwrapped.value = index
       unwrapped.useIndexAsValue = true
     }
@@ -202,7 +207,7 @@ export function useGroup (
     }
   }
 
-  function unregister (id: number) {
+  function unregister (id: string) {
     if (isUnmounted) return
 
     // TODO: re-evaluate this line's importance in the future
@@ -240,7 +245,7 @@ export function useGroup (
     }
   })
 
-  function select (id: number, value?: boolean) {
+  function select (id: string, value?: boolean) {
     const item = items.find(item => item.id === id)
     if (value && item?.disabled) return
 
@@ -274,6 +279,7 @@ export function useGroup (
     } else {
       const isSelected = selected.value.includes(id)
       if (props.mandatory && isSelected) return
+      if (!isSelected && !value) return
 
       selected.value = (value ?? !isSelected) ? [id] : []
     }
@@ -309,12 +315,12 @@ export function useGroup (
     unregister,
     selected,
     select,
-    disabled: toRef(props, 'disabled'),
+    disabled: toRef(() => props.disabled),
     prev: () => step(items.length - 1),
     next: () => step(1),
-    isSelected: (id: number) => selected.value.includes(id),
-    selectedClass: computed(() => props.selectedClass),
-    items: computed(() => items),
+    isSelected: (id: string) => selected.value.includes(id),
+    selectedClass: toRef(() => props.selectedClass),
+    items: toRef(() => items),
     getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 
@@ -332,15 +338,15 @@ function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
-  const ids: number[] = []
+  const ids: string[] = []
 
   modelValue.forEach(value => {
     const item = items.find(item => deepEqual(value, item.value))
     const itemByIndex = items[value]
 
-    if (item?.value != null) {
+    if (item?.value !== undefined) {
       ids.push(item.id)
-    } else if (itemByIndex != null) {
+    } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
     }
   })
@@ -355,7 +361,7 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
     const itemIndex = items.findIndex(item => item.id === id)
     if (~itemIndex) {
       const item = items[itemIndex]
-      values.push(item.value != null ? item.value : itemIndex)
+      values.push(item.value !== undefined ? item.value : itemIndex)
     }
   })
 

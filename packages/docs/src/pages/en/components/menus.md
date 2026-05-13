@@ -97,6 +97,17 @@ Menus with other menus inside them will not close until their children are close
 
 <ExamplesExample file="v-menu/prop-submenu" />
 
+#### Positioning Menus with Coordinates
+
+`v-menu` can be positioned relative to a DOM element or explicit `[x, y]` coordinates.
+
+* The most common use case is to pass an **event target element**. This allows the menu to anchor itself to the element that was clicked.
+* You can also use `[x, y]` screen coordinates, though this is less common and typically used for context menus.
+* `:offset` is used to shift the menu position relative to its anchor, not to define an absolute position.
+* Any DOM event with `clientX` and `clientY` can be used (e.g. `click`, `contextmenu`).
+
+<ExamplesExample file="v-menu/prop-positioningmenu" />
+
 ### Slots
 
 #### Activator and tooltip
@@ -122,6 +133,12 @@ Vuetify comes with [several standard transitions](/styles/transitions#api) that 
 A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there are multiple interactive items within the menu contents.
 
 <ExamplesExample file="v-menu/misc-popover" />
+
+#### Gliding navigation
+
+A single `v-menu` can be reused across multiple activators to create a gliding navigation bar. As the user hovers between buttons, the menu smoothly transitions to the new activator using a CSS transition on its position.
+
+<ExamplesExample file="v-menu/misc-gliding-nav" />
 
 #### Use In components
 

@@ -1,4 +1,5 @@
 {
+  "description": "Standard replacement for `form` HTML element. `v-model` makes it easy to determine if the fields inside are all valid and ready to submit.",
   "events": {
     "submit": "Emitted when form is submitted.",
     "update:modelValue": "Event emitted when the form's validity changes."
@@ -7,6 +8,7 @@
     "errors": "Contains all current form input errors.",
     "isDisabled": "Indicates if form is disabled or not.",
     "isReadonly": "Indicates if form is readonly or not.",
+    "isValid": "Indicates if form is valid or not.",
     "isValidating": "Indicates if form is currently being validated or not.",
     "items": "Array of all registered inputs.",
     "reset": "Resets validation of all registered inputs, and clears their values.",

@@ -7,7 +7,7 @@
     >
       <v-card height="200px">
         <v-card-title class="bg-blue d-flex align-center">
-          <span class="text-h5">Menu</span>
+          <span class="text-headline-small">Menu</span>
 
           <v-spacer></v-spacer>
 
@@ -20,6 +20,7 @@
               <v-list-item
                 v-for="(item, i) in items"
                 :key="i"
+                :value="i"
               >
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>

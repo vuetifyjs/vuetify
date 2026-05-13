@@ -1,0 +1,13 @@
+diff --git a/dist/parseSettings/warnAboutTSVersion.js b/dist/parseSettings/warnAboutTSVersion.js
+index 8b0402b56e2610ab97f8b148946e2f83d5fb9482..7a133e88641bb90d921fb2c6560bf52b6813d9f6 100644
+--- a/dist/parseSettings/warnAboutTSVersion.js
++++ b/dist/parseSettings/warnAboutTSVersion.js
+@@ -44,7 +44,7 @@ const version_1 = require("../version");
+ /**
+  * This needs to be kept in sync with package.json in the typescript-eslint monorepo
+  */
+-exports.SUPPORTED_TYPESCRIPT_VERSIONS = '>=4.8.4 <6.0.0';
++exports.SUPPORTED_TYPESCRIPT_VERSIONS = '>=4.8.4 <6.1.0';
+ /*
+  * The semver package will ignore prerelease ranges, and we don't want to explicitly document every one
+  * List them all separately here, so we can automatically create the full string

@@ -1,8 +1,8 @@
 import '@mdi/font/css/materialdesignicons.css'
-import 'vuetify/src/styles/main.sass'
+import '@/styles/main.sass'
 
-import { createVuetify } from 'vuetify/src/framework'
-import * as directives from 'vuetify/src/directives'
+import { createVuetify } from '@/framework'
+import * as directives from '@/directives'
 
 import date from './vuetify/date'
 import defaults from './vuetify/defaults'

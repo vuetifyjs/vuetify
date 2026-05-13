@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-col
       cols="12"
       lg="6"
@@ -75,12 +75,10 @@
               v-if="formHasErrors"
               location="left"
             >
-              <template v-slot:activator="{ on, attrs }">
+              <template v-slot:activator="{ props }">
                 <v-btn
-                  class="my-0"
                   icon
-                  v-bind="attrs"
-                  v-on="on"
+                  v-bind="props"
                   @click="resetForm"
                 >
                   <v-icon>mdi-refresh</v-icon>

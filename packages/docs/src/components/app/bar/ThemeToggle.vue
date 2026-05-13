@@ -20,7 +20,7 @@
   const hasToggle = computed(() => !['dark', 'light'].includes(theme.name.value))
 
   function onClick () {
-    gtagClick('app-bar', 'theme-toggle', name)
-    user.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
+    sweClick('app-bar', 'theme-toggle', name)
+    user.one.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
   }
 </script>

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Speed Dials
   title: Speed Dial component
@@ -20,12 +19,6 @@ features:
 The `v-speed-dial` component can be used as a floating action button that can reveal additional actions when clicked.
 
 <PageFeatures />
-
-::: success
-
-This feature was introduced in [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
 
 ## Usage
 

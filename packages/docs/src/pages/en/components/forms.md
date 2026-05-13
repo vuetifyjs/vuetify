@@ -78,7 +78,8 @@ By default, all inputs run their validation rules when mounted but do not displa
 | On input       |     ✅     |    ❌     |     ❌      |         ‡         |       *       |    *     |
 | On blur        |     ✅     |    ✅     |     ❌      |         ✅         |       *       |    *     |
 | On submit      |     ✅     |    ✅     |     ✅      |         ✅         |       ✅       |    ✅     |
-<p class="text-caption">
+
+<p class="text-body-small">
 * Uses the behavior of whatever it's combined with, the same as on="input" by default.
 <br>
 † Displays errors immediately on mount or reset.

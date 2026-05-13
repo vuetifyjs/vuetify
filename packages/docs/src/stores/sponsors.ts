@@ -2,13 +2,10 @@
 export interface Sponsor {
   metadata: {
     tier: number
+    visibility: { key: string }
   }
   slug: string
   title: string
-}
-
-export type RootState = {
-  sponsors: Sponsor[]
 }
 
 export const useSponsorsStore = defineStore('sponsors', () => {
@@ -20,7 +17,10 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     const { bucket } = useCosmic()
     const { objects = [] }: { objects: Sponsor[] } = (
       await bucket?.objects
-        .find({ type: 'sponsors' })
+        .find({
+          type: 'sponsors',
+          'metadata.active': true,
+        })
         .props('metadata,slug,title')
         .sort('created_at')
     ) || {}

@@ -7,8 +7,6 @@
 
       <v-toolbar-title>Page title</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon="mdi-magnify"></v-btn>
 
       <v-btn icon="mdi-dots-vertical"></v-btn>
@@ -61,7 +59,7 @@
       >
         <v-card flat>
           <v-card-text>
-            <h2>{{ item }}</h2>
+            <h2 class="my-0">{{ item }}</h2>
             {{ text }}
           </v-card-text>
         </v-card>

@@ -6,6 +6,9 @@
     <p class="font-weight-bold">
       Bold text.
     </p>
+    <p class="font-weight-semibold">
+      Semibold text.
+    </p>
     <p class="font-weight-medium">
       Medium weight text.
     </p>

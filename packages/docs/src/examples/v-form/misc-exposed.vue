@@ -22,6 +22,7 @@
         v-model="checkbox"
         :rules="[v => !!v || 'You must agree to continue!']"
         label="Do you agree?"
+        indent-details
         required
       ></v-checkbox>
 
@@ -72,7 +73,7 @@
   const name = ref('')
   const nameRules = ref([
     v => !!v || 'Name is required',
-    v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+    v => (v && v.length <= 10) || 'Name must be 10 characters or less',
   ])
   const select = ref(null)
   const checkbox = ref(false)
@@ -96,7 +97,7 @@
       name: '',
       nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+        v => (v && v.length <= 10) || 'Name must be 10 characters or less',
       ],
       select: null,
       items: [

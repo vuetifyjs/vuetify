@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Elevation
   description: Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.
@@ -7,13 +8,26 @@ related:
   - /components/cards/
   - /components/sheets/
   - /components/bottom-navigation/
+features:
+  report: true
 ---
 
 # Elevation
 
-The elevation helpers allow you to control relative depth, or distance, between two surfaces along the **z-axis**. There is a total of 25 elevation levels. You can set an element's elevation by using the class `elevation-{n}`, where `n` is a integer between 0-24 corresponding to the desired elevation.
+The elevation helpers control the relative depth between surfaces along the **z-axis**. Following Material Design 3 guidelines, Vuetify uses 6 elevation levels (0-5). Elevation values are measured in **dp** (density-independent pixels), a unit that ensures consistent sizing across different screen densities.
 
 <PageFeatures />
+
+| Class           | Level (dp) | Usage                                 |
+|-----------------|------------|---------------------------------------|
+| **elevation-0** | 0dp        | No shadow - flat surfaces             |
+| **elevation-1** | 1dp        | Cards, buttons (elevated)             |
+| **elevation-2** | 3dp        | Menus, rich tooltip, floating app bar |
+| **elevation-3** | 6dp        | Dialogs, snackbars, FABs              |
+| **elevation-4** | 8dp        | Dragged elements                      |
+| **elevation-5** | 12dp       |                                       |
+
+In MD3, elevation changes are commonly used to indicate interactive states. For example, a card at rest might use `elevation-1`, rising to `elevation-2` on hover and `elevation-3` when pressed or dragged.
 
 <PromotedEntry />
 
