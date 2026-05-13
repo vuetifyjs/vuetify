@@ -1028,5 +1028,23 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
+  it('should keep menu open when scrollbar interaction blurs focus while hovering menu', async () => {
+    const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`)
+    const { element } = render(() => <VSelect items={ items } />)
+
+    await userEvent.click(element)
+
+    const listbox = await screen.findByRole('listbox')
+    await expect.element(listbox).toBeVisible()
+
+    await userEvent.hover(listbox)
+
+    const input = element.querySelector('input') as HTMLInputElement
+    input.dispatchEvent(new FocusEvent('focusout', { relatedTarget: null, bubbles: true }))
+    await wait(50)
+
+    await expect.element(screen.queryByRole('listbox')!).toBeVisible()
+  })
+
   showcase({ stories })
 })

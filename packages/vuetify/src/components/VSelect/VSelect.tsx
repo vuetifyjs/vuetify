@@ -408,6 +408,13 @@ export const VSelect = genericComponent<new <
         !vTextFieldRef.value?.$el.contains(e.relatedTarget as Node) &&
         !(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
       ) {
+        if (
+          menu.value &&
+          e.relatedTarget == null &&
+          vMenuRef.value?.contentEl?.matches(':hover')
+        ) {
+          return
+        }
         isFocused.value = false
       }
     }
@@ -469,7 +476,13 @@ export const VSelect = genericComponent<new <
           modelValue={ model.value.map(v => v.props.title).join(', ') }
           name={ undefined }
           onUpdate:modelValue={ onModelUpdate }
-          v-model:focused={ isFocused.value }
+          focused={ isFocused.value }
+          onUpdate:focused={ (val: boolean) => {
+            if (!val && menu.value && vMenuRef.value?.contentEl?.matches(':hover')) {
+              return
+            }
+            isFocused.value = val
+          }}
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }

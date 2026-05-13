@@ -464,6 +464,13 @@ export const VCombobox = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
       if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        if (
+          menu.value &&
+          e.relatedTarget == null &&
+          vMenuRef.value?.contentEl?.matches(':hover')
+        ) {
+          return
+        }
         isFocused.value = false
       }
     }

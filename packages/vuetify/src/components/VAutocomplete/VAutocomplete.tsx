@@ -357,6 +357,13 @@ export const VAutocomplete = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
       if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        if (
+          menu.value &&
+          e.relatedTarget == null &&
+          vMenuRef.value?.contentEl?.matches(':hover')
+        ) {
+          return
+        }
         isFocused.value = false
       }
     }
@@ -475,7 +482,13 @@ export const VAutocomplete = genericComponent<new <
           { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
-          v-model:focused={ isFocused.value }
+          focused={ isFocused.value }
+          onUpdate:focused={ (val: boolean) => {
+            if (!val && menu.value && vMenuRef.value?.contentEl?.matches(':hover')) {
+              return
+            }
+            isFocused.value = val
+          }}
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }

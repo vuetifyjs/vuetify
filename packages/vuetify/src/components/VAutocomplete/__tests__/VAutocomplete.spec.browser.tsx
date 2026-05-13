@@ -485,6 +485,27 @@ describe('VAutocomplete', () => {
     expect(input).not.toHaveAttribute('placeholder')
   })
 
+  it('should keep menu open when scrollbar interaction blurs focus while hovering menu', async () => {
+    const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`)
+    const { element } = render(() => <VAutocomplete items={ items } />)
+
+    const input = within(element).getByCSS('input') as HTMLInputElement
+    await userEvent.click(input)
+
+    const listbox = await screen.findByRole('listbox')
+    await expect.element(listbox).toBeVisible()
+
+    // Move mouse over menu content (mimics scrollbar drag where cursor stays on menu)
+    await userEvent.hover(listbox)
+
+    // Browser fires focusout with relatedTarget=null when scrollbar is dragged.
+    // With the menu hovered, the fix should keep the menu open.
+    input.dispatchEvent(new FocusEvent('focusout', { relatedTarget: null, bubbles: true }))
+    await waitIdle()
+
+    await expect.element(screen.queryByRole('listbox')!).toBeVisible()
+  })
+
   it('should keep TextField focused while selecting items from open menu', async () => {
     const { element } = render(() => (
       <VAutocomplete
