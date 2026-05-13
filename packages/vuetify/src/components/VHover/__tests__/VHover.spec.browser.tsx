@@ -1,8 +1,8 @@
 import { VHover } from '../VHover'
 
 // Utilities
-import { ref } from 'vue'
 import { render, screen, userEvent, wait } from '@test'
+import { ref } from 'vue'
 
 describe('VHover', () => {
   it('should react on mouse events', async () => {
