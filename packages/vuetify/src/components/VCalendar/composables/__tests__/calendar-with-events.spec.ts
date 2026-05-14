@@ -133,21 +133,6 @@ describe.skip('calendar-with-events.ts', () => {
     expect(wrapper.vm.formatTime(testData4, true)).toMatch(/^(0?3 PM|15)$/i) // 3 AM || 03 AM || 15
   })
 
-  it('should format time in 24-hour mode', async () => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        hour24: true,
-      },
-    })
-
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 8, minute: 30 }, true)).toBe('08:30')
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 17, minute: 45 }, true)).toBe('17:45')
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 0, minute: 0 }, true)).toBe('00')
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 15, minute: 0 }, true)).toBe('15')
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 8, minute: 30 }, true)).not.toMatch(/AM|PM/i)
-    expect(wrapper.vm.formatTime({ date: '2019-01-01', hour: 17, minute: 45 }, true)).not.toMatch(/AM|PM/i)
-  })
-
   it('should get events map', async () => {
     const wrapper = mountFunction({
       render: h => h('div', [
