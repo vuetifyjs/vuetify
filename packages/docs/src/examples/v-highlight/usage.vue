@@ -23,6 +23,7 @@
     </v-container>
 
     <template v-slot:configuration>
+      <v-select v-model="color" :items="colors" label="Color" clearable></v-select>
       <v-checkbox v-model="matchAll" label="Match all"></v-checkbox>
       <v-checkbox v-model="ignoreCase" label="Ignore case"></v-checkbox>
     </template>
@@ -36,6 +37,8 @@
   const query = shallowRef('framework')
   const matchAll = shallowRef(false)
   const ignoreCase = shallowRef(false)
+  const color = shallowRef()
+  const colors = ['primary', '#ac46ff', 'orange-darken-2']
 
   const text = 'Vue is a progressive JavaScript framework for building user interfaces. Unlike monolithic frameworks, Vue is designed to be incrementally adoptable. The core library focuses on the view layer only, making it easy to integrate with other libraries. Thousands of companies use Vue in production today.'
 
@@ -44,6 +47,7 @@
     query: query.value || undefined,
     matchAll: matchAll.value || undefined,
     ignoreCase: ignoreCase.value || undefined,
+    color: color.value || undefined,
     tag: 'p',
   }))
 

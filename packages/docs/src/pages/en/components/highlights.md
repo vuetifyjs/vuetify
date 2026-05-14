@@ -75,6 +75,12 @@ Use **mark-class** to customize the mark styling with CSS classes.
 
 ### Misc
 
+#### CSS variables
+
+Override `--v-highlight-background`, `--v-highlight-color`, and `--v-highlight-border-radius` on any ancestor to restyle marks without touching the component.
+
+<ExamplesExample file="v-highlight/misc-css-variables" />
+
 #### Selection match
 
 <ExamplesExample file="v-highlight/misc-selection-match" />

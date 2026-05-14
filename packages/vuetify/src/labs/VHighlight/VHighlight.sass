@@ -5,6 +5,6 @@
 @include tools.layer('components')
   .v-highlight
     &__mark
-      background: $highlight-mark-background
-      border-radius: $highlight-mark-border-radius
-      color: $highlight-mark-color
+      background: var(--v-highlight-background, #{$highlight-background})
+      border-radius: var(--v-highlight-border-radius, #{$highlight-border-radius})
+      color: var(--v-highlight-color, #{$highlight-color})

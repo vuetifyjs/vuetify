@@ -4,6 +4,8 @@
     "matches": "Pre-computed match ranges as `[start, end]` pairs. Takes priority over **query** when provided and non-empty.",
     "matchAll": "When enabled, all occurrences of each query term are highlighted. When disabled, only the first occurrence of each term is highlighted. Has no effect when **matches** is provided.",
     "ignoreCase": "When enabled, matching is case-insensitive.",
+    "color": "Applies a theme or CSS color to highlighted matches. The background is derived by mixing this color with the theme's highlight opacity.",
+    "opacity": "Overrides the background opacity of highlighted matches. Accepts only CSS `<percentage>` - use `30%` instead of `0.3`.",
     "markClass": "Additional CSS class(es) applied to each `<mark>` element wrapping a highlighted match."
   }
 }

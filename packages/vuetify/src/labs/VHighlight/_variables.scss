@@ -1,4 +1,5 @@
 // VHighlight
-$highlight-mark-background: rgb(var(--v-theme-surface-light)) !default;
-$highlight-mark-border-radius: 2px !default;
-$highlight-mark-color: inherit !default;
+$highlight-opacity: 8% !default;
+$highlight-background: color-mix(in srgb, currentColor var(--v-highlight-opacity, $highlight-opacity), transparent) !default;
+$highlight-border-radius: 2px !default;
+$highlight-color: inherit !default;

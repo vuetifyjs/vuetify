@@ -7,7 +7,7 @@
     <v-highlight
       :query="query"
       :text="text"
-      class="selection-target text-body-2 pa-4 rounded border"
+      class="selection-target text-body-2 pa-4 rounded border overflow-x-auto"
       tag="pre"
       ignore-case
       match-all
