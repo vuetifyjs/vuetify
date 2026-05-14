@@ -2,12 +2,12 @@
 import './VHighlight.sass'
 
 // Composables
-import { useHighlight } from './highlight'
 import { useTextColor } from '@/composables/color'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { toRef } from 'vue'
+import { computed } from 'vue'
+import { toHighlight } from './toHighlight'
 import { defineComponent, propsFactory } from '@/util'
 
 // Types
@@ -35,13 +35,15 @@ export const VHighlight = defineComponent({
   props: makeVHighlightProps(),
 
   setup (props) {
-    const chunks = useHighlight({
-      text: toRef(props, 'text'),
-      query: toRef(props, 'query'),
-      matches: toRef(props, 'matches'),
-      matchAll: toRef(props, 'matchAll'),
-      ignoreCase: toRef(props, 'ignoreCase'),
-    })
+    const chunks = computed(() => toHighlight(
+      () => props.text,
+      () => props.query,
+      {
+        matches: () => props.matches,
+        matchAll: () => props.matchAll,
+        ignoreCase: () => props.ignoreCase,
+      },
+    ))
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
