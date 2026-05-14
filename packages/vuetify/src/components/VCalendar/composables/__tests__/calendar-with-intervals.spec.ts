@@ -3,7 +3,6 @@
 
 // import CalendarWithIntervals from '../calendar-with-intervals'
 // import { CalendarTimestamp } from 'vuetify/types'
-// import { parseTimestamp } from '../../util/timestamp'
 // import {
 //   mount,
 //   Wrapper,
@@ -14,6 +13,35 @@
 // const Mock = CalendarWithIntervals.extend({
 //   render: h => h('div'),
 // })
+
+import { createNativeLocaleFormatter, parseTimestamp } from '../../util/timestamp'
+
+describe('intervalFormatter 24-hour mode', () => {
+  function makeIntervalFormatter (hour24: boolean) {
+    const hour12 = hour24 ? false : undefined
+    const hourStyle = hour24 ? '2-digit' as const : 'numeric' as const
+    return createNativeLocaleFormatter(
+      'en-US',
+      (tms, short) => (
+        !short ? { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', hour12 }
+        : tms.minute === 0 ? { timeZone: 'UTC', hour: hourStyle, hour12 }
+        : { timeZone: 'UTC', hour: hourStyle, minute: '2-digit', hour12 }
+      )
+    )
+  }
+
+  it('should format interval in 24-hour mode', () => {
+    const fmt = makeIntervalFormatter(true)
+    const ts = (s: string) => parseTimestamp(s, true)
+    expect(fmt(ts('2019-02-08 08:00'), true)).toBe('08')
+    expect(fmt(ts('2019-02-08 20:00'), true)).toBe('20')
+    expect(fmt(ts('2019-02-08 00:00'), true)).toBe('00')
+    expect(fmt(ts('2019-02-08 08:30'), true)).toBe('08:30')
+    expect(fmt(ts('2019-02-08 20:30'), true)).toBe('20:30')
+    expect(fmt(ts('2019-02-08 08:30'), false)).toBe('08:30')
+    expect(fmt(ts('2019-02-08 20:30'), false)).toBe('20:30')
+  })
+})
 
 const createMouseEvent = (x, y) => ({
   clientX: x,
@@ -161,22 +189,6 @@ describe.skip('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, true)).toBe('8:30 AM')
     expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, true)).toBe('8:30 PM')
     expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as CalendarTimestamp, true)).toBe('12:30 AM')
-  })
-
-  it.skip('should format interval in 24-hour mode', async () => {
-    const wrapper = mountFunction({
-      propsData: {
-        hour24: true,
-      },
-    })
-
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 0 } as CalendarTimestamp, true)).toBe('08')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 0 } as CalendarTimestamp, true)).toBe('20')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 0 } as CalendarTimestamp, true)).toBe('00')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, true)).toBe('08:30')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, true)).toBe('20:30')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, false)).toBe('08:30')
-    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, false)).toBe('20:30')
   })
 
   it('should return intervalFormat if has one', async () => {

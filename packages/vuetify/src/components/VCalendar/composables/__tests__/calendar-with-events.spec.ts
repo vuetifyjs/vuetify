@@ -7,11 +7,37 @@
 //   MountOptions,
 // } from '@vue/test-utils'
 // import CalendarWithEvents from '../calendar-with-events'
-// import { parseTimestamp } from '../../util/timestamp'
 //
 // const Mock = CalendarWithEvents.extend({
 //   render: h => h('div'),
 // })
+
+import { createNativeLocaleFormatter, parseTimestamp } from '../../util/timestamp'
+
+describe('formatTime 24-hour mode', () => {
+  function makeFormatTime (hour24: boolean) {
+    return (tms: ReturnType<typeof parseTimestamp>) => {
+      const formatter = createNativeLocaleFormatter('en-US', () => ({
+        timeZone: 'UTC',
+        hour: hour24 ? '2-digit' as const : 'numeric' as const,
+        minute: tms!.minute > 0 ? 'numeric' as const : undefined,
+        hour12: hour24 ? false : undefined,
+      }))
+      return formatter(tms!, true)
+    }
+  }
+
+  it('should format event time in 24-hour mode', () => {
+    const fmt = makeFormatTime(true)
+    const ts = (s: string) => parseTimestamp(s, true)
+    expect(fmt(ts('2019-01-01 08:30'))).toBe('08:30')
+    expect(fmt(ts('2019-01-01 17:45'))).toBe('17:45')
+    expect(fmt(ts('2019-01-01 00:00'))).toBe('00')
+    expect(fmt(ts('2019-01-01 15:00'))).toBe('15')
+    expect(fmt(ts('2019-01-01 08:30'))).not.toMatch(/AM|PM/i)
+    expect(fmt(ts('2019-01-01 17:45'))).not.toMatch(/AM|PM/i)
+  })
+})
 
 describe.skip('calendar-with-events.ts', () => {
   type Instance = InstanceType<typeof Mock>
