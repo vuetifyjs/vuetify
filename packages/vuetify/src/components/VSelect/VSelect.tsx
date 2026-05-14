@@ -618,7 +618,15 @@ export const VSelect = genericComponent<new <
                                   ),
                                   title: () => {
                                     return search.value
-                                      ? <VHighlight text={ item.title } matches={ getMatches(item)?.title } matchAll ignoreCase />
+                                      ? (
+                                        <VHighlight
+                                          text={ item.title }
+                                          matches={ getMatches(item)?.title }
+                                          markClass="v-select__mask"
+                                          matchAll
+                                          ignoreCase
+                                        />
+                                      )
                                       : item.title
                                   },
                                 }}
