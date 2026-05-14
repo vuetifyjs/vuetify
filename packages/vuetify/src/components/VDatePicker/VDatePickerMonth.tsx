@@ -18,6 +18,7 @@ import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/
 
 // Types
 import type { PropType } from 'vue'
+import type { CalendarWeekdays } from '@/composables/calendar'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -277,7 +278,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
               } else {
                 const step = calendarDays < 0 ? -1 : 1
                 let candidate = adapter.addDays(adapter.date(curId), calendarDays)
-                while (!props.weekdays.includes(adapter.toJsDate(candidate as Date).getDay())) {
+                while (!props.weekdays.includes(adapter.toJsDate(candidate as Date).getDay() as CalendarWeekdays)) {
                   candidate = adapter.addDays(candidate, step)
                 }
                 targetIsoDate = adapter.toISO(candidate)
