@@ -17,9 +17,9 @@
 import { createNativeLocaleFormatter, parseTimestamp } from '../../util/timestamp'
 
 describe('intervalFormatter 24-hour mode', () => {
-  function makeIntervalFormatter (hour24: boolean) {
-    const hour12 = hour24 ? false : undefined
-    const hourStyle = hour24 ? '2-digit' as const : 'numeric' as const
+  function makeIntervalFormatter (format: 'ampm' | '24hr') {
+    const hour12 = format === '24hr' ? false : undefined
+    const hourStyle = format === '24hr' ? '2-digit' as const : 'numeric' as const
     return createNativeLocaleFormatter(
       'en-US',
       (tms, short) => (
@@ -31,7 +31,7 @@ describe('intervalFormatter 24-hour mode', () => {
   }
 
   it('should format interval in 24-hour mode', () => {
-    const fmt = makeIntervalFormatter(true)
+    const fmt = makeIntervalFormatter('24hr')
     const ts = (s: string) => parseTimestamp(s, true)
     expect(fmt(ts('2019-02-08 08:00'), true)).toBe('08')
     expect(fmt(ts('2019-02-08 20:00'), true)).toBe('20')

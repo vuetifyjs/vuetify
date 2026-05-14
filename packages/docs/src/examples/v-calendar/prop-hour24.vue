@@ -1,17 +1,19 @@
 <template>
   <v-row>
     <v-col>
-      <v-switch
-        v-model="use24hr"
+      <v-select
+        v-model="format"
+        :items="['ampm', '24hr']"
         class="mb-2"
-        label="24-hour format"
+        label="Format"
+        density="compact"
         hide-details
-      ></v-switch>
+      ></v-select>
       <v-sheet height="400">
         <v-calendar
           ref="calendar"
           :events="events"
-          :hour24="use24hr"
+          :format="format"
           :model-value="today"
           :now="today"
           color="primary"
@@ -26,7 +28,7 @@
   import { onMounted, ref } from 'vue'
 
   const calendar = ref()
-  const use24hr = ref(false)
+  const format = ref('ampm')
 
   const today = '2019-01-08'
   const events = [
@@ -55,7 +57,7 @@
 <script>
   export default {
     data: () => ({
-      use24hr: false,
+      format: 'ampm',
       today: '2019-01-08',
       events: [
         {

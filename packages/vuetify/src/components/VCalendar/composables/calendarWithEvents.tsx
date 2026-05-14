@@ -379,9 +379,9 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
     const formatTime = (withTime: CalendarTimestamp, ampm: boolean): string => {
       const formatter = base.getFormatter({
         timeZone: 'UTC',
-        hour: props.hour24 ? '2-digit' : 'numeric',
+        hour: props.format === '24hr' ? '2-digit' : 'numeric',
         minute: withTime.minute > 0 ? 'numeric' : undefined,
-        hour12: props.hour24 ? false : undefined,
+        hour12: props.format === '24hr' ? false : undefined,
       })
       return formatter(withTime, true)
     }

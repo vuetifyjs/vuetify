@@ -144,8 +144,8 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
       return props.intervalFormat as CalendarFormatter
     }
 
-    const hour12 = props.hour24 ? false : undefined
-    const hourStyle = props.hour24 ? '2-digit' : 'numeric'
+    const hour12 = props.format === '24hr' ? false : undefined
+    const hourStyle = props.format === '24hr' ? '2-digit' : 'numeric'
 
     return createNativeLocaleFormatter(
       base.locale.current.value,

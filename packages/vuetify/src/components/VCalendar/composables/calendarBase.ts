@@ -52,7 +52,10 @@ export const makeCalendarBaseProps = propsFactory({
     type: Function as PropType<CalendarFormatter>,
     default: null,
   },
-  hour24: Boolean,
+  format: {
+    type: String as PropType<'ampm' | '24hr'>,
+    default: 'ampm',
+  },
   locale: String,
   now: {
     type: String,
@@ -74,7 +77,7 @@ export interface CalendarBaseProps {
   firstDayOfYear: number | string | undefined
   weekdayFormat: CalendarFormatter | string | undefined
   dayFormat: CalendarFormatter | string | undefined
-  hour24: boolean
+  format: 'ampm' | '24hr'
   locale: string | undefined
   now: string | undefined
   type: 'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'
