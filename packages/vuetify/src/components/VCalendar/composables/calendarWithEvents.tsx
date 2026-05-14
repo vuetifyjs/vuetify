@@ -381,6 +381,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
         timeZone: 'UTC',
         hour: 'numeric',
         minute: withTime.minute > 0 ? 'numeric' : undefined,
+        hour12: props.hour24 ? false : undefined,
       })
       return formatter(withTime, true)
     }

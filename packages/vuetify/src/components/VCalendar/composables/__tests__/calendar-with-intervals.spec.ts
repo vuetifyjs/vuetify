@@ -163,6 +163,22 @@ describe.skip('calendar-with-intervals.ts', () => {
     expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 30 } as CalendarTimestamp, true)).toBe('12:30 AM')
   })
 
+  it.skip('should format interval in 24-hour mode', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        hour24: true,
+      },
+    })
+
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 0 } as CalendarTimestamp, true)).toBe('08')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 0 } as CalendarTimestamp, true)).toBe('20')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 0, minute: 0 } as CalendarTimestamp, true)).toBe('00')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, true)).toBe('08:30')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, true)).toBe('20:30')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 8, minute: 30 } as CalendarTimestamp, false)).toBe('08:30')
+    expect(wrapper.vm.intervalFormatter({ date: '2019-02-08', hour: 20, minute: 30 } as CalendarTimestamp, false)).toBe('20:30')
+  })
+
   it('should return intervalFormat if has one', async () => {
     const intervalFormat = x => x
     const wrapper = mountFunction({
