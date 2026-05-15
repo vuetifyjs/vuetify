@@ -36,7 +36,7 @@ export function useHeatmap (props: HeatmapProps) {
   }
 
   const { data } = usePivot<Record<string, any>, HeatmapCell>(props, {
-    decorate: cell => {
+    transformCell: cell => {
       const value = Number(cell.value) || 0
 
       return {

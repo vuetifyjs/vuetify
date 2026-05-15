@@ -49,7 +49,7 @@ export interface PivotProps<T = Record<string, any>> {
 }
 
 export interface PivotOptions<T, C extends PivotCell<T>> {
-  decorate?: (cell: PivotCell<T>) => C
+  transformCell?: (cell: PivotCell<T>) => C
 }
 
 export function usePivot<
@@ -59,7 +59,7 @@ export function usePivot<
   props: PivotProps<T>,
   options: PivotOptions<T, C> = {},
 ) {
-  const decorate = options.decorate ?? ((cell: PivotCell<T>) => cell as unknown as C)
+  const transformCell = options.transformCell ?? ((cell: PivotCell<T>) => cell as unknown as C)
 
   const data = computed<PivotData<C>>(() => {
     const rows = toValue(props.rows)
@@ -142,7 +142,7 @@ export function usePivot<
           continue // skip items
         }
 
-        const cell = decorate({
+        const cell = transformCell({
           value: getPropertyFromItem(item, itemValue),
           raw: item,
           row: rowKey,
@@ -182,7 +182,7 @@ export function usePivot<
           currentItems = []
         }
 
-        const cell = decorate({
+        const cell = transformCell({
           value: getPropertyFromItem(item, itemValue),
           raw: item,
           row: rowKey,
