@@ -1,9 +1,9 @@
 // Utilities
-import { computed, toValue } from 'vue'
+import { computed, toValue, unref } from 'vue'
 import { getPropertyFromItem } from '@/util'
 
 // Types
-import type { MaybeRefOrGetter } from 'vue'
+import type { MaybeRef, MaybeRefOrGetter } from 'vue'
 import type { SelectItemKey } from '@/util'
 
 export interface PivotCell<T = Record<string, any>> {
@@ -37,13 +37,15 @@ export interface PivotData<C> {
 }
 
 export interface PivotProps<T = Record<string, any>> {
-  items: T[]
-  itemValue: SelectItemKey
-  itemRow: SelectItemKey
-  itemColumn: SelectItemKey
-  groupBy: SelectItemKey
-  rows: any[] | undefined
-  columns: any[] | undefined
+  items: MaybeRefOrGetter<T[]>
+  // SelectItemKey allows accessor functions, which collide with the getter
+  // form of MaybeRefOrGetter — accept Ref or raw value only.
+  itemValue: MaybeRef<SelectItemKey>
+  itemRow: MaybeRef<SelectItemKey>
+  itemColumn: MaybeRef<SelectItemKey>
+  groupBy: MaybeRef<SelectItemKey>
+  rows: MaybeRefOrGetter<any[] | undefined>
+  columns: MaybeRefOrGetter<any[] | undefined>
 }
 
 export interface PivotOptions<T, C extends PivotCell<T>> {
@@ -54,21 +56,19 @@ export function usePivot<
   T extends Record<string, any> = Record<string, any>,
   C extends PivotCell<T> = PivotCell<T>,
 > (
-  props: MaybeRefOrGetter<PivotProps<T>>,
+  props: PivotProps<T>,
   options: PivotOptions<T, C> = {},
 ) {
   const decorate = options.decorate ?? ((cell: PivotCell<T>) => cell as unknown as C)
 
   const data = computed<PivotData<C>>(() => {
-    const {
-      rows,
-      items,
-      itemRow,
-      itemColumn,
-      itemValue,
-      groupBy,
-      columns: columnsProp,
-    } = toValue(props)
+    const rows = toValue(props.rows)
+    const items = toValue(props.items)
+    const itemRow = unref(props.itemRow)
+    const itemColumn = unref(props.itemColumn)
+    const itemValue = unref(props.itemValue)
+    const groupBy = unref(props.groupBy)
+    const columnsProp = toValue(props.columns)
 
     // 1. Resolve rows
     let rowKeys: any[]

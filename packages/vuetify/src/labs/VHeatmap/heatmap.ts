@@ -27,12 +27,12 @@ export type HeatmapColumnGroup = PivotGroup<HeatmapCell>
 export type HeatmapData = PivotData<HeatmapCell>
 
 export interface HeatmapProps extends PivotProps {
-  thresholds: HeatmapThresholds
+  thresholds: MaybeRefOrGetter<HeatmapThresholds>
 }
 
-export function useHeatmap (props: MaybeRefOrGetter<HeatmapProps>) {
+export function useHeatmap (props: HeatmapProps) {
   function colorFromValue (value: number) {
-    return getColorFromScale(value, toValue(props).thresholds)
+    return getColorFromScale(value, toValue(props.thresholds))
   }
 
   const { data } = usePivot<Record<string, any>, HeatmapCell>(props, {
