@@ -5,8 +5,8 @@
         v-model="format"
         :items="['ampm', '24hr']"
         class="mb-2"
-        label="Format"
         density="compact"
+        label="Format"
         hide-details
       ></v-select>
       <v-sheet height="400">
