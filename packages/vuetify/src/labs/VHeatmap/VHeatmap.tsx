@@ -269,7 +269,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                               ]}
                               { ...cellProps }
                             >
-                              { title != null && <title>{ title }</title> }
+                              { title != null && <title key="title">{ title }</title> }
                               <rect
                                 class="v-heatmap-cell__underlay"
                                 width={ cellWidth }
