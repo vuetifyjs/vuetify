@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "highlights",
+        "subfolder": "components"
+      },
+      {
         "title": "icon-buttons",
         "subfolder": "components"
       },
