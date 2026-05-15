@@ -1,55 +1,82 @@
 // Composables
-import { useBackgroundColor } from '@/composables/color'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
+import { getCellRadius } from './VHeatmap'
 import { defineComponent, propsFactory, useRender } from '@/util'
 
 export const makeVHeatmapCellProps = propsFactory({
   color: String,
   disabled: Boolean,
+  width: {
+    type: [Number, String],
+    default: 24,
+  },
+  height: {
+    type: [Number, String],
+    default: 24,
+  },
 
   ...makeRoundedProps(),
 }, 'VHeatmapCell')
+
+function toPx (value: any, defaultValue: number): number {
+  if (value == null || value === '') return defaultValue
+  const parsed = parseFloat(value)
+  return Number.isFinite(parsed) ? parsed : defaultValue
+}
 
 export const VHeatmapCell = defineComponent({
   name: 'VHeatmapCell',
 
   props: makeVHeatmapCellProps(),
 
-  setup (props, { slots }) {
-    // Color-scale values (e.g. `color-mix(...)`) come through as raw CSS
-    // functions — route them through a custom property so the stylesheet
-    // can compose them, bypassing the theme-aware background resolver.
+  setup (props, { slots, attrs }) {
     const isColorScale = computed(() => !!props.color && props.color.includes('('))
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(
-      toRef(() => props.disabled || isColorScale.value ? undefined : props.color)
-    )
-    const { roundedClasses } = useRounded(props)
+    const radius = computed(() => getCellRadius(props.rounded))
+    const width = computed(() => toPx(props.width, 24))
+    const height = computed(() => toPx(props.height, 24))
 
-    useRender(() => (
-      <div class="v-heatmap-cell">
-        <div
+    useRender(() => {
+      const empty = !props.color || props.disabled
+      const fill = !empty && !isColorScale.value ? props.color : undefined
+
+      return (
+        <svg
           class={[
-            'v-heatmap-cell__content',
-            backgroundColorClasses.value,
-            roundedClasses.value,
+            'v-heatmap-cell',
+            'v-heatmap-cell--standalone',
             {
-              'v-heatmap-cell--empty': !props.color || props.disabled,
-              'v-heatmap-cell--color-scale': isColorScale.value && !props.disabled,
+              'v-heatmap-cell--empty': empty,
+              'v-heatmap-cell--color-scale': !empty && isColorScale.value,
+              'v-heatmap-cell--disabled': props.disabled,
             },
           ]}
+          width={ width.value }
+          height={ height.value }
+          viewBox={ `0 0 ${width.value} ${height.value}` }
           style={[
-            backgroundColorStyles.value,
-            isColorScale.value && !props.disabled
-              ? { '--v-heatmap-cell-color': props.color }
-              : undefined,
+            { '--v-heatmap-cell-radius': radius.value },
+            (!empty && isColorScale.value) ? { '--v-heatmap-cell-color': props.color } : null,
+            attrs.style as any,
           ]}
         >
-          { slots.default?.() }
-        </div>
-      </div>
-    ))
+          <rect
+            class="v-heatmap-cell__rect"
+            width={ width.value }
+            height={ height.value }
+            fill={ fill }
+          />
+          { slots.default && (
+            <foreignObject class="v-heatmap-cell__overlay" width={ width.value } height={ height.value }>
+              <div>
+                { slots.default() }
+              </div>
+            </foreignObject>
+          )}
+        </svg>
+      )
+    })
   },
 })

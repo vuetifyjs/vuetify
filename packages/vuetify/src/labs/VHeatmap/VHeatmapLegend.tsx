@@ -81,6 +81,8 @@ export const VHeatmapLegend = defineComponent({
                 color={ color }
                 disabled={ !props.activeBuckets.includes(i) }
                 rounded={ props.rounded }
+                width={ cellWidth }
+                height={ cellHeight }
                 onClick={ () => emit('click:threshold', i) }
               />
             ))
