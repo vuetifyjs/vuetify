@@ -126,10 +126,11 @@
   })
 
   const code = computed(() => {
-    return `<${name} ${propsToString(props.value)}
-  :columns="columns"
-  :items="items"
-  :thresholds="thresholds"
-/>`
+    return `<${name} ${propsToString({
+      ...props.value,
+      columns: 'columns',
+      items: 'items',
+      thresholds: 'thresholds',
+    }, ['columns', 'items', 'thresholds'])} />`
   })
 </script>

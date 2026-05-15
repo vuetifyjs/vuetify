@@ -16,7 +16,7 @@
     "itemRow": "Property name or function that returns the row key of an item.",
     "itemValue": "Property name or function that returns the numeric value of an item, used for cell color matching.",
     "rows": "Explicit list of row keys. When omitted, rows are derived from the items in insertion order.",
-    "thresholds": "Either a list of `{ min, color }` thresholds (highest matching wins) or a linear scale `{ from, to }` that interpolates cell colors between two stops using `color-mix`."
+    "thresholds": "Controls how each item's value maps to a cell color. Two forms:\n- **Buckets:** an array of `{ min, color }` stops. Each cell takes the color of the highest stop whose `min` it meets or exceeds.\n- **Linear:** a `{ from, to }` pair that interpolates between two stops via `color-mix`. Optional `colorSpace` (e.g. `'oklch'`) picks the interpolation space, and `hueInterpolation` (`'shorter'` / `'longer'``) controls hue path in polar spaces."
   },
   "slots": {
     "cell": "Slot used to render custom content inside each cell.",

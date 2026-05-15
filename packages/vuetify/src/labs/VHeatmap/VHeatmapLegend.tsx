@@ -6,6 +6,7 @@ import { useLocale } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
+import { getInterpolationMethod } from './colorScale'
 import { isLinearScale } from './heatmap'
 import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
 
@@ -69,7 +70,7 @@ export const VHeatmapLegend = defineComponent({
               key="legend-gradient"
               class="v-heatmap-legend__gradient"
               style={{
-                background: `linear-gradient(to right, ${linear.from.color}, ${linear.to.color})`,
+                background: `linear-gradient(${getInterpolationMethod(linear)} to right, ${linear.from.color}, ${linear.to.color})`,
               }}
             />
           ) : (

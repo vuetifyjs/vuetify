@@ -77,11 +77,11 @@ Notable behaviors:
 
 #### Thresholds and legend
 
-The `legend` prop accepts `true` or an object like `{ labels: ['Low', 'High'], cellSize: 16 }` allowing you to replace the default labels and resize the legend cells independently from the grid.
+The `legend` prop accepts `boolean` or an object like `{ labels: ['Low', 'High'], cellSize: 16 }` allowing you to replace the default labels and resize the legend cells independently from the grid.
 
 <ExamplesExample file="v-heatmap/prop-thresholds" />
 
-The `thresholds` prop drives both cell colors. It accept array (like in the example above) or a linear scale object `{ from, to }` making the cell interpolate colors between the two stops.
+The `thresholds` prop accepts array (like in the example above) or a linear scale object `{ from, to }` making the cell interpolate colors between the two stops.
 
 <ExamplesExample file="v-heatmap/prop-thresholds-linear" />
 
