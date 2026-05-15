@@ -69,6 +69,10 @@ export default {
     moreEvents: 'Mais {0}',
     today: 'Hoje',
   },
+  heatmap: {
+    less: 'Menos',
+    more: 'Mais',
+  },
   input: {
     clear: 'Limpar {0}',
     prependAction: '{0} ação antes',

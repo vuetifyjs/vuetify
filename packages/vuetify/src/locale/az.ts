@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} ədəd daha',
     today: 'Bu gün',
   },
+  heatmap: {
+    less: 'Az',
+    more: 'Çox',
+  },
   input: {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',

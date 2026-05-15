@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} 더보기',
     today: '오늘',
   },
+  heatmap: {
+    less: '적음',
+    more: '많음',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',

@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} més',
     today: 'Avui',
   },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
+  },
   input: {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',

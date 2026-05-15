@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} fler',
     today: 'Idag',
   },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mer',
+  },
   input: {
     clear: 'Rensa {0}',
     prependAction: '{0} föregående åtgärd',

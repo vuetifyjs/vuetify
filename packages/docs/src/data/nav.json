@@ -285,6 +285,10 @@
         "subfolder": "components"
       },
       {
+        "title": "heatmaps",
+        "subfolder": "components"
+      },
+      {
         "title": "highlights",
         "subfolder": "components"
       },
