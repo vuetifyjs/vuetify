@@ -85,6 +85,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-highlight](/components/highlights/)               | Renders text with highlighted search matches               | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

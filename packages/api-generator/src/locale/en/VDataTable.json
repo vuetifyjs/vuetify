@@ -1,4 +1,5 @@
 {
+  "description": "Used for displaying tabular data. Supports searching, grouping, sorting and pagination.",
   "props": {
     "collapseIcon": "Icon to display when the expandable row is expanded.",
     "customFilter": "Function to filter items.",

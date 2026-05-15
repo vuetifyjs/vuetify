@@ -1,4 +1,5 @@
 {
+  "description": "Chart component used to create simple line or bars.",
   "props": {
     "autoDraw": "Trace the length of the line when first rendered.",
     "autoDrawDuration": "Amount of time (in ms) to run the trace animation.",

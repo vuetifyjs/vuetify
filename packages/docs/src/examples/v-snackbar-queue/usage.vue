@@ -33,7 +33,7 @@
         <v-list-item>
           <pre
             v-if="logs.length"
-            class="overflow-y-auto text-caption text-pre-wrap my-0"
+            class="overflow-y-auto text-body-small text-pre-wrap my-0"
             style="max-height: 80px"
           >{{ logs.join('\n') }}</pre>
         </v-list-item>

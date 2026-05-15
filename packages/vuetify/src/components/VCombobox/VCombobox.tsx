@@ -16,11 +16,12 @@ import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -573,7 +574,6 @@ export const VCombobox = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-combobox__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -582,6 +582,7 @@ export const VCombobox = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
+                  contentClass={['v-combobox__content', props.menuProps?.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }
@@ -674,7 +675,15 @@ export const VCombobox = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                                  : (
+                                    <VHighlight
+                                      text={ item.title }
+                                      matches={ getMatches(item)?.title }
+                                      markClass="v-combobox__mask"
+                                      matchAll
+                                      ignoreCase
+                                    />
+                                  )
                               },
                             }}
                           </VListItem>
