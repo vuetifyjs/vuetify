@@ -128,18 +128,27 @@ export const VMonthPicker = genericComponent<new <
     })
 
     const {
-      viewMode,
       year,
       disablePrevYear,
       disableNextYear,
       prevYear,
       nextYear,
-      toggleViewMode,
-      setYear,
       selectMonth,
       getMonthValue,
       range,
     } = useMonthPicker(props, model)
+
+    const viewMode = shallowRef<'months' | 'years'>('months')
+
+    function toggleViewMode () {
+      viewMode.value = viewMode.value === 'years' ? 'months' : 'years'
+    }
+
+    function onUpdateYear (v: number) {
+      year.value = v
+      // Brief delay so the year-grid click feedback is visible before the view swaps
+      setTimeout(() => { viewMode.value = 'months' }, 100)
+    }
 
     const headerText = computed(() => {
       const values = model.value
@@ -246,7 +255,7 @@ export const VMonthPicker = genericComponent<new <
                 <VDefaultsProvider defaults={{ VBtn: { variant: 'text' } }}>
                   <div class="v-month-picker__controls">
                     <VBtn
-                      disabled={ props.disabled || disablePrevYear.value }
+                      disabled={ props.disabled || viewMode.value === 'years' || disablePrevYear.value }
                       icon={ props.prevIcon }
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.previousYear') }
                       onClick={ prevYear }
@@ -260,7 +269,7 @@ export const VMonthPicker = genericComponent<new <
                       onClick={ toggleViewMode }
                     />
                     <VBtn
-                      disabled={ props.disabled || disableNextYear.value }
+                      disabled={ props.disabled || viewMode.value === 'years' || disableNextYear.value }
                       icon={ props.nextIcon }
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.nextYear') }
                       onClick={ nextYear }
@@ -277,7 +286,7 @@ export const VMonthPicker = genericComponent<new <
                       min={ props.min ? `${props.min}-01` : undefined }
                       max={ props.max ? `${props.max}-01` : undefined }
                       allowedYears={ props.allowedYears }
-                      onUpdate:modelValue={ setYear }
+                      onUpdate:modelValue={ onUpdateYear }
                     />
                   ) : (
                     <div

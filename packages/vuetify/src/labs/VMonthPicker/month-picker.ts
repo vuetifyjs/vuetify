@@ -26,7 +26,6 @@ export interface MonthPickerProps {
 export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly string[]>) {
   const adapter = useDate()
 
-  const viewMode = shallowRef<'months' | 'years'>('months')
   const year = shallowRef<number>(adapter.getYear(adapter.date()))
 
   const range = useRangePicker({
@@ -34,12 +33,6 @@ export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly str
     model,
     compare: compareYearMonth,
   })
-
-  function setYear (v: number) {
-    year.value = v
-    // Brief delay so the year-button click feedback is visible before the view swaps
-    setTimeout(() => { viewMode.value = 'months' }, 100)
-  }
 
   function getMonthValue (monthIndex: number): string {
     return toYearMonth(year.value, monthIndex)
@@ -50,14 +43,12 @@ export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly str
   }
 
   const disablePrevYear = computed(() => {
-    if (viewMode.value === 'years') return true
     if (!props.min) return false
     const minYear = parseInt(props.min.split('-')[0], 10)
     return year.value <= minYear
   })
 
   const disableNextYear = computed(() => {
-    if (viewMode.value === 'years') return true
     if (!props.max) return false
     const maxYear = parseInt(props.max.split('-')[0], 10)
     return year.value >= maxYear
@@ -65,16 +56,12 @@ export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly str
 
   function prevYear () {
     if (disablePrevYear.value) return
-    setYear(year.value - 1)
+    year.value--
   }
 
   function nextYear () {
     if (disableNextYear.value) return
-    setYear(year.value + 1)
-  }
-
-  function toggleViewMode () {
-    viewMode.value = viewMode.value === 'years' ? 'months' : 'years'
+    year.value++
   }
 
   watch(model, val => {
@@ -85,15 +72,12 @@ export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly str
   }, { immediate: true })
 
   return {
-    viewMode,
     year,
     disablePrevYear,
     disableNextYear,
-    setYear,
     selectMonth,
     prevYear,
     nextYear,
-    toggleViewMode,
     getMonthValue,
     range,
   }
