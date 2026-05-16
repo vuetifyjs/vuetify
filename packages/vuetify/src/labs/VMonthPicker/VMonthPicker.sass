@@ -103,10 +103,16 @@
         position: relative
         z-index: 1
 
+    &--selected
+      .v-btn
+        background-color: rgb(var(--v-theme-surface-variant))
+        color: rgb(var(--v-theme-on-surface-variant))
+
     .v-month-picker__range-bg
       position: absolute
       inset: var(--range-selection-inset) 0
       pointer-events: none
+      background-color: rgb(var(--v-theme-surface-variant))
 
       @include tools.layer('trumps')
         @media (forced-colors: active)
@@ -114,10 +120,10 @@
           opacity: 0.2
 
       &--range
-        opacity: 0.1
+        opacity: $month-picker-range-selection-opacity
 
       &--preview
-        opacity: 0.06
+        opacity: $month-picker-preview-selection-opacity
 
     &--range-start > .v-month-picker__range-bg
       left: var(--range-selection-inset)

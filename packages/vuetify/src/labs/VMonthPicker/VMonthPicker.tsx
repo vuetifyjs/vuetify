@@ -20,7 +20,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
-import { chunkArray, createRange, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -60,10 +60,7 @@ export const makeVMonthPickerProps = propsFactory({
     type: IconValue,
     default: '$subgroup',
   },
-  modelValue: {
-    type: null as any as PropType<string | string[] | null>,
-    default: null,
-  },
+  modelValue: null,
   headerColor: String,
   min: String,
   max: String,
@@ -87,9 +84,7 @@ export const makeVMonthPickerProps = propsFactory({
     default: 'picker-reverse-transition',
   },
 
-  ...makeVPickerProps({
-    title: '$vuetify.monthPicker.title',
-  }),
+  ...omit(makeVPickerProps({ title: '$vuetify.monthPicker.title' }), ['landscape']),
 }, 'VMonthPicker')
 
 export const VMonthPicker = genericComponent<new <
@@ -108,7 +103,7 @@ export const VMonthPicker = genericComponent<new <
   props: makeVMonthPickerProps(),
 
   emits: {
-    'update:modelValue': (_value: any) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -135,7 +130,6 @@ export const VMonthPicker = genericComponent<new <
     const {
       viewMode,
       year,
-      headerText,
       disablePrevYear,
       disableNextYear,
       prevYear,
@@ -143,21 +137,33 @@ export const VMonthPicker = genericComponent<new <
       toggleViewMode,
       setYear,
       selectMonth,
-      isMonthSelected,
-      isMonthRangeStart,
-      isMonthRangeEnd,
-      isMonthRangeMiddle,
-      previewMonth,
-      clearPreview,
-      isMonthPreviewStart,
-      isMonthPreviewEnd,
-      isMonthPreviewMiddle,
-      isMonthPreviewed,
+      getMonthValue,
+      range,
     } = useMonthPicker(props, model)
 
+    const headerText = computed(() => {
+      const values = model.value
+      if (values.length === 0) {
+        return props.multiple === 'range'
+          ? t('$vuetify.monthPicker.range.title')
+          : t('$vuetify.monthPicker.header')
+      }
+      if (props.multiple === 'range' && values.length === 2) {
+        const startDate = adapter.parseISO(`${values[0]}-01`)
+        const endDate = adapter.parseISO(`${values[1]}-01`)
+        const start = `${adapter.format(startDate, 'monthShort')} ${adapter.format(startDate, 'year')}`
+        const end = `${adapter.format(endDate, 'monthShort')} ${adapter.format(endDate, 'year')}`
+        return `${start} – ${end}`
+      }
+      if (props.multiple && values.length > 1) {
+        return t('$vuetify.monthPicker.itemsSelected', values.length)
+      }
+      const last = values[values.length - 1]
+      return adapter.format(adapter.parseISO(`${last}-01`), 'monthAndYear')
+    })
+
     const headerColor = toRef(() => props.headerColor ?? props.color)
-    const selectionColor = toRef(() => props.color || 'surface-variant')
-    const { backgroundColorClasses: rangeColorClasses, backgroundColorStyles: rangeColorStyles } = useBackgroundColor(selectionColor)
+    const { backgroundColorClasses: rangeColorClasses, backgroundColorStyles: rangeColorStyles } = useBackgroundColor(() => props.color)
 
     const headerTransition = toRef(() => `date-picker-header${isReverse.value ? '-reverse' : ''}-transition`)
 
@@ -282,7 +288,7 @@ export const VMonthPicker = genericComponent<new <
                         <div
                           key={ year.value }
                           class="v-month-picker__months-content"
-                          onMouseleave={ clearPreview }
+                          onMouseleave={ range.clearPreview }
                         >
                           { monthRows.value.map((row, rowIndex) => {
                             const cols = Number(props.monthsColumns) || 4
@@ -290,14 +296,15 @@ export const VMonthPicker = genericComponent<new <
                               <div class="v-month-picker__months-row">
                                 { row.map((month, colIndex) => {
                                   const index = rowIndex * cols + colIndex
-                                  const rangeStart = isMonthRangeStart(index)
-                                  const rangeEnd = isMonthRangeEnd(index)
-                                  const rangeMiddle = isMonthRangeMiddle(index)
-                                  const previewStart = isMonthPreviewStart(index)
-                                  const previewEnd = isMonthPreviewEnd(index)
-                                  const previewMiddle = isMonthPreviewMiddle(index)
-                                  const previewed = isMonthPreviewed(index)
-                                  const selected = isMonthSelected(index) && !rangeMiddle
+                                  const monthValue = getMonthValue(index)
+                                  const rangeStart = range.isRangeStart(monthValue)
+                                  const rangeEnd = range.isRangeEnd(monthValue)
+                                  const rangeMiddle = range.isRangeMiddle(monthValue)
+                                  const previewStart = range.isPreviewStart(monthValue)
+                                  const previewEnd = range.isPreviewEnd(monthValue)
+                                  const previewMiddle = range.isPreviewMiddle(monthValue)
+                                  const previewed = range.isInPreviewRange(monthValue)
+                                  const selected = range.isSelected(monthValue) && !rangeMiddle
 
                                   const variant = isListView.value
                                     ? (selected ? 'tonal' : 'text')
@@ -307,7 +314,7 @@ export const VMonthPicker = genericComponent<new <
 
                                   const btnProps = {
                                     color: (selected || (month.isCurrent && !isListView.value))
-                                      ? selectionColor.value
+                                      ? props.color
                                       : undefined,
                                     disabled: props.disabled || month.isDisabled,
                                     readonly: props.readonly,
@@ -322,9 +329,9 @@ export const VMonthPicker = genericComponent<new <
                                     'aria-current': month.isCurrent ? 'date' : undefined,
                                     'aria-selected': selected,
                                     onClick: () => selectMonth(index),
-                                    onMouseenter: () => previewMonth(index),
-                                    onFocus: () => previewMonth(index),
-                                    onBlur: clearPreview,
+                                    onMouseenter: () => range.setPreview(monthValue),
+                                    onFocus: () => range.setPreview(monthValue),
+                                    onBlur: range.clearPreview,
                                   } as const
 
                                   const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
