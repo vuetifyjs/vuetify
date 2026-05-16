@@ -35,7 +35,7 @@ In MD3, elevation changes are commonly used to indicate interactive states. For 
 
 The `elevation` helper classes allow you to assign a custom **z-depth** to any element.
 
-<ExamplesExample file="elevation/usage" />
+<ExamplesExample file="elevation/usage" new-in="4.1.0" />
 
 ## Examples
 
@@ -55,7 +55,7 @@ transition: 0.28s box-shadow cubic-bezier(0.4, 0, 0.2, 1); /* simplified */
 
 :::
 
-<ExamplesExample file="elevation/prop-dynamic" />
+<ExamplesExample file="elevation/prop-dynamic" new-in="4.1.0" />
 
 ### Misc
 
