@@ -24,7 +24,7 @@ interface VirtualFocusOptions {
   onHighlight?: (id: string | number) => void
 }
 
-interface VirtualFocusReturn {
+export interface VirtualFocusReturn {
   highlightedId: ShallowRef<string | number | undefined>
   highlight: (id: string | number) => void
   focusHighlighted: () => void

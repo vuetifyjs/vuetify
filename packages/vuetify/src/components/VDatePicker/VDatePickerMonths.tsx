@@ -6,12 +6,11 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useGridKeyboardSelection } from '@/composables/gridKeyboardSelection'
+import { useGridSelection } from '@/composables/gridSelection'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useVirtualFocus } from '@/composables/virtualFocus'
 
 // Utilities
-import { computed, ref, shallowRef, useId, watchEffect } from 'vue'
+import { computed, useId, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -57,8 +56,6 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
-    const contentRef = ref<HTMLElement>()
-    const hasFocusIn = shallowRef(false)
     const uid = useId()
 
     const months = computed(() => {
@@ -90,18 +87,6 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       model.value = model.value ?? adapter.getMonth(adapter.date())
     })
 
-    const virtualFocus = useVirtualFocus(
-      () => months.value.map(month => ({
-        id: month.value,
-        disabled: month.isDisabled,
-        el: () => contentRef.value?.querySelector<HTMLElement>(`[data-v-month="${month.value}"]`),
-      })),
-      {
-        control: contentRef,
-        columns: () => props.columns,
-      }
-    )
-
     function isMonthAllowed (month: number) {
       if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
         return props.allowedMonths.includes(month)
@@ -114,45 +99,18 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       return true
     }
 
-    function onFocusin (e: FocusEvent) {
-      const grid = contentRef.value
-      if (!grid || grid.contains(e.relatedTarget as Node)) return
-
-      hasFocusIn.value = true
-      const cur = model.value ?? adapter.getMonth(adapter.date())
-      virtualFocus.highlight(cur)
-      virtualFocus.focusHighlighted()
+    function onMonthSelect (value: number) {
+      if (model.value === value) emit('update:modelValue', value)
+      else model.value = value
     }
 
-    function onFocusout (e: FocusEvent) {
-      if (!contentRef.value?.contains(e.relatedTarget as Node)) {
-        hasFocusIn.value = false
-        virtualFocus.clear()
-      }
-    }
-
-    function onActivate () {
-      const id = virtualFocus.highlightedId.value as number
-      const month = months.value.find(m => m.value === id)
-      if (!month || month.isDisabled) return
-
-      if (model.value === id) emit('update:modelValue', model.value)
-      else model.value = id
-    }
-
-    function onMonthClick (i: number) {
-      virtualFocus.highlight(i)
-      virtualFocus.focusHighlighted()
-      if (model.value === i) {
-        emit('update:modelValue', model.value)
-        return
-      }
-      model.value = i
-    }
-
-    const onContainerKeydown = useGridKeyboardSelection(virtualFocus, {
+    const { containerProps, selectItem } = useGridSelection<number>({
+      items: () => months.value,
+      columns: () => props.columns,
+      initialValue: current => current ?? model.value ?? adapter.getMonth(adapter.date()),
+      itemAttribute: 'data-v-month',
+      onSelect: onMonthSelect,
       onEscape: () => emit('escape'),
-      onActivate,
     })
 
     useRender(() => (
@@ -163,13 +121,9 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
         }}
       >
         <div
-          ref={ contentRef }
           class="v-date-picker-months__content"
           style={{ '--v-date-picker-months-columns': props.columns }}
-          tabindex={ hasFocusIn.value ? -1 : 0 }
-          onKeydown={ onContainerKeydown }
-          onFocusin={ onFocusin }
-          onFocusout={ onFocusout }
+          { ...containerProps.value }
         >
           { months.value.map((month, i) => {
             const btnProps = {
@@ -184,7 +138,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
               variant: model.value === month.value ? 'flat' : 'text',
               'data-v-month': month.value,
               onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
-              onClick: () => onMonthClick(i),
+              onClick: () => selectItem(i),
             } as const
 
             return slots.month?.({

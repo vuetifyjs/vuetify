@@ -606,7 +606,7 @@ describe('preserve focus when selecting day from adjacent month', () => {
     // Anchor virtual focus on Jan 1, then move to adjacent Dec 31.
     // findByText('1') would be ambiguous — Feb 1 is also rendered as adjacent
     // in the 6th static week row, so target by data-v-date instead.
-    await userEvent.click(await screen.findByCSS('[data-v-date="2026-01-01"] button'))
+    await userEvent.click(await screen.findByCSS('[data-v-date="2026-01-01"]'))
     await userEvent.keyboard('{ArrowLeft}')
     expect(highlighted()?.textContent?.trim()).toBe('31')
     expect(month.value).toBe(0)

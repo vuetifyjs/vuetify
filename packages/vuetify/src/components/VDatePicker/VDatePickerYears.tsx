@@ -6,15 +6,14 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
-import { useGridKeyboardSelection } from '@/composables/gridKeyboardSelection'
+import { useGridSelection } from '@/composables/gridSelection'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useVirtualFocus } from '@/composables/virtualFocus'
 
 // Directives
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { computed, shallowRef, useId, watchEffect } from 'vue'
+import { computed, useId, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
@@ -68,8 +67,6 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
     const containerRef = templateRef()
-    const contentRef = templateRef()
-    const hasFocusIn = shallowRef(false)
     const uid = useId()
 
     const years = computed(() => {
@@ -106,29 +103,6 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       model.value = model.value ?? adapter.getYear(adapter.date())
     })
 
-    const virtualFocus = useVirtualFocus(
-      () => years.value.map(year => ({
-        id: year.value,
-        disabled: year.isDisabled,
-        el: () => contentRef.el?.querySelector<HTMLElement>(`[data-v-year="${year.value}"]`),
-      })),
-      {
-        control: () => contentRef.el,
-        columns: () => props.columns,
-      }
-    )
-
-    function scrollToSelected () {
-      const container = containerRef.el
-      const target = contentRef.el?.querySelector<HTMLElement>(`[data-v-year="${model.value}"]`)
-      if (!container || !target) return
-
-      const containerRect = container.getBoundingClientRect()
-      const targetRect = target.getBoundingClientRect()
-
-      container.scrollTop += (targetRect.top - containerRect.top) - (container.clientHeight / 2) + (targetRect.height / 2)
-    }
-
     function isYearAllowed (year: number) {
       if (Array.isArray(props.allowedYears) && props.allowedYears.length) {
         return props.allowedYears.includes(year)
@@ -141,46 +115,30 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
       return true
     }
 
-    function onFocusin (e: FocusEvent) {
-      const grid = contentRef.el
-      if (!grid || grid.contains(e.relatedTarget as Node)) return
-
-      hasFocusIn.value = true
-      const cur = model.value ?? adapter.getYear(adapter.date())
-      virtualFocus.highlight(cur)
-      virtualFocus.focusHighlighted()
+    function onYearSelect (value: number) {
+      if (model.value === value) emit('update:modelValue', value)
+      else model.value = value
     }
 
-    function onFocusout (e: FocusEvent) {
-      if (!contentRef.el?.contains(e.relatedTarget as Node)) {
-        hasFocusIn.value = false
-        virtualFocus.clear()
-      }
-    }
-
-    function onActivate () {
-      const id = virtualFocus.highlightedId.value as number
-      const year = years.value.find(y => y.value === id)
-      if (!year || year.isDisabled) return
-
-      if (model.value === id) emit('update:modelValue', model.value)
-      else model.value = id
-    }
-
-    function onYearClick (value: number) {
-      virtualFocus.highlight(value)
-      virtualFocus.focusHighlighted()
-      if (model.value === value) {
-        emit('update:modelValue', model.value)
-        return
-      }
-      model.value = value
-    }
-
-    const onContainerKeydown = useGridKeyboardSelection(virtualFocus, {
+    const { containerProps, containerEl, selectItem } = useGridSelection<number>({
+      items: () => years.value,
+      columns: () => props.columns,
+      initialValue: current => current ?? model.value ?? adapter.getYear(adapter.date()),
+      itemAttribute: 'data-v-year',
+      onSelect: onYearSelect,
       onEscape: () => emit('escape'),
-      onActivate,
     })
+
+    function scrollToSelected () {
+      const container = containerRef.el
+      const target = containerEl.value?.querySelector<HTMLElement>(`[data-v-year="${model.value}"]`)
+      if (!container || !target) return
+
+      const containerRect = container.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+
+      container.scrollTop += (targetRect.top - containerRect.top) - (container.clientHeight / 2) + (targetRect.height / 2)
+    }
 
     useRender(() => (
       <div
@@ -195,13 +153,9 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         }}
       >
         <div
-          ref={ contentRef }
           class="v-date-picker-years__content"
           style={{ '--v-date-picker-years-columns': props.columns }}
-          tabindex={ hasFocusIn.value ? -1 : 0 }
-          onKeydown={ onContainerKeydown }
-          onFocusin={ onFocusin }
-          onFocusout={ onFocusout }
+          { ...containerProps.value }
         >
           { years.value.map((year, i) => {
             const btnProps = {
@@ -215,7 +169,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
               variant: model.value === year.value ? 'flat' : 'text',
               'data-v-year': year.value,
               onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
-              onClick: () => onYearClick(year.value),
+              onClick: () => selectItem(year.value),
             } as const
 
             return slots.year?.({
