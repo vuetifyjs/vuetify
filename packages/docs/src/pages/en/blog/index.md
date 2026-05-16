@@ -1,7 +1,7 @@
 ---
 layout: blog
 meta:
-  title: Vuetify — Blog
+  title: Blog
   description: The Vuetify blog is a place where we share the latest news, updates, and stories about Vuetify. Stay up to date with the latest developments in the Vuetify ecosystem.
   keywords: vuetify, blog, news, updates, stories, ecosystem
 ---
@@ -17,6 +17,30 @@ Latest news, updates, and stories about Vuetify.
 ---
 
 <br>
+
+## April 2026 Update
+
+🖊️ John Leider • 📅 May 4th, 2026
+
+April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives — alongside three Vuetify framework patch releases, MCP v0.7.0 with playground and link CRUD tools, and four ESLint Config releases including ESLint 10 support. Six new v0 components (Carousel, Image, NumberField, Progress, Toggle, Overflow) merged in April, the display composable became the first Vuetify internal to migrate to v0, and useTheme/useLocale/useFeatures became reactive-by-default across 847 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/april-2026-update/) { .text-end }
+
+## March 2026 Update
+
+🖊️ John Leider • 📅 April 16th, 2026
+
+March delivered 7 Vuetify patch releases stabilizing v4, while Vuetify0 exploded with 427 commits reaching v0.2.0 with 7 new headless components including Switch, Slider, Treeview, and Combobox. The Nuxt Module hit v1.0.0-beta, the CLI shipped 10 releases with Vite 8 and Vue Router 5 support, and the ESLint plugin gained automated v4 migration rules across 720 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/march-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Alpha
+
+🖊️ John Leider • 📅 April 7th, 2026
+
+The Vuetify0 alpha is here — a headless meta-framework for Vue 3 with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. 100% TypeScript, zero styles. Includes a full tutorial building DevKey, a developer API dashboard, from scratch. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-alpha/) { .text-end }
 
 ## February 2026 Update
 

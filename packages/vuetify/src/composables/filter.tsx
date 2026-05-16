@@ -226,7 +226,9 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      _filteredMatches.set(item.value, matches)
+      if (item.value !== undefined) {
+        _filteredMatches.set(item.value, matches)
+      }
     })
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
@@ -237,20 +239,4 @@ export function useFilter <T extends InternalItem> (
   }
 
   return { filteredItems, filteredMatches, getMatches }
-}
-
-export function highlightResult (name: string, text: string, matches: FilterMatchArrayMultiple | undefined) {
-  if (matches == null || !matches.length) return text
-
-  return matches.map((match, i) => {
-    const start = i === 0 ? 0 : matches[i - 1][1]
-    const result = [
-      <span class={ `${name}__unmask` }>{ text.slice(start, match[0]) }</span>,
-      <span class={ `${name}__mask` }>{ text.slice(match[0], match[1]) }</span>,
-    ]
-    if (i === matches.length - 1) {
-      result.push(<span class={ `${name}__unmask` }>{ text.slice(match[1]) }</span>)
-    }
-    return <>{ result }</>
-  })
 }

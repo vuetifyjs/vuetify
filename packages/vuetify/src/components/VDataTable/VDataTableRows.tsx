@@ -50,7 +50,7 @@ export const makeVDataTableRowsProps = propsFactory({
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
 
-  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon', 'density']),
+  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon', 'density', 'getMatches']),
   ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon', 'density']),
   ...makeDisplayProps(),
 }, 'VDataTableRows')
@@ -169,6 +169,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   expandIcon: props.expandIcon,
                   density: props.density,
                   mobile: mobile.value,
+                  getMatches: props.getMatches,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'

@@ -1,4 +1,5 @@
 {
+  "description": "A single radio button, meant to be used within `v-radio-group`.",
   "props": {
     "falseIcon": "The icon used when inactive.",
     "trueIcon": "The icon used when active."

@@ -83,6 +83,10 @@ export default {
     moreEvents: '{0} נוספים',
     today: 'היום',
   },
+  heatmap: {
+    less: 'פחות',
+    more: 'יותר',
+  },
   input: {
     clear: 'נקה {0}',
     prependAction: '{0} פעולה מקדימה',

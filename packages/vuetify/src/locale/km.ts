@@ -83,6 +83,10 @@ export default {
     moreEvents: '{0} ទៀត',
     today: 'ថ្ងៃនេះ',
   },
+  heatmap: {
+    less: 'តិច',
+    more: 'ច្រើន',
+  },
   input: {
     clear: 'សម្អាត {0}',
     prependAction: '{0} សម្អាតសកម្ម',

@@ -18,32 +18,32 @@ Vuetify is always under development. We are constantly working towards improving
 
 <PromotedEntry />
 
-## 2025/2026 Roadmap
+## 2026 Roadmap
 
-The following is a list of all planned components for the year 2025.
+The following is a list of all planned components for the year 2026.
 
 ### Versions
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
-| [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
+| [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | Q2 2026         |
+| [v4.2](https://github.com/vuetifyjs/vuetify/milestone/90)               | TBD             |
 
 ### New form components and features
 
 | Name                                                              | Entering Labs | Production Release |
 |-------------------------------------------------------------------|---------------|--------------------|
-| [validation rules](/features/rules)                               | *             | Q1 2026            |
-| [v-file-upload](/components/file-upload/)                         | *             | Q1 2026            |
-| [v-date-input](/components/date-inputs/)                          | *             | Q1 2026            |
-| [v-color-input](/components/color-inputs/)                        | *             | Q1 2026            |
-| [v-mask-input](/components/mask-inputs/)                          | *             | Q2 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)   | Q1 2026       | Q3 2026            |
-| [v-month-picker](https://github.com/vuetifyjs/vuetify/pull/22534) | Q1 2026       | TBD                |
-| v-date-time-picker                                                | Q1 2026       | TBD                |
-| v-date-range-picker                                               | Q2 2026       | TBD                |
-| v-password-input                                                  | Q2 2026       | TBD                |
-| [v-editor](https://github.com/vuetifyjs/vuetify/pull/21653)       | TBD           | TBD                |
+| [validation rules](/features/rules)                               | *             | Q2 2026            |
+| [v-file-upload](/components/file-upload/)                         | *             | Q2 2026            |
+| [v-date-input](/components/date-inputs/)                          | *             | Q2 2026            |
+| [v-color-input](/components/color-inputs/)                        | *             | Q2 2026            |
+| [v-mask-input](/components/mask-inputs/)                          | *             | Q3 2026            |
+| [v-month-picker](https://github.com/vuetifyjs/vuetify/pull/22534) | Q2 2026       | TBD                |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)   | Q2 2026       | Q4 2026            |
+| v-date-time-picker                                                | Q3 2026       | TBD                |
+| v-date-range-picker                                               | Q3 2026       | TBD                |
+| v-password-input                                                  | Q3 2026       | TBD                |
 
 \* Already in Labs { .text-body-small }
 
@@ -51,12 +51,13 @@ The following is a list of all planned components for the year 2025.
 
 | Name                                                                 | Entering Labs | Production Release |
 |----------------------------------------------------------------------|---------------|--------------------|
-| [v-icon-btn](/components/icon-buttons/)                              | *             | Q1 2026            |
-| [v-video](/components/videos)                                        | *             | TBD                |
-| [v-pie](/components/pie-charts)                                      | *             | TBD                |
-| [v-command-palette](https://github.com/vuetifyjs/vuetify/pull/22403) | Q1 2026       | TBD                |
-| [v-avatar-group](https://github.com/vuetifyjs/vuetify/pull/22495)    | Q1 2026       | TBD                |
+| [v-icon-btn](/components/icon-buttons/)                              | *             | Q2 2026            |
+| [v-video](/components/videos)                                        | *             | Q3 2026            |
+| [v-pie](/components/pie-charts)                                      | *             | Q3 2026            |
+| [v-command-palette](https://github.com/vuetifyjs/vuetify/pull/22403) | *             | Q4 2026            |
+| [v-avatar-group](https://github.com/vuetifyjs/vuetify/pull/22495)    | Q1 2026       | Q3 2026            |
 | [v-heatmap](https://github.com/vuetifyjs/vuetify/pull/22535)         | Q2 2026       | TBD                |
+| [v-highlight](hhttps://github.com/vuetifyjs/vuetify/pull/22817)      | Q2 2026       | TBD                |
 | v-split-btn                                                          | Q2 2026       | TBD                |
 | v-feature-discovery                                                  | TBD           | TBD                |
 | v-drag (directive)                                                   | TBD           | TBD                |

@@ -83,6 +83,10 @@ export default {
     moreEvents: '{0} ďalších',
     today: 'Dnes',
   },
+  heatmap: {
+    less: 'Menej',
+    more: 'Viac',
+  },
   input: {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',

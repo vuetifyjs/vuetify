@@ -83,6 +83,10 @@ export default {
     moreEvents: '{بیشتر {0',
     today: 'امروز',
   },
+  heatmap: {
+    less: 'کمتر',
+    more: 'بیشتر',
+  },
   input: {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',

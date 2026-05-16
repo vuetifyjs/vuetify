@@ -83,6 +83,10 @@ export default {
     moreEvents: '{0} ακόμη',
     today: 'Σήμερα',
   },
+  heatmap: {
+    less: 'Λιγότερα',
+    more: 'Περισσότερα',
+  },
   input: {
     clear: 'Καθαρισμός {0}',
     prependAction: '{0} προσαρτημένη ενέργεια',

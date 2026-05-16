@@ -83,6 +83,10 @@ export default {
     moreEvents: '{0} زیاتر',
     today: 'ئەمڕو',
   },
+  heatmap: {
+    less: 'کەمتر',
+    more: 'زیاتر',
+  },
   input: {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',

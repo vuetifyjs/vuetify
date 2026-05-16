@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-command-palette` representing a single item in the command list.",
   "props": {
     "item": "The command palette item data object.",
     "index": "The index of the item within the command palette list."

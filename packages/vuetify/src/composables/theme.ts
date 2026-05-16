@@ -173,6 +173,7 @@ function genDefaults () {
           'theme-on-light': '#000',
           'elevation-overlay-color': 'black',
           'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '8%',
         },
       },
       dark: {
@@ -215,6 +216,7 @@ function genDefaults () {
           'theme-on-light': '#000',
           'elevation-overlay-color': 'white',
           'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '20%',
         },
       },
     },
