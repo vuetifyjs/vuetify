@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} више',
     today: 'Данас',
   },
+  heatmap: {
+    less: 'Мање',
+    more: 'Више',
+  },
   input: {
     clear: 'Очисти {0}',
     prependAction: '{0} претходна акција',

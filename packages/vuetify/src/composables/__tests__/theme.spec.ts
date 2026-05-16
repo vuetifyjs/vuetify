@@ -1,4 +1,4 @@
-/* eslint-disable vitest/no-commented-out-tests */
+/* eslint-disable @vitest/no-commented-out-tests */
 // Composables
 import { createTheme } from '../theme'
 

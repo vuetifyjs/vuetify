@@ -99,3 +99,14 @@
   .v-file-upload-item
     &:not(:first-child)
       margin-top: 8px
+
+  .v-file-upload__loader
+    border-radius: inherit
+    inset: 0
+    overflow: hidden
+    pointer-events: none
+    position: absolute
+    z-index: 1
+
+    > *
+      pointer-events: auto

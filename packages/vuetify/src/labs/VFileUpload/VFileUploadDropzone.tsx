@@ -55,6 +55,7 @@ export type VFileUploadDropzoneSlots = {
     props: { 'onClick:remove': () => void }
   }
   input: never
+  loader: never
 }
 
 export const makeVFileUploadDropzoneProps = propsFactory({
@@ -181,7 +182,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           class={[
             'v-file-upload-dropzone',
             {
-              'v-file-upload-dropzone--clickable': !hasBrowse && !hasFiles,
+              'v-file-upload-dropzone--clickable': !hasBrowse,
               'v-file-upload-dropzone--disabled': disabled,
               'v-file-upload-dropzone--dragging': isDragging.value,
               'v-file-upload-dropzone--has-files': hasFiles,
@@ -195,7 +196,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           onDragleave={ onDragleave }
           onDragover={ onDragover }
           onDrop={ onDrop }
-          onClick={ !hasBrowse && !hasFiles ? onClickBrowse : undefined }
+          onClick={ !hasBrowse && !(isInset && hasFiles) ? onClickBrowse : undefined }
         >
           { slots.default?.({
             isDragging: isDragging.value,
@@ -366,6 +367,8 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           />
 
           { slots.input?.() }
+
+          { slots.loader?.() }
         </VSheet>
       )
     })

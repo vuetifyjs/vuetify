@@ -436,7 +436,7 @@ describe('VNumberInput', () => {
       expect(vInput).toHaveClass('v-input--error')
     })
 
-    it('while typing', async () => {
+    it('on external change', async () => {
       const model = ref(0)
       const onChange = vi.fn()
       render(() => (

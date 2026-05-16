@@ -91,6 +91,66 @@ describe('VCommandPalette', () => {
 
       expect(screen.getByText('No data available')).toBeInTheDocument()
     })
+
+    it('should keep the overlay top position stable when filtered results change height', async () => {
+      const model = ref(true)
+      const items = Array.from({ length: 16 }, (_, index) => ({
+        title: `Command ${index}`,
+        subtitle: `Description ${index}`,
+        value: `command-${index}`,
+      }))
+
+      items.push({
+        title: 'Special Command',
+        subtitle: 'A unique entry for filtering',
+        value: 'special-command',
+      })
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ items } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content')
+      expect(content).toBeInTheDocument()
+
+      const initialTop = content!.getBoundingClientRect().top
+      const input = screen.getByRole('textbox')
+
+      await userEvent.type(input, 'special')
+      await wait(100)
+
+      const filteredTop = content!.getBoundingClientRect().top
+
+      expect(Math.abs(filteredTop - initialTop)).toBeLessThanOrEqual(1)
+    })
+
+    it('should keep command palette top offset when dialog margins are defined later', async () => {
+      const model = ref(true)
+      const style = document.createElement('style')
+      style.textContent = '.v-dialog > .v-overlay__content { margin: 24px; }'
+      document.head.appendChild(style)
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(50)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content') as HTMLElement
+      expect(content).toBeInTheDocument()
+
+      const sheet = content.querySelector('.v-sheet') as HTMLElement
+      expect(sheet).toBeInTheDocument()
+
+      // Even with dialog margin overrides, top offset is applied to the sheet
+      expect(sheet.getBoundingClientRect().top).toBeGreaterThan(50)
+
+      style.remove()
+    })
   })
 
   describe('Search & Filtering', () => {

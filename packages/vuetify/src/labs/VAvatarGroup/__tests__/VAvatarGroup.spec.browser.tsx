@@ -28,19 +28,27 @@ describe('VAvatarGroup', () => {
     expect(group).toHaveStyle('--v-avatar-group-gap: -16px')
   })
 
+  it('should show all items if they fit within limit', () => {
+    render(() => <VAvatarGroup items={ items } limit={ 5 } />)
+
+    const avatars = screen.getByCSS('.v-avatar-group__content').querySelectorAll('.v-avatar')
+    expect(avatars).toHaveLength(5)
+    expect(avatars[4]).toHaveTextContent('IJ')
+  })
+
   it('should limit visible items and show overflow', () => {
     render(() => <VAvatarGroup items={ items } limit={ 3 } />)
 
     const avatars = screen.getByCSS('.v-avatar-group__content').querySelectorAll('.v-avatar')
-    expect(avatars).toHaveLength(4) // 3 items + 1 overflow
-    expect(avatars[3]).toHaveTextContent('+2')
+    expect(avatars).toHaveLength(3) // 2 items + overflow
+    expect(avatars[2]).toHaveTextContent('+3')
   })
 
   it('should use custom overflowText', () => {
-    render(() => <VAvatarGroup items={ items } limit={ 2 } overflowText="and 3 more" />)
+    render(() => <VAvatarGroup items={ items } limit={ 2 } overflowText="and 4 more" />)
 
     const overflow = screen.getByCSS('.v-avatar-group__overflow')
-    expect(overflow).toHaveTextContent('and 3 more')
+    expect(overflow).toHaveTextContent('and 4 more')
   })
 
   it('should apply vertical class', () => {

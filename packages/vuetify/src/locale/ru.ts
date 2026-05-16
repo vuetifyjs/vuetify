@@ -69,6 +69,10 @@ export default {
     moreEvents: 'Еще {0}',
     today: 'Сегодня',
   },
+  heatmap: {
+    less: 'Меньше',
+    more: 'Больше',
+  },
   input: {
     clear: 'Очистить {0}',
     prependAction: '{0} предварительных действий',

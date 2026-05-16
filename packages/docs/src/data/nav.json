@@ -285,11 +285,23 @@
         "subfolder": "components"
       },
       {
+        "title": "heatmaps",
+        "subfolder": "components"
+      },
+      {
+        "title": "highlights",
+        "subfolder": "components"
+      },
+      {
         "title": "icon-buttons",
         "subfolder": "components"
       },
       {
         "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "progress",
         "subfolder": "components"
       },
       {

@@ -43,7 +43,6 @@ export type VSwitchSlots =
   }
 
 export const makeVSwitchProps = propsFactory({
-  indeterminate: Boolean,
   inset: Boolean,
   flat: Boolean,
   loading: {

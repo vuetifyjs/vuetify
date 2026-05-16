@@ -190,6 +190,7 @@ export function useFocusTrap (
 
   onScopeDispose(() => {
     registry.delete(trapId)
+    if (!IN_BROWSER) return
     clearTimeout(focusTrapSuppressionTimeout)
     document.removeEventListener('pointerdown', onPointerdown)
     document.removeEventListener('focusin', captureOnFocus)

@@ -21,21 +21,21 @@ Control text size, alignment, wrapping, overflow, transforms and more. By defaul
 
 | Class | Properties |
 | - | - |
-| **text-display-large** | font-size: 57px;<br>font-weight: 500;<br>line-height: 64px;<br>letter-spacing: -0.25px; |
-| **text-display-medium** | font-size: 45px;<br>font-weight: 500;<br>line-height: 52px;<br>letter-spacing: 0px; |
-| **text-display-small** | font-size: 36px;<br>font-weight: 500;<br>line-height: 44px;<br>letter-spacing: 0px; |
-| **text-headline-large** | font-size: 32px;<br>font-weight: 500;<br>line-height: 40px;<br>letter-spacing: 0px; |
-| **text-headline-medium** | font-size: 28px;<br>font-weight: 500;<br>line-height: 36px;<br>letter-spacing: 0px; |
-| **text-headline-small** | font-size: 24px;<br>font-weight: 500;<br>line-height: 32px;<br>letter-spacing: 0px; |
-| **text-title-large** | font-size: 22px;<br>font-weight: 400;<br>line-height: 30px;<br>letter-spacing: 0px; |
-| **text-title-medium** | font-size: 16px;<br>font-weight: 500;<br>line-height: 24px;<br>letter-spacing: 0.15px; |
-| **text-title-small** | font-size: 14px;<br>font-weight: 500;<br>line-height: 20px;<br>letter-spacing: 0.1px; |
-| **text-body-large** | font-size: 16px;<br>font-weight: 400;<br>line-height: 24px;<br>letter-spacing: 0.5px; |
-| **text-body-medium** | font-size: 14px;<br>font-weight: 400;<br>line-height: 20px;<br>letter-spacing: 0.25px; |
-| **text-body-small** | font-size: 12px;<br>font-weight: 400;<br>line-height: 16px;<br>letter-spacing: 0.4px; |
-| **text-label-large** | font-size: 14px;<br>font-weight: 500;<br>line-height: 20px;<br>letter-spacing: 0.1px; |
-| **text-label-medium** | font-size: 12px;<br>font-weight: 500;<br>line-height: 16px;<br>letter-spacing: 0.5px; |
-| **text-label-small** | font-size: 11px;<br>font-weight: 500;<br>line-height: 16px;<br>letter-spacing: 0.5px; |
+| **text-display-large** | font-size: 3.5625rem (57px);<br>font-weight: 400;<br>line-height: 4rem (64px);<br>letter-spacing: -0.015625rem (-0.25px); |
+| **text-display-medium** | font-size: 2.8125rem (45px);<br>font-weight: 400;<br>line-height: 3.25rem (52px);<br>letter-spacing: 0; |
+| **text-display-small** | font-size: 2.25rem (36px);<br>font-weight: 400;<br>line-height: 2.75rem (44px);<br>letter-spacing: 0; |
+| **text-headline-large** | font-size: 2rem (32px);<br>font-weight: 400;<br>line-height: 2.5rem (40px);<br>letter-spacing: 0; |
+| **text-headline-medium** | font-size: 1.75rem (28px);<br>font-weight: 400;<br>line-height: 2.25rem (36px);<br>letter-spacing: 0; |
+| **text-headline-small** | font-size: 1.5rem (24px);<br>font-weight: 400;<br>line-height: 2rem (32px);<br>letter-spacing: 0; |
+| **text-title-large** | font-size: 1.375rem (22px);<br>font-weight: 400;<br>line-height: 1.75rem (28px);<br>letter-spacing: 0; |
+| **text-title-medium** | font-size: 1rem (16px);<br>font-weight: 500;<br>line-height: 1.5rem (24px);<br>letter-spacing: 0.009375rem (0.15px); |
+| **text-title-small** | font-size: 0.875rem (14px);<br>font-weight: 500;<br>line-height: 1.25rem (20px);<br>letter-spacing: 0.00625rem (0.1px); |
+| **text-body-large** | font-size: 1rem (16px);<br>font-weight: 400;<br>line-height: 1.5rem (24px);<br>letter-spacing: 0.03125rem (0.5px); |
+| **text-body-medium** | font-size: 0.875rem (14px);<br>font-weight: 400;<br>line-height: 1.25rem (20px);<br>letter-spacing: 0.015625rem (0.25px); |
+| **text-body-small** | font-size: 0.75rem (12px);<br>font-weight: 400;<br>line-height: 1rem (16px);<br>letter-spacing: 0.025rem (0.4px); |
+| **text-label-large** | font-size: 0.875rem (14px);<br>font-weight: 500;<br>line-height: 1.25rem (20px);<br>letter-spacing: 0.00625rem (0.1px); |
+| **text-label-medium** | font-size: 0.75rem (12px);<br>font-weight: 500;<br>line-height: 1rem (16px);<br>letter-spacing: 0.03125rem (0.5px); |
+| **text-label-small** | font-size: 0.6875rem (11px);<br>font-weight: 500;<br>line-height: 1rem (16px);<br>letter-spacing: 0.03125rem (0.5px); |
 | **text-high-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)); |
 | **text-medium-emphasis** | color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)); |
 | **text-disabled** | color: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)); |

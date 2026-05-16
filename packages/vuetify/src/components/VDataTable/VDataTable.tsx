@@ -45,6 +45,9 @@ export type VDataTableSlotProps<T> = {
   pageCount: number
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
   setItemsPerPage: (value: number) => void
+  prevPage: () => void
+  nextPage: () => void
+  setPage: (value: number) => void
   someSelected: boolean
   allSelected: boolean
   isSelected: ReturnType<typeof provideSelection>['isSelected']
@@ -153,7 +156,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(() => props.search)
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
@@ -177,15 +180,20 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const {
       pageCount,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       paginatedItems,
     } = usePaginatedGroups({
       pageBy,
       sortedItems,
       paginate: items => {
         const itemsLength = computed(() => toValue(items).length)
-        const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
+        const {
+          startIndex, stopIndex, pageCount, setItemsPerPage, prevPage, nextPage, setPage,
+        } = providePagination({ page, itemsPerPage, itemsLength })
         const { paginatedItems } = usePaginatedItems({ items, startIndex, stopIndex, itemsPerPage })
-        return { paginatedItems, pageCount, setItemsPerPage }
+        return { paginatedItems, pageCount, setItemsPerPage, prevPage, nextPage, setPage }
       },
       group: items => useGroupedItems(items, groupBy, opened, () => !!slots['group-summary']),
     })
@@ -227,6 +235,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       pageCount: pageCount.value,
       toggleSort,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
       isSelected,
@@ -287,6 +298,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ paginatedItems.value }
+                        getMatches={ getMatches }
                         v-slots={ slots }
                       />
                     )}

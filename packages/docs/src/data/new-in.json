@@ -22,6 +22,10 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "examples": {
+      "slot-menu-footer": "3.12.0",
+      "misc-new-tab": "3.3.0"
     }
   },
   "VAvatar": {
@@ -32,6 +36,9 @@
     },
     "slots": {
       "badge": "4.0.0"
+    },
+    "examples": {
+      "prop-badge": "4.0.0"
     }
   },
   "VBadge": {
@@ -57,12 +64,20 @@
       "readonly": "3.6.0",
       "activeColor": "3.7.0",
       "spaced": "3.10.0"
+    },
+    "examples": {
+      "prop-spaced": "3.10.0",
+      "misc-readonly": "3.6.0"
     }
   },
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
       "transitionDuration": "3.10.0"
+    },
+    "examples": {
+      "misc-vertical": "3.9.0",
+      "prop-custom-transition": "3.10.0"
     }
   },
   "VChip": {
@@ -94,6 +109,9 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "examples": {
+      "slot-menu-header": "3.12.0"
     }
   },
   "VConfirmEdit": {
@@ -117,6 +135,11 @@
     },
     "slots": {
       "controls": "3.11.0"
+    },
+    "examples": {
+      "prop-landscape": "3.11.0",
+      "prop-events": "3.11.0",
+      "slots-controls": "3.11.0"
     }
   },
   "VDataIterator": {
@@ -133,10 +156,15 @@
       "headerProps": "3.5.0",
       "initialSortOrder": "3.11.0",
       "pageBy": "3.12.0",
+      "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
     },
     "slots": {
       "group-summary": "3.10.0"
+    },
+    "examples": {
+      "prop-sort-icon": "3.12.0",
+      "slot-group-summary": "3.10.0"
     }
   },
   "VDataTableServer": {
@@ -147,6 +175,7 @@
       "groupExpandIcon": "3.10.0",
       "initialSortOrder": "3.11.0",
       "pageBy": "3.12.0",
+      "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
     },
     "slots": {
@@ -179,11 +208,19 @@
       "gradient": "3.11.0",
       "contentOffset": "3.11.0",
       "variant": "3.11.0"
+    },
+    "examples": {
+      "prop-gradient": "3.11.0"
     }
   },
   "VExpansionPanels": {
     "props": {
-      "static": "3.4.0"
+      "static": "3.4.0",
+      "gap": "4.1.0",
+      "noDivider": "4.1.0"
+    },
+    "examples": {
+      "prop-rounded-gap": "4.1.0"
     }
   },
   "VField": {
@@ -200,7 +237,14 @@
   },
   "VFileUpload": {
     "props": {
-      "filterByType": "3.10.0"
+      "filterByType": "3.10.0",
+      "loading": "4.1.0"
+    },
+    "slots": {
+      "loader": "4.1.0"
+    },
+    "examples": {
+      "prop-loading": "4.1.0"
     }
   },
   "VIcon": {
@@ -216,6 +260,9 @@
       "crossorigin": "3.4.0",
       "absolute": "3.7.0",
       "imageClass": "3.12.0"
+    },
+    "examples": {
+      "prop-image-class": "3.12.0"
     }
   },
   "VInput": {
@@ -245,6 +292,9 @@
       "stickToTarget": "3.10.0",
       "submenu": "3.7.0",
       "viewportMargin": "3.11.0"
+    },
+    "examples": {
+      "prop-submenu": "3.7.0"
     }
   },
   "VNavigationDrawer": {
@@ -256,13 +306,21 @@
   },
   "VNumberInput": {
     "props": {
-      "autocomplete": "3.10.0"
+      "autocomplete": "3.10.0",
+      "grouping": "4.1.0",
+      "groupSeparator": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VOtpInput": {
     "props": {
       "density": "3.12.0",
       "masked": "3.12.0"
+    },
+    "examples": {
+      "prop-masked": "3.12.0"
     }
   },
   "VOverlay": {
@@ -282,13 +340,20 @@
     "props": {
       "reveal": "3.12.0",
       "rounded": "3.11.0"
+    },
+    "examples": {
+      "prop-reveal": "3.12.0"
     }
   },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
-      "chunkWidth": "3.10.0"
+      "chunkWidth": "3.10.0",
+      "variant": "4.1.0"
+    },
+    "examples": {
+      "prop-chunks": "3.10.0"
     }
   },
   "VRow": {
@@ -306,6 +371,16 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "examples": {
+      "prop-list-props": "3.5.0",
+      "slot-menu-header-and-footer": "3.12.0"
+    }
+  },
+  "VSelectionControl": {
+    "props": {
+      "indeterminate": "4.1.0",
+      "indeterminateIcon": "4.1.0"
     }
   },
   "VSlider": {
@@ -333,6 +408,14 @@
     "slots": {
       "header": "4.0.0",
       "prepend": "4.0.0"
+    },
+    "examples": {
+      "prop-prepend-icon": "4.0.0",
+      "prop-prepend-avatar": "4.0.0",
+      "prop-loading": "4.0.0",
+      "prop-timer-position": "4.0.0",
+      "slot-header": "4.0.0",
+      "slot-prepend": "4.0.0"
     }
   },
   "VSnackbarQueue": {
@@ -340,7 +423,12 @@
       "closable": "4.0.0",
       "closeText": "4.0.0",
       "gap": "4.0.0",
-      "totalVisible": "3.11.0"
+      "totalVisible": "4.0.0"
+    },
+    "examples": {
+      "misc-promise": "4.0.0",
+      "prop-total-visible": "3.11.0",
+      "prop-transition": "4.0.0"
     }
   },
   "VStepper": {
@@ -376,6 +464,10 @@
     "slots": {
       "next": "3.11.0",
       "prev": "3.11.0"
+    },
+    "examples": {
+      "prop-slider-transition": "3.11.0",
+      "prop-spaced": "3.10.0"
     }
   },
   "VTextarea": {
@@ -412,6 +504,12 @@
       "footer": "3.11.0",
       "no-data": "3.11.0",
       "toggle": "3.10.0"
+    },
+    "examples": {
+      "prop-items-registration": "3.11.0",
+      "slot-no-data": "3.11.0",
+      "slot-toggle": "3.10.0",
+      "misc-indent-lines": "3.9.0"
     }
   },
   "VTreeviewItem": {
@@ -427,6 +525,9 @@
     "props": {
       "collapsePosition": "3.11.0",
       "location": "3.12.0"
+    },
+    "examples": {
+      "prop-location": "3.12.0"
     }
   },
   "VTooltip": {
@@ -436,6 +537,9 @@
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0",
       "persistent": "3.11.3"
+    },
+    "examples": {
+      "prop-interactive": "3.8.0"
     }
   },
   "VVirtualScroll": {

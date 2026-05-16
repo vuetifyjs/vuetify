@@ -68,12 +68,6 @@ Use the **size** prop to control avatar dimensions and the **gap** prop to adjus
 
 <ExamplesExample file="v-avatar-group/prop-size" />
 
-#### Limit
-
-Use the **limit** prop to restrict the number of visible avatars. Overflow is indicated with a "+N" avatar.
-
-<ExamplesExample file="v-avatar-group/prop-limit" />
-
 #### Reverse
 
 The **reverse** prop displays avatars in reverse stacking order. When rendering individual avatars (instead of passing `items`), use `toReversed` to counter flexbox visual order.
