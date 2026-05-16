@@ -264,11 +264,9 @@ export const VTimePickerClock = genericComponent()({
 
       switch (e.key) {
         case 'ArrowUp':
-        case 'ArrowRight':
           newValue = findNextAllowed(current, 1)
           break
         case 'ArrowDown':
-        case 'ArrowLeft':
           newValue = findNextAllowed(current, -1)
           break
         case 'Enter':

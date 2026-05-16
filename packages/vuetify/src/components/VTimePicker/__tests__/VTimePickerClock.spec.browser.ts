@@ -9,8 +9,6 @@ describe('VTimePickerClock', () => {
     it.each([
       ['ArrowUp', 6],
       ['ArrowDown', 4],
-      ['ArrowRight', 6],
-      ['ArrowLeft', 4],
     ])('should update value on %s', async (key, expectedValue) => {
       const onInput = vi.fn()
       const onChange = vi.fn()

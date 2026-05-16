@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, onMounted, ref, toRef, watch } from 'vue'
 import { makeTimeValidationProps, useTimeValidation } from './useTimeValidation'
 import { convert12to24, convert24to12, pad } from './util'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -176,6 +176,16 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
       }
     }
 
+    function onClockKeydown (e: KeyboardEvent) {
+      if (props.disabled) return
+      if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault()
+        const modes: VTimePickerViewMode[] = ['hour', 'minute', ...(props.useSeconds ? ['second' as const] : [])]
+        const delta = e.key === 'ArrowRight' ? 1 : -1
+        viewMode.value = modes[clamp(modes.indexOf(viewMode.value) + delta, 0, modes.length - 1)]
+      }
+    }
+
     function onChange (value: number) {
       switch (viewMode.value || 'hour') {
         case 'hour':
@@ -282,6 +292,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 viewMode={ viewMode.value }
                 onChange={ onChange }
                 onInput={ onInput }
+                onKeydown={ onClockKeydown }
                 ref={ clockRef }
               />
             ),
