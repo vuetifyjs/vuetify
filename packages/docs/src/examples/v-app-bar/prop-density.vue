@@ -21,7 +21,7 @@
 
       <v-main>
         <v-container fluid>
-          <v-row dense>
+          <v-row density="comfortable">
             <v-col
               v-for="n in 8"
               :key="n"

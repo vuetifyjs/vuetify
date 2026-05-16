@@ -51,7 +51,7 @@
         </template>
 
         <tr v-if="!filtered.length">
-          <td class="text-center text-disabled text-body-2" colspan="4">
+          <td class="text-center text-disabled text-body-medium" colspan="4">
             {{ t('search.no-results') }}
           </td>
         </tr>

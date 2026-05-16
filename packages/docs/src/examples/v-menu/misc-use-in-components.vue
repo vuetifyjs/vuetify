@@ -7,7 +7,7 @@
     >
       <v-card height="200px">
         <v-card-title class="bg-blue d-flex align-center">
-          <span class="text-h5">Menu</span>
+          <span class="text-headline-small">Menu</span>
 
           <v-spacer></v-spacer>
 

@@ -69,6 +69,10 @@ export default {
     moreEvents: 'Още {0}',
     today: 'Днес',
   },
+  heatmap: {
+    less: 'По-малко',
+    more: 'Повече',
+  },
   input: {
     clear: 'Изчисти {0}',
     prependAction: '{0} предшестващо действие',
@@ -91,6 +95,7 @@ export default {
     hour: 'Час',
     minute: 'Минути',
     second: 'Секунди',
+    notAllowed: 'Стойността не е разрешена',
   },
   pagination: {
     ariaLabel: {

@@ -12,7 +12,7 @@ $slider-thumb-focus-opacity: var(--v-focus-opacity) !default;
 $slider-thumb-pressed-opacity: var(--v-pressed-opacity) !default;
 $slider-thumb-border-radius: 50% !default;
 $slider-thumb-focused-size-increase: 24px !default;
-$slider-thumb-label-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
+$slider-thumb-label-font-size: tools.map-deep-get(settings.$typography, 'label-small', 'size') !default;
 $slider-thumb-label-border-radius: 4px !default;
 $slider-thumb-label-height: 25px !default;
 $slider-thumb-label-min-width: 35px !default;

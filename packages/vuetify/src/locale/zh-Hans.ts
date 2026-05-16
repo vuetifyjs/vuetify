@@ -69,6 +69,10 @@ export default {
     moreEvents: '还有 {0} 项',
     today: '今天',
   },
+  heatmap: {
+    less: '少',
+    more: '多',
+  },
   input: {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
@@ -91,6 +95,7 @@ export default {
     hour: '小时',
     minute: '分钟',
     second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {

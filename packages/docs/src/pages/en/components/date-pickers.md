@@ -20,8 +20,6 @@ features:
 
 <PageFeatures />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.
@@ -60,7 +58,7 @@ The `v-date-picker` component supports multiple props for configuring dates that
 
 #### Elevation
 
-The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
+The `v-date-picker` component supports elevation up to a maximum value of 5. For more information on elevations, visit the official [Material Design elevations](https://m3.material.io/styles/elevation) page.
 
 <ExamplesExample file="v-date-picker/prop-elevation" />
 

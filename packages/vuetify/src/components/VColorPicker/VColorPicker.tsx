@@ -35,6 +35,7 @@ export const makeVColorPickerProps = propsFactory({
   hideCanvas: Boolean,
   hideSliders: Boolean,
   hideInputs: Boolean,
+  hideInputLabels: Boolean,
   mode: {
     type: String as PropType<keyof typeof modes>,
     default: 'rgba',
@@ -126,9 +127,9 @@ export const VColorPicker = defineComponent({
 
     provideDefaults({
       VSlider: {
-        color: undefined,
-        trackColor: undefined,
-        trackFillColor: undefined,
+        color: null,
+        trackColor: null,
+        trackFillColor: null,
       },
     })
 
@@ -191,6 +192,7 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
                         readonly={ props.readonly }
+                        hideInputLabels={ props.hideInputLabels }
                       />
                     )}
                   </div>

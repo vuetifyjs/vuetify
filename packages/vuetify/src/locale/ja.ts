@@ -69,6 +69,10 @@ export default {
     moreEvents: 'さらに{0}',
     today: '今日',
   },
+  heatmap: {
+    less: '少ない',
+    more: '多い',
+  },
   input: {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',
@@ -91,6 +95,7 @@ export default {
     hour: '時',
     minute: '分',
     second: '秒',
+    notAllowed: '値は許可されていません',
   },
   pagination: {
     ariaLabel: {

@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandaag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
@@ -91,6 +95,7 @@ export default {
     hour: 'Uur',
     minute: 'Minuten',
     second: 'Seconden',
+    notAllowed: 'Waarde is niet toegestaan',
   },
   pagination: {
     ariaLabel: {

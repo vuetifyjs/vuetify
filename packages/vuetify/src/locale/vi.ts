@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} nữa',
     today: 'Hôm nay',
   },
+  heatmap: {
+    less: 'Ít hơn',
+    more: 'Nhiều hơn',
+  },
   input: {
     clear: 'Xóa {0}',
     prependAction: 'Hành động trước {0}',
@@ -91,6 +95,7 @@ export default {
     hour: 'Giờ',
     minute: 'Phút',
     second: 'Giây',
+    notAllowed: 'Giá trị không được phép',
   },
   pagination: {
     ariaLabel: {

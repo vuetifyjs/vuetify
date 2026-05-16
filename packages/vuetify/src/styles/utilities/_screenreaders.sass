@@ -5,7 +5,7 @@
 @use '../tools'
 
 @if (settings.$utilities != false and map.get(settings.$misc, 'sr-only') != false and list.length(settings.$utilities) > 0)
-  @include tools.layer('utilities')
+  @include tools.layer('utilities.helpers')
     .d-sr-only,
     .d-sr-only-focusable:not(:focus)
       border: 0 !important

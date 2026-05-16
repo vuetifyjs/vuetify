@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} ទៀត',
     today: 'ថ្ងៃនេះ',
   },
+  heatmap: {
+    less: 'តិច',
+    more: 'ច្រើន',
+  },
   input: {
     clear: 'សម្អាត {0}',
     prependAction: '{0} សម្អាតសកម្ម',
@@ -91,6 +95,7 @@ export default {
     hour: 'ម៉ោង',
     minute: 'នាទី',
     second: 'វិនាទី',
+    notAllowed: 'តម្លៃមិនត្រូវបានអនុញ្ញាតទេ',
   },
   pagination: {
     ariaLabel: {

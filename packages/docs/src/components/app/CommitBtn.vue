@@ -4,7 +4,7 @@
     :prepend-icon="commits.latest ? 'mdi-source-commit' : undefined"
     :readonly="!commits.latest"
     :text="commits.latest?.sha.slice(0, 7)"
-    class="text-caption"
+    class="text-body-small"
     rel="noopener noreferrer"
     size="small"
     target="_blank"

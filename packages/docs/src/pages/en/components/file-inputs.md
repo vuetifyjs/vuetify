@@ -22,7 +22,7 @@ The `v-file-input` component is a specialized input that provides a clean interf
 
 ## Usage
 
-At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields).
+At its core, `v-file-input` is built on the same [VField](/components/text-fields) and VInput primitives as [v-text-field](/components/text-fields), giving it a consistent look and feel without directly extending it.
 
 <ExamplesUsage name="v-file-input" />
 

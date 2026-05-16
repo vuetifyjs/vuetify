@@ -112,8 +112,8 @@ describe('VSlider', () => {
     await userEvent.click(screen.getByCSS('.mdi-magnify-minus-outline'))
     await userEvent.click(screen.getByCSS('.mdi-magnify-plus-outline'))
 
-    expect(onClickPrepend).toHaveBeenCalledOnce()
-    expect(onClickAppend).toHaveBeenCalledOnce()
+    expect(onClickPrepend).toHaveBeenCalledTimes(1)
+    expect(onClickAppend).toHaveBeenCalledTimes(1)
   })
 
   it('should emit start and end events', async () => {
@@ -131,10 +131,10 @@ describe('VSlider', () => {
       />
     ))
 
-    await commands.drag([15, 15], [250, 15])
+    await commands.drag([8, 16], [250, 16])
 
     expect(onStart).toHaveBeenCalledExactlyOnceWith(0)
-    expect(onEnd).toHaveBeenCalledOnce()
+    expect(onEnd).toHaveBeenCalledTimes(1)
     expect(model.value).toBeCloseTo(50, 0)
   })
 

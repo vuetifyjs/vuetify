@@ -91,6 +91,66 @@ describe('VCommandPalette', () => {
 
       expect(screen.getByText('No data available')).toBeInTheDocument()
     })
+
+    it('should keep the overlay top position stable when filtered results change height', async () => {
+      const model = ref(true)
+      const items = Array.from({ length: 16 }, (_, index) => ({
+        title: `Command ${index}`,
+        subtitle: `Description ${index}`,
+        value: `command-${index}`,
+      }))
+
+      items.push({
+        title: 'Special Command',
+        subtitle: 'A unique entry for filtering',
+        value: 'special-command',
+      })
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ items } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content')
+      expect(content).toBeInTheDocument()
+
+      const initialTop = content!.getBoundingClientRect().top
+      const input = screen.getByRole('textbox')
+
+      await userEvent.type(input, 'special')
+      await wait(100)
+
+      const filteredTop = content!.getBoundingClientRect().top
+
+      expect(Math.abs(filteredTop - initialTop)).toBeLessThanOrEqual(1)
+    })
+
+    it('should keep command palette top offset when dialog margins are defined later', async () => {
+      const model = ref(true)
+      const style = document.createElement('style')
+      style.textContent = '.v-dialog > .v-overlay__content { margin: 24px; }'
+      document.head.appendChild(style)
+
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(50)
+
+      const content = document.querySelector('.v-command-palette > .v-overlay__content') as HTMLElement
+      expect(content).toBeInTheDocument()
+
+      const sheet = content.querySelector('.v-sheet') as HTMLElement
+      expect(sheet).toBeInTheDocument()
+
+      // Even with dialog margin overrides, top offset is applied to the sheet
+      expect(sheet.getBoundingClientRect().top).toBeGreaterThan(50)
+
+      style.remove()
+    })
   })
 
   describe('Search & Filtering', () => {
@@ -246,6 +306,7 @@ describe('VCommandPalette', () => {
         expect.objectContaining({ title: 'Folder', value: 'folder' }),
         expect.any(MouseEvent)
       )
+      expect(model.value).toBe(false)
     })
 
     it('should call item onClick handler when executed', async () => {
@@ -270,6 +331,82 @@ describe('VCommandPalette', () => {
       await wait(100)
 
       expect(handleClick).toHaveBeenCalled()
+    })
+
+    it('should keep palette open when closeOnSelect is false', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          closeOnSelect={ false }
+          items={ testItems }
+          onClick:item={ onClickItem }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'File', value: 'file' }),
+        expect.any(KeyboardEvent)
+      )
+      expect(model.value).toBe(true)
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('should support drill-in by preventing close in before-select', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      const items = ref([
+        { title: 'Files', value: 'files' },
+        { title: 'Settings', value: 'settings' },
+      ])
+
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={ items.value }
+          onClick:item={ onClickItem }
+          onBeforeSelect={ (payload: any) => {
+            const { item, preventDefault } = payload
+            if ('value' in item && item.value === 'files') {
+              preventDefault()
+              items.value = [
+                { title: 'New File', value: 'new-file' },
+                { title: 'Open File', value: 'open-file' },
+              ]
+            }
+          }}
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      await wait(100)
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(model.value).toBe(true)
+      expect(screen.getByText('New File')).toBeInTheDocument()
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Files', value: 'files' }),
+        expect.any(KeyboardEvent)
+      )
+
+      await userEvent.keyboard('{Enter}')
+      await wait(100)
+
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'New File', value: 'new-file' }),
+        expect.any(KeyboardEvent)
+      )
+      expect(model.value).toBe(false)
     })
   })
 

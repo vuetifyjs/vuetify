@@ -8,7 +8,16 @@
 @use './pointer-events'
 @use './screenreaders'
 
-@include tools.layer('utilities')
+@include tools.layer('utilities.typography')
+  $typography: map.get(settings.$utilities, 'typography')
+  @if not ($typography == null or $typography == false)
+    @each $breakpoint in map.keys(settings.$grid-breakpoints)
+      @include tools.media-breakpoint-up($breakpoint)
+        $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
+        @if map.get($typography, responsive) or $infix == ""
+          @include tools.generate-utility($typography, $infix, 'bidi')
+
+@include tools.layer('utilities.helpers')
   @each $breakpoint in map.keys(settings.$grid-breakpoints)
     // Generate media query if needed
     @include tools.media-breakpoint-up($breakpoint)
@@ -16,17 +25,18 @@
 
       // Loop over each utility property
       @each $key, $utility in settings.$utilities
-        // The utility can be disabled with `false`, thus check if the utility is a map first
-        // Only proceed if responsive media queries are enabled or if it's the base media query
-        @if string.slice($key, -4) == ':ltr'
-          @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            @include tools.generate-utility($utility, $infix, 'ltr')
-        @else if string.slice($key, -4) == ':rtl'
-          @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            @include tools.generate-utility($utility, $infix, 'rtl')
-        @else
-          @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
-            @include tools.generate-utility($utility, $infix, 'bidi')
+        @if not ($key == 'typography')
+          // The utility can be disabled with `false`, thus check if the utility is a map first
+          // Only proceed if responsive media queries are enabled or if it's the base media query
+          @if string.slice($key, -4) == ':ltr'
+            @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+              @include tools.generate-utility($utility, $infix, 'ltr')
+          @else if string.slice($key, -4) == ':rtl'
+            @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+              @include tools.generate-utility($utility, $infix, 'rtl')
+          @else
+            @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+              @include tools.generate-utility($utility, $infix, 'bidi')
 
   // Print utilities
   @media print

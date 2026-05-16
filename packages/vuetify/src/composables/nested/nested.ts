@@ -40,7 +40,7 @@ import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategy } from './selectStrategies'
 import type { ListItem } from '@/composables/list-items'
-import type { EventProp } from '@/util'
+import type { EventProp, ValueComparator } from '@/util'
 
 export type ActiveStrategyProp =
   | 'single-leaf'
@@ -153,10 +153,12 @@ export const useNested = (
     items,
     returnObject,
     scrollToActive,
+    valueComparator,
   }: {
     items: Ref<ListItem[]>
     returnObject: MaybeRefOrGetter<boolean>
     scrollToActive: MaybeRefOrGetter<boolean>
+    valueComparator?: MaybeRefOrGetter<ValueComparator | undefined>
   },
 ) => {
   let isUnmounted = false
@@ -212,18 +214,49 @@ export const useNested = (
     }
   })
 
+  const flatItems = computed(() => {
+    const flat: ListItem[] = []
+    const stack = [...items.value]
+    while (stack.length) {
+      const item = stack.pop()!
+      flat.push(item)
+      if (item.children) stack.push(...item.children)
+    }
+    return flat
+  })
+
+  function resolveValue (value: unknown): unknown {
+    const comparator = toValue(valueComparator)
+    if (!comparator) return value
+    const _returnObject = toValue(returnObject)
+    for (const item of flatItems.value) {
+      const itemVal = _returnObject ? toRaw(item.raw) : item.value
+      if (comparator(value, itemVal)) return itemVal
+    }
+    return value
+  }
+
   const activated = useProxiedModel(
     props,
     'activated',
     props.activated,
-    v => activeStrategy.value.in(v, children.value, parents.value),
+    v => activeStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+    ),
     v => activeStrategy.value.out(v, children.value, parents.value),
   )
   const selected = useProxiedModel(
     props,
     'selected',
     props.selected,
-    v => selectStrategy.value.in(v, children.value, parents.value, disabled.value),
+    v => selectStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+      disabled.value,
+    ),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 

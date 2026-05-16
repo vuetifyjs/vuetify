@@ -83,7 +83,8 @@
   @return $result
 
 @function theme-color($color, $opacity: 1)
-  $color: rgba(var(--v-theme-#{$color}), $opacity)
+  $color: rgb(var(--v-theme-#{$color}))
+  $color: color-mix(in srgb, $color calc($opacity * 100%), transparent)
   @return $color
 
 @function roundEven($val)

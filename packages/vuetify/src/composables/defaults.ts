@@ -75,7 +75,7 @@ export function provideDefaults (
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties)
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
       : properties
   }) as ComputedRef<DefaultsInstance>
 

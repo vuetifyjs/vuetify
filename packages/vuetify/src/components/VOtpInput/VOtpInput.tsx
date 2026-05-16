@@ -41,6 +41,7 @@ export const makeVOtpInputProps = propsFactory({
     type: [Number, String],
     default: 6,
   },
+  masked: Boolean,
   modelValue: {
     type: [Number, String],
     default: undefined,
@@ -151,17 +152,66 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       onInput()
     }
 
-    function onKeydown (e: KeyboardEvent) {
+    function onBeforeinput (e: InputEvent) {
+      const isBackwardDelete = [
+        'deleteContentBackward',
+        'deleteWordBackward',
+        'deleteSoftLineBackward',
+        'deleteHardLineBackward',
+      ].includes(e.inputType)
+
+      const isForwardDelete = [
+        'deleteContentForward',
+        'deleteWordForward',
+        'deleteSoftLineForward',
+        'deleteHardLineForward',
+      ].includes(e.inputType)
+
+      if (!isBackwardDelete && !isForwardDelete) return
+
+      e.preventDefault()
+
       const array = model.value.slice()
       const index = focusIndex.value
+      let target: 'prev' | null = null
+
+      if (isBackwardDelete) {
+        if (!array[index]) {
+          if (index > 0) {
+            array[index - 1] = ''
+            model.value = array
+            target = 'prev'
+          }
+        } else {
+          const isLastFilledField = !array.slice(index + 1).some(v => v)
+          for (let i = index; i < length.value - 1; i++) {
+            array[i] = array[i + 1]
+          }
+          array[length.value - 1] = ''
+          model.value = array
+          if (!isLastFilledField && index > 0) target = 'prev'
+        }
+      } else {
+        for (let i = index; i < length.value - 1; i++) {
+          array[i] = array[i + 1]
+        }
+        array[length.value - 1] = ''
+        model.value = array
+      }
+
+      requestAnimationFrame(() => {
+        if (target != null) {
+          focusChild(contentRef.value!, target)
+        } else {
+          inputRef.value[index]?.select()
+        }
+      })
+    }
+
+    function onKeydown (e: KeyboardEvent) {
       let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
 
-      if (![
-        'ArrowLeft',
-        'ArrowRight',
-        'Backspace',
-        'Delete',
-      ].includes(e.key)) return
+      if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return
 
       e.preventDefault()
 
@@ -169,18 +219,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         target = 'prev'
       } else if (e.key === 'ArrowRight') {
         target = 'next'
-      } else if (['Backspace', 'Delete'].includes(e.key)) {
-        array[focusIndex.value] = ''
-
-        model.value = array
-
-        if (focusIndex.value > 0 && e.key === 'Backspace') {
-          target = 'prev'
-        } else {
-          requestAnimationFrame(() => {
-            inputRef.value[index]?.select()
-          })
-        }
       }
 
       requestAnimationFrame(() => {
@@ -303,9 +341,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                           min={ props.type === 'number' ? 0 : undefined }
                           maxlength={ i === 0 ? length.value : '1' }
                           placeholder={ props.placeholder }
-                          type={ props.type === 'number' ? 'text' : props.type }
+                          type={ props.masked ? 'password' : props.type === 'number' ? 'text' : props.type }
                           value={ model.value[i] }
                           onInput={ onInput }
+                          onBeforeinput={ onBeforeinput }
                           onFocus={ e => onFocus(e, i) }
                           onBlur={ onBlur }
                           onKeydown={ onKeydown }

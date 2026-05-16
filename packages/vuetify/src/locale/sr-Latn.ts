@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} više',
     today: 'Danas',
   },
+  heatmap: {
+    less: 'Manje',
+    more: 'Više',
+  },
   input: {
     clear: 'Obriši {0}',
     prependAction: '{0} prethodna radnja',
@@ -91,6 +95,7 @@ export default {
     hour: 'Sat',
     minute: 'Minute',
     second: 'Sekunde',
+    notAllowed: 'Vrednost nije dozvoljena',
   },
   pagination: {
     ariaLabel: {

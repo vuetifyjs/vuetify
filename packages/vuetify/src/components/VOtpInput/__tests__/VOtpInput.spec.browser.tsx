@@ -1,7 +1,7 @@
 import { VOtpInput } from '../VOtpInput'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent } from '@test'
+import { commands, render, screen, showcase, userEvent, waitAnimationFrame } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -81,12 +81,98 @@ describe('VOtpInput', () => {
 
     await userEvent.keyboard('{Backspace}')
     expect(inputs[3]).toHaveFocus()
-    expect(inputs[3]).toHaveValue('4')
+    expect(inputs[3]).toHaveValue('')
 
     await userEvent.keyboard('{Backspace}')
     expect(inputs[2]).toHaveFocus()
-    expect(inputs[2]).toHaveValue('3')
+    expect(inputs[2]).toHaveValue('')
   })
+
+  it('removes value and stays on current input when using backspace on last filled field', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+
+    await userEvent.click(inputs[0])
+    await userEvent.keyboard('12345')
+    await userEvent.click(inputs[4])
+
+    expect(inputs[4]).toHaveFocus()
+    expect(inputs[4]).toHaveValue('5')
+
+    await userEvent.keyboard('{Backspace}')
+    expect(inputs[4]).toHaveFocus()
+    expect(inputs[4]).toHaveValue('')
+  })
+
+  it('shifts values left and goes back when using backspace on a non-last filled field', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+
+    await userEvent.click(inputs[0])
+    await userEvent.keyboard('12345')
+    await userEvent.click(inputs[2])
+    expect(inputs[2]).toHaveFocus()
+    expect(inputs[2]).toHaveValue('3')
+
+    await userEvent.keyboard('{Backspace}')
+    expect(inputs[1]).toHaveFocus()
+    expect(inputs[2]).toHaveValue('4')
+    expect(inputs[3]).toHaveValue('5')
+    expect(inputs[4]).toHaveValue('')
+  })
+
+  it('shifts values left when using backspace on the first field', async () => {
+    render(() => (<VOtpInput />))
+    const inputs = screen.getAllByCSS('.v-otp-input input')
+
+    await userEvent.click(inputs[0])
+    await userEvent.keyboard('12345')
+    await userEvent.click(inputs[0])
+    expect(inputs[0]).toHaveFocus()
+    expect(inputs[0]).toHaveValue('1')
+
+    await userEvent.keyboard('{Backspace}')
+    expect(inputs[0]).toHaveFocus()
+    expect(inputs[0]).toHaveValue('2')
+    expect(inputs[1]).toHaveValue('3')
+    expect(inputs[4]).toHaveValue('')
+  })
+
+  it.each(['deleteWordBackward', 'deleteSoftLineBackward', 'deleteHardLineBackward'])(
+    'removes value and goes back on %s',
+    async inputType => {
+      render(() => (<VOtpInput />))
+      const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
+
+      await userEvent.click(inputs[0])
+      await userEvent.keyboard('1234')
+      expect(inputs[4]).toHaveFocus()
+
+      inputs[4].dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
+      await waitAnimationFrame()
+      expect(inputs[3]).toHaveFocus()
+      expect(inputs[3]).toHaveValue('')
+    }
+  )
+
+  it.each(['deleteWordForward', 'deleteSoftLineForward', 'deleteHardLineForward'])(
+    'shifts values left and stays on %s',
+    async inputType => {
+      render(() => (<VOtpInput />))
+      const inputs = screen.getAllByCSS('.v-otp-input input:not([type="hidden"])')
+
+      await userEvent.click(inputs[0])
+      await userEvent.keyboard('1234')
+      await userEvent.keyboard('{ArrowLeft}{ArrowLeft}')
+      expect(inputs[2]).toHaveFocus()
+
+      inputs[2].dispatchEvent(new InputEvent('beforeinput', { inputType, cancelable: true, bubbles: true }))
+      await waitAnimationFrame()
+      expect(inputs[2]).toHaveFocus()
+      expect(inputs[2]).toHaveValue('4')
+      expect(inputs[3]).toHaveValue('')
+    }
+  )
 
   it('emits finish event when all inputs are filled', async () => {
     const onFinish = vi.fn()

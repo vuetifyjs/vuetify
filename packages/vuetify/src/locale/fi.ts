@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} lisää',
     today: 'Tänään',
   },
+  heatmap: {
+    less: 'Vähemmän',
+    more: 'Enemmän',
+  },
   input: {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',
@@ -91,6 +95,7 @@ export default {
     hour: 'Tunti',
     minute: 'Minuutit',
     second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {

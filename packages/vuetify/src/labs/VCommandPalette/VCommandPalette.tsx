@@ -3,7 +3,7 @@ import './VCommandPalette.scss'
 
 // Components
 import { VCommandPaletteSymbol } from './shared'
-import { VCommandPaletteItemComponent } from './VCommandPaletteItem'
+import { VCommandPaletteItem } from './VCommandPaletteItem'
 import { VDialog } from '@/components/VDialog'
 import { makeVDialogProps } from '@/components/VDialog/VDialog'
 import { VList } from '@/components/VList'
@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -45,6 +45,14 @@ export const makeVCommandPaletteProps = propsFactory({
     default: '$search',
   },
   hotkey: String,
+  offsetTop: {
+    type: [Number, String],
+    default: '15vh',
+  },
+  closeOnSelect: {
+    type: Boolean,
+    default: true,
+  },
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
@@ -53,7 +61,12 @@ export const makeVCommandPaletteProps = propsFactory({
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
   ...makeDensityProps(),
-  ...omit(makeVDialogProps({ maxWidth: 500 }), ['modelValue']),
+  ...omit(makeVDialogProps({
+    location: 'top center' as const,
+    maxWidth: 500,
+    origin: 'top center' as const,
+    viewportMargin: 16,
+  }), ['modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
@@ -81,6 +94,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     'update:modelValue': (value: boolean) => true,
     'update:search': (value: string) => true,
     'click:item': (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) => true,
+    'before-select': (payload: {
+      item: VCommandPaletteItemType
+      event: MouseEvent | KeyboardEvent
+      preventDefault: () => void
+    }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -112,14 +130,33 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       }))
     })
 
+    function executeItem (item: VCommandPaletteItemType, event: MouseEvent | KeyboardEvent) {
+      if ('onClick' in item && item.onClick) {
+        item.onClick(event, item.value)
+      }
+
+      emit('click:item', item, event)
+
+      if (!isActionItem(item) || !props.closeOnSelect) return
+
+      let shouldClose = true
+      emit('before-select', {
+        item,
+        event,
+        preventDefault: () => {
+          shouldClose = false
+        },
+      })
+
+      if (shouldClose) {
+        isOpen.value = false
+      }
+    }
+
     const navigation = useCommandPaletteNavigation({
       filteredItems,
       onItemClick: (item, event) => {
-        if ('onClick' in item && item.onClick) {
-          item.onClick(event, item.value)
-        }
-        emit('click:item', item, event)
-        isOpen.value = false
+        executeItem(item, event)
       },
     })
 
@@ -148,11 +185,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
           if (isActionItem(item) && item.hotkey) {
             const unsubscribe = useHotkey(item.hotkey, event => {
               event.preventDefault()
-              if (item.onClick) {
-                item.onClick(event as KeyboardEvent, item.value)
-              }
-              emit('click:item', item, event as KeyboardEvent)
-              isOpen.value = false
+              executeItem(item, event as KeyboardEvent)
             }, { inputs: true })
             hotkeyUnsubscribes.push(unsubscribe)
           }
@@ -248,8 +281,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return (
         <VDialog
           ref={ dialogRef }
-          class="v-command-palette"
           v-model={ isOpen.value }
+          class="v-command-palette"
+          style={{
+            '--v-command-palette-top-offset': convertToUnit(props.offsetTop),
+          }}
           scrollable
           { ...dialogProps }
         >
@@ -304,7 +340,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                         subheader: slots['list.subheader'],
                         item: ({ props: itemProps }: { props: any }) => (
                           slots.item?.({ item: itemProps, index: itemProps.index }) ?? (
-                            <VCommandPaletteItemComponent
+                            <VCommandPaletteItem
                               key={ `item-${itemProps.index}` }
                               item={ itemProps }
                               index={ itemProps.index }

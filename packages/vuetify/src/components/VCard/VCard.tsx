@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -110,7 +110,7 @@ export const VCard = genericComponent<VCardSlots>()({
     const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const link = useLink(props, attrs)
     const loadingColor = shallowRef<string | undefined>(undefined)
 
@@ -165,9 +165,13 @@ export const VCard = genericComponent<VCardSlots>()({
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            {
+              '--v-card-height': convertToUnit(props.height),
+            },
+            roundedStyles.value,
             props.style,
           ]}
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && link.navigate.value }
           v-ripple={ isClickable && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >

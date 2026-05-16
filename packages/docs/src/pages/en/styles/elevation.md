@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Elevation
   description: Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.
@@ -13,37 +14,20 @@ features:
 
 # Elevation
 
-The elevation helpers control the relative depth between surfaces along the **z-axis**.
+The elevation helpers control the relative depth between surfaces along the **z-axis**. Following Material Design 3 guidelines, Vuetify uses 6 elevation levels (0-5). Elevation values are measured in **dp** (density-independent pixels), a unit that ensures consistent sizing across different screen densities.
 
 <PageFeatures />
 
-| Class | Properties |
-| - | - |
-| **elevation-0** | elevation: 0px; |
-| **elevation-1** | elevation: 1px; |
-| **elevation-2** | elevation: 2px; |
-| **elevation-3** | elevation: 3px; |
-| **elevation-4** | elevation: 4px; |
-| **elevation-5** | elevation: 5px; |
-| **elevation-6** | elevation: 6px; |
-| **elevation-7** | elevation: 7px; |
-| **elevation-8** | elevation: 8px; |
-| **elevation-9** | elevation: 9px; |
-| **elevation-10** | elevation: 10px; |
-| **elevation-11** | elevation: 11px; |
-| **elevation-12** | elevation: 12px; |
-| **elevation-13** | elevation: 13px; |
-| **elevation-14** | elevation: 14px; |
-| **elevation-15** | elevation: 15px; |
-| **elevation-16** | elevation: 16px; |
-| **elevation-17** | elevation: 17px; |
-| **elevation-18** | elevation: 18px; |
-| **elevation-19** | elevation: 19px; |
-| **elevation-20** | elevation: 20px; |
-| **elevation-21** | elevation: 21px; |
-| **elevation-22** | elevation: 22px; |
-| **elevation-23** | elevation: 23px; |
-| **elevation-24** | elevation: 24px; { style="max-height: 420px;" fixed-header }|
+| Class           | Level (dp) | Usage                                 |
+|-----------------|------------|---------------------------------------|
+| **elevation-0** | 0dp        | No shadow - flat surfaces             |
+| **elevation-1** | 1dp        | Cards, buttons (elevated)             |
+| **elevation-2** | 3dp        | Menus, rich tooltip, floating app bar |
+| **elevation-3** | 6dp        | Dialogs, snackbars, FABs              |
+| **elevation-4** | 8dp        | Dragged elements                      |
+| **elevation-5** | 12dp       |                                       |
+
+In MD3, elevation changes are commonly used to indicate interactive states. For example, a card at rest might use `elevation-1`, rising to `elevation-2` on hover and `elevation-3` when pressed or dragged.
 
 <PromotedEntry />
 
@@ -51,14 +35,38 @@ The elevation helpers control the relative depth between surfaces along the **z-
 
 The `elevation` helper classes allow you to assign a custom **z-depth** to any element.
 
-<ExamplesExample file="elevation/usage" />
+<ExamplesExample file="elevation/usage" new-in="4.1.0" />
 
 ## Examples
 
 ### Props
 
-#### Dynamic elevation
+#### Hover elevation
 
-Numerous components utilize the **elevatable** mixin and are given an **elevation** prop. For components that are not supported, you can dynamically change the class
+Use the `hover-elevation` prop to change a component's elevation on hover. For regular HTML elements or components without `elevation` prop, the `hover-elevation-*` utility classes helps achieve the same effect.
 
-<ExamplesExample file="elevation/prop-dynamic" />
+::: tip
+
+The `hover-elevation-*` utility classes do not include a transition. To animate the change, add your own transition styles or use a CSS framework like Tailwind. VCard applies the following transition by default:
+
+```css
+transition: 0.28s box-shadow cubic-bezier(0.4, 0, 0.2, 1); /* simplified */
+```
+
+:::
+
+<ExamplesExample file="elevation/prop-dynamic" new-in="4.1.0" />
+
+### Misc
+
+#### Elevation overlay
+
+The `elevation-overlay` class adds a translucent layer whose opacity scales with the elevation level. This is especially useful in **dark themes** where shadows are less visible — the overlay provides a visual cue for surface depth.
+
+<ExamplesExample file="elevation/misc-elevation-overlay" />
+
+#### CSS custom properties
+
+You can customize `--v-shadow-color` for each theme or use it directly on the component to change the shadow color (expects an RGB value) and `--v-elevation-overlay-color` to customize the overlay tint.
+
+<ExamplesExample file="elevation/misc-css-custom-properties" />

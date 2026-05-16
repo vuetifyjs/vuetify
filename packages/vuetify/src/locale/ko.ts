@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} 더보기',
     today: '오늘',
   },
+  heatmap: {
+    less: '적음',
+    more: '많음',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
@@ -91,6 +95,7 @@ export default {
     hour: '시간',
     minute: '분',
     second: '초',
+    notAllowed: '값이 허용되지 않습니다',
   },
   pagination: {
     ariaLabel: {

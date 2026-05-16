@@ -3,17 +3,15 @@ import { makeElevationProps, useElevation } from '../elevation'
 
 // Utilities
 
-// Utilities
-
 describe('elevation.ts', () => {
   it('should have the correct class', () => {
     const values = [
       [1, ['elevation-1']],
       [undefined, []],
       [null, []],
-      [20, ['elevation-20']],
+      [5, ['elevation-5']],
       [0, ['elevation-0']],
-      ['14', ['elevation-14']],
+      ['3', ['elevation-3']],
     ] as const
 
     for (const [elevation, equal] of values) {
@@ -24,17 +22,37 @@ describe('elevation.ts', () => {
     }
   })
 
-  it('should only allow numeric values between 0 and 24', () => {
-    const { elevation: { validator } } = makeElevationProps()
-    const validValues = [1, '24']
-    const invalidValues = [-1, '25', false, true]
+  it('should include hover-elevation class', () => {
+    const values = [
+      [{ elevation: 1, hoverElevation: 3 }, ['elevation-1', 'hover-elevation-3']],
+      [{ elevation: 0, hoverElevation: 5 }, ['elevation-0', 'hover-elevation-5']],
+      [{ elevation: 2, hoverElevation: '4' }, ['elevation-2', 'hover-elevation-4']],
+      [{ elevation: 1, hoverElevation: 0 }, ['elevation-1', 'hover-elevation-0']],
+      [{ elevation: 1, hoverElevation: undefined }, ['elevation-1']],
+      [{ elevation: 1, hoverElevation: null }, ['elevation-1']],
+      [{ elevation: undefined, hoverElevation: 3 }, []],
+    ] as const
+
+    for (const [props, equal] of values) {
+      const { elevationClasses } = useElevation(props)
+
+      expect(elevationClasses.value).toEqual(equal)
+    }
+  })
+
+  it('should only allow numeric values at least 0 and no upper limit', () => {
+    const { elevation: { validator }, hoverElevation: { validator: hoverValidator } } = makeElevationProps()
+    const validValues = [1, '5', 24]
+    const invalidValues = [-1, '-6.2', false, true] as any
 
     for (const value of validValues) {
       expect(validator(value)).toBe(true)
+      expect(hoverValidator(value)).toBe(true)
     }
 
     for (const value of invalidValues) {
       expect(validator(value)).toBe(false)
+      expect(hoverValidator(value)).toBe(false)
     }
   })
 })

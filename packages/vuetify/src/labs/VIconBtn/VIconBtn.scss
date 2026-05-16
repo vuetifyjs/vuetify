@@ -108,7 +108,9 @@
       --v-activated-opacity: 0;
     }
   }
+}
 
+@include tools.layer('trumps') {
   @media (forced-colors: active) {
     .v-icon-btn {
       &:focus-visible {
@@ -118,15 +120,14 @@
 
       &:not(&--active):hover,
       &:not(&--active):focus {
-        color: highlight !important;
+        color: highlight;
       }
 
       &--active:not(&--disabled),
-      &--active:not(&--disabled)[class*="bg-"]
-      {
-        outline-color: canvastext !important;
-        background: highlight !important;
-        color: highlighttext !important;
+      &--active:not(&--disabled)[class*="bg-"] {
+        outline-color: canvastext;
+        background: highlight;
+        color: highlighttext;
       }
 
       &--disabled {

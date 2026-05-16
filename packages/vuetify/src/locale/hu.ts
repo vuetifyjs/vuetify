@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} további',
     today: 'Ma',
   },
+  heatmap: {
+    less: 'Kevesebb',
+    more: 'Több',
+  },
   input: {
     clear: 'Törlés {0}',
     prependAction: '{0} előrehozott művelet',
@@ -91,6 +95,7 @@ export default {
     hour: 'Óra',
     minute: 'Perc',
     second: 'Másodperc',
+    notAllowed: 'Az érték nem engedélyezett',
   },
   pagination: {
     ariaLabel: {

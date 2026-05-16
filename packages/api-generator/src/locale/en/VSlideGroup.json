@@ -1,4 +1,5 @@
 {
+  "description": "Used to display scrollable items. Supports horizontal and vertical orientation.",
   "props": {
     "centerActive": "Forces the selected component to be centered.",
     "contentClass": "Adds classes to the slide group item.",
@@ -11,11 +12,6 @@
   "slots": {
     "next": "The next slot.",
     "prev": "The prev slot."
-  },
-  "events": {
-    "change": "Emitted when the component value is changed by user interaction.",
-    "click:prev": "Emitted when the prev is clicked.",
-    "click:next": "Emitted when the next is clicked."
   },
   "exposed": {
     "focus": "Focus the component.",

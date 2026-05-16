@@ -10,7 +10,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, onScopeDispose, ref, watch } from 'vue'
-import { debounce, genericComponent, propsFactory, useRender } from '@/util'
+import { debounce, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -237,6 +237,7 @@ export const VTimePickerClock = genericComponent()({
     }
 
     function removeListeners () {
+      if (!IN_BROWSER) return
       window.removeEventListener('mousemove', onDragMove)
       window.removeEventListener('touchmove', onDragMove)
       window.removeEventListener('mouseup', onMouseUp)

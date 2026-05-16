@@ -25,6 +25,7 @@ export const makeVDialogProps = propsFactory({
 
   ...omit(makeVOverlayProps({
     captureFocus: true,
+    location: 'center center' as const,
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
     transition: { component: VDialogTransition },

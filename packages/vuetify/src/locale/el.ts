@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} ακόμη',
     today: 'Σήμερα',
   },
+  heatmap: {
+    less: 'Λιγότερα',
+    more: 'Περισσότερα',
+  },
   input: {
     clear: 'Καθαρισμός {0}',
     prependAction: '{0} προσαρτημένη ενέργεια',
@@ -91,6 +95,7 @@ export default {
     hour: 'Ώρα',
     minute: 'Λεπτά',
     second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {

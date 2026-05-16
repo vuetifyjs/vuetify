@@ -12,7 +12,7 @@
       <v-btn icon>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
-      <v-card-title class="text-h6 font-weight-regular">
+      <v-card-title class="text-title-large font-weight-regular">
         Sign up
       </v-card-title>
       <v-spacer></v-spacer>
@@ -102,7 +102,7 @@
       persistent
     >
       <v-card>
-        <v-card-title class="text-h5 text-center mt-5">
+        <v-card-title class="text-headline-small text-center mt-5">
           Legal
         </v-card-title>
         <v-card-text>

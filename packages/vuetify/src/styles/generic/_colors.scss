@@ -6,24 +6,24 @@
 
 @mixin background-color($color_value) {
   & {
-    background-color: $color_value !important;
+    background-color: $color_value;
   }
 }
 @mixin text-color($color_value) {
   & {
-    color: $color_value !important;
+    color: $color_value;
   }
 }
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
 
   & {
-    color: $map_value !important;
+    color: $map_value;
   }
 }
 
 @if (settings.$color-pack) {
-  @include tools.layer('theme.background') {
+  @include tools.layer('utilities.theme-background') {
     @each $color_name, $color_value in colors.$shades {
       .bg-#{$color_name} {
         @include background-color($color_value);
@@ -57,7 +57,7 @@
     }
   }
 
-  @include tools.layer('theme.foreground') {
+  @include tools.layer('utilities.theme-foreground') {
     @each $color_name, $color_value in colors.$shades {
       .text-#{$color_name} {
         @include text-color($color_value);

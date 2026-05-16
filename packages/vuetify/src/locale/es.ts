@@ -69,6 +69,10 @@ export default {
     moreEvents: '{0} más',
     today: 'Hoy',
   },
+  heatmap: {
+    less: 'Menos',
+    more: 'Más',
+  },
   input: {
     clear: 'Borrar {0}',
     prependAction: '{0} acción adelantada',
@@ -91,6 +95,7 @@ export default {
     hour: 'Hora',
     minute: 'Minutos',
     second: 'Segundos',
+    notAllowed: 'El valor no está permitido',
   },
   pagination: {
     ariaLabel: {

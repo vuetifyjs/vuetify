@@ -6,6 +6,7 @@
       v-model="model"
       :filter-keys="['raw.name', 'raw.username']"
       :items="items"
+      class="pa-2"
       hotkey="alt+g"
       item-title="name"
       item-value="name"
@@ -13,11 +14,11 @@
       placeholder="Search by name"
     >
       <template v-slot:prepend>
-        <div class="ma-2 text-subtitle-2">
+        <div class="ma-2 text-title-small">
           What are you looking for?
         </div>
 
-        <v-chip-group class="pl-2 mt-n1 mb-1">
+        <v-chip-group class="pl-2 mt-n1 mb-1 flex-1-0">
           <v-chip
             v-for="c in ['People', 'Files', 'Actions']"
             :key="c"
@@ -41,7 +42,7 @@
         <div class="d-flex align-center">
           <v-list-subheader>{{ title }}</v-list-subheader>
           <v-btn
-            class="ml-auto my-n1 text-none"
+            class="ml-auto my-n1"
             size="small"
             tabindex="-1"
             text="See all"
