@@ -135,9 +135,11 @@
     },
     open: Boolean,
     preview: Boolean,
+    newIn: String,
   })
 
   const resolvedNewIn = computed(() => {
+    if (props.newIn) return props.newIn
     const [componentPath, exampleName] = props.file.split('/')
     const componentName = componentPath.split('-').map(part =>
       part.charAt(0).toUpperCase() + part.slice(1)
