@@ -8,11 +8,11 @@ import { computed, shallowRef, toRef, watch } from 'vue'
 // Types
 import type { Ref } from 'vue'
 
-function toYearMonth (year: number, month: number): string {
+function toISO (year: number, month: number): string {
   return `${year}-${String(month + 1).padStart(2, '0')}`
 }
 
-function compareYearMonth (a: string, b: string): number {
+function compareISO (a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0
 }
 
@@ -31,11 +31,11 @@ export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly str
   const range = useRangePicker({
     multiple: toRef(() => props.multiple),
     model,
-    compare: compareYearMonth,
+    compare: compareISO,
   })
 
   function getMonthValue (monthIndex: number): string {
-    return toYearMonth(year.value, monthIndex)
+    return toISO(year.value, monthIndex)
   }
 
   function selectMonth (monthIndex: number) {
