@@ -15,7 +15,7 @@
           <div class="text-center text-title-large">{{ group.key }} percentile</div>
         </template>
         <template v-slot:cell="{ item }">
-          <span class="v-heatmap-cell__text">{{ item.value.toFixed(2) }}x</span>
+          <span class="v-heatmap__cell-text">{{ item.value.toFixed(2) }}x</span>
         </template>
       </v-heatmap>
     </v-row>

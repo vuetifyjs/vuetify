@@ -90,43 +90,43 @@
     margin-inline-start: calc(-1 * var(--v-heatmap-group-gap) + var(--v-heatmap-cell-gap));
   }
 
-  .v-heatmap-cell {
+  .v-heatmap__cell {
     .v-heatmap--hover & {
       cursor: pointer;
 
-      &:hover > .v-heatmap-cell__content {
+      &:hover > .v-heatmap__cell-content {
         transform: scale(var(--v-heatmap-hover-scale, 0.85));
       }
     }
   }
 
-  .v-heatmap-cell__content {
+  .v-heatmap__cell-content {
     transform-box: fill-box;
     transform-origin: center;
     transition: transform .15s ease;
   }
 
-  .v-heatmap-cell__rect {
-    rx: var(--v-heatmap-cell-radius);
-    ry: var(--v-heatmap-cell-radius);
+  .v-heatmap__cell-rect {
+    rx: var(--v-heatmap-cell-radius, #{$heatmap-cell-border-radius});
+    ry: var(--v-heatmap-cell-radius, #{$heatmap-cell-border-radius});
     transition: fill .15s ease;
     // No default `fill` here — SVG presentation attributes have lower
     // specificity than any CSS rule, so the per-cell `fill="..."` attribute
     // would be overridden by it. Only set `fill` from CSS for cases that
     // actually need it (empty, color-scale).
 
-    .v-heatmap-cell--color-scale & {
+    .v-heatmap__cell--color-scale & {
       fill: var(--v-heatmap-cell-color);
     }
 
-    .v-heatmap-cell--empty & {
+    .v-heatmap__cell--empty & {
       fill: var(--v-heatmap-day-bg);
       stroke: var(--v-heatmap-cell-border);
       stroke-width: 2;
     }
   }
 
-  .v-heatmap-cell__overlay > div {
+  .v-heatmap__cell-overlay > div {
     width: 100%;
     height: 100%;
     display: flex;
@@ -134,11 +134,11 @@
     justify-content: center;
   }
 
-  .v-heatmap-cell--color-scale .v-heatmap-cell__overlay {
+  .v-heatmap__cell--color-scale .v-heatmap__cell-overlay {
     color: oklch(from var(--v-heatmap-cell-color) round(1.21 - L) 0 0);
   }
 
-  .v-heatmap-cell__text {
+  .v-heatmap__cell-text {
     font-size: $heatmap-cell-font-size;
     user-select: none;
   }

@@ -8,14 +8,14 @@
         :items="items"
         :rows="rows"
         :thresholds="thresholds"
-        rounded="circle"
+        rounded="20"
       >
         <template v-slot:row-header="{ row }">
           <span class="text-capitalize font-weight-bold">{{ row }}</span>&nbsp;(°F)
         </template>
 
         <template v-slot:cell="{ item }">
-          <span class="v-heatmap-cell__text text-white">{{ item.value }}</span>
+          <span class="v-heatmap__cell-text text-white">{{ item.value }}</span>
         </template>
       </v-heatmap>
     </v-row>

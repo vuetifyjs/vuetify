@@ -1,9 +1,8 @@
 // Components
-import { VHeatmapCell } from './VHeatmapCell'
+import { VHeatmapLegendCell } from './VHeatmapLegendCell'
 
 // Composables
 import { useLocale } from '@/composables/locale'
-import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
 import { getInterpolationMethod } from './colorScale'
@@ -31,7 +30,7 @@ export const makeVHeatmapLegendProps = propsFactory({
     type: Array as PropType<number[]>,
     required: true as const,
   },
-  ...makeRoundedProps(),
+  rounded: [Number, String],
 }, 'VHeatmapLegend')
 
 export const VHeatmapLegend = defineComponent({
@@ -75,7 +74,7 @@ export const VHeatmapLegend = defineComponent({
             />
           ) : (
             (props.thresholds as { min: number, color: string }[]).map(({ min, color }, i) => (
-              <VHeatmapCell
+              <VHeatmapLegendCell
                 key={ min }
                 class="v-heatmap-legend__cell"
                 color={ color }

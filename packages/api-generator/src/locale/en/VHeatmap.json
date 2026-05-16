@@ -15,6 +15,7 @@
     "itemProps": "Additional props to pass to each `v-heatmap-cell`.",
     "itemRow": "Property name or function that returns the row key of an item.",
     "itemValue": "Property name or function that returns the numeric value of an item, used for cell color matching.",
+    "rounded": "Cell corner radius. Accepts a number or string with `px` or `%` units only — the value is passed directly to the SVG `<rect>` `rx`/`ry` attributes.",
     "rows": "Explicit list of row keys. When omitted, rows are derived from the items in insertion order.",
     "thresholds": "Controls how each item's value maps to a cell color. Two forms:\n- **Buckets:** an array of `{ min, color }` stops. Each cell takes the color of the highest stop whose `min` it meets or exceeds.\n- **Linear:** a `{ from, to }` pair that interpolates between two stops via `color-mix`. Optional `colorSpace` (e.g. `'oklch'`) picks the interpolation space, and `hueInterpolation` (`'shorter'` / `'longer'``) controls hue path in polar spaces."
   },

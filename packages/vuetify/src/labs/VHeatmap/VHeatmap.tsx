@@ -6,12 +6,11 @@ import { VHeatmapLegend } from './VHeatmapLegend'
 
 // Composables
 import { useHeatmap } from './heatmap'
-import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { ref, watch } from 'vue'
-import { genericComponent, hasLightForeground, isParsableColor, parseColor, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, hasLightForeground, isParsableColor, parseColor, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -31,27 +30,6 @@ export type VHeatmapSlots = {
   'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
 }
 
-// Rounded keyword → SVG-compatible radius value (matches Vuetify's $rounded scale).
-const RADIUS_KEYWORDS: Record<string, string> = {
-  sm: '2px',
-  md: '4px',
-  lg: '8px',
-  xl: '24px',
-  pill: '9999px',
-  circle: '50%',
-}
-
-export function getCellRadius (rounded: any, defaultRadius = '5px'): string {
-  if (rounded == null || rounded === '' || rounded === true) return defaultRadius
-  if (rounded === false || rounded === 0 || rounded === '0' || rounded === 'tile') return '0'
-  if (typeof rounded === 'number') return `${rounded}px`
-  if (typeof rounded === 'string') {
-    if (rounded in RADIUS_KEYWORDS) return RADIUS_KEYWORDS[rounded]
-    if (/^\d/.test(rounded)) return /[a-z%]$/i.test(rounded) ? rounded : `${rounded}px`
-  }
-  return defaultRadius
-}
-
 function toPx (value: any, defaultValue: number): number {
   if (value == null || value === '') return defaultValue
   const parsed = parseFloat(value)
@@ -64,10 +42,11 @@ export const makeVHeatmapProps = propsFactory({
     default: 26,
   },
   gap: {
-    type: [Number, String] as PropType<string | number>,
+    type: [Number, String],
     default: 6,
   },
-  groupGap: [Number, String] as PropType<string | number>,
+  groupGap: [Number, String],
+  rounded: [Number, String],
   hideColumnHeaders: Boolean,
   hideRowHeaders: Boolean,
   legend: {
@@ -76,7 +55,7 @@ export const makeVHeatmapProps = propsFactory({
   },
   hover: Boolean,
   hoverScale: {
-    type: [Number, String] as PropType<string | number>,
+    type: [Number, String],
     default: 0.85,
   },
   items: {
@@ -103,8 +82,6 @@ export const makeVHeatmapProps = propsFactory({
   },
   rows: Array as PropType<any[]>,
   columns: Array as PropType<any[]>,
-
-  ...makeRoundedProps(),
   ...makeThemeProps(),
 }, 'VHeatmap')
 
@@ -146,7 +123,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
       const cellHeight = toPx(Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize, 26)
       const gap = toPx(props.gap, 6)
       const groupGap = props.groupGap != null ? toPx(props.groupGap, cellWidth + gap) : (cellWidth + gap)
-      const radius = getCellRadius(props.rounded)
+      const radius = convertToUnit(props.rounded)
 
       const { rows, groups, rowItems, hasExplicitColumns } = data.value
       const rowCount = rows.length
@@ -255,11 +232,11 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                             <g
                               key={ key }
                               class={[
-                                'v-heatmap-cell',
+                                'v-heatmap__cell',
                                 {
-                                  'v-heatmap-cell--empty': empty,
-                                  'v-heatmap-cell--color-scale': isColorScale,
-                                  'v-heatmap-cell--disabled': disabled,
+                                  'v-heatmap__cell--empty': empty,
+                                  'v-heatmap__cell--color-scale': isColorScale,
+                                  'v-heatmap__cell--disabled': disabled,
                                 },
                               ]}
                               transform={ `translate(${x},${y})` }
@@ -271,20 +248,20 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                             >
                               { title != null && <title key="title">{ title }</title> }
                               <rect
-                                class="v-heatmap-cell__underlay"
+                                class="v-heatmap__cell-underlay"
                                 width={ cellWidth }
                                 height={ cellHeight }
                                 fill="transparent"
                               />
-                              <g class="v-heatmap-cell__content">
+                              <g class="v-heatmap__cell-content">
                                 <rect
-                                  class="v-heatmap-cell__rect"
+                                  class="v-heatmap__cell-rect"
                                   width={ cellWidth }
                                   height={ cellHeight }
                                   fill={ !empty && !isColorScale ? color : undefined }
                                 />
                                 { hasSlot && (
-                                  <foreignObject class="v-heatmap-cell__overlay" width={ cellWidth } height={ cellHeight }>
+                                  <foreignObject class="v-heatmap__cell-overlay" width={ cellWidth } height={ cellHeight }>
                                     <div>
                                       { slots.cell?.({ item: cell }) }
                                     </div>

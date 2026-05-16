@@ -8,7 +8,7 @@
         :items="items"
         :rows="rows"
         :thresholds="thresholds"
-        rounded="sm"
+        rounded="2"
       >
         <template v-slot:row-header="{ row }">
           <v-spacer></v-spacer>

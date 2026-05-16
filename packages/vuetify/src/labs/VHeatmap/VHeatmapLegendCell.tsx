@@ -1,12 +1,8 @@
-// Composables
-import { makeRoundedProps } from '@/composables/rounded'
-
 // Utilities
 import { computed } from 'vue'
-import { getCellRadius } from './VHeatmap'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
 
-export const makeVHeatmapCellProps = propsFactory({
+export const makeVHeatmapLegendCellProps = propsFactory({
   color: String,
   disabled: Boolean,
   width: {
@@ -17,9 +13,8 @@ export const makeVHeatmapCellProps = propsFactory({
     type: [Number, String],
     default: 24,
   },
-
-  ...makeRoundedProps(),
-}, 'VHeatmapCell')
+  rounded: [Number, String],
+}, 'VHeatmapLegendCell')
 
 function toPx (value: any, defaultValue: number): number {
   if (value == null || value === '') return defaultValue
@@ -27,14 +22,13 @@ function toPx (value: any, defaultValue: number): number {
   return Number.isFinite(parsed) ? parsed : defaultValue
 }
 
-export const VHeatmapCell = defineComponent({
-  name: 'VHeatmapCell',
+export const VHeatmapLegendCell = defineComponent({
+  name: 'VHeatmapLegendCell',
 
-  props: makeVHeatmapCellProps(),
+  props: makeVHeatmapLegendCellProps(),
 
   setup (props, { slots, attrs }) {
     const isColorScale = computed(() => !!props.color && props.color.includes('('))
-    const radius = computed(() => getCellRadius(props.rounded))
     const width = computed(() => toPx(props.width, 24))
     const height = computed(() => toPx(props.height, 24))
 
@@ -45,31 +39,31 @@ export const VHeatmapCell = defineComponent({
       return (
         <svg
           class={[
-            'v-heatmap-cell',
-            'v-heatmap-cell--standalone',
+            'v-heatmap__cell',
+            'v-heatmap__cell--standalone',
             {
-              'v-heatmap-cell--empty': empty,
-              'v-heatmap-cell--color-scale': !empty && isColorScale.value,
-              'v-heatmap-cell--disabled': props.disabled,
+              'v-heatmap__cell--empty': empty,
+              'v-heatmap__cell--color-scale': !empty && isColorScale.value,
+              'v-heatmap__cell--disabled': props.disabled,
             },
           ]}
           width={ width.value }
           height={ height.value }
           viewBox={ `0 0 ${width.value} ${height.value}` }
           style={[
-            { '--v-heatmap-cell-radius': radius.value },
+            { '--v-heatmap-cell-radius': convertToUnit(props.rounded) },
             (!empty && isColorScale.value) ? { '--v-heatmap-cell-color': props.color } : null,
             attrs.style as any,
           ]}
         >
           <rect
-            class="v-heatmap-cell__rect"
+            class="v-heatmap__cell-rect"
             width={ width.value }
             height={ height.value }
             fill={ fill }
           />
           { slots.default && (
-            <foreignObject class="v-heatmap-cell__overlay" width={ width.value } height={ height.value }>
+            <foreignObject class="v-heatmap__cell-overlay" width={ width.value } height={ height.value }>
               <div>
                 { slots.default() }
               </div>

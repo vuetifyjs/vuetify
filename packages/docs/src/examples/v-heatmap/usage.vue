@@ -80,7 +80,7 @@
   const hover = ref(false)
   const cellSize = ref(32)
   const gap = ref(6)
-  const roundedOptions = ['0', 'sm', 'md', 'lg', 'xl', 'pill']
+  const roundedOptions = ['0', '2', '4', '8', '24', '999']
   const roundedIndex = ref(2)
   const rounded = computed(() => roundedOptions[roundedIndex.value])
 
