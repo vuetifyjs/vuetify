@@ -16,12 +16,14 @@ function compareYearMonth (a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0
 }
 
-export function useMonthPicker (props: {
+export interface MonthPickerProps {
   min?: string
   max?: string
   multiple?: boolean | 'range'
   allowedMonths?: number[] | ((date: number) => boolean)
-}, model: Ref<readonly string[]>) {
+}
+
+export function useMonthPicker (props: MonthPickerProps, model: Ref<readonly string[]>) {
   const adapter = useDate()
 
   const viewMode = shallowRef<'months' | 'years'>('months')

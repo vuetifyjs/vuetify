@@ -4,13 +4,13 @@ import { computed, shallowRef } from 'vue'
 // Types
 import type { Ref } from 'vue'
 
-export function useRangePicker <T> (options: {
-  multiple: Ref<boolean | 'range' | undefined>
+export interface RangePickerOptions<T> {
+  multiple: Readonly<Ref<boolean | 'range' | undefined>>
   model: Ref<readonly T[]>
   compare: (a: T, b: T) => number
-}) {
-  const { multiple, model, compare } = options
+}
 
+export function useRangePicker <T> ({ multiple, model, compare }: RangePickerOptions<T>) {
   const rangeStart = computed(() => model.value.length >= 1 ? model.value[0] : undefined)
   const rangeEnd = computed(() => model.value.length >= 2 ? model.value[model.value.length - 1] : undefined)
   const previewValue = shallowRef<T>()
