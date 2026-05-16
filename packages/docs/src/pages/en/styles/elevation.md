@@ -45,6 +45,16 @@ The `elevation` helper classes allow you to assign a custom **z-depth** to any e
 
 Use the `hover-elevation` prop to change a component's elevation on hover. For regular HTML elements or components without `elevation` prop, the `hover-elevation-*` utility classes helps achieve the same effect.
 
+::: tip
+
+The `hover-elevation-*` utility classes do not include a transition. To animate the change, add your own transition styles or use a CSS framework like Tailwind. VCard applies the following transition by default:
+
+```css
+transition: 0.28s box-shadow cubic-bezier(0.4, 0, 0.2, 1); /* simplified */
+```
+
+:::
+
 <ExamplesExample file="elevation/prop-dynamic" />
 
 ### Misc
