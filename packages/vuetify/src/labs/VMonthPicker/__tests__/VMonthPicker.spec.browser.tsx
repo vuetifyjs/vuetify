@@ -2,7 +2,8 @@
 import { VMonthPicker } from '../VMonthPicker'
 
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { render, screen, userEvent } from '@test'
+import { commands } from 'vitest/browser'
 import { ref } from 'vue'
 
 describe('VMonthPicker', () => {
@@ -30,24 +31,20 @@ describe('VMonthPicker', () => {
     await userEvent.click(monthButtons[5])
     expect(model.value).toMatch(/-06$/)
 
-    // Year controls should be visible
-    const controls = screen.getByCSS('.v-month-picker__controls')
-    expect(controls).toBeTruthy()
-
     // Click previous year arrow
+    const controls = screen.getByCSS('.v-month-picker__controls')
     const prevBtn = controls.querySelector('.v-btn')!
-    const currentYear = parseInt(model.value!.split('-')[0])
+    const currentYear = parseInt(model.value!.split('-')[0], 10)
     await userEvent.click(prevBtn)
-    await wait(200)
+    await commands.waitStable('.v-month-picker__months-content')
 
     // After navigating to prev year and re-selecting, year should decrease
     // The month buttons are re-rendered for the new year
     const newMonthButtons = screen.getByCSS('.v-month-picker__months-content')
       .querySelectorAll('.v-btn')
     await userEvent.click(newMonthButtons[5])
-    await wait()
 
-    expect(model.value).toBe(`${currentYear - 1}-06`)
+    await expect.poll(() => model.value).toBe(`${currentYear - 1}-06`)
   })
 
   it('should toggle to year view and back when selecting a year', async () => {
@@ -57,16 +54,16 @@ describe('VMonthPicker', () => {
       <VMonthPicker v-model={ model.value } />
     ))
 
-    // Should initially show months view
-    expect(screen.getByCSS('.v-month-picker__months')).toBeTruthy()
+    // Initially shows months view
+    screen.getByCSS('.v-month-picker__months')
 
     // Click the year button in controls to toggle to years view
     const controls = screen.getByCSS('.v-month-picker__controls')
     const yearBtn = controls.querySelectorAll('.v-btn')[1] // middle button is year toggle
     await userEvent.click(yearBtn)
 
-    // Should now show years view
-    expect(screen.getByCSS('.v-date-picker-years')).toBeTruthy()
+    // Now shows years view
+    screen.getByCSS('.v-date-picker-years')
 
     // Click a year
     const yearButtons = screen.getByCSS('.v-date-picker-years__content')
@@ -77,10 +74,9 @@ describe('VMonthPicker', () => {
     )
     expect(targetYear).toBeTruthy()
     await userEvent.click(targetYear!)
-    await wait(200) // viewMode transition back to months
 
-    // Should switch back to months view after selecting a year
-    expect(screen.getByCSS('.v-month-picker__months')).toBeTruthy()
+    // Switches back to months view after selecting a year
+    await screen.findByCSS('.v-month-picker__months')
 
     // Now select a month to confirm the year stuck
     const monthButtons = screen.getByCSS('.v-month-picker__months-content')
