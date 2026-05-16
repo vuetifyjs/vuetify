@@ -4,13 +4,13 @@ import { onScopeDispose, shallowRef, toValue } from 'vue'
 // Types
 import type { MaybeRefOrGetter, ShallowRef } from 'vue'
 
-export interface VirtualFocusItem {
+interface VirtualFocusItem {
   id: string | number
   disabled?: MaybeRefOrGetter<boolean>
   el?: MaybeRefOrGetter<HTMLElement | null | undefined>
 }
 
-export interface VirtualFocusOptions {
+interface VirtualFocusOptions {
   /** Element that retains DOM focus and receives aria-activedescendant */
   control: MaybeRefOrGetter<HTMLElement | null | undefined>
   /** Arrow key mapping — ignored when `columns` is set (grid uses all 4 arrows) */
@@ -24,7 +24,7 @@ export interface VirtualFocusOptions {
   onHighlight?: (id: string | number) => void
 }
 
-export interface VirtualFocusReturn {
+interface VirtualFocusReturn {
   highlightedId: ShallowRef<string | number | undefined>
   highlight: (id: string | number) => void
   focusHighlighted: () => void
