@@ -19,7 +19,7 @@ import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -83,8 +83,8 @@ export const makeVDatePickerProps = propsFactory({
   ...makeVDatePickerMonthProps({
     weeksInMonth: 'static' as const,
   }),
-  ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
-  ...omit(makeVDatePickerYearsProps(), ['modelValue']),
+  ...omit(makeVDatePickerMonthsProps(), ['modelValue', 'columns']),
+  ...omit(makeVDatePickerYearsProps(), ['modelValue', 'columns']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 
   modelValue: null,
@@ -332,8 +332,15 @@ export const VDatePicker = genericComponent<new <
       onUpdateYear()
     }
 
+    const monthGridRef = shallowRef<{ focusGrid: () => void }>()
+
     function onClickDate () {
       viewMode.value = 'month'
+    }
+
+    function onEscape () {
+      viewMode.value = 'month'
+      nextTick(() => monthGridRef.value?.focusGrid())
     }
 
     function onClickMonth () {
@@ -467,6 +474,7 @@ export const VDatePicker = genericComponent<new <
                       year={ year.value }
                       allowedMonths={ allowedMonths.value }
                       onUpdate:modelValue={ onUpdateMonth }
+                      onEscape={ onEscape }
                     >
                       {{ month: slots.month }}
                     </VDatePickerMonths>
@@ -479,11 +487,13 @@ export const VDatePicker = genericComponent<new <
                       max={ maxDate.value }
                       allowedYears={ allowedYears.value }
                       onUpdate:modelValue={ onUpdateYear }
+                      onEscape={ onEscape }
                     >
                       {{ year: slots.year }}
                     </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
+                      ref={ monthGridRef }
                       key="date-picker-month"
                       { ...datePickerMonthProps }
                       v-model={ model.value }
