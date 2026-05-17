@@ -13,13 +13,14 @@ import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
 import { useMonthPicker } from './month-picker'
 import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date'
+import { useGridSelection } from '@/composables/gridSelection'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { chunkArray, createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -222,6 +223,63 @@ export const VMonthPicker = genericComponent<new <
       return true
     }
 
+    function initialFocusMonth (current: number | undefined): number | undefined {
+      const isVisible = (m: (typeof months.value)[number]) => !m.isDisabled
+
+      if (current != null) {
+        const cur = months.value.find(m => m.value === current)
+        if (cur && !cur.isDisabled) return current
+      }
+
+      const selected = months.value.find(m =>
+        isVisible(m) && model.value.some(v => v === getMonthValue(m.value))
+      )
+      if (selected) return selected.value
+
+      if (year.value === currentYear) {
+        const today = months.value.find(m => m.value === currentMonth && isVisible(m))
+        if (today) return today.value
+      }
+
+      return months.value.find(isVisible)?.value
+    }
+
+    function onMonthSelect (index: number) {
+      selectMonth(index)
+    }
+
+    const { containerProps, selectItem, focusItem, clear } = useGridSelection<number>({
+      items: () => months.value,
+      columns: () => Number(props.monthsColumns) || 4,
+      initialValue: initialFocusMonth,
+      itemAttribute: 'data-v-month',
+      onSelect: onMonthSelect,
+      onNavigation: (...args) => onMonthNavigation(...args),
+      onHighlight: value => range.setPreview(value != null ? getMonthValue(value) : undefined),
+    })
+
+    function onMonthNavigation (direction: 'up' | 'down' | 'left' | 'right', e: KeyboardEvent, curIndex: number | undefined): boolean {
+      if (curIndex == null) return false
+
+      if (direction === 'left' && curIndex === 0 && !disablePrevYear.value) {
+        e.preventDefault()
+        prevYear()
+        nextTick(() => focusItem(11))
+        return true
+      }
+
+      if (direction === 'right' && curIndex === 11 && !disableNextYear.value) {
+        e.preventDefault()
+        nextYear()
+        nextTick(() => focusItem(0))
+        return true
+      }
+
+      return false
+    }
+
+    watch(year, () => clear())
+
     useRender(() => {
       const pickerProps = VPicker.filterProps(props)
 
@@ -298,6 +356,7 @@ export const VMonthPicker = genericComponent<new <
                           key={ year.value }
                           class="v-month-picker__months-content"
                           onMouseleave={ range.clearPreview }
+                          { ...containerProps.value }
                         >
                           { monthRows.value.map((row, rowIndex) => {
                             const cols = Number(props.monthsColumns) || 4
@@ -332,15 +391,16 @@ export const VMonthPicker = genericComponent<new <
                                     prependIcon: icon,
                                     variant,
                                     ripple: false,
+                                    tabindex: -1,
                                     'aria-label': month.isCurrent
                                       ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
                                       : month.label,
                                     'aria-current': month.isCurrent ? 'date' : undefined,
                                     'aria-selected': selected,
-                                    onClick: () => selectMonth(index),
+                                    'data-v-month': month.isDisabled ? undefined : month.value,
+                                    onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
+                                    onClick: () => selectItem(index),
                                     onMouseenter: () => range.setPreview(monthValue),
-                                    onFocus: () => range.setPreview(monthValue),
-                                    onBlur: range.clearPreview,
                                   } as const
 
                                   const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
