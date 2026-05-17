@@ -151,6 +151,9 @@
     },
     "events": {
       "update:opened": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VDataTable": {
@@ -175,6 +178,7 @@
       "group-summary": "3.10.0"
     },
     "examples": {
+      "prop-grouping": "4.1.0",
       "prop-sort-icon": "3.12.0",
       "slot-group-summary": "3.10.0"
     }
