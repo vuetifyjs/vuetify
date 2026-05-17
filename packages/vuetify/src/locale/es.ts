@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'a',
   },
+  monthPicker: {
+    title: 'Seleccionar mes',
+    itemsSelected: '{0} seleccionados',
+    header: 'Introducir mes',
+    range: {
+      title: 'Introducir meses',
+    },
+    ariaLabel: {
+      previousYear: 'Año anterior',
+      nextYear: 'Año siguiente',
+      selectYear: 'Seleccionar año',
+      currentMonth: 'Mes actual, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seleccionados',
     range: {

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'hingga',
   },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} dipilih',
     range: {

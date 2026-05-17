@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '至',
   },
+  monthPicker: {
+    title: '选择月份',
+    itemsSelected: '已选择 {0} 项',
+    header: '输入月份',
+    range: {
+      title: '输入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '选择年份',
+      currentMonth: '本月，{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '已选择 {0} 项',
     range: {

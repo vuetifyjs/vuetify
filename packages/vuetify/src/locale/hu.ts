@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '–',
   },
+  monthPicker: {
+    title: 'Hónap kiválasztása',
+    itemsSelected: '{0} kiválasztva',
+    header: 'Adja meg a hónapot',
+    range: {
+      title: 'Adja meg a hónapokat',
+    },
+    ariaLabel: {
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectYear: 'Év kiválasztása',
+      currentMonth: 'Aktuális hónap, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} kiválasztva',
     range: {

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
+  monthPicker: {
+    title: 'اختر الشهر',
+    itemsSelected: '{0} محدد',
+    header: 'أدخل الشهر',
+    range: {
+      title: 'أدخل الأشهر',
+    },
+    ariaLabel: {
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectYear: 'اختر السنة',
+      currentMonth: 'الشهر الحالي، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} محدد',
     range: {
