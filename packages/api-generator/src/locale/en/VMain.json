@@ -1,4 +1,5 @@
 {
+  "description": "Typically a main content wrapper in `v-app`.",
   "props": {
     "scrollable": "Specify a custom scrollable function."
   }

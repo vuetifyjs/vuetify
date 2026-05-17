@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Виберіть місяць',
+    itemsSelected: 'Вибрано {0}',
+    header: 'Введіть місяць',
+    range: {
+      title: 'Введіть місяці',
+    },
+    ariaLabel: {
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectYear: 'Виберіть рік',
+      currentMonth: 'Поточний місяць, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: 'Вибрано {0}',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'Ще {0}',
     today: 'Сьогодні',
+  },
+  heatmap: {
+    less: 'Менше',
+    more: 'Більше',
   },
   input: {
     clear: 'Очистити {0}',

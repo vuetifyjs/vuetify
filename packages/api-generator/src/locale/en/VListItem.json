@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-list` used to display a single item or modify the `v-list` state.",
   "props": {
     "active": "Controls the **active** state of the item. This is typically used to highlight the component.",
     "activeColor": "Deprecated, use `color` instead.",

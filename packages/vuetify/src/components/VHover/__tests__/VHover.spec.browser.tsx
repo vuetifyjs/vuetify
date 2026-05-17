@@ -2,6 +2,7 @@ import { VHover } from '../VHover'
 
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
+import { ref } from 'vue'
 
 describe('VHover', () => {
   it('should react on mouse events', async () => {
@@ -45,6 +46,34 @@ describe('VHover', () => {
     await expect.element(element).not.toHaveClass('bg-primary')
 
     await userEvent.unhover(element)
+    await expect.element(element).not.toHaveClass('bg-primary')
+  })
+
+  it('should reconcile hover state when re-enabled', async () => {
+    const disabled = ref(false)
+
+    render(() => (
+      <VHover disabled={ disabled.value }>
+        {{
+          default: ({ isHovering, props }) => (
+            <div { ...props } class={['hover-element', isHovering && 'bg-primary']}>foobar</div>
+          ),
+        }}
+      </VHover>
+    ))
+
+    const element = screen.getByCSS('.hover-element')
+
+    await userEvent.hover(element)
+    await expect.element(element).toHaveClass('bg-primary')
+
+    // Disable while hovered, then move cursor away while disabled — no events observed.
+    disabled.value = true
+    await userEvent.unhover(element)
+    expect(element).toHaveClass('bg-primary')
+
+    // Re-enabling should reconcile to the actual cursor position (not hovered).
+    disabled.value = false
     await expect.element(element).not.toHaveClass('bg-primary')
   })
 

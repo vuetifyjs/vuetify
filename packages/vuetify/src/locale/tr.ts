@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ile',
   },
+  monthPicker: {
+    title: 'Ay seçin',
+    itemsSelected: '{0} seçildi',
+    header: 'Ay girin',
+    range: {
+      title: 'Ayları girin',
+    },
+    ariaLabel: {
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectYear: 'Yıl seçin',
+      currentMonth: 'Bu ay, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seçildi',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} tane daha',
     today: 'Bugün',
+  },
+  heatmap: {
+    less: 'Az',
+    more: 'Çok',
   },
   input: {
     clear: '{0} temizle',

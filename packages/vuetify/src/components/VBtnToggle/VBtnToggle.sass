@@ -9,6 +9,11 @@
       &.v-btn--variant-plain
         opacity: 1
 
+      &.v-btn--variant-elevated,
+      &.v-btn--variant-flat
+        > .v-btn__overlay
+          opacity: 0
+
 @include tools.layer('trumps')
   @media (forced-colors: active)
     .v-btn-toggle

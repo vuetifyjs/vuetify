@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'έως',
   },
+  monthPicker: {
+    title: 'Επιλέξτε μήνα',
+    itemsSelected: '{0} επιλεγμένα',
+    header: 'Εισαγάγετε μήνα',
+    range: {
+      title: 'Εισαγάγετε μήνες',
+    },
+    ariaLabel: {
+      previousYear: 'Προηγούμενο έτος',
+      nextYear: 'Επόμενο έτος',
+      selectYear: 'Επιλέξτε έτος',
+      currentMonth: 'Τρέχων μήνας, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} ακόμη',
     today: 'Σήμερα',
+  },
+  heatmap: {
+    less: 'Λιγότερα',
+    more: 'Περισσότερα',
   },
   input: {
     clear: 'Καθαρισμός {0}',

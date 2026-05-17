@@ -1,0 +1,1 @@
+export { VHeatmap } from './VHeatmap'

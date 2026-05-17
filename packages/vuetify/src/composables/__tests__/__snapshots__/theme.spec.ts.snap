@@ -69,6 +69,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   .v-theme--light {
     color-scheme: normal;
@@ -132,6 +133,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   .v-theme--dark {
     color-scheme: dark;
@@ -195,6 +197,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: white;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 20%;
   }
   }
   @layer theme-background {
@@ -453,6 +456,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   :where(#my-app) .v-theme--light {
     color-scheme: normal;
@@ -516,6 +520,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   :where(#my-app) .v-theme--dark {
     color-scheme: dark;
@@ -579,6 +584,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: white;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 20%;
   }
   }
   @layer theme-background {
@@ -842,6 +848,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   .v-theme--light {
     color-scheme: normal;
@@ -905,6 +912,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: black;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 8%;
   }
   .v-theme--dark {
     color-scheme: dark;
@@ -968,6 +976,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-light: 0, 0, 0;
     --v-elevation-overlay-color: white;
     --v-elevation-overlay-opacity-step: 2%;
+    --v-highlight-opacity: 20%;
   }
   }
   @layer theme-background {

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Vyberte měsíc',
+    itemsSelected: '{0} vybráno',
+    header: 'Zadejte měsíc',
+    range: {
+      title: 'Zadejte měsíce',
+    },
+    ariaLabel: {
+      previousYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuální měsíc, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} vybráno',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} dalších',
     today: 'Dnes',
+  },
+  heatmap: {
+    less: 'Méně',
+    more: 'Více',
   },
   input: {
     clear: 'Vymazat {0}',
