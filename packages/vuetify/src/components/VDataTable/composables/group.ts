@@ -33,7 +33,7 @@ export interface GroupSummary<T = any> {
   items: readonly (T | Group<T> | GroupSummary<T>)[]
 }
 
-export type GroupKeyFn = (options: { key: string, value: any, parentKey: string | null }) => string
+export type GroupKeyFunction = (options: { key: string, value: any, parentKey: string | null }) => string
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
@@ -45,7 +45,7 @@ export const makeDataTableGroupProps = propsFactory({
     default: () => ([]),
   },
   openAll: Boolean,
-  groupKey: Function as PropType<GroupKeyFn>,
+  groupKey: Function as PropType<GroupKeyFunction>,
 }, 'DataTable-group')
 
 const VDataTableGroupSymbol: InjectionKey<{
@@ -63,7 +63,7 @@ type GroupProps = {
   opened: readonly string[]
   'onUpdate:opened': ((value: string[]) => void) | undefined
   openAll: boolean
-  groupKey: GroupKeyFn | undefined
+  groupKey: GroupKeyFunction | undefined
 }
 
 export function createGroupBy (props: GroupProps) {
@@ -170,7 +170,7 @@ const defaultGroupId = (key: string, value: any, parentKey: string) => `${parent
 function groupItems <T extends GroupableItem> (
   items: readonly T[],
   groupBy: readonly string[],
-  groupKeyFn?: GroupKeyFn,
+  groupKeyFn?: GroupKeyFunction,
   depth = 0,
   parentKey = 'root',
 ) {
@@ -205,12 +205,12 @@ function collectGroupIds <T extends GroupableItem> (groups: readonly Group<T>[])
   ])
 }
 
-export function syncOpenedWithGroups (
+export function useOpenAllGroups (
   opened: Ref<Set<string>>,
   openAll: MaybeRefOrGetter<boolean>,
   items: MaybeRefOrGetter<readonly GroupableItem[]>,
   groupBy: Ref<readonly SortItem[]>,
-  groupKeyFn?: MaybeRefOrGetter<GroupKeyFn | undefined>,
+  groupKeyFn?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
 ) {
   const allIds = computed(() => {
     if (!toValue(openAll) || !groupBy.value.length) return new Set<string>()
@@ -271,7 +271,7 @@ export function useGroupedItems <T extends GroupableItem> (
   opened: Ref<Set<string>>,
   hasSummary: MaybeRefOrGetter<boolean>,
   isGroupOpen?: (group: Group) => boolean,
-  groupKeyFn?: MaybeRefOrGetter<GroupKeyFn | undefined>,
+  groupKeyFn?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
 ) {
   const groups = computed(() => {
     if (!groupBy.value.length) return []

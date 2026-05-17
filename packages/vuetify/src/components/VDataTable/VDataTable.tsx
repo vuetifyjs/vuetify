@@ -10,7 +10,7 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, syncOpenedWithGroups, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -176,7 +176,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       sortFunctions,
       sortRawFunctions,
     })
-    syncOpenedWithGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
 
     const pageBy = computed(() => {
       if (props.pageBy === 'auto') {

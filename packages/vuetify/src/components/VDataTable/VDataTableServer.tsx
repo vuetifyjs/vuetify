@@ -8,7 +8,7 @@ import { VTable } from '@/components/VTable'
 
 // Composables
 import { provideExpanded } from './composables/expand'
-import { createGroupBy, provideGroupBy, syncOpenedWithGroups, useGroupedItems } from './composables/group'
+import { createGroupBy, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -91,7 +91,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       toggleGroup,
       extractRows,
     } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
-    syncOpenedWithGroups(openedGroups, openAll, items, groupBy, groupKey)
+    useOpenAllGroups(openedGroups, openAll, items, groupBy, groupKey)
 
     const { pageCount, setItemsPerPage, prevPage, nextPage, setPage } = providePagination({ page, itemsPerPage, itemsLength })
 
