@@ -82,12 +82,6 @@ Use the **group-by** prop to group items, and **v-model:opened** to control whic
 
 <ExamplesExample file="v-data-iterator/prop-grouping" />
 
-::: warning
-
-When **open-all** is enabled, the **v-model:opened** array does not represent the full open state — groups that the user closes are tracked separately and are not emitted through the model. Setting `opened = []` while **open-all** is `true` will not collapse anything; disable **open-all** first to programmatically close all groups.
-
-:::
-
 ### Slots
 
 The `v-data-iterator` component has 4 main slots
