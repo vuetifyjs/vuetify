@@ -376,13 +376,19 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
     const background = eventColorFunction(event.input)
     const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
     const singline = diffMinutes(event.start, event.end) <= parsedEventOverlapThreshold.value
+
     const formatTime = (withTime: CalendarTimestamp, ampm: boolean): string => {
+      const hour12 = props.format === 'ampm' ? true
+        : props.format === '24hr' ? false
+        : undefined
+
       const formatter = base.getFormatter({
         timeZone: 'UTC',
         hour: props.format === '24hr' ? '2-digit' : 'numeric',
         minute: withTime.minute > 0 ? 'numeric' : undefined,
-        hour12: props.format === '24hr' ? false : undefined,
+        hour12,
       })
+
       return formatter(withTime, true)
     }
 

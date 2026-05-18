@@ -58,9 +58,9 @@ This is an example of an event calendar with all-day and timed events with a **t
 
 <ExamplesExample file="v-calendar/prop-type-week" />
 
-#### Hour 24
+#### 24-hour format
 
-Use the `hour24` prop to display interval labels and event times in 24-hour format instead of the locale default.
+By default, interval labels and event times adapt to the active locale. Use the `format` prop to set `24hr` or `ampm` regardless of locale.
 
 <ExamplesExample file="v-calendar/prop-hour24" />
 
