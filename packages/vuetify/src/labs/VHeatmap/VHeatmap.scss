@@ -7,12 +7,9 @@
     --v-heatmap-cell-height: #{$heatmap-cell-height};
     --v-heatmap-cell-gap: #{$heatmap-cell-gap};
     --v-heatmap-cell-radius: #{$heatmap-cell-border-radius};
-    --v-heatmap-column-header-padding: #{$heatmap-column-header-padding};
+    --v-heatmap-column-header-margin: #{$heatmap-column-header-margin};
     --v-heatmap-row-header-padding: #{$heatmap-row-header-padding};
-    --v-heatmap-group-gap: calc(var(--v-heatmap-cell-width) + var(--v-heatmap-cell-gap));
-
-    --v-heatmap-cell-border: #{$heatmap-cell-border-color};
-    --v-heatmap-day-bg: #{$heatmap-cell-background};
+    --v-heatmap-empty-color: #{$heatmap-cell-empty-color};
 
     display: inline-block;
     line-height: 1;
@@ -43,51 +40,42 @@
     white-space: nowrap;
   }
 
-  .v-heatmap__groups {
+  .v-heatmap__group-labels {
     grid-column: 2;
-    grid-row: 1 / -1;
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-auto-flow: column;
-    grid-auto-columns: auto;
-    column-gap: var(--v-heatmap-group-gap);
-  }
-
-  .v-heatmap__group {
-    grid-row: 1 / -1;
-    display: grid;
-    grid-template-rows: subgrid;
-  }
-
-  .v-heatmap__group-label {
     grid-row: 1;
-    font-size: $heatmap-header-font-size;
-    padding-bottom: var(--v-heatmap-column-header-padding);
-    white-space: nowrap;
   }
 
   .v-heatmap__column-headers {
+    grid-column: 2;
     grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(var(--v-heatmap-group-columns), var(--v-heatmap-cell-width));
-    column-gap: var(--v-heatmap-cell-gap);
-    padding-bottom: var(--v-heatmap-column-header-padding);
   }
 
+  .v-heatmap__group-labels,
+  .v-heatmap__column-headers {
+    position: relative;
+    line-height: 1.4;
+    min-height: calc(#{$heatmap-header-font-size} * 1.4);
+    margin: var(--v-heatmap-column-header-margin);
+  }
+
+  .v-heatmap__group-label,
   .v-heatmap__column-header {
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
     font-size: $heatmap-header-font-size;
-    text-align: center;
     white-space: nowrap;
   }
 
-  .v-heatmap__group-grid {
+  .v-heatmap__column-header {
+    text-align: center;
+  }
+
+  .v-heatmap__grid {
+    grid-column: 2;
     grid-row: 3;
     display: block;
     overflow: visible;
-  }
-
-  .v-heatmap__group-grid--offset-start {
-    margin-inline-start: calc(-1 * var(--v-heatmap-group-gap) + var(--v-heatmap-cell-gap));
   }
 
   .v-heatmap__cell {
@@ -109,20 +97,11 @@
   .v-heatmap__cell-rect {
     rx: var(--v-heatmap-cell-radius, #{$heatmap-cell-border-radius});
     ry: var(--v-heatmap-cell-radius, #{$heatmap-cell-border-radius});
+    fill: var(--v-heatmap-cell-color, var(--v-heatmap-empty-color, transparent));
     transition: fill .15s ease;
-    // No default `fill` here — SVG presentation attributes have lower
-    // specificity than any CSS rule, so the per-cell `fill="..."` attribute
-    // would be overridden by it. Only set `fill` from CSS for cases that
-    // actually need it (empty, color-scale).
 
-    .v-heatmap__cell--color-scale & {
-      fill: var(--v-heatmap-cell-color);
-    }
-
-    .v-heatmap__cell--empty & {
-      fill: var(--v-heatmap-day-bg);
-      stroke: var(--v-heatmap-cell-border);
-      stroke-width: 2;
+    .v-heatmap__cell--disabled & {
+      fill: var(--v-heatmap-empty-color, transparent);
     }
   }
 
@@ -132,10 +111,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .v-heatmap__cell--color-scale .v-heatmap__cell-overlay {
-    color: oklch(from var(--v-heatmap-cell-color) round(1.21 - L) 0 0);
+    color: oklch(from var(--v-heatmap-cell-color) round(1.21 - L) 0 0); // auto-contrast against cell color
   }
 
   .v-heatmap__cell-text {

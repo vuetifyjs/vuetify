@@ -2,6 +2,7 @@
 import './VHeatmap.scss'
 
 // Components
+import { VHeatmapCell } from './VHeatmapCell'
 import { VHeatmapLegend } from './VHeatmapLegend'
 
 // Composables
@@ -9,12 +10,12 @@ import { useHeatmap } from './heatmap'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { ref, watch } from 'vue'
-import { convertToUnit, genericComponent, hasLightForeground, isParsableColor, parseColor, propsFactory, useRender } from '@/util'
+import { computed, ref, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { HeatmapCell, HeatmapColumnGroup, HeatmapThresholds } from './heatmap'
+import type { CSSProperties, PropType } from 'vue'
+import type { HeatmapCell, HeatmapGroup, HeatmapThresholds } from './heatmap'
 import type { SelectItemKey } from '@/util'
 
 export interface HeatmapLegendOptions {
@@ -27,13 +28,7 @@ export type VHeatmapSlots = {
   legend: { thresholds: HeatmapThresholds, activeBuckets: number[], toggle: (index: number) => void }
   'row-header': { row: any, index: number, items: HeatmapCell[] }
   'column-header': { column: any, index: number, items: HeatmapCell[] }
-  'group-header': { group: HeatmapColumnGroup, items: HeatmapCell[] }
-}
-
-function toPx (value: any, defaultValue: number): number {
-  if (value == null || value === '') return defaultValue
-  const parsed = parseFloat(value)
-  return Number.isFinite(parsed) ? parsed : defaultValue
+  'group-header': { group: HeatmapGroup, items: HeatmapCell[] }
 }
 
 export const makeVHeatmapProps = propsFactory({
@@ -45,7 +40,10 @@ export const makeVHeatmapProps = propsFactory({
     type: [Number, String],
     default: 6,
   },
-  groupGap: [Number, String],
+  groupGap: {
+    type: [Number, String] as PropType<number | string>,
+    default: 0,
+  },
   rounded: [Number, String],
   hideColumnHeaders: Boolean,
   hideRowHeaders: Boolean,
@@ -80,6 +78,7 @@ export const makeVHeatmapProps = propsFactory({
     type: [Array, Object] as PropType<HeatmapThresholds>,
     default: () => [],
   },
+  emptyColor: String,
   rows: Array as PropType<any[]>,
   columns: Array as PropType<any[]>,
   ...makeThemeProps(),
@@ -92,12 +91,46 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { data } = useHeatmap(props)
+    const {
+      rows,
+      rowItems,
+      groups,
+      hasExplicitColumns,
+      cellWidth,
+      cellHeight,
+      gap,
+      cellStep,
+      rowStep,
+      totalWidth,
+      totalHeight,
+      bucketColors,
+      linearColors,
+      colorSpaceClass,
+      bucketBoundaries,
+    } = useHeatmap(props)
+
     const activeBuckets = ref<number[]>([])
 
-    watch(() => props.thresholds, val => {
-      activeBuckets.value = Array.isArray(val) ? val.map((_, i) => i) : []
-    }, { deep: 1, immediate: true })
+    const colorProperties = computed(() => {
+      const style: CSSProperties = {}
+      const buckets = bucketColors.value
+      const linear = linearColors.value
+
+      for (let i = 0; i < buckets.length; i++) {
+        style[`--v-heatmap-color-bucket-${i}`] = buckets[i]
+      }
+
+      if (linear) {
+        style['--v-heatmap-color-start'] = linear.from
+        style['--v-heatmap-color-end'] = linear.to
+      }
+
+      return style
+    })
+
+    watch(bucketBoundaries, val => {
+      activeBuckets.value = val.map((_, i) => i)
+    }, { immediate: true })
 
     function toggle (index: number) {
       const position = activeBuckets.value.indexOf(index)
@@ -107,31 +140,17 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
     }
 
     function isDisabled (cell: HeatmapCell) {
-      const thresholds = props.thresholds
-
-      if (!Array.isArray(thresholds)) return false
-
-      const bucketIndex = thresholds.findLastIndex(({ min }) => cell.value >= min)
-
-      if (bucketIndex < 0) return false
-
-      return !activeBuckets.value.includes(bucketIndex)
+      if (cell.bucketIndex < 0) return false
+      return !activeBuckets.value.includes(cell.bucketIndex)
     }
 
     useRender(() => {
-      const cellWidth = toPx(Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize, 26)
-      const cellHeight = toPx(Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize, 26)
-      const gap = toPx(props.gap, 6)
-      const groupGap = props.groupGap != null ? toPx(props.groupGap, cellWidth + gap) : (cellWidth + gap)
       const radius = convertToUnit(props.rounded)
-
-      const { rows, groups, rowItems, hasExplicitColumns } = data.value
-      const rowCount = rows.length
-
-      const hasGroupLabels = !props.hideColumnHeaders && (!!slots['group-header'] || groups.some(g => g.label))
-      const hasColumnHeaders = !props.hideColumnHeaders && hasExplicitColumns
-
-      const totalHeight = rowCount * cellHeight + Math.max(0, rowCount - 1) * gap
+      const hasGroupLabels = !props.hideColumnHeaders && (!!slots['group-header'] || groups.value.some(group => group.label))
+      const hasColumnHeaders = !props.hideColumnHeaders && hasExplicitColumns.value
+      const itemProps = props.itemProps
+      const hasCellSlot = !!slots.cell
+      const space = colorSpaceClass.value
 
       return (
         <div
@@ -144,139 +163,98 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
               'v-heatmap--has-group-labels': hasGroupLabels,
               'v-heatmap--has-column-headers': hasColumnHeaders,
             },
+            space && `v-heatmap--color-space-${space}`,
             themeClasses.value,
           ]}
           style={{
-            '--v-heatmap-cell-width': `${cellWidth}px`,
-            '--v-heatmap-cell-height': `${cellHeight}px`,
-            '--v-heatmap-cell-gap': `${gap}px`,
-            '--v-heatmap-group-gap': `${groupGap}px`,
+            '--v-heatmap-cell-width': `${cellWidth.value}px`,
+            '--v-heatmap-cell-height': `${cellHeight.value}px`,
+            '--v-heatmap-cell-gap': `${gap.value}px`,
             '--v-heatmap-cell-radius': radius,
             '--v-heatmap-hover-scale': props.hover ? Number(props.hoverScale) : undefined,
-            '--v-heatmap-rows-count': rowCount,
+            '--v-heatmap-rows-count': rows.value.length,
+            '--v-heatmap-empty-color': props.emptyColor,
+            ...colorProperties.value,
           }}
         >
           <div class="v-heatmap__body">
-            { !props.hideRowHeaders && (
-              <div class="v-heatmap__row-headers" key="row-headers">
-                { rows.map((row, index) => (
-                  <div key={ `row-header-${index}` } class="v-heatmap__row-header">
-                    { slots['row-header']?.({ row, index, items: rowItems.get(row) ?? [] }) ?? row }
+            { hasGroupLabels && (
+              <div class="v-heatmap__group-labels" key="group-labels" style={{ width: `${totalWidth.value}px` }}>
+                { groups.value.map(group => (
+                  <div
+                    key={ group.key }
+                    class="v-heatmap__group-label"
+                    style={{
+                      insetInlineStart: `${group.x}px`,
+                      width: `${group.width}px`,
+                      paddingInlineStart: group.labelOffset ? `${group.labelOffset}px` : undefined,
+                    }}
+                  >
+                    { slots['group-header']?.({ group, items: group.items }) ?? group.label }
                   </div>
                 ))}
               </div>
             )}
 
-            <div class="v-heatmap__groups">
-              { groups.map((group, groupIndex) => {
-                const columnCount = group.columns.length
-                const groupWidth = columnCount * cellWidth + Math.max(0, columnCount - 1) * gap
-                // Calendar-style: a non-first group that begins with a leading blank in its first column
-                // should overlap the gap between groups so the rendered weeks stay flush.
-                const offsetStart = groupIndex > 0 && group.columns[0]?.cells[0] == null
-
-                return (
-                  <div
-                    key={ group.key }
-                    class="v-heatmap__group"
-                    style={{ '--v-heatmap-group-columns': columnCount }}
-                  >
-                    { hasGroupLabels && (
-                      <div class="v-heatmap__group-label" key="group-label">
-                        { slots['group-header']?.({ group, items: group.items }) ?? group.label }
-                      </div>
-                    )}
-                    { hasColumnHeaders && (
-                      <div class="v-heatmap__column-headers" key="column-headers">
-                        { group.columns.map((col, index) => (
-                          <div key={ `column-header-${col.key}` } class="v-heatmap__column-header">
-                            { slots['column-header']?.({ column: col.key, index, items: col.items }) ?? col.key }
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <svg
-                      class={[
-                        'v-heatmap__group-grid',
-                        { 'v-heatmap__group-grid--offset-start': offsetStart },
-                      ]}
-                      width={ groupWidth }
-                      height={ totalHeight }
-                      viewBox={ `0 0 ${groupWidth} ${totalHeight}` }
+            { hasColumnHeaders && (
+              <div class="v-heatmap__column-headers" key="column-headers" style={{ width: `${totalWidth.value}px` }}>
+                { groups.value.flatMap(group =>
+                  group.columns.map((col, index) => (
+                    <div
+                      key={ `column-header-${group.key}-${col.key}` }
+                      class="v-heatmap__column-header"
+                      style={{
+                        insetInlineStart: `${group.x + index * cellStep.value}px`,
+                        width: `${cellWidth.value}px`,
+                      }}
                     >
-                      { group.columns.flatMap((col, columnIndex) =>
-                        col.cells.map((cell, rowIndex) => {
-                          if (!cell) return null
+                      { slots['column-header']?.({ column: col.key, index, items: col.items }) ?? col.key }
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
 
-                          const x = columnIndex * (cellWidth + gap)
-                          const y = rowIndex * (cellHeight + gap)
-                          const disabled = isDisabled(cell)
-                          // SVG <title> child renders as a native tooltip; the `title` HTML attribute
-                          // does not. Pull it out of the spread and render it as a child instead.
-                          const { title, ...cellProps } = (typeof props.itemProps === 'function'
-                            ? props.itemProps(cell)
-                            : props.itemProps) ?? {}
-                          const color = !disabled ? cell.color : undefined
-                          const isColorScale = !!color && color.includes('(')
-                          const hasSlot = !!slots.cell
-                          const empty = !color
-                          const key = `${group.key}-${columnIndex}-${rowIndex}`
-
-                          // Match v2 behavior: auto-contrast text on solid-color cells (hex/rgb).
-                          // Color-scale cells handle this in CSS via oklch().
-                          const autoTextColor = !empty && !isColorScale && color && isParsableColor(color)
-                            ? (hasLightForeground(parseColor(color)) ? '#fff' : '#000')
-                            : undefined
-
-                          return (
-                            <g
-                              key={ key }
-                              class={[
-                                'v-heatmap__cell',
-                                {
-                                  'v-heatmap__cell--empty': empty,
-                                  'v-heatmap__cell--color-scale': isColorScale,
-                                  'v-heatmap__cell--disabled': disabled,
-                                },
-                              ]}
-                              transform={ `translate(${x},${y})` }
-                              style={[
-                                isColorScale ? { '--v-heatmap-cell-color': color } : null,
-                                autoTextColor ? { color: autoTextColor } : null,
-                              ]}
-                              { ...cellProps }
-                            >
-                              { title != null && <title key="title">{ title }</title> }
-                              <rect
-                                class="v-heatmap__cell-underlay"
-                                width={ cellWidth }
-                                height={ cellHeight }
-                                fill="transparent"
-                              />
-                              <g class="v-heatmap__cell-content">
-                                <rect
-                                  class="v-heatmap__cell-rect"
-                                  width={ cellWidth }
-                                  height={ cellHeight }
-                                  fill={ !empty && !isColorScale ? color : undefined }
-                                />
-                                { hasSlot && (
-                                  <foreignObject class="v-heatmap__cell-overlay" width={ cellWidth } height={ cellHeight }>
-                                    <div>
-                                      { slots.cell?.({ item: cell }) }
-                                    </div>
-                                  </foreignObject>
-                                )}
-                              </g>
-                            </g>
-                          )
-                        })
-                      )}
-                    </svg>
+            { !props.hideRowHeaders && (
+              <div class="v-heatmap__row-headers" key="row-headers">
+                { rows.value.map((row, index) => (
+                  <div key={ `row-header-${index}` } class="v-heatmap__row-header">
+                    { slots['row-header']?.({ row, index, items: rowItems.value.get(row) ?? [] }) ?? row }
                   </div>
+                ))}
+              </div>
+            )}
+
+            <svg
+              class="v-heatmap__grid"
+              width={ totalWidth.value }
+              height={ totalHeight.value }
+              viewBox={ `0 0 ${totalWidth.value} ${totalHeight.value}` }
+            >
+              { groups.value.flatMap(group =>
+                group.columns.flatMap((col, columnIndex) =>
+                  col.cells.map((cell, rowIndex) => {
+                    if (!cell) return null
+
+                    const cellProps = (typeof itemProps === 'function' ? itemProps(cell) : itemProps) ?? {}
+
+                    return (
+                      <VHeatmapCell
+                        key={ `${group.key}-${columnIndex}-${rowIndex}` }
+                        item={ cell }
+                        x={ group.x + columnIndex * cellStep.value }
+                        y={ rowIndex * rowStep.value }
+                        width={ cellWidth.value }
+                        height={ cellHeight.value }
+                        disabled={ isDisabled(cell) }
+                        cellProps={ cellProps }
+                        v-slots={ hasCellSlot ? { default: () => slots.cell!({ item: cell }) } : undefined }
+                      />
+                    )
+                  })
                 )
-              })}
-            </div>
+              )}
+            </svg>
           </div>
 
           { props.legend && (

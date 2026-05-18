@@ -41,41 +41,41 @@ const THRESHOLDS = [
 
 describe('useHeatmap rows', () => {
   it('derives rows from items in insertion order', () => {
-    const { data } = setup({
+    const { rows } = setup({
       itemColumn: 'col',
       items: [
         { row: 'B', col: 'X', value: 1 },
         { row: 'A', col: 'X', value: 2 },
       ],
     })
-    expect(data.value.rows).toEqual(['B', 'A'])
+    expect(rows.value).toEqual(['B', 'A'])
   })
 
   it('uses explicit rows when provided', () => {
-    const { data } = setup({
+    const { rows } = setup({
       rows: ['A', 'B', 'C'],
       itemColumn: 'col',
       items: [
         { row: 'B', col: 'X', value: 1 },
       ],
     })
-    expect(data.value.rows).toEqual(['A', 'B', 'C'])
+    expect(rows.value).toEqual(['A', 'B', 'C'])
   })
 })
 
 describe('useHeatmap column groups', () => {
   it('creates a single empty-keyed group when groupBy is not set', () => {
-    const { data } = setup({
+    const { groups } = setup({
       itemColumn: 'col',
       items: [{ row: 'A', col: 'X', value: 1 }],
     })
-    expect(data.value.groups).toHaveLength(1)
-    expect(data.value.groups[0].key).toBe('')
-    expect(data.value.groups[0].label).toBe('')
+    expect(groups.value).toHaveLength(1)
+    expect(groups.value[0].key).toBe('')
+    expect(groups.value[0].label).toBe('')
   })
 
   it('splits items across column groups by groupBy', () => {
-    const { data } = setup({
+    const { groups } = setup({
       groupBy: 'month',
       itemColumn: 'col',
       items: [
@@ -84,13 +84,13 @@ describe('useHeatmap column groups', () => {
         { month: 'Jan', row: 'A', col: 'Y', value: 3 },
       ],
     })
-    expect(data.value.groups.map(g => g.key)).toEqual(['Jan', 'Feb'])
-    expect(data.value.groups[0].columns).toHaveLength(2) // X, Y
-    expect(data.value.groups[1].columns).toHaveLength(1) // X
+    expect(groups.value.map(g => g.key)).toEqual(['Jan', 'Feb'])
+    expect(groups.value[0].columns).toHaveLength(2) // X, Y
+    expect(groups.value[1].columns).toHaveLength(1) // X
   })
 
   it('accepts a function as groupBy', () => {
-    const { data } = setup({
+    const { groups } = setup({
       groupBy: (v: any) => v.m.toUpperCase(),
       itemColumn: 'col',
       items: [
@@ -98,31 +98,31 @@ describe('useHeatmap column groups', () => {
         { m: 'feb', row: 'A', col: 'X', value: 2 },
       ],
     })
-    expect(data.value.groups.map(g => g.key)).toEqual(['JAN', 'FEB'])
+    expect(groups.value.map(g => g.key)).toEqual(['JAN', 'FEB'])
   })
 })
 
 describe('useHeatmap explicit columns (itemColumn)', () => {
   it('derives columns per group from items', () => {
-    const { data } = setup({
+    const { groups } = setup({
       itemColumn: 'col',
       items: [
         { row: 'A', col: 'X', value: 1 },
         { row: 'A', col: 'Y', value: 2 },
       ],
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols.map(c => c.key)).toEqual(['X', 'Y'])
   })
 
   it('uses explicit columns when provided', () => {
-    const { data } = setup({
+    const { groups } = setup({
       itemColumn: 'col',
       columns: ['X', 'Y', 'Z'],
       rows: ['A'],
       items: [{ row: 'A', col: 'X', value: 1 }],
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols.map(c => c.key)).toEqual(['X', 'Y', 'Z'])
     expect(cols[0].cells[0]?.value).toBe(1)
     expect(cols[1].cells[0]).toBeNull() // blank
@@ -130,7 +130,7 @@ describe('useHeatmap explicit columns (itemColumn)', () => {
   })
 
   it('maps cell values and colors by (row, column)', () => {
-    const { data } = setup({
+    const { groups } = setup({
       itemColumn: 'col',
       rows: ['A'],
       items: [
@@ -139,7 +139,7 @@ describe('useHeatmap explicit columns (itemColumn)', () => {
       ],
       thresholds: THRESHOLDS,
     })
-    const [cx, cy] = data.value.groups[0].columns
+    const [cx, cy] = groups.value[0].columns
     expect(cx.cells[0]?.value).toBe(7)
     expect(cx.cells[0]?.color).toBe('#b')
     expect(cy.cells[0]?.color).toBe('#c')
@@ -151,7 +151,7 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
   const rows = [0, 1, 2, 3, 4, 5, 6]
 
   it('places items in a single column while row index is monotonically increasing', () => {
-    const { data } = setup({
+    const { groups } = setup({
       rows,
       items: [
         { row: 0, value: 1 },
@@ -159,7 +159,7 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
         { row: 2, value: 3 },
       ],
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols).toHaveLength(1)
     expect(cols[0].cells[0]?.value).toBe(1)
     expect(cols[0].cells[1]?.value).toBe(2)
@@ -169,7 +169,7 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
   })
 
   it('starts a new column when row index wraps back', () => {
-    const { data } = setup({
+    const { groups } = setup({
       rows,
       items: [
         { row: 5, value: 1 },
@@ -178,7 +178,7 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
         { row: 1, value: 4 },
       ],
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols).toHaveLength(2)
     // first column: leading blanks, then Fri/Sat
     expect(cols[0].cells[0]).toBeNull()
@@ -191,7 +191,7 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
   })
 
   it('groupBy + inferred columns produces a calendar-like layout', () => {
-    const { data } = setup({
+    const { groups } = setup({
       rows,
       groupBy: 'month',
       items: [
@@ -204,9 +204,9 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
         { month: 'Feb', row: 2, value: 5 },
       ],
     })
-    expect(data.value.groups).toHaveLength(2)
+    expect(groups.value).toHaveLength(2)
 
-    const [jan, feb] = data.value.groups
+    const [jan, feb] = groups.value
     expect(jan.columns).toHaveLength(1)
     // Jan leading blanks (Sun, Mon, Tue) then Wed-Fri, Sat blank
     expect(jan.columns[0].cells[0]).toBeNull()
@@ -223,20 +223,20 @@ describe('useHeatmap inferred columns (no itemColumn)', () => {
 
 describe('useHeatmap accessors', () => {
   it('supports function accessors', () => {
-    const { data } = setup({
+    const { groups } = setup({
       itemRow: (v: any) => v.r,
       itemColumn: (v: any) => v.c,
       itemValue: (v: any) => v.v * 2,
       items: [{ r: 'A', c: 'X', v: 3 }],
     })
-    const cell = data.value.groups[0].columns[0].cells[0]
+    const cell = groups.value[0].columns[0].cells[0]
     expect(cell?.value).toBe(6)
     expect(cell?.row).toBe('A')
     expect(cell?.column).toBe('X')
   })
 
   it('interpolates colors with color-mix when thresholds is a linear scale', () => {
-    const { data } = setup({
+    const { groups } = setup({
       rows: [0],
       itemColumn: 'col',
       columns: ['A', 'B', 'C', 'D', 'E'],
@@ -252,16 +252,16 @@ describe('useHeatmap accessors', () => {
         to: { min: 3, color: '#00ff00' },
       },
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols[0].cells[0]?.color).toBe('#ff0000')
     expect(cols[1].cells[0]?.color).toBe('#ff0000')
-    expect(cols[2].cells[0]?.color).toBe('color-mix(in srgb, #00ff00 50%, #ff0000)')
+    expect(cols[2].cells[0]?.color).toBe('color-mix(in srgb, #ff0000, #00ff00 50%)')
     expect(cols[3].cells[0]?.color).toBe('#00ff00')
     expect(cols[4].cells[0]?.color).toBe('#00ff00')
   })
 
   it('applies threshold colors with findLast semantics', () => {
-    const { data } = setup({
+    const { groups } = setup({
       rows: [0],
       itemColumn: 'col',
       columns: ['X', 'Y', 'Z'],
@@ -272,7 +272,7 @@ describe('useHeatmap accessors', () => {
       ],
       thresholds: THRESHOLDS,
     })
-    const cols = data.value.groups[0].columns
+    const cols = groups.value[0].columns
     expect(cols[0].cells[0]?.color).toBeUndefined()
     expect(cols[1].cells[0]?.color).toBe('#a')
     expect(cols[2].cells[0]?.color).toBe('#c')
@@ -281,7 +281,7 @@ describe('useHeatmap accessors', () => {
 
 describe('useHeatmap rowItems', () => {
   it('indexes cells by row key', () => {
-    const { data } = setup({
+    const { rowItems } = setup({
       rows: [0, 1],
       itemColumn: 'col',
       items: [
@@ -290,7 +290,7 @@ describe('useHeatmap rowItems', () => {
         { row: 1, col: 'X', value: 3 },
       ],
     })
-    expect(data.value.rowItems.get(0)).toHaveLength(2)
-    expect(data.value.rowItems.get(1)).toHaveLength(1)
+    expect(rowItems.value.get(0)).toHaveLength(2)
+    expect(rowItems.value.get(1)).toHaveLength(1)
   })
 })

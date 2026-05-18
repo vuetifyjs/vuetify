@@ -1,9 +1,13 @@
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { CSSProperties } from 'vue'
 
 export const makeVHeatmapLegendCellProps = propsFactory({
   color: String,
+  bucketIndex: Number,
   disabled: Boolean,
   width: {
     type: [Number, String],
@@ -28,13 +32,20 @@ export const VHeatmapLegendCell = defineComponent({
   props: makeVHeatmapLegendCellProps(),
 
   setup (props, { slots, attrs }) {
-    const isColorScale = computed(() => !!props.color && props.color.includes('('))
-    const width = computed(() => toPx(props.width, 24))
-    const height = computed(() => toPx(props.height, 24))
+    const width = toRef(() => toPx(props.width, 24))
+    const height = toRef(() => toPx(props.height, 24))
 
     useRender(() => {
-      const empty = !props.color || props.disabled
-      const fill = !empty && !isColorScale.value ? props.color : undefined
+      const hasBucket = props.bucketIndex != null && props.bucketIndex >= 0
+
+      const style: CSSProperties = {
+        '--v-heatmap-cell-radius': convertToUnit(props.rounded),
+      }
+      if (hasBucket) {
+        style['--v-heatmap-cell-color'] = `var(--v-heatmap-color-bucket-${props.bucketIndex})`
+      } else if (props.color) {
+        style['--v-heatmap-cell-color'] = props.color
+      }
 
       return (
         <svg
@@ -42,25 +53,18 @@ export const VHeatmapLegendCell = defineComponent({
             'v-heatmap__cell',
             'v-heatmap__cell--standalone',
             {
-              'v-heatmap__cell--empty': empty,
-              'v-heatmap__cell--color-scale': !empty && isColorScale.value,
               'v-heatmap__cell--disabled': props.disabled,
             },
           ]}
           width={ width.value }
           height={ height.value }
           viewBox={ `0 0 ${width.value} ${height.value}` }
-          style={[
-            { '--v-heatmap-cell-radius': convertToUnit(props.rounded) },
-            (!empty && isColorScale.value) ? { '--v-heatmap-cell-color': props.color } : null,
-            attrs.style as any,
-          ]}
+          style={[style, attrs.style as any]}
         >
           <rect
             class="v-heatmap__cell-rect"
             width={ width.value }
             height={ height.value }
-            fill={ fill }
           />
           { slots.default && (
             <foreignObject class="v-heatmap__cell-overlay" width={ width.value } height={ height.value }>

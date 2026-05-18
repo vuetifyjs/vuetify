@@ -97,7 +97,7 @@
   "components/footers": ["VFooter"],
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
-  "components/heatmaps": ["VHeatmap", "VHeatmapLegend"],
+  "components/heatmaps": ["VHeatmap", "VHeatmapCell", "VHeatmapLegend", "VHeatmapLegendCell"],
   "components/highlights": ["VHighlight"],
   "components/hotkeys": ["VHotkey"],
   "components/hover": ["VHover"],
