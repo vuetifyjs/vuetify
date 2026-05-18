@@ -46,6 +46,7 @@ export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vueti
 
 export type VOtpInputSlots = {
   default: never
+  fields: never
   divider: { index: number }
   loader: never
 }
@@ -145,6 +146,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     const renderSelectionEnd = ref<number | null>(null)
 
     let prevSelection: [number | null, number | null, 'forward' | 'backward' | 'none' | null] = [null, null, null]
+    let isComposing = false
 
     // selectionchange is not in InputHTMLAttributes types
     watch(inputRef, (input, _, onCleanup) => {
@@ -250,6 +252,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     })
 
     function onInput (e: Event) {
+      if (isComposing) return
       const target = e.target as HTMLInputElement
       let filtered = target.value
       if (effectivePattern.value) {
@@ -258,6 +261,15 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       filtered = filtered.slice(0, length.value)
       target.value = filtered
       model.value = filtered.split('')
+    }
+
+    function onCompositionstart () {
+      isComposing = true
+    }
+
+    function onCompositionend (e: CompositionEvent) {
+      isComposing = false
+      onInput(e)
     }
 
     let focusAtPending = false
@@ -461,7 +473,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             style={[dimensionStyles.value]}
             dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
-            { slots.default ? slots.default() : props.merged
+            { slots.fields ? slots.fields() : props.merged
               ? (
                 <VOtpGroup merged>
                   { Array.from({ length: length.value }, (_, i) => (
@@ -501,6 +513,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 onBlur={ onBlur }
                 onPaste={ onPaste }
                 onMousedown={ onInputMousedown }
+                onCompositionstart={ onCompositionstart }
+                onCompositionend={ onCompositionend }
               />
             </div>
 
@@ -519,6 +533,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 />
               )}
             </VOverlay>
+
+            { slots.default?.() }
           </div>
         </div>
       )

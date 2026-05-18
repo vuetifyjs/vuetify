@@ -147,6 +147,6 @@ Using the `divider` prop or the `#divider` slot, you can add visual separators b
 
 ### Custom layout
 
-Using the `v-otp-field`, `v-otp-group`, and `v-otp-separator` sub-components, you can build custom layouts. Groups can be individually merged, and separators accept any content through their default slot.
+Using the `v-otp-field`, `v-otp-group`, and `v-otp-separator` sub-components inside the `#fields` slot, you can build custom layouts. Groups can be individually merged, and separators accept any content through their default slot.
 
 <ExamplesExample file="v-otp-input/misc-custom-layout" />

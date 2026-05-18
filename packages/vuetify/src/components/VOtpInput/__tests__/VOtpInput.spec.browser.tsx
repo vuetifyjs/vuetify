@@ -337,24 +337,30 @@ describe('VOtpInput', () => {
   it('renders custom layout with sub-components', async () => {
     render(() => (
       <VOtpInput>
-        <VOtpGroup merged>
-          <VOtpField index={ 0 } />
-          <VOtpField index={ 1 } />
-          <VOtpField index={ 2 } />
-        </VOtpGroup>
-        <VOtpSeparator />
-        <VOtpGroup merged>
-          <VOtpField index={ 3 } />
-          <VOtpField index={ 4 } />
-          <VOtpField index={ 5 } />
-        </VOtpGroup>
+        {{
+          fields: () => (
+            <>
+              <VOtpGroup merged>
+                <VOtpField index={ 0 } />
+                <VOtpField index={ 1 } />
+                <VOtpField index={ 2 } />
+              </VOtpGroup>
+              <VOtpSeparator />
+              <VOtpGroup merged>
+                <VOtpField index={ 3 } />
+                <VOtpField index={ 4 } />
+                <VOtpField index={ 5 } />
+              </VOtpGroup>
+            </>
+          ),
+        }}
       </VOtpInput>
     ))
 
     const groups = screen.getAllByCSS('.v-otp-group--merged')
     expect(groups).toHaveLength(2)
 
-    const separators = screen.getAllByCSS('.v-otp-separator')
+    const separators = screen.getAllByCSS('.v-otp-input__divider')
     expect(separators).toHaveLength(1)
 
     const fields = screen.getAllByCSS('.v-field')
@@ -364,17 +370,23 @@ describe('VOtpInput', () => {
   it('supports click-to-select in custom layout', async () => {
     render(() => (
       <VOtpInput>
-        <VOtpGroup merged>
-          <VOtpField index={ 0 } />
-          <VOtpField index={ 1 } />
-          <VOtpField index={ 2 } />
-        </VOtpGroup>
-        <VOtpSeparator />
-        <VOtpGroup merged>
-          <VOtpField index={ 3 } />
-          <VOtpField index={ 4 } />
-          <VOtpField index={ 5 } />
-        </VOtpGroup>
+        {{
+          fields: () => (
+            <>
+              <VOtpGroup merged>
+                <VOtpField index={ 0 } />
+                <VOtpField index={ 1 } />
+                <VOtpField index={ 2 } />
+              </VOtpGroup>
+              <VOtpSeparator />
+              <VOtpGroup merged>
+                <VOtpField index={ 3 } />
+                <VOtpField index={ 4 } />
+                <VOtpField index={ 5 } />
+              </VOtpGroup>
+            </>
+          ),
+        }}
       </VOtpInput>
     ))
     const input = getInput()
