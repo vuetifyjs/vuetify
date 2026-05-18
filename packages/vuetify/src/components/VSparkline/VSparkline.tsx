@@ -63,7 +63,7 @@ export const VSparkline = genericComponent<VSparklineSlots>()({
           key={ props.type }
           class={ textColorClasses.value }
           style={ textColorStyles.value }
-          viewBox={ `0 0 ${props.width} ${parseInt(totalHeight.value, 10)}` }
+          viewBox={ `0 0 ${props.width} ${totalHeight.value}` }
           { ...lineProps }
           onUpdate:currentIndex={ (v: number | null) => emit('update:currentIndex', v) }
           v-slots={ slots }

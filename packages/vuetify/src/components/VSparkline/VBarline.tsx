@@ -1,5 +1,5 @@
 // Components
-import { VTooltip } from '@/components/VTooltip/VTooltip'
+import { VSparklineTooltip } from './VSparklineTooltip'
 
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
@@ -8,24 +8,12 @@ import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFac
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
+import type { Boundary } from './util/line'
+
 export type VBarlineSlots = {
   default: void
   label: { index: number, value: string }
   tooltip: { index: number, value: number }
-}
-
-export type SparklineItem = number | { value: number }
-
-export type SparklineText = {
-  x: number
-  value: string
-}
-
-export interface Boundary {
-  minX: number
-  minY: number
-  maxX: number
-  maxY: number
 }
 
 export interface Bar {
@@ -125,22 +113,32 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       el.style.transition = `y ${duration}ms ${easing}, height ${duration}ms ${easing}`
     }
 
-    function collapseNewBars (fromIndex: number, duration: number, easing: string) {
-      const barsData = bars.value
-      for (let i = fromIndex; i < barsData.length; i++) {
+    function collapseNewBars (bars: Bar[], fromIndex: number, duration: number, easing: string) {
+      for (let i = fromIndex; i < bars.length; i++) {
         const el = clipRects.value[i]
         if (!el) continue
 
         // Snap to collapsed at bar's baseline
         el.style.transition = 'none'
-        el.setAttribute('y', String(barsData[i].y + barsData[i].height))
+        el.setAttribute('y', String(bars[i].y + bars[i].height))
         el.setAttribute('height', '0')
         el.getBoundingClientRect()
 
         // Animate to final state
         applyTransition(el, duration, easing)
-        el.setAttribute('y', String(barsData[i].y))
-        el.setAttribute('height', String(barsData[i].height))
+        el.setAttribute('y', String(bars[i].y))
+        el.setAttribute('height', String(bars[i].height))
+      }
+    }
+
+    function applyBarsTransition (oldCount: number) {
+      if (!props.animation) return
+
+      clipRects.value.forEach(el => {
+        if (el) applyTransition(el, animationDuration.value, animationEasing.value)
+      })
+      if (bars.value.length > oldCount && oldCount > 0) {
+        collapseNewBars(bars.value, oldCount, animationDuration.value, animationEasing.value)
       }
     }
 
@@ -152,36 +150,16 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       const oldCount = prevBarCount.value
       prevBarCount.value = bars.value.length
 
-      // Animation-only mode (no auto-draw): just ensure transition is set
-      if (!props.autoDraw) {
-        if (props.animation) {
-          clipRects.value.forEach(el => {
-            if (el) applyTransition(el, animationDuration.value, animationEasing.value)
-          })
-          if (bars.value.length > oldCount && oldCount > 0) {
-            collapseNewBars(oldCount, animationDuration.value, animationEasing.value)
-          }
-        }
-        return
-      }
-
-      if (props.autoDraw === 'once' && hasDrawn.value) {
-        if (props.animation) {
-          clipRects.value.forEach(el => {
-            if (el) applyTransition(el, animationDuration.value, animationEasing.value)
-          })
-          if (bars.value.length > oldCount && oldCount > 0) {
-            collapseNewBars(oldCount, animationDuration.value, animationEasing.value)
-          }
-        }
+      // Animation-only mode (no auto-draw), or draw-once after first draw: just ensure transition is set
+      if (!props.autoDraw || (props.autoDraw === 'once' && hasDrawn.value)) {
+        applyBarsTransition(oldCount)
         return
       }
       hasDrawn.value = true
 
       const shouldDrawOnce = props.autoDraw === 'once'
-      const barsData = bars.value
       clipRects.value.forEach((el, i) => {
-        const bar = barsData[i]
+        const bar = bars.value[i]
         if (!el || !bar) return
 
         // Snap to collapsed state
@@ -205,32 +183,15 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     }, { immediate: true })
 
     const parsedLabels = computed(() => {
-      const labels = []
-      const points = genBars(items.value, boundary.value)
-      const len = points.length
-
-      for (let i = 0; labels.length < len; i++) {
-        const item = points[i]
-        let value = props.labels[i]
-
-        if (!value) {
-          value = typeof item === 'object'
-            ? item.value
-            : item
-        }
-
-        labels.push({
-          x: item.x,
-          value: String(value),
-        })
-      }
-
-      return labels
+      return bars.value.map((bar, i) => ({
+        x: bar.x,
+        value: String(props.labels[i] ?? bar.value),
+      }))
     })
 
     const offsetX = computed(() => bars.value.length === 1
       ? (boundary.value.maxX - lineWidth.value) / 2
-      : (Math.abs(bars.value[0].x - (bars.value[1].x)) - lineWidth.value) / 2
+      : (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2
     )
     const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
     const columnWidth = computed(() => {
@@ -247,27 +208,27 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const targetY = shallowRef(0)
     const targetHeight = shallowRef(0)
 
-    watch(currentIndex, idx => {
-      if (idx === null) return
-      const bar = bars.value[idx]
+    watch(currentIndex, index => {
+      if (index === null) return
+      const bar = bars.value[index]
       if (!bar) return
       targetX.value = bar.x + offsetX.value
       targetY.value = bar.y
       targetHeight.value = bar.height
     })
 
-    const transitionOpts = { duration: 150, transition: easingPatterns.easeOutQuad }
-    const animatedX = useTransition(targetX, transitionOpts)
-    const animatedY = useTransition(targetY, transitionOpts)
+    const transitionOptions = { duration: 150, transition: easingPatterns.easeOutQuad }
+    const animatedX = useTransition(targetX, transitionOptions)
+    const animatedY = useTransition(targetY, transitionOptions)
 
     const tooltipTarget = computed<[number, number] | undefined>(() => {
       if (currentIndex.value === null || !svgRef.value) return undefined
       const ctm = svgRef.value.getScreenCTM()
       if (!ctm) return undefined
-      const pt = svgRef.value.createSVGPoint()
-      pt.x = animatedX.value + lineWidth.value / 2
-      pt.y = animatedY.value
-      const { x, y } = pt.matrixTransform(ctm)
+      const svgPoint = svgRef.value.createSVGPoint()
+      svgPoint.x = animatedX.value + lineWidth.value / 2
+      svgPoint.y = animatedY.value
+      const { x, y } = svgPoint.matrixTransform(ctm)
       return [x, y]
     })
 
@@ -291,7 +252,10 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         bars.value.forEach((bar, i) => {
           const barCenter = bar.x + offsetX.value + lineWidth.value / 2
           const dist = Math.abs(barCenter - svgX)
-          if (dist < minDist) { minDist = dist; nearest = i }
+          if (dist < minDist) {
+            minDist = dist
+            nearest = i
+          }
         })
 
         currentIndex.value = nearest
@@ -338,9 +302,9 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault()
-        const dir = e.key === 'ArrowLeft' ? -1 : 1
-        const current = currentIndex.value ?? (dir === 1 ? -1 : len)
-        const next = Math.max(0, Math.min(len - 1, current + dir))
+        const direction = e.key === 'ArrowLeft' ? -1 : 1
+        const current = currentIndex.value ?? (direction === 1 ? -1 : len)
+        const next = Math.max(0, Math.min(len - 1, current + direction))
         setIndex(next)
       }
     }
@@ -443,25 +407,19 @@ export const VBarline = genericComponent<VBarlineSlots>()({
         </svg>
 
         { !!props.tooltip && (
-          <VTooltip
+          <VSparklineTooltip
             key="tooltip"
             modelValue={ tooltipVisible.value }
             target={ tooltipTarget.value }
+            index={ currentIndex.value }
+            value={ currentIndex.value !== null ? bars.value[currentIndex.value].value : 0 }
             offset={ tooltipConfig.value.offset }
             contentClass={ tooltipConfig.value.class }
+            titleFormat={ tooltipConfig.value.titleFormat }
             location="top center"
             onAfterLeave={ onTooltipAfterLeave }
-          >
-            { currentIndex.value !== null && (
-              slots.tooltip?.({
-                index: currentIndex.value,
-                value: bars.value[currentIndex.value].value,
-              }) ?? tooltipConfig.value.titleFormat({
-                index: currentIndex.value,
-                value: bars.value[currentIndex.value].value,
-              })
-            )}
-          </VTooltip>
+            v-slots={{ default: slots.tooltip }}
+          />
         )}
         </Fragment>
       )

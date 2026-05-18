@@ -1,5 +1,5 @@
 // Types
-import type { Point } from '../VTrendline'
+import type { Point } from './line'
 
 /**
  * Monotone cubic Hermite interpolation (Fritsch-Carlson) converted to cubic Bezier.

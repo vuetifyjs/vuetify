@@ -1,39 +1,19 @@
 // Components
-import { VTooltip } from '@/components/VTooltip/VTooltip'
+import { VSparklineTooltip } from './VSparklineTooltip'
 
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
-import { makeLineProps } from './util/line'
-import { genMonotonePath } from './util/monotone'
-import { genRoundedPath } from './util/path'
+import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
 import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
+import type { Boundary, Point } from './util/line'
+
 export type VTrendlineSlots = {
   default: void
   label: { index: number, value: string }
   tooltip: { index: number, value: number }
-}
-
-export type SparklineItem = number | { value: number }
-
-export type SparklineText = {
-  x: number
-  value: string
-}
-
-export interface Boundary {
-  minX: number
-  minY: number
-  maxX: number
-  maxY: number
-}
-
-export interface Point {
-  x: number
-  y: number
-  value: number
 }
 
 export const makeVTrendlineProps = propsFactory({
@@ -41,22 +21,6 @@ export const makeVTrendlineProps = propsFactory({
 
   ...makeLineProps(),
 }, 'VTrendline')
-
-function resample (values: number[], targetCount: number): number[] {
-  const len = values.length
-  if (len === 0) return Array(targetCount).fill(0)
-  if (len === 1) return Array(targetCount).fill(values[0])
-
-  const result: number[] = []
-  for (let i = 0; i < targetCount; i++) {
-    const t = i / (targetCount - 1) * (len - 1)
-    const lo = Math.floor(t)
-    const hi = Math.min(lo + 1, len - 1)
-    const frac = t - lo
-    result.push(values[lo] + (values[hi] - values[lo]) * frac)
-  }
-  return result
-}
 
 export const VTrendline = genericComponent<VTrendlineSlots>()({
   name: 'VTrendline',
@@ -74,7 +38,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
-    const lastLength = ref(0)
     const hasDrawn = ref(false)
     const fillPath = ref<SVGPathElement | null>(null)
     const strokePath = ref<SVGPathElement | null>(null)
@@ -116,9 +79,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         !!slots?.label
       )
     })
-    const lineWidth = computed(() => {
-      return parseFloat(props.lineWidth) || 4
-    })
+
     const totalWidth = computed(() => Number(props.width))
 
     const boundary = computed<Boundary>(() => {
@@ -153,7 +114,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           for (const [pathRef, fill] of [[strokePath, false], [fillPath, true]] as const) {
             const path = pathRef.value
             if (!path) continue
-            path.setAttribute('d', generatePathString(oldResampled, fill))
+            path.setAttribute('d', genPath(oldResampled, fill))
           }
         }
       }
@@ -168,37 +129,20 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
     const points = computed(() => genPoints(normalizedItems.value, boundary.value))
 
-    function extendPoints (pts: Point[]): Point[] {
-      if (!props.inset || pts.length < 2) return pts
+    const extendedPoints = computed(() => extendPoints(points.value, props.inset, totalWidth.value))
 
-      const first = pts[0]
-      const second = pts[1]
-      const last = pts[pts.length - 1]
-      const secondLast = pts[pts.length - 2]
+    function genPath (input: Point[] | number[], fill: boolean): string {
+      const points = typeof input[0] === 'number'
+        ? extendPoints(genPoints(input as number[], boundary.value), props.inset, totalWidth.value)
+        : input as Point[]
 
-      const slopeStart = (second.y - first.y) / (second.x - first.x)
-      const slopeEnd = (last.y - secondLast.y) / (last.x - secondLast.x)
-
-      const ghostStart: Point = { x: 0, y: first.y - first.x * slopeStart, value: first.value }
-      const ghostEnd: Point = { x: totalWidth.value, y: last.y + (totalWidth.value - last.x) * slopeEnd, value: last.value }
-
-      return [ghostStart, ...pts, ghostEnd]
-    }
-
-    const extendedPoints = computed(() => extendPoints(points.value))
-
-    function generatePathString (values: number[], fill: boolean): string {
-      const pts = extendPoints(genPoints(values, boundary.value))
-      return buildPath(pts.slice(), fill)
-    }
-
-    function buildPath (pts: Point[], fill: boolean): string {
-      const smoothValue = typeof props.smooth === 'boolean' ? (props.smooth ? 8 : 0) : Number(props.smooth ?? 0)
-      const h = parseInt(props.height, 10)
-      if (props.smoothMode === 'monotone') {
-        return genMonotonePath(pts, smoothValue, fill, h)
-      }
-      return genRoundedPath(pts, smoothValue, fill, h, !!props.animation)
+      return buildPath(points, {
+        smooth: props.smooth,
+        smoothMode: props.smoothMode,
+        height: parseInt(props.height, 10),
+        fill,
+        animation: !!props.animation,
+      })
     }
 
     const parsedLabels = computed(() => {
@@ -251,16 +195,17 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       if (!props.fill) {
         const path = strokePath.value
         const length = path.getTotalLength()
+
         path.style.transition = 'none'
         path.style.strokeDasharray = `${length}`
         path.style.strokeDashoffset = `${length}`
         path.getBoundingClientRect()
+
         const dTransition = props.animation
           ? `, d ${animationDuration.value}ms ${animationEasing.value}`
           : ''
         path.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}${dTransition}`
         path.style.strokeDashoffset = '0'
-        lastLength.value = length
 
         if (shouldDrawOnce) {
           path.addEventListener('transitionend', e => {
@@ -277,10 +222,12 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       } else {
         for (const path of [fillPath.value, strokePath.value]) {
           if (!path) continue
+
           path.style.transformOrigin = 'bottom center'
           path.style.transition = 'none'
           path.style.transform = `scaleY(0)`
           path.getBoundingClientRect()
+
           const dTransition = props.animation
             ? `, d ${animationDuration.value}ms ${animationEasing.value}`
             : ''
@@ -303,10 +250,6 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       }
     }, { immediate: true })
 
-    function genPath (fill: boolean) {
-      return buildPath(extendedPoints.value.slice(), fill)
-    }
-
     // Hover / tooltip state
     const svgRef = shallowRef<SVGSVGElement | null>(null)
     const currentIndex = shallowRef<number | null>(null)
@@ -320,6 +263,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       const total = svgPath.getTotalLength()
       let low = 0
       let high = total
+      // 32 bisections ≈ sub-pixel accuracy on any reasonable chart width
       for (let i = 0; i < 32; i++) {
         const mid = (low + high) / 2
         if (svgPath.getPointAtLength(mid).x < targetX) low = mid
@@ -335,16 +279,18 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     })
 
     const animatedLength = useTransition(markerPathLength, { duration: 150, transition: easingPatterns.easeOutQuad })
-    const markerCx = computed(() => strokePath.value?.getPointAtLength(animatedLength.value).x ?? 0)
-    const markerCy = computed(() => strokePath.value?.getPointAtLength(animatedLength.value).y ?? 0)
+    const markerPoint = computed(() => {
+      const { x, y } = strokePath.value?.getPointAtLength(animatedLength.value) ?? { x: 0, y: 0 }
+      return { x, y }
+    })
 
     const tooltipTarget = computed<[number, number] | undefined>(() => {
       if (!currentPoint.value || !svgRef.value) return undefined
       const matrix = svgRef.value.getScreenCTM()
       if (!matrix) return undefined
       const svgPoint = svgRef.value.createSVGPoint()
-      svgPoint.x = markerCx.value
-      svgPoint.y = markerCy.value
+      svgPoint.x = markerPoint.value.x
+      svgPoint.y = markerPoint.value.y
       const { x, y } = svgPoint.matrixTransform(matrix)
       return [x, y]
     })
@@ -369,7 +315,10 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         let minDist = Infinity
         points.value.forEach((point, index) => {
           const dist = Math.abs(point.x - svgX)
-          if (dist < minDist) { minDist = dist; nearest = index }
+          if (dist < minDist) {
+            minDist = dist
+            nearest = index
+          }
         })
 
         currentIndex.value = nearest
@@ -470,7 +419,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               {
                 parsedLabels.value.map((item, i) => (
                   <text
-                    x={ item.x + (lineWidth.value / 2) + lineWidth.value / 2 }
+                    x={ item.x }
                     y={ (parseInt(props.height, 10) - 4) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
                     font-size={ Number(props.labelSize) || 7 }
                   >
@@ -484,7 +433,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
           <path
             key="fill"
             ref={ props.fill ? fillPath : strokePath }
-            d={ genPath(props.fill) }
+            d={ genPath(extendedPoints.value, props.fill) }
             fill={ props.fill ? `url(#${id.value})` : 'none' }
             stroke={ props.fill ? 'none' : `url(#${id.value})` }
           />
@@ -493,7 +442,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             <path
               key="trendline"
               ref={ strokePath }
-              d={ genPath(false) }
+              d={ genPath(extendedPoints.value, false) }
               fill="none"
               stroke="currentColor"
             />
@@ -521,9 +470,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               { tooltipConfig.value.showCrosshair && (
                 <line
                   key="crosshair-line"
-                  x1={ markerCx.value }
+                  x1={ markerPoint.value.x }
                   y1={ props.inset ? 0 : boundary.value.minY }
-                  x2={ markerCx.value }
+                  x2={ markerPoint.value.x }
                   y2={ props.inset ? parseInt(props.height, 10) : boundary.value.maxY }
                   stroke="currentColor"
                   stroke-width={ 1 }
@@ -533,8 +482,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               )}
               <circle
                 key="marker"
-                cx={ markerCx.value }
-                cy={ markerCy.value }
+                cx={ markerPoint.value.x }
+                cy={ markerPoint.value.y }
                 r={ markerRadius }
                 fill="currentColor"
                 stroke={ props.markerStroke }
@@ -546,24 +495,18 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         </svg>
 
         { !!props.tooltip && (
-          <VTooltip
+          <VSparklineTooltip
             key="tooltip"
             modelValue={ tooltipVisible.value }
             target={ tooltipTarget.value }
+            index={ currentIndex.value }
+            value={ currentIndex.value !== null ? points.value[currentIndex.value].value : 0 }
             offset={ tooltipConfig.value.offset }
             contentClass={ tooltipConfig.value.class }
+            titleFormat={ tooltipConfig.value.titleFormat }
             onAfterLeave={ onTooltipAfterLeave }
-          >
-            { currentIndex.value !== null && (
-              slots.tooltip?.({
-                index: currentIndex.value,
-                value: points.value[currentIndex.value].value,
-              }) ?? tooltipConfig.value.titleFormat({
-                index: currentIndex.value,
-                value: points.value[currentIndex.value].value,
-              })
-            )}
-          </VTooltip>
+            v-slots={{ default: slots.tooltip }}
+          />
         )}
         </Fragment>
       )

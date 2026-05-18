@@ -146,7 +146,7 @@
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbar-queue": ["VSnackbarQueue", "VSnackbar"],
   "components/snackbars": ["VSnackbar"],
-  "components/sparklines": ["VSparkline"],
+  "components/sparklines": ["VSparkline", "VSparklineTooltip"],
   "components/speed-dials": ["VSpeedDial"],
   "components/steppers": [
     "VStepper",

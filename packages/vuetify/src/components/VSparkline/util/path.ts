@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 
-import { Point } from '../VSparkline'
+import { Point } from './line'
 // import { checkCollinear, getDistance, moveTo } from './math'
 
 /**
