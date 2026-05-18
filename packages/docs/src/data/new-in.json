@@ -144,7 +144,16 @@
   },
   "VDataIterator": {
     "props": {
-      "initialSortOrder": "3.11.0"
+      "groupKey": "4.1.0",
+      "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0"
+    },
+    "events": {
+      "update:opened": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VDataTable": {
@@ -153,16 +162,23 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "headerProps": "3.5.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "pageBy": "3.12.0",
       "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
+    },
+    "events": {
+      "update:opened": "4.1.0"
     },
     "slots": {
       "group-summary": "3.10.0"
     },
     "examples": {
+      "prop-grouping": "4.1.0",
       "prop-sort-icon": "3.12.0",
       "slot-group-summary": "3.10.0"
     }
@@ -173,10 +189,16 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "pageBy": "3.12.0",
       "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
+    },
+    "events": {
+      "update:opened": "4.1.0"
     },
     "slots": {
       "group-summary": "3.10.0"
@@ -188,8 +210,14 @@
       "expandIcon": "3.10.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "sortIcon": "3.12.0"
+    },
+    "events": {
+      "update:opened": "4.1.0"
     },
     "slots": {
       "group-summary": "3.10.0"
