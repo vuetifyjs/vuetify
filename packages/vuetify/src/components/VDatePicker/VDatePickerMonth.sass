@@ -89,19 +89,23 @@
     &--range-start,
     &--preview-middle,
     &--preview-start
-      &:last-of-type > .v-date-picker-month__range-bg
-        right: 1px
-        border-top-right-radius: var(--range-selection-rounding)
-        border-bottom-right-radius: var(--range-selection-rounding)
+      &:last-of-type,
+      &:has(+ .v-date-picker-month__day--hide-adjacent)
+        > .v-date-picker-month__range-bg
+          right: 1px
+          border-top-right-radius: var(--range-selection-rounding)
+          border-bottom-right-radius: var(--range-selection-rounding)
 
     &--range-middle,
     &--range-end,
     &--preview-middle,
     &--preview-end
-      &:first-of-type > .v-date-picker-month__range-bg
-        left: 1px
-        border-top-left-radius: var(--range-selection-rounding)
-        border-bottom-left-radius: var(--range-selection-rounding)
+      &:first-of-type,
+      .v-date-picker-month__day--hide-adjacent + &
+        > .v-date-picker-month__range-bg
+          left: 1px
+          border-top-left-radius: var(--range-selection-rounding)
+          border-bottom-left-radius: var(--range-selection-rounding)
 
   .v-date-picker-month__day--adjacent
     opacity: 0.5
