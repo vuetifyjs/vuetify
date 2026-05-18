@@ -15,6 +15,16 @@ This page describes changes introduced in **v4.0.0** and maps the legacy typogra
 
 ## Quick Reference
 
+| MD2 (Legacy)           | MD3 (New)                                             |
+|------------------------|-------------------------------------------------------|
+| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
+| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
+| `subtitle-1`, `body-1` | `body-large`                                          |
+| `body-2`               | `body-medium`                                         |
+| `caption`              | `body-small`                                          |
+| `button`, `subtitle-2` | `label-large`                                         |
+| `overline`             | `label-small`                                         |
+
 <DocTypographyPreview />
 
 ## Conservative Migration Mapping

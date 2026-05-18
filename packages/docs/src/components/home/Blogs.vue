@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'April 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/april-2026-update/april-hero.png',
+      shortDescription: 'April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives — alongside three Vuetify framework patch releases, MCP v0.7.0 with playground and link CRUD tools, and four ESLint Config releases including ESLint 10 support. Six new v0 components (Carousel, Image, NumberField, Progress, Toggle, Overflow) merged in April, the display composable became the first Vuetify internal to migrate to v0, and useTheme/useLocale/useFeatures became reactive-by-default across 847 total commits...',
+      date: 'May 4, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/april-2026-update'),
+    },
+    {
       title: 'March 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/march-2026-update/march-hero.png',
       shortDescription: 'March was Vuetify0\'s breakout month with 427 commits, 11 releases, and 7 new headless components reaching v0.2.0. The core framework shipped 7 patch releases stabilizing v4, the Nuxt Module hit v1.0.0-beta, the CLI continued with 10 releases, and the ESLint plugin gained automated v4 and TailwindCSS migration rules across 720 total commits and 69 merged PRs...',

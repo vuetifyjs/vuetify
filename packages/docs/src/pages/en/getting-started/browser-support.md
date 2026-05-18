@@ -33,7 +33,7 @@ This is not an exhaustive list of compatible browsers, but the main targeted one
 | Other Browsers          |         | ❓ Not officially supported       |
 
 <p class="text-body-small">* All browsers on iOS use WebKit and have the same support as Safari</p>
-<p class="text-body-small">** Some components may have incorrect colors due to lack of support for <AppLink href="https://www.w3.org/TR/css-color-5/#relative-colors">relative color syntax</AppLink> (e.g. <v-code>rgb(from ...)</v-code>)</p>
+<p class="text-body-small">** Some components may have incorrect colors due to lack of support for <AppLink href="https://www.w3.org/TR/css-color-5/#relative-colors">relative color syntax</AppLink> (e.g. <v-code>rgb(from ...)</v-code>). VNumberInput locale-aware grouping requires <v-code>Intl.NumberFormat</v-code> with string <v-code>useGrouping</v-code> options (Chrome 106+, Firefox 115+).</p>
 
 This table is updated with minor releases of Vuetify. Chrome, Firefox, and Safari will be supported at least two years back from the Vuetify x.x.0 release date.
 Current start date is December 2023.

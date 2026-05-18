@@ -1,4 +1,5 @@
 {
+  "description": "Used to display information in a daily, weekly, monthly, or category view.",
   "props": {
     "categories": "Specifies what categories to display in the `category` view. This controls the order of the categories as well. If the calendar uses events any categories specified in those events not specified in this value are dynamically rendered in the view unless `category-hide-dynamic` is true.",
     "categoryHideDynamic": "Sets whether categories specified in an event should be hidden if it's not defined in `categories`.",
@@ -25,6 +26,7 @@
     "eventTimed": "If Dates or milliseconds are used as the start or end timestamp of an event, this prop can be a string to a property on the event that is truthy if the event is a timed event or a function which takes the event and returns a truthy value if the event is a timed event.",
     "firstInterval": "The first interval to display in the `day` view. If `intervalMinutes` is set to 60 and this is set to 9 the first time in the view is 9am.",
     "firstTime": "The first time to display in the `day` view. If specified, this overwrites any `firstInterval` value specified. This can be the number of minutes since midnight, a string in the format of `HH:mm`, or an object with number properties hour and minute.",
+    "format": "Forces a clock convention for interval labels and event times, overriding the locale.",
     "hideHeader": "If the header at the top of the `day` view should be visible.",
     "intervalCount": "The number of intervals to display in the `day` view.",
     "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",

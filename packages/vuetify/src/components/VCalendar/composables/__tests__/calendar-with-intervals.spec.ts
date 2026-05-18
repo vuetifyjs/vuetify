@@ -3,7 +3,6 @@
 
 // import CalendarWithIntervals from '../calendar-with-intervals'
 // import { CalendarTimestamp } from 'vuetify/types'
-// import { parseTimestamp } from '../../util/timestamp'
 // import {
 //   mount,
 //   Wrapper,
@@ -14,6 +13,35 @@
 // const Mock = CalendarWithIntervals.extend({
 //   render: h => h('div'),
 // })
+
+import { createNativeLocaleFormatter, parseTimestamp } from '../../util/timestamp'
+
+describe('intervalFormatter 24-hour mode', () => {
+  function makeIntervalFormatter (format: 'ampm' | '24hr') {
+    const hour12 = format === '24hr' ? false : undefined
+    const hourStyle = format === '24hr' ? '2-digit' as const : 'numeric' as const
+    return createNativeLocaleFormatter(
+      'en-US',
+      (tms, short) => (
+        !short ? { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', hour12 }
+        : tms.minute === 0 ? { timeZone: 'UTC', hour: hourStyle, hour12 }
+        : { timeZone: 'UTC', hour: hourStyle, minute: '2-digit', hour12 }
+      )
+    )
+  }
+
+  it('should format interval in 24-hour mode', () => {
+    const fmt = makeIntervalFormatter('24hr')
+    const ts = (s: string) => parseTimestamp(s, true)
+    expect(fmt(ts('2019-02-08 08:00'), true)).toBe('08')
+    expect(fmt(ts('2019-02-08 20:00'), true)).toBe('20')
+    expect(fmt(ts('2019-02-08 00:00'), true)).toBe('00')
+    expect(fmt(ts('2019-02-08 08:30'), true)).toBe('08:30')
+    expect(fmt(ts('2019-02-08 20:30'), true)).toBe('20:30')
+    expect(fmt(ts('2019-02-08 08:30'), false)).toBe('08:30')
+    expect(fmt(ts('2019-02-08 20:30'), false)).toBe('20:30')
+  })
+})
 
 const createMouseEvent = (x, y) => ({
   clientX: x,

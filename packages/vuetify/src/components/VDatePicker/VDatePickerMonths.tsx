@@ -6,10 +6,11 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
+import { useGridSelection } from '@/composables/gridSelection'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
+import { computed, useId, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -30,6 +31,10 @@ export type VDatePickerMonthsSlots = {
 
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
+  columns: {
+    type: Number,
+    default: 2,
+  },
   height: [String, Number],
   min: null as any as PropType<unknown>,
   max: null as any as PropType<unknown>,
@@ -45,11 +50,13 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
 
   emits: {
     'update:modelValue': (date: any) => true,
+    escape: () => true,
   },
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const uid = useId()
 
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
@@ -92,6 +99,20 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       return true
     }
 
+    function onMonthSelect (value: number) {
+      if (model.value === value) emit('update:modelValue', value)
+      else model.value = value
+    }
+
+    const { containerProps, selectItem } = useGridSelection<number>({
+      items: () => months.value,
+      columns: () => props.columns,
+      initialValue: current => current ?? model.value ?? adapter.getMonth(adapter.date()),
+      itemAttribute: 'data-v-month',
+      onSelect: onMonthSelect,
+      onEscape: () => emit('escape'),
+    })
+
     useRender(() => (
       <div
         class="v-date-picker-months"
@@ -99,26 +120,26 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-months__content">
+        <div
+          class="v-date-picker-months__content"
+          style={{ '--v-date-picker-months-columns': props.columns }}
+          { ...containerProps.value }
+        >
           { months.value.map((month, i) => {
             const btnProps = {
+              id: `${uid}-month-${i}`,
               active: model.value === i,
               ariaLabel: month.label,
               color: model.value === i ? props.color : undefined,
               disabled: month.isDisabled,
               rounded: true,
+              tabindex: -1,
               text: month.text,
               variant: model.value === month.value ? 'flat' : 'text',
-              onClick: () => onClick(i),
+              'data-v-month': month.value,
+              onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
+              onClick: () => selectItem(i),
             } as const
-
-            function onClick (i: number) {
-              if (model.value === i) {
-                emit('update:modelValue', model.value)
-                return
-              }
-              model.value = i
-            }
 
             return slots.month?.({
               month,
