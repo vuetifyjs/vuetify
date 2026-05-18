@@ -2,7 +2,7 @@
   <div class="text-center">
     <h5 class="my-2">[3] - [3] merged groups</h5>
     <v-otp-input v-model="otp">
-      <template #fields>
+      <template v-slot:fields>
         <v-otp-group merged>
           <v-otp-field :index="0"></v-otp-field>
           <v-otp-field :index="1"></v-otp-field>
@@ -19,7 +19,7 @@
 
     <h5 class="my-2 mt-6">[2] - [4] mixed</h5>
     <v-otp-input v-model="otp">
-      <template #fields>
+      <template v-slot:fields>
         <v-otp-group>
           <v-otp-field :index="0"></v-otp-field>
           <v-otp-field :index="1"></v-otp-field>
