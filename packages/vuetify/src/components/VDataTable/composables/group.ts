@@ -85,9 +85,7 @@ export function provideGroupBy (options: {
 
   const openedModel = options.opened ?? ref<readonly string[]>([])
 
-  // Local mirror of opened for immediate (synchronous) rendering.
-  // In controlled (v-model) mode the proxied model only updates after a parent
-  // re-render, so reads from props.opened would be stale on the first render.
+  // Keep a Set mirror for O(1) lookups; the v-model carries the string[] form.
   const localOpened = shallowRef(new Set<string>(openedModel.value))
   watch(openedModel, val => { localOpened.value = new Set(val) })
 
@@ -170,7 +168,7 @@ const defaultGroupId = (key: string, value: any, parentKey: string) => `${parent
 function groupItems <T extends GroupableItem> (
   items: readonly T[],
   groupBy: readonly string[],
-  groupKeyFn?: GroupKeyFunction,
+  groupKey?: GroupKeyFunction,
   depth = 0,
   parentKey = 'root',
 ) {
@@ -182,15 +180,15 @@ function groupItems <T extends GroupableItem> (
   const rest = groupBy.slice(1)
   groupedItems.forEach((items, value) => {
     const key = groupBy[0]
-    const id = groupKeyFn
-      ? groupKeyFn({ key, value, parentKey: depth === 0 ? null : parentKey })
+    const id = groupKey
+      ? groupKey({ key, value, parentKey: depth === 0 ? null : parentKey })
       : defaultGroupId(key, value, parentKey)
     groups.push({
       depth,
       id,
       key,
       value,
-      items: rest.length ? groupItems(items, rest, groupKeyFn, depth + 1, id) : items,
+      items: rest.length ? groupItems(items, rest, groupKey, depth + 1, id) : items,
       type: 'group',
     })
   })
@@ -199,9 +197,9 @@ function groupItems <T extends GroupableItem> (
 }
 
 function collectGroupIds <T extends GroupableItem> (groups: readonly Group<T>[]): string[] {
-  return groups.flatMap(g => [
-    g.id,
-    ...collectGroupIds(g.items.filter((item): item is Group<T> => 'type' in item && item.type === 'group')),
+  return groups.flatMap(group => [
+    group.id,
+    ...collectGroupIds(group.items.filter((item): item is Group<T> => 'type' in item && item.type === 'group')),
   ])
 }
 
@@ -210,12 +208,12 @@ export function useOpenAllGroups (
   openAll: MaybeRefOrGetter<boolean>,
   items: MaybeRefOrGetter<readonly GroupableItem[]>,
   groupBy: Ref<readonly SortItem[]>,
-  groupKeyFn?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
+  groupKey?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
 ) {
   const allIds = computed(() => {
     if (!toValue(openAll) || !groupBy.value.length) return new Set<string>()
     return new Set(collectGroupIds(
-      groupItems(toValue(items), groupBy.value.map(g => g.key), toValue(groupKeyFn))
+      groupItems(toValue(items), groupBy.value.map(group => group.key), toValue(groupKey))
     ))
   })
 
@@ -271,11 +269,11 @@ export function useGroupedItems <T extends GroupableItem> (
   opened: Ref<Set<string>>,
   hasSummary: MaybeRefOrGetter<boolean>,
   isGroupOpen?: (group: Group) => boolean,
-  groupKeyFn?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
+  groupKey?: MaybeRefOrGetter<GroupKeyFunction | undefined>,
 ) {
   const groups = computed(() => {
     if (!groupBy.value.length) return []
-    return groupItems(toValue(items), groupBy.value.map(item => item.key), toValue(groupKeyFn))
+    return groupItems(toValue(items), groupBy.value.map(item => item.key), toValue(groupKey))
   })
 
   const isOpen = isGroupOpen ?? ((group: Group) => opened.value.has(group.id))
