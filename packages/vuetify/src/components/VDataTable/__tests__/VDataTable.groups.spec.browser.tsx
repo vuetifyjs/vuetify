@@ -51,7 +51,7 @@ describe('VDataTable group-by', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(4)
   })
 
-  it('should open a group when its header is clicked', async () => {
+  it('should toggle a group open and closed when its header is clicked', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -65,26 +65,10 @@ describe('VDataTable group-by', () => {
     ))
 
     await userEvent.click(screen.getAllByCSS('.v-data-table-group-header-row .v-btn')[0])
-
     await expect.poll(() => opened.value).toStrictEqual(['root_category_Dairy'])
-  })
-
-  it('should close a group when its open header is clicked', async () => {
-    const opened = ref(['root_category_Dairy', 'root_category_Pastry'])
-
-    render(() => (
-      <VDataTable
-        items={ DESSERT_ITEMS }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        v-model:opened={ opened.value }
-        itemsPerPage={ -1 }
-      />
-    ))
 
     await userEvent.click(screen.getAllByCSS('.v-data-table-group-header-row .v-btn')[0])
-
-    await expect.poll(() => opened.value).toStrictEqual(['root_category_Pastry'])
+    await expect.poll(() => opened.value).toStrictEqual([])
   })
 
   it('should react to opened changes from outside', async () => {
@@ -109,22 +93,7 @@ describe('VDataTable group-by', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('should open all groups when openAll is set', () => {
-    render(() => (
-      <VDataTable
-        items={ DESSERT_ITEMS }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        openAll
-        itemsPerPage={ -1 }
-      />
-    ))
-
-    // All 6 items should be visible
-    expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
-  })
-
-  it('should allow closing individual groups while openAll is set', async () => {
+  it('should open all groups when openAll is set, and allow closing them individually', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -202,30 +171,7 @@ describe('VDataTable group-by', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
   })
 
-  it('should open new groups that appear while openAll is set', async () => {
-    const items = ref([...DESSERT_ITEMS])
-    const opened = ref<string[]>([])
-
-    render(() => (
-      <VDataTable
-        items={ items.value }
-        headers={ DESSERT_HEADERS }
-        groupBy={[{ key: 'category' }]}
-        v-model:opened={ opened.value }
-        openAll
-        itemsPerPage={ -1 }
-      />
-    ))
-
-    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
-
-    items.value = [...DESSERT_ITEMS, { name: 'Lollipop', calories: 392, category: 'Candy2' }]
-
-    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(7)
-    await expect.poll(() => opened.value).toContain('root_category_Candy2')
-  })
-
-  it('should drop removed groups from opened', async () => {
+  it('should sync opened when groups are added or removed while openAll is set', async () => {
     const items = ref([...DESSERT_ITEMS])
     const opened = ref<string[]>([])
 
@@ -242,10 +188,15 @@ describe('VDataTable group-by', () => {
 
     await expect.poll(() => opened.value).toContain('root_category_Dairy')
 
-    items.value = DESSERT_ITEMS.filter(i => i.category !== 'Dairy')
+    // Add a new group → should auto-open
+    items.value = [...DESSERT_ITEMS, { name: 'Lollipop', calories: 392, category: 'Candy2' }]
+    await expect.poll(() => opened.value).toContain('root_category_Candy2')
+    await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(7)
 
+    // Remove the Dairy group → should drop from opened (4 categories left: Pastry, Cookie, Candy, Candy2)
+    items.value = items.value.filter(i => i.category !== 'Dairy')
     await expect.poll(() => opened.value).not.toContain('root_category_Dairy')
-    await expect.poll(() => screen.queryAllByCSS('.v-data-table-group-header-row')).toHaveLength(3)
+    await expect.poll(() => screen.queryAllByCSS('.v-data-table-group-header-row')).toHaveLength(4)
   })
 
   it('should use groupKey to build group ids', async () => {
