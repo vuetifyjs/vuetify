@@ -80,6 +80,14 @@
       "prop-custom-transition": "3.10.0"
     }
   },
+  "VCalendar": {
+    "props": {
+      "format": "4.1.0"
+    },
+    "examples": {
+      "prop-hour24": "4.1.0"
+    }
+  },
   "VChip": {
     "props": {
       "baseColor": "3.8.0"
