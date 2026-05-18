@@ -20,8 +20,8 @@ const DESSERT_ITEMS = [
   { name: 'Jelly bean', calories: 375, category: 'Candy' },
 ]
 
-describe('VDataTable - v-model:opened (group-by)', () => {
-  it('renders only group headers when opened is empty', () => {
+describe('VDataTable group-by', () => {
+  it('should render only group headers when no groups are opened', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
@@ -36,7 +36,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('opens the groups whose ids appear in the opened prop', () => {
+  it('should show items of groups listed in opened', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
@@ -51,7 +51,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(4)
   })
 
-  it('emits update:opened with the new id when a group is toggled open', async () => {
+  it('should open a group when its header is clicked', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -69,7 +69,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => opened.value).toStrictEqual(['root_category_Dairy'])
   })
 
-  it('emits update:opened without the id when an open group is toggled closed', async () => {
+  it('should close a group when its open header is clicked', async () => {
     const opened = ref(['root_category_Dairy', 'root_category_Pastry'])
 
     render(() => (
@@ -87,7 +87,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => opened.value).toStrictEqual(['root_category_Pastry'])
   })
 
-  it('reflects external opened changes reactively (v-model sync)', async () => {
+  it('should react to opened changes from outside', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -109,7 +109,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('opens all groups when openAll is true', () => {
+  it('should open all groups when openAll is set', () => {
     render(() => (
       <VDataTable
         items={ DESSERT_ITEMS }
@@ -124,7 +124,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
   })
 
-  it('allows toggling individual groups closed after openAll is set', async () => {
+  it('should allow closing individual groups while openAll is set', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
@@ -146,7 +146,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(4)
   })
 
-  it('works with nested group-by', () => {
+  it('should keep nested groups closed until their parent is opened', () => {
     const items = [
       { name: 'A', category: 'Cat1', sub: 'X' },
       { name: 'B', category: 'Cat1', sub: 'Y' },
@@ -174,7 +174,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     expect(screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(0)
   })
 
-  it('reopens all groups when openAll is toggled off then back on', async () => {
+  it('should reopen all groups when openAll is turned off and on again', async () => {
     const openAll = ref(true)
     const opened = ref<string[]>([])
 
@@ -202,7 +202,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => screen.queryAllByCSS('tbody tr:not(.v-data-table-group-header-row)')).toHaveLength(6)
   })
 
-  it('auto-opens new groups that appear while openAll is true', async () => {
+  it('should open new groups that appear while openAll is set', async () => {
     const items = ref([...DESSERT_ITEMS])
     const opened = ref<string[]>([])
 
@@ -225,7 +225,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => opened.value).toContain('root_category_Candy2')
   })
 
-  it('removes a dropped group from opened and emits update:opened', async () => {
+  it('should drop removed groups from opened', async () => {
     const items = ref([...DESSERT_ITEMS])
     const opened = ref<string[]>([])
 
@@ -248,7 +248,7 @@ describe('VDataTable - v-model:opened (group-by)', () => {
     await expect.poll(() => screen.queryAllByCSS('.v-data-table-group-header-row')).toHaveLength(3)
   })
 
-  it('uses custom groupKey function to generate group IDs', async () => {
+  it('should use groupKey to build group ids', async () => {
     const opened = ref<string[]>([])
 
     render(() => (
