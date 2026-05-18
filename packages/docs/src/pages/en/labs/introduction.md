@@ -78,6 +78,7 @@ The following is a list of available and up-and-coming components for use with L
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
 | [v-color-input](/components/color-inputs/)           | A color input component                                    | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-date-input](/components/date-inputs/)             | A date input component                                     | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
+| [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
 | [v-stepper-vertical](/components/vertical-steppers/) | Vertical version of v-stepper                              | [v3.6.5](/getting-started/release-notes/?version=v3.6.5)   |

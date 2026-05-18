@@ -70,6 +70,15 @@ export function useGridSelection<T extends string | number> ({
 
     hasFocusIn.value = true
 
+    const targetEl = e.target as HTMLElement | null
+    const targetId = targetEl?.getAttribute?.(itemAttribute)
+
+    if (targetId != null && items().some(item => String(item.value) === targetId)) {
+      virtualFocus.highlight(targetId as T)
+
+      return
+    }
+
     const initial = initialValue(virtualFocus.highlightedId.value as T | undefined)
     if (initial != null) virtualFocus.highlight(initial)
     virtualFocus.focusHighlighted()

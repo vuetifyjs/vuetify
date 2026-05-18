@@ -321,6 +321,10 @@
         "subfolder": "components"
       },
       {
+        "title": "date-range-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "videos",
         "subfolder": "components"
       },

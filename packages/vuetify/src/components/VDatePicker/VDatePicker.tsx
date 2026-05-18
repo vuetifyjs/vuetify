@@ -112,8 +112,10 @@ export const VDatePicker = genericComponent<new <
     'update:modelValue': (date: any) => true,
     'update:month': (date: any) => true,
     'update:year': (date: any) => true,
+    'update:previewValue': (_value: any) => true,
     // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
+    'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -360,6 +362,8 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
+      if (props.noAutoNavigation) return
+
       const arrBefore = wrapInArray(oldVal)
       const arrAfter = wrapInArray(val)
 
@@ -501,6 +505,8 @@ export const VDatePicker = genericComponent<new <
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
+                      onUpdate:previewValue={ (value: any) => emit('update:previewValue', value) }
+                      onBoundaryNavigate={ (payload: any) => emit('boundary-navigate', payload) }
                       min={ minDate.value }
                       max={ maxDate.value }
                     >

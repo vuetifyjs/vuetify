@@ -89,4 +89,33 @@ describe('VDatePicker', () => {
 
     await commands.clearAbortTimeout()
   })
+
+  it('no-auto-navigation should keep the displayed month after model change', async () => {
+    const onUpdateMonth = vi.fn()
+    const onUpdateYear = vi.fn()
+    const model = ref<unknown>('2026-01-15')
+
+    render(() => (
+      <VDatePicker
+        v-model={ model.value }
+        month={ 0 }
+        year={ 2026 }
+        onUpdate:month={ onUpdateMonth }
+        onUpdate:year={ onUpdateYear }
+        noAutoNavigation
+      />
+    ))
+
+    // Reassign the model to a date in February. Without `no-auto-navigation` this would
+    // emit update:month and re-render to Feb 2026. With it, the picker must stay on Jan.
+    model.value = '2026-02-20'
+    await nextTick()
+
+    expect(onUpdateMonth).not.toHaveBeenCalled()
+    expect(onUpdateYear).not.toHaveBeenCalled()
+
+    // January grid is still rendered.
+    expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
+  })
 })
