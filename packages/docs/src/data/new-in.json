@@ -481,6 +481,12 @@
     },
     "events": {
       "update:currentIndex": "4.1.0"
+    },
+    "examples": {
+      "misc-interactive": "4.1.0",
+      "prop-animation": "4.1.0",
+      "prop-inset": "4.1.0",
+      "prop-smooth-mode": "4.1.0"
     }
   },
   "VStepper": {
