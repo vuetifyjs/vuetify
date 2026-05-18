@@ -334,7 +334,11 @@ export const VDatePicker = genericComponent<new <
       onUpdateYear()
     }
 
-    const monthGridRef = shallowRef<{ focusGrid: () => void }>()
+    const monthGridRef = shallowRef<{ focusGrid: () => void, focusItem: (isoDate: string) => void }>()
+
+    function focusDate (isoDate: string) {
+      monthGridRef.value?.focusItem(isoDate)
+    }
 
     function onClickDate () {
       viewMode.value = 'month'
@@ -522,7 +526,7 @@ export const VDatePicker = genericComponent<new <
       )
     })
 
-    return {}
+    return { focusDate }
   },
 })
 

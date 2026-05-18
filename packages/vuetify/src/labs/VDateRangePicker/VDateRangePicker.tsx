@@ -115,7 +115,16 @@ export const VDateRangePicker = genericComponent<new <
     const rightPrevDisabled = computed(() => rightIndex.value - 1 <= leftIndex.value)
 
     const rootRef = shallowRef<{ $el?: HTMLElement }>()
+    const leftPickerRef = shallowRef<{ $el?: HTMLElement, focusDate: (iso: string) => void }>()
+    const rightPickerRef = shallowRef<{ $el?: HTMLElement, focusDate: (iso: string) => void }>()
     const previewValue = shallowRef<unknown>()
+
+    function panelContaining (iso: string) {
+      if (leftPickerRef.value?.$el?.querySelector(`[data-v-date="${iso}"]`)) return leftPickerRef.value
+      if (rightPickerRef.value?.$el?.querySelector(`[data-v-date="${iso}"]`)) return rightPickerRef.value
+
+      return null
+    }
 
     function isMonthInView (date: unknown): boolean {
       const month = adapter.getMonth(date)
@@ -169,9 +178,8 @@ export const VDateRangePicker = genericComponent<new <
       syncing = false
     })
 
-    // Re-pair the panels when the user turns independent-months OFF after they have drifted apart.
-    // If the range start happens to live in the right panel, preserve the right panel and shift
-    // the left one back; otherwise default to right = left + 1.
+    // Re-pair the panels when independent-months turns OFF. Preserve the right panel if it
+    // holds the range start; otherwise default to right = left + 1.
     watch(() => props.independentMonths, (value, oldValue) => {
       if (value || !oldValue) return
 
@@ -205,15 +213,14 @@ export const VDateRangePicker = genericComponent<new <
     })
 
     function focusCell (iso: string) {
-      rootRef.value?.$el?.querySelector<HTMLElement>(`[data-v-date="${iso}"]`)?.focus()
+      panelContaining(iso)?.focusDate(iso)
     }
 
     function onBoundaryNavigate ({ direction, targetIsoDate }: {
       direction: 'up' | 'down' | 'left' | 'right'
       targetIsoDate: string
     }) {
-      // Inner boundary: the target already lives in the sibling panel — just focus it.
-      if (rootRef.value?.$el?.querySelector(`[data-v-date="${targetIsoDate}"]`)) {
+      if (panelContaining(targetIsoDate)) {
         focusCell(targetIsoDate)
         return
       }
@@ -247,10 +254,7 @@ export const VDateRangePicker = genericComponent<new <
           leftYear.value = previous.year
         }
       } else {
-        // Target lives between the two panels — only possible with independent-months and a gap.
-        // The arrow direction tells us which panel the user moved away from: a backward arrow came
-        // from the right panel and should pull the right panel back to the target; a forward arrow
-        // came from the left panel and should push the left panel forward.
+        // Target sits in the independent-months gap: direction tells us which panel to move.
         const goingBack = direction === 'left' || direction === 'up'
 
         if (goingBack) {
@@ -280,6 +284,7 @@ export const VDateRangePicker = genericComponent<new <
             default: () => (
               <>
                 <VDatePicker
+                  ref={ leftPickerRef }
                   { ...datePickerProps }
                   v-model={ model.value }
                   v-model:month={ leftMonth.value }
@@ -321,6 +326,7 @@ export const VDateRangePicker = genericComponent<new <
                 <div class="v-date-range-picker__divider" role="separator" />
 
                 <VDatePicker
+                  ref={ rightPickerRef }
                   { ...datePickerProps }
                   v-model={ model.value }
                   v-model:month={ rightMonth.value }

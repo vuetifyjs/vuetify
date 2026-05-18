@@ -465,7 +465,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       </div>
     ))
 
-    return { focusGrid }
+    return { focusGrid, focusItem }
   },
 })
 
