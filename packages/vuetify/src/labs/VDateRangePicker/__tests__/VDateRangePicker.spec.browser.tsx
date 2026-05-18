@@ -3,10 +3,11 @@ import { VDateRangePicker } from '../VDateRangePicker'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
+import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { ref } from 'vue'
 
-const cell = (iso: string) => document.querySelector<HTMLElement>(`[data-v-date="${iso}"]`)
+const cell = (iso: string) => screen.queryByCSS<HTMLElement>(`[data-v-date="${iso}"]`)
 const dayBtn = (iso: string) => cell(iso) as HTMLButtonElement | null
 const dayWrapper = (iso: string) => cell(iso)?.closest<HTMLElement>('.v-date-picker-month__day') ?? null
 
@@ -22,8 +23,7 @@ describe('VDateRangePicker', () => {
 
     // showAdjacentMonths is forced to false: May 1 is NOT rendered as a button in the left
     // calendar — only as a real cell in the right panel.
-    const mayFirstCells = document.querySelectorAll('[data-v-date="2026-05-01"]')
-    expect(mayFirstCells).toHaveLength(1)
+    expect(screen.queryAllByCSS('[data-v-date="2026-05-01"]')).toHaveLength(1)
   })
 
   it('renders the footer slot inside the picker root, below the calendar body', async () => {
@@ -35,12 +35,9 @@ describe('VDateRangePicker', () => {
       </VDateRangePicker>
     ))
 
-    const root = await screen.getByCSS('.v-date-range-picker')
-    const body = root.querySelector('.v-picker__body')!
-    const footer = root.querySelector('.v-picker__actions')!
+    const body = await screen.getByCSS('.v-date-range-picker > .v-picker__body')
+    const footer = await screen.getByCSS('.v-date-range-picker > .v-picker__actions')
 
-    expect(body).not.toBeNull()
-    expect(footer).not.toBeNull()
     expect(footer.contains(screen.getByTestId('picker-footer'))).toBe(true)
     // Footer is a sibling of body inside the root — never wraps siblings composed externally.
     expect(footer.parentElement).toBe(body.parentElement)
@@ -152,15 +149,16 @@ describe('VDateRangePicker', () => {
         <VDateRangePicker modelValue={['2026-04-15', '2026-04-20']} independentMonths />
       ))
 
-      const panels = document.querySelectorAll('.v-date-range-picker__panel')
+      const panels = screen.queryAllByCSS('.v-date-range-picker__panel')
       expect(panels).toHaveLength(2)
 
-      // With independent-months, the nav-placeholder spacer is replaced by a button — none remain.
-      expect(document.querySelectorAll('.v-date-range-picker__nav-placeholder')).toHaveLength(0)
+      // Inner-facing nav buttons are always rendered but visually hidden when not independent;
+      // with independent-months on, the hidden marker is gone.
+      expect(screen.queryAllByCSS('.v-date-range-picker__nav-hidden')).toHaveLength(0)
 
       // Each panel's controls have a prev + next button (2 each, 4 total).
-      const navButtons = Array.from(panels).flatMap(panel =>
-        Array.from(panel.querySelectorAll('.v-date-picker-controls .v-btn'))
+      const navButtons = panels.flatMap(panel =>
+        within(panel).queryAllByCSS('.v-date-picker-controls .v-btn')
       )
       expect(navButtons).toHaveLength(4)
 
@@ -238,22 +236,18 @@ describe('VDateRangePicker', () => {
         <VDateRangePicker modelValue={['2026-04-15', '2026-04-20']} independentMonths />
       ))
 
-      const panels = document.querySelectorAll('.v-date-range-picker__panel')
-      const leftButtons = panels[0].querySelectorAll<HTMLButtonElement>('.v-date-picker-controls .v-btn')
-      const rightButtons = panels[1].querySelectorAll<HTMLButtonElement>('.v-date-picker-controls .v-btn')
-      const leftPrev = leftButtons[0]
-      const rightNext = rightButtons[1]
+      const panels = screen.queryAllByCSS('.v-date-range-picker__panel')
+      const panelButtons = (i: number) =>
+        within(panels[i]).queryAllByCSS<HTMLButtonElement>('.v-date-picker-controls .v-btn')
 
       // Step left back to March, right forward to June. Now there's a 3-month gap.
-      await userEvent.click(leftPrev)
-      await userEvent.click(rightNext)
+      await userEvent.click(panelButtons(0)[0])
+      await userEvent.click(panelButtons(1)[1])
       await commands.waitStable('.v-date-range-picker .v-picker__body')
 
       // Both inner-facing buttons should now be enabled again.
-      const refreshedLeftButtons = panels[0].querySelectorAll<HTMLButtonElement>('.v-date-picker-controls .v-btn')
-      const refreshedRightButtons = panels[1].querySelectorAll<HTMLButtonElement>('.v-date-picker-controls .v-btn')
-      expect(refreshedLeftButtons[1].disabled).toBe(false)
-      expect(refreshedRightButtons[0].disabled).toBe(false)
+      expect(panelButtons(0)[1].disabled).toBe(false)
+      expect(panelButtons(1)[0].disabled).toBe(false)
     })
   })
 })
