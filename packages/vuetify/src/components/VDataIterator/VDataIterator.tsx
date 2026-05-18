@@ -1,7 +1,13 @@
 // Components
 import { VFadeTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
-import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
+import {
+  createGroupBy,
+  makeDataTableGroupProps,
+  provideGroupBy,
+  useGroupedItems,
+  useOpenAllGroups,
+} from '@/components/VDataTable/composables/group'
 import { useOptions } from '@/components/VDataTable/composables/options'
 import {
   createPagination,
@@ -17,7 +23,6 @@ import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { LoaderSlot } from '@/composables/loader'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
 import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -105,11 +110,12 @@ export const VDataIterator = genericComponent<new <T> (
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
     'update:currentItems': (value: any) => true,
   },
 
   setup (props, { slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
     const search = toRef(() => props.search)
 
     const { items } = useDataIteratorItems(props)
@@ -119,10 +125,17 @@ export const VDataIterator = genericComponent<new <T> (
     const { page, itemsPerPage } = createPagination(props)
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, false)
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, openedGroups, false, isGroupOpen, groupKey)
 
     const manualPagination = toRef(() => !isEmpty(props.itemsLength))
     const itemsLength = toRef(() => manualPagination.value ? Number(props.itemsLength) : flatItems.value.length)

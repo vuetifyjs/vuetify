@@ -1,4 +1,5 @@
 {
+  "description": "Toolbar wrapper dedicated to hold logo and the primary navigation.",
   "props": {
     "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
     "extensionHeight": "Designate an explicit height for the `extension` slot.",

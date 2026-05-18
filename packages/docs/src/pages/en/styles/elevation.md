@@ -35,14 +35,38 @@ In MD3, elevation changes are commonly used to indicate interactive states. For 
 
 The `elevation` helper classes allow you to assign a custom **z-depth** to any element.
 
-<ExamplesExample file="elevation/usage" />
+<ExamplesExample file="elevation/usage" new-in="4.1.0" />
 
 ## Examples
 
 ### Props
 
-#### Dynamic elevation
+#### Hover elevation
 
-Numerous components utilize the **elevatable** mixin and are given an **elevation** prop. For components that are not supported, you can dynamically change the class
+Use the `hover-elevation` prop to change a component's elevation on hover. For regular HTML elements or components without `elevation` prop, the `hover-elevation-*` utility classes helps achieve the same effect.
 
-<ExamplesExample file="elevation/prop-dynamic" />
+::: tip
+
+The `hover-elevation-*` utility classes do not include a transition. To animate the change, add your own transition styles or use a CSS framework like Tailwind. VCard applies the following transition by default:
+
+```css
+transition: 0.28s box-shadow cubic-bezier(0.4, 0, 0.2, 1); /* simplified */
+```
+
+:::
+
+<ExamplesExample file="elevation/prop-dynamic" new-in="4.1.0" />
+
+### Misc
+
+#### Elevation overlay
+
+The `elevation-overlay` class adds a translucent layer whose opacity scales with the elevation level. This is especially useful in **dark themes** where shadows are less visible — the overlay provides a visual cue for surface depth.
+
+<ExamplesExample file="elevation/misc-elevation-overlay" />
+
+#### CSS custom properties
+
+You can customize `--v-shadow-color` for each theme or use it directly on the component to change the shadow color (expects an RGB value) and `--v-elevation-overlay-color` to customize the overlay tint.
+
+<ExamplesExample file="elevation/misc-css-custom-properties" />

@@ -21,8 +21,6 @@
       grid-template-areas: "prepend content append close" "prepend content . ."
 
     &.v-alert--border
-      --v-border-opacity: #{$alert-border-opacity}
-
       &.v-alert--border-start
         padding-inline-start: $alert-padding + $alert-border-thin-width
 
@@ -51,7 +49,7 @@
     border-radius: inherit
     bottom: 0
     left: 0
-    opacity: var(--v-border-opacity)
+    opacity: $alert-border-opacity
     position: absolute
     pointer-events: none
     right: 0

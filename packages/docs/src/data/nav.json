@@ -285,6 +285,14 @@
         "subfolder": "components"
       },
       {
+        "title": "heatmaps",
+        "subfolder": "components"
+      },
+      {
+        "title": "highlights",
+        "subfolder": "components"
+      },
+      {
         "title": "icon-buttons",
         "subfolder": "components"
       },
@@ -306,6 +314,10 @@
       },
       {
         "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "month-pickers",
         "subfolder": "components"
       },
       {

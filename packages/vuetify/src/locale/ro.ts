@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'până la',
   },
+  monthPicker: {
+    title: 'Selectați luna',
+    itemsSelected: '{0} selectate',
+    header: 'Introduceți luna',
+    range: {
+      title: 'Introduceți lunile',
+    },
+    ariaLabel: {
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectYear: 'Selectați anul',
+      currentMonth: 'Luna curentă, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selectate',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'încă {0}',
     today: 'Today',
+  },
+  heatmap: {
+    less: 'Mai puțin',
+    more: 'Mai mult',
   },
   input: {
     clear: 'Șterge {0}',

@@ -1,4 +1,5 @@
 {
+  "description": "Chart component used to create simple line or bars.",
   "props": {
     "animation": "Enables smooth transitions when values change. When `true`, uses default duration (300ms) and easing (`ease`). Can be an object with `duration` (ms) and `easing` (CSS easing) properties.",
     "autoDraw": "Trace the length of the line when first rendered. Since 4.1.0 it accepts `'once'`, to make the animation play only on mount and make the subsequent value changes interpolate smoothly.",

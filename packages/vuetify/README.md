@@ -108,11 +108,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
   <tbody>
     <tr>
       <td>
-        <a href="https://route4me.com/">
-          <img height="40px" src="https://cdn.cosmicjs.com/3b7a95b0-5360-11ef-b1ea-f56c65dfade9-route-4-me-light.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.abacus.ch/">
           <img height="40px" src="https://cdn.cosmicjs.com/0b978be0-6cbb-11ef-b5ae-a594bb4a8e67-abacus-light.svg">
         </a>

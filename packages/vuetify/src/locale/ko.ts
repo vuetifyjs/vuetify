@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '부터',
   },
+  monthPicker: {
+    title: '월 선택',
+    itemsSelected: '{0}개 선택됨',
+    header: '월 입력',
+    range: {
+      title: '월 입력',
+    },
+    ariaLabel: {
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectYear: '연도 선택',
+      currentMonth: '이번 달, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0}개 선택됨',
     range: {
@@ -68,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} 더보기',
     today: '오늘',
+  },
+  heatmap: {
+    less: '적음',
+    more: '많음',
   },
   input: {
     clear: '{0} 지우기',
