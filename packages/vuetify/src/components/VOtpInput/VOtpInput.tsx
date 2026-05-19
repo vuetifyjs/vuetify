@@ -260,14 +260,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       syncDOM()
     }
 
-    function getSlotIndexAtPoint (x: number, y: number): number | null {
-      const elements = document.elementsFromPoint(x, y)
-      const slotEl = elements.find(el => el.hasAttribute('data-otp-index'))
-      if (!slotEl) return null
-      const index = Number(slotEl.getAttribute('data-otp-index'))
-      return Number.isNaN(index) ? null : index
-    }
-
     function focusAt (index: number) {
       const input = inputRef.value
       if (!input) return
@@ -276,15 +268,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       focusAtPending = false
       otp.selectSlot(index)
       applySelection()
-    }
-
-    function onInputMousedown (e: MouseEvent) {
-      if (e.button !== 0) return
-      const index = getSlotIndexAtPoint(e.clientX, e.clientY)
-      if (index != null) {
-        e.preventDefault()
-        focusAt(index)
-      }
     }
 
     // selectionchange is not in InputHTMLAttributes types
@@ -376,31 +359,31 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               ))
             }
 
-            <div class="v-otp-input__input-wrapper">
-              <input
-                ref={ inputRef }
-                class="v-otp-input__input"
-                type="text"
-                inputmode={ otp.inputMode.value }
-                dir={ isRtl.value ? 'rtl' : 'ltr' }
-                autocomplete="one-time-code"
-                maxlength={ length.value }
-                disabled={ props.disabled }
-                aria-label={ t(props.label) }
-                value={ model.value }
-                { ...inputAttrs }
-                onInput={ onInput }
-                onKeydown={ onKeydown }
-                onBeforeinput={ onBeforeinput }
-                onFocus={ onFocus }
-                onBlur={ onBlur }
-                onPaste={ onPaste }
-                onMousedown={ onInputMousedown }
-                onCompositionstart={ onCompositionstart }
-                onCompositionupdate={ onCompositionupdate }
-                onCompositionend={ onCompositionend }
-              />
-            </div>
+            <input
+              ref={ inputRef }
+              class="v-otp-input__input"
+              type="text"
+              inputmode={ otp.inputMode.value }
+              dir={ isRtl.value ? 'rtl' : 'ltr' }
+              autocomplete="one-time-code"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck={ false }
+              maxlength={ length.value }
+              disabled={ props.disabled }
+              aria-label={ t(props.label) }
+              value={ model.value }
+              { ...inputAttrs }
+              onInput={ onInput }
+              onKeydown={ onKeydown }
+              onBeforeinput={ onBeforeinput }
+              onFocus={ onFocus }
+              onBlur={ onBlur }
+              onPaste={ onPaste }
+              onCompositionstart={ onCompositionstart }
+              onCompositionupdate={ onCompositionupdate }
+              onCompositionend={ onCompositionend }
+            />
 
             <VOverlay
               contained

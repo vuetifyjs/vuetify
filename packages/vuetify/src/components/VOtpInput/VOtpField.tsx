@@ -40,7 +40,7 @@ export const VOtpField = genericComponent()({
         <VField
           focused={ slot.value.isActive || isHighlighted.value }
           class={{ 'v-otp-input__field--highlighted': isHighlighted.value }}
-          data-otp-index={ props.index }
+          onMousedown={ (e: MouseEvent) => e.preventDefault() }
           onClick={ () => otpInput.focusAt(props.index) }
         >
           {{
