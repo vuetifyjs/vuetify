@@ -28,6 +28,7 @@ import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 
 export interface OtpSlotData {
   char: string | null
+  compositionChar: string | null
   placeholderChar: string | null
   isActive: boolean
   hasFakeCaret: boolean
@@ -55,9 +56,13 @@ const OtpInputPatterns = {
   numeric: /[0-9]/,
   alpha: /[a-zA-Z]/,
   alphanumeric: /[a-zA-Z0-9]/,
+  'unicode-alpha': /\p{L}/u,
+  'unicode-alphanumeric': /[\p{L}\p{N}]/u,
 } as const
 
 type OtpInputPattern = keyof typeof OtpInputPatterns
+
+const IME_SCRIPT_RE = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Bopomofo}]/u
 
 export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
@@ -147,6 +152,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     let prevSelection: [number | null, number | null, 'forward' | 'backward' | 'none' | null] = [null, null, null]
     let isComposing = false
+    const compositionText = ref('')
 
     // selectionchange is not in InputHTMLAttributes types
     watch(inputRef, (input, _, onCleanup) => {
@@ -172,6 +178,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     // Forces the selection to always cover at least 1 character
     function onSelectionChange () {
+      // Freeze the active slot during IME composition
+      if (isComposing) return
       const input = inputRef.value
       if (!input) {
         renderSelectionStart.value = null
@@ -229,9 +237,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     const otpSlots = computed(() => {
+      const compStart = renderSelectionStart.value ?? model.value.length
       return Array.from({ length: length.value }, (_, i) => {
         const char = model.value[i] ?? null
         const displayChar = char !== null && isMasked.value ? '•' : char
+
+        let compositionChar: string | null = null
+        if (compositionText.value && i >= compStart) {
+          const offset = i - compStart
+          const c = compositionText.value[offset]
+          if (c != null) compositionChar = isMasked.value ? '•' : c
+        }
 
         const isActive =
           isFocused.value &&
@@ -244,16 +260,28 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
         return {
           char: displayChar,
+          compositionChar,
           placeholderChar: props.placeholder ?? null,
           isActive,
-          hasFakeCaret: isActive && char === null,
+          hasFakeCaret: isActive && char === null && compositionChar === null,
         }
       })
     })
 
     function onInput (e: Event) {
-      if (isComposing) return
+      const ev = e as InputEvent
       const target = e.target as HTMLInputElement
+      const composing = ev.isComposing || isComposing
+
+      if (composing) {
+        if (IME_SCRIPT_RE.test(target.value)) return
+        if (isComposing) {
+          isComposing = false
+          compositionText.value = ''
+          onSelectionChange()
+        }
+      }
+
       let filtered = target.value
       if (effectivePattern.value) {
         filtered = filtered.split('').filter(c => effectivePattern.value!.test(c)).join('')
@@ -265,10 +293,18 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     function onCompositionstart () {
       isComposing = true
+      compositionText.value = ''
+    }
+
+    function onCompositionupdate (e: CompositionEvent) {
+      // Only paint the overlay for real IME composition
+      const data = e.data ?? ''
+      compositionText.value = IME_SCRIPT_RE.test(data) ? data : ''
     }
 
     function onCompositionend (e: CompositionEvent) {
       isComposing = false
+      compositionText.value = ''
       onInput(e)
     }
 
@@ -447,6 +483,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     })
 
     watch(model, val => {
+      if (isComposing) return
       if (val.length === length.value) {
         emit('finish', val.join(''))
       }
@@ -514,6 +551,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
                 onPaste={ onPaste }
                 onMousedown={ onInputMousedown }
                 onCompositionstart={ onCompositionstart }
+                onCompositionupdate={ onCompositionupdate }
                 onCompositionend={ onCompositionend }
               />
             </div>

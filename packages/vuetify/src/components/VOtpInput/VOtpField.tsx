@@ -47,7 +47,11 @@ export const VOtpField = genericComponent()({
             loader: undefined,
             default: () => (
               <div class="v-otp-input__field">
-                { slot.value.hasFakeCaret ? (
+                { slot.value.compositionChar ? (
+                  <span class="v-otp-input__composition">
+                    { slot.value.compositionChar }
+                  </span>
+                ) : slot.value.hasFakeCaret ? (
                   <span class="v-otp-input__caret" />
                 ) : (
                   <span class={ !slot.value.char ? 'v-otp-input__placeholder' : undefined }>
