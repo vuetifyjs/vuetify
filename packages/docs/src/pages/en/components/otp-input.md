@@ -107,7 +107,7 @@ The `merged` prop renders all fields in a single connected group with shared ele
 
 #### Pattern
 
-The `pattern` prop restricts which characters are accepted. It supports preset values (`numeric`, `alpha`, `alphanumeric`) or a custom `RegExp`. When `type="number"` is set, the pattern defaults to `numeric` automatically.
+The `pattern` prop restricts which characters are accepted. It supports preset values (`numeric`, `alpha`, `alphanumeric`, `unicode-alpha`, `unicode-alphanumeric`) or a custom `RegExp`. When `type="number"` is set, the pattern defaults to `numeric` automatically. Use the `unicode-*` variants to accept non-Latin scripts such as CJK, Cyrillic or accented characters.
 
 <ExamplesExample file="v-otp-input/prop-pattern" />
 
