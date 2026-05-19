@@ -281,6 +281,113 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(3)
   })
 
+  function getSlotChar (index: number) {
+    return getSlots()[index].querySelector('.v-otp-input__field')?.textContent ?? ''
+  }
+
+  it('renders a single emoji in one slot, not as two surrogate halves', async () => {
+    render(() => (<VOtpInput type="text" />))
+    const input = getInput()
+    await focusInput()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('😀')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(input.value).toBe('😀')
+    expect(getSlotChar(0)).toBe('😀')
+    expect(getSlotChar(1)).toBe('')
+    expect(getActiveSlotIndex()).toBe(1)
+  })
+
+  it('treats a flag emoji (regional indicator pair) as one slot', async () => {
+    render(() => (<VOtpInput type="text" />))
+    const input = getInput()
+    await focusInput()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('🇨🇦')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(input.value).toBe('🇨🇦')
+    expect(getSlotChar(0)).toBe('🇨🇦')
+    expect(getSlotChar(1)).toBe('')
+    expect(getActiveSlotIndex()).toBe(1)
+  })
+
+  it('treats a ZWJ family sequence as one slot', async () => {
+    render(() => (<VOtpInput type="text" />))
+    await focusInput()
+    const lock = await commands.getLock()
+    // 👨‍👩‍👧 = man + ZWJ + woman + ZWJ + girl, multiple codepoints, one glyph
+    await navigator.clipboard.writeText('👨‍👩‍👧')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(getSlotChar(0)).toBe('👨‍👩‍👧')
+    expect(getSlotChar(1)).toBe('')
+    expect(getActiveSlotIndex()).toBe(1)
+  })
+
+  it('places consecutive emojis into separate slots', async () => {
+    render(() => (<VOtpInput type="text" />))
+    const input = getInput()
+    await focusInput()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('😀😎🎉')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(input.value).toBe('😀😎🎉')
+    expect(getSlotChar(0)).toBe('😀')
+    expect(getSlotChar(1)).toBe('😎')
+    expect(getSlotChar(2)).toBe('🎉')
+    expect(getActiveSlotIndex()).toBe(3)
+  })
+
+  it('clamps pasted emojis by codepoint count, not code units', async () => {
+    render(() => (<VOtpInput type="text" length={ 4 } />))
+    const input = getInput()
+    await focusInput()
+    const lock = await commands.getLock()
+    // 5 emojis (10 code units) into 4 slots — model keeps exactly 4 codepoints,
+    // last slot highlighted.
+    await navigator.clipboard.writeText('😀😎🎉🚀🎯')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+
+    expect(Array.from(input.value)).toHaveLength(4)
+    expect(input.value).toBe('😀😎🎉🚀')
+    expect(getActiveSlotIndex()).toBe(3)
+  })
+
+  it('routes slot clicks correctly past a multi-codepoint grapheme', async () => {
+    const modelValue = ref('1🇨🇦34🚀')
+    render(() => (
+      <VOtpInput
+        type="text"
+        modelValue={ modelValue.value }
+        onUpdate:modelValue={ val => { modelValue.value = val } }
+      />
+    ))
+    await focusInput()
+
+    // Slots before the flag emoji are at predictable code-unit positions.
+    await userEvent.click(getSlots()[2])
+    expect(getActiveSlotIndex()).toBe(2)
+
+    // Slots after the flag emoji must also land on the clicked slot
+    // (regression: they used to all collapse onto slot 2).
+    await userEvent.click(getSlots()[3])
+    expect(getActiveSlotIndex()).toBe(3)
+
+    await userEvent.click(getSlots()[4])
+    expect(getActiveSlotIndex()).toBe(4)
+
+    await userEvent.click(getSlots()[5])
+    expect(getActiveSlotIndex()).toBe(5)
+  })
+
   it('handles mobile OTP autofill', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()

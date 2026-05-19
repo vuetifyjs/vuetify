@@ -154,7 +154,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         selectionStart: input.selectionStart,
         selectionEnd: input.selectionEnd,
         selectionDirection: input.selectionDirection,
-        maxLength: input.maxLength,
+        // Slot count (codepoints), not `input.maxLength` (code units) — see
+        // useOtpInput.ts syncSelection.
+        maxLength: length.value,
       })
       if (!result) return
       if (input.selectionStart !== result.start || input.selectionEnd !== result.end) {
@@ -370,7 +372,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               autocorrect="off"
               autocapitalize="off"
               spellcheck={ false }
-              maxlength={ length.value }
               disabled={ props.disabled }
               aria-label={ t(props.label) }
               value={ model.value }

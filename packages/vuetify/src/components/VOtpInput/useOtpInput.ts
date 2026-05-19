@@ -40,6 +40,8 @@ export type OtpInputPattern = keyof typeof OtpInputPatterns
 
 const IME_SCRIPT_RE = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Bopomofo}]/u
 
+const graphemeSegmenter = /* @__PURE__ */ new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+
 export interface OtpInputOptions {
   value: Ref<string>
   length?: MaybeRefOrGetter<number>
@@ -111,27 +113,61 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     effectivePattern.value === OtpInputPatterns.numeric ? 'numeric' as const : 'text' as const
   )
 
+  // Selection is kept in code units to line up with `setSelectionRange` and
+  // `selectionStart`, but slot count, length, and boundary checks all work in
+  // grapheme-cluster space so each rendered glyph occupies one slot. This
+  // handles emoji (surrogate pairs), flag sequences (regional indicator pairs),
+  // ZWJ sequences (👨‍👩‍👧), skin-tone modifiers, and keycap sequences uniformly.
+  function graphemes (s: string): string[] {
+    return Array.from(graphemeSegmenter.segment(s), seg => seg.segment)
+  }
+
+  function codeUnitsToGraphemeIndex (s: string, pos: number): number {
+    let count = 0
+    for (const seg of graphemeSegmenter.segment(s)) {
+      if (seg.index >= pos) break
+      count++
+    }
+    return count
+  }
+
+  function graphemeIndexToCodeUnits (s: string, gIndex: number): number {
+    if (gIndex <= 0) return 0
+    let count = 0
+    for (const seg of graphemeSegmenter.segment(s)) {
+      if (count === gIndex) return seg.index
+      count++
+    }
+    return s.length
+  }
+
   const slots = computed((): OtpSlotData[] => {
-    const compStart = selection.value?.start ?? value.value.length
+    const chars = graphemes(value.value)
+    const compChars = graphemes(composition.value)
     const place = toValue(placeholder) ?? null
+    const sel = selection.value
+    const startG = sel ? codeUnitsToGraphemeIndex(value.value, sel.start) : null
+    const endG = sel ? codeUnitsToGraphemeIndex(value.value, sel.end) : null
+    const compStart = startG ?? chars.length
+
     return Array.from({ length: length.value }, (_, i) => {
-      const char = value.value[i] ?? null
+      const char = chars[i] ?? null
       const displayChar = char !== null && isMasked.value ? '•' : char
 
       let compositionChar: string | null = null
       if (composition.value && i >= compStart) {
         const offset = i - compStart
-        const c = composition.value[offset]
+        const c = compChars[offset]
         if (c != null) compositionChar = isMasked.value ? '•' : c
       }
 
-      const sel = selection.value
       const isActive =
         isFocused.value &&
-        sel !== null &&
+        startG !== null &&
+        endG !== null &&
         (
-          (sel.start === sel.end && i === sel.start) ||
-          (i >= sel.start && i < sel.end)
+          (startG === endG && i === startG) ||
+          (i >= startG && i < endG)
         )
 
       return {
@@ -147,7 +183,13 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   function filter (text: string): string {
     const re = effectivePattern.value
     if (!re) return text
-    return text.split('').filter(c => re.test(c)).join('')
+    return graphemes(text).filter(c => re.test(c)).join('')
+  }
+
+  function clampGraphemes (text: string, max: number): string {
+    const chars = graphemes(text)
+    if (chars.length <= max) return text
+    return chars.slice(0, max).join('')
   }
 
   function isImeText (text: string): boolean {
@@ -155,7 +197,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   }
 
   function setValue (text: string): string {
-    const next = filter(text).slice(0, length.value)
+    const next = clampGraphemes(filter(text), length.value)
     value.value = next
     return next
   }
@@ -165,13 +207,14 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     const start = range?.start ?? current.length
     const end = range?.end ?? current.length
     const filtered = filter(text)
-    const next = (current.slice(0, start) + filtered + current.slice(end)).slice(0, length.value)
+    const next = clampGraphemes(current.slice(0, start) + filtered + current.slice(end), length.value)
     value.value = next
 
-    const insertEnd = start + filtered.length
-    const cursor = Math.min(insertEnd, length.value - 1)
-    const newEnd = Math.min(insertEnd, next.length)
-    setSelection(cursor, newEnd, 'forward')
+    const insertEnd = Math.min(start + filtered.length, next.length)
+    const insertEndG = codeUnitsToGraphemeIndex(next, insertEnd)
+    const cursorG = Math.min(insertEndG, length.value - 1)
+    const cursor = graphemeIndexToCodeUnits(next, cursorG)
+    setSelection(cursor, insertEnd, 'forward')
     return next
   }
 
@@ -217,8 +260,19 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   }
 
   function selectAtEnd (): OtpSelection {
-    const start = Math.min(value.value.length, length.value - 1)
-    const end = value.value.length
+    const value_ = value.value
+    const graphemeCount = graphemes(value_).length
+    let start: number
+    let end: number
+    if (graphemeCount >= length.value) {
+      // Full: range over the last slot (so it renders as active).
+      start = graphemeIndexToCodeUnits(value_, length.value - 1)
+      end = value_.length
+    } else {
+      // Partial: single caret at the end of the typed content.
+      start = value_.length
+      end = value_.length
+    }
     const next: OtpSelection = { start, end, direction: 'forward' }
     selection.value = next
     prevSelection = next
@@ -226,52 +280,30 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   }
 
   function selectSlot (index: number): OtpSelection {
-    const clamped = Math.min(index, value.value.length)
-    const end = Math.min(clamped + 1, value.value.length)
-    const next: OtpSelection = { start: clamped, end, direction: 'forward' }
+    const value_ = value.value
+    const graphemeCount = graphemes(value_).length
+    const clamped = Math.min(index, graphemeCount)
+    // Caller passes a slot/grapheme index; convert to code-unit positions so
+    // the selection range covers the right glyph (not a slice mid-grapheme).
+    const start = graphemeIndexToCodeUnits(value_, clamped)
+    const end = clamped < graphemeCount
+      ? graphemeIndexToCodeUnits(value_, clamped + 1)
+      : value_.length
+    const next: OtpSelection = { start, end, direction: 'forward' }
     selection.value = next
     prevSelection = next
     return next
   }
 
   // Selection synthesis: forces the rendered selection to always cover at least
-  // one character so a slot is "active" when a caret would otherwise be between two.
+  // one slot, so a slot is "active" when a caret would otherwise be between two.
+  // All boundary checks run in grapheme space (= slot space) so each rendered
+  // glyph is one slot; the final selection is returned in code units to match
+  // `setSelectionRange`.
   function syncSelection (raw: OtpSelectionInput): OtpSelection | null {
     if (isComposing.value) return selection.value
 
     const { value: inputValue, selectionStart, selectionEnd, selectionDirection, maxLength } = raw
-
-    let start = -1
-    let end = -1
-    let direction: 'forward' | 'backward' | 'none' | undefined
-
-    if (inputValue.length !== 0 && selectionStart !== null && selectionEnd !== null) {
-      const isSingleCaret = selectionStart === selectionEnd
-      const isInsertMode = selectionStart === inputValue.length && inputValue.length < maxLength
-
-      if (isSingleCaret && !isInsertMode) {
-        if (selectionStart === 0) {
-          start = 0
-          end = 1
-          direction = 'forward'
-        } else if (selectionStart === maxLength) {
-          start = selectionStart - 1
-          end = selectionStart
-          direction = 'backward'
-        } else if (maxLength > 1 && inputValue.length > 1) {
-          let offset = 0
-          if (prevSelection !== null) {
-            direction = selectionStart < prevSelection.end ? 'backward' : 'forward'
-            const wasPreviouslyInserting = prevSelection.start === prevSelection.end && prevSelection.start < maxLength
-            if (direction === 'backward' && !wasPreviouslyInserting) {
-              offset = -1
-            }
-          }
-          start = offset + selectionStart
-          end = offset + selectionStart + 1
-        }
-      }
-    }
 
     if (selectionStart === null || selectionEnd === null) {
       selection.value = null
@@ -279,8 +311,48 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
       return null
     }
 
-    const finalStart = start !== -1 ? start : selectionStart
-    const finalEnd = end !== -1 ? end : selectionEnd
+    const valueG = graphemes(inputValue).length
+    const startG = codeUnitsToGraphemeIndex(inputValue, selectionStart)
+    const endG = codeUnitsToGraphemeIndex(inputValue, selectionEnd)
+
+    let outStartG = -1
+    let outEndG = -1
+    let direction: 'forward' | 'backward' | 'none' | undefined
+
+    if (valueG !== 0) {
+      const isSingleCaret = startG === endG
+      const isInsertMode = startG === valueG && valueG < maxLength
+
+      if (isSingleCaret && !isInsertMode) {
+        if (startG === 0) {
+          outStartG = 0
+          outEndG = 1
+          direction = 'forward'
+        } else if (startG === maxLength) {
+          outStartG = startG - 1
+          outEndG = startG
+          direction = 'backward'
+        } else if (maxLength > 1 && valueG > 1) {
+          let offset = 0
+          if (prevSelection !== null) {
+            const prevStartG = codeUnitsToGraphemeIndex(inputValue, prevSelection.start)
+            const prevEndG = codeUnitsToGraphemeIndex(inputValue, prevSelection.end)
+            direction = startG < prevEndG ? 'backward' : 'forward'
+            const wasPreviouslyInserting = prevStartG === prevEndG && prevStartG < maxLength
+            if (direction === 'backward' && !wasPreviouslyInserting) {
+              offset = -1
+            }
+          }
+          outStartG = offset + startG
+          outEndG = offset + startG + 1
+        }
+      }
+    }
+
+    const finalStartG = outStartG !== -1 ? outStartG : startG
+    const finalEndG = outEndG !== -1 ? outEndG : endG
+    const finalStart = graphemeIndexToCodeUnits(inputValue, finalStartG)
+    const finalEnd = graphemeIndexToCodeUnits(inputValue, finalEndG)
     const finalDirection = direction ?? selectionDirection ?? 'none'
 
     const next: OtpSelection = { start: finalStart, end: finalEnd, direction: finalDirection }
