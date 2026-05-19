@@ -156,10 +156,13 @@
     font-size: $otp-input-field-font-size
     height: 100%
     width: 100%
-    display: flex
-    align-items: center
-    justify-content: center
+    display: grid
+    place-items: center
+    place-content: center
     position: relative
+
+    > *
+      grid-area: 1 / 1
 
   .v-otp-input__placeholder
     color: currentColor
@@ -172,14 +175,15 @@
     text-decoration: underline
 
   .v-otp-input__caret
-    position: absolute
-    top: 50%
-    transform: translateY(-50%)
-    display: inline-block
     width: 1px
     height: 1.2em
     background: currentColor
     animation: v-otp-blink 1s step-end infinite
+
+  .v-otp-input__spacer
+    display: block
+    opacity: 0
+    pointer-events: none
 
   .v-otp-input__loader
     align-items: center
