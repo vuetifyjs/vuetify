@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, toDisplayString, toRef, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, onMounted, ref, toDisplayString, toRef, watch } from 'vue'
 import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -198,6 +198,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
         nextTick(() => handleActiveLink())
       }
     })
+    onMounted(() => {
+      if (props.activeColor) {
+        deprecate('active-color', ['color', 'base-color'])
+      }
+    })
     function handleActiveLink () {
       if (parent.value != null) {
         root.open(parent.value, true)
@@ -274,10 +279,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       list?.updateHasPrepend(hasPrepend)
 
-      if (props.activeColor) {
-        deprecate('active-color', ['color', 'base-color'])
-      }
-
       return (
         <Tag
           { ...link.linkProps }
@@ -316,7 +317,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
-          onClick={ onClick }
+          onClick={ isClickable.value && onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
         >
