@@ -1,9 +1,9 @@
 // Utilities
-import { Vuetify0DateAdapter } from '@vuetify/v0/date'
+import { V0DateAdapter } from '@vuetify/v0/date'
 import { VuetifyDateBridge } from '../../bridge'
 
 function createAdapter (locale: string) {
-  return new VuetifyDateBridge(new Vuetify0DateAdapter(locale))
+  return new VuetifyDateBridge(new V0DateAdapter(locale))
 }
 
 describe('vuetify date adapter (via VuetifyDateBridge)', () => {

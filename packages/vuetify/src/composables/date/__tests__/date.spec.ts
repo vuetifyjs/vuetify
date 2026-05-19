@@ -1,5 +1,5 @@
 // Utilities
-import { Vuetify0DateAdapter } from '@vuetify/v0/date'
+import { V0DateAdapter } from '@vuetify/v0/date'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateBridge } from '../bridge'
 import { createDateRange } from '../date'
@@ -10,10 +10,10 @@ import type { Temporal } from '@js-temporal/polyfill'
 type PlainDateTime = Temporal.PlainDateTime
 
 function createAdapter (locale: string): VuetifyDateBridge<PlainDateTime> {
-  return new VuetifyDateBridge(new Vuetify0DateAdapter(locale))
+  return new VuetifyDateBridge(new V0DateAdapter(locale))
 }
 
-describe('VuetifyDateBridge (Vuetify0DateAdapter)', () => {
+describe('VuetifyDateBridge (V0DateAdapter)', () => {
   it('should have the correct days in a month', () => {
     const adapter = createAdapter('en-US')
 
@@ -200,33 +200,36 @@ describe('StringDateAdapter', () => {
 
   it('should adjust for start of a week', () => {
     const adapter = new StringDateAdapter({ locale: 'en-US' }) // first day = 7 | minimal days = 1
+    adapter.firstDayOfWeek = 1
 
-    expect(adapter.getWeek('2028-12-25', 1)).toBe(53)
-    expect(adapter.getWeek('2028-12-31', 1)).toBe(53)
-    expect(adapter.getWeek('2029-01-01', 1)).toBe(1)
-    expect(adapter.getWeek('2029-01-07', 1)).toBe(1)
+    expect(adapter.getWeek('2028-12-25')).toBe(53)
+    expect(adapter.getWeek('2028-12-31')).toBe(53)
+    expect(adapter.getWeek('2029-01-01')).toBe(1)
+    expect(adapter.getWeek('2029-01-07')).toBe(1)
 
     const adapter2 = new StringDateAdapter({ locale: 'pt-PT' }) // first day = 7 | minimal days = 4
+    adapter2.firstDayOfWeek = 1
 
-    expect(adapter2.getWeek('2024-12-28', 1)).toBe(52)
-    expect(adapter2.getWeek('2024-12-29', 1)).toBe(52)
-    expect(adapter2.getWeek('2024-12-30', 1)).toBe(1)
-    expect(adapter2.getWeek('2024-12-31', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-01', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-02', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-03', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-04', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-05', 1)).toBe(1)
-    expect(adapter2.getWeek('2025-01-06', 1)).toBe(2)
-    expect(adapter2.getWeek('2025-01-07', 1)).toBe(2)
+    expect(adapter2.getWeek('2024-12-28')).toBe(52)
+    expect(adapter2.getWeek('2024-12-29')).toBe(52)
+    expect(adapter2.getWeek('2024-12-30')).toBe(1)
+    expect(adapter2.getWeek('2024-12-31')).toBe(1)
+    expect(adapter2.getWeek('2025-01-01')).toBe(1)
+    expect(adapter2.getWeek('2025-01-02')).toBe(1)
+    expect(adapter2.getWeek('2025-01-03')).toBe(1)
+    expect(adapter2.getWeek('2025-01-04')).toBe(1)
+    expect(adapter2.getWeek('2025-01-05')).toBe(1)
+    expect(adapter2.getWeek('2025-01-06')).toBe(2)
+    expect(adapter2.getWeek('2025-01-07')).toBe(2)
 
-    expect(adapter2.getWeek('2028-12-25', 1)).toBe(52)
-    expect(adapter2.getWeek('2028-12-31', 1)).toBe(52)
-    expect(adapter2.getWeek('2029-01-01', 1)).toBe(1)
-    expect(adapter2.getWeek('2029-01-07', 1)).toBe(1)
+    expect(adapter2.getWeek('2028-12-25')).toBe(52)
+    expect(adapter2.getWeek('2028-12-31')).toBe(52)
+    expect(adapter2.getWeek('2029-01-01')).toBe(1)
+    expect(adapter2.getWeek('2029-01-07')).toBe(1)
 
     const adapter3 = new StringDateAdapter({ locale: 'pl-PL' })
-    expect(adapter3.getWeek('2024-12-29', 1)).toBe(52)
+    adapter3.firstDayOfWeek = 1
+    expect(adapter3.getWeek('2024-12-29')).toBe(52)
   })
 
   it('should adjust fallback to week start from locale', () => {
