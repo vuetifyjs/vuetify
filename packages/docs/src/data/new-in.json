@@ -359,6 +359,11 @@
     },
     "slots": {
       "divider": "4.1.0"
+    },
+    "examples": {
+      "misc-custom-layout": "4.1.0",
+      "misc-merged": "4.1.0",
+      "misc-pattern": "4.1.0"
     }
   },
   "VOverlay": {
