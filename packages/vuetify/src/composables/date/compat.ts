@@ -13,14 +13,32 @@ import type { DateAdapter } from '@vuetify/v0'
  * 2. Provide stub implementations for v0-only methods that legacy adapters lack
  */
 export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
-  locale?: string
+  private _locale = 'en-US'
+  private _firstDayOfWeek = 0
 
   constructor (private legacy: any) {
     consoleWarn(
       'Custom date adapters should implement @vuetify/v0\'s DateAdapter interface. ' +
       'Param-based signatures are deprecated and will be removed in a future version.'
     )
-    this.locale = legacy.locale
+    if (legacy.locale != null) this._locale = legacy.locale
+  }
+
+  get locale (): string {
+    return this._locale
+  }
+
+  set locale (value: string) {
+    this._locale = value
+    if (this.legacy.locale != null) this.legacy.locale = value
+  }
+
+  get firstDayOfWeek (): number {
+    return this._firstDayOfWeek
+  }
+
+  set firstDayOfWeek (value: number) {
+    this._firstDayOfWeek = value
   }
 
   // ============================================
@@ -39,8 +57,8 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
     return this.legacy.getWeekArray(date, firstDayOfWeek)
   }
 
-  getWeekdays (firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return this.legacy.getWeekdays(firstDayOfWeek, weekdayFormat)
+  getWeekdays (weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.legacy.getWeekdays(this.firstDayOfWeek, weekdayFormat)
   }
 
   getWeek (date: T, firstDayOfWeek?: number, minimalDays?: number): number {
@@ -240,8 +258,8 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
     return this.legacy.parse?.(value, format) ?? this.unsupported('parse')
   }
 
-  isNull (value: T | null): value is null {
-    return this.legacy.isNull?.(value) ?? (value === null)
+  isNullish (value: T | null): value is null {
+    return this.legacy.isNullish?.(value) ?? this.legacy.isNull?.(value) ?? (value === null)
   }
 
   getCurrentLocaleCode (): string {

@@ -1,17 +1,20 @@
-import { Vuetify0DateAdapter } from '@vuetify/v0/date'
+import { V0DateAdapter } from '@vuetify/v0/date'
 
 // Types
 import type { DateAdapter } from '@vuetify/v0/composables'
 
 export class StringDateAdapter implements DateAdapter<string> {
-  private base: Vuetify0DateAdapter
+  private base: V0DateAdapter
 
   constructor (options?: { locale?: string }) {
-    this.base = new Vuetify0DateAdapter(options?.locale)
+    this.base = new V0DateAdapter(options?.locale)
   }
 
   get locale () { return this.base.locale }
   set locale (v: string) { this.base.locale = v }
+
+  get firstDayOfWeek () { return this.base.firstDayOfWeek }
+  set firstDayOfWeek (v: number) { this.base.firstDayOfWeek = v }
 
   // ============================================
   // Construction & Conversion
@@ -43,8 +46,8 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.base.isValid(date)
   }
 
-  isNull (value: string | null): value is null {
-    return this.base.isNull(value as any)
+  isNullish (value: string | null): value is null {
+    return this.base.isNullish(value as any)
   }
 
   // ============================================
@@ -91,12 +94,12 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.fromBase(this.base.endOfDay(this.toBase(date)))
   }
 
-  startOfWeek (date: string, firstDayOfWeek?: number): string {
-    return this.fromBase(this.base.startOfWeek(this.toBase(date), firstDayOfWeek))
+  startOfWeek (date: string): string {
+    return this.fromBase(this.base.startOfWeek(this.toBase(date)))
   }
 
-  endOfWeek (date: string, firstDayOfWeek?: number): string {
-    return this.fromBase(this.base.endOfWeek(this.toBase(date), firstDayOfWeek))
+  endOfWeek (date: string): string {
+    return this.fromBase(this.base.endOfWeek(this.toBase(date)))
   }
 
   startOfMonth (date: string): string {
@@ -242,8 +245,8 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.base.getDiff(this.toBase(date), this.toBase(comparing), unit)
   }
 
-  getWeek (date: string, firstDayOfWeek?: number, minimalDays?: number): number {
-    return this.base.getWeek(this.toBase(date), firstDayOfWeek, minimalDays)
+  getWeek (date: string, minimalDays?: number): number {
+    return this.base.getWeek(this.toBase(date), minimalDays)
   }
 
   getDaysInMonth (date: string): number {
@@ -282,12 +285,12 @@ export class StringDateAdapter implements DateAdapter<string> {
   // Calendar Utilities
   // ============================================
 
-  getWeekdays (firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return this.base.getWeekdays(firstDayOfWeek, weekdayFormat)
+  getWeekdays (weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
+    return this.base.getWeekdays(weekdayFormat)
   }
 
-  getWeekArray (date: string, firstDayOfWeek?: number): string[][] {
-    return this.base.getWeekArray(this.toBase(date), firstDayOfWeek).map(week =>
+  getWeekArray (date: string): string[][] {
+    return this.base.getWeekArray(this.toBase(date)).map(week =>
       week.map(day => this.fromBase(day))
     )
   }

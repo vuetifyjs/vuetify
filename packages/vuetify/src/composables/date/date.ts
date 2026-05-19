@@ -1,6 +1,6 @@
 // Utilities
 import { createDate as createV0Date } from '@vuetify/v0/composables'
-import { Vuetify0DateAdapter } from '@vuetify/v0/date'
+import { V0DateAdapter } from '@vuetify/v0/date'
 import { isUndefined } from '@vuetify/v0/utilities'
 import { inject, watch } from 'vue'
 import { isString } from '@/util'
@@ -11,7 +11,7 @@ import { LegacyDateAdapterCompat } from './compat'
 import { withWeekFallback } from './adapters/week'
 
 // Types
-import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
+import type { DateAdapter as V0BaseAdapter } from '@vuetify/v0/composables'
 import type { App, InjectionKey } from 'vue'
 import type { DateAdapter } from './bridge'
 import type { LocaleInstance } from '@/composables/locale'
@@ -92,13 +92,13 @@ const defaultLocaleMap: Record<string, string> = {
 /**
  * Detect whether an adapter is a v0 DateAdapter.
  *
- * v0 adapters have `getCurrentLocaleCode`, `isNull`, `parse` as own methods.
+ * v0 adapters have `getCurrentLocaleCode`, `isNullish`, `parse` as own methods.
  * Old Vuetify-style adapters lack these methods.
  */
-function isV0Adapter (adapter: any): adapter is V0DateAdapter<any> {
+function isV0Adapter (adapter: any): adapter is V0BaseAdapter<any> {
   return (
     typeof adapter.getCurrentLocaleCode === 'function' &&
-    typeof adapter.isNull === 'function' &&
+    typeof adapter.isNullish === 'function' &&
     typeof adapter.parse === 'function'
   )
 }
@@ -116,11 +116,11 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   const localeMap: Record<string, string> = { ...defaultLocaleMap, ...userLocaleMap }
 
   // 1. Classify adapter and resolve to a v0-compatible DateAdapter
-  let adapter: V0DateAdapter<any>
+  let adapter: V0BaseAdapter<any>
 
   if (isUndefined(userAdapter)) {
     // No adapter provided — use v0's Temporal-based default
-    adapter = new Vuetify0DateAdapter()
+    adapter = new V0DateAdapter()
   } else if (isV0Adapter(userAdapter)) {
     // Already a v0 DateAdapter instance — use directly
     adapter = userAdapter

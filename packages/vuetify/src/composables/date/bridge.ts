@@ -70,34 +70,36 @@ function calculateWeekWithFirstDayOfYear<T> (
   firstDayOfYear: number,
 ): number {
   const firstDayOfYearOffset = (7 + firstDayOfYear - weekStart) % 7
+  const saved = adapter.firstDayOfWeek
+  adapter.firstDayOfWeek = weekStart
 
-  function startOfWeek (d: T): T {
-    return adapter.startOfWeek(d, weekStart)
+  try {
+    function addDays (d: T, amount: number): T {
+      return adapter.addDays(d, amount)
+    }
+
+    function yearStartWeekdayOffset (year: number): number {
+      return (7 + adapter.toJsDate(adapter.date(new Date(year, 0, 1))!).getDay() - weekStart) % 7
+    }
+
+    const currentWeekStart = adapter.startOfWeek(date)
+    const currentWeekEnd = addDays(currentWeekStart, 6)
+
+    let year = adapter.getYear(currentWeekStart)
+    if (year < adapter.getYear(currentWeekEnd) && yearStartWeekdayOffset(year + 1) <= firstDayOfYearOffset) {
+      year++
+    }
+
+    const yearStart = adapter.date(new Date(year, 0, 1))!
+    const offset = yearStartWeekdayOffset(year)
+    const d1w1 = offset <= firstDayOfYearOffset
+      ? addDays(yearStart, -offset)
+      : addDays(yearStart, 7 - offset)
+
+    return 1 + adapter.getDiff(adapter.endOfDay(currentWeekStart), adapter.startOfDay(d1w1), 'weeks')
+  } finally {
+    adapter.firstDayOfWeek = saved
   }
-
-  function addDays (d: T, amount: number): T {
-    return adapter.addDays(d, amount)
-  }
-
-  function yearStartWeekdayOffset (year: number): number {
-    return (7 + adapter.toJsDate(adapter.date(new Date(year, 0, 1))!).getDay() - weekStart) % 7
-  }
-
-  const currentWeekStart = startOfWeek(date)
-  const currentWeekEnd = addDays(currentWeekStart, 6)
-
-  let year = adapter.getYear(currentWeekStart)
-  if (year < adapter.getYear(currentWeekEnd) && yearStartWeekdayOffset(year + 1) <= firstDayOfYearOffset) {
-    year++
-  }
-
-  const yearStart = adapter.date(new Date(year, 0, 1))!
-  const offset = yearStartWeekdayOffset(year)
-  const d1w1 = offset <= firstDayOfYearOffset
-    ? addDays(yearStart, -offset)
-    : addDays(yearStart, 7 - offset)
-
-  return 1 + adapter.getDiff(adapter.endOfDay(currentWeekStart), adapter.startOfDay(d1w1), 'weeks')
 }
 
 /**
@@ -112,19 +114,29 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
   constructor (public readonly adapter: V0DateAdapter<T>) {}
 
   // ============================================
-  // Translated methods — coerce string → number
+  // Translated methods — coerce string → number,
+  // translate per-call firstDayOfWeek param to v0's adapter-level property
   // ============================================
 
+  private withFirstDayOfWeek<R> (firstDayOfWeek: number | undefined, fn: () => R): R {
+    if (isUndefined(firstDayOfWeek) || firstDayOfWeek === this.adapter.firstDayOfWeek) {
+      return fn()
+    }
+    const saved = this.adapter.firstDayOfWeek
+    this.adapter.firstDayOfWeek = firstDayOfWeek
+    try { return fn() } finally { this.adapter.firstDayOfWeek = saved }
+  }
+
   startOfWeek (date: T, firstDayOfWeek?: number | string): T {
-    return this.adapter.startOfWeek(date, toNumber(firstDayOfWeek))
+    return this.withFirstDayOfWeek(toNumber(firstDayOfWeek), () => this.adapter.startOfWeek(date))
   }
 
   getWeekArray (date: T, firstDayOfWeek?: number | string): T[][] {
-    return this.adapter.getWeekArray(date, toNumber(firstDayOfWeek))
+    return this.withFirstDayOfWeek(toNumber(firstDayOfWeek), () => this.adapter.getWeekArray(date))
   }
 
   getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
-    return this.adapter.getWeekdays(toNumber(firstDayOfWeek), weekdayFormat)
+    return this.withFirstDayOfWeek(toNumber(firstDayOfWeek), () => this.adapter.getWeekdays(weekdayFormat))
   }
 
   getWeek (date: T, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number {
@@ -136,7 +148,7 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
       return calculateWeekWithFirstDayOfYear(this.adapter, date, weekStart, fdoy)
     }
 
-    return this.adapter.getWeek(date, fdow)
+    return this.withFirstDayOfWeek(fdow, () => this.adapter.getWeek(date))
   }
 
   // ============================================
