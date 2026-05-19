@@ -167,14 +167,15 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const target = e.target as HTMLInputElement
       const composing = ev.isComposing || otp.isComposing.value
 
-      if (composing) {
-        if (otp.isImeText(target.value)) return
-        if (otp.isComposing.value) {
-          otp.endComposition()
-          onSelectionChange()
-        }
-      }
+      // For real CJK composition, skip until compositionend so the in-progress
+      // characters render via the overlay and don't leak into the model.
+      if (composing && otp.isImeText(target.value)) return
 
+      // For non-CJK composition (Linux Compose key, dead keys, Samsung predictive,
+      // Chrome OTP autofill): filter the value into the model now, but do NOT end
+      // composition here. The browser keeps composition open until compositionend;
+      // ending early causes onSelectionChange to read the still-composing DOM and
+      // advance selection past the model length.
       const next = otp.setValue(target.value)
       if (target.value !== next) target.value = next
     }
