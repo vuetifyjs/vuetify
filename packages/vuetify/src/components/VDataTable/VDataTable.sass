@@ -135,6 +135,13 @@
     display: flex
     align-items: center
 
+    > .v-data-table-header__select-all
+      margin-inline: $data-table-header-select-all-margin-inline
+      flex-grow: 0
+
+      &:only-child
+        margin-inline-start: auto
+
   .v-data-table-header__sort-icon
     margin-inline: $data-table-header-sort-icon-margin-inline
 
