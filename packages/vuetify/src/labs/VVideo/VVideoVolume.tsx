@@ -3,9 +3,9 @@ import './VVideoVolume.sass'
 
 // Components
 import { VIcon } from '@/components/VIcon/VIcon'
+import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
 import { VMenu } from '@/components/VMenu/VMenu'
 import { VSlider } from '@/components/VSlider/VSlider'
-import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
