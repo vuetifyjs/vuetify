@@ -1,7 +1,7 @@
 <template>
   <v-row
     v-if="related?.length > 0"
-    dense
+    density="comfortable"
   >
     <v-col
       v-for="(to, i) in related"

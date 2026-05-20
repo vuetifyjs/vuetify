@@ -19,8 +19,9 @@
   )
   const hasToggle = computed(() => !['dark', 'light'].includes(theme.name.value))
 
-  function onClick () {
+  function onClick (e) {
     sweClick('app-bar', 'theme-toggle', name)
-    user.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
+    theme.setTransitionOrigin(e.target)
+    user.one.theme = theme.global.name.value === 'dark' ? 'light' : 'dark'
   }
 </script>

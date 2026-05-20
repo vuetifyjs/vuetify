@@ -2,11 +2,11 @@
   <AppSettingsSettingsHeader text="enable-composition-message" title="enable-composition">
     <v-defaults-provider
       :defaults="{
-        VIcon: { color: user.composition === 'composition' ? 'primary' : 'disabled' }
+        VIcon: { color: user.ecosystem.docs.composition === 'composition' ? 'primary' : 'disabled' }
       }"
     >
       <SettingsSwitch
-        v-model="user.composition"
+        v-model="user.ecosystem.docs.composition"
         false-value="options"
         true-value="composition"
       />

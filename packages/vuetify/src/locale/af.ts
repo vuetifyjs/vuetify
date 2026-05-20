@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'tot',
   },
+  monthPicker: {
+    title: 'Kies maand',
+    itemsSelected: '{0} gekies',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maande in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectYear: 'Kies jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} gekies',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Voer datum in',
     input: {
       placeholder: 'Voer datum in',
+    },
+    ariaLabel: {
+      previousMonth: 'Vorige maand',
+      nextMonth: 'Volgende maand',
+      selectYear: 'Kies jaar',
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectMonth: 'Kies maand',
+      selectDate: '{0}',
+      currentDate: 'Vandag, {0}',
     },
   },
   noDataText: 'Geen data is beskikbaar nie',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} meer',
     today: 'Vandag',
+  },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
   },
   input: {
     clear: 'Maak skoon {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'VM',
     pm: 'NM',
     title: 'Kies tyd',
+    hour: 'Uur',
+    minute: 'Minute',
+    second: 'Sekondes',
+    notAllowed: 'Waarde word nie toegelaat nie',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Die {0} karakter is nie toegelaat nie',
     notEmpty: 'Kies asseblief ten minste een waarde',
     pattern: 'Ongeldige formaat',
+  },
+  command: {
+    search: 'Tik \'n opdrag of soek...',
+  },
+  hotkey: {
+    then: 'dan',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Up Arrow',
+    downArrow: 'Down Arrow',
+    leftArrow: 'Left Arrow',
+    rightArrow: 'Right Arrow',
+    backspace: 'Backspace',
+    space: 'Spasie',
+    plus: 'plus',
+    shortcut: 'Sleutelbordkortpad: {0}',
+    or: 'of',
+  },
+  video: {
+    play: 'Speel',
+    pause: 'Pouseer',
+    seek: 'Soek',
+    volume: 'Volume',
+    showVolume: 'Wys volumebeheer',
+    mute: 'Demp',
+    unmute: 'Ontdemp',
+    enterFullscreen: 'Volskerm',
+    exitFullscreen: 'Verlaat volskerm',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Kies kleur van die skerm af',
+      hueSlider: 'Tint',
+      alphaSlider: 'Alfa',
+      redInput: 'Rooi',
+      greenInput: 'Groen',
+      blueInput: 'Blou',
+      alphaInput: 'Alfa',
+      hueInput: 'Tint',
+      saturationInput: 'Versadiging',
+      lightnessInput: 'Ligtheid',
+      hexInput: 'HEX-waarde',
+      hexaInput: 'HEX met alfa-waarde',
+      changeFormat: 'Verander kleurformaat',
+    },
   },
 }

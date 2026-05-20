@@ -7,7 +7,7 @@
       flat
     ></v-toolbar>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col class="d-flex align-center" cols="12" sm="6">
         <v-treeview
           v-model:selected="tree"
@@ -31,7 +31,7 @@
         <v-card-text>
           <div
             v-if="tree.length === 0"
-            class="text-h6 font-weight-light text-grey pa-4 text-center"
+            class="text-title-large font-weight-light text-grey pa-4 text-center"
           >
             Select your favorite breweries
           </div>
@@ -116,7 +116,7 @@
   function load () {
     if (breweries.value.length) return
 
-    return fetch('https://api.openbrewerydb.org/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
+    return fetch('https://api.openbrewerydb.org/v1/breweries').then(res => res.json()).then(data => (breweries.value = data)).catch(err => console.log(err))
   }
 
   function getChildren (type) {

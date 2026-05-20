@@ -1,0 +1,59 @@
+<template>
+  <v-combobox
+    v-model="selected"
+    :items="items"
+    item-title="name"
+    item-value="name"
+    chips
+    closable-chips
+    multiple
+  >
+    <template v-slot:chip="{ props, item }">
+      <v-chip v-bind="props" label>
+        <template v-slot:prepend>
+          <div class="me-1">{{ item.symbol }}</div>
+        </template>
+        <template v-slot:close>
+          <v-icon icon="$close" size="14"></v-icon>
+        </template>
+      </v-chip>
+    </template>
+  </v-combobox>
+</template>
+
+<script setup>
+  import { ref } from 'vue'
+
+  const items = [
+    { symbol: '🍎', name: 'Apple' },
+    { symbol: '🍌', name: 'Banana' },
+    { symbol: '🍇', name: 'Grapes' },
+    { symbol: '🍉', name: 'Watermelon' },
+    { symbol: '🍓', name: 'Strawberry' },
+    { symbol: '🥝', name: 'Kiwi' },
+  ]
+  const selected = ref(['Apple', 'Kiwi', 'Grapes']
+    .map(v => items.find(item => item.name === v)))
+</script>
+
+<script>
+  export default {
+    data () {
+      return {
+        items: [
+          { symbol: '🍎', name: 'Apple' },
+          { symbol: '🍌', name: 'Banana' },
+          { symbol: '🍇', name: 'Grapes' },
+          { symbol: '🍉', name: 'Watermelon' },
+          { symbol: '🍓', name: 'Strawberry' },
+          { symbol: '🥝', name: 'Kiwi' },
+        ],
+        selected: [],
+      }
+    },
+    mounted () {
+      this.selected = ['Apple', 'Kiwi', 'Grapes']
+        .map(v => this.items.find(item => item.name === v))
+    },
+  }
+</script>

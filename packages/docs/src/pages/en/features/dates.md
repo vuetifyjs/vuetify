@@ -21,8 +21,6 @@ Easily hook up date libraries that are used for components such as Date Picker a
 
 <PromotedEntry />
 
-<DocIntroduced version="3.4.0" />
-
 ## Usage
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.
@@ -91,6 +89,39 @@ The following example shows how to use the date composable to format a date stri
 
   console.log(formatted) // Tuesday, April 13, 2010
 </script>
+```
+
+### Custom formats
+
+You can extend available formats by providing definitions matching your adapter capabilities.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  date: {
+    formats: {
+      // for built-in adapter
+      weekdayNarrow: { weekday: 'narrow' },
+      // for Moment or Day.js
+      weekdayNarrow: 'dd',
+      // for Luxon or DateFns
+      weekdayNarrow: 'EEEEE',
+    },
+  },
+})
+```
+
+```js
+// use registered key
+date.format(adapter.date(), 'weekdayNarrow')
+```
+
+Built-in adapter accepts objects that will be passed to Intl.DateTimeFormat.
+
+```js
+// works only with built-in adapter
+date.format(adapter.date(), { weekday: 'narrow' })
 ```
 
 ## API
@@ -369,4 +400,18 @@ declare module 'vuetify' {
     interface Adapter extends MyAdapter {}
   }
 }
+```
+
+## String adapter
+
+Date objects can be inconvenient to work with, especially if you're just passing the value straight to a fetch request. Vuetify also exports a StringDateAdapter that will cause date components to emit strings instead.
+
+```ts { resource="src/plugins/vuetify.js" }
+import { StringDateAdapter } from 'vuetify/date/adapters/string'
+
+export default createVuetify({
+  date: {
+    adapter: StringDateAdapter,
+  },
+})
 ```

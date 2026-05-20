@@ -1,5 +1,7 @@
 {
+  "description": "Functional wrapper for many buttons, passing most of the props down. Building block of `v-btn-toggle`.",
   "props": {
+    "direction": "Control how children components are arranged - in a row or column.",
     "divided": "Add dividers between children [v-btn](/components/buttons) components."
   }
 }

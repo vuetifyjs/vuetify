@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ilə',
   },
+  monthPicker: {
+    title: 'Ayı seçin',
+    itemsSelected: '{0} seçilib',
+    header: 'Ayı daxil edin',
+    range: {
+      title: 'Ayları daxil edin',
+    },
+    ariaLabel: {
+      previousYear: 'Əvvəlki il',
+      nextYear: 'Növbəti il',
+      selectYear: 'İli seçin',
+      currentMonth: 'Cari ay, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seçilib',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Tarixi daxil edin',
     input: {
       placeholder: 'Tarixi daxil edin',
+    },
+    ariaLabel: {
+      previousMonth: 'Əvvəlki ay',
+      nextMonth: 'Növbəti ay',
+      selectYear: 'İli seçin',
+      previousYear: 'Əvvəlki il',
+      nextYear: 'Növbəti il',
+      selectMonth: 'Ayı seçin',
+      selectDate: '{0}',
+      currentDate: 'Bu gün, {0}',
     },
   },
   noDataText: 'Heç bir məlumat yoxdur.',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} ədəd daha',
     today: 'Bu gün',
+  },
+  heatmap: {
+    less: 'Az',
+    more: 'Çox',
   },
   input: {
     clear: 'Təmizlə {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'Səhər',
     pm: 'Axşam',
     title: 'Vaxtı seçin',
+    hour: 'Saat',
+    minute: 'Dəqiqə',
+    second: 'Saniyə',
+    notAllowed: 'Dəyərə icazə verilmir',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: '{0} simvoluna icazə verilmir',
     notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
     pattern: 'Yanlış format',
+  },
+  command: {
+    search: 'Əmr yazın və ya axtarış edin...',
+  },
+  hotkey: {
+    then: 'sonra',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Yuxarı Ox',
+    downArrow: 'Aşağı Ox',
+    leftArrow: 'Sol Ox',
+    rightArrow: 'Sağ Ox',
+    backspace: 'Geri Sil',
+    space: 'Boşluq',
+    plus: 'plus',
+    shortcut: 'Klaviatura qısayolu: {0}',
+    or: 'və ya',
+  },
+  video: {
+    play: 'Oynat',
+    pause: 'Pauza',
+    seek: 'Axtar',
+    volume: 'Səs',
+    showVolume: 'Səs səviyyəsini göstər',
+    mute: 'Səsi kəs',
+    unmute: 'Səsi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çıx',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Ekrandan rəng seçin',
+      hueSlider: 'Rəng çaları',
+      alphaSlider: 'Alfa',
+      redInput: 'Qırmızı',
+      greenInput: 'Yaşıl',
+      blueInput: 'Mavi',
+      alphaInput: 'Alfa',
+      hueInput: 'Rəng çaları',
+      saturationInput: 'Doyğunluq',
+      lightnessInput: 'Açıqlıq',
+      hexInput: 'HEX dəyəri',
+      hexaInput: 'Alfa dəyəri ilə HEX',
+      changeFormat: 'Rəng formatını dəyişdirin',
+    },
   },
 }

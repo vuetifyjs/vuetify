@@ -49,7 +49,7 @@ When using the `auto-grow` prop, textarea's will automatically increase in size 
 
 #### Background color
 
-The `background-color` and `color` props give you more control over styling `v-textarea`'s.
+The `bg-color` and `color` props give you more control over styling `v-textarea`'s.
 
 <ExamplesExample file="v-textarea/prop-background-color" />
 

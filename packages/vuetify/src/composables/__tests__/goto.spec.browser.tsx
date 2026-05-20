@@ -1,5 +1,5 @@
 // Utilities
-import { render, userEvent } from '@test'
+import { render, screen, userEvent } from '@test'
 import { defineComponent } from 'vue'
 import { useGoTo } from '../goto'
 
@@ -42,7 +42,7 @@ const ComponentB = defineComponent({
 
 describe('goto', () => {
   it('scrolls vertically', async () => {
-    const { container } = render(() => (
+    render(() => (
       <div>
         <ComponentA id="top" target="#bottom" />
         <div style="height: 2000px" />
@@ -50,18 +50,18 @@ describe('goto', () => {
       </div>
     ))
 
-    const top = container.querySelector('#top')!
-    const bottom = container.querySelector('#bottom')!
+    const top = screen.getByCSS('#top')
+    const bottom = screen.getByCSS('#bottom')
 
     await userEvent.click(top)
-    await expect.poll(() => window.scrollY).toBeCloseTo(1250, -1)
+    await expect.poll(() => window.scrollY).toBeCloseTo(1260, -1)
 
     await userEvent.click(bottom)
     await expect.poll(() => window.scrollY).toBe(0)
   })
 
   it('scrolls horizontally', async () => {
-    const { container } = render(() => (
+    render(() => (
       <div>
         <ComponentB id="start" target="#end" />
 
@@ -69,13 +69,17 @@ describe('goto', () => {
       </div>
     ))
 
-    const start = container.querySelector('#start')!
-    const end = container.querySelector('#end')!
+    const start = screen.getByCSS('#start')
+    const end = screen.getByCSS('#end')
 
     await userEvent.click(start)
-    await expect.poll(() => window.scrollX).toBeCloseTo(755, -1)
+    await expect.poll(() => window.scrollX).toBeCloseTo(770, -1)
+
+    expect('target is not reachable').not.toHaveBeenTipped()
 
     await userEvent.click(end)
     await expect.poll(() => window.scrollX).toBe(0)
+
+    expect('target is not reachable').not.toHaveBeenTipped()
   })
 })

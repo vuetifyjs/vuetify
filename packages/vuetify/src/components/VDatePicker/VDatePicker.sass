@@ -5,6 +5,23 @@
   .v-date-picker
     overflow: hidden
     width: $date-picker-width
+    --v-date-picker-landscape-header-width: #{$date-picker-landscape-header-width}
 
     &--show-week
       width: $date-picker-show-week-width
+
+    &.v-picker--landscape:has(.v-picker__header-wrapper)
+      width: calc(#{$date-picker-width} + var(--v-date-picker-landscape-header-width))
+
+      .v-picker__header-wrapper
+        width: var(--v-date-picker-landscape-header-width)
+
+        .v-date-picker-header
+          height: auto
+          padding-inline: 24px
+
+      &.v-picker--show-week
+        width: calc(#{$date-picker-show-week-width} + var(--v-date-picker-landscape-header-width))
+
+    > .v-picker__body
+      flex-direction: column

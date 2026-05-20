@@ -22,7 +22,7 @@ import {
   parseAnchor,
   propsFactory,
 } from '@/util'
-import { Box, getOverflow, getTargetBox } from '@/util/box'
+import { Box, getElementBox, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -48,9 +48,12 @@ const locationStrategies = {
 
 export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
+  contained?: boolean
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
+  stickToTarget?: boolean
+  viewportMargin?: number | string
   maxHeight?: number | string
   maxWidth?: number | string
   minHeight?: number | string
@@ -72,6 +75,11 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
+  stickToTarget: Boolean,
+  viewportMargin: {
+    type: [Number, String],
+    default: 12,
+  },
 }, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
@@ -86,10 +94,14 @@ export function useLocationStrategies (
       watch(() => props.locationStrategy, reset)
       onScopeDispose(() => {
         window.removeEventListener('resize', onResize)
+        visualViewport?.removeEventListener('resize', onVisualResize)
+        visualViewport?.removeEventListener('scroll', onVisualScroll)
         updateLocation.value = undefined
       })
 
       window.addEventListener('resize', onResize, { passive: true })
+      visualViewport?.addEventListener('resize', onVisualResize, { passive: true })
+      visualViewport?.addEventListener('scroll', onVisualScroll, { passive: true })
 
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
@@ -103,14 +115,69 @@ export function useLocationStrategies (
     updateLocation.value?.(e)
   }
 
+  function onVisualResize (e: Event) {
+    updateLocation.value?.(e)
+  }
+
+  function onVisualScroll (e: Event) {
+    updateLocation.value?.(e)
+  }
+
   return {
     contentStyles,
     updateLocation,
   }
 }
 
-function staticLocationStrategy () {
-  // TODO
+function staticLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+  if (props.contained) return
+
+  const target = ref<[x: number, y: number]>()
+  const connectedStyles = ref<Record<string, string>>({})
+  const connected = connectedLocationStrategy(
+    { ...data, target },
+    { ...props, origin: 'auto' },
+    connectedStyles
+  )
+
+  function updateStyles () {
+    if (props.origin !== 'auto' && props.origin !== 'overlap') {
+      const { side, align } = parseAnchor(props.origin, data.isRtl.value)
+      contentStyles.value = { ...connectedStyles.value, transformOrigin: `${side} ${align}` }
+    } else {
+      contentStyles.value = connectedStyles.value
+    }
+  }
+
+  watch(connectedStyles, updateStyles, { deep: true })
+  watch([() => props.origin, data.isRtl], updateStyles)
+
+  function updateTarget () {
+    const viewportBox = new Box({
+      x: visualViewport?.offsetLeft ?? 0,
+      y: visualViewport?.offsetTop ?? 0,
+      width: visualViewport?.width ?? window.innerWidth,
+      height: visualViewport?.height ?? window.innerHeight,
+    })
+
+    const point = anchorToPoint(parseAnchor(props.location, data.isRtl.value), viewportBox)
+    target.value = [point.x, point.y]
+  }
+
+  function updateLocation () {
+    updateTarget()
+    connected.updateLocation()
+  }
+
+  watch(() => [props.location, data.isRtl.value], () => {
+    updateLocation()
+  })
+
+  nextTick(() => {
+    updateLocation()
+  })
+
+  return { updateLocation }
 }
 
 /** Get size of element ignoring max-width/max-height */
@@ -215,7 +282,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (flipped.isFull) {
       const values = flipped.values()
-      if (deepEqual(values.at(-1), values.at(-3))) {
+      if (
+        deepEqual(values.at(-1), values.at(-3)) &&
+        !deepEqual(values.at(-1), values.at(-2))
+      ) {
         // Flipping is causing a container resize loop
         return
       }
@@ -225,21 +295,25 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (result) flipped.push(result.flipped)
   })
 
-  watch([data.target, data.contentEl], ([newTarget, newContentEl], [oldTarget, oldContentEl]) => {
-    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
-    if (newTarget && !Array.isArray(newTarget)) observer.observe(newTarget)
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
+  watch(data.target, (newTarget, oldTarget) => {
+    if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
+    if (!Array.isArray(newTarget)) {
+      if (newTarget) observer.observe(newTarget)
+    } else if (!deepEqual(newTarget, oldTarget)) {
+      updateLocation()
+    }
+  }, { immediate: true })
+
+  watch(data.contentEl, (newContentEl, oldContentEl) => {
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
-  }, {
-    immediate: true,
-  })
+  }, { immediate: true })
 
   onScopeDispose(() => {
     observer.disconnect()
   })
-
-  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {
@@ -258,7 +332,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
-    const viewportMargin = 12
+    const viewportMargin = Number(props.viewportMargin)
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
@@ -269,13 +343,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     const viewport = scrollParents.reduce<Box>((box: Box | undefined, el) => {
-      const rect = el.getBoundingClientRect()
-      const scrollBox = new Box({
-        x: el === document.documentElement ? 0 : rect.x,
-        y: el === document.documentElement ? 0 : rect.y,
-        width: el.clientWidth,
-        height: el.clientHeight,
-      })
+      const scrollBox = getElementBox(el)
 
       if (box) {
         return new Box({
@@ -287,10 +355,24 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       }
       return scrollBox
     }, undefined!)
-    viewport.x += viewportMargin
-    viewport.y += viewportMargin
-    viewport.width -= viewportMargin * 2
-    viewport.height -= viewportMargin * 2
+
+    if (props.stickToTarget) {
+      viewport.x += Math.min(viewportMargin, targetBox.x)
+      viewport.y += Math.min(viewportMargin, targetBox.y)
+      viewport.width = Math.max(
+        viewport.width - viewportMargin * 2,
+        targetBox.x + targetBox.width - viewportMargin
+      )
+      viewport.height = Math.max(
+        viewport.height - viewportMargin * 2,
+        targetBox.y + targetBox.height - viewportMargin
+      )
+    } else {
+      viewport.x += viewportMargin
+      viewport.y += viewportMargin
+      viewport.width -= viewportMargin * 2
+      viewport.height -= viewportMargin * 2
+    }
 
     let placement = {
       anchor: preferredAnchor.value,
@@ -414,10 +496,13 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
 
     const axis = getAxis(placement.anchor)
+    const transformOrigin = props.origin !== 'auto' && props.origin !== 'overlap'
+      ? parseAnchor(props.origin, data.isRtl.value)
+      : placement.origin
 
     Object.assign(contentStyles.value, {
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
-      transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
+      transformOrigin: `${transformOrigin.side} ${transformOrigin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y)),
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
@@ -438,6 +523,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     () => [
       preferredAnchor.value,
       preferredOrigin.value,
+      props.origin,
       props.offset,
       props.minWidth,
       props.minHeight,

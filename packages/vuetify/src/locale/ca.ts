@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'fins a',
   },
+  monthPicker: {
+    title: 'Selecciona mes',
+    itemsSelected: '{0} seleccionats',
+    header: 'Introdueix el mes',
+    range: {
+      title: 'Introdueix els mesos',
+    },
+    ariaLabel: {
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectYear: 'Selecciona any',
+      currentMonth: 'Mes actual, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seleccionats',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Introdueix la data',
     input: {
       placeholder: 'Introdueix la data',
+    },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes següent',
+      selectYear: 'Selecciona any',
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectMonth: 'Selecciona mes',
+      selectDate: '{0}',
+      currentDate: 'Avui, {0}',
     },
   },
   noDataText: 'Sense dades',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} més',
     today: 'Avui',
+  },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
   },
   input: {
     clear: 'Esborra {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecciona l’hora',
+    hour: 'Hora',
+    minute: 'Minuts',
+    second: 'Segons',
+    notAllowed: 'El valor no està permès',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'El caràcter {0} no està permès',
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
+  },
+  command: {
+    search: 'Escriu una ordre o cerca...',
+  },
+  hotkey: {
+    then: 'després',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Intro',
+    escape: 'Escape',
+    upArrow: 'Fletxa amunt',
+    downArrow: 'Fletxa avall',
+    leftArrow: 'Fletxa esquerra',
+    rightArrow: 'Fletxa dreta',
+    backspace: 'Retrocés',
+    space: 'Espai',
+    plus: 'més',
+    shortcut: 'Drecera de teclat: {0}',
+    or: 'o',
+  },
+  video: {
+    play: 'Reproduir',
+    pause: 'Paura',
+    seek: 'Cercar',
+    volume: 'Volum',
+    showVolume: 'Mostrar control de volum',
+    mute: 'Silenciar',
+    unmute: 'Activar so',
+    enterFullscreen: 'Pantalla completa',
+    exitFullscreen: 'Sortir de pantalla completa',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'To',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermell',
+      greenInput: 'Verd',
+      blueInput: 'Blau',
+      alphaInput: 'Alfa',
+      hueInput: 'To',
+      saturationInput: 'Saturació',
+      lightnessInput: 'Lluminositat',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX amb alfa',
+      changeFormat: 'Canviar format de color',
+    },
   },
 }

@@ -2,13 +2,16 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -18,6 +21,7 @@ import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRen
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
 import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
+import type { FilterMatchArrayMultiple } from '@/composables/filter'
 import type { GenericProps } from '@/util'
 
 export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
@@ -35,13 +39,25 @@ export type VDataTableRowSlots<T> = {
 }
 
 export const makeVDataTableRowProps = propsFactory({
+  color: String,
   index: Number,
   item: Object as PropType<DataTableItem>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  collapseIcon: {
+    type: IconValue,
+    default: '$collapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$expand',
+  },
+
+  getMatches: Function as PropType<(item: DataTableItem) => Record<string, FilterMatchArrayMultiple | undefined> | undefined>,
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
 
+  ...makeDensityProps(),
   ...makeDisplayProps(),
 }, 'VDataTableRow')
 
@@ -121,18 +137,25 @@ export const VDataTableRow = genericComponent<new <T>(
             })
             : column.cellProps
 
+          const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
+          const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
+
           return (
             <VDataTableColumn
               align={ column.align }
+              indent={ column.indent }
               class={{
                 'v-data-table__td--expanded-row': column.key === 'data-table-expand',
                 'v-data-table__td--select-row': column.key === 'data-table-select',
               }}
               fixed={ column.fixed }
               fixedOffset={ column.fixedOffset }
+              fixedEndOffset={ column.fixedEndOffset }
               lastFixed={ column.lastFixed }
+              firstFixedEnd={ column.firstFixedEnd }
               maxWidth={ !mobile.value ? column.maxWidth : undefined }
-              noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
+              noPadding={ noPadding }
+              empty={ isEmpty }
               nowrap={ column.nowrap }
               width={ !mobile.value ? column.width : undefined }
               { ...cellProps }
@@ -144,13 +167,16 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-select']?.({
                       ...slotProps,
                       props: {
+                        color: props.color,
                         disabled: !item.selectable,
                         modelValue: isSelected([item]),
                         onClick: withModifiers(() => toggleSelect(item), ['stop']),
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        color={ props.color }
                         disabled={ !item.selectable }
+                        density={ props.density }
                         modelValue={ isSelected([item]) }
                         onClick={ withModifiers(
                           (event: Event) => toggleSelect(item, props.index, event as PointerEvent),
@@ -164,14 +190,14 @@ export const VDataTableRow = genericComponent<new <T>(
                     return slots['item.data-table-expand']?.({
                       ...slotProps,
                       props: {
-                        icon: isExpanded(item) ? '$collapse' : '$expand',
+                        icon: isExpanded(item) ? props.collapseIcon : props.expandIcon,
                         size: 'small',
                         variant: 'text',
                         onClick: withModifiers(() => toggleExpand(item), ['stop']),
                       },
                     }) ?? (
                       <VBtn
-                        icon={ isExpanded(item) ? '$collapse' : '$expand' }
+                        icon={ isExpanded(item) ? props.collapseIcon : props.expandIcon }
                         size="small"
                         variant="text"
                         onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
@@ -181,7 +207,11 @@ export const VDataTableRow = genericComponent<new <T>(
 
                   if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
 
-                  const displayValue = toDisplayString(slotProps.value)
+                  const text = toDisplayString(slotProps.value)
+                  const matches = props.getMatches?.(item)?.[column.key!]
+                  const displayValue = matches?.length
+                    ? <VHighlight text={ text } matches={ matches } />
+                    : text
 
                   return !mobile.value ? displayValue : (
                     <>

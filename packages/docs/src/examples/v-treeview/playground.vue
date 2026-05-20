@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-switch
         v-model="dense"
         label="Dense"
@@ -58,6 +58,8 @@
       :selectable="selectable"
       :selected-color="selectedColor"
       :shaped="shaped"
+      item-title="name"
+      item-value="id"
     ></v-treeview>
   </div>
 </template>

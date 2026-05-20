@@ -1,8 +1,7 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
-  description: The Number input component is used for ...
+  description: The number input component provides a clean interface for entering numeric values with increment and decrement controls.
   keywords: Number, vuetify number input component, vue number component
 related:
   - /components/inputs/
@@ -19,8 +18,6 @@ features:
 The VNumberInput extends the standard HTML number-type input, ensuring style consistency across browsers as a replacement for `<input type="number">`
 
 <page-features />
-
-<DocIntroduced version="3.8.0" />
 
 ## Usage
 
@@ -97,3 +94,9 @@ The `step` prop behaves the same as the `step` attribute in the `<input type="nu
 The `precision` prop enforces strict precision. It is expected to be an integer value in range between `0` and `15`. Input will prevent user from typing or pasting an invalid value.
 
 <ExamplesExample file="v-number-input/prop-precision" />
+
+#### Grouping
+
+The `grouping` prop enables digit grouping (e.g. thousands separators). The value is passed to [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping) - `"auto"` should be preferred over `true`. Use `group-separator` to override the separator character.
+
+<ExamplesExample file="v-number-input/prop-grouping" />

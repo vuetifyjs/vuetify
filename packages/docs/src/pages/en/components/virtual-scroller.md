@@ -20,8 +20,6 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 <PageFeatures />
 
-<DocIntroduced version="3.2.0" />
-
 ## Usage
 
 The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.
@@ -77,6 +75,12 @@ For lists where the item height is static and uniform for all items, it's recomm
 If your items are not of a uniform size, omit the **item-height** prop to have `v-virtual-scroll` dynamically calculate each item.
 
 <ExamplesExample file="v-virtual-scroll/prop-dynamic-item-height" />
+
+#### Renderless
+
+Renderless mode does not generate DOM nodes automatically, so you must bind `itemRef` yourself for virtual scrolling to work properly.
+
+<ExamplesExample file="v-virtual-scroll/prop-renderless" />
 
 ### Examples
 

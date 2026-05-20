@@ -27,7 +27,7 @@
       >
         <li
           :class="[
-            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-medium py-1 font-weight-regular',
             {
               'text-primary router-link-active': activeItem === to.slice(1),
               'ps-6': level === 3,
@@ -57,7 +57,7 @@
           tag="router-link"
         />
 
-        <v-row dense>
+        <v-row density="comfortable">
           <template v-if="sponsors.length">
             <v-col
               v-for="sponsor of sponsors"
@@ -103,7 +103,7 @@
           </v-col>
 
           <v-col
-            v-if="spot.spot && (!user.disableAds || (user.showHouseAds && spot.spot.sponsor === 'Vuetify'))"
+            v-if="spot.spot && (user.one.ads.enabled || (user.one.ads.house && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
@@ -212,20 +212,23 @@
 </script>
 
 <style lang="sass" scoped>
-  #app-toc
-    ul
-      list-style-type: none
+  @layer base
+    #app-toc
+      ul
+        list-style-type: none
+        margin: 0
+        padding: 0
 
-    li
-      border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
+      li
+        border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
 
-      &.router-link-active
-        border-left-color: currentColor
+        &.router-link-active
+          border-left-color: currentColor
 
-    .v-toc-link
-      color: inherit
+      .v-toc-link
+        color: inherit
 
-    :deep(.v-navigation-drawer__content)
-      height: auto
-      margin-right: 12px
+      :deep(.v-navigation-drawer__content)
+        height: auto
+        margin-right: 12px
 </style>

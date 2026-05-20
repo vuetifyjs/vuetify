@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '至',
   },
+  monthPicker: {
+    title: '選擇月份',
+    itemsSelected: '已選擇 {0} 個日期',
+    header: '輸入月份',
+    range: {
+      title: '輸入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '選擇年份',
+      currentMonth: '本月，{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '已選擇 {0} 個日期',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: '輸入日期',
     input: {
       placeholder: '請輸入日期',
+    },
+    ariaLabel: {
+      previousMonth: '上個月',
+      nextMonth: '下個月',
+      selectYear: '選擇年份',
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectMonth: '選擇月份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
     },
   },
   noDataText: '沒有資料',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '還有其他 {0} 項',
     today: '今天',
+  },
+  heatmap: {
+    less: '少',
+    more: '多',
   },
   input: {
     clear: '清除 {0}',
@@ -78,6 +106,10 @@ export default {
     am: '上午',
     pm: '下午',
     title: '選擇時間',
+    hour: '小時',
+    minute: '分鐘',
+    second: '秒',
+    notAllowed: '值不允許',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: '字符{0}是不允許的',
     notEmpty: '請至少選擇一個值',
     pattern: '格式無效',
+  },
+  command: {
+    search: '輸入指令或搜尋...',
+  },
+  hotkey: {
+    then: '然後',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: '上箭頭',
+    downArrow: '下箭頭',
+    leftArrow: '左箭頭',
+    rightArrow: '右箭頭',
+    backspace: '退格',
+    space: '空格',
+    plus: '加',
+    shortcut: '鍵盤快捷鍵：{0}',
+    or: '或',
+  },
+  video: {
+    play: '播放',
+    pause: '暫停',
+    seek: '搜尋',
+    volume: '音量',
+    showVolume: '顯示音量控制',
+    mute: '靜音',
+    unmute: '取消靜音',
+    enterFullscreen: '全螢幕',
+    exitFullscreen: '退出全螢幕',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '從螢幕上選取顏色',
+      hueSlider: '色相',
+      alphaSlider: '透明度',
+      redInput: '紅色',
+      greenInput: '綠色',
+      blueInput: '藍色',
+      alphaInput: '透明度',
+      hueInput: '色相',
+      saturationInput: '飽和度',
+      lightnessInput: '亮度',
+      hexInput: '十六進位值',
+      hexaInput: '帶透明度的十六進位值',
+      changeFormat: '變更顏色格式',
+    },
   },
 }

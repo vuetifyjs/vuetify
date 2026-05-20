@@ -37,9 +37,22 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      {
+        "title": "css-utilities",
+        "subfolder": "features",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "overview",
+          "unocss-vuetify-preset",
+          "unocss-tailwind-preset",
+          "tailwindcss"
+        ]
+      },
       "dates",
       "display-and-platform",
       "global-configuration",
+      "hotkey",
       "icon-fonts",
       "internationalization",
       "scrolling",
@@ -53,7 +66,9 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -78,7 +93,6 @@
   },
   {
     "title": "concepts",
-    "emphasized": true,
     "inactiveIcon": "mdi-puzzle-outline",
     "activeIcon": "mdi-puzzle",
     "items": [
@@ -106,6 +120,7 @@
       { "subheader": "containment" },
       "bottom-sheets",
       "buttons",
+      "icon-buttons",
       "cards",
       "chips",
       "dialogs",
@@ -133,7 +148,9 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
+      "date-inputs",
       "file-inputs",
       "forms",
       "inputs",
@@ -148,6 +165,7 @@
       "textareas",
       { "divider": true },
       { "subheader": "data-and-display" },
+      "calendars",
       "confirm-edit",
       "data-iterators",
       {
@@ -165,9 +183,11 @@
           "virtual-tables"
         ]
       },
+      "hotkeys",
       "sparklines",
       "infinite-scroller",
       "tables",
+      "treeview",
       "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
@@ -180,6 +200,7 @@
       "item-groups",
       "slide-groups",
       "steppers",
+      "vertical-steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -206,6 +227,7 @@
       { "subheader": "pickers" },
       "color-pickers",
       "date-pickers",
+      "time-pickers",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -214,14 +236,17 @@
       { "divider": true },
       { "subheader": "miscellaneous" },
       "lazy",
-      "no-ssr"
+      "no-ssr",
+      "pull-to-refresh"
     ]
   },
   {
     "title": "api",
     "inactiveIcon": "mdi-flask-empty-outline",
     "activeIcon": "mdi-flask-outline",
-    "items": []
+    "items": [
+      "hotkey"
+    ]
   },
   {
     "title": "directives",
@@ -245,15 +270,15 @@
     "items": [
       "introduction",
       {
-        "title": "calendars",
+        "title": "avatar-groups",
         "subfolder": "components"
       },
       {
-        "title": "color-inputs",
+        "title": "command-palettes",
         "subfolder": "components"
       },
       {
-        "title": "date-inputs",
+        "title": "date-range-pickers",
         "subfolder": "components"
       },
       {
@@ -261,23 +286,31 @@
         "subfolder": "components"
       },
       {
-        "title": "icon-buttons",
+        "title": "heatmaps",
         "subfolder": "components"
       },
       {
-        "title": "pull-to-refresh",
+        "title": "highlights",
         "subfolder": "components"
       },
       {
-        "title": "vertical-steppers",
+        "title": "mask-inputs",
         "subfolder": "components"
       },
       {
-        "title": "time-pickers",
+        "title": "month-pickers",
         "subfolder": "components"
       },
       {
-        "title": "treeview",
+        "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "progress",
+        "subfolder": "components"
+      },
+      {
+        "title": "videos",
         "subfolder": "components"
       },
       {

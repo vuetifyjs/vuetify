@@ -1,6 +1,6 @@
 // Utilities
 import { h, mergeProps, Transition, TransitionGroup } from 'vue'
-import { isObject, propsFactory } from '@/util'
+import { isObject, onlyDefinedProps, propsFactory } from '@/util'
 
 // Types
 import type { Component, FunctionalComponent, Prop, TransitionProps } from 'vue'
@@ -31,7 +31,7 @@ export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props
   if (isObject(transition)) {
     transitionProps = mergeProps(
       customProps,
-      JSON.parse(JSON.stringify({ disabled, group })),
+      onlyDefinedProps({ disabled, group }),
       rest,
     )
   } else {

@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use 'sass:math';
+
+$treeview-item-spacer-width: 10px !default;
+$treeview-item-first-icon-margin-start: -6px !default;
+
+$treeview-indent-size: 28px !default; // 28px here to match the width of the expand toggle VBtn.
+$treeview-indent-padding: 16px !default;
+
+$treeview-indent-lines-padding-left: 8px !default;
+$treeview-indent-lines-gap: 0 !default;
+$treeview-indent-lines-opacity: .4 !default;
+$treeview-indent-line-width: 1px !default;
+$treeview-indent-line-width-half: math.round(math.div($treeview-indent-line-width, 2)) !default;
+$treeview-indent-line-color: rgb(var(--v-theme-on-surface)) !default;
+$treeview-indent-line-style: solid !default;
+$treeview-indent-line-leaf-link-margin-right: 6px !default;
+$treeview-indent-line-leaf-margin-right: 4px !default;
+$treeview-indent-line-border-radius: 4px !default;

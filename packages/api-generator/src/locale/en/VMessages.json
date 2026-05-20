@@ -1,6 +1,6 @@
 {
+  "description": "Subcomponent of `v-input` used to display validation messages and hints.",
   "props": {
-    "active": "Determines whether the messages are visible or not.",
-    "message": "Display a single message."
+    "active": "Determines whether the messages are visible or not."
   }
 }

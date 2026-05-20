@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'iki',
   },
+  monthPicker: {
+    title: 'Pasirinkite mėnesį',
+    itemsSelected: '{0} parinkta',
+    header: 'Įveskite mėnesį',
+    range: {
+      title: 'Įveskite mėnesius',
+    },
+    ariaLabel: {
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectYear: 'Pasirinkite metus',
+      currentMonth: 'Šis mėnuo, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} parinkta',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Įveskite datą',
     input: {
       placeholder: 'Įveskite datą',
+    },
+    ariaLabel: {
+      previousMonth: 'Ankstesnis mėnuo',
+      nextMonth: 'Kitas mėnuo',
+      selectYear: 'Pasirinkite metus',
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectMonth: 'Pasirinkite mėnesį',
+      selectDate: '{0}',
+      currentDate: 'Šiandien, {0}',
     },
   },
   noDataText: 'Nėra duomenų',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'Daugiau {0}',
     today: 'Šiandien',
+  },
+  heatmap: {
+    less: 'Mažiau',
+    more: 'Daugiau',
   },
   input: {
     clear: 'Išvalyti {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pasirinkite laiką',
+    hour: 'Valanda',
+    minute: 'Minutės',
+    second: 'Sekundės',
+    notAllowed: 'Reikšmė neleidžiama',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Simbolis {0} nėra leidžiamas',
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
+  },
+  command: {
+    search: 'Įveskite komandą arba ieškokite...',
+  },
+  hotkey: {
+    then: 'tada',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Rodyklė į viršų',
+    downArrow: 'Rodyklė žemyn',
+    leftArrow: 'Rodyklė kairėn',
+    rightArrow: 'Rodyklė dešinėn',
+    backspace: 'Backspace',
+    space: 'Tarpas',
+    plus: 'plius',
+    shortcut: 'Klaviatūros trumpinys: {0}',
+    or: 'arba',
+  },
+  video: {
+    play: 'Groti',
+    pause: 'Pauzė',
+    seek: 'Ieškoti',
+    volume: 'Garsumas',
+    showVolume: 'Rodyti garso valdymą',
+    mute: 'Nutildyti',
+    unmute: 'Įjungti garsą',
+    enterFullscreen: 'Visas ekranas',
+    exitFullscreen: 'Išeiti iš viso ekrano',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pasirinkite spalvą iš ekrano',
+      hueSlider: 'Atspalvis',
+      alphaSlider: 'Skaidrumas',
+      redInput: 'Raudona',
+      greenInput: 'Žalia',
+      blueInput: 'Mėlyna',
+      alphaInput: 'Skaidrumas',
+      hueInput: 'Atspalvis',
+      saturationInput: 'Sodrumas',
+      lightnessInput: 'Šviesumas',
+      hexInput: 'HEX reikšmė',
+      hexaInput: 'HEX su skaidrumo reikšme',
+      changeFormat: 'Keisti spalvos formatą',
+    },
   },
 }

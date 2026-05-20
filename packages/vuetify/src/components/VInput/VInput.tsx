@@ -25,13 +25,14 @@ import type { GenericProps } from '@/util'
 
 export interface VInputSlot {
   id: ComputedRef<string>
-  messagesId: ComputedRef<string>
+  messagesId: ComputedRef<string | undefined>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
   isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
+  hasDetails: Ref<boolean>
   reset: () => void
   resetValidation: () => void
   validate: () => void
@@ -52,6 +53,10 @@ export const makeVInputProps = propsFactory({
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
   hint: String,
+  indentDetails: {
+    type: Boolean,
+    default: null,
+  },
   persistentHint: Boolean,
   messages: {
     type: [Array, String] as PropType<string | readonly string[]>,
@@ -111,7 +116,6 @@ export const VInput = genericComponent<new <T>(
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
-    const messagesId = computed(() => `${id.value}-messages`)
 
     const {
       errorMessages,
@@ -127,6 +131,25 @@ export const VInput = genericComponent<new <T>(
       validationClasses,
     } = useValidation(props, 'v-input', id)
 
+    const messages = computed(() => {
+      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
+        return errorMessages.value
+      } else if (props.hint && (props.persistentHint || props.focused)) {
+        return props.hint
+      } else {
+        return props.messages
+      }
+    })
+
+    const hasMessages = toRef(() => messages.value.length > 0)
+
+    const hasDetails = toRef(() => !props.hideDetails || (
+      props.hideDetails === 'auto' &&
+      (hasMessages.value || !!slots.details)
+    ))
+
+    const messagesId = computed(() => hasDetails.value ? `${id.value}-messages` : undefined)
+
     const slotProps = computed<VInputSlot>(() => ({
       id,
       messagesId,
@@ -136,6 +159,7 @@ export const VInput = genericComponent<new <T>(
       isPristine,
       isValid,
       isValidating,
+      hasDetails,
       reset,
       resetValidation,
       validate,
@@ -153,24 +177,9 @@ export const VInput = genericComponent<new <T>(
       return props.iconColor === true ? color.value : props.iconColor
     })
 
-    const messages = computed(() => {
-      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
-        return errorMessages.value
-      } else if (props.hint && (props.persistentHint || props.focused)) {
-        return props.hint
-      } else {
-        return props.messages
-      }
-    })
-
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasMessages = messages.value.length > 0
-      const hasDetails = !props.hideDetails || (
-        props.hideDetails === 'auto' &&
-        (hasMessages || !!slots.details)
-      )
 
       return (
         <div
@@ -182,6 +191,7 @@ export const VInput = genericComponent<new <T>(
               'v-input--focused': props.focused,
               'v-input--glow': props.glow,
               'v-input--hide-spin-buttons': props.hideSpinButtons,
+              'v-input--indent-details': props.indentDetails,
             },
             densityClasses.value,
             themeClasses.value,
@@ -196,15 +206,16 @@ export const VInput = genericComponent<new <T>(
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
-              { slots.prepend?.(slotProps.value) }
-
-              { props.prependIcon && (
-                <InputIcon
-                  key="prepend-icon"
-                  name="prepend"
-                  color={ iconColor.value }
-                />
-              )}
+              { slots.prepend
+                ? slots.prepend(slotProps.value)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
@@ -216,19 +227,20 @@ export const VInput = genericComponent<new <T>(
 
           { hasAppend && (
             <div key="append" class="v-input__append">
-              { props.appendIcon && (
-                <InputIcon
-                  key="append-icon"
-                  name="append"
-                  color={ iconColor.value }
-                />
-              )}
-
-              { slots.append?.(slotProps.value) }
+              { slots.append
+                ? slots.append(slotProps.value)
+                : (props.appendIcon && (
+                  <InputIcon
+                    key="append-icon"
+                    name="append"
+                    color={ iconColor.value }
+                  />
+                ))
+              }
             </div>
           )}
 
-          { hasDetails && (
+          { hasDetails.value && (
             <div
               id={ messagesId.value }
               class="v-input__details"
@@ -236,7 +248,7 @@ export const VInput = genericComponent<new <T>(
               aria-live="polite"
             >
               <VMessages
-                active={ hasMessages }
+                active={ hasMessages.value }
                 messages={ messages.value }
                 v-slots={{ message: slots.message }}
               />

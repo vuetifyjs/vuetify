@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Vyberte měsíc',
+    itemsSelected: '{0} vybráno',
+    header: 'Zadejte měsíc',
+    range: {
+      title: 'Zadejte měsíce',
+    },
+    ariaLabel: {
+      previousYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuální měsíc, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} vybráno',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Zadejte datum',
     input: {
       placeholder: 'Zadejte datum',
+    },
+    ariaLabel: {
+      previousMonth: 'Předchozí měsíc',
+      nextMonth: 'Další měsíc',
+      selectYear: 'Vyberte rok',
+      previousYear: 'Předchozí rok',
+      nextYear: 'Další rok',
+      selectMonth: 'Vyberte měsíc',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
     },
   },
   noDataText: 'Nejsou dostupná žádná data',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} dalších',
     today: 'Dnes',
+  },
+  heatmap: {
+    less: 'Méně',
+    more: 'Více',
   },
   input: {
     clear: 'Vymazat {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'Dopoledne',
     pm: 'Odpoledne',
     title: 'Vyberte čas',
+    hour: 'Hodina',
+    minute: 'Minuty',
+    second: 'Sekundy',
+    notAllowed: 'Hodnota není povolena',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Znak {0} není povolen',
     notEmpty: 'Vyberte alespoň jednu hodnotu',
     pattern: 'Neplatný formát',
+  },
+  command: {
+    search: 'Zadejte příkaz nebo hledejte...',
+  },
+  hotkey: {
+    then: 'poté',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Šipka nahoru',
+    downArrow: 'Šipka dolů',
+    leftArrow: 'Šipka vlevo',
+    rightArrow: 'Šipka vpravo',
+    backspace: 'Backspace',
+    space: 'Mezerník',
+    plus: 'plus',
+    shortcut: 'Klávesová zkratka: {0}',
+    or: 'nebo',
+  },
+  video: {
+    play: 'Přehrát',
+    pause: 'Pozastavit',
+    seek: 'Vyhledat',
+    volume: 'Hlasitost',
+    showVolume: 'Zobrazit ovládání hlasitosti',
+    mute: 'Ztlumit',
+    unmute: 'Zrušit ztlumení',
+    enterFullscreen: 'Celá obrazovka',
+    exitFullscreen: 'Ukončit celou obrazovku',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrat barvu z obrazovky',
+      hueSlider: 'Odstín',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odstín',
+      saturationInput: 'Sytost',
+      lightnessInput: 'Světlost',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Změnit formát barvy',
+    },
   },
 }

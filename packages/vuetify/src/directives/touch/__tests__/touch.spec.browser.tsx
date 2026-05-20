@@ -1,5 +1,5 @@
 // Directives
-import Touch from '../'
+import vTouch from '../'
 
 // Utilities
 import { commands, render } from '@test'
@@ -10,7 +10,7 @@ import type { PropType } from 'vue'
 import type { TouchValue } from '../'
 
 const TestComponent = defineComponent({
-  directives: { Touch },
+  directives: { vTouch },
   props: {
     value: Object as PropType<TouchValue>,
   },

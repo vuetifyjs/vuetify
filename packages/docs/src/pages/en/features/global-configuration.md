@@ -23,7 +23,7 @@ Vuetify allows you to set default prop values globally or per component when set
 
 ## Setup
 
-Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `4` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
+Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `2` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -35,7 +35,7 @@ export default createVuetify({
       ripple: false,
     },
     VBtn: {
-      elevation: 4,
+      elevation: 2,
       prependIcon: "$vuetify",
     },
   },
@@ -69,8 +69,6 @@ This is used internally by some components already:
 [v-defaults-provider](/components/defaults-providers/) can be used to set defaults for components within a specific scope.
 
 ## Global class and styles
-
-<DocIntroduced version="3.2.0" />
 
 Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
@@ -219,8 +217,6 @@ There are some cases where a default class or style could be unintentionally pas
 :::
 
 ## Using in custom components
-
-<DocIntroduced version="3.2.0" />
 
 Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
 

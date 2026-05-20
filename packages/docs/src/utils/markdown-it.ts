@@ -3,6 +3,7 @@ import MarkdownItLinkAttributes from 'markdown-it-link-attributes'
 import MarkdownItAttrs from 'markdown-it-attrs'
 import MarkdownItAnchor from 'markdown-it-anchor'
 import MarkdownItHeaderSections from 'markdown-it-header-sections'
+import MarkdownItMultimdTable from 'markdown-it-multimd-table'
 import markdownRules from './markdown-it-rules'
 import Emoji from 'markdown-it-emoji/bare.js'
 import type MarkdownIt from 'markdown-it'
@@ -50,6 +51,9 @@ export function configureMarkdown (
         fire: '🔥',
         test_tube: '🧪',
       },
+    })
+    .use(MarkdownItMultimdTable, {
+      rowspan: true,
     })
 
   if (options.headerSections !== false) {

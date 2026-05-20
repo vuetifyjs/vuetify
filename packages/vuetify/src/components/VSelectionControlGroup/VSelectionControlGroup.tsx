@@ -16,7 +16,7 @@ import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
-import type { GenericProps } from '@/util'
+import type { GenericProps, ValueComparator } from '@/util'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
@@ -38,6 +38,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   inline: Boolean,
   falseIcon: IconValue,
   trueIcon: IconValue,
+  indeterminateIcon: IconValue,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -54,7 +55,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   modelValue: null,
   type: String,
   valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
+    type: Function as PropType<ValueComparator>,
     default: deepEqual,
   },
 

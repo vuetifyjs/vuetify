@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ile',
   },
+  monthPicker: {
+    title: 'Ay seçin',
+    itemsSelected: '{0} seçildi',
+    header: 'Ay girin',
+    range: {
+      title: 'Ayları girin',
+    },
+    ariaLabel: {
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectYear: 'Yıl seçin',
+      currentMonth: 'Bu ay, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seçildi',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Tarih girin',
     input: {
       placeholder: 'Tarih girin',
+    },
+    ariaLabel: {
+      previousMonth: 'Önceki ay',
+      nextMonth: 'Sonraki ay',
+      selectYear: 'Yıl seçin',
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectMonth: 'Ay seçin',
+      selectDate: '{0}',
+      currentDate: 'Bugün, {0}',
     },
   },
   noDataText: 'Bu görünümde veri yok.',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} tane daha',
     today: 'Bugün',
+  },
+  heatmap: {
+    less: 'Az',
+    more: 'Çok',
   },
   input: {
     clear: '{0} temizle',
@@ -78,6 +106,10 @@ export default {
     am: 'ÖÖ',
     pm: 'ÖS',
     title: 'Saat seçin',
+    hour: 'Saat',
+    minute: 'Dakika',
+    second: 'Saniye',
+    notAllowed: 'Değere izin verilmiyor',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: '{0} karakteri izin verilmez',
     notEmpty: 'Lütfen en az bir değer seçin',
     pattern: 'Geçersiz biçim',
+  },
+  command: {
+    search: 'Komut yazın veya arayın...',
+  },
+  hotkey: {
+    then: 'sonra',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Yukarı Ok',
+    downArrow: 'Aşağı Ok',
+    leftArrow: 'Sol Ok',
+    rightArrow: 'Sağ Ok',
+    backspace: 'Geri Al',
+    space: 'Boşluk',
+    plus: 'artı',
+    shortcut: 'Klavye kısayolu: {0}',
+    or: 'veya',
+  },
+  video: {
+    play: 'Oynat',
+    pause: 'Duraklat',
+    seek: 'Ara',
+    volume: 'Ses',
+    showVolume: 'Ses kontrolünü göster',
+    mute: 'Sesi kapat',
+    unmute: 'Sesi aç',
+    enterFullscreen: 'Tam ekran',
+    exitFullscreen: 'Tam ekrandan çık',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Ekranda renk seç',
+      hueSlider: 'Ton',
+      alphaSlider: 'Alfa',
+      redInput: 'Kırmızı',
+      greenInput: 'Yeşil',
+      blueInput: 'Mavi',
+      alphaInput: 'Alfa',
+      hueInput: 'Ton',
+      saturationInput: 'Doygunluk',
+      lightnessInput: 'Parlaklık',
+      hexInput: 'HEX değeri',
+      hexaInput: 'Alfa değerli HEX',
+      changeFormat: 'Renk biçimini değiştir',
+    },
   },
 }

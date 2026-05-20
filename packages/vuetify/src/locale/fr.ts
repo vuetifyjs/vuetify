@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'à',
   },
+  monthPicker: {
+    title: 'Sélectionner un mois',
+    itemsSelected: '{0} sélectionné(s)',
+    header: 'Entrer un mois',
+    range: {
+      title: 'Entrer des mois',
+    },
+    ariaLabel: {
+      previousYear: 'Année précédente',
+      nextYear: 'Année suivante',
+      selectYear: 'Sélectionner une année',
+      currentMonth: 'Mois actuel, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} sélectionné(s)',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Entrer une date',
     input: {
       placeholder: 'Entrer une date',
+    },
+    ariaLabel: {
+      previousMonth: 'Mois précédent',
+      nextMonth: 'Mois suivant',
+      selectYear: 'Sélectionner une année',
+      previousYear: 'Année précédente',
+      nextYear: 'Année suivante',
+      selectMonth: 'Sélectionner un mois',
+      selectDate: '{0}',
+      currentDate: 'Aujourd\'hui, {0}',
     },
   },
   noDataText: 'Aucune donnée disponible',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} de plus',
     today: 'Aujourd\'hui',
+  },
+  heatmap: {
+    less: 'Moins',
+    more: 'Plus',
   },
   input: {
     clear: 'Vider {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Sélectionner une heure',
+    hour: 'Heure',
+    minute: 'Minute',
+    second: 'Seconde',
+    notAllowed: 'La valeur n\'est pas autorisée',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Le caractère {0} n’est pas autorisé',
     notEmpty: 'Veuillez choisir au moins une valeur',
     pattern: 'Format invalide',
+  },
+  command: {
+    search: 'Tapez une commande ou recherchez...',
+  },
+  hotkey: {
+    then: 'puis',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Entrée',
+    escape: 'Échap',
+    upArrow: 'Flèche haut',
+    downArrow: 'Flèche bas',
+    leftArrow: 'Flèche gauche',
+    rightArrow: 'Flèche droite',
+    backspace: 'Retour',
+    space: 'Espace',
+    plus: 'plus',
+    shortcut: 'Raccourci clavier : {0}',
+    or: 'ou',
+  },
+  video: {
+    play: 'Lire',
+    pause: 'Pause',
+    seek: 'Chercher',
+    volume: 'Volume',
+    showVolume: 'Afficher le contrôle du volume',
+    mute: 'Muet',
+    unmute: 'Activer le son',
+    enterFullscreen: 'Plein écran',
+    exitFullscreen: 'Quitter le plein écran',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Sélectionner une couleur à l\'écran',
+      hueSlider: 'Teinte',
+      alphaSlider: 'Opacité',
+      redInput: 'Rouge',
+      greenInput: 'Vert',
+      blueInput: 'Bleu',
+      alphaInput: 'Opacité',
+      hueInput: 'Teinte',
+      saturationInput: 'Saturation',
+      lightnessInput: 'Luminosité',
+      hexInput: 'Valeur HEX',
+      hexaInput: 'Valeur HEX avec opacité',
+      changeFormat: 'Changer le format de couleur',
+    },
   },
 }

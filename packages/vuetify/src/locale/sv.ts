@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'till',
   },
+  monthPicker: {
+    title: 'Välj månad',
+    itemsSelected: '{0} valda',
+    header: 'Välj månad',
+    range: {
+      title: 'Välj månader',
+    },
+    ariaLabel: {
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectYear: 'Välj år',
+      currentMonth: 'Denna månad, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valda',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Välj datum',
     input: {
       placeholder: 'Välj datum',
+    },
+    ariaLabel: {
+      previousMonth: 'Föregående månad',
+      nextMonth: 'Nästa månad',
+      selectYear: 'Välj år',
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectMonth: 'Välj månad',
+      selectDate: '{0}',
+      currentDate: 'Idag, {0}',
     },
   },
   noDataText: 'Ingen data tillgänglig',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} fler',
     today: 'Idag',
+  },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mer',
   },
   input: {
     clear: 'Rensa {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'FM',
     pm: 'EM',
     title: 'Välj tid',
+    hour: 'Timme',
+    minute: 'Minuter',
+    second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Tecknet {0} är inte tillåtet',
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
+  },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
+  },
+  hotkey: {
+    then: 'sedan',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Pil upp',
+    downArrow: 'Pil ner',
+    leftArrow: 'Pil vänster',
+    rightArrow: 'Pil höger',
+    backspace: 'Backsteg',
+    space: 'Mellanslag',
+    plus: 'plus',
+    shortcut: 'Tangentbordsgenväg: {0}',
+    or: 'eller',
+  },
+  video: {
+    play: 'Spela upp',
+    pause: 'Pausa',
+    seek: 'Sök',
+    volume: 'Volym',
+    showVolume: 'Visa volymkontroll',
+    mute: 'Stäng av ljud',
+    unmute: 'Slå på ljud',
+    enterFullscreen: 'Helskärm',
+    exitFullscreen: 'Avsluta helskärm',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Välj färg från skärmen',
+      hueSlider: 'Nyans',
+      alphaSlider: 'Alfa',
+      redInput: 'Röd',
+      greenInput: 'Grön',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Nyans',
+      saturationInput: 'Mättnad',
+      lightnessInput: 'Ljushet',
+      hexInput: 'HEX-värde',
+      hexaInput: 'HEX med alfavärde',
+      changeFormat: 'Ändra färgformat',
+    },
   },
 }

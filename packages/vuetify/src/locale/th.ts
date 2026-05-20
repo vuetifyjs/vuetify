@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ถึง',
   },
+  monthPicker: {
+    title: 'เลือกเดือน',
+    itemsSelected: 'เลือกแล้ว {0} รายการ',
+    header: 'ป้อนเดือน',
+    range: {
+      title: 'ป้อนเดือน',
+    },
+    ariaLabel: {
+      previousYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      selectYear: 'เลือกปี',
+      currentMonth: 'เดือนนี้, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: 'เลือกแล้ว {0} รายการ',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'ป้อนวันที่',
     input: {
       placeholder: 'ป้อนวันที่',
+    },
+    ariaLabel: {
+      previousMonth: 'เดือนก่อนหน้า',
+      nextMonth: 'เดือนถัดไป',
+      selectYear: 'เลือกปี',
+      previousYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      selectMonth: 'เลือกเดือน',
+      selectDate: '{0}',
+      currentDate: 'วันนี้, {0}',
     },
   },
   noDataText: 'ไม่มีข้อมูล',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'มีอีก {0}',
     today: 'วันนี้',
+  },
+  heatmap: {
+    less: 'น้อย',
+    more: 'มาก',
   },
   input: {
     clear: 'ล้าง {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'ช่วงเช้า',
     pm: 'ช่วงบ่าย',
     title: 'เลือกเวลา',
+    hour: 'ชั่วโมง',
+    minute: 'นาที',
+    second: 'วินาที',
+    notAllowed: 'ค่าไม่ได้รับอนุญาต',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'อักขระ {0} ไม่ได้รับอนุญาต',
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
+  },
+  command: {
+    search: 'พิมพ์คำสั่งหรือค้นหา...',
+  },
+  hotkey: {
+    then: 'จากนั้น',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'ลูกศรขึ้น',
+    downArrow: 'ลูกศรลง',
+    leftArrow: 'ลูกศรซ้าย',
+    rightArrow: 'ลูกศรขวา',
+    backspace: 'Backspace',
+    space: 'เว้นวรรค',
+    plus: 'บวก',
+    shortcut: 'ทางลัดแป้นพิมพ์: {0}',
+    or: 'หรือ',
+  },
+  video: {
+    play: 'เล่น',
+    pause: 'หยุดชั่วคราว',
+    seek: 'ค้นหา',
+    volume: 'ระดับเสียง',
+    showVolume: 'แสดงตัวควบคุมระดับเสียง',
+    mute: 'ปิดเสียง',
+    unmute: 'เปิดเสียง',
+    enterFullscreen: 'เต็มหน้าจอ',
+    exitFullscreen: 'ออกจากเต็มหน้าจอ',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'เลือกสีจากหน้าจอ',
+      hueSlider: 'ค่าสี',
+      alphaSlider: 'ค่าความโปร่งใส',
+      redInput: 'สีแดง',
+      greenInput: 'สีเขียว',
+      blueInput: 'สีน้ำเงิน',
+      alphaInput: 'ค่าความโปร่งใส',
+      hueInput: 'ค่าสี',
+      saturationInput: 'ค่าความอิ่มตัวของสี',
+      lightnessInput: 'ค่าความสว่าง',
+      hexInput: 'ค่า HEX',
+      hexaInput: 'ค่า HEX พร้อมค่าความโปร่งใส',
+      changeFormat: 'เปลี่ยนรูปแบบสี',
+    },
   },
 }

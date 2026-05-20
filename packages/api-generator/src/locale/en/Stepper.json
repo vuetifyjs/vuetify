@@ -3,6 +3,7 @@
     "altLabels": "Places the labels beneath the step.",
     "editable": "Marks step as editable.",
     "hideActions": "Hide actions bar (prev and next buttons).",
+    "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
     "itemTitle": "Property on supplied `items` that contains its title.",
     "itemValue": "Property on supplied `items` that contains its value.",
     "mobile": "Forces the stepper into a mobile state, removing labels from stepper items.",

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'hingga',
   },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} dipilih',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Masukkan tanggal',
     input: {
       placeholder: 'Masukkan tanggal',
+    },
+    ariaLabel: {
+      previousMonth: 'Bulan sebelumnya',
+      nextMonth: 'Bulan berikutnya',
+      selectYear: 'Pilih tahun',
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectMonth: 'Pilih bulan',
+      selectDate: '{0}',
+      currentDate: 'Hari ini, {0}',
     },
   },
   noDataText: 'Tidak ada data tersedia',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} lagi',
     today: 'Hari ini',
+  },
+  heatmap: {
+    less: 'Kurang',
+    more: 'Lebih',
   },
   input: {
     clear: 'Bersihkan {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pilih Waktu',
+    hour: 'Jam',
+    minute: 'Menit',
+    second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Karakter {0} tidak diperbolehkan',
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
+  },
+  command: {
+    search: 'Ketik perintah atau cari...',
+  },
+  hotkey: {
+    then: 'kemudian',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Panah Atas',
+    downArrow: 'Panah Bawah',
+    leftArrow: 'Panah Kiri',
+    rightArrow: 'Panah Kanan',
+    backspace: 'Hapus',
+    space: 'Spasi',
+    plus: 'plus',
+    shortcut: 'Pintasan keyboard: {0}',
+    or: 'atau',
+  },
+  video: {
+    play: 'Putar',
+    pause: 'Jeda',
+    seek: 'Cari',
+    volume: 'Volume',
+    showVolume: 'Tampilkan kontrol volume',
+    mute: 'Bisukan',
+    unmute: 'Bunyikan',
+    enterFullscreen: 'Layar penuh',
+    exitFullscreen: 'Keluar dari layar penuh',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pilih warna dari layar',
+      hueSlider: 'Rona',
+      alphaSlider: 'Alfa',
+      redInput: 'Merah',
+      greenInput: 'Hijau',
+      blueInput: 'Biru',
+      alphaInput: 'Alfa',
+      hueInput: 'Rona',
+      saturationInput: 'Saturasi',
+      lightnessInput: 'Kecerahan',
+      hexInput: 'Nilai HEX',
+      hexaInput: 'HEX dengan nilai alfa',
+      changeFormat: 'Ubah format warna',
+    },
   },
 }

@@ -1,8 +1,16 @@
 import 'vue/jsx'
 
 // Types
-import type { ComponentInjectOptions, ComponentOptionsMixin, EmitsOptions, SlotsType } from 'vue'
-import type { ComputedOptions, Events, MethodOptions, VNode } from 'vue'
+import type {
+  ComponentInjectOptions,
+  ComponentOptionsMixin,
+  ComputedOptions,
+  EmitsOptions,
+  Events,
+  MethodOptions,
+  SlotsType,
+  VNode,
+} from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
@@ -24,6 +32,7 @@ declare global {
       isTouch?: boolean
       showTimer?: number
       showTimerCommit?: (() => void) | null
+      keyDownHandler?: ((e: KeyboardEvent) => void) | null
     }
     _observe?: Record<number, {
       init: boolean
@@ -78,6 +87,10 @@ declare global {
 
   interface Window {
     EyeDropper: EyeDropperConstructor
+  }
+
+  interface FocusOptions {
+    focusVisible?: boolean
   }
 
   function parseInt(s: string | number, radix?: number): number

@@ -1,4 +1,4 @@
-// @vitest/browser/context stub for unit tests to suppress warning
+// vitest/browser stub for unit tests to suppress warning
 export const page = null
 export const server = null
 export const userEvent = null

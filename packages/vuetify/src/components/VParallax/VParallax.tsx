@@ -12,7 +12,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import { clamp, genericComponent, getScrollParent, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, getScrollParent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VImgSlots } from '@/components/VImg/VImg'
@@ -71,7 +71,7 @@ export const VParallax = genericComponent<VImgSlots>()({
 
     let frame = -1
     function onScroll () {
-      if (!isIntersecting.value) return
+      if (!isIntersecting.value || PREFERS_REDUCED_MOTION()) return
 
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {

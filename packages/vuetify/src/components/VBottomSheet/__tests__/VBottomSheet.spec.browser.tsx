@@ -8,13 +8,13 @@ import { ref } from 'vue'
 describe('VBottomSheet', () => {
   it('renders properly with default props', async () => {
     render(() => (
-      <VBottomSheet model-value>
+      <VBottomSheet modelValue>
         <div>Content inside bottom sheet</div>
       </VBottomSheet>
     ))
 
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
-    await expect.element(bottomSheet).toBeOnScreen()
+    await expect.element(bottomSheet).toBeInViewport()
     await expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
     await expect.element(bottomSheet).toHaveTextContent('Content inside bottom sheet')
   })
@@ -23,7 +23,7 @@ describe('VBottomSheet', () => {
     const inset = ref<boolean>(false)
 
     render(() => (
-      <VBottomSheet model-value inset={ inset.value }>
+      <VBottomSheet modelValue inset={ inset.value }>
         <div>Content inside bottom sheet</div>
       </VBottomSheet>
     ))
@@ -37,7 +37,7 @@ describe('VBottomSheet', () => {
 
   it('applies custom styles and classes', async () => {
     render(() => (
-      <VBottomSheet model-value class="custom-class" style="color: red;">
+      <VBottomSheet modelValue class="custom-class" style="color: red;">
         <div>Custom styles</div>
       </VBottomSheet>
     ))

@@ -35,6 +35,13 @@ export interface FilterProps {
 export interface InternalItem<T = any> {
   value: any
   raw: T
+  type?: string
+}
+
+type FilterResult = {
+  index: number
+  matches: Record<string, FilterMatchArrayMultiple | undefined>
+  type?: 'divider' | 'subheader'
 }
 
 // Composables
@@ -74,6 +81,7 @@ export const makeFilterProps = propsFactory({
   noFilter: Boolean,
 }, 'filter')
 
+// eslint-disable-next-line complexity
 export function filterItems (
   items: readonly (readonly [item: InternalItem, transformed: {}])[] | readonly InternalItem[],
   query: string,
@@ -85,13 +93,15 @@ export function filterItems (
     noFilter?: boolean
   },
 ) {
-  const array: { index: number, matches: Record<string, FilterMatchArrayMultiple | undefined> }[] = []
+  const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
   if (!items?.length) return array
+
+  let lookAheadItems: FilterResult[] = []
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -101,8 +111,21 @@ export function filterItems (
     let match: FilterMatch = -1
 
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
+      let hasOnlyCustomFilters = false
+
       if (typeof item === 'object') {
+        if (item.type === 'divider' || item.type === 'subheader') {
+          if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
+            // clear unless, divider appears before subheader
+            lookAheadItems = []
+          }
+
+          lookAheadItems.push({ index: i, matches: { }, type: item.type })
+          continue
+        }
+
         const filterKeys = keys || Object.keys(transformed)
+        hasOnlyCustomFilters = filterKeys.length === customFiltersLength
 
         for (const key of filterKeys) {
           const value = getPropertyFromItem(transformed, key)
@@ -141,9 +164,14 @@ export function filterItems (
         options?.filterMode === 'intersection' &&
         (
           customMatchesLength !== customFiltersLength ||
-          !defaultMatchesLength
+          (!defaultMatchesLength && customFiltersLength > 0 && !hasOnlyCustomFilters)
         )
       ) continue
+    }
+
+    if (lookAheadItems.length) {
+      array.push(...lookAheadItems)
+      lookAheadItems = []
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })
@@ -198,7 +226,9 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      _filteredMatches.set(item.value, matches)
+      if (item.value !== undefined) {
+        _filteredMatches.set(item.value, matches)
+      }
     })
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
@@ -209,20 +239,4 @@ export function useFilter <T extends InternalItem> (
   }
 
   return { filteredItems, filteredMatches, getMatches }
-}
-
-export function highlightResult (name: string, text: string, matches: FilterMatchArrayMultiple | undefined) {
-  if (matches == null || !matches.length) return text
-
-  return matches.map((match, i) => {
-    const start = i === 0 ? 0 : matches[i - 1][1]
-    const result = [
-      <span class={ `${name}__unmask` }>{ text.slice(start, match[0]) }</span>,
-      <span class={ `${name}__mask` }>{ text.slice(match[0], match[1]) }</span>,
-    ]
-    if (i === matches.length - 1) {
-      result.push(<span class={ `${name}__unmask` }>{ text.slice(match[1]) }</span>)
-    }
-    return <>{ result }</>
-  })
 }

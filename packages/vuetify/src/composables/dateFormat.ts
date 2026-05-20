@@ -129,7 +129,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   }
 
   function formatDate (value: unknown) {
-    const parts = adapter.toISO(value).split('-')
+    const parts = adapter.toISO(value).split('T')[0].split('-')
 
     return currentFormat.value.order.split('')
       .map(sign => parts['ymd'.indexOf(sign)])

@@ -35,16 +35,40 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
-  datePicker: {
-    itemsSelected: '{0} selected',
+  monthPicker: {
+    title: 'اختر الشهر',
+    itemsSelected: '{0} محدد',
+    header: 'أدخل الشهر',
     range: {
-      title: 'Select dates',
-      header: 'Enter dates',
+      title: 'أدخل الأشهر',
     },
-    title: 'Select date',
-    header: 'Enter date',
+    ariaLabel: {
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectYear: 'اختر السنة',
+      currentMonth: 'الشهر الحالي، {0}',
+    },
+  },
+  datePicker: {
+    itemsSelected: '{0} محدد',
+    range: {
+      title: 'اختر التواريخ',
+      header: 'أدخل التواريخ',
+    },
+    title: 'اختر التاريخ',
+    header: 'أدخل التاريخ',
     input: {
-      placeholder: 'Enter date',
+      placeholder: 'أدخل التاريخ',
+    },
+    ariaLabel: {
+      previousMonth: 'الشهر السابق',
+      nextMonth: 'الشهر التالي',
+      selectYear: 'اختر السنة',
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectMonth: 'اختر الشهر',
+      selectDate: '{0}',
+      currentDate: 'اليوم، {0}',
     },
   },
   noDataText: 'لا توجد بيانات',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} أكثر',
     today: 'Today',
+  },
+  heatmap: {
+    less: 'أقل',
+    more: 'أكثر',
   },
   input: {
     clear: 'Clear {0}',
@@ -77,7 +105,11 @@ export default {
   timePicker: {
     am: 'صباحاً',
     pm: 'مساءً',
-    title: 'Select Time',
+    title: 'حدد الوقت',
+    hour: 'ساعة',
+    minute: 'دقائق',
+    second: 'ثواني',
+    notAllowed: 'القيمة غير مسموح بها',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'الحرف {0} غير مسموح به',
     notEmpty: 'يرجى اختيار قيمة واحدة على الأقل',
     pattern: 'تنسيق غير صالح',
+  },
+  command: {
+    search: 'اكتب أمراً أو ابحث...',
+  },
+  hotkey: {
+    then: 'ثم',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'السهم العلوي',
+    downArrow: 'السهم السفلي',
+    leftArrow: 'السهم الأيسر',
+    rightArrow: 'السهم الأيمن',
+    backspace: 'مسافة للخلف',
+    space: 'مسافة',
+    plus: 'زائد',
+    shortcut: 'اختصار لوحة المفاتيح: {0}',
+    or: 'or',
+  },
+  video: {
+    play: 'تشغيل',
+    pause: 'إيقاف مؤقت',
+    seek: 'بحث',
+    volume: 'مستوى الصوت',
+    showVolume: 'إظهار التحكم في مستوى الصوت',
+    mute: 'كتم الصوت',
+    unmute: 'إلغاء كتم الصوت',
+    enterFullscreen: 'ملء الشاشة',
+    exitFullscreen: 'الخروج من وضع ملء الشاشة',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'اختيار لون من الشاشة',
+      hueSlider: 'درجة اللون',
+      alphaSlider: 'الشفافية',
+      redInput: 'أحمر',
+      greenInput: 'أخضر',
+      blueInput: 'أزرق',
+      alphaInput: 'الشفافية',
+      hueInput: 'درجة اللون',
+      saturationInput: 'التشبع اللوني',
+      lightnessInput: 'السطوع',
+      hexInput: 'قيمة HEX',
+      hexaInput: 'قيمة HEX مع الشفافية',
+      changeFormat: 'تغيير تنسيق اللون',
+    },
   },
 }

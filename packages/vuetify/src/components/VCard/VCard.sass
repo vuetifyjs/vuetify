@@ -188,6 +188,10 @@
     width: 100%
     z-index: 1
 
+    @media (forced-colors: active)
+      .v-progress-linear
+        border: none
+
   .v-card__overlay
     background-color: currentColor
     border-radius: inherit
@@ -199,3 +203,8 @@
     pointer-events: none
     opacity: 0
     transition: opacity 0.2s ease-in-out
+
+  @media (forced-colors: active)
+    .v-card
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid

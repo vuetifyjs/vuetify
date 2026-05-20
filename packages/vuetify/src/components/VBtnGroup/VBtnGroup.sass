@@ -5,24 +5,18 @@
 
 @include tools.layer('components')
   .v-btn-group
-    $root: &
-
     display: inline-flex
     flex-wrap: nowrap
     max-width: 100%
     min-width: 0
-    overflow: hidden
+    overflow-y: hidden
+    overflow-x: auto
     vertical-align: middle
 
     @include tools.border($btn-group-border...)
     @include tools.elevation($btn-group-elevation)
     @include tools.rounded($btn-group-border-radius)
     @include tools.theme($btn-group-theme...)
-
-    @at-root
-      @include tools.density('v-btn-group', $button-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          height: $btn-group-height + $modifier
 
     .v-btn
       border-radius: 0
@@ -32,6 +26,13 @@
       @include tools.rounded($btn-group-tile-border-radius)
 
     &--horizontal
+      $root: &
+
+      @at-root
+        @include tools.density('v-btn-group', $button-density) using ($modifier)
+          @at-root #{selector.append(&, $root)}
+            height: $btn-group-height + $modifier
+
       .v-btn
         &:not(:last-child)
           border-inline-end: none
@@ -55,7 +56,6 @@
 
     &--vertical
       flex-direction: column
-      height: auto !important
 
       .v-btn
         &:not(:last-child)

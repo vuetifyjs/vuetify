@@ -8,6 +8,7 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
+import { toRef } from 'vue'
 import {
   convertToUnit,
   deepEqual,
@@ -31,6 +32,7 @@ export const makeVColorPickerSwatchesProps = propsFactory({
     default: () => parseDefaultColors(colors),
   },
   disabled: Boolean,
+  readonly: Boolean,
   color: Object as PropType<HSV | null>,
   maxHeight: [Number, String],
 
@@ -69,6 +71,16 @@ export const VColorPickerSwatches = defineComponent({
   },
 
   setup (props, { emit }) {
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
+    function onSwatchClick (hsva: HSV) {
+      if (!isInteractive.value || !hsva) {
+        return
+      }
+
+      emit('update:color', hsva)
+    }
+
     useRender(() => (
       <div
         class={[
@@ -90,8 +102,13 @@ export const VColorPickerSwatches = defineComponent({
 
                 return (
                   <div
-                    class="v-color-picker-swatches__color"
-                    onClick={ () => hsva && emit('update:color', hsva) }
+                    class={[
+                      'v-color-picker-swatches__color',
+                      {
+                        'v-color-picker-swatches__color--disabled': props.disabled,
+                      },
+                    ]}
+                    onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
                       { props.color && deepEqual(props.color, hsva)

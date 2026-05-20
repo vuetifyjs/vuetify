@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'đến',
   },
+  monthPicker: {
+    title: 'Chọn tháng',
+    itemsSelected: '{0} mục đã chọn',
+    header: 'Nhập tháng',
+    range: {
+      title: 'Nhập tháng',
+    },
+    ariaLabel: {
+      previousYear: 'Năm trước',
+      nextYear: 'Năm sau',
+      selectYear: 'Chọn năm',
+      currentMonth: 'Tháng này, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} mục đã chọn',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Nhập ngày',
     input: {
       placeholder: 'Nhập ngày',
+    },
+    ariaLabel: {
+      previousMonth: 'Tháng trước',
+      nextMonth: 'Tháng sau',
+      selectYear: 'Chọn năm',
+      previousYear: 'Năm trước',
+      nextYear: 'Năm sau',
+      selectMonth: 'Chọn tháng',
+      selectDate: '{0}',
+      currentDate: 'Hôm nay, {0}',
     },
   },
   noDataText: 'Không có dữ liệu',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} nữa',
     today: 'Hôm nay',
+  },
+  heatmap: {
+    less: 'Ít hơn',
+    more: 'Nhiều hơn',
   },
   input: {
     clear: 'Xóa {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'SA',
     pm: 'CH',
     title: 'Chọn thời gian',
+    hour: 'Giờ',
+    minute: 'Phút',
+    second: 'Giây',
+    notAllowed: 'Giá trị không được phép',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Ký tự {0} không được phép',
     notEmpty: 'Vui lòng chọn ít nhất một giá trị',
     pattern: 'Định dạng không hợp lệ',
+  },
+  command: {
+    search: 'Nhập lệnh hoặc tìm kiếm...',
+  },
+  hotkey: {
+    then: 'sau đó',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Mũi tên lên',
+    downArrow: 'Mũi tên xuống',
+    leftArrow: 'Mũi tên trái',
+    rightArrow: 'Mũi tên phải',
+    backspace: 'Backspace',
+    space: 'Khoảng trắng',
+    plus: 'cộng',
+    shortcut: 'Phím tắt: {0}',
+    or: 'hoặc',
+  },
+  video: {
+    play: 'Phát',
+    pause: 'Tạm dừng',
+    seek: 'Tìm kiếm',
+    volume: 'Âm lượng',
+    showVolume: 'Hiện điều khiển âm lượng',
+    mute: 'Tắt tiếng',
+    unmute: 'Bật tiếng',
+    enterFullscreen: 'Toàn màn hình',
+    exitFullscreen: 'Thoát toàn màn hình',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Chọn màu từ màn hình',
+      hueSlider: 'Sắc độ',
+      alphaSlider: 'Độ trong suốt',
+      redInput: 'Đỏ',
+      greenInput: 'Xanh lục',
+      blueInput: 'Xanh lam',
+      alphaInput: 'Độ trong suốt',
+      hueInput: 'Sắc độ',
+      saturationInput: 'Độ bão hòa',
+      lightnessInput: 'Độ sáng',
+      hexInput: 'Giá trị HEX',
+      hexaInput: 'Giá trị HEX có độ trong suốt',
+      changeFormat: 'Thay đổi định dạng màu',
+    },
   },
 }

@@ -7,7 +7,6 @@ meta:
 related:
   - /components/buttons/
   - /components/lists/
-  - /components/fields/
 ---
 
 # Variants

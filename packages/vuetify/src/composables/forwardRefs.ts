@@ -1,6 +1,6 @@
 // Types
 import type { ComponentOptionsBase, ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
-import type { UnionToIntersection } from '@/util'
+import type { NonEmptyArray, UnionToIntersection } from '@/util'
 
 const Refs = Symbol('Forwarded refs')
 
@@ -27,7 +27,7 @@ function getDescriptor (obj: any, key: PropertyKey) {
 
 export function forwardRefs<
   T extends {},
-  U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>[],
+  U extends NonEmptyArray<Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>>,
   UU = { [K in keyof U]: NonNullable<UnwrapRef<U[K]>> }[number],
   UC = { [K in keyof U]: OmitPrivate<OmitProps<NonNullable<UnwrapRef<U[K]>>>> }[number],
   R = T & UnionToIntersection<UC> & {

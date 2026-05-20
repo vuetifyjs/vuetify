@@ -20,6 +20,9 @@
     @include tools.rounded($navigation-drawer-border-radius)
     @include tools.theme($navigation-drawer-theme...)
 
+    @media (prefers-reduced-motion: reduce)
+      transition: none
+
     &--rounded
       @include tools.rounded($navigation-drawer-rounded-border-radius)
 

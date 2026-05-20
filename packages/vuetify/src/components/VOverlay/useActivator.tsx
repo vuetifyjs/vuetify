@@ -114,14 +114,19 @@ export function useActivator (
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
-      if (e.sourceCapabilities?.firesTouchEvents) return
-
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (props.target === 'cursor') {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       runOpenDelay()
+    },
+    onMousemove: (e: MouseEvent) => {
+      cursorTarget.value = [e.clientX, e.clientY]
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
+      if (props.target === 'cursor') isFocused = false
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
@@ -137,7 +142,7 @@ export function useActivator (
       isFocused = false
       e.stopPropagation()
 
-      runCloseDelay()
+      runCloseDelay({ minDelay: 1 })
     },
   }
 
@@ -150,6 +155,9 @@ export function useActivator (
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
       events.onMouseleave = availableEvents.onMouseleave
+      if (props.target === 'cursor' && !openOnClick.value) {
+        events.onMousemove = availableEvents.onMousemove
+      }
     }
     if (openOnFocus.value) {
       events.onFocus = availableEvents.onFocus
@@ -174,13 +182,14 @@ export function useActivator (
     }
 
     if (openOnFocus.value) {
-      events.onFocusin = () => {
+      events.onFocusin = (e: Event) => {
+        if (!(e.target as HTMLElement).matches(':focus-visible')) return
         isFocused = true
         runOpenDelay()
       }
       events.onFocusout = () => {
         isFocused = false
-        runCloseDelay()
+        runCloseDelay({ minDelay: 1 })
       }
     }
 
@@ -220,7 +229,7 @@ export function useActivator (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
     ) && !contentEl.value?.contains(document.activeElement)) {
-      isActive.value = false
+      runCloseDelay()
     }
   })
 

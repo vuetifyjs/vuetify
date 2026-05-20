@@ -27,7 +27,6 @@ export const VFieldLabel = genericComponent()({
           props.class,
         ]}
         style={ props.style }
-        aria-hidden={ props.floating || undefined }
         v-slots={ slots }
       />
     ))

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'kuni',
   },
+  monthPicker: {
+    title: 'Valige kuu',
+    itemsSelected: '{0} valitud',
+    header: 'Sisesta kuu',
+    range: {
+      title: 'Sisesta kuud',
+    },
+    ariaLabel: {
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectYear: 'Vali aasta',
+      currentMonth: 'Praegune kuu, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valitud',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Sisesta kuupäev',
     input: {
       placeholder: 'Sisesta kuupäev',
+    },
+    ariaLabel: {
+      previousMonth: 'Eelmine kuu',
+      nextMonth: 'Järgmine kuu',
+      selectYear: 'Vali aasta',
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectMonth: 'Valige kuu',
+      selectDate: '{0}',
+      currentDate: 'Täna, {0}',
     },
   },
   noDataText: 'Andmed puuduvad',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} veel',
     today: 'Täna',
+  },
+  heatmap: {
+    less: 'Vähem',
+    more: 'Rohkem',
   },
   input: {
     clear: 'Tühjenda {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vali aeg',
+    hour: 'Tund',
+    minute: 'Minut',
+    second: 'Sekund',
+    notAllowed: 'Väärtus ei ole lubatud',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Märk {0} ei ole lubatud',
     notEmpty: 'Palun vali vähemalt üks väärtus',
     pattern: 'Vale vorming',
+  },
+  command: {
+    search: 'Sisestage käsk või otsige...',
+  },
+  hotkey: {
+    then: 'siis',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Nool üles',
+    downArrow: 'Nool alla',
+    leftArrow: 'Nool vasakule',
+    rightArrow: 'Nool paremale',
+    backspace: 'Tagasiklahv',
+    space: 'Tühik',
+    plus: 'pluss',
+    shortcut: 'Klaviatuuri otsetee: {0}',
+    or: 'või',
+  },
+  video: {
+    play: 'Esita',
+    pause: 'Peata',
+    seek: 'Otsi',
+    volume: 'Helitugevus',
+    showVolume: 'Näita helitugevuse regulaatorit',
+    mute: 'Vaigista',
+    unmute: 'Lülita vaigistus välja',
+    enterFullscreen: 'Täisekraan',
+    exitFullscreen: 'Välju täisekraanilt',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Võta värv ekraanilt',
+      hueSlider: 'Toon',
+      alphaSlider: 'Alfa',
+      redInput: 'Punane',
+      greenInput: 'Roheline',
+      blueInput: 'Sinine',
+      alphaInput: 'Alfa',
+      hueInput: 'Toon',
+      saturationInput: 'Küllastus',
+      lightnessInput: 'Heledus',
+      hexInput: 'HEKS väärtus',
+      hexaInput: 'HEKS koos alfa väärtusega',
+      changeFormat: 'Muuda värvi formaati',
+    },
   },
 }

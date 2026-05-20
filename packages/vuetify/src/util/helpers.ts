@@ -1,15 +1,21 @@
 // Utilities
 import {
+  camelize,
   capitalize,
   Comment,
   Fragment,
+  isProxy,
+  isReactive,
+  isRef,
   isVNode,
   reactive,
   shallowRef,
+  toRaw,
   toRef,
   unref,
   watchEffect,
 } from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -41,33 +47,6 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
   if (obj == null) return fallback
 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
-}
-
-export function deepEqual (a: any, b: any): boolean {
-  if (a === b) return true
-
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
-    // If the values are Date, compare them as timestamps
-    return false
-  }
-
-  if (a !== Object(a) || b !== Object(b)) {
-    // If the values aren't objects, they were already checked for equality
-    return false
-  }
-
-  const props = Object.keys(a)
-
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]))
 }
 
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
@@ -224,7 +203,7 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
   for (const key of paths) {
@@ -369,7 +348,7 @@ export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
 export function filterInputAttrs (attrs: Record<string, unknown>) {
   const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', 'inert', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]
@@ -416,17 +395,6 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   }
   wrap.immediate = fn
   return wrap
-}
-
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
-  let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
-    }
-  }
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -482,6 +450,7 @@ export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
+  targetCondition?: (k: string, v: unknown) => boolean,
 ) {
   const out: Record<string, any> = {}
 
@@ -490,13 +459,18 @@ export function mergeDeep (
   }
 
   for (const key in target) {
-    const sourceProperty = source[key]
     const targetProperty = target[key]
+
+    if (targetCondition && !targetCondition(key, targetProperty)) {
+      continue
+    }
+
+    const sourceProperty = source[key]
 
     // Only continue deep merging if
     // both properties are plain objects
     if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, targetCondition)
 
       continue
     }
@@ -549,7 +523,7 @@ export function findChildrenWithProvide (
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
@@ -650,10 +624,36 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
@@ -667,23 +667,27 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+export function focusChild (
+  el: Element,
+  location?: 'next' | 'prev' | 'first' | 'last' | number | null,
+  options?: FocusOptions
+) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
+  if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
-      focusable[0]?.focus()
+      focusable[0]?.focus(options)
     }
   } else if (location === 'first') {
-    focusable[0]?.focus()
+    focusable[0]?.focus(options)
   } else if (location === 'last') {
-    focusable.at(-1)?.focus()
+    focusable.at(-1)?.focus(options)
   } else if (typeof location === 'number') {
-    focusable[location]?.focus()
+    focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
     if (_el) _el.focus()
-    else focusChild(el, location === 'next' ? 'first' : 'last')
+    else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }
 
@@ -718,6 +722,15 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
   })
     ? vnodes
     : null
+}
+
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
 }
 
 export function defer (timeout: number, cb: () => void) {
@@ -777,4 +790,71 @@ export function checkPrintable (e: KeyboardEvent) {
 export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
   return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+}
+
+export function escapeForRegex (sign: string) {
+  return '\\^$*+?.()|{}[]'.includes(sign)
+    ? `\\${sign}`
+    : sign
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
+  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
+  const cleanText = text.split('')
+    .filter(x => onlyValidCharacters.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (decimalDigitsLimit === 0) {
+    return cleanText.split(decimalSeparator)[0]
+  }
+
+  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
+  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+    const parts = cleanText.split(decimalSeparator)
+    return [
+      parts[0],
+      parts[1].substring(0, decimalDigitsLimit),
+    ].join(decimalSeparator)
+  }
+
+  return cleanText
+}
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
+}
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
+
+export type NonEmptyArray<T> = [T, ...T[]]
+
+export function deepToRaw<T extends {}> (value: T): T {
+  const objectIterator = (input: any): any => {
+    if (Array.isArray(input)) {
+      return input.map(item => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (isPlainObject(input)) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key as keyof typeof acc] = objectIterator(input[key])
+        return acc
+      }, {} as T)
+    }
+    return input
+  }
+
+  return objectIterator(value)
 }

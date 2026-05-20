@@ -24,7 +24,7 @@ The **size** and **density** props are used to reduce the overall space a compon
 
 ### Size
 
-This property reduces or increases the vertical and horizontal width a component takes up, as well as font-size.
+This property reduces or increases the width and height a component takes up, as well as font-size.
 
 - x-small
 - small

@@ -55,6 +55,8 @@ export interface GroupItemProvide {
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
+  register: () => void
+  unregister: () => void
 }
 
 export const makeGroupProps = propsFactory({
@@ -118,15 +120,16 @@ export function useGroupItem (
   const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
-  group.register({
-    id,
-    value,
-    disabled,
-  }, vm)
+  function register () {
+    group?.register({ id, value, disabled }, vm)
+  }
 
-  onBeforeUnmount(() => {
-    group.unregister(id)
-  })
+  function unregister () {
+    group?.unregister(id)
+  }
+
+  register()
+  onBeforeUnmount(() => unregister())
 
   const isSelected = computed(() => {
     return group.isSelected(id)
@@ -155,6 +158,8 @@ export function useGroupItem (
     value,
     disabled,
     group,
+    register,
+    unregister,
   }
 }
 
@@ -169,9 +174,9 @@ export function useGroup (
     'modelValue',
     [],
     v => {
-      if (v == null) return []
+      if (v === undefined) return []
 
-      return getIds(items, wrapInArray(v))
+      return getIds(items, v === null ? [null] : wrapInArray(v))
     },
     v => {
       const arr = getValues(items, v)
@@ -190,7 +195,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (unref(unwrapped.value) == null) {
+    if (unref(unwrapped.value) === undefined) {
       unwrapped.value = index
       unwrapped.useIndexAsValue = true
     }
@@ -274,6 +279,7 @@ export function useGroup (
     } else {
       const isSelected = selected.value.includes(id)
       if (props.mandatory && isSelected) return
+      if (!isSelected && !value) return
 
       selected.value = (value ?? !isSelected) ? [id] : []
     }
@@ -338,9 +344,9 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
     const item = items.find(item => deepEqual(value, item.value))
     const itemByIndex = items[value]
 
-    if (item?.value != null) {
+    if (item?.value !== undefined) {
       ids.push(item.id)
-    } else if (itemByIndex != null) {
+    } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
     }
   })
@@ -355,7 +361,7 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
     const itemIndex = items.findIndex(item => item.id === id)
     if (~itemIndex) {
       const item = items[itemIndex]
-      values.push(item.value != null ? item.value : itemIndex)
+      values.push(item.value !== undefined ? item.value : itemIndex)
     }
   })
 

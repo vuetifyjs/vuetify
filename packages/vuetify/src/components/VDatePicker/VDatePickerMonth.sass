@@ -5,38 +5,47 @@
   .v-date-picker-month
     display: flex
     justify-content: center
+    overflow: hidden
     padding: $date-picker-month-padding
+    position: relative
 
     --v-date-picker-month-day-diff: 4px
 
   .v-date-picker-month__weeks
-    display: grid
-    grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
-    column-gap: $date-picker-month-column-gap
+    display: flex
+    flex-direction: column
     font-size: $date-picker-month-font-size
-
-    + .v-date-picker-month__days
-      grid-row-gap: 0
 
   .v-date-picker-month__weekday
     font-size: $date-picker-month-font-size
 
   .v-date-picker-month__days
+    width: 100%
+
+  .v-date-picker-month__days-row
     display: grid
-    grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
-    column-gap: $date-picker-month-column-gap
-    flex: 1 1
-    justify-content: space-around
+    grid-template-columns: repeat(var(--v-date-picker-days-in-week), 1fr)
+    justify-items: center
 
   .v-date-picker-month__day
     align-items: center
     display: flex
     justify-content: center
     position: relative
-    height: $date-picker-month-day-size
-    width: $date-picker-month-day-size
+    height: calc(#{$date-picker-month-day-size} + 2 * #{$date-picker-month-cell-padding})
+    padding: $date-picker-month-cell-padding
+    --range-selection-rounding: #{$date-picker-month-range-selection-border-radius}
+    width: 100%
 
-    &--selected
+    &--range-start,
+    &--range-end,
+    &--preview-start,
+    &--preview-end
+      > .v-btn
+        position: relative
+        z-index: 1
+
+    &--selected:not(&--range-middle)
       .v-btn
         background-color: rgb(var(--v-theme-surface-variant))
         color: rgb(var(--v-theme-on-surface-variant))
@@ -48,8 +57,81 @@
     &--week
       font-size: var(--v-btn-size)
 
+  .v-date-picker-month__range-bg
+    position: absolute
+    inset: $date-picker-month-range-selection-inset 0
+    pointer-events: none
+
+    &--range
+      opacity: 0.1
+
+    &--preview
+      opacity: 0.06
+
+  .v-date-picker-month__day
+    &--range-start > .v-date-picker-month__range-bg
+      left: $date-picker-month-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--range-end > .v-date-picker-month__range-bg
+      right: $date-picker-month-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--preview-start > .v-date-picker-month__range-bg
+      left: $date-picker-month-range-selection-inset
+      border-radius: var(--range-selection-rounding) 0 0 var(--range-selection-rounding)
+
+    &--preview-end > .v-date-picker-month__range-bg
+      right: $date-picker-month-range-selection-inset
+      border-radius: 0 var(--range-selection-rounding) var(--range-selection-rounding) 0
+
+    &--range-middle,
+    &--range-start,
+    &--preview-middle,
+    &--preview-start
+      &:last-of-type,
+      &:has(+ .v-date-picker-month__day--hide-adjacent)
+        > .v-date-picker-month__range-bg
+          right: 1px
+          border-top-right-radius: var(--range-selection-rounding)
+          border-bottom-right-radius: var(--range-selection-rounding)
+
+    &--range-middle,
+    &--range-end,
+    &--preview-middle,
+    &--preview-end
+      &:first-of-type,
+      .v-date-picker-month__day--hide-adjacent + &
+        > .v-date-picker-month__range-bg
+          left: 1px
+          border-top-left-radius: var(--range-selection-rounding)
+          border-bottom-left-radius: var(--range-selection-rounding)
+
   .v-date-picker-month__day--adjacent
     opacity: 0.5
 
   .v-date-picker-month__day--hide-adjacent
     opacity: 0
+
+  .v-date-picker-month__events
+    height: $date-picker-event-size
+    left: 0
+    text-indent: 0
+    position: absolute
+    text-align: center
+    white-space: pre
+    width: 100%
+
+    > div
+      height: $date-picker-event-size
+      margin: $date-picker-event-margin
+      width: $date-picker-event-size
+      margin-bottom: -1px
+
+    .v-badge--dot .v-badge__badge
+      border-radius: $date-picker-event-border-radius
+      height: $date-picker-event-size
+      width: $date-picker-event-size
+
+  .v-date-picker-month__day .v-date-picker-month__events
+    bottom: $date-picker-event-date-bottom

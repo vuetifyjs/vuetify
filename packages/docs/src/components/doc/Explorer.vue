@@ -19,7 +19,7 @@
       <template #chip="{ props, item }">
         <v-chip
           v-bind="props"
-          :prepend-icon="item.props.prependIcon"
+          :prepend-icon="item.prependIcon"
           color="primary"
           variant="flat"
           label
@@ -75,6 +75,9 @@
     } else if (name.startsWith('use')) {
       prependIcon = '$vuetify'
       subtitle = 'Composable'
+    } else if (name.startsWith('global')) {
+      prependIcon = '$vuetify'
+      subtitle = 'Global SASS'
     } else {
       return acc
     }

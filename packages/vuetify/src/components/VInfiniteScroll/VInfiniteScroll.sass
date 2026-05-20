@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -21,9 +22,11 @@
       width: 100%
 
   .v-infinite-scroll-intersect
+    overflow: hidden
     pointer-events: none
     margin-top: var(--v-infinite-margin)
     margin-bottom: calc(var(--v-infinite-margin) * -1)
+
     &:nth-child(2) // TODO: "1 of &" would be more stable if structure changes
       --v-infinite-margin: var(--v-infinite-margin-size, 1px)
     &:nth-last-child(2)
@@ -34,3 +37,10 @@
     display: flex
     justify-content: center
     padding: $infinite-scroll-side-padding
+    transition-property: padding
+    transition-duration: settings.$transition-duration-root
+    transition-timing-function: settings.$standard-easing
+
+    &:empty,
+    &:has(> div:only-child:empty)
+      padding: 0

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'til',
   },
+  monthPicker: {
+    title: 'Velg måned',
+    itemsSelected: '{0} valgt',
+    header: 'Velg måned',
+    range: {
+      title: 'Velg måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Neste år',
+      selectYear: 'Velg år',
+      currentMonth: 'Denne måneden, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valgt',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Velg dato',
     input: {
       placeholder: 'Fyll inn dato',
+    },
+    ariaLabel: {
+      previousMonth: 'Forrige måned',
+      nextMonth: 'Neste måned',
+      selectYear: 'Velg år',
+      previousYear: 'Forrige år',
+      nextYear: 'Neste år',
+      selectMonth: 'Velg måned',
+      selectDate: '{0}',
+      currentDate: 'I dag, {0}',
     },
   },
   noDataText: 'Ingen data er tilgjengelig',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} flere',
     today: 'I dag',
+  },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mer',
   },
   input: {
     clear: 'Fjern {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Velg tid',
+    hour: 'Time',
+    minute: 'Minutter',
+    second: 'Sekunder',
+    notAllowed: 'Verdien er ikke tillatt',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Tegnet {0} er ikke tillatt',
     notEmpty: 'Vennligst velg minst én verdi',
     pattern: 'Ugyldig format',
+  },
+  command: {
+    search: 'Skriv en kommando eller søk...',
+  },
+  hotkey: {
+    then: 'deretter',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Pil opp',
+    downArrow: 'Pil ned',
+    leftArrow: 'Pil venstre',
+    rightArrow: 'Pil høyre',
+    backspace: 'Slett',
+    space: 'Mellomrom',
+    plus: 'pluss',
+    shortcut: 'Tastatursnarveier: {0}',
+    or: 'eller',
+  },
+  video: {
+    play: 'Spill av',
+    pause: 'Pause',
+    seek: 'Søk',
+    volume: 'Volum',
+    showVolume: 'Vis volumkontroll',
+    mute: ' Demp',
+    unmute: 'Slå på lyd',
+    enterFullscreen: 'Fullskjerm',
+    exitFullscreen: 'Avslutt fullskjerm',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Velg farge fra skjermen',
+      hueSlider: 'Fargetone',
+      alphaSlider: 'Alfa',
+      redInput: 'Rød',
+      greenInput: 'Grønn',
+      blueInput: 'Blå',
+      alphaInput: 'Alfa',
+      hueInput: 'Fargetone',
+      saturationInput: 'Metning',
+      lightnessInput: 'Lyshet',
+      hexInput: 'HEX-verdi',
+      hexaInput: 'HEX med alfa-verdi',
+      changeFormat: 'Endre fargeformat',
+    },
   },
 }

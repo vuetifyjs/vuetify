@@ -2,27 +2,49 @@
 import './VOtpInput.sass'
 
 // Components
-import { makeVFieldProps, VField } from '@/components/VField/VField'
+import { VOtpField } from './VOtpField'
+import { VOtpGroup } from './VOtpGroup'
+import { VOtpSeparator } from './VOtpSeparator'
+import { makeVFieldProps } from '@/components/VField/VField'
 import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
 
 // Composables
+import { useOtpInput } from './useOtpInput'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useLocale } from '@/composables/locale'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, nextTick, ref, toRef, watch } from 'vue'
-import { filterInputAttrs, focusChild, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
+import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { OtpInputPattern, OtpSlotData } from './useOtpInput'
 
-// Types
+export type { OtpSlotData, OtpInputPattern } from './useOtpInput'
+
+export interface VOtpInputContext {
+  otpSlots: Readonly<Ref<OtpSlotData[]>>
+  isFocused: Ref<boolean>
+  focusAll: Ref<boolean>
+  divider: Ref<string | undefined>
+  merged: Ref<boolean>
+  focusAt: (index: number) => void
+}
+
+export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vuetify:v-otp-input')
+
 export type VOtpInputSlots = {
   default: never
+  fields: never
+  divider: { index: number }
   loader: never
 }
 
@@ -30,6 +52,7 @@ export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,
   divider: String,
   focusAll: Boolean,
+  merged: Boolean,
   label: {
     type: String,
     default: '$vuetify.input.otp',
@@ -38,8 +61,13 @@ export const makeVOtpInputProps = propsFactory({
     type: [Number, String],
     default: 6,
   },
+  masked: Boolean,
   modelValue: {
     type: [Number, String],
+    default: undefined,
+  },
+  pattern: {
+    type: [String, Object] as PropType<OtpInputPattern | RegExp>,
     default: undefined,
   },
   placeholder: String,
@@ -48,6 +76,7 @@ export const makeVOtpInputProps = propsFactory({
     default: 'number',
   },
 
+  ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeFocusProps(),
   ...pick(makeVFieldProps({
@@ -73,127 +102,209 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   props: makeVOtpInputProps(),
 
   emits: {
-    finish: (val: string) => true,
-    'update:focused': (val: boolean) => true,
-    'update:modelValue': (val: string) => true,
+    finish: (value: string) => true,
+    'update:focused': (value: boolean) => true,
+    'update:modelValue': (value: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
-    const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(
-      props,
-      'modelValue',
-      '',
-      val => val == null ? [] : String(val).split(''),
-      val => val.join('')
-    )
+    const { isFocused } = useFocus(props)
     const { t } = useLocale()
+    const { isRtl } = useRtl()
 
-    const length = computed(() => Number(props.length))
-    const fields = computed(() => Array(length.value).fill(0))
-    const focusIndex = ref(-1)
-    const contentRef = ref<HTMLElement>()
-    const inputRef = ref<HTMLInputElement[]>([])
-    const current = computed(() => inputRef.value[focusIndex.value])
+    const model = useProxiedModel(props, 'modelValue', '', val => val == null ? '' : String(val))
+    const inputRef = ref<HTMLInputElement>()
+    const length = toRef(() => Number(props.length))
+    let focusAtPending = false
 
-    function onInput () {
-      // The maxlength attribute doesn't work for the number type input, so the text type is used.
-      // The following logic simulates the behavior of a number input.
-      if (isValidNumber(current.value.value)) {
-        current.value.value = ''
+    const otp = useOtpInput({
+      value: model,
+      length,
+      pattern: () => props.pattern,
+      type: () => props.type,
+      masked: () => props.masked,
+      placeholder: () => props.placeholder,
+      isFocused,
+    })
+
+    function applySelection () {
+      const input = inputRef.value
+      const selection = otp.selection.value
+      if (!input || !selection) return
+      input.setSelectionRange(selection.start, selection.end, selection.direction)
+    }
+
+    function syncDOM () {
+      const input = inputRef.value
+      if (!input) return
+      if (input.value !== otp.value.value) input.value = otp.value.value
+      applySelection()
+    }
+
+    function onSelectionChange () {
+      const input = inputRef.value
+      if (!input) {
+        otp.clearSelection()
         return
       }
-
-      const array = model.value.slice()
-      const value = current.value.value
-
-      array[focusIndex.value] = value
-
-      let target: any = null
-
-      if (focusIndex.value > model.value.length) {
-        target = model.value.length + 1
-      } else if (focusIndex.value + 1 !== length.value) {
-        target = 'next'
-      }
-
-      model.value = array
-
-      if (target) focusChild(contentRef.value!, target)
-    }
-
-    function onKeydown (e: KeyboardEvent) {
-      const array = model.value.slice()
-      const index = focusIndex.value
-      let target: 'next' | 'prev' | 'first' | 'last' | number | null = null
-
-      if (![
-        'ArrowLeft',
-        'ArrowRight',
-        'Backspace',
-        'Delete',
-      ].includes(e.key)) return
-
-      e.preventDefault()
-
-      if (e.key === 'ArrowLeft') {
-        target = 'prev'
-      } else if (e.key === 'ArrowRight') {
-        target = 'next'
-      } else if (['Backspace', 'Delete'].includes(e.key)) {
-        array[focusIndex.value] = ''
-
-        model.value = array
-
-        if (focusIndex.value > 0 && e.key === 'Backspace') {
-          target = 'prev'
-        } else {
-          requestAnimationFrame(() => {
-            inputRef.value[index]?.select()
-          })
-        }
-      }
-
-      requestAnimationFrame(() => {
-        if (target != null) {
-          focusChild(contentRef.value!, target)
-        }
+      const result = otp.syncSelection({
+        value: input.value,
+        selectionStart: input.selectionStart,
+        selectionEnd: input.selectionEnd,
+        selectionDirection: input.selectionDirection,
+        // Slot count, not `input.maxLength` (code units).
+        maxLength: length.value,
       })
+      if (!result) return
+      if (input.selectionStart !== result.start || input.selectionEnd !== result.end) {
+        input.setSelectionRange(result.start, result.end, result.direction)
+      }
     }
 
-    function onPaste (index: number, e: ClipboardEvent) {
-      e.preventDefault()
-      e.stopPropagation()
+    function onInput (e: Event) {
+      const ev = e as InputEvent
+      const target = e.target as HTMLInputElement
+      const composing = ev.isComposing || otp.isComposing.value
 
-      const clipboardText = e?.clipboardData?.getData('Text').slice(0, length.value) ?? ''
+      // CJK composition renders via the overlay until compositionend.
+      if (composing && otp.isImeText(target.value)) return
 
-      if (isValidNumber(clipboardText)) return
-
-      model.value = clipboardText.split('')
-
-      inputRef.value?.[index].blur()
+      // Non-CJK composition (dead keys, Samsung predictive, Chrome OTP autofill)
+      // commits into the model now; don't end composition early or selection
+      // will advance past the model length on the next selectionchange.
+      const next = otp.setValue(target.value)
+      if (target.value !== next) target.value = next
     }
 
-    function reset () {
-      model.value = []
+    function onCompositionstart () {
+      otp.startComposition()
     }
 
-    function onFocus (e: FocusEvent, index: number) {
-      focus()
+    function onCompositionupdate (e: CompositionEvent) {
+      otp.updateComposition(e.data ?? '')
+    }
 
-      focusIndex.value = index
+    function onCompositionend (e: CompositionEvent) {
+      otp.endComposition()
+      onInput(e)
+    }
+
+    function onFocus () {
+      isFocused.value = true
+      if (focusAtPending) return
+      if (!inputRef.value) return
+      otp.selectAtEnd()
+      applySelection()
     }
 
     function onBlur () {
-      blur()
-
-      focusIndex.value = -1
+      isFocused.value = false
+      otp.clearSelection()
     }
 
-    function isValidNumber (value: string) {
-      return props.type === 'number' && /[^0-9]/g.test(value)
+    function onKeydown (e: KeyboardEvent) {
+      if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        // Extend with our own anchor so the originally-selected slot stays included.
+        const direction = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
+        if (otp.extendSelection(direction)) {
+          e.preventDefault()
+          syncDOM()
+        }
+        return
+      }
+
+      if (e.key !== 'Backspace' && e.key !== 'Delete') return
+      if (!e.metaKey && !e.ctrlKey && !e.altKey) return
+      e.preventDefault()
+      otp.bulkDelete(e.key === 'Backspace')
+      syncDOM()
     }
+
+    function onBeforeinput (e: InputEvent) {
+      if (e.inputType === 'insertText' && e.data && otp.effectivePattern.value && !otp.effectivePattern.value.test(e.data)) {
+        e.preventDefault()
+        return
+      }
+
+      if (e.inputType === 'deleteContentForward') {
+        e.preventDefault()
+        const input = inputRef.value
+        if (!input) return
+        const selection = otp.selection.value
+        const start = selection?.start ?? 0
+        const end = selection?.end ?? input.value.length
+        otp.deleteRange(start, end)
+        syncDOM()
+        return
+      }
+
+      const isBackward = [
+        'deleteWordBackward',
+        'deleteSoftLineBackward',
+        'deleteHardLineBackward',
+      ].includes(e.inputType)
+      const isForward = [
+        'deleteWordForward',
+        'deleteSoftLineForward',
+        'deleteHardLineForward',
+      ].includes(e.inputType)
+      if (!isBackward && !isForward) return
+      e.preventDefault()
+      otp.bulkDelete(isBackward)
+      syncDOM()
+    }
+
+    function onPaste (e: ClipboardEvent) {
+      e.preventDefault()
+      const input = inputRef.value
+      if (!input) return
+      const text = e.clipboardData?.getData('text/plain').trim() ?? ''
+      const selection = otp.selection.value
+      otp.insert(text, {
+        start: selection?.start ?? 0,
+        end: selection?.end ?? input.value.length,
+      })
+      syncDOM()
+    }
+
+    function focusAt (index: number) {
+      const input = inputRef.value
+      if (!input) return
+      focusAtPending = true
+      input.focus()
+      focusAtPending = false
+      otp.selectSlot(index)
+      applySelection()
+    }
+
+    // selectionchange is not in InputHTMLAttributes types
+    watch(inputRef, (input, _, onCleanup) => {
+      if (!input) return
+      input.addEventListener('selectionchange', onSelectionChange)
+      onCleanup(() => input.removeEventListener('selectionchange', onSelectionChange))
+    }, { immediate: true })
+
+    useToggleScope(() => props.autofocus, () => {
+      const intersectScope = effectScope()
+      intersectScope.run(() => {
+        const { intersectionRef, isIntersecting } = useIntersectionObserver()
+        watchEffect(() => {
+          intersectionRef.value = inputRef.value
+        })
+        watch(isIntersecting, v => {
+          if (!v) return
+          intersectionRef.value?.focus()
+          intersectScope.stop()
+        })
+      })
+    })
+
+    watch(model, val => {
+      if (otp.isComposing.value) return
+      if (val.length === length.value) emit('finish', val)
+    })
 
     provideDefaults({
       VField: {
@@ -203,19 +314,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         disabled: toRef(() => props.disabled),
         error: toRef(() => props.error),
         variant: toRef(() => props.variant),
+        rounded: toRef(() => props.rounded),
       },
     }, { scoped: true })
 
-    watch(model, val => {
-      if (val.length === length.value) emit('finish', val.join(''))
-    }, { deep: true })
-
-    watch(focusIndex, val => {
-      if (val < 0) return
-
-      nextTick(() => {
-        inputRef.value[val]?.select()
-      })
+    provide(VOtpInputSymbol, {
+      otpSlots: otp.slots,
+      isFocused,
+      focusAll: toRef(() => props.focusAll),
+      divider: toRef(() => props.divider),
+      merged: toRef(() => props.merged),
+      focusAt,
     })
 
     useRender(() => {
@@ -228,74 +337,66 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             {
               'v-otp-input--divided': !!props.divider,
             },
+            densityClasses.value,
             props.class,
           ]}
-          style={[
-            props.style,
-          ]}
+          style={[props.style]}
           { ...rootAttrs }
         >
           <div
-            ref={ contentRef }
             class="v-otp-input__content"
-            style={[
-              dimensionStyles.value,
-            ]}
+            style={[dimensionStyles.value]}
+            dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
-            { fields.value.map((_, i) => (
-              <>
-                { props.divider && i !== 0 && (
-                  <span class="v-otp-input__divider">{ props.divider }</span>
-                )}
-
-                <VField
-                  focused={ (isFocused.value && props.focusAll) || focusIndex.value === i }
-                  key={ i }
-                >
-                  {{
-                    ...slots,
-                    loader: undefined,
-                    default: () => {
-                      return (
-                        <input
-                          ref={ val => inputRef.value[i] = val as HTMLInputElement }
-                          aria-label={ t(props.label, i + 1) }
-                          autofocus={ i === 0 && props.autofocus }
-                          autocomplete="one-time-code"
-                          class={[
-                            'v-otp-input__field',
-                          ]}
-                          disabled={ props.disabled }
-                          inputmode={ props.type === 'number' ? 'numeric' : 'text' }
-                          min={ props.type === 'number' ? 0 : undefined }
-                          maxlength={ i === 0 ? length.value : '1' }
-                          placeholder={ props.placeholder }
-                          type={ props.type === 'number' ? 'text' : props.type }
-                          value={ model.value[i] }
-                          onInput={ onInput }
-                          onFocus={ e => onFocus(e, i) }
-                          onBlur={ onBlur }
-                          onKeydown={ onKeydown }
-                          onPaste={ event => onPaste(i, event) }
-                        />
-                      )
-                    },
-                  }}
-                </VField>
-              </>
-            ))}
+            { slots.fields ? slots.fields() : props.merged
+              ? (
+                <VOtpGroup merged>
+                  { Array.from({ length: length.value }, (_, i) => (
+                    <VOtpField index={ i } key={ i } />
+                  ))}
+                </VOtpGroup>
+              )
+              : Array.from({ length: length.value }, (_, i) => (
+                <>
+                  { (props.divider || slots.divider) && i !== 0 && (
+                    <VOtpSeparator key={ `d-${i}` }>
+                      { slots.divider?.({ index: i - 1 }) ?? props.divider }
+                    </VOtpSeparator>
+                  )}
+                  <VOtpField index={ i } key={ i } />
+                </>
+              ))
+            }
 
             <input
-              class="v-otp-input-input"
-              type="hidden"
+              ref={ inputRef }
+              class="v-otp-input__input"
+              type="text"
+              inputmode={ otp.inputMode.value }
+              dir={ isRtl.value ? 'rtl' : 'ltr' }
+              autocomplete="one-time-code"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck={ false }
+              disabled={ props.disabled }
+              aria-label={ t(props.label) }
+              value={ model.value }
               { ...inputAttrs }
-              value={ model.value.join('') }
+              onInput={ onInput }
+              onKeydown={ onKeydown }
+              onBeforeinput={ onBeforeinput }
+              onFocus={ onFocus }
+              onBlur={ onBlur }
+              onPaste={ onPaste }
+              onCompositionstart={ onCompositionstart }
+              onCompositionupdate={ onCompositionupdate }
+              onCompositionend={ onCompositionend }
             />
 
             <VOverlay
               contained
-              content-class="v-otp-input__loader"
-              model-value={ !!props.loading }
+              contentClass="v-otp-input__loader"
+              modelValue={ !!props.loading }
               persistent
             >
               { slots.loader?.() ?? (
@@ -315,16 +416,15 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     })
 
     return {
-      blur: () => {
-        inputRef.value?.some(input => input.blur())
-      },
-      focus: () => {
-        inputRef.value?.[0].focus()
-      },
-      reset,
+      blur: () => { inputRef.value?.blur() },
+      focus: () => { inputRef.value?.focus() },
+      reset: otp.reset,
       isFocused,
     }
   },
 })
 
 export type VOtpInput = InstanceType<typeof VOtpInput>
+
+export { useOtpInput, OtpInputPatterns } from './useOtpInput'
+export type { OtpInputContext, OtpInputOptions } from './useOtpInput'

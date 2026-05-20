@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'až',
   },
+  monthPicker: {
+    title: 'Vyberte mesiac',
+    itemsSelected: '{0} vybraných',
+    header: 'Zadajte mesiac',
+    range: {
+      title: 'Zadajte mesiace',
+    },
+    ariaLabel: {
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuálny mesiac, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} vybraných',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Zadajte dátum',
     input: {
       placeholder: 'Zadajte dátum',
+    },
+    ariaLabel: {
+      previousMonth: 'Predchádzajúci mesiac',
+      nextMonth: 'Ďalší mesiac',
+      selectYear: 'Vyberte rok',
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectMonth: 'Vyberte mesiac',
+      selectDate: '{0}',
+      currentDate: 'Dnes, {0}',
     },
   },
   noDataText: 'Nie sú dostupné žiadne dáta',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} ďalších',
     today: 'Dnes',
+  },
+  heatmap: {
+    less: 'Menej',
+    more: 'Viac',
   },
   input: {
     clear: 'Vymazať {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Vyberte čas',
+    hour: 'Hodina',
+    minute: 'Minúty',
+    second: 'Sekundy',
+    notAllowed: 'Hodnota nie je povolená',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Znak {0} nie je povolený',
     notEmpty: 'Vyberte aspoň jednu hodnotu',
     pattern: 'Neplatný formát',
+  },
+  command: {
+    search: 'Zadajte príkaz alebo hľadajte...',
+  },
+  hotkey: {
+    then: 'potom',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Šípka hore',
+    downArrow: 'Šípka dole',
+    leftArrow: 'Šípka vľavo',
+    rightArrow: 'Šípka vpravo',
+    backspace: 'Backspace',
+    space: 'Medzera',
+    plus: 'plus',
+    shortcut: 'Klávesová skratka: {0}',
+    or: 'alebo',
+  },
+  video: {
+    play: 'Prehrať',
+    pause: 'Pozastaviť',
+    seek: 'Vyhľadať',
+    volume: 'Hlasitosť',
+    showVolume: 'Zobraziť ovládanie hlasitosti',
+    mute: 'Stlmiť',
+    unmute: 'Zrušiť stlmenie',
+    enterFullscreen: 'Celá obrazovka',
+    exitFullscreen: 'Opustiť celú obrazovku',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Vybrať farbu z obrazovky',
+      hueSlider: 'Odtieň',
+      alphaSlider: 'Alfa',
+      redInput: 'Červená',
+      greenInput: 'Zelená',
+      blueInput: 'Modrá',
+      alphaInput: 'Alfa',
+      hueInput: 'Odtieň',
+      saturationInput: 'Sýtosť',
+      lightnessInput: 'Svetlosť',
+      hexInput: 'HEX hodnota',
+      hexaInput: 'HEX s alfa hodnotou',
+      changeFormat: 'Zmeniť formát farby',
+    },
   },
 }

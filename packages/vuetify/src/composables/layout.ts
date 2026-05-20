@@ -15,7 +15,7 @@ import {
   shallowRef, toRef,
   useId,
 } from 'vue'
-import { convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
+import { consoleWarn, convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -286,13 +286,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
-        const size = elementSize.value ?? layoutSize.value
+        const size = Number(elementSize.value ?? layoutSize.value)
+        const transformFunction = `translate${isHorizontal ? 'X' : 'Y'}`
+        const transformValue = active.value ? 0
+          : (size === 0 ? 100 : size + 1) * (isOppositeHorizontal || isOppositeVertical ? 1 : -1)
         const unit = size === 0 ? '%' : 'px'
 
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -(size === 0 ? 100 : size)) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}${unit})`,
+          transform: `${transformFunction}(${transformValue}${unit})`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
@@ -301,7 +304,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         const item = items.value[index.value]
 
-        if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
+        if (!item) consoleWarn(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {

@@ -13,7 +13,7 @@ import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
@@ -56,6 +56,7 @@ export type VSelectionControlSlots = {
 }
 
 export const makeVSelectionControlProps = propsFactory({
+  indeterminate: Boolean,
   label: String,
   baseColor: String,
   trueValue: null,
@@ -112,19 +113,24 @@ export function useSelectionControl (
       }
     },
   })
+  const isActive = computed(() => model.value || props.indeterminate)
   const { textColorClasses, textColorStyles } = useTextColor(() => {
     if (props.error || props.disabled) return undefined
 
-    return model.value ? props.color : props.baseColor
+    return isActive.value ? props.color : props.baseColor
   })
   const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
     return (
-      model.value &&
+      isActive.value &&
       !props.error &&
       !props.disabled
     ) ? props.color : props.baseColor
   })
-  const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
+  const icon = computed(() => (
+    props.indeterminate ? props.indeterminateIcon
+    : model.value ? props.trueIcon
+    : props.falseIcon
+  ))
 
   return {
     group,
@@ -149,7 +155,7 @@ export const VSelectionControl = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   inheritAttrs: false,
 
@@ -185,7 +191,7 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     function onFocus (e: FocusEvent) {
-      if (!isInteractive.value) return
+      if (props.disabled) return
 
       isFocused.value = true
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
@@ -254,6 +260,7 @@ export const VSelectionControl = genericComponent<new <T>(
             'v-selection-control',
             {
               'v-selection-control--dirty': model.value,
+              'v-selection-control--indeterminate': props.indeterminate,
               'v-selection-control--disabled': props.disabled,
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
@@ -282,8 +289,8 @@ export const VSelectionControl = genericComponent<new <T>(
               class={[
                 'v-selection-control__input',
               ]}
-              v-ripple={ props.ripple && [
-                !props.disabled && !props.readonly,
+              v-ripple={[
+                !props.disabled && !props.readonly && props.ripple,
                 null,
                 ['center', 'circle'],
               ]}

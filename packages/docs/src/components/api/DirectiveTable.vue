@@ -9,9 +9,9 @@
     />
     <span v-else>{{ item.description }}</span>
 
-    <p v-if="user.dev && item.source">
+    <p v-if="user.one.devmode && item.source">
       <strong>source: {{ item.source }}</strong>
-      <template v-if="user.dev && item.descriptionSource && item.source !== item.descriptionSource">
+      <template v-if="user.one.devmode && item.descriptionSource && item.source !== item.descriptionSource">
         <br>
         <strong>description source: {{ item.descriptionSource }}</strong>
       </template>

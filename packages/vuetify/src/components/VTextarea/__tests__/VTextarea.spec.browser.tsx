@@ -14,12 +14,12 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" v-model={ model.value } />
         </div>
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -27,7 +27,7 @@ describe('VTextarea', () => {
     await userEvent.keyboard('sed d')
     await expect.poll(() => el.offsetHeight).toBe(56)
 
-    await userEvent.keyboard('o')
+    await userEvent.keyboard('{Enter}')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
 
@@ -38,12 +38,12 @@ describe('VTextarea', () => {
     render(() => (
       <Application>
         <div>
-          <VTextarea auto-grow rows="1" max-rows="2" v-model={ model.value } />
+          <VTextarea autoGrow rows="1" maxRows="2" v-model={ model.value } />
         </div>
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -53,5 +53,21 @@ describe('VTextarea', () => {
 
     await userEvent.keyboard('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
     await expect.poll(() => el.offsetHeight).toBe(80)
+  })
+
+  it('should emit update rows', async () => {
+    await page.viewport(500, 500)
+    const model = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+    const rows = ref(1)
+    render(() => (
+      <Application>
+        <div>
+          <VTextarea autoGrow rows="1" v-model={ model.value } onUpdate:rows={ val => { rows.value = val } } />
+        </div>
+      </Application>
+    ))
+    await userEvent.tab()
+    await userEvent.keyboard('Lorem ipsum dolor')
+    expect(rows.value).toBe(2)
   })
 })

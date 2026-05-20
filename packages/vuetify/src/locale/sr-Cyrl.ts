@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Изаберите месец',
+    itemsSelected: '{0} изабрано',
+    header: 'Унесите месец',
+    range: {
+      title: 'Унесите месеце',
+    },
+    ariaLabel: {
+      previousYear: 'Претходна година',
+      nextYear: 'Следећа година',
+      selectYear: 'Select year',
+      currentMonth: 'Тренутни месец, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} изабрано',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Унесите датум',
     input: {
       placeholder: 'Унесите датум',
+    },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      previousYear: 'Претходна година',
+      nextYear: 'Следећа година',
+      selectMonth: 'Изаберите месец',
+      selectDate: '{0}',
+      currentDate: 'Today, {0}',
     },
   },
   noDataText: 'Нема доступних података',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} више',
     today: 'Данас',
+  },
+  heatmap: {
+    less: 'Мање',
+    more: 'Више',
   },
   input: {
     clear: 'Очисти {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'АМ',
     pm: 'ПМ',
     title: 'Изаберите време',
+    hour: 'Сат',
+    minute: 'Минути',
+    second: 'Секунде',
+    notAllowed: 'Вредност није дозвољена',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Карактер {0} није дозвољен',
     notEmpty: 'Изаберите бар једну вредност',
     pattern: 'Неважећи формат',
+  },
+  command: {
+    search: 'Унесите команду или претражите...',
+  },
+  hotkey: {
+    then: 'затим',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Стрелица нагоре',
+    downArrow: 'Стрелица надоле',
+    leftArrow: 'Стрелица налево',
+    rightArrow: 'Стрелица надесно',
+    backspace: 'Backspace',
+    space: 'Размак',
+    plus: 'плус',
+    shortcut: 'Пречица на тастатури: {0}',
+    or: 'или',
+  },
+  video: {
+    play: 'Пусти',
+    pause: 'Паузирај',
+    seek: 'Тражи',
+    volume: 'Јачина звука',
+    showVolume: 'Прикажи контролу јачине звука',
+    mute: 'Искључи звук',
+    unmute: 'Укључи звук',
+    enterFullscreen: 'Цео екран',
+    exitFullscreen: 'Изађи из целог екрана',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Изаберите боју са екрана',
+      hueSlider: 'Нијанса',
+      alphaSlider: 'Алфа',
+      redInput: 'Црвена',
+      greenInput: 'Зелена',
+      blueInput: 'Плава',
+      alphaInput: 'Алфа',
+      hueInput: 'Нијанса',
+      saturationInput: 'Засићеност',
+      lightnessInput: 'Осветљеност',
+      hexInput: 'ХЕКС вредност',
+      hexaInput: 'ХЕКС са алфа вредношћу',
+      changeFormat: 'Промени формат боје',
+    },
   },
 }

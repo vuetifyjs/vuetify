@@ -6,7 +6,7 @@
     theme="light"
   >
     <div class="text-blue-darken-3 text-start ms-4">
-      <div class="text-caption">
+      <div class="text-body-small">
         You are viewing the documentation for <strong>Vuetify 3</strong>
       </div>
     </div>
@@ -38,9 +38,9 @@
 <script setup>
   const user = useUserStore()
 
-  const showBanner = computed(() => !user.notifications.last.v2banner)
+  const showBanner = computed(() => !user.one.banners.last)
 
   function onClose () {
-    user.notifications.last.v2banner = Date.now()
+    user.one.banners.last = Date.now()
   }
 </script>

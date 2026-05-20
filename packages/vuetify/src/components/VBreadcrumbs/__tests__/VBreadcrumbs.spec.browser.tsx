@@ -65,7 +65,7 @@ describe('VBreadcrumbs', () => {
 
   it('should apply active color', async () => {
     render(() => (
-      <VBreadcrumbs active-color="primary">
+      <VBreadcrumbs activeColor="primary">
         <VBreadcrumbsItem active title="hello"></VBreadcrumbsItem>
         <VBreadcrumbsItem title="world" to="/world"></VBreadcrumbsItem>
       </VBreadcrumbs>
@@ -76,6 +76,7 @@ describe('VBreadcrumbs', () => {
     const items = screen.getAllByCSS('.v-breadcrumbs-item')
     await expect.element(items[0]).toHaveClass('text-primary')
   })
+
   it('should disable last item by default if using items prop', async () => {
     render(() => (
       <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>

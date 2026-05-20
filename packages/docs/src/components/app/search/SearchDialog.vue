@@ -3,7 +3,8 @@
   <v-dialog
     v-model="model"
     activator="parent"
-    content-class="overflow-visible align-self-start mt-16"
+    content-class="overflow-visible mt-16"
+    location="top center"
     max-height="900"
     width="600"
     scrollable
@@ -21,7 +22,7 @@
       >
         <template #append-inner>
           <AppBtn size="small" border>
-            <span class="text-caption text-disabled">{{ t('esc') }}</span>
+            <span class="text-body-small text-disabled">{{ t('esc') }}</span>
           </AppBtn>
         </template>
       </AppTextField>
@@ -76,7 +77,7 @@
           v-else
           :search-client="searchClient"
           class="flex-grow-1"
-          index-name="vuetifyjs-v3"
+          index-name="vuetifyjs-v4"
           @state-change="searchFunction"
         >
           <ais-configure
@@ -95,9 +96,15 @@
         </ais-instant-search>
       </v-card-text>
 
-      <v-divider class="my-4" />
+      <v-divider class="mt-4" />
 
-      <AisPoweredBy class="ms-auto me-4 mb-2" />
+      <div class="d-flex mx-4 my-2 align-center">
+        <AppLink class="text-body-small" href="https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/#how-to-use">
+          Advanced search
+        </AppLink>
+        <v-spacer />
+        <AisPoweredBy class="pt-2" />
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -131,11 +138,11 @@
     if (!Array.isArray(value)) {
       return []
     }
-    return value
+    return value.filter(Boolean)
   }
 
   const searches = shallowRef(getLocalStorage('searches'))
-  const favorites = shallowRef(getLocalStorage('favorite'))
+  const favorites = shallowRef(getLocalStorage('favorites'))
 
   const locale = 'en'
 
@@ -229,7 +236,9 @@
     source.splice(index, 1)
 
     const target = to.value.slice(0, 6)
-    target.unshift(item)
+    if (item) {
+      target.unshift(item)
+    }
 
     from.value = source
     to.value = target

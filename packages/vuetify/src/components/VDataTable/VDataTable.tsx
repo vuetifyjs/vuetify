@@ -10,23 +10,29 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
+import {
+  createPagination,
+  makeDataTablePaginateProps,
+  providePagination,
+  usePaginatedGroups,
+  usePaginatedItems,
+} from './composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
-import { computed, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, toRef, toRefs, toValue } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, UnwrapRef } from 'vue'
-import type { Group } from './composables/group'
+import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -38,7 +44,10 @@ export type VDataTableSlotProps<T> = {
   sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
   pageCount: number
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage']
+  setItemsPerPage: (value: number) => void
+  prevPage: () => void
+  nextPage: () => void
+  setPage: (value: number) => void
   someSelected: boolean
   allSelected: boolean
   isSelected: ReturnType<typeof provideSelection>['isSelected']
@@ -51,7 +60,7 @@ export type VDataTableSlotProps<T> = {
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly T[]
   internalItems: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>>)[]
+  groupedItems: readonly (DataTableItem<T> | Group<DataTableItem<T>> | GroupSummary<DataTableItem<T>>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -85,7 +94,7 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
-  ...makeVDataTableHeadersProps(),
+  ...omit(makeVDataTableHeadersProps(), ['multiSort', 'initialSortOrder']),
   ...makeVTableProps(),
 }, 'DataTable')
 
@@ -123,12 +132,13 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
     'update:currentItems': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
 
@@ -147,24 +157,54 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(() => props.search)
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
-    const itemsLength = computed(() => flatItems.value.length)
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
 
-    const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
-    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
+    const pageBy = computed(() => {
+      if (props.pageBy === 'auto') {
+        return props.groupBy.length ? 'group' : 'item'
+      }
+      return props.pageBy
+    })
+
+    const {
+      pageCount,
+      setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
+      paginatedItems,
+    } = usePaginatedGroups({
+      pageBy,
+      sortedItems,
+      paginate: items => {
+        const itemsLength = computed(() => toValue(items).length)
+        const {
+          startIndex, stopIndex, pageCount, setItemsPerPage, prevPage, nextPage, setPage,
+        } = providePagination({ page, itemsPerPage, itemsLength })
+        const { paginatedItems } = usePaginatedItems({ items, startIndex, stopIndex, itemsPerPage })
+        return { paginatedItems, pageCount, setItemsPerPage, prevPage, nextPage, setPage }
+      },
+      group: items => useGroupedItems(items, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey),
+    })
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
@@ -203,6 +243,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       pageCount: pageCount.value,
       toggleSort,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
       isSelected,
@@ -222,7 +265,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -249,6 +292,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                   <thead key="thead">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>
@@ -262,6 +306,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ paginatedItems.value }
+                        getMatches={ getMatches }
                         v-slots={ slots }
                       />
                     )}

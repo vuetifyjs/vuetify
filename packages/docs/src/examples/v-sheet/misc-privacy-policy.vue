@@ -5,7 +5,7 @@
     color="#141518"
     max-width="400"
   >
-    <h4 class="text-h5 font-weight-bold mb-4">Your Privacy</h4>
+    <h4 class="text-headline-small font-weight-bold mt-0 mb-4">Your Privacy</h4>
 
     <p class="mb-8">
       This business determines the use of personal data collected on our media properties and across the internet. We may collect data that you submit to us directly or data that we collect automatically including from cookies (such as device information or IP address).
@@ -37,3 +37,8 @@
     </v-btn>
   </v-sheet>
 </template>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1646-137533&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

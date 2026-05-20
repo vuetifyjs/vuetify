@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'から',
   },
+  monthPicker: {
+    title: '月を選択',
+    itemsSelected: '{0} 選択済',
+    header: '月を入力',
+    range: {
+      title: '月を入力',
+    },
+    ariaLabel: {
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectYear: '年を選択',
+      currentMonth: '今月、{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} 選択済',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: '日付を入力',
     input: {
       placeholder: '日付を入力',
+    },
+    ariaLabel: {
+      previousMonth: '前の月',
+      nextMonth: '次の月',
+      selectYear: '年を選択',
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectMonth: '月を選択',
+      selectDate: '{0}',
+      currentDate: '今日、{0}',
     },
   },
   noDataText: 'データはありません。',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'さらに{0}',
     today: '今日',
+  },
+  heatmap: {
+    less: '少ない',
+    more: '多い',
   },
   input: {
     clear: 'クリア {0}',
@@ -78,6 +106,10 @@ export default {
     am: '午前',
     pm: '午後',
     title: '時間を選択',
+    hour: '時',
+    minute: '分',
+    second: '秒',
+    notAllowed: '値は許可されていません',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: '{0}という文字は使用できません',
     notEmpty: '少なくとも1つの値を選んでください',
     pattern: '無効な形式です',
+  },
+  command: {
+    search: 'コマンドを入力するか検索...',
+  },
+  hotkey: {
+    then: '次に',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: '上矢印',
+    downArrow: '下矢印',
+    leftArrow: '左矢印',
+    rightArrow: '右矢印',
+    backspace: 'バックスペース',
+    space: 'スペース',
+    plus: 'プラス',
+    shortcut: 'キーボードショートカット: {0}',
+    or: 'または',
+  },
+  video: {
+    play: '再生',
+    pause: '一時停止',
+    seek: 'シーク',
+    volume: '音量',
+    showVolume: '音量コントロールを表示',
+    mute: 'ミュート',
+    unmute: 'ミュート解除',
+    enterFullscreen: '全画面表示',
+    exitFullscreen: '全画面表示を終了',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '画面から色を選択',
+      hueSlider: '色相',
+      alphaSlider: 'アルファ',
+      redInput: '赤',
+      greenInput: '緑',
+      blueInput: '青',
+      alphaInput: 'アルファ',
+      hueInput: '色相',
+      saturationInput: '彩度',
+      lightnessInput: '明度',
+      hexInput: 'HEX値',
+      hexaInput: 'アルファ付きHEX値',
+      changeFormat: 'カラーフォーマットを変更',
+    },
   },
 }

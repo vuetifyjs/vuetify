@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Виберіть місяць',
+    itemsSelected: 'Вибрано {0}',
+    header: 'Введіть місяць',
+    range: {
+      title: 'Введіть місяці',
+    },
+    ariaLabel: {
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectYear: 'Виберіть рік',
+      currentMonth: 'Поточний місяць, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: 'Вибрано {0}',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'Введіть дату',
     input: {
       placeholder: 'Введіть дату',
+    },
+    ariaLabel: {
+      previousMonth: 'Попередній місяць',
+      nextMonth: 'Наступний місяць',
+      selectYear: 'Виберіть рік',
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectMonth: 'Виберіть місяць',
+      selectDate: '{0}',
+      currentDate: 'Сьогодні, {0}',
     },
   },
   noDataText: 'Немає даних для відображення',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: 'Ще {0}',
     today: 'Сьогодні',
+  },
+  heatmap: {
+    less: 'Менше',
+    more: 'Більше',
   },
   input: {
     clear: 'Очистити {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Оберіть час',
+    hour: 'Година',
+    minute: 'Хвилини',
+    second: 'Секунди',
+    notAllowed: 'Значення не дозволено',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'Символ {0} не дозволений',
     notEmpty: 'Будь ласка, виберіть принаймні одне значення',
     pattern: 'Недійсний формат',
+  },
+  command: {
+    search: 'Введіть команду або виконайте пошук...',
+  },
+  hotkey: {
+    then: 'потім',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'Стрілка вгору',
+    downArrow: 'Стрілка вниз',
+    leftArrow: 'Стрілка вліво',
+    rightArrow: 'Стрілка вправо',
+    backspace: 'Backspace',
+    space: 'Пробіл',
+    plus: 'плюс',
+    shortcut: 'Комбінація клавіш: {0}',
+    or: 'або',
+  },
+  video: {
+    play: 'Відтворити',
+    pause: 'Пауза',
+    seek: 'Пошук',
+    volume: 'Гучність',
+    showVolume: 'Показати регулятор гучності',
+    mute: 'Вимкнути звук',
+    unmute: 'Увімкнути звук',
+    enterFullscreen: 'На весь екран',
+    exitFullscreen: 'Вийти з повноекранного режиму',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вибрати колір з екрана',
+      hueSlider: 'Відтінок',
+      alphaSlider: 'Прозорість',
+      redInput: 'Червоний',
+      greenInput: 'Зелений',
+      blueInput: 'Синій',
+      alphaInput: 'Прозорість',
+      hueInput: 'Відтінок',
+      saturationInput: 'Насиченість',
+      lightnessInput: 'Яскравість',
+      hexInput: 'HEX значення',
+      hexaInput: 'HEX зі значенням прозорості',
+      changeFormat: 'Змінити формат кольору',
+    },
   },
 }

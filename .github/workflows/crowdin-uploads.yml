@@ -17,7 +17,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: v3
+  CROWDIN_BRANCH: v4
 
 jobs:
   upload-to-crowdin:
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Upload
-        uses: crowdin/github-action@v2.7.0
+        uses: crowdin/github-action@v2.7.1
         with:
           config: crowdin.yml
           crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}

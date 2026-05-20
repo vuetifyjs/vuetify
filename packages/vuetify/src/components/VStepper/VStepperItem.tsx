@@ -11,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 import { genOverlays } from '@/composables/variant'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
@@ -80,7 +80,7 @@ export const makeVStepperItemProps = propsFactory({
 export const VStepperItem = genericComponent<VStepperItemSlots>()({
   name: 'VStepperItem',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVStepperItemProps(),
 
@@ -144,7 +144,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
           disabled={ !props.editable }
           type="button"
           v-ripple={[
-            props.ripple && props.editable,
+            props.editable && props.ripple,
             null,
             null,
           ]}

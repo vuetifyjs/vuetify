@@ -8,7 +8,7 @@ import { VTable } from '@/components/VTable'
 
 // Composables
 import { provideExpanded } from './composables/expand'
-import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -19,7 +19,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef, toRefs } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -65,11 +65,12 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:opened': (value: string[]) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
-    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
+    const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
     const itemsLength = computed(() => parseInt(props.itemsLength, 10))
@@ -82,13 +83,19 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     const { items } = useDataTableItems(props, columns)
 
-    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const {
+      opened: openedGroups,
+      isGroupOpen,
+      toggleGroup,
+      extractRows,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
+    useOpenAllGroups(openedGroups, openAll, items, groupBy, groupKey)
 
-    const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
+    const { pageCount, setItemsPerPage, prevPage, nextPage, setPage } = providePagination({ page, itemsPerPage, itemsLength })
 
-    const { flatItems } = useGroupedItems(items, groupBy, opened)
+    const { flatItems } = useGroupedItems(items, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey)
 
     const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
       allItems: items,
@@ -128,6 +135,9 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
       pageCount: pageCount.value,
       toggleSort,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
       isSelected,
@@ -147,7 +157,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
 
     useRender(() => {
       const dataTableFooterProps = VDataTableFooter.filterProps(props)
-      const dataTableHeadersProps = VDataTableHeaders.filterProps(props)
+      const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
 
@@ -173,6 +183,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
                   <thead key="thead" class="v-data-table__thead" role="rowgroup">
                     <VDataTableHeaders
                       { ...dataTableHeadersProps }
+                      multiSort={ !!props.multiSort }
                       v-slots={ slots }
                     />
                   </thead>

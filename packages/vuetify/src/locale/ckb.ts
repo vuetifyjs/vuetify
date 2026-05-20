@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'بۆ',
   },
+  monthPicker: {
+    title: 'مانگ هەڵبژێرە',
+    itemsSelected: '{0} هەڵبژێردراوە',
+    header: 'مانگ بنووسە',
+    range: {
+      title: 'مانگەکان بنووسە',
+    },
+    ariaLabel: {
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      currentMonth: 'مانگی ئێستا، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
     range: {
@@ -45,6 +59,16 @@ export default {
     header: 'بەروار بنووسە',
     input: {
       placeholder: 'بەروار بنووسە',
+    },
+    ariaLabel: {
+      previousMonth: 'مانگی پێشوو',
+      nextMonth: 'مانگی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectMonth: 'مانگ هەڵبژێرە',
+      selectDate: '{0}',
+      currentDate: 'ئەمڕو، {0}',
     },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
@@ -58,6 +82,10 @@ export default {
   calendar: {
     moreEvents: '{0} زیاتر',
     today: 'ئەمڕو',
+  },
+  heatmap: {
+    less: 'کەمتر',
+    more: 'زیاتر',
   },
   input: {
     clear: 'سڕینەوە {0}',
@@ -78,6 +106,10 @@ export default {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
     title: 'کات دیاریبکە',
+    hour: 'کاتژمێر',
+    minute: 'خولەک',
+    second: 'چرکە',
+    notAllowed: 'بەهاکە ڕێگەپێدراو نییە',
   },
   pagination: {
     ariaLabel: {
@@ -116,5 +148,55 @@ export default {
     exclude: 'پیتەکەی {0} ڕێپێدراو نیە',
     notEmpty: 'تکایە بەلایەنی کەم یەک هەڵبژێرە',
     pattern: 'فۆرماتەکە نادروستە',
+  },
+  command: {
+    search: 'فرمان بنووسە یان بگەڕە...',
+  },
+  hotkey: {
+    then: 'پاشان',
+    ctrl: 'Ctrl',
+    command: 'Command',
+    shift: 'Shift',
+    alt: 'Alt',
+    option: 'Option',
+    enter: 'Enter',
+    escape: 'Escape',
+    upArrow: 'تیری سەرەوە',
+    downArrow: 'تیری خوارەوە',
+    leftArrow: 'تیری چەپ',
+    rightArrow: 'تیری ڕاست',
+    backspace: 'Backspace',
+    space: 'بۆشایی',
+    plus: 'زیادکردن',
+    shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+    or: 'یان',
+  },
+  video: {
+    play: 'لێدان',
+    pause: 'ڕاگرتن',
+    seek: 'گەڕان',
+    volume: 'دەنگ',
+    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
+    mute: 'بێدەنگکردن',
+    unmute: 'لە بێدەنگی دەرهێنان',
+    enterFullscreen: 'پڕ بە شاشە',
+    exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ڕەنگ لەسەر شاشە هەڵبژێرە',
+      hueSlider: 'ڕەنگ',
+      alphaSlider: 'ئەلفا',
+      redInput: 'سوور',
+      greenInput: 'سەوز',
+      blueInput: 'شین',
+      alphaInput: 'ئەلفا',
+      hueInput: 'ڕەنگ',
+      saturationInput: 'تێربوون',
+      lightnessInput: 'کاڵی',
+      hexInput: 'بەهای HEX',
+      hexaInput: 'HEX لەگەڵ بەهای ئەلفا',
+      changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
+    },
   },
 }

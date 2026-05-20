@@ -67,9 +67,17 @@ You can set **min** and **max** values of sliders.
 
 #### Vertical sliders
 
-You can use the **vertical** prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.
+You can use the **vertical** prop to switch sliders to a vertical orientation.
+If you need to change the height of a vertical slider, be aware that `v-range-slider` is not a simple HTML element. This means plain CSS on the component will not affect the correct internal element. Instead, you must use a **deep selector**.
 
 <ExamplesExample file="v-range-slider/prop-vertical" />
+
+::: tip
+
+The `:deep()` pseudo-class allows scoped styles to affect child components, which is why it works for resizing the slider.
+See the official Vue documentation for more details: [Scoped CSS and :deep selectors](https://vuejs.org/api/sfc-css-features.html#scoped-css)
+
+:::
 
 ### Slots
 

@@ -15,7 +15,19 @@ import type {
   ThemeInstance,
 } from './framework'
 
+interface ViewTransitionTypesInit {
+  update: () => void | Promise<void>
+  types: string[]
+}
+
 declare global {
+  interface ViewTransition {
+    finished: Promise<void>
+  }
+  interface Document {
+    startViewTransition (init: ViewTransitionTypesInit): ViewTransition
+  }
+
   namespace JSX {
     interface ElementChildrenAttribute {
       $children: {}
@@ -44,5 +56,8 @@ declare module 'vue' {
   }
   export interface GlobalComponents {
     // @generate-components
+  }
+  export interface GlobalDirectives {
+    // @generate-directives
   }
 }

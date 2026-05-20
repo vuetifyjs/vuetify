@@ -10,7 +10,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, toRef } from 'vue'
@@ -59,7 +59,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   props: makeVExpansionPanelTitleProps(),
 

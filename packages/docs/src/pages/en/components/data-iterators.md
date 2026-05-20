@@ -6,7 +6,7 @@ meta:
   keywords: data iterators, vuetify data iterator component, vue data iterator component
 related:
   - /components/data-tables/basics/
-  - /components/simple-tables/
+  - /components/tables/
   - /components/toolbars/
 features:
   github: /components/VDataIterator/
@@ -19,8 +19,6 @@ features:
 The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
 <PageFeatures />
-
-<DocIntroduced version="3.4.0" />
 
 ## Usage
 
@@ -75,6 +73,14 @@ The following code snippet is an example of a basic `v-data-iterator` component:
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-data-iterator` component.
+
+### Props
+
+#### Grouping
+
+Use the **group-by** prop to group items, and **v-model:opened** to control which groups are open. The **group-key** prop allows customizing group IDs, and **open-all** opens all groups by default.
+
+<ExamplesExample file="v-data-iterator/prop-grouping" />
 
 ### Slots
 

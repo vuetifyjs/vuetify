@@ -33,6 +33,7 @@
           <Backmatter v-if="hasBackmatter" :key="route.name" />
         </v-container>
       </slot>
+      <SponsorSnackbarPopup />
     </v-main>
   </v-app>
 </template>
