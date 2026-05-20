@@ -76,15 +76,15 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component                                            | Description                                                | Min Version                                                |
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
-| [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
-| [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
-| [v-pull-to-refresh](/components/pull-to-refresh/)    | A component to update content by screen swipes             | [v3.6.0](/getting-started/release-notes/?version=v3.6.0)   |
-| [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
+| [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
+| [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-highlight](/components/highlights/)               | Renders text with highlighted search matches               | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-progress](/components/progress/)                  | A unified progress indicator component with a11y defaults  | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
