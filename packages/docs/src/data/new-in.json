@@ -139,6 +139,7 @@
       "hideTitle": "3.10.0",
       "landscape": "3.11.0",
       "landscapeHeaderWidth": "3.11.0",
+      "noAutoNavigation": "4.1.0",
       "noMonthPicker": "3.11.0"
     },
     "slots": {

@@ -11,6 +11,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date/date'
 import { useGridSelection } from '@/composables/gridSelection'
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
@@ -63,6 +64,8 @@ export const makeVDatePickerMonthProps = propsFactory({
     type: [Array, Function, Object, String] as PropType<DatePickerEventColors>,
     default: () => null,
   },
+  noAutoNavigation: Boolean,
+  previewValue: null as any as PropType<unknown>,
   ...omit(makeCalendarProps(), ['displayValue']),
 }, 'VDatePickerMonth')
 
@@ -81,6 +84,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'update:modelValue': (date: unknown) => true,
     'update:month': (date: number) => true,
     'update:year': (date: number) => true,
+    'update:previewValue': (_value: unknown) => true,
+    'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -101,6 +106,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       return adapter.isBefore(a, b) ? -1 : 1
     }
 
+    const previewValue = useProxiedModel(props, 'previewValue')
+
     const range = useRangePicker({
       multiple: computed(() => {
         if (props.multiple === 'range') return 'range'
@@ -109,6 +116,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       model,
       compare: compareDays,
       normalizeEnd: (value: unknown) => adapter.endOfDay(value),
+      previewValue,
     })
 
     const selectionColor = toRef(() => props.color || 'surface-variant')
@@ -228,6 +236,12 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
           candidate = adapter.addDays(candidate, step)
         }
         targetIsoDate = adapter.toISO(candidate)
+      }
+
+      if (props.noAutoNavigation) {
+        emit('boundary-navigate', { direction, targetIsoDate })
+
+        return true
       }
 
       const targetDate = adapter.date(targetIsoDate)
@@ -451,7 +465,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       </div>
     ))
 
-    return { focusGrid }
+    return { focusGrid, focusItem }
   },
 })
 
