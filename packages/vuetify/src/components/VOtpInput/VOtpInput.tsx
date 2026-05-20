@@ -131,9 +131,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
 
     function applySelection () {
       const input = inputRef.value
-      const sel = otp.selection.value
-      if (!input || !sel) return
-      input.setSelectionRange(sel.start, sel.end, sel.direction)
+      const selection = otp.selection.value
+      if (!input || !selection) return
+      input.setSelectionRange(selection.start, selection.end, selection.direction)
     }
 
     function syncDOM () {
@@ -154,8 +154,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         selectionStart: input.selectionStart,
         selectionEnd: input.selectionEnd,
         selectionDirection: input.selectionDirection,
-        // Slot count (codepoints), not `input.maxLength` (code units) — see
-        // useOtpInput.ts syncSelection.
+        // Slot count, not `input.maxLength` (code units).
         maxLength: length.value,
       })
       if (!result) return
@@ -169,15 +168,12 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const target = e.target as HTMLInputElement
       const composing = ev.isComposing || otp.isComposing.value
 
-      // For real CJK composition, skip until compositionend so the in-progress
-      // characters render via the overlay and don't leak into the model.
+      // CJK composition renders via the overlay until compositionend.
       if (composing && otp.isImeText(target.value)) return
 
-      // For non-CJK composition (Linux Compose key, dead keys, Samsung predictive,
-      // Chrome OTP autofill): filter the value into the model now, but do NOT end
-      // composition here. The browser keeps composition open until compositionend;
-      // ending early causes onSelectionChange to read the still-composing DOM and
-      // advance selection past the model length.
+      // Non-CJK composition (dead keys, Samsung predictive, Chrome OTP autofill)
+      // commits into the model now; don't end composition early or selection
+      // will advance past the model length on the next selectionchange.
       const next = otp.setValue(target.value)
       if (target.value !== next) target.value = next
     }
@@ -211,8 +207,8 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
         // Extend with our own anchor so the originally-selected slot stays included.
-        const dir = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
-        if (otp.extendSelection(dir)) {
+        const direction = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
+        if (otp.extendSelection(direction)) {
           e.preventDefault()
           syncDOM()
         }
@@ -236,9 +232,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         e.preventDefault()
         const input = inputRef.value
         if (!input) return
-        const sel = otp.selection.value
-        const start = sel?.start ?? 0
-        const end = sel?.end ?? input.value.length
+        const selection = otp.selection.value
+        const start = selection?.start ?? 0
+        const end = selection?.end ?? input.value.length
         otp.deleteRange(start, end)
         syncDOM()
         return
@@ -265,10 +261,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       const input = inputRef.value
       if (!input) return
       const text = e.clipboardData?.getData('text/plain').trim() ?? ''
-      const sel = otp.selection.value
+      const selection = otp.selection.value
       otp.insert(text, {
-        start: sel?.start ?? 0,
-        end: sel?.end ?? input.value.length,
+        start: selection?.start ?? 0,
+        end: selection?.end ?? input.value.length,
       })
       syncDOM()
     }

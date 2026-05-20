@@ -100,7 +100,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   const composition = shallowRef('')
   const isComposing = shallowRef(false)
   let prevSelection: OtpSelection | null = null
-  // Anchor/focus (grapheme space) for Shift+Arrow extension.
+  // Shift+Arrow anchor/focus tracked in grapheme space.
   let anchorG: number | null = null
   let focusG: number | null = null
 
@@ -117,11 +117,9 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     effectivePattern.value === OtpInputPatterns.numeric ? 'numeric' as const : 'text' as const
   )
 
-  // Selection is kept in code units to line up with `setSelectionRange` and
-  // `selectionStart`, but slot count, length, and boundary checks all work in
-  // grapheme-cluster space so each rendered glyph occupies one slot. This
-  // handles emoji (surrogate pairs), flag sequences (regional indicator pairs),
-  // ZWJ sequences (👨‍👩‍👧), skin-tone modifiers, and keycap sequences uniformly.
+  // Selection is stored in code units (for `setSelectionRange`), but every slot
+  // boundary works in grapheme space so emoji, ZWJ sequences and skin-tone
+  // modifiers each occupy one slot.
   function graphemes (s: string): string[] {
     return Array.from(graphemeSegmenter.segment(s), seg => seg.segment)
   }
@@ -233,10 +231,10 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
 
   function bulkDelete (isBackward: boolean): string {
     const current = value.value
-    const sel = selection.value
+    const currentSelection = selection.value
     const next = isBackward
-      ? current.slice(sel?.end ?? current.length)
-      : current.slice(0, sel?.start ?? 0)
+      ? current.slice(currentSelection?.end ?? current.length)
+      : current.slice(0, currentSelection?.start ?? 0)
     value.value = next
 
     if (next.length === 0) setSelection(0, 0, 'none')
@@ -259,9 +257,9 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     const next: OtpSelection = { start, end, direction }
     selection.value = next
     prevSelection = next
-    const g = codeUnitsToGraphemeIndex(value.value, start)
-    anchorG = g
-    focusG = g
+    const startG = codeUnitsToGraphemeIndex(value.value, start)
+    anchorG = startG
+    focusG = startG
   }
 
   function clearSelection (): void {
@@ -271,18 +269,18 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   }
 
   function selectAtEnd (): OtpSelection {
-    const value_ = value.value
-    const graphemeCount = graphemes(value_).length
+    const current = value.value
+    const graphemeCount = graphemes(current).length
     let start: number
     let end: number
     if (graphemeCount >= length.value) {
-      // Full: range over the last slot (so it renders as active).
-      start = graphemeIndexToCodeUnits(value_, length.value - 1)
-      end = value_.length
+      // Full: range over the last slot so it renders as active.
+      start = graphemeIndexToCodeUnits(current, length.value - 1)
+      end = current.length
     } else {
       // Partial: single caret at the end of the typed content.
-      start = value_.length
-      end = value_.length
+      start = current.length
+      end = current.length
     }
     const next: OtpSelection = { start, end, direction: 'forward' }
     selection.value = next
@@ -293,15 +291,13 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   }
 
   function selectSlot (index: number): OtpSelection {
-    const value_ = value.value
-    const graphemeCount = graphemes(value_).length
+    const current = value.value
+    const graphemeCount = graphemes(current).length
     const clamped = Math.min(index, graphemeCount)
-    // Caller passes a slot/grapheme index; convert to code-unit positions so
-    // the selection range covers the right glyph (not a slice mid-grapheme).
-    const start = graphemeIndexToCodeUnits(value_, clamped)
+    const start = graphemeIndexToCodeUnits(current, clamped)
     const end = clamped < graphemeCount
-      ? graphemeIndexToCodeUnits(value_, clamped + 1)
-      : value_.length
+      ? graphemeIndexToCodeUnits(current, clamped + 1)
+      : current.length
     const next: OtpSelection = { start, end, direction: 'forward' }
     selection.value = next
     prevSelection = next
@@ -310,51 +306,48 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     return next
   }
 
-  function extendSelection (dir: -1 | 1): OtpSelection | null {
-    const value_ = value.value
-    const valueG = graphemes(value_).length
+  function extendSelection (direction: -1 | 1): OtpSelection | null {
+    const current = value.value
+    const valueG = graphemes(current).length
     if (valueG === 0) return null
 
     const maxFocus = Math.min(length.value - 1, valueG)
 
     // Fallback when Shift+Arrow fires before anchor/focus were tracked.
     if (anchorG === null || focusG === null) {
-      const sel = selection.value
-      if (!sel) return null
-      const sStartG = codeUnitsToGraphemeIndex(value_, sel.start)
-      const sEndG = codeUnitsToGraphemeIndex(value_, sel.end)
-      if (sEndG - sStartG <= 1) {
-        anchorG = sStartG
-        focusG = sStartG
-      } else if (sel.direction === 'backward') {
-        anchorG = sEndG - 1
-        focusG = sStartG
+      const currentSelection = selection.value
+      if (!currentSelection) return null
+      const selectionStartG = codeUnitsToGraphemeIndex(current, currentSelection.start)
+      const selectionEndG = codeUnitsToGraphemeIndex(current, currentSelection.end)
+      if (selectionEndG - selectionStartG <= 1) {
+        anchorG = selectionStartG
+        focusG = selectionStartG
+      } else if (currentSelection.direction === 'backward') {
+        anchorG = selectionEndG - 1
+        focusG = selectionStartG
       } else {
-        anchorG = sStartG
-        focusG = sEndG - 1
+        anchorG = selectionStartG
+        focusG = selectionEndG - 1
       }
     }
 
-    const newFocus = Math.max(0, Math.min(maxFocus, focusG + dir))
+    const newFocus = Math.max(0, Math.min(maxFocus, focusG + direction))
     focusG = newFocus
 
     const minG = Math.min(anchorG, newFocus)
     const maxG = Math.max(anchorG, newFocus)
-    const start = graphemeIndexToCodeUnits(value_, minG)
-    const end = (maxG + 1) >= valueG ? value_.length : graphemeIndexToCodeUnits(value_, maxG + 1)
-    const direction: 'forward' | 'backward' = newFocus < anchorG ? 'backward' : 'forward'
+    const start = graphemeIndexToCodeUnits(current, minG)
+    const end = (maxG + 1) >= valueG ? current.length : graphemeIndexToCodeUnits(current, maxG + 1)
+    const newDirection: 'forward' | 'backward' = newFocus < anchorG ? 'backward' : 'forward'
 
-    const next: OtpSelection = { start, end, direction }
+    const next: OtpSelection = { start, end, direction: newDirection }
     selection.value = next
     prevSelection = next
     return next
   }
 
-  // Selection synthesis: forces the rendered selection to always cover at least
-  // one slot, so a slot is "active" when a caret would otherwise be between two.
-  // All boundary checks run in grapheme space (= slot space) so each rendered
-  // glyph is one slot; the final selection is returned in code units to match
-  // `setSelectionRange`.
+  // Force the rendered selection to always cover at least one slot, so a slot
+  // stays "active" when a caret would otherwise be between two.
   function syncSelection (raw: OtpSelectionInput): OtpSelection | null {
     if (isComposing.value) return selection.value
 
@@ -394,7 +387,10 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
             const prevEndG = codeUnitsToGraphemeIndex(inputValue, prevSelection.end)
             direction = startG < prevEndG ? 'backward' : 'forward'
             const wasPreviouslyInserting = prevStartG === prevEndG && prevStartG < maxLength
-            if (direction === 'backward' && !wasPreviouslyInserting) {
+            // Multi-slot collapse: caret landed at an edge of the prior range,
+            // user didn't navigate between slots, so don't shift the slot back.
+            const wasMultiSlot = prevEndG - prevStartG > 1
+            if (direction === 'backward' && !wasPreviouslyInserting && !wasMultiSlot) {
               offset = -1
             }
           }
