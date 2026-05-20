@@ -149,6 +149,7 @@
       "checkboxes",
       "color-inputs",
       "combobox",
+      "date-inputs",
       "file-inputs",
       "forms",
       "inputs",
@@ -273,10 +274,6 @@
       },
       {
         "title": "command-palettes",
-        "subfolder": "components"
-      },
-      {
-        "title": "date-inputs",
         "subfolder": "components"
       },
       {
