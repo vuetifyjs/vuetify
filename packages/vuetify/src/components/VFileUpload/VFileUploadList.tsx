@@ -6,8 +6,8 @@ import { makeVListProps, VList } from '@/components/VList/VList'
 
 // Utilities
 import { inject } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
 import { getFileKey } from './fileKey'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

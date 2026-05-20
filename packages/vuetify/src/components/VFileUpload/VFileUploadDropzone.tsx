@@ -17,8 +17,8 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, ref, shallowRef, toRef } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { getFileKey } from './fileKey'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'

@@ -11,34 +11,12 @@ related:
 features:
   report: true
   label: 'C: VFileUpload'
-  github: '/labs/VFileUpload/'
+  github: '/components/VFileUpload/'
 ---
 
 # File upload
 
 <PageFeatures />
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import {
-  VFileUpload,
-  VFileUploadDropzone,
-  VFileUploadItem,
-  VFileUploadList,
-} from 'vuetify/labs/VFileUpload'
-
-export default createVuetify({
-  components: {
-    VFileUpload,
-    VFileUploadDropzone,
-    VFileUploadItem,
-    VFileUploadList,
-  },
-})
-```
 
 ## Usage
 

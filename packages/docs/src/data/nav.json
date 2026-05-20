@@ -152,6 +152,7 @@
       "combobox",
       "date-inputs",
       "file-inputs",
+      "file-upload",
       "forms",
       "inputs",
       "number-inputs",
@@ -279,10 +280,6 @@
       },
       {
         "title": "date-range-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "file-upload",
         "subfolder": "components"
       },
       {
