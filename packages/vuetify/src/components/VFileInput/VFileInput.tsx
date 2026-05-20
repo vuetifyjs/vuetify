@@ -184,10 +184,20 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!inputRef.value || !hasFilesOrFolders(e)) return
+      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
 
       const allDroppedFiles = await handleDrop(e)
       selectAccepted(allDroppedFiles)
+    }
+
+    async function onPaste (e: ClipboardEvent) {
+      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
+      e.preventDefault()
+
+      const files = await handleDrop(e)
+      if (files.length) {
+        selectAccepted(files)
+      }
     }
 
     function onFileSelection (e: Event) {
@@ -319,6 +329,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        onPaste={ onPaste }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

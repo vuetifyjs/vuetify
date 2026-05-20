@@ -115,7 +115,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
-    const { handleDrop } = useFileDrop()
+    const { handleDrop, hasFilesOrFolders } = useFileDrop()
     const context = inject(VFileUploadKey, null)
     const vSheetRef = ref<VSheet>()
     const isDragging = shallowRef(false)
@@ -137,7 +137,10 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
+
       isDragging.value = false
+
+      if (props.disabled || !hasFilesOrFolders(e)) return
 
       const files = await handleDrop(e)
       if (context) {
@@ -155,11 +158,32 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       }
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClickBrowse()
+      }
+    }
+
     function onClickRemove (index: number) {
       if (context) {
         context.onClickRemove(index)
       } else {
         emit('click:remove', index)
+      }
+    }
+
+    async function onPaste (e: ClipboardEvent) {
+      if (props.disabled || !hasFilesOrFolders(e)) return
+
+      e.preventDefault()
+      const files = await handleDrop(e)
+      if (!files.length) return
+
+      if (context) {
+        context.onDrop(files)
+      } else {
+        emit('drop', files)
       }
     }
 
@@ -178,6 +202,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       return (
         <VSheet
           ref={ vSheetRef }
+          tabindex={ disabled ? -1 : 0 }
           { ...sheetProps }
           class={[
             'v-file-upload-dropzone',
@@ -196,7 +221,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
           onDragleave={ onDragleave }
           onDragover={ onDragover }
           onDrop={ onDrop }
+          onPaste={ onPaste }
           onClick={ !hasBrowse && !(isInset && hasFiles) ? onClickBrowse : undefined }
+          onKeydown={ onKeydown }
         >
           { slots.default?.({
             isDragging: isDragging.value,
