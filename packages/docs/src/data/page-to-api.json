@@ -127,7 +127,7 @@
   "components/no-ssr": ["VNoSsr"],
   "components/month-pickers": ["VMonthPicker"],
   "components/number-inputs": ["VNumberInput"],
-  "components/otp-input": ["VOtpInput"],
+  "components/otp-input": ["VOtpInput", "VOtpField", "VOtpGroup", "VOtpSeparator"],
   "components/overflow-btns": ["VOverflowBtn"],
   "components/overlays": ["VOverlay"],
   "components/paginations": ["VPagination"],
