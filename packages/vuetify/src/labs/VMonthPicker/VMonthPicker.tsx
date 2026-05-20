@@ -7,7 +7,7 @@ import { VBtn } from '@/components/VBtn'
 import { VDatePickerHeader } from '@/components/VDatePicker/VDatePickerHeader'
 import { VDatePickerYears } from '@/components/VDatePicker/VDatePickerYears'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useMonthPicker } from './month-picker'

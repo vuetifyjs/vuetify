@@ -5,7 +5,7 @@ import './VDateRangePicker.sass'
 import { VBtn } from '@/components/VBtn'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
 import { VSpacer } from '@/components/VGrid'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'

@@ -9,7 +9,7 @@ import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMont
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useCalendarRange } from '@/composables/calendar'
@@ -28,7 +28,7 @@ import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
-import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { VPickerSlots } from '@/components/VPicker/VPicker'
 import type { GenericProps } from '@/util'
 
 // Types
