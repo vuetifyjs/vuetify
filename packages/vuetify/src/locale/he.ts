@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'עד',
   },
+  monthPicker: {
+    title: 'בחר חודש',
+    itemsSelected: '{0} נבחר',
+    header: 'הזן חודש',
+    range: {
+      title: 'הזן חודשים',
+    },
+    ariaLabel: {
+      previousYear: 'השנה הקודמת',
+      nextYear: 'השנה הבאה',
+      selectYear: 'בחר שנה',
+      currentMonth: 'החודש הנוכחי, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} נבחר',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} נוספים',
     today: 'היום',
   },
+  heatmap: {
+    less: 'פחות',
+    more: 'יותר',
+  },
   input: {
     clear: 'נקה {0}',
     prependAction: '{0} פעולה מקדימה',
@@ -91,6 +109,7 @@ export default {
     hour: 'שעה',
     minute: 'דקות',
     second: 'שניות',
+    notAllowed: 'הערך אינו מותר',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'התו {0} אינו מותר',
     notEmpty: 'נא לבחור לפחות ערך אחד',
     pattern: 'פורמט לא תקף',
+  },
+  command: {
+    search: 'הקלד פקודה או חפש...',
   },
   hotkey: {
     then: 'אז',

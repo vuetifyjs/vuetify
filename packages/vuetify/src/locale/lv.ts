@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'līdz',
   },
+  monthPicker: {
+    title: 'Izvēlieties mēnesi',
+    itemsSelected: '{0} izvēlēts',
+    header: 'Ievadiet mēnesi',
+    range: {
+      title: 'Ievadiet mēnešus',
+    },
+    ariaLabel: {
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectYear: 'Izvēlieties gadu',
+      currentMonth: 'Šis mēnesis, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'Vēl {0}',
     today: 'Šodien',
   },
+  heatmap: {
+    less: 'Mazāk',
+    more: 'Vairāk',
+  },
   input: {
     clear: 'Notīrīt {0}',
     prependAction: '{0} pievienota darbība sākumā',
@@ -91,6 +109,7 @@ export default {
     hour: 'Stunda',
     minute: 'Minūtes',
     second: 'Sekundes',
+    notAllowed: 'Vērtība nav atļauta',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Rakstzīme {0} nav atļauta',
     notEmpty: 'Lūdzu, izvēlieties vismaz vienu vērtību',
     pattern: 'Nederīgs formāts',
+  },
+  command: {
+    search: 'Ierakstiet komandu vai meklējiet...',
   },
   hotkey: {
     then: 'tad',

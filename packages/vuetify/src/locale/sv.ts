@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'till',
   },
+  monthPicker: {
+    title: 'Välj månad',
+    itemsSelected: '{0} valda',
+    header: 'Välj månad',
+    range: {
+      title: 'Välj månader',
+    },
+    ariaLabel: {
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectYear: 'Välj år',
+      currentMonth: 'Denna månad, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valda',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} fler',
     today: 'Idag',
   },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mer',
+  },
   input: {
     clear: 'Rensa {0}',
     prependAction: '{0} föregående åtgärd',
@@ -91,6 +109,7 @@ export default {
     hour: 'Timme',
     minute: 'Minuter',
     second: 'Sekunder',
+    notAllowed: 'Värdet är inte tillåtet',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Tecknet {0} är inte tillåtet',
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
+  },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
   },
   hotkey: {
     then: 'sedan',

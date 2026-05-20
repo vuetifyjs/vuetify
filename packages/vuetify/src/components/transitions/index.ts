@@ -24,7 +24,8 @@ export const VSlideYReverseTransition = createCssTransition('slide-y-reverse-tra
 
 // Javascript transitions
 export const VExpandTransition = createJavascriptTransition('expand-transition', ExpandTransitionGenerator())
-export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
+export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', 'x'))
+export const VExpandBothTransition = createJavascriptTransition('expand-both-transition', ExpandTransitionGenerator('', 'both'))
 
 export { VDialogTransition } from './dialog-transition'
 

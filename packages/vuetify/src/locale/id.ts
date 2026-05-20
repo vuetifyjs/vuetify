@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'hingga',
   },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} dipilih',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} lagi',
     today: 'Hari ini',
   },
+  heatmap: {
+    less: 'Kurang',
+    more: 'Lebih',
+  },
   input: {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',
@@ -91,6 +109,7 @@ export default {
     hour: 'Jam',
     minute: 'Menit',
     second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Karakter {0} tidak diperbolehkan',
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
+  },
+  command: {
+    search: 'Ketik perintah atau cari...',
   },
   hotkey: {
     then: 'kemudian',

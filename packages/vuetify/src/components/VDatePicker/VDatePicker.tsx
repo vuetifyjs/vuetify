@@ -9,7 +9,7 @@ import { makeVDatePickerMonthsProps, VDatePickerMonths } from './VDatePickerMont
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VFadeTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useCalendarRange } from '@/composables/calendar'
@@ -19,7 +19,7 @@ import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -29,7 +29,7 @@ import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { CalendarDay } from '@/composables/calendar'
-import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { VPickerSlots } from '@/components/VPicker/VPicker'
 import type { EventProp, GenericProps } from '@/util'
 
 // Types
@@ -84,8 +84,8 @@ export const makeVDatePickerProps = propsFactory({
   ...makeVDatePickerMonthProps({
     weeksInMonth: 'static' as const,
   }),
-  ...omit(makeVDatePickerMonthsProps(), ['modelValue']),
-  ...omit(makeVDatePickerYearsProps(), ['modelValue']),
+  ...omit(makeVDatePickerMonthsProps(), ['modelValue', 'columns']),
+  ...omit(makeVDatePickerYearsProps(), ['modelValue', 'columns']),
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
 
   modelValue: null,
@@ -114,8 +114,10 @@ export const VDatePicker = genericComponent<new <
     'update:modelValue': (date: any) => true,
     'update:month': (date: any) => true,
     'update:year': (date: any) => true,
+    'update:previewValue': (_value: any) => true,
     // 'update:inputMode': (date: any) => true,
     'update:viewMode': (date: any) => true,
+    'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
   setup (props, { emit, slots, attrs }) {
@@ -160,6 +162,13 @@ export const VDatePicker = genericComponent<new <
 
     const isReversing = shallowRef(false)
     const header = computed(() => {
+      if (props.multiple === 'range' && model.value.length === 2) {
+        const [startDate, endDate] = model.value
+        const daysBetween = adapter.getDiff(endDate, startDate, 'days') + 1
+
+        return t('$vuetify.datePicker.itemsSelected', daysBetween)
+      }
+
       if (props.multiple && model.value.length > 1) {
         return t('$vuetify.datePicker.itemsSelected', model.value.length)
       }
@@ -327,8 +336,19 @@ export const VDatePicker = genericComponent<new <
       onUpdateYear()
     }
 
+    const monthGridRef = shallowRef<{ focusGrid: () => void, focusItem: (isoDate: string) => void }>()
+
+    function focusDate (isoDate: string) {
+      monthGridRef.value?.focusItem(isoDate)
+    }
+
     function onClickDate () {
       viewMode.value = 'month'
+    }
+
+    function onEscape () {
+      viewMode.value = 'month'
+      nextTick(() => monthGridRef.value?.focusGrid())
     }
 
     function onClickMonth () {
@@ -348,6 +368,8 @@ export const VDatePicker = genericComponent<new <
     }
 
     watch(model, (val, oldVal) => {
+      if (props.noAutoNavigation) return
+
       const arrBefore = wrapInArray(oldVal)
       const arrAfter = wrapInArray(val)
 
@@ -462,6 +484,7 @@ export const VDatePicker = genericComponent<new <
                       year={ year.value }
                       allowedMonths={ allowedMonths.value }
                       onUpdate:modelValue={ onUpdateMonth }
+                      onEscape={ onEscape }
                     >
                       {{ month: slots.month }}
                     </VDatePickerMonths>
@@ -474,11 +497,13 @@ export const VDatePicker = genericComponent<new <
                       max={ maxDate.value }
                       allowedYears={ allowedYears.value }
                       onUpdate:modelValue={ onUpdateYear }
+                      onEscape={ onEscape }
                     >
                       {{ year: slots.year }}
                     </VDatePickerYears>
                   ) : (
                     <VDatePickerMonth
+                      ref={ monthGridRef }
                       key="date-picker-month"
                       { ...attrs }
                       { ...datePickerMonthProps }
@@ -487,6 +512,8 @@ export const VDatePicker = genericComponent<new <
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
+                      onUpdate:previewValue={ (value: any) => emit('update:previewValue', value) }
+                      onBoundaryNavigate={ (payload: any) => emit('boundary-navigate', payload) }
                       min={ minDate.value }
                       max={ maxDate.value }
                     >
@@ -502,7 +529,7 @@ export const VDatePicker = genericComponent<new <
       )
     })
 
-    return {}
+    return { focusDate }
   },
 })
 

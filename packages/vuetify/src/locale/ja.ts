@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'から',
   },
+  monthPicker: {
+    title: '月を選択',
+    itemsSelected: '{0} 選択済',
+    header: '月を入力',
+    range: {
+      title: '月を入力',
+    },
+    ariaLabel: {
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectYear: '年を選択',
+      currentMonth: '今月、{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} 選択済',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'さらに{0}',
     today: '今日',
   },
+  heatmap: {
+    less: '少ない',
+    more: '多い',
+  },
   input: {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',
@@ -91,6 +109,7 @@ export default {
     hour: '時',
     minute: '分',
     second: '秒',
+    notAllowed: '値は許可されていません',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: '{0}という文字は使用できません',
     notEmpty: '少なくとも1つの値を選んでください',
     pattern: '無効な形式です',
+  },
+  command: {
+    search: 'コマンドを入力するか検索...',
   },
   hotkey: {
     then: '次に',

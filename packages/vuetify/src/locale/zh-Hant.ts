@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '至',
   },
+  monthPicker: {
+    title: '選擇月份',
+    itemsSelected: '已選擇 {0} 個日期',
+    header: '輸入月份',
+    range: {
+      title: '輸入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '選擇年份',
+      currentMonth: '本月，{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '已選擇 {0} 個日期',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '還有其他 {0} 項',
     today: '今天',
   },
+  heatmap: {
+    less: '少',
+    more: '多',
+  },
   input: {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
@@ -91,6 +109,7 @@ export default {
     hour: '小時',
     minute: '分鐘',
     second: '秒',
+    notAllowed: '值不允許',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: '字符{0}是不允許的',
     notEmpty: '請至少選擇一個值',
     pattern: '格式無效',
+  },
+  command: {
+    search: '輸入指令或搜尋...',
   },
   hotkey: {
     then: '然後',

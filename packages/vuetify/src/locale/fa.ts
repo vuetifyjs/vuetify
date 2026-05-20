@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'تا',
   },
+  monthPicker: {
+    title: 'انتخاب ماه',
+    itemsSelected: '{0} انتخاب‌شده',
+    header: 'ماه را وارد کنید',
+    range: {
+      title: 'ماه‌ها را وارد کنید',
+    },
+    ariaLabel: {
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectYear: 'انتخاب سال',
+      currentMonth: 'ماه جاری، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} انتخاب‌شده',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{بیشتر {0',
     today: 'امروز',
   },
+  heatmap: {
+    less: 'کمتر',
+    more: 'بیشتر',
+  },
   input: {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',
@@ -91,6 +109,7 @@ export default {
     hour: 'ساعت',
     minute: 'دقیقه',
     second: 'ثانیه',
+    notAllowed: 'مقدار مجاز نیست',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'کاراکتر {0} مجاز نیست',
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
+  },
+  command: {
+    search: 'دستور را تایپ کنید یا جستجو کنید...',
   },
   hotkey: {
     then: 'سپس',

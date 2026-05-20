@@ -61,7 +61,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         symbol: component.displayName,
       },
       aliases: undefined, // TODO: are we using this? deprecated name changes?
-      description: '', // TODO: we should probably include component description in locale files
+      description: component.description.en,
       'doc-url': getDocUrl(component.pathName),
       attributes: Object.entries(component.props ?? {}).map(createTagAttribute),
       events: Object.entries(component.events ?? {}).map(createTagEvent),
@@ -121,7 +121,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
   const attributes = directiveData.map(createAttribute)
 
   const webTypes = {
-    $schema: 'http://json.schemastore.org/web-types',
+    $schema: 'https://json.schemastore.org/web-types',
     framework: 'vue',
     name: 'vuetify',
     version: pkg.version,

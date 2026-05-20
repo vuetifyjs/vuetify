@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'tot',
   },
+  monthPicker: {
+    title: 'Selecteer maand',
+    itemsSelected: '{0} geselecteerd',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maanden in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectYear: 'Selecteer jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandaag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
@@ -91,6 +109,7 @@ export default {
     hour: 'Uur',
     minute: 'Minuten',
     second: 'Seconden',
+    notAllowed: 'Waarde is niet toegestaan',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Het teken {0} is niet toegestaan',
     notEmpty: 'Kies ten minste één waarde',
     pattern: 'Ongeldig formaat',
+  },
+  command: {
+    search: 'Typ een opdracht of zoek...',
   },
   hotkey: {
     then: 'dan',

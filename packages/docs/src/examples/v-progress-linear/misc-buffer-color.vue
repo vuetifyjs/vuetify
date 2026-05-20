@@ -19,6 +19,6 @@
       rounded
     ></v-progress-linear>
 
-    <div class="ms-4 text-h6">3/9</div>
+    <div class="ms-4 text-title-large">3/9</div>
   </v-sheet>
 </template>

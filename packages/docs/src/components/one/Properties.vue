@@ -1,10 +1,10 @@
 <template>
   <v-container class="pa-4 mx-auto mb-12" max-width="1100" fluid>
-    <h2 class="text-h4 text-md-h3 font-weight-bold mb-2 text-center">
+    <h2 class="text-headline-large text-md-display-medium font-weight-bold mb-2 text-center">
       Premium Across the Ecosystem
     </h2>
 
-    <p class="text-body-1 text-medium-emphasis mb-8 text-center">
+    <p class="text-body-large text-medium-emphasis mb-8 text-center">
       Your subscription unlocks features on every Vuetify property
     </p>
 
@@ -40,7 +40,7 @@
 
           <div class="flex-grow-1">
             <div class="d-flex align-center mb-1">
-              <span class="text-subtitle-1 font-weight-bold">{{ property.name }}</span>
+              <span class="text-body-large font-weight-bold">{{ property.name }}</span>
 
               <v-icon
                 class="ml-1 text-medium-emphasis"
@@ -49,7 +49,7 @@
               />
             </div>
 
-            <p class="text-body-2 text-medium-emphasis mb-2">
+            <p class="text-body-medium text-medium-emphasis mb-2">
               {{ property.description }}
             </p>
 

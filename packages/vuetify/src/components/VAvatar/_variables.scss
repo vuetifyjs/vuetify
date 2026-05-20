@@ -11,7 +11,7 @@ $avatar-border-radius: map.get(settings.$rounded, 0) !default;
 $avatar-border-style: settings.$border-style-root !default;
 $avatar-border-thin-width: thin !default;
 $avatar-border-width: 0 !default;
-$avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$avatar-color: functions.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $avatar-elevation: 1 !default;
 $avatar-height: 40px !default;
@@ -20,8 +20,8 @@ $avatar-plain-opacity: .62 !default;
 $avatar-rounded-border-radius: variables.$border-radius-root !default;
 $avatar-vertical-align: middle !default;
 $avatar-width: 40px !default;
-$avatar-margin-end: map.get(variables.$grid-gutters, 'md') !default;
-$avatar-margin-start: map.get(variables.$grid-gutters, 'md') !default;
+$avatar-margin-end: 8px !default;
+$avatar-margin-start: 8px !default;
 
 $avatar-sizes: () !default;
 $avatar-sizes: functions.map-deep-merge(

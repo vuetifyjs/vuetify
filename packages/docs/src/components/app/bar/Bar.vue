@@ -18,7 +18,7 @@
     </template>
 
     <template #append>
-      <div v-if="mdAndUp" class="d-flex ga-1 pe-2">
+      <div v-if="showExtraLinks" class="d-flex ga-1 pe-2">
         <AppBarBlogLink />
 
         <AppBarLearnMenu />
@@ -27,12 +27,12 @@
 
         <AppBarEcosystemMenu />
 
-        <AppBarPlaygroundLink v-if="lgAndUp" />
+        <AppBarPlaygroundLink v-if="showPlaygroundLink" />
 
-        <AppBarOneLink />
+        <AppBarOneLink class="ml-4" />
       </div>
 
-      <AppVerticalDivider v-if="mdAndUp" />
+      <AppVerticalDivider v-if="showExtraLinks" />
 
       <div class="d-flex ga-1">
         <AppBarStoreLink v-if="smAndUp" />
@@ -49,8 +49,9 @@
 
 <script setup>
   const app = useAppStore()
-  const { smAndUp, lgAndUp, mdAndDown, width } = useDisplay()
+  const { smAndUp, mdAndDown, width } = useDisplay()
   const route = useRoute()
 
-  const mdAndUp = computed(() => width.value >= 1077)
+  const showExtraLinks = computed(() => width.value >= 1052)
+  const showPlaygroundLink = computed(() => width.value >= 1220)
 </script>

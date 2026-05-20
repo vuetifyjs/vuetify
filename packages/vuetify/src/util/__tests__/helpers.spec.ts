@@ -215,9 +215,9 @@ describe('helpers', () => {
 
       expect(obj).toHaveProperty('a')
       expect(obj).toHaveProperty('b')
-      expect(isRef(obj.a)).toBeTruthy()
-      expect(isRef(obj.b)).toBeTruthy()
-      expect(isProxy(obj)).toBeFalsy()
+      expect(isRef(obj.a)).toBe(true)
+      expect(isRef(obj.b)).toBe(true)
+      expect(isProxy(obj)).toBe(false)
     })
 
     it('should be reactive', async () => {
@@ -238,12 +238,12 @@ describe('helpers', () => {
 
   describe('isEmpty', () => {
     it('should be empty value', () => {
-      expect(isEmpty(null)).toBeTruthy()
-      expect(isEmpty(undefined)).toBeTruthy()
-      expect(isEmpty('')).toBeTruthy()
-      expect(isEmpty(' ')).toBeTruthy()
-      expect(isEmpty('sample text')).toBeFalsy()
-      expect(isEmpty(12345)).toBeFalsy()
+      expect(isEmpty(null)).toBe(true)
+      expect(isEmpty(undefined)).toBe(true)
+      expect(isEmpty('')).toBe(true)
+      expect(isEmpty(' ')).toBe(true)
+      expect(isEmpty('sample text')).toBe(false)
+      expect(isEmpty(12345)).toBe(false)
     })
   })
 

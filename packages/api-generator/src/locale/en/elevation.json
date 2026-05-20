@@ -1,5 +1,6 @@
 {
   "props": {
-    "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation)."
+    "elevation": "Designates an elevation applied to the component between 0 and 5. You can find more information on the [elevation page](/styles/elevation).",
+    "hoverElevation": "Elevation level applied to the component upon hover (adds class with CSS `:hover` selector)"
   }
 }

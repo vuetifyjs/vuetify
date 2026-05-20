@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    align="center"
-    justify="space-around"
-  >
+  <v-row class="align-center justify-space-around">
     <v-chip
       :model-value="active"
       class="ma-2"

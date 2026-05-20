@@ -14,11 +14,7 @@
         cover
       >
         <template v-slot:placeholder>
-          <v-row
-            align="center"
-            class="fill-height ma-0"
-            justify="center"
-          >
+          <v-row class="fill-height align-center justify-center">
             <v-progress-circular
               color="grey-lighten-5"
               indeterminate

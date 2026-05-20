@@ -74,6 +74,12 @@ function unmounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
 export const Intersect = {
   mounted,
   unmounted,
+  updated: (el: HTMLElement, binding: ObserveDirectiveBinding) => {
+    if (el._observe?.[binding.instance!.$.uid]) {
+      unmounted(el, binding)
+      mounted(el, binding)
+    }
+  },
 }
 
 export default Intersect

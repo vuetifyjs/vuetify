@@ -450,6 +450,7 @@ export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
+  targetCondition?: (k: string, v: unknown) => boolean,
 ) {
   const out: Record<string, any> = {}
 
@@ -458,13 +459,18 @@ export function mergeDeep (
   }
 
   for (const key in target) {
-    const sourceProperty = source[key]
     const targetProperty = target[key]
+
+    if (targetCondition && !targetCondition(key, targetProperty)) {
+      continue
+    }
+
+    const sourceProperty = source[key]
 
     // Only continue deep merging if
     // both properties are plain objects
     if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, targetCondition)
 
       continue
     }
@@ -661,23 +667,27 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+export function focusChild (
+  el: Element,
+  location?: 'next' | 'prev' | 'first' | 'last' | number | null,
+  options?: FocusOptions
+) {
   const focusable = focusableChildren(el)
 
   if (location == null) {
     if (el === document.activeElement || !el.contains(document.activeElement)) {
-      focusable[0]?.focus()
+      focusable[0]?.focus(options)
     }
   } else if (location === 'first') {
-    focusable[0]?.focus()
+    focusable[0]?.focus(options)
   } else if (location === 'last') {
-    focusable.at(-1)?.focus()
+    focusable.at(-1)?.focus(options)
   } else if (typeof location === 'number') {
-    focusable[location]?.focus()
+    focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
     if (_el) _el.focus()
-    else focusChild(el, location === 'next' ? 'first' : 'last')
+    else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }
 

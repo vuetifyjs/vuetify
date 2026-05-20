@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Изаберите месец',
+    itemsSelected: '{0} изабрано',
+    header: 'Унесите месец',
+    range: {
+      title: 'Унесите месеце',
+    },
+    ariaLabel: {
+      previousYear: 'Претходна година',
+      nextYear: 'Следећа година',
+      selectYear: 'Select year',
+      currentMonth: 'Тренутни месец, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} изабрано',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} више',
     today: 'Данас',
   },
+  heatmap: {
+    less: 'Мање',
+    more: 'Више',
+  },
   input: {
     clear: 'Очисти {0}',
     prependAction: '{0} претходна акција',
@@ -91,6 +109,7 @@ export default {
     hour: 'Сат',
     minute: 'Минути',
     second: 'Секунде',
+    notAllowed: 'Вредност није дозвољена',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Карактер {0} није дозвољен',
     notEmpty: 'Изаберите бар једну вредност',
     pattern: 'Неважећи формат',
+  },
+  command: {
+    search: 'Унесите команду или претражите...',
   },
   hotkey: {
     then: 'затим',

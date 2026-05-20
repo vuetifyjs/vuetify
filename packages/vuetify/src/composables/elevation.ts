@@ -6,23 +6,19 @@ import { propsFactory } from '@/util'
 import type { Ref } from 'vue'
 export interface ElevationProps {
   elevation?: number | string | null
+  hoverElevation?: number | string | null
 }
 
 // Composables
 export const makeElevationProps = propsFactory({
   elevation: {
     type: [Number, String],
-    validator (v: any) {
-      const value = parseInt(v)
-
-      return (
-        !isNaN(value) &&
-        value >= 0 &&
-        // Material Design has a maximum elevation of 24
-        // https://material.io/design/environment/elevation.html#default-elevations
-        value <= 24
-      )
-    },
+    // no limit to allow both 0-6 (MD3) and legacy 0-24 (MD2)
+    validator: (value: string | number) => parseInt(value) >= 0,
+  },
+  hoverElevation: {
+    type: [Number, String],
+    validator: (value: string | number) => parseInt(value) >= 0,
   },
 }, 'elevation')
 
@@ -33,8 +29,12 @@ type ElevationData = {
 export function useElevation (props: ElevationProps | Ref<number | string | undefined>): ElevationData {
   const elevationClasses = toRef(() => {
     const elevation = isRef(props) ? props.value : props.elevation
+    const hoverElevation = isRef(props) ? null : props.hoverElevation
     if (elevation == null) return []
-    return [`elevation-${elevation}`]
+    return [
+      ...elevation == null ? [] : [`elevation-${parseInt(elevation)}`],
+      ...hoverElevation == null ? [] : [`hover-elevation-${parseInt(hoverElevation)}`],
+    ]
   })
 
   return { elevationClasses }

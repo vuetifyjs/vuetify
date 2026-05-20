@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'până la',
   },
+  monthPicker: {
+    title: 'Selectați luna',
+    itemsSelected: '{0} selectate',
+    header: 'Introduceți luna',
+    range: {
+      title: 'Introduceți lunile',
+    },
+    ariaLabel: {
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectYear: 'Selectați anul',
+      currentMonth: 'Luna curentă, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selectate',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'încă {0}',
     today: 'Today',
   },
+  heatmap: {
+    less: 'Mai puțin',
+    more: 'Mai mult',
+  },
   input: {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
@@ -91,6 +109,7 @@ export default {
     hour: 'Oră',
     minute: 'Minute',
     second: 'Secunde',
+    notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Caracterele {0} nu sunt permise',
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
+  },
+  command: {
+    search: 'Tastați o comandă sau căutați...',
   },
   hotkey: {
     then: 'apoi',

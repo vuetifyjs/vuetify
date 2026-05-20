@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ถึง',
   },
+  monthPicker: {
+    title: 'เลือกเดือน',
+    itemsSelected: 'เลือกแล้ว {0} รายการ',
+    header: 'ป้อนเดือน',
+    range: {
+      title: 'ป้อนเดือน',
+    },
+    ariaLabel: {
+      previousYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      selectYear: 'เลือกปี',
+      currentMonth: 'เดือนนี้, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: 'เลือกแล้ว {0} รายการ',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'มีอีก {0}',
     today: 'วันนี้',
   },
+  heatmap: {
+    less: 'น้อย',
+    more: 'มาก',
+  },
   input: {
     clear: 'ล้าง {0}',
     prependAction: 'การกระทำก่อนหน้า {0}',
@@ -91,6 +109,7 @@ export default {
     hour: 'ชั่วโมง',
     minute: 'นาที',
     second: 'วินาที',
+    notAllowed: 'ค่าไม่ได้รับอนุญาต',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'อักขระ {0} ไม่ได้รับอนุญาต',
     notEmpty: 'กรุณาเลือกอย่างน้อยหนึ่งค่า',
     pattern: 'รูปแบบไม่ถูกต้อง',
+  },
+  command: {
+    search: 'พิมพ์คำสั่งหรือค้นหา...',
   },
   hotkey: {
     then: 'จากนั้น',

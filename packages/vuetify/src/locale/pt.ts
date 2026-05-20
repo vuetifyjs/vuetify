@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'até',
   },
+  monthPicker: {
+    title: 'Selecionar mês',
+    itemsSelected: '{0} selecionados',
+    header: 'Digite o mês',
+    range: {
+      title: 'Digite os meses',
+    },
+    ariaLabel: {
+      previousYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      selectYear: 'Selecionar ano',
+      currentMonth: 'Mês atual, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selecionados',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'Mais {0}',
     today: 'Hoje',
   },
+  heatmap: {
+    less: 'Menos',
+    more: 'Mais',
+  },
   input: {
     clear: 'Limpar {0}',
     prependAction: '{0} ação antes',
@@ -91,6 +109,7 @@ export default {
     hour: 'Hora',
     minute: 'Minuto',
     second: 'Segundos',
+    notAllowed: 'O valor não é permitido',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'O caractere {0} não é permitido',
     notEmpty: 'Por favor, escolha pelo menos um valor',
     pattern: 'Formato inválido',
+  },
+  command: {
+    search: 'Digite um comando ou pesquise...',
   },
   hotkey: {
     then: 'então',

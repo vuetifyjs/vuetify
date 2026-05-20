@@ -101,7 +101,7 @@ export function filterItems (
 
   if (!items?.length) return array
 
-  let lookAheadItem: FilterResult | null = null
+  let lookAheadItems: FilterResult[] = []
 
   loop:
   for (let i = 0; i < items.length; i++) {
@@ -115,11 +115,12 @@ export function filterItems (
 
       if (typeof item === 'object') {
         if (item.type === 'divider' || item.type === 'subheader') {
-          if (lookAheadItem?.type === 'divider' && item.type === 'subheader') {
-            array.push(lookAheadItem) // divider before subheader
+          if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
+            // clear unless, divider appears before subheader
+            lookAheadItems = []
           }
 
-          lookAheadItem = { index: i, matches: { }, type: item.type }
+          lookAheadItems.push({ index: i, matches: { }, type: item.type })
           continue
         }
 
@@ -168,9 +169,9 @@ export function filterItems (
       ) continue
     }
 
-    if (lookAheadItem) {
-      array.push(lookAheadItem)
-      lookAheadItem = null
+    if (lookAheadItems.length) {
+      array.push(...lookAheadItems)
+      lookAheadItems = []
     }
 
     array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })
@@ -225,7 +226,9 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      _filteredMatches.set(item.value, matches)
+      if (item.value !== undefined) {
+        _filteredMatches.set(item.value, matches)
+      }
     })
     filteredItems.value = _filteredItems
     filteredMatches.value = _filteredMatches
@@ -236,20 +239,4 @@ export function useFilter <T extends InternalItem> (
   }
 
   return { filteredItems, filteredMatches, getMatches }
-}
-
-export function highlightResult (name: string, text: string, matches: FilterMatchArrayMultiple | undefined) {
-  if (matches == null || !matches.length) return text
-
-  return matches.map((match, i) => {
-    const start = i === 0 ? 0 : matches[i - 1][1]
-    const result = [
-      <span class={ `${name}__unmask` }>{ text.slice(start, match[0]) }</span>,
-      <span class={ `${name}__mask` }>{ text.slice(match[0], match[1]) }</span>,
-    ]
-    if (i === matches.length - 1) {
-      result.push(<span class={ `${name}__unmask` }>{ text.slice(match[1]) }</span>)
-    }
-    return <>{ result }</>
-  })
 }

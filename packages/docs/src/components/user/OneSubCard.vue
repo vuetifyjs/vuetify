@@ -12,7 +12,7 @@
       <span class="font-weight-light">Subscriber</span>
     </div>
 
-    <div class="text-caption font-weight-regular text-grey-lighten-2">
+    <div class="text-body-small font-weight-regular text-grey-lighten-2">
       Since {{ memberSince }}
     </div>
   </v-card>

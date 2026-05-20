@@ -85,6 +85,25 @@ describe('VNumberInput', () => {
       expect(model.value).toBe(1)
     })
 
+    // https://github.com/vuetifyjs/vuetify/issues/22677
+    it('does not mutate model when typing non-digit chars while readonly', async () => {
+      const model = ref(42)
+
+      const { element } = render(() => (
+        <VNumberInput v-model={ model.value } readonly />
+      ))
+
+      await userEvent.click(element)
+      // Select all text and type a non-digit character
+      await userEvent.keyboard('{Control>}a{/Control}')
+      await userEvent.keyboard(' ')
+      expect(model.value).toBe(42)
+
+      // Type arbitrary non-digit chars
+      await userEvent.keyboard('abc')
+      expect(model.value).toBe(42)
+    })
+
     it('prevents mutation in readonly form', async () => {
       const model = ref(1)
 
@@ -157,24 +176,52 @@ describe('VNumberInput', () => {
   })
 
   describe('native number input quirks', () => {
-    it('should not bypass min', async () => {
+    it('should auto-clamp after interaction', async () => {
       const model = ref(1)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
+      await expect.element(screen.getByCSS('input')).toHaveValue('1')
+      expect(model.value).toBe(1)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.tab()
+
       await expect.element(screen.getByCSS('input')).toHaveValue('5')
       expect(model.value).toBe(5)
     })
 
-    it('should not bypass max', async () => {
+    it('should apply increments within the range', async () => {
       const model = ref(20)
       render(() =>
         <VNumberInput min={ 5 } max={ 15 } v-model={ model.value } />
       )
 
-      await expect.element(screen.getByCSS('input')).toHaveValue('15')
-      expect(model.value).toBe(15)
+      await expect.element(screen.getByCSS('input')).toHaveValue('20')
+      expect(model.value).toBe(20)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{arrowDown}')
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('14')
+      expect(model.value).toBe(14)
+    })
+
+    it('should auto-correct when incrementing against the limit', async () => {
+      const model = ref(-33)
+      render(() =>
+        <VNumberInput min={ -10 } max={ 20 } v-model={ model.value } precision={ 2 } step={ 0.5 } />
+      )
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('-33.00')
+      expect(model.value).toBe(-33)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{arrowDown}')
+
+      await expect.element(screen.getByCSS('input')).toHaveValue('-10')
+      expect(model.value).toBe(-10)
     })
 
     it('supports decimal step', async () => {
@@ -389,7 +436,7 @@ describe('VNumberInput', () => {
       expect(vInput).toHaveClass('v-input--error')
     })
 
-    it('while typing', async () => {
+    it('on external change', async () => {
       const model = ref(0)
       const onChange = vi.fn()
       render(() => (

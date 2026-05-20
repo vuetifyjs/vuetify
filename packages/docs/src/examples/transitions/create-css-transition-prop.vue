@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col class="text-center">
         <v-menu transition="custom-prop-transition">
           <template v-slot:activator="{ props }">

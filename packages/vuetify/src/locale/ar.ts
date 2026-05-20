@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
+  monthPicker: {
+    title: 'اختر الشهر',
+    itemsSelected: '{0} محدد',
+    header: 'أدخل الشهر',
+    range: {
+      title: 'أدخل الأشهر',
+    },
+    ariaLabel: {
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectYear: 'اختر السنة',
+      currentMonth: 'الشهر الحالي، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} محدد',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} أكثر',
     today: 'Today',
   },
+  heatmap: {
+    less: 'أقل',
+    more: 'أكثر',
+  },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
@@ -91,6 +109,7 @@ export default {
     hour: 'ساعة',
     minute: 'دقائق',
     second: 'ثواني',
+    notAllowed: 'القيمة غير مسموح بها',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'الحرف {0} غير مسموح به',
     notEmpty: 'يرجى اختيار قيمة واحدة على الأقل',
     pattern: 'تنسيق غير صالح',
+  },
+  command: {
+    search: 'اكتب أمراً أو ابحث...',
   },
   hotkey: {
     then: 'ثم',

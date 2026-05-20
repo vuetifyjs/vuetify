@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Steppers Vertical
   title: Vertical Stepper component
@@ -9,6 +10,8 @@ related:
   - /components/icons/
   - /styles/transitions/
 features:
+  label: 'C: VStepperVertical'
+  github: /components/VStepperVertical/
   report: true
 ---
 
@@ -17,26 +20,6 @@ features:
 The `v-stepper-vertical` component can be used as a navigation element that guides users through a sequence of steps.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.6.5](/getting-started/release-notes/?version=v3.6.5)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VStepperVertical } from 'vuetify/labs/VStepperVertical'
-
-export default createVuetify({
-  components: {
-    VStepperVertical,
-  },
-})
-```
 
 ## Usage
 

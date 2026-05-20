@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'έως',
   },
+  monthPicker: {
+    title: 'Επιλέξτε μήνα',
+    itemsSelected: '{0} επιλεγμένα',
+    header: 'Εισαγάγετε μήνα',
+    range: {
+      title: 'Εισαγάγετε μήνες',
+    },
+    ariaLabel: {
+      previousYear: 'Προηγούμενο έτος',
+      nextYear: 'Επόμενο έτος',
+      selectYear: 'Επιλέξτε έτος',
+      currentMonth: 'Τρέχων μήνας, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} ακόμη',
     today: 'Σήμερα',
   },
+  heatmap: {
+    less: 'Λιγότερα',
+    more: 'Περισσότερα',
+  },
   input: {
     clear: 'Καθαρισμός {0}',
     prependAction: '{0} προσαρτημένη ενέργεια',
@@ -91,6 +109,7 @@ export default {
     hour: 'Ώρα',
     minute: 'Λεπτά',
     second: 'Δευτερόλεπτα',
+    notAllowed: 'Η τιμή δεν επιτρέπεται',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Ο χαρακτήρας {0} δεν επιτρέπεται',
     notEmpty: 'Παρακαλώ επιλέξτε τουλάχιστον μία τιμή',
     pattern: 'Μη έγκυρη μορφή',
+  },
+  command: {
+    search: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
   },
   hotkey: {
     then: 'στη συνέχεια',

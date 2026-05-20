@@ -1,14 +1,10 @@
 <template>
-  <v-row
-    align="center"
-    class="ma-4"
-    justify="center"
-  >
+  <v-row class="ma-4 align-center justify-center">
     <v-card
       height="300"
       width="250"
     >
-      <v-row justify="center">
+      <v-row class="justify-center">
         <v-btn
           class="mt-12"
           color="success"

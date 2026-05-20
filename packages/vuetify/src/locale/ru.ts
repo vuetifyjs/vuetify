@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Выбрать месяц',
+    itemsSelected: '{0} выбрано',
+    header: 'Ввод месяца',
+    range: {
+      title: 'Ввод месяцев',
+    },
+    ariaLabel: {
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectYear: 'Выбрать год',
+      currentMonth: 'Текущий месяц, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} выбрано',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: 'Еще {0}',
     today: 'Сегодня',
   },
+  heatmap: {
+    less: 'Меньше',
+    more: 'Больше',
+  },
   input: {
     clear: 'Очистить {0}',
     prependAction: '{0} предварительных действий',
@@ -91,6 +109,7 @@ export default {
     hour: 'Час',
     minute: 'Минуты',
     second: 'Секунды',
+    notAllowed: 'Значение не разрешено',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Символ {0} не разрешен',
     notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
     pattern: 'Недопустимый формат',
+  },
+  command: {
+    search: 'Введите команду или введите...',
   },
   hotkey: {
     then: 'затем',

@@ -306,6 +306,39 @@ const options = [
       }
     ],
   },
+  {
+    input: 'src/entry-styles.ts',
+    output: [
+      { format: 'es', dir: 'dist' },
+    ],
+    onwarn (warning, defaultHandler) {
+      if (warning.code === 'EMPTY_BUNDLE') return
+      defaultHandler(warning)
+    },
+    plugins: [
+      sass({
+        options: {
+          charset: false,
+          silenceDeprecations: ['legacy-js-api'],
+        },
+        output (styles, styleNodes) {
+          // Individual CSS files
+          for (const { id, content } of styleNodes) {
+            const relativePath = path.relative(srcDir, id)
+            const out = path.parse(path.join(libDir, relativePath))
+            mkdirp(out.dir).then(() => {
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
+            })
+          }
+        },
+      }),
+      {
+        generateBundle (options, bundle) {
+          delete bundle['entry-styles.js']
+        }
+      }
+    ],
+  },
 ]
 
 export default options

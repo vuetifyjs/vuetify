@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: '–',
   },
+  monthPicker: {
+    title: 'Valitse kuukausi',
+    itemsSelected: '{0} valittu',
+    header: 'Syötä kuukausi',
+    range: {
+      title: 'Syötä kuukaudet',
+    },
+    ariaLabel: {
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectYear: 'Valitse vuosi',
+      currentMonth: 'Nykyinen kuukausi, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valittu',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} lisää',
     today: 'Tänään',
   },
+  heatmap: {
+    less: 'Vähemmän',
+    more: 'Enemmän',
+  },
   input: {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',
@@ -91,6 +109,7 @@ export default {
     hour: 'Tunti',
     minute: 'Minuutit',
     second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Merkki {0} ei ole sallittu',
     notEmpty: 'Valitse ainakin yksi arvo',
     pattern: 'Virheellinen muoto',
+  },
+  command: {
+    search: 'Kirjoita komento tai hae...',
   },
   hotkey: {
     then: 'sitten',

@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'až',
   },
+  monthPicker: {
+    title: 'Vyberte mesiac',
+    itemsSelected: '{0} vybraných',
+    header: 'Zadajte mesiac',
+    range: {
+      title: 'Zadajte mesiace',
+    },
+    ariaLabel: {
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuálny mesiac, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} vybraných',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} ďalších',
     today: 'Dnes',
   },
+  heatmap: {
+    less: 'Menej',
+    more: 'Viac',
+  },
   input: {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',
@@ -91,6 +109,7 @@ export default {
     hour: 'Hodina',
     minute: 'Minúty',
     second: 'Sekundy',
+    notAllowed: 'Hodnota nie je povolená',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: 'Znak {0} nie je povolený',
     notEmpty: 'Vyberte aspoň jednu hodnotu',
     pattern: 'Neplatný formát',
+  },
+  command: {
+    search: 'Zadajte príkaz alebo hľadajte...',
   },
   hotkey: {
     then: 'potom',

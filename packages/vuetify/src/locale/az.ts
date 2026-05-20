@@ -35,6 +35,20 @@ export default {
   dateRangeInput: {
     divider: 'ilə',
   },
+  monthPicker: {
+    title: 'Ayı seçin',
+    itemsSelected: '{0} seçilib',
+    header: 'Ayı daxil edin',
+    range: {
+      title: 'Ayları daxil edin',
+    },
+    ariaLabel: {
+      previousYear: 'Əvvəlki il',
+      nextYear: 'Növbəti il',
+      selectYear: 'İli seçin',
+      currentMonth: 'Cari ay, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seçilib',
     range: {
@@ -69,6 +83,10 @@ export default {
     moreEvents: '{0} ədəd daha',
     today: 'Bu gün',
   },
+  heatmap: {
+    less: 'Az',
+    more: 'Çox',
+  },
   input: {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',
@@ -91,6 +109,7 @@ export default {
     hour: 'Saat',
     minute: 'Dəqiqə',
     second: 'Saniyə',
+    notAllowed: 'Dəyərə icazə verilmir',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +148,9 @@ export default {
     exclude: '{0} simvoluna icazə verilmir',
     notEmpty: 'Zəhmət olmasa ən azı bir dəyər seçin',
     pattern: 'Yanlış format',
+  },
+  command: {
+    search: 'Əmr yazın və ya axtarış edin...',
   },
   hotkey: {
     then: 'sonra',

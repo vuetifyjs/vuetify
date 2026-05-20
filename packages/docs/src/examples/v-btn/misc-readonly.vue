@@ -9,7 +9,7 @@
     variant="flat"
   >
     <v-list-item-title>
-      <span class="text-h6">Vuetify One Subscriber</span>
+      <span class="text-title-large">Vuetify One Subscriber</span>
     </v-list-item-title>
 
     <v-list-item-subtitle :opacity="isSubscriber ? .8 : undefined">
@@ -17,7 +17,7 @@
         <div
           v-if="isSubscriber"
           key="subscribed"
-          class="text-success text-caption"
+          class="text-success text-body-small"
         >
           <v-icon icon="mdi-medal" size="1em"></v-icon>
           $2.99 /month
@@ -26,7 +26,7 @@
         <div
           v-else
           key="not-subscribed"
-          class="text-caption"
+          class="text-body-small"
         >
           Support Vuetify by becoming a Subscriber
         </div>

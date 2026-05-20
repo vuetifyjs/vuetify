@@ -8,7 +8,7 @@ import { VVirtualScrollItem } from '@/components/VVirtualScroll/VVirtualScrollIt
 
 // Composables
 import { provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -36,6 +36,9 @@ type VDataTableVirtualSlotProps<T> = Omit<
   | 'page'
   | 'pageCount'
   | 'itemsPerPage'
+  | 'prevPage'
+  | 'nextPage'
+  | 'setPage'
 >
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
@@ -85,10 +88,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
     const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { disableSort } = toRefs(props)
 
@@ -106,20 +110,27 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(() => props.search)
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, () => !!slots['group-summary'])
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey)
 
     const allItems = computed(() => extractRows(flatItems.value))
 
@@ -241,6 +252,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ displayItems.value }
+                        getMatches={ getMatches }
                       >
                         {{
                           ...slots,
@@ -257,6 +269,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                     ref={ itemRef }
                                     key={ itemSlotProps.internalItem.index }
                                     index={ itemSlotProps.index }
+                                    getMatches={ getMatches }
                                     v-slots={ slots }
                                   />
                                 )
