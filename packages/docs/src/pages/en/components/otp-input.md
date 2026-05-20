@@ -119,7 +119,7 @@ The `divider` prop renders a simple text character between every field.
 
 ### Slots
 
-#### Divider
+#### Dividers
 
 The `divider` slot allows you to customize the separator content between fields. It receives the divider `index` as a slot prop.
 
