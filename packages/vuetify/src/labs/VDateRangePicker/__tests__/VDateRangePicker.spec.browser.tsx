@@ -7,7 +7,7 @@ import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { ref } from 'vue'
 
-const cell = (iso: string) => screen.queryByCSS<HTMLElement>(`[data-v-date="${iso}"]`)
+const cell = (iso: string) => screen.queryByCSS(`[data-v-date="${iso}"]`)
 const dayBtn = (iso: string) => cell(iso) as HTMLButtonElement | null
 const dayWrapper = (iso: string) => cell(iso)?.closest<HTMLElement>('.v-date-picker-month__day') ?? null
 
@@ -237,8 +237,7 @@ describe('VDateRangePicker', () => {
       ))
 
       const panels = screen.queryAllByCSS('.v-date-range-picker__panel')
-      const panelButtons = (i: number) =>
-        within(panels[i]).queryAllByCSS<HTMLButtonElement>('.v-date-picker-controls .v-btn')
+      const panelButtons = (i: number) => within(panels[i]).queryAllByCSS('.v-date-picker-controls .v-btn')
 
       // Step left back to March, right forward to June. Now there's a 3-month gap.
       await userEvent.click(panelButtons(0)[0])
@@ -246,8 +245,8 @@ describe('VDateRangePicker', () => {
       await commands.waitStable('.v-date-range-picker .v-picker__body')
 
       // Both inner-facing buttons should now be enabled again.
-      expect(panelButtons(0)[1].disabled).toBe(false)
-      expect(panelButtons(1)[0].disabled).toBe(false)
+      expect(panelButtons(0)[1]).toBeEnabled()
+      expect(panelButtons(1)[0]).toBeEnabled()
     })
   })
 })
