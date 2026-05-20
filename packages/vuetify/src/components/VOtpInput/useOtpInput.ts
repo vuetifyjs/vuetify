@@ -76,6 +76,7 @@ export interface OtpInputContext {
   clearSelection: () => void
   selectAtEnd: () => OtpSelection
   selectSlot: (index: number) => OtpSelection
+  extendSelection: (direction: -1 | 1) => OtpSelection | null
 
   startComposition: () => void
   updateComposition: (data: string) => void
@@ -99,6 +100,9 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   const composition = shallowRef('')
   const isComposing = shallowRef(false)
   let prevSelection: OtpSelection | null = null
+  // Anchor/focus (grapheme space) for Shift+Arrow extension.
+  let anchorG: number | null = null
+  let focusG: number | null = null
 
   const length = toRef(() => Number(toValue(_length)))
   const isMasked = toRef(() => toValue(masked) || toValue(type) === 'password')
@@ -248,15 +252,22 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   ): void {
     if (start === null || end === null) {
       selection.value = null
+      anchorG = null
+      focusG = null
       return
     }
     const next: OtpSelection = { start, end, direction }
     selection.value = next
     prevSelection = next
+    const g = codeUnitsToGraphemeIndex(value.value, start)
+    anchorG = g
+    focusG = g
   }
 
   function clearSelection (): void {
     selection.value = null
+    anchorG = null
+    focusG = null
   }
 
   function selectAtEnd (): OtpSelection {
@@ -276,6 +287,8 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     const next: OtpSelection = { start, end, direction: 'forward' }
     selection.value = next
     prevSelection = next
+    anchorG = graphemeCount >= length.value ? length.value - 1 : graphemeCount
+    focusG = anchorG
     return next
   }
 
@@ -290,6 +303,48 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
       ? graphemeIndexToCodeUnits(value_, clamped + 1)
       : value_.length
     const next: OtpSelection = { start, end, direction: 'forward' }
+    selection.value = next
+    prevSelection = next
+    anchorG = clamped
+    focusG = clamped
+    return next
+  }
+
+  function extendSelection (dir: -1 | 1): OtpSelection | null {
+    const value_ = value.value
+    const valueG = graphemes(value_).length
+    if (valueG === 0) return null
+
+    const maxFocus = Math.min(length.value - 1, valueG)
+
+    // Fallback when Shift+Arrow fires before anchor/focus were tracked.
+    if (anchorG === null || focusG === null) {
+      const sel = selection.value
+      if (!sel) return null
+      const sStartG = codeUnitsToGraphemeIndex(value_, sel.start)
+      const sEndG = codeUnitsToGraphemeIndex(value_, sel.end)
+      if (sEndG - sStartG <= 1) {
+        anchorG = sStartG
+        focusG = sStartG
+      } else if (sel.direction === 'backward') {
+        anchorG = sEndG - 1
+        focusG = sStartG
+      } else {
+        anchorG = sStartG
+        focusG = sEndG - 1
+      }
+    }
+
+    const newFocus = Math.max(0, Math.min(maxFocus, focusG + dir))
+    focusG = newFocus
+
+    const minG = Math.min(anchorG, newFocus)
+    const maxG = Math.max(anchorG, newFocus)
+    const start = graphemeIndexToCodeUnits(value_, minG)
+    const end = (maxG + 1) >= valueG ? value_.length : graphemeIndexToCodeUnits(value_, maxG + 1)
+    const direction: 'forward' | 'backward' = newFocus < anchorG ? 'backward' : 'forward'
+
+    const next: OtpSelection = { start, end, direction }
     selection.value = next
     prevSelection = next
     return next
@@ -358,6 +413,11 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     const next: OtpSelection = { start: finalStart, end: finalEnd, direction: finalDirection }
     selection.value = next
     prevSelection = next
+    // Reset anchor on plain navigation; preserve it during extendSelection's round-trip.
+    if (finalEndG - finalStartG <= 1) {
+      anchorG = finalStartG
+      focusG = finalStartG
+    }
     return next
   }
 
@@ -381,6 +441,8 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     composition.value = ''
     isComposing.value = false
     prevSelection = null
+    anchorG = null
+    focusG = null
   }
 
   return {
@@ -407,6 +469,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     clearSelection,
     selectAtEnd,
     selectSlot,
+    extendSelection,
 
     startComposition,
     updateComposition,

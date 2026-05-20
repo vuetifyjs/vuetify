@@ -209,6 +209,16 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
+      if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        // Extend with our own anchor so the originally-selected slot stays included.
+        const dir = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
+        if (otp.extendSelection(dir)) {
+          e.preventDefault()
+          syncDOM()
+        }
+        return
+      }
+
       if (e.key !== 'Backspace' && e.key !== 'Delete') return
       if (!e.metaKey && !e.ctrlKey && !e.altKey) return
       e.preventDefault()
