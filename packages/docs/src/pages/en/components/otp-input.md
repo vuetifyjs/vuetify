@@ -111,11 +111,19 @@ The `pattern` prop restricts which characters are accepted. It supports preset v
 
 <ExamplesExample file="v-otp-input/prop-pattern" />
 
+#### Divider
+
+The `divider` prop renders a simple text character between every field.
+
+<ExamplesExample file="v-otp-input/prop-divider" />
+
 ### Slots
 
 #### Divider
 
-The `divider` slot allows you to customize the separator content between fields. It receives the divider `index` as a slot prop. You can also use the `divider` string prop for simple text separators.
+The `divider` slot allows you to customize the separator content between fields. It receives the divider `index` as a slot prop.
+
+<ExamplesExample file="v-otp-input/slot-divider" />
 
 ## Examples
 
@@ -138,12 +146,6 @@ The following example is a detailed example of a `v-otp-input` component used wi
 The following example is a detailed example of a `v-otp-input` component used to verify a user's account.
 
 <ExamplesExample file="v-otp-input/misc-verify" />
-
-### Dividers
-
-Using the `divider` prop or the `#divider` slot, you can add visual separators between each field. The slot variant supports any content, such as icons.
-
-<ExamplesExample file="v-otp-input/misc-divider" />
 
 ### Custom layout
 

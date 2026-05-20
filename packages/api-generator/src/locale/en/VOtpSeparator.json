@@ -1,5 +1,3 @@
 {
-  "props": {
-    "tag": "Specify a custom tag used on the root element."
-  }
+  "description": "Sub-component rendering a visual separator between OTP fields or groups inside the `#fields` slot."
 }

@@ -14,17 +14,17 @@
 <script setup>
   import { shallowRef } from 'vue'
 
-  const numeric = shallowRef('')
-  const alpha = shallowRef('')
-  const upper = shallowRef('')
+  const numeric = shallowRef('1234')
+  const alpha = shallowRef('abcD')
+  const upper = shallowRef('ZERO')
 </script>
 
 <script>
   export default {
     data: () => ({
-      numeric: '',
-      alpha: '',
-      upper: '',
+      numeric: '123456',
+      alpha: 'abcDEF',
+      upper: 'VUEJSX',
     }),
   }
 </script>

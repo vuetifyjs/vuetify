@@ -12,7 +12,7 @@
     "type": "Supported types: `text`, `password`, `number`."
   },
   "events": {
-    "finish": "Emitted when the input is filled completely and cursor is blurred."
+    "finish": "Emitted when all slots have been filled."
   },
   "slots": {
     "divider": "Slot for custom divider content between fields. Receives `{ index }` with the divider position."

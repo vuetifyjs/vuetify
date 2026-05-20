@@ -1,20 +1,21 @@
 <template>
   <v-otp-input
     v-model="otp"
-    merged
+    divider="•"
+    length="4"
   ></v-otp-input>
 </template>
 
 <script setup>
   import { shallowRef } from 'vue'
 
-  const otp = shallowRef('4256')
+  const otp = shallowRef('')
 </script>
 
 <script>
   export default {
     data: () => ({
-      otp: '4256',
+      otp: '',
     }),
   }
 </script>

@@ -1,5 +1,6 @@
 {
+  "description": "Sub-component representing a single OTP character field intended for `#fields` slot in VOtpInput",
   "props": {
-    "index": "The index of the OTP character this field represents."
+    "index": "Logical position of the slot within the OTP value."
   }
 }
