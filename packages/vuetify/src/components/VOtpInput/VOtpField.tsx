@@ -47,7 +47,7 @@ export const VOtpField = genericComponent()({
             loader: undefined,
             default: () => (
               <div class="v-otp-input__field">
-                <input class="v-otp-input__spacer" aria-hidden="true" />
+                <input class="v-otp-input__spacer" aria-hidden="true" tabindex="-1" />
                 { slot.value.compositionChar ? (
                   <span class="v-otp-input__composition">
                     { slot.value.compositionChar }
