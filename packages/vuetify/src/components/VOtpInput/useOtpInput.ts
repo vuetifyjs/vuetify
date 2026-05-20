@@ -147,21 +147,21 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
 
   const slots = computed((): OtpSlotData[] => {
     const chars = graphemes(value.value)
-    const compChars = graphemes(composition.value)
-    const place = toValue(placeholder) ?? null
-    const sel = selection.value
-    const startG = sel ? codeUnitsToGraphemeIndex(value.value, sel.start) : null
-    const endG = sel ? codeUnitsToGraphemeIndex(value.value, sel.end) : null
-    const compStart = startG ?? chars.length
+    const compositionChars = graphemes(composition.value)
+    const placeholderChar = toValue(placeholder) ?? null
+    const currentSelection = selection.value
+    const startG = currentSelection ? codeUnitsToGraphemeIndex(value.value, currentSelection.start) : null
+    const endG = currentSelection ? codeUnitsToGraphemeIndex(value.value, currentSelection.end) : null
+    const compositionStart = startG ?? chars.length
 
     return Array.from({ length: length.value }, (_, i) => {
       const char = chars[i] ?? null
       const displayChar = char !== null && isMasked.value ? '•' : char
 
       let compositionChar: string | null = null
-      if (composition.value && i >= compStart) {
-        const offset = i - compStart
-        const c = compChars[offset]
+      if (composition.value && i >= compositionStart) {
+        const offset = i - compositionStart
+        const c = compositionChars[offset]
         if (c != null) compositionChar = isMasked.value ? '•' : c
       }
 
@@ -177,7 +177,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
       return {
         char: displayChar,
         compositionChar,
-        placeholderChar: place,
+        placeholderChar,
         isActive,
         hasFakeCaret: isActive && char === null && compositionChar === null,
       }

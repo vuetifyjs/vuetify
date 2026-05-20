@@ -102,9 +102,9 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
   props: makeVOtpInputProps(),
 
   emits: {
-    finish: (_val: string) => true,
-    'update:focused': (_val: boolean) => true,
-    'update:modelValue': (_val: string) => true,
+    finish: (value: string) => true,
+    'update:focused': (value: boolean) => true,
+    'update:modelValue': (value: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
