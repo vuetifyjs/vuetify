@@ -198,6 +198,7 @@
       "item-groups",
       "slide-groups",
       "steppers",
+      "vertical-steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -312,10 +313,6 @@
       },
       {
         "title": "progress",
-        "subfolder": "components"
-      },
-      {
-        "title": "vertical-steppers",
         "subfolder": "components"
       },
       {
