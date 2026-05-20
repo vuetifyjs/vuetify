@@ -6,9 +6,9 @@ import { makeVVideoControlsProps, VVideoControls } from './VVideoControls'
 import { VFadeTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
 import { VImg } from '@/components/VImg/VImg'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
-import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
 import { useDisplay } from '@/composables'

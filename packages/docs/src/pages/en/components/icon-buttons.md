@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Icon buttons
   title: Icon button component
@@ -9,7 +10,7 @@ related:
   - /components/buttons/
   - /components/floating-action-buttons/
 features:
-  github: /labs/VIconBtn/
+  github: /components/VIconBtn/
   label: 'C: VIconBtn'
   report: true
   spec: https://m3.material.io/components/icon-buttons/
@@ -20,20 +21,6 @@ features:
 The `v-icon-btn` component is a lightweight button component for iconography.
 
 <PageFeatures />
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VIconBtn } from 'vuetify/labs/VIconBtn'
-
-export default createVuetify({
-  components: {
-    VIconBtn,
-  },
-})
-```
 
 ## Usage
 
