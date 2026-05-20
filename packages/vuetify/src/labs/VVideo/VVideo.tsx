@@ -8,7 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg/VImg'
 import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircular'
-import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
+import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
 
 // Composables
 import { useDisplay } from '@/composables'

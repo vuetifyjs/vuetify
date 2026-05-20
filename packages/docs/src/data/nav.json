@@ -120,6 +120,7 @@
       { "subheader": "containment" },
       "bottom-sheets",
       "buttons",
+      "icon-buttons",
       "cards",
       "chips",
       "dialogs",
@@ -290,10 +291,6 @@
       },
       {
         "title": "highlights",
-        "subfolder": "components"
-      },
-      {
-        "title": "icon-buttons",
         "subfolder": "components"
       },
       {
