@@ -118,6 +118,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const vDropzoneRef = ref<VFileUploadDropzone>()
     const inputRef = ref<HTMLInputElement | null>(null)
     const isError = toRef(() => vInputRef.value?.isValid === false)
+    const isInteractive = toRef(() => !form.isDisabled.value && !form.isReadonly.value)
     const loadingColor = shallowRef<string | undefined>(undefined)
 
     watch(() => props.loading, (val, old) => {
@@ -131,6 +132,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     provide(VFileUploadKey, {
       files: model,
       disabled: form.isDisabled,
+      readonly: form.isReadonly,
       error: isError,
       onDrop,
       onClickBrowse: onClick,
@@ -145,6 +147,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     })
 
     function onDrop (files: File[]) {
+      if (!isInteractive.value) return
       selectAccepted(files)
     }
 
@@ -183,10 +186,12 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     function onClick () {
+      if (!isInteractive.value) return
       inputRef.value?.click()
     }
 
     function onClickRemove (index: number) {
+      if (!isInteractive.value) return
       const newValue = model.value.filter((_, i) => i !== index)
       model.value = newValue
 

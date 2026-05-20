@@ -16,7 +16,7 @@ import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { inject, ref, shallowRef } from 'vue'
+import { inject, ref, shallowRef, toRef } from 'vue'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -25,6 +25,7 @@ import type { InjectionKey, PropType, Ref } from 'vue'
 export interface VFileUploadContext {
   files: Ref<readonly File[]>
   disabled: Ref<boolean>
+  readonly: Ref<boolean>
   error: Ref<boolean>
   onDrop: (files: File[]) => void
   onClickBrowse: () => void
@@ -78,6 +79,7 @@ export const makeVFileUploadDropzoneProps = propsFactory({
   },
   clearable: Boolean,
   disabled: Boolean,
+  readonly: Boolean,
   error: Boolean,
   hideBrowse: Boolean,
   insetFileList: Boolean,
@@ -119,8 +121,12 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     const context = inject(VFileUploadKey, null)
     const vSheetRef = ref<VSheet>()
     const isDragging = shallowRef(false)
+    const isDisabled = toRef(() => context?.disabled.value ?? props.disabled)
+    const isReadonly = toRef(() => context?.readonly.value ?? props.readonly)
+    const isInteractive = toRef(() => !isDisabled.value && !isReadonly.value)
 
     function onDragover (e: DragEvent) {
+      if (!isInteractive.value) return
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = true
@@ -140,7 +146,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
       isDragging.value = false
 
-      if (props.disabled || !hasFilesOrFolders(e)) return
+      if (!isInteractive.value || !hasFilesOrFolders(e)) return
 
       const files = await handleDrop(e)
       if (context) {
@@ -151,6 +157,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     }
 
     function onClickBrowse () {
+      if (!isInteractive.value) return
       if (context) {
         context.onClickBrowse()
       } else {
@@ -159,6 +166,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     }
 
     function onKeydown (e: KeyboardEvent) {
+      if (!isInteractive.value) return
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
         onClickBrowse()
@@ -166,6 +174,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     }
 
     function onClickRemove (index: number) {
+      if (!isInteractive.value) return
       if (context) {
         context.onClickRemove(index)
       } else {
@@ -174,7 +183,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     }
 
     async function onPaste (e: ClipboardEvent) {
-      if (props.disabled || !hasFilesOrFolders(e)) return
+      if (!isInteractive.value || !hasFilesOrFolders(e)) return
 
       e.preventDefault()
       const files = await handleDrop(e)
@@ -189,7 +198,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
     useRender(() => {
       const modelValue = context?.files.value ?? props.modelValue
-      const disabled = context?.disabled.value ?? props.disabled
+      const disabled = isDisabled.value
+      const readonly = isReadonly.value
+      const interactive = isInteractive.value
       const error = context?.error.value || props.error
       const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
@@ -209,6 +220,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
             {
               'v-file-upload-dropzone--clickable': !hasBrowse,
               'v-file-upload-dropzone--disabled': disabled,
+              'v-file-upload-dropzone--readonly': readonly,
               'v-file-upload-dropzone--dragging': isDragging.value,
               'v-file-upload-dropzone--has-files': hasFiles,
               'v-file-upload-dropzone--inset': isInset,
@@ -241,7 +253,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                     defaults={{
                       VFileUploadItem: {
                         file: modelValue[0],
-                        clearable: props.clearable,
+                        clearable: props.clearable && !readonly,
                         disabled,
                         showSize: props.showSize,
                         border: false,
@@ -268,7 +280,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       defaults={{
                         VFileUploadItem: {
                           file,
-                          clearable: props.clearable,
+                          clearable: props.clearable && !readonly,
                           disabled,
                           showSize: props.showSize,
                           border: false,
@@ -291,7 +303,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
               <div class="v-file-upload-inset__action">
                 { !slots.browse ? (
                   <VBtn
-                    readonly={ disabled }
+                    readonly={ !interactive }
                     text={ t(props.browseText) }
                     variant="text"
                     onClick={ onClickBrowse }
@@ -300,7 +312,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                   <VDefaultsProvider
                     defaults={{
                       VBtn: {
-                        readonly: disabled,
+                        readonly: !interactive,
                         text: t(props.browseText),
                         variant: 'text',
                       },
@@ -354,7 +366,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       </div>
                       { !slots.browse ? (
                         <VBtn
-                          readonly={ disabled }
+                          readonly={ !interactive }
                           size="large"
                           text={ t(props.browseText) }
                           variant="tonal"
@@ -364,7 +376,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                         <VDefaultsProvider
                           defaults={{
                             VBtn: {
-                              readonly: disabled,
+                              readonly: !interactive,
                               size: 'large',
                               text: t(props.browseText),
                               variant: 'tonal',

@@ -171,6 +171,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
     function onDragover (e: DragEvent) {
+      if (props.disabled || props.readonly) return
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = true

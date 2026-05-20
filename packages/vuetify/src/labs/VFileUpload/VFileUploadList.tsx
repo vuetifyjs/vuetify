@@ -45,6 +45,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
     useRender(() => {
       const files = props.files ?? context?.files.value ?? []
       const disabled = context?.disabled.value ?? props.disabled
+      const readonly = context?.readonly.value ?? false
       const listProps = VList.filterProps(props)
 
       if (!slots.default && !files.length) return (<></>)
@@ -74,7 +75,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
                 defaults={{
                   VFileUploadItem: {
                     file,
-                    clearable: props.clearable,
+                    clearable: props.clearable && !readonly,
                     disabled,
                     showSize: props.showSize,
                     variant: 'flat',

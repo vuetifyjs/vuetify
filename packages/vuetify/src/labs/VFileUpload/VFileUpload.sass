@@ -36,10 +36,11 @@
       > *
         pointer-events: none
 
-    &--clickable
+    &--clickable:not(&--readonly)
       cursor: pointer
 
-    &--has-files:not(&--clickable)
+    &--has-files:not(&--clickable),
+    &--readonly
       cursor: default
 
     &--error.v-sheet
