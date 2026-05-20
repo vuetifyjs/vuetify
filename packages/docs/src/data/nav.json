@@ -281,6 +281,10 @@
         "subfolder": "components"
       },
       {
+        "title": "date-range-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "file-upload",
         "subfolder": "components"
       },
@@ -297,6 +301,14 @@
         "subfolder": "components"
       },
       {
+        "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "month-pickers",
+        "subfolder": "components"
+      },
+      {
         "title": "pie-charts",
         "subfolder": "components"
       },
@@ -310,18 +322,6 @@
       },
       {
         "title": "vertical-steppers",
-        "subfolder": "components"
-      },
-      {
-        "title": "mask-inputs",
-        "subfolder": "components"
-      },
-      {
-        "title": "month-pickers",
-        "subfolder": "components"
-      },
-      {
-        "title": "date-range-pickers",
         "subfolder": "components"
       },
       {
