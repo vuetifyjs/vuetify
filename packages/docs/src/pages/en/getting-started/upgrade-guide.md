@@ -61,7 +61,7 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
-[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
+Sections tagged with <codemod-chip>Codemod Available</codemod-chip> can be automated using [vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods).
 
 ## Styles
 
@@ -128,6 +128,23 @@ Restoring most of the previous reset styles would be heavy-handed, but will get 
 }
 ```
 
+#### Applying without a build step
+
+The snippets above are plain CSS and do not require Sass compiler — drop them into any stylesheet, or inline them within `<style>` block when using the CDN build:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@4/dist/vuetify.css">
+
+<style>
+  @layer vuetify-core.reset {
+    ul, ol, figure, details, summary { padding: 0; margin: 0; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; }
+  }
+</style>
+```
+
+Place the `<style>` block after Vuetify's stylesheet so the layer order declared in `vuetify.css` takes effect first. Subsequent `@layer vuetify-core.reset { … }` rules append to the existing layer and won't override component styles.
+
 ### Layers
 
 Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
@@ -147,19 +164,25 @@ This can be used to easily interleave your own layers with ours:
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-### Typography
+### Typography {codemod-available}
 
-The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
+The typography system has been updated from Material Design 2 to Material Design 3. The following replacements will have some minor font size differences:
 
-| MD2 (Legacy)           | MD3 (New)                                             |
-|------------------------|-------------------------------------------------------|
-| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
-| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
-| `subtitle-1`, `body-1` | `body-large`                                          |
-| `body-2`               | `body-medium`                                         |
-| `caption`              | `body-small`                                          |
-| `button`, `subtitle-2` | `label-large`                                         |
-| `overline`             | `label-small`                                         |
+| MD2 (Legacy)      | MD3 (New)                          |
+|-------------------|------------------------------------|
+| `text-h1`         | `text-display-large` (96px → 60px) |
+| `text-h2`         | `text-display-large`               |
+| `text-h3`         | `text-display-medium`              |
+| `text-h4`         | `text-headline-large`              |
+| `text-h5`         | `text-headline-small`              |
+| `text-h6`         | `text-title-large`                 |
+| `text-subtitle-1` | `text-body-large`                  |
+| `text-subtitle-2` | `text-title-small`                 |
+| `text-body-1`     | `text-body-large`                  |
+| `text-body-2`     | `text-body-medium`                 |
+| `text-button`     | `text-label-large` (No uppercase)  |
+| `text-caption`    | `text-body-small`                  |
+| `text-overline`   | `text-label-medium` (No uppercase) |
 
 For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
 
@@ -204,7 +227,7 @@ export default createVuetify({
 );
 ```
 
-### Elevation
+### Elevation {codemod-available}
 
 Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24).
 
@@ -349,7 +372,7 @@ Removed the **$file-input-details-padding-inline** Sass variable.
 );
 ```
 
-### VForm
+### VForm {codemod-available}
 
 Slot variables are no longer refs, read-only values passed to slots are now unwrapped:
 
@@ -383,7 +406,7 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 );
 ```
 
-### VSelect/VCombobox/VAutocomplete
+### VSelect/VCombobox/VAutocomplete {codemod-available}
 
 `item` in slots has been renamed to `internalItem` for consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
@@ -421,7 +444,7 @@ Or remove `.raw`:
   </VSelect>
 ```
 
-### VSnackbar
+### VSnackbar {codemod-available}
 
 ::: warning
 This component has its internal HTML structure overhauled to incorporate **header** and **prepend** slots
@@ -438,7 +461,7 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
   />
 ```
 
-### VSnackbarQueue
+### VSnackbarQueue {codemod-available}
 
 ::: warning
 This component has been rewritten to enable showing multiple snackbars at once
@@ -478,7 +501,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | Gaps from padding                                             | No default padding, utilizes CSS `gap` |
 | Widths from hardcoded percentage (e.g., `75%` for `.v-col-9`) | Calculated width accounting for gaps   |
 
-#### Prop changes on VRow
+#### Prop changes on VRow {codemod-available}
 
 | Previous                         | New                                              |
 |----------------------------------|--------------------------------------------------|
@@ -489,7 +512,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | `align-sm`, `justify-md`, etc.   | use responsive utility classes                   |
 | no fine-grained control over gap | `gap` prop accepts number, string, or `[x, y]`   |
 
-#### Prop changes on VCol
+#### Prop changes on VCol {codemod-available}
 
 | Previous                                | New                                                 |
 |-----------------------------------------|-----------------------------------------------------|

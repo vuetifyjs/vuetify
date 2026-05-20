@@ -391,7 +391,7 @@ export const VSelect = genericComponent<new <
       }
       if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
-        listRef.value.focus(index >= 0 ? index : 'first')
+        listRef.value.focus(index >= 0 ? index : 'first', { focusVisible: false })
       }
     }
     function onAfterLeave () {
@@ -517,7 +517,6 @@ export const VSelect = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-select__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -527,6 +526,7 @@ export const VSelect = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
+                  contentClass={['v-select__content', computedMenuProps.value.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }

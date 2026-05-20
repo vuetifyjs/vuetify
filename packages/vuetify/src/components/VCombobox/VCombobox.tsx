@@ -573,7 +573,6 @@ export const VCombobox = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-combobox__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -582,6 +581,7 @@ export const VCombobox = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
+                  contentClass={['v-combobox__content', props.menuProps?.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }
