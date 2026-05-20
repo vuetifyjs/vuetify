@@ -232,7 +232,8 @@
       { "divider": true },
       { "subheader": "miscellaneous" },
       "lazy",
-      "no-ssr"
+      "no-ssr",
+      "pull-to-refresh"
     ]
   },
   {
@@ -314,10 +315,6 @@
       },
       {
         "title": "progress",
-        "subfolder": "components"
-      },
-      {
-        "title": "pull-to-refresh",
         "subfolder": "components"
       },
       {
