@@ -7,6 +7,7 @@ import { makeVListProps, VList } from '@/components/VList/VList'
 // Utilities
 import { inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+import { getFileKey } from './fileKey'
 
 // Types
 import type { PropType } from 'vue'
@@ -62,6 +63,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
           bgColor="transparent"
         >
           { slots.default?.({ files, onClickRemove: (i: number) => context?.onClickRemove(i) }) ?? files.map((file, index) => {
+            const key = getFileKey(file)
             const slotProps = {
               file,
               props: {
@@ -71,7 +73,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
 
             return (
               <VDefaultsProvider
-                key={ index }
+                key={ key }
                 defaults={{
                   VFileUploadItem: {
                     file,
@@ -84,7 +86,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
               >
                 { slots.item?.(slotProps) ?? (
                   <VFileUploadItem
-                    key={ index }
+                    key={ key }
                     onClick:remove={ () => context?.onClickRemove(index) }
                   />
                 )}

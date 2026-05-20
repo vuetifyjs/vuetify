@@ -18,6 +18,7 @@ import { useLocale } from '@/composables/locale'
 // Utilities
 import { inject, ref, shallowRef, toRef } from 'vue'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
+import { getFileKey } from './fileKey'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -267,6 +268,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                 )
               ) : (
                 modelValue.map((file, i) => {
+                  const key = getFileKey(file)
                   const slotProps = {
                     file,
                     props: {
@@ -276,7 +278,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
                   return (
                     <VDefaultsProvider
-                      key={ i }
+                      key={ key }
                       defaults={{
                         VFileUploadItem: {
                           file,
@@ -289,7 +291,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                     >
                       { slots.item?.(slotProps) ?? (
                         <VFileUploadItem
-                          key={ i }
+                          key={ key }
                           onClick:remove={ () => onClickRemove(i) }
                         />
                       )}
