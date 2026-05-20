@@ -505,7 +505,7 @@ export const VDatePicker = genericComponent<new <
                     <VDatePickerMonth
                       ref={ monthGridRef }
                       key="date-picker-month"
-                      { ...attrs }
+                      { ...attrs } // <-- TODO: filter by `on` prefix
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }

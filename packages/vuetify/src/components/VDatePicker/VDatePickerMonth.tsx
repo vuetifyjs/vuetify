@@ -411,6 +411,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                         onMouseenter: () => range.setPreview(item.date),
                         onFocus: () => range.setPreview(item.date),
                         onBlur: range.clearPreview,
+                        // ...events <-- TODO: merge with all existing handlers
                       },
                       item,
                       i,
