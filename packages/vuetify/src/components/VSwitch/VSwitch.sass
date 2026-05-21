@@ -81,13 +81,22 @@
       height: $switch-inset-thumb-height
       width: $switch-inset-thumb-width
       transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
+      transition: $switch-thumb-transition, .2s translate settings.$standard-easing
+      @include tools.ltr()
+        translate: -#{($switch-inset-track-width - $switch-inset-track-height) * .5}
+      @include tools.rtl()
+        translate: #{($switch-inset-track-width - $switch-inset-track-height) * .5}
 
       &--filled
         transform: none
 
     .v-switch--inset .v-selection-control--dirty &
       transform: none
-      transition: .15s .05s transform settings.$decelerated-easing
+      transition: .15s .05s transform settings.$decelerated-easing, .2s translate settings.$standard-easing
+      @include tools.ltr()
+        translate: #{($switch-inset-track-width - $switch-inset-track-height) * .5}
+      @include tools.rtl()
+        translate: -#{($switch-inset-track-width - $switch-inset-track-height) * .5}
 
   .v-switch
     $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
@@ -127,6 +136,15 @@
     &.v-switch--inset
       .v-selection-control__wrapper
         width: auto
+
+      .v-selection-control__input
+        left: 0
+        width: 100%
+        transform: none
+
+      .v-selection-control--dirty
+        .v-selection-control__input
+          transform: none
 
     &.v-input--vertical
       .v-label
