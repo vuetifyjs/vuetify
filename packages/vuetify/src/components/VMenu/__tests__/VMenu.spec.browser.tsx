@@ -7,7 +7,7 @@ import { VTextarea } from '@/components/VTextarea'
 import { VTextField } from '@/components/VTextField'
 
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { commands, render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 describe('VMenu', () => {
@@ -258,5 +258,57 @@ describe('VMenu', () => {
 
     expect(model.value).toBe(false)
     expect(document.activeElement).toBe(after)
+  })
+
+  describe('cascade close', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should return focus to the top-level activator after clicking the deepest item', async () => {
+      render(() => (
+        <div>
+          <button data-testid="before">before</button>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item" link>
+                  <span>L1</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item" link>
+                        <span>L2</span>
+                        <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="l3-item" link>L3</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+        </div>
+      ))
+
+      const topBtn = screen.getByTestId('top-btn')
+      await userEvent.click(topBtn)
+      await expect.poll(() => screen.queryByTestId('l1-item')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('l1-item'))
+      await expect.poll(() => screen.queryByTestId('l2-item')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('l2-item'))
+      await expect.poll(() => screen.queryByTestId('l3-item')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('l3-item'))
+      await wait(300)
+      await expect.poll(() => screen.queryByTestId('l1-item')).toBeNull()
+
+      expect(document.activeElement).toBe(topBtn)
+    })
   })
 })

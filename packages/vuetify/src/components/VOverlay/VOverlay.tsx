@@ -222,7 +222,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         activeEl === document.body ||
         activeEl === el ||
         el.contains(activeEl) ||
-        contentEl.value?.contains(activeEl)
+        !!activeEl.closest?.('.v-overlay__content')
       if (!focusWasInOverlay) return
 
       const parent = el.parentElement
