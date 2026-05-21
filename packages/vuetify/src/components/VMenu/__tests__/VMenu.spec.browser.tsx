@@ -260,6 +260,44 @@ describe('VMenu', () => {
     expect(document.activeElement).toBe(after)
   })
 
+  it('should stay closed when @keydown.enter handler closes the menu from inside a text field', async () => {
+    const model = ref(false)
+    render(() => (
+      <VMenu v-model={ model.value } closeOnContentClick={ false }>
+        {{
+          activator: ({ props }: any) => <VBtn { ...props } data-testid="btn">Menu</VBtn>,
+          default: () => (
+            <VSheet class="pa-3" width="400">
+              <VTextField label="Field 1" />
+              <VTextField
+                data-testid="field-2"
+                label="Field 2"
+                onKeydown={ (e: KeyboardEvent) => {
+                  if (e.key === 'Enter') model.value = false
+                }}
+              />
+            </VSheet>
+          ),
+        }}
+      </VMenu>
+    ))
+
+    await userEvent.click(screen.getByTestId('btn'))
+    await expect.poll(() => model.value).toBe(true)
+
+    const input = screen.getByCSS('[data-testid="field-2"] input')
+    input.focus()
+    await wait(50)
+    expect(document.activeElement).toBe(input)
+
+    await userEvent.keyboard('{Enter}')
+    await wait(300)
+    expect(model.value).toBe(false)
+
+    await wait(200)
+    expect(model.value).toBe(false)
+  })
+
   describe('cascade close', () => {
     beforeEach(() => commands.setReduceMotionDisabled())
 

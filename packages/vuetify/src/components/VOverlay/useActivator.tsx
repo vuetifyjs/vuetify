@@ -113,6 +113,7 @@ export function useActivator (
   const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
+      if (reopenLock && !isActive.value) return
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (!isActive.value) {
