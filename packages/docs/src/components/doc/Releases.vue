@@ -112,7 +112,7 @@
 
         <div class="px-4 pt-4">
           <AppMarkdown
-            :content="model.body"
+            :content="cleanedBody"
             class="releases"
           />
         </div>
@@ -235,6 +235,10 @@
   })
 
   const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
+  const cleanedBody = computed(() => {
+    return model.value?.body?.replace(/^>\s*\[![\s\S]*?\n---\s*\n+/, '') ?? ''
+  })
 
   const publishedOn = computed(() => {
     if (!model.value?.published_at) return undefined
