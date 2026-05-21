@@ -61,7 +61,7 @@ The following is a list of all planned components for the year 2026.
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
-### v4.1 (Revisionist)
+### v4.1 (Ascendant)
 
 - **Released:** June 2026
 - **Target Release:** Q2 2026
