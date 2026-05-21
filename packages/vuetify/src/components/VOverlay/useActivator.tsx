@@ -141,6 +141,11 @@ export function useActivator (
       runOpenDelay()
     },
     onBlur: (e: FocusEvent) => {
+      // Keep open while focus is being moved inside the content
+      // (incl. body parks from non-focusable clicks)
+      const next = e.relatedTarget as Element | null
+      if (!next || contentEl.value?.contains(next)) return
+
       isFocused = false
       e.stopPropagation()
 
@@ -186,7 +191,10 @@ export function useActivator (
         isFocused = true
         runOpenDelay()
       }
-      events.onFocusout = () => {
+      events.onFocusout = (e: Event) => {
+        const next = (e as FocusEvent).relatedTarget as Element | null
+        if (!next || contentEl.value?.contains(next)) return
+
         isFocused = false
         runCloseDelay({ minDelay: 1 })
       }

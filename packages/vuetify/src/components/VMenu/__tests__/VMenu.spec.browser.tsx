@@ -11,6 +11,47 @@ import { commands, render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 describe('VMenu', () => {
+  describe('open-on-focus with template activator', () => {
+    beforeEach(() => commands.setFocusEmulationDisabled())
+
+    afterEach(() => commands.setFocusEmulationEnabled())
+
+    it('should stay open across multiple clicks inside the content', async () => {
+      render(() => (
+        <VMenu openOnFocus closeOnContentClick={ false }>
+          {{
+            activator: ({ props }: any) => <VTextField { ...props } data-testid="field" placeholder="Click on me" />,
+            default: () => (
+              <VSheet class="pa-3" data-testid="menu-content">
+                <button data-testid="inner-btn">Inner</button>
+                <div data-testid="inert-region" style="height: 40px;">Inert</div>
+              </VSheet>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      const input = screen.getByCSS('[data-testid="field"] input')
+      await userEvent.click(input)
+      await wait(400)
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+
+      // First interaction: focus leaves the input for body/inert area.
+      input.blur()
+      await wait(500)
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+
+      // Second interaction: focus moves to an inner focusable, then leaves it for body.
+      const innerBtn = screen.getByTestId('inner-btn')
+      innerBtn.focus()
+      await wait(50)
+      innerBtn.blur()
+      await wait(500)
+
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+  })
+
   it('should return focus to the activator on Escape', async () => {
     render(() => (
       <VTextField data-testid="field" placeholder="Click or focus">
