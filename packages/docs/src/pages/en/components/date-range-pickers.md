@@ -20,7 +20,11 @@ The `v-date-range-picker` component renders two synchronized `v-date-picker` pan
 
 <page-features />
 
-<DocIntroduced version="4.1.0" />
+::: warning
+
+This feature requires [v4.1.0](/getting-started/release-notes/?version=v4.1.0)
+
+:::
 
 ## Installation
 
