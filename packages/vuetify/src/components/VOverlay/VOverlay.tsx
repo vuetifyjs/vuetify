@@ -37,6 +37,7 @@ import {
 import {
   animate,
   convertToUnit,
+  focusableChildren,
   genericComponent,
   getCurrentInstance,
   getScrollParent,
@@ -207,6 +208,38 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     useFocusTrap(props, { isActive, localTop, contentEl })
+
+    function returnFocusToActivator () {
+      const el = activatorEl.value
+      if (!el || !el.isConnected) return
+      // Skip submenus: their activator lives inside another open overlay's content.
+      // The outermost close in the cascade will restore focus.
+      if (el.closest('.v-overlay__content')) return
+
+      const activeEl = document.activeElement as HTMLElement | null
+      const focusWasInOverlay =
+        !activeEl ||
+        activeEl === document.body ||
+        activeEl === el ||
+        el.contains(activeEl) ||
+        contentEl.value?.contains(activeEl)
+      if (!focusWasInOverlay) return
+
+      const parent = el.parentElement
+      const focusableInParent = parent ? focusableChildren(parent) : []
+      let target: HTMLElement | undefined
+      if (focusableInParent.includes(el)) {
+        target = el
+      } else {
+        const focusableWithin = focusableChildren(el)
+        target = focusableWithin.find(x => x.tagName === 'INPUT' || x.tagName === 'TEXTAREA') ?? focusableWithin[0]
+      }
+      target?.focus({ preventScroll: true })
+    }
+
+    watch(isActive, val => {
+      if (!val) returnFocusToActivator()
+    }, { flush: 'post' })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {

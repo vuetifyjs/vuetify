@@ -103,6 +103,13 @@ export function useActivator (
     }
   })
 
+  let reopenLock = false
+  watch(isActive, v => {
+    if (v) return
+    reopenLock = true
+    setTimeout(() => reopenLock = false, 50)
+  })
+
   const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
@@ -123,6 +130,7 @@ export function useActivator (
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
+      if (reopenLock) return
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
