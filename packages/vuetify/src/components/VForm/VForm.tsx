@@ -82,12 +82,12 @@ export const VForm = genericComponent<VFormSlots>()({
         onSubmit={ onSubmit }
       >
         { slots.default?.({
-          errors: form.errors.value,
-          isDisabled: form.isDisabled.value,
-          isReadonly: form.isReadonly.value,
-          isValidating: form.isValidating.value,
-          isValid: form.isValid.value,
-          items: form.items.value,
+          get errors () { return form.errors.value },
+          get isDisabled () { return form.isDisabled.value },
+          get isReadonly () { return form.isReadonly.value },
+          get isValidating () { return form.isValidating.value },
+          get isValid () { return form.isValid.value },
+          get items () { return form.items.value },
           validate: form.validate,
           reset: form.reset,
           resetValidation: form.resetValidation,
