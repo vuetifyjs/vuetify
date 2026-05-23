@@ -402,7 +402,11 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          vTextFieldRef.value?.focus()
+        }
       }
       isPristine.value = true
       _searchLock.value = null
@@ -468,9 +472,18 @@ export const VCombobox = genericComponent<new <
       }
     }
 
+    let mousedownInsideContentAt = 0
+    function onMousedownContent () {
+      mousedownInsideContentAt = performance.now()
+    }
+
     function onBlur (e: FocusEvent) {
+      const next = e.relatedTarget as Node | null
       const menuContent = vMenuRef.value?.contentEl
-      if (menuContent?.contains(e.relatedTarget as Node)) {
+      if (
+        menuContent?.contains(next) ||
+        (!next && performance.now() - mousedownInsideContentAt < 10)
+      ) {
         isFocused.value = true
       }
     }
@@ -587,6 +600,7 @@ export const VCombobox = genericComponent<new <
                     elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
+                    onMousedown={ onMousedownContent }
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>
