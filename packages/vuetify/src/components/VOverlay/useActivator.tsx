@@ -141,8 +141,7 @@ export function useActivator (
       runOpenDelay()
     },
     onBlur: (e: FocusEvent) => {
-      // Keep open while focus is being moved inside the content
-      // (incl. body parks from non-focusable clicks)
+      // Body parks from clicks on empty areas inside content also count as "still focused".
       const next = e.relatedTarget as Element | null
       if (!next || contentEl.value?.contains(next)) return
 

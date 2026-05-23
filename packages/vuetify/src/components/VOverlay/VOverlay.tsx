@@ -212,17 +212,18 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function returnFocusToActivator () {
       const el = activatorEl.value
       if (!el || !el.isConnected) return
-      // Skip submenus: their activator lives inside another open overlay's content.
-      // The outermost close in the cascade will restore focus.
+      // Skip submenus; the outermost close in the cascade will restore focus.
       if (el.closest('.v-overlay__content')) return
 
-      const activeEl = document.activeElement as HTMLElement | null
+      if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
+
+      const activeEl = document.activeElement
       const focusWasInOverlay =
         !activeEl ||
         activeEl === document.body ||
         activeEl === el ||
         el.contains(activeEl) ||
-        !!activeEl.closest?.('.v-overlay__content')
+        !!activeEl.closest('.v-overlay__content')
       if (!focusWasInOverlay) return
 
       const parent = el.parentElement
@@ -376,7 +377,15 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  v-click-outside={{
+                    handler: onClickOutside,
+                    closeConditional,
+                    include: () => [
+                      activatorEl.value,
+                      // Submenu/cascade clicks count as "inside" so they don't suppress focus-return.
+                      ...Array.from(document.querySelectorAll('.v-overlay__content')) as HTMLElement[],
+                    ],
+                  }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,

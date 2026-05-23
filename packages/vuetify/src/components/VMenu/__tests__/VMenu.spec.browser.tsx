@@ -24,7 +24,7 @@ describe('VMenu', () => {
             default: () => (
               <VSheet class="pa-3" data-testid="menu-content">
                 <button data-testid="inner-btn">Inner</button>
-                <div data-testid="inert-region" style="height: 40px;">Inert</div>
+                <div data-testid="empty-region" style="height: 40px;">Empty</div>
               </VSheet>
             ),
           }}
@@ -36,12 +36,10 @@ describe('VMenu', () => {
       await wait(400)
       await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
 
-      // First interaction: focus leaves the input for body/inert area.
       input.blur()
       await wait(500)
       expect(screen.queryByTestId('menu-content')).toBeVisible()
 
-      // Second interaction: focus moves to an inner focusable, then leaves it for body.
       const innerBtn = screen.getByTestId('inner-btn')
       innerBtn.focus()
       await wait(50)
@@ -327,9 +325,10 @@ describe('VMenu', () => {
     await expect.poll(() => model.value).toBe(true)
 
     const input = screen.getByCSS('[data-testid="field-2"] input')
-    input.focus()
-    await wait(50)
-    expect(document.activeElement).toBe(input)
+    await expect.poll(() => {
+      input.focus()
+      return document.activeElement
+    }).toBe(input)
 
     await userEvent.keyboard('{Enter}')
     await wait(300)

@@ -342,8 +342,12 @@ export const VAutocomplete = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        isPristine.value = true
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          isPristine.value = true
+          vTextFieldRef.value?.focus()
+        }
       }
       _searchLock.value = null
     }
@@ -364,9 +368,18 @@ export const VAutocomplete = genericComponent<new <
       if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
     }
 
+    let mousedownInsideContentAt = 0
+    function onMousedownContent () {
+      mousedownInsideContentAt = performance.now()
+    }
+
     function onBlur (e: FocusEvent) {
+      const next = e.relatedTarget as Node | null
       const menuContent = vMenuRef.value?.contentEl
-      if (menuContent?.contains(e.relatedTarget as Node)) {
+      if (
+        menuContent?.contains(next) ||
+        (!next && performance.now() - mousedownInsideContentAt < 10)
+      ) {
         isFocused.value = true
       }
     }
@@ -524,6 +537,7 @@ export const VAutocomplete = genericComponent<new <
                     elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
+                    onMousedown={ onMousedownContent }
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>
