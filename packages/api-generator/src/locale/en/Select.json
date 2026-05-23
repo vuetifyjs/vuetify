@@ -7,8 +7,8 @@
     "itemColor": "Sets color of selected items.",
     "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
     "menuElevation": "Sets the elevation of the dropdown menu.",
-    "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended.",
     "multiple": "Changes select to multiple. Accepts array for value.",
+    "noAutoScroll": "Prevents the select menu to scroll to the selected item automatically.",
     "openOnClear": "Open's the menu whenever the clear icon is clicked.",
     "openText": "Text set to the inputs **aria-label** and **title** when input menu is open."
   },

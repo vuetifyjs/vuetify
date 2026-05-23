@@ -10,7 +10,7 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
@@ -45,6 +45,9 @@ export type VDataTableSlotProps<T> = {
   pageCount: number
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
   setItemsPerPage: (value: number) => void
+  prevPage: () => void
+  nextPage: () => void
+  setPage: (value: number) => void
   someSelected: boolean
   allSelected: boolean
   isSelected: ReturnType<typeof provideSelection>['isSelected']
@@ -129,11 +132,12 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
     'update:currentItems': (value: any) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const { groupBy } = createGroupBy(props)
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
     const { initialSortOrder, sortBy, multiSort, mustSort } = createSort(props)
     const { page, itemsPerPage } = createPagination(props)
     const { disableSort } = toRefs(props)
@@ -153,19 +157,26 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { items } = useDataTableItems(props, columns)
 
     const search = toRef(() => props.search)
-    const { filteredItems } = useFilter(props, items, search, {
+    const { filteredItems, getMatches } = useFilter(props, items, search, {
       transform: item => item.columns,
       customKeyFilter: filterFunctions,
     })
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy, disableSort })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, disableSort, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, {
       transform: item => ({ ...item.raw, ...item.columns }),
       sortFunctions,
       sortRawFunctions,
     })
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
 
     const pageBy = computed(() => {
       if (props.pageBy === 'auto') {
@@ -177,17 +188,22 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const {
       pageCount,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       paginatedItems,
     } = usePaginatedGroups({
       pageBy,
       sortedItems,
       paginate: items => {
         const itemsLength = computed(() => toValue(items).length)
-        const { startIndex, stopIndex, pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
+        const {
+          startIndex, stopIndex, pageCount, setItemsPerPage, prevPage, nextPage, setPage,
+        } = providePagination({ page, itemsPerPage, itemsLength })
         const { paginatedItems } = usePaginatedItems({ items, startIndex, stopIndex, itemsPerPage })
-        return { paginatedItems, pageCount, setItemsPerPage }
+        return { paginatedItems, pageCount, setItemsPerPage, prevPage, nextPage, setPage }
       },
-      group: items => useGroupedItems(items, groupBy, opened, () => !!slots['group-summary']),
+      group: items => useGroupedItems(items, groupBy, openedGroups, () => !!slots['group-summary'], isGroupOpen, groupKey),
     })
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
@@ -227,6 +243,9 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       pageCount: pageCount.value,
       toggleSort,
       setItemsPerPage,
+      prevPage,
+      nextPage,
+      setPage,
       someSelected: someSelected.value,
       allSelected: allSelected.value,
       isSelected,
@@ -287,6 +306,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                         { ...attrs }
                         { ...dataTableRowsProps }
                         items={ paginatedItems.value }
+                        getMatches={ getMatches }
                         v-slots={ slots }
                       />
                     )}

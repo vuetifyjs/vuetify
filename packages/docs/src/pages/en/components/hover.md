@@ -42,7 +42,7 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 #### Disabled
 
-The **disabled** prop disables the hover functionality.
+Use the **disabled** prop to pause hover tracking. When re-enabled, the value updates to reflect the cursor's current position.
 
 <ExamplesExample file="v-hover/prop-disabled" />
 

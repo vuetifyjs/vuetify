@@ -22,8 +22,22 @@ The `v-command-palette` component provides a keyboard-driven command interface t
 <PageFeatures />
 
 ::: success
-This feature was introduced as a labs component and is available for testing and feedback.
+This feature was introduced in v4.0, is a labs component and is available for testing and feedback.
 :::
+
+## Installation
+
+Labs components require manual import and registration with the Vuetify instance.
+
+```js { resource="src/plugins/vuetify.js" }
+import { VCommandPalette } from 'vuetify/labs/VCommandPalette'
+
+export default createVuetify({
+  components: {
+    VCommandPalette,
+  },
+})
+```
 
 ## Usage
 
@@ -60,11 +74,11 @@ Use the **hotkey** prop to register a global keyboard shortcut that toggles the 
 
 <ExamplesExample file="v-command-palette/prop-hotkey" />
 
-#### Dialog configuration
+#### Controlled close behavior
 
-The command palette is built on `v-dialog` and accepts most of the props while passing **class** and **style** values to the `v-sheet` content container.
+By default, selecting an actionable item closes the palette. Use **close-on-select** to disable that behavior, or handle **@before-select** and call **preventDefault()** to keep the palette open for external drill-in flows.
 
-<ExamplesExample file="v-command-palette/prop-dialog" />
+<ExamplesExample file="v-command-palette/prop-close-on-select" />
 
 ### Slots
 

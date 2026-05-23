@@ -65,7 +65,7 @@ bun create vuetify
 
 :::
 
-...choose the "Recommended" preset for Vite and select Vuetify 4.
+...choose the "Base" preset and "None" when asked for the CSS framework. The point is to learn how the pieces work together by performing code changes manually.
 
 Verify the boilerplate by building it with the standard NPM build script (e.g. `pnpm run build`).
 
@@ -142,7 +142,9 @@ In order for Vuetify transitions to work properly, we have to ensure `tailwind.*
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
+
 @layer tailwind; /* <-- our new utilities */
+
 @layer vuetify-final;
 ```
 
@@ -164,7 +166,6 @@ import 'vuetify/styles'
 Let's adjust `src/styles/settings.scss`:
 
 ```scss { resource="src/styles/settings.scss" }
-@use './layers';
 @use 'vuetify/settings' with (
   $color-pack: false,
   $utilities: false,

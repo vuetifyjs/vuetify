@@ -11,26 +11,12 @@ related:
 features:
   report: true
   label: 'C: VFileUpload'
-  github: '/labs/VFileUpload/'
+  github: '/components/VFileUpload/'
 ---
 
 # File upload
 
 <PageFeatures />
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VFileUpload } from 'vuetify/labs/VFileUpload'
-
-export default createVuetify({
-  components: {
-    VFileUpload,
-  },
-})
-```
 
 ## Usage
 
@@ -65,6 +51,12 @@ Utilize various properties to customize the look and feel of the `v-file-upload`
 Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** props to customize the text displayed in the component.
 
 <ExamplesExample file="v-file-upload/prop-content" />
+
+#### Loading
+
+The **loading** prop displays a progress indicator on the component. Unlike other components, the loading state does not disable interactions; files can still be browsed and dropped.
+
+<ExamplesExample file="v-file-upload/prop-loading" />
 
 #### Inset file list
 

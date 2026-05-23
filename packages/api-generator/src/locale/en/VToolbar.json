@@ -1,7 +1,7 @@
 {
+  "description": "Pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
-    "bottom": "Aligns the component towards the bottom.",
     "collapse": "Puts the toolbar into a collapsed state reducing its maximum width.",
     "collapsePosition": "Specifies side to attach the collapsed toolbar.",
     "extended": "Use this prop to increase the height of the toolbar _without_ using the `extension` slot for adding content. May be used in conjunction with the **extension-height** prop. When false, will not show extension slot even if content is present.",

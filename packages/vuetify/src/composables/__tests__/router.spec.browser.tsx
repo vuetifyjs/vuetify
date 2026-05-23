@@ -65,7 +65,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -86,7 +86,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     pageReloadAttempted = false
     expect(router.currentRoute.value.fullPath).toBe('/page1')
 
@@ -96,7 +96,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page2')
   })
 
@@ -122,7 +122,7 @@ describe('useLink', () => {
 
     await userEvent.click(anchor)
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -141,7 +141,7 @@ describe('useLink', () => {
 
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(link.isActive?.value).toBe(true)
 
     to.value = { name: 'page2' }

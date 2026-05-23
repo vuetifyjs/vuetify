@@ -56,6 +56,7 @@ export type VDataTableHeadersSlots = {
   loader: LoaderSlotProps
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+  'mobile.header': HeadersSlotProps
 } & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
@@ -163,6 +164,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
       const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
+      const isSortable = column.sortable && !props.disableSort
 
       return (
         <VDataTableColumn
@@ -170,7 +172,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           align={ column.align }
           class={[
             {
-              'v-data-table__th--sortable': column.sortable && !props.disableSort,
+              'v-data-table__th--sortable': isSortable,
               'v-data-table__th--sorted': isSorted(column),
               'v-data-table__th--fixed': column.fixed,
             },
@@ -190,9 +192,9 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           firstFixedEnd={ column.firstFixedEnd }
           noPadding={ noPadding }
           empty={ isEmpty }
-          tabindex={ column.sortable ? 0 : undefined }
-          onClick={ column.sortable ? (event: PointerEvent) => toggleSort(column, event) : undefined }
-          onKeydown={ column.sortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
+          tabindex={ isSortable ? 0 : undefined }
+          onClick={ isSortable ? (event: PointerEvent) => toggleSort(column, event) : undefined }
+          onKeydown={ isSortable ? (event: KeyboardEvent) => handleEnterKeyPress(event, column) : undefined }
           { ...headerProps }
         >
           {{
@@ -272,6 +274,60 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         },
       })
 
+      function renderSortSelect () {
+        return (
+          <VSelect
+            v-model={ sortingChips.value }
+            chips
+            color={ props.color }
+            class="v-data-table__td-sort-select"
+            clearable
+            density="default"
+            items={ sortableColumns.value }
+            label={ t('$vuetify.dataTable.sortBy') }
+            multiple={ props.multiSort }
+            variant="underlined"
+            returnObject
+            onClick:clear={ () => sortBy.value = [] }
+          >
+            {{
+              chip: ({ internalItem }) => (
+                <VChip
+                  onClick={ internalItem.raw.sortable ? () => toggleSort(internalItem.raw, undefined, true) : undefined }
+                  onMousedown={ (e: MouseEvent) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                  }}
+                >
+                  { internalItem.title }
+                  <VIcon
+                    class={[
+                      'v-data-table__td-sort-icon',
+                      isSorted(internalItem.raw) && 'v-data-table__td-sort-icon-active',
+                    ]}
+                    icon={ getSortIcon(internalItem.raw) }
+                    size="small"
+                  />
+                </VChip>
+              ),
+            }}
+          </VSelect>
+        )
+      }
+
+      function renderSelectAll () {
+        return (
+          <VCheckboxBtn
+            class="v-data-table-header__select-all"
+            color={ props.color }
+            density="compact"
+            modelValue={ allSelected.value }
+            indeterminate={ someSelected.value && !allSelected.value }
+            onUpdate:modelValue={ () => selectAll(!allSelected.value) }
+          />
+        )
+      }
+
       return (
         <VDataTableColumn
           tag="th"
@@ -282,51 +338,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
-            <VSelect
-              v-model={ sortingChips.value }
-              chips
-              color={ props.color }
-              class="v-data-table__td-sort-select"
-              clearable
-              density="default"
-              items={ sortableColumns.value }
-              label={ t('$vuetify.dataTable.sortBy') }
-              multiple={ props.multiSort }
-              variant="underlined"
-              returnObject
-              onClick:clear={ () => sortBy.value = [] }
-            >
-              {{
-                append: showSelectColumn ? () => (
-                  <VCheckboxBtn
-                    color={ props.color }
-                    density="compact"
-                    modelValue={ allSelected.value }
-                    indeterminate={ someSelected.value && !allSelected.value }
-                    onUpdate:modelValue={ () => selectAll(!allSelected.value) }
-                  />
-                ) : undefined,
-                chip: ({ internalItem }) => (
-                  <VChip
-                    onClick={ internalItem.raw.sortable ? () => toggleSort(internalItem.raw, undefined, true) : undefined }
-                    onMousedown={ (e: MouseEvent) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }}
-                  >
-                    { internalItem.title }
-                    <VIcon
-                      class={[
-                        'v-data-table__td-sort-icon',
-                        isSorted(internalItem.raw) && 'v-data-table__td-sort-icon-active',
-                      ]}
-                      icon={ getSortIcon(internalItem.raw) }
-                      size="small"
-                    />
-                  </VChip>
-                ),
-              }}
-            </VSelect>
+            { slots['mobile.header']?.(slotProps.value) ?? (
+              <>
+                { sortableColumns.value.length > 0 && renderSortSelect() }
+                { showSelectColumn && renderSelectAll() }
+              </>
+            )}
           </div>
         </VDataTableColumn>
       )

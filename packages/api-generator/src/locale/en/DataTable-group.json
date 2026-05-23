@@ -1,6 +1,9 @@
 {
   "props": {
     "groupBy": "Defines the grouping of the table items.",
+    "groupKey": "Custom function to generate group IDs. Receives `{ key, value, parentKey }` where `parentKey` is `null` for top-level groups. Useful when group values contain special characters or are non-string types.",
+    "openAll": "Opens all groups by default. Synchronizes with **v-model:opened**, so closed groups are not re-opened accidentally.",
+    "opened": "Array of group IDs that should be open. Can be bound to external variable using **v-model:opened**.",
     "pageBy": "Controls how pagination counts items.\n- **item** paginates by individual items,\n- **auto** paginates by top-level groups and falls back to regular items if **group-by** is empty,\n- **any** paginates by both items and groups combined"
   }
 }

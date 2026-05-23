@@ -103,7 +103,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLTextAreaElement>()
     const scrollbarWidth = ref(0)

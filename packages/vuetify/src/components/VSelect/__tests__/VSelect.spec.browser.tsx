@@ -358,6 +358,7 @@ describe('VSelect', () => {
       ))
       expect(element).toHaveTextContent('Default Language')
     })
+
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
       const items = [
         { code: 'en-US', name: 'English' },
@@ -999,6 +1000,32 @@ describe('VSelect', () => {
       await userEvent.keyboard('{Tab}')
       await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22697
+  it('should not steal focus from another input when menu closes', async () => {
+    render(() => (
+      <div>
+        <VTextField label="Text" data-testid="textfield" />
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.click(screen.getByCSS('.v-select'))
+    await commands.waitStable('.v-list')
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+    }, { timeout: 3000 })
+
+    const textfield = screen.getByTestId('textfield')
+    await userEvent.click(textfield)
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    expect(textfield.querySelector('input')).toHaveFocus()
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
   showcase({ stories })

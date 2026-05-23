@@ -1,4 +1,5 @@
 {
+  "description": "An alternative to `v-sheet` that provides a semantic interface for various types of cards holding title, general content, and optional actions, icon and image.",
   "props": {
     "flat": "Removes the card's elevation.",
     "hover": "Applies **3dp** (level 2) of elevation when hovered (default 1dp). You can find more information on the [elevation page](/styles/elevation).",
@@ -8,8 +9,5 @@
   "slots": {
     "actions": "The slot used for the card actions; located at the bottom of the card.",
     "image": "The slot used for the card image. This is used with the [image](#props-image) prop."
-  },
-  "events": {
-    "click": "Emitted when component is clicked - Will trigger component to ripple when clicked unless the `.native` modifier is used."
   }
 }

@@ -179,6 +179,7 @@
   "cancel": "Cancel",
   "close": "Close",
   "code": "Code",
+  "codemod-available": "Codemod Available",
   "colors": "Colors",
   "composition": "Composition",
   "copied": "Copied!",
@@ -216,6 +217,7 @@
   "copy-source": "Copy source",
   "copyright": "Copyright {0}",
   "create": "Create",
+  "css-utilities": "CSS Utilities",
   "customization": "Customization",
   "dark": "Dark",
   "dashboard": {
