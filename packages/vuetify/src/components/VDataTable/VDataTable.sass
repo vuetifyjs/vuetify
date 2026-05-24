@@ -117,6 +117,14 @@
       > span
         padding-left: 5px
 
+  @include tools.layer('overrides')
+    .v-data-table__tr--expanded
+      > td
+        height: 0
+        padding: 0
+        border-bottom: none
+        contain: layout
+
   .v-data-table--loading
     &:not(.v-table--fixed-header) > .v-table__wrapper > table > thead,
     &:not(.v-table--fixed-footer) > .v-table__wrapper > table > tfoot,
