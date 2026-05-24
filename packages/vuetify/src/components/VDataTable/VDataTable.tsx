@@ -13,6 +13,7 @@ import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems, useOpenAllGroups } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
+import { useLoadingConfig } from './composables/loading'
 import { useOptions } from './composables/options'
 import {
   createPagination,
@@ -25,6 +26,7 @@ import { makeDataTableSelectProps, provideSelection } from './composables/select
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { LoaderSlot } from '@/composables/loader'
 
 // Utilities
 import { computed, toRef, toRefs, toValue } from 'vue'
@@ -219,6 +221,8 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
+    const loadingConfig = useLoadingConfig(() => props.loading, () => props.color)
+
     useOptions({
       page,
       itemsPerPage,
@@ -311,6 +315,20 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                       />
                     )}
                     { slots['body.append']?.(slotProps.value) }
+                    { loadingConfig.active.value && ['end', 'both'].includes(loadingConfig.side.value) && (
+                      <tr class="v-data-table-progress v-data-table-progress--bottom">
+                        <th colspan={ columns.value.length }>
+                          <LoaderSlot
+                            name="v-data-table-progress"
+                            absolute
+                            active
+                            color={ loadingConfig.color.value }
+                            indeterminate
+                            v-slots={{ default: slots.loader }}
+                          />
+                        </th>
+                      </tr>
+                    )}
                   </tbody>
                 )}
                 { slots.tbody?.(slotProps.value) }
