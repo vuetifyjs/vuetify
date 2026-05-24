@@ -285,8 +285,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.25(typescript@6.0.2))
       '@vuetify/one':
-        specifier: ^3.1.1
-        version: 3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
+        specifier: ^3.1.2
+        version: 3.1.2(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3673,8 +3673,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@3.1.1':
-    resolution: {integrity: sha512-WDGSAprdT0KBl3U47fAjcRCHhmzTIA+Fu/m/W/ZT0m8t35qaFx1x2IRYwhQo0lhoUEZrSa8YVkJP5kRiLACuuA==}
+  '@vuetify/one@3.1.2':
+    resolution: {integrity: sha512-Lq9ap7/OpGPTrY7j5aQKQirj2Z7Od+SnLU8gouL0HDkL0I0H9huo1vx7u7XVY5IsvbQDepHHT5Ph/aCjzV1N2g==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -12030,7 +12030,7 @@ snapshots:
       vue: 3.5.25(typescript@6.0.2)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
+  '@vuetify/one@3.1.2(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       '@vuetify/auth': 0.1.8(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))

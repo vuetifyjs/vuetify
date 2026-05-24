@@ -26,6 +26,14 @@ const registry = new Map<symbol, {
 }>()
 let subscribers = 0
 
+function lastActiveTrap (): HTMLElement | undefined {
+  let el: HTMLElement | undefined
+  for (const { isActive, contentEl } of registry.values()) {
+    if (isActive.value && contentEl.value) el = contentEl.value
+  }
+  return el
+}
+
 function onKeydown (e: KeyboardEvent) {
   const activeElement = document.activeElement as HTMLElement | null
   if (e.key !== 'Tab' || !activeElement) return
@@ -34,17 +42,31 @@ function onKeydown (e: KeyboardEvent) {
     .filter(({ isActive, contentEl }) => isActive.value && contentEl.value?.contains(activeElement))
     .map(x => x.contentEl.value)
 
-  let closestTrap
-  let currentParent = activeElement.parentElement
-  while (currentParent) {
-    if (parentTraps.includes(currentParent)) {
-      closestTrap = currentParent
+  let closestTrap: HTMLElement | undefined
+  let currentNode: HTMLElement | null = activeElement
+  while (currentNode) {
+    if (parentTraps.includes(currentNode)) {
+      closestTrap = currentNode
       break
     }
-    currentParent = currentParent.parentElement
+    currentNode = currentNode.parentElement
   }
 
-  if (!closestTrap) return
+  if (!closestTrap) {
+    const trapEl = lastActiveTrap() // assuming last registered == topmost panel
+    if (!trapEl) return
+
+    const focusable = focusableChildren(trapEl).filter(x => x.tabIndex >= 0)
+    e.preventDefault()
+    if (!focusable.length) {
+      trapEl.focus({ preventScroll: true })
+    } else if (e.shiftKey) {
+      focusable[focusable.length - 1].focus()
+    } else {
+      focusable[0].focus()
+    }
+    return
+  }
 
   const focusable = focusableChildren(closestTrap)
     // excluding VListItems with tabindex="-2"
@@ -52,11 +74,10 @@ function onKeydown (e: KeyboardEvent) {
 
   if (!focusable.length) return
 
-  const active = document.activeElement as HTMLElement | null
   if (
     focusable.length === 1 &&
     focusable[0].classList.contains('v-list') &&
-    focusable[0].contains(active)
+    focusable[0].contains(activeElement)
   ) {
     e.preventDefault()
     return
@@ -65,24 +86,24 @@ function onKeydown (e: KeyboardEvent) {
   const firstElement = focusable[0]
   const lastElement = focusable[focusable.length - 1]
 
-  if (
-    e.shiftKey &&
-    (
-      active === firstElement ||
-      (firstElement.classList.contains('v-list') && firstElement.contains(active))
-    )
-  ) {
+  // contentEl wrapper (tabindex=-1) counts as "before first"
+  const atFirst = (
+    activeElement === firstElement ||
+    activeElement === closestTrap ||
+    (firstElement.classList.contains('v-list') && firstElement.contains(activeElement))
+  )
+
+  const atLast = (
+    activeElement === lastElement ||
+    (lastElement.classList.contains('v-list') && lastElement.contains(activeElement))
+  )
+
+  if (e.shiftKey && atFirst) {
     e.preventDefault()
     lastElement.focus({ preventScroll: true })
   }
 
-  if (
-    !e.shiftKey &&
-    (
-      active === lastElement ||
-      (lastElement.classList.contains('v-list') && lastElement.contains(active))
-    )
-  ) {
+  if (!e.shiftKey && atLast) {
     e.preventDefault()
     firstElement.focus({ preventScroll: true })
   }
@@ -90,10 +111,9 @@ function onKeydown (e: KeyboardEvent) {
 
 export function useFocusTrap (
   props: FocusTrapProps,
-  { isActive, localTop, activatorEl, contentEl }: {
+  { isActive, localTop, contentEl }: {
     isActive: Ref<boolean>
     localTop: Readonly<Ref<boolean>>
-    activatorEl?: Readonly<Ref<HTMLElement | undefined>>
     contentEl: Readonly<Ref<HTMLElement | undefined>>
   }
 ) {
