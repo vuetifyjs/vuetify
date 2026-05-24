@@ -28,6 +28,7 @@
     "body.prepend": "Prepends elements to the start of the default table `<tbody>`.",
     "bottom": "Slot for custom rendering of a data table footer.",
     "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",
+    "expanded": "Slot for custom rendering of the expanded content inside a pre-styled row spanning all columns.",
     "footer.prepend": "Adds content to the empty space in the footer.",
     "group-header": "Slot for custom rendering of a group header.",
     "group-summary": "Slot for custom rendering of a group summary.",

@@ -169,6 +169,8 @@
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -184,11 +186,13 @@
       "update:opened": "4.1.0"
     },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     },
     "examples": {
       "prop-grouping": "4.1.0",
       "prop-sort-icon": "3.12.0",
+      "slot-expanded": "4.1.0",
       "slot-group-summary": "3.10.0"
     }
   },
@@ -196,6 +200,8 @@
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -210,6 +216,7 @@
       "update:opened": "4.1.0"
     },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     }
   },
@@ -217,6 +224,8 @@
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -229,6 +238,7 @@
       "update:opened": "4.1.0"
     },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     }
   },

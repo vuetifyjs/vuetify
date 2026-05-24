@@ -232,6 +232,12 @@ The `loading` slot allows you to customize your table's display state when fetch
 
 <ExamplesExample file="v-data-table/slot-loading" />
 
+#### Expanded slot
+
+The `expanded` slot renders the expanded content inside a pre-styled row that spans all columns, so you only need to provide the inner content. It also wraps the content in a `v-expand-transition` by default — use the **expand-transition** prop to customize or disable it. Combine with `expand-strategy="single"` to keep only one row open at a time.
+
+<ExamplesExample file="v-data-table/slot-expanded" />
+
 ### Misc
 
 #### Select All
@@ -257,5 +263,7 @@ The **show-expand** prop will render an expand icon on each row. You can customi
 You can override the rows expand icon via the `item.data-table-expand` slot. To call upon the expand functionality, pass the slots provided `internalItem` to the `toggleExpand` function and add it to a click handler to perform the expand functionality. You can also check the current state of the rows expansion by passing the `internalItem` to the `isExpanded` function.
 
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
+
+The `expanded-row` slot is a full row override — you are responsible for rendering the wrapping `<tr>` and the `<td>` cells inside it, so you can split the expanded area into multiple columns. If you only need to fill the row with a single block of content, prefer the simpler [expanded](#expanded-slot) slot.
 
 <ExamplesExample file="v-data-table/misc-expand" />

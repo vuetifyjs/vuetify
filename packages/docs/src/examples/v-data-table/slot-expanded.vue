@@ -2,57 +2,40 @@
   <v-data-table
     :headers="headers"
     :items="movies"
+    expand-strategy="single"
     item-value="title"
     hide-default-footer
     show-expand
   >
-    <template v-slot:item.data-table-expand="{ internalItem, isExpanded, toggleExpand }">
-      <v-btn
-        :append-icon="isExpanded(internalItem) ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        :text="isExpanded(internalItem) ? 'Collapse' : 'More info'"
-        class="text-none"
-        color="medium-emphasis"
-        size="small"
-        variant="text"
-        width="105"
-        border
-        slim
-        @click="toggleExpand(internalItem)"
-      ></v-btn>
-    </template>
+    <template v-slot:expanded="{ item }">
+      <v-sheet class="ma-2" rounded="lg" border>
+        <v-table density="compact">
+          <tbody class="bg-surface-light">
+            <tr>
+              <th>Rating</th>
+              <th>Synopsis</th>
+              <th>Cast</th>
+            </tr>
+          </tbody>
 
-    <template v-slot:expanded-row="{ columns, item }">
-      <tr>
-        <td class="text-center">
-          <v-rating
-            :model-value="item.details.rating"
-            color="orange-darken-2"
-            density="comfortable"
-            size="small"
-            half-increments
-            readonly
-          ></v-rating>
-        </td>
-        <td :colspan="columns.length - 1" class="py-2">
-          <v-sheet rounded="lg" border>
-            <v-table density="compact">
-              <tbody class="bg-surface-light">
-                <tr>
-                  <th>Synopsis</th>
-                  <th>Cast</th>
-                </tr>
-              </tbody>
-
-              <tbody>
-                <tr>
-                  <td class="py-2">{{ item.details.synopsis }}</td>
-                  <td class="py-2">{{ item.details.cast.join(', ') }}</td>
-                </tr>
-              </tbody>
-            </v-table>
-          </v-sheet>
-        </td>
-      </tr>
+          <tbody>
+            <tr>
+              <td class="py-2">
+                <v-rating
+                  :model-value="item.details.rating"
+                  color="orange-darken-2"
+                  density="comfortable"
+                  size="small"
+                  half-increments
+                  readonly
+                ></v-rating>
+              </td>
+              <td class="py-2">{{ item.details.synopsis }}</td>
+              <td class="py-2">{{ item.details.cast.join(', ') }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-sheet>
     </template>
   </v-data-table>
 </template>
@@ -64,7 +47,7 @@
     { width: 150, title: 'Genre', key: 'genre' },
     { width: 100, title: 'Year', key: 'year', align: 'end' },
     { width: 140, title: 'Runtime(min)', key: 'runtime', align: 'end' },
-    { width: 1, key: 'data-table-expand', align: 'end' }, // optional, to keep it as short as possible
+    { width: 1, key: 'data-table-expand', align: 'end' },
   ]
 
   const movies = [
@@ -140,7 +123,7 @@
         { width: 150, title: 'Genre', key: 'genre' },
         { width: 100, title: 'Year', key: 'year', align: 'end' },
         { width: 140, title: 'Runtime(min)', key: 'runtime', align: 'end' },
-        { width: 1, key: 'data-table-expand', align: 'end' }, // optional, to keep it as short as possible
+        { width: 1, key: 'data-table-expand', align: 'end' },
       ],
       movies: [
         {
