@@ -5,8 +5,8 @@ import { VField } from '@/components/VField/VField'
 import { computed, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import { VOtpInputSymbol } from './VOtpInput'
+// Shared
+import { VOtpInputSymbol } from './shared'
 
 export const makeVOtpFieldProps = propsFactory({
   index: {
