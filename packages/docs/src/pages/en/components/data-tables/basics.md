@@ -234,7 +234,7 @@ The `loading` slot allows you to customize your table's display state when fetch
 
 #### Expanded slot
 
-The `expanded` slot renders the expanded content inside a pre-styled row that spans all columns, so you only need to provide the inner content. It also wraps the content in a `v-expand-transition` by default — use the **expand-transition** prop to customize or disable it. Combine with `expand-strategy="single"` to keep only one row open at a time.
+The `expanded` slot renders the expanded content inside a row that spans all columns, so you only need to provide the inner content. It also applies expand/collapse animation. Combine with `expand-strategy="single"` to keep only one row open at a time.
 
 <ExamplesExample file="v-data-table/slot-expanded" />
 
@@ -264,6 +264,10 @@ You can override the rows expand icon via the `item.data-table-expand` slot. To 
 
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
 
-The `expanded-row` slot is a full row override — you are responsible for rendering the wrapping `<tr>` and the `<td>` cells inside it, so you can split the expanded area into multiple columns. If you only need to fill the row with a single block of content, prefer the simpler [expanded](#expanded-slot) slot.
+::: tip
+
+The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside inside it, so you can split the expanded area into multiple columns. If you intend to use `colspand="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
+
+:::
 
 <ExamplesExample file="v-data-table/misc-expand" />
