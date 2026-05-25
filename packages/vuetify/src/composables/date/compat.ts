@@ -33,13 +33,9 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
     if (this.legacy.locale != null) this.legacy.locale = value
   }
 
-  get firstDayOfWeek (): number {
-    return this._firstDayOfWeek
-  }
-
-  set firstDayOfWeek (value: number) {
-    this._firstDayOfWeek = value
-  }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get firstDayOfWeek () { return this._firstDayOfWeek }
+  set firstDayOfWeek (value: number) { this._firstDayOfWeek = value }
 
   // ============================================
   // Week methods — passthrough (both APIs are param-based)
