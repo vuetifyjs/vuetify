@@ -183,7 +183,7 @@ describe('VDateRangePicker', () => {
       await expect.poll(() => document.activeElement?.getAttribute('data-v-date')).toBe('2026-06-30')
       // Left panel stayed on May; only the right panel moved.
       expect(cell('2026-05-15')).not.toBeNull()
-      expect(cell('2026-07-10')).toBeNull()
+      await expect.poll(() => cell('2026-07-10')).toBeNull()
     })
 
     it('ArrowRight on the last day of the left panel pushes the left panel into the gap', async () => {
@@ -199,7 +199,7 @@ describe('VDateRangePicker', () => {
       await expect.poll(() => document.activeElement?.getAttribute('data-v-date')).toBe('2026-06-01')
       // Right panel stayed on July; only the left panel moved.
       expect(cell('2026-07-10')).not.toBeNull()
-      expect(cell('2026-05-15')).toBeNull()
+      await expect.poll(() => cell('2026-05-15')).toBeNull()
     })
 
     it('ArrowRight on April 30 still cross-focuses May 1 in independent mode when panels are adjacent', async () => {
