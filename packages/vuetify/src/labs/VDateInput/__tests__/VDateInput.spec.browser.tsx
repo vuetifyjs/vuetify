@@ -5,6 +5,9 @@ import { VDateInput } from '../VDateInput'
 import { render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
+// Types
+import type { Temporal } from '@js-temporal/polyfill'
+
 describe('VDateInput', () => {
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
     const onFocus = vi.fn()
@@ -18,7 +21,7 @@ describe('VDateInput', () => {
   })
 
   it('accepts keyboard input even if the picker is hidden', async () => {
-    const model = ref<Date | null>(null)
+    const model = ref<Temporal.PlainDateTime | null>(null)
     const { element } = render(() => <VDateInput v-model={ model.value } />)
 
     await userEvent.click(element)
@@ -32,8 +35,7 @@ describe('VDateInput', () => {
     await userEvent.type(input, '02/20/2022{Enter}')
 
     expect(model.value).toBeDefined()
-    const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' })
-    expect(formatter.format(model.value!)).toBe('Feb 20, 2022')
+    expect(model.value!.toLocaleString('en-US', { dateStyle: 'medium' })).toBe('Feb 20, 2022')
   })
 
   describe('parseDateString', () => {
@@ -41,37 +43,37 @@ describe('VDateInput', () => {
       {
         format: 'YYYY-MM-DD',
         input: '2024-03-15',
-        expected: { year: 2024, month: 2, day: 15 },
+        expected: { year: 2024, month: 3, day: 15 },
       },
       {
         format: 'MM/DD/YYYY',
         input: '03/15/2024',
-        expected: { year: 2024, month: 2, day: 15 },
+        expected: { year: 2024, month: 3, day: 15 },
       },
       {
         format: 'DD-MM-YYYY',
         input: '15-03-2024',
-        expected: { year: 2024, month: 2, day: 15 },
+        expected: { year: 2024, month: 3, day: 15 },
       },
       {
         format: 'YYYY-MM-DD',
-        input: '2023-02-29',
-        expected: { year: 2023, month: 2, day: 1 },
+        input: '2023-02-29', // V0DateAdapter.parseISO throws error
+        expected: undefined,
       },
       {
         format: 'YYYY-MM-DD',
         input: '2024-02-29',
-        expected: { year: 2024, month: 1, day: 29 },
+        expected: { year: 2024, month: 2, day: 29 },
       },
       {
         format: 'YYYY-MM-DD',
         input: '2024-12-31',
-        expected: { year: 2024, month: 11, day: 31 },
+        expected: { year: 2024, month: 12, day: 31 },
       },
       {
         format: 'YYYY-MM-DD',
         input: '2024-01-01',
-        expected: { year: 2024, month: 0, day: 1 },
+        expected: { year: 2024, month: 1, day: 1 },
       },
     ]
 
@@ -88,10 +90,15 @@ describe('VDateInput', () => {
         await userEvent.keyboard(input)
         await userEvent.keyboard('{Enter}')
 
-        const date = emitted<Date[]>('update:modelValue')![0][0]
-        expect(date.getFullYear()).toBe(expected.year)
-        expect(date.getMonth()).toBe(expected.month)
-        expect(date.getDate()).toBe(expected.day)
+        if (!expected) {
+          expect(emitted('update:modelValue')).toBeUndefined()
+          return
+        }
+
+        const date = emitted<Temporal.PlainDateTime[]>('update:modelValue')![0][0]
+        expect(date.year).toBe(expected.year)
+        expect(date.month).toBe(expected.month)
+        expect(date.day).toBe(expected.day)
       })
     })
 
@@ -154,7 +161,7 @@ describe('VDateInput', () => {
       await userEvent.clear(input)
       await userEvent.keyboard('{Enter}')
 
-      const date = emitted<Date[]>('update:modelValue')![0][0]
+      const date = emitted<Temporal.PlainDateTime[]>('update:modelValue')![0][0]
       expect(date).toBeNull()
     })
   })
