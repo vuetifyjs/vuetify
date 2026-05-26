@@ -8,6 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
+import { computed } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -21,8 +22,14 @@ export type VTableSlots = {
 }
 
 export type Striped = null | 'odd' | 'even'
+export type Gridlines = 'horizontal' | 'vertical' | 'all'
 
 export const makeVTableProps = propsFactory({
+  gridlines: {
+    type: [Boolean, String] as PropType<boolean | Gridlines>,
+    default: 'horizontal',
+    validator: (v: any) => typeof v === 'boolean' || ['horizontal', 'vertical', 'all'].includes(v),
+  },
   fixedHeader: Boolean,
   fixedFooter: Boolean,
   height: [Number, String],
@@ -48,10 +55,17 @@ export const VTable = genericComponent<VTableSlots>()({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
+    const gridlinesVariant = computed<'none' | 'horizontal' | 'vertical' | 'all'>(() => {
+      if (props.gridlines === false) return 'none'
+      if (props.gridlines === true) return 'all'
+      return props.gridlines
+    })
+
     useRender(() => (
       <props.tag
         class={[
           'v-table',
+          `v-table--gridlines-${gridlinesVariant.value}`,
           {
             'v-table--fixed-height': !!props.height,
             'v-table--fixed-header': props.fixedHeader,
