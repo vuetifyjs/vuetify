@@ -2,9 +2,11 @@
 import { computed, Fragment, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Shared
+import { VOtpInputSymbol } from './shared'
+
 // Types
 import type { PropType, VNode } from 'vue'
-import { VOtpInputSymbol } from './VOtpInput'
 
 function countSlotChildren (vnodes: VNode[]): number {
   let count = 0
