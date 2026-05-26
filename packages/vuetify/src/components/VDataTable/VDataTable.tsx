@@ -41,6 +41,7 @@ import type { GenericProps, SelectItemKey } from '@/util'
 export type VDataTableSlotProps<T> = {
   page: number
   itemsPerPage: number
+  itemsLength: number
   sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
   pageCount: number
   toggleSort: ReturnType<typeof provideSort>['toggleSort']
@@ -239,6 +240,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
       itemsPerPage: itemsPerPage.value,
+      itemsLength: filteredItems.value.length,
       sortBy: sortBy.value,
       pageCount: pageCount.value,
       toggleSort,
