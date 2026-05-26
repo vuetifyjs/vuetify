@@ -5,7 +5,7 @@ import { VDateRangePicker } from '../VDateRangePicker'
 import { render, screen, userEvent } from '@test'
 import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const cell = (iso: string) => screen.queryByCSS(`[data-v-date="${iso}"]`)
 const dayBtn = (iso: string) => cell(iso) as HTMLButtonElement | null
@@ -73,10 +73,10 @@ describe('VDateRangePicker', () => {
     await userEvent.keyboard('{ArrowLeft}')
 
     // Months should have shifted back: left = March, right = April. Focus is on March 31.
-    await expect.poll(() => cell('2026-03-31')).not.toBeNull()
+    await expect.poll(() => cell('2026-03-15')).not.toBeNull()
     await expect.poll(() => document.activeElement?.getAttribute('data-v-date')).toBe('2026-03-31')
     // April still visible in the right panel.
-    expect(cell('2026-04-15')).not.toBeNull()
+    await expect.poll(() => cell('2026-04-15')).not.toBeNull()
   })
 
   it('hover preview in one panel updates the preview band in the other', async () => {
@@ -93,13 +93,8 @@ describe('VDateRangePicker', () => {
     await userEvent.hover(dayBtn('2026-05-15')!)
 
     // Cells between Apr 10 and May 15 should now carry preview classes in BOTH panels.
-    await expect.poll(() =>
-      dayWrapper('2026-04-20')?.classList.contains('v-date-picker-month__day--preview-middle')
-    ).toBe(true)
-
-    await expect.poll(() =>
-      dayWrapper('2026-05-05')?.classList.contains('v-date-picker-month__day--preview-middle')
-    ).toBe(true)
+    await expect.poll(() => dayWrapper('2026-04-20')).toHaveClass('v-date-picker-month__day--preview-middle')
+    await expect.poll(() => dayWrapper('2026-05-05')).toHaveClass('v-date-picker-month__day--preview-middle')
   })
 
   describe('auto-navigate on model change', () => {
@@ -134,9 +129,10 @@ describe('VDateRangePicker', () => {
 
       // Update the model to a date that's already visible in the right panel.
       model.value = ['2026-04-15', '2026-05-20']
+      await nextTick()
 
       // No navigation — April and May are still the displayed months.
-      await expect.poll(() => cell('2026-04-15')).not.toBeNull()
+      expect(cell('2026-04-15')).not.toBeNull()
       expect(cell('2026-05-20')).not.toBeNull()
       // March should NOT be rendered — proves panels didn't shift back.
       expect(cell('2026-03-15')).toBeNull()
@@ -164,10 +160,10 @@ describe('VDateRangePicker', () => {
 
       // Left=April, Right=May → left's next would step into May (same as right), right's prev would step into April (same as left).
       const [leftPrev, leftNext, rightPrev, rightNext] = navButtons as HTMLButtonElement[]
-      expect(leftPrev.disabled).toBe(false)
-      expect(leftNext.disabled).toBe(true)
-      expect(rightPrev.disabled).toBe(true)
-      expect(rightNext.disabled).toBe(false)
+      expect(leftPrev).toBeEnabled()
+      expect(leftNext).toBeDisabled()
+      expect(rightPrev).toBeDisabled()
+      expect(rightNext).toBeEnabled()
     })
 
     it('ArrowLeft on the first day of the right panel pulls the right panel back into the gap', async () => {
@@ -227,8 +223,8 @@ describe('VDateRangePicker', () => {
       await expect.poll(() => cell('2026-04-15')).not.toBeNull()
       await expect.poll(() => cell('2026-07-10')).not.toBeNull()
       // May/June should NOT be rendered — proves we jumped, not stepped.
-      expect(cell('2026-05-15')).toBeNull()
-      expect(cell('2026-06-15')).toBeNull()
+      await expect.poll(() => cell('2026-05-15')).toBeNull()
+      await expect.poll(() => cell('2026-06-15')).toBeNull()
     })
 
     it('allows the panels to drift apart and re-enables the buttons once there is a gap', async () => {
