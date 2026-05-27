@@ -70,6 +70,7 @@ export type VDataTableSlotProps<T> = {
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
   default: VDataTableSlotProps<T>
+  caption: never
   colgroup: VDataTableSlotProps<T>
   top: VDataTableSlotProps<T>
   body: VDataTableSlotProps<T>
@@ -291,6 +292,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
         >
           {{
             top: () => slots.top?.(slotProps.value),
+            caption: slots.caption,
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }

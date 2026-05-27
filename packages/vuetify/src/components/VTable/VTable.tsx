@@ -19,12 +19,15 @@ export type VTableSlots = {
   top: never
   bottom: never
   wrapper: never
+  caption: never
 }
 
 export type Striped = null | 'odd' | 'even'
 export type Gridlines = 'horizontal' | 'vertical' | 'all'
 
 export const makeVTableProps = propsFactory({
+  ariaLabel: String,
+  ariaLabelledby: String,
   gridlines: {
     type: [Boolean, String] as PropType<boolean | Gridlines>,
     default: 'horizontal',
@@ -89,7 +92,11 @@ export const VTable = genericComponent<VTableSlots>()({
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}
           >
-            <table>
+            <table
+              aria-label={ props.ariaLabel }
+              aria-labelledby={ props.ariaLabelledby }
+            >
+              { slots.caption?.() }
               { slots.default() }
             </table>
           </div>

@@ -42,6 +42,7 @@ type VDataTableVirtualSlotProps<T> = Omit<
 >
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
+  caption: never
   colgroup: VDataTableVirtualSlotProps<T>
   top: VDataTableVirtualSlotProps<T>
   headers: VDataTableHeadersSlots['headers']
@@ -229,7 +230,11 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                   height: convertToUnit(props.height),
                 }}
               >
-                <table>
+                <table
+                  aria-label={ props.ariaLabel }
+                  aria-labelledby={ props.ariaLabelledby }
+                >
+                  { slots.caption && <caption>{ slots.caption() }</caption> }
                   { slots.colgroup?.(slotProps.value) }
                   { !props.hideDefaultHeader && (
                     <thead key="thead">

@@ -177,6 +177,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
         >
           {{
             top: () => slots.top?.(slotProps.value),
+            caption: slots.caption,
             default: () => slots.default ? slots.default(slotProps.value) : (
               <>
                 { slots.colgroup?.(slotProps.value) }
