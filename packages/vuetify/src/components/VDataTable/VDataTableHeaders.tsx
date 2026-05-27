@@ -172,10 +172,17 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       const isEmpty = column.key === 'data-table-group' && column.width === 0 && !column.title
       const headerProps = mergeProps(props.headerProps ?? {}, column.headerProps ?? {})
       const isSortable = column.sortable && !props.disableSort
+      const sortItem = isSortable ? sortBy.value.find(item => item.key === column.key) : undefined
+      const ariaSort = sortItem?.order === 'asc'
+        ? 'ascending'
+        : sortItem?.order === 'desc'
+          ? 'descending'
+          : undefined
 
       return (
         <VDataTableColumn
           tag="th"
+          aria-sort={ ariaSort }
           align={ column.align }
           class={[
             {
