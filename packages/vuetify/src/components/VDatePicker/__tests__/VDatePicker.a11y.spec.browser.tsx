@@ -311,7 +311,7 @@ describe('VDatePickerMonths — Escape', () => {
 
     await userEvent.keyboard('{Escape}')
 
-    expect(document.querySelector('.v-date-picker-months')).toBeNull()
+    await expect.poll(() => document.querySelector('.v-date-picker-months')).toBeNull()
     await expect.poll(() => document.querySelector('[data-highlighted]')).not.toBeNull()
     expect(document.querySelector('[data-highlighted]')!.tagName.toLowerCase()).toBe('button')
   })
@@ -333,7 +333,7 @@ describe('VDatePickerYears — Escape', () => {
 
     await userEvent.keyboard('{Escape}')
 
-    expect(document.querySelector('.v-date-picker-years')).toBeNull()
+    await expect.poll(() => document.querySelector('.v-date-picker-years')).toBeNull()
     await expect.poll(() => document.querySelector('[data-highlighted]')).not.toBeNull()
     expect(document.querySelector('[data-highlighted]')!.tagName.toLowerCase()).toBe('button')
   })

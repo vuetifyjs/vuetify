@@ -24,22 +24,16 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
 import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
 
+// Shared
+import { VOtpInputSymbol } from './shared'
+
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
-import type { OtpInputPattern, OtpSlotData } from './useOtpInput'
+import type { PropType } from 'vue'
+import type { OtpInputPattern } from './useOtpInput'
 
 export type { OtpSlotData, OtpInputPattern } from './useOtpInput'
-
-export interface VOtpInputContext {
-  otpSlots: Readonly<Ref<OtpSlotData[]>>
-  isFocused: Ref<boolean>
-  focusAll: Ref<boolean>
-  divider: Ref<string | undefined>
-  merged: Ref<boolean>
-  focusAt: (index: number) => void
-}
-
-export const VOtpInputSymbol: InjectionKey<VOtpInputContext> = Symbol.for('vuetify:v-otp-input')
+export { VOtpInputSymbol } from './shared'
+export type { VOtpInputContext } from './shared'
 
 export type VOtpInputSlots = {
   default: never

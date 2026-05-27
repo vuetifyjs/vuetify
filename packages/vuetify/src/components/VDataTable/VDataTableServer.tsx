@@ -131,6 +131,7 @@ export const VDataTableServer = genericComponent<new <T extends readonly any[], 
     const slotProps = computed<VDataTableSlotProps<any>>(() => ({
       page: page.value,
       itemsPerPage: itemsPerPage.value,
+      itemsLength: itemsLength.value,
       sortBy: sortBy.value,
       pageCount: pageCount.value,
       toggleSort,

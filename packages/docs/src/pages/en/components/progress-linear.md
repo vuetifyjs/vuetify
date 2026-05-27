@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress linear
   title: Progress linear component

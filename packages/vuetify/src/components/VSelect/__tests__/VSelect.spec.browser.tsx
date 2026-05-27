@@ -956,8 +956,8 @@ describe('VSelect', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
-      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+      await expect.poll(() => screen.queryByTestId('header-content')).toHaveTextContent('My Header')
+      await expect.poll(() => screen.queryByTestId('footer-content')).toHaveTextContent('My Footer')
     })
 
     it('should navigate freely between interactive elements with Tab', async () => {

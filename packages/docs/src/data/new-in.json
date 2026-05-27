@@ -171,6 +171,7 @@
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
       "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -202,6 +203,7 @@
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
       "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -226,6 +228,7 @@
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
       "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
       "groupKey": "4.1.0",
@@ -526,6 +529,11 @@
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
       "sliderTransitionDuration": "3.11.0"
+    }
+  },
+  "VTable": {
+    "props": {
+      "gridlines": "4.1.0"
     }
   },
   "VTabs": {

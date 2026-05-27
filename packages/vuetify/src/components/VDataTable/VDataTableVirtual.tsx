@@ -179,6 +179,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
     })
 
     const slotProps = computed<VDataTableVirtualSlotProps<any>>(() => ({
+      itemsLength: allItems.value.length,
       sortBy: sortBy.value,
       toggleSort,
       someSelected: someSelected.value,
