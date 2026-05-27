@@ -90,6 +90,57 @@ describe('VDialog', () => {
     await expect.poll(() => document.activeElement).toBe(first)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/22322
+  it('should wrap focus to the last element when Shift+Tab from the initial content wrapper', async () => {
+    const model = ref(true)
+    render(() => (
+      <div>
+        <button data-testid="outside">Outside</button>
+        <VDialog v-model={ model.value } persistent>
+          <div>
+            <button data-testid="first">First</button>
+            <button data-testid="last">Last</button>
+          </div>
+        </VDialog>
+      </div>
+    ))
+    const last = screen.getByCSS('button[data-testid="last"]')
+    const dialogContent = document.querySelector('.v-dialog .v-overlay__content') as HTMLElement
+
+    await expect.poll(() => document.activeElement).toBe(dialogContent)
+
+    await userEvent.tab({ shift: true })
+    await expect.poll(() => document.activeElement).toBe(last)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22322
+  it('should pull focus back into the dialog when Tab is pressed from outside', async () => {
+    const model = ref(true)
+    render(() => (
+      <div>
+        <button data-testid="outside">Outside</button>
+        <VDialog v-model={ model.value } persistent>
+          <div>
+            <button data-testid="first">First</button>
+            <button data-testid="last">Last</button>
+          </div>
+        </VDialog>
+      </div>
+    ))
+    const outside = screen.getByCSS('button[data-testid="outside"]')
+    const first = screen.getByCSS('button[data-testid="first"]')
+    const last = screen.getByCSS('button[data-testid="last"]')
+
+    last.focus() // Consume the one-shot initial capture listener
+    await expect.poll(() => document.activeElement).toBe(last)
+
+    outside.focus() // simulating focus landing back on <body> after closing dialog
+    await expect.poll(() => document.activeElement).toBe(outside)
+
+    await userEvent.tab() // should be pulled back
+    await expect.poll(() => document.activeElement).toBe(first)
+  })
+
   describe('routing back', () => {
     function createTestRouter () {
       return createRouter({

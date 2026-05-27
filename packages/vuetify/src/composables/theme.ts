@@ -268,7 +268,7 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
 
   for (const [key, value] of Object.entries(theme.variables)) {
     const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (color.a == null ? '' : `, ${color.a}`) : undefined
     variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 
