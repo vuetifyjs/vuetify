@@ -81,6 +81,10 @@ export const makeVDataTableHeadersProps = propsFactory({
   headerProps: {
     type: Object as PropType<Record<string, any>>,
   },
+  selectAllLabel: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.selectAll',
+  },
 
   /** @deprecated */
   sticky: Boolean,
@@ -221,6 +225,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(columnSlotProps) ?? (showSelectAll.value && (
                   <VCheckboxBtn
+                    aria-label={ t(props.selectAllLabel) }
                     color={ props.color }
                     density={ props.density }
                     modelValue={ allSelected.value }
@@ -321,6 +326,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       function renderSelectAll () {
         return (
           <VCheckboxBtn
+            aria-label={ t(props.selectAllLabel) }
             class="v-data-table-header__select-all"
             color={ props.color }
             density="compact"
