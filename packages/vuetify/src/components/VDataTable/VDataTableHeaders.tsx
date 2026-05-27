@@ -7,6 +7,7 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { useHeaders } from './composables/headers'
+import { useLoadingConfig } from './composables/loading'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
@@ -138,6 +139,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
+
+    const loadingConfig = useLoadingConfig(() => props.loading, () => props.color)
 
     const slotProps = computed(() => ({
       headers: headers.value,
@@ -366,16 +369,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               </tr>
             ))}
 
-          { props.loading && (
+          { loadingConfig.active.value && ['start', 'both'].includes(loadingConfig.side.value) && (
             <tr class="v-data-table-progress">
               <th colspan={ columns.value.length }>
                 <LoaderSlot
                   name="v-data-table-progress"
                   absolute
                   active
-                  color={ typeof props.loading === 'boolean' || props.loading === 'true'
-                    ? props.color
-                    : props.loading }
+                  color={ loadingConfig.color.value }
                   indeterminate
                   v-slots={{ default: slots.loader }}
                 />

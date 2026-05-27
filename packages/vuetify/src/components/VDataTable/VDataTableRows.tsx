@@ -19,7 +19,7 @@ import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRend
 // Types
 import type { Component, PropType, TransitionProps } from 'vue'
 import type { Group, GroupSummary } from './composables/group'
-import type { CellProps, DataTableItem, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
+import type { CellProps, DataTableItem, DataTableLoading, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
 import type { GenericProps } from '@/util'
@@ -36,7 +36,7 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
 
 export const makeVDataTableRowsProps = propsFactory({
   color: String,
-  loading: [Boolean, String],
+  loading: [Boolean, String, Object] as PropType<DataTableLoading>,
   loadingText: {
     type: String,
     default: '$vuetify.dataIterator.loadingText',
