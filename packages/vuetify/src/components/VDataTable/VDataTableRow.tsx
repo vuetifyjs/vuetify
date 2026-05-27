@@ -11,6 +11,7 @@ import { useSort } from './composables/sort'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
@@ -49,6 +50,10 @@ export const makeVDataTableRowProps = propsFactory({
     type: IconValue,
     default: '$expand',
   },
+  selectRowLabel: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.selectRow',
+  },
 
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
@@ -70,6 +75,7 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
@@ -171,6 +177,7 @@ export const VDataTableRow = genericComponent<new <T>(
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        aria-label={ t(props.selectRowLabel) }
                         color={ props.color }
                         disabled={ !item.selectable }
                         density={ props.density }
