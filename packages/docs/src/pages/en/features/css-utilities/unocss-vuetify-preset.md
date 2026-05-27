@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: UnoCSS + Vuetify preset
   title: Vuetify + UnoCSS (Vuetify preset)

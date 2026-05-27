@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: TailwindCSS
   title: Vuetify + TailwindCSS

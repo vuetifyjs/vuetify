@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: UnoCSS + presetWind4
   title: Vuetify + UnoCSS (presetWind4)

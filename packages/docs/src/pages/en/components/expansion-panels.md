@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Expansion panels
   title: Expansion panel component
