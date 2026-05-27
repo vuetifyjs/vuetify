@@ -376,8 +376,9 @@
     },
     "examples": {
       "misc-custom-layout": "4.1.0",
-      "misc-merged": "4.1.0",
-      "misc-pattern": "4.1.0"
+      "prop-merged": "4.1.0",
+      "prop-pattern": "4.1.0",
+      "slot-divider": "4.1.0"
     }
   },
   "VOverlay": {
