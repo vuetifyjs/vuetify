@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'fins a',
   },
+  monthPicker: {
+    title: 'Selecciona mes',
+    itemsSelected: '{0} seleccionats',
+    header: 'Introdueix el mes',
+    range: {
+      title: 'Introdueix els mesos',
+    },
+    ariaLabel: {
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectYear: 'Selecciona any',
+      currentMonth: 'Mes actual, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seleccionats',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} més',
     today: 'Avui',
+  },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
   },
   input: {
     clear: 'Esborra {0}',

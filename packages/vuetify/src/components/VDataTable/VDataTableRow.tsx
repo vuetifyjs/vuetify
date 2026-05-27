@@ -2,6 +2,7 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -21,6 +22,7 @@ import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRen
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
 import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
+import type { FilterMatchArrayMultiple } from '@/composables/filter'
 import type { GenericProps } from '@/util'
 
 export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
@@ -59,6 +61,7 @@ export const makeVDataTableRowProps = propsFactory({
     default: '$vuetify.dataTable.ariaLabel.deselectRow',
   },
 
+  getMatches: Function as PropType<(item: DataTableItem) => Record<string, FilterMatchArrayMultiple | undefined> | undefined>,
   onClick: EventProp<[MouseEvent]>(),
   onContextmenu: EventProp<[MouseEvent]>(),
   onDblclick: EventProp<[MouseEvent]>(),
@@ -218,7 +221,11 @@ export const VDataTableRow = genericComponent<new <T>(
 
                   if (slots[slotName] && !mobile.value) return slots[slotName](slotProps)
 
-                  const displayValue = toDisplayString(slotProps.value)
+                  const text = toDisplayString(slotProps.value)
+                  const matches = props.getMatches?.(item)?.[column.key!]
+                  const displayValue = matches?.length
+                    ? <VHighlight text={ text } matches={ matches } />
+                    : text
 
                   return !mobile.value ? displayValue : (
                     <>

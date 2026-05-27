@@ -1,27 +1,39 @@
 <template>
-  <div class="text--primary">
-    <!-- Using the elevation prop -->
-    <v-hover v-slot="{ isHovering, props }">
-      <v-card
-        v-bind="props"
-        :elevation="isHovering ? 5 : 1"
-        class="mx-auto pa-6"
+  <v-container>
+    <v-row justify="center">
+      <v-col
+        v-for="(_, n) in 6"
+        :key="n"
+        cols="auto"
       >
-        Prop based elevation
-      </v-card>
-    </v-hover>
+        <v-card
+          :elevation="0"
+          :hover-elevation="n"
+          border="thin dashed"
+          class="d-flex justify-center align-center"
+          height="70"
+          rounded="xl"
+          width="100"
+        >
+          <div>{{ n }}</div>
+        </v-card>
+      </v-col>
+    </v-row>
 
-    <div class="my-6"></div>
-
-    <!-- Using a dynamic class -->
-    <v-hover v-slot="{ isHovering, props }">
-      <div
-        v-bind="props"
-        :class="`bg-surface elevation-${isHovering ? 5 : 1}`"
-        class="mx-auto pa-6"
+    <v-row justify="center">
+      <v-col
+        v-for="(_, n) in 6"
+        :key="n"
+        cols="auto"
       >
-        Class based elevation
-      </div>
-    </v-hover>
-  </div>
+        <div
+          :class="`bg-surface elevation-0 hover-elevation-${n}`"
+          class="d-flex justify-center align-center rounded-xl border-thin border-dashed"
+          style="height: 70px; width: 100px"
+        >
+          <div>{{ n }}</div>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>

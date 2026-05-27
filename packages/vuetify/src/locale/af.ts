@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'tot',
   },
+  monthPicker: {
+    title: 'Kies maand',
+    itemsSelected: '{0} gekies',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maande in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectYear: 'Kies jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} gekies',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} meer',
     today: 'Vandag',
+  },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
   },
   input: {
     clear: 'Maak skoon {0}',

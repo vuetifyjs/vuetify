@@ -80,6 +80,14 @@
       "prop-custom-transition": "3.10.0"
     }
   },
+  "VCalendar": {
+    "props": {
+      "format": "4.1.0"
+    },
+    "examples": {
+      "prop-hour24": "4.1.0"
+    }
+  },
   "VChip": {
     "props": {
       "baseColor": "3.8.0"
@@ -94,7 +102,8 @@
     "props": {
       "hideEyeDropper": "3.10.0",
       "eyeDropperIcon": "3.10.0",
-      "hideTitle": "3.10.0"
+      "hideTitle": "3.10.0",
+      "hideInputLabels": "4.1.0"
     }
   },
   "VCombobox": {
@@ -130,6 +139,7 @@
       "hideTitle": "3.10.0",
       "landscape": "3.11.0",
       "landscapeHeaderWidth": "3.11.0",
+      "noAutoNavigation": "4.1.0",
       "noMonthPicker": "3.11.0"
     },
     "slots": {
@@ -143,25 +153,47 @@
   },
   "VDataIterator": {
     "props": {
-      "initialSortOrder": "3.11.0"
+      "groupKey": "4.1.0",
+      "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0"
+    },
+    "events": {
+      "update:opened": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VDataTable": {
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "headerProps": "3.5.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "pageBy": "3.12.0",
+      "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
     },
+    "events": {
+      "update:opened": "4.1.0"
+    },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     },
     "examples": {
+      "prop-grouping": "4.1.0",
       "prop-sort-icon": "3.12.0",
+      "slot-expanded": "4.1.0",
       "slot-group-summary": "3.10.0"
     }
   },
@@ -169,13 +201,24 @@
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "pageBy": "3.12.0",
+      "showFirstLastPage": "4.1.0",
       "sortIcon": "3.12.0"
     },
+    "events": {
+      "update:opened": "4.1.0"
+    },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     }
   },
@@ -183,12 +226,22 @@
     "props": {
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
+      "expandStrategy": "4.1.0",
+      "expandTransition": "4.1.0",
+      "gridlines": "4.1.0",
       "groupCollapseIcon": "3.10.0",
       "groupExpandIcon": "3.10.0",
+      "groupKey": "4.1.0",
       "initialSortOrder": "3.11.0",
+      "openAll": "4.1.0",
+      "opened": "4.1.0",
       "sortIcon": "3.12.0"
     },
+    "events": {
+      "update:opened": "4.1.0"
+    },
     "slots": {
+      "expanded": "4.1.0",
       "group-summary": "3.10.0"
     }
   },
@@ -212,7 +265,12 @@
   },
   "VExpansionPanels": {
     "props": {
-      "static": "3.4.0"
+      "static": "3.4.0",
+      "gap": "4.1.0",
+      "noDivider": "4.1.0"
+    },
+    "examples": {
+      "prop-rounded-gap": "4.1.0"
     }
   },
   "VField": {
@@ -229,7 +287,14 @@
   },
   "VFileUpload": {
     "props": {
-      "filterByType": "3.10.0"
+      "filterByType": "3.10.0",
+      "loading": "4.1.0"
+    },
+    "slots": {
+      "loader": "4.1.0"
+    },
+    "examples": {
+      "prop-loading": "4.1.0"
     }
   },
   "VIcon": {
@@ -291,16 +356,29 @@
   },
   "VNumberInput": {
     "props": {
-      "autocomplete": "3.10.0"
+      "autocomplete": "3.10.0",
+      "grouping": "4.1.0",
+      "groupSeparator": "4.1.0"
+    },
+    "examples": {
+      "prop-grouping": "4.1.0"
     }
   },
   "VOtpInput": {
     "props": {
       "density": "3.12.0",
-      "masked": "3.12.0"
+      "masked": "3.12.0",
+      "merged": "4.1.0",
+      "pattern": "4.1.0"
+    },
+    "slots": {
+      "divider": "4.1.0"
     },
     "examples": {
-      "prop-masked": "3.12.0"
+      "misc-custom-layout": "4.1.0",
+      "prop-merged": "4.1.0",
+      "prop-pattern": "4.1.0",
+      "slot-divider": "4.1.0"
     }
   },
   "VOverlay": {
@@ -329,7 +407,8 @@
     "props": {
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
-      "chunkWidth": "3.10.0"
+      "chunkWidth": "3.10.0",
+      "variant": "4.1.0"
     },
     "examples": {
       "prop-chunks": "3.10.0"
@@ -354,6 +433,12 @@
     "examples": {
       "prop-list-props": "3.5.0",
       "slot-menu-header-and-footer": "3.12.0"
+    }
+  },
+  "VSelectionControl": {
+    "props": {
+      "indeterminate": "4.1.0",
+      "indeterminateIcon": "4.1.0"
     }
   },
   "VSlider": {
@@ -404,6 +489,28 @@
       "prop-transition": "4.0.0"
     }
   },
+  "VSparkline": {
+    "props": {
+      "animation": "4.1.0",
+      "autoDraw": "4.1.0",
+      "inset": "4.1.0",
+      "interactive": "4.1.0",
+      "markerSize": "4.1.0",
+      "markerStroke": "4.1.0",
+      "showMarkers": "4.1.0",
+      "smoothMode": "4.1.0",
+      "tooltip": "4.1.0"
+    },
+    "events": {
+      "update:currentIndex": "4.1.0"
+    },
+    "examples": {
+      "misc-interactive": "4.1.0",
+      "prop-animation": "4.1.0",
+      "prop-inset": "4.1.0",
+      "prop-smooth-mode": "4.1.0"
+    }
+  },
   "VStepper": {
     "props": {
       "itemProps": "3.11.0"
@@ -423,6 +530,11 @@
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
       "sliderTransitionDuration": "3.11.0"
+    }
+  },
+  "VTable": {
+    "props": {
+      "gridlines": "4.1.0"
     }
   },
   "VTabs": {

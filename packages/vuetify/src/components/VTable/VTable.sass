@@ -15,26 +15,44 @@
     .v-table-divider
       border-right: $table-border
 
-    .v-table__wrapper
-      > table
-        > thead
-          > tr
-            > th
-              border-bottom: $table-border
-
-        > tbody
-          > tr
-            &:not(:last-child)
-              > td,
+    &--gridlines-vertical,
+    &--gridlines-horizontal,
+    &--gridlines-all
+      > .v-table__wrapper
+        > table
+          > thead
+            > tr
               > th
                 border-bottom: $table-border
 
-        > tfoot
-          > tr
+          > tfoot
+            > tr
               > td,
               > th
                 border-top: $table-border
 
+    &--gridlines-horizontal,
+    &--gridlines-all
+      > .v-table__wrapper
+        > table
+          > tbody
+            > tr
+              &:not(:last-child)
+                > td,
+                > th
+                  border-bottom: $table-border
+
+    &--gridlines-vertical,
+    &--gridlines-all
+      > .v-table__wrapper
+        > table
+          > thead,
+          > tbody,
+          > tfoot
+            > tr
+              > th:not(:last-child),
+              > td:not(:last-child)
+                border-right: $table-border
 
     &.v-table--hover
       > .v-table__wrapper

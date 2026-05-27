@@ -16,6 +16,7 @@
     "bottom": "Slot to add content below the table.",
     "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "expanded": "Slot for custom rendering of the expanded content inside a row spanning all columns.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "footer.prepend": "Adds content to the empty space in the footer.",
     "group-header": "Slot for custom rendering of a group header.",

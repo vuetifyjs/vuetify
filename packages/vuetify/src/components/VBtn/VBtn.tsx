@@ -111,7 +111,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
@@ -223,6 +223,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           aria-busy={ props.loading ? true : undefined }

@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'a',
   },
+  monthPicker: {
+    title: 'Seleziona mese',
+    itemsSelected: '{0} selezionato/i',
+    header: 'Inserisci mese',
+    range: {
+      title: 'Inserisci mesi',
+    },
+    ariaLabel: {
+      previousYear: 'Anno precedente',
+      nextYear: 'Anno successivo',
+      selectYear: 'Seleziona anno',
+      currentMonth: 'Mese corrente, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selezionato/i',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} di più',
     today: 'Oggi',
+  },
+  heatmap: {
+    less: 'Meno',
+    more: 'Più',
   },
   input: {
     clear: 'Cancella {0}',

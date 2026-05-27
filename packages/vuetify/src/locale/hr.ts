@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Odaberite mjesec',
+    itemsSelected: '{0} odabrano',
+    header: 'Unesite mjesec',
+    range: {
+      title: 'Unesite mjesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectYear: 'Odaberite godinu',
+      currentMonth: 'Trenutni mjesec, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} odabrano',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: 'Još {0}',
     today: 'Danas',
+  },
+  heatmap: {
+    less: 'Manje',
+    more: 'Više',
   },
   input: {
     clear: 'Očisti {0}',

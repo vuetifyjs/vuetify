@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Wybierz miesiąc',
+    itemsSelected: '{0} wybrano',
+    header: 'Wprowadź miesiąc',
+    range: {
+      title: 'Wprowadź miesiące',
+    },
+    ariaLabel: {
+      previousYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      selectYear: 'Wybierz rok',
+      currentMonth: 'Bieżący miesiąc, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} wybrano',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} więcej',
     today: 'Dzisiaj',
+  },
+  heatmap: {
+    less: 'Mniej',
+    more: 'Więcej',
   },
   input: {
     clear: 'Wyczyść {0}',

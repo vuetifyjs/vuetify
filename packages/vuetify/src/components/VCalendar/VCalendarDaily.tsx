@@ -1,5 +1,5 @@
 // Components
-import { VIconBtn } from '@/labs/VIconBtn'
+import { VIconBtn } from '@/components/VIconBtn'
 
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'

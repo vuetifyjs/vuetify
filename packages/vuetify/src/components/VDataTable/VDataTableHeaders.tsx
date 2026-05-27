@@ -7,6 +7,7 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { useHeaders } from './composables/headers'
+import { useLoadingConfig } from './composables/loading'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
@@ -56,6 +57,7 @@ export type VDataTableHeadersSlots = {
   loader: LoaderSlotProps
   'header.data-table-select': VDataTableHeaderCellColumnSlotProps
   'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
+  'mobile.header': HeadersSlotProps
 } & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
@@ -149,6 +151,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const { displayClasses, mobile } = useDisplay(props)
+
+    const loadingConfig = useLoadingConfig(() => props.loading, () => props.color)
 
     const slotProps = computed(() => ({
       headers: headers.value,
@@ -296,6 +300,62 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         },
       })
 
+      function renderSortSelect () {
+        return (
+          <VSelect
+            v-model={ sortingChips.value }
+            chips
+            color={ props.color }
+            class="v-data-table__td-sort-select"
+            clearable
+            density="default"
+            items={ sortableColumns.value }
+            label={ t('$vuetify.dataTable.sortBy') }
+            multiple={ props.multiSort }
+            variant="underlined"
+            returnObject
+            onClick:clear={ () => sortBy.value = [] }
+          >
+            {{
+              chip: ({ internalItem }) => (
+                <VChip
+                  onClick={ internalItem.raw.sortable ? () => toggleSort(internalItem.raw, undefined, true) : undefined }
+                  onMousedown={ (e: MouseEvent) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                  }}
+                >
+                  { internalItem.title }
+                  <VIcon
+                    class={[
+                      'v-data-table__td-sort-icon',
+                      isSorted(internalItem.raw) && 'v-data-table__td-sort-icon-active',
+                    ]}
+                    icon={ getSortIcon(internalItem.raw) }
+                    size="small"
+                  />
+                </VChip>
+              ),
+            }}
+          </VSelect>
+        )
+      }
+
+      function renderSelectAll () {
+        return (
+          <VCheckboxBtn
+            class="v-data-table-header__select-all"
+            color={ props.color }
+            density="compact"
+            data-testid="v-data-table-thead-mobile-sort-selector"
+            aria-label={ showSelectLabel.value }
+            modelValue={ allSelected.value }
+            indeterminate={ someSelected.value && !allSelected.value }
+            onUpdate:modelValue={ () => selectAll(!allSelected.value) }
+          />
+        )
+      }
+
       return (
         <VDataTableColumn
           tag="th"
@@ -306,69 +366,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
           { ...props.headerProps }
         >
           <div class="v-data-table-header__content">
-            { sortableColumns.value.length > 0 && (
-              <VSelect
-                key="sort-selector"
-                v-model={ sortingChips.value }
-                data-testid="v-data-table-thead-mobile-sort-selector"
-                chips
-                color={ props.color }
-                class="v-data-table__td-sort-select"
-                clearable
-                density="default"
-                items={ sortableColumns.value }
-                label={ t('$vuetify.dataTable.sortBy') }
-                multiple={ props.multiSort }
-                variant="underlined"
-                returnObject
-                onClick:clear={ () => sortBy.value = [] }
-              >
-                {{
-                  append: showSelectColumn ? () => (
-                    <VCheckboxBtn
-                      data-testid="v-data-table-thead-mobile-select-checkbox"
-                      color={ props.color }
-                      density="compact"
-                      aria-label={ showSelectLabel.value }
-                      modelValue={ allSelected.value }
-                      indeterminate={ someSelected.value && !allSelected.value }
-                      onUpdate:modelValue={ () => selectAll(!allSelected.value) }
-                    />
-                  ) : undefined,
-                  chip: ({ internalItem }) => (
-                    <VChip
-                      onClick={ internalItem.raw.sortable ? () => toggleSort(internalItem.raw, undefined, true) : undefined }
-                      onMousedown={ (e: MouseEvent) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                      }}
-                    >
-                      { internalItem.title }
-                      <VIcon
-                        class={[
-                          'v-data-table__td-sort-icon',
-                          isSorted(internalItem.raw) && 'v-data-table__td-sort-icon-active',
-                        ]}
-                        icon={ getSortIcon(internalItem.raw) }
-                        size="small"
-                      />
-                    </VChip>
-                  ),
-                }}
-              </VSelect>
-            )}
-            { showSelectColumn && sortableColumns.value.length === 0 && (
-              <VCheckboxBtn
-                key="select-checkbox"
-                class="flex-row-reverse"
-                data-testid="v-data-table-thead-mobile-select-checkbox"
-                color={ props.color }
-                density="compact"
-                label={ showSelectLabel.value }
-                modelValue={ allSelected.value }
-                indeterminate={ someSelected.value && !allSelected.value }
-                onUpdate:modelValue={ () => selectAll(!allSelected.value) }
-              />
+            { slots['mobile.header']?.(slotProps.value) ?? (
+              <>
+                { sortableColumns.value.length > 0 && renderSortSelect() }
+                { showSelectColumn && renderSelectAll() }
+              </>
             )}
           </div>
         </VDataTableColumn>
@@ -392,16 +394,14 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               </tr>
             ))}
 
-          { props.loading && (
+          { loadingConfig.active.value && ['start', 'both'].includes(loadingConfig.side.value) && (
             <tr class="v-data-table-progress">
               <th colspan={ columns.value.length }>
                 <LoaderSlot
                   name="v-data-table-progress"
                   absolute
                   active
-                  color={ typeof props.loading === 'boolean' || props.loading === 'true'
-                    ? props.color
-                    : props.loading }
+                  color={ loadingConfig.color.value }
                   indeterminate
                   v-slots={{ default: slots.loader }}
                 />

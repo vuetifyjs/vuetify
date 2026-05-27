@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.

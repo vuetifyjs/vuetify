@@ -56,28 +56,28 @@
           border-top-right-radius: inherit
 
         > :not(:first-child):not(.v-expansion-panel--after-active):not(.v-expansion-panel--active)
-          border-top-left-radius: 0
-          border-top-right-radius: 0
+          border-top-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-top-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
         > :not(:last-child):not(.v-expansion-panel--before-active):not(.v-expansion-panel--active)
-          border-bottom-left-radius: 0
-          border-bottom-right-radius: 0
+          border-bottom-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-bottom-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
       &--variant-accordion
         > :first-child:not(:last-child)
-          border-bottom-left-radius: 0
-          border-bottom-right-radius: 0
+          border-bottom-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-bottom-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
         > :last-child:not(:first-child)
-          border-top-left-radius: 0
-          border-top-right-radius: 0
+          border-top-left-radius: var(--v-expansion-panels-inner-radius, 0)
+          border-top-right-radius: var(--v-expansion-panels-inner-radius, 0)
 
           .v-expansion-panel-title--active
             border-bottom-left-radius: initial
             border-bottom-right-radius: initial
 
         > :not(:first-child):not(:last-child)
-          border-radius: 0
+          border-radius: var(--v-expansion-panels-inner-radius, 0)
 
     &--variant-accordion
       .v-expansion-panel-title__overlay
@@ -150,7 +150,8 @@
     justify-content: space-between
 
     @media (prefers-reduced-motion: no-preference)
-      transition: .3s min-height settings.$standard-easing
+      transition: .3s settings.$standard-easing
+      transition-property: min-height, border-radius
 
     @include tools.states('.v-expansion-panel-title__overlay', false)
 
@@ -180,6 +181,10 @@
 
   // Variants
   .v-expansion-panels--variant-accordion
+    &.v-expansion-panels--no-divider
+      > .v-expansion-panel::after
+        opacity: 0
+
     > .v-expansion-panel
       margin-top: 0
 

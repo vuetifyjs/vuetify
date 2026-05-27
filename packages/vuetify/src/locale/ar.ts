@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
+  monthPicker: {
+    title: 'اختر الشهر',
+    itemsSelected: '{0} محدد',
+    header: 'أدخل الشهر',
+    range: {
+      title: 'أدخل الأشهر',
+    },
+    ariaLabel: {
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectYear: 'اختر السنة',
+      currentMonth: 'الشهر الحالي، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} محدد',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} أكثر',
     today: 'Today',
+  },
+  heatmap: {
+    less: 'أقل',
+    more: 'أكثر',
   },
   input: {
     clear: 'Clear {0}',

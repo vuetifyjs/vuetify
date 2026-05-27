@@ -6,7 +6,7 @@ import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { makeVColorPickerPreviewProps, VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useRtl } from '@/composables'
@@ -35,6 +35,7 @@ export const makeVColorPickerProps = propsFactory({
   hideCanvas: Boolean,
   hideSliders: Boolean,
   hideInputs: Boolean,
+  hideInputLabels: Boolean,
   mode: {
     type: String as PropType<keyof typeof modes>,
     default: 'rgba',
@@ -191,6 +192,7 @@ export const VColorPicker = defineComponent({
                         onUpdate:color={ updateColor }
                         disabled={ props.disabled }
                         readonly={ props.readonly }
+                        hideInputLabels={ props.hideInputLabels }
                       />
                     )}
                   </div>

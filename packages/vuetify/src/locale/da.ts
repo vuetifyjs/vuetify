@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'til',
   },
+  monthPicker: {
+    title: 'Vælg måned',
+    itemsSelected: '{0} valgt',
+    header: 'Indtast måned',
+    range: {
+      title: 'Indtast måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Næste år',
+      selectYear: 'Vælg år',
+      currentMonth: 'Denne måned, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valgt',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} mere',
     today: 'I dag',
+  },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mere',
   },
   input: {
     clear: 'Ryd {0}',

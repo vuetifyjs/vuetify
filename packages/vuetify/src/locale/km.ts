@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'ដល់',
   },
+  monthPicker: {
+    title: 'ជ្រើសរើសខែ',
+    itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
+    header: 'បញ្ចូលខែ',
+    range: {
+      title: 'បញ្ចូលខែ',
+    },
+    ariaLabel: {
+      previousYear: 'ឆ្នាំមុន',
+      nextYear: 'ឆ្នាំក្រោយ',
+      selectYear: 'Select year',
+      currentMonth: 'ខែបច្ចុប្បន្ន, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} ទៀត',
     today: 'ថ្ងៃនេះ',
+  },
+  heatmap: {
+    less: 'តិច',
+    more: 'ច្រើន',
   },
   input: {
     clear: 'សម្អាត {0}',

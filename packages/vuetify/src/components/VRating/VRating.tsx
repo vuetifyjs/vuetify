@@ -29,6 +29,7 @@ type VRatingItemSlot = {
   isHovered: boolean
   icon: IconValue
   color?: string
+  activeColor?: string
   props: Record<string, unknown>
   rating: number
 }
@@ -117,7 +118,7 @@ export const VRating = genericComponent<VRatingSlots>()({
       const activeColor = props.activeColor ?? props.color
       const color = (isFilled || isHovered) ? activeColor : props.color
 
-      return { isFilled, isHovered, icon, color }
+      return { isFilled, isHovered, icon, color, activeColor }
     }))
 
     const eventState = computed(() => [0, ...increments.value].map(value => {

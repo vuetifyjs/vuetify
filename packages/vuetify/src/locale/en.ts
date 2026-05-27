@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
+  monthPicker: {
+    title: 'Select month',
+    itemsSelected: '{0} selected',
+    header: 'Enter month',
+    range: {
+      title: 'Enter months',
+    },
+    ariaLabel: {
+      previousYear: 'Previous year',
+      nextYear: 'Next year',
+      selectYear: 'Select year',
+      currentMonth: 'Current month, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
@@ -74,11 +88,15 @@ export default {
     moreEvents: '{0} more',
     today: 'Today',
   },
+  heatmap: {
+    less: 'Less',
+    more: 'More',
+  },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Enter verification code',
   },
   fileInput: {
     counter: '{0} files',

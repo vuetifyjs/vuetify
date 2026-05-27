@@ -4,7 +4,7 @@ import './VTimePicker.sass'
 // Components
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -20,7 +20,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { Period, VTimePickerViewMode } from './shared'
-import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { VPickerSlots } from '@/components/VPicker/VPicker'
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 

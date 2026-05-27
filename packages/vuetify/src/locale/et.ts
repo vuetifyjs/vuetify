@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'kuni',
   },
+  monthPicker: {
+    title: 'Valige kuu',
+    itemsSelected: '{0} valitud',
+    header: 'Sisesta kuu',
+    range: {
+      title: 'Sisesta kuud',
+    },
+    ariaLabel: {
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectYear: 'Vali aasta',
+      currentMonth: 'Praegune kuu, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valitud',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: '{0} veel',
     today: 'Täna',
+  },
+  heatmap: {
+    less: 'Vähem',
+    more: 'Rohkem',
   },
   input: {
     clear: 'Tühjenda {0}',

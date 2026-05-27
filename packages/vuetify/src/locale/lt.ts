@@ -40,6 +40,20 @@ export default {
   dateRangeInput: {
     divider: 'iki',
   },
+  monthPicker: {
+    title: 'Pasirinkite mėnesį',
+    itemsSelected: '{0} parinkta',
+    header: 'Įveskite mėnesį',
+    range: {
+      title: 'Įveskite mėnesius',
+    },
+    ariaLabel: {
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectYear: 'Pasirinkite metus',
+      currentMonth: 'Šis mėnuo, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} parinkta',
     range: {
@@ -73,6 +87,10 @@ export default {
   calendar: {
     moreEvents: 'Daugiau {0}',
     today: 'Šiandien',
+  },
+  heatmap: {
+    less: 'Mažiau',
+    more: 'Daugiau',
   },
   input: {
     clear: 'Išvalyti {0}',
