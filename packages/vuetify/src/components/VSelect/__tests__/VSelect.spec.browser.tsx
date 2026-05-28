@@ -1027,5 +1027,29 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VSelect
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    await userEvent.click(screen.getByCSS('.v-select'))
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+    expect(menu.value).toBe(true)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    screen.getAllByRole('option')[0].remove()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
   showcase({ stories })
 })

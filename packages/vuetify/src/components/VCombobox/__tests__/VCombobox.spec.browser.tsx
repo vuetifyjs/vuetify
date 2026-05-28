@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
@@ -889,6 +889,36 @@ describe('VCombobox', () => {
       await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
       expect(screen.getByTestId('header-btn')).toHaveFocus()
     })
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VCombobox
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    option.remove()
+    await waitIdle()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
   })
 
   showcase({ stories })

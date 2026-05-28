@@ -18,6 +18,7 @@ import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
+import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
 import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
@@ -255,6 +256,11 @@ export const VCombobox = genericComponent<new <
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const repairOrphanedFocus = useFocusRepair(
+      menu,
+      () => vMenuRef.value?.contentEl,
+      () => vTextFieldRef.value?.controlRef,
+    )
     const { onTabKeydown } = useFocusGroups({
       groups: [
         { type: 'element' as const, contentRef: headerRef },
@@ -464,6 +470,7 @@ export const VCombobox = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
       if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        if (repairOrphanedFocus(e)) return
         isFocused.value = false
       }
     }
