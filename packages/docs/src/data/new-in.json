@@ -167,8 +167,6 @@
   },
   "VDataTable": {
     "props": {
-      "ariaLabel": "4.1.0",
-      "ariaLabelledby": "4.1.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
@@ -202,8 +200,6 @@
   },
   "VDataTableServer": {
     "props": {
-      "ariaLabel": "4.1.0",
-      "ariaLabelledby": "4.1.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
@@ -230,8 +226,6 @@
   },
   "VDataTableVirtual": {
     "props": {
-      "ariaLabel": "4.1.0",
-      "ariaLabelledby": "4.1.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
@@ -543,8 +537,6 @@
   },
   "VTable": {
     "props": {
-      "ariaLabel": "4.1.0",
-      "ariaLabelledby": "4.1.0",
       "gridlines": "4.1.0"
     },
     "slots": {

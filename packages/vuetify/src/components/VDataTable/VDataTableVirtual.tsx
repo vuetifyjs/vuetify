@@ -20,7 +20,7 @@ import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef, toRefs } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, pickWithRest, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly } from 'vue'
@@ -204,6 +204,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
       const dataTableHeadersProps = VDataTableHeaders.filterProps(omit(props, ['multiSort']))
       const dataTableRowsProps = VDataTableRows.filterProps(props)
       const tableProps = VTable.filterProps(props)
+      const [tableAttrs] = pickWithRest(attrs, [/^aria-label/])
 
       return (
         <VTable
@@ -230,10 +231,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                   height: convertToUnit(props.height),
                 }}
               >
-                <table
-                  aria-label={ props.ariaLabel }
-                  aria-labelledby={ props.ariaLabelledby }
-                >
+                <table { ...tableAttrs }>
                   { slots.caption && <caption>{ slots.caption() }</caption> }
                   { slots.colgroup?.(slotProps.value) }
                   { !props.hideDefaultHeader && (

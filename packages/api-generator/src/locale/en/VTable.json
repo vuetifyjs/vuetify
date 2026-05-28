@@ -1,8 +1,6 @@
 {
   "description": "Replacement for native `<table>` HTML element. Lightweight alternative to `v-data-table`.",
   "props": {
-    "ariaLabel": "Sets the accessible name of the underlying `<table>` element. Use when the table has no visible heading.",
-    "ariaLabelledby": "References the `id` of an element whose text labels the underlying `<table>` element.",
     "fixedFooter": "Use the fixed-footer prop together with the height prop to fix the footer to the bottom of the table.",
     "fixedHeader": "Use the fixed-header prop together with the height prop to fix the header to the top of the table.",
     "gridlines": "Controls cell borders\n- **horizontal** draws lines between rows\n- **vertical** between columns (keeps horizontal lines of header and footer rows)\n- **all** / `true` draws both vertical and horizontal lines\n- `false` removes all lines.",
