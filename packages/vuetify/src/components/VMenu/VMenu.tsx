@@ -117,14 +117,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      if (e.key === 'Tab' || (e.key === 'Enter' && !props.closeOnContentClick)) {
-        if (
-          e.key === 'Enter' &&
-          ((e.target instanceof HTMLTextAreaElement) ||
-          (e.target instanceof HTMLInputElement && !!e.target.closest('form')))
-        ) return
-        if (e.key === 'Enter') e.preventDefault()
-
+      if (e.key === 'Tab') {
         const nextElement = getNextElement(
           focusableChildren(overlay.value?.contentEl as Element, false),
           e.shiftKey ? 'prev' : 'next',
@@ -132,11 +125,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
         )
         if (!nextElement && !props.retainFocus) {
           isActive.value = false
-          overlay.value?.activatorEl?.focus()
         }
       } else if (props.submenu && e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
         isActive.value = false
-        overlay.value?.activatorEl?.focus()
       }
     }
 

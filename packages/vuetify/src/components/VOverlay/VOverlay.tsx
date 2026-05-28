@@ -37,6 +37,7 @@ import {
 import {
   animate,
   convertToUnit,
+  focusableChildren,
   genericComponent,
   getCurrentInstance,
   getScrollParent,
@@ -208,6 +209,39 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     useFocusTrap(props, { isActive, localTop, contentEl })
 
+    function returnFocusToActivator () {
+      const el = activatorEl.value
+      if (!el || !el.isConnected) return
+      // Skip submenus; the outermost close in the cascade will restore focus.
+      if (el.closest('.v-overlay__content')) return
+
+      if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
+
+      const activeEl = document.activeElement
+      const focusWasInOverlay =
+        !activeEl ||
+        activeEl === document.body ||
+        activeEl === el ||
+        el.contains(activeEl) ||
+        !!activeEl.closest('.v-overlay__content')
+      if (!focusWasInOverlay) return
+
+      const parent = el.parentElement
+      const focusableInParent = parent ? focusableChildren(parent) : []
+      let target: HTMLElement | undefined
+      if (focusableInParent.includes(el)) {
+        target = el
+      } else {
+        const focusableWithin = focusableChildren(el)
+        target = focusableWithin.find(x => x.tagName === 'INPUT' || x.tagName === 'TEXTAREA') ?? focusableWithin[0]
+      }
+      target?.focus({ preventScroll: true })
+    }
+
+    watch(isActive, val => {
+      if (!val) returnFocusToActivator()
+    }, { flush: 'post' })
+
     IN_BROWSER && watch(isActive, val => {
       if (val) {
         window.addEventListener('keydown', onKeydown)
@@ -343,7 +377,15 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  v-click-outside={{
+                    handler: onClickOutside,
+                    closeConditional,
+                    include: () => [
+                      activatorEl.value,
+                      // Submenu/cascade clicks count as "inside" so they don't suppress focus-return.
+                      ...Array.from(document.querySelectorAll('.v-overlay__content')) as HTMLElement[],
+                    ],
+                  }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,

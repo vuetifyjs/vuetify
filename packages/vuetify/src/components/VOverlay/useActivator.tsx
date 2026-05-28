@@ -103,9 +103,17 @@ export function useActivator (
     }
   })
 
+  let reopenLock = false
+  watch(isActive, v => {
+    if (v) return
+    reopenLock = true
+    setTimeout(() => reopenLock = false, 50)
+  })
+
   const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
+      if (reopenLock && !isActive.value) return
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (!isActive.value) {
@@ -130,6 +138,7 @@ export function useActivator (
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
+      if (reopenLock) return
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
@@ -139,6 +148,10 @@ export function useActivator (
       runOpenDelay()
     },
     onBlur: (e: FocusEvent) => {
+      // Body parks from clicks on empty areas inside content also count as "still focused".
+      const next = e.relatedTarget as Element | null
+      if (!next || contentEl.value?.contains(next)) return
+
       isFocused = false
       e.stopPropagation()
 
@@ -187,7 +200,10 @@ export function useActivator (
         isFocused = true
         runOpenDelay()
       }
-      events.onFocusout = () => {
+      events.onFocusout = (e: Event) => {
+        const next = (e as FocusEvent).relatedTarget as Element | null
+        if (!next || contentEl.value?.contains(next)) return
+
         isFocused = false
         runCloseDelay({ minDelay: 1 })
       }

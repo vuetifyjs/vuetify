@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { useAutocomplete } from '@/composables/autocomplete'
@@ -223,6 +224,11 @@ export const VSelect = genericComponent<new <
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const repairOrphanedFocus = useFocusRepair(
+      menu,
+      () => vMenuRef.value?.contentEl,
+      () => vTextFieldRef.value?.controlRef,
+    )
     const { onTabKeydown } = useFocusGroups({
       groups: [
         { type: 'element' as const, contentRef: headerRef },
@@ -409,6 +415,7 @@ export const VSelect = genericComponent<new <
         !vTextFieldRef.value?.$el.contains(e.relatedTarget as Node) &&
         !(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
       ) {
+        if (repairOrphanedFocus(e)) return
         isFocused.value = false
       }
     }
