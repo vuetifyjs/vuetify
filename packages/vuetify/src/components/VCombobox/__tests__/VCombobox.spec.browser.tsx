@@ -723,6 +723,11 @@ describe('VCombobox', () => {
     await expect.poll(() => selectedItem.value).toBe('test 2')
     expect(input).toHaveValue('')
 
+    // Close the menu kept open by the previous selection before reopening,
+    // otherwise clicking an already-open field races the close/open transition
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
+
     // Search existing item and click to select
     await userEvent.click(element)
     expect(input).toHaveValue('')
