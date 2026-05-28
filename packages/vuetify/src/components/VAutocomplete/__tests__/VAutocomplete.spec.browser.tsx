@@ -3,7 +3,7 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
@@ -46,6 +46,160 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
+  it('should clear focused state after interacting with content and moving to sibling field', async () => {
+    const menuA = ref(false)
+    const menuB = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menuA.value }
+          data-testid="field-a"
+          items={['Apple', 'Banana']}
+        >
+          {{
+            'menu-footer': () => (
+              <div data-testid="footer-a" style="padding: 16px; height: 40px;">
+                <button>Clear</button>
+                <button>Done</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+        <VAutocomplete
+          v-model:menu={ menuB.value }
+          data-testid="field-b"
+          items={['Cherry', 'Date']}
+        />
+      </div>
+    ))
+
+    const fieldARoot = screen.getByTestId('field-a')
+    const inputA = screen.getByCSS('[data-testid="field-a"] input')
+    const inputB = screen.getByCSS('[data-testid="field-b"] input')
+
+    await userEvent.click(inputA)
+    await waitIdle()
+    expect(menuA.value).toBe(true)
+    expect(fieldARoot).toHaveClass('v-input--focused')
+
+    const footerA = screen.getByTestId('footer-a')
+    footerA.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    inputA.blur()
+    await waitIdle()
+
+    await userEvent.click(inputB)
+    await waitIdle()
+    await wait(300)
+
+    expect(menuA.value).toBe(false)
+    expect(fieldARoot).not.toHaveClass('v-input--focused')
+  })
+
+  it('should not return focus to the input on click-outside', async () => {
+    const menu = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menu.value }
+          data-testid="field"
+          items={['Apple', 'Banana']}
+        />
+        <div data-testid="outside" style="height: 80px; padding: 24px;">outside</div>
+      </div>
+    ))
+
+    const input = screen.getByCSS('[data-testid="field"] input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    await userEvent.click(screen.getByTestId('outside'))
+    await waitIdle()
+
+    expect(menu.value).toBe(false)
+    await wait(300)
+    expect(menu.value).toBe(false)
+    expect(document.activeElement).not.toBe(input)
+  })
+
+  it('should not auto-close the sibling menu after clicking an empty area in this menu', async () => {
+    const menuA = ref(false)
+    const menuB = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menuA.value }
+          data-testid="field-a"
+          items={['Apple', 'Banana']}
+        >
+          {{
+            'menu-footer': () => (
+              <div data-testid="footer-a" style="padding: 16px; height: 40px;">
+                <button>Clear</button>
+                <button>Done</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+        <VAutocomplete
+          v-model:menu={ menuB.value }
+          data-testid="field-b"
+          items={['Cherry', 'Date']}
+        />
+      </div>
+    ))
+
+    const inputA = screen.getByCSS('[data-testid="field-a"] input')
+    const inputB = screen.getByCSS('[data-testid="field-b"] input')
+
+    await userEvent.click(inputA)
+    await waitIdle()
+    expect(menuA.value).toBe(true)
+
+    const footerA = screen.getByTestId('footer-a')
+    footerA.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    inputA.blur()
+    await waitIdle()
+
+    await userEvent.click(inputB)
+    await waitIdle()
+
+    expect(menuB.value).toBe(true)
+    await wait(300)
+    expect(menuB.value).toBe(true)
+  })
+
+  it('should stay open when clicking an empty area inside menu-footer slot', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete
+        v-model:menu={ menu.value }
+        items={['Apple', 'Banana']}
+      >
+        {{
+          'menu-footer': () => (
+            <div data-testid="footer-empty" style="padding: 16px; height: 40px;">
+              <button>Clear</button>
+              <button>Done</button>
+            </div>
+          ),
+        }}
+      </VAutocomplete>
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const footer = screen.getByTestId('footer-empty')
+    footer.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    input.blur()
+    await waitIdle()
+
+    expect(menu.value).toBe(true)
+  })
+
   it('should close only first chip', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
