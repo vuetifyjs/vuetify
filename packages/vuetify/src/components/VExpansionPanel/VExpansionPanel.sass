@@ -153,16 +153,11 @@
       transition: .3s settings.$standard-easing
       transition-property: min-height, border-radius
 
+    &--hover
     @include tools.states('.v-expansion-panel-title__overlay', false)
 
     &--focusable.v-expansion-panel-title--active
       @include tools.active-states('.v-expansion-panel-title__overlay')
-
-    &--no-hover
-      @include tools.layer('trumps')
-        &:hover
-          > .v-expansion-panel-title__overlay
-            opacity: 0
 
   .v-expansion-panel-title__overlay
     background-color: currentColor
