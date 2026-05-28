@@ -14,10 +14,11 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, noop, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { LocationStrategyFunction } from '@/types'
 
 export const makeVDialogProps = propsFactory({
   fullscreen: Boolean,
@@ -75,12 +76,18 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
     useRender(() => {
       const overlayProps = VOverlay.filterProps(props)
+
       const activatorProps = mergeProps({
         'aria-haspopup': 'dialog',
       }, props.activatorProps)
+
       const contentProps = mergeProps({
         tabindex: -1,
       }, props.contentProps)
+
+      const locationStrategy = props.fullscreen
+        ? noop as LocationStrategyFunction
+        : props.locationStrategy
 
       return (
         <VOverlay
@@ -103,6 +110,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
           width={ !props.fullscreen ? props.width : undefined }
           maxHeight={ !props.fullscreen ? props.maxHeight : undefined }
           maxWidth={ !props.fullscreen ? props.maxWidth : undefined }
+          locationStrategy={ locationStrategy }
           role="dialog"
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }
