@@ -200,6 +200,64 @@ describe('VAutocomplete', () => {
     expect(menu.value).toBe(true)
   })
 
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    // Arrow-navigation (navigationStrategy="focus") puts real DOM focus on an item.
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // Recycling/reload removes the focused node from the DOM (what VVirtualScroll
+    // or an async items reload does); focus falls to <body> and the menu closes.
+    option.remove()
+    await waitIdle()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  it('should return focus to the field when a reload leaves no item to focus', async () => {
+    const items = ref(Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`))
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete v-model:menu={ menu.value } items={ items.value } />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // Reload into no-data: the focused item is gone and nothing in the menu is
+    // focusable, so focus should fall back to the text field.
+    items.value = []
+    await waitIdle()
+    await wait(300)
+
+    expect(menu.value).toBe(true)
+    expect(document.activeElement).toBe(input)
+  })
+
   it('should close only first chip', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
