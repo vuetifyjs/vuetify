@@ -94,7 +94,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             'v-expansion-panel-title--focusable': props.focusable,
             'v-expansion-panel-title--static': props.static,
             'v-expansion-panel-title--hover': props.hover,
-        },
+          },
           backgroundColorClasses.value,
           props.class,
         ]}
