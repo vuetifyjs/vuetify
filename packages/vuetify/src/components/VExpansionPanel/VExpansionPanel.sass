@@ -153,7 +153,8 @@
       transition: .3s settings.$standard-easing
       transition-property: min-height, border-radius
 
-    @include tools.states('.v-expansion-panel-title__overlay', false)
+    &--hover
+      @include tools.states('.v-expansion-panel-title__overlay', false)
 
     &--focusable.v-expansion-panel-title--active
       @include tools.active-states('.v-expansion-panel-title__overlay')

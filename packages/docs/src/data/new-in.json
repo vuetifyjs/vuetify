@@ -270,10 +270,16 @@
     "props": {
       "static": "3.4.0",
       "gap": "4.1.0",
+      "hover": "4.1.0",
       "noDivider": "4.1.0"
     },
     "examples": {
       "prop-rounded-gap": "4.1.0"
+    }
+  },
+  "VExpansionPanelTitle": {
+    "props": {
+      "hover": "4.1.0"
     }
   },
   "VField": {
