@@ -50,7 +50,7 @@ describe('VAutocomplete', () => {
     const menuA = ref(false)
     const menuB = ref(false)
     render(() => (
-      <div>
+      <div class="d-flex">
         <VAutocomplete
           v-model:menu={ menuA.value }
           data-testid="field-a"
@@ -98,7 +98,7 @@ describe('VAutocomplete', () => {
   it('should not return focus to the input on click-outside', async () => {
     const menu = ref(false)
     render(() => (
-      <div>
+      <div class="d-flex">
         <VAutocomplete
           v-model:menu={ menu.value }
           data-testid="field"
@@ -126,7 +126,7 @@ describe('VAutocomplete', () => {
     const menuA = ref(false)
     const menuB = ref(false)
     render(() => (
-      <div>
+      <div class="d-flex">
         <VAutocomplete
           v-model:menu={ menuA.value }
           data-testid="field-a"
