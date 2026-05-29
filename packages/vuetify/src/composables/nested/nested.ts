@@ -85,6 +85,7 @@ type NestedProvide = {
     children: Ref<Map<unknown, unknown[]>>
     parents: Ref<Map<unknown, unknown>>
     disabled: Ref<Set<unknown>>
+    detached: Ref<Set<unknown>>
     activatable: Ref<boolean>
     selectable: Ref<boolean>
     opened: Ref<Set<unknown>>
@@ -116,6 +117,7 @@ export const emptyNested: NestedProvide = {
     children: ref(new Map()),
     parents: ref(new Map()),
     disabled: ref(new Set()),
+    detached: ref(new Set()),
     open: () => null,
     openOnSelect: () => null,
     activate: () => null,
@@ -164,7 +166,8 @@ export const useNested = (
   let isUnmounted = false
   const children = shallowRef(new Map<unknown, unknown[]>())
   const parents = shallowRef(new Map<unknown, unknown>())
-  const disabled = shallowRef(new Set<unknown>())
+  const disabled = shallowRef(new Set<unknown>()) // not selectable, nor activatable, not clickable (with CSS)
+  const detached = shallowRef(new Set<unknown>()) // not selectable, but still activatable and clickable
 
   const opened = useProxiedModel(
     props,
@@ -297,6 +300,7 @@ export const useNested = (
     const _parents = new Map()
     const _children = new Map()
     const _disabled = new Set()
+    const _detached = new Set()
 
     const getValue = toValue(returnObject)
       ? (item: ListItem) => toRaw(item.raw)
@@ -309,6 +313,7 @@ export const useNested = (
       const itemValue = getValue(item)
 
       if (item.children) {
+        // TODO: traverse through detached children ?
         const childValues = []
         for (const child of item.children) {
           const childValue = getValue(child)
@@ -322,11 +327,16 @@ export const useNested = (
       if (item.props.disabled) {
         _disabled.add(itemValue)
       }
+
+      if (item.props.detached) {
+        _detached.add(itemValue)
+      }
     }
 
     children.value = _children
     parents.value = _parents
     disabled.value = _disabled
+    detached.value = _detached
   }
 
   const nested: NestedProvide = {
@@ -422,6 +432,8 @@ export const useNested = (
         newOpened && (opened.value = newOpened)
       },
       select: (id, value, event) => {
+        if (detached.value.has(id)) return
+
         vm.emit('click:select', { id, value, path: getPath(id), event })
 
         const newSelected = selectStrategy.value.select({
@@ -473,6 +485,7 @@ export const useNested = (
       children,
       parents,
       disabled,
+      detached,
       getPath,
     },
   }
@@ -482,7 +495,12 @@ export const useNested = (
   return nested.root
 }
 
-export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRefOrGetter<boolean>, isGroup: boolean) => {
+export const useNestedItem = (
+  id: MaybeRefOrGetter<unknown>,
+  isDisabled: MaybeRefOrGetter<boolean>,
+  isDetached: MaybeRefOrGetter<boolean>,
+  isGroup: boolean
+) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol('nested item')
@@ -509,6 +527,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   }
 
   onBeforeMount(() => {
+    if (toValue(isDetached)) {
+      parent.root.detached.value.add(computedId.value)
+      return
+    }
     if (parent.isGroupActivator || parent.root.itemsRegistration.value === 'props') return
     nextTick(() => {
       parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
@@ -516,6 +538,10 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   })
 
   onBeforeUnmount(() => {
+    if (toValue(isDetached)) {
+      parent.root.detached.value.delete(computedId.value)
+      return
+    }
     if (parent.isGroupActivator || parent.root.itemsRegistration.value === 'props') return
     parent.root.unregister(computedId.value)
   })
@@ -530,6 +556,16 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
 
   watch(() => toValue(isDisabled), val => {
     parent.root.updateDisabled(computedId.value, val)
+  })
+
+  watch(() => toValue(isDetached), val => {
+    if (val) {
+      parent.root.detached.value.add(computedId.value)
+      parent.root.unregister(computedId.value)
+    } else {
+      parent.root.detached.value.delete(computedId.value)
+      parent.root.register(computedId.value, parent.id.value, toValue(isDisabled), isGroup)
+    }
   })
 
   isGroup && provide(VNestedSymbol, item)
