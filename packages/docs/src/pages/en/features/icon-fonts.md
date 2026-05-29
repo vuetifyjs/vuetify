@@ -225,6 +225,7 @@ The icon sets listed below have a dedicated Vuetify import that includes **alias
 | [BoxIcons](https://boxicons.com/) | `@iconify-json/bx` | `vuetify/iconsets/bx` | `bx` |
 | [Carbon](https://carbondesignsystem.com/elements/icons/library/) | `@iconify-json/carbon` | `vuetify/iconsets/carbon` | `carbon` |
 | [Material Symbols](https://fonts.google.com/icons) | `@iconify-json/material-symbols` | `vuetify/iconsets/ms` | `ms` |
+| [Solar](https://icon-sets.iconify.design/solar/) | `@iconify-json/solar` | `vuetify/iconsets/solar` | `solar` |
 
 Install `unocss` and the Iconify package(s) for your chosen librar(ies):
 
