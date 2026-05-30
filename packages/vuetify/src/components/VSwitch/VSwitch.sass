@@ -8,14 +8,6 @@
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
-  .v-switch--inset
-    --v-switch-inset-track-color: #{$switch-inset-track-background}
-    --v-switch-inset-outline-color: #{$switch-inset-outline}
-
-    .v-theme--dark &
-      --v-switch-inset-track-color: #{$switch-inset-track-background-dark}
-      --v-switch-inset-outline-color: #{$switch-inset-outline-dark}
-
   .v-switch__loader
     display: flex
 
@@ -61,8 +53,8 @@
       height: $switch-inset-track-height
       min-width: $switch-inset-track-width
       opacity: $switch-inset-track-opacity
-      background-color: var(--v-switch-inset-track-color)
-      border: $switch-inset-border-width solid var(--v-switch-inset-outline-color)
+      background-color: $switch-inset-track-color
+      border: $switch-inset-border-width solid $switch-inset-outline-color
 
     .v-switch--inset .v-selection-control--dirty &
       border-color: transparent
@@ -94,7 +86,7 @@
     .v-switch--inset &
       height: $switch-inset-thumb-height
       width: $switch-inset-thumb-width
-      background-color: var(--v-switch-inset-outline-color)
+      background-color: $switch-inset-outline-color
       transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
 
       &--filled
@@ -103,7 +95,7 @@
       // icon reads as a cutout of the track behind it; the selected + color case
       // is overridden by the text-color utility applied in the template
       .v-icon
-        color: var(--v-switch-inset-track-color)
+        color: $switch-inset-track-color
 
     .v-switch--inset .v-selection-control--dirty &
       transform: none

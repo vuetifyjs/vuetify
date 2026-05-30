@@ -17,13 +17,10 @@ $switch-inset-track-height: 32px !default;
 $switch-inset-track-width: 52px !default;
 $switch-inset-track-opacity: 1 !default;
 
-// MD3 inset switch approximations. The spec uses surface-container-highest (track)
-// and outline (border + unselected thumb); neither token exists yet and both are
-// theme-dependent, so they are hardcoded per theme — temporary workaround until v5.
-$switch-inset-track-background: #e6e0e8 !default;
-$switch-inset-track-background-dark: #48454e !default;
-$switch-inset-outline: #7a747e !default;
-$switch-inset-outline-dark: #938f98 !default;
+// MD3 inset switch: unselected track is surface-container-highest, the border and
+// unselected thumb are outline. Both resolve per theme via the theme system.
+$switch-inset-track-color: rgb(var(--v-theme-surface-container-highest)) !default;
+$switch-inset-outline-color: rgb(var(--v-theme-outline)) !default;
 $switch-inset-border-width: 2px !default;
 
 // Focus ring. MD3 uses secondary; unavailable until v5, so it falls back to the
@@ -34,14 +31,14 @@ $switch-focus-outline-offset: 2px !default;
 
 // Disabled (inset). MD3 derives the disabled state from on-surface / surface with
 // 12% (track/outline) and 38% (handle/icon) opacities; only the unselected track
-// uses the surface-container-highest approximation (--v-switch-inset-track-color).
+// uses surface-container-highest ($switch-inset-track-color).
 $switch-inset-disabled-track: rgba(var(--v-theme-on-surface), .12) !default;
-$switch-inset-disabled-track-unselected: color-mix(in srgb, var(--v-switch-inset-track-color) 12%, transparent) !default;
+$switch-inset-disabled-track-unselected: color-mix(in srgb, #{$switch-inset-track-color} 12%, transparent) !default;
 $switch-inset-disabled-outline: rgba(var(--v-theme-on-surface), .12) !default;
 $switch-inset-disabled-handle: rgba(var(--v-theme-on-surface), .38) !default;
 $switch-inset-disabled-handle-selected: rgb(var(--v-theme-surface)) !default;
 $switch-inset-disabled-icon: rgba(var(--v-theme-on-surface), .38) !default;
-$switch-inset-disabled-icon-unselected: color-mix(in srgb, var(--v-switch-inset-track-color) 38%, transparent) !default;
+$switch-inset-disabled-icon-unselected: color-mix(in srgb, #{$switch-inset-track-color} 38%, transparent) !default;
 
 $switch-label-margin-inline-start: 10px !default;
 $switch-loader-color: rgb(var(--v-theme-surface)) !default;
