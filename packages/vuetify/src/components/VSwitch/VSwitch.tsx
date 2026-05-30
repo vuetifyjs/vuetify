@@ -10,6 +10,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
@@ -45,6 +46,7 @@ export type VSwitchSlots =
 export const makeVSwitchProps = propsFactory({
   inset: Boolean,
   flat: Boolean,
+  thumbColor: String,
   loading: {
     type: [Boolean, String],
     default: false,
@@ -78,6 +80,7 @@ export const VSwitch = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
+    const { backgroundColorClasses: thumbColorClasses, backgroundColorStyles: thumbColorStyles } = useBackgroundColor(() => props.thumbColor)
     const control = ref<VSelectionControl>()
     const inputRef = ref<VInput>()
     const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
@@ -179,17 +182,25 @@ export const VSwitch = genericComponent<new <T>(
                         )}
                       </div>
                     ),
-                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles, textColorClasses, textColorStyles }) => (
+                    input: ({ inputNode, icon, model: isSelected, backgroundColorClasses, backgroundColorStyles, textColorClasses, textColorStyles }) => {
+                      // thumbColor overrides the selected-state thumb (the default
+                      // is the contrast/on-color, which can look poor — e.g. orange)
+                      const useThumbColor = !isForcedColorsModeActive && !!props.thumbColor && isSelected.value
+
+                      return (
                       <>
                         { inputNode }
                         <div
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
+                            isForcedColorsModeActive ? undefined
+                            : useThumbColor ? thumbColorClasses.value
+                            : backgroundColorClasses.value,
                           ]}
                           style={
-                            props.inset
+                            useThumbColor ? thumbColorStyles.value
+                            : props.inset
                               ? (backgroundColorClasses.value.length || backgroundColorStyles.value.backgroundColor
                                 ? { backgroundColor: 'currentColor' }
                                 : undefined)
@@ -243,7 +254,8 @@ export const VSwitch = genericComponent<new <T>(
                           )}
                         </div>
                       </>
-                    ),
+                      )
+                    },
                   }}
                 </VSelectionControl>
               )
