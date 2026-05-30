@@ -18,6 +18,9 @@ $switch-inset-track-width: 52px !default;
 $switch-inset-track-opacity: 1 !default;
 $switch-inset-border-width: 2px !default;
 
+$switch-inset-square-track-radius: 6px !default;
+$switch-inset-square-thumb-radius: 4px !default;
+
 $switch-inset-unselected-track-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 50%, #888) !default;
 $switch-inset-unselected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 50%, #888) !default;
 $switch-inset-unselected-border-color: $switch-inset-unselected-thumb-color !default;
