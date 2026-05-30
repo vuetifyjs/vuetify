@@ -45,7 +45,7 @@ export type VSwitchSlots =
 
 export const makeVSwitchProps = propsFactory({
   inset: {
-    type: [Boolean, String] as PropType<boolean | 'tonal' | 'material'>,
+    type: [Boolean, String] as PropType<boolean | 'tonal' | 'material' | 'square'>,
     default: false,
   },
   flat: Boolean,
@@ -125,7 +125,8 @@ export const VSwitch = genericComponent<new <T>(
             'v-switch',
             { 'v-switch--flat': props.flat },
             { 'v-switch--inset': !!props.inset },
-            { 'v-switch--inset-material': props.inset === 'material' },
+            { 'v-switch--inset-material': isMaterial },
+            { 'v-switch--inset-square': props.inset === 'square' },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
             props.class,
