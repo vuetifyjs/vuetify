@@ -115,6 +115,8 @@ export const VSwitch = genericComponent<new <T>(
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const inputProps = VInput.filterProps(props)
       const controlProps = VSelectionControl.filterProps(props)
+      const isMaterial = ['material', 'square'].includes(String(props.inset))
+      const hasThumbColor = !isForcedColorsModeActive && !!props.thumbColor
 
       return (
         <VInput
@@ -197,11 +199,7 @@ export const VSwitch = genericComponent<new <T>(
                       backgroundColorStyles,
                       textColorClasses,
                       textColorStyles,
-                    }) => {
-                      const isMaterial = props.inset === 'material'
-                      const useThumbColor = !isForcedColorsModeActive && !!props.thumbColor && isSelected.value
-
-                      return (
+                    }) => (
                       <>
                         { inputNode }
                         <div
@@ -209,20 +207,20 @@ export const VSwitch = genericComponent<new <T>(
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
                             isForcedColorsModeActive ? undefined
-                            : useThumbColor ? thumbColorClasses.value
+                            : (hasThumbColor && isSelected.value) ? thumbColorClasses.value
                             : isMaterial ? backgroundColorClasses.value
                             : props.inset ? undefined
                             : backgroundColorClasses.value,
                           ]}
-                          style={
-                            useThumbColor ? thumbColorStyles.value
+                          style={[
+                            (hasThumbColor && isSelected.value) ? thumbColorStyles.value
                             : isMaterial
                               ? (backgroundColorClasses.value.length || backgroundColorStyles.value.backgroundColor
                                 ? { backgroundColor: 'currentColor' }
                                 : undefined)
                               : props.inset ? undefined
-                              : backgroundColorStyles.value
-                          }
+                              : backgroundColorStyles.value,
+                          ]}
                         >
                           { slots.thumb ? (
                             <VDefaultsProvider
@@ -271,8 +269,7 @@ export const VSwitch = genericComponent<new <T>(
                           )}
                         </div>
                       </>
-                      )
-                    },
+                    ),
                   }}
                 </VSelectionControl>
               )

@@ -80,7 +80,7 @@
     .v-switch--inset &
       height: $switch-inset-thumb-height
       width: $switch-inset-thumb-width
-      transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
+      transform: scale(var(--v-switch-inset-thumb-off-scale, #{$switch-inset-thumb-off-scale}))
 
       &--filled
         transform: none
@@ -92,14 +92,12 @@
   .v-switch--inset-material
     .v-switch__track
       opacity: $switch-inset-track-opacity
-      background-color: $switch-inset-track-color
-      border: $switch-inset-border-width solid $switch-inset-outline-color
+      background-color: $switch-inset-unselected-track-color
+      border: $switch-inset-border-width solid $switch-inset-unselected-thumb-color
 
     .v-switch__thumb
-      background-color: $switch-inset-outline-color
-
-      .v-icon
-        color: $switch-inset-track-color
+      background-color: $switch-inset-unselected-thumb-color
+      color: $switch-inset-unselected-track-color
 
     .v-selection-control--dirty
       .v-switch__track
@@ -107,13 +105,11 @@
         background-color: $switch-inset-selected-track-color
 
       .v-switch__thumb
-        background-color: $switch-inset-selected-handle-color
-
-        .v-icon
-          color: $switch-inset-selected-track-color
+        background-color: $switch-inset-selected-thumb-color
+        color: $switch-inset-selected-track-color
 
     .v-selection-control__input:active .v-switch__thumb
-      transform: scale(calc($switch-inset-thumb-pressed-height / $switch-inset-thumb-height))
+      transform: scale(var(--v-switch-inset-thumb-pressed-scale, #{$switch-inset-thumb-pressed-scale}))
 
     .v-selection-control__input:before
       --v-hover-opacity: 0.08
@@ -135,25 +131,25 @@
         opacity: var(--v-disabled-opacity)
 
       .v-switch__track
-        background-color: $switch-inset-disabled-track-unselected
-        border-color: $switch-inset-disabled-outline
+        background-color: $switch-inset-disabled-unselected-track-color
+        border-color: $switch-inset-disabled-unselected-border-color
 
       .v-switch__thumb
-        background-color: $switch-inset-disabled-handle
+        background-color: $switch-inset-disabled-unselected-thumb-color
 
         .v-icon
-          color: $switch-inset-disabled-icon-unselected
+          opacity: .8
 
     .v-selection-control--disabled.v-selection-control--dirty
       .v-switch__track
-        background-color: $switch-inset-disabled-track
+        background-color: $switch-inset-disabled-selected-track-color
         border-color: transparent
 
       .v-switch__thumb
-        background-color: $switch-inset-disabled-handle-selected
+        background-color: $switch-inset-disabled-selected-thumb-color
 
         .v-icon
-          color: $switch-inset-disabled-icon
+          opacity: .4
 
   .v-switch
     $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset
@@ -168,6 +164,9 @@
       border-radius: 50%
       transition: $switch-control-input-transition
       position: absolute
+      height: calc(var(--v-switch-thumb-height) * 1.666666667)
+      width: calc(var(--v-switch-thumb-height) * 1.666666667)
+
       @include tools.ltr()
         transform: translateX(-$switch-thumb-transform)
       @include tools.rtl()
