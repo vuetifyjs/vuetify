@@ -8,6 +8,14 @@
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
+  .v-switch--inset
+    --v-switch-inset-track-color: #{$switch-inset-track-background}
+    --v-switch-inset-outline-color: #{$switch-inset-outline}
+
+    .v-theme--dark &
+      --v-switch-inset-track-color: #{$switch-inset-track-background-dark}
+      --v-switch-inset-outline-color: #{$switch-inset-outline-dark}
+
   .v-switch__loader
     display: flex
 
@@ -52,6 +60,12 @@
       font-size: .75rem
       height: $switch-inset-track-height
       min-width: $switch-inset-track-width
+      opacity: $switch-inset-track-opacity
+      background-color: var(--v-switch-inset-track-color)
+      border: $switch-inset-border-width solid var(--v-switch-inset-outline-color)
+
+    .v-switch--inset .v-selection-control--dirty &
+      border-color: transparent
 
   .v-switch__thumb
     align-items: center
@@ -80,14 +94,58 @@
     .v-switch--inset &
       height: $switch-inset-thumb-height
       width: $switch-inset-thumb-width
+      background-color: var(--v-switch-inset-outline-color)
       transform: scale(calc($switch-inset-thumb-off-height / $switch-inset-thumb-height))
 
       &--filled
         transform: none
 
+      // icon reads as a cutout of the track behind it; the selected + color case
+      // is overridden by the text-color utility applied in the template
+      .v-icon
+        color: var(--v-switch-inset-track-color)
+
     .v-switch--inset .v-selection-control--dirty &
       transform: none
       transition: .15s .05s transform settings.$decelerated-easing
+
+    .v-switch--inset .v-selection-control__wrapper:active &
+      transform: scale(calc($switch-inset-thumb-pressed-height / $switch-inset-thumb-height))
+
+  // Disabled (inset) — neutral surface tokens carry their own alpha, so the blanket
+  // control fade is reset to 1 (the label keeps it explicitly).
+  .v-switch--inset
+    .v-selection-control--disabled
+      opacity: 1
+
+      .v-label
+        opacity: var(--v-disabled-opacity)
+
+      .v-switch__track
+        background-color: $switch-inset-disabled-track-unselected
+        border-color: $switch-inset-disabled-outline
+
+      .v-switch__thumb
+        background-color: $switch-inset-disabled-handle
+
+        .v-icon
+          color: $switch-inset-disabled-icon-unselected
+
+    .v-selection-control--disabled.v-selection-control--dirty
+      .v-switch__track
+        background-color: $switch-inset-disabled-track
+        border-color: transparent
+
+      .v-switch__thumb
+        background-color: $switch-inset-disabled-handle-selected
+
+        .v-icon
+          color: $switch-inset-disabled-icon
+
+    .v-selection-control--focus-visible .v-selection-control__wrapper
+      border-radius: $switch-inset-track-border-radius
+      outline: $switch-focus-outline-width solid $switch-focus-outline-color
+      outline-offset: $switch-focus-outline-offset
 
   .v-switch
     $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset

@@ -179,23 +179,29 @@ export const VSwitch = genericComponent<new <T>(
                         )}
                       </div>
                     ),
-                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
+                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles, textColorClasses, textColorStyles }) => (
                       <>
                         { inputNode }
                         <div
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset || isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
+                            isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
                           ]}
-                          style={ props.inset ? undefined : backgroundColorStyles.value }
+                          style={
+                            props.inset
+                              ? (backgroundColorClasses.value.length || backgroundColorStyles.value.backgroundColor
+                                ? { backgroundColor: 'currentColor' }
+                                : undefined)
+                              : backgroundColorStyles.value
+                          }
                         >
                           { slots.thumb ? (
                             <VDefaultsProvider
                               defaults={{
                                 VIcon: {
                                   icon,
-                                  size: 'x-small',
+                                  size: props.inset ? 16 : 'x-small',
                                 },
                               }}
                             >
@@ -207,8 +213,10 @@ export const VSwitch = genericComponent<new <T>(
                                 (icon && (
                                   <VIcon
                                     key={ String(icon) }
+                                    class={ props.inset ? textColorClasses.value : undefined }
+                                    style={ props.inset ? textColorStyles.value : undefined }
                                     icon={ icon }
-                                    size="x-small"
+                                    size={ props.inset ? 16 : 'x-small' }
                                   />
                                 ))) : (
                                 <LoaderSlot
