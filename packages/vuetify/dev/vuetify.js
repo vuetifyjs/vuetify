@@ -16,11 +16,5 @@ export default createVuetify({
   defaults,
   icons,
   locale,
-  theme: {
-    defaultTheme: 'light',
-    themes: {
-      light: { colors: { primary: '#6750A4', 'on-primary': '#FFFFFF' } },
-      dark: { colors: { primary: '#D0BCFF', 'on-primary': '#381E72' } },
-    },
-  },
+  theme: { defaultTheme: 'light' },
 })

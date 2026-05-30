@@ -21,7 +21,7 @@ import { ref, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
@@ -44,7 +44,10 @@ export type VSwitchSlots =
   }
 
 export const makeVSwitchProps = propsFactory({
-  inset: Boolean,
+  inset: {
+    type: [Boolean, String] as PropType<boolean | 'tonal' | 'material'>,
+    default: false,
+  },
   flat: Boolean,
   thumbColor: String,
   loading: {
@@ -80,7 +83,10 @@ export const VSwitch = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
-    const { backgroundColorClasses: thumbColorClasses, backgroundColorStyles: thumbColorStyles } = useBackgroundColor(() => props.thumbColor)
+    const {
+      backgroundColorClasses: thumbColorClasses,
+      backgroundColorStyles: thumbColorStyles,
+    } = useBackgroundColor(() => props.thumbColor)
     const control = ref<VSelectionControl>()
     const inputRef = ref<VInput>()
     const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
@@ -116,7 +122,8 @@ export const VSwitch = genericComponent<new <T>(
           class={[
             'v-switch',
             { 'v-switch--flat': props.flat },
-            { 'v-switch--inset': props.inset },
+            { 'v-switch--inset': !!props.inset },
+            { 'v-switch--inset-material': props.inset === 'material' },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
             props.class,
@@ -182,9 +189,16 @@ export const VSwitch = genericComponent<new <T>(
                         )}
                       </div>
                     ),
-                    input: ({ inputNode, icon, model: isSelected, backgroundColorClasses, backgroundColorStyles, textColorClasses, textColorStyles }) => {
-                      // thumbColor overrides the selected-state thumb (the default
-                      // is the contrast/on-color, which can look poor — e.g. orange)
+                    input: ({
+                      inputNode,
+                      icon,
+                      model: isSelected,
+                      backgroundColorClasses,
+                      backgroundColorStyles,
+                      textColorClasses,
+                      textColorStyles,
+                    }) => {
+                      const isMaterial = props.inset === 'material'
                       const useThumbColor = !isForcedColorsModeActive && !!props.thumbColor && isSelected.value
 
                       return (
@@ -196,14 +210,17 @@ export const VSwitch = genericComponent<new <T>(
                             { 'v-switch__thumb--filled': icon || props.loading },
                             isForcedColorsModeActive ? undefined
                             : useThumbColor ? thumbColorClasses.value
+                            : isMaterial ? backgroundColorClasses.value
+                            : props.inset ? undefined
                             : backgroundColorClasses.value,
                           ]}
                           style={
                             useThumbColor ? thumbColorStyles.value
-                            : props.inset
+                            : isMaterial
                               ? (backgroundColorClasses.value.length || backgroundColorStyles.value.backgroundColor
                                 ? { backgroundColor: 'currentColor' }
                                 : undefined)
+                              : props.inset ? undefined
                               : backgroundColorStyles.value
                           }
                         >
@@ -212,7 +229,7 @@ export const VSwitch = genericComponent<new <T>(
                               defaults={{
                                 VIcon: {
                                   icon,
-                                  size: props.inset ? 16 : 'x-small',
+                                  size: isMaterial ? 16 : 'x-small',
                                 },
                               }}
                             >
@@ -224,10 +241,10 @@ export const VSwitch = genericComponent<new <T>(
                                 (icon && (
                                   <VIcon
                                     key={ String(icon) }
-                                    class={ props.inset ? textColorClasses.value : undefined }
-                                    style={ props.inset ? textColorStyles.value : undefined }
+                                    class={ isMaterial ? textColorClasses.value : undefined }
+                                    style={ isMaterial ? textColorStyles.value : undefined }
                                     icon={ icon }
-                                    size={ props.inset ? 16 : 'x-small' }
+                                    size={ isMaterial ? 16 : 'x-small' }
                                   />
                                 ))) : (
                                 <LoaderSlot
