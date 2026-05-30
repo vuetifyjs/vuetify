@@ -28,8 +28,9 @@ import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
+import type { CalendarDay } from '@/composables/calendar'
 import type { VPickerSlots } from '@/components/VPicker/VPicker'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots =
@@ -98,6 +99,7 @@ export const VDatePicker = genericComponent<new <
     : T,
 > (
   props: {
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDay]>
     modelValue?: TModel
     'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
@@ -118,7 +120,7 @@ export const VDatePicker = genericComponent<new <
     'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const adapter = useDate()
     const { t } = useLocale()
     const { rtlClasses } = useRtl()
@@ -503,6 +505,7 @@ export const VDatePicker = genericComponent<new <
                     <VDatePickerMonth
                       ref={ monthGridRef }
                       key="date-picker-month"
+                      { ...attrs } // <-- TODO: filter by `on` prefix
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }
