@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, Ref } from 'vue'
@@ -50,7 +50,7 @@ export const makeVSwitchProps = propsFactory({
     default: false,
   },
 
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['glow']),
   ...makeVSelectionControlProps(),
 }, 'VSwitch')
 
