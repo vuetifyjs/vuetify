@@ -1,3 +1,5 @@
+@use 'sass:list'
+@use 'sass:math'
 @use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -5,8 +7,24 @@
 
 @include tools.layer('components')
   .v-switch
+    --v-switch-scale: 1
+
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
+
+  @each $name, $size in $switch-sizes
+    .v-switch--size-#{$name}
+      --v-switch-scale: #{math.div(list.nth($size, 1), $switch-track-height)}
+      --v-switch-track-height: #{list.nth($size, 1)}
+      --v-switch-thumb-height: #{list.nth($size, 2)}
+      --v-switch-thumb-width: #{list.nth($size, 3)}
+
+  @each $name, $size in $switch-inset-sizes
+    .v-switch--inset.v-switch--size-#{$name}
+      --v-switch-scale: #{math.div(list.nth($size, 1), $switch-inset-track-height)}
+      --v-switch-track-height: #{list.nth($size, 1)}
+      --v-switch-thumb-height: #{list.nth($size, 2)}
+      --v-switch-thumb-width: #{list.nth($size, 3)}
 
   .v-switch__loader
     display: flex
@@ -41,17 +59,16 @@
     padding: 0 5px
     background-color: $switch-track-background
     border-radius: $switch-track-radius
-    height: $switch-track-height
+    height: var(--v-switch-track-height)
     opacity: $switch-track-opacity
-    min-width: $switch-track-width
+    min-width: calc(#{$switch-track-width} * var(--v-switch-scale))
     cursor: pointer
     transition: $switch-track-transition
 
     .v-switch--inset &
       border-radius: $switch-inset-track-border-radius
       font-size: .75rem
-      height: $switch-inset-track-height
-      min-width: $switch-inset-track-width
+      min-width: calc(#{$switch-inset-track-width} * var(--v-switch-scale))
 
   .v-switch__thumb
     align-items: center
@@ -60,9 +77,9 @@
     border-radius: $switch-thumb-radius
     display: flex
     font-size: .75rem
-    height: $switch-thumb-height
+    height: var(--v-switch-thumb-height)
     justify-content: center
-    width: $switch-thumb-width
+    width: var(--v-switch-thumb-width)
     pointer-events: none
     transition: $switch-thumb-transition
     position: relative
@@ -78,8 +95,6 @@
       @include tools.elevation(0)
 
     .v-switch--inset &
-      height: $switch-inset-thumb-height
-      width: $switch-inset-thumb-width
       transform: scale(var(--v-switch-inset-thumb-off-scale, #{$switch-inset-thumb-off-scale}))
 
       &--filled
@@ -175,9 +190,9 @@
       width: calc(var(--v-switch-thumb-height) * 1.666666667)
 
       @include tools.ltr()
-        transform: translateX(-$switch-thumb-transform)
+        transform: translateX(calc(#{-$switch-thumb-transform} * var(--v-switch-scale)))
       @include tools.rtl()
-        transform: translateX($switch-thumb-transform)
+        transform: translateX(calc(#{$switch-thumb-transform} * var(--v-switch-scale)))
 
       .v-icon
         position: absolute
@@ -188,9 +203,9 @@
     .v-selection-control--dirty
       .v-selection-control__input
         @include tools.ltr()
-          transform: translateX($switch-thumb-transform)
+          transform: translateX(calc(#{$switch-thumb-transform} * var(--v-switch-scale)))
         @include tools.rtl()
-          transform: translateX(-$switch-thumb-transform)
+          transform: translateX(calc(#{-$switch-thumb-transform} * var(--v-switch-scale)))
 
     &.v-switch--indeterminate
       .v-selection-control__input

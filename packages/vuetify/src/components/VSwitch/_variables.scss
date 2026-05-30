@@ -59,3 +59,19 @@ $switch-track-width: 36px !default;
 $switch-track-height: 14px !default;
 $switch-track-opacity: .6 !default;
 $switch-track-transition: .2s background-color settings.$standard-easing !default;
+
+$switch-sizes: (
+  'x-small': ($switch-track-height - 5px, 13px, 13px),
+  'small': ($switch-track-height - 3px, 16px, 16px),
+  'default': ($switch-track-height, $switch-thumb-height, $switch-thumb-width),
+  'large': ($switch-track-height + 3px, 24px, 24px),
+  'x-large': ($switch-track-height + 5px, 28px, 28px),
+) !default;
+
+$switch-inset-sizes: (
+  'x-small': ($switch-inset-track-height - 12px, 15px, 15px),
+  'small': ($switch-inset-track-height - 6px, 20px, 20px),
+  'default': ($switch-inset-track-height, $switch-inset-thumb-height, $switch-inset-thumb-width),
+  'large': ($switch-inset-track-height + 6px, 30px, 30px),
+  'x-large': ($switch-inset-track-height + 12px, 34px, 34px),
+) !default;

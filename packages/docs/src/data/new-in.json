@@ -526,6 +526,10 @@
     }
   },
   "VSwitch": {
+    "props": {
+      "size": "4.1.0",
+      "thumbColor": "4.1.0"
+    },
     "slots": {
       "thumb": "3.5.0",
       "track-false": "3.5.0",

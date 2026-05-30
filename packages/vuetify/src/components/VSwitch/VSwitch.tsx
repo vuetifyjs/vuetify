@@ -15,6 +15,7 @@ import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeSizeProps } from '@/composables/size'
 
 // Utilities
 import { ref, toRef, useId } from 'vue'
@@ -57,7 +58,17 @@ export const makeVSwitchProps = propsFactory({
 
   ...omit(makeVInputProps(), ['glow']),
   ...makeVSelectionControlProps(),
+  ...makeSizeProps(),
 }, 'VSwitch')
+
+const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
+const iconSizes: Record<string, number> = {
+  'x-small': 11,
+  small: 14,
+  default: 16,
+  large: 18,
+  'x-large': 22,
+}
 
 export const VSwitch = genericComponent<new <T>(
   props: {
@@ -100,6 +111,11 @@ export const VSwitch = genericComponent<new <T>(
     const uid = useId()
     const id = toRef(() => props.id || `switch-${uid}`)
 
+    const isPredefinedSize = toRef(() => predefinedSizes.includes(props.size as string))
+    const iconSize = toRef(() => {
+      return isPredefinedSize.value ? iconSizes[props.size as string] : Math.round(16 * Number(props.size) / 32)
+    })
+
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -128,6 +144,7 @@ export const VSwitch = genericComponent<new <T>(
             { 'v-switch--inset-material': isMaterial },
             { 'v-switch--inset-square': props.inset === 'square' },
             { 'v-switch--indeterminate': indeterminate.value },
+            isPredefinedSize.value ? `v-switch--size-${props.size}` : undefined,
             loaderClasses.value,
             props.class,
           ]}
@@ -136,7 +153,10 @@ export const VSwitch = genericComponent<new <T>(
           v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
-          style={ props.style }
+          style={[
+            { '--v-switch-scale': isPredefinedSize.value ? undefined : Number(props.size) / 32 },
+            props.style,
+          ]}
         >
           {{
             ...slots,
@@ -228,7 +248,7 @@ export const VSwitch = genericComponent<new <T>(
                               defaults={{
                                 VIcon: {
                                   icon,
-                                  size: isMaterial ? 16 : 'x-small',
+                                  size: isMaterial ? iconSize.value : 'x-small',
                                 },
                               }}
                             >
@@ -243,7 +263,7 @@ export const VSwitch = genericComponent<new <T>(
                                     class={ isMaterial ? textColorClasses.value : undefined }
                                     style={ isMaterial ? textColorStyles.value : undefined }
                                     icon={ icon }
-                                    size={ isMaterial ? 16 : 'x-small' }
+                                    size={ isMaterial ? iconSize.value : 'x-small' }
                                   />
                                 ))) : (
                                 <LoaderSlot
@@ -259,7 +279,7 @@ export const VSwitch = genericComponent<new <T>(
                                           active={ slotProps.isActive }
                                           color={ slotProps.color }
                                           indeterminate
-                                          size="16"
+                                          size={ iconSize.value }
                                           width="2"
                                         />
                                       )
