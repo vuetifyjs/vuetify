@@ -10,9 +10,30 @@ $switch-inset-thumb-height: 24px !default;
 $switch-inset-thumb-width: 24px !default;
 $switch-inset-thumb-off-height: 16px !default;
 $switch-inset-thumb-off-width: 16px !default;
+$switch-inset-thumb-off-scale: calc(#{$switch-inset-thumb-off-height} / #{$switch-inset-thumb-height}) !default;
+$switch-inset-thumb-pressed-scale: calc(28px / #{$switch-inset-thumb-height}) !default;
 $switch-inset-track-border-radius: 9999px !default;
 $switch-inset-track-height: 32px !default;
 $switch-inset-track-width: 52px !default;
+$switch-inset-track-opacity: 1 !default;
+$switch-inset-border-width: 2px !default;
+
+$switch-inset-unselected-track-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 50%, #888) !default;
+$switch-inset-unselected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 50%, #888) !default;
+$switch-inset-unselected-border-color: $switch-inset-unselected-thumb-color !default;
+
+$switch-inset-selected-track-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 90%, white) !default;
+$switch-inset-selected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 80%, white) !default;
+
+$switch-focus-outline-color: rgb(var(--v-theme-primary)) !default;
+$switch-focus-outline-width: 2px !default;
+$switch-focus-outline-offset: 2px !default;
+
+$switch-inset-disabled-unselected-track-color: color-mix(in srgb, #{$switch-inset-unselected-track-color} 12%, transparent) !default;
+$switch-inset-disabled-unselected-thumb-color: rgba(var(--v-theme-on-surface), .38) !default;
+$switch-inset-disabled-unselected-border-color: rgba(var(--v-theme-on-surface), .12) !default;
+$switch-inset-disabled-selected-track-color: rgba(var(--v-theme-on-surface), .12) !default;
+$switch-inset-disabled-selected-thumb-color: rgb(var(--v-theme-surface)) !default;
 
 $switch-label-margin-inline-start: 10px !default;
 $switch-loader-color: rgb(var(--v-theme-surface)) !default;

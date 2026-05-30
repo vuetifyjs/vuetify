@@ -10,6 +10,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { LoaderSlot, useLoader } from '@/composables/loader'
@@ -20,7 +21,7 @@ import { ref, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { IconValue } from '@/composables/icons'
@@ -43,8 +44,12 @@ export type VSwitchSlots =
   }
 
 export const makeVSwitchProps = propsFactory({
-  inset: Boolean,
+  inset: {
+    type: [Boolean, String] as PropType<boolean | 'tonal' | 'material'>,
+    default: false,
+  },
   flat: Boolean,
+  thumbColor: String,
   loading: {
     type: [Boolean, String],
     default: false,
@@ -78,6 +83,10 @@ export const VSwitch = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
     const { isFocused, focus, blur } = useFocus(props)
+    const {
+      backgroundColorClasses: thumbColorClasses,
+      backgroundColorStyles: thumbColorStyles,
+    } = useBackgroundColor(() => props.thumbColor)
     const control = ref<VSelectionControl>()
     const inputRef = ref<VInput>()
     const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
@@ -106,6 +115,8 @@ export const VSwitch = genericComponent<new <T>(
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const inputProps = VInput.filterProps(props)
       const controlProps = VSelectionControl.filterProps(props)
+      const isMaterial = ['material', 'square'].includes(String(props.inset))
+      const hasThumbColor = !isForcedColorsModeActive && !!props.thumbColor
 
       return (
         <VInput
@@ -113,7 +124,8 @@ export const VSwitch = genericComponent<new <T>(
           class={[
             'v-switch',
             { 'v-switch--flat': props.flat },
-            { 'v-switch--inset': props.inset },
+            { 'v-switch--inset': !!props.inset },
+            { 'v-switch--inset-material': props.inset === 'material' },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
             props.class,
@@ -179,23 +191,43 @@ export const VSwitch = genericComponent<new <T>(
                         )}
                       </div>
                     ),
-                    input: ({ inputNode, icon, backgroundColorClasses, backgroundColorStyles }) => (
+                    input: ({
+                      inputNode,
+                      icon,
+                      model: isSelected,
+                      backgroundColorClasses,
+                      backgroundColorStyles,
+                      textColorClasses,
+                      textColorStyles,
+                    }) => (
                       <>
                         { inputNode }
                         <div
                           class={[
                             'v-switch__thumb',
                             { 'v-switch__thumb--filled': icon || props.loading },
-                            props.inset || isForcedColorsModeActive ? undefined : backgroundColorClasses.value,
+                            isForcedColorsModeActive ? undefined
+                            : (hasThumbColor && isSelected.value) ? thumbColorClasses.value
+                            : isMaterial ? backgroundColorClasses.value
+                            : props.inset ? undefined
+                            : backgroundColorClasses.value,
                           ]}
-                          style={ props.inset ? undefined : backgroundColorStyles.value }
+                          style={[
+                            (hasThumbColor && isSelected.value) ? thumbColorStyles.value
+                            : isMaterial
+                              ? (backgroundColorClasses.value.length || backgroundColorStyles.value.backgroundColor
+                                ? { backgroundColor: 'currentColor' }
+                                : undefined)
+                              : props.inset ? undefined
+                              : backgroundColorStyles.value,
+                          ]}
                         >
                           { slots.thumb ? (
                             <VDefaultsProvider
                               defaults={{
                                 VIcon: {
                                   icon,
-                                  size: 'x-small',
+                                  size: isMaterial ? 16 : 'x-small',
                                 },
                               }}
                             >
@@ -207,8 +239,10 @@ export const VSwitch = genericComponent<new <T>(
                                 (icon && (
                                   <VIcon
                                     key={ String(icon) }
+                                    class={ isMaterial ? textColorClasses.value : undefined }
+                                    style={ isMaterial ? textColorStyles.value : undefined }
                                     icon={ icon }
-                                    size="x-small"
+                                    size={ isMaterial ? 16 : 'x-small' }
                                   />
                                 ))) : (
                                 <LoaderSlot
