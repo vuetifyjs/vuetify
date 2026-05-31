@@ -180,11 +180,13 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number + props.step <= props.max
+      if (model.value == null) return true
+      return model.value + props.step <= props.max
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number - props.step >= props.min
+      if (model.value == null) return true
+      return model.value - props.step >= props.min
     })
 
     const controlVariant = computed(() => {
