@@ -224,6 +224,28 @@ describe('VNumberInput', () => {
       expect(model.value).toBe(-10)
     })
 
+    it('should have increment enabled when range is entirely negative', async () => {
+      const model = ref(null)
+      render(() =>
+        <VNumberInput min={ -10 } max={ -2 } v-model={ model.value } />
+      )
+
+      expect(screen.getByTestId('increment')).toBeEnabled()
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(model.value).toBe(-2)
+    })
+
+    it('should have decrement enabled when range is entirely positive', async () => {
+      const model = ref(null)
+      render(() =>
+        <VNumberInput min={ 2 } max={ 10 } v-model={ model.value } />
+      )
+
+      expect(screen.getByTestId('decrement')).toBeEnabled()
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(model.value).toBe(2)
+    })
+
     it('supports decimal step', async () => {
       const model = ref(0)
       render(() => (
