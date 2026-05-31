@@ -185,7 +185,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               ...textColorStyles.value,
               [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value),
               borderTop: `${convertToUnit(height.value / 2)} dotted`,
-              opacity: parseFloat(props.bufferOpacity!),
+              opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
               top: `calc(50% - ${convertToUnit(height.value / 4)})`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
@@ -201,7 +201,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           style={[
             backgroundColorStyles.value,
             {
-              opacity: parseFloat(props.bgOpacity!),
+              opacity: props.bgOpacity != null ? parseFloat(props.bgOpacity) : undefined,
               width: props.stream ? 0 : undefined,
             },
           ]}
@@ -215,7 +215,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           style={[
             bufferColorStyles.value,
             {
-              opacity: parseFloat(props.bufferOpacity!),
+              opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
               width: convertToUnit(bufferWidth.value, '%'),
             },
           ]}
