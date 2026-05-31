@@ -1,5 +1,5 @@
 // Utilities
-import { nextTick, onScopeDispose, toRef, toValue, watch } from 'vue'
+import { onScopeDispose, toRef, toValue, watch } from 'vue'
 import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
@@ -116,7 +116,7 @@ export function useFocusTrap (
     document.removeEventListener('pointerdown', onPointerdown)
     document.removeEventListener('keydown', captureOnKeydown)
 
-    await nextTick()
+    await new Promise(resolve => requestAnimationFrame(resolve))
 
     if (
       isActive.value &&
