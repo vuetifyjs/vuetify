@@ -58,7 +58,8 @@
       "scrolling",
       "sass-variables",
       "theme",
-      "treeshaking"
+      "treeshaking",
+      "typescript"
     ]
   },
   {
