@@ -100,12 +100,12 @@ function onKeydown (e: KeyboardEvent) {
 
   if (e.shiftKey && atFirst) {
     e.preventDefault()
-    lastElement.focus({ preventScroll: true })
+    lastElement.focus()
   }
 
   if (!e.shiftKey && atLast) {
     e.preventDefault()
-    firstElement.focus({ preventScroll: true })
+    firstElement.focus()
   }
 }
 
