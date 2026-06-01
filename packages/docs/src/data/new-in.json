@@ -82,7 +82,8 @@
   },
   "VCalendar": {
     "props": {
-      "format": "4.1.0"
+      "format": "4.1.0",
+      "intervalHighlight": "4.1.0"
     },
     "examples": {
       "prop-hour24": "4.1.0"
