@@ -28,7 +28,7 @@ $switch-inset-unselected-border-color: $switch-inset-unselected-thumb-color !def
 $switch-inset-selected-track-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 90%, white) !default;
 $switch-inset-selected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 80%, white) !default;
 
-$switch-focus-outline-color: rgb(var(--v-theme-primary)) !default;
+$switch-focus-outline-color: rgb(var(--v-theme-surface-variant)) !default;
 $switch-focus-outline-width: 2px !default;
 $switch-focus-outline-offset: 2px !default;
 
