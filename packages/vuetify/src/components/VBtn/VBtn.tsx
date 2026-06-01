@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, withDirectives } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -42,6 +42,16 @@ export type VBtnSlots = {
   prepend: never
   append: never
   loader: never
+}
+
+export type VBtnSizeSpec = {
+  height?: string | number
+  fontSize?: string | number
+  fontWeight?: string | number
+  paddingInline?: string | number
+  iconGap?: string | number
+  borderRadius?: string | number
+  borderRadiusPressed?: string | number
 }
 
 export const makeVBtnProps = propsFactory({
@@ -74,6 +84,11 @@ export const makeVBtnProps = propsFactory({
   text: {
     type: [String, Number, Boolean],
     default: undefined,
+  },
+
+  sizes: {
+    type: Object as PropType<Record<string, VBtnSizeSpec>>,
+    default: () => ({}),
   },
 
   ...makeBorderProps(),
@@ -113,6 +128,20 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { positionClasses } = usePosition(props)
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
+    const sizeVariables = computed(() => {
+      const spec = props.sizes?.[String(props.size ?? 'default')]
+      if (!spec) return undefined
+      const styles: Record<string, string | undefined> = {
+        '--v-btn-height': convertToUnit(spec.height),
+        '--v-btn-size': convertToUnit(spec.fontSize),
+        '--v-btn-font-weight': spec.fontWeight != null ? String(spec.fontWeight) : undefined,
+        '--v-btn-padding-inline': convertToUnit(spec.paddingInline),
+        '--v-btn-icon-gap': convertToUnit(spec.iconGap),
+        '--v-btn-border-radius': convertToUnit(spec.borderRadius),
+        '--v-btn-border-radius-pressed': convertToUnit(spec.borderRadiusPressed),
+      }
+      return Object.fromEntries(Object.entries(styles).filter(([, v]) => v != null))
+    })
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
 
@@ -223,6 +252,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            sizeVariables.value,
             roundedStyles.value,
             props.style,
           ]}

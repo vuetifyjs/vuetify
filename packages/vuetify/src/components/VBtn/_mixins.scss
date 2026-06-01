@@ -17,9 +17,10 @@
     #{$selector} {
       --v-btn-size: #{$size};
       --v-btn-height: #{$height};
+      --v-btn-padding-inline: #{tools.roundEven(math.div($height, map.get($map, 'padding-ratio')))};
       font-size: var(--v-btn-size);
       min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
-      padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
+      padding: 0 var(--v-btn-padding-inline);
     }
   }
 }
