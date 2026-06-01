@@ -27,6 +27,10 @@ export const VCalendarCategory = defineComponent({
       type: String,
       default: '',
     },
+    showIntervalHighlight: {
+      type: Boolean,
+      default: false,
+    },
 
     ...makeCalendarBaseProps(),
     ...makeCalendarWithIntervalsProps(),
@@ -48,7 +52,46 @@ export const VCalendarCategory = defineComponent({
       }
     }
 
-    function genDayHeader (scope: CalendarTimestamp & { week: any, index: number }) {
+    function getHoveredTimeFromEvent (e: MouseEvent): string | null {
+      const dayEl = (e.currentTarget as HTMLElement)
+      const rect = dayEl.getBoundingClientRect()
+      const y = e.clientY - rect.top
+      const intervalIndex = Math.floor(y / base.parsedIntervalHeight.value)
+      const intervals = base.intervals.value[0]
+      if (!intervals || intervalIndex < 0 || intervalIndex >= intervals.length) return null
+      return intervals[intervalIndex].time
+    }
+
+    function highlightIntervals (time: string | null, el: HTMLElement) {
+      const container = el.closest('.v-calendar-category')
+        ?.querySelector('.v-calendar-daily__day-container')
+      if (!container) return
+
+      container.querySelectorAll('.v-calendar-daily__day-interval--hover').forEach(el => {
+        el.classList.remove('v-calendar-daily__day-interval--hover')
+      })
+
+      if (time !== null) {
+        container.querySelectorAll('.v-calendar-daily__day-interval').forEach(el => {
+          if (el.getAttribute('data-time') === time) {
+            el.classList.add('v-calendar-daily__day-interval--hover')
+          }
+        })
+      }
+    }
+
+    function onDayMouseMove (e: MouseEvent) {
+      if (!props.showIntervalHighlight) return
+      const time = getHoveredTimeFromEvent(e)
+      highlightIntervals(time, e.currentTarget as HTMLElement)
+    }
+
+    function onDayMouseLeave (e: MouseEvent) {
+      if (!props.showIntervalHighlight) return
+      highlightIntervals(null, e.currentTarget as HTMLElement)
+    }
+
+    function genDayHeader (scope: any) {
       return (
         <div class="v-calendar-category__columns">
           { parsedCategories.value.map(category => {
@@ -59,7 +102,7 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
-      const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
+      const headerTitle = typeof scope.category === 'object' ? scope.category?.categoryName : scope.category
       const events = getPrefixedEventHandlers(attrs, ':dayCategory', () => {
         return getCategoryScope(base.getSlotScope(day) || day, scope.category)
       })
@@ -83,7 +126,7 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDays () {
-      const days: any[] = []
+      const days: JSX.Element[] = []
       base.days.value.forEach((d: CalendarTimestamp, j: number) => {
         const day = new Array(parsedCategories.value.length || 1)
         day.fill(d)
@@ -102,6 +145,8 @@ export const VCalendarCategory = defineComponent({
           key={ day.date + '-' + categoryIndex }
           class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
           { ...events }
+          onMousemove={ onDayMouseMove }
+          onMouseleave={ onDayMouseLeave }
         >
           { genDayIntervals(index, category) }
           { genDayBody(day, category) }
@@ -122,6 +167,7 @@ export const VCalendarCategory = defineComponent({
           key={ interval.time }
           class="v-calendar-daily__day-interval"
           style={[{ height }, styler({ ...interval, category })]}
+          data-time={ interval.time }
         >
           { slots.interval?.(
             getCategoryScope(base.getSlotScope(interval), category)
