@@ -167,18 +167,20 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     return undefined
   }
 
-  function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
-    const timestamp: CalendarTimestamp = copyTimestamp(day)
+  function getIntervalAtEvent (e: Event): number {
     const bounds = new Box(e.currentTarget as HTMLElement)
-    const baseMinutes: number = firstMinute.value
     const touchEvent: TouchEvent = e as TouchEvent
     const mouseEvent: MouseEvent = e as MouseEvent
     const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
     const target = touches && touches[0] ? touches[0] : mouseEvent
     const point = getTargetBox([target.clientX, target.clientY])
-    const addIntervals: number = (point.y - bounds.top) / parsedIntervalHeight.value
-    const addMinutes: number = Math.floor(addIntervals * parsedIntervalMinutes.value)
-    const minutes: number = baseMinutes + addMinutes
+    return (point.y - bounds.top) / parsedIntervalHeight.value
+  }
+
+  function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
+    const timestamp: CalendarTimestamp = copyTimestamp(day)
+    const addMinutes: number = Math.floor(getIntervalAtEvent(e) * parsedIntervalMinutes.value)
+    const minutes: number = firstMinute.value + addMinutes
 
     return updateMinutes(timestamp, minutes, base.times.now)
   }
@@ -278,6 +280,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     intervalFormatter,
     showIntervalLabelDefault,
     intervalStyleDefault,
+    getIntervalAtEvent,
     getTimestampAtEvent,
     getSlotScope,
     scrollToTime,
