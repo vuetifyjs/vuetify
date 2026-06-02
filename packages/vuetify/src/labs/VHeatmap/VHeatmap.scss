@@ -139,6 +139,10 @@
       width: calc(var(--v-heatmap-cell-width) * 8);
       height: var(--v-heatmap-cell-height);
       border-radius: $heatmap-cell-border-radius;
+
+      @media (forced-colors: active) {
+        forced-color-adjust: preserve-parent-color;
+      }
     }
   }
 }
