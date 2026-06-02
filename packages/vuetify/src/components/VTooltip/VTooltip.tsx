@@ -113,12 +113,12 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           { ...overlayProps }
           contentClass={[
             colorClasses.value,
+            props.contentClass,
           ]}
-          contentProps={{
-            style: [
-              colorStyles.value,
-            ],
-          }}
+          contentProps={ mergeProps(
+            { style: [colorStyles.value] },
+            props.contentProps,
+          )}
           v-model={ isActive.value }
           transition={ transition.value }
           absolute
