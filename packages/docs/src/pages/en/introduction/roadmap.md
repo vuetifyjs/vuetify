@@ -25,8 +25,8 @@ The following is a list of all planned components for the year 2026.
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
-| [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | Q2 2026         |
-| [v4.2](https://github.com/vuetifyjs/vuetify/milestone/90)               | Q3 2026         |
+| [v4.1 (Ascendant)](https://github.com/vuetifyjs/vuetify/milestone/77)   | Q2 2026         |
+| [v4.2 (Crusader)](https://github.com/vuetifyjs/vuetify/milestone/90)    | Q3 2026         |
 | v4.3                                                                    | TBD             |
 
 ### New form components and features
