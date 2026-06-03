@@ -209,6 +209,22 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     useFocusTrap(props, { isActive, localTop, contentEl })
 
+    let openedWithActivatorFocus = false
+
+    function ownsFocus (activeElement: Element | null): boolean {
+      let current = activeElement
+      const visited = new Set<Element>()
+      while (current) {
+        const el = current.closest('.v-overlay__content')
+        if (!el || visited.has(el)) return false
+        if (el === contentEl.value) return true
+        visited.add(el)
+        const ownerId = el.closest('.v-overlay')?.id
+        current = ownerId ? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
+      }
+      return false
+    }
+
     function returnFocusToActivator () {
       const el = activatorEl.value
       if (!el || !el.isConnected) return
@@ -219,11 +235,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
       const activeEl = document.activeElement
       const focusWasInOverlay =
-        !activeEl ||
-        activeEl === document.body ||
+        ((!activeEl || activeEl === document.body) && openedWithActivatorFocus) ||
         activeEl === el ||
         el.contains(activeEl) ||
-        !!activeEl.closest('.v-overlay__content')
+        ownsFocus(activeEl)
       if (!focusWasInOverlay) return
 
       const parent = el.parentElement
@@ -239,7 +254,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     }
 
     watch(isActive, val => {
-      if (!val) returnFocusToActivator()
+      if (val) {
+        const activeEl = document.activeElement
+        const el = activatorEl.value
+        openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+      } else {
+        returnFocusToActivator()
+      }
     }, { flush: 'post' })
 
     IN_BROWSER && watch(isActive, val => {
