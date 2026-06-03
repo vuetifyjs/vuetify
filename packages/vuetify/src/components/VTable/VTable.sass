@@ -92,12 +92,14 @@
                 z-index: 1
 
     &.v-table--fixed-footer
-      > tfoot
-        > tr
-          > th,
-          > td
-            background: $table-background
-            box-shadow: inset 0 1px 0 $table-border-color
+      > .v-table__wrapper
+        > table
+          > tfoot
+            > tr
+              > th,
+              > td
+                background: $table-background
+                box-shadow: inset 0 1px 0 $table-border-color
 
   // Block
   .v-table
