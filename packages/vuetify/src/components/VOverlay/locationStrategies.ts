@@ -246,12 +246,20 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
   })
 
-  const [minWidth, minHeight, maxWidth, maxHeight] =
+  const [getMinWidth, getMinHeight, getMaxWidth, getMaxHeight] =
     (['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const).map(key => {
-      return computed(() => {
-        const val = parseFloat(props[key]!)
-        return isNaN(val) ? Infinity : val
-      })
+      const isWidth = key.endsWith('Width')
+      return () => {
+        const raw = props[key]
+        const val = parseFloat(raw!)
+        if (isNaN(val)) return Infinity
+        if (typeof raw === 'string' && raw.endsWith('%')) {
+          // resolve against the overlay container, like CSS would
+          const box = getElementBox(data.contentEl.value?.parentElement ?? document.documentElement)
+          return val * (isWidth ? box.width : box.height) / 100
+        }
+        return val
+      }
     })
 
   const offset = computed(() => {
@@ -333,6 +341,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = Number(props.viewportMargin)
+    const minWidth = getMinWidth()
+    const minHeight = getMinHeight()
+    const maxWidth = getMaxWidth()
+    const maxHeight = getMaxHeight()
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
@@ -403,8 +415,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       box.x += x
       box.y += y
 
-      box.width = Math.min(box.width, maxWidth.value)
-      box.height = Math.min(box.height, maxHeight.value)
+      box.width = Math.min(box.width, maxWidth)
+      box.height = Math.min(box.height, maxHeight)
 
       const overflows = getOverflow(box, viewport)
 
@@ -507,9 +519,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       top: convertToUnit(pixelRound(y)),
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
       right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
-      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
-      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth, targetBox.width) : minWidth),
+      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth === Infinity ? 0 : minWidth, maxWidth))),
+      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight === Infinity ? 0 : minHeight, maxHeight))),
     })
 
     return {
