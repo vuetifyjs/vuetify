@@ -76,6 +76,7 @@ export const makeVComboboxProps = propsFactory({
     default: true,
   },
   delimiters: Array as PropType<readonly string[]>,
+  trimValues: Boolean,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps({ hideNoData: true, returnObject: true }),
@@ -338,8 +339,13 @@ export const VCombobox = genericComponent<new <
       }
 
       if (e.key === 'Enter' && search.value) {
-        select(transformItem(props, search.value), true, true)
-        if (hasSelectionSlot.value) _search.value = ''
+        const value = props.trimValues ? search.value.trim() : search.value
+        if (props.trimValues && !value) {
+          _search.value = ''
+        } else {
+          select(transformItem(props, value), true, true)
+          if (hasSelectionSlot.value) _search.value = ''
+        }
       }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
@@ -503,17 +509,24 @@ export const VCombobox = genericComponent<new <
       menu.value = false
 
       if (search.value) {
+        const value = props.trimValues ? search.value.trim() : search.value
+
+        if (props.trimValues && !value) {
+          _search.value = ''
+          return
+        }
+
         if (props.multiple) {
-          select(transformItem(props, search.value))
+          select(transformItem(props, value))
           return
         }
 
         if (!hasSelectionSlot.value) return
 
-        if (model.value.some(({ title }) => title === search.value)) {
+        if (model.value.some(({ title }) => title === value)) {
           _search.value = ''
         } else {
-          select(transformItem(props, search.value))
+          select(transformItem(props, value))
         }
       }
     })

@@ -926,5 +926,41 @@ describe('VCombobox', () => {
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/14874
+  describe('trimValues', () => {
+    it('should discard whitespace-only values and trim committed values', async () => {
+      const model = ref([])
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } multiple trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      // whitespace-only value committed on blur (Tab) is discarded
+      await userEvent.click(input)
+      await userEvent.keyboard(' ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual([])
+
+      // whitespace-only value committed on Enter is discarded
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard('  {Enter}')
+      await expect.poll(() => model.value).toEqual([])
+
+      // trailing whitespace committed on Enter is trimmed
+      await userEvent.keyboard('a {Enter}')
+      await expect.poll(() => model.value).toEqual(['a'])
+
+      // surrounding whitespace committed on blur (Tab) is trimmed, inner space kept
+      await userEvent.keyboard(' b b')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual(['a', 'b b'])
+    })
+  })
+
   showcase({ stories })
 })
