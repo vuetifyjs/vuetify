@@ -170,11 +170,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     let activeTimeout = -1
     function startTimeout () {
-      countdown.reset()
+      countdown.clear()
       window.clearTimeout(activeTimeout)
       const timeout = Number(props.timeout)
 
       if (!isActive.value || timeout === -1) return
+
+      countdown.reset()
 
       const element = refElement(timerRef.value)
 
@@ -348,7 +350,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             <div class="v-snackbar__header">{ slots.header?.() }</div>
           )}
 
-          { props.timer && countdown.time.value > 0 && !isHovering.value && (
+          { props.timer && Number(props.timeout) > 0 && !isHovering.value && (
             <div
               key="timer"
               class={[
