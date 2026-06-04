@@ -126,7 +126,8 @@
       "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "trimValues": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
