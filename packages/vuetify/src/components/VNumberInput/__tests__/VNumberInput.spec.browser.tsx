@@ -486,4 +486,39 @@ describe('VNumberInput', () => {
       expect(vInput).not.toHaveClass('v-input--error')
     })
   })
+
+  describe('propagates native change event', () => {
+    it('on typing then blur', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput onChange={ onChange } />)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('42')
+      await userEvent.tab()
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('on increment/decrement controls', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput modelValue={ 5 } onChange={ onChange } />)
+
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+
+    it('on arrow up/down keys', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput modelValue={ 5 } onChange={ onChange } />)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{ArrowUp}')
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
 })

@@ -234,18 +234,25 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return idx ? str.length - idx : 0
     }
 
+    function emitChange () {
+      vTextFieldRef.value?.controlRef?.dispatchEvent(new Event('change', { bubbles: true }))
+    }
+
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
+      if (increment ? !canIncrease.value : !canDecrease.value) return
       if (model.value == null) {
         inputText.value = correctPrecision(clamp(0, props.min, props.max))
+        emitChange()
         return
       }
-
       const inferredPrecision = Math.max(inferPrecision(toNumber(inputText.value)), inferPrecision(props.step))
-      if (increment) {
-        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
-      } else {
-        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
+      if (increment && canIncrease.value) {
+        inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
+        emitChange()
+      } else if (!increment && canDecrease.value) {
+        inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
+        emitChange()
       }
     }
 
