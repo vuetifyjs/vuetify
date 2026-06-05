@@ -957,3 +957,26 @@ describe('VTreeview with loading', () => {
     expect(screen.getByText(/4.leaf/)).not.toBeVisible()
   })
 })
+
+// https://github.com/vuetifyjs/vuetify/issues/21585
+// https://github.com/vuetifyjs/vuetify/issues/22898
+describe('VTreeview accessibility', () => {
+  it('should have aria-label on toggle button that changes with open state', async () => {
+    const items = [
+      { id: 1, title: 'Parent', children: [{ id: 2, title: 'Child' }] },
+    ]
+
+    render(() => (
+      <VTreeview items={ items } itemValue="id" />
+    ))
+
+    const toggleBtn = screen.getByLabelText('Expand')
+    expect(toggleBtn).toBeVisible()
+
+    await userEvent.click(toggleBtn)
+    await expect.element(screen.getByLabelText('Collapse')).toBeVisible()
+
+    await userEvent.click(screen.getByLabelText('Collapse'))
+    await expect.element(screen.getByLabelText('Expand')).toBeVisible()
+  })
+})
