@@ -389,4 +389,74 @@ describe('VMenu', () => {
       expect(document.activeElement).toBe(topBtn)
     })
   })
+
+  describe('submenu keyboard navigation', () => {
+    it('should close submenus one level at a time with ArrowLeft and keep focus inside', async () => {
+      render(() => (
+        <div>
+          <button data-testid="before">before</button>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                <VListItem data-testid="l1-item-2" link>
+                  <span>L1-2</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                      <VListItem data-testid="l2-item-2" link>
+                        <span>L2-2</span>
+                        <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="l3-item-1" link>L3-1</VListItem>
+                            <VListItem data-testid="l3-item-2" link>L3-2</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <button data-testid="after">after</button>
+        </div>
+      ))
+
+      screen.getByTestId('before').focus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('top-btn'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l3-item-1'))
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect.poll(() => screen.queryByTestId('l3-item-1')).toBeNull()
+      expect(screen.queryByTestId('l2-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l2-item-2'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByTestId('l1-item-1')).toBeNull()
+      expect(document.activeElement).toBe(screen.getByTestId('after'))
+    })
+  })
 })
