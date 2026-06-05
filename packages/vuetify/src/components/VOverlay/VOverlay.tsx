@@ -258,7 +258,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = document.activeElement
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+        contentEl.value?.removeAttribute('inert')
       } else {
+        if (contentEl.value) contentEl.value.inert = true
         returnFocusToActivator()
       }
     }, { flush: 'post' })

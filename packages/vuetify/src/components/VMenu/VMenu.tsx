@@ -167,7 +167,23 @@ export const VMenu = genericComponent<OverlaySlots>()({
       ) {
         isActive.value = true
         e.preventDefault()
-        setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
+        focusContentWhenReady(e)
+      }
+    }
+
+    // Re-dispatch the opening keystroke once the menu content has mounted and its
+    // items are focusable. A fixed delay races with content layout and only lands
+    // focus about half the time, so retry across frames until focus is inside.
+    function focusContentWhenReady (e: KeyboardEvent, attempt = 1) {
+      if (!isActive.value) return
+      const el = overlay.value?.contentEl
+      if (el?.contains(document.activeElement)) return
+      if (el && focusableChildren(el).length) {
+        onActivatorKeydown(e)
+        if (el.contains(document.activeElement)) return
+      }
+      if (attempt <= 10) {
+        requestAnimationFrame(() => focusContentWhenReady(e, attempt + 1))
       }
     }
 

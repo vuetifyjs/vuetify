@@ -458,5 +458,101 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByTestId('l1-item-1')).toBeNull()
       expect(document.activeElement).toBe(screen.getByTestId('after'))
     })
+
+    it('should keep focus inside the menu tree when Tab/Shift+Tab is pressed in a submenu', async () => {
+      render(() => (
+        <div>
+          <button data-testid="before">before</button>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                <VListItem data-testid="l1-item-2" link>
+                  <span>L1-2</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                      <VListItem data-testid="l2-item-2" link>L2-2</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <button data-testid="after">after</button>
+        </div>
+      ))
+
+      screen.getByTestId('before').focus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('top-btn'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+    })
+
+    // Animations widen the gap between content mount and item layout, which is
+    // exactly when the open keystroke used to drop focus, so run with real motion.
+    describe('with animations', () => {
+      beforeEach(() => commands.setReduceMotionDisabled())
+      afterEach(() => commands.setReduceMotionEnabled())
+
+      it('should focus the first submenu item with a single ArrowRight press', async () => {
+        render(() => (
+          <div>
+            <button data-testid="before">before</button>
+            <VBtn data-testid="top-btn">
+              Open
+              <VMenu activator="parent">
+                <VList>
+                  <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                  <VListItem data-testid="l1-item-2" link>
+                    <span>L1-2</span>
+                    <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                      <VList>
+                        <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                        <VListItem data-testid="l2-item-2" link>L2-2</VListItem>
+                      </VList>
+                    </VMenu>
+                  </VListItem>
+                </VList>
+              </VMenu>
+            </VBtn>
+          </div>
+        ))
+
+        screen.getByTestId('top-btn').focus()
+
+        // Each open is a single keypress — no retry. Polling waits for the
+        // deferred focus to land, but never re-presses the key.
+        await userEvent.keyboard('{ArrowDown}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+
+        await userEvent.keyboard('{ArrowDown}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+        await userEvent.keyboard('{ArrowRight}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      })
+    })
   })
 })
