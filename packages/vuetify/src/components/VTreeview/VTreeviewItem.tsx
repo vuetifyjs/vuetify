@@ -128,9 +128,11 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                           { !slots.toggle ? (
                             <VBtn
                               key="prepend-toggle"
+                              class="v-treeview-item__toggle"
                               density="compact"
                               icon={ props.toggleIcon }
                               loading={ props.loading }
+                              tabindex={ -1 }
                               variant="text"
                               onClick={ onClickAction }
                             >
@@ -153,6 +155,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                   icon: props.toggleIcon,
                                   variant: 'text',
                                   loading: props.loading,
+                                  tabindex: -1,
                                 },
                                 VProgressCircular: {
                                   indeterminate: 'disable-shrink',
@@ -165,6 +168,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                 ...slotProps,
                                 loading: props.loading,
                                 props: {
+                                  class: 'v-treeview-item__toggle',
                                   onClick: onClickAction,
                                 },
                               })}

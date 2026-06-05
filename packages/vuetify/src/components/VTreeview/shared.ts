@@ -7,7 +7,7 @@ export interface TreeViewProvide {
 }
 
 export type ToggleListItemSlot = ListItemSlot & {
-  props: { onClick: (e: PointerEvent) => void }
+  props: { class: string, onClick: (e: PointerEvent) => void }
 }
 
 export const VTreeviewSymbol: InjectionKey<TreeViewProvide> = Symbol.for('vuetify:v-treeview')

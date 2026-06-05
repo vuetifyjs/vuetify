@@ -215,7 +215,10 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...treeItemProps,
                 ...activatorProps,
                 value: treeItemProps?.value,
-                ariaExpanded: isOpen,
+                'aria-expanded': isOpen,
+                'aria-level': depth + 1,
+                'aria-posinset': index + 1,
+                'aria-setsize': items.length,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: props.disabled || treeItemProps.disabled
                   ? undefined
@@ -278,6 +281,9 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               { ...treeItemProps }
               hasCustomPrepend={ !!slots.prepend }
               hideActions={ props.hideActions }
+              aria-level={ depth + 1 }
+              aria-posinset={ index + 1 }
+              aria-setsize={ items.length }
               value={ props.returnObject ? toRaw(item.raw) : treeItemProps.value }
               v-slots={ slotsWithItem }
             />

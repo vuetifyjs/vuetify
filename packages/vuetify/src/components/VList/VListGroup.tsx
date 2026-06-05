@@ -119,7 +119,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
           { renderWhenClosed.value
             ? (
-            <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+            <div class="v-list-group__items" role="group" aria-labelledby={ id.value } inert={ !isOpen.value } v-show={ isOpen.value }>
               { slots.default?.() }
             </div>
             ) : isOpen.value && (
