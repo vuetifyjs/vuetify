@@ -73,18 +73,32 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop, contentEl }: {
+  { isActive, isTop, contentEl, isSubmenu = false }: {
     isActive: Ref<boolean>
     isTop: Ref<boolean>
     contentEl: Ref<HTMLElement | undefined>
+    isSubmenu?: boolean
   }
 ) {
   const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
 
+  const parentMenu = inject(VMenuSymbol, null)
+
   let isHovered = false
   let isFocused = false
   let firstEnter = true
+  // True only when this overlay was last opened by the hover delay (not keyboard/click/focus).
+  const openedByHover = ref(false)
+  // Set synchronously inside the delay callback before mutating isActive; consumed by the next watcher tick.
+  let delayCallbackFiredOpen = false
+
+  // Hover-leave should collapse the whole structure only when the ROOT of the chain was hover-opened.
+  // A submenu inherits the root's verdict via VMenuSymbol; everything else (tooltips, root or
+  // standalone menus) decides on its own hover-open state, even when nested in a menu's content.
+  const rootOpenedByHover = () => isSubmenu
+    ? (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
+    : openedByHover.value
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
@@ -98,6 +112,10 @@ export function useActivator (
     ) {
       if (isActive.value !== value) {
         firstEnter = true
+        if (value) {
+          delayCallbackFiredOpen = true
+          openedByHover.value = isHovered && props.openOnHover
+        }
       }
       isActive.value = value
     }
@@ -105,9 +123,17 @@ export function useActivator (
 
   let reopenLock = false
   watch(isActive, v => {
-    if (v) return
-    reopenLock = true
-    setTimeout(() => reopenLock = false, 50)
+    if (!v) {
+      reopenLock = true
+      setTimeout(() => reopenLock = false, 50)
+      openedByHover.value = false
+      delayCallbackFiredOpen = false
+      return
+    }
+    if (!delayCallbackFiredOpen) {
+      openedByHover.value = false
+    }
+    delayCallbackFiredOpen = false
   })
 
   const cursorTarget = ref<[x: number, y: number]>()
@@ -135,7 +161,7 @@ export function useActivator (
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
       if (props.target === 'cursor') isFocused = false
-      runCloseDelay()
+      if (rootOpenedByHover()) runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
       if (reopenLock) return
@@ -190,7 +216,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (rootOpenedByHover()) runCloseDelay()
       }
     }
 
@@ -233,7 +259,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (rootOpenedByHover()) runCloseDelay()
       }
     }
 
@@ -241,10 +267,15 @@ export function useActivator (
   })
 
   watch(isTop, val => {
-    if (val && (
-      (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
-      (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    ) && !contentEl.value?.contains(document.activeElement)) {
+    if (
+      val &&
+      rootOpenedByHover() &&
+      (
+        (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
+        (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
+      ) &&
+      !contentEl.value?.contains(document.activeElement)
+    ) {
       runCloseDelay()
     }
   })
@@ -294,7 +325,7 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
+  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents, openedByHover }
 }
 
 function _useActivator (

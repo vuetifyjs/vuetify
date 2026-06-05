@@ -80,13 +80,17 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = shallowRef(new Set<string>())
+    const openChildren = shallowRef(new Map<string, () => void>())
     provide(VMenuSymbol, {
-      register () {
-        openChildren.value.add(uid)
+      register (childUid, close) {
+        // Only one submenu open per level: close any already-open sibling first.
+        for (const [otherUid, closeOther] of [...openChildren.value]) {
+          if (otherUid !== childUid) closeOther()
+        }
+        openChildren.value.set(childUid, close)
       },
-      unregister () {
-        openChildren.value.delete(uid)
+      unregister (childUid) {
+        openChildren.value.delete(childUid)
       },
       closeParents (e) {
         setTimeout(() => {
@@ -99,15 +103,26 @@ export const VMenu = genericComponent<OverlaySlots>()({
           }
         }, 40)
       },
+      openOnHover: props.openOnHover,
+      // Submenus inherit the chain root's hover-open state; a non-submenu menu reports its own,
+      // so hover-leave collapses a submenu tree only when its root menu was hover-opened.
+      rootOpenedByHover: props.submenu && parent
+        ? parent.rootOpenedByHover
+        : () => overlay.value?.openedByHover ?? false,
     })
 
-    onBeforeUnmount(() => parent?.unregister())
+    onBeforeUnmount(() => parent?.unregister(uid))
     onDeactivated(() => isActive.value = false)
 
     watch(isActive, val => {
-      val
-        ? parent?.register()
-        : parent?.unregister()
+      if (val) {
+        parent?.register(uid, () => { isActive.value = false })
+      } else {
+        parent?.unregister(uid)
+        // Closing a menu collapses its whole open subtree, so descendants don't
+        // linger hidden-but-active and reappear when this menu is reopened.
+        for (const [, closeChild] of [...openChildren.value]) closeChild()
+      }
     }, { immediate: true })
 
     function onClickOutside (e: MouseEvent) {
@@ -212,6 +227,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           { ...overlayProps }
           v-model={ isActive.value }
           absolute
+          _submenu={ props.submenu }
           activatorProps={ activatorProps.value }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onClick:outside={ onClickOutside }
