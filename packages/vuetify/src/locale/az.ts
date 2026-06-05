@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Tam ekran',
     exitFullscreen: 'Tam ekrandan çıx',
   },
+  treeview: {
+    expand: 'Genişlət',
+    collapse: 'Yığ',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Ekrandan rəng seçin',

@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Täisekraan',
     exitFullscreen: 'Välju täisekraanilt',
   },
+  treeview: {
+    expand: 'Laienda',
+    collapse: 'Ahenda',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Võta värv ekraanilt',

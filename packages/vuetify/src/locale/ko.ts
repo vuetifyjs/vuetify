@@ -185,6 +185,10 @@ export default {
     enterFullscreen: '전체 화면',
     exitFullscreen: '전체 화면 종료',
   },
+  treeview: {
+    expand: '펼치기',
+    collapse: '접기',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: '화면에서 색상 선택',

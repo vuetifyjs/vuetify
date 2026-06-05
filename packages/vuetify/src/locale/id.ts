@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Layar penuh',
     exitFullscreen: 'Keluar dari layar penuh',
   },
+  treeview: {
+    expand: 'Perluas',
+    collapse: 'Ciutkan',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Pilih warna dari layar',

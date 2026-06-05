@@ -185,6 +185,10 @@ export default {
     enterFullscreen: '全螢幕',
     exitFullscreen: '退出全螢幕',
   },
+  treeview: {
+    expand: '展開',
+    collapse: '收起',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: '從螢幕上選取顏色',

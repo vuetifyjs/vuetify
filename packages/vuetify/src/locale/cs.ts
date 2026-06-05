@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Celá obrazovka',
     exitFullscreen: 'Ukončit celou obrazovku',
   },
+  treeview: {
+    expand: 'Rozbalit',
+    collapse: 'Sbalit',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Vybrat barvu z obrazovky',

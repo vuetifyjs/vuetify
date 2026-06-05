@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Volledig scherm',
     exitFullscreen: 'Volledig scherm verlaten',
   },
+  treeview: {
+    expand: 'Uitvouwen',
+    collapse: 'Invouwen',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Kies een kleur van het scherm',

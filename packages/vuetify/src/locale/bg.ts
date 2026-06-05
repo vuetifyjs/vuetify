@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Цял екран',
     exitFullscreen: 'Изход от цял екран',
   },
+  treeview: {
+    expand: 'Разгъни',
+    collapse: 'Свий',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Вземане на цвят от екрана',

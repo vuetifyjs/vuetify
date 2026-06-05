@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'מסך מלא',
     exitFullscreen: 'צא ממסך מלא',
   },
+  treeview: {
+    expand: 'הרחב',
+    collapse: 'צמצם',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'בחר צבע מהמסך',

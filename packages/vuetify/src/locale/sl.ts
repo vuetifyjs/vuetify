@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Celozaslonski način',
     exitFullscreen: 'Izhod iz celozaslonskega načina',
   },
+  treeview: {
+    expand: 'Razširi',
+    collapse: 'Skrči',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Izberi barvo z zaslona',

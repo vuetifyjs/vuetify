@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Pilnekrāna režīms',
     exitFullscreen: 'Iziet no pilnekrāna režīma',
   },
+  treeview: {
+    expand: 'Izvērst',
+    collapse: 'Sakļaut',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Izvēlēties krāsu no ekrāna',

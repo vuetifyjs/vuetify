@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Tela cheia',
     exitFullscreen: 'Sair da tela cheia',
   },
+  treeview: {
+    expand: 'Expandir',
+    collapse: 'Recolher',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Selecionar cor da tela',

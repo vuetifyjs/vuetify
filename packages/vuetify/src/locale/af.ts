@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Volskerm',
     exitFullscreen: 'Verlaat volskerm',
   },
+  treeview: {
+    expand: 'Uitbrei',
+    collapse: 'Invou',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Kies kleur van die skerm af',

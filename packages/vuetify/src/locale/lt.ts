@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Visas ekranas',
     exitFullscreen: 'Išeiti iš viso ekrano',
   },
+  treeview: {
+    expand: 'Išskleisti',
+    collapse: 'Suskleisti',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Pasirinkite spalvą iš ekrano',

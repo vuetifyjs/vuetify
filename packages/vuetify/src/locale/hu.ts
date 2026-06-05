@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Teljes képernyő',
     exitFullscreen: 'Kilépés a teljes képernyőből',
   },
+  treeview: {
+    expand: 'Kibontás',
+    collapse: 'Összecsukás',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Szín kiválasztása a képernyőről',

@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Koko näyttö',
     exitFullscreen: 'Poistu koko näytöstä',
   },
+  treeview: {
+    expand: 'Laajenna',
+    collapse: 'Supista',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Valitse väri näytöltä',

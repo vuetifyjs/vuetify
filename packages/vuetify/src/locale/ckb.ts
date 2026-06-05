@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'پڕ بە شاشە',
     exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
   },
+  treeview: {
+    expand: 'فراوانکردن',
+    collapse: 'داخستن',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'ڕەنگ لەسەر شاشە هەڵبژێرە',

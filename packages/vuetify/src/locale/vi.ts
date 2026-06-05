@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Toàn màn hình',
     exitFullscreen: 'Thoát toàn màn hình',
   },
+  treeview: {
+    expand: 'Mở rộng',
+    collapse: 'Thu gọn',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Chọn màu từ màn hình',

@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'تمام صفحه',
     exitFullscreen: 'خروج از تمام صفحه',
   },
+  treeview: {
+    expand: 'گسترش',
+    collapse: 'جمع کردن',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'انتخاب رنگ از صفحه',

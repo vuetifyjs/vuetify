@@ -185,6 +185,10 @@ export default {
     enterFullscreen: '全画面表示',
     exitFullscreen: '全画面表示を終了',
   },
+  treeview: {
+    expand: '展開',
+    collapse: '折りたたむ',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: '画面から色を選択',

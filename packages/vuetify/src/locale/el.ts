@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'Πλήρης οθόνη',
     exitFullscreen: 'Έξοδος από πλήρη οθόνη',
   },
+  treeview: {
+    expand: 'Ανάπτυξη',
+    collapse: 'Σύμπτυξη',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'Επιλογή χρώματος από την οθόνη',

@@ -185,6 +185,10 @@ export default {
     enterFullscreen: 'ពេញអេក្រង់',
     exitFullscreen: 'ចេញពីអេក្រង់ពេ',
   },
+  treeview: {
+    expand: 'ពង្រីក',
+    collapse: 'បង្រួម',
+  },
   colorPicker: {
     ariaLabel: {
       eyedropper: 'ជ្រើសរើសពណ៌ពីអេក្រង់',
