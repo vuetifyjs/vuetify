@@ -2,8 +2,10 @@
 import type { InjectionKey } from 'vue'
 
 interface MenuProvide {
-  register (): void
-  unregister (): void
+  openOnHover: boolean
+  rootOpenedByHover: () => boolean
+  register (uid: string, close: () => void): void
+  unregister (uid: string): void
   closeParents (e?: MouseEvent): void
 }
 
