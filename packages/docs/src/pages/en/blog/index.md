@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing the Vuetify0 Beta
+
+🖊️ John Leider • 📅 June 2nd, 2026
+
+Vuetify0 has reached beta, freezing the public API: the existing composables and components keep their names and signatures through v1. Since the alpha, the totals went to 49 components and 68 composables, no composables remain in draft, and a headless drag-and-drop family (useDragDrop, createSortable, createKanban) was added along with createOtp, useDelay, and the Overflow component. The release also covers the testing and stability work — 5,700+ unit tests, 98.7% coverage — ahead of v1... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-beta/) { .text-end }
+
 ## April 2026 Update
 
 🖊️ John Leider • 📅 May 4th, 2026
