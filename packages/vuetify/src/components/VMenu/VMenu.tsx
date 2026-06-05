@@ -129,6 +129,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         }
       } else if (props.submenu && e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
         isActive.value = false
+        overlay.value?.activatorEl?.focus()
       }
     }
 
@@ -145,6 +146,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         } else if (props.submenu) {
           if (e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
             isActive.value = false
+            overlay.value?.activatorEl?.focus()
           } else if (e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')) {
             e.preventDefault()
             focusChild(el, 'first')
