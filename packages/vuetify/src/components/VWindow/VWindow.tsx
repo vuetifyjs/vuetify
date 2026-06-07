@@ -15,7 +15,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
@@ -67,6 +67,7 @@ export const makeVWindowProps = propsFactory({
     validator: (v: any) => typeof v === 'boolean' || v === 'hover',
   },
   verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+  wheel: Boolean,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -205,6 +206,39 @@ export const VWindow = genericComponent<new <T>(
       canMoveForward.value && group.next()
     }
 
+    let wheelTimeout = -1
+    let wheelStopTimeout = -1
+
+    function onWheel (e: WheelEvent) {
+      if (!props.wheel) return
+
+      const delta = props.direction === 'vertical'
+        ? e.deltaY
+        : Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+
+      if (!delta) return
+
+      const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
+
+      if (canMove) {
+        e.preventDefault()
+      }
+
+      window.clearTimeout(wheelStopTimeout)
+      wheelStopTimeout = window.setTimeout(() => {
+        wheelTimeout = -1
+      }, 400)
+
+      if (wheelTimeout >= 0 || !canMove) return
+
+      wheelTimeout = wheelStopTimeout
+      delta > 0 ? next() : prev()
+    }
+
+    onScopeDispose(() => {
+      if (IN_BROWSER) window.clearTimeout(wheelStopTimeout)
+    })
+
     const arrows = computed(() => {
       const arrows = []
 
@@ -311,6 +345,7 @@ export const VWindow = genericComponent<new <T>(
           },
         ]}
         v-touch={ touchOptions.value }
+        onWheel={ onWheel }
       >
         <div
           class="v-window__container"

@@ -47,6 +47,7 @@ export const makeVCarouselProps = propsFactory({
     continuous: true,
     mandatory: 'force' as const,
     showArrows: true,
+    wheel: true,
   }),
 }, 'VCarousel')
 
