@@ -271,6 +271,62 @@ describe('VWindow', () => {
     await expect.poll(() => document.querySelector('.v-window-x-transition-enter-active')).toBeTruthy()
   })
 
+  it('should support opt-in mouse wheel navigation', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value={ 1 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const windowEl = screen.getByCSS('.v-window')
+
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
+    )).toBe(false)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(2)
+  })
+
+  it('should not navigate with mouse wheel by default', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value }>
+        <VWindowItem value={ 1 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const windowEl = screen.getByCSS('.v-window')
+
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
+    )).toBe(true)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(1)
+  })
+
   describe('keyboard controls', () => {
     it('should support horizontal keyboard navigation', async () => {
       const model = ref(1)
