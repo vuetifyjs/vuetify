@@ -1,5 +1,6 @@
 // Components
 import { VSelect } from '../VSelect'
+import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { VTextField } from '@/components/VTextField'
@@ -1050,6 +1051,25 @@ describe('VSelect', () => {
     // Repaired: focus returns into the menu content and the menu stays open.
     expect(menu.value).toBe(true)
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  it('should close its menu when clicking another field inside a dialog', async () => {
+    const dialog = ref(true)
+    render(() => (
+      <VDialog v-model={ dialog.value }>
+        <div>
+          <VTextField data-testid="other-field" label="Other" />
+          <VSelect items={ items } label="Age" />
+        </div>
+      </VDialog>
+    ))
+
+    const select = screen.getByCSS('.v-select')
+    await userEvent.click(select)
+    await expect.poll(() => select).toHaveClass('v-select--active-menu')
+
+    await userEvent.click(screen.getByTestId('other-field'))
+    await expect.poll(() => select).not.toHaveClass('v-select--active-menu')
   })
 
   showcase({ stories })

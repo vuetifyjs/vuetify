@@ -32,7 +32,7 @@ runs:
         repository: ${{ inputs.checkout-repo }}
         ref: ${{ inputs.checkout-ref }}
         fetch-depth: 0
-    - uses: vuetifyjs/setup-action@master
+    - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
     - run: >-
         node -e "
           const json = require('./lerna.json');

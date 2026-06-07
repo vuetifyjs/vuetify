@@ -403,8 +403,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     closeConditional,
                     include: () => [
                       activatorEl.value,
-                      // Submenu/cascade clicks count as "inside" so they don't suppress focus-return.
-                      ...Array.from(document.querySelectorAll('.v-overlay__content')) as HTMLElement[],
+                      // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
+                      ...Array.from(document.querySelectorAll('.v-overlay__content'))
+                        .filter(ownsFocus) as HTMLElement[],
                     ],
                   }}
                   class={[
