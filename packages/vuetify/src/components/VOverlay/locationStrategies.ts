@@ -134,9 +134,15 @@ function staticLocationStrategy (data: LocationStrategyData, props: StrategyProp
 
   const target = ref<[x: number, y: number]>()
   const connectedStyles = ref<Record<string, string>>({})
+
+  // reactive equivalent of `{ ...props, origin: 'auto' }`
+  const connectedProps = new Proxy(props, {
+    get: (target, key) => key === 'origin' ? 'auto' : Reflect.get(target, key),
+  })
+
   const connected = connectedLocationStrategy(
     { ...data, target },
-    { ...props, origin: 'auto' },
+    connectedProps,
     connectedStyles
   )
 

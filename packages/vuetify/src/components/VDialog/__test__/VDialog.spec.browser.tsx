@@ -31,6 +31,21 @@ describe('VDialog', () => {
     await expect.poll(() => screen.queryByTestId('content')).toBeNull()
   })
 
+  it('should react to max-width changes', async () => {
+    const model = ref(true)
+    const maxWidth = ref(300)
+    render(() => (
+      <VDialog v-model={ model.value } maxWidth={ maxWidth.value }>
+        <div data-testid="content">Content</div>
+      </VDialog>
+    ))
+
+    await expect.element(screen.getByCSS('.v-overlay__content')).toHaveStyle({ maxWidth: '300px' })
+
+    maxWidth.value = 500
+    await expect.element(screen.getByCSS('.v-overlay__content')).toHaveStyle({ maxWidth: '500px' })
+  })
+
   it('should emit afterLeave', async () => {
     const model = ref(true)
     const onAfterLeave = vi.fn()
