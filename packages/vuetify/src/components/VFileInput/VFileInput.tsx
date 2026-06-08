@@ -170,14 +170,21 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const charsKeepOneSide = Math.floor((Number(props.truncateLength) - 1) / 2)
       return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
+    function hasDraggedFiles (e: DragEvent) {
+      const types = [...e.dataTransfer?.types ?? []]
+      return types.includes('Files') || hasFilesOrFolders(e)
+    }
     function onDragover (e: DragEvent) {
-      if (props.disabled || props.readonly) return
+      if (props.disabled || props.readonly || !hasDraggedFiles(e)) return
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = true
     }
     function onDragleave (e: DragEvent) {
       e.preventDefault()
+      isDragging.value = false
+    }
+    function onDragend () {
       isDragging.value = false
     }
     async function onDrop (e: DragEvent) {
@@ -301,6 +308,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 focused={ isFocused.value }
                 details={ hasDetails.value }
                 error={ isValid.value === false }
+                onDragend={ onDragend }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
               >

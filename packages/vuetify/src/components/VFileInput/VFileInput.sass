@@ -36,5 +36,18 @@
       width: 100%
       z-index: 0
 
-    &--dragging input[type="file"]
-      z-index: 1
+    &--dragging
+      .v-field__overlay
+        background-color: rgb(var(--v-theme-primary))
+        opacity: .08
+
+      .v-field__outline
+        --v-field-border-opacity: 1
+
+        color: rgb(var(--v-theme-primary))
+
+      .v-field--variant-outlined .v-field__outline
+        --v-field-border-width: 2px
+
+      input[type="file"]
+        z-index: 1
