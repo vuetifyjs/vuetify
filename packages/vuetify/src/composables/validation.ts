@@ -2,8 +2,8 @@
 import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRules } from '@/composables/rules'
 import { useToggleScope } from '@/composables/toggleScope'
-import { useRules } from '@/labs/rules'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
@@ -11,7 +11,7 @@ import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray }
 
 // Types
 import type { PropType } from 'vue'
-import type { ValidationAlias } from '@/labs/rules'
+import type { ValidationAlias } from '@/composables/rules'
 import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
