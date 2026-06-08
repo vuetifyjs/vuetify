@@ -74,8 +74,7 @@ The following are the already released **minor** and **major** version updates. 
   - VDataTable - programatic control over groups state with `v-model:opened`
   - VSparkline - hover interactivity, markers and tooltips
   - VOtpInputs - grouping fields into segments, a11y and emojis
-  - Introduced [validation rules](/features/rules/) to the main framework from Labs
-  - Introduced 5 new components to the main framework from Labs:
+  - Introduced 7 new components to the main framework from Labs:
     - [v-icon-btn](/components/icon-buttons/)
     - [v-stepper-vertical](/components/vertical-steppers/)
     - [v-pull-to-refresh](/components/pull-to-refresh/)
