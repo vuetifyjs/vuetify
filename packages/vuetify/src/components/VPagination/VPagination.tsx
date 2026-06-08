@@ -193,6 +193,9 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
+      // Always show all pages when length < 3 — no truncation needed
+      if (length.value < 3) return createRange(length.value, start.value)
+
       if (totalVisible.value <= 0) return []
       else if (totalVisible.value === 1) return [page.value]
 
