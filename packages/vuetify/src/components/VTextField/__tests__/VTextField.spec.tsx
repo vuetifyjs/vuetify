@@ -3,6 +3,7 @@ import { VTextField } from '../VTextField'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
+import { ref } from 'vue'
 
 describe('VTextField', () => {
   const vuetify = createVuetify()
@@ -216,6 +217,102 @@ describe('VTextField', () => {
       expect(details.exists()).toBe(true)
       expect(details.attributes('id')).toBe('input-6-messages')
       expect(details.text()).toContain('Custom details')
+    })
+  })
+
+  describe('placeholder slot', () => {
+    it('should render placeholder slot when input is empty', () => {
+      const wrapper = mountFunction(
+        <VTextField v-slots={{
+          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+        }} />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(true)
+      expect(placeholder.text()).toBe('Custom Placeholder')
+    })
+
+    it('should not render placeholder slot when input has value', () => {
+      const wrapper = mountFunction(
+        <VTextField modelValue="hello" v-slots={{
+          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+        }} />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(false)
+    })
+
+    it('should not set native placeholder when slot is provided', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          placeholder="Native placeholder"
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('placeholder')).toBeUndefined()
+    })
+
+    it('should fallback to placeholder prop when no slot is provided', () => {
+      const wrapper = mountFunction(
+        <VTextField placeholder="Native placeholder" />
+      )
+
+      const input = wrapper.find('input')
+      expect(input.attributes('placeholder')).toBe('Native placeholder')
+    })
+
+    it('should pass placeholder prop in slot scope', () => {
+      let slotPlaceholder: string | undefined
+      mountFunction(
+        <VTextField
+          placeholder="test-placeholder"
+          v-slots={{
+            placeholder: (slotProps: any) => {
+              slotPlaceholder = slotProps.placeholder
+              return <div>Placeholder</div>
+            },
+          }}
+        />
+      )
+
+      expect(slotPlaceholder).toBe('test-placeholder')
+    })
+
+    it('should render placeholder slot when dirty but not focused', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          modelValue="hello"
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(false)
+    })
+
+    it('should show placeholder when persistentPlaceholder is true and focused', async () => {
+      const wrapper = mountFunction(
+        <VTextField
+          persistentPlaceholder
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const input = wrapper.find('input')
+      await input.trigger('focus')
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(true)
     })
   })
 })

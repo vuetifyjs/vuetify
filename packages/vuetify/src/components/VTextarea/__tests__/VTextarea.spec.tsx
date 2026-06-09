@@ -3,6 +3,7 @@ import { VTextarea } from '../VTextarea'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
+import { ref } from 'vue'
 
 describe('VTextarea', () => {
   const vuetify = createVuetify()
@@ -94,5 +95,101 @@ describe('VTextarea', () => {
     expect(onClickPrepend).toHaveBeenCalledTimes(1)
     expect(onClickPrependInner).toHaveBeenCalledTimes(1)
     expect(onClickAppendInner).toHaveBeenCalledTimes(1)
+  })
+
+  describe('placeholder slot', () => {
+    it('should render placeholder slot when input is empty', () => {
+      const wrapper = mountFunction(
+        <VTextarea v-slots={{
+          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+        }} />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(true)
+      expect(placeholder.text()).toBe('Custom Placeholder')
+    })
+
+    it('should not render placeholder slot when input has value', () => {
+      const wrapper = mountFunction(
+        <VTextarea modelValue="hello" v-slots={{
+          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+        }} />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(false)
+    })
+
+    it('should not set native placeholder when slot is provided', () => {
+      const wrapper = mountFunction(
+        <VTextarea
+          placeholder="Native placeholder"
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const textarea = wrapper.find('textarea')
+      expect(textarea.attributes('placeholder')).toBeUndefined()
+    })
+
+    it('should fallback to placeholder prop when no slot is provided', () => {
+      const wrapper = mountFunction(
+        <VTextarea placeholder="Native placeholder" />
+      )
+
+      const textarea = wrapper.find('textarea')
+      expect(textarea.attributes('placeholder')).toBe('Native placeholder')
+    })
+
+    it('should pass placeholder prop in slot scope', () => {
+      let slotPlaceholder: string | undefined
+      mountFunction(
+        <VTextarea
+          placeholder="test-placeholder"
+          v-slots={{
+            placeholder: (slotProps: any) => {
+              slotPlaceholder = slotProps.placeholder
+              return <div>Placeholder</div>
+            },
+          }}
+        />
+      )
+
+      expect(slotPlaceholder).toBe('test-placeholder')
+    })
+
+    it('should not render placeholder slot when dirty', () => {
+      const wrapper = mountFunction(
+        <VTextarea
+          modelValue="hello"
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(false)
+    })
+
+    it('should show placeholder when persistentPlaceholder is true and focused', async () => {
+      const wrapper = mountFunction(
+        <VTextarea
+          persistentPlaceholder
+          v-slots={{
+            placeholder: () => <div>Custom Placeholder</div>,
+          }}
+        />
+      )
+
+      const textarea = wrapper.find('textarea')
+      await textarea.trigger('focus')
+
+      const placeholder = wrapper.find('.v-field__placeholder')
+      expect(placeholder.exists()).toBe(true)
+    })
   })
 })
