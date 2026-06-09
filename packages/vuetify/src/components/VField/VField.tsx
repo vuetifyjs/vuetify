@@ -81,6 +81,8 @@ export const makeVFieldProps = propsFactory({
   flat: Boolean,
   iconColor: [Boolean, String],
   label: String,
+  persistentPlaceholder: Boolean,
+  placeholder: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
   reverse: Boolean,
@@ -106,6 +108,7 @@ export type VFieldSlots = {
   'prepend-inner': DefaultInputSlot
   'append-inner': DefaultInputSlot
   label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
+  placeholder: DefaultInputSlot & { placeholder: string | undefined }
   loader: LoaderSlotProps
   default: VFieldSlot
 }
@@ -146,6 +149,7 @@ export const VField = genericComponent<new <T>(
     const isActive = toRef(() => props.dirty || props.active)
     const hasLabel = toRef(() => !!(props.label || slots.label))
     const hasFloatingLabel = toRef(() => !props.singleLine && hasLabel.value)
+    const hasPlaceholder = toRef(() => !!slots.placeholder)
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
@@ -342,6 +346,22 @@ export const VField = genericComponent<new <T>(
               >
                 { label() }
               </VFieldLabel>
+            )}
+
+            { hasPlaceholder.value && (props.persistentPlaceholder || !isActive.value) && (
+              <div
+                key="placeholder"
+                class={[
+                  'v-field__placeholder',
+                  textColorClasses.value,
+                ]}
+                style={ textColorStyles.value }
+              >
+                { slots.placeholder!({
+                  ...slotProps.value,
+                  placeholder: props.placeholder,
+                }) }
+              </div>
             )}
 
             { slots.default?.({
