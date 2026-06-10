@@ -17,7 +17,7 @@ This page documents the June 2026 security incident affecting Vuetify's Discord 
 <PageFeatures />
 
 ::: info
-**TLDR:** On 2026-06-03, a Vuetify maintainer's personal machine was compromised by a commodity infostealer after a social-engineering lure. The attacker used credentials harvested from the browser to take over the Vuetify Discord support account, added 2FA to lock the owner out, and sent an extortion demand, which was refused. No Vuetify package, source, release, CI pipeline, or user data was affected. Discord recovery is ongoing; the current verified community link is in [Where to find us now](#where-to-find-us-now).
+**TLDR:** On 2026-06-03, a Vuetify maintainer's personal machine was compromised by a commodity infostealer after a social-engineering lure. The attacker used credentials harvested from the browser to take over the Vuetify Discord support account, added 2FA to lock the owner out, and sent an extortion demand, which was refused. No Vuetify package, source, release, CI pipeline, or user data was affected. The Discord account was recovered on 2026-06-10, but the original community server was deleted and cannot be restored; the community now lives on a replacement server — see [Where to find us now](#where-to-find-us-now).
 :::
 
 ## Summary { #summary }
@@ -37,7 +37,7 @@ The compromise was limited to one personal machine and the accounts reachable fr
 | **CI/CD & infrastructure** | **Not affected.** |
 | **User data & databases** | **Not affected.** |
 | **Google Workspace** | **Not breached.** The `vuetifyjs.com` account was auto-suspended by Google as a precaution; the password was reset and control retained. |
-| **Discord support account** | **Compromised.** The attacker added 2FA after taking it over; it is currently unrecoverable through self-service. |
+| **Discord support account** | **Recovered (2026-06-10).** The attacker added 2FA after taking it over; the account was later recovered, but the original community server was deleted and cannot be restored, per Discord support. |
 | **Browser-stored secrets** | **Exposed.** Saved credentials, cookies, and autofill on the affected machine are treated as compromised and have been rotated or removed pending an internal audit. |
 | **Developer tokens & keys** | **Treated as exposed.** Tokens on the host, including those with npm/GitHub access, have been rotated or removed and their sessions revoked, pending an internal audit. No evidence any were used against project infrastructure. |
 
@@ -59,28 +59,29 @@ All times are UTC on 2026-06-03 unless noted. Approximate times are marked with 
 | `18:10` | OAuth revoked | Third-party OAuth grants were revoked and active sessions cut. |
 | `18:25` | Payment demanded | The attacker demanded payment under threat to leak and sell the data; no payment was made. |
 | `2026-06-04` | Discord recovery blocked | Self-service recovery failed because of the attacker-added 2FA; a recovery case was opened with Discord. |
-| `ongoing` | Discord recovery pending | Recovery and takedown requests to Discord remain unanswered; the attacker still controls the account and server. An interim community channel is live (see below). |
+| `2026-06-05` | Replacement server opened | A new Vuetify Discord server was opened as the verified home for the community. |
+| `2026-06-10` | Account recovered; server lost | The support account was recovered. Discord support confirmed the original server was deleted and cannot be restored. |
 
 ## Root cause { #root-cause }
 
 The maintainer was led to a throwaway website and ran an unsigned installer that was malware. Because credentials were stored in the browser, a single execution exposed the full set at once.
 
-## What is still open: Discord recovery { #discord-recovery }
+## Discord outcome { #discord-recovery }
 
-The Vuetify Discord support account is not yet recovered. The attacker added 2FA, and because the account itself is required to begin Discord's self-service recovery, that path is blocked. Requests submitted through Discord's support channels have so far gone unanswered.
+The Vuetify Discord support account has been recovered. The original community server, however, was deleted, and Discord support has confirmed there is no ability to restore it — the loss of the server, its channels, and its message history is permanent.
 
-As of 2026-06-05, more than 48 hours after the takeover, the attacker still has complete control of the Vuetify Discord server and is actively messaging people from the hijacked support account. Requests asking Discord to suspend or shut down the account or the server have not received a response.
+A replacement server was opened while recovery was pending and is now the official home of the Vuetify community on Discord. The verified invite is in [Where to find us now](#where-to-find-us-now).
 
 The exfiltration channel and the attacker's delivery infrastructure have been reported to the relevant platforms.
 
 ## Where to find us now { #where-to-find-us-now }
 
 ::: warning
-Until the official server is restored or replaced, the only verified home for the Vuetify community on Discord is:
+The original server is permanently gone. The only verified home for the Vuetify community on Discord is:
 
 **[vtfy.link/discord-fallback](https://vtfy.link/discord-fallback)**
 
-If the old server, or any direct message, claims to be us and asks for money, credentials, or 2FA codes, it is not us.
+If any other server, or any direct message, claims to be us and asks for money, credentials, or 2FA codes, it is not us.
 :::
 
 Changes to the official channels will be posted here and on [vuetifyjs.com](https://vuetifyjs.com), the [GitHub organization](https://github.com/vuetifyjs), and [@vuetifyjs on X](https://x.com/vuetifyjs).
@@ -112,3 +113,4 @@ Dated entries are added here rather than editing the report above.
 | Date | Update |
 | - | - |
 | 2026-06-05 | Initial publication. |
+| 2026-06-10 | The Discord support account has been recovered. Discord support confirmed the original server was deleted and cannot be restored; the replacement server is now the permanent home of the community. |
