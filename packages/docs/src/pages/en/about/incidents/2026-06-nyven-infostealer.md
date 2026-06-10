@@ -1,7 +1,7 @@
 ---
 meta:
-  nav: Infostealer & Discord takeover (June 2026)
-  title: 'Incident report: infostealer compromise and Discord account takeover (June 2026)'
+  nav: Discord takeover (June 2026)
+  title: 'Incident report: Compromise and Discord account takeover (June 2026)'
   description: Report on the June 2026 security incident in which a maintainer's personal machine was compromised by an infostealer and the Vuetify Discord support account was taken over. No Vuetify packages, source, releases, or user data were affected.
   keywords: vuetify security incident, infostealer, discord account takeover, extortion, incident report, nyven
 related:
@@ -10,7 +10,7 @@ related:
   - /introduction/long-term-support/
 ---
 
-# Incident report: infostealer compromise and Discord account takeover
+# Incident report June 2026
 
 This page documents the June 2026 security incident affecting Vuetify's Discord support account.
 
