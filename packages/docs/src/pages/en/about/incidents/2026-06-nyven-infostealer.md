@@ -1,8 +1,8 @@
 ---
 meta:
   nav: Discord takeover (June 2026)
-  title: 'Incident report: Compromise and Discord account takeover (June 2026)'
-  description: Report on the June 2026 security incident in which a maintainer's personal machine was compromised by an infostealer and the Vuetify Discord support account was taken over. No Vuetify packages, source, releases, or user data were affected.
+  title: 'Incident report: Discord takeover (June 2026)'
+  description: An infostealer on a maintainer's machine led to the takeover of the Vuetify Discord account. No Vuetify packages, releases, or user data were affected.
   keywords: vuetify security incident, infostealer, discord account takeover, extortion, incident report, nyven
 related:
   - /about/security-disclosure/
@@ -77,9 +77,7 @@ The exfiltration channel and the attacker's delivery infrastructure have been re
 ## Where to find us now { #where-to-find-us-now }
 
 ::: warning
-The original server is permanently gone. The only verified home for the Vuetify community on Discord is:
-
-**[vtfy.link/discord-fallback](https://vtfy.link/discord-fallback)**
+The original server is permanently gone. We have started rebuilding and you can request an invite by going to [https://community.vuetifyjs.com](https://community.vuetifyjs.com).
 
 If any other server, or any direct message, claims to be us and asks for money, credentials, or 2FA codes, it is not us.
 :::
@@ -113,4 +111,4 @@ Dated entries are added here rather than editing the report above.
 | Date | Update |
 | - | - |
 | 2026-06-05 | Initial publication. |
-| 2026-06-10 | The Discord support account has been recovered. Discord support confirmed the original server was deleted and cannot be restored; the replacement server is now the permanent home of the community. |
+| 2026-06-10 | The Discord support account has been recovered. Discord support confirmed the original server was deleted and cannot be restored; the replacement server is now active at [https://community.vuetifyjs.com](https://community.vuetifyjs.com). |
