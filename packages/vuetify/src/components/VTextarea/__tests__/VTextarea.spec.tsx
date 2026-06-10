@@ -3,7 +3,6 @@ import { VTextarea } from '../VTextarea'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
-import { ref } from 'vue'
 
 describe('VTextarea', () => {
   const vuetify = createVuetify()

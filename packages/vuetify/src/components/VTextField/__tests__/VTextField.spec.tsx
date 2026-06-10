@@ -3,7 +3,6 @@ import { VTextField } from '../VTextField'
 // Utilities
 import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
-import { ref } from 'vue'
 
 describe('VTextField', () => {
   const vuetify = createVuetify()
@@ -284,7 +283,7 @@ describe('VTextField', () => {
       expect(slotPlaceholder).toBe('test-placeholder')
     })
 
-    it('should render placeholder slot when dirty but not focused', () => {
+    it('should not render placeholder slot when dirty but not focused', () => {
       const wrapper = mountFunction(
         <VTextField
           modelValue="hello"
