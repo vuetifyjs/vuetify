@@ -81,6 +81,47 @@ describe('toHighlight', () => {
     })
   })
 
+  describe('with ignoreAccents', () => {
+    it('does not fold accents by default', () => {
+      expect(toHighlight('café', 'cafe')).toStrictEqual([
+        { text: 'café', match: false },
+      ])
+    })
+
+    it("folds both sides when ignoreAccents is true ('cafe' finds 'café')", () => {
+      expect(toHighlight('a café here', 'cafe', { ignoreAccents: true }).filter(c => c.match).map(c => c.text))
+        .toStrictEqual(['café'])
+    })
+
+    it('maps ranges back to the original text when the source is decomposed', () => {
+      // "café" written as e + combining acute (5 code units)
+      const decomposed = 'cafe\u0301' // e + combining acute => 5 code units
+      const chunks = toHighlight(`a ${decomposed} here`, 'cafe', { ignoreAccents: true })
+      expect(chunks.filter(c => c.match).map(c => c.text)).toStrictEqual([decomposed])
+    })
+
+    it("'target' folds only the text ('cafe' finds 'café')", () => {
+      expect(toHighlight('café', 'cafe', { ignoreAccents: 'target' }).filter(c => c.match).map(c => c.text))
+        .toStrictEqual(['café'])
+    })
+
+    it("'target' leaves the query accented ('café' does not match plain 'cafe')", () => {
+      expect(toHighlight('cafe', 'café', { ignoreAccents: 'target' })).toStrictEqual([
+        { text: 'cafe', match: false },
+      ])
+    })
+
+    it("'query' folds only the query ('café' finds plain 'cafe')", () => {
+      expect(toHighlight('cafe', 'café', { ignoreAccents: 'query' }).filter(c => c.match).map(c => c.text))
+        .toStrictEqual(['cafe'])
+    })
+
+    it('combines with ignoreCase', () => {
+      expect(toHighlight('RÉSUMÉ', 'resume', { ignoreAccents: true, ignoreCase: true, matchAll: true })
+        .filter(c => c.match).map(c => c.text)).toStrictEqual(['RÉSUMÉ'])
+    })
+  })
+
   describe('matchAll is ignored when matches are pre-computed', () => {
     it('renders all provided spans regardless of matchAll: false', () => {
       expect(toHighlight('aa bb aa', undefined, { matches: [[0, 2], [6, 8]], matchAll: false })).toStrictEqual([
