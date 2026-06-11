@@ -270,10 +270,21 @@ describe('VWindow', () => {
     const windowEl = screen.getByCSS('.v-window')
 
     expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
+      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
     )).toBe(false)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(2)
+
+    windowEl.dispatchEvent(new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true }))
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(2)
+
+    await new Promise(resolve => setTimeout(resolve, 160))
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true })
+    )).toBe(false)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(1)
   })
 
   it('should not navigate with mouse wheel by default', async () => {
@@ -299,6 +310,90 @@ describe('VWindow', () => {
 
     expect(windowEl.dispatchEvent(
       new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
+    )).toBe(true)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(1)
+  })
+
+  it('should ignore vertical wheel input on horizontal windows', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value={ 1 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const windowEl = screen.getByCSS('.v-window')
+
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
+    )).toBe(true)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(1)
+  })
+
+  it('should support shift wheel input on horizontal windows', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value={ 1 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const windowEl = screen.getByCSS('.v-window')
+
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: 100, shiftKey: true, bubbles: true, cancelable: true })
+    )).toBe(false)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(2)
+  })
+
+  it('should ignore horizontal wheel input on vertical windows', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel direction="vertical">
+        <VWindowItem value={ 1 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const windowEl = screen.getByCSS('.v-window')
+
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
     )).toBe(true)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(1)

@@ -207,36 +207,32 @@ export const VWindow = genericComponent<new <T>(
     }
 
     let wheelTimeout = -1
-    let wheelStopTimeout = -1
 
     function onWheel (e: WheelEvent) {
       if (!props.wheel) return
 
       const delta = props.direction === 'vertical'
         ? e.deltaY
-        : Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-
+        : e.deltaX || (e.shiftKey ? e.deltaY : 0)
       if (!delta) return
 
       const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
+      if (canMove) e.preventDefault()
 
-      if (canMove) {
-        e.preventDefault()
-      }
+      const isWheelActive = wheelTimeout >= 0
 
-      window.clearTimeout(wheelStopTimeout)
-      wheelStopTimeout = window.setTimeout(() => {
+      window.clearTimeout(wheelTimeout)
+      wheelTimeout = window.setTimeout(() => {
         wheelTimeout = -1
-      }, 400)
+      }, 150)
 
-      if (wheelTimeout >= 0 || !canMove) return
-
-      wheelTimeout = wheelStopTimeout
-      delta > 0 ? next() : prev()
+      if (!isWheelActive && canMove) {
+        delta > 0 ? next() : prev()
+      }
     }
 
     onScopeDispose(() => {
-      if (IN_BROWSER) window.clearTimeout(wheelStopTimeout)
+      if (IN_BROWSER) window.clearTimeout(wheelTimeout)
     })
 
     const arrows = computed(() => {
