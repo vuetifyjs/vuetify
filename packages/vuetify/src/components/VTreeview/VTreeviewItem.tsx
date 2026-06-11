@@ -134,6 +134,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               loading={ props.loading }
                               tabindex={ -1 }
                               variant="text"
+                              aria-hidden="true"
                               onClick={ onClickAction }
                             >
                               {{
