@@ -394,7 +394,7 @@ describe('VWindow', () => {
     expect(model.value).toBe(2)
   })
 
-  it('should ignore horizontal wheel input on vertical windows', async () => {
+  it('should ignore horizontal and shift wheel input on vertical windows', async () => {
     const model = ref(1)
 
     render(() => (
@@ -417,6 +417,9 @@ describe('VWindow', () => {
 
     expect(windowEl.dispatchEvent(
       new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
+    )).toBe(true)
+    expect(windowEl.dispatchEvent(
+      new WheelEvent('wheel', { deltaY: 100, shiftKey: true, bubbles: true, cancelable: true })
     )).toBe(true)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(1)
