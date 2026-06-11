@@ -3,11 +3,11 @@
 
 // Utilities
 import { computed, shallowRef, unref, watchEffect } from 'vue'
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { findMatchRanges, getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { IgnoreAccents, MaybeRef } from '@/util'
 
 /**
  * - boolean: match without highlight
@@ -29,6 +29,7 @@ export interface FilterProps {
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  ignoreAccents?: IgnoreAccents
   noFilter?: boolean
 }
 
@@ -45,23 +46,22 @@ type FilterResult = {
 }
 
 // Composables
-export const defaultFilter: FilterFunction = (value, query, item) => {
-  if (value == null || query == null) return -1
-  if (!query.length) return 0
+export function createDefaultFilter (ignoreAccents?: IgnoreAccents): FilterFunction {
+  return (value, query) => {
+    if (value == null || query == null) return -1
+    if (!query.length) return 0
 
-  value = value.toString().toLocaleLowerCase()
-  query = query.toString().toLocaleLowerCase()
+    const ranges = findMatchRanges(value.toString(), query.toString(), {
+      ignoreCase: true,
+      ignoreAccents,
+      all: true,
+    })
 
-  const result = []
-  let idx = value.indexOf(query)
-  while (~idx) {
-    result.push([idx, idx + query.length] as const)
-
-    idx = value.indexOf(query, idx + query.length)
+    return ranges.length ? ranges : -1
   }
-
-  return result.length ? result : -1
 }
+
+export const defaultFilter: FilterFunction = createDefaultFilter()
 
 function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMultiple | undefined {
   if (match == null || typeof match === 'boolean' || match === -1) return
@@ -78,6 +78,7 @@ export const makeFilterProps = propsFactory({
     type: String as PropType<FilterMode>,
     default: 'intersection',
   },
+  ignoreAccents: [Boolean, String] as PropType<IgnoreAccents>,
   noFilter: Boolean,
 }, 'filter')
 
@@ -90,12 +91,13 @@ export function filterItems (
     default?: FilterFunction
     filterKeys?: FilterKeys
     filterMode?: FilterMode
+    ignoreAccents?: IgnoreAccents
     noFilter?: boolean
   },
 ) {
   const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
-  const filter = options?.default ?? defaultFilter
+  const filter = options?.default ?? createDefaultFilter(options?.ignoreAccents)
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
@@ -215,6 +217,7 @@ export function useFilter <T extends InternalItem> (
         default: props.customFilter,
         filterKeys: props.filterKeys,
         filterMode: props.filterMode,
+        ignoreAccents: props.ignoreAccents,
         noFilter: props.noFilter,
       },
     )
