@@ -212,7 +212,7 @@ export const VWindow = genericComponent<new <T>(
       if (!props.wheel) return
 
       const delta = props.direction === 'vertical'
-        ? e.deltaY
+        ? (e.shiftKey ? 0 : e.deltaY)
         : e.deltaX || (e.shiftKey ? e.deltaY : 0)
       if (!delta) return
 

@@ -286,7 +286,7 @@ describe('VWindow', () => {
     expect(model.value).toBe(1)
   })
 
-  it('should navigate vertical windows with vertical wheel input', async () => {
+  it('should navigate vertical windows only with vertical wheel input', async () => {
     const model = ref(1)
 
     render(() => (
@@ -302,6 +302,11 @@ describe('VWindow', () => {
 
     await commands.waitStable('.v-window')
     const windowEl = screen.getByCSS('.v-window')
+
+    // horizontal and shift+wheel (horizontal intent) are ignored on a vertical window
+    expect(wheel(windowEl, { deltaX: 100 })).toBe(true)
+    expect(wheel(windowEl, { deltaY: 100, shiftKey: true })).toBe(true)
+    expect(model.value).toBe(1)
 
     // vertical wheel navigates and prevents default
     expect(wheel(windowEl, { deltaY: 100 })).toBe(false)
