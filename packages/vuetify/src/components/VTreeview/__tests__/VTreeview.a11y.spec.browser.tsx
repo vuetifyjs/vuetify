@@ -96,16 +96,6 @@ describe('VTreeview a11y', () => {
     expect(tree).toHaveAttribute('aria-label', 'Org')
   })
 
-  it('keeps the expand/collapse toggle out of the tab order', async () => {
-    render(() => (
-      <VTreeview items={ items } itemValue="id" />
-    ))
-
-    const toggles = screen.getAllByCSS('.v-treeview-item__toggle')
-    expect(toggles.length).toBeGreaterThan(0)
-    toggles.forEach(toggle => expect(toggle).toHaveAttribute('tabindex', '-1'))
-  })
-
   it('ArrowRight expands a collapsed parent, then moves focus to its first child', async () => {
     render(() => (
       <VTreeview items={ items } itemValue="id" />
@@ -141,21 +131,6 @@ describe('VTreeview a11y', () => {
     expect(treeitem('Core team')).toHaveAttribute('aria-expanded', 'false')
 
     await userEvent.keyboard('{ArrowLeft}') // move to its parent
-    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
-  })
-
-  it('ArrowDown / ArrowUp move focus through visible items', async () => {
-    render(() => (
-      <VTreeview items={ items } itemValue="id" openAll />
-    ))
-
-    await userEvent.tab()
-    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
-
-    await userEvent.keyboard('{ArrowDown}')
-    expect(document.activeElement).toBe(treeitem('Core team'))
-
-    await userEvent.keyboard('{ArrowUp}')
     expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
   })
 

@@ -842,8 +842,6 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/3.node/)).toHaveLength(0)
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
-    // The toggle is no longer a tab stop; the row owns expand, so Tab focuses
-    // the first node and ArrowRight expands it (triggering loadChildren).
     await userEvent.tab()
     await userEvent.keyboard('{ArrowRight}')
     expect(loadSpy).toHaveBeenCalledTimes(1)

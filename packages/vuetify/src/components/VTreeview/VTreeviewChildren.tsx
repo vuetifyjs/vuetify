@@ -8,10 +8,11 @@ import { VListItemAction, VListSubheader } from '@/components/VList'
 // Composables
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
+import { VNestedSymbol } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, reactive, ref, toRaw } from 'vue'
+import { computed, inject, reactive, ref, toRaw } from 'vue'
 import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
@@ -47,6 +48,20 @@ export type VTreeviewChildrenSlots<T> = {
   }
   divider: { props: InternalListItem['props'] }
   subheader: { props: InternalListItem['props'] }
+}
+
+// Roving focus crosses VTreeviewChildren instances, so it has to walk the DOM.
+// The first child is the first treeitem inside this node's own group, and the
+// parent is the treeitem referenced by the enclosing group's aria-labelledby.
+function focusFirstChild (el: HTMLElement) {
+  el.closest('.v-list-group')
+    ?.querySelector<HTMLElement>(':scope > .v-list-group__items [role="treeitem"]')
+    ?.focus()
+}
+
+function focusParent (el: HTMLElement) {
+  const id = el.closest('.v-list-group__items')?.getAttribute('aria-labelledby')
+  if (id) document.getElementById(id)?.focus()
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -98,6 +113,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const { isRtl } = useRtl()
+    const nested = inject(VNestedSymbol, null)
     const isLoading = reactive(new Set<unknown>())
     const activatorItems = ref<VTreeviewItem[]>([])
 
@@ -124,6 +141,47 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
     function selectItem (select: (value: boolean) => void, isSelected: boolean) {
       if (props.selectable) {
         select(isSelected)
+      }
+    }
+
+    function idOf (item: InternalListItem) {
+      return props.returnObject ? toRaw(item.raw) : item.value
+    }
+
+    // VList owns ArrowUp/Down/Home/End and VListItem owns Enter/Space, so the tree
+    // only adds the keys they ignore: ArrowLeft/Right (RTL-aware) and `*`.
+    function onItemKeydown (e: KeyboardEvent, item: InternalListItem) {
+      const root = nested?.root
+      if (!root || e.target !== e.currentTarget) return
+
+      const el = e.currentTarget as HTMLElement
+      const expandKey = isRtl.value ? 'ArrowLeft' : 'ArrowRight'
+      const collapseKey = isRtl.value ? 'ArrowRight' : 'ArrowLeft'
+      const expandable = !!item.children
+      const isExpanded = root.opened.value.has(idOf(item))
+
+      if (e.key === expandKey) {
+        e.preventDefault()
+        if (expandable && !isExpanded) {
+          checkChildren(item)
+          root.open(idOf(item), true, e)
+        } else if (isExpanded) {
+          focusFirstChild(el)
+        }
+      } else if (e.key === collapseKey) {
+        e.preventDefault()
+        if (expandable && isExpanded) {
+          root.open(idOf(item), false, e)
+        } else {
+          focusParent(el)
+        }
+      } else if (e.key === '*') {
+        e.preventDefault()
+        for (const sibling of props.items ?? []) {
+          if (!sibling.children) continue
+          checkChildren(sibling)
+          root.open(idOf(sibling), true, e)
+        }
       }
     }
 
@@ -156,6 +214,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         ...itemProps as InternalListItem['props'] & { disabled?: boolean },
         hideActions: props.hideActions,
         indentLines: children ? indentLines.node : indentLines.leaf,
+        onKeydown: (e: KeyboardEvent) => onItemKeydown(e, item),
       }
 
       const slotsWithItem = {

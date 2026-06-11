@@ -4,7 +4,7 @@ import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 import { VListItem } from '@/components/VList/VListItem'
 
 // Composables
-import { useLocale, useRtl } from '@/composables'
+import { useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -27,42 +27,6 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
     if (item.children) flatten(item.children, flat)
   }
   return flat
-}
-
-function asTreeitem (target: EventTarget | null): HTMLElement | null {
-  return target instanceof HTMLElement && target.getAttribute('role') === 'treeitem'
-    ? target
-    : null
-}
-
-function isExpandable (el: HTMLElement) {
-  return el.hasAttribute('aria-expanded')
-}
-
-function isExpanded (el: HTMLElement) {
-  return el.getAttribute('aria-expanded') === 'true'
-}
-
-function toggleNode (el: HTMLElement) {
-  el.querySelector<HTMLElement>('.v-treeview-item__toggle')?.click()
-}
-
-function focusFirstChild (el: HTMLElement) {
-  const group = el.parentElement?.querySelector<HTMLElement>(':scope > .v-list-group__items')
-  group?.querySelector<HTMLElement>('[role="treeitem"]')?.focus()
-}
-
-function focusParent (el: HTMLElement) {
-  const group = el.closest('.v-list-group__items')
-  group?.parentElement?.querySelector<HTMLElement>(':scope > [role="treeitem"]')?.focus()
-}
-
-function siblingNodes (el: HTMLElement): HTMLElement[] {
-  const container = el.closest('.v-list-group__items') ?? el.closest('[role="tree"]')
-  if (!container) return []
-  return [...container.querySelectorAll<HTMLElement>(
-    ':scope > [role="treeitem"], :scope > .v-list-group > [role="treeitem"]'
-  )]
 }
 
 export const makeVTreeviewProps = propsFactory({
@@ -125,7 +89,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
   setup (props, { slots, emit }) {
     const { t } = useLocale()
-    const { isRtl } = useRtl()
     const { items } = useListItems(props)
     const activeColor = toRef(() => props.activeColor)
     const baseColor = toRef(() => props.baseColor)
@@ -188,39 +151,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
       return ids
     }
 
-    // VList owns ArrowUp/Down/Home/End and VListItem owns Enter/Space, so the tree
-    // only adds the keys they ignore: ArrowLeft/Right and `*`.
-    function onTreeKeydown (e: KeyboardEvent) {
-      const item = asTreeitem(e.target)
-      if (!item) return
-
-      const expandKey = isRtl.value ? 'ArrowLeft' : 'ArrowRight'
-      const collapseKey = isRtl.value ? 'ArrowRight' : 'ArrowLeft'
-
-      if (e.key === expandKey) {
-        e.preventDefault()
-        if (isExpandable(item) && !isExpanded(item)) {
-          toggleNode(item)
-        } else if (isExpanded(item)) {
-          focusFirstChild(item)
-        }
-      } else if (e.key === collapseKey) {
-        e.preventDefault()
-        if (isExpandable(item) && isExpanded(item)) {
-          toggleNode(item)
-        } else {
-          focusParent(item)
-        }
-      } else if (e.key === '*') {
-        e.preventDefault()
-        for (const sibling of siblingNodes(item)) {
-          if (isExpandable(sibling) && !isExpanded(sibling)) {
-            toggleNode(sibling)
-          }
-        }
-      }
-    }
-
     provide(VTreeviewSymbol, { visibleIds })
 
     provideDefaults({
@@ -261,7 +191,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
           ]}
           role="tree"
           openStrategy="multiple"
-          onKeydown={ onTreeKeydown }
           style={[
             {
               '--v-treeview-indent-line-color': props.indentLinesColor,

@@ -129,7 +129,6 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                           { !slots.toggle ? (
                             <VBtn
                               key="prepend-toggle"
-                              class="v-treeview-item__toggle"
                               density="compact"
                               icon={ props.toggleIcon }
                               loading={ props.loading }
@@ -170,7 +169,6 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                 ...slotProps,
                                 loading: props.loading,
                                 props: {
-                                  class: 'v-treeview-item__toggle',
                                   onClick: onClickAction,
                                 },
                               })}
