@@ -48,7 +48,7 @@ const locationStrategies = {
 
 export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
-  location: Anchor
+  location?: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
   stickToTarget?: boolean
@@ -65,10 +65,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'static',
     validator: (val: any) => typeof val === 'function' || val in locationStrategies,
   },
-  location: {
-    type: String as PropType<StrategyProps['location']>,
-    default: 'bottom',
-  },
+  location: String as PropType<StrategyProps['location']>,
   origin: {
     type: String as PropType<StrategyProps['origin']>,
     default: 'auto',
@@ -131,8 +128,9 @@ export function useLocationStrategies (
   }
 }
 
-export function getStaticLocationClasses (location: Anchor) {
-  // A bare side ("bottom") implies center on the other axis, matching `useLocation`.
+export function getStaticLocationClasses (location: Anchor | undefined) {
+  if (!location) return undefined
+
   const normalized = location.includes(' ') ? location : `${location} center`
 
   let justify = 'center'
@@ -227,7 +225,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   }
 
   const { preferredAnchor, preferredOrigin } = destructComputed(() => {
-    const parsedAnchor = parseAnchor(props.location, data.isRtl.value)
+    const parsedAnchor = parseAnchor(props.location ?? 'bottom', data.isRtl.value)
     const parsedOrigin =
       props.origin === 'overlap' ? parsedAnchor
       : props.origin === 'auto' ? flipSide(parsedAnchor)
