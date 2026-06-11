@@ -13,7 +13,7 @@ import { VNestedSymbol } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, inject, reactive, ref, toRaw } from 'vue'
-import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
+import { focusableChildren, genericComponent, getIndentLines, pick, propsFactory, renderSlot } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -62,6 +62,30 @@ function focusFirstChild (el: HTMLElement) {
 function focusParent (el: HTMLElement) {
   const id = el.closest('.v-list-group__items')?.getAttribute('aria-labelledby')
   if (id) document.getElementById(id)?.focus()
+}
+
+// Up/Down/Home/End move between treeitems only. focusableChildren already drops
+// nodes inside a collapsing (inert) subtree and hidden ones, so the visible
+// treeitems are exactly the rows a user can step through.
+function visibleTreeitems (el: HTMLElement) {
+  const tree = el.closest('.v-treeview')
+  return tree
+    ? focusableChildren(tree).filter(x => x.matches('[role="treeitem"]'))
+    : []
+}
+
+function siblingTreeitem (el: HTMLElement, offset: 1 | -1) {
+  const items = visibleTreeitems(el)
+  return items[items.indexOf(el) + offset] ?? null
+}
+
+function focusSibling (el: HTMLElement, offset: 1 | -1) {
+  siblingTreeitem(el, offset)?.focus()
+}
+
+function focusEdge (el: HTMLElement, edge: 'first' | 'last') {
+  const items = visibleTreeitems(el)
+  ;(edge === 'first' ? items[0] : items.at(-1))?.focus()
 }
 
 export const makeVTreeviewChildrenProps = propsFactory({
@@ -148,13 +172,45 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
       return props.returnObject ? toRaw(item.raw) : item.value
     }
 
-    // VList owns ArrowUp/Down/Home/End and VListItem owns Enter/Space, so the tree
-    // only adds the keys they ignore: ArrowLeft/Right (RTL-aware) and `*`.
+    const verticalKeys = ['ArrowUp', 'ArrowDown', 'Home', 'End']
+
     function onItemKeydown (e: KeyboardEvent, item: InternalListItem) {
       const root = nested?.root
-      if (!root || e.target !== e.currentTarget) return
+      if (!root) return
 
       const el = e.currentTarget as HTMLElement
+      const onItem = e.target === e.currentTarget
+
+      if (verticalKeys.includes(e.key)) {
+        e.stopPropagation()
+        if (!onItem) return
+        e.preventDefault()
+        if (e.key === 'ArrowDown') focusSibling(el, 1)
+        else if (e.key === 'ArrowUp') focusSibling(el, -1)
+        else if (e.key === 'Home') focusEdge(el, 'first')
+        else if (e.key === 'End') focusEdge(el, 'last')
+        return
+      }
+
+      if (e.key === 'Tab') {
+        const controls = focusableChildren(el)
+        if (controls.length) {
+          if (!e.shiftKey && e.target === controls.at(-1)) {
+            const next = siblingTreeitem(el, 1)
+            if (next) {
+              e.preventDefault()
+              next.focus()
+            }
+          } else if (e.shiftKey && e.target === controls[0]) {
+            e.preventDefault()
+            el.focus()
+          }
+        }
+        return
+      }
+
+      if (!onItem) return
+
       const expandKey = isRtl.value ? 'ArrowLeft' : 'ArrowRight'
       const collapseKey = isRtl.value ? 'ArrowRight' : 'ArrowLeft'
       const expandable = !!item.children

@@ -157,6 +157,78 @@ describe('VTreeview a11y', () => {
     expect(treeitem('Administrators')).toHaveAttribute('aria-expanded', 'true')
   })
 
+  it('moves between treeitems with Arrow/Home/End, skipping row controls', async () => {
+    render(() => (
+      <VTreeview openAll items={ items } itemValue="id" selectable selectStrategy="classic" />
+    ))
+
+    await userEvent.tab()
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+
+    // Down/Up step row-to-row, never into the selection checkboxes.
+    await userEvent.keyboard('{ArrowDown}')
+    expect(document.activeElement).toBe(treeitem('Core team'))
+    await userEvent.keyboard('{ArrowUp}')
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+
+    // Home/End jump to the first and last visible treeitem.
+    await userEvent.keyboard('{End}')
+    expect(document.activeElement).toBe(treeitem('Other contributors'))
+    await userEvent.keyboard('{Home}')
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+  })
+
+  it('threads a row\'s controls onto the treeitem chain with Tab, without looping', async () => {
+    render(() => (
+      <>
+        <VTreeview openAll items={ items } itemValue="id" selectable selectStrategy="classic" />
+        <button data-test="after">after</button>
+      </>
+    ))
+
+    await userEvent.tab()
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+
+    // Tab steps into the row's checkbox, then off the last control onto the next row.
+    await userEvent.tab()
+    expect(document.activeElement!.tagName).toBe('INPUT')
+    expect(document.activeElement!.closest('[role="treeitem"]')).toBe(treeitem('Vuetify Human Resources'))
+    await userEvent.tab()
+    expect(document.activeElement).toBe(treeitem('Core team'))
+
+    // Shift+Tab reverses: back into the previous row's control, then onto its treeitem.
+    await userEvent.tab({ shift: true })
+    expect(document.activeElement!.closest('[role="treeitem"]')).toBe(treeitem('Vuetify Human Resources'))
+    await userEvent.tab({ shift: true })
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+
+    // From the last row's last control, Tab exits the tree instead of looping back.
+    await userEvent.keyboard('{End}')
+    await userEvent.tab() // its checkbox
+    await userEvent.tab() // nothing left in the tree → exit
+    expect(document.activeElement).toBe(screen.getByCSS('[data-test="after"]'))
+  })
+
+  it('leaves vertical keys to an append-slot control once focus is inside it', async () => {
+    render(() => (
+      <VTreeview openAll items={ items } itemValue="id">
+        {{
+          append: ({ item }: any) => item.id === 4
+            ? <input data-test="appended" />
+            : undefined,
+        }}
+      </VTreeview>
+    ))
+
+    const input = screen.getByCSS('[data-test="appended"]') as HTMLInputElement
+    input.focus()
+    expect(document.activeElement).toBe(input)
+
+    // VList would otherwise hijack ArrowDown and move focus to the next row.
+    await userEvent.keyboard('{ArrowDown}')
+    expect(document.activeElement).toBe(input)
+  })
+
   it('marks a collapsing subtree inert so focus can not enter it', async () => {
     render(() => (
       <VTreeview items={ items } itemValue="id" openAll />
