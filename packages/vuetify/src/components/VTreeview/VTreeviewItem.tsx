@@ -102,6 +102,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
             props.class,
           ]}
           role="treeitem"
+          aria-busy={ props.loading || undefined }
           ripple={ false }
           onClick={ activateGroupActivator }
         >
