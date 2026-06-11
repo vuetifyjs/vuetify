@@ -256,6 +256,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
+      // Treeview items own their Enter/Space handling
+      if ((e.currentTarget as HTMLElement | null)?.getAttribute('role') === 'treeitem') return
+
       if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
         e.stopPropagation()

@@ -202,9 +202,4 @@ export default {
       changeFormat: 'שנה פורמט צבע',
     },
   },
-  treeview: {
-    ariaLabel: {
-      checkboxFallback: 'נבחר',
-    },
-  },
 }

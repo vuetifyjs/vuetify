@@ -202,9 +202,4 @@ export default {
       changeFormat: 'Muuda värvi formaati',
     },
   },
-  treeview: {
-    ariaLabel: {
-      checkboxFallback: 'Valitud',
-    },
-  },
 }

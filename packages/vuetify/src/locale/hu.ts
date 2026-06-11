@@ -202,9 +202,4 @@ export default {
       changeFormat: 'Színformátum módosítása',
     },
   },
-  treeview: {
-    ariaLabel: {
-      checkboxFallback: 'Kiválasztva',
-    },
-  },
 }

@@ -202,9 +202,4 @@ export default {
       changeFormat: 'เปลี่ยนรูปแบบสี',
     },
   },
-  treeview: {
-    ariaLabel: {
-      checkboxFallback: 'เลือกแล้ว',
-    },
-  },
 }

@@ -3,7 +3,7 @@ import { VTreeview } from '../VTreeview'
 
 // Utilities
 import { render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
-import { nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const items = [
   {
@@ -178,7 +178,50 @@ describe('VTreeview a11y', () => {
     expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
   })
 
-  it('threads a row\'s controls onto the treeitem chain with Tab, without looping', async () => {
+  it('Enter and Space expand a focused parent in the default mode, no row click needed', async () => {
+    render(() => (
+      <VTreeview items={ items } itemValue="id" />
+    ))
+
+    await userEvent.tab()
+    const root = treeitem('Vuetify Human Resources')
+    expect(document.activeElement).toBe(root)
+    expect(root).toHaveAttribute('aria-expanded', 'false')
+
+    await userEvent.keyboard('{Enter}')
+    expect(treeitem('Vuetify Human Resources')).toHaveAttribute('aria-expanded', 'true')
+
+    await userEvent.keyboard(' ')
+    expect(treeitem('Vuetify Human Resources')).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('Space toggles selection of the focused row without leaving it', async () => {
+    const selected = ref([])
+    render(() => (
+      <VTreeview
+        v-model:selected={ selected.value }
+        openAll
+        items={ items }
+        itemValue="id"
+        selectable
+        selectStrategy="classic"
+      />
+    ))
+
+    await userEvent.tab()
+    await userEvent.keyboard('{End}')
+    expect(document.activeElement).toBe(treeitem('Other contributors'))
+
+    await userEvent.keyboard(' ')
+    expect(selected.value).toStrictEqual([4])
+    // focus stays on the row rather than diving into a checkbox
+    expect(document.activeElement).toBe(treeitem('Other contributors'))
+
+    await userEvent.keyboard(' ')
+    expect(selected.value).toStrictEqual([])
+  })
+
+  it('keeps the selection checkbox decorative — aria-hidden, out of the Tab order', async () => {
     render(() => (
       <>
         <VTreeview openAll items={ items } itemValue="id" selectable selectStrategy="classic" />
@@ -186,26 +229,15 @@ describe('VTreeview a11y', () => {
       </>
     ))
 
+    const checkbox = treeitem('Vuetify Human Resources').querySelector('input[type="checkbox"]')!
+    expect(checkbox).toHaveAttribute('tabindex', '-1')
+    expect(checkbox).toHaveAttribute('aria-hidden', 'true')
+
+    // With no focusable controls in the row, Tab leaves the tree instead of
+    // forcing the user onto the checkbox to change selection.
     await userEvent.tab()
     expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
-
-    // Tab steps into the row's checkbox, then off the last control onto the next row.
     await userEvent.tab()
-    expect(document.activeElement!.tagName).toBe('INPUT')
-    expect(document.activeElement!.closest('[role="treeitem"]')).toBe(treeitem('Vuetify Human Resources'))
-    await userEvent.tab()
-    expect(document.activeElement).toBe(treeitem('Core team'))
-
-    // Shift+Tab reverses: back into the previous row's control, then onto its treeitem.
-    await userEvent.tab({ shift: true })
-    expect(document.activeElement!.closest('[role="treeitem"]')).toBe(treeitem('Vuetify Human Resources'))
-    await userEvent.tab({ shift: true })
-    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
-
-    // From the last row's last control, Tab exits the tree instead of looping back.
-    await userEvent.keyboard('{End}')
-    await userEvent.tab() // its checkbox
-    await userEvent.tab() // nothing left in the tree → exit
     expect(document.activeElement).toBe(screen.getByCSS('[data-test="after"]'))
   })
 

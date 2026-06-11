@@ -8,7 +8,7 @@ import { VListItemAction, VListSubheader } from '@/components/VList'
 // Composables
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
-import { useLocale, useRtl } from '@/composables/locale'
+import { useRtl } from '@/composables/locale'
 import { VNestedSymbol } from '@/composables/nested/nested'
 
 // Utilities
@@ -136,7 +136,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   props: makeVTreeviewChildrenProps(),
 
   setup (props, { slots }) {
-    const { t } = useLocale()
     const { isRtl } = useRtl()
     const nested = inject(VNestedSymbol, null)
     const isLoading = reactive(new Set<unknown>())
@@ -209,14 +208,33 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
         return
       }
 
-      if (!onItem) return
+      if (onItem) onItemActionKeydown(e, item, el, root)
+    }
 
+    function onItemActionKeydown (e: KeyboardEvent, item: InternalListItem, el: HTMLElement, root: NonNullable<typeof nested>['root']) {
       const expandKey = isRtl.value ? 'ArrowLeft' : 'ArrowRight'
       const collapseKey = isRtl.value ? 'ArrowRight' : 'ArrowLeft'
       const expandable = !!item.children
       const isExpanded = root.opened.value.has(idOf(item))
+      const selectableNode = props.selectable &&
+        (!item.children || !['leaf', 'single-leaf'].includes(props.selectStrategy as string))
 
-      if (e.key === expandKey) {
+      const toggleExpand = () => {
+        checkChildren(item)
+        root.open(idOf(item), !isExpanded, e)
+      }
+      const toggleSelect = () => root.select(idOf(item), root.selected.value.get(idOf(item)) !== 'on', e)
+
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        if (props.activatable) root.activate(idOf(item), !root.activated.value.has(idOf(item)), e)
+        if (expandable) toggleExpand()
+        else if (selectableNode) toggleSelect()
+      } else if (e.key === ' ') {
+        e.preventDefault()
+        if (selectableNode) toggleSelect()
+        else if (expandable) toggleExpand()
+      } else if (e.key === expandKey) {
         e.preventDefault()
         if (expandable && !isExpanded) {
           checkChildren(item)
@@ -283,7 +301,8 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
-                  aria-label={ item.title || t('$vuetify.treeview.ariaLabel.checkboxFallback') }
+                  aria-hidden="true"
+                  tabindex={ -1 }
                   modelValue={ slotProps.isSelected }
                   disabled={ props.disabled || itemProps.disabled }
                   loading={ loading }
@@ -295,11 +314,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                   trueIcon={ props.trueIcon }
                   onUpdate:modelValue={ v => selectItem(slotProps.select, v) }
                   onClick={ (e: PointerEvent) => e.stopPropagation() }
-                  onKeydown={ (e: KeyboardEvent) => {
-                    if (!['Enter', 'Space'].includes(e.key)) return
-                    e.stopPropagation()
-                    selectItem(slotProps.select, slotProps.isSelected)
-                  }}
                 />
               </VListItemAction>
             )}

@@ -202,9 +202,4 @@ export default {
       changeFormat: 'تغيير تنسيق اللون',
     },
   },
-  treeview: {
-    ariaLabel: {
-      checkboxFallback: 'محدد',
-    },
-  },
 }
