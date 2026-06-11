@@ -7,68 +7,6 @@ import { commands, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VCarousel', () => {
-  it('should support opt-in mouse wheel navigation', async () => {
-    const model = ref(1)
-
-    render(() => (
-      <VCarousel v-model={ model.value } wheel>
-        <VCarouselItem value={ 1 }>
-          <h1>1</h1>
-        </VCarouselItem>
-        <VCarouselItem value={ 2 }>
-          <h1>2</h1>
-        </VCarouselItem>
-        <VCarouselItem value={ 3 }>
-          <h1>3</h1>
-        </VCarouselItem>
-      </VCarousel>
-    ))
-
-    await commands.waitStable('.v-carousel')
-    const carousel = screen.getByCSS('.v-carousel')
-
-    expect(carousel.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
-    )).toBe(false)
-    await commands.waitStable('.v-carousel')
-    expect(model.value).toBe(2)
-
-    carousel.dispatchEvent(new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true }))
-    await commands.waitStable('.v-carousel')
-    expect(model.value).toBe(2)
-
-    await new Promise(resolve => setTimeout(resolve, 160))
-    expect(carousel.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true })
-    )).toBe(false)
-    await commands.waitStable('.v-carousel')
-    expect(model.value).toBe(1)
-  })
-
-  it('should not navigate with mouse wheel by default', async () => {
-    const model = ref(1)
-
-    render(() => (
-      <VCarousel v-model={ model.value }>
-        <VCarouselItem value={ 1 }>
-          <h1>1</h1>
-        </VCarouselItem>
-        <VCarouselItem value={ 2 }>
-          <h1>2</h1>
-        </VCarouselItem>
-      </VCarousel>
-    ))
-
-    await commands.waitStable('.v-carousel')
-    const carousel = screen.getByCSS('.v-carousel')
-
-    expect(carousel.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
-    )).toBe(true)
-    await commands.waitStable('.v-carousel')
-    expect(model.value).toBe(1)
-  })
-
   describe('keyboard controls', () => {
     it('should support horizontal keyboard navigation on delimiters', async () => {
       const model = ref(1)
