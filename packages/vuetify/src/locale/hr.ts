@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Promijeni format boje',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Odabrano',
+    },
+  },
 }

@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Ubah format warna',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Dipilih',
+    },
+  },
 }

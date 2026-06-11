@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Farbformat ändern',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Ausgewählt',
+    },
+  },
 }

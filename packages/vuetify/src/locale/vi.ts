@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Thay đổi định dạng màu',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Đã chọn',
+    },
+  },
 }

@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Endre fargeformat',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Valgt',
+    },
+  },
 }

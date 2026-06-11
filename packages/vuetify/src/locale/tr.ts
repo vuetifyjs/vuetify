@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Renk biçimini değiştir',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Seçildi',
+    },
+  },
 }

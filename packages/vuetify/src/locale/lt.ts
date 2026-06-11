@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Keisti spalvos formatą',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Pasirinkta',
+    },
+  },
 }

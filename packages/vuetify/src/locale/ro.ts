@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Schimbă formatul culorii',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Selectat',
+    },
+  },
 }

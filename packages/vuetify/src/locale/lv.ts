@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Mainīt krāsas formātu',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Atlasīts',
+    },
+  },
 }

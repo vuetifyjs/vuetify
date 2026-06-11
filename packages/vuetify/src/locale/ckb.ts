@@ -202,4 +202,9 @@ export default {
       changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'هەڵبژێردراو',
+    },
+  },
 }

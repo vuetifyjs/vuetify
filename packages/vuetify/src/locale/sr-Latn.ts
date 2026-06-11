@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Promeni format boje',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Izabrano',
+    },
+  },
 }

@@ -202,4 +202,9 @@ export default {
       changeFormat: 'Zmień format koloru',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'Wybrano',
+    },
+  },
 }

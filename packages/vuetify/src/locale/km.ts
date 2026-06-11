@@ -202,4 +202,9 @@ export default {
       changeFormat: 'ប្ដូរទម្រង់ពណ៌',
     },
   },
+  treeview: {
+    ariaLabel: {
+      checkboxFallback: 'បានជ្រើសរើស',
+    },
+  },
 }

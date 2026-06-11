@@ -8,6 +8,7 @@ import { VListItemAction, VListSubheader } from '@/components/VList'
 // Composables
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, reactive, ref, toRaw } from 'vue'
@@ -96,6 +97,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
   props: makeVTreeviewChildrenProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const isLoading = reactive(new Set<unknown>())
     const activatorItems = ref<VTreeviewItem[]>([])
 
@@ -165,6 +167,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
               <VListItemAction start>
                 <VCheckboxBtn
                   key={ item.value }
+                  aria-label={ item.title || t('$vuetify.treeview.ariaLabel.checkboxFallback') }
                   modelValue={ slotProps.isSelected }
                   disabled={ props.disabled || itemProps.disabled }
                   loading={ loading }
