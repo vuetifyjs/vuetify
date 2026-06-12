@@ -97,6 +97,7 @@ export function useLocationStrategies (
         visualViewport?.removeEventListener('resize', onVisualResize)
         visualViewport?.removeEventListener('scroll', onVisualScroll)
         updateLocation.value = undefined
+        contentStyles.value = {}
       })
 
       window.addEventListener('resize', onResize, { passive: true })
