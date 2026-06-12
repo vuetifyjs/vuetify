@@ -2,7 +2,7 @@
 import { VDialog } from '../VDialog'
 
 // Utilities
-import { commands, render, screen, userEvent, wait } from '@test'
+import { commands, page, render, screen, userEvent, wait } from '@test'
 import { h, nextTick, ref } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
@@ -29,6 +29,39 @@ describe('VDialog', () => {
     await expect.poll(() => model.value).toBeFalsy()
     await expect.poll(() => screen.queryByTestId('dialog')).toBeNull()
     await expect.poll(() => screen.queryByTestId('content')).toBeNull()
+  })
+
+  it('should react to max-width changes', async () => {
+    const model = ref(true)
+    const maxWidth = ref(300)
+    render(() => (
+      <VDialog v-model={ model.value } maxWidth={ maxWidth.value }>
+        <div data-testid="content">Content</div>
+      </VDialog>
+    ))
+
+    expect(screen.getByCSS('.v-overlay__content')).toHaveStyle({ maxWidth: '300px' })
+
+    maxWidth.value = 500
+    await expect.poll(() => screen.getByCSS('.v-overlay__content')).toHaveStyle({ maxWidth: '500px' })
+  })
+
+  it('should respect a CSS function max-width', async () => {
+    await page.viewport(1280, 800) // 50vw resolves to 640px
+
+    const model = ref(true)
+    const maxWidth = ref('min(50vw, 200px)')
+    render(() => (
+      <VDialog v-model={ model.value } maxWidth={ maxWidth.value }>
+        <div>Content</div>
+      </VDialog>
+    ))
+
+    await expect.poll(() => document.querySelector('.v-overlay__content')).not.toBeNull()
+    expect(screen.getByCSS('.v-overlay__content').getBoundingClientRect()).toMatchObject({ width: 200 })
+
+    maxWidth.value = 'min(50vw, 1000px)'
+    await expect.poll(() => screen.getByCSS('.v-overlay__content').getBoundingClientRect()).toMatchObject({ width: 640 })
   })
 
   it('should emit afterLeave', async () => {
