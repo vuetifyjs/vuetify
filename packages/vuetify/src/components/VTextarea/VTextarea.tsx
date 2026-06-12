@@ -35,8 +35,6 @@ export const makeVTextareaProps = propsFactory({
   counter: [Boolean, Number, String] as PropType<true | number | string>,
   counterValue: Function as PropType<(value: any) => number>,
   prefix: String,
-  placeholder: String,
-  persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   noResize: Boolean,
   rows: {

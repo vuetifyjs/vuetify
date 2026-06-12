@@ -33,8 +33,6 @@ export const makeVTextFieldProps = propsFactory({
   counter: [Boolean, Number, String],
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
-  placeholder: String,
-  persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   suffix: String,
   role: String,

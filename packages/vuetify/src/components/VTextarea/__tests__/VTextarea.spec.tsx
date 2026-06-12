@@ -99,9 +99,11 @@ describe('VTextarea', () => {
   describe('placeholder slot', () => {
     it('should render placeholder slot when input is empty', () => {
       const wrapper = mountFunction(
-        <VTextarea v-slots={{
-          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
-        }} />
+        <VTextarea
+          v-slots={{
+            placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+          }}
+        />
       )
 
       const placeholder = wrapper.find('.v-field__placeholder')
@@ -111,9 +113,12 @@ describe('VTextarea', () => {
 
     it('should not render placeholder slot when input has value', () => {
       const wrapper = mountFunction(
-        <VTextarea modelValue="hello" v-slots={{
-          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
-        }} />
+        <VTextarea
+          modelValue="hello"
+          v-slots={{
+            placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+          }}
+        />
       )
 
       const placeholder = wrapper.find('.v-field__placeholder')

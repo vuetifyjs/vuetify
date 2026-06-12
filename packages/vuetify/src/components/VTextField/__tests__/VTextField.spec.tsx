@@ -222,9 +222,11 @@ describe('VTextField', () => {
   describe('placeholder slot', () => {
     it('should render placeholder slot when input is empty', () => {
       const wrapper = mountFunction(
-        <VTextField v-slots={{
-          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
-        }} />
+        <VTextField
+          v-slots={{
+            placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+          }}
+        />
       )
 
       const placeholder = wrapper.find('.v-field__placeholder')
@@ -234,9 +236,12 @@ describe('VTextField', () => {
 
     it('should not render placeholder slot when input has value', () => {
       const wrapper = mountFunction(
-        <VTextField modelValue="hello" v-slots={{
-          placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
-        }} />
+        <VTextField
+          modelValue="hello"
+          v-slots={{
+            placeholder: () => <div class="custom-placeholder">Custom Placeholder</div>,
+          }}
+        />
       )
 
       const placeholder = wrapper.find('.v-field__placeholder')

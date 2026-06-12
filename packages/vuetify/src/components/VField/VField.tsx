@@ -360,7 +360,7 @@ export const VField = genericComponent<new <T>(
                 { slots.placeholder!({
                   ...slotProps.value,
                   placeholder: props.placeholder,
-                }) }
+                })}
               </div>
             )}
 
