@@ -134,9 +134,15 @@ function staticLocationStrategy (data: LocationStrategyData, props: StrategyProp
 
   const target = ref<[x: number, y: number]>()
   const connectedStyles = ref<Record<string, string>>({})
+
+  // reactive equivalent of `{ ...props, origin: 'auto' }`
+  const connectedProps = new Proxy(props, {
+    get: (target, key) => key === 'origin' ? 'auto' : Reflect.get(target, key),
+  })
+
   const connected = connectedLocationStrategy(
     { ...data, target },
-    { ...props, origin: 'auto' },
+    connectedProps,
     connectedStyles
   )
 
@@ -178,6 +184,18 @@ function staticLocationStrategy (data: LocationStrategyData, props: StrategyProp
   })
 
   return { updateLocation }
+}
+
+/** Resolve a CSS length the browser understands (calc(), min(), vw, …) to pixels */
+function resolveCssLength (value: string, container: HTMLElement, isWidth: boolean) {
+  const probe = document.createElement('div')
+  probe.style.position = 'absolute'
+  probe.style.visibility = 'hidden'
+  probe.style[isWidth ? 'width' : 'height'] = value
+  container.appendChild(probe)
+  const size = isWidth ? probe.offsetWidth : probe.offsetHeight
+  container.removeChild(probe)
+  return size > 0 ? size : Infinity
 }
 
 /** Get size of element ignoring max-width/max-height */
@@ -251,14 +269,20 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       const isWidth = key.endsWith('Width')
       return () => {
         const raw = props[key]
-        const val = parseFloat(raw!)
-        if (isNaN(val)) return Infinity
-        if (typeof raw === 'string' && raw.endsWith('%')) {
-          // resolve against the overlay container, like CSS would
-          const box = getElementBox(data.contentEl.value?.parentElement ?? document.documentElement)
-          return val * (isWidth ? box.width : box.height) / 100
+        if (raw == null) return Infinity
+
+        const container = (data.contentEl.value?.parentElement ?? document.documentElement) as HTMLElement
+
+        if (typeof raw === 'number' || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
+          return parseFloat(raw as string)
         }
-        return val
+        if (raw.endsWith('%')) {
+          // resolve against the overlay container, like CSS would
+          const box = getElementBox(container)
+          return parseFloat(raw) * (isWidth ? box.width : box.height) / 100
+        }
+        // let the browser resolve viewport units, calc(), min(), max(), clamp(), etc.
+        return resolveCssLength(raw, container, isWidth)
       }
     })
 

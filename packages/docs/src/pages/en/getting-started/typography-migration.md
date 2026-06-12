@@ -132,136 +132,133 @@ In order to restore the customized values, pass them directly to the specific va
 If you want to avoid visual regression entirely, you can restore MD2 typography using configuration snippets bellow.
 
 ```scss { resource="src/typography.scss" }
+@use 'sass:map';
+
 $body-font-family: 'Roboto', sans-serif;
 $heading-font-family: $body-font-family;
 
 $typography: (
-  (
-    'h1': (
-      'size': 6rem,
-      'weight': 300,
-      'line-height': 1,
-      'letter-spacing': -.015625em,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'h2': (
-      'size': 3.75rem,
-      'weight': 300,
-      'line-height': 1,
-      'letter-spacing': -.0083333333em,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'h3': (
-      'size': 3rem,
-      'weight': 400,
-      'line-height': 1.05,
-      'letter-spacing': normal,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'h4': (
-      'size': 2.125rem,
-      'weight': 400,
-      'line-height': 1.175,
-      'letter-spacing': .0073529412em,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'h5': (
-      'size': 1.5rem,
-      'weight': 400,
-      'line-height': 1.333,
-      'letter-spacing': normal,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'h6': (
-      'size': 1.25rem,
-      'weight': 500,
-      'line-height': 1.6,
-      'letter-spacing': .0125em,
-      'font-family': $heading-font-family,
-      'text-transform': none
-    ),
-    'subtitle-1': (
-      'size': 1rem,
-      'weight': normal,
-      'line-height': 1.75,
-      'letter-spacing': .009375em,
-      'font-family': $body-font-family,
-      'text-transform': none
-    ),
-    'subtitle-2': (
-      'size': .875rem,
-      'weight': 500,
-      'line-height': 1.6,
-      'letter-spacing': .0071428571em,
-      'font-family': $body-font-family,
-      'text-transform': none
-    ),
-    'body-1': (
-      'size': 1rem,
-      'weight': 400,
-      'line-height': 1.5,
-      'letter-spacing': .03125em,
-      'font-family': $body-font-family,
-      'text-transform': none
-    ),
-    'body-2': (
-      'size': .875rem,
-      'weight': 400,
-      'line-height': 1.425,
-      'letter-spacing': .0178571429em,
-      'font-family': $body-font-family,
-      'text-transform': none
-    ),
-    'button': (
-      'size': .875rem,
-      'weight': 500,
-      'line-height': 2.6,
-      'letter-spacing': .0892857143em,
-      'font-family': $body-font-family,
-      'text-transform': uppercase
-    ),
-    'caption': (
-      'size': .75rem,
-      'weight': 400,
-      'line-height': 1.667,
-      'letter-spacing': .0333333333em,
-      'font-family': $body-font-family,
-      'text-transform': none
-    ),
-    'overline': (
-      'size': .75rem,
-      'weight': 500,
-      'line-height': 2.667,
-      'letter-spacing': .1666666667em,
-      'font-family': $body-font-family,
-      'text-transform': uppercase
-    )
+  'h1': (
+    'size': 6rem,
+    'weight': 300,
+    'line-height': 1,
+    'letter-spacing': -.015625em,
+    'font-family': $heading-font-family,
+    'text-transform': none
   ),
-  $typography
+  'h2': (
+    'size': 3.75rem,
+    'weight': 300,
+    'line-height': 1,
+    'letter-spacing': -.0083333333em,
+    'font-family': $heading-font-family,
+    'text-transform': none
+  ),
+  'h3': (
+    'size': 3rem,
+    'weight': 400,
+    'line-height': 1.05,
+    'letter-spacing': normal,
+    'font-family': $heading-font-family,
+    'text-transform': none
+  ),
+  'h4': (
+    'size': 2.125rem,
+    'weight': 400,
+    'line-height': 1.175,
+    'letter-spacing': .0073529412em,
+    'font-family': $heading-font-family,
+    'text-transform': none
+  ),
+  'h5': (
+    'size': 1.5rem,
+    'weight': 400,
+    'line-height': 1.333,
+    'letter-spacing': normal,
+    'font-family': $heading-font-family,
+    'text-transform': none
+  ),
+  'h6': (
+    'size': 1.25rem,
+    'weight': 500,
+    'line-height': 1.6,
+    'letter-spacing': .0125em,
+    'font-family': $heading-font-family,
+    'text-transform': none
+  ),
+  'subtitle-1': (
+    'size': 1rem,
+    'weight': normal,
+    'line-height': 1.75,
+    'letter-spacing': .009375em,
+    'font-family': $body-font-family,
+    'text-transform': none
+  ),
+  'subtitle-2': (
+    'size': .875rem,
+    'weight': 500,
+    'line-height': 1.6,
+    'letter-spacing': .0071428571em,
+    'font-family': $body-font-family,
+    'text-transform': none
+  ),
+  'body-1': (
+    'size': 1rem,
+    'weight': 400,
+    'line-height': 1.5,
+    'letter-spacing': .03125em,
+    'font-family': $body-font-family,
+    'text-transform': none
+  ),
+  'body-2': (
+    'size': .875rem,
+    'weight': 400,
+    'line-height': 1.425,
+    'letter-spacing': .0178571429em,
+    'font-family': $body-font-family,
+    'text-transform': none
+  ),
+  'button': (
+    'size': .875rem,
+    'weight': 500,
+    'line-height': 2.6,
+    'letter-spacing': .0892857143em,
+    'font-family': $body-font-family,
+    'text-transform': uppercase
+  ),
+  'caption': (
+    'size': .75rem,
+    'weight': 400,
+    'line-height': 1.667,
+    'letter-spacing': .0333333333em,
+    'font-family': $body-font-family,
+    'text-transform': none
+  ),
+  'overline': (
+    'size': .75rem,
+    'weight': 500,
+    'line-height': 2.667,
+    'letter-spacing': .1666666667em,
+    'font-family': $body-font-family,
+    'text-transform': uppercase
+  )
 );
 
 $flat-typography: ();
 @each $type, $values in $typography {
-  $flat-typography: map-deep-merge(
-    $flat-typography,
-    (#{$type}: (
-      map.get($values, 'size'),
-      map.get($values, 'weight'),
-      map.get($values, 'line-height'),
-      map.get($values, 'letter-spacing'),
-      map.get($values, 'font-family'),
-      map.get($values, 'text-transform'),
-    ))
-  );
+  $flat-typography: map.set($flat-typography, $type, (
+    map.get($values, 'size'),
+    map.get($values, 'weight'),
+    map.get($values, 'line-height'),
+    map.get($values, 'letter-spacing'),
+    map.get($values, 'font-family'),
+    map.get($values, 'text-transform'),
+  ));
 }
 ```
 
 ```scss { resource="src/settings.scss" }
+@use 'sass:map';
 @use './typography' as *;
 @use 'vuetify/settings' with (
   $utilities: (
@@ -278,69 +275,69 @@ $flat-typography: ();
     ),
   ),
 
-  $alert-title-font-size: tools.map-deep-get(.$typography, 'h6', 'size'),
-  $alert-title-font-weight: tools.map-deep-get(.$typography, 'h6', 'weight'),
-  $alert-title-letter-spacing: tools.map-deep-get(.$typography, 'h6', 'letter-spacing'),
-  $banner-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $banner-line-height: tools.map-deep-get(.$typography, 'subtitle-2', 'line-height'),
-  $breadcrumbs-item-icon-font-size: tools.map-deep-get(.$typography, 'body-1', 'size'),
-  $breadcrumbs-line-height: tools.map-deep-get(.$typography, 'subtitle-2', 'line-height'),
-  $button-font-size: tools.map-deep-get(.$typography, 'button', 'size'),
-  $button-font-weight: tools.map-deep-get(.$typography, 'button', 'weight'),
-  $button-text-letter-spacing: tools.map-deep-get(.$typography, 'button', 'letter-spacing'),
-  $button-text-transform: tools.map-deep-get(.$typography, 'button', 'text-transform'),
-  $card-title-font-size: tools.map-deep-get(.$typography, 'h6', 'size'),
-  $card-title-font-weight: tools.map-deep-get(.$typography, 'h6', 'weight'),
-  $card-title-letter-spacing: tools.map-deep-get(.$typography, 'h6', 'letter-spacing'),
-  $card-title-line-height: tools.map-deep-get(.$typography, 'h6', 'line-height'),
-  $card-subtitle-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $card-subtitle-font-weight: tools.map-deep-get(.$typography, 'body-2', 'weight'),
-  $card-subtitle-letter-spacing: tools.map-deep-get(.$typography, 'body-2', 'letter-spacing'),
-  $card-subtitle-line-height: tools.map-deep-get(.$typography, 'body-2', 'line-height'),
-  $card-text-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $card-text-font-weight: tools.map-deep-get(.$typography, 'body-2', 'weight'),
-  $card-text-letter-spacing: tools.map-deep-get(.$typography, 'body-2', 'letter-spacing'),
-  $card-text-line-height: tools.map-deep-get(.$typography, 'body-2', 'line-height'),
-  $card-text-text-transform: tools.map-deep-get(.$typography, 'body-2', 'text-transform'),
-  $chip-font-size: tools.map-deep-get(.$typography, "button", "size"),
-  $dialog-card-text-letter-spacing: tools.map-deep-get(.$typography, 'body-1', 'letter-spacing'),
-  $empty-state-headline-font-size: functions.map-deep-get(.$typography, 'h2', 'size'),
-  $empty-state-headline-font-weight: functions.map-deep-get(.$typography, 'h2', 'weight'),
-  $empty-state-headline-line-height: functions.map-deep-get(.$typography, 'h2', 'line-height'),
-  $empty-state-headline-mobile-font-size: functions.map-deep-get(.$typography, 'h4', 'size'),
-  $empty-state-text-font-size: functions.map-deep-get(.$typography, 'body-2', 'size'),
-  $empty-state-text-font-weight: functions.map-deep-get(.$typography, 'body-2', 'weight'),
-  $empty-state-text-line-height: functions.map-deep-get(.$typography, 'body-2', 'line-height'),
-  $empty-state-title-font-size: functions.map-deep-get(.$typography, 'h6', 'size'),
-  $empty-state-title-font-weight: functions.map-deep-get(.$typography, 'h6', 'weight'),
-  $empty-state-title-line-height: functions.map-deep-get(.$typography, 'h6', 'line-height'),
-  $fab-font-size: tools.map-deep-get(.$typography, 'button', 'size'),
-  $fab-font-weight: tools.map-deep-get(.$typography, 'button', 'weight'),
-  $input-font-size: tools.map-deep-get(.$typography, 'body-1', 'size'),
-  $input-font-weight: tools.map-deep-get(.$typography, 'body-1', 'weight'),
-  $list-item-nav-subtitle-font-weight: tools.map-deep-get(.$typography, 'body-2', 'weight'),
-  $list-item-nav-subtitle-letter-spacing: tools.map-deep-get(.$typography, 'body-2', 'letter-spacing'),
-  $list-item-subtitle-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $list-item-subtitle-font-weight: tools.map-deep-get(.$typography, 'body-2', 'weight'),
-  $list-item-subtitle-letter-spacing: tools.map-deep-get(.$typography, 'body-2', 'letter-spacing'),
-  $list-item-title-font-size: tools.map-deep-get(.$typography, 'body-1', 'size'),
-  $list-item-title-font-weight: tools.map-deep-get(.$typography, 'body-1', 'weight'),
-  $list-item-title-letter-spacing: tools.map-deep-get(.$typography, 'subtitle-1', 'letter-spacing'),
-  $list-item-title-line-height: tools.map-deep-get(.$typography, 'body-1', 'line-height'),
-  $slider-thumb-label-font-size: tools.map-deep-get(.$typography, 'caption', 'size'),
-  $snackbar-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $snackbar-font-weight: tools.map-deep-get(.$typography, 'body-2', 'weight'),
-  $snackbar-letter-spacing: tools.map-deep-get(.$typography, 'body-2', 'letter-spacing'),
-  $snackbar-line-height: tools.map-deep-get(.$typography, 'body-2', 'line-height'),
-  $system-bar-font-size: tools.map-deep-get(.$typography, 'caption', 'size'),
-  $system-bar-font-weight: tools.map-deep-get(.$typography, 'caption', 'weight'),
-  $system-bar-letter-spacing: tools.map-deep-get(.$typography, 'caption', 'letter-spacing'),
-  $system-bar-line-height: tools.map-deep-get(.$typography, 'caption', 'line-height'),
-  $system-bar-text-transform: tools.map-deep-get(.$typography, 'caption', 'text-transform'),
-  $table-header-font-size: tools.map-deep-get(.$typography, 'caption', 'size'),
-  $table-font-size: tools.map-deep-get(.$typography, 'body-2', 'size'),
-  $table-row-font-size: tools.map-deep-get(.$typography, 'subtitle-2', 'size'),
-  $icon-btn-font-size: tools.map-deep-get(.$typography, 'button', 'size'),
-  $icon-btn-font-weight: tools.map-deep-get(.$typography, 'button', 'weight'),
+  $alert-title-font-size: map.get($typography, 'h6', 'size'),
+  $alert-title-font-weight: map.get($typography, 'h6', 'weight'),
+  $alert-title-letter-spacing: map.get($typography, 'h6', 'letter-spacing'),
+  $banner-font-size: map.get($typography, 'body-2', 'size'),
+  $banner-line-height: map.get($typography, 'subtitle-2', 'line-height'),
+  $breadcrumbs-item-icon-font-size: map.get($typography, 'body-1', 'size'),
+  $breadcrumbs-line-height: map.get($typography, 'subtitle-2', 'line-height'),
+  $button-font-size: map.get($typography, 'button', 'size'),
+  $button-font-weight: map.get($typography, 'button', 'weight'),
+  $button-text-letter-spacing: map.get($typography, 'button', 'letter-spacing'),
+  $button-text-transform: map.get($typography, 'button', 'text-transform'),
+  $card-title-font-size: map.get($typography, 'h6', 'size'),
+  $card-title-font-weight: map.get($typography, 'h6', 'weight'),
+  $card-title-letter-spacing: map.get($typography, 'h6', 'letter-spacing'),
+  $card-title-line-height: map.get($typography, 'h6', 'line-height'),
+  $card-subtitle-font-size: map.get($typography, 'body-2', 'size'),
+  $card-subtitle-font-weight: map.get($typography, 'body-2', 'weight'),
+  $card-subtitle-letter-spacing: map.get($typography, 'body-2', 'letter-spacing'),
+  $card-subtitle-line-height: map.get($typography, 'body-2', 'line-height'),
+  $card-text-font-size: map.get($typography, 'body-2', 'size'),
+  $card-text-font-weight: map.get($typography, 'body-2', 'weight'),
+  $card-text-letter-spacing: map.get($typography, 'body-2', 'letter-spacing'),
+  $card-text-line-height: map.get($typography, 'body-2', 'line-height'),
+  $card-text-text-transform: map.get($typography, 'body-2', 'text-transform'),
+  $chip-font-size: map.get($typography, "button", "size"),
+  $dialog-card-text-letter-spacing: map.get($typography, 'body-1', 'letter-spacing'),
+  $empty-state-headline-font-size: map.get($typography, 'h2', 'size'),
+  $empty-state-headline-font-weight: map.get($typography, 'h2', 'weight'),
+  $empty-state-headline-line-height: map.get($typography, 'h2', 'line-height'),
+  $empty-state-headline-mobile-font-size: map.get($typography, 'h4', 'size'),
+  $empty-state-text-font-size: map.get($typography, 'body-2', 'size'),
+  $empty-state-text-font-weight: map.get($typography, 'body-2', 'weight'),
+  $empty-state-text-line-height: map.get($typography, 'body-2', 'line-height'),
+  $empty-state-title-font-size: map.get($typography, 'h6', 'size'),
+  $empty-state-title-font-weight: map.get($typography, 'h6', 'weight'),
+  $empty-state-title-line-height: map.get($typography, 'h6', 'line-height'),
+  $fab-font-size: map.get($typography, 'button', 'size'),
+  $fab-font-weight: map.get($typography, 'button', 'weight'),
+  $input-font-size: map.get($typography, 'body-1', 'size'),
+  $input-font-weight: map.get($typography, 'body-1', 'weight'),
+  $list-item-nav-subtitle-font-weight: map.get($typography, 'body-2', 'weight'),
+  $list-item-nav-subtitle-letter-spacing: map.get($typography, 'body-2', 'letter-spacing'),
+  $list-item-subtitle-font-size: map.get($typography, 'body-2', 'size'),
+  $list-item-subtitle-font-weight: map.get($typography, 'body-2', 'weight'),
+  $list-item-subtitle-letter-spacing: map.get($typography, 'body-2', 'letter-spacing'),
+  $list-item-title-font-size: map.get($typography, 'body-1', 'size'),
+  $list-item-title-font-weight: map.get($typography, 'body-1', 'weight'),
+  $list-item-title-letter-spacing: map.get($typography, 'subtitle-1', 'letter-spacing'),
+  $list-item-title-line-height: map.get($typography, 'body-1', 'line-height'),
+  $slider-thumb-label-font-size: map.get($typography, 'caption', 'size'),
+  $snackbar-font-size: map.get($typography, 'body-2', 'size'),
+  $snackbar-font-weight: map.get($typography, 'body-2', 'weight'),
+  $snackbar-letter-spacing: map.get($typography, 'body-2', 'letter-spacing'),
+  $snackbar-line-height: map.get($typography, 'body-2', 'line-height'),
+  $system-bar-font-size: map.get($typography, 'caption', 'size'),
+  $system-bar-font-weight: map.get($typography, 'caption', 'weight'),
+  $system-bar-letter-spacing: map.get($typography, 'caption', 'letter-spacing'),
+  $system-bar-line-height: map.get($typography, 'caption', 'line-height'),
+  $system-bar-text-transform: map.get($typography, 'caption', 'text-transform'),
+  $table-header-font-size: map.get($typography, 'caption', 'size'),
+  $table-font-size: map.get($typography, 'body-2', 'size'),
+  $table-row-font-size: map.get($typography, 'subtitle-2', 'size'),
+  $icon-btn-font-size: map.get($typography, 'button', 'size'),
+  $icon-btn-font-weight: map.get($typography, 'button', 'weight'),
 );
 ```

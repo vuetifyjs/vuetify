@@ -193,6 +193,10 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
+      if (props.totalVisible == null && length.value < 3) {
+        return createRange(length.value, start.value)
+      }
+
       if (totalVisible.value <= 0) return []
       else if (totalVisible.value === 1) return [page.value]
 

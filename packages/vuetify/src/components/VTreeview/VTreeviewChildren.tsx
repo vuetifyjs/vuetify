@@ -152,6 +152,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
 
       const treeItemProps = {
         ...itemProps as InternalListItem['props'] & { disabled?: boolean },
+        hideActions: props.hideActions,
         indentLines: children ? indentLines.node : indentLines.leaf,
       }
 
@@ -277,7 +278,6 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
             <VTreeviewItem
               { ...treeItemProps }
               hasCustomPrepend={ !!slots.prepend }
-              hideActions={ props.hideActions }
               value={ props.returnObject ? toRaw(item.raw) : treeItemProps.value }
               v-slots={ slotsWithItem }
             />

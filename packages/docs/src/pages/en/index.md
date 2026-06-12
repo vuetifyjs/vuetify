@@ -32,10 +32,6 @@ meta:
 
 <HomeSnips />
 
-<v-divider />
-
-<HomeStore />
-
 <v-divider color="primary" />
 
 <HomeSupport />
