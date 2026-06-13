@@ -37,17 +37,22 @@
       z-index: 0
 
     &--dragging
-      .v-field__overlay
-        background-color: rgb(var(--v-theme-primary))
-        opacity: .08
+      .v-field:not(.v-field--variant-outlined)
+        outline: 2px dashed rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+        outline-offset: 2px
 
-      .v-field__outline
-        --v-field-border-opacity: 1
+      .v-field--variant-outlined
+        .v-field__outline
+          --v-field-border-opacity: var(--v-medium-emphasis-opacity)
+          --v-field-border-width: 2px
 
-        color: rgb(var(--v-theme-primary))
+          color: rgb(var(--v-theme-on-surface))
 
-      .v-field--variant-outlined .v-field__outline
-        --v-field-border-width: 2px
+        .v-field__outline__start,
+        .v-field__outline__notch::before,
+        .v-field__outline__notch::after,
+        .v-field__outline__end
+          border-style: dashed
 
       input[type="file"]
         z-index: 1

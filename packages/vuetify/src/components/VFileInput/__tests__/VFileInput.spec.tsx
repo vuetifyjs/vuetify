@@ -109,6 +109,18 @@ describe('VFileInput', () => {
 
     expect(input.classes()).not.toContain('v-file-input--dragging')
 
+    await field.trigger('dragenter', { dataTransfer })
+    expect(input.classes()).toContain('v-file-input--dragging')
+
+    await field.trigger('dragenter', { dataTransfer })
+    expect(input.classes()).toContain('v-file-input--dragging')
+
+    await field.trigger('dragleave')
+    expect(input.classes()).toContain('v-file-input--dragging')
+
+    await field.trigger('dragleave')
+    expect(input.classes()).not.toContain('v-file-input--dragging')
+
     await field.trigger('dragover', { dataTransfer })
     expect(input.classes()).toContain('v-file-input--dragging')
 

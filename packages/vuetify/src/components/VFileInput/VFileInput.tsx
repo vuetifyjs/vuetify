@@ -141,6 +141,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     ))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const dragCounter = shallowRef(0)
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
@@ -181,6 +182,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const types = [...e.dataTransfer?.types ?? []]
       return types.includes('Files') || hasFilesOrFolders(e)
     }
+    function onDragenter (e: DragEvent) {
+      if (props.disabled || props.readonly || !hasDraggedFiles(e)) return
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      dragCounter.value++
+      isDragging.value = true
+    }
     function onDragover (e: DragEvent) {
       if (props.disabled || props.readonly || !hasDraggedFiles(e)) return
       e.preventDefault()
@@ -189,14 +197,17 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     }
     function onDragleave (e: DragEvent) {
       e.preventDefault()
-      isDragging.value = false
+      if (dragCounter.value > 0) dragCounter.value--
+      if (dragCounter.value === 0) isDragging.value = false
     }
     function onDragend () {
+      dragCounter.value = 0
       isDragging.value = false
     }
     async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
+      dragCounter.value = 0
       isDragging.value = false
 
       if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
@@ -321,7 +332,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 focused={ isFocused.value }
                 details={ hasDetails.value }
                 error={ isValid.value === false }
+                onDragenter={ onDragenter }
                 onDragend={ onDragend }
+                onDragleave={ onDragleave }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
               >
@@ -348,7 +361,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           onFocus()
                         }}
                         onChange={ onFileSelection }
-                        onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         onPaste={ onPaste }
