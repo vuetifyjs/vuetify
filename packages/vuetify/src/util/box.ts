@@ -1,3 +1,5 @@
+import { IS_WEBKIT } from './globals'
+
 export class Box {
   x: number
   y: number
@@ -69,8 +71,8 @@ export function getElementBox (el: HTMLElement) {
     } else {
       const pageScale = document.body.currentCSSZoom ?? 1
       return new Box({
-        x: visualViewport.scale > 1 ? 0 : visualViewport.offsetLeft,
-        y: visualViewport.scale > 1 ? 0 : visualViewport.offsetTop,
+        x: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetLeft,
+        y: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetTop,
         width: visualViewport.width * visualViewport.scale / pageScale,
         height: visualViewport.height * visualViewport.scale / pageScale,
       })
