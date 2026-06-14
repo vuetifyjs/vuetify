@@ -64,7 +64,7 @@ Cool example of the month: [VBites](https://play.vuetifyjs.com/playgrounds/7Ksit
 
 June continued our steady release cadence with several updates addressing bugs and introducing enhancements. These releases focused on component stability and developer experience improvements. View the complete list of changes in the [Full Changelog](#june-2025-changelog).
 
-![Hero image for June release notes](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/june-2025-hero-asdfasdf.png "June release notes hero image"){ height=200 }
+![Hero image for June release notes](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/june-2025-hero-asdfasdf.png "June release notes hero image"){ height=200 }
 
 **Details:**
 
@@ -87,7 +87,7 @@ June continued our steady release cadence with several updates addressing bugs a
 * **Integration Testing**: Validate component behavior across different scenarios
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vstudio-june-2025.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/vstudio-june-2025.mp4" type="video/mp4"></source>
 </video>
 
 We're continuously expanding Studio's capabilities to support modern development workflows, and we encourage the community to explore how Studio can accelerate your Vuetify development process.
@@ -112,7 +112,7 @@ This month marked a significant milestone with the completion and pre-release of
 * **Platform Awareness**: New `platform` prop allows forcing the component to display Mac vs PC hotkey conventions
 * **Enhanced Customization**: Added `prefix` and `postfix` props for better integration flexibility
 
-![Hero image for VHotkey component](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/hotkeys.png "VHotkey component hero image"){ height=220 }
+![Hero image for VHotkey component](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/hotkeys.png "VHotkey component hero image"){ height=220 }
 
 **useHotkey Composable Features:**
 
@@ -133,21 +133,21 @@ We have several new components in development that we are confident will enhance
 
 **VMaskInput**: After vanishing in v2, masking is back in the library with enhanced input capabilities and new features.
 
-![Hero gif for VMaskInput component](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vmaskinput.gif "VMaskInput component hero gif"){ height=280 }
+![Hero gif for VMaskInput component](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/vmaskinput.gif "VMaskInput component hero gif"){ height=280 }
 
 **VEditor**: Early development phase for a new editor component, expanding Vuetify's content creation capabilities.
 
-![Hero image for VEditor component](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/veditor.png "VEditor component hero image"){ height=220 }
+![Hero image for VEditor component](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/veditor.png "VEditor component hero image"){ height=220 }
 
 **VVideo**: Documentation improvements, Sass variable extraction, and volume component refinement.
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vvideo.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/vvideo.mp4" type="video/mp4"></source>
 </video>
 
 **VCommandPalette**: Ongoing development for a powerful command palette component, designed to enhance user interaction and streamline application workflows.{ height=150 }
 
-![Hero image for VCommandPalette component](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vcommandpalette.png "VCommandPalette component hero image"){ height=370 }
+![Hero image for VCommandPalette component](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/vcommandpalette.png "VCommandPalette component hero image"){ height=370 }
 
 **Details:**
 
@@ -163,11 +163,11 @@ Multiple advancements were made across the Vuetify ecosystem to improve develope
 
 [Vuetify One subscribers](https://vuetifyjs.com/en/?one=subscribe) can now copy documentation pages as Markdown. This feature allows you to easily extract and reuse documentation content in your projects, enhancing collaboration and knowledge sharing within teams.
 
-![Vuetify documentation copy page as markdown](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/copy-page-as-markdown.png "Vuetify documentation copy page as markdown"){ height=220 }
+![Vuetify documentation copy page as markdown](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/copy-page-as-markdown.png "Vuetify documentation copy page as markdown"){ height=220 }
 
 All users can now save favorite search results in the Vuetify documentation. Just press `ctrl+k` or `cmd+k` to open the search bar, type your query, and click the star icon next to the search result you want to save. This feature allows you to quickly access frequently used documentation pages, improving your workflow and efficiency.
 
-![Vuetify documentation search favorites](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/docs-favorites.png "Vuetify documentation search favorites"){ height=300 }
+![Vuetify documentation search favorites](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/docs-favorites.png "Vuetify documentation search favorites"){ height=300 }
 
 **Details:**
 
@@ -178,13 +178,13 @@ All users can now save favorite search results in the Vuetify documentation. Jus
 
 Updated default interface to include links to various Vuetify ecosystem sites, making it easier for users to navigate and access resources.
 
-![Vuetify One Platform interface](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/one-quicklinks.png "Vuetify One Platform interface"){ height=300 }
+![Vuetify One Platform interface](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/one-quicklinks.png "Vuetify One Platform interface"){ height=300 }
 
 ### Vuetify Bin
 
 Bins now support **locking**. This new functionality prevents unwanted changes to shared code examples, ensuring that your collaborative work remains intact and consistent.
 
-![Vuetify Bin locking functionality](https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/lock-bin.png "Vuetify Bin locking functionality"){ height=250 }
+![Vuetify Bin locking functionality](https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/lock-bin.png "Vuetify Bin locking functionality"){ height=250 }
 
 This feature will soon propagate to the [Vuetify Playground](https://play.vuetifyjs.com/) as well as [Vuetify Studio](https://studio.vuetifyjs.com/).
 

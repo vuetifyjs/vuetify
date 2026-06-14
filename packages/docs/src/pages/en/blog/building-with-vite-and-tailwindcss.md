@@ -159,7 +159,7 @@ import 'vuetify/styles'
 // followed by createVuetify({ ... })
 ```
 
-![CSS Layers preview in browser DevTools](https://vuetifyjs.b-cdn.net/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
+![CSS Layers preview in browser DevTools](https://cdn.vuetifyjs.com/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
 
 ### Disable Vuetify utilities
 

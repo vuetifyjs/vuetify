@@ -165,7 +165,7 @@
 
   const tableItems = [
     {
-      avatar: 'https://vuetifyjs.b-cdn.net/docs/images/graphics/mice/10.png',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/10.png',
       name: 'G Pro X Superlight',
       amount: 149,
       vendor: 'Logitech',
@@ -173,7 +173,7 @@
       rating: '5.0',
     },
     {
-      avatar: 'https://vuetifyjs.b-cdn.net/docs/images/graphics/mice/7.png',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/7.png',
       name: 'DeathAdder V3',
       amount: 79,
       vendor: 'Razer',
@@ -181,7 +181,7 @@
       rating: '4.5',
     },
     {
-      avatar: 'https://vuetifyjs.b-cdn.net/docs/images/graphics/mice/3.png',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/3.png',
       name: 'Pulsefire Haste 2',
       amount: 299,
       vendor: 'HyperX',
@@ -189,7 +189,7 @@
       rating: '4.8',
     },
     {
-      avatar: 'https://vuetifyjs.b-cdn.net/docs/images/graphics/mice/5.png',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/5.png',
       name: 'Viper V2 Pro',
       amount: 29,
       vendor: 'Razer',
@@ -197,7 +197,7 @@
       rating: '4.2',
     },
     {
-      avatar: 'https://vuetifyjs.b-cdn.net/docs/images/graphics/mice/9.png',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/9.png',
       name: 'MX Master 3S',
       amount: 49,
       vendor: 'Logitech',
