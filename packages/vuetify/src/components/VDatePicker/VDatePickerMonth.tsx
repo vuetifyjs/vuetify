@@ -15,13 +15,17 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
+// Directives
+import vTouch from '@/directives/touch'
+
 // Utilities
 import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, genericComponent, omit, propsFactory, throttle, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { CalendarWeekdays } from '@/composables/calendar'
+import type { TouchValue } from '@/directives/touch'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -48,6 +52,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
   showWeek: Boolean,
   readonly: Boolean,
+  scrollable: Boolean,
   transition: {
     type: String,
     default: 'picker-transition',
@@ -77,6 +82,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
   slots: VDatePickerMonthSlots
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDatePickerMonth',
+
+  directives: { vTouch },
 
   props: makeVDatePickerMonthProps(),
 
@@ -275,6 +282,56 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
+    function navigateMonth (direction: 1 | -1) {
+      const firstCurrentDay = daysInMonth.value.find(day => !day.isAdjacent)?.date
+      if (!firstCurrentDay) return
+
+      const minDate = props.min != null ? adapter.date(props.min) : null
+      const maxDate = props.max != null ? adapter.date(props.max) : null
+
+      if (direction > 0) {
+        const nextMonthStart = adapter.addDays(adapter.endOfMonth(firstCurrentDay), 1)
+
+        if (maxDate && adapter.isAfter(nextMonthStart, maxDate)) return
+
+        emit('update:month', adapter.getMonth(nextMonthStart))
+        emit('update:year', adapter.getYear(nextMonthStart))
+      } else {
+        const prevMonthEnd = adapter.addDays(adapter.startOfMonth(firstCurrentDay), -1)
+
+        if (minDate && adapter.isAfter(minDate, prevMonthEnd)) return
+
+        emit('update:month', adapter.getMonth(prevMonthEnd))
+        emit('update:year', adapter.getYear(prevMonthEnd))
+      }
+    }
+
+    const onWheelThrottled = throttle((deltaY: number) => {
+      navigateMonth(deltaY > 0 ? 1 : -1)
+    }, 250, { leading: true, trailing: false })
+
+    function onWheel (event: WheelEvent) {
+      if (!props.scrollable || event.deltaY === 0) return
+
+      event.preventDefault()
+      onWheelThrottled(event.deltaY)
+    }
+
+    const touchOptions = computed<TouchValue | false>(() => {
+      if (!props.scrollable) return false
+
+      return {
+        options: { passive: false },
+        move: ({ originalEvent }) => {
+          originalEvent.preventDefault()
+        },
+        left: () => navigateMonth(1),
+        right: () => navigateMonth(-1),
+        up: () => navigateMonth(1),
+        down: () => navigateMonth(-1),
+      }
+    })
+
     function focusGrid () {
       containerEl.value?.focus()
     }
@@ -358,9 +415,14 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         <MaybeTransition name={ transition.value }>
           <div
             key={ daysInMonth.value[0].date?.toString() }
-            class="v-date-picker-month__days"
+            class={[
+              'v-date-picker-month__days',
+              { 'v-date-picker-month__days--scrollable': props.scrollable },
+            ]}
             role="grid"
             onMouseleave={ range.clearPreview }
+            onWheel={ onWheel }
+            v-touch={ touchOptions.value }
             { ...containerProps.value }
           >
             { !props.hideWeekdays && (
