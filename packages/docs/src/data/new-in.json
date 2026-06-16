@@ -341,6 +341,7 @@
   "VListItem": {
     "props": {
       "baseColor": "3.3.0",
+      "detached": "3.12.0",
       "prependGap": "3.11.0",
       "slim": "3.4.0"
     }
@@ -616,6 +617,7 @@
   },
   "VTreeviewItem": {
     "props": {
+      "detached": "3.12.0",
       "hideActions": "3.9.0",
       "indentLines": "3.9.0"
     },
