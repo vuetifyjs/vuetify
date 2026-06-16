@@ -108,9 +108,9 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
-  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => void
-  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => void
-  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => void
+  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => Promise<void>
   setTransitionOrigin: (e: PointerEvent | Element | null) => void
 
   readonly isDisabled: boolean
@@ -554,10 +554,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  function withPageTransition (callback: () => void, options: ThemeTransitionOptions) {
+  function withPageTransition (callback: () => void, options: ThemeTransitionOptions): Promise<void> {
     if (!IN_BROWSER || !document.startViewTransition || PREFERS_REDUCED_MOTION()) {
       callback()
-      return
+      return Promise.resolve()
     }
 
     const origin = options.origin ?? '50% 0%'
@@ -578,33 +578,36 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       _transitionOrigin = null
       style.remove()
     })
+
+    return transition.updateCallbackDone
   }
 
-  function change (themeName: string, transition?: boolean | ThemeTransitionOptions) {
+  function change (themeName: string, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
       consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
-      return
+      return Promise.resolve()
     }
 
     const apply = () => { name.value = themeName }
     const transitionOptions = resolveTransitionOptions(transition)
 
     if (transitionOptions) {
-      withPageTransition(apply, transitionOptions)
-    } else {
-      apply()
+      return withPageTransition(apply, transitionOptions)
     }
+
+    apply()
+    return Promise.resolve()
   }
 
-  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions) {
+  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     const currentIndex = themeArray.indexOf(name.value)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
 
-    change(themeArray[nextIndex], transition)
+    return change(themeArray[nextIndex], transition)
   }
 
-  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions) {
-    cycle(themeArray, transition)
+  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    return cycle(themeArray, transition)
   }
 
   const globalName = new Proxy(name, {
