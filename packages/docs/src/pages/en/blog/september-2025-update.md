@@ -355,7 +355,7 @@ Vuetify Link is a new service that simplifies the process of creating and managi
 * **Analytics**: Monitor link performance with detailed statistics
 * **Free & Pro Plans**: Basic link shortening is free, with advanced features available for Vuetify One subscribers
 
-![Vuetify Link Landing Screenshot](https://vuetifyjs.b-cdn.net/docs/images/blog/september-2025-update/vlink_banner.png "Vuetify Link Landing")
+![Vuetify Link Landing Screenshot](https://cdn.vuetifyjs.com/docs/images/blog/september-2025-update/vlink_banner.png "Vuetify Link Landing")
 
 We anticipate launching this new service **this month!** Stay tuned for the official release announcement with all the details.
 
