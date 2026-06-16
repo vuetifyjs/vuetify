@@ -16,7 +16,7 @@
   <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
-  <a href="https://community.vuetifyjs.com">
+  <a href="https://discord.gg/vuetify">
     <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
   </a>
   <br>
@@ -191,7 +191,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://community.vuetifyjs.com/">
+        <a href="https://discord.gg/vuetify">
           💭&nbsp;Vuetify&nbsp;Discord
         </a>
       </td>
@@ -258,7 +258,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
 
 ### 🙋‍♂️ Questions
 
-For help and support questions, please use our [Discord community](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
+For help and support questions, please use our [Discord community](https://discord.gg/vuetify). This issue list of this repo is **exclusively** for bug reports and feature requests.
 
 ### 🐛 Issues
 
@@ -278,9 +278,9 @@ Detailed changes for each release are documented in the [release notes](https://
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing/).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
-  enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://community.vuetifyjs.com/).
+  enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://discord.gg/vuetify).
 
-To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
+To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://discord.gg/vuetify).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
 
