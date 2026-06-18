@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: May 2026 Update
-  description: May was a full-throttle feature sprint for Vuetify 4.1. The core team pushed hard to clear the backlog and land everything queued for the first minor since 4.0.0 — seven components promoted out of labs, four new ones (VHeatmap, VHighlight, VMonthPicker, VDateRangePicker), a data-table accessibility pass, and a wave of fixes across 4 releases. Vuetify0 ran in parallel toward its own beta.
+  description: May shipped Vuetify 4.1 — seven labs promotions, four new components, and a wave of fixes across four releases, with Vuetify0 racing toward its own beta.
   keywords: Vuetify May 2026, Vuetify 4.1 Ascendant, labs promotion, VHeatmap, VHighlight, VMonthPicker, VDateRangePicker, Vuetify0 drag and drop, createSortable, createKanban
 ---
 
