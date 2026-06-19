@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: April 2026 Update
-  description: April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives. The framework shipped 3 patch releases, MCP hit v0.7.0 with playground and link tools, and ESLint config landed 4 releases including ESLint 10 support.
+  description: April shipped the Vuetify0 v1.0.0 public alpha — 46 headless components, 63 composables — plus 3 Vuetify patches, MCP v0.7.0, and ESLint 10 support.
   keywords: Vuetify April 2026, Vuetify0 v1.0.0 alpha, VTooltip cursor, VVideo controls, VNumberInput grouping, MCP playground tools, useTheme reactive
 ---
 

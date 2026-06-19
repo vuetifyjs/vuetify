@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: June 2025 Update
-  description: June delivered substantial progress on VHotkey component, VCommandPalette development, component stability improvements, and developer experience enhancements across the Vuetify ecosystem.
+  description: June delivered progress on the VHotkey component, VCommandPalette development, component stability, and developer-experience improvements across Vuetify.
   keywords: Vuetify June 2025, VHotkey, VCommandPalette, Vuetify 0, component stability, developer experience
 ---
 
