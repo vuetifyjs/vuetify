@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: September 2025 Update
-  description: September marks significant progress as we assemble the building blocks for Vuetify's next phase. From revolutionary design-to-development workflows with our new Figma UI Kit to foundational v0 composables, September has been about connecting the pieces that will define the future of Vue development.
+  description: September assembles the building blocks for Vuetify's next phase — from the new Figma UI Kit and design-to-development workflows to foundational v0 composables.
   keywords: Vuetify September 2025, Figma UI Kit, Vuetify0
 ---
 

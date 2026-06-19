@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: July 2025 Update
-  description: July delivered substantial progress on collaborative development, component enhancements, developer experience improvements, and ecosystem tools across the Vuetify ecosystem.
+  description: July delivered progress on collaborative development, component enhancements, developer-experience improvements, and ecosystem tools across Vuetify.
   keywords: Vuetify July 2025, Vuetify Migrations Webinar, Vuetify0, VCommandPalette, VEditor, Framework Czar, Vuetify Bin
 ---
 

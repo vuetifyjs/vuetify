@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Blog
-  description: The Vuetify blog is a place where we share the latest news, updates, and stories about Vuetify. Stay up to date with the latest developments in the Vuetify ecosystem.
+  description: The Vuetify blog shares the latest news, updates, and stories — stay up to date with developments across the Vuetify ecosystem.
   keywords: vuetify, blog, news, updates, stories, ecosystem
 ---
 
