@@ -92,6 +92,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
     }
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
+    calculateVisibleItems()
   }, updateTime)
 
   const unwatch = watch(hasInitialRender, v => {
