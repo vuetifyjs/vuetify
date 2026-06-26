@@ -31,6 +31,7 @@ export const makeVTreeviewItemProps = propsFactory({
   hasCustomPrepend: Boolean,
   indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
+  isOpen: Boolean,
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
@@ -73,6 +74,11 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
         vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
       }
     }
+
+    const toggleAriaLabel = computed(() => {
+      const title = props.title ?? ''
+      return props.isOpen ? `Collapse ${title}` : `Expand ${title}`
+    })
 
     function onClickAction (e: PointerEvent) {
       e.preventDefault()
@@ -132,6 +138,8 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               icon={ props.toggleIcon }
                               loading={ props.loading }
                               variant="text"
+                              aria-label={ toggleAriaLabel.value }
+                              aria-expanded={ props.isOpen }
                               onClick={ onClickAction }
                             >
                               {{
