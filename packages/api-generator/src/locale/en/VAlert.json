@@ -6,6 +6,7 @@
     "closable": "Adds a close icon that can hide the alert.",
     "closeIcon": "Change the default icon used for **closable** alerts.",
     "closeLabel": "Text used for *aria-label* on **closable** alerts. Can also be customized globally in [Internationalization](/customization/internationalization).",
+    "duration": "Time (in milliseconds) to wait until the alert is automatically dismissed. A value of `0` keeps the alert visible.",
     "height": "Sets the height for the component.",
     "maxHeight": "Sets the maximum height for the component.",
     "maxWidth": "Sets the maximum width for the component.",
