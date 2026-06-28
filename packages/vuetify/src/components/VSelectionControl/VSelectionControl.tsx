@@ -323,7 +323,7 @@ export const VSelectionControl = genericComponent<new <T>(
           { (label || slots.text || props.text) && (
             <div class="v-selection-control__content">
               { label && (
-                <VLabel for={ id.value } onClick={ onClickLabel }>
+                <VLabel key="label" for={ id.value } onClick={ onClickLabel }>
                   { label }
                 </VLabel>
               )}
