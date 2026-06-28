@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Αλλαγή μορφής χρώματος',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

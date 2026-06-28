@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Spremeni format barve',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

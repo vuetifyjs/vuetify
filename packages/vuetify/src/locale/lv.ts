@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Mainīt krāsas formātu',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

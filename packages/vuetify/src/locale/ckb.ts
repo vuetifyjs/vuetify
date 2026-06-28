@@ -202,4 +202,8 @@ export default {
       changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

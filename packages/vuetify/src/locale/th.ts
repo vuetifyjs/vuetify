@@ -202,4 +202,8 @@ export default {
       changeFormat: 'เปลี่ยนรูปแบบสี',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

@@ -11,9 +11,9 @@ import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
+import { useLocale } from '@/composables'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { useLocale } from '@/composables'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'

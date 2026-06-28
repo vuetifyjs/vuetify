@@ -202,4 +202,8 @@ export default {
       changeFormat: 'تغيير تنسيق اللون',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

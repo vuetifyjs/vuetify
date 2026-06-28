@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Промяна на цветовия формат',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Thay đổi định dạng màu',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

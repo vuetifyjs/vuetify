@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Ubah format warna',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

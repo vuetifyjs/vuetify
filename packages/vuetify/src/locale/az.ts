@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Rəng formatını dəyişdirin',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

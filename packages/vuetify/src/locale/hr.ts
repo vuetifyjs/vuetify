@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Promijeni format boje',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }

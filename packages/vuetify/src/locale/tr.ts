@@ -202,4 +202,8 @@ export default {
       changeFormat: 'Renk biçimini değiştir',
     },
   },
+  treeview: {
+    expand: 'Expand {0}',
+    collapse: 'Collapse {0}',
+  },
 }
