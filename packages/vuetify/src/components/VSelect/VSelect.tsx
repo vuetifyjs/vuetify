@@ -150,8 +150,8 @@ export const VSelect = genericComponent<new <
     'update:modelValue': (value: any) => true,
     'update:menu': (ue: boolean) => true,
     'update:search': (value: string) => true,
-    'blur': (e: FocusEvent) => true,
-    'focus': (e: FocusEvent) => true,
+    blur: (e: FocusEvent) => true,
+    focus: (e: FocusEvent) => true,
   },
 
   setup (props, { emit, slots }) {
