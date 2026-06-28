@@ -103,6 +103,27 @@
       height: $skeleton-loader-chip-height
       max-width: $skeleton-loader-chip-width
 
+    &__chip-group
+      flex-wrap: wrap
+
+      .v-skeleton-loader__chip
+        flex: 0 0 auto
+
+    &__timeline-item,
+    &__timeline-item-two,
+    &__timeline-item-three
+      flex-wrap: nowrap
+      align-items: flex-start
+
+      > .v-skeleton-loader__avatar
+        flex: 0 0 auto
+        align-self: center
+
+      > .v-skeleton-loader__heading,
+      > .v-skeleton-loader__sentences,
+      > .v-skeleton-loader__paragraph
+        flex: 1 1 auto
+
       + .v-skeleton-loader__bone
         flex: 1 1 auto
         margin-inline-start: 0
