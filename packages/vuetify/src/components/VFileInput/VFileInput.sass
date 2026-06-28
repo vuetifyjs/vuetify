@@ -36,5 +36,16 @@
       width: 100%
       z-index: 0
 
-    &--dragging input[type="file"]
-      z-index: 1
+    &--dragging
+      input[type="file"]
+        z-index: 1
+
+      .v-field
+        border-color: $file-input-dragging-border-color !important
+
+        &::after
+          opacity: $file-input-dragging-opacity
+
+        &--variant-outlined .v-field__outline
+          --v-field-border-opacity: 1
+          color: $file-input-dragging-border-color
