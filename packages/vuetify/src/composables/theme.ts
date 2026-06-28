@@ -200,7 +200,7 @@ function genDefaults () {
           secondary: '#54B6B2',
           'secondary-darken-1': '#48A9A6',
           error: '#CF6679',
-          info: '#2196F3',
+          info: '#29B6F6',
           success: '#4CAF50',
           warning: '#FB8C00',
         },
