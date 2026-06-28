@@ -170,6 +170,12 @@ export const VAutocomplete = genericComponent<new <
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
+    watch(model, value => {
+      if (!isFocused.value && !props.multiple && !hasSelectionSlot.value) {
+        search.value = value.at(-1)?.props.title ?? ''
+      }
+    }, { immediate: true })
+
     const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
 
     const highlightFirst = computed(() => {
