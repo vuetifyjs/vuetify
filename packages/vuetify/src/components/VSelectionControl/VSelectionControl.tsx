@@ -53,11 +53,13 @@ export type VSelectionControlSlots = {
   }
   label: { label: string | undefined, props: Record<string, unknown> }
   input: SelectionControlSlot
+  text: { text: string | undefined }
 }
 
 export const makeVSelectionControlProps = propsFactory({
   indeterminate: Boolean,
   label: String,
+  text: String,
   baseColor: String,
   trueValue: null,
   falseValue: null,
@@ -318,10 +320,20 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } onClick={ onClickLabel }>
-              { label }
-            </VLabel>
+          { (label || slots.text || props.text) && (
+            <div class="v-selection-control__content">
+              { label && (
+                <VLabel for={ id.value } onClick={ onClickLabel }>
+                  { label }
+                </VLabel>
+              )}
+
+              { (slots.text || props.text) && (
+                <div class="v-selection-control__text">
+                  { slots.text?.({ text: props.text }) ?? props.text }
+                </div>
+              )}
+            </div>
           )}
         </div>
       )
