@@ -62,6 +62,7 @@ export const makeVTextareaProps = propsFactory({
 
 type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
   counter: VCounterSlot
+  placeholder: never
 }
 
 export const VTextarea = genericComponent<VTextareaSlots>()({
@@ -334,7 +335,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                        placeholder={ props.placeholder }
+                        placeholder={ slots.placeholder ? undefined : props.placeholder }
                         rows={ props.rows }
                         name={ autocomplete.fieldName.value }
                         autocomplete={ autocomplete.fieldAutocomplete.value }
@@ -344,6 +345,12 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         { ...slotProps }
                         { ...inputAttrs }
                       />
+
+                      { slots.placeholder && !model.value && (!isFocused.value || props.persistentPlaceholder) && (
+                        <div class="v-textarea__placeholder" aria-hidden="true">
+                          { slots.placeholder() }
+                        </div>
+                      )}
 
                       { props.autoGrow && (
                         <textarea
