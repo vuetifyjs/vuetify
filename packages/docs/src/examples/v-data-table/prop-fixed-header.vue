@@ -1,10 +1,10 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
     height="300"
-    fixed-header
+    :items="desserts"
     items-per-page="20"
+    fixed-header
   ></v-data-table>
 </template>
 
