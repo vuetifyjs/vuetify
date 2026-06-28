@@ -13,8 +13,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { convertToUnit, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -40,6 +40,7 @@ export const makeVCarouselProps = propsFactory({
     default: 6000,
     validator: (value: string | number) => Number(value) > 0,
   },
+  mousewheel: Boolean,
   progress: [Boolean, String],
   verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
 
@@ -104,6 +105,41 @@ export const VCarousel = genericComponent<new <T>(
       window.clearTimeout(slideTimeout)
       window.requestAnimationFrame(startTimeout)
     }
+
+    let lastWheelAt = 0
+    function onWheel (e: WheelEvent) {
+      e.preventDefault()
+      const now = Date.now()
+      if (now - lastWheelAt < 300 || !windowRef.value) return
+      lastWheelAt = now
+      if (e.deltaY > 0 || e.deltaX > 0) {
+        windowRef.value.group.next()
+      } else {
+        windowRef.value.group.prev()
+      }
+    }
+
+    watch(() => props.mousewheel, val => {
+      if (!IN_BROWSER || !windowRef.value) return
+      const el: HTMLElement = windowRef.value.$el
+      if (val) {
+        el.addEventListener('wheel', onWheel, { passive: false })
+      } else {
+        el.removeEventListener('wheel', onWheel)
+      }
+    })
+
+    onMounted(() => {
+      if (props.mousewheel && windowRef.value) {
+        windowRef.value.$el.addEventListener('wheel', onWheel, { passive: false })
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (windowRef.value) {
+        windowRef.value.$el.removeEventListener('wheel', onWheel)
+      }
+    })
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
       if (

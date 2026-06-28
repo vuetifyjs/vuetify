@@ -87,6 +87,12 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 
 <ExamplesExample file="v-carousel/prop-progress" />
 
+#### Mousewheel
+
+Enable mouse-wheel (and trackpad scroll) navigation with the **mousewheel** prop. Scrolling down or right advances to the next slide; scrolling up or left goes to the previous one. A 300ms cooldown prevents accidental multi-slide jumps per scroll gesture.
+
+<ExamplesExample file="v-carousel/prop-mousewheel" />
+
 #### Model
 
 You can control carousel with **v-model**.
