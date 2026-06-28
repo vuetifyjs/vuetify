@@ -158,7 +158,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-secondary-darken-1-overlay-multiplier: 2;
     --v-theme-error: 207,102,121;
     --v-theme-error-overlay-multiplier: 2;
-    --v-theme-info: 33,150,243;
+    --v-theme-info: 41,182,246;
     --v-theme-info-overlay-multiplier: 2;
     --v-theme-success: 76,175,80;
     --v-theme-success-overlay-multiplier: 2;
@@ -173,7 +173,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-secondary: 255,255,255;
     --v-theme-on-secondary-darken-1: 255,255,255;
     --v-theme-on-error: 255,255,255;
-    --v-theme-on-info: 255,255,255;
+    --v-theme-on-info: 0,0,0;
     --v-theme-on-success: 255,255,255;
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
@@ -545,7 +545,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-secondary-darken-1-overlay-multiplier: 2;
     --v-theme-error: 207,102,121;
     --v-theme-error-overlay-multiplier: 2;
-    --v-theme-info: 33,150,243;
+    --v-theme-info: 41,182,246;
     --v-theme-info-overlay-multiplier: 2;
     --v-theme-success: 76,175,80;
     --v-theme-success-overlay-multiplier: 2;
@@ -560,7 +560,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-secondary: 255,255,255;
     --v-theme-on-secondary-darken-1: 255,255,255;
     --v-theme-on-error: 255,255,255;
-    --v-theme-on-info: 255,255,255;
+    --v-theme-on-info: 0,0,0;
     --v-theme-on-success: 255,255,255;
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
@@ -937,7 +937,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-secondary-darken-1-overlay-multiplier: 2;
     --v-theme-error: 207,102,121;
     --v-theme-error-overlay-multiplier: 2;
-    --v-theme-info: 33,150,243;
+    --v-theme-info: 41,182,246;
     --v-theme-info-overlay-multiplier: 2;
     --v-theme-success: 76,175,80;
     --v-theme-success-overlay-multiplier: 2;
@@ -952,7 +952,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-secondary: 255,255,255;
     --v-theme-on-secondary-darken-1: 255,255,255;
     --v-theme-on-error: 255,255,255;
-    --v-theme-on-info: 255,255,255;
+    --v-theme-on-info: 0,0,0;
     --v-theme-on-success: 255,255,255;
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
