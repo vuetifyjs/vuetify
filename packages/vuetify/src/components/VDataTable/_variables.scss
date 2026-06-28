@@ -8,6 +8,8 @@ $data-table-header-sort-icon-hover-opacity: .5 !default;
 $data-table-header-sort-icon-margin-inline: 0px !default;
 $data-table-header-select-all-margin-inline: 16px -4px !default;
 
+$data-table-selected-row-color: rgba(var(--v-theme-on-surface), var(--v-selected-opacity)) !default;
+
 $data-table-loading-opacity: var(--v-disabled-opacity) !default;
 
 $data-table-footer-info-min-width: 116px !default;
