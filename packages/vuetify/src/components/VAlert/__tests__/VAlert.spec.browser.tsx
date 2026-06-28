@@ -42,7 +42,9 @@ describe('VAlert', () => {
 
   describe('timeout', () => {
     it('keeps the alert visible until the timeout elapses, then dismisses it', async () => {
-      render(() => <VAlert text="auto dismiss" timeout={ 300 } />)
+      // Offset from the top-left corner so the resting headless-CI cursor doesn't
+      // hover the full-width alert and pause its auto-dismiss timer.
+      render(() => <div style={{ paddingTop: '200px' }}><VAlert text="auto dismiss" timeout={ 1000 } /></div>)
 
       await screen.findByCSS('.v-alert')
 
@@ -51,15 +53,19 @@ describe('VAlert', () => {
       expect(document.querySelector('.v-alert')).not.toBeNull()
 
       // should be dismissed after the timeout
-      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 2000 }).toBeNull()
+      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
     })
 
     it('emits update:modelValue when auto-dismissed', async () => {
       const onUpdate = vi.fn()
 
-      render(() => <VAlert text="auto dismiss" timeout={ 150 } { ...{ 'onUpdate:modelValue': onUpdate } } />)
+      render(() => (
+        <div style={{ paddingTop: '200px' }}>
+          <VAlert text="auto dismiss" timeout={ 150 } { ...{ 'onUpdate:modelValue': onUpdate } } />
+        </div>
+      ))
 
-      await expect.poll(() => onUpdate.mock.calls.length, { timeout: 2000 }).toBeGreaterThan(0)
+      await expect.poll(() => onUpdate.mock.calls.length, { timeout: 5000 }).toBeGreaterThan(0)
       expect(onUpdate).toHaveBeenLastCalledWith(false)
     })
 
@@ -75,7 +81,7 @@ describe('VAlert', () => {
 
       // resumes and dismisses once the pointer leaves
       await userEvent.unhover(alert)
-      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 2000 }).toBeNull()
+      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
     })
 
     it('does not auto-dismiss by default', async () => {

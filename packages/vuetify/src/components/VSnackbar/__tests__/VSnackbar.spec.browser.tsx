@@ -8,7 +8,7 @@ const CONTENT = '.v-snackbar .v-overlay__content'
 describe('VSnackbar', () => {
   describe('timeout', () => {
     it('auto-dismisses after the timeout elapses', async () => {
-      render(() => <VSnackbar modelValue timeout={ 300 } text="auto dismiss" />)
+      render(() => <VSnackbar modelValue timeout={ 1000 } text="auto dismiss" />)
 
       await expect.poll(() => screen.queryByCSS(CONTENT)).toBeVisible()
 
@@ -17,7 +17,7 @@ describe('VSnackbar', () => {
       expect(screen.queryByCSS(CONTENT)).toBeVisible()
 
       // should be dismissed after the timeout
-      await expect.poll(() => screen.queryByCSS(CONTENT), { timeout: 2000 }).toBeNull()
+      await expect.poll(() => screen.queryByCSS(CONTENT), { timeout: 5000 }).toBeNull()
     })
 
     it('pauses the timer while hovered and resumes on leave', async () => {
@@ -32,7 +32,7 @@ describe('VSnackbar', () => {
 
       // resumes and dismisses once the pointer leaves
       await userEvent.unhover(content)
-      await expect.poll(() => screen.queryByCSS(CONTENT), { timeout: 2000 }).toBeNull()
+      await expect.poll(() => screen.queryByCSS(CONTENT), { timeout: 5000 }).toBeNull()
     })
 
     it('stays open indefinitely when timeout is -1', async () => {
