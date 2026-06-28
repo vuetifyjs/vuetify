@@ -150,9 +150,11 @@ export const VSelect = genericComponent<new <
     'update:modelValue': (value: any) => true,
     'update:menu': (ue: boolean) => true,
     'update:search': (value: string) => true,
+    'blur': (e: FocusEvent) => true,
+    'focus': (e: FocusEvent) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -417,8 +419,14 @@ export const VSelect = genericComponent<new <
       ) {
         if (repairOrphanedFocus(e)) return
         isFocused.value = false
+        emit('blur', e)
       }
     }
+
+    watch(isFocused, (val, old) => {
+      if (val && !old) emit('focus', new FocusEvent('focus'))
+      else if (!val && old && !menu.value) emit('blur', new FocusEvent('blur'))
+    })
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
       else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
