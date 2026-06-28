@@ -106,7 +106,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
     const vListRef = ref<VList>()
 
-    const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
     const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, flatItems, search)
@@ -121,6 +120,28 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
           ...getChildren(itemVal),
         ].map(toRaw)
       }))
+    })
+
+    const searchOpened = computed(() => {
+      if (!search.value) return null
+      const getPath = vListRef.value?.getPath
+      if (!getPath) return null
+      const ids = new Set<unknown>()
+      for (const item of filteredItems.value) {
+        const itemVal = props.returnObject ? item.raw : item.props.value
+        for (const id of getPath(itemVal)) {
+          ids.add(toRaw(id))
+        }
+      }
+      return ids.size > 0 ? [...ids] : null
+    })
+
+    const opened = computed(() => {
+      if (props.openAll) return openAll(items.value)
+      if (searchOpened.value) {
+        return [...new Set([...(props.opened ?? []), ...searchOpened.value])]
+      }
+      return props.opened
     })
 
     function getChildren (id: unknown) {
