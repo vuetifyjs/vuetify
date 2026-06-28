@@ -91,7 +91,7 @@ export const VDataTableRow = genericComponent<new <T>(
           'v-data-table__tr',
           {
             'v-data-table__tr--clickable': !!(props.onClick || props.onContextmenu || props.onDblclick),
-          'v-data-table__tr--selected': props.item && isSelected([props.item]),
+            'v-data-table__tr--selected': props.item && isSelected([props.item]),
           },
           displayClasses.value,
         ]}
