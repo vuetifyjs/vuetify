@@ -1,8 +1,8 @@
 <template>
   <v-data-table
     :headers="headers"
-    height="300"
     :items="desserts"
+    height="300"
     items-per-page="20"
     fixed-header
   ></v-data-table>
