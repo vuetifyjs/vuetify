@@ -22,10 +22,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useTimeout } from '@/composables/timeout'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { onMounted, onScopeDispose, toRef, watch } from 'vue'
+import { onMounted, toRef, watch } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -57,7 +58,7 @@ export const makeVAlertProps = propsFactory({
     type: String,
     default: '$vuetify.close',
   },
-  duration: {
+  timeout: {
     type: [Number, String],
     default: -1,
   },
@@ -112,26 +113,16 @@ export const VAlert = genericComponent<VAlertSlots>()({
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
-    let dismissTimer = -1
-    function clearDismissTimer () {
-      if (dismissTimer !== -1) {
-        window.clearTimeout(dismissTimer)
-        dismissTimer = -1
-      }
-    }
+    const { start: startTimeout, clear: clearTimeout } = useTimeout()
     function scheduleDismiss () {
-      clearDismissTimer()
-      const ms = Number(props.duration)
+      clearTimeout()
+      const ms = Number(props.timeout)
       if (ms > 0 && isActive.value) {
-        dismissTimer = window.setTimeout(() => {
-          isActive.value = false
-          dismissTimer = -1
-        }, ms)
+        startTimeout(ms, () => { isActive.value = false })
       }
     }
     onMounted(scheduleDismiss)
-    watch(() => [props.duration, isActive.value], scheduleDismiss)
-    onScopeDispose(clearDismissTimer)
+    watch(() => [props.timeout, isActive.value], scheduleDismiss)
 
     const icon = toRef(() => {
       if (props.icon === false) return undefined

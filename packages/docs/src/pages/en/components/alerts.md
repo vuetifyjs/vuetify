@@ -135,7 +135,7 @@ The **closable** prop adds a [v-icon](/components/icons) on the far right, after
 
 The **duration** prop causes the alert to automatically dismiss itself after the specified number of milliseconds. Set to `-1` (the default) to disable auto-dismiss. Combine with **closable** to give users both auto-dismiss and manual control.
 
-<ExamplesExample file="v-alert/prop-duration" />
+<ExamplesExample file="v-alert/prop-timeout" />
 
 The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
 

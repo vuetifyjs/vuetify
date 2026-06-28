@@ -22,6 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useTimeout } from '@/composables/timeout'
 import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
@@ -168,10 +169,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       if (isActive.value) startTimeout()
     })
 
-    let activeTimeout = -1
+    const { start: _startTimeout, clear: _clearTimeout } = useTimeout()
     function startTimeout () {
       countdown.clear()
-      window.clearTimeout(activeTimeout)
+      _clearTimeout()
       const timeout = Number(props.timeout)
 
       if (!isActive.value || timeout === -1) return
@@ -182,14 +183,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
       nextTick(() => countdown.start(element))
 
-      activeTimeout = window.setTimeout(() => {
-        isActive.value = false
-      }, timeout)
+      _startTimeout(timeout, () => { isActive.value = false })
     }
 
     function clearTimeout () {
       countdown.reset()
-      window.clearTimeout(activeTimeout)
+      _clearTimeout()
     }
 
     function onPointerenter () {

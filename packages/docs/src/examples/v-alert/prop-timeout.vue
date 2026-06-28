@@ -10,7 +10,7 @@
     <v-alert
       v-else
       v-model="visible"
-      :duration="3000"
+      :timeout="3000"
       text="This alert will automatically dismiss after 3 seconds."
       type="info"
       closable
