@@ -217,6 +217,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalListIte
                 ...activatorProps,
                 value: treeItemProps?.value,
                 ariaExpanded: isOpen,
+                expanded: isOpen,
                 onToggleExpand: [() => checkChildren(item), activatorProps.onClick] as any,
                 onClick: props.disabled || treeItemProps.disabled
                   ? undefined

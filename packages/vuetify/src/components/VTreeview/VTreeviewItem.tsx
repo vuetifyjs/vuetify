@@ -13,6 +13,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables'
 
 // Utilities
 import { computed, inject, ref, toRaw } from 'vue'
@@ -31,6 +32,10 @@ export const makeVTreeviewItemProps = propsFactory({
   hasCustomPrepend: Boolean,
   indentLines: Array as PropType<IndentLineType[]>,
   toggleIcon: IconValue,
+  expanded: {
+    type: Boolean,
+    default: undefined,
+  },
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
@@ -49,6 +54,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   },
 
   setup (props, { slots, emit }) {
+    const { t } = useLocale()
     const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
 
     const vListItemRef = ref<VListItem>()
@@ -132,6 +138,11 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               icon={ props.toggleIcon }
                               loading={ props.loading }
                               variant="text"
+                              aria-label={
+                                props.expanded
+                                  ? t('$vuetify.treeview.collapse', String(props.title))
+                                  : t('$vuetify.treeview.expand', String(props.title))
+                              }
                               onClick={ onClickAction }
                             >
                               {{
