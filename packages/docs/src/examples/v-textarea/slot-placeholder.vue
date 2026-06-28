@@ -1,6 +1,6 @@
 <template>
   <v-textarea v-model="message" label="Message">
-    <template #placeholder>
+    <template v-slot:placeholder>
       <v-fade-transition mode="out-in">
         <span :key="hint">{{ hint }}</span>
       </v-fade-transition>
