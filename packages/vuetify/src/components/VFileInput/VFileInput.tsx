@@ -56,6 +56,8 @@ export const makeVFileInputProps = propsFactory({
   },
   hideInput: Boolean,
   multiple: Boolean,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
   showSize: {
     type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
     default: false,
@@ -131,7 +133,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
-    const isActive = toRef(() => isFocused.value || props.active)
+    const isActive = toRef(() => isFocused.value || props.active || props.persistentPlaceholder)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
@@ -350,6 +352,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                             />
                           ))
                           : fileNames.value.join(', ')
+                        )}
+
+                        { !model.value?.length && props.placeholder && !props.hideInput && (
+                          <span class="v-file-input__placeholder">
+                            { props.placeholder }
+                          </span>
                         )}
                       </div>
                     </>

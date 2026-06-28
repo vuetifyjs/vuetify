@@ -70,6 +70,12 @@ The `v-file-input` can contain multiple files at the same time when using the **
 
 <ExamplesExample file="v-file-input/prop-multiple" />
 
+#### Placeholder
+
+Use the **placeholder** prop to display hint text when no file is selected. Combine with **persistent-placeholder** to keep the label floating so the placeholder remains visible.
+
+<ExamplesExample file="v-file-input/prop-placeholder" />
+
 #### Prepend icon
 
 The `v-file-input` has a default **prepend-icon** that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/features/icon-fonts).
