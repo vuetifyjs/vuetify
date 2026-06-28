@@ -40,36 +40,36 @@ describe('VAlert', () => {
     })
   })
 
-  describe('duration', () => {
-    it('keeps the alert visible until the duration elapses, then dismisses it', async () => {
-      render(() => <VAlert text="auto dismiss" duration={ 300 } />)
+  describe('timeout', () => {
+    it('keeps the alert visible until the timeout elapses, then dismisses it', async () => {
+      render(() => <VAlert text="auto dismiss" timeout={ 300 } />)
 
       await screen.findByCSS('.v-alert')
 
-      // should not be dismissed before the duration elapses
+      // should not be dismissed before the timeout elapses
       await wait(100)
       expect(document.querySelector('.v-alert')).not.toBeNull()
 
-      // should be dismissed after the duration
+      // should be dismissed after the timeout
       await expect.poll(() => document.querySelector('.v-alert'), { timeout: 2000 }).toBeNull()
     })
 
     it('emits update:modelValue when auto-dismissed', async () => {
       const onUpdate = vi.fn()
 
-      render(() => <VAlert text="auto dismiss" duration={ 150 } { ...{ 'onUpdate:modelValue': onUpdate } } />)
+      render(() => <VAlert text="auto dismiss" timeout={ 150 } { ...{ 'onUpdate:modelValue': onUpdate } } />)
 
       await expect.poll(() => onUpdate.mock.calls.length, { timeout: 2000 }).toBeGreaterThan(0)
       expect(onUpdate).toHaveBeenLastCalledWith(false)
     })
 
     it('pauses the timer while hovered and resumes on leave', async () => {
-      render(() => <VAlert text="hover" duration={ 500 } />)
+      render(() => <VAlert text="hover" timeout={ 500 } />)
 
       const alert = await screen.findByCSS('.v-alert')
 
       await userEvent.hover(alert)
-      // stays visible past its duration while hovered
+      // stays visible past its timeout while hovered
       await wait(700)
       expect(document.querySelector('.v-alert')).not.toBeNull()
 

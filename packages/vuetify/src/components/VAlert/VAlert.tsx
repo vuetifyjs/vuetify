@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { useAutoDismiss } from '@/composables/autoDismiss'
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -25,7 +26,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { onMounted, onScopeDispose, shallowRef, toRef, watch } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -57,9 +58,9 @@ export const makeVAlertProps = propsFactory({
     type: String,
     default: '$vuetify.close',
   },
-  duration: {
+  timeout: {
     type: [Number, String],
-    default: 0,
+    default: -1,
   },
   icon: {
     type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
@@ -111,57 +112,13 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const isHovering = shallowRef(false)
-    const isFocused = shallowRef(false)
 
-    let activeTimeout = -1
-    function startTimeout () {
-      window.clearTimeout(activeTimeout)
-      const duration = Number(props.duration)
-
-      if (!isActive.value || !duration || duration < 0 || isHovering.value || isFocused.value) return
-
-      activeTimeout = window.setTimeout(() => {
-        isActive.value = false
-      }, duration)
-    }
-
-    function clearTimeout () {
-      window.clearTimeout(activeTimeout)
-    }
-
-    function onPointerenter () {
-      isHovering.value = true
-      clearTimeout()
-    }
-
-    function onPointerleave () {
-      isHovering.value = false
-      startTimeout()
-    }
-
-    function onFocusin () {
-      isFocused.value = true
-      clearTimeout()
-    }
-
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget && (e.currentTarget as HTMLElement | null)?.contains(e.relatedTarget as Node)) return
-
-      isFocused.value = false
-      startTimeout()
-    }
-
-    watch(isActive, startTimeout)
-    watch(() => props.duration, startTimeout)
-
-    onMounted(() => {
-      if (isActive.value) startTimeout()
-    })
-
-    onScopeDispose(() => {
-      window.clearTimeout(activeTimeout)
-    })
+    const {
+      onPointerenter,
+      onPointerleave,
+      onFocusin,
+      onFocusout,
+    } = useAutoDismiss(isActive, () => Number(props.timeout))
 
     const icon = toRef(() => {
       if (props.icon === false) return undefined
