@@ -52,6 +52,7 @@ export const makeStepperItemProps = propsFactory({
     default: '$complete',
   },
   editable: Boolean,
+  nonLinear: Boolean,
   editIcon: {
     type: IconValue,
     default: '$edit',
@@ -92,7 +93,7 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
     const group = useGroupItem(props, VStepperSymbol, true)
     const step = computed(() => group?.value.value ?? props.value)
     const isValid = computed(() => props.rules.every(handler => handler() === true))
-    const isClickable = computed(() => !props.disabled && props.editable)
+    const isClickable = computed(() => !props.disabled && (props.editable || props.nonLinear))
     const canEdit = computed(() => !props.disabled && props.editable)
     const hasError = computed(() => props.error || !isValid.value)
     const hasCompleted = computed(() => props.complete || (props.rules.length > 0 && isValid.value))
@@ -141,10 +142,10 @@ export const VStepperItem = genericComponent<VStepperItemSlots>()({
             },
             group?.selectedClass.value,
           ]}
-          disabled={ !props.editable }
+          disabled={ !isClickable.value }
           type="button"
           v-ripple={[
-            props.editable && props.ripple,
+            isClickable.value && props.ripple,
             null,
             null,
           ]}

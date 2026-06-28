@@ -105,7 +105,7 @@ export const VStepper = genericComponent<new <TModel>(
   setup (props, { slots }) {
     const { items: _items, next, prev, selected } = useGroup(props, VStepperSymbol)
     const { displayClasses, mobile } = useDisplay(props)
-    const { completeIcon, editIcon, errorIcon, color, editable, prevText, nextText } = toRefs(props)
+    const { completeIcon, editIcon, errorIcon, color, editable, nonLinear, prevText, nextText } = toRefs(props)
 
     const items = computed(() => props.items.map((item, index) => {
       const title = getPropertyFromItem(item, props.itemTitle, item)
@@ -141,6 +141,7 @@ export const VStepper = genericComponent<new <TModel>(
     provideDefaults({
       VStepperItem: {
         editable,
+        nonLinear,
         errorIcon,
         completeIcon,
         editIcon,
