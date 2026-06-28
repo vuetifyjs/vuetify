@@ -49,11 +49,11 @@ $card-title-hyphens: auto !default;
 $card-title-letter-spacing: tools.map-deep-get(settings.$typography, 'title-large', 'letter-spacing') !default;
 $card-title-line-height: tools.map-deep-get(settings.$typography, 'title-large', 'line-height') !default;
 $card-title-overflow-wrap: normal !default;
-$card-title-overflow: hidden !default;
+$card-title-overflow: visible !default;
 $card-title-padding: .5rem 1rem !default;
-$card-title-text-overflow: ellipsis !default;
+$card-title-text-overflow: clip !default;
 $card-title-text-transform: none !default;
-$card-title-white-space: nowrap !default;
+$card-title-white-space: normal !default;
 $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
 
