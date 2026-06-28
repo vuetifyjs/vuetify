@@ -11,10 +11,10 @@
       v-else
       v-model="visible"
       type="info"
-      closable
       :duration="3000"
       text="This alert will automatically dismiss after 3 seconds."
-    />
+      closable
+    ></v-alert>
   </div>
 </template>
 
