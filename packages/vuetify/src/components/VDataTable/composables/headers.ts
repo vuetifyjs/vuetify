@@ -312,6 +312,10 @@ export function createHeaders (
 
     const flatHeaders = parsed.headers.flat(1)
 
+    sortFunctions.value = {}
+    sortRawFunctions.value = {}
+    filterFunctions.value = {}
+
     for (const header of flatHeaders) {
       if (!header.key) continue
 
