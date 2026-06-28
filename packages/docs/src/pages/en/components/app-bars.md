@@ -36,7 +36,7 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 `v-app-bar` relies on Vuetify's layout injection system and **must** be a direct or indirect child of `v-app`. Without `v-app` as an ancestor you will see a runtime error:
 
-```
+```text
 injection "Symbol(vuetify:layout)" not found
 ```
 
