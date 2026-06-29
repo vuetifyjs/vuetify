@@ -108,9 +108,13 @@ export const VDateInput = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t, current: currentLocale } = useLocale()
+    const { t } = useLocale()
     const adapter = useDate()
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
+    // Derive the input's display/parse format from the date adapter's locale —
+    // consistent with every other date component — rather than the i18n locale,
+    // which ignores a `date` adapter configured with a different locale.
+    const adapterLocale = computed(() => adapter.locale)
+    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
