@@ -228,6 +228,10 @@ export const VDateInput = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
+      if ((e.relatedTarget as HTMLElement | null)?.closest('[data-v-date]')) {
+        return // first click on a day
+      }
+
       if (props.updateOn.includes('blur') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
