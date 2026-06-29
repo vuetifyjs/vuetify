@@ -151,6 +151,16 @@ The **height** prop is required for **fixed-header** to work. Without it, the ta
 
 <ExamplesExample file="v-data-table/prop-fixed-header" />
 
+#### Fixed footer
+
+Use the **fixed-footer** prop together with the **height** prop to keep the pagination footer visible while scrolling through tall tables. Like **fixed-header**, the **height** prop is required for **fixed-footer** to work.
+
+::: info
+The **height** prop is required for **fixed-footer** to work. Without it, the table expands to show all rows and there is nothing to scroll.
+:::
+
+<ExamplesExample file="v-data-table/prop-fixed-footer" />
+
 #### Density
 
 Using the **density** prop you are able to give your data tables an alternate style.
