@@ -38,6 +38,7 @@ export const VOtpField = genericComponent()({
 
       return (
         <VField
+          data-otp-index={ props.index }
           focused={ slot.value.isActive || isHighlighted.value }
           class={{ 'v-otp-input__field--highlighted': isHighlighted.value }}
           onMousedown={ (e: MouseEvent) => e.preventDefault() }

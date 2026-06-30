@@ -273,6 +273,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       applySelection()
     }
 
+    function slotIndexAtPoint (x: number, y: number): number | null {
+      const slot = document.elementsFromPoint(x, y).find(el => el.hasAttribute('data-otp-index'))
+      const index = slot ? Number(slot.getAttribute('data-otp-index')) : NaN
+      return Number.isNaN(index) ? null : index
+    }
+
+    function onClick (e: MouseEvent) {
+      const index = slotIndexAtPoint(e.clientX, e.clientY)
+      if (index != null) focusAt(index)
+    }
+
     // selectionchange is not in InputHTMLAttributes types
     watch(inputRef, (input, _, onCleanup) => {
       if (!input) return
@@ -376,6 +387,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               aria-label={ t(props.label) }
               value={ model.value }
               { ...inputAttrs }
+              onClick={ onClick }
               onInput={ onInput }
               onKeydown={ onKeydown }
               onBeforeinput={ onBeforeinput }
