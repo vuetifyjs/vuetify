@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: January 2026 Update
-  description: January delivered Vuetify 4.0.0-beta.0, MD3 typography and elevation levels, VCommandPalette labs release, grid system overhaul, and Vuetify0 hitting v0.1.0 with 21 merged PRs including Tabs, Radio, and Checkbox components.
+  description: January shipped Vuetify 4.0.0-beta.0, MD3 typography and elevation, the VCommandPalette labs release, a grid overhaul, and Vuetify0 v0.1.0.
   keywords: Vuetify January 2026, v4.0.0-beta.0, VCommandPalette, MD3 typography, grid system, Vuetify0, CLI
 ---
 

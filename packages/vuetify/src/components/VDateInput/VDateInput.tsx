@@ -108,9 +108,10 @@ export const VDateInput = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t, current: currentLocale } = useLocale()
+    const { t } = useLocale()
     const adapter = useDate()
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
+    const adapterLocale = computed(() => adapter.locale)
+    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
@@ -228,6 +229,10 @@ export const VDateInput = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
+      if ((e.relatedTarget as HTMLElement | null)?.closest('[data-v-date]')) {
+        return // first click on a day
+      }
+
       if (props.updateOn.includes('blur') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }

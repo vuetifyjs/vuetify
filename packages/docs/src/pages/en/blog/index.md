@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Blog
-  description: The Vuetify blog is a place where we share the latest news, updates, and stories about Vuetify. Stay up to date with the latest developments in the Vuetify ecosystem.
+  description: The Vuetify blog shares the latest news, updates, and stories — stay up to date with developments across the Vuetify ecosystem.
   keywords: vuetify, blog, news, updates, stories, ecosystem
 ---
 
@@ -17,6 +17,14 @@ Latest news, updates, and stories about Vuetify.
 ---
 
 <br>
+
+## May 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 June 16th, 2026
+
+May was a full-throttle feature sprint for Vuetify 4.1, the first minor since 4.0.0. The core team pushed hard to clear the backlog and land everything queued for the release: seven components promoted out of labs (VFileUpload, VDateInput, VColorInput, VIconBtn, VPicker, VStepperVertical, VPullToRefresh), four new ones (VHeatmap, VHighlight, VMonthPicker, VDateRangePicker), a full data-table accessibility pass, and a wave of fixes across 89 commits and 4 releases. Vuetify0 ran in parallel, landing its headless drag-and-drop family (useDragDrop, createSortable, createKanban) on the road to its June beta... { .text-medium-emphasis }
+
+[Read More](/blog/may-2026-update/) { .text-end }
 
 ## Announcing the Vuetify0 Beta
 
