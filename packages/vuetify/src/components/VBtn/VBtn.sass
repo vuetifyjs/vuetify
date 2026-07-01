@@ -30,6 +30,8 @@
     flex-shrink: 0
 
     .v-locale--is-rtl &
+      letter-spacing: 0
+
       @if meta.type-of($button-text-letter-spacing) == 'number'
         text-indent: -1 * $button-text-letter-spacing
 
