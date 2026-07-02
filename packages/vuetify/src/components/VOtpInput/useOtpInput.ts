@@ -76,6 +76,7 @@ export interface OtpInputContext {
   clearSelection: () => void
   selectAtEnd: () => OtpSelection
   selectSlot: (index: number) => OtpSelection
+  moveCaret: (direction: -1 | 1) => OtpSelection | null
   extendSelection: (direction: -1 | 1) => OtpSelection | null
 
   startComposition: () => void
@@ -306,6 +307,15 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     return next
   }
 
+  function moveCaret (direction: -1 | 1): OtpSelection | null {
+    const current = value.value
+    if (graphemes(current).length === 0) return null
+
+    const currentSelection = selection.value
+    const currentG = currentSelection ? codeUnitsToGraphemeIndex(current, currentSelection.start) : 0
+    return selectSlot(Math.max(0, currentG + direction))
+  }
+
   function extendSelection (direction: -1 | 1): OtpSelection | null {
     const current = value.value
     const valueG = graphemes(current).length
@@ -465,6 +475,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
     clearSelection,
     selectAtEnd,
     selectSlot,
+    moveCaret,
     extendSelection,
 
     startComposition,

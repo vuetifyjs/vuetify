@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'May 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/may-2026-update/may-hero.png',
+      shortDescription: 'May shipped Vuetify 4.1 — the first minor since 4.0.0 — promoting seven components out of labs and adding four new ones: VHeatmap, VHighlight, VMonthPicker, and VDateRangePicker. Four framework releases carried 34 features and 19 fixes, open issues dropped from 436 to 386, and Vuetify0 wrapped up its alpha with a headless drag-and-drop family (useDragDrop, createSortable, createKanban) ahead of the beta announced June 2...',
+      date: 'June 5, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/may-2026-update'),
+    },
+    {
       title: 'Announcing the Vuetify0 Beta',
       shortDescription: 'Vuetify0 has reached beta, freezing the public API: the existing composables and components keep their names and signatures through v1. Since the alpha, the totals went to 49 components and 68 composables, no composables remain in draft, and a headless drag-and-drop family (useDragDrop, createSortable, createKanban) was added along with createOtp, useDelay, and the Overflow component. The release also covers the testing and stability work — 5,700+ unit tests, 98.7% coverage — ahead of v1.',
       date: 'June 2, 2026',

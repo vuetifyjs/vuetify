@@ -28,10 +28,10 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: actions/checkout@v6
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm build vuetify
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: vuetify-dist
           path: |
@@ -48,12 +48,12 @@ jobs:
       matrix:
         scopes: ['--filter vuetify --filter @vuetify/api-generator', '--filter vuetifyjs.com']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
         with:
           name: vuetify-dist
           path: packages/vuetify
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm run $SCOPES lint
         env:
           SCOPES: ${{ matrix.scopes }}
@@ -64,16 +64,16 @@ jobs:
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('./pnpm-lock.yaml') }}
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm exec playwright install chromium
       - run: pnpm run test
         working-directory: ./packages/vuetify
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: Test screenshots
@@ -90,14 +90,14 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           name: vuetify-dist
           path: packages/vuetify
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm build api
       - run: npm install -g npm@latest
       - name: NPM Release
@@ -120,12 +120,12 @@ jobs:
       contains(toJSON('["master", "dev", "next"]'), github.ref_name)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
         with:
           name: vuetify-dist
           path: packages/vuetify
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - uses: ./.github/actions/download-locales
       - run: pnpm build api
       - run: pnpm build docs
@@ -143,7 +143,7 @@ jobs:
           VITE_API_SERVER_URL: ${{ secrets.API_SERVER_URL }}
           VITE_GITHUB_SHA: ${{ github.sha }}
           VITE_GITHUB_REF: ${{ github.ref_name }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: docs-dist
           path: packages/docs/dist
@@ -153,12 +153,12 @@ jobs:
     runs-on: ubuntu-24.04
     environment: ${{ github.ref_name }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v7
         with:
           name: docs-dist
           path: packages/docs/dist
-      - uses: vuetifyjs/coolify-action@f24a3716773c4c238e67c4bf0319c410bafc52de # master
+      - uses: vuetifyjs/coolify-action@37a9c5a532f4c489e941d43edffd73fd2af00ec2 # master
         with:
           token: ${{ secrets.GITHUB_TOKEN  }}
           imageName: docs

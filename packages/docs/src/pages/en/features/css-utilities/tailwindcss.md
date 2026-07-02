@@ -175,12 +175,11 @@ Create `tailwind.css` (in `src/styles/` for Vite or `assets/styles/` for Nuxt). 
 
 ```css { resource="tailwind.css" }
 @import "tailwindcss/theme" layer(tailwind-theme);
-@import "tailwindcss/preflight" layer(tailwind-reset);
 @import "tailwindcss/utilities" layer(tailwind-utilities);
 
 /* dark/light mode — Vuetify uses .v-theme--dark/.v-theme--light instead of .dark */
 @custom-variant light (&:where(.v-theme--light, .v-theme--light *));
-@custom-variant dark  (&:where(.v-theme--dark,  .v-theme--dark  *));
+@custom-variant dark (&:where(.v-theme--dark, .v-theme--dark *));
 
 @theme {
   --breakpoint-*: initial; /* reset Tailwind defaults */

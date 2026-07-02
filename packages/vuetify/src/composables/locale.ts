@@ -90,7 +90,7 @@ function genDefaults () {
     ar: true,
     bg: false,
     ca: false,
-    ckb: false,
+    ckb: true,
     cs: false,
     de: false,
     el: false,

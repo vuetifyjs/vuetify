@@ -38,6 +38,7 @@ import {
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
+  isComposingIgnoreKey,
   matchesSelector,
   noop,
   omit,
@@ -250,7 +251,7 @@ export const VAutocomplete = genericComponent<new <
 
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
-      if (form.isReadonly.value) return
+      if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value?.selectionStart
       const length = model.value.length
@@ -460,7 +461,7 @@ export const VAutocomplete = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
