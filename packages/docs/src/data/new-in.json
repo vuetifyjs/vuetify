@@ -13,6 +13,7 @@
   },
   "VAutocomplete": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
@@ -109,6 +110,7 @@
   },
   "VCombobox": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
@@ -154,6 +156,7 @@
   },
   "VDataIterator": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "groupKey": "4.1.0",
       "initialSortOrder": "3.11.0",
       "openAll": "4.1.0",
@@ -168,6 +171,7 @@
   },
   "VDataTable": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
@@ -227,6 +231,7 @@
   },
   "VDataTableVirtual": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
       "expandStrategy": "4.1.0",
@@ -431,6 +436,7 @@
   },
   "VSelect": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "autocomplete": "3.10.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
@@ -592,6 +598,7 @@
   },
   "VTreeview": {
     "props": {
+      "ignoreAccents": "4.2.0",
       "hideActions": "3.9.0",
       "hideNoData": "3.10.0",
       "noDataText": "3.10.0",
