@@ -40,7 +40,7 @@ The release candidate narrows scope further. Between now and v1.0:
 
 - **No breaking changes and no new features.** The beta still accepted additive changes; the RC does not. The single exception is a critical security vulnerability that cannot be fixed any other way — and it would be documented in the release notes.
 - **The time goes to testing.** Exercising the frozen surface against edge cases, accessibility passes, and security testing on top of the hardening the betas already shipped.
-- **Documentation and feedback.** The rest of the effort is documentation, and the RC window is the last chance for feedback to catch a problem before the API locks in for the whole 1.x line. An API that fights you, a doc that misleads, a behavior that surprises — report it on [GitHub](https://github.com/vuetifyjs/0/issues) or [Discord](https://community.vuetifyjs.com).
+- **Documentation and feedback.** The rest of the effort is documentation, and the RC window is the last chance for feedback to catch a problem before the API locks in for the whole 1.x line. An API that fights you, a doc that misleads, a behavior that surprises — report it at [issues.vuetifyjs.com](https://issues.vuetifyjs.com) or on [Discord](https://community.vuetifyjs.com).
 - **v1.0 is milestone-driven**, targeted for Q3 2026. Barring release-blocking discoveries, the RC is what v1.0 ships as — it releases when the milestones are met, not on a date.
 
 After v1.0, the surface is governed by semver: breaking changes only in major releases.
@@ -170,7 +170,7 @@ Code written against the beta API ran through six beta releases and the RC witho
 
 ### Will the draft components ship in v1?
 
-The ten draft components are experimental and outside the frozen surface. They promote individually when they meet the bar, whether that is before or after v1 — there is no commitment tying them to the v1.0 release.
+The ten draft components are experimental and outside the frozen surface, and each is already plotted on the public [milestones](https://github.com/vuetifyjs/0/milestones): table components in v1.1, product tours in v1.2, virtualized lists, Kanban, and OTP input in v1.3, then time and date pickers in v1.4 and v1.5. Each promotes when it meets the bar.
 
 ### Will there be breaking changes between RC and v1?
 
@@ -178,13 +178,19 @@ None are planned. The only thing that could force one is a critical security vul
 
 ### Can I use Vuetify0 alongside Vuetify 4?
 
-Yes. They don't conflict, and v0 is already used inside Vuetify's internals. The path to future Vuetify versions is expected to need minimal changes.
+Yes. They don't conflict, and you can adopt v0 primitives inside a Vuetify 4 app today. Meanwhile, Vuetify 5's internals are being refactored to use v0 directly — the frozen surface is the foundation that work builds on.
+
+### How do I report a problem or contribute?
+
+Bug reports go through [issues.vuetifyjs.com](https://issues.vuetifyjs.com) — issues opened outside the generator are closed automatically. The [contributing guide](https://0.vuetifyjs.com/introduction/contributing) covers local setup and conventions, and [Discord](https://community.vuetifyjs.com) is the place to discuss before you build.
 
 ---
 
 - **Documentation** — [0.vuetifyjs.com](https://0.vuetifyjs.com)
 - **Getting Started** — [Installation guide](https://0.vuetifyjs.com/introduction/getting-started)
 - **GitHub** — [vuetifyjs/0](https://github.com/vuetifyjs/0)
+- **Report an issue** — [issues.vuetifyjs.com](https://issues.vuetifyjs.com)
+- **Contributing** — [Contributing guide](https://0.vuetifyjs.com/introduction/contributing)
 - **Discord** — [community.vuetifyjs.com](https://community.vuetifyjs.com)
 
 *Vuetify0 is part of the [Vuetify](https://vuetifyjs.com) ecosystem. Documentation is at [0.vuetifyjs.com](https://0.vuetifyjs.com); source is on [GitHub](https://github.com/vuetifyjs/0).*
