@@ -115,7 +115,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: vuetifyjs/setup-action@fb6949e3ee1041636b7fa9eef3c7694ff31840b8 # master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm exec playwright install chromium
       - run: pnpm vizzly run "pnpm test:browser"
         working-directory: ./packages/vuetify
