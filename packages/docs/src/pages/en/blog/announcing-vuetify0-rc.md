@@ -32,6 +32,21 @@ Vuetify0 has reached release candidate. The API freeze announced at [beta](/blog
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
+## Table of Contents
+
+- [What a release candidate means](#what-a-release-candidate-means)
+- [Where things stand](#where-things-stand)
+- [A month of hardening](#a-month-of-hardening)
+- [Accessible by default](#accessible-by-default)
+- [Testing and benchmarks](#testing-and-benchmarks)
+- [A reference implementation](#a-reference-implementation)
+- [Documentation](#documentation)
+- [AI tooling](#ai-tooling)
+- [Road to v1](#road-to-v1)
+- [FAQ](#faq)
+
+---
+
 ## What a release candidate means
 
 The beta froze the public API and promised that existing composables and components would keep their names, signatures, and behavior. A month and six releases later, that promise held — and it is now enforced mechanically: a repository check fails any pull request that changes the public surface ([#409](https://github.com/vuetifyjs/0/pull/409)).
