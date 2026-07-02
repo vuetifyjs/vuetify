@@ -142,6 +142,14 @@
 
   const items = [
     {
+      title: 'Announcing the Vuetify0 Release Candidate',
+      shortDescription: 'Vuetify0 has reached release candidate. The API freeze held through five weekly beta releases — nothing renamed, nothing removed — across 175 commits with 60 fixes and 5 performance rewrites. The surface stands at 50 components, 71 composables, and 24 utilities; every component now ships a built-in English aria label (WCAG 4.1.2), and useReducedMotion landed for motion-sensitive users. From here to v1.0 the work is final testing and documentation — no new features.',
+      date: 'July 2, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-rc'),
+    },
+    {
       title: 'Announcing the Vuetify0 Beta',
       shortDescription: 'Vuetify0 has reached beta, freezing the public API: the existing composables and components keep their names and signatures through v1. Since the alpha, the totals went to 49 components and 68 composables, no composables remain in draft, and a headless drag-and-drop family (useDragDrop, createSortable, createKanban) was added along with createOtp, useDelay, and the Overflow component. The release also covers the testing and stability work — 5,700+ unit tests, 98.7% coverage — ahead of v1.',
       date: 'June 2, 2026',
