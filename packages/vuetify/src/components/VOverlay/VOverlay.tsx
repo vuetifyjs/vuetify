@@ -125,6 +125,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
   props: {
     _disableGlobalStack: Boolean,
+    _submenu: Boolean,
 
     ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
@@ -162,7 +163,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+      openedByHover,
+    } = useActivator(props, { isActive, isTop: localTop, contentEl, isSubmenu: props._submenu })
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
@@ -233,8 +235,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function returnFocusToActivator () {
       const el = activatorEl.value
       if (!el || !el.isConnected) return
-      // Skip submenus; the outermost close in the cascade will restore focus.
-      if (el.closest('.v-overlay__content')) return
+      // In a full cascade, the parent overlay's content is also inert (closing),
+      // so let the outermost close handle focus restoration.
+      // If the parent is still active (e.g. only this submenu closes via hover-out),
+      // we must restore focus ourselves so it doesn't fall to document.body.
+      const parentContent = el.closest<HTMLElement>('.v-overlay__content')
+      if (parentContent?.inert) return
 
       if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
 
@@ -263,7 +269,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = document.activeElement
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+        contentEl.value?.removeAttribute('inert')
       } else {
+        if (contentEl.value) contentEl.value.inert = true
         returnFocusToActivator()
       }
     }, { flush: 'post' })
@@ -444,6 +452,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       globalTop,
       localTop,
       updateLocation,
+      openedByHover,
     }
   },
 })
