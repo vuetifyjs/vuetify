@@ -35,8 +35,6 @@ export const makeVTextareaProps = propsFactory({
   counter: [Boolean, Number, String] as PropType<true | number | string>,
   counterValue: Function as PropType<(value: any) => number>,
   prefix: String,
-  placeholder: String,
-  persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   noResize: Boolean,
   rows: {
@@ -334,7 +332,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                        placeholder={ props.placeholder }
+                        placeholder={ slots.placeholder ? undefined : props.placeholder }
                         rows={ props.rows }
                         name={ autocomplete.fieldName.value }
                         autocomplete={ autocomplete.fieldAutocomplete.value }

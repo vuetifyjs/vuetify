@@ -33,8 +33,6 @@ export const makeVTextFieldProps = propsFactory({
   counter: [Boolean, Number, String],
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
-  placeholder: String,
-  persistentPlaceholder: Boolean,
   persistentCounter: Boolean,
   suffix: String,
   role: String,
@@ -240,7 +238,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         disabled={ isDisabled.value }
                         name={ autocomplete.fieldName.value }
                         autocomplete={ autocomplete.fieldAutocomplete.value }
-                        placeholder={ props.placeholder }
+                        placeholder={ slots.placeholder ? undefined : props.placeholder }
                         size={ 1 }
                         role={ props.role }
                         type={ props.type }
