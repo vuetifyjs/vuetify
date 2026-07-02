@@ -396,7 +396,7 @@ export const VSelect = genericComponent<new <
       }
       if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
-        listRef.value.focus(index >= 0 ? index : 'first', { focusVisible: false })
+        listRef.value.focus(index >= 0 ? index : 'first', { focusVisible: false, preventScroll: props.noAutoScroll })
       }
     }
     function onAfterLeave () {
