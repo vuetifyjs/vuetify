@@ -36,11 +36,14 @@ Vuetify0 has reached release candidate. The API freeze announced at [beta](/blog
 
 The beta froze the public API and promised that existing composables and components would keep their names, signatures, and behavior. A month and five releases later, that promise held — and it is now enforced mechanically: a repository check fails any pull request that changes the public surface ([#409](https://github.com/vuetifyjs/0/pull/409)).
 
-The release candidate narrows scope further:
+The release candidate narrows scope further. Between now and v1.0:
 
-- No new features between RC and v1.0. The beta still accepted additive changes; the RC does not.
-- Only release-blocking fixes and documentation land from here.
-- v1.0 is milestone-driven and targeted for Q3 2026. It ships when the milestones are met, not on a date.
+- **No breaking changes and no new features.** The beta still accepted additive changes; the RC does not. The single exception is a critical security vulnerability that cannot be fixed any other way — and it would be documented in the release notes.
+- **The time goes to testing.** Exercising the frozen surface against edge cases, accessibility passes, and security testing on top of the hardening the betas already shipped.
+- **Documentation and feedback.** The rest of the effort is documentation, and the RC window is the last chance for feedback to catch a problem before the API locks in for the whole 1.x line. An API that fights you, a doc that misleads, a behavior that surprises — report it on [GitHub](https://github.com/vuetifyjs/0/issues) or [Discord](https://community.vuetifyjs.com).
+- **v1.0 is milestone-driven**, targeted for Q3 2026. Barring release-blocking discoveries, the RC is what v1.0 ships as — it releases when the milestones are met, not on a date.
+
+After v1.0, the surface is governed by semver: breaking changes only in major releases.
 
 ---
 
@@ -157,7 +160,7 @@ See the [roadmap](https://0.vuetifyjs.com/roadmap) for details.
 
 ### What changes at RC?
 
-Scope, not API. The beta froze names and signatures but still accepted additive features; the RC accepts none. Between now and v1.0 only release-blocking fixes and documentation land. New features resume after v1.
+Scope, not API. The beta froze names and signatures but still accepted additive features; the RC accepts none. Between now and v1.0 only release-blocking fixes and documentation land — the focus is testing, security review, and feedback. New features resume after v1.
 
 ### Can I use the RC in production?
 
@@ -169,7 +172,7 @@ The ten draft components are experimental and outside the frozen surface. They p
 
 ### Will there be breaking changes between RC and v1?
 
-None are planned. If a critical bug or accessibility issue requires one, it will be documented in the release notes.
+None are planned. The only thing that could force one is a critical security vulnerability with no other fix, and it would be documented in the release notes.
 
 ### Can I use Vuetify0 alongside Vuetify 4?
 
