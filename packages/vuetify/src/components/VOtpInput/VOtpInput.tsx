@@ -199,10 +199,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-        // Extend with our own anchor so the originally-selected slot stays included.
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const direction = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
-        if (otp.extendSelection(direction)) {
+        const moved = e.shiftKey
+          ? otp.extendSelection(direction)
+          : otp.moveCaret(direction)
+
+        if (moved) {
           e.preventDefault()
           syncDOM()
         }
@@ -351,7 +354,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           <div
             class="v-otp-input__content"
             style={[dimensionStyles.value]}
-            dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
             { slots.fields ? slots.fields() : props.merged
               ? (

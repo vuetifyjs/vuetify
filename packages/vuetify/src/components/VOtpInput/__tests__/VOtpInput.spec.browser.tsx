@@ -102,6 +102,58 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(2)
   })
 
+  it('navigates using arrows it in rtl', async () => {
+    render(() => (<VOtpInput length={ 6 } />), null, {
+      locale: { rtl: { en: true } },
+    })
+
+    await focusInput()
+    await userEvent.keyboard('1234')
+    expect(getActiveSlotIndex()).toBe(4)
+
+    for (const expected of [3, 2, 1, 0]) {
+      await userEvent.keyboard('{ArrowRight}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{ArrowRight}') // overshoot, no-op
+    expect(getActiveSlotIndex()).toBe(0)
+
+    for (const expected of [1, 2]) {
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{Delete}')
+    expect(getInput().value).toBe('124')
+    expect(getActiveSlotIndex()).toBe(2)
+  })
+
+  it('navigates using arrows it in ltr', async () => {
+    render(() => (<VOtpInput length={ 6 } />))
+
+    await focusInput()
+    await userEvent.keyboard('1234')
+    expect(getActiveSlotIndex()).toBe(4)
+
+    for (const expected of [3, 2, 1, 0]) {
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{ArrowLeft}') // overshoot, no-op
+    expect(getActiveSlotIndex()).toBe(0)
+
+    for (const expected of [1, 2]) {
+      await userEvent.keyboard('{ArrowRight}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{Delete}')
+    expect(getInput().value).toBe('124')
+    expect(getActiveSlotIndex()).toBe(2)
+  })
+
   it('removes value and goes back when using backspace', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()
