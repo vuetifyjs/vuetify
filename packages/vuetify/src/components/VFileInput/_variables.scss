@@ -1,4 +1,7 @@
+@use '../../styles/tools';
+
 // Defaults
 $file-input-chip-margin-inline-end: null !default;
 $file-input-chips-margin-top: null !default;
 $file-input-chips-margin-bottom: null !default;
+$file-input-placeholder-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
