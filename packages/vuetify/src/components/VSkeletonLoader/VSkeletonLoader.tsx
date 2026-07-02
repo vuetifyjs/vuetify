@@ -28,6 +28,7 @@ export const rootTypes = {
   card: 'image, heading',
   'card-avatar': 'image, list-item-avatar',
   chip: 'chip',
+  'chip-group': 'chip@5',
   'date-picker': 'list-item, heading, divider, date-picker-options, date-picker-days, actions',
   'date-picker-options': 'text, avatar@2',
   'date-picker-days': 'avatar@28',
@@ -52,6 +53,9 @@ export const rootTypes = {
   'table-row': 'text@6',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
+  'timeline-item': 'avatar, heading',
+  'timeline-item-two': 'avatar, sentences',
+  'timeline-item-three': 'avatar, paragraph',
 } as const
 
 function genBone (type: string, children: VSkeletonBones = []) {
