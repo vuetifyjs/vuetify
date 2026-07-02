@@ -127,7 +127,7 @@ The [benchmarks page](https://0.vuetifyjs.com/guide/fundamentals/benchmarks) doc
 
 Numbers describe the surface; [DevKey](https://devkey.vuetifyjs.com) shows it in use. The developer API dashboard from the [alpha tutorial](/blog/announcing-vuetify0-alpha/) is maintained as the reference v0 implementation and is updated in lockstep with releases — including this RC. Its command palette is a good picture of how the primitives compose: a `Dialog`, an `Input`, `createFilter`, `useHotkey`, and `useVirtualFocus` in one component (condensed from the source):
 
-```vue { resource="src/components/DkCommandPalette.vue" }
+```html { resource="src/components/DkCommandPalette.vue" }
 <script setup lang="ts">
   import { Dialog, Input, createFilter, useHotkey, useVirtualFocus } from '@vuetify/v0'
 
