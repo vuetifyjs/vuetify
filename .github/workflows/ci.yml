@@ -158,7 +158,7 @@ jobs:
         with:
           name: docs-dist
           path: packages/docs/dist
-      - uses: vuetifyjs/coolify-action@f24a3716773c4c238e67c4bf0319c410bafc52de # master
+      - uses: vuetifyjs/coolify-action@37a9c5a532f4c489e941d43edffd73fd2af00ec2 # master
         with:
           token: ${{ secrets.GITHUB_TOKEN  }}
           imageName: docs
