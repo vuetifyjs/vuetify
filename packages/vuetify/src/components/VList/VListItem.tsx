@@ -263,6 +263,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
       }
     }
 
+    const clickHandler = computed(() => (isClickable.value || attrs.onClick) ? onClick : undefined)
+
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
       const hasTitle = (slots.title || props.title != null)
@@ -317,7 +319,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
-          onClick={ onClick }
+          onClick={ clickHandler.value }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
         >
