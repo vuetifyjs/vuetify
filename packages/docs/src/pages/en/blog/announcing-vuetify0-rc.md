@@ -123,6 +123,36 @@ The [benchmarks page](https://0.vuetifyjs.com/guide/fundamentals/benchmarks) doc
 
 ---
 
+## A reference implementation
+
+Numbers describe the surface; [DevKey](https://devkey.vuetifyjs.com) shows it in use. The developer API dashboard from the [alpha tutorial](/blog/announcing-vuetify0-alpha/) is maintained as the reference v0 implementation and is updated in lockstep with releases — including this RC. Its command palette is a good picture of how the primitives compose: a `Dialog`, an `Input`, `createFilter`, `useHotkey`, and `useVirtualFocus` in one component (condensed from the source):
+
+```vue { resource="src/components/DkCommandPalette.vue" }
+<script setup lang="ts">
+  import { Dialog, Input, createFilter, useHotkey, useVirtualFocus } from '@vuetify/v0'
+
+  // Cmd+K to open
+  useHotkey('cmd+k', () => {
+    open.value = true
+    query.value = ''
+  })
+
+  // Filter commands by search query
+  const filter = createFilter({ keys: ['label'] })
+  const { items: filtered } = filter.apply(query, () => commands)
+
+  // Keyboard navigation through results
+  const { highlightedId, onKeydown } = useVirtualFocus(
+    () => filtered.value.map(cmd => ({ id: cmd.id })),
+    { control: search },
+  )
+</script>
+```
+
+No positioning math, no key-event switch statements, no filter re-implementation — the component is mostly wiring. The full source is at [vuetifyjs/devkey](https://github.com/vuetifyjs/devkey), and the [integration guide](https://0.vuetifyjs.com/guide/integration/devkey) walks through the architecture.
+
+---
+
 ## Documentation
 
 The 61 documentation commits were mostly one push: a full audit of the guide pages. Component and composable pages were normalized to one structure ([#392](https://github.com/vuetifyjs/0/pull/392)), FAQ sections homogenized ([#395](https://github.com/vuetifyjs/0/pull/395)), examples converted to multi-file copy-paste blocks ([#382](https://github.com/vuetifyjs/0/pull/382)), and stale data corrected across the board ([#458](https://github.com/vuetifyjs/0/pull/458), [#461](https://github.com/vuetifyjs/0/pull/461)).
