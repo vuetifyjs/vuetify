@@ -22,7 +22,7 @@ meta:
 
 # Announcing the Vuetify0 Release Candidate
 
-Vuetify0 has reached release candidate. The API freeze announced at [beta](/blog/announcing-vuetify0-beta/) held through five weekly releases: nothing was renamed, nothing was removed, and the only additions were additive — a reduced-motion plugin and an accessibility helper on the locale system. From here to v1.0, the work is final testing and documentation. No new features.
+Vuetify0 has reached release candidate. The API freeze announced at [beta](/blog/announcing-vuetify0-beta/) held through six beta releases: nothing was renamed, nothing was removed, and the only additions were additive — a reduced-motion plugin and an accessibility helper on the locale system. From here to v1.0, the work is final testing and documentation. No new features.
 
 🖊️ John Leider • 📅 July 2nd, 2026
 
@@ -34,7 +34,7 @@ Vuetify0 has reached release candidate. The API freeze announced at [beta](/blog
 
 ## What a release candidate means
 
-The beta froze the public API and promised that existing composables and components would keep their names, signatures, and behavior. A month and five releases later, that promise held — and it is now enforced mechanically: a repository check fails any pull request that changes the public surface ([#409](https://github.com/vuetifyjs/0/pull/409)).
+The beta froze the public API and promised that existing composables and components would keep their names, signatures, and behavior. A month and six releases later, that promise held — and it is now enforced mechanically: a repository check fails any pull request that changes the public surface ([#409](https://github.com/vuetifyjs/0/pull/409)).
 
 The release candidate narrows scope further. Between now and v1.0:
 
@@ -51,10 +51,12 @@ After v1.0, the surface is governed by semver: breaking changes only in major re
 
 At the beta announcement the totals were 49 components and 68 composables. Beta.0 itself shipped the [Tooltip](https://0.vuetifyjs.com/components/disclosure/tooltip) component with its [useTooltip](https://0.vuetifyjs.com/composables/plugins/use-tooltip) plugin and [createDataGrid](https://0.vuetifyjs.com/composables/data/create-data-grid); the freeze window added [useReducedMotion](https://0.vuetifyjs.com/composables/plugins/use-reduced-motion) in beta.2. The RC surface is **50 components, 71 composables, and 24 utilities**.
 
+The RC also promotes the v1 stable set ([#470](https://github.com/vuetifyjs/0/pull/470)): the selection family — `createModel`, `createSelection`, `createSingle`, `createStep`, `createGroup`, `createNested` — plus `createRegistry` and the `useTheme`, `useStorage`, and `useBreakpoints` plugins are now API-locked for 1.0. They join the already-stable foundation and observer composables, bringing the stable surface to 16 composables and 17 utilities.
+
 | Maturity | Components | Composables | Utilities | What it means |
 |----------|-----------|-------------|-----------|---------------|
-| **Stable** | 0 | 6 | 17 | In use across releases, no planned breaking changes |
-| **Preview** | 40 | 65 | 7 | Feature-complete and documented |
+| **Stable** | 0 | 16 | 17 | In use across releases, no planned breaking changes |
+| **Preview** | 40 | 55 | 7 | Feature-complete and documented |
 | **Draft** | 10 | 0 | 0 | Experimental or planned for a future release |
 
 ::: info
@@ -67,7 +69,7 @@ The ten draft components — DatePicker, DateRangePicker, TimePicker, Otp, Alert
 
 ## A month of hardening
 
-The beta cycle ran on a weekly cadence — beta.1 through beta.4 between June 9 and June 30 — and produced 175 commits: 60 fixes, 5 performance rewrites, and 61 documentation commits. The fixes cluster into a few themes:
+The beta cycle ran on a weekly cadence — five follow-up releases between June 9 and the RC cut — and produced 184 commits: 60 fixes, 5 performance rewrites, and 66 documentation commits. The fixes cluster into a few themes:
 
 - **Security and input hardening** — composables were hardened against prototype pollution, CSS injection, and unbounded allocation ([#271](https://github.com/vuetifyjs/0/pull/271)); theme adapters now validate their CSS prefix ([#440](https://github.com/vuetifyjs/0/pull/440)) and popover anchor names are coerced to a safe charset ([#416](https://github.com/vuetifyjs/0/pull/416)).
 - **Overlays and the top layer** — a native modal `<dialog>` paints above all z-index, so overlays teleported to `body` rendered underneath it. Snackbar and Portal can now teleport into the topmost open modal instead ([#397](https://github.com/vuetifyjs/0/pull/397)), and non-modal overlays no longer count toward stack blocking or scrim state ([#354](https://github.com/vuetifyjs/0/pull/354), [#352](https://github.com/vuetifyjs/0/pull/352)).
@@ -127,7 +129,7 @@ The 61 documentation commits were mostly one push: a full audit of the guide pag
 
 New pages landed for [testing](https://0.vuetifyjs.com/guide/tooling/testing) ([#283](https://github.com/vuetifyjs/0/pull/283)) and a [core terminology glossary](https://0.vuetifyjs.com/guide/essentials/glossary) ([#410](https://github.com/vuetifyjs/0/pull/410)). The release pipeline moved to [Changesets](https://github.com/changesets/changesets) ([#365](https://github.com/vuetifyjs/0/pull/365)), and the docs now derive feature counts directly from the maturity manifest instead of hand-maintained numbers ([#378](https://github.com/vuetifyjs/0/pull/378)).
 
-For learning the framework, [Vuetify0 Skillz](https://0.vuetifyjs.com/skillz) — interactive, hands-on tutorials built into the docs, itself in beta — now counts four guided tours: Using the Docs, Using Search, Navigating by Keyboard, and Using Examples, the newest landing alongside the RC ([#459](https://github.com/vuetifyjs/0/pull/459)) to walk through live examples, the Playground, and multi-file recipes. Every page is also tagged Beginner, Intermediate, or Advanced, and the [skill filter](https://0.vuetifyjs.com/guide/essentials/using-the-docs#skill-levels-learning-tracks) trims the navigation to the levels you choose.
+For learning the framework, [Vuetify0 Skillz](https://0.vuetifyjs.com/skillz) — interactive, hands-on tutorials built into the docs, itself in beta — now counts three guided tours: Using the Docs, Using Search, and Using Examples, the newest landing alongside the RC ([#459](https://github.com/vuetifyjs/0/pull/459)) to walk through live examples, the Playground, and multi-file recipes. Every page is also tagged Beginner, Intermediate, or Advanced, and the [skill filter](https://0.vuetifyjs.com/guide/essentials/using-the-docs#skill-levels-learning-tracks) trims the navigation to the levels you choose.
 
 ---
 
@@ -164,7 +166,7 @@ Scope, not API. The beta froze names and signatures but still accepted additive 
 
 ### Can I use the RC in production?
 
-Code written against the beta API ran through five releases and the RC without changes, and the same guarantee carries to v1: the surface is frozen and the freeze is enforced by a repository check on every pull request.
+Code written against the beta API ran through six beta releases and the RC without changes, and the same guarantee carries to v1: the surface is frozen and the freeze is enforced by a repository check on every pull request.
 
 ### Will the draft components ship in v1?
 
