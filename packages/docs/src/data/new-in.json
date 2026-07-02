@@ -610,8 +610,7 @@
     "examples": {
       "prop-items-registration": "3.11.0",
       "slot-no-data": "3.11.0",
-      "slot-toggle": "3.10.0",
-      "misc-indent-lines": "3.9.0"
+      "slot-toggle": "3.10.0"
     }
   },
   "VTreeviewItem": {

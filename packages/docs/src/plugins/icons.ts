@@ -264,6 +264,7 @@ export {
   mdiLanguageHtml5,
   mdiLanguageMarkdown,
   mdiLanguageMarkdownOutline,
+  mdiLanguageTypescript,
   mdiLaptop,
   mdiLayersOutline,
   mdiLayersTriple,

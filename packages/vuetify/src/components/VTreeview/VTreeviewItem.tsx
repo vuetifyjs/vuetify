@@ -102,6 +102,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
             props.class,
           ]}
           role="treeitem"
+          aria-busy={ props.loading || undefined }
           ripple={ false }
           onClick={ activateGroupActivator }
         >
@@ -131,7 +132,9 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               density="compact"
                               icon={ props.toggleIcon }
                               loading={ props.loading }
+                              tabindex={ -1 }
                               variant="text"
+                              aria-hidden="true"
                               onClick={ onClickAction }
                             >
                               {{
@@ -153,6 +156,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                   icon: props.toggleIcon,
                                   variant: 'text',
                                   loading: props.loading,
+                                  tabindex: -1,
                                 },
                                 VProgressCircular: {
                                   indeterminate: 'disable-shrink',
