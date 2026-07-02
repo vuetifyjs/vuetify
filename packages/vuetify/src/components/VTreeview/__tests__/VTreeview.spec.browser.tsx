@@ -755,6 +755,123 @@ describe.each([
         expect(screen.getByText(/Andrew/)).not.toBeVisible()
         expect(screen.getByText(/Administrators/)).not.toBeVisible()
       })
+
+      it('should expand collapsed parents of matched items', async () => {
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            returnObject
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+
+        search.value = 'John'
+        await nextTick()
+        expect(screen.getByText(/Vuetify/)).toBeVisible()
+        expect(screen.getByText(/Core/)).toBeVisible()
+        expect(screen.getByText(/John/)).toBeVisible()
+      })
+
+      it('should allow manually collapsing a branch while search is active', async () => {
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            returnObject
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'John'
+        await nextTick()
+        expect(screen.getByText(/John/)).toBeVisible()
+
+        await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        // eslint-disable-next-line @vitest/no-conditional-in-test
+        if (itemsRegistration === 'render') {
+          // eslint-disable-next-line @vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/John/)).not.toBeVisible()
+        } else {
+          // eslint-disable-next-line @vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/John/)).toBeNull()
+        }
+      })
+
+      it('should keep user-opened branches when search is cleared', async () => {
+        const opened = shallowRef<any[]>([])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            v-model:opened={ opened.value }
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'John'
+        await waitIdle()
+        expect(opened.value).toContain(2) // search opened John's parent "Core team"
+        expect(opened.value).not.toContain(201) // never open the matched leaf itself
+
+        // user opens an unrelated branch while searching
+        opened.value = [...opened.value, 3]
+        await waitIdle()
+
+        search.value = ''
+        await waitIdle()
+        expect(opened.value).toContain(3) // user's branch survives
+        expect(opened.value).not.toContain(2) // search's expansion is undone
+      })
+
+      it('should keep ancestors of a branch opened inside a search match', async () => {
+        const nested = [{
+          id: 1,
+          title: 'Root',
+          children: [
+            {
+              id: 2,
+              title: 'Core team',
+              children: [
+                { id: 21, title: 'Managers', children: [{ id: 211, title: 'Alice' }] },
+              ],
+            },
+          ],
+        }]
+        const opened = shallowRef<any[]>([1])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            v-model:opened={ opened.value }
+            search={ search.value }
+            items={ nested }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'core' // reveals & opens "Core team"
+        await waitIdle()
+
+        opened.value = [...opened.value, 21]
+        await waitIdle()
+
+        search.value = ''
+        await waitIdle()
+        expect(opened.value).toEqual(expect.arrayContaining([1, 2, 21])) // whole chain kept
+        expect(screen.getByText(/Alice/)).toBeVisible()
+      })
     })
   })
 
