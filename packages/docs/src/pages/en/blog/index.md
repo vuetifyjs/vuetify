@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing the Vuetify0 Release Candidate
+
+🖊️ John Leider • 📅 July 2nd, 2026
+
+Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-rc/) { .text-end }
+
 ## May 2026 Update
 
 🖊️ Jacek Czarniecki • 📅 June 16th, 2026

@@ -142,6 +142,14 @@
 
   const items = [
     {
+      title: 'Announcing the Vuetify0 Release Candidate',
+      shortDescription: 'Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features.',
+      date: 'July 2, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-rc'),
+    },
+    {
       title: 'May 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/may-2026-update/may-hero.png',
       shortDescription: 'May shipped Vuetify 4.1 — the first minor since 4.0.0 — promoting seven components out of labs and adding four new ones: VHeatmap, VHighlight, VMonthPicker, and VDateRangePicker. Four framework releases carried 34 features and 19 fixes, open issues dropped from 436 to 386, and Vuetify0 wrapped up its alpha with a headless drag-and-drop family (useDragDrop, createSortable, createKanban) ahead of the beta announced June 2...',
