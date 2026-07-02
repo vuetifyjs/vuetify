@@ -35,6 +35,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const inputAction = shallowRef()
     const caretPosition = shallowRef(0)
+    const previousMaskPattern = shallowRef<string | null>(null)
 
     const mask = useMask(props)
     const returnMaskedValue = computed(() => props.mask && props.returnMaskedValue)
@@ -49,13 +50,19 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
         if (props.mask) {
           // E.g. mask is #-# and the input value is '2-23'
           // model-value should be enforced to '2-2'
-          const newMaskedValue = mask.mask(mask.unmask(val))
+          const unmaskedVal = mask.unmask(val)
+          const newMaskedValue = mask.mask(unmaskedVal)
           const newUnmaskedValue = mask.unmask(newMaskedValue)
+
+          const currentMaskPattern = mask.getMask(mask.unmask(val))
+          const hasMaskChanged = Array.isArray(props.mask) && previousMaskPattern.value !== currentMaskPattern
+          previousMaskPattern.value = currentMaskPattern
 
           const newCaretPosition = getNewCaretPosition({
             oldValue: model.value,
             newValue: newMaskedValue,
             oldCaret: caretPosition.value,
+            hasMaskChanged,
           })
 
           vTextFieldRef.value!.value = newMaskedValue
@@ -69,32 +76,55 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
 
     const validationValue = toRef(() => returnMaskedValue.value ? model.value : mask.unmask(model.value))
 
+    function countNonDelimiters (value: string, upTo: number): number {
+      let count = 0
+      for (let i = 0; i < Math.min(upTo, value.length); i++) {
+        if (!mask.isDelimiter(value, i)) count++
+      }
+      return count
+    }
+
+    function findPositionByNonDelimiterCount (value: string, targetCount: number): number {
+      let count = 0
+      let index = 0
+      while (index < value.length && count < targetCount) {
+        if (!mask.isDelimiter(value, index)) count++
+        index++
+      }
+      return index
+    }
+
     function getNewCaretPosition ({
       oldValue,
       newValue,
       oldCaret,
+      hasMaskChanged,
     }: {
       oldValue: string
       newValue: string
       oldCaret: number
+      hasMaskChanged: boolean
     }): number {
       if (!newValue) return 0
       if (!oldValue) return newValue.length
 
       let newCaret: number
+      const effectiveOldCaret = hasMaskChanged ? countNonDelimiters(oldValue, oldCaret) : oldCaret
 
       if (inputAction.value === 'Backspace') {
-        newCaret = oldCaret - 1
-        while (newCaret > 0 && mask.isDelimiter(newValue, newCaret - 1)) newCaret--
+        newCaret = effectiveOldCaret - 1
+        if (!hasMaskChanged) while (newCaret > 0 && mask.isDelimiter(newValue, newCaret - 1)) newCaret--
       } else if (inputAction.value === 'Delete') {
-        newCaret = oldCaret
+        newCaret = effectiveOldCaret
       } else { // insertion
-        newCaret = oldCaret + 1
-        while (mask.isDelimiter(newValue, newCaret)) newCaret++
-        if (mask.isDelimiter(newValue, oldCaret)) newCaret++
+        newCaret = effectiveOldCaret + 1
+        if (!hasMaskChanged) {
+          while (mask.isDelimiter(newValue, newCaret)) newCaret++
+          if (mask.isDelimiter(newValue, effectiveOldCaret)) newCaret++
+        }
       }
 
-      return newCaret
+      return hasMaskChanged ? findPositionByNonDelimiterCount(newValue, newCaret) : newCaret
     }
 
     onBeforeMount(() => {
