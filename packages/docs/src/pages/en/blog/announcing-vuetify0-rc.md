@@ -124,6 +124,8 @@ The 61 documentation commits were mostly one push: a full audit of the guide pag
 
 New pages landed for [testing](https://0.vuetifyjs.com/guide/tooling/testing) ([#283](https://github.com/vuetifyjs/0/pull/283)) and a [core terminology glossary](https://0.vuetifyjs.com/guide/essentials/glossary) ([#410](https://github.com/vuetifyjs/0/pull/410)). The release pipeline moved to [Changesets](https://github.com/changesets/changesets) ([#365](https://github.com/vuetifyjs/0/pull/365)), and the docs now derive feature counts directly from the maturity manifest instead of hand-maintained numbers ([#378](https://github.com/vuetifyjs/0/pull/378)).
 
+For learning the framework, [Vuetify0 Skillz](https://0.vuetifyjs.com/skillz) — interactive, hands-on tutorials built into the docs, itself in beta — now counts four guided tours: Using the Docs, Using Search, Navigating by Keyboard, and Using Examples, the newest landing alongside the RC ([#459](https://github.com/vuetifyjs/0/pull/459)) to walk through live examples, the Playground, and multi-file recipes. Every page is also tagged Beginner, Intermediate, or Advanced, and the [skill filter](https://0.vuetifyjs.com/guide/essentials/using-the-docs#skill-levels-learning-tracks) trims the navigation to the levels you choose.
+
 ---
 
 ## AI tooling
