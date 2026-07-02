@@ -7,11 +7,13 @@ import { computed, toRaw, watch } from 'vue'
 // Types
 import type { Ref } from 'vue'
 import type { ListItem } from '@/composables/list-items'
+import type { EventProp } from '@/util'
 
 type GetPath = (id: unknown) => unknown[]
 
 interface OpenProps {
   opened: unknown[]
+  'onUpdate:opened': EventProp | undefined
   openAll: boolean
   returnObject: boolean
   search: string | undefined
@@ -39,8 +41,20 @@ export function useOpened (
     )
   }
 
-  watch([() => props.openAll, items], ([openAll]) => {
-    if (openAll) opened.value = everyGroupId(items.value)
+  const allGroupIds = computed(() => props.openAll ? everyGroupId(items.value).map(toRaw) : [])
+
+  watch(allGroupIds, (ids, previous = []) => {
+    const open = new Set(opened.value.map(toRaw))
+    const stillAllGroups = new Set(ids)
+
+    const toOpen = ids.filter(id => !previous.includes(id) && !open.has(id))
+    const toClose = previous.filter(id => !stillAllGroups.has(id) && open.has(id))
+    if (!toOpen.length && !toClose.length) return
+
+    toOpen.forEach(id => open.add(id))
+    toClose.forEach(id => open.delete(id))
+
+    opened.value = [...open]
   }, { immediate: true })
 
   const revealedBySearch = new Set<unknown>()

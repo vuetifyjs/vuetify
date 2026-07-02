@@ -892,6 +892,34 @@ describe.each([
     })
   })
 
+  it('should not re-open collapsed groups when an item is mutated with open-all', async () => {
+    const data = reactive<any[]>([
+      { id: 1, title: 'Qux', children: [{ id: 11, title: 'Quid' }] },
+      { id: 2, title: 'Mop', children: [{ id: 21, title: 'Moon' }] },
+    ])
+    const opened = shallowRef<any[]>([])
+    render(() => (
+      <VTreeview
+        v-model:opened={ opened.value }
+        openAll
+        items={ data }
+        itemValue="id"
+        itemsRegistration={ itemsRegistration }
+      />
+    ))
+
+    await waitIdle()
+    expect(opened.value).toEqual(expect.arrayContaining([1, 2]))
+
+    await userEvent.click(screen.getByText('Mop').parentElement!.previousElementSibling!)
+    await waitIdle()
+    expect(opened.value).not.toContain(2)
+
+    data[0].children![0].disabled = true
+    await waitIdle()
+    expect(opened.value).not.toContain(2) // mutation must not re-open Mop
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/20830
   it('should return correct isOpen state in prepend slot', async () => {
     render(() => (
