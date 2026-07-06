@@ -147,6 +147,16 @@ Using the **density** prop you are able to give your data tables an alternate st
 
 <ExamplesExample file="v-data-table/prop-dense" />
 
+#### Fixed header
+
+Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table while the rows scroll beneath it.
+
+::: warning
+
+The **fixed-header** prop has no effect on its own. You must also set the **height** prop (or otherwise constrain the table's height), otherwise the table has no internal scroll area and the header will not stay fixed.
+
+:::
+
 <!-- #### Footer props
 
 The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using **footer-props**.
