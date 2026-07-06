@@ -34,6 +34,11 @@ describe('format', () => {
       expect(formatNumber(1.23456, opts({ precision: 2 }))).toBe('1.23')
     })
 
+    it('keeps all decimals when precision is null', () => {
+      expect(formatNumber(0.1234, opts({ precision: null }))).toBe('0.1234')
+      expect(formatNumber(1234.12345678, opts({ useGrouping: 'auto', precision: null }))).toBe('1,234.12345678')
+    })
+
     it('respects minFractionDigits', () => {
       expect(formatNumber(1.2, opts({ minFractionDigits: 3 }))).toBe('1.200')
     })
