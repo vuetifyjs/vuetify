@@ -652,7 +652,7 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = toRef(() => props.theme ?? theme.name.value)
-  const current = toRef(() => theme.themes.value[name.value])
+  const current = toRef(() => theme.computedThemes.value[name.value])
 
   const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 

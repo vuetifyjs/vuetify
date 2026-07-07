@@ -745,19 +745,6 @@ export function defer (timeout: number, cb: () => void) {
   return () => window.clearTimeout(timeoutId)
 }
 
-export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
-  const mouseX = event.clientX
-  const mouseY = event.clientY
-
-  const divRect = targetDiv.getBoundingClientRect()
-  const divLeft = divRect.left
-  const divTop = divRect.top
-  const divRight = divRect.right
-  const divBottom = divRect.bottom
-
-  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
-}
-
 export type TemplateRef = {
   (target: Element | ComponentPublicInstance | null): void
   value: HTMLElement | ComponentPublicInstance | null | undefined
@@ -798,9 +785,13 @@ export function escapeForRegex (sign: string) {
     : sign
 }
 
+export function normalizeMinusSign (text: string): string {
+  return text.replace(/−/g, '-')
+}
+
 export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
   const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
-  const cleanText = text.split('')
+  const cleanText = normalizeMinusSign(text).split('')
     .filter(x => onlyValidCharacters.test(x))
     .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
         (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once

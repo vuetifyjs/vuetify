@@ -8,7 +8,6 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 // Composables
 import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
-import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
@@ -259,7 +258,7 @@ export const VDateInput = genericComponent<new <
               .map(parseDate)
               .map(clampDate)
               .toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = createDateRange(adapter, start, stop)
+            model.value = stop == null ? [start] : [start, adapter.endOfDay(stop)]
           } else {
             model.value = parts
               .map(parseDate)
