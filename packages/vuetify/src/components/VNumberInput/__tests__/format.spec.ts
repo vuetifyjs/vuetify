@@ -70,5 +70,10 @@ describe('format', () => {
       const result = formatNumber(1234, opts({ locale: 'ar-SA' }))
       expect(result).toBe('1,234')
     })
+
+    it('renders the locale minus sign (hr uses U+2212)', () => {
+      const o = opts({ locale: 'hr', useGrouping: false, decimalSeparator: ',', groupSeparator: '.', precision: null })
+      expect(formatNumber(-1234.1234, o)).toBe('−1234,1234')
+    })
   })
 })

@@ -798,9 +798,13 @@ export function escapeForRegex (sign: string) {
     : sign
 }
 
+export function normalizeMinusSign (text: string): string {
+  return text.replace(/−/g, '-')
+}
+
 export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
   const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
-  const cleanText = text.split('')
+  const cleanText = normalizeMinusSign(text).split('')
     .filter(x => onlyValidCharacters.test(x))
     .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
         (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
