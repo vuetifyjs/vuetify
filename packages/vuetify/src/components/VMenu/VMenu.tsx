@@ -95,7 +95,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
             (e == null || (overlay.value?.contentEl && !isClickInsideElement(e, overlay.value.contentEl)))
           ) {
             isActive.value = false
-            parent?.closeParents()
+            parent?.closeParents(e)
           }
         }, 40)
       },
