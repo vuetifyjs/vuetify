@@ -388,5 +388,42 @@ describe('VMenu', () => {
 
       expect(document.activeElement).toBe(topBtn)
     })
+
+    it('should keep the parent menu open when parts of inner content hide on click', async () => {
+      const showMore = ref(false)
+      render(() => (
+        <VBtn data-testid="menu-activator">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-3" data-testid="menu-content">
+              <VBtn data-testid="submenu-activator" onClick={ () => (showMore.value = true) }>
+                Show more
+                <VMenu activator="parent" closeOnContentClick={ false } location="end top">
+                  <VSheet class="pa-3">Submenu content</VSheet>
+                </VMenu>
+              </VBtn>
+              { showMore.value && (
+                <div
+                  data-testid="collapsible-content"
+                  style="height: 200px;"
+                  onClick={ () => (showMore.value = false) }
+                >More content</div>
+              )}
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('menu-activator'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('submenu-activator'))
+      await expect.poll(() => screen.queryByText('Submenu content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('collapsible-content'))
+      await wait(300)
+
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
   })
 })

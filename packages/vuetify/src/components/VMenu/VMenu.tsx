@@ -32,7 +32,6 @@ import {
   focusChild,
   genericComponent,
   getNextElement,
-  isClickInsideElement,
   omit,
   propsFactory,
   useRender,
@@ -89,10 +88,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
         openChildren.value.delete(uid)
       },
       closeParents (e) {
+        const clickedOutside = !e || overlay.value?.contentEl?._clickOutside?.lastMousedownWasOutside
+
         setTimeout(() => {
           if (!openChildren.value.size &&
             !props.persistent &&
-            (e == null || (overlay.value?.contentEl && !isClickInsideElement(e, overlay.value.contentEl)))
+            clickedOutside
           ) {
             isActive.value = false
             parent?.closeParents()
