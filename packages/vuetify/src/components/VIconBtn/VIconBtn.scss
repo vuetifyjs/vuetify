@@ -20,6 +20,7 @@
       height: #{$icon-btn-height};
       justify-content: center;
       outline: none;
+      overflow: hidden;
       position: relative;
       transition-property: width, height, transform;
       transition: 0.2s settings.$standard-easing;
@@ -93,7 +94,6 @@
 
   .v-icon-btn__overlay,
   .v-icon-btn__underlay {
-    border-radius: inherit;
     pointer-events: none;
 
     @include tools.absolute();
