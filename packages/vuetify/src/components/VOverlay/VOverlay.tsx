@@ -407,12 +407,15 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   v-click-outside={{
                     handler: onClickOutside,
                     closeConditional,
-                    include: () => [
-                      activatorEl.value,
-                      // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
-                      ...Array.from(document.querySelectorAll('.v-overlay__content'))
-                        .filter(ownsFocus) as HTMLElement[],
-                    ],
+                    include: () => {
+                      if (!isActive.value) return []
+                      return [
+                        activatorEl.value,
+                        // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
+                        ...Array.from(document.querySelectorAll('.v-overlay__content'))
+                          .filter(ownsFocus) as HTMLElement[],
+                      ]
+                    },
                   }}
                   class={[
                     'v-overlay__content',
