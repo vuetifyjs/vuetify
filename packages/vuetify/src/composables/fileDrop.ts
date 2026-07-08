@@ -1,7 +1,15 @@
+// Utilities
+import { shallowRef } from 'vue'
+
 // Types
 type FileSelection = { file: File, path: string }
 
-export function useFileDrop () {
+export interface FileDropOptions {
+  isInteractive: () => boolean
+  onDrop: (files: File[]) => void
+}
+
+export function useFileDrop (options?: FileDropOptions) {
   function getTransfer (e: DragEvent | ClipboardEvent): DataTransfer | null {
     return (e as DragEvent).dataTransfer ?? (e as ClipboardEvent).clipboardData ?? null
   }
@@ -14,6 +22,38 @@ export function useFileDrop () {
       .filter(Boolean)
 
     return entries.length > 0 || [...transfer?.files ?? []].length > 0
+  }
+
+  function hasDraggedFiles (e: DragEvent): boolean {
+    const types = [...getTransfer(e)?.types ?? []]
+    return types.includes('Files') || hasFilesOrFolders(e)
+  }
+
+  const isDragging = shallowRef(false)
+
+  function onDragover (e: DragEvent) {
+    if (!options?.isInteractive() || !hasDraggedFiles(e)) return
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    isDragging.value = true
+  }
+
+  function onDragleave (e: DragEvent) {
+    e.preventDefault()
+    const container = e.currentTarget as HTMLElement
+    if (!container.contains(e.relatedTarget as Node)) {
+      isDragging.value = false
+    }
+  }
+
+  async function onDrop (e: DragEvent) {
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    isDragging.value = false
+
+    if (!options?.isInteractive() || !hasFilesOrFolders(e)) return
+
+    options.onDrop(await handleDrop(e))
   }
 
   async function handleDrop (e: DragEvent | ClipboardEvent) {
@@ -38,8 +78,12 @@ export function useFileDrop () {
   }
 
   return {
+    isDragging,
     handleDrop,
     hasFilesOrFolders,
+    onDragover,
+    onDragleave,
+    onDrop,
   }
 }
 

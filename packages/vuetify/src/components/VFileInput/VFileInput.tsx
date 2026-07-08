@@ -17,7 +17,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, ref, toRef, watch } from 'vue'
 import {
   callEvent,
   filterInputAttrs,
@@ -133,8 +133,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-    const isDragging = shallowRef(false)
-    const { handleDrop, hasFilesOrFolders } = useFileDrop()
+    const { isDragging, handleDrop, hasFilesOrFolders, onDragover, onDragleave, onDrop } = useFileDrop({
+      isInteractive: () => !!inputRef.value && !props.disabled && !props.readonly,
+      onDrop: selectAccepted,
+    })
 
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -170,27 +172,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const charsKeepOneSide = Math.floor((Number(props.truncateLength) - 1) / 2)
       return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
-    function onDragover (e: DragEvent) {
-      if (props.disabled || props.readonly) return
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      isDragging.value = true
-    }
-    function onDragleave (e: DragEvent) {
-      e.preventDefault()
-      isDragging.value = false
-    }
-    async function onDrop (e: DragEvent) {
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      isDragging.value = false
-
-      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
-
-      const allDroppedFiles = await handleDrop(e)
-      selectAccepted(allDroppedFiles)
-    }
-
     async function onPaste (e: ClipboardEvent) {
       if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
       e.preventDefault()
@@ -301,6 +282,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 focused={ isFocused.value }
                 details={ hasDetails.value }
                 error={ isValid.value === false }
+                onDragleave={ onDragleave }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
               >
@@ -327,7 +309,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           onFocus()
                         }}
                         onChange={ onFileSelection }
-                        onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         onPaste={ onPaste }

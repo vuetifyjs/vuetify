@@ -16,7 +16,7 @@ import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { inject, ref, shallowRef, toRef } from 'vue'
+import { inject, ref, toRef } from 'vue'
 import { getFileKey } from './fileKey'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
@@ -118,44 +118,15 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
-    const { handleDrop, hasFilesOrFolders } = useFileDrop()
     const context = inject(VFileUploadKey, null)
     const vSheetRef = ref<VSheet>()
-    const isDragging = shallowRef(false)
     const isDisabled = toRef(() => context?.disabled.value ?? props.disabled)
     const isReadonly = toRef(() => context?.readonly.value ?? props.readonly)
     const isInteractive = toRef(() => !isDisabled.value && !isReadonly.value)
-
-    function onDragover (e: DragEvent) {
-      if (!isInteractive.value) return
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      isDragging.value = true
-    }
-
-    function onDragleave (e: DragEvent) {
-      e.preventDefault()
-      const container = e.currentTarget as HTMLElement
-      if (!container.contains(e.relatedTarget as Node)) {
-        isDragging.value = false
-      }
-    }
-
-    async function onDrop (e: DragEvent) {
-      e.preventDefault()
-      e.stopImmediatePropagation()
-
-      isDragging.value = false
-
-      if (!isInteractive.value || !hasFilesOrFolders(e)) return
-
-      const files = await handleDrop(e)
-      if (context) {
-        context.onDrop(files)
-      } else {
-        emit('drop', files)
-      }
-    }
+    const { isDragging, handleDrop, hasFilesOrFolders, onDragover, onDragleave, onDrop } = useFileDrop({
+      isInteractive: () => isInteractive.value,
+      onDrop: files => context ? context.onDrop(files) : emit('drop', files),
+    })
 
     function onClickBrowse () {
       if (!isInteractive.value) return

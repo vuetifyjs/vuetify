@@ -6,6 +6,12 @@ import { createVuetify } from '@/framework'
 
 describe('VFileInput', () => {
   const vuetify = createVuetify()
+  const file = new File([''], 'test.txt')
+  const dataTransfer = {
+    files: [file],
+    items: [],
+    types: ['Files'],
+  }
 
   function mountFunction (component: any, options = {}) {
     return mount(component, {
@@ -94,5 +100,49 @@ describe('VFileInput', () => {
     expect(onClickPrepend).toHaveBeenCalledTimes(1)
     expect(onClickPrependInner).toHaveBeenCalledTimes(1)
     expect(onClickAppendInner).toHaveBeenCalledTimes(1)
+  })
+
+  it('applies dragging class while files are dragged over the input', async () => {
+    const wrapper = mountFunction(<VFileInput />)
+    const input = wrapper.find('.v-file-input')
+    const field = wrapper.find('.v-field')
+    const fileInput = wrapper.find('input[type="file"]').element
+
+    expect(input.classes()).not.toContain('v-file-input--dragging')
+
+    await field.trigger('dragover', { dataTransfer })
+    expect(input.classes()).toContain('v-file-input--dragging')
+
+    // moving between child elements keeps the dragging state
+    await field.trigger('dragleave', { relatedTarget: fileInput })
+    expect(input.classes()).toContain('v-file-input--dragging')
+
+    // leaving the field entirely clears it
+    await field.trigger('dragleave', { relatedTarget: null })
+    expect(input.classes()).not.toContain('v-file-input--dragging')
+  })
+
+  it('does not apply dragging class when disabled', async () => {
+    const wrapper = mountFunction(<VFileInput disabled />)
+    const input = wrapper.find('.v-file-input')
+
+    await wrapper.find('.v-field').trigger('dragover', { dataTransfer })
+
+    expect(input.classes()).not.toContain('v-file-input--dragging')
+  })
+
+  it('does not apply dragging class when dragged data does not contain files', async () => {
+    const wrapper = mountFunction(<VFileInput />)
+    const input = wrapper.find('.v-file-input')
+
+    await wrapper.find('.v-field').trigger('dragover', {
+      dataTransfer: {
+        files: [],
+        items: [],
+        types: ['text/plain'],
+      },
+    })
+
+    expect(input.classes()).not.toContain('v-file-input--dragging')
   })
 })
