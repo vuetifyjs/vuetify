@@ -9,8 +9,8 @@
 
 <script setup>
   const items = [
-    { image: 'https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/3.jpg' },
-    { image: 'https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/4.jpg' },
+    { image: 'https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/3.jpg' },
+    { image: 'https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/4.jpg' },
     { icon: 'mdi-account', color: 'info' },
     { text: 'JD', color: 'primary' },
   ]
@@ -20,8 +20,8 @@
   export default {
     data: () => ({
       items: [
-        { image: 'https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/3.jpg' },
-        { image: 'https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/4.jpg' },
+        { image: 'https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/3.jpg' },
+        { image: 'https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/4.jpg' },
         { icon: 'mdi-account', color: 'info' },
         { text: 'JD', color: 'primary' },
       ],

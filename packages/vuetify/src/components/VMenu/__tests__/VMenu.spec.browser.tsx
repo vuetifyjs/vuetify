@@ -1,7 +1,8 @@
 // Components
 import { VMenu } from '../VMenu'
+import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
-import { VList, VListItem } from '@/components/VList'
+import { VList, VListItem, VListItemTitle } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
 import { VTextarea } from '@/components/VTextarea'
 import { VTextField } from '@/components/VTextField'
@@ -387,6 +388,156 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByTestId('l1-item')).toBeNull()
 
       expect(document.activeElement).toBe(topBtn)
+    })
+
+    it('should keep the parent menu open when parts of inner content hide on click', async () => {
+      const showMore = ref(false)
+      render(() => (
+        <VBtn data-testid="menu-activator">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-3" data-testid="menu-content">
+              <VBtn data-testid="submenu-activator" onClick={ () => (showMore.value = true) }>
+                Show more
+                <VMenu activator="parent" closeOnContentClick={ false } location="end top">
+                  <VSheet class="pa-3">Submenu content</VSheet>
+                </VMenu>
+              </VBtn>
+              { showMore.value && (
+                <div
+                  data-testid="collapsible-content"
+                  style="height: 200px;"
+                  onClick={ () => (showMore.value = false) }
+                >More content</div>
+              )}
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('menu-activator'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('submenu-activator'))
+      await expect.poll(() => screen.queryByText('Submenu content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('collapsible-content'))
+      await wait(300)
+
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+
+    it('should close the whole stack when clicking outside with submenus open', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1" link>
+                  <VListItemTitle>L1</VListItemTitle>
+                  <VMenu activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2" link>
+                        <VListItemTitle>L2</VListItemTitle>
+                        <VMenu activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="l3" link>L3</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('l1')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('l1'))
+      await expect.poll(() => screen.queryByTestId('l2')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('l2'))
+      await expect.poll(() => screen.queryByTestId('l3')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('l1')).toBeNull()
+    })
+
+    it('should close the parent menu when clicking outside an autocomplete child', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VSheet class="pa-4" data-testid="menu-content">
+                <VAutocomplete items={['California', 'Colorado', 'Florida', 'Texas']} label="Autocomplete" />
+              </VSheet>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByCSS('[role="combobox"] input'))
+      await expect.poll(() => screen.queryByText('California')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should keep the top menu open when clicking a sibling after opening a deep submenu', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent">
+            <VList>
+              <VListItem data-testid="l1-1" link>
+                <VListItemTitle>L1.1</VListItemTitle>
+                <VMenu activator="parent" submenu>
+                  <VList>
+                    <VListItem data-testid="l2-1" link>
+                      <VListItemTitle>L2.1</VListItemTitle>
+                      <VMenu activator="parent" submenu>
+                        <VList>
+                          <VListItem data-testid="l3-1" link>L3.1</VListItem>
+                        </VList>
+                      </VMenu>
+                    </VListItem>
+                  </VList>
+                </VMenu>
+              </VListItem>
+              <VListItem data-testid="l1-2" link>
+                <VListItemTitle>L1.2</VListItemTitle>
+                <VMenu activator="parent" submenu>
+                  <VList>
+                    <VListItem data-testid="l2-2" link>L2.2</VListItem>
+                  </VList>
+                </VMenu>
+              </VListItem>
+            </VList>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('l1-1')).toBeVisible()
+      await userEvent.click(screen.getByTestId('l1-1'))
+      await expect.poll(() => screen.queryByTestId('l2-1')).toBeVisible()
+      await userEvent.click(screen.getByTestId('l2-1'))
+      await expect.poll(() => screen.queryByTestId('l3-1')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('l1-2'))
+      await wait(300)
+
+      // Top menu stays open, the previously open branch collapses.
+      expect(screen.queryByTestId('l1-1')).toBeVisible()
+      expect(screen.queryByTestId('l3-1')).toBeNull()
     })
   })
 })

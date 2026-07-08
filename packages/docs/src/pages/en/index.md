@@ -2,7 +2,7 @@
 layout: home
 meta:
   title: Vuetify — A Vue Component Framework
-  description: Vuetify is a no design skills required Open Source UI Component Framework for Vue. It provides you with all of the tools necessary to create beautiful content rich web applications.
+  description: Vuetify is a no-design-skills-required Open Source UI component framework for Vue with everything you need to build beautiful, content-rich web apps.
   keywords: vue, vue components, vue ui components, material design components, vuetify, component framework, component library
 ---
 

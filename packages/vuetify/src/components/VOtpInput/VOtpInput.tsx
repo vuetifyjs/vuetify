@@ -199,10 +199,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-        // Extend with our own anchor so the originally-selected slot stays included.
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const direction = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
-        if (otp.extendSelection(direction)) {
+        const moved = e.shiftKey
+          ? otp.extendSelection(direction)
+          : otp.moveCaret(direction)
+
+        if (moved) {
           e.preventDefault()
           syncDOM()
         }
@@ -273,6 +276,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       applySelection()
     }
 
+    function slotIndexAtPoint (x: number, y: number): number | null {
+      const slot = document.elementsFromPoint(x, y).find(el => el.hasAttribute('data-otp-index'))
+      const index = slot ? Number(slot.getAttribute('data-otp-index')) : NaN
+      return Number.isNaN(index) ? null : index
+    }
+
+    function onClick (e: MouseEvent) {
+      const index = slotIndexAtPoint(e.clientX, e.clientY)
+      if (index != null) focusAt(index)
+    }
+
     // selectionchange is not in InputHTMLAttributes types
     watch(inputRef, (input, _, onCleanup) => {
       if (!input) return
@@ -340,7 +354,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           <div
             class="v-otp-input__content"
             style={[dimensionStyles.value]}
-            dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
             { slots.fields ? slots.fields() : props.merged
               ? (
@@ -376,6 +389,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               aria-label={ t(props.label) }
               value={ model.value }
               { ...inputAttrs }
+              onClick={ onClick }
               onInput={ onInput }
               onKeydown={ onKeydown }
               onBeforeinput={ onBeforeinput }

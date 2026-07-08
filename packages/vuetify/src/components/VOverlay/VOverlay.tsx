@@ -2,7 +2,7 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
+import { getStaticLocationClasses, makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
@@ -172,6 +172,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
+    const staticLocationClasses = computed(() => {
+      return props.locationStrategy === 'static'
+        ? getStaticLocationClasses(props.location)
+        : undefined
+    })
     const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
@@ -364,6 +369,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   'v-overlay--active': isActive.value,
                   'v-overlay--contained': props.contained,
                 },
+                staticLocationClasses.value,
                 themeClasses.value,
                 rtlClasses.value,
                 props.class,

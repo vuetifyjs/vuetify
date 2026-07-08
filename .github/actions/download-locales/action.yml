@@ -14,7 +14,7 @@ runs:
       run: |
         echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
       shell: bash
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       id: cache-crowdin
       with:
         key: crowdin-${{ inputs.crowdin-branch }}-${{ steps.get-date.outputs.date }}

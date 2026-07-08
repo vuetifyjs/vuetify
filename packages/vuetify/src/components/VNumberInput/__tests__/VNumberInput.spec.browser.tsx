@@ -1,6 +1,7 @@
 // Components
 import { VNumberInput } from '../VNumberInput'
 import { VForm } from '@/components/VForm'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { click, commands, render, screen, userEvent } from '@test'
@@ -20,6 +21,43 @@ describe('VNumberInput', () => {
     await userEvent.click(element)
     await userEvent.keyboard(typing)
     expect(screen.getByCSS('input')).toHaveValue(expected)
+  })
+
+  describe('locales using a non-ASCII minus sign', () => {
+    it('keeps the value negative on blur', async () => {
+      const model = ref(-1234.1234)
+      render(() => (
+        <VLocaleProvider locale="hr">
+          <VNumberInput v-model={ model.value } precision={ null } />
+        </VLocaleProvider>
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+      expect(input.value).toBe('−1234,1234')
+
+      await userEvent.click(input)
+      await userEvent.click(document.body)
+
+      expect(model.value).toBe(-1234.1234)
+      expect(input.value).toBe('−1234,1234')
+    })
+
+    it('accepts a typed ASCII minus and renders the locale sign', async () => {
+      const model = ref<number | null>(null)
+      render(() => (
+        <VLocaleProvider locale="hr">
+          <VNumberInput v-model={ model.value } precision={ null } />
+        </VLocaleProvider>
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.click(input)
+      await userEvent.keyboard('-5')
+      await userEvent.click(document.body)
+
+      expect(model.value).toBe(-5)
+      expect(input.value).toBe('−5')
+    })
   })
 
   it('resets v-model to null when click:clear is triggered', async () => {

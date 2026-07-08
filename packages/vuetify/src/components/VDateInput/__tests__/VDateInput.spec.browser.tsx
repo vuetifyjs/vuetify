@@ -36,6 +36,31 @@ describe('VDateInput', () => {
     expect(formatter.format(model.value!)).toBe('Feb 20, 2022')
   })
 
+  describe('range selection with visible actions', () => {
+    it('should not ignore the first click', async () => {
+      const model = ref(['2026-06-05', '2026-06-15'])
+      const updates: any[] = []
+      const { element } = render(() => (
+        <VDateInput
+          v-model={ model.value }
+          onUpdate:modelValue={ (v: any) => updates.push(v) }
+          hideActions={ false }
+          multiple="range"
+        />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
+      expect(document.querySelectorAll('.v-date-picker-month__day--selected')).toHaveLength(11)
+
+      await userEvent.click(screen.getByCSS('[data-v-date="2026-06-08"]'))
+      expect(document.querySelectorAll('.v-date-picker-month__day--selected')).toHaveLength(1)
+
+      // nothing is committed to the parent until the user confirms
+      expect(updates).toHaveLength(0)
+    })
+  })
+
   describe('parseDateString', () => {
     const testCases = [
       {

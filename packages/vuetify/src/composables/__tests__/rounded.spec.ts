@@ -36,6 +36,7 @@ describe('rounded.ts', () => {
     [{ rounded: 'circle' }, ['rounded-circle']],
     [{ rounded: 'shaped' }, ['rounded-shaped']],
     [{ rounded: 'pill' }, ['rounded-pill']],
+    [{ rounded: '2xl' }, ['rounded-2xl']],
     // Corner and axis rounded
     [{ rounded: 'te-xl be-lg' }, ['rounded-te-xl', 'rounded-be-lg']],
   ] as RoundedProps[])('should return correct rounded classes', (props: RoundedProps, expected: any) => {

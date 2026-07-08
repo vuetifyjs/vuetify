@@ -4,7 +4,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "4.1.1",
+  "version": "4.1.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -17,8 +17,8 @@
     "preview-https": "HTTPS=true vite preview",
     "lint": "concurrently 'vue-tsc --noEmit --pretty' 'pnpm lint:md' 'jest --no-cache' -n 'tsc,md,eslint' --kill-others-on-fail -gr",
     "lint:fix": "pnpm fix:md && JEST_FIX=true jest --no-cache",
-    "lint:md": "markdownlint --config .markdownlintrc src/pages/en",
-    "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
+    "lint:md": "markdownlint --config .markdownlintrc --rules build/markdownlint-rules/meta-length.cjs src/pages/en",
+    "fix:md": "markdownlint --config .markdownlintrc --rules build/markdownlint-rules/meta-length.cjs src/pages/en --fix"
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.5.6",
