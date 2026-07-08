@@ -74,11 +74,11 @@ June shipped **four framework releases**. [v4.0.9](/getting-started/release-note
 ### Key Improvements
 
 * **[Vuetify 4.1](/getting-started/release-notes/?version=v4.1.0)** — the first minor of the v4 line went stable on June 2
-* **[VSwitch](/components/switches/)** — MD3 alignment, a `size` prop, and a `square` inset variant, finalized in the stable release
-* **[VCalendar](/components/calendars/)** — new `interval-highlight` prop ([#22885](https://github.com/vuetifyjs/vuetify/pull/22885))
-* **[VExpansionPanels](/components/expansion-panels/)** — improved focus styles and a `hover` prop to opt out of the hover effect ([#22827](https://github.com/vuetifyjs/vuetify/pull/22827))
-* **[VOverlay](/components/overlays/)** — a run of static-location fixes: edge snapping ([#22921](https://github.com/vuetifyjs/vuetify/pull/22921)), iOS keyboard attachment ([#22923](https://github.com/vuetifyjs/vuetify/pull/22923)), `calc()`/`min()`/`vw` sizes, and reactive dimensions
-* **Forced-colors mode** — `VHeatmap` and `VHighlight` now render correctly under Windows high-contrast themes
+* **[VSwitch](/components/switches/)** — MD3 alignment, a long awaited `size` prop, and a `square` nobody asked for, 😂 LOL, quite a mix
+* **[VCalendar](/components/calendars/)** — new `interval-highlight` for subtle row tint on mouse hover ([#22885](https://github.com/vuetifyjs/vuetify/pull/22885))
+* **[VExpansionPanels](/components/expansion-panels/)** — improved focus styles and a `hover` prop to opt-out of the hover effect ([#22827](https://github.com/vuetifyjs/vuetify/pull/22827))
+* **[VOverlay](/components/overlays/)** — a handful of location fixes after introducing edge snapping ([#22921](https://github.com/vuetifyjs/vuetify/pull/22921)), iOS keyboard attachment ([#22923](https://github.com/vuetifyjs/vuetify/pull/22923)), finished by restoring `calc()`/`min()`/`vw` support for sizing
+* **Forced-colors mode** — `VHeatmap` and `VHighlight` now render correctly for people relying on forced high-contrast override
 
 View the complete list of changes in the [Full Changelog](#june-2026-changelog).
 
@@ -97,9 +97,7 @@ View the complete list of changes in the [Full Changelog](#june-2026-changelog).
 
 <br>
 
-May opened [v4.1.0](/getting-started/release-notes/?version=v4.1.0) in beta; **on June 2 it went stable**. The minor — codenamed **Ascendant** — brought seven labs promotions, four new components (`VHeatmap`, `VHighlight`, `VMonthPicker`, `VDateRangePicker`), and a broad wave of feature props across data tables, pickers, and overlays. That was covered in depth in the [May update](/blog/may-2026-update/); June's job was to make it stable.
-
-The last additions to land before GA were the **VSwitch** MD3 changes — alignment with the MD3 spec ([#22879](https://github.com/vuetifyjs/vuetify/pull/22879)), a `size` prop ([#22882](https://github.com/vuetifyjs/vuetify/pull/22882)), and a `square` inset variant ([#22881](https://github.com/vuetifyjs/vuetify/pull/22881)) — plus **VExpansionPanel** focus polish and the **VCalendar** `interval-highlight` prop. Everything after that was a fix.
+May opened [v4.1.0](/getting-started/release-notes/?version=v4.1.0) in beta; **on June 2 it went stable**. The release brought us four new components (`VHeatmap`, `VHighlight`, `VMonthPicker`, `VDateRangePicker`), already covered in [the previous blog post](/blog/may-2026-update/) and a broad wave of feature props across data tables, pickers, and overlays.
 
 **Details:**
 
@@ -110,62 +108,51 @@ The last additions to land before GA were the **VSwitch** MD3 changes — alignm
 
 ## Framework Updates
 
-### New Features
-
-June was deliberately feature-light — the point was to stabilize, not to add. A handful of additions still made it into the stable release and the patches that followed:
-
-**[VSwitch](/components/switches/)** — the MD3 work that had been in flight through late May landed in the stable release: alignment with the MD3 spec, a `size` prop, and a new `square` inset variant. Follow-up patches tuned the inset track color and gave the outline a neutral color.
-
-**[VCalendar](/components/calendars/)** — a new `interval-highlight` prop lets you highlight specific intervals in the day and week views ([#22885](https://github.com/vuetifyjs/vuetify/pull/22885)).
-
-**[VExpansionPanels](/components/expansion-panels/)** — improved focus styling across the panel headers, plus a `hover` prop on `VExpansionPanelTitle` to disable the hover effect where it isn't wanted ([#22827](https://github.com/vuetifyjs/vuetify/pull/22827)).
+June was deliberately feature-light — the team waited for feedback from users adopting latest version for new features and improvements.
 
 ### Bug Fixes
 
 The overlay location strategy introduced in v4.1 was the month's dominant fix theme. It's a powerful feature, and putting it in front of real layouts surfaced the placement edge cases you'd expect — most of them now closed.
 
-| Component                               | Fix                                              | Version | PR                                                        |
-|-----------------------------------------|--------------------------------------------------|---------|-----------------------------------------------------------|
-| **VProgressLinear**                     | Avoid `opacity:NaN` when rendering with SSR      | v4.0.9  | [#22880](https://github.com/vuetifyjs/vuetify/pull/22880) |
-| **VNumberInput**                        | Keep both controls enabled when empty            | v4.0.9  | —                                                         |
-| **focusTrap**                           | Prevent page scroll when capturing focus         | v4.0.9  | —                                                         |
-| **VSelect**                             | Close menu when click lands inside host overlay  | v4.1.1  | —                                                         |
-| **VSnackbar**                           | More reliable progress bar                       | v4.1.1  | —                                                         |
-| **VNumberInput**                        | Emit `change` when using controls and arrows     | v4.1.1  | —                                                         |
-| **VTooltip**                            | Avoid stealing focus                             | v4.1.1  | —                                                         |
-| **VTable**                              | Apply background and border for `fixed-footer`   | v4.1.1  | —                                                         |
-| **VMenu**                               | Prevent focus change during IME input            | v4.1.1  | [#21008](https://github.com/vuetifyjs/vuetify/pull/21008) |
-| **VHeatmap**                            | Keep legend bar visible in forced-colors mode    | v4.1.1  | —                                                         |
-| **VHighlight**                          | Support forced-colors mode                       | v4.1.1  | —                                                         |
-| **VOverlay**                            | Static location should snap to edges using CSS   | v4.1.2  | [#22921](https://github.com/vuetifyjs/vuetify/pull/22921) |
-| **VOverlay**                            | Keep overlay attached with iOS keyboard open     | v4.1.2  | [#22923](https://github.com/vuetifyjs/vuetify/pull/22923) |
-| **VOverlay**                            | Resolve `calc`/`min`/`vw` sizes to pixels        | v4.1.2  | —                                                         |
-| **VDialog**                             | Clear inline styles when enabling fullscreen     | v4.1.2  | —                                                         |
-| **VTreeview**                           | Apply `hide-actions` to group nodes              | v4.1.2  | —                                                         |
-| **VPagination**                         | Predictable length behavior in flex container    | v4.1.2  | [#22912](https://github.com/vuetifyjs/vuetify/pull/22912) |
-| **theme**                               | Async transition should return a Promise         | v4.1.2  | —                                                         |
+| Component           | Fix                                             | Version | PR / commit                                               |
+|---------------------|-------------------------------------------------|---------|-----------------------------------------------------------|
+| **VProgressLinear** | Avoid `opacity:NaN` when rendering with SSR     | v4.0.9  | [#22880](https://github.com/vuetifyjs/vuetify/pull/22880) |
+| **VNumberInput**    | Keep both controls enabled when empty           | v4.0.9  | [e0133c2](https://github.com/vuetifyjs/vuetify/commit/e0133c2) |
+| **focusTrap**       | Prevent page scroll when capturing focus        | v4.0.9  | [451e7c3](https://github.com/vuetifyjs/vuetify/commit/451e7c3) |
+| **VSelect**         | Close menu when click lands inside host overlay | v4.1.1  | [7ed9a54](https://github.com/vuetifyjs/vuetify/commit/7ed9a54) |
+| **VSnackbar**       | More reliable progress bar                      | v4.1.1  | [5e6fe60](https://github.com/vuetifyjs/vuetify/commit/5e6fe60) |
+| **VNumberInput**    | Emit `change` when using controls and arrows    | v4.1.1  | [2ab2509](https://github.com/vuetifyjs/vuetify/commit/2ab2509) |
+| **VTooltip**        | Avoid stealing focus                            | v4.1.1  | [77d1a8a](https://github.com/vuetifyjs/vuetify/commit/77d1a8a) |
+| **VTable**          | Apply background and border for `fixed-footer`  | v4.1.1  | [ecabcc5](https://github.com/vuetifyjs/vuetify/commit/ecabcc5) |
+| **VMenu**           | Prevent focus change during IME input           | v4.1.1  | [#21008](https://github.com/vuetifyjs/vuetify/pull/21008) |
+| **VHeatmap**        | Keep legend bar visible in forced-colors mode   | v4.1.1  | [58e3e7d](https://github.com/vuetifyjs/vuetify/commit/58e3e7d) |
+| **VHighlight**      | Support forced-colors mode                      | v4.1.1  | [067228c](https://github.com/vuetifyjs/vuetify/commit/067228c) |
+| **VOverlay**        | Static location should snap to edges using CSS  | v4.1.2  | [#22921](https://github.com/vuetifyjs/vuetify/pull/22921) |
+| **VOverlay**        | Keep overlay attached with iOS keyboard open    | v4.1.2  | [#22923](https://github.com/vuetifyjs/vuetify/pull/22923) |
+| **VOverlay**        | Resolve `calc`/`min`/`vw` sizes to pixels       | v4.1.2  | [bf105bf](https://github.com/vuetifyjs/vuetify/commit/bf105bf) |
+| **VDialog**         | Clear inline styles when enabling fullscreen    | v4.1.2  | [ea29378](https://github.com/vuetifyjs/vuetify/commit/ea29378) |
+| **VTreeview**       | Apply `hide-actions` to group nodes             | v4.1.2  | [e5555ae](https://github.com/vuetifyjs/vuetify/commit/e5555ae) |
+| **VPagination**     | Predictable length behavior in flex container   | v4.1.2  | [#22912](https://github.com/vuetifyjs/vuetify/pull/22912) |
+| **theme**           | Async transition should return a Promise        | v4.1.2  | [904f949](https://github.com/vuetifyjs/vuetify/commit/904f949) |
 
 ### In Development
 
-**Validation rules out of labs** — the `rules` utilities are being promoted from labs to core ([2871f71](https://github.com/vuetifyjs/vuetify/commit/2871f71)). The work merged in June and is queued for the next release, part of the year-long push to drain labs by November.
+**Deferred to v4.2** — keeping v4.1 tight meant several in-flight initiatives slipped past the minor and now sit against the [v4.2.0 milestone](https://github.com/vuetifyjs/vuetify/milestone/90). Most are feature PRs that were already open before v4.1 went stable:
+
+* **[VTreeview](/components/treeview/)** — a set of accessibility improvements: more aria attributes and correct keyboard navigation
+* **[VSlider](/components/sliders/)** — a `pill` variant to match MD3 ([#22699](https://github.com/vuetifyjs/vuetify/pull/22699))
+* **[VBreadcrumbs](/components/breadcrumbs/)** — improved accessibility and a collapse menu ([#22358](https://github.com/vuetifyjs/vuetify/pull/22358))
+* **[VMaskInput](/components/mask-inputs/)** — multiple and dynamic mask resolution ([#22501](https://github.com/vuetifyjs/vuetify/pull/22501))
 
 ---
 
 ## Security Incident { #security-incident }
 
-On June 3, a maintainer's personal machine was compromised by a commodity infostealer after a social-engineering lure. The attacker used browser-stored credentials to take over the Vuetify **Discord support account**, added 2FA to lock the owner out, and sent an extortion demand, which was refused.
+If you somehow missed the [deep dive into the incident](/about/incidents/2026-06-nyven-infostealer/), a long story short is that Discord failed us by shipping insecure client (2FA is a joke) and having no backup, no "security cooldown" nor tools to recover the server after the takeover. After a shaky two weeks, we had set up a new one and get things back on track. All community members are welcome to re-join.
 
-**No Vuetify package, source, release, CI pipeline, or user data was affected.** The release pipeline's existing protections — OIDC-based trusted publishing to npm and mandatory 2FA — limit what any single stolen credential can do, and there is no sign any were used against project infrastructure. Tokens on the affected host were rotated or revoked as a precaution.
+**No Vuetify package, source, release, CI pipeline, or user data was affected.** But the team still took the opportunity to rotate the security tokens and strenghten the internal policies. One interesting side-effect of "what if" planning was a new project [pkg-diff](https://github.com/vuetifyjs/pkg-diff). It appears despite constant problems around NPM packages security, we had not found even one decent tool to diff packages - some were slow, other limited, so we created our own and since it is computing everything in-browser, everyone is free to use it :)
 
-The support account was recovered on June 10, but **the original community server was deleted and cannot be restored** — Discord support confirmed the loss of the server, its channels, and its message history is permanent. A replacement server was opened while recovery was pending and is now the official home of the community.
-
-::: warning
-
-The original Discord server is permanently gone. Request an invite to the new one at [community.vuetifyjs.com](https://community.vuetifyjs.com). If any other server or DM claims to be us and asks for money, credentials, or 2FA codes, **it is not us**.
-
-:::
-
-The full write-up — timeline, scope, root cause, and public indicators of compromise — is on the [incident report page](/about/incidents/2026-06-nyven-infostealer/).
+<!-- TODO: screenshot from -->
 
 ---
 
@@ -209,80 +196,6 @@ The [Nuxt Module](https://github.com/vuetifyjs/nuxt-module) continued its march 
 
 ---
 
-## June 2026 Changelog
-
-The following section provides an overview of the changes made in June 2026 across the Vuetify framework.
-
-**Key Improvements:**
-
-* v4.0.9: stable-line patch — `VProgressLinear` SSR opacity, `VNumberInput` empty-state controls, focus-trap scroll
-* v4.1.0: stable release of the v4.1 minor — VSwitch MD3 (`size`, `square` inset, spec alignment), `VCalendar` `interval-highlight`, `VExpansionPanel` focus polish and `hover` prop
-* v4.1.1: fixes across VSelect, VSnackbar, VNumberInput, VTooltip, VTable, VMenu (IME), plus forced-colors support for VHeatmap and VHighlight
-* v4.1.2: overlay static-location hardening (edge snapping, iOS keyboard, `calc()`/`min()`/`vw` sizes, reactive dimensions), plus VDialog, VTreeview, VPagination, and theme fixes
-
-**Expand** this section to see the detailed changelog for June 2026:
-
-<details>
-<summary>June 2026 Full Changelog</summary>
-
-### v4.0.9 (2026-06-02)
-
-**:wrench: Bug Fixes**
-
-* **VProgressLinear:** avoid `opacity:NaN` when rendering with SSR ([#22880](https://github.com/vuetifyjs/vuetify/issues/22880))
-* **VNumberInput:** keep both controls enabled when empty
-* **focusTrap:** prevent page scroll when capturing focus
-
----
-
-### v4.1.0 (2026-06-02)
-
-**:rocket: Features**
-
-* **VSwitch:** align with MD3 spec ([#22879](https://github.com/vuetifyjs/vuetify/issues/22879)); add `size` prop ([#22882](https://github.com/vuetifyjs/vuetify/issues/22882)); add `square` inset variant ([#22881](https://github.com/vuetifyjs/vuetify/issues/22881))
-* **VCalendar:** add `interval-highlight` prop ([#22885](https://github.com/vuetifyjs/vuetify/issues/22885))
-* **VExpansionPanelTitle:** add `hover` prop to disable hover effect ([#22827](https://github.com/vuetifyjs/vuetify/issues/22827))
-
-**:wrench: Bug Fixes**
-
-* **VSwitch:** tune track color for inset material; outline should have neutral color
-* **VExpansionPanel:** improved focus styles
-* **VDialog:** no viewport margin for fullscreen dialog
-* **VDataTableVirtual:** align `caption` slot with VTable
-
----
-
-### v4.1.1 (2026-06-08)
-
-**:wrench: Bug Fixes**
-
-* **VSelect:** close menu when click lands inside host overlay
-* **VSnackbar:** more reliable progress bar
-* **VNumberInput:** emit `change` when using controls and arrows
-* **VOverlay:** respect % dimension boundaries
-* **VTooltip:** avoid stealing focus; merge content class and props
-* **VTable:** apply background and border for `fixed-footer`
-* **VMenu:** prevent focus change during IME input ([#21008](https://github.com/vuetifyjs/vuetify/issues/21008))
-* **VHeatmap:** keep legend bar visible in forced-colors mode
-* **VHighlight:** support forced-colors mode
-
----
-
-### v4.1.2 (2026-06-16)
-
-**:wrench: Bug Fixes**
-
-* **VOverlay:** static location should snap to edges using CSS ([#22921](https://github.com/vuetifyjs/vuetify/issues/22921)); keep overlay attached with iOS keyboard open ([#22923](https://github.com/vuetifyjs/vuetify/issues/22923)); resolve size with CSS function (calc, min, vw) to pixels; dimension props should be reactive in static strategy; do not clear position when closing
-* **VDialog:** clear inline styles when enabling fullscreen mode
-* **VTreeview:** apply `hide-actions` to group nodes
-* **VPagination:** predictable length behavior in flex container ([#22912](https://github.com/vuetifyjs/vuetify/issues/22912))
-* **theme:** async transition should return a Promise
-* **utilities:** merge height values into a single group
-
-</details>
-
----
-
 ## What's Next { .mt-4 }
 
 July finishes the year's first arc. **Vuetify0** reaches **v1.0**, ending the beta and giving the framework a stable foundation to migrate onto. **Vuetify 4.1** continues its patch cadence, with the `rules` promotion and more overlay and treeview polish already queued. And with a v0 v1 in hand, the **theme**, **locale**, and **date** migrations move from planning to real work.
@@ -301,9 +214,9 @@ The theme for the rest of the year hasn't changed: **finishing what we started**
 
 **A modernized docs experience (later this year)**: we're planning a significant UX upgrade to the Vuetify docs, porting over features introduced first to the [Vuetify0 documentation](https://0.vuetifyjs.com/). For a preview of where we're headed, spend some time in the [v0 docs](https://0.vuetifyjs.com/) — the navigation, search, and interactive code samples are an early taste of what's coming.
 
-::: error
+::: warning
 
-**Vuetify needs your support.** OpenCollective funds are exhausted and we're currently unable to compensate contributors for ongoing work on the framework and ecosystem tools. If your team relies on Vuetify, please consider sponsoring us via [Open Collective](https://opencollective.com/vuetify) or [GitHub Sponsors](https://github.com/sponsors/johnleider). Every contribution keeps Vuetify shipping.
+**Vuetify needs your support.** OpenCollective trend slowly picks up and we appreciate every contribution and support for ongoing work on the framework and ecosystem tools. If your team relies on Vuetify, please educate your boss about importance of sponsoring OSS projects like Vuetify. You can point them to [Open Collective](https://opencollective.com/vuetify) or [GitHub Sponsors](https://github.com/sponsors/johnleider). Every contribution keeps Vuetify afloat.
 
 :::
 
