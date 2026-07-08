@@ -1,5 +1,6 @@
 // Components
 import { VTreeview } from '../VTreeview'
+import { VSelect } from '@/components/VSelect'
 
 // Utilities
 import { render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
@@ -259,6 +260,42 @@ describe('VTreeview a11y', () => {
     // VList would otherwise hijack ArrowDown and move focus to the next row.
     await userEvent.keyboard('{ArrowDown}')
     expect(document.activeElement).toBe(input)
+  })
+
+  it('exits to the previous element on the first shift+Tab, not the list container', async () => {
+    render(() => (
+      <>
+        <button data-test="before">before</button>
+        <VTreeview openAll items={ items } itemValue="id" />
+        <button data-test="after">after</button>
+      </>
+    ))
+
+    await userEvent.tab()
+    expect(document.activeElement).toBe(screen.getByCSS('[data-test="before"]'))
+    await userEvent.tab()
+    expect(document.activeElement).toBe(treeitem('Vuetify Human Resources'))
+
+    await userEvent.tab({ shift: true })
+    expect(document.activeElement).toBe(screen.getByCSS('[data-test="before"]'))
+  })
+
+  it('lands on the next row when tabbing out of an embedded select menu', async () => {
+    render(() => (
+      <VTreeview openAll items={ items } itemValue="id">
+        {{
+          append: ({ item }: any) => item.id === 201
+            ? <VSelect items={['a', 'b', 'c']} modelValue="a" density="compact" hideDetails style="width: 100px" />
+            : undefined,
+        }}
+      </VTreeview>
+    ))
+
+    await userEvent.click(screen.getByCSS('.v-select'))
+    await expect.poll(() => screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+
+    await userEvent.keyboard('{Tab}')
+    expect(document.activeElement).toBe(treeitem('Kael'))
   })
 
   it('marks a collapsing subtree inert so focus can not enter it', async () => {
