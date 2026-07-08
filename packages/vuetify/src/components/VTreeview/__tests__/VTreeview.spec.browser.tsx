@@ -843,8 +843,7 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
     await userEvent.tab()
-    await userEvent.tab()
-    await userEvent.keyboard('{enter}')
+    await userEvent.keyboard('{ArrowRight}')
     expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()

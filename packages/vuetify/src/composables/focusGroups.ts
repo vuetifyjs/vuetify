@@ -49,6 +49,12 @@ export function useFocusGroups ({ groups, onLeave }: {
 
       if (atEdge) {
         onLeave()
+        const refocused = document.activeElement as HTMLElement | null
+        if (refocused) {
+          const relayed = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: e.shiftKey, bubbles: true, cancelable: true })
+          refocused.dispatchEvent(relayed) // let list or treeview handle the navigation
+          if (relayed.defaultPrevented) e.preventDefault()
+        }
       }
     } else {
       e.preventDefault()

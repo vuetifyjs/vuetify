@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Treeview
   title: Treeview component
@@ -23,7 +24,7 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 A basic example of the treeview component.
 
-<ExamplesExample file="v-treeview/usage" />
+<ExamplesUsage name="v-treeview" />
 
 <PromotedEntry />
 
@@ -55,21 +56,9 @@ The `v-treeview` component has several props that allow you to customize its app
 
 #### Activatable
 
-Treeview nodes can be activated by clicking on them.
+Treeview nodes can be activated by clicking on them. Use the `color` prop to control the text and background color of the active node.
 
 <ExamplesExample file="v-treeview/prop-activatable" />
-
-#### Color
-
-You can control the text and background color of the active treeview node.
-
-<ExamplesExample file="v-treeview/prop-color" />
-
-#### Density
-
-Dense mode provides more compact layout with decreased heights of the items.
-
-<ExamplesExample file="v-treeview/prop-dense" />
 
 #### Items registration
 
@@ -100,12 +89,6 @@ Treeview nodes can be pre-opened on page load.
 You can make treeview nodes rounded.
 
 <ExamplesExample file="v-treeview/prop-rounded" /> -->
-
-#### Fluid
-
-The **fluid** prop removes the extra indentation used to line up children. This is useful when you want to reduce the horizontal space used by the treeview.
-
-<ExamplesExample file="v-treeview/prop-fluid" />
 
 #### Selected color
 
@@ -181,9 +164,3 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <ExamplesExample file="v-treeview/misc-selectable-icons" />
-
-### Indent lines
-
-The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
-
-<ExamplesExample file="v-treeview/misc-indent-lines" />
