@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## June 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 July 8th, 2026
+
+June was a stabilization month: May opened the v4.1 minor in beta, and June carried it across the line — v4.1.0 went stable on June 2, followed by two patch releases that spent most of their energy hardening the new overlay location strategy (iOS keyboards, calc() sizes, percentage boundaries, edge snapping) and cleaning up the edges of a large minor. VSwitch's MD3 work, VCalendar's interval-highlight prop, and VExpansionPanel focus polish rounded out the release. It was also the month a security incident cost us our Discord server — no package, release, or user data was touched, but rebuilding the community's home became part of the work... { .text-medium-emphasis }
+
+[Read More](/blog/june-2026-update/) { .text-end }
+
 ## Announcing the Vuetify0 Release Candidate
 
 🖊️ John Leider • 📅 July 2nd, 2026
