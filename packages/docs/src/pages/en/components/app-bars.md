@@ -34,6 +34,10 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 <PromotedEntry />
 
+::: warning
+  The `v-app-bar` must be used inside a `v-app` component. Without it, you will get an `injection "Symbol(vuetify:layout)" not found` error. See [v-app](/components/application/) for more information.
+:::
+
 ## API
 
 | Component | Description |
