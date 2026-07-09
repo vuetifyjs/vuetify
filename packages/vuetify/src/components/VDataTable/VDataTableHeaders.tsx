@@ -365,11 +365,22 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
+    const showMobileHeader = computed(() => {
+      if (slots['mobile.header']) return true
+      const hasSortableColumns = columns.value.some(column => column?.sortable && !props.disableSort)
+      const hasSelectionControl = columns.value.some(column => column.key === 'data-table-select')
+      return hasSortableColumns || hasSelectionControl
+    })
+
     useRender(() => {
       return mobile.value ? (
-        <tr>
-          <VDataTableMobileHeaderCell />
-        </tr>
+        <>
+          { showMobileHeader.value && (
+            <tr>
+              <VDataTableMobileHeaderCell />
+            </tr>
+          )}
+        </>
       ) : (
         <>
           { slots.headers
