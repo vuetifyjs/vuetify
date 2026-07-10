@@ -349,6 +349,21 @@ describe('VMaskInput', () => {
         expect(model.value).toBe(outputText)
         expect(input.selectionStart).toBe(outputCaret)
       })
+
+      it('should keep the value intact when copying and pasting a full selection', async () => {
+        const { input, model, insertCaretAt } = renderComponent({
+          defaultModel: '1234567890123456',
+          defaultMask: '####-####-####-####',
+        })
+
+        await insertCaretAt(0, input.value.length)
+        const lock = await commands.getLock()
+        await navigator.clipboard.writeText(input.value)
+        await userEvent.paste()
+        await commands.releaseLock(lock)
+
+        expect(model.value).toBe('1234-5678-9012-3456')
+      })
     })
   })
 })
