@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '../../styles/settings';
 
 // VSwitch
@@ -10,8 +11,8 @@ $switch-inset-thumb-height: 24px !default;
 $switch-inset-thumb-width: 24px !default;
 $switch-inset-thumb-off-height: 16px !default;
 $switch-inset-thumb-off-width: 16px !default;
-$switch-inset-thumb-off-scale: calc(#{$switch-inset-thumb-off-height} / #{$switch-inset-thumb-height}) !default;
-$switch-inset-thumb-pressed-scale: calc(28px / #{$switch-inset-thumb-height}) !default;
+$switch-inset-thumb-off-scale: math.div($switch-inset-thumb-off-height, $switch-inset-thumb-height) !default;
+$switch-inset-thumb-pressed-scale: math.div(28px, $switch-inset-thumb-height) !default;
 $switch-inset-track-border-radius: 9999px !default;
 $switch-inset-track-height: 32px !default;
 $switch-inset-track-width: 52px !default;
