@@ -20,6 +20,9 @@ export default {
       activateNone: 'نشط لإزالة الترتيب.',
       activateDescending: 'نشط للترتيب تنازلياً.',
       activateAscending: 'نشط للترتيب تصاعدياً.',
+      selectRow: 'تحديد الصف',
+      selectAll: 'تحديد الكل',
+      selectGroup: 'تحديد المجموعة',
     },
     sortBy: 'رتب حسب',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'to',
+  },
+  monthPicker: {
+    title: 'اختر الشهر',
+    itemsSelected: '{0} محدد',
+    header: 'أدخل الشهر',
+    range: {
+      title: 'أدخل الأشهر',
+    },
+    ariaLabel: {
+      previousYear: 'السنة السابقة',
+      nextYear: 'السنة التالية',
+      selectYear: 'اختر السنة',
+      currentMonth: 'الشهر الحالي، {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} محدد',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} أكثر',
     today: 'Today',
+  },
+  heatmap: {
+    less: 'أقل',
+    more: 'أكثر',
   },
   input: {
     clear: 'Clear {0}',

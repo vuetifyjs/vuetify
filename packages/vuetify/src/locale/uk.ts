@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активувати, щоб видалити сортування.',
       activateDescending: 'Активувати, щоб відсортувати за спаданням.',
       activateAscending: 'Активувати, щоб відсортувати за зростанням.',
+      selectRow: 'Вибрати рядок',
+      selectAll: 'Вибрати всі',
+      selectGroup: 'Вибрати групу',
     },
     sortBy: 'Відсортувати за',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'до',
+  },
+  monthPicker: {
+    title: 'Виберіть місяць',
+    itemsSelected: 'Вибрано {0}',
+    header: 'Введіть місяць',
+    range: {
+      title: 'Введіть місяці',
+    },
+    ariaLabel: {
+      previousYear: 'Попередній рік',
+      nextYear: 'Наступний рік',
+      selectYear: 'Виберіть рік',
+      currentMonth: 'Поточний місяць, {0}',
+    },
   },
   datePicker: {
     itemsSelected: 'Вибрано {0}',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'Ще {0}',
     today: 'Сьогодні',
+  },
+  heatmap: {
+    less: 'Менше',
+    more: 'Більше',
   },
   input: {
     clear: 'Очистити {0}',

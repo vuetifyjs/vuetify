@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: CSS Layers
   description: Vuetify 4 uses cascade layers to avoid specificity problems

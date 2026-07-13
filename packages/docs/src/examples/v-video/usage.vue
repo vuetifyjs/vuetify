@@ -53,8 +53,8 @@
       'hide-volume': (!isHidden.value && hideVolume.value) || undefined,
       noFullscreen: (!isHidden.value && noFullscreen.value) || undefined,
       'controls-variant': controlsVariants.includes(model.value) ? model.value : undefined,
-      image: 'https://cdn.jsek.work/cdn/vt-sunflowers.jpg',
-      src: 'https://cdn.jsek.work/cdn/vt-sunflowers.mp4',
+      image: 'https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4',
     }
   })
 

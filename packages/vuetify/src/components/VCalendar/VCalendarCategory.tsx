@@ -4,6 +4,7 @@ import { VCalendarDaily } from './VCalendarDaily'
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './composables/calendarWithIntervals'
+import { makeIntervalHighlightProps, useIntervalHighlight } from './composables/intervalHighlight'
 
 // Utilities
 import { computed } from 'vue'
@@ -27,13 +28,15 @@ export const VCalendarCategory = defineComponent({
       type: String,
       default: '',
     },
-
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithIntervalsProps(),
   },
 
   setup (props, { slots, attrs }) {
     const base = useCalendarWithIntervals(props)
+
+    const highlight = useIntervalHighlight(props, base)
 
     const parsedCategories = computed((): CalendarCategory[] => {
       return getParsedCategories(props.categories, props.categoryText)
@@ -102,6 +105,8 @@ export const VCalendarCategory = defineComponent({
           key={ day.date + '-' + categoryIndex }
           class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
           { ...events }
+          onMousemove={ highlight.onMousemove }
+          onMouseleave={ highlight.onMouseleave }
         >
           { genDayIntervals(index, category) }
           { genDayBody(day, category) }
@@ -120,9 +125,15 @@ export const VCalendarCategory = defineComponent({
       return (
         <div
           key={ interval.time }
-          class="v-calendar-daily__day-interval"
+          class={[
+            'v-calendar-daily__day-interval',
+            {
+              'v-calendar-daily__day-interval--hover': highlight.isHighlighted(interval),
+            },
+          ]}
           style={[{ height }, styler({ ...interval, category })]}
         >
+          { highlight.genUnderlay() }
           { slots.interval?.(
             getCategoryScope(base.getSlotScope(interval), category)
           )}

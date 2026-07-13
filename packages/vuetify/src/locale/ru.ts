@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активируйте, чтобы убрать сортировку.',
       activateDescending: 'Активируйте для упорядочивания убыванию.',
       activateAscending: 'Активируйте для упорядочивания по возрастанию.',
+      selectRow: 'Выбрать строку',
+      selectAll: 'Выбрать всё',
+      selectGroup: 'Выбрать группу',
     },
     sortBy: 'Сортировать по',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'до',
+  },
+  monthPicker: {
+    title: 'Выбрать месяц',
+    itemsSelected: '{0} выбрано',
+    header: 'Ввод месяца',
+    range: {
+      title: 'Ввод месяцев',
+    },
+    ariaLabel: {
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectYear: 'Выбрать год',
+      currentMonth: 'Текущий месяц, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} выбрано',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'Еще {0}',
     today: 'Сегодня',
+  },
+  heatmap: {
+    less: 'Меньше',
+    more: 'Больше',
   },
   input: {
     clear: 'Очистить {0}',

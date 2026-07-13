@@ -20,6 +20,9 @@ export default {
       activateNone: 'Kích hoạt để bỏ sắp xếp.',
       activateDescending: 'Kích hoạt để sắp xếp giảm dần.',
       activateAscending: 'Kích hoạt để sắp xếp tăng dần.',
+      selectRow: 'Chọn hàng',
+      selectAll: 'Chọn tất cả',
+      selectGroup: 'Chọn nhóm',
     },
     sortBy: 'Sắp xếp',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'đến',
+  },
+  monthPicker: {
+    title: 'Chọn tháng',
+    itemsSelected: '{0} mục đã chọn',
+    header: 'Nhập tháng',
+    range: {
+      title: 'Nhập tháng',
+    },
+    ariaLabel: {
+      previousYear: 'Năm trước',
+      nextYear: 'Năm sau',
+      selectYear: 'Chọn năm',
+      currentMonth: 'Tháng này, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} mục đã chọn',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} nữa',
     today: 'Hôm nay',
+  },
+  heatmap: {
+    less: 'Ít hơn',
+    more: 'Nhiều hơn',
   },
   input: {
     clear: 'Xóa {0}',

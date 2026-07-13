@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: December 2025 Update
-  description: December delivered Vuetify 4.0.0-alpha.0 with CSS layers and theme improvements, five v3.11.x patch releases, the Vuetify CLI public release, PWA rollout across all ecosystem products, and significant Vuetify0 progress.
+  description: December shipped Vuetify 4.0.0-alpha.0 with CSS layers, five v3.11.x patches, the Vuetify CLI public release, ecosystem-wide PWA rollout, and v0 progress.
   keywords: Vuetify December 2025, v4.0.0-alpha.0, Vuetify CLI, PWA, CSS layers, Vuetify0, MCP
 ---
 

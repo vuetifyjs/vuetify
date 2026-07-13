@@ -12,9 +12,9 @@
           color="orange"
           controls-transition="slide-y-transition"
           elevation="0"
-          image="https://cdn.jsek.work/cdn/vt-video-poster.jpg"
+          image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video-poster.jpg"
           rounded="xl"
-          src="https://cdn.jsek.work/cdn/vt-video.mp4"
+          src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video.mp4"
           width="100%"
           detached
           eager

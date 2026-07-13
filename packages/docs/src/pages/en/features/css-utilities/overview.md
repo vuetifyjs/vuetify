@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Overview
   title: CSS Utilities - Overview

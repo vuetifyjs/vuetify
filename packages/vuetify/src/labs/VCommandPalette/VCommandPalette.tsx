@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -45,6 +45,10 @@ export const makeVCommandPaletteProps = propsFactory({
     default: '$search',
   },
   hotkey: String,
+  offsetTop: {
+    type: [Number, String],
+    default: '15vh',
+  },
   closeOnSelect: {
     type: Boolean,
     default: true,
@@ -57,7 +61,12 @@ export const makeVCommandPaletteProps = propsFactory({
 
   ...makeFilterProps({ filterKeys: ['title', 'subtitle'] }),
   ...makeDensityProps(),
-  ...omit(makeVDialogProps({ maxWidth: 500 }), ['modelValue']),
+  ...omit(makeVDialogProps({
+    location: 'top center' as const,
+    maxWidth: 500,
+    origin: 'top center' as const,
+    viewportMargin: 16,
+  }), ['modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
@@ -272,8 +281,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
       return (
         <VDialog
           ref={ dialogRef }
-          class="v-command-palette"
           v-model={ isOpen.value }
+          class="v-command-palette"
+          style={{
+            '--v-command-palette-top-offset': convertToUnit(props.offsetTop),
+          }}
           scrollable
           { ...dialogProps }
         >

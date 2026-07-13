@@ -54,6 +54,9 @@ export const VBtnToggle = genericComponent<new <T>(
         <VBtnGroup
           class={[
             'v-btn-toggle',
+            {
+              'v-btn-toggle--has-color': !!props.color,
+            },
             props.class,
           ]}
           { ...btnGroupProps }

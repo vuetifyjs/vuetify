@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivoi lajittelun poistamiseksi.',
       activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
       activateAscending: 'Aktivoi lajitella nouseva.',
+      selectRow: 'Valitse rivi',
+      selectAll: 'Valitse kaikki',
+      selectGroup: 'Valitse ryhmä',
     },
     sortBy: 'Järjestä',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '–',
+  },
+  monthPicker: {
+    title: 'Valitse kuukausi',
+    itemsSelected: '{0} valittu',
+    header: 'Syötä kuukausi',
+    range: {
+      title: 'Syötä kuukaudet',
+    },
+    ariaLabel: {
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectYear: 'Valitse vuosi',
+      currentMonth: 'Nykyinen kuukausi, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valittu',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} lisää',
     today: 'Tänään',
+  },
+  heatmap: {
+    less: 'Vähemmän',
+    more: 'Enemmän',
   },
   input: {
     clear: 'Tyhjennä {0}',

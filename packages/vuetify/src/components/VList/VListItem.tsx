@@ -211,7 +211,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(roundedProps)
+    const { roundedClasses, roundedStyles } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
     const rippleOptions = toRef(() =>
       (
@@ -311,6 +311,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
             },
             colorStyles.value,
             dimensionStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }

@@ -1,6 +1,7 @@
 // Components
 import { VNumberInput } from '../VNumberInput'
 import { VForm } from '@/components/VForm'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { click, commands, render, screen, userEvent } from '@test'
@@ -20,6 +21,43 @@ describe('VNumberInput', () => {
     await userEvent.click(element)
     await userEvent.keyboard(typing)
     expect(screen.getByCSS('input')).toHaveValue(expected)
+  })
+
+  describe('locales using a non-ASCII minus sign', () => {
+    it('keeps the value negative on blur', async () => {
+      const model = ref(-1234.1234)
+      render(() => (
+        <VLocaleProvider locale="hr">
+          <VNumberInput v-model={ model.value } precision={ null } />
+        </VLocaleProvider>
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+      expect(input.value).toBe('−1234,1234')
+
+      await userEvent.click(input)
+      await userEvent.click(document.body)
+
+      expect(model.value).toBe(-1234.1234)
+      expect(input.value).toBe('−1234,1234')
+    })
+
+    it('accepts a typed ASCII minus and renders the locale sign', async () => {
+      const model = ref<number | null>(null)
+      render(() => (
+        <VLocaleProvider locale="hr">
+          <VNumberInput v-model={ model.value } precision={ null } />
+        </VLocaleProvider>
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.click(input)
+      await userEvent.keyboard('-5')
+      await userEvent.click(document.body)
+
+      expect(model.value).toBe(-5)
+      expect(input.value).toBe('−5')
+    })
   })
 
   it('resets v-model to null when click:clear is triggered', async () => {
@@ -222,6 +260,28 @@ describe('VNumberInput', () => {
 
       await expect.element(screen.getByCSS('input')).toHaveValue('-10')
       expect(model.value).toBe(-10)
+    })
+
+    it('should have increment enabled when range is entirely negative', async () => {
+      const model = ref(null)
+      render(() =>
+        <VNumberInput min={ -10 } max={ -2 } v-model={ model.value } />
+      )
+
+      expect(screen.getByTestId('increment')).toBeEnabled()
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(model.value).toBe(-2)
+    })
+
+    it('should have decrement enabled when range is entirely positive', async () => {
+      const model = ref(null)
+      render(() =>
+        <VNumberInput min={ 2 } max={ 10 } v-model={ model.value } />
+      )
+
+      expect(screen.getByTestId('decrement')).toBeEnabled()
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(model.value).toBe(2)
     })
 
     it('supports decimal step', async () => {
@@ -462,6 +522,41 @@ describe('VNumberInput', () => {
       model.value = 45
       await nextTick()
       expect(vInput).not.toHaveClass('v-input--error')
+    })
+  })
+
+  describe('propagates native change event', () => {
+    it('on typing then blur', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput onChange={ onChange } />)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('42')
+      await userEvent.tab()
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('on increment/decrement controls', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput modelValue={ 5 } onChange={ onChange } />)
+
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+
+    it('on arrow up/down keys', async () => {
+      const onChange = vi.fn()
+      render(() => <VNumberInput modelValue={ 5 } onChange={ onChange } />)
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('{ArrowUp}')
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(onChange).toHaveBeenCalledTimes(2)
     })
   })
 })

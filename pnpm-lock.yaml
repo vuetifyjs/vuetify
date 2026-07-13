@@ -285,8 +285,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(vue@3.5.25(typescript@6.0.2))
       '@vuetify/one':
-        specifier: ^3.1.1
-        version: 3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
+        specifier: ^4.0.0
+        version: 4.0.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3260,6 +3260,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@unhead/dom@1.11.20':
     resolution: {integrity: sha512-jgfGYdOH+xHJF/j8gudjsYu3oIjFyXhCWcgKaw3vQnT616gSqyqnGQGOItL+BQtQZACKNISwIfx5PuOtztMKLA==}
@@ -3673,8 +3674,8 @@ packages:
       vue: ^3.0.0
       vuetify: ^3.0.0
 
-  '@vuetify/one@3.1.1':
-    resolution: {integrity: sha512-WDGSAprdT0KBl3U47fAjcRCHhmzTIA+Fu/m/W/ZT0m8t35qaFx1x2IRYwhQo0lhoUEZrSa8YVkJP5kRiLACuuA==}
+  '@vuetify/one@4.0.0':
+    resolution: {integrity: sha512-M0bG39XzMLn9c7hWbuR6Dny0bBHRO5Q6Ib1ETCwal+FcukrmBENQosOSps6LohrRoeyX2i+j3f2hF9D9xhYVJw==}
     peerDependencies:
       '@mdi/js': 7.4.47
       lodash-es: ^4.17.21
@@ -12030,7 +12031,7 @@ snapshots:
       vue: 3.5.25(typescript@6.0.2)
       vuetify: link:packages/vuetify
 
-  '@vuetify/one@3.1.1(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
+  '@vuetify/one@4.0.0(@mdi/js@7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f))(lodash-es@4.17.22)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))(vuetify@packages+vuetify)':
     dependencies:
       '@mdi/js': 7.4.47(patch_hash=3c2a78b1509745df3a3100e3e59075dd87718e67632cc14dc64dd9ac34098f9f)
       '@vuetify/auth': 0.1.8(pinia@3.0.4(typescript@6.0.2)(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))

@@ -72,6 +72,7 @@ export type ColorPickerMode = {
   inputProps: Record<string, unknown>
   inputs: {
     [key: string]: any
+    label: string
     getValue: (color: any) => number | string
     getColor: (color: any, v: string) => any
   }[]

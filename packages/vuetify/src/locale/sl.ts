@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivirajte za odstranitev razvrščanja.',
       activateDescending: 'Aktivirajte za padajoče razvrščanje.',
       activateAscending: 'Aktivirajte za naraščajoče razvrščanje.',
+      selectRow: 'Izberi vrstico',
+      selectAll: 'Izberi vse',
+      selectGroup: 'Izberi skupino',
     },
     sortBy: 'Razvrsti po',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'do',
+  },
+  monthPicker: {
+    title: 'Izberite mesec',
+    itemsSelected: '{0} izbranih',
+    header: 'Vnesite mesec',
+    range: {
+      title: 'Vnesite mesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prejšnje leto',
+      nextYear: 'Naslednje leto',
+      selectYear: 'Izberite leto',
+      currentMonth: 'Trenutni mesec, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} izbranih',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'Še {0}',
     today: 'Danes',
+  },
+  heatmap: {
+    less: 'Manj',
+    more: 'Več',
   },
   input: {
     clear: 'Počisti {0}',

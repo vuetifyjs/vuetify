@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiver for at fjerne sortering.',
       activateDescending: 'Aktiver for at sortere faldende.',
       activateAscending: 'Aktiver for at sortere stigende.',
+      selectRow: 'Vælg række',
+      selectAll: 'Vælg alle',
+      selectGroup: 'Vælg gruppe',
     },
     sortBy: 'Sorter efter',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'til',
+  },
+  monthPicker: {
+    title: 'Vælg måned',
+    itemsSelected: '{0} valgt',
+    header: 'Indtast måned',
+    range: {
+      title: 'Indtast måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Næste år',
+      selectYear: 'Vælg år',
+      currentMonth: 'Denne måned, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valgt',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} mere',
     today: 'I dag',
+  },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mere',
   },
   input: {
     clear: 'Ryd {0}',

@@ -305,6 +305,11 @@ describe('helpers', () => {
       expect(extractNumber(' 23 567,20 ', 2, ',')).toBe('23567,20')
       expect(extractNumber('-200,99 ', 1, ',')).toBe('-200,9')
     })
+
+    it('should treat U+2212 minus as an ASCII sign', () => {
+      expect(extractNumber('−6.67', 2, '.')).toBe('-6.67')
+      expect(extractNumber('−1234,1234', null, ',')).toBe('-1234,1234')
+    })
   })
 
   describe('camelizeProps', () => {

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Progress
   title: Progress component

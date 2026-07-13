@@ -1,7 +1,7 @@
 ---
 meta:
   title: Long-term support
-  description: Vuetify provides long-term support to the last major release for 18 months for critical bugs and security vulnerabilities
+  description: Vuetify provides long-term support to the previous major release for 18 months for critical bugs and security vulnerabilities
   keywords: lts, long-term support
 related:
   - /introduction/enterprise-support/
@@ -11,13 +11,13 @@ related:
 
 # Long-term support
 
-Vuetify provides long-term support to the last major release for 18 months for critical bugs and security vulnerabilities.
+Vuetify provides long-term support to the previous major release for 18 months for critical bugs and security vulnerabilities.
 
 <PageFeatures />
 
 <PromotedEntry />
 
-We understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and businesses peace of mind when adopting Vuetify, we commit to at minimum of **6 months** for critical bugs and security vulnerabilities for the latest _minor_ of the last _major_ release.
+We understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and businesses peace of mind when adopting Vuetify, we commit to a minimum of **6 months** of critical bug and security fixes for the latest _minor_ of the previous _major_ release.
 
 | Version                                   | Status        | Initial Release Date | LTS Start Date  | LTS End Date       |
 |-------------------------------------------|---------------|----------------------|-----------------|--------------------|

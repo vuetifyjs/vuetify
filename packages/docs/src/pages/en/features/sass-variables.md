@@ -174,7 +174,6 @@ Vuetify includes several utility classes that are not covered by the `$utilities
     "gap-column": false,
     "gap-row": false,
     "gap": false,
-    "height-screen": false,
     "height": false,
     "justify-content": false,
     "justify-items": false,

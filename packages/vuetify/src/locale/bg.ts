@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активирай за премахване на подредбата.',
       activateDescending: 'Активирай за подредба в намаляващ ред.',
       activateAscending: 'Активирай за подредба в нарастващ ред.',
+      selectRow: 'Избор на ред',
+      selectAll: 'Избор на всички',
+      selectGroup: 'Избор на група',
     },
     sortBy: 'Сортирай по',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'до',
+  },
+  monthPicker: {
+    title: 'Изберете месец',
+    itemsSelected: '{0} избрани',
+    header: 'Въвеждане на месец',
+    range: {
+      title: 'Въвеждане на месеци',
+    },
+    ariaLabel: {
+      previousYear: 'Предишна година',
+      nextYear: 'Следваща година',
+      selectYear: 'Изберете година',
+      currentMonth: 'Текущ месец, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} избрани',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'Още {0}',
     today: 'Днес',
+  },
+  heatmap: {
+    less: 'По-малко',
+    more: 'Повече',
   },
   input: {
     clear: 'Изчисти {0}',

@@ -11,6 +11,7 @@ import { VCalendarWeekly } from './VCalendarWeekly'
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
+import { makeIntervalHighlightProps } from './composables/intervalHighlight'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Directives
@@ -146,6 +147,7 @@ export const VCalendar = genericComponent<new (
       default: '',
     },
 
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithEventsProps(),
   },

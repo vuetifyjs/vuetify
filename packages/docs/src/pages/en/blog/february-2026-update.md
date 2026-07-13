@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: February 2026 Update
-  description: February marks Vuetify's most significant milestone—the stable release of Vuetify 4.0.0 with CSS layers, MD3 design system, and unstyled component foundations. The CLI hits v1.0.0, VAvatarGroup ships, and Vuetify0 gains createDataTable and Breadcrumbs composables.
+  description: February ships stable Vuetify 4.0.0 — CSS layers, MD3, and unstyled foundations — plus CLI v1.0.0, VAvatarGroup, and new Vuetify0 composables.
   keywords: Vuetify February 2026, Vuetify 4.0.0 Revisionist, v4 stable, VAvatarGroup, CLI v1.0.0, Vuetify0, createDataTable
 ---
 

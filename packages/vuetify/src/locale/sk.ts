@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivujte na zrušenie zoradenia.',
       activateDescending: 'Aktivujte na zoradenie zostupne.',
       activateAscending: 'Aktivujte na zoradenie vzostupne.',
+      selectRow: 'Vybrať riadok',
+      selectAll: 'Vybrať všetko',
+      selectGroup: 'Vybrať skupinu',
     },
     sortBy: 'Zoradiť podľa',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'až',
+  },
+  monthPicker: {
+    title: 'Vyberte mesiac',
+    itemsSelected: '{0} vybraných',
+    header: 'Zadajte mesiac',
+    range: {
+      title: 'Zadajte mesiace',
+    },
+    ariaLabel: {
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuálny mesiac, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} vybraných',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} ďalších',
     today: 'Dnes',
+  },
+  heatmap: {
+    less: 'Menej',
+    more: 'Viac',
   },
   input: {
     clear: 'Vymazať {0}',

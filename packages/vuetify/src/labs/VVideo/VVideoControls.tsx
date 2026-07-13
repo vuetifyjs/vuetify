@@ -7,8 +7,8 @@ import './VVideoControls.sass'
 import { VVideoVolume } from './VVideoVolume'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VSpacer } from '@/components/VGrid/VSpacer'
+import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
 import { VSlider } from '@/components/VSlider/VSlider'
-import { VIconBtn } from '@/labs/VIconBtn/VIconBtn'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

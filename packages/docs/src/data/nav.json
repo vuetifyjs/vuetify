@@ -120,6 +120,7 @@
       { "subheader": "containment" },
       "bottom-sheets",
       "buttons",
+      "icon-buttons",
       "cards",
       "chips",
       "dialogs",
@@ -147,8 +148,11 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
+      "date-inputs",
       "file-inputs",
+      "file-upload",
       "forms",
       "inputs",
       "number-inputs",
@@ -197,6 +201,7 @@
       "item-groups",
       "slide-groups",
       "steppers",
+      "vertical-steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -232,7 +237,8 @@
       { "divider": true },
       { "subheader": "miscellaneous" },
       "lazy",
-      "no-ssr"
+      "no-ssr",
+      "pull-to-refresh"
     ]
   },
   {
@@ -269,23 +275,27 @@
         "subfolder": "components"
       },
       {
-        "title": "color-inputs",
-        "subfolder": "components"
-      },
-      {
         "title": "command-palettes",
         "subfolder": "components"
       },
       {
-        "title": "date-inputs",
+        "title": "date-range-pickers",
         "subfolder": "components"
       },
       {
-        "title": "file-upload",
+        "title": "heatmaps",
         "subfolder": "components"
       },
       {
-        "title": "icon-buttons",
+        "title": "highlights",
+        "subfolder": "components"
+      },
+      {
+        "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "month-pickers",
         "subfolder": "components"
       },
       {
@@ -294,18 +304,6 @@
       },
       {
         "title": "progress",
-        "subfolder": "components"
-      },
-      {
-        "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "vertical-steppers",
-        "subfolder": "components"
-      },
-      {
-        "title": "mask-inputs",
         "subfolder": "components"
       },
       {

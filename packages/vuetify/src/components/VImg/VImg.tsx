@@ -119,7 +119,7 @@ export const VImg = genericComponent<VImgSlots>()({
 
   setup (props, { attrs, emit, slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const vm = getCurrentInstance('VImg')
 
     const currentSrc = shallowRef('') // Set from srcset
@@ -370,6 +370,7 @@ export const VImg = genericComponent<VImgSlots>()({
           style={[
             { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           { ...responsiveProps }

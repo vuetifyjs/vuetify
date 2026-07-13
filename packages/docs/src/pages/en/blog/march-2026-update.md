@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: March 2026 Update
-  description: March delivered 7 Vuetify patch releases stabilizing v4, while Vuetify0 exploded with 427 commits reaching v0.2.0 with 7 new headless components. The Nuxt Module hit beta, the CLI shipped 10 releases, and ESLint gained v4 migration rules.
+  description: March shipped 7 Vuetify patches while Vuetify0 reached v0.2.0 with 7 new headless components, the Nuxt Module beta, 10 CLI releases, and ESLint v4 rules.
   keywords: Vuetify March 2026, Vuetify0 v0.2.0, VCommandPalette, VProgress, Nuxt Module beta, Vuetify CLI, ESLint v4 migration
 ---
 

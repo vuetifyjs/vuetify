@@ -142,6 +142,40 @@
 
   const items = [
     {
+      title: 'Announcing the Vuetify0 Release Candidate',
+      shortDescription: 'Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features.',
+      date: 'July 2, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-rc'),
+    },
+    {
+      title: 'May 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/may-2026-update/may-hero.png',
+      shortDescription: 'May shipped Vuetify 4.1 — the first minor since 4.0.0 — promoting seven components out of labs and adding four new ones: VHeatmap, VHighlight, VMonthPicker, and VDateRangePicker. Four framework releases carried 34 features and 19 fixes, open issues dropped from 436 to 386, and Vuetify0 wrapped up its alpha with a headless drag-and-drop family (useDragDrop, createSortable, createKanban) ahead of the beta announced June 2...',
+      date: 'June 5, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/may-2026-update'),
+    },
+    {
+      title: 'Announcing the Vuetify0 Beta',
+      shortDescription: 'Vuetify0 has reached beta, freezing the public API: the existing composables and components keep their names and signatures through v1. Since the alpha, the totals went to 49 components and 68 composables, no composables remain in draft, and a headless drag-and-drop family (useDragDrop, createSortable, createKanban) was added along with createOtp, useDelay, and the Overflow component. The release also covers the testing and stability work — 5,700+ unit tests, 98.7% coverage — ahead of v1.',
+      date: 'June 2, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-beta'),
+    },
+    {
+      title: 'April 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/april-2026-update/april-hero.png',
+      shortDescription: 'April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives — alongside three Vuetify framework patch releases, MCP v0.7.0 with playground and link CRUD tools, and four ESLint Config releases including ESLint 10 support. Six new v0 components (Carousel, Image, NumberField, Progress, Toggle, Overflow) merged in April, the display composable became the first Vuetify internal to migrate to v0, and useTheme/useLocale/useFeatures became reactive-by-default across 847 total commits...',
+      date: 'May 4, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/april-2026-update'),
+    },
+    {
       title: 'March 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/march-2026-update/march-hero.png',
       shortDescription: 'March was Vuetify0\'s breakout month with 427 commits, 11 releases, and 7 new headless components reaching v0.2.0. The core framework shipped 7 patch releases stabilizing v4, the Nuxt Module hit v1.0.0-beta, the CLI continued with 10 releases, and the ESLint plugin gained automated v4 and TailwindCSS migration rules across 720 total commits and 69 merged PRs...',
