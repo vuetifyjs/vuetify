@@ -15,7 +15,7 @@ import {
   validateNumber,
   validateTime,
 } from '../util/timestamp'
-import { propsFactory } from '@/util'
+import { clamp, propsFactory } from '@/util'
 import { Box, getTargetBox } from '@/util/box'
 
 // Types
@@ -115,8 +115,13 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
       : parsedFirstInterval.value * parsedIntervalMinutes.value
   })
 
+  const effectiveIntervalCount = computed((): number => {
+    const dayLimit = Math.ceil((MINUTES_IN_DAY - firstMinute.value) / parsedIntervalMinutes.value)
+    return clamp(parsedIntervalCount.value, 0, dayLimit)
+  })
+
   const bodyHeight = computed((): number => {
-    return parsedIntervalCount.value * parsedIntervalHeight.value
+    return effectiveIntervalCount.value * parsedIntervalHeight.value
   })
 
   const days = computed((): CalendarTimestamp[] => {
@@ -133,7 +138,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     const daysValue = days.value
     const first: number = firstMinute.value
     const minutes: number = parsedIntervalMinutes.value
-    const count: number = parsedIntervalCount.value
+    const count: number = effectiveIntervalCount.value
     const now: CalendarTimestamp = base.times.now
 
     return daysValue.map(d => createIntervalList(d, first, minutes, count, now))
@@ -188,7 +193,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     scope.week = days.value
     scope.intervalRange = [
       firstMinute.value,
-      firstMinute.value + parsedIntervalCount.value * parsedIntervalMinutes.value,
+      firstMinute.value + effectiveIntervalCount.value * parsedIntervalMinutes.value,
     ]
     return scope
   }
@@ -247,7 +252,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
       return false
     }
 
-    const gap: number = parsedIntervalCount.value * parsedIntervalMinutes.value
+    const gap: number = effectiveIntervalCount.value * parsedIntervalMinutes.value
 
     if (targetDate && typeof time === 'object' && 'day' in time) {
       const a = getDayIdentifier(time)
