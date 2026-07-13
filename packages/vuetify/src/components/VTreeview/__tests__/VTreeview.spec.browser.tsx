@@ -956,4 +956,51 @@ describe('VTreeview with loading', () => {
     await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
     expect(screen.getByText(/4.leaf/)).not.toBeVisible()
   })
+
+  it('should keep lazily loaded children visible when searching for their parent with return-object', async () => {
+    const items = ref([
+      {
+        name: 'C:',
+        path: 'C',
+        children: [
+          { name: 'Dir1', path: 'C/dir1', children: [] },
+          { name: 'Dir2', path: 'C/dir2', children: [] },
+        ],
+      },
+    ] as any[])
+
+    async function loadChildren (item: any) {
+      await wait(50)
+      item.children = [
+        { name: 'file1.txt', path: `${item.path}/file1.txt` },
+        { name: 'file2.txt', path: `${item.path}/file2.txt` },
+      ]
+    }
+
+    const search = shallowRef('')
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+        search={ search.value }
+        itemTitle="name"
+        itemValue="path"
+        openOnClick
+        returnObject
+      />
+    ))
+
+    // open C, then Dir1 to lazily load file1.txt / file2.txt under it
+    await userEvent.click(screen.getByText(/C/))
+    await userEvent.click(screen.getByText(/Dir1/))
+    await expect.poll(() => screen.queryByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
+
+    // searching for the parent node must keep its loaded (reactive) children visible
+    search.value = 'Dir1'
+    await nextTick()
+    expect(screen.getByText(/Dir1/)).toBeVisible()
+    expect(screen.getByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
+  })
 })
