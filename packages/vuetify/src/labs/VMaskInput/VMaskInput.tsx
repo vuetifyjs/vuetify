@@ -194,8 +194,10 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     async function replaceSelection (inputElement: HTMLInputElement, pastedCharacters: string[]) {
       caretPosition.value = inputElement.selectionStart || 0
       for (let i = 0; i < pastedCharacters.length; i++) {
-        await replaceCharacter(caretPosition.value, pastedCharacters[i])
-        caretPosition.value++
+        const nextIndex = await replaceCharacter(caretPosition.value, pastedCharacters[i])
+        if (nextIndex !== -1) {
+          caretPosition.value = nextIndex
+        }
       }
     }
 
@@ -205,8 +207,14 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       // Find next non-delimiter position
       while (targetIndex < model.value.length && isMaskDelimiter(model.value[targetIndex])) targetIndex++
 
-      model.value = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
-      await nextTick()
+      const newValue = model.value.slice(0, targetIndex) + character + model.value.slice(targetIndex + 1)
+
+      if (mask.isValid(newValue)) {
+        model.value = newValue
+        await nextTick()
+        return targetIndex + 1
+      }
+      return -1
     }
 
     useRender(() => {
