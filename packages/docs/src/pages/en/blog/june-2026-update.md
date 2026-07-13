@@ -152,7 +152,7 @@ If you somehow missed the [deep dive into the incident](/about/incidents/2026-06
 
 **No Vuetify package, source, release, CI pipeline, or user data was affected.** But the team still took the opportunity to rotate the security tokens and strenghten the internal policies. One interesting side-effect of "what if" planning was a new project [pkg-diff](https://github.com/vuetifyjs/pkg-diff). It appears despite constant problems around NPM packages security, we had not found even one decent tool to diff packages - some were slow, other limited, so we created our own and since it is computing everything in-browser, everyone is free to use it :)
 
-<!-- TODO: screenshot from -->
+![pkg-diff screenshot](https://cdn.vuetifyjs.com/docs/images/blog/june-2026-update/pkg-diff-screenshot.png)
 
 ---
 
