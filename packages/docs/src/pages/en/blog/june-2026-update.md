@@ -2,8 +2,8 @@
 layout: blog
 meta:
   title: June 2026 Update
-  description: June took Vuetify 4.1 stable, hardened the new overlay location strategy across two patch releases, and — after a security incident cost us our Discord server — rebuilt the community's home.
-  keywords: Vuetify June 2026, Vuetify 4.1 stable, Ascendant, VOverlay location strategy, VSwitch MD3, VCalendar interval-highlight, Vuetify Discord incident, Vuetify0 beta
+  description: June started with Vuetify 4.1 stable release, followed by a bunch of regression fixes across two patch releases
+  keywords: Vuetify June 2026, Vuetify 4.1 stable, VOverlay, Vuetify0 beta
 ---
 
 <script setup>
@@ -31,7 +31,7 @@ meta:
 
 # June 2026 Update
 
-**June was a stabilization month, and then some.** May opened the v4.1 minor in beta; June carried it across the line — [v4.1.0](/getting-started/release-notes/?version=v4.1.0) went stable on June 2, followed by two patch releases that spent almost all of their energy hardening the new overlay location strategy and cleaning up the edges of a large minor. It was also the month a security incident cost us our Discord server. No package, release, or user data was touched — but the community's home was, and rebuilding it became part of the month's work.
+**June was a stabilization month.** [v4.1.0](/getting-started/release-notes/?version=v4.1.0) shipped on June 2, with two patch releases after that. Most of the work went into the new overlay location strategy, fixing the placement bugs that only turned up once people were using VDialog in fullscreen mode. June was also when a security incident cost us our Discord server. No package, release, or user data was touched, but the community lost its home for a couple of weeks, and getting it back was a big part of the month. One small thing did come out of the drama — [pkg-diff](https://github.com/vuetifyjs/pkg-diff), a fast in-browser tool for diffing NPM packages (more on that [below](#security-focus)).
 
 ![Hero image for June update](https://cdn.vuetifyjs.com/docs/images/blog/june-2026-update/june-hero.png "June hero image"){ height=112 }
 
@@ -56,7 +56,7 @@ Where May was a feature sprint, June was about making that work solid. **52 comm
   * [New Features](#new-features)
   * [Bug Fixes](#bug-fixes)
   * [In Development](#in-development)
-* [Security Incident](#security-incident)
+* [A side-effect of security focus](#security-focus)
 * [Vuetify0 Progress Update](#vuetify0-progress)
 * [Product Updates](#product-updates)
 * [June 2026 Changelog](#june-2026-changelog)
@@ -67,7 +67,7 @@ Where May was a feature sprint, June was about making that work solid. **52 comm
 
 ## Releases
 
-June shipped **four framework releases**. [v4.0.9](/getting-started/release-notes/?version=v4.0.9) (June 2) was a small patch on the stable v4.0 line — an SSR fix for `VProgressLinear`, a `VNumberInput` control-state fix, and a focus-trap scroll fix. The same day, [v4.1.0](/getting-started/release-notes/?version=v4.1.0) went stable, finalizing the VSwitch MD3 work and folding in the late-May fixes. From there the month was patches: [v4.1.1](/getting-started/release-notes/?version=v4.1.1) (June 8) and [v4.1.2](/getting-started/release-notes/?version=v4.1.2) (June 16), each a round of fixes led by the overlay location strategy.
+We shipped **four framework releases**. [v4.0.9](/getting-started/release-notes/?version=v4.0.9) (June 2) was a small patch on the stable v4.0 line — an SSR fix for `VProgressLinear`, a `VNumberInput` control-state fix, and a focus-trap scroll fix. The same day, [v4.1.0](/getting-started/release-notes/?version=v4.1.0) went stable, finalizing the VSwitch MD3 work and folding in the late-May fixes. From there the month was patches: [v4.1.1](/getting-started/release-notes/?version=v4.1.1) (June 8) and [v4.1.2](/getting-started/release-notes/?version=v4.1.2) (June 16), each a round of fixes led by the overlay location strategy.
 
 <AppFigure :src="releasesimg" alt="June Releases Banner" title="June Releases Banner" />
 
@@ -91,7 +91,7 @@ View the complete list of changes in the [Full Changelog](#june-2026-changelog).
 
 ---
 
-## Spotlight: Vuetify 4.1 Goes Stable (Ascendant) { #vuetify-4-1 }
+## Spotlight: Vuetify 4.1.0 release { #vuetify-4-1 }
 
 <AppFigure :src="vuetifylogo" alt="Vuetify logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Logo" />
 
@@ -108,7 +108,7 @@ May opened [v4.1.0](/getting-started/release-notes/?version=v4.1.0) in beta; **o
 
 ## Framework Updates
 
-June was deliberately feature-light — the team waited for feedback from users adopting latest version for new features and improvements.
+This month was deliberately feature-light — the team waited for feedback from users adopting latest version for new features and improvements.
 
 ### Bug Fixes
 
@@ -146,11 +146,11 @@ The overlay location strategy introduced in v4.1 was the month's dominant fix th
 
 ---
 
-## Security Incident { #security-incident }
+## A side-effect of security focus { #security-focus }
 
 If you somehow missed the [deep dive into the incident](/about/incidents/2026-06-nyven-infostealer/), a long story short is that Discord failed us by shipping insecure client (2FA is a joke) and having no backup, no "security cooldown" nor tools to recover the server after the takeover. After a shaky two weeks, we had set up a new one and get things back on track. All community members are welcome to re-join.
 
-**No Vuetify package, source, release, CI pipeline, or user data was affected.** But the team still took the opportunity to rotate the security tokens and strenghten the internal policies. One interesting side-effect of "what if" planning was a new project [pkg-diff](https://github.com/vuetifyjs/pkg-diff). It appears despite constant problems around NPM packages security, we had not found even one decent tool to diff packages - some were slow, other limited, so we created our own and since it is computing everything in-browser, everyone is free to use it :)
+**No Vuetify package, source, release, CI pipeline, or user data was affected.** But the team still took the opportunity to rotate the security tokens and strenghten the internal policies. One interesting side-effect of "what if" planning was a new project [pkg-diff](https://github.com/vuetifyjs/pkg-diff). It appears despite constant problems around NPM packages security, we had not found even one decent tool to diff packages - some were slow, other limited, so we created our own and since it is computing everything in-browser - arguably better than what NPMX shipped lately, everyone is free to use it :)
 
 ![pkg-diff screenshot](https://cdn.vuetifyjs.com/docs/images/blog/june-2026-update/pkg-diff-screenshot.png)
 
@@ -162,7 +162,7 @@ If you somehow missed the [deep dive into the incident](/about/incidents/2026-06
 
 <br>
 
-June was Vuetify0's first month in beta. The [beta was announced on June 2](/blog/announcing-vuetify0-beta/) with the public API frozen, so the work shifted from adding primitives to hardening the ones that shipped — edge cases, documentation, and the road to **v1.0 in July**. With a frozen target now in place, the **theme**, **locale**, and **date** v0 migrations inside the framework have something stable to build against.
+June was Vuetify0's first month in beta. The [beta was announced on June 2](/blog/announcing-vuetify0-beta/) with the public API frozen, so the work shifted from adding primitives to refining the ones that shipped — edge cases, documentation, and the road to **v1.0 in July**. With a frozen target now in place, the **theme**, **locale**, and **date** v0 migrations inside the framework have something stable to build against.
 
 <AppFigure :src="v0img" alt="Vuetify0 Progress" title="Vuetify0 June Progress" />
 
