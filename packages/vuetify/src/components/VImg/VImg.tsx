@@ -193,7 +193,7 @@ export const VImg = genericComponent<VImgSlots>()({
             if (!aspectRatio.value) pollForSize(image.value, null)
             if (state.value === 'loading') onLoad()
           } else {
-            if (!aspectRatio.value) pollForSize(image.value!)
+            if (!aspectRatio.value) pollForSize(image.value)
             getSrc()
           }
         })
@@ -204,7 +204,7 @@ export const VImg = genericComponent<VImgSlots>()({
       if (vm.isUnmounted) return
 
       getSrc()
-      pollForSize(image.value!)
+      pollForSize(image.value)
       state.value = 'loaded'
       emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
@@ -227,10 +227,10 @@ export const VImg = genericComponent<VImgSlots>()({
       clearTimeout(timer)
     })
 
-    function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
+    function pollForSize (img: HTMLImageElement | undefined, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
-        if (vm.isUnmounted) return
+        if (vm.isUnmounted || !img) return
 
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
