@@ -1,4 +1,4 @@
-Contact: https://github.com/vuetifyjs/vuetify/security/advisories/new
+Contact: mailto:security@vuetifyjs.com
 Expires: 2027-07-14T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://vuetifyjs.com/.well-known/security.txt
