@@ -16,13 +16,13 @@ The `v-touch` directive allows you to capture swipe gestures and apply direction
 
 <PageFeatures />
 
-<PromotedEntry />
-
 ## Usage
 
 On a mobile device, try swiping in various directions.
 
 <ExamplesExample file="v-touch/usage" />
+
+<PromotedEntry />
 
 ## API
 

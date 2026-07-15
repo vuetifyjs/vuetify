@@ -1,0 +1,7 @@
+{
+  "description": "Displays the header of the `v-date-picker` component.",
+  "props": {
+    "header": "Sets the header content.",
+    "transition": "Sets the transition when the header changes."
+  }
+}

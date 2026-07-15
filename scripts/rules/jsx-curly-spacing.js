@@ -9,8 +9,6 @@
  * @author Erik Wendel
  */
 
-'use strict'
-
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------
@@ -30,7 +28,7 @@ const messages = {
   spaceNeededBefore: 'A space is required before \'{{token}}\'',
 }
 
-module.exports = {
+export default {
   meta: {
     docs: {
       description: 'Enforce or disallow spaces inside of curly braces in JSX attributes and expressions',

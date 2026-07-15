@@ -20,8 +20,6 @@ features:
 
 The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.
 
-![Chips Entry](https://cdn.vuetifyjs.com/docs/images/components/v-chip/v-chip-entry.png)
-
 <PageFeatures />
 
 ## Usage

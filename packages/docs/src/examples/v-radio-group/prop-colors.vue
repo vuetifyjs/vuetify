@@ -8,10 +8,7 @@
             md="6"
             sm="6"
           >
-            <v-radio-group
-              v-model="ex7"
-              column
-            >
+            <v-radio-group v-model="ex7">
               <v-radio
                 color="red"
                 label="red"
@@ -49,10 +46,7 @@
             md="6"
             sm="6"
           >
-            <v-radio-group
-              v-model="ex8"
-              column
-            >
+            <v-radio-group v-model="ex8">
               <v-radio
                 color="primary"
                 label="primary"
@@ -108,3 +102,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2070-83999&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

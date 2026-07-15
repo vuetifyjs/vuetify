@@ -18,8 +18,6 @@ features:
 
 The `v-carousel` component is used to display large numbers of visual content on a rotating timer.
 
-<!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
-
 <PageFeatures />
 
 ## Usage
@@ -49,11 +47,15 @@ Use any available icon as your carousel's slide delimiter.
 
 <ExamplesExample file="v-carousel/prop-custom-icons" />
 
-<!-- #### Custom transition
+#### Custom transition
 
 The `v-carousel-item` component can have its **transition/reverse-transition** changed.
 
-<ExamplesExample file="v-carousel/prop-custom-transition" /> -->
+::: info
+Crossfade transition using `crossfade` prop requires **3.10.0**.
+:::
+
+<ExamplesExample file="v-carousel/prop-custom-transition" />
 
 #### Cycle
 
@@ -90,3 +92,11 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 You can control carousel with **v-model**.
 
 <ExamplesExample file="v-carousel/prop-model" />
+
+### Misc
+
+#### Vertical with overlay content
+
+Carousel can be augmented with additional content simply by placing VOverlay next to it.
+
+<ExamplesExample file="v-carousel/misc-vertical" />

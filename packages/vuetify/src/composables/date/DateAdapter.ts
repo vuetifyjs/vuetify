@@ -7,18 +7,22 @@ export interface DateAdapter<T = unknown> {
 
   startOfDay (date: T): T
   endOfDay (date: T): T
-  startOfWeek (date: T): T
+  startOfWeek (date: T, firstDayOfWeek?: number | string): T
   endOfWeek (date: T): T
   startOfMonth (date: T): T
   endOfMonth (date: T): T
   startOfYear (date: T): T
   endOfYear (date: T): T
 
-  isBefore (date: T, comparing: T): boolean
   isAfter (date: T, comparing: T): boolean
-  isEqual (date: T, comparing: T): boolean
+  isAfterDay(date: T, comparing: T): boolean
+
   isSameDay (date: T, comparing: T): boolean
   isSameMonth (date: T, comparing: T): boolean
+  isSameYear(date: T, comparing: T): boolean
+
+  isBefore (date: T, comparing: T): boolean
+  isEqual (date: T, comparing: T): boolean
   isValid (date: any): boolean
   isWithinRange (date: T, range: [T, T]): boolean
 
@@ -31,13 +35,16 @@ export interface DateAdapter<T = unknown> {
   getYear (date: T): number
   setYear (date: T, year: number): T
   getDiff (date: T, comparing: T | string, unit?: string): number
-  getWeekArray (date: T): T[][]
-  getWeekdays (): string[]
+  getWeekArray (date: T, firstDayOfWeek?: number | string): T[][]
+  getWeekdays (firstDayOfWeek?: number | string, weekdayFormat?: 'long' | 'short' | 'narrow'): string[]
+  getWeek (date: T, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number
   getMonth (date: T): number
   setMonth (date: T, month: number): T
   getDate (date: T): number
   setDate (date: T, day: number): T
   getNextMonth (date: T): T
+  getPreviousMonth(date: T): T
+
   getHours (date: T): number
   setHours (date: T, hours: number): T
   getMinutes (date: T): number

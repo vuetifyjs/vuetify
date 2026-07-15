@@ -3,9 +3,10 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-checkbox
-  &.v-input
-    flex: $checkbox-flex
+@include tools.layer('components')
+  .v-checkbox
+    &.v-input
+      flex: $checkbox-flex
 
-  .v-selection-control
-    min-height: var(--v-input-control-height)
+    .v-selection-control
+      min-height: var(--v-input-control-height)

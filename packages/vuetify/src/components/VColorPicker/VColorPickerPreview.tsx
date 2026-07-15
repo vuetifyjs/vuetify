@@ -7,29 +7,38 @@ import { VSlider } from '@/components/VSlider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { onUnmounted } from 'vue'
+import { onUnmounted, toRef } from 'vue'
 import { nullColor } from './util'
 import {
   defineComponent,
-  HexToHSV,
   HSVtoCSS,
+  parseColor,
   propsFactory,
+  RGBtoHSV,
   SUPPORTS_EYE_DROPPER,
   useRender,
 } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Hex, HSV } from '@/util'
+import type { HSV } from '@/util'
 
 export const makeVColorPickerPreviewProps = propsFactory({
   color: {
     type: Object as PropType<HSV | null>,
   },
   disabled: Boolean,
+  readonly: Boolean,
   hideAlpha: Boolean,
+  hideEyeDropper: Boolean,
+  eyeDropperIcon: {
+    type: IconValue,
+    default: '$eyeDropper',
+  },
 
   ...makeComponentProps(),
 }, 'VColorPickerPreview')
@@ -44,17 +53,21 @@ export const VColorPickerPreview = defineComponent({
   },
 
   setup (props, { emit }) {
+    const { t } = useLocale()
+
     const abortController = new AbortController()
+
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
 
     onUnmounted(() => abortController.abort())
 
     async function openEyeDropper () {
-      if (!SUPPORTS_EYE_DROPPER) return
+      if (!SUPPORTS_EYE_DROPPER || !isInteractive.value) return
 
       const eyeDropper = new window.EyeDropper()
       try {
         const result = await eyeDropper.open({ signal: abortController.signal })
-        const colorHexValue = HexToHSV(result.sRGBHex as Hex)
+        const colorHexValue = RGBtoHSV(parseColor(result.sRGBHex))
         emit('update:color', { ...(props.color ?? nullColor), ...colorHexValue })
       } catch (e) {}
     }
@@ -70,9 +83,17 @@ export const VColorPickerPreview = defineComponent({
         ]}
         style={ props.style }
       >
-        { SUPPORTS_EYE_DROPPER && (
+        { SUPPORTS_EYE_DROPPER && !props.hideEyeDropper && (
           <div class="v-color-picker-preview__eye-dropper" key="eyeDropper">
-            <VBtn onClick={ openEyeDropper } icon="$eyeDropper" variant="plain" density="comfortable" />
+            <VBtn
+              aria-label={ t('$vuetify.colorPicker.ariaLabel.eyedropper') }
+              density="comfortable"
+              disabled={ props.disabled }
+              readonly={ props.readonly }
+              icon={ props.eyeDropperIcon }
+              variant="plain"
+              onClick={ openEyeDropper }
+            />
           </div>
         )}
 
@@ -83,12 +104,14 @@ export const VColorPickerPreview = defineComponent({
         <div class="v-color-picker-preview__sliders">
           <VSlider
             class="v-color-picker-preview__track v-color-picker-preview__hue"
+            aria-label={ t('$vuetify.colorPicker.ariaLabel.hueSlider') }
             modelValue={ props.color?.h }
             onUpdate:modelValue={ h => emit('update:color', { ...(props.color ?? nullColor), h }) }
-            step={ 0 }
+            step={ 1 }
             min={ 0 }
             max={ 360 }
             disabled={ props.disabled }
+            readonly={ props.readonly }
             thumbSize={ 14 }
             trackSize={ 8 }
             trackFillColor="white"
@@ -98,12 +121,14 @@ export const VColorPickerPreview = defineComponent({
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
+              aria-label={ t('$vuetify.colorPicker.ariaLabel.alphaSlider') }
               modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
-              step={ 1 / 256 }
+              step={ 0.01 }
               min={ 0 }
               max={ 1 }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               thumbSize={ 14 }
               trackSize={ 8 }
               trackFillColor="white"

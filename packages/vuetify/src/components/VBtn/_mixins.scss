@@ -9,8 +9,12 @@
   @each $sizeName, $multiplier in settings.$size-scales {
     $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
     $height: map.get($map, 'height') + (settings.$size-scale * $multiplier);
+    $selector: '.v-btn--size-#{$sizeName}';
+    @if $immediate {
+      $selector: '#{&}#{$selector}';
+    }
 
-    #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
+    #{$selector} {
       --v-btn-size: #{$size};
       --v-btn-height: #{$height};
       font-size: var(--v-btn-size);

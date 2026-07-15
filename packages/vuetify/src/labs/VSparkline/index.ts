@@ -1,1 +1,0 @@
-export { VSparkline } from './VSparkline'

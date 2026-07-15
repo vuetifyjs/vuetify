@@ -83,7 +83,7 @@
           <a
             :href="rpath('/introduction/sponsors-and-backers/')"
             class="ms-2"
-            target="_blank text-caption"
+            target="_blank text-body-small"
           >
             <small class="text-primary">More Information</small>
           </a>
@@ -122,7 +122,7 @@
           </v-btn>
         </v-card-actions>
 
-        <div class="text-center text-caption pb-2">
+        <div class="text-center text-body-small pb-2">
           <small>
             Issues with this form?
             <a
@@ -146,16 +146,16 @@
   const theme = useTheme()
   const { t } = useI18n()
 
-  const name = ref('')
-  const email = ref('')
-  const upgrade = ref(false)
-  const review = ref(false)
-  const sla = ref(false)
-  const sponsor = ref(false)
-  const loading = ref(false)
-  const valid = ref<boolean | null>(null)
-  const success = ref(false)
-  const form = ref<HTMLFormElement>()
+  const name = shallowRef('')
+  const email = shallowRef('')
+  const upgrade = shallowRef(false)
+  const review = shallowRef(false)
+  const sla = shallowRef(false)
+  const sponsor = shallowRef(false)
+  const loading = shallowRef(false)
+  const valid = shallowRef<boolean | null>(null)
+  const success = shallowRef(false)
+  const form = shallowRef<HTMLFormElement>()
   const rules = {
     required: (v: string) => !!v || 'Field is required',
     email: (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',

@@ -13,22 +13,24 @@ import type { LocaleInstance } from '@/composables/locale'
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
-export interface DateInstance<T = DateInstanceType['instanceType']> extends DateAdapter<T> {
+export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
 }
 
-/** Supports module augmentation to specify date object types */
-export interface DateInstanceType {
-  instanceType: unknown
+/** Supports module augmentation to specify date adapter types */
+export namespace DateModule {
+  interface Adapter {}
+
+  export type InternalAdapter = {} extends Adapter ? DateAdapter : Adapter
 }
 
-export type InternalDateOptions<T = unknown> = {
-  adapter: (new (options: { locale: any, formats?: any }) => DateInstance<T>) | DateInstance<T>
+export type InternalDateOptions = {
+  adapter: (new (options: { locale: any, formats?: any }) => DateInstance) | DateInstance
   formats?: Record<string, any>
   locale: Record<string, any>
 }
 
-export type DateOptions<T = any> = Partial<InternalDateOptions<T>>
+export type DateOptions = Partial<InternalDateOptions>
 
 export const DateOptionsSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-options')
 export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
@@ -87,6 +89,16 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
+export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
+  const iso = [
+    `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
+    `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
+  ]
+  return typeof adapter.date() === 'string'
+    ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
+    : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     typeof options.adapter === 'function'
@@ -105,7 +117,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   return instance
 }
 
-export function useDate () {
+export function useDate (): DateInstance {
   const options = inject(DateOptionsSymbol)
 
   if (!options) throw new Error('[Vuetify] Could not find injected date options')
@@ -113,27 +125,4 @@ export function useDate () {
   const locale = useLocale()
 
   return createInstance(options, locale)
-}
-
-// https://stackoverflow.com/questions/274861/how-do-i-calculate-the-week-number-given-a-date/275024#275024
-export function getWeek (adapter: DateAdapter<any>, value: any) {
-  const date = adapter.toJsDate(value)
-  let year = date.getFullYear()
-  let d1w1 = new Date(year, 0, 1)
-
-  if (date < d1w1) {
-    year = year - 1
-    d1w1 = new Date(year, 0, 1)
-  } else {
-    const tv = new Date(year + 1, 0, 1)
-    if (date >= tv) {
-      year = year + 1
-      d1w1 = tv
-    }
-  }
-
-  const diffTime = Math.abs(date.getTime() - d1w1.getTime())
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-  return Math.floor(diffDays / 7) + 1
 }

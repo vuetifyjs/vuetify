@@ -19,8 +19,6 @@ features:
 
 The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text.  When **rounded** prop set to `0` will display an avatar without border radius.
 
-![Avatar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-entry.png)
-
 <PageFeatures />
 
 ## Usage
@@ -41,7 +39,7 @@ Avatars in their simplest form display content within a circular container.
 
 The recommended placement of elements inside of `v-avatar` is:
 
-* Place a [v-img](/components/images/) or [v-icon](/components/images/) component within the default *slot*
+* Place a [v-img](/components/images/) or [v-icon](/components/icons/) component within the default *slot*
 * Place textual content within the default *slot*
 
 ![Avatar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-avatar/v-avatar-anatomy.png)
@@ -61,6 +59,12 @@ The recommended placement of elements inside of `v-avatar` is:
 The `size` prop allows you to change the height and width of the avatar.
 
 <ExamplesExample file="v-avatar/prop-size" />
+
+#### Badge
+
+The `badge` prop wraps the avatar in a [v-badge](/components/badges/) to display a status indicator. Set it to `true` for a default dot badge, a color string, or an object of VBadge props for full customization. Use the **badge** slot to render custom content inside the badge.
+
+<ExamplesExample file="v-avatar/prop-badge" />
 
 #### Tile
 

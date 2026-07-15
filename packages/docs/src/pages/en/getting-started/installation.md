@@ -1,9 +1,9 @@
 ---
 meta:
   nav: Installation
-  title: Get started with Vuetify 3
-  description: Details for v3 release - faq, changes, and upgrading.
-  keywords: migration, releases, upgrading vuetify, beta, v3
+  title: Get started with Vuetify 4
+  description: Details for v4 release - faq, changes, and upgrading.
+  keywords: migration, releases, upgrading vuetify, beta, v4
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
@@ -14,13 +14,11 @@ related:
   import { version } from 'vuetify'
 </script>
 
-# Get started with Vuetify 3
+# Get started with Vuetify 4
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
 <PageFeatures />
-
-<VoPromotionsCardHighlight slug="vuemastery-getting-started" />
 
 ## Installation
 
@@ -28,16 +26,20 @@ Vuetify has support for multiple different installation paths with the most comm
 
 For more information regarding supported package managers, please visit their official websites:
 
+* [pnpm](https://pnpm.io/)
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
-* [pnpm](https://pnpm.io/)
 * [bun](https://bun.sh/package-manager)
 
 ## Using Vite
 
-To get started with Vuetify 3, simply paste the following code into your terminal:
+To get started with Vuetify 4, simply paste the following code into your terminal:
 
 ::: tabs
+
+```bash [pnpm]
+pnpm create vuetify
+```
 
 ```bash [yarn]
 yarn create vuetify
@@ -47,17 +49,13 @@ yarn create vuetify
 npm create vuetify@latest
 ```
 
-```bash [pnpm]
-pnpm create vuetify
-```
-
 ```bash [bun]
 bun create vuetify
 ```
 
 :::
 
-This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
+This command prompts you with a few options before generating your scaffolded Vue / Vuetify 4 project.
 
 ```bash
 success Installed "create-vuetify@x.x.x" with binaries:
@@ -79,16 +77,29 @@ Once the scaffold is complete, start the vite development server by running the 
 
 ```bash
 cd vuetify-project
-yarn dev
+pnpm dev
 ```
+
+<PromotedEntry />
 
 ## Using Nuxt 3
 
-[Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports. Nuxt is powered by Vite, so the steps to get Vuetify working in Nuxt 3 are quite similar to the manual steps described above.
+[Nuxt](https://nuxt.com/) is an open-source framework that has helpful features to quickly get you started with developing a full-stack Vue app, such as file-based routing, SSR and component auto-imports.
+
+### Manual setup
+
+Nuxt is powered by Nitro and can be used with Vite or Webpack 5 bundlers, so the steps to get Vuetify working in Nuxt 3 are quite similar to [the manual steps described below](#existing-projects).
 
 Start off creating a nuxt app by executing the following commands:
 
 ::: tabs
+
+```bash [pnpm]
+pnpx nuxi@latest init <project-name>
+cd <project-name>
+# Create a .npmrc file with shamefully-hoist=true
+pnpm install
+```
 
 ```bash [yarn]
 npx nuxi@latest init <project-name>
@@ -102,13 +113,6 @@ cd <project-name>
 npm install
 ```
 
-```bash [pnpm]
-pnpm dlx nuxi@latest init <project-name>
-# Make sure you have `shamefully-hoist=true` in `.npmrc` before running pnpm install
-cd <project-name>
-pnpm install
-```
-
 ```bash [bun]
 bunx nuxi@latest init <project-name>
 cd <project-name>
@@ -117,9 +121,14 @@ bun install
 
 :::
 
-and then install the required Vuefity modules as dependencies:
+and then install the required Vuetify modules as dependencies:
 
 ::: tabs
+
+```bash [pnpm]
+pnpm i -D vuetify vite-plugin-vuetify
+pnpm i @mdi/font
+```
 
 ```bash [yarn]
 yarn add -D vuetify vite-plugin-vuetify
@@ -129,11 +138,6 @@ yarn add @mdi/font
 ```bash [npm]
 npm i -D vuetify vite-plugin-vuetify
 npm i @mdi/font
-```
-
-```bash [pnpm]
-pnpm i -D vuetify vite-plugin-vuetify
-pnpm i @mdi/font
 ```
 
 ```bash [bun]
@@ -152,16 +156,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: [
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    },
-    //...
-  ],
   vite: {
+    plugins: [
+      // @ts-expect-error
+      vuetify({ autoImport: true }),
+    ],
     vue: {
       template: {
         transformAssetUrls,
@@ -212,58 +211,130 @@ or
 </template>
 ```
 
-You should now have access to all Vuetify components and tools in Nuxt app.
+You should now have access to all Vuetify components and tools in the Nuxt app.
 
-## Using Laravel Mix
+### vuetify-nuxt-module
 
-```js
+Alternatively, you can use the [vuetify-nuxt-module](https://github.com/vuetifyjs/nuxt-module) (works only with Vite). The module is strongly opinionated and has a built-in default configuration out of the box. You can use it without any configuration, and it will work for most use cases.
+
+Check the [documentation](https://nuxt.vuetifyjs.com/) for more information on how to use it.
+
+## Using Laravel
+
+The `createApp()` setup may differ, especially if your Laravel application uses [inertiajs](https://inertiajs.com/client-side-setup). As long as you chain with`.use()`, Vuetify should be properly registered and available.
+
+```js  { data-resource=resources/js/app.ts }
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 
-const vuetify = createVuetify({
-  components,
-  directives
+const app = createApp()
+
+// Register Vuetify as plugin
+const vuetify = createVuetify()
+app.use(vuetify).mount("#app")
+```
+
+```js { data-resource=vite-config.ts }
+import vuetify from 'vite-plugin-vuetify'
+// ... other imports
+
+export default defineConfig({
+  plugins: [
+    // ... other plugins
+    vuetify({ autoImport: true }),
+  ],
 })
-
-createApp(App).use(vuetify).mount('#app')
 ```
 
-To import the fonts you need to add to webpack.mix.js:
-
-```js
-mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
-```
+If font is defined at `resources/views/app.blade.php`, Vuetify's font settings will not take effect.
 
 ## Using CDN
 
-We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+We recommend using the latest version of Vuetify 4 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
 
 `https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
 
 `https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
 
-```js
-const { createApp } = Vue
-const { createVuetify } = Vuetify
+Rememeber to include additional script for Vue.js. See full example below:
 
-const vuetify = createVuetify()
-
-const app = createApp()
-app.use(vuetify).mount('#app')
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- ... -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }]/dist/vuetify.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-container>
+          <v-text-field label="My field" />
+        </v-container>
+      </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@{{ version }}/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js"></script>
+    <script>
+      const { createApp } = Vue
+      const { createVuetify } = Vuetify
+      const vuetify = createVuetify()
+      const app = createApp()
+      app.use(vuetify).mount('#app')
+    </script>
+  </body>
+</html>
 ```
 
-## Existing projects
+## Using as ES Module with CDN
 
-Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
+To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
+
+::: info
+  Unlike regular CDN links, import map expects `.../vuetify.esm.js` (**\*esm.js** instead of **\*.min.js**)
+:::
+
+```html
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700" />
+  <script type="importmap">
+  {
+    "imports": {
+      "vue": "https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.esm-browser.js",
+      "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.esm.js"
+    }
+  }
+  </script>
+</head>
+```
+
+```html
+<script type="module">
+  import { createApp, ref, computed } from "vue"
+  import { createVuetify } from "vuetify"
+  //... setup as usual
+</script>
+```
+
+## Using Vitepress
+
+You can use Vuetify's components in your Vitepress static site.
+
+After initializing your Vitepress project, add Vuetify to your dependencies
 
 ::: tabs
+
+```bash [pnpm]
+pnpm i vuetify
+```
 
 ```bash [yarn]
 yarn add vuetify
@@ -273,8 +344,47 @@ yarn add vuetify
 npm i vuetify
 ```
 
+```bash [bun]
+bun add vuetify
+```
+
+:::
+
+Then, in your `.vitepress/theme/index.ts`
+
+```ts
+import DefaultTheme from 'vitepress/theme'
+import 'vuetify/styles'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({ components, directives })
+
+export default {
+  extends: DefaultTheme,
+  enhanceApp({ app }) {
+    app.use(vuetify)
+  },
+}
+```
+
+## Existing projects
+
+Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
+
+::: tabs
+
 ```bash [pnpm]
 pnpm i vuetify
+```
+
+```bash [yarn]
+yarn add vuetify
+```
+
+```bash [npm]
+npm i vuetify
 ```
 
 ```bash [bun]
@@ -293,13 +403,15 @@ In the file where you create the Vue application, add the following code
 
 ```js
 import { createApp } from 'vue'
-import App from './App.vue'
 
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Components
+import App from './App.vue'
 
 const vuetify = createVuetify({
   components,
@@ -312,6 +424,106 @@ createApp(App).use(vuetify).mount('#app')
 This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
 
 Lastly, do not forget to install [icons](/features/icon-fonts/).
+
+## Fonts
+
+Vuetify uses Roboto as its default font. To ensure your project renders correctly, you need to add the Roboto font yourself. We recommend using @fontsource/roboto or bundling with unplugin-fonts which is the default used in [vuetify-create](https://github.com/vuetifyjs/create) installations.
+
+### Option A — Install via @fontsource/roboto
+
+::: tabs
+
+```bash [pnpm]
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add @fontsource/roboto
+```
+
+:::
+
+Then import the styles you need in your main.ts or main.js:
+
+```js
+import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import '@fontsource/roboto/900.css'
+
+/* optional italic styles */
+import '@fontsource/roboto/100-italic.css'
+import '@fontsource/roboto/300-italic.css'
+import '@fontsource/roboto/400-italic.css'
+import '@fontsource/roboto/500-italic.css'
+import '@fontsource/roboto/700-italic.css'
+import '@fontsource/roboto/900-italic.css'
+```
+
+### Option B — Install via unplugin-fonts + @fontsource  (recommended)
+
+::: tabs
+
+```bash [pnpm]
+pnpm i --save-dev unplugin-fonts
+pnpm i @fontsource/roboto
+```
+
+```bash [yarn]
+yarn add --save-dev unplugin-fonts
+yarn add @fontsource/roboto
+```
+
+```bash [npm]
+npm i --save-dev unplugin-fonts
+npm i @fontsource/roboto
+```
+
+```bash [bun]
+bun add --save-dev unplugin-fonts
+bun add @fontsource/roboto
+```
+
+:::
+
+Update your vite.config.ts:
+
+```ts
+import { defineConfig } from 'vite'
+import ViteFonts from 'unplugin-fonts/vite'
+
+export default defineConfig({
+  plugins: [
+    ViteFonts({
+      fontsource: {
+        families: [
+          {
+            name: 'Roboto',
+            weights: [100, 300, 400, 500, 700, 900],
+            styles: ['normal', 'italic'],
+          },
+        ],
+      },
+    }),
+  ],
+})
+```
+
+And import the generated CSS once in your main.ts or main.js:
+
+```ts
+import 'unfonts.css'
+```
 
 ## SSR caveats
 

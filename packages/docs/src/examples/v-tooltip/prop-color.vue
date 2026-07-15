@@ -1,55 +1,30 @@
 <template>
   <div class="text-center d-flex align-center justify-space-around">
-    <v-tooltip color="primary" bottom>
+    <v-tooltip color="#cc0" location="bottom">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="props"
-        >
-          primary
-        </v-btn>
+        <v-btn color="#cc0" v-bind="props" text="Custom Hex"></v-btn>
       </template>
-      <span>Primary tooltip</span>
+      <span>Custom Hex</span>
     </v-tooltip>
 
-    <v-tooltip color="success" bottom>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="success"
-          dark
-          v-bind="props"
-        >
-          success
-        </v-btn>
-      </template>
-      <span>Success tooltip</span>
-    </v-tooltip>
+    <v-btn color="success" text="success (from theme)">
+      success
+      <v-tooltip activator="parent" color="success" location="bottom">
+        <span>Success (from theme)</span>
+      </v-tooltip>
+    </v-btn>
 
-    <v-tooltip color="warning" bottom>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="warning"
-          dark
-          v-bind="props"
-        >
-          warning
-        </v-btn>
-      </template>
-      <span>Warning tooltip</span>
-    </v-tooltip>
+    <v-btn color="warning">
+      warning (variable + opacity)
+      <v-tooltip activator="parent" color="rgba(var(--v-theme-warning), .5)" location="bottom">
+        <span>Warning (variable + opacity)</span>
+      </v-tooltip>
+    </v-btn>
 
-    <v-tooltip color="error" bottom>
-      <template v-slot:activator="{ props }">
-        <v-btn
-          color="error"
-          dark
-          v-bind="props"
-        >
-          error
-        </v-btn>
-      </template>
-      <span>Error tooltip</span>
-    </v-tooltip>
+    <v-btn
+      color="error"
+      text="Error (directive)"
+      v-tooltip:bottom="{ text: 'Error (directive)', color: 'error' }"
+    ></v-btn>
   </div>
 </template>

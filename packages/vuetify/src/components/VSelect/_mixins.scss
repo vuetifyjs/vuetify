@@ -1,0 +1,14 @@
+@mixin select-compact-chip-label {
+  &--chips.v-input--density-compact {
+    .v-field--variant-solo,
+    .v-field--variant-solo-inverted,
+    .v-field--variant-filled,
+    .v-field--variant-solo-filled {
+      .v-label.v-field-label {
+        &--floating {
+          top: 0px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-video
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    --v-video-aspect-ratio: #{$video-aspect-ratio}
+    --v-video-controls-height: #{$video-controls-height}
+    --v-video-controls-pill-border-radius: #{$video-controls-pill-border-radius}
+
+    @at-root
+      @include tools.density('v-video', $video-density) using ($modifier)
+        --v-video-controls-height: #{$video-controls-height + $modifier * 2}
+
+    &__video
+      position: absolute
+      width: 100%
+      height: 100%
+      object-fit: cover
+      z-index: 0
+
+      &::-webkit-media-controls
+        display: none !important
+
+      & ~ *
+        z-index: 1
+
+    &__header
+      position: relative
+      opacity: 0
+      transition: opacity .6s ease-in-out
+      pointer-events: none
+      > *
+        pointer-events: auto
+
+    &__content
+      position: relative
+      border-radius: inherit
+      z-index: 0
+      @include tools.elevation($video-elevation)
+
+    &:not(.v-video--idle):not(.v-video--error)
+      .v-video__content .v-video__overlay-fill
+        &, > *
+          pointer-events: none
+
+    &:not(.v-video--error)
+      .v-video__content
+        cursor: pointer
+
+    &__overlay-fill
+      position: absolute
+      inset: 0
+      display: flex
+      align-items: center
+      justify-content: center
+      border-radius: inherit
+
+      > .v-img
+        position: absolute
+        border-radius: inherit
+        inset: 0
+
+    &:has(.v-video-controls:not(.v-video-controls--detached))
+      .v-video__content .v-video__overlay-fill
+        padding-bottom: var(--v-video-controls-height) // controls size
+
+    &__center-icon.v-icon-btn
+      border: $video-center-icon-border
+      transition-property: transform, opacity
+      transition-duration: 0.28s
+      transition-timing-function: settings.$standard-easing
+
+      &.v-video__center-icon--play
+        opacity: $video-center-icon-opacity
+
+    &__content:hover &__center-icon--play
+      transform: $video-center-icon-hover-transform
+      opacity: 1
+
+    &--variant-player
+      width: $video-player-width
+
+      > .v-video__content
+        width: 100%
+        aspect-ratio: var(--v-video-aspect-ratio)
+
+    &--variant-background
+      outline: none
+      position: absolute
+      inset: 0
+      pointer-events: none
+
+      > .v-video__content
+        width: 100%
+        height: 100%
+
+    // Integration with VVideoControls: pull controls up to overlap the video,
+    // and hide them by default until hover / pause.
+    .v-video-controls
+      opacity: 0
+
+      &:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height))
+
+      &--detached
+        opacity: 1
+
+      &--floating:not(.v-video-controls--detached)
+        margin-top: calc(-1 * var(--v-video-controls-height) - #{$video-controls-floating-margin})
+        margin-bottom: $video-controls-floating-margin
+
+    &:not(.v-video--playing),
+    &:hover
+      .v-video__header,
+      .v-video-controls
+        opacity: 1
+
+    &--rounded
+      border-radius: $video-rounded-border-radius
+
+    &:fullscreen .v-video__content
+      min-height: 100% !important
+      min-width: 100% !important
+
+  .poster-fade-out
+    &-leave-active
+      transition: opacity 1s linear 0.3s
+    &-leave-to
+      opacity: 0

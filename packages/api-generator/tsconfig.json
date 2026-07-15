@@ -3,10 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "noUnusedLocals": false,
-    "module": "ESNext",
+    "module": "preserve",
     "moduleResolution": "bundler",
+    "noEmit": true,
     "noEmitOnError": false,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "paths": {
       "@/*": [
         "../vuetify/src/*"
@@ -14,6 +16,8 @@
     },
   },
   "include": [
+    "./src/**/*.ts",
     "./src/locale/**/*.json",
+    "./templates/tmp/*"
   ],
 }

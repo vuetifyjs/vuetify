@@ -2,7 +2,6 @@
 import { makeValidationProps, useValidation } from '../validation'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 

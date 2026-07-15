@@ -28,10 +28,10 @@
 
           <template v-for="(value, key) in reactions" :key="key">
             <template v-if="model?.reactions?.[key]">
-              <span class="d-inline-flex align-center text-body-2 me-2">
+              <span class="d-inline-flex align-center text-body-medium me-2">
                 {{ value }}
 
-                <span class="text-caption">{{ model.reactions[key] }}</span>
+                <span class="text-body-small">{{ model.reactions[key] }}</span>
               </span>
             </template>
           </template>
@@ -40,11 +40,11 @@
 
       <template #item="{ item, props: itemProps }">
         <v-list-item
-          v-if="item?.title"
+          v-if="item.name"
           v-bind="itemProps"
         >
-          <template v-if="item.raw?.reactions" #append>
-            {{ genEmoji(item.raw.reactions.total_count) }}
+          <template v-if="item.reactions" #append>
+            {{ genEmoji(item.reactions.total_count) }}
           </template>
         </v-list-item>
 
@@ -77,7 +77,7 @@
         v-if="model?.author"
         class="d-flex align-center justify-space-between pa-4 bg-surface-light border-y"
       >
-        <div class="d-flex align-center text-caption">
+        <div class="d-flex align-center text-body-small">
           <i18n-t v-if="publishedOn" keypath="published" scope="global">
             <template #date>
               <border-chip
@@ -112,7 +112,7 @@
 
         <div class="px-4 pt-4">
           <AppMarkdown
-            :content="model.body"
+            :content="cleanedBody"
             class="releases"
           />
         </div>
@@ -121,7 +121,7 @@
           <v-divider class="my-2" />
 
           <div class="px-4 pb-4">
-            <h2 class="text-h6 font-weight-bold">Assets</h2>
+            <h2 class="text-title-large font-weight-bold">Assets</h2>
 
             <AppSheet>
               <v-list-item
@@ -182,9 +182,9 @@
   const router = useRouter()
   const store = useReleasesStore()
 
-  const autocomplete = ref()
-  const clicked = ref('copy-link')
-  const model = ref<Release>()
+  const autocomplete = shallowRef()
+  const clicked = shallowRef('copy-link')
+  const model = shallowRef<Release>()
   const search = shallowRef('')
   let timeout = -1 as any
 
@@ -201,7 +201,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
+          await navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${model.value!.tag_name}`)
 
           clicked.value = 'copied'
 
@@ -235,6 +235,10 @@
   })
 
   const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
+  const cleanedBody = computed(() => {
+    return model.value?.body?.replace(/^>\s*\[![\s\S]*?\n---\s*\n+/, '') ?? ''
+  })
 
   const publishedOn = computed(() => {
     if (!model.value?.published_at) return undefined

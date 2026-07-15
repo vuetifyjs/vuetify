@@ -20,7 +20,7 @@
     },
   })
 
-  const html = ref('')
+  const html = shallowRef('')
   watchEffect(async () => {
     html.value = highlight(String(await props.code))
   })

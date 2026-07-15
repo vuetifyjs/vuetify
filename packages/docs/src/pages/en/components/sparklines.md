@@ -8,39 +8,25 @@ related:
   - /components/cards/
   - /components/sheets/
   - /components/expansion-panels/
+features:
+  github: /components/VSparkline/
+  label: 'C: VSparkline'
+  report: true
 ---
 
 # Sparklines
 
 The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
 
-<PromotedEntry />
-
-::: warning
-
-This feature requires [v3.5.5](/getting-started/release-notes/?version=v3.5.5)
-
-:::
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VSparkline } from 'vuetify/labs/VSparkline'
-
-export default createVuetify({
-  components: {
-    VSparkline,
-  },
-})
-```
+<PageFeatures />
 
 ## Usage
 
 A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.
 
-<ExamplesExample file="v-sparkline/usage" />
+<ExamplesUsage name="v-sparkline" />
+
+<PromotedEntry />
 
 ## API
 
@@ -54,11 +40,29 @@ A sparkline is a tiny chart that provides a visual representation of data. The s
 
 ### Props
 
+#### Animation
+
+The **animation** prop enables smooth transitions when values change. Combined with **auto-draw** set to **once**, the sparkline draws on mount then smoothly interpolates between datasets. Toggle between weekly, monthly, and quarterly views to see the effect.
+
+<ExamplesExample file="v-sparkline/prop-animation" />
+
 #### Fill
 
 You can create a `v-sparkline` with fill using the `fill` property.
 
 <ExamplesExample file="v-sparkline/prop-fill" />
+
+#### Inset
+
+The **inset** prop extends the line beyond the chart boundary for edge-to-edge rendering. It is useful when combined with **interactive**, so that edge points are not clipped by SVG boundaries.
+
+<ExamplesExample file="v-sparkline/prop-inset" />
+
+#### Smooth mode
+
+The **smooth-mode** prop controls the interpolation algorithm. The default mode rounds corners which can cause the line to appear away from the actual values. The **monotone** mode makes the line stick to the exact data points, but also limits the **smooth** to **8**.
+
+<ExamplesExample file="v-sparkline/prop-smooth-mode" />
 
 ### Misc
 
@@ -74,14 +78,14 @@ The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create c
 
 <ExamplesExample file="v-sparkline/misc-dashboard-card" />
 
+#### Interactive
+
+The **interactive** prop enables hover tracking, keyboard navigation, and focus support. Use the `@update:current-index` event to react to the active data point. This example fetches weekly npm download data and displays the hovered week's value and date range.
+
+<ExamplesExample file="v-sparkline/misc-interactive" />
+
 #### Heart rate
 
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
 <ExamplesExample file="v-sparkline/misc-heart-rate" />
-
-#### Dashboard cards
-
-The `v-sparkline` component can be used to create a variety of different cards for a dashboard. Here we show a few examples of how it can be used to display different types of data.
-
-<ExamplesExample file="v-sparkline/misc-dashboard-cards" />

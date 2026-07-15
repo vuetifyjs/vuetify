@@ -1,7 +1,5 @@
-import { createHeaders } from '../composables/headers'
-
 // Utilities
-import { describe, expect, it } from '@jest/globals'
+import { createHeaders } from '../composables/headers'
 
 describe('VDataTable headers', () => {
   it('flattens 2d headers', () => {

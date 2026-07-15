@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use '../../styles/settings';
 
 // VSwitch
@@ -10,9 +11,33 @@ $switch-inset-thumb-height: 24px !default;
 $switch-inset-thumb-width: 24px !default;
 $switch-inset-thumb-off-height: 16px !default;
 $switch-inset-thumb-off-width: 16px !default;
+$switch-inset-thumb-off-scale: math.div($switch-inset-thumb-off-height, $switch-inset-thumb-height) !default;
+$switch-inset-thumb-pressed-scale: math.div(28px, $switch-inset-thumb-height) !default;
 $switch-inset-track-border-radius: 9999px !default;
 $switch-inset-track-height: 32px !default;
 $switch-inset-track-width: 52px !default;
+$switch-inset-track-opacity: 1 !default;
+$switch-inset-border-width: 2px !default;
+
+$switch-inset-square-track-radius: 6px !default;
+$switch-inset-square-thumb-radius: 4px !default;
+
+$switch-inset-unselected-track-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 73%, #ccc) !default;
+$switch-inset-unselected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 20%, #888) !default;
+$switch-inset-unselected-border-color: $switch-inset-unselected-thumb-color !default;
+
+$switch-inset-selected-track-color: color-mix(in srgb, rgb(var(--v-theme-surface-variant)) 90%, white) !default;
+$switch-inset-selected-thumb-color: color-mix(in srgb, rgb(var(--v-theme-on-surface-variant)) 80%, white) !default;
+
+$switch-focus-outline-color: rgb(var(--v-theme-surface-variant)) !default;
+$switch-focus-outline-width: 2px !default;
+$switch-focus-outline-offset: 2px !default;
+
+$switch-inset-disabled-unselected-track-color: color-mix(in srgb, #{$switch-inset-unselected-track-color} 12%, transparent) !default;
+$switch-inset-disabled-unselected-thumb-color: rgba(var(--v-theme-on-surface), .38) !default;
+$switch-inset-disabled-unselected-border-color: rgba(var(--v-theme-on-surface), .12) !default;
+$switch-inset-disabled-selected-track-color: rgba(var(--v-theme-on-surface), .12) !default;
+$switch-inset-disabled-selected-thumb-color: rgb(var(--v-theme-surface)) !default;
 
 $switch-label-margin-inline-start: 10px !default;
 $switch-loader-color: rgb(var(--v-theme-surface)) !default;
@@ -21,7 +46,7 @@ $switch-thumb-background: rgb(var(--v-theme-surface-bright)) !default;
 $switch-thumb-color: rgb(var(--v-theme-on-surface-bright)) !default;
 $switch-thumb-flat-background: rgb(var(--v-theme-surface-variant)) !default;
 $switch-thumb-flat-color: rgb(var(--v-theme-on-surface-variant)) !default;
-$switch-thumb-elevation: 4 !default;
+$switch-thumb-elevation: 2 !default;
 $switch-thumb-height: 20px !default;
 $switch-thumb-width: 20px !default;
 $switch-thumb-offset: 2px !default;
@@ -35,3 +60,19 @@ $switch-track-width: 36px !default;
 $switch-track-height: 14px !default;
 $switch-track-opacity: .6 !default;
 $switch-track-transition: .2s background-color settings.$standard-easing !default;
+
+$switch-sizes: (
+  'x-small': ($switch-track-height - 5px, 13px, 13px),
+  'small': ($switch-track-height - 3px, 16px, 16px),
+  'default': ($switch-track-height, $switch-thumb-height, $switch-thumb-width),
+  'large': ($switch-track-height + 3px, 24px, 24px),
+  'x-large': ($switch-track-height + 5px, 28px, 28px),
+) !default;
+
+$switch-inset-sizes: (
+  'x-small': ($switch-inset-track-height - 12px, 15px, 15px),
+  'small': ($switch-inset-track-height - 6px, 20px, 20px),
+  'default': ($switch-inset-track-height, $switch-inset-thumb-height, $switch-inset-thumb-width),
+  'large': ($switch-inset-track-height + 6px, 30px, 30px),
+  'x-large': ($switch-inset-track-height + 12px, 34px, 34px),
+) !default;

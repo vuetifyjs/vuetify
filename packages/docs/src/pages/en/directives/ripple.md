@@ -16,13 +16,13 @@ The `v-ripple` directive is used to show action from a user. It can be applied t
 
 <PageFeatures />
 
-<PromotedEntry />
-
 ## Usage
 
 Basic ripple functionality can be enabled just by using `v-ripple` directive on a component or an HTML element
 
 <ExamplesExample file="v-ripple/usage" />
+
+<PromotedEntry />
 
 ## API
 

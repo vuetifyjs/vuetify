@@ -1,9 +1,6 @@
 <template>
   <div>
-    <v-row
-      class="flex"
-      justify="center"
-    >
+    <v-row class="flex justify-center">
       <v-card
         :ripple="false"
         class="portrait"
@@ -15,10 +12,8 @@
 
     <v-menu
       v-model="showMenu"
-      :position-x="x"
-      :position-y="y"
+      :target="[x, y]"
       absolute
-      offset-y
     >
       <v-list>
         <v-list-item

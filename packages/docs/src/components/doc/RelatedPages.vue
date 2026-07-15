@@ -1,7 +1,7 @@
 <template>
   <v-row
     v-if="related?.length > 0"
-    dense
+    density="comfortable"
   >
     <v-col
       v-for="(to, i) in related"
@@ -16,5 +16,6 @@
 </template>
 
 <script setup>
-  const related = useRoute().meta.related
+  const frontmatter = useFrontmatter()
+  const related = computed(() => frontmatter.value?.related)
 </script>

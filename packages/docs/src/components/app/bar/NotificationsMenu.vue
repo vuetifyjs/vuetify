@@ -1,6 +1,6 @@
 <template>
   <AppMenuMenu
-    v-if="user.notifications.show"
+    v-if="user.one.notifications.enabled"
     v-model="menu"
     :close-on-content-click="false"
     :open-on-hover="false"
@@ -49,7 +49,7 @@
     >
       <div
         v-if="done"
-        class="py-8 text-center text-subtitle-1"
+        class="py-8 text-center text-body-large"
       >
         <p>{{ t('done') }}</p>
 
@@ -75,13 +75,13 @@
                 <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
-              <v-list-item-title class="text-wrap text-h6">
+              <v-list-item-title class="text-wrap text-title-large">
                 <div class=" text-truncate">{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
+              <div class="text-body-small mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
-              <div class="text-medium-emphasis text-caption">
+              <div class="text-medium-emphasis text-body-small">
                 <AppMarkdown :content="notification.metadata.text" class="mb-n3" />
 
                 <border-chip
@@ -125,18 +125,17 @@
   }
 
   const { t } = useI18n()
-  const { event } = useGtag()
   const { bucket } = useCosmic()
   const { mobile } = useDisplay()
   const date = useDate()
   const user = useUserStore()
 
-  const menu = ref(false)
+  const menu = shallowRef(false)
   const all = ref<Notification[]>([])
-  const showArchived = ref(false)
+  const showArchived = shallowRef(false)
 
-  const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
-  const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
+  const unread = computed(() => all.value.filter(({ slug }) => !user.one.notifications.read.includes(slug)))
+  const read = computed(() => all.value.filter(({ slug }) => user.one.notifications.read.includes(slug)))
   const notifications = computed(() => showArchived.value ? read.value : unread.value)
   const done = computed(() => {
     return (
@@ -161,16 +160,12 @@
   function onClick (notification: Notification) {
     toggle(notification)
     menu.value = false
-    event('click', {
-      event_category: 'vuetify-notification',
-      event_label: notification.slug,
-      value: notification.metadata.action,
-    })
+    sweClick('notification', notification.slug, notification.metadata.action)
   }
   function toggle ({ slug }: Notification) {
-    user.notifications.read = user.notifications.read.includes(slug)
-      ? user.notifications.read.filter((n: any) => n !== slug)
-      : [...user.notifications.read, slug]
+    user.one.notifications.read = user.one.notifications.read.includes(slug)
+      ? user.one.notifications.read.filter((n: any) => n !== slug)
+      : [...user.one.notifications.read, slug]
   }
 
   onMounted(async () => {

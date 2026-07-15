@@ -10,13 +10,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { computed, onScopeDispose, provide, toRef } from 'vue'
-import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { onScopeDispose, provide, toRef, useId } from 'vue'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
-import type { GenericProps } from '@/util'
+import type { GenericProps, ValueComparator } from '@/util'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
@@ -38,6 +38,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   inline: Boolean,
   falseIcon: IconValue,
   trueIcon: IconValue,
+  indeterminateIcon: IconValue,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,
@@ -54,7 +55,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   modelValue: null,
   type: String,
   valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
+    type: Function as PropType<ValueComparator>,
     default: deepEqual,
   },
 
@@ -86,9 +87,9 @@ export const VSelectionControlGroup = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const modelValue = useProxiedModel(props, 'modelValue')
-    const uid = getUid()
-    const id = computed(() => props.id || `v-selection-control-group-${uid}`)
-    const name = computed(() => props.name || id.value)
+    const uid = useId()
+    const id = toRef(() => props.id || `v-selection-control-group-${uid}`)
+    const name = toRef(() => props.name || id.value)
 
     const updateHandlers = new Set<() => void>()
     provide(VSelectionControlGroupSymbol, {
@@ -106,20 +107,20 @@ export const VSelectionControlGroup = genericComponent<new <T>(
 
     provideDefaults({
       [props.defaultsTarget]: {
-        color: toRef(props, 'color'),
-        disabled: toRef(props, 'disabled'),
-        density: toRef(props, 'density'),
-        error: toRef(props, 'error'),
-        inline: toRef(props, 'inline'),
+        color: toRef(() => props.color),
+        disabled: toRef(() => props.disabled),
+        density: toRef(() => props.density),
+        error: toRef(() => props.error),
+        inline: toRef(() => props.inline),
         modelValue,
-        multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
+        multiple: toRef(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
         name,
-        falseIcon: toRef(props, 'falseIcon'),
-        trueIcon: toRef(props, 'trueIcon'),
-        readonly: toRef(props, 'readonly'),
-        ripple: toRef(props, 'ripple'),
-        type: toRef(props, 'type'),
-        valueComparator: toRef(props, 'valueComparator'),
+        falseIcon: toRef(() => props.falseIcon),
+        trueIcon: toRef(() => props.trueIcon),
+        readonly: toRef(() => props.readonly),
+        ripple: toRef(() => props.ripple),
+        type: toRef(() => props.type),
+        valueComparator: toRef(() => props.valueComparator),
       },
     })
 

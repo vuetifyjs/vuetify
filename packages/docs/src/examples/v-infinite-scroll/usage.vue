@@ -9,7 +9,6 @@
     <div>
       <v-infinite-scroll
         v-bind="props"
-        :items="items.value"
         @load="load"
       >
         <template v-for="(item, index) in items" :key="item">
@@ -48,8 +47,7 @@
   const props = computed(() => {
     return {
       height: 300,
-      ':items': 'items',
-      ':onLoad': 'load',
+      onLoad: 'load',
     }
   })
 

@@ -8,10 +8,9 @@
       <v-tab
         v-for="i in 30"
         :key="i"
+        :text="'Item ' + i"
         :value="'tab-' + i"
-      >
-        Item {{ i }}
-      </v-tab>
+      ></v-tab>
     </v-tabs>
   </v-card>
 </template>

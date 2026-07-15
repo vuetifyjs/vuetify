@@ -9,6 +9,7 @@
         color="medium-emphasis"
         icon="mdi-translate"
         v-bind="props"
+        v-tooltip:bottom="t('languages')"
       />
     </template>
   </AppMenuMenu>
@@ -29,6 +30,7 @@
         to: route.fullPath.replace(/^\/[a-zA-Z-]+/, `/${locale.alternate || locale.locale}`),
       }
     }),
+    { title: t('help-translate'), href: 'https://crowdin.com/project/vuetify' },
     { title: t('more-coming-soon'), disabled: true },
   ]))
 </script>

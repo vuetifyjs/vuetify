@@ -1,4 +1,5 @@
 {
+  "description": "Pre-defined pagination component for `v-data-table`.",
   "props": {
     "firstIcon": "First icon.",
     "firstPageLabel": "Label for first page.",
@@ -12,5 +13,8 @@
     "prevIcon": "Previous icon.",
     "prevPageLabel": "Label for previous page.",
     "showCurrentPage": "Show current page number between prev/next icons."
+  },
+  "slots": {
+    "prepend": "Extra content placed before the default pagination."
   }
 }

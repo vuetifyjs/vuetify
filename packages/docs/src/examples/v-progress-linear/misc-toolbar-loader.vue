@@ -14,11 +14,9 @@
         :active="loading"
         :indeterminate="loading"
         color="deep-purple-accent-4"
+        location="bottom"
         absolute
-        bottom
       ></v-progress-linear>
-
-      <v-spacer></v-spacer>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -30,11 +28,7 @@
     </v-toolbar>
 
     <v-container style="height: 282px;">
-      <v-row
-        align="center"
-        class="fill-height"
-        justify="center"
-      >
+      <v-row class="fill-height align-center justify-center">
         <v-scale-transition>
           <div
             v-if="!loading"

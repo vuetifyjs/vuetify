@@ -19,8 +19,6 @@ features:
 
 The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.
 
-![System Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-entry.png)
-
 <PageFeatures />
 
 ## Usage

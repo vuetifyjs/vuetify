@@ -1,2 +1,3 @@
-@mixin rounded($radius: null, $important: false)
-  border-radius: $radius if($important, !important, null)
+@mixin rounded($radius: null)
+  &
+    border-radius: $radius

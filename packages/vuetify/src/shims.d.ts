@@ -1,15 +1,33 @@
 /* eslint-disable local-rules/sort-imports */
 
 import 'vue/jsx'
-import type { FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+import type { UnwrapNestedRefs, VNodeChild } from 'vue'
 
+// These already exist in scope in the final bundle
 // @skip-build
-import type { ComponentPublicInstance } from 'vue'
+import type {
+  DateInstance,
+  DefaultsInstance,
+  DisplayInstance,
+  IconOptions,
+  LocaleInstance,
+  RtlInstance,
+  ThemeInstance,
+} from './framework'
 
-// @skip-build
-import type { DateInstance, DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
+interface ViewTransitionTypesInit {
+  update: () => void | Promise<void>
+  types: string[]
+}
 
 declare global {
+  interface ViewTransition {
+    finished: Promise<void>
+  }
+  interface Document {
+    startViewTransition (init: ViewTransitionTypesInit): ViewTransition
+  }
+
   namespace JSX {
     interface ElementChildrenAttribute {
       $children: {}
@@ -18,19 +36,6 @@ declare global {
 }
 
 declare module 'vue' {
-  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
-}
-
-declare module '@vue/runtime-dom' {
-  export interface HTMLAttributes {
-    $children?: VNodeChild
-  }
-  export interface SVGAttributes {
-    $children?: VNodeChild
-  }
-}
-
-declare module '@vue/runtime-core' {
   interface Vuetify {
     defaults: DefaultsInstance
     display: UnwrapNestedRefs<DisplayInstance>
@@ -43,8 +48,16 @@ declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
     $vuetify: Vuetify
   }
-
+  export interface HTMLAttributes {
+    $children?: VNodeChild
+  }
+  export interface SVGAttributes {
+    $children?: VNodeChild
+  }
   export interface GlobalComponents {
     // @generate-components
+  }
+  export interface GlobalDirectives {
+    // @generate-directives
   }
 }

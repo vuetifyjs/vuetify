@@ -1,13 +1,13 @@
 <template>
   <v-lazy min-height="128">
-    <div class="d-flex">
+    <div class="d-flex team-member">
       <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
         <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
       </v-avatar>
 
       <div class="ps-6 font-weight-medium">
-        <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
+        <div class="text-headline-small mb-1 font-weight-bold d-flex align-center">
           <span
             class="me-3"
             v-text="member.name"
@@ -59,7 +59,7 @@
           class="d-flex align-center flex-wrap"
         >
           <h3
-            class="text-uppercase text-caption font-weight-regular"
+            class="text-uppercase text-body-small font-weight-regular"
           >{{ t('focus') }}</h3>
 
           <div class="mx-2">
@@ -84,7 +84,7 @@
           class="d-flex align-center flex-wrap mt-1"
         >
           <h3
-            class="text-uppercase text-caption font-weight-regular"
+            class="text-uppercase text-body-small font-weight-regular"
           >{{ t('funding') }}</h3>
 
           <div class="mx-2">
@@ -147,7 +147,7 @@
 
 <script setup lang="ts">
   // Types
-  import type { Member } from '@/stores/team'
+  import type { Member } from '@/stores/team-members'
   import type { PropType } from 'vue'
 
   const props = defineProps({
@@ -174,7 +174,7 @@
         color: '#212121',
         href: `https://x.com/${props.member.twitter}`,
         icon: '$x',
-        tooltip: 'X',
+        tooltip: 'Xitter',
       })
     }
 
@@ -214,8 +214,9 @@
   }
 </script>
 
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
+<style lang="sass">
+  .team-member
+    .v-markdown
+      > p
+        margin: 0
 </style>

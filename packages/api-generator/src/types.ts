@@ -1,7 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import { prettifyType } from './utils'
-import { kebabCase } from './helpers/text'
+import { prettifyType } from './utils.ts'
+import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -20,7 +20,10 @@ async function inspect (project: Project, node?: Node<ts.Node>) {
           Object.entries(definition.properties)
             // Exclude private properties
             .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
-            .map(async ([name, prop]) => [name, await prettifyType(name, prop)])
+            .map(async ([name, prop]) => [
+              name.replace('Uncapitalize<Capitalize<string>>', 'string'),
+              await prettifyType(name, prop),
+            ])
         )
       )
     }
@@ -81,7 +84,8 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
         fileName: `v-${kebabName}`,
         displayName: `v-${kebabName}`,
         pathName: `v-${kebabName}-directive`,
-        argument: { value: await prettifyType(name, (data as ObjectDefinition).properties.value) },
+        value: await prettifyType(name, (data as ObjectDefinition).properties.value),
+        argument: (data as ObjectDefinition).properties.arg,
         modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
       }
     })
@@ -91,10 +95,17 @@ export async function generateDirectiveDataFromTypes (): Promise<DirectiveData[]
 export async function generateComponentDataFromTypes (component: string): Promise<ComponentData> {
   const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const props = await inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = await inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = await inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = await inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const [
+    props,
+    events,
+    slots,
+    exposed,
+  ] = await Promise.all([
+    inspect(project, sourceFile.getTypeAlias('ComponentProps')),
+    inspect(project, sourceFile.getTypeAlias('ComponentEvents')),
+    inspect(project, sourceFile.getTypeAlias('ComponentSlots')),
+    inspect(project, sourceFile.getTypeAlias('ComponentExposed')),
+  ])
 
   const sections = [props, events, slots, exposed]
 
@@ -110,10 +121,15 @@ export async function generateComponentDataFromTypes (component: string): Promis
   }
 
   return {
+    description: {},
     props: props.properties,
     events: events.properties,
     slots: slots.properties,
     exposed: exposed.properties,
+    displayName: component,
+    fileName: component,
+    pathName: kebabCase(component),
+    sass: {},
   }
 }
 
@@ -212,11 +228,13 @@ export type BaseData = {
   pathName: string // kebab-case name for use in urls
 }
 export type ComponentData = BaseData & {
+  description: Record<string, string>
   sass: Record<string, { default: string }>
   props: Record<string, Definition>
   slots: Record<string, Definition>
   events: Record<string, Definition>
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
@@ -226,7 +244,8 @@ export type DirectiveData = BaseData & {
   slots?: never
   events?: never
   exposed?: never
-  argument: { value: Definition }
+  value: Definition
+  argument: Definition
   modifiers: Record<string, Definition>
 }
 export type ComposableData = BaseData & {
@@ -235,6 +254,7 @@ export type ComposableData = BaseData & {
   slots?: never
   events?: never
   exposed: Record<string, Definition>
+  value?: never
   argument?: never
   modifiers?: never
 }
@@ -268,21 +288,21 @@ function getSource (declaration?: Node<ts.Node>) {
   return filePath && startLine ? `${filePath}#L${startLine}-L${endLine}` : undefined
 }
 
-function listFlags (flags: object, value?: number) {
-  if (!value) return []
+// function listFlags (flags: object, value?: number) {
+//   if (!value) return []
 
-  const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
+//   const entries = Object.entries(flags).filter(([_, flag]) => typeof flag === 'number')
 
-  return entries.reduce<string[]>((arr, [name, flag]) => {
-    if (value & flag) {
-      arr.push(name)
-    }
-    return arr
-  }, [])
-}
+//   return entries.reduce<string[]>((arr, [name, flag]) => {
+//     if (value & flag) {
+//       arr.push(name)
+//     }
+//     return arr
+//   }, [])
+// }
 
 function getCleanText (text: string) {
-  return text.replaceAll(/import\(.*?\)\./g, '')
+  return text.replace(/import\(.*?\)\./g, '')
 }
 
 function count (arr: string[], needle: string) {
@@ -294,24 +314,35 @@ function count (arr: string[], needle: string) {
 // Types that are displayed as links
 const allowedRefs = [
   'Anchor',
+  'ActiveStrategy',
   'DataIteratorItem',
   'DataTableHeader',
   'DataTableItem',
   'FilterFunction',
   'FormValidationResult',
   'Group',
+  'GroupSummary',
   'InternalDataTableHeader',
   'ListItem',
-  'LocationStrategyFn',
-  'OpenSelectStrategyFn',
-  'OpenStrategyFn',
-  'ScrollStrategyFn',
+  'LocationStrategyFunction',
+  'OpenSelectStrategyFunction',
+  'OpenStrategy',
+  'OpenStrategyFunction',
+  'ScrollStrategyFunction',
+  'SelectableItem',
   'SelectItemKey',
-  'SelectStrategyFn',
+  'SelectStrategy',
+  'SelectStrategyFunction',
   'SortItem',
   'SubmitEventPromise',
+  'ItemKeySlot',
+  'TemplateRef',
   'TouchHandlers',
   'ValidationRule',
+  'CalendarTimestamp',
+  'CalendarDaySlotScope',
+  'CalendarEventParsed',
+  'CalendarEventVisual',
 ]
 
 // Types that displayed without their generic arguments
@@ -323,7 +354,10 @@ const plainRefs = [
   'DataTableItem',
   'ListItem',
   'Group',
+  'GroupSummary',
   'DataIteratorItem',
+  'ItemKeySlot',
+  'SelectItemKey',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -371,6 +405,9 @@ function formatDefinition (definition: Definition) {
       } else {
         formatted = definition.text
       }
+      if (allowedRefs.includes(definition.ref)) {
+        formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
+      }
       break
     case 'interface':
     case 'boolean':
@@ -383,10 +420,6 @@ function formatDefinition (definition: Definition) {
   }
 
   definition.formatted = formatted
-
-  if (allowedRefs.includes(formatted)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
-  }
 }
 
 // eslint-disable-next-line complexity
@@ -607,7 +640,7 @@ function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
 function findPotentialRecursiveTypes (type?: Type<ts.Type>): string[] {
   if (type == null) return []
 
-  const recursiveTypes = []
+  const recursiveTypes: string[] = []
 
   if (type.isUnion()) {
     recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))

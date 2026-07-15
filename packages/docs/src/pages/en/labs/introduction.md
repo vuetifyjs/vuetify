@@ -26,15 +26,15 @@ Components available through Labs are considered **NOT** production ready and on
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-picker` in your component:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-month-picker` in your component:
 
 ```html
 <template>
-  <v-picker />
+  <v-month-picker />
 </template>
 
 <script setup>
-  import { VPicker } from 'vuetify/labs/VPicker'
+  import { VMonthPicker } from 'vuetify/labs/VMonthPicker'
 </script>
 ```
 
@@ -42,16 +42,16 @@ Alternatively you can make the component available globally by importing it in y
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VPicker } from 'vuetify/labs/VPicker'
+import { VMonthPicker } from 'vuetify/labs/VMonthPicker'
 
 export default createVuetify({
   components: {
-    VPicker,
+    VMonthPicker,
   },
 })
 ```
 
-When Vuetify instantiates it will register `VPicker` as a usable component within templates.
+When Vuetify instantiates it will register `VMonthPicker` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 
@@ -74,18 +74,17 @@ export default createVuetify({
 
 The following is a list of available and up-and-coming components for use with Labs:
 
-| Component | Description | Min Version |
-| - | - | - |
-| [v-calendar](/components/calendars/) | A calendar component | [v3.4.9](/getting-started/release-notes/?version=v3.4.9) |
-| [v-confirm-edit](/components/confirm-edit/) | A component for confirming model changes | [v3.4.0](/getting-started/release-notes/?version=v3.4.0) |
-| [v-empty-state](/components/empty-states/) | A component for displaying empty states | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
-| [v-fab](/components/floating-action-buttons/) | A layout aware [v-btn](/components/buttons/) | [v3.5.7](/getting-started/release-notes/?version=v3.5.7) |
-| [v-number-input](/components/number-input/) | A component for numerical data | [v3.5.10](/getting-started/release-notes/?version=v3.5.10) |
-| [v-snackbar-queue](/components/snackbar-queue/) | A queue for snackbars | [v3.6.0](/getting-started/release-notes/?version=v3.6.0) |
-| [v-sparkline](/components/sparklines/) | A basic data display component | [v3.5.5](/getting-started/release-notes/?version=v3.5.5) |
-| [v-speed-dial](/components/speed-dials/) | A component for display actions | [v3.5.8](/getting-started/release-notes/?version=v3.5.8) |
-| [v-time-picker](/components/time-pickers/) | A time-picker component | [v3.5.12](/getting-started/release-notes/?version=v3.5.12) |
-| [v-treeview](/components/treeview/) | A treeview component | [v3.5.9](/getting-started/release-notes/?version=v3.5.9) |
+| Component                                            | Description                                                | Min Version                                                |
+|------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
+| [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
+| [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
+| [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
+| [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
+| [v-progress](/components/progress/)                  | A unified progress indicator component with a11y defaults  | [v4.0.3](/getting-started/release-notes/?version=v4.0.3)   |
+| [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-highlight](/components/highlights/)               | Renders text with highlighted search matches               | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.

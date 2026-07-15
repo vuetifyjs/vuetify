@@ -1,25 +1,5 @@
 <template>
   <v-toolbar>
-    <!-- <v-overflow-btn
-      :items="dropdown_font"
-      label="Select font"
-      hide-details
-      class="pa-0"
-    ></v-overflow-btn>
-
-    <v-divider vertical></v-divider>
-
-    <v-overflow-btn
-      :items="dropdown_edit"
-      editable
-      label="Select size"
-      hide-details
-      class="pa-0"
-      overflow
-    ></v-overflow-btn>
-
-    <v-divider vertical></v-divider> -->
-
     <v-spacer></v-spacer>
 
     <v-btn-toggle
@@ -54,9 +34,8 @@
     <v-btn-toggle
       v-model="toggleExclusive"
       color="primary"
+      density="compact"
       variant="plain"
-      dense
-      group
     >
       <v-btn
         :value="1"

@@ -11,7 +11,6 @@
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Dropdown
@@ -22,6 +21,7 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          :value="index"
         >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>

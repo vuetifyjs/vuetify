@@ -1,24 +1,28 @@
 // Utilities
-import { inject } from 'vue'
-import { clamp, consoleWarn, mergeDeep, refElement } from '@/util'
+import { inject, toRef } from 'vue'
+import { useRtl } from './locale'
+import { clamp, consoleWarn, easingPatterns, mergeDeep, PREFERS_REDUCED_MOTION, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
 import type { LocaleInstance, RtlInstance } from './locale'
+import type { EasingFunction } from '@/util'
 
 export interface GoToInstance {
   rtl: Ref<boolean>
-  options: GoToOptions
+  options: InternalGoToOptions
 }
 
-export interface GoToOptions {
+export interface InternalGoToOptions {
   container: ComponentPublicInstance | HTMLElement | string
   duration: number
   layout: boolean
   offset: number
-  easing: string | ((t: number) => number)
-  patterns: Record<string, (t: number) => number>
+  easing: string | EasingFunction
+  patterns: Record<string, EasingFunction>
 }
+
+export type GoToOptions = Partial<InternalGoToOptions>
 
 export const GoToSymbol: InjectionKey<GoToInstance> = Symbol.for('vuetify:goto')
 
@@ -28,22 +32,8 @@ function genDefaults () {
     duration: 300,
     layout: false,
     offset: 0,
-    easing: 'easeInOutCubic',
-    patterns: {
-      linear: (t: number) => t,
-      easeInQuad: (t: number) => t ** 2,
-      easeOutQuad: (t: number) => t * (2 - t),
-      easeInOutQuad: (t: number) => (t < 0.5 ? 2 * t ** 2 : -1 + (4 - 2 * t) * t),
-      easeInCubic: (t: number) => t ** 3,
-      easeOutCubic: (t: number) => --t ** 3 + 1,
-      easeInOutCubic: (t: number) => t < 0.5 ? 4 * t ** 3 : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
-      easeInQuart: (t: number) => t ** 4,
-      easeOutQuart: (t: number) => 1 - --t ** 4,
-      easeInOutQuart: (t: number) => (t < 0.5 ? 8 * t ** 4 : 1 - 8 * --t ** 4),
-      easeInQuint: (t: number) => t ** 5,
-      easeOutQuint: (t: number) => 1 + --t ** 5,
-      easeInOutQuint: (t: number) => t < 0.5 ? 16 * t ** 5 : 1 + 16 * --t ** 5,
-    },
+    easing: 'easeInOutCubic' satisfies keyof typeof easingPatterns,
+    patterns: easingPatterns,
   }
 }
 
@@ -68,16 +58,19 @@ function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
   return totalOffset
 }
 
-export function createGoTo (options: Partial<GoToOptions> | undefined, locale: LocaleInstance & RtlInstance) {
+export function createGoTo (
+  options: GoToOptions| undefined,
+  locale: LocaleInstance & RtlInstance
+): GoToInstance {
   return {
     rtl: locale.isRtl,
-    options: mergeDeep(genDefaults(), options),
+    options: mergeDeep(genDefaults(), options) as InternalGoToOptions,
   }
 }
 
 export async function scrollTo (
   _target: ComponentPublicInstance | HTMLElement | number | string,
-  _options: Partial<GoToOptions>,
+  _options: GoToOptions,
   horizontal?: boolean,
   goTo?: GoToInstance,
 ) {
@@ -88,7 +81,9 @@ export async function scrollTo (
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
-  const ease = typeof options.easing === 'function' ? options.easing : options.patterns[options.easing]
+  const ease = PREFERS_REDUCED_MOTION() ? options.patterns.instant
+    : typeof options.easing === 'function' ? options.easing
+    : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 
@@ -107,6 +102,7 @@ export async function scrollTo (
   }
 
   targetLocation += options.offset
+  targetLocation = clampTarget(container, targetLocation, !!rtl, !!horizontal)
 
   const startLocation = container[property] ?? 0
 
@@ -138,10 +134,17 @@ export async function scrollTo (
   }))
 }
 
-export function useGoTo (_options: Partial<GoToOptions> = {}) {
-  const goTo = inject(GoToSymbol)
+export function useGoTo (_options: GoToOptions = {}) {
+  const goToInstance = inject(GoToSymbol)
+  const { isRtl } = useRtl()
 
-  if (!goTo) throw new Error('[Vuetify] Could not find injected goto instance')
+  if (!goToInstance) throw new Error('[Vuetify] Could not find injected goto instance')
+
+  const goTo = {
+    ...goToInstance,
+    // can be set via VLocaleProvider
+    rtl: toRef(() => goToInstance.rtl.value || isRtl.value),
+  }
 
   async function go (
     target: ComponentPublicInstance | HTMLElement | string | number,
@@ -158,4 +161,38 @@ export function useGoTo (_options: Partial<GoToOptions> = {}) {
   }
 
   return go
+}
+
+/**
+ * Clamp target value to achieve a smooth scroll animation
+ * when the value goes outside the scroll container size
+ */
+function clampTarget (
+  container: HTMLElement,
+  value: number,
+  rtl: boolean,
+  horizontal: boolean,
+) {
+  const { scrollWidth, scrollHeight } = container
+  const [containerWidth, containerHeight] = container === document.scrollingElement
+    ? [window.innerWidth, window.innerHeight]
+    : [container.offsetWidth, container.offsetHeight]
+
+  let min: number
+  let max: number
+
+  if (horizontal) {
+    if (rtl) {
+      min = -(scrollWidth - containerWidth)
+      max = 0
+    } else {
+      min = 0
+      max = scrollWidth - containerWidth
+    }
+  } else {
+    min = 0
+    max = scrollHeight + -containerHeight
+  }
+
+  return clamp(value, min, max)
 }

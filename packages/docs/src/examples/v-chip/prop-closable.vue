@@ -12,8 +12,6 @@
     <v-btn
       v-if="!chip"
       color="primary"
-      close
-      dark
       @click="chip = true"
     >
       Reset Chip
@@ -36,3 +34,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2690-8443&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

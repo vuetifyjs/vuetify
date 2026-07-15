@@ -6,13 +6,16 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
+import { useGridSelection } from '@/composables/gridSelection'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, watchEffect } from 'vue'
+import { computed, useId, watchEffect } from 'vue'
 import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+
 export type VDatePickerMonthsSlots = {
   month: {
     month: {
@@ -28,8 +31,16 @@ export type VDatePickerMonthsSlots = {
 
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,
+  columns: {
+    type: Number,
+    default: 2,
+  },
   height: [String, Number],
+  min: null as any as PropType<unknown>,
+  max: null as any as PropType<unknown>,
   modelValue: Number,
+  year: Number,
+  allowedMonths: [Array, Function] as PropType<number[] | ((date: number) => boolean)>,
 }, 'VDatePickerMonths')
 
 export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
@@ -39,21 +50,34 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
 
   emits: {
     'update:modelValue': (date: any) => true,
+    escape: () => true,
   },
 
   setup (props, { emit, slots }) {
     const adapter = useDate()
     const model = useProxiedModel(props, 'modelValue')
+    const uid = useId()
 
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
-
+      if (props.year) {
+        date = adapter.setYear(date, props.year)
+      }
       return createRange(12).map(i => {
         const text = adapter.format(date, 'monthShort')
+        const label = adapter.format(date, 'month')
+        const isDisabled =
+          !!(
+            !isMonthAllowed(i) ||
+            (props.min && adapter.isAfter(adapter.startOfMonth(adapter.date(props.min)), date)) ||
+            (props.max && adapter.isAfter(date, adapter.startOfMonth(adapter.date(props.max))))
+          )
         date = adapter.getNextMonth(date)
 
         return {
+          isDisabled,
           text,
+          label,
           value: i,
         }
       })
@@ -63,6 +87,32 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
       model.value = model.value ?? adapter.getMonth(adapter.date())
     })
 
+    function isMonthAllowed (month: number) {
+      if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
+        return props.allowedMonths.includes(month)
+      }
+
+      if (typeof props.allowedMonths === 'function') {
+        return props.allowedMonths(month)
+      }
+
+      return true
+    }
+
+    function onMonthSelect (value: number) {
+      if (model.value === value) emit('update:modelValue', value)
+      else model.value = value
+    }
+
+    const { containerProps, selectItem } = useGridSelection<number>({
+      items: () => months.value,
+      columns: () => props.columns,
+      initialValue: current => current ?? model.value ?? adapter.getMonth(adapter.date()),
+      itemAttribute: 'data-v-month',
+      onSelect: onMonthSelect,
+      onEscape: () => emit('escape'),
+    })
+
     useRender(() => (
       <div
         class="v-date-picker-months"
@@ -70,24 +120,26 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
           height: convertToUnit(props.height),
         }}
       >
-        <div class="v-date-picker-months__content">
+        <div
+          class="v-date-picker-months__content"
+          style={{ '--v-date-picker-months-columns': props.columns }}
+          { ...containerProps.value }
+        >
           { months.value.map((month, i) => {
             const btnProps = {
+              id: `${uid}-month-${i}`,
               active: model.value === i,
+              ariaLabel: month.label,
               color: model.value === i ? props.color : undefined,
+              disabled: month.isDisabled,
               rounded: true,
+              tabindex: -1,
               text: month.text,
               variant: model.value === month.value ? 'flat' : 'text',
-              onClick: () => onClick(i),
+              'data-v-month': month.value,
+              onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
+              onClick: () => selectItem(i),
             } as const
-
-            function onClick (i: number) {
-              if (model.value === i) {
-                emit('update:modelValue', model.value)
-                return
-              }
-              model.value = i
-            }
 
             return slots.month?.({
               month,

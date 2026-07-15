@@ -1,7 +1,5 @@
 {
-  "argument": {
-    "value": "By default takes a handler function that is invoked when the element that the directive is attached to is mutated. It can also take an object, which allows you to pass along [MutationObserver options](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)."
-  },
+  "value": "A handler function that is invoked when the element that the directive is attached to is mutated, or an object of [MutationObserver options](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe).",
   "modifiers": {
     "attr": "Sets the value of [attributes](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) to true.",
     "char": "Sets the value of [characterData](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) to true.",

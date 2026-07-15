@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
@@ -7,7 +7,7 @@ import type { PropType } from 'vue'
 
 const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
-// typeof allowedDensities[number] evalutes to any
+// typeof allowedDensities[number] evaluates to any
 // when generating api types for whatever reason.
 export type Density = null | 'default' | 'comfortable' | 'compact'
 
@@ -28,7 +28,7 @@ export function useDensity (
   props: DensityProps,
   name = getCurrentInstanceName(),
 ) {
-  const densityClasses = computed(() => {
+  const densityClasses = toRef(() => {
     return `${name}--density-${props.density}`
   })
 

@@ -1,20 +1,20 @@
 // Utilities
 import { h, mergeProps, Transition, TransitionGroup } from 'vue'
-import { propsFactory } from '@/util'
+import { isObject, onlyDefinedProps, propsFactory } from '@/util'
 
 // Types
-import type { Component, FunctionalComponent, PropType, TransitionProps } from 'vue'
+import type { Component, FunctionalComponent, Prop, TransitionProps } from 'vue'
 
 export const makeTransitionProps = propsFactory({
   transition: {
-    type: [Boolean, String, Object] as PropType<string | boolean | TransitionProps & { component?: Component }>,
+    type: null,
     default: 'fade-transition',
     validator: val => val !== true,
-  },
+  } as Prop<null | string | boolean | TransitionProps & { component?: Component }>,
 }, 'transition')
 
 interface MaybeTransitionProps extends TransitionProps {
-  transition?: string | boolean | TransitionProps & { component?: any }
+  transition?: null | string | boolean | TransitionProps & { component?: any }
   disabled?: boolean
   group?: boolean
 }
@@ -25,19 +25,25 @@ export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props
   const {
     component = group ? TransitionGroup : Transition,
     ...customProps
-  } = typeof transition === 'object' ? transition : {}
+  } = isObject(transition) ? transition : {}
+
+  let transitionProps
+  if (isObject(transition)) {
+    transitionProps = mergeProps(
+      customProps,
+      onlyDefinedProps({ disabled, group }),
+      rest,
+    )
+  } else {
+    transitionProps = mergeProps(
+      { name: disabled || !transition ? '' : transition },
+      rest,
+    )
+  }
 
   return h(
     component,
-    mergeProps(
-      typeof transition === 'string'
-        ? { name: disabled ? '' : transition }
-        : customProps as any,
-      typeof transition === 'string'
-        ? {}
-        : Object.fromEntries(Object.entries({ disabled, group }).filter(([_, v]) => v !== undefined)),
-      rest as any,
-    ),
+    transitionProps,
     slots
   )
 }

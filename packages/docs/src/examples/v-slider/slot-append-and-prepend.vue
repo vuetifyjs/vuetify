@@ -10,18 +10,14 @@
       <v-toolbar-title>
         <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
       <v-btn icon="mdi-share-variant" variant="text"></v-btn>
     </v-toolbar>
 
     <v-card-text>
-      <v-row
-        class="mb-4"
-        justify="space-between"
-      >
+      <v-row class="mb-4 justify-space-between">
         <v-col class="text-left">
           <span
-            class="text-h2 font-weight-light"
+            class="text-display-large font-weight-light"
             v-text="bpm"
           ></span>
           <span class="subheading font-weight-light me-1">BPM</span>

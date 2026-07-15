@@ -1,5 +1,6 @@
 {
   "props": {
-    "mobileBreakpoint": "Sets the designated mobile breakpoint for the component."
+    "mobile": "Determines the display mode of the component. If true, the component will be displayed in mobile mode. If false, the component will be displayed in desktop mode. If null, will be based on the current mobile-breakpoint",
+    "mobileBreakpoint": "Overrides the display configuration default screen size that the component should be considered in mobile."
   }
 }

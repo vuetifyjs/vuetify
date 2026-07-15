@@ -7,6 +7,8 @@ related:
 - /features/blueprints/
 - /features/global-configuration/
 - /features/treeshaking/
+features:
+  report: true
 ---
 
 # Aliasing & virtual components

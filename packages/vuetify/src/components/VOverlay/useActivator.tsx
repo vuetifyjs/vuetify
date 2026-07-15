@@ -22,7 +22,7 @@ import {
   IN_BROWSER,
   matchesSelector,
   propsFactory,
-  refElement,
+  templateRef,
   unbindProps,
 } from '@/util'
 
@@ -73,7 +73,11 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop }: { isActive: Ref<boolean>, isTop: Ref<boolean> }
+  { isActive, isTop, contentEl }: {
+    isActive: Ref<boolean>
+    isTop: Ref<boolean>
+    contentEl: Ref<HTMLElement | undefined>
+  }
 ) {
   const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
@@ -99,9 +103,17 @@ export function useActivator (
     }
   })
 
+  let reopenLock = false
+  watch(isActive, v => {
+    if (v) return
+    reopenLock = true
+    setTimeout(() => reopenLock = false, 50)
+  })
+
   const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
+      if (reopenLock && !isActive.value) return
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (!isActive.value) {
@@ -110,17 +122,23 @@ export function useActivator (
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
-      if (e.sourceCapabilities?.firesTouchEvents) return
-
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (props.target === 'cursor') {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       runOpenDelay()
+    },
+    onMousemove: (e: MouseEvent) => {
+      cursorTarget.value = [e.clientX, e.clientY]
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
+      if (props.target === 'cursor') isFocused = false
       runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
+      if (reopenLock) return
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
@@ -130,10 +148,14 @@ export function useActivator (
       runOpenDelay()
     },
     onBlur: (e: FocusEvent) => {
+      // Body parks from clicks on empty areas inside content also count as "still focused".
+      const next = e.relatedTarget as Element | null
+      if (!next || contentEl.value?.contains(next)) return
+
       isFocused = false
       e.stopPropagation()
 
-      runCloseDelay()
+      runCloseDelay({ minDelay: 1 })
     },
   }
 
@@ -146,6 +168,9 @@ export function useActivator (
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
       events.onMouseleave = availableEvents.onMouseleave
+      if (props.target === 'cursor' && !openOnClick.value) {
+        events.onMousemove = availableEvents.onMousemove
+      }
     }
     if (openOnFocus.value) {
       events.onFocus = availableEvents.onFocus
@@ -170,13 +195,17 @@ export function useActivator (
     }
 
     if (openOnFocus.value) {
-      events.onFocusin = () => {
+      events.onFocusin = (e: Event) => {
+        if (!(e.target as HTMLElement).matches(':focus-visible')) return
         isFocused = true
         runOpenDelay()
       }
-      events.onFocusout = () => {
+      events.onFocusout = (e: Event) => {
+        const next = (e as FocusEvent).relatedTarget as Element | null
+        if (!next || contentEl.value?.contains(next)) return
+
         isFocused = false
-        runCloseDelay()
+        runCloseDelay({ minDelay: 1 })
       }
     }
 
@@ -215,8 +244,8 @@ export function useActivator (
     if (val && (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    )) {
-      isActive.value = false
+    ) && !contentEl.value?.contains(document.activeElement)) {
+      runCloseDelay()
     }
   })
 
@@ -228,19 +257,19 @@ export function useActivator (
     }
   }, { flush: 'post' })
 
-  const activatorRef = ref<HTMLElement>()
+  const activatorRef = templateRef()
   watchEffect(() => {
     if (!activatorRef.value) return
 
     nextTick(() => {
-      activatorEl.value = refElement(activatorRef.value)
+      activatorEl.value = activatorRef.el
     })
   })
 
-  const targetRef = ref<HTMLElement>()
+  const targetRef = templateRef()
   const target = computed(() => {
     if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
-    if (targetRef.value) return refElement(targetRef.value)
+    if (targetRef.value) return targetRef.el
     return getTarget(props.target, vm) || activatorEl.value
   })
   const targetEl = computed(() => {

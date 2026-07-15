@@ -32,7 +32,7 @@
 
   const props = computed(() => {
     return {
-      color: color.value,
+      color: color.value || undefined,
       extended: extended.value || undefined,
       icon: !extended.value ? '$vuetify' : undefined,
       'prepend-icon': extended.value ? '$vuetify' : undefined,

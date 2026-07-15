@@ -2,17 +2,18 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, inject, markRaw, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, PropType, Raw, Ref } from 'vue'
 import type { ValidationProps } from './validation'
 import type { EventProp } from '@/util'
 
 export interface FormProvide {
   register: (item: {
     id: number | string
+    vm: ComponentInternalInstance
     validate: () => Promise<string[]>
     reset: () => Promise<void>
     resetValidation: () => Promise<void>
@@ -20,8 +21,8 @@ export interface FormProvide {
   unregister: (id: number | string) => void
   update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
   items: Ref<FormField[]>
-  isDisabled: ComputedRef<boolean>
-  isReadonly: ComputedRef<boolean>
+  isDisabled: Readonly<Ref<boolean>>
+  isReadonly: Readonly<Ref<boolean>>
   isValidating: Ref<boolean>
   isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
@@ -32,6 +33,7 @@ export interface FormField {
   validate: () => Promise<string[]>
   reset: () => Promise<void>
   resetValidation: () => Promise<void>
+  vm: Raw<ComponentInternalInstance>
   isValid: boolean | null
   errorMessages: string[]
 }
@@ -76,8 +78,8 @@ export const makeFormProps = propsFactory({
 export function createForm (props: FormProps) {
   const model = useProxiedModel(props, 'modelValue')
 
-  const isDisabled = computed(() => props.disabled)
-  const isReadonly = computed(() => props.readonly)
+  const isDisabled = toRef(() => props.disabled)
+  const isReadonly = toRef(() => props.readonly)
   const isValidating = shallowRef(false)
   const items = ref<FormField[]>([])
   const errors = ref<FieldValidationResult[]>([])
@@ -141,7 +143,7 @@ export function createForm (props: FormProps) {
   }, { deep: true, flush: 'post' })
 
   provide(FormKey, {
-    register: ({ id, validate, reset, resetValidation }) => {
+    register: ({ id, vm, validate, reset, resetValidation }) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -151,6 +153,7 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
+        vm: markRaw(vm),
         isValid: null,
         errorMessages: [],
       })
@@ -173,7 +176,7 @@ export function createForm (props: FormProps) {
     isValidating,
     isValid: model,
     items,
-    validateOn: toRef(props, 'validateOn'),
+    validateOn: toRef(() => props.validateOn),
   })
 
   return {
@@ -189,6 +192,11 @@ export function createForm (props: FormProps) {
   }
 }
 
-export function useForm () {
-  return inject(FormKey, null)
+export function useForm (props?: { readonly: boolean | null, disabled: boolean | null }) {
+  const form = inject(FormKey, null)
+  return {
+    ...form,
+    isReadonly: computed(() => !!(props?.readonly ?? form?.isReadonly.value)),
+    isDisabled: computed(() => !!(props?.disabled ?? form?.isDisabled.value)),
+  }
 }

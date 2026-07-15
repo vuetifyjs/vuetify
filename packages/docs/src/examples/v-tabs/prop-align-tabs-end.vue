@@ -9,8 +9,9 @@
       <v-tab :value="2">City</v-tab>
       <v-tab :value="3">Abstract</v-tab>
     </v-tabs>
-    <v-window v-model="tab">
-      <v-window-item
+
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item
         v-for="n in 3"
         :key="n"
         :value="n"
@@ -26,13 +27,14 @@
               <v-img
                 :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
                 :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                aspect-ratio="1"
+                height="205"
+                cover
               ></v-img>
             </v-col>
           </v-row>
         </v-container>
-      </v-window-item>
-    </v-window>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
 

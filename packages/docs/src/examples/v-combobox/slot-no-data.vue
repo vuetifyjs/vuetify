@@ -7,10 +7,10 @@
       :items="items"
       hint="Maximum of 5 tags"
       label="Add some tags"
+      chips
       hide-selected
       multiple
       persistent-hint
-      small-chips
     >
       <template v-slot:no-data>
         <v-list-item>

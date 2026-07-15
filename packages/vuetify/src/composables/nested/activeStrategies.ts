@@ -1,8 +1,9 @@
 /* eslint-disable sonarjs/no-identical-functions */
 // Utilities
 import { toRaw } from 'vue'
+import { wrapInArray } from '@/util'
 
-export type ActiveStrategyFn = (data: {
+type ActiveStrategyFunction = (data: {
   id: unknown
   value: boolean
   activated: Set<unknown>
@@ -11,22 +12,22 @@ export type ActiveStrategyFn = (data: {
   event?: Event
 }) => Set<unknown>
 
-export type ActiveStrategyTransformInFn = (
-  v: readonly unknown[] | undefined,
+type ActiveStrategyTransformInFunction = (
+  v: unknown | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Set<unknown>
 
-export type ActiveStrategyTransformOutFn = (
+type ActiveStrategyTransformOutFunction = (
   v: Set<unknown>,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
-) => unknown[]
+) => unknown
 
 export type ActiveStrategy = {
-  activate: ActiveStrategyFn
-  in: ActiveStrategyTransformInFn
-  out: ActiveStrategyTransformOutFn
+  activate: ActiveStrategyFunction
+  in: ActiveStrategyTransformInFunction
+  out: ActiveStrategyTransformOutFunction
 }
 
 export const independentActiveStrategy = (mandatory?: boolean): ActiveStrategy => {
@@ -49,14 +50,16 @@ export const independentActiveStrategy = (mandatory?: boolean): ActiveStrategy =
     in: (v, children, parents) => {
       let set = new Set()
 
-      for (const id of (v || [])) {
-        set = strategy.activate({
-          id,
-          value: true,
-          activated: new Set(set),
-          children,
-          parents,
-        })
+      if (v != null) {
+        for (const id of wrapInArray(v)) {
+          set = strategy.activate({
+            id,
+            value: true,
+            activated: new Set(set),
+            children,
+            parents,
+          })
+        }
       }
 
       return set
@@ -81,8 +84,11 @@ export const independentSingleActiveStrategy = (mandatory?: boolean): ActiveStra
     in: (v, children, parents) => {
       let set = new Set()
 
-      if (v?.length) {
-        set = parentStrategy.in(v.slice(0, 1), children, parents)
+      if (v != null) {
+        const arr = wrapInArray(v)
+        if (arr.length) {
+          set = parentStrategy.in(arr.slice(0, 1), children, parents)
+        }
       }
 
       return set

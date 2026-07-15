@@ -11,7 +11,7 @@
     </v-card-text>
 
     <v-card-text>
-      <div class="text-subtitle-2 font-weight-black mb-1">Last 4 digits of your SSN</div>
+      <div class="text-title-small font-weight-black mb-1">Last 4 digits of your SSN</div>
 
       <v-text-field
         label="Enter value here"
@@ -71,3 +71,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1479-92504&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

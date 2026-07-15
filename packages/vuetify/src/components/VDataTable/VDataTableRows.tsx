@@ -1,22 +1,25 @@
 // Components
-import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
-import { VDataTableRow } from './VDataTableRow'
+import { makeVDataTableGroupHeaderRowProps, VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
+import { makeVDataTableRowProps, VDataTableRow } from './VDataTableRow'
+import { VExpandTransition } from '@/components/transitions'
 
 // Composables
 import { useExpanded } from './composables/expand'
 import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
+import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { useLocale } from '@/composables/locale'
+import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { Group } from './composables/group'
-import type { CellProps, DataTableItem, GroupHeaderSlot, ItemSlot, RowProps } from './types'
+import type { Component, PropType, TransitionProps } from 'vue'
+import type { Group, GroupSummary } from './composables/group'
+import type { CellProps, DataTableItem, DataTableLoading, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import type { VDataTableRowSlots } from './VDataTableRow'
 import type { GenericProps } from '@/util'
@@ -25,19 +28,22 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
   item: ItemSlot<T> & { props: Record<string, any> }
   loading: never
   'group-header': GroupHeaderSlot
+  'group-summary': GroupSummarySlot
   'no-data': never
   'expanded-row': ItemSlot<T>
+  expanded: ItemSlot<T>
 }
 
 export const makeVDataTableRowsProps = propsFactory({
-  loading: [Boolean, String],
+  color: String,
+  loading: [Boolean, String, Object] as PropType<DataTableLoading>,
   loadingText: {
     type: String,
     default: '$vuetify.dataIterator.loadingText',
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<readonly (DataTableItem | Group)[]>,
+    type: Array as PropType<readonly (DataTableItem | Group | GroupSummary)[]>,
     default: () => ([]),
   },
   noDataText: {
@@ -46,11 +52,20 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowProps: [Object, Function] as PropType<RowProps<any>>,
   cellProps: [Object, Function] as PropType<CellProps<any>>,
+  expandTransition: {
+    type: null as unknown as PropType<null | string | boolean | TransitionProps & { component?: Component }>,
+    default: () => ({ component: VExpandTransition }),
+    validator: val => val !== true,
+  },
+
+  ...pick(makeVDataTableRowProps(), ['collapseIcon', 'expandIcon', 'density', 'getMatches']),
+  ...pick(makeVDataTableGroupHeaderRowProps(), ['groupCollapseIcon', 'groupExpandIcon', 'density']),
+  ...makeDisplayProps(),
 }, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<new <T>(
   props: {
-    items?: readonly (DataTableItem<T> | Group<T>)[]
+    items?: readonly (DataTableItem<T> | Group<T> | GroupSummary<T>)[]
   },
   slots: VDataTableRowsSlots<T>,
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -66,8 +81,11 @@ export const VDataTableRows = genericComponent<new <T>(
     const { isSelected, toggleSelect } = useSelection()
     const { toggleGroup, isGroupOpen } = useGroupBy()
     const { t } = useLocale()
+    const { mobile } = useDisplay(props)
 
     useRender(() => {
+      const groupHeaderRowProps = pick(props, ['groupCollapseIcon', 'groupExpandIcon', 'density'])
+
       if (props.loading && (!props.items.length || slots.loading)) {
         return (
           <tr
@@ -114,14 +132,26 @@ export const VDataTableRows = genericComponent<new <T>(
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.id}` }
                   item={ item }
-                  { ...getPrefixedEventHandlers(attrs, ':group-header', () => slotProps) }
+                  { ...getPrefixedEventHandlers(attrs, ':groupHeader', () => slotProps) }
+                  { ...groupHeaderRowProps }
                   v-slots={ slots }
                 />
               )
             }
 
+            if (item.type === 'group-summary') {
+              const slotProps = {
+                index,
+                item,
+                columns: columns.value,
+                toggleGroup,
+              } satisfies GroupSummarySlot
+
+              return slots['group-summary']?.(slotProps) ?? ''
+            }
+
             const slotProps = {
-              index,
+              index: item.virtualIndex ?? index,
               item: item.raw,
               internalItem: item,
               columns: columns.value,
@@ -141,7 +171,13 @@ export const VDataTableRows = genericComponent<new <T>(
                   } : undefined,
                   index,
                   item,
+                  color: props.color,
                   cellProps: props.cellProps,
+                  collapseIcon: props.collapseIcon,
+                  expandIcon: props.expandIcon,
+                  density: props.density,
+                  mobile: mobile.value,
+                  getMatches: props.getMatches,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
                 typeof props.rowProps === 'function'
@@ -163,7 +199,26 @@ export const VDataTableRows = genericComponent<new <T>(
                   />
                 )}
 
-                { isExpanded(item) && slots['expanded-row']?.(slotProps) }
+                { slots['expanded-row']
+                  ? isExpanded(item) && slots['expanded-row'](slotProps)
+                  : slots.expanded && (
+                    <tr class="v-data-table__tr--expanded">
+                      <td colspan={ columns.value.length }>
+                        { props.expandTransition
+                          ? (
+                            <MaybeTransition transition={ props.expandTransition }>
+                              { isExpanded(item)
+                                ? <div>{ slots.expanded(slotProps) }</div>
+                                : null }
+                            </MaybeTransition>
+                          )
+                          // bypass <Transition> to avoid flash when expand-strategy=single
+                          : isExpanded(item) && <div>{ slots.expanded(slotProps) }</div>
+                        }
+                      </td>
+                    </tr>
+                  )
+                }
               </Fragment>
             )
           })}

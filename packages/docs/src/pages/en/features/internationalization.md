@@ -7,6 +7,10 @@ related:
   - /features/accessibility/
   - /components/locale-providers/
   - /getting-started/browser-support/
+features:
+  github: /composables/locale.ts
+  label: 'i18n'
+  report: true
 ---
 
 # Internationalization (i18n)

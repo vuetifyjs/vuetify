@@ -1,6 +1,6 @@
 <template>
 
-  <v-layout class="overflow-visible" style="height: 56px;">
+  <v-layout style="height: 56px;">
     <v-bottom-navigation
       v-model="value"
       :bg-color="color"

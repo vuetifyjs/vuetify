@@ -2,46 +2,44 @@
 layout: home
 meta:
   title: Vuetify — A Vue Component Framework
-  description: Vuetify is a no design skills required Open Source UI Component Framework for Vue. It provides you with all of the tools necessary to create beautiful content rich web applications.
+  description: Vuetify is a no-design-skills-required Open Source UI component framework for Vue with everything you need to build beautiful, content-rich web apps.
   keywords: vue, vue components, vue ui components, material design components, vuetify, component framework, component library
 ---
 
 <HomeEntry />
 
-<br>
-
-<HomeFeatures />
-
-<br>
-
 <HomeSpecialSponsor />
 
-<br>
+<HomeGalleryComponents />
 
-## Project Sponsors
-
-The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto .px-4}
+<v-divider />
 
 <HomeSponsors />
 
-<v-divider style="max-width: 500px;" class="mx-auto my-16" />
+<v-divider />
 
-## Templates Built With Vuetify
+<HomeEcosystem />
 
-Check out these premium templates built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+<v-divider  />
 
-<DocPremiumThemesGallery />
+<HomeVuetifyOne />
 
-<v-divider style="max-width: 500px;" class="mx-auto my-16" />
+<v-divider  />
 
-## Made With Vuetify
+<HomeTooling />
 
-Check out these beautiful apps, plugins, and themes built using Vuetify.{style="max-width: 568px" .mx-auto .px-4}
+<v-divider />
 
-<DocMadeWithVuetifyGallery class="pa-3 mb-4" />
+<HomeSnips />
 
-<DocMadeWithVuetifyLink />
+<v-divider color="primary" />
 
-<br>
-<br>
-<br>
+<HomeSupport />
+
+<v-divider />
+
+<HomeDiscord />
+
+<v-divider />
+
+<HomeBlogs />

@@ -48,7 +48,7 @@
 
     <v-card-title class="align-start">
       <div>
-        <span class="text-h5">FORTNITE</span>
+        <span class="text-headline-small">FORTNITE</span>
         <div class="text-grey font-weight-light">
           Video game
         </div>
@@ -65,37 +65,19 @@
         </template>
 
         <v-card>
-          <v-card-title>
-            <span class="text-h6 font-weight-bold">Share</span>
+          <v-card-title class="d-flex">
+            <span class="text-title-large font-weight-bold">Share</span>
             <v-spacer></v-spacer>
 
-            <v-btn
-              class="mx-0"
-              icon
-              @click="dialog = false"
-            >
+            <v-btn class="mx-0" icon @click="dialog = false">
               <v-icon>mdi-close-circle-outline</v-icon>
             </v-btn>
           </v-card-title>
 
           <v-list>
-            <v-list-item title="Facebook">
-              <template v-slot:prepend>
-                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
-              </template>
-            </v-list-item>
-
-            <v-list-item title="Twitter">
-              <template v-slot:prepend>
-                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
-              </template>
-            </v-list-item>
-
-            <v-list-item title="Email">
-              <template v-slot:prepend>
-                <v-icon icon="mdi-email"></v-icon>
-              </template>
-            </v-list-item>
+            <v-list-item prepend-icon="mdi-facebook" title="Facebook"></v-list-item>
+            <v-list-item prepend-icon="mdi-twitter" title="Twitter"></v-list-item>
+            <v-list-item prepend-icon="mdi-email" title="Email"></v-list-item>
           </v-list>
 
           <v-text-field
@@ -113,7 +95,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <span class="ps-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
+      <span class="ps-2 text-grey-darken-2 font-weight-light text-body-small">16,544 reviews</span>
 
       <v-spacer></v-spacer>
 
@@ -131,7 +113,7 @@
         </template>
       </v-rating>
     </v-card-actions>
-    <div class="pa-4 pt-0 text-caption">
+    <div class="pa-4 pt-0 text-body-small">
       <em>Portions of the materials used are trademarks and/or copyrighted works of Epic Games, Inc. All rights reserved by Epic. This material is not official and is not endorsed by Epic.</em>
     </div>
   </v-card>

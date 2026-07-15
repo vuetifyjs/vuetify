@@ -5,10 +5,15 @@
     "enabled": true
   },
   {
+    "title": "Español",
+    "locale": "es-MX",
+    "enabled": true
+  },
+  {
     "title": "日本語",
     "locale": "ja-JP",
     "alternate": "ja",
-    "enabled": false
+    "enabled": true
   },
   {
     "title": "简体中文",
@@ -39,10 +44,5 @@
     "locale": "ko-KR",
     "alternate": "ko",
     "enabled": false
-  },
-  {
-    "title": "Help translate",
-    "locale": "eo-UY",
-    "enabled": true
   }
 ]

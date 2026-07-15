@@ -40,7 +40,7 @@ export async function waitForReadystate () {
 
 /** Jaro-Winkler distance between two strings */
 // eslint-disable-next-line max-statements
-export function distance (s1: string, s2: string) {
+export function getDistance (s1: string, s2: string) {
   // Exit early if either are empty.
   if (s1.length === 0 || s2.length === 0) {
     return 0
@@ -118,7 +118,7 @@ const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 export const eventName = (name: string) => name.slice(2, 3).toLowerCase() + name.slice(3)
 
-export function propsToString (props: Record<string, any>, indent = 1, bound: string[] = []) {
+export function propsToString (props: Record<string, any>, bound: string[] = [], indent = 1) {
   const displayedProps =
     Object.entries(props)
       .filter(([k, v]) => v !== undefined)

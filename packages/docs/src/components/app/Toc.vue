@@ -9,11 +9,9 @@
     floating
     sticky
   >
-    <template
-      v-if="routeToc?.length"
-      #prepend
-    >
+    <template #prepend>
       <AppHeadline
+        v-if="frontmatter?.toc?.length"
         class="mt-4 mb-2 ms-4"
         path="contents"
       />
@@ -21,7 +19,7 @@
 
     <ul class="ms-5">
       <router-link
-        v-for="{ to, level, text } in routeToc"
+        v-for="{ to, level, text } in frontmatter?.toc"
         :key="text"
         v-slot="{ href }"
         :to="to"
@@ -29,7 +27,7 @@
       >
         <li
           :class="[
-            'ps-3 text-medium-emphasis text-body-2 py-1 font-weight-regular',
+            'ps-3 text-medium-emphasis text-body-medium py-1 font-weight-regular',
             {
               'text-primary router-link-active': activeItem === to.slice(1),
               'ps-6': level === 3,
@@ -40,7 +38,7 @@
         >
           <a
             :href="href"
-            class="v-toc-link d-block transition-swing text-decoration-none"
+            class="v-toc-link d-block text-decoration-none"
             @click.prevent.stop="onClick(to)"
             v-text="text"
           />
@@ -59,16 +57,17 @@
           tag="router-link"
         />
 
-        <v-row dense>
+        <v-row density="comfortable">
           <template v-if="sponsors.length">
             <v-col
               v-for="sponsor of sponsors"
               :key="sponsor.slug"
+              :cols="sponsor.metadata.tier === -2 ? 12 : 6"
               class="d-inline-flex"
             >
               <sponsor-card
                 :color="dark ? undefined : 'grey-lighten-5'"
-                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :max-height="sponsor.metadata.tier === -2 ? 52 : 40"
                 :sponsor="sponsor"
               />
             </v-col>
@@ -104,14 +103,14 @@
           </v-col>
 
           <v-col
-            v-if="!user.disableAds && spot.spot"
+            v-if="spot.spot && (user.one.ads.enabled || (user.one.ads.house && spot.spot.sponsor === 'Vuetify'))"
             cols="12"
           >
             <a
               :href="spot.spot.href"
               rel="noopener noreferrer sponsored"
               target="_blank"
-              @click="gtagClick('toc', 'promotion', spot.spot.sponsor)"
+              @click="sweClick('toc', 'promotion', spot.spot.sponsor)"
             >
               <v-img :src="spot.spot.image.url" />
             </a>
@@ -123,12 +122,6 @@
 </template>
 
 <script setup lang="ts">
-  type TocItem = {
-    to: string;
-    text: string;
-    level: number;
-  }
-
   const { toc: tocDrawer, scrolling } = storeToRefs(useAppStore())
 
   const route = useRoute()
@@ -136,11 +129,10 @@
   const spot = useSpotStore()
   const theme = useTheme()
   const user = useUserStore()
-
-  const routeToc = computed(() => route.meta.toc as TocItem[] | undefined)
+  const frontmatter = useFrontmatter()
 
   const activeStack = [] as string[]
-  const activeItem = ref('')
+  const activeItem = shallowRef('')
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -149,7 +141,7 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || routeToc.value?.[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || activeItem.value || frontmatter.value?.toc?.[0]?.to.slice(1) || ''
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
@@ -158,13 +150,13 @@
     activeItem.value = ''
     observer.disconnect()
     await nextTick()
-    routeToc.value?.forEach(v => {
+    frontmatter.value?.toc?.forEach(v => {
       const el = document.querySelector(v.to)
       el && observer.observe(el)
     })
   }
 
-  watch(routeToc, observeToc)
+  watch(() => frontmatter.value?.toc, observeToc)
   onMounted(() => {
     observeToc()
   })
@@ -180,10 +172,10 @@
     scrolling.value = true
     const query = route.query
 
-    if (val === routeToc.value?.[0]?.to.slice(1) && route.hash) {
+    if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
       router.replace({ path: route.path, query })
     } else {
-      const toc = routeToc.value?.find(v => v.to.slice(1) === val)
+      const toc = frontmatter.value?.toc?.find(v => v.to.slice(1) === val)
       if (toc) {
         await router.replace({ path: route.path, hash: toc.to, query })
       }
@@ -206,8 +198,6 @@
 
   const sponsorStore = useSponsorsStore()
 
-  // const toc = computed(() => route.meta.toc as TocItem[])
-
   const sponsors = computed(() => (
     sponsorStore.sponsors
       .filter(sponsor => sponsor.metadata.tier <= 1)
@@ -222,20 +212,23 @@
 </script>
 
 <style lang="sass" scoped>
-  #app-toc
-    ul
-      list-style-type: none
+  @layer base
+    #app-toc
+      ul
+        list-style-type: none
+        margin: 0
+        padding: 0
 
-    li
-      border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
+      li
+        border-left: 2px solid rgb(var(--v-theme-on-surface-variant))
 
-      &.router-link-active
-        border-left-color: currentColor
+        &.router-link-active
+          border-left-color: currentColor
 
-    .v-toc-link
-      color: inherit
+      .v-toc-link
+        color: inherit
 
-    :deep(.v-navigation-drawer__content)
-      height: auto
-      margin-right: 12px
+      :deep(.v-navigation-drawer__content)
+        height: auto
+        margin-right: 12px
 </style>

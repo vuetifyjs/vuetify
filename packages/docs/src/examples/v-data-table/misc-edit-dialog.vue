@@ -36,7 +36,7 @@
         >
           <div>{{ props.item.iron }}</div>
           <template v-slot:input>
-            <div class="mt-4 text-h6">
+            <div class="mt-4 text-title-large">
               Update Iron
             </div>
             <v-text-field
@@ -59,12 +59,8 @@
     >
       {{ snackText }}
 
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          v-bind="attrs"
-          variant="text"
-          @click="snack = false"
-        >
+      <template v-slot:actions>
+        <v-btn @click="snack = false">
           Close
         </v-btn>
       </template>

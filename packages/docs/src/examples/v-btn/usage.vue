@@ -67,7 +67,7 @@
   watch(icon, val => val && (prepend.value = false, append.value = false, stacked.value = false))
 
   const slots = computed(() => {
-    return `
+    return icon.value ? '' : `
   Button
 `
   })

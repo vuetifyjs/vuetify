@@ -23,14 +23,25 @@ export const makeDimensionProps = propsFactory({
 }, 'dimension')
 
 export function useDimension (props: DimensionProps) {
-  const dimensionStyles = computed(() => ({
-    height: convertToUnit(props.height),
-    maxHeight: convertToUnit(props.maxHeight),
-    maxWidth: convertToUnit(props.maxWidth),
-    minHeight: convertToUnit(props.minHeight),
-    minWidth: convertToUnit(props.minWidth),
-    width: convertToUnit(props.width),
-  }))
+  const dimensionStyles = computed(() => {
+    const styles: Record<string, any> = {}
+
+    const height = convertToUnit(props.height)
+    const maxHeight = convertToUnit(props.maxHeight)
+    const maxWidth = convertToUnit(props.maxWidth)
+    const minHeight = convertToUnit(props.minHeight)
+    const minWidth = convertToUnit(props.minWidth)
+    const width = convertToUnit(props.width)
+
+    if (height != null) styles.height = height
+    if (maxHeight != null) styles.maxHeight = maxHeight
+    if (maxWidth != null) styles.maxWidth = maxWidth
+    if (minHeight != null) styles.minHeight = minHeight
+    if (minWidth != null) styles.minWidth = minWidth
+    if (width != null) styles.width = width
+
+    return styles
+  })
 
   return { dimensionStyles }
 }

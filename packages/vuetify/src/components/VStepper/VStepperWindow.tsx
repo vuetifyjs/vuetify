@@ -1,4 +1,5 @@
 // Components
+import { VStepperSymbol } from './shared'
 import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
@@ -9,16 +10,20 @@ import { computed, inject } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InjectionKey } from 'vue'
-import type { GroupProvide } from '@/composables/group'
-
-export const VStepperSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-stepper')
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { GenericProps } from '@/util'
 
 export const makeVStepperWindowProps = propsFactory({
   ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),
 }, 'VStepperWindow')
 
-export const VStepperWindow = genericComponent()({
+export const VStepperWindow = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VWindowSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VStepperWindow',
 
   props: makeVStepperWindowProps(),
@@ -54,7 +59,11 @@ export const VStepperWindow = genericComponent()({
           _as="VStepperWindow"
           { ...windowProps }
           v-model={ model.value }
-          class="v-stepper-window"
+          class={[
+            'v-stepper-window',
+            props.class,
+          ]}
+          style={ props.style }
           mandatory={ false }
           touch={ false }
           v-slots={ slots }

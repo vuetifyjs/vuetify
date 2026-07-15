@@ -6,7 +6,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { MaybeTransition } from '@/composables/transition'
 
 // Directives
-import Touch from '@/directives/touch'
+import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, shallowRef } from 'vue'
@@ -33,9 +33,7 @@ export const makeVWindowItemProps = propsFactory({
 export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
 
-  directives: {
-    Touch,
-  },
+  directives: { vTouch },
 
   props: makeVWindowItemProps(),
 

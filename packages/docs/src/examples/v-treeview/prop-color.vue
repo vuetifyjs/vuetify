@@ -2,6 +2,7 @@
   <v-treeview
     :items="items"
     color="warning"
+    item-value="id"
     activatable
   ></v-treeview>
 </template>

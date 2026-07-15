@@ -3,6 +3,7 @@ import './VMain.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
@@ -14,6 +15,7 @@ export const makeVMainProps = propsFactory({
   scrollable: Boolean,
 
   ...makeComponentProps(),
+  ...makeDimensionProps(),
   ...makeTagProps({ tag: 'main' }),
 }, 'VMain')
 
@@ -23,6 +25,7 @@ export const VMain = genericComponent()({
   props: makeVMainProps(),
 
   setup (props, { slots }) {
+    const { dimensionStyles } = useDimension(props)
     const { mainStyles } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
@@ -36,6 +39,7 @@ export const VMain = genericComponent()({
         style={[
           mainStyles.value,
           ssrBootStyles.value,
+          dimensionStyles.value,
           props.style,
         ]}
       >

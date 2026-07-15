@@ -1,20 +1,17 @@
-// Setup
-// import type { ComponentOptions } from 'vue'
-
 // Utilities
-import toHaveBeenWarnedInit from './util/to-have-been-warned'
+import './globals.d'
+import { render as _render } from '@testing-library/vue'
+import { createVuetify } from '../src/framework'
+import { mergeDeep } from '../src/util'
+import { aliases } from '../src/iconsets/mdi-svg'
+import { commands, page } from 'vitest/browser'
 
-// export function functionalContext (context: ComponentOptions<Vue> = {}, children = []) {
-//   if (!Array.isArray(children)) children = [children]
-//   return {
-//     context: {
-//       data: {},
-//       props: {},
-//       ...context,
-//     },
-//     children,
-//   }
-// }
+import type { RenderOptions, RenderResult } from '@testing-library/vue'
+import type { VuetifyOptions } from '../src/framework'
+
+export { userEvent, page, commands } from 'vitest/browser'
+export { screen } from '@testing-library/vue'
+export * from './templates'
 
 export function touch (element: Element) {
   const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
@@ -39,73 +36,57 @@ export const wait = (timeout?: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }
 
-export const waitAnimationFrame = (timeout?: number) => {
+export const waitAnimationFrame = () => {
   return new Promise(resolve => requestAnimationFrame(resolve))
 }
 
-export const resizeWindow = (width = window.innerWidth, height = window.innerHeight) => {
-  (window as any).innerWidth = width
-  ;(window as any).innerHeight = height
-  window.dispatchEvent(new Event('resize'))
-
-  return wait(200)
+export const waitIdle = () => {
+  return new Promise(resolve => requestIdleCallback(resolve, { timeout: 500 }))
 }
 
-export const scrollWindow = (y: number) => {
-  (window as any).pageYOffset = y
-  window.dispatchEvent(new Event('scroll'))
-
-  return wait(200)
+export const click = (el: Element) => {
+  return commands.click(page.elementLocator(el).selector)
 }
 
-export const scrollElement = (element: Element, y: number) => {
-  element.scrollTop = y
-  element.dispatchEvent(new Event('scroll'))
-
-  return wait(200)
+export const waitForClickable = (el: Element) => {
+  return commands.waitForClickable(page.elementLocator(el).selector)
 }
 
-// Add a global mockup for IntersectionObserver
-class IntersectionObserver {
-  callback?: (entries: any, observer: any) => {}
-
-  constructor (callback: any) {
-    this.callback = callback
-  }
-
-  observe () {
-    this.callback?.([], this)
-    return null
-  }
-
-  unobserve () {
-    this.callback = undefined
-    return null
-  }
+export const scroll = (options: ScrollToOptions, el: Element | Window = window) => {
+  return Promise.race([
+    wait(500),
+    new Promise(resolve => {
+      el.addEventListener('scrollend', resolve, { once: true })
+      el.scroll(options)
+    }).then(waitIdle),
+  ])
 }
 
-(global as any).IntersectionObserver = IntersectionObserver
+export function render<C> (
+  component: C,
+  options?: RenderOptions<C> | null,
+  vuetifyOptions?: VuetifyOptions
+): RenderResult {
+  const vuetify = createVuetify(mergeDeep({ icons: { aliases } }, vuetifyOptions))
 
-class ResizeObserver {
-  callback?: ResizeObserverCallback
-
-  constructor (callback: ResizeObserverCallback) {
-    this.callback = callback
+  const defaultOptions = {
+    global: {
+      stubs: {
+        transition: false,
+        'transition-group': false,
+      },
+      plugins: [vuetify],
+    },
   }
 
-  observe () {
-    this.callback?.([], this)
-  }
+  const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
 
-  unobserve () {
-    this.callback = undefined
-  }
-
-  disconnect () {
-    this.callback = undefined
-  }
+  return _render(component, mountOptions)
 }
 
-(global as any).ResizeObserver = ResizeObserver
-
-toHaveBeenWarnedInit()
+export function unfill (o: Record<string, any>) {
+  return Object.keys(o).reduce((result, key) => {
+    result[key] = typeof o[key] === 'object' ? unfill(o[key]) : typeof o[key]
+    return result
+  }, {} as Record<string, any>)
+}

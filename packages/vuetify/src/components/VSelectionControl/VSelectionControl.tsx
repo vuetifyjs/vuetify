@@ -13,14 +13,13 @@ import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
-import { Ripple } from '@/directives/ripple'
+import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
-  getUid,
   matchesSelector,
   propsFactory,
   useRender,
@@ -57,6 +56,7 @@ export type VSelectionControlSlots = {
 }
 
 export const makeVSelectionControlProps = propsFactory({
+  indeterminate: Boolean,
   label: String,
   baseColor: String,
   trueValue: null,
@@ -113,19 +113,24 @@ export function useSelectionControl (
       }
     },
   })
-  const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+  const isActive = computed(() => model.value || props.indeterminate)
+  const { textColorClasses, textColorStyles } = useTextColor(() => {
     if (props.error || props.disabled) return undefined
 
-    return model.value ? props.color : props.baseColor
-  }))
-  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => {
+    return isActive.value ? props.color : props.baseColor
+  })
+  const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
     return (
-      model.value &&
+      isActive.value &&
       !props.error &&
       !props.disabled
     ) ? props.color : props.baseColor
-  }))
-  const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
+  })
+  const icon = computed(() => (
+    props.indeterminate ? props.indeterminateIcon
+    : model.value ? props.trueIcon
+    : props.falseIcon
+  ))
 
   return {
     group,
@@ -150,7 +155,7 @@ export const VSelectionControl = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
-  directives: { Ripple },
+  directives: { vRipple },
 
   inheritAttrs: false,
 
@@ -172,12 +177,12 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
-    const uid = getUid()
+    const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
-    const id = computed(() => props.id || `input-${uid}`)
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const id = toRef(() => props.id || `input-${uid}`)
+    const isInteractive = toRef(() => !props.disabled && !props.readonly)
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -186,7 +191,7 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     function onFocus (e: FocusEvent) {
-      if (!isInteractive.value) return
+      if (props.disabled) return
 
       isFocused.value = true
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') !== false) {
@@ -204,7 +209,16 @@ export const VSelectionControl = genericComponent<new <T>(
     }
 
     function onInput (e: Event) {
-      if (!isInteractive.value) return
+      if (!isInteractive.value) {
+        if (input.value) {
+          // model value is not updated when input is not interactive
+          // but the internal checked state of the input is still updated,
+          // so here it's value is restored
+          input.value.checked = model.value
+        }
+
+        return
+      }
 
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
@@ -246,6 +260,7 @@ export const VSelectionControl = genericComponent<new <T>(
             'v-selection-control',
             {
               'v-selection-control--dirty': model.value,
+              'v-selection-control--indeterminate': props.indeterminate,
               'v-selection-control--disabled': props.disabled,
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
@@ -274,8 +289,8 @@ export const VSelectionControl = genericComponent<new <T>(
               class={[
                 'v-selection-control__input',
               ]}
-              v-ripple={ props.ripple && [
-                !props.disabled && !props.readonly,
+              v-ripple={[
+                !props.disabled && !props.readonly && props.ripple,
                 null,
                 ['center', 'circle'],
               ]}

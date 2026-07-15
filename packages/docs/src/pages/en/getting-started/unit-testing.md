@@ -15,7 +15,7 @@ Add regression protection by adding unit tests to your Vuetify application
 
 <PageFeatures />
 
-<VoPromotionsCardVuetify />
+<PromotedEntry />
 
 ## Usage
 
@@ -51,16 +51,16 @@ export default defineConfig({
 
 ::: tabs
 
+```bash [pnpm]
+pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
+```
+
 ```bash [yarn]
 yarn add @vue/test-utils vitest resize-observer-polyfill --dev
 ```
 
 ```bash [npm]
 npm install @vue/test-utils vitest resize-observer-polyfill --save-dev
-```
-
-```bash [pnpm]
-pnpm add @vue/test-utils vitest resize-observer-polyfill --save-dev
 ```
 
 ```bash [bun]
@@ -103,3 +103,58 @@ test('displays message', () => {
   expect(wrapper.text()).toContain('Components')
 })
 ```
+
+## Testing Vuetify Components
+
+When testing Vuetify components, we recommend running tests in a real browser environment instead of `jsdom`.
+
+### Recommended Test Runners
+
+* [Vitest (browser mode)](https://vitest.dev/guide/browser/) – Fast, Vite-native test runner with browser support.
+* [Playwright](https://playwright.dev/) – End-to-end testing in actual browsers.
+* [Cypress](https://www.cypress.io/) – Great for integration and E2E tests.
+
+### Rendering with Vuetify
+
+To properly render Vuetify components in tests, create a Vuetify instance and pass it to the test renderer. You don’t need to mock transitions or other internals.
+
+```ts { resource="vuetify/packages/vuetify/test/index.ts" }
+export function render<C> (
+  component: C,
+  options?: RenderOptions<C> | null,
+  vuetifyOptions?: VuetifyOptions
+): RenderResult {
+  const vuetify = createVuetify(mergeDeep({ icons: { aliases } }, vuetifyOptions))
+
+  const defaultOptions = {
+    global: {
+      stubs: {
+        transition: false,
+        'transition-group': false,
+      },
+      plugins: [vuetify],
+    },
+  }
+
+  const mountOptions = mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))
+
+  return _render(component, mountOptions)
+}
+```
+
+### Using `data-testid`
+
+For reliable queries in tests, use `data-testid` attributes in your components:
+
+```html
+<v-btn data-testid="submit-btn">Submit</v-btn>
+```
+
+```ts
+const { getByTestId } = render(MyComponent)
+expect(getByTestId('submit-btn')).toBeInTheDocument()
+```
+
+### Accessibility Considerations
+
+Tests should respect user accessibility preferences. Configure [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) when testing animations to avoid flakiness and ensure accessibility compliance.

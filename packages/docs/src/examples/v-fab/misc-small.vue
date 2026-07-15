@@ -9,8 +9,6 @@
 
       <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn color="grey-darken-4" icon="mdi-magnify"></v-btn>
 
       <v-btn color="grey-darken-4" icon="mdi-view-module"></v-btn>
@@ -29,10 +27,7 @@
       </template>
     </v-toolbar>
 
-    <v-list
-      lines="two"
-      subheader
-    >
+    <v-list lines="two">
       <v-list-subheader title="Folders" inset></v-list-subheader>
 
       <v-list-item
@@ -112,9 +107,9 @@
 
   const dialog = ref(false)
   const items = ref([
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Photos', subtitle: 'Jan 9, 2014' },
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Recipes', subtitle: 'Jan 17, 2014' },
-    { icon: 'mdi-folder', iconClass: 'bg-grey-lighten-1 text-white', title: 'Work', subtitle: 'Jan 28, 2014' },
+    { icon: 'mdi-folder', iconClass: 'bg-grey text-white', title: 'Photos', subtitle: 'Jan 9, 2014' },
+    { icon: 'mdi-folder', iconClass: 'bg-grey text-white', title: 'Recipes', subtitle: 'Jan 17, 2014' },
+    { icon: 'mdi-folder', iconClass: 'bg-grey text-white', title: 'Work', subtitle: 'Jan 28, 2014' },
   ])
   const items2 = ref([
     { icon: 'mdi-clipboard-text', iconClass: 'bg-blue text-white', title: 'Vacation itinerary', subtitle: 'Jan 20, 2014' },

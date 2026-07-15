@@ -1,7 +1,11 @@
 {
   "props": {
-    "expanded": "Whether the item is expanded or not.",
+    "expanded": "Array of expanded items. Can be bound to external variable using **v-model:expanded**.",
     "expandOnClick": "Expands item when the row is clicked.",
+    "expandStrategy": "Controls how many rows can be expanded at once. Use `single` to collapse the previously expanded row when another is opened.",
     "showExpand": "Shows the expand icon."
+  },
+  "events": {
+    "update:expanded": "Emits when the **expanded** items are updated."
   }
 }

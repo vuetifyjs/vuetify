@@ -1,6 +1,10 @@
 {
+  "description": "An alternative to the sidebar. Primarily used for mobile applications.",
   "props": {
     "grow": "Force all [v-btn](/components/buttons) children to take up all available horizontal space.",
     "mode": "Changes the orientation and active state styling of the component."
+  },
+  "events": {
+    "update:active": "Event that is emitted when the active state changes."
   }
 }

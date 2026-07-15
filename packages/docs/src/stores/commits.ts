@@ -3,8 +3,7 @@ import type { components as octokitComponents } from '@octokit/openapi-types'
 
 export type Commit = octokitComponents['schemas']['commit']
 
-export type State = {
-  latest: Commit | null
+type State = {
   commits: Commit[]
   isLoading: boolean
 }
@@ -13,7 +12,6 @@ const url = import.meta.env.VITE_API_SERVER_URL
 
 export const useCommitsStore = defineStore('commits', {
   state: (): State => ({
-    latest: null,
     commits: [] as Commit[],
     isLoading: false,
   }),
@@ -23,15 +21,23 @@ export const useCommitsStore = defineStore('commits', {
       this.isLoading = true
 
       try {
-        this.latest = await fetch(`${url}/github/commits`, {
+        const res = await fetch(`${url}/github/commits`, {
           method: 'GET',
           credentials: 'include',
-        }).then(res => res.json())
+        }).then(async res => res.json())
+
+        this.commits = res
       } catch (err: any) {
-        console.error(err)
+        console.warn(`Failed to fetch commits: ${err.message}`)
       }
 
       this.isLoading = false
+    },
+  },
+
+  getters: {
+    latest (state) {
+      return state.commits?.[0]
     },
   },
 })

@@ -1,103 +1,184 @@
+@use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
 
-.v-snackbar
-  justify-content: center
-  z-index: $snackbar-z-index
-  margin: $snackbar-wrapper-margin
-  margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
-  padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
+@include tools.layer('components')
+  .v-snackbar
+    justify-content: center
+    z-index: $snackbar-z-index
+    margin: $snackbar-wrapper-margin
+    margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
+    padding: var(--v-layout-top) var(--v-layout-right) var(--v-layout-bottom) var(--v-layout-left)
 
-  &__wrapper
-    align-items: center
-    display: flex
-    max-width: $snackbar-wrapper-max-width
-    min-height: $snackbar-wrapper-min-height
-    min-width: $snackbar-wrapper-min-width
-    overflow: hidden
-    padding: $snackbar-wrapper-padding
+    --v-snackbar-current-offset: var(--v-snackbar-offset)
+    transform: translateY(calc(var(--v-snackbar-direction) * (var(--v-snackbar-current-offset) + var(--v-snackbar-mobile-notch, 0px))))
+    transition: transform .2s settings.$standard-easing
 
-    @include tools.rounded($snackbar-border-radius)
+    &:not(.v-snackbar--center):not(.v-snackbar--top)
+      align-items: flex-end
 
-    @at-root .v-snackbar
-      @include tools.variant($snackbar-variants...)
+    &__wrapper
+      align-items: center
+      display: flex
+      flex-wrap: wrap
+      max-width: $snackbar-wrapper-max-width
+      min-height: $snackbar-wrapper-min-height
+      min-width: $snackbar-wrapper-min-width
+      overflow: hidden
+      padding: $snackbar-wrapper-padding
 
-  &__content
-    flex-grow: 1
-    font-size: $snackbar-font-size
-    font-weight: $snackbar-font-weight
-    letter-spacing: $snackbar-letter-spacing
-    line-height: $snackbar-line-height
-    margin-right: auto
-    padding: $snackbar-content-padding
-    text-align: initial
+      transition: .35s settings.$standard-easing
+      transition-property: height, width
 
-  &__actions
-    align-items: center
-    align-self: center
-    display: flex
-    margin-inline-end: $snackbar-action-margin
+      @include tools.rounded($snackbar-border-radius)
 
-    & > .v-btn
-      padding: $snackbar-btn-padding
-      min-width: auto
+      @at-root .v-snackbar
+        @include tools.variant($snackbar-variants...)
 
-  &__timer
-    width: 100%
-    position: absolute
-    top: 0
+        &--variant-outlined,
+        &--variant-tonal
+          background: $snackbar-fallback-background
 
-    .v-progress-linear
-      transition: .2s linear
+      @media (forced-colors: active)
+        border: thick solid
 
-  &--absolute
-    position: absolute
-    z-index: $snackbar-absolute-z-index
+    &__header
+      flex-basis: 100%
 
-  &--multi-line &__wrapper
-    min-height: $snackbar-multi-line-wrapper-min-height
+      &:after
+        content: ''
+        display: block
+        flex-basis: 100%
 
-  &--vertical &__wrapper
-    flex-direction: column
+    &__prepend
+      align-self: center
+      display: flex
+      margin-inline: $snackbar-prepend-margin-inline
 
-    .v-snackbar__actions
-      align-self: flex-end
+    &__prepend + &__content
+      padding-inline-start: 0
+
+    &__title
+      font-weight: $snackbar-title-font-weight
+
+    &__content
+      flex: 1 1
+      font-size: $snackbar-font-size
+      font-weight: $snackbar-font-weight
+      letter-spacing: $snackbar-letter-spacing
+      line-height: $snackbar-line-height
+      margin-right: auto
+      padding: $snackbar-content-padding
+      text-align: initial
+
+    &__actions
+      align-items: center
+      align-self: center
+      display: flex
+      margin-inline-end: $snackbar-action-margin
+
+      & > .v-btn
+        padding: $snackbar-btn-padding
+        min-width: auto
+
+    &__timer
+      width: 100%
+      position: absolute
+
+      &--top
+        top: 0
+
+      &--bottom
+        bottom: 0
+
+      .v-progress-linear
+        transition: .2s linear
+
+    &--absolute
+      position: absolute
+      z-index: $snackbar-absolute-z-index
+
+    &--vertical .v-snackbar__actions
+      flex-basis: 100%
+      justify-content: end
       margin-bottom: $snackbar-vertical-action-margin-bottom
 
-  &--center
-    align-items: center
-    justify-content: center
+      &:before
+        content: ''
+        display: block
+        flex-basis: 100%
 
-  &--top
-    align-items: flex-start
+    &--center
+      align-items: center
+      justify-content: center
 
-  &--bottom
-    align-items: flex-end
+    &--top
+      align-items: flex-start
 
-  &--left,
-  &--start
-    justify-content: flex-start
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-top), 0px)
 
-  &--right,
-  &--end
-    justify-content: flex-end
+    &--bottom
+      align-items: flex-end
 
-.v-snackbar-transition
-  &-enter-active,
-  &-leave-active
-    transition-duration: .15s
-    transition-timing-function: settings.$decelerated-easing
+      @media #{map.get(settings.$display-breakpoints, 'sm-and-down')}
+        --v-snackbar-mobile-notch: max(env(safe-area-inset-bottom), 0px)
 
-  &-enter-active
-    transition-property: opacity, transform
+    &--left,
+    &--start
+      justify-content: flex-start
 
-  &-enter-from
-    opacity: 0
-    transform: scale($snackbar-transition-scale)
+    &--right,
+    &--end
+      justify-content: flex-end
 
-  &-leave-active
-    transition-property: opacity
+    &--collapsed
+      --v-snackbar-current-offset: calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
 
-  &-leave-to
-    opacity: 0
+      .v-snackbar__wrapper
+        min-width: 0
+        width: calc(var(--v-snackbar-collapsed-width) - 2 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0))
+        height: var(--v-snackbar-collapsed-height)
+
+        > *
+          opacity: 0
+
+      &.v-snackbar--start,
+      &.v-snackbar--left
+        .v-snackbar__wrapper
+          transform: translateX(calc(var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      &.v-snackbar--end,
+      &.v-snackbar--right
+        .v-snackbar__wrapper
+          transform: translateX(calc(-1 * var(--v-snackbar-gap) * var(--v-snackbar-index, 0)))
+
+      .v-progress-linear
+        opacity: 0
+
+    .v-avatar
+      background: transparent
+
+@include tools.layer('transitions')
+  .v-snackbar-transition
+    &-enter-active,
+    &-leave-active
+      transition-duration: .15s
+      transition-timing-function: settings.$decelerated-easing
+
+    &-enter-active
+      transition-property: opacity, transform
+
+      @media (prefers-reduced-motion: reduce)
+        transition-property: opacity
+
+    &-enter-from
+      opacity: 0
+      transform: scale($snackbar-transition-scale)
+
+    &-leave-active
+      transition-property: opacity
+
+    &-leave-to
+      opacity: 0

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress linear
   title: Progress linear component
@@ -48,6 +49,16 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 <ExamplesExample file="v-progress-linear/prop-buffer-value" />
 
+#### Chunks
+
+The component can be split into chunks using `chunk-count` or `chunk-width`. Visible progress is snapped to the last filled chunk.
+
+::: warning
+  The **chunk-count** and **chunk-width** props have no effect when using **variant="split"**.
+:::
+
+<ExamplesExample file="v-progress-linear/prop-chunks" />
+
 #### Colors
 
 You can set the colors of the progress bar using the props **color** and **bg-color**.
@@ -92,7 +103,7 @@ This applies a striped background over the value portion of the `v-progress-line
 
 #### Default
 
-The `v-progress-linear` component will be responsive to user input when using **v-model**. You can use the default slot or bind a local model to display inside of the progress. If you are looking for advanced features on a linear type component, check out [v-slider](/components/sliders).
+Default slot exposes current value as **percentage** (0–100) in relation to `max` prop (100 by default). It is recommended to round it in order to avoid JavaScript floating point number representation with lots of decimal digits. You can use `Math.round()` or `.toFixed()` to render the value correctly.
 
 <ExamplesExample file="v-progress-linear/slot-default" />
 
@@ -115,3 +126,9 @@ The `v-progress-linear` component is good for communicating to the user that the
 Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar`. We also use the **active** prop which allows us to control the visibility of the progress.
 
 <ExamplesExample file="v-progress-linear/misc-toolbar-loader" />
+
+#### Buffer color and opacity
+
+The buffer color and opacity can be controlled using the **buffer-color** and **buffer-opacity** props. This enables you to make multi colored progress bars.
+
+<ExamplesExample file="v-progress-linear/misc-buffer-color" />

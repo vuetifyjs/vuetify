@@ -22,7 +22,7 @@ The `v-file-input` component is a specialized input that provides a clean interf
 
 ## Usage
 
-At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields).
+At its core, `v-file-input` is built on the same [VField](/components/text-fields) and VInput primitives as [v-text-field](/components/text-fields), giving it a consistent look and feel without directly extending it.
 
 <ExamplesUsage name="v-file-input" />
 
@@ -84,7 +84,7 @@ The displayed size of the selected file(s) can be configured with the **show-siz
 
 #### Validation
 
-Similar to other inputs, you can use the **rules** prop to create your own custom validation parameters.
+Similar to other inputs, you can use the **rules** prop to create your own custom validation parameters. If **multiple** props is set, the`value` passed in the validation functions will be an array.
 
 <ExamplesExample file="v-file-input/prop-validation" />
 

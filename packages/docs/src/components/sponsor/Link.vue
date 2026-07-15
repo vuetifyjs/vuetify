@@ -5,7 +5,7 @@
     :to="rpath('/introduction/sponsors-and-backers/')"
     color="primary"
     variant="outlined"
-    @click="onClick"
+    @click="sweClick('button', 'sponsors', name)"
   >
     <span
       class="text-capitalize font-weight-regular"
@@ -19,15 +19,6 @@
     size: String,
   })
 
-  const { event } = useGtag()
   const { name } = useRoute()
   const { t } = useI18n()
-
-  function onClick () {
-    event('click', {
-      event_category: 'button',
-      event_label: 'sponsors',
-      value: name,
-    })
-  }
 </script>

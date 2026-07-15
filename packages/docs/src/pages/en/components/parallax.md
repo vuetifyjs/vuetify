@@ -46,6 +46,12 @@ You can also place any content inside of the parallax. This allows you to use th
 
 <ExamplesExample file="v-parallax/misc-content" />
 
+#### Welcome
+
+You can use it as a welcome section or as a portfolio hero section.
+
+<ExamplesExample file="v-parallax/misc-welcome" />
+
 #### Custom height
 
 You can specify a custom height on a parallax. Keep in mind this can break the parallax if your image is not sized properly
