@@ -59,6 +59,12 @@ Find more information and examples on the [Server side tables](/components/data-
 
 The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports client-side sorting and filtering, but not pagination.
 
+::: warning
+
+When using virtualized variant of VDataTable, you have to set the **height** prop or constrain the table's height using custom CSS. Otherwise the table has no internal scroll area and will put all the rows in the DOM. This also applies to the **fixed-header** and **fixed-footer** props - those have no effect if the table **height** is unconstrained.
+
+:::
+
 | Component | Description |
 | - | - |
 | [v-data-table-virtual](/api/v-data-table-virtual/) | Primary Component |
