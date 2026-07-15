@@ -96,6 +96,49 @@ describe('VTextField', () => {
     expect(onClickAppendInner).toHaveBeenCalledTimes(1)
   })
 
+  describe('clearFocusable', () => {
+    it('should have tabindex="-1" on clear button by default', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          clearable
+          modelValue="test"
+        />
+      )
+
+      const clearBtn = wrapper.find('.v-field__clearable .v-icon')
+      expect(clearBtn.exists()).toBe(true)
+      expect(clearBtn.attributes('tabindex')).toBe('-1')
+    })
+
+    it('should have tabindex="0" on clear button when clearFocusable is true', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          clearable
+          clearFocusable
+          modelValue="test"
+        />
+      )
+
+      const clearBtn = wrapper.find('.v-field__clearable .v-icon')
+      expect(clearBtn.exists()).toBe(true)
+      expect(clearBtn.attributes('tabindex')).toBe('0')
+    })
+
+    it('should have tabindex="-1" on clear button when clearFocusable is false', () => {
+      const wrapper = mountFunction(
+        <VTextField
+          clearable
+          clearFocusable={ false }
+          modelValue="test"
+        />
+      )
+
+      const clearBtn = wrapper.find('.v-field__clearable .v-icon')
+      expect(clearBtn.exists()).toBe(true)
+      expect(clearBtn.attributes('tabindex')).toBe('-1')
+    })
+  })
+
   describe('hide-details behavior', () => {
     it('should not have aria-describedby when hide-details is true', () => {
       const wrapper = mountFunction(
