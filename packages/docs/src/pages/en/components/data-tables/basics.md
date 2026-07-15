@@ -165,6 +165,12 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
+#### Fixed footer
+
+Use the **fixed-footer** prop together with the `tfoot` slot to pin a custom footer to the bottom of a scrollable table. The slot exposes the currently visible `items`, so aggregates such as column totals recalculate automatically as the table is searched or filtered.
+
+<ExamplesExample file="v-data-table/prop-fixed-footer" />
+
 #### Sort icons
 
 You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
