@@ -58,10 +58,6 @@ describe('defaults', () => {
     expect(wrapper.attributes('style')).toContain('caret-color: blue;')
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/23009
-  // A `root` reset (as VMenu does for teleported content) must keep the nested
-  // defaults the owning component flattened into the immediate context, even
-  // when an ancestor provideDefaults links a `prev` chain to the global root.
   it.each([false, true])('keeps nested root defaults under a provideDefaults ancestor (ancestor: %s)', hasAncestor => {
     const vuetify = createVuetify({
       defaults: {

@@ -59,9 +59,6 @@ export function provideDefaults (
     if (reset || root) {
       const len = Number(reset || Infinity)
 
-      // The owning component flattens its nested `root` defaults (e.g. VSelect's
-      // VMenu config) into the immediate context, so grab them before walking
-      // `prev` — an intermediate provideDefaults ancestor pushes them out of reach.
       const rootDefaults = typeof root === 'string' ? properties.prev?.[root] : undefined
 
       for (let i = 0; i <= len; i++) {
