@@ -32,6 +32,12 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 <ExamplesUsage name="v-app-bar" />
 
+::: warning
+
+`v-app-bar` depends on Vuetify's layout system and must be placed inside `v-app`.
+
+:::
+
 <PromotedEntry />
 
 ## API
