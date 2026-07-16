@@ -74,7 +74,7 @@ describe('defaults', () => {
       props: { color: String },
       setup (props) {
         const _props = useDefaults(props, 'Probe')
-        return () => h('div', { 'data-color': _props.color })
+        return () => h('div', { 'data-color': _props.color || 'red' })
       },
     })
 
