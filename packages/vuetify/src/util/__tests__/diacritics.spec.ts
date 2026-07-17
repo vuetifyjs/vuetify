@@ -56,5 +56,27 @@ describe('diacritics', () => {
       // 'ß' folds to 'ss', so the match spans a single source character
       expect(findMatchRanges('straße', 'strasse', { ignoreAccents: true })).toStrictEqual([[0, 6]])
     })
+
+    describe('astral characters (surrogate pairs)', () => {
+      // 3 capital Adlam letters (U+1E900..) case-fold to their lowercase forms.
+      const adlam = String.fromCodePoint(0x1E900, 0x1E901, 0x1E902)
+      // CJK compatibility ideograph (U+2F800), NFD-decomposes to U+4E3D.
+      const cjkCompat = String.fromCodePoint(0x2F800)
+
+      it('case-folds an astral bicameral script (Adlam)', () => {
+        expect(findMatchRanges(adlam, adlam.toLowerCase(), { ignoreAccents: true, ignoreCase: true }))
+          .toStrictEqual([[0, adlam.length]])
+      })
+
+      it('decomposes an astral NFD character back to its base', () => {
+        expect(findMatchRanges(cjkCompat, cjkCompat.normalize('NFD'), { ignoreAccents: true }))
+          .toStrictEqual([[0, cjkCompat.length]])
+      })
+
+      it('keeps emoji intact and maps ranges past them', () => {
+        expect(findMatchRanges('👍 café', 'cafe', { ignoreAccents: true })).toStrictEqual([[3, 7]])
+        expect(findMatchRanges('a👍b', 'b', { ignoreAccents: true })).toStrictEqual([[3, 4]])
+      })
+    })
   })
 })

@@ -44,20 +44,23 @@ function fold (str: string) {
     .replace(SPECIAL_LETTER, char => SPECIAL_LETTERS[char])
 }
 
-// Fold per character and record each output unit's source index, so ranges can
+// Fold per code point and record each output unit's source index, so ranges can
 // map back to the original. Decomposition and lowercasing both change length,
 // so a straight indexOf on the folded string would otherwise misalign.
 function foldWithMap (str: string, lowerCase: boolean) {
   let folded = ''
   const map: number[] = []
+  let i = 0
 
-  for (let i = 0; i < str.length; i++) {
-    const chunk = fold(lowerCase ? str[i].toLocaleLowerCase() : str[i])
+  for (const char of str) {
+    const chunk = fold(lowerCase ? char.toLocaleLowerCase() : char)
 
     for (let j = 0; j < chunk.length; j++) {
       folded += chunk[j]
       map.push(i)
     }
+
+    i += char.length
   }
 
   map.push(str.length)
