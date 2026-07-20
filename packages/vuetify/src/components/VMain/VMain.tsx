@@ -13,6 +13,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVMainProps = propsFactory({
   scrollable: Boolean,
+  transition: {
+    type: Boolean,
+    default: true,
+  },
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
@@ -38,7 +42,7 @@ export const VMain = genericComponent()({
         ]}
         style={[
           mainStyles.value,
-          ssrBootStyles.value,
+          props.transition ? ssrBootStyles.value : {},
           dimensionStyles.value,
           props.style,
         ]}
