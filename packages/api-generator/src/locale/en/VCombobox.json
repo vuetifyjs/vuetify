@@ -6,6 +6,7 @@
     "clearOnSelect": "Reset the search text when a selection is made while using the **multiple** prop.",
     "itemChildren": "This property currently has **no effect**.",
     "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
+    "trimValues": "Trims leading and trailing whitespace from entered values, and discards entries that are empty once trimmed.",
     "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props."
   },
   "slots": {
