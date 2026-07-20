@@ -42,7 +42,7 @@ export const VMain = genericComponent()({
         ]}
         style={[
           mainStyles.value,
-          props.transition ? ssrBootStyles.value : {},
+          props.transition ? ssrBootStyles.value : { transition: 'none' },
           dimensionStyles.value,
           props.style,
         ]}
