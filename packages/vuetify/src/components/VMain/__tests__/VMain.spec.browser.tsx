@@ -6,17 +6,17 @@ import { VLayout } from '@/components/VLayout'
 import { render, screen, wait } from '@test'
 
 describe('VMain', () => {
-  it('should suppress transition immediately after mount when transition is true (default)', () => {
+  it('should be true if transition if transition is set to true', () => {
     render(() => (
       <VLayout>
-        <VMain />
+        <VMain transition />
       </VLayout>
     ))
 
     expect(screen.getByCSS('.v-main').style.transition).toBe('none')
   })
 
-  it('should stop suppressing transition once booted', async () => {
+  it('should be true if transition is not set', async () => {
     render(() => (
       <VLayout>
         <VMain />
@@ -28,13 +28,13 @@ describe('VMain', () => {
     expect(screen.getByCSS('.v-main').style.transition).not.toBe('none')
   })
 
-  it('should never suppress transition when transition is explicitly false', async () => {
+  it('should be none if transition is set to false', async () => {
     render(() => (
       <VLayout>
         <VMain transition={ false } />
       </VLayout>
     ))
 
-    expect(screen.getByCSS('.v-main').style.transition).not.toBe('none')
+    expect(screen.getByCSS('.v-main').style.transition).toBe('none')
   })
 })
