@@ -129,7 +129,7 @@ export const VCombobox = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -603,6 +603,7 @@ export const VCombobox = genericComponent<new <
                   hidden
                   multiple={ props.multiple }
                   name={ autocomplete.fieldName.value }
+                  form={ attrs.form as string }
                 >
                   { formItems.value.map(value => (
                     <option

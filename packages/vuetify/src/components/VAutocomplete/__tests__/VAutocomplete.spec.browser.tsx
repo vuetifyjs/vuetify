@@ -1099,6 +1099,29 @@ describe('VAutocomplete', () => {
       const values = submittedData!.getAll('field')
       expect(values).toEqual(['1', '2'])
     })
+
+    it('should associate with a form outside its tree via the form attribute', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <>
+          <form
+            id="outer"
+            onSubmit={ e => {
+              e.preventDefault()
+              submittedData = new FormData(e.target as HTMLFormElement)
+            }}
+          >
+            <button type="submit">Submit</button>
+          </form>
+          <VAutocomplete form="outer" name="field" items={ objectItems } modelValue={ objectItems[0] } />
+        </>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
   })
 
   showcase({ stories })

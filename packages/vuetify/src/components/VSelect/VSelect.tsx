@@ -152,7 +152,7 @@ export const VSelect = genericComponent<new <
     'update:search': (value: string) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -510,6 +510,7 @@ export const VSelect = genericComponent<new <
                   hidden
                   multiple={ props.multiple }
                   name={ autocomplete.fieldName.value }
+                  form={ attrs.form as string }
                 >
                   { items.value.map(item => (
                     <option

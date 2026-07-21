@@ -124,7 +124,7 @@ export const VAutocomplete = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -541,6 +541,7 @@ export const VAutocomplete = genericComponent<new <
                   hidden
                   multiple={ props.multiple }
                   name={ autocomplete.fieldName.value }
+                  form={ attrs.form as string }
                 >
                   { items.value.map(item => (
                     <option
