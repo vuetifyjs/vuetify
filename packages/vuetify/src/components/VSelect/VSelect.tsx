@@ -69,6 +69,7 @@ export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
   eager: Boolean,
+  form: String,
   hideNoData: Boolean,
   hideSelected: Boolean,
   listProps: {
@@ -151,7 +152,7 @@ export const VSelect = genericComponent<new <
     'update:search': (value: string) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -510,7 +511,7 @@ export const VSelect = genericComponent<new <
                     type="hidden"
                     name={ props.name }
                     value={ value }
-                    form={ attrs.form as string }
+                    form={ props.form }
                   />
                 ))}
 

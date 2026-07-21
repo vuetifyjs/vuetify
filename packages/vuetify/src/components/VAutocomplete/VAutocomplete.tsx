@@ -123,7 +123,7 @@ export const VAutocomplete = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -501,7 +501,7 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          name={ undefined }
+          form=""
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
@@ -540,7 +540,7 @@ export const VAutocomplete = genericComponent<new <
                     type="hidden"
                     name={ props.name }
                     value={ value }
-                    form={ attrs.form as string }
+                    form={ props.form }
                   />
                 ))}
 

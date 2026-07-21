@@ -128,7 +128,7 @@ export const VCombobox = genericComponent<new <
     'update:menu': (value: boolean) => true,
   },
 
-  setup (props, { attrs, emit, slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -558,7 +558,7 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          name={ undefined }
+          form=""
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -596,7 +596,7 @@ export const VCombobox = genericComponent<new <
                     type="hidden"
                     name={ props.name }
                     value={ value }
-                    form={ attrs.form as string }
+                    form={ props.form }
                   />
                 ))}
 
