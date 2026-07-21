@@ -103,7 +103,7 @@ describe('VAutocomplete', () => {
       </>
     ))
 
-    const input = screen.getByCSS('input') as HTMLInputElement
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
 
     screen.getByTestId('before').focus()
     await userEvent.tab()
@@ -126,7 +126,7 @@ describe('VAutocomplete', () => {
       </>
     ))
 
-    const input = screen.getByCSS('input') as HTMLInputElement
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
     expect(input.value).toBe('California')
 
     await userEvent.click(input)
@@ -147,7 +147,7 @@ describe('VAutocomplete', () => {
       </>
     ))
 
-    const input = screen.getByCSS('input') as HTMLInputElement
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
 
     // keyboard focus selects the title, so typing replaces it without clearing the model
     screen.getByTestId('before').focus()
@@ -259,7 +259,7 @@ describe('VAutocomplete', () => {
       </VAutocomplete>
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -281,7 +281,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -310,7 +310,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete v-model:menu={ menu.value } items={ items.value } />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -531,9 +531,9 @@ describe('VAutocomplete', () => {
     const activeItems = await findAllByRole(menu, 'option', { selected: true })
     expect(activeItems).toHaveLength(2)
 
-    expect(document.activeElement).toBe(within(container).getByCSS('input'))
+    expect(document.activeElement).toBe(within(container).getByCSS('input[type="text"]'))
 
-    const input = within(container).getByCSS('input')
+    const input = within(container).getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
   })
 
@@ -555,7 +555,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
     expect(element).not.toHaveClass('v-select--active-menu')
 
-    screen.getByCSS('input').focus()
+    screen.getByCSS('input[type="text"]').focus()
     await userEvent.keyboard('{ArrowDown}')
 
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
@@ -583,7 +583,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
     expect(element).not.toHaveClass('v-select--active-menu')
 
-    screen.getByCSS('input').focus()
+    screen.getByCSS('input[type="text"]').focus()
     await userEvent.keyboard('{ArrowDown}')
 
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
@@ -743,7 +743,7 @@ describe('VAutocomplete', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
@@ -781,7 +781,7 @@ describe('VAutocomplete', () => {
 
     await userEvent.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}c')
 
-    expect(document.activeElement).toBe(within(element).getByCSS('input'))
+    expect(document.activeElement).toBe(within(element).getByCSS('input[type="text"]'))
   })
 
   it('should not open menu when closing a chip', async () => {
@@ -959,7 +959,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(element)
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
 
     // Blur input with a custom search input value
@@ -1098,6 +1098,26 @@ describe('VAutocomplete', () => {
 
       const values = submittedData!.getAll('field')
       expect(values).toEqual(['1', '2'])
+    })
+
+    it('should not submit any value when nothing is selected', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete name="field" items={ objectItems } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.has('field')).toBe(false)
     })
 
     it('should associate with a form outside its tree via the form attribute', async () => {

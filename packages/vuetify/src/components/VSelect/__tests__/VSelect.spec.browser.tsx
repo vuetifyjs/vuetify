@@ -384,7 +384,7 @@ describe('VSelect', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })

@@ -97,7 +97,7 @@ describe('VCombobox', () => {
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
       await expect.poll(() => search.value).toBe(items[0].title)
-      expect(screen.getByCSS('input')).toHaveValue(items[0].title)
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue(items[0].title)
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
       await userEvent.click(element)
@@ -105,7 +105,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('Item 2')
       expect(model.value).toBe('Item 2')
       expect(search.value).toBe('Item 2')
-      expect(screen.getByCSS('input')).toHaveValue('Item 2')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('Item 2')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
@@ -113,7 +113,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('item3')
       expect(model.value).toBe('item3')
       expect(search.value).toBe('item3')
-      expect(screen.getByCSS('input')).toHaveValue('item3')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('item3')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('item3')
     })
 
@@ -140,7 +140,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
       await commands.waitStable('.v-list')
@@ -259,7 +259,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
 
@@ -312,7 +312,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
 
@@ -481,7 +481,7 @@ describe('VCombobox', () => {
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
-    await expect.poll(() => screen.getByCSS('input')).toHaveValue('0')
+    await expect.poll(() => screen.getByCSS('input[type="text"]')).toHaveValue('0')
   })
 
   it('should conditionally show placeholder', async () => {
@@ -489,7 +489,7 @@ describe('VCombobox', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
@@ -708,7 +708,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
 
     // Blur input with a custom search input value
@@ -905,7 +905,7 @@ describe('VCombobox', () => {
       />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
