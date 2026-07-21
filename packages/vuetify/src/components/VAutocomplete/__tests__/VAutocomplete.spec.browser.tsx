@@ -95,6 +95,76 @@ describe('VAutocomplete', () => {
     expect(fieldARoot).not.toHaveClass('v-input--focused')
   })
 
+  it('should select input text on keyboard focus but not on click', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input') as HTMLInputElement
+
+    screen.getByTestId('before').focus()
+    await userEvent.tab()
+    await waitAnimationFrame()
+    expect([input.selectionStart, input.selectionEnd]).toEqual([0, 'California'.length])
+
+    await userEvent.tab({ shift: true })
+    await waitAnimationFrame()
+
+    await userEvent.click(input)
+    await waitAnimationFrame()
+    expect(input.selectionStart).toBe(input.selectionEnd)
+  })
+
+  it('should keep the selected title in the input when blurred', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input') as HTMLInputElement
+    expect(input.value).toBe('California')
+
+    await userEvent.click(input)
+    await waitIdle()
+    await userEvent.type(input, 'xyz')
+    expect(input.value).not.toBe('California')
+
+    screen.getByTestId('before').focus()
+    await waitAnimationFrame()
+    expect(input.value).toBe('California')
+  })
+
+  it('should show the full list when reopened after an abandoned search', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input') as HTMLInputElement
+
+    // keyboard focus selects the title, so typing replaces it without clearing the model
+    screen.getByTestId('before').focus()
+    await userEvent.tab()
+    await waitAnimationFrame()
+    await userEvent.type(input, 'Colo')
+    expect(await screen.findAllByRole('option')).toHaveLength(1)
+
+    screen.getByTestId('before').focus()
+    await waitAnimationFrame()
+    expect(input.value).toBe('California')
+
+    await userEvent.click(input)
+    await waitIdle()
+    expect(await screen.findAllByRole('option')).toHaveLength(items.length)
+  })
+
   it('should not return focus to the input on click-outside', async () => {
     const menu = ref(false)
     render(() => (
