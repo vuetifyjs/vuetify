@@ -21,6 +21,7 @@ import { VHighlight } from '@/labs/VHighlight'
 // Composables
 import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
@@ -240,7 +241,15 @@ export const VCombobox = genericComponent<new <
       }
     })
 
+    const autocomplete = useAutocomplete(props)
+
     const selectedValues = computed(() => model.value.map(selection => selection.value))
+
+    // freeform entries aren't in `items`, so add them as options or the form drops them
+    const formItems = computed(() => {
+      const extra = selectedValues.value.filter(v => !items.value.some(item => item.value === v))
+      return [...items.value.map(item => item.value), ...extra]
+    })
 
     const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
 
@@ -558,6 +567,7 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          name={ undefined }
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -589,6 +599,20 @@ export const VCombobox = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                <select
+                  hidden
+                  multiple={ props.multiple }
+                  name={ autocomplete.fieldName.value }
+                >
+                  { formItems.value.map(value => (
+                    <option
+                      key={ value }
+                      value={ value }
+                      selected={ selectedValues.value.includes(value) }
+                    />
+                  ))}
+                </select>
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

@@ -20,6 +20,7 @@ import { VHighlight } from '@/labs/VHighlight'
 // Composables
 import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
+import { useAutocomplete } from '@/composables/autocomplete'
 import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
@@ -174,6 +175,8 @@ export const VAutocomplete = genericComponent<new <
         ? ''
         : String(model.value.at(-1)?.props.title ?? '')
     })
+
+    const autocomplete = useAutocomplete(props)
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
@@ -501,6 +504,7 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          name={ undefined }
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
@@ -533,6 +537,20 @@ export const VAutocomplete = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                <select
+                  hidden
+                  multiple={ props.multiple }
+                  name={ autocomplete.fieldName.value }
+                >
+                  { items.value.map(item => (
+                    <option
+                      key={ item.value }
+                      value={ item.value }
+                      selected={ selectedValues.value.includes(item.value) }
+                    />
+                  ))}
+                </select>
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

@@ -154,7 +154,8 @@ describe('VAutocomplete', () => {
     await userEvent.tab()
     await waitAnimationFrame()
     await userEvent.type(input, 'Colo')
-    expect(await screen.findAllByRole('option')).toHaveLength(1)
+    const filtered = await screen.findAllByRole('option')
+    expect(filtered).toHaveLength(1)
 
     screen.getByTestId('before').focus()
     await waitAnimationFrame()
@@ -162,7 +163,8 @@ describe('VAutocomplete', () => {
 
     await userEvent.click(input)
     await waitIdle()
-    expect(await screen.findAllByRole('option')).toHaveLength(items.length)
+    const reopened = await screen.findAllByRole('option')
+    expect(reopened).toHaveLength(items.length)
   })
 
   it('should not return focus to the input on click-outside', async () => {
@@ -1047,6 +1049,55 @@ describe('VAutocomplete', () => {
       // Shift+Tab back to header
       await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
       expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
+  })
+
+  describe('native form submission', () => {
+    const objectItems = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete name="field" items={ objectItems } modelValue={ objectItems[0] } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete multiple name="field" items={ objectItems } modelValue={[objectItems[0], objectItems[1]]} />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      const values = submittedData!.getAll('field')
+      expect(values).toEqual(['1', '2'])
     })
   })
 
