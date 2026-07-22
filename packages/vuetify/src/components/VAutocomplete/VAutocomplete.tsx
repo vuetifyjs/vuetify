@@ -71,6 +71,7 @@ export const makeVAutocompleteProps = propsFactory({
   },
   clearOnSelect: Boolean,
   search: String,
+  toggleOnClick: Boolean,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
@@ -228,7 +229,7 @@ export const VAutocomplete = genericComponent<new <
     function onMousedownControl () {
       if (menuDisabled.value) return
 
-      menu.value = true
+      menu.value = props.toggleOnClick ? !menu.value : true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return

@@ -17,7 +17,8 @@
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "toggleOnClick": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
@@ -113,7 +114,8 @@
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "toggleOnClick": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
