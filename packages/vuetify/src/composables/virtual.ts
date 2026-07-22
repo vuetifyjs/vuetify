@@ -227,7 +227,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       } else {
         // Only update the side that's reached its limit if there's still buffer left
         if (start <= 0) first.value = start
-        if (end >= items.value.length) last.value = end
+        if (end >= items.value.length) {
+          last.value = end
+          first.value = start
+        }
       }
     }
 
