@@ -67,6 +67,12 @@ async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
   })
 }
 
+async function setReduceMotionDisabled (ctx: BrowserCommandContext) {
+  await ctx.page.emulateMedia({
+    reducedMotion: 'no-preference',
+  })
+}
+
 /**
  * Use this to run some async code in only one test at a time
  *
@@ -120,6 +126,7 @@ export const commands = {
   waitForClickable,
   setFocusEmulationEnabled,
   setReduceMotionEnabled,
+  setReduceMotionDisabled,
   abortAfter,
   clearAbortTimeout,
   getLock,
