@@ -408,8 +408,13 @@ export const VSelect = genericComponent<new <
     }
     function onAfterLeave () {
       search.value = ''
+
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          vTextFieldRef.value?.focus()
+        }
       }
     }
     function onFocusin (e: FocusEvent) {

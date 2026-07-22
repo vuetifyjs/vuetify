@@ -1027,6 +1027,27 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
+  it('should release focus on a single click outside on a non-focusable area', async () => {
+    render(() => (
+      <div>
+        <div data-testid="outside" style="height: 40px">Outside</div>
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+
+    await userEvent.click(screen.getByTestId('outside'))
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    // focus must not bounce back to the field
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
   it('should keep menu open and repair focus when the focused item is removed', async () => {
     const menu = ref(false)
     render(() => (
