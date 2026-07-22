@@ -656,9 +656,17 @@ export function focusableChildren (el: Element, filterByTabIndex = true) {
     )
 }
 
+export function getActiveElement (): Element | null {
+  let active = document.activeElement
+  while (active?.shadowRoot?.activeElement) {
+    active = active.shadowRoot.activeElement
+  }
+  return active
+}
+
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
   let _el
-  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  let idx = elements.indexOf(getActiveElement() as HTMLElement)
   const inc = location === 'next' ? 1 : -1
   do {
     idx += inc
@@ -675,7 +683,8 @@ export function focusChild (
   const focusable = focusableChildren(el)
 
   if (location == null) {
-    if (el === document.activeElement || !el.contains(document.activeElement)) {
+    const active = getActiveElement()
+    if (el === active || !el.contains(active)) {
       focusable[0]?.focus(options)
     }
   } else if (location === 'first') {

@@ -39,6 +39,7 @@ import {
   convertToUnit,
   focusableChildren,
   genericComponent,
+  getActiveElement,
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
@@ -238,7 +239,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
       if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
 
-      const activeEl = document.activeElement
+      const activeEl = getActiveElement()
       const focusWasInOverlay =
         ((!activeEl || activeEl === document.body) && openedWithActivatorFocus) ||
         activeEl === el ||
@@ -260,7 +261,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     watch(isActive, val => {
       if (val) {
-        const activeEl = document.activeElement
+        const activeEl = getActiveElement()
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
       } else {
@@ -284,12 +285,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
-        if (!contentEl.value?.contains(document.activeElement)) {
+        if (!contentEl.value?.contains(getActiveElement())) {
           emit('keydown', e)
         }
         if (!props.persistent) {
           isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
+          if (contentEl.value?.contains(getActiveElement())) {
             activatorEl.value?.focus()
           }
         } else animateClick()
