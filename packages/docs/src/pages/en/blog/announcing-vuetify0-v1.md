@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Announcing Vuetify0 1.0
-  description: Vuetify0 reaches 1.0 — a headless meta-framework for Vue 3. For a framework that builds frameworks, 1.0 locks the foundation under semver — the logic layer and a stable component spine.
+  description: Vuetify0 1.0 — a headless meta-framework for Vue 3. Its foundation is now locked under semver — the logic layer plus a stable component spine.
   keywords: Vuetify0 1.0, Vuetify0 v1, headless Vue, meta-framework, composables, WAI-ARIA, semver
 ---
 
