@@ -656,10 +656,6 @@ export function focusableChildren (el: Element, filterByTabIndex = true) {
     )
 }
 
-// `document.activeElement` returns the shadow *host*, not the focused element
-// inside an open shadow root. Walk down through open shadow roots so focus and
-// keyboard navigation resolve the real focused element — fixes VMenu / VList /
-// VSelect keyboard nav when rendered inside a custom element / shadow DOM.
 export function getActiveElement (): Element | null {
   let active = document.activeElement
   while (active?.shadowRoot?.activeElement) {
