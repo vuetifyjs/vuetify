@@ -42,7 +42,6 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
-  isObject,
   omit,
   propsFactory,
   standardEasing,
@@ -398,7 +397,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 appear
                 persisted
                 transition={ props.transition }
-                target={ isObject(props.transition) ? target.value : undefined }
+                target={ target.value }
                 onAfterEnter={ onAfterEnter }
                 onAfterLeave={ onAfterLeave }
               >
