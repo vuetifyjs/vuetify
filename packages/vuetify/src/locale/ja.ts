@@ -20,6 +20,9 @@ export default {
       activateNone: 'ソートを削除するには有効にしてください。',
       activateDescending: '降順の並び替えのためには有効にしてください。',
       activateAscending: '昇順のソートのためには有効にしてください。',
+      selectRow: '行を選択',
+      selectAll: 'すべて選択',
+      selectGroup: 'グループを選択',
     },
     sortBy: 'ソート方式',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'から',
+  },
+  monthPicker: {
+    title: '月を選択',
+    itemsSelected: '{0} 選択済',
+    header: '月を入力',
+    range: {
+      title: '月を入力',
+    },
+    ariaLabel: {
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectYear: '年を選択',
+      currentMonth: '今月、{0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} 選択済',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'さらに{0}',
     today: '今日',
+  },
+  heatmap: {
+    less: '少ない',
+    more: '多い',
   },
   input: {
     clear: 'クリア {0}',

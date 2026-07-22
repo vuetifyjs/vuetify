@@ -20,6 +20,9 @@ export default {
       activateNone: 'Sıralamayı kaldırmak için etkinleştir.',
       activateDescending: 'Z den A ya sıralamak için etkinleştir.',
       activateAscending: 'A dan Z ye sıralamak için etkinleştir.',
+      selectRow: 'Satırı seç',
+      selectAll: 'Tümünü seç',
+      selectGroup: 'Grubu seç',
     },
     sortBy: 'Sırala',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'ile',
+  },
+  monthPicker: {
+    title: 'Ay seçin',
+    itemsSelected: '{0} seçildi',
+    header: 'Ay girin',
+    range: {
+      title: 'Ayları girin',
+    },
+    ariaLabel: {
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectYear: 'Yıl seçin',
+      currentMonth: 'Bu ay, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seçildi',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} tane daha',
     today: 'Bugün',
+  },
+  heatmap: {
+    less: 'Az',
+    more: 'Çok',
   },
   input: {
     clear: '{0} temizle',

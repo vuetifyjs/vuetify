@@ -24,7 +24,7 @@
   </v-sheet>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { computed, onUnmounted, shallowRef } from 'vue'
 
   const totalBytes = 2 * 1024 * 1024 * 1024 // 128 GB
@@ -40,7 +40,7 @@
 
   onUnmounted(() => clearInterval(interval))
 
-  function formatBytes (v: number) {
+  function formatBytes (v) {
     if (Number.isNaN(Number(v))) return { value: 0, unit: 'B' }
 
     const kB = v / 1024

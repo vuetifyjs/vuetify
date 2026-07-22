@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivizēt, lai noņemtu kārtošanu.',
       activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
       activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
+      selectRow: 'Atlasīt rindu',
+      selectAll: 'Atlasīt visu',
+      selectGroup: 'Atlasīt grupu',
     },
     sortBy: 'Kārtot pēc',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'līdz',
+  },
+  monthPicker: {
+    title: 'Izvēlieties mēnesi',
+    itemsSelected: '{0} izvēlēts',
+    header: 'Ievadiet mēnesi',
+    range: {
+      title: 'Ievadiet mēnešus',
+    },
+    ariaLabel: {
+      previousYear: 'Iepriekšējais gads',
+      nextYear: 'Nākamais gads',
+      selectYear: 'Izvēlieties gadu',
+      currentMonth: 'Šis mēnesis, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'Vēl {0}',
     today: 'Šodien',
+  },
+  heatmap: {
+    less: 'Mazāk',
+    more: 'Vairāk',
   },
   input: {
     clear: 'Notīrīt {0}',

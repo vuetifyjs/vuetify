@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -15,21 +15,139 @@
     .v-field
       height: 100%
 
+      &--variant-solo.v-field--focused .v-field__overlay,
+      &--variant-plain.v-field--focused .v-field__overlay
+        background-color: currentColor
+        opacity: calc(var(--v-theme-overlay-multiplier) * 0.12)
+
       .v-field__outline
         &__start,
         &__end
           flex: 1
 
-      input::placeholder
-        color: currentColor
-        opacity: var(--v-disabled-opacity)
+  .v-otp-input__field--highlighted
+    .v-field__outline
+      opacity: 0.5
 
-      &.v-field--focused
-        input::placeholder
-          opacity: 0
+    &.v-field--focused.v-field--variant-filled,
+    &.v-field--focused.v-field--variant-underlined
+      .v-field__outline::after
+        opacity: 0.5
+
+    &.v-field--focused.v-field--variant-plain .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo .v-field__overlay,
+    &.v-field--focused.v-field--variant-solo-filled .v-field__overlay
+      opacity: calc(var(--v-theme-overlay-multiplier) * 0.04)
+
+    &.v-field--focused.v-field--variant-solo-inverted .v-field__overlay
+      opacity: 0.5
 
   .v-otp-input__divider
+    display: flex
+    align-items: center
+    justify-content: center
     margin: $otp-input-divider-margin
+
+    &:has(> .v-icon)
+      margin: 0 -4px
+
+  .v-otp-group
+    display: contents
+
+    .v-field
+      flex: 1
+
+    &--merged
+      display: flex
+      gap: 0
+      align-items: center
+      height: 100%
+      border-radius: inherit
+
+      &:has(.v-field--variant-solo),
+      &:has(.v-field--variant-solo-filled),
+      &:has(.v-field--variant-solo-inverted)
+        @include tools.elevation(1)
+
+      .v-field
+        flex: 1
+        border-radius: 0
+        box-shadow: none
+
+        .v-field__outline__start,
+        .v-field__outline__end
+          border-radius: 0
+
+        &:not(:first-child)
+          margin-inline-start: -1px
+
+          .v-field__outline__start
+            border-inline-start-width: 0
+
+        &:hover
+          z-index: 1
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &.v-field--focused
+          z-index: 2
+
+          .v-field__outline__start
+            border-inline-start-width: var(--v-field-border-width)
+
+        &:first-child
+          border-start-start-radius: inherit
+          border-end-start-radius: inherit
+
+          .v-field__outline__start
+            border-start-start-radius: inherit
+            border-end-start-radius: inherit
+
+        &:last-child
+          border-start-end-radius: inherit
+          border-end-end-radius: inherit
+
+          .v-field__outline__end
+            border-start-end-radius: inherit
+            border-end-end-radius: inherit
+
+  // Hidden but in-DOM so the browser still treats it as the autofill /
+  // IME / autocomplete target. Anchored to the bottom-center of the root
+  // so the IME candidates popup, mobile autofill bar, and (if it leaks
+  // past spellcheck=false) any spellcheck UI render off the slot row.
+  .v-otp-input__input
+    position: absolute
+    bottom: 0
+    inset-inline-start: 50%
+    width: 1px
+    height: 1px
+    padding: 0
+    margin: 0
+    border: 0
+    outline: none
+    background: transparent
+    color: transparent
+    caret-color: transparent
+    opacity: 0
+    pointer-events: none
+
+    @media (any-pointer: coarse)
+      inset: 0
+      width: 100%
+      height: 100%
+      opacity: 1
+      pointer-events: auto
+
+      &::selection
+        background: transparent
+        color: transparent
+
+      &:-webkit-autofill
+        background: transparent !important
+        color: transparent !important
+        -webkit-text-fill-color: transparent !important
+        box-shadow: none !important
 
   .v-otp-input__content
     align-items: center
@@ -37,6 +155,7 @@
     gap: $otp-input-content-gap
     padding: $otp-input-content-padding
     justify-content: center
+    width: 100%
     max-width: $otp-input-content-max-width
     position: relative
     border-radius: inherit
@@ -50,26 +169,38 @@
         height: #{$otp-input-content-height + math.div($modifier, 2)}
 
   .v-otp-input__field
-    padding: 0
-    margin: 0
-    border-radius: 0
-    font: inherit
-    border-style: none
     color: inherit
-    background-color: transparent
     font-size: $otp-input-field-font-size
     height: 100%
-    outline: none
-    text-align: center
     width: 100%
+    display: grid
+    place-items: center
+    place-content: center
+    position: relative
 
-    &[type=number]::-webkit-outer-spin-button,
-    &[type=number]::-webkit-inner-spin-button
-      -webkit-appearance: none
-      margin: 0
+    > *
+      grid-area: 1 / 1
 
-    &[type=number]
-      -moz-appearance: textfield
+  .v-otp-input__placeholder
+    color: currentColor
+    opacity: var(--v-disabled-opacity)
+
+  .v-otp-input__composition
+    color: currentColor
+    opacity: 0.6
+    font-style: italic
+    text-decoration: underline
+
+  .v-otp-input__caret
+    width: 1px
+    height: 1.2em
+    background: currentColor
+    animation: v-otp-blink 1s step-end infinite
+
+  .v-otp-input__spacer
+    display: block
+    opacity: 0
+    pointer-events: none
 
   .v-otp-input__loader
     align-items: center
@@ -80,3 +211,9 @@
 
     .v-progress-linear
       position: absolute
+
+  @keyframes v-otp-blink
+    0%, 100%
+      opacity: 1
+    50%
+      opacity: 0

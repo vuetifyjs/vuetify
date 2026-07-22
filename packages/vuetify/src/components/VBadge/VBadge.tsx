@@ -64,7 +64,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(() => props.textColor)
     const { themeClasses } = useTheme()
@@ -134,6 +134,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                     width: convertToUnit(props.dotSize),
                     height: convertToUnit(props.dotSize),
                   } : {},
+                  roundedStyles.value,
                 ]}
                 aria-atomic="true"
                 aria-label={ t(props.label, value) }

@@ -61,9 +61,20 @@ async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
+async function setFocusEmulationDisabled (ctx: BrowserCommandContext) {
+  const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
+  await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: false })
+}
+
 async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
   await ctx.page.emulateMedia({
     reducedMotion: 'reduce',
+  })
+}
+
+async function setReduceMotionDisabled (ctx: BrowserCommandContext) {
+  await ctx.page.emulateMedia({
+    reducedMotion: 'no-preference',
   })
 }
 
@@ -119,7 +130,9 @@ export const commands = {
   waitStable,
   waitForClickable,
   setFocusEmulationEnabled,
+  setFocusEmulationDisabled,
   setReduceMotionEnabled,
+  setReduceMotionDisabled,
   abortAfter,
   clearAbortTimeout,
   getLock,

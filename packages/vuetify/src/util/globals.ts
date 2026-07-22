@@ -6,3 +6,4 @@ export const SUPPORTS_MATCH_MEDIA = IN_BROWSER && 'matchMedia' in window && type
 export const PREFERS_REDUCED_MOTION = () => (
   SUPPORTS_MATCH_MEDIA && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 )
+export const IS_WEBKIT = IN_BROWSER && CSS?.supports?.('-webkit-backdrop-filter', 'none')

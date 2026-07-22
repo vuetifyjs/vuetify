@@ -1,8 +1,8 @@
 ---
 layout: blog
 meta:
-  title: Vuetify — Blog
-  description: The Vuetify blog is a place where we share the latest news, updates, and stories about Vuetify. Stay up to date with the latest developments in the Vuetify ecosystem.
+  title: Blog
+  description: The Vuetify blog shares the latest news, updates, and stories — stay up to date with developments across the Vuetify ecosystem.
   keywords: vuetify, blog, news, updates, stories, ecosystem
 ---
 
@@ -17,6 +17,62 @@ Latest news, updates, and stories about Vuetify.
 ---
 
 <br>
+
+## June 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 July 14th, 2026
+
+This was a stabilization month. v4.1.0 shipped on June 2, followed by two patch releases. Most of that work went into the updated VOverlay, fixing placement and sizing bugs. Lot's of great new features were released to the users. Meanwhile Vuetify0 spent its first month in beta with the public API frozen, refining what shipped on the road to v1.0 in July... { .text-medium-emphasis }
+
+[Read More](/blog/june-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Release Candidate
+
+🖊️ John Leider • 📅 July 2nd, 2026
+
+Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-rc/) { .text-end }
+
+## May 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 June 16th, 2026
+
+May was a full-throttle feature sprint for Vuetify 4.1, the first minor since 4.0.0. The core team pushed hard to clear the backlog and land everything queued for the release: seven components promoted out of labs (VFileUpload, VDateInput, VColorInput, VIconBtn, VPicker, VStepperVertical, VPullToRefresh), four new ones (VHeatmap, VHighlight, VMonthPicker, VDateRangePicker), a full data-table accessibility pass, and a wave of fixes across 89 commits and 4 releases. Vuetify0 ran in parallel, landing its headless drag-and-drop family (useDragDrop, createSortable, createKanban) on the road to its June beta... { .text-medium-emphasis }
+
+[Read More](/blog/may-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Beta
+
+🖊️ John Leider • 📅 June 2nd, 2026
+
+Vuetify0 has reached beta, freezing the public API: the existing composables and components keep their names and signatures through v1. Since the alpha, the totals went to 49 components and 68 composables, no composables remain in draft, and a headless drag-and-drop family (useDragDrop, createSortable, createKanban) was added along with createOtp, useDelay, and the Overflow component. The release also covers the testing and stability work — 5,700+ unit tests, 98.7% coverage — ahead of v1... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-beta/) { .text-end }
+
+## April 2026 Update
+
+🖊️ John Leider • 📅 May 4th, 2026
+
+April delivered the Vuetify0 v1.0.0 public alpha — 46 components and 63 composables of headless Vue primitives — alongside three Vuetify framework patch releases, MCP v0.7.0 with playground and link CRUD tools, and four ESLint Config releases including ESLint 10 support. Six new v0 components (Carousel, Image, NumberField, Progress, Toggle, Overflow) merged in April, the display composable became the first Vuetify internal to migrate to v0, and useTheme/useLocale/useFeatures became reactive-by-default across 847 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/april-2026-update/) { .text-end }
+
+## March 2026 Update
+
+🖊️ John Leider • 📅 April 16th, 2026
+
+March delivered 7 Vuetify patch releases stabilizing v4, while Vuetify0 exploded with 427 commits reaching v0.2.0 with 7 new headless components including Switch, Slider, Treeview, and Combobox. The Nuxt Module hit v1.0.0-beta, the CLI shipped 10 releases with Vite 8 and Vue Router 5 support, and the ESLint plugin gained automated v4 migration rules across 720 total commits... { .text-medium-emphasis }
+
+[Read More](/blog/march-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Alpha
+
+🖊️ John Leider • 📅 April 7th, 2026
+
+The Vuetify0 alpha is here — a headless meta-framework for Vue 3 with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. 100% TypeScript, zero styles. Includes a full tutorial building DevKey, a developer API dashboard, from scratch. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-alpha/) { .text-end }
 
 ## February 2026 Update
 

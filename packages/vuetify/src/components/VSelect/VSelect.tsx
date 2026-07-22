@@ -15,12 +15,14 @@ import { VMenu } from '@/components/VMenu'
 import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { useAutocomplete } from '@/composables/autocomplete'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -185,6 +187,7 @@ export const VSelect = genericComponent<new <
     let keyboardLookupPrefix = ''
     let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
+    let openedByKeyboard = false
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -222,6 +225,11 @@ export const VSelect = genericComponent<new <
 
     const listRef = ref<VList>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const repairOrphanedFocus = useFocusRepair(
+      menu,
+      () => vMenuRef.value?.contentEl,
+      () => vTextFieldRef.value?.controlRef,
+    )
     const { onTabKeydown } = useFocusGroups({
       groups: [
         { type: 'element' as const, contentRef: headerRef },
@@ -242,6 +250,7 @@ export const VSelect = genericComponent<new <
     function onMousedownControl () {
       if (menuDisabled.value) return
 
+      openedByKeyboard = false
       menu.value = !menu.value
     }
 
@@ -263,6 +272,7 @@ export const VSelect = genericComponent<new <
       }
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+        openedByKeyboard = true
         menu.value = true
       }
 
@@ -391,20 +401,33 @@ export const VSelect = genericComponent<new <
       }
       if (listRef.value && isFocused.value) {
         const index = getSelectedFocusableIndex()
-        listRef.value.focus(index >= 0 ? index : 'first')
+        if (index >= 0) {
+          listRef.value.focus(index, { focusVisible: false, preventScroll: props.noAutoScroll })
+        } else if (openedByKeyboard) {
+          listRef.value.focus('first', { focusVisible: false, preventScroll: props.noAutoScroll })
+        }
       }
     }
     function onAfterLeave () {
       search.value = ''
+
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          vTextFieldRef.value?.focus()
+        }
       }
     }
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
     function onFocusout (e: FocusEvent) {
-      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+      if (
+        !vTextFieldRef.value?.$el.contains(e.relatedTarget as Node) &&
+        !(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)
+      ) {
+        if (repairOrphanedFocus(e)) return
         isFocused.value = false
       }
     }
@@ -420,7 +443,9 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    watch(menu, () => {
+    watch(menu, val => {
+      if (!val) openedByKeyboard = false
+
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
@@ -514,7 +539,7 @@ export const VSelect = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-select__content"
+                  captureFocus={ false }
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -524,6 +549,7 @@ export const VSelect = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
+                  contentClass={['v-select__content', computedMenuProps.value.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }
@@ -614,7 +640,15 @@ export const VSelect = genericComponent<new <
                                   ),
                                   title: () => {
                                     return search.value
-                                      ? highlightResult('v-select', item.title, getMatches(item)?.title)
+                                      ? (
+                                        <VHighlight
+                                          text={ item.title }
+                                          matches={ getMatches(item)?.title }
+                                          markClass="v-select__mask"
+                                          matchAll
+                                          ignoreCase
+                                        />
+                                      )
                                       : item.title
                                   },
                                 }}

@@ -1,4 +1,5 @@
 {
+  "description": "Form component used for collecting single-line text.",
   "props": {
     "autofocus": "Enables autofocus.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",

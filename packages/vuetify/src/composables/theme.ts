@@ -23,10 +23,12 @@ import {
   lighten,
   mergeDeep,
   parseColor,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { VueHeadClient } from '@unhead/vue/client'
@@ -36,11 +38,17 @@ import type { Color } from '@/util'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
+export interface ThemeTransitionOptions {
+  origin?: string
+  duration?: string
+}
+
 export type ThemeOptions = false | {
   cspNonce?: string
   defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
+  transition?: boolean | ThemeTransitionOptions
   stylesheetId?: string
   scope?: string
   utilities?: boolean
@@ -54,6 +62,7 @@ interface InternalThemeOptions {
   prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
+  transition: boolean | ThemeTransitionOptions
   stylesheetId: string
   scope?: string
   scoped: boolean
@@ -99,9 +108,10 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
-  change: (themeName: string) => void
-  cycle: (themeArray?: string[]) => void
-  toggle: (themeArray?: [string, string]) => void
+  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  setTransitionOrigin: (e: PointerEvent | Element | null) => void
 
   readonly isDisabled: boolean
   readonly isSystem: Readonly<Ref<boolean>>
@@ -173,6 +183,7 @@ function genDefaults () {
           'theme-on-light': '#000',
           'elevation-overlay-color': 'black',
           'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '8%',
         },
       },
       dark: {
@@ -215,12 +226,14 @@ function genDefaults () {
           'theme-on-light': '#000',
           'elevation-overlay-color': 'white',
           'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '20%',
         },
       },
     },
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
     utilities: true,
+    transition: false,
   }
 }
 
@@ -255,7 +268,7 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
 
   for (const [key, value] of Object.entries(theme.variables)) {
     const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (color.a == null ? '' : `, ${color.a}`) : undefined
     variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 
@@ -504,24 +517,97 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  function change (themeName: string) {
-    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
-      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+  let _transitionOrigin: string | null
+  function setTransitionOrigin (e: PointerEvent | Element | null) {
+    if (!e) {
+      _transitionOrigin = null
       return
     }
 
-    name.value = themeName
+    let x: number
+    let y: number
+
+    if (e instanceof Element) {
+      const box = new Box(e)
+      x = box.left + box.width / 2
+      y = box.top + box.height / 2
+    } else {
+      x = e.clientX
+      y = e.clientY
+    }
+
+    const originX = Math.min(98.9, 100 * x / window.innerWidth) // clip to avoid glitches
+    const originY = 100 * y / window.innerHeight
+    _transitionOrigin = `${originX.toFixed(2)}% ${originY.toFixed(2)}%`
   }
 
-  function cycle (themeArray: string[] = themeNames.value) {
+  function resolveTransitionOptions (
+    transition?: boolean | ThemeTransitionOptions
+  ): ThemeTransitionOptions | false {
+    const opt = transition ?? parsedOptions.transition
+    if (!opt && !_transitionOrigin) return false
+    const global = typeof parsedOptions.transition === 'object' ? parsedOptions.transition : {}
+    const local = typeof transition === 'object' ? transition : {}
+    return {
+      origin: local.origin ?? _transitionOrigin ?? global.origin,
+      duration: local.duration ?? global.duration,
+    }
+  }
+
+  function withPageTransition (callback: () => void, options: ThemeTransitionOptions): Promise<void> {
+    if (!IN_BROWSER || !document.startViewTransition || PREFERS_REDUCED_MOTION()) {
+      callback()
+      return Promise.resolve()
+    }
+
+    const origin = options.origin ?? '50% 0%'
+    const duration = options.duration ?? '500ms'
+
+    const style = document.createElement('style')
+    style.textContent =
+      `html:active-view-transition-type(vuetify-theme)::view-transition-old(root) { animation: none; }` +
+      `html:active-view-transition-type(vuetify-theme)::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
+      `@keyframes v-circle-in {` +
+      `  from { clip-path: circle(0% at ${origin}); }` +
+      `  to { clip-path: circle(150% at ${origin}); }` +
+      `}`
+    document.head.appendChild(style)
+
+    const transition = document.startViewTransition({ update: () => callback(), types: ['vuetify-theme'] })
+    transition.finished.then(() => {
+      _transitionOrigin = null
+      style.remove()
+    })
+
+    return transition.updateCallbackDone
+  }
+
+  function change (themeName: string, transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
+      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+      return Promise.resolve()
+    }
+
+    const apply = () => { name.value = themeName }
+    const transitionOptions = resolveTransitionOptions(transition)
+
+    if (transitionOptions) {
+      return withPageTransition(apply, transitionOptions)
+    }
+
+    apply()
+    return Promise.resolve()
+  }
+
+  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     const currentIndex = themeArray.indexOf(name.value)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
 
-    change(themeArray[nextIndex])
+    return change(themeArray[nextIndex], transition)
   }
 
-  function toggle (themeArray: [string, string] = ['light', 'dark']) {
-    cycle(themeArray)
+  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    return cycle(themeArray, transition)
   }
 
   const globalName = new Proxy(name, {
@@ -541,6 +627,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     change,
     cycle,
     toggle,
+    setTransitionOrigin,
     isDisabled: parsedOptions.isDisabled,
     isSystem,
     name,
@@ -565,7 +652,7 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = toRef(() => props.theme ?? theme.name.value)
-  const current = toRef(() => theme.themes.value[name.value])
+  const current = toRef(() => theme.computedThemes.value[name.value])
 
   const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 

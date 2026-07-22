@@ -43,7 +43,7 @@ export const VSheet = genericComponent()({
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     useRender(() => (
       <props.tag
@@ -61,6 +61,7 @@ export const VSheet = genericComponent()({
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

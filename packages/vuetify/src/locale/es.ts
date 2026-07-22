@@ -20,6 +20,9 @@ export default {
       activateNone: 'Pulse para quitar orden.',
       activateDescending: 'Pulse para ordenar de forma descendente.',
       activateAscending: 'Pulse para ordenar de forma ascendente.',
+      selectRow: 'Seleccionar fila',
+      selectAll: 'Seleccionar todo',
+      selectGroup: 'Seleccionar grupo',
     },
     sortBy: 'Ordenado por',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'a',
+  },
+  monthPicker: {
+    title: 'Seleccionar mes',
+    itemsSelected: '{0} seleccionados',
+    header: 'Introducir mes',
+    range: {
+      title: 'Introducir meses',
+    },
+    ariaLabel: {
+      previousYear: 'Año anterior',
+      nextYear: 'Año siguiente',
+      selectYear: 'Seleccionar año',
+      currentMonth: 'Mes actual, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seleccionados',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} más',
     today: 'Hoy',
+  },
+  heatmap: {
+    less: 'Menos',
+    more: 'Más',
   },
   input: {
     clear: 'Borrar {0}',

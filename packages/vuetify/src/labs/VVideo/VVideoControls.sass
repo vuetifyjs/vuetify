@@ -1,0 +1,151 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-video-controls
+    --v-video-controls-height: #{$video-controls-height}
+    --v-video-controls-pill-border-radius: #{$video-controls-pill-border-radius}
+    --v-video-controls-gap: #{$video-controls-gap}
+    --v-background-opacity: #{$video-controls-default-background-opacity}
+
+    // override by density logic
+    --v-video-controls-pill-height: 42px
+
+    flex: 1 0 100%
+    align-self: stretch
+    padding: $video-controls-padding
+    display: flex
+    align-items: center
+    position: relative
+    gap: var(--v-video-controls-gap)
+    min-height: var(--v-video-controls-height)
+    backdrop-filter: $video-controls-default-backdrop-filter
+    background-color: rgba($video-controls-default-background-color, var(--v-background-opacity))
+    color: $video-controls-default-color
+    width: 100%
+    opacity: 1
+
+    @at-root
+      @include tools.density('v-video-controls', $video-density) using ($modifier)
+        --v-video-controls-gap: #{$video-controls-gap + $modifier}
+        --v-video-controls-height: #{$video-controls-height + $modifier * 2}
+
+    &, &--pills > .v-video-control__pill
+      transition: .6s ease-in-out
+      transition-property: opacity, background-color
+
+    &--pills > .v-video-control__pill
+      @include tools.elevation($video-elevation)
+
+    &:hover
+      --v-background-opacity: 1
+
+    .v-video-control__pill
+      display: flex
+      align-items: center
+      gap: $video-controls-pill-gap
+
+    &--pills
+      --v-background-opacity: 1
+      --v-video-controls-height: calc(var(--v-video-controls-pill-height) + 24px)
+      backdrop-filter: none
+      pointer-events: none
+
+      > *
+        pointer-events: auto
+
+      &:not(:empty)
+        background: transparent
+
+      > .v-video-control__pill
+        backdrop-filter: $video-controls-pill-backdrop-filter
+        background: rgba($video-controls-default-background-color, var(--v-background-opacity))
+        border-radius: var(--v-video-controls-pill-border-radius)
+        min-height: var(--v-video-controls-pill-height)
+        min-width: var(--v-video-controls-pill-height)
+        padding: $video-controls-pill-padding
+        z-index: 1
+
+        > .v-icon-btn
+          border-radius: inherit
+
+        &:empty
+          display: none
+
+        &:has(> *:only-child)
+          padding-inline: 0
+          justify-content: center
+          border-radius: var(--v-video-controls-pill-border-radius)
+
+      > .v-video__time
+        padding: $video-time-pill-padding
+
+    &--variant-tube
+      .v-slider.v-video__track
+        position: absolute
+        top: $video-tube-track-top
+        left: 0
+        right: 0
+
+        .v-slider-track
+          height: calc(var(--v-slider-track-size) + #{$video-tube-track-hover-offset})
+
+        .v-slider-track__fill
+          height: var(--v-slider-track-size)
+
+    &--split-time
+      padding-inline: $video-controls-split-time-padding-inline
+
+    &:not(.v-video-controls--floating)
+      border-bottom-left-radius: inherit
+      border-bottom-right-radius: inherit
+
+    &:not(.v-video-controls--floating):not(.v-video-controls--pills)
+      border-top: thin solid tools.theme-color('surface-variant', .2)
+
+    &--floating
+      --v-background-opacity: 1
+      border-radius: inherit
+      margin-inline: $video-controls-floating-margin
+      width: calc(100% - 2 * #{$video-controls-floating-margin})
+
+    &--detached
+      --v-background-opacity: 1
+      position: relative
+      margin-block-start: $video-controls-detached-offset
+      padding-inline: $video-controls-detached-padding-inline
+      backdrop-filter: none
+      border-top: none
+      border-radius: inherit
+      opacity: 1
+
+      &:not(.v-video-controls--pills)
+        @include tools.elevation($video-elevation)
+
+    &--fullscreen
+      position: absolute
+      bottom: 0
+      z-index: 2147483647
+
+      &.v-video-controls--floating
+        bottom: $video-controls-floating-margin
+
+  .v-video__track
+    position: relative
+    z-index: 1
+
+    &.v-slider.v-input--horizontal > .v-input__control
+      min-height: 4px
+
+    .v-slider-thumb:not(:hover)
+      .v-slider-thumb__label
+        opacity: 0
+        transition-delay: .2s
+
+    .v-slider-thumb__label
+      color: rgb(var(--v-theme-on-surface-variant)) !important
+
+  .v-video__time
+    font-size: $video-time-font-size
+    line-height: $video-time-line-height
+    letter-spacing: $video-time-letter-spacing

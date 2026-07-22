@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activer pour supprimer le tri.',
       activateDescending: 'Activer pour trier par ordre décroissant.',
       activateAscending: 'Activer pour trier par ordre croissant.',
+      selectRow: 'Sélectionner la ligne',
+      selectAll: 'Tout sélectionner',
+      selectGroup: 'Sélectionner le groupe',
     },
     sortBy: 'Trier par',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'à',
+  },
+  monthPicker: {
+    title: 'Sélectionner un mois',
+    itemsSelected: '{0} sélectionné(s)',
+    header: 'Entrer un mois',
+    range: {
+      title: 'Entrer des mois',
+    },
+    ariaLabel: {
+      previousYear: 'Année précédente',
+      nextYear: 'Année suivante',
+      selectYear: 'Sélectionner une année',
+      currentMonth: 'Mois actuel, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} sélectionné(s)',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} de plus',
     today: 'Aujourd\'hui',
+  },
+  heatmap: {
+    less: 'Moins',
+    more: 'Plus',
   },
   input: {
     clear: 'Vider {0}',

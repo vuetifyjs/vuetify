@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Basics
   title: Data table component
@@ -57,6 +58,12 @@ Find more information and examples on the [Server side tables](/components/data-
 ### Virtual tables
 
 The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports client-side sorting and filtering, but not pagination.
+
+::: warning
+
+When using virtualized variant of VDataTable, you have to set the **height** prop or constrain the table's height using custom CSS. Otherwise the table has no internal scroll area and will put all the rows in the DOM. This also applies to the **fixed-header** and **fixed-footer** props - those have no effect if the table **height** is unconstrained.
+
+:::
 
 | Component | Description |
 | - | - |
@@ -158,6 +165,12 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
 
+#### Fixed footer
+
+Use the **fixed-footer** prop together with the `tfoot` slot to pin a custom footer to the bottom of a scrollable table. The slot exposes the currently visible `items`, so aggregates such as column totals recalculate automatically as the table is searched or filtered.
+
+<ExamplesExample file="v-data-table/prop-fixed-footer" />
+
 #### Sort icons
 
 You can customize sorting icons using dedicated props as well as control default opacity and spacing with Sass variables.
@@ -232,6 +245,12 @@ The `loading` slot allows you to customize your table's display state when fetch
 
 <ExamplesExample file="v-data-table/slot-loading" />
 
+#### Expanded slot
+
+The `expanded` slot renders the expanded content inside a row that spans all columns, so you only need to provide the inner content. It also applies expand/collapse animation. Combine with `expand-strategy="single"` to keep only one row open at a time.
+
+<ExamplesExample file="v-data-table/slot-expanded" />
+
 ### Misc
 
 #### Select All
@@ -257,5 +276,11 @@ The **show-expand** prop will render an expand icon on each row. You can customi
 You can override the rows expand icon via the `item.data-table-expand` slot. To call upon the expand functionality, pass the slots provided `internalItem` to the `toggleExpand` function and add it to a click handler to perform the expand functionality. You can also check the current state of the rows expansion by passing the `internalItem` to the `isExpanded` function.
 
 Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
+
+::: tip
+
+The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside inside it, so you can split the expanded area into multiple columns. If you intend to use `colspand="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
+
+:::
 
 <ExamplesExample file="v-data-table/misc-expand" />

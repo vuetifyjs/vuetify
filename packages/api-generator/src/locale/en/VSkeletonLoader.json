@@ -1,4 +1,5 @@
 {
+  "description": "Provides a straightforward loading placeholders in your application. Modern alternative to generic loading spinners.",
   "props": {
     "boilerplate": "Remove the loading animation from the skeleton.",
     "loading": "Applies a loading animation with a on-hover loading cursor. A value of **false** will only work when there is content in the `default` slot.",

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activați pentru a elimina sortarea.',
       activateDescending: 'Activați pentru a sorta descendent.',
       activateAscending: 'Activați pentru a sorta ascendent.',
+      selectRow: 'Selectează rând',
+      selectAll: 'Selectează tot',
+      selectGroup: 'Selectează grup',
     },
     sortBy: 'Sortați după',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'până la',
+  },
+  monthPicker: {
+    title: 'Selectați luna',
+    itemsSelected: '{0} selectate',
+    header: 'Introduceți luna',
+    range: {
+      title: 'Introduceți lunile',
+    },
+    ariaLabel: {
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectYear: 'Selectați anul',
+      currentMonth: 'Luna curentă, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} selectate',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: 'încă {0}',
     today: 'Today',
+  },
+  heatmap: {
+    less: 'Mai puțin',
+    more: 'Mai mult',
   },
   input: {
     clear: 'Șterge {0}',

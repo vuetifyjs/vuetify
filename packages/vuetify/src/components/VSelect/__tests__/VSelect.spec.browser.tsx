@@ -1,5 +1,6 @@
 // Components
 import { VSelect } from '../VSelect'
+import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { VTextField } from '@/components/VTextField'
@@ -358,6 +359,7 @@ describe('VSelect', () => {
       ))
       expect(element).toHaveTextContent('Default Language')
     })
+
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
       const items = [
         { code: 'en-US', name: 'English' },
@@ -955,12 +957,12 @@ describe('VSelect', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
-      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+      await expect.poll(() => screen.queryByTestId('header-content')).toHaveTextContent('My Header')
+      await expect.poll(() => screen.queryByTestId('footer-content')).toHaveTextContent('My Footer')
     })
 
     it('should navigate freely between interactive elements with Tab', async () => {
-      const { element } = render(() => (
+      render(() => (
         <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
           {{
             'menu-header': () => (
@@ -978,7 +980,7 @@ describe('VSelect', () => {
         </VSelect>
       ))
 
-      await userEvent.click(element, { force: true })
+      await userEvent.keyboard('{Tab}{ArrowDown}')
       await commands.waitStable('.v-list')
 
       const menu = await screen.findByRole('listbox')
@@ -1010,7 +1012,7 @@ describe('VSelect', () => {
       </div>
     ))
 
-    await userEvent.click(screen.getByCSS('.v-select'))
+    await userEvent.keyboard('{Tab}{Tab}{ArrowDown}')
     await commands.waitStable('.v-list')
 
     await waitFor(() => {
@@ -1025,6 +1027,91 @@ describe('VSelect', () => {
 
     expect(textfield.querySelector('input')).toHaveFocus()
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
+  it('should release focus on a single click outside on a non-focusable area', async () => {
+    render(() => (
+      <div>
+        <div data-testid="outside" style="height: 40px">Outside</div>
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+
+    await userEvent.click(screen.getByTestId('outside'))
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    // focus must not bounce back to the field
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VSelect
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+    expect(menu.value).toBe(true)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    screen.getAllByRole('option')[0].remove()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('focus on open', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should not focus the first item when opened with a pointer', async () => {
+      render(() => (
+        <VSelect
+          items={ items }
+          transition="fade-transition" // custom transition
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+      await wait(400)
+
+      expect(document.activeElement?.closest('.v-list-item')).toBeNull()
+    })
+  })
+
+  it('should close its menu when clicking another field inside a dialog', async () => {
+    const dialog = ref(true)
+    render(() => (
+      <VDialog v-model={ dialog.value }>
+        <div>
+          <VTextField data-testid="other-field" label="Other" />
+          <VSelect items={ items } label="Age" />
+        </div>
+      </VDialog>
+    ))
+
+    const select = screen.getByCSS('.v-select')
+    await userEvent.click(select)
+    await expect.poll(() => select).toHaveClass('v-select--active-menu')
+
+    await userEvent.click(screen.getByTestId('other-field'))
+    await expect.poll(() => select).not.toHaveClass('v-select--active-menu')
   })
 
   showcase({ stories })

@@ -16,11 +16,13 @@ import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -255,6 +257,11 @@ export const VCombobox = genericComponent<new <
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const repairOrphanedFocus = useFocusRepair(
+      menu,
+      () => vMenuRef.value?.contentEl,
+      () => vTextFieldRef.value?.controlRef,
+    )
     const { onTabKeydown } = useFocusGroups({
       groups: [
         { type: 'element' as const, contentRef: headerRef },
@@ -402,7 +409,11 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          vTextFieldRef.value?.focus()
+        }
       }
       isPristine.value = true
       _searchLock.value = null
@@ -464,13 +475,23 @@ export const VCombobox = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
       if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        if (repairOrphanedFocus(e)) return
         isFocused.value = false
       }
     }
 
+    let mousedownInsideContentAt = 0
+    function onMousedownContent () {
+      mousedownInsideContentAt = performance.now()
+    }
+
     function onBlur (e: FocusEvent) {
+      const next = e.relatedTarget as Node | null
       const menuContent = vMenuRef.value?.contentEl
-      if (menuContent?.contains(e.relatedTarget as Node)) {
+      if (
+        menuContent?.contains(next) ||
+        (!next && performance.now() - mousedownInsideContentAt < 10)
+      ) {
         isFocused.value = true
       }
     }
@@ -502,7 +523,7 @@ export const VCombobox = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
@@ -573,7 +594,6 @@ export const VCombobox = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-combobox__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -582,11 +602,13 @@ export const VCombobox = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
+                  contentClass={['v-combobox__content', props.menuProps?.contentClass]}
                 >
                   <VSheet
                     elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
+                    onMousedown={ onMousedownContent }
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>
@@ -674,7 +696,15 @@ export const VCombobox = genericComponent<new <
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                                  : (
+                                    <VHighlight
+                                      text={ item.title }
+                                      matches={ getMatches(item)?.title }
+                                      markClass="v-combobox__mask"
+                                      matchAll
+                                      ignoreCase
+                                    />
+                                  )
                               },
                             }}
                           </VListItem>

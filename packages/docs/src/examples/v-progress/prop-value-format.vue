@@ -22,8 +22,8 @@
   </v-container>
 </template>
 
-<script lang="ts" setup>
-  function formatUploaded ({ value, max } : { value: number, max: number }) {
+<script setup>
+  function formatUploaded ({ value, max }) {
     return `${Math.floor(value)} out of ${max} items`
   }
 </script>

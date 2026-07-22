@@ -20,6 +20,9 @@ export default {
       activateNone: 'הפעל להסרת המיון.',
       activateDescending: 'הפעל למיון יורד.',
       activateAscending: 'הפעל למיון עולה.',
+      selectRow: 'בחר שורה',
+      selectAll: 'בחר הכל',
+      selectGroup: 'בחר קבוצה',
     },
     sortBy: 'סדר לפי',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'עד',
+  },
+  monthPicker: {
+    title: 'בחר חודש',
+    itemsSelected: '{0} נבחר',
+    header: 'הזן חודש',
+    range: {
+      title: 'הזן חודשים',
+    },
+    ariaLabel: {
+      previousYear: 'השנה הקודמת',
+      nextYear: 'השנה הבאה',
+      selectYear: 'בחר שנה',
+      currentMonth: 'החודש הנוכחי, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} נבחר',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} נוספים',
     today: 'היום',
+  },
+  heatmap: {
+    less: 'פחות',
+    more: 'יותר',
   },
   input: {
     clear: 'נקה {0}',

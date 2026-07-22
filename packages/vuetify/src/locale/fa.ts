@@ -20,6 +20,9 @@ export default {
       activateNone: 'غیرفعال‌سازی مرتب‌سازی',
       activateDescending: 'غیرفعال‌سازی مرتب‌سازی نزولی',
       activateAscending: 'غیرفعال‌سازی مرتب‌سازی صعودی',
+      selectRow: 'انتخاب ردیف',
+      selectAll: 'انتخاب همه',
+      selectGroup: 'انتخاب گروه',
     },
     sortBy: 'مرتب‌سازی براساس',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'تا',
+  },
+  monthPicker: {
+    title: 'انتخاب ماه',
+    itemsSelected: '{0} انتخاب‌شده',
+    header: 'ماه را وارد کنید',
+    range: {
+      title: 'ماه‌ها را وارد کنید',
+    },
+    ariaLabel: {
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectYear: 'انتخاب سال',
+      currentMonth: 'ماه جاری، {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} انتخاب‌شده',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{بیشتر {0',
     today: 'امروز',
+  },
+  heatmap: {
+    less: 'کمتر',
+    more: 'بیشتر',
   },
   input: {
     clear: 'پاکسازی {0}',

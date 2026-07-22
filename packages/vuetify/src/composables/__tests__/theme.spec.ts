@@ -1,9 +1,10 @@
-/* eslint-disable vitest/no-commented-out-tests */
+/* eslint-disable @vitest/no-commented-out-tests */
 // Composables
-import { createTheme } from '../theme'
+import { createTheme, provideTheme, ThemeSymbol } from '../theme'
 
 // Utilities
-import { createApp } from 'vue'
+import { mount } from '@vue/test-utils'
+import { createApp, defineComponent, h, provide } from 'vue'
 
 // Types
 import type { App } from 'vue'
@@ -145,6 +146,45 @@ describe('createTheme', () => {
 
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-darken-1')
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
+  })
+
+  it('should carry generated variations into a nested provideTheme current', () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        light: {
+          colors: { color2: '#1697f6' },
+        },
+      },
+      variations: {
+        colors: ['color2'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
+
+    let nested: ReturnType<typeof provideTheme> | undefined
+
+    const ChildComponent = defineComponent({
+      setup () {
+        nested = provideTheme({ theme: undefined })
+        return () => h('div')
+      },
+    })
+
+    const ParentComponent = defineComponent({
+      setup () {
+        provide(ThemeSymbol, theme)
+        return () => h(ChildComponent)
+      },
+    })
+
+    mount(ParentComponent)
+
+    expect(nested?.current.value).toStrictEqual(theme.computedThemes.value.light)
+    expect(nested?.current.value.colors).toHaveProperty('color2-darken-1')
+    expect(nested?.current.value.colors).toHaveProperty('color2-lighten-1')
+    expect(nested?.current.value.colors).toHaveProperty('on-color2')
   })
 
   it('should allow for customization of the stylesheet id', () => {

@@ -8,7 +8,9 @@ import { VDivider } from '@/components/VDivider'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
+import { formatNumber } from './format'
 import { useHold } from './hold'
+import { processGroupedInput, processPlainInput } from './typing'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -16,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
-import { clamp, escapeForRegex, extractNumber, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, normalizeMinusSign, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,6 +70,14 @@ const makeVNumberInputProps = propsFactory({
     type: String,
     validator: (v: any) => !v || v.length === 1,
   },
+  grouping: {
+    type: [Boolean, String] as PropType<'always' | 'auto' | 'min2' | boolean>,
+    default: false,
+  },
+  groupSeparator: {
+    type: String,
+    validator: (v: any) => !v || (v.length === 1 && !/[0-9+-]/.test(v)),
+  },
 
   ...omit(makeVTextFieldProps(), ['modelValue', 'validationValue']),
 }, 'VNumberInput')
@@ -95,32 +105,30 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isFocused = shallowRef(props.focused)
 
-    const { decimalSeparator: decimalSeparatorFromLocale } = useLocale()
+    const {
+      current: locale,
+      decimalSeparator: decimalSeparatorFromLocale,
+      numericGroupSeparator: numericGroupSeparatorFromLocale,
+    } = useLocale()
+
     const decimalSeparator = computed(() => props.decimalSeparator?.[0] || decimalSeparatorFromLocale.value)
+    const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
+    const minusSign = computed(() => new Intl.NumberFormat(locale.value).formatToParts(-1).find(p => p.type === 'minusSign')?.value ?? '-')
 
-    function correctPrecision (val: number, precision = props.precision, trim = true) {
-      const fixed = precision == null
-        ? String(val)
-        : val.toFixed(precision)
+    function toNumber (val: string | null | undefined) {
+      return Number(normalizeMinusSign(val ?? '').replace(decimalSeparator.value, '.').replace(/[^0-9.-]/g, ''))
+    }
 
-      if (isFocused.value && trim) {
-        return Number(fixed).toString() // trim zeros
-          .replace('.', decimalSeparator.value)
-      }
-
-      if (props.minFractionDigits === null || (precision !== null && precision < props.minFractionDigits)) {
-        return fixed.replace('.', decimalSeparator.value)
-      }
-
-      let [baseDigits, fractionDigits] = fixed.split('.')
-
-      fractionDigits = (fractionDigits ?? '').padEnd(props.minFractionDigits, '0')
-        .replace(new RegExp(`(?<=\\d{${props.minFractionDigits}})0+$`, 'g'), '')
-
-      return [
-        baseDigits,
-        fractionDigits,
-      ].filter(Boolean).join(decimalSeparator.value)
+    function correctPrecision (val: number, precision?: number | null, trim = true) {
+      precision ??= isFocused.value && trim ? undefined : props.precision ?? undefined
+      return formatNumber(val, {
+        locale: locale.value,
+        precision,
+        minFractionDigits: props.minFractionDigits,
+        useGrouping: props.grouping,
+        decimalSeparator: decimalSeparator.value,
+        groupSeparator: groupSeparator.value,
+      })
     }
 
     const model = useProxiedModel(props, 'modelValue', null,
@@ -137,7 +145,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (
         isFocused.value &&
           !controlsDisabled.value &&
-          Number(_inputText.value?.replace(decimalSeparator.value, '.')) === val
+          toNumber(_inputText.value) === val
       ) {
         // ignore external changes while typing
         // e.g. 5.01{backspace}2 » should result in 5.02
@@ -147,7 +155,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         _lastParsedValue.value = null
       } else if (!isNaN(val)) {
         _inputText.value = correctPrecision(val)
-        _lastParsedValue.value = Number(_inputText.value.replace(decimalSeparator.value, '.'))
+        _lastParsedValue.value = toNumber(_inputText.value)
       }
     }, { immediate: true })
 
@@ -160,7 +168,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
           _lastParsedValue.value = null
           return
         }
-        const parsedValue = Number(val.replace(decimalSeparator.value, '.'))
+        const parsedValue = toNumber(val)
         if (!isNaN(parsedValue)) {
           _inputText.value = val
           _lastParsedValue.value = parsedValue
@@ -174,17 +182,19 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
     const isOutOfRange = computed(() => {
       if (_lastParsedValue.value === null) return false
-      const numberFromText = Number(_inputText.value?.replace(decimalSeparator.value, '.'))
+      const numberFromText = toNumber(_inputText.value)
       return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number + props.step <= props.max
+      if (model.value == null) return true
+      return model.value + props.step <= props.max
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
-      return (model.value ?? 0) as number - props.step >= props.min
+      if (model.value == null) return true
+      return model.value - props.step >= props.min
     })
 
     const controlVariant = computed(() => {
@@ -213,71 +223,80 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       },
     }
 
-    watch(() => props.precision, () => formatInputValue())
-    watch(() => props.minFractionDigits, () => formatInputValue())
+    watch(
+      () => [locale.value, decimalSeparator.value, groupSeparator.value, props.precision, props.minFractionDigits],
+      () => formatInputValue()
+    )
 
-    function inferPrecision (value: number | null) {
+    function inferPrecision (value: number | string | null) {
       if (value == null) return 0
       const str = value.toString()
-      const idx = str.indexOf('.')
-      return ~idx ? str.length - idx : 0
+      const idx = str.indexOf('.') + 1
+      return idx ? str.length - idx : 0
+    }
+
+    function emitChange () {
+      vTextFieldRef.value?.controlRef?.dispatchEvent(new Event('change', { bubbles: true }))
     }
 
     function toggleUpDown (increment = true) {
       if (controlsDisabled.value) return
+      if (increment ? !canIncrease.value : !canDecrease.value) return
       if (model.value == null) {
         inputText.value = correctPrecision(clamp(0, props.min, props.max))
+        emitChange()
         return
       }
-
-      let inferredPrecision = Math.max(inferPrecision(model.value), inferPrecision(props.step))
-      if (props.precision != null) inferredPrecision = Math.max(inferredPrecision, props.precision)
-      if (increment) {
-        if (canIncrease.value) inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
-      } else {
-        if (canDecrease.value) inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
+      const inferredPrecision = Math.max(inferPrecision(toNumber(inputText.value)), inferPrecision(props.step))
+      if (increment && canIncrease.value) {
+        inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
+        emitChange()
+      } else if (!increment && canDecrease.value) {
+        inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
+        emitChange()
       }
     }
 
     function onBeforeinput (e: InputEvent) {
       if (controlsDisabled.value) return
-      if (!e.data) return
       const inputElement = e.target as HTMLInputElement
-      const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
 
-      const potentialNewInputVal =
-        existingTxt
-          ? existingTxt.slice(0, selectionStart as number | undefined) + e.data + existingTxt.slice(selectionEnd as number | undefined)
-          : e.data
+      const result = props.grouping
+        ? processGroupedInput(
+          e.inputType,
+          e.data,
+          inputElement.value ?? '',
+          inputElement.selectionStart ?? 0,
+          inputElement.selectionEnd ?? 0,
+          {
+            groupSeparator: groupSeparator.value,
+            decimalSeparator: decimalSeparator.value,
+            precision: props.precision,
+            grouping: props.grouping,
+            locale: locale.value,
+            minusSign: minusSign.value,
+          }
+        )
+        : processPlainInput(
+          e.data,
+          inputElement.value ?? '',
+          inputElement.selectionStart ?? 0,
+          inputElement.selectionEnd ?? 0,
+          {
+            decimalSeparator: decimalSeparator.value,
+            precision: props.precision,
+            minusSign: minusSign.value,
+          }
+        )
 
-      const potentialNewNumber = extractNumber(potentialNewInputVal, props.precision, decimalSeparator.value)
+      if (result === null) return
 
-      // Allow only numbers, "-" and {decimal separator}
-      // Allow "-" and {decimal separator} only once
-      // Allow "-" only at the start
-      if (!new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator.value)}?\\d*$`).test(potentialNewInputVal)) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-      }
+      e.preventDefault()
 
-      if (props.precision == null) return
+      inputElement.value = result.text
+      inputElement.setSelectionRange(result.cursor, result.cursor)
 
-      // Ignore decimal digits above precision limit
-      if (potentialNewInputVal.split(decimalSeparator.value)[1]?.length > props.precision) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-
-        const cursorPosition = (selectionStart ?? 0) + e.data.length
-        inputElement!.setSelectionRange(cursorPosition, cursorPosition)
-      }
-      // Ignore decimal separator when precision = 0
-      if (props.precision === 0 && potentialNewInputVal.endsWith(decimalSeparator.value)) {
-        e.preventDefault()
-        inputElement!.value = potentialNewNumber
-        nextTick(() => inputText.value = potentialNewNumber)
-      }
+      nextTick(() => inputText.value = result.text)
     }
 
     async function onKeydown (e: KeyboardEvent) {
@@ -331,7 +350,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (controlsDisabled.value) return
       if (!vTextFieldRef.value) return
       const actualText = vTextFieldRef.value.value
-      const parsedValue = Number(actualText.replace(decimalSeparator.value, '.'))
+      const parsedValue = toNumber(actualText)
       if (actualText && !isNaN(parsedValue)) {
         inputText.value = correctPrecision(clamp(parsedValue, props.min, props.max))
       } else {
@@ -352,8 +371,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         inputText.value = null
         return
       }
-      inputText.value = model.value.toString()
-        .replace('.', decimalSeparator.value)
+      inputText.value = correctPrecision(model.value)
     }
 
     function onFocus () {

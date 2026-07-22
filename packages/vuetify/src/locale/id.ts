@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktifkan untuk menghapus penyortiran.',
       activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
       activateAscending: 'Aktifkan untuk mengurutkan keatas.',
+      selectRow: 'Pilih baris',
+      selectAll: 'Pilih semua',
+      selectGroup: 'Pilih grup',
     },
     sortBy: 'Urutkan berdasar',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'hingga',
+  },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} lagi',
     today: 'Hari ini',
+  },
+  heatmap: {
+    less: 'Kurang',
+    more: 'Lebih',
   },
   input: {
     clear: 'Bersihkan {0}',

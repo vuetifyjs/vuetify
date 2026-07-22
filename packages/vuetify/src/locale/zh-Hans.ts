@@ -20,6 +20,9 @@ export default {
       activateNone: '点击以移除排序。',
       activateDescending: '点击以降序排列。',
       activateAscending: '点击以升序排列。',
+      selectRow: '选择行',
+      selectAll: '选择全部',
+      selectGroup: '选择分组',
     },
     sortBy: '排序方式',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '至',
+  },
+  monthPicker: {
+    title: '选择月份',
+    itemsSelected: '已选择 {0} 项',
+    header: '输入月份',
+    range: {
+      title: '输入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '选择年份',
+      currentMonth: '本月，{0}',
+    },
   },
   datePicker: {
     itemsSelected: '已选择 {0} 项',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '还有 {0} 项',
     today: '今天',
+  },
+  heatmap: {
+    less: '少',
+    more: '多',
   },
   input: {
     clear: '清除 {0}',

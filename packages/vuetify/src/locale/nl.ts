@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activeer om de sortering te verwijderen.',
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',
+      selectRow: 'Rij selecteren',
+      selectAll: 'Alles selecteren',
+      selectGroup: 'Groep selecteren',
     },
     sortBy: 'Sorteer op',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'tot',
+  },
+  monthPicker: {
+    title: 'Selecteer maand',
+    itemsSelected: '{0} geselecteerd',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maanden in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectYear: 'Selecteer jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} meer',
     today: 'Vandaag',
+  },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
   },
   input: {
     clear: 'Maak {0} leeg',

@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-video` used to display a volume control.",
   "props": {
     "inline": "Display slider next to the icon. VMenu won't be displayed on click. Recomended to pair with **sliderProps** to configure slider width.",
     "direction": "Switch between horizontal and vertical slider.",

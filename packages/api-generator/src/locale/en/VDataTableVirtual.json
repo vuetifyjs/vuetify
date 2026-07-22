@@ -1,4 +1,5 @@
 {
+  "description": "Specialized `v-data-table` with built-in row virtualization to handle thousands of rows with minimal performance impact.",
   "props": {
     "headerProps": "Pass props to the default header.",
     "itemKey": "The property on each item that is used as a unique key."
@@ -15,6 +16,7 @@
     "colgroup": "Slot to replace the default rendering of the `<colgroup>` element.",
     "data-table-group": "Slot for custom rendering of a group.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "expanded": "Slot for custom rendering of the expanded content inside a row spanning all columns.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "group-header": "Slot for custom rendering of a group header.",
     "group-summary": "Slot for custom rendering of a group summary.",

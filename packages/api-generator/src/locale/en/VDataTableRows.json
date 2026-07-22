@@ -1,6 +1,8 @@
 {
+  "description": "Used to define the rows for a `v-data-table`.",
   "props": {
     "cellProps": "An object of additional props to be passed to each `<td>` in the table body. Also accepts a function that will be called for each cell. If the same prop is defined both here and in `cellProps` in a headers object, the value from the headers object will be used.",
+    "expandTransition": "Transition used to animate the `expanded` slot content. Pass a string transition name, a component via `{ component }`, or any `<Transition>` props object.",
     "loading": "Displays `loading` slot if set to `true`",
     "loadingText": "Text shown when the data is loading.",
     "rowProps": "An object of additional props to be passed to each `<tr>` in the table body. Also accepts a function that will be called for each row."
@@ -12,6 +14,7 @@
     "[`item.${string}`]": "Slot for custom rendering of a column.",
     "data-table-group": "Slot for custom rendering of a group.",
     "data-table-select": "Slot for custom rendering of a header cell with the select checkbox.",
+    "expanded": "Slot for custom rendering of the expanded content inside a row spanning all columns.",
     "expanded-row": "Slot for custom rendering of an expanded row.",
     "group-header": "Slot for custom rendering of a group header.",
     "group-summary": "Slot for custom rendering of a group summary.",
