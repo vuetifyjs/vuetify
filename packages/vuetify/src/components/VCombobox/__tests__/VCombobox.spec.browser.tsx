@@ -717,6 +717,8 @@ describe('VCombobox', () => {
     await expect.poll(() => selectedItem.value).toBe('test')
     expect(input).toHaveValue('')
 
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
+
     // Press enter key with a custom search input value
     await userEvent.click(element)
     await userEvent.keyboard('test 2{Enter}')
