@@ -28,7 +28,7 @@ Vuetify0 is 1.0. The release candidate held — the frozen surface shipped throu
 
 ## June 2026 Update
 
-🖊️ Jacek Czarniecki • 📅 July 14th, 2026
+🖊️ Jacek Czarniecki • 📅 July 8th, 2026
 
 This was a stabilization month. v4.1.0 shipped on June 2, followed by two patch releases. Most of that work went into the updated VOverlay, fixing placement and sizing bugs. Lot's of great new features were released to the users. Meanwhile Vuetify0 spent its first month in beta with the public API frozen, refining what shipped on the road to v1.0 in July... { .text-medium-emphasis }
 
