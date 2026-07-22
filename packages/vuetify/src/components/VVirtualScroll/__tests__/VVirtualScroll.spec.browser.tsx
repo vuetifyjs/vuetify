@@ -3,6 +3,7 @@ import { VVirtualScroll } from '../VVirtualScroll'
 
 // Utilities
 import { render, screen, scroll, waitIdle } from '@test'
+import { ref } from 'vue'
 import { createRange } from '@/util'
 
 describe('VVirtualScroll', () => {
@@ -22,6 +23,36 @@ describe('VVirtualScroll', () => {
     const elements = screen.getAllByCSS('.v-virtual-scroll__item')
     expect(elements.length).toBeGreaterThan(16) // 400/24=16.6
     expect(elements.length).toBeLessThan(50)
+  })
+
+  it('recalculates paddingBottom when an item collapses without scroll', async () => {
+    const collapsed = ref(false)
+
+    render(() => (
+      <VVirtualScroll height="400" items={ createRange(50) }>
+        {{
+          default: ({ index }) => (
+            <div style={{ height: index === 0 && collapsed.value ? '12px' : '48px' }}>
+              { index }
+            </div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    await waitIdle()
+    await waitIdle()
+
+    collapsed.value = true
+
+    await waitIdle()
+    await waitIdle()
+    await waitIdle()
+
+    const container = screen.getByCSS('.v-virtual-scroll__container')
+    const paddingBottom = parseFloat(container.style.paddingBottom)
+
+    expect(paddingBottom).toBeLessThan(800)
   })
 
   it('reuses the same elements', async () => {
