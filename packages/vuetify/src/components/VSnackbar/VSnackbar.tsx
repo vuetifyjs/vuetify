@@ -13,6 +13,7 @@ import { useSnackbarItem } from '@/components/VSnackbarQueue/queue'
 
 // Composables
 import { useLayout } from '@/composables'
+import { useAutoDismiss } from '@/composables/autoDismiss'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { VuetifyLayoutKey } from '@/composables/layout'
@@ -26,7 +27,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, inject, mergeProps, nextTick, onScopeDispose, ref, shallowRef, watchEffect } from 'vue'
 import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
@@ -147,8 +148,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     let _lastOffset: string
 
     const timerRef = ref<VProgressLinear>()
-    const isHovering = shallowRef(false)
-    const isFocused = shallowRef(false)
     const startY = shallowRef(0)
     const mainStyles = ref()
     const hasLayout = inject(VuetifyLayoutKey, undefined)
@@ -161,60 +160,18 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       })
     })
 
-    watch(isActive, startTimeout)
-    watch(() => props.timeout, startTimeout)
-
-    onMounted(() => {
-      if (isActive.value) startTimeout()
+    const {
+      isHovering,
+      isFocused,
+      onPointerenter,
+      onPointerleave,
+      onFocusin,
+      onFocusout,
+    } = useAutoDismiss(isActive, () => Number(props.timeout), {
+      getContentEl: () => overlay.value?.contentEl,
+      onClear: () => countdown.reset(),
+      onStart: () => nextTick(() => countdown.start(refElement(timerRef.value))),
     })
-
-    let activeTimeout = -1
-    function startTimeout () {
-      countdown.clear()
-      window.clearTimeout(activeTimeout)
-      const timeout = Number(props.timeout)
-
-      if (!isActive.value || timeout === -1) return
-
-      countdown.reset()
-
-      const element = refElement(timerRef.value)
-
-      nextTick(() => countdown.start(element))
-
-      activeTimeout = window.setTimeout(() => {
-        isActive.value = false
-      }, timeout)
-    }
-
-    function clearTimeout () {
-      countdown.reset()
-      window.clearTimeout(activeTimeout)
-    }
-
-    function onPointerenter () {
-      isHovering.value = true
-      clearTimeout()
-    }
-
-    function onPointerleave () {
-      isHovering.value = false
-      if (!isFocused.value) startTimeout()
-    }
-
-    function onFocusin () {
-      isFocused.value = true
-      clearTimeout()
-    }
-
-    function onFocusout (event: FocusEvent) {
-      const contentEl = overlay.value?.contentEl
-      if (contentEl?.contains(event.relatedTarget as Node)) {
-        return
-      }
-      isFocused.value = false
-      if (!isHovering.value) startTimeout()
-    }
 
     function onTouchstart (event: TouchEvent) {
       startY.value = event.touches[0].clientY
