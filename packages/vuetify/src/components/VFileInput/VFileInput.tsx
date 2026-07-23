@@ -135,6 +135,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const isDragging = shallowRef(false)
+    const dragCounter = shallowRef(0)
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
@@ -171,19 +172,36 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const charsKeepOneSide = Math.floor((Number(props.truncateLength) - 1) / 2)
       return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
+    function hasDraggedFiles (e: DragEvent) {
+      const types = [...e.dataTransfer?.types ?? []]
+      return types.includes('Files') || hasFilesOrFolders(e)
+    }
+    function onDragenter (e: DragEvent) {
+      if (props.disabled || props.readonly || !hasDraggedFiles(e)) return
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      dragCounter.value++
+      isDragging.value = true
+    }
     function onDragover (e: DragEvent) {
-      if (props.disabled || props.readonly) return
+      if (props.disabled || props.readonly || !hasDraggedFiles(e)) return
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = true
     }
     function onDragleave (e: DragEvent) {
       e.preventDefault()
+      if (dragCounter.value > 0) dragCounter.value--
+      if (dragCounter.value === 0) isDragging.value = false
+    }
+    function onDragend () {
+      dragCounter.value = 0
       isDragging.value = false
     }
     async function onDrop (e: DragEvent) {
       e.preventDefault()
       e.stopImmediatePropagation()
+      dragCounter.value = 0
       isDragging.value = false
 
       if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
@@ -302,6 +320,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 focused={ isFocused.value }
                 details={ hasDetails.value }
                 error={ isValid.value === false }
+                onDragenter={ onDragenter }
+                onDragend={ onDragend }
+                onDragleave={ onDragleave }
                 onDragover={ onDragover }
                 onDrop={ onDrop }
               >
@@ -328,7 +349,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           onFocus()
                         }}
                         onChange={ onFileSelection }
-                        onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
                         onPaste={ onPaste }
