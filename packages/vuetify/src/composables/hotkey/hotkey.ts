@@ -3,7 +3,7 @@ import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 
 // Utilities
 import { onScopeDispose, toValue, watch } from 'vue'
-import { IN_BROWSER } from '@/util'
+import { getActiveElement, IN_BROWSER } from '@/util'
 
 // Types
 import type { Combo, Key, KeyCombination, Sequence } from '@/composables/hotkey/hotkey-parsing'
@@ -47,7 +47,7 @@ export function useHotkey (
   function isInputFocused () {
     if (toValue(inputs)) return false
 
-    const activeElement = document.activeElement as HTMLElement
+    const activeElement = getActiveElement() as HTMLElement
 
     return activeElement && (
       activeElement.tagName === 'INPUT' ||
