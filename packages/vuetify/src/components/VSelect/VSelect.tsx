@@ -188,6 +188,7 @@ export const VSelect = genericComponent<new <
     let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
     let openedByKeyboard = false
+    let openedByArrow: 'next' | 'prev' | null = null
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -251,6 +252,7 @@ export const VSelect = genericComponent<new <
       if (menuDisabled.value) return
 
       openedByKeyboard = false
+      openedByArrow = null
       menu.value = !menu.value
     }
 
@@ -269,6 +271,12 @@ export const VSelect = genericComponent<new <
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
+      }
+
+      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        openedByArrow = e.key === 'ArrowDown' ? 'next' : 'prev'
+      } else if (['Enter', ' '].includes(e.key)) {
+        openedByArrow = null
       }
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
@@ -401,6 +409,13 @@ export const VSelect = genericComponent<new <
       if (listRef.value.$el?.contains(document.activeElement)) return
 
       const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
+
+      // fallback for VMenu's re-dispatch; fires before the virtual list has scrolled
+      if (openedByArrow) {
+        listRef.value.focus(openedByArrow, opts)
+        return
+      }
+
       if (focusSelectedItem(opts)) return
 
       if (openedByKeyboard) {
@@ -443,7 +458,10 @@ export const VSelect = genericComponent<new <
     }
 
     watch(menu, val => {
-      if (!val) openedByKeyboard = false
+      if (!val) {
+        openedByKeyboard = false
+        openedByArrow = null
+      }
 
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = getSelectedIndex()

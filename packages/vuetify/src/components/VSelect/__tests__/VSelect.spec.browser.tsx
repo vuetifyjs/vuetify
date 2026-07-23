@@ -1156,7 +1156,6 @@ describe('VSelect', () => {
         .map(el => el.textContent))
         .toContain('101')
 
-      await wait(100)
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('101')
     })
 
@@ -1173,7 +1172,6 @@ describe('VSelect', () => {
         .map(el => el.textContent))
         .toContain('299')
 
-      await wait(400)
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
     })
   })
