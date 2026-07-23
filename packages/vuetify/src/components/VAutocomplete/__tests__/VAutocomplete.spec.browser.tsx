@@ -980,5 +980,45 @@ describe('VAutocomplete', () => {
     })
   })
 
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item on Enter', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+    })
+
+    it('should move arrows from the selected item', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
+  })
+
   showcase({ stories })
 })

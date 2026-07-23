@@ -928,5 +928,32 @@ describe('VCombobox', () => {
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
   })
 
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item and arrow from selection', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
+  })
+
   showcase({ stories })
 })

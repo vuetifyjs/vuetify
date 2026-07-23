@@ -1095,6 +1095,89 @@ describe('VSelect', () => {
     })
   })
 
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item on click', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      const target = screen.getAllByRole('option').find(el => el.textContent === '100')!
+      await userEvent.click(target) // actual visibility test; workaround for vitest limitation
+    })
+
+    it('should move arrows from the selected item after Enter open', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('99')
+    })
+
+    it('should open with ArrowDown onto the item after selection', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('101')
+
+      await wait(100)
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('101')
+    })
+
+    it('should open with ArrowUp onto the item before the first selection', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={[300, 555, 992]} multiple />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('299')
+
+      await wait(400)
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
+    })
+  })
+
   it('should close its menu when clicking another field inside a dialog', async () => {
     const dialog = ref(true)
     render(() => (
