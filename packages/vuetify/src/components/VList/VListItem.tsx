@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VListItem.sass'
 
@@ -317,7 +319,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
-          onClick={ onClick }
+          onClick={ (isClickable.value || props.onClick || props.onClickOnce) && onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
         >
