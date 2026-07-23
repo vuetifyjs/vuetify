@@ -4,6 +4,7 @@ import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 import { VListItem } from '@/components/VList/VListItem'
 
 // Composables
+import { useOpened } from './open'
 import { useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
@@ -17,7 +18,6 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
-import type { InternalListItem } from '@/components/VList/VList'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, IndentLinesVariant } from '@/util'
 
@@ -106,10 +106,11 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
     const vListRef = ref<VList>()
 
-    const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
     const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, flatItems, search)
+    const opened = useOpened(props, items, filteredItems, () => vListRef.value?.getPath)
+
     const visibleIds = computed(() => {
       if (!search.value) return null
       const getPath = vListRef.value?.getPath
@@ -133,22 +134,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
         queue.push(...((vListRef.value?.children.get(child) ?? []).slice()))
       }
       return arr
-    }
-
-    function openAll (items: InternalListItem<any>[]) {
-      let ids: any[] = []
-
-      for (const i of items) {
-        if (!i.children) continue
-
-        ids.push(props.returnObject ? toRaw(i.raw) : i.value)
-
-        if (i.children) {
-          ids = ids.concat(openAll(i.children))
-        }
-      }
-
-      return ids
     }
 
     provide(VTreeviewSymbol, { visibleIds })
@@ -198,7 +183,8 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             },
             props.style,
           ]}
-          opened={ opened.value }
+          opened={[...opened.value]}
+          onUpdate:opened={ val => { opened.value = val } }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
