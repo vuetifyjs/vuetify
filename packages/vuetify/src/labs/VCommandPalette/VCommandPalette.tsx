@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, getActiveElement, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -250,7 +250,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     watch(isOpen, (newValue, oldValue) => {
       if (newValue && !oldValue) {
-        previouslyFocusedElement.value = document.activeElement as HTMLElement | null
+        previouslyFocusedElement.value = getActiveElement() as HTMLElement | null
         searchQuery.value = ''
         navigation.reset()
 
