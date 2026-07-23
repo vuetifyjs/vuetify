@@ -667,6 +667,9 @@ export function getActiveElement (): Element | null {
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
   let _el
   let idx = elements.indexOf(getActiveElement() as HTMLElement)
+  if (idx < 0) {
+    idx = elements.findIndex(el => el.getAttribute('aria-selected') === 'true')
+  }
   const inc = location === 'next' ? 1 : -1
   do {
     idx += inc
