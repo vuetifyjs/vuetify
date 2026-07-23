@@ -20,6 +20,7 @@ import { VHighlight } from '@/labs/VHighlight'
 // Composables
 import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
+import { useSelectionMenu } from '../VSelect/useSelectionMenu'
 import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
@@ -192,15 +193,7 @@ export const VAutocomplete = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
-        if (v && menuDisabled.value) return
-        _menu.value = v
-      },
-    })
+    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled })
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
@@ -426,7 +419,7 @@ export const VAutocomplete = genericComponent<new <
 
         // watch for search watcher to trigger
         nextTick(() => {
-          menu.value = false
+          closeOnSelect()
           isPristine.value = true
         })
       }
