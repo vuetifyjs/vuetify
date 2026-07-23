@@ -169,6 +169,12 @@ export const VAutocomplete = genericComponent<new <
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
+    const selectedTitle = computed(() => {
+      return (props.multiple || hasSelectionSlot.value)
+        ? ''
+        : String(model.value.at(-1)?.props.title ?? '')
+    })
+
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
     const firstSelectableItem = computed(() => displayItems.value.find(x => x.type === 'item' && !x.props.disabled))
@@ -393,8 +399,6 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    const isSelecting = shallowRef(false)
-
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
       if (!item || item.props.disabled) return
@@ -432,24 +436,26 @@ export const VAutocomplete = genericComponent<new <
       if (val === oldVal) return
 
       if (val) {
-        isSelecting.value = true
-        search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
-
-        nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && search.value == null) model.value = []
         menu.value = false
         if (!isPristine.value && search.value) {
           _searchLock.value = search.value
         }
-        search.value = ''
+        search.value = selectedTitle.value
+        isPristine.value = true
         selectionIndex.value = -1
       }
     })
 
+    watch(selectedTitle, val => {
+      if (isFocused.value) return
+      search.value = val
+    }, { immediate: true })
+
     watch(search, val => {
-      if (!isFocused.value || isSelecting.value) return
+      if (!isFocused.value) return
 
       if (val) menu.value = true
 
@@ -495,6 +501,7 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          form=""
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
@@ -527,6 +534,16 @@ export const VAutocomplete = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                { selectedValues.value.map((value, i) => (
+                  <input
+                    key={ i }
+                    type="hidden"
+                    name={ props.name }
+                    value={ value }
+                    form={ props.form }
+                  />
+                ))}
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

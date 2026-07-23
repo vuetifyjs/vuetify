@@ -558,6 +558,7 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          form=""
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -589,6 +590,16 @@ export const VCombobox = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                { selectedValues.value.map((value, i) => (
+                  <input
+                    key={ i }
+                    type="hidden"
+                    name={ props.name }
+                    value={ value }
+                    form={ props.form }
+                  />
+                ))}
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

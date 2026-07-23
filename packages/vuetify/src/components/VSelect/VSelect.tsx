@@ -21,7 +21,6 @@ import { VHighlight } from '@/labs/VHighlight'
 import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useFocusGroups } from '../../composables/focusGroups'
-import { useAutocomplete } from '@/composables/autocomplete'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -70,6 +69,7 @@ export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
   eager: Boolean,
+  form: String,
   hideNoData: Boolean,
   hideSelected: Boolean,
   listProps: {
@@ -178,7 +178,6 @@ export const VSelect = genericComponent<new <
         : model.value.length
     })
     const form = useForm(props)
-    const autocomplete = useAutocomplete(props)
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
@@ -506,19 +505,15 @@ export const VSelect = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
-                <select
-                  hidden
-                  multiple={ props.multiple }
-                  name={ autocomplete.fieldName.value }
-                >
-                  { items.value.map(item => (
-                    <option
-                      key={ item.value }
-                      value={ item.value }
-                      selected={ selectedValues.value.includes(item.value) }
-                    />
-                  ))}
-                </select>
+                { selectedValues.value.map((value, i) => (
+                  <input
+                    key={ i }
+                    type="hidden"
+                    name={ props.name }
+                    value={ value }
+                    form={ props.form }
+                  />
+                ))}
 
                 <VMenu
                   id={ menuId.value }
