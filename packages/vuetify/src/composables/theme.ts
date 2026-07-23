@@ -36,7 +36,7 @@ import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { Color } from '@/util'
 
-type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
+export type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 export interface ThemeTransitionOptions {
   origin?: string
@@ -55,7 +55,7 @@ export type ThemeOptions = false | {
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
-interface InternalThemeOptions {
+export interface InternalThemeOptions {
   cspNonce?: string
   isDisabled: boolean
   defaultTheme: 'light' | 'dark' | 'system' | string & {}
@@ -69,13 +69,13 @@ interface InternalThemeOptions {
   utilities: boolean
 }
 
-interface VariationsOptions {
+export interface VariationsOptions {
   colors: string[]
   lighten: number
   darken: number
 }
 
-interface InternalThemeDefinition {
+export interface InternalThemeDefinition {
   dark: boolean
   colors: Colors
   variables: Record<string, string | number>
@@ -85,7 +85,7 @@ export interface Colors extends BaseColors, OnColors {
   [key: string]: Color
 }
 
-interface BaseColors {
+export interface BaseColors {
   background: Color
   surface: Color
   primary: Color
@@ -96,7 +96,7 @@ interface BaseColors {
   info: Color
 }
 
-interface OnColors {
+export interface OnColors {
   'on-background': Color
   'on-surface': Color
   'on-primary': Color
