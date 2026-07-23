@@ -142,6 +142,23 @@
 
   const items = [
     {
+      title: 'Announcing Vuetify0 1.0',
+      shortDescription: 'Vuetify0 is 1.0. The release candidate held — the frozen surface shipped through the validation window without a breaking change — and the package is now @vuetify/v0, no tag required. For a headless meta-framework, 1.0 is a promise about the foundation: nineteen composables, seventeen utilities, and a thirteen-component spine locked under semver for the whole 1.x line, enforced by CI, with the rest of the components promoting onto it individually. It ships 40 components, 71 composables, and 24 utilities — the logic layer a decade of Vuetify was built on, extracted, hardened, and frozen...',
+      date: 'July 22, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-v1'),
+    },
+    {
+      title: 'June 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/june-2026-update/june-hero.png',
+      shortDescription: 'June was a stabilization month. Vuetify 4.1.0 shipped on June 2, followed by two patch releases, with most of the work going into the new overlay location strategy that fixed VDialog placement bugs in fullscreen mode. A security incident briefly cost the community its Discord server — no packages, releases, or user data were touched — and out of it came pkg-diff, a fast in-browser tool for diffing NPM packages. Vuetify0 spent its first full month in beta with the public API frozen, refining what shipped on the road to v1.0...',
+      date: 'July 8, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/june-2026-update'),
+    },
+    {
       title: 'Announcing the Vuetify0 Release Candidate',
       shortDescription: 'Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features.',
       date: 'July 2, 2026',

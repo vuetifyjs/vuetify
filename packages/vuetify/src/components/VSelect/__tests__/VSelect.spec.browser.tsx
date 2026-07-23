@@ -962,7 +962,7 @@ describe('VSelect', () => {
     })
 
     it('should navigate freely between interactive elements with Tab', async () => {
-      const { element } = render(() => (
+      render(() => (
         <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
           {{
             'menu-header': () => (
@@ -980,7 +980,7 @@ describe('VSelect', () => {
         </VSelect>
       ))
 
-      await userEvent.click(element, { force: true })
+      await userEvent.keyboard('{Tab}{ArrowDown}')
       await commands.waitStable('.v-list')
 
       const menu = await screen.findByRole('listbox')
@@ -1012,7 +1012,7 @@ describe('VSelect', () => {
       </div>
     ))
 
-    await userEvent.click(screen.getByCSS('.v-select'))
+    await userEvent.keyboard('{Tab}{Tab}{ArrowDown}')
     await commands.waitStable('.v-list')
 
     await waitFor(() => {
@@ -1029,6 +1029,27 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
   })
 
+  it('should release focus on a single click outside on a non-focusable area', async () => {
+    render(() => (
+      <div>
+        <div data-testid="outside" style="height: 40px">Outside</div>
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+
+    await userEvent.click(screen.getByTestId('outside'))
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    // focus must not bounce back to the field
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
   it('should keep menu open and repair focus when the focused item is removed', async () => {
     const menu = ref(false)
     render(() => (
@@ -1038,7 +1059,7 @@ describe('VSelect', () => {
       />
     ))
 
-    await userEvent.click(screen.getByCSS('.v-select'))
+    await userEvent.keyboard('{Tab}{ArrowDown}')
     await commands.waitStable('.v-list')
     await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
     expect(menu.value).toBe(true)
@@ -1051,6 +1072,27 @@ describe('VSelect', () => {
     // Repaired: focus returns into the menu content and the menu stays open.
     expect(menu.value).toBe(true)
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('focus on open', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should not focus the first item when opened with a pointer', async () => {
+      render(() => (
+        <VSelect
+          items={ items }
+          transition="fade-transition" // custom transition
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+      await wait(400)
+
+      expect(document.activeElement?.closest('.v-list-item')).toBeNull()
+    })
   })
 
   it('should close its menu when clicking another field inside a dialog', async () => {

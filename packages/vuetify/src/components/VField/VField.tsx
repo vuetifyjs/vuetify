@@ -24,6 +24,7 @@ import {
   convertToUnit,
   EventProp,
   genericComponent,
+  getActiveElement,
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
@@ -238,7 +239,7 @@ export const VField = genericComponent<new <T>(
     })
 
     function onClick (e: MouseEvent) {
-      if (e.target !== document.activeElement) {
+      if (e.target !== getActiveElement()) {
         e.preventDefault()
       }
     }

@@ -22,6 +22,7 @@ import {
   callEvent,
   filterInputAttrs,
   genericComponent,
+  getActiveElement,
   humanReadableFileSize,
   omit,
   propsFactory,
@@ -137,7 +138,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
+      if (inputRef.value !== getActiveElement()) {
         inputRef.value?.focus()
       }
 
