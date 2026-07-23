@@ -3,7 +3,7 @@ import { VVirtualScroll } from '../VVirtualScroll'
 
 // Utilities
 import { render, screen, scroll, waitIdle } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { createRange } from '@/util'
 
 describe('VVirtualScroll', () => {
@@ -109,5 +109,54 @@ describe('VVirtualScroll', () => {
     await scroll({ top: 800, behavior: 'smooth' }, root)
     await scroll({ top: 200, behavior: 'smooth' }, root)
     await expect(result.findByText(16)).resolves.not.toBe(el)
+  })
+
+  it('scrollToIndex reaches the last item after repeated appends', async () => {
+    const items = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+    const scroller = ref<VVirtualScroll>()
+
+    render(() => (
+      <VVirtualScroll
+        ref={ scroller }
+        height="100"
+        itemHeight="25"
+        items={ items.value }
+      >
+        {{
+          default: ({ item }) => (
+            <div style="height: 25px">{ item }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll')
+
+    await waitIdle()
+
+    for (let i = 0; i < 4; i++) {
+      items.value.push(items.value.length + 1)
+      await nextTick()
+      scroller.value!.scrollToIndex(items.value.length)
+      await waitIdle()
+
+      const last = String(items.value.at(-1))
+      const maxScroll = root.scrollHeight - root.clientHeight
+
+      // bug when scrollTop === maxScroll - 25 (one item short of the end)
+      expect(root.scrollTop).toBeGreaterThanOrEqual(maxScroll - 1)
+
+      await expect.poll(() => (
+        screen.getAllByCSS('.v-virtual-scroll__item').map(el => el.textContent?.trim())
+      )).toContain(last)
+
+      const lastEl = screen.getAllByCSS('.v-virtual-scroll__item')
+        .find(el => el.textContent?.trim() === last)!
+      const rootBox = root.getBoundingClientRect()
+      const itemBox = lastEl.getBoundingClientRect()
+      // bug had last item sitting just below the fold (top === viewport bottom)
+      expect(itemBox.top).toBeLessThan(rootBox.bottom)
+      expect(itemBox.bottom).toBeLessThanOrEqual(rootBox.bottom + 1)
+    }
   })
 })
