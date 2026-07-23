@@ -139,11 +139,11 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   if (!target?._touchHandlers || uid === undefined) return
 
   const handlers = target._touchHandlers[uid]
-
-  keys(handlers).forEach(eventName => {
-    target.removeEventListener(eventName, handlers[eventName])
-  })
-
+  if (handlers) {
+    keys(handlers).forEach(eventName => {
+      target.removeEventListener(eventName, handlers[eventName])
+    })
+  }
   delete target._touchHandlers[uid]
 }
 
