@@ -15,8 +15,8 @@
     "reverseTransition": "The transition used when changing months into the past"
   },
   "events": {
-    "update:month": "Fired when the month changes.",
-    "update:year": "Fired when the year changes."
+    "update:month": "Emitted when the month changes.",
+    "update:year": "Emitted when the year changes."
   },
   "slots": {
     "day": "Slot for a day in the month."
