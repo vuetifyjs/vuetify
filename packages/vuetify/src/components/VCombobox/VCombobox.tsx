@@ -138,6 +138,7 @@ export const VCombobox = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
+    let focusLastOnOpen = false
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
@@ -256,7 +257,7 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value)
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -317,6 +318,12 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
+        menu.value = true
+      }
+
+      // Empty + ArrowUp: onAfterEnter jumps to true last item (#18383)
+      if (e.key === 'ArrowUp' && !model.value.length) {
+        focusLastOnOpen = true
         menu.value = true
       }
 
@@ -405,6 +412,10 @@ export const VCombobox = genericComponent<new <
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (focusLastOnOpen) {
+        focusLastOnOpen = false
+        listEvents.focusLastItem(displayItems.value.length)
       }
     }
     function onAfterLeave () {
@@ -519,6 +530,8 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, val => {
+      if (!val) focusLastOnOpen = false
+
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
