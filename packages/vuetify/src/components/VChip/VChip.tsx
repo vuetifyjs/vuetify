@@ -233,7 +233,7 @@ export const VChip = genericComponent<VChipSlots>()({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           tabindex={ isClickable.value ? 0 : undefined }
-          onClick={ onClick }
+          onClick={ (isClickable.value || props.onClick || props.onClickOnce) && onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={[isClickable.value && props.ripple, null]}
         >
