@@ -311,6 +311,10 @@
         "subfolder": "components"
       },
       {
+        "title": "editor",
+        "subfolder": "components"
+      },
+      {
         "title": "rules",
         "subfolder": "features"
       }
