@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VListItem.sass'
 
