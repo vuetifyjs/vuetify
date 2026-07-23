@@ -1,6 +1,9 @@
 // Styles
 import './VOverlay.sass'
 
+// Components
+import { VMenuSymbol } from '@/components/VMenu/shared'
+
 // Composables
 import { getStaticLocationClasses, makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
@@ -27,6 +30,7 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import {
   computed,
+  inject,
   mergeProps,
   onBeforeUnmount,
   ref,
@@ -199,11 +203,16 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       updateLocation,
     })
 
+    const menuParent = inject(VMenuSymbol, null)
+    const isMenu = vm.parent?.type?.name === 'VMenu'
+
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
 
       if (!props.persistent) isActive.value = false
       else animateClick()
+
+      if (!isMenu) menuParent?.closeParents(e)
     }
 
     function closeConditional (e: Event) {
