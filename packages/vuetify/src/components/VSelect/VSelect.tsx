@@ -384,28 +384,27 @@ export const VSelect = genericComponent<new <
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
     }
-    function getSelectedFocusableIndex () {
-      if (!model.value.length) return -1
-      const comparator = props.valueComparator || deepEqual
-      let focusableIndex = 0
-      for (const item of displayItems.value) {
-        const isSelected = model.value.some(s => comparator(s.value, item.value))
-        if (isSelected) return item.props.disabled ? -1 : focusableIndex
-        if (!item.props.disabled) focusableIndex++
-      }
-      return -1
+    function focusSelectedItem (options?: FocusOptions) {
+      // Virtual list only mounts a window — numeric index into DOM children is wrong
+      const selected = listRef.value?.$el?.querySelector?.('[aria-selected="true"]') as HTMLElement | null
+      if (!selected) return false
+      selected.focus(options)
+      return true
     }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
-      if (listRef.value && isFocused.value) {
-        const index = getSelectedFocusableIndex()
-        if (index >= 0) {
-          listRef.value.focus(index, { focusVisible: false, preventScroll: props.noAutoScroll })
-        } else if (openedByKeyboard) {
-          listRef.value.focus('first', { focusVisible: false, preventScroll: props.noAutoScroll })
-        }
+      if (!listRef.value || !isFocused.value) return
+
+      // VMenu re-dispatches ArrowUp/Down after open and already moved focus to next/prev
+      if (listRef.value.$el?.contains(document.activeElement)) return
+
+      const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
+      if (focusSelectedItem(opts)) return
+
+      if (openedByKeyboard) {
+        listRef.value.focus('first', opts)
       }
     }
     function onAfterLeave () {
