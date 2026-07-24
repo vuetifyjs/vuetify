@@ -76,6 +76,7 @@ export const makeVComboboxProps = propsFactory({
     default: true,
   },
   delimiters: Array as PropType<readonly string[]>,
+  toggleOnClick: Boolean,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps({ hideNoData: true, returnObject: true }),
@@ -284,7 +285,7 @@ export const VCombobox = genericComponent<new <
     function onMousedownControl () {
       if (menuDisabled.value) return
 
-      menu.value = true
+      menu.value = props.toggleOnClick ? !menu.value : true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
       if (menuDisabled.value) return
