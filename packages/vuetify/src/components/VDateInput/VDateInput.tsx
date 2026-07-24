@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, getCurrentInstance, omit, pick, propsFactory, toKebabCase, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -38,6 +38,9 @@ export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> &
     actions: VDateInputActionsSlot
     default: never
   }
+
+// picker props the user may bind one- or two-way, forwarded exactly as bound
+const pickerModels = ['month', 'year', 'viewMode'] as const
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: {
@@ -104,9 +107,13 @@ export const VDateInput = genericComponent<new <
     'update:focused': (val: boolean) => true,
     'update:modelValue': (val: unknown) => true,
     'update:menu': (val: boolean) => true,
+    'update:month': (val: number) => true,
+    'update:year': (val: number) => true,
+    'update:viewMode': (val: 'month' | 'months' | 'year') => true,
   },
 
   setup (props, { emit, slots }) {
+    const vm = getCurrentInstance('VDateInput')
     const { t } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
@@ -221,6 +228,14 @@ export const VDateInput = genericComponent<new <
       menu.value = false
     }
 
+    function hasProp (name: string) {
+      return [name, toKebabCase(name)].some(key => !!vm.vnode.props?.hasOwnProperty(key))
+    }
+
+    function hasListener (name: string) {
+      return [name, toKebabCase(name)].some(key => !!vm.vnode.props?.hasOwnProperty(`onUpdate:${key}`))
+    }
+
     function onUpdateDisplayModel (value: unknown) {
       if (value != null) return
 
@@ -281,9 +296,17 @@ export const VDateInput = genericComponent<new <
           'maxWidth',
           'minWidth',
           'width',
+          // an unbound prop must not reach the picker at all, or it counts as controlled
+          // and stops keeping view state of its own
+          ...pickerModels.filter(name => !hasProp(name)),
         ])),
         ...props.pickerProps,
       }
+      const datePickerListeners = Object.fromEntries(
+        pickerModels
+          .filter(name => hasListener(name))
+          .map(name => [`onUpdate:${name}`, (value: any) => emit(`update:${name}` as 'update:month', value)])
+      )
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
@@ -347,6 +370,7 @@ export const VDateInput = genericComponent<new <
                         return (
                           <VDatePicker
                             { ...datePickerProps }
+                            { ...datePickerListeners }
                             modelValue={ props.hideActions ? model.value : proxyModel.value }
                             onUpdate:modelValue={ value => onUpdateModel(value) }
                             onMousedown={ (e: MouseEvent) => e.preventDefault() }

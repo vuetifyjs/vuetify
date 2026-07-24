@@ -36,6 +36,84 @@ describe('VDateInput', () => {
     expect(formatter.format(model.value!)).toBe('Feb 20, 2022')
   })
 
+  describe('view-mode model', () => {
+    it('should open in the bound view and emit changes back', async () => {
+      const viewMode = ref<'month' | 'months' | 'year'>('year')
+      const { element } = render(() => (
+        <VDateInput v-model:viewMode={ viewMode.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByCSS('.v-date-picker-years')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('month-btn'))
+      expect(viewMode.value).toBe('months')
+
+      viewMode.value = 'month'
+      await expect.poll(() => screen.getByCSS('.v-date-picker-month')).toBeVisible()
+    })
+  })
+
+  describe('month and year models', () => {
+    it('should open on the bound month/year and emit navigation back', async () => {
+      const month = ref(11)
+      const year = ref(1999)
+      const { element } = render(() => (
+        <VDateInput v-model:month={ month.value } v-model:year={ year.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
+      expect(screen.getByCSS('[data-v-date="1999-12-01"]')).toBeInTheDocument()
+
+      await userEvent.click(screen.getByTestId('next-month'))
+
+      expect(month.value).toBe(0)
+      expect(year.value).toBe(2000)
+    })
+
+    it('should use a one-way month/year as the view, and follow later changes', async () => {
+      const year = ref(1999)
+      const { element } = render(() => (
+        <VDateInput month={ 11 } year={ year.value } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
+      expect(screen.getByTestId('month-btn')).toHaveTextContent('Dec')
+      expect(screen.getByTestId('year-btn')).toHaveTextContent('1999')
+
+      await userEvent.click(screen.getByTestId('next-year'))
+      expect(screen.getByTestId('year-btn')).toHaveTextContent('2000')
+
+      year.value = 2020
+      await expect.poll(() => screen.getByTestId('year-btn')).toHaveTextContent('2020')
+    })
+
+    it('should return to the selection when reopened without a binding', async () => {
+      const onYear = vi.fn()
+      const { element } = render(() => (
+        <VDateInput modelValue={ new Date(2028, 0, 1) } onUpdate:year={ onYear } />
+      ))
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByCSS('.v-picker')).toBeVisible()
+      expect(screen.getByTestId('year-btn')).toHaveTextContent('2028')
+
+      await userEvent.click(screen.getByTestId('next-year'))
+      await userEvent.click(screen.getByTestId('next-year'))
+      expect(screen.getByTestId('year-btn')).toHaveTextContent('2030')
+      expect(onYear).toHaveBeenCalledWith(2030)
+
+      await userEvent.keyboard('{Escape}')
+      await userEvent.click(document.body) // drop focus so the menu content unmounts
+      await expect.poll(() => document.querySelectorAll('.v-picker')).toHaveLength(0)
+
+      await userEvent.click(element)
+      await expect.poll(() => screen.getByTestId('year-btn')).toHaveTextContent('2028')
+    })
+  })
+
   describe('range selection with visible actions', () => {
     it('should not ignore the first click', async () => {
       const model = ref(['2026-06-05', '2026-06-15'])
