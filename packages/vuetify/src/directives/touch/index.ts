@@ -140,11 +140,19 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 
   const handlers = target._touchHandlers[uid]
 
+  // guard against double teardown: e.g. router & suspence racing
+  if (!handlers) return
+
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
 
   delete target._touchHandlers[uid]
+
+  if (!keys(target._touchHandlers).length) {
+    // only relevant if we keep `parent: boolean`
+    delete target._touchHandlers
+  }
 }
 
 export const Touch = {
