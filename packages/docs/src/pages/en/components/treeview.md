@@ -149,6 +149,12 @@ Here, a custom **toggle** slot is utilized to assign a specific color and varian
 
 <ExamplesExample file="v-treeview/slot-toggle" />
 
+#### Footer
+
+The **footer** slot renders below a group's children nodes. Here it adds a "Load more" row per group that shows a loading trigger and indicator while the data is being fetched.
+
+<ExamplesExample file="v-treeview/slot-footer" />
+
 ## Examples
 
 The following are a collection of examples that demonstrate more advanced and real world use of the `v-treeview` component.
