@@ -9,10 +9,10 @@
 @include tools.layer('components')
   .v-btn
     align-items: center
-    border-radius: $button-border-radius
+    border-radius: var(--v-btn-border-radius, #{$button-border-radius})
     display: inline-flex
     flex-direction: row
-    font-weight: $button-font-weight
+    font-weight: var(--v-btn-font-weight, #{$button-font-weight})
     justify-content: center
     letter-spacing: $button-text-letter-spacing
     line-height: $button-line-height
@@ -22,12 +22,15 @@
     text-decoration: none
     text-indent: $button-text-letter-spacing
     text-transform: $button-text-transform
-    transition-property: $button-transition-property
+    transition-property: $button-transition-property, border-radius
     transition-duration: 0.28s
     transition-timing-function: settings.$standard-easing
     user-select: none
     vertical-align: $button-vertical-align
     flex-shrink: 0
+
+    &:active
+      border-radius: var(--v-btn-border-radius-pressed, var(--v-btn-border-radius, #{$button-border-radius}))
 
     .v-locale--is-rtl &
       letter-spacing: 0
@@ -44,17 +47,9 @@
     @include tools.states('.v-btn__overlay')
     @include tools.variant($button-variants...)
 
-    @supports selector(:focus-visible)
-      &::after
-        pointer-events: none
-        border: 2px solid currentColor
-        border-radius: inherit
-        opacity: 0
-        transition: opacity .2s ease-in-out
-        @include tools.absolute(true)
-
-      &:focus-visible::after
-        opacity: calc(.25 * var(--v-theme-overlay-multiplier))
+    &:focus-visible
+      outline: $button-focus-outline-width solid $button-focus-outline-color
+      outline-offset: $button-focus-outline-offset
 
     &--icon
       border-radius: $button-icon-border-radius
@@ -138,6 +133,10 @@
       justify-content: center
       gap: $button-stacked-gap
 
+      @include tools.layer('overrides')
+        height: fit-content
+        padding-block: calc(var(--v-btn-padding-inline) / 2)
+
       .v-btn__content
         flex-direction: column
         line-height: $button-stacked-line-height
@@ -150,7 +149,7 @@
 
       @at-root
         @include button-sizes($button-stacked-sizes, true)
-        @include button-density('height', $button-stacked-density)
+        @include button-density('min-height', $button-stacked-density)
 
     &--slim
       padding: $button-slim-padding
@@ -200,13 +199,13 @@
     transition: $button-content-transition
 
   .v-btn__prepend
-    margin-inline: $button-margin-start $button-margin-end
+    margin-inline: $button-margin-start var(--v-btn-icon-gap, #{$button-margin-end})
 
     .v-btn--slim &
       margin-inline-start: 0
 
   .v-btn__append
-    margin-inline: $button-margin-end $button-margin-start
+    margin-inline: var(--v-btn-icon-gap, #{$button-margin-end}) $button-margin-start
 
     .v-btn--slim &
       margin-inline-end: 0

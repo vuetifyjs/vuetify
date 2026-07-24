@@ -7,6 +7,10 @@
 // if false, disabled buttons will be greyed out
 $button-colored-disabled: true !default;
 
+$button-focus-outline-color: rgb(var(--v-theme-surface-variant)) !default;
+$button-focus-outline-width: 2px !default;
+$button-focus-outline-offset: 2px !default;
+
 $button-background: rgb(var(--v-theme-surface)) !default;
 $button-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $button-banner-actions-padding: 0 8px !default; // @deprecated
