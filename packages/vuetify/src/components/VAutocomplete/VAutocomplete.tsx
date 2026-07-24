@@ -129,6 +129,7 @@ export const VAutocomplete = genericComponent<new <
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
+    let focusLastOnOpen = false
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -201,7 +202,7 @@ export const VAutocomplete = genericComponent<new <
     const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+    const listEvents = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value)
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -260,7 +261,28 @@ export const VAutocomplete = genericComponent<new <
         e.preventDefault()
       }
 
+      // Filtering: enter the filtered list from the ends, not from model selection
+      if (
+        menu.value &&
+        !isPristine.value &&
+        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
+        listRef.value?.$el &&
+        !listRef.value.$el.contains(document.activeElement as Node)
+      ) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if (e.key === 'ArrowDown') void listEvents.focusFirstItem()
+        else void listEvents.focusLastItem(displayItems.value.length)
+        return
+      }
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
+        menu.value = true
+      }
+
+      // Empty + ArrowUp: onAfterEnter jumps to true last item (#18383)
+      if (e.key === 'ArrowUp' && !model.value.length) {
+        focusLastOnOpen = true
         menu.value = true
       }
 
@@ -346,6 +368,10 @@ export const VAutocomplete = genericComponent<new <
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (focusLastOnOpen) {
+        focusLastOnOpen = false
+        listEvents.focusLastItem(displayItems.value.length)
       }
     }
     function onAfterLeave () {
@@ -454,9 +480,22 @@ export const VAutocomplete = genericComponent<new <
       if (val) menu.value = true
 
       isPristine.value = !val
+
+      // Filtered list is a new set — reset scroll and return focus to the field
+      // so the next arrow enters from the ends of the filtered results
+      if (menu.value) {
+        nextTick(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)
+          if (listRef.value?.$el?.contains(document.activeElement as Node)) {
+            vTextFieldRef.value?.focus()
+          }
+        })
+      }
     })
 
     watch(menu, val => {
+      if (!val) focusLastOnOpen = false
+
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
@@ -559,7 +598,7 @@ export const VAutocomplete = genericComponent<new <
                         key="autocomplete-list"
                         ref={ listRef }
                         filterable
-                        selected={ selectedValues.value }
+                        selected={ isPristine.value ? selectedValues.value : [] }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                         onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onFocusout={ onFocusout }
