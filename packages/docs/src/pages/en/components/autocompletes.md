@@ -72,6 +72,12 @@ When user is typing in the field to narrow the list of options, the input text i
 
 <ExamplesExample file="v-autocomplete/prop-filter-keys" />
 
+#### Ignore accents (i18n)
+
+The **ignore-accents** prop lets a plain query match names written using native language characters.
+
+<ExamplesExample file="v-autocomplete/prop-ignore-accents" />
+
 #### Subheaders and dividers
 
 The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.

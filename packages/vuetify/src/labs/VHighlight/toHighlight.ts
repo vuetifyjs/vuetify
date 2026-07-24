@@ -1,9 +1,10 @@
 // Utilities
 import { toValue } from 'vue'
-import { wrapInArray } from '@/util'
+import { findMatchRanges, wrapInArray } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter } from 'vue'
+import type { IgnoreAccents } from '@/util'
 
 export type MatchRange = readonly [number, number]
 
@@ -16,6 +17,7 @@ export interface ToHighlightOptions {
   matches?: MaybeRefOrGetter<readonly MatchRange[] | undefined>
   matchAll?: MaybeRefOrGetter<boolean>
   ignoreCase?: MaybeRefOrGetter<boolean>
+  ignoreAccents?: MaybeRefOrGetter<IgnoreAccents | undefined>
 }
 
 function mergeRanges (ranges: readonly MatchRange[]): MatchRange[] {
@@ -48,25 +50,18 @@ function chunkText (text: string, ranges: readonly MatchRange[]): HighlightChunk
   return chunks
 }
 
-function findRanges (text: string, query: string | string[], matchAll: boolean, ignoreCase: boolean): MatchRange[] {
+function findRanges (
+  text: string,
+  query: string | string[],
+  matchAll: boolean,
+  ignoreCase: boolean,
+  ignoreAccents: IgnoreAccents,
+): MatchRange[] {
   const terms = wrapInArray(query).filter(Boolean)
-  const haystack = ignoreCase ? text.toLocaleLowerCase() : text
   const spans: [number, number][] = []
 
   for (const term of terms) {
-    const needle = ignoreCase ? term.toLocaleLowerCase() : term
-    let index = haystack.indexOf(needle)
-
-    if (index !== -1) {
-      spans.push([index, index + term.length])
-      if (matchAll) {
-        index = haystack.indexOf(needle, index + term.length)
-        while (index !== -1) {
-          spans.push([index, index + term.length])
-          index = haystack.indexOf(needle, index + term.length)
-        }
-      }
-    }
+    spans.push(...findMatchRanges(text, term, { ignoreCase, ignoreAccents, all: matchAll }))
   }
 
   return mergeRanges(spans)
@@ -84,11 +79,12 @@ export function toHighlight (
   const _matches = toValue(options.matches)
   const matchAll = toValue(options.matchAll) ?? false
   const ignoreCase = toValue(options.ignoreCase) ?? false
+  const ignoreAccents = toValue(options.ignoreAccents) ?? false
 
   if (_matches?.length) return chunkText(_text, mergeRanges(_matches))
 
   if (_query) {
-    const ranges = findRanges(_text, _query, matchAll, ignoreCase)
+    const ranges = findRanges(_text, _query, matchAll, ignoreCase, ignoreAccents)
     return ranges.length > 0 ? chunkText(_text, ranges) : [{ text: _text, match: false }]
   }
 
