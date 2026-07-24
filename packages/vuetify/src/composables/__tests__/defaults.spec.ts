@@ -95,4 +95,36 @@ describe('defaults', () => {
 
     expect(wrapper.find('[data-color]').attributes('data-color')).toBe('primary')
   })
+
+  it('drops an ancestor contextual default from reset content', () => {
+    const vuetify = createVuetify({
+      defaults: {
+        Probe: { color: 'global' },
+        Container: {
+          Probe: { color: 'contextual' },
+        },
+      },
+    })
+
+    const Probe = defineComponent({
+      name: 'Probe',
+      props: { color: String },
+      setup (props) {
+        const _props = useDefaults(props, 'Probe')
+        return () => h('div', { 'data-color': _props.color || 'red' })
+      },
+    })
+
+    const Container = defineComponent({
+      name: 'Container',
+      setup (props) {
+        useDefaults(props, 'Container')
+        return () => h(VDefaultsProvider, { root: 'VMenu' }, () => h(Probe))
+      },
+    })
+
+    const wrapper = mount(Container, { global: { plugins: [vuetify] } })
+
+    expect(wrapper.find('[data-color]').attributes('data-color')).toBe('global')
+  })
 })

@@ -16,6 +16,7 @@ export type DefaultsInstance = undefined | {
 export type DefaultsOptions = Partial<DefaultsInstance>
 
 export const DefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults')
+export const RootDefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults:root')
 
 export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstance> {
   return ref(options)
@@ -39,6 +40,7 @@ export function provideDefaults (
   }
 ) {
   const injectedDefaults = injectDefaults()
+  const injectedRoot = inject(RootDefaultsSymbol, null)
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
@@ -60,6 +62,10 @@ export function provideDefaults (
       const len = Number(reset || Infinity)
 
       const rootDefaults = typeof root === 'string' ? properties.prev?.[root] : undefined
+
+      if (root && injectedRoot?.value) {
+        properties = injectedRoot.value
+      }
 
       for (let i = 0; i <= len; i++) {
         if (!properties || !('prev' in properties)) {
