@@ -23,6 +23,8 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: piscina@4.9.3
+  - piscina@4.9.3
 
 nodeLinker: hoisted
 
