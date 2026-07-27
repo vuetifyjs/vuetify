@@ -27,6 +27,7 @@
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`."
   },
   "events": {
+    "[`${string}:day`]": "Any event on the day button.",
     "update:month": "Emitted when the month changes.",
     "update:viewMode": "Emitted when the view mode changes.",
     "update:year": "Emitted when the year changes."
