@@ -1,4 +1,4 @@
-import { isFunction } from './guards'
+import { isFunction } from './v0'
 
 export const IN_BROWSER = typeof window !== 'undefined'
 export const SUPPORTS_INTERSECTION = IN_BROWSER && 'IntersectionObserver' in window

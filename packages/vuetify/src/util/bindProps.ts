@@ -1,5 +1,5 @@
 // Utilities
-import { isNullOrUndefined } from './guards'
+import { isNullOrUndefined } from './v0'
 import { eventName, isOn } from '@/util/helpers'
 
 const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()

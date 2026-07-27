@@ -1,5 +1,5 @@
 import { isPrimitive } from './helpers'
-import { isBoolean } from './guards'
+import { isBoolean } from './v0'
 
 function updateRecursionCache (a: any, b: any, cache: WeakMap<any, any>, result: boolean) {
   if (!cache || isPrimitive(a) || isPrimitive(b)) return

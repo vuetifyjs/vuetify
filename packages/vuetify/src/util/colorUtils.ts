@@ -6,7 +6,7 @@ import * as CIELAB from '@/util/color/transformCIELAB'
 import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
-import { isNullOrUndefined, isNumber, isString, isUndefined } from './guards'
+import { isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
 import type { Colors } from '@/composables/theme'
 
 export type XYZ = [number, number, number]

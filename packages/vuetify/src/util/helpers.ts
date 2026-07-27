@@ -31,7 +31,7 @@ import type {
   VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
-import { isBoolean, isFunction, isNull, isNullOrUndefined, isNumber, isString, isUndefined } from './guards'
+import { isBoolean, isFunction, isNull, isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -91,10 +91,6 @@ export function getPropertyFromItem (
   const value = property(item, fallback)
 
   return typeof value === 'undefined' ? fallback : value
-}
-
-export function createRange (length: number, start = 0): number[] {
-  return Array.from({ length }, (v, k) => start + k)
 }
 
 export function getZIndex (el?: Element | null): number {

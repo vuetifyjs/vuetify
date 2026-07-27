@@ -1,4 +1,4 @@
-import { isFunction } from './guards'
+import { isFunction } from './v0'
 
 /**
  * Returns:

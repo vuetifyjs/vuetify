@@ -1,7 +1,7 @@
 // Types
 import type { IfAny } from '@vue/shared' // eslint-disable-line vue/prefer-import-from-vue
 import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
-import { isObject } from './guards'
+import { isObject } from './v0'
 
 /**
  * Creates a factory function for props definitions.
