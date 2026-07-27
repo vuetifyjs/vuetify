@@ -11,6 +11,9 @@
   "slots": {
     "item": "Define a custom item appearance. The root element of this slot must be a **v-list-item** with `v-bind=\"props\"` applied. `props` includes everything required for the default select list behaviour - including title, value, click handlers, virtual scrolling, and anything else that has been added with `item-props`."
   },
+  "events": {
+    "item:created": "Emitted when a value is committed that does not match any existing item (free-text create). Also emits **item:added**."
+  },
   "exposed": {
     "selectionIndex": "The index of the currently selected item."
   }

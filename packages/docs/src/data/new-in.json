@@ -24,6 +24,10 @@
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
     },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
+    },
     "examples": {
       "slot-menu-footer": "3.12.0",
       "misc-new-tab": "3.3.0"
@@ -125,6 +129,11 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0",
+      "item:created": "4.2.0"
     },
     "examples": {
       "slot-menu-header": "3.12.0"
@@ -447,6 +456,10 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
     },
     "examples": {
       "prop-list-props": "3.5.0",
