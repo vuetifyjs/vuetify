@@ -66,7 +66,9 @@ export function useDirectiveComponent (
 function mountComponent (component: ConcreteComponent, props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)) {
   return function (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
     const _props = typeof props === 'function' ? props(binding) : props
-    const text = binding.value?.text ?? binding.value ?? _props?.text
+    const text = isObject(binding.value) ? binding.value.text
+      : typeof binding.value === 'string' ? binding.value
+      : _props?.text
     const value = isObject(binding.value) ? binding.value : {}
 
     // Get the children from the props or directive value, or the element's children
