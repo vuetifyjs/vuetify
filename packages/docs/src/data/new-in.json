@@ -22,6 +22,10 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "3.13.0",
+      "item:removed": "3.13.0"
     }
   },
   "VAvatar": {
@@ -83,6 +87,11 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "3.13.0",
+      "item:removed": "3.13.0",
+      "item:created": "3.13.0"
     }
   },
   "VConfirmEdit": {
@@ -289,6 +298,10 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "3.13.0",
+      "item:removed": "3.13.0"
     }
   },
   "VSkeletonLoader": {
