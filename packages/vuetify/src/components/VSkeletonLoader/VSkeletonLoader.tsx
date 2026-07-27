@@ -10,7 +10,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { consoleWarn, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -45,11 +45,12 @@ export const rootTypes = {
   sentences: 'text@2',
   subtitle: 'text',
   table: 'table-heading, table-thead, table-tbody, table-tfoot',
-  'table-heading': 'chip, text',
+  'table-heading': 'heading, text',
   'table-thead': 'heading@6',
   'table-tbody': 'table-row-divider@6',
   'table-row-divider': 'table-row, divider',
-  'table-row': 'text@6',
+  'table-row': 'table-cell@6',
+  'table-cell': 'text',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
 } as const
@@ -67,43 +68,47 @@ function genBone (type: string, children: VSkeletonBones = []) {
   )
 }
 
-function genBones (bone: string) {
+function genBones (bone: string, types: Record<string, string>) {
   // e.g. 'text@3'
-  const [type, length] = bone.split('@') as [VSkeletonLoaderType, number]
+  const [type, length] = bone.split('@') as [string, number]
 
   // Generate a length array based upon
   // value after @ in the bone string
-  return Array.from({ length }).map(() => genStructure(type))
+  return Array.from({ length }).map(() => genStructure(type, types))
 }
 
-function genStructure (type?: string): VSkeletonBones {
+function genStructure (type: string | undefined, types: Record<string, string>): VSkeletonBones {
+  if (!type) return []
+
+  // Array of values - e.g. 'heading, paragraph, text@2'
+  if (type.includes(',')) return mapBones(type, types)
+  // Array of values - e.g. 'paragraph@4'
+  if (type.includes('@')) return genBones(type, types)
+  // Must stay below the ',' and '@' branches - neither is ever a key
+  if (!(type in types)) {
+    consoleWarn(`Unknown skeleton type "${type}", register it with the types prop`)
+    return [genBone(type)]
+  }
+
+  const bone = types[type]
   let children: VSkeletonBones = []
-
-  if (!type) return children
-
-  // TODO: figure out a better way to type this
-  const bone = (rootTypes as Record<string, string>)[type]
 
   // End of recursion, do nothing
   /* eslint-disable-next-line no-empty, brace-style */
   if (type === bone) {}
-  // Array of values - e.g. 'heading, paragraph, text@2'
-  else if (type.includes(',')) return mapBones(type)
-  // Array of values - e.g. 'paragraph@4'
-  else if (type.includes('@')) return genBones(type)
   // Array of values - e.g. 'card@2'
-  else if (bone.includes(',')) children = mapBones(bone)
+  else if (bone.includes(',')) children = mapBones(bone, types)
   // Array of values - e.g. 'list-item@2'
-  else if (bone.includes('@')) children = genBones(bone)
+  else if (bone.includes('@')) children = genBones(bone, types)
   // Single value - e.g. 'card-heading'
-  else if (bone) children.push(genStructure(bone))
+  else children.push(genStructure(bone, types))
 
   return [genBone(type, children)]
 }
 
-function mapBones (bones: string) {
+function mapBones (bones: string, types: Record<string, string>) {
   // Remove spaces and return array of structures
-  return bones.replace(/\s/g, '').split(',').map(genStructure)
+  return bones.replace(/\s/g, '').split(',').map(bone => genStructure(bone, types))
 }
 
 export const makeVSkeletonLoaderProps = propsFactory({
@@ -121,6 +126,7 @@ export const makeVSkeletonLoaderProps = propsFactory({
     >,
     default: 'ossein',
   },
+  types: Object as PropType<Record<string, string>>,
 
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -141,7 +147,10 @@ export const VSkeletonLoader = genericComponent()({
     const { themeClasses } = provideTheme(props)
     const { t } = useLocale()
 
-    const items = computed(() => genStructure(wrapInArray(props.type).join(',')))
+    const items = computed(() => genStructure(
+      wrapInArray(props.type).join(','),
+      { ...rootTypes, ...props.types },
+    ))
 
     useRender(() => {
       const isLoading = !slots.default || props.loading
