@@ -104,6 +104,22 @@ The following built-in types are available:
 | **table-tfoot** | text@2, avatar@2 |
 | **text** | text |
 
+::: info
+
+Since v4.2.0: a type name that is neither built-in nor registered renders an empty bone and logs a warning (no longer throws an error)
+
+:::
+
+#### Types
+
+The **types** property registers additional variants on top of the built-in ones. A custom type can reference built-in types or custom ones.
+
+<ExamplesExample file="v-skeleton-loader/prop-types" />
+
+Redefine built-in types to apply for quick customization. The **table** type is 6 × 6 by default and it is fairy staightforward to change it into 3 × 4.
+
+<ExamplesExample file="v-skeleton-loader/prop-types-table" />
+
 #### Loading
 
 A skeleton loader is considered to be in a loading state if one of the following conditions are met:

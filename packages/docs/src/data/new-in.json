@@ -454,6 +454,14 @@
       "indeterminateIcon": "4.1.0"
     }
   },
+  "VSkeletonLoader": {
+    "props": {
+      "types": "4.2.0"
+    },
+    "examples": {
+      "prop-types": "4.2.0"
+    }
+  },
   "VSlider": {
     "events": {
       "start": "3.2.0",
