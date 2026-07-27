@@ -1,5 +1,6 @@
 @use 'sass:selector'
 @use '../../styles/tools'
+@use '../VBtn/mixins' as *
 @use '../VBtn/variables' as *
 @use './variables' as *
 
@@ -31,6 +32,12 @@
 
     &--tile
       @include tools.rounded($btn-group-tile-border-radius)
+
+    &--has-size
+      height: auto !important
+
+      .v-btn--icon
+        @include button-density(('width', 'height'), $button-density)
 
     &--horizontal
       .v-btn
