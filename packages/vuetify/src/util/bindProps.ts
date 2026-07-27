@@ -1,4 +1,5 @@
 // Utilities
+import { isNullOrUndefined } from './guards'
 import { eventName, isOn } from '@/util/helpers'
 
 const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()
@@ -8,7 +9,7 @@ export function bindProps (el: HTMLElement, props: Record<string, any>) {
     if (isOn(k)) {
       const name = eventName(k)
       const handler = handlers.get(el)
-      if (props[k] == null) {
+      if (isNullOrUndefined(props[k])) {
         handler?.forEach(v => {
           const [n, fn] = v
           if (n === name) {
@@ -23,7 +24,7 @@ export function bindProps (el: HTMLElement, props: Record<string, any>) {
         if (!handlers.has(el)) handlers.set(el, _handler)
       }
     } else {
-      if (props[k] == null) {
+      if (isNullOrUndefined(props[k])) {
         el.removeAttribute(k)
       } else {
         el.setAttribute(k, props[k])

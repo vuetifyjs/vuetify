@@ -1,6 +1,6 @@
 // Utilities
 import { toValue } from 'vue'
-import { focusableChildren, getActiveElement } from '@/util'
+import { focusableChildren, getActiveElement, isNull } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -36,7 +36,7 @@ export function useFocusGroups ({ groups, onLeave }: {
 
     const nextIndex = nextFocusGroup(children, currentGroupIndex, direction, target)
 
-    if (nextIndex === null) {
+    if (isNull(nextIndex)) {
       const originGroup = groups[currentGroupIndex]
       const origin = children[currentGroupIndex]
       const isListGroup = originGroup.type === 'list'

@@ -3,7 +3,17 @@ import { useProxiedModel } from './proxiedModel'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
-import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
+import {
+  consoleWarn,
+  deepEqual,
+  findChildrenWithProvide,
+  getCurrentInstance,
+  isNull,
+  isNullOrUndefined,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -174,9 +184,9 @@ export function useGroup (
     'modelValue',
     [],
     v => {
-      if (v === undefined) return []
+      if (isUndefined(v)) return []
 
-      return getIds(items, v === null ? [null] : wrapInArray(v))
+      return getIds(items, isNull(v) ? [null] : wrapInArray(v))
     },
     v => {
       const arr = getValues(items, v)
@@ -195,7 +205,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (unref(unwrapped.value) === undefined) {
+    if (isUndefined(unref(unwrapped.value))) {
       unwrapped.value = index
       unwrapped.useIndexAsValue = true
     }
@@ -268,7 +278,7 @@ export function useGroup (
       // cause max limit to be exceeded
       if (
         !isSelected &&
-        props.max != null &&
+        !isNullOrUndefined(props.max) &&
         internalValue.length + 1 > props.max
       ) return
 
@@ -344,7 +354,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
     const item = items.find(item => deepEqual(value, item.value))
     const itemByIndex = items[value]
 
-    if (item?.value !== undefined) {
+    if (!isUndefined(item?.value)) {
       ids.push(item.id)
     } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
@@ -361,7 +371,7 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
     const itemIndex = items.findIndex(item => item.id === id)
     if (~itemIndex) {
       const item = items[itemIndex]
-      values.push(item.value !== undefined ? item.value : itemIndex)
+      values.push(!isUndefined(item.value) ? item.value : itemIndex)
     }
   })
 

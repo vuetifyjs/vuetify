@@ -1,5 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { isNullOrUndefined, isString, isUndefined } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
@@ -52,7 +53,7 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    if (providedDefaults.value == null && !(scoped || reset || root)) return injectedDefaults.value
+    if (isNullOrUndefined(providedDefaults.value) && !(scoped || reset || root)) return injectedDefaults.value
 
     let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
@@ -61,7 +62,7 @@ export function provideDefaults (
     if (reset || root) {
       const len = Number(reset || Infinity)
 
-      const rootDefaults = typeof root === 'string' ? properties.prev?.[root] : undefined
+      const rootDefaults = isString(root) ? properties.prev?.[root] : undefined
 
       if (root && injectedRoot?.value) {
         properties = injectedRoot.value
@@ -83,7 +84,7 @@ export function provideDefaults (
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => !isUndefined(v))
       : properties
   }) as ComputedRef<DefaultsInstance>
 
@@ -114,13 +115,13 @@ export function internalUseDefaults (
     get (target, prop: string) {
       const propValue = Reflect.get(target, prop)
       if (prop === 'class' || prop === 'style') {
-        return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
+        return [componentDefaults.value?.[prop], propValue].filter(v => !isNullOrUndefined(v))
       }
       if (propIsDefined(vm.vnode, prop)) return propValue
       const _componentDefault = componentDefaults.value?.[prop]
-      if (_componentDefault !== undefined) return _componentDefault
+      if (!isUndefined(_componentDefault)) return _componentDefault
       const _globalDefault = defaults.value?.global?.[prop]
-      if (_globalDefault !== undefined) return _globalDefault
+      if (!isUndefined(_globalDefault)) return _globalDefault
       return propValue
     },
   })

@@ -1,6 +1,6 @@
 // Utilities
 import { isRef, toRef } from 'vue'
-import { propsFactory } from '@/util'
+import { isNullOrUndefined, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -30,10 +30,10 @@ export function useElevation (props: ElevationProps | Ref<number | string | unde
   const elevationClasses = toRef(() => {
     const elevation = isRef(props) ? props.value : props.elevation
     const hoverElevation = isRef(props) ? null : props.hoverElevation
-    if (elevation == null) return []
+    if (isNullOrUndefined(elevation)) return []
     return [
-      ...elevation == null ? [] : [`elevation-${parseInt(elevation)}`],
-      ...hoverElevation == null ? [] : [`hover-elevation-${parseInt(hoverElevation)}`],
+      ...isNullOrUndefined(elevation) ? [] : [`elevation-${parseInt(elevation)}`],
+      ...isNullOrUndefined(hoverElevation) ? [] : [`hover-elevation-${parseInt(hoverElevation)}`],
     ]
   })
 

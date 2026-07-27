@@ -1,3 +1,5 @@
+import { isFunction } from './guards'
+
 /**
  * Returns:
  *  - 'null' if the node is not attached to the DOM
@@ -5,7 +7,7 @@
  */
 export function attachedRoot (node: Node): null | HTMLDocument | ShadowRoot {
   /* istanbul ignore next */
-  if (typeof node.getRootNode !== 'function') {
+  if (!isFunction(node.getRootNode)) {
     // Shadow DOM not supported (IE11), lets find the root of this node
     while (node.parentNode) node = node.parentNode
 

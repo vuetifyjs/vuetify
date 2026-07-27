@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
+import { getCurrentInstanceName, isNull, isNumber, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -181,7 +181,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
       : lg ? 'lg'
       : xl ? 'xl'
       : 'xxl'
-    const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
+    const breakpointValue = isNumber(mobileBreakpoint) ? mobileBreakpoint : thresholds[mobileBreakpoint]
     const mobile = width.value < breakpointValue
 
     state.xs = xs
@@ -237,11 +237,11 @@ export function useDisplay (
   const mobile = computed(() => {
     if (props.mobile) {
       return true
-    } else if (typeof props.mobileBreakpoint === 'number') {
+    } else if (isNumber(props.mobileBreakpoint)) {
       return display.width.value < props.mobileBreakpoint
     } else if (props.mobileBreakpoint) {
       return display.width.value < display.thresholds.value[props.mobileBreakpoint]
-    } else if (props.mobile === null) {
+    } else if (isNull(props.mobile)) {
       return display.mobile.value
     } else {
       return false

@@ -20,6 +20,8 @@ import {
   getLuma,
   hasLightForeground,
   IN_BROWSER,
+  isNullOrUndefined,
+  isString,
   lighten,
   mergeDeep,
   parseColor,
@@ -260,15 +262,15 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
     const rgb = parseColor(value)
-    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (rgb.a == null ? '' : `,${rgb.a}`))
+    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (isNullOrUndefined(rgb.a) ? '' : `,${rgb.a}`))
     if (!key.startsWith('on-')) {
       variables.push(`--${prefix}theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
   }
 
   for (const [key, value] of Object.entries(theme.variables)) {
-    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (color.a == null ? '' : `, ${color.a}`) : undefined
+    const color = isString(value) && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (isNullOrUndefined(color.a) ? '' : `, ${color.a}`) : undefined
     variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 

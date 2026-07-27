@@ -1,6 +1,7 @@
 // Types
 import type { IfAny } from '@vue/shared' // eslint-disable-line vue/prefer-import-from-vue
 import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
+import { isObject } from './guards'
 
 /**
  * Creates a factory function for props definitions.
@@ -35,7 +36,7 @@ export function propsFactory<
     defaults?: Defaults
   ): AppendDefault<PropsOptions, Defaults> => {
     return Object.keys(props).reduce<any>((obj, prop) => {
-      const isObjectDefinition = typeof props[prop] === 'object' && props[prop] != null && !Array.isArray(props[prop])
+      const isObjectDefinition = isObject(props[prop])
       const definition = isObjectDefinition ? props[prop] : { type: props[prop] }
 
       if (defaults && prop in defaults) {

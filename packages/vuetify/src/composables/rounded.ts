@@ -1,6 +1,6 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, isString, propsFactory } from '@/util'
 
 // Types
 import type { CSSProperties, Ref } from 'vue'
@@ -39,7 +39,7 @@ export function useRounded (
       classes.push('rounded-0')
     } else if (rounded === true || rounded === '') {
       classes.push(`${name}--rounded`)
-    } else if (rounded === 0 || (typeof rounded === 'string' && (rounded === '0' || !/[0-9%]/.test(rounded) || /\d*xl$/.test(rounded)))) {
+    } else if (rounded === 0 || (isString(rounded) && (rounded === '0' || !/[0-9%]/.test(rounded) || /\d*xl$/.test(rounded)))) {
       for (const value of String(rounded).split(' ')) {
         classes.push(`rounded-${value}`)
       }

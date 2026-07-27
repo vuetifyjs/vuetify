@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { isObject, propsFactory } from '@/util'
+import { isNullOrUndefined, isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -69,7 +69,7 @@ const defaultTokens: Record<string, MaskItem> = {
 
 export function useMask (props: MaskProps) {
   const mask = computed(() => {
-    if (typeof props.mask === 'string') {
+    if (isString(props.mask)) {
       if (props.mask in presets) return presets[props.mask]
       return props.mask
     }
@@ -87,7 +87,7 @@ export function useMask (props: MaskProps) {
   }
 
   function maskValidates (mask: string, char: string): boolean {
-    if (char == null || !isMask(mask)) return false
+    if (isNullOrUndefined(char) || !isMask(mask)) return false
     const item = tokens.value[mask]
     if (item.pattern) return item.pattern.test(char)
     return item.test(char)
@@ -101,7 +101,7 @@ export function useMask (props: MaskProps) {
   function maskText (text: string | null | undefined): string {
     const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
-    if (trimmedText == null) return ''
+    if (isNullOrUndefined(trimmedText)) return ''
 
     if (!mask.value.length || !trimmedText.length) return trimmedText
 
@@ -142,7 +142,7 @@ export function useMask (props: MaskProps) {
   }
 
   function unmaskText (text: string | null): string | null {
-    if (text == null) return null
+    if (isNullOrUndefined(text)) return null
 
     if (!mask.value.length || !text.length) return text
 
@@ -160,7 +160,7 @@ export function useMask (props: MaskProps) {
   }
 
   function getUnmaskMap (text: string | null): boolean[] {
-    if (text == null || !mask.value.length || !text.length) return []
+    if (isNullOrUndefined(text) || !mask.value.length || !text.length) return []
 
     let textIndex = 0
     let maskIndex = 0
@@ -170,9 +170,9 @@ export function useMask (props: MaskProps) {
       const mchar = mask.value[maskIndex]
       const tchar = text[textIndex]
 
-      if (tchar == null) break
+      if (isNullOrUndefined(tchar)) break
 
-      if (mchar == null) {
+      if (isNullOrUndefined(mchar)) {
         result[textIndex] = false
         textIndex++
         continue
@@ -197,7 +197,7 @@ export function useMask (props: MaskProps) {
         // input doesn't match mask, skip forward until it does
         while (true) {
           const mchar = mask.value[maskIndex++]
-          if (mchar == null || maskValidates(mchar, tchar)) break
+          if (isNullOrUndefined(mchar) || maskValidates(mchar, tchar)) break
         }
         continue
       }

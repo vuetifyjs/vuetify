@@ -3,7 +3,7 @@ import { useDate } from '@/composables/date/date'
 
 // Utilities
 import { toRef } from 'vue'
-import { consoleWarn, propsFactory } from '@/util'
+import { consoleWarn, isString, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -27,7 +27,7 @@ class DateFormatSpec {
   }
 
   static canBeParsed (v: any) {
-    if (typeof v !== 'string') return false
+    if (!isString(v)) return false
     const lowercase = v.toLowerCase()
     return ['y', 'm', 'd'].every(sign => lowercase.includes(sign)) &&
       ['/', '-', '.'].some(sign => v.includes(sign))
