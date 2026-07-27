@@ -165,39 +165,63 @@
       .v-skeleton-loader__text
         margin: 0
 
-    &__table-thead
+    &__table-heading
+      align-items: center
+      display: flex
       justify-content: space-between
 
-      .v-skeleton-loader__heading
+      > .v-skeleton-loader__heading
+        max-width: 15%
+        height: 32px
+
+      > .v-skeleton-loader__text
+        max-width: 40%
+
+    &__table-thead
+      align-items: baseline
+      display: grid
+      grid-auto-columns: 1fr
+      grid-auto-flow: column
+      margin: $skeleton-loader-table-row-margin
+
+      > .v-skeleton-loader__heading
         margin-top: $skeleton-loader-gutter
-        max-width: $skeleton-loader-gutter
+        margin-inline: $skeleton-loader-table-row-text-margin
+        max-width: $skeleton-loader-table-head-cell-max-width
 
     &__table-tfoot
+      justify-content: flex-end
       flex-wrap: nowrap
+      min-height: $skeleton-loader-table-tfoot-min-height
+
+      > .v-skeleton-loader__avatar
+        min-height: $skeleton-loader-table-tfoot-avatar-size
+        min-width: $skeleton-loader-table-tfoot-avatar-size
+        height: $skeleton-loader-table-tfoot-avatar-size
+        width: $skeleton-loader-table-tfoot-avatar-size
+        flex-grow: 0
 
       > .v-skeleton-loader__text.v-skeleton-loader__bone
         margin-top: $skeleton-loader-gutter
 
-    &__table-row
-      align-items: baseline
-      margin: $skeleton-loader-table-row-margin
-      justify-content: space-evenly
-      flex-wrap: nowrap
+        &:nth-child(1)
+          max-width: 170px
 
-      > .v-skeleton-loader__text.v-skeleton-loader__bone
-        margin-inline: $skeleton-loader-table-row-text-margin
+        &:nth-child(2)
+          max-width: 64px
+
+    &__table-row
+      display: grid
+      grid-auto-columns: 1fr
+      grid-auto-flow: column
+      margin: $skeleton-loader-table-row-margin
 
       + .v-skeleton-loader__divider
         margin: 0 $skeleton-loader-gutter
 
     &__table-cell
-      align-items: center
-      display: flex
-      height: $skeleton-loader-table-cell-height
-      width: $skeleton-loader-table-cell-width
-
-      .v-skeleton-loader__text
-        margin-bottom: 0
+      > .v-skeleton-loader__text
+        margin-inline: $skeleton-loader-table-row-text-margin
 
     &__subtitle
       max-width: $skeleton-loader-subtitle-max-width
