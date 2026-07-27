@@ -148,9 +148,11 @@ export const VSelect = genericComponent<new <
     'update:modelValue': (value: any) => true,
     'update:menu': (ue: boolean) => true,
     'update:search': (value: string) => true,
+    'item:added': (item: ListItem) => true,
+    'item:removed': (item: ListItem) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -280,6 +282,7 @@ export const VSelect = genericComponent<new <
 
       if (props.clearable && e.key === 'Backspace') {
         e.preventDefault()
+        for (const item of model.value) emit('item:removed', item)
         model.value = []
         onClear(e)
         return
@@ -343,7 +346,7 @@ export const VSelect = genericComponent<new <
       keyboardLookupIndex = index
       listRef.value?.focus(index)
       if (!props.multiple) {
-        model.value = [item]
+        select(item, true)
       }
     }
 
@@ -351,20 +354,37 @@ export const VSelect = genericComponent<new <
     function select (item: ListItem, set: boolean | null = true) {
       if (item.props.disabled) return
 
+      const comparator = props.valueComparator || deepEqual
+
       if (props.multiple) {
-        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
+        const index = model.value.findIndex(selection => comparator(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
-          value.splice(index, 1)
+          const [removed] = value.splice(index, 1)
+          if (!add) emit('item:removed', removed) // skip if only reordered
           model.value = value
         } else if (add) {
+          emit('item:added', item)
           model.value = [...model.value, item]
         }
       } else {
         const add = set !== false
-        model.value = add ? [item] : []
+        const old = model.value[0]
+
+        if (add) {
+          if (old && !comparator(old.value, item.value)) {
+            emit('item:removed', old)
+            emit('item:added', item)
+          } else if (!old) {
+            emit('item:added', item)
+          }
+          model.value = [item]
+        } else {
+          if (old) emit('item:removed', old)
+          model.value = []
+        }
 
         nextTick(() => {
           menu.value = false
@@ -427,8 +447,10 @@ export const VSelect = genericComponent<new <
       }
     }
     function onModelUpdate (v: any) {
-      if (v == null) model.value = []
-      else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+      if (v == null) {
+        for (const item of model.value) emit('item:removed', item)
+        model.value = []
+      } else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
         const item = items.value.find(item => item.title === v)
         if (item) {
           select(item)

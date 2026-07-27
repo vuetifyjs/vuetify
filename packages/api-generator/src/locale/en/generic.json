@@ -103,6 +103,8 @@
     "click:prependInner": "Emitted when prepended inner icon is clicked.",
     "input": "The updated bound model.",
     "group:selected": "Event that is emitted when an item is selected within a group.",
+    "item:added": "Emitted when an item is added to the model.",
+    "item:removed": "Emitted when an item is removed from the model.",
     "rejected": "Emitted when some of the files from user input, drop or folder selection did not pass through `strict-accept` filter.",
     "update:focused": "Event that is emitted when the component's focus state changes.",
     "update:menu": "Event that is emitted when the component's menu state changes.",

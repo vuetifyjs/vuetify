@@ -921,5 +921,75 @@ describe('VCombobox', () => {
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
   })
 
+  describe('selection events for multiple', () => {
+    it('should emit item:created for free-text values', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('Brand new{Enter}')
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).toHaveBeenCalledTimes(1)
+      expect(created.mock.calls[0][0]).toMatchObject({ title: 'Brand new', value: 'Brand new', raw: 'Brand new' })
+      expect(model.value).toEqual(['Brand new'])
+    })
+
+    it('should not emit item:created when selecting an existing item', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+      await userEvent.click(screen.getAllByRole('option')[0])
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).not.toHaveBeenCalled()
+    })
+
+    it('should emit item:removed when closing a chip', async () => {
+      const removed = vi.fn()
+
+      render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          modelValue={['Item 1', 'Item 2']}
+          multiple
+          chips
+          closableChips
+          onItem:removed={ removed }
+        />
+      ))
+
+      await userEvent.click(screen.getAllByTestId('close-chip')[0])
+      expect(removed).toHaveBeenCalledTimes(1)
+      expect(removed.mock.calls[0][0]).toMatchObject({ title: 'Item 1', value: 'Item 1' })
+    })
+  })
+
   showcase({ stories })
 })
