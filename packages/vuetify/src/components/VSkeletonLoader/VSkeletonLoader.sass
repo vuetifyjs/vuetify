@@ -139,6 +139,30 @@
       .v-skeleton-loader__text
         flex: 1 1 auto
 
+    &__chip-group
+      flex-wrap: wrap
+      padding: $skeleton-loader-gutter
+      gap: $skeleton-loader-chip-group-gap
+
+      > .v-skeleton-loader__chip
+        flex: 0 0 auto
+        margin: 0
+
+        &:nth-child(5n + 1)
+          min-width: 60px
+
+        &:nth-child(5n + 2)
+          min-width: 160px
+
+        &:nth-child(5n + 3)
+          min-width: 85px
+
+        &:nth-child(5n + 4)
+          min-width: 55px
+
+        &:nth-child(5n + 5)
+          min-width: 110px
+
     &__divider
       border-radius: $skeleton-loader-divider-border-radius
       height: $skeleton-loader-divider-height
