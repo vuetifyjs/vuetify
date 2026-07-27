@@ -293,10 +293,10 @@
   },
   "VSkeletonLoader": {
     "props": {
-      "types": "4.2.0"
+      "types": "3.13.0"
     },
     "examples": {
-      "prop-types": "4.2.0"
+      "prop-types": "3.13.0"
     }
   },
   "VSlider": {

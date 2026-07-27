@@ -108,7 +108,7 @@ The following built-in types are available:
 
 ::: info
 
-Since v4.2.0: a type name that is neither built-in nor registered renders an empty bone and logs a warning (no longer throws an error)
+Since v3.13.0: a type name that is neither built-in nor registered renders an empty bone and logs a warning (no longer throws an error)
 
 :::
 
