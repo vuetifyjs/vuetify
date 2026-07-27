@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-range-slider v-bind="props"></v-range-slider>
@@ -12,14 +12,10 @@
     <template v-slot:configuration>
       <v-checkbox v-model="disabled" label="Disabled"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-range-slider'
   const model = ref('default')
   const options = ['vertical']

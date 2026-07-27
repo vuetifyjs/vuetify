@@ -6,7 +6,7 @@ $timeline-density-comfortable-grid-template-start: auto min-content min-content 
 $timeline-density-compact-grid-template-end: 0 min-content auto !default;
 $timeline-density-compact-grid-template-start: auto min-content 0 !default;
 $timeline-dot-border-radius: 50% !default;
-$timeline-dot-divider-background: rgb(var(--v-theme-on-surface-variant)) !default;
+$timeline-dot-divider-background: rgb(var(--v-theme-surface-light)) !default;
 $timeline-dot-size: 38px !default;
 $timeline-inner-dot-divider-background: rgb(var(--v-theme-on-surface)) !default;
 $timeline-inset-divider-line: var(--v-timeline-line-inset) !default;

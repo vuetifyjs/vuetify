@@ -20,10 +20,10 @@
           </v-card-title>
         </template>
 
-        <v-divider vertical class="mx-2"></v-divider>
+        <v-divider class="mx-2" vertical></v-divider>
 
         <v-btn
-          class="text-none text-subtitle-1"
+          class="text-none text-body-large"
           color="#5865f2"
           size="small"
           variant="flat"
@@ -48,7 +48,7 @@
       variant="flat"
     >
       <v-card-item>
-        <v-card-title class="text-body-2 d-flex align-center">
+        <v-card-title class="text-body-medium d-flex align-center">
           <v-icon
             color="#949cf7"
             icon="mdi-calendar"
@@ -75,7 +75,7 @@
         </v-card-title>
 
         <div class="py-2">
-          <div class="text-h6">Live Q&A</div>
+          <div class="text-title-large">Live Q&A</div>
 
           <div class="font-weight-light text-medium-emphasis">
             Join the Vuetify team for a live Question and Answer session.
@@ -98,7 +98,7 @@
           size="x-small"
         ></v-icon>
 
-        <span class="text-caption text-medium-emphasis ms-1 font-weight-light">
+        <span class="text-body-small text-medium-emphasis ms-1 font-weight-light">
           streaming
         </span>
 
@@ -119,10 +119,10 @@
         </v-btn>
 
         <v-btn
-          border
           class="text-none"
           prepend-icon="mdi-check"
           variant="text"
+          border
         >
           Interested
         </v-btn>

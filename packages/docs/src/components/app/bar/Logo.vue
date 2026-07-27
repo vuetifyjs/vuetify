@@ -7,22 +7,14 @@
       :key="logo"
       :alt="`Vuetify ${t('logo')}`"
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
+      :transition="false"
       :width="lgAndUp ? 148 : 34"
       class="shrink"
-      :transition="false"
     />
   </router-link>
 </template>
 
 <script setup>
-  // Composables
-  import { useDisplay, useTheme } from 'vuetify'
-  import { useI18n } from 'vue-i18n'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   defineProps({
     alt: Boolean,
   })
@@ -32,7 +24,7 @@
   const theme = useTheme()
 
   const logo = computed(() => {
-    const file = `${theme.name.value}.svg`
+    const file = `${theme.current.value.dark ? 'dark' : 'light'}.svg`
     const logo = 'vuetify-logo-v3-slim'
 
     return `${logo}-${lgAndUp.value ? 'text-' : ''}${file}`

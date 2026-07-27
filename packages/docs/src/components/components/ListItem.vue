@@ -1,8 +1,8 @@
 <template>
   <v-col
     cols="12"
-    md="6"
     lg="4"
+    md="6"
   >
     <v-card
       :image="image"
@@ -17,19 +17,19 @@
             v-if="labs"
             :to="rpath('/labs/introduction/')"
             color="success"
-            label
             prepend-icon="mdi-beaker-outline"
             rounded="bs-0 te-0"
             size="small"
             text="Labs Component"
             variant="flat"
+            label
             @click.stop
           />
         </v-img>
       </template>
     </v-card>
 
-    <h2 class="text-h6">
+    <h2 class="text-title-large mt-4 mb-n3 font-weight-medium">
       <span class="text-capitalize">{{ name?.replace(/-/g, ' ') }}</span>
     </h2>
 
@@ -38,10 +38,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed, shallowRef } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const props = defineProps({
     name: String,
     labs: Boolean,

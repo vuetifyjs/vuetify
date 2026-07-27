@@ -5,12 +5,12 @@
     max-width="500"
   >
     <v-bottom-navigation
-      absolute
       color="white"
-      hide-on-scroll
-      horizontal
       scroll-target="#scroll-threshold-example"
       scroll-threshold="500"
+      absolute
+      hide-on-scroll
+      horizontal
     >
       <v-btn>
         <span>Recents</span>

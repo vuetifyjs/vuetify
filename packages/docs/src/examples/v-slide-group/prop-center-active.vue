@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="3"
     max-width="800"
   >
     <v-slide-group
@@ -27,8 +27,8 @@
               <v-icon
                 v-if="isSelected"
                 color="white"
-                size="48"
                 icon="mdi-close-circle-outline"
+                size="48"
               ></v-icon>
             </v-scale-transition>
           </div>

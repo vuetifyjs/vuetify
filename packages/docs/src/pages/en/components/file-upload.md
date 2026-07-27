@@ -1,0 +1,89 @@
+---
+emphasized: true
+meta:
+  title: File upload
+  description: The file upload component is a drag and drop area for uploading files.
+  keywords: file uploading, file upload, file drag and drop, file drop area, file dropzone, file upload component
+related:
+  - /components/buttons/
+  - /components/file-inputs/
+  - /components/sheets/
+features:
+  report: true
+  label: 'C: VFileUpload'
+  github: '/components/VFileUpload/'
+---
+
+# File upload
+
+<PageFeatures />
+
+## Usage
+
+The `v-file-upload` component is a drag and drop area for uploading files. It can be customized with slots and has support for density and multiple styles.
+
+<ExamplesUsage name="v-file-upload" />
+
+<PromotedEntry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-file-upload](/api/v-file-upload/) | Primary Component |
+| [v-file-upload-dropzone](/api/v-file-upload-dropzone/) | Dropzone Component |
+| [v-file-upload-item](/api/v-file-upload-item/) | Item Component |
+| [v-file-upload-list](/api/v-file-upload-list/) | List Component |
+| [v-file-input](/api/v-file-input/) | File input component |
+
+<ApiInline hide-links />
+
+## Guide
+
+The v-file-upload component is a more visual counterpart to the [v-file-input](/components/file-inputs/) component. It provides a drag and drop area for files, and can be customized with slots.
+
+### Props
+
+Utilize various properties to customize the look and feel of the `v-file-upload` component.
+
+#### Content
+
+Use the **browse-text**, **divider-text**, **icon**, **title**, or **subtitle** props to customize the text displayed in the component.
+
+<ExamplesExample file="v-file-upload/prop-content" />
+
+#### Loading
+
+The **loading** prop displays a progress indicator on the component. Unlike other components, the loading state does not disable interactions; files can still be browsed and dropped.
+
+<ExamplesExample file="v-file-upload/prop-loading" />
+
+#### Inset file list
+
+The **inset-file-list** prop renders the file list inside the dropzone instead of below it.
+
+<ExamplesExample file="v-file-upload/prop-inset-file-list" />
+
+#### Scrim
+
+The **scrim** property allows you to set a colored scrim when hovering over the component with files.
+
+<ExamplesExample file="v-file-upload/prop-scrim" />
+
+### Slots
+
+The `v-file-upload` component has several slots that can be used to customize the component.
+
+#### Item
+
+The **item** slot is used to customize the appearance of the file item.
+
+<ExamplesExample file="v-file-upload/slot-item" />
+
+### Misc
+
+#### List
+
+Use `v-file-upload-list` with the **default** slot to compose `v-file-upload-item` components directly. The slot provides `files` and `onClickRemove` for wiring up removal.
+
+<ExamplesExample file="v-file-upload/misc-list" />

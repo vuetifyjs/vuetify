@@ -1,15 +1,15 @@
 <template>
-  <v-row justify="space-around">
+  <v-row class="justify-space-around">
     <v-date-picker
       v-model="picker"
-      type="month"
       color="green-lighten-1"
+      type="month"
     ></v-date-picker>
     <v-date-picker
       v-model="picker2"
-      type="month"
       color="green-lighten-1"
       header-color="primary"
+      type="month"
     ></v-date-picker>
   </v-row>
 </template>

@@ -1,19 +1,19 @@
 <template>
   <v-sheet
     id="comparison"
-    class="mb-5 text-body-2 mx-auto"
+    class="mb-5 text-body-medium mx-auto"
     border
     rounded
   >
     <v-table>
-      <caption class="pa-4 text-h6">
+      <AppCaption class="pa-4 text-title-large">
         {{ t('comparison.caption', { year: (new Date()).getFullYear() }) }}
-      </caption>
+      </AppCaption>
 
       <thead>
         <tr>
           <th>
-            <strong class="text-h6">{{ t('features') }}</strong>
+            <strong class="text-title-large">{{ t('features') }}</strong>
           </th>
 
           <th
@@ -21,12 +21,11 @@
             :key="i"
             class="text-center text-no-wrap"
           >
-            <div class="d-flex align-center justify-center text-body-2">
+            <div class="d-flex align-center justify-center text-body-medium">
               <v-img
                 v-if="framework.src"
                 :src="framework.src"
                 class="me-2"
-                contain
                 height="24"
                 max-width="24"
                 width="24"
@@ -71,7 +70,7 @@
       <tfoot class="text-center">
         <tr>
           <td
-            class="text-caption font-italic text-disabled"
+            class="text-body-small font-italic text-disabled"
             colspan="7"
           >
             <div>{{ t('comparison.average') }}</div>
@@ -83,9 +82,6 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   // Types
   type Framework = {
     a11y?: boolean,

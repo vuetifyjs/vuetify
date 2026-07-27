@@ -12,6 +12,7 @@ import { propsFactory } from '@/util/propsFactory'
 // Types
 import type {
   AllowedComponentProps,
+  Component,
   ComponentCustomProps,
   ComponentInjectOptions,
   ComponentObjectPropsOptions,
@@ -20,6 +21,7 @@ import type {
   ComponentOptionsWithObjectProps,
   ComponentOptionsWithoutProps,
   ComponentPropsOptions,
+  ComponentPublicInstance,
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
@@ -143,6 +145,7 @@ export type SlotsToProps<
     | VNodeChild
     | (T extends { default: infer V } ? V : {})
     | { [K in keyof T]?: T[K] }
+    | { $stable?: boolean }
   )
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
@@ -185,6 +188,11 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
   P = III extends Record<'$props', any>
     ? Omit<PropsOptions, keyof III['$props']>
     : PropsOptions,
+  EEE extends EmitsOptions = E extends any[]
+    ? E
+    : III extends Record<'$props', any>
+      ? Omit<E, ToListeners<keyof III['$props']>>
+      : E,
   Base = DefineComponent<
     P,
     RawBindings,
@@ -193,10 +201,10 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : III extends Record<'$props', any> ? Omit<E, ToListeners<keyof III['$props']>> : E,
+    EEE,
     EE,
     PublicProps,
-    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<E>),
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<EEE>),
     ExtractDefaultPropTypes<P>,
     S
   >
@@ -294,3 +302,33 @@ export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentProps
     U extends Exclude<keyof Props, Exclude<keyof Props, keyof T>>
   > (props: T): Partial<Pick<T, U>>
 }
+
+// https://github.com/vuejs/core/pull/10557
+export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<any, any, any> }
+  ? InstanceType<T>
+  : T extends FunctionalComponent<infer Props, infer Emits>
+    ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
+    : T extends Component<
+          infer Props,
+          infer RawBindings,
+          infer D,
+          infer C,
+          infer M
+        >
+      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
+      ComponentPublicInstance<
+          unknown extends Props ? {} : Props,
+          unknown extends RawBindings ? {} : RawBindings,
+          unknown extends D ? {} : D,
+          C,
+          M
+        >
+      : never // not a vue Component
+
+type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
+  [K in keyof E]: (...args: E[K]) => any;
+} : E;
+
+export type JSXComponent<Props = any> =
+  | { new (): ComponentPublicInstance<Props> }
+  | FunctionalComponent<Props>

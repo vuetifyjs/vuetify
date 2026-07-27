@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="text-center">
       <v-progress-circular v-bind="props"></v-progress-circular>
@@ -20,29 +20,25 @@
       <v-slider
         v-model="size"
         label="Size"
-        step="1"
-        min="32"
         max="128"
+        min="32"
+        step="1"
       ></v-slider>
 
       <v-slider
         v-model="width"
         label="Width"
-        step="1"
-        min="4"
         max="12"
+        min="4"
+        step="1"
       ></v-slider>
 
       <v-checkbox v-model="indeterminate" label="Indeterminate"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-progress-circular'
   const model = ref('default')
   const color = ref()

@@ -8,15 +8,15 @@
             :append-icon="message ? 'mdi-send' : 'mdi-microphone'"
             :append-inner-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
             :prepend-icon="icon"
-            variant="filled"
             clear-icon="mdi-close-circle"
-            clearable
             label="Message"
             type="text"
-            @click:append-inner="toggleMarker"
+            variant="filled"
+            clearable
             @click:append="sendMessage"
-            @click:prepend="changeIcon"
+            @click:append-inner="toggleMarker"
             @click:clear="clearMessage"
+            @click:prepend="changeIcon"
           ></v-text-field>
         </v-col>
       </v-row>

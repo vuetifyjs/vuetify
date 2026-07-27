@@ -1,31 +1,53 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-img
-  --v-theme-overlay-multiplier: 3
-  z-index: 0
+@include tools.layer('components')
+  .v-img
+    --v-theme-overlay-multiplier: 3
+    z-index: 0
 
-  &--booting .v-responsive__sizer
-    transition: none
+    &.v-img--absolute
+      height: 100%
+      left: 0
+      overflow: hidden
+      position: absolute
+      top: 0
+      width: 100%
+      z-index: -1
 
-.v-img__img,
-.v-img__picture,
-.v-img__gradient,
-.v-img__placeholder,
-.v-img__error
-  z-index: -1
+    &.v-img--fit-content
+      max-width: fit-content
 
-  @include tools.absolute()
+      > .v-img__img
+        position: relative
 
-.v-img__img
-  &--preload
-    filter: $img-preload-filter
+      > .v-responsive__sizer
+        display: none
 
-  &--contain
-    object-fit: contain
+    &--booting .v-responsive__sizer
+      transition: none
 
-  &--cover
-    object-fit: cover
+    &--rounded
+      @include tools.rounded($img-rounded-border-radius)
 
-.v-img__gradient
-  background-repeat: no-repeat
+  .v-img__img,
+  .v-img__picture,
+  .v-img__gradient,
+  .v-img__placeholder,
+  .v-img__error
+    z-index: -1
+
+    @include tools.absolute()
+
+  .v-img__img
+    &--preload
+      filter: $img-preload-filter
+
+    &--contain
+      object-fit: contain
+
+    &--cover
+      object-fit: cover
+
+  .v-img__gradient
+    background-repeat: no-repeat

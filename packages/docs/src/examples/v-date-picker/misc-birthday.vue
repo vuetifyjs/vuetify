@@ -5,18 +5,16 @@
       ref="menu"
       v-model="menuActive"
       :close-on-content-click="false"
-      transition="scale-transition"
-      offset-y
       min-width="auto"
+      transition="scale-transition"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-text-field
           v-model="date"
           label="Birthday date"
           prepend-icon="mdi-calendar"
           readonly
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         ></v-text-field>
       </template>
       <v-date-picker

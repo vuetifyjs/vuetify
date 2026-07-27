@@ -1,22 +1,16 @@
 <template>
-  <app-link-list-item
-    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
-    :title="`v${version}`"
+  <AppListLinkListItem
     :label="t('latest-release')"
+    :title="`v${version}`"
+    :to="rpath(`/getting-started/release-notes/?version=v${version}`)"
     append-icon="mdi-page-next"
-    prepend-icon="mdi-label"
+    prepend-icon="mdi-tag-outline"
     @click="onClick"
   />
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  // Stores
-  import { useAppStore } from '@/store/app'
-
   // Utilities
-  import { rpath } from '@/util/routes'
   import { version } from 'vuetify'
 
   const app = useAppStore()

@@ -1,7 +1,5 @@
 // Imports
-import { watch } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { useLocaleStore } from '@/store/locale'
 
 // Types
 import type { App } from 'vue'

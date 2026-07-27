@@ -1,15 +1,12 @@
 <template>
-  <v-row
-    justify="space-around"
-    align="center"
-  >
+  <v-row class="align-center justify-space-around">
     <v-time-picker
       v-model="picker"
       disabled
     ></v-time-picker>
     <v-time-picker
       v-model="picker"
-      :landscape="$vuetify.breakpoint.smAndUp"
+      :landscape="$vuetify.display.smAndUp"
       disabled
     ></v-time-picker>
   </v-row>

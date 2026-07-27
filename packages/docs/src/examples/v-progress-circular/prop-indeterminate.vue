@@ -1,28 +1,28 @@
 <template>
   <div class="text-center">
     <v-progress-circular
-      indeterminate
       color="primary"
+      indeterminate
     ></v-progress-circular>
 
     <v-progress-circular
-      indeterminate
       color="red"
+      indeterminate
     ></v-progress-circular>
 
     <v-progress-circular
-      indeterminate
       color="purple"
+      indeterminate
     ></v-progress-circular>
 
     <v-progress-circular
-      indeterminate
       color="green"
+      indeterminate
     ></v-progress-circular>
 
     <v-progress-circular
-      indeterminate
       color="amber"
+      indeterminate
     ></v-progress-circular>
   </div>
 </template>

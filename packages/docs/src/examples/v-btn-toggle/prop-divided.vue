@@ -1,7 +1,8 @@
 <template>
-  <div class="d-flex align-center flex-column bg-grey-lighten-4 pa-6">
+  <div class="d-flex align-center flex-column pa-6">
     <v-btn-toggle
       v-model="toggle"
+      border
       divided
     >
       <v-btn icon="mdi-format-align-left"></v-btn>

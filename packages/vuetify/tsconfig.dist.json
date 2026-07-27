@@ -1,4 +1,10 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["dev", "**/*.spec.*", "cypress"]
+  "exclude": ["dev", "**/*.spec.*", "test"],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  },
 }

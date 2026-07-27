@@ -1,19 +1,19 @@
 <template>
   <v-slider
     v-model="slider"
-    class="align-center"
     :max="max"
     :min="min"
+    class="align-center"
     hide-details
   >
     <template v-slot:append>
       <v-text-field
         v-model="slider"
+        density="compact"
+        style="width: 70px"
+        type="number"
         hide-details
         single-line
-        density="compact"
-        type="number"
-        style="width: 70px"
       ></v-text-field>
     </template>
   </v-slider>

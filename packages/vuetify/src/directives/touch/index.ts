@@ -120,7 +120,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const options = value?.options ?? { passive: true }
   const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
-  if (!target || !uid) return
+  if (!value || !target || uid === undefined) return
 
   const handlers = createHandlers(binding.value)
 
@@ -136,20 +136,36 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value?.parent ? el.parentElement : el
   const uid = binding.instance?.$.uid
 
-  if (!target?._touchHandlers || !uid) return
+  if (!target?._touchHandlers || uid === undefined) return
 
   const handlers = target._touchHandlers[uid]
+
+  // guard against double teardown: e.g. router & suspence racing
+  if (!handlers) return
 
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
 
   delete target._touchHandlers[uid]
+
+  if (!keys(target._touchHandlers).length) {
+    // only relevant if we keep `parent: boolean`
+    delete target._touchHandlers
+  }
+}
+
+function updated (el: HTMLElement, binding: TouchDirectiveBinding) {
+  if (binding.value === binding.oldValue) return
+
+  unmounted(el, { ...binding, value: binding.oldValue } as TouchDirectiveBinding)
+  mounted(el, binding)
 }
 
 export const Touch = {
   mounted,
   unmounted,
+  updated,
 }
 
 export default Touch

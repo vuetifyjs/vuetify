@@ -1,7 +1,9 @@
 <template>
   <v-treeview
-    hoverable
     :items="items"
+    item-title="name"
+    item-value="id"
+    hoverable
   ></v-treeview>
 </template>
 

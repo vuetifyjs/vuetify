@@ -1,9 +1,9 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div class="d-flex justify-center">
       <v-color-picker v-bind="props"></v-color-picker>
@@ -14,14 +14,10 @@
 
       <v-checkbox v-model="hideInputs" label="Hide inputs"></v-checkbox>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-color-picker'
   const model = ref('default')
   const options = ['Disabled', 'Show swatches']

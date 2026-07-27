@@ -10,8 +10,8 @@
             v-model="title"
             :rules="[rules.required, rules.counter]"
             label="Title"
-            counter
             maxlength="20"
+            counter
           ></v-text-field>
         </v-col>
 

@@ -1,9 +1,6 @@
 <template>
-  <div class="text-center">
-    <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
+  <div class="text-center pa-4">
+    <v-btn @click="dialog = true">
       Open Dialog
     </v-btn>
 
@@ -11,13 +8,19 @@
       v-model="dialog"
       width="auto"
     >
-      <v-card>
-        <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
-        </v-card-actions>
+      <v-card
+        max-width="400"
+        prepend-icon="mdi-update"
+        text="Your application will relaunch automatically after the update is complete."
+        title="Update in progress"
+      >
+        <template v-slot:actions>
+          <v-btn
+            class="ms-auto"
+            text="Ok"
+            @click="dialog = false"
+          ></v-btn>
+        </template>
       </v-card>
     </v-dialog>
   </div>

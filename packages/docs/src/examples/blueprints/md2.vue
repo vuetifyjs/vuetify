@@ -2,7 +2,7 @@
   <div>
     <v-defaults-provider :defaults="md2.defaults">
       <div class="d-flex align-center">
-        <v-btn class="me-6 text-white" :color="color">Button</v-btn>
+        <v-btn :color="color" class="me-6 text-white">Button</v-btn>
 
         <v-tabs :color="color">
           <v-tab>Tab One</v-tab>
@@ -20,8 +20,8 @@
         <template v-slot:prepend>
           <!-- rounded added due to bug -->
           <v-avatar
-            icon="$vuetify"
             class="text-white"
+            icon="$vuetify"
             rounded="circle"
           ></v-avatar>
         </template>
@@ -43,3 +43,10 @@
 
   const color = md2.theme.themes.light.colors.primary
 </script>
+
+<style scoped>
+.v-btn {
+  /* for demo, normally handled by global typography */
+  letter-spacing: .0892857143em;
+}
+</style>

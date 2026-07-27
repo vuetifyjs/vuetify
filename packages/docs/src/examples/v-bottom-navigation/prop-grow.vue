@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="overflow-visible" style="height: 56px;">
+  <v-layout style="height: 56px;">
     <v-bottom-navigation
       v-model="value"
       color="teal"
@@ -37,3 +37,8 @@
     data: () => ({ value: 1 }),
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2441-27203&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

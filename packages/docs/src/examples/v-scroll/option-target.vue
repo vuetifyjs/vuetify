@@ -1,24 +1,20 @@
 <template>
   <div>
-    <v-row
-      justify="center"
-      align="center"
-    >
+    <v-row class="align-center justify-center">
       <v-col class="text-center">
-        <div class="text-subtitle-2">Offset Top</div>
+        <div class="text-title-small">Offset Top</div>
         {{ offsetTop }}
       </v-col>
     </v-row>
     <v-container
       id="scroll-target"
-      style="max-height: 400px"
       class="overflow-y-auto"
+      style="max-height: 400px"
     >
       <v-row
-        v-scroll:#scroll-target="onScroll"
-        align="center"
-        justify="center"
+        class="align-center justify-center"
         style="height: 1000px"
+        v-scroll:#scroll-target="onScroll"
       >
       </v-row>
     </v-container>

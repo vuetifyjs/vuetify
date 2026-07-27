@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { inject, provide, toRef } from 'vue'
+import { inject, provide, toRaw, toRef } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -15,6 +15,10 @@ export const makeDataTableExpandProps = propsFactory({
   expanded: {
     type: Array as PropType<readonly string[]>,
     default: () => ([]),
+  },
+  expandStrategy: {
+    type: String as PropType<'multiple' | 'single'>,
+    default: 'multiple',
   },
 }, 'DataTable-expand')
 
@@ -29,11 +33,12 @@ export const VDataTableExpandedKey: InjectionKey<{
 type ExpandProps = {
   expandOnClick: boolean
   expanded: readonly string[]
+  expandStrategy: 'multiple' | 'single'
   'onUpdate:expanded': ((value: any[]) => void) | undefined
 }
 
 export function provideExpanded (props: ExpandProps) {
-  const expandOnClick = toRef(props, 'expandOnClick')
+  const expandOnClick = toRef(() => props.expandOnClick)
   const expanded = useProxiedModel(props, 'expanded', props.expanded, v => {
     return new Set(v)
   }, v => {
@@ -41,10 +46,14 @@ export function provideExpanded (props: ExpandProps) {
   })
 
   function expand (item: DataTableItem, value: boolean) {
-    const newExpanded = new Set(expanded.value)
+    const rawValue = toRaw(item.value)
+    const newExpanded = value && props.expandStrategy === 'single'
+      ? new Set<string>()
+      : new Set(expanded.value)
 
     if (!value) {
-      newExpanded.delete(item.value)
+      const existing = [...expanded.value].find(x => toRaw(x) === rawValue)!
+      newExpanded.delete(existing)
     } else {
       newExpanded.add(item.value)
     }
@@ -53,7 +62,8 @@ export function provideExpanded (props: ExpandProps) {
   }
 
   function isExpanded (item: DataTableItem) {
-    return expanded.value.has(item.value)
+    const rawValue = toRaw(item.value)
+    return [...expanded.value].some(x => toRaw(x) === rawValue)
   }
 
   function toggleExpand (item: DataTableItem) {

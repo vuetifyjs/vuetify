@@ -1,11 +1,11 @@
 <template>
   <v-card
-    v-scroll.self="onScroll"
     class="overflow-y-auto"
     max-height="400"
+    v-scroll.self="onScroll"
   >
     <v-banner
-      class="justify-center text-h5 font-weight-light"
+      class="justify-center text-headline-small font-weight-light"
       sticky
     >
       Scroll Me - Method invoked

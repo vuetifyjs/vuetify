@@ -1,5 +1,5 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
@@ -15,14 +15,10 @@
 
     <!-- <template v-slot:configuration>
     </template> -->
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-virtual-scroll'
   const model = ref('default')
   const items = Array.from({ length: 1000 }, (k, v) => v + 1)

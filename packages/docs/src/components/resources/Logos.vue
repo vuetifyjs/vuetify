@@ -1,26 +1,26 @@
 <template>
-  <app-btn
-    border
+  <AppBtn
     href="https://cdn.vuetifyjs.com/docs/images/brand-kit/vuetify-brand-kit.zip"
     prepend-icon="mdi-download-box-outline"
     target="_blank"
     text="download-brand-kit"
+    border
   />
 
   <v-container class="px-0">
-    <v-row>
-      <v-col cols="12" class="pb-0 font-weight-bold">{{ t('logo') }}</v-col>
+    <div class="font-weight-bold mb-3">{{ t('logo') }}</div>
 
+    <v-row class="mb-6">
       <v-col v-for="logo in logos" :key="logo.title" cols="auto">
-        <v-sheet rounded border class="pa-4">
-          <app-figure
+        <v-sheet class="pa-4" border rounded>
+          <AppFigure
             :src="`${logo.src}.svg`"
             :title="logo.title"
             class="mb-4 mx-auto"
             width="125"
           />
 
-          <div class="d-flex justify-center">
+          <div class="d-flex justify-center mt-4">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -43,25 +43,27 @@
           </div>
         </v-sheet>
       </v-col>
+    </v-row>
 
-      <v-col cols="12" class="pb-0 font-weight-bold">{{ t('text') }}</v-col>
+    <div class="font-weight-bold mb-3">{{ t('text') }}</div>
 
+    <v-row class="mb-6">
       <v-col v-for="logo in text" :key="logo.title" cols="auto">
         <v-sheet
           :theme="logo.src.indexOf('dark') > -1 ? 'dark' : 'light'"
-          border
           class="pa-4"
-          rounded
           width="300"
+          border
+          rounded
         >
-          <app-figure
+          <AppFigure
             :src="`${logo.src}.svg`"
             :title="logo.title"
             class="mb-4"
             cover
           />
 
-          <div class="d-flex justify-center">
+          <div class="d-flex justify-center mt-4">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -84,9 +86,11 @@
           </div>
         </v-sheet>
       </v-col>
+    </v-row>
 
-      <v-col cols="12" class="pb-0 font-weight-bold">{{ t('icon') }}</v-col>
+    <div class="font-weight-bold my-3">{{ t('icon') }}</div>
 
+    <v-row class="mb-3">
       <v-col
         v-for="icon in icons"
         :key="icon.title"
@@ -94,9 +98,9 @@
         sm="6"
       >
         <v-sheet
-          rounded
-          border
           class="pa-2"
+          border
+          rounded
         >
           <div class="text-center">
             <v-icon
@@ -106,11 +110,11 @@
             />
           </div>
 
-          <figcaption class="text-caption font-weight-bold text-center text-medium-emphasis mb-2">
+          <figcaption class="text-body-small font-weight-bold text-center text-medium-emphasis mb-2">
             {{ icon.title }}
           </figcaption>
 
-          <app-markup :code="icon.code" />
+          <AppMarkup :code="icon.code" />
         </v-sheet>
       </v-col>
     </v-row>
@@ -118,9 +122,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useI18n } from 'vue-i18n'
-
   const { t } = useI18n()
 
   const logos = [

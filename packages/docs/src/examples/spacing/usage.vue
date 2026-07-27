@@ -68,7 +68,7 @@
       >
         <v-sheet
           :class="[computedMargin]"
-          elevation="4"
+          elevation="2"
           rounded
         >
           <div

@@ -7,29 +7,29 @@
       <v-tab
         v-for="n in length"
         :key="n"
+        :text="`Item ${n}`"
         :value="n"
-      >
-        Item {{ n }}
-      </v-tab>
+      ></v-tab>
     </v-tabs>
+
     <v-card-text class="text-center">
       <v-btn
         :disabled="!length"
+        text="Remove Tab"
         variant="text"
         @click="length--"
-      >
-        Remove Tab
-      </v-btn>
+      ></v-btn>
+
       <v-divider
         class="mx-4"
         vertical
       ></v-divider>
+
       <v-btn
+        text="Add Tab"
         variant="text"
         @click="length++"
-      >
-        Add Tab
-      </v-btn>
+      ></v-btn>
     </v-card-text>
   </v-card>
 </template>

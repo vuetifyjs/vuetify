@@ -1,0 +1,6 @@
+{
+  "exposed": {
+    "rtl": "The current RTL state.",
+    "options": "The current goTo scrolling options."
+  }
+}

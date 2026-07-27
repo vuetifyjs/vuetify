@@ -4,14 +4,14 @@
       <v-col cols="12">
         <h3
           ref="radio"
-          class="text-h5"
+          class="text-headline-small my-0"
         >
           Target
         </h3>
 
         <v-radio-group
           v-model="type"
-          row
+          inline
         >
           <v-radio
             label="Number"
@@ -32,8 +32,8 @@
         <v-text-field
           v-if="type === 'number'"
           v-model="number"
-          type="number"
           label="Number"
+          type="number"
         ></v-text-field>
 
         <v-text-field
@@ -51,7 +51,7 @@
       </v-col>
 
       <v-col cols="12">
-        <h3 class="text-h5">
+        <h3 class="text-headline-small my-0">
           Options
         </h3>
 
@@ -63,17 +63,17 @@
 
         <v-slider
           v-model="duration"
-          min="0"
-          max="1000"
           label="Duration"
+          max="1000"
+          min="0"
           thumb-label
         ></v-slider>
 
         <v-slider
           v-model="offset"
-          min="-500"
-          max="500"
           label="Offset"
+          max="500"
+          min="-500"
           thumb-label
         ></v-slider>
       </v-col>
@@ -81,8 +81,8 @@
       <v-col>
         <v-btn
           ref="button"
-          block
           color="primary"
+          block
           @click="$vuetify.goTo(target, options)"
         >
           scroll

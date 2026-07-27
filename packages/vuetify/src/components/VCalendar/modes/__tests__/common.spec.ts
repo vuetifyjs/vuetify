@@ -1,12 +1,9 @@
-// @ts-nocheck
-/* eslint-disable */
-
-// import { parseEvent } from '../../util/events'
+import { parseEvent } from '../../util/events'
 import {
   getVisuals, hasOverlap,
 } from '../common'
 
-describe.skip('common.ts', () => {
+describe('common.ts', () => {
   it('should get visuals 1', () => {
     expect(getVisuals([])).toEqual([])
     expect(parseEvent({
@@ -26,6 +23,7 @@ describe.skip('common.ts', () => {
       b: '2019-02-14',
     }, 1, 'a', 'b')).toMatchSnapshot()
   })
+
   it('should get visuals 2', () => {
     const p0 = parseEvent({
       start: '2019-02-13',
@@ -62,19 +60,20 @@ describe.skip('common.ts', () => {
       { event: p2, ...visualDefaults },
     ])
   })
+
   it('should overlap', () => {
-    expect(hasOverlap(0, 1, 1, 2)).toBeFalsy()
-    expect(hasOverlap(0, 1, 1, 2, false)).toBeTruthy()
-    expect(hasOverlap(1, 2, 0, 1)).toBeFalsy()
-    expect(hasOverlap(1, 2, 0, 1, false)).toBeTruthy()
-    expect(hasOverlap(0, 1, 2, 3)).toBeFalsy()
-    expect(hasOverlap(2, 3, 0, 1)).toBeFalsy()
-    expect(hasOverlap(1, 4, 1, 4)).toBeTruthy()
-    expect(hasOverlap(1, 4, 1, 3)).toBeTruthy()
-    expect(hasOverlap(1, 3, 1, 4)).toBeTruthy()
-    expect(hasOverlap(1, 4, 2, 3)).toBeTruthy()
-    expect(hasOverlap(2, 3, 1, 4)).toBeTruthy()
-    expect(hasOverlap(1, 4, 3, 5)).toBeTruthy()
-    expect(hasOverlap(3, 5, 1, 4)).toBeTruthy()
+    expect(hasOverlap(0, 1, 1, 2)).toBe(false)
+    expect(hasOverlap(0, 1, 1, 2, false)).toBe(true)
+    expect(hasOverlap(1, 2, 0, 1)).toBe(false)
+    expect(hasOverlap(1, 2, 0, 1, false)).toBe(true)
+    expect(hasOverlap(0, 1, 2, 3)).toBe(false)
+    expect(hasOverlap(2, 3, 0, 1)).toBe(false)
+    expect(hasOverlap(1, 4, 1, 4)).toBe(true)
+    expect(hasOverlap(1, 4, 1, 3)).toBe(true)
+    expect(hasOverlap(1, 3, 1, 4)).toBe(true)
+    expect(hasOverlap(1, 4, 2, 3)).toBe(true)
+    expect(hasOverlap(2, 3, 1, 4)).toBe(true)
+    expect(hasOverlap(1, 4, 3, 5)).toBe(true)
+    expect(hasOverlap(3, 5, 1, 4)).toBe(true)
   })
 })

@@ -1,22 +1,19 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { CalendarCategory, CalendarCategoryTextFunction } from 'types'
+// Types
+import type { CalendarCategory, CalendarCategoryTextFunction } from '../types'
 
 export function parsedCategoryText (
   category: CalendarCategory,
-  categoryText: string | CalendarCategoryTextFunction
+  categoryText: string | CalendarCategoryTextFunction | undefined
 ): string {
-  return typeof categoryText === 'string' && typeof category === 'object' && category
-    ? category[categoryText]
-    : typeof categoryText === 'function'
-      ? categoryText(category)
-      : category
+  return typeof categoryText === 'function' ? categoryText(category)
+    : typeof categoryText === 'string' && typeof category === 'object' && category ? category[categoryText]
+    : typeof category === 'string' ? category
+    : ''
 }
 
 export function getParsedCategories (
   categories: CalendarCategory | CalendarCategory[],
-  categoryText: string | CalendarCategoryTextFunction
+  categoryText: string | CalendarCategoryTextFunction | undefined
 ): CalendarCategory[] {
   if (typeof categories === 'string') return categories.split(/\s*,\s/)
   if (Array.isArray(categories)) {

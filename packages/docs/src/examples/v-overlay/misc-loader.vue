@@ -14,8 +14,8 @@
     >
       <v-progress-circular
         color="primary"
-        indeterminate
         size="64"
+        indeterminate
       ></v-progress-circular>
     </v-overlay>
   </div>

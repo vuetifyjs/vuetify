@@ -4,8 +4,8 @@
     max-width="344"
   >
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       height="200px"
+      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       cover
     ></v-img>
 
@@ -20,10 +20,8 @@
     <v-card-actions>
       <v-btn
         color="orange-lighten-2"
-        variant="text"
-      >
-        Explore
-      </v-btn>
+        text="Explore"
+      ></v-btn>
 
       <v-spacer></v-spacer>
 
@@ -58,3 +56,8 @@
     }),
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1514-96232&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

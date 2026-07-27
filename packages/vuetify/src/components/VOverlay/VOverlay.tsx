@@ -2,12 +2,13 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
+import { getStaticLocationClasses, makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
 import { useHydration } from '@/composables/hydration'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
@@ -21,24 +22,28 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import { ClickOutside } from '@/directives/click-outside'
+import vClickOutside from '@/directives/click-outside'
 
 // Utilities
 import {
   computed,
   mergeProps,
+  onBeforeUnmount,
   ref,
   Teleport,
-  toRef,
   Transition,
   watch,
 } from 'vue'
 import {
   animate,
   convertToUnit,
+  focusableChildren,
   genericComponent,
+  getActiveElement,
+  getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  omit,
   propsFactory,
   standardEasing,
   useRender,
@@ -47,6 +52,7 @@ import {
 // Types
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
+import type { TemplateRef } from '@/util'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -73,7 +79,7 @@ function Scrim (props: ScrimProps) {
 
 export type OverlaySlots = {
   default: { isActive: Ref<boolean> }
-  activator: { isActive: boolean, props: Record<string, any> }
+  activator: { isActive: boolean, props: Record<string, any>, targetRef: TemplateRef }
 }
 
 export const makeVOverlayProps = propsFactory({
@@ -87,6 +93,7 @@ export const makeVOverlayProps = propsFactory({
   contentClass: null,
   contentProps: null,
   disabled: Boolean,
+  opacity: [Number, String],
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
@@ -105,6 +112,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeLazyProps(),
   ...makeLocationStrategyProps(),
   ...makeScrollStrategyProps(),
+  ...makeFocusTrapProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
 }, 'VOverlay')
@@ -112,23 +120,29 @@ export const makeVOverlayProps = propsFactory({
 export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
-  directives: { ClickOutside },
+  directives: { vClickOutside },
 
   inheritAttrs: false,
 
   props: {
     _disableGlobalStack: Boolean,
 
-    ...makeVOverlayProps(),
+    ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    keydown: (e: KeyboardEvent) => true,
+    afterEnter: () => true,
     afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
+    const vm = getCurrentInstance('VOverlay')
+    const root = ref<HTMLElement>()
+    const scrimEl = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
     const model = useProxiedModel(props, 'modelValue')
     const isActive = computed({
       get: () => model.value,
@@ -136,31 +150,40 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (!(v && props.disabled)) model.value = v
       },
     })
-    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses, isRtl } = useRtl()
-    const { hasContent, onAfterLeave } = useLazy(props, isActive)
-    const scrimColor = useBackgroundColor(computed(() => {
+    const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
+    const scrimColor = useBackgroundColor(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
-    }))
-    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
+    })
+    const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
     const {
       activatorEl, activatorRef,
       target, targetEl, targetRef,
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop })
+    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+    const { teleportTarget } = useTeleport(() => {
+      const target = props.attach || props.contained
+      if (target) return target
+      const rootNode = activatorEl?.value?.getRootNode() || vm.proxy?.$el?.getRootNode()
+      if (rootNode instanceof ShadowRoot) return rootNode
+      return false
+    })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
+    const staticLocationClasses = computed(() => {
+      return props.locationStrategy === 'static'
+        ? getStaticLocationClasses(props.location)
+        : undefined
+    })
     const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
       if (v) isActive.value = false
     })
 
-    const root = ref<HTMLElement>()
-    const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
@@ -171,6 +194,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       root,
       contentEl,
       targetEl,
+      target,
       isActive,
       updateLocation,
     })
@@ -182,9 +206,68 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       else animateClick()
     }
 
-    function closeConditional () {
-      return isActive.value && globalTop.value
+    function closeConditional (e: Event) {
+      return isActive.value && localTop.value && (
+        // If using scrim, only close if clicking on it rather than anything opened on top
+        !props.scrim || e.target === scrimEl.value || (e instanceof MouseEvent && e.shadowTarget === scrimEl.value)
+      )
     }
+
+    useFocusTrap(props, { isActive, localTop, contentEl })
+
+    let openedWithActivatorFocus = false
+
+    function ownsFocus (activeElement: Element | null): boolean {
+      let current = activeElement
+      const visited = new Set<Element>()
+      while (current) {
+        const el = current.closest('.v-overlay__content')
+        if (!el || visited.has(el)) return false
+        if (el === contentEl.value) return true
+        visited.add(el)
+        const ownerId = el.closest('.v-overlay')?.id
+        current = ownerId ? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
+      }
+      return false
+    }
+
+    function returnFocusToActivator () {
+      const el = activatorEl.value
+      if (!el || !el.isConnected) return
+      // Skip submenus; the outermost close in the cascade will restore focus.
+      if (el.closest('.v-overlay__content')) return
+
+      if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
+
+      const activeEl = getActiveElement()
+      const focusWasInOverlay =
+        ((!activeEl || activeEl === document.body) && openedWithActivatorFocus) ||
+        activeEl === el ||
+        el.contains(activeEl) ||
+        ownsFocus(activeEl)
+      if (!focusWasInOverlay) return
+
+      const parent = el.parentElement
+      const focusableInParent = parent ? focusableChildren(parent) : []
+      let target: HTMLElement | undefined
+      if (focusableInParent.includes(el)) {
+        target = el
+      } else {
+        const focusableWithin = focusableChildren(el)
+        target = focusableWithin.find(x => x.tagName === 'INPUT' || x.tagName === 'TEXTAREA') ?? focusableWithin[0]
+      }
+      target?.focus({ preventScroll: true })
+    }
+
+    watch(isActive, val => {
+      if (val) {
+        const activeEl = getActiveElement()
+        const el = activatorEl.value
+        openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+      } else {
+        returnFocusToActivator()
+      }
+    }, { flush: 'post' })
 
     IN_BROWSER && watch(isActive, val => {
       if (val) {
@@ -194,27 +277,40 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       }
     }, { immediate: true })
 
+    onBeforeUnmount(() => {
+      if (!IN_BROWSER) return
+
+      window.removeEventListener('keydown', onKeydown)
+    })
+
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
+        if (!contentEl.value?.contains(getActiveElement())) {
+          emit('keydown', e)
+        }
         if (!props.persistent) {
           isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
+          if (contentEl.value?.contains(getActiveElement())) {
             activatorEl.value?.focus()
           }
         } else animateClick()
       }
     }
+    function onKeydownSelf (e: KeyboardEvent) {
+      if (e.key === 'Escape' && !globalTop.value) return
+
+      emit('keydown', e)
+    }
 
     const router = useRouter()
     useToggleScope(() => props.closeOnBack, () => {
-      useBackButton(router, next => {
+      useBackButton(router, () => {
         if (globalTop.value && isActive.value) {
-          next(false)
           if (!props.persistent) isActive.value = false
           else animateClick()
-        } else {
-          next()
+          return false
         }
+        return undefined
       })
     })
 
@@ -242,13 +338,22 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       })
     }
 
+    function onAfterEnter () {
+      emit('afterEnter')
+    }
+
+    function onAfterLeave () {
+      _onAfterLeave()
+      emit('afterLeave')
+    }
+
     useRender(() => (
       <>
         { slots.activator?.({
           isActive: isActive.value,
+          targetRef,
           props: mergeProps({
             ref: activatorRef,
-            targetRef,
           }, activatorEvents.value, props.activatorProps),
         })}
 
@@ -265,22 +370,28 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   'v-overlay--active': isActive.value,
                   'v-overlay--contained': props.contained,
                 },
+                staticLocationClasses.value,
                 themeClasses.value,
                 rtlClasses.value,
                 props.class,
               ]}
               style={[
                 stackStyles.value,
-                { top: convertToUnit(top.value) },
+                {
+                  '--v-overlay-opacity': props.opacity,
+                  top: convertToUnit(top.value),
+                },
                 props.style,
               ]}
               ref={ root }
+              onKeydown={ onKeydownSelf }
               { ...scopeId }
               { ...attrs }
             >
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
+                ref={ scrimEl }
                 { ...scrimEvents.value }
               />
               <MaybeTransition
@@ -288,12 +399,25 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                 persisted
                 transition={ props.transition }
                 target={ target.value }
-                onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
+                onAfterEnter={ onAfterEnter }
+                onAfterLeave={ onAfterLeave }
               >
                 <div
                   ref={ contentEl }
                   v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                  v-click-outside={{
+                    handler: onClickOutside,
+                    closeConditional,
+                    include: () => {
+                      if (!isActive.value) return []
+                      return [
+                        activatorEl.value,
+                        // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
+                        ...Array.from(document.querySelectorAll('.v-overlay__content'))
+                          .filter(ownsFocus) as HTMLElement[],
+                      ]
+                    },
+                  }}
                   class={[
                     'v-overlay__content',
                     props.contentClass,
@@ -316,9 +440,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     return {
       activatorEl,
+      scrimEl,
       target,
       animateClick,
       contentEl,
+      rootEl: root,
       globalTop,
       localTop,
       updateLocation,

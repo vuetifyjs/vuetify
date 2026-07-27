@@ -16,8 +16,16 @@ import { makeVariantProps } from '@/composables/variant'
 import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { PropType } from 'vue'
+
 export const makeVBtnGroupProps = propsFactory({
+  baseColor: String,
   divided: Boolean,
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -39,15 +47,16 @@ export const VBtnGroup = genericComponent()({
     const { densityClasses } = useDensity(props)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     provideDefaults({
       VBtn: {
-        height: 'auto',
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
+        height: toRef(() => props.direction === 'horizontal' ? 'auto' : null),
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        density: toRef(() => props.density),
         flat: true,
-        variant: toRef(props, 'variant'),
+        variant: toRef(() => props.variant),
       },
     })
 
@@ -56,6 +65,7 @@ export const VBtnGroup = genericComponent()({
         <props.tag
           class={[
             'v-btn-group',
+            `v-btn-group--${props.direction}`,
             {
               'v-btn-group--divided': props.divided,
             },
@@ -66,7 +76,7 @@ export const VBtnGroup = genericComponent()({
             roundedClasses.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[roundedStyles.value, props.style]}
           v-slots={ slots }
         />
       )

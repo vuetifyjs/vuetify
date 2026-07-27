@@ -15,10 +15,10 @@
 
       <v-text-field
         v-model="search"
-        clearable
-        hide-details
         label="Search News"
         prepend-inner-icon="mdi-magnify"
+        clearable
+        hide-details
         single-line
       ></v-text-field>
 
@@ -56,7 +56,7 @@
         </template>
 
         <v-list-item-title
-          class="text-uppercase font-weight-regular text-caption"
+          class="text-uppercase font-weight-regular text-body-small"
           v-text="item.category"
         ></v-list-item-title>
 

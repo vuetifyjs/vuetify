@@ -1,4 +1,1 @@
-import VSpeedDial from './VSpeedDial'
-
-export { VSpeedDial }
-export default VSpeedDial
+export { VSpeedDial } from './VSpeedDial'

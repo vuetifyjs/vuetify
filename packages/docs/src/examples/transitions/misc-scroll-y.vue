@@ -1,12 +1,10 @@
 <template>
-  <v-row
-    justify="center"
-  >
+  <v-row class="justify-center">
     <v-menu transition="scroll-y-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="primary"
           class="ma-2"
+          color="primary"
           v-bind="props"
         >
           Scroll Y Transition
@@ -28,8 +26,8 @@
     <v-menu transition="scroll-y-reverse-transition">
       <template v-slot:activator="{ props }">
         <v-btn
-          color="secondary"
           class="ma-2"
+          color="secondary"
           v-bind="props"
         >
           Scroll Y Reverse Transition

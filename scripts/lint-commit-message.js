@@ -1,13 +1,18 @@
-const fs = require('fs')
+import fs from 'node:fs'
 
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
 
-const [messageFile] = process.env.HUSKY_GIT_PARAMS.split(' ')
-const currentMessage = fs.readFileSync(messageFile, 'utf8').replace(/^# ------------------------ >8 ------------------------[\s\S]*$|^#.*\n/gm, '')
+const [messageFile] = process.argv.slice(2)
+const currentMessage = fs.readFileSync(messageFile, 'utf8')
+  .replace(/^# ------------------------ >8 ------------------------[\s\S]*$|^#.*\n/gm, '')
 
 const errors = []
 
+/**
+ * @param message {string}
+ * @param cb {(currentMessage: string) => boolean}
+ */
 function check (message, cb) {
   if (cb(currentMessage)) {
     errors.push(message)

@@ -2,7 +2,6 @@
 import { VResponsive } from '..'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { createVuetify } from '@/framework'

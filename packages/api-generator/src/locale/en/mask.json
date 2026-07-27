@@ -1,0 +1,6 @@
+{
+  "props": {
+    "mask": "Apply a mask to the input. See [guide](/components/mask-inputs/#guide) for more information.",
+    "returnMaskedValue": "Returns the unmodified masked string."
+  }
+}

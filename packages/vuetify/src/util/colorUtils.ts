@@ -48,9 +48,13 @@ export function parseColor (color: Color): RGB {
   } else if (typeof color === 'string' && cssColorRe.test(color)) {
     const { groups } = color.match(cssColorRe)!
     const { fn, values } = groups as { fn: keyof typeof mappers, values: string }
-    const realValues = values.split(/,\s*/)
-      .map(v => {
-        if (v.endsWith('%') && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn)) {
+    const realValues = values.split(/,\s*|\s*\/\s*|\s+/)
+      .map((v, i) => {
+        if (
+          v.endsWith('%') ||
+          // unitless slv are %
+          (i > 0 && i < 3 && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn))
+        ) {
           return parseFloat(v) / 100
         } else {
           return parseFloat(v)
@@ -286,7 +290,7 @@ export function getContrast (first: Color, second: Color) {
   return (light + 0.05) / (dark + 0.05)
 }
 
-export function getForeground (color: Color) {
+export function hasLightForeground (color: Color) {
   const blackContrast = Math.abs(APCAcontrast(parseColor(0), parseColor(color)))
   const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), parseColor(color)))
 
@@ -300,5 +304,5 @@ export function getForeground (color: Color) {
   // }
 
   // Prefer white text if both have an acceptable contrast ratio
-  return whiteContrast > Math.min(blackContrast, 50) ? '#fff' : '#000'
+  return whiteContrast > Math.min(blackContrast, 50)
 }

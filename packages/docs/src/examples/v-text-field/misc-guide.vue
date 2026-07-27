@@ -10,17 +10,17 @@
           :readonly="loading"
           :rules="[required]"
           class="mb-2"
-          clearable
           label="Email"
+          clearable
         ></v-text-field>
 
         <v-text-field
           v-model="password"
           :readonly="loading"
           :rules="[required]"
-          clearable
           label="Password"
           placeholder="Enter your password"
+          clearable
         ></v-text-field>
 
         <br>
@@ -28,11 +28,11 @@
         <v-btn
           :disabled="!form"
           :loading="loading"
-          block
           color="success"
           size="large"
           type="submit"
           variant="elevated"
+          block
         >
           Sign In
         </v-btn>

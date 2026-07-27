@@ -24,7 +24,7 @@ function isCustomComponent (node) {
     !allowedStrings.includes(node.arguments[0].value)
 }
 
-module.exports = {
+export default {
   create (context) {
     return {
       CallExpression (node) {

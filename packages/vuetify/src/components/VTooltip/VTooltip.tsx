@@ -6,13 +6,14 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { useColor } from '@/composables/color'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+import { computed, mergeProps, ref, toRef, useId } from 'vue'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
@@ -20,7 +21,9 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVTooltipProps = propsFactory({
   id: String,
+  interactive: Boolean,
   text: String,
+  color: String,
 
   ...omit(makeVOverlayProps({
     closeOnBack: false,
@@ -34,10 +37,12 @@ export const makeVTooltipProps = propsFactory({
     origin: 'auto' as const,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: false,
+    transition: null,
   }), [
     'absolute',
-    'persistent',
+    'retainFocus',
+    'captureFocus',
+    'disableInitialFocus',
   ]),
 }, 'VTooltip')
 
@@ -54,8 +59,12 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
-    const uid = getUid()
-    const id = computed(() => props.id || `v-tooltip-${uid}`)
+    const { colorClasses, colorStyles } = useColor(() => ({
+      background: props.color,
+    }))
+
+    const uid = useId()
+    const id = toRef(() => props.id || `v-tooltip-${uid}`)
 
     const overlay = ref<VOverlay>()
 
@@ -75,8 +84,8 @@ export const VTooltip = genericComponent<OverlaySlots>()({
         : props.origin + ' center' as StrategyProps['origin']
     })
 
-    const transition = computed(() => {
-      if (props.transition) return props.transition
+    const transition = toRef(() => {
+      if (props.transition != null) return props.transition
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
@@ -94,17 +103,27 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           ref={ overlay }
           class={[
             'v-tooltip',
+            { 'v-tooltip--interactive': props.interactive },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            props.style,
+          ]}
           id={ id.value }
           { ...overlayProps }
+          contentClass={[
+            colorClasses.value,
+            props.contentClass,
+          ]}
+          contentProps={ mergeProps(
+            { style: [colorStyles.value] },
+            props.contentProps,
+          )}
           v-model={ isActive.value }
           transition={ transition.value }
           absolute
           location={ location.value }
           origin={ origin.value }
-          persistent
           role="tooltip"
           activatorProps={ activatorProps.value }
           _disableGlobalStack

@@ -4,8 +4,8 @@
       <v-row>
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Regular"
@@ -15,20 +15,20 @@
 
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Solo"
-            variant="solo"
             placeholder="Placeholder"
+            variant="solo"
           ></v-text-field>
         </v-col>
 
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Filled"
@@ -39,8 +39,8 @@
 
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Outlined"
@@ -51,8 +51,8 @@
 
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Plain"
@@ -63,8 +63,8 @@
 
         <v-col
           cols="12"
-          sm="6"
           md="4"
+          sm="6"
         >
           <v-text-field
             label="Underlined"

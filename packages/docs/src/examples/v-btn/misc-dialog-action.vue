@@ -5,8 +5,8 @@
   >
     <div class="position-absolute d-flex align-center justify-center w-100 h-100">
       <v-btn
-        size="x-large"
         color="deep-purple-darken-2"
+        size="x-large"
         @click="dialog = !dialog"
       >
         Open Dialog
@@ -18,7 +18,7 @@
         v-if="dialog"
         append-icon="$close"
         class="mx-auto"
-        elevation="16"
+        elevation="4"
         max-width="500"
         title="Send a receipt"
       >
@@ -36,7 +36,7 @@
             size="128"
           ></v-icon>
 
-          <div class="text-h4 font-weight-bold">This receipt was sent</div>
+          <div class="text-headline-large font-weight-bold">This receipt was sent</div>
         </div>
 
         <v-divider></v-divider>
@@ -46,8 +46,8 @@
             class="text-none"
             color="medium-emphasis"
             min-width="92"
-            rounded
             variant="outlined"
+            rounded
             @click="dialog = false"
           >
             Close
@@ -63,3 +63,9 @@
 
   const dialog = ref(true)
 </script>
+
+<example-meta lang="json">
+{
+  "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2383-26533&t=tWnPBMI0RfGlNRgq-4"
+}
+</example-meta>

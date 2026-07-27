@@ -6,6 +6,7 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { GroupableItem } from '@/components/VDataTable/composables/group'
 import type { SelectableItem } from '@/components/VDataTable/composables/select'
+import type { InternalItem } from '@/composables/filter'
 import type { SelectItemKey } from '@/util'
 
 export interface DataIteratorItemProps {
@@ -15,7 +16,7 @@ export interface DataIteratorItemProps {
   returnObject: boolean
 }
 
-export interface DataIteratorItem<T = any> extends GroupableItem<T>, SelectableItem {
+export interface DataIteratorItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   value: unknown
 }
 

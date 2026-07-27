@@ -6,7 +6,7 @@
     <router-link
       v-if="(prev && prev.name !== 'home')"
       :to="prev.path"
-      class="text-decoration-none text-body-1 d-inline-flex align-center"
+      class="text-decoration-none text-body-large d-inline-flex align-center"
     >
       <v-icon
         :icon="arrows.prev"
@@ -25,7 +25,7 @@
     <router-link
       v-if="next"
       :to="next.path"
-      class="text-decoration-none text-body-1 d-inline-flex align-center"
+      class="text-decoration-none text-body-large d-inline-flex align-center"
     >
       <span
         class="text-primary"
@@ -42,15 +42,6 @@
 </template>
 
 <script setup>
-  // Composables
-  import { useRoute, useRouter } from 'vue-router'
-  import { useRtl } from 'vuetify'
-  import { useAppStore } from '@/store/app'
-
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const { pages } = useAppStore()
   const route = useRoute()
   const path = computed(() => route.path.split('/').slice(2, -1))

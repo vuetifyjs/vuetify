@@ -2,16 +2,16 @@
   <v-select
     v-model="model"
     :items="items"
-    readonly
     label="Read-only"
+    readonly
   ></v-select>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
+  const model = shallowRef('Foo')
   const items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-  const model = ref('Foo')
 </script>
 
 <script>

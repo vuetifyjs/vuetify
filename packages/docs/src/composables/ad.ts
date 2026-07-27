@@ -1,15 +1,3 @@
-// Composables
-import { useAdsStore } from '@/store/ads'
-import { useI18n } from 'vue-i18n'
-
-// Stores
-import { useUserStore } from '@/store/user'
-
-// Utilities
-import { computed } from 'vue'
-import { kebabCase } from 'lodash-es'
-import { leadingSlash, trailingSlash } from '@/util/routes'
-
 interface AdProps {
   medium: string
   slug?: string
@@ -39,7 +27,7 @@ export const useAd = (props: AdProps) => {
   })
 
   const ad = computed(() => {
-    if (user.disableAds && !props.permanent) return undefined
+    if (!user.one.ads.enabled && !props.permanent) return undefined
     if (props.slug) return store.ads?.find(ad => ad.slug === props.slug)
 
     return ads.value[Math.floor(Math.random() * ads.value.length)]
@@ -54,7 +42,7 @@ export const useAd = (props: AdProps) => {
       return leadingSlash(trailingSlash(`${locale.value}${url}`))
     }
 
-    if (query && query.indexOf('utm_source') !== -1) {
+    if (query && query.includes('utm_source')) {
       return `${url}?${query}`
     }
 

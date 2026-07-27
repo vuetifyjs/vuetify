@@ -1,27 +1,40 @@
 <template>
   <v-card
-    class="pa-4"
+    height="300"
+    image="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
+    border
     flat
-    height="300px"
-    img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
   >
-    <v-toolbar
-      dense
-      floating
-    >
-      <v-text-field
-        hide-details
-        prepend-icon="mdi-magnify"
-        single-line
-      ></v-text-field>
+    <template v-slot:text>
+      <v-toolbar rounded="lg" border floating>
+        <div class="px-4">
+          <v-text-field
+            density="compact"
+            placeholder="Search"
+            prepend-inner-icon="mdi-magnify"
+            variant="solo"
+            width="200"
+            flat
+            hide-details
+            single-line
+          ></v-text-field>
+        </div>
 
-      <v-btn icon>
-        <v-icon>mdi-crosshairs-gps</v-icon>
-      </v-btn>
+        <template v-slot:append>
+          <v-btn
+            color="medium-emphasis"
+            density="comfortable"
+            icon="mdi-crosshairs-gps"
+          ></v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-toolbar>
+          <v-btn
+            class="ms-1"
+            color="medium-emphasis"
+            density="comfortable"
+            icon="mdi-dots-vertical"
+          ></v-btn>
+        </template>
+      </v-toolbar>
+    </template>
   </v-card>
 </template>

@@ -1,5 +1,4 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { APCAcontrast } from '../color/APCA'
 import * as transformCIELAB from '../color/transformCIELAB'
 import * as transformSRGB from '../color/transformSRGB'
@@ -22,16 +21,16 @@ const currentTheme = { primary: '#1976d2' }
 
 describe('isCssColor', () => {
   it('should return true if css color is passed', () => {
-    expect(isCssColor('#ff0000')).toBeTruthy()
-    expect(isCssColor('#fff')).toBeTruthy()
-    expect(isCssColor('rgb(255, 255, 255)')).toBeTruthy()
-    expect(isCssColor('rgba(255, 0, 0, 0.8)')).toBeTruthy()
-    expect(isCssColor('var(--my-color)')).toBeTruthy()
+    expect(isCssColor('#ff0000')).toBe(true)
+    expect(isCssColor('#fff')).toBe(true)
+    expect(isCssColor('rgb(255, 255, 255)')).toBe(true)
+    expect(isCssColor('rgba(255, 0, 0, 0.8)')).toBe(true)
+    expect(isCssColor('var(--my-color)')).toBe(true)
   })
 
   it('should return false if non-css color is passed', () => {
-    expect(isCssColor('red')).toBeFalsy()
-    expect(isCssColor('primary')).toBeFalsy()
+    expect(isCssColor('red')).toBe(false)
+    expect(isCssColor('primary')).toBe(false)
   })
 })
 
@@ -46,9 +45,12 @@ describe('parseColor', () => {
 
   it('should parse a CSS color string', () => {
     expect(parseColor('rgb(255, 0, 0)')).toEqual({ r: 255, g: 0, b: 0, a: undefined })
+    expect(parseColor('rgb(255 0 0)')).toEqual({ r: 255, g: 0, b: 0, a: undefined })
     expect(parseColor('rgba(255, 0, 0, 0.5)')).toEqual({ r: 255, g: 0, b: 0, a: 0.5 })
+    expect(parseColor('rgba(255 0 0 / 0.5)')).toEqual({ r: 255, g: 0, b: 0, a: 0.5 })
     expect(parseColor('hsl(100, 50%, 25%)')).toEqual({ r: 53, g: 96, b: 32, a: undefined })
     expect(parseColor('hsla(100, 50%, 25%, 0.5)')).toEqual({ r: 53, g: 96, b: 32, a: 0.5 })
+    expect(parseColor('hsl(100 50 25 / 0.5)')).toEqual({ r: 53, g: 96, b: 32, a: 0.5 })
   })
 
   it('should parse rgb object', () => {
@@ -105,10 +107,17 @@ describe('parseColor', () => {
   it('should reject invalid formats', async () => {
     // @ts-expect-error
     expect(() => parseColor([]))
-      .toThrow('Invalid color: Array\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number')
+      .toThrowErrorMatchingInlineSnapshot(`
+        [TypeError: Invalid color: Array
+        Expected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number]
+      `)
     // @ts-expect-error
     expect(() => parseColor(() => {}))
-      .toThrow('Invalid color: () => {}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number')
+      .toThrowErrorMatchingInlineSnapshot(`
+        [TypeError: Invalid color: () => {
+            }
+        Expected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number]
+      `)
 
     parseColor(-1)
     parseColor('#1000000')
@@ -224,7 +233,7 @@ describe('APCAcontrast', () => {
     ['#def', '#123', -98.44863435731264],
     ['#123', '#234', 1.276075977788573],
   ])('%s on %s', (text, bg, expected) => {
-    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBe(expected)
+    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBeCloseTo(expected, 13)
   })
 })
 

@@ -1,8 +1,7 @@
 <template>
   <v-card
-    class="mx-auto"
+    class="mx-auto text-white"
     color="#26c6da"
-    theme="dark"
     max-width="400"
     prepend-icon="mdi-twitter"
     title="Twitter"
@@ -11,7 +10,7 @@
       <v-icon size="x-large"></v-icon>
     </template>
 
-    <v-card-text class="text-h5 py-2">
+    <v-card-text class="text-headline-small py-2">
       "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."
     </v-card-text>
 

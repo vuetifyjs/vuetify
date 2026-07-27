@@ -4,7 +4,6 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVListSubheaderProps = propsFactory({
@@ -23,7 +22,7 @@ export const VListSubheader = genericComponent()({
   props: makeVListSubheaderProps(),
 
   setup (props, { slots }) {
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     useRender(() => {
       const hasText = !!(slots.default || props.title)

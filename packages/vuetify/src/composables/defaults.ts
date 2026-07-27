@@ -1,6 +1,8 @@
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
-import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
+import { getCurrentInstance } from '@/util/getCurrentInstance'
+import { mergeDeep, toKebabCase } from '@/util/helpers'
+import { injectSelf } from '@/util/injectSelf'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
@@ -14,6 +16,7 @@ export type DefaultsInstance = undefined | {
 export type DefaultsOptions = Partial<DefaultsInstance>
 
 export const DefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults')
+export const RootDefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults:root')
 
 export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstance> {
   return ref(options)
@@ -37,6 +40,7 @@ export function provideDefaults (
   }
 ) {
   const injectedDefaults = injectDefaults()
+  const injectedRoot = inject(RootDefaultsSymbol, null)
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
@@ -57,6 +61,12 @@ export function provideDefaults (
     if (reset || root) {
       const len = Number(reset || Infinity)
 
+      const rootDefaults = typeof root === 'string' ? properties.prev?.[root] : undefined
+
+      if (root && injectedRoot?.value) {
+        properties = injectedRoot.value
+      }
+
       for (let i = 0; i <= len; i++) {
         if (!properties || !('prev' in properties)) {
           break
@@ -65,15 +75,15 @@ export function provideDefaults (
         properties = properties.prev
       }
 
-      if (properties && typeof root === 'string' && root in properties) {
-        properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
+      if (properties && rootDefaults) {
+        properties = mergeDeep(mergeDeep(properties, { prev: properties }), rootDefaults)
       }
 
       return properties
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties)
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
       : properties
   }) as ComputedRef<DefaultsInstance>
 
@@ -83,8 +93,8 @@ export function provideDefaults (
 }
 
 function propIsDefined (vnode: VNode, prop: string) {
-  return typeof vnode.props?.[prop] !== 'undefined' ||
-    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
+  return vnode.props && (typeof vnode.props[prop] !== 'undefined' ||
+    typeof vnode.props[toKebabCase(prop)] !== 'undefined')
 }
 
 export function internalUseDefaults (
@@ -101,13 +111,16 @@ export function internalUseDefaults (
 
   const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
   const _props = new Proxy(props, {
-    get (target, prop) {
+    get (target, prop: string) {
       const propValue = Reflect.get(target, prop)
       if (prop === 'class' || prop === 'style') {
         return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
-      } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] ?? defaults.value?.global?.[prop] ?? propValue
       }
+      if (propIsDefined(vm.vnode, prop)) return propValue
+      const _componentDefault = componentDefaults.value?.[prop]
+      if (_componentDefault !== undefined) return _componentDefault
+      const _globalDefault = defaults.value?.global?.[prop]
+      if (_globalDefault !== undefined) return _globalDefault
       return propValue
     },
   })
@@ -115,7 +128,8 @@ export function internalUseDefaults (
   const _subcomponentDefaults = shallowRef()
   watchEffect(() => {
     if (componentDefaults.value) {
-      const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
+      const subComponents = Object.entries(componentDefaults.value)
+        .filter(([key]) => key.startsWith(key[0].toUpperCase()))
       _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
     } else {
       _subcomponentDefaults.value = undefined

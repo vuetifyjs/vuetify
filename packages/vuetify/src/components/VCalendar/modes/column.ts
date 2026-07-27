@@ -1,8 +1,6 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { CalendarEventOverlapMode } from 'vuetify/types'
+// Types
 import { getOverlapGroupHandler } from './common'
+import type { CalendarEventOverlapMode } from '../types'
 
 const FULL_WIDTH = 100
 

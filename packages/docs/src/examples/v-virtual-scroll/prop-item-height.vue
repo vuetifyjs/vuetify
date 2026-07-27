@@ -16,8 +16,8 @@
     >
       <template v-slot:default="{ item }">
         <v-list-item
-          :title="`Employee Name`"
           :subtitle="`Badge #${item}`"
+          :title="`Employee Name`"
         >
           <template v-slot:prepend>
             <v-icon class="bg-primary">mdi-account</v-icon>

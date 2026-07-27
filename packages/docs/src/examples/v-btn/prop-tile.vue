@@ -1,11 +1,8 @@
 <template>
-  <v-row
-    align="center"
-    justify="space-around"
-  >
+  <v-row class="align-center justify-space-around">
     <v-btn
-      tile
       color="success"
+      tile
     >
       <v-icon start>
         mdi-pencil

@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     color="success"
-    loading
     disabled
+    loading
   ></v-text-field>
 </template>

@@ -2,12 +2,11 @@
 import { useColor } from '@/composables/color'
 
 // Utilities
-import { computed, unref } from 'vue'
+import { toRef, toValue } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { MaybeRefOrGetter, PropType } from 'vue'
 
 export const allowedVariants = [
   'elevated',
@@ -45,20 +44,20 @@ export const makeVariantProps = propsFactory({
 }, 'variant')
 
 export function useVariant (
-  props: MaybeRef<VariantProps>,
+  props: MaybeRefOrGetter<VariantProps>,
   name = getCurrentInstanceName(),
 ) {
-  const variantClasses = computed(() => {
-    const { variant } = unref(props)
+  const variantClasses = toRef(() => {
+    const { variant } = toValue(props)
     return `${name}--variant-${variant}`
   })
 
-  const { colorClasses, colorStyles } = useColor(computed(() => {
-    const { variant, color } = unref(props)
+  const { colorClasses, colorStyles } = useColor(() => {
+    const { variant, color } = toValue(props)
     return {
       [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
     }
-  }))
+  })
 
   return { colorClasses, colorStyles, variantClasses }
 }

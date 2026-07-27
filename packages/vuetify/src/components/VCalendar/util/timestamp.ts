@@ -1,8 +1,7 @@
-// @ts-nocheck
-/* eslint-disable */
+import { isLeapYear } from './dateTimeUtils'
 
-import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
-import { isLeapYear } from '../../../util/dateTimeUtils'
+// Types
+import type { CalendarFormatter, CalendarTimestamp } from '../types'
 
 export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -26,7 +25,7 @@ export const OFFSET_MONTH = 100
 export const OFFSET_HOUR = 100
 export const OFFSET_TIME = 10000
 
-type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => object
+type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => Intl.DateTimeFormatOptions
 type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
 export type VTime = number | string | {
   hour: number
@@ -75,6 +74,10 @@ export function getEndOfMonth (timestamp: CalendarTimestamp): CalendarTimestamp 
   return end
 }
 
+export function validateNumber (input: any): boolean {
+  return isFinite(parseInt(input))
+}
+
 export function validateTime (input: any): input is VTime {
   return (typeof input === 'number' && isFinite(input)) ||
     (!!PARSE_TIME.exec(input)) ||
@@ -112,9 +115,9 @@ export function validateTimestamp (input: any): input is VTimestampInput {
     (input instanceof Date)
 }
 
-export function parseTimestamp (input: VTimestampInput, required?: false, now?: CalendarTimestamp): CalendarTimestamp | null
+export function parseTimestamp (input: VTimestampInput | null, required?: false, now?: CalendarTimestamp | null): CalendarTimestamp | null
 export function parseTimestamp (input: VTimestampInput, required: true, now?: CalendarTimestamp): CalendarTimestamp
-export function parseTimestamp (input: VTimestampInput, required = false, now?: CalendarTimestamp): CalendarTimestamp | null {
+export function parseTimestamp (input: VTimestampInput | null, required = false, now?: CalendarTimestamp | null): CalendarTimestamp | null {
   if (typeof input === 'number' && isFinite(input)) {
     input = new Date(input)
   }
@@ -243,9 +246,10 @@ export function updateHasTime (timestamp: CalendarTimestamp, hasTime: boolean, n
 
 export function updateMinutes (timestamp: CalendarTimestamp, minutes: number, now?: CalendarTimestamp): CalendarTimestamp {
   timestamp.hasTime = true
-  timestamp.hour = Math.floor(minutes / MINUTES_IN_HOUR)
-  timestamp.minute = minutes % MINUTES_IN_HOUR
-  timestamp.time = getTime(timestamp)
+  timestamp.hour = 0
+  timestamp.minute = 0
+  nextMinutes(timestamp, minutes)
+  updateFormatted(timestamp)
   if (now) {
     updateRelative(timestamp, now, true)
   }
@@ -284,7 +288,11 @@ export function daysInMonth (year: number, month: number) {
   return isLeapYear(year) ? DAYS_IN_MONTH_LEAP[month] : DAYS_IN_MONTH[month]
 }
 
-export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp {
+export function copyTimestamp (timestamp: null): null
+export function copyTimestamp (timestamp: CalendarTimestamp): CalendarTimestamp
+export function copyTimestamp (timestamp: CalendarTimestamp | null): CalendarTimestamp | null {
+  if (timestamp == null) return null
+
   const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
 
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
@@ -317,7 +325,7 @@ export function getTime (timestamp: CalendarTimestamp): string {
 
 export function nextMinutes (timestamp: CalendarTimestamp, minutes: number): CalendarTimestamp {
   timestamp.minute += minutes
-  while (timestamp.minute > MINUTES_IN_HOUR) {
+  while (timestamp.minute >= MINUTES_IN_HOUR) {
     timestamp.minute -= MINUTES_IN_HOUR
     timestamp.hour++
     if (timestamp.hour >= HOURS_IN_DAY) {
@@ -451,8 +459,13 @@ export function createDayList (
   return days
 }
 
-export function createIntervalList (timestamp: CalendarTimestamp, first: number,
-  minutes: number, count: number, now?: CalendarTimestamp): CalendarTimestamp[] {
+export function createIntervalList (
+  timestamp: CalendarTimestamp,
+  first: number,
+  minutes: number,
+  count: number,
+  now?: CalendarTimestamp
+): CalendarTimestamp[] {
   const intervals: CalendarTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
@@ -480,4 +493,50 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
       return ''
     }
   }
+}
+
+export function validateWeekdays (input: string | (number | string)[]): boolean {
+  if (typeof input === 'string') {
+    input = input.split(',')
+  }
+
+  if (Array.isArray(input)) {
+    const ints = input.map(x => parseInt(x))
+
+    if (ints.length > DAYS_IN_WEEK || ints.length === 0) {
+      return false
+    }
+
+    const visited: Record<number, boolean> = {}
+    let wrapped = false
+
+    for (let i = 0; i < ints.length; i++) {
+      const x = ints[i]
+
+      if (!isFinite(x) || x < 0 || x >= DAYS_IN_WEEK) {
+        return false
+      }
+
+      if (i > 0) {
+        const d = x - ints[i - 1]
+        if (d < 0) {
+          if (wrapped) {
+            return false
+          }
+          wrapped = true
+        } else if (d === 0) {
+          return false
+        }
+      }
+
+      if (visited[x]) {
+        return false
+      }
+      visited[x] = true
+    }
+
+    return true
+  }
+
+  return false
 }

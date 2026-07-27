@@ -1,18 +1,18 @@
 <template>
   <v-file-input
     v-model="files"
-    placeholder="Upload your documents"
     label="File input"
-    multiple
+    placeholder="Upload your documents"
     prepend-icon="mdi-paperclip"
+    multiple
   >
     <template v-slot:selection="{ fileNames }">
       <template v-for="fileName in fileNames" :key="fileName">
         <v-chip
+          class="me-2"
+          color="primary"
           size="small"
           label
-          color="primary"
-          class="me-2"
         >
           {{ fileName }}
         </v-chip>

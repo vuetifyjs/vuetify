@@ -3,8 +3,8 @@
     v-model="selected"
     :headers="headers"
     :items="desserts"
-    items-per-page="5"
     item-value="name"
+    items-per-page="5"
     return-object
     show-select
   ></v-data-table>

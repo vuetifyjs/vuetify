@@ -9,7 +9,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed } from 'vue'
+import { toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -17,6 +17,7 @@ import type { Component } from 'vue'
 
 export const makeVCounterProps = propsFactory({
   active: Boolean,
+  disabled: Boolean,
   max: [Number, String],
   value: {
     type: [Number, String],
@@ -47,7 +48,7 @@ export const VCounter = genericComponent<VCounterSlots>()({
   props: makeVCounterProps(),
 
   setup (props, { slots }) {
-    const counter = computed(() => {
+    const counter = toRef(() => {
       return props.max ? `${props.value} / ${props.max}` : String(props.value)
     })
 
@@ -57,6 +58,10 @@ export const VCounter = genericComponent<VCounterSlots>()({
           v-show={ props.active }
           class={[
             'v-counter',
+            {
+              'text-error': props.max && !props.disabled &&
+                parseFloat(props.value) > parseFloat(props.max),
+            },
             props.class,
           ]}
           style={ props.style }

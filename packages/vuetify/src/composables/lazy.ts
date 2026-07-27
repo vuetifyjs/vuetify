@@ -1,5 +1,5 @@
 // Utilities
-import { computed, shallowRef, watch } from 'vue'
+import { shallowRef, toRef, watch } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -11,7 +11,7 @@ export const makeLazyProps = propsFactory({
 
 export function useLazy (props: { eager: boolean }, active: Ref<boolean>) {
   const isBooted = shallowRef(false)
-  const hasContent = computed(() => isBooted.value || props.eager || active.value)
+  const hasContent = toRef(() => isBooted.value || props.eager || active.value)
 
   watch(active, () => isBooted.value = true)
 

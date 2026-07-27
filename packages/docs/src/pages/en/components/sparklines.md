@@ -1,42 +1,68 @@
 ---
-disabled: true
+emphasized: true
 meta:
-  title: Sparkline component
+  title: Sparklines
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.
   keywords: sparklines, vuetify sparkline component, vue sparkline component, sparkline, graph, chart, line
 related:
   - /components/cards/
   - /components/sheets/
   - /components/expansion-panels/
+features:
+  github: /components/VSparkline/
+  label: 'C: VSparkline'
+  report: true
 ---
 
 # Sparklines
 
 The sparkline component can be used to create simple graphs, like GitHub's contribution chart.
 
-Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.
-
-<entry />
+<PageFeatures />
 
 ## Usage
 
 A sparkline is a tiny chart that provides a visual representation of data. The sparkline component comes in 2 variations, **trend** (default) and **bar**. Each supports a multitude of options for customizing the look and feel of the sparkline.
 
-<example file="v-sparkline/usage" />
+<ExamplesUsage name="v-sparkline" />
+
+<PromotedEntry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-sparkline](/api/v-sparkline/) | Primary Component |
+
+<ApiInline hide-links />
 
 ## Examples
 
 ### Props
 
+#### Animation
+
+The **animation** prop enables smooth transitions when values change. Combined with **auto-draw** set to **once**, the sparkline draws on mount then smoothly interpolates between datasets. Toggle between weekly, monthly, and quarterly views to see the effect.
+
+<ExamplesExample file="v-sparkline/prop-animation" />
+
 #### Fill
 
 You can create a `v-sparkline` with fill using the `fill` property.
 
-<example file="v-sparkline/prop-fill" />
+<ExamplesExample file="v-sparkline/prop-fill" />
+
+#### Inset
+
+The **inset** prop extends the line beyond the chart boundary for edge-to-edge rendering. It is useful when combined with **interactive**, so that edge points are not clipped by SVG boundaries.
+
+<ExamplesExample file="v-sparkline/prop-inset" />
+
+#### Smooth mode
+
+The **smooth-mode** prop controls the interpolation algorithm. The default mode rounds corners which can cause the line to appear away from the actual values. The **monotone** mode makes the line stick to the exact data points, but also limits the **smooth** to **8**.
+
+<ExamplesExample file="v-sparkline/prop-smooth-mode" />
 
 ### Misc
 
@@ -44,16 +70,22 @@ You can create a `v-sparkline` with fill using the `fill` property.
 
 By providing a **label** slot, we are able to modify the displayed content by adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text).
 
-<example file="v-sparkline/misc-custom-labels" />
+<ExamplesExample file="v-sparkline/misc-custom-labels" />
 
 #### Dashboard card
 
 The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline.
 
-<example file="v-sparkline/misc-dashboard-card" />
+<ExamplesExample file="v-sparkline/misc-dashboard-card" />
+
+#### Interactive
+
+The **interactive** prop enables hover tracking, keyboard navigation, and focus support. Use the `@update:current-index` event to react to the active data point. This example fetches weekly npm download data and displays the hovered week's value and date range.
+
+<ExamplesExample file="v-sparkline/misc-interactive" />
 
 #### Heart rate
 
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
-<example file="v-sparkline/misc-heart-rate" />
+<ExamplesExample file="v-sparkline/misc-heart-rate" />

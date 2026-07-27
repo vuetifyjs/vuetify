@@ -1,11 +1,3 @@
-import VTreeview from './VTreeview'
-import VTreeviewNode from './VTreeviewNode'
-
-export { VTreeview, VTreeviewNode }
-
-export default {
-  $_vuetify_subcomponents: {
-    VTreeview,
-    VTreeviewNode,
-  },
-}
+export { VTreeview } from './VTreeview'
+export { VTreeviewItem } from './VTreeviewItem'
+export { VTreeviewGroup } from './VTreeviewGroup'

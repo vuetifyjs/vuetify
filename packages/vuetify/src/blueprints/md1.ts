@@ -19,20 +19,44 @@ export const md1: Blueprint = {
       color: 'primary',
     },
     VBtn: {
+      class: 'text-uppercase',
       color: 'primary',
       rounded: 0,
     },
     VCheckbox: {
       color: 'secondary',
+      indentDetails: false,
     },
     VCombobox: {
       variant: 'underlined',
+    },
+    VDatePicker: {
+      color: 'primary',
+      controlHeight: 44,
+      elevation: 1,
+      rounded: 0,
+      controlVariant: 'modal',
+
+      VBtn: {
+        color: 'high-emphasis',
+        rounded: 'circle',
+      },
     },
     VSelect: {
       variant: 'underlined',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: false,
+    },
+    VSwitch: {
+      indentDetails: false,
+    },
+    VRadioGroup: {
+      indentDetails: false,
+    },
+    VRangeSlider: {
+      indentDetails: false,
     },
     VTabs: {
       color: 'primary',

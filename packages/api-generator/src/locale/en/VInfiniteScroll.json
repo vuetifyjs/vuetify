@@ -1,4 +1,5 @@
 {
+  "description": "Container that detects when user scrolls to either edge and allows auto-loading more items to show.",
   "props": {
     "direction": "Specifies if scroller is **vertical** or **horizontal**.",
     "emptyText": "Text shown when there is no more content to load.",
@@ -15,5 +16,8 @@
   },
   "events": {
     "load": "Emitted when reaching the start / end threshold, or if triggered when using manual mode."
+  },
+  "exposed": {
+    "reset": "Resets side status to 'ok' letting it trigger 'load' again. Useful to prevent given side being stuck in 'empty' or 'error' state."
   }
 }

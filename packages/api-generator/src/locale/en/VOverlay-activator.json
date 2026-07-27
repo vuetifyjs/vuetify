@@ -7,6 +7,7 @@
     "location": "Specifies the anchor point for positioning the component, using directional cues to align it either horizontally, vertically, or both..",
     "openOnClick": "Activate the component when the activator is clicked.",
     "openOnFocus": "Activate the component when the activator is focused.",
+    "openOnHover": "Activate the component when the activator is hovered.",
     "target": "For locationStrategy=\"connected\", specify an element or array of x,y coordinates that the overlay should position itself relative to. This will be the activator element by default."
   }
 }

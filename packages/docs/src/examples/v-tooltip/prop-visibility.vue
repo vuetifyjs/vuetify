@@ -1,12 +1,9 @@
 <template>
   <v-container
-    fluid
     class="text-center"
+    fluid
   >
-    <v-row
-      class="flex"
-      justify="space-between"
-    >
+    <v-row class="flex justify-space-between">
       <v-col cols="12">
         <v-btn @click="show = !show">
           toggle
@@ -14,8 +11,8 @@
       </v-col>
 
       <v-col
-        cols="12"
         class="mt-12"
+        cols="12"
       >
         <v-tooltip
           v-model="show"

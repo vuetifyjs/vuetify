@@ -1,12 +1,12 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-date-picker
       v-model="date"
       :allowed-dates="allowedMonths"
-      type="month"
       class="mt-4"
-      min="2017-06"
       max="2019-10"
+      min="2017-06"
+      type="month"
     ></v-date-picker>
   </v-row>
 </template>

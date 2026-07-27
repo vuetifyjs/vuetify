@@ -1,7 +1,7 @@
 <template>
-  <app-sheet class="mb-6">
-    <vue-file :file="`${name}/usage`" />
-  </app-sheet>
+  <AppSheet class="mb-4">
+    <ExamplesVueFile :file="`${name}/usage`" />
+  </AppSheet>
 </template>
 
 <script setup>

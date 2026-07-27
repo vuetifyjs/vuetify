@@ -1,31 +1,31 @@
 <template>
   <div>
     <v-progress-linear
-      model-value="10"
       color="light-blue"
       height="10"
+      model-value="10"
       striped
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      model-value="20"
       color="light-green-darken-4"
       height="10"
+      model-value="20"
       striped
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      model-value="45"
-      height="10"
-      striped
       color="lime"
+      height="10"
+      model-value="45"
+      striped
     ></v-progress-linear>
     <br>
     <v-progress-linear
-      model-value="60"
-      height="10"
-      striped
       color="deep-orange"
+      height="10"
+      model-value="60"
+      striped
     ></v-progress-linear>
   </div>
 </template>

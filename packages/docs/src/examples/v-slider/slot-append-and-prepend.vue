@@ -4,24 +4,20 @@
     max-width="600"
   >
     <v-toolbar
-      flat
       dense
+      flat
     >
       <v-toolbar-title>
         <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn variant="text" icon="mdi-share-variant"></v-btn>
+      <v-btn icon="mdi-share-variant" variant="text"></v-btn>
     </v-toolbar>
 
     <v-card-text>
-      <v-row
-        class="mb-4"
-        justify="space-between"
-      >
+      <v-row class="mb-4 justify-space-between">
         <v-col class="text-left">
           <span
-            class="text-h2 font-weight-light"
+            class="text-display-large font-weight-light"
             v-text="bpm"
           ></span>
           <span class="subheading font-weight-light me-1">BPM</span>
@@ -40,12 +36,12 @@
         <v-col class="text-right">
           <v-btn
             :color="color"
+            elevation="0"
             theme="dark"
             icon
-            elevation="0"
             @click="toggle"
           >
-            <v-icon size="large" :icon="isPlaying ? 'mdi-pause' : 'mdi-play'"></v-icon>
+            <v-icon :icon="isPlaying ? 'mdi-pause' : 'mdi-play'" size="large"></v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -53,27 +49,27 @@
       <v-slider
         v-model="bpm"
         :color="color"
-        track-color="grey"
-        min="40"
-        max="218"
         :step="1"
+        max="218"
+        min="40"
+        track-color="grey"
       >
         <template v-slot:prepend>
           <v-btn
+            :color="color"
+            icon="mdi-minus"
             size="small"
             variant="text"
-            icon="mdi-minus"
-            :color="color"
             @click="decrement"
           ></v-btn>
         </template>
 
         <template v-slot:append>
           <v-btn
+            :color="color"
+            icon="mdi-plus"
             size="small"
             variant="text"
-            icon="mdi-plus"
-            :color="color"
             @click="increment"
           ></v-btn>
         </template>

@@ -1,13 +1,10 @@
 <template>
   <v-container
-    fluid
     style="height: 300px"
+    fluid
   >
-    <v-row justify="center">
-      <v-menu
-        min-width="200px"
-        rounded
-      >
+    <v-row class="justify-center">
+      <v-menu min-width="200px">
         <template v-slot:activator="{ props }">
           <v-btn
             icon
@@ -17,7 +14,7 @@
               color="brown"
               size="large"
             >
-              <span class="text-h5">{{ user.initials }}</span>
+              <span class="text-headline-small">{{ user.initials }}</span>
             </v-avatar>
           </v-btn>
         </template>
@@ -27,23 +24,23 @@
               <v-avatar
                 color="brown"
               >
-                <span class="text-h5">{{ user.initials }}</span>
+                <span class="text-headline-small">{{ user.initials }}</span>
               </v-avatar>
-              <h3>{{ user.fullName }}</h3>
-              <p class="text-caption mt-1">
+              <h3 class="my-0">{{ user.fullName }}</h3>
+              <p class="text-body-small mt-1">
                 {{ user.email }}
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Edit Account
               </v-btn>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                rounded
                 variant="text"
+                rounded
               >
                 Disconnect
               </v-btn>

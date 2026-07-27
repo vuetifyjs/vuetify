@@ -1,14 +1,14 @@
 <template>
   <v-card
-    max-width="600"
     class="mx-auto"
+    max-width="600"
   >
     <div class="d-flex justify-space-between pa-4 pb-0">
       <v-btn-toggle
         v-model="formatting"
-        multiple
         variant="outlined"
         divided
+        multiple
       >
         <v-btn>
           <v-icon icon="mdi-format-italic"></v-icon>
@@ -27,10 +27,10 @@
             <v-icon icon="mdi-format-color-text"></v-icon>
 
             <v-sheet
-              tile
+              color="purple"
               height="4"
               width="26"
-              color="purple"
+              tile
             ></v-sheet>
           </div>
         </v-btn>
@@ -58,10 +58,9 @@
     <v-sheet class="pa-4 text-center">
       <v-textarea
         v-model="value"
+        rows="2"
         variant="outlined"
         auto-grow
-        full-width
-        rows="2"
         hide-details
       ></v-textarea>
     </v-sheet>
@@ -85,3 +84,8 @@
     }),
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2219-13727&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

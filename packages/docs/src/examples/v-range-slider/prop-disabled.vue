@@ -4,8 +4,8 @@
       <v-col cols="12">
         <v-range-slider
           v-model="value"
-          disabled
           label="Disabled"
+          disabled
         ></v-range-slider>
       </v-col>
     </v-row>

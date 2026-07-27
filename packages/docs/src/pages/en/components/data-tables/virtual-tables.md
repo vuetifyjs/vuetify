@@ -8,16 +8,34 @@ related:
   - /components/data-tables/basics/
   - /components/data-tables/server-side-tables/
   - /components/tables/
+features:
+  github: /components/VDataTable/VDataTableVirtual.tsx
+  label: 'C: VDataTableVirtual'
+  report: true
 ---
 
 # Data table - Virtual tables
 
 The v-data-table-virtual component relies on all data being available locally. But unlike the standard data-table it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-data-table-virtual](/api/v-data-table-virtual/) | Primary Component |
+
+<ApiInline hide-links />
 
 ## Examples
 
 ### Basic example
 
-<example file="v-data-table/virtual" />
+<ExamplesExample file="v-data-table/virtual" />
+
+When customizing rows with the `#item` slot, you must bind the provided `itemRef` to your `<tr>`. This ensures that the virtual scroller can correctly measure and recycle rows.
+
+<ExamplesExample file="v-data-table/virtual-custom" />

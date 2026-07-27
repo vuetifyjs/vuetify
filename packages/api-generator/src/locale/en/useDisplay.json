@@ -21,6 +21,8 @@
     "xlAndDown": "Returns **true** if the current browser breakpoint is **xl** or lower.",
     "xlAndUp": "Returns **true** if the current browser breakpoint is **xl** or higher.",
     "xs": "Returns **true** if the current browser breakpoint is **xs**.",
-    "xxl": "Returns **true** if the current browser breakpoint is **xxl**."
+    "xxl": "Returns **true** if the current browser breakpoint is **xxl**.",
+    "ssr": "Returns **true** if the current page was server rendered.",
+    "displayClasses": "Returns an object containing the breakpoints and their corresponding classes."
   }
 }

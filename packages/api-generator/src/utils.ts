@@ -1,8 +1,8 @@
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
-import typescriptParser from 'prettier/esm/parser-typescript.mjs'
-import type { Definition } from './types'
+import * as typescriptParser from 'prettier/plugins/typescript'
+import type { Definition, DirectiveData } from './types.ts'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -22,7 +22,9 @@ function getPropType (type: any | any[]): string | string[] {
   return type.name.toLowerCase()
 }
 
-function getPropDefault (def: any, type: string | string[]) {
+function getPropDefault (definition: any, type: string | string[]) {
+  const def = definition?.default
+
   if (typeof def === 'function' && type !== 'function') {
     return def.call({}, {})
   }
@@ -35,7 +37,7 @@ function getPropDefault (def: any, type: string | string[]) {
     return parseFunctionParams(def)
   }
 
-  if (def == null && (
+  if ((!definition || !('default' in definition)) && (
     type === 'boolean' ||
     (Array.isArray(type) && type.includes('boolean'))
   )) {
@@ -46,6 +48,7 @@ function getPropDefault (def: any, type: string | string[]) {
 }
 
 type ComponentData = {
+  description?: Record<string, string>
   props?: Record<string, Definition>
   slots?: Record<string, Definition>
   events?: Record<string, Definition>
@@ -74,7 +77,7 @@ export function stringifyProps (props: any) {
   return Object.fromEntries(
     Object.entries<any>(props).map(([key, prop]) => {
       let def = typeof prop === 'object'
-        ? getPropDefault(prop?.default, getPropType(prop?.type))
+        ? getPropDefault(prop, getPropType(prop?.type))
         : getPropDefault(undefined, getPropType(prop))
 
       if (typeof def === 'object') {
@@ -106,11 +109,11 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
   }
   try {
     const data = await import(`../src/locale/${cacheKey}.json`, {
-      assert: { type: 'json' },
+      with: { type: 'json' },
     })
     localeCache.set(cacheKey, data.default)
     return data.default
-  } catch (err) {
+  } catch (err: any) {
     if (err.code === 'ERR_MODULE_NOT_FOUND') {
       console.error(`\x1b[35mMissing locale for ${cacheKey}\x1b[0m`)
       localeCache.set(cacheKey, {})
@@ -123,6 +126,39 @@ async function loadLocale (componentName: string, locale: string): Promise<Recor
 
 const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
 
+type MissingDescription = {
+  name: string
+  section: string
+  key: string
+  locale: string
+  color?: keyof typeof ansiColors
+}
+
+const missingDescriptions: MissingDescription[] = []
+
+const ansiColors = {
+  red: '\x1b[31m',
+  yellow: '\x1b[33m',
+  green: '\x1b[32m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+}
+const reset = '\x1b[0m'
+
+export function reportMissingDescriptions () {
+  if (!missingDescriptions.length) return
+
+  console.warn(`\n${ansiColors.red}Missing API Descriptions:${reset}`)
+  missingDescriptions.forEach(({ name, section, key, locale, color }) => {
+    const c = ansiColors[color ?? 'red']
+    console.warn(`${c}- ${name} (${locale}): [${section}] ${key}${reset}`)
+  })
+
+  // Clear missing descriptions in case of multiple runs
+  missingDescriptions.length = 0
+}
+
 async function getSources (name: string, locale: string, sources: string[]) {
   const arr = await Promise.all([
     loadLocale(name, locale),
@@ -132,14 +168,25 @@ async function getSources (name: string, locale: string, sources: string[]) {
   const sourcesMap = [name, ...sources, 'generic']
 
   return {
-    find: (section: string, key: string, ogSource = name) => {
+    find (section: string, key?: string, ogSource = name) {
       for (let i = 0; i < arr.length; i++) {
-        const source = arr[i]
-        const found: string | undefined = source?.[section]?.[key]
+        const source = arr[i] as any
+        const found: string | undefined = ['argument', 'value'].includes(section)
+          ? source?.[section]
+          : source?.[section]?.[key!]
         if (found) {
           return { text: found, source: sourcesMap[i] }
         }
       }
+
+      // Collect missing descriptions
+      missingDescriptions.push({
+        name,
+        section,
+        key: key || '',
+        locale,
+      })
+
       const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${ogSource}.json`
       return { text: `MISSING DESCRIPTION ([edit in github](${githubUrl}))`, source: name }
     },
@@ -148,6 +195,14 @@ async function getSources (name: string, locale: string, sources: string[]) {
 
 export async function addDescriptions (name: string, componentData: ComponentData, locales: string[], sources: string[] = []) {
   for (const locale of locales) {
+    const localeData = await loadLocale(name, locale)
+    componentData.description ??= {}
+    const desc = localeData.description as string
+    componentData.description[locale] = desc ?? ''
+    if (!desc) {
+      missingDescriptions.push({ name, section: 'description', key: '', locale, color: 'yellow' })
+    }
+
     const descriptions = await getSources(name, locale, sources)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
@@ -165,35 +220,45 @@ export async function addDescriptions (name: string, componentData: ComponentDat
 
 export async function addDirectiveDescriptions (
   name: string,
-  componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
+  componentData: DirectiveData,
   locales: string[],
   sources: string[] = [],
 ) {
   for (const locale of locales) {
     const descriptions = await getSources(name, locale, sources)
 
-    if (componentData.argument) {
-      for (const [name, arg] of Object.entries(componentData.argument)) {
-        arg.description = arg.description ?? {}
+    if (componentData.value) {
+      componentData.value.description = componentData.value.description ?? {}
+      componentData.value.description[locale] = descriptions.find('value')?.text
+    }
 
-        arg.description[locale] = descriptions.find('argument', name)?.text
-      }
+    if (componentData.argument) {
+      componentData.argument.description = componentData.argument.description ?? {}
+      componentData.argument.description[locale] = descriptions.find('argument')?.text
     }
 
     if (componentData.modifiers) {
       for (const [name, modifier] of Object.entries(componentData.modifiers)) {
         modifier.description = modifier.description ?? {}
-
         modifier.description[locale] = descriptions.find('modifiers', name)?.text
       }
     }
   }
 }
 
+export function sortByKey (data: Record<string, any>) {
+  return Object.keys(data)
+    .sort()
+    .reduce((obj: Record<string, any>, key: string) => {
+      obj[key] = data[key]
+      return obj
+    }, {})
+}
+
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*?>(.*?)<\/a>/g
+  const regexp = /<a .+?>(.+?)<\/a>/g
 
   let matches = regexp.exec(str)
 
@@ -214,12 +279,12 @@ export function insertLinks (str: string, stripped: Record<string, string>) {
   return str
 }
 
-export function prettifyType (name: string, item: Definition) {
+export async function prettifyType (name: string, item: Definition) {
   const prefix = 'type Type = '
   const [str, stripped] = stripLinks(item.formatted)
   let formatted
   try {
-    formatted = prettier.format(prefix + str, {
+    formatted = await prettier.format(prefix + str, {
       parser: 'typescript',
       plugins: [typescriptParser],
       bracketSpacing: true,
@@ -227,7 +292,7 @@ export function prettifyType (name: string, item: Definition) {
       singleQuote: true,
       trailingComma: 'all',
     })
-  } catch (err) {
+  } catch (err: any) {
     console.error('\x1b[31m', `${name}:`, err.message, '\x1b[0m')
     return item
   }

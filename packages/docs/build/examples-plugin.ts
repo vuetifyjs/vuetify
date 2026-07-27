@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
-import path from 'path'
-import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 
 const ID = '@vuetify-examples'
 
@@ -32,7 +32,9 @@ ${dirs}
 
 export async function getExample (name) {
   const [dir, file] = name.split('/')
-  return (await dirs[dir]()).default[file]
+  const example = (await dirs[dir]()).default[file]
+  if (!example) throw new Error('Example "' + name + '" does not exist')
+  return example
 }
       `
 

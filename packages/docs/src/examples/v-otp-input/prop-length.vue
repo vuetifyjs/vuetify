@@ -1,6 +1,6 @@
 <template>
   <v-otp-input
-    model-value="3214214"
     length="7"
+    model-value="3214214"
   ></v-otp-input>
 </template>

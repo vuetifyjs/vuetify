@@ -1,0 +1,8 @@
+{
+  "props": {
+    "hideDefaultBody": "Hides the default body.",
+    "hideDefaultHeader": "Hides the default header.",
+    "hideDefaultFooter": "Hides the default footer.",
+    "search": "Text input used to filter items."
+  }
+}

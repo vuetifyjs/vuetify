@@ -14,8 +14,8 @@
           v-model="select"
           :items="items"
           label="I use chips"
-          multiple
           chips
+          multiple
         ></v-combobox>
       </v-col>
       <v-col cols="12">
@@ -25,22 +25,18 @@
           label="I use a scoped slot"
           multiple
         >
-          <template v-slot:selection="data">
+          <template v-slot:selection="{ item, internalItem }">
             <v-chip
-              :key="JSON.stringify(data.item)"
-              v-bind="data.attrs"
-              :model-value="data.selected"
-              :disabled="data.disabled"
+              :text="item.title"
+              :value="internalItem.value"
               size="small"
-              @click:close="data.parent.selectItem(data.item)"
             >
               <template v-slot:prepend>
-                <v-avatar
-                  class="bg-accent text-uppercase"
-                  start
-                >{{ data.item.title.slice(0, 1) }}</v-avatar>
+                <v-avatar class="bg-accent text-uppercase" start>
+                  {{ item.slice(0, 1) }}
+                </v-avatar>
               </template>
-              {{ data.item.title }}
+              {{ item }}
             </v-chip>
           </template>
         </v-combobox>

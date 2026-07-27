@@ -1,0 +1,22 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../styles/settings';
+@use '../../styles/tools';
+@use './variables' as *;
+
+@mixin fab-sizes ($map: $fab-sizes, $immediate: false) {
+  @each $sizeName, $multiplier in $fab-size-scales {
+    $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
+    $height: map.get($map, 'height') + (12px * $multiplier);
+
+    // .v-fab .v-btn--size-#{$sizeName} {
+    //   --v-btn-size: #{$size};
+    //   --v-btn-height: #{$height};
+    // }
+
+    .v-fab--bottom .v-btn--size-#{$sizeName} {
+      bottom: -1 * $height / 2;
+    }
+  }
+}

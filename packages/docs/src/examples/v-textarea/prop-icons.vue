@@ -8,8 +8,8 @@
         <v-textarea
           class="mx-2"
           label="prepend-icon"
-          rows="1"
           prepend-icon="mdi-comment"
+          rows="1"
         ></v-textarea>
       </v-col>
       <v-col
@@ -28,9 +28,9 @@
         sm="6"
       >
         <v-textarea
-          prepend-inner-icon="mdi-comment"
           class="mx-2"
           label="prepend-inner-icon"
+          prepend-inner-icon="mdi-comment"
           rows="1"
         ></v-textarea>
       </v-col>

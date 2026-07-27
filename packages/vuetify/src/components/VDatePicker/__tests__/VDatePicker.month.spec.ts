@@ -80,7 +80,7 @@ describe.skip('VDatePicker.ts', () => {
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05',
-        elevation: 15,
+        elevation: 4,
         type: 'month',
       },
     })

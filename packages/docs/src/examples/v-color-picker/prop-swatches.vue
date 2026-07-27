@@ -2,12 +2,12 @@
   <div class="d-flex justify-space-around">
     <v-color-picker
       class="ma-2"
-      show-swatches
       swatches-max-height="400px"
+      show-swatches
     ></v-color-picker>
     <v-color-picker
-      class="ma-2"
       :swatches="swatches"
+      class="ma-2"
       show-swatches
     ></v-color-picker>
   </div>

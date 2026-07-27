@@ -17,13 +17,13 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append"
             append-icon="mdi-map-marker"
+            label="Append"
           ></v-text-field>
 
           <v-text-field
-            label="Append inner"
             append-inner-icon="mdi-map-marker"
+            label="Append inner"
           ></v-text-field>
         </v-col>
 
@@ -44,14 +44,14 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append"
             append-icon="mdi-map-marker"
+            label="Append"
             variant="solo"
           ></v-text-field>
 
           <v-text-field
-            label="Append inner"
             append-inner-icon="mdi-map-marker"
+            label="Append inner"
             variant="solo"
           ></v-text-field>
         </v-col>
@@ -73,14 +73,14 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append"
             append-icon="mdi-map-marker"
+            label="Append"
             variant="outlined"
           ></v-text-field>
 
           <v-text-field
-            label="Append inner"
             append-inner-icon="mdi-map-marker"
+            label="Append inner"
             variant="outlined"
           ></v-text-field>
         </v-col>
@@ -90,27 +90,27 @@
           sm="6"
         >
           <v-text-field
-            variant="underlined"
             label="Prepend"
             prepend-icon="mdi-map-marker"
+            variant="underlined"
           ></v-text-field>
 
           <v-text-field
-            variant="underlined"
             label="Prepend inner"
             prepend-inner-icon="mdi-map-marker"
+            variant="underlined"
           ></v-text-field>
 
           <v-text-field
-            variant="underlined"
-            label="Append"
             append-icon="mdi-map-marker"
+            label="Append"
+            variant="underlined"
           ></v-text-field>
 
           <v-text-field
-            variant="underlined"
-            label="Append inner"
             append-inner-icon="mdi-map-marker"
+            label="Append inner"
+            variant="underlined"
           ></v-text-field>
         </v-col>
       </v-row>

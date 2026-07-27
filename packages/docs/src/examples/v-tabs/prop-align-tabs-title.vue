@@ -5,15 +5,9 @@
 
       <v-toolbar-title>Your Dashboard</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-btn icon="mdi-magnify"></v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-dots-vertical"></v-btn>
 
       <template v-slot:extension>
         <v-tabs
@@ -23,16 +17,15 @@
           <v-tab
             v-for="item in items"
             :key="item"
+            :text="item"
             :value="item"
-          >
-            {{ item }}
-          </v-tab>
+          ></v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
 
-    <v-window v-model="tab">
-      <v-window-item
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item
         v-for="item in items"
         :key="item"
         :value="item"
@@ -40,8 +33,8 @@
         <v-card flat>
           <v-card-text v-text="text"></v-card-text>
         </v-card>
-      </v-window-item>
-    </v-window>
+      </v-tabs-window-item>
+    </v-tabs-window>
   </v-card>
 </template>
 
@@ -50,13 +43,7 @@
 
   const tab = ref(null)
 
-  const items = [
-    'web',
-    'shopping',
-    'videos',
-    'images',
-    'news',
-  ]
+  const items = ['Web', 'Shopping', 'Videos', 'Images', 'News']
   const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
 </script>
 
@@ -65,9 +52,7 @@
     data () {
       return {
         tab: null,
-        items: [
-          'web', 'shopping', 'videos', 'images', 'news',
-        ],
+        items: ['Web', 'Shopping', 'Videos', 'Images', 'News'],
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       }
     },

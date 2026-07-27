@@ -1,0 +1,12 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$pie-underlay-inset: -8px !default;
+$pie-title-padding-bottom: 12px !default;
+$pie-legend-padding-block: 12px !default;
+$pie-legend-chip-default-font-size: 0.8125rem !default;
+$pie-legend-chip-compact-font-size: 0.66rem !default;
+$pie-legend-chip-disabled-opacity: .4 !default;
+$pie-legend-avatar-border: thin solid tools.theme-color('on-surface', .2) !default;
+$pie-tooltip-min-width: 100px !default;
+$pie-tooltip-avatar-border: thin solid tools.theme-color('on-surface-variant', .2) !default;

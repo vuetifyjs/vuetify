@@ -1,5 +1,9 @@
 <template>
-  <v-select label="User" :items="items" :item-props="itemProps"></v-select>
+  <v-select
+    :item-props="itemProps"
+    :items="items"
+    label="User"
+  ></v-select>
 </template>
 
 <script setup>

@@ -2,16 +2,16 @@
 import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VBtnSlots } from '@/components/VBtn/VBtn'
 
 export const makeVAppBarNavIconProps = propsFactory({
-  ...makeVBtnProps({
+  ...omit(makeVBtnProps({
     icon: '$menu',
     variant: 'text' as const,
-  }),
+  }), ['spaced']),
 }, 'VAppBarNavIcon')
 
 export const VAppBarNavIcon = genericComponent<VBtnSlots>()({

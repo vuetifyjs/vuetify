@@ -1,5 +1,5 @@
 <template>
-  <v-theme-provider theme="dark" with-background class="pa-10">
-    <v-card title="Title" subtitle="Subtitle"></v-card>
+  <v-theme-provider class="pa-10" theme="dark" with-background>
+    <v-card subtitle="Subtitle" title="Title"></v-card>
   </v-theme-provider>
 </template>

@@ -1,4 +1,4 @@
-import { ar, en, ja, sv } from 'vuetify/src/locale'
+import { ar, en, ja, sv } from '@/locale'
 
 export default {
   messages: {

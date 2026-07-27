@@ -9,20 +9,20 @@
         <v-toolbar class="px-2">
           <v-text-field
             v-model="search"
-            clearable
             density="comfortable"
-            hide-details
             placeholder="Search"
             prepend-inner-icon="mdi-magnify"
             style="max-width: 300px;"
             variant="solo"
+            clearable
+            hide-details
           ></v-text-field>
         </v-toolbar>
       </template>
 
       <template v-slot:default="{ items }">
         <v-container class="pa-2" fluid>
-          <v-row dense>
+          <v-row density="comfortable">
             <v-col
               v-for="item in items"
               :key="item.title"
@@ -32,25 +32,25 @@
               <v-card class="pb-3" border flat>
                 <v-img :src="item.raw.img"></v-img>
 
-                <v-list-item class="mb-2" :subtitle="item.raw.subtitle">
+                <v-list-item :subtitle="item.raw.subtitle" class="mb-2">
                   <template v-slot:title>
-                    <strong class="text-h6 mb-2">{{ item.raw.title }}</strong>
+                    <strong class="d-block text-title-large py-2 text-truncate">{{ item.raw.title }}</strong>
                   </template>
                 </v-list-item>
 
                 <div class="d-flex justify-space-between px-4">
-                  <div class="d-flex align-center text-caption text-medium-emphasis me-1">
+                  <div class="d-flex align-center text-body-small text-medium-emphasis me-1">
                     <v-icon icon="mdi-clock" start></v-icon>
 
                     <div class="text-truncate">{{ item.raw.duration }}</div>
                   </div>
 
                   <v-btn
-                    border
-                    flat
-                    size="small"
                     class="text-none"
+                    size="small"
                     text="Read"
+                    variant="flat"
+                    border
                   >
                   </v-btn>
                 </div>
@@ -64,21 +64,21 @@
         <div class="d-flex align-center justify-center pa-4">
           <v-btn
             :disabled="page === 1"
-            icon="mdi-arrow-left"
             density="comfortable"
+            icon="mdi-arrow-left"
             variant="tonal"
             rounded
             @click="prevPage"
           ></v-btn>
 
-          <div class="mx-2 text-caption">
+          <div class="mx-2 text-body-small">
             Page {{ page }} of {{ pageCount }}
           </div>
 
           <v-btn
             :disabled="page >= pageCount"
-            icon="mdi-arrow-right"
             density="comfortable"
+            icon="mdi-arrow-right"
             variant="tonal"
             rounded
             @click="nextPage"
@@ -146,7 +146,7 @@
     {
       img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
       title: '1920s Mystery Detective Chronicles',
-      subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+      subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
       advanced: false,
       duration: '9 minutes',
     },
@@ -210,7 +210,7 @@
         {
           img: 'https://cdn.vuetifyjs.com/docs/images/graphics/games/8.png',
           title: '1920s Mystery Detective Chronicles',
-          subtitle: 'Solve crimes and uncover secrets in the glamourous 1920s era.',
+          subtitle: 'Solve crimes and uncover secrets in the glamorous 1920s era.',
           advanced: false,
           duration: '9 minutes',
         },

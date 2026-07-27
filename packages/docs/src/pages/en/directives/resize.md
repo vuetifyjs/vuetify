@@ -14,18 +14,20 @@ related:
 
 The `v-resize` directive can be used for calling specific functions when the window resizes.
 
-<entry />
+<PageFeatures />
 
 ## Usage
 
 Resize your window and observe the values change..
 
-<example file="v-resize/usage" />
+<ExamplesExample file="v-resize/usage" />
+
+<PromotedEntry />
 
 ## API
 
-| Directive | Description |
-| - | - |
-| [v-resize](/api/v-resize/) | The resize directive |
+| Directive                            | Description          |
+|--------------------------------------|----------------------|
+| [v-resize](/api/v-resize-directive/) | The resize directive |
 
-<api-inline hide-links />
+<ApiInline hide-links />

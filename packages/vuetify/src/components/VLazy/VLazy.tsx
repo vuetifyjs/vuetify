@@ -6,7 +6,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -36,7 +36,7 @@ export const makeVLazyProps = propsFactory({
 export const VLazy = genericComponent()({
   name: 'VLazy',
 
-  directives: { intersect },
+  directives: { vIntersect },
 
   props: makeVLazyProps(),
 

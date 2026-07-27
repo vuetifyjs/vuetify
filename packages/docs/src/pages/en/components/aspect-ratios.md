@@ -17,15 +17,15 @@ features:
 
 The `v-responsive` component can be used to fix any section to a specific aspect ratio
 
-<page-features />
+<PageFeatures />
 
 ## Usage
 
 Specify a custom aspect-ratio
 
-<usage name="v-responsive" />
+<ExamplesUsage name="v-responsive" />
 
-<entry />
+<PromotedEntry />
 
 ## API
 
@@ -33,4 +33,4 @@ Specify a custom aspect-ratio
 | - | - |
 | [v-responsive](/api/v-responsive/) | Primary component |
 
-<api-inline hide-links />
+<ApiInline hide-links />

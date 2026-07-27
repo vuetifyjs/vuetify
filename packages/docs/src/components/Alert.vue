@@ -3,7 +3,7 @@
     :border-color="type"
     :type="type"
     border="start"
-    class="v-alert--doc mb-4 border-opacity-100"
+    class="v-alert--doc my-4 border-opacity-100"
     variant="tonal"
   >
     <template #prepend>
@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
-
   const props = defineProps({ type: String })
 
   const type = computed(() => {

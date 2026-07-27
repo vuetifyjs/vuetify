@@ -1,21 +1,19 @@
 <template>
   <v-window
     v-model="onboarding"
-    show-arrows
     reverse
+    show-arrows
   >
     <v-window-item
       v-for="n in length"
       :key="`card-${n}`"
     >
       <v-card
-        elevation="2"
-        height="200"
         class="d-flex align-center justify-center ma-2"
+        elevation="1"
+        height="200"
       >
-        <h1
-          class="text-h2"
-        >
+        <h1 class="text-display-large my-0">
           Slide {{ n }}
         </h1>
       </v-card>

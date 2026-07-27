@@ -27,9 +27,9 @@
   <v-stepper model-value="2">
     <v-stepper-header>
       <v-stepper-item
-        complete
         title="Select campaign settings"
         value="1"
+        complete
       ></v-stepper-item>
 
       <v-divider></v-divider>
@@ -53,17 +53,17 @@
   <v-stepper model-value="3">
     <v-stepper-header>
       <v-stepper-item
-        complete
         title="Select campaign settings"
         value="1"
+        complete
       ></v-stepper-item>
 
       <v-divider></v-divider>
 
       <v-stepper-item
-        complete
         title="Create an ad group"
         value="2"
+        complete
       ></v-stepper-item>
 
       <v-divider></v-divider>

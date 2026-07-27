@@ -1,20 +1,20 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 font-weight-regular bg-blue-grey">
+    <v-card-title class="font-weight-regular bg-blue-grey py-3">
       Profile
     </v-card-title>
 
     <v-card-text>
-      <div class="text-caption pa-3">Where do you live?</div>
+      <div class="text-body-small pa-3">Where do you live?</div>
 
       <v-autocomplete
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
         :items="states"
-        :readonly="!isEditing"
         :label="`State — ${isEditing ? 'Editable' : 'Readonly'}`"
-        persistent-hint
+        :readonly="!isEditing"
         prepend-icon="mdi-city"
+        persistent-hint
       >
         <template v-slot:append>
           <v-slide-x-reverse-transition mode="out-in">
@@ -126,3 +126,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2039-72488&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

@@ -17,10 +17,6 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed } from 'vue'
-  import { rpath } from '@/util/routes'
-
   const props = defineProps({
     href: {
       type: String,

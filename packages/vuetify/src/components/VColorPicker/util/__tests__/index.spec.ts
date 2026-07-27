@@ -1,5 +1,4 @@
 // Utilities
-import { describe, expect, it } from '@jest/globals'
 import { extractColor } from '../'
 
 const red = { h: 0, s: 1, v: 1, a: 1 }
@@ -18,6 +17,8 @@ describe('VColorPicker Utils', () => {
       [red, { h: 0, s: 1, v: 1 }, { h: 0, s: 1, v: 1 }],
       [red, { h: 0, s: 1, v: 1, a: 0.5 }, { h: 0, s: 1, v: 1, a: 1 }],
       [red, undefined, '#FF0000'],
+      [red, 'hsl(0 0 0 / 1)', 'hsl(0 100 50)'],
+      [{ ...red, a: 0.5 }, 'hsl(0 0 0 / 1)', 'hsl(0 100 50 / 0.5)'],
     ] as const
 
     it.each(cases)('When given %p and %p, extractColor util should return %p', (...args) => {

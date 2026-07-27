@@ -1,14 +1,15 @@
-// @ts-nocheck
-/* eslint-disable */
-
 import {
-  parseTimestamp,
+  copyTimestamp,
   getDayIdentifier,
   getTimestampIdentifier,
   isTimedless,
+  nextMinutes,
+  parseTimestamp,
   updateHasTime,
 } from './timestamp'
-import { CalendarTimestamp, CalendarEvent, CalendarEventParsed } from 'vuetify/types'
+
+// Types
+import type { CalendarEvent, CalendarEventParsed, CalendarTimestamp } from '../types'
 
 export function parseEvent (
   input: CalendarEvent,
@@ -42,14 +43,41 @@ export function isEventOn (event: CalendarEventParsed, dayIdentifier: number): b
   return dayIdentifier >= event.startIdentifier && dayIdentifier <= event.endIdentifier
 }
 
+export function isEventOnDay (
+  event: CalendarEventParsed,
+  day: CalendarTimestamp,
+  inRange?: [number, number]
+): boolean {
+  if (inRange) {
+    const dayStart = nextMinutes(copyTimestamp(day), inRange[0])
+    const dayEnd = nextMinutes(copyTimestamp(day), inRange[1])
+
+    const starts = event.startTimestampIdentifier < getTimestampIdentifier(dayEnd)
+    const ends = event.endTimestampIdentifier > getTimestampIdentifier(dayStart)
+
+    return starts && ends
+  }
+
+  return isEventOn(event, getDayIdentifier(day))
+}
+
 export function isEventHiddenOn (event: CalendarEventParsed, day: CalendarTimestamp): boolean {
   return event.end.time === '00:00' && event.end.date === day.date && event.start.date !== day.date
 }
 
-export function isEventStart (event: CalendarEventParsed, day: CalendarTimestamp, dayIdentifier: number, firstWeekday: number): boolean {
+export function isEventStart (
+  event: CalendarEventParsed,
+  day: CalendarTimestamp,
+  dayIdentifier: number,
+  firstWeekday: number
+): boolean {
   return dayIdentifier === event.startIdentifier || (firstWeekday === day.weekday && isEventOn(event, dayIdentifier))
 }
 
-export function isEventOverlapping (event: CalendarEventParsed, startIdentifier: number, endIdentifier: number): boolean {
+export function isEventOverlapping (
+  event: CalendarEventParsed,
+  startIdentifier: number,
+  endIdentifier: number
+): boolean {
   return startIdentifier <= event.endIdentifier && endIdentifier >= event.startIdentifier
 }

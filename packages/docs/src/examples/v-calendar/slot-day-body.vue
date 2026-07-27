@@ -9,9 +9,9 @@
         >
           <template v-slot:day-body="{ date, week }">
             <div
-              class="v-current-time"
               :class="{ first: date === week[0].date }"
-              :style="{ top: nowY }"
+              :style="{ top: nowY() }"
+              class="v-current-time"
             ></div>
           </template>
         </v-calendar>
@@ -21,36 +21,33 @@
 </template>
 
 <script setup>
-  import { computed, onMounted, ref } from 'vue'
+  import { onMounted, onUnmounted, ref } from 'vue'
 
   const calendar = ref()
 
   const value = ref('')
-  const ready = ref(false)
 
-  const cal = computed(() => {
-    return ready.value ? calendar.value : null
-  })
-  const nowY = computed(() => {
-    return cal.value ? cal.value.timeToY(cal.value.times.now) + 'px' : '-10px'
-  })
+  function nowY () {
+    return calendar.value ? calendar.value.timeToY(calendar.value.times.now) + 'px' : '-10px'
+  }
 
+  let updateInterval = -1
   onMounted(() => {
-    ready.value = true
     scrollToTime()
-    updateTime()
+    updateInterval = setInterval(() => calendar.value?.updateTimes(), 60_000)
+  })
+
+  onUnmounted(() => {
+    clearInterval(updateInterval)
   })
 
   function getCurrentTime () {
-    return cal.value ? cal.value.times.now.hour * 60 + cal.value.times.now.minute : 0
+    return calendar.value ? calendar.value.times.now.hour * 60 + calendar.value.times.now.minute : 0
   }
   function scrollToTime () {
     const time = getCurrentTime()
     const first = Math.max(0, time - (time % 30) - 30)
-    cal.value.scrollToTime(first)
-  }
-  function updateTime () {
-    setInterval(() => cal.value.updateTimes(), 60 * 1000)
+    calendar.value?.scrollToTime(first)
   }
 </script>
 
@@ -64,9 +61,6 @@
       cal () {
         return this.ready ? this.$refs.calendar : null
       },
-      nowY () {
-        return this.cal ? this.cal.timeToY(this.cal.times.now) + 'px' : '-10px'
-      },
     },
     mounted () {
       this.ready = true
@@ -74,6 +68,9 @@
       this.updateTime()
     },
     methods: {
+      nowY () {
+        return this.cal ? this.cal.timeToY(this.cal.times.now) + 'px' : '-10px'
+      },
       getCurrentTime () {
         return this.cal ? this.cal.times.now.hour * 60 + this.cal.times.now.minute : 0
       },
@@ -90,7 +87,7 @@
   }
 </script>
 
-<style lang="scss">
+<style>
 .v-current-time {
   height: 2px;
   background-color: #ea4335;

@@ -1,7 +1,7 @@
 <template>
   <div
+    class="text-center elevation-1 pa-12 text-headline-small"
     v-ripple
-    class="text-center elevation-2 pa-12 text-h5"
   >
     HTML element with v-ripple
   </div>

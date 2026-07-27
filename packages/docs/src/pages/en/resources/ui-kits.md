@@ -13,7 +13,9 @@ related:
 
 Easily create design prototypes with Figma components that match Vuetify's.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ----
 

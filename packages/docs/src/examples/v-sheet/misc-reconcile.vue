@@ -1,10 +1,10 @@
 <template>
   <v-sheet
-    elevation="12"
+    class="pa-4 text-center mx-auto"
+    elevation="4"
     max-width="600"
     rounded="lg"
     width="100%"
-    class="pa-4 text-center mx-auto"
   >
     <v-icon
       class="mb-5"
@@ -13,10 +13,10 @@
       size="112"
     ></v-icon>
 
-    <h2 class="text-h5 mb-6">You reconciled this account</h2>
+    <h2 class="text-headline-small mt-0 mb-6">You reconciled this account</h2>
 
-    <p class="mb-4 text-medium-emphasis text-body-2">
-      To see a report on this reconciliation, click <a href="#" class="text-decoration-none text-info">View reconciliation report.</a>
+    <p class="mb-4 text-medium-emphasis text-body-medium">
+      To see a report on this reconciliation, click <a class="text-decoration-none text-info" href="#">View reconciliation report.</a>
 
       <br>
 
@@ -29,9 +29,9 @@
       <v-btn
         class="text-none"
         color="success"
-        rounded
         variant="flat"
         width="90"
+        rounded
       >
         Done
       </v-btn>

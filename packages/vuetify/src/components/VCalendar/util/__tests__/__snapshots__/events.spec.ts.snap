@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`events.ts should parse events 1`] = `
-Object {
+exports[`events.ts > should parse events 1`] = `
+{
   "allDay": true,
   "category": false,
-  "end": Object {
+  "end": {
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -22,11 +22,11 @@ Object {
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
   "index": 0,
-  "input": Object {
+  "input": {
     "end": "2019-02-14",
     "start": "2019-02-13",
   },
-  "start": Object {
+  "start": {
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -46,11 +46,11 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 2`] = `
-Object {
+exports[`events.ts > should parse events 2`] = `
+{
   "allDay": true,
   "category": false,
-  "end": Object {
+  "end": {
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -68,11 +68,11 @@ Object {
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
   "index": 0,
-  "input": Object {
+  "input": {
     "a": "2019-02-13",
     "b": "2019-02-14",
   },
-  "start": Object {
+  "start": {
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -92,11 +92,11 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 3`] = `
-Object {
+exports[`events.ts > should parse events 3`] = `
+{
   "allDay": true,
   "category": false,
-  "end": Object {
+  "end": {
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -114,11 +114,11 @@ Object {
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
   "index": 1,
-  "input": Object {
+  "input": {
     "end": "2019-02-14",
     "start": "2019-02-13",
   },
-  "start": Object {
+  "start": {
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -138,11 +138,11 @@ Object {
 }
 `;
 
-exports[`events.ts should parse events 4`] = `
-Object {
+exports[`events.ts > should parse events 4`] = `
+{
   "allDay": true,
   "category": false,
-  "end": Object {
+  "end": {
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -160,11 +160,11 @@ Object {
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902142359,
   "index": 1,
-  "input": Object {
+  "input": {
     "a": "2019-02-13",
     "b": "2019-02-14",
   },
-  "start": Object {
+  "start": {
     "date": "2019-02-13",
     "day": 13,
     "future": false,
@@ -184,11 +184,11 @@ Object {
 }
 `;
 
-exports[`events.ts should parse timed events 1`] = `
-Object {
+exports[`events.ts > should parse timed events 1`] = `
+{
   "allDay": false,
   "category": false,
-  "end": Object {
+  "end": {
     "date": "2019-02-14",
     "day": 14,
     "future": false,
@@ -206,11 +206,11 @@ Object {
   "endIdentifier": 20190214,
   "endTimestampIdentifier": 201902140000,
   "index": 0,
-  "input": Object {
+  "input": {
     "end": "2019-02-14",
     "start": "2019-02-13 8:30",
   },
-  "start": Object {
+  "start": {
     "date": "2019-02-13",
     "day": 13,
     "future": false,

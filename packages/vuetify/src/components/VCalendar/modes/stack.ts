@@ -1,8 +1,6 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { CalendarEventOverlapMode, CalendarEventVisual } from 'vuetify/types'
-import { getOverlapGroupHandler, getVisuals, hasOverlap, getNormalizedRange } from './common'
+// Types
+import { getNormalizedRange, getOverlapGroupHandler, getVisuals, hasOverlap } from './common'
+import type { CalendarEventOverlapMode, CalendarEventVisual } from '../types'
 import { getTimestampIdentifier } from '../util/timestamp'
 
 interface Group {

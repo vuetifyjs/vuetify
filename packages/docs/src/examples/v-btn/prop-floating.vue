@@ -2,70 +2,64 @@
   <div class="text-center">
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="small"
       color="primary"
+      size="small"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-minus
       </v-icon>
     </v-btn>
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="small"
       color="pink"
+      size="small"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-heart
       </v-icon>
     </v-btn>
 
     <v-btn
       class="mx-2"
-      fab
-      dark
       color="indigo"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-plus
       </v-icon>
     </v-btn>
 
     <v-btn
       class="mx-2"
-      fab
-      dark
       color="teal"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-format-list-bulleted-square
       </v-icon>
     </v-btn>
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="large"
       color="cyan"
+      size="large"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-pencil
       </v-icon>
     </v-btn>
 
     <v-btn
       class="mx-2"
-      fab
-      dark
-      size="large"
       color="purple"
+      size="large"
+      icon
     >
-      <v-icon dark>
+      <v-icon>
         mdi-android
       </v-icon>
     </v-btn>

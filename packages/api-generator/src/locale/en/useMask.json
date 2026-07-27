@@ -1,0 +1,8 @@
+{
+  "exposed": {
+    "isValid": "Check if a string is valid for the mask.",
+    "isComplete": "Check if a string is complete for the mask.",
+    "mask": "Apply mask to a string.",
+    "unmask": "Remove mask from a string."
+  }
+}

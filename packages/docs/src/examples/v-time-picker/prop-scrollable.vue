@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    justify="space-around"
-    align="center"
-  >
+  <v-row class="align-center justify-space-around">
     <v-time-picker
       v-model="picker"
       scrollable

@@ -1,0 +1,23 @@
+{
+  "props": {
+    "keys": "A reactive string defining the keyboard shortcut combination. Supports single keys (e.g., 'a'), modifier combinations (e.g., 'cmd+s', 'ctrl+shift+z'), sequential key combinations (e.g., 'cmd+k-t'), and multiple alternatives separated by spaces. Platform-aware: 'cmd' automatically maps to Ctrl on PC and Command on Mac. Use '-' for sequences, '+' for simultaneous key combinations.",
+    "callback": "Function to execute when the hotkey is triggered. Receives the KeyboardEvent as a parameter, allowing access to event details and the ability to call preventDefault() if needed.",
+    "options": "Configuration object to customize hotkey behavior. Includes event type ('keydown' or 'keyup'), input field handling, preventDefault behavior, and sequence timeout settings."
+  },
+  "options": {
+    "event": "The keyboard event type to listen for. Accepts 'keydown' (default) or 'keyup'. Use 'keydown' for immediate response and 'keyup' for actions that should trigger when the key is released.",
+    "inputs": "Whether to allow hotkeys when input elements (input, textarea, contentEditable) are focused. Default is false, which prevents hotkeys from triggering in form fields to avoid interfering with normal typing.",
+    "preventDefault": "Whether to prevent the default browser behavior for the hotkey. Default is true, which stops the browser from performing its normal action (e.g., Ctrl+S won't show the save dialog).",
+    "sequenceTimeout": "Timeout in milliseconds for completing key sequences. Default is 1000ms. If the next key in a sequence isn't pressed within this time, the sequence resets. Only applies to sequential hotkeys (those with '-' separators)."
+  },
+  "returns": {
+    "cleanup": "A cleanup function that removes the event listener and clears any active timers. Automatically called when the component unmounts if used within a Vue component's setup function. Call manually if used outside of Vue's setup context."
+  },
+  "examples": {
+    "basic": "useHotkey('cmd+s', () => save())",
+    "sequence": "useHotkey('cmd+k-t', () => openThemeSelector())",
+    "options": "useHotkey('enter', handleSubmit, { inputs: true, event: 'keyup' })",
+    "reactive": "useHotkey(computed(() => settings.hotkey), handleAction)",
+    "cleanup": "const cleanup = useHotkey('esc', close); onBeforeUnmount(cleanup)"
+  }
+}

@@ -4,15 +4,17 @@ meta:
   description: Add Vuetify as a search engine to your Chrome browser for quick access to the documentation
   keywords: search engine, vuetify search engine, vuetify chrome search engine, vuetify chrome extension
 related:
-  - /getting-started/quick-start/
-  - /getting-started/why-vuetify/
+  - /getting-started/installation/
+  - /introduction/why-vuetify/
 ---
 
 # Search engine
 
 Add Vuetify as a browser search engine for quick access to the documentation.
 
-<entry />
+<PageFeatures />
+
+<PromotedEntry />
 
 ## Setup
 
@@ -59,3 +61,9 @@ The Vuetify documentation supports being a search engine for your browser. This 
   ![search bar](https://github.com/vuetifyjs/vuetify/assets/9064066/59311829-e564-4c80-a0c9-d33e7aacfd21)
 7. Type your search query and hit enter to search the Vuetify documentation
   ![step5](https://github.com/vuetifyjs/vuetify/assets/9064066/8245afd9-bceb-41dd-8310-50e4137d1fca)
+
+### For Firefox
+
+Vuetify documentation website includes `/search.xml` with OpenSearch description that allows Firefox users to [add a custom search engine](https://support.mozilla.org/en-US/kb/add-or-remove-search-engine-firefox#w_add-a-search-engine-from-the-search-bar). If you don't see an option in the address bar you might need to restore dedicated search field (it can be hidden afterwards).
+
+**Note**: when using browser based on Firefox (like Zen or Waterfox) please check the settings page first as they might include <v-kbd>Add</v-kbd> button under the list of enabled search engines. When present, you can follow regular instructions for Chrome.

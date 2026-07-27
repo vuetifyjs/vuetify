@@ -1,7 +1,7 @@
 <template>
   <v-card
-    max-width="400"
     class="mx-auto"
+    max-width="400"
   >
     <v-container class="pa-1">
       <v-item-group
@@ -18,9 +18,9 @@
             <v-item v-slot="{ isSelected, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
-                cover
-                height="150"
                 class="text-right pa-2"
+                height="150"
+                cover
                 @click="toggle"
               >
                 <v-btn :icon="isSelected ? 'mdi-heart' : 'mdi-heart-outline'"></v-btn>

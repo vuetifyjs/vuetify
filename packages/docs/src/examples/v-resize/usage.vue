@@ -1,11 +1,10 @@
 <template>
   <v-row
+    class="align-center justify-center"
     v-resize="onResize"
-    align="center"
-    justify="center"
   >
     <v-col class="text-center">
-      <div class="text-subtitle-2">Window Size</div>
+      <div class="text-title-small">Window Size</div>
       {{ windowSize }}
     </v-col>
   </v-row>

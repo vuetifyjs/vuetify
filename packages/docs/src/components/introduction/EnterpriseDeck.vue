@@ -15,34 +15,34 @@
       <v-row>
         <template v-for="(item, i) in items" :key="i">
           <v-col cols="12" md="4">
-            <v-responsive class="mb-4" :min-height="mdAndUp ? 96 : undefined">
-              <h3 class="text-h5 font-weight-medium">
+            <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
+              <h3 class="text-headline-small font-weight-medium">
                 {{ item.name }}
               </h3>
 
-              <div class="text-caption">
+              <div class="text-body-small">
                 {{ item.text }}
               </div>
             </v-responsive>
 
             <div class="mb-4">
-              <span class="text-h5 font-weight-bold">${{ item.price }} USD</span>
-              <span v-if="item.suffix" class="font-weight-medium text-medium-emphasis text-h6">{{ item.suffix }}</span>
+              <span class="text-headline-small font-weight-bold">${{ item.price }} USD</span>
+              <span v-if="item.suffix" class="font-weight-medium text-medium-emphasis text-title-large">{{ item.suffix }}</span>
             </div>
 
             <v-btn
               :href="item.href"
-              target="_blank"
-              rel="noopener"
+              :variant="i === 0 ? 'flat' : 'outlined'"
               class="mb-6 text-none"
               color="primary"
-              block
-              text="Book Now"
+              rel="noopener"
               size="x-large"
-              :variant="i === 0 ? 'flat' : 'outlined'"
+              target="_blank"
+              text="Book Now"
+              block
             />
 
-            <ul class="text-caption ps-1" style="list-style-type: none;">
+            <ul class="text-body-small ps-1" style="list-style-type: none;">
               <li v-for="(benefit, k) in item.benefits" :key="k" class="mb-2 d-flex">
                 <div class="me-2">{{ benefit.emoji }}</div>
 
@@ -56,23 +56,20 @@
       </v-row>
     </v-container>
 
-    <div class="px-4 pb-3 text-medium-emphasis text-caption">
+    <div class="px-4 pb-3 text-medium-emphasis text-body-small">
       *Cost for initial project review. Upgrade quote provided separately.
     </div>
   </v-sheet>
 </template>
 
 <script setup>
-  // eslint-disable
-  import { useDisplay } from 'vuetify'
-
   const { mdAndUp } = useDisplay()
 
   const items = [
     {
       name: 'Direct Support',
       text: 'Get direct help from the author of Vuetify in a live conference call',
-      price: '180',
+      price: '120',
       suffix: '/60m',
       benefits: [
         {

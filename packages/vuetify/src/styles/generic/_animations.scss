@@ -1,13 +1,17 @@
-@keyframes v-shake {
-  59% {
-    margin-left: 0;
-  }
+@use '../tools';
 
-  60%, 80% {
-    margin-left: 2px;
-  }
+@include tools.layer('transitions') {
+  @keyframes v-shake {
+    59% {
+      margin-left: 0;
+    }
 
-  70%, 90% {
-    margin-left: -2px;
+    60%, 80% {
+      margin-left: 2px;
+    }
+
+    70%, 90% {
+      margin-left: -2px;
+    }
   }
 }

@@ -28,7 +28,7 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
 
 export const makeVResponsiveProps = propsFactory({
   aspectRatio: [String, Number],
-  contentClass: String,
+  contentClass: null,
   inline: Boolean,
 
   ...makeComponentProps(),

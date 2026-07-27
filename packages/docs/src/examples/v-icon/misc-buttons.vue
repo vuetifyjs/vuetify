@@ -7,8 +7,8 @@
       >
         Accept
         <v-icon
-          end
           icon="mdi-checkbox-marked-circle"
+          end
         ></v-icon>
       </v-btn>
 
@@ -18,8 +18,8 @@
       >
         Decline
         <v-icon
-          end
           icon="mdi-cancel"
+          end
         ></v-icon>
       </v-btn>
 
@@ -27,8 +27,8 @@
         class="ma-2"
       >
         <v-icon
-          start
           icon="mdi-minus-circle"
+          start
         ></v-icon>
         Cancel
       </v-btn>
@@ -40,8 +40,8 @@
         color="orange-darken-2"
       >
         <v-icon
-          start
           icon="mdi-arrow-left"
+          start
         ></v-icon>
         Back
       </v-btn>
@@ -62,16 +62,16 @@
     <div>
       <v-btn
         class="ma-2"
-        variant="text"
-        icon="mdi-thumb-up"
         color="blue-lighten-2"
+        icon="mdi-thumb-up"
+        variant="text"
       ></v-btn>
 
       <v-btn
         class="ma-2"
-        variant="text"
-        icon="mdi-thumb-down"
         color="red-lighten-2"
+        icon="mdi-thumb-down"
+        variant="text"
       ></v-btn>
     </div>
   </div>

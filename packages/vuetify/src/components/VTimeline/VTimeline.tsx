@@ -11,14 +11,16 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
+import { makeVTimelineItemProps } from './VTimelineItem'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'start' | 'end' | undefined
 export type TimelineAlign = 'center' | 'start'
+export type TimelineJustify = 'auto' | 'center'
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 export const makeVTimelineProps = propsFactory({
@@ -36,15 +38,11 @@ export const makeVTimelineProps = propsFactory({
     type: String,
     default: 'auto',
     validator: (v: any) => ['auto', 'center'].includes(v),
-  },
+  } as Prop<TimelineJustify>,
   side: {
     type: String,
     validator: (v: any) => v == null || ['start', 'end'].includes(v),
   } as Prop<TimelineSide>,
-  lineInset: {
-    type: [String, Number],
-    default: 0,
-  },
   lineThickness: {
     type: [String, Number],
     default: 2,
@@ -55,6 +53,9 @@ export const makeVTimelineProps = propsFactory({
     validator: (v: any) => ['start', 'end', 'both'].includes(v),
   } as Prop<TimelineTruncateLine>,
 
+  ...pick(makeVTimelineItemProps({
+    lineInset: 0,
+  }), ['dotColor', 'fillDot', 'hideOpposite', 'iconColor', 'lineInset', 'size']),
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeTagProps(),
@@ -73,11 +74,17 @@ export const VTimeline = genericComponent()({
 
     provideDefaults({
       VTimelineDivider: {
-        lineColor: toRef(props, 'lineColor'),
+        lineColor: toRef(() => props.lineColor),
       },
       VTimelineItem: {
-        density: toRef(props, 'density'),
-        lineInset: toRef(props, 'lineInset'),
+        density: toRef(() => props.density),
+        dotColor: toRef(() => props.dotColor),
+        fillDot: toRef(() => props.fillDot),
+        hideOpposite: toRef(() => props.hideOpposite),
+        iconColor: toRef(() => props.iconColor),
+        lineColor: toRef(() => props.lineColor),
+        lineInset: toRef(() => props.lineInset),
+        size: toRef(() => props.size),
       },
     })
 

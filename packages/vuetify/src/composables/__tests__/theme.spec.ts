@@ -1,11 +1,10 @@
-/* eslint-disable jest/no-commented-out-tests */
-
+/* eslint-disable @vitest/no-commented-out-tests */
 // Composables
-import { createTheme } from '../theme'
+import { createTheme, provideTheme, ThemeSymbol } from '../theme'
 
 // Utilities
-import { describe, expect, it } from '@jest/globals'
-import { createApp } from 'vue'
+import { mount } from '@vue/test-utils'
+import { createApp, defineComponent, h, provide } from 'vue'
 
 // Types
 import type { App } from 'vue'
@@ -149,41 +148,203 @@ describe('createTheme', () => {
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
   })
 
-  // it('should use vue-meta@2.3 functionality', () => {
-  //   const theme = createTheme()
-  //   const set = jest.fn()
-  //   const $meta = () => ({
-  //     addApp: () => ({ set }),
-  //   })
-  //   ;(instance as any).$meta = $meta as any
-  //   theme.init(instance)
-  //   expect(set).toHaveBeenCalled()
-  // })
+  it('should carry generated variations into a nested provideTheme current', () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        light: {
+          colors: { color2: '#1697f6' },
+        },
+      },
+      variations: {
+        colors: ['color2'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
 
-  // it('should set theme with vue-meta@2', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({
-  //     getOptions: () => ({ keyName: 'metaInfo' }),
-  //   })
-  //   theme.init(anyInstance)
-  //   const metaKeyName = anyInstance.$meta().getOptions().keyName
-  //   expect(typeof anyInstance.$options[metaKeyName]).toBe('function')
-  //   const metaInfo = anyInstance.$options[metaKeyName]()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
+    let nested: ReturnType<typeof provideTheme> | undefined
 
-  // it('should set theme with vue-meta@1', () => {
-  //   const theme = mockTheme()
-  //   const anyInstance = instance as any
-  //   anyInstance.$meta = () => ({})
-  //   theme.init(anyInstance)
-  //   expect(typeof anyInstance.$options.metaInfo).toBe('function')
-  //   const metaInfo = anyInstance.$options.metaInfo()
-  //   expect(metaInfo).toBeTruthy()
-  //   expect(metaInfo.style).toHaveLength(1)
-  //   expect(metaInfo.style[0].cssText).toMatchSnapshot()
-  // })
+    const ChildComponent = defineComponent({
+      setup () {
+        nested = provideTheme({ theme: undefined })
+        return () => h('div')
+      },
+    })
+
+    const ParentComponent = defineComponent({
+      setup () {
+        provide(ThemeSymbol, theme)
+        return () => h(ChildComponent)
+      },
+    })
+
+    mount(ParentComponent)
+
+    expect(nested?.current.value).toStrictEqual(theme.computedThemes.value.light)
+    expect(nested?.current.value.colors).toHaveProperty('color2-darken-1')
+    expect(nested?.current.value.colors).toHaveProperty('color2-lighten-1')
+    expect(nested?.current.value.colors).toHaveProperty('on-color2')
+  })
+
+  it('should allow for customization of the stylesheet id', () => {
+    const customStylesheetId = 'custom-vuetify-stylesheet-id'
+    const theme = createTheme({
+      stylesheetId: customStylesheetId,
+    })
+
+    theme.install(app)
+
+    expect(document.getElementById(customStylesheetId)).toBeDefined()
+  })
+
+  it('should allow for themes to be scoped', () => {
+    const theme = createTheme({
+      scope: '#my-app',
+    })
+
+    theme.install(app)
+
+    expect(document.head).toMatchSnapshot()
+  })
+
+  it('should properly integrate with unhead when available', async () => {
+    const mockPush = vi.fn().mockReturnValue({ patch: vi.fn() })
+    const mockUpdateHead = vi.fn()
+    const mockUseUnhead = {
+      push: mockPush,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with head
+    app._context = {
+      provides: {
+        usehead: mockUseUnhead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the head push method was called
+    expect(mockPush).toHaveBeenCalled()
+
+    // The push method should receive a function that returns an object with a style property
+    const headObj = mockPush.mock.calls[0][0]()
+    expect(headObj).toHaveProperty('style')
+    expect(Array.isArray(headObj.style)).toBe(true)
+    expect(headObj.style[0]).toHaveProperty('textContent')
+    expect(headObj.style[0]).toHaveProperty('id', 'vuetify-theme-stylesheet')
+  })
+
+  it('should work with legacy head client methods', async () => {
+    const mockAddHeadObjs = vi.fn()
+    const mockUpdateHead = vi.fn()
+    const mockLegacyHead = {
+      addHeadObjs: mockAddHeadObjs,
+      updateDOM: mockUpdateHead,
+    }
+
+    // Mock the app context with legacy head
+    app._context = {
+      provides: {
+        usehead: mockLegacyHead,
+      },
+    } as any
+
+    const theme = createTheme()
+    theme.install(app)
+
+    // Verify the legacy addHeadObjs method was called
+    expect(mockAddHeadObjs).toHaveBeenCalled()
+
+    // Verify updateDOM is called during reactivity
+    expect(mockUpdateHead).toHaveBeenCalled()
+  })
+
+  it('should change, toggle, and cycle theme', async () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        custom: { dark: false },
+        utopia: { dark: true },
+      },
+    })
+
+    // Test 1: Toggle through all available themes when no argument provided
+    expect(theme.name.value).toBe('light')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('dark')
+
+    theme.toggle()
+    expect(theme.name.value).toBe('light')
+
+    // Test 2: Change to a specific theme
+    theme.change('dark')
+    expect(theme.name.value).toBe('dark')
+
+    // Test 3: Cycle between a limited set of themes
+    theme.cycle()
+    expect(theme.name.value).toBe('custom')
+
+    theme.cycle()
+    expect(theme.name.value).toBe('utopia')
+
+    theme.cycle()
+    expect(theme.name.value).toBe('light')
+
+    // Test 4: Cycle between a subset of themes
+    theme.cycle(['light', 'utopia'])
+    expect(theme.name.value).toBe('utopia')
+
+    theme.cycle(['light', 'utopia'])
+    expect(theme.name.value).toBe('light')
+
+    // Test 5: Error when changing to a non-existent theme
+    const consoleMock = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    theme.change('nonexistent')
+    expect(consoleMock).toHaveBeenCalledWith('[Vue warn]: Vuetify: Theme "nonexistent" not found on the Vuetify theme instance')
+    consoleMock.mockReset()
+  })
+
+  it('should generate utility classes with a custom prefix', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-' })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('--v-theme-primary')
+    expect(css).toContain('--custom-theme-primary')
+  })
+
+  it('should use defined prefix for utility classes', async () => {
+    // @ts-expect-error next-line
+    const theme = createTheme({ prefix: 'custom-', scoped: true })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).toContain('.custom-bg-primary')
+    expect(css).toContain('.custom-text-primary')
+    expect(css).toContain('.custom-border-primary')
+  })
+
+  it('should not generate utility classes if disabled', async () => {
+    const theme = createTheme({ utilities: false })
+
+    theme.install(app)
+
+    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
+    const css = stylesheet!.innerHTML
+
+    expect(css).not.toContain('.bg-primary')
+    expect(css).not.toContain('.text-primary')
+    expect(css).not.toContain('.border-primary')
+  })
 })

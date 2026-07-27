@@ -1,29 +1,30 @@
 // @ts-nocheck
-/* eslint-disable */
+/* eslint-disable max-len */
 
 import {
-  parseTime,
-  validateTimestamp,
-  parseTimestamp,
-  parseDate,
-  getDayIdentifier,
-  getTimeIdentifier,
-  updateRelative,
   copyTimestamp,
-  getWeekdaySkips,
   createDayList,
-  getStartOfWeek,
-  getEndOfWeek,
   createIntervalList,
   createNativeLocaleFormatter,
-  getStartOfMonth,
-  getEndOfMonth,
-  nextMinutes,
-  updateMinutes,
   findWeekday,
+  getDayIdentifier,
+  getEndOfMonth,
+  getEndOfWeek,
+  getStartOfMonth,
+  getStartOfWeek,
+  getTimeIdentifier,
+  getWeekdaySkips,
   nextDay,
+  nextMinutes,
+  parseDate,
+  parseTime,
+  parseTimestamp,
   prevDay,
   relativeDays,
+  updateMinutes,
+  updateRelative,
+  validateNumber,
+  validateTimestamp,
 } from '../timestamp'
 
 describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
@@ -261,10 +262,10 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
   })
 
   it('should update relative flags without time', () => {
-    const now = parseTimestamp('2019-02-04 09:30')
-    const a = parseTimestamp('2019-02-04')
-    const b = parseTimestamp('2019-02-06')
-    const c = parseTimestamp('2019-02-01')
+    const now = parseTimestamp('2019-02-04 09:30')!
+    const a = parseTimestamp('2019-02-04')!
+    const b = parseTimestamp('2019-02-06')!
+    const c = parseTimestamp('2019-02-01')!
 
     const aa = copyTimestamp(a)
     const bb = copyTimestamp(b)
@@ -287,10 +288,10 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
   })
 
   it('should update relative flags with time', () => {
-    const now = parseTimestamp('2019-02-04 09:30')
-    const a = parseTimestamp('2019-02-04 09:30')
-    const b = parseTimestamp('2019-02-04 12:30')
-    const c = parseTimestamp('2019-02-04 05:10')
+    const now = parseTimestamp('2019-02-04 09:30')!
+    const a = parseTimestamp('2019-02-04 09:30')!
+    const b = parseTimestamp('2019-02-04 12:30')!
+    const c = parseTimestamp('2019-02-04 05:10')!
 
     const aa = copyTimestamp(a)
     const bb = copyTimestamp(b)
@@ -313,105 +314,93 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
   })
 
   it('should calculate weekday', () => { // eslint-disable-line max-statements
-    expect(parseTimestamp('2019-01-01').weekday).toBe(2)
-    expect(parseTimestamp('2019-01-02').weekday).toBe(3)
-    expect(parseTimestamp('2019-01-03').weekday).toBe(4)
-    expect(parseTimestamp('2019-01-04').weekday).toBe(5)
-    expect(parseTimestamp('2019-01-05').weekday).toBe(6)
-    expect(parseTimestamp('2019-01-06').weekday).toBe(0)
-    expect(parseTimestamp('2019-01-07').weekday).toBe(1)
-    expect(parseTimestamp('2019-01-08').weekday).toBe(2)
-    expect(parseTimestamp('2019-01-09').weekday).toBe(3)
-    expect(parseTimestamp('2019-01-10').weekday).toBe(4)
-    expect(parseTimestamp('2019-01-11').weekday).toBe(5)
-    expect(parseTimestamp('2019-01-12').weekday).toBe(6)
-    expect(parseTimestamp('2019-01-13').weekday).toBe(0)
-    expect(parseTimestamp('2019-01-14').weekday).toBe(1)
-    expect(parseTimestamp('2019-01-15').weekday).toBe(2)
-    expect(parseTimestamp('2019-01-16').weekday).toBe(3)
-    expect(parseTimestamp('2019-01-17').weekday).toBe(4)
-    expect(parseTimestamp('2019-01-18').weekday).toBe(5)
-    expect(parseTimestamp('2019-01-19').weekday).toBe(6)
-    expect(parseTimestamp('2019-01-20').weekday).toBe(0)
-    expect(parseTimestamp('2019-01-21').weekday).toBe(1)
-    expect(parseTimestamp('2019-01-22').weekday).toBe(2)
-    expect(parseTimestamp('2019-01-23').weekday).toBe(3)
-    expect(parseTimestamp('2019-01-24').weekday).toBe(4)
-    expect(parseTimestamp('2019-01-25').weekday).toBe(5)
-    expect(parseTimestamp('2019-01-26').weekday).toBe(6)
-    expect(parseTimestamp('2019-01-27').weekday).toBe(0)
-    expect(parseTimestamp('2019-01-28').weekday).toBe(1)
-    expect(parseTimestamp('2019-01-29').weekday).toBe(2)
-    expect(parseTimestamp('2019-01-30').weekday).toBe(3)
-    expect(parseTimestamp('2019-01-31').weekday).toBe(4)
-    expect(parseTimestamp('2019-02-01').weekday).toBe(5)
-    expect(parseTimestamp('2019-02-02').weekday).toBe(6)
-    expect(parseTimestamp('2019-02-03').weekday).toBe(0)
-    expect(parseTimestamp('2019-02-04').weekday).toBe(1)
-    expect(parseTimestamp('2019-02-05').weekday).toBe(2)
-    expect(parseTimestamp('2019-02-06').weekday).toBe(3)
-    expect(parseTimestamp('2019-02-07').weekday).toBe(4)
-    expect(parseTimestamp('2019-02-08').weekday).toBe(5)
-    expect(parseTimestamp('2019-02-09').weekday).toBe(6)
-    expect(parseTimestamp('2019-02-10').weekday).toBe(0)
-    expect(parseTimestamp('2019-02-11').weekday).toBe(1)
-    expect(parseTimestamp('2019-02-12').weekday).toBe(2)
-    expect(parseTimestamp('2019-02-13').weekday).toBe(3)
-    expect(parseTimestamp('2019-02-14').weekday).toBe(4)
-    expect(parseTimestamp('2019-02-15').weekday).toBe(5)
-    expect(parseTimestamp('2019-02-16').weekday).toBe(6)
-    expect(parseTimestamp('2019-02-17').weekday).toBe(0)
-    expect(parseTimestamp('2019-02-18').weekday).toBe(1)
-    expect(parseTimestamp('2019-02-19').weekday).toBe(2)
-    expect(parseTimestamp('2019-02-20').weekday).toBe(3)
-    expect(parseTimestamp('2019-02-21').weekday).toBe(4)
-    expect(parseTimestamp('2019-02-22').weekday).toBe(5)
-    expect(parseTimestamp('2019-02-23').weekday).toBe(6)
-    expect(parseTimestamp('2019-02-24').weekday).toBe(0)
-    expect(parseTimestamp('2019-02-25').weekday).toBe(1)
-    expect(parseTimestamp('2019-02-26').weekday).toBe(2)
-    expect(parseTimestamp('2019-02-27').weekday).toBe(3)
-    expect(parseTimestamp('2019-02-28').weekday).toBe(4)
-    expect(parseTimestamp('2019-03-01').weekday).toBe(5)
+    expect(parseTimestamp('2019-01-01')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-01-02')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-01-03')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-01-04')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-01-05')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-01-06')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-01-07')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-01-08')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-01-09')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-01-10')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-01-11')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-01-12')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-01-13')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-01-14')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-01-15')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-01-16')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-01-17')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-01-18')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-01-19')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-01-20')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-01-21')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-01-22')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-01-23')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-01-24')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-01-25')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-01-26')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-01-27')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-01-28')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-01-29')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-01-30')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-01-31')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-02-01')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-02-02')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-02-03')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-02-04')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-02-05')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-02-06')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-02-07')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-02-08')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-02-09')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-02-10')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-02-11')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-02-12')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-02-13')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-02-14')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-02-15')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-02-16')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-02-17')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-02-18')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-02-19')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-02-20')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-02-21')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-02-22')!.weekday).toBe(5)
+    expect(parseTimestamp('2019-02-23')!.weekday).toBe(6)
+    expect(parseTimestamp('2019-02-24')!.weekday).toBe(0)
+    expect(parseTimestamp('2019-02-25')!.weekday).toBe(1)
+    expect(parseTimestamp('2019-02-26')!.weekday).toBe(2)
+    expect(parseTimestamp('2019-02-27')!.weekday).toBe(3)
+    expect(parseTimestamp('2019-02-28')!.weekday).toBe(4)
+    expect(parseTimestamp('2019-03-01')!.weekday).toBe(5)
   })
 
   it('should create interval list', () => {
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 30, 15, 10)).toMatchSnapshot()
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 15, 15, 10)).toMatchSnapshot()
-    expect(createIntervalList(parseTimestamp('2019-02-08'), 10, 5, 2)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08')!, 30, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08')!, 15, 15, 10)).toMatchSnapshot()
+    expect(createIntervalList(parseTimestamp('2019-02-08')!, 10, 5, 2)).toMatchSnapshot()
   })
 
   // TODO Create a test that doesn't fail when
   // the day changes or ignore the code it
   // covers
-  it.skip('should create native locale formatter', () => {
-    expect(createNativeLocaleFormatter('en-US', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
-    expect(createNativeLocaleFormatter('en-UK', () => {})(parseTimestamp('2019-02-08'))).toBe('2/8/2019')
-    expect(createNativeLocaleFormatter('ru-RU', () => {})(parseTimestamp('2019-02-08'))).toBe('2019-2-8')
-  })
+  it.todo('should create native locale formatter')
 
-  it(`should return emptyFormatter if Intl isn't defined`, () => {
-    const intl = global.Intl
-    global.Intl = undefined
-    expect(createNativeLocaleFormatter('', () => {})(parseTimestamp('2019-02-08'))).toBe('')
-    global.Intl = intl
-  })
+  it.todo(`should return emptyFormatter if Intl isn't defined`)
 
-  it('should return emptyFormatter if Intl throws error', () => {
-    global.Intl.DateTimeFormat = () => { throw new Error() }
-    expect(createNativeLocaleFormatter('', () => {})(parseTimestamp('2019-02-08'))).toBe('')
-  })
+  it.todo('should return emptyFormatter if Intl throws error')
 
   it('should get month start', () => {
-    expect(getStartOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-01')
-    expect(getStartOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-01')
-    expect(getStartOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-01')
+    expect(getStartOfMonth(parseTimestamp('2019-02-08')!).date).toBe('2019-02-01')
+    expect(getStartOfMonth(parseTimestamp('2019-03-08')!).date).toBe('2019-03-01')
+    expect(getStartOfMonth(parseTimestamp('2019-06-08')!).date).toBe('2019-06-01')
   })
 
   it('should get month end', () => {
-    expect(getEndOfMonth(parseTimestamp('2019-02-08')).date).toEqual('2019-02-28')
-    expect(getEndOfMonth(parseTimestamp('2019-03-08')).date).toEqual('2019-03-31')
-    expect(getEndOfMonth(parseTimestamp('2019-06-08')).date).toEqual('2019-06-30')
+    expect(getEndOfMonth(parseTimestamp('2019-02-08')!).date).toBe('2019-02-28')
+    expect(getEndOfMonth(parseTimestamp('2019-03-08')!).date).toBe('2019-03-31')
+    expect(getEndOfMonth(parseTimestamp('2019-06-08')!).date).toBe('2019-06-30')
   })
 
   it('should get next minutes', () => {
@@ -438,7 +427,7 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
     it('should create day list', () => {
       const skips = getWeekdaySkips([0, 1, 2, 3, 4, 5, 6])
       const skips1 = getWeekdaySkips([1, 1, 1, 1, 1, 1, 0])
-      expect(() => createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toThrow()
+      expect(() => createDayList(parseTimestamp('2019-02-02'), parseTimestamp('2019-02-01'), parseTimestamp('2019-02-02'), skips)).toThrow('End date is earlier than start date')
       expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips)).toHaveLength(10)
       expect(createDayList(parseTimestamp('2019-02-01'), parseTimestamp('2019-02-10'), parseTimestamp('2019-02-02'), skips1)).toHaveLength(3)
     })
@@ -511,5 +500,19 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1)).toMatchObject({ day: 2 })
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 10)).toMatchObject({ day: 24 })
     expect(relativeDays(parseTimestamp('2019-01-03'), prevDay, 1000)).toMatchObject({ day: 8, month: 4, year: 2016 })
+  })
+
+  describe('validateNumber', () => {
+    it('should return true if number is valid', () => {
+      expect(validateNumber(1)).toBe(true)
+      expect(validateNumber(1000000)).toBe(true)
+      expect(validateNumber('1234')).toBe(true)
+    })
+
+    it('should return false if number is bad', () => {
+      expect(validateNumber(Infinity)).toBe(false)
+      expect(validateNumber(NaN)).toBe(false)
+      expect(validateNumber('bad')).toBe(false)
+    })
   })
 })

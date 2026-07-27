@@ -1,20 +1,20 @@
 <template>
   <v-carousel
     height="400"
-    show-arrows
     hide-delimiter-background
+    show-arrows
   >
     <template v-slot:prev="{ props }">
       <v-btn
-        variant="elevated"
         color="success"
+        variant="elevated"
         @click="props.onClick"
       >Previous slide</v-btn>
     </template>
     <template v-slot:next="{ props }">
       <v-btn
-        variant="elevated"
         color="info"
+        variant="elevated"
         @click="props.onClick"
       >Next slide</v-btn>
     </template>
@@ -27,7 +27,7 @@
         height="100%"
       >
         <div class="d-flex fill-height justify-center align-center">
-          <div class="text-h2">
+          <div class="text-display-large">
             {{ slide }} Slide
           </div>
         </div>

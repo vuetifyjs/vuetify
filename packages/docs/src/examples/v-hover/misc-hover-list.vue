@@ -1,10 +1,6 @@
 <template>
   <v-container class="pa-4 text-center">
-    <v-row
-      class="fill-height"
-      align="center"
-      justify="center"
-    >
+    <v-row class="fill-height align-center justify-center">
       <template v-for="(item, i) in items" :key="i">
         <v-col
           cols="12"
@@ -12,8 +8,8 @@
         >
           <v-hover v-slot="{ isHovering, props }">
             <v-card
-              :elevation="isHovering ? 12 : 2"
               :class="{ 'on-hover': isHovering }"
+              :elevation="isHovering ? 12 : 2"
               v-bind="props"
             >
               <v-img
@@ -21,16 +17,16 @@
                 height="225px"
                 cover
               >
-                <v-card-title class="text-h6 text-white d-flex flex-column">
+                <v-card-title class="text-title-large text-white d-flex flex-column">
                   <p class="mt-4">
                     {{ item.title }}
                   </p>
 
                   <div>
-                    <p class="ma-0 text-body-1 font-weight-bold">
+                    <p class="ma-0 text-body-large font-weight-bold">
                       {{ item.text }}
                     </p>
-                    <p class="text-caption font-weight-medium">
+                    <p class="text-body-small font-weight-medium">
                       {{ item.subtext }}
                     </p>
                   </div>
@@ -39,10 +35,10 @@
                   <v-btn
                     v-for="(icon, index) in icons"
                     :key="index"
-                    variant="text"
                     :class="{ 'show-btns': isHovering }"
                     :color="transparent"
                     :icon="icon"
+                    variant="text"
                   ></v-btn>
                 </div>
               </v-img>

@@ -19,8 +19,13 @@ export const VStepperWindowItem = genericComponent()({
 
       return (
         <VWindowItem
+          _as="VStepperWindowItem"
           { ...windowItemProps }
-          class="v-stepper-window-item"
+          class={[
+            'v-stepper-window-item',
+            props.class,
+          ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )

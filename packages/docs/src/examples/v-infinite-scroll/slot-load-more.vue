@@ -1,7 +1,7 @@
 <template>
   <v-infinite-scroll
-    mode="manual"
     height="400"
+    mode="manual"
     @load="load"
   >
     <template v-for="(item, index) in items" :key="item">
@@ -12,8 +12,8 @@
     <template v-slot:load-more="{ props }">
       <v-btn
         icon="mdi-refresh"
-        variant="text"
         size="small"
+        variant="text"
         v-bind="props"
       ></v-btn>
     </template>

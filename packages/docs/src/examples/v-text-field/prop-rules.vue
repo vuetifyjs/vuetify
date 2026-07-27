@@ -5,8 +5,8 @@
   >
     <v-text-field
       :rules="[rules.required]"
-      clearable
       label="Last name"
+      clearable
     ></v-text-field>
   </v-responsive>
 </template>

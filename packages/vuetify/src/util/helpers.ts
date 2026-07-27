@@ -1,5 +1,21 @@
 // Utilities
-import { camelize, capitalize, Comment, computed, Fragment, isVNode, reactive, toRefs, unref, watchEffect } from 'vue'
+import {
+  camelize,
+  capitalize,
+  Comment,
+  Fragment,
+  isProxy,
+  isReactive,
+  isRef,
+  isVNode,
+  reactive,
+  shallowRef,
+  toRaw,
+  toRef,
+  unref,
+  watchEffect,
+} from 'vue'
+import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -10,8 +26,7 @@ import type {
   InjectionKey,
   PropType,
   Ref,
-  Slots,
-  ToRefs,
+  ToRef,
   VNode,
   VNodeArrayChildren,
   VNodeChild,
@@ -34,33 +49,6 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
 }
 
-export function deepEqual (a: any, b: any): boolean {
-  if (a === b) return true
-
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
-    // If the values are Date, compare them as timestamps
-    return false
-  }
-
-  if (a !== Object(a) || b !== Object(b)) {
-    // If the values aren't objects, they were already checked for equality
-    return false
-  }
-
-  const props = Object.keys(a)
-
-  if (props.length !== Object.keys(b).length) {
-    // Different number of props, don't bother to check
-    return false
-  }
-
-  return props.every(p => deepEqual(a[p], b[p]))
-}
-
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (obj == null || !path || typeof path !== 'string') return fallback
@@ -70,11 +58,11 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey =
+export type SelectItemKey<T = Record<string, any>> =
   | boolean | null | undefined // Ignored
   | string // Lookup by key, can use dot notation for nested objects
   | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
-  | ((item: Record<string, any>, fallback?: any) => any)
+  | ((item: T, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
@@ -111,7 +99,7 @@ export function createRange (length: number, start = 0): number[] {
 export function getZIndex (el?: Element | null): number {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
 
-  const index = +window.getComputedStyle(el).getPropertyValue('z-index')
+  const index = Number(window.getComputedStyle(el).getPropertyValue('z-index'))
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
@@ -122,17 +110,27 @@ export function convertToUnit (str: string | number | null | undefined, unit?: s
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined
-  } else if (isNaN(+str!)) {
+  }
+  const num = Number(str)
+  if (isNaN(num)) {
     return String(str)
-  } else if (!isFinite(+str!)) {
+  } else if (!isFinite(num)) {
     return undefined
   } else {
-    return `${Number(str)}${unit}`
+    return `${num}${unit}`
   }
 }
 
-export function isObject (obj: any): obj is object {
+export function isObject (obj: any): obj is Record<string, any> {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isPlainObject (obj: any): obj is Record<string, any> {
+  let proto
+  return obj !== null && typeof obj === 'object' && (
+    (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
+    proto === null
+  )
 }
 
 export function refElement (obj?: ComponentPublicInstance<any> | HTMLElement): HTMLElement | undefined {
@@ -205,13 +203,12 @@ type MaybePick<
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): MaybePick<T, U> {
+> (obj: T, paths: readonly U[]): MaybePick<T, U> {
   const found: any = {}
 
-  const keys = new Set(Object.keys(obj))
-  for (const path of paths) {
-    if (keys.has(path)) {
-      found[path] = obj[path]
+  for (const key of paths) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      found[key] = obj[key]
     }
   }
 
@@ -261,17 +258,6 @@ export function omit<
   const clone = { ...obj }
 
   exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
-export function only<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, include: U[]): Pick<T, U> {
-  const clone = {} as T
-
-  include.forEach(prop => clone[prop] = obj[prop])
 
   return clone
 }
@@ -362,7 +348,7 @@ export function isComposingIgnoreKey (e: KeyboardEvent): boolean {
 export function filterInputAttrs (attrs: Record<string, unknown>) {
   const [events, props] = pickWithRest(attrs, [onRE])
   const inputEvents = omit(events, bubblingEvents)
-  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', /^data-/])
+  const [rootAttrs, inputAttrs] = pickWithRest(props, ['class', 'style', 'id', 'inert', /^data-/])
   Object.assign(rootAttrs, events)
   Object.assign(inputAttrs, inputEvents)
   return [rootAttrs, inputAttrs]
@@ -386,9 +372,9 @@ export function wrapInArray<T> (
     ? IfAny<T, T[], T>
     : NonNullable<T>[] {
   return v == null
-    ? []
+    ? [] as any
     : Array.isArray(v)
-      ? v as any : [v]
+      ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -396,14 +382,6 @@ export function defaultFilter (value: any, search: string | null, item: any) {
     search != null &&
     typeof value !== 'boolean' &&
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
-}
-
-export function searchItems<T extends any = any> (items: T[], search: string): T[] {
-  if (!search) return items
-  search = search.toString().toLowerCase()
-  if (search.trim() === '') return items
-
-  return items.filter((item: any) => Object.keys(item).some(key => defaultFilter(getObjectValueByPath(item, key), search, item)))
 }
 
 export function debounce (fn: Function, delay: MaybeRef<number>) {
@@ -417,33 +395,6 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
   }
   wrap.immediate = fn
   return wrap
-}
-
-export function throttle<T extends (...args: any[]) => any> (fn: T, limit: number) {
-  let throttling = false
-  return (...args: Parameters<T>): void | ReturnType<T> => {
-    if (!throttling) {
-      throttling = true
-      setTimeout(() => throttling = false, limit)
-      return fn(...args)
-    }
-  }
-}
-
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P]
-}
-
-/**
- * Filters slots to only those starting with `prefix`, removing the prefix
- */
-export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
-  return Object.keys(slots)
-    .filter(k => k.startsWith(prefix))
-    .reduce<Writable<Slots>>((obj, k) => {
-      obj[k.replace(prefix, '')] = slots[k]
-      return obj
-    }, {})
 }
 
 export function clamp (value: number, min = 0, max = 1) {
@@ -475,6 +426,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
+export function chunkArray (array: any[], size = 1) {
+  return Array.from({ length: Math.ceil(array.length / size) }, (v, i) =>
+    array.slice(i * size, i * size + size)
+  )
+}
+
 export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
@@ -489,19 +446,11 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000):
   return `${bytes.toFixed(1)} ${prefix[unit]}B`
 }
 
-export function camelizeObjectKeys (obj: Record<string, any> | null | undefined) {
-  if (!obj) return {}
-
-  return Object.keys(obj).reduce((o: any, key: string) => {
-    o[camelize(key)] = obj[key]
-    return o
-  }, {})
-}
-
 export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
+  targetCondition?: (k: string, v: unknown) => boolean,
 ) {
   const out: Record<string, any> = {}
 
@@ -510,21 +459,23 @@ export function mergeDeep (
   }
 
   for (const key in target) {
-    const sourceProperty = source[key]
     const targetProperty = target[key]
 
+    if (targetCondition && !targetCondition(key, targetProperty)) {
+      continue
+    }
+
+    const sourceProperty = source[key]
+
     // Only continue deep merging if
-    // both properties are objects
-    if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
-    ) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+    // both properties are plain objects
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, targetCondition)
 
       continue
     }
 
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
@@ -536,10 +487,6 @@ export function mergeDeep (
   return out
 }
 
-export function fillArray<T> (length: number, obj: T) {
-  return Array(length).fill(obj)
-}
-
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {
     if (node.type === Fragment) {
@@ -548,11 +495,6 @@ export function flattenFragments (nodes: VNode[]): VNode[] {
       return node
     }
   }).flat()
-}
-
-export const randomHexColor = () => {
-  const n = (Math.random() * 0xfffff * 1000000).toString(16)
-  return '#' + n.slice(0, 6)
 }
 
 export function toKebabCase (str = '') {
@@ -568,30 +510,6 @@ toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 
-export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
-  if (!vnode || typeof vnode !== 'object') {
-    return []
-  }
-
-  if (Array.isArray(vnode)) {
-    return vnode
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (Array.isArray(vnode.children)) {
-    return vnode.children
-      .map(child => findChildren(child))
-      .filter(v => v)
-      .flat(1)
-  } else if (vnode.component) {
-    return [vnode.component, ...findChildren(vnode.component?.subTree)]
-      .filter(v => v)
-      .flat(1)
-  }
-
-  return []
-}
-
 export function findChildrenWithProvide (
   key: InjectionKey<any> | symbol,
   vnode?: VNodeChild,
@@ -600,10 +518,12 @@ export function findChildrenWithProvide (
 
   if (Array.isArray(vnode)) {
     return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.suspense) {
+    return findChildrenWithProvide(key, vnode.ssContent!)
   } else if (Array.isArray(vnode.children)) {
     return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
   } else if (vnode.component) {
-    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+    if (Object.getOwnPropertyDescriptor(vnode.component.provides, key as symbol)) {
       return [vnode.component]
     } else if (vnode.component.subTree) {
       return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
@@ -619,6 +539,10 @@ export class CircularBuffer<T = never> {
 
   constructor (public readonly size: number) {}
 
+  get isFull () {
+    return this.#arr.length === this.size
+  }
+
   push (val: T) {
     this.#arr[this.#pointer] = val
     this.#pointer = (this.#pointer + 1) % this.size
@@ -626,6 +550,11 @@ export class CircularBuffer<T = never> {
 
   values (): T[] {
     return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+
+  clear () {
+    this.#arr.length = 0
+    this.#pointer = 0
   }
 }
 
@@ -644,20 +573,26 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
 type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
 type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
 
+type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
+
 /**
  * Convert a computed ref to a record of refs.
  * The getter function must always return an object with the same keys.
  */
-export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = reactive({}) as T
-  const base = computed(getter)
   watchEffect(() => {
-    for (const key in base.value) {
-      refs[key] = base.value[key]
+    const base = getter()
+    for (const key in base) {
+      refs[key] = base[key]
     }
   }, { flush: 'sync' })
-  return toRefs(refs)
+  const obj = {} as ToReadonlyRefs<T>
+  for (const key in refs) {
+    obj[key] = toRef(() => refs[key]) as any
+  }
+  return obj
 }
 
 /** Array.includes but value can be any type */
@@ -669,7 +604,8 @@ export function eventName (propName: string) {
   return propName[2].toLowerCase() + propName.slice(3)
 }
 
-export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+// TODO: this should be an array but vue's types don't accept arrays: vuejs/core#8025
+export type EventProp<T extends any[] = any[], F = (...args: T) => void> = F
 export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
@@ -677,7 +613,7 @@ export function hasEvent (props: Record<string, any>, name: string) {
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>[] | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
@@ -688,15 +624,52 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, .
 }
 
 export function focusableChildren (el: Element, filterByTabIndex = true) {
-  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
-    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled])`)
+  const targets = [
+    'button',
+    '[href]',
+    'input:not([type="hidden"])',
+    'select',
+    'textarea',
+    'details:not(:has(> summary))',
+    'details > summary',
+    '[tabindex]',
+    '[contenteditable]:not([contenteditable="false"])',
+    'audio[controls]',
+    'video[controls]',
+  ]
+    .map(s => `${s}${filterByTabIndex ? ':not([tabindex="-1"])' : ''}:not([disabled], [inert])`)
     .join(', ')
-  return [...el.querySelectorAll(targets)] as HTMLElement[]
+
+  let elements
+  try {
+    elements = [...el.querySelectorAll(targets)] as HTMLElement[]
+  } catch (err) {
+    consoleError(String(err))
+    return []
+  }
+
+  return elements
+    .filter(x => !x.closest('[inert]')) // does not have inert parent
+    .filter(x => !!x.offsetParent || x.getClientRects().length > 0) // is rendered
+    .filter(x => !x.parentElement?.closest('details:not([open])') ||
+      (x.tagName === 'SUMMARY' && x.parentElement?.tagName === 'DETAILS')
+    )
+}
+
+export function getActiveElement (): Element | null {
+  let active = document.activeElement
+  while (active?.shadowRoot?.activeElement) {
+    active = active.shadowRoot.activeElement
+  }
+  return active
 }
 
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
   let _el
-  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  let idx = elements.indexOf(getActiveElement() as HTMLElement)
+  if (idx < 0) {
+    idx = elements.findIndex(el => el.getAttribute('aria-selected') === 'true')
+  }
   const inc = location === 'next' ? 1 : -1
   do {
     idx += inc
@@ -705,23 +678,28 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+export function focusChild (
+  el: Element,
+  location?: 'next' | 'prev' | 'first' | 'last' | number | null,
+  options?: FocusOptions
+) {
   const focusable = focusableChildren(el)
 
-  if (!location) {
-    if (el === document.activeElement || !el.contains(document.activeElement)) {
-      focusable[0]?.focus()
+  if (location == null) {
+    const active = getActiveElement()
+    if (el === active || !el.contains(active)) {
+      focusable[0]?.focus(options)
     }
   } else if (location === 'first') {
-    focusable[0]?.focus()
+    focusable[0]?.focus(options)
   } else if (location === 'last') {
-    focusable.at(-1)?.focus()
+    focusable.at(-1)?.focus(options)
   } else if (typeof location === 'number') {
-    focusable[location]?.focus()
+    focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
     if (_el) _el.focus()
-    else focusChild(el, location === 'next' ? 'first' : 'last')
+    else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }
 
@@ -756,4 +734,130 @@ export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildre
   })
     ? vnodes
     : null
+}
+
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+
+export function renderSlot <T> (slot: Slot<never> | undefined, fallback?: Slot<never> | undefined): VNodeChild
+export function renderSlot <T> (slot: Slot<T> | undefined, props: T, fallback?: Slot<T> | undefined): VNodeChild
+export function renderSlot (slot?: Slot<unknown>, props?: unknown, fallback?: Slot<unknown>) {
+  // TODO: check if slot returns elements: #18308
+  return slot?.(props) ?? fallback?.(props)
+}
+
+export function defer (timeout: number, cb: () => void) {
+  if (!IN_BROWSER || timeout === 0) {
+    cb()
+
+    return () => {}
+  }
+
+  const timeoutId = window.setTimeout(cb, timeout)
+
+  return () => window.clearTimeout(timeoutId)
+}
+
+export type TemplateRef = {
+  (target: Element | ComponentPublicInstance | null): void
+  value: HTMLElement | ComponentPublicInstance | null | undefined
+  readonly el: HTMLElement | undefined
+}
+export function templateRef () {
+  const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
+  const fn = (target: HTMLElement | ComponentPublicInstance | null) => {
+    el.value = target
+  }
+  Object.defineProperty(fn, 'value', {
+    enumerable: true,
+    get: () => el.value,
+    set: val => el.value = val,
+  })
+  Object.defineProperty(fn, 'el', {
+    enumerable: true,
+    get: () => refElement(el.value),
+  })
+
+  return fn as TemplateRef
+}
+
+export function checkPrintable (e: KeyboardEvent) {
+  const isPrintableChar = e.key.length === 1
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+  return isPrintableChar && noModifier
+}
+
+export type Primitive = string | number | boolean | symbol | bigint
+export function isPrimitive (value: unknown): value is Primitive {
+  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+}
+
+export function escapeForRegex (sign: string) {
+  return '\\^$*+?.()|{}[]'.includes(sign)
+    ? `\\${sign}`
+    : sign
+}
+
+export function normalizeMinusSign (text: string): string {
+  return text.replace(/−/g, '-')
+}
+
+export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
+  const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
+  const cleanText = normalizeMinusSign(text).split('')
+    .filter(x => onlyValidCharacters.test(x))
+    .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
+        (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once
+        /\d/.test(x))
+    .join('')
+
+  if (decimalDigitsLimit === 0) {
+    return cleanText.split(decimalSeparator)[0]
+  }
+
+  const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
+  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+    const parts = cleanText.split(decimalSeparator)
+    return [
+      parts[0],
+      parts[1].substring(0, decimalDigitsLimit),
+    ].join(decimalSeparator)
+  }
+
+  return cleanText
+}
+
+export function camelizeProps<T extends Record<string, unknown>> (props: T | null): T {
+  const out = {} as T
+  for (const prop in props) {
+    out[camelize(prop) as keyof T] = props[prop]
+  }
+  return out
+}
+
+export function onlyDefinedProps (props: Record<string, any>) {
+  const booleanAttributes = ['checked', 'disabled']
+  return Object.fromEntries(Object.entries(props)
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+}
+
+export type NonEmptyArray<T> = [T, ...T[]]
+
+export function deepToRaw<T extends {}> (value: T): T {
+  const objectIterator = (input: any): any => {
+    if (Array.isArray(input)) {
+      return input.map(item => objectIterator(item))
+    }
+    if (isRef(input) || isReactive(input) || isProxy(input)) {
+      return objectIterator(toRaw(input))
+    }
+    if (isPlainObject(input)) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key as keyof typeof acc] = objectIterator(input[key])
+        return acc
+      }, {} as T)
+    }
+    return input
+  }
+
+  return objectIterator(value)
 }

@@ -1,17 +1,18 @@
 <template>
   <v-card
-    class="mt-4 mx-auto"
+    class="mt-8 mx-auto overflow-visible"
     max-width="400"
   >
     <v-sheet
       class="v-sheet--offset mx-auto"
       color="cyan"
-      elevation="12"
+      elevation="4"
       max-width="calc(100% - 32px)"
+      rounded="lg"
     >
       <v-sparkline
         :labels="labels"
-        :value="value"
+        :model-value="value"
         color="white"
         line-width="2"
         padding="16"
@@ -19,7 +20,7 @@
     </v-sheet>
 
     <v-card-text class="pt-0">
-      <div class="text-h6 font-weight-light mb-2">
+      <div class="text-title-large font-weight-light mb-2">
         User Registrations
       </div>
       <div class="subheading font-weight-light text-grey">
@@ -32,7 +33,7 @@
       >
         mdi-clock
       </v-icon>
-      <span class="text-caption text-grey font-weight-light">last registration 26 minutes ago</span>
+      <span class="text-body-small text-grey font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
   </v-card>
 </template>

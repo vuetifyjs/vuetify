@@ -1,23 +1,19 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
-    :options="options"
     :name="name"
+    :options="options"
   >
     <div>
       <v-footer v-bind="props">
         {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
       </v-footer>
     </div>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-footer'
   const model = ref('default')
   const options = ['bordered']

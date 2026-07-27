@@ -1,13 +1,13 @@
 <template>
-  <div :id="id" ref="rootEl" />
+  <div ref="rootEl" :id="id" />
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { IN_BROWSER } from '@/util/globals'
-  import { onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
-
   const props = defineProps({
+    async: {
+      type: Boolean,
+      default: false,
+    },
     id: {
       type: String,
       required: true,
@@ -36,6 +36,7 @@
     script.type = 'text/javascript'
     script.id = props.scriptId
     script.src = props.src
+    script.async = props.async
     script.onload = () => emit('script:load')
     script.onerror = onError
 

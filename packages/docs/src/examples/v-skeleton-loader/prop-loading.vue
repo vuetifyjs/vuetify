@@ -9,13 +9,13 @@
       </v-btn>
     </div>
 
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col
         class="mb-12"
         cols="12"
         md="6"
       >
-        <div class="text-h5 text-center">
+        <div class="text-headline-small text-center">
           Using slot
         </div>
 
@@ -24,9 +24,9 @@
           type="list-item-two-line"
         >
           <v-list-item
-            title="Title"
-            subtitle="Subtitle"
             lines="two"
+            subtitle="Subtitle"
+            title="Title"
             rounded
           ></v-list-item>
         </v-skeleton-loader>
@@ -36,7 +36,7 @@
         cols="12"
         md="6"
       >
-        <div class="text-h5 text-center">
+        <div class="text-headline-small text-center">
           Using if
         </div>
 
@@ -47,9 +47,9 @@
 
         <v-list-item
           v-else
-          title="Title"
-          subtitle="Subtitle"
           lines="two"
+          subtitle="Subtitle"
+          title="Title"
           rounded
         ></v-list-item>
       </v-col>

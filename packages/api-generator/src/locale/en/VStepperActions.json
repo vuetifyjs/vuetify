@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-stepper` that represents the step action controls.",
   "props": {
     "nextText": "The text used for the Next button.",
     "prevText": "The text used for the Prev button."
@@ -8,7 +9,7 @@
     "click:prev": "Event emitted when clicking the prev button."
   },
   "slots": {
-    "next": "Slot for customizing the next step functionailty",
+    "next": "Slot for customizing the next step functionality",
     "prev": "Slot for customizing the prev step functionality"
   }
 }

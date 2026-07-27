@@ -7,8 +7,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Regular"
+            model-value="John Doe"
             disabled
           ></v-text-field>
         </v-col>
@@ -18,8 +18,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Regular"
+            model-value="John Doe"
             readonly
           ></v-text-field>
         </v-col>
@@ -29,8 +29,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Solo"
+            model-value="John Doe"
             variant="solo"
             disabled
           ></v-text-field>
@@ -41,8 +41,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Solo"
+            model-value="John Doe"
             variant="solo"
             readonly
           ></v-text-field>
@@ -53,8 +53,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Outlined"
+            model-value="John Doe"
             variant="outlined"
             disabled
           ></v-text-field>
@@ -65,8 +65,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="Outlined"
+            model-value="John Doe"
             variant="outlined"
             readonly
           ></v-text-field>
@@ -77,8 +77,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="underlined"
+            model-value="John Doe"
             variant="underlined"
             disabled
           ></v-text-field>
@@ -89,8 +89,8 @@
           sm="6"
         >
           <v-text-field
-            model-value="John Doe"
             label="underlined"
+            model-value="John Doe"
             variant="underlined"
             readonly
           ></v-text-field>

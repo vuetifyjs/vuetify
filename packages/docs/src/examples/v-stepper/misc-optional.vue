@@ -28,9 +28,9 @@
   <v-stepper model-value="2">
     <v-stepper-header>
       <v-stepper-item
-        complete
         title="Select campaign settings"
         value="1"
+        complete
       ></v-stepper-item>
 
       <v-divider></v-divider>

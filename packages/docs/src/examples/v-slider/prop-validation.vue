@@ -1,9 +1,9 @@
 <template>
   <v-card
-    flat
     color="transparent"
+    flat
   >
-    <div class="text-subtitle-2">Rules</div>
+    <div class="text-title-small">Rules</div>
 
     <v-card-text class="pt-0">
       <v-slider
@@ -16,7 +16,7 @@
       ></v-slider>
     </v-card-text>
 
-    <div class="text-subtitle-2">Persistent hint</div>
+    <div class="text-title-small">Persistent hint</div>
 
     <v-card-text class="pt-0">
       <v-slider
@@ -24,9 +24,9 @@
         :rules="rules"
         hint="40 in stock"
         label="How many?"
-        persistent-hint
         step="10"
         thumb-label="always"
+        persistent-hint
         ticks
       ></v-slider>
     </v-card-text>

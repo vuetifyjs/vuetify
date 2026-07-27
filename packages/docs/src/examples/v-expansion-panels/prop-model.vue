@@ -16,20 +16,20 @@
       multiple
     >
       <v-expansion-panel
-        title="Foo"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        title="Foo"
         value="foo"
       ></v-expansion-panel>
 
       <v-expansion-panel
-        title="Bar"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        title="Bar"
         value="bar"
       ></v-expansion-panel>
 
       <v-expansion-panel
-        title="Baz"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        title="Baz"
         value="baz"
       ></v-expansion-panel>
     </v-expansion-panels>

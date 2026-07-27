@@ -1,5 +1,22 @@
 // Styles
+import './main.scss'
 import 'prism-theme-vars/base.css'
+
+// Plugins
+import * as Swetrix from 'swetrix'
+import * as Sentry from '@sentry/vue'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import { createHead } from '@unhead/vue/client'
+import { installVuetify } from '@/plugins/vuetify'
+import { installPinia, pinia } from '@/plugins/pinia'
+import { installGlobalComponents } from '@/plugins/global-components'
+import { installOne } from '@/plugins/one'
+import { installI18n } from '@/plugins/i18n'
+import { useAppStore } from '@/stores/app'
+import { useLocaleStore } from '@/stores/locale'
+import { installPwa } from '@/plugins/pwa'
+import { useUserStore } from '@vuetify/one'
 
 // App
 import App from './App.vue'
@@ -7,20 +24,6 @@ import App from './App.vue'
 // Virtual
 // import 'virtual:api'
 import { setupLayouts } from 'virtual:generated-layouts'
-
-// Plugins
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { createHead } from '@vueuse/head'
-import { installPinia, pinia } from '@/plugins/pinia'
-import { installGlobalComponents } from '@/plugins/global-components'
-import { installGtag } from '@/plugins/gtag'
-import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/store/app'
-import { useLocaleStore } from '@/store/locale'
-import { installPwa } from '@/plugins/pwa'
-import { useUserStore } from '@/store/user'
-import { installVuetify } from '@/plugins/vuetify'
 
 // Utilities
 import {
@@ -30,11 +33,11 @@ import {
   redirectRoutes,
   rpath,
   trailingSlash,
-} from '@/util/routes'
-import { wrapInArray } from '@/util/helpers'
+} from '@/utils/routes'
+import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/util/globals'
+import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -42,16 +45,39 @@ const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
+const app = createApp(App)
+
 if (IN_BROWSER) {
+  window.localStorage.setItem(
+    'userSessions',
+    String(Number(window.localStorage.getItem('userSessions') || 0) + 1)
+  )
   localeStore.$subscribe((_, state) => {
     window.localStorage.setItem('currentLocale', state.locale)
   })
   userStore.$subscribe(() => {
     userStore.save()
   })
+  Swetrix.init('ZMrLolxUmS0l', {
+    apiURL: 'https://swetrix-api.vuetifyjs.com/log',
+  })
+  Swetrix.trackViews()
+  Sentry.init({
+    app,
+    dsn: 'https://491ef7e8180648c488b1fcc158eb9ecc@glitchtip.vuetifyjs.com/1',
+    release: import.meta.env.VITE_GITHUB_SHA,
+    environment: import.meta.env.VITE_GITHUB_REF,
+    enabled: import.meta.env.VITE_GITHUB_SHA,
+
+    sampleRate: 1,
+    integrations: integrations => {
+      return integrations.filter(
+        integration => integration.name !== 'BrowserSession',
+      )
+    },
+  })
 }
 
-const app = createApp(App)
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -114,16 +140,23 @@ app.use(router)
 
 app.config.errorHandler = (err, vm, info) => {
   console.error(err, vm, info)
+  Swetrix.trackError({
+    name: (err as any).name,
+    message: (err as any).message,
+    lineno: null,
+    colno: null,
+    filename: null,
+  })
 }
 app.config.warnHandler = (err, vm, info) => {
   console.warn(err, vm, info)
 }
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
   if (to.meta.locale !== from.meta.locale) {
     localeStore.locale = to.meta.locale as string
   }
-  return to.path.endsWith('/') ? next() : next(`${trailingSlash(to.path)}` + to.hash)
+  if (!to.path.endsWith('/')) return `${trailingSlash(to.path)}` + to.hash
 })
 router.afterEach((to, from) => {
   if (to.meta.locale !== from.meta.locale && from.meta.locale === 'eo-UY') {
@@ -138,18 +171,32 @@ router.onError((err, to) => {
       location.assign(to.fullPath)
     } else {
       console.error('Dynamic import error, reloading page did not fix it', err)
+      Swetrix.trackError({
+        name: err.name,
+        message: err.message,
+        lineno: null,
+        colno: null,
+        filename: null,
+      })
     }
   } else {
     console.error(err)
+    Swetrix.trackError({
+      name: err?.name,
+      message: err?.message,
+      lineno: null,
+      colno: null,
+      filename: null,
+    })
   }
 })
 
 installGlobalComponents(app)
-installGtag(app, router)
 installI18n(app)
 installPwa(router)
 installPinia(app, router)
 installVuetify(app)
+installOne(app)
 
 router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')

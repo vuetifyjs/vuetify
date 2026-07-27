@@ -5,26 +5,32 @@ import './VImg.sass'
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Directives
-import intersect from '@/directives/intersect'
+import vIntersect from '@/directives/intersect'
 
 // Utilities
 import {
   computed,
   nextTick,
   onBeforeMount,
+  onBeforeUnmount,
   ref,
   shallowRef,
+  toRef,
   vShow,
   watch,
   withDirectives,
 } from 'vue'
 import {
   convertToUnit,
+  filterInputAttrs,
   genericComponent,
+  getCurrentInstance,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -49,14 +55,17 @@ export type VImgSlots = {
 }
 
 export const makeVImgProps = propsFactory({
+  absolute: Boolean,
   alt: String,
   cover: Boolean,
+  color: String,
   draggable: {
     type: [Boolean, String] as PropType<boolean | 'true' | 'false'>,
     default: undefined,
   },
   eager: Boolean,
   gradient: String,
+  imageClass: null,
   lazySrc: String,
   options: {
     type: Object as PropType<IntersectionObserverInit>,
@@ -89,13 +98,16 @@ export const makeVImgProps = propsFactory({
 
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
+  ...makeRoundedProps(),
   ...makeTransitionProps(),
 }, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
-  directives: { intersect },
+  directives: { vIntersect },
+
+  inheritAttrs: false,
 
   props: makeVImgProps(),
 
@@ -105,12 +117,18 @@ export const VImg = genericComponent<VImgSlots>()({
     error: (value: string | undefined) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
+    const { roundedClasses, roundedStyles } = useRounded(props)
+    const vm = getCurrentInstance('VImg')
+
     const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
     const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
     const naturalWidth = shallowRef<number>()
     const naturalHeight = shallowRef<number>()
+
+    let deferredLoadEmit = false
 
     const normalisedSrc = computed<srcObject>(() => {
       return props.src && typeof props.src === 'object'
@@ -126,6 +144,7 @@ export const VImg = genericComponent<VImgSlots>()({
           aspect: Number(props.aspectRatio || 0),
         }
     })
+
     const aspectRatio = computed(() => {
       return normalisedSrc.value.aspect || naturalWidth.value! / naturalHeight.value! || 0
     })
@@ -133,9 +152,22 @@ export const VImg = genericComponent<VImgSlots>()({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+
     watch(aspectRatio, (val, oldVal) => {
       if (!val && oldVal && image.value) {
         pollForSize(image.value)
+      }
+    })
+
+    watch(image, img => {
+      if (!img || state.value === 'idle') return
+
+      if (!aspectRatio.value) pollForSize(img)
+      getSrc(img)
+
+      if (deferredLoadEmit) {
+        deferredLoadEmit = false
+        emit('load', img.currentSrc || normalisedSrc.value.src)
       }
     })
 
@@ -165,6 +197,8 @@ export const VImg = genericComponent<VImgSlots>()({
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
         setTimeout(() => {
+          if (vm.isUnmounted) return
+
           if (image.value?.complete) {
             if (!image.value.naturalWidth) {
               onError()
@@ -174,35 +208,49 @@ export const VImg = genericComponent<VImgSlots>()({
 
             if (!aspectRatio.value) pollForSize(image.value, null)
             if (state.value === 'loading') onLoad()
-          } else {
-            if (!aspectRatio.value) pollForSize(image.value!)
-            getSrc()
+          } else if (image.value) {
+            if (!aspectRatio.value) pollForSize(image.value)
+            getSrc(image.value)
           }
         })
       })
     }
 
     function onLoad () {
-      getSrc()
-      pollForSize(image.value!)
+      if (vm.isUnmounted) return
+
+      if (image.value) {
+        getSrc(image.value)
+        pollForSize(image.value)
+        emit('load', image.value.currentSrc || normalisedSrc.value.src)
+      } else {
+        deferredLoadEmit = true
+      }
       state.value = 'loaded'
-      emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
+      if (vm.isUnmounted) return
+
       state.value = 'error'
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
-    function getSrc () {
-      const img = image.value
-      if (img) currentSrc.value = img.currentSrc || img.src
+    function getSrc (img: HTMLImageElement) {
+      currentSrc.value = img.currentSrc || img.src
     }
 
     let timer = -1
+
+    onBeforeUnmount(() => {
+      clearTimeout(timer)
+    })
+
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
         clearTimeout(timer)
+        if (vm.isUnmounted) return
+
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
@@ -219,7 +267,7 @@ export const VImg = genericComponent<VImgSlots>()({
       poll()
     }
 
-    const containClasses = computed(() => ({
+    const containClasses = toRef(() => ({
       'v-img__img--cover': props.cover,
       'v-img__img--contain': !props.cover,
     }))
@@ -229,12 +277,12 @@ export const VImg = genericComponent<VImgSlots>()({
 
       const img = (
         <img
-          class={['v-img__img', containClasses.value]}
+          class={['v-img__img', containClasses.value, props.imageClass]}
           style={{ objectPosition: props.position }}
+          crossorigin={ props.crossorigin }
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
           alt={ props.alt }
-          crossorigin={ props.crossorigin }
           referrerpolicy={ props.referrerpolicy }
           draggable={ props.draggable }
           sizes={ props.sizes }
@@ -266,9 +314,9 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             style={{ objectPosition: props.position }}
+            crossorigin={ props.crossorigin }
             src={ normalisedSrc.value.lazySrc }
             alt={ props.alt }
-            crossorigin={ props.crossorigin }
             referrerpolicy={ props.referrerpolicy }
             draggable={ props.draggable }
           />
@@ -323,18 +371,29 @@ export const VImg = genericComponent<VImgSlots>()({
 
     useRender(() => {
       const responsiveProps = VResponsive.filterProps(props)
+      const [rootAttrs, imageAttrs] = filterInputAttrs(attrs)
+
       return (
         <VResponsive
           class={[
             'v-img',
-            { 'v-img--booting': !isBooted.value },
+            {
+              'v-img--absolute': props.absolute,
+              'v-img--booting': !isBooted.value,
+              'v-img--fit-content': props.width === 'fit-content',
+            },
+            backgroundColorClasses.value,
+            roundedClasses.value,
             props.class,
           ]}
           style={[
             { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+            backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           { ...responsiveProps }
+          { ...rootAttrs }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }
           role={ props.alt ? 'img' : undefined }
@@ -345,7 +404,7 @@ export const VImg = genericComponent<VImgSlots>()({
         >{{
           additional: () => (
             <>
-              <__image />
+              <__image { ...imageAttrs } />
               <__preloadImage />
               <__gradient />
               <__placeholder />

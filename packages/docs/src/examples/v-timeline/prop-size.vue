@@ -7,11 +7,11 @@
       <v-card>
         <v-card-title class="bg-purple-lighten-2">
           <v-icon
-            size="large"
             class="me-4"
             icon="mdi-magnify"
+            size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 1
           </h2>
         </v-card-title>
@@ -23,17 +23,17 @@
 
     <v-timeline-item
       dot-color="amber-lighten-1"
-      fill-dot
       size="x-small"
+      fill-dot
     >
       <v-card>
         <v-card-title class="bg-amber-lighten-1 justify-end">
-          <h2 class="me-4 font-weight-light">
+          <h2 class="mt-0 me-4 font-weight-light">
             Title 2
           </h2>
           <v-icon
-            size="large"
             icon="mdi-home-outline"
+            size="large"
           ></v-icon>
         </v-card-title>
         <v-card-text>
@@ -50,10 +50,10 @@
         <v-card-title class="bg-cyan-lighten-1">
           <v-icon
             class="me-4"
-            size="large"
             icon="mdi-email-outline"
+            size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 3
           </h2>
         </v-card-title>
@@ -65,17 +65,17 @@
 
     <v-timeline-item
       dot-color="red-lighten-1"
-      fill-dot
       size="x-small"
+      fill-dot
     >
       <v-card>
         <v-card-title class="bg-red-lighten-1 justify-end">
-          <h2 class="me-4 font-weight-light">
+          <h2 class="mt-0 me-4 font-weight-light">
             Title 4
           </h2>
           <v-icon
-            size="large"
             icon="mdi-account-multiple-outline"
+            size="large"
           ></v-icon>
         </v-card-title>
         <v-card-text>
@@ -92,10 +92,10 @@
         <v-card-title class="bg-green-lighten-1">
           <v-icon
             class="me-4"
-            size="large"
             icon="mdi-phone-in-talk"
+            size="large"
           ></v-icon>
-          <h2 class="font-weight-light">
+          <h2 class="font-weight-light my-0">
             Title 5
           </h2>
         </v-card-title>

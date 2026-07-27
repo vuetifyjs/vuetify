@@ -1,11 +1,11 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-date-picker
         v-model="date"
         :allowed-dates="allowedDates"
-        min="2016-06-15"
         max="2018-03-20"
+        min="2016-06-15"
       ></v-date-picker>
     </v-row>
   </v-container>

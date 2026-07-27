@@ -11,10 +11,10 @@
           > tfoot {
             > tr {
               > th {
-                height: map-get($properties, header)
+                height: map.get($properties, header)
               }
               > td {
-                height: map-get($properties, row)
+                height: map.get($properties, row)
               }
             }
           }

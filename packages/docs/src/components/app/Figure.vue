@@ -7,7 +7,7 @@
 
     <figcaption
       v-if="caption"
-      class="text-caption font-weight-bold text-center text-capitalize text-medium-emphasis"
+      class="text-body-small font-weight-bold text-center text-capitalize text-medium-emphasis"
       v-text="caption"
     />
 
@@ -16,9 +16,6 @@
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, useAttrs } from 'vue'
-
   const attrs = useAttrs()
 
   defineProps({
@@ -33,3 +30,9 @@
     inheritAttrs: false,
   }
 </script>
+
+<style scoped>
+figure {
+  margin: 0;
+}
+</style>

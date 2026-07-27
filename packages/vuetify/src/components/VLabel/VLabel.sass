@@ -2,17 +2,18 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-.v-label
-  align-items: center
-  color: $label-color
-  display: $label-display
-  font-size: $label-font-size
-  letter-spacing: $label-letter-spacing
-  min-width: 0
-  opacity: var(--v-medium-emphasis-opacity)
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
+@include tools.layer('components')
+  .v-label
+    align-items: center
+    color: $label-color
+    display: $label-display
+    font-size: $label-font-size
+    letter-spacing: $label-letter-spacing
+    min-width: 0
+    opacity: $label-opacity
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
-.v-label--clickable
-  cursor: pointer
+  .v-label--clickable
+    cursor: pointer

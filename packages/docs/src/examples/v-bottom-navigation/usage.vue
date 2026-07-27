@@ -1,11 +1,12 @@
 <template>
-  <usage-example
+  <ExamplesUsageExample
     v-model="model"
     :code="code"
     :name="name"
     :options="options"
   >
-    <v-layout class="overflow-visible">
+    <v-layout class="border" style="height: 150px;">
+      <v-main></v-main>
       <v-bottom-navigation v-bind="props">
         <v-btn value="history">
           <v-icon>mdi-history</v-icon>
@@ -28,16 +29,12 @@
     </v-layout>
 
     <template v-slot:configuration>
-      <v-slider v-model="elevation" label="Elevation" step="1" min="0" max="24"></v-slider>
+      <v-slider v-model="elevation" label="Elevation" max="24" min="0" step="1"></v-slider>
     </template>
-  </usage-example>
+  </ExamplesUsageExample>
 </template>
 
 <script setup>
-  // Utilities
-  import { computed, ref } from 'vue'
-  import { propsToString } from '@/util/helpers'
-
   const name = 'v-bottom-navigation'
   const model = ref('default')
   const options = ['grow', 'shift']

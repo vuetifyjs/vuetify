@@ -11,8 +11,6 @@
 
       <v-toolbar-title>Photo Info</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn
         icon="mdi-magnify"
         @click="searchField.focus()"
@@ -21,15 +19,11 @@
     </v-toolbar>
 
     <v-container>
-      <v-row
-        align="center"
-        justify="start"
-      >
+      <v-row class="align-center justify-start" gap="8">
         <v-col
           v-for="(selection, i) in selections"
           :key="selection.text"
           cols="auto"
-          class="py-1 pe-0"
         >
           <v-chip
             :disabled="loading"
@@ -52,8 +46,8 @@
           <v-text-field
             ref="searchField"
             v-model="search"
-            hide-details
             label="Search"
+            hide-details
             single-line
           ></v-text-field>
         </v-col>
