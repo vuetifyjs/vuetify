@@ -22,7 +22,7 @@ type VirtualProps = {
   height: number | string | undefined
 }
 
-type ScrollToPosition = 'start' | 'center' | 'end'
+export type ScrollToPosition = 'start' | 'center' | 'end'
 
 export const makeVirtualProps = propsFactory({
   itemHeight: {
@@ -240,6 +240,13 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
+  function calculateScrollTop (index: number, position: ScrollToPosition) {
+    const offset = calculateOffset(index)
+    if (position === 'center') return Math.max(0, offset - viewportHeight.value / 2 + getSize(index) / 2)
+    if (position === 'end') return Math.max(0, offset - viewportHeight.value + getSize(index))
+    return offset
+  }
+
   function scrollToIndex (index: number, position: ScrollToPosition = 'start') {
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
@@ -253,8 +260,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const itemSize = itemHeight.value || 16
     const buffer = Math.ceil(BUFFER_PX / itemSize)
     const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
-    first.value = clamp(index - buffer, 0, Math.max(0, items.value.length - 1))
-    last.value = clamp(index + viewport + buffer, first.value + 1, items.value.length)
+
+    // paddingTop comes from first and must not exceed the scrollTop assigned below
+    const lead = position === 'center' ? Math.ceil(viewport / 2) : position === 'end' ? viewport : 0
+    first.value = clamp(index - lead - buffer, 0, Math.max(0, items.value.length - 1))
+    last.value = clamp(index - lead + viewport + buffer, first.value + 1, items.value.length)
     paddingTop.value = calculateOffset(first.value)
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
 
@@ -268,12 +278,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       // Superseded by a later scrollToIndex
       if (!el || !~targetScrollIndex || targetScrollIndex !== index) return
 
-      const itemOffset = calculateOffset(index)
-      const top = position === 'center'
-        ? itemOffset - viewportHeight.value / 2 + getSize(index) / 2
-        : position === 'end'
-          ? itemOffset - viewportHeight.value + getSize(index)
-          : itemOffset
+      const top = calculateScrollTop(index, position)
       el.scrollTop = top
       // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
       lastScrollTop = el.scrollTop
