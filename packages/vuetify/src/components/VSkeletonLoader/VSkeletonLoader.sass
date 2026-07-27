@@ -165,6 +165,18 @@
       .v-skeleton-loader__text
         margin: 0
 
+    &__table-heading
+      align-items: center
+      display: flex
+      justify-content: space-between
+
+      > .v-skeleton-loader__heading
+        max-width: 15%
+        height: 32px
+
+      > .v-skeleton-loader__text
+        max-width: 40%
+
     &__table-thead
       align-items: baseline
       display: grid
@@ -178,10 +190,26 @@
         max-width: $skeleton-loader-table-head-cell-max-width
 
     &__table-tfoot
+      justify-content: flex-end
       flex-wrap: nowrap
+      min-height: $skeleton-loader-table-tfoot-min-height
+
+      > .v-skeleton-loader__avatar
+        min-height: $skeleton-loader-table-tfoot-avatar-size
+        min-width: $skeleton-loader-table-tfoot-avatar-size
+        height: $skeleton-loader-table-tfoot-avatar-size
+        width: $skeleton-loader-table-tfoot-avatar-size
+        flex-grow: 0
 
       > .v-skeleton-loader__text.v-skeleton-loader__bone
         margin-top: $skeleton-loader-gutter
+
+        &:nth-child(1)
+          max-width: 170px
+
+        &:nth-child(2)
+          max-width: 64px
+
     &__table-row
       display: grid
       grid-auto-columns: 1fr

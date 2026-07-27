@@ -45,7 +45,7 @@ export const rootTypes = {
   sentences: 'text@2',
   subtitle: 'text',
   table: 'table-heading, table-thead, table-tbody, table-tfoot',
-  'table-heading': 'chip, text',
+  'table-heading': 'heading, text',
   'table-thead': 'heading@6',
   'table-tbody': 'table-row-divider@6',
   'table-row-divider': 'table-row, divider',

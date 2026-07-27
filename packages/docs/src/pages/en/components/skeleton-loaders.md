@@ -99,7 +99,8 @@ The following built-in types are available:
 | **table-thead** | heading@6 |
 | **table-tbody** | table-row-divider@6 |
 | **table-row-divider** | table-row, divider |
-| **table-row** | text@6 |
+| **table-row** | table-cell@6 |
+| **table-cell** | text |
 | **table-tfoot** | text@2, avatar@2 |
 | **text** | text |
 
