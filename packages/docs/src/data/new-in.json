@@ -71,6 +71,11 @@
       "misc-readonly": "3.6.0"
     }
   },
+  "VBtnGroup": {
+    "props": {
+      "size": "4.2.0"
+    }
+  },
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
