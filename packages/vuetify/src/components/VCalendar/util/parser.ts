@@ -1,5 +1,5 @@
 // Utilities
-import { isObject } from '@/util'
+import { isFunction, isObject, isString } from '@/util'
 
 // Types
 import type { CalendarCategory, CalendarCategoryTextFunction } from '../types'
@@ -8,9 +8,9 @@ export function parsedCategoryText (
   category: CalendarCategory,
   categoryText: string | CalendarCategoryTextFunction | undefined
 ): string {
-  return typeof categoryText === 'function' ? categoryText(category)
-    : typeof categoryText === 'string' && isObject(category) ? category[categoryText]
-    : typeof category === 'string' ? category
+  return isFunction(categoryText) ? categoryText(category)
+    : isString(categoryText) && isObject(category) ? category[categoryText]
+    : isString(category) ? category
     : ''
 }
 
@@ -18,12 +18,12 @@ export function getParsedCategories (
   categories: CalendarCategory | CalendarCategory[],
   categoryText: string | CalendarCategoryTextFunction | undefined
 ): CalendarCategory[] {
-  if (typeof categories === 'string') return categories.split(/\s*,\s/)
+  if (isString(categories)) return categories.split(/\s*,\s/)
   if (Array.isArray(categories)) {
     return categories.map((category: CalendarCategory) => {
-      if (typeof category === 'string') return category
+      if (isString(category)) return category
 
-      const categoryName = typeof category.categoryName === 'string'
+      const categoryName = isString(category.categoryName)
         ? category.categoryName
         : parsedCategoryText(category, categoryText)
       return { ...category, categoryName }

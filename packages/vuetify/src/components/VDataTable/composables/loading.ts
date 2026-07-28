@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { isObject } from '@/util'
+import { isObject, isString } from '@/util'
 
 // Types
 import type { DataTableLoading, DataTableLoadingSide } from '../types'
@@ -23,7 +23,7 @@ export function useLoadingConfig (
   const color = computed(() => {
     const v = loading()
     if (isObject(v) && v.color) return v.color
-    if (typeof v === 'string' && v !== 'true') return v
+    if (isString(v) && v !== 'true') return v
     return fallbackColor()
   })
 

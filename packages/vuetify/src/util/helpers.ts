@@ -33,7 +33,7 @@ import type {
 } from 'vue'
 import { isBoolean, isFunction, isNull, isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
 
-export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
+export function getNestedValue (obj: any, path: readonly (string | number)[], fallback?: any): any {
   const last = path.length - 1
 
   if (last < 0) return isUndefined(obj) ? fallback : obj

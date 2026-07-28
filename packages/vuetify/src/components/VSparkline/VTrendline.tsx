@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
-import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isNumber, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -132,7 +132,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const extendedPoints = computed(() => extendPoints(points.value, props.inset, totalWidth.value))
 
     function genPath (input: Point[] | number[], fill: boolean): string {
-      const points = typeof input[0] === 'number'
+      const points = isNumber(input[0])
         ? extendPoints(genPoints(input as number[], boundary.value), props.inset, totalWidth.value)
         : input as Point[]
 

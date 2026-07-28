@@ -18,6 +18,9 @@ import {
   getScrollParents,
   IN_BROWSER,
   isFixedPosition,
+  isFunction,
+  isNumber,
+  isString,
   nullifyTransforms,
   parseAnchor,
   propsFactory,
@@ -63,7 +66,7 @@ export const makeLocationStrategyProps = propsFactory({
   locationStrategy: {
     type: [String, Function] as PropType<StrategyProps['locationStrategy']>,
     default: 'static',
-    validator: (val: any) => typeof val === 'function' || val in locationStrategies,
+    validator: (val: any) => isFunction(val) || val in locationStrategies,
   },
   location: String as PropType<StrategyProps['location']>,
   origin: {
@@ -102,7 +105,7 @@ export function useLocationStrategies (
       visualViewport?.addEventListener('resize', onVisualResize, { passive: true })
       visualViewport?.addEventListener('scroll', onVisualScroll, { passive: true })
 
-      if (typeof props.locationStrategy === 'function') {
+      if (isFunction(props.locationStrategy)) {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
@@ -254,7 +257,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
         const container = (data.contentEl.value?.parentElement ?? document.documentElement) as HTMLElement
 
-        if (typeof raw === 'number' || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
+        if (isNumber(raw) || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
           return parseFloat(raw as string)
         }
         if (raw.endsWith('%')) {
@@ -271,12 +274,12 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (Array.isArray(props.offset)) {
       return props.offset
     }
-    if (typeof props.offset === 'string') {
+    if (isString(props.offset)) {
       const offset = props.offset.split(' ').map(parseFloat)
       if (offset.length < 2) offset.push(0)
       return offset
     }
-    return typeof props.offset === 'number' ? [props.offset, 0] : [0, 0]
+    return isNumber(props.offset) ? [props.offset, 0] : [0, 0]
   })
 
   let observe = false

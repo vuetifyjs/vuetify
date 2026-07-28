@@ -19,7 +19,7 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { convertToUnit, genericComponent, pick, propsFactory } from '@/util'
+import { convertToUnit, genericComponent, isFunction, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'
@@ -127,7 +127,7 @@ export const VPie = genericComponent<VPieSlots>()({
     const legendMode = toRef(() => !legendConfig.value.visible ? 'hidden' : legendConfig.value.position)
 
     const legendTextFormatFunction = toRef(() => (item: PieItem) => {
-      return typeof legendConfig.value.textFormat === 'function'
+      return isFunction(legendConfig.value.textFormat)
         ? legendConfig.value.textFormat(item)
         : formatTextTemplate(legendConfig.value.textFormat, item)
     })

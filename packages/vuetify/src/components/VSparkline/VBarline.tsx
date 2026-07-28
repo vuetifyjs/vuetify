@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -193,7 +193,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       ? (boundary.value.maxX - lineWidth.value) / 2
       : (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2
     )
-    const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
+    const smooth = computed(() => isBoolean(props.smooth) ? (props.smooth ? 2 : 0) : Number(props.smooth))
     const columnWidth = computed(() => {
       const len = bars.value.length
       return totalWidth.value / (len === 1 ? 2 : len)

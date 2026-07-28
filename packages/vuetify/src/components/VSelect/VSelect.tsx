@@ -41,6 +41,8 @@ import {
   genericComponent,
   getActiveElement,
   IN_BROWSER,
+  isFunction,
+  isNumber,
   matchesSelector,
   omit,
   propsFactory,
@@ -176,8 +178,8 @@ export const VSelect = genericComponent<new <
       }
     )
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : model.value.length
     })
     const form = useForm(props)

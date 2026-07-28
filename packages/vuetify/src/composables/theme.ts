@@ -20,6 +20,7 @@ import {
   getLuma,
   hasLightForeground,
   IN_BROWSER,
+  isElement,
   isNumber,
   isString,
   lighten,
@@ -529,7 +530,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     let x: number
     let y: number
 
-    if (e instanceof Element) {
+    if (isElement(e)) {
       const box = new Box(e)
       x = box.left + box.width / 2
       y = box.top + box.height / 2

@@ -1,5 +1,5 @@
 // Utilities
-import { attachedRoot } from '@/util'
+import { attachedRoot, isFunction } from '@/util'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -56,7 +56,7 @@ function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): b
 }
 
 function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
-  const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
+  const handler = isFunction(binding.value) ? binding.value : binding.value.handler
 
   // Clicks in the Shadow DOM change their target while using setTimeout, so the original target is saved here
   e.shadowTarget = e.target

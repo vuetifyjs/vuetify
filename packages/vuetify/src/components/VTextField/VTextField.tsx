@@ -18,7 +18,18 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, getActiveElement, omit, propsFactory, useRender } from '@/util'
+import {
+  callEvent,
+  filterInputAttrs,
+  genericComponent,
+  getActiveElement,
+  isFunction,
+  isNumber,
+  isString,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -78,8 +89,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
@@ -87,8 +98,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
       if (
         !props.counter ||
-        (typeof props.counter !== 'number' &&
-        typeof props.counter !== 'string')
+        (!isNumber(props.counter) && !isString(props.counter))
       ) return undefined
 
       return props.counter

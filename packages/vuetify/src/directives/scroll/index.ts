@@ -1,3 +1,6 @@
+// Utilities
+import { isFunction } from '@/util'
+
 // Types
 import type { DirectiveBinding } from 'vue'
 
@@ -15,7 +18,7 @@ function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
   const { self = false } = binding.modifiers ?? {}
   const value = binding.value
   const options = (typeof value === 'object' && value.options) || { passive: true }
-  const handler = typeof value === 'function' || 'handleEvent' in value ? value : value.handler
+  const handler = isFunction(value) || 'handleEvent' in value ? value : value.handler
 
   const target = self
     ? el

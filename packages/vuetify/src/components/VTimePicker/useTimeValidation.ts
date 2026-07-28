@@ -1,7 +1,7 @@
 // Utilities
 import { computed } from 'vue'
 import { incrementHour, incrementMinuteOrSecond } from './util'
-import { propsFactory } from '@/util'
+import { isFunction, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -34,7 +34,7 @@ export function useTimeValidation (props: TimeValidationProps) {
       if (val < minHour) return false
       if (val > maxHour) return false
       if (Array.isArray(props.allowedHours)) return props.allowedHours.includes(val)
-      if (typeof props.allowedHours === 'function') return props.allowedHours(val)
+      if (isFunction(props.allowedHours)) return props.allowedHours(val)
       return true
     }
   })
@@ -52,7 +52,7 @@ export function useTimeValidation (props: TimeValidationProps) {
         if (time > maxTime) return false
       }
       if (Array.isArray(props.allowedMinutes)) return props.allowedMinutes.includes(val)
-      if (typeof props.allowedMinutes === 'function') return props.allowedMinutes(val)
+      if (isFunction(props.allowedMinutes)) return props.allowedMinutes(val)
       return true
     }
   })
@@ -70,7 +70,7 @@ export function useTimeValidation (props: TimeValidationProps) {
         if (time > maxTime) return false
       }
       if (Array.isArray(props.allowedSeconds)) return props.allowedSeconds.includes(val)
-      if (typeof props.allowedSeconds === 'function') return props.allowedSeconds(val)
+      if (isFunction(props.allowedSeconds)) return props.allowedSeconds(val)
       return true
     }
   })

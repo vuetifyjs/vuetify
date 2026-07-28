@@ -8,6 +8,7 @@ import {
   RGBtoHSV,
 } from '@/util/colorUtils'
 import { has } from '@/util/helpers'
+import { isNumber, isString } from '@/util/v0'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'
@@ -23,8 +24,8 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 }
 
 export function extractColor (color: HSV, input: any) {
-  if (input == null || typeof input === 'string') {
-    const hasA = typeof color.a === 'number' && color.a < 1
+  if (input == null || isString(input)) {
+    const hasA = isNumber(color.a) && color.a < 1
     if (input?.startsWith('rgb(')) {
       const { r, g, b, a } = HSVtoRGB(color)
       return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
@@ -55,7 +56,7 @@ export function extractColor (color: HSV, input: any) {
 export function hasAlpha (color: any) {
   if (!color) return false
 
-  if (typeof color === 'string') {
+  if (isString(color)) {
     return color.length > 7
   }
 

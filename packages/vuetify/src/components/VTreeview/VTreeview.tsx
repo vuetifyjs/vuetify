@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRaw, toRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, isBoolean, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -176,7 +176,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
     useRender(() => {
       const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
-      const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
+      const indentLinesVariant = isBoolean(props.indentLines) ? 'default' : props.indentLines
 
       return (
         <VList

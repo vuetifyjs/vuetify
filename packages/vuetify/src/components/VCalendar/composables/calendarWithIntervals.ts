@@ -15,7 +15,7 @@ import {
   validateNumber,
   validateTime,
 } from '../util/timestamp'
-import { clamp, propsFactory } from '@/util'
+import { clamp, isBoolean, propsFactory } from '@/util'
 import { Box, getTargetBox } from '@/util/box'
 
 // Types
@@ -226,7 +226,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     targetDateOrClamp: CalendarTimestamp | boolean = false
   ): number | false {
     const clamp = targetDateOrClamp !== false
-    const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
+    const targetDate = !isBoolean(targetDateOrClamp) ? targetDateOrClamp : undefined
 
     let y = timeDelta(time, targetDate)
     if (y === false) return y

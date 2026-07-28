@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isFunction, propsFactory, useRender } from '@/util'
 
 // Types
 import type { CSSProperties, PropType } from 'vue'
@@ -236,7 +236,7 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
                   col.cells.map((cell, rowIndex) => {
                     if (!cell) return null
 
-                    const cellProps = (typeof itemProps === 'function' ? itemProps(cell) : itemProps) ?? {}
+                    const cellProps = (isFunction(itemProps) ? itemProps(cell) : itemProps) ?? {}
 
                     return (
                       <VHeatmapCell

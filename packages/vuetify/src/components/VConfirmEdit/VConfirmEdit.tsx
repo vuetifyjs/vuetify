@@ -7,7 +7,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, watchEffect } from 'vue'
-import { deepEqual, deepToRaw, genericComponent, propsFactory, useRender } from '@/util'
+import { deepEqual, deepToRaw, genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
@@ -73,7 +73,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     })
 
     function isActionDisabled (action: 'save' | 'cancel') {
-      if (typeof props.disabled === 'boolean') {
+      if (isBoolean(props.disabled)) {
         return props.disabled
       }
 

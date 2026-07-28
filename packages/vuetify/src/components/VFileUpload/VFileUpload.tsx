@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { provide, ref, shallowRef, toRef, watch } from 'vue'
-import { filterInputAttrs, genericComponent, isObject, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { filterInputAttrs, genericComponent, isBoolean, isObject, isString, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -120,9 +120,9 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     const loadingColor = shallowRef<string | undefined>(undefined)
 
     watch(() => props.loading, (val, old) => {
-      loadingColor.value = !val && typeof old === 'string'
+      loadingColor.value = !val && isString(old)
         ? old
-        : typeof val === 'boolean'
+        : isBoolean(val)
           ? undefined
           : val
     }, { immediate: true })

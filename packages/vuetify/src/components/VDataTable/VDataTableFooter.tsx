@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, isNumber, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -88,7 +88,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
     const itemsPerPageOptions = computed(() => (
       props.itemsPerPageOptions.map(option => {
-        if (typeof option === 'number') {
+        if (isNumber(option)) {
           return {
             value: option,
             title: option === -1
