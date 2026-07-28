@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { isNullOrUndefined, isObject, isString, propsFactory } from '@/util'
+import { isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -87,7 +87,7 @@ export function useMask (props: MaskProps) {
   }
 
   function maskValidates (mask: string, char: string): boolean {
-    if (isNullOrUndefined(char) || !isMask(mask)) return false
+    if (!isString(char) || !isMask(mask)) return false
     const item = tokens.value[mask]
     if (item.pattern) return item.pattern.test(char)
     return item.test(char)
@@ -101,7 +101,7 @@ export function useMask (props: MaskProps) {
   function maskText (text: string | null | undefined): string {
     const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
-    if (isNullOrUndefined(trimmedText)) return ''
+    if (!isString(trimmedText)) return ''
 
     if (!mask.value.length || !trimmedText.length) return trimmedText
 
@@ -142,7 +142,7 @@ export function useMask (props: MaskProps) {
   }
 
   function unmaskText (text: string | null): string | null {
-    if (isNullOrUndefined(text)) return null
+    if (!isString(text)) return null
 
     if (!mask.value.length || !text.length) return text
 
@@ -160,7 +160,7 @@ export function useMask (props: MaskProps) {
   }
 
   function getUnmaskMap (text: string | null): boolean[] {
-    if (isNullOrUndefined(text) || !mask.value.length || !text.length) return []
+    if (!isString(text) || !mask.value.length || !text.length) return []
 
     let textIndex = 0
     let maskIndex = 0
@@ -170,9 +170,9 @@ export function useMask (props: MaskProps) {
       const mchar = mask.value[maskIndex]
       const tchar = text[textIndex]
 
-      if (isNullOrUndefined(tchar)) break
+      if (!isString(tchar)) break
 
-      if (isNullOrUndefined(mchar)) {
+      if (!isString(mchar)) {
         result[textIndex] = false
         textIndex++
         continue
@@ -197,7 +197,7 @@ export function useMask (props: MaskProps) {
         // input doesn't match mask, skip forward until it does
         while (true) {
           const mchar = mask.value[maskIndex++]
-          if (isNullOrUndefined(mchar) || maskValidates(mchar, tchar)) break
+          if (!isString(mchar) || maskValidates(mchar, tchar)) break
         }
         continue
       }

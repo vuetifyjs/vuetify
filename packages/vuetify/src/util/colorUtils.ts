@@ -6,7 +6,7 @@ import * as CIELAB from '@/util/color/transformCIELAB'
 import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
-import { isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
+import { isNullOrUndefined, isNumber, isString } from './v0'
 import type { Colors } from '@/composables/theme'
 
 export type XYZ = [number, number, number]
@@ -185,7 +185,7 @@ export function HSLtoHSV (hsl: HSL): HSV {
 }
 
 export function RGBtoCSS ({ r, g, b, a }: RGB): string {
-  return isUndefined(a) ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`
+  return isNumber(a) ? `rgb(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`
 }
 
 export function HSVtoCSS (hsva: HSV): string {
@@ -202,14 +202,14 @@ export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
     toHex(r),
     toHex(g),
     toHex(b),
-    !isUndefined(a) ? toHex(Math.round(a * 255)) : '',
+    isNumber(a) ? toHex(Math.round(a * 255)) : '',
   ].join('')}` as Hex
 }
 
 export function HexToRGB (hex: Hex): RGB {
   hex = parseHex(hex)
   let [r, g, b, a] = chunk(hex, 2).map((c: string) => parseInt(c, 16))
-  a = isUndefined(a) ? a : (a / 255)
+  a = isNumber(a) ? a / 255 : a
 
   return { r, g, b, a }
 }

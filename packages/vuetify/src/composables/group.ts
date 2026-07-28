@@ -9,7 +9,7 @@ import {
   findChildrenWithProvide,
   getCurrentInstance,
   isNull,
-  isNullOrUndefined,
+  isNumber,
   isUndefined,
   propsFactory,
   wrapInArray,
@@ -278,7 +278,7 @@ export function useGroup (
       // cause max limit to be exceeded
       if (
         !isSelected &&
-        !isNullOrUndefined(props.max) &&
+        isNumber(props.max) &&
         internalValue.length + 1 > props.max
       ) return
 

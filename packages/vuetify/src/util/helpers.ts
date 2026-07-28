@@ -808,7 +808,7 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null, 
   }
 
   const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
-  if (!isNull(decimalDigitsLimit) && decimalPart.test(cleanText)) {
+  if (isNumber(decimalDigitsLimit) && decimalPart.test(cleanText)) {
     const parts = cleanText.split(decimalSeparator)
     return [
       parts[0],

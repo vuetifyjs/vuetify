@@ -1,6 +1,6 @@
 // Utilities
 import { toValue } from 'vue'
-import { destructComputed, hasLightForeground, isCssColor, isNullOrUndefined, isParsableColor, isString, parseColor } from '@/util'
+import { destructComputed, hasLightForeground, isCssColor, isNumber, isParsableColor, isString, parseColor } from '@/util'
 
 // Types
 import type { CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
@@ -74,7 +74,7 @@ export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue
 
       if (!_colors.text && isParsableColor(_colors.background)) {
         const backgroundColor = parseColor(_colors.background)
-        if (isNullOrUndefined(backgroundColor.a) || backgroundColor.a === 1) {
+        if (!isNumber(backgroundColor.a) || backgroundColor.a === 1) {
           classes.push(hasLightForeground(backgroundColor)
             ? 'v-theme-on-dark'
             : 'v-theme-on-light'

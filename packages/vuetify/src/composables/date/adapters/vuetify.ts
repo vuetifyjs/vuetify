@@ -1,5 +1,5 @@
 // Utilities
-import { consoleWarn, createRange, isFunction, isNullOrUndefined, isString, isUndefined, padStart } from '@/util'
+import { consoleWarn, createRange, isFunction, isNullOrUndefined, isNumber, isString, isUndefined, padStart } from '@/util'
 
 // Types
 import type { DateAdapter } from '../DateAdapter'
@@ -320,7 +320,7 @@ function getWeek (date: Date, locale: string, firstDayOfWeek?: number, firstDayO
   const weekStart = firstDayOfWeek ?? weekInfoFromLocale?.firstDay ?? 0
   const minWeekSize = weekInfoFromLocale?.firstWeekSize ?? 1
 
-  return !isUndefined(firstDayOfYear)
+  return isNumber(firstDayOfYear)
     ? calculateWeekWithFirstDayOfYear(date, locale, weekStart, firstDayOfYear)
     : calculateWeekWithMinWeekSize(date, locale, weekStart, minWeekSize)
 }
