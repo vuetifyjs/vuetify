@@ -194,8 +194,6 @@
   "inline": "Inline",
   "introduction": "Introduction",
   "invert-example-colors": "Invert example colors",
-  "jobs": "Jobs",
-  "jobs-for-vue": "Jobs for Vue",
   "joined": "Joined {date}",
   "labs": "Labs",
   "laptop": "Laptop",
@@ -298,7 +296,6 @@
     "favorite": "Favorite"
   },
   "search-api": "Search API",
-  "search-jobs": "Search Jobs",
   "search-sass-api": "Search SASS Variables",
   "section": "Section",
   "see-more-projects": "See More Projects",

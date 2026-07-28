@@ -306,7 +306,6 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "brand-kit",
-      "jobs-for-vue",
       "made-with-vuetify",
       "themes",
       { "divider": true },

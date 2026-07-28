@@ -62,11 +62,6 @@
       appendIcon: 'mdi-image-outline',
     },
     {
-      title: 'jobs',
-      to: rpath('/resources/jobs-for-vue/'),
-      appendIcon: 'mdi-briefcase-variant-outline',
-    },
-    {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
       appendIcon: 'mdi-alert-circle-outline',

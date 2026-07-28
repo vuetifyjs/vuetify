@@ -27,7 +27,7 @@ The issue list of this repo is exclusively for bug reports and feature requests.
 
 - Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
+- Try to reproduce with the latest [3.x release](https://github.com/vuetifyjs/vuetify/releases) in [Vuetify Play](https://play.vuetifyjs.com/) or a repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
@@ -188,23 +188,17 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 #### Choosing a base branch
 
-Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
+Before starting development you should know which branch to base your changes on.
 
-| Version   | Type of change                 | Branch      |
-|-----------|--------------------------------|-------------|
-| Vuetify 4 | Documentation                  | `master`    |
-| Vuetify 4 | Bug fixes                      | `master`    |
-| Vuetify 4 | New features                   | `dev`       |
-| Vuetify 5 | Features with breaking changes | `next`      |
-| Vuetify 3 | Documentation                  | `v3-stable` |
-| Vuetify 3 | Bug fixes                      | `v3-stable` |
-| Vuetify 2 | Documentation                  | `v2-stable` |
+| Version   | Type of change | Branch      |
+|-----------|----------------|-------------|
+| Vuetify 3 | Documentation  | `v3-stable` |
+| Vuetify 3 | Bug fixes      | `v3-stable` |
+
+For branches targeting newer major versions, see the [contributing guide](https://vuetifyjs.com/en/getting-started/contributing/) on the main site.
 
 ```bash
 # Switch to the desired branch
-# v4
-git switch master
-# v3
 git switch v3-stable
 
 # Pull down any upstream changes
@@ -255,10 +249,6 @@ We **do not** accept PRs for any documentation changes pertaining to languages o
 - Directly through the [Crowdin project](https://crowdin.com/project/vuetify).
 
 **Note**: Languages will not be added to the language drop down on the docs site until they have at least 50% of their translations completed.
-
-### Requesting new features
-
-Pending
 
 ### Commit guidelines
 
