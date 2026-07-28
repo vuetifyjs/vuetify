@@ -53,7 +53,7 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    if (isNullOrUndefined(providedDefaults.value) && !(scoped || reset || root)) return injectedDefaults.value
+    if (!providedDefaults.value && !(scoped || reset || root)) return injectedDefaults.value
 
     let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 

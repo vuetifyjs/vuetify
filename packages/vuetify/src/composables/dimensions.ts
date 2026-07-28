@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, isNullOrUndefined, propsFactory } from '@/util'
+import { convertToUnit, propsFactory } from '@/util'
 
 // Types
 export interface DimensionProps {
@@ -33,12 +33,12 @@ export function useDimension (props: DimensionProps) {
     const minWidth = convertToUnit(props.minWidth)
     const width = convertToUnit(props.width)
 
-    if (!isNullOrUndefined(height)) styles.height = height
-    if (!isNullOrUndefined(maxHeight)) styles.maxHeight = maxHeight
-    if (!isNullOrUndefined(maxWidth)) styles.maxWidth = maxWidth
-    if (!isNullOrUndefined(minHeight)) styles.minHeight = minHeight
-    if (!isNullOrUndefined(minWidth)) styles.minWidth = minWidth
-    if (!isNullOrUndefined(width)) styles.width = width
+    if (height) styles.height = height
+    if (maxHeight) styles.maxHeight = maxHeight
+    if (maxWidth) styles.maxWidth = maxWidth
+    if (minHeight) styles.minHeight = minHeight
+    if (minWidth) styles.minWidth = minWidth
+    if (width) styles.width = width
 
     return styles
   })

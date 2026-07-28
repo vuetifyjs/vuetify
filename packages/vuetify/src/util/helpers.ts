@@ -120,9 +120,9 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
 
 export function isPlainObject (obj: any): obj is Record<string, any> {
   let proto
-  return !isNull(obj) && typeof obj === 'object' && (
+  return !!obj && typeof obj === 'object' && (
     (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
-    isNull(proto)
+    !proto
   )
 }
 
@@ -667,7 +667,7 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   do {
     idx += inc
     _el = elements[idx]
-  } while ((!_el || isNullOrUndefined(_el.offsetParent) || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
+  } while ((!_el || !_el.offsetParent || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
   return _el
 }
 

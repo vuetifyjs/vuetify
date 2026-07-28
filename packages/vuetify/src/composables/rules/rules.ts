@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, toRef } from 'vue'
-import { isNull, isString } from '@/util'
+import { isString } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -99,7 +99,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
         ruleName = rule
       }
 
-      if (!isNull(ruleName)) {
+      if (ruleName) {
         if (ruleName.startsWith('$')) {
           ruleName = ruleName.slice(1)
         }
