@@ -17,7 +17,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, genericComponent, isObject, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -311,7 +311,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         eventColors = wrapInArray(eventColor(date))
       } else if (Array.isArray(eventColor)) {
         eventColors = eventColor
-      } else if (typeof eventColor === 'object' && eventColor !== null) {
+      } else if (isObject(eventColor)) {
         eventColors = wrapInArray(eventColor[date])
       }
 

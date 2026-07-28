@@ -24,6 +24,7 @@ import {
   genericComponent,
   getActiveElement,
   humanReadableFileSize,
+  isObject,
   omit,
   propsFactory,
   useRender,
@@ -77,9 +78,7 @@ export const makeVFileInputProps = propsFactory({
   modelValue: {
     type: [Array, Object] as PropType<File[] | File | null>,
     default: (props: any) => props.multiple ? [] : null,
-    validator: (val: any) => {
-      return wrapInArray(val).every(v => v != null && typeof v === 'object')
-    },
+    validator: (val: any) => wrapInArray(val).every(isObject),
   },
 
   ...makeFileFilterProps(),

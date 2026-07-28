@@ -1,3 +1,6 @@
+// Utilities
+import { isObject } from '@/util'
+
 // Types
 import type { CalendarCategory, CalendarCategoryTextFunction } from '../types'
 
@@ -6,7 +9,7 @@ export function parsedCategoryText (
   categoryText: string | CalendarCategoryTextFunction | undefined
 ): string {
   return typeof categoryText === 'function' ? categoryText(category)
-    : typeof categoryText === 'string' && typeof category === 'object' && category ? category[categoryText]
+    : typeof categoryText === 'string' && isObject(category) ? category[categoryText]
     : typeof category === 'string' ? category
     : ''
 }
