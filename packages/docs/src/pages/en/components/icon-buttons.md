@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Icon buttons
   title: Icon button component

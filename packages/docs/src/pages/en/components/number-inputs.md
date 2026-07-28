@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Number inputs
   description: The number input component provides a clean interface for entering numeric values with increment and decrement controls.

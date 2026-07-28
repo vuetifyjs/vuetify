@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Time pickers
   title: Time picker component

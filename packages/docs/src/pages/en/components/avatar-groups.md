@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Avatar groups
   title: Avatar group component

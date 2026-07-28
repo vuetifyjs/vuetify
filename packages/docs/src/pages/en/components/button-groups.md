@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Button toggles
   title: Button toggle component

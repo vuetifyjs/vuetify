@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Pie charts
   title: Pie chart component
