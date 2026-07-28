@@ -54,7 +54,7 @@ export const VFab = genericComponent()({
     const el = shallowRef<HTMLElement>()
     useResizeObserver(el, entries => {
       if (!entries.length) return
-      height.value = entries[0].contentRect.height
+      height.value = entries[0].target.clientHeight
     })
 
     const hasPosition = toRef(() => props.app || props.absolute)
