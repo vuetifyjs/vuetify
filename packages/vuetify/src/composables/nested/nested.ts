@@ -32,7 +32,7 @@ import {
   leafSingleSelectStrategy,
   trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, isFunction, isNullOrUndefined, isUndefined, propsFactory, throttle } from '@/util'
+import { consoleError, getCurrentInstance, isFunction, isNullOrUndefined, isObject, isUndefined, propsFactory, throttle } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -175,8 +175,8 @@ export const useNested = (
   )
 
   const activeStrategy = computed(() => {
-    if (typeof props.activeStrategy === 'object') return props.activeStrategy
     if (isFunction(props.activeStrategy)) return props.activeStrategy(props.mandatory)
+    if (isObject(props.activeStrategy)) return props.activeStrategy
 
     switch (props.activeStrategy) {
       case 'leaf': return leafActiveStrategy(props.mandatory)
@@ -188,8 +188,8 @@ export const useNested = (
   })
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
     if (isFunction(props.selectStrategy)) return props.selectStrategy(props.mandatory)
+    if (isObject(props.selectStrategy)) return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
@@ -204,7 +204,7 @@ export const useNested = (
   })
 
   const openStrategy = computed(() => {
-    if (typeof props.openStrategy === 'object') return props.openStrategy
+    if (isObject(props.openStrategy)) return props.openStrategy
 
     switch (props.openStrategy) {
       case 'list': return listOpenStrategy
