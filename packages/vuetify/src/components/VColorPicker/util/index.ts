@@ -1,4 +1,5 @@
 // Utilities
+import { isObject } from '@/util'
 import {
   HexToHSV,
   HSLtoHSV,
@@ -40,7 +41,7 @@ export function extractColor (color: HSV, input: any) {
     else return hex
   }
 
-  if (typeof input === 'object') {
+  if (isObject(input)) {
     let converted
 
     if (has(input, ['r', 'g', 'b'])) converted = HSVtoRGB(color)
@@ -60,7 +61,7 @@ export function hasAlpha (color: any) {
     return color.length > 7
   }
 
-  if (typeof color === 'object') {
+  if (isObject(color)) {
     return has(color, ['a']) || has(color, ['alpha'])
   }
 

@@ -34,6 +34,7 @@ import {
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
+  isObject,
 } from '@/util'
 
 // Types
@@ -131,7 +132,7 @@ export const VImg = genericComponent<VImgSlots>()({
     let deferredLoadEmit = false
 
     const normalisedSrc = computed<srcObject>(() => {
-      return props.src && typeof props.src === 'object'
+      return props.src && isObject(props.src)
         ? {
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,

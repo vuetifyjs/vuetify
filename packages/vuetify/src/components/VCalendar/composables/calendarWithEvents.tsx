@@ -19,7 +19,7 @@ import {
   parseEvent,
 } from '../util/events'
 import { diffMinutes, getDayIdentifier } from '../util/timestamp'
-import { getPrefixedEventHandlers, isFunction, isString, propsFactory } from '@/util'
+import { getPrefixedEventHandlers, isFunction, isString, propsFactory, isObject } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -504,7 +504,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
 
   function isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
     return !categoryMode.value ||
-      (typeof category === 'object' && category.categoryName &&
+      (isObject(category) && category.categoryName &&
       category.categoryName === event.category) ||
       (isString(event.category) && category === event.category) ||
       (!isString(event.category) && category === null)

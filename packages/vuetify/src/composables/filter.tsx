@@ -13,6 +13,7 @@ import {
   isUndefined,
   propsFactory,
   wrapInArray,
+  isObject,
 } from '@/util'
 
 // Types
@@ -123,7 +124,7 @@ export function filterItems (
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       let hasOnlyCustomFilters = false
 
-      if (typeof item === 'object') {
+      if (isObject(item)) {
         if (item.type === 'divider' || item.type === 'subheader') {
           if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
             // clear unless, divider appears before subheader

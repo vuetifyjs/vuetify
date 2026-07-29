@@ -1,4 +1,5 @@
 // Utilities
+import { isObject } from '@/util'
 import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
@@ -78,7 +79,7 @@ export function parseColor (color: Color): RGB {
     }
 
     return HexToRGB(hex as Hex)
-  } else if (typeof color === 'object') {
+  } else if (isObject(color)) {
     if (has(color, ['r', 'g', 'b'])) {
       return color
     } else if (has(color, ['h', 's', 'l'])) {

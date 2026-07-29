@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender, isObject } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -47,10 +47,10 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const hasDrawn = ref(false)
     const clipRects = shallowRef<SVGRectElement[]>([])
     const animationDuration = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+      isObject(props.animation) ? (props.animation.duration ?? 300) : 300
     )
     const animationEasing = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+      isObject(props.animation) ? (props.animation.easing ?? 'ease') : 'ease'
     )
 
     const hasLabels = computed(() => {
@@ -235,7 +235,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const tooltipConfig = computed(() => ({
       showCrosshair: false,
       titleFormat: (item: { index: number, value: number }) => String(item.value),
-      ...(typeof props.tooltip === 'object' ? props.tooltip : {}),
+      ...(isObject(props.tooltip) ? props.tooltip : {}),
     }))
 
     let frame = -1

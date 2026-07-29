@@ -30,6 +30,7 @@ import {
   propsFactory,
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
+  isObject,
 } from '@/util'
 import { Box } from '@/util/box'
 
@@ -549,8 +550,8 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   ): ThemeTransitionOptions | false {
     const opt = transition ?? parsedOptions.transition
     if (!opt && !_transitionOrigin) return false
-    const global = typeof parsedOptions.transition === 'object' ? parsedOptions.transition : {}
-    const local = typeof transition === 'object' ? transition : {}
+    const global = isObject(parsedOptions.transition) ? parsedOptions.transition : {}
+    const local = isObject(transition) ? transition : {}
     return {
       origin: local.origin ?? _transitionOrigin ?? global.origin,
       duration: local.duration ?? global.duration,

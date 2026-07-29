@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
-import { genericComponent, getPropertyFromItem, isNumber, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isNumber, PREFERS_REDUCED_MOTION, propsFactory, useRender, isObject } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -42,10 +42,10 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const fillPath = ref<SVGPathElement | null>(null)
     const strokePath = ref<SVGPathElement | null>(null)
     const animationDuration = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+      isObject(props.animation) ? (props.animation.duration ?? 300) : 300
     )
     const animationEasing = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+      isObject(props.animation) ? (props.animation.easing ?? 'ease') : 'ease'
     )
 
     function genPoints (
@@ -299,7 +299,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       showCrosshair: true,
       offset: 16 as number | undefined,
       titleFormat: (item: { index: number, value: number }) => String(item.value),
-      ...(typeof props.tooltip === 'object' ? props.tooltip : {}),
+      ...(isObject(props.tooltip) ? props.tooltip : {}),
     }))
 
     let frame = -1

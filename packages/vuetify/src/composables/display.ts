@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, isNull, isNumber, mergeDeep, propsFactory } from '@/util'
+import { getCurrentInstanceName, isNull, isNumber, mergeDeep, propsFactory, isObject } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -102,13 +102,13 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
 function getClientWidth (ssr?: SSROptions) {
   return IN_BROWSER && !ssr
     ? window.innerWidth
-    : (typeof ssr === 'object' && ssr.clientWidth) || 0
+    : (isObject(ssr) && ssr.clientWidth) || 0
 }
 
 function getClientHeight (ssr?: SSROptions) {
   return IN_BROWSER && !ssr
     ? window.innerHeight
-    : (typeof ssr === 'object' && ssr.clientHeight) || 0
+    : (isObject(ssr) && ssr.clientHeight) || 0
 }
 
 function getPlatform (ssr?: SSROptions): DisplayPlatform {

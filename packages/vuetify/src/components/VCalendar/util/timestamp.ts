@@ -1,7 +1,7 @@
 import { isLeapYear } from './dateTimeUtils'
 
 // Utilities
-import { isNumber, isString } from '@/util'
+import { isNumber, isString, isObject } from '@/util'
 
 // Types
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
@@ -84,7 +84,7 @@ export function validateNumber (input: any): boolean {
 export function validateTime (input: any): input is VTime {
   return (isNumber(input) && isFinite(input)) ||
     (!!PARSE_TIME.exec(input)) ||
-    (typeof input === 'object' && isFinite(input.hour) && isFinite(input.minute))
+    (isObject(input) && isFinite(input.hour) && isFinite(input.minute))
 }
 
 export function parseTime (input: any): number | false {
@@ -99,7 +99,7 @@ export function parseTime (input: any): number | false {
     }
 
     return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
-  } else if (typeof input === 'object') {
+  } else if (isObject(input)) {
     // when an object is given, it must have hour and minute
     if (!isNumber(input.hour) || !isNumber(input.minute)) {
       return false

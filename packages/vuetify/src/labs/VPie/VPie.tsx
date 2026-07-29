@@ -19,7 +19,7 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { convertToUnit, genericComponent, isFunction, pick, propsFactory } from '@/util'
+import { convertToUnit, genericComponent, isFunction, pick, propsFactory, isObject } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'
@@ -115,7 +115,7 @@ export const VPie = genericComponent<VPieSlots>()({
       visible: !!props.legend,
       position: 'bottom',
       textFormat: '[title]',
-      ...(typeof props.legend === 'object' ? props.legend : {}),
+      ...(isObject(props.legend) ? props.legend : {}),
     }))
 
     const { colorClasses, colorStyles } = useColor(() => ({ background: props.bgColor }))
@@ -181,13 +181,13 @@ export const VPie = genericComponent<VPieSlots>()({
     function colorFromPalette (index: number) {
       if (props.palette.length === 0) return undefined
       const paletteItem = props.palette[index % props.palette.length]
-      return typeof paletteItem === 'object' ? paletteItem.color : paletteItem
+      return isObject(paletteItem) ? paletteItem.color : paletteItem
     }
 
     function patternFromPalette (index: number) {
       if (props.palette.length === 0) return undefined
       const paletteItem = props.palette[index % props.palette.length]
-      return typeof paletteItem === 'object' ? paletteItem.pattern : undefined
+      return isObject(paletteItem) ? paletteItem.pattern : undefined
     }
 
     function isVisible (item: PieItem) {
@@ -273,10 +273,10 @@ export const VPie = genericComponent<VPieSlots>()({
       const tooltipProps = {
         item: tooltipItem.value,
         modelValue: tooltipVisible.value,
-        titleFormat: typeof props.tooltip === 'object' ? props.tooltip.titleFormat : '[title]',
-        subtitleFormat: typeof props.tooltip === 'object' ? props.tooltip.subtitleFormat : '[value]',
-        transition: typeof props.tooltip === 'object' ? props.tooltip.transition : defaultTooltipTransition,
-        offset: typeof props.tooltip === 'object' ? props.tooltip.offset : 16,
+        titleFormat: isObject(props.tooltip) ? props.tooltip.titleFormat : '[title]',
+        subtitleFormat: isObject(props.tooltip) ? props.tooltip.subtitleFormat : '[value]',
+        transition: isObject(props.tooltip) ? props.tooltip.transition : defaultTooltipTransition,
+        offset: isObject(props.tooltip) ? props.tooltip.offset : 16,
         target: tooltipTarget.value,
       }
 
@@ -294,7 +294,7 @@ export const VPie = genericComponent<VPieSlots>()({
 
       const tooltipDefaults = {
         VAvatar: {
-          size: typeof props.tooltip === 'object' ? (props.tooltip.avatarSize ?? 28) : 28,
+          size: isObject(props.tooltip) ? (props.tooltip.avatarSize ?? 28) : 28,
         },
       }
 

@@ -15,7 +15,7 @@ import {
   validateNumber,
   validateTime,
 } from '../util/timestamp'
-import { clamp, isBoolean, propsFactory } from '@/util'
+import { clamp, isBoolean, propsFactory, isObject } from '@/util'
 import { Box, getTargetBox } from '@/util/box'
 
 // Types
@@ -259,7 +259,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
 
     const gap: number = effectiveIntervalCount.value * parsedIntervalMinutes.value
 
-    if (targetDate && typeof time === 'object' && 'day' in time) {
+    if (targetDate && isObject(time) && 'day' in time) {
       const a = getDayIdentifier(time)
       const b = getDayIdentifier(targetDate)
       minutes += (a - b) * gap

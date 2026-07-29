@@ -37,7 +37,8 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()
+  const value = binding.value
+  const elements = ((isFunction(value) ? undefined : value.include) || (() => []))()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -50,7 +51,8 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 }
 
 function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
-  const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
+  const value = binding.value
+  const isActive = (isFunction(value) ? undefined : value.closeConditional) || defaultConditional
 
   return isActive(e)
 }

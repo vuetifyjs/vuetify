@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, isFunction, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isFunction, propsFactory, useRender, isObject } from '@/util'
 
 // Types
 import type { CSSProperties, PropType } from 'vue'
@@ -260,11 +260,11 @@ export const VHeatmap = genericComponent<VHeatmapSlots>()({
           { props.legend && (
             slots.legend?.({ thresholds: props.thresholds, activeBuckets: activeBuckets.value, toggle }) ?? (
               <VHeatmapLegend
-                cellSize={ (typeof props.legend === 'object' ? props.legend.cellSize : undefined) ?? props.cellSize }
+                cellSize={ (isObject(props.legend) ? props.legend.cellSize : undefined) ?? props.cellSize }
                 thresholds={ props.thresholds }
                 activeBuckets={ activeBuckets.value }
                 rounded={ props.rounded }
-                labels={ typeof props.legend === 'object' ? props.legend.labels : undefined }
+                labels={ isObject(props.legend) ? props.legend.labels : undefined }
                 onClick:threshold={ toggle }
               />
             )

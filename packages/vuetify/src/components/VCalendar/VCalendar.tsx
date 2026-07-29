@@ -37,7 +37,7 @@ import {
   updateWeekday,
   validateTimestamp,
 } from './util/timestamp'
-import { genericComponent, isNumber, isString, useRender } from '@/util'
+import { genericComponent, isNumber, isString, useRender, isObject } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -324,7 +324,7 @@ export const VCalendar = genericComponent<new (
     function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!base.noEvents.value) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
+          if (isObject(category) && category.categoryName) map[category.categoryName] = { index, count: 0 }
           else if (isString(category)) map[category] = { index, count: 0 }
           return map
         }, {})
@@ -363,7 +363,7 @@ export const VCalendar = genericComponent<new (
         }
 
         categories = categories.filter((category: CalendarCategory) => {
-          if (typeof category === 'object' && category.categoryName) {
+          if (isObject(category) && category.categoryName) {
             return categoryMap.hasOwnProperty(category.categoryName)
           } else if (isString(category)) {
             return categoryMap.hasOwnProperty(category)

@@ -61,7 +61,7 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
-      const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
+      const headerTitle = isObject(scope.category) ? scope.category.categoryName : scope.category
       const events = getPrefixedEventHandlers(attrs, ':dayCategory', () => {
         return getCategoryScope(base.getSlotScope(day) || day, scope.category)
       })
