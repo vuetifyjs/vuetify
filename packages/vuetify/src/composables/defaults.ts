@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
-import { isNullOrUndefined, isString, isUndefined } from '@/util'
+import { isString } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
@@ -84,7 +84,7 @@ export function provideDefaults (
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties, undefined, (_, v) => !isUndefined(v))
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
       : properties
   }) as ComputedRef<DefaultsInstance>
 
@@ -115,13 +115,13 @@ export function internalUseDefaults (
     get (target, prop: string) {
       const propValue = Reflect.get(target, prop)
       if (prop === 'class' || prop === 'style') {
-        return [componentDefaults.value?.[prop], propValue].filter(v => !isNullOrUndefined(v))
+        return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
       }
       if (propIsDefined(vm.vnode, prop)) return propValue
       const _componentDefault = componentDefaults.value?.[prop]
-      if (!isUndefined(_componentDefault)) return _componentDefault
+      if (_componentDefault !== undefined) return _componentDefault
       const _globalDefault = defaults.value?.global?.[prop]
-      if (!isUndefined(_globalDefault)) return _globalDefault
+      if (_globalDefault !== undefined) return _globalDefault
       return propValue
     },
   })
