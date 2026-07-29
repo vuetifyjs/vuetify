@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, shallowRef, toRef, toValue } from 'vue'
-import { deepEqual, isPrimitive, propsFactory, wrapInArray, isObject } from '@/util'
+import { deepEqual, isObject, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'

@@ -19,7 +19,7 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import { computed, shallowRef, toRef, watch } from 'vue'
 import { formatTextTemplate } from './utils'
-import { convertToUnit, genericComponent, isFunction, pick, propsFactory, isObject } from '@/util'
+import { convertToUnit, genericComponent, isFunction, isObject, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType, TransitionProps } from 'vue'

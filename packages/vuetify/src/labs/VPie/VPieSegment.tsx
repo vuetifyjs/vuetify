@@ -5,7 +5,7 @@ import { makeRevealProps, useReveal } from '@/composables/reveal'
 // Utilities
 import { computed, toRef } from 'vue'
 import { useInnerSlicePath, useOuterSlicePath, usePieArc } from './utils'
-import { easingPatterns, genericComponent, propsFactory, useTransition, isObject } from '@/util'
+import { easingPatterns, genericComponent, isObject, propsFactory, useTransition } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

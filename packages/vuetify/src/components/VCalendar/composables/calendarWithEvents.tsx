@@ -19,7 +19,7 @@ import {
   parseEvent,
 } from '../util/events'
 import { diffMinutes, getDayIdentifier } from '../util/timestamp'
-import { getPrefixedEventHandlers, isFunction, isString, propsFactory, isObject } from '@/util'
+import { getPrefixedEventHandlers, isFunction, isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'

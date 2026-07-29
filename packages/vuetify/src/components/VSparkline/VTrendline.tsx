@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
-import { genericComponent, getPropertyFromItem, isNumber, PREFERS_REDUCED_MOTION, propsFactory, useRender, isObject } from '@/util'
+import { genericComponent, getPropertyFromItem, isNumber, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types

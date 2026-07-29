@@ -1,7 +1,7 @@
 import { isLeapYear } from './dateTimeUtils'
 
 // Utilities
-import { isNumber, isString, isObject } from '@/util'
+import { isNumber, isObject, isString } from '@/util'
 
 // Types
 import type { CalendarFormatter, CalendarTimestamp } from '../types'

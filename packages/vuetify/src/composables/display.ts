@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, isNull, isNumber, mergeDeep, propsFactory, isObject } from '@/util'
+import { getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types

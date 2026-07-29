@@ -1,5 +1,5 @@
 // Utilities
-import { SUPPORTS_INTERSECTION, isFunction, isObject } from '@/util'
+import { isFunction, isObject, SUPPORTS_INTERSECTION } from '@/util'
 
 // Types
 import type {

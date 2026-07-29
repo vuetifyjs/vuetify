@@ -9,11 +9,11 @@ import {
   isFunction,
   isNullOrUndefined,
   isNumber,
+  isObject,
   isString,
   isUndefined,
   propsFactory,
   wrapInArray,
-  isObject,
 } from '@/util'
 
 // Types

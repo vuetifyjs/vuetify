@@ -37,7 +37,7 @@ import {
   updateWeekday,
   validateTimestamp,
 } from './util/timestamp'
-import { genericComponent, isNumber, isString, useRender, isObject } from '@/util'
+import { genericComponent, isNumber, isObject, isString, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

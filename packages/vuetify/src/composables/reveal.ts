@@ -1,6 +1,6 @@
 // Utilities
 import { onMounted, shallowRef, toRef } from 'vue'
-import { propsFactory, isObject } from '@/util'
+import { isObject, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

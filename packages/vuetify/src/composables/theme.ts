@@ -22,6 +22,7 @@ import {
   IN_BROWSER,
   isElement,
   isNumber,
+  isObject,
   isString,
   lighten,
   mergeDeep,
@@ -30,7 +31,6 @@ import {
   propsFactory,
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
-  isObject,
 } from '@/util'
 import { Box } from '@/util/box'
 

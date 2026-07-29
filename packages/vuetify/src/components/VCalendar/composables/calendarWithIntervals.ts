@@ -15,7 +15,7 @@ import {
   validateNumber,
   validateTime,
 } from '../util/timestamp'
-import { clamp, isBoolean, propsFactory, isObject } from '@/util'
+import { clamp, isBoolean, isObject, propsFactory } from '@/util'
 import { Box, getTargetBox } from '@/util/box'
 
 // Types

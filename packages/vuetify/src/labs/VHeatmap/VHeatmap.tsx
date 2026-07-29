@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, isFunction, propsFactory, useRender, isObject } from '@/util'
+import { convertToUnit, genericComponent, isFunction, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { CSSProperties, PropType } from 'vue'

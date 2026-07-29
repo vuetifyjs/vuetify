@@ -1,5 +1,7 @@
-// Types
+// Utilities
 import { isFunction } from '@/util'
+
+// Types
 import type { DirectiveBinding } from 'vue'
 import type { MutationOptions } from '@/composables/mutationObserver'
 

@@ -31,10 +31,10 @@ import {
   filterInputAttrs,
   genericComponent,
   getCurrentInstance,
+  isObject,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
-  isObject,
 } from '@/util'
 
 // Types
