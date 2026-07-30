@@ -316,7 +316,6 @@ declare module 'vue' {
     readonly useHttpStore: UnwrapRef<typeof import('@vuetify/one')['useHttpStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
-    readonly useJobsStore: UnwrapRef<typeof import('./src/stores/jobs')['useJobsStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useLocaleStore: UnwrapRef<typeof import('./src/stores/locale')['useLocaleStore']>
     readonly useMadeWithVuetifyStore: UnwrapRef<typeof import('./src/stores/made-with-vuetify')['useMadeWithVuetifyStore']>
