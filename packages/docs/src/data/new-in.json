@@ -358,6 +358,7 @@
   },
   "VInput": {
     "props": {
+      "detailsActive": "4.2.0",
       "iconColor": "3.8.0",
       "glow": "3.8.0"
     }

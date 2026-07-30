@@ -53,7 +53,7 @@ export const VCounter = genericComponent<VCounterSlots>()({
     })
 
     useRender(() => (
-      <MaybeTransition transition={ props.transition }>
+      <MaybeTransition transition={ props.transition } appear>
         <div
           v-show={ props.active }
           class={[
