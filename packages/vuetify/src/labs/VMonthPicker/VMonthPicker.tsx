@@ -208,6 +208,16 @@ export const VMonthPicker = genericComponent<new <
 
     const isListView = computed(() => Number(props.monthsColumns) === 1)
 
+    const monthsContainerRef = shallowRef<HTMLElement>()
+    const monthsLayoutRef = shallowRef<HTMLElement>()
+    const scrollable = computed(() => {
+      if (!monthsContainerRef.value || !monthsLayoutRef.value) {
+        return false
+      }
+
+      return monthsContainerRef.value.scrollWidth > monthsLayoutRef.value.scrollWidth
+    })
+
     const monthRows = computed(() => {
       const cols = Number(props.monthsColumns) || 4
       return chunkArray(months.value, cols)
@@ -248,6 +258,14 @@ export const VMonthPicker = genericComponent<new <
       selectMonth(index)
     }
 
+    function scrollMonths (direction: -1 | 1) {
+      const el = monthsContainerRef.value
+      if (!el) return
+
+      const scrollAmount = Math.max(el.clientWidth * 0.75, 120)
+      el.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' })
+    }
+
     const { containerProps, selectItem, focusItem, clear } = useGridSelection<number>({
       items: () => months.value,
       columns: () => Number(props.monthsColumns) || 4,
@@ -279,7 +297,6 @@ export const VMonthPicker = genericComponent<new <
     }
 
     watch(year, () => clear())
-
     useRender(() => {
       const pickerProps = VPicker.filterProps(props)
 
@@ -347,110 +364,137 @@ export const VMonthPicker = genericComponent<new <
                       onUpdate:modelValue={ onUpdateYear }
                     />
                   ) : (
-                    <div
-                      key="months"
-                      class="v-month-picker__months flex-grow-1"
-                    >
-                      <MaybeTransition name={ transition.value }>
-                        <div
-                          key={ year.value }
-                          class="v-month-picker__months-content"
-                          onMouseleave={ range.clearPreview }
-                          { ...containerProps.value }
-                        >
-                          { monthRows.value.map((row, rowIndex) => {
-                            const cols = Number(props.monthsColumns) || 4
-                            return (
-                              <div class="v-month-picker__months-row">
-                                { row.map((month, colIndex) => {
-                                  const index = rowIndex * cols + colIndex
-                                  const monthValue = getMonthValue(index)
-                                  const rangeStart = range.isRangeStart(monthValue)
-                                  const rangeEnd = range.isRangeEnd(monthValue)
-                                  const rangeMiddle = range.isRangeMiddle(monthValue)
-                                  const previewStart = range.isPreviewStart(monthValue)
-                                  const previewEnd = range.isPreviewEnd(monthValue)
-                                  const previewMiddle = range.isPreviewMiddle(monthValue)
-                                  const previewed = range.isInPreviewRange(monthValue)
-                                  const selected = range.isSelected(monthValue) && !rangeMiddle
+                    <div class="v-month-picker__months-layout" ref={ monthsLayoutRef }>
+                      <VBtn
+                        class={[
+                          'v-month-picker__months-nav v-month-picker__months-nav--prev',
+                          { 'd-none': !scrollable.value },
+                        ]}
+                        icon={ props.prevIcon }
+                        disabled={ props.disabled }
+                        size="small"
+                        variant="text"
+                        aria-label={ t('$vuetify.monthPicker.ariaLabel.scrollMonthPrev') }
+                        onClick={ () => scrollMonths(-1) }
+                      />
+                      <div
+                        key="months"
+                        ref={ monthsContainerRef }
+                        class="v-month-picker__months flex-grow-1"
+                      >
+                        <MaybeTransition name={ transition.value }>
+                          <div
+                            key={ year.value }
+                            class="v-month-picker__months-content"
+                            onMouseleave={ range.clearPreview }
+                            { ...containerProps.value }
+                          >
+                            { monthRows.value.map((row, rowIndex) => {
+                              const cols = Number(props.monthsColumns) || 4
+                              return (
+                                <div class="v-month-picker__months-row">
+                                  { row.map((month, colIndex) => {
+                                    const index = rowIndex * cols + colIndex
+                                    const monthValue = getMonthValue(index)
+                                    const rangeStart = range.isRangeStart(monthValue)
+                                    const rangeEnd = range.isRangeEnd(monthValue)
+                                    const rangeMiddle = range.isRangeMiddle(monthValue)
+                                    const previewStart = range.isPreviewStart(monthValue)
+                                    const previewEnd = range.isPreviewEnd(monthValue)
+                                    const previewMiddle = range.isPreviewMiddle(monthValue)
+                                    const previewed = range.isInPreviewRange(monthValue)
+                                    const selected = range.isSelected(monthValue) && !rangeMiddle
 
-                                  const variant = isListView.value
-                                    ? (selected ? 'tonal' : 'text')
-                                    : (selected ? 'flat' : (month.isCurrent ? 'outlined' : 'text'))
+                                    const variant = isListView.value
+                                      ? (selected ? 'tonal' : 'text')
+                                      : (selected ? 'flat' : (month.isCurrent ? 'outlined' : 'text'))
 
-                                  const icon = isListView.value && selected ? props.selectedIcon : undefined
+                                    const icon = isListView.value && selected ? props.selectedIcon : undefined
 
-                                  const btnProps = {
-                                    color: (selected || (month.isCurrent && !isListView.value))
-                                      ? props.color
-                                      : undefined,
-                                    disabled: props.disabled || month.isDisabled,
-                                    readonly: props.readonly,
-                                    rounded: isListView.value ? 0 : true,
-                                    text: isListView.value ? month.label : month.text,
-                                    prependIcon: icon,
-                                    variant,
-                                    ripple: false,
-                                    tabindex: -1,
-                                    'aria-label': month.isCurrent
-                                      ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
-                                      : month.label,
-                                    'aria-current': month.isCurrent ? 'date' : undefined,
-                                    'aria-selected': selected,
-                                    'data-v-month': month.isDisabled ? undefined : month.value,
-                                    onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
-                                    onClick: () => selectItem(index),
-                                    onMouseenter: () => range.setPreview(monthValue),
-                                  } as const
+                                    const btnProps = {
+                                      color: (selected || (month.isCurrent && !isListView.value))
+                                        ? props.color
+                                        : undefined,
+                                      disabled: props.disabled || month.isDisabled,
+                                      readonly: props.readonly,
+                                      rounded: isListView.value ? 0 : true,
+                                      text: isListView.value ? month.label : month.text,
+                                      prependIcon: icon,
+                                      variant,
+                                      ripple: false,
+                                      tabindex: -1,
+                                      'aria-label': month.isCurrent
+                                        ? t('$vuetify.monthPicker.ariaLabel.currentMonth', month.label)
+                                        : month.label,
+                                      'aria-current': month.isCurrent ? 'date' : undefined,
+                                      'aria-selected': selected,
+                                      'data-v-month': month.isDisabled ? undefined : month.value,
+                                      onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
+                                      onClick: () => selectItem(index),
+                                      onMouseenter: () => range.setPreview(monthValue),
+                                    } as const
 
-                                  const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
-                                  const hasPreviewBg = previewStart || previewEnd || previewMiddle
+                                    const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
+                                    const hasPreviewBg = previewStart || previewEnd || previewMiddle
 
-                                  return (
-                                    <div
-                                      class={[
-                                        'v-month-picker__month',
-                                        {
-                                          'v-month-picker__month--current': month.isCurrent,
-                                          'v-month-picker__month--selected': selected,
-                                          'v-month-picker__month--range-start': rangeStart,
-                                          'v-month-picker__month--range-end': rangeEnd,
-                                          'v-month-picker__month--range-middle': rangeMiddle,
-                                          'v-month-picker__month--preview-start': previewStart,
-                                          'v-month-picker__month--preview-end': previewEnd,
-                                          'v-month-picker__month--preview-middle': previewMiddle,
-                                          'v-month-picker__month--previewed': previewed,
-                                        },
-                                      ]}
-                                    >
-                                      { (hasRangeBg || hasPreviewBg) && (
-                                        <div
-                                          key="range-background"
-                                          class={[
-                                            'v-month-picker__range-bg',
-                                            hasRangeBg ? 'v-month-picker__range-bg--range' : 'v-month-picker__range-bg--preview',
-                                            rangeColorClasses.value,
-                                          ]}
-                                          style={ rangeColorStyles.value }
-                                        />
-                                      )}
-                                      { slots.month?.({
-                                        month,
-                                        i: index,
-                                        props: btnProps,
-                                      }) ?? (
-                                        <VBtn
-                                          { ...btnProps }
-                                        />
-                                      )}
-                                    </div>
-                                  )
-                                })}
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </MaybeTransition>
+                                    return (
+                                      <div
+                                        class={[
+                                          'v-month-picker__month',
+                                          {
+                                            'v-month-picker__month--current': month.isCurrent,
+                                            'v-month-picker__month--selected': selected,
+                                            'v-month-picker__month--range-start': rangeStart,
+                                            'v-month-picker__month--range-end': rangeEnd,
+                                            'v-month-picker__month--range-middle': rangeMiddle,
+                                            'v-month-picker__month--preview-start': previewStart,
+                                            'v-month-picker__month--preview-end': previewEnd,
+                                            'v-month-picker__month--preview-middle': previewMiddle,
+                                            'v-month-picker__month--previewed': previewed,
+                                          },
+                                        ]}
+                                      >
+                                        { (hasRangeBg || hasPreviewBg) && (
+                                          <div
+                                            key="range-background"
+                                            class={[
+                                              'v-month-picker__range-bg',
+                                              hasRangeBg ? 'v-month-picker__range-bg--range' : 'v-month-picker__range-bg--preview',
+                                              rangeColorClasses.value,
+                                            ]}
+                                            style={ rangeColorStyles.value }
+                                          />
+                                        )}
+                                        { slots.month?.({
+                                          month,
+                                          i: index,
+                                          props: btnProps,
+                                        }) ?? (
+                                          <VBtn
+                                            { ...btnProps }
+                                          />
+                                        )}
+                                      </div>
+                                    )
+                                  })}
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </MaybeTransition>
+                      </div>
+                      <VBtn
+                        class={[
+                          'v-month-picker__months-nav v-month-picker__months-nav--next',
+                          { 'd-none': !scrollable.value },
+                        ]}
+                        icon={ props.nextIcon }
+                        disabled={ props.disabled }
+                        aria-label={ t('$vuetify.monthPicker.ariaLabel.scrollMonthNext') }
+                        size="small"
+                        variant="text"
+                        onClick={ () => scrollMonths(1) }
+                      />
                     </div>
                   )}
                 </VFadeTransition>
