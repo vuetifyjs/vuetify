@@ -45,7 +45,6 @@ export type VMonthPickerSlots = {
 export const makeVMonthPickerProps = propsFactory({
   disabled: Boolean,
   readonly: Boolean,
-  fluid: Boolean,
   selectedIcon: {
     type: IconValue,
     default: '$complete',
@@ -292,7 +291,6 @@ export const VMonthPicker = genericComponent<new <
             {
               'v-month-picker--list': isListView.value,
               'v-month-picker--years': viewMode.value === 'years',
-              'v-month-picker--fluid': props.fluid,
             },
             props.class,
           ]}
@@ -313,13 +311,7 @@ export const VMonthPicker = genericComponent<new <
             default: () => (
               <>
                 <VDefaultsProvider defaults={{ VBtn: { variant: 'text' } }}>
-                  <div class={[
-                    'v-month-picker__controls',
-                    {
-                      'v-month-picker__controls--fluid': props.fluid,
-                    },
-                  ]}
-                  >
+                  <div class="v-month-picker__controls">
                     <VBtn
                       disabled={ props.disabled || viewMode.value === 'years' || disablePrevYear.value }
                       icon={ props.prevIcon }
@@ -357,10 +349,7 @@ export const VMonthPicker = genericComponent<new <
                   ) : (
                     <div
                       key="months"
-                      class={[
-                        'v-month-picker__months flex-grow-1',
-                        { 'v-month-picker__months--fluid': props.fluid },
-                      ]}
+                      class="v-month-picker__months flex-grow-1"
                     >
                       <MaybeTransition name={ transition.value }>
                         <div

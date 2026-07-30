@@ -2,7 +2,6 @@
   "props": {
     "allowedMonths": "Restricts which months can be selected. Accepts an array of month numbers (0-11) or a function that receives a month number and returns a boolean.",
     "allowedYears": "Restricts which years can be selected in years view.",
-    "fluid": "When set to `true`, the picker will expand to fill its container. Months will be scrollable if they exceed the width of the container.",
     "headerColor": "Overrides the color used for the header and title areas. Falls back to `color` when not set.",
     "min": "Minimum selectable date in `YYYY-MM` format.",
     "max": "Maximum selectable date in `YYYY-MM` format.",

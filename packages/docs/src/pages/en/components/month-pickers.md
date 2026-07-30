@@ -74,12 +74,6 @@ The `min` and `max` props restrict the selectable range. Both accept strings in 
 
 <ExamplesExample file="v-month-picker/prop-min-max" />
 
-#### Fluid
-
-The `fluid` prop will make the picker fill its container.
-
-<ExamplesExample file="v-month-picker/prop-fluid" />
-
 ### Misc
 
 #### Dialog and menu

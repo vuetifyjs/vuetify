@@ -144,21 +144,4 @@ describe('VMonthPicker', () => {
     await userEvent.click(monthButtons[0]) // January (deselect)
     expect(model.value).toHaveLength(2)
   })
-
-  it('should respect fluid prop and apply correct classes', async () => {
-    render(() => (
-      <VMonthPicker
-        fluid
-        monthsColumns="12"
-      />
-    ))
-    const pickerContainer = screen.getByCSS('.v-month-picker')
-    expect(pickerContainer.classList.contains('v-month-picker--fluid')).toBe(true)
-
-    const controlsContainer = screen.getByCSS('.v-month-picker__controls')
-    expect(controlsContainer.classList.contains('v-month-picker__controls--fluid')).toBe(true)
-
-    const monthsContainer = screen.getByCSS('.v-month-picker__months')
-    expect(monthsContainer.classList.contains('v-month-picker__months--fluid')).toBe(true)
-  })
 })
