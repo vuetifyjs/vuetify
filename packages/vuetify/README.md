@@ -150,7 +150,7 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 - **Responsive Layout:** The default configuration of Vuetify components is responsive, allowing your application to adapt to different screen sizes.
 - **Theme System:** A powerful color system that makes it easy to style your application with a consistent color palette.
 - **Vite Support:** _Smaller_ bundle sizes with **automatic** tree-shaking
-- **6 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
+- min. **6 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **Internationalization:** 42+ supported languages
 
 #### Browser Support

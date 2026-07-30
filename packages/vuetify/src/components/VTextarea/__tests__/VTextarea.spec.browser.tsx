@@ -70,4 +70,15 @@ describe('VTextarea', () => {
     await userEvent.keyboard('Lorem ipsum dolor')
     expect(rows.value).toBe(2)
   })
+
+  it('hides details when using hide-details="auto" and counter without focus', async () => {
+    const { element, queryByCSS } = render(() => (
+      <VTextarea hideDetails="auto" counter></VTextarea>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toBeNull()
+
+    await userEvent.click(element)
+    expect(queryByCSS('.v-input__details')).not.toBeNull()
+  })
 })

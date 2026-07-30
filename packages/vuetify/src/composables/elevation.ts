@@ -30,7 +30,6 @@ export function useElevation (props: ElevationProps | Ref<number | string | unde
   const elevationClasses = toRef(() => {
     const elevation = isRef(props) ? props.value : props.elevation
     const hoverElevation = isRef(props) ? null : props.hoverElevation
-    if (isNullOrUndefined(elevation)) return []
     return [
       ...isNullOrUndefined(elevation) ? [] : [`elevation-${parseInt(elevation)}`],
       ...isNullOrUndefined(hoverElevation) ? [] : [`hover-elevation-${parseInt(hoverElevation)}`],
