@@ -50,6 +50,8 @@ export default {
       nextYear: 'Anul următor',
       selectYear: 'Selectați anul',
       currentMonth: 'Luna curentă, {0}',
+      scrollMonthPrev: 'Derulați la luna anterioară',
+      scrollMonthNext: 'Derulați la luna următoare',
     },
   },
   datePicker: {

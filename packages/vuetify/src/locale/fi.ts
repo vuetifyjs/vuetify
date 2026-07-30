@@ -50,6 +50,8 @@ export default {
       nextYear: 'Seuraava vuosi',
       selectYear: 'Valitse vuosi',
       currentMonth: 'Nykyinen kuukausi, {0}',
+      scrollMonthPrev: 'Vieritä edelliseen kuukauteen',
+      scrollMonthNext: 'Vieritä seuraavaan kuukauteen',
     },
   },
   datePicker: {

@@ -50,6 +50,8 @@ export default {
       nextYear: 'Sonraki yıl',
       selectYear: 'Yıl seçin',
       currentMonth: 'Bu ay, {0}',
+      scrollMonthPrev: 'Önceki aya kaydır',
+      scrollMonthNext: 'Sonraki aya kaydır',
     },
   },
   datePicker: {

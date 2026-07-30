@@ -50,6 +50,8 @@ export default {
       nextYear: '次の年',
       selectYear: '年を選択',
       currentMonth: '今月、{0}',
+      scrollMonthPrev: '前の月へスクロール',
+      scrollMonthNext: '次の月へスクロール',
     },
   },
   datePicker: {

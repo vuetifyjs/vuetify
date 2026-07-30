@@ -50,6 +50,8 @@ export default {
       nextYear: 'Järgmine aasta',
       selectYear: 'Vali aasta',
       currentMonth: 'Praegune kuu, {0}',
+      scrollMonthPrev: 'Keri eelmisele kuule',
+      scrollMonthNext: 'Keri järgmisele kuule',
     },
   },
   datePicker: {

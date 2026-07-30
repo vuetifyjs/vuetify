@@ -50,6 +50,8 @@ export default {
       nextYear: 'Következő év',
       selectYear: 'Év kiválasztása',
       currentMonth: 'Aktuális hónap, {0}',
+      scrollMonthPrev: 'Görgetés az előző hónapra',
+      scrollMonthNext: 'Görgetés a következő hónapra',
     },
   },
   datePicker: {

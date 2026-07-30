@@ -50,6 +50,8 @@ export default {
       nextYear: '下一年',
       selectYear: '選擇年份',
       currentMonth: '本月，{0}',
+      scrollMonthPrev: '捲動到上個月',
+      scrollMonthNext: '捲動到下個月',
     },
   },
   datePicker: {
