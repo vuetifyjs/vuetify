@@ -2,17 +2,17 @@
   <v-card
     class="mx-auto"
     color="purple"
-    elevation="10"
+    elevation="3"
     width="360"
   >
     <div class="d-flex justify-between">
       <v-card-title class="flex-grow-1 flex-column align-start">
-        <div class="text-h5">
+        <div class="text-headline-small">
           Halycon Days
         </div>
-        <div class="text-h6 font-weight-thin">Ellie Goulding</div>
+        <div class="text-title-large font-weight-thin">Ellie Goulding</div>
 
-        <div class="text-h6 font-weight-thin">(2013)</div>
+        <div class="text-title-large font-weight-thin">(2013)</div>
       </v-card-title>
 
       <v-img
@@ -30,7 +30,7 @@
 
       <v-spacer></v-spacer>
 
-      <span class="text-grey-lighten-2 text-caption me-2">
+      <span class="text-grey-lighten-2 text-body-small me-2">
         ({{ rating }})
       </span>
 

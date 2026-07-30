@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-select
         v-model="strategy"
-        :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic']"
+        :items="['leaf', 'single-leaf', 'independent', 'single-independent', 'classic', 'trunk', 'branch']"
         label="Selection type"
       ></v-select>
 

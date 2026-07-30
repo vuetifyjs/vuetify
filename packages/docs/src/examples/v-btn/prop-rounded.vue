@@ -1,6 +1,6 @@
 <template>
   <v-container class="text-center">
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-col cols="12" md="4" sm="6">
         <v-btn rounded="0" size="x-large" block>Rounded 0</v-btn>
       </v-col>

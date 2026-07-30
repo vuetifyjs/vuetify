@@ -6,9 +6,6 @@ import type { Blueprint } from '@/framework'
 
 export const md2: Blueprint = {
   defaults: {
-    global: {
-      rounded: 'md',
-    },
     VAvatar: {
       rounded: 'circle',
     },
@@ -19,10 +16,12 @@ export const md2: Blueprint = {
       color: 'primary',
     },
     VBtn: {
+      class: 'text-uppercase',
       color: 'primary',
     },
     VCheckbox: {
       color: 'secondary',
+      indentDetails: true,
     },
     VCombobox: {
       variant: 'filled',
@@ -39,11 +38,21 @@ export const md2: Blueprint = {
         rounded: 'circle',
       },
     },
+    VRadioGroup: {
+      indentDetails: true,
+    },
     VSelect: {
       variant: 'filled',
     },
     VSlider: {
       color: 'primary',
+      indentDetails: true,
+    },
+    VRangeSlider: {
+      indentDetails: true,
+    },
+    VSwitch: {
+      indentDetails: true,
     },
     VTabs: {
       color: 'primary',

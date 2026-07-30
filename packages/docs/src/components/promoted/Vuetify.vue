@@ -16,7 +16,7 @@
         <AppMarkdown
           v-if="description"
           :content="description"
-          class="text-caption"
+          class="text-body-small"
         />
       </template>
     </v-list-item>

@@ -8,9 +8,9 @@
   />
 
   <v-container class="px-0">
-    <v-row>
-      <v-col class="pb-0 font-weight-bold" cols="12">{{ t('logo') }}</v-col>
+    <div class="font-weight-bold mb-3">{{ t('logo') }}</div>
 
+    <v-row class="mb-6">
       <v-col v-for="logo in logos" :key="logo.title" cols="auto">
         <v-sheet class="pa-4" border rounded>
           <AppFigure
@@ -20,7 +20,7 @@
             width="125"
           />
 
-          <div class="d-flex justify-center">
+          <div class="d-flex justify-center mt-4">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -43,9 +43,11 @@
           </div>
         </v-sheet>
       </v-col>
+    </v-row>
 
-      <v-col class="pb-0 font-weight-bold" cols="12">{{ t('text') }}</v-col>
+    <div class="font-weight-bold mb-3">{{ t('text') }}</div>
 
+    <v-row class="mb-6">
       <v-col v-for="logo in text" :key="logo.title" cols="auto">
         <v-sheet
           :theme="logo.src.indexOf('dark') > -1 ? 'dark' : 'light'"
@@ -61,7 +63,7 @@
             cover
           />
 
-          <div class="d-flex justify-center">
+          <div class="d-flex justify-center mt-4">
             <v-btn
               :href="`${logo.src}.svg`"
               class="mx-1"
@@ -84,9 +86,11 @@
           </div>
         </v-sheet>
       </v-col>
+    </v-row>
 
-      <v-col class="pb-0 font-weight-bold" cols="12">{{ t('icon') }}</v-col>
+    <div class="font-weight-bold my-3">{{ t('icon') }}</div>
 
+    <v-row class="mb-3">
       <v-col
         v-for="icon in icons"
         :key="icon.title"
@@ -106,7 +110,7 @@
             />
           </div>
 
-          <figcaption class="text-caption font-weight-bold text-center text-medium-emphasis mb-2">
+          <figcaption class="text-body-small font-weight-bold text-center text-medium-emphasis mb-2">
             {{ icon.title }}
           </figcaption>
 

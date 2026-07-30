@@ -89,22 +89,6 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
-export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
-  const diff = daysDiff(adapter, start, stop)
-  const datesInRange = [start]
-
-  for (let i = 1; i < diff; i++) {
-    const nextDate = adapter.addDays(start, i)
-    datesInRange.push(nextDate)
-  }
-
-  if (stop) {
-    datesInRange.push(adapter.endOfDay(stop))
-  }
-
-  return datesInRange
-}
-
 export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
   const iso = [
     `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,

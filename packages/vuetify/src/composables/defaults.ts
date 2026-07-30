@@ -59,6 +59,8 @@ export function provideDefaults (
     if (reset || root) {
       const len = Number(reset || Infinity)
 
+      const rootDefaults = typeof root === 'string' ? properties.prev?.[root] : undefined
+
       for (let i = 0; i <= len; i++) {
         if (!properties || !('prev' in properties)) {
           break
@@ -67,15 +69,15 @@ export function provideDefaults (
         properties = properties.prev
       }
 
-      if (properties && typeof root === 'string' && root in properties) {
-        properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
+      if (properties && rootDefaults) {
+        properties = mergeDeep(mergeDeep(properties, { prev: properties }), rootDefaults)
       }
 
       return properties
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties)
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
       : properties
   }) as ComputedRef<DefaultsInstance>
 

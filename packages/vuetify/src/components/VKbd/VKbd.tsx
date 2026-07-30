@@ -32,7 +32,7 @@ export const VKbd = genericComponent()({
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
 
@@ -49,6 +49,7 @@ export const VKbd = genericComponent()({
         ]}
         style={[
           backgroundColorStyles.value,
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

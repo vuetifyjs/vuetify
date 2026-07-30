@@ -1,5 +1,5 @@
 <template>
-  <v-sheet color="#0d1117" elevation="3" rounded="lg">
+  <v-sheet color="#0d1117" elevation="1" rounded="lg">
     <v-tabs
       v-model="tab"
       :items="tabs"

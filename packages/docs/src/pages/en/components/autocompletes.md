@@ -99,6 +99,12 @@ This is required for virtual scrolling to work properly — without it, only par
 
 <ExamplesExample file="v-autocomplete/slot-item-and-vbind-props" />
 
+#### Menu footer
+
+The **menu-footer** slot allows you to add custom content at the bottom of the dropdown menu, such as action buttons for clearing the selection or closing the menu.
+
+<ExamplesExample file="v-autocomplete/slot-menu-footer" />
+
 ### Misc
 
 #### Asynchronous items
@@ -114,8 +120,6 @@ Using a combination of `v-autocomplete` slots and transitions, you can create a 
 <ExamplesExample file="v-autocomplete/misc-state-selector" />
 
 #### New tab
-
-<DocIntroduced version="3.3.0" />
 
 The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
 

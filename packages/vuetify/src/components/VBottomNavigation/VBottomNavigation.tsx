@@ -77,7 +77,7 @@ export const VBottomNavigation = genericComponent<new <T>(
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { ssrBootStyles } = useSsrBoot()
     const height = computed(() => (
       Number(props.height) -
@@ -132,6 +132,7 @@ export const VBottomNavigation = genericComponent<new <T>(
               height: convertToUnit(height.value),
             },
             ssrBootStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >

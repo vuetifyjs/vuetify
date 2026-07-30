@@ -20,6 +20,9 @@ export default {
       activateNone: '點擊以移除排序方式。',
       activateDescending: '點擊以降序排列。',
       activateAscending: '點擊以移除排序方式。',
+      selectRow: '選擇行',
+      selectAll: '選擇全部',
+      selectGroup: '選擇分組',
     },
     sortBy: '排序方式',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '至',
+  },
+  monthPicker: {
+    title: '選擇月份',
+    itemsSelected: '已選擇 {0} 個日期',
+    header: '輸入月份',
+    range: {
+      title: '輸入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '選擇年份',
+      currentMonth: '本月，{0}',
+    },
   },
   datePicker: {
     itemsSelected: '已選擇 {0} 個日期',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '還有其他 {0} 項',
     today: '今天',
+  },
+  heatmap: {
+    less: '少',
+    more: '多',
   },
   input: {
     clear: '清除 {0}',
@@ -130,6 +151,9 @@ export default {
     exclude: '字符{0}是不允許的',
     notEmpty: '請至少選擇一個值',
     pattern: '格式無效',
+  },
+  command: {
+    search: '輸入指令或搜尋...',
   },
   hotkey: {
     then: '然後',

@@ -11,16 +11,20 @@
     .v-timeline-divider__dot
       background: $timeline-dot-divider-background
 
-      @media (forced-colors: active)
-        border: 2px solid
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          border: 2px solid
 
     .v-timeline-divider__inner-dot
       background: $timeline-inner-dot-divider-background
 
-      @media (forced-colors: active)
-        background-color: transparent !important
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          background-color: transparent
 
   .v-timeline
+    --v-timeline-dot-border-size: #{map.get($timeline-dot-border-sizes, 'default')}
+
     display: grid
     grid-auto-flow: dense
     position: relative
@@ -208,18 +212,17 @@
       $size: $timeline-dot-size + (8 * $multiplier)
 
       &--size-#{$name}
+        --v-timeline-dot-border-size: #{map.get($timeline-dot-border-sizes, $name)}
         height: $size
         width: $size
-
-        .v-timeline-divider__inner-dot
-          height: calc(100% - #{map.get($timeline-dot-border-sizes, $name)})
-          width: calc(100% - #{map.get($timeline-dot-border-sizes, $name)})
 
   .v-timeline-divider__inner-dot
     align-items: center
     border-radius: $timeline-dot-border-radius
     display: flex
     justify-content: center
+    height: calc(100% - var(--v-timeline-dot-border-size))
+    width: calc(100% - var(--v-timeline-dot-border-size))
 
   /** Modifiers **/
 

@@ -215,9 +215,9 @@ describe('helpers', () => {
 
       expect(obj).toHaveProperty('a')
       expect(obj).toHaveProperty('b')
-      expect(isRef(obj.a)).toBeTruthy()
-      expect(isRef(obj.b)).toBeTruthy()
-      expect(isProxy(obj)).toBeFalsy()
+      expect(isRef(obj.a)).toBe(true)
+      expect(isRef(obj.b)).toBe(true)
+      expect(isProxy(obj)).toBe(false)
     })
 
     it('should be reactive', async () => {
@@ -238,12 +238,12 @@ describe('helpers', () => {
 
   describe('isEmpty', () => {
     it('should be empty value', () => {
-      expect(isEmpty(null)).toBeTruthy()
-      expect(isEmpty(undefined)).toBeTruthy()
-      expect(isEmpty('')).toBeTruthy()
-      expect(isEmpty(' ')).toBeTruthy()
-      expect(isEmpty('sample text')).toBeFalsy()
-      expect(isEmpty(12345)).toBeFalsy()
+      expect(isEmpty(null)).toBe(true)
+      expect(isEmpty(undefined)).toBe(true)
+      expect(isEmpty('')).toBe(true)
+      expect(isEmpty(' ')).toBe(true)
+      expect(isEmpty('sample text')).toBe(false)
+      expect(isEmpty(12345)).toBe(false)
     })
   })
 
@@ -304,6 +304,11 @@ describe('helpers', () => {
       expect(extractNumber('($9.000,00)', 2, ',')).toBe('9000,00')
       expect(extractNumber(' 23 567,20 ', 2, ',')).toBe('23567,20')
       expect(extractNumber('-200,99 ', 1, ',')).toBe('-200,9')
+    })
+
+    it('should treat U+2212 minus as an ASCII sign', () => {
+      expect(extractNumber('−6.67', 2, '.')).toBe('-6.67')
+      expect(extractNumber('−1234,1234', null, ',')).toBe('-1234,1234')
     })
   })
 

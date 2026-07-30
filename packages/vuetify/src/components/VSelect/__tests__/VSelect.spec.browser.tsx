@@ -1,11 +1,13 @@
 // Components
 import { VSelect } from '../VSelect'
+import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+import { VTextField } from '@/components/VTextField'
 
 // Utilities
-import { commands, render, screen, showcase, userEvent, waitForClickable } from '@test'
-import { getAllByRole } from '@testing-library/vue'
+import { commands, render, screen, showcase, userEvent, wait, waitForClickable } from '@test'
+import { getAllByRole, waitFor } from '@testing-library/vue'
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -35,7 +37,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VSelect>
@@ -82,7 +84,7 @@ describe('VSelect', () => {
       >
         {{
           selection: ({ item, index }) => {
-            return item.raw.title.toUpperCase()
+            return item.title.toUpperCase()
           },
         }}
       </VSelect>
@@ -357,6 +359,7 @@ describe('VSelect', () => {
       ))
       expect(element).toHaveTextContent('Default Language')
     })
+
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
       const items = [
         { code: 'en-US', name: 'English' },
@@ -934,6 +937,262 @@ describe('VSelect', () => {
       expect(select).toContain('1')
       expect(select).toContain('2')
     })
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VSelect menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.queryByTestId('header-content')).toHaveTextContent('My Header')
+      await expect.poll(() => screen.queryByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate freely between interactive elements with Tab', async () => {
+      render(() => (
+        <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
+          {{
+            'menu-header': () => (
+              <div>
+                <VTextField data-testid="textfield-1" placeholder="Search..." />
+              </div>
+            ),
+            'menu-footer': () => (
+              <div class="d-flex justify-between">
+                <button data-testid="button-1">Button 1</button>
+                <button data-testid="button-2">Button 2</button>
+              </div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.keyboard('{Tab}{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      const menu = await screen.findByRole('listbox')
+      await expect.element(menu).toBeVisible()
+
+      await waitFor(() => {
+        expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+      }, { timeout: 3000 })
+
+      await wait(400)
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-1')).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('button-2')).toHaveFocus()
+
+      // Tab past footer closes menu
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/22697
+  it('should not steal focus from another input when menu closes', async () => {
+    render(() => (
+      <div>
+        <VTextField label="Text" data-testid="textfield" />
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.keyboard('{Tab}{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+    }, { timeout: 3000 })
+
+    const textfield = screen.getByTestId('textfield')
+    await userEvent.click(textfield)
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    expect(textfield.querySelector('input')).toHaveFocus()
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
+  it('should release focus on a single click outside on a non-focusable area', async () => {
+    render(() => (
+      <div>
+        <div data-testid="outside" style="height: 40px">Outside</div>
+        <VSelect label="Select" items={['Item 1', 'Item 2']} />
+      </div>
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+
+    await userEvent.click(screen.getByTestId('outside'))
+
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+    await wait(300)
+
+    // focus must not bounce back to the field
+    expect(screen.getByCSS('.v-select .v-field')).not.toHaveClass('v-field--focused')
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VSelect
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    await userEvent.keyboard('{Tab}{ArrowDown}')
+    await commands.waitStable('.v-list')
+    await waitFor(() => expect(screen.getAllByRole('option').at(0)).toHaveFocus(), { timeout: 3000 })
+    expect(menu.value).toBe(true)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    screen.getAllByRole('option')[0].remove()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('focus on open', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should not focus the first item when opened with a pointer', async () => {
+      render(() => (
+        <VSelect
+          items={ items }
+          transition="fade-transition" // custom transition
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+      await wait(400)
+
+      expect(document.activeElement?.closest('.v-list-item')).toBeNull()
+    })
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item on click', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      const target = screen.getAllByRole('option').find(el => el.textContent === '100')!
+      await userEvent.click(target) // actual visibility test; workaround for vitest limitation
+    })
+
+    it('should move arrows from the selected item after Enter open', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('99')
+    })
+
+    it('should open with ArrowDown onto the item after selection', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('101')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('101')
+    })
+
+    it('should open with ArrowUp onto the item before the first selection', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={[300, 555, 992]} multiple />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('299')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
+    })
+  })
+
+  it('should close its menu when clicking another field inside a dialog', async () => {
+    const dialog = ref(true)
+    render(() => (
+      <VDialog v-model={ dialog.value }>
+        <div>
+          <VTextField data-testid="other-field" label="Other" />
+          <VSelect items={ items } label="Age" />
+        </div>
+      </VDialog>
+    ))
+
+    const select = screen.getByCSS('.v-select')
+    await userEvent.click(select)
+    await expect.poll(() => select).toHaveClass('v-select--active-menu')
+
+    await userEvent.click(screen.getByTestId('other-field'))
+    await expect.poll(() => select).not.toHaveClass('v-select--active-menu')
   })
 
   showcase({ stories })

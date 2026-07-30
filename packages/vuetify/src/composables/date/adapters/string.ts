@@ -25,6 +25,9 @@ export class StringDateAdapter implements DateAdapter<string> {
     })
   }
 
+  get locale () { return this.base.locale }
+  set locale (value: string) { this.base.locale = value }
+
   addDays (date: string, amount: number): string {
     return this.base.toISO(
       this.base.addDays(this.base.date(date)!, amount)

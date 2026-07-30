@@ -1,7 +1,13 @@
 // Components
 import { VFadeTransition } from '@/components/transitions'
 import { makeDataTableExpandProps, provideExpanded } from '@/components/VDataTable/composables/expand'
-import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/components/VDataTable/composables/group'
+import {
+  createGroupBy,
+  makeDataTableGroupProps,
+  provideGroupBy,
+  useGroupedItems,
+  useOpenAllGroups,
+} from '@/components/VDataTable/composables/group'
 import { useOptions } from '@/components/VDataTable/composables/options'
 import {
   createPagination,
@@ -17,13 +23,13 @@ import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { LoaderSlot } from '@/composables/loader'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
+import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, toRef, watchEffect } from 'vue'
+import { genericComponent, isEmpty, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
@@ -67,6 +73,7 @@ export type VDataIteratorSlots<T> = {
 export const makeVDataIteratorProps = propsFactory({
   search: String,
   loading: Boolean,
+  itemsLength: [Number, String],
 
   ...makeComponentProps(),
   ...makeDataIteratorItemsProps(),
@@ -103,11 +110,12 @@ export const VDataIterator = genericComponent<new <T> (
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'update:opened': (value: string[]) => true,
     'update:currentItems': (value: any) => true,
   },
 
   setup (props, { slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy, opened, openAll, groupKey } = createGroupBy(props)
     const search = toRef(() => props.search)
 
     const { items } = useDataIteratorItems(props)
@@ -117,12 +125,20 @@ export const VDataIterator = genericComponent<new <T> (
     const { page, itemsPerPage } = createPagination(props)
 
     const { toggleSort } = provideSort({ initialSortOrder, sortBy, multiSort, mustSort, page })
-    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const {
+      sortByWithGroups,
+      opened: openedGroups,
+      extractRows,
+      isGroupOpen,
+      toggleGroup,
+    } = provideGroupBy({ groupBy, sortBy, opened })
 
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups, { transform: item => item.raw })
-    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened, false)
+    useOpenAllGroups(openedGroups, openAll, sortedItems, groupBy, groupKey)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, openedGroups, false, isGroupOpen, groupKey)
 
-    const itemsLength = toRef(() => flatItems.value.length)
+    const manualPagination = toRef(() => !isEmpty(props.itemsLength))
+    const itemsLength = toRef(() => manualPagination.value ? Number(props.itemsLength) : flatItems.value.length)
 
     const {
       startIndex,
@@ -133,16 +149,26 @@ export const VDataIterator = genericComponent<new <T> (
       setItemsPerPage,
       setPage,
     } = providePagination({ page, itemsPerPage, itemsLength })
-    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
 
-    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
+    const paginatedItems = shallowRef<typeof flatItems.value>([])
+    const currentItems = computed(() => manualPagination.value ? flatItems.value : paginatedItems.value)
+
+    useToggleScope(() => !manualPagination.value, () => {
+      const { paginatedItems: items } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
+
+      watchEffect(() => {
+        paginatedItems.value = items.value
+      })
+    })
+
+    const currentItemsWithoutGroups = computed(() => extractRows(currentItems.value))
 
     const {
       isSelected,
       select,
       selectAll,
       toggleSelect,
-    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
+    } = provideSelection(props, { allItems: items, currentPage: currentItemsWithoutGroups })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     useOptions({
@@ -171,9 +197,9 @@ export const VDataIterator = genericComponent<new <T> (
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: paginatedItemsWithoutGroups.value,
+      items: currentItemsWithoutGroups.value,
       itemsCount: filteredItems.value.length,
-      groupedItems: paginatedItems.value,
+      groupedItems: currentItems.value,
     }))
 
     useRender(() => (
@@ -196,7 +222,7 @@ export const VDataIterator = genericComponent<new <T> (
             </LoaderSlot>
           ) : (
             <div key="items">
-              { !paginatedItems.value.length
+              { !currentItems.value.length
                 ? slots['no-data']?.()
                 : slots.default?.(slotProps.value)
               }

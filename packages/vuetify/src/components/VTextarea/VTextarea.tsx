@@ -21,7 +21,17 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import {
+  callEvent,
+  clamp,
+  convertToUnit,
+  filterInputAttrs,
+  genericComponent,
+  getActiveElement,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -103,7 +113,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLTextAreaElement>()
     const scrollbarWidth = ref(0)
@@ -120,7 +130,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
         autocomplete.update()
       }
 
-      if (textareaRef.value !== document.activeElement) {
+      if (textareaRef.value !== getActiveElement()) {
         textareaRef.value?.focus()
       }
 
@@ -281,6 +291,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,

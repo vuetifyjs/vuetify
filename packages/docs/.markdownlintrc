@@ -12,5 +12,9 @@
   "emphasis-style": false,
   "link-fragments": false,
   "descriptive-link-text": false,
-  "table-column-style": false
+  "table-column-style": false,
+  "meta-length": {
+    "title_max": 60,
+    "description_max": 160
+  }
 }

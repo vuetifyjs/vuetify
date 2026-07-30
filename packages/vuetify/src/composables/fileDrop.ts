@@ -2,19 +2,25 @@
 type FileSelection = { file: File, path: string }
 
 export function useFileDrop () {
-  function hasFilesOrFolders (e: DragEvent): boolean {
-    const entries = [...e.dataTransfer?.items ?? []]
+  function getTransfer (e: DragEvent | ClipboardEvent): DataTransfer | null {
+    return (e as DragEvent).dataTransfer ?? (e as ClipboardEvent).clipboardData ?? null
+  }
+
+  function hasFilesOrFolders (e: DragEvent | ClipboardEvent): boolean {
+    const transfer = getTransfer(e)
+    const entries = [...transfer?.items ?? []]
       .filter(x => x.kind === 'file')
       .map(x => x.webkitGetAsEntry())
       .filter(Boolean)
 
-    return entries.length > 0 || [...e.dataTransfer?.files ?? []].length > 0
+    return entries.length > 0 || [...transfer?.files ?? []].length > 0
   }
 
-  async function handleDrop (e: DragEvent) {
+  async function handleDrop (e: DragEvent | ClipboardEvent) {
+    const transfer = getTransfer(e)
     const result: File[] = []
 
-    const entries = [...e.dataTransfer?.items ?? []]
+    const entries = [...transfer?.items ?? []]
       .filter(x => x.kind === 'file')
       .map(x => x.webkitGetAsEntry())
       .filter(Boolean)
@@ -25,7 +31,7 @@ export function useFileDrop () {
         result.push(...files.map(x => x.file))
       }
     } else {
-      result.push(...[...e.dataTransfer?.files ?? []])
+      result.push(...[...transfer?.files ?? []])
     }
 
     return result

@@ -450,6 +450,7 @@ export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
+  targetCondition?: (k: string, v: unknown) => boolean,
 ) {
   const out: Record<string, any> = {}
 
@@ -458,13 +459,18 @@ export function mergeDeep (
   }
 
   for (const key in target) {
-    const sourceProperty = source[key]
     const targetProperty = target[key]
+
+    if (targetCondition && !targetCondition(key, targetProperty)) {
+      continue
+    }
+
+    const sourceProperty = source[key]
 
     // Only continue deep merging if
     // both properties are plain objects
     if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
-      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn, targetCondition)
 
       continue
     }
@@ -650,9 +656,20 @@ export function focusableChildren (el: Element, filterByTabIndex = true) {
     )
 }
 
+export function getActiveElement (): Element | null {
+  let active = document.activeElement
+  while (active?.shadowRoot?.activeElement) {
+    active = active.shadowRoot.activeElement
+  }
+  return active
+}
+
 export function getNextElement (elements: HTMLElement[], location?: 'next' | 'prev', condition?: (el: HTMLElement) => boolean) {
   let _el
-  let idx = elements.indexOf(document.activeElement as HTMLElement)
+  let idx = elements.indexOf(getActiveElement() as HTMLElement)
+  if (idx < 0) {
+    idx = elements.findIndex(el => el.getAttribute('aria-selected') === 'true')
+  }
   const inc = location === 'next' ? 1 : -1
   do {
     idx += inc
@@ -661,23 +678,28 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   return _el
 }
 
-export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last' | number) {
+export function focusChild (
+  el: Element,
+  location?: 'next' | 'prev' | 'first' | 'last' | number | null,
+  options?: FocusOptions
+) {
   const focusable = focusableChildren(el)
 
   if (location == null) {
-    if (el === document.activeElement || !el.contains(document.activeElement)) {
-      focusable[0]?.focus()
+    const active = getActiveElement()
+    if (el === active || !el.contains(active)) {
+      focusable[0]?.focus(options)
     }
   } else if (location === 'first') {
-    focusable[0]?.focus()
+    focusable[0]?.focus(options)
   } else if (location === 'last') {
-    focusable.at(-1)?.focus()
+    focusable.at(-1)?.focus(options)
   } else if (typeof location === 'number') {
-    focusable[location]?.focus()
+    focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
     if (_el) _el.focus()
-    else focusChild(el, location === 'next' ? 'first' : 'last')
+    else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }
 
@@ -735,19 +757,6 @@ export function defer (timeout: number, cb: () => void) {
   return () => window.clearTimeout(timeoutId)
 }
 
-export function isClickInsideElement (event: MouseEvent, targetDiv: HTMLElement) {
-  const mouseX = event.clientX
-  const mouseY = event.clientY
-
-  const divRect = targetDiv.getBoundingClientRect()
-  const divLeft = divRect.left
-  const divTop = divRect.top
-  const divRight = divRect.right
-  const divBottom = divRect.bottom
-
-  return mouseX >= divLeft && mouseX <= divRight && mouseY >= divTop && mouseY <= divBottom
-}
-
 export type TemplateRef = {
   (target: Element | ComponentPublicInstance | null): void
   value: HTMLElement | ComponentPublicInstance | null | undefined
@@ -788,9 +797,13 @@ export function escapeForRegex (sign: string) {
     : sign
 }
 
+export function normalizeMinusSign (text: string): string {
+  return text.replace(/−/g, '-')
+}
+
 export function extractNumber (text: string, decimalDigitsLimit: number | null, decimalSeparator: string) {
   const onlyValidCharacters = new RegExp(`[\\d\\-${escapeForRegex(decimalSeparator)}]`)
-  const cleanText = text.split('')
+  const cleanText = normalizeMinusSign(text).split('')
     .filter(x => onlyValidCharacters.test(x))
     .filter((x, i, all) => (i === 0 && /[-]/.test(x)) || // sign allowed at the start
         (x === decimalSeparator && i === all.indexOf(x)) || // decimal separator allowed only once

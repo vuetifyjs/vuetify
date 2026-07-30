@@ -18,12 +18,12 @@ function defaultConditional () {
   return true
 }
 
-function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): boolean {
+function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding, ignoreActive = false): boolean {
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
   // with non-toggleable components
-  if (!e || checkIsActive(e, binding) === false) return false
+  if (!e || (!ignoreActive && checkIsActive(e, binding) === false)) return false
 
   // If we're clicking inside the shadowroot, then the app root doesn't get the same
   // level of introspection as to _what_ we're clicking. We want to check to see if
@@ -85,7 +85,10 @@ export const ClickOutside = {
   mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
+      // Ignore the active check here so ancestors of the top overlay (e.g. a menu
+      // with an open submenu, which isn't localTop) still record that the click
+      // landed outside, letting the close cascade propagate. #20003
+      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding, true)
     }
 
     handleShadow(el, (app: HTMLElement) => {

@@ -20,7 +20,10 @@
       pointer-events: auto
 
       &--variant-elevated
-        @include tools.elevation(3)
+        @include tools.elevation($fab-elevation)
+
+        &:hover
+          @include tools.elevation($fab-hover-elevation)
 
     &--app,
     &--absolute
@@ -49,10 +52,11 @@
       align-items: flex-start
 
     &--extended
-      .v-btn
-        // min-height: 56px
-        // min-width: 80px
-        border-radius: 9999px !important
+      @include tools.layer('overrides')
+        .v-btn
+          // min-height: 56px
+          // min-width: 80px
+          border-radius: 9999px
 
   .v-fab__container
     align-self: center

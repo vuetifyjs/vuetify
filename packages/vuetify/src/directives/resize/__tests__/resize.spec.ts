@@ -1,11 +1,6 @@
 // Directives
 import Resize from '../'
 
-// Utilities
-
-// Types
-import type { Mock } from 'vitest'
-
 const instance = {
   $: { uid: 1 },
 }
@@ -26,8 +21,8 @@ describe('v-resize', () => {
     Resize.unmounted!(el as HTMLElement, { value: callback, instance } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    ;(window.addEventListener as Mock).mockClear()
-    ;(window.removeEventListener as Mock).mockClear()
+    vi.mocked(window.addEventListener).mockClear()
+    vi.mocked(window.removeEventListener).mockClear()
   })
 
   it('should not run the callback in quiet mode', () => {
@@ -45,7 +40,7 @@ describe('v-resize', () => {
     Resize.unmounted!(el as HTMLElement, { value: callback, modifiers: { quiet: true }, instance } as any)
     expect(window.removeEventListener).toHaveBeenCalledWith('resize', callback, { passive: true })
 
-    ;(window.addEventListener as Mock).mockClear()
-    ;(window.removeEventListener as Mock).mockClear()
+    vi.mocked(window.addEventListener).mockClear()
+    vi.mocked(window.removeEventListener).mockClear()
   })
 })

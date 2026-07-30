@@ -1,4 +1,5 @@
 {
+  "description": "A specialized form input for selecting files.",
   "props": {
     "chips": "Changes display of selections to chips.",
     "counter": "Displays the number of selected files.",
@@ -7,15 +8,13 @@
     "hideInput": "Display the icon only without the input (file names).",
     "multiple": "Adds the **multiple** attribute to the input, allowing multiple file selections.",
     "showSize": "Sets the displayed size of selected file(s). When using **true** will default to _1000_ displaying (**kB, MB, GB**) while _1024_ will display (**KiB, MiB, GiB**).",
-    "truncateLength": "The length of a filename before it is truncated with ellipsis.",
-    "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File)."
+    "truncateLength": "The length of a filename before it is truncated with ellipsis."
   },
   "slots": {
     "counter": "Slot for the input’s counter text.",
     "selection": "Slot for defining a custom appearance for selected item(s). Provides the current **index**, **text** (truncated) and [file](https://developer.mozilla.org/en-US/docs/Web/API/File)."
   },
   "events": {
-    "counter": "Creates counter for selected files length. Does not apply any validation.",
     "mousedown:control": "Event that is emitted when using mousedown on the main control area."
   }
 }

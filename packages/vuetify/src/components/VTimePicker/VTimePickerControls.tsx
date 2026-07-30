@@ -226,8 +226,6 @@ export const VTimePickerControls = genericComponent()({
 
     function setPeriod (val: Period) {
       emit('update:period', val)
-      const next = findNextAllowed('hour', val === 'am' ? 23 : 11, true)
-      nextTick(() => hour.value = pad(next))
     }
 
     const hourInputRef = ref<VTimePickerField>()

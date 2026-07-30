@@ -1,4 +1,5 @@
 {
+  "description": "Abstract component to use within a `v-layout` or `v-app` container.",
   "props": {
     "position": "The position of the item."
   }

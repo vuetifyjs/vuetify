@@ -3,7 +3,7 @@ import { VAutocomplete } from '../VAutocomplete'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { findAllByRole, queryAllByRole, within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
@@ -35,7 +35,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VAutocomplete>
@@ -46,6 +46,218 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
+  it('should clear focused state after interacting with content and moving to sibling field', async () => {
+    const menuA = ref(false)
+    const menuB = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menuA.value }
+          data-testid="field-a"
+          items={['Apple', 'Banana']}
+        >
+          {{
+            'menu-footer': () => (
+              <div data-testid="footer-a" style="padding: 16px; height: 40px;">
+                <button>Clear</button>
+                <button>Done</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+        <VAutocomplete
+          v-model:menu={ menuB.value }
+          data-testid="field-b"
+          items={['Cherry', 'Date']}
+        />
+      </div>
+    ))
+
+    const fieldARoot = screen.getByTestId('field-a')
+    const inputA = screen.getByCSS('[data-testid="field-a"] input')
+    const inputB = screen.getByCSS('[data-testid="field-b"] input')
+
+    await userEvent.click(inputA)
+    await waitIdle()
+    expect(menuA.value).toBe(true)
+    expect(fieldARoot).toHaveClass('v-input--focused')
+
+    const footerA = screen.getByTestId('footer-a')
+    footerA.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    inputA.blur()
+    await waitIdle()
+
+    await userEvent.click(inputB)
+    await waitIdle()
+    await wait(300)
+
+    expect(menuA.value).toBe(false)
+    expect(fieldARoot).not.toHaveClass('v-input--focused')
+  })
+
+  it('should not return focus to the input on click-outside', async () => {
+    const menu = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menu.value }
+          data-testid="field"
+          items={['Apple', 'Banana']}
+        />
+        <div data-testid="outside" style="height: 80px; padding: 24px;">outside</div>
+      </div>
+    ))
+
+    const input = screen.getByCSS('[data-testid="field"] input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    await userEvent.click(screen.getByTestId('outside'))
+    await waitIdle()
+
+    expect(menu.value).toBe(false)
+    await wait(300)
+    expect(menu.value).toBe(false)
+    expect(document.activeElement).not.toBe(input)
+  })
+
+  it('should not auto-close the sibling menu after clicking an empty area in this menu', async () => {
+    const menuA = ref(false)
+    const menuB = ref(false)
+    render(() => (
+      <div class="d-flex">
+        <VAutocomplete
+          v-model:menu={ menuA.value }
+          data-testid="field-a"
+          items={['Apple', 'Banana']}
+        >
+          {{
+            'menu-footer': () => (
+              <div data-testid="footer-a" style="padding: 16px; height: 40px;">
+                <button>Clear</button>
+                <button>Done</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+        <VAutocomplete
+          v-model:menu={ menuB.value }
+          data-testid="field-b"
+          items={['Cherry', 'Date']}
+        />
+      </div>
+    ))
+
+    const inputA = screen.getByCSS('[data-testid="field-a"] input')
+    const inputB = screen.getByCSS('[data-testid="field-b"] input')
+
+    await userEvent.click(inputA)
+    await waitIdle()
+    expect(menuA.value).toBe(true)
+
+    const footerA = screen.getByTestId('footer-a')
+    footerA.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    inputA.blur()
+    await waitIdle()
+
+    await userEvent.click(inputB)
+    await waitIdle()
+
+    expect(menuB.value).toBe(true)
+    await wait(300)
+    expect(menuB.value).toBe(true)
+  })
+
+  it('should stay open when clicking an empty area inside menu-footer slot', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete
+        v-model:menu={ menu.value }
+        items={['Apple', 'Banana']}
+      >
+        {{
+          'menu-footer': () => (
+            <div data-testid="footer-empty" style="padding: 16px; height: 40px;">
+              <button>Clear</button>
+              <button>Done</button>
+            </div>
+          ),
+        }}
+      </VAutocomplete>
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const footer = screen.getByTestId('footer-empty')
+    footer.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    input.blur()
+    await waitIdle()
+
+    expect(menu.value).toBe(true)
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    // Arrow-navigation (navigationStrategy="focus") puts real DOM focus on an item.
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // Recycling/reload removes the focused node from the DOM (what VVirtualScroll
+    // or an async items reload does); focus falls to <body> and the menu closes.
+    option.remove()
+    await waitIdle()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  it('should return focus to the field when a reload leaves no item to focus', async () => {
+    const items = ref(Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`))
+    const menu = ref(false)
+    render(() => (
+      <VAutocomplete v-model:menu={ menu.value } items={ items.value } />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // Reload into no-data: the focused item is gone and nothing in the menu is
+    // focusable, so focus should fall back to the text field.
+    items.value = []
+    await waitIdle()
+    await wait(300)
+
+    expect(menu.value).toBe(true)
+    expect(document.activeElement).toBe(input)
+  })
+
   it('should close only first chip', async () => {
     const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
 
@@ -701,6 +913,111 @@ describe('VAutocomplete', () => {
     await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate between header, list, and footer with Tab', async () => {
+      const { element } = render(() => (
+        <VAutocomplete menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'menu-header': () => (
+              <div>
+                <button data-testid="header-btn">Header Button</button>
+              </div>
+            ),
+            'menu-footer': () => (
+              <div>
+                <button data-testid="footer-btn">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VAutocomplete>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      // Navigate to list first
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      // Tab to list
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Tab to footer
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('footer-btn')).toHaveFocus()
+
+      // Shift+Tab back to list
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Shift+Tab back to header
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item on Enter', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+    })
+
+    it('should move arrows from the selected item', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
   })
 
   showcase({ stories })

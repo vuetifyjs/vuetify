@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p class="text-caption opacity-80">
+    <p class="text-body-small opacity-80">
       💡 The <code>height</code> prop should be a plain number,
       or a value with units like <code>px</code> and <code>vh</code>, but not the percentage
       (<code>%</code>).

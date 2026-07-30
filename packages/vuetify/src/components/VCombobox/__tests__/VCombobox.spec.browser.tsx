@@ -3,7 +3,7 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, showcase, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
 import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
@@ -34,7 +34,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VCombobox>
@@ -717,11 +717,18 @@ describe('VCombobox', () => {
     await expect.poll(() => selectedItem.value).toBe('test')
     expect(input).toHaveValue('')
 
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
+
     // Press enter key with a custom search input value
     await userEvent.click(element)
     await userEvent.keyboard('test 2{Enter}')
     await expect.poll(() => selectedItem.value).toBe('test 2')
     expect(input).toHaveValue('')
+
+    // Close the menu kept open by the previous selection before reopening,
+    // otherwise clicking an already-open field races the close/open transition
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
 
     // Search existing item and click to select
     await userEvent.click(element)
@@ -824,6 +831,128 @@ describe('VCombobox', () => {
     await userEvent.paste()
     await commands.releaseLock(lock)
     expect(model.value).toEqual(['foo', 'bar'])
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VCombobox menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VCombobox>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate between header, list, and footer with Tab', async () => {
+      const { element } = render(() => (
+        <VCombobox menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'menu-header': () => (
+              <div>
+                <button data-testid="header-btn">Header Button</button>
+              </div>
+            ),
+            'menu-footer': () => (
+              <div>
+                <button data-testid="footer-btn">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VCombobox>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      // Navigate to list first
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      // Tab to list
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Tab to footer
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('footer-btn')).toHaveFocus()
+
+      // Shift+Tab back to list
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Shift+Tab back to header
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VCombobox
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    option.remove()
+    await waitIdle()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item and arrow from selection', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
   })
 
   showcase({ stories })

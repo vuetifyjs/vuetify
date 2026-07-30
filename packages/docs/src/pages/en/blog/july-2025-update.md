@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: July 2025 Update
-  description: July delivered substantial progress on collaborative development, component enhancements, developer experience improvements, and ecosystem tools across the Vuetify ecosystem.
+  description: July delivered progress on collaborative development, component enhancements, developer-experience improvements, and ecosystem tools across Vuetify.
   keywords: Vuetify July 2025, Vuetify Migrations Webinar, Vuetify0, VCommandPalette, VEditor, Framework Czar, Vuetify Bin
 ---
 
@@ -23,7 +23,7 @@ meta:
 
 This month showcases the power of collaborative development as our team and community work together to enhance Vuetify's ecosystem.
 
-![Hero image for July release notes](https://vuetifyjs.b-cdn.net/docs/images/blog/july-2025-update/july-hero.png "July release notes hero image"){ height=112 }
+![Hero image for July release notes](https://cdn.vuetifyjs.com/docs/images/blog/july-2025-update/july-hero.png "July release notes hero image"){ height=112 }
 
 ---
 
@@ -165,7 +165,7 @@ Every month, we highlight one tool from the Vuetify ecosystem. This month, we're
 
 [Vuetify Bin](https://bin.vuetifyjs.com/) is our official pastebin/gist alternative for saving and managing snippets of code. Since code is compressed into the URL, you can easily bookmark and share your snippets with others—*free forever*.
 
-![Image of Vuetify Bin](https://vuetifyjs.b-cdn.net/docs/images/blog/july-2025-update/vbin1234.png "Vuetify Bin interface"){ height=300 }
+![Image of Vuetify Bin](https://cdn.vuetifyjs.com/docs/images/blog/july-2025-update/vbin1234.png "Vuetify Bin interface"){ height=300 }
 
 ::: info
 If you're part of the **Vuetify One** subscription, you can save your snippets with a unique URL. [More Info](https://vuetifyjs.com/?one=subscribe)
@@ -190,7 +190,7 @@ We've made significant progress on several key components and features this mont
 **VVideo** officially entered Labs with the release of [v3.9.3](https://vuetifyjs.com/getting-started/release-notes/?version=v3.9.3). This component provides a flexible and powerful way to embed videos in Vuetify applications, supporting various formats and configurations.
 
 <video width="100%" height="auto" loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/june-2025-update/vvideo.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/june-2025-update/vvideo.mp4" type="video/mp4"></source>
 </video>
 
 **Details:**

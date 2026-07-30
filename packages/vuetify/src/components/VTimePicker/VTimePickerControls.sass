@@ -1,7 +1,6 @@
 @use 'sass:map'
 @use '../../styles/tools'
 @use '../../styles/settings'
-@use '../../styles/utilities'
 @use './variables' as *
 
 @include tools.layer('components')
@@ -176,13 +175,13 @@
     .v-time-picker-controls__time
       text-align: center
 
-
-  .v-time-picker-controls
-    @media (forced-colors: active)
-      .v-time-picker-controls__time__field:has(input:focus-visible)
+@include tools.layer('trumps')
+  @media (forced-colors: active)
+    .v-time-picker-controls
+      &__time__field:has(input:focus-visible)
         outline: 2px solid highlight
         outline-offset: 2px
 
-      .v-time-picker-controls__ampm__btn.v-btn--active
-        color: highlight !important
+      &__ampm__btn.v-btn--active
+        color: highlight
         forced-color-adjust: preserve-parent-color

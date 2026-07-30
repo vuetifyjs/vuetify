@@ -19,6 +19,10 @@ We will go through the following steps:
 * Ensure Vuetify's light/dark themes work with TailwindCSS `light:*` and `dark:*` prefixes
 * Align breakpoints configuration
 
+🖊️ Jacek Czarniecki • 📅 February 16th, 2026
+
+<PromotedEntry />
+
 ---
 
 ## Table of Contents
@@ -61,7 +65,7 @@ bun create vuetify
 
 :::
 
-...choose the "Recommended" preset for Vite and select Vuetify 4.
+...choose the "Base" preset and "None" when asked for the CSS framework. The point is to learn how the pieces work together by performing code changes manually.
 
 Verify the boilerplate by building it with the standard NPM build script (e.g. `pnpm run build`).
 
@@ -138,7 +142,9 @@ In order for Vuetify transitions to work properly, we have to ensure `tailwind.*
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
+
 @layer tailwind; /* <-- our new utilities */
+
 @layer vuetify-final;
 ```
 
@@ -153,14 +159,13 @@ import 'vuetify/styles'
 // followed by createVuetify({ ... })
 ```
 
-![CSS Layers preview in browser DevTools](https://vuetifyjs.b-cdn.net/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
+![CSS Layers preview in browser DevTools](https://cdn.vuetifyjs.com/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
 
 ### Disable Vuetify utilities
 
 Let's adjust `src/styles/settings.scss`:
 
 ```scss { resource="src/styles/settings.scss" }
-@use './layers';
 @use 'vuetify/settings' with (
   $color-pack: false,
   $utilities: false,

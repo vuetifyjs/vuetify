@@ -1,5 +1,6 @@
 // Utilities
 import { onScopeDispose } from 'vue'
+import { IN_BROWSER } from '@/util'
 
 const HOLD_REPEAT = 50
 const HOLD_DELAY = 500
@@ -21,6 +22,7 @@ export function useHold ({ toggleUpDown }: { toggleUpDown: (increment: boolean) 
   }
 
   function holdStop () {
+    if (!IN_BROWSER) return
     window.clearTimeout(timeout)
     window.clearInterval(interval)
     window.removeEventListener('pointerup', holdStop)

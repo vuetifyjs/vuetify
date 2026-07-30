@@ -2,15 +2,19 @@
 layout: blog
 meta:
   title: Build with Nuxt and UnoCSS
-  description: Learn how to effectively integrate Vuetify with UnoCSS taking into consideration breakpoints, theme, typography and CSS layers.
+  description: Learn how to effectively integrate Vuetify v3 with UnoCSS taking into consideration breakpoints, theme, typography and CSS layers.
   keywords: UnoCSS, TailwindCSS, Theme, CSS Layers
 ---
 
-# Creating a highly optimized Vuetify project with Nuxt and UnoCSS
+# Creating a highly optimized Vuetify 3 project with Nuxt and UnoCSS
 
 Although traditionally we tend to think about Vuetify as a great fit for large projects, it can also serve smaller projects that tend to prioritize performance. When scaffolding new projects it comes with tree-shaking out-of-the-box, but there is still some room for improvement as main CSS bundle ships hundreds of kB of CSS we might not need. If the users like your page loading animation and you can afford a bit of overhead, there is nothing wrong with simplified setup that does the job and let's you focus on the business logic or UX. That said, integrating UnoCSS (atomic CSS engine) will help us trim the bundle and enable dynamic utilities. With it's superpowers we not only avoid writing plain CSS (most of the time), but can also make use of TailwindCSS tooling (IDE extensions) or standardize certain utilities.
 
 The article will walk through scaffolding a starter project, installing and wiring UnoCSS, customizing fonts, handling light/dark mode and aligning breakpoints. Finally, "CSS layers" section shows how to order Vuetify, UnoCSS, and app‑specific styles to avoid specificity conflicts.
+
+🖊️ Jacek Czarniecki • 📅 December 22nd, 2025
+
+<PromotedEntry />
 
 ---
 
@@ -48,19 +52,19 @@ Lastly, we will enable CSS layers to establish order. This part is meant for adv
 ::: tabs
 
 ```bash [pnpm]
-pnpm create vuetify
+pnpm create vuetify@2.8.0
 ```
 
 ```bash [yarn]
-yarn create vuetify
+yarn create vuetify@2.8.0
 ```
 
 ```bash [npm]
-npm create vuetify
+npm create vuetify@2.8.0
 ```
 
 ```bash [bun]
-bun create vuetify
+bun create vuetify@2.8.0
 ```
 
 :::

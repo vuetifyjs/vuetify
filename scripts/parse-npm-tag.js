@@ -11,11 +11,11 @@ const prerelease = semver.prerelease(version)
 const major = semver.major(version)
 
 if (prerelease == null) {
-  if (major > 3) {
+  if (major > 4) {
     console.log('next')
   } else {
     console.log('latest')
   }
 } else {
-  console.log('next')
+  console.log('dev')
 }

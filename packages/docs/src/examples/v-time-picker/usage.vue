@@ -5,7 +5,7 @@
     :name="name"
     :options="options"
   >
-    <v-row justify="center">
+    <v-row class="justify-center">
       <v-time-picker v-bind="props"></v-time-picker>
     </v-row>
   </ExamplesUsageExample>

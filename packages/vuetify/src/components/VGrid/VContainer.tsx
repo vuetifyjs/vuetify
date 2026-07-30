@@ -1,5 +1,5 @@
 // Styles
-import './VGrid.sass'
+import './VContainer.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

@@ -8,12 +8,10 @@ import type { ValidationProps, ValidationRule } from '@/composables/validation'
 
 export type ValidationRuleBuilderWithoutOptions = (err?: string) => ValidationRule
 export type ValidationRuleBuilderWithOptions<T> = (options: T, err?: string) => ValidationRule
-export type ValidationRuleBuilder =
-  | ValidationRuleBuilderWithoutOptions
-  | ValidationRuleBuilderWithOptions<any>
+export type CustomValidationRuleBuilder = (...args: any[]) => ValidationRule
 
 export interface RuleAliases {
-  [name: string]: ValidationRuleBuilder
+  [name: string]: CustomValidationRuleBuilder
   required: ValidationRuleBuilderWithoutOptions
   email: ValidationRuleBuilderWithoutOptions
   number: ValidationRuleBuilderWithoutOptions

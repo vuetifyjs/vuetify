@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
@@ -19,8 +20,6 @@ features:
 `v-date-picker` is a fully featured date selection component that lets users select a date.
 
 <PageFeatures />
-
-<DocIntroduced version="3.4.0" />
 
 ## Usage
 
@@ -60,7 +59,7 @@ The `v-date-picker` component supports multiple props for configuring dates that
 
 #### Elevation
 
-The `v-date-picker` component supports elevation up to a maximum value of 24. For more information on elevations, visit the official [Material Design elevations](https://material.io/design/environment/elevation.html) page.
+The `v-date-picker` component supports elevation up to a maximum value of 5. For more information on elevations, visit the official [Material Design elevations](https://m3.material.io/styles/elevation) page.
 
 <ExamplesExample file="v-date-picker/prop-elevation" />
 

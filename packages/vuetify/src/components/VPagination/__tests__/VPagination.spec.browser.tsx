@@ -3,7 +3,7 @@ import { VPagination } from '../VPagination'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { page, render, screen, showcase, userEvent } from '@test'
+import { page, render, screen, showcase, userEvent, waitIdle } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -21,6 +21,48 @@ describe('VPagination', () => {
     ))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(3)
+  })
+
+  it('should render all pages when length is less than 3 in a flexbox container', async () => {
+    render(() => (
+      <div class="d-flex">
+        <VPagination length="2" />
+      </div>
+    ))
+
+    await waitIdle() // resize-observer loop has to settle
+
+    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(2)
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toHaveTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
+  })
+
+  it('should still honor an explicit total-visible when length is less than 3', () => {
+    render(() => (
+      <div class="d-flex">
+        <VPagination length="2" totalVisible="1" />
+      </div>
+    ))
+
+    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(1)
+  })
+
+  it('should render without first and last page buttons', () => {
+    render(() => (
+      <VPagination showFirstLastPage={ false } length="3" />
+    ))
+
+    expect(screen.queryByTestId('v-pagination-first')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-last')).not.toBeInTheDocument()
+  })
+
+  it('should render without last page button', () => {
+    render(() => (
+      <VPagination showFirstLastPage="only-first" showlength="3" />
+    ))
+
+    expect(screen.queryByTestId('v-pagination-first')).toBeInTheDocument()
+    expect(screen.queryByTestId('v-pagination-last')).not.toBeInTheDocument()
   })
 
   it('should react to mouse navigation', async () => {

@@ -1,20 +1,18 @@
 // Utilities
+import { assertType } from 'vitest'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
-import { createDateRange } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
 import type { DateAdapter } from '../DateAdapter'
 
-function expectAssignable<T, T2 extends T = T> (value: T2): void {}
-
 describe('date', () => {
   it('types', () => {
     // Cannot define properties that don't exist in date-io
-    expectAssignable<DateAdapter>({} as IUtils<Date, string>)
+    assertType<DateAdapter>({} as IUtils<Date, string>)
     // @ts-expect-error Can implement a subset of date-io
-    expectAssignable<IUtils<Date>>({} as DateAdapter)
+    assertType<IUtils<Date, string>>({} as DateAdapter)
   })
 })
 
@@ -94,70 +92,6 @@ describe('VuetifyDateAdapter', () => {
     const adapter2 = new VuetifyDateAdapter({ locale: 'fr' })
     expect(adapter2.getWeek(new Date('2025-01-05'))).toBe(1) // sunday
     expect(adapter2.getWeek(new Date('2025-01-06'))).toBe(2) // monday
-  })
-
-  describe('createDateRange', () => {
-    const adapter = new VuetifyDateAdapter({ locale: 'en-US' })
-
-    it('should create a single date array when only start date is provided', () => {
-      const start = new Date('2024-01-01')
-      const result = createDateRange(adapter, start)
-
-      expect(result).toHaveLength(1)
-      expect(result[0]).toEqual(start)
-    })
-
-    it('should handle same start and stop date', () => {
-      const date = new Date('2024-01-01')
-      const result = createDateRange(adapter, date, date)
-
-      expect(result[0]).toEqual(date)
-      expect(result[1]).toEqual(adapter.endOfDay(date))
-    })
-
-    it('should create a range of dates between start and stop', () => {
-      const start = new Date('2024-01-01')
-      const stop = new Date('2024-01-03')
-      const result = createDateRange(adapter, start, stop)
-
-      expect(result).toHaveLength(3)
-      expect(result[0]).toEqual(start)
-      expect(result[1]).toEqual(new Date('2024-01-02'))
-      expect(result[2]).toEqual(adapter.endOfDay(stop))
-    })
-
-    it('should handle dates in different months', () => {
-      const start = new Date('2024-01-30')
-      const stop = new Date('2024-02-02')
-      const result = createDateRange(adapter, start, stop)
-
-      expect(result).toHaveLength(4)
-      expect(result[0]).toEqual(start)
-      expect(result[1]).toEqual(new Date('2024-01-31'))
-      expect(result[2]).toEqual(new Date('2024-02-01'))
-      expect(result[3]).toEqual(adapter.endOfDay(stop))
-    })
-
-    it('should handle dates in different years', () => {
-      const start = new Date('2024-12-30')
-      const stop = new Date('2025-01-02')
-      const result = createDateRange(adapter, start, stop)
-
-      expect(result).toHaveLength(4)
-      expect(result[0]).toEqual(start)
-      expect(result[1]).toEqual(new Date('2024-12-31'))
-      expect(result[2]).toEqual(new Date('2025-01-01'))
-      expect(result[3]).toEqual(adapter.endOfDay(stop))
-    })
-
-    it('should not miss any days near ST/DST transition', () => {
-      // values passed to createDateRange on VDateInput blur when TZ=Europe/Warsaw
-      const start = new Date('2025-03-28T23:00:00.000Z')
-      const stop = new Date('2025-03-30T22:00:00.000Z')
-      const result = createDateRange(adapter, start, stop)
-
-      expect(result).toHaveLength(3)
-    })
   })
 
   describe('week numbers with time zone', () => {

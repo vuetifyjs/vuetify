@@ -34,7 +34,7 @@ export const makeVRadioGroupProps = propsFactory({
     default: 'auto',
   },
 
-  ...omit(makeVInputProps(), ['direction']),
+  ...omit(makeVInputProps(), ['direction', 'glow']),
   ...omit(makeSelectionControlGroupProps(), ['multiple']),
 
   trueIcon: {

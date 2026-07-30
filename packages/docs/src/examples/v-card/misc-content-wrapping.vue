@@ -11,7 +11,7 @@
           <v-btn icon="$menu"></v-btn>
         </template>
 
-        <v-toolbar-title class="text-h6" text="Messages"></v-toolbar-title>
+        <v-toolbar-title class="text-title-large" text="Messages"></v-toolbar-title>
 
         <template v-slot:append>
           <v-btn icon="mdi-dots-vertical"></v-btn>

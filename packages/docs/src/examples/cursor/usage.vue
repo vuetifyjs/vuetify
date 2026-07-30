@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-between">
+    <v-row class="justify-space-between">
       <v-col v-for="cursor in cursors" :key="cursor" cols="3">
         <v-btn
           :class="`cursor-${cursor}`"

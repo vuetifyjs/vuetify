@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="mx-auto"
-    elevation="8"
+    elevation="3"
     max-width="800"
   >
     <v-slide-group

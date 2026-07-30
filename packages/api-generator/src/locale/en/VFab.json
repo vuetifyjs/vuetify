@@ -1,4 +1,5 @@
 {
+  "description": "Layout-aware component used to display a floating action button.",
   "props": {
     "app": "If true, attaches to the closest layout and positions according to the value of **location**.",
     "layout": "If true, will effect layout dimensions based on size and position.",

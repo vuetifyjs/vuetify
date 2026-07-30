@@ -11,6 +11,8 @@ import { VCalendarWeekly } from './VCalendarWeekly'
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
+import { makeCalendarWithIntervalsProps } from './composables/calendarWithIntervals'
+import { makeIntervalHighlightProps } from './composables/intervalHighlight'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Directives
@@ -131,10 +133,6 @@ export const VCalendar = genericComponent<new (
     categoryText: {
       type: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
     },
-    maxDays: {
-      type: Number,
-      default: 7,
-    },
     categoryHideDynamic: {
       type: Boolean,
     },
@@ -146,8 +144,10 @@ export const VCalendar = genericComponent<new (
       default: '',
     },
 
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithEventsProps(),
+    ...makeCalendarWithIntervalsProps(),
   },
 
   setup (props, { slots, attrs, emit }) {

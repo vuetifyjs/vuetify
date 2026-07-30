@@ -7,7 +7,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
-import { clamp, createRange, getDecimals, propsFactory } from '@/util'
+import { clamp, createRange, getDecimals, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
@@ -99,9 +99,9 @@ export const makeSliderProps = propsFactory({
   },
   thumbColor: String,
   thumbLabel: {
-    type: [Boolean, String] as PropType<boolean | 'always' | undefined>,
+    type: [Boolean, String] as PropType<boolean | 'always' | 'hover' | undefined>,
     default: undefined,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => typeof v === 'boolean' || v === 'always' || v === 'hover',
   },
   thumbSize: {
     type: [Number, String],
@@ -136,7 +136,7 @@ export const makeSliderProps = propsFactory({
 
   ...makeRoundedProps(),
   ...makeElevationProps({
-    elevation: 2,
+    elevation: 1,
   }),
   ripple: {
     type: Boolean,
@@ -316,6 +316,7 @@ export const useSlider = ({
   }
 
   onScopeDispose(() => {
+    if (!IN_BROWSER) return
     window.removeEventListener('touchmove', onMouseMove)
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('mouseup', onSliderMouseUp)

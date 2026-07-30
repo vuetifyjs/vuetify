@@ -37,6 +37,18 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      {
+        "title": "css-utilities",
+        "subfolder": "features",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "overview",
+          "unocss-vuetify-preset",
+          "unocss-tailwind-preset",
+          "tailwindcss"
+        ]
+      },
       "dates",
       "display-and-platform",
       "global-configuration",
@@ -54,7 +66,9 @@
     "inactiveIcon": "mdi-palette-outline",
     "activeIcon": "mdi-palette",
     "items": [
+      "entry-points",
       "css-reset",
+      "layers",
       "transitions",
       "colors",
       { "divider": true },
@@ -106,6 +120,7 @@
       { "subheader": "containment" },
       "bottom-sheets",
       "buttons",
+      "icon-buttons",
       "cards",
       "chips",
       "dialogs",
@@ -133,8 +148,11 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
+      "date-inputs",
       "file-inputs",
+      "file-upload",
       "forms",
       "inputs",
       "number-inputs",
@@ -183,6 +201,7 @@
       "item-groups",
       "slide-groups",
       "steppers",
+      "vertical-steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -218,7 +237,8 @@
       { "divider": true },
       { "subheader": "miscellaneous" },
       "lazy",
-      "no-ssr"
+      "no-ssr",
+      "pull-to-refresh"
     ]
   },
   {
@@ -251,19 +271,31 @@
     "items": [
       "introduction",
       {
-        "title": "color-inputs",
+        "title": "avatar-groups",
         "subfolder": "components"
       },
       {
-        "title": "date-inputs",
+        "title": "command-palettes",
         "subfolder": "components"
       },
       {
-        "title": "file-upload",
+        "title": "date-range-pickers",
         "subfolder": "components"
       },
       {
-        "title": "icon-buttons",
+        "title": "heatmaps",
+        "subfolder": "components"
+      },
+      {
+        "title": "highlights",
+        "subfolder": "components"
+      },
+      {
+        "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "month-pickers",
         "subfolder": "components"
       },
       {
@@ -271,15 +303,7 @@
         "subfolder": "components"
       },
       {
-        "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "vertical-steppers",
-        "subfolder": "components"
-      },
-      {
-        "title": "mask-inputs",
+        "title": "progress",
         "subfolder": "components"
       },
       {

@@ -180,10 +180,39 @@ describe.each([
       ))
 
       await userEvent.click(screen.getByText(/John/))
-      expect(onActivated).toHaveBeenCalledOnce()
+      expect(onActivated).toHaveBeenCalledTimes(1)
 
       await userEvent.click(screen.getByText(/Human Resources/))
       expect(onActivated).toHaveBeenCalledTimes(2)
+    })
+
+    it('should apply value-comparator to initial activated', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+      ]
+      const activated = ref<string[]>(['beta'])
+
+      render(() => (
+        <VTreeview
+          v-model:activated={ activated.value }
+          items={ caseItems }
+          activatable
+          openAll
+          activeStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      expect(screen.getByText('Beta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Alpha').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
     })
   })
 
@@ -303,6 +332,43 @@ describe.each([
       await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
       expect(selected.value).toStrictEqual([4, 201, 202, 203, 204, 205, 301, 302])
     })
+
+    it('should apply value-comparator to initial selected', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+        {
+          title: 'Group B',
+          value: 'GROUP_B',
+          children: [
+            { title: 'Gamma', value: 'GAMMA' },
+            { title: 'Delta', value: 'DELTA' },
+          ],
+        },
+      ]
+      const selected = ref<string[]>(['beta', 'delta'])
+
+      render(() => (
+        <VTreeview
+          v-model:selected={ selected.value }
+          items={ caseItems }
+          selectable
+          openAll
+          selectStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      const inputs = screen.getAllByCSS('.v-checkbox-btn input') as HTMLInputElement[]
+      expect(inputs.filter(el => el.checked)).toHaveLength(2)
+    })
   })
 
   describe('return-object', () => {
@@ -320,12 +386,12 @@ describe.each([
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        // eslint-disable-next-line vitest/no-conditional-in-test
+        // eslint-disable-next-line @vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
         } else {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
         }
       })
@@ -779,7 +845,7 @@ describe('VTreeview with loading', () => {
     await userEvent.tab()
     await userEvent.tab()
     await userEvent.keyboard('{enter}')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -826,7 +892,7 @@ describe('VTreeview with loading', () => {
 
     await userEvent.tab() // single tab selects the whole item
     await userEvent.keyboard(' ')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -877,7 +943,7 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
     await userEvent.click(screen.queryAllByText('[toggle]')[0])
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -889,5 +955,52 @@ describe('VTreeview with loading', () => {
     await userEvent.click(screen.queryAllByText('[toggle]')[0])
     await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
     expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+  })
+
+  it('should keep lazily loaded children visible when searching for their parent with return-object', async () => {
+    const items = ref([
+      {
+        name: 'C:',
+        path: 'C',
+        children: [
+          { name: 'Dir1', path: 'C/dir1', children: [] },
+          { name: 'Dir2', path: 'C/dir2', children: [] },
+        ],
+      },
+    ] as any[])
+
+    async function loadChildren (item: any) {
+      await wait(50)
+      item.children = [
+        { name: 'file1.txt', path: `${item.path}/file1.txt` },
+        { name: 'file2.txt', path: `${item.path}/file2.txt` },
+      ]
+    }
+
+    const search = shallowRef('')
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+        search={ search.value }
+        itemTitle="name"
+        itemValue="path"
+        openOnClick
+        returnObject
+      />
+    ))
+
+    // open C, then Dir1 to lazily load file1.txt / file2.txt under it
+    await userEvent.click(screen.getByText(/C/))
+    await userEvent.click(screen.getByText(/Dir1/))
+    await expect.poll(() => screen.queryByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
+
+    // searching for the parent node must keep its loaded (reactive) children visible
+    search.value = 'Dir1'
+    await nextTick()
+    expect(screen.getByText(/Dir1/)).toBeVisible()
+    expect(screen.getByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
   })
 })

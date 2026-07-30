@@ -22,6 +22,7 @@ import {
   callEvent,
   filterInputAttrs,
   genericComponent,
+  getActiveElement,
   humanReadableFileSize,
   omit,
   propsFactory,
@@ -129,7 +130,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       else return t(props.counterString, fileCount)
     })
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
     const isActive = toRef(() => isFocused.value || props.active)
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
@@ -137,7 +138,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
     function onFocus () {
-      if (inputRef.value !== document.activeElement) {
+      if (inputRef.value !== getActiveElement()) {
         inputRef.value?.focus()
       }
 
@@ -171,6 +172,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       return `${str.slice(0, charsKeepOneSide)}…${str.slice(str.length - charsKeepOneSide)}`
     }
     function onDragover (e: DragEvent) {
+      if (props.disabled || props.readonly) return
       e.preventDefault()
       e.stopImmediatePropagation()
       isDragging.value = true
@@ -184,10 +186,20 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!inputRef.value || !hasFilesOrFolders(e)) return
+      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
 
       const allDroppedFiles = await handleDrop(e)
       selectAccepted(allDroppedFiles)
+    }
+
+    async function onPaste (e: ClipboardEvent) {
+      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
+      e.preventDefault()
+
+      const files = await handleDrop(e)
+      if (files.length) {
+        selectAccepted(files)
+      }
     }
 
     function onFileSelection (e: Event) {
@@ -266,6 +278,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,
@@ -321,6 +334,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         onDragleave={ onDragleave }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        onPaste={ onPaste }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

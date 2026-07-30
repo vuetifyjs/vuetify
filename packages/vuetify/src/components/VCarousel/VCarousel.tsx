@@ -13,7 +13,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -105,6 +105,26 @@ export const VCarousel = genericComponent<new <T>(
       window.requestAnimationFrame(startTimeout)
     }
 
+    function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
+        group.prev()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
+      }
+
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
+        group.next()
+        nextTick(() => windowRef.value?.$el.querySelector('.v-btn--active')?.focus())
+      }
+    }
+
     useRender(() => {
       const windowProps = VWindow.filterProps(props)
 
@@ -159,6 +179,7 @@ export const VCarousel = genericComponent<new <T>(
                               group.isSelected(item.id) && 'v-btn--active',
                             ],
                             onClick: () => group.select(item.id, true),
+                            onKeydown: (e: KeyboardEvent) => onDelimiterKeyDown(e, group),
                           }
 
                           return slots.item

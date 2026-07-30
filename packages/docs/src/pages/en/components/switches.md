@@ -47,18 +47,6 @@ Switches can be colored by using any of the builtin colors and contextual names 
 
 <ExamplesExample file="v-switch/prop-colors" />
 
-<!-- #### Flat
-
-You can make switch render without elevation of thumb using **flat** property.
-
-<ExamplesExample file="v-switch/prop-flat" /> -->
-
-#### Inset
-
-You can make switch render in inset mode.
-
-<ExamplesExample file="v-switch/prop-inset" />
-
 #### Model as array
 
 Multiple `v-switch`'s can share the same **v-model** by using an array.

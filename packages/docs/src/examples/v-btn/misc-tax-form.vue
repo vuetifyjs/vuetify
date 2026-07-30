@@ -11,7 +11,7 @@
     </v-card-text>
 
     <v-card-text>
-      <div class="text-subtitle-2 font-weight-black mb-1">Last 4 digits of your SSN</div>
+      <div class="text-title-small font-weight-black mb-1">Last 4 digits of your SSN</div>
 
       <v-text-field
         label="Enter value here"

@@ -6,6 +6,7 @@ import { VDatePicker } from '../VDatePicker'
 
 // import { touch } from '@/../test'
 import { render, screen } from '@test'
+import { h, ref } from 'vue'
 import {
   mount,
   MountOptions,
@@ -116,7 +117,7 @@ describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
     const wrapper = mountFunction({
       propsData: {
         value: '2013-05-07',
-        elevation: 15,
+        elevation: 4,
       },
     })
 
@@ -803,15 +804,20 @@ describe('range selection with time zone', () => {
   beforeEach(() => vi.stubEnv('TZ', 'America/New_York'))
   afterEach(() => vi.unstubAllEnvs())
 
-  it('should select correct dates near ST/DST transition', async () => {
+  function renderWithVModel (initialValue: string[]) {
     const update = vi.fn()
-    const wrapper = render(VDatePicker, {
-      props: {
-        multiple: 'range',
-        modelValue: ['2025-03-01','2025-03-01'],
-        'onUpdate:modelValue': update,
-      },
-    })
+    const modelValue = ref<readonly unknown[]>(initialValue)
+    update.mockImplementation((v: unknown[]) => { modelValue.value = v })
+    const wrapper = render(() => h(VDatePicker, {
+      multiple: 'range',
+      modelValue: modelValue.value,
+      'onUpdate:modelValue': update,
+    }))
+    return { wrapper, update }
+  }
+
+  it('should select correct dates near ST/DST transition', async () => {
+    const { wrapper, update } = renderWithVModel(['2025-03-01', '2025-03-01'])
 
     const btn1 = await wrapper.findByText('8') as HTMLElement
     btn1.click()
@@ -822,14 +828,7 @@ describe('range selection with time zone', () => {
   })
 
   it('should select correct dates near DST/ST transition', async () => {
-    const update = vi.fn()
-    const wrapper = render(VDatePicker, {
-      props: {
-        multiple: 'range',
-        modelValue: ['2025-10-01','2025-10-01'],
-        'onUpdate:modelValue': update,
-      },
-    })
+    const { wrapper, update } = renderWithVModel(['2025-10-01', '2025-10-01'])
 
     const btn1 = await wrapper.findByText('2') as HTMLElement
     btn1.click()

@@ -21,8 +21,6 @@ Handle scrolling within your application by using the **goTo** function.
 
 <PromotedEntry />
 
-<DocIntroduced version="3.5.0" />
-
 ## Usage
 
 The **goTo** method takes two parameters **target** and **options**. **target** can be either a pixel offset from the top of the page, a valid css selector, or an element reference. **options** is an object that includes **duration**, **easing**, **container**, and **offset**.

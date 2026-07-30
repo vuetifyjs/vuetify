@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: August 2025 Update
-  description: August marks a pivotal moment in Vuetify's evolution as we prepare to release the pre-alpha of Vuetify0 (v0), launch our redesigned issues page, and continue delivering powerful components and improvements.
+  description: August prepares the Vuetify0 pre-alpha, launches the redesigned issues page, and continues delivering powerful components and improvements.
   keywords: Vuetify August 2025, Vuetify0, v0 pre-alpha, VEditor, issues page redesign, theming webinar, performance optimization
 ---
 

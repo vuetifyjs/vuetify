@@ -15,12 +15,12 @@
     </template>
 
     <template v-slot:title>
-      <div class="text-caption text-grey text-uppercase">
+      <div class="text-body-small text-grey text-uppercase">
         Heart rate
       </div>
 
       <span
-        class="text-h3 font-weight-black"
+        class="text-display-medium font-weight-black"
         v-text="avg || '—'"
       ></span>
       <strong v-if="avg">BPM</strong>

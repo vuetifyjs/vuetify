@@ -23,12 +23,21 @@
 
     <template v-slot:expanded-row="{ columns, item }">
       <tr>
-        <td :colspan="columns.length" class="py-2">
+        <td class="text-center">
+          <v-rating
+            :model-value="item.details.rating"
+            color="orange-darken-2"
+            density="comfortable"
+            size="small"
+            half-increments
+            readonly
+          ></v-rating>
+        </td>
+        <td :colspan="columns.length - 1" class="py-2">
           <v-sheet rounded="lg" border>
             <v-table density="compact">
               <tbody class="bg-surface-light">
                 <tr>
-                  <th>Rating</th>
                   <th>Synopsis</th>
                   <th>Cast</th>
                 </tr>
@@ -36,16 +45,6 @@
 
               <tbody>
                 <tr>
-                  <td class="py-2">
-                    <v-rating
-                      :model-value="item.details.rating"
-                      color="orange-darken-2"
-                      density="comfortable"
-                      size="small"
-                      half-increments
-                      readonly
-                    ></v-rating>
-                  </td>
                   <td class="py-2">{{ item.details.synopsis }}</td>
                   <td class="py-2">{{ item.details.cast.join(', ') }}</td>
                 </tr>

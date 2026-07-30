@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivera för att ta bort sortering.',
       activateDescending: 'Aktivera för att sortera fallande.',
       activateAscending: 'Aktivera för att sortera stigande.',
+      selectRow: 'Välj rad',
+      selectAll: 'Välj alla',
+      selectGroup: 'Välj grupp',
     },
     sortBy: 'Sortera efter',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'till',
+  },
+  monthPicker: {
+    title: 'Välj månad',
+    itemsSelected: '{0} valda',
+    header: 'Välj månad',
+    range: {
+      title: 'Välj månader',
+    },
+    ariaLabel: {
+      previousYear: 'Föregående år',
+      nextYear: 'Nästa år',
+      selectYear: 'Välj år',
+      currentMonth: 'Denna månad, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valda',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} fler',
     today: 'Idag',
+  },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mer',
   },
   input: {
     clear: 'Rensa {0}',
@@ -130,6 +151,9 @@ export default {
     exclude: 'Tecknet {0} är inte tillåtet',
     notEmpty: 'Välj minst ett värde',
     pattern: 'Ogiltigt format',
+  },
+  command: {
+    search: 'Skriv ett kommando eller sök...',
   },
   hotkey: {
     then: 'sedan',

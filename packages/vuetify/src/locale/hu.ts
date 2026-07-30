@@ -20,6 +20,9 @@ export default {
       activateNone: 'Rendezés törlése.',
       activateDescending: 'Aktiváld a csökkenő rendezésért.',
       activateAscending: 'Aktiváld a növekvő rendezésért.',
+      selectRow: 'Sor kijelölése',
+      selectAll: 'Összes kijelölése',
+      selectGroup: 'Csoport kijelölése',
     },
     sortBy: 'Rendezés',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '–',
+  },
+  monthPicker: {
+    title: 'Hónap kiválasztása',
+    itemsSelected: '{0} kiválasztva',
+    header: 'Adja meg a hónapot',
+    range: {
+      title: 'Adja meg a hónapokat',
+    },
+    ariaLabel: {
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectYear: 'Év kiválasztása',
+      currentMonth: 'Aktuális hónap, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} kiválasztva',
@@ -68,6 +85,10 @@ export default {
   calendar: {
     moreEvents: '{0} további',
     today: 'Ma',
+  },
+  heatmap: {
+    less: 'Kevesebb',
+    more: 'Több',
   },
   input: {
     clear: 'Törlés {0}',
@@ -130,6 +151,9 @@ export default {
     exclude: 'A(z) {0} karakter nem engedélyezett',
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
+  },
+  command: {
+    search: 'Írjon be parancsot vagy keressen...',
   },
   hotkey: {
     then: 'majd',

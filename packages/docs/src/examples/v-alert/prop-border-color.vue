@@ -3,7 +3,7 @@
     <v-alert
       border="start"
       border-color="deep-purple accent-4"
-      elevation="2"
+      elevation="1"
     >
       Aliquam eu nunc. Fusce commodo aliquam arcu. In consectetuer turpis ut velit. Nulla facilisi..
 
@@ -15,7 +15,7 @@
     <v-alert
       border="top"
       border-color="success"
-      elevation="2"
+      elevation="1"
     >
       Vestibulum ullamcorper mauris at ligula. Nam pretium turpis et arcu. Ut varius tincidunt libero. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Morbi nec metus.
     </v-alert>
@@ -25,7 +25,7 @@
     <v-alert
       border="bottom"
       border-color="warning"
-      elevation="2"
+      elevation="1"
     >
       Sed in libero ut nibh placerat accumsan. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
     </v-alert>
@@ -35,7 +35,7 @@
     <v-alert
       border="end"
       border-color="error"
-      elevation="2"
+      elevation="1"
     >
       Fusce commodo aliquam arcu. Pellentesque posuere. Phasellus tempus. Donec posuere vulputate arcu.
     </v-alert>

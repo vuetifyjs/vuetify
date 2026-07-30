@@ -12,14 +12,18 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
+import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { makeFilterProps, useFilter } from '@/composables/filter'
+import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { transformItem, useItems } from '@/composables/list-items'
@@ -30,6 +34,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
@@ -45,7 +50,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
@@ -101,14 +106,16 @@ export const VCombobox = genericComponent<new <
     'onUpdate:modelValue'?: (value: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
-    selection: { item: ListItem<Item>, index: number }
+    item: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: Item, internalItem: ListItem<Item>, index: number }
     subheader: { props: Record<string, unknown>, index: number }
     divider: { props: Record<string, unknown>, index: number }
     'prepend-item': never
     'append-item': never
     'no-data': never
+    'menu-header': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
+    'menu-footer': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCombobox',
@@ -248,7 +255,25 @@ export const VCombobox = genericComponent<new <
     })
 
     const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
     const listEvents = useScrolling(listRef, vTextFieldRef)
+    const repairOrphanedFocus = useFocusRepair(
+      menu,
+      () => vMenuRef.value?.contentEl,
+      () => vTextFieldRef.value?.controlRef,
+    )
+    const { onTabKeydown } = useFocusGroups({
+      groups: [
+        { type: 'element' as const, contentRef: headerRef },
+        { type: 'list' as const, contentRef: listRef, displayItemsCount: () => displayItems.value.length },
+        { type: 'element' as const, contentRef: footerRef },
+      ],
+      onLeave: () => {
+        menu.value = false
+        vTextFieldRef.value?.focus()
+      },
+    })
     function onClear (e: MouseEvent) {
       cleared = true
       nextTick(() => (cleared = false))
@@ -271,11 +296,16 @@ export const VCombobox = genericComponent<new <
       }
       menu.value = !menu.value
     }
-    function onListKeydown (e: KeyboardEvent) {
-      if (checkPrintable(e) || e.key === 'Backspace') {
+    function onMenuKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        onTabKeydown(e)
+      }
+
+      if (listRef.value?.$el.contains(e.target) && (checkPrintable(e) || e.key === 'Backspace')) {
         vTextFieldRef.value?.focus()
       }
     }
+
     // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (isComposingIgnoreKey(e) || form.isReadonly.value) return
@@ -380,7 +410,11 @@ export const VCombobox = genericComponent<new <
     }
     function onAfterLeave () {
       if (isFocused.value) {
-        vTextFieldRef.value?.focus()
+        if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
+          isFocused.value = false
+        } else {
+          vTextFieldRef.value?.focus()
+        }
       }
       isPristine.value = true
       _searchLock.value = null
@@ -441,6 +475,26 @@ export const VCombobox = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
+      if (!vTextFieldRef.value?.$el.contains(e.relatedTarget as Node)) {
+        if (repairOrphanedFocus(e)) return
+        isFocused.value = false
+      }
+    }
+
+    let mousedownInsideContentAt = 0
+    function onMousedownContent () {
+      mousedownInsideContentAt = performance.now()
+    }
+
+    function onBlur (e: FocusEvent) {
+      const next = e.relatedTarget as Node | null
+      const menuContent = vMenuRef.value?.contentEl
+      if (
+        menuContent?.contains(next) ||
+        (!next && performance.now() - mousedownInsideContentAt < 10)
+      ) {
+        isFocused.value = true
+      }
     }
 
     watch(isFocused, (val, oldVal) => {
@@ -470,7 +524,7 @@ export const VCombobox = genericComponent<new <
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
         )
-        IN_BROWSER && window.requestAnimationFrame(() => {
+        IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
       }
@@ -495,6 +549,11 @@ export const VCombobox = genericComponent<new <
       )
       const isDirty = model.value.length > 0
       const textFieldProps = VTextField.filterProps(props)
+
+      const menuSlotProps = {
+        search,
+        filteredItems: filteredItems.value,
+      }
 
       return (
         <VTextField
@@ -523,6 +582,7 @@ export const VCombobox = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
           onPaste={ onPaste }
+          onBlur={ onBlur }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >
@@ -535,7 +595,6 @@ export const VCombobox = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
-                  contentClass="v-combobox__content"
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
@@ -544,26 +603,38 @@ export const VCombobox = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
+                  contentClass={['v-combobox__content', props.menuProps?.contentClass]}
                 >
-                  { hasList && (
-                    <VList
-                      ref={ listRef }
-                      filterable
-                      selected={ selectedValues.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      selectable={ !!displayItems.value.length }
-                      onKeydown={ onListKeydown }
-                      onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
-                      tabindex="-1"
-                      aria-live="polite"
-                      aria-labelledby={ `${id.value}-label` }
-                      aria-multiselectable={ props.multiple }
-                      color={ props.itemColor ?? props.color }
-                      { ...listEvents }
-                      { ...props.listProps }
-                    >
+                  <VSheet
+                    elevation={ props.menuElevation }
+                    onFocusin={ onFocusin }
+                    onKeydown={ onMenuKeydown }
+                    onMousedown={ onMousedownContent }
+                  >
+                    { slots['menu-header'] && (
+                      <header ref={ headerRef }>
+                        { slots['menu-header'](menuSlotProps) }
+                      </header>
+                    )}
+
+                    { hasList && (
+                      <VList
+                        key="combobox-list"
+                        ref={ listRef }
+                        filterable
+                        selected={ selectedValues.value }
+                        selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                        selectable={ !!displayItems.value.length }
+                        onFocusout={ onFocusout }
+                        tabindex="-1"
+                        aria-live="polite"
+                        aria-labelledby={ `${id.value}-label` }
+                        aria-multiselectable={ props.multiple }
+                        color={ props.itemColor ?? props.color }
+                        { ...listEvents }
+                        { ...props.listProps }
+                      >
                       { slots['prepend-item']?.() }
 
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
@@ -572,6 +643,7 @@ export const VCombobox = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
@@ -594,7 +666,8 @@ export const VCombobox = genericComponent<new <
                           }
 
                           return slots.item?.({
-                            item,
+                            item: item.raw,
+                            internalItem: item,
                             index,
                             props: itemProps,
                           }) ?? (
@@ -613,19 +686,27 @@ export const VCombobox = genericComponent<new <
                                     />
                                   ) : undefined }
 
-                                  { item.props.prependAvatar && (
-                                    <VAvatar image={ item.props.prependAvatar } />
+                                  { camelizedProps.prependAvatar && (
+                                    <VAvatar image={ camelizedProps.prependAvatar } />
                                   )}
 
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
+                                  { camelizedProps.prependIcon && (
+                                    <VIcon icon={ camelizedProps.prependIcon } />
                                   )}
                                 </>
                               ),
                               title: () => {
                                 return isPristine.value
                                   ? item.title
-                                  : highlightResult('v-combobox', item.title, getMatches(item)?.title)
+                                  : (
+                                    <VHighlight
+                                      text={ item.title }
+                                      matches={ getMatches(item)?.title }
+                                      markClass="v-combobox__mask"
+                                      matchAll
+                                      ignoreCase
+                                    />
+                                  )
                               },
                             }}
                           </VListItem>
@@ -635,7 +716,14 @@ export const VCombobox = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  )}
+                    )}
+
+                    { slots['menu-footer'] && (
+                      <footer ref={ footerRef }>
+                        { slots['menu-footer'](menuSlotProps) }
+                      </footer>
+                    )}
+                  </VSheet>
                 </VMenu>
 
                 { model.value.map((item, index) => {
@@ -668,8 +756,8 @@ export const VCombobox = genericComponent<new <
                   const slotContent = hasSlot
                     ? ensureValidVNode(
                       hasChips.value
-                        ? slots.chip!({ item, index, props: slotProps })
-                        : slots.selection!({ item, index })
+                        ? slots.chip!({ item: item.raw, internalItem: item, index, props: slotProps })
+                        : slots.selection!({ item: item.raw, internalItem: item, index })
                     )
                     : undefined
 

@@ -5,9 +5,9 @@
         aspect-ratio="1"
         color="blue"
         controls-variant="mini"
-        image="https://cdn.jsek.work/cdn/vt-sunflowers.jpg"
+        image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
         rounded="lg"
-        src="https://cdn.jsek.work/cdn/vt-sunflowers.mp4"
+        src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
         style="--v-video-controls-pill-border-radius: 8px"
         width="300"
         eager
@@ -28,9 +28,9 @@
     <v-video
       aspect-ratio="1"
       controls-variant="mini"
-      image="https://cdn.jsek.work/cdn/vt-sunflowers.jpg"
+      image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       rounded="xl"
-      src="https://cdn.jsek.work/cdn/vt-sunflowers.mp4"
+      src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
       width="300"
       eager
       hide-overlay
