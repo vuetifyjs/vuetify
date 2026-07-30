@@ -50,7 +50,9 @@
     top: 0
     width: 100%
     transition-property: width, left, right
-    transition: inherit
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
   @include tools.layer('trumps')
     @media (forced-colors: active)
@@ -84,8 +86,10 @@
     height: inherit
     left: 0
     position: absolute
-    transition: inherit
     transition-property: width, left, right
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
   .v-progress-linear__indeterminate
     animation-play-state: paused
@@ -134,8 +138,10 @@
     opacity: $progress-linear-stream-opacity
     pointer-events: none
     position: absolute
-    transition: inherit
     transition-property: width, left, right
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
   // Modifiers
   .v-progress-linear--reverse
