@@ -132,7 +132,6 @@ describe('VTextField', () => {
     expect(element).toHaveTextContent('0')
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/19998
   it('hides details when using hide-details="auto" and counter without focus', async () => {
     const { element, queryByCSS } = render(() => (
       <VTextField hideDetails="auto" counter></VTextField>

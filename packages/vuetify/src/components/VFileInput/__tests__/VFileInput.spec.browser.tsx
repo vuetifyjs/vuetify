@@ -186,7 +186,6 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/19998
   it('hides details when using hide-details="auto" and counter without files', async () => {
     const model = ref<File[]>([])
     const { queryByCSS } = render(() => (

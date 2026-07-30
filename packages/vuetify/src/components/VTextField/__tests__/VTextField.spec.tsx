@@ -179,7 +179,6 @@ describe('VTextField', () => {
       expect(details.attributes('id')).toBe('input-4-messages')
     })
 
-    // https://github.com/vuetifyjs/vuetify/issues/19998
     it('should not have details when hide-details is "auto" and has counter without focus', async () => {
       const wrapper = mountFunction(
         <VTextField
