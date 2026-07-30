@@ -65,8 +65,10 @@
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    transition: inherit;
     transition-property: transform;
+    transition-duration: inherit;
+    transition-timing-function: inherit;
+    transition-delay: inherit;
     transform: rotate(var(--v-icon-btn-rotate, 0deg));
 
     .v-icon-btn--loading & {
