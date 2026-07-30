@@ -144,4 +144,29 @@ describe('VMonthPicker', () => {
     await userEvent.click(monthButtons[0]) // January (deselect)
     expect(model.value).toHaveLength(2)
   })
+
+  it('should scroll to selected month on mount', async () => {
+    const model = ref<string | null>('2024-06')
+
+    render(() => (
+      <VMonthPicker
+        v-model={ model.value }
+        color="primary"
+      />
+    ))
+
+    // Wait for the intersection observer to trigger scrollToSelected
+    await commands.waitStable('.v-month-picker__months-content')
+
+    const container = screen.getByCSS('.v-month-picker__months')
+    const target = container.querySelector<HTMLElement>(`[data-v-month="5"]`) // June is index 5
+
+    expect(target).toBeTruthy()
+    const containerRect = container.getBoundingClientRect()
+    const targetRect = target!.getBoundingClientRect()
+
+    // Check that the target month is in the container's visible area, does not need to be centered, just visible
+    expect(targetRect.top).toBeGreaterThanOrEqual(containerRect.top)
+    expect(targetRect.bottom).toBeLessThanOrEqual(containerRect.bottom)
+  })
 })

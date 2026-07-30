@@ -19,9 +19,12 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
+// Directives
+import vIntersect from '@/directives/intersect'
+
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { chunkArray, createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, createRange, genericComponent, omit, propsFactory, templateRef, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -100,6 +103,8 @@ export const VMonthPicker = genericComponent<new <
   slots: VMonthPickerSlots
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VMonthPicker',
+
+  directives: { vIntersect },
 
   props: makeVMonthPickerProps(),
 
@@ -208,15 +213,27 @@ export const VMonthPicker = genericComponent<new <
 
     const isListView = computed(() => Number(props.monthsColumns) === 1)
 
-    const monthsContainerRef = shallowRef<HTMLElement>()
-    const monthsLayoutRef = shallowRef<HTMLElement>()
+    const monthsContainerRef = templateRef()
+    const monthsLayoutRef = templateRef()
     const scrollable = computed(() => {
-      if (!monthsContainerRef.value || !monthsLayoutRef.value) {
+      if (!monthsContainerRef.el || !monthsLayoutRef.el) {
         return false
       }
 
-      return monthsContainerRef.value.scrollWidth > monthsLayoutRef.value.scrollWidth
+      return monthsContainerRef.el.scrollWidth > monthsLayoutRef.el.scrollWidth
     })
+    function scrollToSelected () {
+      const container = monthsContainerRef.el
+      const month = model.value[0]?.split('-')[1]
+
+      const target = monthsContainerRef.el?.querySelector<HTMLElement>(`[data-v-month="${month - 1}"]`)
+      if (!container || !target) return
+
+      const containerRect = container.getBoundingClientRect()
+      const targetRect = target.getBoundingClientRect()
+
+      container.scrollLeft += (targetRect.left - containerRect.left) - (container.clientWidth / 2) + (targetRect.width / 2)
+    }
 
     const monthRows = computed(() => {
       const cols = Number(props.monthsColumns) || 4
@@ -259,7 +276,7 @@ export const VMonthPicker = genericComponent<new <
     }
 
     function scrollMonths (direction: -1 | 1) {
-      const el = monthsContainerRef.value
+      const el = monthsContainerRef.el
       if (!el) return
 
       const scrollAmount = Math.max(el.clientWidth * 0.75, 120)
@@ -380,6 +397,9 @@ export const VMonthPicker = genericComponent<new <
                       <div
                         key="months"
                         ref={ monthsContainerRef }
+                        v-intersect={[{
+                          handler: scrollToSelected,
+                        }, null, ['once']]}
                         class="v-month-picker__months flex-grow-1"
                       >
                         <MaybeTransition name={ transition.value }>
