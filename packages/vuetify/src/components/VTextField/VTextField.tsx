@@ -172,9 +172,9 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
-      const hasDetails = !!(
-        (hasCounter && (props.hideDetails !== 'auto' || props.persistentCounter || isFocused.value)) ||
-        slots.details
+      const hasDetails = props.hideDetails !== true && !!(
+        slots.details ||
+        (hasCounter && (props.persistentCounter || props.hideDetails === false || isFocused.value))
       )
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
