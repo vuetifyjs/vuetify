@@ -243,7 +243,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
-      const hasDetails = !!(hasCounter || slots.details)
+      const hasDetails = props.hideDetails !== true && !!(
+        slots.details ||
+        (hasCounter && (props.hideDetails === false || model.value?.length))
+      )
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
