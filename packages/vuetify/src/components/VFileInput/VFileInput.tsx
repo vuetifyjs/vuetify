@@ -57,6 +57,8 @@ export const makeVFileInputProps = propsFactory({
   },
   hideInput: Boolean,
   multiple: Boolean,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
   showSize: {
     type: [Boolean, Number, String] as PropType<boolean | 1000 | 1024>,
     default: false,
@@ -132,8 +134,18 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
-    const isActive = toRef(() => isFocused.value || props.active)
+    const isActive = toRef(() => (
+      props.persistentPlaceholder ||
+      isFocused.value ||
+      props.active
+    ))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    const placeholder = computed(() => (
+      model.value?.length ||
+      (!isFocused.value && props.label && !props.persistentPlaceholder)
+        ? undefined
+        : props.placeholder
+    ))
     const isDragging = shallowRef(false)
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
 
@@ -336,23 +348,36 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         { ...inputAttrs }
                       />
 
-                      <div class={ fieldClass }>
-                        { !!model.value?.length && !props.hideInput && (
-                          slots.selection ? slots.selection({
-                            fileNames: fileNames.value,
-                            totalBytes: totalBytes.value,
-                            totalBytesReadable: totalBytesReadable.value,
-                          })
-                          : props.chips ? fileNames.value.map(text => (
-                            <VChip
-                              key={ text }
-                              size="small"
-                              text={ text }
-                            />
-                          ))
-                          : fileNames.value.join(', ')
+                      { !model.value?.length && props.placeholder && !props.hideInput
+                        ? (
+                          <input
+                            aria-hidden="true"
+                            class={ fieldClass }
+                            placeholder={ placeholder.value }
+                            readonly
+                            tabindex="-1"
+                            type="text"
+                          />
+                        )
+                        : (
+                          <div class={ fieldClass }>
+                            { !!model.value?.length && !props.hideInput && (
+                              slots.selection ? slots.selection({
+                                fileNames: fileNames.value,
+                                totalBytes: totalBytes.value,
+                                totalBytesReadable: totalBytesReadable.value,
+                              })
+                              : props.chips ? fileNames.value.map(text => (
+                                <VChip
+                                  key={ text }
+                                  size="small"
+                                  text={ text }
+                                />
+                              ))
+                              : fileNames.value.join(', ')
+                            )}
+                          </div>
                         )}
-                      </div>
                     </>
                   ),
                 }}
