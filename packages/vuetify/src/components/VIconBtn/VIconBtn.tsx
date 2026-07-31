@@ -18,7 +18,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { toDisplayString } from 'vue'
+import { computed, toDisplayString } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -32,6 +32,18 @@ export type VIconBtnSlots = {
 }
 
 export type VIconBtnSizes = 'x-small' | 'small' | 'default' | 'large' | 'x-large'
+
+export type VIconBtnForm = 'narrow' | 'default' | 'wide'
+
+export type VIconBtnSizeSpec = {
+  size?: number // container height (and default-form width when defaultWidth omitted)
+  iconSize?: number // icon size
+  narrowWidth?: number // container width for narrow form
+  defaultWidth?: number // container width for default form
+  wideWidth?: number // container width for wide form
+  borderRadius?: string | number
+  borderRadiusPressed?: string | number
+}
 
 export const makeVIconBtnProps = propsFactory({
   active: {
@@ -60,7 +72,7 @@ export const makeVIconBtnProps = propsFactory({
     default: 'default',
   },
   sizes: {
-    type: Array as PropType<[VIconBtnSizes, number][]>,
+    type: Array as PropType<[VIconBtnSizes | string, number | VIconBtnSizeSpec][]>,
     default: () => ([
       ['x-small', 16],
       ['small', 24],
@@ -68,6 +80,10 @@ export const makeVIconBtnProps = propsFactory({
       ['large', 48],
       ['x-large', 56],
     ]),
+  },
+  form: {
+    type: String as PropType<VIconBtnForm>,
+    default: 'default',
   },
   text: {
     type: [String, Number, Boolean],
@@ -118,7 +134,33 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       })(),
     }))
 
-    const btnSizeMap = new Map(props.sizes)
+    const sizeVariables = computed(() => {
+      const map = new Map(props.sizes)
+      const _btnSize = String(props.size) as VIconBtnSizes
+      const sizeEntry = map.has(_btnSize) ? map.get(_btnSize) : undefined
+      const spec = typeof sizeEntry === 'object' && sizeEntry !== null ? sizeEntry as VIconBtnSizeSpec : null
+      const containerSize = spec?.size ?? (typeof sizeEntry === 'number' ? sizeEntry : undefined)
+      const formWidth = spec
+        ? (props.form === 'narrow' ? spec.narrowWidth
+          : props.form === 'wide' ? spec.wideWidth
+          : spec.defaultWidth ?? containerSize)
+        : undefined
+      const btnHeight = props.height ?? containerSize ?? (map.has(_btnSize) ? undefined : _btnSize)
+      const btnWidth = props.width ?? formWidth ?? containerSize ?? (map.has(_btnSize) ? undefined : _btnSize)
+      const defaultIconSize = spec?.iconSize ?? new Map(props.iconSizes).get(_btnSize)
+      return {
+        defaultIconSize,
+        styles: {
+          '--v-icon-btn-rotate': convertToUnit(props.rotate, 'deg'),
+          '--v-icon-btn-height': convertToUnit(btnHeight),
+          '--v-icon-btn-width': convertToUnit(btnWidth),
+          '--v-icon-btn-border-radius': convertToUnit(spec?.borderRadius),
+          '--v-icon-btn-border-radius-pressed': convertToUnit(spec?.borderRadiusPressed),
+        },
+      }
+    })
+
+    const { iconSize } = useIconSizes(props, () => sizeVariables.value.defaultIconSize)
 
     function onClick () {
       if (
@@ -133,13 +175,6 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
 
     useRender(() => {
       const icon = isActive.value ? props.activeIcon ?? props.icon : props.icon
-
-      const _btnSize = props.size as VIconBtnSizes
-      const hasNamedSize = btnSizeMap.has(_btnSize)
-      const btnSize = hasNamedSize ? btnSizeMap.get(_btnSize) : _btnSize
-      const btnHeight = props.height ?? btnSize
-      const btnWidth = props.width ?? btnSize
-      const { iconSize } = useIconSizes(props, () => new Map(props.iconSizes).get(_btnSize))
 
       const iconProps = {
         icon,
@@ -159,6 +194,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn--loading': props.loading,
               'v-icon-btn--readonly': props.readonly,
               [`v-icon-btn--${props.size}`]: true,
+              [`v-icon-btn--form-${props.form}`]: props.form !== 'default',
             },
             themeClasses.value,
             colorClasses.value,
@@ -169,11 +205,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             props.class,
           ]}
           style={[
-            {
-              '--v-icon-btn-rotate': convertToUnit(props.rotate, 'deg'),
-              '--v-icon-btn-height': convertToUnit(btnHeight),
-              '--v-icon-btn-width': convertToUnit(btnWidth),
-            },
+            sizeVariables.value.styles,
             colorStyles.value,
             roundedStyles.value,
             props.style,

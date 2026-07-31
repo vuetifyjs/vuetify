@@ -5,12 +5,12 @@
 @include tools.layer('components') {
   .v-icon-btn {
     @include tools.border($icon-btn-border...);
-    @include tools.rounded($icon-btn-border-radius);
     @include tools.states('.v-icon-btn__overlay');
     @include tools.variant($icon-btn-variants...);
 
     & {
       align-items: center;
+      border-radius: var(--v-icon-btn-border-radius, #{$icon-btn-border-radius});
       cursor: pointer;
       display: inline-flex;
       flex: none;
@@ -21,24 +21,18 @@
       justify-content: center;
       outline: none;
       position: relative;
-      transition-property: width, height, transform;
+      transition-property: width, height, transform, border-radius;
       transition: 0.2s settings.$standard-easing;
+
+      &:active {
+        border-radius: var(--v-icon-btn-border-radius-pressed, var(--v-icon-btn-border-radius, #{$icon-btn-border-radius}));
+      }
       vertical-align: middle;
       width: #{$icon-btn-width};
 
-      @supports selector(:focus-visible) {
-        &::after {
-          pointer-events: none;
-          border: 2px solid currentColor;
-          border-radius: inherit;
-          opacity: 0;
-          transition: opacity .2s ease-in-out;
-          @include tools.absolute(true);
-        }
-
-        &:focus-visible::after {
-          opacity: calc(.25 * var(--v-theme-overlay-multiplier));
-        }
+      &:focus-visible {
+        outline: $icon-btn-focus-outline-width solid $icon-btn-focus-outline-color;
+        outline-offset: $icon-btn-focus-outline-offset;
       }
     }
 

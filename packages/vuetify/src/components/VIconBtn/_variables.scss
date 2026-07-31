@@ -3,6 +3,10 @@
 @use '../../styles/tools';
 
 // VIconBtn
+$icon-btn-focus-outline-color: rgb(var(--v-theme-surface-variant)) !default;
+$icon-btn-focus-outline-width: 2px !default;
+$icon-btn-focus-outline-offset: 2px !default;
+
 $icon-btn-background: rgb(var(--v-theme-surface)) !default;
 $icon-btn-color: inherit !default;
 $icon-btn-border-color: settings.$border-color-root !default;
