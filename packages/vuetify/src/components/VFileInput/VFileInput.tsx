@@ -351,11 +351,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       { !model.value?.length && props.placeholder && !props.hideInput
                         ? (
                           <input
-                            aria-hidden="true"
                             class={ fieldClass }
+                            inert
                             placeholder={ placeholder.value }
                             readonly
-                            tabindex="-1"
                             type="text"
                           />
                         )

@@ -91,8 +91,7 @@ describe('VFileInput', () => {
     const fileInput = screen.getByCSS('input[type="file"]')
     const placeholderInput = screen.getByCSS('input[type="text"]')
     await expect.element(placeholderInput).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(placeholderInput).toHaveAttribute('aria-hidden', 'true')
-    await expect.element(placeholderInput).toHaveAttribute('tabindex', '-1')
+    await expect.element(placeholderInput).toHaveAttribute('inert')
 
     await rerender({ label: 'Label' })
     await expect.element(placeholderInput).not.toHaveAttribute('placeholder')
