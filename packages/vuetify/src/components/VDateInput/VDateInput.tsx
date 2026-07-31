@@ -110,7 +110,7 @@ export const VDateInput = genericComponent<new <
     const { t } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
+    const { isValid, maskDate, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
@@ -130,6 +130,7 @@ export const VDateInput = genericComponent<new <
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
+    let edit: { value: string, start: number, end: number } | undefined
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
@@ -161,6 +162,15 @@ export const VDateInput = genericComponent<new <
       }
 
       return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
+    })
+
+    const placeholder = computed(() => {
+      if (props.placeholder) return props.placeholder
+
+      if (props.multiple === 'range') return `${parserFormat.value} - ${parserFormat.value}`
+      if (props.multiple) return `${parserFormat.value}, ...`
+
+      return parserFormat.value
     })
 
     const inputmode = computed(() => {
@@ -195,6 +205,54 @@ export const VDateInput = genericComponent<new <
       if (props.updateOn.includes('enter') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
+    }
+
+    function onBeforeinput (e: InputEvent) {
+      const el = e.target as HTMLInputElement
+
+      edit = { value: el.value, start: el.selectionStart ?? 0, end: el.selectionEnd ?? 0 }
+    }
+
+    // sections have a fixed width, so typing inside one overwrites instead of shifting
+    function overtype (text: string, start: number, typed: string): [string, number] {
+      const chars = [...text]
+      const isDigit = (index: number) => /\d/.test(chars[index])
+      let caret = start
+
+      for (const char of typed) {
+        while (caret < chars.length && !isDigit(caret)) caret++
+
+        if (!/\d/.test(char)) {
+          // a typed separator jumps to the next section
+          while (caret < chars.length && isDigit(caret)) caret++
+        } else if (caret < chars.length) {
+          chars[caret++] = char
+        }
+      }
+
+      while (caret < chars.length && !isDigit(caret)) caret++
+
+      return [chars.join(''), caret]
+    }
+
+    function onInput (e: InputEvent) {
+      if (e.isComposing || e.inputType?.startsWith('delete')) return
+
+      const el = e.target as HTMLInputElement
+      const previous = edit?.value ?? ''
+      // a value the mask would rewrite has no sections to overwrite, e.g. after a backspace
+      const isInside = !!edit && edit.start < previous.length &&
+        edit.end - edit.start < previous.length &&
+        maskDate(previous, props.multiple) === previous
+
+      const [value, caret] = isInside
+        ? overtype(previous, edit!.start, el.value.slice(edit!.start, el.value.length - previous.length + edit!.end))
+        : [maskDate(el.value, props.multiple)]
+
+      if (value === el.value) return
+
+      el.value = value
+      el.setSelectionRange(caret ?? value.length, caret ?? value.length)
     }
 
     function onClick (e: MouseEvent) {
@@ -251,7 +309,7 @@ export const VDateInput = genericComponent<new <
           model.value = clampDate(parseDate(value))
         }
       } else {
-        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
+        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/).filter(Boolean)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts
@@ -295,9 +353,11 @@ export const VDateInput = genericComponent<new <
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
-          placeholder={ props.placeholder ?? parserFormat.value }
+          placeholder={ placeholder.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
+          onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
+          onInput={ isInteractive.value ? onInput : undefined }
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
