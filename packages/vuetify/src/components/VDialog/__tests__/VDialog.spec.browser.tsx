@@ -5,7 +5,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Utilities
 import { commands, page, render, screen, userEvent, wait } from '@test'
-import { h, nextTick, ref } from 'vue'
+import { defineComponent, h, nextTick, onErrorCaptured, ref, watch } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 // Tests
@@ -49,6 +49,47 @@ describe('VDialog', () => {
     await expect.poll(() => model.value).toBeFalsy()
     await expect.poll(() => screen.queryByTestId('dialog')).toBeNull()
     await expect.poll(() => screen.queryByTestId('content')).toBeNull()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/23053
+  it('should not throw when unmounted while closing', async () => {
+    let error: unknown
+    const dialog = ref(false)
+    const selected = ref<{ name: string } | null>(null)
+
+    const Root = defineComponent({
+      setup () {
+        watch(selected, item => {
+          if (item) dialog.value = true
+        })
+        // Deselect after close unmounts the dialog inside the tick its close watcher awaits across.
+        watch(dialog, val => {
+          if (!val) selected.value = null
+        }, { flush: 'post' })
+
+        onErrorCaptured(err => {
+          error = err
+          return false
+        })
+
+        return () => selected.value && (
+          <VDialog v-model={ dialog.value } data-testid="dialog">
+            <div data-testid="content">Content</div>
+          </VDialog>
+        )
+      },
+    })
+
+    render(Root)
+
+    selected.value = { name: 'Item 1' }
+    await expect(screen.findByTestId('dialog')).resolves.toBeVisible()
+
+    dialog.value = false
+    await expect.poll(() => screen.queryByTestId('dialog')).toBeNull()
+    await wait()
+
+    expect(error).toBeUndefined()
   })
 
   it('should react to max-width changes', async () => {
