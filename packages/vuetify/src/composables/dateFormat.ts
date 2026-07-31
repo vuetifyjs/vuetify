@@ -1,5 +1,6 @@
 // Composables
 import { useDate } from '@/composables/date/date'
+import { dateSegments, maskSegmentsFrom } from '@/composables/segmentedMask'
 
 // Utilities
 import { toRef } from 'vue'
@@ -79,6 +80,21 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       : DateFormatSpec.parse(inferFromLocale())
   })
 
+  function autoFixYear (year: number) {
+    const currentYear = adapter.getYear(adapter.date())
+    if (year > 100 || currentYear % 100 >= 50) {
+      return year
+    }
+
+    const currentCentury = ~~(currentYear / 100) * 100
+
+    return year < 50
+      ? currentCentury + year
+      : (currentCentury - 100) + year
+  }
+
+  const segments = toRef(() => dateSegments(currentFormat.value.order, currentFormat.value.separator, autoFixYear))
+
   function parseDate (dateString: string) {
     function parseDateParts (text: string): Record<'y' |'m' | 'd', number> {
       const parts = text.trim().split(currentFormat.value.separator)
@@ -99,19 +115,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       return { year: autoFixYear(year), month, day }
     }
 
-    function autoFixYear (year: number) {
-      const currentYear = adapter.getYear(adapter.date())
-      if (year > 100 || currentYear % 100 >= 50) {
-        return year
-      }
-
-      const currentCentury = ~~(currentYear / 100) * 100
-
-      return year < 50
-        ? currentCentury + year
-        : (currentCentury - 100) + year
-    }
-
     const dateParts = parseDateParts(dateString)
     const validatedParts = validateDateParts(dateParts)
 
@@ -128,6 +131,43 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     return !!parseDate(text)
   }
 
+  function maskDate (input: string, multiple: boolean | 'range' | number | string = false, caret = -1) {
+    // only separators end a section, and a trailing one closes the date
+    const text = input.trimStart().replace(/[^\d/.\- ]/g, '')
+    const trimmed = input.length - text.length
+    const isRange = multiple === 'range'
+    const join = isRange ? ' - ' : ', '
+    const limit = isRange ? 2 : multiple ? Infinity : 1
+    let result = ''
+    let index = 0
+    let width = 0
+    let outCaret = -1
+    let gaps = false
+
+    for (let date = 0; date < limit; date++) {
+      const start = index
+      const masked = maskSegmentsFrom(segments.value, text, index, caret < 0 ? -1 : caret - trimmed)
+      index = masked.index
+
+      // the next date waits for the end of the previous one
+      if (index === start || !masked.value) break
+
+      if (masked.caret >= 0 && outCaret < 0) outCaret = result.length + masked.caret
+
+      result += masked.value
+      width += masked.width
+      gaps ||= masked.gaps
+
+      if (!masked.complete || (!masked.closed && index >= text.length)) break
+      if (date + 1 < limit) {
+        result += join
+        width += join.length
+      }
+    }
+
+    return { value: result, caret: outCaret < 0 ? result.length : outCaret, width, gaps }
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('T')[0].split('-')
 
@@ -138,6 +178,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   return {
     isValid,
+    maskDate,
     parseDate,
     formatDate,
     parserFormat: toRef(() => currentFormat.value.format),

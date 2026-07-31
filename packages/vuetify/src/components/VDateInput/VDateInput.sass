@@ -1,0 +1,15 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-date-input__format-hint
+    align-items: center
+    display: flex
+    inset: 0
+    opacity: var(--v-disabled-opacity)
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    white-space: pre
+
+    > span
+      color: transparent
