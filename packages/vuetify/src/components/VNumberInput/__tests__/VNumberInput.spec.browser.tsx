@@ -23,6 +23,30 @@ describe('VNumberInput', () => {
     expect(screen.getByCSS('input')).toHaveValue(expected)
   })
 
+  describe('grouped input', () => {
+    it.each([
+      { locale: 'de', separators: {} },
+      { locale: 'en', separators: { decimalSeparator: ',', groupSeparator: '.' } },
+    ])('keeps the typed value on blur', async ({ locale, separators }) => {
+      const model = ref<number | null>(null)
+      render(() => (
+        <VLocaleProvider locale={ locale }>
+          <VNumberInput v-model={ model.value } grouping="auto" precision={ 2 } { ...separators } />
+        </VLocaleProvider>
+      ))
+
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.click(input)
+      await userEvent.keyboard('1234,56')
+      expect(input.value).toBe('1.234,56')
+
+      await userEvent.click(document.body)
+
+      expect(model.value).toBe(1234.56)
+      expect(input.value).toBe('1.234,56')
+    })
+  })
+
   describe('locales using a non-ASCII minus sign', () => {
     it('keeps the value negative on blur', async () => {
       const model = ref(-1234.1234)

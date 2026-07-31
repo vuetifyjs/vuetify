@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, shallowRef, toRef, watch } from 'vue'
-import { clamp, genericComponent, normalizeMinusSign, omit, propsFactory, useRender } from '@/util'
+import { clamp, consoleWarn, genericComponent, normalizeMinusSign, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -112,11 +112,21 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
     } = useLocale()
 
     const decimalSeparator = computed(() => props.decimalSeparator?.[0] || decimalSeparatorFromLocale.value)
-    const groupSeparator = computed(() => props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value)
+    const groupSeparator = computed(() => {
+      const separator = props.groupSeparator?.[0] || numericGroupSeparatorFromLocale.value
+      if (separator !== decimalSeparator.value) return separator
+      if (props.grouping) {
+        consoleWarn(`decimalSeparator and groupSeparator are both "${separator}", groups will not be separated`)
+      }
+      return ''
+    })
     const minusSign = computed(() => new Intl.NumberFormat(locale.value).formatToParts(-1).find(p => p.type === 'minusSign')?.value ?? '-')
 
     function toNumber (val: string | null | undefined) {
-      return Number(normalizeMinusSign(val ?? '').replace(decimalSeparator.value, '.').replace(/[^0-9.-]/g, ''))
+      return Number(normalizeMinusSign(val ?? '')
+        .replaceAll(groupSeparator.value, '')
+        .replace(decimalSeparator.value, '.')
+        .replace(/[^0-9.-]/g, ''))
     }
 
     function correctPrecision (val: number, precision?: number | null, trim = true) {
