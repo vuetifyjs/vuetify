@@ -8,6 +8,34 @@ import { commands } from 'vitest/browser'
 import { nextTick, ref } from 'vue'
 
 describe('VDatePicker', () => {
+  function dispatchTouchEvent (target: Element, type: 'touchstart' | 'touchmove' | 'touchend', x: number, y: number) {
+    const touchPoint = new Touch({
+      identifier: 1,
+      target,
+      clientX: x,
+      clientY: y,
+      pageX: x,
+      pageY: y,
+      screenX: x,
+      screenY: y,
+      radiusX: 1,
+      radiusY: 1,
+      rotationAngle: 0,
+      force: 1,
+    })
+    const isEnd = type === 'touchend'
+    const touches = isEnd ? [] : [touchPoint]
+    const changedTouches = [touchPoint]
+
+    target.dispatchEvent(new TouchEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      touches,
+      targetTouches: touches,
+      changedTouches,
+    }))
+  }
+
   it('selects a range of dates', async () => {
     const model = ref<unknown[]>([])
     render(() => (
@@ -117,5 +145,44 @@ describe('VDatePicker', () => {
     // January grid is still rendered.
     expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
     expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
+  })
+
+  it('scrollable should navigate to next month on mouse wheel', async () => {
+    render(() => (
+      <VDatePicker
+        modelValue="2026-01-15"
+        month={ 0 }
+        year={ 2026 }
+        scrollable
+      />
+    ))
+
+    const days = document.querySelector('.v-date-picker-month__days')
+    expect(days).not.toBeNull()
+
+    days!.dispatchEvent(new WheelEvent('wheel', { deltaY: 1, bubbles: true, cancelable: true }))
+    await nextTick()
+
+    expect(document.querySelector('[data-v-date="2026-02-15"]')).not.toBeNull()
+  })
+
+  it('scrollable should navigate to next month on swipe gesture', async () => {
+    render(() => (
+      <VDatePicker
+        modelValue="2026-01-15"
+        month={ 0 }
+        year={ 2026 }
+        scrollable
+      />
+    ))
+
+    const days = document.querySelector('.v-date-picker-month__days')
+    expect(days).not.toBeNull()
+
+    dispatchTouchEvent(days!, 'touchstart', 120, 120)
+    dispatchTouchEvent(days!, 'touchend', 40, 120)
+    await nextTick()
+
+    expect(document.querySelector('[data-v-date="2026-02-15"]')).not.toBeNull()
   })
 })
