@@ -2,7 +2,7 @@
   "props": {
     "complete": "Marks step as complete.",
     "completeIcon": "Icon to display when step is marked as completed.",
-    "editable": "Marks step as editable.",
+    "editable": "Marks step as editable, allowing the user to navigate to it by clicking.",
     "editIcon": "Icon to display when step is editable.",
     "errorIcon": "Icon to display when step has an error.",
     "error": "Puts the stepper item in a manual error state.",

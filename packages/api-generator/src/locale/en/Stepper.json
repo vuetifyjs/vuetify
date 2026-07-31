@@ -1,7 +1,7 @@
 {
   "props": {
     "altLabels": "Places the labels beneath the step.",
-    "editable": "Marks step as editable.",
+    "editable": "Marks step as editable, allowing the user to navigate to it by clicking.",
     "hideActions": "Hide actions bar (prev and next buttons).",
     "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
     "itemTitle": "Property on supplied `items` that contains its title.",
@@ -9,7 +9,7 @@
     "mobile": "Forces the stepper into a mobile state, removing labels from stepper items.",
     "nextText": "The text used for the Next button.",
     "prevText": "The text used for the Prev button.",
-    "nonLinear": "Allow user to jump to any step."
+    "nonLinear": "Displays unvisited steps with increased opacity to indicate that they can be completed in any order. Purely visual; combine with the **editable** prop on steps to let users select them directly."
   },
   "slots": {
     "[`header-item.${string}`]": "Slot for customizing header items when using the [items](/api/v-stepper/#props-items) prop.",
