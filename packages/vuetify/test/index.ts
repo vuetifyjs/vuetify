@@ -32,6 +32,11 @@ export function touch (element: Element) {
   }
 }
 
+export const wheel = (element: Element, options: WheelEventInit) => {
+  // replace with userEvent.wheel (vitest@4.1.x) unless it would make tests flaky
+  return element.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, ...options }))
+}
+
 export const wait = (timeout?: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout))
 }
