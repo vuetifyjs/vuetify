@@ -16,7 +16,7 @@ features:
 
 # Inputs
 
-The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, and a default slot.
+The `v-input` component gives you a baseline to create your own custom inputs. It consists of a prepend/append slot, messages, validation, and a default slot.
 
 <PageFeatures />
 
@@ -33,6 +33,8 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 | Component | Description |
 | - | - |
 | [v-input](/api/v-input/) | Primary Component |
+| [v-field](/api/v-field/) | Field container used by most text-like inputs |
+| [v-validation](/api/v-validation/) | Validation state shared by input components |
 
 <ApiInline hide-links />
 
@@ -43,6 +45,20 @@ The `v-input` component gives you a baseline to create your own custom inputs. I
 The `v-input` component is used as a wrapper for all of the Vuetify form controls. It does **NOT** inherit attributes as they are expected to be passed down to inner inputs.
 
 :::
+
+## Guide
+
+### Building custom inputs
+
+Most custom text-like inputs combine `v-input` and `v-field`. `v-input` owns validation, messages, and the outer prepend/append areas. `v-field` renders the label, loader, and field styling. Your control owns its value and must receive the attributes provided by the `v-field` default slot.
+
+Pass the same model to `v-input` and to your control. Then forward `v-input` validation state to `v-field` so the label, details, disabled state, and error state stay in sync. The example below creates a custom text control with an outlined field and validation rules.
+
+<ExamplesExample file="v-input/misc-custom-field" />
+
+The `v-field` default slot provides `props` for the control, a `controlRef`, and `focus` and `blur` handlers. Bind `props` to the focusable control, assign `controlRef`, and call the handlers from the control's focus events. `v-field` slot state values are Vue refs, so use `.value` when reading them in template expressions or JavaScript.
+
+`v-input` does not pass its attributes to the inner control automatically. Pass attributes such as `name`, `autocomplete`, and `aria-*` directly to your custom control.
 
 ## Examples
 
@@ -74,13 +90,13 @@ When the **hide-details** prop is set to `auto` messages will be rendered only i
 
 #### Loading
 
-`v-input` has **loading** state which can be used, e.g. for data loading indication. Note: `v-text-field` is used just for example.
+`v-input` has **loading** state which can be used, for example, for data loading indication. Note: `v-text-field` is used just for example.
 
 <ExamplesExample file="v-input/prop-loading" />
 
 #### Rules
 
-You can add custom validation rules to `v-input`, add them as functions returning `true`/error message. Note: `v-text-field` is used just for example.
+You can add custom validation rules to `v-input` as functions returning `true` or an error message. Bind the same model to the custom control so `v-input` can validate it.
 
 <ExamplesExample file="v-input/prop-rules" />
 
