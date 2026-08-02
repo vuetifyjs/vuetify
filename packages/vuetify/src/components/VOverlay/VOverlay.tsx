@@ -226,7 +226,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (el === contentEl.value) return true
         visited.add(el)
         const ownerId = el.closest('.v-overlay')?.id
-        current = ownerId ? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
+        current = ownerId ? document.querySelector(`[data-v-overlay-activator="${CSS.escape(ownerId)}"]`) : null
       }
       return false
     }

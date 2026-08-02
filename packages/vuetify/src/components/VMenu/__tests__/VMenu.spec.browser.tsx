@@ -12,6 +12,22 @@ import { commands, render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 describe('VMenu', () => {
+  it('should associate the activator with the menu using aria-controls', () => {
+    render(() => (
+      <VMenu>
+        {{
+          activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Menu</VBtn>,
+          default: () => <VListItem title="Item" />,
+        }}
+      </VMenu>
+    ))
+
+    const activator = screen.getByTestId('activator')
+
+    expect(activator.getAttribute('aria-controls')).toMatch(/^v-menu-v-\d+$/)
+    expect(activator).not.toHaveAttribute('aria-owns')
+  })
+
   describe('open-on-focus with template activator', () => {
     beforeEach(() => commands.setFocusEmulationDisabled())
 
