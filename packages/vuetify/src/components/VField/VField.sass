@@ -400,6 +400,11 @@
           #{selector.append('[class*=" rounded-"]', &)}
             flex-basis: calc(var(--v-input-control-height) / 2 + 2px)
 
+        @at-root
+          #{selector.append('.rounded-0', &)},
+          #{selector.append('[class*=" rounded-0"]', &)}
+            flex-basis: $field-control-affixed-padding
+
         @at-root #{selector.append('.v-field--reverse', &)}
           border-start-start-radius: 0
           border-start-end-radius: inherit
