@@ -223,6 +223,14 @@ export const VSlideGroup = genericComponent<new <T>(
 
       if (!isOverflowing.value || !contentRef.el) return
 
+      // Skip scroll if the focused element is inside a "no-activator" element
+      // (e.g. chip close button, button content, etc.)
+      let target = e.target as HTMLElement | null
+      while (target && target !== contentRef.el) {
+        if (target.hasAttribute('data-no-activator')) return
+        target = target.parentElement
+      }
+
       // Focused element is likely to be the root of an item, so a
       // breadth-first search will probably find it in the first iteration
       for (const el of e.composedPath()) {
