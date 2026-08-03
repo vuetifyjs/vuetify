@@ -70,11 +70,16 @@ export function getElementBox (el: HTMLElement) {
       })
     } else {
       const pageScale = document.body.currentCSSZoom ?? 1
+      const isZoomed = visualViewport.scale > 1 || IS_WEBKIT
       return new Box({
-        x: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetLeft,
-        y: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetTop,
-        width: visualViewport.width * visualViewport.scale / pageScale,
-        height: visualViewport.height * visualViewport.scale / pageScale,
+        x: isZoomed ? 0 : visualViewport.offsetLeft,
+        y: isZoomed ? 0 : visualViewport.offsetTop,
+        width: isZoomed
+          ? document.documentElement.clientWidth
+          : visualViewport.width * visualViewport.scale / pageScale,
+        height: isZoomed
+          ? document.documentElement.clientHeight
+          : visualViewport.height * visualViewport.scale / pageScale,
       })
     }
   } else {
