@@ -37,6 +37,7 @@ export const makeVMessagesProps = propsFactory({
     transition: {
       component: VSlideYTransition as Component,
       leaveAbsolute: true,
+      hideOnLeave: true,
       group: true,
     },
   }),
