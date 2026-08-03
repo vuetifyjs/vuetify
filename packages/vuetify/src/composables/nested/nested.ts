@@ -383,17 +383,13 @@ export const useNested = (
         itemsUpdatePropagation()
       },
       updateDisabled: (id, isDisabled) => {
+        const newDisabled = new Set(disabled.value)
         if (isDisabled) {
-          disabled.value.add(id)
+          newDisabled.add(id)
         } else {
-          disabled.value.delete(id)
+          newDisabled.delete(id)
         }
-        // classic selection requires refresh to re-evaluate on/off/indeterminate but
-        // currently it is only run for selection interactions, so it will set new disabled
-        // to "off" and the visual state becomes out of sync
-        // -- selected.value = new Map(selected.value)
-        // it is not clear if the framework should un-select when disabled changed to true
-        // more discussion is needed
+        disabled.value = newDisabled
       },
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
