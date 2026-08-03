@@ -291,9 +291,25 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     })
   })
 
-  watch(items, () => {
-    sizes = Array.from({ length: items.value.length })
-    offsets = Array.from({ length: items.value.length })
+  watch(items, (newItems, oldItems) => {
+    const newLength = newItems?.length ?? 0
+    const oldLength = oldItems?.length ?? 0
+    const oldSizes = sizes.slice()
+
+    sizes = Array.from({ length: newLength })
+    offsets = Array.from({ length: newLength })
+
+    // Preserve existing height measurements for items at the same index
+    // so scroll position doesn't jump when items array is reassigned
+    if (oldLength > 0 && newLength > 0) {
+      const minLength = Math.min(oldLength, newLength)
+      for (let i = 0; i < minLength; i++) {
+        if (oldSizes[i]) {
+          sizes[i] = oldSizes[i]
+        }
+      }
+    }
+
     updateOffsets.immediate()
     calculateVisibleItems()
   }, { deep: 1 })
