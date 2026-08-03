@@ -235,6 +235,12 @@ export const VSelectionControl = genericComponent<new <T>(
         : props.label
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
+      // When a visible label is rendered (via <label for="...">), it provides
+      // the accessible name. Setting both aria-label and a <label for="...">
+      // can cause screen readers (e.g. Orca) to read the label text
+      // character by character when navigating with arrow keys.
+      const inputAriaLabel = label ? undefined : props.label
+
       const inputNode = (
         <input
           ref={ input }
@@ -245,7 +251,7 @@ export const VSelectionControl = genericComponent<new <T>(
           onFocus={ onFocus }
           onInput={ onInput }
           aria-disabled={ !!props.disabled }
-          aria-label={ props.label }
+          aria-label={ inputAriaLabel }
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }

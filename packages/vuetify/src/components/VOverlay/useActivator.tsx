@@ -122,6 +122,22 @@ export function useActivator (
       }
       isActive.value = !isActive.value
     },
+    onClickHover: (e: MouseEvent) => {
+      e.stopPropagation()
+      nextTick(() => {
+        const el = e.currentTarget as HTMLElement
+        if (el && isActive.value) {
+          const rect = el.getBoundingClientRect()
+          if (
+            e.clientX < rect.left || e.clientX > rect.right ||
+            e.clientY < rect.top || e.clientY > rect.bottom
+          ) {
+            isHovered = false
+            runCloseDelay()
+          }
+        }
+      })
+    },
     onMouseenter: (e: MouseEvent) => {
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
@@ -171,6 +187,10 @@ export function useActivator (
       events.onMouseleave = availableEvents.onMouseleave
       if (props.target === 'cursor' && !openOnClick.value) {
         events.onMousemove = availableEvents.onMousemove
+      }
+      // Chromium doesn't fire mouseleave when element moves under cursor
+      if (!openOnClick.value) {
+        events.onClick = availableEvents.onClickHover
       }
     }
     if (openOnFocus.value) {
