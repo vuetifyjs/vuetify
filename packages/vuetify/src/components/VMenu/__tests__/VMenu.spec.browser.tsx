@@ -467,6 +467,59 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByTestId('l1')).toBeNull()
     })
 
+    it('does not query aria-owns once for every mounted overlay on mousedown', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VList>
+                <VListItem link>Item</VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      const fixtures: Element[] = []
+      for (let i = 0; i < 8; i++) {
+        const owner = document.createElement('button')
+        const overlay = document.createElement('div')
+        const content = document.createElement('div')
+
+        overlay.id = `stale-overlay-${i}`
+        overlay.className = 'v-overlay'
+        content.className = 'v-overlay__content'
+        owner.setAttribute('aria-owns', overlay.id)
+        overlay.append(content)
+        document.body.append(owner, overlay)
+        fixtures.push(owner, overlay)
+      }
+
+      const querySelector = vi.spyOn(document, 'querySelector')
+
+      try {
+        await userEvent.click(screen.getByTestId('opener'))
+        await expect.poll(() => screen.queryByText('Item')).toBeVisible()
+
+        const outside = screen.getByTestId('outside')
+        outside.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+        outside.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+        outside.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+
+        const ariaOwnsQueries = querySelector.mock.calls.filter(call => {
+          const selector = call[0]
+          return typeof selector === 'string' && selector.startsWith('[aria-owns~=')
+        })
+
+        expect(ariaOwnsQueries).toHaveLength(0)
+      } finally {
+        querySelector.mockRestore()
+        for (const fixture of fixtures) fixture.remove()
+      }
+    })
+
     it('should close the parent menu when clicking outside an autocomplete child', async () => {
       render(() => (
         <div>

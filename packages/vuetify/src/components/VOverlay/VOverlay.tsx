@@ -217,7 +217,21 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     let openedWithActivatorFocus = false
 
-    function ownsFocus (activeElement: Element | null): boolean {
+    function getAriaOwners (): Map<string, Element> {
+      const owners = new Map<string, Element>()
+
+      for (const el of document.querySelectorAll('[aria-owns]')) {
+        const ids = el.getAttribute('aria-owns')?.trim().split(/\s+/) ?? []
+
+        for (const id of ids) {
+          if (id) owners.set(id, el)
+        }
+      }
+
+      return owners
+    }
+
+    function ownsFocus (activeElement: Element | null, ariaOwners?: Map<string, Element>): boolean {
       let current = activeElement
       const visited = new Set<Element>()
       while (current) {
@@ -226,7 +240,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (el === contentEl.value) return true
         visited.add(el)
         const ownerId = el.closest('.v-overlay')?.id
-        current = ownerId ? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
+        current = ownerId ? ariaOwners?.get(ownerId) ?? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
       }
       return false
     }
@@ -410,11 +424,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     closeConditional,
                     include: () => {
                       if (!isActive.value) return []
+                      const ariaOwners = getAriaOwners()
+
                       return [
                         activatorEl.value,
                         // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
                         ...Array.from(document.querySelectorAll('.v-overlay__content'))
-                          .filter(ownsFocus) as HTMLElement[],
+                          .filter(el => ownsFocus(el, ariaOwners)) as HTMLElement[],
                       ]
                     },
                   }}
