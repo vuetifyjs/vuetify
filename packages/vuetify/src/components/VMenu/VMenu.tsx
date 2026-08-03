@@ -190,7 +190,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
           v-model={ isActive.value }
           absolute
           activatorProps={ activatorProps.value }
-          _disableLocalTop
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
