@@ -67,6 +67,12 @@ Pass pre-computed `[start, end]` index pairs to **matches** to skip the internal
 
 <ExamplesExample file="v-highlight/prop-matches" />
 
+#### Ignore accents (i18n)
+
+Set **ignore-accents** so a plain query still marks accented or other non-ASCII text. It is directional: `'target'` ignores accents in the text, `'query'` ignores them in the query, and `true` ignores them on both sides.
+
+<ExamplesExample file="v-highlight/prop-ignore-accents" />
+
 #### Mark class
 
 Use **mark-class** to customize the mark styling with CSS classes.
