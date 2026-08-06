@@ -26,6 +26,12 @@ The `v-app-bar` component is pivotal to any graphical user interface (GUI), as i
 
 <PageFeatures />
 
+::: warning
+
+Must be placed within a `v-app` component.
+
+:::
+
 ## Usage
 
 The `v-app-bar` component is used for application-wide actions and information.
