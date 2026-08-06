@@ -2,7 +2,7 @@
 import { VField } from '@/components/VField/VField'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed, createCommentVNode, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Shared
@@ -34,7 +34,7 @@ export const VOtpField = genericComponent()({
     )
 
     useRender(() => {
-      if (!slot.value) return (<></>)
+      if (!slot.value) return createCommentVNode()
 
       return (
         <VField
