@@ -1,0 +1,1 @@
+export { VConfirm } from './VConfirm'
