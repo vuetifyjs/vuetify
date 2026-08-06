@@ -33,12 +33,15 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, toRef, watch } from 'vue'
 import {
+  camelizeProps,
   checkPrintable,
   deepEqual,
   ensureValidVNode,
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
+  isFunction,
+  isNumber,
   matchesSelector,
   noop,
   omit,
@@ -150,8 +153,8 @@ export const VAutocomplete = genericComponent<new <
       }
     )
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : model.value.length
     })
     const form = useForm(props)
@@ -623,6 +626,7 @@ export const VAutocomplete = genericComponent<new <
 
                       <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
                         { ({ item, index, itemRef }) => {
+                          const camelizedProps = camelizeProps(item.props)
                           const itemProps = mergeProps(item.props, {
                             ref: itemRef,
                             key: item.value,
@@ -665,12 +669,12 @@ export const VAutocomplete = genericComponent<new <
                                     />
                                   ) : undefined }
 
-                                  { item.props.prependAvatar && (
-                                    <VAvatar image={ item.props.prependAvatar } />
+                                  { camelizedProps.prependAvatar && (
+                                    <VAvatar image={ camelizedProps.prependAvatar } />
                                   )}
 
-                                  { item.props.prependIcon && (
-                                    <VIcon icon={ item.props.prependIcon } />
+                                  { camelizedProps.prependIcon && (
+                                    <VIcon icon={ camelizedProps.prependIcon } />
                                   )}
                                 </>
                               ),

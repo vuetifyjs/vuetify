@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "4.1.6",
+  "version": "4.1.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -145,6 +145,9 @@
     "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
+  },
+  "dependencies": {
+    "@vuetify/v0": "^1.0.2"
   },
   "devDependencies": {
     "@date-io/core": "3.2.0",

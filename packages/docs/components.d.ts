@@ -145,7 +145,6 @@ declare module 'vue' {
     HomeTooling: typeof import('./src/components/home/Tooling.vue')['default']
     HomeVuetifyOne: typeof import('./src/components/home/VuetifyOne.vue')['default']
     IconsChevronDown: typeof import('./src/components/icons/ChevronDown.vue')['default']
-    IntroductionComparison: typeof import('./src/components/introduction/Comparison.vue')['default']
     IntroductionConsultingServices: typeof import('./src/components/introduction/ConsultingServices.vue')['default']
     IntroductionDirectSupport: typeof import('./src/components/introduction/DirectSupport.vue')['default']
     IntroductionDiscordDeck: typeof import('./src/components/introduction/DiscordDeck.vue')['default']

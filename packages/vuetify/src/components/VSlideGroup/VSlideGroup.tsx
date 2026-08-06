@@ -24,7 +24,7 @@ import {
   getScrollPosition,
   getScrollSize,
 } from './helpers'
-import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { focusableChildren, genericComponent, IN_BROWSER, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -73,7 +73,7 @@ export const makeVSlideGroupProps = propsFactory({
   showArrows: {
     type: [Boolean, String],
     validator: (v: any) => (
-      typeof v === 'boolean' || [
+      isBoolean(v) || [
         'always',
         'desktop',
         'mobile',

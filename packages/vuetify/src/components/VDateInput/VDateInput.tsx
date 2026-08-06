@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, isFunction, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -133,7 +133,7 @@ export const VDateInput = genericComponent<new <
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
     function format (date: unknown) {
-      if (typeof props.displayFormat === 'function') {
+      if (isFunction(props.displayFormat)) {
         return props.displayFormat(date)
       }
       if (props.displayFormat) {

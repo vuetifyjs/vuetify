@@ -14,7 +14,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { Fragment, mergeProps } from 'vue'
-import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, getPrefixedEventHandlers, isFunction, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component, PropType, TransitionProps } from 'vue'
@@ -180,7 +180,7 @@ export const VDataTableRows = genericComponent<new <T>(
                   getMatches: props.getMatches,
                 },
                 getPrefixedEventHandlers(attrs, ':row', () => slotProps),
-                typeof props.rowProps === 'function'
+                isFunction(props.rowProps)
                   ? props.rowProps({
                     item: slotProps.item,
                     index: slotProps.index,

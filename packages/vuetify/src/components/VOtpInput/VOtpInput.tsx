@@ -22,7 +22,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, isBoolean, pick, propsFactory, useRender } from '@/util'
 
 // Shared
 import { VOtpInputSymbol } from './shared'
@@ -409,7 +409,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             >
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate
                   size="24"
                   width="2"
