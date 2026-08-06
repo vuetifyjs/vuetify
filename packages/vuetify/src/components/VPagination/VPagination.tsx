@@ -24,7 +24,7 @@ import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef } from 'vue'
-import { createRange, genericComponent, keyValues, propsFactory, useRender } from '@/util'
+import { createRange, genericComponent, isString, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, PropType } from 'vue'
@@ -247,7 +247,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       return range.value.map((item, index) => {
         const ref = (e: any) => updateRef(e, index)
 
-        if (typeof item === 'string') {
+        if (isString(item)) {
           return {
             isActive: false,
             key: `ellipsis-${index}`,

@@ -5,7 +5,7 @@ import { VTooltip } from '@/components/VTooltip'
 import { useDirectiveComponent } from '@/composables/directiveComponent'
 
 // Utilities
-import { isObject } from '@/util'
+import { isBoolean, isObject } from '@/util'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -24,7 +24,7 @@ export const Tooltip = useDirectiveComponent<TooltipDirectiveBinding>(VTooltip, 
   return {
     activator: disabled ? null : 'parent',
     location: binding.arg?.replace('-', ' '),
-    text: typeof binding.value === 'boolean' ? undefined : binding.value,
+    text: isBoolean(binding.value) ? undefined : binding.value,
   }
 })
 

@@ -28,6 +28,9 @@ import {
   filterInputAttrs,
   genericComponent,
   getActiveElement,
+  isFunction,
+  isNumber,
+  isString,
   omit,
   propsFactory,
   useRender,
@@ -96,7 +99,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function'
+      return isFunction(props.counterValue)
         ? props.counterValue(model.value)
         : (model.value || '').toString().length
     })
@@ -105,8 +108,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
       if (
         !props.counter ||
-        (typeof props.counter !== 'number' &&
-        typeof props.counter !== 'string')
+        (!isNumber(props.counter) && !isString(props.counter))
       ) return undefined
 
       return props.counter

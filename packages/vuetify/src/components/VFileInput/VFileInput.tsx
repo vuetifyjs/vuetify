@@ -24,6 +24,8 @@ import {
   genericComponent,
   getActiveElement,
   humanReadableFileSize,
+  isBoolean,
+  isObject,
   omit,
   propsFactory,
   useRender,
@@ -62,7 +64,7 @@ export const makeVFileInputProps = propsFactory({
     default: false,
     validator: (v: boolean | number) => {
       return (
-        typeof v === 'boolean' ||
+        isBoolean(v) ||
         [1000, 1024].includes(Number(v))
       )
     },
@@ -77,9 +79,7 @@ export const makeVFileInputProps = propsFactory({
   modelValue: {
     type: [Array, Object] as PropType<File[] | File | null>,
     default: (props: any) => props.multiple ? [] : null,
-    validator: (val: any) => {
-      return wrapInArray(val).every(v => v != null && typeof v === 'object')
-    },
+    validator: (val: any) => wrapInArray(val).every(isObject),
   },
 
   ...makeFileFilterProps(),
@@ -112,7 +112,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
     )
     const { isFocused, focus, blur } = useFocus(props)
-    const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
+    const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
 

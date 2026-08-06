@@ -1,6 +1,6 @@
 // Utilities
 import { h, mergeProps, render, resolveComponent } from 'vue'
-import { consoleError, isObject } from '@/util'
+import { consoleError, isFunction, isObject, isString } from '@/util'
 
 // Types
 import type {
@@ -48,7 +48,7 @@ export function useDirectiveComponent (
   component: string | Component,
   props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)
 ): ObjectDirective | CustomDirective {
-  const concreteComponent = (typeof component === 'string'
+  const concreteComponent = (isString(component)
     ? resolveComponent(component)
     : component) as ConcreteComponent
 
@@ -65,9 +65,9 @@ export function useDirectiveComponent (
 
 function mountComponent (component: ConcreteComponent, props?: Record<string, any> | ((binding: DirectiveBinding) => Record<string, any>)) {
   return function (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) {
-    const _props = typeof props === 'function' ? props(binding) : props
+    const _props = isFunction(props) ? props(binding) : props
     const text = isObject(binding.value) ? binding.value.text
-      : typeof binding.value === 'string' ? binding.value
+      : isString(binding.value) ? binding.value
       : _props?.text
     const value = isObject(binding.value) ? binding.value : {}
 

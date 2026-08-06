@@ -10,7 +10,7 @@ import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { clamp, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, isFunction, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -65,7 +65,7 @@ export const makeVProgressProps = propsFactory({
 }, 'VProgress')
 
 function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
-  if (typeof format === 'function') return format({ value, max, percent })
+  if (isFunction(format)) return format({ value, max, percent })
   return format
     .replaceAll('[value]', String(value))
     .replaceAll('[max]', String(max))

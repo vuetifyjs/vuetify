@@ -1,6 +1,9 @@
 // Composables
 import { VuetifyDateAdapter } from '@/composables/date/adapters/vuetify'
 
+// Utilities
+import { isFunction } from '@/util'
+
 // Types
 import type { DateAdapter } from '@/composables/date'
 
@@ -16,7 +19,7 @@ export class StringDateAdapter implements DateAdapter<string> {
         Object.entries(options.formats).map(([k, v]) => {
           return [
             k,
-            typeof v === 'function'
+            isFunction(v)
               ? (date, ...args) => v(this.base.toISO(date), ...args)
               : v,
           ]

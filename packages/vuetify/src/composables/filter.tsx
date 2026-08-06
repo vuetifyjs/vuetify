@@ -3,7 +3,18 @@
 
 // Utilities
 import { computed, shallowRef, unref, watchEffect } from 'vue'
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import {
+  getPropertyFromItem,
+  isBoolean,
+  isFunction,
+  isNullOrUndefined,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -46,7 +57,7 @@ type FilterResult = {
 
 // Composables
 export const defaultFilter: FilterFunction = (value, query, item) => {
-  if (value == null || query == null) return -1
+  if (isNullOrUndefined(value) || isNullOrUndefined(query)) return -1
   if (!query.length) return 0
 
   value = value.toString().toLocaleLowerCase()
@@ -64,8 +75,8 @@ export const defaultFilter: FilterFunction = (value, query, item) => {
 }
 
 function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMultiple | undefined {
-  if (match == null || typeof match === 'boolean' || match === -1) return
-  if (typeof match === 'number') return [[match, match + query.length]]
+  if (isNullOrUndefined(match) || isBoolean(match) || match === -1) return
+  if (isNumber(match)) return [[match, match + query.length]]
   if (Array.isArray(match[0])) return match as FilterMatchArrayMultiple
   return [match] as FilterMatchArrayMultiple
 }
@@ -113,7 +124,7 @@ export function filterItems (
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       let hasOnlyCustomFilters = false
 
-      if (typeof item === 'object') {
+      if (isObject(item)) {
         if (item.type === 'divider' || item.type === 'subheader') {
           if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
             // clear unless, divider appears before subheader
@@ -198,10 +209,10 @@ export function useFilter <T extends InternalItem> (
   ))
 
   watchEffect(() => {
-    const _query = typeof query === 'function' ? query() : unref(query)
+    const _query = isFunction(query) ? query() : unref(query)
     const strQuery = (
-      typeof _query !== 'string' &&
-      typeof _query !== 'number'
+      !isString(_query) &&
+      !isNumber(_query)
     ) ? '' : String(_query)
 
     const results = filterItems(
@@ -226,7 +237,7 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      if (item.value !== undefined) {
+      if (!isUndefined(item.value)) {
         _filteredMatches.set(item.value, matches)
       }
     })

@@ -1,5 +1,8 @@
 import { isLeapYear } from './dateTimeUtils'
 
+// Utilities
+import { isNumber, isObject, isString } from '@/util'
+
 // Types
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
 
@@ -79,16 +82,16 @@ export function validateNumber (input: any): boolean {
 }
 
 export function validateTime (input: any): input is VTime {
-  return (typeof input === 'number' && isFinite(input)) ||
+  return (isNumber(input) && isFinite(input)) ||
     (!!PARSE_TIME.exec(input)) ||
-    (typeof input === 'object' && isFinite(input.hour) && isFinite(input.minute))
+    (isObject(input) && isFinite(input.hour) && isFinite(input.minute))
 }
 
 export function parseTime (input: any): number | false {
-  if (typeof input === 'number') {
+  if (isNumber(input)) {
     // when a number is given, it's minutes since 12:00am
     return input
-  } else if (typeof input === 'string') {
+  } else if (isString(input)) {
     // when a string is given, it's a hh:mm:ss format where seconds are optional
     const parts = PARSE_TIME.exec(input)
     if (!parts) {
@@ -96,9 +99,9 @@ export function parseTime (input: any): number | false {
     }
 
     return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
-  } else if (typeof input === 'object') {
+  } else if (isObject(input)) {
     // when an object is given, it must have hour and minute
-    if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
+    if (!isNumber(input.hour) || !isNumber(input.minute)) {
       return false
     }
 
@@ -110,15 +113,15 @@ export function parseTime (input: any): number | false {
 }
 
 export function validateTimestamp (input: any): input is VTimestampInput {
-  return (typeof input === 'number' && isFinite(input)) ||
-    (typeof input === 'string' && !!PARSE_REGEX.exec(input)) ||
+  return (isNumber(input) && isFinite(input)) ||
+    (isString(input) && !!PARSE_REGEX.exec(input)) ||
     (input instanceof Date)
 }
 
 export function parseTimestamp (input: VTimestampInput | null, required?: false, now?: CalendarTimestamp | null): CalendarTimestamp | null
 export function parseTimestamp (input: VTimestampInput, required: true, now?: CalendarTimestamp): CalendarTimestamp
 export function parseTimestamp (input: VTimestampInput | null, required = false, now?: CalendarTimestamp | null): CalendarTimestamp | null {
-  if (typeof input === 'number' && isFinite(input)) {
+  if (isNumber(input) && isFinite(input)) {
     input = new Date(input)
   }
 
@@ -132,7 +135,7 @@ export function parseTimestamp (input: VTimestampInput | null, required = false,
     return date
   }
 
-  if (typeof input !== 'string') {
+  if (!isString(input)) {
     if (required) {
       throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
     }
@@ -225,7 +228,7 @@ export function updateRelative (timestamp: CalendarTimestamp, now: CalendarTimes
 }
 
 export function isTimedless (input: VTimestampInput): input is (Date | number) {
-  return (input instanceof Date) || (typeof input === 'number' && isFinite(input))
+  return (input instanceof Date) || (isNumber(input) && isFinite(input))
 }
 
 export function updateHasTime (timestamp: CalendarTimestamp, hasTime: boolean, now?: CalendarTimestamp): CalendarTimestamp {
@@ -496,7 +499,7 @@ export function createNativeLocaleFormatter (locale: string, getOptions: Calenda
 }
 
 export function validateWeekdays (input: string | (number | string)[]): boolean {
-  if (typeof input === 'string') {
+  if (isString(input)) {
     input = input.split(',')
   }
 

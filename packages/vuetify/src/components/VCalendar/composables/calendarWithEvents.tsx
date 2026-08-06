@@ -19,7 +19,7 @@ import {
   parseEvent,
 } from '../util/events'
 import { diffMinutes, getDayIdentifier } from '../util/timestamp'
-import { getPrefixedEventHandlers, propsFactory } from '@/util'
+import { getPrefixedEventHandlers, isFunction, isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -114,7 +114,7 @@ export const makeCalendarWithEventsProps = propsFactory({
   eventOverlapMode: {
     type: [String, Function] as PropType<'stack' | 'column' | CalendarEventOverlapMode>,
     default: 'stack',
-    validate: (mode: any) => mode in CalendarEventOverlapModes || typeof mode === 'function',
+    validate: (mode: any) => mode in CalendarEventOverlapModes || isFunction(mode),
   },
   eventMore: {
     type: Boolean,
@@ -165,13 +165,13 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   })
 
   const eventTimedFunction = computed((): CalendarEventTimedFunction => {
-    return typeof props.eventTimed === 'function'
+    return isFunction(props.eventTimed)
       ? props.eventTimed
       : event => !!event[props.eventTimed as string]
   })
 
   const eventCategoryFunction = computed((): CalendarEventCategoryFunction => {
-    return typeof props.eventCategory === 'function'
+    return isFunction(props.eventCategory)
       ? props.eventCategory
       : event => event[props.eventCategory as string]
   })
@@ -193,19 +193,19 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   })
 
   const eventTextColorFunction = computed((): CalendarEventColorFunction => {
-    return typeof props.eventTextColor === 'function'
+    return isFunction(props.eventTextColor)
       ? props.eventTextColor
       : () => props.eventTextColor as string
   })
 
   const eventNameFunction = computed((): CalendarEventNameFunction => {
-    return typeof props.eventName === 'function'
+    return isFunction(props.eventName)
       ? props.eventName
       : (event, timedEvent) => event.input[props.eventName as string] as string || ''
   })
 
   const eventModeFunction = computed((): CalendarEventOverlapMode => {
-    return typeof props.eventOverlapMode === 'function'
+    return isFunction(props.eventOverlapMode)
       ? props.eventOverlapMode
       : CalendarEventOverlapModes[props.eventOverlapMode as keyof typeof CalendarEventOverlapModes]
   })
@@ -215,7 +215,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
   })
 
   function eventColorFunction (e: CalendarEvent): string | undefined {
-    return typeof props.eventColor === 'function'
+    return isFunction(props.eventColor)
       ? props.eventColor(e)
       : e.color || props.eventColor
   }
@@ -504,10 +504,10 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
 
   function isEventForCategory (event: CalendarEventParsed, category: CalendarCategory): boolean {
     return !categoryMode.value ||
-      (typeof category === 'object' && category.categoryName &&
+      (isObject(category) && category.categoryName &&
       category.categoryName === event.category) ||
-      (typeof event.category === 'string' && category === event.category) ||
-      (typeof event.category !== 'string' && category === null)
+      (isString(event.category) && category === event.category) ||
+      (!isString(event.category) && category === null)
   }
 
   function getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
