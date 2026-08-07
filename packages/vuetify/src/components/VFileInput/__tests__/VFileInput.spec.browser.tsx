@@ -89,22 +89,25 @@ describe('VFileInput', () => {
     })
 
     const fileInput = screen.getByCSS('input[type="file"]')
-    const placeholderInput = screen.getByCSS('input[type="text"]')
-    await expect.element(placeholderInput).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(placeholderInput).toHaveAttribute('inert')
+    const placeholderInput = () => screen.queryByCSS('input[type="text"]')
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(placeholderInput()).toHaveAttribute('inert')
 
     await rerender({ label: 'Label' })
-    await expect.element(placeholderInput).not.toHaveAttribute('placeholder')
+    await expect.poll(placeholderInput).toBeNull()
     fileInput.focus()
-    await expect.element(placeholderInput).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.poll(placeholderInput).not.toBeNull()
     fileInput.blur()
-    await expect.element(placeholderInput).not.toHaveAttribute('placeholder')
+    await expect.poll(placeholderInput).toBeNull()
 
     await rerender({ persistentPlaceholder: true })
-    await expect.element(placeholderInput).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
 
-    await rerender({ modelValue: oneMBFile })
-    expect(screen.queryByCSS('input[type="text"]')).toBeNull()
+    await rerender({ hideInput: true })
+    await expect.poll(placeholderInput).toBeNull()
+
+    await rerender({ hideInput: false, modelValue: oneMBFile })
+    await expect.poll(placeholderInput).toBeNull()
   })
 
   it('should clear input', async () => {

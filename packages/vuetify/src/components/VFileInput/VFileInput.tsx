@@ -140,11 +140,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       props.active
     ))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
-    const placeholder = computed(() => (
-      model.value?.length ||
-      (!isFocused.value && props.label && !props.persistentPlaceholder)
-        ? undefined
-        : props.placeholder
+    const hasPlaceholder = toRef(() => (
+      !!props.placeholder &&
+      !props.hideInput &&
+      !model.value?.length &&
+      (isFocused.value || props.persistentPlaceholder || !props.label)
     ))
     const isDragging = shallowRef(false)
     const { handleDrop, hasFilesOrFolders } = useFileDrop()
@@ -351,12 +351,12 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         { ...inputAttrs }
                       />
 
-                      { !model.value?.length && props.placeholder && !props.hideInput
+                      { hasPlaceholder.value
                         ? (
                           <input
                             class={ fieldClass }
                             inert
-                            placeholder={ placeholder.value }
+                            placeholder={ props.placeholder }
                             readonly
                             type="text"
                           />
