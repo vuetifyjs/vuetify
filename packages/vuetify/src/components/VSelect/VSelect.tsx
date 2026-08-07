@@ -20,6 +20,7 @@ import { VHighlight } from '@/labs/VHighlight'
 // Composables
 import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
+import { useSelectionMenu } from './useSelectionMenu'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
@@ -206,15 +207,7 @@ export const VSelect = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
-    const _menu = useProxiedModel(props, 'menu')
-    const menu = computed({
-      get: () => _menu.value,
-      set: v => {
-        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren.size) return
-        if (v && menuDisabled.value) return
-        _menu.value = v
-      },
-    })
+    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled })
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
@@ -398,9 +391,7 @@ export const VSelect = genericComponent<new <
           model.value = []
         }
 
-        nextTick(() => {
-          menu.value = false
-        })
+        nextTick(() => closeOnSelect())
       }
     }
     function onBlur (e: FocusEvent) {
