@@ -357,6 +357,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                             inert
                             placeholder={ props.placeholder }
                             readonly
+                            form=""
                             type="text"
                           />
                         )
