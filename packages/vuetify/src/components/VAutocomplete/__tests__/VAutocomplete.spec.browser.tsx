@@ -813,6 +813,18 @@ describe('VAutocomplete', () => {
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
+  it('should close menu on control click with toggle-on-click', async () => {
+    const { element } = render(() => (
+      <VAutocomplete items={['foo', 'bar']} toggleOnClick />
+    ))
+
+    await userEvent.click(element)
+    await screen.findByRole('listbox')
+
+    await userEvent.click(element)
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+  })
+
   describe('auto-select-first', () => {
     async function setup () {
       const selectedItems = ref()
