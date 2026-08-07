@@ -146,7 +146,7 @@ Place the `<style>` block after Vuetify's stylesheet so the layer order declared
 
 ### Layers
 
-Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer) are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
 
 If you were already using `$layers: true` in Vuetify 3, there are now five top-level layers instead of one.
 
@@ -170,16 +170,36 @@ The layer order `@layer` statement must be imported **before any layered CSS is 
 Import your layer order statement at the very top of your app entrypoint:
 
 ```js { resource="src/main.ts" }
-import './styles/layers.scss'  // @layer declaration comes first
+// @layer declaration comes first
+import './styles/layers.css'
 import 'vuetify/styles'
 import { createApp } from 'vue'
 ```
 
-```scss { resource="src/styles/layers.scss" }
-@layer vuetify-core, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, vuetify-final;
+If you intend to migrate large application, it is recommended to define and adopt your own layers, so that developers can drop `!important` and gain more control over the stylesheets.
+
+```css { resource="src/styles/layers.css" }
+@layer vuetify-core;
+@layer vuetify-components;
+@layer vuetify-overrides;
+
+@layer my-app-base;
+@layer my-app-components;
+
+@layer vuetify-utilities;
+
+@layer my-app-utilities;
+
+@layer vuetify-final;
 ```
 
-If this import is missing or appears after Vuetify styles, reset styles or earlier-declared layers may unexpectedly override component styles. Symptoms vary per app depending on build output order, making it difficult to diagnose.
+::: warning
+
+If this import is missing or appears after Vuetify styles, reset styles or earlier-declared layers may unexpectedly override component styles. Symptoms vary per app depending on build output order, making it difficult to diagnose. This is often caused by Vite v8.x and/or `vue-router` v5.x.
+
+**Note**: using `@vuetify/cli` with `init` command to generate a working project for comparison is usually the fastest way to effectively troubleshoot the problems.
+
+:::
 
 ### Typography {codemod-available}
 
