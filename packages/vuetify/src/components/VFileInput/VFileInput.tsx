@@ -142,7 +142,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     const hasPlaceholder = toRef(() => (
       !!props.placeholder &&
-      !props.hideInput &&
       !model.value?.length &&
       (isFocused.value || props.persistentPlaceholder || !props.label)
     ))

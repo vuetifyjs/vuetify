@@ -103,10 +103,7 @@ describe('VFileInput', () => {
     await rerender({ persistentPlaceholder: true })
     await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
 
-    await rerender({ hideInput: true })
-    await expect.poll(placeholderInput).toBeNull()
-
-    await rerender({ hideInput: false, modelValue: oneMBFile })
+    await rerender({ modelValue: oneMBFile })
     await expect.poll(placeholderInput).toBeNull()
   })
 
