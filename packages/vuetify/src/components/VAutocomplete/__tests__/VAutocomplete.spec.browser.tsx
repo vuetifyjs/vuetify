@@ -1018,6 +1018,57 @@ describe('VAutocomplete', () => {
       await userEvent.keyboard('{ArrowUp}')
       expect(document.activeElement?.textContent?.trim()).toBe('100')
     })
+
+    it('should reset list window when filtering after open with selection', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 102 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('103')
+
+      // backspace selection text "102" → "10"
+      await userEvent.keyboard('{Backspace}')
+      await waitIdle()
+
+      await expect.poll(() => screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .toContain('10')
+      const opts = screen.getAllByRole('option').map(el => el.textContent?.trim())
+      expect(opts[0]).toBe('10')
+      expect(opts).not.toContain('110') // stale mid-window artifact
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('10')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('910')
+    })
+
+    it('should wrap when filtering after open with selection', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+
+      // backspace selection text "100" → "10"
+      await userEvent.keyboard('{Backspace}')
+      await waitIdle()
+
+      await expect.poll(() => screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .toContain('10')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('910')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('10')
+    })
   })
 
   showcase({ stories })

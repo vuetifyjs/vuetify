@@ -1174,6 +1174,114 @@ describe('VSelect', () => {
 
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
     })
+
+    it('should wrap ArrowUp from first item to last of the full list', async () => {
+      const states = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+        'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+        'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+        'West Virginia', 'Wisconsin', 'Wyoming',
+      ]
+
+      render(() => (
+        <VSelect items={ states } />
+      ))
+
+      await userEvent.tab()
+      // empty + ArrowDown → first
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Alabama')
+
+      // ArrowUp from first of full list → last of full list (not last of window)
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Wyoming')
+      expect(screen.getAllByRole('option').map(el => el.textContent)).toContain('Wyoming')
+    })
+
+    it('should open with ArrowUp onto the last item when empty', async () => {
+      const states = Array.from({ length: 50 }, (_, i) => `State ${i}`)
+
+      render(() => (
+        <VSelect items={ states } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('State 49')
+    })
+
+    it('should wrap and Home/End across subheaders', async () => {
+      const items = [
+        { type: 'subheader', title: 'Group 1' },
+        { title: 'Item 1.1', value: 11 },
+        { title: 'Item 1.2', value: 12 },
+        { type: 'divider' },
+        { type: 'subheader', title: 'Group 2' },
+        ...Array.from({ length: 30 }, (_, i) => ({ title: `Item 2.${i + 1}`, value: 20 + i })),
+      ]
+
+      render(() => (
+        <VSelect items={ items } itemTitle="title" itemValue="value" />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      // first focusable option (skip leading subheader)
+      await expect.poll(() => screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .toContain('Item 1.1')
+      await userEvent.keyboard('{Home}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 1.1')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 2.30')
+
+      await userEvent.keyboard('{Home}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 1.1')
+
+      await userEvent.keyboard('{End}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 2.30')
+    })
+
+    // typeahead must scroll + focus the matched item, not DOM child [index]
+    it('should sync list focus with typeahead selection while menu is open', async () => {
+      const states = [
+        'Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California',
+        'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+        'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+        'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
+        'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+        'West Virginia', 'Wisconsin', 'Wyoming',
+      ]
+
+      render(() => (
+        <VSelect items={ states } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('t')
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      await userEvent.keyboard('a')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Alabama')
+
+      await userEvent.keyboard('m')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('American Samoa')
+    })
   })
 
   it('should close its menu when clicking another field inside a dialog', async () => {
