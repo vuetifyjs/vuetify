@@ -50,6 +50,10 @@ export const makeVInputProps = propsFactory({
   glow: Boolean,
   iconColor: [Boolean, String],
   prependIcon: IconValue,
+  detailsActive: {
+    type: Boolean,
+    default: null,
+  },
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hideSpinButtons: Boolean,
   hint: String,
@@ -145,7 +149,7 @@ export const VInput = genericComponent<new <T>(
 
     const hasDetails = toRef(() => !props.hideDetails || (
       props.hideDetails === 'auto' &&
-      (hasMessages.value || !!slots.details)
+      (hasMessages.value || (props.detailsActive ?? !!slots.details))
     ))
 
     const messagesId = computed(() => hasDetails.value ? `${id.value}-messages` : undefined)
@@ -240,10 +244,13 @@ export const VInput = genericComponent<new <T>(
             </div>
           )}
 
-          { hasDetails.value && (
+          { props.hideDetails !== true && (
             <div
               id={ messagesId.value }
-              class="v-input__details"
+              class={[
+                'v-input__details',
+                { 'v-input__details--hidden': !hasDetails.value },
+              ]}
               role="alert"
               aria-live="polite"
             >

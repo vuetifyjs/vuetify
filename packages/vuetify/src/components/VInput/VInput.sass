@@ -57,6 +57,25 @@
     padding-top: $input-details-padding-above
     overflow: hidden
     justify-content: space-between
+    interpolate-size: allow-keywords
+    transition: height $input-details-transition, min-height $input-details-transition, padding-top $input-details-transition, opacity $input-details-transition, display $input-details-transition allow-discrete
+
+    @media (prefers-reduced-motion: reduce)
+      transition-duration: 0s
+
+    @starting-style
+      &:not(.v-input__details--hidden)
+        height: 0
+        min-height: 0
+        padding-top: 0
+        opacity: 0
+
+    &--hidden
+      display: none
+      height: 0
+      min-height: 0
+      padding-top: 0
+      opacity: 0
 
   .v-input__details,
   .v-input__prepend,

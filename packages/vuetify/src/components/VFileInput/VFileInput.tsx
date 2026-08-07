@@ -249,10 +249,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.hideDetails === false || model.value?.length))
-      )
+      const counterActive = !!model.value?.length
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -287,6 +286,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -392,7 +392,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     <span />
 
                     <VCounter
-                      active={ !!model.value?.length }
+                      active={ counterActive }
                       value={ counterValue.value }
                       disabled={ props.disabled }
                       v-slots:default={ slots.counter }

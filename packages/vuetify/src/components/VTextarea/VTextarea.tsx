@@ -254,10 +254,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.persistentCounter || props.hideDetails === false || isFocused.value))
-      )
+      const counterActive = props.persistentCounter || isFocused.value
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -293,6 +292,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -393,7 +393,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                     <span />
 
                     <VCounter
-                      active={ props.persistentCounter || isFocused.value }
+                      active={ counterActive }
                       value={ counterValue.value }
                       max={ max.value }
                       disabled={ props.disabled }
