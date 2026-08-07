@@ -384,6 +384,20 @@ describe('VCombobox', () => {
         id: 'item2',
       }])
     })
+
+    it('should show placeholder if initial value is empty string', () => {
+      const emptyString = ref('')
+
+      const { getByPlaceholderText } = render(() => (
+        <VCombobox
+          v-model={ emptyString.value }
+          items={['a', 'b', 'c']}
+          placeholder="select something"
+        />
+      ))
+
+      expect(getByPlaceholderText('select something')).toBeVisible()
+    })
   })
 
   describe('readonly', () => {
