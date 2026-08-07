@@ -578,5 +578,61 @@ describe('VMenu', () => {
       expect(screen.queryByTestId('l1-1')).toBeVisible()
       expect(screen.queryByTestId('l3-1')).toBeNull()
     })
+
+    // A non-menu overlay child (tooltip, plain overlay) doesn't participate in the
+    // menu close cascade, so an outside click used to leave the menu open.
+    it('should close the menu on outside click while a tooltip child is open', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VSheet class="pa-4" data-testid="menu-content">
+                <VBtn data-testid="tip-btn">
+                  Tip
+                  <VTooltip activator="parent" openOnHover={ false } openOnClick>Tooltip</VTooltip>
+                </VBtn>
+                <VBtn data-testid="other">Other</VBtn>
+              </VSheet>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('tip-btn'))
+      await expect.poll(() => screen.queryByText('Tooltip')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should keep the menu open when clicking inside it while a tooltip child is open', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-4" data-testid="menu-content">
+              <VBtn data-testid="tip-btn">
+                Tip
+                <VTooltip activator="parent" openOnHover={ false } openOnClick>Tooltip</VTooltip>
+              </VBtn>
+              <VBtn data-testid="other">Other</VBtn>
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('tip-btn'))
+      await expect.poll(() => screen.queryByText('Tooltip')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('other'))
+      await wait(300)
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
   })
 })
