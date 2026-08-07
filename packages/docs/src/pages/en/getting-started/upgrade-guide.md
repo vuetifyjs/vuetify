@@ -146,7 +146,7 @@ Place the `<style>` block after Vuetify's stylesheet so the layer order declared
 
 ### Layers
 
-Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer) are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
 
 If you were already using `$layers: true` in Vuetify 3, there are now five top-level layers instead of one.
 
@@ -155,13 +155,45 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 + @layer base, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final, overrides;
 ```
 
-This can be used to easily interleave your own layers with ours:
+If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-```css
-@layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
+#### Layer order declaration must come first
+
+The layer order `@layer` statement must be imported **before any layered CSS is parsed** — including Vuetify's own styles. The browser assigns layer priority the first time a layer name appears, so if Vuetify's styles load first, the browser will establish the order from those, not from your declaration.
+
+Import your layer order statement at the very top of your app entrypoint:
+
+```js { resource="src/main.ts" }
+// @layer declaration comes first
+import './styles/layers.css'
+import 'vuetify/styles'
+import { createApp } from 'vue'
 ```
 
-If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
+If you intend to migrate large application, it is recommended to define and adopt your own layers, so that developers can drop `!important` and gain more control over the stylesheets.
+
+```css { resource="src/styles/layers.css" }
+@layer vuetify-core;
+@layer vuetify-components;
+@layer vuetify-overrides;
+
+@layer my-app-base;
+@layer my-app-components;
+
+@layer vuetify-utilities;
+
+@layer my-app-utilities;
+
+@layer vuetify-final;
+```
+
+::: warning
+
+If this import is missing or appears after Vuetify styles, reset styles or earlier-declared layers may unexpectedly override component styles. Symptoms vary per app depending on build output order, making it difficult to diagnose. This is often caused by Vite v8.x and/or `vue-router` v5.x.
+
+**Note**: using `@vuetify/cli` with `init` command to generate a working project for comparison is usually the fastest way to effectively troubleshoot the problems.
+
+:::
 
 ### Typography {codemod-available}
 
@@ -607,6 +639,40 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
 #### Restoring the legacy grid behavior
 
 If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
+## Tooling
+
+### Vite: overlay z-index in dev mode
+
+Vuetify 4 calculates overlay z-index through a shared `useStack` singleton — when a dialog opens at 2400, any overlay rendered inside it (a select menu, a tooltip, etc.) automatically stacks at 2410. This works correctly in production, but can silently break in Vite dev mode.
+
+**Symptom:** Menus, selects, or other overlays opened inside a dialog appear behind it — they render, but are invisible because they sit at the default z-index (2000) instead of stacking above the dialog.
+
+**Root cause:** Vite's dependency pre-bundler can serve some Vuetify modules from its optimized cache and others from raw ESM. When this split happens, two separate `useStack` instances are created. Each overlay registers with its own instance, so they never see each other's stack — and auto-stacking stops working.
+
+**Fix:** Force Vite to pre-bundle Vuetify's overlay-related modules consistently, then clear the cache:
+
+```ts { resource="vite.config.ts" }
+export default defineConfig({
+  optimizeDeps: {
+    include: [
+      'vuetify/components/VOverlay',
+      'vuetify/components/VDialog',
+      'vuetify/components/VMenu',
+      'vuetify/components/VSelect',
+      'vuetify/components/VTooltip',
+    ],
+  },
+})
+```
+
+After updating the config, delete the `.vite` cache directory and restart the dev server:
+
+```bash
+rm -rf node_modules/.vite
+```
+
+This issue only manifests in dev mode. Production builds are not affected because Vite bundles everything into a single module graph.
 
 ## Defaults
 

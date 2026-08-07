@@ -411,15 +411,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     lines.push('@layer theme-base {\n')
 
-    if (current.value?.dark) {
-      createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
-    }
+    createCssClass(lines, ':root', [`color-scheme: ${current.value?.dark ? 'dark' : 'light'}`], parsedOptions.scope)
 
     createCssClass(lines, ':root', genCssVariables(current.value, parsedOptions.prefix), parsedOptions.scope)
 
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
       createCssClass(lines, `.${parsedOptions.prefix}theme--${themeName}`, [
-        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'light'}`,
         ...genCssVariables(theme, parsedOptions.prefix),
       ], parsedOptions.scope)
     }
