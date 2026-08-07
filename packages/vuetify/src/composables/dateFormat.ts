@@ -128,6 +128,62 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     return !!parseDate(text)
   }
 
+  function maskDate (input: string, multiple: boolean | 'range' | number | string = false) {
+    const { order, separator } = currentFormat.value
+    // only separators end a section, and a trailing one closes the date
+    const text = input.trimStart().replace(/[^\d/.\- ]/g, '')
+    const isRange = multiple === 'range'
+    const join = isRange ? ' - ' : ', '
+    const limit = isRange ? 2 : multiple ? Infinity : 1
+    let result = ''
+    let index = 0
+
+    // whether the last section was ended by a typed separator
+    function maskSections () {
+      let closed = false
+
+      for (const sign of order) {
+        const size = sign === 'y' ? 4 : 2
+        let digits = ''
+
+        while (index < text.length && digits.length < size && /\d/.test(text[index])) {
+          digits += text[index++]
+        }
+
+        if (!digits) return false
+
+        const separatorStart = index
+        while (index < text.length && !/\d/.test(text[index])) index++
+        const hasSeparator = index > separatorStart
+        closed = hasSeparator
+
+        // 03 is the only way to read a day starting with 4, same for a month starting with 2
+        const overflows = digits.length === 1 && Number(digits) > (sign === 'm' ? 1 : 3)
+
+        // a typed separator ends the section early, 2-digit years are expanded by autoFixYear
+        if (sign !== 'y' && (hasSeparator || overflows)) digits = digits.padStart(size, '0')
+
+        result += digits
+
+        if (digits.length < size && !hasSeparator) return false
+        if (sign !== order.at(-1)) result += separator
+      }
+
+      return closed
+    }
+
+    for (let date = 0; date < limit; date++) {
+      const start = index
+      const closed = maskSections()
+
+      // the next date waits for the end of the previous one
+      if (index === start || (!closed && index >= text.length)) break
+      if (date + 1 < limit) result += join
+    }
+
+    return result
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('T')[0].split('-')
 
@@ -138,6 +194,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   return {
     isValid,
+    maskDate,
     parseDate,
     formatDate,
     parserFormat: toRef(() => currentFormat.value.format),
