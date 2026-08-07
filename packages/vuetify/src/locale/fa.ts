@@ -50,6 +50,8 @@ export default {
       nextYear: 'سال بعد',
       selectYear: 'انتخاب سال',
       currentMonth: 'ماه جاری، {0}',
+      scrollMonthPrev: 'پیمایش به ماه قبل',
+      scrollMonthNext: 'پیمایش به ماه بعد',
     },
   },
   datePicker: {

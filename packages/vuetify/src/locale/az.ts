@@ -50,6 +50,8 @@ export default {
       nextYear: 'Növbəti il',
       selectYear: 'İli seçin',
       currentMonth: 'Cari ay, {0}',
+      scrollMonthPrev: 'Əvvəlki aya sürüşdürün',
+      scrollMonthNext: 'Növbəti aya sürüşdürün',
     },
   },
   datePicker: {

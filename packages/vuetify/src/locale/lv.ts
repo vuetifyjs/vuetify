@@ -50,6 +50,8 @@ export default {
       nextYear: 'Nākamais gads',
       selectYear: 'Izvēlieties gadu',
       currentMonth: 'Šis mēnesis, {0}',
+      scrollMonthPrev: 'Ritiniet uz iepriekšējo mēnesi',
+      scrollMonthNext: 'Ritiniet uz nākamo mēnesi',
     },
   },
   datePicker: {

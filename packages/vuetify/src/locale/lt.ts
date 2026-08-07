@@ -50,6 +50,8 @@ export default {
       nextYear: 'Kiti metai',
       selectYear: 'Pasirinkite metus',
       currentMonth: 'Šis mėnuo, {0}',
+      scrollMonthPrev: 'Slinkite į ankstesnį mėnesį',
+      scrollMonthNext: 'Slinkite į kitą mėnesį',
     },
   },
   datePicker: {
