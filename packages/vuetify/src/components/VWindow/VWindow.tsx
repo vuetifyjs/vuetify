@@ -239,18 +239,47 @@ export const VWindow = genericComponent<new <T>(
       return arrows
     })
 
+    const touchScrollableParent = shallowRef<HTMLElement | null>(null)
+    const touchScrollLeft = shallowRef(0)
+    const touchScrollTop = shallowRef(0)
+
     const touchOptions = computed(() => {
       if (props.touch === false) return props.touch
 
       const options: TouchHandlers = {
         left: () => {
+          // Skip window navigation if a scrollable child was scrolled horizontally
+          if (touchScrollableParent.value && props.direction === 'horizontal') {
+            const delta = Math.abs(touchScrollableParent.value.scrollLeft - touchScrollLeft.value)
+            if (delta > 0) return
+          }
           isRtlReverse.value ? prev() : next()
         },
         right: () => {
+          // Skip window navigation if a scrollable child was scrolled horizontally
+          if (touchScrollableParent.value && props.direction === 'horizontal') {
+            const delta = Math.abs(touchScrollableParent.value.scrollLeft - touchScrollLeft.value)
+            if (delta > 0) return
+          }
           isRtlReverse.value ? next() : prev()
         },
         start: ({ originalEvent }) => {
           originalEvent.stopPropagation()
+
+          // Check if the touch target is inside a scrollable child element
+          if (IN_BROWSER) {
+            const target = originalEvent.target as HTMLElement | null
+            if (target) {
+              const scrollable = getScrollParent(target, false)
+              if (scrollable && scrollable !== document.scrollingElement) {
+                touchScrollableParent.value = scrollable
+                touchScrollLeft.value = scrollable.scrollLeft
+                touchScrollTop.value = scrollable.scrollTop
+              } else {
+                touchScrollableParent.value = null
+              }
+            }
+          }
         },
       }
 
