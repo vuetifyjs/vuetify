@@ -8,3 +8,5 @@ $selection-control-error-color: rgb(var(--v-theme-error)) !default;
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;
 $selection-control-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $selection-control-size: 40px !default;
+$selection-control-text-font-size: 0.875rem !default;
+$selection-control-text-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;

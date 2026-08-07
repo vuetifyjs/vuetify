@@ -71,6 +71,12 @@ A single `v-checkbox` will have a boolean value as its **value**.
 
 <ExamplesExample file="v-checkbox/prop-states" />
 
+#### Text
+
+Use the **text** prop to display a description below the checkbox label.
+
+<ExamplesExample file="v-checkbox/prop-text" />
+
 ### Slots
 
 #### Label slot
