@@ -33,6 +33,7 @@ import {
   Teleport,
   Transition,
   watch,
+  watchEffect,
 } from 'vue'
 import {
   animate,
@@ -53,6 +54,8 @@ import {
 import type { PropType, Ref } from 'vue'
 import type { BackgroundColorData } from '@/composables/color'
 import type { TemplateRef } from '@/util'
+
+const overlayActivators = new WeakMap<Element, HTMLElement>()
 
 interface ScrimProps {
   [key: string]: unknown
@@ -217,6 +220,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     let openedWithActivatorFocus = false
 
+    watchEffect(() => {
+      if (!contentEl.value) return
+      if (activatorEl.value) overlayActivators.set(contentEl.value, activatorEl.value)
+      else overlayActivators.delete(contentEl.value)
+    })
+
     function ownsFocus (activeElement: Element | null): boolean {
       let current = activeElement
       const visited = new Set<Element>()
@@ -225,8 +234,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         if (!el || visited.has(el)) return false
         if (el === contentEl.value) return true
         visited.add(el)
-        const ownerId = el.closest('.v-overlay')?.id
-        current = ownerId ? document.querySelector(`[aria-owns~="${CSS.escape(ownerId)}"]`) : null
+        current = overlayActivators.get(el) ?? null
       }
       return false
     }
