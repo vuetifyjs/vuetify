@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## July 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 August 10th, 2026
+
+Two things finished in July. Vuetify0 hit 1.0 on the 22nd: its composables, utilities and a thirteen-component spine keep their names and signatures for the whole 1.x line, with a CI check that fails any PR trying to change them. Five days later v3.13.0 shipped as the final v3 minor, starting the LTS clock on a line that has been running since 2022 — critical bugs and security only, until July 2027. In between, v4.1 took five patches — including a small one that makes focus behave inside a shadow root, which quietly opens the door to shipping Vuetify components as web components... { .text-medium-emphasis }
+
+[Read More](/blog/july-2026-update/) { .text-end }
+
 ## Announcing Vuetify0 1.0
 
 🖊️ John Leider • 📅 July 22nd, 2026
