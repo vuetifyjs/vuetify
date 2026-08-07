@@ -155,12 +155,6 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 + @layer base, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final, overrides;
 ```
 
-This can be used to easily interleave your own layers with ours:
-
-```css
-@layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
-```
-
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
 #### Layer order declaration must come first
