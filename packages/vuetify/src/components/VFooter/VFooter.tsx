@@ -11,10 +11,9 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVFooterProps = propsFactory({
@@ -40,8 +39,6 @@ export const VFooter = genericComponent()({
   props: makeVFooterProps(),
 
   setup (props, { slots }) {
-    const layoutItemStyles = ref()
-
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
@@ -55,20 +52,14 @@ export const VFooter = genericComponent()({
     })
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
 
-    useToggleScope(() => props.app, () => {
-      const layout = useLayoutItem({
-        id: props.name,
-        order: computed(() => parseInt(props.order, 10)),
-        position: toRef(() => 'bottom'),
-        layoutSize: height,
-        elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
-        active: toRef(() => props.app),
-        absolute: toRef(() => props.absolute),
-      })
-
-      watchEffect(() => {
-        layoutItemStyles.value = layout.layoutItemStyles.value
-      })
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      order: computed(() => parseInt(props.order, 10)),
+      position: toRef(() => 'bottom'),
+      layoutSize: height,
+      elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
+      active: toRef(() => props.app),
+      absolute: toRef(() => props.absolute),
     })
 
     useRender(() => (

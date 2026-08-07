@@ -111,7 +111,7 @@ export function useLayoutItem (options: {
 }) {
   const layout = inject(VuetifyLayoutKey)
 
-  if (!layout) throw new Error('[Vuetify] Could not find injected layout')
+  if (!layout && options.active.value) throw new Error('[Vuetify] Could not find injected layout')
 
   const id = options.id ?? `layout-item-${useId()}`
 
@@ -126,7 +126,7 @@ export function useLayoutItem (options: {
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
-  } = layout.register(vm, {
+  } = layout.register(vm, { // TODO: get styles without registering?
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
     id,
