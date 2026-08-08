@@ -448,7 +448,7 @@ export const VSelect = genericComponent<new <
     function onModelUpdate (v: any) {
       if (v == null) model.value = []
       else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
-        const item = items.value.find(item => item.title === v)
+        const item = items.value.find(item => item.title === v || item.value === v)
         if (item) {
           select(item)
         }

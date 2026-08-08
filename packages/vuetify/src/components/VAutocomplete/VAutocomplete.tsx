@@ -337,7 +337,8 @@ export const VAutocomplete = genericComponent<new <
 
     function onChange (e: Event) {
       if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
-        const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
+        const value = (e.target as HTMLInputElement).value
+        const item = items.value.find(item => item.title === value || item.value === value)
         if (item) {
           select(item)
         }
