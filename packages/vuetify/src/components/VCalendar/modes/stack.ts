@@ -35,7 +35,7 @@ const WIDTH_MULTIPLIER = 1.7
  * whitespace is reduced. If there is a hole in columns the event width is
  * scaled up so it intersects with the next column. The columns have equal
  * width in the space they are given. If the event doesn't have any to the
- * right of it that intersect with it's content it's right side is extended
+ * right of it that intersect with its content its right side is extended
  * to the right side.
  */
 
