@@ -122,6 +122,7 @@ export function useValidation (
     }
   })
   const isValidating = shallowRef(false)
+  let isResetting = false
   const validationClasses = computed(() => {
     return {
       [`${name}--error`]: isValid.value === false,
@@ -157,15 +158,7 @@ export function useValidation (
 
   useToggleScope(() => validateOn.value.input || (validateOn.value.invalidInput && isValid.value === false), () => {
     watch(validationModel, () => {
-      if (validationModel.value != null) {
-        validate()
-      } else if (props.focused) {
-        const unwatch = watch(() => props.focused, val => {
-          if (!val) validate()
-
-          unwatch()
-        })
-      }
+      if (!isResetting) validate()
     })
   })
 
@@ -180,8 +173,10 @@ export function useValidation (
   })
 
   async function reset () {
+    isResetting = true
     model.value = null
     await nextTick()
+    isResetting = false
     await resetValidation()
   }
 

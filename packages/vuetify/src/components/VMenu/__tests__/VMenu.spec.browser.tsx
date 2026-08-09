@@ -6,6 +6,7 @@ import { VList, VListItem, VListItemTitle } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
 import { VTextarea } from '@/components/VTextarea'
 import { VTextField } from '@/components/VTextField'
+import { VTooltip } from '@/components/VTooltip'
 
 // Utilities
 import { commands, render, screen, userEvent, wait } from '@test'
@@ -481,6 +482,44 @@ describe('VMenu', () => {
 
       await userEvent.click(screen.getByTestId('outside'))
       await expect.poll(() => screen.queryByTestId('l1')).toBeNull()
+    })
+
+    it('should return focus to the activator after clicking an interactive tooltip inside the content', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VSheet class="pa-4" data-testid="menu-content">
+                <VTextField data-testid="field" />
+                <VBtn data-testid="tip-activator">
+                  Hover me
+                  <VTooltip activator="parent" interactive openOnHover>
+                    <span data-testid="tip-content">Tooltip</span>
+                  </VTooltip>
+                </VBtn>
+              </VSheet>
+            </VMenu>
+          </VBtn>
+          <div data-testid="away" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">away</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+
+      await userEvent.click(screen.getByCSS('[data-testid="field"] input'))
+
+      await userEvent.hover(screen.getByTestId('tip-activator'))
+      await expect.poll(() => screen.queryByTestId('tip-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('tip-content'))
+
+      await userEvent.keyboard('{Escape}')
+      await expect.poll(() => screen.queryByTestId('tip-content')).toBeNull()
+
+      await userEvent.keyboard('{Escape}')
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+      await expect.poll(() => screen.getByTestId('opener')).toHaveFocus()
     })
 
     it('should close the parent menu when clicking outside an autocomplete child', async () => {

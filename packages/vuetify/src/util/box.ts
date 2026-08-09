@@ -69,12 +69,11 @@ export function getElementBox (el: HTMLElement) {
         height: document.documentElement.clientHeight,
       })
     } else {
-      const pageScale = document.body.currentCSSZoom ?? 1
       return new Box({
         x: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetLeft,
         y: visualViewport.scale > 1 || IS_WEBKIT ? 0 : visualViewport.offsetTop,
-        width: visualViewport.width * visualViewport.scale / pageScale,
-        height: visualViewport.height * visualViewport.scale / pageScale,
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight,
       })
     }
   } else {
