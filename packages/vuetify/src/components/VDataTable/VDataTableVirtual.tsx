@@ -2,7 +2,7 @@
 import { makeDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRow } from './VDataTableRow'
-import { VDataTableRows } from './VDataTableRows'
+import { expansionNodes, VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
 import { VVirtualScrollItem } from '@/components/VVirtualScroll/VVirtualScrollItem'
 
@@ -20,11 +20,11 @@ import { MaybeTransition } from '@/composables/transition'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { cloneVNode, computed, Fragment, isVNode, nextTick, shallowRef, toRef, toRefs, watch } from 'vue'
+import { cloneVNode, computed, nextTick, shallowRef, toRef, toRefs, watch } from 'vue'
 import { convertToUnit, genericComponent, omit, pickWithRest, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DeepReadonly, VNode, VNodeArrayChildren } from 'vue'
+import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -66,16 +66,6 @@ export const makeVDataTableVirtualProps = propsFactory({
 }, 'VDataTableVirtual')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
-
-function elementNodes (nodes?: VNodeArrayChildren): VNode[] {
-  return (nodes ?? []).flatMap(node =>
-    Array.isArray(node) ? elementNodes(node)
-    : !isVNode(node) ? []
-    : node.type === Fragment ? elementNodes(node.children as VNodeArrayChildren)
-    : typeof node.type === 'symbol' ? []
-    : [node]
-  )
-}
 
 export const VDataTableVirtual = genericComponent<new <T extends readonly any[], V>(
   props: {
@@ -320,7 +310,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                             const index = itemSlotProps.internalItem.virtualIndex ?? itemSlotProps.internalItem.index
                             const itemExpanded = isExpanded(itemSlotProps.internalItem)
                             const expandedRows = props.showExpand && itemExpanded && slots['expanded-row']
-                              ? elementNodes(slots['expanded-row'](itemSlot))
+                              ? expansionNodes(slots['expanded-row'](itemSlot))
                               : []
 
                             // rows that stay never resize, so a shrunk slot reports nothing
@@ -366,7 +356,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                         onUpdate:height={ height => setExpandedHeight(index, 0, height) }
                                       >
                                         { ({ itemRef }) => (
-                                          <tr class="v-data-table__tr--expanded" ref={ itemRef }>
+                                          <tr class="v-data-table__tr--expanded v-data-table__tr--expansion" ref={ itemRef }>
                                             <td colspan={ columns.value.length }>
                                               { props.expandTransition
                                                 ? (

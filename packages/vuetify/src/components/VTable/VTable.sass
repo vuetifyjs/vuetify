@@ -3,6 +3,9 @@
 @use './variables' as *
 @use './mixins' as *
 
+// Rows that belong to the item above them; a stripe only extends onto a lone one
+$expansion-row: '.v-data-table__tr--expansion'
+
 @include tools.layer('components')
   // Theme
   .v-table
@@ -71,16 +74,16 @@
       > .v-table__wrapper
         > table
           > tbody
-            > tr:nth-child(even of :not(.v-data-table__tr--expanded)),
-            > tr:nth-child(even of :not(.v-data-table__tr--expanded)) + .v-data-table__tr--expanded
+            > tr:nth-child(even of :not(#{$expansion-row})),
+            > tr:nth-child(even of :not(#{$expansion-row})) + #{$expansion-row}:not(:has(+ #{$expansion-row}))
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--striped-odd
       > .v-table__wrapper
         > table
           > tbody
-            > tr:nth-child(odd of :not(.v-data-table__tr--expanded)),
-            > tr:nth-child(odd of :not(.v-data-table__tr--expanded)) + .v-data-table__tr--expanded
+            > tr:nth-child(odd of :not(#{$expansion-row})),
+            > tr:nth-child(odd of :not(#{$expansion-row})) + #{$expansion-row}:not(:has(+ #{$expansion-row}))
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--fixed-header
