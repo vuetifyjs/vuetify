@@ -71,14 +71,16 @@
       > .v-table__wrapper
         > table
           > tbody
-            > tr:nth-child(even)
+            > tr:nth-child(even of :not(.v-data-table__tr--expanded)),
+            > tr:nth-child(even of :not(.v-data-table__tr--expanded)) + .v-data-table__tr--expanded
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--striped-odd
       > .v-table__wrapper
         > table
           > tbody
-            > tr:nth-child(odd)
+            > tr:nth-child(odd of :not(.v-data-table__tr--expanded)),
+            > tr:nth-child(odd of :not(.v-data-table__tr--expanded)) + .v-data-table__tr--expanded
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--fixed-header

@@ -237,6 +237,25 @@ describe('VDataTable', () => {
     expect(screen.getByCSS('#body-append')).toHaveTextContent(DESSERT_ITEMS.length)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/23091
+  it('should stripe expanded rows the same as the row they belong to', () => {
+    render(() => (
+      <VDataTable
+        items={ DESSERT_ITEMS }
+        headers={ DESSERT_HEADERS }
+        itemsPerPage={ 4 }
+        striped="odd"
+      >
+        {{ expanded: () => <div>expanded</div> }}
+      </VDataTable>
+    ))
+
+    const striped = screen.getAllByCSS('tbody > tr')
+      .map(row => getComputedStyle(row).backgroundImage !== 'none')
+
+    expect(striped).toEqual([true, true, false, false, true, true, false, false])
+  })
+
   describe('sort', () => {
     it('should sort by sortBy', async () => {
       render(() => (
