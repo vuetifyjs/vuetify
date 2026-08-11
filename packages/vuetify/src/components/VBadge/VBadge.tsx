@@ -112,7 +112,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
           { ...attrs }
           style={ props.style }
         >
-          <div class="v-badge__wrapper">
+          <props.tag class="v-badge__wrapper">
             { ctx.slots.default?.() }
 
             <MaybeTransition transition={ props.transition }>
@@ -150,7 +150,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 }
               </span>
             </MaybeTransition>
-          </div>
+          </props.tag>
         </props.tag>
       )
     })
