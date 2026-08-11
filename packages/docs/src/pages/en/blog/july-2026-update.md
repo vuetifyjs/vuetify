@@ -35,7 +35,7 @@ Welcome to the July 2026 Vuetify update! This month closes out two long-running 
 
 ![Hero image for July update](https://cdn.vuetifyjs.com/docs/images/blog/july-2026-update/july-hero.png "July hero image"){ height=112 }
 
-🖊️ John Leider • 📅 August 7th, 2026
+🖊️ John Leider • 📅 August 11th, 2026
 
 <PromotedEntry />
 
