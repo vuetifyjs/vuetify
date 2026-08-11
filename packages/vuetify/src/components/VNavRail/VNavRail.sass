@@ -1,0 +1,42 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-nav-rail
+    display: flex
+    flex-direction: column
+    max-height: 100%
+    overflow-x: hidden
+    overflow-y: auto
+    padding-block: $nav-rail-padding
+    position: absolute
+    transition: $nav-rail-transition
+
+    @include tools.border($nav-rail-border...)
+    @include tools.rounded($nav-rail-border-radius)
+    @include tools.theme($nav-rail-theme...)
+
+    &--active
+      @include tools.elevation($nav-rail-elevation)
+
+  .v-nav-rail__prepend
+    flex: none
+
+  .v-nav-rail__append
+    flex: none
+    margin-block-start: auto
+
+  .v-nav-rail__content
+    display: flex
+    flex: 1 1 auto
+    flex-direction: column
+    width: 100%
+
+    .v-nav-rail--align-start &
+      justify-content: flex-start
+
+    .v-nav-rail--align-center &
+      justify-content: center
+
+    .v-nav-rail--align-end &
+      justify-content: flex-end

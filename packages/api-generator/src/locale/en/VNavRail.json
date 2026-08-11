@@ -1,0 +1,17 @@
+{
+  "description": "A vertical navigation rail, typically anchored to the start edge of the application, for switching between top-level destinations.",
+  "props": {
+    "location": "Controls the edge of the screen the rail is attached to.",
+    "width": "Sets the width of the rail.",
+    "align": "Aligns the rail items along the main (vertical) axis.",
+    "active": "Controls whether the rail is shown and reserves layout space for it."
+  },
+  "slots": {
+    "default": "The default slot for `v-nav-rail-item` destinations.",
+    "prepend": "A slot at the top of the rail, typically for a menu button or FAB.",
+    "append": "A slot at the bottom of the rail, typically for settings or account actions."
+  },
+  "events": {
+    "update:active": "Event that is emitted when the active state changes."
+  }
+}
