@@ -103,7 +103,7 @@ export const makeVSelectProps = propsFactory({
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),
   ...omit(makeVTextFieldProps({
-    modelValue: null,
+    modelValue: undefined,
     role: 'combobox',
   }), ['validationValue', 'dirty']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
