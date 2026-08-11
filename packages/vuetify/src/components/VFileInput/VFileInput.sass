@@ -38,3 +38,6 @@
 
     &--dragging input[type="file"]
       z-index: 1
+
+    input[inert]
+      pointer-events: none // for Chromium < 102 / Firefox < 112 -- drop in v5

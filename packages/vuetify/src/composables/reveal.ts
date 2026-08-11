@@ -1,6 +1,6 @@
 // Utilities
 import { onMounted, shallowRef, toRef } from 'vue'
-import { propsFactory } from '@/util'
+import { isObject, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,7 +22,7 @@ export const makeRevealProps = propsFactory({
 
 export function useReveal (props: RevealProps) {
   const defaultDuration = 900
-  const duration = toRef(() => typeof props.reveal === 'object'
+  const duration = toRef(() => isObject(props.reveal)
     ? Math.max(0, Number(props.reveal.duration ?? defaultDuration))
     : defaultDuration
   )

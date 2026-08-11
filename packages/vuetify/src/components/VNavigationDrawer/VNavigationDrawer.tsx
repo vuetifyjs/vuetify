@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, omit, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, isString, omit, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -191,14 +191,14 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       disableTransitions: toRef(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        props.absolute || (isSticky.value && typeof isStuck.value !== 'string')
+        props.absolute || (isSticky.value && !isString(isStuck.value))
       ),
     })
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
     const scrimColor = useBackgroundColor(() => {
-      return typeof props.scrim === 'string' ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : null
     })
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {

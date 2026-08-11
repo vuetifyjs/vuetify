@@ -1,4 +1,5 @@
 import { IS_WEBKIT } from './globals'
+import { isElement } from './v0'
 
 export class Box {
   x: number
@@ -12,16 +13,21 @@ export class Box {
     width: number
     height: number
   }) {
-    const pageScale = document.body.currentCSSZoom ?? 1
-    const isElement = args instanceof Element
-    const factor = isElement ? 1 + (1 - pageScale) / pageScale : 1
+    if (isElement(args)) {
+      const pageScale = document.body.currentCSSZoom ?? 1
+      const factor = 1 + (1 - pageScale) / pageScale
+      const { x, y, width, height } = args.getBoundingClientRect()
 
-    const { x, y, width, height } = isElement ? args.getBoundingClientRect() : args
-
-    this.x = x * factor
-    this.y = y * factor
-    this.width = width * factor
-    this.height = height * factor
+      this.x = x * factor
+      this.y = y * factor
+      this.width = width * factor
+      this.height = height * factor
+    } else {
+      this.x = args.x
+      this.y = args.y
+      this.width = args.width
+      this.height = args.height
+    }
   }
 
   get top () { return this.y }

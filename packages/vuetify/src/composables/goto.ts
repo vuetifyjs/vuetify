@@ -1,7 +1,7 @@
 // Utilities
 import { inject, toRef } from 'vue'
 import { useRtl } from './locale'
-import { clamp, consoleWarn, easingPatterns, mergeDeep, PREFERS_REDUCED_MOTION, refElement } from '@/util'
+import { clamp, consoleWarn, easingPatterns, isFunction, isNumber, isString, mergeDeep, PREFERS_REDUCED_MOTION, refElement } from '@/util'
 
 // Types
 import type { ComponentPublicInstance, InjectionKey, Ref } from 'vue'
@@ -42,11 +42,11 @@ function getContainer (el?: ComponentPublicInstance | HTMLElement | string) {
 }
 
 function getTarget (el: ComponentPublicInstance | HTMLElement | string | undefined) {
-  return (typeof el === 'string') ? document.querySelector<HTMLElement>(el) : refElement(el)
+  return (isString(el)) ? document.querySelector<HTMLElement>(el) : refElement(el)
 }
 
 function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
-  if (typeof target === 'number') return horizontal && rtl ? -target : target
+  if (isNumber(target)) return horizontal && rtl ? -target : target
 
   let el = getTarget(target)
   let totalOffset = 0
@@ -77,18 +77,18 @@ export async function scrollTo (
   const property = horizontal ? 'scrollLeft' : 'scrollTop'
   const options = mergeDeep(goTo?.options ?? genDefaults(), _options)
   const rtl = goTo?.rtl.value
-  const target = (typeof _target === 'number' ? _target : getTarget(_target)) ?? 0
+  const target = (isNumber(_target) ? _target : getTarget(_target)) ?? 0
   const container = options.container === 'parent' && target instanceof HTMLElement
     ? target.parentElement!
     : getContainer(options.container)
   const ease = PREFERS_REDUCED_MOTION() ? options.patterns.instant
-    : typeof options.easing === 'function' ? options.easing
+    : isFunction(options.easing) ? options.easing
     : options.patterns[options.easing]
 
   if (!ease) throw new TypeError(`Easing function "${options.easing}" not found.`)
 
   let targetLocation: number
-  if (typeof target === 'number') {
+  if (isNumber(target)) {
     targetLocation = getOffset(target, horizontal, rtl)
   } else {
     targetLocation = getOffset(target, horizontal, rtl) - getOffset(container, horizontal, rtl)

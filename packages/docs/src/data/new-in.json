@@ -16,12 +16,17 @@
       "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
+      "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0"
     },
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
     },
     "examples": {
       "slot-menu-footer": "3.12.0",
@@ -70,6 +75,11 @@
       "misc-readonly": "3.6.0"
     }
   },
+  "VBtnGroup": {
+    "props": {
+      "size": "4.2.0"
+    }
+  },
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
@@ -112,12 +122,18 @@
       "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
+      "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0"
     },
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0",
+      "item:created": "4.2.0"
     },
     "examples": {
       "slot-menu-header": "3.12.0"
@@ -432,6 +448,7 @@
   "VSelect": {
     "props": {
       "autocomplete": "3.10.0",
+      "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
       "noAutoScroll": "3.9.0"
@@ -439,6 +456,10 @@
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
     },
     "examples": {
       "prop-list-props": "3.5.0",
@@ -449,6 +470,14 @@
     "props": {
       "indeterminate": "4.1.0",
       "indeterminateIcon": "4.1.0"
+    }
+  },
+  "VSkeletonLoader": {
+    "props": {
+      "types": "4.2.0"
+    },
+    "examples": {
+      "prop-types": "4.2.0"
     }
   },
   "VSlider": {
@@ -610,8 +639,7 @@
     "examples": {
       "prop-items-registration": "3.11.0",
       "slot-no-data": "3.11.0",
-      "slot-toggle": "3.10.0",
-      "misc-indent-lines": "3.9.0"
+      "slot-toggle": "3.10.0"
     }
   },
   "VTreeviewItem": {

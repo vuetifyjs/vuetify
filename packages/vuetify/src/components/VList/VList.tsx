@@ -382,7 +382,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
             roundedStyles.value,
             props.style,
           ]}
-          tabindex={ props.disabled ? -1 : 0 }
+          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={
             props.navigationStrategy === 'track' && navigationIndex.value >= 0

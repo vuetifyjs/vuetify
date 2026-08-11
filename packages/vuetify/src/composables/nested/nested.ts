@@ -32,7 +32,7 @@ import {
   leafSingleSelectStrategy,
   trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, propsFactory, throttle } from '@/util'
+import { consoleError, getCurrentInstance, isFunction, isNullOrUndefined, isObject, isUndefined, propsFactory, throttle } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -175,8 +175,8 @@ export const useNested = (
   )
 
   const activeStrategy = computed(() => {
-    if (typeof props.activeStrategy === 'object') return props.activeStrategy
-    if (typeof props.activeStrategy === 'function') return props.activeStrategy(props.mandatory)
+    if (isFunction(props.activeStrategy)) return props.activeStrategy(props.mandatory)
+    if (isObject(props.activeStrategy)) return props.activeStrategy
 
     switch (props.activeStrategy) {
       case 'leaf': return leafActiveStrategy(props.mandatory)
@@ -188,8 +188,8 @@ export const useNested = (
   })
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
-    if (typeof props.selectStrategy === 'function') return props.selectStrategy(props.mandatory)
+    if (isFunction(props.selectStrategy)) return props.selectStrategy(props.mandatory)
+    if (isObject(props.selectStrategy)) return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
@@ -204,7 +204,7 @@ export const useNested = (
   })
 
   const openStrategy = computed(() => {
-    if (typeof props.openStrategy === 'object') return props.openStrategy
+    if (isObject(props.openStrategy)) return props.openStrategy
 
     switch (props.openStrategy) {
       case 'list': return listOpenStrategy
@@ -268,7 +268,7 @@ export const useNested = (
     const path: unknown[] = []
     let parent: unknown = toRaw(id)
 
-    while (parent !== undefined) {
+    while (!isUndefined(parent)) {
       path.unshift(parent)
       parent = parents.value.get(parent)
     }
@@ -363,7 +363,7 @@ export const useNested = (
         isDisabled && disabled.value.add(id)
         isGroup && children.value.set(id, [])
 
-        if (parentId != null) {
+        if (!isNullOrUndefined(parentId)) {
           children.value.set(parentId, [...children.value.get(parentId) || [], id])
         }
         itemsUpdatePropagation()
@@ -488,7 +488,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   const uidSymbol = Symbol('nested item')
   const computedId = computed(() => {
     const idValue = toRaw(toValue(id))
-    return idValue !== undefined ? idValue : uidSymbol
+    return !isUndefined(idValue) ? idValue : uidSymbol
   })
 
   const item = {

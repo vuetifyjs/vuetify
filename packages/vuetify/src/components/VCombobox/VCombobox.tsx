@@ -42,6 +42,8 @@ import {
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
+  isFunction,
+  isNumber,
   noop,
   omit,
   propsFactory,
@@ -127,6 +129,9 @@ export const VCombobox = genericComponent<new <
     'update:modelValue': (value: any) => true,
     'update:search': (value: string) => true,
     'update:menu': (value: boolean) => true,
+    'item:added': (item: ListItem) => true,
+    'item:removed': (item: ListItem) => true,
+    'item:created': (item: ListItem) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -168,6 +173,9 @@ export const VCombobox = genericComponent<new <
       set: async (val: string | null) => {
         _search.value = val ?? ''
         if (val === null || (val === '' && !props.multiple && !hasSelectionSlot.value)) {
+          for (const item of model.value) {
+            emit('item:removed', item)
+          }
           model.value = []
         } else if (!props.multiple && !hasSelectionSlot.value) {
           model.value = [transformItem(props, val)]
@@ -189,8 +197,8 @@ export const VCombobox = genericComponent<new <
     })
 
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : (props.multiple ? model.value.length : search.value.length)
     })
 
@@ -419,19 +427,30 @@ export const VCombobox = genericComponent<new <
       isPristine.value = true
       _searchLock.value = null
     }
+
+    function isExistingItem (item: ListItem) {
+      const comparator = props.valueComparator || deepEqual
+      return items.value.some(i => comparator(i.value, item.value))
+    }
+
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true, keepMenu = false) {
       if (!item || item.props.disabled) return
 
+      const comparator = props.valueComparator || deepEqual
+
       if (props.multiple) {
-        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
+        const index = model.value.findIndex(selection => comparator(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
-          value.splice(index, 1)
+          const [removed] = value.splice(index, 1)
+          if (!add) emit('item:removed', removed) // skip if only reordered
           model.value = value
         } else if (add) {
+          emit('item:added', item)
+          if (!isExistingItem(item)) emit('item:created', item)
           model.value = [...model.value, item]
         }
 
@@ -440,7 +459,23 @@ export const VCombobox = genericComponent<new <
         }
       } else {
         const add = set !== false
-        model.value = add ? [item] : []
+        const old = model.value[0]
+
+        if (add) {
+          if (old && !comparator(old.value, item.value)) {
+            emit('item:removed', old)
+            emit('item:added', item)
+            if (!isExistingItem(item)) emit('item:created', item)
+          } else if (!old) {
+            emit('item:added', item)
+            if (!isExistingItem(item)) emit('item:created', item)
+          }
+          model.value = [item]
+        } else {
+          if (old) emit('item:removed', old)
+          model.value = []
+        }
+
         if ((!isPristine.value || props.alwaysFilter) && _search.value) {
           _searchLock.value = _search.value
         }
@@ -559,6 +594,7 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          form=""
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -590,6 +626,16 @@ export const VCombobox = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                { selectedValues.value.map((value, i) => (
+                  <input
+                    key={ i }
+                    type="hidden"
+                    name={ props.name }
+                    value={ value }
+                    form={ props.form }
+                  />
+                ))}
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

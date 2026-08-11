@@ -83,6 +83,30 @@ describe('VFileInput', () => {
     expect(element).toHaveTextContent('2 files (3.0 MB in total)')
   })
 
+  it('should conditionally show placeholder', async () => {
+    const { rerender } = render(VFileInput, {
+      props: { placeholder: 'Placeholder' },
+    })
+
+    const fileInput = screen.getByCSS('input[type="file"]')
+    const placeholderInput = () => screen.queryByCSS('input[type="text"]')
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(placeholderInput()).toHaveAttribute('inert')
+
+    await rerender({ label: 'Label' })
+    await expect.poll(placeholderInput).toBeNull()
+    fileInput.focus()
+    await expect.poll(placeholderInput).not.toBeNull()
+    fileInput.blur()
+    await expect.poll(placeholderInput).toBeNull()
+
+    await rerender({ persistentPlaceholder: true })
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
+
+    await rerender({ modelValue: oneMBFile })
+    await expect.poll(placeholderInput).toBeNull()
+  })
+
   it('should clear input', async () => {
     const model = ref([oneMBFile, twoMBFile])
     const { element } = render(() => (

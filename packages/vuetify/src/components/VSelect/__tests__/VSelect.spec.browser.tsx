@@ -384,7 +384,7 @@ describe('VSelect', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
@@ -1193,6 +1193,60 @@ describe('VSelect', () => {
 
     await userEvent.click(screen.getByTestId('other-field'))
     await expect.poll(() => select).not.toHaveClass('v-select--active-menu')
+  })
+
+  describe('item:added / item:removed', () => {
+    it('should emit when selecting and deselecting multiple items', async () => {
+      const added = vi.fn()
+      const removed = vi.fn()
+      const model = ref<string[]>([])
+      const selectItems = ['California', 'Colorado', 'Florida']
+
+      render(() => (
+        <VSelect
+          items={ selectItems }
+          multiple
+          chips
+          closableChips
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:removed={ removed }
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+      await userEvent.click(screen.getAllByRole('option')[0])
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(added.mock.calls[0][0]).toMatchObject({ title: 'California', value: 'California', raw: 'California' })
+      expect(removed).not.toHaveBeenCalled()
+
+      await userEvent.click(screen.getAllByTestId('close-chip')[0])
+      expect(removed).toHaveBeenCalledTimes(1)
+      expect(removed.mock.calls[0][0]).toMatchObject({ title: 'California', value: 'California', raw: 'California' })
+    })
+
+    it('should emit removed for each item on clear', async () => {
+      const removed = vi.fn()
+      const model = ref(['California', 'Colorado'])
+      const selectItems = ['California', 'Colorado', 'Florida']
+
+      render(() => (
+        <VSelect
+          items={ selectItems }
+          multiple
+          clearable
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:removed={ removed }
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-field__clearable'))
+      expect(removed).toHaveBeenCalledTimes(2)
+    })
   })
 
   showcase({ stories })

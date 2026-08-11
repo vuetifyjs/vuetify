@@ -44,6 +44,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  isString,
   omit,
   propsFactory,
   standardEasing,
@@ -157,7 +158,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(() => {
-      return typeof props.scrim === 'string' ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : null
     })
     const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
     const {

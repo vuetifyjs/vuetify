@@ -40,6 +40,8 @@ import {
   genericComponent,
   IN_BROWSER,
   isComposingIgnoreKey,
+  isFunction,
+  isNumber,
   matchesSelector,
   noop,
   omit,
@@ -122,9 +124,11 @@ export const VAutocomplete = genericComponent<new <
     'update:search': (value: any) => true,
     'update:modelValue': (value: any) => true,
     'update:menu': (value: boolean) => true,
+    'item:added': (item: ListItem) => true,
+    'item:removed': (item: ListItem) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const isFocused = shallowRef(false)
@@ -149,8 +153,8 @@ export const VAutocomplete = genericComponent<new <
       }
     )
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : model.value.length
     })
     const form = useForm(props)
@@ -169,6 +173,12 @@ export const VAutocomplete = genericComponent<new <
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
+
+    const selectedTitle = computed(() => {
+      return (props.multiple || hasSelectionSlot.value)
+        ? ''
+        : String(model.value.at(-1)?.props.title ?? '')
+    })
 
     const selectedValues = computed(() => model.value.map(selection => selection.props.value))
 
@@ -375,7 +385,10 @@ export const VAutocomplete = genericComponent<new <
       }
     }
     function onUpdateModelValue (v: any) {
-      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) model.value = []
+      if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) {
+        for (const item of model.value) emit('item:removed', item)
+        model.value = []
+      }
     }
 
     let mousedownInsideContentAt = 0
@@ -394,21 +407,23 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    const isSelecting = shallowRef(false)
-
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
       if (!item || item.props.disabled) return
 
+      const comparator = props.valueComparator || deepEqual
+
       if (props.multiple) {
-        const index = model.value.findIndex(selection => (props.valueComparator || deepEqual)(selection.value, item.value))
+        const index = model.value.findIndex(selection => comparator(selection.value, item.value))
         const add = set == null ? !~index : set
 
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
-          value.splice(index, 1)
+          const [removed] = value.splice(index, 1)
+          if (!add) emit('item:removed', removed) // skip if only reordered
           model.value = value
         } else if (add) {
+          emit('item:added', item)
           model.value = [...model.value, item]
         }
 
@@ -417,7 +432,21 @@ export const VAutocomplete = genericComponent<new <
         }
       } else {
         const add = set !== false
-        model.value = add ? [item] : []
+        const old = model.value[0]
+
+        if (add) {
+          if (old && !comparator(old.value, item.value)) {
+            emit('item:removed', old)
+            emit('item:added', item)
+          } else if (!old) {
+            emit('item:added', item)
+          }
+          model.value = [item]
+        } else {
+          if (old) emit('item:removed', old)
+          model.value = []
+        }
+
         _searchLock.value = isPristine.value ? '' : (search.value ?? '')
         search.value = add && !hasSelectionSlot.value ? item.title : ''
 
@@ -433,24 +462,29 @@ export const VAutocomplete = genericComponent<new <
       if (val === oldVal) return
 
       if (val) {
-        isSelecting.value = true
-        search.value = (props.multiple || hasSelectionSlot.value) ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
-
-        nextTick(() => isSelecting.value = false)
       } else {
-        if (!props.multiple && search.value == null) model.value = []
+        if (!props.multiple && search.value == null) {
+          for (const item of model.value) emit('item:removed', item)
+          model.value = []
+        }
         menu.value = false
         if (!isPristine.value && search.value) {
           _searchLock.value = search.value
         }
-        search.value = ''
+        search.value = selectedTitle.value
+        isPristine.value = true
         selectionIndex.value = -1
       }
     })
 
+    watch(selectedTitle, val => {
+      if (isFocused.value) return
+      search.value = val
+    }, { immediate: true })
+
     watch(search, val => {
-      if (!isFocused.value || isSelecting.value) return
+      if (!isFocused.value) return
 
       if (val) menu.value = true
 
@@ -496,6 +530,7 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
+          form=""
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
@@ -528,6 +563,16 @@ export const VAutocomplete = genericComponent<new <
             ...slots,
             default: ({ id }) => (
               <>
+                { selectedValues.value.map((value, i) => (
+                  <input
+                    key={ i }
+                    type="hidden"
+                    name={ props.name }
+                    value={ value }
+                    form={ props.form }
+                  />
+                ))}
+
                 <VMenu
                   id={ menuId.value }
                   ref={ vMenuRef }

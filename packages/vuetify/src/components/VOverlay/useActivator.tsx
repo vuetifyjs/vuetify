@@ -21,6 +21,7 @@ import {
   getActiveElement,
   getCurrentInstance,
   IN_BROWSER,
+  isString,
   matchesSelector,
   propsFactory,
   templateRef,
@@ -356,7 +357,7 @@ function getTarget<T extends 'parent' | string | Element | ComponentPublicInstan
       el = el.parentNode
     }
     target = el
-  } else if (typeof selector === 'string') {
+  } else if (isString(selector)) {
     // Selector
     target = document.querySelector(selector)
   } else if ('$el' in selector) {
