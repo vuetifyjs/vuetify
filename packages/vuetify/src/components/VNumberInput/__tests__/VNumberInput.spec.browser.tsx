@@ -583,4 +583,23 @@ describe('VNumberInput', () => {
       expect(onChange).toHaveBeenCalledTimes(2)
     })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/23098
+  it('keeps the display in sync when the emitted value is overridden', async () => {
+    const model = ref(0)
+    render(() => (
+      <VNumberInput
+        modelValue={ model.value }
+        onUpdate:modelValue={ (val: number) => { model.value = Math.max(0, val) } }
+      />
+    ))
+
+    await userEvent.click(screen.getByTestId('decrement'))
+    await expect.element(screen.getByCSS('input')).toHaveValue('0')
+    expect(model.value).toBe(0)
+
+    await userEvent.click(screen.getByTestId('increment'))
+    await expect.element(screen.getByCSS('input')).toHaveValue('1')
+    expect(model.value).toBe(1)
+  })
 })
