@@ -1,5 +1,6 @@
 // Components
 import { VDataTable } from '../VDataTable'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Utilities
 import { render, screen, showcase, userEvent } from '@test'
@@ -110,6 +111,24 @@ describe('VDataTable', () => {
     expect(updatePage).toHaveBeenCalledTimes(2)
     expect(updatePage).toHaveBeenNthCalledWith(1, 2)
     expect(updatePage).toHaveBeenNthCalledWith(2, 1)
+  })
+
+  it('should let nested VSelect defaults override variant of sort and items-per-page selects', async () => {
+    render(() => (
+      <VDefaultsProvider defaults={{
+        VDataTableHeaders: { VSelect: { variant: 'solo' } },
+        VDataTableFooter: { VSelect: { variant: 'solo' } },
+      }}
+      >
+        <VDataTable headers={ DESSERT_HEADERS } items={ DESSERT_ITEMS } mobile />
+      </VDefaultsProvider>
+    ))
+
+    const fields = screen.getAllByCSS('.v-select .v-field')
+    expect(fields).toHaveLength(2)
+    for (const field of fields) {
+      expect(field).toHaveClass('v-field--variant-solo')
+    }
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16999

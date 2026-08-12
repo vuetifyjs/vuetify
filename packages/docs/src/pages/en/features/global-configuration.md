@@ -66,6 +66,31 @@ This is used internally by some components already:
 - `<v-list>` has `bg-color="transparent"` when nested within a `<v-navigation-drawer>`
 - Lists, chip groups, expansion panels, tabs, and forms all use this system to propagate certain props to their children, for example `<v-tabs disabled>` will set the default value of `disabled` to `true` for all `<v-tab>` components inside it.
 
+Where a component styles a child of its own, nested defaults win over the built-in value. This only works through the nested key — ambient `VBtn` or `VChip` defaults leave these children alone:
+
+```js { resource="src/plugins/vuetify.js" }
+createVuetify({
+  defaults: {
+    VSelect: { VChip: { size: 'large' } }, // also VAutocomplete, VCombobox, VFileInput
+    VStepperActions: { VBtn: { variant: 'outlined' } },
+    VConfirmEdit: { VBtn: { variant: 'outlined' } },
+    VDataTableFooter: { VSelect: { variant: 'solo-filled' } },
+    VDataTableHeaders: { VSelect: { variant: 'solo-filled' } }, // mobile sort
+    VFileUploadDropzone: { VBtn: { variant: 'outlined' } },
+    VFileUploadItem: { VBtn: { variant: 'outlined' } },
+    VSpeedDial: { VBtn: { size: 'default' } },
+  },
+})
+```
+
+A few internal buttons are addressed by a role name instead, and take no `VBtn` defaults at all:
+
+- `VPaginationBtn` — `<v-pagination>` and the `<v-data-table>` footer
+- `VNumberInputBtn` — `<v-number-input>` increment and decrement
+- `VCarouselBtn` — `<v-carousel>` delimiters
+
+A prop written directly in the template still wins over any of this.
+
 [v-defaults-provider](/components/defaults-providers/) can be used to set defaults for components within a specific scope.
 
 ## Defaults for menu and dialog content

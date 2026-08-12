@@ -8,6 +8,7 @@ import { VOverlay } from '@/components/VOverlay/VOverlay'
 import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { makeDelayProps } from '@/composables/delay'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { useFileDrop } from '@/composables/fileDrop'
@@ -117,6 +118,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
     const { densityClasses } = useDensity(props)
     const { handleDrop, hasFilesOrFolders, isDraggingFiles } = useFileDrop()
     const context = inject(VFileUploadKey, null)
@@ -308,6 +310,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                     readonly={ !interactive }
                     text={ t(props.browseText) }
                     variant="text"
+                    { ...btnDefaults.value }
                     onClick={ onClickBrowse }
                   />
                 ) : (
@@ -317,6 +320,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                         readonly: !interactive,
                         text: t(props.browseText),
                         variant: 'text',
+                        ...btnDefaults.value,
                       },
                     }}
                   >
@@ -372,6 +376,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                           size="large"
                           text={ t(props.browseText) }
                           variant="tonal"
+                          { ...btnDefaults.value }
                           onClick={ onClickBrowse }
                         />
                       ) : (
@@ -382,6 +387,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                               size: 'large',
                               text: t(props.browseText),
                               variant: 'tonal',
+                              ...btnDefaults.value,
                             },
                           }}
                         >

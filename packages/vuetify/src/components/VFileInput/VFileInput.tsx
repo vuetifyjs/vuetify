@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useFileDrop } from '@/composables/fileDrop'
 import { makeFileFilterProps, useFileFilter } from '@/composables/fileFilter'
 import { useFocus } from '@/composables/focus'
@@ -114,6 +115,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
     )
     const { isFocused, focus, blur } = useFocus(props)
+    const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
@@ -381,6 +383,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                                 <VChip
                                   key={ text }
                                   size="small"
+                                  { ...chipDefaults.value }
                                   text={ text }
                                 />
                               ))

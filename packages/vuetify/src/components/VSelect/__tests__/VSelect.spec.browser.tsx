@@ -1,5 +1,6 @@
 // Components
 import { VSelect } from '../VSelect'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
@@ -220,6 +221,19 @@ describe('VSelect', () => {
       </VSelect>
     ))
     expect(screen.getAllByCSS('.v-list-item').at(-1)).toHaveTextContent('Foo')
+  })
+
+  it.each([
+    ['VSelect > VChip defaults should override chip size', { VSelect: { VChip: { size: 'large' } } }, 'v-chip--size-large'],
+    ['ambient VChip defaults should not reach selection chips', { VChip: { size: 'large' } }, 'v-chip--size-small'],
+  ])('%s', async (_, defaults, expected) => {
+    render(() => (
+      <VDefaultsProvider defaults={ defaults }>
+        <VSelect items={ items } modelValue={['California']} chips multiple />
+      </VDefaultsProvider>
+    ))
+
+    expect(screen.getByCSS('.v-chip')).toHaveClass(expected)
   })
 
   it('should close only first chip', async () => {

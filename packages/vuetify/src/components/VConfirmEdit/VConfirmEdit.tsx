@@ -2,6 +2,7 @@
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -60,6 +61,7 @@ export const VConfirmEdit = genericComponent<new <T> (
   },
 
   setup (props, { emit, slots }) {
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
     const model = useProxiedModel(props, 'modelValue')
     const internalModel = ref()
     watchEffect(() => {
@@ -101,18 +103,20 @@ export const VConfirmEdit = genericComponent<new <T> (
       return (
         <>
           <VBtn
-            disabled={ isCancelDisabled.value }
             variant="text"
             color={ props.color }
+            { ...btnDefaults.value }
+            disabled={ isCancelDisabled.value }
             onClick={ cancel }
             text={ t(props.cancelText) }
             { ...actionsProps }
           />
 
           <VBtn
-            disabled={ isSaveDisabled.value }
             variant="text"
             color={ props.color }
+            { ...btnDefaults.value }
+            disabled={ isSaveDisabled.value }
             onClick={ save }
             text={ t(props.okText) }
             { ...actionsProps }

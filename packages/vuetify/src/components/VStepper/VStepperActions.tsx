@@ -3,6 +3,7 @@ import { VBtn } from '@/components/VBtn/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -48,6 +49,8 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
+
     function onClickPrev () {
       emit('click:prev')
     }
@@ -69,9 +72,10 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
           <VDefaultsProvider
             defaults={{
               VBtn: {
+                variant: 'text',
+                ...btnDefaults.value,
                 disabled: ['prev', true].includes(props.disabled),
                 text: t(props.prevText),
-                variant: 'text',
               },
             }}
           >
@@ -84,9 +88,10 @@ export const VStepperActions = genericComponent<VStepperActionsSlots>()({
             defaults={{
               VBtn: {
                 color: props.color,
+                variant: 'tonal',
+                ...btnDefaults.value,
                 disabled: ['next', true].includes(props.disabled),
                 text: t(props.nextText),
-                variant: 'tonal',
               },
             }}
           >

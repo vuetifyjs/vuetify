@@ -11,6 +11,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { formatNumber } from './format'
 import { useHold } from './hold'
 import { processGroupedInput, processPlainInput } from './typing'
+import { injectComponentDefaults } from '@/composables/defaults'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -96,6 +97,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField>()
+    const controlDefaults = injectComponentDefaults<VBtn['$props']>('VNumberInputBtn')
 
     const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
@@ -397,6 +399,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function incrementControlNode () {
         return !slots.increment ? (
           <VBtn
+            _as="VNumberInputBtn"
             aria-hidden="true"
             data-testid="increment"
             disabled={ !canIncrease.value }
@@ -408,7 +411,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
-            variant="text"
+            variant={ controlDefaults.value?.variant ?? 'text' }
             tabindex="-1"
           />
         ) : (
@@ -432,6 +435,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function decrementControlNode () {
         return !slots.decrement ? (
           <VBtn
+            _as="VNumberInputBtn"
             aria-hidden="true"
             data-testid="decrement"
             disabled={ !canDecrease.value }
@@ -443,7 +447,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
-            variant="text"
+            variant={ controlDefaults.value?.variant ?? 'text' }
             tabindex="-1"
           />
         ) : (

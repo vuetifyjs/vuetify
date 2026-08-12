@@ -8,6 +8,7 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
+import { injectComponentDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -80,6 +81,7 @@ export const VCarousel = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
     const windowRef = ref<VWindow>()
+    const delimiterDefaults = injectComponentDefaults<VBtn['$props']>('VCarouselBtn')
 
     let slideTimeout = -1
     watch(model, restartTimeout)
@@ -127,6 +129,12 @@ export const VCarousel = genericComponent<new <T>(
 
     useRender(() => {
       const windowProps = VWindow.filterProps(props)
+      const delimiterBtnDefaults = {
+        color: props.color,
+        icon: props.delimiterIcon,
+        size: 'x-small',
+        variant: 'text',
+      }
 
       return (
         <VWindow
@@ -161,12 +169,8 @@ export const VCarousel = genericComponent<new <T>(
                     { group.items.value.length > 0 && (
                       <VDefaultsProvider
                         defaults={{
-                          VBtn: {
-                            color: props.color,
-                            icon: props.delimiterIcon,
-                            size: 'x-small',
-                            variant: 'text',
-                          },
+                          VBtn: delimiterBtnDefaults,
+                          VCarouselBtn: { ...delimiterBtnDefaults, ...delimiterDefaults.value },
                         }}
                         scoped
                       >
@@ -184,7 +188,7 @@ export const VCarousel = genericComponent<new <T>(
 
                           return slots.item
                             ? slots.item({ props, item })
-                            : (<VBtn { ...item } { ...props } />)
+                            : (<VBtn _as="VCarouselBtn" { ...item } { ...props } />)
                         })}
                       </VDefaultsProvider>
                     )}
