@@ -40,6 +40,7 @@ import {
   deepEqual,
   ensureValidVNode,
   genericComponent,
+  getActiveElement,
   IN_BROWSER,
   matchesSelector,
   omit,
@@ -406,7 +407,7 @@ export const VSelect = genericComponent<new <
       if (!listRef.value || !isFocused.value) return
 
       // VMenu re-dispatches ArrowUp/Down after open and already moved focus to next/prev
-      if (listRef.value.$el?.contains(document.activeElement)) return
+      if (listRef.value.$el?.contains(getActiveElement())) return
 
       const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
 
