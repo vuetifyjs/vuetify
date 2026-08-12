@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'July 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/july-2026-update/july-hero.png',
+      shortDescription: 'Vuetify0 reached 1.0 on July 22, shipping stable as @vuetify/v0 after 214 merged PRs and a thirteen-component stable spine. Five days later v3.13.0 shipped as the final Vuetify 3 minor and moved the line into long-term support through July 2027, on a window now shortened from eighteen months to twelve. The v4.1 patch line shipped five releases underneath both, fixing focus resolution in Shadow DOM, two defaults-inheritance leaks, and a run of select-family reports...',
+      date: 'August 11, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/july-2026-update'),
+    },
+    {
       title: 'Announcing Vuetify0 1.0',
       shortDescription: 'Vuetify0 is 1.0. The release candidate held — the frozen surface shipped through the validation window without a breaking change — and the package is now @vuetify/v0, no tag required. For a headless meta-framework, 1.0 is a promise about the foundation: nineteen composables, seventeen utilities, and a thirteen-component spine locked under semver for the whole 1.x line, enforced by CI, with the rest of the components promoting onto it individually. It ships 40 components, 71 composables, and 24 utilities — the logic layer a decade of Vuetify was built on, extracted, hardened, and frozen...',
       date: 'July 22, 2026',

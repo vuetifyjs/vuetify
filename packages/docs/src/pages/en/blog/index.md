@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## July 2026 Update
+
+🖊️ John Leider • 📅 August 11th, 2026
+
+Vuetify0 reached 1.0 on July 22, shipping stable as @vuetify/v0 after 214 merged PRs and a thirteen-component stable spine. Five days later v3.13.0 shipped as the final Vuetify 3 minor and moved the line into long-term support through July 2027, on a window now shortened from eighteen months to twelve. The v4.1 patch line shipped five releases underneath both, fixing focus resolution in Shadow DOM, two defaults-inheritance leaks, and a run of select-family reports... { .text-medium-emphasis }
+
+[Read More](/blog/july-2026-update/) { .text-end }
+
 ## Announcing Vuetify0 1.0
 
 🖊️ John Leider • 📅 July 22nd, 2026
