@@ -99,7 +99,7 @@ export const VDivider = genericComponent()({
               ? props.vertical ? 'vertical' : 'horizontal'
               : undefined
           }
-          role={ `${attrs.role || 'separator'}` }
+          role={ attrs.role as string | undefined }
         />
       )
 
