@@ -1094,5 +1094,60 @@ describe('VCombobox', () => {
     })
   })
 
+  describe('trimValues', () => {
+    it('should discard whitespace-only values and trim committed values', async () => {
+      const model = ref([])
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } multiple trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard(' ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard('  {Enter}')
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('a {Enter}')
+      await expect.poll(() => model.value).toEqual(['a'])
+
+      await userEvent.keyboard(' b b')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual(['a', 'b b'])
+    })
+
+    it('should trim single value on blur', async () => {
+      const model = ref()
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('  ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBeNull()
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard(' a a ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBe('a a')
+      await expect.poll(() => (input as HTMLInputElement).value).toBe('a a')
+    })
+  })
+
   showcase({ stories })
 })
