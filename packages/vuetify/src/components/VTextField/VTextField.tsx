@@ -216,7 +216,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                 onMousedown={ onControlMousedown }
                 onClick={ onControlClick }
                 onClick:clear={ (e: MouseEvent) => onClear(e, reset) }
-                role={ props.role }
                 { ...omit(fieldProps, ['onClick:clear']) }
                 id={ id.value }
                 labelId={ `${id.value}-label` }
