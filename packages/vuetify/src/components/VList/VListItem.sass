@@ -23,6 +23,9 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--variant-tonal
+      overflow: hidden
+
     &--focus-visible
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
