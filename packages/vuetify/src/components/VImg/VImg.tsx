@@ -395,7 +395,7 @@ export const VImg = genericComponent<VImgSlots>()({
           { ...responsiveProps }
           { ...rootAttrs }
           aspectRatio={ aspectRatio.value }
-          aria-label={ props.alt }
+          aria-label={ props.alt || undefined }
           role={ props.alt ? 'img' : undefined }
           v-intersect={[{
             handler: init,
