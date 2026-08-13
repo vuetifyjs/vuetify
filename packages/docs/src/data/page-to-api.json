@@ -105,6 +105,7 @@
   "components/icon-buttons": ["VIconBtn"],
   "components/icons": ["VIcon"],
   "components/images": ["VImg"],
+  "components/infinite-carousels": ["VInfiniteCarousel"],
   "components/infinite-scroller": ["VInfiniteScroll"],
   "components/inputs": ["VInput"],
   "components/item-groups": ["VItem", "VItemGroup"],
