@@ -175,6 +175,12 @@
     .v-progress-linear__stream
       right: auto
 
+  .v-progress-linear--revealing
+    --v-progress-reveal-duration: #{$progress-linear-reveal-duration}
+
+    .v-progress-linear__determinate
+      transition-duration: var(--v-progress-reveal-duration)
+
   .v-progress-linear--no-transition
     --v-progress-linear-transition-duration: 0s
 

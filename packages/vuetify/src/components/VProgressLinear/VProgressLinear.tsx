@@ -9,6 +9,7 @@ import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -68,6 +69,7 @@ export const makeVProgressLinearProps = propsFactory({
   ...makeChunksProps(),
   ...makeComponentProps(),
   ...makeLocationProps({ location: 'top' } as const),
+  ...makeRevealProps(),
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
@@ -104,11 +106,15 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     } = useBackgroundColor(() => props.color)
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const max = computed(() => parseFloat(props.max))
     const height = computed(() => parseFloat(props.height))
     const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue) / max.value * 100, 0, 100))
-    const normalizedValue = computed(() => clamp(parseFloat(progress.value) / max.value * 100, 0, 100))
+    const normalizedValue = computed(() => revealState.value === 'initial'
+      ? 0
+      : clamp(parseFloat(progress.value) / max.value * 100, 0, 100)
+    )
     const isReversed = computed(() => isRtl.value !== props.reverse)
     const transitionDuration = computed(() => props.transition === false ? undefined : convertToUnit(
       isObject(props.transition) ? props.transition.duration : undefined, 'ms'
@@ -186,6 +192,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--clickable': props.clickable,
             'v-progress-linear--no-transition': props.transition === false,
+            'v-progress-linear--revealing': ['initial', 'pending'].includes(revealState.value),
             'v-progress-linear--variant-split': props.variant === 'split',
           },
           roundedClasses.value,
@@ -200,6 +207,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             height: props.active ? convertToUnit(height.value) : 0,
             '--v-progress-linear-height': convertToUnit(height.value),
             '--v-progress-linear-transition-duration': transitionDuration.value,
+            '--v-progress-reveal-duration': `${revealDuration.value}ms`,
             '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
             ...(props.absolute ? locationStyles.value : {}),
           },

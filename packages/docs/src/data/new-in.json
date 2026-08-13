@@ -439,6 +439,7 @@
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
       "chunkWidth": "3.10.0",
+      "reveal": "4.2.0",
       "transition": "4.2.0",
       "variant": "4.1.0"
     },

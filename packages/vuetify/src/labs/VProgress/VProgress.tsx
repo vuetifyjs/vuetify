@@ -61,6 +61,7 @@ export const makeVProgressProps = propsFactory({
     'bgColor',
     'theme',
     'transition',
+    'reveal',
   ]),
   ...makeComponentProps(),
 }, 'VProgress')
