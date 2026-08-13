@@ -426,10 +426,12 @@
   "VProgressCircular": {
     "props": {
       "reveal": "3.12.0",
-      "rounded": "3.11.0"
+      "rounded": "3.11.0",
+      "transition": "4.2.0"
     },
     "examples": {
-      "prop-reveal": "3.12.0"
+      "prop-reveal": "3.12.0",
+      "prop-transition": "4.2.0"
     }
   },
   "VProgressLinear": {
@@ -437,10 +439,12 @@
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
       "chunkWidth": "3.10.0",
+      "transition": "4.2.0",
       "variant": "4.1.0"
     },
     "examples": {
-      "prop-chunks": "3.10.0"
+      "prop-chunks": "3.10.0",
+      "prop-transition": "4.2.0"
     }
   },
   "VRow": {

@@ -17,7 +17,10 @@ import { useToggleScope } from '@/composables/toggleScope'
 // Utilities
 import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
-import { clamp, convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 type VProgressLinearSlots = {
   default: { value: number, buffer: number }
@@ -57,6 +60,10 @@ export const makeVProgressLinearProps = propsFactory({
   stream: Boolean,
   striped: Boolean,
   roundedBar: Boolean,
+  transition: {
+    type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
+    default: undefined,
+  },
 
   ...makeChunksProps(),
   ...makeComponentProps(),
@@ -103,7 +110,10 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue) / max.value * 100, 0, 100))
     const normalizedValue = computed(() => clamp(parseFloat(progress.value) / max.value * 100, 0, 100))
     const isReversed = computed(() => isRtl.value !== props.reverse)
-    const transition = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
+    const transitionDuration = computed(() => props.transition === false ? undefined : convertToUnit(
+      isObject(props.transition) ? props.transition.duration : undefined, 'ms'
+    ))
+    const transitionName = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
     const containerWidth = shallowRef(0)
     const { hasChunks, splitStyles, chunksMaskStyles, snapValueToChunk } = useChunks(
@@ -175,6 +185,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--rounded-bar': props.roundedBar,
             'v-progress-linear--striped': props.striped,
             'v-progress-linear--clickable': props.clickable,
+            'v-progress-linear--no-transition': props.transition === false,
             'v-progress-linear--variant-split': props.variant === 'split',
           },
           roundedClasses.value,
@@ -188,6 +199,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             top: props.location === 'top' ? 0 : undefined,
             height: props.active ? convertToUnit(height.value) : 0,
             '--v-progress-linear-height': convertToUnit(height.value),
+            '--v-progress-linear-transition-duration': transitionDuration.value,
             '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
             ...(props.absolute ? locationStyles.value : {}),
           },
@@ -238,7 +250,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           ]}
         />
 
-        <Transition name={ transition.value }>
+        <Transition name={ transitionName.value }>
           { !props.indeterminate ? (
             <div
               class={[

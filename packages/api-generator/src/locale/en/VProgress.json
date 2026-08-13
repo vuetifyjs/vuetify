@@ -8,6 +8,7 @@
     "max": "Sets the maximum value for the progress indicator.",
     "hideLabel": "Hides the label text.",
     "hideValue": "Hides the value text.",
+    "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (`0.4s`), or `false` to remove it. Does not affect the `indeterminate` animation.",
     "valueFormat": "Formatter for the visible value text and `aria-valuetext`. Use `[value]` and `[max]` as placeholders in strings, or pass a function that receives `{ value, max }` and returns a string."
   },
   "slots": {

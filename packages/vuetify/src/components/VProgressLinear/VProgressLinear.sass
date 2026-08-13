@@ -21,6 +21,8 @@
 @include tools.layer('components')
   // Block
   .v-progress-linear
+    --v-progress-linear-transition-duration: #{$progress-linear-transition-duration}
+
     background: transparent
     overflow: hidden
     position: relative
@@ -172,6 +174,9 @@
 
     .v-progress-linear__stream
       right: auto
+
+  .v-progress-linear--no-transition
+    --v-progress-linear-transition-duration: 0s
 
   .v-progress-linear--absolute,
   .v-progress-linear--fixed
