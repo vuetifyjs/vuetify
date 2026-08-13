@@ -118,7 +118,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const { densityClasses } = useDensity(props)
-    const { handleDrop, hasFilesOrFolders } = useFileDrop()
+    const { handleDrop, hasFilesOrFolders, isDraggingFiles } = useFileDrop()
     const context = inject(VFileUploadKey, null)
     const vSheetRef = ref<VSheet>()
     const isDragging = shallowRef(false)
@@ -130,7 +130,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       if (!isInteractive.value) return
       e.preventDefault()
       e.stopImmediatePropagation()
-      isDragging.value = true
+      if (isDraggingFiles(e)) isDragging.value = true
     }
 
     function onDragleave (e: DragEvent) {

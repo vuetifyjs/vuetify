@@ -1,4 +1,5 @@
 @use './variables' as *
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use 'sass:math'
 @use 'sass:selector'
@@ -36,8 +37,17 @@
       width: 100%
       z-index: 0
 
-    &--dragging input[type="file"]
-      z-index: 1
+    .v-field
+      outline: 2px dashed transparent
+      outline-offset: 2px
+      transition: outline-color 250ms settings.$standard-easing
+
+    &--dragging
+      .v-field
+        outline-color: rgba(var(--v-theme-on-surface), $file-input-drag-outline-opacity)
+
+      input[type="file"]
+        z-index: 1
 
     input[inert]
       pointer-events: none // for Chromium < 102 / Firefox < 112 -- drop in v5
