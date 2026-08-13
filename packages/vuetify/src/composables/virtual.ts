@@ -122,7 +122,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const prevHeight = sizes[index]
     const prevMinHeight = itemHeight.value
 
-    itemHeight.value = prevMinHeight ? Math.min(itemHeight.value, height) : height
+    if (height > 0) {
+      itemHeight.value = prevMinHeight ? Math.min(prevMinHeight, height) : height
+    }
 
     if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
       sizes[index] = height
