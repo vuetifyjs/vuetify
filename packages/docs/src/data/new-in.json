@@ -16,6 +16,7 @@
       "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
+      "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0"
@@ -122,6 +123,7 @@
       "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
+      "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0"
