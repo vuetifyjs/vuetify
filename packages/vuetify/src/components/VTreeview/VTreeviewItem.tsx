@@ -103,7 +103,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           ]}
           role="treeitem"
           ripple={ false }
-          onClick={ activateGroupActivator }
+          onClick={ isClickable.value ? activateGroupActivator : undefined }
         >
           {{
             ...slots,
