@@ -388,7 +388,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             : headers.value.map((row, y) => (
               <tr>
                 { row.map((column, x) => (
-                  <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+                  <VDataTableHeaderCell key={ column.key ?? x } column={ column } x={ x } y={ y } />
                 ))}
               </tr>
             ))}
