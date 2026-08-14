@@ -41,6 +41,7 @@ import {
   ensureValidVNode,
   escapeForRegex,
   genericComponent,
+  getActiveElement,
   IN_BROWSER,
   isComposingIgnoreKey,
   isFunction,
@@ -147,6 +148,7 @@ export const VCombobox = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
+    let focusLastOnOpen = false
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
@@ -226,6 +228,13 @@ export const VCombobox = genericComponent<new <
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
+    const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
+    const { listEvents, focusFirstItem, focusLastItem } = useScrolling(
+      listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value,
+    )
+
     watch(_search, value => {
       if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
@@ -233,6 +242,15 @@ export const VCombobox = genericComponent<new <
         nextTick(() => (cleared = false))
       } else if (isFocused.value && !menu.value) {
         menu.value = true
+      }
+
+      if (menu.value && isFocused.value) {
+        nextTick(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)
+          if (listRef.value?.$el?.contains(getActiveElement())) {
+            vTextFieldRef.value?.focus()
+          }
+        })
       }
 
       emit('update:search', value)
@@ -256,11 +274,6 @@ export const VCombobox = genericComponent<new <
         !isPristine.value &&
         !listHasFocus.value
     })
-
-    const listRef = ref<VList>()
-    const headerRef = ref<HTMLElement>()
-    const footerRef = ref<HTMLElement>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -320,7 +333,26 @@ export const VCombobox = genericComponent<new <
         e.preventDefault()
       }
 
+      if (
+        menu.value &&
+        !isPristine.value &&
+        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
+        listRef.value?.$el &&
+        !listRef.value.$el.contains(getActiveElement())
+      ) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if (e.key === 'ArrowDown') focusFirstItem()
+        else focusLastItem()
+        return
+      }
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
+        menu.value = true
+      }
+
+      if (e.key === 'ArrowUp' && !menu.value && !model.value.length) {
+        focusLastOnOpen = true
         menu.value = true
       }
 
@@ -414,6 +446,10 @@ export const VCombobox = genericComponent<new <
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (focusLastOnOpen) {
+        focusLastOnOpen = false
+        focusLastItem()
       }
     }
     function onAfterLeave () {
@@ -565,6 +601,8 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, val => {
+      if (!val) focusLastOnOpen = false
+
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))

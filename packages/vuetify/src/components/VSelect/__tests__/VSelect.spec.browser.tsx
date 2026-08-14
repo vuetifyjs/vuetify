@@ -1174,6 +1174,106 @@ describe('VSelect', () => {
 
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
     })
+
+    it('should wrap ArrowUp from first item to last of the full list', async () => {
+      const items = Array.from({ length: 50 }, (_, i) => `Item ${i}`)
+
+      render(() => (
+        <VSelect items={ items } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 0')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 49')
+      expect(screen.getAllByRole('option').map(el => el.textContent)).toContain('Item 49')
+    })
+
+    it('should open with ArrowUp onto the last item when empty', async () => {
+      const items = Array.from({ length: 50 }, (_, i) => `Item ${i}`)
+
+      render(() => (
+        <VSelect items={ items } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 49')
+    })
+
+    it('should wrap and Home/End across subheaders', async () => {
+      const items = [
+        { type: 'subheader', title: 'Group 1' },
+        { title: 'Item 1.1', value: 11 },
+        { title: 'Item 1.2', value: 12 },
+        { type: 'divider' },
+        { type: 'subheader', title: 'Group 2' },
+        ...Array.from({ length: 30 }, (_, i) => ({ title: `Item 2.${i + 1}`, value: 20 + i })),
+      ]
+
+      render(() => (
+        <VSelect items={ items } itemTitle="title" itemValue="value" />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .toContain('Item 1.1')
+      await userEvent.keyboard('{Home}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 1.1')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 2.30')
+
+      await userEvent.keyboard('{Home}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 1.1')
+
+      await userEvent.keyboard('{End}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 2.30')
+    })
+
+    it('should follow typeahead with list focus while the menu is open', async () => {
+      render(() => (
+        <VSelect items={ manyItems } multiple />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      await userEvent.keyboard('9')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('9')
+
+      await userEvent.keyboard('9')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('99')
+    })
+
+    it('should keep the scroll position continuous while arrowing down', async () => {
+      render(() => (
+        <VSelect items={ manyItems } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('0')
+
+      const list = screen.getByCSS('.v-list')
+      let previous = list.scrollTop
+      for (let i = 1; i < 30; i++) {
+        await userEvent.keyboard('{ArrowDown}')
+        await expect.poll(() => document.activeElement?.textContent?.trim()).toBe(String(i))
+        expect(list.scrollTop - previous).toBeLessThan(list.clientHeight)
+        previous = list.scrollTop
+      }
+    })
   })
 
   it('should close its menu when clicking another field inside a dialog', async () => {

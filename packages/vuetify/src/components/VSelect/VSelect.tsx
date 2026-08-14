@@ -194,6 +194,7 @@ export const VSelect = genericComponent<new <
     let keyboardLookupLastTime: number
     let openedByKeyboard = false
     let openedByArrow: 'next' | 'prev' | null = null
+    let focusLastOnOpen = false
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -222,7 +223,9 @@ export const VSelect = genericComponent<new <
     })
 
     const listRef = ref<VList>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+    const { listEvents, focusItem, focusFirstItem, focusLastItem, focusAdjacentItem } = useScrolling(
+      listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value,
+    )
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -250,6 +253,7 @@ export const VSelect = genericComponent<new <
 
       openedByKeyboard = false
       openedByArrow = null
+      focusLastOnOpen = false
       menu.value = !menu.value
     }
 
@@ -276,8 +280,9 @@ export const VSelect = genericComponent<new <
         openedByArrow = null
       }
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+      if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         openedByKeyboard = true
+        focusLastOnOpen = e.key === 'ArrowUp' && !model.value.length
         menu.value = true
       }
 
@@ -293,10 +298,10 @@ export const VSelect = genericComponent<new <
         return
       }
 
-      if (e.key === 'Home') {
-        listRef.value?.focus('first')
-      } else if (e.key === 'End') {
-        listRef.value?.focus('last')
+      if (menu.value && e.key === 'Home') {
+        focusFirstItem()
+      } else if (menu.value && e.key === 'End') {
+        focusLastItem()
       }
 
       // html select hotkeys
@@ -349,9 +354,11 @@ export const VSelect = genericComponent<new <
 
       const [item, index] = result
       keyboardLookupIndex = index
-      listRef.value?.focus(index)
       if (!props.multiple) {
         select(item, true)
+      }
+      if (menu.value) {
+        focusItem(index)
       }
     }
 
@@ -405,34 +412,40 @@ export const VSelect = genericComponent<new <
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
     }
-    function focusSelectedItem (options?: FocusOptions) {
-      // Virtual list only mounts a window — numeric index into DOM children is wrong
-      const selected = listRef.value?.$el?.querySelector?.('[aria-selected="true"]') as HTMLElement | null
-      if (!selected) return false
-      selected.focus(options)
-      return true
-    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
       if (!listRef.value || !isFocused.value) return
 
-      // VMenu re-dispatches ArrowUp/Down after open and already moved focus to next/prev
+      if (focusLastOnOpen) {
+        focusLastOnOpen = false
+        focusLastItem()
+        return
+      }
+
       if (listRef.value.$el?.contains(getActiveElement())) return
 
       const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
 
-      // fallback for VMenu's re-dispatch; fires before the virtual list has scrolled
       if (openedByArrow) {
+        const selected = getSelectedIndex()
+        if (selected >= 0) {
+          focusAdjacentItem(selected, openedByArrow === 'next' ? 1 : -1)
+          return
+        }
         listRef.value.focus(openedByArrow, opts)
         return
       }
 
-      if (focusSelectedItem(opts)) return
+      const selected = getSelectedIndex()
+      if (selected >= 0) {
+        focusItem(selected)
+        return
+      }
 
       if (openedByKeyboard) {
-        listRef.value.focus('first', opts)
+        focusFirstItem()
       }
     }
     function onAfterLeave () {
@@ -476,6 +489,7 @@ export const VSelect = genericComponent<new <
       if (!val) {
         openedByKeyboard = false
         openedByArrow = null
+        focusLastOnOpen = false
       }
 
       if (!props.hideSelected && menu.value && model.value.length) {

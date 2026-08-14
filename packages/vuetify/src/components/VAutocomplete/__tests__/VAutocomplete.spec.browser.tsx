@@ -1194,6 +1194,67 @@ describe('VAutocomplete', () => {
       await userEvent.keyboard('{ArrowUp}')
       expect(document.activeElement?.textContent?.trim()).toBe('100')
     })
+
+    it('should reset the list window when filtering after open with selection', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 102 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('102')
+
+      await userEvent.keyboard('1')
+      await waitIdle()
+
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+      expect(screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .not.toContain('102')
+    })
+
+    it('should enter the filtered list from either end', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 102 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('1')
+      await waitIdle()
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('1')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('991')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('1')
+    })
+
+    it('should keep checkboxes in sync with the model while filtering', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={[1]} multiple />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('1')
+      await waitIdle()
+
+      const checked = () => screen.getAllByRole('option')
+        .filter(el => el.querySelector('input:checked'))
+        .map(el => el.textContent?.trim())
+
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+      expect(checked()).toEqual(['1'])
+    })
   })
 
   showcase({ stories })

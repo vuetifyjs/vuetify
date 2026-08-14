@@ -39,6 +39,7 @@ import {
   deepEqual,
   ensureValidVNode,
   genericComponent,
+  getActiveElement,
   IN_BROWSER,
   isComposingIgnoreKey,
   isFunction,
@@ -136,6 +137,7 @@ export const VAutocomplete = genericComponent<new <
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
+    let focusLastOnOpen = false
     const vMenuRef = ref<VMenu>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
@@ -206,7 +208,13 @@ export const VAutocomplete = genericComponent<new <
     const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+
+    const {
+      listEvents,
+      focusFirstItem,
+      focusLastItem,
+    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value)
+
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -265,7 +273,26 @@ export const VAutocomplete = genericComponent<new <
         e.preventDefault()
       }
 
+      if (
+        menu.value &&
+        !isPristine.value &&
+        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
+        listRef.value?.$el &&
+        !listRef.value.$el.contains(getActiveElement())
+      ) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if (e.key === 'ArrowDown') focusFirstItem()
+        else focusLastItem()
+        return
+      }
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
+        menu.value = true
+      }
+
+      if (e.key === 'ArrowUp' && !menu.value && !model.value.length) {
+        focusLastOnOpen = true
         menu.value = true
       }
 
@@ -351,6 +378,10 @@ export const VAutocomplete = genericComponent<new <
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
+      }
+      if (focusLastOnOpen) {
+        focusLastOnOpen = false
+        focusLastItem()
       }
     }
     function onAfterLeave () {
@@ -483,9 +514,20 @@ export const VAutocomplete = genericComponent<new <
       if (val) menu.value = true
 
       isPristine.value = !val
+
+      if (menu.value) {
+        nextTick(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)
+          if (listRef.value?.$el?.contains(getActiveElement())) {
+            vTextFieldRef.value?.focus()
+          }
+        })
+      }
     })
 
     watch(menu, val => {
+      if (!val) focusLastOnOpen = false
+
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = displayItems.value.findIndex(
           item => model.value.some(s => item.value === s.value)
