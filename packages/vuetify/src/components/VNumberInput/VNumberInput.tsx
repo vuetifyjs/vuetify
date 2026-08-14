@@ -196,15 +196,23 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       return numberFromText !== clamp(numberFromText, props.min, props.max)
     })
 
+    function stepResult (increment: boolean) {
+      const current = toNumber(inputText.value)
+      const stepped = current + (increment ? props.step : -props.step)
+      return { current, stepped, next: clamp(stepped, props.min, props.max) }
+    }
+
     const canIncrease = computed(() => {
       if (controlsDisabled.value) return false
       if (model.value == null) return true
-      return model.value + props.step <= props.max
+      const { current, next } = stepResult(true)
+      return next !== current
     })
     const canDecrease = computed(() => {
       if (controlsDisabled.value) return false
       if (model.value == null) return true
-      return model.value - props.step >= props.min
+      const { current, next } = stepResult(false)
+      return next !== current
     })
 
     const controlVariant = computed(() => {
@@ -257,14 +265,12 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
         emitChange()
         return
       }
-      const inferredPrecision = Math.max(inferPrecision(toNumber(inputText.value)), inferPrecision(props.step))
-      if (increment && canIncrease.value) {
-        inputText.value = correctPrecision(model.value + props.step, inferredPrecision)
-        emitChange()
-      } else if (!increment && canDecrease.value) {
-        inputText.value = correctPrecision(model.value - props.step, inferredPrecision)
-        emitChange()
-      }
+      const { current, stepped, next } = stepResult(increment)
+
+      inputText.value = next === stepped
+        ? correctPrecision(next, Math.max(inferPrecision(current), inferPrecision(props.step)))
+        : correctPrecision(next)
+      emitChange()
     }
 
     function onBeforeinput (e: InputEvent) {
@@ -309,7 +315,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       nextTick(() => inputText.value = result.text)
     }
 
-    async function onKeydown (e: KeyboardEvent) {
+    function onKeydown (e: KeyboardEvent) {
       if (
         ['Enter', 'ArrowLeft', 'ArrowRight', 'Backspace', 'Delete', 'Tab'].includes(e.key) ||
         e.ctrlKey
@@ -318,14 +324,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         e.preventDefault()
         e.stopPropagation()
-        clampModel()
-        // _model is controlled, so need to wait until props['modelValue'] is updated
-        await nextTick()
-        if (e.key === 'ArrowDown') {
-          toggleUpDown(false)
-        } else {
-          toggleUpDown()
-        }
+        toggleUpDown(e.key === 'ArrowUp')
       }
     }
 
