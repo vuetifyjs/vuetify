@@ -111,10 +111,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
         : parent?.unregister()
     }, { immediate: true })
 
-    function onClickOutside (e: MouseEvent) {
-      parent?.closeParents(e)
-    }
-
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
@@ -191,7 +187,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           activatorProps={ activatorProps.value }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
-          onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
           { ...scopeId }
         >

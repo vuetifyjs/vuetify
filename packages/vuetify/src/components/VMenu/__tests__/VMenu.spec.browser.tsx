@@ -2,6 +2,7 @@
 import { VMenu } from '../VMenu'
 import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
+import { VDialog } from '@/components/VDialog'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
 import { VTextarea } from '@/components/VTextarea'
@@ -631,6 +632,34 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByText('Tooltip')).toBeVisible()
 
       await userEvent.click(screen.getByTestId('other'))
+      await wait(300)
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+
+    it('should keep the menu open when dismissing a scrimmed child overlay', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-4" data-testid="menu-content">
+              <VBtn data-testid="dialog-btn">
+                Dialog
+                <VDialog activator="parent" width="200">
+                  <VSheet class="pa-4" data-testid="dialog-content">Dialog</VSheet>
+                </VDialog>
+              </VBtn>
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('dialog-btn'))
+      await expect.poll(() => screen.queryByTestId('dialog-content')).toBeVisible()
+
+      await userEvent.click(document.querySelector('.v-overlay__scrim')!, { position: { x: 5, y: 5 } })
+      await expect.poll(() => screen.queryByTestId('dialog-content')).toBeNull()
       await wait(300)
       expect(screen.queryByTestId('menu-content')).toBeVisible()
     })

@@ -207,8 +207,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       updateLocation,
     })
 
-    const menuParent = inject(VMenuSymbol, null)
-    const isMenu = vm.parent?.type?.name === 'VMenu'
+    // self-reference or the closest ancestor
+    const menu = inject(VMenuSymbol, null)
 
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
@@ -216,7 +216,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (!props.persistent) isActive.value = false
       else animateClick()
 
-      if (!isMenu) menuParent?.closeParents(e)
+      if (!props.scrim) menu?.closeParents(e)
     }
 
     function closeConditional (e: Event) {
