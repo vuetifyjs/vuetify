@@ -360,6 +360,21 @@ describe('VNumberInput', () => {
       expect(model.value).toBe(0)
     })
 
+    // 0.2 + 0.1 > 0.3 in IEEE-754; must still allow stepping to max
+    it('should reach max when step has floating-point error', async () => {
+      const model = ref(0)
+      render(() => <VNumberInput step={ 0.1 } max={ 0.3 } v-model={ model.value } precision={ null } />)
+
+      await userEvent.keyboard('{Tab}{ArrowUp}')
+      expect(model.value).toBe(0.1)
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(0.2)
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(0.3)
+    })
+
     it('shows custom decimal separator when incrementing', async () => {
       const model = ref(0)
       render(() => (
