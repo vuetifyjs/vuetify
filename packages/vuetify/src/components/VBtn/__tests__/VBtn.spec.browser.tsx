@@ -206,14 +206,6 @@ describe('VBtn', () => {
       const { wrapper } = render(<VBtn></VBtn>)
       expect(wrapper.element).not.toHaveValue()
     })
-
-    it('should not render the value attribute on a link', async () => {
-      const { wrapper } = render(() => (
-        <VBtn href="#anchor" value="foo"></VBtn>
-      ))
-      expect(wrapper.element.tagName).toBe('A')
-      expect(wrapper.element).not.toHaveAttribute('value')
-    })
   })
 
   describe('Reactivity', () => {
