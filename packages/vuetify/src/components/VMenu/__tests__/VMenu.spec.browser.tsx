@@ -340,6 +340,38 @@ describe('VMenu', () => {
     expect(model.value).toBe(false)
   })
 
+  it('should only reference the menu id on the activator while it is open', async () => {
+    render(() => (
+      <VMenu>
+        {{
+          activator: ({ props }: any) => <VBtn { ...props } data-testid="btn">Open</VBtn>,
+          default: () => (
+            <VSheet class="pa-3" data-testid="menu-content">
+              <p>Content</p>
+            </VSheet>
+          ),
+        }}
+      </VMenu>
+    ))
+
+    const btn = screen.getByTestId('btn')
+    expect(btn).not.toHaveAttribute('aria-controls')
+    expect(btn).not.toHaveAttribute('aria-owns')
+
+    await userEvent.click(btn)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+
+    const id = btn.getAttribute('aria-controls')
+    expect(btn).toHaveAttribute('aria-owns', id)
+    expect(document.getElementById(id!)).not.toBeNull()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+
+    expect(btn).not.toHaveAttribute('aria-controls')
+    expect(btn).not.toHaveAttribute('aria-owns')
+  })
+
   describe('cascade close', () => {
     beforeEach(() => commands.setReduceMotionDisabled())
 
