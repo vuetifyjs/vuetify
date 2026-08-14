@@ -74,6 +74,9 @@ export const VDivider = genericComponent()({
     })
 
     useRender(() => {
+      const role = attrs.role as string | undefined
+      const hasSlot = !!slots.default
+
       const divider = (
         <hr
           class={[
@@ -95,15 +98,15 @@ export const VDivider = genericComponent()({
             props.style,
           ]}
           aria-orientation={
-            !attrs.role || attrs.role === 'separator'
+            !hasSlot && !role
               ? props.vertical ? 'vertical' : 'horizontal'
               : undefined
           }
-          role={ attrs.role as string | undefined }
+          role={ !hasSlot ? role : undefined }
         />
       )
 
-      if (!slots.default) return divider
+      if (!hasSlot) return divider
 
       return (
         <div
