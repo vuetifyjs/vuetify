@@ -97,6 +97,19 @@ The following are the already released **minor** and **major** version updates. 
   - reduced CSS reset - respecting browser defaults
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
 
+### v3.13 (LTS)
+
+- **Released:** July 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v3.13 Release](/getting-started/release-notes/?version=v3.13.0)
+- **Overview:**
+  - final v3 minor release — enters [long-term support](/introduction/long-term-support/)
+  - VSelect/VAutocomplete/VCombobox - new events for multi-selection
+  - VDataTable - mobile header slot and improved a11y for sorting and selection
+  - VSkeletonLoader - new `types` prop, `chip-group` type and `table` improvements
+  - VBtnGroup - `size` prop to align with standalone buttons
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/92)
+
 ### v3.12 (Warden)
 
 - **Released:** February 2026

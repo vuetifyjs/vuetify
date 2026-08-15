@@ -9,7 +9,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isBoolean, pickWithRest, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -29,7 +29,7 @@ export const makeVTableProps = propsFactory({
   gridlines: {
     type: [Boolean, String] as PropType<boolean | Gridlines>,
     default: 'horizontal',
-    validator: (v: any) => typeof v === 'boolean' || ['horizontal', 'vertical', 'all'].includes(v),
+    validator: (v: any) => isBoolean(v) || ['horizontal', 'vertical', 'all'].includes(v),
   },
   fixedHeader: Boolean,
   fixedFooter: Boolean,

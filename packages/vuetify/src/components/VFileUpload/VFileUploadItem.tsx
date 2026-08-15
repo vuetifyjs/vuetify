@@ -6,7 +6,7 @@ import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
 // Utilities
 import { computed, ref, watchEffect } from 'vue'
-import { genericComponent, humanReadableFileSize, propsFactory, useRender } from '@/util'
+import { genericComponent, humanReadableFileSize, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
 
   setup (props, { emit, slots }) {
     const preview = ref()
-    const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
+    const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
 
     function onClickRemove () {
       emit('click:remove')

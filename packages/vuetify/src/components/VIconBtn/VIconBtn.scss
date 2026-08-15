@@ -20,6 +20,7 @@
       height: #{$icon-btn-height};
       justify-content: center;
       outline: none;
+      overflow: hidden;
       position: relative;
       transition-property: width, height, transform;
       transition: 0.2s settings.$standard-easing;
@@ -65,8 +66,10 @@
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    transition: inherit;
     transition-property: transform;
+    transition-duration: inherit;
+    transition-timing-function: inherit;
+    transition-delay: inherit;
     transform: rotate(var(--v-icon-btn-rotate, 0deg));
 
     .v-icon-btn--loading & {
@@ -93,7 +96,6 @@
 
   .v-icon-btn__overlay,
   .v-icon-btn__underlay {
-    border-radius: inherit;
     pointer-events: none;
 
     @include tools.absolute();

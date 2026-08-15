@@ -7,7 +7,15 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray } from '@/util'
+import {
+  getCurrentInstance,
+  getCurrentInstanceName,
+  isFunction,
+  isString,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -84,7 +92,7 @@ export function useValidation (
   id: MaybeRef<string | number> = useId(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
-  const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
+  const validationModel = computed(() => isUndefined(props.validationValue) ? model.value : props.validationValue)
   const form = useForm(props)
   const rules = useRules(() => props.rules)
   const internalErrorMessages = ref<string[]>([])
@@ -122,6 +130,7 @@ export function useValidation (
     }
   })
   const isValidating = shallowRef(false)
+  let isResetting = false
   const validationClasses = computed(() => {
     return {
       [`${name}--error`]: isValid.value === false,
@@ -157,15 +166,7 @@ export function useValidation (
 
   useToggleScope(() => validateOn.value.input || (validateOn.value.invalidInput && isValid.value === false), () => {
     watch(validationModel, () => {
-      if (validationModel.value != null) {
-        validate()
-      } else if (props.focused) {
-        const unwatch = watch(() => props.focused, val => {
-          if (!val) validate()
-
-          unwatch()
-        })
-      }
+      if (!isResetting) validate()
     })
   })
 
@@ -180,8 +181,10 @@ export function useValidation (
   })
 
   async function reset () {
+    isResetting = true
     model.value = null
     await nextTick()
+    isResetting = false
     await resetValidation()
   }
 
@@ -204,12 +207,12 @@ export function useValidation (
         break
       }
 
-      const handler = typeof rule === 'function' ? rule : () => rule
+      const handler = isFunction(rule) ? rule : () => rule
       const result = await handler(validationModel.value)
 
       if (result === true) continue
 
-      if (result !== false && typeof result !== 'string') {
+      if (result !== false && !isString(result)) {
         // eslint-disable-next-line no-console
         console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
 

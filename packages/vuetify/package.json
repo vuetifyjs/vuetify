@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "4.1.6",
+  "version": "4.1.9",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -146,6 +146,9 @@
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
+  "dependencies": {
+    "@vuetify/v0": "^1.0.2"
+  },
   "devDependencies": {
     "@date-io/core": "3.2.0",
     "@date-io/date-fns": "3.2.1",
@@ -212,7 +215,7 @@
   "peerDependencies": {
     "typescript": ">=4.7",
     "vite-plugin-vuetify": ">=2.1.0",
-    "vue": "^3.5.0",
+    "vue": "^3.5.0 || ^3.6.0-0",
     "webpack-plugin-vuetify": ">=3.1.0"
   },
   "peerDependenciesMeta": {

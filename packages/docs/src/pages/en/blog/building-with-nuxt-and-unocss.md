@@ -8,7 +8,7 @@ meta:
 
 # Creating a highly optimized Vuetify 3 project with Nuxt and UnoCSS
 
-Although traditionally we tend to think about Vuetify as a great fit for large projects, it can also serve smaller projects that tend to prioritize performance. When scaffolding new projects it comes with tree-shaking out-of-the-box, but there is still some room for improvement as main CSS bundle ships hundreds of kB of CSS we might not need. If the users like your page loading animation and you can afford a bit of overhead, there is nothing wrong with simplified setup that does the job and let's you focus on the business logic or UX. That said, integrating UnoCSS (atomic CSS engine) will help us trim the bundle and enable dynamic utilities. With it's superpowers we not only avoid writing plain CSS (most of the time), but can also make use of TailwindCSS tooling (IDE extensions) or standardize certain utilities.
+Although traditionally we tend to think about Vuetify as a great fit for large projects, it can also serve smaller projects that tend to prioritize performance. When scaffolding new projects it comes with tree-shaking out-of-the-box, but there is still some room for improvement as main CSS bundle ships hundreds of kB of CSS we might not need. If the users like your page loading animation and you can afford a bit of overhead, there is nothing wrong with simplified setup that does the job and lets you focus on the business logic or UX. That said, integrating UnoCSS (atomic CSS engine) will help us trim the bundle and enable dynamic utilities. With its superpowers we not only avoid writing plain CSS (most of the time), but can also make use of TailwindCSS tooling (IDE extensions) or standardize certain utilities.
 
 The article will walk through scaffolding a starter project, installing and wiring UnoCSS, customizing fonts, handling light/dark mode and aligning breakpoints. Finally, "CSS layers" section shows how to order Vuetify, UnoCSS, and app‑specific styles to avoid specificity conflicts.
 
@@ -213,7 +213,7 @@ bun add -D @unocss/preset-wind4
 
 :::
 
-The preset called [Wind4](https://unocss.dev/presets/wind4) is an official configuration builder providing making it easy to expose all the utilities from TailwindCSS v4 in your project. There are 2 configuration points - an object passed to the main `presetWind4` method and `theme` field next to the `presets`. Unlike using pure TailwindCSS v4 it let's us configure stuff in JavaScript code.
+The preset called [Wind4](https://unocss.dev/presets/wind4) is an official configuration builder providing making it easy to expose all the utilities from TailwindCSS v4 in your project. There are 2 configuration points - an object passed to the main `presetWind4` method and `theme` field next to the `presets`. Unlike using pure TailwindCSS v4 it lets us configure stuff in JavaScript code.
 
 ```ts { resource="nuxt.config.ts" }
 import presetWind4 from '@unocss/preset-wind4'

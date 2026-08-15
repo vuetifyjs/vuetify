@@ -45,6 +45,10 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
+  openOnArrow: {
+    type: Boolean,
+    default: true,
+  },
 
   ...omit(makeVOverlayProps({
     captureFocus: true,
@@ -111,10 +115,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
         : parent?.unregister()
     }, { immediate: true })
 
-    function onClickOutside (e: MouseEvent) {
-      parent?.closeParents(e)
-    }
-
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
@@ -137,14 +137,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
 
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
-        if (e.key === 'ArrowDown') {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          if (!props.openOnArrow) return
           e.preventDefault()
           e.stopImmediatePropagation()
-          focusChild(el, 'next')
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault()
-          e.stopImmediatePropagation()
-          focusChild(el, 'prev')
+          focusChild(el, e.key === 'ArrowDown' ? 'next' : 'prev')
         } else if (props.submenu) {
           if (e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
             isActive.value = false
@@ -156,7 +153,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       } else if (
         props.submenu
           ? e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')
-          : ['ArrowDown', 'ArrowUp'].includes(e.key)
+          : props.openOnArrow && ['ArrowDown', 'ArrowUp'].includes(e.key)
       ) {
         isActive.value = true
         e.preventDefault()
@@ -191,7 +188,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           activatorProps={ activatorProps.value }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
-          onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
           { ...scopeId }
         >

@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -195,7 +195,7 @@ export const VCarousel = genericComponent<new <T>(
                   <VProgressLinear
                     absolute
                     class="v-carousel__progress"
-                    color={ typeof props.progress === 'string' ? props.progress : undefined }
+                    color={ isString(props.progress) ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                   />
                 )}

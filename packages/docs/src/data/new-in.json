@@ -16,13 +16,19 @@
       "autocomplete": "3.10.0",
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
+      "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "openOnFocus": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
     },
     "examples": {
       "slot-menu-footer": "3.12.0",
@@ -71,6 +77,11 @@
       "misc-readonly": "3.6.0"
     }
   },
+  "VBtnGroup": {
+    "props": {
+      "size": "4.2.0"
+    }
+  },
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
@@ -100,6 +111,11 @@
       "scrollToActive": "3.10.6"
     }
   },
+  "VColorInput": {
+    "props": {
+      "openOnFocus": "4.2.0"
+    }
+  },
   "VColorPicker": {
     "props": {
       "hideEyeDropper": "3.10.0",
@@ -113,13 +129,21 @@
       "alwaysFilter": "3.10.4",
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
+      "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "openOnFocus": "4.2.0",
+      "trimValues": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0",
+      "item:created": "4.2.0"
     },
     "examples": {
       "slot-menu-header": "3.12.0"
@@ -128,6 +152,11 @@
   "VConfirmEdit": {
     "props": {
       "hideActions": "3.8.0"
+    }
+  },
+  "VDateInput": {
+    "props": {
+      "openOnFocus": "4.2.0"
     }
   },
   "VDatePicker": {
@@ -350,6 +379,7 @@
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
+      "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "submenu": "3.7.0",
@@ -409,10 +439,12 @@
   "VProgressCircular": {
     "props": {
       "reveal": "3.12.0",
-      "rounded": "3.11.0"
+      "rounded": "3.11.0",
+      "transition": "4.2.0"
     },
     "examples": {
-      "prop-reveal": "3.12.0"
+      "prop-reveal": "3.12.0",
+      "prop-transition": "4.2.0"
     }
   },
   "VProgressLinear": {
@@ -420,10 +452,13 @@
       "chunkCount": "3.10.0",
       "chunkGap": "3.10.0",
       "chunkWidth": "3.10.0",
+      "reveal": "4.2.0",
+      "transition": "4.2.0",
       "variant": "4.1.0"
     },
     "examples": {
-      "prop-chunks": "3.10.0"
+      "prop-chunks": "3.10.0",
+      "prop-transition": "4.2.0"
     }
   },
   "VRow": {
@@ -437,11 +472,16 @@
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
-      "noAutoScroll": "3.9.0"
+      "noAutoScroll": "3.9.0",
+      "openOnFocus": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
       "menu-footer": "3.12.0"
+    },
+    "events": {
+      "item:added": "4.2.0",
+      "item:removed": "4.2.0"
     },
     "examples": {
       "prop-list-props": "3.5.0",

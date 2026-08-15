@@ -23,6 +23,9 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--variant-tonal
+      overflow: hidden
+
     &--focus-visible
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
@@ -172,8 +175,14 @@
     display: flex
     align-items: center
     flex: none
-    transition: inherit
+
+    // TODO: cleanup in v5.0
+    // not effective, transition inheritance takes only from immediate parent
+    // which is typically the append slot container, so it requires custom CSS
     transition-property: height, width
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
     &--start
       margin-inline-end: $list-item-action-margin-end
