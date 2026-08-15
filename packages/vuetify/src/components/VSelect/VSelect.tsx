@@ -235,10 +235,11 @@ export const VSelect = genericComponent<new <
       listRef,
       vTextFieldRef,
       vVirtualScrollRef,
-      () => displayItems.value,
+      displayItems,
       {
         selectedIndex: getSelectedIndex,
         menuContentEl: () => vMenuRef.value?.contentEl,
+        noAutoScroll: () => props.noAutoScroll,
       }
     )
 
@@ -303,9 +304,12 @@ export const VSelect = genericComponent<new <
           if (onActivatorKeydown(e, menu)) return
           break
         case 'Home':
+          e.preventDefault()
+          if (menu.value) focusFirstItem()
+          break
         case 'End':
           e.preventDefault()
-          if (menu.value) (e.key === 'Home' ? focusFirstItem : focusLastItem)()
+          if (menu.value) focusLastItem()
           break
         case 'Backspace':
           if (!props.clearable) break

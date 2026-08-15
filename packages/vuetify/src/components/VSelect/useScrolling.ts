@@ -34,6 +34,7 @@ export function useScrolling (
     selectedIndex?: () => number
     headerEl?: () => HTMLElement | undefined
     menuContentEl?: () => HTMLElement | undefined
+    noAutoScroll?: MaybeRefOrGetter<boolean>
   } = {},
 ) {
   const isScrolling = shallowRef(false)
@@ -120,8 +121,10 @@ export function useScrolling (
 
   /** ArrowUp/ArrowDown pressed while focus is still on the field. */
   function focusFromActivator (step: 1 | -1) {
-    const selected = options.selectedIndex?.() ?? -1
-    if (selected >= 0) return focusAdjacentItem(selected, step)
+    if (!toValue(options.noAutoScroll)) {
+      const selected = options.selectedIndex?.() ?? -1
+      if (selected >= 0) return focusAdjacentItem(selected, step)
+    }
 
     if (step === 1) {
       const header = options.headerEl?.()

@@ -241,11 +241,12 @@ export const VCombobox = genericComponent<new <
       listRef,
       vTextFieldRef,
       vVirtualScrollRef,
-      () => displayItems.value,
+      displayItems,
       {
         selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
         headerEl: () => headerRef.value,
         menuContentEl: () => vMenuRef.value?.contentEl,
+        noAutoScroll: () => props.noAutoScroll,
       }
     )
 

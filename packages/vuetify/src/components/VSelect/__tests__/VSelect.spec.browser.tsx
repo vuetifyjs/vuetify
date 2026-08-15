@@ -1175,6 +1175,45 @@ describe('VSelect', () => {
       expect(screen.getByCSS('.v-select__content .v-list').scrollTop).toBe(0)
     })
 
+    it('should not scroll to the selected item with no-auto-scroll on click', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 500 } noAutoScroll />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      await commands.waitStable('.v-list')
+
+      expect(screen.getAllByRole('option').map(el => el.textContent)).not.toContain('500')
+      expect(screen.getByCSS('.v-select__content .v-list').scrollTop).toBe(0)
+    })
+
+    it('should not jump to selected on ArrowDown open with no-auto-scroll', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 500 } noAutoScroll />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('0')
+      expect(screen.getAllByRole('option').map(el => el.textContent)).not.toContain('500')
+      expect(screen.getByCSS('.v-select__content .v-list').scrollTop).toBe(0)
+    })
+
+    it('should not jump to selected on ArrowUp open with no-auto-scroll', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 500 } noAutoScroll />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('999')
+      expect(screen.getAllByRole('option').map(el => el.textContent)).not.toContain('500')
+    })
+
     it('should move arrows from the selected item after Enter open', async () => {
       render(() => (
         <VSelect items={ manyItems } modelValue={ 100 } />
