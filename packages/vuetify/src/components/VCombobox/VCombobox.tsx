@@ -232,7 +232,7 @@ export const VCombobox = genericComponent<new <
     const footerRef = ref<HTMLElement>()
     const {
       listEvents,
-      focusFromActivator,
+      onActivatorKeydown,
       armOpenFocus,
       flushOpenFocus,
     } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
@@ -328,66 +328,61 @@ export const VCombobox = genericComponent<new <
       }
     }
 
-    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
-      const selectionStart = vTextFieldRef.value?.selectionStart
+      switch (e.key) {
+        case 'Escape':
+          menu.value = false
+          break
+        case 'ArrowDown':
+        case 'ArrowUp':
+          e.preventDefault()
+          if (onActivatorKeydown(e, menu)) break
+          if (e.key === 'ArrowDown' && highlightFirst.value) listRef.value?.focus('next')
+          break
+        case 'Enter':
+          e.preventDefault()
+          menu.value = true
+          selectHighlighted()
+          if (search.value) selectFreeText()
+          break
+        case 'Tab':
+          selectHighlighted()
+          break
+        default:
+          onSelectionKeydown(e)
+      }
+    }
+
+    function selectHighlighted () {
+      const item = firstSelectableItem.value
+      if (!highlightFirst.value || !item) return
+      if (model.value.some(({ value }) => value === item.value)) return
+
+      select(item)
+    }
+
+    function selectFreeText () {
+      const value = props.trimValues ? search.value.trim() : search.value
+
+      if (!value) {
+        search.value = ''
+        return
+      }
+
+      select(transformItem(props, value), true, true)
+      if (hasSelectionSlot.value) _search.value = ''
+    }
+
+    function onSelectionKeydown (e: KeyboardEvent) {
       const length = model.value.length
-
-      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
-        e.preventDefault()
-      }
-
-      const menuWasOpen = menu.value
-      const arrowStep = e.key === 'ArrowDown' ? 1 as const : e.key === 'ArrowUp' ? -1 as const : null
-
-      if (e.key === 'Enter' || e.key === 'ArrowDown' || (arrowStep === -1 && !model.value.length)) {
-        menu.value = true
-      }
-
-      if (arrowStep && !listRef.value?.$el?.contains(getActiveElement())) {
-        e.preventDefault()
-        if (menuWasOpen) {
-          e.stopImmediatePropagation()
-          focusFromActivator(arrowStep)
-          return
-        }
-        armOpenFocus(arrowStep)
-      }
-
-      if (['Escape'].includes(e.key)) {
-        menu.value = false
-      }
-
-      if (
-        highlightFirst.value &&
-        ['Enter', 'Tab'].includes(e.key) &&
-        firstSelectableItem.value &&
-        !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
-      ) {
-        select(firstSelectableItem.value)
-      }
-
-      if (e.key === 'ArrowDown' && highlightFirst.value) {
-        listRef.value?.focus('next')
-      }
-
-      if (e.key === 'Enter' && search.value) {
-        const value = props.trimValues ? search.value.trim() : search.value
-        if (!value) {
-          search.value = ''
-        } else {
-          select(transformItem(props, value), true, true)
-          if (hasSelectionSlot.value) _search.value = ''
-        }
-      }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
         if (
           !props.multiple &&
           hasSelectionSlot.value &&
-          model.value.length > 0 &&
+          length > 0 &&
           !search.value
         ) return select(model.value[0], false)
 
@@ -407,7 +402,7 @@ export const VCombobox = genericComponent<new <
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
+        if (selectionIndex.value < 0 && (vTextFieldRef.value?.selectionStart ?? 0) > 0) return
 
         const prev = selectionIndex.value > -1
           ? selectionIndex.value - 1

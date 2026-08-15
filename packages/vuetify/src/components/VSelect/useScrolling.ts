@@ -143,6 +143,29 @@ export function useScrolling (
     return step === 1 ? focusFirstItem() : focusLastItem()
   }
 
+  /**
+   * ArrowUp/ArrowDown on the field: open the menu and move into the list.
+   * Returns true when focus moved, false when it was armed for the transition.
+   */
+  function onActivatorKeydown (e: KeyboardEvent, menu: Ref<boolean>) {
+    const step = e.key === 'ArrowDown' ? 1 as const : e.key === 'ArrowUp' ? -1 as const : null
+    if (!step) return false
+
+    const wasOpen = menu.value
+    menu.value = true
+
+    if (getListEl()?.contains(getActiveElement())) return false
+
+    if (!wasOpen) {
+      armOpenFocus(step)
+      return false
+    }
+
+    e.stopImmediatePropagation()
+    focusFromActivator(step)
+    return true
+  }
+
   /** Arrow key opened the menu — the list only exists once the transition ends. */
   function armOpenFocus (step: 1 | -1 | null) {
     pendingOpenStep = step
@@ -232,6 +255,7 @@ export function useScrolling (
     focusFirstItem,
     focusLastItem,
     focusFromActivator,
+    onActivatorKeydown,
     armOpenFocus,
     flushOpenFocus,
   }

@@ -8,7 +8,7 @@
     "disableInitialFocus": "Deprecated, use `capture-focus` instead. Prevents automatic redirect of first `focusin` event. Intended to use on permanently open menus or VSpeedDial.",
     "minWidth": "Sets the minimum width for the component. Use `auto` to use the activator width.",
     "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop.",
-    "arrowKeyFocus": "When true, activator ArrowUp/ArrowDown open the menu (if closed) and move focus into content. Set `false` when the activator owns list focus (e.g. VSelect).",
+    "arrowKeyFocus": "When true, activator ArrowUp/ArrowDown open the menu (if closed) and move focus into content. Intended for opt-out when the menu contains virtualized list.",
     "openOnClick": "Designates whether menu should open on activator click.",
     "openOnHover": "Designates whether menu should open on activator hover.",
     "submenu": "Opens with right arrow and closes on left instead of up/down. Implies `location=\"end\"`. Directions are reversed for RTL."

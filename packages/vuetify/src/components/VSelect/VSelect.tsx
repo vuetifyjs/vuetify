@@ -226,7 +226,7 @@ export const VSelect = genericComponent<new <
       focusItem,
       focusFirstItem,
       focusLastItem,
-      focusFromActivator,
+      onActivatorKeydown,
       armOpenFocus,
       flushOpenFocus,
     } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
@@ -276,43 +276,36 @@ export const VSelect = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || form.isReadonly.value) return
 
-      if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
-        e.preventDefault()
-      }
+      switch (e.key) {
+        case 'Escape':
+        case 'Tab':
+          menu.value = false
+          break
+        case 'Enter':
+        case ' ':
+          e.preventDefault()
+          openedByKeyboard = true
+          menu.value = true
+          break
+        case 'ArrowDown':
+        case 'ArrowUp':
+          e.preventDefault()
+          openedByKeyboard = true
+          if (onActivatorKeydown(e, menu)) return
+          break
+        case 'Home':
+        case 'End':
+          e.preventDefault()
+          if (menu.value) (e.key === 'Home' ? focusFirstItem : focusLastItem)()
+          break
+        case 'Backspace':
+          if (!props.clearable) break
 
-      const menuWasOpen = menu.value
-      const arrowStep = e.key === 'ArrowDown' ? 1 as const : e.key === 'ArrowUp' ? -1 as const : null
-
-      if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
-        openedByKeyboard = true
-        menu.value = true
-      }
-
-      if (arrowStep && !listRef.value?.$el?.contains(getActiveElement())) {
-        if (menuWasOpen) {
-          e.stopImmediatePropagation()
-          focusFromActivator(arrowStep)
+          e.preventDefault()
+          for (const item of model.value) emit('item:removed', item)
+          model.value = []
+          onClear(e)
           return
-        }
-        armOpenFocus(arrowStep)
-      }
-
-      if (['Escape', 'Tab'].includes(e.key)) {
-        menu.value = false
-      }
-
-      if (props.clearable && e.key === 'Backspace') {
-        e.preventDefault()
-        for (const item of model.value) emit('item:removed', item)
-        model.value = []
-        onClear(e)
-        return
-      }
-
-      if (menu.value && e.key === 'Home') {
-        focusFirstItem()
-      } else if (menu.value && e.key === 'End') {
-        focusLastItem()
       }
 
       // html select hotkeys

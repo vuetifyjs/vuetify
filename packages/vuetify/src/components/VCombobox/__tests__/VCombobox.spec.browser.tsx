@@ -1022,6 +1022,20 @@ describe('VCombobox', () => {
       await userEvent.keyboard('{ArrowUp}')
       expect(document.activeElement?.textContent?.trim()).toBe('100')
     })
+
+    it('should open on ArrowUp when a value is selected', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('{Escape}')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('99')
+    })
   })
 
   describe('selection events for multiple', () => {
