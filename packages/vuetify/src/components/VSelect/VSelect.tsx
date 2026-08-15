@@ -507,7 +507,7 @@ export const VSelect = genericComponent<new <
       if (!props.hideSelected && menu.value && model.value.length) {
         const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index, 'center')
         })
       }
     })

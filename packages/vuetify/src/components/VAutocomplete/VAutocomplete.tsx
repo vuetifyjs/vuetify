@@ -539,7 +539,7 @@ export const VAutocomplete = genericComponent<new <
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
-          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
+          index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index, 'center')
         })
       }
       if (val) _searchLock.value = null

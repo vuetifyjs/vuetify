@@ -8,6 +8,7 @@ import type { VList } from '@/components/VList'
 import type { VTextField } from '@/components/VTextField'
 import type { VVirtualScroll } from '@/components/VVirtualScroll'
 import type { ListItem } from '@/composables/list-items'
+import type { ScrollToPosition } from '@/composables/virtual'
 
 function isNavigable (item: ListItem | undefined) {
   return !!item &&
@@ -74,7 +75,7 @@ export function useScrolling (
     return getListEl()?.querySelector<HTMLElement>(`[aria-posinset="${index + 1}"]`) ?? null
   }
 
-  async function focusItem (index: number, scroll = true) {
+  async function focusItem (index: number, scroll = true, position: ScrollToPosition = 'center') {
     if (index < 0) return false
 
     if (!scroll) {
@@ -91,7 +92,7 @@ export function useScrolling (
       listEl.focus({ preventScroll: true })
     }
 
-    virtualScrollRef.value?.scrollToIndex(index)
+    virtualScrollRef.value?.scrollToIndex(index, position)
 
     let el = findItemEl(index)
     const deadline = performance.now() + 500
@@ -115,15 +116,18 @@ export function useScrolling (
     if (!await focusItem(index)) listRef.value?.focus('last')
   }
 
-  function focusAdjacentItem (from: number, step: 1 | -1) {
-    return focusItem(findNavigableIndex(toValue(displayItems), from + step, step))
+  function focusAdjacentItem (from: number, step: 1 | -1, scroll = true) {
+    return focusItem(findNavigableIndex(toValue(displayItems), from + step, step), scroll)
   }
 
   /** ArrowUp/ArrowDown pressed while focus is still on the field. */
-  function focusFromActivator (step: 1 | -1) {
+  async function focusFromActivator (step: 1 | -1) {
     if (!toValue(options.noAutoScroll)) {
       const selected = options.selectedIndex?.() ?? -1
-      if (selected >= 0) return focusAdjacentItem(selected, step)
+      // Opening already centred the selection, scrolling again shifts it by a row
+      if (selected >= 0) {
+        return await focusAdjacentItem(selected, step, false) || focusAdjacentItem(selected, step)
+      }
     }
 
     if (step === 1) {
