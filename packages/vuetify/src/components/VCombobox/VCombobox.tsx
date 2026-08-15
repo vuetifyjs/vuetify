@@ -140,12 +140,17 @@ export const VCombobox = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
     const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
+    const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
+    const vVirtualScrollRef = ref<VVirtualScroll>()
+
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
-    const vMenuRef = ref<VMenu>()
-    const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
     const { items, transformIn, transformOut } = useItems(props)
@@ -227,19 +232,22 @@ export const VCombobox = genericComponent<new <
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
-    const listRef = ref<VList>()
-    const headerRef = ref<HTMLElement>()
-    const footerRef = ref<HTMLElement>()
     const {
       listEvents,
       onActivatorKeydown,
-      armOpenFocus,
-      flushOpenFocus,
-    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
-      selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
-      headerEl: () => headerRef.value,
-      menuContentEl: () => vMenuRef.value?.contentEl,
-    })
+      setPendingFocus,
+      flushPendingFocus,
+    } = useScrolling(
+      listRef,
+      vTextFieldRef,
+      vVirtualScrollRef,
+      () => displayItems.value,
+      {
+        selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
+        headerEl: () => headerRef.value,
+        menuContentEl: () => vMenuRef.value?.contentEl,
+      }
+    )
 
     watch(_search, value => {
       if (cleared) {
@@ -339,7 +347,9 @@ export const VCombobox = genericComponent<new <
         case 'ArrowUp':
           e.preventDefault()
           if (onActivatorKeydown(e, menu)) break
-          if (e.key === 'ArrowDown' && highlightFirst.value) listRef.value?.focus('next')
+          if (e.key === 'ArrowDown' && highlightFirst.value) {
+            listRef.value?.focus('next')
+          }
           break
         case 'Enter':
           e.preventDefault()
@@ -445,7 +455,7 @@ export const VCombobox = genericComponent<new <
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
-      flushOpenFocus()
+      flushPendingFocus()
     }
     function onAfterLeave () {
       if (isFocused.value) {
@@ -596,7 +606,7 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, val => {
-      if (!val) armOpenFocus(null)
+      if (!val) setPendingFocus(null)
 
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = getSelectedIndex()

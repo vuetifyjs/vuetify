@@ -160,11 +160,14 @@ export const VSelect = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
+
     const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const { filteredItems, getMatches } = useFilter(props, items, () => search.value)
@@ -220,19 +223,25 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    const listRef = ref<VList>()
     const {
       listEvents,
       focusItem,
       focusFirstItem,
       focusLastItem,
       onActivatorKeydown,
-      armOpenFocus,
-      flushOpenFocus,
-    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
-      selectedIndex: getSelectedIndex,
-      menuContentEl: () => vMenuRef.value?.contentEl,
-    })
+      setPendingFocus,
+      flushPendingFocus,
+    } = useScrolling(
+      listRef,
+      vTextFieldRef,
+      vVirtualScrollRef,
+      () => displayItems.value,
+      {
+        selectedIndex: getSelectedIndex,
+        menuContentEl: () => vMenuRef.value?.contentEl,
+      }
+    )
+
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -259,7 +268,7 @@ export const VSelect = genericComponent<new <
       if (menuDisabled.value) return
 
       openedByKeyboard = false
-      armOpenFocus(null)
+      setPendingFocus(null)
       menu.value = !menu.value
     }
 
@@ -422,7 +431,7 @@ export const VSelect = genericComponent<new <
       }
       if (!listRef.value || !isFocused.value) return
 
-      if (flushOpenFocus()) return
+      if (flushPendingFocus()) return
 
       if (listRef.value.$el?.contains(getActiveElement())) return
 
@@ -473,7 +482,7 @@ export const VSelect = genericComponent<new <
     watch(menu, val => {
       if (!val) {
         openedByKeyboard = false
-        armOpenFocus(null)
+        setPendingFocus(null)
       }
 
       if (!props.hideSelected && menu.value && model.value.length) {

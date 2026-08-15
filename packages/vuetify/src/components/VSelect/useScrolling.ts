@@ -31,11 +31,8 @@ export function useScrolling (
   virtualScrollRef: Ref<VVirtualScroll | undefined>,
   displayItems: MaybeRefOrGetter<readonly ListItem[]>,
   options: {
-    /** Index the field considers current, arrows step away from it. */
     selectedIndex?: () => number
-    /** ArrowDown enters here instead of the list when the slot is filled. */
     headerEl?: () => HTMLElement | undefined
-    /** Fallback target when the list holds nothing focusable. */
     menuContentEl?: () => HTMLElement | undefined
   } = {},
 ) {
@@ -157,7 +154,7 @@ export function useScrolling (
     if (getListEl()?.contains(getActiveElement())) return false
 
     if (!wasOpen) {
-      armOpenFocus(step)
+      setPendingFocus(step)
       return false
     }
 
@@ -167,11 +164,11 @@ export function useScrolling (
   }
 
   /** Arrow key opened the menu — the list only exists once the transition ends. */
-  function armOpenFocus (step: 1 | -1 | null) {
+  function setPendingFocus (step: 1 | -1 | null) {
     pendingOpenStep = step
   }
 
-  function flushOpenFocus () {
+  function flushPendingFocus () {
     if (!pendingOpenStep) return false
     const step = pendingOpenStep
     pendingOpenStep = null
@@ -219,15 +216,15 @@ export function useScrolling (
     }
 
     if (e.key !== 'PageDown' && e.key !== 'PageUp') return
-    const el = getListEl()
-    if (!el) return
+    const list = getListEl()
+    if (!list) return
 
     await finishScrolling()
 
-    const children = el.querySelectorAll(':scope > :not(.v-virtual-scroll__spacer)')
+    const children = list.querySelectorAll(':scope > :not(.v-virtual-scroll__spacer)')
 
     if (e.key === 'PageDown') {
-      const top = el.getBoundingClientRect().top
+      const top = list.getBoundingClientRect().top
       for (const child of children) {
         if (child.getBoundingClientRect().top >= top) {
           (child as HTMLElement).focus()
@@ -235,7 +232,7 @@ export function useScrolling (
         }
       }
     } else {
-      const bottom = el.getBoundingClientRect().bottom
+      const bottom = list.getBoundingClientRect().bottom
       for (const child of [...children].reverse()) {
         if (child.getBoundingClientRect().bottom <= bottom) {
           (child as HTMLElement).focus()
@@ -256,7 +253,7 @@ export function useScrolling (
     focusLastItem,
     focusFromActivator,
     onActivatorKeydown,
-    armOpenFocus,
-    flushOpenFocus,
+    setPendingFocus,
+    flushPendingFocus,
   }
 }

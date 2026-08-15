@@ -133,12 +133,17 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
     const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
+    const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
+    const vVirtualScrollRef = ref<VVirtualScroll>()
+
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
-    const vMenuRef = ref<VMenu>()
-    const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
@@ -204,20 +209,22 @@ export const VAutocomplete = genericComponent<new <
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
-    const listRef = ref<VList>()
-    const headerRef = ref<HTMLElement>()
-    const footerRef = ref<HTMLElement>()
-
     const {
       listEvents,
       onActivatorKeydown,
-      armOpenFocus,
-      flushOpenFocus,
-    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
-      selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
-      headerEl: () => headerRef.value,
-      menuContentEl: () => vMenuRef.value?.contentEl,
-    })
+      setPendingFocus,
+      flushPendingFocus,
+    } = useScrolling(
+      listRef,
+      vTextFieldRef,
+      vVirtualScrollRef,
+      () => displayItems.value,
+      {
+        selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
+        headerEl: () => headerRef.value,
+        menuContentEl: () => vMenuRef.value?.contentEl,
+      }
+    )
 
     const repairOrphanedFocus = useFocusRepair(
       menu,
@@ -277,7 +284,9 @@ export const VAutocomplete = genericComponent<new <
         case 'ArrowUp':
           e.preventDefault()
           if (onActivatorKeydown(e, menu)) break
-          if (e.key === 'ArrowDown' && highlightFirst.value) listRef.value?.focus('next')
+          if (e.key === 'ArrowDown' && highlightFirst.value) {
+            listRef.value?.focus('next')
+          }
           break
         case 'Enter':
           e.preventDefault()
@@ -373,12 +382,14 @@ export const VAutocomplete = genericComponent<new <
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
     }
+
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
-      flushOpenFocus()
+      flushPendingFocus()
     }
+
     function onAfterLeave () {
       if (isFocused.value) {
         if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
@@ -521,7 +532,7 @@ export const VAutocomplete = genericComponent<new <
     })
 
     watch(menu, val => {
-      if (!val) armOpenFocus(null)
+      if (!val) setPendingFocus(null)
 
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
         const index = getSelectedIndex()
