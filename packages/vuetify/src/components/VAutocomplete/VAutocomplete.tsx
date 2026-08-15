@@ -205,7 +205,7 @@ export const VAutocomplete = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
-    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled })
+    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled, isFocused })
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 

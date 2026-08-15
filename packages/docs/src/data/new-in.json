@@ -19,7 +19,8 @@
       "closeOnInputClick": "4.2.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
-      "menuElevation": "4.0.0"
+      "menuElevation": "4.0.0",
+      "openOnFocus": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",
@@ -110,6 +111,11 @@
       "scrollToActive": "3.10.6"
     }
   },
+  "VColorInput": {
+    "props": {
+      "openOnFocus": "4.2.0"
+    }
+  },
   "VColorPicker": {
     "props": {
       "hideEyeDropper": "3.10.0",
@@ -127,6 +133,7 @@
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
+      "openOnFocus": "4.2.0",
       "trimValues": "4.2.0"
     },
     "slots": {
@@ -145,6 +152,11 @@
   "VConfirmEdit": {
     "props": {
       "hideActions": "3.8.0"
+    }
+  },
+  "VDateInput": {
+    "props": {
+      "openOnFocus": "4.2.0"
     }
   },
   "VDatePicker": {
@@ -460,7 +472,8 @@
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
-      "noAutoScroll": "3.9.0"
+      "noAutoScroll": "3.9.0",
+      "openOnFocus": "4.2.0"
     },
     "slots": {
       "menu-header": "3.12.0",

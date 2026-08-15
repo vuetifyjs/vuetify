@@ -94,6 +94,7 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+  openOnFocus: Boolean,
   itemColor: String,
   noAutoScroll: Boolean,
 
@@ -209,7 +210,7 @@ export const VSelect = genericComponent<new <
       (props.hideNoData && !displayItems.value.length) ||
       form.isReadonly.value || form.isDisabled.value
     ))
-    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled })
+    const { menu, closeOnSelect } = useSelectionMenu(props, { vMenuRef, menuDisabled, isFocused })
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
@@ -418,10 +419,24 @@ export const VSelect = genericComponent<new <
         if (closeMenu) nextTick(() => closeOnSelect())
       }
     }
+    let mousedownInsideContentAt = 0
+    function onMousedownContent () {
+      mousedownInsideContentAt = performance.now()
+    }
+
     function onBlur (e: FocusEvent) {
       const target = e.target as Element
       if (!vTextFieldRef.value?.$el.contains(target)) {
         menu.value = false
+      }
+
+      // Clicking dead space in the menu parks focus on body, we still count as focused
+      const next = e.relatedTarget as Node | null
+      if (
+        vMenuRef.value?.contentEl?.contains(next) ||
+        (!next && performance.now() - mousedownInsideContentAt < 10)
+      ) {
+        isFocused.value = true
       }
     }
     function getSelectedIndex () {
@@ -596,6 +611,7 @@ export const VSelect = genericComponent<new <
                     onFocusin={ onFocusin }
                     onFocusout={ onFocusout }
                     onKeydown={ onMenuKeydown }
+                    onMousedown={ onMousedownContent }
                   >
                     { slots['menu-header'] && (
                       <header ref={ headerRef }>

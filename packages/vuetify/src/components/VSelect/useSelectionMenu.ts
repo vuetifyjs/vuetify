@@ -1,4 +1,5 @@
 // Composables
+import { useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -13,6 +14,7 @@ export interface SelectionMenuProps {
   'onUpdate:menu': ((value: boolean) => void) | undefined
   menuProps: VMenu['$props'] | undefined
   multiple: boolean
+  openOnFocus: boolean
 }
 
 export function useSelectionMenu (
@@ -20,6 +22,7 @@ export function useSelectionMenu (
   options: {
     vMenuRef: Ref<VMenu | undefined>
     menuDisabled: MaybeRefOrGetter<boolean>
+    isFocused: Ref<boolean>
   },
 ) {
   const _menu = useProxiedModel(props, 'menu')
@@ -32,6 +35,8 @@ export function useSelectionMenu (
       _menu.value = v
     },
   })
+
+  useOpenOnFocus(menu, options.isFocused, () => props.openOnFocus)
 
   function closeOnSelect () {
     if (props.multiple || props.menuProps?.closeOnContentClick === false) return
