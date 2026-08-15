@@ -46,6 +46,27 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
+  it.each([
+    ['{Tab}', 'after'],
+    ['{Shift>}{Tab}{/Shift}', 'before'],
+  ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } openOnFocus v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    screen.getByCSS('.v-autocomplete input[type="text"]').focus()
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard(keys)
+    await expect.poll(() => menu.value).toBe(false)
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+  })
+
   it('should clear focused state after interacting with content and moving to sibling field', async () => {
     const menuA = ref(false)
     const menuB = ref(false)

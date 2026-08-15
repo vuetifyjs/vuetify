@@ -45,6 +45,27 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VCombobox', () => {
+  it.each([
+    ['{Tab}', 'after'],
+    ['{Shift>}{Tab}{/Shift}', 'before'],
+  ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VCombobox items={ items } openOnFocus v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    screen.getByCSS('.v-combobox input[type="text"]').focus()
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard(keys)
+    await expect.poll(() => menu.value).toBe(false)
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+  })
+
   describe('closableChips', () => {
     it('should close only first chip', async () => {
       const items = [

@@ -11,6 +11,7 @@
     "multiple": "Changes select to multiple. Accepts array for value.",
     "noAutoScroll": "Prevents the select menu to scroll to the selected item automatically.",
     "openOnClear": "Open's the menu whenever the clear icon is clicked.",
+    "openOnFocus": "Open the menu when the input receives focus.",
     "openText": "Text set to the inputs **aria-label** and **title** when input menu is open."
   },
   "slots": {

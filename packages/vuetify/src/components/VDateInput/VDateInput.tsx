@@ -13,6 +13,7 @@ import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
+import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -50,6 +51,7 @@ export const makeVDateInputProps = propsFactory({
   },
   menu: Boolean,
   menuProps: Object as PropType<VMenu['$props']>,
+  openOnFocus: Boolean,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
@@ -130,7 +132,10 @@ export const VDateInput = genericComponent<new <
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
+
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
 
     function format (date: unknown) {
       if (isFunction(props.displayFormat)) {
@@ -241,6 +246,8 @@ export const VDateInput = genericComponent<new <
         menu.value = false
         isEditingInput.value = false
       }
+
+      closeWhenFocusLeaves(menu, vTextFieldRef.value?.$el, vMenuRef.value?.contentEl)
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
@@ -310,6 +317,7 @@ export const VDateInput = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   minWidth="0"

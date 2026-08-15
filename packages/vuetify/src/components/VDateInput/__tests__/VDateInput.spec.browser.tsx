@@ -6,6 +6,60 @@ import { render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VDateInput', () => {
+  it('should close the picker when tabbing out of the field', async () => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VDateInput v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    const input = screen.getByCSS('.v-date-input input[type="text"]')
+
+    await userEvent.click(input)
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+    await expect.poll(() => menu.value).toBe(false)
+    expect(document.activeElement).toBe(screen.getByTestId('before'))
+
+    await userEvent.click(input)
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard('{Tab}')
+    await expect.poll(() => menu.value).toBe(false)
+    expect(document.activeElement).toBe(screen.getByTestId('after'))
+  })
+
+  it('should keep only the focused field open when both use open-on-focus', async () => {
+    const menuA = ref(false)
+    const menuB = ref(false)
+    render(() => (
+      <>
+        <VDateInput label="A" openOnFocus v-model:menu={ menuA.value } />
+        <VDateInput label="B" openOnFocus v-model:menu={ menuB.value } />
+      </>
+    ))
+
+    const inputs = screen.getAllByCSS('.v-date-input input[type="text"]')
+
+    inputs[0].focus()
+    await expect.poll(() => menuA.value).toBe(true)
+    await expect.poll(() => menuB.value).toBe(false)
+
+    await userEvent.keyboard('{Tab}')
+    await expect.poll(() => document.activeElement).toBe(inputs[1])
+    await expect.poll(() => menuA.value).toBe(false)
+    await expect.poll(() => menuB.value).toBe(true)
+
+    await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+    await expect.poll(() => document.activeElement).toBe(inputs[0])
+    await expect.poll(() => menuA.value).toBe(true)
+    await expect.poll(() => menuB.value).toBe(false)
+  })
+
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
     const onFocus = vi.fn()
     const { element } = render(() => (

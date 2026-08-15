@@ -48,6 +48,108 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  describe('open-on-focus', () => {
+    it('should open the menu when the input is focused', async () => {
+      render(() => (
+        <>
+          <button data-testid="before">before</button>
+          <VSelect items={ items } openOnFocus />
+        </>
+      ))
+
+      screen.getByTestId('before').focus()
+      await userEvent.keyboard('{Tab}')
+
+      await expect.poll(() => screen.queryAllByRole('option')).not.toStrictEqual([])
+    })
+
+    it('should open again after the menu was closed by an outside click', async () => {
+      const menu = ref(false)
+      render(() => (
+        <>
+          <button data-testid="outside">outside</button>
+          <VSelect items={ items } openOnFocus v-model:menu={ menu.value } />
+        </>
+      ))
+
+      const input = screen.getByCSS('.v-select input[type="text"]')
+      input.focus()
+      await expect.poll(() => menu.value).toBe(true)
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => menu.value).toBe(false)
+
+      input.focus()
+      await expect.poll(() => menu.value).toBe(true)
+    })
+
+    it.each([
+      ['{Tab}', 'after'],
+      ['{Shift>}{Tab}{/Shift}', 'before'],
+    ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+      const menu = ref(false)
+      render(() => (
+        <>
+          <button data-testid="before">before</button>
+          <VSelect items={ items } openOnFocus v-model:menu={ menu.value } />
+          <button data-testid="after">after</button>
+        </>
+      ))
+
+      screen.getByCSS('.v-select input[type="text"]').focus()
+      await expect.poll(() => menu.value).toBe(true)
+
+      await userEvent.keyboard(keys)
+      await expect.poll(() => menu.value).toBe(false)
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+    })
+
+    it('should not reopen after Escape when a click landed on dead space in the menu', async () => {
+      const menu = ref(false)
+      render(() => (
+        <>
+          <button data-testid="before">before</button>
+          <VSelect items={ items } openOnFocus v-model:menu={ menu.value }>
+            {{
+              'menu-header': () => <div data-testid="dead-space" style="padding: 16px">Header</div>,
+            }}
+          </VSelect>
+        </>
+      ))
+
+      screen.getByTestId('before').focus()
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => menu.value).toBe(true)
+
+      await userEvent.click(screen.getByTestId('dead-space'))
+      await userEvent.keyboard('{Escape}')
+      await wait(300)
+
+      expect(menu.value).toBe(false)
+    })
+  })
+
+  it('should stay focused when a click lands on dead space in the menu', async () => {
+    const { element } = render(() => (
+      <VSelect items={ items }>
+        {{
+          'menu-header': () => <div data-testid="dead-space" style="padding: 16px">Header</div>,
+        }}
+      </VSelect>
+    ))
+
+    await userEvent.click(element)
+    await screen.findByRole('listbox')
+
+    await userEvent.click(screen.getByTestId('dead-space'))
+    await wait(60)
+
+    expect(element).toHaveClass('v-input--focused')
+
+    await userEvent.click(screen.getAllByRole('option')[0])
+    await expect.poll(() => document.activeElement).toBe(screen.getByCSS('.v-select input[type="text"]'))
+  })
+
   it('should toggle menu with dropdown icon', async () => {
     const { element } = render(() => (
       <VSelect items={['Item #1', 'Item #2']} />
