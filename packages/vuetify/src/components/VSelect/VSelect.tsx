@@ -623,6 +623,7 @@ export const VSelect = genericComponent<new <
                       <VList
                         key="select-list"
                         ref={ listRef }
+                        class="v-list--navigable"
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                         tabindex="-1"

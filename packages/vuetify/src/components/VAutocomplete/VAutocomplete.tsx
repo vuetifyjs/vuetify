@@ -648,6 +648,7 @@ export const VAutocomplete = genericComponent<new <
                       <VList
                         key="autocomplete-list"
                         ref={ listRef }
+                        class="v-list--navigable"
                         filterable
                         selected={ selectedValues.value }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }

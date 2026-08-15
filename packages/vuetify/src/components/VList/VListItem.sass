@@ -317,6 +317,11 @@
     .v-list-item--active.v-list-item--variant-elevated &
       --v-theme-overlay-multiplier: 0
 
+  .v-list--navigable
+    .v-list-item::after,
+    .v-list-item__overlay
+      transition: none
+
   $base-padding: list.nth($list-item-padding, 2)
   .v-list
     --indent-padding: 0px

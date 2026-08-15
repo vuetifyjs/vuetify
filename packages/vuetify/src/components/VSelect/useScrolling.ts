@@ -102,7 +102,22 @@ export function useScrolling (
       el = findItemEl(index)
     }
     el?.focus({ preventScroll: true })
+    if (el && listEl) {
+      alignItem(listEl, el, position)
+    }
     return !!el
+  }
+
+  function alignItem (listEl: HTMLElement, el: HTMLElement, position: ScrollToPosition) {
+    const viewTop = listEl.getBoundingClientRect().top + listEl.clientTop
+    const viewHeight = listEl.clientHeight
+    const { top, height } = el.getBoundingClientRect()
+
+    const delta = position === 'start' ? top - viewTop
+      : position === 'end' ? (top + height) - (viewTop + viewHeight)
+      : (top + height / 2) - (viewTop + viewHeight / 2)
+
+    if (Math.abs(delta) > 1) listEl.scrollTop += delta
   }
 
   async function focusFirstItem () {
@@ -206,7 +221,8 @@ export function useScrolling (
 
     e.preventDefault()
     e.stopImmediatePropagation()
-    void focusItem(index)
+    // The row sits just past the edge we're leaving, so this scrolls by one row
+    void focusItem(index, true, step === 1 ? 'end' : 'start')
   }
 
   async function onListKeydown (e: KeyboardEvent) {

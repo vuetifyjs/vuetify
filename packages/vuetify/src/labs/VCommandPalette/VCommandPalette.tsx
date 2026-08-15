@@ -325,7 +325,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   { filteredItems.value.length > 0 ? (
                     <VList
                       key="list"
-                      class="v-command-palette__list"
+                      class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }
                       itemType="type"

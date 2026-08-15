@@ -245,7 +245,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   function calculateScrollTop (index: number, position: ScrollToPosition) {
     const offset = calculateOffset(index)
     if (position === 'center') return Math.max(0, offset - viewportHeight.value / 2 + getSize(index) / 2)
-    if (position === 'end') return Math.max(0, offset - viewportHeight.value + getSize(index))
+    if (position === 'end') {
+      const scrollport = containerRef.value?.clientHeight || viewportHeight.value
+      return Math.max(0, offset + markerOffset - scrollport + getSize(index))
+    }
     return offset
   }
 

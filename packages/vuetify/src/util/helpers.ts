@@ -691,7 +691,7 @@ export function focusChild (
     focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
-    if (_el) _el.focus()
+    if (_el) _el.focus(options)
     else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }

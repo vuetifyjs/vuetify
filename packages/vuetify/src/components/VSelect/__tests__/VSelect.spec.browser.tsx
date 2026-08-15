@@ -703,6 +703,56 @@ describe('VSelect', () => {
     expect(offset).toBeLessThan(2)
   })
 
+  it.each(['ArrowDown', 'ArrowUp'])('should scroll by about one row per %s', async key => {
+    const longList = Array.from({ length: 200 }, (_, i) => `Item #${i + 1}`)
+    render(() => <VSelect items={ longList } modelValue="Item #100" />)
+
+    await openWithKey('{ArrowDown}')()
+    const list = await screen.findByRole('listbox')
+    await commands.waitStable('.v-list')
+    await expect.poll(() => list.contains(document.activeElement)).toBe(true)
+
+    const rowHeight = screen.getAllByRole('option')[0].getBoundingClientRect().height
+    let previous = list.scrollTop
+    let widest = 0
+    for (let i = 0; i < 20; i++) {
+      await userEvent.keyboard(`{${key}}`)
+      widest = Math.max(widest, Math.abs(list.scrollTop - previous))
+      previous = list.scrollTop
+    }
+
+    expect(widest).toBeLessThan(rowHeight + 1)
+  })
+
+  it('should not jump when stepping past subheaders and dividers', async () => {
+    const grouped = [
+      { type: 'subheader', title: 'Group 1' },
+      ...Array.from({ length: 4 }, (_, i) => ({ title: `Item 1.${i + 1}`, value: 11 + i })),
+      { type: 'divider' },
+      { type: 'subheader', title: 'Group 2' },
+      ...Array.from({ length: 20 }, (_, i) => ({ title: `Item 2.${i + 1}`, value: 21 + i })),
+    ]
+    render(() => <VSelect items={ grouped } itemValue="value" />)
+
+    await openWithKey('{ArrowDown}')()
+    const list = await screen.findByRole('listbox')
+    await commands.waitStable('.v-list')
+    await expect.poll(() => list.contains(document.activeElement)).toBe(true)
+
+    const rowHeight = screen.getAllByRole('option')[0].getBoundingClientRect().height
+    let previous = list.scrollTop
+    let widest = 0
+    for (let i = 0; i < 20; i++) {
+      await userEvent.keyboard('{ArrowDown}')
+      widest = Math.max(widest, Math.abs(list.scrollTop - previous))
+      previous = list.scrollTop
+    }
+
+    // A row that gets measured for the first time shifts everything below it,
+    // so a step can cost one row plus that correction
+    expect(widest).toBeLessThan(rowHeight * 2.5)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/19235
   it('should update v-model when click closable chip', async () => {
     const selectedItem = ref('abc')
