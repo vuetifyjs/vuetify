@@ -45,7 +45,7 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
-  arrowKeyFocus: {
+  openOnArrow: {
     type: Boolean,
     default: true,
   },
@@ -138,7 +138,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-          if (!props.arrowKeyFocus) return
+          if (!props.openOnArrow) return
           e.preventDefault()
           e.stopImmediatePropagation()
           focusChild(el, e.key === 'ArrowDown' ? 'next' : 'prev')
@@ -153,7 +153,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       } else if (
         props.submenu
           ? e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')
-          : props.arrowKeyFocus && ['ArrowDown', 'ArrowUp'].includes(e.key)
+          : props.openOnArrow && ['ArrowDown', 'ArrowUp'].includes(e.key)
       ) {
         isActive.value = true
         e.preventDefault()
