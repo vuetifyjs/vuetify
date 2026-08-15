@@ -39,6 +39,7 @@ import {
   deepEqual,
   ensureValidVNode,
   genericComponent,
+  getActiveElement,
   IN_BROWSER,
   isComposingIgnoreKey,
   isFunction,
@@ -132,12 +133,17 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
     const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
+    const listRef = ref<VList>()
+    const headerRef = ref<HTMLElement>()
+    const footerRef = ref<HTMLElement>()
+    const vVirtualScrollRef = ref<VVirtualScroll>()
+
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
     const listHasFocus = shallowRef(false)
-    const vMenuRef = ref<VMenu>()
-    const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
@@ -203,10 +209,24 @@ export const VAutocomplete = genericComponent<new <
 
     const { menuId, ariaExpanded, ariaControls } = useMenuActivator(props, menu)
 
-    const listRef = ref<VList>()
-    const headerRef = ref<HTMLElement>()
-    const footerRef = ref<HTMLElement>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+    const {
+      listEvents,
+      onActivatorKeydown,
+      setPendingFocus,
+      flushPendingFocus,
+    } = useScrolling(
+      listRef,
+      vTextFieldRef,
+      vVirtualScrollRef,
+      displayItems,
+      {
+        selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
+        headerEl: () => headerRef.value,
+        menuContentEl: () => vMenuRef.value?.contentEl,
+        noAutoScroll: () => props.noAutoScroll,
+      }
+    )
+
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -254,45 +274,55 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    // eslint-disable-next-line complexity
     function onKeydown (e: KeyboardEvent) {
       if (isComposingIgnoreKey(e) || form.isReadonly.value) return
 
-      const selectionStart = vTextFieldRef.value?.selectionStart
+      switch (e.key) {
+        case 'Escape':
+          menu.value = false
+          break
+        case 'ArrowDown':
+        case 'ArrowUp':
+          e.preventDefault()
+          if (onActivatorKeydown(e, menu)) break
+          if (e.key === 'ArrowDown' && highlightFirst.value) {
+            listRef.value?.focus('next')
+          }
+          break
+        case 'Enter':
+          e.preventDefault()
+          menu.value = true
+          selectHighlighted()
+          break
+        case 'Tab':
+          selectHighlighted()
+          break
+        default:
+          onSelectionKeydown(e)
+      }
+    }
+
+    function selectHighlighted () {
+      const item = firstSelectableItem.value
+      if (!highlightFirst.value || !item) return
+      if (model.value.some(({ value }) => value === item.value)) return
+
+      select(item)
+    }
+
+    function onSelectionKeydown (e: KeyboardEvent) {
       const length = model.value.length
-
-      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
-        e.preventDefault()
-      }
-
-      if (['Enter', 'ArrowDown'].includes(e.key)) {
-        menu.value = true
-      }
-
-      if (['Escape'].includes(e.key)) {
-        menu.value = false
-      }
-
-      if (
-        highlightFirst.value &&
-        ['Enter', 'Tab'].includes(e.key) &&
-        firstSelectableItem.value &&
-        !model.value.some(({ value }) => value === firstSelectableItem.value!.value)
-      ) {
-        select(firstSelectableItem.value)
-      }
-
-      if (e.key === 'ArrowDown' && highlightFirst.value) {
-        listRef.value?.focus('next')
-      }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
         if (
           !props.multiple &&
           hasSelectionSlot.value &&
-          model.value.length > 0 &&
+          length > 0 &&
           !search.value
-        ) return select(model.value[0], false)
+        ) {
+          select(model.value[0], false)
+          return
+        }
 
         if (~selectionIndex.value) {
           e.preventDefault()
@@ -310,7 +340,7 @@ export const VAutocomplete = genericComponent<new <
       if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
-        if (selectionIndex.value < 0 && selectionStart && selectionStart > 0) return
+        if (selectionIndex.value < 0 && (vTextFieldRef.value?.selectionStart ?? 0) > 0) return
 
         const prev = selectionIndex.value > -1
           ? selectionIndex.value - 1
@@ -348,11 +378,19 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
+    function getSelectedIndex () {
+      return displayItems.value.findIndex(
+        item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
+      )
+    }
+
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
+      flushPendingFocus()
     }
+
     function onAfterLeave () {
       if (isFocused.value) {
         if (vMenuRef.value?.contentEl?._clickOutside?.lastMousedownWasOutside) {
@@ -483,13 +521,22 @@ export const VAutocomplete = genericComponent<new <
       if (val) menu.value = true
 
       isPristine.value = !val
+
+      if (menu.value) {
+        nextTick(() => {
+          vVirtualScrollRef.value?.scrollToIndex(0)
+          if (listRef.value?.$el?.contains(getActiveElement())) {
+            vTextFieldRef.value?.focus()
+          }
+        })
+      }
     })
 
     watch(menu, val => {
+      if (!val) setPendingFocus(null)
+
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => item.value === s.value)
-        )
+        const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })
@@ -572,6 +619,8 @@ export const VAutocomplete = genericComponent<new <
                   ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
+                  captureFocus={ false }
+                  openOnArrow={ false }
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }

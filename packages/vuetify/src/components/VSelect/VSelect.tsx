@@ -160,11 +160,14 @@ export const VSelect = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
+    const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
     const vVirtualScrollRef = ref<VVirtualScroll>()
+
     const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const { filteredItems, getMatches } = useFilter(props, items, () => search.value)
@@ -193,7 +196,6 @@ export const VSelect = genericComponent<new <
     let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
     let openedByKeyboard = false
-    let openedByArrow: 'next' | 'prev' | null = null
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -221,8 +223,26 @@ export const VSelect = genericComponent<new <
       }
     })
 
-    const listRef = ref<VList>()
-    const listEvents = useScrolling(listRef, vTextFieldRef)
+    const {
+      listEvents,
+      focusItem,
+      focusFirstItem,
+      focusLastItem,
+      onActivatorKeydown,
+      setPendingFocus,
+      flushPendingFocus,
+    } = useScrolling(
+      listRef,
+      vTextFieldRef,
+      vVirtualScrollRef,
+      displayItems,
+      {
+        selectedIndex: getSelectedIndex,
+        menuContentEl: () => vMenuRef.value?.contentEl,
+        noAutoScroll: () => props.noAutoScroll,
+      }
+    )
+
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -249,7 +269,7 @@ export const VSelect = genericComponent<new <
       if (menuDisabled.value) return
 
       openedByKeyboard = false
-      openedByArrow = null
+      setPendingFocus(null)
       menu.value = !menu.value
     }
 
@@ -266,37 +286,39 @@ export const VSelect = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (!e.key || form.isReadonly.value) return
 
-      if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
-        e.preventDefault()
-      }
+      switch (e.key) {
+        case 'Escape':
+        case 'Tab':
+          menu.value = false
+          break
+        case 'Enter':
+        case ' ':
+          e.preventDefault()
+          openedByKeyboard = true
+          menu.value = true
+          break
+        case 'ArrowDown':
+        case 'ArrowUp':
+          e.preventDefault()
+          openedByKeyboard = true
+          if (onActivatorKeydown(e, menu)) return
+          break
+        case 'Home':
+          e.preventDefault()
+          if (menu.value) focusFirstItem()
+          break
+        case 'End':
+          e.preventDefault()
+          if (menu.value) focusLastItem()
+          break
+        case 'Backspace':
+          if (!props.clearable) break
 
-      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
-        openedByArrow = e.key === 'ArrowDown' ? 'next' : 'prev'
-      } else if (['Enter', ' '].includes(e.key)) {
-        openedByArrow = null
-      }
-
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
-        openedByKeyboard = true
-        menu.value = true
-      }
-
-      if (['Escape', 'Tab'].includes(e.key)) {
-        menu.value = false
-      }
-
-      if (props.clearable && e.key === 'Backspace') {
-        e.preventDefault()
-        for (const item of model.value) emit('item:removed', item)
-        model.value = []
-        onClear(e)
-        return
-      }
-
-      if (e.key === 'Home') {
-        listRef.value?.focus('first')
-      } else if (e.key === 'End') {
-        listRef.value?.focus('last')
+          e.preventDefault()
+          for (const item of model.value) emit('item:removed', item)
+          model.value = []
+          onClear(e)
+          return
       }
 
       // html select hotkeys
@@ -349,14 +371,16 @@ export const VSelect = genericComponent<new <
 
       const [item, index] = result
       keyboardLookupIndex = index
-      listRef.value?.focus(index)
-      if (!props.multiple) {
+      if (menu.value) {
+        if (!props.multiple) select(item, true, false)
+        focusItem(index)
+      } else if (!props.multiple) {
         select(item, true)
       }
     }
 
     /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
+    function select (item: ListItem, set: boolean | null = true, closeMenu = true) {
       if (item.props.disabled) return
 
       const comparator = props.valueComparator || deepEqual
@@ -391,7 +415,7 @@ export const VSelect = genericComponent<new <
           model.value = []
         }
 
-        nextTick(() => closeOnSelect())
+        if (closeMenu) nextTick(() => closeOnSelect())
       }
     }
     function onBlur (e: FocusEvent) {
@@ -405,34 +429,21 @@ export const VSelect = genericComponent<new <
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
     }
-    function focusSelectedItem (options?: FocusOptions) {
-      // Virtual list only mounts a window — numeric index into DOM children is wrong
-      const selected = listRef.value?.$el?.querySelector?.('[aria-selected="true"]') as HTMLElement | null
-      if (!selected) return false
-      selected.focus(options)
-      return true
-    }
-    function onAfterEnter () {
+    async function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
       if (!listRef.value || !isFocused.value) return
 
-      // VMenu re-dispatches ArrowUp/Down after open and already moved focus to next/prev
+      if (flushPendingFocus()) return
+
       if (listRef.value.$el?.contains(getActiveElement())) return
 
-      const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
-
-      // fallback for VMenu's re-dispatch; fires before the virtual list has scrolled
-      if (openedByArrow) {
-        listRef.value.focus(openedByArrow, opts)
-        return
-      }
-
-      if (focusSelectedItem(opts)) return
+      const selected = getSelectedIndex()
+      if (selected >= 0 && await focusItem(selected, !props.noAutoScroll)) return
 
       if (openedByKeyboard) {
-        listRef.value.focus('first', opts)
+        focusFirstItem()
       }
     }
     function onAfterLeave () {
@@ -475,7 +486,7 @@ export const VSelect = genericComponent<new <
     watch(menu, val => {
       if (!val) {
         openedByKeyboard = false
-        openedByArrow = null
+        setPendingFocus(null)
       }
 
       if (!props.hideSelected && menu.value && model.value.length) {
@@ -568,6 +579,7 @@ export const VSelect = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   captureFocus={ false }
+                  openOnArrow={ false }
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }
