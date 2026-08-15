@@ -420,7 +420,7 @@ export const VSelect = genericComponent<new <
 
       if (focusLastOnOpen) {
         focusLastOnOpen = false
-        focusLastItem()
+        setTimeout(() => setTimeout(() => focusLastItem()))
         return
       }
 

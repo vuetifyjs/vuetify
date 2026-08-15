@@ -1,6 +1,6 @@
 // Utilities
 import { nextTick, shallowRef, toValue, watch } from 'vue'
-import { focusableChildren, getActiveElement } from '@/util'
+import { getActiveElement, getScrollParent } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -10,7 +10,10 @@ import type { VVirtualScroll } from '@/components/VVirtualScroll'
 import type { ListItem } from '@/composables/list-items'
 
 function isNavigable (item: ListItem | undefined) {
-  return !!item && item.type !== 'divider' && item.type !== 'subheader' && !item.props?.disabled
+  return !!item &&
+    item.type !== 'divider' &&
+    item.type !== 'subheader' &&
+    !item.props?.disabled
 }
 
 function findNavigableIndex (items: readonly ListItem[], from: number, step: 1 | -1) {
@@ -22,6 +25,12 @@ function findNavigableIndex (items: readonly ListItem[], from: number, step: 1 |
   return -1
 }
 
+function isVisibleIn (container: HTMLElement, el: HTMLElement) {
+  const c = container.getBoundingClientRect()
+  const r = el.getBoundingClientRect()
+  return r.bottom > c.top + 1 && r.top < c.bottom - 1
+}
+
 export function useScrolling (
   listRef: Ref<VList | undefined>,
   textFieldRef: Ref<VTextField | undefined>,
@@ -30,6 +39,8 @@ export function useScrolling (
 ) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
+  let focusToken = 0
+
   function onListScroll (e: Event) {
     cancelAnimationFrame(scrollTimeout)
     isScrolling.value = true
@@ -39,6 +50,7 @@ export function useScrolling (
       })
     })
   }
+
   async function finishScrolling () {
     await new Promise(resolve => requestAnimationFrame(resolve))
     await new Promise(resolve => requestAnimationFrame(resolve))
@@ -63,19 +75,29 @@ export function useScrolling (
 
   async function focusItem (index: number) {
     if (index < 0) return false
+    const token = ++focusToken
+    const listEl = getListEl()
+    const scroller = listEl ? getScrollParent(listEl) : undefined
 
     let el = findItemEl(index)
-    if (!el) {
-      virtualScrollRef.value?.scrollToIndex(index)
-      await nextTick()
-      await finishScrolling()
-      const deadline = performance.now() + 500
-      while (!el && performance.now() < deadline) {
-        await new Promise(resolve => requestAnimationFrame(resolve))
+    if (!el || (scroller && !isVisibleIn(scroller, el))) {
+      if (listEl?.contains(getActiveElement())) {
+        listEl.focus({ preventScroll: true })
+      }
+
+      const deadline = performance.now() + 1000
+      while (performance.now() < deadline) {
+        if (token !== focusToken) return false
+        virtualScrollRef.value?.scrollToIndex(index)
+        await nextTick()
+        await finishScrolling()
         el = findItemEl(index)
+        if (el && (!scroller || isVisibleIn(scroller, el))) break
+        await new Promise(resolve => requestAnimationFrame(resolve))
       }
     }
 
+    if (token !== focusToken) return false
     el?.focus({ preventScroll: true })
     return !!el
   }
@@ -98,24 +120,27 @@ export function useScrolling (
   function onListKeydownCapture (e: KeyboardEvent) {
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
 
-    const el = getListEl()
+    const listEl = getListEl()
     const active = getActiveElement() as HTMLElement | null
-    if (!el || !active || !el.contains(active)) return
+    if (!listEl || !active || !listEl.contains(active)) return
 
-    const focusable = focusableChildren(el)
-    const atEdge = active === (e.key === 'ArrowUp' ? focusable[0] : focusable.at(-1))
+    const itemEl = active.closest('[aria-posinset]') as HTMLElement | null
+    if (!itemEl || !listEl.contains(itemEl)) return
+
+    const mounted = listEl.querySelectorAll('[aria-posinset]')
+    const atEdge = itemEl === (e.key === 'ArrowUp' ? mounted[0] : mounted[mounted.length - 1])
     if (!atEdge) return
 
-    const position = Number(active.getAttribute('aria-posinset'))
+    const position = Number(itemEl.getAttribute('aria-posinset'))
     if (!position) return
 
     const step = e.key === 'ArrowUp' ? -1 as const : 1 as const
     const index = findNavigableIndex(toValue(displayItems), position - 1 + step, step)
-    if (index < 0) return
+    if (index < 0 || index === position - 1) return
 
     e.preventDefault()
     e.stopImmediatePropagation()
-    focusItem(index)
+    void focusItem(index)
   }
 
   async function onListKeydown (e: KeyboardEvent) {

@@ -351,7 +351,7 @@ export const VCombobox = genericComponent<new <
         menu.value = true
       }
 
-      if (e.key === 'ArrowUp' && !menu.value && !model.value.length) {
+      if (e.key === 'ArrowUp' && !model.value.length) {
         focusLastOnOpen = true
         menu.value = true
       }
@@ -449,7 +449,7 @@ export const VCombobox = genericComponent<new <
       }
       if (focusLastOnOpen) {
         focusLastOnOpen = false
-        focusLastItem()
+        setTimeout(() => setTimeout(() => focusLastItem()))
       }
     }
     function onAfterLeave () {

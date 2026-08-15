@@ -1189,7 +1189,13 @@ describe('VSelect', () => {
 
       await userEvent.keyboard('{ArrowUp}')
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 49')
-      expect(screen.getAllByRole('option').map(el => el.textContent)).toContain('Item 49')
+
+      const viewport = screen.getByCSS('.v-overlay__content')
+      const active = document.activeElement as HTMLElement
+      const viewRect = viewport.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      expect(activeRect.bottom).toBeGreaterThan(viewRect.top)
+      expect(activeRect.top).toBeLessThan(viewRect.bottom)
     })
 
     it('should open with ArrowUp onto the last item when empty', async () => {
