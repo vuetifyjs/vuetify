@@ -1248,20 +1248,33 @@ describe('VAutocomplete', () => {
       expect(screen.getAllByRole('option').map(el => el.textContent)).toContain('999')
     })
 
-    it('should wrap ArrowUp from first item to last of the full list', async () => {
-      const items = Array.from({ length: 50 }, (_, i) => `Item ${i}`)
-
+    it('should ArrowUp to the last filtered item from the field', async () => {
       render(() => (
-        <VAutocomplete items={ items } />
+        <VAutocomplete items={ manyItems } />
       ))
 
       await userEvent.tab()
-      await userEvent.keyboard('{ArrowDown}')
-      await commands.waitStable('.v-list')
-      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 0')
+      await userEvent.keyboard('1')
+      await waitIdle()
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
 
       await userEvent.keyboard('{ArrowUp}')
-      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item 49')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('991')
+    })
+
+    it('should wrap ArrowUp from first item to last of the full list', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('0')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('999')
 
       const viewport = screen.getByCSS('.v-overlay__content')
       const active = document.activeElement as HTMLElement

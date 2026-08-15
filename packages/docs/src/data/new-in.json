@@ -367,6 +367,7 @@
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
+      "arrowKeyFocus": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "submenu": "3.7.0",

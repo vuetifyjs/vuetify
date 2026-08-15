@@ -280,10 +280,30 @@ export const VSelect = genericComponent<new <
         openedByArrow = null
       }
 
+      const menuWasOpen = menu.value
+
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         openedByKeyboard = true
         focusLastOnOpen = e.key === 'ArrowUp' && !model.value.length
         menu.value = true
+      }
+
+      if (
+        menuWasOpen &&
+        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
+        listRef.value?.$el &&
+        !listRef.value.$el.contains(getActiveElement())
+      ) {
+        e.stopImmediatePropagation()
+        const selected = getSelectedIndex()
+        if (selected >= 0) {
+          focusAdjacentItem(selected, e.key === 'ArrowDown' ? 1 : -1)
+        } else if (e.key === 'ArrowDown') {
+          focusFirstItem()
+        } else {
+          focusLastItem()
+        }
+        return
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
@@ -354,16 +374,16 @@ export const VSelect = genericComponent<new <
 
       const [item, index] = result
       keyboardLookupIndex = index
-      if (!props.multiple) {
-        select(item, true)
-      }
       if (menu.value) {
+        if (!props.multiple) select(item, true, false)
         focusItem(index)
+      } else if (!props.multiple) {
+        select(item, true)
       }
     }
 
     /** @param set - null means toggle */
-    function select (item: ListItem, set: boolean | null = true) {
+    function select (item: ListItem, set: boolean | null = true, closeMenu = true) {
       if (item.props.disabled) return
 
       const comparator = props.valueComparator || deepEqual
@@ -398,7 +418,7 @@ export const VSelect = genericComponent<new <
           model.value = []
         }
 
-        nextTick(() => closeOnSelect())
+        if (closeMenu) nextTick(() => closeOnSelect())
       }
     }
     function onBlur (e: FocusEvent) {
@@ -420,13 +440,11 @@ export const VSelect = genericComponent<new <
 
       if (focusLastOnOpen) {
         focusLastOnOpen = false
-        setTimeout(() => setTimeout(() => focusLastItem()))
+        focusLastItem()
         return
       }
 
       if (listRef.value.$el?.contains(getActiveElement())) return
-
-      const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
 
       if (openedByArrow) {
         const selected = getSelectedIndex()
@@ -434,7 +452,8 @@ export const VSelect = genericComponent<new <
           focusAdjacentItem(selected, openedByArrow === 'next' ? 1 : -1)
           return
         }
-        listRef.value.focus(openedByArrow, opts)
+        if (openedByArrow === 'next') focusFirstItem()
+        else focusLastItem()
         return
       }
 
@@ -582,6 +601,7 @@ export const VSelect = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   captureFocus={ false }
+                  arrowKeyFocus={ false }
                   disabled={ menuDisabled.value }
                   eager={ props.eager }
                   maxHeight={ 310 }

@@ -1,6 +1,6 @@
 // Utilities
-import { nextTick, shallowRef, toValue, watch } from 'vue'
-import { getActiveElement, getScrollParent } from '@/util'
+import { shallowRef, toValue, watch } from 'vue'
+import { getActiveElement } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -25,12 +25,6 @@ function findNavigableIndex (items: readonly ListItem[], from: number, step: 1 |
   return -1
 }
 
-function isVisibleIn (container: HTMLElement, el: HTMLElement) {
-  const c = container.getBoundingClientRect()
-  const r = el.getBoundingClientRect()
-  return r.bottom > c.top + 1 && r.top < c.bottom - 1
-}
-
 export function useScrolling (
   listRef: Ref<VList | undefined>,
   textFieldRef: Ref<VTextField | undefined>,
@@ -39,7 +33,6 @@ export function useScrolling (
 ) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
-  let focusToken = 0
 
   function onListScroll (e: Event) {
     cancelAnimationFrame(scrollTimeout)
@@ -75,29 +68,20 @@ export function useScrolling (
 
   async function focusItem (index: number) {
     if (index < 0) return false
-    const token = ++focusToken
+
     const listEl = getListEl()
-    const scroller = listEl ? getScrollParent(listEl) : undefined
-
-    let el = findItemEl(index)
-    if (!el || (scroller && !isVisibleIn(scroller, el))) {
-      if (listEl?.contains(getActiveElement())) {
-        listEl.focus({ preventScroll: true })
-      }
-
-      const deadline = performance.now() + 1000
-      while (performance.now() < deadline) {
-        if (token !== focusToken) return false
-        virtualScrollRef.value?.scrollToIndex(index)
-        await nextTick()
-        await finishScrolling()
-        el = findItemEl(index)
-        if (el && (!scroller || isVisibleIn(scroller, el))) break
-        await new Promise(resolve => requestAnimationFrame(resolve))
-      }
+    if (listEl?.contains(getActiveElement())) {
+      listEl.focus({ preventScroll: true })
     }
 
-    if (token !== focusToken) return false
+    await virtualScrollRef.value?.scrollToIndex(index)
+
+    let el = findItemEl(index)
+    const deadline = performance.now() + 500
+    while (!el && performance.now() < deadline) {
+      await new Promise(resolve => requestAnimationFrame(resolve))
+      el = findItemEl(index)
+    }
     el?.focus({ preventScroll: true })
     return !!el
   }

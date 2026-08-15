@@ -516,6 +516,27 @@ describe('VSelect', () => {
     expect(selectedItems.value).toBe('foo')
   })
 
+  it('should keep the menu open during multi-character typeahead', async () => {
+    const selected = ref<string>()
+    const items = ['Alabama', 'Alaska', 'American Samoa', 'Arizona']
+
+    render(() => (
+      <VSelect v-model={ selected.value } items={ items } />
+    ))
+
+    await userEvent.tab()
+    await userEvent.keyboard('{Enter}')
+    await commands.waitStable('.v-list')
+
+    await userEvent.keyboard('a')
+    expect(selected.value).toBe('Alabama')
+    expect(screen.getByCSS('.v-overlay--active')).toBeTruthy()
+
+    await userEvent.keyboard('m')
+    expect(selected.value).toBe('American Samoa')
+    expect(screen.getByCSS('.v-overlay--active')).toBeTruthy()
+  })
+
   it('should keep TextField focused while selecting items from open menu', async () => {
     const { element } = render(() => (
       <VSelect
