@@ -677,6 +677,32 @@ describe('VSelect', () => {
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
+  const openWithKey = (key: string) => async () => {
+    screen.getByCSS('.v-select input[type="text"]').focus()
+    await userEvent.keyboard(key)
+  }
+
+  it.each([
+    ['click', () => userEvent.click(screen.getByCSS('.v-select .v-field'))],
+    ['ArrowDown', openWithKey('{ArrowDown}')],
+    ['ArrowUp', openWithKey('{ArrowUp}')],
+  ])('should center the selected item when opening the menu with %s', async (_label, open) => {
+    const longList = Array.from({ length: 50 }, (_, i) => `Item #${i + 1}`)
+    render(() => <VSelect items={ longList } modelValue="Item #25" />)
+
+    await open()
+    const list = await screen.findByRole('listbox')
+    await commands.waitStable('.v-list')
+    // Focus landing in the list scrolls a second time
+    await expect.poll(() => list.contains(document.activeElement)).toBe(true)
+
+    const item = screen.getByCSS('.v-list-item--active').getBoundingClientRect()
+    const box = list.getBoundingClientRect()
+    const offset = Math.abs((item.top + item.height / 2) - (box.top + box.height / 2))
+
+    expect(offset).toBeLessThan(2)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/19235
   it('should update v-model when click closable chip', async () => {
     const selectedItem = ref('abc')
