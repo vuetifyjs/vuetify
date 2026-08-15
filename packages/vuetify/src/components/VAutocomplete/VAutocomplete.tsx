@@ -296,6 +296,7 @@ export const VAutocomplete = genericComponent<new <
           break
         case 'Tab':
           selectHighlighted()
+          menu.value = false
           break
         default:
           onSelectionKeydown(e)

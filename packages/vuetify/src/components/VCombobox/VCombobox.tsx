@@ -360,6 +360,7 @@ export const VCombobox = genericComponent<new <
           break
         case 'Tab':
           selectHighlighted()
+          menu.value = false
           break
         default:
           onSelectionKeydown(e)

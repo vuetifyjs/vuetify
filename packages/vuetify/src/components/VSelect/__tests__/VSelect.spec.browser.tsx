@@ -83,6 +83,27 @@ describe('VSelect', () => {
       await expect.poll(() => menu.value).toBe(true)
     })
 
+    it.each([
+      ['{Tab}', 'after'],
+      ['{Shift>}{Tab}{/Shift}', 'before'],
+    ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+      const menu = ref(false)
+      render(() => (
+        <>
+          <button data-testid="before">before</button>
+          <VSelect items={ items } openOnFocus v-model:menu={ menu.value } />
+          <button data-testid="after">after</button>
+        </>
+      ))
+
+      screen.getByCSS('.v-select input[type="text"]').focus()
+      await expect.poll(() => menu.value).toBe(true)
+
+      await userEvent.keyboard(keys)
+      await expect.poll(() => menu.value).toBe(false)
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+    })
+
     it('should not reopen after Escape when a click landed on dead space in the menu', async () => {
       const menu = ref(false)
       render(() => (
