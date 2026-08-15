@@ -915,6 +915,20 @@ describe('VAutocomplete', () => {
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
+  it('should return focus to the field on Escape when eager', async () => {
+    render(() => <VAutocomplete items={ items } eager />)
+
+    const input = screen.getByCSS('.v-autocomplete input[type="text"]')
+    await userEvent.click(input)
+    await expect.poll(() => screen.queryByRole('listbox')).toBeVisible()
+
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => document.activeElement).toBe(input)
+  })
+
   describe('menu-header and menu-footer slots', () => {
     it('should render menu-header and menu-footer slots', async () => {
       const { element } = render(() => (
