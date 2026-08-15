@@ -79,7 +79,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
-  let scrollToIndexToken = 0
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
@@ -110,7 +109,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     nextTick(() => {
       IN_BROWSER && window.requestAnimationFrame(() => {
-        if (~targetScrollIndex) void scrollToIndex(targetScrollIndex)
+        if (~targetScrollIndex) scrollToIndex(targetScrollIndex)
       })
     })
   })
@@ -240,85 +239,46 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
-  function scrollToIndex (index: number): Promise<void> {
-    const token = ++scrollToIndexToken
-    targetScrollIndex = index
-
-    if (!IN_BROWSER) {
-      targetScrollIndex = -1
-      return Promise.resolve()
+  function scrollToIndex (index: number) {
+    const offset = calculateOffset(index)
+    if (!containerRef.value || (index && !offset)) {
+      targetScrollIndex = index
+      return
     }
 
-    const deadline = performance.now() + 1000
+    // Move the window first so paddingTop/Bottom make scrollHeight large enough
+    // before we assign scrollTop (otherwise the browser clamps the scroll).
+    const itemSize = itemHeight.value || 16
+    const buffer = Math.ceil(BUFFER_PX / itemSize)
+    const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
+    first.value = clamp(index - buffer, 0, Math.max(0, items.value.length - 1))
+    last.value = clamp(index + viewport + buffer, first.value + 1, items.value.length)
+    paddingTop.value = calculateOffset(first.value)
+    paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
 
-    return new Promise(resolve => {
-      const done = () => {
-        if (token === scrollToIndexToken) targetScrollIndex = -1
-        resolve()
-      }
+    scrollVelocity = 0
+    lastScrollTime = 0
+    targetScrollIndex = index
 
-      const run = () => {
-        if (token !== scrollToIndexToken) {
-          resolve()
-          return
-        }
+    nextTick(() => {
+      const el = containerRef.value
+      // Superseded by a later scrollToIndex
+      if (!el || !~targetScrollIndex || targetScrollIndex !== index) return
 
-        const offset = calculateOffset(index)
-        if (!containerRef.value || (index > 0 && !offset)) {
-          if (performance.now() < deadline) {
-            requestAnimationFrame(run)
-          } else {
-            done()
-          }
-          return
-        }
+      const top = calculateOffset(index)
+      el.scrollTop = top
+      // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
+      lastScrollTop = el.scrollTop
 
-        // Move the window first so paddingTop/Bottom make scrollHeight large enough
-        // before we assign scrollTop (otherwise the browser clamps the scroll).
-        const itemSize = itemHeight.value || 16
-        const buffer = Math.ceil(BUFFER_PX / itemSize)
-        const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
-        first.value = clamp(index - buffer, 0, Math.max(0, items.value.length - 1))
-        last.value = clamp(index + viewport + buffer, first.value + 1, items.value.length)
-        paddingTop.value = calculateOffset(first.value)
-        paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
-
-        scrollVelocity = 0
-        lastScrollTime = 0
-
-        nextTick(() => {
-          if (token !== scrollToIndexToken) {
-            resolve()
-            return
-          }
-
-          const el = containerRef.value
-          if (!el) {
-            done()
-            return
-          }
-
-          const top = calculateOffset(index)
-          el.scrollTop = top
-          // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
-          lastScrollTop = el.scrollTop
-
-          const fullHeight = calculateOffset(items.value.length) + markerOffset
-          if (index && el.scrollTop < top - 1 && el.scrollHeight < fullHeight - 1) {
-            if (performance.now() < deadline) {
-              requestAnimationFrame(run)
-            } else {
-              calculateVisibleItems()
-              done()
-            }
-          } else {
-            calculateVisibleItems()
-            requestAnimationFrame(done)
-          }
+      const fullHeight = calculateOffset(items.value.length) + markerOffset
+      if (index && el.scrollTop < top - 1 && el.scrollHeight < fullHeight - 1) {
+        IN_BROWSER && requestAnimationFrame(() => {
+          if (targetScrollIndex === index) scrollToIndex(index)
         })
+      } else {
+        targetScrollIndex = -1
+        calculateVisibleItems()
       }
-
-      run()
     })
   }
 

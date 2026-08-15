@@ -982,6 +982,29 @@ describe('VSelect', () => {
       await expect.poll(() => screen.queryByTestId('footer-content')).toHaveTextContent('My Footer')
     })
 
+    it('should reach the header and footer when the list is empty', async () => {
+      render(() => (
+        <VSelect items={[]} multiple>
+          {{
+            'menu-header': () => (
+              <div><button data-testid="header-btn">Header</button></div>
+            ),
+            'menu-footer': () => (
+              <div><button data-testid="footer-btn">Footer</button></div>
+            ),
+          }}
+        </VSelect>
+      ))
+
+      await userEvent.keyboard('{Tab}{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.getByTestId('footer-btn')).toHaveFocus()
+    })
+
     it('should navigate freely between interactive elements with Tab', async () => {
       render(() => (
         <VSelect items={ Array.from({ length: 20 }, (_, i) => `Item #${i + 1}`) }>
@@ -1137,6 +1160,19 @@ describe('VSelect', () => {
 
       const target = screen.getAllByRole('option').find(el => el.textContent === '100')!
       await userEvent.click(target) // actual visibility test; workaround for vitest limitation
+    })
+
+    it('should not scroll to the selected item with no-auto-scroll', async () => {
+      render(() => (
+        <VSelect items={ manyItems } modelValue={ 100 } noAutoScroll />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+
+      expect(screen.getAllByRole('option').map(el => el.textContent)).not.toContain('100')
+      expect(screen.getByCSS('.v-select__content .v-list').scrollTop).toBe(0)
     })
 
     it('should move arrows from the selected item after Enter open', async () => {

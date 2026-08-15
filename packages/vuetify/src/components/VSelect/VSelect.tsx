@@ -193,8 +193,6 @@ export const VSelect = genericComponent<new <
     let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
     let openedByKeyboard = false
-    let openedByArrow: 'next' | 'prev' | null = null
-    let focusLastOnOpen = false
 
     const displayItems = computed(() => {
       const baseItems = search.value ? filteredItems.value : items.value
@@ -223,9 +221,18 @@ export const VSelect = genericComponent<new <
     })
 
     const listRef = ref<VList>()
-    const { listEvents, focusItem, focusFirstItem, focusLastItem, focusAdjacentItem } = useScrolling(
-      listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value,
-    )
+    const {
+      listEvents,
+      focusItem,
+      focusFirstItem,
+      focusLastItem,
+      focusFromActivator,
+      armOpenFocus,
+      flushOpenFocus,
+    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
+      selectedIndex: getSelectedIndex,
+      menuContentEl: () => vMenuRef.value?.contentEl,
+    })
     const repairOrphanedFocus = useFocusRepair(
       menu,
       () => vMenuRef.value?.contentEl,
@@ -252,8 +259,7 @@ export const VSelect = genericComponent<new <
       if (menuDisabled.value) return
 
       openedByKeyboard = false
-      openedByArrow = null
-      focusLastOnOpen = false
+      armOpenFocus(null)
       menu.value = !menu.value
     }
 
@@ -274,36 +280,21 @@ export const VSelect = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
-        openedByArrow = e.key === 'ArrowDown' ? 'next' : 'prev'
-      } else if (['Enter', ' '].includes(e.key)) {
-        openedByArrow = null
-      }
-
       const menuWasOpen = menu.value
+      const arrowStep = e.key === 'ArrowDown' ? 1 as const : e.key === 'ArrowUp' ? -1 as const : null
 
       if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         openedByKeyboard = true
-        focusLastOnOpen = e.key === 'ArrowUp' && !model.value.length
         menu.value = true
       }
 
-      if (
-        menuWasOpen &&
-        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
-        listRef.value?.$el &&
-        !listRef.value.$el.contains(getActiveElement())
-      ) {
-        e.stopImmediatePropagation()
-        const selected = getSelectedIndex()
-        if (selected >= 0) {
-          focusAdjacentItem(selected, e.key === 'ArrowDown' ? 1 : -1)
-        } else if (e.key === 'ArrowDown') {
-          focusFirstItem()
-        } else {
-          focusLastItem()
+      if (arrowStep && !listRef.value?.$el?.contains(getActiveElement())) {
+        if (menuWasOpen) {
+          e.stopImmediatePropagation()
+          focusFromActivator(arrowStep)
+          return
         }
-        return
+        armOpenFocus(arrowStep)
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
@@ -432,36 +423,18 @@ export const VSelect = genericComponent<new <
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
     }
-    function onAfterEnter () {
+    async function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
       if (!listRef.value || !isFocused.value) return
 
-      if (focusLastOnOpen) {
-        focusLastOnOpen = false
-        focusLastItem()
-        return
-      }
+      if (flushOpenFocus()) return
 
       if (listRef.value.$el?.contains(getActiveElement())) return
 
-      if (openedByArrow) {
-        const selected = getSelectedIndex()
-        if (selected >= 0) {
-          focusAdjacentItem(selected, openedByArrow === 'next' ? 1 : -1)
-          return
-        }
-        if (openedByArrow === 'next') focusFirstItem()
-        else focusLastItem()
-        return
-      }
-
       const selected = getSelectedIndex()
-      if (selected >= 0) {
-        focusItem(selected)
-        return
-      }
+      if (selected >= 0 && await focusItem(selected, !props.noAutoScroll)) return
 
       if (openedByKeyboard) {
         focusFirstItem()
@@ -507,8 +480,7 @@ export const VSelect = genericComponent<new <
     watch(menu, val => {
       if (!val) {
         openedByKeyboard = false
-        openedByArrow = null
-        focusLastOnOpen = false
+        armOpenFocus(null)
       }
 
       if (!props.hideSelected && menu.value && model.value.length) {

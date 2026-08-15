@@ -40,7 +40,6 @@ import {
   deepEqual,
   ensureValidVNode,
   escapeForRegex,
-  focusableChildren,
   genericComponent,
   getActiveElement,
   IN_BROWSER,
@@ -149,8 +148,6 @@ export const VCombobox = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
     const selectionIndex = shallowRef(-1)
     let cleared = false
-    let focusLastOnOpen = false
-    let focusFirstOnOpen = false
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
@@ -233,9 +230,16 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
     const headerRef = ref<HTMLElement>()
     const footerRef = ref<HTMLElement>()
-    const { listEvents, focusFirstItem, focusLastItem, focusAdjacentItem } = useScrolling(
-      listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value,
-    )
+    const {
+      listEvents,
+      focusFromActivator,
+      armOpenFocus,
+      flushOpenFocus,
+    } = useScrolling(listRef, vTextFieldRef, vVirtualScrollRef, () => displayItems.value, {
+      selectedIndex: () => isPristine.value ? getSelectedIndex() : -1,
+      headerEl: () => headerRef.value,
+      menuContentEl: () => vMenuRef.value?.contentEl,
+    })
 
     watch(_search, value => {
       if (cleared) {
@@ -336,46 +340,20 @@ export const VCombobox = genericComponent<new <
       }
 
       const menuWasOpen = menu.value
+      const arrowStep = e.key === 'ArrowDown' ? 1 as const : e.key === 'ArrowUp' ? -1 as const : null
 
-      if (e.key === 'ArrowDown') {
-        if (!menuWasOpen) focusFirstOnOpen = true
-        menu.value = true
-      } else if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === 'ArrowDown' || (arrowStep === -1 && !model.value.length)) {
         menu.value = true
       }
 
-      if (e.key === 'ArrowUp' && !model.value.length) {
-        if (!menuWasOpen) focusLastOnOpen = true
-        menu.value = true
-      }
-
-      if (
-        menuWasOpen &&
-        ['ArrowDown', 'ArrowUp'].includes(e.key) &&
-        listRef.value?.$el &&
-        !listRef.value.$el.contains(getActiveElement())
-      ) {
+      if (arrowStep && !listRef.value?.$el?.contains(getActiveElement())) {
         e.preventDefault()
-        e.stopImmediatePropagation()
-        if (!isPristine.value) {
-          if (e.key === 'ArrowDown') focusFirstItem()
-          else focusLastItem()
-        } else {
-          const selected = displayItems.value.findIndex(
-            item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
-          )
-          if (selected >= 0) {
-            focusAdjacentItem(selected, e.key === 'ArrowDown' ? 1 : -1)
-          } else if (e.key === 'ArrowDown') {
-            const content = vMenuRef.value?.contentEl
-            const first = content && focusableChildren(content)[0]
-            if (first) first.focus()
-            else focusFirstItem()
-          } else {
-            focusLastItem()
-          }
+        if (menuWasOpen) {
+          e.stopImmediatePropagation()
+          focusFromActivator(arrowStep)
+          return
         }
-        return
+        armOpenFocus(arrowStep)
       }
 
       if (['Escape'].includes(e.key)) {
@@ -465,17 +443,14 @@ export const VCombobox = genericComponent<new <
         selectMultiple(values)
       }
     }
+    function getSelectedIndex () {
+      return displayItems.value.findIndex(item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value)))
+    }
     function onAfterEnter () {
       if (props.eager) {
         vVirtualScrollRef.value?.calculateVisibleItems()
       }
-      if (focusLastOnOpen) {
-        focusLastOnOpen = false
-        nextTick(() => focusLastItem())
-      } else if (focusFirstOnOpen) {
-        focusFirstOnOpen = false
-        nextTick(() => focusFirstItem())
-      }
+      flushOpenFocus()
     }
     function onAfterLeave () {
       if (isFocused.value) {
@@ -626,15 +601,10 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(menu, val => {
-      if (!val) {
-        focusLastOnOpen = false
-        focusFirstOnOpen = false
-      }
+      if (!val) armOpenFocus(null)
 
       if (!props.hideSelected && val && model.value.length && isPristine.value) {
-        const index = displayItems.value.findIndex(
-          item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
-        )
+        const index = getSelectedIndex()
         IN_BROWSER && !props.noAutoScroll && window.requestAnimationFrame(() => {
           index >= 0 && vVirtualScrollRef.value?.scrollToIndex(index)
         })

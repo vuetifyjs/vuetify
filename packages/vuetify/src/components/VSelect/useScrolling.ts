@@ -1,6 +1,6 @@
 // Utilities
 import { shallowRef, toValue, watch } from 'vue'
-import { getActiveElement } from '@/util'
+import { focusableChildren, getActiveElement } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -30,9 +30,19 @@ export function useScrolling (
   textFieldRef: Ref<VTextField | undefined>,
   virtualScrollRef: Ref<VVirtualScroll | undefined>,
   displayItems: MaybeRefOrGetter<readonly ListItem[]>,
+  options: {
+    /** Index the field considers current, arrows step away from it. */
+    selectedIndex?: () => number
+    /** ArrowDown enters here instead of the list when the slot is filled. */
+    headerEl?: () => HTMLElement | undefined
+    /** Fallback target when the list holds nothing focusable. */
+    menuContentEl?: () => HTMLElement | undefined
+  } = {},
 ) {
   const isScrolling = shallowRef(false)
   let scrollTimeout: number
+  let focusToken = 0
+  let pendingOpenStep: 1 | -1 | null = null
 
   function onListScroll (e: Event) {
     cancelAnimationFrame(scrollTimeout)
@@ -66,20 +76,30 @@ export function useScrolling (
     return getListEl()?.querySelector<HTMLElement>(`[aria-posinset="${index + 1}"]`) ?? null
   }
 
-  async function focusItem (index: number) {
+  async function focusItem (index: number, scroll = true) {
     if (index < 0) return false
 
+    if (!scroll) {
+      const mounted = findItemEl(index)
+      mounted?.focus({ preventScroll: true })
+      return !!mounted
+    }
+
+    const token = ++focusToken
     const listEl = getListEl()
+    // Park focus on the list before the window moves, otherwise unmounting the
+    // focused item drops focus to <body> and useFocusRepair closes the menu.
     if (listEl?.contains(getActiveElement())) {
       listEl.focus({ preventScroll: true })
     }
 
-    await virtualScrollRef.value?.scrollToIndex(index)
+    virtualScrollRef.value?.scrollToIndex(index)
 
     let el = findItemEl(index)
     const deadline = performance.now() + 500
     while (!el && performance.now() < deadline) {
       await new Promise(resolve => requestAnimationFrame(resolve))
+      if (token !== focusToken) return true
       el = findItemEl(index)
     }
     el?.focus({ preventScroll: true })
@@ -97,8 +117,43 @@ export function useScrolling (
     if (!await focusItem(index)) listRef.value?.focus('last')
   }
 
-  async function focusAdjacentItem (from: number, step: 1 | -1) {
+  function focusAdjacentItem (from: number, step: 1 | -1) {
     return focusItem(findNavigableIndex(toValue(displayItems), from + step, step))
+  }
+
+  /** ArrowUp/ArrowDown pressed while focus is still on the field. */
+  function focusFromActivator (step: 1 | -1) {
+    const selected = options.selectedIndex?.() ?? -1
+    if (selected >= 0) return focusAdjacentItem(selected, step)
+
+    if (step === 1) {
+      const header = options.headerEl?.()
+      const firstInHeader = header && focusableChildren(header)[0]
+      if (firstInHeader) return firstInHeader.focus()
+    }
+
+    // An empty list can't take focus, so the header/footer are the only way in.
+    if (findNavigableIndex(toValue(displayItems), 0, 1) < 0) {
+      const content = options.menuContentEl?.()
+      const children = content ? focusableChildren(content) : []
+      const el = step === 1 ? children[0] : children.at(-1)
+      return el?.focus()
+    }
+
+    return step === 1 ? focusFirstItem() : focusLastItem()
+  }
+
+  /** Arrow key opened the menu — the list only exists once the transition ends. */
+  function armOpenFocus (step: 1 | -1 | null) {
+    pendingOpenStep = step
+  }
+
+  function flushOpenFocus () {
+    if (!pendingOpenStep) return false
+    const step = pendingOpenStep
+    pendingOpenStep = null
+    focusFromActivator(step)
+    return true
   }
 
   function onListKeydownCapture (e: KeyboardEvent) {
@@ -176,6 +231,8 @@ export function useScrolling (
     focusItem,
     focusFirstItem,
     focusLastItem,
-    focusAdjacentItem,
+    focusFromActivator,
+    armOpenFocus,
+    flushOpenFocus,
   }
 }
