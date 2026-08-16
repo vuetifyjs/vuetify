@@ -58,6 +58,11 @@ export default {
       title: 'Vyberte rozsah dátumov',
       header: 'Zadajte rozsah dátumov',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Vyberte dátum',
     header: 'Zadajte dátum',
     input: {

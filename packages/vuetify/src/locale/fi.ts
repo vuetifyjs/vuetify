@@ -58,6 +58,11 @@ export default {
       title: 'Valitse päivämäärät',
       header: 'Syötä päivämäärät',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Valitse päivämäärä',
     header: 'Syötä päivämäärä',
     input: {

@@ -58,6 +58,11 @@ export default {
       title: 'Tarixləri seçin',
       header: 'Tarixləri daxil edin',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Tarixi seçin',
     header: 'Tarixi daxil edin',
     input: {

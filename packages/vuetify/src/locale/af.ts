@@ -58,6 +58,11 @@ export default {
       title: 'Kies datums',
       header: 'Voer datums in',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Kies datum',
     header: 'Voer datum in',
     input: {

@@ -58,6 +58,11 @@ export default {
       title: 'Välj datum',
       header: 'Välj datum',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Välj datum',
     header: 'Välj datum',
     input: {

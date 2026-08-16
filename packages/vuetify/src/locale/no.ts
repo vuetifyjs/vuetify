@@ -58,6 +58,11 @@ export default {
       title: 'Velg datoer',
       header: 'Velg datoer',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Velg dato',
     header: 'Velg dato',
     input: {

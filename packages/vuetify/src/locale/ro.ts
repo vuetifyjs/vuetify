@@ -58,6 +58,11 @@ export default {
       title: 'Selectați datele',
       header: 'Introduceți datele',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Selectați data',
     header: 'Introduceți data',
     input: {

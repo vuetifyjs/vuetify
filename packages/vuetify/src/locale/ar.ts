@@ -58,6 +58,11 @@ export default {
       title: 'اختر التواريخ',
       header: 'أدخل التواريخ',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'اختر التاريخ',
     header: 'أدخل التاريخ',
     input: {

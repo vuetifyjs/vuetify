@@ -58,6 +58,11 @@ export default {
       title: 'Vali kuupäevad',
       header: 'Sisesta kuupäevad',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Vali kuupäev',
     header: 'Sisesta kuupäev',
     input: {

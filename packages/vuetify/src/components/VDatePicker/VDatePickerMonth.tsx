@@ -8,7 +8,7 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useBackgroundColor } from '@/composables/color'
-import { useDate } from '@/composables/date/date'
+import { createWeekRange, useDate } from '@/composables/date/date'
 import { useGridSelection } from '@/composables/gridSelection'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -45,7 +45,7 @@ export type VDatePickerMonthSlots = {
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,
   hideWeekdays: Boolean,
-  multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
+  multiple: [Boolean, Number, String] as PropType<boolean | 'range' | 'week' | number | (string & {})>,
   showWeek: Boolean,
   readonly: Boolean,
   transition: {
@@ -107,16 +107,20 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     }
 
     const previewValue = useProxiedModel(props, 'previewValue')
+    const isWeek = toRef(() => props.multiple === 'week')
 
     const range = useRangePicker({
       multiple: computed(() => {
-        if (props.multiple === 'range') return 'range'
+        if (props.multiple === 'range' || isWeek.value) return 'range'
         return !!props.multiple
       }),
       model,
       compare: compareDays,
       normalizeEnd: (value: unknown) => adapter.endOfDay(value),
       previewValue,
+      expand: value => isWeek.value
+        ? createWeekRange(adapter, value, props.firstDayOfWeek)
+        : null,
     })
 
     const selectionColor = toRef(() => props.color || 'surface-variant')
@@ -275,6 +279,23 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
+    // in week mode the whole row is the target, so the gaps between day buttons stay live
+    function weekRowTarget (row: typeof daysInMonth.value) {
+      return row.find(item => !item.isAdjacent && !isDayDisabled(item)) ?? row.find(item => !isDayDisabled(item))
+    }
+
+    function onWeekRowEnter (row: typeof daysInMonth.value) {
+      range.setPreview(weekRowTarget(row)?.date)
+    }
+
+    function onWeekRowClick (row: typeof daysInMonth.value, e: MouseEvent) {
+      if ((e.target as HTMLElement).closest('.v-date-picker-month__day-btn')) return
+
+      const item = weekRowTarget(row)
+
+      if (item) onDayClick(item)
+    }
+
     function focusGrid () {
       containerEl.value?.focus()
     }
@@ -336,7 +357,10 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     }
     useRender(() => (
       <div
-        class="v-date-picker-month"
+        class={[
+          'v-date-picker-month',
+          { 'v-date-picker-month--week': isWeek.value },
+        ]}
         style={{ '--v-date-picker-days-in-week': props.weekdays.length }}
       >
         { props.showWeek && (
@@ -377,7 +401,12 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
             )}
 
             { dayRows.value.map((row, rowIndex) => (
-              <div class="v-date-picker-month__days-row" role="row">
+              <div
+                class="v-date-picker-month__days-row"
+                role="row"
+                onMouseenter={ isWeek.value ? () => onWeekRowEnter(row) : undefined }
+                onClick={ isWeek.value ? (e: MouseEvent) => onWeekRowClick(row, e) : undefined }
+              >
                 { row.map((item, colIndex) => {
                   const i = rowIndex * props.weekdays.length + colIndex
                   const isSelected = isSelectedDay(item)

@@ -58,6 +58,11 @@ export default {
       title: 'Wybór zakresu dat',
       header: 'Wprowadź zakres dat',
     },
+    week: {
+      title: 'Wybór tygodnia',
+      header: 'Wprowadź tydzień',
+      selected: 'Tydzień {0}, {1}',
+    },
     title: 'Wybór daty',
     header: 'Wprowadź datę',
     input: {

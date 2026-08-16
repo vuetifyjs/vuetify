@@ -58,6 +58,11 @@ export default {
       title: '選擇日期範圍',
       header: '輸入日期範圍',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: '選擇日期',
     header: '輸入日期',
     input: {

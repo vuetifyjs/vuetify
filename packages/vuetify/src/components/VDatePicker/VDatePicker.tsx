@@ -68,10 +68,7 @@ export const makeVDatePickerProps = propsFactory({
   //   type: String,
   //   default: 'dd/mm/yyyy',
   // },
-  header: {
-    type: String,
-    default: '$vuetify.datePicker.header',
-  },
+  header: String,
   headerColor: String,
   headerDateFormat: {
     type: String,
@@ -85,14 +82,14 @@ export const makeVDatePickerProps = propsFactory({
   }),
   ...omit(makeVDatePickerMonthsProps(), ['modelValue', 'columns']),
   ...omit(makeVDatePickerYearsProps(), ['modelValue', 'columns']),
-  ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
+  ...makeVPickerProps(),
 
   modelValue: null,
 }, 'VDatePicker')
 
 export const VDatePicker = genericComponent<new <
   T,
-  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  Multiple extends boolean | 'range' | 'week' | number | (string & {}) = false,
   TModel = Multiple extends true | number | string
     ? T[]
     : T,
@@ -161,7 +158,19 @@ export const VDatePicker = genericComponent<new <
     })
 
     const isReversing = shallowRef(false)
+    const isWeek = toRef(() => props.multiple === 'week')
+    const titleText = toRef(() => t(
+      props.title ?? (isWeek.value ? '$vuetify.datePicker.week.title' : '$vuetify.datePicker.title')
+    ))
     const header = computed(() => {
+      if (isWeek.value && model.value.length) {
+        return t(
+          '$vuetify.datePicker.week.selected',
+          adapter.getWeek(model.value[0], props.firstDayOfWeek, props.firstDayOfYear),
+          adapter.getYear(model.value[0]),
+        )
+      }
+
       if (props.multiple === 'range' && model.value.length === 2) {
         const [startDate, endDate] = model.value
         const daysBetween = adapter.getDiff(endDate, startDate, 'days') + 1
@@ -175,7 +184,7 @@ export const VDatePicker = genericComponent<new <
 
       const formattedDate = (model.value[0] && adapter.isValid(model.value[0]))
         ? adapter.format(adapter.date(model.value[0]), props.headerDateFormat)
-        : t(props.header)
+        : t(props.header ?? (isWeek.value ? '$vuetify.datePicker.week.header' : '$vuetify.datePicker.header'))
 
       return props.landscape && formattedDate.split(' ').length === 3
         ? formattedDate.replace(' ', '\n')
@@ -376,7 +385,9 @@ export const VDatePicker = genericComponent<new <
       if (!arrAfter.length) return
 
       const before = adapter.date(arrBefore[arrBefore.length - 1])
-      const after = adapter.date(arrAfter[arrAfter.length - 1])
+      // a week can straddle two months — keep the one already on screen
+      const onScreen = isWeek.value && arrAfter.find(d => adapter.getMonth(adapter.date(d)) === month.value)
+      const after = adapter.date(onScreen || arrAfter[arrAfter.length - 1])
 
       if (adapter.isSameDay(before, after)) return
 
@@ -432,7 +443,7 @@ export const VDatePicker = genericComponent<new <
           v-slots={{
             title: () => slots.title?.() ?? (
               <div class="v-date-picker__title">
-                { t(props.title) }
+                { titleText.value }
               </div>
             ),
             header: () => slots.header ? (

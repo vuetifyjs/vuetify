@@ -58,6 +58,11 @@ export default {
       title: 'Pilih tanggal',
       header: 'Masukkan tanggal',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Pilih tanggal',
     header: 'Masukkan tanggal',
     input: {

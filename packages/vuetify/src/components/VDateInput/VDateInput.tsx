@@ -8,6 +8,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 // Composables
 import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
+import { createWeekRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
@@ -83,7 +84,7 @@ export const makeVDateInputProps = propsFactory({
 
 export const VDateInput = genericComponent<new <
   T,
-  Multiple extends boolean | 'range' | number | (string & {}) = false,
+  Multiple extends boolean | 'range' | 'week' | number | (string & {}) = false,
   TModel = Multiple extends true | number | string
     ? T[]
     : T,
@@ -156,7 +157,7 @@ export const VDateInput = genericComponent<new <
         return t('$vuetify.datePicker.itemsSelected', value.length)
       }
 
-      if (props.multiple === 'range') {
+      if (props.multiple === 'range' || props.multiple === 'week') {
         const start = value[0]
         const end = value[value.length - 1]
 
@@ -260,7 +261,9 @@ export const VDateInput = genericComponent<new <
       } else {
         const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
         if (parts.every(isValid)) {
-          if (props.multiple === 'range') {
+          if (props.multiple === 'week') {
+            model.value = createWeekRange(adapter, clampDate(parseDate(parts[0])), props.firstDayOfWeek)
+          } else if (props.multiple === 'range') {
             const [start, stop] = parts
               .map(parseDate)
               .map(clampDate)

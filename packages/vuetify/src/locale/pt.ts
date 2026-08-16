@@ -58,6 +58,11 @@ export default {
       title: 'Selecione as datas',
       header: 'Digite as datas',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Selecione a data',
     header: 'Digite a data',
     input: {

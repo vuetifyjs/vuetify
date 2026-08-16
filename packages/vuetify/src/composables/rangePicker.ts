@@ -10,6 +10,8 @@ export interface RangePickerOptions<T> {
   compare: (a: T, b: T) => number
   normalizeEnd?: (value: T) => T
   previewValue?: Ref<T | undefined>
+  /** Return a fixed span for a single value to replace two-click range picking, or null to keep it. */
+  expand?: (value: T) => [T, T] | null
 }
 
 export function useRangePicker <T> ({
@@ -18,6 +20,7 @@ export function useRangePicker <T> ({
   compare,
   normalizeEnd = (v: T) => v,
   previewValue: externalPreview,
+  expand,
 }: RangePickerOptions<T>) {
   const rangeStart = computed(() => model.value.length >= 1 ? model.value[0] : undefined)
   const rangeEnd = computed(() => model.value.length >= 2 ? model.value[model.value.length - 1] : undefined)
@@ -25,8 +28,10 @@ export function useRangePicker <T> ({
 
   const previewRange = computed<[T, T] | null>(() => {
     if (multiple.value !== 'range') return null
-    if (!rangeStart.value || rangeEnd.value) return null
     if (!previewValue.value) return null
+    const span = expand?.(previewValue.value)
+    if (span) return span
+    if (!rangeStart.value || rangeEnd.value) return null
     const start = rangeStart.value
     const preview = previewValue.value
     if (compare(start, preview) === 0) return null
@@ -66,7 +71,10 @@ export function useRangePicker <T> ({
   }
 
   function select (value: T): void {
-    if (multiple.value === 'range') {
+    const span = expand?.(value)
+    if (span) {
+      model.value = span
+    } else if (multiple.value === 'range') {
       onRangeSelect(value)
     } else if (multiple.value) {
       onMultipleSelect(value)

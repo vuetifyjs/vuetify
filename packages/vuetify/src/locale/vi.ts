@@ -58,6 +58,11 @@ export default {
       title: 'Chọn ngày',
       header: 'Nhập ngày',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Chọn ngày',
     header: 'Nhập ngày',
     input: {
