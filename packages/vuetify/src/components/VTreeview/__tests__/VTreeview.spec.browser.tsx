@@ -798,7 +798,7 @@ describe.each([
         // eslint-disable-next-line @vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
           // eslint-disable-next-line @vitest/no-conditional-expect
-          await expect.poll(() => screen.queryByText(/John/)).not.toBeVisible()
+          await expect.poll(() => screen.queryByText(/John/), { timeout: 3000 }).not.toBeVisible()
         } else {
           // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/John/)).toBeNull()

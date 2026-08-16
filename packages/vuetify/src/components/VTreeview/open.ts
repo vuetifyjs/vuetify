@@ -2,10 +2,10 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, toRaw, watch } from 'vue'
+import { computed, toRaw, toValue, watch } from 'vue'
 
 // Types
-import type { Ref } from 'vue'
+import type { MaybeRefOrGetter, Ref } from 'vue'
 import type { ListItem } from '@/composables/list-items'
 import type { EventProp } from '@/util'
 
@@ -23,7 +23,7 @@ export function useOpened (
   props: OpenProps,
   items: Ref<ListItem[]>,
   filteredItems: Ref<ListItem[]>,
-  getPath: () => GetPath | undefined,
+  getPath: MaybeRefOrGetter<GetPath | undefined>,
 ) {
   const opened = useProxiedModel(
     props,
@@ -32,7 +32,11 @@ export function useOpened (
     (v): unknown[] => Array.isArray(v) ? v : [],
   )
 
-  const idOf = (item: ListItem) => props.returnObject ? toRaw(item.raw) : item.props.value
+  const revealedBySearch = new Set<unknown>()
+
+  function idOf (item: ListItem) {
+    return props.returnObject ? toRaw(item.raw) : item.props.value
+  }
 
   function everyGroupId (items: ListItem[]): unknown[] {
     return items.flatMap(item => item.children
@@ -41,14 +45,17 @@ export function useOpened (
     )
   }
 
-  const allGroupIds = computed(() => props.openAll ? everyGroupId(items.value).map(toRaw) : [])
+  const allGroupIds = computed(() => {
+    return props.openAll ? everyGroupId(items.value).map(toRaw) : []
+  })
 
   watch(allGroupIds, (ids, previous = []) => {
     const open = new Set(opened.value.map(toRaw))
-    const stillAllGroups = new Set(ids)
+    const all = new Set(ids)
 
     const toOpen = ids.filter(id => !previous.includes(id) && !open.has(id))
-    const toClose = previous.filter(id => !stillAllGroups.has(id) && open.has(id))
+    const toClose = previous.filter(id => !all.has(id) && open.has(id))
+
     if (!toOpen.length && !toClose.length) return
 
     toOpen.forEach(id => open.add(id))
@@ -57,40 +64,48 @@ export function useOpened (
     opened.value = [...open]
   }, { immediate: true })
 
-  const revealedBySearch = new Set<unknown>()
-
   const groupsRevealingMatches = computed<unknown[]>(() => {
-    const getPathTo = getPath()
+    const getPathTo = toValue(getPath)
+
     if (!props.search || !getPathTo) return []
-    return [...new Set(
-      filteredItems.value.flatMap(item => {
+
+    const groups = filteredItems.value
+      .flatMap(item => {
         const branch = getPathTo(idOf(item))
         return item.children ? branch : branch.slice(0, -1)
-      }).map(toRaw)
-    )]
+      })
+
+    return [...new Set(groups.map(toRaw))]
   })
 
   watch(groupsRevealingMatches, groups => {
     const open = new Set(opened.value.map(toRaw))
     const toOpen = groups.filter(id => !open.has(id))
+
     if (!toOpen.length) return
+
     toOpen.forEach(id => revealedBySearch.add(id))
+
     opened.value = [...opened.value, ...toOpen]
   })
 
-  watch(() => !!props.search, searching => {
-    if (searching || !revealedBySearch.size) return
-    const getPathTo = getPath()
+  watch(() => !props.search, cleared => {
+    if (!cleared || !revealedBySearch.size) return
+
+    const getPathTo = toValue(getPath)
+
     const stillNeeded = new Set(
       opened.value
         .map(toRaw)
         .filter(id => !revealedBySearch.has(id))
-        .flatMap(id => (getPathTo?.(id) ?? [id]).map(toRaw))
+        .flatMap(id => (getPathTo?.(id) ?? [id]))
+        .map(toRaw)
     )
-    opened.value = opened.value.filter(id => {
-      const raw = toRaw(id)
-      return !revealedBySearch.has(raw) || stillNeeded.has(raw)
-    })
+
+    opened.value = opened.value
+      .map(toRaw)
+      .filter(val => !revealedBySearch.has(val) || stillNeeded.has(val))
+
     revealedBySearch.clear()
   })
 

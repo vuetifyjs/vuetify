@@ -183,8 +183,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             },
             props.style,
           ]}
-          opened={[...opened.value]}
-          onUpdate:opened={ val => { opened.value = val } }
+          v-model:opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >
