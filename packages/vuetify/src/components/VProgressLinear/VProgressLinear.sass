@@ -1,6 +1,8 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+$bar-transition: width $progress-linear-transition, left $progress-linear-transition, right $progress-linear-transition
+
 @property --v-progress-indeterminate-long-left
   syntax: "<percentage>"
   inherits: true
@@ -49,10 +51,7 @@
     position: absolute
     top: 0
     width: 100%
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   @include tools.layer('trumps')
     @media (forced-colors: active)
@@ -86,10 +85,7 @@
     height: inherit
     left: 0
     position: absolute
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   .v-progress-linear__indeterminate
     animation-play-state: paused
@@ -139,10 +135,7 @@
     opacity: $progress-linear-stream-opacity
     pointer-events: none
     position: absolute
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   // Modifiers
   .v-progress-linear--reverse
