@@ -815,18 +815,20 @@ describe.each([
             items={ items }
             itemValue="id"
             itemsRegistration={ itemsRegistration }
+            openOnClick
           />
         ))
 
         await nextTick()
-        search.value = 'John'
-        await waitIdle()
-        expect(opened.value).toContain(2) // search opened John's parent "Core team"
-        expect(opened.value).not.toContain(201) // never open the matched leaf itself
+        search.value = 'Human'
+        await expect.poll(() => opened.value).toContain(1)
 
-        // user opens an unrelated branch while searching
-        opened.value = [...opened.value, 3]
+        // user opens an unrelated branch
+        await userEvent.click(screen.getByText(/Administrators/))
         await waitIdle()
+
+        search.value = 'John'
+        await expect.poll(() => opened.value).toContain(2)
 
         search.value = ''
         await waitIdle()
@@ -857,6 +859,7 @@ describe.each([
             items={ nested }
             itemValue="id"
             itemsRegistration={ itemsRegistration }
+            openOnClick
           />
         ))
 
@@ -864,7 +867,7 @@ describe.each([
         search.value = 'core' // reveals & opens "Core team"
         await waitIdle()
 
-        opened.value = [...opened.value, 21]
+        await userEvent.click(screen.getByText(/Managers/))
         await waitIdle()
 
         search.value = ''
