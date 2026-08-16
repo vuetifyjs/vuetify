@@ -33,6 +33,7 @@ export function useOpened (
   )
 
   const revealedBySearch = new Set<unknown>()
+  const collapsedByUser = new Set<unknown>()
 
   function idOf (item: ListItem) {
     return props.returnObject ? toRaw(item.raw) : item.props.value
@@ -78,9 +79,16 @@ export function useOpened (
     return [...new Set(groups.map(toRaw))]
   })
 
+  watch(opened, val => {
+    const open = new Set(val.map(toRaw))
+    revealedBySearch.forEach(id => open.has(id) || collapsedByUser.add(id))
+  })
+
+  watch(() => props.search, () => collapsedByUser.clear())
+
   watch(groupsRevealingMatches, groups => {
     const open = new Set(opened.value.map(toRaw))
-    const toOpen = groups.filter(id => !open.has(id))
+    const toOpen = groups.filter(id => !open.has(id) && !collapsedByUser.has(id))
 
     if (!toOpen.length) return
 

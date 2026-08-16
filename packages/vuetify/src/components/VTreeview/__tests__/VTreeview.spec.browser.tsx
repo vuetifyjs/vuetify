@@ -795,6 +795,8 @@ describe.each([
         expect(screen.getByText(/John/)).toBeVisible()
 
         await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        // registration changes are propagated with a 100ms throttle
+        await wait(300)
         // eslint-disable-next-line @vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
           // eslint-disable-next-line @vitest/no-conditional-expect
@@ -803,6 +805,48 @@ describe.each([
           // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/John/)).toBeNull()
         }
+
+        search.value = 'Andrew'
+        await expect.poll(() => screen.queryByText(/Andrew/)).toBeVisible()
+      })
+
+      it('should reveal matches added to items while search is active', async () => {
+        const liveItems = reactive([
+          {
+            id: 1,
+            title: 'Vuetify Human Resources',
+            children: [
+              { id: 2, title: 'Core team', children: [{ id: 201, title: 'John' }] },
+              { id: 3, title: 'Administrators', children: [{ id: 301, title: 'Mike' }] },
+            ],
+          },
+        ])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ liveItems }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'John'
+        await expect.poll(() => screen.queryByText(/John/)).toBeVisible()
+
+        liveItems[0].children[1].children.push({ id: 302, title: 'Johnson' })
+        await expect.poll(() => screen.queryByText(/Johnson/)).toBeVisible()
+
+        // a branch the user collapsed stays closed until the search changes
+        await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        await wait(300)
+        liveItems[0].children[0].children.push({ id: 202, title: 'Johnny' })
+        await wait(300)
+        expect(screen.queryByText(/Johnny/)?.checkVisibility()).toBeFalsy()
+
+        search.value = 'Johnny'
+        await expect.poll(() => screen.queryByText(/Johnny/)).toBeVisible()
       })
 
       it('should keep user-opened branches when search is cleared', async () => {
