@@ -6,8 +6,8 @@ import { useTextColor } from '@/composables/color'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
+import { toHighlight } from '@vuetify/v0'
 import { computed } from 'vue'
-import { toHighlight } from './toHighlight'
 import { defineComponent, propsFactory } from '@/util'
 
 // Types

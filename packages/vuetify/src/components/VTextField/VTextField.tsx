@@ -18,7 +18,18 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import {
+  callEvent,
+  filterInputAttrs,
+  genericComponent,
+  getActiveElement,
+  isFunction,
+  isNumber,
+  isString,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -78,8 +89,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function' ? props.counterValue(model.value)
-        : typeof props.counterValue === 'number' ? props.counterValue
+      return isFunction(props.counterValue) ? props.counterValue(model.value)
+        : isNumber(props.counterValue) ? props.counterValue
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
@@ -87,8 +98,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
       if (
         !props.counter ||
-        (typeof props.counter !== 'number' &&
-        typeof props.counter !== 'string')
+        (!isNumber(props.counter) && !isString(props.counter))
       ) return undefined
 
       return props.counter
@@ -114,7 +124,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       if (!isFocused.value) focus()
 
       nextTick(() => {
-        if (inputRef.value !== document.activeElement) {
+        if (inputRef.value !== getActiveElement()) {
           inputRef.value?.focus()
         }
       })
@@ -172,7 +182,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
-      const hasDetails = !!(hasCounter || slots.details)
+      const hasDetails = props.hideDetails !== true && !!(
+        slots.details ||
+        (hasCounter && (props.persistentCounter || props.hideDetails === false || isFocused.value))
+      )
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)

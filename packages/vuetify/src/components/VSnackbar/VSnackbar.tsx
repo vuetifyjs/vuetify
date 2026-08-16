@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -263,7 +263,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const transition = computed(() => {
-      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+      if (!isString(props.transition) || !props.transition.endsWith('-auto')) {
         return props.transition
       }
 

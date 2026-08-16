@@ -45,6 +45,27 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VCombobox', () => {
+  it.each([
+    ['{Tab}', 'after'],
+    ['{Shift>}{Tab}{/Shift}', 'before'],
+  ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VCombobox items={ items } openOnFocus v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    screen.getByCSS('.v-combobox input[type="text"]').focus()
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard(keys)
+    await expect.poll(() => menu.value).toBe(false)
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+  })
+
   describe('closableChips', () => {
     it('should close only first chip', async () => {
       const items = [
@@ -97,7 +118,7 @@ describe('VCombobox', () => {
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
       await expect.poll(() => search.value).toBe(items[0].title)
-      expect(screen.getByCSS('input')).toHaveValue(items[0].title)
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue(items[0].title)
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
       await userEvent.click(element)
@@ -105,7 +126,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('Item 2')
       expect(model.value).toBe('Item 2')
       expect(search.value).toBe('Item 2')
-      expect(screen.getByCSS('input')).toHaveValue('Item 2')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('Item 2')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
@@ -113,7 +134,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('item3')
       expect(model.value).toBe('item3')
       expect(search.value).toBe('item3')
-      expect(screen.getByCSS('input')).toHaveValue('item3')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('item3')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('item3')
     })
 
@@ -140,7 +161,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
       await commands.waitStable('.v-list')
@@ -259,7 +280,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
 
@@ -312,7 +333,7 @@ describe('VCombobox', () => {
         />
       ))
 
-      const input = screen.getByCSS('input')
+      const input = screen.getByCSS('input[type="text"]')
 
       await userEvent.click(element)
 
@@ -481,7 +502,7 @@ describe('VCombobox', () => {
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
-    await expect.poll(() => screen.getByCSS('input')).toHaveValue('0')
+    await expect.poll(() => screen.getByCSS('input[type="text"]')).toHaveValue('0')
   })
 
   it('should conditionally show placeholder', async () => {
@@ -489,7 +510,7 @@ describe('VCombobox', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
@@ -708,7 +729,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
 
     // Blur input with a custom search input value
@@ -716,6 +737,8 @@ describe('VCombobox', () => {
     input.blur()
     await expect.poll(() => selectedItem.value).toBe('test')
     expect(input).toHaveValue('')
+
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
 
     // Press enter key with a custom search input value
     await userEvent.click(element)
@@ -905,7 +928,7 @@ describe('VCombobox', () => {
       />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -924,6 +947,241 @@ describe('VCombobox', () => {
     // Repaired: focus returns into the menu content and the menu stays open.
     expect(menu.value).toBe(true)
     expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('native form submission', () => {
+    const objectItems = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox name="field" items={ objectItems } modelValue={ objectItems[0] } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox multiple name="field" items={ objectItems } modelValue={[objectItems[0], objectItems[1]]} />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      const values = submittedData!.getAll('field')
+      expect(values).toEqual(['1', '2'])
+    })
+
+    it('should include freeform values not present in items', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox name="field" items={ items } modelValue="Narnia" />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('Narnia')
+    })
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item and arrow from selection', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
+
+    it('should open on ArrowUp when a value is selected', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('{Escape}')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('99')
+    })
+  })
+
+  describe('selection events for multiple', () => {
+    it('should emit item:created for free-text values', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('Brand new{Enter}')
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).toHaveBeenCalledTimes(1)
+      expect(created.mock.calls[0][0]).toMatchObject({ title: 'Brand new', value: 'Brand new', raw: 'Brand new' })
+      expect(model.value).toEqual(['Brand new'])
+    })
+
+    it('should not emit item:created when selecting an existing item', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+      await userEvent.click(screen.getAllByRole('option')[0])
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).not.toHaveBeenCalled()
+    })
+
+    it('should emit item:removed when closing a chip', async () => {
+      const removed = vi.fn()
+
+      render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          modelValue={['Item 1', 'Item 2']}
+          multiple
+          chips
+          closableChips
+          onItem:removed={ removed }
+        />
+      ))
+
+      await userEvent.click(screen.getAllByTestId('close-chip')[0])
+      expect(removed).toHaveBeenCalledTimes(1)
+      expect(removed.mock.calls[0][0]).toMatchObject({ title: 'Item 1', value: 'Item 1' })
+    })
+  })
+
+  describe('trimValues', () => {
+    it('should discard whitespace-only values and trim committed values', async () => {
+      const model = ref([])
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } multiple trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard(' ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard('  {Enter}')
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('a {Enter}')
+      await expect.poll(() => model.value).toEqual(['a'])
+
+      await userEvent.keyboard(' b b')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual(['a', 'b b'])
+    })
+
+    it('should trim single value on blur', async () => {
+      const model = ref()
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('  ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBeNull()
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard(' a a ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBe('a a')
+      await expect.poll(() => (input as HTMLInputElement).value).toBe('a a')
+    })
   })
 
   showcase({ stories })

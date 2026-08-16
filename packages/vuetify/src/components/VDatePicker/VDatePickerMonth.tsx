@@ -17,7 +17,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, genericComponent, isFunction, isObject, isString, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -305,13 +305,13 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         return []
       } else if (eventData !== true) {
         eventColors = wrapInArray(eventData)
-      } else if (typeof eventColor === 'string') {
+      } else if (isString(eventColor)) {
         eventColors = [eventColor]
-      } else if (typeof eventColor === 'function') {
+      } else if (isFunction(eventColor)) {
         eventColors = wrapInArray(eventColor(date))
       } else if (Array.isArray(eventColor)) {
         eventColors = eventColor
-      } else if (typeof eventColor === 'object' && eventColor !== null) {
+      } else if (isObject(eventColor)) {
         eventColors = wrapInArray(eventColor[date])
       }
 
@@ -320,7 +320,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         ? ['surface-variant']
         : eventColors
           .filter(Boolean)
-          .map((color: string | boolean) => typeof color === 'string' ? color : 'surface-variant')
+          .map((color: string | boolean) => isString(color) ? color : 'surface-variant')
     }
 
     function genEvents (date: string): JSX.Element | null {

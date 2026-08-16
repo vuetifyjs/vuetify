@@ -3,7 +3,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, reactive, watch } from 'vue'
-import { mergeDeep } from '@/util'
+import { isFunction, isString, mergeDeep } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -94,14 +94,14 @@ export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown)
     `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
     `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
   ]
-  return typeof adapter.date() === 'string'
+  return isString(adapter.date())
     ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
     : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
 }
 
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
-    typeof options.adapter === 'function'
+    isFunction(options.adapter)
       // eslint-disable-next-line new-cap
       ? new options.adapter({
         locale: options.locale[locale.current.value] ?? locale.current.value,

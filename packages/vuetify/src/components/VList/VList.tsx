@@ -29,6 +29,7 @@ import {
   EventProp,
   focusChild,
   genericComponent,
+  getActiveElement,
   getPropertyFromItem,
   isPrimitive,
   omit,
@@ -327,7 +328,11 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
             navigationIndex.value = nextIndex
           }
         } else {
-          focus(direction)
+          focus(direction, { preventScroll: true })
+          const focused = getActiveElement()
+          if (focused && contentRef.value?.contains(focused)) {
+            focused.scrollIntoView({ block: 'nearest' })
+          }
         }
       }
     }

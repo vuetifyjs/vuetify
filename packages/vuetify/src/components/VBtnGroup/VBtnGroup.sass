@@ -1,5 +1,6 @@
 @use 'sass:selector'
 @use '../../styles/tools'
+@use '../VBtn/mixins' as *
 @use '../VBtn/variables' as *
 @use './variables' as *
 
@@ -25,13 +26,17 @@
     &--tile
       @include tools.rounded($btn-group-tile-border-radius)
 
+    &--has-size .v-btn--icon
+      @include button-density(('width', 'height'), $button-density)
+
     &--horizontal
       $root: &
 
       @at-root
         @include tools.density('v-btn-group', $button-density) using ($modifier)
           @at-root #{selector.append(&, $root)}
-            height: $btn-group-height + $modifier
+            &:not(#{$root}--has-size)
+              height: $btn-group-height + $modifier
 
       .v-btn
         &:not(:last-child)

@@ -22,6 +22,8 @@ type VirtualProps = {
   height: number | string | undefined
 }
 
+export type ScrollToPosition = 'start' | 'center' | 'end'
+
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
@@ -79,6 +81,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
+  let targetScrollPosition: ScrollToPosition = 'start'
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
@@ -92,6 +95,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
     }
     updateTime.value = Math.max(updateTime.value, performance.now() - start)
+    calculateVisibleItems()
   }, updateTime)
 
   const unwatch = watch(hasInitialRender, v => {
@@ -108,8 +112,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
     nextTick(() => {
       IN_BROWSER && window.requestAnimationFrame(() => {
-        scrollToIndex(targetScrollIndex)
-        targetScrollIndex = -1
+        if (~targetScrollIndex) scrollToIndex(targetScrollIndex, targetScrollPosition)
       })
     })
   })
@@ -122,7 +125,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const prevHeight = sizes[index]
     const prevMinHeight = itemHeight.value
 
-    itemHeight.value = prevMinHeight ? Math.min(itemHeight.value, height) : height
+    if (height > 0) {
+      itemHeight.value = prevMinHeight ? Math.min(prevMinHeight, height) : height
+    }
 
     if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
       sizes[index] = height
@@ -226,7 +231,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       } else {
         // Only update the side that's reached its limit if there's still buffer left
         if (start <= 0) first.value = start
-        if (end >= items.value.length) last.value = end
+        if (end >= items.value.length) {
+          last.value = end
+          first.value = start
+        }
       }
     }
 
@@ -234,13 +242,63 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
   }
 
-  function scrollToIndex (index: number) {
+  function calculateScrollTop (index: number, position: ScrollToPosition) {
+    const offset = calculateOffset(index)
+    if (position === 'center') return Math.max(0, offset - viewportHeight.value / 2 + getSize(index) / 2)
+    if (position === 'end') {
+      const scrollport = containerRef.value?.clientHeight || viewportHeight.value
+      return Math.max(0, offset + markerOffset - scrollport + getSize(index))
+    }
+    return offset
+  }
+
+  function scrollToIndex (index: number, position: ScrollToPosition = 'start') {
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
       targetScrollIndex = index
-    } else {
-      containerRef.value.scrollTop = offset
+      targetScrollPosition = position
+      return
     }
+
+    // Move the window first so paddingTop/Bottom make scrollHeight large enough
+    // before we assign scrollTop (otherwise the browser clamps the scroll).
+    const itemSize = itemHeight.value || 16
+    const buffer = Math.ceil(BUFFER_PX / itemSize)
+    const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
+
+    // paddingTop comes from first and must not exceed the scrollTop assigned below
+    const lead = position === 'center' ? Math.ceil(viewport / 2) : position === 'end' ? viewport : 0
+    first.value = clamp(index - lead - buffer, 0, Math.max(0, items.value.length - 1))
+    last.value = clamp(index - lead + viewport + buffer, first.value + 1, items.value.length)
+    paddingTop.value = calculateOffset(first.value)
+    paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
+
+    scrollVelocity = 0
+    lastScrollTime = 0
+    targetScrollIndex = index
+    targetScrollPosition = position
+
+    nextTick(() => {
+      const el = containerRef.value
+      // Superseded by a later scrollToIndex
+      if (!el || !~targetScrollIndex || targetScrollIndex !== index) return
+
+      const top = calculateScrollTop(index, position)
+      el.scrollTop = top
+      // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
+      lastScrollTop = el.scrollTop
+
+      const fullHeight = calculateOffset(items.value.length) + markerOffset
+      if (index && el.scrollTop < top - 1 && el.scrollHeight < fullHeight - 1) {
+        IN_BROWSER && requestAnimationFrame(() => {
+          if (targetScrollIndex === index) scrollToIndex(index, position)
+        })
+      } else {
+        targetScrollIndex = -1
+        targetScrollPosition = 'start'
+        calculateVisibleItems()
+      }
+    })
   }
 
   const computedItems = computed(() => {

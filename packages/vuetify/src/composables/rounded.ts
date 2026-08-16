@@ -1,6 +1,6 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, isString, propsFactory } from '@/util'
 
 // Types
 import type { CSSProperties, Ref } from 'vue'
@@ -15,6 +15,21 @@ export interface RoundedProps {
 type RoundedData = {
   roundedClasses: Ref<string[]>
   roundedStyles: Ref<CSSProperties>
+}
+
+const CSS_LENGTH = /^-?\d*\.?\d+([a-z%]{0,4})$/i
+
+function splitTokens (v: RoundedValue) {
+  return String(v).trim().split(/\s+/)
+}
+
+function isCssLength (token: string) {
+  return token.toLowerCase().match(CSS_LENGTH)?.at(1)?.startsWith('x') === false
+}
+
+function isCssValue (v: RoundedValue): v is string {
+  return typeof v === 'string' && !!v &&
+    (v.includes('(') || splitTokens(v).every(isCssLength))
 }
 
 // Composables
@@ -35,12 +50,12 @@ export function useRounded (
     const tile = isRef(props) ? false : props.tile
     const classes: string[] = []
 
-    if (tile || rounded === false) {
+    if (tile || rounded === false || String(rounded) === '0') {
       classes.push('rounded-0')
     } else if (rounded === true || rounded === '') {
       classes.push(`${name}--rounded`)
-    } else if (rounded === 0 || (typeof rounded === 'string' && (rounded === '0' || !/[0-9%]/.test(rounded) || /\d*xl$/.test(rounded)))) {
-      for (const value of String(rounded).split(' ')) {
+    } else if (isString(rounded) && !isCssValue(rounded)) {
+      for (const value of splitTokens(rounded)) {
         classes.push(`rounded-${value}`)
       }
     }
@@ -50,16 +65,14 @@ export function useRounded (
 
   const roundedStyles = computed<CSSProperties>(() => {
     const rounded = isRef(props) ? props.value : props.rounded
-    const roundedText = String(rounded)
 
-    if (!/[0-9]/.test(roundedText) ||
-      roundedText.includes('xl') ||
-      roundedText === '0'
+    if ((!isCssValue(rounded) || String(rounded) === '0') &&
+      !(typeof rounded === 'number' && rounded !== 0)
     ) {
       return {}
     }
 
-    return { borderRadius: convertToUnit(roundedText) }
+    return { borderRadius: convertToUnit(rounded) }
   })
 
   return { roundedClasses, roundedStyles }

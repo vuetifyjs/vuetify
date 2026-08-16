@@ -1,6 +1,6 @@
 // Utilities
 import { onScopeDispose, toRef, toValue, watch } from 'vue'
-import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
+import { focusableChildren, getActiveElement, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -35,7 +35,7 @@ function lastActiveTrap (): HTMLElement | undefined {
 }
 
 function onKeydown (e: KeyboardEvent) {
-  const activeElement = document.activeElement as HTMLElement | null
+  const activeElement = getActiveElement() as HTMLElement | null
   if (e.key !== 'Tab' || !activeElement) return
 
   const parentTraps = Array.from(registry.values())

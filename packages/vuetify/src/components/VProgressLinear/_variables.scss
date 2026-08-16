@@ -20,7 +20,9 @@ $progress-linear-stripe-gradient: linear-gradient(
   transparent
 ) !default;
 $progress-linear-indeterminate-animation-duration: 2.2s !default;
+$progress-linear-reveal-duration: 900ms !default;
 $progress-linear-stream-animation: stream .25s infinite linear !default;
 $progress-linear-striped-animation: progress-linear-stripes 1s infinite linear !default;
 $progress-linear-striped-size: var(--v-progress-linear-height) !default;
-$progress-linear-transition: .2s settings.$standard-easing !default;
+$progress-linear-transition-duration: .2s !default;
+$progress-linear-transition: var(--v-progress-linear-transition-duration) settings.$standard-easing !default;

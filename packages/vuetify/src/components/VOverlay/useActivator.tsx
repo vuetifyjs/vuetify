@@ -18,8 +18,10 @@ import {
 } from 'vue'
 import {
   bindProps,
+  getActiveElement,
   getCurrentInstance,
   IN_BROWSER,
+  isString,
   matchesSelector,
   propsFactory,
   templateRef,
@@ -244,7 +246,7 @@ export function useActivator (
     if (val && (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    ) && !contentEl.value?.contains(document.activeElement)) {
+    ) && !contentEl.value?.contains(getActiveElement())) {
       runCloseDelay()
     }
   })
@@ -355,7 +357,7 @@ function getTarget<T extends 'parent' | string | Element | ComponentPublicInstan
       el = el.parentNode
     }
     target = el
-  } else if (typeof selector === 'string') {
+  } else if (isString(selector)) {
     // Selector
     target = document.querySelector(selector)
   } else if ('$el' in selector) {

@@ -46,6 +46,27 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
+  it.each([
+    ['{Tab}', 'after'],
+    ['{Shift>}{Tab}{/Shift}', 'before'],
+  ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } openOnFocus v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    screen.getByCSS('.v-autocomplete input[type="text"]').focus()
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard(keys)
+    await expect.poll(() => menu.value).toBe(false)
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+  })
+
   it('should clear focused state after interacting with content and moving to sibling field', async () => {
     const menuA = ref(false)
     const menuB = ref(false)
@@ -93,6 +114,78 @@ describe('VAutocomplete', () => {
 
     expect(menuA.value).toBe(false)
     expect(fieldARoot).not.toHaveClass('v-input--focused')
+  })
+
+  it('should select input text on keyboard focus but not on click', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
+
+    screen.getByTestId('before').focus()
+    await userEvent.tab()
+    await waitAnimationFrame()
+    expect([input.selectionStart, input.selectionEnd]).toEqual([0, 'California'.length])
+
+    await userEvent.tab({ shift: true })
+    await waitAnimationFrame()
+
+    await userEvent.click(input)
+    await waitAnimationFrame()
+    expect(input.selectionStart).toBe(input.selectionEnd)
+  })
+
+  it('should keep the selected title in the input when blurred', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
+    expect(input.value).toBe('California')
+
+    await userEvent.click(input)
+    await waitIdle()
+    await userEvent.type(input, 'xyz')
+    expect(input.value).not.toBe('California')
+
+    screen.getByTestId('before').focus()
+    await waitAnimationFrame()
+    expect(input.value).toBe('California')
+  })
+
+  it('should show the full list when reopened after an abandoned search', async () => {
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VAutocomplete items={ items } modelValue="California" />
+      </>
+    ))
+
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
+
+    // keyboard focus selects the title, so typing replaces it without clearing the model
+    screen.getByTestId('before').focus()
+    await userEvent.tab()
+    await waitAnimationFrame()
+    await userEvent.type(input, 'Colo')
+    const filtered = await screen.findAllByRole('option')
+    expect(filtered).toHaveLength(1)
+
+    screen.getByTestId('before').focus()
+    await waitAnimationFrame()
+    expect(input.value).toBe('California')
+
+    await userEvent.click(input)
+    await waitIdle()
+    const reopened = await screen.findAllByRole('option')
+    expect(reopened).toHaveLength(items.length)
   })
 
   it('should not return focus to the input on click-outside', async () => {
@@ -187,7 +280,7 @@ describe('VAutocomplete', () => {
       </VAutocomplete>
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -209,7 +302,7 @@ describe('VAutocomplete', () => {
       />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -238,7 +331,7 @@ describe('VAutocomplete', () => {
       <VAutocomplete v-model:menu={ menu.value } items={ items.value } />
     ))
 
-    const input = screen.getByCSS('input')
+    const input = screen.getByCSS('input[type="text"]')
     await userEvent.click(input)
     await waitIdle()
     expect(menu.value).toBe(true)
@@ -459,9 +552,9 @@ describe('VAutocomplete', () => {
     const activeItems = await findAllByRole(menu, 'option', { selected: true })
     expect(activeItems).toHaveLength(2)
 
-    expect(document.activeElement).toBe(within(container).getByCSS('input'))
+    expect(document.activeElement).toBe(within(container).getByCSS('input[type="text"]'))
 
-    const input = within(container).getByCSS('input')
+    const input = within(container).getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
   })
 
@@ -483,7 +576,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
     expect(element).not.toHaveClass('v-select--active-menu')
 
-    screen.getByCSS('input').focus()
+    screen.getByCSS('input[type="text"]').focus()
     await userEvent.keyboard('{ArrowDown}')
 
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
@@ -511,7 +604,7 @@ describe('VAutocomplete', () => {
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
     expect(element).not.toHaveClass('v-select--active-menu')
 
-    screen.getByCSS('input').focus()
+    screen.getByCSS('input[type="text"]').focus()
     await userEvent.keyboard('{ArrowDown}')
 
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
@@ -671,7 +764,7 @@ describe('VAutocomplete', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
@@ -709,7 +802,7 @@ describe('VAutocomplete', () => {
 
     await userEvent.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}c')
 
-    expect(document.activeElement).toBe(within(element).getByCSS('input'))
+    expect(document.activeElement).toBe(within(element).getByCSS('input[type="text"]'))
   })
 
   it('should not open menu when closing a chip', async () => {
@@ -738,6 +831,18 @@ describe('VAutocomplete', () => {
     await screen.findByRole('listbox')
 
     await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
+  })
+
+  it('should close menu on control click with close-on-input-click', async () => {
+    const { element } = render(() => (
+      <VAutocomplete items={['foo', 'bar']} closeOnInputClick />
+    ))
+
+    await userEvent.click(element)
+    await screen.findByRole('listbox')
+
+    await userEvent.click(element)
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
@@ -887,7 +992,7 @@ describe('VAutocomplete', () => {
     ))
 
     await userEvent.click(element)
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
 
     // Blur input with a custom search input value
@@ -977,6 +1082,246 @@ describe('VAutocomplete', () => {
       // Shift+Tab back to header
       await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
       expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
+  })
+
+  describe('native form submission', () => {
+    const objectItems = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete name="field" items={ objectItems } modelValue={ objectItems[0] } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete multiple name="field" items={ objectItems } modelValue={[objectItems[0], objectItems[1]]} />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      const values = submittedData!.getAll('field')
+      expect(values).toEqual(['1', '2'])
+    })
+
+    it('should not submit any value when nothing is selected', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VAutocomplete name="field" items={ objectItems } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.has('field')).toBe(false)
+    })
+
+    it('should associate with a form outside its tree via the form attribute', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <>
+          <form
+            id="outer"
+            onSubmit={ e => {
+              e.preventDefault()
+              submittedData = new FormData(e.target as HTMLFormElement)
+            }}
+          >
+            <button type="submit">Submit</button>
+          </form>
+          <VAutocomplete form="outer" name="field" items={ objectItems } modelValue={ objectItems[0] } />
+        </>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item on Enter', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+    })
+
+    it('should move arrows from the selected item', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
+
+    it('should reset the list window when filtering after open with selection', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 102 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('102')
+
+      await userEvent.keyboard('1')
+      await waitIdle()
+
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+      expect(screen.getAllByRole('option').map(el => el.textContent?.trim()))
+        .not.toContain('102')
+    })
+
+    it('should enter the filtered list from either end', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={ 102 } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('1')
+      await waitIdle()
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('1')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('991')
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('1')
+    })
+
+    it('should use ArrowUp to reach the last of the long list', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } />
+      ))
+
+      await userEvent.keyboard('{Tab}{ArrowUp}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('999')
+      expect(screen.getAllByRole('option').map(el => el.textContent)).toContain('999')
+    })
+
+    it('should ArrowUp to the last filtered item from the field', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('1')
+      await waitIdle()
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('991')
+    })
+
+    it('should wrap ArrowUp from first item to last of the full list', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('0')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('999')
+
+      const viewport = screen.getByCSS('.v-overlay__content')
+      const active = document.activeElement as HTMLElement
+      const viewRect = viewport.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      expect(activeRect.bottom).toBeGreaterThan(viewRect.top)
+      expect(activeRect.top).toBeLessThan(viewRect.bottom)
+    })
+
+    it('should keep checkboxes in sync with the model while filtering', async () => {
+      render(() => (
+        <VAutocomplete items={ manyItems } modelValue={[1]} multiple />
+      ))
+
+      await userEvent.tab()
+      await userEvent.keyboard('{Enter}')
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('1')
+      await waitIdle()
+
+      const checked = () => screen.getAllByRole('option')
+        .filter(el => el.querySelector('input:checked'))
+        .map(el => el.textContent?.trim())
+
+      await expect.poll(() => screen.getAllByRole('option')[0]?.textContent?.trim()).toBe('1')
+      expect(checked()).toEqual(['1'])
     })
   })
 
