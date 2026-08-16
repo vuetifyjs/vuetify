@@ -98,6 +98,9 @@
     animation-name: indeterminate-ltr
 
     .long, .short
+      animation-duration: inherit
+      animation-iteration-count: inherit
+      animation-play-state: inherit
       bottom: 0
       height: inherit
       position: absolute
@@ -105,12 +108,14 @@
       width: auto
 
     .long
-      left: var(--v-progress-indeterminate-long-left)
-      right: var(--v-progress-indeterminate-long-right)
+      animation-name: indeterminate-ltr-long
+      left: -90%
+      right: 107%
 
     .short
-      left: var(--v-progress-indeterminate-short-left)
-      right: var(--v-progress-indeterminate-short-right)
+      animation-name: indeterminate-ltr-short
+      left: -200%
+      right: 107%
 
     > .v-progress-linear__background
       height: 100%
@@ -153,6 +158,16 @@
 
     .v-progress-linear__indeterminate
       animation-name: indeterminate-rtl
+
+      .long
+        animation-name: indeterminate-rtl-long
+        left: 107%
+        right: -90%
+
+      .short
+        animation-name: indeterminate-rtl-short
+        left: 107%
+        right: -200%
 
       > .v-progress-linear__background
         &:nth-child(1)
@@ -234,6 +249,25 @@
       --v-progress-indeterminate-short-left: 107%
       --v-progress-indeterminate-short-right: -8%
 
+  @keyframes indeterminate-ltr-long
+    0%
+      left: -90%
+      right: 107%
+    100%
+      left: 107%
+      right: -35%
+
+  @keyframes indeterminate-ltr-short
+    0%
+      left: -200%
+      right: 107%
+    60%
+      left: 107%
+      right: -8%
+    100%
+      left: 107%
+      right: -8%
+
   @keyframes indeterminate-rtl
     0%
       --v-progress-indeterminate-long-left: 107%
@@ -250,6 +284,25 @@
       --v-progress-indeterminate-long-right: 107%
       --v-progress-indeterminate-short-left: -8%
       --v-progress-indeterminate-short-right: 107%
+
+  @keyframes indeterminate-rtl-long
+    0%
+      left: 107%
+      right: -90%
+    100%
+      left: -35%
+      right: 107%
+
+  @keyframes indeterminate-rtl-short
+    0%
+      left: 107%
+      right: -200%
+    60%
+      left: -8%
+      right: 107%
+    100%
+      left: -8%
+      right: 107%
 
   @keyframes stream
     to
