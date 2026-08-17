@@ -33,6 +33,7 @@ import {
   inject,
   mergeProps,
   onBeforeUnmount,
+  provide,
   ref,
   Teleport,
   Transition,
@@ -209,6 +210,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     // self-reference or the closest ancestor
     const menu = inject(VMenuSymbol, null)
+
+    // Non-menu overlays (dialog, tooltip, …) sit under a host menu in the component tree even
+    // when teleported. Scrub the inject chain so closeParents stops at that boundary.
+    if (vm.parent?.type?.name !== 'VMenu') {
+      provide(VMenuSymbol, null)
+    }
 
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)

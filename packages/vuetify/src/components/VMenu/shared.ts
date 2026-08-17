@@ -7,4 +7,4 @@ interface MenuProvide {
   closeParents (e?: MouseEvent): void
 }
 
-export const VMenuSymbol: InjectionKey<MenuProvide> = Symbol.for('vuetify:v-menu')
+export const VMenuSymbol: InjectionKey<MenuProvide | null> = Symbol.for('vuetify:v-menu')
