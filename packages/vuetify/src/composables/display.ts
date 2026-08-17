@@ -1,8 +1,17 @@
 // Utilities
-import { createBreakpoints, useWindowEventListener } from '@vuetify/v0'
-import { isObject } from '@vuetify/v0/utilities'
+import {
+  createBreakpoints,
+  useMediaQuery,
+  useWindowEventListener,
+} from '@vuetify/v0'
+import { isNumber, isObject } from '@vuetify/v0/utilities'
 import { computed, inject, readonly, shallowRef, toRef } from 'vue'
-import { assertExact, getCurrentInstanceName, omit, propsFactory } from '@/util'
+import {
+  assertExact,
+  getCurrentInstanceName,
+  omit,
+  propsFactory,
+} from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -162,13 +171,23 @@ export function useDisplay (
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
+  const minWidthMatches = props.mobileBreakpoint
+    ? useMediaQuery(() => {
+      if (!props.mobileBreakpoint) return '' // Redundant guard than never happens but gets TS to comply
+
+      const mbValue = isNumber(props.mobileBreakpoint)
+        ? props.mobileBreakpoint
+        : display.thresholds.value[props.mobileBreakpoint] ?? display.thresholds.value.lg
+
+      return `(min-width: ${mbValue}px)`
+    }).matches
+    : null
+
   const mobile = computed(() => {
     if (props.mobile) {
       return true
-    } else if (typeof props.mobileBreakpoint === 'number') {
-      return display.width.value < props.mobileBreakpoint
     } else if (props.mobileBreakpoint) {
-      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
+      return !minWidthMatches?.value
     } else if (props.mobile === null) {
       return display.mobile.value
     } else {

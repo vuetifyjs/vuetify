@@ -1,9 +1,16 @@
 // Composables
-import { createDisplay } from '../display'
+import { createDisplay, useDisplay } from '../display'
 
 // Utilities
-import { page } from '@test'
-import { effectScope } from 'vue'
+import { page, render } from '@test'
+import {
+  defineComponent,
+  effectScope,
+  h,
+} from 'vue'
+
+// Types
+import type { DisplayBreakpoint } from '@/composables/display'
 
 const breakpoints = [
   'xs',
@@ -310,5 +317,51 @@ describe('display', () => {
 
     await page.viewport(600, 900)
     await expect.poll(() => mobile.value).toBe(true)
+  })
+
+  it('should resolve per-component numeric mobileBreakpoint via matchMedia', async () => {
+    const MobileProbe = defineComponent({
+      props: {
+        mobileBreakpoint: { type: [Number, String], required: true },
+      },
+      setup (props) {
+        const { mobile } = useDisplay(props as { mobile: null, mobileBreakpoint: number | DisplayBreakpoint })
+
+        return () => String(mobile.value)
+      },
+    })
+
+    const view = render(() => h(MobileProbe, { mobileBreakpoint: 800 }))
+
+    const text = () => view.container.textContent?.trim()
+
+    await page.viewport(1920, 900)
+    await expect.poll(text).toBe('false')
+
+    await page.viewport(600, 900)
+    await expect.poll(text).toBe('true')
+
+    await page.viewport(900, 900)
+    await expect.poll(text).toBe('false')
+  })
+
+  it('should fall through to display.mobile.value when mobileBreakpoint is not set', async () => {
+    const Probe = defineComponent({
+      setup () {
+        const { mobile } = useDisplay({ mobile: null })
+
+        return () => String(mobile.value)
+      },
+    })
+
+    await page.viewport(600, 900)
+    const view = render(() => h(Probe))
+
+    const text = () => view.container.textContent?.trim()
+
+    await expect.poll(text).toBe('true')
+
+    await page.viewport(1920, 900)
+    await expect.poll(text).toBe('false')
   })
 })
