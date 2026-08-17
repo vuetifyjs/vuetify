@@ -20,7 +20,9 @@ import { computed, shallowRef, watch } from 'vue'
 import {
   calculateCenteredTarget,
   calculateUpdatedTarget,
+  getOffsetPosition,
   getOffsetSize,
+  getScrollDistance,
   getScrollPosition,
   getScrollSize,
 } from './helpers'
@@ -49,6 +51,15 @@ export type VSlideGroupSlots = {
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
+  scrollDistance: {
+    type: [String, Number],
+    default: '100%',
+    validator: (v: any) => /^-?\d*\.?\d+(px|%)?$/.test(String(v).trim()),
+  },
+  scrollSnap: {
+    type: String as PropType<'start' | 'center' | 'end'>,
+    validator: (v: any) => ['start', 'center', 'end'].includes(v),
+  },
   scrollToActive: {
     type: Boolean,
     default: true,
@@ -166,6 +177,11 @@ export const VSlideGroup = genericComponent<new <T>(
     const isFocused = shallowRef(false)
 
     function scrollToChildren (children: HTMLElement, center?: boolean) {
+      if (props.scrollSnap) {
+        const nextPosition = snapToElement(children, center)
+        return scrollToPosition(mirrorInRtl(nextPosition))
+      }
+
       let target = 0
 
       if (center) {
@@ -186,18 +202,14 @@ export const VSlideGroup = genericComponent<new <T>(
       scrollToPosition(target)
     }
 
+    let activeAnimations = 0
     function scrollToPosition (newPosition: number) {
       if (!IN_BROWSER || !containerRef.el) return
 
       const offsetSize = getOffsetSize(isHorizontal.value, containerRef.el)
-      const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.el)
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.el)
 
-      if (
-        scrollSize <= offsetSize ||
-        // Prevent scrolling by only a couple of pixels, which doesn't look smooth
-        Math.abs(newPosition - scrollPosition) < 16
-      ) return
+      if (scrollSize <= offsetSize) return
 
       if (isHorizontal.value && isRtl.value && containerRef.el) {
         const { scrollWidth, offsetWidth: containerWidth } = containerRef.el!
@@ -205,10 +217,16 @@ export const VSlideGroup = genericComponent<new <T>(
         newPosition = (scrollWidth - containerWidth) - newPosition
       }
 
-      if (isHorizontal.value) {
-        goTo.horizontal(newPosition, goToOptions.value)
-      } else {
-        goTo(newPosition, goToOptions.value)
+      const scrolling = isHorizontal.value
+        ? goTo.horizontal(newPosition, goToOptions.value)
+        : goTo(newPosition, goToOptions.value)
+
+      // Suppress re-snapping every frame we write
+      if (props.scrollSnap) {
+        const el = containerRef.el
+        el.style.scrollSnapType = 'none'
+        activeAnimations++
+        scrolling.finally(() => --activeAnimations || (el.style.scrollSnapType = ''))
       }
     }
 
@@ -324,21 +342,90 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
+    function mirrorInRtl (position: number) {
+      return isHorizontal.value && isRtl.value
+        ? getScrollSize(true, containerRef.el) - getOffsetSize(true, containerRef.el) - position
+        : position
+    }
+
+    function getPosition () {
+      return mirrorInRtl(getScrollPosition(isHorizontal.value, isRtl.value, containerRef.el))
+    }
+
+    function getBounds (child: HTMLElement) {
+      const size = getOffsetSize(isHorizontal.value, child)
+      const start = isHorizontal.value && isRtl.value
+        ? getScrollSize(true, containerRef.el) - child.offsetLeft - size
+        : getOffsetPosition(isHorizontal.value, child)
+
+      return { start, end: start + size }
+    }
+
+    type Bounds = ReturnType<typeof getBounds>
+
+    function getItemBounds () {
+      return contentRef.el
+        ? Array.from(contentRef.el.children as HTMLCollectionOf<HTMLElement>, getBounds)
+        : []
+    }
+
+    function getSnapPosition (item: Bounds) {
+      if (props.scrollSnap === 'end') return item.end - containerSize.value
+      if (props.scrollSnap === 'center') return (item.start + item.end - containerSize.value) / 2
+
+      return item.start
+    }
+
+    function getSnapPositions () {
+      return getItemBounds().map(getSnapPosition)
+    }
+
+    function getItemClippedAt (edge: number) {
+      return getItemBounds().find(item => item.start < edge - 1 && item.end > edge + 1)
+    }
+
+    function reveals (item: Bounds | undefined) {
+      return (position: number) => !item ||
+        (position <= item.start + 1 && position + containerSize.value >= item.end - 1)
+    }
+
+    function nearestTo (ideal: number) {
+      return (best: number, position: number) =>
+        Math.abs(position - ideal) < Math.abs(best - ideal) ? position : best
+    }
+
+    function snapToElement (child: HTMLElement, center?: boolean) {
+      const item = getBounds(child)
+      const ideal = center ? (item.start + item.end - containerSize.value) / 2 : getPosition()
+
+      return getSnapPositions().filter(reveals(item)).reduce(nearestTo(ideal), getSnapPosition(item))
+    }
+
+    function snapToItem (from: number, step: number) {
+      const forward = step > 0
+      const target = from + step
+      const candidates = getSnapPositions().filter(p => forward ? p > from + 1 : p < from - 1)
+      const revealing = candidates.filter(reveals(getItemClippedAt(forward ? target : from)))
+      const options = revealing.length ? revealing : candidates
+
+      return (forward
+        ? options.findLast(p => p <= target) ?? options[0]
+        : options.find(p => p >= target) ?? options.at(-1)
+      ) ?? target
+    }
+
     function scrollTo (location: 'prev' | 'next') {
-      const direction = isHorizontal.value && isRtl.value ? -1 : 1
+      if (!containerRef.el || !containerSize.value) return
 
-      const offsetStep = (location === 'prev' ? -direction : direction) * containerSize.value
+      const distance = getScrollDistance(containerSize.value, props.scrollDistance)
+      const step = location === 'prev' ? -distance : distance
+      const from = getPosition()
 
-      let newPosition = scrollOffset.value + offsetStep
+      const nextPosition = props.scrollSnap
+        ? snapToItem(from, step)
+        : from + step
 
-      // TODO: improve it
-      if (isHorizontal.value && isRtl.value && containerRef.el) {
-        const { scrollWidth, offsetWidth: containerWidth } = containerRef.el!
-
-        newPosition += scrollWidth - containerWidth
-      }
-
-      scrollToPosition(newPosition)
+      scrollToPosition(mirrorInRtl(nextPosition))
     }
 
     const slotProps = computed(() => ({
@@ -402,6 +489,7 @@ export const VSlideGroup = genericComponent<new <T>(
             'v-slide-group--vertical': !isHorizontal.value,
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
+            'v-slide-group--snap': !!props.scrollSnap,
           },
           displayClasses.value,
           props.class,
@@ -435,6 +523,7 @@ export const VSlideGroup = genericComponent<new <T>(
             'v-slide-group__container',
             props.contentClass,
           ]}
+          style={{ '--v-slide-group-snap-align': props.scrollSnap }}
           onScroll={ onScroll }
         >
           <div

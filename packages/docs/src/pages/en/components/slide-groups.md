@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Slide groups
   title: Slide group component
@@ -24,7 +25,7 @@ The `v-slide-group` component is used to display pseudo paginated information. I
 
 Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.
 
-<ExamplesExample file="v-slide-group/usage" />
+<ExamplesUsage name="v-slide-group" />
 
 <PromotedEntry />
 
