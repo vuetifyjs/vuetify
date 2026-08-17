@@ -182,15 +182,9 @@ export function useDisplay (
   }).matches
 
   const mobile = computed(() => {
-    if (props.mobile) {
-      return true
-    } else if (props.mobileBreakpoint) {
-      return !minWidthMatches?.value
-    } else if (props.mobile === null) {
-      return display.mobile.value
-    } else {
-      return false
-    }
+    if (props.mobile) return true
+    if (props.mobileBreakpoint) return !minWidthMatches?.value
+    return props.mobile === null ? display.mobile.value : false
   })
 
   const displayClasses = toRef(() => {
