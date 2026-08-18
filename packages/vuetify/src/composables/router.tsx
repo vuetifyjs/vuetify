@@ -85,6 +85,13 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   const route = useRoute()
   const isActive = computed(() => {
     if (!link.value) return false
+    // router still resolving initial navigation, according to posva:
+    // - START_LOCATION has an empty matched array and its name is undefined (unlike 404 Not Page Found)
+    // - if the router is still resolving the initial boot, we bypass the active check and return false to
+    //   prevent the flashing overlay on page refresh
+    if (route.value && route.value.matched.length === 0 && route.value.name == null) {
+      return link.value.isExactActive?.value ?? false
+    }
     if (!props.exact) return link.value.isActive?.value ?? false
     if (!route.value) return link.value.isExactActive?.value ?? false
 
