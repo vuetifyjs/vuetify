@@ -171,6 +171,11 @@ const router = createRouter({
 
     // 2: Initial load
     if (from === START_LOCATION) {
+      // Respect browser reload convention: restore saved position if available
+      if (savedPosition) {
+        return savedPosition
+      }
+
       if (to.hash) {
         // We do the rAF poll limited to 3s
         const isStable = await waitForElementStable(to.hash, 3000)
@@ -182,40 +187,35 @@ const router = createRouter({
             // manual scroll with "instant" (without behavior: smooth) because the user just entered the page
             // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
             el.scrollIntoView({ behavior: 'instant' })
-            return false
           }
         }
+        // If unstable or aborted by user interaction, do not yank to top; stay put
+        return false
       }
       return { top: 0 }
     }
 
     // 3: Standard navigation crossing pages
-    let wait = 0
     if (to.path !== from.path && to.hash) {
-      wait = 500
-    }
+      // We use the rAF poll instead of a blind 500ms timeout
+      const isStable = await waitForElementStable(to.hash, 3000)
 
-    if (wait > 0) {
-      await (new Promise(resolve => setTimeout(resolve, wait)))
-    }
+      if (isStable) {
+        // avoid CSS selector issues by only allowing ID selectors
+        const el = document.getElementById(to.hash.slice(1))
+        if (el) {
+          // manual scroll with "instant/smooth"
+          // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
+          const isReduced =
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            Math.abs(el.getBoundingClientRect().top) > 500
 
-    if (to.hash) {
-      // avoid CSS selector issues by only allowing ID selectors
-      const el = document.getElementById(to.hash.slice(1))
-      // manual scroll with "instant/smooth"
-      // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
-      if (el) {
-        // 3.1: Keep 'smooth' ONLY for explicit clicks (onClick) in the TOC
-        // If the user does not want animations, or the jump is greater than 500 pixels, instant.
-        const isReduced =
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-          Math.abs(el.getBoundingClientRect().top) > 500
-
-        el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
-        return false
+          el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+        }
       }
 
-      return { el: to.hash }
+      // Fallback if the element is not found or the user aborted; do not jump to top
+      return false
     } else if (savedPosition) {
       return savedPosition
     } else {
