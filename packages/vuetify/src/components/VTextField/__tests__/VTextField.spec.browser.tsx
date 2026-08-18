@@ -5,7 +5,7 @@ import { VMenu } from '@/components/VMenu'
 
 // Utilities
 import { commands, render, screen, showcase, userEvent, wait } from '@test'
-import { cloneVNode, ref } from 'vue'
+import { cloneVNode, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -152,6 +152,28 @@ describe('VTextField', () => {
     await userEvent.keyboard('-0.1')
     await expect.element(await screen.findByRole('textbox')).toHaveValue('-0.1')
     expect(model.value).toBe(-0.1)
+  })
+
+  it('keeps the selection when the type changes', async () => {
+    const type = ref('password')
+    render(() => (
+      <VTextField
+        modelValue="Hello World!"
+        type={ type.value }
+        appendInnerIcon="$clear"
+        onClick:appendInner={ () => (type.value = type.value === 'password' ? 'text' : 'password') }
+      />
+    ))
+
+    const input = screen.getByCSS('input') as HTMLInputElement
+    input.focus()
+    input.setSelectionRange(2, 5)
+
+    await userEvent.click(screen.getByCSS('.v-field__append-inner .v-icon'))
+    await nextTick()
+
+    expect(input.type).toBe('text')
+    expect([input.selectionStart, input.selectionEnd]).toEqual([2, 5])
   })
 
   showcase({ stories })

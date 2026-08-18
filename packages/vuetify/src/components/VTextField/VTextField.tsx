@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
+import { cloneVNode, computed, nextTick, ref, watch, withDirectives } from 'vue'
 import {
   callEvent,
   filterInputAttrs,
@@ -109,6 +109,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+
+    // hack for Chrome to keep caret/selection
+    watch(() => props.type, () => void inputRef.value?.offsetHeight, { flush: 'post' })
+
     const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
