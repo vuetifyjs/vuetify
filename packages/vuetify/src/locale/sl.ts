@@ -58,6 +58,11 @@ export default {
       title: 'Izberite datume',
       header: 'Vnesite datume',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Izberite datum',
     header: 'Vnesite datum',
     input: {

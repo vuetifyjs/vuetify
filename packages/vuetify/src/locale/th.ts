@@ -58,6 +58,11 @@ export default {
       title: 'เลือกวันที่',
       header: 'ป้อนวันที่',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'เลือกวันที่',
     header: 'ป้อนวันที่',
     input: {

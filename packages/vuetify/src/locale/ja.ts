@@ -58,6 +58,11 @@ export default {
       title: '日付を選択',
       header: '日付を入力',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: '日付を選択',
     header: '日付を入力',
     input: {

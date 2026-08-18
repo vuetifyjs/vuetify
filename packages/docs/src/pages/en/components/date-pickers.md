@@ -87,6 +87,12 @@ Specify allowed dates using objects or functions. When using objects, accepts a 
 
 <ExamplesExample file="v-date-picker/prop-allowed-dates" />
 
+#### Week selection
+
+Setting **multiple** to `week` selects the whole week a clicked day belongs to. The model holds the first and last day of that week.
+
+<ExamplesExample file="v-date-picker/prop-week-selection" />
+
 #### Landscape
 
 Using `landscape` moves header to the side. You can customize it further using custom width and date format.

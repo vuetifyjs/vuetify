@@ -58,6 +58,11 @@ export default {
       title: 'בחר תאריכים',
       header: 'הזן תאריכים',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'בחר תאריך',
     header: 'הזן תאריך',
     input: {

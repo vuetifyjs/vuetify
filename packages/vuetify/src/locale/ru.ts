@@ -58,6 +58,11 @@ export default {
       title: 'Выбранные даты',
       header: 'Ввод дат',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Выбор даты',
     header: 'Ввод даты',
     input: {

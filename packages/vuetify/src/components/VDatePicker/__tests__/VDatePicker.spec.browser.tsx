@@ -118,4 +118,55 @@ describe('VDatePicker', () => {
     expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
     expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
   })
+
+  it('previews the hovered end of a range', async () => {
+    render(() => (
+      <VDatePicker multiple="range" modelValue={[new Date(2025, 3, 8)]} />
+    ))
+
+    const $days = await screen.findAllByCSS('.v-date-picker-month__day-btn')
+    await userEvent.hover($days[15])
+
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview').length).toBeGreaterThan(0)
+  })
+
+  it('selects and previews a whole week', async () => {
+    const model = ref<unknown[]>([])
+    render(() => (
+      <VDatePicker v-model={ model.value } multiple="week" />
+    ))
+
+    const $days = await screen.findAllByCSS('.v-date-picker-month__day-btn')
+    await userEvent.hover($days[10])
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview')).toHaveLength(7)
+
+    await userEvent.click($days[10])
+    await expect.poll(() => model.value).toHaveLength(2)
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--range')).toHaveLength(7)
+  })
+
+  it('treats the whole row as one week target', async () => {
+    const update = vi.fn()
+    render(() => (
+      <VDatePicker multiple="week" onUpdate:modelValue={ update } />
+    ))
+
+    // the gap between two day buttons belongs to the row, not to either day
+    const $row = (await screen.findAllByCSS('.v-date-picker-month__days-row'))[2]
+    const row = $row.getBoundingClientRect()
+    const [a, b] = Array.from($row.querySelectorAll('.v-date-picker-month__day-btn')).map(el => el.getBoundingClientRect())
+    const position = { x: (a.right + b.left) / 2 - row.left, y: a.top + a.height / 2 - row.top }
+    expect(b.left - a.right).toBeGreaterThan(0)
+
+    await userEvent.hover($row, { position })
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview')).toHaveLength(7)
+
+    await userEvent.click($row, { position })
+    expect(update).toHaveBeenCalledTimes(1)
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--range')).toHaveLength(7)
+
+    // clicking a day still runs through the day, not twice through the row as well
+    await userEvent.click($row.querySelectorAll('.v-date-picker-month__day-btn')[3])
+    expect(update).toHaveBeenCalledTimes(2)
+  })
 })

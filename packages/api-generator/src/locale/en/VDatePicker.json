@@ -15,7 +15,7 @@
     "headerDateFormat": "Allows you to customize the format of the date selection text that appears in the header of the calendar.",
     "max": "Maximum allowed date/month (ISO 8601 format).",
     "min": "Minimum allowed date/month (ISO 8601 format).",
-    "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections.",
+    "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections, **week** selects the week a clicked day belongs to.",
     "noAutoNavigation": "Prevents the displayed month from automatically following the selected value. Useful when building multi-calendar layouts where each picker manages its own view.",
     "nextIcon": "Sets the icon for next month/year button.",
     "prevIcon": "Sets the icon for previous month/year button.",

@@ -58,6 +58,11 @@ export default {
       title: 'انتخاب تاریخ‌ها',
       header: 'تاریخ‌ها را وارد کنید',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'انتخاب تاریخ',
     header: 'تاریخ را وارد کنید',
     input: {

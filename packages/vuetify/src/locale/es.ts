@@ -58,6 +58,11 @@ export default {
       title: 'Seleccionar fechas',
       header: 'Introducir fechas',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Seleccionar fecha',
     header: 'Introducir fecha',
     input: {

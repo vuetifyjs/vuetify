@@ -6,7 +6,7 @@ import { VDatePicker } from '../VDatePicker'
 
 // import { touch } from '@/../test'
 import { render, screen } from '@test'
-import { h, ref } from 'vue'
+import { h, nextTick, ref } from 'vue'
 import {
   mount,
   MountOptions,
@@ -836,5 +836,46 @@ describe('range selection with time zone', () => {
     const btn2 = await wrapper.findByText('3') as HTMLElement
     btn2.click()
     expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-10-02T04:00:00.000Z'), new Date('2025-10-04T03:59:59.999Z')])
+  })
+})
+
+describe('week selection', () => {
+  function renderWeekPicker (initialValue: unknown[]) {
+    const update = vi.fn()
+    const modelValue = ref<readonly unknown[]>(initialValue)
+    update.mockImplementation((v: unknown[]) => { modelValue.value = v })
+    const wrapper = render(() => h(VDatePicker, {
+      multiple: 'week',
+      modelValue: modelValue.value,
+      'onUpdate:modelValue': update,
+    }))
+    return { wrapper, update }
+  }
+
+  it('should select the whole week with a single click', async () => {
+    const { wrapper, update } = renderWeekPicker([new Date(2025, 3, 1)])
+
+    const btn = await wrapper.findByText('9') as HTMLElement
+    btn.click()
+
+    expect(update).toHaveBeenCalledWith([new Date(2025, 3, 6), new Date(2025, 3, 12, 23, 59, 59, 999)])
+  })
+
+  it('should show the week number in the header', async () => {
+    renderWeekPicker([new Date(2025, 3, 9)])
+
+    const $header = await screen.findByCSS('.v-date-picker-header__content')
+    expect($header.textContent).toBe('Week 15, 2025')
+  })
+
+  it('should stay on the displayed month when the week straddles two months', async () => {
+    const { wrapper } = renderWeekPicker([new Date(2025, 3, 15)])
+
+    const btn = await wrapper.findByText('30') as HTMLElement
+    btn.click()
+    await nextTick()
+
+    const $controls = await screen.findByCSS('.v-date-picker-controls')
+    expect($controls.textContent).toContain('Apr2025')
   })
 })

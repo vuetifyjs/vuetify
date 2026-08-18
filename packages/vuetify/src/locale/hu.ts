@@ -58,6 +58,11 @@ export default {
       title: 'Válassza ki a dátumokat',
       header: 'Adja meg a dátumokat',
     },
+    week: {
+      title: 'Select week',
+      header: 'Enter week',
+      selected: 'Week {0}, {1}',
+    },
     title: 'Válassza ki a dátumot',
     header: 'Adja meg a dátumot',
     input: {

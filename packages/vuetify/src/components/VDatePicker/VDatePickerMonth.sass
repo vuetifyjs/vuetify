@@ -27,6 +27,9 @@
     grid-template-columns: repeat(var(--v-date-picker-days-in-week), 1fr)
     justify-items: center
 
+  .v-date-picker-month--week .v-date-picker-month__days-row:has(.v-btn:not(.v-btn--disabled))
+    cursor: pointer
+
   .v-date-picker-month__day
     align-items: center
     display: flex

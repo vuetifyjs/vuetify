@@ -99,6 +99,12 @@ export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown)
     : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
 }
 
+export function createWeekRange (adapter: DateInstance, value: unknown, firstDayOfWeek?: number | string): [unknown, unknown] {
+  const start = adapter.startOfDay(adapter.startOfWeek(value, firstDayOfWeek))
+
+  return [start, adapter.endOfDay(adapter.addDays(start, 6))]
+}
+
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
     isFunction(options.adapter)
