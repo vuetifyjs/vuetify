@@ -60,6 +60,12 @@ You can add your custom pagination icons instead of arrows using the **next-icon
 
 <ExamplesExample file="v-slide-group/prop-custom-icons" />
 
+#### Direction
+
+Use the **direction** prop for a vertical layout. Pair it with **scroll-snap** and the exposed `slide` method for wheel navigation.
+
+<ExamplesExample file="v-slide-group/prop-direction" />
+
 ### Mandatory
 
 the **mandatory** prop will make the slide group require at least 1 item must be selected.
