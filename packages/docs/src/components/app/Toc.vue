@@ -122,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-  const { toc: tocDrawer, scrolling } = storeToRefs(useAppStore())
+  const { toc: tocDrawer } = storeToRefs(useAppStore())
 
   const route = useRoute()
   const router = useRouter()
@@ -145,7 +145,6 @@
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
-    scrolling.value = false
     activeStack.length = 0
     activeItem.value = ''
     observer.disconnect()
@@ -165,11 +164,10 @@
   })
 
   let internalScrolling = false
-  let timeout = -1
+
   watch(activeItem, async val => {
     if (!val || internalScrolling) return
 
-    scrolling.value = true
     const query = route.query
 
     if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
@@ -180,20 +178,37 @@
         await router.replace({ path: route.path, hash: toc.to, query })
       }
     }
-    clearTimeout(timeout)
-    timeout = window.setTimeout(() => {
-      scrolling.value = false
-    }, 200)
   })
 
   async function onClick (hash: string) {
-    if (route.hash === hash) return
-
     internalScrolling = true
     await router.replace({ path: route.path, hash })
-    setTimeout(() => {
+
+    // avoid CSS selector issues by only allowing ID selectors
+    const el = document.getElementById(hash.slice(1))
+    if (el) {
+      // If the user does not want animations, or the jump is greater than 500 pixels, instant.
+      const isReduced =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        Math.abs(el.getBoundingClientRect().top) > 500
+
+      // Listener to release internalScrolling just at the end of the animation
+      let fallbackTimeout: ReturnType<typeof setTimeout>
+      const onScrollEnd = () => {
+        internalScrolling = false
+        clearTimeout(fallbackTimeout)
+        document.removeEventListener('scrollend', onScrollEnd)
+      }
+      document.addEventListener('scrollend', onScrollEnd)
+
+      // Security fallback of 1000ms for older browsers or instant jumps
+      fallbackTimeout = setTimeout(onScrollEnd, 1000)
+
+      el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+    } else {
+      // release the internalScrolling flag if the element is not found, to avoid locking the state
       internalScrolling = false
-    }, 1000)
+    }
   }
 
   const sponsorStore = useSponsorsStore()

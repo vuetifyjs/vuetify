@@ -6,14 +6,13 @@ import 'prism-theme-vars/base.css'
 import * as Swetrix from 'swetrix'
 import * as Sentry from '@sentry/vue'
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
 import { createHead } from '@unhead/vue/client'
 import { installVuetify } from '@/plugins/vuetify'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installOne } from '@/plugins/one'
 import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/stores/app'
 import { useLocaleStore } from '@/stores/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@vuetify/one'
@@ -41,7 +40,6 @@ import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
-const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
@@ -78,6 +76,44 @@ if (IN_BROWSER) {
   })
 }
 
+const waitForElementStable = (selector: string, maxWaitMs = 3000): Promise<boolean> => {
+  return new Promise<boolean>(resolve => {
+    const startTime = performance.now()
+    let lastTop: number | null = null
+    let stableFrames = 0
+
+    const checkFrame = (currentTime: number) => {
+      // abort if we exceed 3 seconds (bounded)
+      if (currentTime - startTime > maxWaitMs) {
+        return resolve(false)
+      }
+
+      // avoid CSS selector issues by only allowing ID selectors
+      const el = document.getElementById(selector.slice(1))
+      if (el) {
+        const currentTop = el.getBoundingClientRect().top
+        // Check if the Y position is identical to the previous frame
+        if (lastTop === currentTop) {
+          stableFrames++
+          // If it has been stable for 3 consecutive frames, consider it "position stable"
+          if (stableFrames >= 3) {
+            return resolve(true)
+          }
+        } else {
+          // If it has moved, reset the counter
+          stableFrames = 0
+          lastTop = currentTop
+        }
+      }
+
+      // next frame
+      requestAnimationFrame(checkFrame)
+    }
+
+    requestAnimationFrame(checkFrame)
+  })
+}
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -107,31 +143,61 @@ const router = createRouter({
     },
   ],
   async scrollBehavior (to, from, savedPosition) {
-    if (appStore.scrolling) return
+    // 1: Table of Contents (TOC) rewrites should never scroll: Toc.vue will scroll.
+    if (to.path === from.path && to.hash !== from.hash) return false
 
-    let main = IN_BROWSER && document.querySelector('main')
-    // For default & hash navigation
+    // 2: Initial load
+    if (from === START_LOCATION) {
+      if (to.hash) {
+        // We do the rAF poll limited to 3s
+        const isStable = await waitForElementStable(to.hash, 3000)
+
+        if (isStable) {
+          // avoid CSS selector issues by only allowing ID selectors
+          const el = document.getElementById(to.hash.slice(1))
+          if (el) {
+            // manual scroll with "instant" (without behavior: smooth) because the user just entered the page
+            // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
+            el.scrollIntoView({ behavior: 'instant' })
+            return false
+          }
+        }
+      }
+      return { top: 0 }
+    }
+
+    // 3: Standard navigation crossing pages
     let wait = 0
-
-    if (!main) {
-      // For initial page load
-      wait = 1500
-      main = document.querySelector('main')
-    } else if (to.path !== from.path && to.hash) {
-      // For cross page navigation
+    if (to.path !== from.path && to.hash) {
       wait = 500
     }
 
-    await (new Promise(resolve => setTimeout(resolve, wait)))
+    if (wait > 0) {
+      await (new Promise(resolve => setTimeout(resolve, wait)))
+    }
 
     if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: main ? 'smooth' : undefined,
-        top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+      // avoid CSS selector issues by only allowing ID selectors
+      const el = document.getElementById(to.hash.slice(1))
+      // manual scroll with "instant/smooth"
+      // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
+      if (el) {
+        // 3.1: Keep 'smooth' ONLY for explicit clicks (onClick) in the TOC
+        // If the user does not want animations, or the jump is greater than 500 pixels, instant.
+        const isReduced =
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+          Math.abs(el.getBoundingClientRect().top) > 500
+
+        el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+        return false
       }
-    } else if (savedPosition) return savedPosition
-    else return { top: 0 }
+
+      return { el: to.hash }
+    } else if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
   },
 })
 
