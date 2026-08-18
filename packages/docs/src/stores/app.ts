@@ -11,9 +11,9 @@ type RootState = {
   apiSearch: string
   drawer: boolean | null
   toc: boolean | null
-  scrolling: boolean
   items: NavItem[]
   pages: string[]
+  settings: boolean
   categories: Record<string, Category>
 }
 
