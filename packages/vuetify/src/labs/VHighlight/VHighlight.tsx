@@ -13,6 +13,7 @@ import { defineComponent, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { FilterMatchArrayMultiple } from '@/composables/filter'
+import type { IgnoreAccents } from '@/util'
 
 export const makeVHighlightProps = propsFactory({
   text: {
@@ -23,6 +24,7 @@ export const makeVHighlightProps = propsFactory({
   matches: Array as PropType<FilterMatchArrayMultiple>,
   matchAll: Boolean,
   ignoreCase: Boolean,
+  ignoreAccents: [Boolean, String] as PropType<IgnoreAccents>,
   color: String,
   opacity: [String, Number],
   markClass: String,
@@ -42,6 +44,7 @@ export const VHighlight = defineComponent({
         matches: () => props.matches,
         matchAll: () => props.matchAll,
         ignoreCase: () => props.ignoreCase,
+        ignoreAccents: () => props.ignoreAccents,
       },
     ))
 
