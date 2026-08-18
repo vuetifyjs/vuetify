@@ -156,9 +156,8 @@ describe('VTextField', () => {
       const input = wrapper.find('input')
       expect(input.attributes('aria-describedby')).toBeUndefined()
 
-      // Should not have details section
       const details = wrapper.find('.v-input__details')
-      expect(details.exists()).toBe(false)
+      expect(details.classes()).toContain('v-input__details--hidden')
     })
 
     it('should have aria-describedby when hide-details is "auto" and has error messages', () => {
@@ -188,14 +187,12 @@ describe('VTextField', () => {
         />
       )
 
-      // Should not have details section without focus
-      expect(wrapper.find('.v-input__details').exists()).toBe(false)
+      expect(wrapper.find('.v-input__details').classes()).toContain('v-input__details--hidden')
       expect(wrapper.find('input').attributes('aria-describedby')).toBeUndefined()
 
-      // Should have details section with counter when focused
       wrapper.find('input').trigger('focus')
       await wrapper.vm.$nextTick()
-      expect(wrapper.find('.v-input__details').exists()).toBe(true)
+      expect(wrapper.find('.v-input__details').classes()).not.toContain('v-input__details--hidden')
       expect(wrapper.find('.v-input__details').attributes('id')).toBe('input-5-messages')
     })
 
@@ -219,5 +216,14 @@ describe('VTextField', () => {
       expect(details.attributes('id')).toBe('input-6-messages')
       expect(details.text()).toContain('Custom details')
     })
+  })
+
+  it('keeps the counter mounted when counter is toggled off', async () => {
+    const wrapper = mountFunction(<VTextField counter />)
+
+    expect(wrapper.find('.v-counter').exists()).toBe(true)
+
+    await wrapper.setProps({ counter: false })
+    expect(wrapper.find('.v-counter').exists()).toBe(true)
   })
 })

@@ -216,10 +216,10 @@ describe('VFileInput', () => {
       <VFileInput hideDetails="auto" counter v-model={ model.value }></VFileInput>
     ))
 
-    expect(queryByCSS('.v-input__details')).toBeNull()
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
 
     model.value = [oneMBFile]
-    await expect.poll(() => queryByCSS('.v-input__details')).not.toBeNull()
+    await expect.poll(() => queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
 
   showcase({ stories })

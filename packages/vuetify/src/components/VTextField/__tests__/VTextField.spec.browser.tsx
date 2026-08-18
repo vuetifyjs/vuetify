@@ -137,10 +137,10 @@ describe('VTextField', () => {
       <VTextField hideDetails="auto" counter></VTextField>
     ))
 
-    expect(queryByCSS('.v-input__details')).toBeNull()
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
 
     await userEvent.click(element)
-    expect(queryByCSS('.v-input__details')).not.toBeNull()
+    expect(queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
 
   it('keeps -0 with v-model.number', async () => {
