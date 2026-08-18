@@ -81,10 +81,32 @@ const waitForElementStable = (selector: string, maxWaitMs = 3000): Promise<boole
     const startTime = performance.now()
     let lastTop: number | null = null
     let stableFrames = 0
+    let userAborted = false
+
+    // Listen for user events to abort the automatic scroll
+    const abortEvents = ['wheel', 'touchmove', 'keydown']
+    const onUserInteraction = () => {
+      userAborted = true
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      cleanup()
+      // Return false to cancel the scrollIntoView
+      resolve(false)
+    }
+
+    const cleanup = () => {
+      abortEvents.forEach(e => window.removeEventListener(e, onUserInteraction, { capture: true }))
+    }
+
+    // Register the listeners (once: true so they clean up automatically when triggered)
+    abortEvents.forEach(e => window.addEventListener(e, onUserInteraction, { capture: true, once: true, passive: true }))
 
     const checkFrame = (currentTime: number) => {
+      // If the user moved, stop the loop immediately
+      if (userAborted) return
+
       // abort if we exceed 3 seconds (bounded)
       if (currentTime - startTime > maxWaitMs) {
+        cleanup()
         return resolve(false)
       }
 
@@ -97,6 +119,7 @@ const waitForElementStable = (selector: string, maxWaitMs = 3000): Promise<boole
           stableFrames++
           // If it has been stable for 3 consecutive frames, consider it "position stable"
           if (stableFrames >= 3) {
+            cleanup()
             return resolve(true)
           }
         } else {
