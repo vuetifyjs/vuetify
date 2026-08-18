@@ -3,6 +3,7 @@
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
     "centerAffix": "Vertically align **appendInner**, **prependInner**, **clearIcon** and **label** in the center.",
+    "detailsActive": "Overrides the automatic check for details content when [hide-details](#props-hide-details) is set to `auto`.",
     "direction": "Changes the direction of the input.",
     "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display.",
     "hideSpinButtons": "Hides spin buttons on the input when type is set to `number`.",

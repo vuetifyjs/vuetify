@@ -49,7 +49,10 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & {
 
 export const makeVFileInputProps = propsFactory({
   chips: Boolean,
-  counter: Boolean,
+  counter: {
+    type: Boolean as PropType<boolean | null>,
+    default: undefined,
+  },
   counterSizeString: {
     type: String,
     default: '$vuetify.fileInput.counterSize',
@@ -260,11 +263,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter)
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.hideDetails === false || model.value?.length))
-      )
+      const hasCounter = !!(slots.counter || props.counter !== undefined)
+      const counterActive = props.counter !== false && props.counter !== null && !!model.value?.length
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -299,6 +301,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -404,7 +407,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     <span />
 
                     <VCounter
-                      active={ !!model.value?.length }
+                      active={ counterActive }
                       value={ counterValue.value }
                       disabled={ props.disabled }
                       v-slots:default={ slots.counter }

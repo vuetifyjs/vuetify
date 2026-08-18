@@ -45,7 +45,10 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 export const makeVTextareaProps = propsFactory({
   autoGrow: Boolean,
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counter: {
+    type: [Boolean, Number, String] as PropType<boolean | number | string | null>,
+    default: undefined,
+  },
   counterValue: Function as PropType<(value: any) => number>,
   prefix: String,
   placeholder: String,
@@ -253,11 +256,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.persistentCounter || props.hideDetails === false || isFocused.value))
-      )
+      const hasCounter = !!(slots.counter || props.counter !== undefined || props.counterValue != null)
+      const counterActive = props.counter !== false && props.counter !== null &&
+        (props.persistentCounter || isFocused.value)
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -293,6 +296,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -393,7 +397,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                     <span />
 
                     <VCounter
-                      active={ props.persistentCounter || isFocused.value }
+                      active={ counterActive }
                       value={ counterValue.value }
                       max={ max.value }
                       disabled={ props.disabled }
