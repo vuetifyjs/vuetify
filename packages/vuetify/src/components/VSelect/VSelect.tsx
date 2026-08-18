@@ -22,6 +22,7 @@ import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useSelectionMenu } from './useSelectionMenu'
 import { useFocusGroups } from '../../composables/focusGroups'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -191,6 +192,7 @@ export const VSelect = genericComponent<new <
     const selectedValues = computed(() => model.value.map(selection => selection.value))
     const isFocused = shallowRef(false)
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
+    const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const { InputIcon } = useInputIcon(props)
 
     let keyboardLookupPrefix = ''
@@ -770,7 +772,7 @@ export const VSelect = genericComponent<new <
                           <VChip
                             key="chip"
                             closable={ closableChips.value }
-                            size="small"
+                            size={ chipDefaults.value?.size ?? 'small' }
                             text={ item.title }
                             disabled={ item.props.disabled }
                             { ...slotProps }
@@ -781,7 +783,7 @@ export const VSelect = genericComponent<new <
                             defaults={{
                               VChip: {
                                 closable: closableChips.value,
-                                size: 'small',
+                                size: chipDefaults.value?.size ?? 'small',
                                 text: item.title,
                               },
                             }}

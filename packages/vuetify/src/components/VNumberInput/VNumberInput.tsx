@@ -11,6 +11,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { formatNumber } from './format'
 import { useHold } from './hold'
 import { processGroupedInput, processPlainInput } from './typing'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -96,6 +97,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField>()
+    const controlDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
@@ -408,7 +410,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
-            variant="text"
+            variant={ controlDefaults.value?.variant ?? 'text' }
             tabindex="-1"
           />
         ) : (
@@ -420,7 +422,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: incrementIcon.value,
-                variant: 'text',
+                variant: controlDefaults.value?.variant ?? 'text',
               },
             }}
           >
@@ -443,7 +445,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
             onPointerup={ onControlMouseup }
             onPointercancel={ onControlMouseup }
             size={ controlNodeSize.value }
-            variant="text"
+            variant={ controlDefaults.value?.variant ?? 'text' }
             tabindex="-1"
           />
         ) : (
@@ -455,7 +457,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: decrementIcon.value,
-                variant: 'text',
+                variant: controlDefaults.value?.variant ?? 'text',
               },
             }}
           >

@@ -22,6 +22,7 @@ import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useSelectionMenu } from '../VSelect/useSelectionMenu'
 import { useTextColor } from '@/composables/color'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
@@ -179,6 +180,7 @@ export const VAutocomplete = genericComponent<new <
     })
 
     const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
+    const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
 
@@ -808,7 +810,7 @@ export const VAutocomplete = genericComponent<new <
                           <VChip
                             key="chip"
                             closable={ closableChips.value }
-                            size="small"
+                            size={ chipDefaults.value?.size ?? 'small' }
                             text={ item.title }
                             disabled={ item.props.disabled }
                             { ...slotProps }
@@ -819,7 +821,7 @@ export const VAutocomplete = genericComponent<new <
                             defaults={{
                               VChip: {
                                 closable: closableChips.value,
-                                size: 'small',
+                                size: chipDefaults.value?.size ?? 'small',
                                 text: item.title,
                               },
                             }}
