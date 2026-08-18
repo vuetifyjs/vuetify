@@ -68,7 +68,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     watch(isActive, async val => {
       if (!val) {
         await nextTick()
-        overlay.value!.activatorEl?.focus({ preventScroll: true })
+        overlay.value?.activatorEl?.focus({ preventScroll: true })
       }
     })
 
