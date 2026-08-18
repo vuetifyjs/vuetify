@@ -18,6 +18,21 @@ describe('VStepperActions', () => {
     }
   })
 
+  it.each([
+    ['prev', { VStepperActionsPrevBtn: { variant: 'outlined' } }, ['v-btn--variant-outlined', 'v-btn--variant-tonal']],
+    ['next', { VStepperActionsNextBtn: { variant: 'outlined' } }, ['v-btn--variant-text', 'v-btn--variant-outlined']],
+  ])('should let %s button be targeted on its own', async (_, defaults, [prevClass, nextClass]) => {
+    render(() => (
+      <VDefaultsProvider defaults={ defaults }>
+        <VStepperActions />
+      </VDefaultsProvider>
+    ))
+
+    const [prev, next] = screen.getAllByCSS('.v-btn')
+    expect(prev).toHaveClass(prevClass)
+    expect(next).toHaveClass(nextClass)
+  })
+
   it('should keep built-in variants when only ambient VBtn defaults are set', async () => {
     render(() => (
       <VDefaultsProvider defaults={{ VBtn: { variant: 'elevated' } }}>

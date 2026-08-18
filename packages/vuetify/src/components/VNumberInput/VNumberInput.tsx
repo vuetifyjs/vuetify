@@ -11,7 +11,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { formatNumber } from './format'
 import { useHold } from './hold'
 import { processGroupedInput, processPlainInput } from './typing'
-import { injectComponentDefaults } from '@/composables/defaults'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
@@ -97,7 +97,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
 
   setup (props, { slots }) {
     const vTextFieldRef = ref<VTextField>()
-    const controlDefaults = injectComponentDefaults<VBtn['$props']>('VNumberInputBtn')
+    const controlDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     const { holdStart, holdStop } = useHold({ toggleUpDown })
     const form = useForm(props)
@@ -399,7 +399,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function incrementControlNode () {
         return !slots.increment ? (
           <VBtn
-            _as="VNumberInputBtn"
             aria-hidden="true"
             data-testid="increment"
             disabled={ !canIncrease.value }
@@ -423,7 +422,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: incrementIcon.value,
-                variant: 'text',
+                variant: controlDefaults.value?.variant ?? 'text',
               },
             }}
           >
@@ -435,7 +434,6 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       function decrementControlNode () {
         return !slots.decrement ? (
           <VBtn
-            _as="VNumberInputBtn"
             aria-hidden="true"
             data-testid="decrement"
             disabled={ !canDecrease.value }
@@ -459,7 +457,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
                 height: controlNodeDefaultHeight.value,
                 size: controlNodeSize.value,
                 icon: decrementIcon.value,
-                variant: 'text',
+                variant: controlDefaults.value?.variant ?? 'text',
               },
             }}
           >

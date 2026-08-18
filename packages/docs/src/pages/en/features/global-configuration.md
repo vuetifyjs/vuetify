@@ -66,7 +66,7 @@ This is used internally by some components already:
 - `<v-list>` has `bg-color="transparent"` when nested within a `<v-navigation-drawer>`
 - Lists, chip groups, expansion panels, tabs, and forms all use this system to propagate certain props to their children, for example `<v-tabs disabled>` will set the default value of `disabled` to `true` for all `<v-tab>` components inside it.
 
-Where a component styles a child of its own, nested defaults win over the built-in value. This only works through the nested key — ambient `VBtn` or `VChip` defaults leave these children alone:
+Some components include predefined size and/or variant for internal controls they render, to shield them from global and unscoped defaults. Set those through the nested key:
 
 ```js { resource="src/plugins/vuetify.js" }
 createVuetify({
@@ -79,15 +79,16 @@ createVuetify({
     VFileUploadDropzone: { VBtn: { variant: 'outlined' } },
     VFileUploadItem: { VBtn: { variant: 'outlined' } },
     VSpeedDial: { VBtn: { size: 'default' } },
+    VCarousel: { VBtn: { size: 'small' } }, // delimiters
+    VNumberInput: { VBtn: { variant: 'tonal' } }, // increment and decrement
   },
 })
 ```
 
-A few internal buttons are addressed by a role name instead, and take no `VBtn` defaults at all:
+Buttons addressed by a role name are separate — they read that key and ignore `VBtn`:
 
 - `VPaginationBtn` — `<v-pagination>` and the `<v-data-table>` footer
-- `VNumberInputBtn` — `<v-number-input>` increment and decrement
-- `VCarouselBtn` — `<v-carousel>` delimiters
+- `VStepperActionsPrevBtn`, `VStepperActionsNextBtn` — either stepper action button on its own
 
 A prop written directly in the template still wins over any of this.
 

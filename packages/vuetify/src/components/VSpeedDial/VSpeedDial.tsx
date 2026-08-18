@@ -81,8 +81,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
               <VDefaultsProvider
                 defaults={{
                   VBtn: {
-                    size: 'small',
-                    ...btnDefaults.value,
+                    size: btnDefaults.value?.size ?? 'small',
                   },
                 }}
               >

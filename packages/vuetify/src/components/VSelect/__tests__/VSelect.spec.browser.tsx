@@ -225,7 +225,7 @@ describe('VSelect', () => {
 
   it.each([
     ['VSelect > VChip defaults should override chip size', { VSelect: { VChip: { size: 'large' } } }, 'v-chip--size-large'],
-    ['ambient VChip defaults should not reach selection chips', { VChip: { size: 'large' } }, 'v-chip--size-small'],
+    ['unscoped VChip defaults should not apply', { VChip: { size: 'large' } }, 'v-chip--size-small'],
   ])('%s', async (_, defaults, expected) => {
     render(() => (
       <VDefaultsProvider defaults={ defaults }>

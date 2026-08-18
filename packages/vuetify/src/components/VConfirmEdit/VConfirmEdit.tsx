@@ -103,20 +103,18 @@ export const VConfirmEdit = genericComponent<new <T> (
       return (
         <>
           <VBtn
-            variant="text"
-            color={ props.color }
-            { ...btnDefaults.value }
             disabled={ isCancelDisabled.value }
+            variant={ btnDefaults.value?.variant ?? 'text' }
+            color={ props.color }
             onClick={ cancel }
             text={ t(props.cancelText) }
             { ...actionsProps }
           />
 
           <VBtn
-            variant="text"
-            color={ props.color }
-            { ...btnDefaults.value }
             disabled={ isSaveDisabled.value }
+            variant={ btnDefaults.value?.variant ?? 'text' }
+            color={ props.color }
             onClick={ save }
             text={ t(props.okText) }
             { ...actionsProps }

@@ -114,8 +114,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                       <VBtn
                         icon="$clear"
                         density="comfortable"
-                        variant="text"
-                        { ...btnDefaults.value }
+                        variant={ btnDefaults.value?.variant ?? 'text' }
                         onClick={ onClickRemove }
                       />
                     ) : (
@@ -124,8 +123,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                           VBtn: {
                             icon: '$clear',
                             density: 'comfortable',
-                            variant: 'text',
-                            ...btnDefaults.value,
+                            variant: btnDefaults.value?.variant ?? 'text',
                           },
                         }}
                       >

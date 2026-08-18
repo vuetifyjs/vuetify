@@ -309,8 +309,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                   <VBtn
                     readonly={ !interactive }
                     text={ t(props.browseText) }
-                    variant="text"
-                    { ...btnDefaults.value }
+                    variant={ btnDefaults.value?.variant ?? 'text' }
                     onClick={ onClickBrowse }
                   />
                 ) : (
@@ -319,8 +318,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       VBtn: {
                         readonly: !interactive,
                         text: t(props.browseText),
-                        variant: 'text',
-                        ...btnDefaults.value,
+                        variant: btnDefaults.value?.variant ?? 'text',
                       },
                     }}
                   >
@@ -373,10 +371,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       { !slots.browse ? (
                         <VBtn
                           readonly={ !interactive }
-                          size="large"
+                          size={ btnDefaults.value?.size ?? 'large' }
                           text={ t(props.browseText) }
-                          variant="tonal"
-                          { ...btnDefaults.value }
+                          variant={ btnDefaults.value?.variant ?? 'tonal' }
                           onClick={ onClickBrowse }
                         />
                       ) : (
@@ -384,10 +381,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                           defaults={{
                             VBtn: {
                               readonly: !interactive,
-                              size: 'large',
+                              size: btnDefaults.value?.size ?? 'large',
                               text: t(props.browseText),
-                              variant: 'tonal',
-                              ...btnDefaults.value,
+                              variant: btnDefaults.value?.variant ?? 'tonal',
                             },
                           }}
                         >

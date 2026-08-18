@@ -25,8 +25,8 @@ describe('VNumberInput', () => {
   })
 
   it.each([
-    ['VNumberInputBtn defaults should style the controls', { VNumberInputBtn: { variant: 'tonal' } }, 'v-btn--variant-tonal'],
-    ['ambient VBtn defaults should not reach the controls', { VBtn: { variant: 'tonal' } }, 'v-btn--variant-text'],
+    ['VNumberInput > VBtn defaults should style the controls', { VNumberInput: { VBtn: { variant: 'tonal' } } }, 'v-btn--variant-tonal'],
+    ['unscoped VBtn defaults should not apply', { VBtn: { variant: 'tonal' } }, 'v-btn--variant-text'],
   ])('%s', async (_, defaults, expected) => {
     render(() => (
       <VDefaultsProvider defaults={ defaults }>

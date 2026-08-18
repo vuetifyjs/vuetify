@@ -883,11 +883,10 @@ export const VCombobox = genericComponent<new <
                         !slots.chip ? (
                           <VChip
                             key="chip"
-                            size="small"
+                            closable={ closableChips.value }
+                            size={ chipDefaults.value?.size ?? 'small' }
                             text={ item.title }
                             disabled={ item.props.disabled }
-                            { ...chipDefaults.value }
-                            closable={ closableChips.value }
                             { ...slotProps }
                           />
                         ) : (
@@ -895,10 +894,9 @@ export const VCombobox = genericComponent<new <
                             key="chip-defaults"
                             defaults={{
                               VChip: {
-                                size: 'small',
-                                text: item.title,
-                                ...chipDefaults.value,
                                 closable: closableChips.value,
+                                size: chipDefaults.value?.size ?? 'small',
+                                text: item.title,
                               },
                             }}
                           >

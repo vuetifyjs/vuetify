@@ -8,7 +8,7 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
-import { injectComponentDefaults } from '@/composables/defaults'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -81,7 +81,7 @@ export const VCarousel = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
     const windowRef = ref<VWindow>()
-    const delimiterDefaults = injectComponentDefaults<VBtn['$props']>('VCarouselBtn')
+    const delimiterDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     let slideTimeout = -1
     watch(model, restartTimeout)
@@ -129,12 +129,6 @@ export const VCarousel = genericComponent<new <T>(
 
     useRender(() => {
       const windowProps = VWindow.filterProps(props)
-      const delimiterBtnDefaults = {
-        color: props.color,
-        icon: props.delimiterIcon,
-        size: 'x-small',
-        variant: 'text',
-      }
 
       return (
         <VWindow
@@ -169,8 +163,12 @@ export const VCarousel = genericComponent<new <T>(
                     { group.items.value.length > 0 && (
                       <VDefaultsProvider
                         defaults={{
-                          VBtn: delimiterBtnDefaults,
-                          VCarouselBtn: { ...delimiterBtnDefaults, ...delimiterDefaults.value },
+                          VBtn: {
+                            color: props.color,
+                            icon: props.delimiterIcon,
+                            size: delimiterDefaults.value?.size ?? 'x-small',
+                            variant: delimiterDefaults.value?.variant ?? 'text',
+                          },
                         }}
                         scoped
                       >
@@ -188,7 +186,7 @@ export const VCarousel = genericComponent<new <T>(
 
                           return slots.item
                             ? slots.item({ props, item })
-                            : (<VBtn _as="VCarouselBtn" { ...item } { ...props } />)
+                            : (<VBtn { ...item } { ...props } />)
                         })}
                       </VDefaultsProvider>
                     )}

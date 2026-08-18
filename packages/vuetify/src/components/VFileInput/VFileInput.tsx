@@ -382,8 +382,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                               : props.chips ? fileNames.value.map(text => (
                                 <VChip
                                   key={ text }
-                                  size="small"
-                                  { ...chipDefaults.value }
+                                  size={ chipDefaults.value?.size ?? 'small' }
                                   text={ text }
                                 />
                               ))
