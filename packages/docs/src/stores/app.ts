@@ -14,7 +14,6 @@ type RootState = {
   scrolling: boolean
   items: NavItem[]
   pages: string[]
-  settings: boolean
   categories: Record<string, Category>
 }
 
@@ -33,7 +32,6 @@ export const useAppStore = defineStore('app', {
     apiSearch: '',
     drawer: null,
     toc: null,
-    scrolling: false,
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
