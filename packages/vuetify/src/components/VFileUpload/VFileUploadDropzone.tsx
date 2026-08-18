@@ -119,6 +119,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
+    const insetBrowseVariant = toRef(() => btnDefaults.value?.variant ?? 'text')
+    const browseSize = toRef(() => btnDefaults.value?.size ?? 'large')
+    const browseVariant = toRef(() => btnDefaults.value?.variant ?? 'tonal')
     const { densityClasses } = useDensity(props)
     const { handleDrop, hasFilesOrFolders, isDraggingFiles } = useFileDrop()
     const context = inject(VFileUploadKey, null)
@@ -309,7 +312,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                   <VBtn
                     readonly={ !interactive }
                     text={ t(props.browseText) }
-                    variant={ btnDefaults.value?.variant ?? 'text' }
+                    variant={ insetBrowseVariant.value }
                     onClick={ onClickBrowse }
                   />
                 ) : (
@@ -318,7 +321,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       VBtn: {
                         readonly: !interactive,
                         text: t(props.browseText),
-                        variant: btnDefaults.value?.variant ?? 'text',
+                        variant: insetBrowseVariant.value,
                       },
                     }}
                   >
@@ -371,9 +374,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       { !slots.browse ? (
                         <VBtn
                           readonly={ !interactive }
-                          size={ btnDefaults.value?.size ?? 'large' }
+                          size={ browseSize.value }
                           text={ t(props.browseText) }
-                          variant={ btnDefaults.value?.variant ?? 'tonal' }
+                          variant={ browseVariant.value }
                           onClick={ onClickBrowse }
                         />
                       ) : (
@@ -381,9 +384,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                           defaults={{
                             VBtn: {
                               readonly: !interactive,
-                              size: btnDefaults.value?.size ?? 'large',
+                              size: browseSize.value,
                               text: t(props.browseText),
-                              variant: btnDefaults.value?.variant ?? 'tonal',
+                              variant: browseVariant.value,
                             },
                           }}
                         >
