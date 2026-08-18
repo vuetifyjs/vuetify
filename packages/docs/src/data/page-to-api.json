@@ -124,6 +124,7 @@
   "components/mask-inputs": ["VMaskInput"],
   "components/menus": ["VMenu"],
   "components/navigation-drawers": ["VNavigationDrawer"],
+  "components/nav-rails": ["VNavRail", "VNavRailItem"],
   "components/no-ssr": ["VNoSsr"],
   "components/month-pickers": ["VMonthPicker"],
   "components/number-inputs": ["VNumberInput"],

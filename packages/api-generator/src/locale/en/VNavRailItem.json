@@ -1,0 +1,10 @@
+{
+  "description": "A single destination within a [v-nav-rail](/components/nav-rails), rendering an icon button with a label below it.",
+  "props": {
+    "title": "The label shown beneath the icon.",
+    "icon": "The icon shown for the inactive (and default) state.",
+    "activeIcon": "The icon shown when the item is selected. Falls back to `icon` when not provided.",
+    "divider": "Renders a horizontal divider after the item.",
+    "verticalDivider": "Renders a vertical divider after the item."
+  }
+}

@@ -1,0 +1,37 @@
+@use '../../styles/tools'
+
+// M3 navigation rail item: https://m3.material.io/components/navigation-rail
+@include tools.layer('components')
+  .v-nav-rail-item
+    align-items: center
+    display: flex
+    flex-direction: column
+    gap: 4px
+    justify-content: center
+    margin-block: 0.35em
+    user-select: none
+
+  // M3 active indicator: 56 x 32 pill behind the icon.
+  // Size (width/height) and radius (rounded="16") come from the button's
+  // props as inline styles, which beat .v-btn--icon's square/circle rules.
+  // Active state uses the button's tonal variant, so the tinted background
+  // and its contextually-correct "on" color are derived from `color`.
+  // Inactive icon/label: medium-emphasis on-surface (readable, not disabled).
+  // NB: Vuetify's `on-surface-variant` is the "on" color for surface-variant
+  // chips (near-white in the light theme), not M3's muted body text.
+  .v-nav-rail-item:not(.v-nav-rail-item--active) .v-nav-rail-item__btn
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+
+  .v-nav-rail-item__title
+    color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+    font-size: 0.675rem
+    font-weight: 500
+    text-align: center
+
+  .v-nav-rail-item--active .v-nav-rail-item__title
+    color: rgb(var(--v-theme-on-surface))
+
+  .v-nav-rail-item--disabled
+    .v-nav-rail-item__btn,
+    .v-nav-rail-item__title
+      color: rgba(var(--v-theme-on-surface), 0.38)

@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../../styles/settings';
+@use "../../styles/tools/functions";
+
+// VNavRail
+$nav-rail-background: rgb(var(--v-theme-surface)) !default;
+$nav-rail-border-color: settings.$border-color-root !default;
+$nav-rail-border-radius: map.get(settings.$rounded, '0') !default;
+$nav-rail-border-style: settings.$border-style-root !default;
+$nav-rail-border-thin-width: thin !default;
+$nav-rail-border-width: 0 !default;
+$nav-rail-color: functions.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
+$nav-rail-elevation: 2 !default;
+$nav-rail-padding: 8px 1px !default;
+$nav-rail-transition: transform, color, .2s, .1s settings.$standard-easing !default;
+
+$nav-rail-border: (
+  $nav-rail-border-color,
+  $nav-rail-border-style,
+  $nav-rail-border-width,
+  $nav-rail-border-thin-width
+) !default;
+
+$nav-rail-theme: (
+  $nav-rail-background,
+  $nav-rail-color
+) !default;
