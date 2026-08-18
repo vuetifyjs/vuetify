@@ -515,7 +515,11 @@
       "scrollSnap": "4.2.0",
       "scrollToActive": "3.10.6"
     },
+    "events": {
+      "edge": "4.2.0"
+    },
     "exposed": {
+      "hasOverflow": "4.2.0",
       "slide": "4.2.0"
     }
   },

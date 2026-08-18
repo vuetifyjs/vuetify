@@ -54,6 +54,8 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
+export type VSlideGroupEdge = 'start' | 'end'
+
 export type VSlideGroupTarget = 'prev' | 'next'
   | { by: string | number }
   | { index: number }
@@ -129,9 +131,10 @@ export const VSlideGroup = genericComponent<new <T>(
 
   emits: {
     'update:modelValue': (value: any) => true,
+    edge: (side: VSlideGroupEdge) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { isRtl } = useRtl()
     const { displayClasses, mobile } = useDisplay(props)
     const group = useGroup(props, props.symbol)
@@ -239,10 +242,6 @@ export const VSlideGroup = genericComponent<new <T>(
         activeAnimations++
         scrolling.finally(() => --activeAnimations || (el.style.scrollSnapType = ''))
       }
-    }
-
-    function onScroll () {
-      scrollOffset.value = getPosition()
     }
 
     function onFocusin (e: FocusEvent) {
@@ -498,6 +497,18 @@ export const VSlideGroup = genericComponent<new <T>(
       return scrollSizeMax - Math.abs(scrollOffset.value) > 1
     })
 
+    // Watching hasPrev/hasNext instead would report edges that a resize or an appearing
+    // affix produced, without the position ever moving.
+    function onScroll () {
+      const hadPrev = hasPrev.value
+      const hadNext = hasNext.value
+
+      scrollOffset.value = getPosition()
+
+      if (hadPrev && !hasPrev.value) emit('edge', 'start')
+      if (hadNext && !hasNext.value) emit('edge', 'end')
+    }
+
     useRender(() => (
       <props.tag
         class={[
@@ -581,6 +592,7 @@ export const VSlideGroup = genericComponent<new <T>(
       focus,
       hasPrev,
       hasNext,
+      hasOverflow: isOverflowing,
     }
   },
 })

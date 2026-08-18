@@ -15,9 +15,13 @@
     "next": "The next slot.",
     "prev": "The prev slot."
   },
+  "events": {
+    "edge": "Emitted when scrolling reaches the start or the end of the group."
+  },
   "exposed": {
     "focus": "Focus the component.",
     "hasNext": "Returns true if there are items after current index.",
+    "hasOverflow": "Returns true while the content does not fit in the container.",
     "hasPrev": "Returns true if there are items before current index.",
     "scrollOffset": "Current scroll position, in pixels from the start of the container.",
     "slide": "Scroll the group: `prev` or `next` moves one step like the arrows do, `{ by }` overrides the step with pixels or a percentage of the visible area, and `{ index }` reveals an item. Snaps to items when **scroll-snap** is set.",
