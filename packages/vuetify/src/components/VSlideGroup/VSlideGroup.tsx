@@ -34,6 +34,7 @@ import {
   isBoolean,
   isObject,
   isString,
+  matchesSelector,
   propsFactory,
   useRender,
 } from '@/util'
@@ -248,6 +249,10 @@ export const VSlideGroup = genericComponent<new <T>(
       isFocused.value = true
 
       if (!isOverflowing.value || !contentRef.el) return
+
+      // Pointer focus must not scroll: mousedown focuses first and would slide the
+      // target out from under the cursor before click. Keyboard keeps :focus-visible.
+      if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       // Focused element is likely to be the root of an item, so a
       // breadth-first search will probably find it in the first iteration
