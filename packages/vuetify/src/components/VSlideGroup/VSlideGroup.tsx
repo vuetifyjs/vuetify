@@ -26,7 +26,17 @@ import {
   getScrollPosition,
   getScrollSize,
 } from './helpers'
-import { focusableChildren, genericComponent, IN_BROWSER, isBoolean, propsFactory, useRender } from '@/util'
+import {
+  clamp,
+  focusableChildren,
+  genericComponent,
+  IN_BROWSER,
+  isBoolean,
+  isObject,
+  isString,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -42,6 +52,10 @@ interface SlideGroupSlot {
   select: GroupProvide['select']
   isSelected: GroupProvide['isSelected']
 }
+
+export type VSlideGroupTarget = 'prev' | 'next'
+  | { by: string | number }
+  | { index: number }
 
 export type VSlideGroupSlots = {
   default: SlideGroupSlot
@@ -178,8 +192,7 @@ export const VSlideGroup = genericComponent<new <T>(
 
     function scrollToChildren (children: HTMLElement, center?: boolean) {
       if (props.scrollSnap) {
-        const nextPosition = snapToElement(children, center)
-        return scrollToPosition(mirrorInRtl(nextPosition))
+        return scrollToPosition(snapToElement(children, center))
       }
 
       let target = 0
@@ -199,7 +212,7 @@ export const VSlideGroup = genericComponent<new <T>(
         })
       }
 
-      scrollToPosition(target)
+      scrollToPosition(mirrorInRtl(target))
     }
 
     let activeAnimations = 0
@@ -211,11 +224,8 @@ export const VSlideGroup = genericComponent<new <T>(
 
       if (scrollSize <= offsetSize) return
 
-      if (isHorizontal.value && isRtl.value && containerRef.el) {
-        const { scrollWidth, offsetWidth: containerWidth } = containerRef.el!
-
-        newPosition = (scrollWidth - containerWidth) - newPosition
-      }
+      newPosition = clamp(newPosition, 0, scrollSize - offsetSize)
+      if (Math.abs(newPosition - getPosition()) <= 1) return
 
       const scrolling = isHorizontal.value
         ? goTo.horizontal(newPosition, goToOptions.value)
@@ -230,10 +240,8 @@ export const VSlideGroup = genericComponent<new <T>(
       }
     }
 
-    function onScroll (e: Event) {
-      const { scrollTop, scrollLeft } = e.target as HTMLElement
-
-      scrollOffset.value = isHorizontal.value ? scrollLeft : scrollTop
+    function onScroll () {
+      scrollOffset.value = getPosition()
     }
 
     function onFocusin (e: FocusEvent) {
@@ -414,18 +422,22 @@ export const VSlideGroup = genericComponent<new <T>(
       ) ?? target
     }
 
-    function scrollTo (location: 'prev' | 'next') {
+    function slide (target: VSlideGroupTarget) {
       if (!containerRef.el || !containerSize.value) return
 
-      const distance = getScrollDistance(containerSize.value, props.scrollDistance)
-      const step = location === 'prev' ? -distance : distance
+      if (isObject(target) && 'index' in target) {
+        const item = contentRef.el?.children[target.index]
+        if (item) {
+          scrollToChildren(item as HTMLElement, props.centerActive)
+        }
+        return
+      }
+
       const from = getPosition()
-
-      const nextPosition = props.scrollSnap
-        ? snapToItem(from, step)
-        : from + step
-
-      scrollToPosition(mirrorInRtl(nextPosition))
+      const distance = isString(target) ? props.scrollDistance : target.by
+      const scrollDistance = getScrollDistance(containerSize.value, distance) * (target === 'prev' ? -1 : 1)
+      const nextPosition = props.scrollSnap ? snapToItem(from, scrollDistance) : from + scrollDistance
+      scrollToPosition(nextPosition)
     }
 
     const slotProps = computed(() => ({
@@ -506,7 +518,7 @@ export const VSlideGroup = genericComponent<new <T>(
               { 'v-slide-group__prev--disabled': !hasPrev.value },
             ]}
             onMousedown={ onFocusAffixes }
-            onClick={ () => hasPrev.value && scrollTo('prev') }
+            onClick={ () => hasPrev.value && slide('prev') }
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
@@ -545,7 +557,7 @@ export const VSlideGroup = genericComponent<new <T>(
               { 'v-slide-group__next--disabled': !hasNext.value },
             ]}
             onMousedown={ onFocusAffixes }
-            onClick={ () => hasNext.value && scrollTo('next') }
+            onClick={ () => hasNext.value && slide('next') }
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
@@ -559,7 +571,7 @@ export const VSlideGroup = genericComponent<new <T>(
 
     return {
       selected: group.selected,
-      scrollTo,
+      slide,
       scrollOffset,
       focus,
       hasPrev,

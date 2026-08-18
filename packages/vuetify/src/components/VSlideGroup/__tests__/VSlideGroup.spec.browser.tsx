@@ -4,6 +4,7 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { commands, render, screen, userEvent } from '@test'
+import { ref } from 'vue'
 
 // 196px of visible container (300 minus both 52px affixes) fits 2.8 items, so paging by a
 // full container lands mid-item and leaves some items clipped on every page.
@@ -11,9 +12,11 @@ const ITEM_COUNT = 10
 const CONTAINER_SIZE = 196
 
 function renderGroup (props: Record<string, unknown> = {}, rtl = false) {
+  const group = ref<VSlideGroup>()
+
   render(() => (
     <VLocaleProvider rtl={ rtl }>
-      <VSlideGroup showArrows="always" style="width: 300px" { ...props }>
+      <VSlideGroup ref={ group } showArrows="always" style="width: 300px" { ...props }>
         { Array.from({ length: ITEM_COUNT }, (_, i) => (
           <VSlideGroupItem key={ i } value={ i }>
             <div style="width: 70px; height: 40px">{ i }</div>
@@ -22,6 +25,8 @@ function renderGroup (props: Record<string, unknown> = {}, rtl = false) {
       </VSlideGroup>
     </VLocaleProvider>
   ))
+
+  return group
 }
 
 function container () {
@@ -123,6 +128,29 @@ describe('VSlideGroup', () => {
     // Landing anywhere else would leave the browser a snap position to pull the container to.
     expect(snapPositions(align).map(Math.round)).toContain(Math.round(landed))
     expect(fullyVisibleItems()).toContain(2)
+  })
+
+  it.each([false, true])('should slide by a distance override (rtl: %s)', async rtl => {
+    const group = renderGroup({}, rtl)
+    await ready()
+
+    group.value!.slide({ by: '50%' })
+    await expect(settled()).resolves.toBe(rtl ? -98 : 98)
+
+    group.value!.slide({ by: -50 })
+    await expect(settled()).resolves.toBe(rtl ? -48 : 48)
+  })
+
+  it.each([false, true])('should snap a distance override and an index to items (rtl: %s)', async rtl => {
+    const group = renderGroup({ scrollSnap: 'start' }, rtl)
+    await ready()
+
+    group.value!.slide({ by: 100 })
+    await expect(settled()).resolves.toBe(rtl ? -70 : 70)
+
+    group.value!.slide({ index: 7 })
+    await expect(settled()).resolves.toBe(rtl ? -420 : 420)
+    expect(fullyVisibleItems()).toContain(7)
   })
 
   it('should disable each affix at its end of the group', async () => {

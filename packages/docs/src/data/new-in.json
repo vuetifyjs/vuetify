@@ -511,7 +511,12 @@
   "VSlideGroup": {
     "props": {
       "contentClass": "3.9.0",
+      "scrollDistance": "4.2.0",
+      "scrollSnap": "4.2.0",
       "scrollToActive": "3.10.6"
+    },
+    "exposed": {
+      "slide": "4.2.0"
     }
   },
   "VSnackbar": {
