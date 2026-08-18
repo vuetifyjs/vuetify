@@ -1,6 +1,7 @@
 {
   "description": "An alternative to the sidebar. Primarily used for mobile applications.",
   "props": {
+    "height": "Sets the height for the component. A percentage value is relative to the layout and ignores `density`.",
     "grow": "Force all [v-btn](/components/buttons) children to take up all available horizontal space.",
     "mode": "Changes the orientation and active state styling of the component."
   },

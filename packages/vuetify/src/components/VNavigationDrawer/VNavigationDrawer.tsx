@@ -17,7 +17,7 @@ import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
-import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { makeLayoutItemProps, useLayout, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useRouter } from '@/composables/router'
@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, isString, omit, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, isString, omit, propsFactory, resolveSize, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -127,14 +127,21 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       isHovering.value = value
     })
 
+    const { layoutRect } = useLayout()
+
+    const location = computed(() => toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'top' | 'bottom')
+    const isVertical = computed(() => location.value === 'top' || location.value === 'bottom')
+    const layoutSpan = computed(() => (isVertical.value ? layoutRect.value?.height : layoutRect.value?.width) ?? 0)
+
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
-        ? Number(props.width)
-        : Number(props.rail ? props.railWidth : props.width)
+        ? props.width
+        : props.rail
+          ? props.railWidth
+          : props.width
     })
-    const location = computed(() => {
-      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
-    })
+    const widthPx = computed(() => resolveSize(width.value, layoutSpan.value))
+
     const isPersistent = toRef(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
@@ -169,17 +176,19 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       el: rootEl,
       isActive,
       isTemporary,
-      width,
+      width: widthPx,
       touchless: toRef(() => props.touchless),
       position: location,
     })
 
     const layoutSize = computed(() => {
       const size = isTemporary.value ? 0
-        : props.rail && props.expandOnHover ? Number(props.railWidth)
+        : props.rail && props.expandOnHover ? props.railWidth
         : width.value
 
-      return isDragging.value ? size * dragProgress.value : size
+      return isDragging.value
+        ? resolveSize(size, layoutSpan.value) * dragProgress.value
+        : size
     })
     const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,

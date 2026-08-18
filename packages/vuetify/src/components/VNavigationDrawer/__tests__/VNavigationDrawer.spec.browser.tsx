@@ -163,6 +163,23 @@ describe('VNavigationDrawer', () => {
     await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
   })
 
+  it('should allow percentage widths relative to the layout', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer width="20%" permanent />
+        <VMain />
+      </VLayout>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    const layoutWidth = screen.getByCSS('.v-layout').getBoundingClientRect().width
+
+    await commands.waitStable('.v-navigation-drawer')
+
+    expect(drawer.getBoundingClientRect().width).toBeCloseTo(layoutWidth * 0.2, 1)
+    await expect.element(screen.getByCSS('.v-main')).toHaveStyle({ paddingLeft: `${layoutWidth * 0.2}px` })
+  })
+
   it('should position drawer scrim correctly', async () => {
     const visible = ref(false)
     render(() => (
