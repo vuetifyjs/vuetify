@@ -289,6 +289,10 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = getActiveElement()
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+        // eager reuses contentEl, so the mousedown that opened us would linger until the next one
+        if (contentEl.value?._clickOutside) {
+          contentEl.value._clickOutside.lastMousedownWasOutside = false
+        }
       } else {
         returnFocusToActivator()
       }

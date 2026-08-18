@@ -57,21 +57,15 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
       (vListItemRef.value?.root.activatable.value) &&
       vListItemRef.value?.isGroupActivator
     )
-    const vListItemRefIsClickable = computed(() => (
-      vListItemRef.value?.link.isClickable.value ||
-      (props.value != null && !!vListItemRef.value?.list)
-    ))
-    const isClickable = computed(() =>
+    const isActivatable = computed(() =>
       !props.disabled &&
       props.link !== false &&
-      (props.link || vListItemRefIsClickable.value || isActivatableGroupActivator.value)
+      isActivatableGroupActivator.value
     )
     const isFiltered = computed(() => visibleIds.value && !visibleIds.value.has(toRaw(vListItemRef.value?.id)))
 
     function activateGroupActivator (e: MouseEvent | KeyboardEvent) {
-      if (isClickable.value && isActivatableGroupActivator.value) {
-        vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
-      }
+      vListItemRef.value?.activate(!vListItemRef.value?.isActivated, e)
     }
 
     function onClickAction (e: PointerEvent) {
@@ -104,7 +98,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           role="treeitem"
           aria-busy={ props.loading || undefined }
           ripple={ false }
-          onClick={ activateGroupActivator }
+          onClick={ isActivatable.value ? activateGroupActivator : undefined }
         >
           {{
             ...slots,

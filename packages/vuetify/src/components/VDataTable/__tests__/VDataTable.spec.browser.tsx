@@ -216,6 +216,27 @@ describe('VDataTable', () => {
     expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/23123
+  it('should keep column cells in place when toggling show-select', async () => {
+    const showSelect = ref(false)
+    render(() => (
+      <VDataTable
+        headers={ DESSERT_HEADERS }
+        items={ DESSERT_ITEMS }
+        showSelect={ showSelect.value }
+      />
+    ))
+
+    const header = screen.getByCSS('thead tr th:first-child')
+    const cell = screen.getByCSS('tbody tr:first-child td:first-child')
+
+    showSelect.value = true
+    await nextTick()
+
+    expect(screen.getByCSS('thead tr th:nth-child(2)')).toBe(header)
+    expect(screen.getByCSS('tbody tr:first-child td:nth-child(2)')).toBe(cell)
+  })
+
   it('with body.append should show correct item count after group is expanded', async () => {
     render(() => (
       <VDataTable
