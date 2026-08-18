@@ -49,7 +49,10 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & {
 
 export const makeVFileInputProps = propsFactory({
   chips: Boolean,
-  counter: Boolean,
+  counter: {
+    type: Boolean as PropType<boolean | null>,
+    default: undefined,
+  },
   counterSizeString: {
     type: String,
     default: '$vuetify.fileInput.counterSize',
@@ -260,8 +263,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter)
-      const counterActive = !!model.value?.length
+      const hasCounter = !!(slots.counter || props.counter !== undefined)
+      const counterActive = props.counter !== false && props.counter !== null && !!model.value?.length
       const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
       const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)

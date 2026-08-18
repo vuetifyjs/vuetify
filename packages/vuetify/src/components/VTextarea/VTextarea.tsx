@@ -45,7 +45,10 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 export const makeVTextareaProps = propsFactory({
   autoGrow: Boolean,
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counter: {
+    type: [Boolean, Number, String] as PropType<boolean | number | string | null>,
+    default: undefined,
+  },
   counterValue: Function as PropType<(value: any) => number>,
   prefix: String,
   placeholder: String,
@@ -253,8 +256,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const counterActive = props.persistentCounter || isFocused.value
+      const hasCounter = !!(slots.counter || props.counter !== undefined || props.counterValue != null)
+      const counterActive = props.counter !== false && props.counter !== null &&
+        (props.persistentCounter || isFocused.value)
       const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
       const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)

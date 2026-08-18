@@ -41,7 +41,10 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
-  counter: [Boolean, Number, String],
+  counter: {
+    type: [Boolean, Number, String] as PropType<boolean | number | string | null>,
+    default: undefined,
+  },
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
   placeholder: String,
@@ -185,8 +188,9 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
-      const counterActive = props.persistentCounter || isFocused.value
+      const hasCounter = !!(slots.counter || props.counter !== undefined)
+      const counterActive = props.counter !== false && props.counter !== null &&
+        (props.persistentCounter || isFocused.value)
       const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
       const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
