@@ -31,6 +31,7 @@ import {
   focusableChildren,
   focusChild,
   genericComponent,
+  getActiveElement,
   getNextElement,
   omit,
   propsFactory,
@@ -109,8 +110,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
         }, 40)
       },
       openOnHover: props.openOnHover,
-      // Submenus inherit the chain root's hover-open state; a non-submenu menu reports its own,
-      // so hover-leave collapses a submenu tree only when its root menu was hover-opened.
       rootOpenedByHover: props.submenu && parent
         ? parent.rootOpenedByHover
         : () => overlay.value?.openedByHover ?? false,
@@ -124,8 +123,8 @@ export const VMenu = genericComponent<OverlaySlots>()({
         parent?.register(uid, () => { isActive.value = false })
       } else {
         parent?.unregister(uid)
-        // Closing a menu collapses its whole open subtree, so descendants don't
-        // linger hidden-but-active and reappear when this menu is reopened.
+
+        // close a submenu branch
         for (const [, closeChild] of [...openChildren.value]) closeChild()
       }
     }, { immediate: true })
@@ -184,16 +183,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
       }
     }
 
-    // Re-dispatch the opening keystroke once the menu content has mounted and its
-    // items are focusable. A fixed delay races with content layout and only lands
-    // focus about half the time, so retry across frames until focus is inside.
     function focusContentWhenReady (e: KeyboardEvent, attempt = 1) {
       if (!isActive.value) return
       const el = overlay.value?.contentEl
-      if (el?.contains(document.activeElement)) return
+      if (el?.contains(getActiveElement())) return
       if (el && focusableChildren(el).length) {
         onActivatorKeydown(e)
-        if (el.contains(document.activeElement)) return
+        if (el.contains(getActiveElement())) return
       }
       if (attempt <= 10) {
         requestAnimationFrame(() => focusContentWhenReady(e, attempt + 1))

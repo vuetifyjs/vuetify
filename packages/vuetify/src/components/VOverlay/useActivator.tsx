@@ -90,14 +90,10 @@ export function useActivator (
   let isHovered = false
   let isFocused = false
   let firstEnter = true
-  // True only when this overlay was last opened by the hover delay (not keyboard/click/focus).
   const openedByHover = ref(false)
-  // Set synchronously inside the delay callback before mutating isActive; consumed by the next watcher tick.
   let delayCallbackFiredOpen = false
 
-  // Hover-leave should collapse the whole structure only when the ROOT of the chain was hover-opened.
-  // A submenu inherits the root's verdict via VMenuSymbol; everything else (tooltips, root or
-  // standalone menus) decides on its own hover-open state, even when nested in a menu's content.
+  // mouseleave should collapse the whole structure only when the ROOT of the chain was hover-opened
   const rootOpenedByHover = () => isSubmenu
     ? (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
     : openedByHover.value
@@ -327,7 +323,17 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents, openedByHover }
+  return {
+    activatorEl,
+    activatorRef,
+    target,
+    targetEl,
+    targetRef,
+    activatorEvents,
+    contentEvents,
+    scrimEvents,
+    openedByHover,
+  }
 }
 
 function _useActivator (

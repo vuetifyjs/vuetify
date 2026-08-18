@@ -261,10 +261,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function returnFocusToActivator () {
       const el = activatorEl.value
       if (!el || !el.isConnected) return
-      // In a full cascade, the parent overlay's content is also inert (closing),
-      // so let the outermost close handle focus restoration.
-      // If the parent is still active (e.g. only this submenu closes via hover-out),
-      // we must restore focus ourselves so it doesn't fall to document.body.
+
       const parentContent = el.closest<HTMLElement>('.v-overlay__content')
       if (parentContent?.inert) return
 
