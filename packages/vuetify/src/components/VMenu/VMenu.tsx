@@ -109,7 +109,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
           }
         }, 40)
       },
-      openOnHover: props.openOnHover,
       rootOpenedByHover: props.submenu && parent
         ? parent.rootOpenedByHover
         : () => overlay.value?.openedByHover ?? false,

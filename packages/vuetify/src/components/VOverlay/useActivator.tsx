@@ -93,10 +93,8 @@ export function useActivator (
   const openedByHover = ref(false)
   let delayCallbackFiredOpen = false
 
-  // mouseleave should collapse the whole structure only when the ROOT of the chain was hover-opened
-  const rootOpenedByHover = () => isSubmenu
-    ? (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
-    : openedByHover.value
+  // a submenu chain collapses on mouseleave only when its root was hover-opened
+  const shouldCloseOnLeave = () => !isSubmenu || (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
@@ -159,7 +157,7 @@ export function useActivator (
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
       if (props.target === 'cursor') isFocused = false
-      if (rootOpenedByHover()) runCloseDelay()
+      if (shouldCloseOnLeave()) runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
       if (reopenLock) return
@@ -214,7 +212,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        if (rootOpenedByHover()) runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
@@ -257,7 +255,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        if (rootOpenedByHover()) runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
@@ -267,7 +265,7 @@ export function useActivator (
   watch(isTop, val => {
     if (
       val &&
-      rootOpenedByHover() &&
+      shouldCloseOnLeave() &&
       (
         (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
         (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
