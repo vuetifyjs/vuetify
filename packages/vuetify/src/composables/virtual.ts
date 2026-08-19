@@ -77,6 +77,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   let sizes = Array.from<number | null>({ length: items.value.length })
   let offsets = Array.from<number>({ length: items.value.length })
+  let heights = new Map<number, number>()
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
   let targetScrollHeight = 0
@@ -119,15 +120,32 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     updateOffsets.clear()
   })
 
+  function estimateItemHeight () {
+    let total = 0
+    for (const count of heights.values()) total += count
+
+    let seen = 0
+    for (const height of [...heights.keys()].sort((a, b) => a - b)) {
+      seen += heights.get(height)!
+      if (seen * 2 >= total) return height
+    }
+    return itemHeight.value
+  }
+
   function handleItemResize (index: number, height: number) {
     const prevHeight = sizes[index]
-    const prevMinHeight = itemHeight.value
+    const prevItemHeight = itemHeight.value
 
     if (height > 0) {
-      itemHeight.value = prevMinHeight ? Math.min(prevMinHeight, height) : height
+      if (prevHeight) {
+        const count = heights.get(prevHeight)! - 1
+        count ? heights.set(prevHeight, count) : heights.delete(prevHeight)
+      }
+      heights.set(height, (heights.get(height) ?? 0) + 1)
+      itemHeight.value = estimateItemHeight()
     }
 
-    if (prevHeight !== height || prevMinHeight !== itemHeight.value) {
+    if (prevHeight !== height || prevItemHeight !== itemHeight.value) {
       sizes[index] = height
       updateOffsets()
     }
@@ -299,6 +317,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   watch(items, () => {
     sizes = Array.from({ length: items.value.length })
     offsets = Array.from({ length: items.value.length })
+    heights = new Map()
     updateOffsets.immediate()
     calculateVisibleItems()
   }, { deep: 1 })

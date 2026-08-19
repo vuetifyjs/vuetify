@@ -1206,6 +1206,35 @@ describe('VSelect', () => {
         await wait(200)
       }
     })
+
+    it('should not leave blank space below the last item when dividers are present', async () => {
+      const items = Array.from({ length: 300 }, (_, i) => (
+        i % 5 === 4 ? { type: 'divider' } : { title: `Item ${i}`, value: i }
+      ))
+
+      render(() => (
+        <VSelect items={ items } itemTitle="title" itemValue="value" />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      const list = await screen.findByRole('listbox')
+      await commands.waitStable('.v-list')
+
+      const rowHeight = screen.getAllByRole('option')[0].getBoundingClientRect().height
+      let widest = 0
+      for (let top = 100; top <= 2000; top += 100) {
+        list.scrollTop = top
+        await commands.waitStable('.v-list')
+
+        const last = screen.getAllByRole('option').at(-1)!
+        widest = Math.max(widest, list.getBoundingClientRect().bottom - last.getBoundingClientRect().bottom)
+      }
+
+      // 1px dividers estimated at item height push the last row above the fold
+      expect(widest).toBeLessThan(20)
+      // ...and once measured, they must not become the estimate for unmeasured items
+      expect(list.scrollHeight).toBeGreaterThan(240 * rowHeight)
+    })
   })
 
   it('should close its menu when clicking another field inside a dialog', async () => {

@@ -655,13 +655,13 @@ export const VCombobox = genericComponent<new <
 
                           if (item.type === 'divider') {
                             return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } key={ `divider-${index}` } />
+                              <VDivider { ...item.props } ref={ itemRef } key={ `divider-${index}` } />
                             )
                           }
 
                           if (item.type === 'subheader') {
                             return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } key={ `subheader-${index}` } />
+                              <VListSubheader { ...item.props } ref={ itemRef } key={ `subheader-${index}` } />
                             )
                           }
 

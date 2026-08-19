@@ -131,8 +131,9 @@ describe('VDataTableVirtual', () => {
 
     const wrapper = document.querySelector('.v-table__wrapper') as HTMLElement
     await wait(150)
+    const rowHeight = screen.getAllByCSS('tbody tr')[1].getBoundingClientRect().height
     const collapsedHeight = wrapper.scrollHeight
-    expect(collapsedHeight).toBeLessThan(50 * 48 + 200)
+    expect(collapsedHeight).toBeLessThan(50 * rowHeight + 200)
 
     const toggle = (await screen.findAllByCSS('.v-btn--icon'))[0]
     await userEvent.click(toggle)
