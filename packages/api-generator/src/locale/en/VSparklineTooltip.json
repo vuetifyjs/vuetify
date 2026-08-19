@@ -1,0 +1,13 @@
+{
+  "description": "Subcomponent for `v-sparkline` that renders the tooltip displayed when hovering over data points.",
+  "props": {
+    "index": "Index of the active data point. Pass `null` to hide the tooltip content.",
+    "value": "Value of the active data point. Forwarded to **title-format** and the default slot.",
+    "titleFormat": "Function used to format the tooltip body when no slot is provided. Receives `{ index, value }`.",
+    "target": "The coordinates used to position the tooltip.",
+    "offset": "Distance in pixels between the tooltip and the target point."
+  },
+  "slots": {
+    "default": "Custom content for the tooltip. Receives `{ index: number, value: number }`."
+  }
+}

@@ -23,6 +23,9 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--variant-tonal
+      overflow: hidden
+
     &--focus-visible
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
@@ -79,6 +82,9 @@
     display: flex
     grid-area: prepend
 
+    * ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
+
     > .v-badge,
     > .v-icon,
     > .v-tooltip
@@ -119,6 +125,9 @@
       order: -1
       transition: 150ms width settings.$standard-easing
 
+    * ~ .v-list-item__spacer
+      width: var(--v-list-prepend-gap)
+
     > .v-badge,
     > .v-icon,
     > .v-tooltip
@@ -157,13 +166,23 @@
     overflow: hidden
     min-width: $list-item-content-min-width
 
+    .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
+    .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+      min-width: 0
+
   .v-list-item-action
     align-self: center
     display: flex
     align-items: center
     flex: none
-    transition: inherit
+
+    // TODO: cleanup in v5.0
+    // not effective, transition inheritance takes only from immediate parent
+    // which is typically the append slot container, so it requires custom CSS
     transition-property: height, width
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
     &--start
       margin-inline-end: $list-item-action-margin-end
@@ -292,10 +311,16 @@
     position: absolute
     right: 0
     top: 0
-    transition: opacity 0.2s ease-in-out
+    transition: 0.2s ease-in-out
+    transition-property: opacity, color
 
     .v-list-item--active.v-list-item--variant-elevated &
       --v-theme-overlay-multiplier: 0
+
+  .v-list--navigable
+    .v-list-item::after,
+    .v-list-item__overlay
+      transition: none
 
   $base-padding: list.nth($list-item-padding, 2)
   .v-list
@@ -329,7 +354,8 @@
       min-width: 0
 
   .v-list-group__items .v-list-item
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+    @include tools.layer('overrides')
+      padding-inline-start: calc(#{$base-padding} + var(--indent-padding))
 
   .v-list-group__header:not(.v-treeview-item--activatable-group-activator).v-list-item--active
     &:not(:focus-visible)
@@ -340,6 +366,7 @@
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
+@include tools.layer('trumps')
   @media (forced-colors: active)
     .v-list-item
       &--link:not(&--active)
@@ -352,16 +379,16 @@
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
-          color: highlight !important
+          color: highlight
 
       &--active:not(&--variant-text, &--variant-plain):not(&--disabled)
-        background: highlight !important
+        background: highlight
 
         [class*="v-list-item-"],
         [class*="v-list-item-"] > *,
         .v-icon
           opacity: 1
-          color: highlighttext !important
+          color: highlighttext
           forced-color-adjust: preserve-parent-color
 
       &--focus-visible::after

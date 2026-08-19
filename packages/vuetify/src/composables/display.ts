@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, mergeDeep, propsFactory } from '@/util'
+import { getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -88,10 +88,10 @@ const defaultDisplayOptions: DisplayOptions = {
   thresholds: {
     xs: 0,
     sm: 600,
-    md: 960,
-    lg: 1280,
-    xl: 1920,
-    xxl: 2560,
+    md: 840,
+    lg: 1145,
+    xl: 1545,
+    xxl: 2138,
   },
 }
 
@@ -102,13 +102,13 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
 function getClientWidth (ssr?: SSROptions) {
   return IN_BROWSER && !ssr
     ? window.innerWidth
-    : (typeof ssr === 'object' && ssr.clientWidth) || 0
+    : (isObject(ssr) && ssr.clientWidth) || 0
 }
 
 function getClientHeight (ssr?: SSROptions) {
   return IN_BROWSER && !ssr
     ? window.innerHeight
-    : (typeof ssr === 'object' && ssr.clientHeight) || 0
+    : (isObject(ssr) && ssr.clientHeight) || 0
 }
 
 function getPlatform (ssr?: SSROptions): DisplayPlatform {
@@ -181,7 +181,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
       : lg ? 'lg'
       : xl ? 'xl'
       : 'xxl'
-    const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
+    const breakpointValue = isNumber(mobileBreakpoint) ? mobileBreakpoint : thresholds[mobileBreakpoint]
     const mobile = width.value < breakpointValue
 
     state.xs = xs
@@ -237,11 +237,11 @@ export function useDisplay (
   const mobile = computed(() => {
     if (props.mobile) {
       return true
-    } else if (typeof props.mobileBreakpoint === 'number') {
+    } else if (isNumber(props.mobileBreakpoint)) {
       return display.width.value < props.mobileBreakpoint
     } else if (props.mobileBreakpoint) {
       return display.width.value < display.thresholds.value[props.mobileBreakpoint]
-    } else if (props.mobile === null) {
+    } else if (isNull(props.mobile)) {
       return display.mobile.value
     } else {
       return false

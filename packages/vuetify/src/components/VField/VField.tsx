@@ -24,15 +24,19 @@ import {
   convertToUnit,
   EventProp,
   genericComponent,
+  getActiveElement,
+  isString,
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
   standardEasing,
   useRender,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ClassValue } from '@/composables/component'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
@@ -49,7 +53,9 @@ export interface DefaultInputSlot {
 }
 
 export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown>
+  props: Record<string, unknown> & {
+    class?: ClassValue
+  }
 }
 
 export const makeVFieldProps = propsFactory({
@@ -136,7 +142,7 @@ export const VField = genericComponent<new <T>(
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { rtlClasses } = useRtl()
 
     const isActive = toRef(() => props.dirty || props.active)
@@ -157,9 +163,10 @@ export const VField = genericComponent<new <T>(
         : props.baseColor
     })
     const iconColor = computed(() => {
+      if (props.iconColor === true || (!props.iconColor && props.glow && isFocused.value)) return color.value
       if (!props.iconColor || (props.glow && !isFocused.value)) return undefined
 
-      return props.iconColor === true ? color.value : props.iconColor
+      return props.iconColor
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -172,7 +179,7 @@ export const VField = genericComponent<new <T>(
 
         requestAnimationFrame(() => {
           const rect = nullifyTransforms(el)
-          const targetRect = targetEl.getBoundingClientRect()
+          const targetRect = new Box(targetEl)
 
           const x = targetRect.x - rect.x
           const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
@@ -216,8 +223,24 @@ export const VField = genericComponent<new <T>(
       focus,
     }))
 
+    const floatingLabelProps = toRef(() => {
+      const ariaHidden = !isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
+
+    const mainLabelProps = toRef(() => {
+      const ariaHidden = hasFloatingLabel.value && isActive.value
+      return {
+        'aria-hidden': ariaHidden,
+        for: ariaHidden ? undefined : id.value,
+      }
+    })
+
     function onClick (e: MouseEvent) {
-      if (e.target !== document.activeElement) {
+      if (e.target !== getActiveElement()) {
         e.preventDefault()
       }
     }
@@ -268,6 +291,7 @@ export const VField = genericComponent<new <T>(
           ]}
           style={[
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           onClick={ onClick }
@@ -278,7 +302,7 @@ export const VField = genericComponent<new <T>(
           <LoaderSlot
             name="v-field"
             active={ !!props.loading }
-            color={ props.error ? 'error' : (typeof props.loading === 'string' ? props.loading : props.color) }
+            color={ props.error ? 'error' : (isString(props.loading) ? props.loading : props.color) }
             v-slots={{ default: slots.loader }}
           />
 
@@ -304,8 +328,7 @@ export const VField = genericComponent<new <T>(
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
-                for={ id.value }
-                aria-hidden={ !isActive.value }
+                { ...floatingLabelProps.value }
                 style={ textColorStyles.value }
               >
                 { label() }
@@ -317,8 +340,7 @@ export const VField = genericComponent<new <T>(
                 key="label"
                 ref={ labelRef }
                 id={ props.labelId }
-                for={ id.value }
-                aria-hidden={ hasFloatingLabel.value && isActive.value }
+                { ...mainLabelProps.value }
               >
                 { label() }
               </VFieldLabel>
@@ -410,7 +432,11 @@ export const VField = genericComponent<new <T>(
 
                 { hasFloatingLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+                    <VFieldLabel
+                      ref={ floatingLabelRef }
+                      floating
+                      { ...floatingLabelProps.value }
+                    >
                       { label() }
                     </VFieldLabel>
                   </div>
@@ -421,7 +447,7 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value } aria-hidden={ !isActive.value }>
+              <VFieldLabel ref={ floatingLabelRef } floating { ...floatingLabelProps.value }>
                 { label() }
               </VFieldLabel>
             )}

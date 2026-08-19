@@ -4,6 +4,13 @@
 
 @include tools.layer('components')
   .v-stepper-item
+    margin: 0
+    font: inherit
+    overflow: hidden
+    text-transform: none
+    background-color: transparent
+    border-style: none
+    color: inherit
     align-items: center
     align-self: stretch
     display: inline-flex
@@ -85,7 +92,6 @@
 
   .v-stepper-item__overlay
     background-color: currentColor
-    border-radius: inherit
     opacity: 0
     transition: opacity .2s ease-in-out
 

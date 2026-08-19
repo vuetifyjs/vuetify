@@ -8,13 +8,14 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -80,6 +81,7 @@ export const VCarousel = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
     const windowRef = ref<VWindow>()
+    const delimiterDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     let slideTimeout = -1
     watch(model, restartTimeout)
@@ -164,8 +166,8 @@ export const VCarousel = genericComponent<new <T>(
                           VBtn: {
                             color: props.color,
                             icon: props.delimiterIcon,
-                            size: 'x-small',
-                            variant: 'text',
+                            size: delimiterDefaults.value?.size ?? 'x-small',
+                            variant: delimiterDefaults.value?.variant ?? 'text',
                           },
                         }}
                         scoped
@@ -195,7 +197,7 @@ export const VCarousel = genericComponent<new <T>(
                   <VProgressLinear
                     absolute
                     class="v-carousel__progress"
-                    color={ typeof props.progress === 'string' ? props.progress : undefined }
+                    color={ isString(props.progress) ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                   />
                 )}

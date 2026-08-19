@@ -29,6 +29,8 @@ const stories = {
       }}
     </VProgressLinear>
   ),
+  'Split variant': <VProgressLinear modelValue="40" variant="split" />,
+  'Split variant with buffer': <VProgressLinear modelValue="40" bufferValue="70" variant="split" />,
 }
 
 describe('VProgressLinear', () => {

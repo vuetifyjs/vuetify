@@ -516,15 +516,7 @@ You can change the visual order of flex items with the `order` utilities.
 
 The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the wrapped flexbox content across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly` or `stretch` (browser default).
 
-<ExamplesExample file="flex/flex-align-content-start" />
-
-<ExamplesExample file="flex/flex-align-content-end" />
-
-<ExamplesExample file="flex/flex-align-content-center" />
-
-<ExamplesExample file="flex/flex-align-content-between" />
-
-<ExamplesExample file="flex/flex-align-content-around" />
+<ExamplesExample file="flex/flex-align-content" />
 
 ## Flex grow and shrink
 

@@ -76,9 +76,8 @@ describe('VCheckbox', () => {
       const input = wrapper.find('input')
       expect(input.attributes('aria-describedby')).toBeUndefined()
 
-      // Should not have details section
       const details = wrapper.find('.v-input__details')
-      expect(details.exists()).toBe(false)
+      expect(details.classes()).toContain('v-input__details--hidden')
     })
 
     it('should have aria-describedby when hide-details is "auto" and has error messages', () => {

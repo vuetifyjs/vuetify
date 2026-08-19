@@ -20,6 +20,9 @@ export default {
       activateNone: 'Odaberite za uklanjanje sortiranja.',
       activateDescending: 'Odaberite za silazno sortiranje.',
       activateAscending: 'Odaberite za uzlazno sortiranje.',
+      selectRow: 'Odaberi redak',
+      selectAll: 'Odaberi sve',
+      selectGroup: 'Odaberi grupu',
     },
     sortBy: 'Sortirajte po',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'do',
+  },
+  monthPicker: {
+    title: 'Odaberite mjesec',
+    itemsSelected: '{0} odabrano',
+    header: 'Unesite mjesec',
+    range: {
+      title: 'Unesite mjesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectYear: 'Odaberite godinu',
+      currentMonth: 'Trenutni mjesec, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
@@ -69,6 +86,10 @@ export default {
     moreEvents: 'Još {0}',
     today: 'Danas',
   },
+  heatmap: {
+    less: 'Manje',
+    more: 'Više',
+  },
   input: {
     clear: 'Očisti {0}',
     prependAction: '{0} prethodna radnja',
@@ -91,6 +112,7 @@ export default {
     hour: 'Sat',
     minute: 'Minute',
     second: 'Sekunde',
+    notAllowed: 'Vrijednost nije dopuštena',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'Znak {0} nije dopušten',
     notEmpty: 'Odaberite barem jednu vrijednost',
     pattern: 'Nevaljan format',
+  },
+  command: {
+    search: 'Unesite naredbu ili pretražite...',
   },
   hotkey: {
     then: 'zatim',

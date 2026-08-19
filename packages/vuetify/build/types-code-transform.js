@@ -10,4 +10,9 @@ export function codeTransform (code) {
     .replaceAll(/^\s*export \{\s*\};?$/gm, '')
     // ignore style imports
     .replaceAll(/import '[^']*\.s[ac]ss';$/gm, '')
+    // tsc expands RouteLocationRaw and breaks route autocomplete
+    .replaceAll(
+      'string | import("vue-router").RouteLocationAsPathGeneric | import("vue-router").RouteLocationAsRelativeGeneric',
+      'import("vue-router").RouteLocationRaw'
+    )
 }

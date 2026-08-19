@@ -32,7 +32,7 @@ It's been a long road to get where we are today, and looking back, I can’t hel
 
 First, I'd like to reflect on what we've been up to for the past year. Since November 2023, we’ve hit some incredible milestones. This includes the release of `v-data-table`, and over 10 other new and old components. Each of these components was designed with developer feedback in mind, making the framework more flexible and feature-complete. We’ve also made significant progress on our ecosystem tools, with Vuetify One, Vuetify Bin, Vuetify Playground, and Vuetify Snips all seeing major updates.
 
-![Image of 4 releases banner](https://vuetifyjs.b-cdn.net/docs/images/blog/state-of-the-union-2024/releases.png "Release banners")
+![Image of 4 releases banner](https://cdn.vuetifyjs.com/docs/images/blog/state-of-the-union-2024/releases.png "Release banners")
 
 - [**v3.4 (Blackguard)**](/getting-started/release-notes/?version=v3.4.0) in November 2023 brought 8 new components:
   - [`v-bottom-sheet`](/components/bottom-sheets/)
@@ -57,7 +57,7 @@ First, I'd like to reflect on what we've been up to for the past year. Since Nov
 
 In addition, we've made significant progress on our ecosystem tools:
 
-![Image of all ecosystem logos](https://vuetifyjs.b-cdn.net/docs/images/blog/state-of-the-union-2024/ecosystem.png "Ecosystem logos")
+![Image of all ecosystem logos](https://cdn.vuetifyjs.com/docs/images/blog/state-of-the-union-2024/ecosystem.png "Ecosystem logos")
 
 - [**Vuetify One**](/blog/state-of-the-union-2024/?one=subscribe) (January 2024) unified our tools for authentication and state management across the entire Vuetify ecosystem.
 - [**Vuetify Bin**](https://bin.vuetifyjs.com/) (March 2024) was launched as a simple and easy pastebin alternative.
@@ -87,7 +87,7 @@ Kael is a Senior Developer who has been with Vuetify since the beginning. He has
 
 Our user base continues to grow, with Vuetify 3 usage officially surpassing Vuetify 2. The demand for the new features and improved performance has been immense, and it’s been amazing to watch our community evolve. The team remains as dedicated as ever to bringing you the best possible UI framework.
 
-![Graph showing weekly download statistics for Vuetify 0, 1, 2 and 3](https://vuetifyjs.b-cdn.net/docs/images/blog/state-of-the-union-2024/downloads.png "Vuetify download statistics")
+![Graph showing weekly download statistics for Vuetify 0, 1, 2 and 3](https://cdn.vuetifyjs.com/docs/images/blog/state-of-the-union-2024/downloads.png "Vuetify download statistics")
 
 ### Ongoing Success 📈
 

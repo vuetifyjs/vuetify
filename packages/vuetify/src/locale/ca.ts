@@ -20,6 +20,9 @@ export default {
       activateNone: 'Premi per treure la ordenació.',
       activateDescending: 'Premi per ordenar descendent.',
       activateAscending: 'Premi per ordenar ascendent.',
+      selectRow: 'Seleccionar fila',
+      selectAll: 'Seleccionar tot',
+      selectGroup: 'Seleccionar grup',
     },
     sortBy: 'Ordenat per',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'fins a',
+  },
+  monthPicker: {
+    title: 'Selecciona mes',
+    itemsSelected: '{0} seleccionats',
+    header: 'Introdueix el mes',
+    range: {
+      title: 'Introdueix els mesos',
+    },
+    ariaLabel: {
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectYear: 'Selecciona any',
+      currentMonth: 'Mes actual, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seleccionats',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} més',
     today: 'Avui',
   },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
+  },
   input: {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',
@@ -91,6 +112,7 @@ export default {
     hour: 'Hora',
     minute: 'Minuts',
     second: 'Segons',
+    notAllowed: 'El valor no està permès',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'El caràcter {0} no està permès',
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
+  },
+  command: {
+    search: 'Escriu una ordre o cerca...',
   },
   hotkey: {
     then: 'després',

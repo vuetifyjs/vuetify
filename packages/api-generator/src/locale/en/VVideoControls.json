@@ -1,10 +1,12 @@
 {
+  "description": "Subcomponent for `v-video` used to display a video player controls.",
   "props": {
     "color": "General color applied to icons and sliders.",
     "backgroundColor": "Container background color.",
     "trackColor": "Passed to the main slider `color` prop.",
     "playing": "Applies correct icon of the default play button.",
     "hidePlay": "Hides default play button.",
+    "hideProgressBar": "Hides default progress bar.",
     "hideVolume": "Hides default volume control.",
     "hideFullscreen": "Hides default fullscreen button.",
     "fullscreen": "Applies correct icon on the default fullscreen button.",
@@ -16,5 +18,15 @@
     "duration": "Total duration of the video used to calculate displayed time.",
     "volume": "Volume value passed to the underlying control and slots.",
     "volumeProps": "Props passed down to the VVideoVolume component."
+  },
+  "events": {
+    "update:playing": "Emitted when the playing state changes.",
+    "update:progress": "Emitted when the playback progress changes.",
+    "update:volume": "Emitted when the volume value changes.",
+    "skip": "Emitted when a skip action is triggered.",
+    "click:fullscreen": "Emitted when the fullscreen button is clicked."
+  },
+  "exposed": {
+    "toggleMuted": "Toggles the muted state of the video."
   }
 }

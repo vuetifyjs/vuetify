@@ -12,7 +12,7 @@
 
   const defaults = ref({
     global: {
-      elevation: 10,
+      elevation: 3,
     },
     VCard: {
       color: 'secondary',
@@ -25,7 +25,7 @@
     data: () => ({
       defaults: {
         global: {
-          elevation: 10,
+          elevation: 3,
         },
         VCard: {
           color: 'secondary',

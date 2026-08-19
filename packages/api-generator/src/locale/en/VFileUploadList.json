@@ -1,0 +1,7 @@
+{
+  "description": "Subcomponent of `v-file-upload` that displays the list of currently selected files.",
+  "props": {
+    "files": "An array of File objects to display in the list. When used inside a VFileUpload, this is provided automatically via injection.",
+    "showSize": "Shows the size of each file."
+  }
+}

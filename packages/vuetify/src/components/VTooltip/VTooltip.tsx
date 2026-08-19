@@ -6,6 +6,7 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { useColor } from '@/composables/color'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
@@ -22,6 +23,7 @@ export const makeVTooltipProps = propsFactory({
   id: String,
   interactive: Boolean,
   text: String,
+  color: String,
 
   ...omit(makeVOverlayProps({
     closeOnBack: false,
@@ -56,6 +58,10 @@ export const VTooltip = genericComponent<OverlaySlots>()({
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
+
+    const { colorClasses, colorStyles } = useColor(() => ({
+      background: props.color,
+    }))
 
     const uid = useId()
     const id = toRef(() => props.id || `v-tooltip-${uid}`)
@@ -100,9 +106,19 @@ export const VTooltip = genericComponent<OverlaySlots>()({
             { 'v-tooltip--interactive': props.interactive },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            props.style,
+          ]}
           id={ id.value }
           { ...overlayProps }
+          contentClass={[
+            colorClasses.value,
+            props.contentClass,
+          ]}
+          contentProps={ mergeProps(
+            { style: [colorStyles.value] },
+            props.contentProps,
+          )}
           v-model={ isActive.value }
           transition={ transition.value }
           absolute

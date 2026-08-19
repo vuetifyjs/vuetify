@@ -17,33 +17,45 @@ import {
   darken,
   deprecate,
   getCurrentInstance,
-  getForeground,
   getLuma,
+  hasLightForeground,
   IN_BROWSER,
+  isElement,
+  isNumber,
+  isObject,
+  isString,
   lighten,
   mergeDeep,
   parseColor,
+  PREFERS_REDUCED_MOTION,
   propsFactory,
   RGBtoHex,
   SUPPORTS_MATCH_MEDIA,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { Color } from '@/util'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
+
+export interface ThemeTransitionOptions {
+  origin?: string
+  duration?: string
+}
 
 export type ThemeOptions = false | {
   cspNonce?: string
   defaultTheme?: 'light' | 'dark' | 'system' | string & {}
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
+  transition?: boolean | ThemeTransitionOptions
   stylesheetId?: string
   scope?: string
-  unimportant?: boolean
-  layers?: boolean
+  utilities?: boolean
 }
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
@@ -54,12 +66,11 @@ interface InternalThemeOptions {
   prefix: string
   variations: false | VariationsOptions
   themes: Record<string, InternalThemeDefinition>
+  transition: boolean | ThemeTransitionOptions
   stylesheetId: string
   scope?: string
   scoped: boolean
-  unimportant: boolean
   utilities: boolean
-  layers?: boolean
 }
 
 interface VariationsOptions {
@@ -75,35 +86,36 @@ interface InternalThemeDefinition {
 }
 
 export interface Colors extends BaseColors, OnColors {
-  [key: string]: string
+  [key: string]: Color
 }
 
 interface BaseColors {
-  background: string
-  surface: string
-  primary: string
-  secondary: string
-  success: string
-  warning: string
-  error: string
-  info: string
+  background: Color
+  surface: Color
+  primary: Color
+  secondary: Color
+  success: Color
+  warning: Color
+  error: Color
+  info: Color
 }
 
 interface OnColors {
-  'on-background': string
-  'on-surface': string
-  'on-primary': string
-  'on-secondary': string
-  'on-success': string
-  'on-warning': string
-  'on-error': string
-  'on-info': string
+  'on-background': Color
+  'on-surface': Color
+  'on-primary': Color
+  'on-secondary': Color
+  'on-success': Color
+  'on-warning': Color
+  'on-error': Color
+  'on-info': Color
 }
 
 export interface ThemeInstance {
-  change: (themeName: string) => void
-  cycle: (themeArray?: string[]) => void
-  toggle: (themeArray?: [string, string]) => void
+  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  setTransitionOrigin: (e: PointerEvent | Element | null) => void
 
   readonly isDisabled: boolean
   readonly isSystem: Readonly<Ref<boolean>>
@@ -131,7 +143,7 @@ export const makeThemeProps = propsFactory({
 
 function genDefaults () {
   return {
-    defaultTheme: 'light',
+    defaultTheme: 'system',
     prefix: 'v-',
     variations: { colors: [], lighten: 0, darken: 0 },
     themes: {
@@ -156,6 +168,7 @@ function genDefaults () {
         variables: {
           'border-color': '#000000',
           'border-opacity': 0.12,
+          'shadow-color': '#000000',
           'high-emphasis-opacity': 0.87,
           'medium-emphasis-opacity': 0.60,
           'disabled-opacity': 0.38,
@@ -170,6 +183,11 @@ function genDefaults () {
           'theme-on-kbd': '#000000',
           'theme-code': '#F5F5F5',
           'theme-on-code': '#000000',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
+          'elevation-overlay-color': 'black',
+          'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '8%',
         },
       },
       dark: {
@@ -193,6 +211,7 @@ function genDefaults () {
         variables: {
           'border-color': '#FFFFFF',
           'border-opacity': 0.12,
+          'shadow-color': '#000000',
           'high-emphasis-opacity': 1,
           'medium-emphasis-opacity': 0.70,
           'disabled-opacity': 0.50,
@@ -207,13 +226,18 @@ function genDefaults () {
           'theme-on-kbd': '#FFFFFF',
           'theme-code': '#343434',
           'theme-on-code': '#CCCCCC',
+          'theme-on-dark': '#FFF',
+          'theme-on-light': '#000',
+          'elevation-overlay-color': 'white',
+          'elevation-overlay-opacity-step': '2%',
+          'highlight-opacity': '20%',
         },
       },
     },
     stylesheetId: 'vuetify-theme-stylesheet',
     scoped: false,
-    unimportant: false,
     utilities: true,
+    transition: false,
   }
 }
 
@@ -222,18 +246,7 @@ function parseThemeOptions (options: ThemeOptions = genDefaults()): InternalThem
 
   if (!options) return { ...defaults, isDisabled: true } as any
 
-  const themes: Record<string, InternalThemeDefinition> = {}
-  for (const [key, theme] of Object.entries(options.themes ?? {})) {
-    const defaultTheme = theme.dark || key === 'dark'
-      ? defaults.themes?.dark
-      : defaults.themes?.light
-    themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition
-  }
-
-  return mergeDeep(
-    defaults,
-    { ...options, themes },
-  ) as InternalThemeOptions
+  return mergeDeep(defaults, options) as InternalThemeOptions
 }
 
 function createCssClass (lines: string[], selector: string, content: string[], scope?: string) {
@@ -251,22 +264,22 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
     const rgb = parseColor(value)
-    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
+    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (isNumber(rgb.a) ? `,${rgb.a}` : ''))
     if (!key.startsWith('on-')) {
       variables.push(`--${prefix}theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
   }
 
   for (const [key, value] of Object.entries(theme.variables)) {
-    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    const color = isString(value) && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (isNumber(color.a) ? `, ${color.a}` : '') : undefined
     variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 
   return variables
 }
 
-function genVariation (name: string, color: string, variations: VariationsOptions | false) {
+function genVariation (name: string, color: Color, variations: VariationsOptions | false) {
   const object: Record<string, string> = {}
   if (variations) {
     for (const variation of (['lighten', 'darken'] as const)) {
@@ -296,7 +309,7 @@ function genVariations (colors: InternalThemeDefinition['colors'], variations: V
   return variationColors
 }
 
-function genOnColors (colors: InternalThemeDefinition['colors']) {
+function genOnColors (colors: InternalThemeDefinition['colors'], variables: InternalThemeDefinition['variables']) {
   const onColors = {} as InternalThemeDefinition['colors']
 
   for (const color of Object.keys(colors)) {
@@ -305,7 +318,9 @@ function genOnColors (colors: InternalThemeDefinition['colors']) {
     const onColor = `on-${color}` as keyof OnColors
     const colorVal = parseColor(colors[color])
 
-    onColors[onColor] = getForeground(colorVal)
+    onColors[onColor] = hasLightForeground(colorVal)
+      ? variables['theme-on-dark']
+      : variables['theme-on-light']
   }
 
   return onColors
@@ -364,16 +379,22 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   const computedThemes = computed(() => {
     const acc: Record<string, InternalThemeDefinition> = {}
     for (const [name, original] of Object.entries(themes.value)) {
+      const defaultTheme = original.dark || name === 'dark'
+        ? themes.value.dark
+        : themes.value.light
+
+      const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
+
       const colors = {
-        ...original.colors,
-        ...genVariations(original.colors, parsedOptions.variations),
+        ...merged.colors,
+        ...genVariations(merged.colors, parsedOptions.variations),
       }
 
       acc[name] = {
-        ...original,
+        ...merged,
         colors: {
           ...colors,
-          ...genOnColors(colors),
+          ...genOnColors(colors, merged.variables),
         },
       }
     }
@@ -386,21 +407,22 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const styles = computed(() => {
     const lines: string[] = []
-    const important = parsedOptions.unimportant ? '' : ' !important'
     const scoped = parsedOptions.scoped ? parsedOptions.prefix : ''
 
-    if (current.value?.dark) {
-      createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
-    }
+    lines.push('@layer theme-base {\n')
+
+    createCssClass(lines, ':root', [`color-scheme: ${current.value?.dark ? 'dark' : 'light'}`], parsedOptions.scope)
 
     createCssClass(lines, ':root', genCssVariables(current.value, parsedOptions.prefix), parsedOptions.scope)
 
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
       createCssClass(lines, `.${parsedOptions.prefix}theme--${themeName}`, [
-        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'light'}`,
         ...genCssVariables(theme, parsedOptions.prefix),
       ], parsedOptions.scope)
     }
+
+    lines.push('}\n')
 
     if (parsedOptions.utilities) {
       const bgLines: string[] = []
@@ -409,41 +431,29 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
       for (const key of colors) {
         if (key.startsWith('on-')) {
-          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
         } else {
           createCssClass(bgLines, `.${scoped}bg-${key}`, [
             `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
-            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`,
-            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))${important}`,
+            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))`,
+            `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))`,
           ], parsedOptions.scope)
-          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))${important}`], parsedOptions.scope)
+          createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
           createCssClass(fgLines, `.${scoped}border-${key}`, [`--${parsedOptions.prefix}border-color: var(--${parsedOptions.prefix}theme-${key})`], parsedOptions.scope)
         }
       }
 
-      if (parsedOptions.layers) {
-        lines.push(
-          '@layer background {\n',
-          ...bgLines.map(v => `  ${v}`),
-          '}\n',
-          '@layer foreground {\n',
-          ...fgLines.map(v => `  ${v}`),
-          '}\n',
-        )
-      } else {
-        lines.push(...bgLines, ...fgLines)
-      }
+      lines.push(
+        '@layer theme-background {\n',
+        ...bgLines.map(v => `  ${v}`),
+        '}\n',
+        '@layer theme-foreground {\n',
+        ...fgLines.map(v => `  ${v}`),
+        '}\n',
+      )
     }
 
-    let final = lines.map((str, i) => (i === 0 ? str : `    ${str}`)).join('')
-    if (parsedOptions.layers) {
-      final =
-        '@layer vuetify.theme {\n' +
-          lines.map(v => `  ${v}`).join('') +
-        '\n}'
-    }
-
-    return final
+    return '@layer vuetify-utilities {\n' + lines.map(v => `  ${v}`).join('') + '\n}'
   })
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
@@ -478,6 +488,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
             textContent: styles.value,
             id: parsedOptions.stylesheetId,
             nonce: parsedOptions.cspNonce || false as never,
+            tagPosition: 'bodyOpen' as const,
           }],
         }
       }
@@ -508,24 +519,97 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     }
   }
 
-  function change (themeName: string) {
-    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
-      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+  let _transitionOrigin: string | null
+  function setTransitionOrigin (e: PointerEvent | Element | null) {
+    if (!e) {
+      _transitionOrigin = null
       return
     }
 
-    name.value = themeName
+    let x: number
+    let y: number
+
+    if (isElement(e)) {
+      const box = new Box(e)
+      x = box.left + box.width / 2
+      y = box.top + box.height / 2
+    } else {
+      x = e.clientX
+      y = e.clientY
+    }
+
+    const originX = Math.min(98.9, 100 * x / window.innerWidth) // clip to avoid glitches
+    const originY = 100 * y / window.innerHeight
+    _transitionOrigin = `${originX.toFixed(2)}% ${originY.toFixed(2)}%`
   }
 
-  function cycle (themeArray: string[] = themeNames.value) {
+  function resolveTransitionOptions (
+    transition?: boolean | ThemeTransitionOptions
+  ): ThemeTransitionOptions | false {
+    const opt = transition ?? parsedOptions.transition
+    if (!opt && !_transitionOrigin) return false
+    const global = isObject(parsedOptions.transition) ? parsedOptions.transition : {}
+    const local = isObject(transition) ? transition : {}
+    return {
+      origin: local.origin ?? _transitionOrigin ?? global.origin,
+      duration: local.duration ?? global.duration,
+    }
+  }
+
+  function withPageTransition (callback: () => void, options: ThemeTransitionOptions): Promise<void> {
+    if (!IN_BROWSER || !document.startViewTransition || PREFERS_REDUCED_MOTION()) {
+      callback()
+      return Promise.resolve()
+    }
+
+    const origin = options.origin ?? '50% 0%'
+    const duration = options.duration ?? '500ms'
+
+    const style = document.createElement('style')
+    style.textContent =
+      `html:active-view-transition-type(vuetify-theme)::view-transition-old(root) { animation: none; }` +
+      `html:active-view-transition-type(vuetify-theme)::view-transition-new(root) { animation: v-circle-in ${duration} ease-in-out; }` +
+      `@keyframes v-circle-in {` +
+      `  from { clip-path: circle(0% at ${origin}); }` +
+      `  to { clip-path: circle(150% at ${origin}); }` +
+      `}`
+    document.head.appendChild(style)
+
+    const transition = document.startViewTransition({ update: () => callback(), types: ['vuetify-theme'] })
+    transition.finished.then(() => {
+      _transitionOrigin = null
+      style.remove()
+    })
+
+    return transition.updateCallbackDone
+  }
+
+  function change (themeName: string, transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
+      consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
+      return Promise.resolve()
+    }
+
+    const apply = () => { name.value = themeName }
+    const transitionOptions = resolveTransitionOptions(transition)
+
+    if (transitionOptions) {
+      return withPageTransition(apply, transitionOptions)
+    }
+
+    apply()
+    return Promise.resolve()
+  }
+
+  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     const currentIndex = themeArray.indexOf(name.value)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
 
-    change(themeArray[nextIndex])
+    return change(themeArray[nextIndex], transition)
   }
 
-  function toggle (themeArray: [string, string] = ['light', 'dark']) {
-    cycle(themeArray)
+  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    return cycle(themeArray, transition)
   }
 
   const globalName = new Proxy(name, {
@@ -545,6 +629,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     change,
     cycle,
     toggle,
+    setTransitionOrigin,
     isDisabled: parsedOptions.isDisabled,
     isSystem,
     name,
@@ -569,7 +654,7 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = toRef(() => props.theme ?? theme.name.value)
-  const current = toRef(() => theme.themes.value[name.value])
+  const current = toRef(() => theme.computedThemes.value[name.value])
 
   const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 

@@ -23,7 +23,7 @@ describe('VInfiniteScroll', () => {
 
     await scroll({ top: container.scrollHeight }, container)
     expect(screen.queryAllByCSS('.v-infinite-scroll .v-progress-circular')).toHaveLength(1)
-    expect(onLoad).toHaveBeenCalledOnce()
+    expect(onLoad).toHaveBeenCalledTimes(1)
   })
 
   it('should work when using start side', async () => {
@@ -42,7 +42,7 @@ describe('VInfiniteScroll', () => {
 
     await scroll({ top: 0 }, container)
     expect(screen.queryAllByCSS('.v-infinite-scroll .v-progress-circular')).toHaveLength(1)
-    expect(onLoad).toHaveBeenCalledOnce()
+    expect(onLoad).toHaveBeenCalledTimes(1)
   })
 
   it('should work when using both sides', async () => {
@@ -83,7 +83,7 @@ describe('VInfiniteScroll', () => {
 
     await scroll({ left: container.scrollWidth }, container)
     expect(screen.queryAllByCSS('.v-infinite-scroll .v-progress-circular')).toHaveLength(1)
-    expect(onLoad).toHaveBeenCalledOnce()
+    expect(onLoad).toHaveBeenCalledTimes(1)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/17358

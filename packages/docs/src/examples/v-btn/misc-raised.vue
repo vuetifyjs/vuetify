@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    align="center"
-    justify="space-around"
-  >
+  <v-row class="align-center justify-space-around">
     <v-btn>Normal</v-btn>
     <v-btn color="primary">
       Primary

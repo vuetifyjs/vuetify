@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="mx-auto"
-    elevation="10"
+    elevation="3"
     max-width="300"
     rounded="xl"
   >

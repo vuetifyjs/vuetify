@@ -1,4 +1,5 @@
 @use '../../styles/settings';
+@use '../../styles/tools';
 
 // VSheet
 $sheet-background: rgb(var(--v-theme-surface)) !default;
@@ -7,7 +8,7 @@ $sheet-border-radius: 0 !default;
 $sheet-border-style: settings.$border-style-root !default;
 $sheet-border-thin-width: thin !default;
 $sheet-border-width: 0 !default;
-$sheet-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$sheet-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed relative sticky !default;
 $sheet-rounded-border-radius: settings.$border-radius-root !default;

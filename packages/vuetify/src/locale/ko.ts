@@ -20,6 +20,9 @@ export default {
       activateNone: '정렬을 취소하려면 활성화하세요.',
       activateDescending: '내림차순 정렬을 위해 활성화하세요.',
       activateAscending: '오름차순 정렬을 위해 활성화하세요.',
+      selectRow: '행 선택',
+      selectAll: '모두 선택',
+      selectGroup: '그룹 선택',
     },
     sortBy: '정렬 기준',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '부터',
+  },
+  monthPicker: {
+    title: '월 선택',
+    itemsSelected: '{0}개 선택됨',
+    header: '월 입력',
+    range: {
+      title: '월 입력',
+    },
+    ariaLabel: {
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectYear: '연도 선택',
+      currentMonth: '이번 달, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0}개 선택됨',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} 더보기',
     today: '오늘',
   },
+  heatmap: {
+    less: '적음',
+    more: '많음',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
@@ -91,6 +112,7 @@ export default {
     hour: '시간',
     minute: '분',
     second: '초',
+    notAllowed: '값이 허용되지 않습니다',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: '{0} 문자는 허용되지 않습니다',
     notEmpty: '최소 하나의 값을 선택해주세요',
     pattern: '형식이 유효하지 않습니다',
+  },
+  command: {
+    search: '명령을 입력하거나 검색하세요...',
   },
   hotkey: {
     then: '그 다음',

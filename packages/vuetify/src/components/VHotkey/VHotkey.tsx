@@ -38,7 +38,7 @@ import { VKbd } from '@/components/VKbd'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotkey-parsing'
+import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -46,10 +46,11 @@ import { useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
+import { genericComponent, isString, mergeDeep, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { KeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import type { IconValue } from '@/composables/icons'
 
 // Display mode types for different visual representations
@@ -93,7 +94,7 @@ function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMa
   let value: string | IconValue = keyCfg[mode] ?? keyCfg.text
 
   // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
-  if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+  if (mode === 'text' && isString(value) && value.startsWith('$') && !value.startsWith('$vuetify.')) {
     value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
   }
 
@@ -151,6 +152,9 @@ export const hotkeyMap: KeyMapConfig = {
   '-': {
     default: { text: '-' },
   },
+  '+': {
+    default: { text: '+' },
+  },
 }
 
 export const makeVHotkeyProps = propsFactory({
@@ -188,17 +192,17 @@ export const makeVHotkeyProps = propsFactory({
   color: String,
 }, 'VHotkey')
 
-const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For + separators
-const SLASH_DELINEATOR = Symbol('VHotkey:SLASH_DELINEATOR') // For / separators
+const AND_DELINEATOR = Symbol('VHotkey:AND_DELINEATOR') // For +_ separators
+const OR_DELINEATOR = Symbol('VHotkey:OR_DELINEATOR') // For / separators
 const THEN_DELINEATOR = Symbol('VHotkey:THEN_DELINEATOR') // For - separators
-type Delineator = typeof AND_DELINEATOR | typeof SLASH_DELINEATOR | typeof THEN_DELINEATOR
+type Delineator = typeof AND_DELINEATOR | typeof OR_DELINEATOR | typeof THEN_DELINEATOR
 
 function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string {
   const lowerKey = key.toLowerCase()
 
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], 'text', isMac)
-    return typeof result[1] === 'string' ? result[1] : String(result[1])
+    return isString(result[1]) ? result[1] : String(result[1])
   }
 
   return key.toUpperCase()
@@ -210,7 +214,7 @@ function applyDisplayModeToKey (keyMap: KeyMapConfig, mode: DisplayMode, key: st
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], mode, isMac)
 
-    if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
+    if (result[0] === 'text' && isString(result[1]) && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
       return ['text', result[1].replace('$', '').toUpperCase(), key]
     }
 
@@ -230,7 +234,7 @@ export const VHotkey = genericComponent()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
     const { borderClasses } = useBorder(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { elevationClasses } = useElevation(props)
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(() => ({
@@ -249,28 +253,33 @@ export const VHotkey = genericComponent()({
 
       // Split by spaces to handle multiple key combinations
       // Example: "ctrl+k meta+p" -> ["ctrl+k", "meta+p"]
-      return props.keys.split(' ').map(combination => {
+      return props.keys.split(/\b \b/).map(combination => {
         const result: Array<Key | Delineator> = []
 
-        const sequenceGroups = splitKeySequence(combination)
-        for (let i = 0; i < sequenceGroups.length; i++) {
-          const group = sequenceGroups[i]
-
-          // Add THEN delineator between sequence groups
-          if (i > 0) result.push(THEN_DELINEATOR)
-
-          const { keys: keyParts, separators } = splitKeyCombination(group)
-          for (let j = 0; j < keyParts.length; j++) {
-            const part = keyParts[j]
-
-            // Add AND delineator between keys
-            if (j > 0) {
-              result.push(separators[j - 1] === '/' ? SLASH_DELINEATOR : AND_DELINEATOR)
+        function visit (node: KeyCombination) {
+          if (isString(node)) {
+            if (node !== '') {
+              result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, node, isMac.value))
             }
-            result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, part, isMac.value))
+          } else {
+            for (let i = 0; i < node.parts.length; i++) {
+              if (i > 0) {
+                if (node.type === 'sequence') {
+                  result.push(THEN_DELINEATOR)
+                } else if (node.type === 'alternate') {
+                  result.push(OR_DELINEATOR)
+                } else if (node.type === 'combo') {
+                  result.push(AND_DELINEATOR)
+                } else {
+                  void (node satisfies never)
+                }
+              }
+              visit(node.parts[i])
+            }
           }
         }
 
+        visit(parseKeyCombination(combination))
         return result
       })
     })
@@ -292,7 +301,7 @@ export const VHotkey = genericComponent()({
           } else {
             if (key === AND_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.plus'))
-            } else if (key === SLASH_DELINEATOR) {
+            } else if (key === OR_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.or'))
             } else if (key === THEN_DELINEATOR) {
               readableParts.push(t('$vuetify.hotkey.then'))
@@ -336,7 +345,7 @@ export const VHotkey = genericComponent()({
         <KeyComponent
           key={ keyIndex }
           class={ keyClasses }
-          style={ isContained ? undefined : colorStyles.value }
+          style={ isContained ? undefined : [colorStyles.value, roundedStyles.value] }
           aria-hidden="true"
           title={ getKeyTooltip(key) }
         >
@@ -360,7 +369,7 @@ export const VHotkey = genericComponent()({
           aria-hidden="true"
         >
           { key === AND_DELINEATOR ? '+'
-          : key === SLASH_DELINEATOR ? '/'
+          : key === OR_DELINEATOR ? t('$vuetify.hotkey.or')
           : t('$vuetify.hotkey.then')}
         </span>
       )
@@ -420,7 +429,7 @@ export const VHotkey = genericComponent()({
                 elevationClasses.value,
                 colorClasses.value,
               ]}
-              style={ colorStyles.value }
+              style={[colorStyles.value, roundedStyles.value]}
               aria-hidden="true"
             >
               { content }

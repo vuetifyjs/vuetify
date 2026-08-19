@@ -20,6 +20,9 @@ export default {
       activateNone: 'چالاککردن بۆ لابردنی ڕیزکردن.',
       activateDescending: 'چالاککردن بۆ ڕیزکردنی سەربەرەوخوار.',
       activateAscending: 'چالاککردن بۆ ڕیزکردنی سەر بەرەو ژوور.',
+      selectRow: 'ڕیز هەڵبژێرە',
+      selectAll: 'هەمووی هەڵبژێرە',
+      selectGroup: 'گرووپ هەڵبژێرە',
     },
     sortBy: 'ڕیزکردن بەپێی',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'بۆ',
+  },
+  monthPicker: {
+    title: 'مانگ هەڵبژێرە',
+    itemsSelected: '{0} هەڵبژێردراوە',
+    header: 'مانگ بنووسە',
+    range: {
+      title: 'مانگەکان بنووسە',
+    },
+    ariaLabel: {
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      currentMonth: 'مانگی ئێستا، {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} زیاتر',
     today: 'ئەمڕو',
   },
+  heatmap: {
+    less: 'کەمتر',
+    more: 'زیاتر',
+  },
   input: {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
@@ -91,6 +112,7 @@ export default {
     hour: 'کاتژمێر',
     minute: 'خولەک',
     second: 'چرکە',
+    notAllowed: 'بەهاکە ڕێگەپێدراو نییە',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'پیتەکەی {0} ڕێپێدراو نیە',
     notEmpty: 'تکایە بەلایەنی کەم یەک هەڵبژێرە',
     pattern: 'فۆرماتەکە نادروستە',
+  },
+  command: {
+    search: 'فرمان بنووسە یان بگەڕە...',
   },
   hotkey: {
     then: 'پاشان',

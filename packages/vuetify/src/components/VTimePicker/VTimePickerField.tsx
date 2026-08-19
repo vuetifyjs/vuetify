@@ -18,13 +18,13 @@ export const makeVTimePickerFieldProps = propsFactory({
   disabled: Boolean,
   label: String,
   modelValue: String as PropType<string | number | null>,
+  error: String,
+  showHint: Boolean,
   readonly: Boolean,
 }, 'VTimePickerField')
 
 export const VTimePickerField = genericComponent()({
   name: 'VTimePickerField',
-
-  inheritAttrs: false,
 
   props: makeVTimePickerFieldProps(),
 
@@ -32,7 +32,7 @@ export const VTimePickerField = genericComponent()({
     'update:modelValue': (v: string | null) => true,
   },
 
-  setup (props, { emit, attrs }) {
+  setup (props, { emit }) {
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
 
     const vTextInputRef = ref<VTextField>()
@@ -50,31 +50,33 @@ export const VTimePickerField = genericComponent()({
 
     useRender(() => {
       return (
-        <div>
-          <VTextField
-            ref={ vTextInputRef }
-            _as="VTimePickerField"
-            autocomplete="off"
-            class={[
-              'v-time-picker-controls__time__field',
-              { 'v-time-picker-controls__time__field--active': props.active },
-              props.active ? textColorClasses.value : [],
-            ]}
-            style={ props.active ? textColorStyles.value : [] }
-            disabled={ props.disabled }
-            variant="solo-filled"
-            inputmode="numeric"
-            hideDetails
-            flat
-            modelValue={ props.modelValue ?? (isFocused.value ? '' : '--') }
-            onUpdate:modelValue={ v => emit('update:modelValue', v) }
-            onKeydown={ onKeydown }
-            onFocus={ () => isFocused.value = true }
-            onBlur={ () => isFocused.value = false }
-            { ...attrs }
-          />
-          <div class="v-time-picker-controls__field-label">{ props.label }</div>
-        </div>
+        <VTextField
+          ref={ vTextInputRef }
+          _as="VTimePickerField"
+          autocomplete="off"
+          class={[
+            'v-time-picker-controls__time__field',
+            { 'v-time-picker-controls__time__field--active': props.active },
+            props.active ? textColorClasses.value : [],
+          ]}
+          style={ props.active ? textColorStyles.value : [] }
+          disabled={ props.disabled }
+          variant="solo-filled"
+          inputmode="numeric"
+          hideDetails="auto"
+          aria-label={ props.label }
+          aria-invalid={ !!props.error }
+          aria-errormessage={ props.error }
+          error={ !!props.error }
+          hint={ props.showHint ? props.label : undefined }
+          persistentHint
+          flat
+          modelValue={ props.modelValue ?? (isFocused.value ? '' : '--') }
+          onUpdate:modelValue={ v => emit('update:modelValue', v) }
+          onKeydown={ onKeydown }
+          onFocus={ () => isFocused.value = true }
+          onBlur={ () => isFocused.value = false }
+        />
       )
     })
 

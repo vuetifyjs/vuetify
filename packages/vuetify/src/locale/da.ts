@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiver for at fjerne sortering.',
       activateDescending: 'Aktiver for at sortere faldende.',
       activateAscending: 'Aktiver for at sortere stigende.',
+      selectRow: 'Vælg række',
+      selectAll: 'Vælg alle',
+      selectGroup: 'Vælg gruppe',
     },
     sortBy: 'Sorter efter',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'til',
+  },
+  monthPicker: {
+    title: 'Vælg måned',
+    itemsSelected: '{0} valgt',
+    header: 'Indtast måned',
+    range: {
+      title: 'Indtast måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Næste år',
+      selectYear: 'Vælg år',
+      currentMonth: 'Denne måned, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valgt',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} mere',
     today: 'I dag',
   },
+  heatmap: {
+    less: 'Mindre',
+    more: 'Mere',
+  },
   input: {
     clear: 'Ryd {0}',
     prependAction: '{0} foranstillet handling',
@@ -91,6 +112,7 @@ export default {
     hour: 'Time',
     minute: 'Minutter',
     second: 'Sekunder',
+    notAllowed: 'Værdien er ikke tilladt',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'Tegnet {0} er ikke tilladt',
     notEmpty: 'Vælg venligst mindst én værdi',
     pattern: 'Ugyldigt format',
+  },
+  command: {
+    search: 'Skriv en kommando eller søg...',
   },
   hotkey: {
     then: 'derefter',

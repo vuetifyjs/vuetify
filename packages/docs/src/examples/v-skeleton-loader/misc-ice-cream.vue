@@ -59,7 +59,7 @@
             <v-icon color="disabled"></v-icon>
           </template>
 
-          <span class="text-subtitle-1">
+          <span class="text-body-large">
             Homemade Dulce de Leche Ice Cream with Chocolate Chips
           </span>
         </v-chip>

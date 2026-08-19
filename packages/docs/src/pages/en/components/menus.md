@@ -134,8 +134,20 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <ExamplesExample file="v-menu/misc-popover" />
 
-#### Use In components
+#### Gliding navigation
 
-Menus can be placed within almost any component.
+A single `v-menu` can be reused across multiple activators to create a gliding navigation bar. As the user hovers between buttons, the menu smoothly transitions to the new activator using a CSS transition on its position.
 
-<ExamplesExample file="v-menu/misc-use-in-components" />
+<ExamplesExample file="v-menu/misc-gliding-nav" />
+
+#### In text fields
+
+This is an example of image picker attached to a `v-text-field`.
+
+<ExamplesExample file="v-menu/misc-use-in-text-field" />
+
+#### File context menu
+
+You are not limited to a single card. Here is a context menu separating common actions into separate section.
+
+<ExamplesExample file="v-menu/misc-file-context" />

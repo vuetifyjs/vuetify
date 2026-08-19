@@ -31,8 +31,8 @@ import {
   focusableChildren,
   focusChild,
   genericComponent,
+  getActiveElement,
   getNextElement,
-  isClickInsideElement,
   omit,
   propsFactory,
   useRender,
@@ -46,6 +46,10 @@ export const makeVMenuProps = propsFactory({
   // disableKeys: Boolean,
   id: String,
   submenu: Boolean,
+  openOnArrow: {
+    type: Boolean,
+    default: true,
+  },
 
   ...omit(makeVOverlayProps({
     captureFocus: true,
@@ -80,51 +84,60 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = shallowRef(new Set<string>())
+    const openChildren = shallowRef(new Map<string, () => void>())
     provide(VMenuSymbol, {
-      register () {
-        openChildren.value.add(uid)
+      register (childUid, close) {
+        // Only one submenu open per level: close any already-open sibling first.
+        for (const [otherUid, closeOther] of [...openChildren.value]) {
+          if (otherUid !== childUid) closeOther()
+        }
+        openChildren.value.set(childUid, close)
       },
-      unregister () {
-        openChildren.value.delete(uid)
+      unregister (childUid) {
+        openChildren.value.delete(childUid)
       },
       closeParents (e) {
+        const clickedOutside = !e || overlay.value?.contentEl?._clickOutside?.lastMousedownWasOutside
+
         setTimeout(() => {
           if (!openChildren.value.size &&
             !props.persistent &&
-            (e == null || (overlay.value?.contentEl && !isClickInsideElement(e, overlay.value.contentEl)))
+            clickedOutside
           ) {
             isActive.value = false
-            parent?.closeParents()
+            parent?.closeParents(e)
           }
         }, 40)
       },
+      rootOpenedByHover: props.submenu && parent
+        ? parent.rootOpenedByHover
+        : () => overlay.value?.openedByHover ?? false,
     })
 
-    onBeforeUnmount(() => parent?.unregister())
+    onBeforeUnmount(() => parent?.unregister(uid))
     onDeactivated(() => isActive.value = false)
 
     watch(isActive, val => {
-      val
-        ? parent?.register()
-        : parent?.unregister()
-    }, { immediate: true })
+      if (val) {
+        parent?.register(uid, () => { isActive.value = false })
+      } else {
+        parent?.unregister(uid)
 
-    function onClickOutside (e: MouseEvent) {
-      parent?.closeParents(e)
-    }
+        // close a submenu branch
+        for (const [, closeChild] of [...openChildren.value]) closeChild()
+      }
+    }, { immediate: true })
 
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
-      if (e.key === 'Tab' || (e.key === 'Enter' && !props.closeOnContentClick)) {
-        if (
-          e.key === 'Enter' &&
-          ((e.target instanceof HTMLTextAreaElement) ||
-          (e.target instanceof HTMLInputElement && !!e.target.closest('form')))
-        ) return
-        if (e.key === 'Enter') e.preventDefault()
-
+      if (e.key === 'Tab') {
+        if (props.submenu && !props.retainFocus) {
+          e.preventDefault()
+          isActive.value = false
+          overlay.value?.activatorEl?.focus()
+          return
+        }
         const nextElement = getNextElement(
           focusableChildren(overlay.value?.contentEl as Element, false),
           e.shiftKey ? 'prev' : 'next',
@@ -132,7 +145,6 @@ export const VMenu = genericComponent<OverlaySlots>()({
         )
         if (!nextElement && !props.retainFocus) {
           isActive.value = false
-          overlay.value?.activatorEl?.focus()
         }
       } else if (props.submenu && e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
         isActive.value = false
@@ -141,21 +153,19 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onActivatorKeydown (e: KeyboardEvent) {
-      if (props.disabled) return
+      if (props.disabled || e.isComposing) return
 
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
-        if (e.key === 'ArrowDown') {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          if (!props.openOnArrow) return
           e.preventDefault()
           e.stopImmediatePropagation()
-          focusChild(el, 'next')
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault()
-          e.stopImmediatePropagation()
-          focusChild(el, 'prev')
+          focusChild(el, e.key === 'ArrowDown' ? 'next' : 'prev')
         } else if (props.submenu) {
           if (e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
             isActive.value = false
+            overlay.value?.activatorEl?.focus()
           } else if (e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')) {
             e.preventDefault()
             focusChild(el, 'first')
@@ -164,11 +174,24 @@ export const VMenu = genericComponent<OverlaySlots>()({
       } else if (
         props.submenu
           ? e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')
-          : ['ArrowDown', 'ArrowUp'].includes(e.key)
+          : props.openOnArrow && ['ArrowDown', 'ArrowUp'].includes(e.key)
       ) {
         isActive.value = true
         e.preventDefault()
-        setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
+        focusContentWhenReady(e)
+      }
+    }
+
+    function focusContentWhenReady (e: KeyboardEvent, attempt = 1) {
+      if (!isActive.value) return
+      const el = overlay.value?.contentEl
+      if (el?.contains(getActiveElement())) return
+      if (el && focusableChildren(el).length) {
+        onActivatorKeydown(e)
+        if (el.contains(getActiveElement())) return
+      }
+      if (attempt <= 10) {
+        requestAnimationFrame(() => focusContentWhenReady(e, attempt + 1))
       }
     }
 
@@ -197,9 +220,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           { ...overlayProps }
           v-model={ isActive.value }
           absolute
+          _submenu={ props.submenu }
           activatorProps={ activatorProps.value }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
-          onClick:outside={ onClickOutside }
           onKeydown={ onKeydown }
           { ...scopeId }
         >

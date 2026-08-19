@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-between" dense>
+    <v-row class="justify-space-between" density="comfortable">
       <v-col cols="12" md="5">
         <v-treeview
           v-model:activated="active"
@@ -24,19 +24,19 @@
 
       <v-col class="d-flex text-center" cols="12" md="7">
         <v-card
-          class="text-h6 justify-center align-center flex-1-1 d-flex"
+          class="text-title-large justify-center align-center flex-1-1 d-flex"
           color="surface-light"
           height="100%"
           flat
           rounded
         >
           <template v-slot:text>
-            <div v-if="!selected" class="text-subtitle-1">Select a User</div>
+            <div v-if="!selected" class="text-body-large">Select a User</div>
 
             <template v-else>
               <v-avatar :image="`https://avataaars.io/${avatar}`" class="mb-2" size="88"></v-avatar>
 
-              <h3 class="text-h5">{{ selected.name }}</h3>
+              <h3 class="text-headline-small my-0">{{ selected.name }}</h3>
 
               <div class="text-medium-emphasis">{{ selected.email }}</div>
 

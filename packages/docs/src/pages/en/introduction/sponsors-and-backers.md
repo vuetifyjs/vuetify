@@ -69,6 +69,14 @@ These sponsors have pledged $250 per month.
 
 <br>
 
+### Silver
+
+These sponsors have pledged $150 per month.
+
+<SponsorSponsors tier="7" />
+
+<br>
+
 ### Service
 
 These sponsors help keep the lights on by providing free services to the Vuetify project.

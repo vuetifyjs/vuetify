@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column ga-2 text-caption pa-4">
+  <div class="d-flex flex-column ga-2 text-body-small pa-4">
     <div class="d-flex align-end bg-surface-variant pa-2 rounded w-25">.w-25</div>
 
     <div class="d-flex align-end bg-surface-variant pa-2 rounded w-33">.w-33</div>

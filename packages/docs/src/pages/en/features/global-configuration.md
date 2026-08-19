@@ -23,7 +23,7 @@ Vuetify allows you to set default prop values globally or per component when set
 
 ## Setup
 
-Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `4` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
+Use the **defaults** property of the Vuetify configuration object to set default prop values. Here we have disabled **ripple** for all components that support it, and set the default **elevation** to `2` and the default **prepend-icon** to `$vuetify` for all `<v-btn>` components.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -35,7 +35,7 @@ export default createVuetify({
       ripple: false,
     },
     VBtn: {
-      elevation: 4,
+      elevation: 2,
       prependIcon: "$vuetify",
     },
   },
@@ -66,11 +66,61 @@ This is used internally by some components already:
 - `<v-list>` has `bg-color="transparent"` when nested within a `<v-navigation-drawer>`
 - Lists, chip groups, expansion panels, tabs, and forms all use this system to propagate certain props to their children, for example `<v-tabs disabled>` will set the default value of `disabled` to `true` for all `<v-tab>` components inside it.
 
+Some components include predefined size and/or variant for internal controls they render, to shield them from global and unscoped defaults. Set those through the nested key:
+
+```js { resource="src/plugins/vuetify.js" }
+createVuetify({
+  defaults: {
+    VSelect: { VChip: { size: 'large' } }, // also VAutocomplete, VCombobox, VFileInput
+    VStepperActions: { VBtn: { variant: 'outlined' } },
+    VConfirmEdit: { VBtn: { variant: 'outlined' } },
+    VDataTableFooter: { VSelect: { variant: 'solo-filled' } },
+    VDataTableHeaders: { VSelect: { variant: 'solo-filled' } }, // mobile sort
+    VFileUploadDropzone: { VBtn: { variant: 'outlined' } },
+    VFileUploadItem: { VBtn: { variant: 'outlined' } },
+    VSpeedDial: { VBtn: { size: 'default' } },
+    VCarousel: { VBtn: { size: 'small' } }, // delimiters
+    VNumberInput: { VBtn: { variant: 'tonal' } }, // increment and decrement
+  },
+})
+```
+
+Buttons addressed by a role name are separate — they read that key and ignore `VBtn`:
+
+- `VPaginationBtn` — `<v-pagination>` and the `<v-data-table>` footer
+- `VStepperActionsPrevBtn`, `VStepperActionsNextBtn` — either stepper action button on its own
+
+A prop written directly in the template still wins over any of this.
+
 [v-defaults-provider](/components/defaults-providers/) can be used to set defaults for components within a specific scope.
 
-## Global class and styles
+## Defaults for menu and dialog content
 
-<DocIntroduced version="3.2.0" />
+Components like `<v-menu>` and `<v-dialog>` open their content in a popup. That content starts from your **global** defaults rather than inheriting from the place in your template where you wrote it, so a menu looks the same no matter where you put it.
+
+To add defaults to that popup content, nest them under the component's own key (`VMenu` or `VDialog`), **not** `VOverlay`:
+
+```js { resource="src/plugins/vuetify.js" }
+createVuetify({
+  defaults: {
+    VSelect: {
+      VMenu: { // not VOverlay
+        VList: { bgColor: 'primary' },
+      },
+    },
+  },
+})
+```
+
+This applies to the components that open a menu or dialog. Everything else follows the normal [contextual defaults](#contextual-defaults) rules:
+
+| Component | How to set defaults for its content |
+| - | - |
+| `<v-menu>`, `<v-select>`, `<v-autocomplete>`, `<v-combobox>`, `<v-speed-dial>` | Nest under the `VMenu` |
+| `<v-dialog>`, `<v-bottom-sheet>` | Nest under the `VDialog` |
+| `<v-overlay>`, `<v-tooltip>`, `<v-snackbar>` | configuration inherited normally |
+
+## Global class and styles
 
 Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
@@ -219,8 +269,6 @@ There are some cases where a default class or style could be unintentionally pas
 :::
 
 ## Using in custom components
-
-<DocIntroduced version="3.2.0" />
 
 Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
 

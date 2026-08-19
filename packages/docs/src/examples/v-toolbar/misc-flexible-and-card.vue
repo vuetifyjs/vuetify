@@ -12,7 +12,7 @@
 
     <v-card
       class="mx-auto mt-n16 mb-4"
-      elevation="4"
+      elevation="2"
       height="200"
       max-width="600"
     >
@@ -36,7 +36,7 @@
       <v-divider></v-divider>
     </v-card>
 
-    <v-footer class="justify-center text-caption" color="surface-variant">
+    <v-footer class="justify-center text-body-small" color="surface-variant">
       {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
     </v-footer>
   </v-card>

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiveer om sortering te verwyder.',
       activateDescending: 'Aktiveer om aflopend te sorteer.',
       activateAscending: 'Aktiveer om oplopend te sorteer.',
+      selectRow: 'Kies ry',
+      selectAll: 'Kies alles',
+      selectGroup: 'Kies groep',
     },
     sortBy: 'Sorteer volgens',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'tot',
+  },
+  monthPicker: {
+    title: 'Kies maand',
+    itemsSelected: '{0} gekies',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maande in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectYear: 'Kies jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} gekies',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak skoon {0}',
     prependAction: '{0} voorafgevoegde aksie',
@@ -91,6 +112,7 @@ export default {
     hour: 'Uur',
     minute: 'Minute',
     second: 'Sekondes',
+    notAllowed: 'Waarde word nie toegelaat nie',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'Die {0} karakter is nie toegelaat nie',
     notEmpty: 'Kies asseblief ten minste een waarde',
     pattern: 'Ongeldige formaat',
+  },
+  command: {
+    search: 'Tik \'n opdrag of soek...',
   },
   hotkey: {
     then: 'dan',

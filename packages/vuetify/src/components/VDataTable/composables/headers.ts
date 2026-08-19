@@ -1,6 +1,6 @@
 // Utilities
 import { capitalize, inject, provide, ref, watchEffect } from 'vue'
-import { consoleError, propsFactory } from '@/util'
+import { consoleError, isString, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
@@ -251,7 +251,7 @@ function convertToInternalHeaders (items: DeepReadonly<DataTableHeader[]>) {
   const internalHeaders: InternalDataTableHeader[] = []
   for (const item of items) {
     const defaultItem = { ...getDefaultItem(item), ...item }
-    const key = defaultItem.key ?? (typeof defaultItem.value === 'string' ? defaultItem.value : null)
+    const key = defaultItem.key ?? (isString(defaultItem.value) ? defaultItem.value : null)
     const value = defaultItem.value ?? key ?? null
     const internalItem: InternalDataTableHeader = {
       ...defaultItem,
@@ -311,6 +311,10 @@ export function createHeaders (
     columns.value = parsed.columns
 
     const flatHeaders = parsed.headers.flat(1)
+
+    sortFunctions.value = {}
+    sortRawFunctions.value = {}
+    filterFunctions.value = {}
 
     for (const header of flatHeaders) {
       if (!header.key) continue

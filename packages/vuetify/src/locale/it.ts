@@ -20,6 +20,9 @@ export default {
       activateNone: `Attiva per rimuovere l'ordinamento.`,
       activateDescending: 'Attiva per ordinare in ordine decrescente.',
       activateAscending: 'Attiva per ordinare in ordine crescente.',
+      selectRow: 'Seleziona riga',
+      selectAll: 'Seleziona tutto',
+      selectGroup: 'Seleziona gruppo',
     },
     sortBy: 'Ordina per',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'a',
+  },
+  monthPicker: {
+    title: 'Seleziona mese',
+    itemsSelected: '{0} selezionato/i',
+    header: 'Inserisci mese',
+    range: {
+      title: 'Inserisci mesi',
+    },
+    ariaLabel: {
+      previousYear: 'Anno precedente',
+      nextYear: 'Anno successivo',
+      selectYear: 'Seleziona anno',
+      currentMonth: 'Mese corrente, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} selezionato/i',
@@ -69,6 +86,10 @@ export default {
     moreEvents: '{0} di più',
     today: 'Oggi',
   },
+  heatmap: {
+    less: 'Meno',
+    more: 'Più',
+  },
   input: {
     clear: 'Cancella {0}',
     prependAction: 'Azione precedente {0}',
@@ -91,6 +112,7 @@ export default {
     hour: 'Ora',
     minute: 'Minuti',
     second: 'Secondi',
+    notAllowed: 'Il valore non è consentito',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'Il carattere {0} non è consentito',
     notEmpty: 'Seleziona almeno un valore',
     pattern: 'Formato non valido',
+  },
+  command: {
+    search: 'Digita un comando o cerca...',
   },
   hotkey: {
     then: 'poi',

@@ -1,9 +1,10 @@
-/* eslint-disable vitest/no-commented-out-tests */
+/* eslint-disable @vitest/no-commented-out-tests */
 // Composables
-import { createTheme } from '../theme'
+import { createTheme, provideTheme, ThemeSymbol } from '../theme'
 
 // Utilities
-import { createApp } from 'vue'
+import { mount } from '@vue/test-utils'
+import { createApp, defineComponent, h, provide } from 'vue'
 
 // Types
 import type { App } from 'vue'
@@ -147,6 +148,45 @@ describe('createTheme', () => {
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
   })
 
+  it('should carry generated variations into a nested provideTheme current', () => {
+    const theme = createTheme({
+      defaultTheme: 'light',
+      themes: {
+        light: {
+          colors: { color2: '#1697f6' },
+        },
+      },
+      variations: {
+        colors: ['color2'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
+
+    let nested: ReturnType<typeof provideTheme> | undefined
+
+    const ChildComponent = defineComponent({
+      setup () {
+        nested = provideTheme({ theme: undefined })
+        return () => h('div')
+      },
+    })
+
+    const ParentComponent = defineComponent({
+      setup () {
+        provide(ThemeSymbol, theme)
+        return () => h(ChildComponent)
+      },
+    })
+
+    mount(ParentComponent)
+
+    expect(nested?.current.value).toStrictEqual(theme.computedThemes.value.light)
+    expect(nested?.current.value.colors).toHaveProperty('color2-darken-1')
+    expect(nested?.current.value.colors).toHaveProperty('color2-lighten-1')
+    expect(nested?.current.value.colors).toHaveProperty('on-color2')
+  })
+
   it('should allow for customization of the stylesheet id', () => {
     const customStylesheetId = 'custom-vuetify-stylesheet-id'
     const theme = createTheme({
@@ -159,19 +199,13 @@ describe('createTheme', () => {
   })
 
   it('should allow for themes to be scoped', () => {
-    const scope = '#my-app'
     const theme = createTheme({
-      scope,
+      scope: '#my-app',
     })
 
     theme.install(app)
 
-    const scopedStyles = document.getElementById('vuetify-theme-stylesheet')!.innerHTML
-    const selectors = scopedStyles.split('\n').filter(line => line.includes('{')).map(line => line.trim())
-    selectors.forEach(selector => {
-      expect(selector.startsWith(`:where(${scope})`)).toBe(true)
-      expect(selector).not.toContain(':root')
-    })
+    expect(document.head).toMatchSnapshot()
   })
 
   it('should properly integrate with unhead when available', async () => {
@@ -274,17 +308,6 @@ describe('createTheme', () => {
     consoleMock.mockReset()
   })
 
-  it('should generate utility classes without !important', async () => {
-    const theme = createTheme({ unimportant: true })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).not.toContain('!important')
-  })
-
   it('should generate utility classes with a custom prefix', async () => {
     // @ts-expect-error next-line
     const theme = createTheme({ prefix: 'custom-' })
@@ -313,7 +336,6 @@ describe('createTheme', () => {
   })
 
   it('should not generate utility classes if disabled', async () => {
-    // @ts-expect-error next-line
     const theme = createTheme({ utilities: false })
 
     theme.install(app)
@@ -324,16 +346,5 @@ describe('createTheme', () => {
     expect(css).not.toContain('.bg-primary')
     expect(css).not.toContain('.text-primary')
     expect(css).not.toContain('.border-primary')
-  })
-
-  it('should generate layers', async () => {
-    const theme = createTheme({ layers: true })
-
-    theme.install(app)
-
-    const stylesheet = document.getElementById('vuetify-theme-stylesheet')
-    const css = stylesheet!.innerHTML
-
-    expect(css).toContain('@layer vuetify.theme {')
   })
 })

@@ -1,3 +1,6 @@
+// Utilities
+import { isString } from '@/util'
+
 export function calculateUpdatedTarget ({
   selectedElement,
   containerElement,
@@ -47,11 +50,6 @@ export function getScrollSize (isHorizontal: boolean, element?: HTMLElement) {
   return element?.[key] || 0
 }
 
-export function getClientSize (isHorizontal: boolean, element?: HTMLElement) {
-  const key = isHorizontal ? 'clientWidth' : 'clientHeight'
-  return element?.[key] || 0
-}
-
 export function getScrollPosition (isHorizontal: boolean, rtl: boolean, element?: HTMLElement) {
   if (!element) {
     return 0
@@ -80,4 +78,12 @@ export function getOffsetSize (isHorizontal: boolean, element?: HTMLElement) {
 export function getOffsetPosition (isHorizontal: boolean, element?: HTMLElement) {
   const key = isHorizontal ? 'offsetLeft' : 'offsetTop'
   return element?.[key] || 0
+}
+
+export function getScrollDistance (containerSize: number, distance: string | number) {
+  if (isString(distance) && distance.endsWith('%')) {
+    return containerSize * parseFloat(distance) / 100
+  }
+
+  return parseFloat(String(distance)) || containerSize
 }

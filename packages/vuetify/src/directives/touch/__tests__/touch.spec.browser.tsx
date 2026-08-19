@@ -92,4 +92,49 @@ describe('v-touch', () => {
       expect(end).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('ignores the axis a nested element scrolled', () => {
+    const ScrollComponent = defineComponent({
+      directives: { vTouch },
+      props: {
+        value: Object as PropType<TouchValue>,
+      },
+      setup (props) {
+        return () => (
+          <div v-touch={ props.value } style="width: 200px; height: 200px; background: red;">
+            <div class="scroller" style="width: 200px; height: 100px; overflow: auto;">
+              <div style="width: 600px; height: 50px;" />
+            </div>
+          </div>
+        )
+      },
+    })
+
+    function scrollOnMove () {
+      const scroller = document.querySelector('.scroller')!
+      scroller.addEventListener('touchmove', () => { scroller.scrollLeft = 50 })
+    }
+
+    it('suppresses the scrolled axis', async () => {
+      const left = vi.fn()
+
+      render(<ScrollComponent value={{ left }} />)
+      scrollOnMove()
+
+      await commands.drag([150, 50], [60, 50])
+
+      expect(left).not.toHaveBeenCalled()
+    })
+
+    it('keeps the other axis', async () => {
+      const up = vi.fn()
+
+      render(<ScrollComponent value={{ up }} />)
+      scrollOnMove()
+
+      await commands.drag([150, 50], [150, 10])
+
+      expect(up).toHaveBeenCalledTimes(1)
+    })
+  })
 })

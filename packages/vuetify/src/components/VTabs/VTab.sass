@@ -3,8 +3,7 @@
 
 @include tools.layer('components')
   .v-tab
-    // override v-btn size specificity
-    &.v-tab.v-btn
+    @include tools.layer('overrides')
       height: var(--v-tabs-height)
       border-radius: $tab-border-radius
       min-width: $tab-min-width
@@ -33,10 +32,11 @@
       height: 100%
       width: $tab-slider-size
 
+@include tools.layer('trumps')
   @media (forced-colors: active)
     .v-tab
       &--selected.v-btn
-        color: highlight !important
+        color: highlight
 
       &__slider
-        background: highlight !important
+        background: highlight

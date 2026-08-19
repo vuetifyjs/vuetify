@@ -46,14 +46,14 @@ export const VFooter = genericComponent()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const autoHeight = shallowRef(32)
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight
     })
-    const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
+    const height = computed(() => props.height === 'auto' ? autoHeight.value : props.height)
 
     useToggleScope(() => props.app, () => {
       const layout = useLayoutItem({
@@ -88,6 +88,7 @@ export const VFooter = genericComponent()({
           props.app ? layoutItemStyles.value : {
             height: convertToUnit(props.height),
           },
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

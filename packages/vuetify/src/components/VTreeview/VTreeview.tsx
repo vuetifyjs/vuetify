@@ -4,6 +4,7 @@ import { makeVListProps, useListItems, VList } from '@/components/VList/VList'
 import { VListItem } from '@/components/VList/VListItem'
 
 // Composables
+import { useOpened } from './open'
 import { useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
@@ -11,13 +12,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, ref, toRaw, toRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, isBoolean, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { VTreeviewSymbol } from './shared'
 import type { VTreeviewChildrenSlots } from './VTreeviewChildren'
-import type { InternalListItem } from '@/components/VList/VList'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, IndentLinesVariant } from '@/util'
 
@@ -32,6 +32,8 @@ function flatten (items: ListItem[], flat: ListItem[] = []) {
 export const makeVTreeviewProps = propsFactory({
   openAll: Boolean,
   indentLines: [Boolean, String] as PropType<boolean | IndentLinesVariant>,
+  indentLinesColor: String,
+  indentLinesOpacity: [String, Number],
   search: String,
   hideNoData: Boolean,
   noDataText: {
@@ -104,10 +106,11 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
     const vListRef = ref<VList>()
 
-    const opened = computed(() => props.openAll ? openAll(items.value) : props.opened)
     const flatItems = computed(() => flatten(items.value))
     const search = toRef(() => props.search)
     const { filteredItems } = useFilter(props, flatItems, search)
+    const opened = useOpened(props, items, filteredItems, () => vListRef.value?.getPath)
+
     const visibleIds = computed(() => {
       if (!search.value) return null
       const getPath = vListRef.value?.getPath
@@ -123,7 +126,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
 
     function getChildren (id: unknown) {
       const arr: unknown[] = []
-      const queue = ((vListRef.value?.children.get(id) ?? []).slice())
+      const queue = ((vListRef.value?.children.get(toRaw(id)) ?? []).slice())
       while (queue.length) {
         const child = queue.shift()
         if (!child) continue
@@ -131,22 +134,6 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
         queue.push(...((vListRef.value?.children.get(child) ?? []).slice()))
       }
       return arr
-    }
-
-    function openAll (items: InternalListItem<any>[]) {
-      let ids: any[] = []
-
-      for (const i of items) {
-        if (!i.children) continue
-
-        ids.push(props.returnObject ? toRaw(i.raw) : i.value)
-
-        if (i.children) {
-          ids = ids.concat(openAll(i.children))
-        }
-      }
-
-      return ids
     }
 
     provide(VTreeviewSymbol, { visibleIds })
@@ -174,7 +161,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
     useRender(() => {
       const listProps = VList.filterProps(props)
       const treeviewChildrenProps = VTreeviewChildren.filterProps(props)
-      const indentLinesVariant = typeof props.indentLines === 'boolean' ? 'default' : props.indentLines
+      const indentLinesVariant = isBoolean(props.indentLines) ? 'default' : props.indentLines
 
       return (
         <VList
@@ -187,9 +174,16 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             },
             props.class,
           ]}
+          role="tree"
           openStrategy="multiple"
-          style={ props.style }
-          opened={ opened.value }
+          style={[
+            {
+              '--v-treeview-indent-line-color': props.indentLinesColor,
+              '--v-treeview-indent-line-opacity': props.indentLinesOpacity,
+            },
+            props.style,
+          ]}
+          v-model:opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
         >

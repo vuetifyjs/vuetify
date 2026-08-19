@@ -1,5 +1,5 @@
 <template>
-  <v-row dense>
+  <v-row density="comfortable">
     <v-col cols="12">
       <div class="d-flex">
         <AppTextField

@@ -174,7 +174,6 @@ Vuetify includes several utility classes that are not covered by the `$utilities
     "gap-column": false,
     "gap-row": false,
     "gap": false,
-    "height-screen": false,
     "height": false,
     "justify-content": false,
     "justify-items": false,
@@ -257,8 +256,6 @@ Color packs are handy for quickly applying a color to a component but mostly unu
 
 ## Enabling CSS cascade layers
 
-<DocIntroduced version="3.6.0" />
-
 [Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`. This will be included by default in Vuetify 4 but can optionally be used now:
 
 ```scss { resource="src/styles/settings.scss" }
@@ -286,7 +283,7 @@ Your own styles will always<sup>*</sup> override vuetify's if you don't use `@la
 @layer base, vuetify, overrides;
 ```
 
-\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-caption" }
+\* Layers invert `!important`, so anything trying to override an important vuetify style must also be in a layer. { class="text-body-small" }
 
 ## Caveats
 

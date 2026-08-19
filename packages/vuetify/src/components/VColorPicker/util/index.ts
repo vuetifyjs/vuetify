@@ -1,4 +1,5 @@
 // Utilities
+import { isObject } from '@/util'
 import {
   HexToHSV,
   HSLtoHSV,
@@ -8,6 +9,7 @@ import {
   RGBtoHSV,
 } from '@/util/colorUtils'
 import { has } from '@/util/helpers'
+import { isNumber, isString } from '@/util/v0'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'
@@ -23,8 +25,8 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 }
 
 export function extractColor (color: HSV, input: any) {
-  if (input == null || typeof input === 'string') {
-    const hasA = color.a !== 1
+  if (input == null || isString(input)) {
+    const hasA = isNumber(color.a) && color.a < 1
     if (input?.startsWith('rgb(')) {
       const { r, g, b, a } = HSVtoRGB(color)
       return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
@@ -39,7 +41,7 @@ export function extractColor (color: HSV, input: any) {
     else return hex
   }
 
-  if (typeof input === 'object') {
+  if (isObject(input)) {
     let converted
 
     if (has(input, ['r', 'g', 'b'])) converted = HSVtoRGB(color)
@@ -55,11 +57,11 @@ export function extractColor (color: HSV, input: any) {
 export function hasAlpha (color: any) {
   if (!color) return false
 
-  if (typeof color === 'string') {
+  if (isString(color)) {
     return color.length > 7
   }
 
-  if (typeof color === 'object') {
+  if (isObject(color)) {
     return has(color, ['a']) || has(color, ['alpha'])
   }
 
@@ -72,6 +74,7 @@ export type ColorPickerMode = {
   inputProps: Record<string, unknown>
   inputs: {
     [key: string]: any
+    label: string
     getValue: (color: any) => number | string
     getColor: (color: any, v: string) => any
   }[]

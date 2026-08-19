@@ -1,5 +1,7 @@
+@use '../../styles/tools';
+
 // VCarousel
-$carousel-controls-bg: rgba(var(--v-theme-surface-variant), .3) !default;
+$carousel-controls-bg: tools.theme-color('surface-variant', .3) !default;
 $carousel-controls-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $carousel-controls-size: 50px !default;
 $carousel-dot-margin: 0 8px !default;

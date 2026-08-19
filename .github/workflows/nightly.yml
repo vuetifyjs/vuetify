@@ -21,7 +21,7 @@ jobs:
       max-parallel: 1
       fail-fast: false
       matrix:
-        branch: [ 'master', 'dev', 'next', 'v2-stable', 'v2-dev' ]
+        branch: [ 'master', 'dev', 'next', 'v3-stable', 'v2-stable', 'v2-dev' ]
         include:
           - branch: 'master'
             tag: 'latest'
@@ -29,12 +29,14 @@ jobs:
             tag: 'dev'
           - branch: 'next'
             tag: 'next'
+          - branch: 'v3-stable'
+            tag: 'v3-stable'
           - branch: 'v2-stable'
             tag: 'v2-stable'
           - branch: 'v2-dev'
             tag: 'v2-dev'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 0
@@ -53,7 +55,7 @@ jobs:
           checkout-ref: ${{ matrix.branch }}
           release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
           npm-tag: ${{ matrix.tag }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
   nightly-pr:
     runs-on: ubuntu-24.04
@@ -64,7 +66,7 @@ jobs:
       id-token: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/github-script@v7
         with:
           script: |
@@ -101,7 +103,7 @@ jobs:
     runs-on: ubuntu-24.04
     if: ${{ github.event_name == 'schedule' && github.repository_owner == 'vuetifyjs' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: master
           fetch-depth: 0
@@ -113,7 +115,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: vuetifyjs/setup-action@master
+      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
       - run: pnpm exec playwright install chromium
       - run: pnpm vizzly run "pnpm test:browser"
         working-directory: ./packages/vuetify

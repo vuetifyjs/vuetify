@@ -1,7 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
-
 // Types
 import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
@@ -11,6 +10,7 @@ export interface LocaleMessages {
 
 export interface LocaleOptions {
   decimalSeparator?: string
+  numericGroupSeparator?: string
   messages?: LocaleMessages
   locale?: string
   fallback?: string
@@ -20,6 +20,7 @@ export interface LocaleOptions {
 export interface LocaleInstance {
   name: string
   decimalSeparator: ShallowRef<string>
+  numericGroupSeparator: ShallowRef<string>
   messages: Ref<LocaleMessages>
   current: Ref<string>
   fallback: Ref<string>
@@ -30,12 +31,11 @@ export interface LocaleInstance {
 
 export const LocaleSymbol: InjectionKey<LocaleInstance & RtlInstance> = Symbol.for('vuetify:locale')
 
-function isLocaleInstance (obj: any): obj is LocaleInstance {
-  return obj.name != null
-}
-
 export function createLocale (options?: LocaleOptions & RtlOptions) {
-  const i18n = options?.adapter && isLocaleInstance(options?.adapter) ? options?.adapter : createVuetifyAdapter(options)
+  const i18n = options?.adapter?.name
+    ? options.adapter
+    : createVuetifyAdapter(options)
+
   const rtl = createRtl(i18n, options)
 
   return { ...i18n, ...rtl }
@@ -88,7 +88,7 @@ function genDefaults () {
     ar: true,
     bg: false,
     ca: false,
-    ckb: false,
+    ckb: true,
     cs: false,
     de: false,
     el: false,

@@ -44,22 +44,41 @@ export interface TouchDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
   value?: TouchValue
 }
 
-const handleGesture = (wrapper: TouchWrapper) => {
+const handleGesture = (wrapper: TouchWrapper, scrolled: ScrolledAxes) => {
   const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
   const dirRatio = 0.5
   const minDistance = 16
   wrapper.offsetX = touchendX - touchstartX
   wrapper.offsetY = touchendY - touchstartY
 
-  if (Math.abs(wrapper.offsetY) < dirRatio * Math.abs(wrapper.offsetX)) {
+  if (!scrolled.x && Math.abs(wrapper.offsetY) < dirRatio * Math.abs(wrapper.offsetX)) {
     wrapper.left && (touchendX < touchstartX - minDistance) && wrapper.left(wrapper)
     wrapper.right && (touchendX > touchstartX + minDistance) && wrapper.right(wrapper)
   }
 
-  if (Math.abs(wrapper.offsetX) < dirRatio * Math.abs(wrapper.offsetY)) {
+  if (!scrolled.y && Math.abs(wrapper.offsetX) < dirRatio * Math.abs(wrapper.offsetY)) {
     wrapper.up && (touchendY < touchstartY - minDistance) && wrapper.up(wrapper)
     wrapper.down && (touchendY > touchstartY + minDistance) && wrapper.down(wrapper)
   }
+}
+
+interface ScrolledAxes {
+  x: boolean
+  y: boolean
+}
+
+// native scroll within is not a gesture
+function trackScroll (target: EventTarget | null) {
+  const origins: [Element, number, number][] = []
+
+  for (let el = target instanceof Element ? target : null; el; el = el.parentElement) {
+    origins.push([el, el.scrollLeft, el.scrollTop])
+  }
+
+  return (): ScrolledAxes => ({
+    x: origins.some(([el, left]) => el.scrollLeft !== left),
+    y: origins.some(([el,, top]) => el.scrollTop !== top),
+  })
 }
 
 function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
@@ -70,14 +89,14 @@ function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.start?.({ originalEvent: event, ...wrapper })
 }
 
-function touchend (event: TouchEvent, wrapper: TouchWrapper) {
+function touchend (event: TouchEvent, wrapper: TouchWrapper, scrolled: ScrolledAxes) {
   const touch = event.changedTouches[0]
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
 
   wrapper.end?.({ originalEvent: event, ...wrapper })
 
-  handleGesture(wrapper)
+  handleGesture(wrapper, scrolled)
 }
 
 function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
@@ -107,9 +126,14 @@ function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
     end: value.end,
   }
 
+  let getScrolled = () => ({ x: false, y: false })
+
   return {
-    touchstart: (e: TouchEvent) => touchstart(e, wrapper),
-    touchend: (e: TouchEvent) => touchend(e, wrapper),
+    touchstart: (e: TouchEvent) => {
+      getScrolled = trackScroll(e.target)
+      touchstart(e, wrapper)
+    },
+    touchend: (e: TouchEvent) => touchend(e, wrapper, getScrolled()),
     touchmove: (e: TouchEvent) => touchmove(e, wrapper),
   }
 }
@@ -120,7 +144,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const options = value?.options ?? { passive: true }
   const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
-  if (!target || uid === undefined) return
+  if (!value || !target || uid === undefined) return
 
   const handlers = createHandlers(binding.value)
 
@@ -140,16 +164,32 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 
   const handlers = target._touchHandlers[uid]
 
+  // guard against double teardown: e.g. router & suspence racing
+  if (!handlers) return
+
   keys(handlers).forEach(eventName => {
     target.removeEventListener(eventName, handlers[eventName])
   })
 
   delete target._touchHandlers[uid]
+
+  if (!keys(target._touchHandlers).length) {
+    // only relevant if we keep `parent: boolean`
+    delete target._touchHandlers
+  }
+}
+
+function updated (el: HTMLElement, binding: TouchDirectiveBinding) {
+  if (binding.value === binding.oldValue) return
+
+  unmounted(el, { ...binding, value: binding.oldValue } as TouchDirectiveBinding)
+  mounted(el, binding)
 }
 
 export const Touch = {
   mounted,
   unmounted,
+  updated,
 }
 
 export default Touch

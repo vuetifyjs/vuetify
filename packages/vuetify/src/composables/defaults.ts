@@ -1,5 +1,6 @@
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowRef, toRef, unref, watchEffect } from 'vue'
+import { isString } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
@@ -16,6 +17,7 @@ export type DefaultsInstance = undefined | {
 export type DefaultsOptions = Partial<DefaultsInstance>
 
 export const DefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults')
+export const RootDefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults:root')
 
 export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstance> {
   return ref(options)
@@ -39,6 +41,7 @@ export function provideDefaults (
   }
 ) {
   const injectedDefaults = injectDefaults()
+  const injectedRoot = inject(RootDefaultsSymbol, null)
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
@@ -50,7 +53,7 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    if (providedDefaults.value == null && !(scoped || reset || root)) return injectedDefaults.value
+    if (!providedDefaults.value && !(scoped || reset || root)) return injectedDefaults.value
 
     let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
@@ -58,6 +61,12 @@ export function provideDefaults (
 
     if (reset || root) {
       const len = Number(reset || Infinity)
+
+      const rootDefaults = isString(root) ? properties.prev?.[root] : undefined
+
+      if (root && injectedRoot?.value) {
+        properties = injectedRoot.value
+      }
 
       for (let i = 0; i <= len; i++) {
         if (!properties || !('prev' in properties)) {
@@ -67,21 +76,35 @@ export function provideDefaults (
         properties = properties.prev
       }
 
-      if (properties && typeof root === 'string' && root in properties) {
-        properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
+      if (properties && rootDefaults) {
+        properties = mergeDeep(mergeDeep(properties, { prev: properties }), rootDefaults)
       }
 
       return properties
     }
 
     return properties.prev
-      ? mergeDeep(properties.prev, properties)
+      ? mergeDeep(properties.prev, properties, undefined, (_, v) => v !== undefined)
       : properties
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)
 
   return newDefaults
+}
+
+export function injectComponentDefaults<T = Record<string, unknown>> (name: string) {
+  const vm = getCurrentInstance('injectComponentDefaults')
+
+  return toRef(() => injectSelf(DefaultsSymbol, vm)?.value?.[name] as Partial<T> | undefined)
+}
+
+export function injectNestedDefaults<T = Record<string, unknown>> (name: string) {
+  const vm = getCurrentInstance('injectNestedDefaults')
+  const defaults = injectDefaults()
+  const self = (vm.props._as ?? vm.type.name) as string
+
+  return toRef(() => defaults.value?.[self]?.[name] as Partial<T> | undefined)
 }
 
 function propIsDefined (vnode: VNode, prop: string) {

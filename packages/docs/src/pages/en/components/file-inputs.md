@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: File inputs
   title: File input component
@@ -22,7 +23,7 @@ The `v-file-input` component is a specialized input that provides a clean interf
 
 ## Usage
 
-At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields).
+At its core, `v-file-input` is built on the same [VField](/components/text-fields) and VInput primitives as [v-text-field](/components/text-fields), giving it a consistent look and feel without directly extending it.
 
 <ExamplesUsage name="v-file-input" />
 
@@ -69,6 +70,12 @@ You can reduces the file input height with the **density** prop.
 The `v-file-input` can contain multiple files at the same time when using the **multiple** prop.
 
 <ExamplesExample file="v-file-input/prop-multiple" />
+
+#### Placeholder
+
+Use the **placeholder** prop to display hint text when no file is selected. Combine it with **persistent-placeholder** to keep the label floating and the placeholder visible.
+
+<ExamplesExample file="v-file-input/prop-placeholder" />
 
 #### Prepend icon
 

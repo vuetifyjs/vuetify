@@ -27,7 +27,7 @@ The following responses are a collection of common questions asked by the Vuetif
 
 * **Does Vuetify provide support?** { #does-vuetify-provide-support }
 
-  Vuetify is a free to use Open Source project released under the [MIT](http://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
+  Vuetify is a free to use Open Source project released under the [MIT](https://opensource.org/licenses/MIT) license. There are multiple ways to receive support for Vuetify:
 
   * Join our [Discord Community](https://community.vuetifyjs.com/) - (Free/Paid)
   * Ask a question on [GitHub Discussions](https://discussions.vuetifyjs.com/) - (Free)
@@ -76,10 +76,6 @@ The following responses are a collection of common questions asked by the Vuetif
     ssr: true,
   })
   ```
-
-* **Is there still support for IE11 in Vuetify 3?** { #is-there-still-support-for-ie11-in-vuetify-3 }
-
-  No. If you need to support IE11, use [Vuetify 2](https://v2.vuetifyjs.com/).
 
 * **Is there support for Nuxt 3?** { #is-there-support-for-nuxt-3 }
 

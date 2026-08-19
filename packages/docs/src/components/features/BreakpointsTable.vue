@@ -42,7 +42,7 @@
           <small class="d-block me-n1 mb-n1">
             <a
               class="text-decoration-none d-inline-flex align-center"
-              href="https://material.io/design/layout/responsive-layout-grid.html"
+              href="https://m3.material.io/foundations/layout/applying-layout/window-size-classes"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -76,35 +76,35 @@
       device: 'small',
       code: 'sm',
       type: 'breakpoints-table.small-to-medium-tablet',
-      range: '600px > < 960px',
+      range: '600px > < 840px',
     },
     {
       icon: 'mdi-laptop',
       device: 'medium',
       code: 'md',
       type: 'breakpoints-table.large-tablet-to-laptop',
-      range: '960px > < 1280px',
+      range: '840px > < 1145px',
     },
     {
       icon: 'mdi-monitor-small',
       device: 'large',
       code: 'lg',
       type: 'breakpoints-table.desktop',
-      range: '1280px > < 1920px',
+      range: '1145px > < 1545px',
     },
     {
       icon: 'mdi-monitor',
       device: 'extra-large',
       code: 'xl',
       type: 'breakpoints-table.large-to-extra-large',
-      range: '1920px > < 2560px',
+      range: '1545px > < 2138px',
     },
     {
       icon: 'mdi-monitor-screenshot',
       device: 'extra-extra-large',
       code: 'xxl',
       type: 'breakpoints-table.extra-large-to-extra-extra-large',
-      range: '> 2560px',
+      range: '> 2138px',
     },
   ]
 

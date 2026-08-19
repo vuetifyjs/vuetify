@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Mask inputs
   title: Mask input component

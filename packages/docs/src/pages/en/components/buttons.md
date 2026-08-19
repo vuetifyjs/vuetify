@@ -161,8 +161,6 @@ When you use the **prepend-icon** and **append-icon** props in conjunction with 
 
 #### Spaced
 
-<DocIntroduced version="3.10.0" />
-
 By default icons stick to the button content, but you can space them out with `spaced` prop.
 
 <ExamplesExample file="v-btn/prop-spaced" />
@@ -340,7 +338,18 @@ The following properties are modified when used within a `v-btn-group` component
 | **height** | `auto` |
 | **density** | provided by `v-btn-group` |
 | **flat** | `true` |
+| **size** | provided by `v-btn-group` (requires [v3.13.0](/getting-started/release-notes/?version=v3.13.0) or [v4.2.0](/getting-started/release-notes/?version=v4.2.0)) |
 | **variant** | provided by `v-btn-group` |
+
+#### Size{ #btn-group-size }
+
+When **size** is set on the group, child buttons inherit it and the group height matches a standalone button of the same size:
+
+::: info
+This feature requires [v3.13.0](/getting-started/release-notes/?version=v3.13.0) or [v4.2.0](/getting-started/release-notes/?version=v4.2.0)
+:::
+
+<ExamplesExample file="v-btn/defaults-btn-group-size" />
 
 ### Cards
 

@@ -21,7 +21,20 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import {
+  callEvent,
+  clamp,
+  convertToUnit,
+  filterInputAttrs,
+  genericComponent,
+  getActiveElement,
+  isFunction,
+  isNumber,
+  isString,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,7 +45,10 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 export const makeVTextareaProps = propsFactory({
   autoGrow: Boolean,
   autofocus: Boolean,
-  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counter: {
+    type: [Boolean, Number, String] as PropType<boolean | number | string | null>,
+    default: undefined,
+  },
   counterValue: Function as PropType<(value: any) => number>,
   prefix: String,
   placeholder: String,
@@ -56,7 +72,7 @@ export const makeVTextareaProps = propsFactory({
   modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeAutocompleteProps(),
-  ...makeVInputProps(),
+  ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextarea')
 
@@ -86,7 +102,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const { onIntersect } = useAutofocus(props)
     const counterValue = computed(() => {
-      return typeof props.counterValue === 'function'
+      return isFunction(props.counterValue)
         ? props.counterValue(model.value)
         : (model.value || '').toString().length
     })
@@ -95,15 +111,14 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
       if (
         !props.counter ||
-        (typeof props.counter !== 'number' &&
-        typeof props.counter !== 'string')
+        (!isNumber(props.counter) && !isString(props.counter))
       ) return undefined
 
       return props.counter
     })
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLTextAreaElement>()
     const scrollbarWidth = ref(0)
@@ -120,7 +135,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
         autocomplete.update()
       }
 
-      if (textareaRef.value !== document.activeElement) {
+      if (textareaRef.value !== getActiveElement()) {
         textareaRef.value?.focus()
       }
 
@@ -241,8 +256,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || props.counterValue)
-      const hasDetails = !!(hasCounter || slots.details)
+      const hasCounter = !!(slots.counter || props.counter !== undefined || props.counterValue != null)
+      const counterActive = props.counter !== false && props.counter !== null &&
+        (props.persistentCounter || isFocused.value)
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -278,6 +296,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           { ...inputProps }
           centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
+          indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
             ...slots,
@@ -377,7 +397,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                     <span />
 
                     <VCounter
-                      active={ props.persistentCounter || isFocused.value }
+                      active={ counterActive }
                       value={ counterValue.value }
                       max={ max.value }
                       disabled={ props.disabled }

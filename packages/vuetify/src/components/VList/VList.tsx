@@ -29,6 +29,7 @@ import {
   EventProp,
   focusChild,
   genericComponent,
+  getActiveElement,
   getPropertyFromItem,
   isPrimitive,
   omit,
@@ -168,7 +169,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots, emit }) {
     const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
@@ -176,12 +177,13 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const { children, open, parents, select, getPath } = useNested(props, {
       items,
       returnObject: toRef(() => props.returnObject),
       scrollToActive: toRef(() => props.navigationStrategy === 'track'),
+      valueComparator: toRef(() => props.valueComparator),
     })
 
     const lineClasses = toRef(() => props.lines ? `v-list--${props.lines}-line` : undefined)
@@ -326,7 +328,11 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
             navigationIndex.value = nextIndex
           }
         } else {
-          focus(direction)
+          focus(direction, { preventScroll: true })
+          const focused = getActiveElement()
+          if (focused && contentRef.value?.contains(focused)) {
+            focused.scrollIntoView({ block: 'nearest' })
+          }
         }
       }
     }
@@ -335,9 +341,9 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
       isFocused.value = true
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number) {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last' | number | null, options?: FocusOptions) {
       if (contentRef.value) {
-        return focusChild(contentRef.value, location)
+        return focusChild(contentRef.value, location, options)
       }
     }
 
@@ -346,6 +352,10 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
         (props.prependGap
           ? Number(props.prependGap) + 24
           : undefined)
+
+      const ariaMultiselectable = isSelectable.value
+        ? attrs.ariaMultiselectable ?? !String(props.selectStrategy).startsWith('single-')
+        : undefined
 
       return (
         <props.tag
@@ -374,15 +384,17 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
             },
             backgroundColorStyles.value,
             dimensionStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
-          tabindex={ props.disabled ? -1 : 0 }
+          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
           aria-activedescendant={
             props.navigationStrategy === 'track' && navigationIndex.value >= 0
               ? `v-list-item-${uid}-${navigationIndex.value}`
               : undefined
           }
+          aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onFocus={ onFocus }

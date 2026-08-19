@@ -20,6 +20,9 @@ export default {
       activateNone: 'Suaktyvinkite, jei norite rikiavimą pašalinti.',
       activateDescending: 'Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
       activateAscending: 'Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
+      selectRow: 'Pasirinkti eilutę',
+      selectAll: 'Pasirinkti viską',
+      selectGroup: 'Pasirinkti grupę',
     },
     sortBy: 'Rikiuoti pagal',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'iki',
+  },
+  monthPicker: {
+    title: 'Pasirinkite mėnesį',
+    itemsSelected: '{0} parinkta',
+    header: 'Įveskite mėnesį',
+    range: {
+      title: 'Įveskite mėnesius',
+    },
+    ariaLabel: {
+      previousYear: 'Praėję metai',
+      nextYear: 'Kiti metai',
+      selectYear: 'Pasirinkite metus',
+      currentMonth: 'Šis mėnuo, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} parinkta',
@@ -69,6 +86,10 @@ export default {
     moreEvents: 'Daugiau {0}',
     today: 'Šiandien',
   },
+  heatmap: {
+    less: 'Mažiau',
+    more: 'Daugiau',
+  },
   input: {
     clear: 'Išvalyti {0}',
     prependAction: '{0} pridėtas veiksmas',
@@ -91,6 +112,7 @@ export default {
     hour: 'Valanda',
     minute: 'Minutės',
     second: 'Sekundės',
+    notAllowed: 'Reikšmė neleidžiama',
   },
   pagination: {
     ariaLabel: {
@@ -129,6 +151,9 @@ export default {
     exclude: 'Simbolis {0} nėra leidžiamas',
     notEmpty: 'Prašome pasirinkti bent vieną reikšmę',
     pattern: 'Neteisingas formatas',
+  },
+  command: {
+    search: 'Įveskite komandą arba ieškokite...',
   },
   hotkey: {
     then: 'tada',

@@ -26,7 +26,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { toRef } from 'vue'
-import { genericComponent, propsFactory } from '@/util'
+import { genericComponent, isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -39,7 +39,7 @@ export const makeVAlertProps = propsFactory({
   border: {
     type: [Boolean, String] as PropType<boolean | 'top' | 'end' | 'bottom' | 'start'>,
     validator: (val: boolean | string) => {
-      return typeof val === 'boolean' || [
+      return isBoolean(val) || [
         'top',
         'end',
         'bottom',
@@ -125,7 +125,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
     const { elevationClasses } = useElevation(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.borderColor)
     const { t } = useLocale()
 
@@ -175,6 +175,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           role="alert"
