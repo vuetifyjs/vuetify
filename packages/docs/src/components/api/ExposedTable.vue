@@ -1,5 +1,3 @@
-<script setup lang="ts">
-</script>
 <template>
   <ApiApiTable>
     <template #row="{ props, item }">
