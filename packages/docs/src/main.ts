@@ -167,7 +167,13 @@ const router = createRouter({
   ],
   async scrollBehavior (to, from, savedPosition) {
     // 1: Table of Contents (TOC) rewrites should never scroll: Toc.vue will scroll.
-    if (to.path === from.path && to.hash !== from.hash) return false
+    // Toc only uses hashes, so we need to remove it from here when the path is the same and a hash is present.
+    // We fixed the issue when the client on some hash, scrolls, and then click again on the same TOC link.
+    // This prevents the page from jumping to the top when clicking a TOC link and then scrolls again to the hash.
+    // The main drawer will navigate to the page without the hash.
+    // We need to check if to or from have present the hash: TOC now controls the scroll spy corrrectly,
+    // (to.hash || from.hash) will prevent the scroll jumping from the hash to the top.
+    if (to.path === from.path && (to.hash || from.hash)) return false
 
     // 2: Initial load
     if (from === START_LOCATION) {

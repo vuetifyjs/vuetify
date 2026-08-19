@@ -1,5 +1,5 @@
 <template>
-  <td :id="`${section}-${name.replace('$', '')}`">
+  <td :id="`${section}-${name.replace('$', '')}`" role="cell">
     <div class="d-inline-flex align-center">
       <kbd class="name-item text-mono">
         <AppLink :href="href" class="font-weight-bold">
