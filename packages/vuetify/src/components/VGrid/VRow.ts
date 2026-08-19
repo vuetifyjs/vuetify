@@ -108,7 +108,7 @@ export const VRow = genericComponent()({
 
   setup (props, { slots }) {
     if (props.dense) {
-      deprecate('dense', 'density="comfortable"')
+      deprecate('dense', 'density="compact"')
     }
 
     const classes = computed(() => {
