@@ -135,6 +135,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
   props: {
     _disableGlobalStack: Boolean,
+    _submenu: Boolean,
 
     ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
@@ -172,7 +173,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       activatorEvents,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+      openedByHover,
+    } = useActivator(props, { isActive, isTop: localTop, contentEl, isSubmenu: props._submenu })
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
@@ -289,11 +291,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = getActiveElement()
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+        if (contentEl.value) contentEl.value.inert = false
         // eager reuses contentEl, so the mousedown that opened us would linger until the next one
         if (contentEl.value?._clickOutside) {
           contentEl.value._clickOutside.lastMousedownWasOutside = false
         }
       } else {
+        if (contentEl.value) contentEl.value.inert = true
         returnFocusToActivator()
       }
     }, { flush: 'post' })
@@ -477,6 +481,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       globalTop,
       localTop,
       updateLocation,
+      openedByHover,
     }
   },
 })

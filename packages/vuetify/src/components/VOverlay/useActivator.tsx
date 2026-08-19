@@ -75,18 +75,26 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop, contentEl }: {
+  { isActive, isTop, contentEl, isSubmenu = false }: {
     isActive: Ref<boolean>
     isTop: Ref<boolean>
     contentEl: Ref<HTMLElement | undefined>
+    isSubmenu?: boolean
   }
 ) {
   const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
 
+  const parentMenu = inject(VMenuSymbol, null)
+
   let isHovered = false
   let isFocused = false
   let firstEnter = true
+  const openedByHover = ref(false)
+  let delayCallbackFiredOpen = false
+
+  // a submenu chain collapses on mouseleave only when its root was hover-opened
+  const shouldCloseOnLeave = () => !isSubmenu || (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
@@ -100,6 +108,10 @@ export function useActivator (
     ) {
       if (isActive.value !== value) {
         firstEnter = true
+        if (value) {
+          delayCallbackFiredOpen = true
+          openedByHover.value = isHovered && props.openOnHover
+        }
       }
       isActive.value = value
     }
@@ -107,9 +119,17 @@ export function useActivator (
 
   let reopenLock = false
   watch(isActive, v => {
-    if (v) return
-    reopenLock = true
-    setTimeout(() => reopenLock = false, 50)
+    if (!v) {
+      reopenLock = true
+      setTimeout(() => reopenLock = false, 50)
+      openedByHover.value = false
+      delayCallbackFiredOpen = false
+      return
+    }
+    if (!delayCallbackFiredOpen) {
+      openedByHover.value = false
+    }
+    delayCallbackFiredOpen = false
   })
 
   const cursorTarget = ref<[x: number, y: number]>()
@@ -137,7 +157,7 @@ export function useActivator (
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
       if (props.target === 'cursor') isFocused = false
-      runCloseDelay()
+      if (shouldCloseOnLeave()) runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
       if (reopenLock) return
@@ -192,7 +212,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
@@ -235,7 +255,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
@@ -243,10 +263,15 @@ export function useActivator (
   })
 
   watch(isTop, val => {
-    if (val && (
-      (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
-      (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    ) && !contentEl.value?.contains(getActiveElement())) {
+    if (
+      val &&
+      shouldCloseOnLeave() &&
+      (
+        (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
+        (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
+      ) &&
+      !contentEl.value?.contains(getActiveElement())
+    ) {
       runCloseDelay()
     }
   })
@@ -296,7 +321,17 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
+  return {
+    activatorEl,
+    activatorRef,
+    target,
+    targetEl,
+    targetRef,
+    activatorEvents,
+    contentEvents,
+    scrimEvents,
+    openedByHover,
+  }
 }
 
 function _useActivator (
