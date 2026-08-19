@@ -143,6 +143,34 @@ describe('VTextField', () => {
     expect(queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
 
+  describe('details transition', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('does not animate on mount when details are visible', async () => {
+      const { queryByCSS } = render(() => (
+        <VTextField hint="Hint" persistentHint></VTextField>
+      ))
+
+      expect(queryByCSS('.v-input__details')!.getAnimations()).toHaveLength(0)
+    })
+
+    it('animates when details become visible', async () => {
+      const focused = ref(false)
+      const { queryByCSS } = render(() => (
+        <VTextField hideDetails="auto" counter focused={ focused.value }></VTextField>
+      ))
+      const details = queryByCSS('.v-input__details')!
+
+      expect(details.getAnimations()).toHaveLength(0)
+
+      focused.value = true
+      await nextTick()
+      expect(details.getAnimations()).not.toHaveLength(0)
+    })
+  })
+
   it('keeps -0 with v-model.number', async () => {
     const model = ref()
     const { element } = render(() => (
