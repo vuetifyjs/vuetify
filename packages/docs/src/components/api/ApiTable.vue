@@ -1,6 +1,6 @@
 <template>
   <AppSheet>
-    <v-table :style="`--cols: ${headers.length}`" class="api-table" density="comfortable" role="table">
+    <v-table :style="`--cols: ${headers.length || 1}`" class="api-table" density="comfortable" role="table">
       <thead role="rowgroup">
         <tr role="row">
           <th
