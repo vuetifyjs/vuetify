@@ -79,6 +79,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let offsets = Array.from<number>({ length: items.value.length })
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
+  let targetScrollHeight = 0
 
   function getSize (index: number) {
     return sizes[index] || itemHeight.value
@@ -240,6 +241,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   }
 
   function scrollToIndex (index: number) {
+    if (targetScrollIndex !== index) targetScrollHeight = 0
+
     const offset = calculateOffset(index)
     if (!containerRef.value || (index && !offset)) {
       targetScrollIndex = index
@@ -270,8 +273,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
       lastScrollTop = el.scrollTop
 
-      const fullHeight = calculateOffset(items.value.length) + markerOffset
-      if (index && el.scrollTop < top - 1 && el.scrollHeight < fullHeight - 1) {
+      if (index && el.scrollTop < top - 1 && el.scrollHeight > targetScrollHeight) {
+        targetScrollHeight = el.scrollHeight
         IN_BROWSER && requestAnimationFrame(() => {
           if (targetScrollIndex === index) scrollToIndex(index)
         })
