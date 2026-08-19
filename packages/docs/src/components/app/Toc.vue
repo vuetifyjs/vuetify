@@ -141,7 +141,15 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || frontmatter.value?.toc?.[0]?.to.slice(1) || ''
+    // Enter page from left aside -> click toc slots link -> re-enter page from left aside.
+    // The observer band is rootMargin: '-10% 0px -75%', a thin zone in the upper viewport.
+    // After "click Slots → click left link → instant jump to top", the Slots section leaves
+    // the band and — because of the page's tall header/search area — no section has entered
+    // it yet.
+    // Stack goes empty, and the || activeItem.value fallback deliberately keeps the previous
+    // value: stale "Slots" highlight at the top of the page.
+    const firstEntry = frontmatter.value?.toc?.[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || (window.scrollY < 200 ? firstEntry : activeItem.value) || firstEntry
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
