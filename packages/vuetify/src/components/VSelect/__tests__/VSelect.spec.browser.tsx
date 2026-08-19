@@ -1568,6 +1568,67 @@ describe('VSelect', () => {
         previous = list.scrollTop
       }
     })
+
+    it('should not fight the user scrolling when items include a divider', async () => {
+      const dividedItems = [
+        'item-1', 'item-2', 'item-3',
+        { type: 'divider' },
+        'item-4', 'item-5', 'item-6', 'item-7', 'item-8', 'item-9', 'item-10', 'item-11', 'item-12',
+      ]
+      const selection = ref('item-6')
+
+      render(() => (
+        <VSelect items={ dividedItems } modelValue={ selection.value } />
+      ))
+
+      for (const item of ['item-6', 'item-10']) {
+        selection.value = item
+
+        await userEvent.click(screen.getByCSS('.v-select'))
+        await commands.waitStable('.v-list')
+
+        const list = screen.getByCSS('.v-select__content .v-list')
+        await expect.poll(() => list.scrollTop).toBeGreaterThan(0)
+
+        const start = list.scrollTop
+        list.scrollTop = start - 100
+        await wait(200)
+
+        expect(`${item} ${list.scrollTop < start - 50}`).toBe(`${item} true`)
+
+        await userEvent.keyboard('{Escape}')
+        await wait(200)
+      }
+    })
+
+    it('should not leave blank space below the last item when dividers are present', async () => {
+      const items = Array.from({ length: 300 }, (_, i) => (
+        i % 5 === 4 ? { type: 'divider' } : { title: `Item ${i}`, value: i }
+      ))
+
+      render(() => (
+        <VSelect items={ items } itemTitle="title" itemValue="value" />
+      ))
+
+      await userEvent.click(screen.getByCSS('.v-select'))
+      const list = await screen.findByRole('listbox')
+      await commands.waitStable('.v-list')
+
+      const rowHeight = screen.getAllByRole('option')[0].getBoundingClientRect().height
+      let widest = 0
+      for (let top = 100; top <= 2000; top += 100) {
+        list.scrollTop = top
+        await commands.waitStable('.v-list')
+
+        const last = screen.getAllByRole('option').at(-1)!
+        widest = Math.max(widest, list.getBoundingClientRect().bottom - last.getBoundingClientRect().bottom)
+      }
+
+      // 1px dividers estimated at item height push the last row above the fold
+      expect(widest).toBeLessThan(20)
+      // ...and once measured, they must not become the estimate for unmeasured items
+      expect(list.scrollHeight).toBeGreaterThan(240 * rowHeight)
+    })
   })
 
   it('should close its menu when clicking another field inside a dialog', async () => {
