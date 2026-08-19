@@ -150,7 +150,7 @@
     observer.disconnect()
     await nextTick()
     frontmatter.value?.toc?.forEach(v => {
-      const el = document.querySelector(v.to)
+      const el = document.getElementById(v.to.slice(1))
       el && observer.observe(el)
     })
   }
@@ -180,6 +180,27 @@
     }
   })
 
+  function handleScroll (top: number, el: HTMLElement) {
+    // If the user does not want animations, or the jump is greater than 500 pixels, instant.
+    const isReduced =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      Math.abs(top) > 500
+
+    // Listener to release internalScrolling just at the end of the animation
+    let fallbackTimeout: ReturnType<typeof setTimeout>
+    const onScrollEnd = () => {
+      internalScrolling = false
+      clearTimeout(fallbackTimeout)
+      document.removeEventListener('scrollend', onScrollEnd)
+    }
+    document.addEventListener('scrollend', onScrollEnd)
+
+    // Security fallback of 1000ms for older browsers or instant jumps
+    fallbackTimeout = setTimeout(onScrollEnd, 1000)
+
+    el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+  }
+
   async function onClick (hash: string) {
     internalScrolling = true
     await router.replace({ path: route.path, hash })
@@ -187,24 +208,15 @@
     // avoid CSS selector issues by only allowing ID selectors
     const el = document.getElementById(hash.slice(1))
     if (el) {
-      // If the user does not want animations, or the jump is greater than 500 pixels, instant.
-      const isReduced =
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        Math.abs(el.getBoundingClientRect().top) > 500
-
-      // Listener to release internalScrolling just at the end of the animation
-      let fallbackTimeout: ReturnType<typeof setTimeout>
-      const onScrollEnd = () => {
-        internalScrolling = false
-        clearTimeout(fallbackTimeout)
-        document.removeEventListener('scrollend', onScrollEnd)
-      }
-      document.addEventListener('scrollend', onScrollEnd)
-
-      // Security fallback of 1000ms for older browsers or instant jumps
-      fallbackTimeout = setTimeout(onScrollEnd, 1000)
-
-      el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+      requestAnimationFrame(() => {
+        // give scroll spy a chance to update the activeItem before forcing a re-layout
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            // force re-layout only once
+            handleScroll(el.getBoundingClientRect().top, el)
+          })
+        }, 0)
+      })
     } else {
       // release the internalScrolling flag if the element is not found, to avoid locking the state
       internalScrolling = false

@@ -3,4 +3,39 @@
 /* sections for toc */
 main.v-main section section[id] {
   scroll-margin-top: var(--v-layout-top);
+  .v-table.api-table {
+    --cols: 1;
+    table {
+      display: grid;
+      grid-template-columns: repeat(var(--cols), 1fr);
+      overflow: hidden;
+      tbody, thead, tfoot {
+        display: contents;
+      }
+
+      tbody tr, thead tr, tfoot tr {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+        align-items: center;
+        border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+      }
+
+      tbody tr:last-of-type {
+        --v-border-opacity: 0;
+      }
+
+      th, td {
+        display: block;
+        align-content: center;
+        min-height: calc(var(--v-table-header-height));
+        height: 100%;
+        border-bottom: none;
+      }
+
+      td[colspan] {
+        grid-column: 1 / -1;
+      }
+    }
+  }
 }

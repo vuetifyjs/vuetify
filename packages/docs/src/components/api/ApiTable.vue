@@ -1,12 +1,13 @@
 <template>
   <AppSheet>
-    <v-table class="api-table" density="comfortable">
-      <thead>
-        <tr>
+    <v-table :style="`--cols: ${headers.length}`" class="api-table" density="comfortable" role="table">
+      <thead role="rowgroup">
+        <tr role="row">
           <th
             v-for="header in headers"
             :key="header"
             :class="header"
+            role="columnheader"
           >
             <div
               class="text-capitalize"
@@ -16,7 +17,7 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody role="rowgroup">
         <template v-for="item in filtered" :key="item.name">
           <slot
             name="row"
@@ -28,8 +29,8 @@
             }"
           />
 
-          <tr v-if="item.description || (user.one.devmode && item.source)">
-            <td class="text-mono pt-4" colspan="3">
+          <tr v-if="item.description || (user.one.devmode && item.source)" role="row">
+            <td class="text-mono" colspan="3" role="cell">
               <template v-if="item.description">
                 <AppMarkdown
                   v-if="localeStore.locale !== 'eo-UY'"
@@ -50,8 +51,8 @@
           </tr>
         </template>
 
-        <tr v-if="!filtered.length">
-          <td class="text-center text-disabled text-body-medium" colspan="4">
+        <tr v-if="!filtered.length" role="row">
+          <td class="text-center text-disabled text-body-medium" colspan="4" role="cell">
             {{ t('search.no-results') }}
           </td>
         </tr>
