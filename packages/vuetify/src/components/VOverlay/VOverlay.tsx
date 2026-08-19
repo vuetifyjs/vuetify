@@ -261,9 +261,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     function returnFocusToActivator () {
       const el = activatorEl.value
       if (!el || !el.isConnected) return
-
-      const parentContent = el.closest<HTMLElement>('.v-overlay__content')
-      if (parentContent?.inert) return
+      // Skip submenus; the outermost close in the cascade will restore focus.
+      if (el.closest('.v-overlay__content')) return
 
       if (contentEl.value?._clickOutside?.lastMousedownWasOutside) return
 
@@ -292,7 +291,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = getActiveElement()
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
-        contentEl.value?.removeAttribute('inert')
+        if (contentEl.value) contentEl.value.inert = false
         // eager reuses contentEl, so the mousedown that opened us would linger until the next one
         if (contentEl.value?._clickOutside) {
           contentEl.value._clickOutside.lastMousedownWasOutside = false
