@@ -177,8 +177,10 @@
     if (!val || internalScrolling) return
 
     const query = route.query
+    const firstEntry = frontmatter.value?.toc?.[0]?.to.slice(1)
 
-    if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
+    // preserve hash when it is present on the url (page refresh)
+    if (val === firstEntry && route.hash && route.hash.slice(1) !== val) {
       router.replace({ path: route.path, query })
     } else {
       const toc = frontmatter.value?.toc?.find(v => v.to.slice(1) === val)
