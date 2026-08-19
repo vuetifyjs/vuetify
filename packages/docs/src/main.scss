@@ -22,7 +22,7 @@ main.v-main section section[id] {
       }
 
       tbody tr:last-of-type {
-        --v-border-opacity: 0;
+        border-bottom: none;
       }
 
       th, td {
