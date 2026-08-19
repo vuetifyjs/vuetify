@@ -1,0 +1,138 @@
+@use '../../styles/settings'
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-infinite-carousel
+    --v-infinite-carousel-gap: 2rem
+    --v-infinite-carousel-mask-color: rgb(var(--v-theme-background))
+    position: relative
+    overflow-x: clip
+    overflow-y: visible
+    white-space: nowrap
+    width: 100%
+    padding-inline: var(--v-infinite-carousel-mask)
+    // `clip` is not a scroll container, so unlike `hidden` it still reports the
+    // whole track as its intrinsic width and stretches flex/grid parents
+    min-width: 0
+    contain: inline-size
+
+    &::before,
+    &::after
+      content: ''
+      position: absolute
+      z-index: 2
+      pointer-events: none
+      width: var(--v-infinite-carousel-mask)
+
+    &::before
+      inset: 0 auto 0 0
+      background: linear-gradient(to right, var(--v-infinite-carousel-mask-color), transparent)
+
+    &::after
+      inset: 0 0 0 auto
+      background: linear-gradient(to left, var(--v-infinite-carousel-mask-color), transparent)
+
+    &--vertical
+      overflow-x: visible
+      overflow-y: clip
+      width: auto
+      height: 100%
+      padding-inline: 0
+      padding-block: var(--v-infinite-carousel-mask)
+      min-width: auto
+      min-height: 0
+      contain: none
+
+      &::before,
+      &::after
+        width: auto
+        height: var(--v-infinite-carousel-mask)
+
+      &::before
+        inset: 0 0 auto 0
+        background: linear-gradient(to bottom, var(--v-infinite-carousel-mask-color), transparent)
+
+      &::after
+        inset: auto 0 0 0
+        background: linear-gradient(to top, var(--v-infinite-carousel-mask-color), transparent)
+
+    &--draggable
+      cursor: grab
+      touch-action: pan-y
+
+      &.v-infinite-carousel--vertical
+        touch-action: pan-x
+
+    &--dragging
+      cursor: grabbing
+      user-select: none
+
+    &__track
+      display: flex
+      align-items: center
+      width: max-content
+      gap: var(--v-infinite-carousel-gap)
+
+    &--vertical &__track
+      flex-direction: column
+      width: auto
+      height: max-content
+
+    &__group
+      display: inline-flex
+      align-items: center
+      gap: var(--v-infinite-carousel-gap)
+
+      > *
+        flex: none
+
+    &--vertical &__group
+      flex-direction: column
+
+    &__probe
+      position: absolute
+      visibility: hidden
+      pointer-events: none
+      inline-size: var(--v-infinite-carousel-shift)
+      block-size: var(--v-infinite-carousel-shift)
+
+    &__controls
+      position: absolute
+      inset: 0
+      z-index: 3
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 0 16px
+      pointer-events: none
+
+      > *
+        pointer-events: auto
+        transition: transform 0.2s settings.$standard-easing
+
+    &--vertical &__controls
+      flex-direction: column
+      padding: 16px 0
+
+      .v-icon
+        transform: rotate(90deg)
+
+    &--show-arrows-on-hover
+      .v-infinite-carousel__prev
+        transform: translateX(-200%)
+
+      .v-infinite-carousel__next
+        transform: translateX(200%)
+
+      &.v-infinite-carousel--vertical
+        .v-infinite-carousel__prev
+          transform: translateY(-200%)
+
+        .v-infinite-carousel__next
+          transform: translateY(200%)
+
+      &:hover,
+      &:focus-within
+        .v-infinite-carousel__prev,
+        .v-infinite-carousel__next
+          transform: none

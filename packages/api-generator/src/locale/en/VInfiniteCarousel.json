@@ -1,0 +1,18 @@
+{
+  "props": {
+    "direction": "Axis the content scrolls along.",
+    "autoPlay": "Scrolls the content on its own. Pass an object to set the `speed` in pixels per second and to `reverse` the travel direction. Left off, the content holds still while staying draggable and keyboard navigable.",
+    "mask": "Fades the content out at both edges. Pass an object to set the gradient `size` in pixels and its `color`, which takes a theme colour or any CSS colour.",
+    "gap": "Space between items. Also sets the seam between repeated copies, so both stay in step.",
+    "draggable": "Allows scrubbing the content by dragging it with a pointer or finger.",
+    "shiftDistance": "How far one arrow click moves the content. Accepts any CSS length; percentages resolve against the visible area.",
+    "showArrows": "Displays navigation arrows over the content. Use `hover` to reveal them on pointer hover or keyboard focus.",
+    "prevIcon": "Icon used by the arrow that moves towards the start.",
+    "nextIcon": "Icon used by the arrow that moves towards the end."
+  },
+  "slots": {
+    "separator": "Rendered after every item, including across the seam between repeated copies.",
+    "prev": "Replaces the arrow that moves towards the start.",
+    "next": "Replaces the arrow that moves towards the end."
+  }
+}
