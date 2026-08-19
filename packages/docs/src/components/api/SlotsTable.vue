@@ -1,5 +1,3 @@
-<script setup lang="ts">
-</script>
 <template>
   <ApiApiTable>
     <template #row="{ props, item }">
@@ -8,7 +6,7 @@
       </tr>
 
       <tr v-if="item.formatted !== 'never' && item.text !== 'undefined'" role="row">
-        <AppMarkup :code="item.formatted" :rounded="false" language="ts" />
+        <AppMarkup :code="item.formatted" :rounded="false" language="ts" role="cell" />
       </tr>
     </template>
   </ApiApiTable>

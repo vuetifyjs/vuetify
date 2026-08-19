@@ -10,6 +10,7 @@
           :code="item.formatted"
           :rounded="false"
           language="ts"
+          role="cell"
         />
       </tr>
     </template>
