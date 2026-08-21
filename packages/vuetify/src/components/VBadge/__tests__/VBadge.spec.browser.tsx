@@ -56,6 +56,14 @@ describe('VBadge', () => {
       render(<VBadge label="label-badge">label</VBadge>)
       await expect(screen.findByLabelText('label-badge')).resolves.toBeDefined()
     })
+
+    it('should not interpolate NaN into the aria label when content is absent', () => {
+      const { wrapper } = render(<VBadge label="Notifications {0}" dot />)
+      const label = wrapper.find('.v-badge__badge').attributes('aria-label')
+
+      expect(label).not.toContain('NaN')
+      expect(label).toBe('Notifications ')
+    })
   })
 
   describe('max', () => {

@@ -137,7 +137,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                   roundedStyles.value,
                 ]}
                 aria-atomic="true"
-                aria-label={ t(props.label, value) }
+                aria-label={ t(props.label, isNaN(value) ? '' : value) }
                 aria-live="polite"
                 role="status"
                 { ...badgeAttrs }
