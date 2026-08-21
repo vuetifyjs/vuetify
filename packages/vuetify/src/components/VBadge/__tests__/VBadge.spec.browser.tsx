@@ -58,7 +58,7 @@ describe('VBadge', () => {
     })
 
     it('should not interpolate NaN into the aria label when content is absent', () => {
-      const { wrapper } = render(<VBadge label="Notifications {0}" dot />)
+      const { wrapper } = render(<VBadge label="Notifications {0}" />)
       const label = wrapper.find('.v-badge__badge').attributes('aria-label')
 
       expect(label).not.toContain('NaN')
