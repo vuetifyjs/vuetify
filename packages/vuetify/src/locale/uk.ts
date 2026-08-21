@@ -1,5 +1,5 @@
 export default {
-  badge: 'Значок',
+  badge: 'Індикатор',
   open: 'Відкрити',
   close: 'Закрити',
   dismiss: 'Відхилити',
@@ -77,7 +77,7 @@ export default {
   noDataText: 'Немає даних для відображення',
   carousel: {
     prev: 'Попередній слайд',
-    next: 'Наступий слайд',
+    next: 'Наступний слайд',
     ariaLabel: {
       delimiter: 'Слайд {0} з {1}',
     },
@@ -92,26 +92,26 @@ export default {
   },
   input: {
     clear: 'Очистити {0}',
-    prependAction: '{0} попередня дія',
-    appendAction: '{0} наступна дія',
-    otp: 'Будь ласка, введіть символ OTP {0}',
+    prependAction: 'Дія перед полем {0}',
+    appendAction: 'Дія після поля {0}',
+    otp: 'Введіть код підтвердження',
   },
   fileInput: {
-    counter: '{0} файлів',
-    counterSize: '{0} файлів ({1} загалом)',
+    counter: 'Файлів: {0}',
+    counterSize: 'Файлів: {0} ({1} загалом)',
   },
   fileUpload: {
     title: 'Перетягніть файли сюди',
     divider: 'або',
-    browse: 'Переглянути файли',
+    browse: 'Вибрати файли',
   },
   timePicker: {
     am: 'AM',
     pm: 'PM',
     title: 'Оберіть час',
     hour: 'Година',
-    minute: 'Хвилини',
-    second: 'Секунди',
+    minute: 'Хвилина',
+    second: 'Секунда',
     notAllowed: 'Значення не дозволено',
   },
   pagination: {
@@ -120,7 +120,7 @@ export default {
       next: 'Наступна сторінка',
       previous: 'Попередня сторінка',
       page: 'Перейти на сторінку {0}',
-      currentPage: 'Поточна сторінка, Сторінка {0}',
+      currentPage: 'Сторінка {0}, поточна сторінка',
       first: 'Перша сторінка',
       last: 'Остання сторінка',
     },
@@ -177,7 +177,7 @@ export default {
   video: {
     play: 'Відтворити',
     pause: 'Пауза',
-    seek: 'Пошук',
+    seek: 'Позиція відтворення',
     volume: 'Гучність',
     showVolume: 'Показати регулятор гучності',
     mute: 'Вимкнути звук',
@@ -196,7 +196,7 @@ export default {
       alphaInput: 'Прозорість',
       hueInput: 'Відтінок',
       saturationInput: 'Насиченість',
-      lightnessInput: 'Яскравість',
+      lightnessInput: 'Значення світлості',
       hexInput: 'HEX значення',
       hexaInput: 'HEX зі значенням прозорості',
       changeFormat: 'Змінити формат кольору',
