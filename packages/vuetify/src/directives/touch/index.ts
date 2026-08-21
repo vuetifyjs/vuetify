@@ -116,7 +116,7 @@ function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
 
 function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const value = binding.value
-  const target = value?.parent ? el.parentElement : el
+  const target = (value?.parent ? el.parentElement : el)!
   const options = value?.options ?? { passive: true }
   const uid = binding.instance?.$.uid // TODO: use custom uid generator
 
@@ -130,10 +130,18 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   keys(handlers).forEach(eventName => {
     target.addEventListener(eventName, handlers[eventName], options)
   })
+
+  // Store references for cleanup in unmounted — element may be
+  // detached from the DOM by then (e.g. when parent: true), making
+  // el.parentElement unreachable.
+  el._touchTarget = target
+  el._touchOptions = options
 }
 
 function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
-  const target = binding.value?.parent ? el.parentElement : el
+  // Use the stored target reference so cleanup works even when the
+  // element is no longer attached to the DOM (parent: true case).
+  const target = el._touchTarget ?? (binding.value?.parent ? el.parentElement : el)
   const uid = binding.instance?.$.uid
 
   if (!target?._touchHandlers || uid === undefined) return
@@ -143,8 +151,10 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   // guard against double teardown: e.g. router & suspence racing
   if (!handlers) return
 
+  const options = el._touchOptions ?? binding.value?.options
+
   keys(handlers).forEach(eventName => {
-    target.removeEventListener(eventName, handlers[eventName])
+    target.removeEventListener(eventName, handlers[eventName], options)
   })
 
   delete target._touchHandlers[uid]
@@ -153,6 +163,9 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
     // only relevant if we keep `parent: boolean`
     delete target._touchHandlers
   }
+
+  delete el._touchTarget
+  delete el._touchOptions
 }
 
 export const Touch = {

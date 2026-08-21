@@ -49,6 +49,8 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+    _touchTarget?: HTMLElement | null
+    _touchOptions?: AddEventListenerOptions
     _transitionInitialStyles?: {
       position: string
       top: string
