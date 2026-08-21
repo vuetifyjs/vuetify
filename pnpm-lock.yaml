@@ -27,7 +27,7 @@ patchedDependencies:
     hash: f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3
     path: patches/@vitest__browser.patch
   playwright-core:
-    hash: be7446f2a75303dc1fce05913c13dad66a8c466d103eb5627c9092726d2e3430
+    hash: 637574520a34b4289b8d24709437fb445216539193cd7d0dbcd2581b7f2d437c
     path: patches/playwright-core.patch
 
 importers:
@@ -521,7 +521,7 @@ importers:
         version: 5.1.2(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
       '@vitest/browser-playwright':
         specifier: ^4.0.13
-        version: 4.0.13(playwright@1.57.0)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
+        version: 4.0.13(playwright@1.62.1)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
       '@vitest/coverage-istanbul':
         specifier: ^4.0.13
         version: 4.0.13(vitest@4.0.13)
@@ -607,8 +607,8 @@ importers:
         specifier: ^2.30.1
         version: 2.30.1
       playwright:
-        specifier: ^1.57.0
-        version: 1.57.0
+        specifier: ^1.62.1
+        version: 1.62.1
       postcss:
         specifier: ^8.5.3
         version: 8.5.6
@@ -6773,14 +6773,14 @@ packages:
     resolution: {integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==}
     engines: {node: '>=8'}
 
-  playwright-core@1.57.0:
-    resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==}
-    engines: {node: '>=18'}
+  playwright-core@1.62.1:
+    resolution: {integrity: sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==}
+    engines: {node: '>=20'}
     hasBin: true
 
-  playwright@1.57.0:
-    resolution: {integrity: sha512-ilYQj1s8sr2ppEJ2YVadYBN0Mb3mdo9J0wQ+UuDhzYqURwSoW4n1Xs5vs7ORwgDGmyEh33tRMeS8KhdkMoLXQw==}
-    engines: {node: '>=18'}
+  playwright@1.62.1:
+    resolution: {integrity: sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   pngjs@7.0.0:
@@ -11547,11 +11547,11 @@ snapshots:
       vite: 7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
       vue: 3.5.25(typescript@6.0.2)
 
-  '@vitest/browser-playwright@4.0.13(playwright@1.57.0)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)':
+  '@vitest/browser-playwright@4.0.13(playwright@1.62.1)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)':
     dependencies:
       '@vitest/browser': 4.0.13(patch_hash=f7740a93ed6857057d054d6d43d156a886605c0182ed06aa66dfbd682939c3f3)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
       '@vitest/mocker': 4.0.13(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
-      playwright: 1.57.0
+      playwright: 1.62.1
       tinyrainbow: 3.0.3
       vitest: 4.0.13(@types/debug@4.1.12)(@types/node@24.10.1)(@vitest/browser-playwright@4.0.13)(@vitest/ui@4.0.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@27.2.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
     transitivePeerDependencies:
@@ -15680,11 +15680,11 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  playwright-core@1.57.0(patch_hash=be7446f2a75303dc1fce05913c13dad66a8c466d103eb5627c9092726d2e3430): {}
+  playwright-core@1.62.1(patch_hash=637574520a34b4289b8d24709437fb445216539193cd7d0dbcd2581b7f2d437c): {}
 
-  playwright@1.57.0:
+  playwright@1.62.1:
     dependencies:
-      playwright-core: 1.57.0(patch_hash=be7446f2a75303dc1fce05913c13dad66a8c466d103eb5627c9092726d2e3430)
+      playwright-core: 1.62.1(patch_hash=637574520a34b4289b8d24709437fb445216539193cd7d0dbcd2581b7f2d437c)
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -17177,7 +17177,7 @@ snapshots:
     optionalDependencies:
       '@types/debug': 4.1.12
       '@types/node': 24.10.1
-      '@vitest/browser-playwright': 4.0.13(playwright@1.57.0)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
+      '@vitest/browser-playwright': 4.0.13(playwright@1.62.1)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.0.13)
       '@vitest/ui': 4.0.13(vitest@4.0.13)
       happy-dom: 8.9.0(encoding@0.1.13)
       jsdom: 27.2.0
