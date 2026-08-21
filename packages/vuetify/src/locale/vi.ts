@@ -50,6 +50,8 @@ export default {
       nextYear: 'Năm sau',
       selectYear: 'Chọn năm',
       currentMonth: 'Tháng này, {0}',
+      scrollMonthPrev: 'Cuộn tới tháng trước',
+      scrollMonthNext: 'Cuộn tới tháng sau',
     },
   },
   datePicker: {

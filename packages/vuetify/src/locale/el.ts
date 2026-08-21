@@ -50,6 +50,8 @@ export default {
       nextYear: 'Επόμενο έτος',
       selectYear: 'Επιλέξτε έτος',
       currentMonth: 'Τρέχων μήνας, {0}',
+      scrollMonthPrev: 'Κύλιση στον προηγούμενο μήνα',
+      scrollMonthNext: 'Κύλιση στον επόμενο μήνα',
     },
   },
   datePicker: {

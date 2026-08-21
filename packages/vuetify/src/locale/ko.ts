@@ -50,6 +50,8 @@ export default {
       nextYear: '다음 연도',
       selectYear: '연도 선택',
       currentMonth: '이번 달, {0}',
+      scrollMonthPrev: '이전 달로 스크롤',
+      scrollMonthNext: '다음 달로 스크롤',
     },
   },
   datePicker: {

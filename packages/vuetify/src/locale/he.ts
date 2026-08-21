@@ -50,6 +50,8 @@ export default {
       nextYear: 'השנה הבאה',
       selectYear: 'בחר שנה',
       currentMonth: 'החודש הנוכחי, {0}',
+      scrollMonthPrev: 'גלול לחודש הקודם',
+      scrollMonthNext: 'גלול לחודש הבא',
     },
   },
   datePicker: {

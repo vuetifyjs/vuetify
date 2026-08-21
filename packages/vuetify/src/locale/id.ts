@@ -50,6 +50,8 @@ export default {
       nextYear: 'Tahun berikutnya',
       selectYear: 'Pilih tahun',
       currentMonth: 'Bulan ini, {0}',
+      scrollMonthPrev: 'Gulir ke bulan sebelumnya',
+      scrollMonthNext: 'Gulir ke bulan berikutnya',
     },
   },
   datePicker: {

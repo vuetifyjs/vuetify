@@ -50,6 +50,8 @@ export default {
       nextYear: 'Próximo ano',
       selectYear: 'Selecionar ano',
       currentMonth: 'Mês atual, {0}',
+      scrollMonthPrev: 'Role para o mês anterior',
+      scrollMonthNext: 'Role para o próximo mês',
     },
   },
   datePicker: {

@@ -50,6 +50,8 @@ export default {
       nextYear: 'ปีถัดไป',
       selectYear: 'เลือกปี',
       currentMonth: 'เดือนนี้, {0}',
+      scrollMonthPrev: 'เลื่อนไปเดือนก่อนหน้า',
+      scrollMonthNext: 'เลื่อนไปเดือนถัดไป',
     },
   },
   datePicker: {
