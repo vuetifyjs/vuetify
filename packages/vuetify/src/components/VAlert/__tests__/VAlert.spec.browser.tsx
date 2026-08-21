@@ -1,7 +1,7 @@
 import { VAlert } from '..'
 
 // Utilities
-import { render, screen, showcase } from '@test'
+import { render, screen, showcase, userEvent, wait } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -37,6 +37,60 @@ describe('VAlert', () => {
         // TODO: useless assert
         expect(alert).toHaveTextContent(defaultColors[idx])
       })
+    })
+  })
+
+  describe('timeout', () => {
+    it('keeps the alert visible until the timeout elapses, then dismisses it', async () => {
+      // Offset from the top-left corner so the resting headless-CI cursor doesn't
+      // hover the full-width alert and pause its auto-dismiss timer.
+      render(() => <div style={{ paddingTop: '200px' }}><VAlert text="auto dismiss" timeout={ 1000 } /></div>)
+
+      await screen.findByCSS('.v-alert')
+
+      // should not be dismissed before the timeout elapses
+      await wait(100)
+      expect(document.querySelector('.v-alert')).not.toBeNull()
+
+      // should be dismissed after the timeout
+      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
+    })
+
+    it('emits update:modelValue when auto-dismissed', async () => {
+      const onUpdate = vi.fn()
+
+      render(() => (
+        <div style={{ paddingTop: '200px' }}>
+          <VAlert text="auto dismiss" timeout={ 150 } { ...{ 'onUpdate:modelValue': onUpdate } } />
+        </div>
+      ))
+
+      await expect.poll(() => onUpdate.mock.calls.length, { timeout: 5000 }).toBeGreaterThan(0)
+      expect(onUpdate).toHaveBeenLastCalledWith(false)
+    })
+
+    it('pauses the timer while hovered and resumes on leave', async () => {
+      render(() => <VAlert text="hover" timeout={ 500 } />)
+
+      const alert = await screen.findByCSS('.v-alert')
+
+      await userEvent.hover(alert)
+      // stays visible past its timeout while hovered
+      await wait(700)
+      expect(document.querySelector('.v-alert')).not.toBeNull()
+
+      // resumes and dismisses once the pointer leaves
+      await userEvent.unhover(alert)
+      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
+    })
+
+    it('does not auto-dismiss by default', async () => {
+      render(() => <VAlert text="persistent" />)
+
+      await screen.findByCSS('.v-alert')
+      await wait(300)
+
+      expect(document.querySelector('.v-alert')).not.toBeNull()
     })
   })
 
