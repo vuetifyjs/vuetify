@@ -90,6 +90,31 @@ describe('VBtn', () => {
     })
   })
 
+  describe('size', () => {
+    it.each([
+      ['x-small', 20],
+      ['small', 28],
+      ['default', 36],
+      ['large', 44],
+      ['x-large', 52],
+    ])('should match %s and size="%s"', async (name, num) => {
+      render(() => (
+        <>
+          <VBtn size={ name } data-testid="named">{ name }</VBtn>
+          <VBtn size={ num } data-testid="numeric">{ num }</VBtn>
+        </>
+      ))
+
+      const named = getComputedStyle(screen.getByTestId('named'))
+      const numeric = getComputedStyle(screen.getByTestId('numeric'))
+
+      expect(named.height).toBe(numeric.height)
+      expect(named.fontSize).toBe(numeric.fontSize)
+      expect(named.minWidth).toBe(numeric.minWidth)
+      expect(named.padding).toBe(numeric.padding)
+    })
+  })
+
   describe('events', () => {
     it('emits native click events', async () => {
       const click = vi.fn()

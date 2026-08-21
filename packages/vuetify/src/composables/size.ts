@@ -28,8 +28,8 @@ export function useSize (
       sizeClasses = `${name}--size-${size}`
     } else if (size) {
       sizeStyles = {
-        width: convertToUnit(size),
-        height: convertToUnit(size),
+        // ${name}-size is already used in some places for font size instead of dimensions
+        [`--${name}-scale`]: convertToUnit(size),
       }
     }
     return { sizeClasses, sizeStyles }

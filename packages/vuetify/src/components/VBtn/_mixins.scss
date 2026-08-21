@@ -6,20 +6,33 @@
 @use './variables' as *;
 
 @mixin button-sizes ($map: $button-sizes, $immediate: false) {
+  $selector: '.v-btn';
+  @if $immediate {
+    $selector: '#{&}#{$selector}';
+  }
+  $height: var(--v-btn-scale);
+  $base-height: map.get($map, 'height');
+  $multiplier: calc(($height - $base-height) / #{settings.$size-scale});
+  $base-size: map.get($map, 'font-size');
+  $size: calc($base-size + (2rem * $multiplier / 16));
+
+  #{$selector} {
+    --v-btn-height: #{$height};
+    --v-btn-size: #{$size};
+    font-size: var(--v-btn-size);
+    min-width: tools.roundEven(calc($height * map.get($map, 'width-ratio')));
+    padding: 0 tools.roundEven(calc($height / map.get($map, 'padding-ratio')));
+  }
+
   @each $sizeName, $multiplier in settings.$size-scales {
-    $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
-    $height: map.get($map, 'height') + (settings.$size-scale * $multiplier);
     $selector: '.v-btn--size-#{$sizeName}';
     @if $immediate {
       $selector: '#{&}#{$selector}';
     }
 
     #{$selector} {
-      --v-btn-size: #{$size};
-      --v-btn-height: #{$height};
-      font-size: var(--v-btn-size);
-      min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
-      padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
+      --v-btn-scale: #{map.get($map, 'height') + (settings.$size-scale * $multiplier)};
+      --v-btn-size: #{calc(map.get($map, 'font-size') + 2rem * $multiplier / 16)};
     }
   }
 }
