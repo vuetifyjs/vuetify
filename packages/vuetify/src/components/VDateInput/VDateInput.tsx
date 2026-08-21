@@ -13,6 +13,7 @@ import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
+import { useMenuActivator } from '@/composables/menuActivator'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -66,6 +67,7 @@ export const makeVDateInputProps = propsFactory({
   }),
   ...makeVTextFieldProps({
     prependIcon: '$calendar',
+    role: 'combobox',
   }),
   ...omit(makeVDatePickerProps({
     hideHeader: true,
@@ -127,6 +129,10 @@ export const VDateInput = genericComponent<new <
     )
 
     const menu = useProxiedModel(props, 'menu')
+    const { menuId, ariaExpanded, ariaControls } = useMenuActivator(
+      { closeText: '$vuetify.close', openText: '$vuetify.open' },
+      menu,
+    )
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
@@ -304,12 +310,16 @@ export const VDateInput = genericComponent<new <
           onClick:control={ onClick }
           onUpdate:modelValue={ onUpdateDisplayModel }
           onUpdate:focused={ event => isFocused.value = event }
+          aria-haspopup="dialog"
+          aria-expanded={ ariaExpanded.value }
+          aria-controls={ ariaControls.value }
         >
           {{
             ...slots,
             default: () => (
               <>
                 <VMenu
+                  id={ menuId.value }
                   v-model={ menu.value }
                   activator="parent"
                   minWidth="0"
