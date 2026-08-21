@@ -41,6 +41,14 @@
       @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
         --v-selection-control-size: #{$selection-control-size + $modifier}
 
+  .v-selection-control__content
+    display: flex
+    flex-direction: column
+
+  .v-selection-control__text
+    font-size: $selection-control-text-font-size
+    color: $selection-control-text-color
+
   .v-selection-control__wrapper
     width: var(--v-selection-control-size)
     height: var(--v-selection-control-size)

@@ -25,7 +25,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
-import { toRef } from 'vue'
+import { onMounted, onScopeDispose, toRef, watch } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
@@ -56,6 +56,10 @@ export const makeVAlertProps = propsFactory({
   closeLabel: {
     type: String,
     default: '$vuetify.close',
+  },
+  duration: {
+    type: [Number, String],
+    default: -1,
   },
   icon: {
     type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
@@ -107,6 +111,28 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+
+    let dismissTimer = -1
+    function clearDismissTimer () {
+      if (dismissTimer !== -1) {
+        window.clearTimeout(dismissTimer)
+        dismissTimer = -1
+      }
+    }
+    function scheduleDismiss () {
+      clearDismissTimer()
+      const ms = Number(props.duration)
+      if (ms > 0 && isActive.value) {
+        dismissTimer = window.setTimeout(() => {
+          isActive.value = false
+          dismissTimer = -1
+        }, ms)
+      }
+    }
+    onMounted(scheduleDismiss)
+    watch(() => [props.duration, isActive.value], scheduleDismiss)
+    onScopeDispose(clearDismissTimer)
+
     const icon = toRef(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
