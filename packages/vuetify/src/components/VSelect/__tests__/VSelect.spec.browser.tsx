@@ -48,6 +48,24 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  it('should match autofilled text against item values', async () => {
+    const model = ref()
+
+    render(() => (
+      <VSelect
+        v-model={ model.value }
+        items={[{ title: 'California', value: 'CA' }]}
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    vi.spyOn(input, 'matches').mockImplementation(selector => selector === ':autofill')
+
+    await userEvent.fill(input, 'CA')
+
+    expect(model.value).toBe('CA')
+  })
+
   it('should toggle menu with dropdown icon', async () => {
     const { element } = render(() => (
       <VSelect items={['Item #1', 'Item #2']} />
