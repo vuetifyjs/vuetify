@@ -94,7 +94,7 @@ export default {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
     appendAction: '{0} 뒤에 추가된 동작',
-    otp: 'OTP 문자 {0}를 입력하세요',
+    otp: '인증 코드를 입력하세요',
   },
   fileInput: {
     counter: '{0}개 파일',

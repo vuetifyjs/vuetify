@@ -94,7 +94,7 @@ export default {
     clear: 'Ryd {0}',
     prependAction: '{0} foranstillet handling',
     appendAction: '{0} efterstillet handling',
-    otp: 'Indtast OTP-tegn {0}',
+    otp: 'Indtast bekræftelseskode',
   },
   fileInput: {
     counter: '{0} filer',

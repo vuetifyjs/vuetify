@@ -94,7 +94,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'أدخل رمز التحقق',
   },
   fileInput: {
     counter: '{0} ملفات',

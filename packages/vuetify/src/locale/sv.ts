@@ -94,7 +94,7 @@ export default {
     clear: 'Rensa {0}',
     prependAction: '{0} föregående åtgärd',
     appendAction: '{0} efterföljande åtgärd',
-    otp: 'Vänligen ange OTP-tecken {0}',
+    otp: 'Ange verifieringskod',
   },
   fileInput: {
     counter: '{0} filer',

@@ -94,7 +94,7 @@ export default {
     clear: 'Vider {0}',
     prependAction: '{0} action avant',
     appendAction: '{0} action après',
-    otp: 'Caractère {0} du mot de passe à usage unique',
+    otp: 'Saisissez le code de vérification',
   },
   fileInput: {
     counter: '{0} fichier(s)',
