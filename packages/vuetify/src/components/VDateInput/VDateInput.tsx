@@ -15,6 +15,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { createSegmentedEdit } from '@/composables/segmentedMask'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
@@ -112,7 +113,7 @@ export const VDateInput = genericComponent<new <
     const { t } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
+    const { isValid, maskDate, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
@@ -134,6 +135,7 @@ export const VDateInput = genericComponent<new <
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
+    const { onBeforeinput, onInput } = createSegmentedEdit(value => maskDate(value, props.multiple))
 
     useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
 
@@ -166,6 +168,13 @@ export const VDateInput = genericComponent<new <
       }
 
       return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
+    })
+
+    const placeholder = computed(() => {
+      if (props.placeholder) return props.placeholder
+      if (props.multiple === 'range') return `${parserFormat.value} - ${parserFormat.value}`
+      if (props.multiple) return `${parserFormat.value}, ...`
+      return parserFormat.value
     })
 
     const inputmode = computed(() => {
@@ -258,7 +267,7 @@ export const VDateInput = genericComponent<new <
           model.value = clampDate(parseDate(value))
         }
       } else {
-        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
+        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/).filter(Boolean)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts
@@ -302,9 +311,11 @@ export const VDateInput = genericComponent<new <
           style={ props.style }
           modelValue={ display.value }
           inputmode={ inputmode.value }
-          placeholder={ props.placeholder ?? parserFormat.value }
+          placeholder={ placeholder.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
+          onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
+          onInput={ isInteractive.value ? onInput : undefined }
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }

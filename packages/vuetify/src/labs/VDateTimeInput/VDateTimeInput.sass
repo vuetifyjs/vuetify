@@ -1,0 +1,28 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-date-time-input
+    &__body
+      display: flex
+      align-items: stretch
+
+      > .v-picker
+        border-radius: 0
+
+    // the list is taken out of flow so that the date picker alone
+    // decides the height it has to scroll within
+    &__times
+      position: relative
+      overflow: hidden
+      min-width: 120px
+
+      > .v-list
+        position: absolute
+        inset: 0
+        overflow-y: auto
+        text-align: center
+
+    &__actions
+      display: flex
+      justify-content: flex-end
+      padding: 8px

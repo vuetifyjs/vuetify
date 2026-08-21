@@ -1,5 +1,6 @@
 // Composables
 import { useDate } from '@/composables/date/date'
+import { dateSegments, maskSegmentsFrom } from '@/composables/segmentedMask'
 
 // Utilities
 import { toRef } from 'vue'
@@ -7,16 +8,16 @@ import { consoleWarn, isString, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
+import type { Segment } from '@/composables/segmentedMask'
 
-// Types
 export interface DateFormatProps {
   inputFormat?: string
 }
 
 class DateFormatSpec {
   constructor (
-    public readonly order: string, // mdy | dmy | ymd
-    public readonly separator: string // / | - | .
+    public readonly order: string,
+    public readonly separator: string
   ) { }
 
   get format () {
@@ -24,6 +25,10 @@ class DateFormatSpec {
       .map(sign => `${sign}${sign}`)
       .join(this.separator)
       .replace('yy', 'yyyy')
+  }
+
+  get segments (): Segment[] {
+    return dateSegments(this.order, this.separator)
   }
 
   static canBeParsed (v: any) {
@@ -128,6 +133,31 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     return !!parseDate(text)
   }
 
+  function maskDate (input: string, multiple: boolean | 'range' | number | string = false) {
+    const segments = currentFormat.value.segments
+    const text = input.trimStart().replace(/[^\d/.\- ]/g, '')
+    const isRange = multiple === 'range'
+    const join = isRange ? ' - ' : ', '
+    const limit = isRange ? 2 : multiple ? Infinity : 1
+    let result = ''
+    let index = 0
+
+    for (let date = 0; date < limit; date++) {
+      const start = index
+      const { value, index: next, closed } = maskSegmentsFrom(segments, text, index)
+      index = next
+
+      if (index === start || !value) break
+
+      result += value
+
+      if (!closed && index >= text.length) break
+      if (date + 1 < limit && (closed || index < text.length)) result += join
+    }
+
+    return result
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('T')[0].split('-')
 
@@ -138,8 +168,11 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   return {
     isValid,
+    maskDate,
     parseDate,
     formatDate,
     parserFormat: toRef(() => currentFormat.value.format),
+    order: toRef(() => currentFormat.value.order),
+    separator: toRef(() => currentFormat.value.separator),
   }
 }

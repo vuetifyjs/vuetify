@@ -1,19 +1,20 @@
 // Components
-import { VBtn } from '@/components/VBtn'
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
-import { VSpacer } from '@/components/VGrid/VSpacer'
-import { VMenu } from '@/components/VMenu'
+import { useInputIcon } from '@/components/VInput/InputIcon'
+import { VMenu } from '@/components/VMenu/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { makeVTimePickerProps, VTimePicker } from '@/components/VTimePicker/VTimePicker'
 
 // Composables
-import { useTimeInput } from './time-input'
-import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useLocale } from '@/composables/locale'
+import { makeFocusProps } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { createSegmentedEdit } from '@/composables/segmentedMask'
+import { makeTimeFormatProps, useTimeFormat } from '@/composables/timeFormat'
 
 // Utilities
-import { shallowRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -32,17 +33,26 @@ export type VTimeInputSlots = Omit<VTextFieldSlots, 'default'> & {
 }
 
 export const makeVTimeInputProps = propsFactory({
+  menu: Boolean,
+  menuProps: Object as PropType<VMenu['$props']>,
+  openOnFocus: Boolean,
+  updateOn: {
+    type: Array as PropType<('blur' | 'enter')[]>,
+    default: () => ['blur', 'enter'],
+  },
   pickerProps: Object as PropType<VTimePicker['$props']>,
 
+  ...makeTimeFormatProps(),
   ...makeFocusProps(),
-  ...makeVConfirmEditProps(),
+  ...makeVConfirmEditProps({
+    hideActions: true,
+  }),
   ...makeVTextFieldProps({
-    placeholder: '--:--',
     prependIcon: '$clock',
   }),
   ...omit(makeVTimePickerProps({
-    variant: 'dial',
-    hideHeader: true,
+    format: '24hr',
+    hideTitle: true,
   }), [
     'location',
     'rounded',
@@ -59,183 +69,224 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
   props: makeVTimeInputProps(),
 
   emits: {
-    'update:modelValue': (_val: string) => true,
-    'update:period': (_val: string) => true,
+    save: (value: unknown) => true,
+    cancel: () => true,
+    'update:focused': (val: boolean) => true,
+    'update:modelValue': (val: string | null) => true,
+    'update:menu': (val: boolean) => true,
+    'update:period': (val: string) => true,
   },
 
-  setup (props, { slots }) {
-    const { t } = useLocale()
-    const { isFocused, focus, blur } = useFocus(props)
-    const model = useProxiedModel(props, 'modelValue', null)
-    const period = useProxiedModel(props, 'period', 'am')
-    const menu = shallowRef(false)
-    const controlRef = shallowRef<HTMLInputElement>()
-    const textFieldRef = shallowRef<VTextField>()
+  setup (props, { emit, slots }) {
+    const { InputIcon } = useInputIcon(props)
+    const timeFormat = useTimeFormat(toRef(() => ({
+      useSeconds: props.useSeconds,
+      format: props.format,
+    })))
 
-    const timeInput = useTimeInput(
-      {
-        modelValue: model.value,
-        format: props.format,
-        useSeconds: props.useSeconds,
-        period: period.value,
-        readonly: props.readonly,
-        disabled: props.disabled,
-      },
-      { controlRef }
-    )
+    const model = useProxiedModel(props, 'modelValue')
+    const menu = useProxiedModel(props, 'menu')
+    const isFocused = shallowRef(props.focused)
+    const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
+    const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
+    const { onBeforeinput, onInput } = createSegmentedEdit(timeFormat.maskTime)
 
-    // Sync composable model with component model (bidirectional)
-    watch(() => model.value, val => {
-      if (val !== timeInput.model.value) {
-        timeInput.model.value = val
-      }
-    })
-    watch(() => timeInput.model.value, val => {
-      if (val !== model.value) {
-        model.value = val
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
+
+    const display = computed(() => timeFormat.formatTime(model.value))
+    const placeholder = computed(() => props.placeholder ?? timeFormat.parserFormat.value)
+    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isReadonly = computed(() => !props.updateOn.length || props.readonly)
+
+    const viewMode = shallowRef(props.viewMode)
+    const lastViewMode = computed(() => props.useSeconds ? 'second' : 'minute')
+
+    watch(menu, val => {
+      if (!val) {
+        disabledActions.value = ['save']
+        viewMode.value = props.viewMode
       }
     })
 
-    // Sync composable period with component period (bidirectional)
-    watch(() => period.value, val => {
-      if (val !== timeInput.period.value) {
-        timeInput.period.value = val
-      }
-    })
-    watch(() => timeInput.period.value, val => {
-      if (val && val !== period.value) {
-        period.value = val
-      }
-    })
+    // a click on the clock is the only interaction that can complete a value:
+    // wheel events emit the same updates but must not close the menu, and a
+    // click that advances the view (hour -> minute) is not a completed value
+    let pressedIn: string | null = null
+
+    function onPickerMousedown (e: MouseEvent) {
+      const target = e.target as HTMLElement
+      // the header fields have to be able to take focus to switch the view back,
+      // anything else keeps focus in the text field
+      if (!target.closest('.v-time-picker-controls__time__field')) e.preventDefault()
+      pressedIn = target.closest('.v-time-picker-clock') ? viewMode.value : null
+    }
+
+    function onPickerClick () {
+      const completed = pressedIn === lastViewMode.value && viewMode.value === pressedIn
+      pressedIn = null
+      if (completed && props.hideActions && model.value) menu.value = false
+    }
 
     function onKeydown (e: KeyboardEvent) {
-      // Handle Enter to open menu
-      if (e.key === 'Enter' && (!menu.value || !isFocused.value)) {
+      if (e.key !== 'Enter') return
+
+      if (!menu.value || !isFocused.value) {
         menu.value = true
-        return
       }
 
-      // Delegate to time input composable
-      timeInput.onKeydown(e)
+      if (props.updateOn.includes('enter') && !props.readonly) {
+        onUserInput(e.target as HTMLInputElement)
+      }
     }
 
     function onClick (e: MouseEvent) {
+      if (props.disabled) return
       e.preventDefault()
       e.stopPropagation()
-
       menu.value = true
     }
 
-    function onSave () {
+    function onCancel () {
+      emit('cancel')
       menu.value = false
     }
 
-    // Get the input element from VTextField after mount
-    watch(textFieldRef, tf => {
-      if (tf?.$el) {
-        controlRef.value = tf.controlRef as HTMLInputElement
-        controlRef.value?.addEventListener('keydown', onKeydown)
+    function onSave (value: string) {
+      emit('save', value)
+      menu.value = false
+    }
+
+    function onUpdateDisplayModel (value: unknown) {
+      if (value != null) return
+      model.value = null
+    }
+
+    function onBlur (e: FocusEvent) {
+      if ((e.relatedTarget as HTMLElement | null)?.closest('.v-time-picker')) return
+
+      if (props.updateOn.includes('blur') && !props.readonly) {
+        onUserInput(e.target as HTMLInputElement)
       }
-    }, { flush: 'post' })
+
+      closeWhenFocusLeaves(menu, vTextFieldRef.value?.$el, vMenuRef.value?.contentEl)
+    }
+
+    function onUserInput ({ value }: HTMLInputElement) {
+      if (!value.trim()) {
+        model.value = null
+        return
+      }
+
+      const parsed = timeFormat.parseTime(value)
+      if (parsed) model.value = parsed
+    }
 
     useRender(() => {
-      const textFieldProps = VTextField.filterProps(props)
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const timePickerProps = {
         ...VTimePicker.filterProps(omit(props, [
           'active',
           'bgColor',
           'color',
-          'period',
           'rounded',
           'maxWidth',
           'minWidth',
           'width',
-          'variant',
         ])),
         ...props.pickerProps,
       }
+      const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))
 
       return (
         <VTextField
-          ref={ textFieldRef }
+          ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ timeInput.displayValue.value }
-          onInput={ timeInput.onInput }
+          class={['v-time-input', props.class]}
+          style={ props.style }
+          modelValue={ display.value }
+          placeholder={ placeholder.value }
+          readonly={ isReadonly.value }
+          onKeydown={ isInteractive.value ? onKeydown : undefined }
+          onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
+          onInput={ isInteractive.value ? onInput : undefined }
           focused={ menu.value || isFocused.value }
-          onFocus={ () => { focus(); timeInput.onFocus() } }
-          onBlur={ () => { blur(); timeInput.onBlur() } }
-          onClick:control={ e => { onClick(e); timeInput.onClick(e) } }
-          onClick:prepend={ onClick }
+          onBlur={ onBlur }
+          validationValue={ model.value }
+          onClick:control={ onClick }
+          onUpdate:modelValue={ onUpdateDisplayModel }
+          onUpdate:focused={ event => isFocused.value = event }
         >
-          <VMenu
-            v-model={ menu.value }
-            activator="parent"
-            minWidth="0"
-            closeOnContentClick={ false }
-            openOnClick={ false }
-          >
-            <VConfirmEdit
-              { ...confirmEditProps }
-              v-model={ model.value }
-              onSave={ onSave }
-            >
-              {{
-                default: ({ actions, model: proxyModel, save, cancel, isPristine }) => {
-                  return (
-                    <VTimePicker
-                      v-model:period={ period.value }
-                      { ...timePickerProps }
-                      modelValue={ props.hideActions ? model.value : proxyModel.value }
-                      onUpdate:modelValue={ val => {
-                        if (!props.hideActions) {
-                          proxyModel.value = val
-                        } else {
-                          model.value = val
-                        }
-                      }}
-                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                    >
-                      {{
-                        actions: () => (
-                          <>
-                            <div class="d-flex">
-                              <VBtn
-                                class="mr-0"
-                                active={ period.value === 'am' }
-                                color={ period.value === 'am' ? props.color : undefined }
-                                disabled={ props.disabled }
-                                text={ t('$vuetify.timePicker.am') }
-                                variant={ props.disabled && period.value === 'am' ? 'elevated' : 'tonal' }
-                                onClick={ () => period.value !== 'am' ? period.value = 'am' : null }
-                              />
-                              <VBtn
-                                active={ period.value === 'pm' }
-                                color={ period.value === 'pm' ? props.color : undefined }
-                                disabled={ props.disabled }
-                                text={ t('$vuetify.timePicker.pm') }
-                                variant={ props.disabled && period.value === 'pm' ? 'elevated' : 'tonal' }
-                                onClick={ () => period.value !== 'pm' ? period.value = 'pm' : null }
-                              />
-                            </div>
-                            <VSpacer />
-                            { !props.hideActions
-                              ? slots.actions?.({ save, cancel, isPristine }) ?? actions()
-                              : undefined }
-                          </>
-                        ),
-                      }}
-                    </VTimePicker>
-                  )
-                },
-              }}
-            </VConfirmEdit>
-          </VMenu>
+          {{
+            ...slots,
+            default: () => (
+              <>
+                <VMenu
+                  ref={ vMenuRef }
+                  v-model={ menu.value }
+                  activator="parent"
+                  minWidth="0"
+                  eager={ isFocused.value }
+                  closeOnContentClick={ false }
+                  openOnClick={ false }
+                  { ...props.menuProps }
+                >
+                  <VConfirmEdit
+                    { ...confirmEditProps }
+                    v-model={ model.value }
+                    disabled={ disabledActions.value }
+                    onSave={ onSave }
+                    onCancel={ onCancel }
+                  >
+                    {{
+                      default: ({ actions, model: proxyModel, save, cancel, isPristine }) => (
+                        <VTimePicker
+                          { ...timePickerProps }
+                          v-model:viewMode={ viewMode.value }
+                          modelValue={ props.hideActions ? model.value : proxyModel.value }
+                          onUpdate:modelValue={ value => {
+                            if (props.hideActions) {
+                              model.value = value
+                            } else {
+                              proxyModel.value = value
+                            }
+                            emit('save', value)
+                            disabledActions.value = []
+                          }}
+                          onMousedown={ onPickerMousedown }
+                          onClick={ onPickerClick }
+                        >
+                          {{
+                            actions: !props.hideActions ? () => slots.actions?.({ save, cancel, isPristine }) ?? actions() : undefined,
+                          }}
+                        </VTimePicker>
+                      ),
+                    }}
+                  </VConfirmEdit>
+                </VMenu>
 
-          { slots.default?.() }
+                { slots.default?.() }
+              </>
+            ),
+            prepend: hasPrepend ? prependSlotProps => (
+              slots.prepend
+                ? slots.prepend(prependSlotProps)
+                : (props.prependIcon && (
+                  <InputIcon
+                    key="prepend-icon"
+                    name="prepend"
+                    tabindex={ props['onClick:prepend'] ? undefined : -1 }
+                    onClick={ isInteractive.value ? onClick : undefined }
+                  />
+                ))
+            ) : undefined,
+          }}
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 
