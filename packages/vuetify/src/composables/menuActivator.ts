@@ -28,7 +28,7 @@ export function useMenuActivator (props: MenuActivatorProps, isOpen: MaybeRefOrG
   const menuId = computed(() => `menu-${uid}`)
 
   const ariaExpanded = toRef(() => toValue(isOpen))
-  const ariaControls = toRef(() => menuId.value)
+  const ariaControls = toRef(() => toValue(isOpen) ? menuId.value : undefined)
 
   return {
     menuId,
