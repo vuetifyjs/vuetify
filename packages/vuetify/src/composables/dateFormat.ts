@@ -132,8 +132,10 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
   }
 
   function maskDate (input: string, multiple: boolean | 'range' | number | string = false, caret = -1) {
-    const text = input.trimStart().replace(/[^\d/.\- ]/g, '')
-    const trimmed = input.length - text.length
+    const noise = /[^\d/.\- ]/g
+    const text = input.trimStart().replace(noise, '')
+    // the caret moves along with the characters the mask keeps, e.g. the comma joining two dates
+    const before = caret < 0 ? -1 : input.slice(0, caret).trimStart().replace(noise, '').length
     const isRange = multiple === 'range'
     const join = isRange ? ' - ' : ', '
     const limit = isRange ? 2 : multiple ? Infinity : 1
@@ -146,7 +148,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
     for (let date = 0; date < limit; date++) {
       const start = index
-      const masked = maskSegmentsFrom(segments.value, text, index, caret < 0 ? -1 : caret - trimmed)
+      const masked = maskSegmentsFrom(segments.value, text, index, before)
       index = masked.index
 
       // the next date waits for the end of the previous one

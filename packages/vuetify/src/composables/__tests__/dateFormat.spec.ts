@@ -6,13 +6,13 @@ import { mount } from '@vue/test-utils'
 import { defineComponent, ref } from 'vue'
 import { createVuetify } from '@/framework'
 
-type MaskDate = (text: string, multiple?: boolean | 'range') => string
+type MaskDate = ReturnType<typeof useDateFormat>['maskDate']
 
 function useMaskDate (inputFormat: string | undefined, assert: (maskDate: MaskDate) => void) {
   mount(defineComponent({
     setup () {
       const { maskDate } = useDateFormat({ inputFormat }, ref('en-US'))
-      assert((text, multiple) => maskDate(text, multiple).value)
+      assert(maskDate)
       return () => {}
     },
   }), {
@@ -22,7 +22,7 @@ function useMaskDate (inputFormat: string | undefined, assert: (maskDate: MaskDa
 
 // the input handler re-masks after every keystroke
 function typing (maskDate: MaskDate, keys: string) {
-  return [...keys].reduce((value, key) => maskDate(value + key), '')
+  return [...keys].reduce((value, key) => maskDate(value + key).value, '')
 }
 
 const formats: Record<string, [string, string][]> = {
@@ -86,13 +86,13 @@ describe('dateFormat', () => {
     it('should leave a complete date untouched', () => {
       useMaskDate(format, maskDate => {
         const complete = typing(maskDate, '11122023')
-        expect(maskDate(complete)).toBe(complete)
+        expect(maskDate(complete).value).toBe(complete)
       })
     })
   })
 
   it('should cap the day of a pasted date instead of rolling it over', () => {
-    useMaskDate('mm/dd/yyyy', maskDate => expect(maskDate('04/31/2025')).toBe('04/30/2025'))
+    useMaskDate('mm/dd/yyyy', maskDate => expect(maskDate('04/31/2025').value).toBe('04/30/2025'))
   })
 
   it('should mask with the format inferred from locale', () => {
@@ -101,7 +101,7 @@ describe('dateFormat', () => {
 
   describe('maskDate for a range', () => {
     function typingRange (maskDate: MaskDate, keys: string) {
-      return [...keys].reduce((value, key) => maskDate(value + key, 'range'), '')
+      return [...keys].reduce((value, key) => maskDate(value + key, 'range').value, '')
     }
 
     it.each([
@@ -125,9 +125,16 @@ describe('dateFormat', () => {
     })
   })
 
+  it('should not let a later date shift the caret', () => {
+    useMaskDate('mm/dd/yyyy', maskDate => {
+      expect(maskDate('03/1/2024', true, 4)).toMatchObject({ value: '03/1/2024', caret: 4 })
+      expect(maskDate('03/1/2024, 03/15/2024', true, 4)).toMatchObject({ value: '03/1/2024, 03/15/2024', caret: 4 })
+    })
+  })
+
   describe('maskDate for a list', () => {
     function typingList (maskDate: MaskDate, keys: string) {
-      return [...keys].reduce((value, key) => maskDate(value + key, true), '')
+      return [...keys].reduce((value, key) => maskDate(value + key, true).value, '')
     }
 
     it.each([
