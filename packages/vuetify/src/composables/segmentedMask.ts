@@ -9,7 +9,7 @@ export type ValueSegment = {
   key: string
   size: number
   max?: number
-  // narrower limit that only closes a section early while typing, e.g. February
+  // narrower limit read from the other sections, capped afterwards when they come later
   softMax?: (parts: SegmentParts) => number
   // completes a short section once a separator closes it, defaults to zero padding
   close?: (digits: string) => string
@@ -38,13 +38,17 @@ export type MaskResult = {
 
 function readSection (segment: ValueSegment, text: string, start: number, tail: boolean, parts: SegmentParts) {
   const max = segment.max ?? 10 ** segment.size - 1
+  const soft = segment.softMax?.(parts) ?? max
   let index = start
   let digits = ''
   let filled = false
 
   while (index < text.length && !filled && /\d/.test(text[index])) {
+    const value = Number(digits + text[index])
+
     // a digit that does not fit belongs to the next section, e.g. 1 then 9 is January 9th
-    if (Number(digits + text[index]) > max) {
+    // the narrower limit only rejects the digit just typed, and only while a next section can take it
+    if (value > max || (value > soft && !tail && index === text.length - 1)) {
       filled = true
       break
     }
@@ -63,7 +67,7 @@ function readSection (segment: ValueSegment, text: string, start: number, tail: 
   }
 
   // a section with no room left for another digit is closed, e.g. 4 is April
-  filled ||= !!digits && Number(digits) * 10 ** (segment.size - digits.length) > (segment.softMax?.(parts) ?? max)
+  filled ||= !!digits && Number(digits) * 10 ** (segment.size - digits.length) > soft
 
   return { digits, index, filled, closed: index > separatorStart }
 }
@@ -85,6 +89,7 @@ export function maskSegmentsFrom (
   let complete = true
 
   const parts: SegmentParts = {}
+  const limited: { segment: ValueSegment, at: number }[] = []
 
   for (let i = 0; i < segments.length; i++) {
     const segment = segments[i]
@@ -131,6 +136,9 @@ export function maskSegmentsFrom (
     parts[segment.key] = digits
     result += pending + digits
     pending = ''
+
+    if (segment.softMax) limited.push({ segment, at: result.length - digits.length })
+
     width = base + digits.length
 
     if (holds && outCaret < 0) {
@@ -149,6 +157,19 @@ export function maskSegmentsFrom (
 
     // a trailing separator moves the format along with it
     if (separator) width = base
+  }
+
+  // a section read before the one that narrows it is capped afterwards, e.g. 31.04 is April 30th
+  for (const { segment, at } of limited) {
+    const digits = parts[segment.key]
+    const limit = segment.softMax!(parts)
+
+    if (Number(digits) <= limit) continue
+
+    const capped = String(limit).padStart(digits.length, '0')
+
+    parts[segment.key] = capped
+    result = result.slice(0, at) + capped + result.slice(at + digits.length)
   }
 
   return { value: result, index, closed, caret: outCaret, width, gaps, complete }
@@ -183,7 +204,7 @@ export function overtype (text: string, start: number, typed: string): [string, 
 export type MaskEdit = (value: string, caret?: number) => Pick<MaskResult, 'value' | 'caret' | 'gaps'>
 
 // deleting takes out digits but leaves the separators, so the sections keep their place
-function keepSeparators (previous: string, next: string, start: number, removed: number, forward: boolean) {
+function keepSeparators (previous: string, start: number, removed: number, forward: boolean) {
   const cut = previous.slice(start, start + removed)
   const tail = previous.slice(start + removed)
   const kept = /\d/.test(tail) ? cut.replace(/\d/g, '') : ''
@@ -224,12 +245,10 @@ export function createSegmentedEdit (mask: MaskEdit) {
     }
 
     if (e.inputType?.startsWith('delete') && edit && removed > 0) {
-      let start = 0
-      while (start < el.value.length && el.value[start] === previous[start]) start++
+      const collapsed = edit.start === edit.end
+      const forward = collapsed && !!e.inputType.includes('Forward')
 
-      const forward = edit.start === edit.end && !!e.inputType?.includes('Forward')
-
-      apply(el, keepSeparators(previous, el.value, start, removed, forward))
+      apply(el, keepSeparators(previous, collapsed && !forward ? edit.start - removed : edit.start, removed, forward))
       return
     }
 
@@ -238,6 +257,8 @@ export function createSegmentedEdit (mask: MaskEdit) {
     // and one that can still take another digit is edited by inserting, e.g. after a delete
     const isInside = !!edit && edit.start < previous.length &&
       edit.end - edit.start < previous.length &&
+      // typing over a selection with fewer digits leaves a shorter section, so the mask re-shapes it
+      el.value.length >= previous.length &&
       // an emptied section is typed into, only the digits around it are overwritten
       (!shaped.gaps || /\d/.test(previous[edit.start])) &&
       shaped.value === previous &&
@@ -250,7 +271,8 @@ export function createSegmentedEdit (mask: MaskEdit) {
         el.value.slice(edit!.start, el.value.length - previous.length + edit!.end)
       )
 
-      apply(el, { value, caret })
+      // the mask has the last word on the sections the overwrite made invalid, e.g. February 31st
+      apply(el, mask(value, caret))
     } else {
       apply(el, mask(el.value, el.selectionStart ?? el.value.length))
     }
@@ -259,9 +281,12 @@ export function createSegmentedEdit (mask: MaskEdit) {
   return { onBeforeinput, onInput, text }
 }
 
-// February always allows the 29th, an invalid date is corrected once the whole value is parsed
 export function daysInMonth (parts: SegmentParts) {
-  return [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][Number(parts.m) - 1] ?? 31
+  const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][Number(parts.m) - 1] ?? 31
+  const year = Number(parts.y)
+
+  // February keeps the 29th until a whole year rules it out
+  return days === 29 && parts.y?.length === 4 && (year % 4 || (!(year % 100) && year % 400)) ? 28 : days
 }
 
 export function dateSegments (order: string, separator: string, fixYear?: (year: number) => number): Segment[] {

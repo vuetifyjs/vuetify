@@ -167,8 +167,9 @@ describe('VDateInput', () => {
     })
 
     it.each([
-      { selection: [0, 2], typing: '02', expected: '02/31/2030' },
-      { selection: [1, 1], typing: '1', expected: '11/31/2030' },
+      // a day the overwritten month cannot hold is capped, the month stays as typed
+      { selection: [0, 2], typing: '02', expected: '02/28/2030' },
+      { selection: [1, 1], typing: '1', expected: '11/30/2030' },
       { selection: [3, 5], typing: '15', expected: '12/15/2030' },
       { selection: [6, 10], typing: '2031', expected: '12/31/2031' },
       // a typed separator moves on to the next section instead of shifting the value
@@ -187,6 +188,38 @@ describe('VDateInput', () => {
       await userEvent.keyboard(typing)
 
       expect(input).toHaveValue(expected)
+    })
+
+    it('should reopen a section typed over with fewer digits', async () => {
+      const { element } = render(() => (
+        <VDateInput inputFormat="dd.mm.yyyy" modelValue={ new Date(2024, 1, 22) } />
+      ))
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      expect(input).toHaveValue('22.02.2024')
+
+      input.setSelectionRange(0, 2)
+      await userEvent.keyboard('3')
+      expect(input).toHaveValue('3.02.2024')
+
+      await userEvent.keyboard('1')
+      expect(input).toHaveValue('29.02.2024')
+    })
+
+    it('should keep the sections after the one typed over with fewer digits', async () => {
+      const model = ref<Date[]>([])
+      const { element } = render(() => <VDateInput v-model={ model.value } multiple />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('0201202402052024')
+      expect(input).toHaveValue('02/01/2024, 02/05/2024')
+
+      // February closes a day that starts with 3, the dates around it stay untouched
+      input.setSelectionRange(3, 5)
+      await userEvent.keyboard('3')
+      expect(input).toHaveValue('02/03/2024, 02/05/2024')
     })
 
     it('should insert instead of overwriting an incomplete section', async () => {
@@ -222,6 +255,23 @@ describe('VDateInput', () => {
       expect(input.selectionStart).toBe(6)
     })
 
+    it('should delete forward through a section of repeated digits', async () => {
+      const { element } = render(() => (
+        <VDateInput inputFormat="dd.mm.yyyy" modelValue={ new Date(2024, 1, 22) } />
+      ))
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      input.setSelectionRange(0, 0)
+      await userEvent.keyboard('{Delete}')
+      expect(input).toHaveValue('2.02.2024')
+      expect(input.selectionStart).toBe(0)
+
+      await userEvent.keyboard('{Delete}')
+      expect(input).toHaveValue('.02.2024')
+    })
+
     it('should keep the year in place when the sections before it are removed', async () => {
       const { element } = render(() => <VDateInput modelValue={ new Date(2025, 4, 5) } />)
 
@@ -239,7 +289,7 @@ describe('VDateInput', () => {
     })
 
     it('should keep the caret after the overwritten digit', async () => {
-      const { element } = render(() => <VDateInput modelValue={ new Date(2030, 11, 31) } />)
+      const { element } = render(() => <VDateInput modelValue={ new Date(2030, 11, 15) } />)
 
       await userEvent.click(element)
       const input = screen.getByCSS('input') as HTMLInputElement
@@ -250,7 +300,7 @@ describe('VDateInput', () => {
       expect(input.selectionStart).toBe(3)
 
       await userEvent.keyboard('2')
-      expect(input).toHaveValue('11/21/2030')
+      expect(input).toHaveValue('11/25/2030')
       expect(input.selectionStart).toBe(4)
     })
 
@@ -409,7 +459,7 @@ describe('VDateInput', () => {
       {
         format: 'YYYY-MM-DD',
         input: '2023-02-29',
-        expected: { year: 2023, month: 2, day: 1 },
+        expected: { year: 2023, month: 1, day: 28 },
       },
       {
         format: 'YYYY-MM-DD',

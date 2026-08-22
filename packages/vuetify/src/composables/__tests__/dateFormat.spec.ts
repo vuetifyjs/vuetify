@@ -39,13 +39,15 @@ const formats: Record<string, [string, string][]> = {
     ['4/15/26', '04/15/26'],
     ['4.15.26', '04/15/26'],
     ['2/3/2025', '02/03/2025'],
-    // a digit that does not fit the section starts the next one
     ['13', '01/3'],
     ['19', '01/09/'],
     ['333', '03/03/3'],
-    // February is the shortest month, an impossible day is corrected on parse
     ['23', '02/03/'],
-    ['2292026', '02/29/2026'],
+    // April has no 31st, so the digit starts the year instead
+    ['431985', '04/03/1985'],
+    ['2292024', '02/29/2024'],
+    // the year caps a February that was accepted while it was still open
+    ['2292026', '02/28/2026'],
     ['00000000', '00/00/0000'],
     ['1225202599', '12/25/2025'],
     ['1a2', '12/'],
@@ -67,6 +69,11 @@ const formats: Record<string, [string, string][]> = {
     ['25.12.2025', '25.12.2025'],
     ['31122025', '31.12.2025'],
     ['5.1.26', '05.01.26'],
+    // the day is capped once the month that narrows it is typed
+    ['314', '30.04.'],
+    ['3102', '29.02.'],
+    ['31022025', '28.02.2025'],
+    ['31022024', '29.02.2024'],
   ],
 }
 
@@ -82,6 +89,10 @@ describe('dateFormat', () => {
         expect(maskDate(complete)).toBe(complete)
       })
     })
+  })
+
+  it('should cap the day of a pasted date instead of rolling it over', () => {
+    useMaskDate('mm/dd/yyyy', maskDate => expect(maskDate('04/31/2025')).toBe('04/30/2025'))
   })
 
   it('should mask with the format inferred from locale', () => {

@@ -117,6 +117,8 @@ export const VDateInput = genericComponent<new <
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
     const { isValid, maskDate, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
+    const { onBeforeinput, onInput, text } = createSegmentedEdit((value, caret) => maskDate(value, props.multiple, caret))
+
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
@@ -138,7 +140,6 @@ export const VDateInput = genericComponent<new <
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
-    const { onBeforeinput, onInput, text } = createSegmentedEdit((value, caret) => maskDate(value, props.multiple, caret))
 
     useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
 
@@ -182,7 +183,6 @@ export const VDateInput = genericComponent<new <
       return parserFormat.value
     })
 
-    // sections left empty by an edit still take up their place in the format
     const formatHint = computed(() => {
       const format = parserFormat.value
       const { width } = maskDate(text.value, props.multiple)
