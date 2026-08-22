@@ -13,11 +13,11 @@ import { useLocale } from '@/composables/locale'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { Fragment, mergeProps } from 'vue'
+import { cloneVNode, Fragment, isVNode, mergeProps } from 'vue'
 import { genericComponent, getPrefixedEventHandlers, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { Component, PropType, TransitionProps } from 'vue'
+import type { Component, PropType, TransitionProps, VNode, VNodeArrayChildren } from 'vue'
 import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableItem, DataTableLoading, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
 import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
@@ -32,6 +32,17 @@ export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableR
   'no-data': never
   'expanded-row': ItemSlot<T>
   expanded: ItemSlot<T>
+}
+
+// rows in the expanded-row slot belong to the item above, so striping skips them
+export function expansionNodes (nodes?: VNodeArrayChildren): VNode[] {
+  return (nodes ?? []).flatMap(node =>
+    Array.isArray(node) ? expansionNodes(node)
+    : !isVNode(node) ? []
+    : node.type === Fragment ? expansionNodes(node.children as VNodeArrayChildren)
+    : typeof node.type === 'symbol' ? []
+    : [cloneVNode(node, { class: 'v-data-table__tr--expansion' })]
+  )
 }
 
 export const makeVDataTableRowsProps = propsFactory({
@@ -200,9 +211,9 @@ export const VDataTableRows = genericComponent<new <T>(
                 )}
 
                 { slots['expanded-row']
-                  ? isExpanded(item) && slots['expanded-row'](slotProps)
+                  ? isExpanded(item) && expansionNodes(slots['expanded-row'](slotProps))
                   : slots.expanded && (
-                    <tr class="v-data-table__tr--expanded">
+                    <tr class="v-data-table__tr--expanded v-data-table__tr--expansion">
                       <td colspan={ columns.value.length }>
                         { props.expandTransition
                           ? (
