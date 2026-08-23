@@ -1,13 +1,15 @@
 // Composables
-import { dateSegments, maskSegments, overtype } from '../segmentedMask'
+import { overtype } from '../edit'
+import { dateSegments } from '../presets'
+import { maskSegmentsFrom } from '../segmentedMask'
 
-// the input handler re-masks after every keystroke
-function typing (segments: Parameters<typeof maskSegments>[0], keys: string) {
-  return [...keys].reduce((value, key) => maskSegments(segments, value + key), '')
+// the input handler re-masks after every keystroke, with the caret behind the last one
+function typing (segments: Parameters<typeof maskSegmentsFrom>[0], keys: string) {
+  return [...keys].reduce((value, key) => maskSegmentsFrom(segments, value + key, 0, value.length + 1).value, '')
 }
 
 describe('segmentedMask', () => {
-  describe('maskSegments', () => {
+  describe('maskSegmentsFrom', () => {
     it('should follow the segment order', () => {
       expect(typing(dateSegments('mdy', '/'), '12252025')).toBe('12/25/2025')
       expect(typing(dateSegments('ymd', '-'), '20251225')).toBe('2025-12-25')
@@ -20,9 +22,16 @@ describe('segmentedMask', () => {
       expect(typing(dateSegments('ymd', '-'), '2025')).toBe('2025-')
     })
 
-    it('should start the next section with a digit that does not fit', () => {
-      expect(typing(dateSegments('mdy', '/'), '19')).toBe('01/09/')
-      expect(typing(dateSegments('ymd', '-'), '202519')).toBe('2025-01-09')
+    it('should stay on a section it cannot be left with', () => {
+      expect(typing(dateSegments('mdy', '/'), '00')).toBe('0')
+      expect(typing(dateSegments('mdy', '/'), '0/')).toBe('01/')
+      expect(typing(dateSegments('mdy', '/'), '005')).toBe('05/')
+    })
+
+    it('should cap a section at its limit', () => {
+      expect(typing(dateSegments('mdy', '/'), '19')).toBe('12/')
+      expect(typing(dateSegments('mdy', '/'), '1239')).toBe('12/31/')
+      expect(typing(dateSegments('ymd', '-'), '20250229')).toBe('2025-02-28')
     })
 
     it('should limit the day to the length of the month', () => {
@@ -44,6 +53,10 @@ describe('segmentedMask', () => {
 
     it('should treat typed separators as section jumps', () => {
       expect(overtype('12/31/2030', 0, '1/2')).toEqual(['12/21/2030', 4])
+    })
+
+    it('should flip an existing period in place', () => {
+      expect(overtype('01:30 PM', 0, 'a')).toEqual(['01:30 AM', 8])
     })
   })
 })

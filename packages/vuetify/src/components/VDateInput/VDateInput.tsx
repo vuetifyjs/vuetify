@@ -113,11 +113,11 @@ export const VDateInput = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t } = useLocale()
+    const { t, isRtl } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
-    const { isValid, maskDate, parseDate, formatDate, parserFormat } = useDateFormat(props, adapterLocale)
-    const { onBeforeinput, onInput, text } = createSegmentedEdit((value, caret) => maskDate(value, props.multiple, caret))
+    const { isValid, joinDates, maskDate, parseDate, formatDate, separator, parserFormat } = useDateFormat(props, adapterLocale, isRtl)
+    const { onBeforeinput, onInput, onKeydown: onSectionKeydown, text } = createSegmentedEdit(maskDate, separator, isRtl)
 
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
@@ -168,7 +168,7 @@ export const VDateInput = genericComponent<new <
 
         if (!adapter.isValid(start) || !adapter.isValid(end)) return ''
 
-        return `${format(adapter.date(start))} - ${format(adapter.date(end))}`
+        return joinDates([format(adapter.date(start)), format(adapter.date(end))])
       }
 
       return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
@@ -177,22 +177,17 @@ export const VDateInput = genericComponent<new <
     const placeholder = computed(() => {
       if (props.placeholder) return props.placeholder
 
-      if (props.multiple === 'range') return `${parserFormat.value} - ${parserFormat.value}`
+      if (props.multiple === 'range') return joinDates([parserFormat.value, parserFormat.value])
       if (props.multiple) return `${parserFormat.value}, ...`
 
       return parserFormat.value
     })
 
     const formatHint = computed(() => {
-      const format = parserFormat.value
-      const { width } = maskDate(text.value, props.multiple)
+      const { value, hint } = maskDate(text.value)
 
-      if (props.multiple === 'range') return `${format} - ${format}`.slice(width)
-      if (!props.multiple) return format.slice(width)
-
-      const dates = Math.floor(width / (format.length + 2)) + 1
-
-      return Array.from({ length: dates }, () => format).join(', ').slice(width)
+      // a summary or a custom display format has no sections left to complete
+      return value === text.value ? hint : ''
     })
 
     // the mask writes to the input directly, the text field has to render the same value
@@ -221,6 +216,8 @@ export const VDateInput = genericComponent<new <
     })
 
     function onKeydown (e: KeyboardEvent) {
+      onSectionKeydown(e)
+
       if (e.key !== 'Enter') return
 
       if (!menu.value || !isFocused.value) {
@@ -352,8 +349,9 @@ export const VDateInput = genericComponent<new <
               <>
                 { isFocused.value && !isReadonly.value && (
                   <div class="v-date-input__format-hint" aria-hidden="true">
+                    { isRtl.value && formatHint.value }
                     <span>{ text.value }</span>
-                    { formatHint.value }
+                    { !isRtl.value && formatHint.value }
                   </div>
                 )}
 

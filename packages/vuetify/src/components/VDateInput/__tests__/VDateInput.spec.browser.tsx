@@ -4,6 +4,14 @@ import { VDateInput } from '../VDateInput'
 // Utilities
 import { commands, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
+import { ar } from '@/locale'
+
+async function pasteInto (text: string) {
+  const lock = await commands.getLock()
+  await navigator.clipboard.writeText(text)
+  await userEvent.paste()
+  await commands.releaseLock(lock)
+}
 
 describe('VDateInput', () => {
   it('should close the picker when tabbing out of the field', async () => {
@@ -142,10 +150,7 @@ describe('VDateInput', () => {
 
       await userEvent.click(element)
       const input = screen.getByCSS('input')
-      const lock = await commands.getLock()
-      await navigator.clipboard.writeText('12252025')
-      await userEvent.paste()
-      await commands.releaseLock(lock)
+      await pasteInto('12252025')
 
       expect(input).toHaveValue('12/25/2025')
 
@@ -304,6 +309,192 @@ describe('VDateInput', () => {
       expect(input.selectionStart).toBe(4)
     })
 
+    it('should keep the separators when deleting by word', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('12252025')
+
+      await userEvent.keyboard('{Control>}{Backspace}{/Control}')
+      expect(input).toHaveValue('12/25/')
+
+      input.setSelectionRange(0, 0)
+      await userEvent.keyboard('{Control>}{Delete}{/Control}')
+      expect(input).toHaveValue('/25/')
+    })
+
+    it('should keep the separators when deleting across them', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('12252025')
+
+      input.setSelectionRange(2, 6)
+      await userEvent.keyboard('{Backspace}')
+      expect(input).toHaveValue('12//2025')
+      expect(input.selectionStart).toBe(2)
+    })
+
+    it('should start over when the whole value is replaced', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('12252025')
+
+      await userEvent.keyboard('{Control>}a{/Control}{Backspace}')
+      expect(input).toHaveValue('')
+
+      await userEvent.keyboard('3')
+      expect(input).toHaveValue('03/')
+    })
+
+    it('should cut and paste a section', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('12252025')
+
+      const lock = await commands.getLock()
+      input.setSelectionRange(3, 5)
+      await userEvent.cut()
+      expect(input).toHaveValue('12//2025')
+
+      input.setSelectionRange(3, 3)
+      await userEvent.paste()
+      await commands.releaseLock(lock)
+      expect(input).toHaveValue('12/25/2025')
+    })
+
+    it('should replace a section selected by double click', async () => {
+      const { element } = render(() => <VDateInput modelValue={ new Date(2025, 11, 25) } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      await userEvent.dblClick(input)
+      expect(input.selectionStart).toBe(6)
+      expect(input.selectionEnd).toBe(10)
+
+      await userEvent.keyboard('7')
+      expect(input).toHaveValue('12/25/7')
+    })
+
+    it('should ignore characters outside the format', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('1a2b.c d3')
+
+      expect(input).toHaveValue('12/3')
+    })
+
+    it('should delete a whole date from a list', async () => {
+      const model = ref<Date[]>([])
+      const { element } = render(() => <VDateInput v-model={ model.value } multiple />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      await userEvent.keyboard('1225202501022026')
+      expect(input).toHaveValue('12/25/2025, 01/02/2026')
+
+      input.setSelectionRange(12, 22)
+      await userEvent.keyboard('{Backspace}')
+      expect(input).toHaveValue('12/25/2025, ')
+
+      await userEvent.keyboard('{Backspace}{Backspace}')
+      expect(input).toHaveValue('12/25/2025')
+
+      await userEvent.click(document.body)
+      expect(model.value).toHaveLength(1)
+    })
+
+    it.each([
+      // a selection that spans separators leaves the sections it does not empty in place
+      { from: '12/25/2025', selection: [2, 5], typing: '9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [2, 6], typing: '9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [3, 6], typing: '9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [2, 5], typing: '{Backspace}9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [2, 6], typing: '{Backspace}9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [3, 6], typing: '{Backspace}9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [1, 4], typing: '7', expected: '12/05/2025' },
+      { from: '12/25/2025', selection: [1, 4], typing: '{Backspace}7', expected: '12/05/2025' },
+      { from: '12/25/2025', selection: [1, 5], typing: '7', expected: '12//2025' },
+      { from: '12/25/2025', selection: [1, 5], typing: '{Backspace}7', expected: '12//2025' },
+      // the digit left behind keeps its place, the next one is typed in front of it
+      { from: '08/20/2026', selection: [1, 4], typing: '{Backspace}91', expected: '09/10/2026' },
+      // a zero holds the caret in its section until the caret leaves, then it takes the minimum
+      { from: '08/20/2026', selection: [1, 2], typing: '0', expected: '0/20/2026' },
+      { from: '08/20/2026', selection: [1, 2], typing: '05', expected: '05/20/2026' },
+      { from: '08/20/2026', selection: [1, 2], typing: '0{ArrowRight}', expected: '01/20/2026' },
+    ])('should type $typing over $selection of $from', async ({ from, selection, typing, expected }) => {
+      const { element } = render(() => <VDateInput modelValue={ from } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+      expect(input).toHaveValue(from)
+
+      input.setSelectionRange(selection[0], selection[1])
+      await userEvent.keyboard(typing)
+
+      expect(input).toHaveValue(expected)
+    })
+
+    it.fails.each([
+      { from: '12/25/2025', selection: [0, 0], typing: '9', expected: '09/25/2025' },
+      { from: '12/25/2025', selection: [6, 6], typing: '9', expected: '12/09/2025' },
+    ])('should start a section over when the overwritten digit does not fit', async ({ from, selection, typing, expected }) => {
+      const { element } = render(() => <VDateInput modelValue={ from } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      input.setSelectionRange(selection[0], selection[1])
+      await userEvent.keyboard(typing)
+
+      expect(input).toHaveValue(expected)
+    })
+
+    it.each(['91', '9/1', '910'])('should paste %s over a selection', async paste => {
+      const { element } = render(() => <VDateInput modelValue="08/20/2026" />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      input.setSelectionRange(1, 4)
+      await pasteInto(paste)
+
+      expect(input).toHaveValue('09/10/2026')
+    })
+
+    it('should close the section being typed on the arrow the value grows towards', async () => {
+      const { element } = render(() => <VDateInput modelValue={ null } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      await userEvent.keyboard('1{ArrowRight}52026')
+
+      expect(input).toHaveValue('01/05/2026')
+    })
+
+    it('should move the caret with an arrow pressed inside the value', async () => {
+      const { element } = render(() => <VDateInput modelValue={ new Date(2030, 11, 31) } />)
+
+      await userEvent.click(element)
+      const input = screen.getByCSS('input') as HTMLInputElement
+
+      input.setSelectionRange(0, 0)
+      await userEvent.keyboard('{ArrowRight}')
+
+      expect(input).toHaveValue('12/31/2030')
+      expect(input.selectionStart).toBe(1)
+    })
+
     it.each([
       { props: { readonly: true } },
       { props: { updateOn: [] } },
@@ -381,6 +572,245 @@ describe('VDateInput', () => {
       await userEvent.keyboard(keys)
 
       expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent(expected)
+    })
+
+    // the field is filled from the end it starts reading at, whatever the format shows there
+    describe('rtl', () => {
+      async function typeInRtl (locale = 'en', messages?: any) {
+        const { element } = render(() => <VDateInput modelValue={ null } />, null, {
+          locale: { locale, rtl: { [locale]: true }, messages: messages && { [locale]: messages } },
+        })
+
+        await userEvent.click(element)
+
+        const input = screen.getByCSS('input') as HTMLInputElement
+        const hint = screen.getByCSS('.v-date-input__format-hint')
+
+        // what the hint still asks for, the rest of it mirrors the typed value
+        return { input, hint, left: () => hint.textContent!.slice(0, hint.textContent!.length - input.value.length) }
+      }
+
+      it('should fill the section the format shows last', async () => {
+        const { input, left } = await typeInRtl()
+
+        await userEvent.keyboard('2026')
+        expect(input).toHaveValue('/2026')
+        expect(left()).toBe('mm/dd')
+
+        await userEvent.keyboard('25')
+        expect(input).toHaveValue('/25/2026')
+        expect(left()).toBe('mm')
+
+        await userEvent.keyboard('12')
+        expect(input).toHaveValue('12/25/2026')
+        expect(left()).toBe('')
+      })
+
+      it('should fill a day first format from its day', async () => {
+        const { input, left } = await typeInRtl('ar', ar)
+
+        await userEvent.keyboard('1')
+        expect(input).toHaveValue('1')
+        expect(left()).toBe('yyyy/mm/d')
+
+        await userEvent.keyboard('2')
+        expect(input).toHaveValue('/12')
+        expect(left()).toBe('yyyy/mm')
+
+        await userEvent.keyboard('1')
+        expect(input).toHaveValue('1/12')
+        expect(left()).toBe('yyyy/m')
+
+        await userEvent.keyboard('2')
+        expect(input).toHaveValue('/12/12')
+        expect(left()).toBe('yyyy')
+
+        await userEvent.keyboard('2026')
+        expect(input).toHaveValue('2026/12/12')
+        expect(left()).toBe('')
+
+        await userEvent.click(document.body)
+        expect(input).toHaveValue('2026/12/12')
+      })
+
+      it('should close a section that cannot take another digit', async () => {
+        const { input } = await typeInRtl('ar', ar)
+
+        // 4 is the 4th, 2 could still be the 24th
+        await userEvent.keyboard('4')
+        expect(input).toHaveValue('/04')
+
+        await userEvent.keyboard('2')
+        expect(input).toHaveValue('/02/04')
+      })
+
+      it('should close the section being typed on the arrow the value grows towards', async () => {
+        const { input } = await typeInRtl()
+
+        await userEvent.keyboard('20262')
+        expect(input).toHaveValue('2/2026')
+
+        await userEvent.keyboard('{ArrowLeft}1')
+        expect(input).toHaveValue('1/02/2026')
+
+        await userEvent.keyboard('{ArrowLeft}')
+        expect(input).toHaveValue('01/02/2026')
+      })
+
+      it('should wait in front of a date typed to its end', async () => {
+        const { input } = await typeInRtl()
+
+        await userEvent.keyboard('1999')
+        expect(input).toHaveValue('/1999')
+        expect(input.selectionStart).toBe(0)
+
+        await userEvent.keyboard('54')
+        expect(input).toHaveValue('04/05/1999')
+        expect(input.selectionStart).toBe(0)
+      })
+
+      it.each([
+        // a caret between sections belongs to the one in front of it, where the value grows
+        { selection: [2, 2], typing: '2', expected: '02/05/1999' },
+        { selection: [5, 5], typing: '2', expected: '03/02/1999' },
+        // with every section filled the front one is overwritten, the same as it would be in ltr
+        { selection: [0, 0], typing: '1', expected: '12/05/1999' },
+        { selection: [3, 5], typing: '6', expected: '03/06/1999' },
+        { selection: [0, 0], paste: '08/05/2026', expected: '08/05/2026' },
+      ])('should type $typing$paste at $selection', async ({ selection, typing, paste, expected }) => {
+        const { element } = render(() => <VDateInput modelValue="03/05/1999" />, null, {
+          locale: { locale: 'en', rtl: { en: true } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input).toHaveValue('03/05/1999')
+
+        input.setSelectionRange(selection[0], selection[1])
+        await (paste ? pasteInto(paste) : userEvent.keyboard(typing!))
+
+        expect(input).toHaveValue(expected)
+      })
+
+      it.each([
+        { typing: '91' },
+        { paste: '91' },
+        { paste: '9/1' },
+      ])('should overwrite $typing$paste over a selection', async ({ typing, paste }) => {
+        const { element } = render(() => <VDateInput modelValue="07/20/2026" />, null, {
+          locale: { locale: 'en', rtl: { en: true } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input).toHaveValue('07/20/2026')
+
+        input.setSelectionRange(1, 4)
+        await (paste ? pasteInto(paste) : userEvent.keyboard(typing!))
+
+        expect(input).toHaveValue('09/10/2026')
+      })
+
+      it('should leave the caret in front of a pasted date', async () => {
+        const { input } = await typeInRtl()
+
+        await pasteInto('08/10/2026')
+
+        expect(input).toHaveValue('08/10/2026')
+        // nothing is left to type, so the caret waits where the next section would go
+        expect(input.selectionStart).toBe(0)
+      })
+
+      it('should hand the caret to the section in front when one is replaced', async () => {
+        const model = ref<Date | null>(new Date(1990, 3, 3))
+        const { element } = render(() => <VDateInput v-model={ model.value } />, null, {
+          locale: { locale: 'en', rtl: { en: true } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input).toHaveValue('04/03/1990')
+
+        input.setSelectionRange(3, 3)
+        await userEvent.keyboard('1')
+        expect(input).toHaveValue('04/13/1990')
+        expect(input.selectionStart).toBe(4)
+
+        // the day is full, the month is the section typed after it
+        await userEvent.keyboard('5')
+        expect(input).toHaveValue('04/15/1990')
+        expect(input.selectionStart).toBe(0)
+
+        await userEvent.keyboard('12')
+        expect(input).toHaveValue('12/15/1990')
+      })
+
+      it('should fill a range starting with the date that reads first', async () => {
+        const model = ref<Date[]>([])
+        const { element } = render(() => <VDateInput v-model={ model.value } multiple="range" />, null, {
+          locale: { locale: 'en', rtl: { en: true } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+
+        await userEvent.keyboard('20251205')
+        expect(input).toHaveValue('05/12/2025')
+
+        // the second date is typed in front of the first one, the same way the sections are
+        await userEvent.keyboard('20251405')
+        expect(input).toHaveValue('05/14/2025 - 05/12/2025')
+
+        await userEvent.click(document.body)
+        expect(input).toHaveValue('05/14/2025 - 05/12/2025')
+        expect(model.value).toHaveLength(2)
+      })
+
+      it('should retype a year digit taken out of the date that reads second', async () => {
+        const model = ref([new Date(2025, 11, 22), new Date(2026, 0, 3)])
+        const { element } = render(() => <VDateInput v-model={ model.value } multiple="range" />, null, {
+          locale: { locale: 'ar', rtl: { ar: true }, messages: { ar } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+        expect(input).toHaveValue('2026/01/03 - 2025/12/22')
+
+        input.setSelectionRange(17, 17)
+        await userEvent.keyboard('{Backspace}4')
+
+        expect(input).toHaveValue('2026/01/03 - 2024/12/22')
+      })
+
+      it('should fill a list in front of the dates already typed', async () => {
+        const model = ref<Date[]>([])
+        const { element } = render(() => <VDateInput v-model={ model.value } multiple />, null, {
+          locale: { locale: 'en', rtl: { en: true } },
+        })
+
+        await userEvent.click(element)
+        const input = screen.getByCSS('input') as HTMLInputElement
+
+        await userEvent.keyboard('2025120520251405')
+        expect(input).toHaveValue('05/14/2025, 05/12/2025')
+
+        await userEvent.click(document.body)
+        expect(input).toHaveValue('2 selected')
+        expect(model.value).toHaveLength(2)
+      })
+
+      it('should hold the value against the end it grows away from', async () => {
+        const { input, hint } = await typeInRtl()
+
+        await userEvent.keyboard('2026')
+
+        const span = hint.querySelector('span')!
+
+        // the sections fill towards the front, so the value is anchored at the back
+        expect(getComputedStyle(input).direction).toBe('ltr')
+        expect(getComputedStyle(input).textAlign).toBe('right')
+        expect(span.getBoundingClientRect().right).toBeCloseTo(input.getBoundingClientRect().right, 0)
+      })
     })
 
     it('should keep a single typed date as a one day range', async () => {
@@ -506,15 +936,22 @@ describe('VDateInput', () => {
       },
       {
         format: 'YYYY-MM-DD',
-        input: '2024-00-01',
-        description: 'zero month',
-      },
-      {
-        format: 'YYYY-MM-DD',
         input: '2024-01-00',
         description: 'zero day',
       },
     ]
+
+    it('should bump a zero section to its minimum once it is left', async () => {
+      const { element, emitted } = render(<VDateInput inputFormat="YYYY-MM-DD" modelValue={ null } />)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('2024-00-01')
+
+      expect(screen.getByCSS('input')).toHaveValue('2024-01-01')
+      await userEvent.keyboard('{Enter}')
+
+      expect(emitted('update:modelValue')).toBeTruthy()
+    })
 
     invalidTestCases.forEach(({ format, input, description }) => {
       it(`should handle ${description}`, async () => {
@@ -532,9 +969,9 @@ describe('VDateInput', () => {
     })
 
     it.each([
-      ['2024-13-45', '2024-01-03'],
-      ['2024-12-32', '2024-12-03'],
-      ['2024-13-01', '2024-01-03'],
+      ['2024-13-45', '2024-12-04'],
+      ['2024-12-32', '2024-12-31'],
+      ['2024-13-01', '2024-12-01'],
     ])('should correct %s while typing', async (input, expected) => {
       const { element } = render(<VDateInput inputFormat="YYYY-MM-DD" modelValue={ null } />)
 

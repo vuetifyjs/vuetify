@@ -1,8 +1,15 @@
 @use '../../styles/tools'
 
 @include tools.layer('components')
+  .v-date-input input
+    direction: ltr
+
+    +tools.rtl()
+      text-align: right
+
   .v-date-input__format-hint
     align-items: center
+    direction: ltr
     display: flex
     inset: 0
     opacity: var(--v-disabled-opacity)
@@ -10,6 +17,9 @@
     pointer-events: none
     position: absolute
     white-space: pre
+
+    +tools.rtl()
+      justify-content: flex-end
 
     > span
       color: transparent
