@@ -1,0 +1,16 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-time-input__format-hint
+    align-items: center
+    display: flex
+    inset: 0
+    opacity: var(--v-disabled-opacity)
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    user-select: none
+    white-space: pre
+
+    > span
+      opacity: 0
