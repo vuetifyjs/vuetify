@@ -257,6 +257,41 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     return { ...masked, value: shown.value, caret: filled ? 0 : shown.caret }
   }
 
+  // the format the value still asks for, lined up with what the field shows instead of what the mask would write
+  function hintFor (text: string) {
+    const { value, hint } = maskDate(text)
+    // an rtl value grows the other way, so it lines up from its other end
+    const flip = (v: string) => isRtl.value ? [...v].reverse().join('') : v
+    const masked = flip(value)
+    const shown = flip(text)
+    let at = 0
+    let read = 0
+
+    while (at < masked.length && read < shown.length) {
+      if (masked[at] === shown[read]) {
+        at++
+        read++
+      } else if (masked[at] === '0') {
+        // a section the mask pads is shown with the digits it was typed with
+        at++
+      } else {
+        // a summary or a custom display format is not a value the mask can complete
+        return ''
+      }
+    }
+
+    let left = masked.slice(at) + flip(hint)
+
+    // an emptied section is dropped by the mask but still held open by its separators
+    for (const char of shown.slice(read)) {
+      const next = left.indexOf(char)
+      if (next < 0) return ''
+      left = left.slice(next + 1)
+    }
+
+    return flip(left)
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('T')[0].split('-')
 
@@ -267,6 +302,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   return {
     isValid,
+    hintFor,
     joinDates,
     maskDate,
     parseDate,

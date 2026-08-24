@@ -116,7 +116,8 @@ export const VDateInput = genericComponent<new <
     const { t, isRtl } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
-    const { isValid, joinDates, maskDate, parseDate, formatDate, separator, parserFormat } = useDateFormat(props, adapterLocale, isRtl)
+    const { hintFor, isValid, joinDates, maskDate, parseDate, formatDate, separator, parserFormat } =
+      useDateFormat(props, adapterLocale, isRtl)
     const { onBeforeinput, onInput, onKeydown: onSectionKeydown, text } = createSegmentedEdit(maskDate, separator, isRtl)
 
     const { mobile } = useDisplay(props)
@@ -183,12 +184,7 @@ export const VDateInput = genericComponent<new <
       return parserFormat.value
     })
 
-    const formatHint = computed(() => {
-      const { value, hint } = maskDate(text.value)
-
-      // a summary or a custom display format has no sections left to complete
-      return value === text.value ? hint : ''
-    })
+    const formatHint = computed(() => hintFor(text.value))
 
     // the mask writes to the input directly, the text field has to render the same value
     watch(display, value => text.value = value ?? '', { immediate: true })

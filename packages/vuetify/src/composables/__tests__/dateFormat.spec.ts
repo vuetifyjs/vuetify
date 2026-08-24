@@ -245,6 +245,28 @@ describe('dateFormat', () => {
       })
     })
 
+    it.each<[string, string]>([
+      // the field shows the digits as they were typed, the mask pads and closes them
+      ['2/', 'dd/yyyy'],
+      ['02', '/dd/yyyy'],
+      ['02/04', '/yyyy'],
+      ['12/5/', 'yyyy'],
+      // an emptied section is held open by the separators around it
+      ['05//', 'yyyy'],
+      ['//2025', ''],
+      // a summary is not a value the mask can complete
+      ['2 selected', ''],
+    ])('should complete %s with %s', (text, expected) => {
+      useDateFormatIn({ inputFormat: 'mm/dd/yyyy' }, 'en-US', false, ({ hintFor }) => expect(hintFor(text)).toBe(expected))
+    })
+
+    it('should complete an rtl value the field shows without its separator', () => {
+      useDateFormatIn({}, 'ar', true, ({ hintFor }) => {
+        expect(hintFor('/12')).toBe('yyyy/mm')
+        expect(hintFor('12')).toBe('yyyy/mm/')
+      })
+    })
+
     it('should ask for the next date of an rtl list in front of the ones typed', () => {
       useDateFormatIn({ multiple: true }, 'ar', true, ({ maskDate }) => {
         expect(maskDate(', 2025/12/25').hint).toBe('yyyy/mm/dd')
