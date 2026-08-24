@@ -284,6 +284,8 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     maskDate,
     parseDate,
     formatDate,
+    fixYear: autoFixYear,
+    order: toRef(() => currentFormat.value.order),
     separator: toRef(() => currentFormat.value.separator),
     parserFormat: toRef(() => currentFormat.value.format),
   }

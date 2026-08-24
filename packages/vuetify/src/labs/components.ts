@@ -1,6 +1,7 @@
 export * from './VAvatarGroup'
 export * from './VCommandPalette'
 export * from './VDateRangePicker'
+export * from './VDateTimeInput'
 export * from './VMonthPicker'
 export * from './VHeatmap'
 export * from './VHighlight'

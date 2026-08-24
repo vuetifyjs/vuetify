@@ -42,9 +42,10 @@ export function dateTimeSegments (
   order: string,
   dateSeparator: string,
   options: { useSeconds?: boolean, hour12?: boolean } = {},
+  fixYear?: (year: number) => number,
 ): Segment[] {
   return [
-    ...dateSegments(order, dateSeparator),
+    ...dateSegments(order, dateSeparator, fixYear),
     { type: 'separator', value: ' ' },
     ...timeSegments(options),
   ]
