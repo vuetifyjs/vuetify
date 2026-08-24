@@ -11,7 +11,6 @@ function readSection (segment: ValueSegment, text: string, start: number, tail: 
   while (index < text.length && !filled && /\d/.test(text[index])) {
     const value = Number(digits + text[index])
 
-    // a digit that does not fit caps the section it is typed into, e.g. 1 then 5 is December
     if (value > limit) {
       digits = String(limit).padStart(digits.length + 1, '0')
       index++
@@ -21,8 +20,9 @@ function readSection (segment: ValueSegment, text: string, start: number, tail: 
 
     digits += text[index++]
 
-    // a section stays open on a value it cannot be left with, e.g. a month is never 00
-    if (segment.min && !Number(digits)) digits = '0'
+    if (segment.min && !Number(digits)) {
+      digits = '0'
+    }
 
     filled = digits.length === segment.size
   }
@@ -39,10 +39,16 @@ function readSection (segment: ValueSegment, text: string, start: number, tail: 
   // a section with no room left for another digit is closed, e.g. 4 is April
   filled ||= !!digits && Number(digits) * 10 ** (segment.size - digits.length) > limit
 
-  return { digits, index, end: separatorStart, filled, closed: index > separatorStart }
+  return {
+    digits,
+    index,
+    end: separatorStart,
+    filled,
+    closed: index > separatorStart,
+  }
 }
 
-// a closed section fills its width, and cannot be left holding less than it has to be
+// a section cannot be left holding less than its minimum, e.g. a month is never 00
 function closeSection (segment: ValueSegment, digits: string, left: boolean) {
   const value = segment.close?.(digits) ?? digits
   const min = left ? segment.min ?? 0 : 0
@@ -152,15 +158,25 @@ export function maskSegmentsFrom (
     result = result.slice(0, at) + capped + result.slice(at + digits.length)
   }
 
-  return { value: result, index, closed, caret: outCaret, width, gaps, complete }
+  return {
+    value: result,
+    index,
+    closed,
+    caret: outCaret,
+    width,
+    gaps,
+    complete,
+  }
 }
 
-// strip noise and map the caret into the kept character stream
 export function toMaskSource (input: string, noise: RegExp, caret = -1) {
   const text = input.trimStart().replace(noise, '')
   const before = caret < 0 ? -1 : input.slice(0, caret).trimStart().replace(noise, '').length
 
-  return { text, caret: before }
+  return {
+    text,
+    caret: before,
+  }
 }
 
 export function maskInput (

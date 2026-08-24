@@ -116,9 +116,24 @@ export const VDateInput = genericComponent<new <
     const { t, isRtl } = useLocale()
     const adapter = useDate()
     const adapterLocale = computed(() => adapter.locale)
-    const { hintFor, isValid, joinDates, maskDate, parseDate, formatDate, separator, parserFormat } =
-      useDateFormat(props, adapterLocale, isRtl)
-    const { onBeforeinput, onInput, onKeydown: onSectionKeydown, text } = createSegmentedEdit(maskDate, separator, isRtl)
+
+    const {
+      getHint,
+      isValid,
+      joinDates,
+      maskDate,
+      parseDate,
+      formatDate,
+      separator,
+      parserFormat,
+    } = useDateFormat(props, adapterLocale, isRtl)
+
+    const {
+      onBeforeinput,
+      onInput,
+      onKeydown: onInputKeydown,
+      text,
+    } = createSegmentedEdit(maskDate, separator, isRtl)
 
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
@@ -184,7 +199,7 @@ export const VDateInput = genericComponent<new <
       return parserFormat.value
     })
 
-    const formatHint = computed(() => hintFor(text.value))
+    const formatHint = computed(() => getHint(text.value))
 
     // the mask writes to the input directly, the text field has to render the same value
     watch(display, value => text.value = value ?? '', { immediate: true })
@@ -212,7 +227,7 @@ export const VDateInput = genericComponent<new <
     })
 
     function onKeydown (e: KeyboardEvent) {
-      onSectionKeydown(e)
+      onInputKeydown(e)
 
       if (e.key !== 'Enter') return
 
@@ -345,9 +360,8 @@ export const VDateInput = genericComponent<new <
               <>
                 { isFocused.value && !isReadonly.value && (
                   <div class="v-date-input__format-hint" aria-hidden="true">
-                    { isRtl.value && formatHint.value }
-                    <span>{ text.value }</span>
-                    { !isRtl.value && formatHint.value }
+                    <span style={{ order: isRtl.value ? 1 : 0 }}>{ text.value }</span>
+                    { formatHint.value }
                   </div>
                 )}
 

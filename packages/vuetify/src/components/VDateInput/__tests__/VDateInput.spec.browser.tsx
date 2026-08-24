@@ -435,7 +435,7 @@ describe('VDateInput', () => {
         const hint = screen.getByCSS('.v-date-input__format-hint')
 
         // what the hint still asks for, the rest of it mirrors the typed value
-        return { input, hint, left: () => hint.textContent!.slice(0, hint.textContent!.length - input.value.length) }
+        return { input, hint, left: () => hint.textContent!.slice(input.value.length) }
       }
 
       it('should fill the section the format shows last', async () => {
@@ -503,6 +503,17 @@ describe('VDateInput', () => {
 
         await userEvent.keyboard('{ArrowLeft}')
         expect(input).toHaveValue('01/02/2026')
+      })
+
+      it('should keep hinting a year the mask fills in from the century', async () => {
+        const { input, left } = await typeInRtl()
+
+        await userEvent.keyboard('2025')
+        input.setSelectionRange(1, 2)
+        await userEvent.keyboard('{Backspace}')
+
+        expect(input).toHaveValue('/025')
+        expect(left()).toBe('mm/dd')
       })
 
       it('should wait in front of a date typed to its end', async () => {
@@ -697,6 +708,19 @@ describe('VDateInput', () => {
       { typing: '522←××', value: '05//', expected: '05//yyyy' },
     ])('should hint the format left to type over $value', async ({ typing, value, expected }) => {
       const { element } = render(() => <VDateInput />)
+
+      await userEvent.click(element)
+      await userEvent.keyboard(keys(typing))
+
+      expect(screen.getByCSS('input')).toHaveValue(value)
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent(expected)
+    })
+
+    it.each([
+      { typing: '2025←←←←×', value: '025/', expected: '025/mm/dd' },
+      { typing: '20251←←←←←×', value: '025/1', expected: '025/1m/dd' },
+    ])('should hint the format left over a year the mask fills in from the century', async ({ typing, value, expected }) => {
+      const { element } = render(() => <VDateInput inputFormat="yyyy/mm/dd" />)
 
       await userEvent.click(element)
       await userEvent.keyboard(keys(typing))

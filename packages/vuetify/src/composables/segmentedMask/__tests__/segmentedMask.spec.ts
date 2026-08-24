@@ -3,7 +3,6 @@ import { overtype } from '../edit'
 import { dateSegments } from '../presets'
 import { maskSegmentsFrom } from '../segmentedMask'
 
-// the input handler re-masks after every keystroke, with the caret behind the last one
 function typing (segments: Parameters<typeof maskSegmentsFrom>[0], keys: string) {
   return [...keys].reduce((value, key) => maskSegmentsFrom(segments, value + key, 0, value.length + 1).value, '')
 }

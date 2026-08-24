@@ -79,7 +79,6 @@ const formats: Record<string, [string, string][]> = {
     ['25.12.2025', '25.12.2025'],
     ['31122025', '31.12.2025'],
     ['5.1.26', '05.01.26'],
-    // the day is capped once the month that narrows it is typed
     ['314', '30.04.'],
     ['3102', '29.02.'],
     ['31022025', '28.02.2025'],
@@ -257,13 +256,20 @@ describe('dateFormat', () => {
       // a summary is not a value the mask can complete
       ['2 selected', ''],
     ])('should complete %s with %s', (text, expected) => {
-      useDateFormatIn({ inputFormat: 'mm/dd/yyyy' }, 'en-US', false, ({ hintFor }) => expect(hintFor(text)).toBe(expected))
+      useDateFormatIn({ inputFormat: 'mm/dd/yyyy' }, 'en-US', false, ({ getHint }) => expect(getHint(text)).toBe(expected))
+    })
+
+    it('should complete a year shown without the digit the mask reads a century from', () => {
+      useDateFormatIn({ inputFormat: 'yyyy/mm/dd' }, 'en-US', false, ({ getHint }) => {
+        expect(getHint('025/')).toBe('mm/dd')
+        expect(getHint('025/1')).toBe('m/dd')
+      })
     })
 
     it('should complete an rtl value the field shows without its separator', () => {
-      useDateFormatIn({}, 'ar', true, ({ hintFor }) => {
-        expect(hintFor('/12')).toBe('yyyy/mm')
-        expect(hintFor('12')).toBe('yyyy/mm/')
+      useDateFormatIn({}, 'ar', true, ({ getHint }) => {
+        expect(getHint('/12')).toBe('yyyy/mm')
+        expect(getHint('12')).toBe('yyyy/mm/')
       })
     })
 

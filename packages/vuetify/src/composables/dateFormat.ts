@@ -1,6 +1,6 @@
 // Composables
 import { useDate } from '@/composables/date/date'
-import { dateSegments, maskSegmentsFrom, toMaskSource } from '@/composables/segmentedMask'
+import { dateSegments, maskSegmentsFrom, remainingHint, toMaskSource } from '@/composables/segmentedMask'
 
 // Utilities
 import { toRef } from 'vue'
@@ -59,22 +59,23 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   function inferFromLocale () {
     const localeForDateFormat = locale.value ?? 'en-US'
-    const parts = Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
+    const parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
       .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
 
-    const logical = parts.filter(p => ['year', 'month', 'day'].includes(p.type)).map(p => p.type[0]).join('')
+    const logicalOrder = parts.filter(p => ['year', 'month', 'day'].includes(p.type)).map(p => p.type[0]).join('')
     const literal = parts.find(p => p.type === 'literal')?.value ?? ''
     const separator = ['/', '-', '.'].find(sign => literal.includes(sign)) ?? '/'
 
-    if (logical.length !== 3) {
-      consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${logical}]`)
+    if (logicalOrder.length !== 3) {
+      consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${logicalOrder}]`)
       return new DateFormatSpec('mdy', '/')
     }
 
-    // CLDR wraps arabic patterns in U+200F, which renders a day-first date year-first, we reorder instead
-    const order = literal.includes('\u200f') ? [...logical].reverse().join('') : logical
+    const visualOrder = literal.includes('\u200f')
+      ? [...logicalOrder].reverse().join('')
+      : logicalOrder
 
-    return new DateFormatSpec(order, separator)
+    return new DateFormatSpec(visualOrder, separator)
   }
 
   const currentFormat = toRef(() => {
@@ -96,11 +97,12 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       : (currentCentury - 100) + year
   }
 
-  // an rtl field is filled from its other end, so its sections are typed the other way round
   const typingOrder = toRef(() => {
     const { order } = currentFormat.value
 
-    return isRtl.value ? [...order].reverse().join('') : order
+    return isRtl.value
+      ? [...order].reverse().join('')
+      : order
   })
 
   const layout = toRef(() => {
@@ -110,16 +112,13 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     return {
       join: isRange ? ' - ' : ', ',
       limit,
-      // a list takes another date whatever it holds, a single date and a range do not
       bounded: Number.isFinite(limit),
     }
   })
 
   const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
 
-  // an rtl value is masked in typing order and shown the other way round, its sections swap ends
   function mirror (text: string, caret = -1) {
-    // sections sit on the even indices, the separators that divide them on the odd ones
     const parts = text.split(/(\D+)/)
     const value = [...parts].reverse().join('')
 
@@ -133,13 +132,15 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       at += 2
     }
 
-    // the section keeps the caret, its digits still read left to right
-    return { value, caret: text.length - start - parts[at].length + Math.max(caret - start, 0) }
+    const mirroredCaret = text.length - start - parts[at].length + Math.max(caret - start, 0)
+
+    return { value, caret: mirroredCaret }
   }
 
-  // dates are typed one after another, an rtl field lays them out the other way round
   function joinDates (dates: string[]) {
-    return (isRtl.value ? [...dates].reverse() : dates).join(layout.value.join)
+    return (isRtl.value
+      ? [...dates].reverse()
+      : dates).join(layout.value.join)
   }
 
   function parseDate (dateString: string) {
@@ -178,13 +179,14 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     return !!parseDate(text)
   }
 
-  // the sections the value has not grown into yet, on the end it grows towards
-  function hintFrom (width: number, dates: number) {
+  function remainingFormat (width: number, dates: number) {
     const { bounded, join, limit } = layout.value
     const { format } = currentFormat.value
     const template = Array.from({ length: bounded ? limit : dates }, () => format).join(join)
 
-    return isRtl.value ? template.slice(0, template.length - width) : template.slice(width)
+    return isRtl.value
+      ? template.slice(0, template.length - width)
+      : template.slice(width)
   }
 
   function maskInTypingOrder (input: string, caret: number) {
@@ -227,7 +229,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       }
     }
 
-    const hint = hintFrom(width, dates)
+    const hint = remainingFormat(width, dates)
 
     return {
       value: result,
@@ -235,7 +237,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       width,
       gaps,
       hint,
-      // a list takes another date however many it holds, so it is never done growing
       complete: layout.value.bounded && !hint,
     }
   }
@@ -246,50 +247,26 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     }
 
     const typed = mirror(input, caret)
-    // a caret at the end of what is shown sits at the end of what was typed, e.g. after a paste
     const at = caret >= input.length ? typed.value.length : typed.caret
     const masked = maskInTypingOrder(typed.value, at)
     const shown = mirror(masked.value, masked.caret)
-    // with no section and no date left to type the caret waits where an edit would go, in front of it all
-    // an overwrite keeps the caret it was given, only what was typed onto the value hands it over
-    const filled = !inPlace && masked.caret >= masked.value.length && layout.value.bounded && !masked.hint
+    const filled = !inPlace &&
+      masked.caret >= masked.value.length &&
+      layout.value.bounded &&
+      !masked.hint
 
-    return { ...masked, value: shown.value, caret: filled ? 0 : shown.caret }
+    return {
+      ...masked,
+      value: shown.value,
+      caret: filled ? 0 : shown.caret,
+    }
   }
 
-  // the format the value still asks for, lined up with what the field shows instead of what the mask would write
-  function hintFor (text: string) {
+  function getHint (text: string) {
     const { value, hint } = maskDate(text)
-    // an rtl value grows the other way, so it lines up from its other end
     const flip = (v: string) => isRtl.value ? [...v].reverse().join('') : v
-    const masked = flip(value)
-    const shown = flip(text)
-    let at = 0
-    let read = 0
 
-    while (at < masked.length && read < shown.length) {
-      if (masked[at] === shown[read]) {
-        at++
-        read++
-      } else if (masked[at] === '0') {
-        // a section the mask pads is shown with the digits it was typed with
-        at++
-      } else {
-        // a summary or a custom display format is not a value the mask can complete
-        return ''
-      }
-    }
-
-    let left = masked.slice(at) + flip(hint)
-
-    // an emptied section is dropped by the mask but still held open by its separators
-    for (const char of shown.slice(read)) {
-      const next = left.indexOf(char)
-      if (next < 0) return ''
-      left = left.slice(next + 1)
-    }
-
-    return flip(left)
+    return flip(remainingHint(flip(value), flip(hint), flip(text)))
   }
 
   function formatDate (value: unknown) {
@@ -302,7 +279,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   return {
     isValid,
-    hintFor,
+    getHint,
     joinDates,
     maskDate,
     parseDate,

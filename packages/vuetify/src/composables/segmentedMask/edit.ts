@@ -1,5 +1,6 @@
 // Utilities
 import { shallowRef, toValue } from 'vue'
+import { clamp } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter } from 'vue'
@@ -24,24 +25,37 @@ export function overtype (text: string, start: number, typed: string, rtl = fals
       continue
     }
 
-    while (caret < chars.length && !isDigit(caret)) caret++
+    while (caret < chars.length && !isDigit(caret)) {
+      caret++
+    }
 
     if (!/\d/.test(char)) {
       // a typed separator jumps to the next section, from the start of one it has nothing to close
-      if (caret && isDigit(caret - 1)) while (caret < chars.length && isDigit(caret)) caret++
+      if (caret && isDigit(caret - 1)) {
+        while (caret < chars.length && isDigit(caret)) {
+          caret++
+        }
+      }
     } else if (caret < chars.length) {
       chars[caret] = char
       wrote = caret++
     }
   }
 
-  // the caret steps over the separator on its own, unless the mask is the one handing it on
-  if (!rtl) while (caret < chars.length && !isDigit(caret)) caret++
+  // the caret steps over the separator on its own, unless the mask is the one handing it
+  if (!rtl) {
+    while (caret < chars.length && !isDigit(caret)) {
+      caret++
+    }
+  }
 
-  return { value: chars.join(''), caret, wrote }
+  return {
+    value: chars.join(''),
+    caret,
+    wrote,
+  }
 }
 
-// the run of digits a typed one landed in, which is the section it was meant for
 function sectionAt (text: string, at: number) {
   let start = at
   let end = at
@@ -49,7 +63,10 @@ function sectionAt (text: string, at: number) {
   while (start && /\d/.test(text[start - 1])) start--
   while (end < text.length && /\d/.test(text[end])) end++
 
-  return { start, end }
+  return {
+    start,
+    end,
+  }
 }
 
 // deleting takes out digits but leaves the separators, so the sections keep their place
@@ -67,14 +84,14 @@ function keepSeparators (previous: string, start: number, removed: number, after
 }
 
 // an emptied section is retyped from its start, which an rtl value only reads back for a whole one
-function replays (value: string, start: number, end: number, rtl: boolean) {
+function canReplay (value: string, start: number, end: number, rtl: boolean) {
   return !rtl || !(/\d/.test(value[start - 1] ?? '') || /\d/.test(value[end] ?? ''))
 }
 
 export function createSegmentedEdit (
   mask: MaskEdit,
   separator: MaybeRefOrGetter<string>,
-  rtl?: MaybeRefOrGetter<boolean>,
+  isRtl?: MaybeRefOrGetter<boolean>,
 ) {
   const text = shallowRef('')
   let edit: { value: string, start: number, end: number } | undefined
@@ -82,9 +99,9 @@ export function createSegmentedEdit (
   let placed: number | undefined
 
   function onBeforeinput (e: InputEvent) {
-    const el = e.target as HTMLInputElement
+    const inputElement = e.target as HTMLInputElement
 
-    edit = { value: el.value, start: el.selectionStart ?? 0, end: el.selectionEnd ?? 0 }
+    edit = { value: inputElement.value, start: inputElement.selectionStart ?? 0, end: inputElement.selectionEnd ?? 0 }
   }
 
   function apply (el: HTMLInputElement, next: { value: string, caret: number }) {
@@ -98,38 +115,40 @@ export function createSegmentedEdit (
   // the arrow the value grows towards closes the section being typed, like the separator key does
   function onKeydown (e: KeyboardEvent) {
     const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-    const el = e.target as HTMLInputElement
-    const caret = el.selectionStart ?? 0
+    const inputElement = e.target as HTMLInputElement
+    const caret = inputElement.selectionStart ?? 0
 
-    if (!step || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || caret !== el.selectionEnd) return
+    if (!step || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || caret !== inputElement.selectionEnd) {
+      return
+    }
 
-    const isRtl = !!toValue(rtl)
+    const rtl = !!toValue(isRtl)
     // an rtl section grows in front of its separator, with the caret still behind its digits
-    const ahead = isRtl ? el.value.slice(0, caret) : el.value.slice(caret)
-    const grows = (isRtl ? step < 0 : step > 0) && !(isRtl ? /\D/ : /\d/).test(ahead)
-    const at = isRtl ? 0 : caret
+    const ahead = rtl ? inputElement.value.slice(0, caret) : inputElement.value.slice(caret)
+    const grows = (rtl ? step < 0 : step > 0) && !(rtl ? /\D/ : /\d/).test(ahead)
+    const at = rtl ? 0 : caret
 
     const next = grows
-      ? mask(el.value.slice(0, at) + toValue(separator) + el.value.slice(at), isRtl ? 0 : caret + 1)
+      ? mask(inputElement.value.slice(0, at) + toValue(separator) + inputElement.value.slice(at), rtl ? 0 : caret + 1)
       // elsewhere the caret only moves, the mask settles the section it leaves behind
-      : mask(el.value, Math.min(Math.max(caret + step, 0), el.value.length))
+      : mask(inputElement.value, clamp(caret + step, 0, inputElement.value.length))
 
-    // with nothing to close or settle the caret moves on its own
-    if (next.value === el.value) return
+    if (next.value === inputElement.value) {
+      return // with nothing to close or settle the caret moves on its own
+    }
 
     e.preventDefault()
-    apply(el, next)
+    apply(inputElement, next)
   }
 
-  // typing a character where the caret is, either over a section or into an empty one
   function typeIn (state: { value: string, caret: number }, char: string, moved = false) {
     const { value, caret } = state
     const shaped = mask(value)
-    const isRtl = !!toValue(rtl)
+    const rtl = !!toValue(isRtl)
 
     // sections of an rtl field fill towards the front, where the mask parks the caret
     // with every section filled nothing grows, and what is typed overwrites wherever the caret sits
-    const grows = !isRtl ? value.length : shaped.complete ? -1 : shaped.caret
+    const grows = !rtl ? value.length : shaped.complete ? -1 : shaped.caret
     // a value the mask would rewrite has no sections to overwrite, e.g. after a backspace
     // and one that can still take another digit is edited by inserting, e.g. after a delete
     const isInside = caret !== grows &&
@@ -140,7 +159,7 @@ export function createSegmentedEdit (
 
     if (isInside) {
       // an rtl field hands the caret to the section in front of the value, which the mask knows
-      const { value: overtyped, caret: at, wrote } = overtype(value, caret, char, isRtl, moved)
+      const { value: overtyped, caret: at, wrote } = overtype(value, caret, char, rtl, moved)
 
       // the mask has the last word on the sections the overwrite made invalid, e.g. February 31st
       const next = mask(overtyped, at, true)
@@ -166,12 +185,12 @@ export function createSegmentedEdit (
   }
 
   function onInput (e: InputEvent) {
-    const el = e.target as HTMLInputElement
+    const inputElement = e.target as HTMLInputElement
     const previous = edit?.value ?? ''
-    const removed = previous.length - el.value.length
+    const removed = previous.length - inputElement.value.length
 
     if (e.isComposing) {
-      text.value = el.value
+      text.value = inputElement.value
       return
     }
 
@@ -179,25 +198,36 @@ export function createSegmentedEdit (
       const collapsed = edit.start === edit.end
       const forward = collapsed && !!e.inputType.includes('Forward')
 
-      apply(el, keepSeparators(previous, collapsed && !forward ? edit.start - removed : edit.start, removed, forward))
+      apply(inputElement, keepSeparators(previous, collapsed && !forward ? edit.start - removed : edit.start, removed, forward))
       return
     }
 
     // what the browser has put in, read back out of the value it landed in
-    const typed = edit ? el.value.slice(edit.start, el.value.length - previous.length + edit.end) : ''
+    const typed = edit
+      ? inputElement.value.slice(edit.start, inputElement.value.length - previous.length + edit.end)
+      : ''
 
-    // a substitution empties the sections it covers first, then takes the characters one at a time
-    if (edit && edit.start !== edit.end && e.inputType?.startsWith('insert') &&
-      replays(previous, edit.start, edit.end, !!toValue(rtl))
+    if (edit &&
+      edit.start !== edit.end &&
+      e.inputType?.startsWith('insert') &&
+      canReplay(previous, edit.start, edit.end, !!toValue(isRtl))
     ) {
+      // a substitution empties the sections it covers first, then takes the characters one at a time
       const emptied = keepSeparators(previous, edit.start, edit.end - edit.start, false)
-
-      apply(el, [...typed].reduce((state, char) => typeIn(state, char), emptied))
+      const next = [...typed].reduce((state, char) => typeIn(state, char), emptied)
+      apply(inputElement, next)
       return
     }
 
-    apply(el, typeIn({ value: previous, caret: edit?.start ?? previous.length }, typed, edit?.start !== placed))
+    const state = { value: previous, caret: edit?.start ?? previous.length }
+    const next = typeIn(state, typed, edit?.start !== placed)
+    apply(inputElement, next)
   }
 
-  return { onBeforeinput, onInput, onKeydown, text }
+  return {
+    onBeforeinput,
+    onInput,
+    onKeydown,
+    text,
+  }
 }
