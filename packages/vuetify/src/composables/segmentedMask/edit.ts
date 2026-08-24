@@ -6,10 +6,11 @@ import type { MaybeRefOrGetter } from 'vue'
 import type { MaskEdit } from './types'
 
 // sections have a fixed width, so typing inside one overwrites instead of shifting
-export function overtype (text: string, start: number, typed: string, rtl = false, moved = false): [string, number] {
+export function overtype (text: string, start: number, typed: string, rtl = false, moved = false) {
   const chars = [...text]
   const isDigit = (index: number) => /\d/.test(chars[index] ?? '')
   let caret = start
+  let wrote = -1
 
   // a caret the user put between sections is typed into the one it follows, an rtl field fills those in front
   if (rtl && moved && caret && !isDigit(caret) && isDigit(caret - 1)) caret--
@@ -29,14 +30,26 @@ export function overtype (text: string, start: number, typed: string, rtl = fals
       // a typed separator jumps to the next section, from the start of one it has nothing to close
       if (caret && isDigit(caret - 1)) while (caret < chars.length && isDigit(caret)) caret++
     } else if (caret < chars.length) {
-      chars[caret++] = char
+      chars[caret] = char
+      wrote = caret++
     }
   }
 
   // the caret steps over the separator on its own, unless the mask is the one handing it on
   if (!rtl) while (caret < chars.length && !isDigit(caret)) caret++
 
-  return [chars.join(''), caret]
+  return { value: chars.join(''), caret, wrote }
+}
+
+// the run of digits a typed one landed in, which is the section it was meant for
+function sectionAt (text: string, at: number) {
+  let start = at
+  let end = at
+
+  while (start && /\d/.test(text[start - 1])) start--
+  while (end < text.length && /\d/.test(text[end])) end++
+
+  return { start, end }
 }
 
 // deleting takes out digits but leaves the separators, so the sections keep their place
@@ -127,10 +140,19 @@ export function createSegmentedEdit (
 
     if (isInside) {
       // an rtl field hands the caret to the section in front of the value, which the mask knows
-      const [overtyped, at] = overtype(value, caret, char, isRtl, moved)
+      const { value: overtyped, caret: at, wrote } = overtype(value, caret, char, isRtl, moved)
 
       // the mask has the last word on the sections the overwrite made invalid, e.g. February 31st
-      return mask(overtyped, at, true)
+      const next = mask(overtyped, at, true)
+
+      if (wrote < 0 || next.value.length !== overtyped.length || next.value[wrote] === overtyped[wrote]) {
+        return next
+      }
+
+      // a section that cannot hold what was typed into it starts over with it, e.g. 9 over a 12 is September
+      const { start, end } = sectionAt(overtyped, wrote)
+
+      return mask(overtyped.slice(0, start) + overtyped[wrote] + overtyped.slice(end), start + 1, true)
     }
 
     const insert = (at: number) => mask(value.slice(0, at) + char + value.slice(at), at + char.length)

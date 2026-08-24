@@ -46,17 +46,17 @@ describe('segmentedMask', () => {
 
   describe('overtype', () => {
     it('should overwrite digits and skip separators', () => {
-      expect(overtype('12/31/2030', 0, '02')).toEqual(['02/31/2030', 3])
-      expect(overtype('12/31/2030', 1, '1')).toEqual(['11/31/2030', 3])
-      expect(overtype('12/31/2030', 3, '15')).toEqual(['12/15/2030', 6])
+      expect(overtype('12/31/2030', 0, '02')).toMatchObject({ value: '02/31/2030', caret: 3 })
+      expect(overtype('12/31/2030', 1, '1')).toMatchObject({ value: '11/31/2030', caret: 3 })
+      expect(overtype('12/31/2030', 3, '15')).toMatchObject({ value: '12/15/2030', caret: 6 })
     })
 
     it('should treat typed separators as section jumps', () => {
-      expect(overtype('12/31/2030', 0, '1/2')).toEqual(['12/21/2030', 4])
+      expect(overtype('12/31/2030', 0, '1/2')).toMatchObject({ value: '12/21/2030', caret: 4 })
     })
 
     it('should flip an existing period in place', () => {
-      expect(overtype('01:30 PM', 0, 'a')).toEqual(['01:30 AM', 8])
+      expect(overtype('01:30 PM', 0, 'a')).toMatchObject({ value: '01:30 AM', caret: 8 })
     })
   })
 })

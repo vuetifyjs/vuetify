@@ -444,9 +444,14 @@ describe('VDateInput', () => {
       expect(input).toHaveValue(expected)
     })
 
-    it.fails.each([
+    it.each([
       { from: '12/25/2025', selection: [0, 0], typing: '9', expected: '09/25/2025' },
-      { from: '12/25/2025', selection: [6, 6], typing: '9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [3, 3], typing: '9', expected: '12/09/2025' },
+      { from: '12/25/2025', selection: [1, 1], typing: '9', expected: '09/25/2025' },
+      // a digit the section can hold is written where it was typed, whatever the mask makes of the rest
+      { from: '12/25/2025', selection: [0, 0], typing: '1', expected: '12/25/2025' },
+      { from: '12/31/2025', selection: [1, 1], typing: '1', expected: '11/30/2025' },
+      { from: '12/25/2025', selection: [6, 6], typing: '9', expected: '12/25/9025' },
     ])('should start a section over when the overwritten digit does not fit', async ({ from, selection, typing, expected }) => {
       const { element } = render(() => <VDateInput modelValue={ from } />)
 
