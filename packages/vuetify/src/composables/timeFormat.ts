@@ -6,11 +6,12 @@ import { useLocale } from '@/composables/locale'
 import { maskSegmentsFrom, remainingHint, timeSegments, toMaskSource } from '@/composables/segmentedMask'
 
 // Utilities
-import { shallowRef, toRef } from 'vue'
+import { shallowRef, toRef, toValue } from 'vue'
 
 // Types
-import type { Ref } from 'vue'
+import type { MaybeRefOrGetter, Ref } from 'vue'
 import type { Period } from '@/components/VTimePicker/shared'
+import type { Segment } from '@/composables/segmentedMask'
 
 const rtlScript = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Thaana}]/u
 
@@ -19,7 +20,17 @@ export interface TimeFormatProps {
   useSeconds?: boolean
 }
 
-export function useTimeFormat (props: TimeFormatProps, locale: Ref<string>) {
+export interface TimeFormatPrefix {
+  segments: Segment[]
+  hint: string
+}
+
+export function useTimeFormat (
+  props: TimeFormatProps,
+  locale: Ref<string>,
+  // sections typed in front of the time, e.g. the date of VDateTimeInput
+  prefix?: MaybeRefOrGetter<TimeFormatPrefix | undefined>,
+) {
   const { t } = useLocale()
 
   const period = shallowRef<Period | null>(null)
@@ -63,19 +74,29 @@ export function useTimeFormat (props: TimeFormatProps, locale: Ref<string>) {
     return { labels, leading, gap, keys }
   })
 
-  const segments = toRef(() => timeSegments({ hour12: hour12.value, useSeconds: props.useSeconds }))
+  const timeOnly = toRef(() => timeSegments({ hour12: hour12.value, useSeconds: props.useSeconds }))
 
   // unlike the date hint, the native time input does not name its fields
-  const digitsHint = toRef(() => segments.value
+  const timeHint = toRef(() => timeOnly.value
     .map(segment => segment.type === 'separator' ? segment.value : '-'.repeat(segment.size))
     .join(''))
 
+  const front = toRef(() => toValue(prefix))
+
+  const segments = toRef((): Segment[] => front.value
+    ? [...front.value.segments, { type: 'separator', value: ' ' }, ...timeOnly.value]
+    : timeOnly.value)
+
+  const digitsHint = toRef(() => front.value ? `${front.value.hint} ${timeHint.value}` : timeHint.value)
+
+  // the prefix keeps its separators and the period labels go, even when they sit between the date and the time
+  const noise = toRef(() => front.value ? /\s*\p{L}[^\d\s]*|[^\d\s:/.-]/gu : /[^\d:]/g)
+
   const placeholder = toRef(() => {
-    const digits = digitsHint.value
+    const digits = timeHint.value
+    const time = !hour12.value ? digits : periodFormat.value.leading ? `-- ${digits}` : `${digits} --`
 
-    if (!hour12.value) return digits
-
-    return periodFormat.value.leading ? `-- ${digits}` : `${digits} --`
+    return front.value ? `${front.value.hint} ${time}` : time
   })
 
   function withPeriod (digits: string, value: Period) {
@@ -99,7 +120,7 @@ export function useTimeFormat (props: TimeFormatProps, locale: Ref<string>) {
   }
 
   function maskTime (input: string, caret = -1) {
-    const source = toMaskSource(input, /[^\d:]/g, caret)
+    const source = toMaskSource(input, noise.value, caret)
     const masked = maskSegmentsFrom(segments.value, source.text, 0, source.caret)
     const at = masked.caret < 0 ? masked.value.length : masked.caret
     const tokens = digitsHint.value.slice(masked.width)
@@ -112,10 +133,12 @@ export function useTimeFormat (props: TimeFormatProps, locale: Ref<string>) {
 
     // the period joins the text once the digits are done, until then typing grows at the end
     if (masked.complete && period.value) {
+      const split = masked.value.length - timeHint.value.length
+
       return {
         ...masked,
-        value: withPeriod(masked.value, period.value),
-        caret: leading ? at + labels[period.value].length + gap.length : at,
+        value: masked.value.slice(0, split) + withPeriod(masked.value.slice(split), period.value),
+        caret: leading && at >= split ? at + labels[period.value].length + gap.length : at,
         hint: '',
       }
     }
