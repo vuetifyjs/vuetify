@@ -212,6 +212,17 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
+    const selectableItems = computed(() => {
+      switch (props.selectStrategy) {
+        case 'all':
+          return sortedItems.value
+        case 'page':
+          return extractRows(paginatedItems.value)
+        default:
+          return items.value
+      }
+    })
+
     const {
       isSelected,
       select,
@@ -219,7 +230,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleSelect,
       someSelected,
       allSelected,
-    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
+    } = provideSelection(props, { allItems: selectableItems, currentPage: paginatedItemsWithoutGroups })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
