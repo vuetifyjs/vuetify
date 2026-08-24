@@ -1,5 +1,6 @@
 // Composables
 import { useDate } from '@/composables/date/date'
+import { dateSegments, maskSegmentsFrom, remainingHint, toMaskSource } from '@/composables/segmentedMask'
 
 // Utilities
 import { toRef } from 'vue'
@@ -11,6 +12,7 @@ import type { Ref } from 'vue'
 // Types
 export interface DateFormatProps {
   inputFormat?: string
+  multiple?: boolean | 'range' | number | (string & {})
 }
 
 class DateFormatSpec {
@@ -52,32 +54,94 @@ export const makeDateFormatProps = propsFactory({
   },
 }, 'date-format')
 
-export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
+export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRtl: Ref<boolean>) {
   const adapter = useDate()
 
   function inferFromLocale () {
     const localeForDateFormat = locale.value ?? 'en-US'
-    const formatFromLocale = Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
-      .format(adapter.toJsDate(adapter.parseISO('1999-12-07')))
-      .replace(/(07)|(٠٧)|(٢٩)|(۱۶)|(০৭)/, 'dd')
-      .replace(/(12)|(١٢)|(٠٨)|(۰۹)|(১২)/, 'mm')
-      .replace(/(1999)|(2542)|(١٩٩٩)|(١٤٢٠)|(۱۳۷۸)|(১৯৯৯)/, 'yyyy')
-      .replace(/[^ymd\-/.]/g, '')
-      .replace(/\.$/, '')
+    const parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
+      .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
 
-    if (!DateFormatSpec.canBeParsed(formatFromLocale)) {
-      consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${formatFromLocale}]`)
-      return 'mm/dd/yyyy'
+    const logicalOrder = parts.filter(p => ['year', 'month', 'day'].includes(p.type)).map(p => p.type[0]).join('')
+    const literal = parts.find(p => p.type === 'literal')?.value ?? ''
+    const separator = ['/', '-', '.'].find(sign => literal.includes(sign)) ?? '/'
+
+    if (logicalOrder.length !== 3) {
+      consoleWarn(`Date format inferred from locale [${localeForDateFormat}] is invalid: [${logicalOrder}]`)
+      return new DateFormatSpec('mdy', '/')
     }
 
-    return formatFromLocale
+    const visualOrder = literal.includes('\u200f')
+      ? [...logicalOrder].reverse().join('')
+      : logicalOrder
+
+    return new DateFormatSpec(visualOrder, separator)
   }
 
   const currentFormat = toRef(() => {
     return DateFormatSpec.canBeParsed(props.inputFormat)
       ? DateFormatSpec.parse(props.inputFormat!)
-      : DateFormatSpec.parse(inferFromLocale())
+      : inferFromLocale()
   })
+
+  function autoFixYear (year: number) {
+    const currentYear = adapter.getYear(adapter.date())
+    if (year > 100 || currentYear % 100 >= 50) {
+      return year
+    }
+
+    const currentCentury = ~~(currentYear / 100) * 100
+
+    return year < 50
+      ? currentCentury + year
+      : (currentCentury - 100) + year
+  }
+
+  const typingOrder = toRef(() => {
+    const { order } = currentFormat.value
+
+    return isRtl.value
+      ? [...order].reverse().join('')
+      : order
+  })
+
+  const layout = toRef(() => {
+    const isRange = props.multiple === 'range'
+    const limit = isRange ? 2 : props.multiple ? Infinity : 1
+
+    return {
+      join: isRange ? ' - ' : ', ',
+      limit,
+      bounded: Number.isFinite(limit),
+    }
+  })
+
+  const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
+
+  function mirror (text: string, caret = -1) {
+    const parts = text.split(/(\D+)/)
+    const value = [...parts].reverse().join('')
+
+    if (caret < 0) return { value, caret }
+
+    let at = 0
+    let start = 0
+
+    while (at < parts.length - 1 && caret > start + parts[at].length) {
+      start += parts[at].length + parts[at + 1].length
+      at += 2
+    }
+
+    const mirroredCaret = text.length - start - parts[at].length + Math.max(caret - start, 0)
+
+    return { value, caret: mirroredCaret }
+  }
+
+  function joinDates (dates: string[]) {
+    return (isRtl.value
+      ? [...dates].reverse()
+      : dates).join(layout.value.join)
+  }
 
   function parseDate (dateString: string) {
     function parseDateParts (text: string): Record<'y' |'m' | 'd', number> {
@@ -99,19 +163,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
       return { year: autoFixYear(year), month, day }
     }
 
-    function autoFixYear (year: number) {
-      const currentYear = adapter.getYear(adapter.date())
-      if (year > 100 || currentYear % 100 >= 50) {
-        return year
-      }
-
-      const currentCentury = ~~(currentYear / 100) * 100
-
-      return year < 50
-        ? currentCentury + year
-        : (currentCentury - 100) + year
-    }
-
     const dateParts = parseDateParts(dateString)
     const validatedParts = validateDateParts(dateParts)
 
@@ -128,6 +179,96 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
     return !!parseDate(text)
   }
 
+  function remainingFormat (width: number, dates: number) {
+    const { bounded, join, limit } = layout.value
+    const { format } = currentFormat.value
+    const template = Array.from({ length: bounded ? limit : dates }, () => format).join(join)
+
+    return isRtl.value
+      ? template.slice(0, template.length - width)
+      : template.slice(width)
+  }
+
+  function maskInTypingOrder (input: string, caret: number) {
+    const { join, limit } = layout.value
+    const { text, caret: before } = toMaskSource(input, /[^\d/.\- ]/g, caret)
+
+    let result = ''
+    let index = 0
+    let width = 0
+    let outCaret = -1
+    let gaps = false
+    let dates = 1
+
+    for (let date = 0; date < limit; date++) {
+      const start = index
+      const masked = maskSegmentsFrom(segments.value, text, index, before)
+      index = masked.index
+
+      // the next date waits for the end of the previous one
+      if (index === start || !masked.value) {
+        break
+      }
+
+      if (masked.caret >= 0 && outCaret < 0) {
+        outCaret = result.length + masked.caret
+      }
+
+      result += masked.value
+      width += masked.width
+      gaps ||= masked.gaps
+
+      if (!masked.complete || (!masked.closed && index >= text.length)) {
+        break
+      }
+
+      if (date + 1 < limit) {
+        result += join
+        width += join.length
+        dates++
+      }
+    }
+
+    const hint = remainingFormat(width, dates)
+
+    return {
+      value: result,
+      caret: outCaret < 0 ? result.length : outCaret,
+      width,
+      gaps,
+      hint,
+      complete: layout.value.bounded && !hint,
+    }
+  }
+
+  function maskDate (input: string, caret = -1, inPlace = false) {
+    if (!isRtl.value) {
+      return maskInTypingOrder(input, caret)
+    }
+
+    const typed = mirror(input, caret)
+    const at = caret >= input.length ? typed.value.length : typed.caret
+    const masked = maskInTypingOrder(typed.value, at)
+    const shown = mirror(masked.value, masked.caret)
+    const filled = !inPlace &&
+      masked.caret >= masked.value.length &&
+      layout.value.bounded &&
+      !masked.hint
+
+    return {
+      ...masked,
+      value: shown.value,
+      caret: filled ? 0 : shown.caret,
+    }
+  }
+
+  function getHint (text: string) {
+    const { value, hint } = maskDate(text)
+    const flip = (v: string) => isRtl.value ? [...v].reverse().join('') : v
+
+    return flip(remainingHint(flip(value), flip(hint), flip(text)))
+  }
+
   function formatDate (value: unknown) {
     const parts = adapter.toISO(value).split('T')[0].split('-')
 
@@ -138,8 +279,12 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>) {
 
   return {
     isValid,
+    getHint,
+    joinDates,
+    maskDate,
     parseDate,
     formatDate,
+    separator: toRef(() => currentFormat.value.separator),
     parserFormat: toRef(() => currentFormat.value.format),
   }
 }
