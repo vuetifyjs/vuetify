@@ -206,9 +206,13 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
     .v-progress-linear__stream + .v-progress-linear__background
       @include tools.rounded($progress-linear-border-radius)
 
-    .v-progress-linear__determinate
-      border-start-start-radius: 0
-      border-end-start-radius: 0
+    &:not(.v-progress-linear--reverse) .v-progress-linear__determinate
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
+
+    &.v-progress-linear--reverse .v-progress-linear__determinate
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
 
   // Keyframes
   @keyframes indeterminate-ltr
