@@ -161,7 +161,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
       const { target, contentRect } = entries[0]
 
-      const firstItem = target.querySelector('.v-pagination__list > *') as HTMLElement
+      const buttons = target.querySelectorAll('.v-pagination__list > *')
+      const firstItem = buttons[0] as HTMLElement
 
       if (!firstItem) return
 
@@ -169,6 +170,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const itemWidth =
         firstItem.offsetWidth +
         parseFloat(getComputedStyle(firstItem).marginRight) * 2
+      const usedWidth = itemWidth * buttons.length
+      if (usedWidth <= totalWidth + 1 && totalWidth - usedWidth < itemWidth) return
 
       maxButtons.value = getMax(totalWidth, itemWidth)
     })

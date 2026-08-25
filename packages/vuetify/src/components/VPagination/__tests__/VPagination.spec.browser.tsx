@@ -37,6 +37,26 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
   })
 
+  it('should keep the range stable in a shrink-to-fit container', async () => {
+    render(() => (
+      <div class="d-flex">
+        <VPagination length="5" modelValue={ 3 } />
+      </div>
+    ))
+
+    await waitIdle() // resize-observer loop has to settle
+
+    // a shrink-to-fit container is as wide as the buttons it holds, so measuring it
+    // used to alternate between the full range and `1 ... 3 ... 5` on every frame
+    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
+    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('12345')
+
+    await waitIdle()
+
+    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
+    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('12345')
+  })
+
   it('should still honor an explicit total-visible when length is less than 3', () => {
     render(() => (
       <div class="d-flex">
