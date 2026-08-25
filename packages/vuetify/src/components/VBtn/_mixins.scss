@@ -12,7 +12,7 @@
   }
   $height: var(--v-btn-scale);
   $base-height: map.get($map, 'height');
-  $multiplier: calc(($height - $base-height) / #{settings.$size-scale});
+  $multiplier: tools.css-div(calc($height - $base-height), settings.$size-scale);
   $base-size: map.get($map, 'font-size');
   $size: calc($base-size + (2rem * $multiplier / 16));
 
