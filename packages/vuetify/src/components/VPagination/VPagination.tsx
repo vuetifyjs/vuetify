@@ -170,8 +170,16 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const itemWidth =
         firstItem.offsetWidth +
         parseFloat(getComputedStyle(firstItem).marginRight) * 2
-      const usedWidth = itemWidth * buttons.length
-      if (usedWidth <= totalWidth + 1 && totalWidth - usedWidth < itemWidth) return
+      // Assumes every button is as wide as the first one, which is a nav control
+      // (first/prev), not a page item. Custom slots can break that and skew the total.
+      const slack = totalWidth - itemWidth * buttons.length
+
+      // A shrink-to-fit container (flex item, inline-block, table cell) is only ever
+      // as wide as the buttons already inside it, so measuring it feeds the button
+      // count back into itself and oscillates forever. Such a container reports no
+      // overflow and no room to spare, so leave the estimate alone; only react to a
+      // container that is genuinely too small, or has room for another button.
+      if (slack >= -1 && slack < itemWidth) return
 
       maxButtons.value = getMax(totalWidth, itemWidth)
     })

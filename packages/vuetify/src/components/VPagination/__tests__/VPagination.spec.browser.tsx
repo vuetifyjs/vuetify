@@ -37,7 +37,18 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
   })
 
-  it('should keep the range stable in a shrink-to-fit container', async () => {
+  // Samples the rendered range once per frame. A resize-observer feedback loop
+  // redelivers every frame, so an oscillation shows up as transitions in the tail.
+  async function sampleFrames (frames: number) {
+    const samples: string[] = []
+    for (let i = 0; i < frames; i++) {
+      await new Promise(resolve => requestAnimationFrame(resolve))
+      samples.push(screen.getByCSS('.v-pagination__list').textContent ?? '')
+    }
+    return samples
+  }
+
+  it('should not oscillate the range in a shrink-to-fit container', async () => {
     render(() => (
       <div class="d-flex">
         <VPagination length="5" modelValue={ 3 } />
@@ -46,15 +57,30 @@ describe('VPagination', () => {
 
     await waitIdle() // resize-observer loop has to settle
 
-    // a shrink-to-fit container is as wide as the buttons it holds, so measuring it
+    const samples = await sampleFrames(20)
+    const transitions = samples.filter((s, i) => i > 0 && s !== samples[i - 1])
+
     // used to alternate between the full range and `1 ... 3 ... 5` on every frame
-    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('12345')
+    expect(transitions).toHaveLength(0)
+    expect(samples.at(-1)).toBe('12345')
+  })
 
-    await waitIdle()
+  it('should still measure a container that is too small', async () => {
+    render(() => (
+      <div style="width: 300px">
+        <VPagination length="100" modelValue={ 1 } />
+      </div>
+    ))
 
-    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('12345')
+    await waitIdle() // resize-observer loop has to settle
+
+    // the shrink-to-fit early return must not disable measurement altogether
+    expect(screen.getAllByCSS('.v-pagination__item').length).toBeLessThan(8)
+    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('100')
+
+    const samples = await sampleFrames(20)
+
+    expect(samples.filter((s, i) => i > 0 && s !== samples[i - 1])).toHaveLength(0)
   })
 
   it('should still honor an explicit total-visible when length is less than 3', () => {
