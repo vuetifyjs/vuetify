@@ -10,14 +10,14 @@
   @if $immediate {
     $selector: '#{&}#{$selector}';
   }
-  $height: var(--v-btn-scale);
+  $height: var(--v-btn-height);
   $base-height: map.get($map, 'height');
   $multiplier: tools.css-div(calc($height - $base-height), settings.$size-scale);
   $base-size: map.get($map, 'font-size');
   $size: calc($base-size + (2rem * $multiplier / 16));
 
   #{$selector} {
-    --v-btn-height: #{$height};
+    --v-btn-height: #{$base-height};
     --v-btn-size: #{$size};
     font-size: var(--v-btn-size);
     min-width: tools.roundEven(calc($height * map.get($map, 'width-ratio')));
@@ -31,7 +31,7 @@
     }
 
     #{$selector} {
-      --v-btn-scale: #{map.get($map, 'height') + (settings.$size-scale * $multiplier)};
+      --v-btn-height: #{map.get($map, 'height') + (settings.$size-scale * $multiplier)};
       --v-btn-size: #{calc(map.get($map, 'font-size') + 2rem * $multiplier / 16)};
     }
   }
