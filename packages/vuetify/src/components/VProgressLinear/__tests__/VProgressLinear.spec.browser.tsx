@@ -50,12 +50,24 @@ describe('VProgressLinear', () => {
     expect(screen.getByCSS('.v-progress-linear__determinate').clientWidth).toBe(50)
   })
 
-  it('rounds the end of the bar that is not anchored when reversed', () => {
+  it('should not round the anchored end of the bar when reversed', async () => {
     render(() => <VProgressLinear modelValue="25" roundedBar reverse />)
 
-    const styles = getComputedStyle(screen.getByCSS('.v-progress-linear__determinate'))
-    expect(styles.borderTopRightRadius).toBe('0px')
-    expect(styles.borderTopLeftRadius).not.toBe('0px')
+    const bar = screen.getByCSS('.v-progress-linear__determinate')
+    await expect.element(bar).toHaveStyle({ borderTopRightRadius: '0px', borderBottomRightRadius: '0px' })
+    await expect.element(bar).not.toHaveStyle({ borderTopLeftRadius: '0px' })
+  })
+
+  it('should not round the anchored end of the bar when reversed in rtl', async () => {
+    render(() => (
+      <VLocaleProvider rtl>
+        <VProgressLinear modelValue="25" roundedBar reverse />
+      </VLocaleProvider>
+    ))
+
+    const bar = screen.getByCSS('.v-progress-linear__determinate')
+    await expect.element(bar).toHaveStyle({ borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px' })
+    await expect.element(bar).not.toHaveStyle({ borderTopRightRadius: '0px' })
   })
 
   showcase({ stories })
