@@ -44,7 +44,7 @@ export const VHighlight = defineComponent({
         matches: () => props.matches,
         matchAll: () => props.matchAll,
         ignoreCase: () => props.ignoreCase,
-        ignoreAccents: () => props.ignoreAccents,
+        ignoreAccents: () => props.ignoreAccents ?? false,
       },
     ))
 

@@ -66,7 +66,7 @@ export function createDefaultFilter (ignoreAccents?: IgnoreAccents): FilterFunct
     const ranges = findMatchRanges(value.toString(), query.toString(), {
       ignoreCase: true,
       ignoreAccents,
-      all: true,
+      matchAll: true,
     })
 
     return ranges.length ? ranges : -1
