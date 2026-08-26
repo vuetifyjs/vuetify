@@ -11,6 +11,7 @@ import { useLoadingConfig } from './composables/loading'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
@@ -105,6 +106,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
+    const selectDefaults = injectNestedDefaults<VSelect['$props']>('VSelect')
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
@@ -301,7 +303,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             items={ sortableColumns.value }
             label={ t('$vuetify.dataTable.sortBy') }
             multiple={ props.multiSort }
-            variant="underlined"
+            variant={ selectDefaults.value?.variant ?? 'underlined' }
             returnObject
             onClick:clear={ () => sortBy.value = [] }
           >
@@ -388,7 +390,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             : headers.value.map((row, y) => (
               <tr>
                 { row.map((column, x) => (
-                  <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+                  <VDataTableHeaderCell key={ column.key ?? x } column={ column } x={ x } y={ y } />
                 ))}
               </tr>
             ))}

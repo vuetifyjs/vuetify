@@ -1,5 +1,6 @@
 // Components
 import { VNumberInput } from '../VNumberInput'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VForm } from '@/components/VForm'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
@@ -21,6 +22,19 @@ describe('VNumberInput', () => {
     await userEvent.click(element)
     await userEvent.keyboard(typing)
     expect(screen.getByCSS('input')).toHaveValue(expected)
+  })
+
+  it.each([
+    ['VNumberInput > VBtn defaults should style the controls', { VNumberInput: { VBtn: { variant: 'tonal' } } }, 'v-btn--variant-tonal'],
+    ['unscoped VBtn defaults should not apply', { VBtn: { variant: 'tonal' } }, 'v-btn--variant-text'],
+  ])('%s', async (_, defaults, expected) => {
+    render(() => (
+      <VDefaultsProvider defaults={ defaults }>
+        <VNumberInput />
+      </VDefaultsProvider>
+    ))
+
+    expect(screen.getByTestId('increment')).toHaveClass(expected)
   })
 
   describe('grouped input', () => {
@@ -266,8 +280,33 @@ describe('VNumberInput', () => {
       await userEvent.click(screen.getByCSS('input'))
       await userEvent.keyboard('{arrowDown}')
 
+      await expect.element(screen.getByCSS('input')).toHaveValue('15')
+      expect(model.value).toBe(15)
+
+      await userEvent.keyboard('{arrowDown}')
+
       await expect.element(screen.getByCSS('input')).toHaveValue('14')
       expect(model.value).toBe(14)
+    })
+
+    it('should snap to the limit when value is out of range by more than one step', async () => {
+      const model = ref(100)
+      render(() =>
+        <VNumberInput min={ 0 } max={ 10 } v-model={ model.value } />
+      )
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(model.value).toBe(10)
+
+      await userEvent.click(screen.getByTestId('decrement'))
+      expect(model.value).toBe(9)
+
+      model.value = -100
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(model.value).toBe(0)
+
+      await userEvent.click(screen.getByTestId('increment'))
+      expect(model.value).toBe(1)
     })
 
     it('should auto-correct when incrementing against the limit', async () => {
@@ -333,6 +372,21 @@ describe('VNumberInput', () => {
       await userEvent.click(screen.getByTestId('decrement'))
       await expect.element(screen.getByCSS('input')).toHaveValue('0.00')
       expect(model.value).toBe(0)
+    })
+
+    // 0.2 + 0.1 > 0.3 in IEEE-754; must still allow stepping to max
+    it('should reach max when step has floating-point error', async () => {
+      const model = ref(0)
+      render(() => <VNumberInput step={ 0.1 } max={ 0.3 } v-model={ model.value } precision={ null } />)
+
+      await userEvent.keyboard('{Tab}{ArrowUp}')
+      expect(model.value).toBe(0.1)
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(0.2)
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(model.value).toBe(0.3)
     })
 
     it('shows custom decimal separator when incrementing', async () => {

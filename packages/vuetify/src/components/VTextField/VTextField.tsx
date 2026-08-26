@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vIntersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
+import { cloneVNode, computed, nextTick, ref, watch, withDirectives } from 'vue'
 import {
   callEvent,
   filterInputAttrs,
@@ -41,7 +41,10 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
-  counter: [Boolean, Number, String],
+  counter: {
+    type: [Boolean, Number, String] as PropType<boolean | number | string | null>,
+    default: undefined,
+  },
   counterValue: [Number, Function] as PropType<number | ((value: any) => number)>,
   prefix: String,
   placeholder: String,
@@ -109,6 +112,10 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
+
+    // hack for Chrome to keep caret/selection
+    watch(() => props.type, () => void inputRef.value?.offsetHeight, { flush: 'post' })
+
     const autocomplete = useAutocomplete(props)
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
@@ -181,11 +188,11 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || (props.counter !== false && props.counter != null))
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.persistentCounter || props.hideDetails === false || isFocused.value))
-      )
+      const hasCounter = !!(slots.counter || props.counter !== undefined)
+      const counterActive = props.counter !== false && props.counter !== null &&
+        (props.persistentCounter || isFocused.value)
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = VField.filterProps(props)
@@ -208,6 +215,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -310,7 +318,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                     <span />
 
                     <VCounter
-                      active={ props.persistentCounter || isFocused.value }
+                      active={ counterActive }
                       value={ counterValue.value }
                       max={ max.value }
                       disabled={ props.disabled }

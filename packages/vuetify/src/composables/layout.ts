@@ -9,13 +9,23 @@ import {
   onBeforeUnmount,
   onDeactivated,
   onMounted,
+  onScopeDispose,
   provide,
   reactive,
   ref,
   shallowRef, toRef,
   useId,
+  watch,
 } from 'vue'
-import { consoleWarn, convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
+import {
+  consoleWarn,
+  convertToUnit,
+  findChildrenWithProvide,
+  getCurrentInstance,
+  isPercentage,
+  propsFactory,
+  resolveSize,
+} from '@/util'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -96,6 +106,7 @@ export function useLayout () {
     getLayoutItem: layout.getLayoutItem,
     mainRect: layout.mainRect,
     mainStyles: layout.mainStyles,
+    layoutRect: layout.layoutRect,
   }
 }
 
@@ -142,6 +153,7 @@ const generateLayers = (
   positions: Map<string, Ref<Position>>,
   layoutSizes: Map<string, Ref<number | string>>,
   activeItems: Map<string, Ref<boolean>>,
+  sizeOf: (value: number | string | undefined, position: Position) => number,
 ): { id: string, layer: Layer }[] => {
   let previousLayer: Layer = { top: 0, left: 0, right: 0, bottom: 0 }
   const layers = [{ id: '', layer: { ...previousLayer } }]
@@ -153,7 +165,7 @@ const generateLayers = (
 
     const layer = {
       ...previousLayer,
-      [position.value]: parseInt(previousLayer[position.value], 10) + (active.value ? parseInt(amount.value, 10) : 0),
+      [position.value]: previousLayer[position.value] + (active.value ? sizeOf(amount.value, position.value) : 0),
     }
 
     layers.push({
@@ -178,6 +190,23 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const { resizeRef, contentRect: layoutRect } = useResizeObserver()
 
+  function sizeOf (value: number | string | undefined, position: Position) {
+    const span = position === 'left' || position === 'right'
+      ? layoutRect.value?.width
+      : layoutRect.value?.height
+
+    return resolveSize(value, span ?? 0)
+  }
+
+  const isResizing = shallowRef(false)
+  let resizeTimeout = -1
+  watch(() => [layoutRect.value?.width, layoutRect.value?.height], () => {
+    isResizing.value = true
+    window.clearTimeout(resizeTimeout)
+    resizeTimeout = window.setTimeout(() => (isResizing.value = false), 100)
+  })
+  onScopeDispose(() => window.clearTimeout(resizeTimeout))
+
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
     const overlaps = props.overlaps ?? []
@@ -192,8 +221,8 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
       if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue
 
-      map.set(bottom, { position: topPosition.value, amount: parseInt(topAmount.value, 10) })
-      map.set(top, { position: bottomPosition.value, amount: -parseInt(bottomAmount.value, 10) })
+      map.set(bottom, { position: topPosition.value, amount: sizeOf(topAmount.value, topPosition.value) })
+      map.set(top, { position: bottomPosition.value, amount: -sizeOf(bottomAmount.value, bottomPosition.value) })
     }
 
     return map
@@ -206,11 +235,11 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       const items = registered.value.filter(id => priorities.get(id)?.value === p)
       layout.push(...items)
     }
-    return generateLayers(layout, positions, layoutSizes, activeItems)
+    return generateLayers(layout, positions, layoutSizes, activeItems, sizeOf)
   })
 
   const transitionsEnabled = computed(() => {
-    return !Array.from(disabledTransitions.values()).some(ref => ref.value)
+    return !isResizing.value && !Array.from(disabledTransitions.values()).some(ref => ref.value)
   })
 
   const mainRect = computed(() => {
@@ -236,7 +265,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       return {
         id,
         ...layer,
-        size: Number(size!.value),
+        size: sizeOf(size!.value, position!.value),
         position: position!.value,
       }
     })
@@ -286,21 +315,24 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
-        const size = Number(elementSize.value ?? layoutSize.value)
+        const direction = isOppositeHorizontal || isOppositeVertical ? 1 : -1
+        const offscreen = `calc(${100 * direction}% + ${direction}px)`
         const transformFunction = `translate${isHorizontal ? 'X' : 'Y'}`
-        const transformValue = active.value ? 0
-          : (size === 0 ? 100 : size + 1) * (isOppositeHorizontal || isOppositeVertical ? 1 : -1)
-        const unit = size === 0 ? '%' : 'px'
 
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `${transformFunction}(${transformValue}${unit})`,
+          transform: `${transformFunction}(${active.value ? '0px' : offscreen})`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
 
         if (!isMounted.value) return styles
+
+        // percentages stay in CSS until the layout is measured, SSR and the first paint have no rect
+        const measuredSize = isPercentage(elementSize.value) && layoutRect.value
+          ? sizeOf(elementSize.value, position.value)
+          : elementSize.value
 
         const item = items.value[index.value]
 
@@ -315,7 +347,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           ...styles,
           height:
             isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)`
-            : elementSize.value ? `${elementSize.value}px`
+            : measuredSize ? convertToUnit(measuredSize)
             : undefined,
           left: isOppositeHorizontal ? undefined : `${item.left}px`,
           right: isOppositeHorizontal ? `${item.right}px` : undefined,
@@ -323,7 +355,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           bottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           width:
             !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)`
-            : elementSize.value ? `${elementSize.value}px`
+            : measuredSize ? convertToUnit(measuredSize)
             : undefined,
         }
       })

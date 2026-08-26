@@ -7,6 +7,7 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
@@ -84,6 +85,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const selectDefaults = injectNestedDefaults<VSelect['$props']>('VSelect')
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
@@ -120,7 +122,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               modelValue={ itemsPerPage.value }
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
-              variant="outlined"
+              variant={ selectDefaults.value?.variant ?? 'outlined' }
               aria-label={ t(props.itemsPerPageText) }
               hideDetails
             />

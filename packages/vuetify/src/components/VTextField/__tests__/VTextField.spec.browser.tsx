@@ -5,7 +5,7 @@ import { VMenu } from '@/components/VMenu'
 
 // Utilities
 import { commands, render, screen, showcase, userEvent, wait } from '@test'
-import { cloneVNode, ref } from 'vue'
+import { cloneVNode, nextTick, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -137,10 +137,38 @@ describe('VTextField', () => {
       <VTextField hideDetails="auto" counter></VTextField>
     ))
 
-    expect(queryByCSS('.v-input__details')).toBeNull()
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
 
     await userEvent.click(element)
-    expect(queryByCSS('.v-input__details')).not.toBeNull()
+    expect(queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
+  })
+
+  describe('details transition', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('does not animate on mount when details are visible', async () => {
+      const { queryByCSS } = render(() => (
+        <VTextField hint="Hint" persistentHint></VTextField>
+      ))
+
+      expect(queryByCSS('.v-input__details')!.getAnimations()).toHaveLength(0)
+    })
+
+    it('animates when details become visible', async () => {
+      const focused = ref(false)
+      const { queryByCSS } = render(() => (
+        <VTextField hideDetails="auto" counter focused={ focused.value }></VTextField>
+      ))
+      const details = queryByCSS('.v-input__details')!
+
+      expect(details.getAnimations()).toHaveLength(0)
+
+      focused.value = true
+      await nextTick()
+      expect(details.getAnimations()).not.toHaveLength(0)
+    })
   })
 
   it('keeps -0 with v-model.number', async () => {
@@ -152,6 +180,28 @@ describe('VTextField', () => {
     await userEvent.keyboard('-0.1')
     await expect.element(await screen.findByRole('textbox')).toHaveValue('-0.1')
     expect(model.value).toBe(-0.1)
+  })
+
+  it('keeps the selection when the type changes', async () => {
+    const type = ref('password')
+    render(() => (
+      <VTextField
+        modelValue="Hello World!"
+        type={ type.value }
+        appendInnerIcon="$clear"
+        onClick:appendInner={ () => (type.value = type.value === 'password' ? 'text' : 'password') }
+      />
+    ))
+
+    const input = screen.getByCSS('input') as HTMLInputElement
+    input.focus()
+    input.setSelectionRange(2, 5)
+
+    await userEvent.click(screen.getByCSS('.v-field__append-inner .v-icon'))
+    await nextTick()
+
+    expect(input.type).toBe('text')
+    expect([input.selectionStart, input.selectionEnd]).toEqual([2, 5])
   })
 
   showcase({ stories })

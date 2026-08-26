@@ -19,8 +19,8 @@
       >
         <v-card
           :class="['ma-4', selectedClass]"
-          color="grey-lighten-1"
-          height="200"
+          :style="isSelected ? undefined : `background: oklch(${0.35 + (n - 1) * (0.45 / 14)} 0.14 280)`"
+          height="100"
           width="100"
           @click="toggle"
         >

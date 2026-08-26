@@ -102,6 +102,16 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
+export function isPercentage (value: unknown): value is string {
+  return isString(value) && value.endsWith('%')
+}
+
+export function resolveSize (value: number | string | undefined, spanSize = 0): number {
+  return isPercentage(value)
+    ? parseFloat(value) / 100 * spanSize
+    : parseFloat(String(value)) || 0
+}
+
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {

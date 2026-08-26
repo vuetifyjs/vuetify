@@ -228,4 +228,31 @@ describe('VDivider', () => {
       }
     })
   })
+
+  describe('role', () => {
+    it('relies on the implicit separator role of hr', () => {
+      render(() => <VDivider />)
+
+      const divider = screen.getByCSS('.v-divider')
+
+      expect(divider.tagName).toBe('HR')
+      expect(divider).not.toHaveAttribute('role')
+      expect(divider).toHaveAttribute('aria-orientation', 'horizontal')
+    })
+
+    it('sets aria-orientation to vertical when vertical', () => {
+      render(() => <VDivider vertical />)
+
+      expect(screen.getByCSS('.v-divider')).toHaveAttribute('aria-orientation', 'vertical')
+    })
+
+    it('honours an explicit role and drops aria-orientation with it', () => {
+      render(() => <VDivider role="presentation" />)
+
+      const divider = screen.getByCSS('.v-divider')
+
+      expect(divider).toHaveAttribute('role', 'presentation')
+      expect(divider).not.toHaveAttribute('aria-orientation')
+    })
+  })
 })

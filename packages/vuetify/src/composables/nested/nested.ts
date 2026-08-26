@@ -174,6 +174,17 @@ export const useNested = (
     v => [...v.values()],
   )
 
+  // opening multiple nodes in a sync loop cannot wait for the proxied model to catch up
+  let batch: Set<unknown> | null = null
+  function currentOpened () {
+    if (!batch) queueMicrotask(() => { batch = null })
+    return batch ?? opened.value
+  }
+  function setOpened (value: Set<unknown>) {
+    batch = value
+    opened.value = value
+  }
+
   const activeStrategy = computed(() => {
     if (isFunction(props.activeStrategy)) return props.activeStrategy(props.mandatory)
     if (isObject(props.activeStrategy)) return props.activeStrategy
@@ -401,25 +412,25 @@ export const useNested = (
         const newOpened = openStrategy.value.open({
           id,
           value,
-          opened: new Set(opened.value),
+          opened: new Set(currentOpened()),
           children: children.value,
           parents: parents.value,
           event,
         })
 
-        newOpened && (opened.value = newOpened)
+        newOpened && setOpened(newOpened)
       },
       openOnSelect: (id, value, event) => {
         const newOpened = openStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
-          opened: new Set(opened.value),
+          opened: new Set(currentOpened()),
           children: children.value,
           parents: parents.value,
           event,
         })
-        newOpened && (opened.value = newOpened)
+        newOpened && setOpened(newOpened)
       },
       select: (id, value, event) => {
         vm.emit('click:select', { id, value, path: getPath(id), event })

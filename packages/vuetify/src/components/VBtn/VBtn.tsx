@@ -230,7 +230,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
           disabled={ (isDisabled.value && Tag !== 'a') || undefined }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
-          value={ valueAttr.value }
+          value={ Tag !== 'a' ? valueAttr.value : undefined }
         >
           { genOverlays(true, 'v-btn') }
 

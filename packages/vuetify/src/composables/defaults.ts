@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowRef, toRef, unref, watchEffect } from 'vue'
 import { isString } from '@/util'
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
@@ -91,6 +91,20 @@ export function provideDefaults (
   provide(DefaultsSymbol, newDefaults)
 
   return newDefaults
+}
+
+export function injectComponentDefaults<T = Record<string, unknown>> (name: string) {
+  const vm = getCurrentInstance('injectComponentDefaults')
+
+  return toRef(() => injectSelf(DefaultsSymbol, vm)?.value?.[name] as Partial<T> | undefined)
+}
+
+export function injectNestedDefaults<T = Record<string, unknown>> (name: string) {
+  const vm = getCurrentInstance('injectNestedDefaults')
+  const defaults = injectDefaults()
+  const self = (vm.props._as ?? vm.type.name) as string
+
+  return toRef(() => defaults.value?.[self]?.[name] as Partial<T> | undefined)
 }
 
 function propIsDefined (vnode: VNode, prop: string) {

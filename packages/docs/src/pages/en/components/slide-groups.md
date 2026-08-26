@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Slide groups
   title: Slide group component
@@ -24,7 +25,7 @@ The `v-slide-group` component is used to display pseudo paginated information. I
 
 Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.
 
-<ExamplesExample file="v-slide-group/usage" />
+<ExamplesUsage name="v-slide-group" />
 
 <PromotedEntry />
 
@@ -58,6 +59,12 @@ Using the **center-active** prop will make the active item always centered.
 You can add your custom pagination icons instead of arrows using the **next-icon** and **prev-icon** props.
 
 <ExamplesExample file="v-slide-group/prop-custom-icons" />
+
+#### Direction
+
+Use the **direction** prop for a vertical layout. Pair it with **scroll-snap** and the exposed `slide` method for wheel navigation.
+
+<ExamplesExample file="v-slide-group/prop-direction" />
 
 ### Mandatory
 

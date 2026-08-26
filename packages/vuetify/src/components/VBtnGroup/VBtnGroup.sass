@@ -35,7 +35,7 @@
       @at-root
         @include tools.density('v-btn-group', $button-density) using ($modifier)
           @at-root #{selector.append(&, $root)}
-            &:not(#{$root}--has-size)
+            &:not(.v-btn-group--has-size)
               height: $btn-group-height + $modifier
 
       .v-btn

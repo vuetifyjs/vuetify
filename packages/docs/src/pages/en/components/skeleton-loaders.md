@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Skeleton loaders
   title: Skeleton loader component

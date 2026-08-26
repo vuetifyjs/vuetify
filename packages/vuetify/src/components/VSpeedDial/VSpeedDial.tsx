@@ -7,6 +7,7 @@ import { makeVMenuProps, VMenu } from '@/components/VMenu/VMenu'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { MaybeTransition } from '@/composables/transition'
 
@@ -15,6 +16,7 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VBtn } from '@/components/VBtn'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { Anchor } from '@/util'
 
@@ -41,6 +43,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     const menuRef = ref<VMenu>()
 
@@ -78,7 +81,7 @@ export const VSpeedDial = genericComponent<OverlaySlots>()({
               <VDefaultsProvider
                 defaults={{
                   VBtn: {
-                    size: 'small',
+                    size: btnDefaults.value?.size ?? 'small',
                   },
                 }}
               >

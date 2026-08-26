@@ -9,6 +9,7 @@ import { makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useFileDrop } from '@/composables/fileDrop'
 import { makeFileFilterProps, useFileFilter } from '@/composables/fileFilter'
 import { useFocus } from '@/composables/focus'
@@ -48,7 +49,10 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & {
 
 export const makeVFileInputProps = propsFactory({
   chips: Boolean,
-  counter: Boolean,
+  counter: {
+    type: Boolean as PropType<boolean | null>,
+    default: undefined,
+  },
   counterSizeString: {
     type: String,
     default: '$vuetify.fileInput.counterSize',
@@ -114,6 +118,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
     )
     const { isFocused, focus, blur } = useFocus(props)
+    const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
@@ -258,11 +263,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter)
-      const hasDetails = props.hideDetails !== true && !!(
-        slots.details ||
-        (hasCounter && (props.hideDetails === false || model.value?.length))
-      )
+      const hasCounter = !!(slots.counter || props.counter !== undefined)
+      const counterActive = props.counter !== false && props.counter !== null && !!model.value?.length
+      const hasDetails = props.hideDetails !== true && !!(slots.details || hasCounter)
+      const detailsActive = !!(slots.details || (hasCounter && counterActive))
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const { modelValue: _, ...inputProps } = VInput.filterProps(props)
       const fieldProps = {
@@ -297,6 +301,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...inputProps }
           centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
+          detailsActive={ detailsActive }
           indentDetails={ props.indentDetails ?? !isPlainOrUnderlined.value }
         >
           {{
@@ -380,7 +385,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                               : props.chips ? fileNames.value.map(text => (
                                 <VChip
                                   key={ text }
-                                  size="small"
+                                  size={ chipDefaults.value?.size ?? 'small' }
                                   text={ text }
                                 />
                               ))
@@ -402,7 +407,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     <span />
 
                     <VCounter
-                      active={ !!model.value?.length }
+                      active={ counterActive }
                       value={ counterValue.value }
                       disabled={ props.disabled }
                       v-slots:default={ slots.counter }

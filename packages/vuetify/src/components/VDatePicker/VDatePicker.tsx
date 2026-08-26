@@ -132,6 +132,8 @@ export const VDatePicker = genericComponent<new <
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
+    // owns the hover preview so VDatePickerMonth isn't handed a prop nobody writes back
+    const previewValue = useProxiedModel(props, 'previewValue')
     // const inputMode = useProxiedModel(props, 'inputMode')
 
     const { minDate, maxDate, clampDate } = useCalendarRange(props)
@@ -509,7 +511,7 @@ export const VDatePicker = genericComponent<new <
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
-                      onUpdate:previewValue={ (value: any) => emit('update:previewValue', value) }
+                      v-model:previewValue={ previewValue.value }
                       onBoundaryNavigate={ (payload: any) => emit('boundary-navigate', payload) }
                       min={ minDate.value }
                       max={ maxDate.value }
