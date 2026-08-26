@@ -94,7 +94,7 @@ export default {
     clear: 'Tühjenda {0}',
     prependAction: '{0} eelnev toiming',
     appendAction: '{0} lisatud toiming',
-    otp: 'Palun sisesta OTP sümbol {0}',
+    otp: 'Sisestage kinnituskood',
   },
   fileInput: {
     counter: '{0} faili',
