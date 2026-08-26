@@ -23,10 +23,20 @@ describe('VColorInput', () => {
     render(() => <VColorInput ref={ cmp } />)
     await waitIdle()
 
-    for (const key of ['focus', 'blur', 'reset', 'resetValidation', 'validate']) {
-      // eslint-disable-next-line @vitest/prefer-expect-type-of
-      expect(typeof cmp.value[key], key).toBe('function')
+    interface Entry {
+      method: string
+      missing: boolean
     }
+    const missingMethods = [
+      'focus',
+      'blur',
+      'reset',
+      'resetValidation',
+      'validate',
+    ].map(k => ({ method: k, missing: typeof cmp.value[k] !== 'function' } as Entry))
+      .filter(({ missing }) => missing).map(({ method }) => method)
+
+    expect(missingMethods).toEqual([])
 
     expect('isValid' in cmp.value).toBe(true)
     expect(cmp.value.validate()).toBeInstanceOf(Promise)
