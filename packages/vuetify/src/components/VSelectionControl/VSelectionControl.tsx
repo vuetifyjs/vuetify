@@ -177,12 +177,29 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
+
     const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
     const id = toRef(() => props.id || `input-${uid}`)
     const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
+    function focus (options?: FocusOptions) {
+      input.value?.focus(options)
+      if (options?.focusVisible !== undefined) isFocusVisible.value = options.focusVisible
+    }
+
+    function blur () {
+      input.value?.blur()
+    }
+
+    group?.register({
+      el: () => input.value,
+      focus,
+      isChecked: () => model.value,
+      isInteractive: () => isInteractive.value,
+    })
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -328,6 +345,8 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     return {
+      blur,
+      focus,
       isFocused,
       input,
     }

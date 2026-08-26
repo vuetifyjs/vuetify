@@ -22,6 +22,12 @@ export interface VSelectionGroupContext {
   modelValue: Ref<any>
   forceUpdate: () => void
   onForceUpdate: (fn: () => void) => void
+  register: (control: {
+    el: () => HTMLElement | undefined
+    focus: (options?: FocusOptions) => void
+    isChecked: () => boolean
+    isInteractive: () => boolean
+  }) => void
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
@@ -92,6 +98,13 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     const name = toRef(() => props.name || id.value)
 
     const updateHandlers = new Set<() => void>()
+    const controls = new Set<{
+      el: () => HTMLElement | undefined
+      focus: (options?: FocusOptions) => void
+      isChecked: () => boolean
+      isInteractive: () => boolean
+    }>()
+
     provide(VSelectionControlGroupSymbol, {
       modelValue,
       forceUpdate: () => {
@@ -103,7 +116,46 @@ export const VSelectionControlGroup = genericComponent<new <T>(
           updateHandlers.delete(cb)
         })
       },
+      register: control => {
+        if (control) {
+          controls.add(control)
+          onScopeDispose(() => {
+            controls.delete(control)
+          })
+        }
+      },
     })
+
+    function focus (options?: FocusOptions) {
+      for (const control of controls) {
+        if (control.isChecked()) {
+          control.focus(options)
+          return
+        }
+      }
+
+      let first: { focus: (options?: FocusOptions) => void, el: () => HTMLElement | undefined } | undefined
+
+      for (const c of controls) {
+        const el = c.el()
+        if (!el || !c.isInteractive()) continue
+        if (!first || (first.el()!.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING)) {
+          first = c
+        }
+      }
+
+      first?.focus(options)
+    }
+
+    function blur () {
+      for (const c of controls) {
+        const el = c.el()
+        if (el && el === document.activeElement) {
+          el.blur()
+          return
+        }
+      }
+    }
 
     provideDefaults({
       [props.defaultsTarget]: {
@@ -138,7 +190,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
       </div>
     ))
 
-    return {}
+    return { blur, focus }
   },
 })
 

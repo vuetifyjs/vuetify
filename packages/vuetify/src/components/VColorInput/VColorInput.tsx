@@ -10,6 +10,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { makeFocusProps } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -227,6 +228,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 

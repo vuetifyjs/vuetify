@@ -46,8 +46,9 @@ export const VCheckbox = genericComponent<new <T>(
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const { isFocused, focus, blur } = useFocus(props)
+    const { isFocused, focus: setIsFocused, blur: setBlurred } = useFocus(props)
     const inputRef = ref<VInput>()
+    const checkboxBtnRef = ref<VCheckboxBtn>()
 
     const uid = useId()
 
@@ -80,6 +81,7 @@ export const VCheckbox = genericComponent<new <T>(
               isValid,
             }) => (
               <VCheckboxBtn
+                ref={ checkboxBtnRef }
                 { ...checkboxProps }
                 id={ id.value }
                 aria-describedby={ messagesId.value }
@@ -88,8 +90,8 @@ export const VCheckbox = genericComponent<new <T>(
                 { ...controlAttrs }
                 error={ isValid.value === false }
                 v-model={ model.value }
-                onFocus={ focus }
-                onBlur={ blur }
+                onFocus={ setIsFocused }
+                onBlur={ setBlurred }
                 v-slots={ slots }
               />
             ),
@@ -98,7 +100,7 @@ export const VCheckbox = genericComponent<new <T>(
       )
     })
 
-    return forwardRefs({}, inputRef)
+    return forwardRefs({ isFocused }, checkboxBtnRef, inputRef)
   },
 })
 
