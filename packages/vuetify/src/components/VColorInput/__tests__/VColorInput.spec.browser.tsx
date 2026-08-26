@@ -23,20 +23,15 @@ describe('VColorInput', () => {
     render(() => <VColorInput ref={ cmp } />)
     await waitIdle()
 
-    interface Entry {
-      method: string
-      missing: boolean
-    }
-    const missingMethods = [
+    const missing = [
       'focus',
       'blur',
       'reset',
       'resetValidation',
       'validate',
-    ].map(k => ({ method: k, missing: typeof cmp.value[k] !== 'function' } as Entry))
-      .filter(({ missing }) => missing).map(({ method }) => method)
+    ].filter(k => typeof cmp.value[k] !== 'function')
 
-    expect(missingMethods).toEqual([])
+    expect(missing).toEqual([])
 
     expect('isValid' in cmp.value).toBe(true)
     expect(cmp.value.validate()).toBeInstanceOf(Promise)
