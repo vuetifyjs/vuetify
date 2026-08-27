@@ -11,7 +11,7 @@ import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { onScopeDispose, provide, toRef, useId } from 'vue'
-import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
+import { deepEqual, genericComponent, getActiveElement, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -127,6 +127,8 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     })
 
     function focus (options?: FocusOptions) {
+      if (!IN_BROWSER) return
+
       for (const control of controls) {
         if (control.isChecked()) {
           control.focus(options)
@@ -148,9 +150,14 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     }
 
     function blur () {
+      if (!IN_BROWSER) return
+
+      const activeEl = getActiveElement()
+      if (!activeEl) return
+
       for (const c of controls) {
         const el = c.el()
-        if (el && el === document.activeElement) {
+        if (el && el === activeEl) {
           el.blur()
           return
         }
