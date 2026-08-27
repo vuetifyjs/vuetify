@@ -74,13 +74,13 @@ export const VRadioGroup = genericComponent<new <T>(
     const uid = useId()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
-    const { isFocused, focus: setIsFocused, blur: setBlurred } = useFocus(props)
+    const { isFocused, focus, blur } = useFocus(props)
     const inputRef = ref<VInput>()
     const controlGroupRef = ref<VSelectionControlGroup>()
 
     function onFocusout (e: FocusEvent) {
       if (!(e.currentTarget as HTMLElement)?.contains(e.relatedTarget as Node)) {
-        setBlurred()
+        blur()
       }
     }
 
@@ -108,7 +108,7 @@ export const VRadioGroup = genericComponent<new <T>(
           v-model={ model.value }
           id={ id.value }
           focused={ isFocused.value }
-          onFocusin={ setIsFocused }
+          onFocusin={ focus }
           onFocusout={ onFocusout }
         >
           {{

@@ -46,7 +46,7 @@ export const VCheckbox = genericComponent<new <T>(
 
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const { isFocused, focus: setIsFocused, blur: setBlurred } = useFocus(props)
+    const { isFocused, focus, blur } = useFocus(props)
     const inputRef = ref<VInput>()
     const checkboxBtnRef = ref<VCheckboxBtn>()
 
@@ -90,8 +90,8 @@ export const VCheckbox = genericComponent<new <T>(
                 { ...controlAttrs }
                 error={ isValid.value === false }
                 v-model={ model.value }
-                onFocus={ setIsFocused }
-                onBlur={ setBlurred }
+                onFocus={ focus }
+                onBlur={ blur }
                 v-slots={ slots }
               />
             ),
