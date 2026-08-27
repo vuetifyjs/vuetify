@@ -16,6 +16,39 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## Quick Start with Vuetify MCP
+
+The fastest way to check your project for Vuetify 2 → 3 breaking changes is with [Vuetify MCP](https://github.com/vuetifyjs/mcp/). To get started, run the following in your terminal:
+
+```bash
+# Claude Code
+claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
+
+# Configure for hosted remote server
+npx -y @vuetify/mcp config --remote
+
+# Or configure for local installation
+npx -y @vuetify/mcp config
+```
+
+Once the MCP server is set up and loaded you will gain access to tools such as:
+
+- `get_v3_upgrade_playbook`: Ordered upgrade phases (baseline e2e first).
+- `get_v3_breaking_changes`: Filterable v2 → 3 breaking changes, including gotchas.
+- `get_v2_to_v3_component_map`: v2 component → v3.13 status.
+- `get_v3_upgrade_baseline_recipe`: Playwright baseline / after screenshots.
+- `get_upgrade_guide`: Full upgrade-guide markdown (`version: "v2.7"`).
+
+Now, prompt your agent with the following:
+
+```text
+Using the vuetify-mcp server, scan this project for Vuetify 2 to 3 breaking changes. List each issue found with the file, line number, and recommended fix.
+```
+
+This will analyze your codebase and provide a tailored list of changes. Prefer the `upgrade-v2-to-v3` prompt when your client supports MCP prompts — it runs the full playbook including a pre-upgrade e2e baseline.
+
+If you have any questions about the upgrade process, come visit us at [community.vuetifyjs.com](https://community.vuetifyjs.com/).
+
 ::: error
   <span class="text-h6">Many of the changes on this page can be applied automatically using [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)</span>
 :::
@@ -35,9 +68,9 @@ Need assistance with your Vuetify 2 → 3 upgrade?\
 :::
 
 ::: warning
-  Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
+On **Vuetify 3.13 LTS**, data-table, date-picker, treeview, time-picker, calendar, and sparkline are in core (older 3.x may still need `vuetify/labs/...` imports).
 
-- [overflow-btn](https://github.com/vuetifyjs/vuetify/issues/13493)
+`v-overflow-btn` was not ported. See [issue 13493](https://github.com/vuetifyjs/vuetify/issues/13493).
 :::
 
 ## Setup
