@@ -93,7 +93,7 @@ export const VSwitch = genericComponent<new <T>(
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
-    const { isFocused, focus: setIsFocused, blur: setBlurred } = useFocus(props)
+    const { isFocused, focus, blur } = useFocus(props)
     const {
       backgroundColorClasses: thumbColorClasses,
       backgroundColorStyles: thumbColorStyles,
@@ -184,8 +184,8 @@ export const VSwitch = genericComponent<new <T>(
                   aria-checked={ indeterminate.value ? 'mixed' : undefined }
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
-                  onFocus={ setIsFocused }
-                  onBlur={ setBlurred }
+                  onFocus={ focus }
+                  onBlur={ blur }
                   { ...controlAttrs }
                 >
                   {{
