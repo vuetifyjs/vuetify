@@ -12,7 +12,6 @@ $empty-state-headline-font-weight: functions.map-deep-get(settings.$typography, 
 $empty-state-headline-line-height: functions.map-deep-get(settings.$typography, 'display-large', 'line-height') !default;
 $empty-state-headline-margin-bottom: 8px !default;
 $empty-state-headline-mobile-font-size: functions.map-deep-get(settings.$typography, 'headline-large', 'size') !default;
-$empty-state-image-padding: 16px !default;
 $empty-state-min-height: 100% !default;
 $empty-state-media-icon-color: functions.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $empty-state-padding: 16px !default;

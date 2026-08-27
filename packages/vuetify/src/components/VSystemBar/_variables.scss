@@ -14,7 +14,6 @@ $system-bar-height: 24px !default;
 $system-bar-icon-opacity: var(--v-medium-emphasis-opacity) !default;
 $system-bar-justify-content: flex-end !default;
 $system-bar-letter-spacing: tools.map-deep-get(settings.$typography, 'label-small', 'letter-spacing') !default;
-$system-bar-lights-out-background: tools.theme-color('background', 0.7) !default;
 $system-bar-line-height: tools.map-deep-get(settings.$typography, 'label-small', 'line-height') !default;
 $system-bar-padding-x: 8px !default;
 $system-bar-positions: absolute fixed !default;
@@ -35,6 +34,3 @@ $system-bar-typography: (
   $system-bar-line-height,
   $system-bar-text-transform
 ) !default;
-
-// Deprecated
-$system-bar-padding: 0 8px !default;

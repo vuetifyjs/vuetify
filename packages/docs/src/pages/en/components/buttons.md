@@ -267,7 +267,7 @@ Make fine tuned changes by modifying the `v-btn` [SASS variables](/features/sass
 
 ```scss { resource="src/settings.scss" }
 @use 'vuetify/settings' with (
-  $button-banner-actions-padding: 16px,
+  $button-border-radius: 16px,
   $button-height: 32px,
 );
 ```

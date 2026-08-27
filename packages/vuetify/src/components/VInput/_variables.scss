@@ -10,10 +10,6 @@ $input-font-size: tools.map-deep-get(settings.$typography, 'body-large', 'size')
 $input-font-weight: tools.map-deep-get(settings.$typography, 'body-large', 'weight') !default;
 $input-line-height: 1.5 !default;
 
-// CHIPS
-$input-chips-margin-top: null !default;
-$input-chips-margin-bottom: null !default;
-
 // DETAILS
 $input-details-font-size: .75rem !default;
 $input-details-font-weight: 400 !default;

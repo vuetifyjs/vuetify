@@ -11,7 +11,6 @@ $toolbar-border-radius: map.get(settings.$rounded, 0) !default;
 $toolbar-border-style: settings.$border-style-root !default;
 $toolbar-border-thin-width: thin !default;
 $toolbar-border-width: 0 !default;
-$toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
 $toolbar-elevation: 0 !default;
@@ -63,9 +62,3 @@ $toolbar-theme: (
   $toolbar-background,
   $toolbar-color
 ) !default;
-
-
-// Deprecated
-$toolbar-content-padding-x: 16px !default;
-$toolbar-content-padding-y: 4px !default;
-$toolbar-title-extended-padding: 56px !default;

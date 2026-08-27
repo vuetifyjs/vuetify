@@ -12,7 +12,6 @@ $table-header-font-weight: 500 !default;
 $table-header-font-size: inherit !default;
 $table-font-size: tools.map-deep-get(settings.$typography, 'body-medium', 'size') !default;
 $table-row-height: 52px !default;
-$table-row-font-size: tools.map-deep-get(settings.$typography, 'label-large', 'size') !default;
 $table-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $table-border: thin solid $table-border-color !default;
 $table-hover-color: rgba(var(--v-border-color), var(--v-hover-opacity)) !default;
