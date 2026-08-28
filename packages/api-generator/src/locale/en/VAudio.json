@@ -1,0 +1,52 @@
+{
+  "description": "A player for self-hosted audio files, with a seekable waveform and a configurable transport bar.",
+  "props": {
+    "src": "Media file URL",
+    "srcObject": "Sets the source to a MediaStream, MediaSource, or Blob object. Live streams report an infinite duration, so the time display shows elapsed only and the waveform falls back to a placeholder track.",
+    "type": "Media file type (optional). When set, the source is rendered as a nested `<source>` element so the hint is honoured.",
+    "crossorigin": "Forwarded to the native audio element. Required, together with CORS response headers from the media host, before peaks can be decoded from a cross-origin file.",
+    "preload": "Forwarded to the native audio element. The default `metadata` obtains the duration without downloading the whole file.",
+    "currentTime": "Playback position in seconds. Writing to it seeks; it stays in sync with `progress`, which expresses the same position as a percentage.",
+    "error": "Puts the component in the manual error state.",
+    "autoplay": "Starts loading the media file without waiting for the user to click. Playback begins once enough data is loaded.",
+    "loop": "Restarts playback when the end is reached. The `ended` event is not emitted while looping.",
+    "muted": "Hides the volume control and disables the playback sound.",
+    "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "eager": "Silently loads the media file without waiting for the user to click.",
+    "disabled": "Removes all interaction and dims the component.",
+    "seekTarget": "Which surface responds to a click when no waveform is shown. A visible waveform is always the seek surface, so `container` takes effect together with `hide-waveform` — that combination makes the whole component click-to-seek. `none` disables seeking entirely.",
+    "rounded": "Applies a border radius to the container and the controls. Accepts an array of two values to customize the elements separately.",
+    "controlsProps": "Pass props through to the `v-audio-controls` component. Accepts an object with anything from [v-audio-controls](/api/v-audio-controls/#props) props, camelCase keys are recommended."
+  },
+  "events": {
+    "loaded": "Emitted when the audio has loaded its metadata and is ready to be played.",
+    "ended": "Emitted when playback reaches the end. Not emitted while `loop` is set.",
+    "error": "Emits the native MediaError when the audio fails to load, or `false` when the user triggers a retry.",
+    "update:playing": "Emitted when the playing state changes.",
+    "update:progress": "Emitted when the playback position changes, as a percentage (0-100).",
+    "update:currentTime": "Emitted when the playback position changes, in seconds.",
+    "update:volume": "Emitted when the volume changes.",
+    "update:playbackRate": "Emitted when the playback rate changes.",
+    "update:error": "Emitted when the error state changes."
+  },
+  "slots": {
+    "controls": "Replaces the control bar with custom content.",
+    "prepend": "Additional content on the left within the control bar.",
+    "append": "Additional content on the right within the control bar.",
+    "waveform": "Replaces the waveform between the controls and the time display.",
+    "time": "Replaces the time display. Receives the elapsed, remaining and total time already formatted.",
+    "loader": "Slot used to replace the loader displayed while the audio is being loaded.",
+    "error": "Slot used to replace the default error state. Receives the MediaError and a `retry` function.",
+    "sources": "Slot for content placed within the native `<audio>` element."
+  },
+  "exposed": {
+    "audio": "The underlying native audio element.",
+    "play": "Start playback.",
+    "pause": "Pause playback.",
+    "stop": "Pause playback and return to the start.",
+    "skipTo": "Skip to a specific point in the playback. Accepts a percent value (0-100).",
+    "skipBy": "Move the playback position by a number of seconds, positive or negative.",
+    "retry": "Clear the error state and load the source again.",
+    "toggleMuted": "Mute/unmute audio."
+  }
+}

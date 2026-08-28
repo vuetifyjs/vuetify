@@ -1,0 +1,68 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-audio-controls
+    --v-audio-controls-height: #{$audio-controls-height}
+    align-items: center
+    background: transparent
+    color: inherit
+    display: flex
+    gap: $audio-controls-gap
+    min-height: var(--v-audio-controls-height)
+    padding-block: $audio-controls-padding
+    position: relative
+    width: 100%
+
+    @at-root
+      @include tools.density('v-audio-controls', $audio-density) using ($modifier)
+        --v-audio-controls-height: #{$audio-controls-height + $modifier * 2}
+
+    &--floating
+      background: transparent
+
+    &--detached
+      padding-inline: $audio-controls-detached-padding-inline
+
+    &__actions
+      align-items: center
+      display: flex
+      flex: 0 0 auto
+      gap: $audio-controls-actions-gap
+
+    &__waveform
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      min-width: $audio-waveform-min-width
+
+    &__time
+      flex: 0 0 auto
+      font-size: $audio-time-font-size
+      font-variant-numeric: tabular-nums
+      letter-spacing: $audio-time-letter-spacing
+      line-height: $audio-time-line-height
+      min-width: $audio-time-min-width
+      text-align: center
+      white-space: nowrap
+
+    // The slider needs room for its thumb overhang, so the block keeps a fixed basis and
+    // the waveform (the only `flex: 1 1` child) absorbs whatever is left.
+    &__volume
+      align-items: center
+      display: flex
+      flex: 0 0 auto
+      gap: $audio-controls-volume-gap
+      width: $audio-volume-width
+
+    &__waveform
+      overflow: hidden
+
+    .v-audio-control__pill
+      align-items: center
+      backdrop-filter: $audio-controls-pill-backdrop-filter
+      background: rgba(var(--v-theme-surface), $audio-controls-default-background-opacity)
+      border-radius: $audio-controls-pill-border-radius
+      display: flex
+      gap: $audio-controls-pill-gap
+      padding: $audio-controls-pill-padding

@@ -1,0 +1,56 @@
+{
+  "description": "Subcomponent for `v-audio` used to display the transport bar.",
+  "props": {
+    "playing": "Applies the correct icon to the default play button.",
+    "progress": "Controls the playback position (0 ~ 100).",
+    "duration": "Total duration of the audio, used to calculate the displayed time.",
+    "volume": "Volume value passed to the underlying control and slots.",
+    "playbackRate": "Current playback rate. Only meaningful together with `playbackRates`.",
+    "playbackRates": "Rates offered by the playback speed menu. Leaving it empty hides the menu.",
+    "variant": "Layout of the control bar. `mini` renders play and time only; `hidden` renders nothing.",
+    "hidePlay": "Hides the default play button.",
+    "hideStop": "Hides the default stop button.",
+    "hideVolume": "Hides the default volume control.",
+    "hideTime": "Hides the time display.",
+    "hideWaveform": "Hides the waveform. With `seek-target=\"container\"` this turns the whole component into the seek surface.",
+    "skipInterval": "Seconds moved by the skip buttons. `0` hides them. The value is announced in the buttons' labels.",
+    "download": "Shows a download button. A string value is used as the downloaded file name.",
+    "splitTime": "Splits time into elapsed and remaining on each side of the waveform.",
+    "timeDisplay": "Format of the single time display. Ignored when `split-time` is set.",
+    "playIcon": "Icon used for the play action.",
+    "pauseIcon": "Icon used for the pause action.",
+    "stopIcon": "Icon used for the stop action.",
+    "volumeIcon": "Icon used when audio is audible.",
+    "muteIcon": "Icon used when audio is muted.",
+    "downloadIcon": "Icon used for the download action.",
+    "skipForwardIcon": "Icon used for the skip forward action.",
+    "skipBackwardIcon": "Icon used for the skip backward action.",
+    "color": "General color applied to icons, the played waveform and sliders.",
+    "backgroundColor": "Container background color.",
+    "pills": "Makes the container transparent and shows inner actions in separated boxes.",
+    "detached": "Moves the container below so it reads as a separate surface.",
+    "floating": "Introduces visual spacing from the container boundaries.",
+    "waveformProps": "Pass props through to the `v-audio-waveform` component. Accepts an object with anything from [v-audio-waveform](/api/v-audio-waveform/#props) props, camelCase keys are recommended."
+  },
+  "events": {
+    "update:playing": "Emitted when the playing state changes.",
+    "update:progress": "Emitted when the playback position changes.",
+    "update:volume": "Emitted when the volume value changes.",
+    "update:playbackRate": "Emitted when the playback rate changes.",
+    "skip": "Emitted when a skip action is triggered. Carries the target position as a percentage.",
+    "scrubStart": "Emitted when the user starts dragging the waveform.",
+    "scrubEnd": "Emitted when the user stops dragging the waveform.",
+    "click:stop": "Emitted when the stop button is clicked.",
+    "click:download": "Emitted when the download button is clicked."
+  },
+  "slots": {
+    "default": "Replaces the entire contents of the control bar.",
+    "prepend": "Additional content on the left within the control bar.",
+    "append": "Additional content on the right within the control bar.",
+    "waveform": "Replaces the waveform between the controls and the time display.",
+    "time": "Replaces the time display. Receives the elapsed, remaining and total time already formatted."
+  },
+  "exposed": {
+    "toggleMuted": "Toggles the muted state of the audio."
+  }
+}

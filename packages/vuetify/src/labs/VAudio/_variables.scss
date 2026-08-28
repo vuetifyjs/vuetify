@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '../../styles/settings';
+
+$audio-min-width: 200px !default;
+$audio-height: 56px !default;
+$audio-fill-opacity: .08 !default;
+$audio-padding: 8px !default;
+$audio-gap: 8px !default;
+$audio-border-radius: settings.$border-radius-root !default;
+$audio-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$audio-elevation: 0 !default;
+
+$audio-controls-height: 40px !default;
+$audio-controls-padding: 4px !default;
+$audio-controls-gap: 8px !default;
+$audio-controls-actions-gap: 0 !default;
+$audio-controls-volume-gap: 2px !default;
+$audio-controls-pill-gap: 8px !default;
+$audio-controls-pill-padding: 0 6px !default;
+$audio-controls-pill-border-radius: 99px !default;
+$audio-controls-pill-backdrop-filter: blur(5px) !default;
+$audio-controls-default-background-color: var(--v-theme-surface) !default;
+$audio-controls-default-background-opacity: .8 !default;
+$audio-controls-default-color: rgb(var(--v-theme-on-surface)) !default;
+$audio-controls-detached-offset: 12px !default;
+$audio-controls-detached-padding-inline: 12px !default;
+
+$audio-time-font-size: .875rem !default;
+$audio-time-line-height: 1 !default;
+$audio-time-letter-spacing: .02em !default;
+$audio-time-min-width: 5ch !default;
+$audio-volume-width: 112px !default;
+
+$audio-waveform-min-width: 80px !default;
+$audio-waveform-height: 32px !default;
+$audio-waveform-bar-width: 2px !default;
+$audio-waveform-bar-gap: 1px !default;
+$audio-waveform-bar-radius: 1px !default;
+$audio-waveform-bar-min-height: 1px !default;
+$audio-waveform-track-opacity: .3 !default;
+$audio-waveform-buffer-opacity: .15 !default;
+$audio-waveform-mirror-opacity: .4 !default;
+$audio-waveform-progress-transition: none !default;
+$audio-waveform-cursor-width: 1px !default;
+$audio-waveform-cursor-opacity: .5 !default;
+$audio-waveform-disabled-opacity: .38 !default;
+$audio-waveform-tooltip-background: rgba(var(--v-theme-surface-variant), .9) !default;
+$audio-waveform-tooltip-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$audio-waveform-tooltip-font-size: .75rem !default;
+$audio-waveform-tooltip-padding: 2px 6px !default;
+$audio-waveform-tooltip-border-radius: 4px !default;
+$audio-waveform-tooltip-offset: 6px !default;
