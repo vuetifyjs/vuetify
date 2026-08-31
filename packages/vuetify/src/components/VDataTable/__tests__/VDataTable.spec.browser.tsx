@@ -1,5 +1,6 @@
 // Components
 import { VDataTable } from '../VDataTable'
+import { VDataTableRow } from '../VDataTableRow'
 
 // Utilities
 import { render, screen, showcase, userEvent } from '@test'
@@ -256,6 +257,62 @@ describe('VDataTable', () => {
     await userEvent.click(screen.getByCSS('tr:nth-child(1) > .v-data-table__td > .v-btn'))
 
     expect(screen.getByCSS('#body-append')).toHaveTextContent(DESSERT_ITEMS.length)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/23091
+  it('should stripe expanded rows the same as the row they belong to', () => {
+    render(() => (
+      <VDataTable
+        items={ DESSERT_ITEMS }
+        headers={ DESSERT_HEADERS }
+        itemsPerPage={ 4 }
+        striped="odd"
+      >
+        {{ expanded: () => <div>expanded</div> }}
+      </VDataTable>
+    ))
+
+    const striped = screen.getAllByCSS('tbody > tr')
+      .map(row => getComputedStyle(row).backgroundImage !== 'none')
+
+    expect(striped).toEqual([true, true, false, false, true, true, false, false])
+  })
+
+  it('should keep rows from the expanded-row slot out of the stripe count', () => {
+    const child = {
+      type: 'item' as const,
+      key: 'child',
+      index: 0,
+      value: 'child',
+      raw: { name: 'Child' },
+      columns: { name: 'Child' },
+      selectable: false,
+    }
+
+    render(() => (
+      <VDataTable
+        items={ DESSERT_ITEMS }
+        headers={ DESSERT_HEADERS }
+        itemsPerPage={ 4 }
+        itemValue="name"
+        expanded={['Frozen Yogurt']}
+        striped="odd"
+      >
+        {{
+          'expanded-row': ({ columns }) => (
+            <>
+              <VDataTableRow item={ child } />
+              <tr><td colspan={ columns.length }>append</td></tr>
+            </>
+          ),
+        }}
+      </VDataTable>
+    ))
+
+    const striped = screen.getAllByCSS('tbody > tr')
+      .map(row => getComputedStyle(row).backgroundImage !== 'none')
+
+    expect(striped).toEqual([true, false, false, false, true, false])
   })
 
   describe('sort', () => {
