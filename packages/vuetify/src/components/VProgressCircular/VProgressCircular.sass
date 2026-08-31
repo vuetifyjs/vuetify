@@ -12,6 +12,8 @@
     overflow: hidden
     position: relative
     vertical-align: middle
+    height: var(--v-progress-circular-height)
+    width: var(--v-progress-circular-height)
 
     > svg
       width: 100%
@@ -51,8 +53,7 @@
       $size: $progress-circular-size + (settings.$size-scale * $multiplier)
 
       &--size-#{$name}
-        height: $size
-        width: $size
+        --v-progress-circular-height: #{$size}
 
   .v-progress-circular--indeterminate
     > svg
