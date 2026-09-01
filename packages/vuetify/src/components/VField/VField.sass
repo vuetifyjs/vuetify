@@ -170,6 +170,27 @@
     align-items: flex-start
     display: flex
 
+  .v-field__placeholder
+    color: currentColor
+    contain: layout paint
+    display: block
+    margin-inline-start: var(--v-field-padding-start)
+    margin-inline-end: var(--v-field-padding-end)
+    max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
+    opacity: var(--v-disabled-opacity)
+    pointer-events: none
+    position: absolute
+    top: var(--v-input-padding-top)
+    z-index: 1
+
+    .v-field--variant-underlined &,
+    .v-field--variant-plain &
+      top: calc(var(--v-input-padding-top) + var(--v-field-padding-top))
+
+    .v-field--center-affix &
+      top: 50%
+      transform: translateY(-50%)
+
   /* endregion */
   /* region AFFIXES */
   .v-field__prepend-inner
