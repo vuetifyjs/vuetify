@@ -46,6 +46,25 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
+  it('should match autofilled text against item values', async () => {
+    const model = ref()
+
+    render(() => (
+      <VAutocomplete
+        v-model={ model.value }
+        items={[{ title: 'California', value: 'CA' }]}
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    vi.spyOn(input, 'matches').mockImplementation(selector => selector === ':autofill')
+
+    await userEvent.fill(input, 'CA')
+    input.dispatchEvent(new Event('change', { bubbles: true }))
+
+    expect(model.value).toBe('CA')
+  })
+
   it('should clear focused state after interacting with content and moving to sibling field', async () => {
     const menuA = ref(false)
     const menuB = ref(false)
