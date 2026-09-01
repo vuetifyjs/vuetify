@@ -11,6 +11,8 @@
   },
   "exposed": {
     "isFocused": "Will return true if the component is currently focused.",
-    "input": "Reference to the root input element."
+    "input": "Reference to the root input element.",
+    "focus": "Focuses the input. Accepts standard `FocusOptions`, including `focusVisible`.",
+    "blur": "Removes focus from the input."
   }
 }

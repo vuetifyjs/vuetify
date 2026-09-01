@@ -1,7 +1,11 @@
 // Components
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
+// Composables
+import { forwardRefs } from '@/composables/forwardRefs'
+
 // Utilities
+import { ref } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -20,11 +24,14 @@ export const VRadio = genericComponent<VSelectionControlSlots>()({
   props: makeVRadioProps(),
 
   setup (props, { slots }) {
+    const controlRef = ref<VSelectionControl>()
+
     useRender(() => {
       const controlProps = VSelectionControl.filterProps(props)
 
       return (
         <VSelectionControl
+          ref={ controlRef }
           { ...controlProps }
           class={[
             'v-radio',
@@ -37,7 +44,7 @@ export const VRadio = genericComponent<VSelectionControlSlots>()({
       )
     })
 
-    return {}
+    return forwardRefs({}, controlRef)
   },
 })
 

@@ -8,6 +8,7 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
+import { useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -66,13 +67,22 @@ export const VRadioGroup = genericComponent<new <T>(
 
   emits: {
     'update:modelValue': (value: any) => true,
+    'update:focused': (focused: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
     const uid = useId()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const inputRef = ref<VInput>()
+    const controlGroupRef = ref<VSelectionControlGroup>()
+
+    function onFocusout (e: FocusEvent) {
+      if (!(e.currentTarget as HTMLElement)?.contains(e.relatedTarget as Node)) {
+        blur()
+      }
+    }
 
     useRender(() => {
       const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -97,6 +107,9 @@ export const VRadioGroup = genericComponent<new <T>(
           { ...inputProps }
           v-model={ model.value }
           id={ id.value }
+          focused={ isFocused.value }
+          onFocusin={ focus }
+          onFocusout={ onFocusout }
         >
           {{
             ...slots,
@@ -114,6 +127,7 @@ export const VRadioGroup = genericComponent<new <T>(
                 )}
 
                 <VSelectionControlGroup
+                  ref={ controlGroupRef }
                   { ...controlProps }
                   id={ id.value }
                   aria-describedby={ messagesId.value }
@@ -136,7 +150,7 @@ export const VRadioGroup = genericComponent<new <T>(
       )
     })
 
-    return forwardRefs({}, inputRef)
+    return forwardRefs({ isFocused }, controlGroupRef, inputRef)
   },
 })
 

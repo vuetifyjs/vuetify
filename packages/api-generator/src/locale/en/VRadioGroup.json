@@ -2,5 +2,8 @@
   "description": "A wrapper for `v-radio` components. It manages the selection state.",
   "props": {
     "inline": "Displays radio buttons in row."
+  },
+  "events": {
+    "update:focused": "Event that is emitted when the component's focus state changes."
   }
 }
