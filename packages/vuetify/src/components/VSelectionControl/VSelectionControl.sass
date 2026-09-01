@@ -95,3 +95,17 @@
 
     .v-selection-control--focus-visible &::before
       opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+
+  .v-selection-control__label-wrapper
+    display: flex
+    flex-direction: column
+    justify-content: center
+    flex: 1
+
+  .v-label
+    display: block
+
+  .v-selection-control__description
+    font-size: $selection-control-description-font-size
+    color: $selection-control-description-color
+    line-height: 1.4
