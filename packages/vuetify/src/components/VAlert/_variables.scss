@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../../styles/tools';
 
@@ -22,10 +23,10 @@ $alert-append-margin-inline-start: 16px !default;
 $alert-append-close-margin-inline-start: 16px !default;
 
 // VAlertTitle
-$alert-title-font-size: tools.map-deep-get(settings.$typography, 'headline-small', 'size') !default;
-$alert-title-font-weight: tools.map-deep-get(settings.$typography, 'headline-small', 'weight') !default;
+$alert-title-font-size: map.get(settings.$typography, 'headline-small', 'size') !default;
+$alert-title-font-weight: map.get(settings.$typography, 'headline-small', 'weight') !default;
 $alert-title-hyphens: auto !default;
-$alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'headline-small', 'letter-spacing') !default;
+$alert-title-letter-spacing: map.get(settings.$typography, 'headline-small', 'letter-spacing') !default;
 $alert-title-line-height: 1.75rem !default;
 $alert-title-overflow-wrap: normal !default;
 $alert-title-text-transform: none !default;
