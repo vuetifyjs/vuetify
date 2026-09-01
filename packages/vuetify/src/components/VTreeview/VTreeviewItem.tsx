@@ -54,6 +54,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
     const vListItemRef = ref<VListItem>()
 
     const isActivatableGroupActivator = computed(() =>
+      !props.detached &&
       (vListItemRef.value?.root.activatable.value) &&
       vListItemRef.value?.isGroupActivator
     )
