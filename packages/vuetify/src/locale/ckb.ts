@@ -50,6 +50,8 @@ export default {
       nextYear: 'ساڵی داهاتوو',
       selectYear: 'ساڵ هەڵبژێرە',
       currentMonth: 'مانگی ئێستا، {0}',
+      scrollMonthPrev: 'بۆ مانگی پێشوو سکرۆڵ بکە',
+      scrollMonthNext: 'بۆ مانگی داهاتوو سکرۆڵ بکە',
     },
   },
   datePicker: {

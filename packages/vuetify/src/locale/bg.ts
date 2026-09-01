@@ -50,6 +50,8 @@ export default {
       nextYear: 'Следваща година',
       selectYear: 'Изберете година',
       currentMonth: 'Текущ месец, {0}',
+      scrollMonthPrev: 'Превъртете към предишния месец',
+      scrollMonthNext: 'Превъртете към следващия месец',
     },
   },
   datePicker: {

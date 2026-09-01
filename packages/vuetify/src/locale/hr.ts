@@ -50,6 +50,8 @@ export default {
       nextYear: 'Sljedeća godina',
       selectYear: 'Odaberite godinu',
       currentMonth: 'Trenutni mjesec, {0}',
+      scrollMonthPrev: 'Pomaknite se na prethodni mjesec',
+      scrollMonthNext: 'Pomaknite se na sljedeći mjesec',
     },
   },
   datePicker: {

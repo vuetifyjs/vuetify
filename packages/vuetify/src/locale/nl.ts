@@ -50,6 +50,8 @@ export default {
       nextYear: 'Volgend jaar',
       selectYear: 'Selecteer jaar',
       currentMonth: 'Huidige maand, {0}',
+      scrollMonthPrev: 'Scroll naar vorige maand',
+      scrollMonthNext: 'Scroll naar volgende maand',
     },
   },
   datePicker: {

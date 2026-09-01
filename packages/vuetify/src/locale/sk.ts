@@ -50,6 +50,8 @@ export default {
       nextYear: 'Nasledujúci rok',
       selectYear: 'Vyberte rok',
       currentMonth: 'Aktuálny mesiac, {0}',
+      scrollMonthPrev: 'Posuňte sa na predchádzajúci mesiac',
+      scrollMonthNext: 'Posuňte sa na nasledujúci mesiac',
     },
   },
   datePicker: {

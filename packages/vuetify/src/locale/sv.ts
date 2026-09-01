@@ -50,6 +50,8 @@ export default {
       nextYear: 'Nästa år',
       selectYear: 'Välj år',
       currentMonth: 'Denna månad, {0}',
+      scrollMonthPrev: 'Bläddra till föregående månad',
+      scrollMonthNext: 'Bläddra till nästa månad',
     },
   },
   datePicker: {

@@ -1,3 +1,4 @@
+@use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -26,6 +27,7 @@
       align-items: center
       flex-grow: 1
       padding: 12px 12px 0
+      width: 100%
 
       .v-btn > .v-btn__append > .v-icon
         transition-property: transform
@@ -38,11 +40,28 @@
 
     &__months
       position: relative
-      overflow: hidden
+      overflow-y: hidden
+      overflow-x: auto
+      width: 100%
+      
+      -ms-overflow-style: none
+      scrollbar-width: none
+      &::-webkit-scrollbar
+        display: none
+
 
       &-content
         width: 100%
-        padding: $month-picker-content-padding
+        padding: $month-picker-content-padding 0
+
+    &__months-layout
+      display: flex
+      width: 100%
+      overflow-y: hidden
+
+    &__months-nav
+      flex-shrink: 0
+      align-self: center
 
     &--list
       .v-month-picker__months
