@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { useAutoDismiss } from '@/composables/autoDismiss'
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -56,6 +57,10 @@ export const makeVAlertProps = propsFactory({
   closeLabel: {
     type: String,
     default: '$vuetify.close',
+  },
+  timeout: {
+    type: [Number, String],
+    default: -1,
   },
   icon: {
     type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
@@ -107,6 +112,14 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
   setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+
+    const {
+      onPointerenter,
+      onPointerleave,
+      onFocusin,
+      onFocusout,
+    } = useAutoDismiss(isActive, () => Number(props.timeout))
+
     const icon = toRef(() => {
       if (props.icon === false) return undefined
       if (!props.type) return props.icon
@@ -179,6 +192,10 @@ export const VAlert = genericComponent<VAlertSlots>()({
             props.style,
           ]}
           role="alert"
+          onPointerenter={ onPointerenter }
+          onPointerleave={ onPointerleave }
+          onFocusin={ onFocusin }
+          onFocusout={ onFocusout }
         >
           { genOverlays(false, 'v-alert') }
 
