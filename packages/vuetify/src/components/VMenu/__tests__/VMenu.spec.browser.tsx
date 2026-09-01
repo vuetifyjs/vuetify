@@ -579,4 +579,37 @@ describe('VMenu', () => {
       expect(screen.queryByTestId('l3-1')).toBeNull()
     })
   })
+
+  describe('gliding activator', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should settle under the current activator when a position transition is interrupted', async () => {
+      const activator = ref<HTMLElement>()
+
+      render(() => (
+        <div>
+          <style>{ '.glide { transition: left 0.2s linear, top 0.2s linear }' }</style>
+          <button data-testid="first" style="position: fixed; top: 100px; left: 100px;">First</button>
+          <button data-testid="second" style="position: fixed; top: 100px; left: 400px;">Second</button>
+          <VMenu modelValue activator={ activator.value } contentClass="glide" transition={ false }>
+            <VSheet data-testid="menu-content" width="100" height="50" />
+          </VMenu>
+        </div>
+      ))
+
+      activator.value = screen.getByTestId('first')
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await commands.waitStable('.v-overlay__content')
+      const settled = screen.getByCSS('.glide').getBoundingClientRect().x
+
+      activator.value = screen.getByTestId('second')
+      await wait(50) // for ~25% of 0.2s glide transition
+      activator.value = screen.getByTestId('first')
+      await commands.waitStable('.v-overlay__content')
+
+      expect(screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
+    })
+  })
 })

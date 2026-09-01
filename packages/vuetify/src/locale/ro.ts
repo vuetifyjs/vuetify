@@ -94,7 +94,7 @@ export default {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
     appendAction: '{0} acțiune de inserare la sfârșit',
-    otp: 'Introduceți caracterul OTP {0}',
+    otp: 'Introduceți codul de verificare',
   },
   fileInput: {
     counter: '{0} fișiere',

@@ -94,7 +94,7 @@ export default {
     clear: 'Очисти {0}',
     prependAction: '{0} претходна акција',
     appendAction: '{0} додатна акција',
-    otp: 'Унесите OTP знак {0}',
+    otp: 'Унесите код за потврду',
   },
   fileInput: {
     counter: '{0} фајлова',

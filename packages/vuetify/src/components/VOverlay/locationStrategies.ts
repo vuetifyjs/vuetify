@@ -198,12 +198,17 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
-  if (isRtl) {
-    contentBox.x += parseFloat(el.style.right || 0)
-  } else {
-    contentBox.x -= parseFloat(el.style.left || 0)
+  const computed = getComputedStyle(el)
+  function offset (side: 'left' | 'right' | 'top') {
+    return el.style[side] ? parseFloat(computed[side]) || 0 : 0
   }
-  contentBox.y -= parseFloat(el.style.top || 0)
+
+  if (isRtl) {
+    contentBox.x += offset('right')
+  } else {
+    contentBox.x -= offset('left')
+  }
+  contentBox.y -= offset('top')
 
   // el.style.maxWidth = initialMaxWidth
   // el.style.maxHeight = initialMaxHeight
