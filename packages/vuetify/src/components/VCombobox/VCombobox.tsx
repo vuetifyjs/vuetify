@@ -317,7 +317,7 @@ export const VCombobox = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['Enter', 'ArrowDown'].includes(e.key)) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         menu.value = true
       }
 
@@ -334,8 +334,8 @@ export const VCombobox = genericComponent<new <
         select(firstSelectableItem.value)
       }
 
-      if (e.key === 'ArrowDown' && highlightFirst.value) {
-        listRef.value?.focus('next')
+      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        listRef.value?.focus(e.key === 'ArrowDown' ? 'next' : 'prev')
       }
 
       if (e.key === 'Enter' && search.value) {
@@ -596,6 +596,7 @@ export const VCombobox = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   disabled={ menuDisabled.value }
+                  _disableKeys
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }

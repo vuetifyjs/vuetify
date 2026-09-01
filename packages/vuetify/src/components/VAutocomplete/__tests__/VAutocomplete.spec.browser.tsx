@@ -972,13 +972,9 @@ describe('VAutocomplete', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      // Navigate to list first
+      // ArrowDown enters the list directly
       await userEvent.keyboard('{ArrowDown}')
-      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
-
-      // Tab to list
-      await userEvent.keyboard('{Tab}')
-      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
 
       // Tab to footer
       await userEvent.keyboard('{Tab}')

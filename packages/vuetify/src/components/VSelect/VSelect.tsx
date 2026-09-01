@@ -40,7 +40,6 @@ import {
   deepEqual,
   ensureValidVNode,
   genericComponent,
-  getActiveElement,
   IN_BROWSER,
   matchesSelector,
   omit,
@@ -280,7 +279,7 @@ export const VSelect = genericComponent<new <
         openedByArrow = null
       }
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+      if (['Enter', 'ArrowDown', 'ArrowUp', ' '].includes(e.key)) {
         openedByKeyboard = true
         menu.value = true
       }
@@ -406,18 +405,15 @@ export const VSelect = genericComponent<new <
       }
       if (!listRef.value || !isFocused.value) return
 
-      // VMenu re-dispatches ArrowUp/Down after open and already moved focus to next/prev
-      if (listRef.value.$el?.contains(getActiveElement())) return
-
       const opts: FocusOptions = { focusVisible: false, preventScroll: props.noAutoScroll }
 
-      // fallback for VMenu's re-dispatch; fires before the virtual list has scrolled
+      if (focusSelectedItem(opts)) return
+
+      // fallback for when the selected item hasn't scrolled into the virtual list's rendered window yet
       if (openedByArrow) {
         listRef.value.focus(openedByArrow, opts)
         return
       }
-
-      if (focusSelectedItem(opts)) return
 
       if (openedByKeyboard) {
         listRef.value.focus('first', opts)
@@ -559,6 +555,7 @@ export const VSelect = genericComponent<new <
                   activator="parent"
                   captureFocus={ false }
                   disabled={ menuDisabled.value }
+                  _disableKeys
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }

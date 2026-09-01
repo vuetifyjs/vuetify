@@ -668,7 +668,11 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   let _el
   let idx = elements.indexOf(getActiveElement() as HTMLElement)
   if (idx < 0) {
-    idx = elements.findIndex(el => el.getAttribute('aria-selected') === 'true')
+    const focusTarget = location === 'prev' ? elements.at(-1) : elements[0]
+    const focusTargetRole = focusTarget?.getAttribute('role') ?? ''
+    if (['option', 'listbox'].includes(focusTargetRole)) {
+      idx = elements.findIndex(el => el.getAttribute('role') === 'option' && el.getAttribute('aria-selected') === 'true')
+    }
   }
   const inc = location === 'next' ? 1 : -1
   do {

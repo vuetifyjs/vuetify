@@ -261,7 +261,7 @@ export const VAutocomplete = genericComponent<new <
         e.preventDefault()
       }
 
-      if (['Enter', 'ArrowDown'].includes(e.key)) {
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
         menu.value = true
       }
 
@@ -278,8 +278,8 @@ export const VAutocomplete = genericComponent<new <
         select(firstSelectableItem.value)
       }
 
-      if (e.key === 'ArrowDown' && highlightFirst.value) {
-        listRef.value?.focus('next')
+      if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        listRef.value?.focus(e.key === 'ArrowDown' ? 'next' : 'prev')
       }
 
       if (['Backspace', 'Delete'].includes(e.key)) {
@@ -534,6 +534,7 @@ export const VAutocomplete = genericComponent<new <
                   v-model={ menu.value }
                   activator="parent"
                   disabled={ menuDisabled.value }
+                  _disableKeys
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }
