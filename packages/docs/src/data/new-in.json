@@ -33,7 +33,8 @@
     },
     "examples": {
       "slot-menu-footer": "3.12.0",
-      "misc-new-tab": "3.3.0"
+      "misc-new-tab": "3.3.0",
+      "prop-ignore-accents": "4.2.0"
     }
   },
   "VAvatar": {
