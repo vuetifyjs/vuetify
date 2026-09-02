@@ -466,8 +466,8 @@ importers:
   packages/vuetify:
     dependencies:
       '@vuetify/v0':
-        specifier: ^1.2.0
-        version: 1.2.0(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
+        specifier: ^1.2.1
+        version: 1.2.1(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
     devDependencies:
       '@date-io/core':
         specifier: 3.2.0
@@ -3686,8 +3686,8 @@ packages:
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
     engines: {node: '>=18'}
 
-  '@vuetify/v0@1.2.0':
-    resolution: {integrity: sha512-k7+EJXgy9D/AAjZoWgSQ1gAwpIhG97br1xeu7HWPXVvEar392ZFiNgbtYDum88MNsTyDv6bJT/XzwHIo6/cmzQ==}
+  '@vuetify/v0@1.2.1':
+    resolution: {integrity: sha512-lFBUeMmQiKbFR7JXC1Z74Z2dvvGLCqt/Wd9JQqg4falICTvHtlkulYqaHbtmByGV9eR7cbG1ohN1+7OQLLSPfg==}
     peerDependencies:
       '@adobe/leonardo-contrast-colors': '>=1.0.0'
       '@ant-design/colors': '>=7.0.0'
@@ -12060,7 +12060,7 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@vuetify/v0@1.2.0(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))':
+  '@vuetify/v0@1.2.1(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))':
     dependencies:
       vue: 3.5.25(typescript@6.0.2)
     optionalDependencies:
