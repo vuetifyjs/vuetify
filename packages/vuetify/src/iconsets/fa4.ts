@@ -23,6 +23,7 @@ const aliases: IconAliases = {
   checkboxOn: 'fa-check-square',
   checkboxOff: 'fa-square-o',
   checkboxIndeterminate: 'fa-minus-square',
+  clock: 'fa-clock-o',
   delimiter: 'fa-circle', // for carousel
   sortAsc: 'fa-arrow-up',
   sortDesc: 'fa-arrow-down',

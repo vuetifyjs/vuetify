@@ -128,7 +128,7 @@ export const VTimePickerControls = genericComponent()({
     )
 
     function onHourFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
+      if (props.readonly || !['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
 
@@ -149,7 +149,7 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function onMinuteFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
+      if (props.readonly || !['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
 
@@ -159,7 +159,7 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function onSecondFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
+      if (props.readonly || !['ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
       e.stopPropagation()
 
@@ -225,6 +225,7 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function setPeriod (val: Period) {
+      if (props.readonly) return
       emit('update:period', val)
     }
 
@@ -273,6 +274,7 @@ export const VTimePickerControls = genericComponent()({
               active={ props.viewMode === 'hour' }
               color={ props.color }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               label={ t('$vuetify.timePicker.hour') }
               showHint={ props.inputHints }
               error={ isHourValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
@@ -290,6 +292,7 @@ export const VTimePickerControls = genericComponent()({
               active={ props.viewMode === 'minute' }
               color={ props.color }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               label={ t('$vuetify.timePicker.minute') }
               showHint={ props.inputHints }
               error={ isMinuteValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
@@ -312,6 +315,7 @@ export const VTimePickerControls = genericComponent()({
                   active={ props.viewMode === 'second' }
                   color={ props.color }
                   disabled={ props.disabled }
+                  readonly={ props.readonly }
                   label={ t('$vuetify.timePicker.second') }
                   showHint={ props.inputHints }
                   error={ isSecondValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
