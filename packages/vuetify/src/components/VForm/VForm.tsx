@@ -43,6 +43,21 @@ export const VForm = genericComponent<VFormSlots>()({
     const form = createForm(props)
     const formRef = ref<HTMLFormElement>()
 
+    function focusFirstError (id: number | string) {
+      const field = form.items.value.find(item => item.id === id)
+      if (!field?.vm?.vnode?.el) return
+
+      const el = field.vm.vnode.el as HTMLElement
+      const input = el.querySelector?.(
+        'input, textarea, [tabindex]:not([tabindex="-1"]):not([disabled])'
+      )
+      if (input) {
+        (input as HTMLElement).focus()
+      } else {
+        el.focus()
+      }
+    }
+
     function onReset (e: Event) {
       e.preventDefault()
       form.reset()
@@ -59,9 +74,12 @@ export const VForm = genericComponent<VFormSlots>()({
       emit('submit', e)
 
       if (!e.defaultPrevented) {
-        ready.then(({ valid }) => {
+        ready.then(({ valid, errors }) => {
           if (valid) {
             formRef.value?.submit()
+          } else if (errors.length > 0) {
+            // Focus the first invalid field so screen readers announce the error
+            focusFirstError(errors[0].id)
           }
         })
       }
