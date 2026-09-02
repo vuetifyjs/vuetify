@@ -267,7 +267,6 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         type={ props.type }
                         onFocus={ focus }
                         onBlur={ blur }
-                        aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
