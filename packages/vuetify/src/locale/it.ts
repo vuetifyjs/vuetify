@@ -94,7 +94,7 @@ export default {
     clear: 'Cancella {0}',
     prependAction: 'Azione precedente {0}',
     appendAction: 'Azione successiva {0}',
-    otp: 'Inserisci il codice OTP {0}',
+    otp: 'Inserisci il codice di verifica',
   },
   fileInput: {
     counter: '{0} file',

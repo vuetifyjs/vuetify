@@ -312,7 +312,6 @@ $flat-typography: ();
   $empty-state-title-font-weight: map.get($typography, 'h6', 'weight'),
   $empty-state-title-line-height: map.get($typography, 'h6', 'line-height'),
   $fab-font-size: map.get($typography, 'button', 'size'),
-  $fab-font-weight: map.get($typography, 'button', 'weight'),
   $input-font-size: map.get($typography, 'body-1', 'size'),
   $input-font-weight: map.get($typography, 'body-1', 'weight'),
   $list-item-nav-subtitle-font-weight: map.get($typography, 'body-2', 'weight'),
@@ -336,7 +335,6 @@ $flat-typography: ();
   $system-bar-text-transform: map.get($typography, 'caption', 'text-transform'),
   $table-header-font-size: map.get($typography, 'caption', 'size'),
   $table-font-size: map.get($typography, 'body-2', 'size'),
-  $table-row-font-size: map.get($typography, 'subtitle-2', 'size'),
   $icon-btn-font-size: map.get($typography, 'button', 'size'),
   $icon-btn-font-weight: map.get($typography, 'button', 'weight'),
 );

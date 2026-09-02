@@ -627,7 +627,6 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
   $avatar-margin-end: 8px;
   $avatar-margin-start: 8px;
 
-  $icon-left-margin-left: 8px;
   $icon-margin-end: 8px;
   $icon-margin-start: 8px;
 
@@ -639,6 +638,10 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
 #### Restoring the legacy grid behavior
 
 If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
+#### Removed unused Sass variables
+
+A number of other Sass variables that had no effect on rendered output were also removed in v4. If you're migrating a project with custom Sass overrides, see [Unused Sass variables](/getting-started/unused-sass-variables/) for the full list, including ones that stopped working as far back as v3.
 
 ## Tooling
 
