@@ -625,6 +625,7 @@ export const VAutocomplete = genericComponent<new <
                   captureFocus={ false }
                   openOnArrow={ false }
                   disabled={ menuDisabled.value }
+                  _disableKeys
                   eager={ props.eager }
                   maxHeight={ 310 }
                   openOnClick={ false }

@@ -4,7 +4,7 @@
 @use '../../styles/tools';
 
 $fab-height: 56px !default;
-$fab-font-size: tools.map-deep-get(settings.$typography, 'label-large', 'size') !default;
+$fab-font-size: map.get(settings.$typography, 'label-large', 'size') !default;
 $fab-transition-duration: 0.2s !default;
 $fab-transition-timing-function: settings.$standard-easing !default;
 $fab-width-ratio: math.div(16, 9) !default;

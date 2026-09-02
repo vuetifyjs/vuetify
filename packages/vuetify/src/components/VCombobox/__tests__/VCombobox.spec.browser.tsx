@@ -1055,7 +1055,7 @@ describe('VCombobox', () => {
 
       await userEvent.keyboard('{ArrowUp}')
       await commands.waitStable('.v-list')
-      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('99')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
     })
   })
 

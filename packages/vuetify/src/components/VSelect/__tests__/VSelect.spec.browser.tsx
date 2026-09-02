@@ -1431,7 +1431,7 @@ describe('VSelect', () => {
       expect(document.activeElement?.textContent?.trim()).toBe('99')
     })
 
-    it('should open with ArrowDown onto the item after selection', async () => {
+    it('should open with ArrowDown onto the selected item', async () => {
       render(() => (
         <VSelect items={ manyItems } modelValue={ 100 } />
       ))
@@ -1444,10 +1444,13 @@ describe('VSelect', () => {
         .map(el => el.textContent))
         .toContain('101')
 
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowDown}')
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('101')
     })
 
-    it('should open with ArrowUp onto the item before the first selection', async () => {
+    it('should open with ArrowUp onto the selected item', async () => {
       render(() => (
         <VSelect items={ manyItems } modelValue={[300, 555, 992]} multiple />
       ))
@@ -1458,8 +1461,11 @@ describe('VSelect', () => {
 
       await expect.poll(() => screen.getAllByRole('option')
         .map(el => el.textContent))
-        .toContain('299')
+        .toContain('300')
 
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('300')
+
+      await userEvent.keyboard('{ArrowUp}')
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
     })
 

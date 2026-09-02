@@ -1,8 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
 @use '../../styles/settings';
-@use "../../styles/settings/variables";
-@use "../../styles/tools/functions";
+@use "../../styles/tools";
 
 // VBottomNavigation
 $bottom-navigation-background: rgb(var(--v-theme-surface)) !default;
@@ -12,8 +11,8 @@ $bottom-navigation-border-radius: map.get(settings.$rounded, '0') !default;
 $bottom-navigation-border-style: settings.$border-style-root !default;
 $bottom-navigation-border-thin-width: thin !default;
 $bottom-navigation-border-width: 0 !default;
-$bottom-navigation-color: functions.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
-$bottom-navigation-content-font-size: functions.map-deep-get(variables.$typography, 'label-small', 'size') !default;
+$bottom-navigation-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
+$bottom-navigation-content-font-size: map.get(settings.$typography, 'label-small', 'size') !default;
 $bottom-navigation-elevation: 2 !default;
 $bottom-navigation-height: 100% !default;
 $bottom-navigation-icon-font-size: 1.5rem !default;
