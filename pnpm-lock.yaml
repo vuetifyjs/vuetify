@@ -466,8 +466,8 @@ importers:
   packages/vuetify:
     dependencies:
       '@vuetify/v0':
-        specifier: ^1.0.2
-        version: 1.0.2(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
+        specifier: ^1.2.1
+        version: 1.2.1(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
     devDependencies:
       '@date-io/core':
         specifier: 3.2.0
@@ -3686,17 +3686,18 @@ packages:
     resolution: {integrity: sha512-EHJDH+O7eov7yJ3WPR52qELyHq8beQ/GmletheroKRvp4SxTL9IgOEeXqBfw4bOyd49VNH5coyoqvIIlnhavUQ==}
     engines: {node: '>=18'}
 
-  '@vuetify/v0@1.0.2':
-    resolution: {integrity: sha512-YV8zOWlqzlk+efgSOzOttQ1ij0NLym7TfALTa+WO7pfq8ppayNpOO7ZuE0H6ludlHXNLUENZ8DQd3z282jzwAQ==}
+  '@vuetify/v0@1.2.1':
+    resolution: {integrity: sha512-lFBUeMmQiKbFR7JXC1Z74Z2dvvGLCqt/Wd9JQqg4falICTvHtlkulYqaHbtmByGV9eR7cbG1ohN1+7OQLLSPfg==}
     peerDependencies:
       '@adobe/leonardo-contrast-colors': '>=1.0.0'
       '@ant-design/colors': '>=7.0.0'
       '@flagsmith/flagsmith': '>=11.0.0'
+      '@floating-ui/dom': '>=1.8.0'
       '@js-temporal/polyfill': '>=0.5.0'
       '@material/material-color-utilities': '>=0.3.0'
       launchdarkly-js-client-sdk: ^3.0.0
       posthog-js: ^1.0.0
-      vue: '>=3.5.0'
+      vue: '>=3.5.0 || >=3.6.0-0'
       vue-i18n: '>=10.0.0'
     peerDependenciesMeta:
       '@adobe/leonardo-contrast-colors':
@@ -3704,6 +3705,8 @@ packages:
       '@ant-design/colors':
         optional: true
       '@flagsmith/flagsmith':
+        optional: true
+      '@floating-ui/dom':
         optional: true
       '@js-temporal/polyfill':
         optional: true
@@ -12057,7 +12060,7 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@vuetify/v0@1.0.2(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))':
+  '@vuetify/v0@1.2.1(vue-i18n@11.2.1(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))':
     dependencies:
       vue: 3.5.25(typescript@6.0.2)
     optionalDependencies:
