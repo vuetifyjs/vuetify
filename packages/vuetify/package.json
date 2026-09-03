@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "4.2.0-beta.0",
+  "version": "4.2.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -147,7 +147,7 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "dependencies": {
-    "@vuetify/v0": "^1.0.2"
+    "@vuetify/v0": "^1.2.1"
   },
   "devDependencies": {
     "@date-io/core": "3.2.0",

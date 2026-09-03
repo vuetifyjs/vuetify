@@ -3,6 +3,7 @@
 // adopted into 4.x minors.
 
 export {
+  findMatchRanges,
   isArray,
   isBoolean,
   isElement,
@@ -17,6 +18,8 @@ export {
   isThenable,
   isUndefined,
 } from '@vuetify/v0/utilities'
+
+export type { IgnoreAccents } from '@vuetify/v0/utilities'
 
 // Kept under core's existing name — `range` shadows local variables in several
 // components (VPagination, VRating, VSlider).
