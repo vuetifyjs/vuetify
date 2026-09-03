@@ -182,10 +182,11 @@ export default {
     volume: '音量',
     mute: '靜音',
     unmute: '取消靜音',
-    download: 'Download',
     skipForward: 'Skip forward {0} seconds',
     skipBackward: 'Skip back {0} seconds',
     playbackRate: 'Playback speed',
+    playbackRateValue: '{0}x',
+    remainingTime: '-{0}',
     error: 'This audio file could not be played.',
   },
   video: {

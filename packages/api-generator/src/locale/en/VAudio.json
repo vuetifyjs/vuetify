@@ -4,7 +4,7 @@
     "src": "Media file URL",
     "srcObject": "Sets the source to a MediaStream, MediaSource, or Blob object. Live streams report an infinite duration, so the time display shows elapsed only and the waveform falls back to a placeholder track.",
     "type": "Media file type (optional). When set, the source is rendered as a nested `<source>` element so the hint is honoured.",
-    "crossorigin": "Forwarded to the native audio element. Required, together with CORS response headers from the media host, before peaks can be decoded from a cross-origin file.",
+    "crossorigin": "Forwarded to the native audio element. Needed only when the element itself is routed into a Web Audio graph by the consumer.",
     "preload": "Forwarded to the native audio element. The default `metadata` obtains the duration without downloading the whole file.",
     "currentTime": "Playback position in seconds. Writing to it seeks; it stays in sync with `progress`, which expresses the same position as a percentage.",
     "error": "Puts the component in the manual error state.",
@@ -16,7 +16,8 @@
     "disabled": "Removes all interaction and dims the component.",
     "seekTarget": "Which surface responds to a click when no waveform is shown. A visible waveform is always the seek surface, so `container` takes effect together with `hide-waveform` — that combination makes the whole component click-to-seek. `none` disables seeking entirely.",
     "rounded": "Applies a border radius to the container and the controls. Accepts an array of two values to customize the elements separately.",
-    "controlsProps": "Pass props through to the `v-audio-controls` component. Accepts an object with anything from [v-audio-controls](/api/v-audio-controls/#props) props, camelCase keys are recommended."
+    "controlsProps": "Pass props through to the `v-audio-controls` component. Accepts an object with anything from [v-audio-controls](/api/v-audio-controls/#props) props, camelCase keys are recommended.",
+    "peaks": "Waveform amplitudes, nominally 0-1 and one per bar. Generate them where the file is produced; without them a flat placeholder track is drawn."
   },
   "events": {
     "loaded": "Emitted when the audio has loaded its metadata and is ready to be played.",

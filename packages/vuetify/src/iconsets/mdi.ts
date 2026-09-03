@@ -65,7 +65,6 @@ const aliases: IconAliases = {
   play: 'mdi-play',
   pause: 'mdi-pause',
   stop: 'mdi-stop',
-  download: 'mdi-download',
   skipForward: 'mdi-fast-forward',
   skipBackward: 'mdi-rewind',
   fullscreen: 'mdi-fullscreen',

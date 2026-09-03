@@ -4,7 +4,7 @@ import './VAudioWaveform.sass'
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useRtl } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
@@ -95,6 +95,7 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
 
   setup (props, { emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { t } = useLocale()
     const { isRtl } = useRtl()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(() => props.color))
 
@@ -312,6 +313,7 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
           aria-valuemax={ props.seekable && !props.disabled ? 100 : undefined }
           aria-valuenow={ props.seekable && !props.disabled ? Math.round(progress.value) : undefined }
           aria-valuetext={ props.seekable && !props.disabled ? ariaValueText.value : undefined }
+          aria-label={ props.seekable && !props.disabled ? t('$vuetify.audio.seek') : undefined }
           aria-disabled={ props.disabled || undefined }
           onPointerdown={ onPointerdown }
           onPointermove={ onPointermove }

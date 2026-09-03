@@ -18,6 +18,31 @@
       @include tools.density('v-audio-controls', $audio-density) using ($modifier)
         --v-audio-controls-height: #{$audio-controls-height + $modifier * 2}
 
+    // The waveform is the only child allowed to take a whole row; giving it a 100% basis
+    // in a wrapping row moves it above or below the actions with `order` alone, so the
+    // render tree is identical in every variant.
+    &--waveform-top,
+    &--waveform-bottom
+      align-items: stretch
+      flex-wrap: wrap
+
+      .v-audio-controls__waveform
+        flex: 1 0 100%
+        min-width: 100%
+
+      .v-audio-controls__actions,
+      .v-audio-controls__time,
+      .v-audio-controls__volume
+        align-self: center
+
+    &--waveform-top
+      .v-audio-controls__waveform
+        order: -1
+
+    &--waveform-bottom
+      .v-audio-controls__waveform
+        order: 1
+
     &--floating
       background: transparent
 

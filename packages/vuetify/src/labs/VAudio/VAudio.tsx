@@ -17,10 +17,9 @@ import { useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, nextTick, onBeforeUnmount, onMounted, shallowRef, toRef, watch } from 'vue'
-import { decodePeaks, getCachedPeaks } from './decode'
+import { nextTick, onBeforeUnmount, onMounted, shallowRef, toRef, watch } from 'vue'
 import { formatDuration } from './time'
-import { clamp, consoleWarn, genericComponent, IN_BROWSER, omit, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, IN_BROWSER, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -43,6 +42,8 @@ export const makeVAudioProps = propsFactory({
   src: String,
   srcObject: [Object, null] as PropType<MediaProvider | null>,
   type: String,
+  // Nothing here decodes the media, but `audio` is exposed, so a consumer feeding the
+  // element into their own Web Audio graph still needs the element marked CORS-clean.
   crossorigin: String as PropType<'anonymous' | 'use-credentials'>,
   preload: {
     type: String as PropType<'none' | 'metadata' | 'auto'>,
@@ -121,19 +122,13 @@ export const VAudio = genericComponent<VAudioSlots>()({
 
     const duration = shallowRef(0)
     const waiting = shallowRef(false)
-    const decodedPeaks = shallowRef<number[]>()
     const buffered = shallowRef<number[]>([])
     const scrubbing = shallowRef(false)
     const containerHover = shallowRef<number | null>(null)
 
-    let controller: AbortController | undefined
     let syncing = false
     let frame = 0
     let seekingFromModel = false
-
-    const barCount = toRef(() => Math.max(1, Number(props.bars) || 64))
-
-    const peaks = computed(() => props.peaks?.length ? props.peaks : decodedPeaks.value)
 
     const hasWaveform = toRef(() => !props.hideWaveform && props.variant !== 'mini' && props.variant !== 'hidden')
     const seekOnContainer = toRef(() =>
@@ -212,19 +207,6 @@ export const VAudio = genericComponent<VAudioSlots>()({
       if (!el) return
 
       el.load()
-      loadPeaks()
-    }
-
-    function download () {
-      if (!props.src || !IN_BROWSER) return
-
-      const link = document.createElement('a')
-      link.href = props.src
-      link.download = typeof props.download === 'string' ? props.download : ''
-      link.rel = 'noopener'
-      document.body.append(link)
-      link.click()
-      link.remove()
     }
 
     function onLoadedmetadata () {
@@ -306,37 +288,6 @@ export const VAudio = genericComponent<VAudioSlots>()({
       error.value = el?.error ?? true
       waiting.value = false
       emit('error', error.value)
-    }
-
-    async function loadPeaks () {
-      controller?.abort()
-      decodedPeaks.value = undefined
-
-      if (!IN_BROWSER || props.peaks?.length || !props.src || props.srcObject) return
-
-      const cached = getCachedPeaks(props.src, barCount.value, props.sampleStrategy)
-      if (cached) {
-        decodedPeaks.value = cached
-        return
-      }
-
-      controller = new AbortController()
-      const { signal } = controller
-
-      try {
-        const result = await decodePeaks(props.src, barCount.value, props.sampleStrategy, signal)
-        if (!signal.aborted) decodedPeaks.value = result
-      } catch (error_: any) {
-        // A failed decode is the documented degraded path: the flat placeholder track
-        // still renders and still seeks, so this is not surfaced as a media error.
-        if (error_?.name !== 'AbortError') {
-          consoleWarn(
-            `VAudio: could not decode "${props.src}" for the waveform (${error_?.message ?? error_}). ` +
-            'Cross-origin media needs CORS headers and crossorigin="anonymous"; ' +
-            'pass the `peaks` prop to skip decoding entirely.',
-          )
-        }
-      }
     }
 
     function containerRatio (e: PointerEvent) {
@@ -427,12 +378,6 @@ export const VAudio = genericComponent<VAudioSlots>()({
       if (hadError) {
         nextTick(() => audioRef.value?.load())
       }
-
-      loadPeaks()
-    })
-
-    watch(() => [!props.peaks?.length, barCount.value, props.sampleStrategy], () => {
-      loadPeaks()
     })
 
     onMounted(() => {
@@ -442,13 +387,10 @@ export const VAudio = genericComponent<VAudioSlots>()({
       el.volume = clamp(Number(volume.value) || 0, 0, 100) / 100
       el.playbackRate = playbackRate.value
       if (props.srcObject) el.srcObject = props.srcObject
-
-      loadPeaks()
     })
 
     onBeforeUnmount(() => {
       stopTicking()
-      controller?.abort()
       const el = audioRef.value
       if (el) {
         el.pause()
@@ -579,7 +521,7 @@ export const VAudio = genericComponent<VAudioSlots>()({
                   v-model:playbackRate={ playbackRate.value }
                   progress={ progress.value }
                   duration={ duration.value }
-                  peaks={ peaks.value }
+                  peaks={ props.peaks }
                   buffered={ buffered.value }
                   seekable={ waveformSeekable.value }
                   onUpdate:progress={ skipTo }
@@ -591,7 +533,6 @@ export const VAudio = genericComponent<VAudioSlots>()({
                     startTicking()
                   }}
                   onClick:stop={ stop }
-                  onClick:download={ download }
                 >
                   {{
                     default: slots.controls,

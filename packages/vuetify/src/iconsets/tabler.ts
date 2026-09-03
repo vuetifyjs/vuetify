@@ -66,7 +66,6 @@ const aliases: IconAliases = {
   play: 'i-tabler:player-play',
   pause: 'i-tabler:player-pause',
   stop: 'i-tabler:player-stop',
-  download: 'i-tabler:download',
   skipForward: 'i-tabler:rewind-forward-10',
   skipBackward: 'i-tabler:rewind-backward-10',
   fullscreen: 'i-tabler:arrows-maximize',

@@ -66,7 +66,7 @@ All attributes that are not explicitly defined in the component API (`autoplay`,
 
 The waveform is drawn from an array of amplitude values, one per bar, each between 0 and 1.
 
-Supplying **peaks** is the recommended path in production. The component can also derive them itself by fetching the file and decoding it with the Web Audio API, but that requires the media host to send CORS headers, and it downloads and decompresses the entire file — around 10 MB of memory per minute of audio. A table of recordings that each decode on mount is expensive. Peaks computed once at upload time cost nothing at render, work for cross-origin media, and are safe to render on the server.
+You supply the values; the component never downloads or decodes the media to derive them. Reading a whole file to compute peaks costs a full download plus a decode that decompresses it into memory — around 10 MB per minute of audio — and it is impossible anyway for any host that does not send CORS headers. Compute them once where the file is produced, store them alongside it, and rendering costs nothing and works on the server. Without peaks the component draws a flat placeholder track that still seeks and still shows progress.
 
 <ExamplesExample file="v-audio/prop-peaks" />
 
@@ -75,6 +75,12 @@ Supplying **peaks** is the recommended path in production. The component can als
 A visible waveform is always the seek surface. The **seek-target** prop decides what happens when there is no waveform: with `container` and **hide-waveform** the whole component becomes click-to-seek, which suits a compact player in a table row. `none` disables seeking entirely.
 
 <ExamplesExample file="v-audio/prop-seek-target" />
+
+#### Layout
+
+The **variant** prop decides where the waveform sits. By default it is inline, between the actions and the clock; `waveform-top` and `waveform-bottom` give it a row of its own above or below the controls. `mini` reduces the bar to play and time, and `hidden` removes it entirely.
+
+<ExamplesExample file="v-audio/prop-layout" />
 
 #### Density and variants
 
@@ -89,6 +95,12 @@ The **height** prop sizes the container. To change the height of the waveform it
 :::
 
 ### Slots
+
+#### Append
+
+There is no download prop. A download is an ordinary link, so it belongs in the **append** slot where it stays a real anchor — right-clickable, keyboard-reachable, and yours to label.
+
+<ExamplesExample file="v-audio/slot-append" />
 
 #### Error
 

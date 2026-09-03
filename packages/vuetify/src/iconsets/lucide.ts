@@ -68,7 +68,6 @@ const aliases: IconAliases = {
   play: 'i-lucide:play',
   pause: 'i-lucide:pause',
   stop: 'i-lucide:square',
-  download: 'i-lucide:download',
   skipForward: 'i-lucide:fast-forward',
   skipBackward: 'i-lucide:rewind',
   fullscreen: 'i-lucide:maximize',

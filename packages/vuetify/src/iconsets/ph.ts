@@ -68,7 +68,6 @@ const aliases: IconAliases = {
   play: 'i-ph:play',
   pause: 'i-ph:pause',
   stop: 'i-ph:stop',
-  download: 'i-ph:download-simple',
   skipForward: 'i-ph:fast-forward',
   skipBackward: 'i-ph:rewind',
   fullscreen: 'i-ph:arrows-out-simple',

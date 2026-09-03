@@ -68,7 +68,6 @@ const aliases: IconAliases = {
   play: 'i-fa6-solid:play',
   pause: 'i-fa6-solid:pause',
   stop: 'i-fa6-solid:stop',
-  download: 'i-fa6-solid:download',
   skipForward: 'i-fa6-solid:forward',
   skipBackward: 'i-fa6-solid:backward',
   fullscreen: 'i-fa6-solid:maximize',

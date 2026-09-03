@@ -29,6 +29,13 @@ import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
+export type VAudioControlsVariant =
+  | 'default'
+  | 'waveform-top'
+  | 'waveform-bottom'
+  | 'mini'
+  | 'hidden'
+
 export type VAudioControlsTimeSlot = {
   elapsed: string
   remaining: string
@@ -50,7 +57,6 @@ export type VAudioControlsActionsSlot = {
   toggleMuted: () => void
   playbackRate: number
   setPlaybackRate: (v: number) => void
-  download: () => void
   labels: Record<string, string>
 }
 
@@ -85,7 +91,7 @@ export const makeVAudioControlsProps = propsFactory({
     default: () => [],
   },
   variant: {
-    type: String as PropType<'default' | 'mini' | 'hidden'>,
+    type: String as PropType<VAudioControlsVariant>,
     default: 'default',
   },
   hidePlay: Boolean,
@@ -96,10 +102,6 @@ export const makeVAudioControlsProps = propsFactory({
   skipInterval: {
     type: [Number, String],
     default: 0,
-  },
-  download: {
-    type: [Boolean, String],
-    default: false,
   },
   splitTime: Boolean,
   timeDisplay: {
@@ -119,17 +121,12 @@ export const makeVAudioControlsProps = propsFactory({
     type: String,
     default: '$stop',
   },
-  volumeIcon: {
-    type: String,
-    default: '$volumeHigh',
-  },
+  // Unset by default so the graded ladder below runs. Setting it pins one icon for every
+  // non-zero level, which is what a consumer asking for a specific glyph wants.
+  volumeIcon: String,
   muteIcon: {
     type: String,
     default: '$volumeOff',
-  },
-  downloadIcon: {
-    type: String,
-    default: '$download',
   },
   skipForwardIcon: {
     type: String,
@@ -182,7 +179,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
     scrubStart: () => true,
     scrubEnd: () => true,
     'click:stop': () => true,
-    'click:download': () => true,
   },
 
   setup (props, { emit, slots }) {
@@ -200,6 +196,19 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
 
     const lastVolume = shallowRef(Number(props.volume) || 100)
 
+    // The same four-step ladder and thresholds `VVideoVolume` uses, so the two media
+    // components read the volume alias group identically instead of each picking a subset.
+    const volumeIcon = toRef(() => {
+      if (volume.value <= 0) return props.muteIcon
+      if (props.volumeIcon) return props.volumeIcon
+
+      if (volume.value > 70) return '$volumeHigh'
+      if (volume.value > 40) return '$volumeMedium'
+      if (volume.value > 10) return '$volumeLow'
+
+      return '$volumeOff'
+    })
+
     const labels = computed(() => ({
       play: t('$vuetify.audio.play'),
       pause: t('$vuetify.audio.pause'),
@@ -208,7 +217,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       volume: t('$vuetify.audio.volume'),
       mute: t('$vuetify.audio.mute'),
       unmute: t('$vuetify.audio.unmute'),
-      download: t('$vuetify.audio.download'),
       skipForward: t('$vuetify.audio.skipForward', Number(props.skipInterval) || 0),
       skipBackward: t('$vuetify.audio.skipBackward', Number(props.skipInterval) || 0),
       playbackRate: t('$vuetify.audio.playbackRate'),
@@ -232,7 +240,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       switch (props.timeDisplay) {
         case 'elapsed': { return elapsed
         }
-        case 'remaining': { return `-${remaining}`
+        case 'remaining': { return t('$vuetify.audio.remainingTime', remaining)
         }
         case 'duration': { return total
         }
@@ -285,10 +293,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       playbackRate.value = value
     }
 
-    function download () {
-      emit('click:download')
-    }
-
     const slotProps = computed<VAudioControlsActionsSlot>(() => ({
       play,
       pause,
@@ -303,7 +307,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       toggleMuted,
       playbackRate: playbackRate.value,
       setPlaybackRate,
-      download,
       labels: labels.value,
     }))
 
@@ -345,7 +348,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       const showStop = !props.hideStop && !isMini.value
       const showSkip = skipSeconds.value > 0 && !isMini.value
       const showRates = props.playbackRates.length > 0 && !isMini.value
-      const showDownload = !!props.download && !isMini.value
 
       return (
         <div
@@ -436,7 +438,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
                 { !props.hideTime && (
                   <div class="v-audio-controls__time">
                     { props.splitTime
-                      ? (slots.time?.(currentTime.value) ?? `-${currentTime.value.remaining}`)
+                      ? (slots.time?.(currentTime.value) ?? t('$vuetify.audio.remainingTime', currentTime.value.remaining))
                       : (slots.time?.(currentTime.value) ?? timeText.value)}
                   </div>
                 )}
@@ -451,8 +453,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
 
                         >
                           <span class="text-caption">
-                            { playbackRate.value }
-                            x
+                            { t('$vuetify.audio.playbackRateValue', playbackRate.value) }
                           </span>
                         </VIconBtn>
                       ),
@@ -461,7 +462,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
                           { props.playbackRates.map(rate => (
                             <VListItem
                               active={ rate === playbackRate.value }
-                              title={ `${rate}x` }
+                              title={ t('$vuetify.audio.playbackRateValue', rate) }
                               { ...clickable(() => setPlaybackRate(rate)) }
                             />
                           ))}
@@ -474,7 +475,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
                 { showVolume && (
                   <div class="v-audio-controls__volume">
                     <VIconBtn
-                      icon={ volume.value > 0 ? props.volumeIcon : props.muteIcon }
+                      icon={ volumeIcon.value }
                       aria-label={ volume.value > 0 ? labels.value.mute : labels.value.unmute }
                       { ...clickable(toggleMuted) }
                     />
@@ -490,14 +491,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
                       }}
                     />
                   </div>
-                )}
-
-                { showDownload && (
-                  <VIconBtn
-                    icon={ props.downloadIcon }
-                    aria-label={ labels.value.download }
-                    { ...clickable(download) }
-                  />
                 )}
 
                 { slots.append?.(slotProps.value) }

@@ -209,5 +209,68 @@ describe('VAudio', () => {
     expect(labels).toContain('Skip back 15 seconds')
   })
 
+  it('should grade the volume icon the way VVideoVolume does', () => {
+    const iconFor = (volume: number) => {
+      document.body.innerHTML = ''
+      render(() => <VAudio src={ SILENT_WAV } peaks={ peaks } volume={ volume } />)
+      const icon = document.querySelector('.v-audio-controls__volume .v-icon-btn .v-icon')
+      // Iconset-agnostic: whatever the set renders, each step has to be a different glyph.
+      return icon?.innerHTML ?? ''
+    }
+
+    const high = iconFor(100)
+    const medium = iconFor(50)
+    const low = iconFor(20)
+    const off = iconFor(0)
+
+    expect(high).not.toBe('')
+    expect(new Set([high, medium, low, off]).size).toBe(4)
+  })
+
+  it('should stack the waveform above or below the actions on request', () => {
+    const rowsFor = (variant?: string) => {
+      document.body.innerHTML = ''
+      render(() => <VAudio src={ SILENT_WAV } peaks={ peaks } variant={ variant as any } />)
+      const wave = document.querySelector('.v-audio-controls__waveform')!.getBoundingClientRect()
+      const actions = document.querySelector('.v-audio-controls__actions')!.getBoundingClientRect()
+      if (wave.bottom <= actions.top + 2) return 'above'
+      if (actions.bottom <= wave.top + 2) return 'below'
+
+      return 'inline'
+    }
+
+    expect(rowsFor()).toBe('inline')
+    expect(rowsFor('waveform-top')).toBe('above')
+    expect(rowsFor('waveform-bottom')).toBe('below')
+  })
+
+  it('should not offer a download button — that is the append slot', () => {
+    render(() => <VAudio src={ SILENT_WAV } peaks={ peaks } />)
+
+    const labels = [...document.querySelectorAll('[aria-label]')].map(el => el.getAttribute('aria-label'))
+    expect(labels.some(l => /download/i.test(l ?? ''))).toBe(false)
+  })
+
+  it('should resolve every label through the locale', () => {
+    render(() => (
+      <VAudio
+        src={ SILENT_WAV }
+        peaks={ peaks }
+        playbackRates={[0.5, 1, 2]}
+        skipInterval={ 15 }
+        timeDisplay="remaining"
+      />
+    ))
+
+    // `t()` echoes the key back when it is missing, so an untranslated string shows up
+    // verbatim in the rendered output.
+    const root = document.querySelector('.v-audio')!
+    const labels = [...root.querySelectorAll('[aria-label]')].map(el => el.getAttribute('aria-label') ?? '')
+
+    expect(labels.length).toBeGreaterThan(0)
+    expect(labels.filter(l => l.includes('$vuetify'))).toEqual([])
+    expect(root.textContent).not.toContain('$vuetify')
+  })
+
   showcase({ stories })
 })

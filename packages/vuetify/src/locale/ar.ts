@@ -182,10 +182,11 @@ export default {
     volume: 'مستوى الصوت',
     mute: 'كتم الصوت',
     unmute: 'إلغاء كتم الصوت',
-    download: 'Download',
     skipForward: 'Skip forward {0} seconds',
     skipBackward: 'Skip back {0} seconds',
     playbackRate: 'Playback speed',
+    playbackRateValue: '{0}x',
+    remainingTime: '-{0}',
     error: 'This audio file could not be played.',
   },
   video: {

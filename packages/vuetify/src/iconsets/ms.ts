@@ -66,7 +66,6 @@ const aliases: IconAliases = {
   play: 'i-material-symbols:play-arrow',
   pause: 'i-material-symbols:pause',
   stop: 'i-material-symbols:stop',
-  download: 'i-material-symbols:download',
   skipForward: 'i-material-symbols:fast-forward',
   skipBackward: 'i-material-symbols:fast-rewind',
   fullscreen: 'i-material-symbols:fullscreen',

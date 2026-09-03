@@ -68,7 +68,6 @@ const aliases: IconAliases = {
   play: 'i-carbon:play',
   pause: 'i-carbon:pause',
   stop: 'i-carbon:stop',
-  download: 'i-carbon:download',
   skipForward: 'i-carbon:forward-10',
   skipBackward: 'i-carbon:rewind-10',
   fullscreen: 'i-carbon:maximize',
