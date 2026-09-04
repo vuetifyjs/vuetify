@@ -342,7 +342,7 @@ export const VDateInput = genericComponent<new <
           style={ props.style }
           modelValue={ text.value }
           inputmode={ inputmode.value }
-          placeholder={ isFocused.value ? undefined : placeholder.value }
+          placeholder={ isFocused.value && !props.placeholder ? undefined : placeholder.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
@@ -358,7 +358,7 @@ export const VDateInput = genericComponent<new <
             ...slots,
             default: () => (
               <>
-                { isFocused.value && !isReadonly.value && (
+                { isFocused.value && !isReadonly.value && !props.placeholder && (
                   <div class="v-date-input__format-hint" aria-hidden="true">
                     <span style={{ order: isRtl.value ? 1 : 0 }}>{ text.value }</span>
                     { formatHint.value }
