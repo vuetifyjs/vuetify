@@ -693,15 +693,6 @@ describe('VDateInput', () => {
       expect(screen.queryByCSS('.v-date-input__format-hint')).toBeNull()
     })
 
-    it('should still show the format mask hint while typing when no custom placeholder is set', async () => {
-      const { element } = render(() => <VDateInput />)
-
-      await userEvent.click(element)
-      await userEvent.keyboard('12')
-
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('12/dd/yyyy')
-    })
-
     it.each<{ props: VDateInput['$props'], keys: string, expected: string }>([
       { props: {}, keys: '1225', expected: '12/25/yyyy' },
       { props: { multiple: 'range' }, keys: '1225202501', expected: '12/25/2025 - 01/dd/yyyy' },
