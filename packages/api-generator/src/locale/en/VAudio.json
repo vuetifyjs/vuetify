@@ -12,7 +12,6 @@
     "loop": "Restarts playback when the end is reached. The `ended` event is not emitted while looping.",
     "muted": "Hides the volume control and disables the playback sound.",
     "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
-    "eager": "Silently loads the media file without waiting for the user to click.",
     "disabled": "Removes all interaction and dims the component.",
     "seekTarget": "Which surface responds to a click when no waveform is shown. A visible waveform is always the seek surface, so `container` takes effect together with `hide-waveform` — that combination makes the whole component click-to-seek. `none` disables seeking entirely.",
     "rounded": "Applies a border radius to the container and the controls. Accepts an array of two values to customize the elements separately.",

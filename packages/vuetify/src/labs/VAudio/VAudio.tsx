@@ -58,7 +58,6 @@ export const makeVAudioProps = propsFactory({
   loop: Boolean,
   muted: Boolean,
   startAt: [Number, String],
-  eager: Boolean,
   disabled: Boolean,
   seekTarget: {
     type: String as PropType<VAudioSeekTarget>,
