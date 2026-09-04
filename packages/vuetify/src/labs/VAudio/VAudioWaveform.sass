@@ -1,0 +1,75 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-audio-waveform
+    --v-audio-waveform-progress: 0%
+    align-items: center
+    display: flex
+    flex: 1 1 auto
+    min-width: 0
+    position: relative
+    touch-action: none
+    user-select: none
+
+    &:focus-visible
+      outline: 1px solid currentColor
+      outline-offset: 2px
+
+    &--seekable
+      cursor: pointer
+
+    &--disabled
+      opacity: $audio-waveform-disabled-opacity
+      pointer-events: none
+
+    &__svg
+      display: block
+      height: 100%
+      overflow: visible
+      width: 100%
+
+    &__track
+      fill: currentColor
+      opacity: $audio-waveform-track-opacity
+
+    &__buffer
+      fill: currentColor
+      opacity: $audio-waveform-buffer-opacity
+
+    &__progress
+      clip-path: inset(0 calc(100% - var(--v-audio-waveform-progress)) 0 0)
+      fill: currentColor
+      transition: $audio-waveform-progress-transition
+
+      .v-audio-waveform--rtl &
+        clip-path: inset(0 0 0 calc(100% - var(--v-audio-waveform-progress)))
+
+      .v-audio-waveform--scrubbing &,
+      .v-audio-waveform--seeking &
+        transition: none
+
+    &__mirror
+      opacity: $audio-waveform-mirror-opacity
+
+    &__cursor
+      background: currentColor
+      inset-block: 0
+      opacity: $audio-waveform-cursor-opacity
+      pointer-events: none
+      position: absolute
+      width: $audio-waveform-cursor-width
+
+    &__tooltip
+      background: $audio-waveform-tooltip-background
+      border-radius: $audio-waveform-tooltip-border-radius
+      bottom: calc(100% + #{$audio-waveform-tooltip-offset})
+      color: $audio-waveform-tooltip-color
+      font-size: $audio-waveform-tooltip-font-size
+      line-height: 1.4
+      padding: $audio-waveform-tooltip-padding
+      pointer-events: none
+      position: absolute
+      transform: translateX(-50%)
+      white-space: nowrap
+      z-index: 1
