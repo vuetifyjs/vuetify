@@ -684,6 +684,15 @@ describe('VDateInput', () => {
       expect(screen.getByCSS('input')).toHaveAttribute('placeholder', expected)
     })
 
+    it('should keep a custom placeholder on focus instead of switching to the format mask', async () => {
+      const { element } = render(() => <VDateInput placeholder="MM/DD/YYYY" />)
+
+      await userEvent.click(element)
+
+      expect(screen.getByCSS('input')).toHaveAttribute('placeholder', 'MM/DD/YYYY')
+      expect(screen.queryByCSS('.v-date-input__format-hint')).toBeNull()
+    })
+
     it.each<{ props: VDateInput['$props'], keys: string, expected: string }>([
       { props: {}, keys: '1225', expected: '12/25/yyyy' },
       { props: { multiple: 'range' }, keys: '1225202501', expected: '12/25/2025 - 01/dd/yyyy' },
