@@ -109,7 +109,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const max = computed(() => parseFloat(props.max))
-    const height = computed(() => parseFloat(props.height))
+    const height = computed(() => convertToUnit(props.height))
     const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue) / max.value * 100, 0, 100))
     const normalizedValue = computed(() => revealState.value === 'initial'
       ? 0
@@ -204,8 +204,8 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           {
             bottom: props.location === 'bottom' ? 0 : undefined,
             top: props.location === 'top' ? 0 : undefined,
-            height: props.active ? convertToUnit(height.value) : 0,
-            '--v-progress-linear-height': convertToUnit(height.value),
+            height: props.active ? height.value : 0,
+            '--v-progress-linear-height': height.value,
             '--v-progress-linear-transition-duration': transitionDuration.value,
             '--v-progress-reveal-duration': `${revealDuration.value}ms`,
             '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
@@ -231,12 +231,12 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             ]}
             style={{
               ...textColorStyles.value,
-              [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value),
-              borderTop: `${convertToUnit(height.value / 2)} dotted`,
+              [isReversed.value ? 'left' : 'right']: `calc(${height.value} * -1)`,
+              borderTop: `calc(${height.value} / 2) dotted`,
               opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
-              top: `calc(50% - ${convertToUnit(height.value / 4)})`,
+              top: `calc(50% - ${height.value} / 4)`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
+              '--v-progress-linear-stream-to': `${height.value} * ${isReversed.value ? 1 : -1}`,
             }}
           />
         )}
