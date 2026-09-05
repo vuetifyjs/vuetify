@@ -235,7 +235,6 @@ export const VSwitch = genericComponent<new <T>(
                               defaults={{
                                 VIcon: {
                                   icon,
-                                  size: isMaterial ? iconSize.value : 'x-small',
                                 },
                               }}
                             >
@@ -250,7 +249,6 @@ export const VSwitch = genericComponent<new <T>(
                                     class={ isMaterial ? textColorClasses.value : undefined }
                                     style={ isMaterial ? textColorStyles.value : undefined }
                                     icon={ icon }
-                                    size={ isMaterial ? iconSize.value : 'x-small' }
                                   />
                                 ))) : (
                                 <LoaderSlot
@@ -266,7 +264,6 @@ export const VSwitch = genericComponent<new <T>(
                                           active={ slotProps.isActive }
                                           color={ slotProps.color }
                                           indeterminate
-                                          size={ iconSize.value }
                                           width="2"
                                         />
                                       )

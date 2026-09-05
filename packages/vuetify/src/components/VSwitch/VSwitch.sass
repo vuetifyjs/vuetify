@@ -31,6 +31,7 @@
     display: flex
 
     .v-progress-circular
+      --v-progress-circular-height: round(var(--v-switch-height) * .8, 1px)
       color: $switch-loader-color
 
   .v-switch__track,
@@ -78,7 +79,7 @@
     color: $switch-thumb-color
     border-radius: $switch-thumb-radius
     display: flex
-    font-size: .75rem
+    font-size: calc(var(--v-switch-height) * .5)
     height: var(--v-switch-thumb-height)
     justify-content: center
     width: var(--v-switch-thumb-width)
