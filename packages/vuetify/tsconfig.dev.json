@@ -4,8 +4,6 @@
     "src",
     "dev",
     "test",
-    "cypress",
-    "./cypress.config.ts",
     "./vite.config.ts",
     "./vitest.config.ts",
     "./vitest.workspace.ts"
