@@ -52,6 +52,10 @@ export const waitForClickable = (el: Element) => {
   return commands.waitForClickable(page.elementLocator(el).selector)
 }
 
+export const isClickable = (el: Element, timeout?: number) => {
+  return commands.isClickable(page.elementLocator(el).selector, timeout)
+}
+
 export const scroll = (options: ScrollToOptions, el: Element | Window = window) => {
   return Promise.race([
     wait(500),
