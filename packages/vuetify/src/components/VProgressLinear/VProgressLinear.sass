@@ -23,6 +23,8 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
 @include tools.layer('components')
   // Block
   .v-progress-linear
+    --v-progress-linear-transition-duration: #{$progress-linear-transition-duration}
+
     background: transparent
     overflow: hidden
     position: relative
@@ -167,6 +169,15 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
 
     .v-progress-linear__stream
       right: auto
+
+  .v-progress-linear--revealing
+    --v-progress-reveal-duration: #{$progress-linear-reveal-duration}
+
+    .v-progress-linear__determinate
+      transition-duration: var(--v-progress-reveal-duration)
+
+  .v-progress-linear--no-transition
+    --v-progress-linear-transition-duration: 0s
 
   .v-progress-linear--absolute,
   .v-progress-linear--fixed

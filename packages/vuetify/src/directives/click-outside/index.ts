@@ -1,5 +1,5 @@
 // Utilities
-import { attachedRoot } from '@/util'
+import { attachedRoot, isFunction } from '@/util'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -37,7 +37,8 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()
+  const value = binding.value
+  const elements = ((isFunction(value) ? undefined : value.include) || (() => []))()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -50,13 +51,14 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 }
 
 function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
-  const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
+  const value = binding.value
+  const isActive = (isFunction(value) ? undefined : value.closeConditional) || defaultConditional
 
   return isActive(e)
 }
 
 function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
-  const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
+  const handler = isFunction(binding.value) ? binding.value : binding.value.handler
 
   // Clicks in the Shadow DOM change their target while using setTimeout, so the original target is saved here
   e.shadowTarget = e.target

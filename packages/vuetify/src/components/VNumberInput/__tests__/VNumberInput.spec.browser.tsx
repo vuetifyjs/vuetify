@@ -1,5 +1,6 @@
 // Components
 import { VNumberInput } from '../VNumberInput'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VForm } from '@/components/VForm'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
@@ -21,6 +22,19 @@ describe('VNumberInput', () => {
     await userEvent.click(element)
     await userEvent.keyboard(typing)
     expect(screen.getByCSS('input')).toHaveValue(expected)
+  })
+
+  it.each([
+    ['VNumberInput > VBtn defaults should style the controls', { VNumberInput: { VBtn: { variant: 'tonal' } } }, 'v-btn--variant-tonal'],
+    ['unscoped VBtn defaults should not apply', { VBtn: { variant: 'tonal' } }, 'v-btn--variant-text'],
+  ])('%s', async (_, defaults, expected) => {
+    render(() => (
+      <VDefaultsProvider defaults={ defaults }>
+        <VNumberInput />
+      </VDefaultsProvider>
+    ))
+
+    expect(screen.getByTestId('increment')).toHaveClass(expected)
   })
 
   describe('grouped input', () => {

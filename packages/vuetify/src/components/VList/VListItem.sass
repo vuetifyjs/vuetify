@@ -23,6 +23,9 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--variant-tonal
+      overflow: hidden
+
     &--focus-visible
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
@@ -313,6 +316,11 @@
 
     .v-list-item--active.v-list-item--variant-elevated &
       --v-theme-overlay-multiplier: 0
+
+  .v-list--navigable
+    .v-list-item::after,
+    .v-list-item__overlay
+      transition: none
 
   $base-padding: list.nth($list-item-padding, 2)
   .v-list

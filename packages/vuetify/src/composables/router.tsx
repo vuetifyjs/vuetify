@@ -6,7 +6,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
+import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref, SetupContext } from 'vue'
@@ -62,7 +62,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
-  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+  if (isString(RouterLink) || !('useLink' in RouterLink)) {
     const href = toRef(() => props.href)
     return {
       isLink,

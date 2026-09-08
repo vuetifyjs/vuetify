@@ -265,7 +265,7 @@ The [v4.2.0 milestone](https://github.com/vuetifyjs/vuetify/milestone/90) is tar
 * **[VDatePicker](/components/date-pickers/)** — week selection ([#20867](https://github.com/vuetifyjs/vuetify/pull/20867))
 * **[VField](/components/text-fields/)** — a `border` prop ([#19819](https://github.com/vuetifyjs/vuetify/pull/19819))
 
-Opened in July and still open at the end of it: persistent menus for the select family ([#23008](https://github.com/vuetifyjs/vuetify/pull/23008)) and a `toggle-on-click` prop for VAutocomplete and VCombobox ([#23023](https://github.com/vuetifyjs/vuetify/pull/23023)).
+Opened in July and still open at the end of it: persistent menus for the select family ([#23008](https://github.com/vuetifyjs/vuetify/pull/23008)) and a `close-on-input-click` prop for VAutocomplete and VCombobox ([#23023](https://github.com/vuetifyjs/vuetify/pull/23023)).
 
 ---
 

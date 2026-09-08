@@ -1,5 +1,6 @@
 // Utilities
 import { onScopeDispose, shallowRef, toValue } from 'vue'
+import { isNullOrUndefined } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, ShallowRef } from 'vue'
@@ -86,7 +87,7 @@ export function useVirtualFocus (
     const all = items()
     if (!all.length) return
 
-    const current = highlightedId.value == null ? -1 : indexOf(highlightedId.value)
+    const current = isNullOrUndefined(highlightedId.value) ? -1 : indexOf(highlightedId.value)
     const dir = stride > 0 ? 1 : -1
     const abs = Math.abs(stride)
     const maxHops = Math.ceil(all.length / abs)
@@ -122,7 +123,7 @@ export function useVirtualFocus (
     const cols = toValue(_columns) ?? 0
     if (!cols) return first()
     const all = items()
-    const cur = highlightedId.value == null ? 0 : Math.max(0, indexOf(highlightedId.value))
+    const cur = isNullOrUndefined(highlightedId.value) ? 0 : Math.max(0, indexOf(highlightedId.value))
     const start = cur - (cur % cols)
     for (let i = start; i < Math.min(start + cols, all.length); i++) {
       if (!toValue(all[i]?.disabled)) { go(all[i]!.id); return }
@@ -133,7 +134,7 @@ export function useVirtualFocus (
     const cols = toValue(_columns) ?? 0
     if (!cols) return last()
     const all = items()
-    const cur = highlightedId.value == null ? 0 : Math.max(0, indexOf(highlightedId.value))
+    const cur = isNullOrUndefined(highlightedId.value) ? 0 : Math.max(0, indexOf(highlightedId.value))
     const start = cur - (cur % cols)
     const end = Math.min(start + cols, all.length)
     for (let i = end - 1; i >= start; i--) {
@@ -148,7 +149,7 @@ export function useVirtualFocus (
   }
 
   function focusHighlighted () {
-    if (highlightedId.value == null) return
+    if (isNullOrUndefined(highlightedId.value)) return
     const item = items().find(i => i.id === highlightedId.value)
     if (!item?.el) return
     toValue(item.el)?.focus()

@@ -58,7 +58,6 @@ $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
 
 // VCardSubtitle
-$card-subtitle-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
 $card-subtitle-compact-line-height: 1rem !default;
 $card-subtitle-flex: none !default;
@@ -122,10 +121,3 @@ $card-variants: (
   $card-plain-opacity,
   'v-card'
 ) !default;
-
-// Deprecated
-$card-avatar-align-self: flex-start !default;
-$card-avatar-header-padding: 0 !default;
-$card-avatar-padding: .5rem 1rem !default;
-$card-title-padding-top: 1rem !default;
-$card-text-padding-bottom: 1rem !default;

@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
-import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isBoolean, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -47,10 +47,10 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const hasDrawn = ref(false)
     const clipRects = shallowRef<SVGRectElement[]>([])
     const animationDuration = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+      isObject(props.animation) ? (props.animation.duration ?? 300) : 300
     )
     const animationEasing = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+      isObject(props.animation) ? (props.animation.easing ?? 'ease') : 'ease'
     )
 
     const hasLabels = computed(() => {
@@ -193,7 +193,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       ? (boundary.value.maxX - lineWidth.value) / 2
       : (Math.abs(bars.value[0].x - bars.value[1].x) - lineWidth.value) / 2
     )
-    const smooth = computed(() => typeof props.smooth === 'boolean' ? (props.smooth ? 2 : 0) : Number(props.smooth))
+    const smooth = computed(() => isBoolean(props.smooth) ? (props.smooth ? 2 : 0) : Number(props.smooth))
     const columnWidth = computed(() => {
       const len = bars.value.length
       return totalWidth.value / (len === 1 ? 2 : len)
@@ -235,7 +235,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const tooltipConfig = computed(() => ({
       showCrosshair: false,
       titleFormat: (item: { index: number, value: number }) => String(item.value),
-      ...(typeof props.tooltip === 'object' ? props.tooltip : {}),
+      ...(isObject(props.tooltip) ? props.tooltip : {}),
     }))
 
     let frame = -1

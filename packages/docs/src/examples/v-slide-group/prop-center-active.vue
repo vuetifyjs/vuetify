@@ -16,9 +16,10 @@
         v-slot="{ isSelected, toggle }"
       >
         <v-card
-          :color="isSelected ? 'primary' : 'grey-lighten-1'"
+          :color="isSelected ? 'primary' : undefined"
+          :style="isSelected ? undefined : `background: oklch(0.72 ${(n - 1) * (0.2 / 14)} 40)`"
           class="ma-4"
-          height="200"
+          height="100"
           width="100"
           @click="toggle"
         >

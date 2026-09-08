@@ -7,6 +7,8 @@
     "counterString": "The text displayed when using the **counter** prop. Can also be customized globally on the [internationalization page](/customization/internationalization).",
     "hideInput": "Display the icon only without the input (file names).",
     "multiple": "Adds the **multiple** attribute to the input, allowing multiple file selections.",
+    "persistentPlaceholder": "Forces placeholder to always be visible.",
+    "placeholder": "Sets the input’s placeholder text.",
     "showSize": "Sets the displayed size of selected file(s). When using **true** will default to _1000_ displaying (**kB, MB, GB**) while _1024_ will display (**KiB, MiB, GiB**).",
     "truncateLength": "The length of a filename before it is truncated with ellipsis."
   },

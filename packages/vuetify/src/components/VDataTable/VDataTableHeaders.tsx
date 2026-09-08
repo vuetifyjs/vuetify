@@ -11,6 +11,7 @@ import { useLoadingConfig } from './composables/loading'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 import { useBackgroundColor } from '@/composables/color'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
@@ -19,7 +20,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps, nextTick } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, isString, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
@@ -105,11 +106,12 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
+    const selectDefaults = injectNestedDefaults<VSelect['$props']>('VSelect')
 
     function getFixedStyles (column: InternalDataTableHeader, y: number): CSSProperties | undefined {
       if (!(props.sticky || props.fixedHeader) && !column.fixed) return undefined
 
-      const fixedSide = typeof column.fixed === 'string' ? column.fixed
+      const fixedSide = isString(column.fixed) ? column.fixed
         : column.fixed ? 'start'
         : 'none'
 
@@ -301,7 +303,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             items={ sortableColumns.value }
             label={ t('$vuetify.dataTable.sortBy') }
             multiple={ props.multiSort }
-            variant="underlined"
+            variant={ selectDefaults.value?.variant ?? 'underlined' }
             returnObject
             onClick:clear={ () => sortBy.value = [] }
           >

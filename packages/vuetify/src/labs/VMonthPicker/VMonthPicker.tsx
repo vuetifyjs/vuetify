@@ -21,7 +21,7 @@ import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { chunkArray, createRange, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { chunkArray, createRange, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -217,7 +217,7 @@ export const VMonthPicker = genericComponent<new <
       if (Array.isArray(props.allowedMonths) && props.allowedMonths.length) {
         return props.allowedMonths.includes(month)
       }
-      if (typeof props.allowedMonths === 'function') {
+      if (isFunction(props.allowedMonths)) {
         return props.allowedMonths(month)
       }
       return true

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: File inputs
   title: File input component
@@ -69,6 +70,12 @@ You can reduces the file input height with the **density** prop.
 The `v-file-input` can contain multiple files at the same time when using the **multiple** prop.
 
 <ExamplesExample file="v-file-input/prop-multiple" />
+
+#### Placeholder
+
+Use the **placeholder** prop to display hint text when no file is selected. Combine it with **persistent-placeholder** to keep the label floating and the placeholder visible.
+
+<ExamplesExample file="v-file-input/prop-placeholder" />
 
 #### Prepend icon
 

@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, withDirectives } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -303,7 +303,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             <span key="loader" class="v-btn__loader">
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate
                   width="2"
                 />

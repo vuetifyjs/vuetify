@@ -25,6 +25,7 @@ import {
   EventProp,
   genericComponent,
   getActiveElement,
+  isString,
   nullifyTransforms,
   PREFERS_REDUCED_MOTION,
   propsFactory,
@@ -301,7 +302,7 @@ export const VField = genericComponent<new <T>(
           <LoaderSlot
             name="v-field"
             active={ !!props.loading }
-            color={ props.error ? 'error' : (typeof props.loading === 'string' ? props.loading : props.color) }
+            color={ props.error ? 'error' : (isString(props.loading) ? props.loading : props.color) }
             v-slots={{ default: slots.loader }}
           />
 

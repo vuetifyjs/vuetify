@@ -1,7 +1,7 @@
 <template>
   <v-row
     class="bg-grey-lighten-2 align-center justify-center"
-    style="height: 500px"
+    style="height: 500px; touch-action: none"
     v-touch="{
       left: () => swipe('Left'),
       right: () => swipe('Right'),

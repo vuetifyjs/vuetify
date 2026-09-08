@@ -5,7 +5,7 @@ import { makeRevealProps, useReveal } from '@/composables/reveal'
 // Utilities
 import { computed, toRef } from 'vue'
 import { useInnerSlicePath, useOuterSlicePath, usePieArc } from './utils'
-import { easingPatterns, genericComponent, propsFactory, useTransition } from '@/util'
+import { easingPatterns, genericComponent, isObject, propsFactory, useTransition } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -55,14 +55,14 @@ export const VPieSegment = genericComponent()({
       const defaultEasing = 'easeInOutCubic'
       const defaultDuration = 400
 
-      const easingName = typeof props.animation === 'object'
+      const easingName = isObject(props.animation)
         ? props.animation.easing ?? defaultEasing
         : defaultEasing
 
       return {
         duration: ['initial', 'pending'].includes(revealState.value)
           ? revealDuration.value
-          : typeof props.animation === 'object'
+          : isObject(props.animation)
             ? props.animation.duration
             : (props.animation ? defaultDuration : 0),
         transition: easingPatterns[easingName],

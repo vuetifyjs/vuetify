@@ -53,7 +53,7 @@ export const VFooter = genericComponent()({
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight
     })
-    const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
+    const height = computed(() => props.height === 'auto' ? autoHeight.value : props.height)
 
     useToggleScope(() => props.app, () => {
       const layout = useLayoutItem({

@@ -16,7 +16,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
-import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getObjectValueByPath, isFunction, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -125,7 +125,7 @@ export const VDataTableRow = genericComponent<new <T>(
             getSortIcon: () => '',
           }
 
-          const cellProps = typeof props.cellProps === 'function'
+          const cellProps = isFunction(props.cellProps)
             ? props.cellProps({
               index: slotProps.index,
               item: slotProps.item,
@@ -134,7 +134,7 @@ export const VDataTableRow = genericComponent<new <T>(
               column,
             })
             : props.cellProps
-          const columnCellProps = typeof column.cellProps === 'function'
+          const columnCellProps = isFunction(column.cellProps)
             ? column.cellProps({
               index: slotProps.index,
               item: slotProps.item,

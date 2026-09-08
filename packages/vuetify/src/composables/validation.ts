@@ -2,16 +2,24 @@
 import { makeFocusProps } from '@/composables/focus'
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRules } from '@/composables/rules'
 import { useToggleScope } from '@/composables/toggleScope'
-import { useRules } from '@/labs/rules'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, useId, watch } from 'vue'
-import { getCurrentInstance, getCurrentInstanceName, propsFactory, wrapInArray } from '@/util'
+import {
+  getCurrentInstance,
+  getCurrentInstanceName,
+  isFunction,
+  isString,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { ValidationAlias } from '@/labs/rules'
+import type { ValidationAlias } from '@/composables/rules'
 import type { EventProp, MaybeRef } from '@/util'
 
 export type ValidationResult = string | boolean
@@ -84,7 +92,7 @@ export function useValidation (
   id: MaybeRef<string | number> = useId(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
-  const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
+  const validationModel = computed(() => isUndefined(props.validationValue) ? model.value : props.validationValue)
   const form = useForm(props)
   const rules = useRules(() => props.rules)
   const internalErrorMessages = ref<string[]>([])
@@ -199,12 +207,12 @@ export function useValidation (
         break
       }
 
-      const handler = typeof rule === 'function' ? rule : () => rule
+      const handler = isFunction(rule) ? rule : () => rule
       const result = await handler(validationModel.value)
 
       if (result === true) continue
 
-      if (result !== false && typeof result !== 'string') {
+      if (result !== false && !isString(result)) {
         // eslint-disable-next-line no-console
         console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
 

@@ -1,4 +1,5 @@
 import { isPrimitive } from './helpers'
+import { isBoolean } from './v0'
 
 function updateRecursionCache (a: any, b: any, cache: WeakMap<any, any>, result: boolean) {
   if (!cache || isPrimitive(a) || isPrimitive(b)) return
@@ -17,9 +18,9 @@ function findCachedComparison (a: any, b: any, cache: WeakMap<any, any>): boolea
   if (!cache || isPrimitive(a) || isPrimitive(b)) return null
 
   const r1 = cache.get(a)?.get(b)
-  if (typeof r1 === 'boolean') return r1
+  if (isBoolean(r1)) return r1
   const r2 = cache.get(b)?.get(a)
-  if (typeof r2 === 'boolean') return r2
+  if (isBoolean(r2)) return r2
   return null
 }
 

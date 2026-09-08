@@ -13,7 +13,6 @@ $empty-state-headline-font-weight: map.get(settings.$typography, 'display-large'
 $empty-state-headline-line-height: map.get(settings.$typography, 'display-large', 'line-height') !default;
 $empty-state-headline-margin-bottom: 8px !default;
 $empty-state-headline-mobile-font-size: map.get(settings.$typography, 'headline-large', 'size') !default;
-$empty-state-image-padding: 16px !default;
 $empty-state-min-height: 100% !default;
 $empty-state-media-icon-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $empty-state-padding: 16px !default;

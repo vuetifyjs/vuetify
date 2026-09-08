@@ -20,6 +20,7 @@ minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - '@vuetify/one'
   - '@vuetify/testing-library-dom'
+  - '@vuetify/v0'
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.1.1'

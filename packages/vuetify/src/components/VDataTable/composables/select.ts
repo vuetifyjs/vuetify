@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, shallowRef, toRef, toValue } from 'vue'
-import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
+import { deepEqual, isObject, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -119,7 +119,7 @@ export function provideSelection (
   const currentPageSelectable = computed(() => toValue(currentPage).filter(item => item.selectable))
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
+    if (isObject(props.selectStrategy)) return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single': return singleSelectStrategy

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Selects
   title: Select component

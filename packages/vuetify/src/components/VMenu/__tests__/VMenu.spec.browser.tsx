@@ -2,8 +2,10 @@
 import { VMenu } from '../VMenu'
 import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
+import { VDialog } from '@/components/VDialog'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
+import { VTab, VTabs } from '@/components/VTabs'
 import { VTextarea } from '@/components/VTextarea'
 import { VTextField } from '@/components/VTextField'
 import { VTooltip } from '@/components/VTooltip'
@@ -345,6 +347,94 @@ describe('VMenu', () => {
 
     afterEach(() => commands.setReduceMotionEnabled())
 
+    it('should keep submenus open on mouse-leave when the root menu was not hover-opened', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item" link>
+                  <span>L1</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item" link>L2</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="height: 40px;">outside</div>
+        </div>
+      ))
+
+      // root opened by click → the whole chain is sticky against hover-leave
+      await userEvent.click(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('l1-item')).toBeVisible()
+
+      // hover-opened submenu, then leave entirely → stays open
+      await userEvent.hover(screen.getByTestId('l1-item'))
+      await expect.poll(() => screen.queryByTestId('l2-item')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('outside'))
+      await wait(600)
+      expect(screen.queryByTestId('l2-item')).toBeVisible()
+
+      // keyboard-opened submenu, then leave → also stays open
+      screen.getByTestId('l1-item').focus()
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => screen.queryByTestId('l2-item')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('outside'))
+      await wait(600)
+
+      expect(screen.queryByTestId('l2-item')).toBeVisible()
+    })
+
+    it('should collapse the whole chain when the cursor leaves a hover-opened root menu', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="top-btn" openOnHover>
+            Open
+            <VMenu activator="parent" openOnHover>
+              <VList>
+                <VListItem data-testid="l1-item" link>
+                  <span>L1</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item" link>
+                        <span>L2</span>
+                        <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="l3-item" link>L3</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="height: 200px;">outside</div>
+        </div>
+      ))
+
+      // hover the whole chain open
+      await userEvent.hover(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('l1-item')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('l1-item'))
+      await expect.poll(() => screen.queryByTestId('l2-item')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('l2-item'))
+      await expect.poll(() => screen.queryByTestId('l3-item')).toBeVisible()
+
+      // cursor leaves everything → the entire tree collapses (root was hover-opened)
+      await userEvent.hover(screen.getByTestId('outside'))
+
+      await expect.poll(() => screen.queryByTestId('l3-item'), { timeout: 2500 }).toBeNull()
+      await expect.poll(() => screen.queryByTestId('l2-item'), { timeout: 2500 }).toBeNull()
+      await expect.poll(() => screen.queryByTestId('l1-item'), { timeout: 2500 }).toBeNull()
+    })
+
     it('should return focus to the top-level activator after clicking the deepest item', async () => {
       render(() => (
         <div>
@@ -389,6 +479,39 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByTestId('l1-item')).toBeNull()
 
       expect(document.activeElement).toBe(topBtn)
+    })
+
+    // The hover-leave verdict only follows the menu chain for actual submenus. A tooltip
+    // (or any non-submenu overlay) nested in a click-opened menu must still close on its own.
+    it('should close a tooltip nested in a click-opened menu when the mouse leaves', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="item" link>
+                  <span>Item</span>
+                  <VTooltip activator="parent" openOnHover>
+                    <span data-testid="tip">tip</span>
+                  </VTooltip>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="height: 40px;">outside</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('item')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('item'))
+      await expect.poll(() => screen.queryByTestId('tip')).toBeVisible()
+
+      // VTooltip is eager, so its content stays mounted — assert it hides, not unmounts
+      await userEvent.hover(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('tip')).not.toBeVisible()
     })
 
     it('should keep the parent menu open when parts of inner content hide on click', async () => {
@@ -578,6 +701,425 @@ describe('VMenu', () => {
       expect(screen.queryByTestId('l1-1')).toBeVisible()
       expect(screen.queryByTestId('l3-1')).toBeNull()
     })
+
+    // A non-menu overlay child (tooltip, plain overlay) doesn't participate in the
+    // menu close cascade, so an outside click used to leave the menu open.
+    it('should close the menu on outside click while a tooltip child is open', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VSheet class="pa-4" data-testid="menu-content">
+                <VBtn data-testid="tip-btn">
+                  Tip
+                  <VTooltip activator="parent" openOnHover={ false } openOnClick>Tooltip</VTooltip>
+                </VBtn>
+                <VBtn data-testid="other">Other</VBtn>
+              </VSheet>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('tip-btn'))
+      await expect.poll(() => screen.queryByText('Tooltip')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should keep the menu open when clicking inside it while a tooltip child is open', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-4" data-testid="menu-content">
+              <VBtn data-testid="tip-btn">
+                Tip
+                <VTooltip activator="parent" openOnHover={ false } openOnClick>Tooltip</VTooltip>
+              </VBtn>
+              <VBtn data-testid="other">Other</VBtn>
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('tip-btn'))
+      await expect.poll(() => screen.queryByText('Tooltip')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('other'))
+      await wait(300)
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+
+    it('should keep the menu open when dismissing a scrimmed child overlay', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-4" data-testid="menu-content">
+              <VBtn data-testid="dialog-btn">
+                Dialog
+                <VDialog activator="parent" width="200">
+                  <VSheet class="pa-4" data-testid="dialog-content">Dialog</VSheet>
+                </VDialog>
+              </VBtn>
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('dialog-btn'))
+      await expect.poll(() => screen.queryByTestId('dialog-content')).toBeVisible()
+
+      await userEvent.click(document.querySelector('.v-overlay__scrim')!, { position: { x: 5, y: 5 } })
+      await expect.poll(() => screen.queryByTestId('dialog-content')).toBeNull()
+      await wait(300)
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+
+    it('should not close a hosting menu when clicking an item of a menu inside a dialog', async () => {
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VSheet class="pa-4" data-testid="menu-content">
+              <VBtn data-testid="dialog-btn">
+                Dialog
+                <VDialog activator="parent" width="300">
+                  <VSheet class="pa-4" data-testid="dialog-content">
+                    <VBtn data-testid="inner-opener">
+                      Inner menu
+                      <VMenu activator="parent">
+                        <VBtn data-testid="inner-item">
+                          Item
+                          <VMenu activator="parent" submenu>
+                            <VBtn data-testid="deep-item">Deep</VBtn>
+                          </VMenu>
+                        </VBtn>
+                      </VMenu>
+                    </VBtn>
+                  </VSheet>
+                </VDialog>
+              </VBtn>
+            </VSheet>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await userEvent.click(screen.getByTestId('dialog-btn'))
+      await expect.poll(() => screen.queryByTestId('dialog-content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('inner-opener'))
+      await expect.poll(() => screen.queryByTestId('inner-item')).toBeVisible()
+      await userEvent.click(screen.getByTestId('inner-item'))
+      await expect.poll(() => screen.queryByTestId('deep-item')).toBeVisible()
+
+      // The cascade closes both menus inside the dialog, and stops there.
+      await userEvent.click(screen.getByTestId('deep-item'))
+      await expect.poll(() => screen.queryByTestId('inner-item')).toBeNull()
+
+      expect(screen.queryByTestId('deep-item')).toBeNull()
+      expect(screen.queryByTestId('dialog-content')).toBeVisible()
+      expect(screen.queryByTestId('menu-content')).toBeVisible()
+    })
+  })
+
+  describe('one submenu open per level', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    function renderSiblings () {
+      return render(() => (
+        <div>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="a-item" link>
+                  <span>A</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="a-sub" link>A-1</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+                <VListItem data-testid="b-item" link>
+                  <span>B</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="b-sub" link>B-1</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+        </div>
+      ))
+    }
+
+    it('should close a hover-opened submenu when a sibling submenu opens on hover', async () => {
+      renderSiblings()
+
+      await userEvent.click(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('a-item')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('a-item'))
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('b-item'))
+      await expect.poll(() => screen.queryByTestId('b-sub')).toBeVisible()
+
+      // only one submenu should remain open at this level
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeNull()
+    })
+
+    it('should close a keyboard-opened submenu when a sibling submenu opens on hover', async () => {
+      renderSiblings()
+
+      await userEvent.click(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('a-item')).toBeVisible()
+
+      screen.getByTestId('a-item').focus()
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('b-item'))
+      await expect.poll(() => screen.queryByTestId('b-sub')).toBeVisible()
+
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeNull()
+    })
+
+    it('should close a submenu and its open descendants when a sibling opens', async () => {
+      render(() => (
+        <div>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="a-item" link>
+                  <span>A</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="a-sub" link>
+                        <span>A-1</span>
+                        <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="a-sub-sub" link>A-1-a</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+                <VListItem data-testid="b-item" link>
+                  <span>B</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="b-sub" link>B-1</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('top-btn'))
+      await expect.poll(() => screen.queryByTestId('a-item')).toBeVisible()
+
+      await userEvent.hover(screen.getByTestId('a-item'))
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeVisible()
+      await userEvent.hover(screen.getByTestId('a-sub'))
+      await expect.poll(() => screen.queryByTestId('a-sub-sub')).toBeVisible()
+
+      // switching to sibling B should collapse A and its whole open subtree
+      await userEvent.hover(screen.getByTestId('b-item'))
+      await expect.poll(() => screen.queryByTestId('b-sub')).toBeVisible()
+
+      await expect.poll(() => screen.queryByTestId('a-sub')).toBeNull()
+      expect(screen.queryByTestId('a-sub-sub')).toBeNull()
+    })
+  })
+
+  describe('submenu keyboard navigation', () => {
+    it('should close submenus one level at a time with ArrowLeft and keep focus inside', async () => {
+      render(() => (
+        <div>
+          <button data-testid="before">before</button>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                <VListItem data-testid="l1-item-2" link>
+                  <span>L1-2</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                      <VListItem data-testid="l2-item-2" link>
+                        <span>L2-2</span>
+                        <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                          <VList>
+                            <VListItem data-testid="l3-item-1" link>L3-1</VListItem>
+                            <VListItem data-testid="l3-item-2" link>L3-2</VListItem>
+                          </VList>
+                        </VMenu>
+                      </VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <button data-testid="after">after</button>
+        </div>
+      ))
+
+      screen.getByTestId('before').focus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('top-btn'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l3-item-1'))
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect.poll(() => screen.queryByTestId('l3-item-1')).toBeNull()
+      expect(screen.queryByTestId('l2-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l2-item-2'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByTestId('l1-item-1')).toBeNull()
+      expect(document.activeElement).toBe(screen.getByTestId('after'))
+    })
+
+    it('should keep focus inside the menu tree when Tab/Shift+Tab is pressed in a submenu', async () => {
+      render(() => (
+        <div>
+          <button data-testid="before">before</button>
+          <VBtn data-testid="top-btn">
+            Open
+            <VMenu activator="parent">
+              <VList>
+                <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                <VListItem data-testid="l1-item-2" link>
+                  <span>L1-2</span>
+                  <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                    <VList>
+                      <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                      <VListItem data-testid="l2-item-2" link>L2-2</VListItem>
+                    </VList>
+                  </VMenu>
+                </VListItem>
+              </VList>
+            </VMenu>
+          </VBtn>
+          <button data-testid="after">after</button>
+        </div>
+      ))
+
+      screen.getByTestId('before').focus()
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('top-btn'))
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+
+      await userEvent.keyboard('{Tab}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.queryByTestId('l2-item-1')).toBeNull()
+      expect(screen.queryByTestId('l1-item-1')).toBeVisible()
+      expect(document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+    })
+
+    // Animations widen the gap between content mount and item layout, which is
+    // exactly when the open keystroke used to drop focus, so run with real motion.
+    describe('with animations', () => {
+      beforeEach(() => commands.setReduceMotionDisabled())
+
+      afterEach(() => commands.setReduceMotionEnabled())
+
+      it('should focus the first submenu item with a single ArrowRight press', async () => {
+        render(() => (
+          <div>
+            <button data-testid="before">before</button>
+            <VBtn data-testid="top-btn">
+              Open
+              <VMenu activator="parent">
+                <VList>
+                  <VListItem data-testid="l1-item-1" link>L1-1</VListItem>
+                  <VListItem data-testid="l1-item-2" link>
+                    <span>L1-2</span>
+                    <VMenu openOnFocus={ false } activator="parent" openOnHover submenu>
+                      <VList>
+                        <VListItem data-testid="l2-item-1" link>L2-1</VListItem>
+                        <VListItem data-testid="l2-item-2" link>L2-2</VListItem>
+                      </VList>
+                    </VMenu>
+                  </VListItem>
+                </VList>
+              </VMenu>
+            </VBtn>
+          </div>
+        ))
+
+        screen.getByTestId('top-btn').focus()
+
+        // Each open is a single keypress — no retry. Polling waits for the
+        // deferred focus to land, but never re-presses the key.
+        await userEvent.keyboard('{ArrowDown}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-1'))
+
+        await userEvent.keyboard('{ArrowDown}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l1-item-2'))
+
+        await userEvent.keyboard('{ArrowRight}')
+        await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
+      })
+    })
   })
 
   describe('gliding activator', () => {
@@ -610,6 +1152,113 @@ describe('VMenu', () => {
       await commands.waitStable('.v-overlay__content')
 
       expect(screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
+    })
+  })
+
+  describe('opening with arrow keys', () => {
+    it('should focus the selected item, not the one after it, by default', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <VList selectable selected={['b']}>
+                <VListItem value="a" title="Item A" />
+                <VListItem value="b" title="Item B" />
+                <VListItem value="c" title="Item C" />
+              </VList>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item B')
+    })
+
+    it('should still move relatively on a genuine subsequent keypress', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <VList selectable selected={['b']}>
+                <VListItem value="a" title="Item A" />
+                <VListItem value="b" title="Item B" />
+                <VListItem value="c" title="Item C" />
+              </VList>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item B')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('Item C')
+    })
+
+    it('should not skip a tab that comes before the list, even though it is also aria-selected', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <>
+                <VTabs modelValue="two">
+                  <VTab value="one" text="One" />
+                  <VTab value="two" text="Two" />
+                </VTabs>
+                <VList selectable selected={['b']}>
+                  <VListItem value="a" title="Item A" />
+                  <VListItem value="b" title="Item B" />
+                  <VListItem value="c" title="Item C" />
+                </VList>
+              </>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-tabs')
+
+      // "Two" is the natural first focusable element (roving tabindex); the
+      // selected list item further down must not hijack focus away from it
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Two')
+    })
+
+    it('should not skip a search field that comes before the list', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <>
+                <VTextField data-testid="search" label="Search" />
+                <VList selectable selected={['b']}>
+                  <VListItem value="a" title="Item A" />
+                  <VListItem value="b" title="Item B" />
+                  <VListItem value="c" title="Item C" />
+                </VList>
+              </>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement).toBe(screen.getByCSS('[data-testid="search"] input'))
     })
   })
 })

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Autocompletes
   title: Autocomplete component
@@ -71,6 +72,12 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 When user is typing in the field to narrow the list of options, the input text is matched against the `title`. With `filter-keys` you can specify which properties should be used instead. Properties of original objects passed to `items` need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
 
 <ExamplesExample file="v-autocomplete/prop-filter-keys" />
+
+#### Ignore accents (i18n)
+
+The **ignore-accents** prop lets a plain query match names written using native language characters.
+
+<ExamplesExample file="v-autocomplete/prop-ignore-accents" />
 
 #### Subheaders and dividers
 

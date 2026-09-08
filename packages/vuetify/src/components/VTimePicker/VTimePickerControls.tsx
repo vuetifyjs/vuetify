@@ -13,7 +13,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, nextTick, ref, watch } from 'vue'
 import { makeTimeValidationProps, useTimeValidation } from './useTimeValidation'
 import { convert12to24, convert24to12, extractInteger, pad } from './util'
-import { clamp, genericComponent, propsFactory, useRender } from '@/util'
+import { clamp, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -90,7 +90,7 @@ export const VTimePickerControls = genericComponent()({
       },
       out: (v: number | string | null) => {
         if (isNaN(Number(v)) || v == null || v === '') return null
-        const val = typeof v === 'string' ? extractInteger(v) : Number(v)
+        const val = isString(v) ? extractInteger(v) : Number(v)
         if (val === null) return null
         return props.ampm
           ? convert12to24(val, props.period ?? 'am')
@@ -104,7 +104,7 @@ export const VTimePickerControls = genericComponent()({
       in: (v?: number | string | null) => v != null && !isNaN(Number(v)) ? pad(`${v}`) : null,
       out: (v: number | string | null) => {
         if (isNaN(Number(v)) || v == null || v === '') return null
-        const val = typeof v === 'string' ? extractInteger(v) : Number(v)
+        const val = isString(v) ? extractInteger(v) : Number(v)
         return val !== null
           ? clamp(val, 0, 59)
           : null

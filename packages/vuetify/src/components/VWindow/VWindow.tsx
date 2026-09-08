@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, IN_BROWSER, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
@@ -64,7 +64,7 @@ export const makeVWindowProps = propsFactory({
   reverse: Boolean,
   showArrows: {
     type: [Boolean, String],
-    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+    validator: (v: any) => isBoolean(v) || v === 'hover',
   },
   verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   touch: {
