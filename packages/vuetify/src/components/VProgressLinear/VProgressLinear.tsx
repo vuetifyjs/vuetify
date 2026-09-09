@@ -236,7 +236,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
               top: `calc(50% - ${height.value} / 4)`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              '--v-progress-linear-stream-to': `${height.value} * ${isReversed.value ? 1 : -1}`,
+              '--v-progress-linear-stream-to': `calc(${height.value} * ${isReversed.value ? 1 : -1})`,
             }}
           />
         )}
