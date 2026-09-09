@@ -302,10 +302,20 @@ describe('dateFormat', () => {
     })
 
     it.each<[string, string]>([
-      // a native input keeps these on the ascii placeholder
+      ['az-AZ', 'gg.aa.iiii'],
+      ['km', 'ថ្ងៃ/ខែ/ឆ្នាំ'],
+      ['is-IS', 'dd.mm.áááá'],
+    ])('should name the sections of %s as %s whether or not the browser still knows it', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
+    })
+
+    it('should fall back rather than throw on a locale Intl cannot read', () => {
+      useDateFormatIn({}, '', false, ({ parserFormat }) => expect(parserFormat.value).toBe('mm/dd/yyyy'))
+    })
+
+    it.each<[string, string]>([
       ['sw-KE', 'dd/mm/yyyy'],
       ['vi-VN', 'dd/mm/yyyy'],
-      // CLDR has no data and answers in English, which the fallback spells anyway
       ['tn-BW', 'yyyy-mm-dd'],
       ['mh-MH', 'mm/dd/yyyy'],
     ])('should spell %s out as %s', (locale, expected) => {
@@ -313,7 +323,6 @@ describe('dateFormat', () => {
     })
 
     it.each<[string, string]>([
-      // CLDR names these fields as it would in prose, a native date input names the bare unit
       ['ko-KR', '연도.월.일'],
       ['ja-JP', '年/月/日'],
     ])('should name the sections of %s as %s', (locale, expected) => {
@@ -321,7 +330,6 @@ describe('dateFormat', () => {
     })
 
     it.each<[string, string]>([
-      // a section named by a logogram cannot be struck off digit by digit, it goes as one
       ['', '年/月/日'],
       ['2', '/月/日'],
       ['202', '/月/日'],

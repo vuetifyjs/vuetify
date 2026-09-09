@@ -25,14 +25,21 @@ function token (text: string, size: number): HintToken {
 const rtlScript = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Thaana}]/u
 const mirrorRtl = (text: string) => rtlScript.test(text) ? [...text].reverse().join('') : text
 
+const nativeFormat: Record<string, string> = {
+  az: 'dd.MM.yyyy',
+  is: 'dd.MM.yyyy',
+  km: 'dd/MM/yyyy',
+}
+
 const nativeName: Record<string, Record<string, string>> = {
   ar: { y: 'سنة', m: 'شهر' },
   ko: { y: '연도' },
-  // thai abbreviates to the first consonant, which เดือน spells behind its leading vowel
   th: { y: 'ปปปป', m: 'ดด', d: 'วว' },
-  // a native input keeps these two on the ascii placeholder rather than their own initials
   sw: { y: 'yyyy', m: 'mm', d: 'dd' },
   vi: { y: 'yyyy', m: 'mm', d: 'dd' },
+  is: { y: 'ár' },
+  az: { y: 'il', m: 'ay', d: 'gün' },
+  km: { y: 'ឆ្នាំ', m: 'ខែ', d: 'ថ្ងៃ' },
 }
 
 // Types
@@ -78,9 +85,16 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   const adapter = useDate()
 
   function inferFromLocale () {
-    const localeForDateFormat = locale.value ?? 'en-US'
-    const parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
-      .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
+    const localeForDateFormat = locale.value || 'en-US'
+    let parts
+
+    try {
+      parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
+        .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
+    } catch {
+      consoleWarn(`Date format cannot be inferred from locale [${localeForDateFormat}]`)
+      return new DateFormatSpec('mdy', '/')
+    }
 
     const logicalOrder = parts.filter(p => ['year', 'month', 'day'].includes(p.type)).map(p => p.type[0]).join('')
     const literal = parts.find(p => p.type === 'literal')?.value ?? ''
@@ -99,8 +113,14 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   }
 
   const currentFormat = toRef(() => {
-    return DateFormatSpec.canBeParsed(props.inputFormat)
-      ? DateFormatSpec.parse(props.inputFormat!)
+    if (DateFormatSpec.canBeParsed(props.inputFormat)) {
+      return DateFormatSpec.parse(props.inputFormat!)
+    }
+
+    const native = nativeFormat[(locale.value || '').split('-')[0]]
+
+    return native
+      ? DateFormatSpec.parse(native)
       : inferFromLocale()
   })
 
