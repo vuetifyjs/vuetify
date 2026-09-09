@@ -289,6 +289,29 @@ describe('dateFormat', () => {
       })
     })
 
+    it('should name lithuanian sections the letter metai and mėnuo share, as a native input does', () => {
+      useDateFormatIn({}, 'lt-LT', false, ({ parserFormat }) => expect(parserFormat.value).toBe('mmmm-mm-dd'))
+    })
+
+    it('should strike off a section thai abbreviates as a native input does', () => {
+      useDateFormatIn({}, 'th-TH', false, ({ getHint, parserFormat }) => {
+        expect(parserFormat.value).toBe('วว/ดด/ปปปป')
+        expect(getHint('2')).toBe('ว/ดด/ปปปป')
+        expect(getHint('25/')).toBe('ดด/ปปปป')
+      })
+    })
+
+    it.each<[string, string]>([
+      // a native input keeps these on the ascii placeholder
+      ['sw-KE', 'dd/mm/yyyy'],
+      ['vi-VN', 'dd/mm/yyyy'],
+      // CLDR has no data and answers in English, which the fallback spells anyway
+      ['tn-BW', 'yyyy-mm-dd'],
+      ['mh-MH', 'mm/dd/yyyy'],
+    ])('should spell %s out as %s', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
+    })
+
     it.each<[string, string]>([
       // CLDR names these fields as it would in prose, a native date input names the bare unit
       ['ko-KR', '연도.월.일'],

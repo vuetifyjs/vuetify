@@ -8,7 +8,7 @@ import { consoleWarn, isString, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
-import type { Segment } from '@/composables/segmentedMask'
+import type { Segment, ValueSegment } from '@/composables/segmentedMask'
 
 type HintToken = {
   text: string
@@ -18,12 +18,21 @@ type HintToken = {
 
 const fieldName = { y: 'year', m: 'month', d: 'day' } as const
 
+function token (text: string, size: number): HintToken {
+  return { text, size, fill: text.length === size && new Set(text).size === 1 }
+}
+
 const rtlScript = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Thaana}]/u
 const mirrorRtl = (text: string) => rtlScript.test(text) ? [...text].reverse().join('') : text
 
 const nativeName: Record<string, Record<string, string>> = {
   ar: { y: 'سنة', m: 'شهر' },
   ko: { y: '연도' },
+  // thai abbreviates to the first consonant, which เดือน spells behind its leading vowel
+  th: { y: 'ปปปป', m: 'ดด', d: 'วว' },
+  // a native input keeps these two on the ascii placeholder rather than their own initials
+  sw: { y: 'yyyy', m: 'mm', d: 'dd' },
+  vi: { y: 'yyyy', m: 'mm', d: 'dd' },
 }
 
 // Types
@@ -135,7 +144,12 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       const native = nativeName[tag.split('-')[0]] ?? {}
 
       return Object.fromEntries(
-        Object.entries(fieldName).map(([key, field]) => [key, native[key] ?? display.of(field)])
+        Object.entries(fieldName).map(([key, field]) => {
+          const name = native[key] ?? display.of(field)
+
+          // CLDR has no data for the locale and answers in English, which the fallback spells anyway
+          return [key, name?.toLowerCase() === field ? undefined : name]
+        })
       ) as Record<string, string | undefined>
     } catch {
       return null
@@ -154,15 +168,18 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     const named = custom?.length === 3 && !/\d/.test(props.placeholder!)
     const names = named ? null : fieldNames()
 
-    return dateSegments(order, separator).map((segment: Segment, i: number) => {
-      if (segment.type === 'separator') {
-        return { text: segment.value, size: segment.value.length, fill: true }
-      }
+    const segments = dateSegments(order, separator)
+    const values = segments.filter((segment: Segment) => segment.type === 'value') as ValueSegment[]
 
-      const text = named ? custom![i / 2] : spell(names?.[segment.key] || segment.key, segment.size)
+    const labels = values.map((segment, i) => named
+      ? custom![i]
+      : spell(names?.[segment.key] || segment.key, segment.size))
 
-      return { text, size: segment.size, fill: text.length === segment.size && new Set(text).size === 1 }
-    })
+    let at = 0
+
+    return segments.map((segment: Segment) => segment.type === 'separator'
+      ? token(segment.value, segment.value.length)
+      : token(labels[at], values[at++].size))
   })
 
   const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
