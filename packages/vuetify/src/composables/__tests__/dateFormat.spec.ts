@@ -111,7 +111,7 @@ describe('dateFormat', () => {
   describe('a field that reads the other way round', () => {
     // CLDR gives arabic a day-first pattern that renders year-first, so typing runs against the format
     function useArabic (assert: (maskDate: MaskDate, format: string) => void) {
-      useDateFormatIn({}, 'ar', true, ({ maskDate, parserFormat }) => assert(maskDate, parserFormat.value))
+      useDateFormatIn({ placeholder: 'yyyy/mm/dd' }, 'ar', true, ({ maskDate, parserFormat }) => assert(maskDate, parserFormat.value))
     }
 
     // the caret stays where the typing left it, the value grows towards the front
@@ -128,6 +128,9 @@ describe('dateFormat', () => {
 
     it('should show the sections in locale order', () => {
       useArabic((maskDate, format) => expect(format).toBe('yyyy/mm/dd'))
+      useDateFormatIn({}, 'ar', true, ({ parserFormat }) => {
+        expect(parserFormat.value).toBe([...'سنة/شهر/يوم'].reverse().join(''))
+      })
     })
 
     it('should fill the day first and the year last', () => {
@@ -165,7 +168,7 @@ describe('dateFormat', () => {
     })
 
     it('should fill a list from the date it starts at', () => {
-      useDateFormatIn({ multiple: true }, 'ar', true, ({ maskDate }) => {
+      useDateFormatIn({ multiple: true, placeholder: 'yyyy/mm/dd' }, 'ar', true, ({ maskDate }) => {
         // the date just closed keeps the separator that opens the next one
         expect(maskDate(', 2025/12/25').value).toBe(', 2025/12/25')
         expect(maskDate('2026/12/26, 2025/12/25').value).toBe('2026/12/26, 2025/12/25')
@@ -237,7 +240,7 @@ describe('dateFormat', () => {
     })
 
     it('should be asked for on the end an rtl field grows towards', () => {
-      useDateFormatIn({}, 'ar', true, ({ maskDate }) => {
+      useDateFormatIn({ placeholder: 'yyyy/mm/dd' }, 'ar', true, ({ maskDate }) => {
         expect(maskDate('').hint).toBe('yyyy/mm/dd')
         expect(maskDate('/12').hint).toBe('yyyy/mm')
         expect(maskDate('2026/12/12').hint).toBe('')
@@ -260,17 +263,83 @@ describe('dateFormat', () => {
     })
 
     it.each<[string, string]>([
-      // a placeholder shaped like the format is the one the hint reads out
       ['TT.MM.JJJJ', 'MM.JJJJ'],
-      // only the first date of it has to line up, whatever follows is the layout's to join
-      ['TT.MM.JJJJ (optional)', 'MM.JJJJ'],
-      // anything else leaves the format to speak for itself
-      ['pick a date', 'mm.yyyy'],
-      ['TT/MM/JJJJ', 'mm.yyyy'],
-      ['31.12.2024', 'mm.yyyy'],
+      // a section that is not one letter per digit is named in full, or not at all
+      ['TT.MM.JJJJ (optional)', 'MM.JJJJ (optional)'],
+      // anything the separator does not split into three sections leaves the locale to name them
+      ['pick a date', 'MM.JJJJ'],
+      ['TT/MM/JJJJ', 'MM.JJJJ'],
+      // a sample date would read as a mask, the locale names the sections instead
+      ['31.12.2024', 'MM.JJJJ'],
     ])('should hint %s left of a day typed under it as %s', (placeholder, expected) => {
       useDateFormatIn({ inputFormat: 'dd.mm.yyyy', placeholder }, 'de-DE', false, ({ getHint }) => {
         expect(getHint('25.')).toBe(expected)
+      })
+    })
+
+    it.each<[string, string, string]>([
+      ['de-DE', 'TT.MM.JJJJ', 'MM.JJJJ'],
+      ['fr-FR', 'jj.mm.aaaa', 'mm.aaaa'],
+      ['pl-PL', 'dd.mm.rrrr', 'mm.rrrr'],
+      ['ru-RU', 'дд.мм.гггг', 'мм.гггг'],
+    ])('should name the sections of %s as %s', (locale, format, expected) => {
+      useDateFormatIn({ inputFormat: 'dd.mm.yyyy' }, locale, false, ({ getHint, parserFormat }) => {
+        expect(parserFormat.value).toBe(format)
+        expect(getHint('25.')).toBe(expected)
+      })
+    })
+
+    it('should name lithuanian sections the letter metai and mėnuo share, as a native input does', () => {
+      useDateFormatIn({}, 'lt-LT', false, ({ parserFormat }) => expect(parserFormat.value).toBe('mmmm-mm-dd'))
+    })
+
+    it('should strike off a section thai abbreviates as a native input does', () => {
+      useDateFormatIn({}, 'th-TH', false, ({ getHint, parserFormat }) => {
+        expect(parserFormat.value).toBe('วว/ดด/ปปปป')
+        expect(getHint('2')).toBe('ว/ดด/ปปปป')
+        expect(getHint('25/')).toBe('ดด/ปปปป')
+      })
+    })
+
+    it.each<[string, string]>([
+      ['az-AZ', 'gg.aa.iiii'],
+      ['km', 'ថ្ងៃ/ខែ/ឆ្នាំ'],
+      ['is-IS', 'dd.mm.áááá'],
+    ])('should name the sections of %s as %s whether or not the browser still knows it', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
+    })
+
+    it('should fall back rather than throw on a locale Intl cannot read', () => {
+      useDateFormatIn({}, '', false, ({ parserFormat }) => expect(parserFormat.value).toBe('mm/dd/yyyy'))
+    })
+
+    it.each<[string, string]>([
+      ['sw-KE', 'dd/mm/yyyy'],
+      ['vi-VN', 'dd/mm/yyyy'],
+      ['tn-BW', 'yyyy-mm-dd'],
+      ['mh-MH', 'mm/dd/yyyy'],
+    ])('should spell %s out as %s', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
+    })
+
+    it.each<[string, string]>([
+      ['ko-KR', '연도.월.일'],
+      ['ja-JP', '年/月/日'],
+    ])('should name the sections of %s as %s', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
+    })
+
+    it.each<[string, string]>([
+      ['', '年/月/日'],
+      ['2', '/月/日'],
+      ['202', '/月/日'],
+      ['2023/', '月/日'],
+      ['2023/1', '/日'],
+      ['2023/11/', '日'],
+      ['2023/11/2', ''],
+    ])('should drop the section a logogram names as soon as %s reaches it', (text, expected) => {
+      useDateFormatIn({ inputFormat: 'yyyy/mm/dd' }, 'ja-JP', false, ({ getHint }) => {
+        expect(getHint(text)).toBe(expected)
       })
     })
 
@@ -292,14 +361,14 @@ describe('dateFormat', () => {
     })
 
     it('should complete an rtl value the field shows without its separator', () => {
-      useDateFormatIn({}, 'ar', true, ({ getHint }) => {
+      useDateFormatIn({ placeholder: 'yyyy/mm/dd' }, 'ar', true, ({ getHint }) => {
         expect(getHint('/12')).toBe('yyyy/mm')
         expect(getHint('12')).toBe('yyyy/mm/')
       })
     })
 
     it('should ask for the next date of an rtl list in front of the ones typed', () => {
-      useDateFormatIn({ multiple: true }, 'ar', true, ({ maskDate }) => {
+      useDateFormatIn({ multiple: true, placeholder: 'yyyy/mm/dd' }, 'ar', true, ({ maskDate }) => {
         expect(maskDate(', 2025/12/25').hint).toBe('yyyy/mm/dd')
       })
     })
