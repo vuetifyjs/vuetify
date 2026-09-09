@@ -3,7 +3,7 @@ import { VSlideGroup, VSlideGroupItem } from '..'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { commands, render, screen, userEvent } from '@test'
+import { commands, page, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 // 196px of visible container (300 minus both 52px affixes) fits 2.8 items, so paging by a
@@ -82,7 +82,7 @@ async function ready () {
   await settled()
 }
 
-async function page (affix: 'prev' | 'next') {
+async function move (affix: 'prev' | 'next') {
   const seen = new Set(fullyVisibleItems())
 
   for (let i = 0; i < ITEM_COUNT && !isDisabled(affix); i++) {
@@ -103,8 +103,8 @@ describe('VSlideGroup', () => {
     renderGroup({ scrollSnap: 'start' }, rtl)
     await ready()
 
-    await expect(page('next')).resolves.toHaveLength(ITEM_COUNT)
-    await expect(page('prev')).resolves.toHaveLength(ITEM_COUNT)
+    await expect(move('next')).resolves.toHaveLength(ITEM_COUNT)
+    await expect(move('prev')).resolves.toHaveLength(ITEM_COUNT)
   })
 
   it.each(['start', 'center', 'end'] as const)('should rest on a snap position when selecting with scroll-snap %s', async align => {
@@ -159,7 +159,7 @@ describe('VSlideGroup', () => {
 
     expect(isDisabled('prev')).toBe(true)
 
-    await page('next')
+    await move('next')
 
     expect(isDisabled('next')).toBe(true)
     expect(isDisabled('prev')).toBe(false)
@@ -204,5 +204,100 @@ describe('VSlideGroup', () => {
 
     // Half the 196px container, or the pixel count with and without a unit.
     await expect(settled()).resolves.toBe(distance === '150px' ? 150 : 98)
+  })
+
+  it('should apply selectedClass and toggle selection on click', async () => {
+    render(() => (
+      <VSlideGroup selectedClass="bg-primary">
+        { Array.from({ length: 6 }, (_, i) => (
+          <VSlideGroupItem key={ i } value={ i }>
+            { ({ selectedClass, toggle }: any) => (
+              <div data-testid={ `item-${i}` } class={ selectedClass } onClick={ toggle }>{ i }</div>
+            )}
+          </VSlideGroupItem>
+        ))}
+      </VSlideGroup>
+    ))
+
+    await userEvent.click(screen.getByTestId('item-0'))
+    expect(screen.getByTestId('item-0')).toHaveClass('bg-primary')
+
+    await userEvent.click(screen.getByTestId('item-3'))
+    expect(screen.getByTestId('item-3')).toHaveClass('bg-primary')
+    expect(screen.getByTestId('item-0')).not.toHaveClass('bg-primary')
+  })
+
+  it('should show arrows on desktop only when showArrows is "desktop"', async () => {
+    render(() => (
+      <VSlideGroup showArrows="desktop" style="width: 300px">
+        { Array.from({ length: 6 }, (_, i) => (
+          <VSlideGroupItem key={ i }>
+            <div style="width: 70px; height: 40px">{ i }</div>
+          </VSlideGroupItem>
+        ))}
+      </VSlideGroup>
+    ), null, { display: { mobileBreakpoint: 'sm' } })
+
+    await page.viewport(500, 600)
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).toBeNull()
+
+    await page.viewport(800, 600)
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).not.toBeNull()
+  })
+
+  it('should show arrows on mobile only when showArrows is "mobile"', async () => {
+    await page.viewport(800, 600)
+
+    render(() => (
+      <VSlideGroup showArrows="mobile" style="width: 300px">
+        { Array.from({ length: 3 }, (_, i) => (
+          <VSlideGroupItem key={ i }>
+            <div style="width: 70px; height: 40px">{ i }</div>
+          </VSlideGroupItem>
+        ))}
+      </VSlideGroup>
+    ), null, { display: { mobileBreakpoint: 'sm' } })
+
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).toBeNull()
+
+    await page.viewport(500, 400)
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).not.toBeNull()
+  })
+
+  it('should show arrows only when content overflows the container', async () => {
+    await page.viewport(800, 200)
+
+    render(() => (
+      <VSlideGroup showArrows>
+        { Array.from({ length: 6 }, (_, i) => (
+          <VSlideGroupItem key={ i }>
+            <div style="width: 70px; height: 40px">{ i }</div>
+          </VSlideGroupItem>
+        ))}
+      </VSlideGroup>
+    ))
+
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).toBeNull()
+
+    await page.viewport(400, 200)
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).not.toBeNull()
+  })
+
+  it('should scroll the initially selected item into view', async () => {
+    renderGroup({ modelValue: 7 })
+    await ready()
+
+    expect(fullyVisibleItems()).toContain(7)
+  })
+
+  it('should update visibility after a native scroll', async () => {
+    renderGroup()
+    await ready()
+
+    container().scrollLeft = 450
+    await settled()
+
+    expect(fullyVisibleItems()).not.toContain(1)
+    expect(fullyVisibleItems()).toContain(7)
   })
 })
