@@ -10,6 +10,62 @@ import { commands, isClickable, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VOverlay', () => {
+  describe('CSS zoom', () => {
+    const zoomLevels = [
+      ['html', 0.8],
+      ['html', 1.25],
+      ['body', 0.8],
+      ['body', 1.25],
+    ] as const
+
+    afterEach(() => {
+      document.documentElement.style.zoom = ''
+      document.body.style.zoom = ''
+    })
+
+    async function open (
+      target: 'html' | 'body',
+      zoom: number,
+      location: 'top end' | 'top start',
+      origin: 'bottom end' | 'bottom start'
+    ) {
+      const root = target === 'html' ? document.documentElement : document.body
+      root.style.zoom = String(zoom)
+
+      render(() => (
+        <VOverlay locationStrategy="connected" location={ location } origin={ origin } transition={ false }>
+          {{
+            activator: ({ props }) => (
+              <button { ...props } data-testid="activator" style="position: fixed; right: 32px; bottom: 32px; width: 48px; height: 48px;">
+                Open
+              </button>
+            ),
+            default: () => <div style="width: 160px; height: 100px;">Content</div>,
+          }}
+        </VOverlay>
+      ))
+
+      await userEvent.click(screen.getByTestId('activator'))
+      await commands.waitStable('.v-overlay__content')
+
+      return screen.getByCSS('.v-overlay__content').getBoundingClientRect()
+    }
+
+    it.each(zoomLevels)('should stay attached to the activator with %s zoom %s', async (target, zoom) => {
+      const content = await open(target, zoom, 'top end', 'bottom end')
+      const activator = screen.getByTestId('activator').getBoundingClientRect()
+
+      expect(Math.abs(content.right - activator.right)).toBeLessThan(2)
+      expect(Math.abs(content.bottom - activator.top)).toBeLessThan(2)
+    })
+
+    it.each(zoomLevels)('should stay inside the viewport with %s zoom %s', async (target, zoom) => {
+      const content = await open(target, zoom, 'top start', 'bottom start')
+
+      expect(content.right).toBeLessThanOrEqual(window.innerWidth)
+    })
+  })
+
   it('without activator', async () => {
     const model = ref(false)
     render(() => (
