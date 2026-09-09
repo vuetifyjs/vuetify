@@ -67,6 +67,21 @@ export interface IconAliases {
   arrowleft: IconValue
   arrowright: IconValue
   backspace: IconValue
+
+  // Media — shared by VVideo and VAudio. Every alias-defining iconset already supplies
+  // these, so declaring them changes no behaviour; it makes a set that omits one a type
+  // error rather than a blank button at runtime.
+  play: IconValue
+  pause: IconValue
+  stop: IconValue
+  skipForward: IconValue
+  skipBackward: IconValue
+  fullscreen: IconValue
+  fullscreenExit: IconValue
+  volumeHigh: IconValue
+  volumeMedium: IconValue
+  volumeLow: IconValue
+  volumeOff: IconValue
 }
 
 export interface IconProps {
