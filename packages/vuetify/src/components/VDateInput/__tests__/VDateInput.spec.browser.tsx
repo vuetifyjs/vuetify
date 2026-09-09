@@ -1,5 +1,6 @@
 // Components
 import { VDateInput } from '../VDateInput'
+import { VLocaleProvider } from '@/components/VLocaleProvider/VLocaleProvider'
 
 // Utilities
 import { commands, render, screen, userEvent } from '@test'
@@ -657,6 +658,19 @@ describe('VDateInput', () => {
         expect(model.value).toHaveLength(2)
       })
 
+      it('should follow the nearest locale provider, not the app around it', async () => {
+        render(() => (
+          <VLocaleProvider rtl={ false }>
+            <VDateInput modelValue={ null } />
+          </VLocaleProvider>
+        ), null, {
+          locale: { locale: 'ar', rtl: { ar: true }, messages: { ar } },
+        })
+
+        expect(screen.getByCSS('.v-date-input')).not.toHaveClass('v-date-input--rtl')
+        expect(getComputedStyle(screen.getByCSS('input')).textAlign).not.toBe('right')
+      })
+
       it('should hold the value against the end it grows away from', async () => {
         const { input, hint } = await typeInRtl()
 
@@ -711,6 +725,18 @@ describe('VDateInput', () => {
 
       await userEvent.keyboard('023')
       expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('2023/月/日')
+    })
+
+    it('should isolate each named section from the ones beside it', async () => {
+      const { element } = render(() => <VDateInput placeholder="سنة/شهر/يوم" inputFormat="yyyy/mm/dd" />)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('2')
+
+      const hint = screen.getByCSS('.v-date-input__format-hint')
+
+      // bidi reorders neighbouring rtl runs, isolation holds each section where the format put it
+      expect([...hint.querySelectorAll('bdi bdi')].map(el => el.textContent)).toEqual(['شهر', 'يوم'])
     })
 
     it('should keep hinting the format under a placeholder it cannot line up with', async () => {

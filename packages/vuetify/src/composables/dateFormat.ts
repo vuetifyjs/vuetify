@@ -18,6 +18,14 @@ type HintToken = {
 
 const fieldName = { y: 'year', m: 'month', d: 'day' } as const
 
+const rtlScript = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Thaana}]/u
+const mirrorRtl = (text: string) => rtlScript.test(text) ? [...text].reverse().join('') : text
+
+const nativeName: Record<string, Record<string, string>> = {
+  ar: { y: 'سنة', m: 'شهر' },
+  ko: { y: '연도' },
+}
+
 // Types
 export interface DateFormatProps {
   inputFormat?: string
@@ -120,11 +128,14 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   })
 
   function fieldNames () {
+    const tag = locale.value || 'en'
+
     try {
-      const display = new Intl.DisplayNames(locale.value || 'en', { type: 'dateTimeField' })
+      const display = new Intl.DisplayNames(tag, { type: 'dateTimeField' })
+      const native = nativeName[tag.split('-')[0]] ?? {}
 
       return Object.fromEntries(
-        Object.entries(fieldName).map(([key, field]) => [key, display.of(field)])
+        Object.entries(fieldName).map(([key, field]) => [key, native[key] ?? display.of(field)])
       ) as Record<string, string | undefined>
     } catch {
       return null
@@ -340,6 +351,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     parseDate,
     formatDate,
     separator: toRef(() => currentFormat.value.separator),
-    parserFormat: toRef(() => hintTokens.value.map(token => token.text).join('')),
+    parserFormat: toRef(() => mirrorRtl(hintTokens.value.map(token => token.text).join(''))),
   }
 }

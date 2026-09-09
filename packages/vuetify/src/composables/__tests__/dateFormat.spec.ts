@@ -128,7 +128,9 @@ describe('dateFormat', () => {
 
     it('should show the sections in locale order', () => {
       useArabic((maskDate, format) => expect(format).toBe('yyyy/mm/dd'))
-      useDateFormatIn({}, 'ar', true, ({ parserFormat }) => expect(parserFormat.value).toBe('السنة/الشهر/يوم'))
+      useDateFormatIn({}, 'ar', true, ({ parserFormat }) => {
+        expect(parserFormat.value).toBe([...'سنة/شهر/يوم'].reverse().join(''))
+      })
     })
 
     it('should fill the day first and the year last', () => {
@@ -285,6 +287,14 @@ describe('dateFormat', () => {
         expect(parserFormat.value).toBe(format)
         expect(getHint('25.')).toBe(expected)
       })
+    })
+
+    it.each<[string, string]>([
+      // CLDR names these fields as it would in prose, a native date input names the bare unit
+      ['ko-KR', '연도.월.일'],
+      ['ja-JP', '年/月/日'],
+    ])('should name the sections of %s as %s', (locale, expected) => {
+      useDateFormatIn({}, locale, false, ({ parserFormat }) => expect(parserFormat.value).toBe(expected))
     })
 
     it.each<[string, string]>([
