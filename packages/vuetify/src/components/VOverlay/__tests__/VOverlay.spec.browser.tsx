@@ -10,6 +10,44 @@ import { commands, isClickable, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 
 describe('VOverlay', () => {
+  it.each([
+    ['html', 0.8],
+    ['html', 1],
+    ['html', 1.25],
+    ['body', 0.8],
+    ['body', 1],
+    ['body', 1.25],
+  ] as const)('should stay attached near viewport edges with %s zoom %s', async (target, zoom) => {
+    const element = target === 'html' ? document.documentElement : document.body
+    const originalZoom = element.style.zoom
+    element.style.zoom = String(zoom)
+
+    try {
+      render(() => (
+        <VOverlay locationStrategy="connected" location="top end" origin="bottom end" transition={ false }>
+          {{
+            activator: ({ props }) => (
+              <button { ...props } data-testid="activator" style="position: fixed; right: 32px; bottom: 32px; width: 48px; height: 48px;">
+                Open
+              </button>
+            ),
+            default: () => <div style="width: 160px; height: 100px;">Content</div>,
+          }}
+        </VOverlay>
+      ))
+
+      await userEvent.click(screen.getByTestId('activator'))
+      await commands.waitStable('.v-overlay__content')
+
+      const activator = screen.getByTestId('activator').getBoundingClientRect()
+      const content = screen.getByCSS('.v-overlay__content').getBoundingClientRect()
+      expect(Math.abs(content.right - activator.right)).toBeLessThan(2)
+      expect(Math.abs(content.bottom - activator.top)).toBeLessThan(2)
+    } finally {
+      element.style.zoom = originalZoom
+    }
+  })
+
   it('without activator', async () => {
     const model = ref(false)
     render(() => (
