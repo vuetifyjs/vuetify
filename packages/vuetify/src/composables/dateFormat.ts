@@ -8,6 +8,15 @@ import { consoleWarn, isString, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
+import type { Segment } from '@/composables/segmentedMask'
+
+type HintToken = {
+  text: string
+  size: number
+  fill: boolean // spelled one character per digit, so typing can strike it off letter by letter
+}
+
+const fieldName = { y: 'year', m: 'month', d: 'day' } as const
 
 // Types
 export interface DateFormatProps {
@@ -21,13 +30,6 @@ class DateFormatSpec {
     public readonly order: string, // mdy | dmy | ymd
     public readonly separator: string // / | - | .
   ) { }
-
-  get format () {
-    return this.order.split('')
-      .map(sign => `${sign}${sign}`)
-      .join(this.separator)
-      .replace('yy', 'yyyy')
-  }
 
   static canBeParsed (v: any) {
     if (!isString(v)) return false
@@ -117,14 +119,39 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     }
   })
 
-  const hintFormat = toRef(() => {
-    const { format, separator } = currentFormat.value
-    const custom = props.placeholder?.slice(0, format.length)
+  function fieldNames () {
+    try {
+      const display = new Intl.DisplayNames(locale.value || 'en', { type: 'dateTimeField' })
 
-    return custom?.length === format.length && !/\d/.test(custom) &&
-      [...format].every((char, i) => (char === separator) === (custom[i] === separator))
-      ? custom
-      : format
+      return Object.fromEntries(
+        Object.entries(fieldName).map(([key, field]) => [key, display.of(field)])
+      ) as Record<string, string | undefined>
+    } catch {
+      return null
+    }
+  }
+
+  function spell (name: string, size: number) {
+    return /[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Greek}]/u.test([...name][0])
+      ? [...name][0].repeat(size)
+      : name
+  }
+
+  const hintTokens = toRef((): HintToken[] => {
+    const { order, separator } = currentFormat.value
+    const custom = props.placeholder?.split(separator)
+    const named = custom?.length === 3 && !/\d/.test(props.placeholder!)
+    const names = named ? null : fieldNames()
+
+    return dateSegments(order, separator).map((segment: Segment, i: number) => {
+      if (segment.type === 'separator') {
+        return { text: segment.value, size: segment.value.length, fill: true }
+      }
+
+      const text = named ? custom![i / 2] : spell(names?.[segment.key] || segment.key, segment.size)
+
+      return { text, size: segment.size, fill: text.length === segment.size && new Set(text).size === 1 }
+    })
   })
 
   const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
@@ -192,11 +219,32 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   function remainingFormat (width: number, dates: number) {
     const { bounded, join, limit } = layout.value
-    const template = Array.from({ length: bounded ? limit : dates }, () => hintFormat.value).join(join)
+    const tokens = Array.from({ length: bounded ? limit : dates }, () => hintTokens.value)
+      .flatMap((date, i) => i ? [{ text: join, size: join.length, fill: true }, ...date] : date)
 
-    return isRtl.value
-      ? template.slice(0, template.length - width)
-      : template.slice(width)
+    // the value grows from the end the format is read from, the hint is the stretch it has not reached
+    const ordered = isRtl.value ? [...tokens].reverse() : tokens
+    let left = width
+
+    const parts = ordered.map(({ text, size, fill }) => {
+      if (left >= size) {
+        left -= size
+        return ''
+      }
+
+      const shown = fill
+        ? (isRtl.value ? text.slice(0, size - left) : text.slice(left))
+        : (left ? '' : text)
+
+      left = 0
+
+      return shown
+    })
+
+    return {
+      text: (isRtl.value ? parts.reverse() : parts).join(''),
+      covered: width >= tokens.reduce((total, token) => total + token.size, 0),
+    }
   }
 
   function maskInTypingOrder (input: string, caret: number) {
@@ -239,7 +287,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       }
     }
 
-    const hint = remainingFormat(width, dates)
+    const { text: hint, covered } = remainingFormat(width, dates)
 
     return {
       value: result,
@@ -247,7 +295,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       width,
       gaps,
       hint,
-      complete: layout.value.bounded && !hint,
+      complete: layout.value.bounded && covered,
     }
   }
 
@@ -260,10 +308,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     const at = caret >= input.length ? typed.value.length : typed.caret
     const masked = maskInTypingOrder(typed.value, at)
     const shown = mirror(masked.value, masked.caret)
-    const filled = !inPlace &&
-      masked.caret >= masked.value.length &&
-      layout.value.bounded &&
-      !masked.hint
+    const filled = !inPlace && masked.caret >= masked.value.length && masked.complete
 
     return {
       ...masked,
@@ -295,6 +340,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     parseDate,
     formatDate,
     separator: toRef(() => currentFormat.value.separator),
-    parserFormat: toRef(() => currentFormat.value.format),
+    parserFormat: toRef(() => hintTokens.value.map(token => token.text).join('')),
   }
 }
