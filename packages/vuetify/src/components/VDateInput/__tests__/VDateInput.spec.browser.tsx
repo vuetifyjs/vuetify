@@ -432,10 +432,10 @@ describe('VDateInput', () => {
         await userEvent.click(element)
 
         const input = screen.getByCSS('input') as HTMLInputElement
-        const hint = screen.getByCSS('.v-date-input__format-hint')
+        const getHint = () => screen.getByCSS('.v-date-input__format-hint')
 
         // what the hint still asks for, the rest of it mirrors the typed value
-        return { input, hint, left: () => hint.textContent!.slice(input.value.length) }
+        return { input, hint: getHint, left: () => getHint().textContent!.slice(input.value.length) }
       }
 
       it('should fill the section the format shows last', async () => {
@@ -661,7 +661,7 @@ describe('VDateInput', () => {
 
         await userEvent.keyboard('2026')
 
-        const span = hint.querySelector('span')!
+        const span = hint().querySelector('span')!
 
         // the sections fill towards the front, so the value is anchored at the back
         expect(getComputedStyle(input).direction).toBe('ltr')
@@ -682,6 +682,29 @@ describe('VDateInput', () => {
       render(() => <VDateInput { ...props } modelValue={ props.multiple ? [] : null } />)
 
       expect(screen.getByCSS('input')).toHaveAttribute('placeholder', expected)
+    })
+
+    it('should hint a placeholder laid out like the format in place of it', async () => {
+      const { element } = render(() => <VDateInput placeholder="TT.MM.JJJJ" inputFormat="dd.mm.yyyy" />)
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(element)
+
+      expect(input).toHaveAttribute('placeholder', 'TT.MM.JJJJ')
+      expect(screen.queryByCSS('.v-date-input__format-hint')).toBeNull()
+
+      await userEvent.keyboard('25')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.MM.JJJJ')
+    })
+
+    it('should keep hinting the format under a placeholder it cannot line up with', async () => {
+      const { element } = render(() => <VDateInput placeholder="pick a date" inputFormat="dd.mm.yyyy" />)
+
+      await userEvent.click(element)
+      expect(screen.getByCSS('input')).toHaveAttribute('placeholder', 'pick a date')
+
+      await userEvent.keyboard('25')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.mm.yyyy')
     })
 
     it.each<{ props: VDateInput['$props'], keys: string, expected: string }>([

@@ -259,6 +259,31 @@ describe('dateFormat', () => {
       useDateFormatIn({ inputFormat: 'mm/dd/yyyy' }, 'en-US', false, ({ getHint }) => expect(getHint(text)).toBe(expected))
     })
 
+    it.each<[string, string]>([
+      // a placeholder shaped like the format is the one the hint reads out
+      ['TT.MM.JJJJ', 'MM.JJJJ'],
+      // only the first date of it has to line up, whatever follows is the layout's to join
+      ['TT.MM.JJJJ (optional)', 'MM.JJJJ'],
+      // anything else leaves the format to speak for itself
+      ['pick a date', 'mm.yyyy'],
+      ['TT/MM/JJJJ', 'mm.yyyy'],
+      ['31.12.2024', 'mm.yyyy'],
+    ])('should hint %s left of a day typed under it as %s', (placeholder, expected) => {
+      useDateFormatIn({ inputFormat: 'dd.mm.yyyy', placeholder }, 'de-DE', false, ({ getHint }) => {
+        expect(getHint('25.')).toBe(expected)
+      })
+    })
+
+    it('should hint a range from the first date of a placeholder written out for both', () => {
+      useDateFormatIn({
+        inputFormat: 'dd.mm.yyyy',
+        multiple: 'range',
+        placeholder: 'TT.MM.JJJJ - TT.MM.JJJJ',
+      }, 'de-DE', false, ({ getHint }) => {
+        expect(getHint('25.')).toBe('MM.JJJJ - TT.MM.JJJJ')
+      })
+    })
+
     it('should complete a year shown without the digit the mask reads a century from', () => {
       useDateFormatIn({ inputFormat: 'yyyy/mm/dd' }, 'en-US', false, ({ getHint }) => {
         expect(getHint('025/')).toBe('mm/dd')

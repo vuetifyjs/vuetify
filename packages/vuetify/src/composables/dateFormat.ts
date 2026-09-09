@@ -13,6 +13,7 @@ import type { Ref } from 'vue'
 export interface DateFormatProps {
   inputFormat?: string
   multiple?: boolean | 'range' | number | (string & {})
+  placeholder?: string
 }
 
 class DateFormatSpec {
@@ -116,6 +117,16 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     }
   })
 
+  const hintFormat = toRef(() => {
+    const { format, separator } = currentFormat.value
+    const custom = props.placeholder?.slice(0, format.length)
+
+    return custom?.length === format.length && !/\d/.test(custom) &&
+      [...format].every((char, i) => (char === separator) === (custom[i] === separator))
+      ? custom
+      : format
+  })
+
   const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
 
   function mirror (text: string, caret = -1) {
@@ -181,8 +192,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   function remainingFormat (width: number, dates: number) {
     const { bounded, join, limit } = layout.value
-    const { format } = currentFormat.value
-    const template = Array.from({ length: bounded ? limit : dates }, () => format).join(join)
+    const template = Array.from({ length: bounded ? limit : dates }, () => hintFormat.value).join(join)
 
     return isRtl.value
       ? template.slice(0, template.length - width)
