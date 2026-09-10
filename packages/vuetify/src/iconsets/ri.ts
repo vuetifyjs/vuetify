@@ -26,6 +26,7 @@ const aliases: IconAliases = {
   checkboxOn: 'i-ri:checkbox-fill',
   checkboxOff: 'i-ri:checkbox-line',
   checkboxIndeterminate: 'i-ri:checkbox-indeterminate-line',
+  clock: 'i-ri:time-line',
   delimiter: 'i-ri:checkbox-blank-circle-fill', // for carousel
   sortAsc: 'i-ri:arrow-up-line',
   sortDesc: 'i-ri:arrow-down-line',

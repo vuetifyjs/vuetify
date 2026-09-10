@@ -167,6 +167,20 @@ describe('VTimePicker', () => {
         expect(model.value).toBe('09:45')
       })
 
+      it('should not switch periods when readonly', async () => {
+        const model = ref<string | null>('09:45')
+        render(() => (
+          <VTimePicker
+            v-model={ model.value }
+            variant="input"
+            readonly
+          />
+        ))
+
+        await userEvent.click(screen.getByCSS('.v-time-picker-controls__ampm__pm'))
+        expect(model.value).toBe('09:45')
+      })
+
       it('should preserve hour 12 when switching periods', async () => {
         const model = ref<string | null>('00:15')
         render(() => (

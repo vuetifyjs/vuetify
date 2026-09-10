@@ -26,6 +26,7 @@ const aliases: IconAliases = {
   checkboxOn: 'i-lucide:square-check',
   checkboxOff: 'i-lucide:square',
   checkboxIndeterminate: 'i-lucide:square-minus',
+  clock: 'i-lucide:clock',
   delimiter: mdiAliases.delimiter, // for carousel
   sortAsc: 'i-lucide:arrow-up',
   sortDesc: 'i-lucide:arrow-down',

@@ -1,6 +1,6 @@
 // Composables
 import { overtype } from '../edit'
-import { dateSegments } from '../presets'
+import { dateSegments, timeSegments } from '../presets'
 import { maskSegmentsFrom } from '../segmentedMask'
 
 function typing (segments: Parameters<typeof maskSegmentsFrom>[0], keys: string) {
@@ -25,12 +25,14 @@ describe('segmentedMask', () => {
       expect(typing(dateSegments('mdy', '/'), '00')).toBe('0')
       expect(typing(dateSegments('mdy', '/'), '0/')).toBe('01/')
       expect(typing(dateSegments('mdy', '/'), '005')).toBe('05/')
+      expect(typing(timeSegments(), '00')).toBe('00:')
     })
 
     it('should cap a section at its limit', () => {
       expect(typing(dateSegments('mdy', '/'), '19')).toBe('12/')
       expect(typing(dateSegments('mdy', '/'), '1239')).toBe('12/31/')
       expect(typing(dateSegments('ymd', '-'), '20250229')).toBe('2025-02-28')
+      expect(typing(timeSegments(), '2965')).toBe('23:06')
     })
 
     it('should limit the day to the length of the month', () => {
@@ -56,6 +58,17 @@ describe('segmentedMask', () => {
 
     it('should flip an existing period in place', () => {
       expect(overtype('01:30 PM', 0, 'a')).toMatchObject({ value: '01:30 AM', caret: 8 })
+    })
+  })
+
+  describe('timeSegments', () => {
+    it('should mask a 24-hour time', () => {
+      expect(typing(timeSegments(), '1330')).toBe('13:30')
+      expect(typing(timeSegments(), '9')).toBe('09:')
+    })
+
+    it('should mask seconds when enabled', () => {
+      expect(typing(timeSegments({ useSeconds: true }), '133045')).toBe('13:30:45')
     })
   })
 })
