@@ -28,8 +28,8 @@ describe('size', () => {
     [{ size: 'default' }, undefined],
     [{ size: 'large' }, undefined],
     [{ size: 'x-large' }, undefined],
-    [{ size: '100px' }, { width: '100px', height: '100px' }],
-    [{ size: 50 }, { width: '50px', height: '50px' }],
+    [{ size: '100px' }, { '--test-height': '100px' }],
+    [{ size: 50 }, { '--test-height': '50px' }],
     [{ size: undefined }, undefined],
   ] as const)('should return the correct styles given value %p', (...args) => {
     const [input, expected] = args

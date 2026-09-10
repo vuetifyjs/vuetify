@@ -28,8 +28,7 @@ export function useSize (
       sizeClasses = `${name}--size-${size}`
     } else if (size) {
       sizeStyles = {
-        width: convertToUnit(size),
-        height: convertToUnit(size),
+        [`--${name}-height`]: convertToUnit(size),
       }
     }
     return { sizeClasses, sizeStyles }

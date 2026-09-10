@@ -82,4 +82,8 @@
   @return $color
 
 @function roundEven($val)
-  @return 2 * math.round($val * .5)
+  @return round(nearest, $val, 2px)
+
+// https://caniuse.com/mdn-css_types_calc_typed_division_produces_unitless_number
+@function css-div($a, $b)
+  @return tan(atan2($a, $b))
