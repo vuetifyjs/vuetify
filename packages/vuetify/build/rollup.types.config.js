@@ -29,6 +29,8 @@ function createTypesConfig (input, output, renderChunk, filter) {
     const options = {
       input: file,
       output: [{ file: outputFile, format: 'es', sourcemap: false }],
+      // prevent inlining types from internal-types on ESM build
+      external: output.startsWith('dist/') ? undefined : ['./internal-types.js'],
       plugins: [
         dts(),
         {
