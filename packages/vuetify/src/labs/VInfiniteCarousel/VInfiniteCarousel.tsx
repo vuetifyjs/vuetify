@@ -76,7 +76,7 @@ export const makeVInfiniteCarouselProps = propsFactory({
     default: '20%',
   },
   showArrows: {
-    type: [Boolean, String],
+    type: [Boolean, String] as PropType<boolean | 'hover'>,
     validator: (v: any) => isBoolean(v) || v === 'hover',
   },
   prevIcon: {

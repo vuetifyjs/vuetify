@@ -6,7 +6,7 @@
     "gap": "Space between items. Also sets the seam between repeated copies, so both stay in step.",
     "draggable": "Allows scrubbing the content by dragging it with a pointer or finger.",
     "shiftDistance": "How far one arrow click moves the content.",
-    "showArrows": "Displays navigation arrows over the content. When set to `hover`, reveals arrows upon hover or focus.",
+    "showArrows": "Displays navigation arrows over the content.",
     "prevIcon": "Icon used by the arrow that moves towards the start.",
     "nextIcon": "Icon used by the arrow that moves towards the end."
   },
