@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## August 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 September 11th, 2026
+
+Vuetify 4.2 went into beta on August 27 and stable on September 2. It makes @vuetify/v0 the framework's first (and only) runtime dependency. Release included some cleanup and fixes that were too risky for patch releases so you might want to read this post closely. The team improved VDateInput, selection dropdowns, and many improvements landed in v0 for headless DataTable, DataGrid and Alert... { .text-medium-emphasis }
+
+[Read More](/blog/august-2026-update/) { .text-end }
+
 ## July 2026 Update
 
 🖊️ John Leider • 📅 August 11th, 2026
