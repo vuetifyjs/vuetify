@@ -6,6 +6,7 @@ import { VIconBtn } from '@/components/VIconBtn'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { useRtl } from '@/composables/locale'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeTagProps } from '@/composables/tag'
 import { useVirtualFocus } from '@/composables/virtualFocus'
@@ -17,7 +18,6 @@ import {
   flattenFragments,
   focusableChildren,
   genericComponent,
-  IN_BROWSER,
   isBoolean,
   isObject,
   isString,
@@ -95,6 +95,8 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
   props: makeVInfiniteCarouselProps(),
 
   setup (props, { slots }) {
+    const { isRtl } = useRtl()
+    const containerRef = ref<HTMLElement>()
     const trackRef = ref<HTMLElement>()
     const probeRef = ref<HTMLElement>()
     const items = shallowRef<HTMLElement[]>([])
@@ -118,11 +120,10 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       return { speed: Math.max(0, Number(speed) || 0), reverse, pauseOnHover }
     })
 
-    const isHeld = toRef(() => !autoPlayConfig.value.speed)
+    const hasAutoPlay = toRef(() => !!autoPlayConfig.value.speed)
     const isReversed = toRef(() => autoPlayConfig.value.reverse)
-    const loopDuration = toRef(() => isHeld.value ? 1 : loopDistance.value / autoPlayConfig.value.speed)
+    const loopDuration = toRef(() => hasAutoPlay.value ? loopDistance.value / autoPlayConfig.value.speed * 1000 : 1000)
 
-    const containerRef = ref<HTMLElement>()
     const { resizeRef: viewportRef } = useResizeObserver(onResize)
     const { resizeRef: contentRef } = useResizeObserver(onResize)
 
@@ -151,12 +152,13 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
         ]
 
       const gapSize = parseFloat(gap) || 0
+      const endPadding = parseFloat(paddingEnd)
 
-      viewportSize.value = outerSize - parseFloat(paddingStart) - parseFloat(paddingEnd)
+      viewportSize.value = outerSize - parseFloat(paddingStart) - endPadding
       loopDistance.value = groupSize + gapSize
 
       copies.value = loopDistance.value > 0
-        ? Math.min(MAX_COPIES, 1 + Math.ceil((viewportSize.value + parseFloat(paddingEnd) + gapSize) / loopDistance.value))
+        ? Math.min(MAX_COPIES, 1 + Math.ceil((viewportSize.value + endPadding + gapSize) / loopDistance.value))
         : 1
     }
 
@@ -171,7 +173,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       animation?.cancel()
       animation = undefined
 
-      if (!IN_BROWSER || !track || !loopDuration.value) return
+      if (!track || !loopDuration.value) return
 
       const end = isVertical.value
         ? `translateY(-${loopDistance.value}px)`
@@ -180,43 +182,43 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
       animation = track.animate(
         isReversed.value ? keyframes.reverse() : keyframes,
-        { duration: loopDuration.value * 1000, iterations: Infinity, easing: 'linear' }
+        { duration: loopDuration.value, iterations: Infinity, easing: 'linear' }
       )
       seek(previousShift)
 
       if (isPaused()) animation.pause()
     }
 
-    watch([isVertical, isHeld, isReversed, loopDistance, loopDuration], syncAnimation, { flush: 'post' })
+    watch([isVertical, hasAutoPlay, isReversed, loopDistance, loopDuration], syncAnimation, { flush: 'post' })
     watch(() => props.direction, onResize, { flush: 'post' })
 
     function currentShift () {
-      const total = loopDuration.value * 1000
-      if (!animation || !total) return 0
+      const duration = loopDuration.value
+      if (!animation || !duration) return 0
 
-      const progress = Number(animation.currentTime ?? 0) % total / total
+      const progress = Number(animation.currentTime ?? 0) % duration / duration
 
       return (isReversed.value ? 1 - progress : progress) * loopDistance.value
     }
 
     function seek (value: number) {
-      const total = loopDuration.value * 1000
+      const duration = loopDuration.value
       if (!animation || !loopDistance.value) return
 
       const wrapped = ((value % loopDistance.value) + loopDistance.value) % loopDistance.value
       const progress = wrapped / loopDistance.value
 
-      animation.currentTime = Math.min((isReversed.value ? 1 - progress : progress) * total, total - 1)
+      animation.currentTime = Math.min((isReversed.value ? 1 - progress : progress) * duration, duration - 1)
     }
 
     let pendingShift = 0
     let stepFrame = 0
-    let stepStamp = 0
+    let lastStepTime = 0
 
     function advanceStep (now: number) {
-      const decayed = pendingShift * (1 - Math.exp(-(now - stepStamp) / STEP_DECAY))
+      const decayed = pendingShift * (1 - Math.exp(-(now - lastStepTime) / STEP_DECAY))
 
-      stepStamp = now
+      lastStepTime = now
       pendingShift -= decayed
       seek(currentShift() + decayed)
 
@@ -253,7 +255,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       pendingShift += amount
 
       if (!stepFrame) {
-        stepStamp = performance.now()
+        lastStepTime = performance.now()
         stepFrame = requestAnimationFrame(advanceStep)
       }
     }
@@ -292,10 +294,11 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     let hasFocusableItems = false
 
     function onKeydown (e: KeyboardEvent) {
-      const isRtl = !isVertical.value && getComputedStyle(e.currentTarget as HTMLElement).direction === 'rtl'
-      const [previousKey, nextKey] = isVertical.value ? ['ArrowUp', 'ArrowDown']
-        : isRtl ? ['ArrowRight', 'ArrowLeft']
-        : ['ArrowLeft', 'ArrowRight']
+      const [previousKey, nextKey] = isVertical.value
+        ? ['ArrowUp', 'ArrowDown']
+        : isRtl.value
+          ? ['ArrowRight', 'ArrowLeft']
+          : ['ArrowLeft', 'ArrowRight']
 
       if (!hasFocusableItems) {
         if (e.key === previousKey) step(-1)
@@ -313,7 +316,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     function isPaused () {
       const container = containerRef.value
 
-      return isHeld.value ||
+      return !hasAutoPlay.value ||
         isDragging.value ||
         isHoveringInteractive.value ||
         PREFERS_REDUCED_MOTION() ||
@@ -407,9 +410,9 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       // sticky: the tabindex set below keeps this true even if the content later loses its focusables
       hasFocusableItems = !!contentRef.el && focusableChildren(contentRef.el, false).length > 0
       if (hasFocusableItems) {
-        for (const item of items.value) {
+        items.value.forEach(item => {
           item.tabIndex = -1
-        }
+        })
       }
 
       trackRef.value?.querySelectorAll<HTMLElement>('.v-infinite-carousel__group[aria-hidden]')

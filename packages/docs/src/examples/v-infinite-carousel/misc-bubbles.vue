@@ -2,9 +2,9 @@
   <v-infinite-carousel :auto-play="{ speed: 40 }" gap="0" draggable mask>
     <div class="bubbles">
       <v-sheet
-        v-for="([x, y, s], index) in bubbles"
+        v-for="([x, y, scale], index) in bubbles"
         :key="index"
-        :style="{ left: `${x}px`, top: `${y}px`, scale: s }"
+        :style="{ left: `${x}px`, top: `${y}px`, scale }"
         class="bubble"
         elevation="4"
         rounded="circle"
@@ -31,9 +31,7 @@
     'mdi-twitter',
   ]
 
-  // [x, y, scale], baked with best-candidate sampling that wraps around the 880px tile: at least
-  // 32px between any two bubbles at rest, seam included. CSS math cannot see where its siblings
-  // landed, so it can only space bubbles evenly on a lattice, which always shows
+  // [x, y, scale], at least 32px apart, including across the seam of the 880px tile
   const bubbles = [
     [22, 75, 0.6],
     [53, 234, 1],
@@ -71,7 +69,7 @@
   height: 152px;
   animation-name: drift-x, drift-y;
   animation-duration: var(--duration-x), var(--duration-y);
-  /* reaching up to a full back-and-forth, so half the bubbles start out heading the other way */
+  /* up to a full back-and-forth, so bubbles start out of sync */
   animation-delay:
     calc(mod(sibling-index() * 0.732051, 1) * -2 * var(--duration-x)),
     calc(mod(sibling-index() * 0.645751, 1) * -2 * var(--duration-y));

@@ -76,9 +76,7 @@ describe('VInfiniteCarousel', () => {
 
     await waitIdle()
 
-    // one loop shifts by 132px (100 + a 2rem gap), so the track has to span
-    // 800 + 132 to never show a hole
-    // plus the copy leading the original
+    // one loop is 132px (100 + 2rem gap), so covering 800 + 132 takes 8 groups, plus the leading copy
     const groups = () => document.querySelectorAll('.v-infinite-carousel__group').length
     expect(groups()).toBe(9)
 
@@ -362,7 +360,7 @@ describe('VInfiniteCarousel', () => {
 
     await userEvent.click(document.querySelector('.v-infinite-carousel__next')!)
 
-    // clicking an arrow used to focus it, which paused the loop until you clicked away
+    // a focused arrow would keep the loop paused until the user clicks away
     expect(document.querySelector('.v-infinite-carousel')).not.toHaveFocus()
 
     animation.play()
@@ -371,8 +369,7 @@ describe('VInfiniteCarousel', () => {
 
     expect(animation.playState).toBe('running')
 
-    // every position is a wrapped clock position, so a step never adds to the fixed
-    // offset that makes room for the leading copy
+    // steps seek within the animation and leave the offset reserved for the leading copy alone
     expect(getComputedStyle(track).translate).toBe('-1320px')
   })
 

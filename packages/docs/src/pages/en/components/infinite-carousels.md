@@ -77,7 +77,7 @@ Notable behaviors:
 
 #### Auto play
 
-`auto-play` scrolls the content on its own. Pass an object to set the `speed` in pixels per second or to `reverse` the travel direction. The movement pauses while the pointer is over an item with interactive item – set `pauseOnHover: false` to make it move regardless.
+`auto-play` scrolls the content on its own. Pass an object to set the `speed` in pixels per second or to `reverse` the travel direction. The movement pauses while the pointer is over an item with interactive content. Set `pauseOnHover: false` to keep it animating regardless.
 
 <ExamplesExample file="v-infinite-carousel/prop-auto-play" />
 
@@ -105,7 +105,7 @@ Notable behaviors:
 
 The `separator` slot places a divider after every item, including across the seam between repeated copies.
 
-<ExamplesExample file="v-infinite-carousel/slot-divider" />
+<ExamplesExample file="v-infinite-carousel/slot-separator" />
 
 ### Examples
 
@@ -113,13 +113,13 @@ The following are a collection of examples that demonstrate more advanced capabi
 
 #### Logo strip
 
-A common use for an infinite carousel is an endless row of logos or partner names. It requires some spacing for the shadows to be fully rendered.
+A common use for an infinite carousel is an endless row of logos or partner names. Cards need some vertical margin so their shadows are not clipped.
 
 <ExamplesExample file="v-infinite-carousel/misc-logo-strip" />
 
 #### Floating bubbles
 
-Items do not have to sit in a straight row. Here a single tile holds 12 absolutely positioned bubbles with drift movements in pseudo-random direction.
+Items do not have to sit in a straight row. Here a single tile holds 12 absolutely positioned bubbles drifting in pseudo-random directions.
 
 <ExamplesExample file="v-infinite-carousel/misc-bubbles" />
 
