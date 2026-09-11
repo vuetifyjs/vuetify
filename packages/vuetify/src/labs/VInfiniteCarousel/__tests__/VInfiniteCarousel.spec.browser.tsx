@@ -78,13 +78,14 @@ describe('VInfiniteCarousel', () => {
 
     // one loop shifts by 132px (100 + a 2rem gap), so the track has to span
     // 800 + 132 to never show a hole
+    // plus the copy leading the original
     const groups = () => document.querySelectorAll('.v-infinite-carousel__group').length
-    expect(groups()).toBe(8)
+    expect(groups()).toBe(9)
 
     width.value = 400
     await waitIdle()
 
-    expect(groups()).toBe(5)
+    expect(groups()).toBe(6)
   })
 
   it('folds the gap into the loop distance', async () => {
@@ -99,7 +100,29 @@ describe('VInfiniteCarousel', () => {
     await waitIdle()
 
     // without the 2rem default the loop is 100px, so it takes more copies to cover 800
-    expect(document.querySelectorAll('.v-infinite-carousel__group')).toHaveLength(9)
+    expect(document.querySelectorAll('.v-infinite-carousel__group')).toHaveLength(10)
+  })
+
+  it('fills the faded start edge when the loop wraps', async () => {
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={{ size: 40 }}>
+          { Array.from({ length: 10 }, (_, i) => (
+            <button style="width: 100px">{ `item ${i}` }</button>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
+
+    await waitIdle()
+
+    const edge = document.querySelector('.v-infinite-carousel__viewport')!.getBoundingClientRect().left + 5
+
+    // resting at the loop start, the fade shows the tail of the previous lap
+    expect(screen.getAllByText('item 9').some(el => {
+      const { left, right } = el.getBoundingClientRect()
+      return left <= edge && right >= edge
+    })).toBe(true)
   })
 
   it('trails every item with a separator, seam included', async () => {
@@ -348,9 +371,9 @@ describe('VInfiniteCarousel', () => {
 
     expect(animation.playState).toBe('running')
 
-    // every position is a wrapped clock position, so a step can never expose a
-    // gap past the last copy
-    expect(getComputedStyle(track).translate).toBe('none')
+    // every position is a wrapped clock position, so a step never adds to the fixed
+    // offset that makes room for the leading copy
+    expect(getComputedStyle(track).translate).toBe('-1320px')
   })
 
   it('leaves the faded edges out of the visible area', async () => {

@@ -156,7 +156,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       loopDistance.value = groupSize + gapSize
 
       copies.value = loopDistance.value > 0
-        ? Math.min(MAX_COPIES, 1 + Math.ceil((viewportSize.value + gapSize) / loopDistance.value))
+        ? Math.min(MAX_COPIES, 1 + Math.ceil((viewportSize.value + parseFloat(paddingEnd) + gapSize) / loopDistance.value))
         : 1
     }
 
@@ -494,8 +494,16 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           onClickCapture={ onClickCapture }
         >
           <div ref={ viewportRef } class="v-infinite-carousel__viewport">
-            <div ref={ trackRef } class="v-infinite-carousel__track">
+            <div
+              ref={ trackRef }
+              class="v-infinite-carousel__track"
+              style={{ translate: isVertical.value ? `0 ${-loopDistance.value}px` : `${-loopDistance.value}px` }}
+            >
               <div ref={ contentRef } class="v-infinite-carousel__group">
+                { groupChildren() }
+              </div>
+
+              <div class="v-infinite-carousel__group v-infinite-carousel__group--leading" aria-hidden="true">
                 { groupChildren() }
               </div>
 
