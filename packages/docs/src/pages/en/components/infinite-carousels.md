@@ -39,7 +39,7 @@ export default createVuetify({
 
 ## Usage
 
-Put anything in the default slot. The content is repeated as many times as it takes to fill the container, and the loop is seamless in either direction. Add `auto-play` to set it moving.
+Put anything in the default slot. The content is repeated as many times as it takes to fill the container, and the loop is seamless in either direction. It moves on its own unless `paused`.
 
 <ExamplesUsage name="v-infinite-carousel" />
 
@@ -65,7 +65,7 @@ Notable behaviors:
 - duplicates are hidden from screen readers and left out of the tab order, so assistive tech gets the content once; keyboard focus that lands out of view pulls its item into view
 - the strip is a single tab stop; arrow keys move focus between items and pull each one into view. When nothing inside is focusable, they move the strip by `shift-distance` instead. Pass an `aria-label` so the group announces what it holds
 - with `draggable`, pointer and touch drag scrub the loop, and it resumes where you let go; a drag that ends over a link does not follow it
-- the loop pauses while focus is inside it, while the pointer is over a link, button or input in it, and under `prefers-reduced-motion`
+- the loop pauses while focus is inside it and under `prefers-reduced-motion`
 
 ### Props
 
@@ -75,11 +75,11 @@ Notable behaviors:
 
 <ExamplesExample file="v-infinite-carousel/prop-direction" />
 
-#### Auto play
+#### Speed
 
-`auto-play` scrolls the content on its own. Pass an object to set the `speed` in pixels per second or to `reverse` the travel direction. The movement pauses while the pointer is over an item with interactive content. Set `pauseOnHover: false` to keep it animating regardless.
+`speed` sets how many pixels per second the content travels, and `reverse` flips its direction. `paused` holds it still, while dragging and the arrows can still move it. Add `pause-on-hover` to also hold it while the pointer is over the carousel.
 
-<ExamplesExample file="v-infinite-carousel/prop-auto-play" />
+<ExamplesExample file="v-infinite-carousel/prop-speed" />
 
 #### Mask
 
@@ -125,6 +125,6 @@ Items do not have to sit in a straight row. Here a single tile holds 12 absolute
 
 #### External controls
 
-Controls can live anywhere on the page. Grab the component with a template ref and call its exposed `slide('prev')` or `slide('next')`, which moves the content by `shift-distance` like the built-in arrows.
+Controls can live anywhere on the page. Grab the component with a template ref and call its exposed `slide('prev')` or `slide('next')`, which moves the content by `shift-distance` like the built-in arrows. A play/pause toggle only needs to flip `paused`.
 
 <ExamplesExample file="v-infinite-carousel/misc-external-controls" />

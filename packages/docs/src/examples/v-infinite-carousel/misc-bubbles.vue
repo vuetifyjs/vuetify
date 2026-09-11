@@ -1,5 +1,5 @@
 <template>
-  <v-infinite-carousel :auto-play="{ speed: 40 }" gap="0" draggable mask>
+  <v-infinite-carousel gap="0" speed="40" draggable mask>
     <div class="bubbles">
       <v-sheet
         v-for="([x, y, scale], index) in bubbles"

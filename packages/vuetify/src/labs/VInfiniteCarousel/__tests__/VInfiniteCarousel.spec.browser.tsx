@@ -10,7 +10,7 @@ function renderCarousel (props: Record<string, any> = {}) {
     <div>
       <button>before</button>
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } autoPlay={{ speed: 2000 }} { ...props }>
+        <VInfiniteCarousel mask={ false } speed={ 2000 } { ...props }>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -39,7 +39,7 @@ describe('VInfiniteCarousel', () => {
   it('keeps copies out of the tab order and reveals what tab reaches', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false }>
+        <VInfiniteCarousel mask={ false } paused>
           { Array.from({ length: 10 }, (_, i) => (
             <div style="width: 100px">
               <button>{ `item ${i}` }</button>
@@ -104,7 +104,7 @@ describe('VInfiniteCarousel', () => {
   it('fills the faded start edge when the loop wraps', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={{ size: 40 }}>
+        <VInfiniteCarousel mask={{ size: 40 }} paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -183,7 +183,7 @@ describe('VInfiniteCarousel', () => {
   it('steps by shift-distance on arrows when no item is focusable', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } shiftDistance="50%">
+        <VInfiniteCarousel mask={ false } shiftDistance="50%" paused>
           { Array.from({ length: 10 }, (_, i) => (
             <span style="width: 100px">{ `item ${i}` }</span>
           ))}
@@ -207,7 +207,7 @@ describe('VInfiniteCarousel', () => {
 
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } autoPlay={{ speed: speed.value }}>
+        <VInfiniteCarousel mask={ false } speed={ speed.value }>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -227,6 +227,58 @@ describe('VInfiniteCarousel', () => {
     await waitIdle()
 
     expect(duration()).toBe(6600)
+  })
+
+  describe('with motion', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('pauses in place and keeps its position through a rebuild', async () => {
+      const paused = shallowRef(false)
+      const speed = shallowRef(100)
+      const reverse = shallowRef(false)
+
+      render(() => (
+        <div style="width: 200px">
+          <VInfiniteCarousel mask={ false } paused={ paused.value } speed={ speed.value } reverse={ reverse.value }>
+            { Array.from({ length: 10 }, (_, i) => (
+              <span style="width: 100px">{ `item ${i}` }</span>
+            ))}
+          </VInfiniteCarousel>
+        </div>
+      ))
+
+      await waitIdle()
+
+      const track = document.querySelector('.v-infinite-carousel__track')!
+      const animation = track.getAnimations()[0]
+      const position = () => screen.getAllByText('item 0')[0].getBoundingClientRect().x
+
+      expect(animation.playState).toBe('running')
+
+      paused.value = true
+      await waitIdle()
+
+      expect(track.getAnimations()[0]).toBe(animation)
+      expect(animation.playState).toBe('paused')
+
+      // a third of a lap, where reading it against the new duration or direction lands elsewhere
+      animation.currentTime = 4400
+      const before = position()
+
+      speed.value = 200
+      await waitIdle()
+      expect(position()).toBeCloseTo(before, 0)
+
+      reverse.value = true
+      await waitIdle()
+      expect(position()).toBeCloseTo(before, 0)
+
+      paused.value = false
+      await waitIdle()
+      expect(track.getAnimations()[0].playState).toBe('running')
+    })
   })
 
   it('scrubs the loop on drag', async () => {
@@ -263,19 +315,25 @@ describe('VInfiniteCarousel', () => {
   })
 
   it.each([
-    [undefined, 'paused'],
-    [false, 'running'],
+    [true, 'paused'],
+    [undefined, 'running'],
   ])('pauseOnHover: %s leaves the loop %s under the pointer', async (pauseOnHover, playState) => {
-    // no gap, so the pointer always lands on a button
-    renderCarousel({ autoPlay: { speed: 2000, pauseOnHover }, gap: 0 })
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={ false } pauseOnHover={ pauseOnHover }>
+          { Array.from({ length: 10 }, (_, i) => (
+            <span style="width: 100px">{ `item ${i}` }</span>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
 
     await waitIdle()
 
     const animation = document.querySelector('.v-infinite-carousel__track')!.getAnimations()[0]
     animation.play()
 
-    // a moving item never passes the stability check
-    await userEvent.hover(screen.getAllByText('item 0')[0], { force: true })
+    await userEvent.hover(document.querySelector('.v-infinite-carousel')!)
 
     expect(animation.playState).toBe(playState)
   })
@@ -292,8 +350,8 @@ describe('VInfiniteCarousel', () => {
     expect(screen.getAllByText('item 1')[0].getBoundingClientRect().x).toBe(before)
   })
 
-  it('holds still without auto-play but stays seekable', async () => {
-    renderCarousel({ autoPlay: false, draggable: true })
+  it('holds still while paused but stays seekable', async () => {
+    renderCarousel({ paused: true, draggable: true })
 
     await waitIdle()
 
@@ -330,7 +388,7 @@ describe('VInfiniteCarousel', () => {
   it('steps by shift-distance when arrows are clicked', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } shiftDistance="50%" showArrows>
+        <VInfiniteCarousel mask={ false } shiftDistance="50%" showArrows paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -376,7 +434,7 @@ describe('VInfiniteCarousel', () => {
   it('leaves the faded edges out of the visible area', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={{ size: 40 }} shiftDistance="50%" showArrows>
+        <VInfiniteCarousel mask={{ size: 40 }} shiftDistance="50%" showArrows paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -398,7 +456,7 @@ describe('VInfiniteCarousel', () => {
   it('resolves shift-distance in any css length unit', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } shiftDistance="4rem" showArrows>
+        <VInfiniteCarousel mask={ false } shiftDistance="4rem" showArrows paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -416,7 +474,7 @@ describe('VInfiniteCarousel', () => {
   })
 
   it('runs the loop the other way when reversed', async () => {
-    renderCarousel({ autoPlay: { speed: 2000, reverse: true } })
+    renderCarousel({ reverse: true })
 
     await waitIdle()
 
@@ -434,7 +492,7 @@ describe('VInfiniteCarousel', () => {
   it('reaches every item when reversed and repeated', async () => {
     render(() => (
       <div style="width: 700px">
-        <VInfiniteCarousel mask={ false } autoPlay={{ reverse: true }}>
+        <VInfiniteCarousel mask={ false } reverse>
           {['only', 'three', 'chips'].map(label => (
             <button style="width: 70px">{ label }</button>
           ))}
@@ -455,7 +513,7 @@ describe('VInfiniteCarousel', () => {
   it('clips and navigates on the block axis when vertical', async () => {
     render(() => (
       <div style="height: 200px">
-        <VInfiniteCarousel mask={ false } direction="vertical">
+        <VInfiniteCarousel mask={ false } direction="vertical" paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="height: 100px">{ `item ${i}` }</button>
           ))}

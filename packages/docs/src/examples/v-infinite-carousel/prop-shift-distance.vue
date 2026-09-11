@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-infinite-carousel class="mb-6" shift-distance="100%" auto-play show-arrows>
+    <v-infinite-carousel class="mb-6" shift-distance="100%" show-arrows>
       <v-chip v-for="item in items" :key="item" color="primary">{{ item }}</v-chip>
     </v-infinite-carousel>
 
-    <v-infinite-carousel shift-distance="10rem" show-arrows="hover" auto-play>
+    <v-infinite-carousel shift-distance="10rem" show-arrows="hover">
       <v-chip v-for="item in items" :key="item" color="secondary">{{ item }}</v-chip>
     </v-infinite-carousel>
   </v-container>

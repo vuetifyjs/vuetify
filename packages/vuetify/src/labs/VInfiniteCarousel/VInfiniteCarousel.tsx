@@ -30,12 +30,6 @@ import {
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
 
-export interface VInfiniteCarouselAutoPlay {
-  speed?: number | string
-  reverse?: boolean
-  pauseOnHover?: boolean
-}
-
 export interface VInfiniteCarouselMask {
   size?: number | string
 }
@@ -47,27 +41,28 @@ export type VInfiniteCarouselSlots = {
   next: { props: Record<string, any> }
 }
 
-const DEFAULT_SPEED = 35
 const STEP_DECAY = 120
 const DRAG_THRESHOLD = 4
 const MAX_COPIES = 20
-const INTERACTIVE = 'a[href], button, input, select, textarea, [contenteditable]'
 
 export const makeVInfiniteCarouselProps = propsFactory({
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
   },
-  autoPlay: {
-    type: [Boolean, Object] as PropType<boolean | VInfiniteCarouselAutoPlay>,
-    default: false,
+  reverse: Boolean,
+  paused: Boolean,
+  pauseOnHover: Boolean,
+  draggable: Boolean,
+  speed: {
+    type: [Number, String],
+    default: 35,
   },
   mask: {
     type: [Boolean, Object] as PropType<boolean | VInfiniteCarouselMask>,
     default: false,
   },
   gap: [Number, String],
-  draggable: Boolean,
   shiftDistance: {
     type: [Number, String],
     default: '20%',
@@ -102,27 +97,14 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const items = shallowRef<HTMLElement[]>([])
     const copies = shallowRef(1)
     const isDragging = shallowRef(false)
-    const isHoveringInteractive = shallowRef(false)
+    const isHovering = shallowRef(false)
     const viewportSize = shallowRef(0)
     const loopDistance = shallowRef(0)
 
     const isVertical = toRef(() => props.direction === 'vertical')
 
-    const autoPlayConfig = toRef(() => {
-      if (!props.autoPlay) return { speed: 0, reverse: false, pauseOnHover: false }
-
-      const {
-        speed = DEFAULT_SPEED,
-        reverse = false,
-        pauseOnHover = true,
-      } = isObject(props.autoPlay) ? props.autoPlay : {}
-
-      return { speed: Math.max(0, Number(speed) || 0), reverse, pauseOnHover }
-    })
-
-    const hasAutoPlay = toRef(() => !!autoPlayConfig.value.speed)
-    const isReversed = toRef(() => autoPlayConfig.value.reverse)
-    const loopDuration = toRef(() => hasAutoPlay.value ? loopDistance.value / autoPlayConfig.value.speed * 1000 : 1000)
+    const speed = toRef(() => Math.max(0, Number(props.speed) || 0))
+    const loopDuration = toRef(() => speed.value ? loopDistance.value / speed.value * 1000 : 1000)
 
     const { resizeRef: viewportRef } = useResizeObserver(onResize)
     const { resizeRef: contentRef } = useResizeObserver(onResize)
@@ -178,27 +160,33 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       const end = isVertical.value
         ? `translateY(-${loopDistance.value}px)`
         : `translateX(-${loopDistance.value}px)`
-      const keyframes = [{ transform: 'none' }, { transform: end }]
 
-      animation = track.animate(
-        isReversed.value ? keyframes.reverse() : keyframes,
-        { duration: loopDuration.value, iterations: Infinity, easing: 'linear' }
-      )
+      animation = track.animate([{ transform: 'none' }, { transform: end }], {
+        duration: loopDuration.value,
+        direction: props.reverse ? 'reverse' : 'normal',
+        iterations: Infinity,
+        easing: 'linear',
+      })
       seek(previousShift)
 
       if (isPaused()) animation.pause()
     }
 
-    watch([isVertical, hasAutoPlay, isReversed, loopDistance, loopDuration], syncAnimation, { flush: 'post' })
+    watch([isVertical, speed, () => props.reverse, loopDistance], syncAnimation, { flush: 'post' })
     watch(() => props.direction, onResize, { flush: 'post' })
+    watch(() => props.paused, paused => {
+      if (paused) animation?.pause()
+      else resume()
+    })
 
     function currentShift () {
-      const duration = loopDuration.value
-      if (!animation || !duration) return 0
+      if (!animation) return 0
 
-      const progress = Number(animation.currentTime ?? 0) % duration / duration
+      // read from the animation, props already hold the values it is about to be rebuilt with
+      const { duration, direction } = animation.effect!.getTiming()
+      const progress = Number(animation.currentTime ?? 0) % Number(duration) / Number(duration)
 
-      return (isReversed.value ? 1 - progress : progress) * loopDistance.value
+      return (direction === 'reverse' ? 1 - progress : progress) * loopDistance.value
     }
 
     function seek (value: number) {
@@ -208,7 +196,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       const wrapped = ((value % loopDistance.value) + loopDistance.value) % loopDistance.value
       const progress = wrapped / loopDistance.value
 
-      animation.currentTime = Math.min((isReversed.value ? 1 - progress : progress) * duration, duration - 1)
+      animation.currentTime = Math.min((props.reverse ? 1 - progress : progress) * duration, duration - 1)
     }
 
     let pendingShift = 0
@@ -316,27 +304,22 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     function isPaused () {
       const container = containerRef.value
 
-      return !hasAutoPlay.value ||
+      return props.paused ||
+        !speed.value ||
         isDragging.value ||
-        isHoveringInteractive.value ||
+        (props.pauseOnHover && isHovering.value) ||
         PREFERS_REDUCED_MOTION() ||
         !!container?.matches(':focus-visible') ||
         !!container?.querySelector(':focus-visible')
     }
 
-    function onPointerover (e: PointerEvent) {
-      const target = e.target as HTMLElement
-
-      isHoveringInteractive.value = autoPlayConfig.value.pauseOnHover &&
-        !target.closest('.v-infinite-carousel__controls') &&
-        !!target.closest(INTERACTIVE)
-
-      if (isHoveringInteractive.value) animation?.pause()
-      else resume()
+    function onPointerenter () {
+      isHovering.value = true
+      if (props.pauseOnHover) animation?.pause()
     }
 
     function onPointerleave () {
-      isHoveringInteractive.value = false
+      isHovering.value = false
       resume()
     }
 
@@ -488,7 +471,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onKeydown={ onKeydown }
-          onPointerover={ onPointerover }
+          onPointerenter={ onPointerenter }
           onPointerleave={ onPointerleave }
           onPointerdown={ onPointerdown }
           onPointermove={ onPointermove }

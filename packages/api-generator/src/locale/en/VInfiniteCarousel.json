@@ -1,7 +1,10 @@
 {
   "props": {
     "direction": "Axis the content scrolls along.",
-    "autoPlay": "Scrolls the content on its own. Pass an object to set `speed` (pixels per second), `reverse` or `pauseOnHover`.",
+    "paused": "Stops the content from scrolling on its own. Dragging and the arrows still move it.",
+    "speed": "How fast the content scrolls, in pixels per second.",
+    "reverse": "Scrolls the content towards the start instead of the end.",
+    "pauseOnHover": "Pauses the scrolling while the pointer is over the component.",
     "mask": "Fades the content out at both edges. Pass an object to set the gradient `size`.",
     "gap": "Space between items.",
     "draggable": "Allows scrubbing the content by dragging it with a pointer or finger.",

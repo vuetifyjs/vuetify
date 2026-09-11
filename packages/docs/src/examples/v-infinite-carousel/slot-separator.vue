@@ -3,7 +3,6 @@
     class="keyword-strip"
     gap="3rem"
     tabindex="-1"
-    auto-play
     draggable
     mask
   >

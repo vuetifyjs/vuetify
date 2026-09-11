@@ -13,7 +13,7 @@
     </v-infinite-carousel>
 
     <template v-slot:configuration>
-      <v-checkbox v-model="autoPlay" label="Auto-play" hide-details></v-checkbox>
+      <v-checkbox v-model="paused" label="Paused" hide-details></v-checkbox>
       <v-checkbox v-model="reverse" label="Reverse" hide-details></v-checkbox>
       <v-checkbox v-model="draggable" label="Draggable" hide-details></v-checkbox>
       <v-checkbox v-model="arrows" label="Show arrows" hide-details></v-checkbox>
@@ -42,7 +42,7 @@
 
   const items = Array.from({ length: 12 }, (_, i) => `Item ${i + 1}`)
 
-  const autoPlay = ref(true)
+  const paused = ref(false)
   const reverse = ref(false)
   const draggable = ref(false)
   const arrows = ref(false)
@@ -52,7 +52,8 @@
   const props = computed(() => {
     return {
       draggable: draggable.value || undefined,
-      'auto-play': !autoPlay.value ? undefined : reverse.value ? { reverse: true } : true,
+      paused: paused.value || undefined,
+      reverse: reverse.value || undefined,
       'show-arrows': arrows.value || undefined,
       mask: maskSize.value ? { size: maskSize.value } : undefined,
       gap: gap.value !== 32 ? gap.value : undefined,

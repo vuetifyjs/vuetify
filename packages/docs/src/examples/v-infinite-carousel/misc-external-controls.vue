@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-infinite-carousel ref="carousel" :auto-play="playing" shift-distance="20%">
+    <v-infinite-carousel ref="carousel" :paused="!playing" shift-distance="20%">
       <v-chip v-for="item in items" :key="item" color="primary">{{ item }}</v-chip>
     </v-infinite-carousel>
 

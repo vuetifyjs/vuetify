@@ -17,7 +17,6 @@
 
       <v-infinite-carousel
         :aria-label="t('home.ecosystem.subtitle')"
-        :auto-play="{ pauseOnHover: false }"
         class="my-4"
         mask
       >
