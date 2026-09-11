@@ -106,9 +106,13 @@
       padding: 0 16px
       pointer-events: none
 
-      > *
-        pointer-events: auto
-        transition: transform 0.2s settings.$standard-easing
+    &__controls > &__prev,
+    &__controls > &__next
+      pointer-events: auto
+      transition: transform 0.2s settings.$standard-easing
+
+      @media (prefers-reduced-motion: reduce)
+        transition-duration: 0s
 
     &--vertical &__controls
       flex-direction: column
