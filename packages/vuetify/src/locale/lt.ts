@@ -94,7 +94,7 @@ export default {
     clear: 'Išvalyti {0}',
     prependAction: '{0} pridėtas veiksmas',
     appendAction: '{0} pridėtas veiksmas',
-    otp: 'Prašome įvesti OTP simbolį {0}',
+    otp: 'Įveskite patvirtinimo kodą',
   },
   fileInput: {
     counter: '{0} failų',

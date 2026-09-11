@@ -94,7 +94,7 @@ export default {
     clear: 'Изчисти {0}',
     prependAction: '{0} предшестващо действие',
     appendAction: '{0} последващо действие',
-    otp: 'Моля, въведете OTP символ {0}',
+    otp: 'Въведете код за потвърждение',
   },
   fileInput: {
     counter: '{0} файла',

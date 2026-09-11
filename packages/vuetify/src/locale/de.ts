@@ -94,7 +94,7 @@ export default {
     clear: '{0} leeren',
     prependAction: '{0} vorangestellte Aktion',
     appendAction: '{0} angehängte Aktion',
-    otp: 'Bitte OTP-Zeichen {0} eingeben',
+    otp: 'Bestätigungscode eingeben',
   },
   fileInput: {
     counter: '{0} Dateien',

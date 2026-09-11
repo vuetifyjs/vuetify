@@ -6,7 +6,6 @@ $video-player-width: 100% !default;
 $video-aspect-ratio: math.div(16, 9) !default;
 
 $video-elevation: 2 !default;
-$video-padding: 0px !default;
 $video-rounded-border-radius: settings.$border-radius-root !default;
 $video-controls-floating-margin: 12px !default;
 $video-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;

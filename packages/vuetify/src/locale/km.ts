@@ -94,7 +94,7 @@ export default {
     clear: 'សម្អាត {0}',
     prependAction: '{0} សម្អាតសកម្ម',
     appendAction: '{0} សម្អាតសកម្ម',
-    otp: 'សូមបញ្ចូលតួអក្សរ OTP {0}',
+    otp: 'បញ្ចូលកូដផ្ទៀងផ្ទាត់',
   },
   fileInput: {
     counter: '{0} ឯកសារ',

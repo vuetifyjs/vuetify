@@ -94,7 +94,7 @@ export default {
     clear: 'Notīrīt {0}',
     prependAction: '{0} pievienota darbība sākumā',
     appendAction: '{0} pievienota darbība beigās',
-    otp: 'Lūdzu, ievadiet OTP simbolu {0}',
+    otp: 'Ievadiet verifikācijas kodu',
   },
   fileInput: {
     counter: '{0} faili',

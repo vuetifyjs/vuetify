@@ -131,17 +131,18 @@ export function useScrolling (
     if (!await focusItem(index)) listRef.value?.focus('last')
   }
 
-  function focusAdjacentItem (from: number, step: 1 | -1, scroll = true) {
-    return focusItem(findNavigableIndex(toValue(displayItems), from + step, step), scroll)
-  }
-
-  /** ArrowUp/ArrowDown pressed while focus is still on the field. */
-  async function focusFromActivator (step: 1 | -1) {
+  /**
+   * ArrowUp/ArrowDown pressed while focus is still on the field.
+   * `landOnSelected` targets the selection itself (opening the menu); otherwise
+   * the item adjacent to it (menu was already open).
+   */
+  async function focusFromActivator (step: 1 | -1, landOnSelected = false) {
     if (!toValue(options.noAutoScroll)) {
       const selected = options.selectedIndex?.() ?? -1
-      // Opening already centred the selection, scrolling again shifts it by a row
       if (selected >= 0) {
-        return await focusAdjacentItem(selected, step, false) || focusAdjacentItem(selected, step)
+        const target = landOnSelected ? selected : findNavigableIndex(toValue(displayItems), selected + step, step)
+        // Opening already centred the selection, scrolling again shifts it by a row
+        return await focusItem(target, false) || focusItem(target)
       }
     }
 
@@ -194,7 +195,7 @@ export function useScrolling (
     if (!pendingOpenStep) return false
     const step = pendingOpenStep
     pendingOpenStep = null
-    focusFromActivator(step)
+    focusFromActivator(step, true)
     return true
   }
 

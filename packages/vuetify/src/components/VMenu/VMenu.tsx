@@ -42,8 +42,7 @@ import {
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVMenuProps = propsFactory({
-  // TODO
-  // disableKeys: Boolean,
+  _disableKeys: Boolean,
   id: String,
   submenu: Boolean,
   openOnArrow: {
@@ -152,8 +151,32 @@ export const VMenu = genericComponent<OverlaySlots>()({
       }
     }
 
+    function setInitialFocus (e: KeyboardEvent) {
+      const el = overlay.value?.contentEl
+
+      if (!el || !isActive.value) return
+      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
+
+      const focusable = focusableChildren(el)
+      const focusTarget = e.key === 'ArrowUp' ? focusable.at(-1) : focusable[0]
+      const focusTargetRole = focusTarget?.getAttribute('role') ?? ''
+
+      const selectedOption = ['option', 'listbox'].includes(focusTargetRole) &&
+        focusable.find(
+          child => child.getAttribute('role') === 'option' &&
+            child.getAttribute('aria-selected') === 'true' &&
+            child.offsetParent != null
+        )
+
+      if (selectedOption) {
+        selectedOption.focus()
+      } else {
+        focusChild(el, e.key === 'ArrowDown' ? 'next' : 'prev')
+      }
+    }
+
     function onActivatorKeydown (e: KeyboardEvent) {
-      if (props.disabled || e.isComposing) return
+      if (props.disabled || props._disableKeys || e.isComposing) return
 
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
@@ -187,7 +210,11 @@ export const VMenu = genericComponent<OverlaySlots>()({
       const el = overlay.value?.contentEl
       if (el?.contains(getActiveElement())) return
       if (el && focusableChildren(el).length) {
-        onActivatorKeydown(e)
+        if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+          setInitialFocus(e)
+        } else {
+          onActivatorKeydown(e)
+        }
         if (el.contains(getActiveElement())) return
       }
       if (attempt <= 10) {

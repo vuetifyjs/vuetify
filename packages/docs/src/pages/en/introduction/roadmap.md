@@ -36,7 +36,7 @@ The following is a list of all planned components for the year 2026.
 | [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
 | [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
 | [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | Q3 2026       | Q4 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
 | v-date-time-picker                                              | Q3 2026       | Q4 2026            |
 | v-password-input                                                | Q3 2026       | Q4 2026            |
 

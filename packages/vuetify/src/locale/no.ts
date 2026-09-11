@@ -94,7 +94,7 @@ export default {
     clear: 'Fjern {0}',
     prependAction: '{0} foranstilt handling',
     appendAction: '{0} etterstilt handling',
-    otp: 'Vennligst skriv inn OTP-tegn {0}',
+    otp: 'Skriv inn bekreftelseskode',
   },
   fileInput: {
     counter: '{0} filer',

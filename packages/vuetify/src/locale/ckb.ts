@@ -94,7 +94,7 @@ export default {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
     appendAction: '{0} کرداری دواتر',
-    otp: 'تکایە نووسینی نمرەی OTP {0}',
+    otp: 'کۆدی پشتڕاستکردنەوە بنووسە',
   },
   fileInput: {
     counter: '{0} فایل',

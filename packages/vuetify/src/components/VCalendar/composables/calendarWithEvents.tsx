@@ -326,7 +326,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       ],
       style: {
         height: `${eventHeight}px`,
-        width: `${width}%`,
+        width: `calc(${width}% + ${(width - WIDTH_START) / WIDTH_FULL}px)`,
         marginBottom: `${eventMarginBottom}px`,
       },
       'data-date': day.date,

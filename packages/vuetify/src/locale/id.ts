@@ -94,7 +94,7 @@ export default {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',
     appendAction: '{0} aksi diakhir',
-    otp: 'Masukkan karakter OTP {0}',
+    otp: 'Masukkan kode verifikasi',
   },
   fileInput: {
     counter: '{0} berkas',

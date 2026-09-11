@@ -1431,7 +1431,7 @@ describe('VSelect', () => {
       expect(document.activeElement?.textContent?.trim()).toBe('99')
     })
 
-    it('should open with ArrowDown onto the item after selection', async () => {
+    it('should open with ArrowDown onto the selected item', async () => {
       render(() => (
         <VSelect items={ manyItems } modelValue={ 100 } />
       ))
@@ -1444,10 +1444,13 @@ describe('VSelect', () => {
         .map(el => el.textContent))
         .toContain('101')
 
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+
+      await userEvent.keyboard('{ArrowDown}')
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('101')
     })
 
-    it('should open with ArrowUp onto the item before the first selection', async () => {
+    it('should open with ArrowUp onto the selected item', async () => {
       render(() => (
         <VSelect items={ manyItems } modelValue={[300, 555, 992]} multiple />
       ))
@@ -1458,8 +1461,11 @@ describe('VSelect', () => {
 
       await expect.poll(() => screen.getAllByRole('option')
         .map(el => el.textContent))
-        .toContain('299')
+        .toContain('300')
 
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('300')
+
+      await userEvent.keyboard('{ArrowUp}')
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('299')
     })
 
@@ -1587,14 +1593,14 @@ describe('VSelect', () => {
         await userEvent.click(screen.getByCSS('.v-select'))
         await commands.waitStable('.v-list')
 
-        const list = screen.getByCSS('.v-select__content .v-list')
-        await expect.poll(() => list.scrollTop).toBeGreaterThan(0)
+        await expect.poll(() => document.activeElement?.textContent?.trim()).toBe(item)
 
-        const start = list.scrollTop
-        list.scrollTop = start - 100
+        const list = screen.getByCSS('.v-select__content .v-list')
+        const userScrollTop = list.scrollTop - 100
+        list.scrollTop = userScrollTop
         await wait(200)
 
-        expect(`${item} ${list.scrollTop < start - 50}`).toBe(`${item} true`)
+        expect(list.scrollTop).toBe(userScrollTop)
 
         await userEvent.keyboard('{Escape}')
         await wait(200)

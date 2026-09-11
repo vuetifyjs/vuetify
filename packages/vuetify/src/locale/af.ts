@@ -94,7 +94,7 @@ export default {
     clear: 'Maak skoon {0}',
     prependAction: '{0} voorafgevoegde aksie',
     appendAction: '{0} bygevoegde aksie',
-    otp: 'Voer asseblief OTP-karakter {0} in',
+    otp: 'Voer verifikasiekode in',
   },
   fileInput: {
     counter: '{0} lêers',

@@ -5,6 +5,7 @@ import { VBtn } from '@/components/VBtn'
 import { VDialog } from '@/components/VDialog'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
 import { VSheet } from '@/components/VSheet'
+import { VTab, VTabs } from '@/components/VTabs'
 import { VTextarea } from '@/components/VTextarea'
 import { VTextField } from '@/components/VTextField'
 import { VTooltip } from '@/components/VTooltip'
@@ -1118,6 +1119,146 @@ describe('VMenu', () => {
         await userEvent.keyboard('{ArrowRight}')
         await expect.poll(() => document.activeElement).toBe(screen.getByTestId('l2-item-1'))
       })
+    })
+  })
+
+  describe('gliding activator', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should settle under the current activator when a position transition is interrupted', async () => {
+      const activator = ref<HTMLElement>()
+
+      render(() => (
+        <div>
+          <style>{ '.glide { transition: left 0.2s linear, top 0.2s linear }' }</style>
+          <button data-testid="first" style="position: fixed; top: 100px; left: 100px;">First</button>
+          <button data-testid="second" style="position: fixed; top: 100px; left: 400px;">Second</button>
+          <VMenu modelValue activator={ activator.value } contentClass="glide" transition={ false }>
+            <VSheet data-testid="menu-content" width="100" height="50" />
+          </VMenu>
+        </div>
+      ))
+
+      activator.value = screen.getByTestId('first')
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+      await commands.waitStable('.v-overlay__content')
+      const settled = screen.getByCSS('.glide').getBoundingClientRect().x
+
+      activator.value = screen.getByTestId('second')
+      await wait(50) // for ~25% of 0.2s glide transition
+      activator.value = screen.getByTestId('first')
+      await commands.waitStable('.v-overlay__content')
+
+      expect(screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
+    })
+  })
+
+  describe('opening with arrow keys', () => {
+    it('should focus the selected item, not the one after it, by default', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <VList selectable selected={['b']}>
+                <VListItem value="a" title="Item A" />
+                <VListItem value="b" title="Item B" />
+                <VListItem value="c" title="Item C" />
+              </VList>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item B')
+    })
+
+    it('should still move relatively on a genuine subsequent keypress', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <VList selectable selected={['b']}>
+                <VListItem value="a" title="Item A" />
+                <VListItem value="b" title="Item B" />
+                <VListItem value="c" title="Item C" />
+              </VList>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Item B')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('Item C')
+    })
+
+    it('should not skip a tab that comes before the list, even though it is also aria-selected', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <>
+                <VTabs modelValue="two">
+                  <VTab value="one" text="One" />
+                  <VTab value="two" text="Two" />
+                </VTabs>
+                <VList selectable selected={['b']}>
+                  <VListItem value="a" title="Item A" />
+                  <VListItem value="b" title="Item B" />
+                  <VListItem value="c" title="Item C" />
+                </VList>
+              </>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-tabs')
+
+      // "Two" is the natural first focusable element (roving tabindex); the
+      // selected list item further down must not hijack focus away from it
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Two')
+    })
+
+    it('should not skip a search field that comes before the list', async () => {
+      render(() => (
+        <VMenu transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+            default: () => (
+              <>
+                <VTextField data-testid="search" label="Search" />
+                <VList selectable selected={['b']}>
+                  <VListItem value="a" title="Item A" />
+                  <VListItem value="b" title="Item B" />
+                  <VListItem value="c" title="Item C" />
+                </VList>
+              </>
+            ),
+          }}
+        </VMenu>
+      ))
+
+      screen.getByTestId('activator').focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => document.activeElement).toBe(screen.getByCSS('[data-testid="search"] input'))
     })
   })
 })
