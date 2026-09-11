@@ -39,6 +39,12 @@
         hide-details
       ></v-checkbox>
 
+      <v-checkbox
+        v-model="vertical"
+        label="Vertical"
+        hide-details
+      ></v-checkbox>
+
       <v-slider
         v-model="sizeIndex"
         :ticks="sizeTicks"
@@ -87,6 +93,7 @@
   const indeterminate = ref(false)
   const icons = ref(true)
   const loading = ref(false)
+  const vertical = ref(false)
   const options = ['inset', 'material', 'square']
 
   const colors = ['primary', '#ac46ff', 'orange-darken-2']
@@ -119,6 +126,7 @@
       'thumb-color': thumbColor.value || undefined,
       indeterminate: indeterminate.value || undefined,
       loading: loading.value || undefined,
+      direction: vertical.value ? 'vertical' : undefined,
     }
   })
 
