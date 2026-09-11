@@ -1,60 +1,28 @@
-@use '../../styles/settings'
 @use '../../styles/tools'
+@use './variables' as *
 
 @include tools.layer('components')
   .v-infinite-carousel
-    --v-infinite-carousel-gap: 2rem
-    --v-infinite-carousel-mask-color: rgb(var(--v-theme-background))
+    --v-infinite-carousel-gap: #{$infinite-carousel-gap}
+    --v-infinite-carousel-mask-direction: to right
+    --v-infinite-carousel-mask-size: 0px
     position: relative
-    overflow-x: clip
-    overflow-y: visible
-    white-space: nowrap
     width: 100%
-    padding-inline: var(--v-infinite-carousel-mask)
     // `clip` is not a scroll container, so unlike `hidden` it still reports the
     // whole track as its intrinsic width and stretches flex/grid parents
     min-width: 0
     contain: inline-size
 
-    &::before,
-    &::after
-      content: ''
-      position: absolute
-      z-index: 2
-      pointer-events: none
-      width: var(--v-infinite-carousel-mask)
-
-    &::before
-      inset: 0 auto 0 0
-      background: linear-gradient(to right, var(--v-infinite-carousel-mask-color), transparent)
-
-    &::after
-      inset: 0 0 0 auto
-      background: linear-gradient(to left, var(--v-infinite-carousel-mask-color), transparent)
-
     &--vertical
-      overflow-x: visible
-      overflow-y: clip
+      --v-infinite-carousel-mask-direction: to bottom
       width: auto
       height: 100%
-      padding-inline: 0
-      padding-block: var(--v-infinite-carousel-mask)
       min-width: auto
       min-height: 0
       contain: none
 
-      &::before,
-      &::after
-        width: auto
-        height: var(--v-infinite-carousel-mask)
-
-      &::before
-        inset: 0 0 auto 0
-        background: linear-gradient(to bottom, var(--v-infinite-carousel-mask-color), transparent)
-
-      &::after
-        inset: auto 0 0 0
-        background: linear-gradient(to top, var(--v-infinite-carousel-mask-color), transparent)
+    &--mask
+      --v-infinite-carousel-mask-size: #{$infinite-carousel-mask-size}
 
     &--draggable
       cursor: grab
@@ -66,6 +34,29 @@
     &--dragging
       cursor: grabbing
       user-select: none
+
+    &__viewport
+      overflow-x: clip
+      overflow-y: visible
+      white-space: nowrap
+      padding-inline: var(--v-infinite-carousel-mask-size)
+
+    &--vertical &__viewport
+      overflow-x: visible
+      overflow-y: clip
+      height: 100%
+      padding-inline: 0
+      padding-block: var(--v-infinite-carousel-mask-size)
+
+    &--mask &__viewport
+      padding-block: $infinite-carousel-padding
+      $gradient: linear-gradient(var(--v-infinite-carousel-mask-direction), transparent, #000 var(--v-infinite-carousel-mask-size), #000 calc(100% - var(--v-infinite-carousel-mask-size)), transparent)
+      -webkit-mask-image: $gradient // for Chromium before v120
+      mask-image: $gradient
+
+    &--mask.v-infinite-carousel--vertical &__viewport
+      padding-block: var(--v-infinite-carousel-mask-size)
+      padding-inline: $infinite-carousel-padding
 
     &__track
       display: flex
@@ -99,24 +90,26 @@
     &__controls
       position: absolute
       inset: 0
-      z-index: 3
+      z-index: 1
       display: flex
       align-items: center
       justify-content: space-between
-      padding: 0 16px
+      padding: 0 $infinite-carousel-controls-padding
+      // hides the arrows parked off-edge in `hover` mode, now that the root no longer clips
+      overflow: clip
       pointer-events: none
 
     &__controls > &__prev,
     &__controls > &__next
       pointer-events: auto
-      transition: transform 0.2s settings.$standard-easing
+      transition: transform $infinite-carousel-controls-transition
 
       @media (prefers-reduced-motion: reduce)
         transition-duration: 0s
 
     &--vertical &__controls
       flex-direction: column
-      padding: 16px 0
+      padding: $infinite-carousel-controls-padding 0
 
       .v-icon
         transform: rotate(90deg)

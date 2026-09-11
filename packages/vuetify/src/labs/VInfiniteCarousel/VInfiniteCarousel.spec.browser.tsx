@@ -309,6 +309,28 @@ describe('VInfiniteCarousel', () => {
     expect(getComputedStyle(track).translate).toBe('none')
   })
 
+  it('leaves the faded edges out of the visible area', async () => {
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={{ size: 40 }} shiftDistance="50%" showArrows>
+          { Array.from({ length: 10 }, (_, i) => (
+            <button style="width: 100px">{ `item ${i}` }</button>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
+
+    await waitIdle()
+
+    const before = screen.getAllByText('item 0')[0].getBoundingClientRect().x
+
+    await userEvent.click(document.querySelector('.v-infinite-carousel__next')!)
+
+    // 50% of the 120px left between two 40px fades
+    await expect.poll(() => screen.getAllByText('item 0')[0].getBoundingClientRect().x)
+      .toBeCloseTo(before - 60, 0)
+  })
+
   it('resolves shift-distance in any css length unit', async () => {
     render(() => (
       <div style="width: 200px">

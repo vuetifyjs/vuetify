@@ -2,7 +2,7 @@
   "props": {
     "direction": "Axis the content scrolls along.",
     "autoPlay": "Scrolls the content on its own. Pass an object to set `speed` (pixels per second), `reverse` or `pauseOnHover`.",
-    "mask": "Fades the content out at both edges. Pass an object to set the gradient `size` in pixels and its `color`.",
+    "mask": "Fades the content out at both edges. Pass an object to set the gradient `size`.",
     "gap": "Space between items. Also sets the seam between repeated copies, so both stay in step.",
     "draggable": "Allows scrubbing the content by dragging it with a pointer or finger.",
     "shiftDistance": "How far one arrow click moves the content.",

@@ -83,12 +83,14 @@ Notable behaviors:
 
 #### Mask
 
-`mask` fades both edges out under a gradient. Pass an object to change its `size` and/or `color` to match the background.
+`mask` fades both edges out to transparent, so it blends into any background. You can customize the size using `$infinite-carousel-mask-size` or pass an object to the `mask` prop.
 
 ```html
+<!-- default 60px -->
 <v-infinite-carousel mask></v-infinite-carousel>
 
-<v-infinite-carousel :mask="{ size: 80, color: 'surface' }"></v-infinite-carousel>
+<!-- changed to 80px (accepts string value with CSS units or percentage) -->
+<v-infinite-carousel :mask="{ size: 80 }"></v-infinite-carousel>
 ```
 
 #### Arrows

@@ -18,7 +18,6 @@ import {
   genericComponent,
   IN_BROWSER,
   isBoolean,
-  isCssColor,
   isObject,
   isString,
   PREFERS_REDUCED_MOTION,
@@ -38,7 +37,6 @@ export interface VInfiniteCarouselAutoPlay {
 
 export interface VInfiniteCarouselMask {
   size?: number | string
-  color?: string
 }
 
 export type VInfiniteCarouselSlots = {
@@ -49,7 +47,6 @@ export type VInfiniteCarouselSlots = {
 }
 
 const DEFAULT_SPEED = 35
-const DEFAULT_MASK_SIZE = 60
 const STEP_DECAY = 120
 const DRAG_THRESHOLD = 4
 const MAX_COPIES = 20
@@ -125,47 +122,37 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const isHeld = toRef(() => !autoPlayConfig.value.speed)
     const isReversed = toRef(() => autoPlayConfig.value.reverse)
 
-    const maskConfig = toRef(() => {
-      if (!props.mask) return { size: 0, color: undefined }
-
-      const { size = DEFAULT_MASK_SIZE, color } = isObject(props.mask) ? props.mask : {}
-
-      return {
-        size,
-        color: !color || isCssColor(color) ? color : `rgb(var(--v-theme-${color}))`,
-      }
-    })
-
-    const { resizeRef: containerRef } = useResizeObserver(onResize)
+    const containerRef = ref<HTMLElement>()
+    const { resizeRef: viewportRef } = useResizeObserver(onResize)
     const { resizeRef: contentRef } = useResizeObserver(onResize)
 
     function onResize () {
-      const container = containerRef.el
+      const viewport = viewportRef.el
       const group = contentRef.el
-      if (!container || !group) return
+      if (!viewport || !group) return
 
-      const containerStyles = getComputedStyle(container)
+      const viewportStyles = getComputedStyle(viewport)
       const groupStyles = getComputedStyle(group)
 
-      const [groupSize, containerSize, paddingStart, paddingEnd, gap] = isVertical.value
+      const [groupSize, outerSize, paddingStart, paddingEnd, gap] = isVertical.value
         ? [
           group.offsetHeight,
-          container.clientHeight,
-          containerStyles.paddingTop,
-          containerStyles.paddingBottom,
+          viewport.clientHeight,
+          viewportStyles.paddingTop,
+          viewportStyles.paddingBottom,
           groupStyles.rowGap,
         ]
         : [
           group.offsetWidth,
-          container.clientWidth,
-          containerStyles.paddingLeft,
-          containerStyles.paddingRight,
+          viewport.clientWidth,
+          viewportStyles.paddingLeft,
+          viewportStyles.paddingRight,
           groupStyles.columnGap,
         ]
 
       const gapSize = parseFloat(gap) || 0
 
-      viewportSize.value = containerSize - parseFloat(paddingStart) - parseFloat(paddingEnd)
+      viewportSize.value = outerSize - parseFloat(paddingStart) - parseFloat(paddingEnd)
       loopDistance.value = groupSize + gapSize
       loopDuration.value = isHeld.value ? 1 : loopDistance.value / autoPlayConfig.value.speed
 
@@ -291,7 +278,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const virtualFocus = useVirtualFocus(
       () => items.value.map((el, id) => ({ id, el })),
       {
-        control: () => containerRef.el,
+        control: () => containerRef.value,
         circular: true,
         onHighlight (id) {
           const el = items.value[id as number]
@@ -326,7 +313,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     }
 
     function isPaused () {
-      const container = containerRef.el
+      const container = containerRef.value
 
       return isHeld.value ||
         isDragging.value ||
@@ -379,7 +366,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
         isDragging.value = true
         hasDragged = true
-        containerRef.el?.setPointerCapture(e.pointerId)
+        containerRef.value?.setPointerCapture(e.pointerId)
       }
 
       seek(dragOrigin.shift - delta)
@@ -400,7 +387,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     }
 
     function onFocusout (e: FocusEvent) {
-      if (containerRef.el?.contains(e.relatedTarget as Node)) return
+      if (containerRef.value?.contains(e.relatedTarget as Node)) return
 
       virtualFocus.clear()
       resume()
@@ -428,7 +415,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
         for (const entry of entries) {
           entry.target.toggleAttribute('inert', !entry.isIntersecting)
         }
-      }, { root: containerRef.el })
+      }, { root: viewportRef.el })
 
       for (const item of items.value) observer.observe(item)
     }
@@ -481,6 +468,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             'v-infinite-carousel',
             {
               'v-infinite-carousel--vertical': isVertical.value,
+              'v-infinite-carousel--mask': !!props.mask,
               'v-infinite-carousel--draggable': props.draggable && copies.value > 1,
               'v-infinite-carousel--dragging': isDragging.value,
               'v-infinite-carousel--show-arrows-on-hover': props.showArrows === 'hover',
@@ -489,8 +477,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           ]}
           style={[
             {
-              '--v-infinite-carousel-mask': convertToUnit(maskConfig.value.size),
-              '--v-infinite-carousel-mask-color': maskConfig.value.color,
+              '--v-infinite-carousel-mask-size': convertToUnit(isObject(props.mask) ? props.mask.size : undefined),
               '--v-infinite-carousel-gap': convertToUnit(props.gap),
               '--v-infinite-carousel-shift': convertToUnit(props.shiftDistance),
             },
@@ -509,16 +496,18 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           onPointercancel={ onPointerup }
           onClickCapture={ onClickCapture }
         >
-          <div ref={ trackRef } class="v-infinite-carousel__track">
-            <div ref={ contentRef } class="v-infinite-carousel__group">
-              { groupChildren() }
-            </div>
-
-            { Array.from({ length: copies.value - 1 }, (_, index) => (
-              <div key={ index } class="v-infinite-carousel__group" aria-hidden="true" inert>
+          <div ref={ viewportRef } class="v-infinite-carousel__viewport">
+            <div ref={ trackRef } class="v-infinite-carousel__track">
+              <div ref={ contentRef } class="v-infinite-carousel__group">
                 { groupChildren() }
               </div>
-            ))}
+
+              { Array.from({ length: copies.value - 1 }, (_, index) => (
+                <div key={ index } class="v-infinite-carousel__group" aria-hidden="true" inert>
+                  { groupChildren() }
+                </div>
+              ))}
+            </div>
           </div>
 
           <div ref={ probeRef } class="v-infinite-carousel__probe" />
