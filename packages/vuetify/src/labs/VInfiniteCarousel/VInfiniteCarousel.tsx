@@ -20,6 +20,7 @@ import {
   isBoolean,
   isCssColor,
   isObject,
+  isString,
   PREFERS_REDUCED_MOTION,
   propsFactory,
   useRender,
@@ -240,7 +241,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     function resolveShiftDistance () {
       const value = props.shiftDistance
 
-      if (typeof value === 'string' && value.endsWith('%')) {
+      if (isString(value) && value.endsWith('%')) {
         return parseFloat(value) / 100 * viewportSize.value
       }
 
@@ -513,7 +514,9 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       )
     })
 
-    return {}
+    return {
+      slide: (direction: 'prev' | 'next') => step(direction === 'next' ? 1 : -1),
+    }
   },
 })
 
