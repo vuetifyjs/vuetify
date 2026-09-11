@@ -62,7 +62,7 @@ It clips with `overflow: clip` rather than a scroll container, so the strip cann
 Notable behaviors:
 
 - content is duplicated to fill the container, and the copy count follows a resize
-- duplicates are `inert`, as is anything clipped out of view, so screen readers and the tab order only ever see what is on screen
+- duplicates are hidden from screen readers and left out of the tab order, so assistive tech gets the content once; keyboard focus that lands out of view pulls its item into view
 - the strip is a single tab stop; arrow keys move focus between items and pull each one into view. When nothing inside is focusable, they move the strip by `shift-distance` instead. Pass an `aria-label` so the group announces what it holds
 - with `draggable`, pointer and touch drag scrub the loop, and it resumes where you let go; a drag that ends over a link does not follow it
 - the loop pauses while focus is inside it, while the pointer is over a link, button or input in it, and under `prefers-reduced-motion`

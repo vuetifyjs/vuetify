@@ -1,5 +1,5 @@
 // Components
-import { VInfiniteCarousel } from '../VInfiniteCarousel'
+import { VInfiniteCarousel } from '..'
 
 // Utilities
 import { commands, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
@@ -26,24 +26,41 @@ function dragAcross () {
   return commands.drag([left + 180, top + 15], [left + 120, top + 15], [left + 60, top + 15])
 }
 
+function isInView (el: Element) {
+  const viewport = document.querySelector('.v-infinite-carousel__viewport')!.getBoundingClientRect()
+  const { left, right, top, bottom } = el.getBoundingClientRect()
+
+  // 1px of slack for sub-pixel seeking
+  return left >= viewport.left - 1 && right <= viewport.right + 1 &&
+    top >= viewport.top - 1 && bottom <= viewport.bottom + 1
+}
+
 describe('VInfiniteCarousel', () => {
-  it('inerts items clipped by the viewport', async () => {
-    renderCarousel()
+  it('keeps copies out of the tab order and reveals what tab reaches', async () => {
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={ false }>
+          { Array.from({ length: 10 }, (_, i) => (
+            <div style="width: 100px">
+              <button>{ `item ${i}` }</button>
+            </div>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
 
     await waitIdle()
 
-    const [first] = screen.getAllByText('item 0')
-    const [last] = screen.getAllByText('item 9')
+    const copied = Array.from(document.querySelectorAll<HTMLElement>('.v-infinite-carousel__group[aria-hidden] button'))
+    expect(copied.length).toBeGreaterThan(0)
+    expect(copied.every(button => button.tabIndex === -1)).toBe(true)
 
-    expect(first).not.toHaveAttribute('inert')
-    expect(last).toHaveAttribute('inert')
+    // the strip itself, then the buttons nested in items 0 to 3
+    await userEvent.keyboard('{Tab}{Tab}{Tab}{Tab}{Tab}')
 
-    // the suite runs with reducedMotion: 'reduce', so drive the loop by hand
-    // to prove IntersectionObserver keeps up while the track is moving
-    const animation = document.querySelector('.v-infinite-carousel__track')!.getAnimations()[0]
-    animation.play()
-
-    await expect.poll(() => last.hasAttribute('inert'), { timeout: 2000 }).toBe(false)
+    const item3 = screen.getAllByText('item 3')[0]
+    expect(item3).toHaveFocus()
+    expect(isInView(item3)).toBe(true)
   })
 
   it('repeats short content enough to cover the viewport', async () => {
@@ -131,7 +148,7 @@ describe('VInfiniteCarousel', () => {
     await userEvent.keyboard('{ArrowRight}{ArrowRight}{ArrowRight}')
     const item3 = screen.getAllByText('item 3')[0]
     expect(item3).toHaveFocus()
-    expect(item3).not.toHaveAttribute('inert')
+    expect(isInView(item3)).toBe(true)
 
     await userEvent.tab({ shift: true })
     expect(screen.getByText('before')).toHaveFocus()
@@ -384,8 +401,6 @@ describe('VInfiniteCarousel', () => {
 
     for (const label of ['only', 'three', 'chips']) {
       await userEvent.keyboard('{ArrowRight}')
-      // IntersectionObserver runs a frame later and can pull `inert` back on
-      await waitAnimationFrame()
       expect(screen.getAllByText(label)[0]).toHaveFocus()
     }
   })
@@ -406,14 +421,14 @@ describe('VInfiniteCarousel', () => {
     const [first] = screen.getAllByText('item 0')
     const [last] = screen.getAllByText('item 9')
 
-    expect(first).not.toHaveAttribute('inert')
-    expect(last).toHaveAttribute('inert')
+    expect(isInView(first)).toBe(true)
+    expect(isInView(last)).toBe(false)
 
     await userEvent.tab()
     await userEvent.keyboard('{ArrowDown}{ArrowDown}{ArrowDown}')
 
     const item2 = screen.getAllByText('item 2')[0]
     expect(item2).toHaveFocus()
-    expect(item2).not.toHaveAttribute('inert')
+    expect(isInView(item2)).toBe(true)
   })
 })

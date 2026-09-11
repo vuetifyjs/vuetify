@@ -15,6 +15,7 @@ import { onMounted, onScopeDispose, onUpdated, ref, shallowRef, toRef, watch } f
 import {
   convertToUnit,
   flattenFragments,
+  focusableChildren,
   genericComponent,
   IN_BROWSER,
   isBoolean,
@@ -51,7 +52,6 @@ const STEP_DECAY = 120
 const DRAG_THRESHOLD = 4
 const MAX_COPIES = 20
 const INTERACTIVE = 'a[href], button, input, select, textarea, [contenteditable]'
-const FOCUSABLE = `${INTERACTIVE}, [tabindex]`
 
 export const makeVInfiniteCarouselProps = propsFactory({
   direction: {
@@ -284,7 +284,6 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           const el = items.value[id as number]
           if (!el) return
 
-          el.removeAttribute('inert')
           reveal(el)
           el.focus()
         },
@@ -386,6 +385,15 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       e.stopPropagation()
     }
 
+    function onFocusin (e: FocusEvent) {
+      const target = e.target as HTMLElement
+      const item = items.value.find(el => el.contains(target))
+
+      // keyboard only, so clicking an item half under the fade does not jump the strip
+      if (item && target.matches(':focus-visible')) reveal(item)
+      if (isPaused()) animation?.pause()
+    }
+
     function onFocusout (e: FocusEvent) {
       if (containerRef.value?.contains(e.relatedTarget as Node)) return
 
@@ -393,37 +401,27 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       resume()
     }
 
-    let observer: IntersectionObserver | undefined
-
-    function observeItems () {
-      observer?.disconnect()
-
+    function collectItems () {
       items.value = Array.from(contentRef.el?.children ?? [])
         .filter(el => !el.classList.contains('v-infinite-carousel__separator')) as HTMLElement[]
 
       // sticky: the tabindex set below keeps this true even if the content later loses its focusables
-      hasFocusableItems = items.value.some(el => el.matches(FOCUSABLE) || !!el.querySelector(FOCUSABLE))
+      hasFocusableItems = !!contentRef.el && focusableChildren(contentRef.el, false).length > 0
       if (hasFocusableItems) {
         for (const item of items.value) {
           item.tabIndex = -1
         }
       }
 
-      if (!IN_BROWSER) return
-
-      observer = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-          entry.target.toggleAttribute('inert', !entry.isIntersecting)
-        }
-      }, { root: viewportRef.el })
-
-      for (const item of items.value) observer.observe(item)
+      trackRef.value?.querySelectorAll<HTMLElement>('.v-infinite-carousel__group[aria-hidden]')
+        .forEach(copy => focusableChildren(copy).forEach(el => {
+          el.tabIndex = -1
+        }))
     }
 
-    onMounted(observeItems)
-    onUpdated(observeItems)
+    onMounted(collectItems)
+    onUpdated(collectItems)
     onScopeDispose(() => {
-      observer?.disconnect()
       animation?.cancel()
       cancelStep()
     })
@@ -485,7 +483,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           ]}
           role="group"
           tabindex={ virtualFocus.highlightedId.value == null ? 0 : -1 }
-          onFocusin={ () => isPaused() && animation?.pause() }
+          onFocusin={ onFocusin }
           onFocusout={ onFocusout }
           onKeydown={ onKeydown }
           onPointerover={ onPointerover }
@@ -503,7 +501,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
               </div>
 
               { Array.from({ length: copies.value - 1 }, (_, index) => (
-                <div key={ index } class="v-infinite-carousel__group" aria-hidden="true" inert>
+                <div key={ index } class="v-infinite-carousel__group" aria-hidden="true">
                   { groupChildren() }
                 </div>
               ))}
