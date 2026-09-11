@@ -181,6 +181,33 @@ describe('VInfiniteCarousel', () => {
     expect(screen.getAllByText('item 0')[0].getBoundingClientRect().x).toBeCloseTo(before - 100, 0)
   })
 
+  it('picks up a new speed without waiting for a resize', async () => {
+    const speed = shallowRef(100)
+
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={ false } autoPlay={{ speed: speed.value }}>
+          { Array.from({ length: 10 }, (_, i) => (
+            <button style="width: 100px">{ `item ${i}` }</button>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
+
+    await waitIdle()
+
+    const duration = () => document.querySelector('.v-infinite-carousel__track')!
+      .getAnimations()[0].effect!.getTiming().duration
+
+    // one loop is 10 × 100px plus 10 × 32px gaps
+    expect(duration()).toBe(13200)
+
+    speed.value = 200
+    await waitIdle()
+
+    expect(duration()).toBe(6600)
+  })
+
   it('scrubs the loop on drag', async () => {
     renderCarousel({ draggable: true })
 

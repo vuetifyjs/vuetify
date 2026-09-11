@@ -103,7 +103,6 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const isHoveringInteractive = shallowRef(false)
     const viewportSize = shallowRef(0)
     const loopDistance = shallowRef(0)
-    const loopDuration = shallowRef(0)
 
     const isVertical = toRef(() => props.direction === 'vertical')
 
@@ -121,6 +120,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
     const isHeld = toRef(() => !autoPlayConfig.value.speed)
     const isReversed = toRef(() => autoPlayConfig.value.reverse)
+    const loopDuration = toRef(() => isHeld.value ? 1 : loopDistance.value / autoPlayConfig.value.speed)
 
     const containerRef = ref<HTMLElement>()
     const { resizeRef: viewportRef } = useResizeObserver(onResize)
@@ -154,7 +154,6 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
       viewportSize.value = outerSize - parseFloat(paddingStart) - parseFloat(paddingEnd)
       loopDistance.value = groupSize + gapSize
-      loopDuration.value = isHeld.value ? 1 : loopDistance.value / autoPlayConfig.value.speed
 
       copies.value = loopDistance.value > 0
         ? Math.min(MAX_COPIES, 1 + Math.ceil((viewportSize.value + gapSize) / loopDistance.value))
