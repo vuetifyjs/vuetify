@@ -64,8 +64,8 @@ Notable behaviors:
 - content is duplicated to fill the container, and the copy count follows a resize
 - duplicates are `inert`, as is anything clipped out of view, so screen readers and the tab order only ever see what is on screen
 - the strip is a single tab stop; arrow keys move focus between items and pull each one into view. Pass an `aria-label` so the group announces what it holds
-- pointer and touch drag scrub the loop, and it resumes where you let go
-- the loop pauses while focus is inside it and under `prefers-reduced-motion`
+- with `draggable`, pointer and touch drag scrub the loop, and it resumes where you let go; a drag that ends over a link does not follow it
+- the loop pauses while focus is inside it, while the pointer is over a link, button or input in it, and under `prefers-reduced-motion`
 
 ### Props
 
@@ -77,7 +77,7 @@ Notable behaviors:
 
 #### Auto play
 
-`auto-play` scrolls the content on its own. Pass an object to set the `speed` in pixels per second or to `reverse` the travel direction. Left off, the strip holds still while staying draggable and keyboard navigable.
+`auto-play` scrolls the content on its own. Pass an object to set the `speed` in pixels per second or to `reverse` the travel direction. Left off, the strip holds still while staying keyboard navigable, and draggable with `draggable`.
 
 <ExamplesExample file="v-infinite-carousel/prop-auto-play" />
 
