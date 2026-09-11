@@ -142,6 +142,28 @@ describe('VInfiniteCarousel', () => {
     expect(screen.getByText('after')).toHaveFocus()
   })
 
+  it('steps by shift-distance on arrows when no item is focusable', async () => {
+    render(() => (
+      <div style="width: 200px">
+        <VInfiniteCarousel mask={ false } shiftDistance="50%">
+          { Array.from({ length: 10 }, (_, i) => (
+            <span style="width: 100px">{ `item ${i}` }</span>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
+
+    await waitIdle()
+
+    const before = screen.getAllByText('item 0')[0].getBoundingClientRect().x
+
+    await userEvent.tab()
+    await userEvent.keyboard('{ArrowRight}')
+
+    expect(document.querySelector('.v-infinite-carousel')).toHaveFocus()
+    expect(screen.getAllByText('item 0')[0].getBoundingClientRect().x).toBeCloseTo(before - 100, 0)
+  })
+
   it('scrubs the loop on drag', async () => {
     renderCarousel({ draggable: true })
 
@@ -173,6 +195,24 @@ describe('VInfiniteCarousel', () => {
 
     await userEvent.keyboard('{ArrowRight}')
     expect(focusVisible()).not.toBeNull()
+  })
+
+  it.each([
+    [undefined, 'paused'],
+    [false, 'running'],
+  ])('pauseOnHover: %s leaves the loop %s under the pointer', async (pauseOnHover, playState) => {
+    // no gap, so the pointer always lands on a button
+    renderCarousel({ autoPlay: { speed: 2000, pauseOnHover }, gap: 0 })
+
+    await waitIdle()
+
+    const animation = document.querySelector('.v-infinite-carousel__track')!.getAnimations()[0]
+    animation.play()
+
+    // a moving item never passes the stability check
+    await userEvent.hover(screen.getAllByText('item 0')[0], { force: true })
+
+    expect(animation.playState).toBe(playState)
   })
 
   it('ignores drag when draggable is false', async () => {

@@ -33,6 +33,7 @@ import type { IconValue } from '@/composables/icons'
 export interface VInfiniteCarouselAutoPlay {
   speed?: number | string
   reverse?: boolean
+  pauseOnHover?: boolean
 }
 
 export interface VInfiniteCarouselMask {
@@ -53,6 +54,7 @@ const STEP_DECAY = 120
 const DRAG_THRESHOLD = 4
 const MAX_COPIES = 20
 const INTERACTIVE = 'a[href], button, input, select, textarea, [contenteditable]'
+const FOCUSABLE = `${INTERACTIVE}, [tabindex]`
 
 export const makeVInfiniteCarouselProps = propsFactory({
   direction: {
@@ -109,11 +111,15 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const isVertical = toRef(() => props.direction === 'vertical')
 
     const autoPlayConfig = toRef(() => {
-      if (!props.autoPlay) return { speed: 0, reverse: false }
+      if (!props.autoPlay) return { speed: 0, reverse: false, pauseOnHover: false }
 
-      const { speed = DEFAULT_SPEED, reverse = false } = isObject(props.autoPlay) ? props.autoPlay : {}
+      const {
+        speed = DEFAULT_SPEED,
+        reverse = false,
+        pauseOnHover = true,
+      } = isObject(props.autoPlay) ? props.autoPlay : {}
 
-      return { speed: Math.max(0, Number(speed) || 0), reverse }
+      return { speed: Math.max(0, Number(speed) || 0), reverse, pauseOnHover }
     })
 
     const isHeld = toRef(() => !autoPlayConfig.value.speed)
@@ -298,13 +304,19 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       }
     )
 
+    let hasFocusableItems = false
+
     function onKeydown (e: KeyboardEvent) {
       const isRtl = !isVertical.value && getComputedStyle(e.currentTarget as HTMLElement).direction === 'rtl'
       const [previousKey, nextKey] = isVertical.value ? ['ArrowUp', 'ArrowDown']
         : isRtl ? ['ArrowRight', 'ArrowLeft']
         : ['ArrowLeft', 'ArrowRight']
 
-      if (e.key === previousKey) virtualFocus.prev()
+      if (!hasFocusableItems) {
+        if (e.key === previousKey) step(-1)
+        else if (e.key === nextKey) step(1)
+        else return
+      } else if (e.key === previousKey) virtualFocus.prev()
       else if (e.key === nextKey) virtualFocus.next()
       else if (e.key === 'Home') virtualFocus.first()
       else if (e.key === 'End') virtualFocus.last()
@@ -327,7 +339,8 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     function onPointerover (e: PointerEvent) {
       const target = e.target as HTMLElement
 
-      isHoveringInteractive.value = !target.closest('.v-infinite-carousel__controls') &&
+      isHoveringInteractive.value = autoPlayConfig.value.pauseOnHover &&
+        !target.closest('.v-infinite-carousel__controls') &&
         !!target.closest(INTERACTIVE)
 
       if (isHoveringInteractive.value) animation?.pause()
@@ -401,7 +414,13 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       items.value = Array.from(contentRef.el?.children ?? [])
         .filter(el => !el.classList.contains('v-infinite-carousel__separator')) as HTMLElement[]
 
-      for (const item of items.value) item.tabIndex = -1
+      // sticky: the tabindex set below keeps this true even if the content later loses its focusables
+      hasFocusableItems = items.value.some(el => el.matches(FOCUSABLE) || !!el.querySelector(FOCUSABLE))
+      if (hasFocusableItems) {
+        for (const item of items.value) {
+          item.tabIndex = -1
+        }
+      }
 
       if (!IN_BROWSER) return
 
