@@ -153,28 +153,84 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const { themeClasses } = provideTheme(props)
     const { width } = useDisplay()
     const maxButtons = shallowRef(-1)
+    let lastCandidate: number | undefined
+    let candidateBeforeLast: number | undefined
 
     provideDefaults(undefined, { scoped: true })
+
+    const length = computed(() => parseInt(props.length, 10))
+    const start = computed(() => parseInt(props.start, 10))
+    const probeCap = computed(() => Math.max(0, Math.min(length.value, 50)))
+
+    const outerWidth = (el: HTMLElement) => {
+      const style = getComputedStyle(el)
+      return el.getBoundingClientRect().width + parseFloat(style.marginLeft) + parseFloat(style.marginRight)
+    }
+
+    function slotsFitToTotalVisible (rawSlotsFit: number) {
+      if (rawSlotsFit >= length.value) return length.value
+      if (rawSlotsFit <= 0) return 0
+      if (rawSlotsFit <= 2) return 1
+      return rawSlotsFit - 1
+    }
+
+    let availableWidth: number | undefined
+    let reservedWidth = 0
+    let probeCumulativeWidths: number[] = []
+
+    function recalcMaxButtons () {
+      if (availableWidth == null || !probeCumulativeWidths.length) return
+
+      const availableForItems = availableWidth - reservedWidth
+
+      let rawSlotsFit = 0
+      for (const cumulative of probeCumulativeWidths) {
+        if (cumulative > availableForItems) break
+        rawSlotsFit++
+      }
+
+      const candidate = slotsFitToTotalVisible(rawSlotsFit)
+
+      if (candidate === candidateBeforeLast && candidate !== lastCandidate) return
+
+      candidateBeforeLast = lastCandidate
+      lastCandidate = candidate
+      maxButtons.value = candidate
+    }
 
     const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]
 
-      const firstItem = target.querySelector('.v-pagination__list > *') as HTMLElement
+      const controls = Array.from(target.querySelectorAll(
+        '.v-pagination__first, .v-pagination__prev, .v-pagination__next, .v-pagination__last'
+      )) as HTMLElement[]
 
-      if (!firstItem) return
+      availableWidth = contentRect.width
+      reservedWidth = controls.reduce((sum, el) => sum + outerWidth(el), 0)
 
-      const totalWidth = contentRect.width
-      const itemWidth =
-        firstItem.offsetWidth +
-        parseFloat(getComputedStyle(firstItem).marginRight) * 2
-
-      maxButtons.value = getMax(totalWidth, itemWidth)
+      recalcMaxButtons()
     })
 
-    const length = computed(() => parseInt(props.length, 10))
-    const start = computed(() => parseInt(props.start, 10))
+    const { resizeRef: probeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
+      if (!entries.length) return
+
+      const probeItems = Array.from(entries[0].target.querySelectorAll('.v-pagination__probe-item')) as HTMLElement[]
+
+      if (!probeItems.length) return
+
+      let minLeft = Infinity
+      let maxRight = -Infinity
+      probeCumulativeWidths = probeItems.map(el => {
+        const rect = el.getBoundingClientRect()
+        minLeft = Math.min(minLeft, rect.left)
+        maxRight = Math.max(maxRight, rect.right)
+        return maxRight - minLeft
+      })
+
+      recalcMaxButtons()
+    })
 
     const totalVisible = computed(() => {
       if (props.totalVisible != null) return parseInt(props.totalVisible, 10)
@@ -209,17 +265,28 @@ export const VPagination = genericComponent<VPaginationSlots>()({
       const left = even ? middle : middle + 1
       const right = length.value - middle
 
+      let result: (string | number)[]
+
       if (left - page.value >= 0) {
-        return [...createRange(Math.max(1, totalVisible.value - 1), start.value), props.ellipsis, length.value]
+        result = [...createRange(Math.max(1, totalVisible.value - 1), start.value), props.ellipsis, length.value]
       } else if (page.value - right >= (even ? 1 : 0)) {
         const rangeLength = totalVisible.value - 1
         const rangeStart = length.value - rangeLength + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
+        result = [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
       } else {
         const rangeLength = Math.max(1, totalVisible.value - 2)
         const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
+        result = [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
       }
+
+      if (props.totalVisible != null) return result
+
+      return result.map((item, i) => {
+        if (typeof item !== 'string') return item
+        const prev = result[i - 1] as number
+        const next = result[i + 1] as number
+        return next - prev === 2 ? prev + 1 : item
+      })
     })
 
     // TODO: 'first' | 'prev' | 'next' | 'last' does not work here?
@@ -278,6 +345,19 @@ export const VPagination = genericComponent<VPaginationSlots>()({
           }
         }
       })
+    })
+
+    const probeItems = computed(() => {
+      return createRange(probeCap.value, 1).map(item => ({
+        isActive: false,
+        key: `probe-${item}`,
+        page: n(item),
+        props: {
+          ellipsis: false,
+          icon: true,
+          disabled: false,
+        },
+      }))
     })
 
     const controls = computed(() => {
@@ -391,6 +471,24 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             </li>
           )}
         </ul>
+
+        { props.totalVisible == null && (
+        <ul
+          ref={ probeRef }
+          class={['v-pagination__list', 'v-pagination__probe-list']}
+          aria-hidden="true"
+          inert
+          style="position: fixed; top: -9999px; left: -9999px; visibility: hidden; pointer-events: none"
+        >
+          { probeItems.value.map(item => (
+            <li key={ item.key } class="v-pagination__probe-item">
+              { slots.item ? slots.item(item) : (
+                <VBtn _as="VPaginationBtn" { ...item.props }>{ item.page }</VBtn>
+              )}
+            </li>
+          ))}
+        </ul>
+        )}
       </props.tag>
     ))
 

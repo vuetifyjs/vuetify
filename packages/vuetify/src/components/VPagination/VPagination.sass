@@ -3,6 +3,9 @@
 
 @include tools.layer('components')
   .v-pagination
+    width: 100%
+    min-width: 0
+
     &__list
       margin: 0
       padding: 0
@@ -10,6 +13,7 @@
       list-style-type: none
       justify-content: center
       width: 100%
+      // width: fit-content
 
     &__item,
     &__first,
