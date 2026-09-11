@@ -9,11 +9,10 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeLocationProps } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useToggleScope } from '@/composables/toggleScope'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, shallowRef, toRef, watchEffect } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -49,7 +48,6 @@ export const VFab = genericComponent()({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const height = shallowRef(56)
-    const layoutItemStyles = ref()
 
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
@@ -70,20 +68,14 @@ export const VFab = genericComponent()({
       return props.location?.split(' ')[1] ?? 'end'
     })
 
-    useToggleScope(() => props.app, () => {
-      const layout = useLayoutItem({
-        id: props.name,
-        order: computed(() => parseInt(props.order, 10)),
-        position,
-        layoutSize: computed(() => props.layout ? height.value + 24 : 0),
-        elementSize: computed(() => height.value + 24),
-        active: computed(() => props.app && model.value),
-        absolute: toRef(() => props.absolute),
-      })
-
-      watchEffect(() => {
-        layoutItemStyles.value = layout.layoutItemStyles.value
-      })
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      order: computed(() => parseInt(props.order, 10)),
+      position,
+      layoutSize: computed(() => props.layout ? height.value + 24 : 0),
+      elementSize: computed(() => height.value + 24),
+      active: computed(() => props.app && model.value),
+      absolute: toRef(() => props.absolute),
     })
 
     const vFabRef = ref()
@@ -108,7 +100,7 @@ export const VFab = genericComponent()({
           ]}
           style={[
             props.app
-              ? { ...layoutItemStyles.value }
+              ? layoutItemStyles.value
               : {
                 height: props.absolute
                   ? '100%'
