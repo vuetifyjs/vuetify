@@ -19,7 +19,7 @@ The `v-infinite-carousel` component scrolls a strip of content in a seamless loo
 
 ::: warning
 
-This feature requires [v4.2.0](/getting-started/release-notes/?version=v4.2.0)
+This feature requires [v4.3.0](/getting-started/release-notes/?version=v4.3.0)
 
 :::
 
