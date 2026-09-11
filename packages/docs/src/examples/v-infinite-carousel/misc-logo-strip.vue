@@ -1,30 +1,28 @@
 <template>
-  <v-container>
-    <v-infinite-carousel :auto-play="{ speed: 25 }" :mask="{ size: 80 }" gap="4rem">
-      <div
-        v-for="logo in logos"
-        :key="logo.name"
-        class="d-flex align-center ga-3 text-medium-emphasis"
+  <v-infinite-carousel :auto-play="{ speed: 25 }" :mask="{ size: 80 }" gap="1.5rem">
+    <v-card
+      v-for="logo in logos"
+      :key="logo.name"
+      class="d-flex align-center ga-3 text-medium-emphasis py-5 px-8 mt-3 mb-6"
+      elevation="5"
+      rounded="12"
+    >
+      <svg
+        :aria-label="logo.name"
+        fill="currentColor"
+        height="32"
+        role="img"
+        viewBox="0 0 24 24"
+        width="32"
       >
-        <svg
-          :aria-label="logo.name"
-          fill="currentColor"
-          height="32"
-          role="img"
-          viewBox="0 0 24 24"
-          width="32"
-        >
-          <path :d="logo.path" />
-        </svg>
-        <span class="text-h6">{{ logo.name }}</span>
-      </div>
-    </v-infinite-carousel>
-  </v-container>
+        <path :d="logo.path" />
+      </svg>
+      <span class="text-h6">{{ logo.name }}</span>
+    </v-card>
+  </v-infinite-carousel>
 </template>
 
 <script setup>
-  // Brand marks from Iconify's simple-icons set, inlined so the example has no
-  // network dependency
   const logos = [
     { name: 'Vuetify', path: 'M6.312 12.564L12.636 1.2H0zM14.94 1.2L7.464 14.64L12 22.8L24 1.2zm4.98 2.4L12 17.856l-1.788-3.216L16.344 3.6zM6.312 7.62L4.08 3.6h4.476z' },
     { name: 'Vue', path: 'M24 1.61h-9.94L12 5.16L9.94 1.61H0l12 20.78ZM12 14.08L5.16 2.23h4.43L12 6.41l2.41-4.18h4.43Z' },

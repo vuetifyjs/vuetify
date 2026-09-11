@@ -101,11 +101,11 @@ Notable behaviors:
 
 ### Slots
 
-#### Custom arrows
+#### Separator
 
-Use the `prev` and `next` slots to replace the default buttons. Each receives the props the default button would have used.
+The `separator` slot places a divider after every item, including across the seam between repeated copies.
 
-<ExamplesExample file="v-infinite-carousel/slot-arrows" />
+<ExamplesExample file="v-infinite-carousel/slot-divider" />
 
 ### Examples
 
@@ -113,6 +113,18 @@ The following are a collection of examples that demonstrate more advanced capabi
 
 #### Logo strip
 
-A common use for an infinite carousel is an endless row of logos or partner names.
+A common use for an infinite carousel is an endless row of logos or partner names. It requires some spacing for the shadows to be fully rendered.
 
 <ExamplesExample file="v-infinite-carousel/misc-logo-strip" />
+
+#### Floating bubbles
+
+Items do not have to sit in a straight row. Here a single tile holds 12 absolutely positioned bubbles with drift movements in pseudo-random direction.
+
+<ExamplesExample file="v-infinite-carousel/misc-bubbles" />
+
+#### External controls
+
+Controls can live anywhere on the page. Grab the component with a template ref and call its exposed `slide('prev')` or `slide('next')`, which moves the content by `shift-distance` like the built-in arrows.
+
+<ExamplesExample file="v-infinite-carousel/misc-external-controls" />

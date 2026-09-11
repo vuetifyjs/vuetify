@@ -52,7 +52,7 @@
   const props = computed(() => {
     return {
       draggable: draggable.value || undefined,
-      'auto-play': hold.value ? undefined : { reverse: reverse.value },
+      'auto-play': hold.value ? undefined : reverse.value ? { reverse: true } : true,
       'show-arrows': arrows.value || undefined,
       mask: maskSize.value ? { size: maskSize.value } : undefined,
       gap: gap.value !== 32 ? gap.value : undefined,
