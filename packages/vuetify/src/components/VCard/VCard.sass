@@ -127,6 +127,17 @@
 
     @include card-line-height-densities($card-title-densities)
 
+    &--truncate
+      overflow: $card-title-overflow
+      text-overflow: $card-title-text-overflow
+      white-space: $card-title-white-space
+
+    &--wrap
+      overflow: visible
+      text-overflow: clip
+      white-space: normal
+      word-break: break-word
+
     .v-card-item &
       padding: $card-title-header-padding
 
