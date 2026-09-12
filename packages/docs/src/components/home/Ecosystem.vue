@@ -15,19 +15,27 @@
         </template>
       </HomeCommonTitle>
 
-      <HomeCommonMarquee :items="features" class="my-4">
-        <template #default="{ item }">
-          <a :href="item.href" :title="`Visit ${item.href}`" target="_blank">
-            <v-img
-              :alt="item.image"
-              :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
-              height="40"
-              width="150"
-              contain
-            />
-          </a>
-        </template>
-      </HomeCommonMarquee>
+      <v-infinite-carousel
+        :aria-label="t('home.ecosystem.subtitle')"
+        class="my-4"
+        mask
+      >
+        <a
+          v-for="item in features"
+          :key="item.href"
+          :href="item.href"
+          :title="`Visit ${item.href}`"
+          target="_blank"
+        >
+          <v-img
+            :alt="item.image"
+            :src="`https://cdn.vuetifyjs.com/docs/images/one/logos/${item.image}-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`"
+            height="40"
+            width="150"
+            contain
+          />
+        </a>
+      </v-infinite-carousel>
     </v-container>
   </v-responsive>
 </template>

@@ -1,0 +1,8 @@
+@use '../../styles/settings';
+
+// VInfiniteCarousel
+$infinite-carousel-gap: 2rem !default;
+$infinite-carousel-mask-size: 60px !default;
+$infinite-carousel-padding: 4px !default;
+$infinite-carousel-controls-padding: 16px !default;
+$infinite-carousel-controls-transition: .2s settings.$standard-easing !default;
