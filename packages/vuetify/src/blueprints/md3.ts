@@ -94,8 +94,12 @@ export const md3: Blueprint = {
     VSwitch: {
       indentDetails: true,
     },
+    VTab: {
+      rounded: 0,
+    },
     VTabs: {
       color: 'primary',
+      sliderVariant: 'primary',
     },
     VTextarea: {
       variant: 'outlined',
