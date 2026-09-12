@@ -72,7 +72,7 @@ Notable behaviors:
 
 #### Direction
 
-`direction` switches the loop to the block axis. A vertical carousel needs a container with a definite height.
+`direction` switches the loop to the block axis. A vertical carousel needs a definite height, either from `height` or from its container.
 
 <ExamplesExample file="v-infinite-carousel/prop-direction" />
 

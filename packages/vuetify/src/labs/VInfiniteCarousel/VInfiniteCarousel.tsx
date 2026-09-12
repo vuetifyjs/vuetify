@@ -6,6 +6,7 @@ import { VIconBtn } from '@/components/VIconBtn'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useRtl } from '@/composables/locale'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeTagProps } from '@/composables/tag'
@@ -74,6 +75,7 @@ export const makeVInfiniteCarouselProps = propsFactory({
   },
 
   ...makeComponentProps(),
+  ...makeDimensionProps(),
   ...makeTagProps(),
 }, 'VInfiniteCarousel')
 
@@ -84,6 +86,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
   setup (props, { slots }) {
     const { isRtl } = useRtl()
+    const { dimensionStyles } = useDimension(props)
     const containerRef = ref<HTMLElement>()
     const trackRef = ref<HTMLElement>()
     const probeRef = ref<HTMLElement>()
@@ -467,6 +470,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
               '--v-infinite-carousel-gap': convertToUnit(props.gap),
               '--v-infinite-carousel-shift': convertToUnit(props.shiftDistance),
             },
+            dimensionStyles.value,
             props.style,
           ]}
           role="group"
