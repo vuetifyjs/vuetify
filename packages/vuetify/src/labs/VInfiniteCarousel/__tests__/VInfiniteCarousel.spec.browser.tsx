@@ -1,13 +1,14 @@
 // Components
 import { VInfiniteCarousel } from '..'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
 import { commands, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
 import { shallowRef } from 'vue'
 
-function renderCarousel (props: Record<string, any> = {}) {
+function renderCarousel (props: Record<string, any> = {}, rtl = false) {
   return render(() => (
-    <div>
+    <VLocaleProvider rtl={ rtl }>
       <button>before</button>
       <div style="width: 200px">
         <VInfiniteCarousel mask={ false } speed={ 2000 } { ...props }>
@@ -17,13 +18,16 @@ function renderCarousel (props: Record<string, any> = {}) {
         </VInfiniteCarousel>
       </div>
       <button>after</button>
-    </div>
+    </VLocaleProvider>
   ))
 }
 
-function dragAcross () {
+// 120px towards the inline-start edge
+function dragAcross (rtl = false) {
   const { top, left } = document.querySelector('.v-infinite-carousel')!.getBoundingClientRect()
-  return commands.drag([left + 180, top + 15], [left + 120, top + 15], [left + 60, top + 15])
+  return rtl
+    ? commands.drag([left + 20, top + 15], [left + 80, top + 15], [left + 140, top + 15])
+    : commands.drag([left + 180, top + 15], [left + 120, top + 15], [left + 60, top + 15])
 }
 
 function isInView (el: Element) {
@@ -36,17 +40,19 @@ function isInView (el: Element) {
 }
 
 describe('VInfiniteCarousel', () => {
-  it('keeps copies out of the tab order and reveals what tab reaches', async () => {
+  it.each([false, true])('keeps copies out of the tab order and reveals what tab reaches (rtl: %s)', async rtl => {
     render(() => (
-      <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } paused>
-          { Array.from({ length: 10 }, (_, i) => (
-            <div style="width: 100px">
-              <button>{ `item ${i}` }</button>
-            </div>
-          ))}
-        </VInfiniteCarousel>
-      </div>
+      <VLocaleProvider rtl={ rtl }>
+        <div style="width: 200px">
+          <VInfiniteCarousel mask={ false } paused>
+            { Array.from({ length: 10 }, (_, i) => (
+              <div style="width: 100px">
+                <button>{ `item ${i}` }</button>
+              </div>
+            ))}
+          </VInfiniteCarousel>
+        </div>
+      </VLocaleProvider>
     ))
 
     await waitIdle()
@@ -99,6 +105,17 @@ describe('VInfiniteCarousel', () => {
 
     // without the 2rem default the loop is 100px, so it takes more copies to cover 800
     expect(document.querySelectorAll('.v-infinite-carousel__group')).toHaveLength(10)
+  })
+
+  it.each([false, true])('rests with the first item at the start edge (rtl: %s)', async rtl => {
+    renderCarousel({ paused: true }, rtl)
+
+    await waitIdle()
+
+    const viewport = document.querySelector('.v-infinite-carousel__viewport')!.getBoundingClientRect()
+    const first = screen.getAllByText('item 0')[0].getBoundingClientRect()
+
+    expect(rtl ? first.right : first.left).toBeCloseTo(rtl ? viewport.right : viewport.left, 0)
   })
 
   it('fills the faded start edge when the loop wraps', async () => {
@@ -281,16 +298,16 @@ describe('VInfiniteCarousel', () => {
     })
   })
 
-  it('scrubs the loop on drag', async () => {
-    renderCarousel({ draggable: true })
+  it.each([false, true])('scrubs the loop on drag (rtl: %s)', async rtl => {
+    renderCarousel({ draggable: true, paused: true }, rtl)
 
     await waitIdle()
 
     const before = screen.getAllByText('item 1')[0].getBoundingClientRect().x
 
-    await dragAcross()
+    await dragAcross(rtl)
 
-    expect(screen.getAllByText('item 1')[0].getBoundingClientRect().x).toBeLessThan(before)
+    expect(screen.getAllByText('item 1')[0].getBoundingClientRect().x).toBeCloseTo(before + (rtl ? 120 : -120), 0)
   })
 
   it('only counts keyboard focus as a reason to pause', async () => {
@@ -385,15 +402,17 @@ describe('VInfiniteCarousel', () => {
     expect(document.querySelector('.v-infinite-carousel')!.getBoundingClientRect().width).toBe(400)
   })
 
-  it('steps by shift-distance when arrows are clicked', async () => {
+  it.each([false, true])('steps by shift-distance when arrows are clicked (rtl: %s)', async rtl => {
     render(() => (
-      <div style="width: 200px">
-        <VInfiniteCarousel mask={ false } shiftDistance="50%" showArrows paused>
-          { Array.from({ length: 10 }, (_, i) => (
-            <button style="width: 100px">{ `item ${i}` }</button>
-          ))}
-        </VInfiniteCarousel>
-      </div>
+      <VLocaleProvider rtl={ rtl }>
+        <div style="width: 200px">
+          <VInfiniteCarousel mask={ false } shiftDistance="50%" showArrows paused>
+            { Array.from({ length: 10 }, (_, i) => (
+              <button style="width: 100px">{ `item ${i}` }</button>
+            ))}
+          </VInfiniteCarousel>
+        </div>
+      </VLocaleProvider>
     ))
 
     await waitIdle()
@@ -402,9 +421,9 @@ describe('VInfiniteCarousel', () => {
 
     await userEvent.click(document.querySelector('.v-infinite-carousel__next')!)
 
-    // 50% of the 200px viewport
+    // 50% of the 200px viewport, towards the start edge
     await expect.poll(() => screen.getAllByText('item 0')[0].getBoundingClientRect().x)
-      .toBeCloseTo(before - 100, 0)
+      .toBeCloseTo(before + (rtl ? 100 : -100), 0)
   })
 
   it('keeps the loop running through an arrow step', async () => {

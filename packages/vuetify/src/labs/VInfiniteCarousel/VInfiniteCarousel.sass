@@ -123,6 +123,13 @@
       .v-infinite-carousel__next
         transform: translateX(200%)
 
+      @include tools.rtl()
+        .v-infinite-carousel__prev
+          transform: translateX(200%)
+
+        .v-infinite-carousel__next
+          transform: translateX(-200%)
+
       &.v-infinite-carousel--vertical
         .v-infinite-carousel__prev
           transform: translateY(-200%)

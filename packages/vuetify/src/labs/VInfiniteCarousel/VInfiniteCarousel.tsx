@@ -102,6 +102,8 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
     const isVertical = toRef(() => props.direction === 'vertical')
     const isDraggable = toRef(() => props.draggable ?? PREFERS_REDUCED_MOTION())
+    const isMirrored = toRef(() => isRtl.value && !isVertical.value)
+    const loopOffset = toRef(() => isMirrored.value ? loopDistance.value : -loopDistance.value)
 
     const speed = toRef(() => Math.max(0, Number(props.speed) || 0))
     const loopDuration = toRef(() => speed.value ? loopDistance.value / speed.value * 1000 : 1000)
@@ -158,8 +160,8 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       if (!track || !loopDuration.value) return
 
       const end = isVertical.value
-        ? `translateY(-${loopDistance.value}px)`
-        : `translateX(-${loopDistance.value}px)`
+        ? `translateY(${loopOffset.value}px)`
+        : `translateX(${loopOffset.value}px)`
 
       animation = track.animate([{ transform: 'none' }, { transform: end }], {
         duration: loopDuration.value,
@@ -172,7 +174,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       if (isPaused()) animation.pause()
     }
 
-    watch([isVertical, speed, () => props.reverse, loopDistance], syncAnimation, { flush: 'post' })
+    watch([isVertical, speed, () => props.reverse, loopOffset], syncAnimation, { flush: 'post' })
     watch(() => props.direction, onResize, { flush: 'post' })
     watch(() => props.paused, paused => {
       if (paused) animation?.pause()
@@ -258,7 +260,9 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
       const [start, size] = isVertical.value
         ? [el.offsetTop - group.offsetTop, el.offsetHeight]
-        : [el.offsetLeft - group.offsetLeft, el.offsetWidth]
+        : isMirrored.value
+          ? [group.offsetLeft + group.offsetWidth - el.offsetLeft - el.offsetWidth, el.offsetWidth]
+          : [el.offsetLeft - group.offsetLeft, el.offsetWidth]
 
       const shift = currentShift()
 
@@ -355,7 +359,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
         containerRef.value?.setPointerCapture(e.pointerId)
       }
 
-      seek(dragOrigin.shift - delta)
+      seek(dragOrigin.shift + (isMirrored.value ? delta : -delta))
     }
 
     function onPointerup () {
@@ -369,7 +373,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       if (!props.wheel || !delta || !animation || !loopDistance.value) return
 
       e.preventDefault()
-      shiftBy(delta * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? viewportSize.value : 1))
+      shiftBy((isMirrored.value ? -delta : delta) * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? viewportSize.value : 1))
     }
 
     function onClickCapture (e: MouseEvent) {
@@ -435,7 +439,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
 
     useRender(() => {
       const previousProps = {
-        icon: props.prevIcon,
+        icon: isMirrored.value ? props.nextIcon : props.prevIcon,
         class: 'v-infinite-carousel__prev',
         variant: 'text' as const,
         tabindex: -1,
@@ -445,7 +449,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       }
 
       const nextProps = {
-        icon: props.nextIcon,
+        icon: isMirrored.value ? props.prevIcon : props.nextIcon,
         class: 'v-infinite-carousel__next',
         variant: 'text' as const,
         tabindex: -1,
@@ -495,7 +499,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             <div
               ref={ trackRef }
               class="v-infinite-carousel__track"
-              style={{ translate: isVertical.value ? `0 ${-loopDistance.value}px` : `${-loopDistance.value}px` }}
+              style={{ translate: isVertical.value ? `0 ${loopOffset.value}px` : `${loopOffset.value}px` }}
             >
               <div ref={ contentRef } class="v-infinite-carousel__group">
                 { groupChildren() }
