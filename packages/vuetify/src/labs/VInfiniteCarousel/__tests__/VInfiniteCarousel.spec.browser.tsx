@@ -104,7 +104,7 @@ describe('VInfiniteCarousel', () => {
   it('fills the faded start edge when the loop wraps', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={{ size: 40 }} paused>
+        <VInfiniteCarousel mask={ 40 } paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}
@@ -434,7 +434,7 @@ describe('VInfiniteCarousel', () => {
   it('leaves the faded edges out of the visible area', async () => {
     render(() => (
       <div style="width: 200px">
-        <VInfiniteCarousel mask={{ size: 40 }} shiftDistance="50%" showArrows paused>
+        <VInfiniteCarousel mask={ 40 } shiftDistance="50%" showArrows paused>
           { Array.from({ length: 10 }, (_, i) => (
             <button style="width: 100px">{ `item ${i}` }</button>
           ))}

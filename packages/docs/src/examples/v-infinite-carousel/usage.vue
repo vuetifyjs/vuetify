@@ -55,7 +55,7 @@
       paused: paused.value || undefined,
       reverse: reverse.value || undefined,
       'show-arrows': arrows.value || undefined,
-      mask: maskSize.value ? { size: maskSize.value } : undefined,
+      mask: maskSize.value || undefined,
       gap: gap.value !== 32 ? gap.value : undefined,
     }
   })

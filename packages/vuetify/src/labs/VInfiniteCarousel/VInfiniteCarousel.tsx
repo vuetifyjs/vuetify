@@ -19,7 +19,6 @@ import {
   focusableChildren,
   genericComponent,
   isBoolean,
-  isObject,
   isString,
   PREFERS_REDUCED_MOTION,
   propsFactory,
@@ -29,10 +28,6 @@ import {
 // Types
 import type { PropType } from 'vue'
 import type { IconValue } from '@/composables/icons'
-
-export interface VInfiniteCarouselMask {
-  size?: number | string
-}
 
 export type VInfiniteCarouselSlots = {
   default: never
@@ -59,10 +54,7 @@ export const makeVInfiniteCarouselProps = propsFactory({
     type: [Number, String],
     default: 35,
   },
-  mask: {
-    type: [Boolean, Object] as PropType<boolean | VInfiniteCarouselMask>,
-    default: false,
-  },
+  mask: [Boolean, Number, String],
   gap: [Number, String],
   shiftDistance: {
     type: [Number, String],
@@ -471,7 +463,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           ]}
           style={[
             {
-              '--v-infinite-carousel-mask-size': convertToUnit(isObject(props.mask) ? props.mask.size : undefined),
+              '--v-infinite-carousel-mask-size': convertToUnit(isBoolean(props.mask) ? undefined : props.mask),
               '--v-infinite-carousel-gap': convertToUnit(props.gap),
               '--v-infinite-carousel-shift': convertToUnit(props.shiftDistance),
             },

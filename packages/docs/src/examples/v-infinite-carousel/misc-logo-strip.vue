@@ -1,5 +1,5 @@
 <template>
-  <v-infinite-carousel :mask="{ size: 80 }" gap="1.5rem" speed="25">
+  <v-infinite-carousel gap="1.5rem" mask="80" speed="25">
     <v-card
       v-for="logo in logos"
       :key="logo.name"
