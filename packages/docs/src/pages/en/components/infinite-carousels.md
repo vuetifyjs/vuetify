@@ -65,6 +65,7 @@ Notable behaviors:
 - duplicates are hidden from screen readers and left out of the tab order, so assistive tech gets the content once; keyboard focus that lands out of view pulls its item into view
 - the strip is a single tab stop; arrow keys move focus between items and pull each one into view. When nothing inside is focusable, they move the strip by `shift-distance` instead. Pass an `aria-label` so the group announces what it holds
 - with `draggable`, pointer and touch drag scrub the loop, and it resumes where you let go; a drag that ends over a link does not follow it
+- with `wheel`, a horizontal loop scrubs on trackpad swipes and shift+wheel, and a vertical one on the regular wheel, which keeps the page from scrolling while the pointer is over it
 - the loop pauses while focus is inside it and under `prefers-reduced-motion`
 
 ### Props

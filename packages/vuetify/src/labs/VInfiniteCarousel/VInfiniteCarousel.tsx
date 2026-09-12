@@ -54,6 +54,7 @@ export const makeVInfiniteCarouselProps = propsFactory({
   paused: Boolean,
   pauseOnHover: Boolean,
   draggable: Boolean,
+  wheel: Boolean,
   speed: {
     type: [Number, String],
     default: 35,
@@ -233,8 +234,10 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     function step (direction: 1 | -1) {
       if (!animation || !loopDistance.value) return
 
-      const amount = direction * resolveShiftDistance()
+      shiftBy(direction * resolveShiftDistance())
+    }
 
+    function shiftBy (amount: number) {
       if (PREFERS_REDUCED_MOTION()) {
         seek(currentShift() + amount)
         return
@@ -362,6 +365,14 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       resume()
     }
 
+    function onWheel (e: WheelEvent) {
+      const delta = isVertical.value ? e.deltaY : e.deltaX || (e.shiftKey ? e.deltaY : 0)
+      if (!props.wheel || !delta || !animation || !loopDistance.value) return
+
+      e.preventDefault()
+      shiftBy(delta * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? viewportSize.value : 1))
+    }
+
     function onClickCapture (e: MouseEvent) {
       if (!hasDragged) return
 
@@ -477,6 +488,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           onPointermove={ onPointermove }
           onPointerup={ onPointerup }
           onPointercancel={ onPointerup }
+          onWheel={ onWheel }
           onClickCapture={ onClickCapture }
         >
           <div ref={ viewportRef } class="v-infinite-carousel__viewport">
