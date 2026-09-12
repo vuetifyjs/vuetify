@@ -7,7 +7,7 @@
     "pauseOnHover": "Pauses the scrolling while the pointer is over the component.",
     "mask": "Fades the content out at both edges. Pass a number or CSS length to set the gradient size.",
     "gap": "Space between items.",
-    "draggable": "Allows scrubbing the content by dragging it with a pointer or finger.",
+    "draggable": "Allows scrubbing the content by dragging it with a pointer or finger. When not set, it is enabled only for users who prefer reduced motion.",
     "wheel": "Allows scrubbing the content with a mouse wheel or trackpad. A horizontal carousel takes sideways swipes and shift+wheel, a vertical one takes the regular wheel and stops the page from scrolling while the pointer is over it.",
     "shiftDistance": "How far one arrow click moves the content.",
     "showArrows": "Displays navigation arrows over the content.",

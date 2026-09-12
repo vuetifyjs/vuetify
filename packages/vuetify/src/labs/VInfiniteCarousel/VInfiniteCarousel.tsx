@@ -49,7 +49,10 @@ export const makeVInfiniteCarouselProps = propsFactory({
   reverse: Boolean,
   paused: Boolean,
   pauseOnHover: Boolean,
-  draggable: Boolean,
+  draggable: {
+    type: Boolean,
+    default: undefined,
+  },
   wheel: Boolean,
   speed: {
     type: [Number, String],
@@ -98,6 +101,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const loopDistance = shallowRef(0)
 
     const isVertical = toRef(() => props.direction === 'vertical')
+    const isDraggable = toRef(() => props.draggable ?? PREFERS_REDUCED_MOTION())
 
     const speed = toRef(() => Math.max(0, Number(props.speed) || 0))
     const loopDuration = toRef(() => speed.value ? loopDistance.value / speed.value * 1000 : 1000)
@@ -329,7 +333,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     let hasDragged = false
 
     function onPointerdown (e: PointerEvent) {
-      if (!props.draggable || e.button !== 0 || !animation) return
+      if (!isDraggable.value || e.button !== 0 || !animation) return
       if ((e.target as HTMLElement).closest('.v-infinite-carousel__controls')) return
 
       cancelStep()
@@ -458,7 +462,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
             {
               'v-infinite-carousel--vertical': isVertical.value,
               'v-infinite-carousel--mask': !!props.mask,
-              'v-infinite-carousel--draggable': props.draggable && copies.value > 1,
+              'v-infinite-carousel--draggable': isDraggable.value && copies.value > 1,
               'v-infinite-carousel--dragging': isDragging.value,
               'v-infinite-carousel--show-arrows-on-hover': props.showArrows === 'hover',
             },
