@@ -165,7 +165,7 @@ export const VTab = genericComponent<VBtnSlots>()({
                 { slots.default?.() ?? props.text }
 
                 { !props.hideSlider && (
-                  <div
+                  <span
                     ref={ sliderEl }
                     class={[
                       'v-tab__slider',

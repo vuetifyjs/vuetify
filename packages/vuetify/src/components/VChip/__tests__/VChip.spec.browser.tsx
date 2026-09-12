@@ -1,5 +1,8 @@
 import { VChip } from '../VChip'
 
+// Components
+import { VChipGroup } from '@/components/VChipGroup'
+
 // Utilities
 import { render, screen, userEvent } from '@test'
 import { nextTick, shallowRef } from 'vue'
@@ -45,5 +48,26 @@ describe('VChip', () => {
     closeLabel.value = undefined
     await nextTick()
     expect(button).toHaveAttribute('aria-label', 'Close')
+  })
+
+  it('should only render phrasing content inside its span root', () => {
+    const { container } = render(() => (
+      <VChipGroup>
+        <VChip
+          appendIcon="$next"
+          filter
+          prependIcon="$prev"
+          text="Chip"
+        />
+      </VChipGroup>
+    ))
+
+    const chip = container.querySelector('.v-chip')!
+
+    expect(chip.tagName).toBe('SPAN')
+    expect(chip.querySelector('.v-chip__filter')).not.toBeNull()
+    expect(chip.querySelector('.v-chip__prepend')).not.toBeNull()
+    expect(chip.querySelector('.v-chip__append')).not.toBeNull()
+    expect(chip.querySelectorAll('div')).toHaveLength(0)
   })
 })
