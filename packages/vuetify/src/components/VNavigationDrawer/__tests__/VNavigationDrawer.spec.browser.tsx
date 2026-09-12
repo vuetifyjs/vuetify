@@ -59,9 +59,32 @@ describe('VNavigationDrawer', () => {
 
     await userEvent.hover(drawer)
     await expect.element(drawer).toHaveStyle({ width: '256px' })
+    expect(screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
 
     await userEvent.unhover(drawer)
     await expect.element(drawer).toHaveStyle({ width: '56px' })
+  })
+
+  it('should show scrim while expanded on hover when using expandWithScrim', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer permanent expandOnHover rail expandWithScrim />
+        <VMain />
+      </VLayout>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+
+    expect(screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
+
+    await userEvent.hover(drawer)
+    const scrim = screen.getByCSS('.v-navigation-drawer__scrim')
+    await expect.element(scrim).toBeInViewport()
+    await expect.element(scrim).toHaveStyle({ pointerEvents: 'none' })
+
+    await userEvent.unhover(drawer)
+    await expect.poll(() => screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
   })
 
   it('should change width when using bound and unbound rail and expandOnHover', async () => {

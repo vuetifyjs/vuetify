@@ -52,6 +52,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   disableResizeWatcher: Boolean,
   disableRouteWatcher: Boolean,
   expandOnHover: Boolean,
+  expandWithScrim: Boolean,
   floating: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,
@@ -209,13 +210,20 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const scrimColor = useBackgroundColor(() => {
       return isString(props.scrim) ? props.scrim : null
     })
+    const showScrim = computed(() => !!props.scrim && (
+      isTemporary.value
+        ? isDragging.value || isActive.value
+        : props.expandWithScrim && props.expandOnHover && props.rail != null && isHovering.value
+    ))
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
         transition: 'none',
       } : undefined,
+      // a click on the fading hover scrim would otherwise deactivate a permanent drawer
+      ...!isTemporary.value ? { pointerEvents: 'none' } : undefined,
       ...layoutItemScrimStyles.value,
-    }))
+    }) as const)
 
     provideDefaults({
       VList: {
@@ -311,7 +319,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
           </props.tag>
 
           <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
+            { showScrim.value && (
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
