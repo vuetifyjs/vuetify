@@ -1,1 +1,6 @@
 @layer vuetify-core, base, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final;
+
+/* sections for toc */
+main.v-main section section[id] {
+  scroll-margin-top: var(--v-layout-top);
+}
