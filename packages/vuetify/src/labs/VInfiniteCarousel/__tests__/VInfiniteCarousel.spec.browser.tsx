@@ -472,6 +472,30 @@ describe('VInfiniteCarousel', () => {
       .toBeCloseTo(before - 60, 0)
   })
 
+  it('keeps its height when the mask toggles', async () => {
+    const mask = shallowRef<number | boolean>(false)
+
+    render(() => (
+      <div class="wrapper" style="width: 200px">
+        <VInfiniteCarousel mask={ mask.value } paused>
+          { Array.from({ length: 10 }, (_, i) => (
+            <button style="width: 100px">{ `item ${i}` }</button>
+          ))}
+        </VInfiniteCarousel>
+      </div>
+    ))
+
+    await waitIdle()
+
+    const height = () => document.querySelector('.wrapper')!.getBoundingClientRect().height
+    const before = height()
+
+    mask.value = 40
+    await waitIdle()
+
+    expect(height()).toBe(before)
+  })
+
   it('resolves shift-distance in any css length unit', async () => {
     render(() => (
       <div style="width: 200px">
