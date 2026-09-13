@@ -6,6 +6,7 @@
     "inset": "Changes the slider to take full height. Automatically propagated from VTabs.",
     "fixed": "Forces component to take up all available space up to their maximum width (300px), and centers it.",
     "sliderColor": "Applies specified color to the slider when active on that component - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
+    "sliderVariant": "Shape of the active tab slider. `primary` follows the Material Design 3 primary tab — a thicker slider with rounded leading corners, sized to the tab content instead of the whole tab. Ignored when `inset` is set.",
     "sliderTransition": "Changes slider transition to one of the predefined animation presets.",
     "sliderTransitionDuration": "Applies custom slider transition duration. Default duration depends on transition type (fade: 400, grow: 350, shift: 225).",
     "stacked": "Displays the tab as a flex-column."
