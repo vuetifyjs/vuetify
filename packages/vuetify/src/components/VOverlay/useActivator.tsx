@@ -44,6 +44,7 @@ interface ActivatorProps extends DelayProps {
   activatorProps: Record<string, any>
 
   openOnClick: boolean | undefined
+  openOnTouchHold: boolean | undefined
   openOnHover: boolean
   openOnFocus: boolean | undefined
 
@@ -62,6 +63,7 @@ export const makeActivatorProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  openOnTouchHold: Boolean,
   openOnHover: Boolean,
   openOnFocus: {
     type: Boolean,
@@ -88,6 +90,7 @@ export function useActivator (
   const parentMenu = inject(VMenuSymbol, null)
 
   let isHovered = false
+  let isTouched = false
   let isFocused = false
   let firstEnter = true
   const openedByHover = ref(false)
@@ -99,10 +102,11 @@ export function useActivator (
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
 
-  const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
+  const { clearDelay, runOpenDelay, runCloseDelay } = useDelay(props, value => {
     if (
       value === (
         (props.openOnHover && isHovered) ||
+        (props.openOnTouchHold && isTouched) ||
         (openOnFocus.value && isFocused)
       ) && !(props.openOnHover && isActive.value && !isTop.value)
     ) {
@@ -142,6 +146,37 @@ export function useActivator (
         cursorTarget.value = [e.clientX, e.clientY]
       }
       isActive.value = !isActive.value
+    },
+    oncontextmenu: (e: Event) => {
+      e.preventDefault()
+    },
+    onTouchstart: (e: TouchEvent) => {
+      if (!e.touches) return
+      e.stopPropagation()
+      clearDelay()
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (!isActive.value) {
+        const { clientX, clientY } = e.touches[0]
+        cursorTarget.value = [clientX, clientY]
+      }
+      isTouched = true
+      runOpenDelay()
+    },
+    onTouchmove: (e: TouchEvent) => {
+      if (!e.touches || !cursorTarget.value) return
+      e.stopPropagation()
+
+      const sensitivity = 7
+      const [x, y] = cursorTarget.value
+      const { clientX, clientY } = e.touches[0]
+      if (Math.abs(x - clientX) > sensitivity || Math.abs(y - clientY) > sensitivity) {
+        isTouched = false
+        clearDelay()
+      }
+    },
+    onTouchend: (e: TouchEvent) => {
+      isTouched = false
+      clearDelay()
     },
     onMouseenter: (e: MouseEvent) => {
       isHovered = true
@@ -186,6 +221,12 @@ export function useActivator (
 
     if (openOnClick.value) {
       events.onClick = availableEvents.onClick
+    }
+    if (props.openOnTouchHold) {
+      events.onTouchstart = availableEvents.onTouchstart
+      events.onTouchmove = availableEvents.onTouchmove
+      events.onTouchend = availableEvents.onTouchend
+      events.oncontextmenu = availableEvents.oncontextmenu
     }
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
