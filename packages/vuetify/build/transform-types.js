@@ -3,6 +3,7 @@ import fs from 'node:fs/promises'
 import { codeTransform } from './types-code-transform.js'
 import path from 'upath'
 
+/** @type {string[]} */
 const files = fg.sync('lib/**/*.d.ts')
 
 const importRegexp = /(?<a1>(?:import|export)(?:[^;])*?from ['"])(?<a2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<a3>['"];)|(?<b1>import\(['"])(?<b2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<b3>['"]\))/gm
@@ -10,6 +11,7 @@ const importRegexp = /(?<a1>(?:import|export)(?:[^;])*?from ['"])(?<a2>(?:\.\.?|
 for (const name of files) {
   const code = await fs.readFile(name, 'utf-8')
 
+  /** @type {string} */
   let newCode = codeTransform(code)
 
   for (const match of code.matchAll(importRegexp)) {
