@@ -105,7 +105,7 @@ Three changes that aren't new props.
 
 **`@vuetify/v0` is now a dependency.** Before 4.2, `vuetify` did not require any direct dependencies. v4.2.0 depends on `@vuetify/v0@^1.2.1` but for now, the surface is limited to safe and simple utilities (`isString`, `isObject`, …), `range` and the `toHighlight` transformer from it ([#23039](https://github.com/vuetifyjs/vuetify/pull/23039)). We expect v0 to slowly take over more and more of responsibility within the Vuetify codebase.
 
-**Unused Sass variables were removed.** 125 variables across 39 components were declared but never read by any stylesheet ([2d01fae](https://github.com/vuetifyjs/vuetify/commit/2d01fae)). Setting them did not have any effect unless you decided to consume them in custom Sass code. Cleanup make it clear these were never part of the intended API of v3 and v4. If your `settings.scss` did include them, you might be prompted to remove them by the compiler:
+**Sass variables cleanup.** 125 variables across 39 components were declared but never read by any stylesheet ([2d01fae](https://github.com/vuetifyjs/vuetify/commit/2d01fae)). Setting them did not have any effect. Cleanup make it clear these were never part of the intended API of v3 and v4. If your `settings.scss` did include them, you might be prompted to remove them by the compiler:
 
 ```txt
 Error: This variable was not declared with !default in the @used module.
@@ -159,14 +159,14 @@ Visit [Global configuration](/features/global-configuration/) to inspect the ful
 
 **[VDateInput](/components/date-inputs/)** now types like a masked input ([#23052](https://github.com/vuetifyjs/vuetify/pull/23052), closes [#23051](https://github.com/vuetifyjs/vuetify/issues/23051)) while making sure user won't input invalid dates. Separators are inserted/enforced following current locale, range format and RTL. Further improvements are planned for v4.3.0 - input will show localized placeholders marking major i18n improvement ([#23173](https://github.com/vuetifyjs/vuetify/pull/23173)).
 
-**[VSlideGroup](/components/slide-groups/)** closed three issues, the oldest from 2020:
+**[VSlideGroup](/components/slide-groups/)** got three long-standing issues closed:
 
 * `scroll-snap` (`start`, `center` or `end`) enables CSS scroll snapping, and the prev/next arrows stop on item boundaries ([#15916](https://github.com/vuetifyjs/vuetify/issues/15916))
 * `scroll-distance` sets how far the arrows scroll, in pixels or as a percentage
 * `slide()` is exposed for scrolling programmatically: `slide('next')`, `slide({ by: 200 })`, `slide({ index: 3 })` ([#21250](https://github.com/vuetifyjs/vuetify/issues/21250))
 * the `edge` event fires with `'start'` or `'end'` when scrolling reaches either end ([#11364](https://github.com/vuetifyjs/vuetify/issues/11364))
 
-**[VProgressLinear](/components/progress-linear/) and [VProgressCircular](/components/progress-circular/)** take a `transition` prop: `false` turns off the value animation, and `{ duration: 600 }` changes its length ([#22442](https://github.com/vuetifyjs/vuetify/issues/22442)). VProgressLinear also supports `reveal`, which already existed in the circular counterpart.
+**[VProgressLinear](/components/progress-linear/) and [VProgressCircular](/components/progress-circular/)** take a `transition` prop: `false` turns off the value animation, and `{ duration: 600 }` makes it slower ([#22442](https://github.com/vuetifyjs/vuetify/issues/22442)). New `reveal` prop has been shipped to align with the circular counterpart.
 
 Smaller additions:
 
@@ -301,7 +301,7 @@ No release in August. Two features are merged and wait for the next one: `vuetif
 
 ### Upgrade guide
 
-Two v3 → v4 migration problems from a production migration are now documented ([#22848](https://github.com/vuetifyjs/vuetify/pull/22848)). In Vite dev mode the dependency pre-bundler can create two `useStack` instances, and menus opened inside a dialog end up behind it; the fix is `optimizeDeps.include`. And the `@layer` order statement has to be imported before any Vuetify styles, or the browser takes layer priority from whatever it parses first.
+Two v3 → v4 migration problems from a production migration are now documented ([#22848](https://github.com/vuetifyjs/vuetify/pull/22848)). In Vite dev mode the dependency pre-bundler can create two `useStack` instances, and menus opened inside a dialog end up behind it; the fix is `optimizeDeps.include`. The guide digs deeper into the `@layer` order that is a typical friction point for developers trying to upgrade existing projects.
 
 ### Snips
 
