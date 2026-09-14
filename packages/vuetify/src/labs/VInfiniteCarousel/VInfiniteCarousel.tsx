@@ -368,6 +368,10 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
       resume()
     }
 
+    function onDragstart (e: DragEvent) {
+      if (dragOrigin) e.preventDefault()
+    }
+
     function onWheel (e: WheelEvent) {
       const delta = isVertical.value ? e.deltaY : e.deltaX || (e.shiftKey ? e.deltaY : 0)
       if (!props.wheel || !delta || !animation || !loopDistance.value) return
@@ -492,6 +496,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
           onPointermove={ onPointermove }
           onPointerup={ onPointerup }
           onPointercancel={ onPointerup }
+          onDragstart={ onDragstart }
           onWheel={ onWheel }
           onClickCapture={ onClickCapture }
         >
