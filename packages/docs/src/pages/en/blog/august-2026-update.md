@@ -35,7 +35,7 @@ meta:
 
 ![Hero image for August update](https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/august-hero.png "August hero image"){ height=112 }
 
-🖊️ Jacek Czarniecki • 📅 September 11th, 2026
+🖊️ Jacek Czarniecki • 📅 September 14th, 2026
 
 <PromotedEntry />
 
