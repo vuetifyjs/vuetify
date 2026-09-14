@@ -43,14 +43,13 @@ meta:
 
 ## August in numbers
 
-**33 merged PRs** in the framework repo, **16 features and 47 fixes** (unique commits, cherry-picks between `master`, `dev` and `v3-stable` counted once) and **8 releases**. Open issues went from 351 to 286: 96 closed, 29 of them as not planned, and 31 new ones opened. [Vuetify0](https://0.vuetifyjs.com/) merged 172 PRs and shipped its first two minors after 1.0.
+**33 merged PRs** in the framework repo, **16 features and 47 fixes** (unique commits) and **8 releases**. Open issues went from 351 to 286: 96 closed, and 31 new opened. [Vuetify0](https://0.vuetifyjs.com/) merged 163 PRs (33 features, 42 fixes, 62 for docs) and shipped 5 releases, headlined by v1.2.0.
 
 ---
 
 ## Table of Contents
 
-* [Releases](#releases)
-  * [Key Improvements](#key-improvements)
+* [Key Improvements](#key-improvements)
 * [Spotlight: Vuetify 4.2](#vuetify-4-2)
   * [Before you upgrade](#before-you-upgrade)
 * [Framework Updates](#framework-updates)
@@ -63,26 +62,32 @@ meta:
 
 ---
 
-## Releases
-
-**8 releases.** The v4.1 line kept reliable pace of weekly patches: [v4.1.8](/getting-started/release-notes/?version=v4.1.8) (August 7), [v4.1.9](/getting-started/release-notes/?version=v4.1.9) (August 13), [v4.1.10](/getting-started/release-notes/?version=v4.1.10) (August 18), [v4.1.11](/getting-started/release-notes/?version=v4.1.11) (August 19) and [v4.1.12](/getting-started/release-notes/?version=v4.1.12) (August 26). v3.13 LTS got [v3.13.1](/getting-started/release-notes/?version=v3.13.1) (August 7) and [v3.13.2](/getting-started/release-notes/?version=v3.13.2) (August 18) with some backported regression fixes. [v4.2.0-beta.0](/getting-started/release-notes/?version=v4.2.0-beta.0) (August 27) carried new props, emits, enhancements and important fixes.
+## Key Improvements
 
 <AppFigure :src="releasesimg" alt="August Releases Banner" title="August Releases Banner" />
 
-### Key Improvements
+**In Vuetify 4.2** ([beta](/getting-started/release-notes/?version=v4.2.0-beta.0) on August 27, [stable](/getting-started/release-notes/?version=v4.2.0) on September 2):
 
-* **[Vuetify 4.2](/getting-started/release-notes/?version=v4.2.0)** — beta on August 27, stable on September 2
 * **[VSelect / VAutocomplete / VCombobox](/components/selects/)** — `open-on-focus`, persistent menus, `close-on-input-click`, and keyboard navigation that no longer breaks in long lists ([#23126](https://github.com/vuetifyjs/vuetify/pull/23126), [#23008](https://github.com/vuetifyjs/vuetify/pull/23008), [#23023](https://github.com/vuetifyjs/vuetify/pull/23023), [#23031](https://github.com/vuetifyjs/vuetify/pull/23031))
 * **Defaults** — nested defaults can change the sizes and variants components hardcode on their inner controls ([#23108](https://github.com/vuetifyjs/vuetify/pull/23108))
 * **[VDateInput](/components/date-inputs/)** — separators are inserted as user types ([#23052](https://github.com/vuetifyjs/vuetify/pull/23052))
 * **[VSlideGroup](/components/slide-groups/)** — `scroll-snap`, `scroll-distance`, an `edge` event and an exposed `slide()` for programmatic control
 * **Sass** — 125 variables that had no effect are gone in v4.2.0, and those might make your CI red if you did define them ([#23136](https://github.com/vuetifyjs/vuetify/issues/23136))
 
+**Beyond Vuetify core:**
+
+* **[Vuetify0 1.2](https://0.vuetifyjs.com/releases/?version=v1.2.0)** — headless DataTable, DataGrid and Alert, plus a floating-ui adapter for browsers without CSS anchor positioning ([#825](https://github.com/vuetifyjs/0/pull/825), [#826](https://github.com/vuetifyjs/0/pull/826), [#823](https://github.com/vuetifyjs/0/pull/823), [#917](https://github.com/vuetifyjs/0/pull/917))
+* **[Emerald](https://0.vuetifyjs.com/systems/emerald)** — first public release of the styled design system on v0, with a [live demo](https://0.vuetifyjs.com/demo/emerald/) and a [Figma UI kit](https://store.vuetifyjs.com/products/official-emerald-ui-kit-for-figma)
+* **[Bulma](https://0.vuetifyjs.com/systems/bulma)** — Vue behavior for the `bulma.css` you already load ([#760](https://github.com/vuetifyjs/0/pull/760))
+* **Vuetify MCP** — hosted server works without an account at `https://mcp.vuetifyjs.com/mcp`, and v0.11.0 adds a v2 → v3 upgrade toolkit ([#41](https://github.com/vuetifyjs/mcp/pull/41), [#43](https://github.com/vuetifyjs/mcp/pull/43))
+* **[v0 playground](https://v0play.vuetifyjs.com)** — saves playgrounds to Vuetify One and switches Vuetify versions, nightly included ([#817](https://github.com/vuetifyjs/0/pull/817), [#836](https://github.com/vuetifyjs/0/pull/836))
+
 **Details:**
 
-* [v4.2.0](/getting-started/release-notes/?version=v4.2.0) · [v4.2.0-beta.0](/getting-started/release-notes/?version=v4.2.0-beta.0)
-* [v4.1.12](/getting-started/release-notes/?version=v4.1.12) · [v4.1.11](/getting-started/release-notes/?version=v4.1.11) · [v4.1.10](/getting-started/release-notes/?version=v4.1.10) · [v4.1.9](/getting-started/release-notes/?version=v4.1.9) · [v4.1.8](/getting-started/release-notes/?version=v4.1.8)
-* [v3.13.2](/getting-started/release-notes/?version=v3.13.2) · [v3.13.1](/getting-started/release-notes/?version=v3.13.1)
+* Vuetify v4.2: [v4.2.0](/getting-started/release-notes/?version=v4.2.0) · [v4.2.0-beta.0](/getting-started/release-notes/?version=v4.2.0-beta.0)
+* Vuetify v4.1: [v4.1.12](/getting-started/release-notes/?version=v4.1.12) · [v4.1.11](/getting-started/release-notes/?version=v4.1.11) · [v4.1.10](/getting-started/release-notes/?version=v4.1.10) · [v4.1.9](/getting-started/release-notes/?version=v4.1.9) · [v4.1.8](/getting-started/release-notes/?version=v4.1.8)
+* Vuetify v3 LTS: [v3.13.2](/getting-started/release-notes/?version=v3.13.2) · [v3.13.1](/getting-started/release-notes/?version=v3.13.1)
+* Vuetify0: [v1.2.0](https://0.vuetifyjs.com/releases/?version=v1.2.0) · [v1.1.0](https://0.vuetifyjs.com/releases/?version=v1.1.0) · [v1.0.5](https://0.vuetifyjs.com/releases/?version=v1.0.5) · [v1.0.4](https://0.vuetifyjs.com/releases/?version=v1.0.4) · [v1.0.3](https://0.vuetifyjs.com/releases/?version=v1.0.3)
 
 ---
 
@@ -165,20 +170,18 @@ Visit [Global configuration](/features/global-configuration/) to inspect the ful
 
 Smaller additions:
 
-* **[VNavigationDrawer](/components/navigation-drawers/)** — `width` accepts percentages ([#16150](https://github.com/vuetifyjs/vuetify/issues/16150), open since 2022). Don't combine it with a content-sized layout (`width: fit-content`); that ends in a ResizeObserver loop.
+* **[VNavigationDrawer](/components/navigation-drawers/)** — `width` accepts percentages ([#16150](https://github.com/vuetifyjs/vuetify/issues/16150)).
 * **[VRadio](/components/radio-buttons/)** — `v-model` works on a radio without VRadioGroup ([#16245](https://github.com/vuetifyjs/vuetify/issues/16245))
 * **[VFileInput](/components/file-inputs/)** — supports `placeholder` and `persistent-placeholder` ([#23048](https://github.com/vuetifyjs/vuetify/pull/23048)), and shows dashed outline while dragging files over it ([#22909](https://github.com/vuetifyjs/vuetify/pull/22909))
-* **[VVirtualScroll](/components/virtual-scroller/)** — `scrollToIndex(index, position)` takes `'start'`, `'center'` or `'end'` ([#18574](https://github.com/vuetifyjs/vuetify/pull/18574))
+* **[VVirtualScroll](/components/virtual-scroller/)** — `scrollToIndex(index, position)` accepts second argument with `'start'`, `'center'` or `'end'` ([#18574](https://github.com/vuetifyjs/vuetify/pull/18574))
 
 ### Bug Fixes
 
-Most of August's fixes landed in overlays, virtual scrolling and the select family. Four worth reading about:
+Most of August's fixes landed in overlays, virtual scrolling and the select family. Three worth reading about:
 
-**Dialogs opened from menus.** Clicking inside a VDialog opened from a VMenu closed the whole menu chain ([#20468](https://github.com/vuetifyjs/vuetify/issues/20468), from 2024). Non-menu overlays now stop the close cascade ([e30eb47](https://github.com/vuetifyjs/vuetify/commit/e30eb47)), and custom overlays and tooltips no longer keep a menu from closing ([#22993](https://github.com/vuetifyjs/vuetify/pull/22993)).
+**Dialogs opened from menus.** Clicking inside a VDialog opened from a VMenu closed the whole menu chain ([#20468](https://github.com/vuetifyjs/vuetify/issues/20468), from 2024). Non-menu overlays now stop the close cascade ([e30eb47](https://github.com/vuetifyjs/vuetify/commit/e30eb47cc5999f4a26a32dcd472f4ea19e2820f0)), and custom overlays and tooltips no longer keep a menu from closing ([#22993](https://github.com/vuetifyjs/vuetify/pull/22993)).
 
-**Click-outside cost.** On every mousedown, each open overlay ran a document-wide `querySelector` to find which activator owns it ([#23056](https://github.com/vuetifyjs/vuetify/issues/23056)). It's now a WeakMap lookup ([a57ec6e](https://github.com/vuetifyjs/vuetify/commit/a57ec6e), v4.1.8).
-
-**Android "desktop site" mode** placed overlays wrong because the scaled visual viewport was used as the overlay's boundary ([#22124](https://github.com/vuetifyjs/vuetify/issues/22124)). The fix shipped in v4.1.8 and v3.13.1, but it also dropped the correction for CSS `zoom` on the page. v4.2.1 put that back.
+**Android "desktop site" mode.** Overlays should now be correctly positioned in "desktop site" mode ([#22124](https://github.com/vuetifyjs/vuetify/issues/22124)) since v4.1.8 and v3.13.1, and on pages using CSS `zoom` again since v4.2.1.
 
 **Active links on refresh.** In Nuxt, links with `to` could flash as active on a hard refresh while the router was still resolving the first navigation ([#23131](https://github.com/vuetifyjs/vuetify/pull/23131)).
 
@@ -228,11 +231,11 @@ The July update listed six PRs for 4.2: VSlider `pill` ([#22699](https://github.
 
 <br>
 
-172 merged PRs, three patches ([v1.0.3](https://0.vuetifyjs.com/releases/?version=v1.0.3) on August 4, [v1.0.4](https://0.vuetifyjs.com/releases/?version=v1.0.4) on August 12, [v1.0.5](https://0.vuetifyjs.com/releases/?version=v1.0.5) on August 18) and two minors on August 25. [v1.1.0](https://0.vuetifyjs.com/releases/?version=v1.1.0) is small, just Splitter drag intent and `@vuetify/play`, because a `feat` commit on `master` took the version number before `dev` was merged. The table work shipped an hour later as [v1.2.0](https://0.vuetifyjs.com/releases/?version=v1.2.0).
+163 merged PRs, three patches ([v1.0.3](https://0.vuetifyjs.com/releases/?version=v1.0.3) on August 4, [v1.0.4](https://0.vuetifyjs.com/releases/?version=v1.0.4) on August 12, [v1.0.5](https://0.vuetifyjs.com/releases/?version=v1.0.5) on August 18) and [v1.2.0](https://0.vuetifyjs.com/releases/?version=v1.2.0) on August 25. A release tooling slip published a partial v1.1.0 an hour earlier; 1.2.0 includes all of it.
 
 <AppFigure :src="v0img" alt="Vuetify0 Progress" title="Vuetify0 August Progress" />
 
-### New in 1.1 and 1.2
+### New in 1.2
 
 * **[DataTable](https://0.vuetifyjs.com/components/data/data-table)** and **[DataGrid](https://0.vuetifyjs.com/components/data/data-grid)** — headless compounds over `createDataTable` and `createDataGrid`. DataTable renders semantic `<table>` markup with `aria-sort` and `aria-rowcount`; DataGrid adds column pinning and resizing, cell editing and row spanning ([#825](https://github.com/vuetifyjs/0/pull/825), [#826](https://github.com/vuetifyjs/0/pull/826))
 * **[Alert](https://0.vuetifyjs.com/components/semantic/alert)** — a live region, `role="alert"` by default and `role="status"` for messages that shouldn't interrupt ([#823](https://github.com/vuetifyjs/0/pull/823))
@@ -254,7 +257,7 @@ The July update listed six PRs for 4.2: VSlider `pill` ([#22699](https://github.
 
 **[Bulma](https://0.vuetifyjs.com/systems/bulma)** (`@paper/bulma` 0.1.0) goes the other way. Its components render the markup Bulma documents against the `bulma.css` you already load, and add the JavaScript Bulma never had: open state, click-outside, Escape, focus and form wiring. The package ships no CSS.
 
-The [v0 playground](https://v0play.vuetifyjs.com) can save playgrounds to Vuetify One ([#817](https://github.com/vuetifyjs/0/pull/817)) and switch Vuetify versions, nightly included ([#836](https://github.com/vuetifyjs/0/pull/836)).
+The [v0 playground](https://v0play.vuetifyjs.com) can save playgrounds to Vuetify One ([#817](https://github.com/vuetifyjs/0/pull/817)) and switch Vuetify versions (incl. nightly releases ([#836](https://github.com/vuetifyjs/0/pull/836))).
 
 ::: success
 
@@ -265,8 +268,8 @@ The [v0 playground](https://v0play.vuetifyjs.com) can save playgrounds to Vuetif
 **Details:**
 
 * [Vuetify0 Documentation](https://0.vuetifyjs.com/)
-* [v1.2.0 Release](https://0.vuetifyjs.com/releases/?version=v1.2.0)
 * [v1.1.0 Release](https://0.vuetifyjs.com/releases/?version=v1.1.0)
+* [v1.2.0 Release](https://0.vuetifyjs.com/releases/?version=v1.2.0)
 * [v0play](https://v0play.vuetifyjs.com)
 
 ---
