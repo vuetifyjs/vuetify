@@ -21,9 +21,6 @@ meta:
   const mcplogo = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/vmcp-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
-  const releasesimg = computed(() => {
-    return `https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/releases-${theme.current.value.dark ? 'dark' : 'light'}.png`
-  })
   const v0img = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/v0-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
@@ -63,8 +60,6 @@ meta:
 ---
 
 ## Key Improvements
-
-<AppFigure :src="releasesimg" alt="August Releases Banner" title="August Releases Banner" />
 
 **In Vuetify 4.2** ([beta](/getting-started/release-notes/?version=v4.2.0-beta.0) on August 27, [stable](/getting-started/release-notes/?version=v4.2.0) on September 2):
 
