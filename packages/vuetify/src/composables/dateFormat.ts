@@ -8,6 +8,39 @@ import { consoleWarn, isString, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
+import type { Segment, ValueSegment } from '@/composables/segmentedMask'
+
+type HintToken = {
+  text: string
+  size: number
+  fill: boolean // spelled one character per digit, so typing can strike it off letter by letter
+}
+
+const fieldName = { y: 'year', m: 'month', d: 'day' } as const
+
+function token (text: string, size: number): HintToken {
+  return { text, size, fill: text.length === size && new Set(text).size === 1 }
+}
+
+const rtlScript = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Thaana}]/u
+const mirrorRtl = (text: string) => rtlScript.test(text) ? [...text].reverse().join('') : text
+
+const nativeFormat: Record<string, string> = {
+  az: 'dd.MM.yyyy',
+  is: 'dd.MM.yyyy',
+  km: 'dd/MM/yyyy',
+}
+
+const nativeName: Record<string, Record<string, string>> = {
+  ar: { y: 'سنة', m: 'شهر' },
+  ko: { y: '연도' },
+  th: { y: 'ปปปป', m: 'ดด', d: 'วว' },
+  sw: { y: 'yyyy', m: 'mm', d: 'dd' },
+  vi: { y: 'yyyy', m: 'mm', d: 'dd' },
+  is: { y: 'ár' },
+  az: { y: 'il', m: 'ay', d: 'gün' },
+  km: { y: 'ឆ្នាំ', m: 'ខែ', d: 'ថ្ងៃ' },
+}
 
 // Types
 export interface DateFormatProps {
@@ -21,13 +54,6 @@ class DateFormatSpec {
     public readonly order: string, // mdy | dmy | ymd
     public readonly separator: string // / | - | .
   ) { }
-
-  get format () {
-    return this.order.split('')
-      .map(sign => `${sign}${sign}`)
-      .join(this.separator)
-      .replace('yy', 'yyyy')
-  }
 
   static canBeParsed (v: any) {
     if (!isString(v)) return false
@@ -59,9 +85,16 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   const adapter = useDate()
 
   function inferFromLocale () {
-    const localeForDateFormat = locale.value ?? 'en-US'
-    const parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
-      .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
+    const localeForDateFormat = locale.value || 'en-US'
+    let parts
+
+    try {
+      parts = new Intl.DateTimeFormat(localeForDateFormat, { year: 'numeric', month: '2-digit', day: '2-digit' })
+        .formatToParts(adapter.toJsDate(adapter.parseISO('1999-12-07')))
+    } catch {
+      consoleWarn(`Date format cannot be inferred from locale [${localeForDateFormat}]`)
+      return new DateFormatSpec('mdy', '/')
+    }
 
     const logicalOrder = parts.filter(p => ['year', 'month', 'day'].includes(p.type)).map(p => p.type[0]).join('')
     const literal = parts.find(p => p.type === 'literal')?.value ?? ''
@@ -80,8 +113,14 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   }
 
   const currentFormat = toRef(() => {
-    return DateFormatSpec.canBeParsed(props.inputFormat)
-      ? DateFormatSpec.parse(props.inputFormat!)
+    if (DateFormatSpec.canBeParsed(props.inputFormat)) {
+      return DateFormatSpec.parse(props.inputFormat!)
+    }
+
+    const native = nativeFormat[(locale.value || '').split('-')[0]]
+
+    return native
+      ? DateFormatSpec.parse(native)
       : inferFromLocale()
   })
 
@@ -117,14 +156,50 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     }
   })
 
-  const hintFormat = toRef(() => {
-    const { format, separator } = currentFormat.value
-    const custom = props.placeholder?.slice(0, format.length)
+  function fieldNames () {
+    const tag = locale.value || 'en'
 
-    return custom?.length === format.length && !/\d/.test(custom) &&
-      [...format].every((char, i) => (char === separator) === (custom[i] === separator))
-      ? custom
-      : format
+    try {
+      const display = new Intl.DisplayNames(tag, { type: 'dateTimeField' })
+      const native = nativeName[tag.split('-')[0]] ?? {}
+
+      return Object.fromEntries(
+        Object.entries(fieldName).map(([key, field]) => {
+          const name = native[key] ?? display.of(field)
+
+          // CLDR has no data for the locale and answers in English, which the fallback spells anyway
+          return [key, name?.toLowerCase() === field ? undefined : name]
+        })
+      ) as Record<string, string | undefined>
+    } catch {
+      return null
+    }
+  }
+
+  function spell (name: string, size: number) {
+    return /[\p{Script=Latin}\p{Script=Cyrillic}\p{Script=Greek}]/u.test([...name][0])
+      ? [...name][0].repeat(size)
+      : name
+  }
+
+  const hintTokens = toRef((): HintToken[] => {
+    const { order, separator } = currentFormat.value
+    const custom = props.placeholder?.split(separator)
+    const named = custom?.length === 3 && !/\d/.test(props.placeholder!)
+    const names = named ? null : fieldNames()
+
+    const segments = dateSegments(order, separator)
+    const values = segments.filter((segment: Segment) => segment.type === 'value') as ValueSegment[]
+
+    const labels = values.map((segment, i) => named
+      ? custom![i]
+      : spell(names?.[segment.key] || segment.key, segment.size))
+
+    let at = 0
+
+    return segments.map((segment: Segment) => segment.type === 'separator'
+      ? token(segment.value, segment.value.length)
+      : token(labels[at], values[at++].size))
   })
 
   const segments = toRef(() => dateSegments(typingOrder.value, currentFormat.value.separator, autoFixYear))
@@ -192,11 +267,32 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
 
   function remainingFormat (width: number, dates: number) {
     const { bounded, join, limit } = layout.value
-    const template = Array.from({ length: bounded ? limit : dates }, () => hintFormat.value).join(join)
+    const tokens = Array.from({ length: bounded ? limit : dates }, () => hintTokens.value)
+      .flatMap((date, i) => i ? [{ text: join, size: join.length, fill: true }, ...date] : date)
 
-    return isRtl.value
-      ? template.slice(0, template.length - width)
-      : template.slice(width)
+    // the value grows from the end the format is read from, the hint is the stretch it has not reached
+    const ordered = isRtl.value ? [...tokens].reverse() : tokens
+    let left = width
+
+    const parts = ordered.map(({ text, size, fill }) => {
+      if (left >= size) {
+        left -= size
+        return ''
+      }
+
+      const shown = fill
+        ? (isRtl.value ? text.slice(0, size - left) : text.slice(left))
+        : (left ? '' : text)
+
+      left = 0
+
+      return shown
+    })
+
+    return {
+      text: (isRtl.value ? parts.reverse() : parts).join(''),
+      covered: width >= tokens.reduce((total, token) => total + token.size, 0),
+    }
   }
 
   function maskInTypingOrder (input: string, caret: number) {
@@ -239,7 +335,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       }
     }
 
-    const hint = remainingFormat(width, dates)
+    const { text: hint, covered } = remainingFormat(width, dates)
 
     return {
       value: result,
@@ -247,7 +343,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
       width,
       gaps,
       hint,
-      complete: layout.value.bounded && !hint,
+      complete: layout.value.bounded && covered,
     }
   }
 
@@ -260,10 +356,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     const at = caret >= input.length ? typed.value.length : typed.caret
     const masked = maskInTypingOrder(typed.value, at)
     const shown = mirror(masked.value, masked.caret)
-    const filled = !inPlace &&
-      masked.caret >= masked.value.length &&
-      layout.value.bounded &&
-      !masked.hint
+    const filled = !inPlace && masked.caret >= masked.value.length && masked.complete
 
     return {
       ...masked,
@@ -295,6 +388,6 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     parseDate,
     formatDate,
     separator: toRef(() => currentFormat.value.separator),
-    parserFormat: toRef(() => currentFormat.value.format),
+    parserFormat: toRef(() => mirrorRtl(hintTokens.value.map(token => token.text).join(''))),
   }
 }

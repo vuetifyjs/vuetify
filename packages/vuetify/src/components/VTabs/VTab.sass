@@ -18,7 +18,7 @@
   .v-tab__slider
     position: absolute
     bottom: 0
-    left: 0
+    inset-inline-start: 0
     height: $tab-slider-size
     width: 100%
     background: currentColor
@@ -32,6 +32,41 @@
       top: 0
       height: 100%
       width: $tab-slider-size
+
+  .v-tab--slider-primary
+    > .v-btn__content
+      align-self: stretch
+      position: relative
+
+    .v-tab__slider
+      height: $tab-slider-primary-size
+      border-start-start-radius: $tab-slider-primary-radius
+      border-start-end-radius: $tab-slider-primary-radius
+
+    &.v-btn--stacked
+      > .v-btn__content
+        align-self: auto
+        flex-grow: 1
+
+      > .v-btn__prepend
+        align-items: end
+        flex-grow: 1
+
+      &:has(> .v-btn__prepend) > .v-btn__content
+        justify-content: start
+
+    .v-slide-group--vertical &
+      > .v-btn__content
+        align-self: auto
+        position: static
+
+      .v-tab__slider
+        margin-block: auto
+        height: 1lh
+        width: $tab-slider-primary-size
+        border-start-start-radius: 0
+        border-start-end-radius: $tab-slider-primary-radius
+        border-end-end-radius: $tab-slider-primary-radius
 
 @include tools.layer('trumps')
   @media (forced-colors: active)
