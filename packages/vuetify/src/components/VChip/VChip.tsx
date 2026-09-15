@@ -241,7 +241,7 @@ export const VChip = genericComponent<VChipSlots>()({
 
           { hasFilter && (
             <VExpandXTransition key="filter">
-              <div
+              <span
                 class="v-chip__filter"
                 v-show={ group.isSelected.value }
               >
@@ -260,12 +260,12 @@ export const VChip = genericComponent<VChipSlots>()({
                     v-slots:default={ slots.filter }
                   />
                 )}
-              </div>
+              </span>
             </VExpandXTransition>
           )}
 
           { hasPrepend && (
-            <div key="prepend" class="v-chip__prepend">
+            <span key="prepend" class="v-chip__prepend">
               { !slots.prepend ? (
                 <>
                   { props.prependIcon && (
@@ -301,10 +301,10 @@ export const VChip = genericComponent<VChipSlots>()({
                   v-slots:default={ slots.prepend }
                 />
               )}
-            </div>
+            </span>
           )}
 
-          <div class="v-chip__content" data-no-activator="">
+          <span class="v-chip__content" data-no-activator="">
             { slots.default?.({
               isSelected: group?.isSelected.value,
               selectedClass: group?.selectedClass.value,
@@ -313,10 +313,10 @@ export const VChip = genericComponent<VChipSlots>()({
               value: group?.value.value,
               disabled: props.disabled,
             }) ?? toDisplayString(props.text)}
-          </div>
+          </span>
 
           { hasAppend && (
-            <div key="append" class="v-chip__append">
+            <span key="append" class="v-chip__append">
               { !slots.append ? (
                 <>
                   { props.appendIcon && (
@@ -352,7 +352,7 @@ export const VChip = genericComponent<VChipSlots>()({
                   v-slots:default={ slots.append }
                 />
               )}
-            </div>
+            </span>
           )}
 
           { hasClose && (
