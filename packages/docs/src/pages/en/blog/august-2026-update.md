@@ -21,9 +21,6 @@ meta:
   const mcplogo = computed(() => {
     return `https://cdn.vuetifyjs.com/docs/images/one/logos/vmcp-logo-${theme.current.value.dark ? 'dark' : 'light'}.png`
   })
-  const v0img = computed(() => {
-    return `https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/v0-${theme.current.value.dark ? 'dark' : 'light'}.png`
-  })
 </script>
 
 # August 2026 Update
@@ -227,8 +224,6 @@ The July update listed six PRs for 4.2: VSlider `pill` ([#22699](https://github.
 <br>
 
 163 merged PRs, three patches ([v1.0.3](https://0.vuetifyjs.com/releases/?version=v1.0.3) on August 4, [v1.0.4](https://0.vuetifyjs.com/releases/?version=v1.0.4) on August 12, [v1.0.5](https://0.vuetifyjs.com/releases/?version=v1.0.5) on August 18) and [v1.2.0](https://0.vuetifyjs.com/releases/?version=v1.2.0) on August 25. A release tooling slip published a partial v1.1.0 an hour earlier; 1.2.0 includes all of it.
-
-<AppFigure :src="v0img" alt="Vuetify0 Progress" title="Vuetify0 August Progress" />
 
 ### New in 1.2
 
