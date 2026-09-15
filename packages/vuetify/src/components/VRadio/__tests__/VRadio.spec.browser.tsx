@@ -44,7 +44,7 @@ describe('VRadio', () => {
     const model = ref()
 
     const { element } = render(() => (
-      <VRadio id="test" label="Standalone" value="a" v-model={ model } />
+      <VRadio id="test" label="Standalone" value="a" v-model={ model.value } />
     ))
 
     expect(element).toBeInTheDocument()
