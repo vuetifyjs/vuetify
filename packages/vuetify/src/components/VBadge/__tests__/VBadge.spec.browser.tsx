@@ -71,6 +71,13 @@ describe('VBadge', () => {
       const el = wrapper.find('custom-tag').element
       expect(el).toHaveTextContent('tag')
     })
+
+    it('uses the tag for the wrapper element so phrasing content stays valid', () => {
+      const { wrapper } = render(<VBadge tag="span" content="3">child</VBadge>)
+      const root = wrapper.find('span.v-badge').element
+      const wrapperEl = root.querySelector('.v-badge__wrapper')
+      expect(wrapperEl?.tagName).toBe('SPAN')
+    })
   })
 
   showcase({ stories, props, component: VBadge })
