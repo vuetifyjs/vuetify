@@ -72,10 +72,10 @@ describe('v-touch', () => {
 
   describe('does not call directive handlers if distance is too small', () => {
     it.each([
-      ['down', [100, 115]],
-      ['up', [100, 85]],
-      ['left', [85, 100]],
-      ['right', [115, 100]],
+      ['down', [100, 113]],
+      ['up', [100, 87]],
+      ['left', [87, 100]],
+      ['right', [113, 100]],
     ])('%s', async (name, to) => {
       const fn = vi.fn()
       const start = vi.fn()
