@@ -1,0 +1,98 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-audio
+    align-items: center
+    background: rgb(var(--v-theme-surface))
+    border: thin solid rgba(var(--v-border-color), var(--v-border-opacity))
+    border-radius: $audio-border-radius
+    display: flex
+    min-height: var(--v-audio-height)
+    min-width: $audio-min-width
+    overflow: hidden
+    padding-inline: $audio-padding
+    position: relative
+    width: 100%
+    --v-audio-height: #{$audio-height}
+
+    @at-root
+      @include tools.density('v-audio', $audio-density) using ($modifier)
+        --v-audio-height: #{$audio-height + $modifier * 2}
+
+    &--seekable-container
+      cursor: pointer
+
+    &--error
+      .v-audio__controls
+        opacity: .6
+
+    // MiniAudio's whole-box fill: the played portion tints the background itself, so a
+    // waveform-free player still reads as a progress surface. `currentColor` at a low
+    // alpha darkens on light themes and lightens on dark ones with no per-theme rule.
+    &__fill
+      background: currentColor
+      inset-block: 0
+      inset-inline-start: 0
+      opacity: $audio-fill-opacity
+      pointer-events: none
+      position: absolute
+      transition: $audio-waveform-progress-transition
+      width: var(--v-audio-progress, 0%)
+
+    // The same hover affordance the waveform gives, for the waveform-free container.
+    &__cursor
+      background: currentColor
+      inset-block: 0
+      opacity: $audio-waveform-cursor-opacity
+      pointer-events: none
+      position: absolute
+      width: $audio-waveform-cursor-width
+
+    &__cursor-tooltip
+      background: $audio-waveform-tooltip-background
+      border-radius: $audio-waveform-tooltip-border-radius
+      color: $audio-waveform-tooltip-color
+      font-size: $audio-waveform-tooltip-font-size
+      line-height: 1.4
+      padding: $audio-waveform-tooltip-padding
+      pointer-events: none
+      position: absolute
+      top: $audio-waveform-tooltip-offset
+      transform: translateX(-50%)
+      white-space: nowrap
+      z-index: 1
+
+    &--scrubbing &__fill
+      transition: none
+
+    // Chromium already applies `display: none !important` to `audio:not([controls])`, so
+    // this only takes effect if the element is ever given controls. Kept so that stays a
+    // one-attribute change rather than a layout bug.
+    &__native
+      clip: rect(0 0 0 0)
+      clip-path: inset(50%)
+      height: 1px
+      overflow: hidden
+      position: absolute
+      white-space: nowrap
+      width: 1px
+
+    &__controls
+      flex: 1 1 auto
+      min-width: 0
+      position: relative
+
+
+    &__loader
+      inset-inline: 0
+      bottom: 0
+      position: absolute
+
+    &__error
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      gap: $audio-gap
+      font-size: $audio-time-font-size
+      padding-block: $audio-padding
