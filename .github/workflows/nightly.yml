@@ -40,22 +40,26 @@ jobs:
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 0
-      - run: |
+      - id: stale
+        run: |
           last=$(git show -s --format=%ct HEAD)
           now=$(date +%s)
-          diff=$(($now - $last))
-          if [ $diff -gt 86400 ]; then
-              echo "Last commit was more than 24 hours ago, skipping release"
-              exit 1
+          diff=$((now - last))
+          if [ "$diff" -gt 86400 ]; then
+            echo "Last commit was more than 24 hours ago, skipping release"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
-      - run: echo "RELEASE_ID=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - uses: ./.github/actions/nightly-release
+      - if: steps.stale.outputs.skip != 'true'
+        run: echo "RELEASE_ID=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - if: steps.stale.outputs.skip != 'true'
+        uses: ./.github/actions/nightly-release
         with:
           checkout-repo: ${{ github.repository }}
           checkout-ref: ${{ matrix.branch }}
           release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
           npm-tag: ${{ matrix.tag }}
-      - uses: actions/checkout@v6
+      - if: steps.stale.outputs.skip != 'true'
+        uses: actions/checkout@v6
 
   nightly-pr:
     runs-on: ubuntu-24.04
@@ -107,17 +111,21 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - run: |
+      - id: stale
+        run: |
           last=$(git show -s --format=%ct HEAD)
           now=$(date +%s)
-          diff=$(($now - $last))
-          if [ $diff -gt 86400 ]; then
-              echo "Last commit was more than 24 hours ago, skipping tests"
-              exit 1
+          diff=$((now - last))
+          if [ "$diff" -gt 86400 ]; then
+            echo "Last commit was more than 24 hours ago, skipping tests"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
-      - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
-      - run: pnpm exec playwright install chromium
-      - run: pnpm vizzly run "pnpm test:browser"
+      - if: steps.stale.outputs.skip != 'true'
+        uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
+      - if: steps.stale.outputs.skip != 'true'
+        run: pnpm exec playwright install chromium
+      - if: steps.stale.outputs.skip != 'true'
+        run: pnpm vizzly run "pnpm test:browser"
         working-directory: ./packages/vuetify
         env:
           VIZZLY_TOKEN: ${{ secrets.VIZZLY_TOKEN }}
