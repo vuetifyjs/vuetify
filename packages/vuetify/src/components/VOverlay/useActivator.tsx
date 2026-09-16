@@ -46,6 +46,7 @@ interface ActivatorProps extends DelayProps {
   openOnClick: boolean | undefined
   openOnHover: boolean
   openOnFocus: boolean | undefined
+  contextMenu: boolean
 
   closeOnContentClick: boolean
 }
@@ -67,6 +68,7 @@ export const makeActivatorProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+  contextMenu: Boolean,
 
   closeOnContentClick: Boolean,
 
@@ -97,7 +99,9 @@ export function useActivator (
   const shouldCloseOnLeave = () => !isSubmenu || (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
-  const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
+  const openOnClick = computed(() => props.openOnClick || (
+    props.openOnClick == null && !props.openOnHover && !openOnFocus.value && !props.contextMenu
+  ))
 
   const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
     if (
@@ -133,6 +137,8 @@ export function useActivator (
   })
 
   const cursorTarget = ref<[x: number, y: number]>()
+  let touchHoldTimer = -1
+  let openedByTouchHold = false
   const availableEvents = {
     onClick: (e: MouseEvent) => {
       if (reopenLock && !isActive.value) return
@@ -169,6 +175,38 @@ export function useActivator (
 
       runOpenDelay()
     },
+    onContextmenu: (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      clearTimeout(touchHoldTimer)
+      // Android fires contextmenu for the same long-press
+      if (openedByTouchHold) return
+      if (isActive.value) {
+        isActive.value = false
+        return
+      }
+      activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      // keyboard-triggered contextmenu (Shift+F10) may report 0,0; anchor to the activator instead
+      cursorTarget.value = e.clientX || e.clientY ? [e.clientX, e.clientY] : undefined
+      isActive.value = true
+    },
+    // iOS never fires contextmenu, so emulate the long-press
+    onTouchstart: (e: TouchEvent) => {
+      clearTimeout(touchHoldTimer)
+      openedByTouchHold = false
+      if (e.touches.length > 1) return
+      const { clientX, clientY } = e.touches[0]
+      const el = (e.currentTarget || e.target) as HTMLElement
+      touchHoldTimer = window.setTimeout(() => {
+        activatorEl.value = el
+        cursorTarget.value = [clientX, clientY]
+        openedByTouchHold = !isActive.value
+        isActive.value = true
+      }, 500)
+    },
+    onTouchmove: () => clearTimeout(touchHoldTimer),
+    onTouchend: () => clearTimeout(touchHoldTimer),
+    onTouchcancel: () => clearTimeout(touchHoldTimer),
     onBlur: (e: FocusEvent) => {
       // Body parks from clicks on empty areas inside content also count as "still focused".
       const next = e.relatedTarget as Element | null
@@ -193,6 +231,13 @@ export function useActivator (
       if (props.target === 'cursor' && !openOnClick.value) {
         events.onMousemove = availableEvents.onMousemove
       }
+    }
+    if (props.contextMenu) {
+      events.onContextmenu = availableEvents.onContextmenu
+      events.onTouchstart = availableEvents.onTouchstart
+      events.onTouchmove = availableEvents.onTouchmove
+      events.onTouchend = availableEvents.onTouchend
+      events.onTouchcancel = availableEvents.onTouchcancel
     }
     if (openOnFocus.value) {
       events.onFocus = availableEvents.onFocus
@@ -276,13 +321,10 @@ export function useActivator (
     }
   })
 
-  watch(isActive, val => {
-    if (!val) {
-      setTimeout(() => {
-        cursorTarget.value = undefined
-      })
-    }
-  }, { flush: 'post' })
+  // clearing earlier makes the leave transition fly back to the activator
+  function onAfterLeave () {
+    if (!isActive.value) cursorTarget.value = undefined
+  }
 
   const activatorRef = templateRef()
   watchEffect(() => {
@@ -295,7 +337,7 @@ export function useActivator (
 
   const targetRef = templateRef()
   const target = computed(() => {
-    if (props.target === 'cursor' && cursorTarget.value) return cursorTarget.value
+    if ((props.target === 'cursor' || (props.contextMenu && !props.target)) && cursorTarget.value) return cursorTarget.value
     if (targetRef.value) return targetRef.el
     return getTarget(props.target, vm) || activatorEl.value
   })
@@ -318,6 +360,7 @@ export function useActivator (
   }, { flush: 'post', immediate: true })
 
   onScopeDispose(() => {
+    clearTimeout(touchHoldTimer)
     scope?.stop()
   })
 
@@ -331,6 +374,7 @@ export function useActivator (
     contentEvents,
     scrimEvents,
     openedByHover,
+    onAfterLeave,
   }
 }
 

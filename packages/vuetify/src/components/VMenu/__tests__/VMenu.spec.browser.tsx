@@ -342,6 +342,39 @@ describe('VMenu', () => {
     expect(model.value).toBe(false)
   })
 
+  it('should toggle at the cursor on contextmenu and close on left click', async () => {
+    render(() => (
+      <VSheet data-testid="area" height="300" width="300">
+        <VMenu activator="parent" contextMenu>
+          <VSheet data-testid="menu-content" height="40" width="80" />
+        </VMenu>
+      </VSheet>
+    ))
+
+    const area = screen.getByTestId('area')
+    await userEvent.click(area)
+    await wait(100)
+    expect(screen.queryByTestId('menu-content')).toBeNull()
+
+    const box = area.getBoundingClientRect()
+    const event = new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 100, clientY: box.top + 120 })
+    area.dispatchEvent(event)
+    expect(event.defaultPrevented).toBe(true)
+
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+    const content = screen.getByTestId('menu-content').getBoundingClientRect()
+    expect(Math.round(content.left)).toBe(Math.round(box.left + 100))
+    expect(Math.round(content.top)).toBe(Math.round(box.top + 120))
+
+    area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 10, clientY: box.top + 10 }))
+    await expect.poll(() => screen.queryByTestId('menu-content')?.checkVisibility() ?? false).toBe(false)
+
+    area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 10, clientY: box.top + 10 }))
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+    await userEvent.click(area, { position: { x: 200, y: 250 } })
+    await expect.poll(() => screen.queryByTestId('menu-content')?.checkVisibility() ?? false).toBe(false)
+  })
+
   describe('cascade close', () => {
     beforeEach(() => commands.setReduceMotionDisabled())
 
