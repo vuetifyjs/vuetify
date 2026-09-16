@@ -505,6 +505,17 @@ describe('VCombobox', () => {
     await expect.poll(() => screen.getByCSS('input[type="text"]')).toHaveValue('0')
   })
 
+  it('should apply menu-elevation to the menu content', async () => {
+    const { element } = render(() => (
+      <VCombobox items={ items } menuElevation={ 0 } />
+    ))
+
+    await userEvent.click(element)
+
+    const content = await screen.findByCSS('.v-combobox__content')
+    expect(content).toHaveClass('elevation-0')
+  })
+
   it('should conditionally show placeholder', async () => {
     const { rerender } = render(VCombobox, {
       props: { placeholder: 'Placeholder' },
