@@ -1,0 +1,39 @@
+# Notify Grok Bot "Release → social draft" on published GitHub releases.
+# Repo secrets required: GROK_BOT_RELEASE_WEBHOOK_URL, GROK_BOT_RELEASE_WEBHOOK_KEY
+name: Grok Bot release notify
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.release.draft }}
+    steps:
+      - name: POST to Grok Bot webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.GROK_BOT_RELEASE_WEBHOOK_URL }}
+          WEBHOOK_KEY: ${{ secrets.GROK_BOT_RELEASE_WEBHOOK_KEY }}
+          EVENT_PATH: ${{ github.event_path }}
+        run: |
+          set -euo pipefail
+          if [ -z "${WEBHOOK_URL:-}" ] || [ -z "${WEBHOOK_KEY:-}" ]; then
+            echo "Missing GROK_BOT_RELEASE_WEBHOOK_URL or GROK_BOT_RELEASE_WEBHOOK_KEY"
+            exit 1
+          fi
+          payload=$(jq -c '{
+            source: "github-actions",
+            event: "release.published",
+            repository: .repository.full_name,
+            tag: .release.tag_name,
+            name: (.release.name // .release.tag_name),
+            html_url: .release.html_url,
+            prerelease: .release.prerelease,
+            draft: .release.draft,
+            body: (.release.body // "")
+          }' "$EVENT_PATH")
+          curl -fsS -X POST "$WEBHOOK_URL" \
+            -H "Authorization: Bearer $WEBHOOK_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$payload"
