@@ -47,14 +47,19 @@ Prefer `currentColor` / plain `solid`; system colors (`Highlight`, `Canvas`) onl
 
 Transitions and animations that move or resize need `@media (prefers-reduced-motion: reduce)` handling.
 
-`transition` followed by `transition-*` in the same rule is merged into one shorthand by newest Vite. The source looks fine in review while the shipped CSS differs. Write the full shorthand instead:
+`transition` followed by `transition-*` in the same rule is merged into one shorthand by newest Vite. The source looks fine in review while the shipped CSS differs. Use only longhands or only the shorthand:
 
 ```sass
 // ❌
 transition: .2s settings.$standard-easing
 transition-property: width, height
 
-// ✅
+// ✅ longhands only
+transition-property: width, height
+transition-duration: .2s
+transition-timing-function: settings.$standard-easing
+
+// ✅ full shorthand
 transition: width .2s settings.$standard-easing, height .2s settings.$standard-easing
 ```
 
