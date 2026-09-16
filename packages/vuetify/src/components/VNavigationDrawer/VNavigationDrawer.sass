@@ -80,6 +80,12 @@
       object-fit: $navigation-drawer-img-object-fit
       width: $navigation-drawer-img-width
 
+  .v-navigation-drawer__scrim-blur
+    position: absolute
+    inset: 0
+    transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
+    z-index: 1
+
   .v-navigation-drawer__scrim
     position: absolute
     top: 0

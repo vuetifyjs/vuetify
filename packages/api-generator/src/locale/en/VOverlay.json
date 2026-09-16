@@ -9,7 +9,7 @@
     "noClickAnimation": "Disables the bounce effect when clicking outside of the content element when using the persistent prop.",
     "opacity": "Sets the opacity of the scrim element. Only applies if `scrim` is enabled.",
     "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
-    "scrim": "Accepts true/false to enable background, and string to define color.",
+    "scrim": "Accepts true/false to enable background, string to define color, or an object with `color` and `blur`.",
     "zIndex": "The z-index used for the component."
   },
   "events": {

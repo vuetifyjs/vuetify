@@ -86,6 +86,19 @@ describe('VNavigationDrawer', () => {
     await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
   })
 
+  it('should blur and color the scrim when scrim is an object', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer modelValue temporary scrim={{ blur: '2rem', color: 'error' }} />
+        <VMain />
+      </VLayout>
+    ))
+
+    const blur = screen.getByCSS('.v-navigation-drawer__scrim-blur')
+    await expect.element(blur).toHaveStyle({ backdropFilter: 'blur(32px)' })
+    await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toHaveClass('bg-error')
+  })
+
   it('should expand over the content when using v-model:expanded', async () => {
     const expanded = ref(false)
     render(() => (

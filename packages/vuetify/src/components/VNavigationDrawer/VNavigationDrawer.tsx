@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, isString, omit, propsFactory, resolveSize, toPhysical, useRender } from '@/util'
+import { convertToUnit, genericComponent, isObject, isString, omit, propsFactory, resolveSize, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -69,7 +69,7 @@ export const makeVNavigationDrawerProps = propsFactory({
     default: 56,
   },
   scrim: {
-    type: [Boolean, String],
+    type: [Boolean, String, Object] as PropType<boolean | string | { blur?: number | string, color?: string }>,
     default: true,
   },
   image: String,
@@ -206,7 +206,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
     const scrimColor = useBackgroundColor(() => {
-      return isString(props.scrim) ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : isObject(props.scrim) ? props.scrim.color : null
     })
     const showScrim = computed(() => !!props.scrim && (
       isTemporary.value
@@ -314,6 +314,22 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               </div>
             )}
           </props.tag>
+
+          { isObject(props.scrim) && props.scrim.blur != null && (
+            <Transition name="fade-transition" appear>
+              { showScrim.value && (
+                <div
+                  class="v-navigation-drawer__scrim-blur"
+                  style={[
+                    { backdropFilter: `blur(${convertToUnit(props.scrim.blur)})` },
+                    isDragging.value ? { opacity: dragProgress.value, transition: 'none' } : undefined,
+                    layoutItemScrimStyles.value,
+                  ]}
+                  { ...scopeId }
+                />
+              )}
+            </Transition>
+          )}
 
           <Transition name="fade-transition" appear>
             { showScrim.value && (

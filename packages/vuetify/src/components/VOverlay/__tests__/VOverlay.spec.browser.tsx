@@ -199,4 +199,14 @@ describe('VOverlay', () => {
     await expect.poll(() => screen.queryAllByTestId('first-content')).toHaveLength(0)
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
   })
+
+  it('should blur and color the scrim when scrim is an object', async () => {
+    render(() => (
+      <VOverlay modelValue scrim={{ blur: 4, color: 'error' }} />
+    ))
+
+    const blur = screen.getByCSS('.v-overlay__scrim-blur')
+    await expect.element(blur).toHaveStyle({ backdropFilter: 'blur(4px)' })
+    await expect.element(screen.getByCSS('.v-overlay__scrim')).toHaveClass('bg-error')
+  })
 })
