@@ -22,12 +22,14 @@ export interface VSelectionGroupContext {
   modelValue: Ref<any>
   forceUpdate: () => void
   onForceUpdate: (fn: () => void) => void
-  register: (control: {
-    el: () => HTMLElement | undefined
-    focus: (options?: FocusOptions) => void
-    isChecked: () => boolean
-    isInteractive: () => boolean
-  }) => void
+  register: (control: VSelectionControlInstance) => void
+}
+
+export interface VSelectionControlInstance {
+  el: () => HTMLElement | undefined
+  focus: (options?: FocusOptions) => void
+  isChecked: () => boolean
+  isInteractive: () => boolean
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
@@ -98,12 +100,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     const name = toRef(() => props.name || id.value)
 
     const updateHandlers = new Set<() => void>()
-    const controls = new Set<{
-      el: () => HTMLElement | undefined
-      focus: (options?: FocusOptions) => void
-      isChecked: () => boolean
-      isInteractive: () => boolean
-    }>()
+    const controls = new Set<VSelectionControlInstance>()
 
     provide(VSelectionControlGroupSymbol, {
       modelValue,
@@ -129,20 +126,24 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     function focus (options?: FocusOptions) {
       if (!IN_BROWSER) return
 
+      // Find the first checked control or the first interactive one, in DOM order
+      let first: VSelectionControlInstance | undefined
       for (const control of controls) {
-        if (control.isChecked()) {
-          control.focus(options)
-          return
+        const el = control.el()
+        if (!el || !(control.isChecked() || control.isInteractive())) continue
+
+        if (!first) {
+          first = control
+          continue
         }
-      }
 
-      let first: { focus: (options?: FocusOptions) => void, el: () => HTMLElement | undefined } | undefined
-
-      for (const c of controls) {
-        const el = c.el()
-        if (!el || !c.isInteractive()) continue
-        if (!first || (first.el()!.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING)) {
-          first = c
+        const checked = control.isChecked()
+        const firstEl = first.el()
+        if (
+          (checked && !first.isChecked()) ||
+          (checked === first.isChecked() && firstEl && (firstEl.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING))
+        ) {
+          first = control
         }
       }
 
