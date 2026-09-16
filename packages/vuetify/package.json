@@ -170,7 +170,7 @@
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vitest/browser-playwright": "^4.0.13",
     "@vitest/coverage-istanbul": "^4.0.13",
-    "@vitest/eslint-plugin": "^1.6.13",
+    "@vitest/eslint-plugin": "^1.6.27",
     "@vitest/ui": "^4.0.13",
     "@vizzly-testing/cli": "^0.22.2",
     "@vizzly-testing/vitest": "^0.1.1",
