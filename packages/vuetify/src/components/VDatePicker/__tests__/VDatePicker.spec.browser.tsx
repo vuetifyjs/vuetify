@@ -18,8 +18,14 @@ describe('VDatePicker', () => {
     await userEvent.click(await screen.findByText(10))
     await userEvent.click(await screen.findByText(20))
 
-    // Expect a 11-day range to be selected
-    await expect.poll(() => model.value).toHaveLength(11)
+    // Expect only 2 dates (first and last) to be selected
+    await expect.poll(() => model.value).toHaveLength(2)
+
+    // Verify the correct dates are selected (10th and 20th)
+    const dates = model.value as Date[]
+
+    expect(dates[0].getDate()).toBe(10)
+    expect(dates[1].getDate()).toBe(20)
   })
 
   it('selects a range of dates across month boundary', async () => {
@@ -44,8 +50,18 @@ describe('VDatePicker', () => {
     await commands.waitStable('.v-date-picker-month__days')
     await userEvent.click(await screen.findByText(7))
 
-    // Expect a 32-day range spanning across two months
-    await expect.poll(() => model.value).toHaveLength(32)
+    // Expect only 2 dates (first and last) spanning across two months
+    await expect.poll(() => model.value).toHaveLength(2)
+
+    // Verify the correct dates are selected (2025-01-07 and 2025-02-07)
+    const dates = model.value as Date[]
+
+    expect(dates[0].getFullYear()).toBe(2025)
+    expect(dates[0].getMonth()).toBe(0)
+    expect(dates[0].getDate()).toBe(7)
+    expect(dates[1].getFullYear()).toBe(2025)
+    expect(dates[1].getMonth()).toBe(1)
+    expect(dates[1].getDate()).toBe(7)
   })
 
   it('does not trigger infinite loop when first-day-of-week is out of range', async () => {
@@ -72,5 +88,45 @@ describe('VDatePicker', () => {
     expect('Invalid firstDayOfWeek, expected discrete number in range [0-6]').toHaveBeenTipped()
 
     await commands.clearAbortTimeout()
+  })
+
+  it('no-auto-navigation should keep the displayed month after model change', async () => {
+    const onUpdateMonth = vi.fn()
+    const onUpdateYear = vi.fn()
+    const model = ref<unknown>('2026-01-15')
+
+    render(() => (
+      <VDatePicker
+        v-model={ model.value }
+        month={ 0 }
+        year={ 2026 }
+        onUpdate:month={ onUpdateMonth }
+        onUpdate:year={ onUpdateYear }
+        noAutoNavigation
+      />
+    ))
+
+    // Reassign the model to a date in February. Without `no-auto-navigation` this would
+    // emit update:month and re-render to Feb 2026. With it, the picker must stay on Jan.
+    model.value = '2026-02-20'
+    await nextTick()
+
+    expect(onUpdateMonth).not.toHaveBeenCalled()
+    expect(onUpdateYear).not.toHaveBeenCalled()
+
+    // January grid is still rendered.
+    expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
+  })
+
+  it('previews the hovered end of a range', async () => {
+    render(() => (
+      <VDatePicker multiple="range" modelValue={[new Date(2025, 3, 8)]} />
+    ))
+
+    const $days = await screen.findAllByCSS('.v-date-picker-month__day-btn')
+    await userEvent.hover($days[15])
+
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview').length).toBeGreaterThan(0)
   })
 })

@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    elevation="24"
+    elevation="5"
     max-width="444"
   >
     <v-carousel
@@ -21,7 +21,7 @@
           tile
         >
           <div class="d-flex fill-height justify-center align-center">
-            <div class="text-h2">
+            <div class="text-display-large">
               {{ slide }} Slide
             </div>
           </div>

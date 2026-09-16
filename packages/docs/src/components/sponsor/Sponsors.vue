@@ -1,9 +1,7 @@
 <template>
   <v-row
     v-if="sponsors?.length"
-    align="center"
-    class="v-sponsors mb-0"
-    justify="start"
+    class="v-sponsors align-center justify-start"
   >
     <v-col
       v-for="sponsor in sponsors"

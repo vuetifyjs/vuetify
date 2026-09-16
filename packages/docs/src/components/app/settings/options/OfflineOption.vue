@@ -51,7 +51,7 @@
 
   <v-expand-transition>
     <v-card v-if="store.availableOffline && !store.isUpdating && store.pendingUpdate" color="surface-variant" variant="tonal">
-      <v-card-text class="text-caption pb-0">{{ t('settings.offline.pending') }}</v-card-text>
+      <v-card-text class="text-body-small pb-0">{{ t('settings.offline.pending') }}</v-card-text>
       <template #actions>
         <v-spacer />
         <v-btn color="primary" variant="plain" @click="reload">

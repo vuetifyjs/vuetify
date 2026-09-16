@@ -1,10 +1,7 @@
 {
+  "description": "A single radio button, meant to be used within `v-radio-group`.",
   "props": {
     "falseIcon": "The icon used when inactive.",
     "trueIcon": "The icon used when active."
-  },
-  "events": {
-    "change": "Emitted when the input is changed by user interaction.",
-    "click": "Emitted when input is clicked. **Note:** the **change** event should be used instead of **click** when monitoring state change."
   }
 }

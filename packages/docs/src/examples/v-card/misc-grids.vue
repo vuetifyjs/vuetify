@@ -4,7 +4,7 @@
     max-width="500"
   >
     <v-container fluid>
-      <v-row dense>
+      <v-row density="comfortable">
         <v-col
           v-for="card in cards"
           :key="card.title"

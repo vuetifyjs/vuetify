@@ -1,129 +1,47 @@
 <template>
   <v-card flat>
     <v-card-text>
-      <v-container fluid>
-        <v-row>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <v-switch
-              v-model="ex11"
-              color="red"
-              label="red"
-              value="red"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="red-darken-3"
-              label="red-darken-3"
-              value="red-darken-3"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <v-switch
-              v-model="ex11"
-              color="indigo"
-              label="indigo"
-              value="indigo"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="indigo-darken-3"
-              label="indigo-darken-3"
-              value="indigo-darken-3"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <v-switch
-              v-model="ex11"
-              color="orange"
-              label="orange"
-              value="orange"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="orange-darken-3"
-              label="orange-darken-3"
-              value="orange-darken-3"
-              hide-details
-            ></v-switch>
-          </v-col>
-        </v-row>
+      <div class="d-flex justify-center align-center ga-4 mb-6">
+        <v-btn-toggle
+          v-model="variant"
+          variant="outlined"
+          divided
+          mandatory
+        >
+          <v-btn value="default">Default</v-btn>
+          <v-btn value="inset">Inset</v-btn>
+          <v-btn value="material">Material</v-btn>
+          <v-btn value="square">Square</v-btn>
+        </v-btn-toggle>
 
-        <v-row class="mt-12">
+        <v-checkbox
+          v-model="icons"
+          label="Icons"
+          hide-details
+        ></v-checkbox>
+      </div>
+
+      <v-container fluid>
+        <v-row
+          v-for="(group, i) in groups"
+          :key="i"
+          :class="{ 'mt-12': i > 0 }"
+        >
           <v-col
+            v-for="(pair, j) in group"
+            :key="j"
             cols="12"
             md="4"
             sm="4"
           >
             <v-switch
+              v-for="color in pair"
+              :key="color"
               v-model="ex11"
-              color="primary"
-              label="primary"
-              value="primary"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="secondary"
-              label="secondary"
-              value="secondary"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <v-switch
-              v-model="ex11"
-              color="success"
-              label="success"
-              value="success"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="info"
-              label="info"
-              value="info"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <v-switch
-              v-model="ex11"
-              color="warning"
-              label="warning"
-              value="warning"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="ex11"
-              color="error"
-              label="error"
-              value="error"
-              hide-details
+              v-bind="shared"
+              :color="color"
+              :label="color"
+              :value="color"
             ></v-switch>
           </v-col>
         </v-row>
@@ -133,15 +51,54 @@
 </template>
 
 <script setup>
-  const ex11 = ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red-darken-3', 'indigo-darken-3', 'orange-darken-3']
+  const variant = ref('default')
+  const icons = ref(false)
+
+  const shared = computed(() => {
+    return {
+      inset: variant.value === 'default' ? undefined
+        : variant.value === 'inset' ? true
+          : variant.value,
+      'true-icon': icons.value ? 'mdi-check' : undefined,
+      'false-icon': icons.value ? 'mdi-close' : undefined,
+      'hide-details': true,
+    }
+  })
+
+  const groups = [
+    [['red', 'red-darken-3'], ['indigo', 'indigo-darken-3'], ['orange', 'orange-darken-3']],
+    [['primary', 'secondary'], ['success', 'info'], ['warning', 'error']],
+  ]
+
+  const ex11 = ref(groups.flat(2))
 </script>
 
 <script>
   export default {
     data () {
+      const groups = [
+        [['red', 'red-darken-3'], ['indigo', 'indigo-darken-3'], ['orange', 'orange-darken-3']],
+        [['primary', 'secondary'], ['success', 'info'], ['warning', 'error']],
+      ]
+
       return {
-        ex11: ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red-darken-3', 'indigo-darken-3', 'orange-darken-3'],
+        variant: 'default',
+        icons: false,
+        groups,
+        ex11: groups.flat(2),
       }
+    },
+    computed: {
+      shared () {
+        return {
+          inset: this.variant === 'default' ? undefined
+            : this.variant === 'inset' ? true
+              : this.variant,
+          'true-icon': this.icons ? 'mdi-check' : undefined,
+          'false-icon': this.icons ? 'mdi-close' : undefined,
+          'hide-details': true,
+        }
+      },
     },
   }
 </script>

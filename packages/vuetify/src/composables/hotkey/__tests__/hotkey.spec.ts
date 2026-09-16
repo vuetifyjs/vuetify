@@ -7,6 +7,7 @@ import { nextTick, ref } from 'vue'
 
 describe('hotkey.ts', () => {
   const originalNavigator = window.navigator
+
   afterEach(() => {
     Object.defineProperty(window, 'navigator', { value: originalNavigator, writable: true })
   })
@@ -23,6 +24,13 @@ describe('hotkey.ts', () => {
     ['f1', { key: 'f1' }],
     ['enter', { key: 'enter' }],
     ['space', { key: ' ' }],
+    ['plus', { key: '+' }],
+    ['slash', { key: '/' }],
+    ['underscore', { key: '_' }],
+    ['shift+plus', { shiftKey: true, key: '+' }],
+    ['shift+slash', { shiftKey: true, key: '/' }],
+    ['shift+underscore', { shiftKey: true, key: '_' }],
+    ['ctrl+plus', { ctrlKey: true, key: '+' }],
     ['alt+-', { altKey: true, key: '-' }],
   ])('fires on %s', (combo, props) => {
     const cb = vi.fn()
@@ -47,7 +55,7 @@ describe('hotkey.ts', () => {
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[0] }))
       vi.advanceTimersByTime(gap)
-      // eslint-disable-next-line vitest/no-conditional-in-test
+      // eslint-disable-next-line @vitest/no-conditional-in-test
       if (seq[1]) window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[1] }))
       expect(cb).toHaveBeenCalledTimes(expected)
 

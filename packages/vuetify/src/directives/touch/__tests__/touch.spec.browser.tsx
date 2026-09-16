@@ -72,10 +72,10 @@ describe('v-touch', () => {
 
   describe('does not call directive handlers if distance is too small', () => {
     it.each([
-      ['down', [100, 115]],
-      ['up', [100, 85]],
-      ['left', [85, 100]],
-      ['right', [115, 100]],
+      ['down', [100, 113]],
+      ['up', [100, 87]],
+      ['left', [87, 100]],
+      ['right', [113, 100]],
     ])('%s', async (name, to) => {
       const fn = vi.fn()
       const start = vi.fn()
@@ -90,6 +90,51 @@ describe('v-touch', () => {
       expect(start).toHaveBeenCalledTimes(1)
       expect(move).not.toHaveBeenCalled()
       expect(end).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('ignores the axis a nested element scrolled', () => {
+    const ScrollComponent = defineComponent({
+      directives: { vTouch },
+      props: {
+        value: Object as PropType<TouchValue>,
+      },
+      setup (props) {
+        return () => (
+          <div v-touch={ props.value } style="width: 200px; height: 200px; background: red;">
+            <div class="scroller" style="width: 200px; height: 100px; overflow: auto;">
+              <div style="width: 600px; height: 50px;" />
+            </div>
+          </div>
+        )
+      },
+    })
+
+    function scrollOnMove () {
+      const scroller = document.querySelector('.scroller')!
+      scroller.addEventListener('touchmove', () => { scroller.scrollLeft = 50 })
+    }
+
+    it('suppresses the scrolled axis', async () => {
+      const left = vi.fn()
+
+      render(<ScrollComponent value={{ left }} />)
+      scrollOnMove()
+
+      await commands.drag([150, 50], [60, 50])
+
+      expect(left).not.toHaveBeenCalled()
+    })
+
+    it('keeps the other axis', async () => {
+      const up = vi.fn()
+
+      render(<ScrollComponent value={{ up }} />)
+      scrollOnMove()
+
+      await commands.drag([150, 50], [150, 10])
+
+      expect(up).toHaveBeenCalledTimes(1)
     })
   })
 })

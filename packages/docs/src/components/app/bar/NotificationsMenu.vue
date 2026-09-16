@@ -49,7 +49,7 @@
     >
       <div
         v-if="done"
-        class="py-8 text-center text-subtitle-1"
+        class="py-8 text-center text-body-large"
       >
         <p>{{ t('done') }}</p>
 
@@ -75,13 +75,13 @@
                 <div class="pe-4 align-self-start">{{ notification.metadata.emoji }}</div>
               </template>
 
-              <v-list-item-title class="text-wrap text-h6">
+              <v-list-item-title class="text-wrap text-title-large">
                 <div class=" text-truncate">{{ notification.title }}</div>
               </v-list-item-title>
 
-              <div class="text-caption mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
+              <div class="text-body-small mb-1 font-weight-bold text-medium-emphasis">{{ format(notification.created_at) }}</div>
 
-              <div class="text-medium-emphasis text-caption">
+              <div class="text-medium-emphasis text-body-small">
                 <AppMarkdown :content="notification.metadata.text" class="mb-n3" />
 
                 <border-chip

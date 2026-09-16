@@ -56,14 +56,34 @@ async function waitForClickable (ctx: BrowserCommandContext, selector: string) {
   (await ctx.page.$(selector))?.click({ trial: true })
 }
 
+async function isClickable (ctx: BrowserCommandContext, selector: string, timeout = 300) {
+  try {
+    await ctx.iframe.locator(selector).click({ trial: true, timeout })
+    return true
+  } catch {
+    return false
+  }
+}
+
 async function setFocusEmulationEnabled (ctx: BrowserCommandContext) {
   const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true })
 }
 
+async function setFocusEmulationDisabled (ctx: BrowserCommandContext) {
+  const cdp = await ctx.provider.getCDPSession!(ctx.sessionId)
+  await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: false })
+}
+
 async function setReduceMotionEnabled (ctx: BrowserCommandContext) {
   await ctx.page.emulateMedia({
     reducedMotion: 'reduce',
+  })
+}
+
+async function setReduceMotionDisabled (ctx: BrowserCommandContext) {
+  await ctx.page.emulateMedia({
+    reducedMotion: 'no-preference',
   })
 }
 
@@ -118,8 +138,11 @@ export const commands = {
   click,
   waitStable,
   waitForClickable,
+  isClickable,
   setFocusEmulationEnabled,
+  setFocusEmulationDisabled,
   setReduceMotionEnabled,
+  setReduceMotionDisabled,
   abortAfter,
   clearAbortTimeout,
   getLock,

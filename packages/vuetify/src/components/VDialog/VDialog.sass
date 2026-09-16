@@ -24,7 +24,7 @@
           --v-scrollbar-offset: 0px
           border-radius: $dialog-border-radius
           overflow-y: auto
-          flex: 1 1 100%
+          flex: 1 1 var(--v-card-height, 100%)
 
           @include tools.elevation($dialog-elevation)
 
@@ -82,7 +82,7 @@
       &,
       > .v-card
         display: flex
-        flex: 1 1 100%
+        flex: 1 1 var(--v-card-height, 100%)
         flex-direction: column
 
       > .v-card > .v-card-text

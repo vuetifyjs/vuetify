@@ -23,7 +23,7 @@
     </v-card-text>
 
     <v-card-text>
-      <div class="text-h4 font-weight-thin">
+      <div class="text-headline-large font-weight-thin">
         Sales Last 24h
       </div>
     </v-card-text>

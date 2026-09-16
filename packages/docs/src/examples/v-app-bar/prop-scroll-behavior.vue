@@ -6,7 +6,7 @@
       :name="name"
       :options="options"
     >
-      <v-layout class="overflow-visible" style="height: 300px">
+      <v-layout style="height: 300px">
         <v-main id="scroll-behavior-layout" class="pt-0" scrollable>
           <v-app-bar
             v-bind="props"

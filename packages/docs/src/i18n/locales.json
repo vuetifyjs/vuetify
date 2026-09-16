@@ -44,10 +44,5 @@
     "locale": "ko-KR",
     "alternate": "ko",
     "enabled": false
-  },
-  {
-    "title": "Help translate",
-    "locale": "eo-UY",
-    "enabled": true
   }
 ]

@@ -9,6 +9,7 @@
     "provide": "**FOR INTERNAL USE ONLY**",
     "rtl": "**FOR INTERNAL USE ONLY**",
     "rtlClasses": "**FOR INTERNAL USE ONLY**",
-    "t": "Function to localize strings."
+    "t": "Function to localize strings.",
+    "decimalSeparator": "The decimal separator character for the current locale (e.g. `.` for en, `,` for de)."
   }
 }

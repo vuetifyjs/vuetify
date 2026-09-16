@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: November 2025 Update
-  description: November delivered Vuetify v3.11.0 with VCalendar and VHotkey promoted from labs, new VTimePicker input variant, VDatePicker MD3 improvements, and significant CLI progress.
+  description: November shipped Vuetify v3.11.0 with VCalendar and VHotkey promoted from labs, a new VTimePicker input variant, VDatePicker MD3 work, and CLI progress.
   keywords: Vuetify November 2025, v3.11.0 Harbinger, VCalendar, VHotkey, VTimePicker, VDatePicker MD3
 ---
 

@@ -38,6 +38,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   inline: Boolean,
   falseIcon: IconValue,
   trueIcon: IconValue,
+  indeterminateIcon: IconValue,
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
     default: true,

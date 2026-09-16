@@ -136,7 +136,13 @@ export const frontmatterBuilder = createBuilder('frontmatterBuilder', 'metaExtra
   .meta()
 
 export function getRouteMeta (componentPath: string, locale: string) {
-  const str = fs.readFileSync(path.resolve(componentPath.slice(1)), { encoding: 'utf-8' })
+  const resolved = path.resolve(componentPath.slice(1))
+
+  if (!fs.existsSync(resolved)) {
+    return { disabled: true }
+  }
+
+  const str = fs.readFileSync(resolved, { encoding: 'utf-8' })
   const { attributes } = fm(str)
 
   const valid = validate(attributes)

@@ -60,6 +60,12 @@ The `size` prop allows you to change the height and width of the avatar.
 
 <ExamplesExample file="v-avatar/prop-size" />
 
+#### Badge
+
+The `badge` prop wraps the avatar in a [v-badge](/components/badges/) to display a status indicator. Set it to `true` for a default dot badge, a color string, or an object of VBadge props for full customization. Use the **badge** slot to render custom content inside the badge.
+
+<ExamplesExample file="v-avatar/prop-badge" />
+
 #### Tile
 
 The `rounded` prop can be used to remove the border radius from v-avatar leaving you with a simple square avatar.

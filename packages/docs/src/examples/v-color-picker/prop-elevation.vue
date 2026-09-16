@@ -7,7 +7,7 @@
 
     <v-color-picker
       v-model="picker"
-      elevation="15"
+      elevation="4"
     ></v-color-picker>
   </div>
 </template>

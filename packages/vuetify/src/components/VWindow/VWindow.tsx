@@ -16,7 +16,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, IN_BROWSER, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
@@ -64,7 +64,7 @@ export const makeVWindowProps = propsFactory({
   reverse: Boolean,
   showArrows: {
     type: [Boolean, String],
-    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+    validator: (v: any) => isBoolean(v) || v === 'hover',
   },
   verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   touch: {
@@ -260,6 +260,35 @@ export const VWindow = genericComponent<new <T>(
       }
     })
 
+    function onKeyDown (e: KeyboardEvent) {
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'vertical' && e.key === 'ArrowUp')
+      ) {
+        e.preventDefault()
+        prev()
+        nextTick(() => { canMoveBack.value ? focusArrow(0) : focusArrow(1) })
+      }
+
+      if (
+        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'vertical' && e.key === 'ArrowDown')
+      ) {
+        e.preventDefault()
+        next()
+        nextTick(() => { canMoveForward.value ? focusArrow(1) : focusArrow(0) })
+      }
+    }
+
+    function focusArrow (index: number) {
+      const arrow = arrows.value[index]
+
+      if (!arrow) return
+
+      const arrowEl = Array.isArray(arrow) ? arrow[0] : arrow
+      arrowEl.el?.focus()
+    }
+
     useRender(() => (
       <props.tag
         ref={ rootRef }
@@ -298,6 +327,7 @@ export const VWindow = genericComponent<new <T>(
                 { 'v-window__controls--left': props.verticalArrows === 'left' || props.verticalArrows === true },
                 { 'v-window__controls--right': props.verticalArrows === 'right' },
               ]}
+              onKeydown={ onKeyDown }
             >
               { arrows.value }
             </div>

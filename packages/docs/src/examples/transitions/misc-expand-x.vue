@@ -1,7 +1,6 @@
 <template>
   <v-row
-    justify="center"
-
+    class="justify-center"
     style="min-height: 160px;"
   >
     <v-col class="shrink">

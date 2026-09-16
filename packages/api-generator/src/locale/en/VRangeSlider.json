@@ -1,7 +1,7 @@
 {
+  "description": "Complements the `v-slider` component letting user to pick 2 data points on the linear scale.",
   "props": {
     "strict": "Disallows dragging the ending thumb past the starting thumb and vice versa."
-
   },
   "slots": {
     "thumb-label": "Slot for the thumb label.",

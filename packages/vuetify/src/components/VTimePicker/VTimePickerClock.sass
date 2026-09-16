@@ -131,8 +131,9 @@
       &__container
         flex-direction: row
 
-  .v-time-picker-clock
-    @media (forced-colors: active)
+@include tools.layer('trumps')
+  @media (forced-colors: active)
+    .v-time-picker-clock
       &__hand
         background-color: highlight
         &:before
@@ -141,4 +142,4 @@
           background-color: highlight
 
       &__item--active
-        outline: 2px solid highlight !important
+        outline: 2px solid highlight

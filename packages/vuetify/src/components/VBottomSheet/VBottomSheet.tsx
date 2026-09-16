@@ -18,6 +18,9 @@ export const makeVBottomSheetProps = propsFactory({
 
   ...makeVDialogProps({
     transition: 'bottom-sheet-transition',
+    location: 'bottom center' as const,
+    origin: 'bottom center' as const,
+    viewportMargin: 0,
   }),
 }, 'VBottomSheet')
 

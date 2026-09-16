@@ -153,5 +153,67 @@ describe('VList', () => {
     expect(selectedItem.value).toEqual([items[1]])
   })
 
+  describe('value-comparator', () => {
+    it('should apply to initial selected', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+        {
+          title: 'Group B',
+          value: 'GROUP_B',
+          children: [
+            { title: 'Gamma', value: 'GAMMA' },
+            { title: 'Delta', value: 'DELTA' },
+          ],
+        },
+      ]
+      const selected = ref<string[]>(['beta', 'delta'])
+
+      render(() => (
+        <VList
+          v-model:selected={ selected.value }
+          items={ caseItems }
+          opened={['GROUP_A', 'GROUP_B']}
+          selectStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+        />
+      ))
+
+      expect(screen.getByText('Beta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Delta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Alpha').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
+      expect(screen.getByText('Gamma').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
+    })
+
+    it('should apply to initial activated', async () => {
+      const caseItems = [
+        { title: 'Alpha', value: 'ALPHA' },
+        { title: 'Beta', value: 'BETA' },
+        { title: 'Gamma', value: 'GAMMA' },
+      ]
+      const activated = ref<string[]>(['beta'])
+
+      render(() => (
+        <VList
+          v-model:activated={ activated.value }
+          items={ caseItems }
+          activatable
+          activeStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+        />
+      ))
+
+      expect(screen.getByText('Beta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Alpha').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
+      expect(screen.getByText('Gamma').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
+    })
+  })
+
   showcase({ stories })
 })

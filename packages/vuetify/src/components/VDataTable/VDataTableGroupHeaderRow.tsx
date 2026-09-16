@@ -9,6 +9,7 @@ import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -36,6 +37,10 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
     type: IconValue,
     default: '$tableGroupExpand',
   },
+  selectGroupLabel: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.selectGroup',
+  },
   ...makeDensityProps(),
 }, 'VDataTableGroupHeaderRow')
 
@@ -45,6 +50,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
   props: makeVDataTableGroupHeaderRowProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { isGroupOpen, toggleGroup, extractRows } = useGroupBy()
     const { isSelected, isSomeSelected, select } = useSelection()
     const { columns } = useHeaders()
@@ -90,6 +96,7 @@ export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRo
             return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
               <VDataTableColumn class="v-data-table__td--select-row" noPadding>
                 <VCheckboxBtn
+                  aria-label={ t(props.selectGroupLabel) }
                   density={ props.density }
                   disabled={ selectableRows.length === 0 }
                   modelValue={ modelValue }

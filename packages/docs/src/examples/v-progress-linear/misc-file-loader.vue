@@ -31,13 +31,9 @@
     </v-toolbar>
 
     <v-container style="height: 400px;">
-      <v-row
-        align-content="center"
-        class="fill-height"
-        justify="center"
-      >
+      <v-row class="fill-height align-content-center justify-center">
         <v-col
-          class="text-subtitle-1 text-center"
+          class="text-body-large text-center"
           cols="12"
         >
           Getting your files

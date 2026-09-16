@@ -1,4 +1,5 @@
 {
+  "description": "Easy to use wrapper that delays components mount and helps avoid performance overhead of rendering everything at once. Utilizes intersection observer.",
   "props": {
     "options": "Options that are passed to the [Intersection observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) constructor."
   }

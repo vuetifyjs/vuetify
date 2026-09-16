@@ -1,7 +1,7 @@
 // Utilities
 import { effectScope, onScopeDispose, watchEffect } from 'vue'
 import { requestNewFrame } from './requestNewFrame'
-import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
+import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, isFunction, propsFactory } from '@/util'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
@@ -33,7 +33,7 @@ export const makeScrollStrategyProps = propsFactory({
   scrollStrategy: {
     type: [String, Function] as PropType<StrategyProps['scrollStrategy']>,
     default: 'block',
-    validator: (val: any) => typeof val === 'function' || val in scrollStrategies,
+    validator: (val: any) => isFunction(val) || val in scrollStrategies,
   },
 }, 'VOverlay-scroll-strategies')
 
@@ -52,7 +52,7 @@ export function useScrollStrategies (
     scope = effectScope()
     await new Promise(resolve => setTimeout(resolve))
     scope.active && scope.run(() => {
-      if (typeof props.scrollStrategy === 'function') {
+      if (isFunction(props.scrollStrategy)) {
         props.scrollStrategy(data, props, scope!)
       } else {
         scrollStrategies[props.scrollStrategy]?.(data, props, scope!)
@@ -91,7 +91,7 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
     el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
     el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
 
-    if (el !== document.documentElement) {
+    if (el !== document.documentElement || getComputedStyle(el).overflowY !== 'scroll') {
       el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     }
 

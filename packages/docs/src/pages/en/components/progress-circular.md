@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress circular
   title: Progress circular component
@@ -53,6 +54,12 @@ Using the `indeterminate` prop, a `v-progress-circular` continues to animate ind
 
 <ExamplesExample file="v-progress-circular/prop-indeterminate" />
 
+#### Reveal
+
+The `reveal` prop animates the progress circle from 0 to its model value when the component mounts.
+
+<ExamplesExample file="v-progress-circular/prop-reveal" />
+
 #### Rotate
 
 The `rotate` prop gives you the ability to customize the `v-progress-circular`'s origin.
@@ -64,6 +71,12 @@ The `rotate` prop gives you the ability to customize the `v-progress-circular`'s
 The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component.
 
 <ExamplesExample file="v-progress-circular/prop-size-and-width" />
+
+#### Transition
+
+The `transition` prop controls how long the arc takes to animate to a new value. Pass `{ duration }` in milliseconds or as a CSS duration string, or `false` to remove the transition.
+
+<ExamplesExample file="v-progress-circular/prop-transition" />
 
 ### Slots
 

@@ -41,7 +41,7 @@ import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   theme: {
-    defaultTheme: 'dark', // 'light' | 'dark' | 'system'
+    defaultTheme: 'dark', // 'system' | 'light' | 'dark'
   },
 })
 ```
@@ -94,32 +94,6 @@ The theme instance has 3 functions to change the theme:
 </script>
 ```
 
-<details>
-<summary>Usage before v3.9</summary>
-
-In versions before v3.9, you manually change the global name value on the theme instance:
-
-```html { resource="src/App.vue" }
-<template>
-  <v-app>
-    <v-btn @click="toggleTheme">toggle theme</v-btn>
-    ...
-  </v-app>
-</template>
-
-<script setup>
-import { useTheme } from 'vuetify'
-
-const theme = useTheme()
-
-function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-}
-</script>
-```
-
-</details>
-
 <br>
 
 You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
@@ -154,8 +128,6 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
 
 ### System theme
 
-<DocIntroduced version="3.9.0" />
-
 The **system** theme uses the user's system preference for 'light' or 'dark' mode, based on the **prefers-color-scheme** media query. It is evaluated at run-time and reacts to changes in the user's system preference.
 
 ```js { resource="src/plugins/vuetify.js" }
@@ -167,6 +139,54 @@ export default createVuetify({
     defaultTheme: 'system',
   },
 })
+```
+
+### Theme transition
+
+The **transition** option enables an expanding circle animation when changing themes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API). In browsers that do not support the View Transition API, the theme change is applied instantly.
+
+| Browser                 | minimal version for View Transition |
+|-------------------------|:------------------------------------|
+| Chromium (Chrome, Edge) | 111                                 |
+| Firefox                 | 144                                 |
+| Safari                  | 18.0                                |
+
+To enable theme transitions, set the **transition** option to `true` or pass an options object with default origin of the expanding circle:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    transition: true, // default origin: top center
+    // or provide options:
+    transition: { origin: '100% 0%' }, // right corner
+  },
+})
+```
+
+You can also override the transition per-call by passing a second argument to `change`, `toggle`, or `cycle`. This is useful for originating the circle from the click position:
+
+```html
+<template>
+  <v-container class="d-flex justify-center">
+    <v-btn
+      icon="mdi-theme-light-dark"
+      @click="toggleTheme"
+    />
+  </v-container>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+  const theme = useTheme()
+
+  function toggleTheme (e) {
+    // passing target element will make it work for both clicks and keyboard interactions
+    theme.setTransitionOrigin(e.target)
+    theme.toggle()
+  }
+</script>
 ```
 
 ## Custom themes
@@ -315,30 +335,6 @@ export default createVuetify({
   theme: false,
 })
 ```
-
-## Theme layers
-
-The `layers` option can be used to enable a [css cascade layer](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) for the theme:
-
-```ts { resource="src/plugins/vuetify.ts" }
-export default createVuetify({
-  theme: {
-    layers: true,
-  },
-})
-```
-
-which generates the theme layer with two sub-layers (background and foreground):
-
-```css
-@layer vuetify.theme {
-  :root { /* ... */ }
-  @layer background { /* ... */ }
-  @layer foreground { /* ... */ }
-}
-```
-
-`$layers` should also be enabled in SASS for theme colors to override component defaults correctly, see [SASS variables](/features/sass-variables/#enabling-css-cascade-layers) for more information.
 
 ## Theme object structure
 

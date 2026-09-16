@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Date inputs
   title: Date input component
@@ -11,7 +12,7 @@ related:
 features:
   label: 'C: VDateInput'
   report: true
-  github: /labs/VDateInput/
+  github: /components/VDateInput/
 ---
 
 # Date inputs
@@ -19,26 +20,6 @@ features:
 The `v-date-input` component combines a text field with a date picker. It is meant to be a direct replacement for a standard date input.
 
 <PageFeatures />
-
-::: warning
-
-This feature requires [v3.6.0](/getting-started/release-notes/?version=v3.6.0)
-
-:::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VDateInput } from 'vuetify/labs/VDateInput'
-
-export default createVuetify({
-  components: {
-    VDateInput,
-  },
-})
-```
 
 ## Usage
 

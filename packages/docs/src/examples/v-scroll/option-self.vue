@@ -5,7 +5,7 @@
     v-scroll.self="onScroll"
   >
     <v-banner
-      class="justify-center text-h5 font-weight-light"
+      class="justify-center text-headline-small font-weight-light"
       sticky
     >
       Scroll Me - Method invoked

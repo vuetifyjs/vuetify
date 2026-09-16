@@ -6,9 +6,9 @@
     <v-card-text>
       <div>Word of the Day</div>
 
-      <p class="text-h4 font-weight-black">el·ee·mos·y·nar·y</p>
+      <div class="text-headline-large font-weight-black mb-4">el·ee·mos·y·nar·y</div>
 
-      <p>adjective</p>
+      <div class="mb-4">adjective</div>
 
       <div class="text-medium-emphasis">
         relating to or dependent on charity; charitable; charitable donations. Pertaining to alms.<br>
@@ -33,7 +33,7 @@
         style="bottom: 0;"
       >
         <v-card-text class="pb-0">
-          <p class="text-h4">Origin</p>
+          <p class="text-headline-large">Origin</p>
 
           <p class="text-medium-emphasis">
             late 16th century (as a noun denoting a place where alms were distributed): from medieval Latin eleemosynarius, from late Latin eleemosyna ‘alms’, from Greek eleēmosunē ‘compassion’

@@ -3,10 +3,7 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-row
-      align="center"
-      class="pa-6"
-    >
+    <v-row class="pa-6 align-center">
       <span class="me-4">To</span>
 
       <v-menu

@@ -203,13 +203,15 @@
     }
 
     &--variant-text {
-      .v-hotkey__key.v-kbd {
-        background: transparent !important;
-        border: none !important;
-        padding-inline: 0;
-        min-width: auto;
+      @include tools.layer('overrides') {
+        .v-hotkey__key.v-kbd {
+          background: transparent;
+          border: none;
+          padding-inline: 0;
+          min-width: auto;
 
-        @include tools.elevation(0);
+          @include tools.elevation(0);
+        }
       }
 
       .v-hotkey__combination {

@@ -51,9 +51,9 @@
       :start-at="10"
       :track-color="colors.track"
       class="mx-auto mb-3"
-      image="https://cdn.jsek.work/cdn/vt-sunflowers.jpg"
+      image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       max-width="450"
-      src="https://cdn.jsek.work/cdn/vt-sunflowers.mp4"
+      src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
       eager
       muted
       no-fullscreen

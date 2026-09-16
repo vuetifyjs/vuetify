@@ -14,7 +14,7 @@
       :key="`group-${group.name}-${i}`"
     >
       <AppSheet :class="['pa-3', i !== 0 && 'mt-4']" border>
-        <div class="text-high-emphasis font-weight-bold d-flex align-center text-h6 mb-2">
+        <div class="text-high-emphasis font-weight-bold d-flex align-center text-title-large mb-2">
           <v-icon
             :icon="getIcon(group)"
             class="me-2"
@@ -76,7 +76,7 @@
 
               <v-list-item-subtitle
                 v-if="item.content"
-                class="text-caption text-wrap text-high-emphasis font-weight-regular"
+                class="text-body-small text-wrap text-high-emphasis font-weight-regular"
                 v-html="truncateContent(item)"
               />
             </v-list-item>

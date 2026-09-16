@@ -1,5 +1,5 @@
 // Composables
-import { isMaskDelimiter, useMask } from '../mask'
+import { useMask } from '../mask'
 
 // Types
 import type { MaskProps } from '../mask'
@@ -55,13 +55,6 @@ describe('mask', () => {
   ])('unmask %#', (props, expected) => {
     const { unmask } = useMask(props as MaskProps)
     expect(unmask(props.modelValue)).toEqual(expected)
-  })
-
-  it.each([
-    ['a', false],
-    ['-', true],
-  ])('isMaskDelimiter', (input, expected) => {
-    expect(isMaskDelimiter(input)).toEqual(expected)
   })
 
   describe('The test method', () => {

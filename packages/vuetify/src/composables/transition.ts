@@ -17,10 +17,11 @@ interface MaybeTransitionProps extends TransitionProps {
   transition?: null | string | boolean | TransitionProps & { component?: any }
   disabled?: boolean
   group?: boolean
+  target?: HTMLElement | [x: number, y: number]
 }
 
 export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props, { slots }) => {
-  const { transition, disabled, group, ...rest } = props
+  const { transition, disabled, group, target, ...rest } = props
 
   const {
     component = group ? TransitionGroup : Transition,
@@ -31,7 +32,7 @@ export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props
   if (isObject(transition)) {
     transitionProps = mergeProps(
       customProps,
-      onlyDefinedProps({ disabled, group }),
+      onlyDefinedProps({ disabled, group, target }),
       rest,
     )
   } else {

@@ -37,7 +37,7 @@ export const VSystemBar = genericComponent()({
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { ssrBootStyles } = useSsrBoot()
     const height = computed(() => props.height ?? (props.window ? 32 : 24))
     const { layoutItemStyles } = useLayoutItem({
@@ -65,6 +65,7 @@ export const VSystemBar = genericComponent()({
           backgroundColorStyles.value,
           layoutItemStyles.value,
           ssrBootStyles.value,
+          roundedStyles.value,
           props.style,
         ]}
         v-slots={ slots }

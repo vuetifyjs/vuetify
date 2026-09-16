@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef, toRef, watch } from 'vue'
-import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
+import { consoleError, consoleWarn, getObjectValueByPath, isString } from '@/util'
 
 // Locales
 import en from '@/locale/en'
@@ -46,7 +46,7 @@ const createTranslateFunction = (
       str = key
     }
 
-    if (typeof str !== 'string') {
+    if (!isString(str)) {
       consoleError(`Translation key "${key}" has a non-string value`)
       str = key
     }
@@ -66,6 +66,12 @@ function createNumberFunction (current: Ref<string>, fallback: Ref<string>) {
 function inferDecimalSeparator (current: Ref<string>, fallback: Ref<string>) {
   const format = createNumberFunction(current, fallback)
   return format(0.1).includes(',') ? ',' : '.'
+}
+
+function inferNumericGroupSeparator (current: Ref<string>, fallback: Ref<string>) {
+  return new Intl.NumberFormat([current.value, fallback.value], { useGrouping: true })
+    .formatToParts(10000)
+    .find(p => p.type === 'group')?.value ?? ' '
 }
 
 function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
@@ -95,6 +101,7 @@ function createProvideFunction (state: { current: Ref<string>, fallback: Ref<str
       fallback,
       messages,
       decimalSeparator: toRef(() => inferDecimalSeparator(current, fallback)),
+      numericGroupSeparator: toRef(() => inferNumericGroupSeparator(current, fallback)),
       t: createTranslateFunction(current, fallback, messages),
       n: createNumberFunction(current, fallback),
       provide: createProvideFunction({ current, fallback, messages }),
@@ -113,6 +120,7 @@ export function createVuetifyAdapter (options?: LocaleOptions): LocaleInstance {
     fallback,
     messages,
     decimalSeparator: toRef(() => options?.decimalSeparator ?? inferDecimalSeparator(current, fallback)),
+    numericGroupSeparator: toRef(() => options?.numericGroupSeparator ?? inferNumericGroupSeparator(current, fallback)),
     t: createTranslateFunction(current, fallback, messages),
     n: createNumberFunction(current, fallback),
     provide: createProvideFunction({ current, fallback, messages }),

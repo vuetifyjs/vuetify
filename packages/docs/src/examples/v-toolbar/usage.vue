@@ -37,7 +37,7 @@
       border: model.value === 'bordered' ? true : undefined,
       collapse: collapse.value || undefined,
       density: density.value === 'default' ? undefined : density.value,
-      elevation: model.value === 'elevated' ? 8 : undefined,
+      elevation: model.value === 'elevated' ? 3 : undefined,
       title: title.value || undefined,
     }
   })

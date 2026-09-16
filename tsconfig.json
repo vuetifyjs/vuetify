@@ -6,7 +6,6 @@
     "lib": [                                  /* Specify library files to be included in the compilation */
       "esnext",
       "dom",
-      "dom.iterable"
     ],
     "allowJs": false,                         /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
@@ -43,8 +42,7 @@
     /* Module Resolution Options */
     "moduleResolution": "bundler",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "resolveJsonModule": true,
-    // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
-    // "paths": {                             /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    // "paths": {                             /* A series of entries which re-map imports to lookup locations. */
     // },
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */

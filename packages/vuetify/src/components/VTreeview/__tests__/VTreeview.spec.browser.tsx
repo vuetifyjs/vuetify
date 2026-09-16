@@ -180,10 +180,39 @@ describe.each([
       ))
 
       await userEvent.click(screen.getByText(/John/))
-      expect(onActivated).toHaveBeenCalledOnce()
+      expect(onActivated).toHaveBeenCalledTimes(1)
 
       await userEvent.click(screen.getByText(/Human Resources/))
       expect(onActivated).toHaveBeenCalledTimes(2)
+    })
+
+    it('should apply value-comparator to initial activated', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+      ]
+      const activated = ref<string[]>(['beta'])
+
+      render(() => (
+        <VTreeview
+          v-model:activated={ activated.value }
+          items={ caseItems }
+          activatable
+          openAll
+          activeStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      expect(screen.getByText('Beta').closest('.v-list-item')).toHaveClass('v-list-item--active')
+      expect(screen.getByText('Alpha').closest('.v-list-item')).not.toHaveClass('v-list-item--active')
     })
   })
 
@@ -303,6 +332,43 @@ describe.each([
       await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
       expect(selected.value).toStrictEqual([4, 201, 202, 203, 204, 205, 301, 302])
     })
+
+    it('should apply value-comparator to initial selected', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+        {
+          title: 'Group B',
+          value: 'GROUP_B',
+          children: [
+            { title: 'Gamma', value: 'GAMMA' },
+            { title: 'Delta', value: 'DELTA' },
+          ],
+        },
+      ]
+      const selected = ref<string[]>(['beta', 'delta'])
+
+      render(() => (
+        <VTreeview
+          v-model:selected={ selected.value }
+          items={ caseItems }
+          selectable
+          openAll
+          selectStrategy="independent"
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      const inputs = screen.getAllByCSS('.v-checkbox-btn input') as HTMLInputElement[]
+      expect(inputs.filter(el => el.checked)).toHaveLength(2)
+    })
   })
 
   describe('return-object', () => {
@@ -320,12 +386,12 @@ describe.each([
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        // eslint-disable-next-line vitest/no-conditional-in-test
+        // eslint-disable-next-line @vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
         } else {
-          // eslint-disable-next-line vitest/no-conditional-expect
+          // eslint-disable-next-line @vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
         }
       })
@@ -689,6 +755,170 @@ describe.each([
         expect(screen.getByText(/Andrew/)).not.toBeVisible()
         expect(screen.getByText(/Administrators/)).not.toBeVisible()
       })
+
+      it('should expand collapsed parents of matched items', async () => {
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            returnObject
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+
+        search.value = 'John'
+        await nextTick()
+        expect(screen.getByText(/Vuetify/)).toBeVisible()
+        expect(screen.getByText(/Core/)).toBeVisible()
+        expect(screen.getByText(/John/)).toBeVisible()
+      })
+
+      it('should allow manually collapsing a branch while search is active', async () => {
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            returnObject
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'John'
+        await nextTick()
+        expect(screen.getByText(/John/)).toBeVisible()
+
+        await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        // registration changes are propagated with a 100ms throttle
+        await wait(300)
+        // eslint-disable-next-line @vitest/no-conditional-in-test
+        if (itemsRegistration === 'render') {
+          // eslint-disable-next-line @vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/John/), { timeout: 3000 }).not.toBeVisible()
+        } else {
+          // eslint-disable-next-line @vitest/no-conditional-expect
+          await expect.poll(() => screen.queryByText(/John/)).toBeNull()
+        }
+
+        search.value = 'Andrew'
+        await expect.poll(() => screen.queryByText(/Andrew/)).toBeVisible()
+      })
+
+      it('should reveal matches added to items while search is active', async () => {
+        const liveItems = reactive([
+          {
+            id: 1,
+            title: 'Vuetify Human Resources',
+            children: [
+              { id: 2, title: 'Core team', children: [{ id: 201, title: 'John' }] },
+              { id: 3, title: 'Administrators', children: [{ id: 301, title: 'Mike' }] },
+            ],
+          },
+        ])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            search={ search.value }
+            items={ liveItems }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+          />
+        ))
+
+        await nextTick()
+        search.value = 'John'
+        await expect.poll(() => screen.queryByText(/John/)).toBeVisible()
+
+        liveItems[0].children[1].children.push({ id: 302, title: 'Johnson' })
+        await expect.poll(() => screen.queryByText(/Johnson/)).toBeVisible()
+
+        // a branch the user collapsed stays closed until the search changes
+        await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
+        await wait(300)
+        liveItems[0].children[0].children.push({ id: 202, title: 'Johnny' })
+        await wait(300)
+        expect(screen.queryByText(/Johnny/)?.checkVisibility()).toBeFalsy()
+
+        search.value = 'Johnny'
+        await expect.poll(() => screen.queryByText(/Johnny/)).toBeVisible()
+      })
+
+      it('should keep user-opened branches when search is cleared', async () => {
+        const opened = shallowRef<any[]>([])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            v-model:opened={ opened.value }
+            search={ search.value }
+            items={ items }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+            openOnClick
+          />
+        ))
+
+        await nextTick()
+        search.value = 'Human'
+        await expect.poll(() => opened.value).toContain(1)
+
+        // user opens an unrelated branch
+        await userEvent.click(screen.getByText(/Administrators/))
+        await waitIdle()
+
+        search.value = 'John'
+        await expect.poll(() => opened.value).toContain(2)
+
+        search.value = ''
+        await waitIdle()
+        expect(opened.value).toContain(3) // user's branch survives
+        expect(opened.value).not.toContain(2) // search's expansion is undone
+      })
+
+      it('should keep ancestors of a branch opened inside a search match', async () => {
+        const nested = [{
+          id: 1,
+          title: 'Root',
+          children: [
+            {
+              id: 2,
+              title: 'Core team',
+              children: [
+                { id: 21, title: 'Managers', children: [{ id: 211, title: 'Alice' }] },
+              ],
+            },
+          ],
+        }]
+        const opened = shallowRef<any[]>([1])
+        const search = shallowRef('')
+        render(() => (
+          <VTreeview
+            v-model:opened={ opened.value }
+            search={ search.value }
+            items={ nested }
+            itemValue="id"
+            itemsRegistration={ itemsRegistration }
+            openOnClick
+          />
+        ))
+
+        await nextTick()
+        search.value = 'core' // reveals & opens "Core team"
+        await waitIdle()
+
+        await userEvent.click(screen.getByText(/Managers/))
+        await waitIdle()
+
+        search.value = ''
+        await waitIdle()
+        expect(opened.value).toEqual(expect.arrayContaining([1, 2, 21])) // whole chain kept
+        expect(screen.getByText(/Alice/)).toBeVisible()
+      })
     })
   })
 
@@ -707,6 +937,34 @@ describe.each([
     itemEl.forEach(el => {
       expect(el).toBeVisible()
     })
+  })
+
+  it('should not re-open collapsed groups when an item is mutated with open-all', async () => {
+    const data = reactive<any[]>([
+      { id: 1, title: 'Qux', children: [{ id: 11, title: 'Quid' }] },
+      { id: 2, title: 'Mop', children: [{ id: 21, title: 'Moon' }] },
+    ])
+    const opened = shallowRef<any[]>([])
+    render(() => (
+      <VTreeview
+        v-model:opened={ opened.value }
+        openAll
+        items={ data }
+        itemValue="id"
+        itemsRegistration={ itemsRegistration }
+      />
+    ))
+
+    await waitIdle()
+    expect(opened.value).toEqual(expect.arrayContaining([1, 2]))
+
+    await userEvent.click(screen.getByText('Mop').parentElement!.previousElementSibling!)
+    await waitIdle()
+    expect(opened.value).not.toContain(2)
+
+    data[0].children![0].disabled = true
+    await waitIdle()
+    expect(opened.value).not.toContain(2) // mutation must not re-open Mop
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/20830
@@ -777,9 +1035,8 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
     await userEvent.tab()
-    await userEvent.tab()
-    await userEvent.keyboard('{enter}')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    await userEvent.keyboard('{ArrowRight}')
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -826,7 +1083,7 @@ describe('VTreeview with loading', () => {
 
     await userEvent.tab() // single tab selects the whole item
     await userEvent.keyboard(' ')
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -877,7 +1134,7 @@ describe('VTreeview with loading', () => {
     expect(screen.queryAllByText(/4.leaf/)).toHaveLength(0)
 
     await userEvent.click(screen.queryAllByText('[toggle]')[0])
-    expect(loadSpy).toHaveBeenCalledOnce()
+    expect(loadSpy).toHaveBeenCalledTimes(1)
     await wait(350) // needs to fully render for the following click
     expect(screen.getByText(/3.node/)).toBeVisible()
 
@@ -889,5 +1146,52 @@ describe('VTreeview with loading', () => {
     await userEvent.click(screen.queryAllByText('[toggle]')[0])
     await expect.poll(() => screen.getByText(/3.node/)).not.toBeVisible()
     expect(screen.getByText(/4.leaf/)).not.toBeVisible()
+  })
+
+  it('should keep lazily loaded children visible when searching for their parent with return-object', async () => {
+    const items = ref([
+      {
+        name: 'C:',
+        path: 'C',
+        children: [
+          { name: 'Dir1', path: 'C/dir1', children: [] },
+          { name: 'Dir2', path: 'C/dir2', children: [] },
+        ],
+      },
+    ] as any[])
+
+    async function loadChildren (item: any) {
+      await wait(50)
+      item.children = [
+        { name: 'file1.txt', path: `${item.path}/file1.txt` },
+        { name: 'file2.txt', path: `${item.path}/file2.txt` },
+      ]
+    }
+
+    const search = shallowRef('')
+    render(() => (
+      <VTreeview
+        items={ items.value }
+        loadChildren={ loadChildren }
+        search={ search.value }
+        itemTitle="name"
+        itemValue="path"
+        openOnClick
+        returnObject
+      />
+    ))
+
+    // open C, then Dir1 to lazily load file1.txt / file2.txt under it
+    await userEvent.click(screen.getByText(/C/))
+    await userEvent.click(screen.getByText(/Dir1/))
+    await expect.poll(() => screen.queryByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
+
+    // searching for the parent node must keep its loaded (reactive) children visible
+    search.value = 'Dir1'
+    await nextTick()
+    expect(screen.getByText(/Dir1/)).toBeVisible()
+    expect(screen.getByText(/file1.txt/)).toBeVisible()
+    expect(screen.getByText(/file2.txt/)).toBeVisible()
   })
 })

@@ -1,4 +1,5 @@
 {
+  "description": "Pre-defined pagination component for `v-data-table`.",
   "props": {
     "firstIcon": "First icon.",
     "firstPageLabel": "Label for first page.",

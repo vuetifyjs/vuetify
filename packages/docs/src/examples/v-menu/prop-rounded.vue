@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="space-around">
+  <v-row class="justify-space-around">
     <v-menu
       v-for="([text, rounded], index) in btns"
       :key="text"

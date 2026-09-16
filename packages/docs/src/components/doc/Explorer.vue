@@ -19,7 +19,7 @@
       <template #chip="{ props, item }">
         <v-chip
           v-bind="props"
-          :prepend-icon="item.props.prependIcon"
+          :prepend-icon="item.prependIcon"
           color="primary"
           variant="flat"
           label

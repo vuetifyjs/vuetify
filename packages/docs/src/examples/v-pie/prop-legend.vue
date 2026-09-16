@@ -17,7 +17,7 @@
       single-line
     ></v-select>
 
-    <v-sheet class="pa-6" elevation="6" rounded="xl">
+    <v-sheet class="pa-6" elevation="2" rounded="xl">
       <v-pie
         :items="items"
         :legend="legendConfig"

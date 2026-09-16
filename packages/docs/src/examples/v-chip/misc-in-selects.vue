@@ -12,7 +12,7 @@
   >
     <template v-slot:chip="{ props, item }">
       <v-chip v-bind="props">
-        <strong>{{ item.raw }}</strong>&nbsp;
+        <strong>{{ item }}</strong>&nbsp;
         <span>(interest)</span>
       </v-chip>
     </template>

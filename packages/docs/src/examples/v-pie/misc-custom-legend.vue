@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex my-6 justify-center">
-    <v-card class="pa-6" elevation="6" rounded="xl">
+    <v-card class="pa-6" elevation="2" rounded="xl">
       <v-card-title class="d-flex align-center justify-space-between">
         <div class="text-truncate mr-6">Expenses</div>
         <v-select
@@ -32,7 +32,7 @@
       >
         <template v-slot:center>
           <div class="text-center">
-            <div class="text-h3">130</div>
+            <div class="text-display-medium">130</div>
             <div class="opacity-70 mt-1 mb-n1">Total</div>
           </div>
         </template>

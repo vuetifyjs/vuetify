@@ -23,7 +23,7 @@
           >
             <v-card-text>
               <span
-                class="text-h6"
+                class="text-title-large"
                 v-text="key"
               />
             </v-card-text>
@@ -39,7 +39,7 @@
             <v-card-text>
               <v-row>
                 <v-col
-                  class="text-caption"
+                  class="text-body-small"
                   cols="7"
                 >
                   {{ convertToClass(key, key2) }}

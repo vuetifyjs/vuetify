@@ -1,5 +1,0 @@
-{
-  "props": {
-    "value": "Sets the value of the tab. If not provided, the index will be used."
-  }
-}

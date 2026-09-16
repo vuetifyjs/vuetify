@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Combobox
   title: Combobox component
@@ -81,6 +82,12 @@ Previously known as **tags** - user is allowed to enter more than one value.
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
 <ExamplesExample file="v-combobox/slot-no-data" />
+
+#### Menu header
+
+The **menu-header** slot allows you to add custom content at the top of the dropdown menu, such as tabs to filter items by category.
+
+<ExamplesExample file="v-combobox/slot-menu-header" />
 
 #### Custom chips
 

@@ -1,4 +1,5 @@
 {
+  "description": "Navigation component used for paginated sets of data.",
   "props": {
     "ariaLabel": "Label for the root element.",
     "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
@@ -14,7 +15,7 @@
     "pageAriaLabel": "Label for each page button.",
     "prevIcon": "The icon to use for the prev button.",
     "previousAriaLabel": "Label for the previous button.",
-    "showFirstLastPage": "Show buttons for going to first and last page.",
+    "showFirstLastPage": "Show buttons for going to first and last page. Since v4.1.0 it accepts `'only-first'`, to only the first page button.",
     "start": "Specify the starting page.",
     "totalVisible": "Specify the total visible pagination numbers."
   },

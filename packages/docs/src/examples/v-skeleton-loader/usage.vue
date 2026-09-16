@@ -31,7 +31,7 @@
       <v-slider
         v-model="elevation"
         label="Elevation"
-        max="24"
+        max="5"
         min="0"
       ></v-slider>
     </template>

@@ -3,6 +3,7 @@ import './VRipple.sass'
 
 // Utilities
 import { isObject } from '@/util'
+import { Box, getTargetBox } from '@/util/box'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -53,11 +54,12 @@ const calculate = (
   let localY = 0
 
   if (!isKeyboardEvent(e)) {
-    const offset = el.getBoundingClientRect()
+    const offset = new Box(el)
     const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
+    const point = getTargetBox([target.clientX, target.clientY])
 
-    localX = target.clientX - offset.left
-    localY = target.clientY - offset.top
+    localX = point.x - offset.left
+    localY = point.y - offset.top
   }
 
   let radius = 0

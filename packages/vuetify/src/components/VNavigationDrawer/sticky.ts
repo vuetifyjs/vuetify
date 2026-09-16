@@ -1,6 +1,6 @@
 // Utilities
 import { computed, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue'
-import { convertToUnit } from '@/util'
+import { convertToUnit, isBoolean } from '@/util'
 
 // Types
 import type { CSSProperties, Ref, StyleValue } from 'vue'
@@ -16,7 +16,7 @@ export function useSticky ({ rootEl, isSticky, layoutItemStyles }: StickyProps) 
   const stuckPosition = shallowRef(0)
 
   const stickyStyles = computed<StyleValue>(() => {
-    const side = typeof isStuck.value === 'boolean' ? 'top' : isStuck.value
+    const side = isBoolean(isStuck.value) ? 'top' : isStuck.value
     return [
       isSticky.value ? { top: 'auto', bottom: 'auto', height: undefined } : undefined,
       isStuck.value

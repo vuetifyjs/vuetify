@@ -1,3 +1,6 @@
 {
-  "value": "Takes either a function that is invoked when user clicks outside of the element the directive is attached to, or an object containing `handler`, `closeConditional` and `include` callbacks."
+  "value": "Takes either a function that is invoked when user clicks outside of the element the directive is attached to, or an object containing `handler`, `closeConditional` and `include` callbacks.",
+  "modifiers": {
+    "[string]": "Custom modifier keys that can be used to configure directive behavior."
+  }
 }

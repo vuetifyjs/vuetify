@@ -6,6 +6,8 @@
 @include tools.layer('components')
   // Elements
   .v-progress-circular
+    --v-progress-circular-transition-duration: #{$progress-circular-transition-duration}
+
     align-items: center
     display: inline-flex
     justify-content: center
@@ -39,7 +41,16 @@
     transition: $progress-circular-overlay-transition
     z-index: 2
 
+  .v-progress-circular--revealing
+    --v-progress-reveal-duration: #{$progress-circular-reveal-duration}
+
+    .v-progress-circular__overlay
+      transition-duration: var(--v-progress-reveal-duration), 0s
+
   // Modifiers
+  .v-progress-circular--no-transition
+    --v-progress-circular-transition-duration: 0s
+
   .v-progress-circular
     @each $name, $multiplier in $progress-circular-sizes
       $size: $progress-circular-size + (settings.$size-scale * $multiplier)
@@ -72,7 +83,7 @@
   .v-progress-circular--indeterminate:not(.v-progress-circular--visible)
     > svg,
     .v-progress-circular__overlay
-      animation-play-state: paused !important
+      animation-play-state: paused
 
   @keyframes progress-circular-dash
     0%

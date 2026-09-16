@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto my-8"
-    elevation="16"
+    elevation="4"
     max-width="344"
   >
     <v-card-item>

@@ -1,0 +1,10 @@
+@use '../../styles/tools'
+@use './mixins' as *
+
+@include tools.layer('components')
+  .v-container
+    @include make-container
+    @include make-container-max-widths
+
+    &--fluid
+      max-width: 100%

@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-0" fluid>
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12" md="6">
         <v-card
           height="232"
@@ -97,7 +97,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Interactive Comparison">
           <template v-slot:text>

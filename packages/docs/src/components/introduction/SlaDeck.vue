@@ -12,7 +12,7 @@
     />
 
     <v-container class="py-9 px-5" fluid>
-      <v-row justify="space-around" dense>
+      <v-row class="justify-space-around" density="comfortable">
         <template v-for="(tier, i) in tiers" :key="i">
           <v-col
             :class="i === 1 && 'bg-primary'"
@@ -21,14 +21,14 @@
             md="4"
           >
             <v-responsive :min-height="mdAndUp ? 96 : undefined" class="mb-4">
-              <h3 class="d-flex align-center text-h6 font-weight-medium mb-4">
+              <h3 class="d-flex align-center text-title-large font-weight-medium mb-4">
                 <v-avatar :image="tier.src" class="me-3" />
 
                 <div>
                   {{ tier.name }}
 
-                  <div class="text-h5 font-weight-bold">
-                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium opacity-60 text-body-2">{{ tier.suffix }}</span>
+                  <div class="text-headline-small font-weight-bold">
+                    {{ tier.price }}<span v-if="tier.suffix" class="font-weight-medium opacity-60 text-body-medium">{{ tier.suffix }}</span>
                   </div>
                 </div>
               </h3>
@@ -44,12 +44,12 @@
                 block
               />
 
-              <div class="text-caption">{{ tier.text }}</div>
+              <div class="text-body-small">{{ tier.text }}</div>
             </v-responsive>
 
             <v-divider class="mb-4" />
 
-            <ul class="text-caption ps-1" style="list-style-type: none;">
+            <ul class="text-body-small ps-1" style="list-style-type: none;">
               <li v-for="(benefit, k) in tier.benefits" :key="k" class="mb-2 d-flex">
                 <div class="me-2">{{ benefit.emoji }}</div>
 

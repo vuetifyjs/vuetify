@@ -1,4 +1,5 @@
 {
+  "description": "Allows to override theme for a part of the application.",
   "props": {
     "withBackground": "Wraps its children in an element and applies the current theme's background color to it."
   },

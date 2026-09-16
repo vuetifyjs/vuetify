@@ -3,7 +3,7 @@
     <v-select v-model="model" :items="items">
       <template v-slot:item="{ props, item }">
         <v-list-item v-bind="props" :title="null">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>{{ item }}</v-list-item-title>
         </v-list-item>
       </template>
     </v-select>

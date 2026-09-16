@@ -1,0 +1,50 @@
+<template>
+  <v-card
+    border="primary md"
+    class="pa-6 d-md-flex flex-column h-100"
+    elevation="0"
+    rounded="xl"
+    link
+  >
+    <HomeCommonGradient color="primary" opacity-class="opacity-30" />
+
+    <v-img
+      v-if="props.image"
+      :src="props.image"
+      class="mx-auto mb-3"
+      max-height="80"
+      width="120"
+    />
+
+    <div>
+      <h6 v-if="props.title" class="text-body-large font-weight-bold mb-2">
+        {{ props.title }}
+      </h6>
+
+      <p
+        v-if="props.description"
+        class="text-medium-emphasis text-body-medium text-center mb-0 mt-3 my-md-0"
+        style="line-height: 1.6;"
+      >
+        {{ props.description }}
+      </p>
+    </div>
+  </v-card>
+</template>
+
+<script setup lang="ts">
+  const props = defineProps({
+    image: {
+      type: String,
+      default: undefined,
+    },
+    description: {
+      type: String,
+      default: undefined,
+    },
+    title: {
+      type: String,
+      default: undefined,
+    },
+  })
+</script>

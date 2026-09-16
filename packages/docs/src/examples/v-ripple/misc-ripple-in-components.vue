@@ -4,10 +4,7 @@
 </script>
 
 <template>
-  <v-row
-    class="py-12"
-    justify="space-around"
-  >
+  <v-row class="py-12 justify-space-around">
     <v-btn
       color="primary"
     >

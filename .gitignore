@@ -17,12 +17,11 @@ lerna-debug.log
 # Istanbul coverage
 coverage/
 
-# cypress
-cypress/screenshots
-cypress/videos
-
 # vitest
 __screenshots__/
 
 .vercel
 .now
+
+# Superpowers specs/plans
+/docs/

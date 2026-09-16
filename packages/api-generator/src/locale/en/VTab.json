@@ -1,4 +1,5 @@
 {
+  "description": "Represents single tab inside `v-tabs`. Wrapper of `v-btn`.",
   "props": {
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
     "hideSlider": "Hides the active tab slider component (no exit or enter animation).",
@@ -8,10 +9,5 @@
     "sliderTransition": "Changes slider transition to one of the predefined animation presets.",
     "sliderTransitionDuration": "Applies custom slider transition duration. Default duration depends on transition type (fade: 400, grow: 350, shift: 225).",
     "stacked": "Displays the tab as a flex-column."
-  },
-  "events": {
-    "change": "Emitted when tab becomes active.",
-    "click": "Emitted when the component is clicked.",
-    "keydown": "Emitted when **enter** key is pressed."
   }
 }

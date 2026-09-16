@@ -1,8 +1,9 @@
-<p align="center">
-  <a href="https://vuetifyjs.com" target="_blank">
-    <img alt="Vuetify Logo" width="100" src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
-  </a>
-</p>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-dark.png">
+    <img alt="Vuetify Logo" src="https://cdn.vuetifyjs.com/docs/images/one/logos/vuetify-logo-light.png" height="100">
+  </picture>
+</div>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/vuetify">
@@ -15,8 +16,8 @@
   <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
-  <a href="https://community.vuetifyjs.com">
-    <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
+  <a href="https://discord.gg/vuetify">
+    <img src="https://img.shields.io/discord/1513968811047522396?label=Chat&logo=discord" alt="Chat">
   </a>
   <br>
   <a href="https://www.npmjs.com/package/vuetify">
@@ -107,11 +108,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
   <tbody>
     <tr>
       <td>
-        <a href="https://route4me.com/">
-          <img height="40px" src="https://cdn.cosmicjs.com/3b7a95b0-5360-11ef-b1ea-f56c65dfade9-route-4-me-light.png">
-        </a>
-      </td>
-      <td>
         <a href="https://www.abacus.ch/">
           <img height="40px" src="https://cdn.cosmicjs.com/0b978be0-6cbb-11ef-b5ae-a594bb4a8e67-abacus-light.svg">
         </a>
@@ -132,7 +128,7 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
     <tr>
       <td style="text-align: center;">
         <a href="https://www.muenchen.de/">
-          <img height="30px" src="https://imgix.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
+          <img height="30px" src="https://cdn.cosmicjs.com/af2ce530-eaa2-11ed-ba82-019c4666da06-itm-logo.png">
         </a>
       </td>
       <td>
@@ -140,26 +136,6 @@ Funds donated through GitHub Sponsors directly support [John Leider](https://git
           <img height="30px" src="https://cdn.cosmicjs.com/861b0ce0-50e4-11ef-b1ea-f56c65dfade9-views-4-you-light.png">
         </a>
       </td>
-      <td>
-        <a href="https://word.tips/">
-          <img height="30px" src="https://cdn.cosmicjs.com/5b16bd20-afab-11ef-bee4-3bb1d3c55332-wordtips-light.svg">
-        </a>
-      </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td>
-        <a href="https://www.vso.org.uk/">
-          <img height="30px" src="https://cdn.cosmicjs.com/64287760-e7c2-11ef-b333-e101bec29f3d-horizontal_logo.svg">
-        </a>
-      </td>
-      </td>
-      <td style="text-align: center;">
-        <a href="https://haircenterofturkey.com/">
-          <img height="30px" src="https://cdn.cosmicjs.com/ba1af160-1a27-11f0-a229-dfe84053cfeb-hcof-logo-light-1.png">
-        </a>
-      </td>
-      <td></td>
     </tr>
   </tbody>
 </table>
@@ -174,7 +150,7 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 - **Responsive Layout:** The default configuration of Vuetify components is responsive, allowing your application to adapt to different screen sizes.
 - **Theme System:** A powerful color system that makes it easy to style your application with a consistent color palette.
 - **Vite Support:** _Smaller_ bundle sizes with **automatic** tree-shaking
-- **6 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
+- min. **6 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - **Internationalization:** 42+ supported languages
 
 #### Browser Support
@@ -219,7 +195,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
     </tr>
     <tr>
       <td>
-        <a href="https://community.vuetifyjs.com/">
+        <a href="https://discord.gg/vuetify">
           💭&nbsp;Vuetify&nbsp;Discord
         </a>
       </td>
@@ -286,7 +262,7 @@ Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills
 
 ### 🙋‍♂️ Questions
 
-For help and support questions, please use our [Discord community](https://community.vuetifyjs.com). This issue list of this repo is **exclusively** for bug reports and feature requests.
+For help and support questions, please use our [Discord community](https://discord.gg/vuetify). This issue list of this repo is **exclusively** for bug reports and feature requests.
 
 ### 🐛 Issues
 
@@ -306,9 +282,9 @@ Detailed changes for each release are documented in the [release notes](https://
 Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing/).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
-  enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://community.vuetifyjs.com/).
+  enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://discord.gg/vuetify).
 
-To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://community.vuetifyjs.com).
+To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started. If you have any questions, please join us on the [community chat](https://discord.gg/vuetify).
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
 

@@ -60,6 +60,30 @@ describe('VHotkey.tsx', () => {
       expect(keys[1]).toHaveTextContent('-')
     })
 
+    it('should handle plus key with alias name', () => {
+      render(() => <VHotkey keys="shift+plus" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2)
+      expect(keys[1]).toHaveTextContent('+')
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(1)
+      expect(dividers[0]).toHaveTextContent('+')
+    })
+
+    it('should handle slash key with alias name', () => {
+      render(() => <VHotkey keys="shift+slash" displayMode="text" />)
+
+      const keys = screen.getAllByCSS('.v-hotkey__key')
+      expect(keys).toHaveLength(2)
+      expect(keys[1]).toHaveTextContent('/')
+
+      const dividers = screen.getAllByCSS('.v-hotkey__divider')
+      expect(dividers).toHaveLength(1)
+      expect(dividers[0]).toHaveTextContent('+')
+    })
+
     it('should not treat - as separator when not between alphanumeric characters', () => {
       render(() => <VHotkey keys="ctrl+-" />)
 

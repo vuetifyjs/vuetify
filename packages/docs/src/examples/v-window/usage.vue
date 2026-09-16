@@ -8,7 +8,7 @@
       :key="n"
     >
       <v-card class="d-flex justify-center align-center" height="200px">
-        <span class="text-h2">Card {{ n }}</span>
+        <span class="text-display-large">Card {{ n }}</span>
       </v-card>
     </v-window-item>
   </v-window>

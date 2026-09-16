@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center" style="min-height: 160px;">
+    <v-row class="justify-center" style="min-height: 160px;">
       <v-col class="text-center">
         <v-btn
           color="primary"

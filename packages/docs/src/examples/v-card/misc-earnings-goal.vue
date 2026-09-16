@@ -21,9 +21,9 @@
     <v-divider></v-divider>
 
     <v-card-text class="text-medium-emphasis pa-6">
-      <div class="text-h6 mb-6">Earn my first $100</div>
+      <div class="text-title-large mb-6">Earn my first $100</div>
 
-      <div class="text-h4 font-weight-black mb-4">0%</div>
+      <div class="text-headline-large font-weight-black mb-4">0%</div>
 
       <v-progress-linear
         bg-color="surface-variant"

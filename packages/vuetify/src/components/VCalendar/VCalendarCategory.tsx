@@ -4,11 +4,12 @@ import { VCalendarDaily } from './VCalendarDaily'
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './composables/calendarWithIntervals'
+import { makeIntervalHighlightProps, useIntervalHighlight } from './composables/intervalHighlight'
 
 // Utilities
 import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, isObject, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -27,7 +28,7 @@ export const VCalendarCategory = defineComponent({
       type: String,
       default: '',
     },
-
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithIntervalsProps(),
   },
@@ -35,13 +36,14 @@ export const VCalendarCategory = defineComponent({
   setup (props, { slots, attrs }) {
     const base = useCalendarWithIntervals(props)
 
+    const highlight = useIntervalHighlight(props, base)
+
     const parsedCategories = computed((): CalendarCategory[] => {
       return getParsedCategories(props.categories, props.categoryText)
     })
 
     function getCategoryScope (scope: any, category: CalendarCategory) {
-      const cat = typeof category === 'object' && category &&
-          category.categoryName === props.categoryForInvalid ? null : category
+      const cat = isObject(category) && category.categoryName === props.categoryForInvalid ? null : category
       return {
         ...scope,
         category: cat,
@@ -59,7 +61,7 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
-      const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
+      const headerTitle = isObject(scope.category) ? scope.category.categoryName : scope.category
       const events = getPrefixedEventHandlers(attrs, ':dayCategory', () => {
         return getCategoryScope(base.getSlotScope(day) || day, scope.category)
       })
@@ -102,6 +104,8 @@ export const VCalendarCategory = defineComponent({
           key={ day.date + '-' + categoryIndex }
           class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
           { ...events }
+          onMousemove={ highlight.onMousemove }
+          onMouseleave={ highlight.onMouseleave }
         >
           { genDayIntervals(index, category) }
           { genDayBody(day, category) }
@@ -120,9 +124,15 @@ export const VCalendarCategory = defineComponent({
       return (
         <div
           key={ interval.time }
-          class="v-calendar-daily__day-interval"
+          class={[
+            'v-calendar-daily__day-interval',
+            {
+              'v-calendar-daily__day-interval--hover': highlight.isHighlighted(interval),
+            },
+          ]}
           style={[{ height }, styler({ ...interval, category })]}
         >
+          { highlight.genUnderlay() }
           { slots.interval?.(
             getCategoryScope(base.getSlotScope(interval), category)
           )}

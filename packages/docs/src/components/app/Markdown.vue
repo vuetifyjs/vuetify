@@ -80,7 +80,7 @@
 
             if (link.groups.commits) {
               token = new state.Token('code_inline', 'code', 0)
-              token.attrSet('class', 'text-subtitle-1')
+              token.attrSet('class', 'text-body-large')
             } else {
               token = new state.Token('text', '', 0)
             }

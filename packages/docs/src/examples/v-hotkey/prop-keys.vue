@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-0" fluid>
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12" md="6">
         <v-card height="200" title="Single Keys">
           <template v-slot:text>
@@ -58,7 +58,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12" md="6">
         <v-card height="132" title="Sequential Actions">
           <template v-slot:text>
@@ -96,7 +96,7 @@
       </v-col>
     </v-row>
 
-    <v-row dense>
+    <v-row density="comfortable">
       <v-col cols="12">
         <v-card title="Platform-Aware Key Combinations">
           <template v-slot:text>
@@ -109,7 +109,7 @@
 
             <div class="d-flex flex-wrap ga-4 align-center justify-center">
               <div class="text-center">
-                <div class="text-caption mb-1">meta+shift+p</div>
+                <div class="text-body-small mb-1">meta+shift+p</div>
                 <v-hotkey
                   :platform="platform"
                   keys="meta+shift+p"
@@ -117,7 +117,7 @@
               </div>
 
               <div class="text-center">
-                <div class="text-caption mb-1">ctrl+k meta+p</div>
+                <div class="text-body-small mb-1">ctrl+k meta+p</div>
                 <v-hotkey
                   :platform="platform"
                   keys="ctrl+k meta+p"
@@ -125,7 +125,7 @@
               </div>
 
               <div class="text-center">
-                <div class="text-caption mb-1">alt+arrowup</div>
+                <div class="text-body-small mb-1">alt+arrowup</div>
                 <v-hotkey
                   :platform="platform"
                   keys="alt+arrowup"
@@ -133,7 +133,7 @@
               </div>
 
               <div class="text-center">
-                <div class="text-caption mb-1">ctrl+k-meta+p</div>
+                <div class="text-body-small mb-1">ctrl+k-meta+p</div>
                 <v-hotkey
                   :platform="platform"
                   keys="ctrl+k-meta+p"

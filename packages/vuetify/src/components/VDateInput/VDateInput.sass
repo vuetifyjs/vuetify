@@ -1,0 +1,26 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-date-input input
+    direction: ltr
+
+    +tools.rtl()
+      text-align: right
+
+  .v-date-input__format-hint
+    align-items: center
+    direction: ltr
+    display: flex
+    inset: 0
+    opacity: var(--v-disabled-opacity)
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    user-select: none
+    white-space: pre
+
+    +tools.rtl()
+      justify-content: flex-end
+
+    > span
+      opacity: 0

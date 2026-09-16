@@ -50,6 +50,7 @@ export function configureMarkdown (
         arrows_counterclockwise: '🔄',
         fire: '🔥',
         test_tube: '🧪',
+        books: '📚',
       },
     })
     .use(MarkdownItMultimdTable, {

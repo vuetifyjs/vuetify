@@ -12,7 +12,7 @@
     }"
     @click="active = true"
   >
-    <div class="text-h6 text-md-h4 fill-height d-flex align-center justify-center">
+    <div class="text-title-large text-md-headline-large fill-height d-flex align-center justify-center">
       {{ active ? 'Click Outside' : 'Click Me' }}
     </div>
   </v-card>
@@ -22,7 +22,7 @@
       class="ma-2 included"
       rounded="lg"
     >
-      <v-card-text class="text-h6">
+      <v-card-text class="text-title-large">
         This element is included
       </v-card-text>
     </v-card>
@@ -31,7 +31,7 @@
       class="ma-2"
       rounded="lg"
     >
-      <v-card-text class="text-h6">
+      <v-card-text class="text-title-large">
         This element is not included
       </v-card-text>
     </v-card>

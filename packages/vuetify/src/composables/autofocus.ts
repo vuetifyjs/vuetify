@@ -11,7 +11,9 @@ export function useAutofocus (props: AutofocusProps) {
 
     const el = entries[0].target
     const target = (el.matches('input,textarea') ? el : el.querySelector('input,textarea')) as HTMLElement | null
-    target?.focus()
+
+    // Defer past overlay enter setup (e.g. VDialogTransition visibility:hidden)
+    setTimeout(() => target?.focus(), 50)
   }
 
   return {

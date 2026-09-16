@@ -8,6 +8,3 @@
 /lib/
 /lib-temp/
 /dist/
-/cypress/
-*.spec.cy.ts
-*.spec.cy.tsx

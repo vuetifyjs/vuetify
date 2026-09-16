@@ -43,12 +43,6 @@
   // Return result
   @return $result
 
-@function map-deep-get($map, $keys...)
-  @each $key in $keys
-    $map: map.get($map, $key)
-
-  @return $map
-
 @function breakpoint-min($name, $breakpoints)
   $min: map.get($breakpoints, $name)
   @if $min != 0
@@ -83,7 +77,8 @@
   @return $result
 
 @function theme-color($color, $opacity: 1)
-  $color: rgba(var(--v-theme-#{$color}), $opacity)
+  $color: rgb(var(--v-theme-#{$color}))
+  $color: color-mix(in srgb, $color calc($opacity * 100%), transparent)
   @return $color
 
 @function roundEven($val)

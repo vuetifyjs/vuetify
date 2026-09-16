@@ -31,7 +31,7 @@ export const makeDataTableSortProps = propsFactory({
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
-  toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => void
+  toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent, mandatory?: boolean) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
 
@@ -90,7 +90,7 @@ export function provideSort (options: {
 }) {
   const { initialSortOrder, sortBy, mustSort, multiSort, page } = options
 
-  const toggleSort = (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent) => {
+  const toggleSort = (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent, mandatory = false) => {
     if (column.key == null) return
 
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
@@ -110,7 +110,7 @@ export function provideSort (options: {
         newSortBy = [{ key: column.key, order: initialOrder }]
       }
     } else if (item.order === secondaryOrder) {
-      if (mustSort.value && newSortBy.length === 1) {
+      if (mandatory || (mustSort.value && newSortBy.length === 1)) {
         item.order = initialSortOrder.value
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)

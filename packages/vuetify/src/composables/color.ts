@@ -1,6 +1,6 @@
 // Utilities
 import { toValue } from 'vue'
-import { destructComputed, getForeground, isCssColor, isParsableColor, parseColor } from '@/util'
+import { destructComputed, hasLightForeground, isCssColor, isNumber, isParsableColor, isString, parseColor } from '@/util'
 
 // Types
 import type { CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
@@ -51,8 +51,20 @@ export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): Backgr
   return { backgroundColorClasses, backgroundColorStyles }
 }
 
+function normalizeColors (colors: { background?: ColorValue, text?: ColorValue }) {
+  return {
+    text: isString(colors.text)
+      ? colors.text.replace(/^text-/, '')
+      : colors.text,
+    background: isString(colors.background)
+      ? colors.background.replace(/^bg-/, '')
+      : colors.background,
+  }
+}
+
 export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue, text?: ColorValue }>) {
-  const _colors = toValue(colors)
+  const _colors = normalizeColors(toValue(colors))
+
   const classes: string[] = []
   const styles: CSSProperties = {}
 
@@ -62,11 +74,11 @@ export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue
 
       if (!_colors.text && isParsableColor(_colors.background)) {
         const backgroundColor = parseColor(_colors.background)
-        if (backgroundColor.a == null || backgroundColor.a === 1) {
-          const textColor = getForeground(backgroundColor)
-
-          styles.color = textColor
-          styles.caretColor = textColor
+        if (!isNumber(backgroundColor.a) || backgroundColor.a === 1) {
+          classes.push(hasLightForeground(backgroundColor)
+            ? 'v-theme-on-dark'
+            : 'v-theme-on-light'
+          )
         }
       }
     } else {

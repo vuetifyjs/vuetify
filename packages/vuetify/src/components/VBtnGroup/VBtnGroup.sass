@@ -1,12 +1,11 @@
 @use 'sass:selector'
 @use '../../styles/tools'
+@use '../VBtn/mixins' as *
 @use '../VBtn/variables' as *
 @use './variables' as *
 
 @include tools.layer('components')
   .v-btn-group
-    $root: &
-
     display: inline-flex
     flex-wrap: nowrap
     max-width: 100%
@@ -20,11 +19,6 @@
     @include tools.rounded($btn-group-border-radius)
     @include tools.theme($btn-group-theme...)
 
-    @at-root
-      @include tools.density('v-btn-group', $button-density) using ($modifier)
-        @at-root #{selector.append(&, $root)}
-          height: $btn-group-height + $modifier
-
     .v-btn
       border-radius: 0
       border-color: inherit
@@ -32,7 +26,18 @@
     &--tile
       @include tools.rounded($btn-group-tile-border-radius)
 
+    &--has-size .v-btn--icon
+      @include button-density(('width', 'height'), $button-density)
+
     &--horizontal
+      $root: &
+
+      @at-root
+        @include tools.density('v-btn-group', $button-density) using ($modifier)
+          @at-root #{selector.append(&, $root)}
+            &:not(.v-btn-group--has-size)
+              height: $btn-group-height + $modifier
+
       .v-btn
         &:not(:last-child)
           border-inline-end: none
@@ -56,7 +61,6 @@
 
     &--vertical
       flex-direction: column
-      height: auto !important
 
       .v-btn
         &:not(:last-child)

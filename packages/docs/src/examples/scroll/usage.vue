@@ -122,7 +122,7 @@
         class="pa-4"
         color="surface-light"
       >
-        <div id="heading-1" class="text-h5">Heading 1</div>
+        <div id="heading-1" class="text-headline-small">Heading 1</div>
 
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
 
@@ -137,7 +137,7 @@
 
         <div style="height: 420px;"></div>
 
-        <div id="heading-2" class="text-h5">Heading 2</div>
+        <div id="heading-2" class="text-headline-small">Heading 2</div>
 
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
 
@@ -152,7 +152,7 @@
 
         <div style="height: 420px;"></div>
 
-        <div id="heading-3" class="text-h5">Heading 3</div>
+        <div id="heading-3" class="text-headline-small">Heading 3</div>
 
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
 
@@ -167,7 +167,7 @@
 
         <div style="height: 420px;"></div>
 
-        <div id="heading-4" class="text-h5">Heading 4</div>
+        <div id="heading-4" class="text-headline-small">Heading 4</div>
 
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!</p>
 
