@@ -19,6 +19,26 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
   syntax: "<percentage>"
   inherits: true
   initial-value: 0%
+@property --v-progress-linear-wave-phase
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-linear-long-tail
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-linear-long-head
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-linear-short-tail
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-linear-short-head
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
 
 @include tools.layer('components')
   // Block
@@ -60,6 +80,12 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
       .v-progress-linear__buffer
         background-color: highlight
         opacity: .5
+
+      .v-progress-linear__wave
+        stroke: highlight
+
+      .v-progress-linear__stop
+        fill: highlight
 
   .v-progress-linear__content
     align-items: center
@@ -139,6 +165,78 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
     position: absolute
     transition: $bar-transition
 
+  // Dash lengths are in percent of the track: paths use pathLength and --from/--to are unitless
+  .v-progress-linear__wavy
+    animation: progress-linear-wave 1s linear infinite
+    animation-play-state: paused
+    display: block
+    height: 100%
+    width: 100%
+
+    > .v-progress-linear__track,
+    > .v-progress-linear__wave
+      --v-progress-linear-length: max(0, var(--v-progress-linear-to) - var(--v-progress-linear-from))
+      fill: none
+      stroke: currentColor
+      stroke-linecap: round
+      stroke-width: clamp(0px, var(--v-progress-linear-length) * 1000px, var(--v-progress-linear-stroke))
+
+    > .v-progress-linear__track
+      --v-progress-linear-from: calc(var(--v-progress-linear-value) + min(var(--v-progress-linear-value), var(--v-progress-linear-wave-gap)))
+      --v-progress-linear-to: 100
+      opacity: $progress-linear-background-opacity
+      stroke-dasharray: calc(var(--v-progress-linear-length) * 1px) 200px
+      stroke-dashoffset: calc(var(--v-progress-linear-from) * -1px)
+      transition: stroke-dasharray $progress-linear-transition, stroke-dashoffset $progress-linear-transition
+
+    > .v-progress-linear__wave
+      --v-progress-linear-from: 0
+      --v-progress-linear-to: var(--v-progress-linear-value)
+      stroke-dasharray: calc(var(--v-progress-linear-length) * 1px) calc((100 + var(--v-progress-linear-wave-offset)) * 1px)
+      stroke-dashoffset: calc((var(--v-progress-linear-from) + (1 - var(--v-progress-linear-wave-phase)) * var(--v-progress-linear-wave-offset)) * -1px)
+      transform: translateX(calc(var(--v-progress-linear-wave-phase) * var(--v-progress-linear-wavelength)))
+      transition: stroke-dasharray $progress-linear-transition, d $progress-linear-transition
+
+    > .v-progress-linear__stop
+      fill: currentColor
+
+  .v-progress-linear__wavy--indeterminate
+    animation: progress-linear-wave 1s linear infinite, progress-linear-wavy 1.8s linear infinite
+    animation-play-state: paused
+
+    // Gaps shrink to nothing within 1% of either end, so a segment parked at an edge leaves no notch
+    > .v-progress-linear__track
+      transition: none
+
+      &:nth-child(1)
+        --v-progress-linear-from: 0
+        --v-progress-linear-to: calc(var(--v-progress-linear-long-tail) - var(--v-progress-linear-wave-gap) * clamp(0, 100 - var(--v-progress-linear-long-tail), 1))
+
+      &:nth-child(2)
+        --v-progress-linear-from: calc(var(--v-progress-linear-long-head) + var(--v-progress-linear-wave-gap) * clamp(0, var(--v-progress-linear-long-head), 1))
+        --v-progress-linear-to: calc(var(--v-progress-linear-short-tail) - var(--v-progress-linear-wave-gap) * clamp(0, 100 - var(--v-progress-linear-short-tail), 1))
+
+      &:nth-child(3)
+        --v-progress-linear-from: calc(var(--v-progress-linear-short-head) + var(--v-progress-linear-wave-gap) * clamp(0, var(--v-progress-linear-short-head), 1))
+
+    > .v-progress-linear__wave
+      transition: none
+
+      &.long
+        --v-progress-linear-from: var(--v-progress-linear-long-tail)
+        --v-progress-linear-to: var(--v-progress-linear-long-head)
+
+      &.short
+        --v-progress-linear-from: var(--v-progress-linear-short-tail)
+        --v-progress-linear-to: var(--v-progress-linear-short-head)
+
+  @media (prefers-reduced-motion: reduce)
+    .v-progress-linear__wavy
+      animation-name: none
+
+    .v-progress-linear__wavy--indeterminate
+      animation-name: none, progress-linear-wavy
+
   // Modifiers
   .v-progress-linear--reverse
     .v-progress-linear__background,
@@ -147,6 +245,9 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
     .v-progress-linear__content
       left: auto
       right: 0
+
+    .v-progress-linear__wavy
+      transform: scaleX(-1)
 
     .v-progress-linear__indeterminate
       animation-name: indeterminate-rtl
@@ -173,7 +274,9 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
   .v-progress-linear--revealing
     --v-progress-reveal-duration: #{$progress-linear-reveal-duration}
 
-    .v-progress-linear__determinate
+    .v-progress-linear__determinate,
+    .v-progress-linear__track,
+    .v-progress-linear__wave
       transition-duration: var(--v-progress-reveal-duration)
 
   .v-progress-linear--no-transition
@@ -202,6 +305,9 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
       animation-play-state: running
 
     .v-progress-linear__stream
+      animation-play-state: running
+
+    .v-progress-linear__wavy
       animation-play-state: running
 
   .v-progress-linear--rounded-bar
@@ -260,6 +366,37 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
       --v-progress-indeterminate-long-right: 107%
       --v-progress-indeterminate-short-left: -8%
       --v-progress-indeterminate-short-right: 107%
+
+  // Each segment end moves 0 -> 100 in its own window with its own easing; easing on a
+  // keyframe only applies to the properties listed in it, so every start gets its own offset
+  @keyframes progress-linear-wavy
+    0%
+      --v-progress-linear-short-head: 0
+      animation-timing-function: cubic-bezier(.1, 0, .45, 1)
+    18.5%
+      --v-progress-linear-short-tail: 0
+      animation-timing-function: cubic-bezier(0, 0, .65, 1)
+    41.67%
+      --v-progress-linear-short-head: 100
+    55.56%
+      --v-progress-linear-long-head: 0
+      animation-timing-function: cubic-bezier(.4, 0, 1, 1)
+    65.72%
+      --v-progress-linear-short-tail: 100
+    70.39%
+      --v-progress-linear-long-tail: 0
+      animation-timing-function: cubic-bezier(.2, 0, .8, 1)
+    87.06%
+      --v-progress-linear-long-head: 100
+    100%
+      --v-progress-linear-long-tail: 100
+      --v-progress-linear-long-head: 100
+      --v-progress-linear-short-tail: 100
+      --v-progress-linear-short-head: 100
+
+  @keyframes progress-linear-wave
+    to
+      --v-progress-linear-wave-phase: 1
 
   @keyframes stream
     to

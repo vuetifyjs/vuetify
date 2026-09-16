@@ -20,7 +20,8 @@
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**.",
     "striped": "Adds a stripe background to the filled portion of the progress component.",
     "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (e.g. `0.4s`), or `false` to remove it. Does not affect `indeterminate`, `stream` or `striped` animations.",
-    "variant": "Applies a distinct style to the component. **split** visually divides the progress bar at the current value, separating the filled and unfilled portions with a gap."
+    "variant": "Applies a distinct style to the component. **split** visually divides the progress bar at the current value, separating the filled and unfilled portions with a gap.",
+    "wavy": "Renders the MD3 wavy style: an animated wave for the filled part, a **chunk-gap** wide gap before the track and a stop dot at its end. **height** sets the stroke width and the bar grows to fit the wave. Buffer, stream, striped and chunk props are ignored."
   },
   "slots": {
     "default": "Provides the current value of the component."

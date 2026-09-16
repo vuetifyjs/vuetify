@@ -8,6 +8,7 @@
     "rotate": "Rotates the circle start point in degrees.",
     "size": "Sets the diameter of the circle in pixels.",
     "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (e.g. `0.4s`), or `false` to remove it. Does not affect the `indeterminate` and `reveal` animations.",
+    "wavy": "Renders the MD3 wavy style: an animated wave for the progress arc with a gap before the track.",
     "width": "Sets the stroke of the circle in pixels."
   }
 }

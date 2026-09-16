@@ -3,6 +3,21 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+$wave-transition: var(--v-progress-circular-transition-duration) ease-in-out
+
+@property --v-progress-circular-wave-phase
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-circular-tail
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+@property --v-progress-circular-head
+  syntax: "<number>"
+  inherits: true
+  initial-value: 0
+
 @include tools.layer('components')
   // Elements
   .v-progress-circular
@@ -41,11 +56,46 @@
     transition: $progress-circular-overlay-transition
     z-index: 2
 
+  // Dash lengths are in percent of one turn: paths use pathLength and --from/--to are unitless
+  .v-progress-circular__wavy
+    animation: progress-circular-wave 1s linear infinite
+
+    > .v-progress-circular__track,
+    > .v-progress-circular__wave
+      --v-progress-circular-length: max(0, var(--v-progress-circular-to) - var(--v-progress-circular-from))
+      fill: none
+      stroke-dasharray: calc(var(--v-progress-circular-length) * 1px) 400px
+      stroke-linecap: round
+      stroke-width: clamp(0px, var(--v-progress-circular-length) * 1000px, var(--v-progress-circular-stroke))
+
+    > .v-progress-circular__track
+      --v-progress-circular-from: calc(var(--v-progress-circular-value) + min(var(--v-progress-circular-value), var(--v-progress-circular-wave-gap)))
+      --v-progress-circular-to: calc(100 - min(var(--v-progress-circular-value), var(--v-progress-circular-wave-gap)))
+      stroke-dashoffset: calc(var(--v-progress-circular-from) * -1px)
+      transition: stroke-dasharray $wave-transition, stroke-dashoffset $wave-transition
+
+    > .v-progress-circular__wave
+      --v-progress-circular-from: 0
+      --v-progress-circular-to: var(--v-progress-circular-value)
+      stroke: currentColor
+      stroke-dashoffset: calc((var(--v-progress-circular-from) + (1 - var(--v-progress-circular-wave-phase)) * 100 / var(--v-progress-circular-waves)) * -1px)
+      transform: rotate(calc(var(--v-progress-circular-wave-phase) * 360deg / var(--v-progress-circular-waves)))
+      transform-origin: center center
+      transition: stroke-dasharray $wave-transition, d $wave-transition
+
+  @media (prefers-reduced-motion: reduce)
+    .v-progress-circular__wavy
+      animation: none
+
   .v-progress-circular--revealing
     --v-progress-reveal-duration: #{$progress-circular-reveal-duration}
 
     .v-progress-circular__overlay
       transition-duration: var(--v-progress-reveal-duration), 0s
+
+    .v-progress-circular__track,
+    .v-progress-circular__wave
+      transition-duration: var(--v-progress-reveal-duration)
 
   // Modifiers
   .v-progress-circular--no-transition
@@ -73,6 +123,21 @@
       transform-origin: center center
       transform: $progress-circular-overlay-transform
 
+    .v-progress-circular__wavy
+      animation: progress-circular-wavy-dash list.nth($progress-circular-rotate-dash, 2) ease-in-out infinite, $progress-circular-rotate-animation
+      transform: $progress-circular-overlay-transform
+      transform-origin: center center
+
+      > .v-progress-circular__track
+        --v-progress-circular-from: calc(min(var(--v-progress-circular-head), 100) + var(--v-progress-circular-wave-gap))
+        --v-progress-circular-to: calc(100 + var(--v-progress-circular-tail) - var(--v-progress-circular-wave-gap))
+        transition: none
+
+      > .v-progress-circular__wave
+        --v-progress-circular-from: var(--v-progress-circular-tail)
+        --v-progress-circular-to: min(var(--v-progress-circular-head), 100)
+        transition: none
+
   .v-progress-circular--disable-shrink
     > svg
       animation-duration: list.nth($progress-circular-rotate-animation, 2) * .5
@@ -80,9 +145,18 @@
     .v-progress-circular__overlay
       animation: none
 
+    .v-progress-circular__wavy
+      --v-progress-circular-tail: 0
+      --v-progress-circular-head: 20
+      animation: none
+
   .v-progress-circular--indeterminate:not(.v-progress-circular--visible)
     > svg,
     .v-progress-circular__overlay
+      animation-play-state: paused
+
+  .v-progress-circular:not(.v-progress-circular--visible)
+    .v-progress-circular__wavy
       animation-play-state: paused
 
   @keyframes progress-circular-dash
@@ -97,6 +171,24 @@
     100%
       stroke-dasharray: 100, 200
       stroke-dashoffset: -124px
+
+  // progress-circular-dash in percent of the circumference, head = tail + dash
+  @keyframes progress-circular-wavy-dash
+    0%
+      --v-progress-circular-tail: 0
+      --v-progress-circular-head: .8
+
+    50%
+      --v-progress-circular-tail: 11.9
+      --v-progress-circular-head: 91.5
+
+    100%
+      --v-progress-circular-tail: 98.7
+      --v-progress-circular-head: 178.3
+
+  @keyframes progress-circular-wave
+    to
+      --v-progress-circular-wave-phase: 1
 
   @keyframes progress-circular-rotate
     100%

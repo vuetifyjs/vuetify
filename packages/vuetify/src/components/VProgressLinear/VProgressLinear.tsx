@@ -18,6 +18,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 // Utilities
 import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
+import { linearWavePath } from './waves'
 import { clamp, convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
@@ -65,6 +66,7 @@ export const makeVProgressLinearProps = propsFactory({
     type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
     default: undefined,
   },
+  wavy: Boolean,
 
   ...makeChunksProps(),
   ...makeComponentProps(),
@@ -104,6 +106,10 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorClasses: barColorClasses,
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
+    const {
+      textColorClasses: trackColorClasses,
+      textColorStyles: trackColorStyles,
+    } = useTextColor(() => props.bgColor)
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
     const { state: revealState, duration: revealDuration } = useReveal(props)
@@ -129,7 +135,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       normalizedBuffer,
       isReversed
     )
-    useToggleScope(hasChunks, () => {
+    useToggleScope(() => hasChunks.value || props.wavy, () => {
       const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
       watchEffect(() => resizeRef.value = root.value)
     })
@@ -144,6 +150,33 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       return hasChunks.value
         ? snapValueToChunk(normalizedValue.value)
         : normalizedValue.value
+    })
+
+    const wavy = computed(() => {
+      const width = containerWidth.value
+      if (!props.wavy || !width) return undefined
+
+      // ponytail: geometry assumes a px height, rem/em heights would need measuring
+      const stroke = parseFloat(props.height)
+      const value = normalizedValue.value
+      const amplitude = props.indeterminate || (value > 10 && value < 95) ? 3 : 0
+      const wavelength = props.indeterminate ? 20 : 40
+      const center = stroke / 2 + 3
+      const start = stroke / 2
+      const end = Math.max(width - start, start + 1)
+      const range = end - start
+
+      return {
+        width,
+        stroke,
+        wavelength,
+        center,
+        end,
+        offset: wavelength / range * 100,
+        gap: (parseFloat(props.chunkGap) + stroke) / range * 100,
+        track: `M ${start} ${center} H ${end}`,
+        wave: linearWavePath(start - wavelength, end, center, amplitude, wavelength),
+      }
     })
 
     function handleClick (e: MouseEvent) {
@@ -178,6 +211,76 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       )
     }
 
+    function renderWavy () {
+      const w = wavy.value
+      if (!w) return null
+
+      const renderTrack = () => (
+        <path
+          class={[
+            'v-progress-linear__track',
+            trackColorClasses.value,
+          ]}
+          style={[
+            trackColorStyles.value,
+            { opacity: props.bgOpacity != null ? parseFloat(props.bgOpacity) : undefined },
+          ]}
+          d={ w.track }
+          pathLength="100"
+        />
+      )
+      const renderWave = (bar?: string) => (
+        <path
+          class={['v-progress-linear__wave', bar]}
+          style={{ d: `path("${w.wave}")` }}
+          d={ w.wave }
+          pathLength={ 100 + w.offset }
+        />
+      )
+
+      return (
+        <svg
+          class={[
+            'v-progress-linear__wavy',
+            { 'v-progress-linear__wavy--indeterminate': props.indeterminate },
+            textColorClasses.value,
+          ]}
+          style={[
+            textColorStyles.value,
+            {
+              '--v-progress-linear-value': normalizedValue.value,
+              '--v-progress-linear-stroke': convertToUnit(w.stroke),
+              '--v-progress-linear-wavelength': convertToUnit(w.wavelength),
+              '--v-progress-linear-wave-offset': w.offset,
+              '--v-progress-linear-wave-gap': w.gap,
+            },
+          ]}
+          viewBox={ `0 0 ${w.width} ${w.center * 2}` }
+        >
+          { props.indeterminate ? (
+            <>
+              { renderTrack() }
+              { renderTrack() }
+              { renderTrack() }
+              { renderWave('long') }
+              { renderWave('short') }
+            </>
+          ) : (
+            <>
+              { renderTrack() }
+              <circle
+                class="v-progress-linear__stop"
+                cx={ w.end }
+                cy={ w.center }
+                r={ Math.min(2, w.stroke / 2) }
+              />
+              { renderWave() }
+            </>
+          )}
+        </svg>
+      )
+    }
+
     useRender(() => (
       <props.tag
         ref={ root }
@@ -204,7 +307,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           {
             bottom: props.location === 'bottom' ? 0 : undefined,
             top: props.location === 'top' ? 0 : undefined,
-            height: props.active ? height.value : 0,
+            height: !props.active ? 0 : props.wavy ? convertToUnit(parseFloat(props.height) + 6) : height.value,
             '--v-progress-linear-height': height.value,
             '--v-progress-linear-transition-duration': transitionDuration.value,
             '--v-progress-reveal-duration': `${revealDuration.value}ms`,
@@ -222,78 +325,82 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         aria-valuenow={ props.indeterminate ? undefined : Math.min(parseFloat(progress.value), max.value) }
         onClick={ props.clickable && handleClick }
       >
-        { props.stream && (
-          <div
-            key="stream"
-            class={[
-              'v-progress-linear__stream',
-              textColorClasses.value,
-            ]}
-            style={{
-              ...textColorStyles.value,
-              [isReversed.value ? 'left' : 'right']: `calc(${height.value} * -1)`,
-              borderTop: `calc(${height.value} / 2) dotted`,
-              opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
-              top: `calc(50% - ${height.value} / 4)`,
-              width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              '--v-progress-linear-stream-to': `calc(${height.value} * ${isReversed.value ? 1 : -1})`,
-            }}
-          />
-        )}
+        { props.wavy ? renderWavy() : (
+          <>
+            { props.stream && (
+              <div
+                key="stream"
+                class={[
+                  'v-progress-linear__stream',
+                  textColorClasses.value,
+                ]}
+                style={{
+                  ...textColorStyles.value,
+                  [isReversed.value ? 'left' : 'right']: `calc(${height.value} * -1)`,
+                  borderTop: `calc(${height.value} / 2) dotted`,
+                  opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
+                  top: `calc(50% - ${height.value} / 4)`,
+                  width: convertToUnit(100 - normalizedBuffer.value, '%'),
+                  '--v-progress-linear-stream-to': `calc(${height.value} * ${isReversed.value ? 1 : -1})`,
+                }}
+              />
+            )}
 
-        { (props.variant !== 'split' || !props.indeterminate) && renderBackgroundBar() }
+            { (props.variant !== 'split' || !props.indeterminate) && renderBackgroundBar() }
 
-        <div
-          class={[
-            'v-progress-linear__buffer',
-            bufferColorClasses.value,
-          ]}
-          style={[
-            bufferColorStyles.value,
-            {
-              opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
-              width: convertToUnit(bufferWidth.value, '%'),
-            },
-            splitStyles.value?.buffer,
-          ]}
-        />
-
-        <Transition name={ transitionName.value }>
-          { !props.indeterminate ? (
             <div
               class={[
-                'v-progress-linear__determinate',
-                barColorClasses.value,
+                'v-progress-linear__buffer',
+                bufferColorClasses.value,
               ]}
               style={[
-                barColorStyles.value,
-                { width: convertToUnit(barWidth.value, '%') },
-                splitStyles.value?.bar,
+                bufferColorStyles.value,
+                {
+                  opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
+                  width: convertToUnit(bufferWidth.value, '%'),
+                },
+                splitStyles.value?.buffer,
               ]}
             />
-          ) : (
-            <div class="v-progress-linear__indeterminate">
-              { props.variant === 'split' && (
-                <>
-                  { renderBackgroundBar() }
-                  { renderBackgroundBar() }
-                  { renderBackgroundBar() }
-                </>
-              )}
-              {['long', 'short'].map(bar => (
+
+            <Transition name={ transitionName.value }>
+              { !props.indeterminate ? (
                 <div
-                  key={ bar }
                   class={[
-                    'v-progress-linear__indeterminate',
-                    bar,
+                    'v-progress-linear__determinate',
                     barColorClasses.value,
                   ]}
-                  style={ barColorStyles.value }
+                  style={[
+                    barColorStyles.value,
+                    { width: convertToUnit(barWidth.value, '%') },
+                    splitStyles.value?.bar,
+                  ]}
                 />
-              ))}
-            </div>
-          )}
-        </Transition>
+              ) : (
+                <div class="v-progress-linear__indeterminate">
+                  { props.variant === 'split' && (
+                    <>
+                      { renderBackgroundBar() }
+                      { renderBackgroundBar() }
+                      { renderBackgroundBar() }
+                    </>
+                  )}
+                  {['long', 'short'].map(bar => (
+                    <div
+                      key={ bar }
+                      class={[
+                        'v-progress-linear__indeterminate',
+                        bar,
+                        barColorClasses.value,
+                      ]}
+                      style={ barColorStyles.value }
+                    />
+                  ))}
+                </div>
+              )}
+            </Transition>
+          </>
+        )}
 
         { slots.default && (
           <div class="v-progress-linear__content">

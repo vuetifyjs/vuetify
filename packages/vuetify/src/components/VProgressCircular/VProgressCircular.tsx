@@ -1,6 +1,9 @@
 // Styles
 import './VProgressCircular.sass'
 
+// Components
+import { circularWavePath } from '@/components/VProgressLinear/waves'
+
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
@@ -35,6 +38,7 @@ export const makeVProgressCircularProps = propsFactory({
     type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
     default: undefined,
   },
+  wavy: Boolean,
   width: {
     type: [Number, String],
     default: 4,
@@ -98,6 +102,27 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         : baseAngle
     })
 
+    const wavy = computed(() => {
+      if (!props.wavy) return undefined
+
+      const scale = diameter.value / size.value
+      const value = normalizedValue.value
+      const radius = MAGIC_RADIUS_CONSTANT
+      const amplitude = !props.indeterminate && (value <= 10 || value >= 95) ? 0 : 1.6 * scale
+      const waves = Math.max(3, Math.floor(2 * Math.PI * radius / (15 * scale)))
+      const center = diameter.value / 2
+      const arc = `A ${radius} ${radius} 0 1 1`
+
+      return {
+        waves,
+        gap: (4 * scale + strokeWidth.value) / (2 * Math.PI * radius) * 100,
+        // Two turns so the indeterminate track can wrap past the start
+        track: `M ${center + radius} ${center}` + ` ${arc} ${center - radius} ${center} ${arc} ${center + radius} ${center}`.repeat(2),
+        // Peaks sit on the track and troughs dip inward, so a flat wave lands on the track
+        wave: circularWavePath(center, radius - amplitude, amplitude, waves),
+      }
+    })
+
     watchEffect(() => {
       intersectionRef.value = root.value
       resizeRef.value = root.value
@@ -142,32 +167,64 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           xmlns="http://www.w3.org/2000/svg"
           viewBox={ `0 0 ${diameter.value} ${diameter.value}` }
         >
-          <circle
-            class={[
-              'v-progress-circular__underlay',
-              underlayColorClasses.value,
-            ]}
-            style={ underlayColorStyles.value }
-            fill="transparent"
-            cx="50%"
-            cy="50%"
-            r={ MAGIC_RADIUS_CONSTANT }
-            stroke-width={ strokeWidth.value }
-            stroke-dasharray={ CIRCUMFERENCE }
-            stroke-dashoffset={ 0 }
-          />
+          { wavy.value ? (
+            <g
+              class="v-progress-circular__wavy"
+              style={{
+                '--v-progress-circular-value': normalizedValue.value,
+                '--v-progress-circular-stroke': convertToUnit(strokeWidth.value),
+                '--v-progress-circular-waves': wavy.value.waves,
+                '--v-progress-circular-wave-gap': wavy.value.gap,
+              }}
+            >
+              <path
+                class={[
+                  'v-progress-circular__underlay',
+                  'v-progress-circular__track',
+                  underlayColorClasses.value,
+                ]}
+                style={ underlayColorStyles.value }
+                d={ wavy.value.track }
+                pathLength="200"
+              />
 
-          <circle
-            class="v-progress-circular__overlay"
-            fill="transparent"
-            cx="50%"
-            cy="50%"
-            r={ MAGIC_RADIUS_CONSTANT }
-            stroke-width={ strokeWidth.value }
-            stroke-dasharray={ CIRCUMFERENCE }
-            stroke-dashoffset={ strokeDashOffset.value }
-            stroke-linecap={ props.rounded ? 'round' : undefined }
-          />
+              <path
+                class="v-progress-circular__wave"
+                style={{ d: `path("${wavy.value.wave}")` }}
+                d={ wavy.value.wave }
+                pathLength={ 100 + 100 / wavy.value.waves }
+              />
+            </g>
+          ) : (
+            <>
+              <circle
+                class={[
+                  'v-progress-circular__underlay',
+                  underlayColorClasses.value,
+                ]}
+                style={ underlayColorStyles.value }
+                fill="transparent"
+                cx="50%"
+                cy="50%"
+                r={ MAGIC_RADIUS_CONSTANT }
+                stroke-width={ strokeWidth.value }
+                stroke-dasharray={ CIRCUMFERENCE }
+                stroke-dashoffset={ 0 }
+              />
+
+              <circle
+                class="v-progress-circular__overlay"
+                fill="transparent"
+                cx="50%"
+                cy="50%"
+                r={ MAGIC_RADIUS_CONSTANT }
+                stroke-width={ strokeWidth.value }
+                stroke-dasharray={ CIRCUMFERENCE }
+                stroke-dashoffset={ strokeDashOffset.value }
+                stroke-linecap={ props.rounded ? 'round' : undefined }
+              />
+            </>
+          )}
         </svg>
 
         { slots.default && (
