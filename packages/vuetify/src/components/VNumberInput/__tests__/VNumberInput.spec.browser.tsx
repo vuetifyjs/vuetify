@@ -448,8 +448,8 @@ describe('VNumberInput', () => {
         />
       ))
       const input = element.querySelector('input') as HTMLInputElement
-      input.focus()
       const lock = await commands.getLock()
+      input.focus()
       await navigator.clipboard.writeText(text)
       await userEvent.paste()
       await commands.releaseLock(lock)
@@ -476,8 +476,8 @@ describe('VNumberInput', () => {
         />
       ))
       const input = element.querySelector('input') as HTMLInputElement
-      input.focus()
       const lock = await commands.getLock()
+      input.focus()
       await navigator.clipboard.writeText(text)
       await userEvent.paste()
       await commands.releaseLock(lock)
