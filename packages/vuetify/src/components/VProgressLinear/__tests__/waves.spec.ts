@@ -17,6 +17,12 @@ describe('waves', () => {
     expect(endpoints(flat).every(([, y]) => y === 5)).toBe(true)
   })
 
+  it('flattens onto the center at the end when tapered', () => {
+    const points = endpoints(linearWavePath(0, 100, 5, 3, 40, 0, 60))
+    expect(points.at(-1)).toEqual([100, 5])
+    expect(points.find(([x]) => x === 10)).toEqual([10, 8])
+  })
+
   it('draws one extra wave around the circle', () => {
     const points = endpoints(circularWavePath(50, 20, 2, 5))
     const radii = points.map(([x, y]) => Math.hypot(x - 50, y - 50))

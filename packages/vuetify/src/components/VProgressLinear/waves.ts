@@ -1,11 +1,24 @@
 const round = (value: number) => Math.round(value * 1000) / 1000
 
-export function linearWavePath (start: number, end: number, center: number, amplitude: number, wavelength: number) {
+// The sine crosses the center at `phase`; the last `taper` px before `end` flatten linearly onto the center
+export function linearWavePath (
+  start: number,
+  end: number,
+  center: number,
+  amplitude: number,
+  wavelength: number,
+  phase = start,
+  taper = 0,
+) {
   const k = 2 * Math.PI / wavelength
-  const y = (x: number) => center + amplitude * Math.sin(k * (x - start))
-  const slope = (x: number) => amplitude * k * Math.cos(k * (x - start))
+  const envelope = (x: number) => taper ? Math.min(1, (end - x) / taper) : 1
+  const y = (x: number) => center + amplitude * envelope(x) * Math.sin(k * (x - phase))
+  const slope = (x: number) => {
+    const wave = amplitude * envelope(x) * k * Math.cos(k * (x - phase))
+    return taper && end - x < taper ? wave - amplitude / taper * Math.sin(k * (x - phase)) : wave
+  }
 
-  let path = `M ${round(start)} ${round(center)}`
+  let path = `M ${round(start)} ${round(y(start))}`
   for (let x = start; x < end; x += wavelength / 4) {
     const next = Math.min(x + wavelength / 4, end)
     const third = (next - x) / 3

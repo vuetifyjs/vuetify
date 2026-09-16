@@ -167,8 +167,6 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
 
   // Dash lengths are in percent of the track: paths use pathLength and --from/--to are unitless
   .v-progress-linear__wavy
-    animation: progress-linear-wave 1s linear infinite
-    animation-play-state: paused
     display: block
     height: 100%
     width: 100%
@@ -187,15 +185,10 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
       opacity: $progress-linear-background-opacity
       stroke-dasharray: calc(var(--v-progress-linear-length) * 1px) 200px
       stroke-dashoffset: calc(var(--v-progress-linear-from) * -1px)
-      transition: stroke-dasharray $progress-linear-transition, stroke-dashoffset $progress-linear-transition
 
     > .v-progress-linear__wave
       --v-progress-linear-from: 0
       --v-progress-linear-to: var(--v-progress-linear-value)
-      stroke-dasharray: calc(var(--v-progress-linear-length) * 1px) calc((100 + var(--v-progress-linear-wave-offset)) * 1px)
-      stroke-dashoffset: calc((var(--v-progress-linear-from) + (1 - var(--v-progress-linear-wave-phase)) * var(--v-progress-linear-wave-offset)) * -1px)
-      transform: translateX(calc(var(--v-progress-linear-wave-phase) * var(--v-progress-linear-wavelength)))
-      transition: stroke-dasharray $progress-linear-transition, d $progress-linear-transition
 
     > .v-progress-linear__stop
       fill: currentColor
@@ -206,8 +199,6 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
 
     // Gaps shrink to nothing within 1% of either end, so a segment parked at an edge leaves no notch
     > .v-progress-linear__track
-      transition: none
-
       &:nth-child(1)
         --v-progress-linear-from: 0
         --v-progress-linear-to: calc(var(--v-progress-linear-long-tail) - var(--v-progress-linear-wave-gap) * clamp(0, 100 - var(--v-progress-linear-long-tail), 1))

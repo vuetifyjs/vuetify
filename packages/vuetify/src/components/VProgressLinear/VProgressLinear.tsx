@@ -16,10 +16,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
+import { computed, onScopeDispose, ref, shallowRef, Transition, watch, watchEffect } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
 import { linearWavePath } from './waves'
-import { clamp, convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -158,8 +158,6 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
       // ponytail: geometry assumes a px height, rem/em heights would need measuring
       const stroke = parseFloat(props.height)
-      const value = normalizedValue.value
-      const amplitude = props.indeterminate || (value > 10 && value < 95) ? 3 : 0
       const wavelength = props.indeterminate ? 20 : 40
       const center = stroke / 2 + 3
       const start = stroke / 2
@@ -171,13 +169,86 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         stroke,
         wavelength,
         center,
+        start,
         end,
         offset: wavelength / range * 100,
         gap: (parseFloat(props.chunkGap) + stroke) / range * 100,
         track: `M ${start} ${center} H ${end}`,
-        wave: linearWavePath(start - wavelength, end, center, amplitude, wavelength),
+        wave: props.indeterminate ? linearWavePath(start - wavelength, end, center, 3, wavelength) : '',
       }
     })
+
+    // The determinate wave is redrawn every frame: crests travel while the taper stays pinned to the head,
+    // and a critically damped spring keeps the head smooth no matter how often the value updates
+    const svgRef = ref<SVGSVGElement>()
+    const waveRef = ref<SVGPathElement>()
+    const springDuration = computed(() => {
+      if (revealState.value === 'pending') return revealDuration.value
+      if (props.transition === false) return 0
+      const duration = transitionDuration.value
+      return !duration ? 200 : duration.endsWith('ms') ? parseFloat(duration) : parseFloat(duration) * 1000
+    })
+    const isAnimating = computed(() => (
+      props.wavy && !props.indeterminate && props.active && isIntersecting.value && !!svgRef.value
+    ))
+    let shown = normalizedValue.value
+    let velocity = 0
+    let amplitude = shown > 10 && shown < 95 ? 1 : 0
+    let phase = 0
+    let last = 0
+    let frame = -1
+
+    function draw () {
+      const w = wavy.value
+      if (!w || !svgRef.value || !waveRef.value) return
+
+      const head = w.start + (w.end - w.start) * shown / 100
+      const eased = amplitude * amplitude * (3 - 2 * amplitude)
+      waveRef.value.setAttribute('d', linearWavePath(w.start, head, w.center, 3 * eased, w.wavelength, phase, w.wavelength * 1.5))
+      svgRef.value.style.setProperty('--v-progress-linear-value', String(shown))
+    }
+
+    function tick (now: number) {
+      const dt = last ? Math.min(now - last, 100) / 1000 : 0
+      last = now
+
+      const target = normalizedValue.value
+      const omega = 4000 / springDuration.value
+      if (!Number.isFinite(omega)) {
+        shown = target
+        velocity = 0
+      } else {
+        const offset = shown - target
+        const decay = Math.exp(-omega * dt)
+        const c = velocity + omega * offset
+        shown = target + (offset + c * dt) * decay
+        velocity = (velocity - omega * c * dt) * decay
+        if (Math.abs(shown - target) < 0.01 && Math.abs(velocity) < 0.01) {
+          shown = target
+          velocity = 0
+        }
+      }
+
+      const targetAmplitude = shown > 10 && shown < 95 ? 1 : 0
+      amplitude = targetAmplitude > amplitude ? Math.min(amplitude + dt * 2, 1) : Math.max(amplitude - dt * 2, 0)
+
+      const reduceMotion = PREFERS_REDUCED_MOTION()
+      const wavelength = wavy.value?.wavelength ?? 40
+      if (!reduceMotion) phase = (phase - dt * wavelength) % wavelength
+
+      draw()
+
+      const settled = shown === target && amplitude === targetAmplitude
+      frame = isAnimating.value && (!reduceMotion || !settled) ? requestAnimationFrame(tick) : -1
+    }
+
+    watch([isAnimating, normalizedValue, springDuration], () => {
+      if (!isAnimating.value || frame >= 0) return
+      last = 0
+      frame = requestAnimationFrame(tick)
+    }, { immediate: true })
+    watch([svgRef, wavy], draw, { flush: 'post' })
+    onScopeDispose(() => cancelAnimationFrame(frame))
 
     function handleClick (e: MouseEvent) {
       if (!intersectionRef.value) return
@@ -229,10 +300,9 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           pathLength="100"
         />
       )
-      const renderWave = (bar?: string) => (
+      const renderWave = (bar: string) => (
         <path
           class={['v-progress-linear__wave', bar]}
-          style={{ d: `path("${w.wave}")` }}
           d={ w.wave }
           pathLength={ 100 + w.offset }
         />
@@ -240,6 +310,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
       return (
         <svg
+          ref={ svgRef }
           class={[
             'v-progress-linear__wavy',
             { 'v-progress-linear__wavy--indeterminate': props.indeterminate },
@@ -248,7 +319,6 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           style={[
             textColorStyles.value,
             {
-              '--v-progress-linear-value': normalizedValue.value,
               '--v-progress-linear-stroke': convertToUnit(w.stroke),
               '--v-progress-linear-wavelength': convertToUnit(w.wavelength),
               '--v-progress-linear-wave-offset': w.offset,
@@ -274,7 +344,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                 cy={ w.center }
                 r={ Math.min(2, w.stroke / 2) }
               />
-              { renderWave() }
+              <path ref={ waveRef } class="v-progress-linear__wave" />
             </>
           )}
         </svg>
