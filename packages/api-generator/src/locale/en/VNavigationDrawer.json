@@ -13,7 +13,7 @@
     "rail": "Sets the component width to the **rail-width** value.",
     "railWidth": "Sets the width for the component when `rail` is enabled. Percentage values are relative to the layout.",
     "width": "Sets the width for the component. Percentage values are relative to the layout, not the viewport.",
-    "scrim": "Determines whether an overlay is used when a **temporary** drawer is open. Accepts true/false to enable background, and string to define color.",
+    "scrim": "Determines whether an overlay is used when a **temporary** drawer is open. Accepts true/false to enable background, string to define color, or an object with `color` and `blur`.",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background.",
     "touchless": "Disable mobile touch functionality.",
     "location": "Controls the edge of the screen the drawer is attached to.",

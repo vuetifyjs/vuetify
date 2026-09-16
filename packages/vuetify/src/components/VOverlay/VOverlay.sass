@@ -30,6 +30,10 @@
     pointer-events: auto
     contain: layout
 
+  .v-overlay__scrim-blur
+    inset: 0
+    position: fixed
+
   .v-overlay__scrim
     pointer-events: auto
     background: $overlay-scrim-background
@@ -44,7 +48,8 @@
   .v-overlay--absolute
     position: absolute
 
-  .v-overlay--contained .v-overlay__scrim
+  .v-overlay--contained .v-overlay__scrim,
+  .v-overlay--contained .v-overlay__scrim-blur
     position: absolute
 
   .v-overlay--scroll-blocked

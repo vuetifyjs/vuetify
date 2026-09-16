@@ -49,6 +49,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  isObject,
   isString,
   omit,
   propsFactory,
@@ -107,7 +108,7 @@ export const makeVOverlayProps = propsFactory({
   modelValue: Boolean,
   persistent: Boolean,
   scrim: {
-    type: [Boolean, String],
+    type: [Boolean, String, Object] as PropType<boolean | string | { blur?: number | string, color?: string }>,
     default: true,
   },
   zIndex: {
@@ -164,7 +165,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(() => {
-      return isString(props.scrim) ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : isObject(props.scrim) ? props.scrim.color : null
     })
     const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
     const {
@@ -421,6 +422,16 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               { ...scopeId }
               { ...attrs }
             >
+              { isObject(props.scrim) && props.scrim.blur != null && (
+                <Transition key="scrim-blur" name="fade-transition" appear>
+                  { isActive.value && (
+                    <div
+                      class="v-overlay__scrim-blur"
+                      style={{ backdropFilter: `blur(${convertToUnit(props.scrim.blur)})` }}
+                    />
+                  )}
+                </Transition>
+              )}
               <Scrim
                 color={ scrimColor }
                 modelValue={ isActive.value && !!props.scrim }
