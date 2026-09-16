@@ -12,10 +12,8 @@ describe('VCheckbox exposed focus', () => {
     render(() => <VCheckbox ref={ cmp } />)
     await waitIdle()
 
-    // eslint-disable-next-line @vitest/prefer-expect-type-of
-    expect(typeof cmp.value.focus).toBe('function')
-    // eslint-disable-next-line @vitest/prefer-expect-type-of
-    expect(typeof cmp.value.blur).toBe('function')
+    expect(cmp.value.focus).toBeTypeOf('function')
+    expect(cmp.value.blur).toBeTypeOf('function')
 
     cmp.value.focus()
     expect(document.activeElement).toBe(screen.getByCSS('input[type="checkbox"]'))
