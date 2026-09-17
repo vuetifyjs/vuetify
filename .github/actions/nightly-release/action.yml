@@ -61,7 +61,7 @@ runs:
       shell: bash
     - name: NPM Release
       run: |
-        npm publish ./packages/vuetify --tag ${{ inputs.npm-tag }} --access public
+        pnpm publish ./packages/vuetify --no-git-checks --tag ${{ inputs.npm-tag }} --access public
       shell: bash
       env:
         NPM_API_KEY: ${{ inputs.npm-token }}
