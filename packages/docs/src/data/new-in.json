@@ -60,6 +60,11 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBottomSheet": {
+    "props": {
+      "contextMenu": "4.3.0"
+    }
+  },
   "VBreadcrumbsItem": {
     "props": {
       "width": "3.11.0",
@@ -289,6 +294,7 @@
   "VDialog": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -386,6 +392,7 @@
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
@@ -393,6 +400,7 @@
       "viewportMargin": "3.11.0"
     },
     "examples": {
+      "prop-context-menu": "4.3.0",
       "prop-submenu": "3.7.0"
     }
   },
@@ -433,6 +441,7 @@
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -570,6 +579,11 @@
       "misc-promise": "4.0.0",
       "prop-total-visible": "3.11.0",
       "prop-transition": "4.0.0"
+    }
+  },
+  "VSpeedDial": {
+    "props": {
+      "contextMenu": "4.3.0"
     }
   },
   "VSparkline": {
