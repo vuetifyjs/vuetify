@@ -375,6 +375,36 @@ describe('VMenu', () => {
     await expect.poll(() => screen.queryByTestId('menu-content')?.checkVisibility() ?? false).toBe(false)
   })
 
+  it('should close on right and middle click outside', async () => {
+    render(() => (
+      <div class="d-flex ga-4">
+        <VMenu contextMenu>
+          {{
+            activator: ({ props }) => <VSheet data-testid="area" height="200" width="200" { ...props } />,
+            default: () => <VSheet data-testid="menu-content" height="40" width="80" />,
+          }}
+        </VMenu>
+        <VSheet data-testid="outside" height="200" width="200" />
+      </div>
+    ))
+
+    const area = screen.getByTestId('area')
+    const outside = screen.getByTestId('outside')
+    const isVisible = () => screen.queryByTestId('menu-content')?.checkVisibility() ?? false
+
+    await userEvent.click(area, { button: 'right' })
+    await wait(100)
+    expect(isVisible()).toBe(true)
+
+    await userEvent.click(outside, { button: 'right' })
+    await expect.poll(isVisible).toBe(false)
+
+    await userEvent.click(area, { button: 'right' })
+    await expect.poll(isVisible).toBe(true)
+    await userEvent.click(outside, { button: 'middle' })
+    await expect.poll(isVisible).toBe(false)
+  })
+
   describe('cascade close', () => {
     beforeEach(() => commands.setReduceMotionDisabled())
 

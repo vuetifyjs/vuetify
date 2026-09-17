@@ -86,6 +86,8 @@ export const ClickOutside = {
   // clicks on body
   mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
+    // right-click already went through contextmenu; letting its auxclick through calls the handler twice
+    const onAuxclick = (e: Event) => (e as MouseEvent).button !== 2 && onClick(e)
     const onMousedown = (e: Event) => {
       // Ignore the active check here so ancestors of the top overlay (e.g. a menu
       // with an open submenu, which isn't localTop) still record that the click
@@ -95,6 +97,8 @@ export const ClickOutside = {
 
     handleShadow(el, (app: HTMLElement) => {
       app.addEventListener('click', onClick, true)
+      app.addEventListener('auxclick', onAuxclick, true)
+      app.addEventListener('contextmenu', onClick, true)
       app.addEventListener('mousedown', onMousedown, true)
     })
     if (!el._clickOutside) {
@@ -105,6 +109,7 @@ export const ClickOutside = {
 
     el._clickOutside[binding.instance!.$.uid] = {
       onClick,
+      onAuxclick,
       onMousedown,
     }
   },
@@ -115,9 +120,11 @@ export const ClickOutside = {
     handleShadow(el, (app: HTMLElement) => {
       if (!app || !el._clickOutside?.[binding.instance!.$.uid]) return
 
-      const { onClick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
+      const { onClick, onAuxclick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
 
       app.removeEventListener('click', onClick, true)
+      app.removeEventListener('auxclick', onAuxclick, true)
+      app.removeEventListener('contextmenu', onClick, true)
       app.removeEventListener('mousedown', onMousedown, true)
     })
 
