@@ -15,6 +15,10 @@
     &__text
       padding-bottom: 12px
 
+    // without a title the controls would touch the top edge of the picker
+    .v-picker__header-wrapper > .v-picker__header:first-child &
+      margin-top: 12px
+
     &__time
       display: flex
       white-space: nowrap
