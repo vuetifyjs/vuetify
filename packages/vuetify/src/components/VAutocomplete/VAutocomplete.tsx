@@ -23,6 +23,7 @@ import { useScrolling } from '../VSelect/useScrolling'
 import { useSelectionMenu } from '../VSelect/useSelectionMenu'
 import { useTextColor } from '@/composables/color'
 import { injectNestedDefaults } from '@/composables/defaults'
+import { useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
@@ -134,6 +135,7 @@ export const VAutocomplete = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { elevationClasses } = useElevation(toRef(() => props.menuElevation))
 
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -633,10 +635,9 @@ export const VAutocomplete = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
-                  contentClass={['v-autocomplete__content', props.menuProps?.contentClass]}
+                  contentClass={['v-autocomplete__content', elevationClasses.value, props.menuProps?.contentClass]}
                 >
                   <VSheet
-                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
                     onMousedown={ onMousedownContent }

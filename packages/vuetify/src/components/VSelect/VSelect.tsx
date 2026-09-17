@@ -23,6 +23,7 @@ import { useScrolling } from './useScrolling'
 import { useSelectionMenu } from './useSelectionMenu'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { injectNestedDefaults } from '@/composables/defaults'
+import { useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -162,6 +163,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { elevationClasses } = useElevation(toRef(() => props.menuElevation))
 
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -607,10 +609,9 @@ export const VSelect = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
-                  contentClass={['v-select__content', computedMenuProps.value.contentClass]}
+                  contentClass={['v-select__content', elevationClasses.value, computedMenuProps.value.contentClass]}
                 >
                   <VSheet
-                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onFocusout={ onFocusout }
                     onKeydown={ onMenuKeydown }
