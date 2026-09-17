@@ -386,6 +386,7 @@
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
@@ -393,6 +394,7 @@
       "viewportMargin": "3.11.0"
     },
     "examples": {
+      "prop-context-menu": "4.3.0",
       "prop-submenu": "3.7.0"
     }
   },
@@ -433,6 +435,7 @@
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"

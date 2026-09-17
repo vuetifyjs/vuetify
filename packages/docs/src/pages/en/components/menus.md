@@ -91,6 +91,12 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 <ExamplesExample file="v-menu/prop-open-on-hover" />
 
+#### Open on right-click
+
+The **context-menu** prop opens the menu on right-click (or long-press on touch devices) at the cursor position.
+
+<ExamplesExample file="v-menu/prop-context-menu" />
+
 #### Nested menus
 
 Menus with other menus inside them will not close until their children are closed. The **submenu** prop changes keyboard behaviour to open and close with left/right arrow keys instead of up/down.
