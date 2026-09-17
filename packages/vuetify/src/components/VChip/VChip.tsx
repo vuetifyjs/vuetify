@@ -168,11 +168,18 @@ export const VChip = genericComponent<VChipSlots>()({
       }
     })
 
-    const { colorClasses, colorStyles, variantClasses } = useVariant(() => {
+    const { 
+      colorClasses,
+      colorStyles,
+      backgroundColorClasses,
+      backgroundColorStyles,
+      variantClasses 
+    } = useVariant(() => {
       const showColor = !group || group.isSelected.value
       return ({
         color: showColor ? props.color ?? props.baseColor : props.baseColor,
         variant: props.variant,
+        bgColor: showColor ? props.bgColor : undefined,
       })
     })
 
@@ -217,6 +224,7 @@ export const VChip = genericComponent<VChipSlots>()({
             themeClasses.value,
             borderClasses.value,
             colorClasses.value,
+            backgroundColorClasses.value,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
