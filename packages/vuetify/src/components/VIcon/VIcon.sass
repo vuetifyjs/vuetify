@@ -21,6 +21,7 @@
     vertical-align: $icon-vertical-align
     width: $icon-size
     min-width: $icon-size
+    font-size: calc(var(--v-icon-size-multiplier) * var(--v-icon-height))
 
     &--clickable
       cursor: pointer
@@ -31,7 +32,7 @@
 
     @each $name in settings.$sizes
       &--size-#{$name}
-        font-size: calc(var(--v-icon-size-multiplier) * #{map.get($icon-sizes, $name)})
+        --v-icon-height: #{map.get($icon-sizes, $name)}
 
   .v-icon__svg
     fill: currentColor
