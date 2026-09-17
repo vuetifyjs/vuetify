@@ -5,3 +5,5 @@
 // VSelectionControl
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;
 $selection-control-size: 40px !default;
+$selection-control-description-font-size: 0.8125rem !default;
+$selection-control-description-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
