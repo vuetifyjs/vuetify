@@ -11,7 +11,7 @@ import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { onScopeDispose, provide, toRef, useId } from 'vue'
-import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
+import { deepEqual, genericComponent, getActiveElement, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -22,6 +22,14 @@ export interface VSelectionGroupContext {
   modelValue: Ref<any>
   forceUpdate: () => void
   onForceUpdate: (fn: () => void) => void
+  register: (control: VSelectionControlInstance) => void
+}
+
+export interface VSelectionControlInstance {
+  el: () => HTMLElement | undefined
+  focus: (options?: FocusOptions) => void
+  isChecked: () => boolean
+  isInteractive: () => boolean
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
@@ -92,6 +100,8 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     const name = toRef(() => props.name || id.value)
 
     const updateHandlers = new Set<() => void>()
+    const controls = new Set<VSelectionControlInstance>()
+
     provide(VSelectionControlGroupSymbol, {
       modelValue,
       forceUpdate: () => {
@@ -103,7 +113,57 @@ export const VSelectionControlGroup = genericComponent<new <T>(
           updateHandlers.delete(cb)
         })
       },
+      register: control => {
+        if (control) {
+          controls.add(control)
+          onScopeDispose(() => {
+            controls.delete(control)
+          })
+        }
+      },
     })
+
+    function focus (options?: FocusOptions) {
+      if (!IN_BROWSER) return
+
+      // Find the first checked control or the first interactive one, in DOM order
+      let first: VSelectionControlInstance | undefined
+      for (const control of controls) {
+        const el = control.el()
+        if (!el || !(control.isChecked() || control.isInteractive())) continue
+
+        if (!first) {
+          first = control
+          continue
+        }
+
+        const checked = control.isChecked()
+        const firstEl = first.el()
+        if (
+          (checked && !first.isChecked()) ||
+          (checked === first.isChecked() && firstEl && (firstEl.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING))
+        ) {
+          first = control
+        }
+      }
+
+      first?.focus(options)
+    }
+
+    function blur () {
+      if (!IN_BROWSER) return
+
+      const activeEl = getActiveElement()
+      if (!activeEl) return
+
+      for (const c of controls) {
+        const el = c.el()
+        if (el && el === activeEl) {
+          el.blur()
+          return
+        }
+      }
+    }
 
     provideDefaults({
       [props.defaultsTarget]: {
@@ -138,7 +198,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
       </div>
     ))
 
-    return {}
+    return { blur, focus }
   },
 })
 
