@@ -76,6 +76,7 @@ The following is a list of available and up-and-coming components for use with L
 
 | Component                                            | Description                                                | Min Version                                                |
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
+| [v-audio](/components/audio-players/)              | A player for self-hosted audio with a seekable waveform     | [v4.2.0](/getting-started/release-notes/?version=v4.2.0)   |
 | [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |

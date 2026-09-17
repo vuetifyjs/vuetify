@@ -1,0 +1,32 @@
+{
+  "description": "Subcomponent for `v-audio` that draws an amplitude waveform and acts as the seek surface. Usable on its own with nothing but `peaks` and a model.",
+  "props": {
+    "modelValue": "Playback position as a percentage (0 ~ 100).",
+    "peaks": "Precomputed amplitude values, normalized 0 to 1. Supplying them skips decoding entirely, which is the only path that works for cross-origin media.",
+    "buffered": "Buffered ranges as flat `[start, end, …]` pairs in percent, drawn as a dimmed overlay beneath the played portion.",
+    "bars": "Number of bars to draw. Longer `peaks` arrays are downsampled to fit; shorter ones are used as they are.",
+    "barWidth": "Width of a single bar, relative to the bar geometry's own coordinate space.",
+    "barGap": "Gap between bars, in the same units as `bar-width`.",
+    "barRadius": "Corner radius of a single bar.",
+    "height": "Height of the waveform.",
+    "color": "Color of the played portion. Falls back to the current text color.",
+    "trackColor": "Color of the unplayed portion. Falls back to the current text color at a reduced opacity.",
+    "bufferColor": "Color of the buffered overlay. Falls back to the current text color at a reduced opacity.",
+    "seekable": "Allows the position to be changed by pointer and keyboard.",
+    "preview": "Shows a cursor line and a time tooltip while hovering.",
+    "duration": "Total duration in seconds, used for the tooltip and `aria-valuetext`. Without it both fall back to a percentage.",
+    "normalize": "Rescales the peaks so the loudest bar reaches full height. Applied at render, so toggling it does not require decoding again.",
+    "sampleStrategy": "How samples are reduced to one value per bar. `peak` preserves transients and suits speech; `rms` is smoother and suits music.",
+    "mirror": "Reflects the waveform below the centre line at a reduced opacity.",
+    "step": "Distance moved by the arrow keys, as a percentage. Page Up and Page Down move ten times as far.",
+    "disabled": "Removes all interaction and dims the waveform."
+  },
+  "events": {
+    "update:modelValue": "Emitted when the position changes.",
+    "start": "Emitted when the user starts dragging.",
+    "end": "Emitted when the user stops dragging."
+  },
+  "slots": {
+    "tooltip": "Replaces the contents of the hover tooltip. Receives the formatted time and the hovered position."
+  }
+}
