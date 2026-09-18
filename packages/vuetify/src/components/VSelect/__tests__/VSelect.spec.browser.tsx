@@ -693,6 +693,33 @@ describe('VSelect', () => {
     expect(selected.value).toBe('Alabama')
   })
 
+  it('should ignore a typeahead key that matches nothing', async () => {
+    const selected = ref('Arizona')
+
+    render(() => (
+      <VSelect v-model={ selected.value } items={['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California']} />
+    ))
+
+    await userEvent.tab()
+
+    await userEvent.keyboard('z')
+    expect(selected.value).toBe('Arizona')
+    expect(screen.queryByCSS('.v-overlay--active')).toBeNull()
+
+    // the next matching key still works
+    await userEvent.keyboard('a')
+    expect(selected.value).toBe('Arkansas')
+
+    await userEvent.keyboard('{Enter}')
+    await commands.waitStable('.v-list')
+    await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Arkansas')
+
+    await userEvent.keyboard('z')
+    expect(selected.value).toBe('Arkansas')
+    await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Arkansas')
+    expect(screen.getByCSS('.v-overlay--active')).toBeTruthy()
+  })
+
   it('should keep TextField focused while selecting items from open menu', async () => {
     const { element } = render(() => (
       <VSelect
