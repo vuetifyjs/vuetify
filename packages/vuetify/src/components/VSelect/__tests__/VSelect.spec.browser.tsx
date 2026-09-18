@@ -653,6 +653,73 @@ describe('VSelect', () => {
     expect(screen.getByCSS('.v-overlay--active')).toBeTruthy()
   })
 
+  it('should cycle through matches on a repeated typeahead key', async () => {
+    const selected = ref<string>()
+
+    render(() => (
+      <VSelect v-model={ selected.value } items={['9', '90', '99', 'Nine']} />
+    ))
+
+    await userEvent.tab()
+
+    await userEvent.keyboard('9')
+    expect(selected.value).toBe('9')
+
+    await userEvent.keyboard('9')
+    expect(selected.value).toBe('90')
+
+    await userEvent.keyboard('9')
+    expect(selected.value).toBe('99')
+
+    await userEvent.keyboard('9')
+    expect(selected.value).toBe('9')
+  })
+
+  it('should resume typeahead after the current selection', async () => {
+    const selected = ref('Arizona')
+
+    render(() => (
+      <VSelect v-model={ selected.value } items={['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California']} />
+    ))
+
+    await userEvent.tab()
+
+    await userEvent.keyboard('a')
+    expect(selected.value).toBe('Arkansas')
+
+    await wait(1100)
+
+    await userEvent.keyboard('a')
+    expect(selected.value).toBe('Alabama')
+  })
+
+  it('should ignore a typeahead key that matches nothing', async () => {
+    const selected = ref('Arizona')
+
+    render(() => (
+      <VSelect v-model={ selected.value } items={['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California']} />
+    ))
+
+    await userEvent.tab()
+
+    await userEvent.keyboard('z')
+    expect(selected.value).toBe('Arizona')
+    expect(screen.queryByCSS('.v-overlay--active')).toBeNull()
+
+    // the next matching key still works
+    await userEvent.keyboard('a')
+    expect(selected.value).toBe('Arkansas')
+
+    await userEvent.keyboard('{Enter}')
+    await commands.waitStable('.v-list')
+    await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Arkansas')
+
+    await userEvent.keyboard('z')
+    expect(selected.value).toBe('Arkansas')
+    await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('Arkansas')
+    expect(screen.getByCSS('.v-overlay--active')).toBeTruthy()
+  })
+
   it('should keep TextField focused while selecting items from open menu', async () => {
     const { element } = render(() => (
       <VSelect
@@ -1552,7 +1619,7 @@ describe('VSelect', () => {
       await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('9')
 
       await userEvent.keyboard('9')
-      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('99')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('90')
     })
 
     it('should keep the scroll position continuous while arrowing down', async () => {

@@ -196,7 +196,6 @@ export const VSelect = genericComponent<new <
     const { InputIcon } = useInputIcon(props)
 
     let keyboardLookupPrefix = ''
-    let keyboardLookupIndex = 0
     let keyboardLookupLastTime: number
     let openedByKeyboard = false
 
@@ -332,48 +331,38 @@ export const VSelect = genericComponent<new <
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
-        keyboardLookupIndex = 0
       }
       keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
       const items = displayItems.value
-      function findItem () {
-        let result = findItemBase()
-        if (result) return result
+      const current = getTypeaheadAnchor()
+      // A repeated character cycles through the items starting with it, like a native <select>
+      const repeated = keyboardLookupPrefix.length > 1 &&
+        keyboardLookupPrefix.split('').every(char => char === keyboardLookupPrefix[0])
+      const prefix = repeated ? keyboardLookupPrefix[0] : keyboardLookupPrefix
+      // A longer prefix may still describe the current item; anything else moves on from it
+      const from = prefix.length > 1 ? current : current + 1
 
-        if (keyboardLookupPrefix.at(-1) === keyboardLookupPrefix.at(-2)) {
-          // No matches but we have a repeated letter, try the next item with that prefix
-          keyboardLookupPrefix = keyboardLookupPrefix.slice(0, -1)
-          keyboardLookupIndex++
-          result = findItemBase()
-          if (result) return result
-        }
-
-        // Still nothing, wrap around to the top
-        keyboardLookupIndex = 0
-        result = findItemBase()
-        if (result) return result
-
-        // Still nothing, try just the new letter
-        keyboardLookupPrefix = e.key.toLowerCase()
-        return findItemBase()
-      }
-      function findItemBase () {
-        for (let i = keyboardLookupIndex; i < items.length; i++) {
-          const _item = items[i]
-          if (_item.title.toLowerCase().startsWith(keyboardLookupPrefix)) {
-            return [_item, i] as const
+      function findItemBase (prefix: string, from: number) {
+        for (let step = 0; step < items.length; step++) {
+          const i = (Math.max(from, 0) + step) % items.length
+          if (items[i].title.toLowerCase().startsWith(prefix)) {
+            return [items[i], i] as const
           }
         }
         return undefined
       }
 
-      const result = findItem()
+      let result = findItemBase(prefix, from)
+      if (!result && prefix.length > 1) {
+        // Still nothing, try just the new letter
+        keyboardLookupPrefix = e.key.toLowerCase()
+        result = findItemBase(keyboardLookupPrefix, current + 1)
+      }
       if (!result) return
 
       const [item, index] = result
-      keyboardLookupIndex = index
       if (menu.value) {
         if (!props.multiple) select(item, true, false)
         focusItem(index)
@@ -445,6 +434,15 @@ export const VSelect = genericComponent<new <
       return displayItems.value.findIndex(
         item => model.value.some(s => (props.valueComparator || deepEqual)(s.value, item.value))
       )
+    }
+    /** Typeahead continues from the focused option, or from the selection when the list has no focus */
+    function getTypeaheadAnchor () {
+      const active = getActiveElement()
+      const option = listRef.value?.$el?.contains(active) ? active?.closest('[aria-posinset]') : null
+      const position = Number(option?.getAttribute('aria-posinset'))
+      if (position > 0) return position - 1
+
+      return getSelectedIndex()
     }
     async function onAfterEnter () {
       if (props.eager) {
