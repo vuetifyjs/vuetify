@@ -116,7 +116,7 @@ export const VCarousel = genericComponent<new <T>(
 
     function onMouseleave () {
       hovering = false
-      if (props.pauseOnHover) restartTimeout()
+      if (props.pauseOnHover) startTimeout()
     }
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
