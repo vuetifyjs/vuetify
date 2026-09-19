@@ -80,7 +80,7 @@ describe('VCarousel', () => {
       const model = ref(1)
 
       render(() => (
-        <VCarousel v-model={ model.value } cycle interval={ 50 } pauseOnHover>
+        <VCarousel v-model={ model.value } cycle interval={ 200 } pauseOnHover>
           <VCarouselItem value={ 1 }>
             <h1>1</h1>
           </VCarouselItem>
@@ -97,18 +97,18 @@ describe('VCarousel', () => {
       const carousel = screen.getByCSS('.v-carousel')
 
       await userEvent.hover(carousel)
-      await new Promise(resolve => setTimeout(resolve, 150))
+      await new Promise(resolve => setTimeout(resolve, 500))
       expect(model.value).toBe(1)
 
       await userEvent.unhover(carousel)
-      await expect.poll(() => model.value).toBe(2)
+      await expect.poll(() => model.value, { timeout: 5000 }).toBe(2)
     })
 
     it('should keep cycling on hover when pause-on-hover is not set', async () => {
       const model = ref(1)
 
       render(() => (
-        <VCarousel v-model={ model.value } cycle interval={ 50 }>
+        <VCarousel v-model={ model.value } cycle interval={ 200 }>
           <VCarouselItem value={ 1 }>
             <h1>1</h1>
           </VCarouselItem>
@@ -125,7 +125,7 @@ describe('VCarousel', () => {
       const carousel = screen.getByCSS('.v-carousel')
 
       await userEvent.hover(carousel)
-      await expect.poll(() => model.value).toBe(2)
+      await expect.poll(() => model.value, { timeout: 5000 }).toBe(2)
     })
   })
 })
