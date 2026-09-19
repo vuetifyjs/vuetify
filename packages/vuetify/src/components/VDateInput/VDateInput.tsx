@@ -338,11 +338,11 @@ export const VDateInput = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          class={['v-date-input', props.class]}
+          class={['v-date-input', { 'v-date-input--rtl': isRtl.value }, props.class]}
           style={ props.style }
           modelValue={ text.value }
           inputmode={ inputmode.value }
-          placeholder={ isFocused.value ? undefined : placeholder.value }
+          placeholder={ placeholder.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
@@ -358,10 +358,12 @@ export const VDateInput = genericComponent<new <
             ...slots,
             default: () => (
               <>
-                { isFocused.value && !isReadonly.value && (
+                { isFocused.value && !isReadonly.value && !!text.value && (
                   <div class="v-date-input__format-hint" aria-hidden="true">
                     <span style={{ order: isRtl.value ? 1 : 0 }}>{ text.value }</span>
-                    { formatHint.value }
+                    <bdi dir="ltr">
+                      { formatHint.value.split(/(\p{L}+)/u).map((part, i) => i % 2 ? <bdi>{ part }</bdi> : part) }
+                    </bdi>
                   </div>
                 )}
 

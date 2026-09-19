@@ -1593,14 +1593,14 @@ describe('VSelect', () => {
         await userEvent.click(screen.getByCSS('.v-select'))
         await commands.waitStable('.v-list')
 
-        const list = screen.getByCSS('.v-select__content .v-list')
-        await expect.poll(() => list.scrollTop).toBeGreaterThan(0)
+        await expect.poll(() => document.activeElement?.textContent?.trim()).toBe(item)
 
-        const start = list.scrollTop
-        list.scrollTop = start - 100
+        const list = screen.getByCSS('.v-select__content .v-list')
+        const userScrollTop = list.scrollTop - 100
+        list.scrollTop = userScrollTop
         await wait(200)
 
-        expect(`${item} ${list.scrollTop < start - 50}`).toBe(`${item} true`)
+        expect(list.scrollTop).toBe(userScrollTop)
 
         await userEvent.keyboard('{Escape}')
         await wait(200)

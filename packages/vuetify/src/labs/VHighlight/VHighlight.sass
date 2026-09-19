@@ -9,5 +9,7 @@
       border-radius: var(--v-highlight-border-radius, #{$highlight-border-radius})
       color: var(--v-highlight-color, #{$highlight-color})
 
-      @media (forced-colors: active)
-        background: buttontext !important
+      @include tools.layer('trumps')
+        @media (forced-colors: active)
+          background: buttontext
+          color: highlighttext

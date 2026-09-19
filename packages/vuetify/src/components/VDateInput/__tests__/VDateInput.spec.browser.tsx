@@ -1,10 +1,11 @@
 // Components
 import { VDateInput } from '../VDateInput'
+import { VLocaleProvider } from '@/components/VLocaleProvider/VLocaleProvider'
 
 // Utilities
 import { commands, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
-import { ar } from '@/locale'
+import { ar, ja } from '@/locale'
 
 function pad (v: number) {
   return String(v).padStart(2, '0')
@@ -424,18 +425,19 @@ describe('VDateInput', () => {
 
     // the field is filled from the end it starts reading at, whatever the format shows there
     describe('rtl', () => {
-      async function typeInRtl (locale = 'en', messages?: any) {
-        const { element } = render(() => <VDateInput modelValue={ null } />, null, {
+      // the sections are named after the format the locale shows, so the mask is what the assertions read
+      async function typeInRtl (locale = 'en', messages?: any, placeholder = 'mm/dd/yyyy') {
+        const { element } = render(() => <VDateInput modelValue={ null } placeholder={ placeholder } />, null, {
           locale: { locale, rtl: { [locale]: true }, messages: messages && { [locale]: messages } },
         })
 
         await userEvent.click(element)
 
         const input = screen.getByCSS('input') as HTMLInputElement
-        const hint = screen.getByCSS('.v-date-input__format-hint')
+        const getHint = () => screen.getByCSS('.v-date-input__format-hint')
 
         // what the hint still asks for, the rest of it mirrors the typed value
-        return { input, hint, left: () => hint.textContent!.slice(input.value.length) }
+        return { input, hint: getHint, left: () => getHint().textContent!.slice(input.value.length) }
       }
 
       it('should fill the section the format shows last', async () => {
@@ -455,7 +457,7 @@ describe('VDateInput', () => {
       })
 
       it('should fill a day first format from its day', async () => {
-        const { input, left } = await typeInRtl('ar', ar)
+        const { input, left } = await typeInRtl('ar', ar, 'yyyy/mm/dd')
 
         await userEvent.keyboard('1')
         expect(input).toHaveValue('1')
@@ -482,7 +484,7 @@ describe('VDateInput', () => {
       })
 
       it('should close a section that cannot take another digit', async () => {
-        const { input } = await typeInRtl('ar', ar)
+        const { input } = await typeInRtl('ar', ar, 'yyyy/mm/dd')
 
         // 4 is the 4th, 2 could still be the 24th
         await userEvent.keyboard('4')
@@ -656,12 +658,25 @@ describe('VDateInput', () => {
         expect(model.value).toHaveLength(2)
       })
 
+      it('should follow the nearest locale provider, not the app around it', async () => {
+        render(() => (
+          <VLocaleProvider rtl={ false }>
+            <VDateInput modelValue={ null } />
+          </VLocaleProvider>
+        ), null, {
+          locale: { locale: 'ar', rtl: { ar: true }, messages: { ar } },
+        })
+
+        expect(screen.getByCSS('.v-date-input')).not.toHaveClass('v-date-input--rtl')
+        expect(getComputedStyle(screen.getByCSS('input')).textAlign).not.toBe('right')
+      })
+
       it('should hold the value against the end it grows away from', async () => {
         const { input, hint } = await typeInRtl()
 
         await userEvent.keyboard('2026')
 
-        const span = hint.querySelector('span')!
+        const span = hint().querySelector('span')!
 
         // the sections fill towards the front, so the value is anchored at the back
         expect(getComputedStyle(input).direction).toBe('ltr')
@@ -682,6 +697,56 @@ describe('VDateInput', () => {
       render(() => <VDateInput { ...props } modelValue={ props.multiple ? [] : null } />)
 
       expect(screen.getByCSS('input')).toHaveAttribute('placeholder', expected)
+    })
+
+    it('should hint a placeholder laid out like the format in place of it', async () => {
+      const { element } = render(() => <VDateInput placeholder="TT.MM.JJJJ" inputFormat="dd.mm.yyyy" />)
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(element)
+
+      expect(input).toHaveAttribute('placeholder', 'TT.MM.JJJJ')
+      expect(screen.queryByCSS('.v-date-input__format-hint')).toBeNull()
+
+      await userEvent.keyboard('25')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.MM.JJJJ')
+    })
+
+    it('should drop a section its locale names with a logogram', async () => {
+      const { element } = render(() => <VDateInput inputFormat="yyyy/mm/dd" />, null, {
+        locale: { locale: 'ja', messages: { ja } },
+      })
+
+      expect(screen.getByCSS('input')).toHaveAttribute('placeholder', '年/月/日')
+
+      await userEvent.click(element)
+      await userEvent.keyboard('2')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('/月/日')
+
+      await userEvent.keyboard('023')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('2023/月/日')
+    })
+
+    it('should isolate each named section from the ones beside it', async () => {
+      const { element } = render(() => <VDateInput placeholder="سنة/شهر/يوم" inputFormat="yyyy/mm/dd" />)
+
+      await userEvent.click(element)
+      await userEvent.keyboard('2')
+
+      const hint = screen.getByCSS('.v-date-input__format-hint')
+
+      // bidi reorders neighbouring rtl runs, isolation holds each section where the format put it
+      expect([...hint.querySelectorAll('bdi bdi')].map(el => el.textContent)).toEqual(['شهر', 'يوم'])
+    })
+
+    it('should keep hinting the format under a placeholder it cannot line up with', async () => {
+      const { element } = render(() => <VDateInput placeholder="pick a date" inputFormat="dd.mm.yyyy" />)
+
+      await userEvent.click(element)
+      expect(screen.getByCSS('input')).toHaveAttribute('placeholder', 'pick a date')
+
+      await userEvent.keyboard('25')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.mm.yyyy')
     })
 
     it.each<{ props: VDateInput['$props'], keys: string, expected: string }>([

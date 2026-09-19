@@ -519,6 +519,8 @@
   "VSlideGroup": {
     "props": {
       "contentClass": "3.9.0",
+      "gap": "4.3.0",
+      "padding": "4.3.0",
       "scrollDistance": "4.2.0",
       "scrollSnap": "4.2.0",
       "scrollToActive": "3.10.6"
@@ -529,6 +531,9 @@
     "exposed": {
       "hasOverflow": "4.2.0",
       "slide": "4.2.0"
+    },
+    "examples": {
+      "misc-image-slider": "4.3.0"
     }
   },
   "VSnackbar": {
@@ -611,7 +616,8 @@
       "text": "3.2.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
-      "sliderTransitionDuration": "3.11.0"
+      "sliderTransitionDuration": "3.11.0",
+      "sliderVariant": "4.3.0"
     }
   },
   "VTable": {
@@ -629,7 +635,8 @@
       "insetRadius": "3.11.0",
       "spaced": "3.10.0",
       "sliderTransition": "3.11.0",
-      "sliderTransitionDuration": "3.11.0"
+      "sliderTransitionDuration": "3.11.0",
+      "sliderVariant": "4.3.0"
     },
     "slots": {
       "next": "3.11.0",

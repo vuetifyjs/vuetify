@@ -18,6 +18,7 @@
     "nextIcon": "Right pagination icon.",
     "showArrows": "Show pagination arrows if the tab items overflow their container. For mobile devices, arrows will only display when using this prop.",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`.",
+    "sliderVariant": "Shape of the active tab slider. `primary` follows the Material Design 3 primary tab — a thicker slider with rounded leading corners, sized to the tab content instead of the whole tab. Ignored when `inset` is set.",
     "sliderTransition": "Changes slider transition to one of the predefined animation presets.",
     "sliderTransitionDuration": "Applies custom slider transition duration. Default duration depends on transition type (fade: 400, grow: 350, shift: 225).",
     "stacked": "Apply the stacked prop to all children v-tab components."
