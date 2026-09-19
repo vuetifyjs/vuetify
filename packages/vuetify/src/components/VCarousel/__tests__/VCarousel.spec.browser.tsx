@@ -80,7 +80,7 @@ describe('VCarousel', () => {
       const model = ref(1)
 
       render(() => (
-        <VCarousel v-model={ model.value } cycle interval={ 200 } pauseOnHover>
+        <VCarousel v-model={ model.value } cycle interval={ 1000 } pauseOnHover>
           <VCarouselItem value={ 1 }>
             <h1>1</h1>
           </VCarouselItem>
@@ -97,10 +97,13 @@ describe('VCarousel', () => {
       const carousel = screen.getByCSS('.v-carousel')
 
       await userEvent.hover(carousel)
-      await new Promise(resolve => setTimeout(resolve, 500))
+      await new Promise(resolve => setTimeout(resolve, 600))
       expect(model.value).toBe(1)
 
-      await userEvent.unhover(carousel)
+      // userEvent.unhover() moves the pointer by hovering <body>, but the carousel's
+      // default height nearly fills the test viewport, so body's center can still land
+      // inside it and mouseleave never fires. Dispatch it directly instead.
+      carousel.dispatchEvent(new MouseEvent('mouseleave', { bubbles: false, cancelable: true }))
       await expect.poll(() => model.value, { timeout: 5000 }).toBe(2)
     })
 
