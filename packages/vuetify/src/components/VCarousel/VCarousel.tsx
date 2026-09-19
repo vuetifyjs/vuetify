@@ -41,6 +41,7 @@ export const makeVCarouselProps = propsFactory({
     default: 6000,
     validator: (value: string | number) => Number(value) > 0,
   },
+  pauseOnHover: Boolean,
   progress: [Boolean, String],
   verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
 
@@ -84,6 +85,7 @@ export const VCarousel = genericComponent<new <T>(
     const delimiterDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
     let slideTimeout = -1
+    let hovering = false
     watch(model, restartTimeout)
     watch(() => props.interval, restartTimeout)
     watch(() => props.cycle, val => {
@@ -94,7 +96,7 @@ export const VCarousel = genericComponent<new <T>(
     onMounted(startTimeout)
 
     function startTimeout () {
-      if (!props.cycle || !windowRef.value) return
+      if (!props.cycle || !windowRef.value || (props.pauseOnHover && hovering)) return
 
       slideTimeout = window.setTimeout(
         windowRef.value.group.next,
@@ -105,6 +107,16 @@ export const VCarousel = genericComponent<new <T>(
     function restartTimeout () {
       window.clearTimeout(slideTimeout)
       window.requestAnimationFrame(startTimeout)
+    }
+
+    function onMouseenter () {
+      hovering = true
+      if (props.pauseOnHover) window.clearTimeout(slideTimeout)
+    }
+
+    function onMouseleave () {
+      hovering = false
+      if (props.pauseOnHover) restartTimeout()
     }
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
@@ -147,6 +159,8 @@ export const VCarousel = genericComponent<new <T>(
             { height: convertToUnit(props.height) },
             props.style,
           ]}
+          onMouseenter={ onMouseenter }
+          onMouseleave={ onMouseleave }
         >
           {{
             default: slots.default,
