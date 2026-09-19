@@ -326,8 +326,8 @@ export const VCombobox = genericComponent<new <
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
+        menu.value = !menu.value
       }
-      menu.value = !menu.value
     }
     function onMenuKeydown (e: KeyboardEvent) {
       if (e.key === 'Tab') {

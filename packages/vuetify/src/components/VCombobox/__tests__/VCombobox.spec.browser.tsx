@@ -836,6 +836,14 @@ describe('VCombobox', () => {
     await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
   })
 
+  it('should open menu when clicking the menu icon while unfocused', async () => {
+    render(() => <VCombobox items={['foo', 'bar']} openOnFocus closeOnInputClick />)
+
+    await userEvent.click(screen.getByCSS('.v-combobox__menu-icon'))
+
+    await expect.poll(() => screen.queryByRole('listbox')).not.toBeNull()
+  })
+
   it('should create new items when pasting with line break characters', async () => {
     const model = ref(null)
     render(() => (
