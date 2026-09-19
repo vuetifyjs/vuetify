@@ -74,4 +74,58 @@ describe('VCarousel', () => {
       expect(model.value).toBe(1)
     })
   })
+
+  describe('pause-on-hover', () => {
+    it('should pause and resume cycling while the pointer hovers the carousel', async () => {
+      const model = ref(1)
+
+      render(() => (
+        <VCarousel v-model={ model.value } cycle interval={ 200 } pauseOnHover>
+          <VCarouselItem value={ 1 }>
+            <h1>1</h1>
+          </VCarouselItem>
+          <VCarouselItem value={ 2 }>
+            <h1>2</h1>
+          </VCarouselItem>
+          <VCarouselItem value={ 3 }>
+            <h1>3</h1>
+          </VCarouselItem>
+        </VCarousel>
+      ))
+
+      await commands.waitStable('.v-carousel')
+      const carousel = screen.getByCSS('.v-carousel')
+
+      await userEvent.hover(carousel)
+      await new Promise(resolve => setTimeout(resolve, 500))
+      expect(model.value).toBe(1)
+
+      await userEvent.unhover(carousel)
+      await expect.poll(() => model.value, { timeout: 5000 }).toBe(2)
+    })
+
+    it('should keep cycling on hover when pause-on-hover is not set', async () => {
+      const model = ref(1)
+
+      render(() => (
+        <VCarousel v-model={ model.value } cycle interval={ 200 }>
+          <VCarouselItem value={ 1 }>
+            <h1>1</h1>
+          </VCarouselItem>
+          <VCarouselItem value={ 2 }>
+            <h1>2</h1>
+          </VCarouselItem>
+          <VCarouselItem value={ 3 }>
+            <h1>3</h1>
+          </VCarouselItem>
+        </VCarousel>
+      ))
+
+      await commands.waitStable('.v-carousel')
+      const carousel = screen.getByCSS('.v-carousel')
+
+      await userEvent.hover(carousel)
+      await expect.poll(() => model.value, { timeout: 5000 }).toBe(2)
+    })
+  })
 })
