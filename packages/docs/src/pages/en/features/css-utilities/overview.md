@@ -83,11 +83,12 @@ vite-tailwindcss/
 │   │   ├── index.ts
 │   │   └── vuetify.ts              # Vuetify configuration entrypoint
 │   ├── styles/
-│   │   ├── layers.css              # cascade layer order
 │   │   ├── settings.scss           # disables Vuetify's built-in utilities
 │   │   └── tailwind.css            # breakpoints, dark/light variants
 │   ├── App.vue
 │   └── main.ts                     # loads Tailwind stylesheet
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
 ├── index.html
 ├── package.json
 └── vite.config.mts                 # registers Tailwind CSS Vite plugin
@@ -101,10 +102,11 @@ vite-unocss-vuetify/
 │   ├── plugins/
 │   │   └── vuetify.ts              # Vuetify configuration entrypoint
 │   ├── styles/
-│   │   ├── layers.css              # cascade layer order
 │   │   └── settings.scss           # disables Vuetify's built-in utilities
 │   ├── App.vue
 │   └── main.ts                     # loads UnoCSS generated styles
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
 ├── index.html
 ├── package.json
 ├── uno.config.ts                   # Vuetify preset and layer mapping
@@ -119,12 +121,13 @@ vite-unocss-wind4/
 │   ├── plugins/
 │   │   └── vuetify.ts              # Vuetify configuration entrypoint
 │   ├── styles/
-│   │   ├── layers.css              # cascade layer order
 │   │   └── settings.scss           # disables Vuetify's built-in utilities
 │   ├── theme/
 │   │   └── breakpoints.ts          # shared breakpoints for Vuetify and UnoCSS
 │   ├── App.vue
 │   └── main.ts                     # loads UnoCSS generated styles
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
 ├── index.html
 ├── package.json
 ├── uno.config.ts                   # Wind4 preset, dark mode, breakpoints
@@ -136,7 +139,6 @@ nuxt-tailwindcss/
 ├── app/
 │   ├── assets/
 │   │   └── styles/
-│   │       ├── layers.css          # cascade layer order
 │   │       ├── settings.scss       # disables Vuetify's built-in utilities
 │   │       └── tailwind.css        # breakpoints, dark/light variants
 │   ├── components/
@@ -144,7 +146,9 @@ nuxt-tailwindcss/
 │   ├── pages/
 │   │   └── index.vue
 │   └── app.vue
-├── nuxt.config.ts                  # modules and style load order
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
+├── nuxt.config.ts                  # modules and layers.css link
 └── package.json
 ```
 
@@ -153,13 +157,14 @@ nuxt-unocss-vuetify/
 ├── app/
 │   ├── assets/
 │   │   └── styles/
-│   │       ├── layers.css          # cascade layer order
 │   │       └── settings.scss       # disables Vuetify's built-in utilities
 │   ├── components/
 │   │   └── HelloWorld.vue
 │   ├── pages/
 │   │   └── index.vue
 │   └── app.vue
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
 ├── nuxt.config.ts                  # modules, style order, Vuetify preset
 └── package.json
 ```
@@ -169,7 +174,6 @@ nuxt-unocss-wind4/
 ├── app/
 │   ├── assets/
 │   │   └── styles/
-│   │       ├── layers.css          # cascade layer order
 │   │       └── settings.scss       # disables Vuetify's built-in utilities
 │   ├── components/
 │   │   └── HelloWorld.vue
@@ -178,6 +182,8 @@ nuxt-unocss-wind4/
 │   ├── theme/
 │   │   └── breakpoints.ts          # shared breakpoints for Vuetify and UnoCSS
 │   └── app.vue
+├── public/
+│   └── layers.css                  # cascade layer order, linked first
 ├── nuxt.config.ts                  # modules, style order, Wind4 preset
 └── package.json
 ```
