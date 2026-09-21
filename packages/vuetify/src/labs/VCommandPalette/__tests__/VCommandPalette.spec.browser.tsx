@@ -487,7 +487,7 @@ describe('VCommandPalette', () => {
       expect(screen.getByTestId('no-data-slot')).toBeInTheDocument()
     })
 
-    it('should render the list.prepend slot above the list', async () => {
+    it('should render the list.prepend slot', async () => {
       const model = ref(true)
       render(() => (
         <VCommandPalette
@@ -500,9 +500,8 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
-      await wait(100)
 
-      expect(screen.getByTestId('list-prepend-slot')).toBeInTheDocument()
+      await expect(screen.findByTestId('list-prepend-slot')).resolves.toBeInTheDocument()
     })
   })
 
