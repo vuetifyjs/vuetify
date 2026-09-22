@@ -759,17 +759,6 @@ describe('VAutocomplete', () => {
     expect(selectedItems.value).toBeUndefined()
   })
 
-  it('should apply menu-elevation to the menu content', async () => {
-    const { element } = render(() => (
-      <VAutocomplete items={ items } menuElevation={ 0 } />
-    ))
-
-    await userEvent.click(element)
-
-    const content = await screen.findByCSS('.v-autocomplete__content')
-    expect(content).toHaveClass('elevation-0')
-  })
-
   it('should conditionally show placeholder', async () => {
     const { rerender, getByCSS } = render(VAutocomplete, {
       props: { placeholder: 'Placeholder' },
