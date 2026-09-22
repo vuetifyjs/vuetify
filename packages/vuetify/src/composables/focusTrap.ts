@@ -1,6 +1,6 @@
 // Utilities
 import { onScopeDispose, toRef, toValue, watch } from 'vue'
-import { focusableChildren, IN_BROWSER, propsFactory } from '@/util'
+import { focusableChildren, getActiveElement, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -27,7 +27,7 @@ const registry = new Map<symbol, {
 let subscribers = 0
 
 function onKeydown (e: KeyboardEvent) {
-  const activeElement = document.activeElement as HTMLElement | null
+  const activeElement = getActiveElement() as HTMLElement | null
   if (e.key !== 'Tab' || !activeElement) return
 
   const parentTraps = Array.from(registry.values())
@@ -52,11 +52,10 @@ function onKeydown (e: KeyboardEvent) {
 
   if (!focusable.length) return
 
-  const active = document.activeElement as HTMLElement | null
   if (
     focusable.length === 1 &&
     focusable[0].classList.contains('v-list') &&
-    focusable[0].contains(active)
+    focusable[0].contains(activeElement)
   ) {
     e.preventDefault()
     return
@@ -68,8 +67,8 @@ function onKeydown (e: KeyboardEvent) {
   if (
     e.shiftKey &&
     (
-      active === firstElement ||
-      (firstElement.classList.contains('v-list') && firstElement.contains(active))
+      activeElement === firstElement ||
+      (firstElement.classList.contains('v-list') && firstElement.contains(activeElement))
     )
   ) {
     e.preventDefault()
@@ -79,8 +78,8 @@ function onKeydown (e: KeyboardEvent) {
   if (
     !e.shiftKey &&
     (
-      active === lastElement ||
-      (lastElement.classList.contains('v-list') && lastElement.contains(active))
+      activeElement === lastElement ||
+      (lastElement.classList.contains('v-list') && lastElement.contains(activeElement))
     )
   ) {
     e.preventDefault()

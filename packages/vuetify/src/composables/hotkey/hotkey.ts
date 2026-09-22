@@ -3,7 +3,7 @@ import { splitKeyCombination, splitKeySequence } from '@/composables/hotkey/hotk
 
 // Utilities
 import { onScopeDispose, toValue, watch } from 'vue'
-import { IN_BROWSER } from '@/util'
+import { getActiveElement, IN_BROWSER } from '@/util'
 
 // Types
 import type { MaybeRef } from '@/util'
@@ -38,7 +38,7 @@ export function useHotkey (
   function isInputFocused () {
     if (toValue(inputs)) return false
 
-    const activeElement = document.activeElement as HTMLElement
+    const activeElement = getActiveElement() as HTMLElement
 
     return activeElement && (
       activeElement.tagName === 'INPUT' ||

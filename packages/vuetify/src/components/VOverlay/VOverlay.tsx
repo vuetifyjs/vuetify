@@ -38,6 +38,7 @@ import {
   animate,
   convertToUnit,
   genericComponent,
+  getActiveElement,
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
@@ -224,12 +225,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
-        if (!contentEl.value?.contains(document.activeElement)) {
+        if (!contentEl.value?.contains(getActiveElement())) {
           emit('keydown', e)
         }
         if (!props.persistent) {
           isActive.value = false
-          if (contentEl.value?.contains(document.activeElement)) {
+          if (contentEl.value?.contains(getActiveElement())) {
             activatorEl.value?.focus()
           }
         } else animateClick()

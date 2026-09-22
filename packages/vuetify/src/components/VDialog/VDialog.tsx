@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, getActiveElement, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -55,7 +55,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
       if (
         (props.scrim || props.retainFocus) &&
         overlay.value?.contentEl &&
-        !overlay.value.contentEl.contains(document.activeElement)
+        !overlay.value.contentEl.contains(getActiveElement())
       ) {
         overlay.value.contentEl.focus({ preventScroll: true })
       }

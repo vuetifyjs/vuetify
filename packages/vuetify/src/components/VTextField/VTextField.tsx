@@ -18,7 +18,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref, withDirectives } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, getActiveElement, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -114,7 +114,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       if (!isFocused.value) focus()
 
       nextTick(() => {
-        if (inputRef.value !== document.activeElement) {
+        if (inputRef.value !== getActiveElement()) {
           inputRef.value?.focus()
         }
       })

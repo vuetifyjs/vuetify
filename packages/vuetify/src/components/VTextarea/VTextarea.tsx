@@ -21,7 +21,17 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import {
+  callEvent,
+  clamp,
+  convertToUnit,
+  filterInputAttrs,
+  genericComponent,
+  getActiveElement,
+  omit,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -120,7 +130,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
         autocomplete.update()
       }
 
-      if (textareaRef.value !== document.activeElement) {
+      if (textareaRef.value !== getActiveElement()) {
         textareaRef.value?.focus()
       }
 

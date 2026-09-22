@@ -18,6 +18,7 @@ import {
 } from 'vue'
 import {
   bindProps,
+  getActiveElement,
   getCurrentInstance,
   IN_BROWSER,
   matchesSelector,
@@ -218,7 +219,7 @@ export function useActivator (
     if (val && (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
       (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    ) && !contentEl.value?.contains(document.activeElement)) {
+    ) && !contentEl.value?.contains(getActiveElement())) {
       runCloseDelay()
     }
   })
