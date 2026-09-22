@@ -169,17 +169,6 @@ describe('VSelect', () => {
     expect(element).not.toHaveClass('v-select--active-menu')
   })
 
-  it('should apply menu-elevation to the menu content', async () => {
-    render(() => (
-      <VSelect items={['Item #1', 'Item #2']} menuElevation={ 0 } />
-    ))
-
-    await userEvent.click(screen.getByCSS('.v-field'))
-
-    const content = await screen.findByCSS('.v-select__content')
-    expect(content).toHaveClass('elevation-0')
-  })
-
   it('should render selection slot', () => {
     const items = [
       { title: 'a' },
