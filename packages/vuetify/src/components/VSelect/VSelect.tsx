@@ -82,6 +82,7 @@ export const makeSelectProps = propsFactory({
     type: Object as PropType<VList['$props']>,
   },
   menu: Boolean,
+  /** @deprecated use menuProps.contentClass instead */
   menuElevation: [Number, String],
   menuIcon: {
     type: IconValue,
