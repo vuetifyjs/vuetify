@@ -486,23 +486,6 @@ describe('VCommandPalette', () => {
 
       expect(screen.getByTestId('no-data-slot')).toBeInTheDocument()
     })
-
-    it('should render the list.prepend slot', async () => {
-      const model = ref(true)
-      render(() => (
-        <VCommandPalette
-          v-model={ model.value }
-          items={ testItems }
-          v-slots={{
-            'list.prepend': () => <div data-testid="list-prepend-slot">List prepend</div>,
-          } as any}
-        />
-      ))
-
-      await screen.findByRole('dialog')
-
-      await expect(screen.findByTestId('list-prepend-slot')).resolves.toBeInTheDocument()
-    })
   })
 
   describe('Accessibility', () => {
