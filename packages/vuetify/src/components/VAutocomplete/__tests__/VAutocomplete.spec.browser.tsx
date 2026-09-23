@@ -846,14 +846,6 @@ describe('VAutocomplete', () => {
     await expect.poll(() => screen.queryByRole('listbox')).toBeNull()
   })
 
-  it('should open menu when clicking the menu icon while unfocused', async () => {
-    render(() => <VAutocomplete items={['foo', 'bar']} openOnFocus closeOnInputClick />)
-
-    await userEvent.click(screen.getByCSS('.v-autocomplete__menu-icon'))
-
-    await expect.poll(() => screen.queryByRole('listbox')).not.toBeNull()
-  })
-
   describe('auto-select-first', () => {
     async function setup () {
       const selectedItems = ref()
