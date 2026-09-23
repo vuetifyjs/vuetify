@@ -44,9 +44,9 @@ import {
   genericComponent,
   getActiveElement,
   IN_BROWSER,
+  isAutofill,
   isFunction,
   isNumber,
-  matchesSelector,
   omit,
   propsFactory,
   useRender,
@@ -489,11 +489,15 @@ export const VSelect = genericComponent<new <
         isFocused.value = false
       }
     }
+    let isAutofilling = false
+    function onInputCapture (e: Event) {
+      isAutofilling = isAutofill(e)
+    }
     function onModelUpdate (v: any) {
       if (v == null) {
         for (const item of model.value) emit('item:removed', item)
         model.value = []
-      } else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+      } else if (isAutofilling) {
         const item = items.value.find(item => item.title === v || item.value === v)
         if (item) {
           select(item)
@@ -576,6 +580,7 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
+          onInputCapture={ onInputCapture }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >

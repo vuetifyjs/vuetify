@@ -43,10 +43,10 @@ import {
   genericComponent,
   getActiveElement,
   IN_BROWSER,
+  isAutofill,
   isComposingIgnoreKey,
   isFunction,
   isNumber,
-  matchesSelector,
   noop,
   omit,
   propsFactory,
@@ -375,7 +375,7 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onChange (e: Event) {
-      if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
+      if (isAutofill(e)) {
         const value = (e.target as HTMLInputElement).value
         const item = items.value.find(item => item.title === value || item.value === value)
         if (item) {
