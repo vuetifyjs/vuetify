@@ -71,7 +71,7 @@ export default defineNuxtConfig({
 Avoid plain import of `layers.css` from JavaScript or `@import` from another stylesheet. Bundling process usually does not guarantee the same order of stylesheets shipped in production.
 :::
 
-If you compile Vuetify's Sass yourself, for example with `styles.configFile` in `vite-plugin-vuetify`, declare the nested layers in `layers.css` as well:
+Vuetify's stylesheets can also load in any order, so declare its nested layers in `layers.css` as well:
 
 ```css { resource="public/layers.css" }
 @layer vuetify-core {

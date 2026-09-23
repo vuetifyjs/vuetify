@@ -14,7 +14,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import postcss from 'postcss'
-import { compile } from 'sass'
 import { simple as walk } from 'acorn-walk'
 import {
   banner,
@@ -25,10 +24,6 @@ import {
 } from './constants.js'
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
-
-// Bundlers may emit any component stylesheet before main.css, and the first
-// stylesheet to mention a layer fixes its priority, so each file repeats the order
-const layerOrder = compile(path.resolve(srcDir, 'styles/generic/_layers.scss'), { style: 'compressed' }).css + '\n'
 
 /** @type {import("rollup").RollupOptions[]} */
 const options = [
@@ -102,7 +97,7 @@ const options = [
             const relativePath = path.relative(srcDir, id)
             const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
-              writeFile(path.join(out.dir, out.name + '.css'), layerOrder + content, 'utf8')
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
           }
         },
@@ -245,7 +240,7 @@ const options = [
             const relativePath = path.relative(srcDir, id)
             const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
-              writeFile(path.join(out.dir, out.name + '.css'), layerOrder + content, 'utf8')
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
           }
         },
@@ -332,7 +327,7 @@ const options = [
             const relativePath = path.relative(srcDir, id)
             const out = path.parse(path.join(libDir, relativePath))
             mkdirp(out.dir).then(() => {
-              writeFile(path.join(out.dir, out.name + '.css'), layerOrder + content, 'utf8')
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
             })
           }
         },
