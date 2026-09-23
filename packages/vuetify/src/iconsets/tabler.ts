@@ -24,6 +24,7 @@ const aliases: IconAliases = {
   checkboxOn: 'i-tabler:square-check',
   checkboxOff: 'i-tabler:square',
   checkboxIndeterminate: 'i-tabler:square-minus',
+  clock: 'i-tabler:clock',
   delimiter: 'i-tabler:circle-filled', // for carousel
   sortAsc: 'i-tabler:arrow-up',
   sortDesc: 'i-tabler:arrow-down',
