@@ -127,6 +127,9 @@
 
     @include card-line-height-densities($card-title-densities)
 
+    &--wrap
+      white-space: normal
+
     .v-card-item &
       padding: $card-title-header-padding
 
@@ -148,6 +151,9 @@
     white-space: $card-subtitle-white-space
 
     @include card-line-height-densities($card-subtitle-density-line-height)
+
+    &--wrap
+      white-space: normal
 
     .v-card-item &
       padding: $card-subtitle-header-padding

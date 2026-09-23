@@ -68,6 +68,8 @@ export const makeVCardProps = propsFactory({
     type: [String, Number, Boolean],
     default: undefined,
   },
+  titleWrap: Boolean,
+  subtitleWrap: Boolean,
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -212,7 +214,9 @@ export const VCard = genericComponent<VCardSlots>()({
               prependAvatar={ props.prependAvatar }
               prependIcon={ props.prependIcon }
               title={ props.title }
+              titleWrap={ props.titleWrap }
               subtitle={ props.subtitle }
+              subtitleWrap={ props.subtitleWrap }
               appendAvatar={ props.appendAvatar }
               appendIcon={ props.appendIcon }
             >

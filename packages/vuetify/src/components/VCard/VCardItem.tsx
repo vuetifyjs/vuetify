@@ -36,6 +36,8 @@ export const makeCardItemProps = propsFactory({
     type: [String, Number, Boolean],
     default: undefined,
   },
+  titleWrap: Boolean,
+  subtitleWrap: Boolean,
 
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -106,13 +108,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
 
           <div class="v-card-item__content">
             { hasTitle && (
-              <VCardTitle key="title">
+              <VCardTitle key="title" wrap={ props.titleWrap }>
                 { slots.title?.() ?? toDisplayString(props.title) }
               </VCardTitle>
             )}
 
             { hasSubtitle && (
-              <VCardSubtitle key="subtitle">
+              <VCardSubtitle key="subtitle" wrap={ props.subtitleWrap }>
                 { slots.subtitle?.() ?? toDisplayString(props.subtitle) }
               </VCardSubtitle>
             )}

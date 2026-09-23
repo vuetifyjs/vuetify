@@ -7,6 +7,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVCardSubtitleProps = propsFactory({
   opacity: [Number, String],
+  wrap: Boolean,
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -22,6 +23,7 @@ export const VCardSubtitle = genericComponent()({
       <props.tag
         class={[
           'v-card-subtitle',
+          { 'v-card-subtitle--wrap': props.wrap },
           props.class,
         ]}
         style={[

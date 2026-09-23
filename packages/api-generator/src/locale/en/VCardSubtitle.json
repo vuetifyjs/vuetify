@@ -1,0 +1,5 @@
+{
+  "props": {
+    "wrap": "Allows the card subtitle to wrap onto multiple lines."
+  }
+}
