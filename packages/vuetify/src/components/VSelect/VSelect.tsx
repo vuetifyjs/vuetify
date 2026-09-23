@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useAutofill } from './useAutofill'
 import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useSelectionMenu } from './useSelectionMenu'
@@ -174,6 +175,7 @@ export const VSelect = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
 
     const { items, transformIn, transformOut } = useItems(props)
+    const { autofill, resetAutofill } = useAutofill(items, item => select(item))
     const search = useProxiedModel(props, 'search', '')
     const { filteredItems, getMatches } = useFilter(props, items, () => search.value)
     const model = useProxiedModel(
@@ -498,14 +500,13 @@ export const VSelect = genericComponent<new <
         for (const item of model.value) emit('item:removed', item)
         model.value = []
       } else if (isAutofilling) {
-        const item = items.value.find(item => item.title === v || item.value === v)
-        if (item) {
-          select(item)
-        }
+        autofill(v)
       } else if (vTextFieldRef.value) {
         vTextFieldRef.value.value = ''
       }
     }
+
+    watch(isFocused, val => val && resetAutofill())
 
     watch(menu, val => {
       if (!val) {

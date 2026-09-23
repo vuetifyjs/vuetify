@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useAutofill } from '../VSelect/useAutofill'
 import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useSelectionMenu } from '../VSelect/useSelectionMenu'
@@ -150,6 +151,7 @@ export const VAutocomplete = genericComponent<new <
     const selectionIndex = shallowRef(-1)
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
+    const { autofill, resetAutofill } = useAutofill(items, item => select(item))
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
     const search = useProxiedModel(props, 'search', '')
@@ -375,13 +377,7 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onChange (e: Event) {
-      if (isAutofill(e)) {
-        const value = (e.target as HTMLInputElement).value
-        const item = items.value.find(item => item.title === value || item.value === value)
-        if (item) {
-          select(item)
-        }
-      }
+      if (isAutofill(e)) autofill((e.target as HTMLInputElement).value)
     }
 
     function getSelectedIndex () {
@@ -500,6 +496,7 @@ export const VAutocomplete = genericComponent<new <
       if (val === oldVal) return
 
       if (val) {
+        resetAutofill()
         isPristine.value = true
       } else {
         if (!props.multiple && search.value == null) {
