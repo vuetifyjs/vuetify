@@ -577,7 +577,8 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          form=""
+          form={ props.autocomplete === 'suppress' ? '' : undefined }
+          name={ props.autocomplete === 'suppress' ? props.name : undefined }
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
