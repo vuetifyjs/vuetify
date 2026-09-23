@@ -1,6 +1,6 @@
 // Utilities
-import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
+import { computed, inject, onScopeDispose, shallowRef, toRef } from 'vue'
+import { createBreakpoints, getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
@@ -99,18 +99,6 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-function getClientWidth (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerWidth
-    : (isObject(ssr) && ssr.clientWidth) || 0
-}
-
-function getClientHeight (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerHeight
-    : (isObject(ssr) && ssr.clientHeight) || 0
-}
-
 function getPlatform (ssr?: SSROptions): DisplayPlatform {
   const userAgent = IN_BROWSER && !ssr
     ? window.navigator.userAgent
@@ -152,70 +140,61 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = shallowRef(getClientHeight(ssr))
-  const platform = shallowRef(getPlatform(ssr))
-  const state = reactive({} as DisplayInstance)
-  const width = shallowRef(getClientWidth(ssr))
+  // `ssr: true` is the boolean form; createBreakpoints only accepts a size.
+  const ssrSize = isObject(ssr)
+    ? ssr
+    : ssr
+      ? { clientWidth: 0, clientHeight: 0 }
+      : undefined
 
-  function updateSize () {
-    height.value = getClientHeight()
-    width.value = getClientWidth()
-  }
+  const screen = createBreakpoints({
+    breakpoints: thresholds,
+    mobileBreakpoint,
+    ssr: ssrSize,
+  })
+
+  const platform = shallowRef(getPlatform(ssr))
+
   function update () {
-    updateSize()
+    screen.update()
     platform.value = getPlatform()
   }
 
-  // eslint-disable-next-line max-statements
-  watchEffect(() => {
-    const xs = width.value < thresholds.sm
-    const sm = width.value < thresholds.md && !xs
-    const md = width.value < thresholds.lg && !(sm || xs)
-    const lg = width.value < thresholds.xl && !(md || sm || xs)
-    const xl = width.value < thresholds.xxl && !(lg || md || sm || xs)
-    const xxl = width.value >= thresholds.xxl
-    const name =
-      xs ? 'xs'
-      : sm ? 'sm'
-      : md ? 'md'
-      : lg ? 'lg'
-      : xl ? 'xl'
-      : 'xxl'
-    const breakpointValue = isNumber(mobileBreakpoint) ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = width.value < breakpointValue
-
-    state.xs = xs
-    state.sm = sm
-    state.md = md
-    state.lg = lg
-    state.xl = xl
-    state.xxl = xxl
-    state.smAndUp = !xs
-    state.mdAndUp = !(xs || sm)
-    state.lgAndUp = !(xs || sm || md)
-    state.xlAndUp = !(xs || sm || md || lg)
-    state.smAndDown = !(md || lg || xl || xxl)
-    state.mdAndDown = !(lg || xl || xxl)
-    state.lgAndDown = !(xl || xxl)
-    state.xlAndDown = !xxl
-    state.name = name
-    state.height = height.value
-    state.width = width.value
-    state.mobile = mobile
-    state.mobileBreakpoint = mobileBreakpoint
-    state.platform = platform.value
-    state.thresholds = thresholds
-  })
-
+  // Resize stays here. createBreakpointsPlugin subscribes by replacing
+  // app.mount, and createVuetify already owns that hook for the SSR flush.
   if (IN_BROWSER) {
-    window.addEventListener('resize', updateSize, { passive: true })
+    window.addEventListener('resize', screen.update, { passive: true })
 
     onScopeDispose(() => {
-      window.removeEventListener('resize', updateSize)
+      window.removeEventListener('resize', screen.update)
     }, true)
   }
 
-  return { ...toRefs(state), update, ssr: !!ssr }
+  return {
+    xs: screen.xs,
+    sm: screen.sm,
+    md: screen.md,
+    lg: screen.lg,
+    xl: screen.xl,
+    xxl: screen.xxl,
+    smAndUp: screen.smAndUp,
+    mdAndUp: screen.mdAndUp,
+    lgAndUp: screen.lgAndUp,
+    xlAndUp: screen.xlAndUp,
+    smAndDown: screen.smAndDown,
+    mdAndDown: screen.mdAndDown,
+    lgAndDown: screen.lgAndDown,
+    xlAndDown: screen.xlAndDown,
+    name: screen.name,
+    height: screen.height,
+    width: screen.width,
+    mobile: screen.isMobile,
+    mobileBreakpoint: shallowRef(mobileBreakpoint),
+    platform,
+    thresholds: shallowRef(thresholds),
+    ssr: !!ssr,
+    update,
+  } as DisplayInstance
 }
 
 export const makeDisplayProps = propsFactory({
