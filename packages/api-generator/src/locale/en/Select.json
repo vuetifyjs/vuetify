@@ -7,7 +7,7 @@
     "hideSelected": "Do not display in the select menu items that are already selected.",
     "itemColor": "Sets color of selected items.",
     "listProps": "Pass props through to the `v-list` component. Accepts an object with anything from [v-list](/api/v-list/#props) props, camelCase keys are recommended.",
-    "menuElevation": "Sets the elevation of the dropdown menu.",
+    "menuElevation": "Deprecated, use `menu-props` with `contentClass: 'elevation-*'` instead. Sets the elevation of the dropdown menu.",
     "multiple": "Changes select to multiple. Accepts array for value.",
     "noAutoScroll": "Prevents the select menu to scroll to the selected item automatically.",
     "openOnClear": "Open's the menu whenever the clear icon is clicked.",

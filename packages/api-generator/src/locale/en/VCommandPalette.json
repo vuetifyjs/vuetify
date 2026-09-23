@@ -24,7 +24,7 @@
     "input.append-inner": "Content appended inside the search input field. Useful for adding icons or buttons within the input.",
     "append": "Content to render below the items list, inside the command palette card. Useful for footers, keyboard shortcut hints, or additional actions.",
     "no-data": "Custom content to display when no items match the search query. Replaces the default no-data message.",
-    "list.prepend": "Content to prepend to the list component.",
+    "list.prepend": "Content to render above the items list, inside the command palette card.",
     "list.subheader": "Slot for customizing the rendering of subheader items in the list.",
     "item.prepend": "Content to display before each item's title.",
     "item.title": "Slot for customizing the title of each item.",

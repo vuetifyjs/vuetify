@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'August 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/august-hero.png',
+      shortDescription: 'Vuetify 4.2 went into beta on August 27 and stable on September 2. It makes @vuetify/v0 the framework\'s first (and only) runtime dependency. Release included some cleanup and fixes that were too risky for patch releases so you might want to read this post closely. The team improved VDateInput, selection dropdowns, and many improvements landed in v0 for headless DataTable, DataGrid and Alert...',
+      date: 'September 14, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/august-2026-update'),
+    },
+    {
       title: 'July 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/july-2026-update/july-hero.png',
       shortDescription: 'Vuetify0 reached 1.0 on July 22, shipping stable as @vuetify/v0 after 214 merged PRs and a thirteen-component stable spine. Five days later v3.13.0 shipped as the final Vuetify 3 minor and moved the line into long-term support through July 2027, on a window now shortened from eighteen months to twelve. The v4.1 patch line shipped five releases underneath both, fixing focus resolution in Shadow DOM, two defaults-inheritance leaks, and a run of select-family reports...',
