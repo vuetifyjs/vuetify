@@ -31,15 +31,15 @@ Your own styles will always override vuetify's if you don't use `@layer` yoursel
 
 ## Custom layer order
 
-Vuetify's layers must remain in the same order for everything to display correctly, but you can add your own between or around them:
+Vuetify's layers must remain in the same order for everything to display correctly, but you can add your own layers before, between or at the end:
 
 ```css { resource="public/layers.css" }
-@layer base,
+@layer my-base,
   vuetify-core,
   vuetify-components,
-  components,
+  my-components,
   vuetify-overrides,
-  overrides,
+  my-overrides,
   vuetify-utilities,
   vuetify-final;
 ```
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
 ```
 
 ::: warning
-Do not import `layers.css` from JavaScript or `@import` it from another stylesheet. Bundled stylesheets can be loaded in any order.
+Avoid plain import of `layers.css` from JavaScript or `@import` from another stylesheet. Bundling process usually does not guarantee the same order of stylesheets shipped in production.
 :::
 
 If you compile Vuetify's Sass yourself, for example with `styles.configFile` in `vite-plugin-vuetify`, declare the nested layers in `layers.css` as well:
