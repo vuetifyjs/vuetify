@@ -1,6 +1,8 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+$bar-transition: width $progress-linear-transition, left $progress-linear-transition, right $progress-linear-transition
+
 @property --v-progress-indeterminate-long-left
   syntax: "<percentage>"
   inherits: true
@@ -21,6 +23,8 @@
 @include tools.layer('components')
   // Block
   .v-progress-linear
+    --v-progress-linear-transition-duration: #{$progress-linear-transition-duration}
+
     background: transparent
     overflow: hidden
     position: relative
@@ -49,10 +53,7 @@
     position: absolute
     top: 0
     width: 100%
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   @include tools.layer('trumps')
     @media (forced-colors: active)
@@ -86,10 +87,7 @@
     height: inherit
     left: 0
     position: absolute
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   .v-progress-linear__indeterminate
     animation-play-state: paused
@@ -103,6 +101,7 @@
       position: absolute
       top: 0
       width: auto
+      animation-name: none // avoid glitch on Firefox
 
     .long
       left: var(--v-progress-indeterminate-long-left)
@@ -138,14 +137,12 @@
     opacity: $progress-linear-stream-opacity
     pointer-events: none
     position: absolute
-    transition-property: width, left, right
-    transition-duration: inherit
-    transition-timing-function: inherit
-    transition-delay: inherit
+    transition: $bar-transition
 
   // Modifiers
   .v-progress-linear--reverse
     .v-progress-linear__background,
+    .v-progress-linear__buffer,
     .v-progress-linear__determinate,
     .v-progress-linear__content
       left: auto
@@ -173,6 +170,15 @@
     .v-progress-linear__stream
       right: auto
 
+  .v-progress-linear--revealing
+    --v-progress-reveal-duration: #{$progress-linear-reveal-duration}
+
+    .v-progress-linear__determinate
+      transition-duration: var(--v-progress-reveal-duration)
+
+  .v-progress-linear--no-transition
+    --v-progress-linear-transition-duration: 0s
+
   .v-progress-linear--absolute,
   .v-progress-linear--fixed
     left: 0
@@ -183,14 +189,6 @@
 
   .v-progress-linear--fixed
     position: fixed
-
-  .v-progress-linear--rounded
-    @include tools.rounded($progress-linear-border-radius)
-
-    &.v-progress-linear--rounded-bar
-      .v-progress-linear__determinate,
-      .v-progress-linear__indeterminate
-        border-radius: inherit
 
   .v-progress-linear--striped
     .v-progress-linear__determinate
@@ -209,12 +207,24 @@
   .v-progress-linear--rounded-bar
     .v-progress-linear__determinate,
     .v-progress-linear__indeterminate,
+    .v-progress-linear__buffer,
     .v-progress-linear__stream + .v-progress-linear__background
       @include tools.rounded($progress-linear-border-radius)
 
-    .v-progress-linear__determinate
-      border-start-start-radius: 0
-      border-end-start-radius: 0
+    .v-progress-linear__determinate,
+    .v-progress-linear__buffer
+      border-radius: 0 $progress-linear-border-radius $progress-linear-border-radius 0
+
+    &.v-progress-linear--reverse
+      .v-progress-linear__determinate,
+      .v-progress-linear__buffer
+        border-radius: $progress-linear-border-radius 0 0 $progress-linear-border-radius
+
+  .v-progress-linear--rounded.v-progress-linear--rounded-bar
+    .v-progress-linear__determinate,
+    .v-progress-linear__indeterminate,
+    .v-progress-linear__buffer
+      border-radius: inherit
 
   // Keyframes
   @keyframes indeterminate-ltr

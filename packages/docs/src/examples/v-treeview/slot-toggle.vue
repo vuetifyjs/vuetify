@@ -24,6 +24,8 @@
           v-bind="toggleProps"
           :color="isIndeterminate ? 'warning' : isSelected ? 'success' : 'medium-emphasis'"
           :variant="isOpen ? 'outlined' : 'tonal'"
+          aria-hidden="true"
+          tabindex="-1"
         ></v-btn>
       </v-badge>
     </template>

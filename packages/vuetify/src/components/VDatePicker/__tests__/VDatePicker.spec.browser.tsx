@@ -118,4 +118,15 @@ describe('VDatePicker', () => {
     expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
     expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
   })
+
+  it('previews the hovered end of a range', async () => {
+    render(() => (
+      <VDatePicker multiple="range" modelValue={[new Date(2025, 3, 8)]} />
+    ))
+
+    const $days = await screen.findAllByCSS('.v-date-picker-month__day-btn')
+    await userEvent.hover($days[15])
+
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview').length).toBeGreaterThan(0)
+  })
 })

@@ -4,9 +4,12 @@ import { VBtn } from '@/components/VBtn/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { makeVListItemProps, VListItem } from '@/components/VList/VListItem'
 
+// Composables
+import { injectNestedDefaults } from '@/composables/defaults'
+
 // Utilities
 import { computed, ref, watchEffect } from 'vue'
-import { genericComponent, humanReadableFileSize, propsFactory, useRender } from '@/util'
+import { genericComponent, humanReadableFileSize, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -49,8 +52,9 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
   },
 
   setup (props, { emit, slots }) {
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
     const preview = ref()
-    const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
+    const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
 
     function onClickRemove () {
       emit('click:remove')
@@ -110,7 +114,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                       <VBtn
                         icon="$clear"
                         density="comfortable"
-                        variant="text"
+                        variant={ btnDefaults.value?.variant ?? 'text' }
                         onClick={ onClickRemove }
                       />
                     ) : (
@@ -119,7 +123,7 @@ export const VFileUploadItem = genericComponent<VFileUploadItemSlots>()({
                           VBtn: {
                             icon: '$clear',
                             density: 'comfortable',
-                            variant: 'text',
+                            variant: btnDefaults.value?.variant ?? 'text',
                           },
                         }}
                       >

@@ -94,7 +94,7 @@ export default {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',
     appendAction: 'Akcia za {0}',
-    otp: 'Prosím zadajte OTP znak {0}',
+    otp: 'Zadajte verifikačný kód',
   },
   fileInput: {
     counter: '{0} súborov',

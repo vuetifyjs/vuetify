@@ -1,7 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, toRef } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
-
 // Types
 import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
@@ -32,12 +31,11 @@ export interface LocaleInstance {
 
 export const LocaleSymbol: InjectionKey<LocaleInstance & RtlInstance> = Symbol.for('vuetify:locale')
 
-function isLocaleInstance (obj: any): obj is LocaleInstance {
-  return obj.name != null
-}
-
 export function createLocale (options?: LocaleOptions & RtlOptions) {
-  const i18n = options?.adapter && isLocaleInstance(options?.adapter) ? options?.adapter : createVuetifyAdapter(options)
+  const i18n = options?.adapter?.name
+    ? options.adapter
+    : createVuetifyAdapter(options)
+
   const rtl = createRtl(i18n, options)
 
   return { ...i18n, ...rtl }

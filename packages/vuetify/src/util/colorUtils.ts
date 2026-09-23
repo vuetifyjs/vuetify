@@ -2,10 +2,12 @@
 import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
+import { isObject } from '@/util'
 import * as CIELAB from '@/util/color/transformCIELAB'
 import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
+import { isNullOrUndefined, isNumber, isString } from './v0'
 import type { Colors } from '@/composables/theme'
 
 export type XYZ = [number, number, number]
@@ -35,7 +37,7 @@ const mappers = {
 }
 
 export function parseColor (color: Color): RGB {
-  if (typeof color === 'number') {
+  if (isNumber(color)) {
     if (isNaN(color) || color < 0 || color > 0xFFFFFF) { // int can't have opacity
       consoleWarn(`'${color}' is not a valid hex color`)
     }
@@ -45,7 +47,7 @@ export function parseColor (color: Color): RGB {
       g: (color & 0xFF00) >> 8,
       b: (color & 0xFF),
     }
-  } else if (typeof color === 'string' && cssColorRe.test(color)) {
+  } else if (isString(color) && cssColorRe.test(color)) {
     const { groups } = color.match(cssColorRe)!
     const { fn, values } = groups as { fn: keyof typeof mappers, values: string }
     const realValues = values.split(/,\s*|\s*\/\s*|\s+/)
@@ -62,7 +64,7 @@ export function parseColor (color: Color): RGB {
       }) as [number, number, number, number?]
 
     return mappers[fn](...realValues)
-  } else if (typeof color === 'string') {
+  } else if (isString(color)) {
     let hex = color.startsWith('#') ? color.slice(1) : color
 
     if ([3, 4].includes(hex.length)) {
@@ -77,7 +79,7 @@ export function parseColor (color: Color): RGB {
     }
 
     return HexToRGB(hex as Hex)
-  } else if (typeof color === 'object') {
+  } else if (isObject(color)) {
     if (has(color, ['r', 'g', 'b'])) {
       return color
     } else if (has(color, ['h', 's', 'l'])) {
@@ -87,7 +89,7 @@ export function parseColor (color: Color): RGB {
     }
   }
 
-  throw new TypeError(`Invalid color: ${color == null ? color : (String(color) || (color as any).constructor.name)}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number`)
+  throw new TypeError(`Invalid color: ${isNullOrUndefined(color) ? color : (String(color) || (color as any).constructor.name)}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number`)
 }
 
 export function RGBToInt (color: RGB) {
@@ -184,7 +186,7 @@ export function HSLtoHSV (hsl: HSL): HSV {
 }
 
 export function RGBtoCSS ({ r, g, b, a }: RGB): string {
-  return a === undefined ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`
+  return isNumber(a) ? `rgb(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`
 }
 
 export function HSVtoCSS (hsva: HSV): string {
@@ -201,14 +203,14 @@ export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
     toHex(r),
     toHex(g),
     toHex(b),
-    a !== undefined ? toHex(Math.round(a * 255)) : '',
+    isNumber(a) ? toHex(Math.round(a * 255)) : '',
   ].join('')}` as Hex
 }
 
 export function HexToRGB (hex: Hex): RGB {
   hex = parseHex(hex)
   let [r, g, b, a] = chunk(hex, 2).map((c: string) => parseInt(c, 16))
-  a = a === undefined ? a : (a / 255)
+  a = isNumber(a) ? a / 255 : a
 
   return { r, g, b, a }
 }

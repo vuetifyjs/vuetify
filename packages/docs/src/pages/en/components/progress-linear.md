@@ -99,6 +99,12 @@ This applies a striped background over the value portion of the `v-progress-line
 
 <ExamplesExample file="v-progress-linear/prop-striped" />
 
+#### Transition
+
+The **transition** prop controls how long the bar takes to animate to a new value. Pass `{ duration }` in milliseconds or as a CSS duration string, or `false` to remove the transition.
+
+<ExamplesExample file="v-progress-linear/prop-transition" />
+
 ### Slots
 
 #### Default

@@ -1,6 +1,6 @@
 // Utilities
 import { computed, shallowRef, watchEffect } from 'vue'
-import { deepEqual, getPropertyFromItem, isPrimitive, omit, pick, propsFactory } from '@/util'
+import { deepEqual, getPropertyFromItem, isNull, isObject, isPrimitive, isString, omit, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -69,7 +69,7 @@ export function transformItem (
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
-    ? typeof item === 'object' && item != null && !Array.isArray(item)
+    ? isObject(item)
       ? 'children' in item
         ? omit(item, ['children'])
         : item
@@ -122,7 +122,7 @@ export function transformItems (
 
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
-  const hasNullItem = computed(() => items.value.some(item => item.value === null))
+  const hasNullItem = computed(() => items.value.some(item => isNull(item.value)))
 
   const itemsMap = shallowRef<Map<Primitive, ListItem[]>>(new Map())
   const keylessItems = shallowRef<ListItem[]>([])
@@ -132,7 +132,7 @@ export function useItems (props: ItemProps) {
     const keyless = []
     for (let i = 0; i < _items.length; i++) {
       const item = _items[i]
-      if (isPrimitive(item.value) || item.value === null) {
+      if (isPrimitive(item.value) || isNull(item.value)) {
         let values = map.get(item.value)
         if (!values) {
           values = []
@@ -163,11 +163,11 @@ export function useItems (props: ItemProps) {
     main: for (const v of value) {
       // When the model value is null, return an InternalItem
       // based on null only if null is one of the items
-      if (!_hasNullItem && v === null) continue
+      if (!_hasNullItem && isNull(v)) continue
 
       // String model value means value is a custom input value from combobox
       // Don't look up existing items if the model value is a string
-      if (_returnObject && typeof v === 'string') {
+      if (_returnObject && isString(v)) {
         returnValue.push(transformItem(_props, v))
         continue
       }

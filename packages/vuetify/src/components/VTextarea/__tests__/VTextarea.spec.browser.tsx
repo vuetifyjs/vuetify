@@ -76,9 +76,9 @@ describe('VTextarea', () => {
       <VTextarea hideDetails="auto" counter></VTextarea>
     ))
 
-    expect(queryByCSS('.v-input__details')).toBeNull()
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
 
     await userEvent.click(element)
-    expect(queryByCSS('.v-input__details')).not.toBeNull()
+    expect(queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
 })

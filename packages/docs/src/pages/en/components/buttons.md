@@ -267,7 +267,7 @@ Make fine tuned changes by modifying the `v-btn` [SASS variables](/features/sass
 
 ```scss { resource="src/settings.scss" }
 @use 'vuetify/settings' with (
-  $button-banner-actions-padding: 16px,
+  $button-border-radius: 16px,
   $button-height: 32px,
 );
 ```
@@ -338,7 +338,18 @@ The following properties are modified when used within a `v-btn-group` component
 | **height** | `auto` |
 | **density** | provided by `v-btn-group` |
 | **flat** | `true` |
+| **size** | provided by `v-btn-group` (requires [v3.13.0](/getting-started/release-notes/?version=v3.13.0) or [v4.2.0](/getting-started/release-notes/?version=v4.2.0)) |
 | **variant** | provided by `v-btn-group` |
+
+#### Size{ #btn-group-size }
+
+When **size** is set on the group, child buttons inherit it and the group height matches a standalone button of the same size:
+
+::: info
+This feature requires [v3.13.0](/getting-started/release-notes/?version=v3.13.0) or [v4.2.0](/getting-started/release-notes/?version=v4.2.0)
+:::
+
+<ExamplesExample file="v-btn/defaults-btn-group-size" />
 
 ### Cards
 

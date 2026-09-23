@@ -1,5 +1,6 @@
 // Utilities
 import { computed, inject, toRef } from 'vue'
+import { isString } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
@@ -48,7 +49,7 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       }
     },
     email: (err?: string) => {
-      return (v: any) => (!v || (typeof v === 'string' && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
+      return (v: any) => (!v || (isString(v) && /^.+@\S+\.\S+$/.test(v))) || t(err || '$vuetify.rules.email')
     },
     number: (err?: string) => {
       return (v: string) => !v || !isNaN(Number(v)) || t(err || '$vuetify.rules.number')
@@ -94,11 +95,11 @@ export function createRules (options: RulesOptions | undefined, locale: LocaleIn
       if (Array.isArray(rule)) {
         ruleName = rule[0]
         ruleParams = rule.slice(1) as ValidationRuleParams
-      } else if (typeof rule === 'string') {
+      } else if (isString(rule)) {
         ruleName = rule
       }
 
-      if (ruleName !== null) {
+      if (ruleName) {
         if (ruleName.startsWith('$')) {
           ruleName = ruleName.slice(1)
         }

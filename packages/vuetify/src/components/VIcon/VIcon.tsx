@@ -11,7 +11,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 
 // Utilities
 import { shallowRef, Text } from 'vue'
-import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, flattenFragments, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -44,7 +44,7 @@ export const VIcon = genericComponent()({
       const slotValue = slots.default?.()
       if (slotValue) {
         slotIcon.value = flattenFragments(slotValue).filter(node =>
-          node.type === Text && node.children && typeof node.children === 'string'
+          node.type === Text && node.children && isString(node.children)
         )[0]?.children as string
       }
       const hasClick = !!(attrs.onClick || attrs.onClickOnce)

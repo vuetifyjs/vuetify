@@ -1,5 +1,5 @@
 // Composables
-import { defaultFilter, filterItems, useFilter } from '../filter'
+import { createDefaultFilter, defaultFilter, filterItems, useFilter } from '../filter'
 import { transformItem, transformItems } from '../list-items'
 
 // Utilities
@@ -30,6 +30,34 @@ describe('filter', () => {
     ])('should compare %s to %s and return a match result', (text, query, expected) => {
       // @ts-expect-error
       expect(defaultFilter(text, query)).toStrictEqual(expected)
+    })
+
+    it('does not fold accents by default', () => {
+      expect(defaultFilter('café', 'cafe')).toBe(-1)
+    })
+
+    describe('ignoreAccents', () => {
+      it("folds both sides when true ('cafe' finds 'café', ranges map to the original)", () => {
+        expect(createDefaultFilter(true)('café', 'cafe')).toStrictEqual([[0, 4]])
+      })
+
+      it('maps ranges back to a decomposed source string', () => {
+        const decomposed = 'cafe\u0301' // 'cafe' + combining acute => 5 code units
+        expect(decomposed).toHaveLength(5)
+        expect(createDefaultFilter(true)(decomposed, 'cafe')).toStrictEqual([[0, 5]])
+      })
+
+      it("'target' finds accented entries from a plain query", () => {
+        expect(createDefaultFilter('target')('Łódź', 'odz')).toStrictEqual([[1, 4]])
+      })
+
+      it("'target' keeps the query accented", () => {
+        expect(createDefaultFilter('target')('London', 'Łó')).toBe(-1)
+      })
+
+      it("'query' folds an accented query to match plain text", () => {
+        expect(createDefaultFilter('query')('cafe', 'café')).toStrictEqual([[0, 4]])
+      })
     })
   })
 

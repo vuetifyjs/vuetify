@@ -7,7 +7,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
-import { clamp, createRange, getDecimals, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, createRange, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
@@ -101,7 +101,7 @@ export const makeSliderProps = propsFactory({
   thumbLabel: {
     type: [Boolean, String] as PropType<boolean | 'always' | 'hover' | undefined>,
     default: undefined,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always' || v === 'hover',
+    validator: (v: any) => isBoolean(v) || v === 'always' || v === 'hover',
   },
   thumbSize: {
     type: [Number, String],
@@ -110,7 +110,7 @@ export const makeSliderProps = propsFactory({
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
     default: false,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => isBoolean(v) || v === 'always',
   },
   ticks: {
     type: [Array, Object] as PropType<readonly number[] | Record<number, string>>,

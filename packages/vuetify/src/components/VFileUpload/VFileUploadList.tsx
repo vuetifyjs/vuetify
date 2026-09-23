@@ -5,7 +5,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvi
 import { makeVListProps, VList } from '@/components/VList/VList'
 
 // Utilities
-import { inject } from 'vue'
+import { createCommentVNode, inject } from 'vue'
 import { getFileKey } from './fileKey'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
@@ -49,7 +49,7 @@ export const VFileUploadList = genericComponent<VFileUploadListSlots>()({
       const readonly = context?.readonly.value ?? false
       const listProps = VList.filterProps(props)
 
-      if (!slots.default && !files.length) return (<></>)
+      if (!slots.default && !files.length) return createCommentVNode()
 
       return (
         <VList

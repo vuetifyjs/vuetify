@@ -41,7 +41,7 @@ Although treeshaking is automatically applied during production builds, it is ad
 
 ## Virtual component defaults
 
-Virtual components have access to the Vuetify [Global configuration](/features/global-configuration/). Default settings for aliases are defined the same as built-in components with no extra steps required by you. In the following example, **MyButton** uses [v-btn props](/api/v-btn/#props) to change it's default **variant**:
+Virtual components have access to the Vuetify [Global configuration](/features/global-configuration/). Default settings for aliases are defined the same as built-in components with no extra steps required by you. In the following example, **MyButton** uses [v-btn props](/api/v-btn/#props) to change its default **variant**:
 
 ```js { resource="src/plugins/vuetify.js"}
 import { createVuetify } from 'vuetify'

@@ -6,7 +6,7 @@ import {
   resolveDynamicComponent,
   toRef,
 } from 'vue'
-import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
+import { deepEqual, getCurrentInstance, hasEvent, IN_BROWSER, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref, SetupContext } from 'vue'
@@ -62,7 +62,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
     return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
-  if (typeof RouterLink === 'string' || !('useLink' in RouterLink)) {
+  if (isString(RouterLink) || !('useLink' in RouterLink)) {
     const href = toRef(() => props.href)
     return {
       isLink,
@@ -85,6 +85,13 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
   const route = useRoute()
   const isActive = computed(() => {
     if (!link.value) return false
+    // router still resolving initial navigation, according to posva:
+    // - START_LOCATION has an empty matched array and its name is undefined (unlike 404 Not Page Found)
+    // - if the router is still resolving the initial boot, we bypass the active check and returns
+    //   isExactActive ?? false to prevent the flashing overlay on page refresh
+    if (route.value && route.value.matched.length === 0 && route.value.name == null) {
+      return link.value.isExactActive?.value ?? false
+    }
     if (!props.exact) return link.value.isActive?.value ?? false
     if (!route.value) return link.value.isExactActive?.value ?? false
 

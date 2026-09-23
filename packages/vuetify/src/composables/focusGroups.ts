@@ -1,6 +1,6 @@
 // Utilities
 import { toValue } from 'vue'
-import { focusableChildren } from '@/util'
+import { focusableChildren, getActiveElement, isNull } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -36,7 +36,7 @@ export function useFocusGroups ({ groups, onLeave }: {
 
     const nextIndex = nextFocusGroup(children, currentGroupIndex, direction, target)
 
-    if (nextIndex === null) {
+    if (isNull(nextIndex)) {
       const originGroup = groups[currentGroupIndex]
       const origin = children[currentGroupIndex]
       const isListGroup = originGroup.type === 'list'
@@ -49,6 +49,12 @@ export function useFocusGroups ({ groups, onLeave }: {
 
       if (atEdge) {
         onLeave()
+        const refocused = getActiveElement() as HTMLElement | null
+        if (refocused) {
+          const relayed = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: e.shiftKey, bubbles: true, cancelable: true })
+          refocused.dispatchEvent(relayed) // let list or treeview handle the navigation
+          if (relayed.defaultPrevented) e.preventDefault()
+        }
       }
     } else {
       e.preventDefault()

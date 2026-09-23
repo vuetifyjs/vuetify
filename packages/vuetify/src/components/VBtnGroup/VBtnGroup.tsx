@@ -8,6 +8,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
@@ -32,6 +33,7 @@ export const makeVBtnGroupProps = propsFactory({
   ...makeDensityProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
+  ...makeSizeProps({ size: undefined }),
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps(),
@@ -51,11 +53,12 @@ export const VBtnGroup = genericComponent()({
 
     provideDefaults({
       VBtn: {
-        height: toRef(() => props.direction === 'horizontal' ? 'auto' : null),
+        height: toRef(() => props.direction === 'horizontal' && props.size == null ? 'auto' : null),
         baseColor: toRef(() => props.baseColor),
         color: toRef(() => props.color),
         density: toRef(() => props.density),
         flat: true,
+        size: toRef(() => props.size),
         variant: toRef(() => props.variant),
       },
     })
@@ -68,6 +71,7 @@ export const VBtnGroup = genericComponent()({
             `v-btn-group--${props.direction}`,
             {
               'v-btn-group--divided': props.divided,
+              'v-btn-group--has-size': props.size != null,
             },
             themeClasses.value,
             borderClasses.value,

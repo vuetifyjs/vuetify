@@ -19,7 +19,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { toDisplayString } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -205,7 +205,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
             <span key="loader" class="v-icon-btn__loader">
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate="disable-shrink"
                   width="2"
                   size={ iconSize.value }

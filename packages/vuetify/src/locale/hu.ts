@@ -94,7 +94,7 @@ export default {
     clear: 'Törlés {0}',
     prependAction: '{0} előrehozott művelet',
     appendAction: '{0} hozzáadott művelet',
-    otp: 'Kérjük, adja meg az OTP karaktert: {0}',
+    otp: 'Adja meg az ellenőrző kódot',
   },
   fileInput: {
     counter: '{0} fájl',

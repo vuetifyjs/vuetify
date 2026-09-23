@@ -5,8 +5,9 @@
   .v-tab
     @include tools.layer('overrides')
       height: var(--v-tabs-height)
-      border-radius: $tab-border-radius
+      border-radius: var(--v-tabs-inset-radius, #{$tab-border-radius})
       min-width: $tab-min-width
+      overflow: visible
 
     .v-slide-group--horizontal &
       max-width: $tab-max-width

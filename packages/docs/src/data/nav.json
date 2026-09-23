@@ -55,6 +55,7 @@
       "hotkey",
       "icon-fonts",
       "internationalization",
+      "rules",
       "scrolling",
       "sass-variables",
       "theme",
@@ -309,10 +310,6 @@
       {
         "title": "videos",
         "subfolder": "components"
-      },
-      {
-        "title": "rules",
-        "subfolder": "features"
       }
     ]
   },

@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
@@ -132,6 +132,8 @@ export const VDatePicker = genericComponent<new <
     )
 
     const viewMode = useProxiedModel(props, 'viewMode')
+    // owns the hover preview so VDatePickerMonth isn't handed a prop nobody writes back
+    const previewValue = useProxiedModel(props, 'previewValue')
     // const inputMode = useProxiedModel(props, 'inputMode')
 
     const { minDate, maxDate, clampDate } = useCalendarRange(props)
@@ -238,7 +240,7 @@ export const VDatePicker = genericComponent<new <
 
     function isAllowedInRange (start: unknown, end: unknown) {
       const allowedDates = props.allowedDates
-      if (typeof allowedDates !== 'function') return true
+      if (!isFunction(allowedDates)) return true
 
       const days = 1 + daysDiff(adapter, start, end)
 
@@ -249,7 +251,7 @@ export const VDatePicker = genericComponent<new <
     }
 
     function isYearAllowed (year: number) {
-      if (typeof props.allowedDates === 'function') {
+      if (isFunction(props.allowedDates)) {
         const startOfYear = adapter.parseISO(`${year}-01-01`)
         return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
       }
@@ -265,7 +267,7 @@ export const VDatePicker = genericComponent<new <
     }
 
     function isMonthAllowed (month: number) {
-      if (typeof props.allowedDates === 'function') {
+      if (isFunction(props.allowedDates)) {
         const monthTwoDigits = String(month + 1).padStart(2, '0')
         const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
         return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
@@ -509,7 +511,7 @@ export const VDatePicker = genericComponent<new <
                       v-model:year={ year.value }
                       onUpdate:month={ onUpdateMonth }
                       onUpdate:year={ onUpdateYear }
-                      onUpdate:previewValue={ (value: any) => emit('update:previewValue', value) }
+                      v-model:previewValue={ previewValue.value }
                       onBoundaryNavigate={ (payload: any) => emit('boundary-navigate', payload) }
                       min={ minDate.value }
                       max={ maxDate.value }

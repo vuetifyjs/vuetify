@@ -7,12 +7,13 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender } from '@/util'
+import { genericComponent, isNumber, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -84,11 +85,12 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const selectDefaults = injectNestedDefaults<VSelect['$props']>('VSelect')
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
       props.itemsPerPageOptions.map(option => {
-        if (typeof option === 'number') {
+        if (isNumber(option)) {
           return {
             value: option,
             title: option === -1
@@ -120,7 +122,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               modelValue={ itemsPerPage.value }
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
-              variant="outlined"
+              variant={ selectDefaults.value?.variant ?? 'outlined' }
               aria-label={ t(props.itemsPerPageText) }
               hideDetails
             />

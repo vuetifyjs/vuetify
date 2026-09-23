@@ -19,7 +19,7 @@ import { makeSizeProps } from '@/composables/size'
 
 // Utilities
 import { ref, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, isString, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -103,7 +103,7 @@ export const VSwitch = genericComponent<new <T>(
     const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
 
     const loaderColor = toRef(() => {
-      return typeof props.loading === 'string' && props.loading !== ''
+      return isString(props.loading) && props.loading !== ''
         ? props.loading
         : props.color
     })

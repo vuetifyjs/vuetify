@@ -84,6 +84,10 @@
       path: 'cookie-policy',
     },
     {
+      href: '/en/legal/mcp-privacy/',
+      path: 'mcp-privacy-policy',
+    },
+    {
       href: 'mailto:hello@vuetifyjs.com',
       path: 'contact-us',
     },

@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { convertToUnit, genericComponent, getActiveElement, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, getActiveElement, isFunction, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -257,7 +257,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         // Use requestAnimationFrame to ensure DOM is fully rendered
         nextTick(() => {
           requestAnimationFrame(() => {
-            if (searchInputRef.value && typeof searchInputRef.value.focus === 'function') {
+            if (searchInputRef.value && isFunction(searchInputRef.value.focus)) {
               searchInputRef.value.focus()
             }
           })
@@ -322,10 +322,12 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               </div>
 
                 <div class="v-command-palette__content">
+                  { slots['list.prepend']?.() }
+
                   { filteredItems.value.length > 0 ? (
                     <VList
                       key="list"
-                      class="v-command-palette__list"
+                      class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }
                       itemType="type"
@@ -336,7 +338,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }
                       v-slots={{
-                        prepend: slots['list.prepend'],
                         subheader: slots['list.subheader'],
                         item: ({ props: itemProps }: { props: any }) => (
                           slots.item?.({ item: itemProps, index: itemProps.index }) ?? (

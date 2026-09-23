@@ -1,7 +1,7 @@
 // Composables
 import { createIcons } from './icons'
 import { createDate, DateAdapterSymbol, DateOptionsSymbol } from '@/composables/date/date'
-import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
+import { createDefaults, DefaultsSymbol, RootDefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createGoTo, GoToSymbol } from '@/composables/goto'
 import { IconSymbol } from '@/composables/icons'
@@ -86,6 +86,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
       app.onUnmount(() => appScope.stop())
 
       app.provide(DefaultsSymbol, defaults)
+      app.provide(RootDefaultsSymbol, defaults)
       app.provide(DisplaySymbol, display)
       app.provide(ThemeSymbol, theme)
       app.provide(IconSymbol, icons)

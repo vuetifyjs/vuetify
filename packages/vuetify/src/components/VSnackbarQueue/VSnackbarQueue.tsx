@@ -11,7 +11,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef, toRef, triggerRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, isString, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, VNodeProps } from 'vue'
@@ -165,7 +165,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
 
-      const item = typeof next === 'string' ? { text: next } : next
+      const item = isString(next) ? { text: next } : next
       const { promise, success, error, onDismiss, ...itemProps } = item
 
       const newItem: SnackbarQueueItem = {
@@ -215,7 +215,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     }
 
     const btnProps = computed(() => ({
-      color: typeof props.closable === 'string' ? props.closable : undefined,
+      color: isString(props.closable) ? props.closable : undefined,
       text: t(props.closeText),
     }))
 

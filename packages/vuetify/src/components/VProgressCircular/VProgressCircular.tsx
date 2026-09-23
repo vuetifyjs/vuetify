@@ -13,7 +13,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,6 +30,10 @@ export const makeVProgressCircularProps = propsFactory({
   rotate: {
     type: [Number, String],
     default: 0,
+  },
+  transition: {
+    type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
+    default: undefined,
   },
   width: {
     type: [Number, String],
@@ -68,6 +72,9 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
 
     const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
     const width = toRef(() => Number(props.width))
+    const transitionDuration = toRef(() => props.transition === false ? undefined : convertToUnit(
+      isObject(props.transition) ? props.transition.duration : undefined, 'ms'
+    ))
     const size = toRef(() => {
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
@@ -107,6 +114,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             'v-progress-circular--disable-shrink': props.indeterminate &&
               (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
             'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),
+            'v-progress-circular--no-transition': props.transition === false,
           },
           themeClasses.value,
           sizeClasses.value,
@@ -117,7 +125,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           sizeStyles.value,
           textColorStyles.value,
           {
-            '--progress-reveal-duration': `${revealDuration.value}ms`,
+            '--v-progress-reveal-duration': `${revealDuration.value}ms`,
+            '--v-progress-circular-transition-duration': transitionDuration.value,
           },
           props.style,
         ]}

@@ -86,14 +86,14 @@
       @media (forced-colors: active)
         &--current
           > .v-btn
-            border-color: buttontext !important
+            border-color: buttontext
 
         &--selected:not(&--range-middle),
         &--range-start,
         &--range-end
           > .v-btn
-            border-color: highlight !important
-            background: none !important
+            border-color: highlight
+            background: none
 
     &--range-start,
     &--range-end,
@@ -116,7 +116,7 @@
 
       @include tools.layer('trumps')
         @media (forced-colors: active)
-          background-color: highlight !important
+          background-color: highlight
           opacity: 0.2
 
       &--range

@@ -20,11 +20,11 @@ import { MaybeTransition } from '@/composables/transition'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { cloneVNode, computed, shallowRef, toRef, toRefs, watch } from 'vue'
+import { cloneVNode, computed, Fragment, isVNode, nextTick, shallowRef, toRef, toRefs, watch } from 'vue'
 import { convertToUnit, genericComponent, omit, pickWithRest, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DeepReadonly } from 'vue'
+import type { DeepReadonly, VNode, VNodeArrayChildren } from 'vue'
 import type { VDataTableSlotProps } from './VDataTable'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 import type { VDataTableRowsSlots } from './VDataTableRows'
@@ -66,6 +66,16 @@ export const makeVDataTableVirtualProps = propsFactory({
 }, 'VDataTableVirtual')
 
 type ItemType<T> = T extends readonly (infer U)[] ? U : never
+
+function elementNodes (nodes?: VNodeArrayChildren): VNode[] {
+  return (nodes ?? []).flatMap(node =>
+    Array.isArray(node) ? elementNodes(node)
+    : !isVNode(node) ? []
+    : node.type === Fragment ? elementNodes(node.children as VNodeArrayChildren)
+    : typeof node.type === 'symbol' ? []
+    : [node]
+  )
+}
 
 export const VDataTableVirtual = genericComponent<new <T extends readonly any[], V>(
   props: {
@@ -163,18 +173,32 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
         }))
     )
 
-    // one virtual size per index = item row + optional expanded row
+    // one virtual size per index = item row + optional expanded rows
     const rowHeights = new Map<number, number>()
-    const expandedHeights = new Map<number, number>()
+    const expandedHeights = new Map<number, number[]>()
+
     function updateSize (index: number) {
-      handleItemResize(index, (rowHeights.get(index) ?? 0) + (expandedHeights.get(index) ?? 0))
+      const expanded = expandedHeights.get(index)?.reduce((sum, height) => sum + (height || 0), 0) ?? 0
+      handleItemResize(index, (rowHeights.get(index) ?? 0) + expanded)
     }
+
     function setRowHeight (index: number, height: number) {
       rowHeights.set(index, height)
       updateSize(index)
     }
-    function setExpandedHeight (index: number, height: number) {
-      expandedHeights.set(index, height)
+
+    function setExpandedHeight (index: number, row: number, height: number) {
+      const heights = expandedHeights.get(index) ?? []
+      heights[row] = height
+      expandedHeights.set(index, heights)
+      updateSize(index)
+    }
+
+    function trimExpandedHeights (index: number, count: number) {
+      const heights = expandedHeights.get(index)
+      if (!heights || heights.length <= count) return
+
+      heights.length = count
       updateSize(index)
     }
 
@@ -295,6 +319,14 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                             const { props: rowProps, ...itemSlot } = itemSlotProps
                             const index = itemSlotProps.internalItem.virtualIndex ?? itemSlotProps.internalItem.index
                             const itemExpanded = isExpanded(itemSlotProps.internalItem)
+                            const expandedRows = props.showExpand && itemExpanded && slots['expanded-row']
+                              ? elementNodes(slots['expanded-row'](itemSlot))
+                              : []
+
+                            // rows that stay never resize, so a shrunk slot reports nothing
+                            if (slots['expanded-row'] && (expandedHeights.get(index)?.length ?? 0) > expandedRows.length) {
+                              nextTick(() => trimExpandedHeights(index, expandedRows.length))
+                            }
 
                             return (
                               <>
@@ -318,25 +350,20 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
 
                                 { props.showExpand && (
                                   slots['expanded-row']
-                                    ? itemExpanded && (
+                                    ? expandedRows.map((node, row) => (
                                       <VVirtualScrollItem
-                                        key={ `${index}-expanded` }
+                                        key={ `${index}-expanded-${row}` }
                                         renderless
-                                        onUpdate:height={ height => setExpandedHeight(index, height) }
+                                        onUpdate:height={ height => setExpandedHeight(index, row, height) }
                                       >
-                                        { ({ itemRef }) => {
-                                          const nodes = slots['expanded-row']!(itemSlot)
-                                          return nodes?.length
-                                            ? cloneVNode(nodes[0], { ref: itemRef }, true)
-                                            : undefined
-                                        }}
+                                        { ({ itemRef }) => cloneVNode(node, { ref: itemRef }, true) }
                                       </VVirtualScrollItem>
-                                    )
+                                    ))
                                     : slots.expanded && (
                                       <VVirtualScrollItem
                                         key={ `${index}-expanded` }
                                         renderless
-                                        onUpdate:height={ height => setExpandedHeight(index, height) }
+                                        onUpdate:height={ height => setExpandedHeight(index, 0, height) }
                                       >
                                         { ({ itemRef }) => (
                                           <tr class="v-data-table__tr--expanded" ref={ itemRef }>

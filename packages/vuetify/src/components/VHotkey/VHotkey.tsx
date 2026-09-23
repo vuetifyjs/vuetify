@@ -46,7 +46,7 @@ import { useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, mergeDeep, propsFactory, useRender } from '@/util'
+import { genericComponent, isString, mergeDeep, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -94,7 +94,7 @@ function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMa
   let value: string | IconValue = keyCfg[mode] ?? keyCfg.text
 
   // 3. Guard against icon tokens leaking into text mode (e.g. "$ctrl")
-  if (mode === 'text' && typeof value === 'string' && value.startsWith('$') && !value.startsWith('$vuetify.')) {
+  if (mode === 'text' && isString(value) && value.startsWith('$') && !value.startsWith('$vuetify.')) {
     value = value.slice(1).toUpperCase() // "$ctrl" → "CTRL"
   }
 
@@ -202,7 +202,7 @@ function getKeyText (keyMap: KeyMapConfig, key: string, isMac: boolean): string 
 
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], 'text', isMac)
-    return typeof result[1] === 'string' ? result[1] : String(result[1])
+    return isString(result[1]) ? result[1] : String(result[1])
   }
 
   return key.toUpperCase()
@@ -214,7 +214,7 @@ function applyDisplayModeToKey (keyMap: KeyMapConfig, mode: DisplayMode, key: st
   if (lowerKey in keyMap) {
     const result = processKey(keyMap[lowerKey], mode, isMac)
 
-    if (result[0] === 'text' && typeof result[1] === 'string' && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
+    if (result[0] === 'text' && isString(result[1]) && result[1].startsWith('$') && !result[1].startsWith('$vuetify.')) {
       return ['text', result[1].replace('$', '').toUpperCase(), key]
     }
 
@@ -257,7 +257,7 @@ export const VHotkey = genericComponent()({
         const result: Array<Key | Delineator> = []
 
         function visit (node: KeyCombination) {
-          if (typeof node === 'string') {
+          if (isString(node)) {
             if (node !== '') {
               result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, node, isMac.value))
             }

@@ -1,5 +1,6 @@
 // Components
 import { VConfirmEdit } from '../'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
@@ -46,6 +47,18 @@ describe('VConfirmEdit', () => {
 
     await userEvent.click(screen.getByText('OK'))
     expect(externalModel.value).toEqual(['foo', 'bar'])
+  })
+
+  it('should let VConfirmEdit > VBtn defaults override action variant', () => {
+    render(() => (
+      <VDefaultsProvider defaults={{ VConfirmEdit: { VBtn: { variant: 'tonal' } } }}>
+        <VConfirmEdit />
+      </VDefaultsProvider>
+    ))
+
+    for (const btn of screen.getAllByCSS('.v-btn')) {
+      expect(btn).toHaveClass('v-btn--variant-tonal')
+    }
   })
 
   describe('hides actions if used from the slot', () => {

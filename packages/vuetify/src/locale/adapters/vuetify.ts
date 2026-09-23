@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { ref, shallowRef, toRef, watch } from 'vue'
-import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
+import { consoleError, consoleWarn, getObjectValueByPath, isString } from '@/util'
 
 // Locales
 import en from '@/locale/en'
@@ -46,7 +46,7 @@ const createTranslateFunction = (
       str = key
     }
 
-    if (typeof str !== 'string') {
+    if (!isString(str)) {
       consoleError(`Translation key "${key}" has a non-string value`)
       str = key
     }

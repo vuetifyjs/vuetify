@@ -25,14 +25,14 @@ describe('VVirtualScroll', () => {
     expect(elements.length).toBeLessThan(50)
   })
 
-  it('recalculates paddingBottom when an item collapses without scroll', async () => {
+  it('recalculates visible items when they collapse without scroll', async () => {
     const collapsed = ref(false)
 
     render(() => (
       <VVirtualScroll height="400" items={ createRange(50) }>
         {{
           default: ({ index }) => (
-            <div style={{ height: index === 0 && collapsed.value ? '12px' : '48px' }}>
+            <div style={{ height: collapsed.value ? '12px' : '48px' }}>
               { index }
             </div>
           ),
@@ -49,10 +49,12 @@ describe('VVirtualScroll', () => {
     await waitIdle()
     await waitIdle()
 
-    const container = screen.getByCSS('.v-virtual-scroll__container')
-    const paddingBottom = parseFloat(container.style.paddingBottom)
+    // the window has to grow to keep covering the viewport
+    const container = screen.getByCSS('.v-virtual-scroll')
+    const last = screen.getAllByCSS('.v-virtual-scroll__item').at(-1)!
 
-    expect(paddingBottom).toBeLessThan(800)
+    expect(last.getBoundingClientRect().bottom)
+      .toBeGreaterThan(container.getBoundingClientRect().bottom - 1)
   })
 
   it('removes previous items when appending while pinned to the bottom', async () => {
