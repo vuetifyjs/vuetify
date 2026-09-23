@@ -15,8 +15,6 @@ This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/
 
 [Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`.
 
-Import order of stylesheets becomes much more important with layers, therefore `import 'vuetify/styles'` or a file containing `@use 'vuetify'` **must** be loaded *before* any components or the CSS reset will take precedence over component styles and break everything. If you have separate plugin files make sure to import the vuetify plugin before `App.vue` or any other components.
-
 Vuetify defines five layers containing all the framework styles:
 
 ```css
@@ -29,17 +27,64 @@ Vuetify defines five layers containing all the framework styles:
 - utilities: Theme and helper classes such as `.bg-primary` and `.pa-4`.
 - final: Transitions, and rules that must always take priority like `forced-colors`.
 
-Your own styles will always override vuetify's if you don't use `@layer` yourself, or you can specify an order for custom layers in a stylesheet loaded before vuetify. Vuetify's layers must remain in the same order for everything to display correctly, but you can add your own between or around them.
+Your own styles will always override vuetify's if you don't use `@layer` yourself.
 
-```css { resource="src/styles/layers.css" }
-@layer base,
+## Custom layer order
+
+Vuetify's layers must remain in the same order for everything to display correctly, but you can add your own layers before, between or at the end:
+
+```css { resource="public/layers.css" }
+@layer my-base,
   vuetify-core,
   vuetify-components,
-  components,
+  my-components,
   vuetify-overrides,
-  overrides,
+  my-overrides,
   vuetify-utilities,
   vuetify-final;
+```
+
+Place it in `public/` and link it before any other stylesheet, so the browser reads it before any Vuetify styles:
+
+```html { resource="index.html" }
+<head>
+  <link rel="stylesheet" href="/layers.css">
+  <!-- ... -->
+</head>
+```
+
+In Nuxt, add the link in `nuxt.config.ts`:
+
+```ts { resource="nuxt.config.ts" }
+export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        { rel: 'stylesheet', href: '/layers.css' },
+      ],
+    },
+  },
+})
+```
+
+::: warning
+Avoid plain import of `layers.css` from JavaScript or `@import` from another stylesheet. Bundling process usually does not guarantee the same order of stylesheets shipped in production.
+:::
+
+Vuetify's stylesheets can also load in any order, so declare its nested layers in `layers.css` as well:
+
+```css { resource="public/layers.css" }
+@layer vuetify-core {
+  @layer reset, base;
+}
+@layer vuetify-components;
+@layer vuetify-overrides;
+@layer vuetify-utilities {
+  @layer theme-base, typography, helpers, theme-background, theme-foreground;
+}
+@layer vuetify-final {
+  @layer transitions, trumps;
+}
 ```
 
 ## Utilities group
