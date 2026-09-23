@@ -651,7 +651,8 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          form=""
+          form={ props.autocomplete === 'suppress' ? '' : undefined }
+          name={ props.autocomplete === 'suppress' ? props.name : undefined }
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }

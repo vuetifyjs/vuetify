@@ -18,6 +18,7 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useAutofill } from '../VSelect/useAutofill'
 import { useFocusRepair } from '../VSelect/useFocusRepair'
 import { useScrolling } from '../VSelect/useScrolling'
 import { useSelectionMenu } from '../VSelect/useSelectionMenu'
@@ -43,10 +44,10 @@ import {
   genericComponent,
   getActiveElement,
   IN_BROWSER,
+  isAutofill,
   isComposingIgnoreKey,
   isFunction,
   isNumber,
-  matchesSelector,
   noop,
   omit,
   propsFactory,
@@ -150,6 +151,7 @@ export const VAutocomplete = genericComponent<new <
     const selectionIndex = shallowRef(-1)
     const _searchLock = shallowRef<string | null>(null)
     const { items, transformIn, transformOut } = useItems(props)
+    const { autofill, resetAutofill } = useAutofill(items, item => select(item))
     const { textColorClasses, textColorStyles } = useTextColor(() => vTextFieldRef.value?.color)
     const { InputIcon } = useInputIcon(props)
     const search = useProxiedModel(props, 'search', '')
@@ -375,12 +377,7 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onChange (e: Event) {
-      if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
-        const item = items.value.find(item => item.title === (e.target as HTMLInputElement).value)
-        if (item) {
-          select(item)
-        }
-      }
+      if (isAutofill(e)) autofill((e.target as HTMLInputElement).value)
     }
 
     function getSelectedIndex () {
@@ -499,6 +496,7 @@ export const VAutocomplete = genericComponent<new <
       if (val === oldVal) return
 
       if (val) {
+        resetAutofill()
         isPristine.value = true
       } else {
         if (!props.multiple && search.value == null) {
@@ -576,7 +574,8 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          form=""
+          form={ props.autocomplete === 'suppress' ? '' : undefined }
+          name={ props.autocomplete === 'suppress' ? props.name : undefined }
           v-model={ search.value }
           onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
