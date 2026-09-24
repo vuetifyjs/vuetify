@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`VCalendar/util/timestamp.ts createDayList should handle skips equal to zero 1`] = `
-Array [
-  Object {
+exports[`VCalendar/util/timestamp.ts > createDayList > should handle skips equal to zero 1`] = `
+[
+  {
     "date": "2019-04-22",
     "day": 22,
     "future": false,
@@ -17,7 +17,7 @@ Array [
     "weekday": 1,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-04-24",
     "day": 24,
     "future": false,
@@ -32,7 +32,7 @@ Array [
     "weekday": 3,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-04-26",
     "day": 26,
     "future": false,
@@ -50,9 +50,9 @@ Array [
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts should create interval list 1`] = `
-Array [
-  Object {
+exports[`VCalendar/util/timestamp.ts > should create interval list 1`] = `
+[
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -67,7 +67,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -82,7 +82,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -97,7 +97,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -112,7 +112,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -127,7 +127,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -142,7 +142,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -157,7 +157,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -172,7 +172,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -187,7 +187,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -205,9 +205,9 @@ Array [
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts should create interval list 2`] = `
-Array [
-  Object {
+exports[`VCalendar/util/timestamp.ts > should create interval list 2`] = `
+[
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -222,7 +222,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -237,7 +237,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -252,7 +252,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -267,7 +267,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -282,7 +282,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -297,7 +297,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -312,7 +312,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -327,7 +327,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -342,7 +342,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -360,9 +360,9 @@ Array [
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts should create interval list 3`] = `
-Array [
-  Object {
+exports[`VCalendar/util/timestamp.ts > should create interval list 3`] = `
+[
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
@@ -377,7 +377,7 @@ Array [
     "weekday": 5,
     "year": 2019,
   },
-  Object {
+  {
     "date": "2019-02-08",
     "day": 8,
     "future": false,
