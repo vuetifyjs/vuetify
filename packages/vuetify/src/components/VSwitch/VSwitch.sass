@@ -7,29 +7,31 @@
 
 @include tools.layer('components')
   .v-switch
-    --v-switch-scale: 1
+    --v-switch-scale: #{tools.css-div(var(--v-switch-height), $switch-thumb-height)}
+    --v-switch-thumb-height: calc(#{$switch-thumb-height} * var(--v-switch-scale))
+    --v-switch-thumb-width: calc(#{$switch-thumb-width} * var(--v-switch-scale))
 
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
-  @each $name, $size in $switch-sizes
-    .v-switch--size-#{$name}
-      --v-switch-scale: #{math.div(list.nth($size, 1), $switch-track-height)}
-      --v-switch-track-height: #{list.nth($size, 1)}
-      --v-switch-thumb-height: #{list.nth($size, 2)}
-      --v-switch-thumb-width: #{list.nth($size, 3)}
+  .v-switch--inset
+    --v-switch-scale: #{tools.css-div(var(--v-switch-height), $switch-inset-thumb-height)}
+    --v-switch-thumb-height: calc(#{$switch-inset-thumb-height} * var(--v-switch-scale))
+    --v-switch-thumb-width: calc(#{$switch-inset-thumb-width} * var(--v-switch-scale))
 
-  @each $name, $size in $switch-inset-sizes
+  @each $name, $size in settings.$size-scales
+    .v-switch--size-#{$name}
+      --v-switch-height: #{$switch-thumb-height + $switch-size-interval * $size}
+
+  @each $name, $size in settings.$size-scales
     .v-switch--inset.v-switch--size-#{$name}
-      --v-switch-scale: #{math.div(list.nth($size, 1), $switch-inset-track-height)}
-      --v-switch-track-height: #{list.nth($size, 1)}
-      --v-switch-thumb-height: #{list.nth($size, 2)}
-      --v-switch-thumb-width: #{list.nth($size, 3)}
+      --v-switch-height: #{$switch-inset-thumb-height + $switch-inset-size-interval * $size}
 
   .v-switch__loader
     display: flex
 
     .v-progress-circular
+      --v-progress-circular-height: round(var(--v-switch-height) * .8, 1px)
       color: $switch-loader-color
 
   .v-switch__track,
@@ -59,7 +61,7 @@
     padding: 0 5px
     background-color: $switch-track-background
     border-radius: $switch-track-radius
-    height: var(--v-switch-track-height)
+    height: calc(#{$switch-track-height} * var(--v-switch-scale))
     opacity: $switch-track-opacity
     min-width: calc(#{$switch-track-width} * var(--v-switch-scale))
     cursor: pointer
@@ -68,6 +70,7 @@
     .v-switch--inset &
       border-radius: $switch-inset-track-border-radius
       font-size: .75rem
+      height: calc(#{$switch-inset-track-height} * var(--v-switch-scale))
       min-width: calc(#{$switch-inset-track-width} * var(--v-switch-scale))
 
   .v-switch__thumb
@@ -76,7 +79,7 @@
     color: $switch-thumb-color
     border-radius: $switch-thumb-radius
     display: flex
-    font-size: .75rem
+    font-size: calc(var(--v-switch-height) * .5)
     height: var(--v-switch-thumb-height)
     justify-content: center
     width: var(--v-switch-thumb-width)

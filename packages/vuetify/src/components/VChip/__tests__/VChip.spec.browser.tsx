@@ -1,10 +1,83 @@
+// Components
 import { VChip } from '../VChip'
+import { VAvatar } from '@/components/VAvatar'
+import { VIcon } from '@/components/VIcon'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
+import { getByCSS } from '@testing-library/vue'
 import { nextTick, shallowRef } from 'vue'
 
 describe('VChip', () => {
+  describe('size', () => {
+    it.each([
+      ['x-small', 20],
+      ['small', 26],
+      ['default', 32],
+      ['large', 38],
+      ['x-large', 44],
+    ])('should match %s and size="%s"', async (name, num) => {
+      render(() => (
+        <>
+          <VChip size={ name } data-testid="named">{ name }</VChip>
+          <VChip size={ num } data-testid="numeric">{ num }</VChip>
+        </>
+      ))
+
+      const named = getComputedStyle(screen.getByTestId('named'))
+      const numeric = getComputedStyle(screen.getByTestId('numeric'))
+
+      expect(named.height).toBe(numeric.height)
+      expect(named.fontSize).toBe(numeric.fontSize)
+      expect(named.minWidth).toBe(numeric.minWidth)
+      expect(named.padding).toBe(numeric.padding)
+    })
+
+    it.each([
+      ['x-small', 20],
+      ['small', 26],
+      ['default', 32],
+      ['large', 38],
+      ['x-large', 44],
+    ])('should match %s and size="%s" with avatar', async (name, num) => {
+      render(() => (
+        <>
+          <VChip size={ name } data-testid="named">
+            {{
+              default: () => name,
+              prepend: () => <VAvatar start><VIcon icon="$vuetify" /></VAvatar>,
+            }}
+          </VChip>
+          <VChip size={ num } data-testid="numeric">
+            {{
+              default: () => num,
+              prepend: () => <VAvatar start><VIcon icon="$vuetify" /></VAvatar>,
+            }}
+          </VChip>
+        </>
+      ))
+
+      const namedChip = screen.getByTestId('named')
+      const numericChip = screen.getByTestId('numeric')
+
+      const named = getComputedStyle(namedChip)
+      const numeric = getComputedStyle(numericChip)
+
+      expect(named.height).toBe(numeric.height)
+      expect(named.fontSize).toBe(numeric.fontSize)
+      expect(named.minWidth).toBe(numeric.minWidth)
+      expect(named.padding).toBe(numeric.padding)
+
+      const namedAvatar = getByCSS(namedChip, '.v-avatar')
+      const numericAvatar = getByCSS(numericChip, '.v-avatar')
+      expect(getComputedStyle(namedAvatar).height).toBe(getComputedStyle(numericAvatar).height)
+
+      const namedIcon = getByCSS(namedChip, '.v-icon')
+      const numericIcon = getByCSS(numericChip, '.v-icon')
+      expect(getComputedStyle(namedIcon).height).toBe(getComputedStyle(numericIcon).height)
+    })
+  })
+
   it('should emit events when closed', async () => {
     const close = vi.fn()
     const update = vi.fn()
