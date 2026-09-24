@@ -39,6 +39,7 @@ export const makeVListGroupProps = propsFactory({
     type: IconValue,
     default: '$collapse',
   },
+  detached: Boolean,
   disabled: Boolean,
   expandIcon: {
     type: IconValue,
@@ -62,7 +63,12 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   props: makeVListGroupProps(),
 
   setup (props, { slots }) {
-    const { isOpen, open, id: _id } = useNestedItem(() => props.value, () => props.disabled, true)
+    const { isOpen, open, id: _id } = useNestedItem(
+      () => props.value,
+      () => props.disabled,
+      () => props.detached,
+      true
+    )
     const id = computed(() => `v-list-group--id-${String(props.rawId ?? _id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()
