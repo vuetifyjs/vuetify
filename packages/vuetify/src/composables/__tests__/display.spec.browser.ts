@@ -3,7 +3,7 @@ import { createDisplay } from '../display'
 
 // Utilities
 import { page } from '@test'
-import { effectScope } from 'vue'
+import { effectScope, nextTick } from 'vue'
 
 const breakpoints = [
   'xs',
@@ -285,6 +285,31 @@ describe('display', () => {
 
     await page.viewport(399, 900)
     await expect.poll(() => name.value).toBe('xs')
+  })
+
+  it('should remove the ssr resize listener when the scope stops', async () => {
+    const add = vi.spyOn(window, 'addEventListener')
+    const remove = vi.spyOn(window, 'removeEventListener')
+    const scope = effectScope()
+
+    try {
+      const update = scope.run(() => {
+        return createDisplay(undefined, { clientWidth: 1024, clientHeight: 768 }).update
+      })!
+
+      update()
+      await nextTick()
+
+      expect(add).toHaveBeenCalledWith('resize', expect.any(Function), { passive: true })
+
+      scope.stop()
+
+      expect(remove).toHaveBeenCalledWith('resize', expect.any(Function), { passive: true })
+    } finally {
+      scope.stop()
+      add.mockRestore()
+      remove.mockRestore()
+    }
   })
 
   it('should allow breakpoint strings for mobileBreakpoint', async () => {
