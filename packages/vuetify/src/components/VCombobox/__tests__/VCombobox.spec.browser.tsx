@@ -1016,6 +1016,24 @@ describe('VCombobox', () => {
 
       expect(submittedData!.get('field')).toBe('Narnia')
     })
+
+    it('should not submit the form when Enter commits a value', async () => {
+      const onSubmit = vi.fn((e: Event) => e.preventDefault())
+      const model = ref<string[]>([])
+
+      render(() => (
+        <form onSubmit={ onSubmit }>
+          <VCombobox v-model={ model.value } multiple items={ items } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('abc{Enter}')
+
+      expect(model.value).toEqual(['abc'])
+      expect(onSubmit).not.toHaveBeenCalled()
+    })
   })
 
   describe('virtual list with selection', () => {
