@@ -1,8 +1,5 @@
-// @ts-nocheck
-/* eslint-disable */
-
-import { Point } from './line'
-// import { checkCollinear, getDistance, moveTo } from './math'
+// Types
+import type { Point } from './line'
 
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
