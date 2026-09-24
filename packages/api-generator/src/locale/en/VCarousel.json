@@ -9,6 +9,7 @@
     "hideDelimiterBackground": "Hides the bottom delimiter background.",
     "interval": "The duration between image cycles. Requires the **cycle** prop.",
     "nextIcon": "The displayed icon for forcing pagination to the next item.",
+    "pauseOnHover": "Pauses the carousel's automatic cycling while the pointer is hovering over it. Requires the **cycle** prop.",
     "prevIcon": "The displayed icon for forcing pagination to the previous item.",
     "progress": "Displays a carousel progress bar. Requires the **cycle** prop and **interval**.",
     "showArrows": "Displays arrows for next/previous navigation.",

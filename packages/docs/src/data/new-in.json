@@ -87,7 +87,8 @@
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "pauseOnHover": "4.3.0"
     },
     "examples": {
       "misc-vertical": "3.9.0",
