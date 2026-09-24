@@ -7,7 +7,7 @@ import { makeComponentProps } from '@/composables/component'
 import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { shallowRef, Text } from 'vue'
@@ -35,7 +35,7 @@ export const VIcon = genericComponent()({
   setup (props, { attrs, slots }) {
     const slotIcon = shallowRef<string>()
 
-    const { themeClasses } = useTheme()
+    const { themeClasses } = provideTheme(props)
     const { iconData } = useIcon(() => slotIcon.value || props.icon)
     const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)

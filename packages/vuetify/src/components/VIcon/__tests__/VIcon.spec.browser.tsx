@@ -1,9 +1,24 @@
 import { VIcon } from '../VIcon'
 
+// Components
+import { VThemeProvider } from '@/components/VThemeProvider'
+
 // Utilities
 import { render, screen } from '@test'
 
 describe('VIcon', () => {
+  it('should use its theme prop over the inherited theme', () => {
+    render(() => (
+      <VThemeProvider theme="dark">
+        <VIcon icon="mdi-home" data-testid="inherited" />
+        <VIcon icon="mdi-home" theme="light" data-testid="override" />
+      </VThemeProvider>
+    ))
+
+    expect(screen.getByTestId('inherited')).toHaveClass('v-theme--dark')
+    expect(screen.getByTestId('override')).toHaveClass('v-theme--light')
+  })
+
   describe('icon prop', () => {
     it('should render icon from default set', () => {
       render(() => <VIcon icon="mdi-home" />)
