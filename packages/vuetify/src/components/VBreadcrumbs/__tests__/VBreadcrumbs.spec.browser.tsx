@@ -18,7 +18,7 @@ describe('VBreadcrumbs', () => {
 
     const items = screen.getAllByText(/hello!|world!/i)
     expect(items).toHaveLength(2)
-    await expect.element(items[0]).toHaveTextContent('hello!')
+    await expect.element(items[0]).toMatchTextContent('hello!')
   })
 
   it('should use divider slot', () => {

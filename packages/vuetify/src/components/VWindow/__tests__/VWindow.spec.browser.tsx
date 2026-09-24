@@ -102,19 +102,19 @@ describe('VWindow', () => {
     ))
 
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
 
     let arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     expect(arrows).toHaveLength(1)
     await userEvent.click(arrows[0])
 
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('2. bar')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('2. bar')
 
     arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     expect(arrows).toHaveLength(1)
     await userEvent.click(arrows[0])
 
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
   })
 
   it('should wrap around when using continuous prop', async () => {
@@ -134,11 +134,11 @@ describe('VWindow', () => {
     ))
 
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
     await userEvent.click(screen.getAllByCSS('.v-window__controls > .v-btn')[0])
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('2. bar')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('2. bar')
     await userEvent.click(screen.getAllByCSS('.v-window__controls > .v-btn')[1])
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
   })
 
   it('should emit new value when clicking arrows', async () => {
@@ -187,15 +187,15 @@ describe('VWindow', () => {
     ))
 
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
 
     await commands.drag([200, 15], [50, 15])
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('2. bar')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('2. bar')
 
     await commands.drag([50, 15], [200, 15])
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
   })
 
   it('should skip disabled items', async () => {
@@ -222,7 +222,7 @@ describe('VWindow', () => {
     await commands.waitStable('.v-window')
     const arrows = screen.getAllByCSS('.v-window__controls > .v-btn')
     await userEvent.click(arrows[0])
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('3. baz')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('3. baz')
   })
 
   it('should disable touch support', async () => {
@@ -245,7 +245,7 @@ describe('VWindow', () => {
 
     await commands.drag([200, 15], [50, 15])
     await commands.waitStable('.v-window')
-    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+    expect(screen.getByCSS('.v-window-item--active h1')).toMatchTextContent('1. foo')
   })
 
   describe('keyboard controls', () => {

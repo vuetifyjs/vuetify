@@ -69,7 +69,7 @@ describe('VBtn', () => {
       const buttons = screen.getAllByCSS('button')
       expect(buttons).toHaveLength(colors.length)
       buttons.forEach((button, idx) => {
-        expect(button).toHaveTextContent(colors[idx])
+        expect(button).toMatchTextContent(colors[idx])
       })
     })
   })
@@ -78,7 +78,7 @@ describe('VBtn', () => {
     it('renders the proper tag instead of a button', async () => {
       render(<VBtn tag="custom-tag">Click me</VBtn>)
       const customTag = screen.getByCSS('custom-tag')
-      expect(customTag).toHaveTextContent('Click me')
+      expect(customTag).toMatchTextContent('Click me')
     })
   })
 
@@ -140,7 +140,7 @@ describe('VBtn', () => {
       const link = screen.getByCSS('a')
 
       await userEvent.click(link)
-      expect(link).toHaveTextContent('Click me')
+      expect(link).toMatchTextContent('Click me')
       expect(link).toHaveFocus()
       expect(window.location.hash).toContain(anchor.hash)
     })

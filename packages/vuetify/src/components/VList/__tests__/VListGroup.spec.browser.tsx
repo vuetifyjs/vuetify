@@ -20,7 +20,7 @@ describe('VListGroup', () => {
       </VList>
     ))
 
-    expect(screen.getByCSS('.v-list-item-title')).toHaveTextContent('Group')
+    expect(screen.getByCSS('.v-list-item-title')).toMatchTextContent('Group')
   })
 
   it('supports children', () => {
@@ -40,7 +40,7 @@ describe('VListGroup', () => {
       </VList>
     ))
 
-    expect(screen.getAllByCSS('.v-list-item-title')[0]).toHaveTextContent('Group')
+    expect(screen.getAllByCSS('.v-list-item-title')[0]).toMatchTextContent('Group')
   })
 
   it('should not remove opened when unmounted', async () => {

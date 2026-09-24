@@ -216,7 +216,7 @@ describe('VSelect', () => {
       </VSelect>
     ))
 
-    expect(screen.getByCSS('.v-select__selection')).toHaveTextContent('B')
+    expect(screen.getByCSS('.v-select__selection')).toMatchTextContent('B')
   })
 
   it('should render prepend-item slot', () => {
@@ -230,7 +230,7 @@ describe('VSelect', () => {
       </VSelect>
     ))
 
-    expect(screen.getAllByCSS('.v-list-item')[0]).toHaveTextContent('Foo')
+    expect(screen.getAllByCSS('.v-list-item')[0]).toMatchTextContent('Foo')
   })
 
   it('should render append-item slot', () => {
@@ -243,7 +243,7 @@ describe('VSelect', () => {
         }}
       </VSelect>
     ))
-    expect(screen.getAllByCSS('.v-list-item').at(-1)).toHaveTextContent('Foo')
+    expect(screen.getAllByCSS('.v-list-item').at(-1)).toMatchTextContent('Foo')
   })
 
   it.each([
@@ -417,8 +417,8 @@ describe('VSelect', () => {
       await commands.waitStable('.v-list')
       const options = screen.getAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
-      expect(element).toHaveTextContent('Item 1')
-      expect(element).toHaveTextContent('Item 2')
+      expect(element).toMatchTextContent('Item 1')
+      expect(element).toMatchTextContent('Item 2')
 
       await waitForClickable(options[0])
       await userEvent.click(options[0])
@@ -496,7 +496,7 @@ describe('VSelect', () => {
           itemValue="code"
         />
       ))
-      expect(element).toHaveTextContent('Default Language')
+      expect(element).toMatchTextContent('Default Language')
     })
 
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
@@ -570,7 +570,7 @@ describe('VSelect', () => {
     await userEvent.click(screen.getAllByRole('option')[0])
     expect(selectedItems.value).toBe(1)
     expect(itemTitleFunc).toHaveBeenCalledWith({ id: 1, name: 'a' }, expect.anything())
-    expect(element).toHaveTextContent(`Item: {"id":1,"name":"a"}`)
+    expect(element).toMatchTextContent(`Item: {"id":1,"name":"a"}`)
   })
 
   describe('hide-selected', () => {
@@ -587,8 +587,8 @@ describe('VSelect', () => {
       await commands.waitStable('.v-list')
       const options = screen.getAllByRole('option')
       expect(options).toHaveLength(2)
-      expect(options[0]).toHaveTextContent('Item 3')
-      expect(options[1]).toHaveTextContent('Item 4')
+      expect(options[0]).toMatchTextContent('Item 3')
+      expect(options[1]).toMatchTextContent('Item 4')
     })
 
     // https://github.com/vuetifyjs/vuetify/issues/19806
@@ -624,7 +624,7 @@ describe('VSelect', () => {
       expect(screen.queryAllByRole('option', { selected: true })).toHaveLength(0)
       let options = screen.getAllByRole('option')
       expect(options).toHaveLength(2)
-      expect(options[0]).toHaveTextContent('Item 2')
+      expect(options[0]).toMatchTextContent('Item 2')
 
       await waitForClickable(options[0])
       await userEvent.click(options[0])
@@ -632,7 +632,7 @@ describe('VSelect', () => {
       expect(screen.queryAllByRole('option', { selected: true })).toHaveLength(0)
       options = screen.getAllByRole('option')
       expect(options).toHaveLength(2)
-      expect(options[0]).toHaveTextContent('Item 1')
+      expect(options[0]).toMatchTextContent('Item 1')
     })
   })
 
@@ -1193,8 +1193,8 @@ describe('VSelect', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      await expect.poll(() => screen.queryByTestId('header-content')).toHaveTextContent('My Header')
-      await expect.poll(() => screen.queryByTestId('footer-content')).toHaveTextContent('My Footer')
+      await expect.poll(() => screen.queryByTestId('header-content')).toMatchTextContent('My Header')
+      await expect.poll(() => screen.queryByTestId('footer-content')).toMatchTextContent('My Footer')
     })
 
     it('should reach the header and footer when the list is empty', async () => {

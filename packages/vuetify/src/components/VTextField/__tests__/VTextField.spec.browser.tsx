@@ -59,7 +59,7 @@ describe('VTextField', () => {
     await userEvent.keyboard('Hello')
     expect(rule).toHaveBeenCalledTimes(5)
     expect(element).toHaveClass('v-input--error')
-    expect(element).toHaveTextContent('Error!')
+    expect(element).toMatchTextContent('Error!')
   })
 
   it('does not trigger infinite loop when autofilled by password manager', async () => {
@@ -120,7 +120,7 @@ describe('VTextField', () => {
     await userEvent.click(document.body)
     expect(rule).toHaveBeenCalledTimes(1)
     expect(element).toHaveClass('v-input--error')
-    expect(element).toHaveTextContent('Error!')
+    expect(element).toMatchTextContent('Error!')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/15231
@@ -129,7 +129,7 @@ describe('VTextField', () => {
       <VTextField hideDetails="auto" counter></VTextField>
     ))
     await userEvent.click(element)
-    expect(element).toHaveTextContent('0')
+    expect(element).toMatchTextContent('0')
   })
 
   it('hides details when using hide-details="auto" and counter without focus', async () => {

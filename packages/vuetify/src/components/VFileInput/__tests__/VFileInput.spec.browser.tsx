@@ -55,7 +55,7 @@ describe('VFileInput', () => {
     const input = screen.getByCSS('input')
 
     await userEvent.upload(input, 'text.txt')
-    expect(element).toHaveTextContent('text.txt')
+    expect(element).toMatchTextContent('text.txt')
     expect(model.value).toEqual(expect.objectContaining({ name: 'text.txt' }))
   })
 
@@ -64,7 +64,7 @@ describe('VFileInput', () => {
       <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter />
     ))
 
-    expect(element).toHaveTextContent('2 files')
+    expect(element).toMatchTextContent('2 files')
   })
 
   it('should show size of files', async () => {
@@ -72,7 +72,7 @@ describe('VFileInput', () => {
       <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple showSize />
     ))
 
-    expect(element).toHaveTextContent('1MB file (1.0 MB), 2MB file (2.0 MB)')
+    expect(element).toMatchTextContent('1MB file (1.0 MB), 2MB file (2.0 MB)')
   })
 
   it('should show total size of files in counter', async () => {
@@ -80,7 +80,7 @@ describe('VFileInput', () => {
       <VFileInput modelValue={[oneMBFile, twoMBFile]} multiple counter showSize />
     ))
 
-    expect(element).toHaveTextContent('2 files (3.0 MB in total)')
+    expect(element).toMatchTextContent('2 files (3.0 MB in total)')
   })
 
   it('should conditionally show placeholder', async () => {
@@ -115,7 +115,7 @@ describe('VFileInput', () => {
 
     await userEvent.click(screen.getByLabelText(/clear/i))
 
-    expect(element).not.toHaveTextContent('1MB file, 2MB file')
+    expect(element).not.toMatchTextContent('1MB file, 2MB file')
     expect(model.value).toHaveLength(0)
     expect(screen.getByCSS('input')).toHaveValue('')
   })

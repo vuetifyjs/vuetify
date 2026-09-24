@@ -16,7 +16,7 @@ describe('VBottomSheet', () => {
     const bottomSheet = screen.getByCSS('.v-bottom-sheet')
     await expect.element(bottomSheet).toBeInViewport()
     await expect.element(bottomSheet).not.toHaveClass('v-bottom-sheet--inset')
-    await expect.element(bottomSheet).toHaveTextContent('Content inside bottom sheet')
+    await expect.element(bottomSheet).toMatchTextContent('Content inside bottom sheet')
   })
 
   it('applies inset class when inset prop is true', async () => {

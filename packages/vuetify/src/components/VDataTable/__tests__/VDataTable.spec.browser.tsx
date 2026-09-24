@@ -270,11 +270,11 @@ describe('VDataTable', () => {
       </VDataTable>
     ))
 
-    expect(screen.getByCSS('#body-append')).toHaveTextContent(DESSERT_ITEMS.length)
+    expect(screen.getByCSS('#body-append')).toMatchTextContent(DESSERT_ITEMS.length)
 
     await userEvent.click(screen.getByCSS('tr:nth-child(1) > .v-data-table__td > .v-btn'))
 
-    expect(screen.getByCSS('#body-append')).toHaveTextContent(DESSERT_ITEMS.length)
+    expect(screen.getByCSS('#body-append')).toMatchTextContent(DESSERT_ITEMS.length)
   })
 
   describe('sort', () => {

@@ -13,7 +13,7 @@ describe('VHotkey.tsx', () => {
       // Should render ctrl and k keys with + separator
       expect(screen.getByCSS('.v-hotkey__combination')).toBeInTheDocument()
       expect(screen.getAllByCSS('.v-hotkey__key')).toHaveLength(2)
-      expect(screen.getByCSS('.v-hotkey__divider')).toHaveTextContent('+')
+      expect(screen.getByCSS('.v-hotkey__divider')).toMatchTextContent('+')
     })
 
     it('should parse key sequences with - separator', () => {
@@ -39,10 +39,10 @@ describe('VHotkey.tsx', () => {
 
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1) // Only the + separator
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
 
       // The second key should be the minus key
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
     })
 
     it('should handle minus key with alternative names', () => {
@@ -51,13 +51,13 @@ describe('VHotkey.tsx', () => {
 
       let keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
 
       // Rerender with different keys
       rerender(() => <VHotkey keys="ctrl+hyphen" displayMode="text" />)
       keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
     })
 
     it('should handle plus key with alias name', () => {
@@ -65,11 +65,11 @@ describe('VHotkey.tsx', () => {
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
-      expect(keys[1]).toHaveTextContent('+')
+      expect(keys[1]).toMatchTextContent('+')
 
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1)
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
     })
 
     it('should handle slash key with alias name', () => {
@@ -77,11 +77,11 @@ describe('VHotkey.tsx', () => {
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(2)
-      expect(keys[1]).toHaveTextContent('/')
+      expect(keys[1]).toMatchTextContent('/')
 
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1)
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
     })
 
     it('should not treat - as separator when not between alphanumeric characters', () => {
@@ -93,7 +93,7 @@ describe('VHotkey.tsx', () => {
 
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1)
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
     })
 
     it('should treat - as separator when between alphanumeric characters', () => {
@@ -106,7 +106,7 @@ describe('VHotkey.tsx', () => {
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1)
       // Should contain "then" text (localized)
-      expect(dividers[0]).toHaveTextContent(/then/i)
+      expect(dividers[0]).toMatchTextContent(/then/i)
     })
 
     it('should handle complex combinations with both + and - separators', () => {
@@ -132,14 +132,14 @@ describe('VHotkey.tsx', () => {
       expect(dividers).toHaveLength(2) // +, then
 
       // Should have + between meta and k, then "then" separator, then z
-      expect(dividers[0]).toHaveTextContent('+')
-      expect(dividers[1]).toHaveTextContent(/then/i)
+      expect(dividers[0]).toMatchTextContent('+')
+      expect(dividers[1]).toMatchTextContent(/then/i)
 
       // Keys should be meta/ctrl (platform dependent), k, z
       const firstKeyText = keys[0].textContent?.toUpperCase()
       expect(['META', 'CTRL', 'CMD', 'COMMAND']).toContain(firstKeyText)
-      expect(keys[1]).toHaveTextContent('K')
-      expect(keys[2]).toHaveTextContent('Z')
+      expect(keys[1]).toMatchTextContent('K')
+      expect(keys[2]).toMatchTextContent('Z')
     })
 
     it('should handle various sequence patterns correctly', () => {
@@ -148,12 +148,12 @@ describe('VHotkey.tsx', () => {
 
       const keys1 = screen.getAllByCSS('.v-hotkey__key')
       expect(keys1).toHaveLength(2) // k, z (NOT k, then, z)
-      expect(keys1[0]).toHaveTextContent('K')
-      expect(keys1[1]).toHaveTextContent('Z')
+      expect(keys1[0]).toMatchTextContent('K')
+      expect(keys1[1]).toMatchTextContent('Z')
 
       const dividers1 = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers1).toHaveLength(1) // just "then"
-      expect(dividers1[0]).toHaveTextContent(/then/i)
+      expect(dividers1[0]).toMatchTextContent(/then/i)
     })
 
     it('should handle case-insensitive sequence patterns', () => {
@@ -164,10 +164,10 @@ describe('VHotkey.tsx', () => {
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
 
       expect(keys).toHaveLength(2) // a, b
-      expect(keys[0]).toHaveTextContent('A')
-      expect(keys[1]).toHaveTextContent('B')
+      expect(keys[0]).toMatchTextContent('A')
+      expect(keys[1]).toMatchTextContent('B')
       expect(dividers).toHaveLength(1)
-      expect(dividers[0]).toHaveTextContent(/then/i)
+      expect(dividers[0]).toMatchTextContent(/then/i)
     })
   })
 
@@ -176,7 +176,7 @@ describe('VHotkey.tsx', () => {
       render(() => <VHotkey keys="shift+-" displayMode="text" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
       expect(keys[1]).toHaveClass('v-hotkey__key-text')
     })
 
@@ -185,7 +185,7 @@ describe('VHotkey.tsx', () => {
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       // Should fallback to text mode for minus key in symbol mode
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
       expect(keys[1]).toHaveClass('v-hotkey__key-text')
     })
 
@@ -194,7 +194,7 @@ describe('VHotkey.tsx', () => {
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       // Should fallback to text mode for minus key in icon mode
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
       expect(keys[1]).toHaveClass('v-hotkey__key-text')
     })
   })
@@ -237,7 +237,7 @@ describe('VHotkey.tsx', () => {
       })
 
       // Should still have divider
-      expect(screen.getByCSS('.v-hotkey__divider')).toHaveTextContent('+')
+      expect(screen.getByCSS('.v-hotkey__divider')).toMatchTextContent('+')
     })
 
     it('should render contained variant with key sequences', () => {
@@ -487,7 +487,7 @@ describe('VHotkey.tsx', () => {
       render(() => <VHotkey keys="shift+-" keyMap={ customKeyMap } platform="pc" />)
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
-      expect(keys[1]).toHaveTextContent('MINUS')
+      expect(keys[1]).toMatchTextContent('MINUS')
     })
   })
 
@@ -513,7 +513,7 @@ describe('VHotkey.tsx', () => {
 
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(1)
-      expect(keys[0]).toHaveTextContent(/Escape/i) // Should show localized text
+      expect(keys[0]).toMatchTextContent(/Escape/i) // Should show localized text
       expect(keys[0]).toHaveClass('v-hotkey__key-text')
     })
 
@@ -523,7 +523,7 @@ describe('VHotkey.tsx', () => {
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(1)
       // Should fallback to text when symbol is not available
-      expect(keys[0]).toHaveTextContent(/Escape/i)
+      expect(keys[0]).toMatchTextContent(/Escape/i)
       expect(keys[0]).toHaveClass('v-hotkey__key-text') // Should use text CSS class when fallback occurs
     })
 
@@ -533,7 +533,7 @@ describe('VHotkey.tsx', () => {
       const keys = screen.getAllByCSS('.v-hotkey__key')
       expect(keys).toHaveLength(1)
       // Should fallback to text when icon is not available
-      expect(keys[0]).toHaveTextContent(/Escape/i)
+      expect(keys[0]).toMatchTextContent(/Escape/i)
       expect(keys[0]).toHaveClass('v-hotkey__key-text') // Should use text CSS class when fallback occurs
     })
 
@@ -546,17 +546,17 @@ describe('VHotkey.tsx', () => {
 
       // Test all modes in sequence using rerender to avoid interference
       const { rerender } = render(() => <VHotkey keys="customkey" displayMode="text" keyMap={ customKeyMap } />)
-      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toMatchTextContent('CUSTOM')
       expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
 
       // Test symbol mode - should fallback to text since custom key only provides text
       rerender(() => <VHotkey keys="customkey" displayMode="symbol" keyMap={ customKeyMap } />)
-      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toMatchTextContent('CUSTOM')
       expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
 
       // Test icon mode - should fallback to text since custom key only provides text
       rerender(() => <VHotkey keys="customkey" displayMode="icon" keyMap={ customKeyMap } />)
-      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveTextContent('CUSTOM')
+      expect(screen.getAllByCSS('.v-hotkey__key')[0]).toMatchTextContent('CUSTOM')
       expect(screen.getAllByCSS('.v-hotkey__key')[0]).toHaveClass('v-hotkey__key-text')
     })
   })
@@ -857,7 +857,7 @@ describe('VHotkey.tsx', () => {
       // The component should instead render text for the keys
       const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
       expect(textKeys.length).toBeGreaterThanOrEqual(1)
-      expect(textKeys[0]).toHaveTextContent(/ctrl/i)
+      expect(textKeys[0]).toMatchTextContent(/ctrl/i)
     })
 
     it('should render icons when displayMode is "icon" on Mac platforms', () => {
@@ -888,8 +888,8 @@ describe('VHotkey.tsx', () => {
       render(() => <VHotkey keys="ctrl+k" />)
 
       const textKeys = screen.getAllByCSS('.v-hotkey__key-text')
-      expect(textKeys[0]).toHaveTextContent('Ctrl')
-      expect(textKeys[0]).not.toHaveTextContent('$ctrl')
+      expect(textKeys[0]).toMatchTextContent('Ctrl')
+      expect(textKeys[0]).not.toMatchTextContent('$ctrl')
     })
 
     it('should handle icon tokens in text mode gracefully', () => {
@@ -912,8 +912,8 @@ describe('VHotkey.tsx', () => {
       expect(textKeys).toHaveLength(1)
 
       // After the fix, should render "CTRL" instead of "$ctrl"
-      expect(textKeys[0]).toHaveTextContent('CTRL') // Should be converted from $ctrl to CTRL
-      expect(textKeys[0]).not.toHaveTextContent('$ctrl') // Should not contain the icon token
+      expect(textKeys[0]).toMatchTextContent('CTRL') // Should be converted from $ctrl to CTRL
+      expect(textKeys[0]).not.toMatchTextContent('$ctrl') // Should not contain the icon token
     })
 
     it('should preserve valid localization keys starting with $vuetify', () => {
@@ -936,7 +936,7 @@ describe('VHotkey.tsx', () => {
       expect(textKeys).toHaveLength(1)
 
       // Should preserve the localization key and let the translation system handle it
-      expect(textKeys[0]).toHaveTextContent('Ctrl') // Should be translated by the locale system
+      expect(textKeys[0]).toMatchTextContent('Ctrl') // Should be translated by the locale system
     })
 
     it('should force mac rendering when platform="mac" is set on non-Mac platform', () => {
@@ -1241,7 +1241,7 @@ describe('VHotkey.tsx', () => {
       // Check that dividers are visually present
       dividers.forEach(divider => {
         expect(divider).toBeVisible()
-        expect(divider).toHaveTextContent('+')
+        expect(divider).toMatchTextContent('+')
       })
     })
 
@@ -1274,10 +1274,10 @@ describe('VHotkey.tsx', () => {
       expect(dividers).toHaveLength(2)
 
       // First divider should be +
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
 
       // Second divider should be "then" (localized)
-      expect(dividers[1]).toHaveTextContent(/then/i)
+      expect(dividers[1]).toMatchTextContent(/then/i)
     })
   })
 
@@ -1677,10 +1677,10 @@ describe('VHotkey.tsx', () => {
 
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(1) // Only the + separator
-      expect(dividers[0]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
 
       // The second key should be the minus key
-      expect(keys[1]).toHaveTextContent('-')
+      expect(keys[1]).toMatchTextContent('-')
     })
 
     it('should render complex combinations with literal symbols', () => {
@@ -1692,12 +1692,12 @@ describe('VHotkey.tsx', () => {
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(2) // Two + separators
       dividers.forEach(divider => {
-        expect(divider).toHaveTextContent('+')
+        expect(divider).toMatchTextContent('+')
       })
 
-      expect(keys[0]).toHaveTextContent('Ctrl')
-      expect(keys[1]).toHaveTextContent('Shift')
-      expect(keys[2]).toHaveTextContent('-')
+      expect(keys[0]).toMatchTextContent('Ctrl')
+      expect(keys[1]).toMatchTextContent('Shift')
+      expect(keys[2]).toMatchTextContent('-')
     })
 
     it('should render sequence with literal symbols', () => {
@@ -1709,14 +1709,14 @@ describe('VHotkey.tsx', () => {
       const dividers = screen.getAllByCSS('.v-hotkey__divider')
       expect(dividers).toHaveLength(3) // +, then, +
 
-      expect(dividers[0]).toHaveTextContent('+')
-      expect(dividers[1]).toHaveTextContent(/then/i)
-      expect(dividers[2]).toHaveTextContent('+')
+      expect(dividers[0]).toMatchTextContent('+')
+      expect(dividers[1]).toMatchTextContent(/then/i)
+      expect(dividers[2]).toMatchTextContent('+')
 
-      expect(keys[0]).toHaveTextContent('Ctrl')
-      expect(keys[1]).toHaveTextContent('A')
-      expect(keys[2]).toHaveTextContent('Shift')
-      expect(keys[3]).toHaveTextContent('-')
+      expect(keys[0]).toMatchTextContent('Ctrl')
+      expect(keys[1]).toMatchTextContent('A')
+      expect(keys[2]).toMatchTextContent('Shift')
+      expect(keys[3]).toMatchTextContent('-')
     })
   })
 
@@ -1728,7 +1728,7 @@ describe('VHotkey.tsx', () => {
       const spaceKey = keys.find(key => key.textContent?.match(/space/i))
 
       expect(spaceKey).toBeInTheDocument()
-      expect(spaceKey).toHaveTextContent(/space/i)
+      expect(spaceKey).toMatchTextContent(/space/i)
       expect(spaceKey?.textContent?.trim()).not.toBe('')
     })
 
@@ -1753,7 +1753,7 @@ describe('VHotkey.tsx', () => {
 
       const spaceKey = keys[1]
       expect(spaceKey).toHaveClass('v-hotkey__key-text')
-      expect(spaceKey).toHaveTextContent(/space/i)
+      expect(spaceKey).toMatchTextContent(/space/i)
       expect(spaceKey.querySelector('.v-icon')).not.toBeInTheDocument()
     })
 
@@ -1765,7 +1765,7 @@ describe('VHotkey.tsx', () => {
 
       const spaceKey = keys[1]
       expect(spaceKey).toHaveClass('v-hotkey__key-symbol')
-      expect(spaceKey).toHaveTextContent('␣')
+      expect(spaceKey).toMatchTextContent('␣')
     })
 
     it('should fall back to text for space on PC in symbol mode', () => {
@@ -1776,7 +1776,7 @@ describe('VHotkey.tsx', () => {
 
       const spaceKey = keys[1]
       expect(spaceKey).toHaveClass('v-hotkey__key-text')
-      expect(spaceKey).toHaveTextContent(/space/i)
+      expect(spaceKey).toMatchTextContent(/space/i)
     })
   })
 })

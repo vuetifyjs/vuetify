@@ -33,7 +33,7 @@ describe('VAvatarGroup', () => {
 
     const avatars = screen.getByCSS('.v-avatar-group__content').querySelectorAll('.v-avatar')
     expect(avatars).toHaveLength(5)
-    expect(avatars[4]).toHaveTextContent('IJ')
+    expect(avatars[4]).toMatchTextContent('IJ')
   })
 
   it('should limit visible items and show overflow', () => {
@@ -41,14 +41,14 @@ describe('VAvatarGroup', () => {
 
     const avatars = screen.getByCSS('.v-avatar-group__content').querySelectorAll('.v-avatar')
     expect(avatars).toHaveLength(3) // 2 items + overflow
-    expect(avatars[2]).toHaveTextContent('+3')
+    expect(avatars[2]).toMatchTextContent('+3')
   })
 
   it('should use custom overflowText', () => {
     render(() => <VAvatarGroup items={ items } limit={ 2 } overflowText="and 4 more" />)
 
     const overflow = screen.getByCSS('.v-avatar-group__overflow')
-    expect(overflow).toHaveTextContent('and 4 more')
+    expect(overflow).toMatchTextContent('and 4 more')
   })
 
   it('should apply vertical class', () => {

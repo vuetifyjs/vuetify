@@ -694,7 +694,7 @@ describe('VDateInput', () => {
       expect(screen.queryByCSS('.v-date-input__format-hint')).toBeNull()
 
       await userEvent.keyboard('25')
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.MM.JJJJ')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent('25.MM.JJJJ')
     })
 
     it('should keep hinting the format under a placeholder it cannot line up with', async () => {
@@ -704,7 +704,7 @@ describe('VDateInput', () => {
       expect(screen.getByCSS('input')).toHaveAttribute('placeholder', 'pick a date')
 
       await userEvent.keyboard('25')
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('25.mm.yyyy')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent('25.mm.yyyy')
     })
 
     it.each<{ props: VDateInput['$props'], keys: string, expected: string }>([
@@ -720,7 +720,7 @@ describe('VDateInput', () => {
       await userEvent.click(element)
       await userEvent.keyboard(keys)
 
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent(expected)
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent(expected)
     })
 
     it.each([
@@ -736,7 +736,7 @@ describe('VDateInput', () => {
       await userEvent.keyboard(keys(typing))
 
       expect(screen.getByCSS('input')).toHaveValue(value)
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent(expected)
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent(expected)
     })
 
     it.each([
@@ -749,7 +749,7 @@ describe('VDateInput', () => {
       await userEvent.keyboard(keys(typing))
 
       expect(screen.getByCSS('input')).toHaveValue(value)
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent(expected)
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent(expected)
     })
   })
 
@@ -871,7 +871,7 @@ describe('VDateInput', () => {
       input.setSelectionRange(0, 5)
       await userEvent.keyboard('{Delete}')
       expect(input).toHaveValue('//2025')
-      expect(screen.getByCSS('.v-date-input__format-hint')).toHaveTextContent('//2025')
+      expect(screen.getByCSS('.v-date-input__format-hint')).toMatchTextContent('//2025')
 
       await userEvent.keyboard('3')
       expect(input).toHaveValue('03//2025')

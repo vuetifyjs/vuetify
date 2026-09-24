@@ -13,7 +13,7 @@ describe('NAME', () => {
     render(<NAME />)
 
     await userEvent.click(screen.getByTestId(''))
-    await expect.element(screen.getByTestId('')).toHaveTextContent('')
+    await expect.element(screen.getByTestId('')).toMatchTextContent('')
   })
 
   showcase({ stories, props, component: NAME })

@@ -35,7 +35,7 @@ describe('VAlert', () => {
 
       Array.from(alerts).forEach((alert, idx) => {
         // TODO: useless assert
-        expect(alert).toHaveTextContent(defaultColors[idx])
+        expect(alert).toMatchTextContent(defaultColors[idx])
       })
     })
   })

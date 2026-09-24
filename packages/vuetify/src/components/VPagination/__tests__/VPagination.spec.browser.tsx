@@ -33,8 +33,8 @@ describe('VPagination', () => {
     await waitIdle() // resize-observer loop has to settle
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(2)
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toMatchTextContent('2')
   })
 
   it('should still honor an explicit total-visible when length is less than 3', () => {
@@ -108,9 +108,9 @@ describe('VPagination', () => {
       <VPagination length="3" start={ 3 } />
     ))
 
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toHaveTextContent('3')
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('4')
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(2)).toHaveTextContent('5')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toMatchTextContent('3')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toMatchTextContent('4')
+    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(2)).toMatchTextContent('5')
   })
 
   it('should render disabled buttons when length is zero', () => {
@@ -160,28 +160,28 @@ describe('VPagination', () => {
     ))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(3)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('10')
 
     await userEvent.click(screen.getByCSS('.v-pagination__next'))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('2')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
 
     await userEvent.click(screen.getAllByCSS('.v-pagination__item').at(4)!)
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(3)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('10')
 
     await userEvent.click(screen.getByCSS('.v-pagination__prev'))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('9')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('9')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
   })
 
   it('should work with even total visible items', async () => {
@@ -190,34 +190,34 @@ describe('VPagination', () => {
     ))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toHaveTextContent('2')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('3')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toMatchTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('3')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
 
     await userEvent.click(screen.getByCSS('.v-pagination__next'))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toHaveTextContent('2')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('3')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toMatchTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('3')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
 
     await userEvent.click(screen.getAllByCSS('.v-pagination__item').at(4)!)
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('8')
-    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toHaveTextContent('9')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('8')
+    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toMatchTextContent('9')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
 
     await userEvent.click(screen.getByCSS('.v-pagination__prev'))
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('8')
-    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toHaveTextContent('9')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('8')
+    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toMatchTextContent('9')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
   })
 
   it('should work with odd total visible items', async () => {
@@ -229,34 +229,34 @@ describe('VPagination', () => {
     const nextBtn = screen.getByCSS('.v-pagination__next')
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(4)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toHaveTextContent('2')
-    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(1)).toMatchTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toMatchTextContent('10')
 
     await userEvent.click(nextBtn)
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(4)
     await userEvent.click(nextBtn)
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('3')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('3')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
 
     await userEvent.click(screen.getAllByCSS('.v-pagination__item').at(4)!)
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(4)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('9')
-    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('9')
+    expect(screen.getAllByCSS('.v-pagination__item').at(3)).toMatchTextContent('10')
 
     await userEvent.click(prevBtn)
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(4)
     await userEvent.click(prevBtn)
 
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(5)
-    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toHaveTextContent('8')
-    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toHaveTextContent('10')
+    expect(screen.getAllByCSS('.v-pagination__item').at(0)).toMatchTextContent('1')
+    expect(screen.getAllByCSS('.v-pagination__item').at(2)).toMatchTextContent('8')
+    expect(screen.getAllByCSS('.v-pagination__item').at(4)).toMatchTextContent('10')
   })
 
   showcase({ stories })

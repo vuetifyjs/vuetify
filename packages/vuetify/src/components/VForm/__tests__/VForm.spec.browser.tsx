@@ -139,7 +139,7 @@ describe('VForm', () => {
 
     await userEvent.click(screen.getByCSS('.v-btn'))
     expect(screen.getByCSS('.v-text-field')).toHaveClass('v-input--error')
-    expect(screen.getByCSS('.v-messages')).toHaveTextContent('Field required')
+    expect(screen.getByCSS('.v-messages')).toMatchTextContent('Field required')
   })
 
   it('emits a SubmitEventPromise', async () => {

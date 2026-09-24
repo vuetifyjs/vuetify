@@ -61,7 +61,7 @@ describe('VBadge', () => {
   describe('max', () => {
     it('should add a suffix if the content value is greater than the max value', () => {
       const { container } = render(<VBadge content="1000" max="999" />)
-      expect(container).toHaveTextContent('+')
+      expect(container).toMatchTextContent('+')
     })
   })
 
@@ -69,7 +69,7 @@ describe('VBadge', () => {
     it('renders the proper tag instead of a div', () => {
       const { wrapper } = render(<VBadge tag="custom-tag">tag</VBadge>)
       const el = wrapper.find('custom-tag').element
-      expect(el).toHaveTextContent('tag')
+      expect(el).toMatchTextContent('tag')
     })
   })
 

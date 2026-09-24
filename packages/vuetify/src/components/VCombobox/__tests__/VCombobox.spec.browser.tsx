@@ -119,7 +119,7 @@ describe('VCombobox', () => {
       expect(model.value).toStrictEqual(items[0])
       await expect.poll(() => search.value).toBe(items[0].title)
       expect(screen.getByCSS('input[type="text"]')).toHaveValue(items[0].title)
-      expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
+      expect(screen.getByCSS('.v-combobox__selection')).toMatchTextContent(items[0].title)
 
       await userEvent.click(element)
       await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
@@ -127,7 +127,7 @@ describe('VCombobox', () => {
       expect(model.value).toBe('Item 2')
       expect(search.value).toBe('Item 2')
       expect(screen.getByCSS('input[type="text"]')).toHaveValue('Item 2')
-      expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
+      expect(screen.getByCSS('.v-combobox__selection')).toMatchTextContent('Item 2')
 
       await userEvent.click(element)
       await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
@@ -135,7 +135,7 @@ describe('VCombobox', () => {
       expect(model.value).toBe('item3')
       expect(search.value).toBe('item3')
       expect(screen.getByCSS('input[type="text"]')).toHaveValue('item3')
-      expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('item3')
+      expect(screen.getByCSS('.v-combobox__selection')).toMatchTextContent('item3')
     })
 
     it('multiple', async () => {
@@ -169,21 +169,21 @@ describe('VCombobox', () => {
       expect(model.value).toStrictEqual([items[0]])
       expect(search.value).toBeUndefined()
       expect(input).toHaveValue('')
-      expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
+      expect(screen.getByCSS('.v-combobox__selection')).toMatchTextContent(items[0].title)
 
       await userEvent.click(element)
       await userEvent.keyboard('Item 2{tab}')
       expect(model.value).toStrictEqual([items[0], 'Item 2'])
       expect(search.value).toBe('')
       expect(input).toHaveValue('')
-      expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toHaveTextContent('Item 2')
+      expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toMatchTextContent('Item 2')
 
       await userEvent.click(element)
       await userEvent.keyboard('item3{tab}')
       expect(model.value).toStrictEqual([items[0], 'Item 2', 'item3'])
       expect(search.value).toBe('')
       expect(input).toHaveValue('')
-      expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toHaveTextContent('item3')
+      expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toMatchTextContent('item3')
     })
   })
 
@@ -256,11 +256,11 @@ describe('VCombobox', () => {
 
       await userEvent.click(element)
       await userEvent.keyboard('test')
-      await expect(screen.findByRole('option')).resolves.toHaveTextContent('Test1')
+      await expect(screen.findByRole('option')).resolves.toMatchTextContent('Test1')
 
       await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('antonsen')
-      await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
+      await expect(screen.findByRole('option')).resolves.toMatchTextContent('Antonsen PK')
     })
   })
 
@@ -395,8 +395,8 @@ describe('VCombobox', () => {
       const options = await screen.findAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
       const inputField = screen.getByCSS('.v-field')
-      expect(inputField).toHaveTextContent('Item 1')
-      expect(inputField).toHaveTextContent('Item 2')
+      expect(inputField).toMatchTextContent('Item 1')
+      expect(inputField).toMatchTextContent('Item 2')
 
       await userEvent.click(options[0])
 
@@ -479,8 +479,8 @@ describe('VCombobox', () => {
 
       const listItems = await screen.findAllByRole('option')
       expect(listItems).toHaveLength(2)
-      expect(listItems[0]).toHaveTextContent('Item 3')
-      expect(listItems[1]).toHaveTextContent('Item 4')
+      expect(listItems[0]).toMatchTextContent('Item 3')
+      expect(listItems[1]).toMatchTextContent('Item 4')
     })
   })
 
@@ -872,8 +872,8 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
-      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+      expect(screen.getByTestId('header-content')).toMatchTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toMatchTextContent('My Footer')
     })
 
     it('should navigate between header, list, and footer with Tab', async () => {

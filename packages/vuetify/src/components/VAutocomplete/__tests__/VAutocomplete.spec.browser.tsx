@@ -519,13 +519,13 @@ describe('VAutocomplete', () => {
     expect(activeItems).toHaveLength(2)
 
     const inputField = await screen.findByCSS('.v-field')
-    expect(inputField).toHaveTextContent('Item 1')
-    expect(inputField).toHaveTextContent('Item 2')
+    expect(inputField).toMatchTextContent('Item 1')
+    expect(inputField).toMatchTextContent('Item 2')
 
     await userEvent.click(activeItems[0])
 
-    expect(inputField).not.toHaveTextContent('Item 1')
-    expect(inputField).toHaveTextContent('Item 2')
+    expect(inputField).not.toMatchTextContent('Item 1')
+    expect(inputField).toMatchTextContent('Item 2')
     expect(selectedItems.value).toEqual([{
       text: 'Item 2',
       id: 'item2',
@@ -661,7 +661,7 @@ describe('VAutocomplete', () => {
     await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
     await userEvent.click(document.body)
 
-    expect(element).not.toHaveTextContent('Item 1')
+    expect(element).not.toMatchTextContent('Item 1')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16210
@@ -694,7 +694,7 @@ describe('VAutocomplete', () => {
 
     expect(itemTitle).toHaveBeenCalledWith({ id: 1, name: 'a' }, expect.anything())
 
-    expect(element).toHaveTextContent('Item: {"id":1,"name":"a"}')
+    expect(element).toMatchTextContent('Item: {"id":1,"name":"a"}')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16442
@@ -717,7 +717,7 @@ describe('VAutocomplete', () => {
         />
       ))
 
-      expect(element).toHaveTextContent('Default Language')
+      expect(element).toMatchTextContent('Default Language')
     })
 
     it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', async () => {
@@ -759,8 +759,8 @@ describe('VAutocomplete', () => {
 
       const listItems = screen.getAllByRole('option')
       expect(listItems).toHaveLength(2)
-      expect(listItems[0]).toHaveTextContent('Item 3')
-      expect(listItems[1]).toHaveTextContent('Item 4')
+      expect(listItems[0]).toMatchTextContent('Item 3')
+      expect(listItems[1]).toMatchTextContent('Item 4')
     })
   })
 
@@ -1076,8 +1076,8 @@ describe('VAutocomplete', () => {
       await userEvent.click(element)
       await commands.waitStable('.v-list')
 
-      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
-      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+      expect(screen.getByTestId('header-content')).toMatchTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toMatchTextContent('My Footer')
     })
 
     it('should navigate between header, list, and footer with Tab', async () => {
