@@ -6,7 +6,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
 import { commands } from './test/setup/browser-commands'
 
-const viewport = { width: 1280, height: 800 }
 const IS_RUN = process.argv.slice(2).some(v => v === 'run')
 
 export default defineConfig(configEnv => {
@@ -93,7 +92,6 @@ export default defineConfig(configEnv => {
                 provider: playwright({
                   actionTimeout: 5000,
                   contextOptions: {
-                    viewport,
                     reducedMotion: 'reduce',
                     permissions: ['clipboard-write', 'clipboard-read'],
                   },
@@ -113,7 +111,7 @@ export default defineConfig(configEnv => {
                 instances: [{
                   browser: 'chromium',
                 }],
-                viewport,
+                viewport: { width: 1280, height: 800 },
               },
             },
           },
