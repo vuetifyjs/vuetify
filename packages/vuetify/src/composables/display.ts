@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, shallowRef, toRef } from 'vue'
+import { computed, effectScope, inject, shallowRef, toRef } from 'vue'
 import { createBreakpoints, getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -155,8 +155,14 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
 
   const platform = shallowRef(getPlatform(ssr))
 
+  // ssr defers the listener until update(), and that call happens after
+  // createVuetify's scope has returned. The child scope is still stopped
+  // with it, so unmount removes the listener.
+  const resizeScope = ssrSize ? effectScope() : undefined
+
   function update () {
-    screen.update()
+    if (resizeScope) resizeScope.run(() => screen.update())
+    else screen.update()
     platform.value = getPlatform()
   }
 
