@@ -235,7 +235,7 @@ describe('VDataTableServer', () => {
     ])
   })
 
-  it.skip('should only trigger update event once when search changes', async () => {
+  it('should only trigger update event once when search changes', async () => {
     const optionsEmits: any[] = []
     const items = ref<any[]>([])
     const search = ref('')
@@ -279,7 +279,6 @@ describe('VDataTableServer', () => {
     expect(optionsEmits).toEqual([
       { page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: '' },
       { page: 2, itemsPerPage: 2, sortBy: [], groupBy: [], search: '' },
-      // { page: 2, itemsPerPage: 2, sortBy: [], groupBy: [], search: 'frozen' },
       { page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: 'frozen' },
     ])
   })
