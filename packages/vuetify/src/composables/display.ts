@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, onScopeDispose, shallowRef, toRef } from 'vue'
+import { computed, inject, shallowRef, toRef } from 'vue'
 import { createBreakpoints, getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
 import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 
@@ -158,16 +158,6 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
   function update () {
     screen.update()
     platform.value = getPlatform()
-  }
-
-  // Resize stays here. createBreakpointsPlugin subscribes by replacing
-  // app.mount, and createVuetify already owns that hook for the SSR flush.
-  if (IN_BROWSER) {
-    window.addEventListener('resize', screen.update, { passive: true })
-
-    onScopeDispose(() => {
-      window.removeEventListener('resize', screen.update)
-    }, true)
   }
 
   return {
