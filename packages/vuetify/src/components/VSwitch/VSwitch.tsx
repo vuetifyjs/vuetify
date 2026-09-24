@@ -300,7 +300,7 @@ export const VSwitch = genericComponent<new <T>(
       )
     })
 
-    return forwardRefs({}, inputRef)
+    return forwardRefs({ isFocused }, control, inputRef)
   },
 })
 

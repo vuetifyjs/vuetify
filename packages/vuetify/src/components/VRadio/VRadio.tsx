@@ -2,9 +2,11 @@
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
+import { ref } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -35,12 +37,14 @@ export const VRadio = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const controlRef = ref<VSelectionControl>()
 
     useRender(() => {
       const controlProps = omit(VSelectionControl.filterProps(props), ['modelValue'])
 
       return (
         <VSelectionControl
+          ref={ controlRef }
           { ...controlProps }
           v-model={ model.value }
           class={[
@@ -54,7 +58,7 @@ export const VRadio = genericComponent<new <T>(
       )
     })
 
-    return {}
+    return forwardRefs({}, controlRef)
   },
 })
 
