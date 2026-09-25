@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref, toRef, watch } from 'vue'
+import { computed, inject, provide, readonly, ref, toRef, watch } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 import { createV0Rtl } from '@/util'
 // Types
@@ -76,7 +76,7 @@ export interface RtlProps {
 }
 
 export interface RtlInstance {
-  isRtl: Ref<boolean>
+  isRtl: Readonly<Ref<boolean>>
   rtl: Ref<Record<string, boolean>>
   rtlClasses: Ref<string>
 }
@@ -146,7 +146,7 @@ export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInsta
   )
 
   return {
-    isRtl: direction.isRtl,
+    isRtl: readonly(direction.isRtl),
     rtl,
     rtlClasses: toRef(() => `v-locale--is-${direction.isRtl.value ? 'rtl' : 'ltr'}`),
   }
