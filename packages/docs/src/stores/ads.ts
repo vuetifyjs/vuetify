@@ -6,7 +6,6 @@ interface Ad {
     url: string
     type: string
     description?: string
-    // eslint-disable-next-line camelcase
     description_short?: string
     sponsored: boolean
     discoverable: boolean

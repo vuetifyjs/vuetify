@@ -1,4 +1,3 @@
-/* eslint-disable @vitest/no-commented-out-tests */
 // Composables
 import { createTheme, provideTheme, ThemeSymbol } from '../theme'
 

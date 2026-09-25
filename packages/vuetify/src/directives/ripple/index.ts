@@ -82,7 +82,6 @@ const calculate = (
 }
 
 const ripples = {
-  /* eslint-disable max-statements */
   show (
     e: VuetifyRippleEvent,
     el: HTMLElement,

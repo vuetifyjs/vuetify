@@ -33,11 +33,12 @@ const stories = Object.fromEntries(Object.entries({
             modelValue={['California']}
             label="selection slot"
             { ...v.props }
-          >{{
-            selection: ({ item }) => {
-              return item
-            },
-          }}
+          >
+            {{
+              selection: ({ item }) => {
+                return item
+              },
+            }}
           </VAutocomplete>
         </div>
       ))

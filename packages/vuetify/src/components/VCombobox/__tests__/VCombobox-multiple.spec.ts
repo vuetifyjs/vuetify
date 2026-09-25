@@ -270,7 +270,6 @@ describe.skip('VCombobox.ts', () => {
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
-  // eslint-disable-next-line max-statements
   it('should create new items when a delimiter is entered', async () => {
     const { wrapper, change } = createMultipleCombobox({
       delimiters: [', ', 'baz'],
@@ -411,7 +410,6 @@ describe.skip('VCombobox.ts', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/12781
-  // eslint-disable-next-line max-statements
   it('should correctly add items after deletion and blur', async () => {
     const { wrapper, change } = createMultipleCombobox({
       multiple: true,

@@ -155,7 +155,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
   }
 
   function parseDate (dateString: string) {
-    function parseDateParts (text: string): Record<'y' |'m' | 'd', number> {
+    function parseDateParts (text: string): Record<'y' | 'm' | 'd', number> {
       const parts = text.trim().split(currentFormat.value.separator)
 
       return {

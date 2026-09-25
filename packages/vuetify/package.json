@@ -143,8 +143,8 @@
     "test:coverage": "pnpm test --coverage",
     "test:screen": "node ../../scripts/tdd-run.js ",
     "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
-    "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
-    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
+    "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0 --concurrency auto\"",
+    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src --concurrency auto\""
   },
   "dependencies": {
     "@vuetify/v0": "^1.2.1"
@@ -190,9 +190,7 @@
     "date-fns": "catalog:",
     "dayjs": "catalog:",
     "dotenv": "catalog:",
-    "expect": "catalog:",
     "fast-glob": "catalog:",
-    "identity-obj-proxy": "catalog:",
     "jsdom": "catalog:",
     "luxon": "catalog:",
     "micromatch": "catalog:",

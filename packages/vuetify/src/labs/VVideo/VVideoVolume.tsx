@@ -80,58 +80,58 @@ export const VVideoVolume = genericComponent()({
           style={ props.style }
           ref={ containerRef }
         >
-            <VIconBtn
-              icon={ volumeIcon.value }
-              aria-label={ props.label }
-              v-tooltip={[{
-                text: props.label,
-                location: 'top',
-                disabled: menu.value,
-              }]}
-              onClick={ props.onClick as any }
-              { ...attrs }
-            >
-              <VIcon />
-              { !props.inline && (
-                <VMenu
-                  v-model={ menu.value }
-                  activator="parent"
-                  attach={ containerRef.value }
-                  closeOnContentClick={ false }
-                  location={ props.menuProps?.location ?? 'top center' }
-                  offset="8"
+          <VIconBtn
+            icon={ volumeIcon.value }
+            aria-label={ props.label }
+            v-tooltip={[{
+              text: props.label,
+              location: 'top',
+              disabled: menu.value,
+            }]}
+            onClick={ props.onClick as any }
+            { ...attrs }
+          >
+            <VIcon />
+            { !props.inline && (
+              <VMenu
+                v-model={ menu.value }
+                activator="parent"
+                attach={ containerRef.value }
+                closeOnContentClick={ false }
+                location={ props.menuProps?.location ?? 'top center' }
+                offset="8"
+              >
+                <div
+                  class={[
+                    'v-video-volume__menu',
+                    `v-video-volume__menu--${props.direction}`,
+                  ]}
                 >
-                  <div
-                    class={[
-                      'v-video-volume__menu',
-                      `v-video-volume__menu--${props.direction}`,
-                    ]}
-                  >
-                    <VSlider
-                      direction={ props.direction }
-                      aria-label={ t('$vuetify.video.volume') }
-                      modelValue={ volume.value }
-                      onUpdate:modelValue={ v => volume.value = v }
-                      { ...sliderDefaults }
-                      { ...props.sliderProps }
-                    />
-                  </div>
-                </VMenu>
-              )}
-            </VIconBtn>
-
-            { props.inline && (
-              <VSlider
-                class="v-video-volume-inline__slider"
-                minWidth="50"
-                aria-label={ t('$vuetify.video.volume') }
-                modelValue={ volume.value }
-                onUpdate:modelValue={ v => volume.value = v }
-                onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }
-                { ...sliderDefaults }
-                { ...props.sliderProps }
-              />
+                  <VSlider
+                    direction={ props.direction }
+                    aria-label={ t('$vuetify.video.volume') }
+                    modelValue={ volume.value }
+                    onUpdate:modelValue={ v => volume.value = v }
+                    { ...sliderDefaults }
+                    { ...props.sliderProps }
+                  />
+                </div>
+              </VMenu>
             )}
+          </VIconBtn>
+
+          { props.inline && (
+            <VSlider
+              class="v-video-volume-inline__slider"
+              minWidth="50"
+              aria-label={ t('$vuetify.video.volume') }
+              modelValue={ volume.value }
+              onUpdate:modelValue={ v => volume.value = v }
+              onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }
+              { ...sliderDefaults }
+              { ...props.sliderProps }
+            />
+          )}
         </div>
       )
     })

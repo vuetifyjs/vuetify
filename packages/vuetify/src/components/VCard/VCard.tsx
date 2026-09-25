@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-
 // Styles
 import './VCard.sass'
 

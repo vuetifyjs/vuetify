@@ -74,8 +74,8 @@ catalog:
   '@types/markdown-it-container': '^2.0.10'
   '@types/babel__generator': '^7.27.0'
   '@types/yargs': '^17.0.35'
-  '@typescript-eslint/eslint-plugin': '^8.57.2'
-  '@typescript-eslint/parser': '^8.57.2'
+  '@typescript-eslint/eslint-plugin': '^8.70.1'
+  '@typescript-eslint/parser': '^8.70.1'
 
   # CSS/Styling
   sass: 1.93.3
@@ -117,28 +117,18 @@ catalog:
   magic-string: '^0.30.21'
 
   # ESLint ecosystem
-  eslint: '^8.57.0'
-  eslint-config-standard: '^17.1.0'
+  eslint: '^10.0.0'
+  '@eslint/json': '^2.1.0'
+  neostandard: '0.14.0-next.1'
   eslint-formatter-codeframe: '^7.32.2'
   eslint-plugin-import: '^2.32.0'
-  eslint-plugin-local-rules: '^2.0.1'
-  eslint-plugin-n: '^16.6.2'
-  eslint-plugin-promise: '^6.6.0'
   eslint-plugin-react: '^7.37.5'
-  eslint-plugin-sonarjs: '^0.25.1'
-  eslint-plugin-vue: '^10.6.0'
-  eslint-plugin-vuetify: '^2.5.3'
+  eslint-plugin-vue: '^10.11.1'
   '@vitest/eslint-plugin': '^1.6.27'
-  '@stylistic/eslint-plugin-ts': '^3.1.0'
-  vue-eslint-parser: '^10.2.0'
+  vue-eslint-parser: '^10.4.1'
 
   # Testing
-  jest: '^30.2.0'
-  jest-runner-eslint: '^2.3.0'
-  jest-silent-reporter: '^0.6.0'
   jsdom: '^27.2.0'
-  expect: '^30.2.0'
-  identity-obj-proxy: '^3.0.0'
   '@testing-library/user-event': '^14.6.1'
   '@testing-library/vue': '^8.1.0'
   timezone-mock: '^1.3.6'
@@ -228,6 +218,9 @@ minimumReleaseAgeExclude:
   - playwright-core
   - vitest@4.1.11
   - '@vizzly-testing/vitest@0.1.1'
+  - '@typescript-eslint/eslint-plugin'
+  - '@typescript-eslint/parser'
+  - eslint-plugin-vue
 
 nodeLinker: hoisted
 
@@ -243,7 +236,6 @@ overrides:
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
-  '@typescript-eslint/typescript-estree@8.57.2': patches/@typescript-eslint__typescript-estree@8.57.2.patch
   '@vitest/browser': patches/@vitest__browser.patch
   playwright-core: patches/playwright-core.patch
 

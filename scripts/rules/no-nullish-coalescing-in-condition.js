@@ -1,6 +1,6 @@
 export default {
   create (context) {
-    const sourceCode = context.getSourceCode()
+    const sourceCode = context.sourceCode
 
     function isParenthesised (node) {
       const previousToken = sourceCode.getTokenBefore(node)

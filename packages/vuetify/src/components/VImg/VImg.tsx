@@ -402,18 +402,20 @@ export const VImg = genericComponent<VImgSlots>()({
             handler: init,
             options: props.options,
           }, null, ['once']]}
-        >{{
-          additional: () => (
-            <>
-              <__image { ...imageAttrs } />
-              <__preloadImage />
-              <__gradient />
-              <__placeholder />
-              <__error />
-            </>
-          ),
-          default: slots.default,
-        }}</VResponsive>
+        >
+          {{
+            additional: () => (
+              <>
+                <__image { ...imageAttrs } />
+                <__preloadImage />
+                <__gradient />
+                <__placeholder />
+                <__error />
+              </>
+            ),
+            default: slots.default,
+          }}
+        </VResponsive>
       )
     })
 

@@ -35,7 +35,7 @@ export type VTime = number | string | {
   minute: number
 }
 
-export type VTimestampInput = number | string | Date;
+export type VTimestampInput = number | string | Date
 
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)

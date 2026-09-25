@@ -42,7 +42,6 @@ const WIDTH_MULTIPLIER = 1.7
 export const stack: CalendarEventOverlapMode = (events, firstWeekday, overlapThreshold) => {
   const handler = getOverlapGroupHandler(firstWeekday)
 
-  // eslint-disable-next-line max-statements
   return (day, dayEvents, timed, reset) => {
     if (!timed) {
       return handler.getVisuals(day, dayEvents, timed, reset)

@@ -95,8 +95,7 @@ function genStructure (type: string | undefined, types: Record<string, string>):
   let children: VSkeletonBones = []
 
   // End of recursion, do nothing
-  /* eslint-disable-next-line no-empty, brace-style */
-  if (type === bone) {}
+  if (type === bone) void 0
   // Array of values - e.g. 'card@2'
   else if (bone.includes(',')) children = mapBones(bone, types)
   // Array of values - e.g. 'list-item@2'

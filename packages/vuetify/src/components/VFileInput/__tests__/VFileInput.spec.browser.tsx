@@ -32,11 +32,12 @@ const stories = Object.fromEntries(Object.entries({
             modelValue={[oneMBFile, twoMBFile]}
             label="selection slot"
             { ...v.props }
-          >{{
-            selection: ({ fileNames }) => {
-              return fileNames.map(f => f)
-            },
-          }}
+          >
+            {{
+              selection: ({ fileNames }) => {
+                return fileNames.map(f => f)
+              },
+            }}
           </VFileInput>
         </div>
       ))

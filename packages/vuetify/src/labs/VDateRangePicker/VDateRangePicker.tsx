@@ -343,7 +343,7 @@ export const VDateRangePicker = genericComponent<new <
                     controls: ({ monthYearText, prevMonth, nextMonth, disabled }: VDatePickerControlsDefaultSlotProps) => (
                       <>
                         <VBtn
-                        class={{ 'v-date-range-picker__nav-hidden': !props.independentMonths }}
+                          class={{ 'v-date-range-picker__nav-hidden': !props.independentMonths }}
                           density="comfortable"
                           disabled={ !props.independentMonths || rightPrevDisabled.value || disabled.includes('prev-month') }
                           icon={ props.prevIcon }

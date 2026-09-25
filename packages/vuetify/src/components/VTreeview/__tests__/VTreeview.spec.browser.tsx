@@ -386,12 +386,12 @@ describe.each([
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
         await expect.element(screen.getByText(/Core/)).toBeVisible()
         await userEvent.click(screen.getByText(/Vuetify/).parentElement!.previousElementSibling!)
-        // eslint-disable-next-line @vitest/no-conditional-in-test
+        // eslint-disable-next-line vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
-          // eslint-disable-next-line @vitest/no-conditional-expect
+          // eslint-disable-next-line vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).not.toBeVisible()
         } else {
-          // eslint-disable-next-line @vitest/no-conditional-expect
+          // eslint-disable-next-line vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/Core/)).toBeNull()
         }
       })
@@ -797,12 +797,12 @@ describe.each([
         await userEvent.click(screen.getByText(/Core/).parentElement!.previousElementSibling!)
         // registration changes are propagated with a 100ms throttle
         await wait(300)
-        // eslint-disable-next-line @vitest/no-conditional-in-test
+        // eslint-disable-next-line vitest/no-conditional-in-test
         if (itemsRegistration === 'render') {
-          // eslint-disable-next-line @vitest/no-conditional-expect
+          // eslint-disable-next-line vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/John/), { timeout: 3000 }).not.toBeVisible()
         } else {
-          // eslint-disable-next-line @vitest/no-conditional-expect
+          // eslint-disable-next-line vitest/no-conditional-expect
           await expect.poll(() => screen.queryByText(/John/)).toBeNull()
         }
 
@@ -1059,7 +1059,6 @@ describe('VTreeview with loading', () => {
       { value: 2, title: '2.another', children: [] },
     ] as any[])
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     async function loadChildren (item: any) {
       loadSpy(item)
       await wait(50)
@@ -1106,7 +1105,6 @@ describe('VTreeview with loading', () => {
       { value: 2, title: '2.another', children: [] },
     ] as any[])
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     async function loadChildren (item: any) {
       loadSpy(item)
       await wait(50)

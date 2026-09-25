@@ -31,7 +31,7 @@ export default {
     fixable: 'code',
   },
   create (context) {
-    const sourceCode = context.getSourceCode()
+    const sourceCode = context.sourceCode
     const comments = sourceCode.getAllComments().filter(comment => comment.type === 'Line')
     const importMap = []
 
