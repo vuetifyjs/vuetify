@@ -1,12 +1,9 @@
 // Utilities
 import {
   computed,
-  getCurrentScope,
   inject,
-  onScopeDispose,
   provide,
   ref,
-  shallowRef,
   toRef,
   watch,
   watchEffect,
@@ -14,6 +11,7 @@ import {
 import {
   consoleWarn,
   createRange,
+  createV0Theme,
   darken,
   deprecate,
   getCurrentInstance,
@@ -30,7 +28,6 @@ import {
   PREFERS_REDUCED_MOTION,
   propsFactory,
   RGBtoHex,
-  SUPPORTS_MATCH_MEDIA,
 } from '@/util'
 import { Box } from '@/util/box'
 
@@ -363,16 +360,35 @@ function getOrCreateStyleElement (id: string, cspNonce?: string) {
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
-  const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
-  const systemName = shallowRef('light')
+
+  const registered: Record<string, { dark: boolean, colors: { background: string } }> = {}
+  for (const [id, theme] of Object.entries(parsedOptions.themes)) {
+    registered[id] = {
+      dark: Boolean(theme.dark),
+      colors: { background: '#000' },
+    }
+  }
+
+  // Selection and prefers-color-scheme live in v0. Colors, variations, and the
+  // stylesheet stay here. The placeholder color is only so the theme can register.
+  const bundle = createV0Theme({
+    default: 'light',
+    system: { light: 'light', dark: 'dark' },
+    themes: registered,
+  })
+
+  if (parsedOptions.defaultTheme !== 'system') {
+    bundle.select(parsedOptions.defaultTheme)
+  }
 
   const name = computed({
     get () {
-      return _name.value === 'system' ? systemName.value : _name.value
+      return bundle.selectedId.value ? String(bundle.selectedId.value) : 'light'
     },
     set (val: string) {
-      _name.value = val
+      if (val === 'system') bundle.reset()
+      else bundle.select(val)
     },
   })
 
@@ -403,7 +419,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const current = toRef(() => computedThemes.value[name.value])
 
-  const isSystem = toRef(() => _name.value === 'system')
+  const isSystem = bundle.isSystem
 
   const styles = computed(() => {
     const lines: string[] = []
@@ -458,24 +474,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
   const themeClasses = toRef(() => parsedOptions.isDisabled ? undefined : `${parsedOptions.prefix}theme--${name.value}`)
   const themeNames = toRef(() => Object.keys(computedThemes.value))
-
-  if (SUPPORTS_MATCH_MEDIA) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-
-    function updateSystemName () {
-      systemName.value = media.matches ? 'dark' : 'light'
-    }
-
-    updateSystemName()
-
-    media.addEventListener('change', updateSystemName, { passive: true })
-
-    if (getCurrentScope()) {
-      onScopeDispose(() => {
-        media.removeEventListener('change', updateSystemName)
-      })
-    }
-  }
 
   function install (app: App) {
     if (parsedOptions.isDisabled) return
