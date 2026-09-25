@@ -126,9 +126,6 @@ catalogs:
     '@types/prismjs':
       specifier: ^1.26.5
       version: 1.26.5
-    '@types/resize-observer-browser':
-      specifier: ^0.1.11
-      version: 0.1.11
     '@types/stringify-object':
       specifier: ^4.0.5
       version: 4.0.5
@@ -1051,9 +1048,6 @@ importers:
       '@testing-library/vue':
         specifier: 'catalog:'
         version: 8.1.0(patch_hash=15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8)(@vue/compiler-sfc@3.5.26)(vue@3.5.25(typescript@6.0.2))
-      '@types/resize-observer-browser':
-        specifier: 'catalog:'
-        version: 0.1.11
       '@vitejs/plugin-vue-jsx':
         specifier: 'catalog:'
         version: 5.1.2(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
@@ -3665,9 +3659,6 @@ packages:
 
   '@types/qs@6.9.7':
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
-
-  '@types/resize-observer-browser@0.1.11':
-    resolution: {integrity: sha512-cNw5iH8JkMkb3QkCoe7DaZiawbDQEUX8t7iuQaRTyLOyQCR2h+ibBD4GJt7p5yhUHrlOeL7ZtbxNHeipqNsBzQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -11905,8 +11896,6 @@ snapshots:
   '@types/prismjs@1.26.5': {}
 
   '@types/qs@6.9.7': {}
-
-  '@types/resize-observer-browser@0.1.11': {}
 
   '@types/resolve@1.20.2': {}
 

@@ -4,7 +4,7 @@ import './VProgressLinear.sass'
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -16,7 +16,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
+import { computed, shallowRef, Transition } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
 import { clamp, convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
@@ -85,7 +85,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement>()
 
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
@@ -105,7 +105,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
     const { roundedClasses, roundedStyles } = useRounded(props)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { isIntersecting } = useElementIntersection(root)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const max = computed(() => parseFloat(props.max))
@@ -130,8 +130,9 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       isReversed
     )
     useToggleScope(hasChunks, () => {
-      const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
-      watchEffect(() => resizeRef.value = root.value)
+      useResizeObserver(root, entries => {
+        containerWidth.value = entries[0].contentRect.width
+      })
     })
 
     const bufferWidth = computed(() => {
@@ -147,17 +148,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     })
 
     function handleClick (e: MouseEvent) {
-      if (!intersectionRef.value) return
+      if (!root.value) return
 
-      const { left, right, width } = intersectionRef.value.getBoundingClientRect()
+      const { left, right, width } = root.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
       progress.value = Math.round(value / width * max.value)
     }
-
-    watchEffect(() => {
-      intersectionRef.value = root.value
-    })
 
     function renderBackgroundBar () {
       return (

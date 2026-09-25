@@ -49,7 +49,8 @@ export const VFooter = genericComponent()({
     const { roundedClasses, roundedStyles } = useRounded(props)
 
     const autoHeight = shallowRef(32)
-    const { resizeRef } = useResizeObserver(entries => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight
     })
@@ -73,7 +74,7 @@ export const VFooter = genericComponent()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-footer',
           themeClasses.value,
