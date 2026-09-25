@@ -15,13 +15,13 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
+import { effectScope, provide, ref, toRef, watch } from 'vue'
 import { filterInputAttrs, genericComponent, isBoolean, pick, propsFactory, useRender } from '@/util'
 
 // Shared
@@ -297,13 +297,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
       intersectScope.run(() => {
-        const { intersectionRef, isIntersecting } = useIntersectionObserver()
-        watchEffect(() => {
-          intersectionRef.value = inputRef.value
-        })
+        const { isIntersecting } = useElementIntersection(inputRef)
         watch(isIntersecting, v => {
           if (!v) return
-          intersectionRef.value?.focus()
+          inputRef.value?.focus()
           intersectScope.stop()
         })
       })
