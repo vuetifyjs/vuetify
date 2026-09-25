@@ -11,7 +11,7 @@ $selection-control-description-font-size: map.get(settings.$typography, 'body-me
 $selection-control-description-font-weight: map.get(settings.$typography, 'body-medium', 'weight') !default;
 $selection-control-description-letter-spacing: map.get(settings.$typography, 'body-medium', 'letter-spacing') !default;
 $selection-control-description-line-height: 1rem !default;
-$selection-control-description-padding: 0.1rem 0 0 0 !default;
+$selection-control-description-padding: 0 !default;
 $selection-control-description-text-transform: none !default;
 
 $selection-control-description-typography: (
