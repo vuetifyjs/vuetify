@@ -1,7 +1,7 @@
 // Utilities
 import { computed, effectScope, inject, shallowRef, toRef } from 'vue'
 import { createBreakpoints, getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
-import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
+import { IN_BROWSER, SUPPORTS_MATCH_MEDIA, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -209,13 +209,25 @@ export function useDisplay (
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
+  // Same query createBreakpoints uses. Reading width subscribes this computed
+  // to the existing resize listener, so the matchMedia() call does not.
+  function isBelow (px: number, width: number) {
+    if (SUPPORTS_MATCH_MEDIA) {
+      return !window.matchMedia(`(min-width: ${px}px)`).matches
+    }
+
+    return width < px
+  }
+
   const mobile = computed(() => {
+    const width = display.width.value
+
     if (props.mobile) {
       return true
     } else if (isNumber(props.mobileBreakpoint)) {
-      return display.width.value < props.mobileBreakpoint
+      return isBelow(props.mobileBreakpoint, width)
     } else if (props.mobileBreakpoint) {
-      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
+      return isBelow(display.thresholds.value[props.mobileBreakpoint], width)
     } else if (isNull(props.mobile)) {
       return display.mobile.value
     } else {

@@ -1,9 +1,9 @@
 // Composables
-import { createDisplay } from '../display'
+import { createDisplay, DisplaySymbol, useDisplay } from '../display'
 
 // Utilities
-import { page } from '@test'
-import { effectScope, nextTick } from 'vue'
+import { page, render } from '@test'
+import { defineComponent, effectScope, h, inject, nextTick } from 'vue'
 
 const breakpoints = [
   'xs',
@@ -309,6 +309,47 @@ describe('display', () => {
       scope.stop()
       add.mockRestore()
       remove.mockRestore()
+    }
+  })
+
+  it('should use the same media query for a component mobileBreakpoint as the global mobile flag', async () => {
+    await page.viewport(1600, 900)
+
+    const original = window.matchMedia.bind(window)
+    const spy = vi.spyOn(window, 'matchMedia').mockImplementation(query => {
+      const list = original(query)
+
+      if (query !== '(min-width: 1145px)') return list
+
+      return new Proxy(list, {
+        get (target, prop, receiver) {
+          if (prop === 'matches') return false
+
+          const value = Reflect.get(target, prop, receiver)
+          return typeof value === 'function' ? value.bind(target) : value
+        },
+      })
+    })
+
+    try {
+      let local = false
+      let global = false
+
+      render(defineComponent({
+        setup () {
+          const display = inject(DisplaySymbol)!
+          const { mobile } = useDisplay({ mobile: null, mobileBreakpoint: 'lg' })
+          local = mobile.value
+          global = display.mobile.value
+
+          return () => h('div')
+        },
+      }))
+
+      expect(global).toBe(true)
+      expect(local).toBe(true)
+    } finally {
+      spy.mockRestore()
     }
   })
 
