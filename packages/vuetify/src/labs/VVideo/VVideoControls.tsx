@@ -289,20 +289,20 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { props.hideProgressBar
                       ? <VSpacer />
                       : (
-                          <VSlider
-                            modelValue={ props.progress }
-                            noKeyboard
-                            color={ trackColor.value ?? 'surface-variant' }
-                            trackColor={ props.variant === 'tube' ? 'white' : undefined }
-                            class="v-video__track"
-                            thumbLabel="always"
-                            aria-label={ labels.value.seek }
-                            onUpdate:modelValue={ skipTo }
-                          >
-                            {{
-                              'thumb-label': () => currentTime.value.elapsed,
-                            }}
-                          </VSlider>
+                        <VSlider
+                          modelValue={ props.progress }
+                          noKeyboard
+                          color={ trackColor.value ?? 'surface-variant' }
+                          trackColor={ props.variant === 'tube' ? 'white' : undefined }
+                          class="v-video__track"
+                          thumbLabel="always"
+                          aria-label={ labels.value.seek }
+                          onUpdate:modelValue={ skipTo }
+                        >
+                          {{
+                            'thumb-label': () => currentTime.value.elapsed,
+                          }}
+                        </VSlider>
                       )
                     }
                     { props.variant === 'tube' && <VSpacer /> }

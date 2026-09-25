@@ -37,7 +37,7 @@ const componentsInfo: Record<string, { from: string }> = {
   ...importMapLabs.components,
 }
 
-type Truthy<T> = Exclude<T, null | undefined | 0 | '' | false>;
+type Truthy<T> = Exclude<T, null | undefined | 0 | '' | false>
 const BooleanFilter = <T>(x: T): x is Truthy<T> => Boolean(x)
 
 function clamp (v: number, min: number, max: number) {

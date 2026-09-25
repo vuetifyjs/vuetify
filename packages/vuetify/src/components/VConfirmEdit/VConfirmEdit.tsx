@@ -46,7 +46,7 @@ export const VConfirmEdit = genericComponent<new <T> (
   props: {
     modelValue?: T
     'onUpdate:modelValue'?: (value: T) => void
-    'onSave'?: (value: T) => void
+    onSave?: (value: T) => void
   },
   slots: VConfirmEditSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({

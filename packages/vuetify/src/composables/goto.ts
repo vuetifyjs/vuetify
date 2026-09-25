@@ -59,7 +59,7 @@ function getOffset (target: any, horizontal?: boolean, rtl?: boolean): number {
 }
 
 export function createGoTo (
-  options: GoToOptions| undefined,
+  options: GoToOptions | undefined,
   locale: LocaleInstance & RtlInstance
 ): GoToInstance {
   return {

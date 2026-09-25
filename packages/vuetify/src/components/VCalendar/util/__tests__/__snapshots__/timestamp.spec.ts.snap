@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`VCalendar/util/timestamp.ts > createDayList > should handle skips equal to zero 1`] = `
+exports[`VCalendar/util/timestamp > createDayList > should handle skips equal to zero 1`] = `
 [
   {
     "date": "2019-04-22",
@@ -50,7 +50,7 @@ exports[`VCalendar/util/timestamp.ts > createDayList > should handle skips equal
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts > should create interval list 1`] = `
+exports[`VCalendar/util/timestamp > should create interval list 1`] = `
 [
   {
     "date": "2019-02-08",
@@ -205,7 +205,7 @@ exports[`VCalendar/util/timestamp.ts > should create interval list 1`] = `
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts > should create interval list 2`] = `
+exports[`VCalendar/util/timestamp > should create interval list 2`] = `
 [
   {
     "date": "2019-02-08",
@@ -360,7 +360,7 @@ exports[`VCalendar/util/timestamp.ts > should create interval list 2`] = `
 ]
 `;
 
-exports[`VCalendar/util/timestamp.ts > should create interval list 3`] = `
+exports[`VCalendar/util/timestamp > should create interval list 3`] = `
 [
   {
     "date": "2019-02-08",

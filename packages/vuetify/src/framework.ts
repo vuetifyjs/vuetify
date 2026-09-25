@@ -157,6 +157,6 @@ function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string)
   const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
 
   if (provides && (key as any) in provides) {
-    return provides[(key as string)]
+    return provides[key as string]
   }
 }

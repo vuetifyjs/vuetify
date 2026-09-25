@@ -37,10 +37,10 @@ const stories = Object.fromEntries(Object.entries({
             label="selection slot"
             { ...v.props }
           >{{
-            selection: ({ item }) => {
-              return item
-            },
-          }}
+              selection: ({ item }) => {
+                return item
+              },
+            }}
           </VSelect>
         </div>
       ))

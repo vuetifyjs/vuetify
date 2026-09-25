@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable sonarjs/no-identical-functions */
 // Utilities
 import {
   branchSelectStrategy,
