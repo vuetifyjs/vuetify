@@ -2,7 +2,7 @@
 @use '../../styles/tools';
 
 // VLabel
-$label-color: inherit !default;
+$label-color: currentColor !default;
 $label-disabled-color: tools.theme-color('on-surface', var(--v-disabled-opacity)) !default;
 $label-display: inline-flex !default;
 $label-error-color: rgb(var(--v-theme-error)) !default;
