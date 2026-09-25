@@ -308,6 +308,22 @@ describe('createTheme', () => {
     consoleMock.mockReset()
   })
 
+  it('should follow the system scheme until an explicit theme is chosen', () => {
+    const theme = createTheme({ defaultTheme: 'system' })
+
+    expect(theme.isSystem.value).toBe(true)
+    expect(['light', 'dark']).toContain(theme.name.value)
+
+    theme.change('light')
+
+    expect(theme.isSystem.value).toBe(false)
+    expect(theme.name.value).toBe('light')
+
+    theme.change('system')
+
+    expect(theme.isSystem.value).toBe(true)
+  })
+
   it('should generate utility classes with a custom prefix', async () => {
     // @ts-expect-error next-line
     const theme = createTheme({ prefix: 'custom-' })
