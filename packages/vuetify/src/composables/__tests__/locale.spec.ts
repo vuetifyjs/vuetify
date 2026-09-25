@@ -66,4 +66,19 @@ describe('locale.ts', () => {
     warned.mockRestore()
     scope.stop()
   })
+
+  it('should fall back when the current locale has no catalog', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({ locale: 'en-US' }))!
+
+    expect(locale.t('$vuetify.close')).toBe('Close')
+
+    locale.messages.value = { ...locale.messages.value, fr: { close: 'Fermer' } }
+    expect(locale.t('$vuetify.close')).toBe('Close')
+
+    locale.current.value = 'fr'
+    expect(locale.t('$vuetify.close')).toBe('Fermer')
+
+    scope.stop()
+  })
 })

@@ -20,12 +20,20 @@ const replace = (str: string, params: unknown[]) => {
   })
 }
 
+type Bundle = ReturnType<typeof createV0Locale>
+
+function selectLocale (bundle: Bundle, locale: string) {
+  if (!bundle.has(locale)) bundle.register({ id: locale })
+  if (bundle.selectedId.value !== locale) bundle.select(locale)
+}
+
 function createBundle (locale: string, fallbackLocale: string, catalogs: LocaleMessages) {
-  return createV0Locale({
-    default: locale,
+  const bundle = createV0Locale({
     fallback: fallbackLocale,
     messages: catalogs as Record<string, Record<string, string>>,
   })
+  selectLocale(bundle, locale)
+  return bundle
 }
 
 const createTranslateFunction = (
@@ -35,11 +43,7 @@ const createTranslateFunction = (
 ) => {
   const bundle = shallowRef(createBundle(current.value, fallback.value, messages.value))
 
-  watch(current, value => {
-    const active = bundle.value
-    if (!active.has(value)) active.register({ id: value })
-    if (active.selectedId.value !== value) active.select(value)
-  }, { flush: 'sync' })
+  watch(current, value => selectLocale(bundle.value, value), { flush: 'sync' })
 
   // Fallback is fixed inside createLocale, and the catalogs are copied in at
   // construction. Rebuild when either changes so t() keeps reading them.
