@@ -94,15 +94,15 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
 
     const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
     const contentHeight = computed(() => parseInt((
-      Number(props.height) +
-      (props.density === 'prominent' ? Number(props.height) : 0) -
+      parseFloat(props.height as any) +
+      (props.density === 'prominent' ? parseFloat(props.height as any) : 0) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ), 10))
     const extensionHeight = computed(() => isExtended.value
       ? parseInt((
-        Number(props.extensionHeight) +
-        (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
+        parseFloat(props.extensionHeight as any) +
+        (props.density === 'prominent' ? parseFloat(props.extensionHeight as any) : 0) -
         (props.density === 'comfortable' ? 4 : 0) -
         (props.density === 'compact' ? 8 : 0)
       ), 10)
