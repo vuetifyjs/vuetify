@@ -209,8 +209,6 @@ export function useDisplay (
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
-  // Same query createBreakpoints uses. Reading width subscribes this computed
-  // to the existing resize listener, so the matchMedia() call does not.
   function isBelow (px: number, width: number) {
     if (SUPPORTS_MATCH_MEDIA) {
       return !window.matchMedia(`(min-width: ${px}px)`).matches
@@ -220,6 +218,7 @@ export function useDisplay (
   }
 
   const mobile = computed(() => {
+    // Reactivity trigger, do not remove. matchMedia() does not subscribe.
     const width = display.width.value
 
     if (props.mobile) {
