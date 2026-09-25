@@ -41,6 +41,12 @@
       @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
         --v-selection-control-size: #{$selection-control-size + $modifier}
 
+  .v-selection-control__description
+    opacity: $selection-control-description-opacity
+    padding: $selection-control-description-padding
+
+    @include tools.typography($selection-control-description-typography...)
+
   .v-selection-control__wrapper
     width: var(--v-selection-control-size)
     height: var(--v-selection-control-size)

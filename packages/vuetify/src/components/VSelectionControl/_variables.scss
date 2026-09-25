@@ -5,3 +5,19 @@
 // VSelectionControl
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;
 $selection-control-size: 40px !default;
+
+$selection-control-description-opacity: var(--v-list-item-subtitle-opacity, var(--v-medium-emphasis-opacity)) !default;
+$selection-control-description-font-size: map.get(settings.$typography, 'body-medium', 'size') !default;
+$selection-control-description-font-weight: map.get(settings.$typography, 'body-medium', 'weight') !default;
+$selection-control-description-letter-spacing: map.get(settings.$typography, 'body-medium', 'letter-spacing') !default;
+$selection-control-description-line-height: 1rem !default;
+$selection-control-description-padding: 0.1rem 0 0 0 !default;
+$selection-control-description-text-transform: none !default;
+
+$selection-control-description-typography: (
+  $selection-control-description-font-size,
+  $selection-control-description-font-weight,
+  $selection-control-description-letter-spacing,
+  $selection-control-description-line-height,
+  $selection-control-description-text-transform
+) !default;

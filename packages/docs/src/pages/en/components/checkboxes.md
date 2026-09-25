@@ -53,6 +53,12 @@ Checkboxes can be colored by using any of the builtin colors and contextual name
 
 <ExamplesExample file="v-checkbox/prop-colors" />
 
+#### Description
+
+The description prop can provide additional information.
+
+<ExamplesExample file="v-checkbox/prop-description" />
+
 #### Model as array
 
 Multiple `v-checkbox`'s can share the same **v-model** by using an array.
@@ -78,6 +84,16 @@ A single `v-checkbox` will have a boolean value as its **value**.
 Checkbox labels can be defined in `label` slot - that will allow to use HTML content.
 
 <ExamplesExample file="v-checkbox/slot-label" />
+
+#### Description slot
+
+You can provide additional information using the `description` slot.
+
+<ExamplesExample file="v-checkbox/slot-description" />
+
+You can also pass the description prop into the description slot, if you need to control formatting
+
+<ExamplesExample file="v-checkbox/slot-description-with-prop" />
 
 ### Misc
 
