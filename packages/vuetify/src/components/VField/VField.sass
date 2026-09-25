@@ -122,7 +122,7 @@
   /* region ELEMENTS */
   .v-field__input
     align-items: center
-    color: inherit
+    color: $field-input-color
     column-gap: $field-input-column-gap
     display: flex
     flex-wrap: wrap
@@ -163,6 +163,9 @@
     // Remove Firefox red outline
     &:invalid
       box-shadow: none
+
+    @supports (color: oklch(from currentColor l c h / 1))
+      color: oklch(from $field-input-color l c h / 1)
 
   .v-field__field
     flex: 1 0
