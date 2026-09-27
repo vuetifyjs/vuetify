@@ -127,11 +127,17 @@ export const makeRouterProps = propsFactory({
 let inTransition = false
 export function useBackButton (router: Router | undefined, cb: () => NavigationGuardReturn) {
   let popped = false
+  let disposed = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
   if (IN_BROWSER && router?.beforeEach) {
     nextTick(() => {
+      // The scope can already be gone by now (an overlay unmounted within the
+      // same tick). Registering would leave a guard that nothing ever removes,
+      // and it keeps the unmounted component tree alive through `cb`.
+      if (disposed) return
+
       window.addEventListener('popstate', onPopstate)
       removeBefore = router.beforeEach(() => {
         if (!inTransition) {
@@ -147,6 +153,7 @@ export function useBackButton (router: Router | undefined, cb: () => NavigationG
       })
     })
     onScopeDispose(() => {
+      disposed = true
       window.removeEventListener('popstate', onPopstate)
       removeBefore?.()
       removeAfter?.()
