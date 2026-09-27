@@ -1,8 +1,8 @@
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
-import { defineComponent, h, nextTick, ref, shallowRef } from 'vue'
+import { defineComponent, effectScope, h, nextTick, ref, shallowRef } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { useLink } from '../router'
+import { useBackButton, useLink } from '../router'
 
 describe('useLink', () => {
   const TestComponent = defineComponent({
@@ -147,5 +147,42 @@ describe('useLink', () => {
     to.value = { name: 'page2' }
     await wait()
     expect(link.isActive?.value).toBe(false)
+  })
+})
+
+describe('useBackButton', () => {
+  function createFakeRouter () {
+    const removeBefore = vi.fn()
+    const removeAfter = vi.fn()
+    const router = {
+      beforeEach: vi.fn(() => removeBefore),
+      afterEach: vi.fn(() => removeAfter),
+    }
+    return { router: router as any, removeBefore, removeAfter }
+  }
+
+  it('should register the guard and remove it on scope dispose', async () => {
+    const { router, removeBefore, removeAfter } = createFakeRouter()
+    const scope = effectScope()
+    scope.run(() => useBackButton(router, () => undefined))
+
+    await nextTick()
+    expect(router.beforeEach).toHaveBeenCalledTimes(1)
+    expect(router.afterEach).toHaveBeenCalledTimes(1)
+
+    scope.stop()
+    expect(removeBefore).toHaveBeenCalledTimes(1)
+    expect(removeAfter).toHaveBeenCalledTimes(1)
+  })
+
+  it('should not register the guard when the scope is disposed before nextTick', async () => {
+    const { router } = createFakeRouter()
+    const scope = effectScope()
+    scope.run(() => useBackButton(router, () => undefined))
+    scope.stop()
+
+    await nextTick()
+    expect(router.beforeEach).not.toHaveBeenCalled()
+    expect(router.afterEach).not.toHaveBeenCalled()
   })
 })
