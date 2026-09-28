@@ -33,6 +33,7 @@
       label="Option"
       type="checkbox"
       value="1"
+      indent-details
     ></v-checkbox>
 
     <v-btn

@@ -20,6 +20,9 @@ export default {
       activateNone: 'چالاککردن بۆ لابردنی ڕیزکردن.',
       activateDescending: 'چالاککردن بۆ ڕیزکردنی سەربەرەوخوار.',
       activateAscending: 'چالاککردن بۆ ڕیزکردنی سەر بەرەو ژوور.',
+      selectRow: 'ڕیز هەڵبژێرە',
+      selectAll: 'هەمووی هەڵبژێرە',
+      selectGroup: 'گرووپ هەڵبژێرە',
     },
     sortBy: 'ڕیزکردن بەپێی',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'بۆ',
   },
+  monthPicker: {
+    title: 'مانگ هەڵبژێرە',
+    itemsSelected: '{0} هەڵبژێردراوە',
+    header: 'مانگ بنووسە',
+    range: {
+      title: 'مانگەکان بنووسە',
+    },
+    ariaLabel: {
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      currentMonth: 'مانگی ئێستا، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'بەروار بنووسە',
     input: {
       placeholder: 'بەروار بنووسە',
+    },
+    ariaLabel: {
+      previousMonth: 'مانگی پێشوو',
+      nextMonth: 'مانگی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectMonth: 'مانگ هەڵبژێرە',
+      selectDate: '{0}',
+      currentDate: 'ئەمڕو، {0}',
     },
   },
   noDataText: 'هیچ داتایەک بەردەست نیە',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} زیاتر',
     today: 'ئەمڕو',
   },
+  heatmap: {
+    less: 'کەمتر',
+    more: 'زیاتر',
+  },
   input: {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
     appendAction: '{0} کرداری دواتر',
-    otp: 'تکایە نووسینی نمرەی OTP {0}',
+    otp: 'کۆدی پشتڕاستکردنەوە بنووسە',
   },
   fileInput: {
     counter: '{0} فایل',
@@ -78,6 +109,10 @@ export default {
     am: 'پێش نیوەڕۆژ',
     pm: 'دوای نیوەڕۆژ',
     title: 'کات دیاریبکە',
+    hour: 'کاتژمێر',
+    minute: 'خولەک',
+    second: 'چرکە',
+    notAllowed: 'بەهاکە ڕێگەپێدراو نییە',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'تکایە بەلایەنی کەم یەک هەڵبژێرە',
     pattern: 'فۆرماتەکە نادروستە',
   },
+  command: {
+    search: 'فرمان بنووسە یان بگەڕە...',
+  },
   hotkey: {
     then: 'پاشان',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'بۆشایی',
     plus: 'زیادکردن',
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+    or: 'یان',
+  },
+  video: {
+    play: 'لێدان',
+    pause: 'ڕاگرتن',
+    seek: 'گەڕان',
+    volume: 'دەنگ',
+    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
+    mute: 'بێدەنگکردن',
+    unmute: 'لە بێدەنگی دەرهێنان',
+    enterFullscreen: 'پڕ بە شاشە',
+    exitFullscreen: 'چوونە دەرەوە لە پڕ بە شاشە',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'ڕەنگ لەسەر شاشە هەڵبژێرە',
+      hueSlider: 'ڕەنگ',
+      alphaSlider: 'ئەلفا',
+      redInput: 'سوور',
+      greenInput: 'سەوز',
+      blueInput: 'شین',
+      alphaInput: 'ئەلفا',
+      hueInput: 'ڕەنگ',
+      saturationInput: 'تێربوون',
+      lightnessInput: 'کاڵی',
+      hexInput: 'بەهای HEX',
+      hexaInput: 'HEX لەگەڵ بەهای ئەلفا',
+      changeFormat: 'گۆڕینی فۆرماتی ڕەنگ',
+    },
   },
 }

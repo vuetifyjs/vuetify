@@ -27,8 +27,6 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-<VoPromotionsCardHighlight class="mb-4" slug="vuemastery-getting-started" />
-
 The fastest way to try Vuetify is in the browser at [Vuetify Play](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
@@ -37,7 +35,7 @@ Vuetify is a powerful Vue Component Framework built from the ground up to be eas
 
 ### It's free { id="its-free" }
 
-Vuetify is an Open Source project available for free under the [MIT licensed](http://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
+Vuetify is an Open Source project available for free under the [MIT licensed](https://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
 
 ### Flexible components
 
@@ -77,7 +75,7 @@ Vuetify has been in active development since 2016 and is constantly responding t
 * ⛏️ MINOR **(Quarterly)**
 * ⚒️ MAJOR **(Bi-yearly to Yearly)**
 
-In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
+In addition, after every MAJOR release, the previous version is still maintained with 12 months of [Long-term support](/introduction/long-term-support/).
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 

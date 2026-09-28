@@ -2,12 +2,13 @@
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useLocale } from '@/composables'
+import { injectNestedDefaults } from '@/composables/defaults'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, toRaw, watchEffect } from 'vue'
-import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, ref, watchEffect } from 'vue'
+import { deepEqual, deepToRaw, genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref, VNode } from 'vue'
@@ -60,10 +61,11 @@ export const VConfirmEdit = genericComponent<new <T> (
   },
 
   setup (props, { emit, slots }) {
+    const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
     const model = useProxiedModel(props, 'modelValue')
     const internalModel = ref()
     watchEffect(() => {
-      internalModel.value = structuredClone(toRaw(model.value))
+      internalModel.value = structuredClone(deepToRaw(model.value))
     })
 
     const { t } = useLocale()
@@ -73,7 +75,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     })
 
     function isActionDisabled (action: 'save' | 'cancel') {
-      if (typeof props.disabled === 'boolean') {
+      if (isBoolean(props.disabled)) {
         return props.disabled
       }
 
@@ -93,7 +95,7 @@ export const VConfirmEdit = genericComponent<new <T> (
     }
 
     function cancel () {
-      internalModel.value = structuredClone(toRaw(model.value))
+      internalModel.value = structuredClone(deepToRaw(model.value))
       emit('cancel')
     }
 
@@ -102,7 +104,7 @@ export const VConfirmEdit = genericComponent<new <T> (
         <>
           <VBtn
             disabled={ isCancelDisabled.value }
-            variant="text"
+            variant={ btnDefaults.value?.variant ?? 'text' }
             color={ props.color }
             onClick={ cancel }
             text={ t(props.cancelText) }
@@ -111,7 +113,7 @@ export const VConfirmEdit = genericComponent<new <T> (
 
           <VBtn
             disabled={ isSaveDisabled.value }
-            variant="text"
+            variant={ btnDefaults.value?.variant ?? 'text' }
             color={ props.color }
             onClick={ save }
             text={ t(props.okText) }

@@ -9,7 +9,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { toRef } from 'vue'
+import { shallowRef, toRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -48,19 +48,23 @@ export const VCounter = genericComponent<VCounterSlots>()({
   props: makeVCounterProps(),
 
   setup (props, { slots }) {
+    const lastMax = shallowRef(props.max) // to show limit until it slides out
+    watch(() => props.max, val => val != null && (lastMax.value = val))
+    const max = toRef(() => props.active ? props.max : lastMax.value)
+
     const counter = toRef(() => {
-      return props.max ? `${props.value} / ${props.max}` : String(props.value)
+      return max.value ? `${props.value} / ${max.value}` : String(props.value)
     })
 
     useRender(() => (
-      <MaybeTransition transition={ props.transition }>
+      <MaybeTransition transition={ props.transition } appear>
         <div
           v-show={ props.active }
           class={[
             'v-counter',
             {
-              'text-error': props.max && !props.disabled &&
-                parseFloat(props.value) > parseFloat(props.max),
+              'text-error': max.value && !props.disabled &&
+                parseFloat(props.value) > parseFloat(max.value),
             },
             props.class,
           ]}
@@ -69,7 +73,7 @@ export const VCounter = genericComponent<VCounterSlots>()({
           { slots.default
             ? slots.default({
               counter: counter.value,
-              max: props.max,
+              max: max.value,
               value: props.value,
             })
             : counter.value

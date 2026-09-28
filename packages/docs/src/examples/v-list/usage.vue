@@ -54,7 +54,7 @@
 
   const code = computed(() => {
     return `<${name}${propsToString(props.value)}>
-  <v-list-item${propsToString(itemProps.value, 2)}></v-list-item>
+  <v-list-item${propsToString(itemProps.value, [], 2)}></v-list-item>
 </${name}>`
   })
 </script>

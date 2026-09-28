@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, shallowRef } from 'vue'
+import { computed, inject, provide, shallowRef, useId } from 'vue'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, Ref } from 'vue'
@@ -22,18 +22,34 @@ export const ListKey: InjectionKey<{
   filterable: MaybeRefOrGetter<boolean>
   hasPrepend: Ref<boolean>
   updateHasPrepend: (value: boolean) => void
+  trackingIndex: Ref<number>
+  navigationStrategy: Ref<'focus' | 'track'>
+  uid: string
 }> = Symbol.for('vuetify:list')
 
 type InjectedListOptions = {
   filterable: MaybeRefOrGetter<boolean>
+  trackingIndex?: Ref<number>
+  navigationStrategy?: Ref<'focus' | 'track'>
+  uid?: string
 }
 
-export function createList ({ filterable }: InjectedListOptions = { filterable: false }) {
+export function createList (options: InjectedListOptions = { filterable: false }) {
   const parent = inject(ListKey, {
     filterable: false,
     hasPrepend: shallowRef(false),
     updateHasPrepend: () => null,
+    trackingIndex: shallowRef(-1),
+    navigationStrategy: shallowRef('focus' as 'focus' | 'track'),
+    uid: '',
   })
+
+  const {
+    filterable,
+    trackingIndex = parent.trackingIndex,
+    navigationStrategy = parent.navigationStrategy,
+    uid = parent.uid || useId(),
+  } = options
 
   const data = {
     filterable: parent.filterable || filterable,
@@ -41,6 +57,9 @@ export function createList ({ filterable }: InjectedListOptions = { filterable: 
     updateHasPrepend: (value: boolean) => {
       if (value) data.hasPrepend.value = value
     },
+    trackingIndex,
+    navigationStrategy,
+    uid,
   }
 
   provide(ListKey, data)

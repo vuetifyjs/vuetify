@@ -100,20 +100,6 @@
     "work": "CEO at Foundational Technologies LLC",
     "joined": "Feb 2021"
   },
-  "yuwu9145": {
-    "discord": "yuwu9145",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)"
-    ],
-    "languages": [
-      "English",
-      "Chinese(Mandarin)"
-    ],
-    "location": "Melbourne, Australia",
-    "name": "Yuchao Wu",
-    "team": "core",
-    "joined": "Mar 2023"
-  },
   "userquin": {
     "discord": "userquin",
     "focus": [
@@ -129,26 +115,6 @@
     "twitter": "userquin",
     "team": "core",
     "joined": "Mar 2024"
-  },
-  "kieuminhcanh": {
-    "discord": "kieuminhcanh",
-    "focus": [
-      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
-    ],
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
-      "[Patreon](https://patreon.com/kieuminhcanh)",
-      "[Open Collective](https://opencollective.com/vuetify)"
-    ],
-    "languages": [
-      "English",
-      "Vietnamese"
-    ],
-    "location": "California, US",
-    "name": "Ken Kieu",
-    "team": "core",
-    "twitter": "kieuminhcanh",
-    "joined": "April 2024"
   },
   "MatthewAry": {
     "discord": "bitshift_",
@@ -167,9 +133,10 @@
     "joined": "May 2024"
   },
   "J-Sek": {
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/j-sek.png",
     "discord": "jacek#1420",
     "focus": [
-      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+      "[vuetifyjs/vuetify](https://github.com/vuetifyjs/vuetify)"
     ],
     "languages": [
       "Polish",
@@ -191,16 +158,6 @@
     "avatar": "https://avatars.githubusercontent.com/u/11574195",
     "location": "Delhi, India",
     "joined": "March 2025"
-  },
-  "eesayas": {
-    "name": "Isaias Briones",
-    "team": "core",
-    "discord": "ibriones",
-    "linkedin": "ibriones",
-    "avatar": "https://avatars.githubusercontent.com/u/47291268",
-    "focus": ["[vuetifyjs/*](https://github.com/vuetifyjs)"],
-    "languages": ["English", "Filipino"],
-    "location": "Edmonton, AB, Canada"
   },
   "Haviles04": {
     "name": "Henry Aviles",
@@ -278,6 +235,40 @@
     ],
     "joined": "March 2025",
     "location": "Casablanca, Morocco"
+  },
+  "yuwu9145": {
+    "discord": "yuwu9145",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese(Mandarin)"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Yuchao Wu",
+    "team": "legends",
+    "joined": "Mar 2023"
+  },
+  "kieuminhcanh": {
+    "discord": "kieuminhcanh",
+    "focus": [
+      "[vuetifyjs/studio](https://github.com/vuetifyjs/studio)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
+      "[Patreon](https://patreon.com/kieuminhcanh)",
+      "[Open Collective](https://opencollective.com/vuetify)"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "location": "California, US",
+    "name": "Ken Kieu",
+    "team": "legends",
+    "twitter": "kieuminhcanh",
+    "joined": "April 2024"
   },
   "jacekkarczmarczyk": {
     "discord": "jacek#3542",

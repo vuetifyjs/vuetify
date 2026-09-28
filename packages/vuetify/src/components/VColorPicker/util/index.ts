@@ -1,4 +1,5 @@
 // Utilities
+import { isObject } from '@/util'
 import {
   HexToHSV,
   HSLtoHSV,
@@ -8,6 +9,7 @@ import {
   RGBtoHSV,
 } from '@/util/colorUtils'
 import { has } from '@/util/helpers'
+import { isNumber, isString } from '@/util/v0'
 
 // Types
 import type { HSL, HSV, RGB } from '@/util/colorUtils'
@@ -23,8 +25,8 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 }
 
 export function extractColor (color: HSV, input: any) {
-  if (input == null || typeof input === 'string') {
-    const hasA = color.a !== 1
+  if (input == null || isString(input)) {
+    const hasA = isNumber(color.a) && color.a < 1
     if (input?.startsWith('rgb(')) {
       const { r, g, b, a } = HSVtoRGB(color)
       return `rgb(${r} ${g} ${b}` + (hasA ? ` / ${a})` : ')')
@@ -39,7 +41,7 @@ export function extractColor (color: HSV, input: any) {
     else return hex
   }
 
-  if (typeof input === 'object') {
+  if (isObject(input)) {
     let converted
 
     if (has(input, ['r', 'g', 'b'])) converted = HSVtoRGB(color)
@@ -55,11 +57,11 @@ export function extractColor (color: HSV, input: any) {
 export function hasAlpha (color: any) {
   if (!color) return false
 
-  if (typeof color === 'string') {
+  if (isString(color)) {
     return color.length > 7
   }
 
-  if (typeof color === 'object') {
+  if (isObject(color)) {
     return has(color, ['a']) || has(color, ['alpha'])
   }
 
@@ -72,6 +74,7 @@ export type ColorPickerMode = {
   inputProps: Record<string, unknown>
   inputs: {
     [key: string]: any
+    label: string
     getValue: (color: any) => number | string
     getColor: (color: any, v: string) => any
   }[]
@@ -91,6 +94,7 @@ const rgba: ColorPickerMode = {
       step: 1,
       getValue: (c: RGB) => Math.round(c.r),
       getColor: (c: RGB, v: string): RGB => ({ ...c, r: Number(v) }),
+      localeKey: 'redInput',
     },
     {
       label: 'G',
@@ -98,6 +102,7 @@ const rgba: ColorPickerMode = {
       step: 1,
       getValue: (c: RGB) => Math.round(c.g),
       getColor: (c: RGB, v: string): RGB => ({ ...c, g: Number(v) }),
+      localeKey: 'greenInput',
     },
     {
       label: 'B',
@@ -105,6 +110,7 @@ const rgba: ColorPickerMode = {
       step: 1,
       getValue: (c: RGB) => Math.round(c.b),
       getColor: (c: RGB, v: string): RGB => ({ ...c, b: Number(v) }),
+      localeKey: 'blueInput',
     },
     {
       label: 'A',
@@ -112,6 +118,7 @@ const rgba: ColorPickerMode = {
       step: 0.01,
       getValue: ({ a }: RGB) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
+      localeKey: 'alphaInput',
     },
   ],
   to: HSVtoRGB,
@@ -135,6 +142,7 @@ const hsla: ColorPickerMode = {
       step: 1,
       getValue: (c: HSL) => Math.round(c.h),
       getColor: (c: HSL, v: string): HSL => ({ ...c, h: Number(v) }),
+      localeKey: 'hueInput',
     },
     {
       label: 'S',
@@ -142,6 +150,7 @@ const hsla: ColorPickerMode = {
       step: 0.01,
       getValue: (c: HSL) => Math.round(c.s * 100) / 100,
       getColor: (c: HSL, v: string): HSL => ({ ...c, s: Number(v) }),
+      localeKey: 'saturationInput',
     },
     {
       label: 'L',
@@ -149,6 +158,7 @@ const hsla: ColorPickerMode = {
       step: 0.01,
       getValue: (c: HSL) => Math.round(c.l * 100) / 100,
       getColor: (c: HSL, v: string): HSL => ({ ...c, l: Number(v) }),
+      localeKey: 'lightnessInput',
     },
     {
       label: 'A',
@@ -156,6 +166,7 @@ const hsla: ColorPickerMode = {
       step: 0.01,
       getValue: ({ a }: HSL) => a != null ? Math.round(a * 100) / 100 : 1,
       getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
+      localeKey: 'alphaInput',
     },
   ],
   to: HSVtoHSL,
@@ -176,6 +187,7 @@ const hexa: ColorPickerMode = {
       label: 'HEXA',
       getValue: (c: string) => c,
       getColor: (c: string, v: string) => v,
+      localeKey: 'hexaInput',
     },
   ],
   to: HSVtoHex,
@@ -189,6 +201,7 @@ const hex = {
       label: 'HEX',
       getValue: (c: string) => c.slice(0, 7),
       getColor: (c: string, v: string) => v,
+      localeKey: 'hexInput',
     },
   ],
 }

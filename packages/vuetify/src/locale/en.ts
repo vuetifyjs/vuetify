@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activate to remove sorting.',
       activateDescending: 'Activate to sort descending.',
       activateAscending: 'Activate to sort ascending.',
+      selectRow: 'Select row',
+      selectAll: 'Select all',
+      selectGroup: 'Select group',
     },
     sortBy: 'Sort by',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'to',
   },
+  monthPicker: {
+    title: 'Select month',
+    itemsSelected: '{0} selected',
+    header: 'Enter month',
+    range: {
+      title: 'Enter months',
+    },
+    ariaLabel: {
+      previousYear: 'Previous year',
+      nextYear: 'Next year',
+      selectYear: 'Select year',
+      currentMonth: 'Current month, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selected',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Enter date',
     input: {
       placeholder: 'Enter date',
+    },
+    ariaLabel: {
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
+      selectYear: 'Select year',
+      previousYear: 'Previous year',
+      nextYear: 'Next year',
+      selectMonth: 'Select month',
+      selectDate: '{0}', // Full date format
+      currentDate: 'Today, {0}',
     },
   },
   noDataText: 'No data available',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} more',
     today: 'Today',
   },
+  heatmap: {
+    less: 'Less',
+    more: 'More',
+  },
   input: {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Enter verification code',
   },
   fileInput: {
     counter: '{0} files',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Select Time',
+    hour: 'Hour',
+    minute: 'Minute',
+    second: 'Second',
+    notAllowed: 'Value is not allowed',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Please choose at least one value',
     pattern: 'Invalid format',
   },
+  command: {
+    search: 'Type a command or search...',
+  },
   hotkey: {
     then: 'then',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     option: 'Option',
     plus: 'plus',
     shortcut: 'Keyboard shortcut: {0}',
+    or: 'or',
+  },
+  video: {
+    play: 'Play',
+    pause: 'Pause',
+    seek: 'Seek',
+    volume: 'Volume',
+    showVolume: 'Show volume control',
+    mute: 'Mute',
+    unmute: 'Unmute',
+    enterFullscreen: 'Full screen',
+    exitFullscreen: 'Exit full screen',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Select color with eyedropper',
+      hueSlider: 'Hue',
+      alphaSlider: 'Alpha',
+      redInput: 'Red value',
+      greenInput: 'Green value',
+      blueInput: 'Blue value',
+      alphaInput: 'Alpha value',
+      hueInput: 'Hue value',
+      saturationInput: 'Saturation value',
+      lightnessInput: 'Lightness value',
+      hexInput: 'HEX value',
+      hexaInput: 'HEX with alpha value',
+      changeFormat: 'Change color format',
+    },
   },
 }

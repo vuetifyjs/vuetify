@@ -25,7 +25,9 @@ export function hasScrollbar (el?: Element | null) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
 
   const style = window.getComputedStyle(el)
-  return style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight)
+  const hasVerticalScrollbar = style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight)
+  const hasHorizontalScrollbar = style.overflowX === 'scroll' || (style.overflowX === 'auto' && el.scrollWidth > el.clientWidth)
+  return hasVerticalScrollbar || hasHorizontalScrollbar
 }
 
 function isPotentiallyScrollable (el?: Element | null) {

@@ -1,5 +1,5 @@
 // Composables
-import { defaultFilter, filterItems, useFilter } from '../filter'
+import { createDefaultFilter, defaultFilter, filterItems, useFilter } from '../filter'
 import { transformItem, transformItems } from '../list-items'
 
 // Utilities
@@ -30,6 +30,34 @@ describe('filter', () => {
     ])('should compare %s to %s and return a match result', (text, query, expected) => {
       // @ts-expect-error
       expect(defaultFilter(text, query)).toStrictEqual(expected)
+    })
+
+    it('does not fold accents by default', () => {
+      expect(defaultFilter('café', 'cafe')).toBe(-1)
+    })
+
+    describe('ignoreAccents', () => {
+      it("folds both sides when true ('cafe' finds 'café', ranges map to the original)", () => {
+        expect(createDefaultFilter(true)('café', 'cafe')).toStrictEqual([[0, 4]])
+      })
+
+      it('maps ranges back to a decomposed source string', () => {
+        const decomposed = 'cafe\u0301' // 'cafe' + combining acute => 5 code units
+        expect(decomposed).toHaveLength(5)
+        expect(createDefaultFilter(true)(decomposed, 'cafe')).toStrictEqual([[0, 5]])
+      })
+
+      it("'target' finds accented entries from a plain query", () => {
+        expect(createDefaultFilter('target')('Łódź', 'odz')).toStrictEqual([[1, 4]])
+      })
+
+      it("'target' keeps the query accented", () => {
+        expect(createDefaultFilter('target')('London', 'Łó')).toBe(-1)
+      })
+
+      it("'query' folds an accented query to match plain text", () => {
+        expect(createDefaultFilter('query')('cafe', 'café')).toStrictEqual([[0, 4]])
+      })
     })
   })
 
@@ -64,30 +92,10 @@ describe('filter', () => {
         value: (s: string) => s === '1',
       }
       const items = [
-        {
-          title: 'foo',
-          subtitle: 'bar',
-          value: '1',
-          custom: '1',
-        },
-        {
-          title: 'fizz',
-          subtitle: 'buzz',
-          value: '1',
-          custom: 'bar',
-        },
-        {
-          title: 'foobar',
-          subtitle: 'fizzbuzz',
-          value: '2',
-          custom: 'bar',
-        },
-        {
-          title: 'buzz',
-          subtitle: 'buzz',
-          value: '1',
-          custom: 'buzz',
-        },
+        { title: 'foo', subtitle: 'bar', value: '1', custom: '1' },
+        { title: 'fizz', subtitle: 'buzz', value: '1', custom: 'bar' },
+        { title: 'foobar', subtitle: 'fizzbuzz', value: '2', custom: 'bar' },
+        { title: 'buzz', subtitle: 'buzz', value: '1', custom: 'buzz' },
       ] as any
       const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
@@ -122,26 +130,10 @@ describe('filter', () => {
         value: (s: string) => s === '1',
       }
       const items = [
-        {
-          title: 'foo',
-          subtitle: 'bar',
-          value: '1',
-        },
-        {
-          title: 'fizz',
-          subtitle: 'buzz',
-          value: '1',
-        },
-        {
-          title: 'foobar',
-          subtitle: 'fizzbuzz',
-          value: '2',
-        },
-        {
-          title: 'buzz',
-          subtitle: 'buzz',
-          value: '2',
-        },
+        { title: 'foo', subtitle: 'bar', value: '1' },
+        { title: 'fizz', subtitle: 'buzz', value: '1' },
+        { title: 'foobar', subtitle: 'fizzbuzz', value: '2' },
+        { title: 'buzz', subtitle: 'buzz', value: '2' },
       ] as any
       const filterKeys = ['title', 'value']
 
@@ -161,12 +153,31 @@ describe('filter', () => {
         filterKeys,
         customKeyFilter,
         filterMode: 'intersection',
-      })).toHaveLength(0)
+      })).toHaveLength(2)
 
       expect(filterItems(items, '', {
         filterKeys,
         customKeyFilter,
         filterMode: 'every',
+      })).toHaveLength(2)
+    })
+
+    // https://github.com/vuetifyjs/vuetify/pull/21876
+    it('should return filtered rows when all columns have filters', () => {
+      const customKeyFilter = {
+        title: (s: string) => s.length < 5,
+        subtitle: (s: string) => s.startsWith('b'),
+        value: (s: any) => Number(s) > 0,
+      }
+      const items = [
+        { title: 'foo', subtitle: 'bar', value: 1 },
+        { title: 'fizz', subtitle: 'buzz', value: 1 },
+        { title: 'foobar', subtitle: 'fizzbuzz', value: 2 },
+      ] as any
+
+      expect(filterItems(items, '', {
+        customKeyFilter,
+        filterMode: 'intersection',
       })).toHaveLength(2)
     })
   })

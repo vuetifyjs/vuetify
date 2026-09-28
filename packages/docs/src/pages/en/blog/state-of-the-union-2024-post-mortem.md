@@ -50,7 +50,7 @@ These Vuetify heavy hitters are joining the existing ranks of core team members,
 
 How do we pay for this dream team? Glad you asked. The Open Collective's got $6,800 coming in monthly, and we're sitting on just over $16,000. With the new hires, that's six months before we're back to bartering with coffee. So, I threw in $5,000 of my own—call it a nudge to see if anyone's paying attention.
 
-![Donation to Vuetify Open Collective](https://vuetifyjs.b-cdn.net/docs/images/blog/state-of-the-union-2024-post-mortem/donation.png "Donation to Vuetify Open Collective"){ height=300 }
+![Donation to Vuetify Open Collective](https://cdn.vuetifyjs.com/docs/images/blog/state-of-the-union-2024-post-mortem/donation.png "Donation to Vuetify Open Collective"){ height=300 }
 
 If 30 companies matched me, we'd fund Vuetify for years. You're rolling your eyes, I can feel it—but picture this: you hit that [Open Collective link](https://opencollective.com/vuetify), and suddenly we're not just a team, we're a movement. I've seen this [community rally before](https://github.com/vuetifyjs/vuetify/issues/2240).
 

@@ -23,14 +23,14 @@
     </template>
 
     <template #item="{ props, item }">
-      <v-list-item v-bind="props" :prepend-icon="'svg:' + item.raw.path">
+      <v-list-item v-bind="props" :prepend-icon="'svg:' + item.path">
         <template #append>
           <v-btn
             icon="mdi-content-copy"
             size="small"
             tabindex="-1"
             variant="plain"
-            @click.stop="copy(item.raw.name)"
+            @click.stop="copy(item.name)"
           />
         </template>
       </v-list-item>

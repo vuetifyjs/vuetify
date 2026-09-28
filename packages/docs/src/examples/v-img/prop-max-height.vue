@@ -13,7 +13,7 @@
               height="125"
               src="https://picsum.photos/350/165?random"
             ></v-img>
-            <v-card-title class="text-h6">
+            <v-card-title class="text-title-medium py-3">
               height
             </v-card-title>
           </v-card>
@@ -27,7 +27,7 @@
               src="https://picsum.photos/350/165?random"
               cover
             ></v-img>
-            <v-card-title class="text-h6">
+            <v-card-title class="text-title-medium py-3">
               height with cover
             </v-card-title>
           </v-card>
@@ -40,7 +40,7 @@
               max-height="125"
               src="https://picsum.photos/350/165?random"
             ></v-img>
-            <v-card-title class="text-h6">
+            <v-card-title class="text-title-medium py-3">
               max-height
             </v-card-title>
           </v-card>
@@ -54,7 +54,7 @@
               src="https://picsum.photos/350/165?random"
               cover
             ></v-img>
-            <v-card-title class="text-h6">
+            <v-card-title class="text-title-medium py-3">
               max-height with cover
             </v-card-title>
           </v-card>

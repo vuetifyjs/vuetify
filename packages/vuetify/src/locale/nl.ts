@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activeer om de sortering te verwijderen.',
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',
+      selectRow: 'Rij selecteren',
+      selectAll: 'Alles selecteren',
+      selectGroup: 'Groep selecteren',
     },
     sortBy: 'Sorteer op',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'tot',
   },
+  monthPicker: {
+    title: 'Selecteer maand',
+    itemsSelected: '{0} geselecteerd',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maanden in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectYear: 'Selecteer jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Voer datum in',
     input: {
       placeholder: 'Voer datum in',
+    },
+    ariaLabel: {
+      previousMonth: 'Vorige maand',
+      nextMonth: 'Volgende maand',
+      selectYear: 'Selecteer jaar',
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectMonth: 'Selecteer maand',
+      selectDate: '{0}',
+      currentDate: 'Vandaag, {0}',
     },
   },
   noDataText: 'Geen gegevens beschikbaar',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandaag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
     appendAction: '{0} bijgevoegde actie',
-    otp: 'Voer OTP-teken {0} in',
+    otp: 'Voer verificatiecode in',
   },
   fileInput: {
     counter: '{0} bestanden',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecteer tijd',
+    hour: 'Uur',
+    minute: 'Minuten',
+    second: 'Seconden',
+    notAllowed: 'Waarde is niet toegestaan',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Kies ten minste één waarde',
     pattern: 'Ongeldig formaat',
   },
+  command: {
+    search: 'Typ een opdracht of zoek...',
+  },
   hotkey: {
     then: 'dan',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Spatie',
     plus: 'plus',
     shortcut: 'Toetsenbordsnelkoppeling: {0}',
+    or: 'of',
+  },
+  video: {
+    play: 'Afspelen',
+    pause: 'Pauzeren',
+    seek: 'Zoeken',
+    volume: 'Volume',
+    showVolume: 'Volumeregeling weergeven',
+    mute: 'Dempen',
+    unmute: 'Dempen opheffen',
+    enterFullscreen: 'Volledig scherm',
+    exitFullscreen: 'Volledig scherm verlaten',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Kies een kleur van het scherm',
+      hueSlider: 'Tint',
+      alphaSlider: 'Alpha',
+      redInput: 'Rood',
+      greenInput: 'Groen',
+      blueInput: 'Blauw',
+      alphaInput: 'Alpha',
+      hueInput: 'Tint',
+      saturationInput: 'Verzadiging',
+      lightnessInput: 'Helderheid',
+      hexInput: 'HEX-waarde',
+      hexaInput: 'HEX met alpha-waarde',
+      changeFormat: 'Wijzig kleurformaat',
+    },
   },
 }

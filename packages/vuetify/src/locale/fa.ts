@@ -20,6 +20,9 @@ export default {
       activateNone: 'غیرفعال‌سازی مرتب‌سازی',
       activateDescending: 'غیرفعال‌سازی مرتب‌سازی نزولی',
       activateAscending: 'غیرفعال‌سازی مرتب‌سازی صعودی',
+      selectRow: 'انتخاب ردیف',
+      selectAll: 'انتخاب همه',
+      selectGroup: 'انتخاب گروه',
     },
     sortBy: 'مرتب‌سازی براساس',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'تا',
   },
+  monthPicker: {
+    title: 'انتخاب ماه',
+    itemsSelected: '{0} انتخاب‌شده',
+    header: 'ماه را وارد کنید',
+    range: {
+      title: 'ماه‌ها را وارد کنید',
+    },
+    ariaLabel: {
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectYear: 'انتخاب سال',
+      currentMonth: 'ماه جاری، {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} انتخاب‌شده',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'تاریخ را وارد کنید',
     input: {
       placeholder: 'تاریخ را وارد کنید',
+    },
+    ariaLabel: {
+      previousMonth: 'ماه قبل',
+      nextMonth: 'ماه بعد',
+      selectYear: 'انتخاب سال',
+      previousYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      selectMonth: 'انتخاب ماه',
+      selectDate: '{0}',
+      currentDate: 'امروز، {0}',
     },
   },
   noDataText: 'داده‌ای موجود نیست',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{بیشتر {0',
     today: 'امروز',
   },
+  heatmap: {
+    less: 'کمتر',
+    more: 'بیشتر',
+  },
   input: {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',
     appendAction: '{0} اقدام افزوده‌شده',
-    otp: 'لطفا کد را وارد کنید {0}',
+    otp: 'کد تأیید را وارد کنید',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -78,6 +109,10 @@ export default {
     am: 'قبل از ظهر',
     pm: 'بعد از ظهر',
     title: 'انتخاب زمان',
+    hour: 'ساعت',
+    minute: 'دقیقه',
+    second: 'ثانیه',
+    notAllowed: 'مقدار مجاز نیست',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'لطفاً حداقل یک مقدار انتخاب کنید',
     pattern: 'فرمت نامعتبر',
   },
+  command: {
+    search: 'دستور را تایپ کنید یا جستجو کنید...',
+  },
   hotkey: {
     then: 'سپس',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'فاصله',
     plus: 'بعلاوه',
     shortcut: 'میانبر صفحه کلید: {0}',
+    or: 'یا',
+  },
+  video: {
+    play: 'پخش',
+    pause: 'مکث',
+    seek: 'جستجو',
+    volume: 'صدا',
+    showVolume: 'نمایش کنترل صدا',
+    mute: 'بی‌صدا',
+    unmute: 'با صدا',
+    enterFullscreen: 'تمام صفحه',
+    exitFullscreen: 'خروج از تمام صفحه',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'انتخاب رنگ از صفحه',
+      hueSlider: 'فام',
+      alphaSlider: 'آلفا',
+      redInput: 'قرمز',
+      greenInput: 'سبز',
+      blueInput: 'آبی',
+      alphaInput: 'آلفا',
+      hueInput: 'فام',
+      saturationInput: 'اشباع',
+      lightnessInput: 'روشنایی',
+      hexInput: 'مقدار HEX',
+      hexaInput: 'HEX با مقدار آلفا',
+      changeFormat: 'تغییر فرمت رنگ',
+    },
   },
 }

@@ -4,6 +4,7 @@
     "customKeyFilter": "Function used on specific keys within the item object. `customFilter` is skipped for columns with `customKeyFilter` specified.",
     "filterKeys": "Array of specific keys to filter on the item.",
     "filterMode": "Controls how the results of `customFilter` and `customKeyFilter` are combined. All modes only apply `customFilter` to columns not specified in `customKeyFilter`.\n\n- **some**: There is at least one match from either the custom filter or the custom key filter.\n- **every**: All columns match either the custom filter or the custom key filter.\n- **union**: There is at least one match from the custom filter, or all columns match the custom key filters.\n- **intersection**: There is at least one match from the custom filter, and all columns match the custom key filters.",
+    "ignoreAccents": "Folds accents before filtering. Use `'query'` to normalize only the search term, `'target'` to normalize only the item value, or `true` for both.",
     "noFilter": "Disables all item filtering."
   }
 }

@@ -1,8 +1,12 @@
 <template>
   <v-container>
-    <v-row align="center" justify="center">
+    <v-row class="align-center justify-center">
       <v-col class="text-center" cols="12">
         <v-btn size="x-large">Default Elevation (2)</v-btn>
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn elevation="3" size="x-large">Elevation 3</v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -10,23 +14,7 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn elevation="8" size="x-large">Elevation 8</v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn elevation="12" size="x-large">Elevation 12</v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn elevation="16" size="x-large">Elevation 16</v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn elevation="20" size="x-large">Elevation 20</v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn elevation="24" size="x-large">Elevation 24</v-btn>
+        <v-btn elevation="5" size="x-large">Elevation 5</v-btn>
       </v-col>
     </v-row>
   </v-container>

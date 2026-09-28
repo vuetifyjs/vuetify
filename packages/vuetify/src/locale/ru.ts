@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активируйте, чтобы убрать сортировку.',
       activateDescending: 'Активируйте для упорядочивания убыванию.',
       activateAscending: 'Активируйте для упорядочивания по возрастанию.',
+      selectRow: 'Выбрать строку',
+      selectAll: 'Выбрать всё',
+      selectGroup: 'Выбрать группу',
     },
     sortBy: 'Сортировать по',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Выбрать месяц',
+    itemsSelected: '{0} выбрано',
+    header: 'Ввод месяца',
+    range: {
+      title: 'Ввод месяцев',
+    },
+    ariaLabel: {
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectYear: 'Выбрать год',
+      currentMonth: 'Текущий месяц, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} выбрано',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Ввод даты',
     input: {
       placeholder: 'Введите дату',
+    },
+    ariaLabel: {
+      previousMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц',
+      selectYear: 'Выбрать год',
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectMonth: 'Выбрать месяц',
+      selectDate: '{0}',
+      currentDate: 'Сегодня, {0}',
     },
   },
   noDataText: 'Отсутствуют данные',
@@ -59,11 +86,15 @@ export default {
     moreEvents: 'Еще {0}',
     today: 'Сегодня',
   },
+  heatmap: {
+    less: 'Меньше',
+    more: 'Больше',
+  },
   input: {
     clear: 'Очистить {0}',
     prependAction: '{0} предварительных действий',
     appendAction: '{0} добавочных действий',
-    otp: 'Пожалуйста введите символы OTP {0}',
+    otp: 'Введите код подтверждения',
   },
   fileInput: {
     counter: 'Файлов: {0}',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Выберите время',
+    hour: 'Час',
+    minute: 'Минуты',
+    second: 'Секунды',
+    notAllowed: 'Значение не разрешено',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Пожалуйста, выберите хотя бы одно значение',
     pattern: 'Недопустимый формат',
   },
+  command: {
+    search: 'Введите команду или введите...',
+  },
   hotkey: {
     then: 'затем',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Пробел',
     plus: 'плюс',
     shortcut: 'Сочетание клавиш: {0}',
+    or: 'или',
+  },
+  video: {
+    play: 'Воспроизвести',
+    pause: 'Пауза',
+    seek: 'Перемотка',
+    volume: 'Громкость',
+    showVolume: 'Показать регулятор громкости',
+    mute: 'Отключить звук',
+    unmute: 'Включить звук',
+    enterFullscreen: 'Полноэкранный режим',
+    exitFullscreen: 'Выйти из полноэкранного режима',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Выбрать цвет с экрана',
+      hueSlider: 'Оттенок',
+      alphaSlider: 'Прозрачность',
+      redInput: 'Красный',
+      greenInput: 'Зеленый',
+      blueInput: 'Синий',
+      alphaInput: 'Прозрачность',
+      hueInput: 'Оттенок',
+      saturationInput: 'Насыщенность',
+      lightnessInput: 'Яркость',
+      hexInput: 'Значение HEX',
+      hexaInput: 'Значение HEX с прозрачностью',
+      changeFormat: 'Изменить формат цвета',
+    },
   },
 }

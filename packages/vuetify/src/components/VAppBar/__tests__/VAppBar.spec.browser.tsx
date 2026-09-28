@@ -52,28 +52,46 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       await scroll({ top: 500 })
-      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
 
       await scroll({ top: 250 })
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       await scroll({ top: 0 })
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       scrollBehavior.value = 'hide inverted'
-      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
 
       await scroll({ top: 500 })
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       await scroll({ top: 250 })
-      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
 
       await scroll({ top: 0 })
-      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
+    })
+
+    it('hides when scroll-target scrolls', async () => {
+      render(() => (
+        <VLayout>
+          <VAppBar scrollBehavior="hide" scrollTarget="#scroller" />
+          <VMain>
+            <div id="scroller" style="height: 300px; overflow: auto">
+              <div style="height: 2000px" />
+            </div>
+          </VMain>
+        </VLayout>
+      ))
+
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
+
+      await scroll({ top: 500 }, document.querySelector('#scroller')!)
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
     })
 
     it('should hide correctly when scroll to the bottom', async () => {
@@ -88,10 +106,10 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       await scroll({ top: 1000 })
-      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).not.toBeInViewport()
     })
 
     it('collapses', async () => {
@@ -102,7 +120,7 @@ describe('VAppBar', () => {
         </VLayout>
       ))
 
-      await expect.element(screen.getByCSS('.v-app-bar')).toBeOnScreen()
+      await expect.element(screen.getByCSS('.v-app-bar')).toBeInViewport()
 
       await scroll({ top: 500 })
       await scroll({ top: 0 })

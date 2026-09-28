@@ -1,9 +1,9 @@
 // Utilities
 import { computed, isRef } from 'vue'
-import { getCurrentInstanceName, propsFactory } from '@/util'
+import { convertToUnit, getCurrentInstanceName, isString, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 
 type RoundedValue = boolean | string | number | null | undefined
 
@@ -14,6 +14,22 @@ export interface RoundedProps {
 
 type RoundedData = {
   roundedClasses: Ref<string[]>
+  roundedStyles: Ref<CSSProperties>
+}
+
+const CSS_LENGTH = /^-?\d*\.?\d+([a-z%]{0,4})$/i
+
+function splitTokens (v: RoundedValue) {
+  return String(v).trim().split(/\s+/)
+}
+
+function isCssLength (token: string) {
+  return token.toLowerCase().match(CSS_LENGTH)?.at(1)?.startsWith('x') === false
+}
+
+function isCssValue (v: RoundedValue): v is string {
+  return typeof v === 'string' && !!v &&
+    (v.includes('(') || splitTokens(v).every(isCssLength))
 }
 
 // Composables
@@ -31,24 +47,33 @@ export function useRounded (
 ): RoundedData {
   const roundedClasses = computed(() => {
     const rounded = isRef(props) ? props.value : props.rounded
-    const tile = isRef(props) ? props.value : props.tile
+    const tile = isRef(props) ? false : props.tile
     const classes: string[] = []
 
-    if (rounded === true || rounded === '') {
+    if (tile || rounded === false || String(rounded) === '0') {
+      classes.push('rounded-0')
+    } else if (rounded === true || rounded === '') {
       classes.push(`${name}--rounded`)
-    } else if (
-      typeof rounded === 'string' ||
-      rounded === 0
-    ) {
-      for (const value of String(rounded).split(' ')) {
+    } else if (isString(rounded) && !isCssValue(rounded)) {
+      for (const value of splitTokens(rounded)) {
         classes.push(`rounded-${value}`)
       }
-    } else if (tile || rounded === false) {
-      classes.push('rounded-0')
     }
 
     return classes
   })
 
-  return { roundedClasses }
+  const roundedStyles = computed<CSSProperties>(() => {
+    const rounded = isRef(props) ? props.value : props.rounded
+
+    if ((!isCssValue(rounded) || String(rounded) === '0') &&
+      !(typeof rounded === 'number' && rounded !== 0)
+    ) {
+      return {}
+    }
+
+    return { borderRadius: convertToUnit(rounded) }
+  })
+
+  return { roundedClasses, roundedStyles }
 }

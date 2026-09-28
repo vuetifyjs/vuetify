@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="flex-child text-subtitle-2">
+    <v-row class="flex-child text-title-small">
       <v-col
         class="d-flex"
         cols="12"

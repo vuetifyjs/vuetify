@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-around">
+    <v-row class="justify-space-around">
       <v-col cols="12" md="6">
         <v-dialog
           transition="dialog-bottom-transition"
@@ -18,7 +18,7 @@
             <v-card>
               <v-toolbar title="Opening from the Bottom"></v-toolbar>
 
-              <v-card-text class="text-h2 pa-12">
+              <v-card-text class="text-display-large pa-12">
                 Hello world!
               </v-card-text>
 
@@ -49,7 +49,7 @@
             <v-card>
               <v-toolbar title="Opening from the Top"></v-toolbar>
 
-              <v-card-text class="text-h2 pa-12">
+              <v-card-text class="text-display-large pa-12">
                 Hello world!
               </v-card-text>
 

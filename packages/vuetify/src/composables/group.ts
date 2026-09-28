@@ -3,7 +3,17 @@ import { useProxiedModel } from './proxiedModel'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, onMounted, onUpdated, provide, reactive, toRef, unref, useId, watch } from 'vue'
-import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, propsFactory, wrapInArray } from '@/util'
+import {
+  consoleWarn,
+  deepEqual,
+  findChildrenWithProvide,
+  getCurrentInstance,
+  isNull,
+  isNumber,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -55,6 +65,8 @@ export interface GroupItemProvide {
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
+  register: () => void
+  unregister: () => void
 }
 
 export const makeGroupProps = propsFactory({
@@ -118,15 +130,16 @@ export function useGroupItem (
   const value = toRef(() => props.value)
   const disabled = computed(() => !!(group.disabled.value || props.disabled))
 
-  group.register({
-    id,
-    value,
-    disabled,
-  }, vm)
+  function register () {
+    group?.register({ id, value, disabled }, vm)
+  }
 
-  onBeforeUnmount(() => {
-    group.unregister(id)
-  })
+  function unregister () {
+    group?.unregister(id)
+  }
+
+  register()
+  onBeforeUnmount(() => unregister())
 
   const isSelected = computed(() => {
     return group.isSelected(id)
@@ -155,6 +168,8 @@ export function useGroupItem (
     value,
     disabled,
     group,
+    register,
+    unregister,
   }
 }
 
@@ -169,9 +184,9 @@ export function useGroup (
     'modelValue',
     [],
     v => {
-      if (v == null) return []
+      if (isUndefined(v)) return []
 
-      return getIds(items, wrapInArray(v))
+      return getIds(items, isNull(v) ? [null] : wrapInArray(v))
     },
     v => {
       const arr = getValues(items, v)
@@ -190,7 +205,7 @@ export function useGroup (
     const children = findChildrenWithProvide(key, groupVm?.vnode)
     const index = children.indexOf(vm)
 
-    if (unref(unwrapped.value) == null) {
+    if (isUndefined(unref(unwrapped.value))) {
       unwrapped.value = index
       unwrapped.useIndexAsValue = true
     }
@@ -263,7 +278,7 @@ export function useGroup (
       // cause max limit to be exceeded
       if (
         !isSelected &&
-        props.max != null &&
+        isNumber(props.max) &&
         internalValue.length + 1 > props.max
       ) return
 
@@ -339,9 +354,9 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
     const item = items.find(item => deepEqual(value, item.value))
     const itemByIndex = items[value]
 
-    if (item?.value != null) {
+    if (!isUndefined(item?.value)) {
       ids.push(item.id)
-    } else if (itemByIndex != null) {
+    } else if (itemByIndex?.useIndexAsValue) {
       ids.push(itemByIndex.id)
     }
   })
@@ -356,7 +371,7 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
     const itemIndex = items.findIndex(item => item.id === id)
     if (~itemIndex) {
       const item = items[itemIndex]
-      values.push(item.value != null ? item.value : itemIndex)
+      values.push(!isUndefined(item.value) ? item.value : itemIndex)
     }
   })
 

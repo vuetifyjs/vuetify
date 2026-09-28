@@ -9,7 +9,7 @@
     v-click-outside="onClickOutside"
     @click="active = true"
   >
-    <div class="text-h6 text-md-h4 fill-height d-flex align-center justify-center">
+    <div class="text-title-large text-md-headline-large fill-height d-flex align-center justify-center">
       {{ active ? 'Click Outside' : 'Click Me' }}
     </div>
   </v-card>

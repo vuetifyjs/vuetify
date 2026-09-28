@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSliderThumbSlots } from './VSliderThumb'
@@ -41,6 +41,8 @@ export const makeVSliderProps = propsFactory({
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
+  inheritAttrs: false,
+
   props: makeVSliderProps(),
 
   emits: {
@@ -50,7 +52,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
     end: (value: number) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, attrs }) {
     const thumbContainerRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
     const { rtlClasses } = useRtl()
@@ -76,19 +78,31 @@ export const VSlider = genericComponent<VSliderSlots>()({
       trackContainerRef,
       position,
       hasLabels,
+      disabled,
       readonly,
+      noKeyboard,
     } = useSlider({
       props,
       steps,
       onSliderStart: () => {
-        emit('start', model.value)
+        if (!disabled.value && !readonly.value) {
+          emit('start', model.value)
+        }
       },
       onSliderEnd: ({ value }) => {
         const roundedValue = roundValue(value)
-        model.value = roundedValue
+
+        if (!disabled.value && !readonly.value) {
+          model.value = roundedValue
+        }
+
         emit('end', roundedValue)
       },
-      onSliderMove: ({ value }) => model.value = roundValue(value),
+      onSliderMove: ({ value }) => {
+        if (!disabled.value && !readonly.value) {
+          model.value = roundValue(value)
+        }
+      },
       getActiveThumb: () => thumbContainerRef.value?.$el,
     })
 
@@ -97,6 +111,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
     useRender(() => {
       const inputProps = VInput.filterProps(props)
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -108,13 +123,14 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
-              'v-slider--disabled': props.disabled,
+              'v-slider--disabled': disabled.value,
             },
             rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
           { ...inputProps }
+          { ...rootAttrs }
           focused={ isFocused.value }
         >
           {{
@@ -144,8 +160,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ !!props.disabled }
-                  readonly={ !!props.readonly }
+                  disabled={ disabled.value }
+                  readonly={ readonly.value }
                   tabindex="-1"
                   value={ model.value }
                 />
@@ -162,6 +178,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   ref={ thumbContainerRef }
                   aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
+                  noKeyboard={ noKeyboard.value }
                   min={ min.value }
                   max={ max.value }
                   modelValue={ model.value }
@@ -172,6 +189,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   onBlur={ blur }
                   ripple={ props.ripple }
                   name={ props.name }
+                  { ...inputAttrs }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

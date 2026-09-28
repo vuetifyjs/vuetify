@@ -61,23 +61,23 @@
       <template v-slot:text>
         <v-row>
           <v-col cols="12">
-            <v-text-field v-model="record.title" label="Title"></v-text-field>
+            <v-text-field v-model="formModel.title" label="Title"></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field v-model="record.author" label="Author"></v-text-field>
+            <v-text-field v-model="formModel.author" label="Author"></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-select v-model="record.genre" :items="['Fiction', 'Dystopian', 'Non-Fiction', 'Sci-Fi']" label="Genre"></v-select>
+            <v-select v-model="formModel.genre" :items="['Fiction', 'Dystopian', 'Non-Fiction', 'Sci-Fi']" label="Genre"></v-select>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-number-input v-model="record.year" :max="adapter.getYear(adapter.date())" :min="1" label="Year"></v-number-input>
+            <v-number-input v-model="formModel.year" :max="currentYear" :min="1" label="Year"></v-number-input>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-number-input v-model="record.pages" :min="1" label="Pages"></v-number-input>
+            <v-number-input v-model="formModel.pages" :min="1" label="Pages"></v-number-input>
           </v-col>
         </v-row>
       </template>
@@ -96,17 +96,24 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, shallowRef } from 'vue'
-  import { useDate } from 'vuetify'
+  import { onMounted, ref, shallowRef, toRef } from 'vue'
 
-  const adapter = useDate()
+  const currentYear = new Date().getFullYear()
 
-  const DEFAULT_RECORD = { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 }
+  function createNewRecord () {
+    return {
+      title: '',
+      author: '',
+      genre: '',
+      year: currentYear,
+      pages: 1,
+    }
+  }
 
   const books = ref([])
-  const record = ref(DEFAULT_RECORD)
+  const formModel = ref(createNewRecord())
   const dialog = shallowRef(false)
-  const isEditing = shallowRef(false)
+  const isEditing = toRef(() => !!formModel.value.id)
 
   const headers = [
     { title: 'Title', key: 'title', align: 'start' },
@@ -122,17 +129,14 @@
   })
 
   function add () {
-    isEditing.value = false
-    record.value = DEFAULT_RECORD
+    formModel.value = createNewRecord()
     dialog.value = true
   }
 
   function edit (id) {
-    isEditing.value = true
-
     const found = books.value.find(book => book.id === id)
 
-    record.value = {
+    formModel.value = {
       id: found.id,
       title: found.title,
       author: found.author,
@@ -151,11 +155,11 @@
 
   function save () {
     if (isEditing.value) {
-      const index = books.value.findIndex(book => book.id === record.value.id)
-      books.value[index] = record.value
+      const index = books.value.findIndex(book => book.id === formModel.value.id)
+      books.value[index] = formModel.value
     } else {
-      record.value.id = books.value.length + 1
-      books.value.push(record.value)
+      formModel.value.id = books.value.length + 1
+      books.value.push(formModel.value)
     }
 
     dialog.value = false
@@ -163,7 +167,7 @@
 
   function reset () {
     dialog.value = false
-    record.value = DEFAULT_RECORD
+    formModel.value = createNewRecord()
     books.value = [
       { id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction', year: 1960, pages: 281 },
       { id: 2, title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, pages: 328 },
@@ -175,19 +179,25 @@
 </script>
 
 <script>
-  import { onMounted, ref, shallowRef } from 'vue'
-  import { useDate } from 'vuetify'
+  const currentYear = new Date().getFullYear()
+
+  function createNewRecord () {
+    return {
+      title: '',
+      author: '',
+      genre: '',
+      year: currentYear,
+      pages: 1,
+    }
+  }
 
   export default {
     data () {
-      const adapter = useDate()
       return {
-        adapter,
-        DEFAULT_RECORD: { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 },
+        currentYear,
         books: [],
-        record: { title: '', author: '', genre: '', year: adapter.getYear(adapter.date()), pages: 1 },
+        formModel: createNewRecord(),
         dialog: false,
-        isEditing: false,
         headers: [
           { title: 'Title', key: 'title', align: 'start' },
           { title: 'Author', key: 'author' },
@@ -198,19 +208,22 @@
         ],
       }
     },
+    computed: {
+      isEditing () {
+        return !!this.formModel.id
+      },
+    },
     mounted () {
       this.reset()
     },
     methods: {
       add () {
-        this.isEditing = false
-        this.record = { ...this.DEFAULT_RECORD }
+        this.formModel = createNewRecord()
         this.dialog = true
       },
       edit (id) {
-        this.isEditing = true
         const found = this.books.find(book => book.id === id)
-        this.record = { ...found }
+        this.formModel = { ...found }
         this.dialog = true
       },
       remove (id) {
@@ -219,17 +232,17 @@
       },
       save () {
         if (this.isEditing) {
-          const index = this.books.findIndex(book => book.id === this.record.id)
-          this.books[index] = { ...this.record }
+          const index = this.books.findIndex(book => book.id === this.formModel.id)
+          this.books[index] = { ...this.formModel }
         } else {
-          this.record.id = this.books.length + 1
-          this.books.push({ ...this.record })
+          this.formModel.id = this.books.length + 1
+          this.books.push({ ...this.formModel })
         }
         this.dialog = false
       },
       reset () {
         this.dialog = false
-        this.record = { ...this.DEFAULT_RECORD }
+        this.formModel = createNewRecord()
         this.books = [
           { id: 1, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction', year: 1960, pages: 281 },
           { id: 2, title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, pages: 328 },

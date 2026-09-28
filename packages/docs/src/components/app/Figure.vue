@@ -7,7 +7,7 @@
 
     <figcaption
       v-if="caption"
-      class="text-caption font-weight-bold text-center text-capitalize text-medium-emphasis"
+      class="text-body-small font-weight-bold text-center text-capitalize text-medium-emphasis"
       v-text="caption"
     />
 
@@ -30,3 +30,9 @@
     inheritAttrs: false,
   }
 </script>
+
+<style scoped>
+figure {
+  margin: 0;
+}
+</style>

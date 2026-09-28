@@ -9,11 +9,21 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { computed, inject } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
+// Types
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { GenericProps } from '@/util'
+
 export const makeVStepperWindowProps = propsFactory({
   ...omit(makeVWindowProps(), ['continuous', 'nextIcon', 'prevIcon', 'showArrows', 'touch', 'mandatory']),
 }, 'VStepperWindow')
 
-export const VStepperWindow = genericComponent()({
+export const VStepperWindow = genericComponent<new <TModel>(
+  props: {
+    modelValue?: TModel
+    'onUpdate:modelValue'?: (value: TModel) => void
+  },
+  slots: VWindowSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VStepperWindow',
 
   props: makeVStepperWindowProps(),

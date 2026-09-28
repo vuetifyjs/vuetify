@@ -10,10 +10,10 @@
     >
     </v-img>
     <v-card-title class="flex-column align-start">
-      <div class="text-h4 mb-2">
+      <div class="text-headline-large mb-2">
         Welcome Home...
       </div>
-      <div class="text-h6 font-weight-regular text-grey">
+      <div class="text-title-large font-weight-regular text-grey">
         Monday, 12:30 PM, Mostly Sunny
       </div>
       <div class="d-flex align-center">
@@ -24,7 +24,7 @@
           <v-img src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"></v-img>
         </v-avatar>
 
-        <span class="text-body-2 text-grey">81° / 62°</span>
+        <span class="text-body-medium text-grey">81° / 62°</span>
       </div>
     </v-card-title>
 
@@ -68,3 +68,8 @@
     },
   }
 </script>
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1632-99053&t=tWnPBMI0RfGlNRgq-4"
+  }
+</example-meta>

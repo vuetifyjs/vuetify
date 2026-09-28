@@ -3,7 +3,8 @@ import { VCombobox } from '../VCombobox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { generate, render, screen, userEvent, waitAnimationFrame, waitIdle } from '@test'
+import { render, screen, showcase, userEvent, wait, waitAnimationFrame, waitIdle } from '@test'
+import { commands } from 'vitest/browser'
 import { cloneVNode, ref } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
@@ -33,7 +34,7 @@ const stories = Object.fromEntries(Object.entries({
             { ...v.props }
           >{{
             selection: ({ item }) => {
-              return item.title
+              return item
             },
           }}
           </VCombobox>
@@ -44,6 +45,27 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VCombobox', () => {
+  it.each([
+    ['{Tab}', 'after'],
+    ['{Shift>}{Tab}{/Shift}', 'before'],
+  ])('should leave the field with a single %s while the menu is open', async (keys, target) => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <button data-testid="before">before</button>
+        <VCombobox items={ items } openOnFocus v-model:menu={ menu.value } />
+        <button data-testid="after">after</button>
+      </>
+    ))
+
+    screen.getByCSS('.v-combobox input[type="text"]').focus()
+    await expect.poll(() => menu.value).toBe(true)
+
+    await userEvent.keyboard(keys)
+    await expect.poll(() => menu.value).toBe(false)
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId(target))
+  })
+
   describe('closableChips', () => {
     it('should close only first chip', async () => {
       const items = [
@@ -92,26 +114,27 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
       await userEvent.click((await screen.findAllByRole('option'))[0])
       expect(model.value).toStrictEqual(items[0])
-      expect(search.value).toBe(items[0].title)
-      expect(screen.getByRole('textbox')).toHaveValue(items[0].title)
+      await expect.poll(() => search.value).toBe(items[0].title)
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue(items[0].title)
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
       await userEvent.click(element)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 2')
       expect(model.value).toBe('Item 2')
       expect(search.value).toBe('Item 2')
-      expect(screen.getByRole('textbox')).toHaveValue('Item 2')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('Item 2')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('item3')
       expect(model.value).toBe('item3')
       expect(search.value).toBe('item3')
-      expect(screen.getByRole('textbox')).toHaveValue('item3')
+      expect(screen.getByCSS('input[type="text"]')).toHaveValue('item3')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent('item3')
     })
 
@@ -138,25 +161,28 @@ describe('VCombobox', () => {
         />
       ))
 
+      const input = screen.getByCSS('input[type="text"]')
+
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
       await userEvent.click(screen.getAllByRole('option')[0])
       expect(model.value).toStrictEqual([items[0]])
       expect(search.value).toBeUndefined()
-      expect(screen.getByRole('textbox')).toHaveValue('')
+      expect(input).toHaveValue('')
       expect(screen.getByCSS('.v-combobox__selection')).toHaveTextContent(items[0].title)
 
       await userEvent.click(element)
       await userEvent.keyboard('Item 2{tab}')
       expect(model.value).toStrictEqual([items[0], 'Item 2'])
       expect(search.value).toBe('')
-      expect(screen.getByRole('textbox')).toHaveValue('')
+      expect(input).toHaveValue('')
       expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toHaveTextContent('Item 2')
 
       await userEvent.click(element)
       await userEvent.keyboard('item3{tab}')
       expect(model.value).toStrictEqual([items[0], 'Item 2', 'item3'])
       expect(search.value).toBe('')
-      expect(screen.getByRole('textbox')).toHaveValue('')
+      expect(input).toHaveValue('')
       expect(screen.getAllByCSS('.v-combobox__selection').at(-1)).toHaveTextContent('item3')
     })
   })
@@ -177,10 +203,10 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await userEvent.keyboard('Item')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 1')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
     })
@@ -200,10 +226,10 @@ describe('VCombobox', () => {
       await userEvent.click(element)
       await userEvent.keyboard('Item')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(4)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 1')
       await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('Item 3')
       expect(screen.queryAllByRole('option')).toHaveLength(0)
     })
@@ -232,7 +258,7 @@ describe('VCombobox', () => {
       await userEvent.keyboard('test')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Test1')
 
-      await userEvent.keyboard('{Control>}a{/Ctrl}{Backspace}')
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
       await userEvent.keyboard('antonsen')
       await expect(screen.findByRole('option')).resolves.toHaveTextContent('Antonsen PK')
     })
@@ -254,13 +280,15 @@ describe('VCombobox', () => {
         />
       ))
 
+      const input = screen.getByCSS('input[type="text"]')
+
       await userEvent.click(element)
 
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      await expect(screen.findByRole('textbox')).resolves.toBeVisible()
+      await expect(input).toBeVisible()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual(['Colorado'])
     })
@@ -305,13 +333,15 @@ describe('VCombobox', () => {
         />
       ))
 
+      const input = screen.getByCSS('input[type="text"]')
+
       await userEvent.click(element)
 
       await expect(screen.findAllByRole('option', { selected: true })).resolves.toHaveLength(2)
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(2)
 
       await userEvent.click(screen.getAllByTestId('close-chip')[0])
-      await expect(screen.findByRole('textbox')).resolves.toBeVisible()
+      await expect(input).toBeVisible()
       expect(screen.getAllByCSS('.v-chip')).toHaveLength(1)
       expect(selectedItems.value).toStrictEqual([{
         title: 'Item 2',
@@ -360,12 +390,13 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
 
       const options = await screen.findAllByRole('option', { selected: true })
       expect(options).toHaveLength(2)
-      const input = await screen.findByRole('combobox')
-      expect(input).toHaveTextContent('Item 1')
-      expect(input).toHaveTextContent('Item 2')
+      const inputField = screen.getByCSS('.v-field')
+      expect(inputField).toHaveTextContent('Item 1')
+      expect(inputField).toHaveTextContent('Item 2')
 
       await userEvent.click(options[0])
 
@@ -453,7 +484,7 @@ describe('VCombobox', () => {
     })
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/17120
+  // // https://github.com/vuetifyjs/vuetify/issues/17120
   it('should display 0 when selected', async () => {
     const items = [0, 1, 2, 3, 4]
 
@@ -467,10 +498,11 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
 
     await userEvent.click(screen.getAllByRole('option')[0])
 
-    expect(screen.getByRole('textbox')).toHaveValue('0')
+    await expect.poll(() => screen.getByCSS('input[type="text"]')).toHaveValue('0')
   })
 
   it('should conditionally show placeholder', async () => {
@@ -478,20 +510,23 @@ describe('VCombobox', () => {
       props: { placeholder: 'Placeholder' },
     })
 
-    const input = screen.getByRole('textbox')
+    const input = screen.getByCSS('input[type="text"]')
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
 
     await rerender({ label: 'Label' })
-    await expect.element(input).not.toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBe(0)
 
     await userEvent.click(input)
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await userEvent.tab()
     await rerender({ persistentPlaceholder: true })
     await expect.element(input).toHaveAttribute('placeholder', 'Placeholder')
-    await expect.element(input).toBeDisplayed()
+    await expect.element(input).toBeVisible()
+    expect(Number(window.getComputedStyle(input, '::placeholder').opacity)).toBeGreaterThan(0.2)
 
     await rerender({ modelValue: 'Foobar' })
     await expect.element(input).not.toHaveAttribute('placeholder')
@@ -538,6 +573,8 @@ describe('VCombobox', () => {
     expect(screen.queryAllByRole('listbox')).toHaveLength(0)
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
+
     expect(screen.queryAllByRole('listbox')).toHaveLength(1)
     await userEvent.keyboard('{Escape}')
     await expect.poll(() => screen.queryAllByRole('listbox')).toHaveLength(0)
@@ -557,6 +594,8 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
@@ -579,6 +618,8 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
@@ -601,6 +642,8 @@ describe('VCombobox', () => {
       ))
 
       await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
       expect(screen.getAllByRole('option')).toHaveLength(6)
 
       await userEvent.keyboard('Cal')
@@ -662,6 +705,7 @@ describe('VCombobox', () => {
     })
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
     await expect(screen.findByRole('listbox')).resolves.toBeVisible()
 
     await userEvent.click(screen.getAllByRole('option')[0])
@@ -685,7 +729,7 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
-    const input = getByCSS('input')
+    const input = getByCSS('input[type="text"]')
     expect(input).toHaveValue('')
 
     // Blur input with a custom search input value
@@ -694,16 +738,24 @@ describe('VCombobox', () => {
     await expect.poll(() => selectedItem.value).toBe('test')
     expect(input).toHaveValue('')
 
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
+
     // Press enter key with a custom search input value
     await userEvent.click(element)
     await userEvent.keyboard('test 2{Enter}')
     await expect.poll(() => selectedItem.value).toBe('test 2')
     expect(input).toHaveValue('')
 
+    // Close the menu kept open by the previous selection before reopening,
+    // otherwise clicking an already-open field races the close/open transition
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => screen.queryByCSS('.v-overlay__content')).toBeNull()
+
     // Search existing item and click to select
     await userEvent.click(element)
     expect(input).toHaveValue('')
     await userEvent.keyboard('Item 1')
+    await commands.waitStable('.v-list')
     await userEvent.click(await screen.findByRole('option'))
     await expect.poll(() => selectedItem.value).toBe('Item 1')
   })
@@ -728,8 +780,9 @@ describe('VCombobox', () => {
     ))
 
     await userEvent.click(element)
+    await commands.waitStable('.v-list')
     await userEvent.click(screen.getAllByRole('option')[0])
-    expect(model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
+    await expect.poll(() => model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
 
     await userEvent.click(document.body)
     expect(model.value).toStrictEqual({ title: 'Item 1', value: 'item1' })
@@ -741,12 +794,413 @@ describe('VCombobox', () => {
       <VCombobox onUpdate:focused={ onFocus } />
     ))
 
-    await userEvent.click(element, { y: 1 })
+    await userEvent.click(element, { position: { x: 10, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  it.each([
+    { delimiters: [','], text: 'abc,foo, baz', expected: ['abc', 'foo', 'baz'] },
+    { delimiters: [':'], text: '012:2,32:0:1', expected: ['012', '2,32', '0', '1'] },
+    { delimiters: [':', '.', '-'], text: '(1) 231:13 - 123.', expected: ['(1) 231', '13', '123'] },
+  ])('should ingest new items when a delimited text is pasted', async ({ delimiters, text, expected }) => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        delimiters={ delimiters }
+        multiple
+      />
+    ))
+    await userEvent.tab()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText(text)
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+    expect(model.value).toEqual(expected)
   })
+
+  it('should show only matching items when reopening the menu if alwaysFilter is true', async () => {
+    const { element } = render(() => (
+      <VCombobox alwaysFilter items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']} />
+    ))
+
+    await userEvent.click(element)
+    await userEvent.keyboard('c')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(2)
+    await userEvent.keyboard('al')
+    await expect(screen.findAllByRole('option')).resolves.toHaveLength(1)
+    await userEvent.click(document.body)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(0)
+    await userEvent.click(element)
+    await expect.poll(() => screen.queryAllByRole('option')).toHaveLength(1)
+  })
+
+  it('should create new items when pasting with line break characters', async () => {
+    const model = ref(null)
+    render(() => (
+      <VCombobox
+        v-model={ model.value }
+        multiple
+        delimiters={[',']}
+      />
+    ))
+
+    await userEvent.tab()
+    const lock = await commands.getLock()
+    await navigator.clipboard.writeText('foo,\nbar')
+    await userEvent.paste()
+    await commands.releaseLock(lock)
+    expect(model.value).toEqual(['foo', 'bar'])
+  })
+
+  describe('menu-header and menu-footer slots', () => {
+    it('should render menu-header and menu-footer slots', async () => {
+      const { element } = render(() => (
+        <VCombobox menu items={['Item #1', 'Item #2']}>
+          {{
+            'menu-header': () => (
+              <div data-testid="header-content">My Header</div>
+            ),
+            'menu-footer': () => (
+              <div data-testid="footer-content">My Footer</div>
+            ),
+          }}
+        </VCombobox>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      expect(screen.getByTestId('header-content')).toHaveTextContent('My Header')
+      expect(screen.getByTestId('footer-content')).toHaveTextContent('My Footer')
+    })
+
+    it('should navigate between header, list, and footer with Tab', async () => {
+      const { element } = render(() => (
+        <VCombobox menu items={['Item #1', 'Item #2', 'Item #3']}>
+          {{
+            'menu-header': () => (
+              <div>
+                <button data-testid="header-btn">Header Button</button>
+              </div>
+            ),
+            'menu-footer': () => (
+              <div>
+                <button data-testid="footer-btn">Footer Button</button>
+              </div>
+            ),
+          }}
+        </VCombobox>
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+
+      // Navigate to list first
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => screen.getByTestId('header-btn')).toHaveFocus()
+
+      // Tab to list
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Tab to footer
+      await userEvent.keyboard('{Tab}')
+      expect(screen.getByTestId('footer-btn')).toHaveFocus()
+
+      // Shift+Tab back to list
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => screen.getAllByRole('option').at(0)).toHaveFocus()
+
+      // Shift+Tab back to header
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      expect(screen.getByTestId('header-btn')).toHaveFocus()
+    })
+  })
+
+  it('should keep menu open and repair focus when the focused item is removed', async () => {
+    const menu = ref(false)
+    render(() => (
+      <VCombobox
+        v-model:menu={ menu.value }
+        items={ Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`) }
+      />
+    ))
+
+    const input = screen.getByCSS('input[type="text"]')
+    await userEvent.click(input)
+    await waitIdle()
+    expect(menu.value).toBe(true)
+
+    const option = screen.getAllByRole('option')[0]
+    option.focus()
+    await waitIdle()
+    expect(document.activeElement).toBe(option)
+
+    // The focused option is removed (virtual-scroll recycle or async items reload);
+    // focus falls to <body> and the menu would close.
+    option.remove()
+    await waitIdle()
+    await wait(300)
+
+    // Repaired: focus returns into the menu content and the menu stays open.
+    expect(menu.value).toBe(true)
+    expect(screen.getByRole('listbox').contains(document.activeElement)).toBe(true)
+  })
+
+  describe('native form submission', () => {
+    const objectItems = [
+      { title: 'Item 1', value: 1 },
+      { title: 'Item 2', value: 2 },
+      { title: 'Item 3', value: 3 },
+    ]
+
+    it('should include selected value in form data for single selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox name="field" items={ objectItems } modelValue={ objectItems[0] } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('1')
+    })
+
+    it('should include selected values in form data for multiple selection', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox multiple name="field" items={ objectItems } modelValue={[objectItems[0], objectItems[1]]} />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      const values = submittedData!.getAll('field')
+      expect(values).toEqual(['1', '2'])
+    })
+
+    it('should include freeform values not present in items', async () => {
+      let submittedData: FormData | null = null
+
+      render(() => (
+        <form
+          onSubmit={ e => {
+            e.preventDefault()
+            submittedData = new FormData(e.target as HTMLFormElement)
+          }}
+        >
+          <VCombobox name="field" items={ items } modelValue="Narnia" />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+      expect(submittedData!.get('field')).toBe('Narnia')
+    })
+
+    it('should not submit the form when Enter commits a value', async () => {
+      const onSubmit = vi.fn((e: Event) => e.preventDefault())
+      const model = ref<string[]>([])
+
+      render(() => (
+        <form onSubmit={ onSubmit }>
+          <VCombobox v-model={ model.value } multiple items={ items } />
+          <button type="submit">Submit</button>
+        </form>
+      ))
+
+      await userEvent.click(screen.getByCSS('input'))
+      await userEvent.keyboard('abc{Enter}')
+
+      expect(model.value).toEqual(['abc'])
+      expect(onSubmit).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('virtual list with selection', () => {
+    const manyItems = Array.from({ length: 1000 }, (_, i) => i)
+
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should open near the selected item and arrow from selection', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await commands.waitStable('.v-list')
+
+      await expect.poll(() => screen.getAllByRole('option')
+        .map(el => el.textContent))
+        .toContain('100')
+
+      await userEvent.keyboard('{ArrowDown}')
+      expect(document.activeElement?.textContent?.trim()).toBe('101')
+
+      await userEvent.keyboard('{ArrowUp}')
+      expect(document.activeElement?.textContent?.trim()).toBe('100')
+    })
+
+    it('should open on ArrowUp when a value is selected', async () => {
+      render(() => (
+        <VCombobox items={ manyItems } modelValue={ 100 } />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await commands.waitStable('.v-list')
+      await userEvent.keyboard('{Escape}')
+
+      await userEvent.keyboard('{ArrowUp}')
+      await commands.waitStable('.v-list')
+      await expect.poll(() => document.activeElement?.textContent?.trim()).toBe('100')
+    })
+  })
+
+  describe('selection events for multiple', () => {
+    it('should emit item:created for free-text values', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await userEvent.keyboard('Brand new{Enter}')
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).toHaveBeenCalledTimes(1)
+      expect(created.mock.calls[0][0]).toMatchObject({ title: 'Brand new', value: 'Brand new', raw: 'Brand new' })
+      expect(model.value).toEqual(['Brand new'])
+    })
+
+    it('should not emit item:created when selecting an existing item', async () => {
+      const added = vi.fn()
+      const created = vi.fn()
+      const model = ref<string[]>([])
+
+      const { element } = render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          multiple
+          modelValue={ model.value }
+          onUpdate:modelValue={ val => model.value = val as string[] }
+          onItem:added={ added }
+          onItem:created={ created }
+        />
+      ))
+
+      await userEvent.click(element)
+      await commands.waitStable('.v-list')
+      await userEvent.click(screen.getAllByRole('option')[0])
+
+      expect(added).toHaveBeenCalledTimes(1)
+      expect(created).not.toHaveBeenCalled()
+    })
+
+    it('should emit item:removed when closing a chip', async () => {
+      const removed = vi.fn()
+
+      render(() => (
+        <VCombobox
+          items={['Item 1', 'Item 2']}
+          modelValue={['Item 1', 'Item 2']}
+          multiple
+          chips
+          closableChips
+          onItem:removed={ removed }
+        />
+      ))
+
+      await userEvent.click(screen.getAllByTestId('close-chip')[0])
+      expect(removed).toHaveBeenCalledTimes(1)
+      expect(removed.mock.calls[0][0]).toMatchObject({ title: 'Item 1', value: 'Item 1' })
+    })
+  })
+
+  describe('trimValues', () => {
+    it('should discard whitespace-only values and trim committed values', async () => {
+      const model = ref([])
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } multiple trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard(' ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard('  {Enter}')
+      await expect.poll(() => model.value).toEqual([])
+
+      await userEvent.keyboard('a {Enter}')
+      await expect.poll(() => model.value).toEqual(['a'])
+
+      await userEvent.keyboard(' b b')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toEqual(['a', 'b b'])
+    })
+
+    it('should trim single value on blur', async () => {
+      const model = ref()
+      render(() => (
+        <>
+          <VCombobox v-model={ model.value } trimValues />
+          <button type="button">dummy</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('  ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBeNull()
+
+      await userEvent.keyboard('{Shift>}{Tab}{/Shift}')
+      await expect.poll(() => document.activeElement).toBe(input)
+      await userEvent.keyboard(' a a ')
+      await userEvent.tab()
+      await expect.poll(() => model.value).toBe('a a')
+      await expect.poll(() => (input as HTMLInputElement).value).toBe('a a')
+    })
+  })
+
+  showcase({ stories })
 })

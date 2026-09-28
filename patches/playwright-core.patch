@@ -1,0 +1,14 @@
+diff --git a/lib/coreBundle.js b/lib/coreBundle.js
+index d9041dd0f009072511a7d808dec83121ff29e127..4438d6415f9ea02c85d9202648b49887e5c79349 100644
+--- a/lib/coreBundle.js
++++ b/lib/coreBundle.js
+@@ -31798,6 +31798,9 @@ async function validateDependenciesLinux(sdkLanguage, linuxLddDirectories, dlOpe
+       missingDeps.delete(missingDep);
+     }
+   }
++  // Ubuntu 25.04 has libicu76 instead but works fine
++  if (!missingDeps.size && missingPackages.size === 1 && missingPackages.has('libicu74'))
++    return;
+   const maybeSudo = process.getuid?.() && import_os6.default.platform() !== "win32" ? "sudo " : "";
+   const dockerInfo = readDockerVersionSync();
+   const errorLines = [

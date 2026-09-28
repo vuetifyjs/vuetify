@@ -186,15 +186,15 @@ describe('display', () => {
         description: 'WSXGA+ (landscape)',
         width: 1680,
         height: 1050,
-        name: 'lg',
+        name: 'xl',
       },
       [
-        'lg',
+        'xl',
         'smAndUp',
         'mdAndUp',
-        'lgAndDown',
         'lgAndUp',
         'xlAndDown',
+        'xlAndUp',
       ],
     ],
     [

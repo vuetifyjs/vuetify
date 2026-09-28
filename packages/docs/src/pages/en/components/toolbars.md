@@ -72,6 +72,12 @@ Toolbars can display a background as opposed to a solid color using the **src** 
 
 <ExamplesExample file="v-toolbar/prop-background" />
 
+#### Location
+
+You can use **location** prop to control how the toolbar is positioned within a relative container. It can also be used with **position-fixed** class instead of **absolute** prop.
+
+<ExamplesExample file="v-toolbar/prop-location" />
+
 #### Extended
 
 Toolbars can be extended without using the `extension` slot.
@@ -115,3 +121,9 @@ In this example we offset our card onto the extended content area of a toolbar u
 A floating toolbar is turned into an inline element that only takes up as much space as needed. This is particularly useful when placing toolbars over content.
 
 <ExamplesExample file="v-toolbar/prop-floating-with-search" />
+
+### Tooltips and Speed Dial
+
+Toolbar elements can include menus (like Speed Dial) and tooltips to help users understand the action intent when buttons show only icons to keep interface minimalistic.
+
+<ExamplesExample file="v-toolbar/misc-tooltips-and-speed-dial" />

@@ -2,10 +2,23 @@ interface Metadata {
   title: string
   description: string
   keywords: string
+  ogImage?: string
 }
 
-export function genAppMetaInfo (defaults: any) {
-  const metadata = (genMetaInfo as any)(...Object.values(defaults))
+export function genAppMetaInfo (defaults: {
+  title: string
+  description?: string
+  keywords?: string | readonly string[]
+  assets?: string[] | readonly string[]
+  ogImage?: string
+}) {
+  const metadata = genMetaInfo(
+    defaults.title,
+    defaults.description ?? '',
+    String(defaults.keywords ?? ''),
+    [...(defaults.assets ?? [])],
+    defaults.ogImage,
+  )
 
   metadata.link.push(...genLink())
 
@@ -17,6 +30,7 @@ export function genMetaInfo (
   description: string,
   keywords: string,
   assets: string[] = [],
+  ogImage?: string,
 ) {
   const length = (description ?? '').length
 
@@ -24,10 +38,11 @@ export function genMetaInfo (
     ? description
     : `${description.slice(0, 116)}...`
 
-  const options = {
+  const options: Metadata = {
     description,
     keywords,
     title,
+    ogImage,
   }
 
   return {
@@ -37,7 +52,7 @@ export function genMetaInfo (
       { key: 'keywords', name: 'keywords', content: keywords },
       ...genFacebookMetaInfo(),
       ...genOpenGraphMetaInfo(options),
-      ...genTwitterMetaInfo(),
+      ...genTwitterMetaInfo(ogImage),
     ] as (Record<string, any>[]),
     title,
   }
@@ -78,7 +93,7 @@ function genLink () {
 function genOpenGraphMetaInfo (args: Metadata) {
   return parseMeta('og', {
     description: args.description,
-    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    image: args.ogImage ?? 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     site_name: 'Vuetify',
     title: args.title,
     type: 'website',
@@ -105,9 +120,9 @@ function parseMeta (
   return meta
 }
 
-function genTwitterMetaInfo () {
+function genTwitterMetaInfo (ogImage?: string) {
   return parseMeta('twitter', {
-    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    image: ogImage ?? 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     card: 'summary_large_image',
     domain: 'https://vuetifyjs.com/',
     site: '@vuetifyjs',

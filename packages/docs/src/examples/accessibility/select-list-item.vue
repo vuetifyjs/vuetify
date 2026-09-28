@@ -6,7 +6,7 @@
     <template v-slot:item="{ item, props }">
       <v-list-item v-bind="props">
         <template v-slot:title>
-          {{ item.raw }}
+          {{ item }}
         </template>
       </v-list-item>
     </template>

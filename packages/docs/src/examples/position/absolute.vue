@@ -1,5 +1,5 @@
 <template>
-  <div class="text-caption px-4 mb-2">With static child</div>
+  <div class="text-body-small px-4 mb-2">With static child</div>
 
   <div class="bg-surface-variant pa-4 position-relative rounded-lg mx-2 mb-2">
     <div class="mb-2">Relative parent</div>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="text-caption px-4 mb-2">With absolute child</div>
+  <div class="text-body-small px-4 mb-2">With absolute child</div>
 
   <div class="bg-surface-variant pa-4 position-relative rounded-lg mx-2 mb-2">
     <div class="mb-2">Relative parent</div>

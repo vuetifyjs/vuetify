@@ -3,19 +3,19 @@ import path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' with { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' with { type: 'json' }
-import { kebabCase } from './helpers/text'
-import type { ComponentData, DirectiveData } from './types'
-import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
+import { kebabCase } from './helpers/text.ts'
+import type { ComponentData, DirectiveData } from './types.ts'
+import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types.ts'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, addPropData, reportMissingDescriptions, sortByKey, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, reportMissingDescriptions, sortByKey, stringifyProps } from './utils.ts'
 import * as os from 'os'
 import { mkdirp } from 'mkdirp'
-import { createVeturApi } from './vetur'
+import { createVeturApi } from './vetur.ts'
 import { rimraf } from 'rimraf'
-import { createWebTypesApi } from './web-types'
+import { createWebTypesApi } from './web-types.ts'
 import inspector from 'inspector'
 import yargs from 'yargs'
-import { parseGlobalSassVariables, parseSassVariables } from './helpers/sass'
+import { parseGlobalSassVariables, parseSassVariables } from './helpers/sass.ts'
 
 const yar = yargs(process.argv.slice(2))
   .option('components', {

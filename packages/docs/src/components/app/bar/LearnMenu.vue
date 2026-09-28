@@ -70,8 +70,18 @@
     { divider: true },
     { subheader: t('documentation') },
     {
-      title: '3.x (latest)',
+      title: 'Vuetify0',
+      href: 'https://0.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-0-box',
+    },
+    {
+      title: '4.x (latest)',
       href: 'https://vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-4-box',
+    },
+    {
+      title: '3.x (stable)',
+      href: 'https://v3.vuetifyjs.com/',
       appendIcon: 'mdi-numeric-3-box',
     },
     {

@@ -28,8 +28,13 @@ function useProvided <T> (props: any, prop: string, provided: Ref<T>) {
   return internal as Ref<T>
 }
 
-function inferDecimalSeparator (format: (v: number) => string) {
+function inferDecimalSeparator (format: ReturnType<typeof useI18n>['n']) {
   return format(0.1).includes(',') ? ',' : '.'
+}
+
+function inferNumericGroupSeparator (format: ReturnType<typeof useI18n>['n']) {
+  return format(10000, { useGrouping: true, part: true })
+    .find(p => p.type === 'group')?.value ?? ' '
 }
 
 function createProvideFunction (data: {
@@ -62,6 +67,7 @@ function createProvideFunction (data: {
       fallback,
       messages,
       decimalSeparator: toRef(() => props.decimalSeparator ?? inferDecimalSeparator(i18n.n)),
+      numericGroupSeparator: toRef(() => inferNumericGroupSeparator(i18n.n)),
       t: (key: string, ...params: unknown[]) => i18n.t(key, params),
       n: i18n.n,
       provide: createProvideFunction({ current, fallback, messages, useI18n: data.useI18n }),
@@ -80,6 +86,7 @@ export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): 
     fallback,
     messages,
     decimalSeparator: toRef(() => inferDecimalSeparator(i18n.global.n)),
+    numericGroupSeparator: toRef(() => inferNumericGroupSeparator(i18n.global.n)),
     t: (key: string, ...params: unknown[]) => i18n.global.t(key, params),
     n: i18n.global.n,
     provide: createProvideFunction({ current, fallback, messages, useI18n }),

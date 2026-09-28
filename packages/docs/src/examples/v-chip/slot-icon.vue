@@ -24,16 +24,9 @@
       1 Year
     </v-chip>
 
-    <v-chip
-      class="ma-2"
-      color="green"
-    >
+    <v-chip class="ma-2" color="green">
       <template v-slot:prepend>
-        <v-avatar
-          class="green-darken-4"
-        >
-          1
-        </v-avatar>
+        <v-avatar color="green-darken-1" start>1</v-avatar>
       </template>
       Years
     </v-chip>

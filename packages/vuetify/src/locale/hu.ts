@@ -20,6 +20,9 @@ export default {
       activateNone: 'Rendezés törlése.',
       activateDescending: 'Aktiváld a csökkenő rendezésért.',
       activateAscending: 'Aktiváld a növekvő rendezésért.',
+      selectRow: 'Sor kijelölése',
+      selectAll: 'Összes kijelölése',
+      selectGroup: 'Csoport kijelölése',
     },
     sortBy: 'Rendezés',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: '–',
   },
+  monthPicker: {
+    title: 'Hónap kiválasztása',
+    itemsSelected: '{0} kiválasztva',
+    header: 'Adja meg a hónapot',
+    range: {
+      title: 'Adja meg a hónapokat',
+    },
+    ariaLabel: {
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectYear: 'Év kiválasztása',
+      currentMonth: 'Aktuális hónap, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} kiválasztva',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Adja meg a dátumot',
     input: {
       placeholder: 'Adja meg a dátumot',
+    },
+    ariaLabel: {
+      previousMonth: 'Előző hónap',
+      nextMonth: 'Következő hónap',
+      selectYear: 'Év kiválasztása',
+      previousYear: 'Előző év',
+      nextYear: 'Következő év',
+      selectMonth: 'Hónap kiválasztása',
+      selectDate: '{0}',
+      currentDate: 'Ma, {0}',
     },
   },
   noDataText: 'Nincs elérhető adat',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} további',
     today: 'Ma',
   },
+  heatmap: {
+    less: 'Kevesebb',
+    more: 'Több',
+  },
   input: {
     clear: 'Törlés {0}',
     prependAction: '{0} előrehozott művelet',
     appendAction: '{0} hozzáadott művelet',
-    otp: 'Kérjük, adja meg az OTP karaktert: {0}',
+    otp: 'Adja meg az ellenőrző kódot',
   },
   fileInput: {
     counter: '{0} fájl',
@@ -78,6 +109,10 @@ export default {
     am: 'de',
     pm: 'du',
     title: 'Válassza ki az időpontot',
+    hour: 'Óra',
+    minute: 'Perc',
+    second: 'Másodperc',
+    notAllowed: 'Az érték nem engedélyezett',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Kérlek, válassz legalább egy értéket',
     pattern: 'Érvénytelen formátum',
   },
+  command: {
+    search: 'Írjon be parancsot vagy keressen...',
+  },
   hotkey: {
     then: 'majd',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Szóköz',
     plus: 'plusz',
     shortcut: 'Billentyűparancs: {0}',
+    or: 'vagy',
+  },
+  video: {
+    play: 'Lejátszás',
+    pause: 'Szünet',
+    seek: 'Keresés',
+    volume: 'Hangerő',
+    showVolume: 'Hangerőszabályzó megjelenítése',
+    mute: 'Némítás',
+    unmute: 'Némítás feloldása',
+    enterFullscreen: 'Teljes képernyő',
+    exitFullscreen: 'Kilépés a teljes képernyőből',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Szín kiválasztása a képernyőről',
+      hueSlider: 'Árnyalat',
+      alphaSlider: 'Átlátszóság',
+      redInput: 'Vörös',
+      greenInput: 'Zöld',
+      blueInput: 'Kék',
+      alphaInput: 'Átlátszóság',
+      hueInput: 'Árnyalat',
+      saturationInput: 'Telítettség',
+      lightnessInput: 'Világosság',
+      hexInput: 'HEX érték',
+      hexaInput: 'HEX érték átlátszósággal',
+      changeFormat: 'Színformátum módosítása',
+    },
   },
 }

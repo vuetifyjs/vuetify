@@ -1,0 +1,13 @@
+{
+  "props": {
+    "bucketIndex": "Index of the threshold bucket whose color fills the cell.",
+    "color": "Explicit fill color. Used when `bucketIndex` is not set.",
+    "disabled": "Renders the cell in a disabled when toggled off.",
+    "height": "Cell height in pixels.",
+    "rounded": "Cell corner radius. Accepts a number or string with `px` or `%` units only — the value is passed directly to the SVG `<rect>` `rx`/`ry` attributes.",
+    "width": "Cell width in pixels."
+  },
+  "slots": {
+    "default": "Slot used to render custom content inside the legend cell via a `<foreignObject>`."
+  }
+}

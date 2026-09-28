@@ -1,0 +1,5 @@
+// VHighlight
+$highlight-opacity: 8% !default;
+$highlight-background: color-mix(in srgb, currentColor var(--v-highlight-opacity, $highlight-opacity), transparent) !default;
+$highlight-border-radius: 2px !default;
+$highlight-color: inherit !default;

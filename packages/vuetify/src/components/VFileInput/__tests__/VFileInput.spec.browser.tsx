@@ -2,11 +2,12 @@
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { CenteredGrid, generate, render, screen, userEvent } from '@test'
+import { CenteredGrid, render, screen, showcase, userEvent } from '@test'
 import { cloneVNode, defineComponent, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
+const textFile = new File(['text'], 'text.txt')
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -53,7 +54,7 @@ describe('VFileInput', () => {
 
     const input = screen.getByCSS('input')
 
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(element).toHaveTextContent('text.txt')
     expect(model.value).toEqual(expect.objectContaining({ name: 'text.txt' }))
   })
@@ -80,6 +81,30 @@ describe('VFileInput', () => {
     ))
 
     expect(element).toHaveTextContent('2 files (3.0 MB in total)')
+  })
+
+  it('should conditionally show placeholder', async () => {
+    const { rerender } = render(VFileInput, {
+      props: { placeholder: 'Placeholder' },
+    })
+
+    const fileInput = screen.getByCSS('input[type="file"]')
+    const placeholderInput = () => screen.queryByCSS('input[type="text"]')
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
+    await expect.element(placeholderInput()).toHaveAttribute('inert')
+
+    await rerender({ label: 'Label' })
+    await expect.poll(placeholderInput).toBeNull()
+    fileInput.focus()
+    await expect.poll(placeholderInput).not.toBeNull()
+    fileInput.blur()
+    await expect.poll(placeholderInput).toBeNull()
+
+    await rerender({ persistentPlaceholder: true })
+    await expect.element(placeholderInput()).toHaveAttribute('placeholder', 'Placeholder')
+
+    await rerender({ modelValue: oneMBFile })
+    await expect.poll(placeholderInput).toBeNull()
   })
 
   it('should clear input', async () => {
@@ -134,7 +159,7 @@ describe('VFileInput', () => {
 
     const input = screen.getByCSS('input')
     input.focus()
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     await userEvent.tab()
 
     expect(change).toHaveBeenCalledTimes(1)
@@ -169,7 +194,7 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
 
     // add file
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(input.files).toHaveLength(1)
 
     // reset input from wrapper/parent component
@@ -177,7 +202,7 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
 
     // add same file again
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(input.files).toHaveLength(1)
 
     // reset input from wrapper/parent component
@@ -185,7 +210,17 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
   })
 
-  describe('Showcase', () => {
-    generate({ stories })
+  it('hides details when using hide-details="auto" and counter without files', async () => {
+    const model = ref<File[]>([])
+    const { queryByCSS } = render(() => (
+      <VFileInput hideDetails="auto" counter v-model={ model.value }></VFileInput>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
+
+    model.value = [oneMBFile]
+    await expect.poll(() => queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
+
+  showcase({ stories })
 })

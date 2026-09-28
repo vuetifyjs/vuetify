@@ -4,6 +4,10 @@
 
 <script setup lang="ts">
   const props = defineProps({
+    async: {
+      type: Boolean,
+      default: false,
+    },
     id: {
       type: String,
       required: true,
@@ -32,6 +36,7 @@
     script.type = 'text/javascript'
     script.id = props.scriptId
     script.src = props.src
+    script.async = props.async
     script.onload = () => emit('script:load')
     script.onerror = onError
 

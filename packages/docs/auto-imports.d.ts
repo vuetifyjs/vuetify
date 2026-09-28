@@ -172,6 +172,9 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
+  export type { CodeSection } from './src/composables/playground'
+  import('./src/composables/playground')
+  // @ts-ignore
   export type { Category } from './src/stores/app'
   import('./src/stores/app')
   // @ts-ignore

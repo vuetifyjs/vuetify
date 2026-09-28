@@ -20,6 +20,7 @@ import { makeVTimelineItemProps } from './VTimelineItem'
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'start' | 'end' | undefined
 export type TimelineAlign = 'center' | 'start'
+export type TimelineJustify = 'auto' | 'center'
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 export const makeVTimelineProps = propsFactory({
@@ -37,7 +38,7 @@ export const makeVTimelineProps = propsFactory({
     type: String,
     default: 'auto',
     validator: (v: any) => ['auto', 'center'].includes(v),
-  },
+  } as Prop<TimelineJustify>,
   side: {
     type: String,
     validator: (v: any) => v == null || ['start', 'end'].includes(v),

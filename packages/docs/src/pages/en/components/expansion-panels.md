@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Expansion panels
   title: Expansion panel component
@@ -49,6 +50,12 @@ Expansion panels in their simplest form display a list of expandable items. You 
 There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while poput expansion-panels become larger.
 
 <ExamplesExample file="v-expansion-panels/prop-variant" />
+
+#### Gap
+
+Use **gap** to add spacing between accordion panels. Can be combined with `:rounded="[outerRadius, innerRadius]"` to adjust the panels corner rounding.
+
+<ExamplesExample file="v-expansion-panels/prop-rounded-gap" />
 
 #### Disabled
 

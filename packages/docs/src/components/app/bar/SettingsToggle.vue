@@ -19,6 +19,7 @@
     :icon="app.settings ? 'mdi-cog' : 'mdi-cog-outline'"
     class="me-n2"
     color="medium-emphasis"
+    v-tooltip:bottom="t('settings.header')"
     @click="onClick"
   />
 </template>
@@ -27,6 +28,7 @@
   const app = useAppStore()
   const pwa = usePwaStore()
   const { name } = useRoute()
+  const { t } = useI18n()
 
   function onClick () {
     sweClick('app-bar', 'settings-toggle', name)

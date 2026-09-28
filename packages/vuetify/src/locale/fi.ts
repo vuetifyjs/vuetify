@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivoi lajittelun poistamiseksi.',
       activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
       activateAscending: 'Aktivoi lajitella nouseva.',
+      selectRow: 'Valitse rivi',
+      selectAll: 'Valitse kaikki',
+      selectGroup: 'Valitse ryhmä',
     },
     sortBy: 'Järjestä',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: '–',
   },
+  monthPicker: {
+    title: 'Valitse kuukausi',
+    itemsSelected: '{0} valittu',
+    header: 'Syötä kuukausi',
+    range: {
+      title: 'Syötä kuukaudet',
+    },
+    ariaLabel: {
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectYear: 'Valitse vuosi',
+      currentMonth: 'Nykyinen kuukausi, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} valittu',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Syötä päivämäärä',
     input: {
       placeholder: 'Syötä päivämäärä',
+    },
+    ariaLabel: {
+      previousMonth: 'Edellinen kuukausi',
+      nextMonth: 'Seuraava kuukausi',
+      selectYear: 'Valitse vuosi',
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectMonth: 'Valitse kuukausi',
+      selectDate: '{0}',
+      currentDate: 'Tänään, {0}',
     },
   },
   noDataText: 'Ei dataa',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} lisää',
     today: 'Tänään',
   },
+  heatmap: {
+    less: 'Vähemmän',
+    more: 'Enemmän',
+  },
   input: {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',
     appendAction: '{0} lisätty toiminto',
-    otp: 'Syötä OTP-merkki {0}',
+    otp: 'Syötä vahvistuskoodi',
   },
   fileInput: {
     counter: '{0} tiedostoa',
@@ -78,6 +109,10 @@ export default {
     am: 'ap.',
     pm: 'ip.',
     title: 'Valitse aika',
+    hour: 'Tunti',
+    minute: 'Minuutit',
+    second: 'Sekunnit',
+    notAllowed: 'Arvo ei ole sallittu',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Valitse ainakin yksi arvo',
     pattern: 'Virheellinen muoto',
   },
+  command: {
+    search: 'Kirjoita komento tai hae...',
+  },
   hotkey: {
     then: 'sitten',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Välilyönti',
     plus: 'plus',
     shortcut: 'Näppäinyhdistelmä: {0}',
+    or: 'tai',
+  },
+  video: {
+    play: 'Toista',
+    pause: 'Tauko',
+    seek: 'Hae',
+    volume: 'Äänenvoimakkuus',
+    showVolume: 'Näytä äänenvoimakkuuden säädin',
+    mute: 'Mykistä',
+    unmute: 'Poista mykistys',
+    enterFullscreen: 'Koko näyttö',
+    exitFullscreen: 'Poistu koko näytöstä',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Valitse väri näytöltä',
+      hueSlider: 'Sävy',
+      alphaSlider: 'Alfa',
+      redInput: 'Punainen',
+      greenInput: 'Vihreä',
+      blueInput: 'Sininen',
+      alphaInput: 'Alfa',
+      hueInput: 'Sävy',
+      saturationInput: 'Kylläisyys',
+      lightnessInput: 'Vaaleus',
+      hexInput: 'HEX-arvo',
+      hexaInput: 'HEX alfa-arvolla',
+      changeFormat: 'Vaihda värimuotoa',
+    },
   },
 }

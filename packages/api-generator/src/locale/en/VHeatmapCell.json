@@ -1,0 +1,14 @@
+{
+  "props": {
+    "cellProps": "Additional attributes spread on the cell `<g>` element. A `title` value renders as an SVG `<title>` child (native tooltip).",
+    "disabled": "Renders the cell in a disabled when toggled off using interactive legend state.",
+    "height": "Cell height in pixels.",
+    "item": "Heatmap cell data. Exposes `value` and `color` for use in slot content.",
+    "width": "Cell width in pixels.",
+    "x": "Horizontal offset of the cell within the parent SVG.",
+    "y": "Vertical offset of the cell within the parent SVG."
+  },
+  "slots": {
+    "default": "Slot used to render custom content inside the cell via a `<foreignObject>`."
+  }
+}

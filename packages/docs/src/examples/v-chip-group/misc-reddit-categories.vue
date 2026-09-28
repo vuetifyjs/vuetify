@@ -6,9 +6,9 @@
     border
   >
     <div class="pa-4">
-      <div class="text-h6">What are you into?</div>
+      <div class="text-title-large">What are you into?</div>
 
-      <div class="text-subtitle-1">Select topics to continue</div>
+      <div class="text-body-large">Select topics to continue</div>
 
       <v-responsive class="overflow-y-auto" max-height="280">
         <v-chip-group class="mt-3" column>
@@ -92,3 +92,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2226-49680&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

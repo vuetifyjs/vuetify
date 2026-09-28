@@ -1,0 +1,37 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-date-range-picker
+    &.v-picker
+      display: inline-grid
+      width: auto
+
+    .v-picker__body
+      align-items: stretch
+      flex-wrap: nowrap
+
+    .v-picker__actions
+      align-items: center
+      flex: none
+      gap: $date-range-picker-footer-gap
+      min-height: $date-range-picker-footer-min-height
+      padding: $date-range-picker-footer-padding
+      border-top: thin solid $date-range-picker-divider-color
+      justify-content: flex-start
+
+    &__panel
+      display: flex
+      flex-direction: column
+
+    &__divider
+      flex: 0 0 auto
+      align-self: stretch
+      border-inline-start: thin solid $date-range-picker-divider-color
+
+    &__nav-hidden
+      opacity: 0
+
+    .v-date-picker
+      box-shadow: none
+      border-radius: 0

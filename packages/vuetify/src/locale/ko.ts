@@ -20,6 +20,9 @@ export default {
       activateNone: '정렬을 취소하려면 활성화하세요.',
       activateDescending: '내림차순 정렬을 위해 활성화하세요.',
       activateAscending: '오름차순 정렬을 위해 활성화하세요.',
+      selectRow: '행 선택',
+      selectAll: '모두 선택',
+      selectGroup: '그룹 선택',
     },
     sortBy: '정렬 기준',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: '부터',
   },
+  monthPicker: {
+    title: '월 선택',
+    itemsSelected: '{0}개 선택됨',
+    header: '월 입력',
+    range: {
+      title: '월 입력',
+    },
+    ariaLabel: {
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectYear: '연도 선택',
+      currentMonth: '이번 달, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0}개 선택됨',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: '날짜 입력',
     input: {
       placeholder: '날짜 입력',
+    },
+    ariaLabel: {
+      previousMonth: '이전 달',
+      nextMonth: '다음 달',
+      selectYear: '연도 선택',
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectMonth: '월 선택',
+      selectDate: '{0}',
+      currentDate: '오늘, {0}',
     },
   },
   noDataText: '데이터가 없습니다.',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} 더보기',
     today: '오늘',
   },
+  heatmap: {
+    less: '적음',
+    more: '많음',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
     appendAction: '{0} 뒤에 추가된 동작',
-    otp: 'OTP 문자 {0}를 입력하세요',
+    otp: '인증 코드를 입력하세요',
   },
   fileInput: {
     counter: '{0}개 파일',
@@ -78,6 +109,10 @@ export default {
     am: '오전',
     pm: '오후',
     title: '시간을 선택하세요',
+    hour: '시간',
+    minute: '분',
+    second: '초',
+    notAllowed: '값이 허용되지 않습니다',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: '최소 하나의 값을 선택해주세요',
     pattern: '형식이 유효하지 않습니다',
   },
+  command: {
+    search: '명령을 입력하거나 검색하세요...',
+  },
   hotkey: {
     then: '그 다음',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: '스페이스',
     plus: '플러스',
     shortcut: '키보드 단축키: {0}',
+    or: '또는',
+  },
+  video: {
+    play: '재생',
+    pause: '일시정지',
+    seek: '탐색',
+    volume: '볼륨',
+    showVolume: '볼륨 조절 표시',
+    mute: '음소거',
+    unmute: '음소거 해제',
+    enterFullscreen: '전체 화면',
+    exitFullscreen: '전체 화면 종료',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '화면에서 색상 선택',
+      hueSlider: '색조',
+      alphaSlider: '투명도',
+      redInput: '빨강',
+      greenInput: '초록',
+      blueInput: '파랑',
+      alphaInput: '투명도',
+      hueInput: '색조',
+      saturationInput: '채도',
+      lightnessInput: '명도',
+      hexInput: 'HEX 값',
+      hexaInput: '알파 값이 있는 HEX',
+      changeFormat: '색상 형식 변경',
+    },
   },
 }

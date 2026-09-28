@@ -192,7 +192,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
       return selected
     },
-    in: (v, children, parents, disabled) => {
+    in: (v, children, parents) => {
       let map = new Map()
 
       for (const id of (v || [])) {
@@ -202,7 +202,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
           selected: map,
           children,
           parents,
-          disabled,
+          disabled: new Set<unknown>(),
         })
       }
 
@@ -237,6 +237,44 @@ export const trunkSelectStrategy = (mandatory?: boolean): SelectStrategy => {
             const parent = parents.get(key)
             if (v.get(parent) === 'on') continue
           }
+          arr.push(key)
+        }
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
+
+export const branchSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: (v, children, parents, disabled) => {
+      let map = new Map()
+
+      for (const id of (v || [])) {
+        if (children.has(id)) continue
+        map = strategy.select({
+          id,
+          value: true,
+          selected: map,
+          children,
+          parents,
+          disabled,
+        })
+      }
+
+      return map
+    },
+    out: v => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
+        if (value === 'on' || value === 'indeterminate') {
           arr.push(key)
         }
       }

@@ -2,7 +2,7 @@
   <v-container class="bg-surface-variant">
     <v-row
       class="mb-6"
-      no-gutters
+      gap="0"
     >
       <v-col cols="4">
         <v-sheet class="pa-2 ma-2">
@@ -20,7 +20,7 @@
     </v-row>
     <v-row
       class="mb-6"
-      no-gutters
+      gap="0"
     >
       <v-col
         cols="3"
@@ -39,7 +39,7 @@
         </v-sheet>
       </v-col>
     </v-row>
-    <v-row no-gutters>
+    <v-row gap="0">
       <v-col
         cols="6"
         offset="3"

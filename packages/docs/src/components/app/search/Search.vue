@@ -7,14 +7,14 @@
     @click="shouldLoad = true"
   >
     <span :class="mdAndUp && 'me-n1'">
-      <span v-if="smAndUp">
+      <span v-if="lgAndUp">
         {{ t('search.label') }}
       </span>
 
       <span
         :class="[
           smAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
-          'border rounded text-disabled text-caption'
+          'border rounded text-disabled text-body-small'
         ]"
       >
         <span v-if="mdAndUp">
@@ -38,7 +38,7 @@
   const SearchDialog = defineAsyncComponent(() => import('@/components/app/search/SearchDialog.vue'))
 
   const { t } = useI18n()
-  const { smAndUp, smAndDown, mdAndUp, xs, platform } = useDisplay()
+  const { smAndUp, smAndDown, mdAndUp, lgAndUp, xs, platform } = useDisplay()
   const { query } = useRoute()
   const user = useUserStore()
 

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Odaberite za uklanjanje sortiranja.',
       activateDescending: 'Odaberite za silazno sortiranje.',
       activateAscending: 'Odaberite za uzlazno sortiranje.',
+      selectRow: 'Odaberi redak',
+      selectAll: 'Odaberi sve',
+      selectGroup: 'Odaberi grupu',
     },
     sortBy: 'Sortirajte po',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Odaberite mjesec',
+    itemsSelected: '{0} odabrano',
+    header: 'Unesite mjesec',
+    range: {
+      title: 'Unesite mjesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectYear: 'Odaberite godinu',
+      currentMonth: 'Trenutni mjesec, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} odabrano',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Unesite datum',
     input: {
       placeholder: 'Unesite datum',
+    },
+    ariaLabel: {
+      previousMonth: 'Prethodni mjesec',
+      nextMonth: 'Sljedeći mjesec',
+      selectYear: 'Odaberite godinu',
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectMonth: 'Odaberite mjesec',
+      selectDate: '{0}',
+      currentDate: 'Danas, {0}',
     },
   },
   noDataText: 'Nema dostupnih podataka',
@@ -59,11 +86,15 @@ export default {
     moreEvents: 'Još {0}',
     today: 'Danas',
   },
+  heatmap: {
+    less: 'Manje',
+    more: 'Više',
+  },
   input: {
     clear: 'Očisti {0}',
     prependAction: '{0} prethodna radnja',
     appendAction: '{0} dodana radnja',
-    otp: 'Unesite OTP znak {0}',
+    otp: 'Unesite kod za potvrdu',
   },
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Odaberite vrijeme',
+    hour: 'Sat',
+    minute: 'Minute',
+    second: 'Sekunde',
+    notAllowed: 'Vrijednost nije dopuštena',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Odaberite barem jednu vrijednost',
     pattern: 'Nevaljan format',
   },
+  command: {
+    search: 'Unesite naredbu ili pretražite...',
+  },
   hotkey: {
     then: 'zatim',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Razmak',
     plus: 'plus',
     shortcut: 'Tipkovnička prečica: {0}',
+    or: 'ili',
+  },
+  video: {
+    play: 'Reproduciraj',
+    pause: 'Pauziraj',
+    seek: 'Traži',
+    volume: 'Glasnoća',
+    showVolume: 'Prikaži kontrolu glasnoće',
+    mute: 'Isključi zvuk',
+    unmute: 'Uključi zvuk',
+    enterFullscreen: 'Puni zaslon',
+    exitFullscreen: 'Izađi iz punog zaslona',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Odaberite boju sa zaslona',
+      hueSlider: 'Nijansa',
+      alphaSlider: 'Prozirnost',
+      redInput: 'Crvena',
+      greenInput: 'Zelena',
+      blueInput: 'Plava',
+      alphaInput: 'Prozirnost',
+      hueInput: 'Nijansa',
+      saturationInput: 'Zasićenost',
+      lightnessInput: 'Svjetlina',
+      hexInput: 'HEX vrijednost',
+      hexaInput: 'HEX vrijednost s prozirnošću',
+      changeFormat: 'Promijeni format boje',
+    },
   },
 }

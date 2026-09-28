@@ -31,12 +31,14 @@
     </v-main>
 
     <v-footer color="surface-light" name="footer" app>
-      <v-btn
-        class="mx-auto"
-        text="Get data"
-        variant="text"
-        @click="print('footer')"
-      ></v-btn>
+      <child v-slot="{ print }">
+        <v-btn
+          class="mx-auto"
+          text="Get data"
+          variant="text"
+          @click="print('footer')"
+        ></v-btn>
+      </child>
     </v-footer>
   </v-layout>
 </template>

@@ -19,7 +19,7 @@
         title="User Profile"
       >
         <v-card-text>
-          <v-row dense>
+          <v-row density="comfortable">
             <v-col
               cols="12"
               md="4"
@@ -114,7 +114,7 @@
             </v-col>
           </v-row>
 
-          <small class="text-caption text-medium-emphasis">*indicates required field</small>
+          <small class="text-body-small text-medium-emphasis">*indicates required field</small>
         </v-card-text>
 
         <v-divider></v-divider>

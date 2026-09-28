@@ -25,7 +25,7 @@ Vuetify is excited to announce a partnership with HeroDevs to provide extended l
 For teams that haven’t yet migrated to Vuetify 3, whether due to project constraints, long-term maintenance needs, or regulatory requirements, HeroDevs offers Vue 2 NES + Essentials—a solution designed to keep applications secure and up to date without requiring an immediate migration.
 
 “I am glad to partner with HeroDevs to give Vuetify 2 users and teams a secure solution. I know that HeroDevs teams are reactive and well-trained, giving us more focus on the future of Vuetify.”
-<br><span class="text-caption font-weight-bold">— John Leider, Creator of Vuetify</span> { .blockquote .border-s-lg }
+<br><span class="text-body-small font-weight-bold">— John Leider, Creator of Vuetify</span> { .blockquote .border-s-lg }
 
 ### Why This Partnership Matters
 

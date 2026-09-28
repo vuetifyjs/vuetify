@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row class="justify-center">
     <v-col cols="auto">
       <v-radio-group
         v-model="color"
@@ -45,13 +45,13 @@
       >
         <v-card-item>
           <div>
-            <div class="text-overline mb-1">
+            <div class="text-label-medium text-uppercase mt-2 mb-3">
               {{ variant }}
             </div>
-            <div class="text-h6 mb-1">
+            <div class="text-title-large mb-1">
               Headline
             </div>
-            <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
+            <div class="text-body-small">Greyhound divisely hello coldly fonwderfully</div>
           </div>
         </v-card-item>
 

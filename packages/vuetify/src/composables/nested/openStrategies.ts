@@ -1,3 +1,6 @@
+// Utilities
+import { isNullOrUndefined } from '@/util'
+
 type OpenStrategyFunction = (data: {
   id: unknown
   value: boolean
@@ -30,7 +33,7 @@ export const singleOpenStrategy: OpenStrategy = {
 
       let parent = parents.get(id)
 
-      while (parent != null) {
+      while (!isNullOrUndefined(parent)) {
         newOpened.add(parent)
         parent = parents.get(parent)
       }
@@ -50,7 +53,7 @@ export const multipleOpenStrategy: OpenStrategy = {
       let parent = parents.get(id)
       opened.add(id)
 
-      while (parent != null && parent !== id) {
+      while (!isNullOrUndefined(parent) && parent !== id) {
         opened.add(parent)
         parent = parents.get(parent)
       }
@@ -73,7 +76,7 @@ export const listOpenStrategy: OpenStrategy = {
 
     let parent = parents.get(id)
 
-    while (parent != null) {
+    while (!isNullOrUndefined(parent)) {
       path.push(parent)
       parent = parents.get(parent)
     }

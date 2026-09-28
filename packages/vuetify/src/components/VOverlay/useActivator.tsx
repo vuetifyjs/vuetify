@@ -18,8 +18,10 @@ import {
 } from 'vue'
 import {
   bindProps,
+  getActiveElement,
   getCurrentInstance,
   IN_BROWSER,
+  isString,
   matchesSelector,
   propsFactory,
   templateRef,
@@ -73,18 +75,26 @@ export const makeActivatorProps = propsFactory({
 
 export function useActivator (
   props: ActivatorProps,
-  { isActive, isTop, contentEl }: {
+  { isActive, isTop, contentEl, isSubmenu = false }: {
     isActive: Ref<boolean>
     isTop: Ref<boolean>
     contentEl: Ref<HTMLElement | undefined>
+    isSubmenu?: boolean
   }
 ) {
   const vm = getCurrentInstance('useActivator')
   const activatorEl = ref<HTMLElement>()
 
+  const parentMenu = inject(VMenuSymbol, null)
+
   let isHovered = false
   let isFocused = false
   let firstEnter = true
+  const openedByHover = ref(false)
+  let delayCallbackFiredOpen = false
+
+  // a submenu chain collapses on mouseleave only when its root was hover-opened
+  const shouldCloseOnLeave = () => !isSubmenu || (parentMenu?.rootOpenedByHover?.() ?? openedByHover.value)
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
@@ -98,14 +108,34 @@ export function useActivator (
     ) {
       if (isActive.value !== value) {
         firstEnter = true
+        if (value) {
+          delayCallbackFiredOpen = true
+          openedByHover.value = isHovered && props.openOnHover
+        }
       }
       isActive.value = value
     }
   })
 
+  let reopenLock = false
+  watch(isActive, v => {
+    if (!v) {
+      reopenLock = true
+      setTimeout(() => reopenLock = false, 50)
+      openedByHover.value = false
+      delayCallbackFiredOpen = false
+      return
+    }
+    if (!delayCallbackFiredOpen) {
+      openedByHover.value = false
+    }
+    delayCallbackFiredOpen = false
+  })
+
   const cursorTarget = ref<[x: number, y: number]>()
   const availableEvents = {
     onClick: (e: MouseEvent) => {
+      if (reopenLock && !isActive.value) return
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (!isActive.value) {
@@ -114,17 +144,23 @@ export function useActivator (
       isActive.value = !isActive.value
     },
     onMouseenter: (e: MouseEvent) => {
-      if (e.sourceCapabilities?.firesTouchEvents) return
-
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
+      if (props.target === 'cursor') {
+        cursorTarget.value = [e.clientX, e.clientY]
+      }
       runOpenDelay()
+    },
+    onMousemove: (e: MouseEvent) => {
+      cursorTarget.value = [e.clientX, e.clientY]
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
-      runCloseDelay()
+      if (props.target === 'cursor') isFocused = false
+      if (shouldCloseOnLeave()) runCloseDelay()
     },
     onFocus: (e: FocusEvent) => {
+      if (reopenLock) return
       if (matchesSelector(e.target as HTMLElement, ':focus-visible') === false) return
 
       isFocused = true
@@ -134,10 +170,14 @@ export function useActivator (
       runOpenDelay()
     },
     onBlur: (e: FocusEvent) => {
+      // Body parks from clicks on empty areas inside content also count as "still focused".
+      const next = e.relatedTarget as Element | null
+      if (!next || contentEl.value?.contains(next)) return
+
       isFocused = false
       e.stopPropagation()
 
-      runCloseDelay()
+      runCloseDelay({ minDelay: 1 })
     },
   }
 
@@ -150,6 +190,9 @@ export function useActivator (
     if (props.openOnHover) {
       events.onMouseenter = availableEvents.onMouseenter
       events.onMouseleave = availableEvents.onMouseleave
+      if (props.target === 'cursor' && !openOnClick.value) {
+        events.onMousemove = availableEvents.onMousemove
+      }
     }
     if (openOnFocus.value) {
       events.onFocus = availableEvents.onFocus
@@ -169,18 +212,22 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
     if (openOnFocus.value) {
-      events.onFocusin = () => {
+      events.onFocusin = (e: Event) => {
+        if (!(e.target as HTMLElement).matches(':focus-visible')) return
         isFocused = true
         runOpenDelay()
       }
-      events.onFocusout = () => {
+      events.onFocusout = (e: Event) => {
+        const next = (e as FocusEvent).relatedTarget as Element | null
+        if (!next || contentEl.value?.contains(next)) return
+
         isFocused = false
-        runCloseDelay()
+        runCloseDelay({ minDelay: 1 })
       }
     }
 
@@ -208,7 +255,7 @@ export function useActivator (
       }
       events.onMouseleave = () => {
         isHovered = false
-        runCloseDelay()
+        if (shouldCloseOnLeave()) runCloseDelay()
       }
     }
 
@@ -216,11 +263,16 @@ export function useActivator (
   })
 
   watch(isTop, val => {
-    if (val && (
-      (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
-      (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
-    ) && !contentEl.value?.contains(document.activeElement)) {
-      isActive.value = false
+    if (
+      val &&
+      shouldCloseOnLeave() &&
+      (
+        (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
+        (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
+      ) &&
+      !contentEl.value?.contains(getActiveElement())
+    ) {
+      runCloseDelay()
     }
   })
 
@@ -269,7 +321,17 @@ export function useActivator (
     scope?.stop()
   })
 
-  return { activatorEl, activatorRef, target, targetEl, targetRef, activatorEvents, contentEvents, scrimEvents }
+  return {
+    activatorEl,
+    activatorRef,
+    target,
+    targetEl,
+    targetRef,
+    activatorEvents,
+    contentEvents,
+    scrimEvents,
+    openedByHover,
+  }
 }
 
 function _useActivator (
@@ -330,7 +392,7 @@ function getTarget<T extends 'parent' | string | Element | ComponentPublicInstan
       el = el.parentNode
     }
     target = el
-  } else if (typeof selector === 'string') {
+  } else if (isString(selector)) {
     // Selector
     target = document.querySelector(selector)
   } else if ('$el' in selector) {

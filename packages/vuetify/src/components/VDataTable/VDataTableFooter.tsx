@@ -7,17 +7,20 @@ import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, isNumber, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { makeVPaginationProps } from '../VPagination/VPagination'
 
 export const makeVDataTableFooterProps = propsFactory({
+  color: String,
   prevIcon: {
     type: IconValue,
     default: '$prev',
@@ -69,6 +72,10 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
+
+  ...pick(makeVPaginationProps({
+    showFirstLastPage: true,
+  }), ['showFirstLastPage']),
 }, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({
@@ -78,11 +85,12 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
 
   setup (props, { slots }) {
     const { t } = useLocale()
+    const selectDefaults = injectNestedDefaults<VSelect['$props']>('VSelect')
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
       props.itemsPerPageOptions.map(option => {
-        if (typeof option === 'number') {
+        if (isNumber(option)) {
           return {
             value: option,
             title: option === -1
@@ -106,14 +114,16 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
           { slots.prepend?.() }
 
           <div class="v-data-table-footer__items-per-page">
-            <span aria-label={ t(props.itemsPerPageText) }>{ t(props.itemsPerPageText) }</span>
+            <span>{ t(props.itemsPerPageText) }</span>
 
             <VSelect
               items={ itemsPerPageOptions.value }
+              itemColor={ props.color }
               modelValue={ itemsPerPage.value }
               onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
               density="compact"
-              variant="outlined"
+              variant={ selectDefaults.value?.variant ?? 'outlined' }
+              aria-label={ t(props.itemsPerPageText) }
               hideDetails
             />
           </div>
@@ -137,7 +147,7 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
               showFirstLastPage
               totalVisible={ props.showCurrentPage ? 1 : 0 }
               variant="plain"
-              { ...paginationProps }
+              { ...omit(paginationProps, ['color']) }
             ></VPagination>
           </div>
         </div>

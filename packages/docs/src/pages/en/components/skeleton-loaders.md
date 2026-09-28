@@ -1,8 +1,9 @@
 ---
+emphasized: true
 meta:
   nav: Skeleton loaders
   title: Skeleton loader component
-  description:  The skeleton loader component provides a placeholder loading state for when content is being fetched from a server or loaded asynchronously. It can be used in a variety of contexts, including cards, lists, and tables.
+  description:  The skeleton loader component provides a placeholder loading state while content is fetched or loaded asynchronously — ideal for cards, lists, and tables.
   keywords: skeleton loaders, vuetify skeleton loader component, vue skeleton loader
 related:
   - /components/cards/
@@ -20,8 +21,6 @@ features:
 Skeleton loaders provide a simple way to display loading placeholders in your application.
 
 <PageFeatures />
-
-<DocIntroduced version="3.4.0" />
 
 ## Usage
 
@@ -101,9 +100,26 @@ The following built-in types are available:
 | **table-thead** | heading@6 |
 | **table-tbody** | table-row-divider@6 |
 | **table-row-divider** | table-row, divider |
-| **table-row** | text@6 |
+| **table-row** | table-cell@6 |
+| **table-cell** | text |
 | **table-tfoot** | text@2, avatar@2 |
 | **text** | text |
+
+::: info
+
+Since v4.2.0: a type name that is neither built-in nor registered renders an empty bone and logs a warning (no longer throws an error)
+
+:::
+
+#### Types
+
+The **types** property registers additional variants on top of the built-in ones. A custom type can reference built-in types or custom ones.
+
+<ExamplesExample file="v-skeleton-loader/prop-types" />
+
+Redefine built-in types to apply for quick customization. The **table** type is 6 × 6 by default and it is fairy staightforward to change it into 3 × 4.
+
+<ExamplesExample file="v-skeleton-loader/prop-types-table" />
 
 #### Loading
 

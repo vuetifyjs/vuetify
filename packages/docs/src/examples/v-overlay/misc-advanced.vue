@@ -9,7 +9,7 @@
         <v-img src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"></v-img>
 
         <v-card-text>
-          <h2 class="text-h6 text-primary">
+          <h2 class="text-title-large text-primary my-0">
             Magento Forests
           </h2>
           Travel to the best outdoor experience on planet Earth. A vacation you will never forget!
@@ -23,7 +23,7 @@
             density="compact"
             hover
           ></v-rating>
-          <span class="text-primary text-subtitle-2">64 Reviews</span>
+          <span class="text-primary text-title-small">64 Reviews</span>
         </v-card-title>
 
         <v-overlay
@@ -38,3 +38,9 @@
     </v-hover>
   </div>
 </template>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1646-137446&t=tC3y53U3XKPv8ZyJ-4"
+  }
+</example-meta>

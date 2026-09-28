@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getCurrentInstanceName, propsFactory } from '@/util'
+import { getCurrentInstanceName, isString, propsFactory } from '@/util'
 
 // Types
 export interface BorderProps {
@@ -22,7 +22,7 @@ export function useBorder (
     if (border === true || border === '') {
       return `${name}--border`
     } else if (
-      typeof border === 'string' ||
+      isString(border) ||
       border === 0
     ) {
       return String(border).split(' ').map(v => `border-${v}`)

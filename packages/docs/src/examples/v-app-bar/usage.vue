@@ -5,7 +5,7 @@
     :name="name"
     :options="options"
   >
-    <v-layout class="overflow-visible">
+    <v-layout class="border" style="height: 150px;">
       <v-app-bar v-bind="props">
         <template v-slot:prepend>
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -28,7 +28,7 @@
     <template v-slot:configuration>
       <v-checkbox v-model="actions" label="Actions"></v-checkbox>
 
-      <v-slider v-model="elevation" label="Elevation" max="24" min="0" step="1"></v-slider>
+      <v-slider v-model="elevation" label="Elevation" max="5" min="0" step="1"></v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -37,13 +37,13 @@
   const name = 'v-app-bar'
   const model = ref('default')
   const actions = ref(false)
-  const elevation = ref(2)
+  const elevation = ref(1)
   const options = ['collapse', 'rounded']
 
   const props = computed(() => {
     return {
       collapse: model.value === 'collapse' ? true : undefined,
-      elevation: elevation.value === 4 ? undefined : elevation.value,
+      elevation: elevation.value === 1 ? undefined : elevation.value,
       rounded: model.value === 'rounded' ? true : undefined,
     }
   })

@@ -26,6 +26,7 @@ export const makeVDatePickerHeaderProps = propsFactory({
   header: String,
   transition: String,
   onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
 }, 'VDatePickerHeader')
 
 export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
@@ -58,12 +59,12 @@ export const VDatePickerHeader = genericComponent<VDatePickerHeaderSlots>()({
           class={[
             'v-date-picker-header',
             {
-              'v-date-picker-header--clickable': !!props.onClick,
+              'v-date-picker-header--clickable': !!(props.onClick || props.onClickOnce),
             },
             backgroundColorClasses.value,
           ]}
           style={ backgroundColorStyles.value }
-          onClick={ onClick }
+          onClick={ (props.onClick || props.onClickOnce) && onClick }
         >
           { slots.prepend && (
             <div key="prepend" class="v-date-picker-header__prepend">

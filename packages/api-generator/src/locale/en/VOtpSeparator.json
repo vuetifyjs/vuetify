@@ -1,0 +1,3 @@
+{
+  "description": "Sub-component rendering a visual separator between OTP fields or groups inside the `#fields` slot."
+}

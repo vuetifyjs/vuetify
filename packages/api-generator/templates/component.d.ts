@@ -36,7 +36,7 @@ export type ComponentEvents = Events<__component__>
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 type Slots<
   T extends { $props: any },
-  S = '$children' extends keyof T['$props'] ? Exclude<T['$props']['$children'], VNodeChild> : never
+  S = '$children' extends keyof T['$props'] ? Exclude<T['$props']['$children'], VNodeChild | { $stable?: boolean }> : never
 > = '$children' extends keyof T['$props']
   ? ExcludeEmpty<{ [K in keyof S]-?: Exclude<S[K], undefined> extends Slot<infer A> ? A[0] : never }>
   : never

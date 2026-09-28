@@ -20,6 +20,9 @@ export default {
       activateNone: '点击以移除排序。',
       activateDescending: '点击以降序排列。',
       activateAscending: '点击以升序排列。',
+      selectRow: '选择行',
+      selectAll: '选择全部',
+      selectGroup: '选择分组',
     },
     sortBy: '排序方式',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: '至',
   },
+  monthPicker: {
+    title: '选择月份',
+    itemsSelected: '已选择 {0} 项',
+    header: '输入月份',
+    range: {
+      title: '输入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '选择年份',
+      currentMonth: '本月，{0}',
+    },
+  },
   datePicker: {
     itemsSelected: '已选择 {0} 项',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: '输入日期',
     input: {
       placeholder: '输入日期',
+    },
+    ariaLabel: {
+      previousMonth: '上个月',
+      nextMonth: '下个月',
+      selectYear: '选择年份',
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectMonth: '选择月份',
+      selectDate: '{0}',
+      currentDate: '今天，{0}',
     },
   },
   noDataText: '没有数据',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '还有 {0} 项',
     today: '今天',
   },
+  heatmap: {
+    less: '少',
+    more: '多',
+  },
   input: {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
     appendAction: '{0} 后置操作',
-    otp: '请输入第 {0} 位 OTP',
+    otp: '请输入验证码',
   },
   fileInput: {
     counter: '{0} 个文件',
@@ -78,6 +109,10 @@ export default {
     am: '上午',
     pm: '下午',
     title: '选择时间',
+    hour: '小时',
+    minute: '分钟',
+    second: '秒',
+    notAllowed: '值不允许',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: '请至少选择一个值',
     pattern: '格式无效',
   },
+  command: {
+    search: '输入命令或搜索...',
+  },
   hotkey: {
     then: '然后',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: '空格',
     plus: '加',
     shortcut: '键盘快捷键：{0}',
+    or: '或',
+  },
+  video: {
+    play: '播放',
+    pause: '暂停',
+    seek: '跳转',
+    volume: '音量',
+    showVolume: '显示音量控制',
+    mute: '静音',
+    unmute: '取消静音',
+    enterFullscreen: '全屏',
+    exitFullscreen: '退出全屏',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: '从屏幕拾取颜色',
+      hueSlider: '色相',
+      alphaSlider: '不透明度',
+      redInput: '红色',
+      greenInput: '绿色',
+      blueInput: '蓝色',
+      alphaInput: '不透明度',
+      hueInput: '色相',
+      saturationInput: '饱和度',
+      lightnessInput: '亮度',
+      hexInput: 'HEX 值',
+      hexaInput: '带不透明度 HEX 值',
+      changeFormat: '更改颜色格式',
+    },
   },
 }

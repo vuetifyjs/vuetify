@@ -1,3 +1,6 @@
 <template>
-  <v-file-upload scrim="primary"></v-file-upload>
+  <v-file-upload
+    density="comfortable"
+    scrim="primary"
+  ></v-file-upload>
 </template>

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Premi per treure la ordenació.',
       activateDescending: 'Premi per ordenar descendent.',
       activateAscending: 'Premi per ordenar ascendent.',
+      selectRow: 'Seleccionar fila',
+      selectAll: 'Seleccionar tot',
+      selectGroup: 'Seleccionar grup',
     },
     sortBy: 'Ordenat per',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'fins a',
   },
+  monthPicker: {
+    title: 'Selecciona mes',
+    itemsSelected: '{0} seleccionats',
+    header: 'Introdueix el mes',
+    range: {
+      title: 'Introdueix els mesos',
+    },
+    ariaLabel: {
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectYear: 'Selecciona any',
+      currentMonth: 'Mes actual, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} seleccionats',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Introdueix la data',
     input: {
       placeholder: 'Introdueix la data',
+    },
+    ariaLabel: {
+      previousMonth: 'Mes anterior',
+      nextMonth: 'Mes següent',
+      selectYear: 'Selecciona any',
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectMonth: 'Selecciona mes',
+      selectDate: '{0}',
+      currentDate: 'Avui, {0}',
     },
   },
   noDataText: 'Sense dades',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} més',
     today: 'Avui',
   },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
+  },
   input: {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',
     appendAction: 'Acció afegida {0}',
-    otp: 'Si us plau, introdueix el caràcter OTP {0}',
+    otp: 'Introduïu el codi de verificació',
   },
   fileInput: {
     counter: '{0} fitxers',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selecciona l’hora',
+    hour: 'Hora',
+    minute: 'Minuts',
+    second: 'Segons',
+    notAllowed: 'El valor no està permès',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Si us plau, tria almenys un valor',
     pattern: 'Format no vàlid',
   },
+  command: {
+    search: 'Escriu una ordre o cerca...',
+  },
   hotkey: {
     then: 'després',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Espai',
     plus: 'més',
     shortcut: 'Drecera de teclat: {0}',
+    or: 'o',
+  },
+  video: {
+    play: 'Reproduir',
+    pause: 'Paura',
+    seek: 'Cercar',
+    volume: 'Volum',
+    showVolume: 'Mostrar control de volum',
+    mute: 'Silenciar',
+    unmute: 'Activar so',
+    enterFullscreen: 'Pantalla completa',
+    exitFullscreen: 'Sortir de pantalla completa',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Seleccionar color de la pantalla',
+      hueSlider: 'To',
+      alphaSlider: 'Alfa',
+      redInput: 'Vermell',
+      greenInput: 'Verd',
+      blueInput: 'Blau',
+      alphaInput: 'Alfa',
+      hueInput: 'To',
+      saturationInput: 'Saturació',
+      lightnessInput: 'Lluminositat',
+      hexInput: 'Valor HEX',
+      hexaInput: 'Valor HEX amb alfa',
+      changeFormat: 'Canviar format de color',
+    },
   },
 }

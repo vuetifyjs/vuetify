@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активирай за премахване на подредбата.',
       activateDescending: 'Активирай за подредба в намаляващ ред.',
       activateAscending: 'Активирай за подредба в нарастващ ред.',
+      selectRow: 'Избор на ред',
+      selectAll: 'Избор на всички',
+      selectGroup: 'Избор на група',
     },
     sortBy: 'Сортирай по',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'до',
   },
+  monthPicker: {
+    title: 'Изберете месец',
+    itemsSelected: '{0} избрани',
+    header: 'Въвеждане на месец',
+    range: {
+      title: 'Въвеждане на месеци',
+    },
+    ariaLabel: {
+      previousYear: 'Предишна година',
+      nextYear: 'Следваща година',
+      selectYear: 'Изберете година',
+      currentMonth: 'Текущ месец, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} избрани',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Въвеждане на дата',
     input: {
       placeholder: 'Въведете дата',
+    },
+    ariaLabel: {
+      previousMonth: 'Предишен месец',
+      nextMonth: 'Следващ месец',
+      selectYear: 'Изберете година',
+      previousYear: 'Предишна година',
+      nextYear: 'Следваща година',
+      selectMonth: 'Изберете месец',
+      selectDate: '{0}',
+      currentDate: 'Днес, {0}',
     },
   },
   noDataText: 'Няма налични данни',
@@ -59,11 +86,15 @@ export default {
     moreEvents: 'Още {0}',
     today: 'Днес',
   },
+  heatmap: {
+    less: 'По-малко',
+    more: 'Повече',
+  },
   input: {
     clear: 'Изчисти {0}',
     prependAction: '{0} предшестващо действие',
     appendAction: '{0} последващо действие',
-    otp: 'Моля, въведете OTP символ {0}',
+    otp: 'Въведете код за потвърждение',
   },
   fileInput: {
     counter: '{0} файла',
@@ -78,6 +109,10 @@ export default {
     am: 'пр. обяд',
     pm: 'сл. обяд',
     title: 'Изберете време',
+    hour: 'Час',
+    minute: 'Минути',
+    second: 'Секунди',
+    notAllowed: 'Стойността не е разрешена',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Моля, изберете поне една стойност',
     pattern: 'Невалиден формат',
   },
+  command: {
+    search: 'Въведете команда или търсете...',
+  },
   hotkey: {
     then: 'след това',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Интервал',
     plus: 'плюс',
     shortcut: 'Клавиатурна комбинация: {0}',
+    or: 'или',
+  },
+  video: {
+    play: 'Пусни',
+    pause: 'Пауза',
+    seek: 'Търсене',
+    volume: 'Сила на звука',
+    showVolume: 'Покажи контрола за силата на звука',
+    mute: 'Без звук',
+    unmute: 'Включи звука',
+    enterFullscreen: 'Цял екран',
+    exitFullscreen: 'Изход от цял екран',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Вземане на цвят от екрана',
+      hueSlider: 'Цветови тон',
+      alphaSlider: 'Алфа',
+      redInput: 'Червено',
+      greenInput: 'Зелено',
+      blueInput: 'Синьо',
+      alphaInput: 'Алфа',
+      hueInput: 'Цветови тон',
+      saturationInput: 'Наситеност',
+      lightnessInput: 'Светлина',
+      hexInput: 'HEX стойност',
+      hexaInput: 'HEX стойност с алфа',
+      changeFormat: 'Промяна на цветовия формат',
+    },
   },
 }

@@ -11,5 +11,10 @@
   "no-bare-urls": false,
   "emphasis-style": false,
   "link-fragments": false,
-  "descriptive-link-text": false
+  "descriptive-link-text": false,
+  "table-column-style": false,
+  "meta-length": {
+    "title_max": 60,
+    "description_max": 160
+  }
 }

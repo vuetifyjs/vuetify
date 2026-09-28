@@ -1,5 +1,5 @@
 // Utilities
-import { SUPPORTS_INTERSECTION } from '@/util'
+import { isFunction, isObject, SUPPORTS_INTERSECTION } from '@/util'
 
 // Types
 import type {
@@ -25,9 +25,8 @@ function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
 
   const modifiers = binding.modifiers || {}
   const value = binding.value
-  const { handler, options } = typeof value === 'object'
-    ? value
-    : { handler: value, options: {} }
+  const handler = isFunction(value) || !isObject(value) ? value : value.handler
+  const options = isFunction(value) || !isObject(value) ? {} : value.options
 
   const observer = new IntersectionObserver((
     entries: IntersectionObserverEntry[] = [],
@@ -74,6 +73,12 @@ function unmounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
 export const Intersect = {
   mounted,
   unmounted,
+  updated: (el: HTMLElement, binding: ObserveDirectiveBinding) => {
+    if (el._observe?.[binding.instance!.$.uid]) {
+      unmounted(el, binding)
+      mounted(el, binding)
+    }
+  },
 }
 
 export default Intersect

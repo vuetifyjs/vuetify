@@ -20,13 +20,11 @@ The `v-treeview` component is useful for displaying large amounts of nested data
 
 <PageFeatures />
 
-<DocIntroduced version="3.9.0" />
-
 ## Usage
 
 A basic example of the treeview component.
 
-<ExamplesExample file="v-treeview/usage" />
+<ExamplesUsage name="v-treeview" />
 
 <PromotedEntry />
 
@@ -36,7 +34,6 @@ A basic example of the treeview component.
 | - | - |
 | [v-treeview](/api/v-treeview/) | Primary Component |
 | [v-treeview-item](/api/v-treeview-item/) | Sub-component used to display a single treeview node |
-| [v-treeview-children](/api/v-treeview-children/) | Sub-component used to display a single treeview node's children |
 | [v-treeview-group](/api/v-treeview-group/) | Sub-component used to display a single treeview node's children |
 
 <ApiInline hide-links />
@@ -59,21 +56,15 @@ The `v-treeview` component has several props that allow you to customize its app
 
 #### Activatable
 
-Treeview nodes can be activated by clicking on them.
+Treeview nodes can be activated by clicking on them. Use the `color` prop to control the text and background color of the active node.
 
 <ExamplesExample file="v-treeview/prop-activatable" />
 
-#### Color
+#### Items registration
 
-You can control the text and background color of the active treeview node.
+When working with large trees it is recommended to include `items-registration="props"` to ensure faster loading and interactions.
 
-<ExamplesExample file="v-treeview/prop-color" />
-
-#### Dense mode
-
-Dense mode provides more compact layout with decreased heights of the items.
-
-<ExamplesExample file="v-treeview/prop-dense" />
+<ExamplesExample file="v-treeview/prop-items-registration" />
 
 <!-- #### Hoverable
 
@@ -99,12 +90,6 @@ You can make treeview nodes rounded.
 
 <ExamplesExample file="v-treeview/prop-rounded" /> -->
 
-#### Fluid
-
-The **fluid** prop removes the extra indentation used to line up children. This is useful when you want to reduce the horizontal space used by the treeview.
-
-<ExamplesExample file="v-treeview/prop-fluid" />
-
 #### Selected color
 
 You can control the color of the selected node checkbox.
@@ -113,7 +98,16 @@ You can control the color of the selected node checkbox.
 
 #### Selection type
 
-Treeview now supports two different selection types. The default type is **'leaf'**, which will only include leaf nodes in the v-model array, but will render parent nodes as either partially or fully selected. The alternative mode is **'independent'**, which allows one to select parent nodes, but each node is independent of its parent and children.
+Treeview supports several selection modes:
+
+- **leaf** (default): Limits selection to items without children.
+- **independent**: Lets you select any node, with no parent-child linkage at all.
+- **classic**: Selecting a parent selects all descendants, and parent nodes show as selected only when all their descendants are selected. Only leaf nodes are added to the model.
+
+Classic has two variants that are displayed the same way but with slightly different v-model behavior:
+
+- **branch**: Any parent node with at least one selected descendant is also added to the model.
+- **trunk**: If all children are selected only the parent node is added to the model.
 
 <ExamplesExample file="v-treeview/prop-selection-type" />
 
@@ -137,11 +131,29 @@ Both **append**, and **prepend** slots get additional information about the item
 
 <ExamplesExample file="v-treeview/slot-append-and-prepend-item" />
 
+#### No data
+
+When searching within the treeview, you might want to show custom **no-data** slot to provide context or immediate action.
+
+<ExamplesExample file="v-treeview/slot-no-data" />
+
 #### Title
 
 In this example we use a custom **title** slot to apply a line-through the treeview item's text when selected.
 
 <ExamplesExample file="v-treeview/slot-title" />
+
+#### Toggle
+
+Here, a custom **toggle** slot is utilized to assign a specific color and variant to the button depending on the state of the item.
+
+<ExamplesExample file="v-treeview/slot-toggle" />
+
+#### Footer
+
+The **footer** slot renders below a group's children nodes. Here it adds a "Load more" row per group that shows a loading trigger and indicator while the data is being fetched.
+
+<ExamplesExample file="v-treeview/slot-footer" />
 
 ## Examples
 
@@ -158,9 +170,3 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <ExamplesExample file="v-treeview/misc-selectable-icons" />
-
-### Indent lines
-
-The `v-treeview` component can be configured to show indent lines. The `indent-lines` prop controls lines visibility and the variant.
-
-<ExamplesExample file="v-treeview/misc-indent-lines" />

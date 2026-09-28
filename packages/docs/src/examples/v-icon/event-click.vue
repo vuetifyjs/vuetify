@@ -6,7 +6,7 @@
       dense
       flat
     >
-      <v-toolbar-title class="text-body-2">
+      <v-toolbar-title class="text-body-medium">
         Upcoming Changes
       </v-toolbar-title>
     </v-toolbar>

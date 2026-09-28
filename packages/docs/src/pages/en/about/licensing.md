@@ -2,7 +2,7 @@
 meta:
   nav: Licensing
   title: Licensing
-  description: Explore the MIT License under which Vuetify is available, understand your freedoms for using, modifying, and distributing Vuetify, and learn about community contributions.
+  description: Vuetify is available under the MIT License — understand your freedoms to use, modify, and distribute it, and how community contributions are licensed.
   keywords: MIT License, open source, Vuetify license, free software
 related:
   - /introduction/why-vuetify/

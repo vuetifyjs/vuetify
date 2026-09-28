@@ -14,6 +14,10 @@
     &--disabled
       pointer-events: none
 
+    &--indent-details
+      .v-input__details
+        padding-inline: $input-details-padding-inline
+
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         --v-input-control-height: #{$input-control-height + $modifier}
@@ -53,6 +57,19 @@
     padding-top: $input-details-padding-above
     overflow: hidden
     justify-content: space-between
+    interpolate-size: allow-keywords
+    transition: height $input-details-transition, min-height $input-details-transition, padding-top $input-details-transition, opacity $input-details-transition, visibility $input-details-transition
+
+    @media (prefers-reduced-motion: reduce)
+      transition-duration: 0s
+
+    // TODO: flip to --active in v5.0
+    &--hidden
+      visibility: hidden
+      height: 0
+      min-height: 0
+      padding-top: 0
+      opacity: 0
 
   .v-input__details,
   .v-input__prepend,

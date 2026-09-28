@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { computed, toDisplayString, toRef, withDirectives } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -64,6 +64,7 @@ export const makeVBtnProps = propsFactory({
   readonly: Boolean,
   slim: Boolean,
   stacked: Boolean,
+  spaced: String as PropType<'start' | 'end' | 'both'>,
 
   ripple: {
     type: [Boolean, Object] as PropType<RippleDirectiveBinding['value']>,
@@ -110,7 +111,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
@@ -120,7 +121,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
         return props.active
       }
 
-      if (link.isLink.value) {
+      if (link.isRouterLink.value) {
         return link.isActive?.value
       }
 
@@ -164,8 +165,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
         ))
       ) return
 
-      link.navigate?.(e)
-      group?.toggle()
+      if (link.isRouterLink.value) {
+        link.navigate.value?.(e)
+      } else {
+        // Group active state for links is handled by useSelectLink
+        group?.toggle()
+      }
     }
 
     useSelectLink(link, group?.select)
@@ -178,6 +183,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
       return withDirectives(
         <Tag
+          { ...link.linkProps }
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
@@ -194,6 +200,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
               'v-btn--slim': props.slim,
               'v-btn--stacked': props.stacked,
             },
+            props.spaced
+              ? [
+                'v-btn--spaced',
+                `v-btn--spaced-${props.spaced}`,
+              ]
+              : [],
             themeClasses.value,
             borderClasses.value,
             colorClasses.value,
@@ -211,14 +223,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           aria-busy={ props.loading ? true : undefined }
-          disabled={ isDisabled.value || undefined }
+          disabled={ (isDisabled.value && Tag !== 'a') || undefined }
           tabindex={ props.loading || props.readonly ? -1 : undefined }
           onClick={ onClick }
-          value={ valueAttr.value }
-          { ...link.linkProps }
+          value={ Tag !== 'a' ? valueAttr.value : undefined }
         >
           { genOverlays(true, 'v-btn') }
 
@@ -291,7 +303,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             <span key="loader" class="v-btn__loader">
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate
                   width="2"
                 />

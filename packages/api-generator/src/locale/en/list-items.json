@@ -4,7 +4,12 @@
     "itemChildren": "Property on supplied `items` that contains its children.",
     "itemProps": "Props object that will be applied to each item component. `true` will treat the original object as raw props and pass it directly to the component.",
     "itemTitle": "Property on supplied `items` that contains its title.",
+    "itemType": "Designates the key on the supplied items that is used for determining the nodes type.",
     "itemValue": "Property on supplied `items` that contains its value.",
     "returnObject": "Changes the selection behavior to return the object directly rather than the value specified with **item-value**."
+  },
+  "slots": {
+    "divider": "Slot for rendering custom dividers. Receives `{ props }` containing divider item data including `value`. Note: dividers do not receive `index` since they are not navigable items.",
+    "subheader": "Slot for rendering custom subheaders. Receives `{ props }` containing subheader item data including `title` and `value`. Note: subheaders do not receive `index` since they are not navigable items."
   }
 }

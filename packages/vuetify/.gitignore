@@ -1,6 +1,5 @@
 /dev/Playground.vue
 /dev/components.d.ts
-/cypress/screenshots
 
 # Built files
 /es5/
@@ -29,3 +28,4 @@ yarn-error.log*
 *.sw?
 
 .vercel
+.vizzly

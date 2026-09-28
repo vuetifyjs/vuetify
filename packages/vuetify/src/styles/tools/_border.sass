@@ -1,8 +1,8 @@
-@mixin border($color: null, $style: null, $width: null, $thin-width: false, $important: false)
+@mixin border($color: null, $style: null, $width: null, $thin-width: false)
   &
-    border-color: $color if($important, !important, null)
-    border-style: $style if($important, !important, null)
-    border-width: $width if($important, !important, null)
+    border-color: $color
+    border-style: $style
+    border-width: $width
 
   @if $thin-width
     &--border

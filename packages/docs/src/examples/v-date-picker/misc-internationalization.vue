@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="space-around">
+  <v-row class="justify-space-around">
     <v-date-picker
       v-model="picker"
       :first-day-of-week="0"

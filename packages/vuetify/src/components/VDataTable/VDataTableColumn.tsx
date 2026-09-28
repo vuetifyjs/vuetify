@@ -1,5 +1,5 @@
 // Utilities
-import { convertToUnit, defineFunctionalComponent } from '@/util'
+import { convertToUnit, defineFunctionalComponent, isString } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -20,6 +20,9 @@ export const VDataTableColumn = defineFunctionalComponent({
   firstFixedEnd: Boolean,
 
   noPadding: Boolean,
+  indent: [Number, String],
+  empty: Boolean,
+
   tag: String,
   width: [Number, String],
   maxWidth: [Number, String],
@@ -27,7 +30,7 @@ export const VDataTableColumn = defineFunctionalComponent({
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
 
-  const fixedSide = typeof props.fixed === 'string' ? props.fixed
+  const fixedSide = isString(props.fixed) ? props.fixed
     : props.fixed ? 'start'
     : 'none'
 
@@ -42,6 +45,7 @@ export const VDataTableColumn = defineFunctionalComponent({
           'v-data-table-column--first-fixed-end': props.firstFixedEnd,
           'v-data-table-column--no-padding': props.noPadding,
           'v-data-table-column--nowrap': props.nowrap,
+          'v-data-table-column--empty': props.empty,
         },
         `v-data-table-column--align-${props.align}`,
       ]}
@@ -51,6 +55,7 @@ export const VDataTableColumn = defineFunctionalComponent({
         maxWidth: convertToUnit(props.maxWidth),
         left: fixedSide === 'start' ? convertToUnit(props.fixedOffset || null) : undefined,
         right: fixedSide === 'end' ? convertToUnit(props.fixedEndOffset || null) : undefined,
+        paddingInlineStart: props.indent ? convertToUnit(props.indent) : undefined,
       }}
     >
       { slots.default?.() }

@@ -6,7 +6,9 @@
 
     <AppBarBar />
 
-    <v-main class="text-center font-weight-light">
+    <AppBackToTop />
+
+    <v-main class="text-center">
       <router-view />
     </v-main>
 

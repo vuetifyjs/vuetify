@@ -28,6 +28,7 @@
           placeholder="MM/YY"
           prepend-inner-icon="mdi-calendar-blank"
           persistent-hint
+          return-masked-value
         ></v-mask-input>
       </v-col>
 

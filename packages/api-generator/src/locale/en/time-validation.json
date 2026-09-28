@@ -1,0 +1,9 @@
+{
+  "props": {
+    "max": "Maximum allowed time.",
+    "min": "Minimum allowed time.",
+    "allowedHours": "Restricts which hours can be selected. Can be an array of allowed hours, a function that returns true for allowed hours, or an object with `min` and `max` properties.",
+    "allowedMinutes": "Restricts which minutes can be selected. Can be an array of allowed minutes, a function that returns true for allowed minutes, or an object with `min` and `max` properties.",
+    "allowedSeconds": "Restricts which seconds can be selected. Can be an array of allowed seconds, a function that returns true for allowed seconds, or an object with `min` and `max` properties."
+  }
+}

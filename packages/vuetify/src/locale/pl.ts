@@ -20,6 +20,9 @@ export default {
       activateNone: 'Kliknij aby usunąć sortowanie.',
       activateDescending: 'Kliknij aby posortować malejąco.',
       activateAscending: 'Kliknij aby posortować rosnąco.',
+      selectRow: 'Wybierz wiersz',
+      selectAll: 'Wybierz wszystkie',
+      selectGroup: 'Wybierz grupę',
     },
     sortBy: 'Sortuj według',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'do',
   },
+  monthPicker: {
+    title: 'Wybierz miesiąc',
+    itemsSelected: '{0} wybrano',
+    header: 'Wprowadź miesiąc',
+    range: {
+      title: 'Wprowadź miesiące',
+    },
+    ariaLabel: {
+      previousYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      selectYear: 'Wybierz rok',
+      currentMonth: 'Bieżący miesiąc, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} wybrano',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Wprowadź datę',
     input: {
       placeholder: 'Wprowadź datę',
+    },
+    ariaLabel: {
+      previousMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
+      selectYear: 'Wybierz rok',
+      previousYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      selectMonth: 'Wybierz miesiąc',
+      selectDate: '{0}',
+      currentDate: 'Dzisiaj, {0}',
     },
   },
   noDataText: 'Brak danych',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} więcej',
     today: 'Dzisiaj',
   },
+  heatmap: {
+    less: 'Mniej',
+    more: 'Więcej',
+  },
   input: {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
-    otp: 'Proszę wprowadzić znak nr {0}',
+    otp: 'Wprowadź kod weryfikacyjny',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Wybierz godzinę',
+    hour: 'Godzina',
+    minute: 'Minuty',
+    second: 'Sekudy',
+    notAllowed: 'Wartość jest niedozwolona',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Proszę wybrać co najmniej jedną wartość',
     pattern: 'Nieprawidłowy format',
   },
+  command: {
+    search: 'Wpisz polecenie lub szukaj...',
+  },
   hotkey: {
     then: 'następnie',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Spacja',
     plus: 'plus',
     shortcut: 'Skrót klawiszowy: {0}',
+    or: 'lub',
+  },
+  video: {
+    play: 'Odtwórz',
+    pause: 'Wstrzymaj',
+    seek: 'Przewiń',
+    volume: 'Głośność',
+    showVolume: 'Pokaż regulację głośności',
+    mute: 'Wycisz',
+    unmute: 'Wyłącz wyciszenie',
+    enterFullscreen: 'Pełny ekran',
+    exitFullscreen: 'Opuść pełny ekran',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pobierz kolor z ekranu',
+      hueSlider: 'Odcień',
+      alphaSlider: 'Przezroczystość',
+      redInput: 'Czerwony',
+      greenInput: 'Zielony',
+      blueInput: 'Niebieski',
+      alphaInput: 'Przezroczystość',
+      hueInput: 'Odcień',
+      saturationInput: 'Nasycenie',
+      lightnessInput: 'Jasność',
+      hexInput: 'Wartość szesnastkowa',
+      hexaInput: 'Wartość szesnastkowa z kanałem alfa',
+      changeFormat: 'Zmień format koloru',
+    },
   },
 }

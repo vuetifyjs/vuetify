@@ -1,7 +1,9 @@
 {
+  "description": "Represents an individual file item within the `v-file-upload` component.",
   "props": {
     "file": "The file object uploaded",
     "fileIcon": "The icon prepending each uploaded file. This will be a preview image if the file is an image.",
+    "index": "The index of the file in the upload list.",
     "showSize": "Show the size of the file"
   },
   "events": {

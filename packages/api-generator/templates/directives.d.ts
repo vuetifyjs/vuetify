@@ -1,5 +1,5 @@
 import type { DirectiveBinding, ObjectDirective } from 'vue'
-import type { CustomDirective } from '../../vuetify/src/composables/directiveComponent'
+import type { CustomDirective } from '../../vuetify/src/composables/directiveComponent.ts'
 import type * as directives from '../../vuetify/src/directives/index.ts'
 
 type ExtractDirectiveBindings<T> = T extends object

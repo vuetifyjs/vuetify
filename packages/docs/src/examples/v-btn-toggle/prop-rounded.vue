@@ -1,7 +1,8 @@
 <template>
-  <div class="d-flex justify-space-around bg-grey-lighten-4 pa-6">
+  <div class="d-flex justify-space-around pa-6">
     <v-btn-toggle
       rounded="0"
+      border
     >
       <v-btn icon="mdi-format-align-left"></v-btn>
       <v-btn icon="mdi-format-align-center"></v-btn>
@@ -11,6 +12,7 @@
 
     <v-btn-toggle
       rounded="xl"
+      border
     >
       <v-btn icon="mdi-format-align-left"></v-btn>
       <v-btn icon="mdi-format-align-center"></v-btn>

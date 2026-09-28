@@ -3,10 +3,7 @@
     class="text-center"
     fluid
   >
-    <v-row
-      class="flex"
-      justify="space-between"
-    >
+    <v-row class="flex justify-space-between">
       <v-col cols="12">
         <v-btn @click="show = !show">
           toggle

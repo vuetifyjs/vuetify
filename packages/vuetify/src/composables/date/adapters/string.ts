@@ -1,6 +1,9 @@
 // Composables
 import { VuetifyDateAdapter } from '@/composables/date/adapters/vuetify'
 
+// Utilities
+import { isFunction } from '@/util'
+
 // Types
 import type { DateAdapter } from '@/composables/date'
 
@@ -16,7 +19,7 @@ export class StringDateAdapter implements DateAdapter<string> {
         Object.entries(options.formats).map(([k, v]) => {
           return [
             k,
-            typeof v === 'function'
+            isFunction(v)
               ? (date, ...args) => v(this.base.toISO(date), ...args)
               : v,
           ]
@@ -24,6 +27,9 @@ export class StringDateAdapter implements DateAdapter<string> {
       ),
     })
   }
+
+  get locale () { return this.base.locale }
+  set locale (value: string) { this.base.locale = value }
 
   addDays (date: string, amount: number): string {
     return this.base.toISO(
@@ -112,8 +118,8 @@ export class StringDateAdapter implements DateAdapter<string> {
     return this.base.getMonth(this.base.date(date)!)
   }
 
-  getWeek (date: string, firstDayOfWeek?: number | string, firstWeekMinSize?: number): number {
-    return this.base.getWeek(this.base.date(date)!, firstDayOfWeek, firstWeekMinSize)
+  getWeek (date: string, firstDayOfWeek?: number | string, firstDayOfYear?: number | string): number {
+    return this.base.getWeek(this.base.date(date)!, firstDayOfWeek, firstDayOfYear)
   }
 
   getNextMonth (date: string): string {

@@ -8,7 +8,7 @@
       variant="text"
     >
       <template v-slot:title>
-        <div class="text-caption font-weight-bold">Revenue</div>
+        <div class="text-body-small font-weight-bold">Revenue</div>
       </template>
 
       <template v-slot:append>
@@ -23,9 +23,9 @@
       </template>
 
       <template v-slot:text>
-        <div class="text-h4 font-weight-black">$ 9,232,215</div>
+        <div class="text-headline-large font-weight-black">$ 9,232,215</div>
 
-        <small class="text-caption text-medium-emphasis d-flex justify-space-between align-center">
+        <small class="text-body-small text-medium-emphasis d-flex justify-space-between align-center">
           <div>
             <span class="text-green">
               <v-avatar icon="mdi-arrow-up" size="small" variant="tonal"></v-avatar>

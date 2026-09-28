@@ -1,5 +1,5 @@
 <template>
-  <v-row class="py-4" justify="space-around">
+  <v-row class="py-4 justify-space-around">
     <v-icon
       color="green-darken-2"
       icon="mdi-domain"

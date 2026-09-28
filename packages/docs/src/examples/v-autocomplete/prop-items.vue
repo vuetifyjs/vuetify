@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-autocomplete v-model="selection" :items="items" label="Special items like in VList" chips multiple></v-autocomplete>
+    <v-autocomplete :items="items" label="Special items like in VList" chips multiple></v-autocomplete>
 
-    <v-autocomplete v-model="selection" :items="items" label="I have custom divider" chips multiple>
+    <v-autocomplete :items="items" label="I have custom divider" chips multiple>
       <template v-slot:divider="{ props }">
         <div class="d-flex ga-4 align-center">
           <v-divider></v-divider>
@@ -12,7 +12,7 @@
       </template>
     </v-autocomplete>
 
-    <v-autocomplete v-model="selection" :items="items" label="I have custom subheader" chips multiple>
+    <v-autocomplete :items="items" label="I have custom subheader" chips multiple>
       <template v-slot:subheader="{ props }">
         <v-list-subheader class="font-weight-bold bg-primary">{{ props.title }}</v-list-subheader>
       </template>

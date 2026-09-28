@@ -31,11 +31,11 @@
       <v-main>
         <div class="pt-4 pb-16">
           <v-window v-model="tabs">
-            <v-window-item class="pa-2" value="0">
+            <v-window-item :value="0" class="pa-2">
               <v-card>
                 <v-empty-state
                   class="pa-0"
-                  image="https://vuetifyjs.b-cdn.net/docs/images/components/v-empty-state/astro-cat.svg"
+                  image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/astro-cat.svg"
                   size="200"
                 >
                   <template v-slot:media>
@@ -45,11 +45,11 @@
                   </template>
 
                   <template v-slot:title>
-                    <div class="text-h6 text-high-emphasis">Get Started</div>
+                    <div class="text-title-large text-high-emphasis">Get Started</div>
                   </template>
 
                   <template v-slot:text>
-                    <div class="text-body-2 font-weight-medium text-medium-emphasis">
+                    <div class="text-body-medium font-weight-medium text-medium-emphasis">
                       Find a great movie, then relax and enjoy with the Movies & TV app.
                     </div>
                   </template>
@@ -65,11 +65,11 @@
               </v-card>
             </v-window-item>
 
-            <v-window-item class="pa-2" value="0">
+            <v-window-item :value="1" class="pa-2">
               <v-card>
                 <v-empty-state
                   class="pa-0"
-                  image="https://vuetifyjs.b-cdn.net/docs/images/components/v-empty-state/astro-dog.svg"
+                  image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/astro-dog.svg"
                   size="200"
                 >
                   <template v-slot:media>
@@ -79,11 +79,11 @@
                   </template>
 
                   <template v-slot:title>
-                    <div class="text-h6 text-high-emphasis">Get Started</div>
+                    <div class="text-title-large text-high-emphasis">Get Started</div>
                   </template>
 
                   <template v-slot:text>
-                    <div class="text-body-2 font-weight-medium text-medium-emphasis">
+                    <div class="text-body-medium font-weight-medium text-medium-emphasis">
                       Watch your favorite TV Shows with the Movies & TV app.
                     </div>
                   </template>

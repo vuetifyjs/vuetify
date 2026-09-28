@@ -145,6 +145,7 @@ export type SlotsToProps<
     | VNodeChild
     | (T extends { default: infer V } ? V : {})
     | { [K in keyof T]?: T[K] }
+    | { $stable?: boolean }
   )
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {

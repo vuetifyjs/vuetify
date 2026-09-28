@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktifkan untuk menghapus penyortiran.',
       activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
       activateAscending: 'Aktifkan untuk mengurutkan keatas.',
+      selectRow: 'Pilih baris',
+      selectAll: 'Pilih semua',
+      selectGroup: 'Pilih grup',
     },
     sortBy: 'Urutkan berdasar',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'hingga',
   },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} dipilih',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Masukkan tanggal',
     input: {
       placeholder: 'Masukkan tanggal',
+    },
+    ariaLabel: {
+      previousMonth: 'Bulan sebelumnya',
+      nextMonth: 'Bulan berikutnya',
+      selectYear: 'Pilih tahun',
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectMonth: 'Pilih bulan',
+      selectDate: '{0}',
+      currentDate: 'Hari ini, {0}',
     },
   },
   noDataText: 'Tidak ada data tersedia',
@@ -59,11 +86,15 @@ export default {
     moreEvents: '{0} lagi',
     today: 'Hari ini',
   },
+  heatmap: {
+    less: 'Kurang',
+    more: 'Lebih',
+  },
   input: {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',
     appendAction: '{0} aksi diakhir',
-    otp: 'Masukkan karakter OTP {0}',
+    otp: 'Masukkan kode verifikasi',
   },
   fileInput: {
     counter: '{0} berkas',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Pilih Waktu',
+    hour: 'Jam',
+    minute: 'Menit',
+    second: 'Detik',
+    notAllowed: 'Nilai tidak diizinkan',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Pilih setidaknya satu nilai',
     pattern: 'Format tidak valid',
   },
+  command: {
+    search: 'Ketik perintah atau cari...',
+  },
   hotkey: {
     then: 'kemudian',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Spasi',
     plus: 'plus',
     shortcut: 'Pintasan keyboard: {0}',
+    or: 'atau',
+  },
+  video: {
+    play: 'Putar',
+    pause: 'Jeda',
+    seek: 'Cari',
+    volume: 'Volume',
+    showVolume: 'Tampilkan kontrol volume',
+    mute: 'Bisukan',
+    unmute: 'Bunyikan',
+    enterFullscreen: 'Layar penuh',
+    exitFullscreen: 'Keluar dari layar penuh',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Pilih warna dari layar',
+      hueSlider: 'Rona',
+      alphaSlider: 'Alfa',
+      redInput: 'Merah',
+      greenInput: 'Hijau',
+      blueInput: 'Biru',
+      alphaInput: 'Alfa',
+      hueInput: 'Rona',
+      saturationInput: 'Saturasi',
+      lightnessInput: 'Kecerahan',
+      hexInput: 'Nilai HEX',
+      hexaInput: 'HEX dengan nilai alfa',
+      changeFormat: 'Ubah format warna',
+    },
   },
 }

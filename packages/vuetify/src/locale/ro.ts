@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activați pentru a elimina sortarea.',
       activateDescending: 'Activați pentru a sorta descendent.',
       activateAscending: 'Activați pentru a sorta ascendent.',
+      selectRow: 'Selectează rând',
+      selectAll: 'Selectează tot',
+      selectGroup: 'Selectează grup',
     },
     sortBy: 'Sortați după',
   },
@@ -35,6 +38,20 @@ export default {
   dateRangeInput: {
     divider: 'până la',
   },
+  monthPicker: {
+    title: 'Selectați luna',
+    itemsSelected: '{0} selectate',
+    header: 'Introduceți luna',
+    range: {
+      title: 'Introduceți lunile',
+    },
+    ariaLabel: {
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectYear: 'Selectați anul',
+      currentMonth: 'Luna curentă, {0}',
+    },
+  },
   datePicker: {
     itemsSelected: '{0} selectate',
     range: {
@@ -45,6 +62,16 @@ export default {
     header: 'Introduceți data',
     input: {
       placeholder: 'Introduceți data',
+    },
+    ariaLabel: {
+      previousMonth: 'Luna anterioară',
+      nextMonth: 'Luna următoare',
+      selectYear: 'Selectați anul',
+      previousYear: 'Anul precedent',
+      nextYear: 'Anul următor',
+      selectMonth: 'Selectați luna',
+      selectDate: '{0}',
+      currentDate: 'Astăzi, {0}',
     },
   },
   noDataText: 'Nu există date disponibile',
@@ -59,11 +86,15 @@ export default {
     moreEvents: 'încă {0}',
     today: 'Today',
   },
+  heatmap: {
+    less: 'Mai puțin',
+    more: 'Mai mult',
+  },
   input: {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
     appendAction: '{0} acțiune de inserare la sfârșit',
-    otp: 'Introduceți caracterul OTP {0}',
+    otp: 'Introduceți codul de verificare',
   },
   fileInput: {
     counter: '{0} fișiere',
@@ -78,6 +109,10 @@ export default {
     am: 'AM',
     pm: 'PM',
     title: 'Selectați ora',
+    hour: 'Oră',
+    minute: 'Minute',
+    second: 'Secunde',
+    notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
     ariaLabel: {
@@ -117,6 +152,9 @@ export default {
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
   },
+  command: {
+    search: 'Tastați o comandă sau căutați...',
+  },
   hotkey: {
     then: 'apoi',
     ctrl: 'Ctrl',
@@ -134,5 +172,34 @@ export default {
     space: 'Spațiu',
     plus: 'plus',
     shortcut: 'Comandă rapidă tastatură: {0}',
+    or: 'sau',
+  },
+  video: {
+    play: 'Redare',
+    pause: 'Pauză',
+    seek: 'Căutare',
+    volume: 'Volum',
+    showVolume: 'Afișare control volum',
+    mute: 'Fără sunet',
+    unmute: 'Cu sunet',
+    enterFullscreen: 'Ecran complet',
+    exitFullscreen: 'Ieșire din ecran complet',
+  },
+  colorPicker: {
+    ariaLabel: {
+      eyedropper: 'Alege culoarea de pe ecran',
+      hueSlider: 'Nuanță',
+      alphaSlider: 'Alfa',
+      redInput: 'Roșu',
+      greenInput: 'Verde',
+      blueInput: 'Albastru',
+      alphaInput: 'Alfa',
+      hueInput: 'Nuanță',
+      saturationInput: 'Saturație',
+      lightnessInput: 'Luminozitate',
+      hexInput: 'Valoare HEX',
+      hexaInput: 'Valoare HEX cu alfa',
+      changeFormat: 'Schimbă formatul culorii',
+    },
   },
 }

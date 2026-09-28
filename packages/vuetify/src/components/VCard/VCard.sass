@@ -174,11 +174,6 @@
     width: 100%
     z-index: -1
 
-  .v-card__content
-    border-radius: inherit
-    overflow: hidden
-    position: relative
-
   .v-card__loader
     bottom: $card-loader-bottom
     top: $card-loader-top
@@ -188,9 +183,12 @@
     width: 100%
     z-index: 1
 
+    @media (forced-colors: active)
+      .v-progress-linear
+        border: none
+
   .v-card__overlay
     background-color: currentColor
-    border-radius: inherit
     position: absolute
     top: 0
     right: 0
@@ -199,3 +197,8 @@
     pointer-events: none
     opacity: 0
     transition: opacity 0.2s ease-in-out
+
+  @media (forced-colors: active)
+    .v-card
+      &:not(&--variant-text, &--variant-plain)
+        border: thin solid

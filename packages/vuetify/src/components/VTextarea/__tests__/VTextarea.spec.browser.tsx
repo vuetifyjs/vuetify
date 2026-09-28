@@ -19,7 +19,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -27,7 +27,7 @@ describe('VTextarea', () => {
     await userEvent.keyboard('sed d')
     await expect.poll(() => el.offsetHeight).toBe(56)
 
-    await userEvent.keyboard('o')
+    await userEvent.keyboard('{Enter}')
     await expect.poll(() => el.offsetHeight).toBe(80)
   })
 
@@ -43,7 +43,7 @@ describe('VTextarea', () => {
       </Application>
     ))
 
-    const el = screen.getByCSS('#input-v-0')
+    const el = screen.getByCSS('textarea[rows]')
 
     expect(el.offsetHeight).toBe(56)
 
@@ -69,5 +69,16 @@ describe('VTextarea', () => {
     await userEvent.tab()
     await userEvent.keyboard('Lorem ipsum dolor')
     expect(rows.value).toBe(2)
+  })
+
+  it('hides details when using hide-details="auto" and counter without focus', async () => {
+    const { element, queryByCSS } = render(() => (
+      <VTextarea hideDetails="auto" counter></VTextarea>
+    ))
+
+    expect(queryByCSS('.v-input__details')).toHaveClass('v-input__details--hidden')
+
+    await userEvent.click(element)
+    expect(queryByCSS('.v-input__details')).not.toHaveClass('v-input__details--hidden')
   })
 })

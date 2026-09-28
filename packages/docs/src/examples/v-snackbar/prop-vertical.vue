@@ -11,7 +11,7 @@
       v-model="snackbar"
       vertical
     >
-      <div class="text-subtitle-1 pb-2">This is a snackbar message</div>
+      <div class="text-body-large pb-2">This is a snackbar message</div>
 
       <p>This is a longer paragraph explaining something</p>
 

@@ -1,4 +1,5 @@
 {
+  "description": "Functional component meant to interact with `v-item` sub-components to augment any components inside with selection ability.",
   "props": {
     "selectedClass": "Configure the selected CSS class. This class will be available in `v-item` default scoped slot."
   }
