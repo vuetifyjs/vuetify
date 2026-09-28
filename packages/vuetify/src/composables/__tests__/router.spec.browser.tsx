@@ -1,6 +1,6 @@
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
-import { defineComponent, effectScope, h, nextTick, ref, shallowRef } from 'vue'
+import { defineComponent, h, nextTick, ref, shallowRef } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useBackButton, useLink } from '../router'
 
@@ -65,7 +65,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBe(false)
+    expect(pageReloadAttempted).toBeFalsy()
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -86,7 +86,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBe(false)
+    expect(pageReloadAttempted).toBeFalsy()
     pageReloadAttempted = false
     expect(router.currentRoute.value.fullPath).toBe('/page1')
 
@@ -96,7 +96,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBe(false)
+    expect(pageReloadAttempted).toBeFalsy()
     expect(router.currentRoute.value.fullPath).toBe('/page2')
   })
 
@@ -122,7 +122,7 @@ describe('useLink', () => {
 
     await userEvent.click(anchor)
 
-    expect(pageReloadAttempted).toBe(false)
+    expect(pageReloadAttempted).toBeFalsy()
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -141,7 +141,7 @@ describe('useLink', () => {
 
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
-    expect(pageReloadAttempted).toBe(false)
+    expect(pageReloadAttempted).toBeFalsy()
     expect(link.isActive?.value).toBe(true)
 
     to.value = { name: 'page2' }
@@ -151,38 +151,63 @@ describe('useLink', () => {
 })
 
 describe('useBackButton', () => {
+  // Counts guards through the router contract only: every guard that gets registered must be
+  // removed again once its overlay is gone, however the composable schedules the registration.
   function createFakeRouter () {
-    const removeBefore = vi.fn()
-    const removeAfter = vi.fn()
+    const removers: ReturnType<typeof vi.fn>[] = []
     const router = {
-      beforeEach: vi.fn(() => removeBefore),
-      afterEach: vi.fn(() => removeAfter),
+      beforeEach: vi.fn(() => { const rm = vi.fn(); removers.push(rm); return rm }),
+      afterEach: vi.fn(() => vi.fn()),
     }
-    return { router: router as any, removeBefore, removeAfter }
+    const registered = () => router.beforeEach.mock.calls.length
+    const removed = () => removers.filter(rm => rm.mock.calls.length > 0).length
+    return { router: router as any, registered, removed }
   }
 
-  it('should register the guard and remove it on scope dispose', async () => {
-    const { router, removeBefore, removeAfter } = createFakeRouter()
-    const scope = effectScope()
-    scope.run(() => useBackButton(router, () => undefined))
+  // Stand-in for VOverlay: the only thing it does is call useBackButton in setup
+  function createOverlay (router: any) {
+    return defineComponent({
+      setup () {
+        useBackButton(router, () => undefined)
+        return () => h('div', 'overlay')
+      },
+    })
+  }
 
+  it('should register the guard while the overlay lives and remove it on unmount', async () => {
+    const { router, registered, removed } = createFakeRouter()
+    const Overlay = createOverlay(router)
+    const show = ref(false)
+    render(defineComponent({ render: () => (show.value ? h(Overlay) : null) }))
+
+    show.value = true
     await nextTick()
-    expect(router.beforeEach).toHaveBeenCalledTimes(1)
-    expect(router.afterEach).toHaveBeenCalledTimes(1)
+    await nextTick()
+    expect(registered()).toBe(1)
+    expect(removed()).toBe(0)
 
-    scope.stop()
-    expect(removeBefore).toHaveBeenCalledTimes(1)
-    expect(removeAfter).toHaveBeenCalledTimes(1)
+    show.value = false
+    await nextTick()
+    await nextTick()
+    expect(registered()).toBe(1)
+    expect(removed()).toBe(1)
   })
 
-  it('should not register the guard when the scope is disposed before nextTick', async () => {
-    const { router } = createFakeRouter()
-    const scope = effectScope()
-    scope.run(() => useBackButton(router, () => undefined))
-    scope.stop()
+  it('should not leave a guard behind when the overlay is unmounted in the same flush it was mounted in', async () => {
+    // e.g. rows with a menu rendered from cached data, replaced by a skeleton when a refetch starts
+    // in onMounted: the overlay mounts and unmounts within one scheduler flush
+    const { router, registered, removed } = createFakeRouter()
+    const Overlay = createOverlay(router)
+    const show = ref(false)
+    render(defineComponent({
+      render: () => (show.value ? h(Overlay, { onVnodeMounted: () => { show.value = false } }) : null),
+    }))
 
-    await nextTick()
-    expect(router.beforeEach).not.toHaveBeenCalled()
-    expect(router.afterEach).not.toHaveBeenCalled()
+    for (let i = 0; i < 5; i++) {
+      show.value = true
+      await nextTick()
+      await nextTick()
+    }
+    expect(removed()).toBe(registered())
   })
 })
