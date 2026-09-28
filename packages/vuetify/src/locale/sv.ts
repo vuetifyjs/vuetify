@@ -174,7 +174,7 @@ export default {
     shortcut: 'Tangentbordsgenväg: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spela upp',
     pause: 'Pausa',
     seek: 'Sök',

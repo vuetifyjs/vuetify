@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klaviatura qısayolu: {0}',
     or: 'və ya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Pauza',
     seek: 'Axtar',

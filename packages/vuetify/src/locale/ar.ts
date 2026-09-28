@@ -174,7 +174,7 @@ export default {
     shortcut: 'اختصار لوحة المفاتيح: {0}',
     or: 'أو',
   },
-  video: {
+  media: {
     play: 'تشغيل',
     pause: 'إيقاف مؤقت',
     seek: 'بحث',

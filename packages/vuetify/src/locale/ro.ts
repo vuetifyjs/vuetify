@@ -174,7 +174,7 @@ export default {
     shortcut: 'Comandă rapidă tastatură: {0}',
     or: 'sau',
   },
-  video: {
+  media: {
     play: 'Redare',
     pause: 'Pauză',
     seek: 'Căutare',

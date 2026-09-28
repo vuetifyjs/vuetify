@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klávesová skratka: {0}',
     or: 'alebo',
   },
-  video: {
+  media: {
     play: 'Prehrať',
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',

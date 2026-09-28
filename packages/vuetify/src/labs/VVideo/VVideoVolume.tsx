@@ -109,7 +109,7 @@ export const VVideoVolume = genericComponent()({
                   >
                     <VSlider
                       direction={ props.direction }
-                      aria-label={ t('$vuetify.video.volume') }
+                      aria-label={ t('$vuetify.media.volume') }
                       modelValue={ volume.value }
                       onUpdate:modelValue={ v => volume.value = v }
                       { ...sliderDefaults }
@@ -124,7 +124,7 @@ export const VVideoVolume = genericComponent()({
               <VSlider
                 class="v-video-volume-inline__slider"
                 minWidth="50"
-                aria-label={ t('$vuetify.video.volume') }
+                aria-label={ t('$vuetify.media.volume') }
                 modelValue={ volume.value }
                 onUpdate:modelValue={ v => volume.value = v }
                 onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }

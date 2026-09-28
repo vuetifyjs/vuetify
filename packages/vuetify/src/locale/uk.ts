@@ -174,7 +174,7 @@ export default {
     shortcut: 'Комбінація клавіш: {0}',
     or: 'або',
   },
-  video: {
+  media: {
     play: 'Відтворити',
     pause: 'Пауза',
     seek: 'Позиція відтворення',

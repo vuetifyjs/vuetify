@@ -174,7 +174,7 @@ export default {
     shortcut: 'Raccourci clavier : {0}',
     or: 'ou',
   },
-  video: {
+  media: {
     play: 'Lire',
     pause: 'Pause',
     seek: 'Chercher',

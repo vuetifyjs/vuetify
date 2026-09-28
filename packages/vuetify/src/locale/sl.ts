@@ -174,7 +174,7 @@ export default {
     shortcut: 'Tipkovnična bližnjica: {0}',
     or: 'ali',
   },
-  video: {
+  media: {
     play: 'Predvajaj',
     pause: 'Zaustavi',
     seek: 'Išči',

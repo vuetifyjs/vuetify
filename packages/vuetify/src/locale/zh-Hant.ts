@@ -174,7 +174,7 @@ export default {
     shortcut: '鍵盤快捷鍵：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暫停',
     seek: '搜尋',

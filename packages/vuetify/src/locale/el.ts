@@ -174,7 +174,7 @@ export default {
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
     or: 'ή',
   },
-  video: {
+  media: {
     play: 'Αναπαραγωγή',
     pause: 'Παύση',
     seek: 'Αναζήτηση',

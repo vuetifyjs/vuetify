@@ -174,7 +174,7 @@ export default {
     shortcut: 'Tastatūras saīsne: {0}',
     or: 'vai',
   },
-  video: {
+  media: {
     play: 'Atskaņot',
     pause: 'Pauzēt',
     seek: 'Meklēt',

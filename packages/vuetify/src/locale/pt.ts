@@ -174,7 +174,7 @@ export default {
     shortcut: 'Atalho de teclado: {0}',
     or: 'ou',
   },
-  video: {
+  media: {
     play: 'Reproduzir',
     pause: 'Pausar',
     seek: 'Buscar',

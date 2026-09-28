@@ -174,7 +174,7 @@ export default {
     shortcut: 'Tastaturgenvej: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Afspil',
     pause: 'Pause',
     seek: 'Søg',
