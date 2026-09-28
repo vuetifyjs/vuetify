@@ -42,6 +42,30 @@ describe('VAppBar', () => {
     await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ height: '48px' })
   })
 
+  it('offsets VMain by the app bar height for every density', async () => {
+    const density = ref<any>('default')
+    render(() => (
+      <VLayout>
+        <VAppBar density={ density.value } />
+        <VMain />
+      </VLayout>
+    ))
+
+    const appBar = screen.getByCSS('.v-app-bar')
+    const main = screen.getByCSS('.v-main')
+
+    await expect.element(appBar).toHaveStyle({ height: '64px' })
+    await expect.element(main).toHaveStyle({ paddingTop: '64px' })
+
+    density.value = 'comfortable'
+    await expect.element(appBar).toHaveStyle({ height: '56px' })
+    await expect.element(main).toHaveStyle({ paddingTop: '56px' })
+
+    density.value = 'compact'
+    await expect.element(appBar).toHaveStyle({ height: '48px' })
+    await expect.element(main).toHaveStyle({ paddingTop: '48px' })
+  })
+
   describe('scroll behavior', () => {
     it('hides on scroll', async () => {
       const scrollBehavior = ref('hide')
