@@ -324,6 +324,20 @@ describe('createTheme', () => {
     expect(theme.isSystem.value).toBe(true)
   })
 
+  it('should change to a theme added after creation', () => {
+    const theme = createTheme({ defaultTheme: 'light' })
+    theme.themes.value.brand = {
+      ...theme.themes.value.light,
+      dark: true,
+    }
+
+    theme.change('brand')
+
+    expect(theme.name.value).toBe('brand')
+    expect(theme.isSystem.value).toBe(false)
+    expect(theme.current.value.dark).toBe(true)
+  })
+
   it('should generate utility classes with a custom prefix', async () => {
     // @ts-expect-error next-line
     const theme = createTheme({ prefix: 'custom-' })

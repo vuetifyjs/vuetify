@@ -387,8 +387,23 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       return bundle.selectedId.value ? String(bundle.selectedId.value) : 'light'
     },
     set (val: string) {
-      if (val === 'system') bundle.reset()
-      else bundle.select(val)
+      if (val === 'system') {
+        bundle.reset()
+        return
+      }
+
+      // Themes can be added to the ref after createTheme(). v0 only
+      // knows the ids registered at construction, and select() of an
+      // unknown id turns system-following off without changing the name.
+      if (!bundle.has(val) && themes.value[val]) {
+        bundle.register({
+          id: val,
+          dark: Boolean(themes.value[val].dark),
+          colors: { background: '#000' },
+        })
+      }
+
+      bundle.select(val)
     },
   })
 
