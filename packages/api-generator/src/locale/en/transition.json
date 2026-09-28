@@ -1,5 +1,7 @@
 {
   "props": {
+    "disabled": "Disables the transition.",
+    "origin": "Sets the CSS `transform-origin` on the transitioning element.",
     "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition."
   }
 }
