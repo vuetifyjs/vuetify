@@ -1,19 +1,9 @@
-@mixin vertical($immediate: false)
-  $selector: '.v-timeline--vertical'
-  @if $immediate
-    $selector: '#{$selector}#{&}'
-  @else
-    $selector: '#{$selector} #{&}'
-  @at-root #{$selector}
+@mixin vertical()
+  @at-root .v-timeline--vertical#{&}
     @content
 
-@mixin horizontal($immediate: false)
-  $selector: '.v-timeline--horizontal'
-  @if $immediate
-    $selector: '#{$selector}#{&}'
-  @else
-    $selector: '#{$selector} #{&}'
-  @at-root #{$selector}
+@mixin horizontal()
+  @at-root .v-timeline--horizontal#{&}
     @content
 
 @mixin timeline-first-item()

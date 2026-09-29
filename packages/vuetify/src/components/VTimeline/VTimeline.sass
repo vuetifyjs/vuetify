@@ -29,7 +29,7 @@
     grid-auto-flow: dense
     position: relative
 
-    @include horizontal(true)
+    @include horizontal
       grid-column-gap: $timeline-item-padding
       width: 100%
 
@@ -59,7 +59,7 @@
           align-self: flex-start
           padding-block-start: $timeline-item-padding
 
-    @include vertical(true)
+    @include vertical
       row-gap: $timeline-item-padding
       height: 100%
 
@@ -242,22 +242,22 @@
 
   // Justify
   .v-timeline--justify-center
-    @include horizontal(true)
+    @include horizontal
       grid-template-rows: $timeline-item-grid-template-center
 
-    @include vertical(true)
+    @include vertical
       grid-template-columns: $timeline-item-grid-template-center
 
   .v-timeline--justify-auto
-    @include horizontal(true)
+    @include horizontal
       grid-template-rows: $timeline-item-grid-template-auto
 
-    @include vertical(true)
+    @include vertical
       grid-template-columns: $timeline-item-grid-template-auto
 
   // Density
   .v-timeline--density-comfortable
-    @include horizontal(true)
+    @include horizontal
       height: 100%
 
       &.v-timeline--side-end
@@ -266,7 +266,7 @@
       &.v-timeline--side-start
         grid-template-rows: $timeline-density-comfortable-grid-template-start
 
-    @include vertical(true)
+    @include vertical
       width: 100%
 
       &.v-timeline--side-end
@@ -276,7 +276,7 @@
         grid-template-columns: $timeline-density-comfortable-grid-template-start
 
   .v-timeline--density-compact
-    @include horizontal(true)
+    @include horizontal
       &.v-timeline--side-end
         grid-template-rows: $timeline-density-compact-grid-template-end
 
@@ -287,7 +287,7 @@
         > .v-timeline-item__body
           grid-row: 1
 
-    @include vertical(true)
+    @include vertical
       &.v-timeline--side-end
         grid-template-columns: $timeline-density-compact-grid-template-end
 
@@ -301,7 +301,7 @@
   // Side
   .v-timeline.v-timeline--side-end
     > .v-timeline-item
-      @include horizontal(true)
+      @include horizontal
         > .v-timeline-item__body
           grid-row: 3
           align-self: flex-start
@@ -314,7 +314,7 @@
           padding-block-end: $timeline-item-padding
           padding-block-start: initial
 
-      @include vertical(true)
+      @include vertical
         > .v-timeline-item__body
           grid-column: 3
           justify-self: flex-start
@@ -329,7 +329,7 @@
 
   .v-timeline.v-timeline--side-start
     > .v-timeline-item
-      @include horizontal(true)
+      @include horizontal
         > .v-timeline-item__body
           grid-row: 1
           align-self: flex-end
@@ -342,7 +342,7 @@
           padding-block-end: initial
           padding-block-start: $timeline-item-padding
 
-      @include vertical(true)
+      @include vertical
         > .v-timeline-item__body
           grid-column: 1
           justify-self: flex-end
@@ -364,7 +364,7 @@
     --v-timeline-line-size-base: 50%
     --v-timeline-line-size-offset: 0px
 
-    @include horizontal(true)
+    @include horizontal
       justify-items: center
 
       > :where(.v-timeline-item)
@@ -377,7 +377,7 @@
         > .v-timeline-divider
           justify-content: center
 
-    @include vertical(true)
+    @include vertical
       align-items: center
 
       > :where(.v-timeline-item)
@@ -404,7 +404,7 @@
         > .v-timeline-divider__after
           --v-timeline-line-size-offset: 0px
 
-    @include horizontal(true)
+    @include horizontal
       justify-items: flex-start
 
       > :where(.v-timeline-item)
@@ -417,7 +417,7 @@
           > .v-timeline-divider__after
             width: $timeline-line-size-after
 
-    @include vertical(true)
+    @include vertical
       align-items: flex-start
 
       > :where(.v-timeline-item)
@@ -440,11 +440,11 @@
         > .v-timeline-divider__after
           --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
-    @include vertical(true)
+    @include vertical
       @include timeline-first-item()
         padding-block-start: 0
 
-    @include horizontal(true)
+    @include horizontal
       @include timeline-first-item()
         padding-inline-start: 0
 
@@ -458,10 +458,10 @@
         > .v-timeline-divider__before
           --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
-    @include vertical(true)
+    @include vertical
       @include timeline-last-item()
         padding-block-end: 0
 
-    @include horizontal(true)
+    @include horizontal
       @include timeline-last-item()
         padding-inline-end: 0
