@@ -21,6 +21,8 @@ export {
 
 export type { IgnoreAccents } from '@vuetify/v0/utilities'
 
+export { createRtl as createV0Rtl } from '@vuetify/v0/composables'
+
 // Kept under core's existing name — `range` shadows local variables in several
 // components (VPagination, VRating, VSlider).
 export { range as createRange } from '@vuetify/v0/utilities'
