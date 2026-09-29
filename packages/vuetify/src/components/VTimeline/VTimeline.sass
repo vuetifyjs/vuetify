@@ -156,47 +156,50 @@
       background: canvastext
 
   .v-timeline-item:first-child
-    .v-timeline-divider__before
-      @include vertical
-        height: $timeline-line-size
-        top: 0
+    > :where(.v-timeline-divider)
+      > .v-timeline-divider__before
+        @include vertical
+          height: $timeline-line-size
+          top: 0
 
-      @include horizontal
-        width: $timeline-line-size
-        inset-inline-start: 0
-        inset-inline-end: initial
+        @include horizontal
+          width: $timeline-line-size
+          inset-inline-start: 0
+          inset-inline-end: initial
 
-    .v-timeline-divider__after
-      @include vertical
-        height: $timeline-line-size-first-last
+      > .v-timeline-divider__after
+        @include vertical
+          height: $timeline-line-size-first-last
 
-      @include horizontal
-        width: $timeline-line-size-first-last
-        inset-inline-end: $timeline-line-start
-        inset-inline-start: initial
+        @include horizontal
+          width: $timeline-line-size-first-last
+          inset-inline-end: $timeline-line-start
+          inset-inline-start: initial
 
   .v-timeline-item:last-child
-    .v-timeline-divider__before
-      @include vertical
-        height: $timeline-line-size-first-last
+    > :where(.v-timeline-divider)
+      > .v-timeline-divider__before
+        @include vertical
+          height: $timeline-line-size-first-last
 
-      @include horizontal
-        width: $timeline-line-size-first-last
+        @include horizontal
+          width: $timeline-line-size-first-last
 
-    .v-timeline-divider__after
-      @include vertical
-        height: calc(var(--v-timeline-line-size-base) + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
-        bottom: 0
+      > .v-timeline-divider__after
+        @include vertical
+          height: calc(var(--v-timeline-line-size-base) + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
+          bottom: 0
 
-      @include horizontal
-        width: calc(var(--v-timeline-line-size-base) + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
-        inset-inline-end: 0
-        inset-inline-start: initial
+        @include horizontal
+          width: calc(var(--v-timeline-line-size-base) + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
+          inset-inline-end: 0
+          inset-inline-start: initial
 
   .v-timeline-item:only-child
-    .v-timeline-divider__after
-      @include vertical
-        height: calc(var(--v-timeline-line-size-base) - var(--v-timeline-line-inset))
+    > :where(.v-timeline-divider)
+      > .v-timeline-divider__after
+        @include vertical
+          height: calc(var(--v-timeline-line-size-base) - var(--v-timeline-line-inset))
 
   .v-timeline-divider__dot
     z-index: 1
@@ -373,16 +376,18 @@
     $timeline-line-size-before: calc(var(--v-timeline-line-size-offset) + var(--v-timeline-dot-size) / 2 - var(--v-timeline-line-inset))
     $timeline-line-size-after: calc(var(--v-timeline-line-size-base) - var(--v-timeline-dot-size) / 2 + var(--v-timeline-line-size-offset) - var(--v-timeline-line-inset))
 
-    .v-timeline-item:first-child
-      .v-timeline-divider__before
-        --v-timeline-line-size-offset: #{$timeline-item-padding}
+    > .v-timeline-item:first-child
+      > :where(.v-timeline-divider)
+        > .v-timeline-divider__before
+          --v-timeline-line-size-offset: #{$timeline-item-padding}
 
-      .v-timeline-divider__after
-        --v-timeline-line-size-offset: -#{math.div($timeline-item-padding, 2)}
+        > .v-timeline-divider__after
+          --v-timeline-line-size-offset: -#{math.div($timeline-item-padding, 2)}
 
-    .v-timeline-item:last-child
-      .v-timeline-divider__after
-        --v-timeline-line-size-offset: 0px
+    > .v-timeline-item:last-child
+      > :where(.v-timeline-divider)
+        > .v-timeline-divider__after
+          --v-timeline-line-size-offset: 0px
 
     @include horizontal(true)
       justify-items: flex-start
@@ -410,12 +415,13 @@
 
   // Truncate start
   .v-timeline--truncate-line-start
-    .v-timeline-item:first-child
-      .v-timeline-divider__before
-        display: none
+    > .v-timeline-item:first-child
+      > :where(.v-timeline-divider)
+        > .v-timeline-divider__before
+          display: none
 
-      .v-timeline-divider__after
-        --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
+        > .v-timeline-divider__after
+          --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
     @include vertical(true)
       @include timeline-first-item()
@@ -427,12 +433,13 @@
 
   // Truncate end
   .v-timeline--truncate-line-end
-    .v-timeline-item:last-child
-      .v-timeline-divider__after
-        display: none
+    > .v-timeline-item:last-child
+      > :where(.v-timeline-divider)
+        > .v-timeline-divider__after
+          display: none
 
-      .v-timeline-divider__before
-        --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
+        > .v-timeline-divider__before
+          --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
     @include vertical(true)
       @include timeline-last-item()

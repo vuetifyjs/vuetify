@@ -17,11 +17,11 @@
     @content
 
 @mixin timeline-first-item()
-  .v-timeline-item:first-child
-    .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
+  > .v-timeline-item:first-child
+    > .v-timeline-divider, > .v-timeline-item__body, > .v-timeline-item__opposite
       @content
 
 @mixin timeline-last-item()
-  .v-timeline-item:last-child
-    .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
+  > .v-timeline-item:last-child
+    > .v-timeline-divider, > .v-timeline-item__body, > .v-timeline-item__opposite
       @content
