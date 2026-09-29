@@ -2,6 +2,7 @@
 import { createLocale } from '../locale'
 
 // Utilities
+import * as vue from 'vue'
 import { effectScope } from 'vue'
 
 describe('locale.ts', () => {
@@ -33,6 +34,50 @@ describe('locale.ts', () => {
 
     expect(locale.isRtl.value).toBe(false)
     expect(locale.rtlClasses.value).toBe('v-locale--is-ltr')
+
+    scope.stop()
+  })
+
+  it('should translate $vuetify keys through the locale bundle', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({ locale: 'en' }))!
+
+    expect(locale.t('$vuetify.close')).toBe('Close')
+    expect(locale.t('$vuetify.dataFooter.pageText', 1, 10, 100)).toBe('1-10 of 100')
+    expect(locale.t('plain {0}', 'x')).toBe('plain x')
+
+    scope.stop()
+  })
+
+  it('should fall back to the fallback locale and keep the key when nothing matches', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({
+      locale: 'fr',
+      fallback: 'en',
+      messages: { fr: { other: 'Autre' } },
+    }))!
+    const warned = vi.spyOn(vue, 'warn').mockImplementation(() => {})
+
+    expect(locale.t('$vuetify.close')).toBe('Close')
+
+    expect(locale.t('$vuetify.notAKey')).toBe('$vuetify.notAKey')
+    expect(warned).toHaveBeenCalled()
+
+    warned.mockRestore()
+    scope.stop()
+  })
+
+  it('should fall back when the current locale has no catalog', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({ locale: 'en-US' }))!
+
+    expect(locale.t('$vuetify.close')).toBe('Close')
+
+    locale.messages.value = { ...locale.messages.value, fr: { close: 'Fermer' } }
+    expect(locale.t('$vuetify.close')).toBe('Close')
+
+    locale.current.value = 'fr'
+    expect(locale.t('$vuetify.close')).toBe('Fermer')
 
     scope.stop()
   })
