@@ -187,7 +187,9 @@ export const VSelectionControl = genericComponent<new <T>(
 
     function focus (options?: FocusOptions) {
       input.value?.focus(options)
-      if (options?.focusVisible !== undefined) isFocusVisible.value = options.focusVisible
+      if (options?.focusVisible !== undefined && input.value?.matches(':focus')) {
+        isFocusVisible.value = options.focusVisible
+      }
     }
 
     function blur () {
