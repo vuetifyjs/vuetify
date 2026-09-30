@@ -78,24 +78,30 @@ export function useChunks (
     const position = toValue(reversed) ? 'right' : 'left'
 
     const val = toValue(value)
-    if (val <= 0 || val >= 100) return undefined
+    if (val >= 100) return undefined
 
     const buffer = toValue(bufferValue)
-    const split = convertToUnit(val, '%')
+    const hasBar = val > 0
     const hasBuffer = buffer > val && buffer < 100
+    if (!hasBar && !hasBuffer) return undefined
+
+    const split = convertToUnit(val, '%')
     const bufferSplit = convertToUnit(buffer, '%')
+    const edge = hasBuffer ? bufferSplit : split
 
     return {
-      bar: {
+      bar: hasBar ? {
         width: `calc(${split} - ${halfGap})`,
-      },
+      } : undefined,
       buffer: hasBuffer ? {
-        [position]: `calc(${split} + ${halfGap})`,
-        width: `calc(${bufferSplit} - ${split} - ${convertToUnit(chunkGap.value)})`,
+        [position]: hasBar ? `calc(${split} + ${halfGap})` : 0,
+        width: hasBar
+          ? `calc(${bufferSplit} - ${split} - ${convertToUnit(chunkGap.value)})`
+          : `calc(${bufferSplit} - ${halfGap})`,
       } : undefined,
       background: {
-        [position]: `calc(${hasBuffer ? bufferSplit : split} + ${halfGap})`,
-        width: `calc(100% - ${hasBuffer ? bufferSplit : split} - ${halfGap})`,
+        [position]: `calc(${edge} + ${halfGap})`,
+        width: `calc(100% - ${edge} - ${halfGap})`,
       },
     }
   })
