@@ -200,7 +200,6 @@ export const VSelectionControl = genericComponent<new <T>(
       el: () => input.value,
       focus,
       isChecked: () => model.value,
-      isInteractive: () => isInteractive.value,
     })
 
     group?.onForceUpdate(() => {

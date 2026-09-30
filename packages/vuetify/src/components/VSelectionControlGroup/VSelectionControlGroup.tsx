@@ -26,10 +26,9 @@ export interface VSelectionGroupContext {
 }
 
 export interface VSelectionControlInstance {
-  el: () => HTMLElement | undefined
+  el: () => HTMLInputElement | undefined
   focus: (options?: FocusOptions) => void
   isChecked: () => boolean
-  isInteractive: () => boolean
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
@@ -126,11 +125,11 @@ export const VSelectionControlGroup = genericComponent<new <T>(
     function focus (options?: FocusOptions) {
       if (!IN_BROWSER) return
 
-      // Find the first checked control or the first interactive one, in DOM order
+      // Find the first checked control or the first enabled one, in DOM order
       let first: VSelectionControlInstance | undefined
       for (const control of controls) {
         const el = control.el()
-        if (!el || !(control.isChecked() || control.isInteractive())) continue
+        if (!el || el.disabled) continue
 
         if (!first) {
           first = control
