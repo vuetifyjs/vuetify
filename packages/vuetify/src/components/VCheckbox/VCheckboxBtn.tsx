@@ -6,7 +6,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -40,7 +40,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
   setup (props, { slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
-    const controlRef = ref<VSelectionControl>()
+    const controlRef = shallowRef<VSelectionControl>()
 
     function onChange (v: any) {
       if (indeterminate.value) {

@@ -11,7 +11,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, useId } from 'vue'
+import { shallowRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -47,8 +47,8 @@ export const VCheckbox = genericComponent<new <T>(
   setup (props, { attrs, slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
-    const inputRef = ref<VInput>()
-    const checkboxBtnRef = ref<VCheckboxBtn>()
+    const inputRef = shallowRef<VInput>()
+    const checkboxBtnRef = shallowRef<VCheckboxBtn>()
 
     const uid = useId()
 

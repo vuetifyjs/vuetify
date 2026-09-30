@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeSizeProps } from '@/composables/size'
 
 // Utilities
-import { ref, toRef, useId } from 'vue'
+import { shallowRef, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, isString, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
@@ -98,8 +98,8 @@ export const VSwitch = genericComponent<new <T>(
       backgroundColorClasses: thumbColorClasses,
       backgroundColorStyles: thumbColorStyles,
     } = useBackgroundColor(() => props.thumbColor)
-    const control = ref<VSelectionControl>()
-    const inputRef = ref<VInput>()
+    const control = shallowRef<VSelectionControl>()
+    const inputRef = shallowRef<VInput>()
     const isForcedColorsModeActive = SUPPORTS_MATCH_MEDIA && window.matchMedia('(forced-colors: active)').matches
 
     const loaderColor = toRef(() => {

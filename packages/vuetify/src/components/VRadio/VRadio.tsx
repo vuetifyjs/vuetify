@@ -6,7 +6,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -37,7 +37,7 @@ export const VRadio = genericComponent<new <T>(
 
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
-    const controlRef = ref<VSelectionControl>()
+    const controlRef = shallowRef<VSelectionControl>()
 
     useRender(() => {
       const controlProps = omit(VSelectionControl.filterProps(props), ['modelValue'])

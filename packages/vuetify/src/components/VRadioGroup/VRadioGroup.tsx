@@ -14,7 +14,7 @@ import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, useId } from 'vue'
+import { computed, shallowRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -75,8 +75,8 @@ export const VRadioGroup = genericComponent<new <T>(
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
-    const inputRef = ref<VInput>()
-    const controlGroupRef = ref<VSelectionControlGroup>()
+    const inputRef = shallowRef<VInput>()
+    const controlGroupRef = shallowRef<VSelectionControlGroup>()
 
     function onFocusout (e: FocusEvent) {
       if (!(e.currentTarget as HTMLElement)?.contains(e.relatedTarget as Node)) {
