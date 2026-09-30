@@ -732,6 +732,12 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   }
 }
 
+export function isAutofill (e: Event) {
+  return !e.isTrusted ||
+    !!matchesSelector(e.target as Element, ':autofill') ||
+    !!matchesSelector(e.target as Element, ':-webkit-autofill')
+}
+
 export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
   return vnodes.some(child => {
     if (!isVNode(child)) return true

@@ -38,7 +38,7 @@ describe('v-touch', () => {
 
       await commands.drag([100, 100], to)
 
-      expect(fn).toHaveBeenCalledTimes(1)
+      await expect.poll(() => fn).toHaveBeenCalledTimes(1)
       expect(start).toHaveBeenCalledTimes(1)
       expect(move).toHaveBeenCalledTimes(1)
       expect(end).toHaveBeenCalledTimes(1)
@@ -62,7 +62,7 @@ describe('v-touch', () => {
 
       await commands.drag([100, 100], to)
 
-      expect(fn).toHaveBeenCalledTimes(1)
+      await expect.poll(() => fn).toHaveBeenCalledTimes(1)
       expect(nope).not.toHaveBeenCalled()
       expect(start).toHaveBeenCalledTimes(1)
       expect(move).toHaveBeenCalledTimes(1)
@@ -86,10 +86,10 @@ describe('v-touch', () => {
 
       await commands.drag([100, 100], to)
 
+      await expect.poll(() => end).toHaveBeenCalledTimes(1)
       expect(fn).not.toHaveBeenCalled()
       expect(start).toHaveBeenCalledTimes(1)
       expect(move).not.toHaveBeenCalled()
-      expect(end).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -117,12 +117,14 @@ describe('v-touch', () => {
 
     it('suppresses the scrolled axis', async () => {
       const left = vi.fn()
+      const end = vi.fn()
 
-      render(<ScrollComponent value={{ left }} />)
+      render(<ScrollComponent value={{ left, end }} />)
       scrollOnMove()
 
       await commands.drag([150, 50], [60, 50])
 
+      await expect.poll(() => end).toHaveBeenCalledTimes(1)
       expect(left).not.toHaveBeenCalled()
     })
 
@@ -134,7 +136,7 @@ describe('v-touch', () => {
 
       await commands.drag([150, 50], [150, 10])
 
-      expect(up).toHaveBeenCalledTimes(1)
+      await expect.poll(() => up).toHaveBeenCalledTimes(1)
     })
   })
 })

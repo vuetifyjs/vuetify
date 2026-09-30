@@ -102,7 +102,7 @@ jobs:
       - run: npm install -g npm@latest
       - name: NPM Release
         run: |
-          npm publish ./packages/vuetify --tag $(node ./scripts/parse-npm-tag.js $GITHUB_REF_NAME)
+          pnpm publish ./packages/vuetify --no-git-checks --tag $(node ./scripts/parse-npm-tag.js $GITHUB_REF_NAME)
       - name: GitHub release
         id: create_release
         run: pnpm conventional-github-releaser -p vuetify

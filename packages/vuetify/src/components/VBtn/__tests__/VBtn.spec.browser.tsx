@@ -1,4 +1,6 @@
+// Components
 import { VBtn } from '../VBtn'
+import { VBtnToggle } from '@/components/VBtnToggle'
 
 // Utilities
 import { gridOn, render, screen, showcase, userEvent } from '@test'
@@ -107,34 +109,23 @@ describe('VBtn', () => {
       expect(click).toHaveBeenCalledTimes(2)
     })
 
-    // Pending test, is "toggle" even going to be emitted anymore?
-    it.todo('emits toggle when used within a button group', () => {
-      // const register = jest.fn()
-      // const unregister = jest.fn()
-      // const toggle = jest.fn()
-      // const wrapper = mountFunction({
-      //   provide: {
-      //     btnToggle: { register, unregister },
-      //   },
-      //   methods: { toggle },
-      // })
+    it('selects when clicked within VBtnToggle', async () => {
+      const model = ref()
+      render(() => (
+        <VBtnToggle v-model={ model.value }>
+          <VBtn value="a">A</VBtn>
+          <VBtn value="b">B</VBtn>
+        </VBtnToggle>
+      ))
 
-      // wrapper.trigger('click')
-      // expect(toggle).toHaveBeenCalled()
-    })
-  })
-
-  // These tests were copied over from the previous Jest tests,
-  // but they are breaking because the features have not been implemented
-  describe.todo('activeClass', () => {
-    it('should use custom active-class', async () => {
-      const { wrapper } = render(<VBtn active activeClass="my-active-class">Active Class</VBtn>)
-      expect(wrapper.element).toHaveClass('my-active-class')
+      await userEvent.click(screen.getByText('B'))
+      expect(model.value).toBe('b')
+      expect(screen.getByText('B').closest('.v-btn')).toHaveClass('v-btn--active')
     })
   })
 
   describe('href', () => {
-    it.todo('should render an <a> tag when using href prop', async () => {
+    it('should render an <a> tag when using href prop', async () => {
       const anchor = { href: '#anchor', hash: 'anchor' }
       render(<VBtn href={ anchor.href }>Click me</VBtn>)
       const link = screen.getByCSS('a')
@@ -218,17 +209,6 @@ describe('VBtn', () => {
 
       disabled.value = false
       await expect.element(wrapper.element).not.toHaveClass('v-btn--disabled')
-    })
-
-    it.todo('activeClass', async () => {
-      const { rerender } = render(() => (
-        <VBtn activeClass="my-active-class">Active Class</VBtn>
-      ))
-
-      await rerender({ activeClass: 'different-class' })
-
-      const activeClassElement = screen.queryByCSS('.different-class')
-      expect(activeClassElement).not.toBeVisible()
     })
 
     it('variant', async () => {

@@ -62,18 +62,16 @@ Create a `layers.css` file that declares the cascade layers in order. `tailwind`
 @layer vuetify-final;
 ```
 
-This file must be loaded **before** any other styles. In a **Vite** project, save it as `src/styles/layers.css` and import it at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`. You can find the exact configuration snippets in the sections for Vite and Nuxt below.
+Save it as `public/layers.css` and link it instead of importing it (see [Custom layer order](/styles/layers/#custom-layer-order)).
 
 ## Setup dependencies
 
 ### Vite
 
-Import the layers file at the top of `src/plugins/vuetify.ts`, before `vuetify/styles`:
+Link the layers file in `index.html`, before any other stylesheet:
 
-```ts { resource="src/plugins/vuetify.ts" }
-import '../styles/layers.css'
-import 'vuetify/styles'
-// ...
+```html { resource="index.html" }
+<link rel="stylesheet" href="/layers.css">
 ```
 
 Install TailwindCSS and the Vite plugin:
@@ -139,7 +137,7 @@ bun add -D tailwindcss @tailwindcss/postcss
 
 :::
 
-Register `@tailwindcss/postcss` as a PostCSS plugin in `nuxt.config.ts`. The `css` array controls load order — `layers.css` must come first, followed by `vuetify/styles`, then `tailwind.css`. Set `disableVuetifyStyles: true` — otherwise the module injects styles automatically and the order above is ignored:
+Register `@tailwindcss/postcss` as a PostCSS plugin in `nuxt.config.ts`. Link the layers file in `app.head` and add `tailwind.css` to the `css` array:
 
 ```ts { resource="nuxt.config.ts" }
 export default defineNuxtConfig({
@@ -148,9 +146,15 @@ export default defineNuxtConfig({
     // ...
   ],
 
+  app: {
+    head: {
+      link: [
+        { rel: 'stylesheet', href: '/layers.css' },
+      ],
+    },
+  },
+
   css: [
-    'assets/styles/layers.css',
-    'vuetify/styles',
     'assets/styles/tailwind.css',
   ],
 
@@ -162,7 +166,6 @@ export default defineNuxtConfig({
 
   vuetify: {
     moduleOptions: {
-      disableVuetifyStyles: true,
       styles: { configFile: 'assets/styles/settings.scss' },
     },
   },

@@ -322,6 +322,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               </div>
 
                 <div class="v-command-palette__content">
+                  { slots['list.prepend']?.() }
+
                   { filteredItems.value.length > 0 ? (
                     <VList
                       key="list"
@@ -336,7 +338,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }
                       v-slots={{
-                        prepend: slots['list.prepend'],
                         subheader: slots['list.subheader'],
                         item: ({ props: itemProps }: { props: any }) => (
                           slots.item?.({ item: itemProps, index: itemProps.index }) ?? (

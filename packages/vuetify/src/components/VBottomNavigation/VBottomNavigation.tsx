@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -72,7 +72,7 @@ export const VBottomNavigation = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
