@@ -531,8 +531,7 @@ describe('VNumberInput', () => {
   })
 
   describe('should indicate range error', () => {
-    // enable in 4.0.0
-    it.todo('on mount', async () => {
+    it('on mount', async () => {
       const model = ref(-13)
       const onChange = vi.fn()
       render(() => (

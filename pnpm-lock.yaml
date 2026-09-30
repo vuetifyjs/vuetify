@@ -560,6 +560,9 @@ patchedDependencies:
   '@typescript-eslint/typescript-estree@8.57.2':
     hash: 7a4befbda6eebb48b01852719e5adfce4cb4bb9e2ac6d2c9928c4c2c18abc845
     path: patches/@typescript-eslint__typescript-estree@8.57.2.patch
+  '@vitest/browser':
+    hash: a7ba41a2021e8c621a7a998c318e418f34e240b1ecce2b01ae39b1b93c411b7a
+    path: patches/@vitest__browser.patch
   playwright-core:
     hash: 637574520a34b4289b8d24709437fb445216539193cd7d0dbcd2581b7f2d437c
     path: patches/playwright-core.patch
@@ -12235,7 +12238,7 @@ snapshots:
 
   '@vitest/browser-playwright@4.1.11(playwright@1.62.1)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.1.11)':
     dependencies:
-      '@vitest/browser': 4.1.11(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.1.11)
+      '@vitest/browser': 4.1.11(patch_hash=a7ba41a2021e8c621a7a998c318e418f34e240b1ecce2b01ae39b1b93c411b7a)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.1.11)
       '@vitest/mocker': 4.1.11(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
       playwright: 1.62.1
       tinyrainbow: 3.1.1
@@ -12246,7 +12249,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/browser@4.1.11(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.1.11)':
+  '@vitest/browser@4.1.11(patch_hash=a7ba41a2021e8c621a7a998c318e418f34e240b1ecce2b01ae39b1b93c411b7a)(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vitest@4.1.11)':
     dependencies:
       '@blazediff/core': 1.9.1
       '@vitest/mocker': 4.1.11(vite@7.3.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))

@@ -90,6 +90,24 @@ describe('VDatePicker', () => {
     await commands.clearAbortTimeout()
   })
 
+  it('prev/next month buttons wrap the year', async () => {
+    const month = ref(11)
+    const year = ref(2025)
+    render(() => (
+      <VDatePicker v-model:month={ month.value } v-model:year={ year.value } />
+    ))
+
+    await userEvent.click(screen.getByTestId('next-month'))
+    expect(month.value).toBe(0)
+    expect(year.value).toBe(2026)
+    await expect.poll(() => document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
+
+    await userEvent.click(screen.getByTestId('prev-month'))
+    expect(month.value).toBe(11)
+    expect(year.value).toBe(2025)
+    await expect.poll(() => document.querySelector('[data-v-date="2025-12-15"]')).not.toBeNull()
+  })
+
   it('no-auto-navigation should keep the displayed month after model change', async () => {
     const onUpdateMonth = vi.fn()
     const onUpdateYear = vi.fn()

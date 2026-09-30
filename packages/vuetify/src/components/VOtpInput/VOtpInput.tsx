@@ -151,7 +151,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         // Slot count, not `input.maxLength` (code units).
         maxLength: length.value,
       })
-      if (!result) return
+      if (!result || otp.isComposing.value) return
       if (input.selectionStart !== result.start || input.selectionEnd !== result.end) {
         input.setSelectionRange(result.start, result.end, result.direction)
       }
@@ -183,6 +183,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onCompositionend (e: CompositionEvent) {
       otp.endComposition()
       onInput(e)
+      onSelectionChange()
     }
 
     function onFocus () {
