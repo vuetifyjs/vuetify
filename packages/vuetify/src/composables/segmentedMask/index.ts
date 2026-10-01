@@ -18,4 +18,4 @@ export { remainingHint } from './formatHint'
 
 export { createSegmentedEdit, overtype } from './edit'
 
-export { dateSegments } from './presets'
+export { dateSegments, dateTimeSegments, timeSegments } from './presets'
