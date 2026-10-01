@@ -94,7 +94,7 @@ Steppers also have an alternative label style which places the title under the s
 
 #### Linear steppers
 
-Linear steppers will always move a user through your defined path.
+Steppers are linear by default: unfinished steps use lower opacity and users navigate with the previous and next actions. The component does not enforce a progression order; direct step selection is controlled by the **editable** prop.
 
 <ExamplesExample file="v-stepper/misc-linear" />
 
@@ -142,6 +142,6 @@ The error state can also be applied to the alternative label style.
 
 #### Non linear
 
-Non-linear steppers allow the user to move through your process in whatever way they choose.
+The **non-linear** prop increases the opacity of unfinished steps to indicate that they can be completed in any order. It does not make steps selectable; use **editable** to allow users to navigate to them directly.
 
 <ExamplesExample file="v-stepper/prop-non-linear" />
