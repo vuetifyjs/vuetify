@@ -10,11 +10,12 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { makeFocusProps } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, shallowRef } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -78,8 +79,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
-    const vMenuRef = ref<VMenu>()
-    const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = shallowRef<VMenu>()
+    const vTextFieldRef = shallowRef<VTextField>()
     const isFocused = shallowRef(props.focused)
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
@@ -227,6 +228,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 
