@@ -1,32 +1,33 @@
 <template>
   <v-menu v-model="menu" :close-on-content-click="false">
     <template #activator="{ props: menuProps }">
-      <v-input
-        v-model="selectedId"
-        :rules="rules"
-        v-bind="menuProps"
-      >
-        <v-field
-          :label="'Employee'"
-          variant="outlined"
-          :dirty="!!selectedId"
-          :active="menu || !!selectedId"
-          append-inner-icon="mdi-menu-down"
-          @click:control="menu = !menu"
+      <div v-bind="menuProps">
+        <v-input
+          v-model="selectedId"
+          :rules="rules"
         >
-          <template #default="{ props: fieldProps, isFocused, focus, blur }">
-            <div
-              v-bind="fieldProps"
-              tabindex="0"
-              @focus="focus"
-              @blur="blur"
-            >
-              {{ displayName || (isFocused ? '' : '') }}
-              <span v-if="!displayName" class="text-medium-emphasis">Select an employee</span>
-            </div>
-          </template>
-        </v-field>
-      </v-input>
+          <v-field
+            label="Employee"
+            variant="outlined"
+            :dirty="!!selectedId"
+            :active="menu || !!selectedId"
+            append-inner-icon="mdi-menu-down"
+          >
+            <template #default="{ props: fieldProps, focus, blur }">
+              <div
+                v-bind="fieldProps"
+                tabindex="0"
+                role="button"
+                @focus="focus"
+                @blur="blur"
+              >
+                <template v-if="displayName">{{ displayName }}</template>
+                <span v-else class="text-medium-emphasis">Select an employee</span>
+              </div>
+            </template>
+          </v-field>
+        </v-input>
+      </div>
     </template>
 
     <v-list>
