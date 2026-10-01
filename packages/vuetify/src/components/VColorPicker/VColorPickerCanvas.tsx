@@ -84,8 +84,9 @@ export const VColorPickerCanvas = defineComponent({
       }
     })
 
-    const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.el?.offsetParent) return
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
+      if (!el.value?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 
@@ -181,7 +182,7 @@ export const VColorPickerCanvas = defineComponent({
 
     useRender(() => (
       <div
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-color-picker-canvas',
           props.class,

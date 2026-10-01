@@ -51,7 +51,8 @@ export const VFab = genericComponent()({
     const height = shallowRef(56)
     const layoutItemStyles = ref()
 
-    const { resizeRef } = useResizeObserver(entries => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
       if (!entries.length) return
       height.value = entries[0].target.clientHeight
     })
@@ -124,7 +125,7 @@ export const VFab = genericComponent()({
             >
               <VBtn
                 v-show={ props.active }
-                ref={ resizeRef }
+                ref={ el }
                 { ...btnProps }
                 active={ undefined }
                 location={ undefined }

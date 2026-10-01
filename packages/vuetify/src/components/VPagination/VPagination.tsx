@@ -156,7 +156,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults(undefined, { scoped: true })
 
-    const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]
@@ -333,7 +334,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-pagination',
           themeClasses.value,

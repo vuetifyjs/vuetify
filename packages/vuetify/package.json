@@ -166,7 +166,6 @@
     "@testing-library/dom": "catalog:",
     "@testing-library/user-event": "catalog:",
     "@testing-library/vue": "catalog:",
-    "@types/resize-observer-browser": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
