@@ -1,5 +1,5 @@
 // Composables
-import { useColor } from '@/composables/color'
+import { useBackgroundColor, useColor } from '@/composables/color'
 
 // Utilities
 import { toRef, toValue } from 'vue'
@@ -22,6 +22,7 @@ export type Variant = typeof allowedVariants[number]
 export interface VariantProps {
   color?: string
   variant: Variant
+  bgColor?: string
 }
 
 export function genOverlays (isClickable: boolean, name: string) {
@@ -41,23 +42,26 @@ export const makeVariantProps = propsFactory({
     default: 'elevated',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  bgColor: String,
 }, 'variant')
 
 export function useVariant (
   props: MaybeRefOrGetter<VariantProps>,
   name = getCurrentInstanceName(),
 ) {
+  const {variant, color, bgColor} = toValue(props)
+
   const variantClasses = toRef(() => {
-    const { variant } = toValue(props)
     return `${name}--variant-${variant}`
   })
 
   const { colorClasses, colorStyles } = useColor(() => {
-    const { variant, color } = toValue(props)
     return {
-      [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
+      [['elevated'].includes(variant) ? 'background' : 'text']: color,
     }
   })
 
-  return { colorClasses, colorStyles, variantClasses }
+  const {backgroundColorClasses, backgroundColorStyles} = useBackgroundColor(bgColor)
+
+  return { colorClasses, colorStyles, backgroundColorClasses, backgroundColorStyles, variantClasses }
 }
