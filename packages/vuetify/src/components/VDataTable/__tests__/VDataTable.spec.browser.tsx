@@ -256,6 +256,25 @@ describe('VDataTable', () => {
     expect(screen.getByCSS('tbody tr:first-child td:nth-child(2)')).toBe(cell)
   })
 
+  it('should pass selection state to rowProps', async () => {
+    render(() => (
+      <VDataTable
+        headers={ DESSERT_HEADERS }
+        items={ DESSERT_ITEMS }
+        showSelect
+        rowProps={ ({ isSelected, internalItem }) => ({
+          class: isSelected([internalItem]) ? 'selected-row' : undefined,
+        })}
+      />
+    ))
+
+    expect(screen.getAllByCSS('tbody tr')[0].classList.contains('selected-row')).toBe(false)
+
+    await userEvent.click(screen.getAllByCSS('tbody tr .v-checkbox-btn')[0])
+
+    expect(screen.getAllByCSS('tbody tr')[0].classList.contains('selected-row')).toBe(true)
+  })
+
   it('with body.append should show correct item count after group is expanded', async () => {
     render(() => (
       <VDataTable

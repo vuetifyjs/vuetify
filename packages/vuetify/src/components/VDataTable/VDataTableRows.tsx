@@ -185,6 +185,10 @@ export const VDataTableRows = genericComponent<new <T>(
                     item: slotProps.item,
                     index: slotProps.index,
                     internalItem: slotProps.internalItem,
+                    isExpanded: slotProps.isExpanded,
+                    toggleExpand: slotProps.toggleExpand,
+                    isSelected: slotProps.isSelected,
+                    toggleSelect: slotProps.toggleSelect,
                   })
                   : props.rowProps,
               ),
