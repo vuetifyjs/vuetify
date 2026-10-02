@@ -52,12 +52,14 @@ export type VSelectionControlSlots = {
     backgroundColorStyles: Ref<CSSProperties>
   }
   label: { label: string | undefined, props: Record<string, unknown> }
+  description: { description: string | undefined }
   input: SelectionControlSlot
 }
 
 export const makeVSelectionControlProps = propsFactory({
   indeterminate: Boolean,
   label: String,
+  description: String,
   baseColor: String,
   trueValue: null,
   falseValue: null,
@@ -318,10 +320,23 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } onClick={ onClickLabel }>
-              { label }
-            </VLabel>
+          { (label || props.description || slots.description) && (
+            <div class="v-selection-control__label-wrapper">
+              { label && (
+                <VLabel key={ id.value } for={ id.value } onClick={ onClickLabel }>
+                  { label }
+                </VLabel>
+              )}
+
+              { (props.description || slots.description) && (
+                <div class="v-selection-control__description">
+                  { slots.description
+                    ? slots.description({ description: props.description })
+                    : props.description
+                  }
+                </div>
+              )}
+            </div>
           )}
         </div>
       )
