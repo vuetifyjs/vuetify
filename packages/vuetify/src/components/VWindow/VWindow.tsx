@@ -213,7 +213,7 @@ export const VWindow = genericComponent<new <T>(
     let wheelTimeout = -1
 
     function onWheel (e: WheelEvent) {
-      if (!props.wheel || props.disabled) return
+      if (!props.wheel || props.disabled || group.items.value.length < 2) return
 
       const delta = props.direction === 'vertical'
         ? (e.shiftKey ? 0 : e.deltaY)
