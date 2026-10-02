@@ -118,6 +118,18 @@ export const VWindow = genericComponent<new <T>(
     const { t } = useLocale()
 
     const group = useGroup(props, VWindowGroupSymbol)
+    const { prev: groupPrev, next: groupNext } = group
+
+    let stepDirection = 0
+
+    function step (move: () => void, direction: number) {
+      stepDirection = direction
+      move()
+      setTimeout(() => { stepDirection = 0 }, 100)
+    }
+
+    group.prev = () => step(groupPrev, -1)
+    group.next = () => step(groupNext, 1)
 
     const rootRef = ref()
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
@@ -152,18 +164,7 @@ export const VWindow = genericComponent<new <T>(
         savedScrollPosition.top = scrollableParent?.scrollTop
       }
 
-      const itemsLength = group.items.value.length
-      const lastIndex = itemsLength - 1
-
-      if (itemsLength <= 2) {
-        isReversed.value = newVal < oldVal
-      } else if (newVal === lastIndex && oldVal === 0) {
-        isReversed.value = false
-      } else if (newVal === 0 && oldVal === lastIndex) {
-        isReversed.value = true
-      } else {
-        isReversed.value = newVal < oldVal
-      }
+      isReversed.value = stepDirection ? stepDirection < 0 : newVal < oldVal
 
       nextTick(() => {
         if (!IN_BROWSER || !scrollableParent) return
