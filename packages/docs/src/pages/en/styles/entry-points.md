@@ -45,6 +45,10 @@ Includes the Material Design color palette utility classes (e.g., `text-red`, `b
 
 Contains helper classes for layout and spacing (e.g., `d-flex`, `mt-4`, `pa-2`).
 
+#### `vuetify/styles/layers`
+
+Only the `@layer` order declaration, no rules. Already included in `vuetify/styles/core`. Load it before any other stylesheet when you define a [custom layer order](/styles/layers/#custom-layer-order). It is helpful when project developers decide to stick with default layers and add all customization on top.
+
 **Example of modular import:**
 
 ```js { resource="src/plugins/vuetify.js" }

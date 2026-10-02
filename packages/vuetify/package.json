@@ -73,6 +73,11 @@
       "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/colors.css"
     },
+    "./styles/layers": {
+      "sass": "./lib/styles/layers.scss",
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/layers.css"
+    },
     "./styles/utilities": {
       "sass": "./lib/styles/utilities.scss",
       "types": "./lib/styles/styles.d.ts",
