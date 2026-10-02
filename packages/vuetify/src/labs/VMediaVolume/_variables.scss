@@ -1,0 +1,25 @@
+@use '../../styles/settings';
+
+$media-volume-expand-width: 80px !default;
+$media-volume-expand-duration: .2s !default;
+$media-volume-expand-easing: settings.$standard-easing !default;
+
+$media-volume-menu-elevation: 1 !default;
+$media-volume-menu-border-radius: settings.$border-radius-root !default;
+$media-volume-horizontal-margin: 0 16px !default;
+$media-volume-horizontal-menu-width: 100px !default;
+$media-volume-horizontal-menu-height: 40px !default;
+$media-volume-vertical-margin: 16px 0 !default;
+$media-volume-vertical-menu-width: 40px !default;
+$media-volume-vertical-menu-height: 100px !default;
+
+$media-volume-menu-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$media-volume-menu-border-style: solid !default;
+$media-volume-menu-border-width: thin !default;
+$media-volume-menu-border-thin-width: thin !default;
+$media-volume-menu-border: (
+  $media-volume-menu-border-color,
+  $media-volume-menu-border-style,
+  $media-volume-menu-border-width,
+  $media-volume-menu-border-thin-width
+) !default;

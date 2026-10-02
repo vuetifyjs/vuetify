@@ -1,0 +1,22 @@
+@use '../../styles/settings';
+
+$audio-min-width: 200px !default;
+$audio-gap: 8px !default;
+$audio-loader-delay: 200ms !default;
+
+$audio-controls-progress-gap: 8px !default;
+$audio-controls-actions-gap: 0 !default;
+$audio-controls-volume-gap: 2px !default;
+
+$audio-time-font-size: .875rem !default;
+$audio-time-stacked-font-size: .75rem !default;
+$audio-time-line-height: 1 !default;
+$audio-time-letter-spacing: .02em !default;
+$audio-time-min-width: 5ch !default;
+$audio-volume-width: 112px !default;
+
+$audio-waveform-min-width: 80px !default;
+$audio-waveform-track-opacity: .3 !default;
+$audio-waveform-buffer-opacity: .15 !default;
+$audio-waveform-mirror-opacity: .4 !default;
+$audio-waveform-live-mask: linear-gradient(to right, transparent, #000 40%) !default;

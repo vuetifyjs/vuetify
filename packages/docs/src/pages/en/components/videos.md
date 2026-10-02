@@ -44,7 +44,7 @@ A basic example of the video component.
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
 | [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
-| [v-video-volume](/api/v-video-volume/) | Sub-component used to display a volume control |
+| [v-media-volume](/api/v-media-volume/) | Volume control, shared with `v-audio` |
 
 <ApiInline hide-links />
 
