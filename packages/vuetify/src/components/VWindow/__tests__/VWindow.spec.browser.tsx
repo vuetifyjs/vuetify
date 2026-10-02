@@ -344,6 +344,29 @@ describe('VWindow', () => {
     expect(model.value).toBe(2)
   })
 
+  it('should move only the innermost window', async () => {
+    const outer = ref(1)
+    const inner = ref(1)
+
+    render(() => (
+      <VWindow v-model={ outer.value } wheel>
+        <VWindowItem value={ 1 }>
+          <VWindow v-model={ inner.value } class="inner" wheel>
+            <VWindowItem value={ 1 }><h1>1</h1></VWindowItem>
+            <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
+          </VWindow>
+        </VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    wheel(screen.getByCSS('.inner'), { deltaX: 100 })
+    await commands.waitStable('.v-window')
+    expect(inner.value).toBe(2)
+    expect(outer.value).toBe(1)
+  })
+
   it('should leave wheel input to a nested scroller until it reaches the end', async () => {
     const model = ref(1)
 

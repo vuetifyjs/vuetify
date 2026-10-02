@@ -240,7 +240,12 @@ export const VWindow = genericComponent<new <T>(
     }
 
     function onWheel (e: WheelEvent) {
-      if (!props.wheel || props.disabled || group.items.value.length < 2) return
+      if (
+        !props.wheel ||
+        props.disabled ||
+        e.defaultPrevented ||
+        group.items.value.length < 2
+      ) return
 
       const isVertical = props.direction === 'vertical'
       const scrollDelta = isVertical
