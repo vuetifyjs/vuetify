@@ -228,6 +228,8 @@ minimumReleaseAgeExclude:
   - playwright-core
   - vitest@4.1.11
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: markdown-it@14.3.1
+  - markdown-it@14.3.1
 
 nodeLinker: hoisted
 
