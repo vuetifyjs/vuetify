@@ -37,6 +37,7 @@ type WindowProvide = {
   transition: ComputedRef<undefined | string>
   transitionCount: Ref<number>
   transitionHeight: Ref<undefined | string>
+  transitionDuration: Readonly<Ref<undefined | string>>
   isReversed: Ref<boolean>
   rootRef: Ref<HTMLElement | undefined>
 }
@@ -192,6 +193,7 @@ export const VWindow = genericComponent<new <T>(
       isReversed,
       transitionCount,
       transitionHeight,
+      transitionDuration: toRef(() => PREFERS_REDUCED_MOTION() ? undefined : convertToUnit(props.transitionDuration, 'ms')),
       rootRef,
     })
 
@@ -305,14 +307,7 @@ export const VWindow = genericComponent<new <T>(
           themeClasses.value,
           props.class,
         ]}
-        style={[
-          props.style,
-          {
-            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
-              ? convertToUnit(props.transitionDuration, 'ms')
-              : null,
-          },
-        ]}
+        style={ props.style }
         v-touch={ touchOptions.value }
       >
         <div

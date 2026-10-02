@@ -135,7 +135,7 @@ export const VWindowItem = genericComponent()({
             groupItem.selectedClass.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[{ transitionDuration: window.transitionDuration.value }, props.style]}
           v-show={ groupItem.isSelected.value }
         >
           { hasContent.value && slots.default?.() }
