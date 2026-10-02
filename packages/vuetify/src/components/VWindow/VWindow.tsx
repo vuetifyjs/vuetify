@@ -262,8 +262,10 @@ export const VWindow = genericComponent<new <T>(
     })
 
     function onKeyDown (e: KeyboardEvent) {
+      const [backKey, forwardKey] = isRtl.value ? ['ArrowRight', 'ArrowLeft'] : ['ArrowLeft', 'ArrowRight']
+
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'horizontal' && e.key === backKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowUp')
       ) {
         e.preventDefault()
@@ -272,7 +274,7 @@ export const VWindow = genericComponent<new <T>(
       }
 
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'horizontal' && e.key === forwardKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowDown')
       ) {
         e.preventDefault()
