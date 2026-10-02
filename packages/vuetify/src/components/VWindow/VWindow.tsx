@@ -37,6 +37,7 @@ type WindowProvide = {
   transition: ComputedRef<undefined | string>
   transitionCount: Ref<number>
   transitionHeight: Ref<undefined | string>
+  transitionDuration: Readonly<Ref<undefined | string>>
   isReversed: Ref<boolean>
   rootRef: Ref<HTMLElement | undefined>
 }
@@ -140,7 +141,8 @@ export const VWindow = genericComponent<new <T>(
       }
 
       const axis = props.direction === 'vertical' ? 'y' : 'x'
-      const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
+      const isAxisReversed = props.direction === 'vertical' ? props.reverse : isRtlReverse.value
+      const reverse = isAxisReversed ? !isReversed.value : isReversed.value
       const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
@@ -192,6 +194,7 @@ export const VWindow = genericComponent<new <T>(
       isReversed,
       transitionCount,
       transitionHeight,
+      transitionDuration: toRef(() => PREFERS_REDUCED_MOTION() ? undefined : convertToUnit(props.transitionDuration, 'ms')),
       rootRef,
     })
 
@@ -210,7 +213,7 @@ export const VWindow = genericComponent<new <T>(
       const arrows = []
 
       const prevProps = {
-        icon: isRtl.value ? props.nextIcon : props.prevIcon,
+        icon: isRtl.value && !props.verticalArrows ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
         'aria-label': t('$vuetify.carousel.prev'),
@@ -224,7 +227,7 @@ export const VWindow = genericComponent<new <T>(
       )
 
       const nextProps = {
-        icon: isRtl.value ? props.prevIcon : props.nextIcon,
+        icon: isRtl.value && !props.verticalArrows ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
         'aria-label': t('$vuetify.carousel.next'),
@@ -262,8 +265,10 @@ export const VWindow = genericComponent<new <T>(
     })
 
     function onKeyDown (e: KeyboardEvent) {
+      const [backKey, forwardKey] = isRtl.value ? ['ArrowRight', 'ArrowLeft'] : ['ArrowLeft', 'ArrowRight']
+
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'horizontal' && e.key === backKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowUp')
       ) {
         e.preventDefault()
@@ -272,7 +277,7 @@ export const VWindow = genericComponent<new <T>(
       }
 
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'horizontal' && e.key === forwardKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowDown')
       ) {
         e.preventDefault()
@@ -303,14 +308,7 @@ export const VWindow = genericComponent<new <T>(
           themeClasses.value,
           props.class,
         ]}
-        style={[
-          props.style,
-          {
-            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
-              ? convertToUnit(props.transitionDuration, 'ms')
-              : null,
-          },
-        ]}
+        style={ props.style }
         v-touch={ touchOptions.value }
       >
         <div

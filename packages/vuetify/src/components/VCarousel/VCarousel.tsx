@@ -10,7 +10,7 @@ import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 // Composables
 import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -80,6 +80,7 @@ export const VCarousel = genericComponent<new <T>(
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
+    const { isRtl } = useRtl()
     const windowRef = ref<VWindow>()
     const delimiterDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
 
@@ -108,8 +109,10 @@ export const VCarousel = genericComponent<new <T>(
     }
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
+      const [backKey, forwardKey] = isRtl.value ? ['ArrowRight', 'ArrowLeft'] : ['ArrowLeft', 'ArrowRight']
+
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'horizontal' && e.key === backKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowUp')
       ) {
         e.preventDefault()
@@ -118,7 +121,7 @@ export const VCarousel = genericComponent<new <T>(
       }
 
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'horizontal' && e.key === forwardKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowDown')
       ) {
         e.preventDefault()
