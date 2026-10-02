@@ -215,10 +215,11 @@ export const VWindow = genericComponent<new <T>(
     function onWheel (e: WheelEvent) {
       if (!props.wheel || props.disabled || group.items.value.length < 2) return
 
-      const delta = props.direction === 'vertical'
+      let delta = props.direction === 'vertical'
         ? (e.shiftKey ? 0 : e.deltaY)
         : e.deltaX || (e.shiftKey ? e.deltaY : 0)
       if (!delta) return
+      if (props.direction === 'horizontal' && isRtlReverse.value) delta = -delta
 
       const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
       const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
