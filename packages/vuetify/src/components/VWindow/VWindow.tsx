@@ -221,16 +221,16 @@ export const VWindow = genericComponent<new <T>(
       if (!delta) return
 
       const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
-      if (canMove) e.preventDefault()
+      const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
+      if (!canMove && !isLocked) return
 
-      const isWheelActive = wheelTimeout >= 0
-
+      e.preventDefault()
       window.clearTimeout(wheelTimeout)
       wheelTimeout = window.setTimeout(() => {
         wheelTimeout = -1
       }, 150)
 
-      if (!isWheelActive && canMove) {
+      if (!isLocked) {
         delta > 0 ? next() : prev()
       }
     }
