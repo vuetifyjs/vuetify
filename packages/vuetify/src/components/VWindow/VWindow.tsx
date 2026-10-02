@@ -211,27 +211,75 @@ export const VWindow = genericComponent<new <T>(
     }
 
     let wheelTimeout = -1
+    let nestedEl: HTMLElement | undefined
+    let wheelAt = 0
+    let isScrollLatchStale = false
 
-    function onWheel (e: WheelEvent) {
-      if (!props.wheel || props.disabled || group.items.value.length < 2) return
-
-      let delta = props.direction === 'vertical'
-        ? (e.shiftKey ? 0 : e.deltaY)
-        : e.deltaX || (e.shiftKey ? e.deltaY : 0)
-      if (!delta) return
-      if (props.direction === 'horizontal' && isRtlReverse.value) delta = -delta
-
-      const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
-      const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
-      if (!canMove && !isLocked) return
-
-      e.preventDefault()
+    function lockWheel () {
       window.clearTimeout(wheelTimeout)
       wheelTimeout = window.setTimeout(() => {
         wheelTimeout = -1
       }, 150)
+    }
+
+    function findNestedScroller (target: Element | null, isVertical: boolean, delta: number) {
+      if (!target || !rootRef.value?.contains(target)) return undefined
+
+      for (let el = target as HTMLElement | null; el && el !== rootRef.value; el = el.parentElement) {
+        const style = window.getComputedStyle(el)
+        const overflow = isVertical ? style.overflowY : style.overflowX
+        if (overflow !== 'auto' && overflow !== 'scroll') continue
+
+        const max = isVertical ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth
+        // RTL scrollLeft runs from 0 down to -max
+        const position = isVertical ? el.scrollTop : el.scrollLeft + (style.direction === 'rtl' ? max : 0)
+        if (delta > 0 ? position < max - 1 : position >= 1) return el
+      }
+
+      return undefined
+    }
+
+    function onWheel (e: WheelEvent) {
+      if (!props.wheel || props.disabled || group.items.value.length < 2) return
+
+      const isVertical = props.direction === 'vertical'
+      const scrollDelta = isVertical
+        ? (e.shiftKey ? 0 : e.deltaY)
+        : e.deltaX || (e.shiftKey ? e.deltaY : 0)
+      if (!scrollDelta) return
+
+      const now = performance.now()
+      const gap = now - wheelAt
+      if (gap > 500) isScrollLatchStale = false
+      wheelAt = now
+
+      // if mouse does not move continuous wheel events get stuck to an element that just left the screen
+      const isStale = !(e.target as Element).getClientRects().length
+      const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
+      if (!isLocked) {
+        const target = isStale ? document.elementFromPoint(e.clientX, e.clientY) : e.target as Element
+        nestedEl = findNestedScroller(target, isVertical, scrollDelta)
+      }
+
+      if (nestedEl) {
+        if (isStale || isScrollLatchStale) {
+          e.preventDefault()
+          const scale = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? (isVertical ? nestedEl.clientHeight : nestedEl.clientWidth) : 1
+          nestedEl.scrollBy({ [isVertical ? 'top' : 'left']: scrollDelta * scale })
+        }
+        lockWheel()
+        return
+      }
+
+      const delta = !isVertical && isRtlReverse.value ? -scrollDelta : scrollDelta
+      const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
+      if (!canMove && !isLocked) return
+
+      e.preventDefault()
+      lockWheel()
 
       if (!isLocked) {
+        isScrollLatchStale = true
         delta > 0 ? next() : prev()
       }
     }

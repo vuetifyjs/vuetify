@@ -3,7 +3,7 @@ import { VWindow } from '../VWindow'
 import { VWindowItem } from '../VWindowItem'
 
 // Utilities
-import { commands, page, render, screen, showcase, userEvent } from '@test'
+import { commands, page, render, screen, showcase, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
 const stories = {
@@ -423,6 +423,61 @@ describe('VWindow', () => {
     )).toBe(true)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(1)
+  })
+
+  it('should leave wheel input to a nested scroller until it reaches the end', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value={ 1 }>
+          <div class="scroller" style="overflow-x: auto">
+            <div style="width: 300vw; height: 50px" />
+          </div>
+        </VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    const scroller = screen.getByCSS('.scroller')
+
+    expect(scroller.dispatchEvent(new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true }))).toBe(true)
+    expect(model.value).toBe(1)
+
+    scroller.scrollLeft = scroller.scrollWidth
+    await wait(160)
+    expect(scroller.dispatchEvent(new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true }))).toBe(false)
+    expect(model.value).toBe(2)
+  })
+
+  it('should scroll the nested scroller under the pointer when the wheel target is stale', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value={ 1 }><h1 class="stale">1</h1></VWindowItem>
+        <VWindowItem value={ 2 }>
+          <div class="scroller" style="overflow-x: auto">
+            <div style="width: 300vw; height: 50px" />
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    model.value = 2
+    await commands.waitStable('.v-window')
+
+    const scroller = screen.getByCSS('.scroller')
+    const rect = scroller.getBoundingClientRect()
+    const stale = document.querySelector('.stale')!
+
+    expect(stale.dispatchEvent(
+      new WheelEvent('wheel', { deltaX: 100, clientX: rect.x + 10, clientY: rect.y + 10, bubbles: true, cancelable: true })
+    )).toBe(false)
+    expect(scroller.scrollLeft).toBeGreaterThan(0)
+    expect(model.value).toBe(2)
   })
 
   describe('keyboard controls', () => {
