@@ -66,7 +66,7 @@ export const makeVCommandPaletteProps = propsFactory({
     maxWidth: 500,
     origin: 'top center' as const,
     viewportMargin: 16,
-  }), ['modelValue']),
+  }), ['contextMenu', 'modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
