@@ -1,0 +1,41 @@
+{
+  "description": "Subcomponent for `v-audio` used to display the transport bar.",
+  "props": {
+    "playing": "Applies the correct icon to the default play button.",
+    "progress": "Controls the playback position (0 ~ 100).",
+    "duration": "Total duration of the audio, used to calculate the displayed time.",
+    "volume": "Volume value passed to the underlying control and slots.",
+    "playbackRate": "Current playback rate, synced with the media element. Use it with the `setPlaybackRate` slot prop to build a rate control.",
+    "hideTime": "Hides the time display.",
+    "timeDisplay": "Format of the `time` action. In the stacked layout only `remaining` applies, to the time on the right.",
+    "playIcon": "Icon used for the play action.",
+    "pauseIcon": "Icon used for the pause action.",
+    "volumeProps": "Props passed to the `v-media-volume` of the `volume` action, e.g. `expandOnHover`, `inline` side, icons or `sliderProps`. Inline by default.",
+    "color": "General color applied to icons and the seek bar.",
+    "actions": "Which built-in and custom actions to render, in order. Accepts an array or a comma/space separated string. Built-ins: `play`, `progress` (renders the seek bar inline and switches to a single row), `time`, `volume` and `-` (a spacer). Any other name renders the slot of the same name.",
+    "actionsClass": "Classes applied to the actions row.",
+    "progressClass": "Classes applied to the progress wrapper.",
+    "playProps": "Props passed to the default play button, e.g. `color`, `variant` or `size`.",
+    "seekable": "Allows seeking. When off the seek bar stays focusable but read-only."
+  },
+  "events": {
+    "update:playing": "Emitted when the playing state changes.",
+    "update:progress": "Emitted when the playback position changes.",
+    "update:volume": "Emitted when the volume value changes.",
+    "update:playbackRate": "Emitted when the playback rate changes.",
+    "scrubStart": "Emitted when the user starts dragging the seek bar.",
+    "scrubEnd": "Emitted when the user stops dragging the seek bar.",
+    "click:stop": "Emitted when the stop button is clicked."
+  },
+  "slots": {
+    "default": "Replaces the entire contents of the control bar.",
+    "prepend": "Additional content on the left within the control bar.",
+    "append": "Additional content on the right within the control bar.",
+    "time": "Replaces the time text. Receives the elapsed, remaining and total time already formatted.",
+    "progress": "Replaces the seek bar. Receives `props` to bind on `v-media-progress-bar` or `v-audio-waveform`.",
+    "play": "Replaces the play button. Receives `props` to bind on your own button."
+  },
+  "exposed": {
+    "toggleMuted": "Toggles the muted state of the audio."
+  }
+}
