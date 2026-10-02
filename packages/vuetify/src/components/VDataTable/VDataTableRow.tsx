@@ -94,6 +94,8 @@ export const VDataTableRow = genericComponent<new <T>(
           },
           displayClasses.value,
         ]}
+        data-selected={ (props.item && isSelected([props.item])) || undefined }
+        data-expanded={ (props.item && isExpanded(props.item)) || undefined }
         onClick={ props.onClick as any }
         onContextmenu={ props.onContextmenu as any }
         onDblclick={ props.onDblclick as any }
