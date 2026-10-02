@@ -248,6 +248,29 @@ describe('VWindow', () => {
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
   })
 
+  it('should animate wraps in the step direction and jumps in index order', async () => {
+    const model = ref(1)
+
+    render(() => (
+      <VWindow v-model={ model.value } continuous showArrows>
+        <VWindowItem value={ 1 }><h1>1</h1></VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
+        <VWindowItem value={ 3 }><h1>3</h1></VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    await userEvent.click(screen.getByCSS('.v-window__left'))
+    expect(model.value).toBe(3)
+    await expect.poll(() => document.querySelector('.v-window-x-reverse-transition-enter-active')).toBeTruthy()
+
+    await commands.waitStable('.v-window')
+    model.value = 1
+    await commands.waitStable('.v-window')
+    model.value = 3
+    await expect.poll(() => document.querySelector('.v-window-x-transition-enter-active')).toBeTruthy()
+  })
+
   describe('keyboard controls', () => {
     it('should support horizontal keyboard navigation', async () => {
       const model = ref(1)
