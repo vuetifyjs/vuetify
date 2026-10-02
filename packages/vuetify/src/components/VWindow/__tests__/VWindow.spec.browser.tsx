@@ -248,6 +248,85 @@ describe('VWindow', () => {
     expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
   })
 
+  it('should support wheel navigation when enabled', async () => {
+    const model = ref('one')
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel continuous>
+        <VWindowItem value="one">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value="two">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    expect(screen.getByCSS('.v-window-item--active h1')).toHaveTextContent('1. foo')
+
+    const windowEl = screen.getByCSS('.v-window')
+    windowEl.dispatchEvent(new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true }))
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe('two')
+
+    windowEl.dispatchEvent(new WheelEvent('wheel', { deltaY: -100, bubbles: true, cancelable: true }))
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe('one')
+  })
+
+  it('should ignore wheel navigation by default', async () => {
+    const model = ref('one')
+
+    render(() => (
+      <VWindow v-model={ model.value } continuous>
+        <VWindowItem value="one">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value="two">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    screen.getByCSS('.v-window').dispatchEvent(new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true }))
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe('one')
+  })
+
+  it('should respect continuous at the edges for wheel navigation', async () => {
+    const model = ref('two')
+
+    render(() => (
+      <VWindow v-model={ model.value } wheel>
+        <VWindowItem value="one">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>1. foo</h1>
+          </div>
+        </VWindowItem>
+        <VWindowItem value="two">
+          <div class="bg-grey d-flex justify-center align-center">
+            <h1>2. bar</h1>
+          </div>
+        </VWindowItem>
+      </VWindow>
+    ))
+
+    await commands.waitStable('.v-window')
+    screen.getByCSS('.v-window').dispatchEvent(new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true }))
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe('two')
+  })
+
   describe('keyboard controls', () => {
     it('should support horizontal keyboard navigation', async () => {
       const model = ref(1)

@@ -10,7 +10,8 @@
     "showArrows": "Display the \"next\" and \"prev\" buttons.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
-    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally."
+    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally.",
+    "wheel": "Enables mouse wheel and trackpad navigation between items. Disabled by default to avoid hijacking page scroll; only responds to the dominant scroll axis for the window `direction` and respects `continuous` at the first/last item."
   },
   "slots": {
     "next": "Slot displaying the arrow switching to the next item.",

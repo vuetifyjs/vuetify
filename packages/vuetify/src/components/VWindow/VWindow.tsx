@@ -71,6 +71,7 @@ export const makeVWindowProps = propsFactory({
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
   },
+  wheel: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -280,6 +281,23 @@ export const VWindow = genericComponent<new <T>(
       }
     }
 
+    function onWheel (e: WheelEvent) {
+      if (!props.wheel || props.disabled || transitionCount.value > 0) return
+
+      const delta = props.direction === 'vertical'
+        ? (e.deltaY || e.deltaX)
+        : (e.deltaX || e.deltaY)
+      if (!delta) return
+      if ((delta > 0 && !canMoveForward.value) || (delta < 0 && !canMoveBack.value)) return
+
+      e.preventDefault()
+      if (props.direction === 'horizontal' ? isRtlReverse.value : false) {
+        delta > 0 ? prev() : next()
+      } else {
+        delta > 0 ? next() : prev()
+      }
+    }
+
     function focusArrow (index: number) {
       const arrow = arrows.value[index]
 
@@ -311,6 +329,7 @@ export const VWindow = genericComponent<new <T>(
           },
         ]}
         v-touch={ touchOptions.value }
+        onWheel={ onWheel }
       >
         <div
           class="v-window__container"
