@@ -81,17 +81,10 @@
         padding: $video-time-pill-padding
 
     &--variant-tube
-      .v-slider.v-video__track
+      .v-video__track
         position: absolute
         top: $video-tube-track-top
-        left: 0
-        right: 0
-
-        .v-slider-track
-          height: calc(var(--v-slider-track-size) + #{$video-tube-track-hover-offset})
-
-        .v-slider-track__fill
-          height: var(--v-slider-track-size)
+        inset-inline: 0
 
     &--split-time
       padding-inline: $video-controls-split-time-padding-inline
@@ -133,14 +126,6 @@
   .v-video__track
     position: relative
     z-index: 1
-
-    &.v-slider.v-input--horizontal > .v-input__control
-      min-height: 4px
-
-    .v-slider-thumb:not(:hover)
-      .v-slider-thumb__label
-        opacity: 0
-        transition-delay: .2s
 
   .v-video__time
     font-size: $video-time-font-size

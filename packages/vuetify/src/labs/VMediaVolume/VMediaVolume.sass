@@ -1,0 +1,62 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-media-volume
+    &--inline
+      display: flex
+      align-items: center
+
+    &__expand
+      display: grid
+      grid-template-columns: 0fr
+      transition-property: grid-template-columns
+      transition-duration: $media-volume-expand-duration
+      transition-timing-function: $media-volume-expand-easing
+
+      > div
+        min-width: 0
+        overflow-x: clip
+
+      .v-slider
+        width: $media-volume-expand-width
+
+      @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    &--expand-on-hover:hover,
+    &--expand-on-hover:focus-within
+      .v-media-volume__expand
+        grid-template-columns: 1fr
+
+    &__menu
+      background: rgb(var(--v-theme-surface))
+      color: rgb(var(--v-theme-on-surface))
+      overflow: hidden
+      display: flex
+      align-items: center
+      justify-content: center
+
+      @include tools.border($media-volume-menu-border...)
+      @include tools.elevation($media-volume-menu-elevation)
+      @include tools.rounded($media-volume-menu-border-radius)
+
+      &:has(.v-input--horizontal)
+        height: $media-volume-horizontal-menu-height
+
+      &:has(.v-input--vertical)
+        width: $media-volume-vertical-menu-width
+
+      .v-slider.v-input--horizontal
+        margin: $media-volume-horizontal-margin
+        width: $media-volume-horizontal-menu-width
+        height: $media-volume-horizontal-menu-height
+
+      .v-slider.v-input--vertical
+        margin: $media-volume-vertical-margin
+        height: $media-volume-vertical-menu-height
+        width: $media-volume-vertical-menu-width
+
+        > .v-input__control
+          // just smaller than 300px default
+          min-height: 50px

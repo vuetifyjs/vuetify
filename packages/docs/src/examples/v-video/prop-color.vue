@@ -42,7 +42,7 @@
     </div>
 
     <v-video
-      :background-color="colors.background"
+      :bg-color="colors.background"
       :color="colors.color"
       :controls-variant="controlsVariant"
       :detached="features.includes('detached')"

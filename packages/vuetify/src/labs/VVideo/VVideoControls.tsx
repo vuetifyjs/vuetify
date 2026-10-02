@@ -4,11 +4,11 @@
 import './VVideoControls.sass'
 
 // Components
-import { VVideoVolume } from './VVideoVolume'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider/VDefaultsProvider'
 import { VSpacer } from '@/components/VGrid/VSpacer'
 import { VIconBtn } from '@/components/VIconBtn/VIconBtn'
-import { VSlider } from '@/components/VSlider/VSlider'
+import { makeVMediaProgressBarProps, VMediaProgressBar } from '@/labs/VMediaProgressBar/VMediaProgressBar'
+import { VMediaVolume } from '@/labs/VMediaVolume/VMediaVolume'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
@@ -17,21 +17,24 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { resolveSeekTarget, useMute } from '@/labs/composables/media'
 
 // Directives
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
-import { formatTime, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, toRef } from 'vue'
+import { clamp, formatTime, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MediaSeekTarget } from '@/labs/composables/media'
+import type { VMediaVolumeOptions } from '@/labs/VMediaVolume/VMediaVolume'
 
 export type VVideoControlsActionsSlot = {
   play: () => void
   pause: () => void
-  skipTo: (v: number) => void
+  seek: (target: MediaSeekTarget) => void
   volume: Ref<number>
   playing: boolean
   progress: number
@@ -52,7 +55,7 @@ export type VVideoControlsVariant = typeof allowedVariants[number]
 
 export const makeVVideoControlsProps = propsFactory({
   color: String,
-  backgroundColor: String,
+  bgColor: String,
   trackColor: String,
   playing: Boolean,
   hidePlay: Boolean,
@@ -72,14 +75,18 @@ export const makeVVideoControlsProps = propsFactory({
     type: Number,
     default: 0,
   },
-  volume: [Number, String],
+  volume: {
+    type: [Number, String],
+    default: 100,
+  },
   variant: {
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  volumeProps: Object as PropType<Pick<VVideoVolume['$props'], 'direction' | 'inline' | 'sliderProps' | 'menuProps'>>,
+  volumeProps: Object as PropType<VMediaVolumeOptions>,
 
+  ...pick(makeVMediaProgressBarProps(), ['buffer']),
   ...makeDensityProps(),
   ...makeElevationProps(),
   ...makeThemeProps(),
@@ -96,7 +103,6 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     'update:playing': (val: boolean) => true,
     'update:progress': (val: number) => true,
     'update:volume': (val: number) => true,
-    skip: (val: number) => true,
     'click:fullscreen': () => true,
   },
 
@@ -108,7 +114,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
       const fallbackBackground = props.detached ? 'surface' : undefined
-      return props.backgroundColor ?? fallbackBackground
+      return props.bgColor ?? fallbackBackground
     })
 
     const trackColor = toRef(() => {
@@ -117,13 +123,13 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       }
 
       const fallback = currentTheme.value.dark || !props.pills ? undefined : 'surface'
-      return (props.pills ? props.backgroundColor : props.color) ?? fallback
+      return (props.pills ? props.bgColor : props.color) ?? fallback
     })
 
     const playing = useProxiedModel(props, 'playing')
     const progress = useProxiedModel(props, 'progress')
-    const volume = useProxiedModel(props, 'volume', 0, (v?: number | string) => Number(v ?? 0))
-    const lastVolume = shallowRef<number>()
+    const volume = useProxiedModel(props, 'volume', 100, (v?: number | string) => Number(v ?? 100))
+    const { toggleMuted } = useMute(volume)
 
     const currentTime = computed(() => {
       const secondsElapsed = Math.round(props.progress / 100 * props.duration)
@@ -136,7 +142,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     const labels = computed(() => {
       const playIconLocaleKey = playing.value ? 'pause' : 'play'
-      const volumeIconLocaleKey = props.volumeProps?.inline ? (volume.value ? 'mute' : 'unmute') : 'showVolume'
+      const volumeIconLocaleKey = volume.value ? 'mute' : 'unmute'
       const fullscreenIconLocaleKey = props.fullscreen ? 'exitFullscreen' : 'enterFullscreen'
       return {
         seek: t('$vuetify.media.seek'),
@@ -155,17 +161,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       playing.value = false
     }
 
-    function skipTo (v: number) {
-      progress.value = v
-    }
+    function seek (target: MediaSeekTarget) {
+      if (!props.duration) return
 
-    function toggleMuted () {
-      if (volume.value) {
-        lastVolume.value = volume.value
-        volume.value = 0
-      } else {
-        volume.value = lastVolume.value ?? 100
-      }
+      const seconds = resolveSeekTarget(target, props.progress / 100 * props.duration, props.duration)
+      if (Number.isFinite(seconds)) progress.value = clamp(seconds / props.duration * 100, 0, 100)
     }
 
     function toggleFullscreen () {
@@ -211,7 +211,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         playing: playing.value,
         progress: progress.value,
         currentTime: currentTime.value,
-        skipTo,
+        seek,
         volume,
         toggleMuted,
         fullscreen: props.fullscreen,
@@ -289,20 +289,17 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     { props.hideProgressBar
                       ? <VSpacer />
                       : (
-                          <VSlider
-                            modelValue={ props.progress }
-                            noKeyboard
-                            color={ trackColor.value ?? 'surface-variant' }
-                            trackColor={ props.variant === 'tube' ? 'white' : undefined }
+                          <VMediaProgressBar
                             class="v-video__track"
-                            thumbLabel="always"
-                            aria-label={ labels.value.seek }
-                            onUpdate:modelValue={ skipTo }
-                          >
-                            {{
-                              'thumb-label': () => currentTime.value.elapsed,
-                            }}
-                          </VSlider>
+                            modelValue={ props.progress / 100 * props.duration }
+                            max={ props.duration }
+                            buffer={ props.buffer }
+                            color={ trackColor.value ?? 'surface-variant' }
+                            bgColor={ props.variant === 'tube' ? 'white' : undefined }
+                            step={ 10 }
+                            thumb
+                            onUpdate:modelValue={ (seconds: number) => seek({ to: seconds }) }
+                          />
                       )
                     }
                     { props.variant === 'tube' && <VSpacer /> }
@@ -352,13 +349,12 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                     style={ pillStyles }
                   >
                     { !props.hideVolume && (
-                      <VVideoVolume
+                      <VMediaVolume
                         key="volume-control"
                         sliderProps={{ color: props.color }}
                         modelValue={ volume.value }
                         label={ labels.value.volumeAction }
                         onUpdate:modelValue={ v => volume.value = v }
-                        onClick={ () => props.volumeProps?.inline && toggleMuted() }
                         { ...props.volumeProps }
                       />
                     )}
