@@ -6,6 +6,12 @@ import { VWindowItem } from '../VWindowItem'
 import { commands, page, render, screen, showcase, userEvent, wait } from '@test'
 import { ref } from 'vue'
 
+function wheel (element: Element, options: WheelEventInit) {
+  const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, ...options })
+  element.dispatchEvent(event)
+  return event
+}
+
 const stories = {
   'Without arrows': (
     <VWindow>
@@ -271,158 +277,71 @@ describe('VWindow', () => {
     await expect.poll(() => document.querySelector('.v-window-x-transition-enter-active')).toBeTruthy()
   })
 
-  it('should support opt-in mouse wheel navigation', async () => {
+  it('should navigate once per wheel gesture', async () => {
     const model = ref(1)
 
     render(() => (
       <VWindow v-model={ model.value } wheel>
-        <VWindowItem value={ 1 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>1. foo</h1>
-          </div>
-        </VWindowItem>
-        <VWindowItem value={ 2 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>2. bar</h1>
-          </div>
-        </VWindowItem>
+        <VWindowItem value={ 1 }><h1>1</h1></VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
       </VWindow>
     ))
 
     await commands.waitStable('.v-window')
     const windowEl = screen.getByCSS('.v-window')
 
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
-    )).toBe(false)
+    expect(wheel(windowEl, { deltaX: 100 }).defaultPrevented).toBe(true)
+    expect(wheel(windowEl, { deltaX: -100 }).defaultPrevented).toBe(true)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(2)
 
-    windowEl.dispatchEvent(new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true }))
-    await commands.waitStable('.v-window')
-    expect(model.value).toBe(2)
-
-    await new Promise(resolve => setTimeout(resolve, 160))
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: -100, bubbles: true, cancelable: true })
-    )).toBe(false)
+    await wait(160)
+    wheel(windowEl, { deltaX: -100 })
     await commands.waitStable('.v-window')
     expect(model.value).toBe(1)
   })
 
-  it('should not navigate with mouse wheel by default', async () => {
-    const model = ref(1)
-
-    render(() => (
-      <VWindow v-model={ model.value }>
-        <VWindowItem value={ 1 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>1. foo</h1>
-          </div>
-        </VWindowItem>
-        <VWindowItem value={ 2 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>2. bar</h1>
-          </div>
-        </VWindowItem>
-      </VWindow>
-    ))
-
-    await commands.waitStable('.v-window')
-    const windowEl = screen.getByCSS('.v-window')
-
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
-    )).toBe(true)
-    await commands.waitStable('.v-window')
-    expect(model.value).toBe(1)
-  })
-
-  it('should ignore vertical wheel input on horizontal windows', async () => {
+  it('should only use horizontal or shift wheel input on horizontal windows', async () => {
     const model = ref(1)
 
     render(() => (
       <VWindow v-model={ model.value } wheel>
-        <VWindowItem value={ 1 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>1. foo</h1>
-          </div>
-        </VWindowItem>
-        <VWindowItem value={ 2 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>2. bar</h1>
-          </div>
-        </VWindowItem>
+        <VWindowItem value={ 1 }><h1>1</h1></VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
       </VWindow>
     ))
 
     await commands.waitStable('.v-window')
     const windowEl = screen.getByCSS('.v-window')
 
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaY: 100, bubbles: true, cancelable: true })
-    )).toBe(true)
-    await commands.waitStable('.v-window')
+    expect(wheel(windowEl, { deltaY: 100 }).defaultPrevented).toBe(false)
     expect(model.value).toBe(1)
-  })
 
-  it('should support shift wheel input on horizontal windows', async () => {
-    const model = ref(1)
-
-    render(() => (
-      <VWindow v-model={ model.value } wheel>
-        <VWindowItem value={ 1 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>1. foo</h1>
-          </div>
-        </VWindowItem>
-        <VWindowItem value={ 2 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>2. bar</h1>
-          </div>
-        </VWindowItem>
-      </VWindow>
-    ))
-
-    await commands.waitStable('.v-window')
-    const windowEl = screen.getByCSS('.v-window')
-
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaY: 100, shiftKey: true, bubbles: true, cancelable: true })
-    )).toBe(false)
+    expect(wheel(windowEl, { deltaY: 100, shiftKey: true }).defaultPrevented).toBe(true)
     await commands.waitStable('.v-window')
     expect(model.value).toBe(2)
   })
 
-  it('should ignore horizontal and shift wheel input on vertical windows', async () => {
+  it('should only use vertical wheel input on vertical windows', async () => {
     const model = ref(1)
 
     render(() => (
-      <VWindow v-model={ model.value } wheel direction="vertical">
-        <VWindowItem value={ 1 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>1. foo</h1>
-          </div>
-        </VWindowItem>
-        <VWindowItem value={ 2 }>
-          <div class="bg-grey d-flex justify-center align-center">
-            <h1>2. bar</h1>
-          </div>
-        </VWindowItem>
+      <VWindow v-model={ model.value } direction="vertical" wheel>
+        <VWindowItem value={ 1 }><h1>1</h1></VWindowItem>
+        <VWindowItem value={ 2 }><h1>2</h1></VWindowItem>
       </VWindow>
     ))
 
     await commands.waitStable('.v-window')
     const windowEl = screen.getByCSS('.v-window')
 
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true })
-    )).toBe(true)
-    expect(windowEl.dispatchEvent(
-      new WheelEvent('wheel', { deltaY: 100, shiftKey: true, bubbles: true, cancelable: true })
-    )).toBe(true)
-    await commands.waitStable('.v-window')
+    expect(wheel(windowEl, { deltaX: 100 }).defaultPrevented).toBe(false)
+    expect(wheel(windowEl, { deltaY: 100, shiftKey: true }).defaultPrevented).toBe(false)
     expect(model.value).toBe(1)
+
+    expect(wheel(windowEl, { deltaY: 100 }).defaultPrevented).toBe(true)
+    await commands.waitStable('.v-window')
+    expect(model.value).toBe(2)
   })
 
   it('should leave wheel input to a nested scroller until it reaches the end', async () => {
@@ -442,12 +361,12 @@ describe('VWindow', () => {
     await commands.waitStable('.v-window')
     const scroller = screen.getByCSS('.scroller')
 
-    expect(scroller.dispatchEvent(new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true }))).toBe(true)
+    expect(wheel(scroller, { deltaX: 100 }).defaultPrevented).toBe(false)
     expect(model.value).toBe(1)
 
     scroller.scrollLeft = scroller.scrollWidth
     await wait(160)
-    expect(scroller.dispatchEvent(new WheelEvent('wheel', { deltaX: 100, bubbles: true, cancelable: true }))).toBe(false)
+    expect(wheel(scroller, { deltaX: 100 }).defaultPrevented).toBe(true)
     expect(model.value).toBe(2)
   })
 
@@ -470,12 +389,9 @@ describe('VWindow', () => {
     await commands.waitStable('.v-window')
 
     const scroller = screen.getByCSS('.scroller')
-    const rect = scroller.getBoundingClientRect()
-    const stale = document.querySelector('.stale')!
+    const { x, y } = scroller.getBoundingClientRect()
 
-    expect(stale.dispatchEvent(
-      new WheelEvent('wheel', { deltaX: 100, clientX: rect.x + 10, clientY: rect.y + 10, bubbles: true, cancelable: true })
-    )).toBe(false)
+    expect(wheel(screen.getByCSS('.stale'), { deltaX: 100, clientX: x + 10, clientY: y + 10 }).defaultPrevented).toBe(true)
     expect(scroller.scrollLeft).toBeGreaterThan(0)
     expect(model.value).toBe(2)
   })
