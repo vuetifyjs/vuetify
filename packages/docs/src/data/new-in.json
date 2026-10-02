@@ -782,7 +782,8 @@
   "VWindow": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "wheel": "4.3.0"
     }
   }
 }

@@ -15,7 +15,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, IN_BROWSER, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
@@ -68,6 +68,7 @@ export const makeVWindowProps = propsFactory({
     validator: (v: any) => isBoolean(v) || v === 'hover',
   },
   verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+  wheel: Boolean,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -209,6 +210,89 @@ export const VWindow = genericComponent<new <T>(
       canMoveForward.value && group.next()
     }
 
+    let wheelTimeout = -1
+    let nestedEl: HTMLElement | undefined
+    let wheelAt = 0
+    let isScrollLatchStale = false
+
+    function lockWheel () {
+      window.clearTimeout(wheelTimeout)
+      wheelTimeout = window.setTimeout(() => {
+        wheelTimeout = -1
+      }, 150)
+    }
+
+    function findNestedScroller (target: Element | null, isVertical: boolean, delta: number) {
+      if (!target || !rootRef.value?.contains(target)) return undefined
+
+      for (let el = target as HTMLElement | null; el && el !== rootRef.value; el = el.parentElement) {
+        const style = window.getComputedStyle(el)
+        const overflow = isVertical ? style.overflowY : style.overflowX
+        if (overflow !== 'auto' && overflow !== 'scroll') continue
+
+        const max = isVertical ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth
+        // RTL scrollLeft runs from 0 down to -max
+        const position = isVertical ? el.scrollTop : el.scrollLeft + (style.direction === 'rtl' ? max : 0)
+        if (delta > 0 ? position < max - 1 : position >= 1) return el
+      }
+
+      return undefined
+    }
+
+    function onWheel (e: WheelEvent) {
+      if (
+        !props.wheel ||
+        props.disabled ||
+        e.defaultPrevented ||
+        group.items.value.length < 2
+      ) return
+
+      const isVertical = props.direction === 'vertical'
+      const scrollDelta = isVertical
+        ? (e.shiftKey ? 0 : e.deltaY)
+        : e.deltaX || (e.shiftKey ? e.deltaY : 0)
+      if (!scrollDelta) return
+
+      const now = performance.now()
+      const gap = now - wheelAt
+      if (gap > 500) isScrollLatchStale = false
+      wheelAt = now
+
+      // if mouse does not move continuous wheel events get stuck to an element that just left the screen
+      const isStale = !(e.target as Element).getClientRects().length
+      const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
+      if (!isLocked) {
+        const target = isStale ? document.elementFromPoint(e.clientX, e.clientY) : e.target as Element
+        nestedEl = findNestedScroller(target, isVertical, scrollDelta)
+      }
+
+      if (nestedEl) {
+        if (isStale || isScrollLatchStale) {
+          e.preventDefault()
+          const scale = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? (isVertical ? nestedEl.clientHeight : nestedEl.clientWidth) : 1
+          nestedEl.scrollBy({ [isVertical ? 'top' : 'left']: scrollDelta * scale })
+        }
+        lockWheel()
+        return
+      }
+
+      const delta = !isVertical && isRtlReverse.value ? -scrollDelta : scrollDelta
+      const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
+      if (!canMove && !isLocked) return
+
+      e.preventDefault()
+      lockWheel()
+
+      if (!isLocked) {
+        isScrollLatchStale = true
+        delta > 0 ? next() : prev()
+      }
+    }
+
+    onScopeDispose(() => {
+      if (IN_BROWSER) window.clearTimeout(wheelTimeout)
+    })
+
     const arrows = computed(() => {
       const arrows = []
 
@@ -310,6 +394,7 @@ export const VWindow = genericComponent<new <T>(
         ]}
         style={ props.style }
         v-touch={ touchOptions.value }
+        onWheel={ onWheel }
       >
         <div
           class="v-window__container"
