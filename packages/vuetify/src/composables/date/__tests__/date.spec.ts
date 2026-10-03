@@ -1,11 +1,14 @@
 // Utilities
 import { assertType } from 'vitest'
+import { shallowRef } from 'vue'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
+import { createDate } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
 import type { DateAdapter } from '../DateAdapter'
+import type { LocaleInstance } from '@/composables/locale'
 
 describe('date', () => {
   it('types', () => {
@@ -121,6 +124,36 @@ describe('VuetifyDateAdapter', () => {
       expect(adapterGB.getWeek(adapterGB.parseISO('2025-03-16'))).toBe(11)
       expect(adapterUS.getWeek(adapterUS.parseISO('2025-03-16'), 1, 4)).toBe(11)
     })
+  })
+})
+
+describe('createDate', () => {
+  function createAdapter (locale: string) {
+    return createDate(undefined, { current: shallowRef(locale) } as LocaleInstance).instance
+  }
+
+  it.each([
+    ['da', 1],
+    ['srCyrl', 1],
+    ['srLatn', 1],
+    ['ckb', 6],
+  ])('should start the week on the first day of the region of %s', (locale, firstDay) => {
+    const adapter = createAdapter(locale)
+
+    expect((adapter.startOfWeek(new Date(2024, 2, 7)) as Date).getDay()).toBe(firstDay)
+  })
+
+  it('should format Serbian dates in the script of the locale', () => {
+    const date = new Date(2024, 2, 5)
+
+    expect(createAdapter('srLatn').format(date, 'month')).toBe('mart')
+    expect(createAdapter('srCyrl').format(date, 'month')).toBe('март')
+  })
+
+  it('should format dates in Central Kurdish', () => {
+    const adapter = createAdapter('ckb')
+
+    expect(() => adapter.format(new Date(2024, 2, 5), 'fullDate')).not.toThrow()
   })
 })
 
