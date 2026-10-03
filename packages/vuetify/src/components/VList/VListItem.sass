@@ -3,6 +3,7 @@
 @use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
+@use '../VSelectionControl/variables' as selection-control
 @use './variables' as *
 
 @include tools.layer('components')
@@ -188,9 +189,17 @@
       margin-inline-end: $list-item-action-margin-end
       margin-inline-start: -$list-item-action-margin-start
 
+      > .v-selection-control
+        margin-inline-end: calc((var(--v-selection-control-size) - #{selection-control.$selection-control-size}) / 2)
+        margin-inline-start: calc((#{selection-control.$selection-control-size} - var(--v-selection-control-size)) / 2)
+
     &--end
       margin-inline-start: $list-item-action-margin-start
       margin-inline-end: -$list-item-action-margin-end
+
+      > .v-selection-control
+        margin-inline-end: calc((#{selection-control.$selection-control-size} - var(--v-selection-control-size)) / 2)
+        margin-inline-start: calc((var(--v-selection-control-size) - #{selection-control.$selection-control-size}) / 2)
 
   .v-list-item-media
     margin-top: $list-item-media-margin-top
