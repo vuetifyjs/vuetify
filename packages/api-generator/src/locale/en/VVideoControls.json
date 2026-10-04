@@ -18,6 +18,7 @@
     "progress": "Controls main slider value (0 ~ 100)",
     "duration": "Total duration of the video used to calculate displayed time.",
     "volume": "Volume value passed to the underlying control and slots.",
+    "seekStep": "Controls how much the progress is moved (in seconds) by when using the arrow keys. When passed as single number, user holding Shift key will move 10x the distance. For full control pass `[step, shiftStep]` to sets both. Page Up and Page Down move by a tenth of `max`.",
     "volumeSlider": "Passed to the `slider` prop of the volume control.",
     "volumeProps": "Props passed down to the VMediaVolume component."
   },

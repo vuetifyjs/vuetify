@@ -28,7 +28,7 @@ import { clamp, formatTime, genericComponent, pick, propsFactory, useRender } fr
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { MediaSeekTarget } from '@/labs/composables/media'
+import type { MediaSeekStep, MediaSeekTarget } from '@/labs/composables/media'
 import type { VMediaVolumeOptions, VMediaVolumeSlider } from '@/labs/VMediaVolume/VMediaVolume'
 
 export type VVideoControlsActionsSlot = {
@@ -85,6 +85,10 @@ export const makeVVideoControlsProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
   volumeProps: Object as PropType<VMediaVolumeOptions>,
+  seekStep: {
+    type: [Number, Array] as PropType<MediaSeekStep>,
+    default: () => [10, 60],
+  },
   volumeSlider: {
     type: String as PropType<VMediaVolumeSlider>,
     default: 'visible',
@@ -306,7 +310,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
                             buffer={ props.buffer }
                             color={ trackColor.value ?? 'surface-variant' }
                             bgColor={ props.variant === 'tube' ? 'white' : undefined }
-                            step={ 10 }
+                            step={ props.seekStep }
                             thumb
                             onUpdate:modelValue={ (seconds: number) => seek({ to: seconds }) }
                           />

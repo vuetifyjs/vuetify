@@ -36,6 +36,35 @@ describe('VMediaProgressBar', () => {
     expect(model.value).toBe(0)
   })
 
+  it('should leave page keys to the page after a click', async () => {
+    const model = ref(0)
+    render(() => <VMediaProgressBar v-model={ model.value } max={ 100 } />)
+
+    const bar = screen.getByCSS('.v-media-progress-bar')
+    await userEvent.click(bar)
+    const position = model.value
+    expect(document.activeElement).toBe(bar)
+
+    const event = new KeyboardEvent('keydown', { key: 'End', bubbles: true, cancelable: true })
+    bar.dispatchEvent(event)
+    expect(event.defaultPrevented).toBe(false)
+    expect(model.value).toBe(position)
+
+    await userEvent.keyboard('{ArrowRight}')
+    expect(model.value).toBe(position + 5)
+  })
+
+  it('should use a separate Shift step when given a pair', async () => {
+    const model = ref(50)
+    render(() => <VMediaProgressBar v-model={ model.value } max={ 100 } step={[2, 7]} />)
+
+    screen.getByCSS('.v-media-progress-bar').focus()
+    await userEvent.keyboard('{ArrowRight}')
+    expect(model.value).toBe(52)
+    await userEvent.keyboard('{Shift>}{ArrowLeft}{/Shift}')
+    expect(model.value).toBe(45)
+  })
+
   it('should name the chapter in the tooltip and the announced value', async () => {
     const chapters = [{ start: 0, title: 'Intro' }, { start: 60, title: 'Verse' }]
     render(() => <div style="width: 400px"><VMediaProgressBar modelValue={ 90 } max={ 120 } chapters={ chapters } /></div>)

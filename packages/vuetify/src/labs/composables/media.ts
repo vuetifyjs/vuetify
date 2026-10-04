@@ -1,11 +1,12 @@
 // Utilities
 import { nextTick, onScopeDispose, shallowRef, watch } from 'vue'
-import { clamp, isString } from '@/util'
+import { clamp, isNumber, isString } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
 
 export type MediaSeekTarget = { to: number | string } | { by: number | string }
+export type MediaSeekStep = number | readonly [number, number]
 
 export interface MediaProps {
   src?: string
@@ -37,6 +38,11 @@ export function resolveSeekTarget (target: MediaSeekTarget, current: number, tot
     : Number(value)
 
   return 'to' in target ? seconds : current + seconds
+}
+
+export function getSeekStep (step: MediaSeekStep, large: boolean) {
+  const [small, big] = isNumber(step) ? [step, step * 10] : step
+  return large ? big : small
 }
 
 export function useMedia<T extends HTMLMediaElement> (

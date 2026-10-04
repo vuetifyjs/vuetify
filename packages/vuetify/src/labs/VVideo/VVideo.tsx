@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { MaybeTransition } from '@/composables/transition'
-import { useMedia } from '@/labs/composables/media'
+import { getSeekStep, useMedia } from '@/labs/composables/media'
 
 // Utilities
 import { onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
@@ -189,11 +189,11 @@ export const VVideo = genericComponent<VVideoSlots>()({
           break
         }
         case e.key === 'ArrowRight': {
-          seek({ by: 10 * (e.shiftKey ? 6 : 1) })
+          seek({ by: getSeekStep(props.seekStep, e.shiftKey) })
           break
         }
         case e.key === 'ArrowLeft': {
-          seek({ by: -10 * (e.shiftKey ? 6 : 1) })
+          seek({ by: -getSeekStep(props.seekStep, e.shiftKey) })
           break
         }
         case createRange(10).map(String).includes(e.key): {

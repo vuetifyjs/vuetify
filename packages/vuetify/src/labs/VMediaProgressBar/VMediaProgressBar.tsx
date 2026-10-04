@@ -8,6 +8,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { getSeekStep } from '@/labs/composables/media'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
@@ -15,6 +16,7 @@ import { clamp, convertToUnit, formatTime, genericComponent, isObject, keyValues
 
 // Types
 import type { PropType } from 'vue'
+import type { MediaSeekStep } from '@/labs/composables/media'
 
 export type VMediaProgressBarChapter = { start: number, title?: string }
 
@@ -45,7 +47,7 @@ export const makeVMediaProgressBarProps = propsFactory({
     default: 2,
   },
   step: {
-    type: Number,
+    type: [Number, Array] as PropType<MediaSeekStep>,
     default: 5,
   },
   height: {
@@ -129,7 +131,10 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
       model.value = clamp(seconds, 0, props.max)
     }
 
+    let pointerFocused = false
+
     function onPointerdown (e: PointerEvent) {
+      pointerFocused = true
       if (!interactive.value || e.button !== 0) return
 
       rootRef.value!.setPointerCapture(e.pointerId)
@@ -157,7 +162,10 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
       if (!interactive.value) return
 
       const { left, right, up, down, pageup, pagedown, home, end } = keyValues
-      const step = props.step * (e.shiftKey ? 10 : 1)
+      // focus left over from a click must not take page scrolling keys
+      if (pointerFocused && e.key !== left && e.key !== right) return
+
+      const step = getSeekStep(props.step, e.shiftKey)
       const page = props.max / 10
       const delta = {
         [right]: step,
@@ -229,6 +237,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
           onPointercancel={ onPointerup }
           onPointerleave={ () => !dragging.value && (hover.value = null) }
           onKeydown={ onKeydown }
+          onBlur={ () => pointerFocused = false }
         >
           <div
             class={['v-media-progress-bar__track', roundedClasses.value]}
