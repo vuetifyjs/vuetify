@@ -174,7 +174,7 @@
     "VTreeviewGroup"
   ],
   "components/vertical-steppers": ["VStepperVertical", "VStepperVerticalActions", "VStepperVerticalItem"],
-  "components/videos": ["VVideo", "VVideoControls", "VVideoVolume"],
+  "components/videos": ["VVideo", "VVideoControls", "VMediaProgressBar", "VMediaVolume"],
   "components/virtual-scroller": ["VVirtualScroll"],
   "components/windows": ["VWindow", "VWindowItem"],
   "directives/click-outside": ["v-click-outside"],

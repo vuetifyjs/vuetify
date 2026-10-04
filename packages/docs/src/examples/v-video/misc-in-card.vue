@@ -8,7 +8,7 @@
         <v-video
           :volume="50"
           aspect-ratio="4 / 3"
-          background-color="transparent"
+          bg-color="transparent"
           color="orange"
           controls-transition="slide-y-transition"
           elevation="0"

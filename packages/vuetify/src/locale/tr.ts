@@ -179,7 +179,6 @@ export default {
     pause: 'Duraklat',
     seek: 'Ara',
     volume: 'Ses',
-    showVolume: 'Ses kontrolünü göster',
     mute: 'Sesi kapat',
     unmute: 'Sesi aç',
     enterFullscreen: 'Tam ekran',

@@ -179,7 +179,6 @@ export default {
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',
     volume: 'Hlasitosť',
-    showVolume: 'Zobraziť ovládanie hlasitosti',
     mute: 'Stlmiť',
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',

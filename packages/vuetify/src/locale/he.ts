@@ -179,7 +179,6 @@ export default {
     pause: 'השהה',
     seek: 'חפש',
     volume: 'עוצמת שמע',
-    showVolume: 'הצג בקרת עוצמת שמע',
     mute: 'השתק',
     unmute: 'בטל השתקה',
     enterFullscreen: 'מסך מלא',

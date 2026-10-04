@@ -12,8 +12,9 @@
     "eager": "Silently loades the media file without waiting for user to click.",
     "hideOverlay": "Hide center play icon.",
     "noFullscreen": "Disable fullscreen and hide the default fullscreen button.",
+    "showBuffer": "Shows how much of the file has been buffered on the progress bar.",
     "rounded": "Applies a border radius to the video container and the controls. Accepts array of two values to customize elements separately.",
-    "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "startAt": "Position in seconds to start playback from. Applies to the first loaded file only.",
     "controlsProps": "Pass props through to the `v-video-controls` component. Accepts an object with anything from [v-video-controls](/api/v-video-controls/#props) props, camelCase keys are recommended.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "Variant passed to the VVideoControls component."
@@ -23,7 +24,7 @@
     "update:playing": "Emitted when playing state changes.",
     "update:progress": "Emitted when the internal playback progress changes.",
     "update:volume": "Emitted when the volume changes.",
-    "error": "Emits `true` when the video fails to load or `false` when user triggered retry."
+    "error": "Emitted with the native MediaError when the video fails to load."
   },
   "slots": {
     "header": "Slot for additional content placed on top of the video.",
@@ -34,7 +35,7 @@
     "sources": "Slot for content placed within native `<video>` element."
   },
   "exposed": {
-    "skipTo": "Skip to specific moment in the video playback. Accepts percent value (0-100).",
+    "seek": "Move the playback position with `{ to }` or `{ by }`. Numbers are seconds, strings ending in `%` are relative to the duration, e.g. `seek({ to: '50%' })` or `seek({ by: -10 })`.",
     "toggleFullscreen": "Toggle fullscreen mode.",
     "toggleMuted": "Mute/unmute audio."
   }

@@ -179,7 +179,6 @@ export default {
     pause: 'Пауза',
     seek: 'Позиція відтворення',
     volume: 'Гучність',
-    showVolume: 'Показати регулятор гучності',
     mute: 'Вимкнути звук',
     unmute: 'Увімкнути звук',
     enterFullscreen: 'На весь екран',

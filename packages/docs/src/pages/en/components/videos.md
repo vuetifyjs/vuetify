@@ -44,7 +44,7 @@ A basic example of the video component.
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
 | [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
-| [v-video-volume](/api/v-video-volume/) | Sub-component used to display a volume control |
+| [v-media-volume](/api/v-media-volume/) | Volume control |
 
 <ApiInline hide-links />
 
@@ -75,6 +75,15 @@ You can display a cover image before the video is loaded.
 Video can automatically skip to certain timestamp upon load. It can be useful to let the users continue where they stopped last time.
 
 <ExamplesExample file="v-video/prop-start-at" />
+
+::: info
+**start-at** applies to the first loaded file only. To resume a later file, seek from the `loaded` event, which fires for every file:
+
+```html
+<v-video :src="file.src" @loaded="el => el.currentTime = file.resumeAt" />
+```
+
+:::
 
 #### Color
 

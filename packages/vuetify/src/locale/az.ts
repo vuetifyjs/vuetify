@@ -179,7 +179,6 @@ export default {
     pause: 'Pauza',
     seek: 'Axtar',
     volume: 'Səs',
-    showVolume: 'Səs səviyyəsini göstər',
     mute: 'Səsi kəs',
     unmute: 'Səsi aç',
     enterFullscreen: 'Tam ekran',

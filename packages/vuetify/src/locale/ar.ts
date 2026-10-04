@@ -179,7 +179,6 @@ export default {
     pause: 'إيقاف مؤقت',
     seek: 'بحث',
     volume: 'مستوى الصوت',
-    showVolume: 'إظهار التحكم في مستوى الصوت',
     mute: 'كتم الصوت',
     unmute: 'إلغاء كتم الصوت',
     enterFullscreen: 'ملء الشاشة',

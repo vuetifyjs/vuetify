@@ -179,7 +179,6 @@ export default {
     pause: 'ڕاگرتن',
     seek: 'گەڕان',
     volume: 'دەنگ',
-    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
     mute: 'بێدەنگکردن',
     unmute: 'لە بێدەنگی دەرهێنان',
     enterFullscreen: 'پڕ بە شاشە',

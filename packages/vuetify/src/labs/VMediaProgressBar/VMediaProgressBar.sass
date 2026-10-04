@@ -1,0 +1,99 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-media-progress-bar
+    --v-media-progress-bar-at: var(--v-media-progress-bar-playhead, var(--v-media-progress-bar-position))
+    align-items: center
+    direction: ltr
+    display: flex
+    flex: 1 1 auto
+    min-height: $media-progress-bar-hit-height
+    position: relative
+    touch-action: none
+    user-select: none
+
+    &--interactive
+      cursor: pointer
+
+    &--disabled
+      opacity: $media-progress-bar-disabled-opacity
+
+    &:focus-visible
+      outline: none
+
+      &:not(:has(.v-media-progress-bar__thumb)),
+      .v-media-progress-bar__thumb
+        outline: 2px solid currentColor
+        outline-offset: 2px
+
+    &__track
+      flex: 1 1 auto
+      height: var(--v-media-progress-bar-height)
+      overflow: hidden
+      position: relative
+
+    &__background,
+    &__buffer,
+    &__fill
+      background: currentColor
+      inset: 0
+      position: absolute
+
+    &__background
+      opacity: $media-progress-bar-background-opacity
+
+    &__buffer
+      clip-path: inset(0 calc(100% - var(--v-media-progress-bar-buffer)) 0 0)
+      opacity: $media-progress-bar-buffer-opacity
+
+    &__fill
+      clip-path: inset(0 calc(100% - var(--v-media-progress-bar-at)) 0 0)
+
+    &__thumb
+      background: currentColor
+      border-radius: 50%
+      height: $media-progress-bar-thumb-size
+      left: var(--v-media-progress-bar-at)
+      pointer-events: none
+      position: absolute
+      top: 50%
+      transform: translate(-50%, -50%)
+      width: $media-progress-bar-thumb-size
+
+    &--disabled &__thumb
+      display: none
+
+    &__tooltip
+      background: $media-progress-bar-tooltip-background
+      border-radius: $media-progress-bar-tooltip-border-radius
+      bottom: calc(100% + var(--v-media-progress-bar-tooltip-offset, #{$media-progress-bar-tooltip-offset}))
+      color: $media-progress-bar-tooltip-color
+      font-size: $media-progress-bar-tooltip-font-size
+      font-variant-numeric: tabular-nums
+      line-height: 1.4
+      padding: $media-progress-bar-tooltip-padding
+      pointer-events: none
+      position: absolute
+      text-align: center
+      transform: translateX(-50%)
+      white-space: nowrap
+      z-index: 1
+
+    &--tooltip-bottom &__tooltip
+      bottom: auto
+      top: calc(100% + var(--v-media-progress-bar-tooltip-offset, #{$media-progress-bar-tooltip-offset}))
+
+    &__chapter
+      font-weight: 500
+
+  @include tools.layer('trumps')
+    @media (forced-colors: active)
+      .v-media-progress-bar__track
+        forced-color-adjust: none
+        color: CanvasText
+
+      .v-media-progress-bar__fill,
+      .v-media-progress-bar__thumb
+        forced-color-adjust: none
+        background: Highlight

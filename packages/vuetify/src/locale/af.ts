@@ -179,7 +179,6 @@ export default {
     pause: 'Pouseer',
     seek: 'Soek',
     volume: 'Volume',
-    showVolume: 'Wys volumebeheer',
     mute: 'Demp',
     unmute: 'Ontdemp',
     enterFullscreen: 'Volskerm',
