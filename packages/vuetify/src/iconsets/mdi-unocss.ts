@@ -70,8 +70,7 @@ const aliases: IconAliases = {
   fullscreen: 'i-mdi:fullscreen',
   fullscreenExit: 'i-mdi:fullscreen-exit',
   volumeHigh: 'i-mdi:volume-high',
-  volumeMedium: 'i-mdi:volume-medium',
-  volumeLow: 'i-mdi:volume-low',
+  volumeLow: 'i-mdi:volume-medium',
   volumeOff: 'i-mdi:volume-variant-off',
   search: 'i-mdi:magnify',
 }

@@ -67,8 +67,7 @@ const aliases: IconAliases = {
   fullscreen: 'fa-fullscreen',
   fullscreenExit: 'fa-compress',
   volumeHigh: 'fa-volume-high',
-  volumeMedium: 'fa-volume-low',
-  volumeLow: 'fa-volume-off',
+  volumeLow: 'fa-volume-low',
   volumeOff: 'fa-volume-off',
   search: 'fa-magnifying-glass',
 }

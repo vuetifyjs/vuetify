@@ -67,8 +67,7 @@ const aliases: IconAliases = {
   fullscreen: 'mdi-fullscreen',
   fullscreenExit: 'mdi-fullscreen-exit',
   volumeHigh: 'mdi-volume-high',
-  volumeMedium: 'mdi-volume-medium',
-  volumeLow: 'mdi-volume-low',
+  volumeLow: 'mdi-volume-medium',
   volumeOff: 'mdi-volume-variant-off',
   search: 'mdi-magnify',
 }

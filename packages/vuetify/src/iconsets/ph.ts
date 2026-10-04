@@ -70,7 +70,6 @@ const aliases: IconAliases = {
   fullscreen: 'i-ph:arrows-out-simple',
   fullscreenExit: 'i-ph:arrows-in-simple',
   volumeHigh: 'i-ph:speaker-high',
-  volumeMedium: 'i-ph:speaker-simple-high',
   volumeLow: 'i-ph:speaker-low',
   volumeOff: 'i-ph:speaker-x',
   search: 'i-ph:magnifying-glass',

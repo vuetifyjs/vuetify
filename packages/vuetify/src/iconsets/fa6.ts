@@ -70,8 +70,7 @@ const aliases: IconAliases = {
   fullscreen: 'i-fa6-solid:maximize',
   fullscreenExit: 'i-fa6-solid:minimize',
   volumeHigh: 'i-fa6-solid:volume-high',
-  volumeMedium: 'i-fa6-solid:volume-low',
-  volumeLow: 'i-fa6-solid:volume-off',
+  volumeLow: 'i-fa6-solid:volume-low',
   volumeOff: 'i-fa6-solid:volume-xmark',
   search: 'i-fa6-solid:magnifying-glass',
 }

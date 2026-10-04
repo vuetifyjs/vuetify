@@ -70,7 +70,6 @@ const aliases: IconAliases = {
   fullscreen: 'i-bx:fullscreen',
   fullscreenExit: 'i-bx:exit-fullscreen',
   volumeHigh: 'i-bx:volume-full',
-  volumeMedium: 'i-bx:volume',
   volumeLow: 'i-bx:volume-low',
   volumeOff: 'i-bx:volume-mute',
   search: 'i-bx:search',

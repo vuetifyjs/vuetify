@@ -68,8 +68,7 @@ const aliases: IconAliases = {
   fullscreen: 'i-tabler:arrows-maximize',
   fullscreenExit: 'i-tabler:arrows-minimize',
   volumeHigh: 'i-tabler:volume',
-  volumeMedium: 'i-tabler:volume-2',
-  volumeLow: 'i-tabler:volume-3',
+  volumeLow: 'i-tabler:volume-2',
   volumeOff: 'i-tabler:volume-off',
   search: 'i-tabler:search',
 }

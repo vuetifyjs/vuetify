@@ -280,8 +280,7 @@ export function canSetVolume () {
 }
 
 export function getVolumeIcon (volume: number) {
-  if (volume > 70) return '$volumeHigh'
-  if (volume > 40) return '$volumeMedium'
+  if (volume > 50) return '$volumeHigh'
   if (volume > 0) return '$volumeLow'
 
   return '$volumeOff'

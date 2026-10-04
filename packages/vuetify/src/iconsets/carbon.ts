@@ -70,7 +70,6 @@ const aliases: IconAliases = {
   fullscreen: 'i-carbon:maximize',
   fullscreenExit: 'i-carbon:minimize',
   volumeHigh: 'i-carbon:volume-up',
-  volumeMedium: 'i-carbon:volume-down',
   volumeLow: 'i-carbon:volume-down',
   volumeOff: 'i-carbon:volume-mute',
   search: 'i-carbon:search',
