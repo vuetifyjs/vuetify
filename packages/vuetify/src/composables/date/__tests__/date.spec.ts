@@ -1,14 +1,11 @@
 // Utilities
 import { assertType } from 'vitest'
-import { shallowRef } from 'vue'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
-import { createDate } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
 import type { DateAdapter } from '../DateAdapter'
-import type { LocaleInstance } from '@/composables/locale'
 
 describe('date', () => {
   it('types', () => {
