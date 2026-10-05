@@ -1,13 +1,15 @@
 // Components
 import { VOverlay } from '../VOverlay'
 import { VApp } from '@/components/VApp'
+import { VBtn } from '@/components/VBtn'
+import { VDialog } from '@/components/VDialog'
 import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 
 // Utilities
 import { commands, isClickable, render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 describe('VOverlay', () => {
   describe('CSS zoom', () => {
@@ -198,5 +200,155 @@ describe('VOverlay', () => {
 
     await expect.poll(() => screen.queryAllByTestId('first-content')).toHaveLength(0)
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
+  })
+})
+
+describe('VOverlay scrim', () => {
+  it('should retain the default tint without fading the element', async () => {
+    render(() => <VOverlay modelValue />)
+
+    await expect.element(screen.getByCSS('.v-overlay__scrim')).toHaveStyle({
+      backgroundColor: 'color(srgb 0 0 0 / 0.32)',
+      opacity: '1',
+      backdropFilter: 'blur(0px)',
+    })
+  })
+
+  it('should blur the backdrop independently of tint opacity', async () => {
+    render(() => (
+      <VOverlay modelValue style={{ '--v-scrim-blur': '8px', '--v-scrim-opacity': 0.4 }} />
+    ))
+
+    const scrim = screen.getByCSS('.v-overlay__scrim')
+    await expect.element(scrim).toHaveStyle({ backdropFilter: 'blur(8px)', opacity: '1' })
+    await expect.element(scrim).toHaveStyle({ backgroundColor: 'color(srgb 0 0 0 / 0.4)' })
+  })
+
+  it.each([
+    [0.7, undefined, '0.7'],
+    [undefined, 0.6, '0.6'],
+    [0, undefined, '0'],
+    ['1', undefined, '1'],
+  ])('should prioritize component opacity %s and CSS override %s', async (opacity, override, alpha) => {
+    render(() => (
+      <VOverlay
+        modelValue
+        opacity={ opacity }
+        style={{ '--v-scrim-opacity': 0.4, ...override !== undefined ? { '--v-overlay-opacity': override } : {} }}
+      />
+    ))
+
+    await expect.element(screen.getByCSS('.v-overlay__scrim')).toHaveStyle({
+      backgroundColor: alpha === '1' ? 'color(srgb 0 0 0)' : `color(srgb 0 0 0 / ${alpha})`,
+    })
+  })
+
+  it.each([
+    ['primary', 'color(srgb 1 0 0 / 0.4)'],
+    ['black', 'color(srgb 0 0 0 / 0.4)'],
+    ['red', 'color(srgb 0.956863 0.262745 0.211765 / 0.4)'],
+    ['var(--custom-scrim)', 'color(srgb 0 0 1 / 0.4)'],
+  ])('should tint explicit color %s instead of the shared color', async (color, backgroundColor) => {
+    render(() => (
+      <VOverlay
+        modelValue
+        scrim={ color }
+        style={{ '--v-scrim-color': 'rgb(0 255 0)', '--v-scrim-opacity': 0.4, '--custom-scrim': 'rgb(0 0 255)' }}
+      />
+    ), null, { theme: { themes: { light: { colors: { primary: '#ff0000' } } } } })
+
+    await expect.poll(() => getComputedStyle(screen.getByCSS('.v-overlay__scrim')).backgroundColor).toBe(backgroundColor)
+  })
+
+  it('should multiply tint opacity by the CSS color alpha', async () => {
+    render(() => <VOverlay modelValue scrim="rgba(255, 0, 0, 0.5)" opacity={ 0.4 } />)
+
+    const scrim = screen.getByCSS('.v-overlay__scrim')
+    await expect.poll(() => getComputedStyle(scrim).backgroundColor).toMatch(/^color\(srgb 1 0 0 \/ /)
+    await expect.poll(() => parseFloat(getComputedStyle(scrim).backgroundColor.split('/')[1])).toBeCloseTo(0.2, 2)
+  })
+
+  it('should update shared tokens without tinting the content', async () => {
+    const blur = shallowRef('4px')
+    const color = shallowRef('rgb(255 0 0)')
+    const opacity = shallowRef(0.4)
+    render(() => (
+      <VOverlay modelValue style={{ '--v-scrim-blur': blur.value, '--v-scrim-color': color.value, '--v-scrim-opacity': opacity.value }}>
+        <VBtn color="primary">Content</VBtn>
+      </VOverlay>
+    ), null, { theme: { themes: { light: { colors: { primary: '#ff0000' } } } } })
+
+    const scrim = screen.getByCSS('.v-overlay__scrim')
+    await expect.element(scrim).toHaveStyle({ backdropFilter: 'blur(4px)', backgroundColor: 'color(srgb 1 0 0 / 0.4)' })
+    await expect.element(screen.getByRole('button')).toHaveStyle({ backgroundColor: 'color(srgb 1 0 0)' })
+
+    blur.value = '12px'
+    color.value = 'rgb(0 0 255)'
+    opacity.value = 0.6
+    await expect.element(scrim).toHaveStyle({ backdropFilter: 'blur(12px)', backgroundColor: 'color(srgb 0 0 1 / 0.6)' })
+    await expect.element(screen.getByRole('button')).toHaveStyle({ backgroundColor: 'color(srgb 1 0 0)' })
+  })
+
+  it('should use theme tokens after teleporting and changing theme', async () => {
+    const theme = shallowRef('light')
+    render(() => <VOverlay modelValue theme={ theme.value } />, null, {
+      theme: {
+        themes: {
+          light: { variables: { 'scrim-blur': '4px', 'scrim-color': 'rgb(255 0 0)', 'scrim-opacity': 0.4 } },
+          dark: { variables: { 'scrim-blur': '8px', 'scrim-color': 'rgb(0 0 255)', 'scrim-opacity': 0.6 } },
+        },
+      },
+    })
+
+    const scrim = screen.getByCSS('.v-overlay__scrim')
+    expect(scrim.closest('.v-overlay-container')?.parentElement).toBe(document.body)
+    await expect.element(scrim).toHaveStyle({ backdropFilter: 'blur(4px)', backgroundColor: 'color(srgb 1 0 0 / 0.4)' })
+    theme.value = 'dark'
+    await expect.element(scrim).toHaveStyle({ backdropFilter: 'blur(8px)', backgroundColor: 'color(srgb 0 0 1 / 0.6)' })
+  })
+
+  it('should not create a scrim when disabled', async () => {
+    render(() => <VOverlay modelValue scrim={ false } style={{ '--v-scrim-blur': '8px' }}><button>Content</button></VOverlay>)
+
+    await expect.element(screen.getByRole('button')).toBeVisible()
+    expect(screen.queryAllByCSS('.v-overlay__scrim')).toHaveLength(0)
+  })
+
+  it('should contain the scrim and blur within its parent', async () => {
+    render(() => (
+      <div data-testid="parent" style={{ position: 'relative', width: '240px', height: '180px' }}>
+        <VOverlay modelValue contained style={{ '--v-scrim-blur': '8px' }} />
+      </div>
+    ))
+
+    const scrim = screen.getByCSS('.v-overlay__scrim')
+    await expect.element(scrim).toHaveStyle({ position: 'absolute', width: '240px', height: '180px', backdropFilter: 'blur(8px)' })
+    expect(scrim.getBoundingClientRect().toJSON()).toEqual(screen.getByTestId('parent').getBoundingClientRect().toJSON())
+  })
+
+  it('should keep persistent scrims active when clicked', async () => {
+    const active = shallowRef(true)
+    render(() => <VOverlay v-model={ active.value } persistent noClickAnimation style={{ '--v-scrim-blur': '8px' }} />)
+
+    await userEvent.click(screen.getByCSS('.v-overlay__scrim'))
+    expect(active.value).toBe(true)
+    await expect.element(screen.getByCSS('.v-overlay__scrim')).toBeVisible()
+  })
+
+  it('should close only the top dialog when scrims are nested', async () => {
+    const outer = shallowRef(true)
+    const inner = shallowRef(true)
+    render(() => (
+      <VDialog v-model={ outer.value } maxWidth="440" style={{ '--v-scrim-blur': '4px' }}>
+        <button>Outer content</button>
+        <VDialog v-model={ inner.value } maxWidth="320" style={{ '--v-scrim-blur': '8px' }}><button>Inner content</button></VDialog>
+      </VDialog>
+    ))
+
+    await expect.poll(() => screen.queryAllByCSS('.v-overlay__scrim')).toHaveLength(2)
+    await userEvent.click(screen.getAllByCSS('.v-overlay__scrim').at(-1)!, { position: { x: 10, y: 10 } })
+    await expect.poll(() => inner.value).toBe(false)
+    expect(outer.value).toBe(true)
+    await expect.poll(() => screen.queryAllByCSS('.v-overlay__scrim')).toHaveLength(1)
   })
 })

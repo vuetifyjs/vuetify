@@ -435,7 +435,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         } else {
           createCssClass(bgLines, `.${scoped}bg-${key}`, [
             `--${parsedOptions.prefix}theme-overlay-multiplier: var(--${parsedOptions.prefix}theme-${key}-overlay-multiplier)`,
-            `background-color: rgb(var(--${parsedOptions.prefix}theme-${key}))`,
+            `background-color: color-mix(in srgb, rgb(var(--${parsedOptions.prefix}theme-${key})) calc(var(--v-background-opacity, 1) * 100%), transparent)`,
             `color: rgb(var(--${parsedOptions.prefix}theme-on-${key}))`,
           ], parsedOptions.scope)
           createCssClass(fgLines, `.${scoped}text-${key}`, [`color: rgb(var(--${parsedOptions.prefix}theme-${key}))`], parsedOptions.scope)
