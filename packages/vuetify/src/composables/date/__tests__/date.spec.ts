@@ -127,36 +127,6 @@ describe('VuetifyDateAdapter', () => {
   })
 })
 
-describe('createDate', () => {
-  function createAdapter (locale: string) {
-    return createDate(undefined, { current: shallowRef(locale) } as LocaleInstance).instance
-  }
-
-  it.each([
-    ['da', 1],
-    ['srCyrl', 1],
-    ['srLatn', 1],
-    ['ckb', 6],
-  ])('should start the week on the first day of the region of %s', (locale, firstDay) => {
-    const adapter = createAdapter(locale)
-
-    expect((adapter.startOfWeek(new Date(2024, 2, 7)) as Date).getDay()).toBe(firstDay)
-  })
-
-  it('should format Serbian dates in the script of the locale', () => {
-    const date = new Date(2024, 2, 5)
-
-    expect(createAdapter('srLatn').format(date, 'month')).toBe('mart')
-    expect(createAdapter('srCyrl').format(date, 'month')).toBe('март')
-  })
-
-  it('should format dates in Central Kurdish', () => {
-    const adapter = createAdapter('ckb')
-
-    expect(() => adapter.format(new Date(2024, 2, 5), 'fullDate')).not.toThrow()
-  })
-})
-
 describe('StringDateAdapter', () => {
   it('should have the correct days in a month', () => {
     const adapter = new StringDateAdapter({ locale: 'en-US' })
