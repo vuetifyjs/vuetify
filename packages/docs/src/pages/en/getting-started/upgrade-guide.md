@@ -16,6 +16,13 @@ This page contains a detailed list of breaking changes and the steps required to
 
 <PageFeatures />
 
+## Scrim opacity
+
+- `v-overlay` (including `v-dialog`) and `v-navigation-drawer` now apply scrim opacity to the background color instead of the entire element. Default tint colors and opacity values are unchanged.
+- Replace CSS overrides of `.v-overlay__scrim` or `.v-navigation-drawer__scrim` element `opacity` with `--v-scrim-opacity`. Element opacity also fades backdrop blur and is reserved for enter/leave transitions.
+- The overlay **opacity** prop and `--v-overlay-opacity` still override the shared tint opacity. A color's existing alpha is multiplied by the tint opacity.
+- Use `--v-scrim-blur` and `--v-scrim-color` to configure blur and tint for both components. See [scrim customization](/components/overlays/#scrim-customization).
+
 ## Quick Start with Vuetify MCP
 
 The fastest way to check your project for breaking changes is with [Vuetify MCP](https://github.com/vuetifyjs/mcp/). To get started, run the following in your terminal:
