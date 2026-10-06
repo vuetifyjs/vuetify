@@ -12,6 +12,7 @@
     "VMain"
   ],
   "components/aspect-ratios": ["VResponsive"],
+  "components/audio-players": ["VAudio", "VAudioControls", "VAudioWaveform", "VMediaProgressBar", "VMediaVolume"],
   "components/autocompletes": ["VAutocomplete"],
   "components/avatars": ["VAvatar"],
   "components/avatar-groups": ["VAvatarGroup"],
@@ -61,7 +62,7 @@
   "components/color-inputs": ["VColorInput", "VColorPicker"],
   "components/color-pickers": ["VColorPicker"],
   "components/combobox": ["VCombobox"],
-  "components/command-palettes": ["VCommandPalette"],
+  "components/command-palettes": ["VCommandPalette", "VCommandPaletteItem"],
   "components/confirm-edit": ["VConfirmEdit"],
   "components/data-iterators": ["VDataIterator"],
   "components/date-inputs": ["VDateInput", "VDatePicker"],

@@ -1,0 +1,79 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-audio-controls
+    direction: ltr
+    align-items: center
+    background: transparent
+    color: inherit
+    display: flex
+    position: relative
+    width: 100%
+
+    &--stacked
+      flex-wrap: wrap
+
+      > .v-audio-controls__progress
+        flex: 1 0 100%
+        flex-wrap: wrap
+        justify-content: space-between
+        order: -1
+        row-gap: 0
+
+        > .v-audio-controls__seek
+          --v-media-progress-bar-height: #{$audio-seek-stacked-height}
+          flex: 1 0 100%
+          order: -1
+
+        > .v-audio-controls__time
+          min-width: 0
+
+      .v-audio-controls__actions
+        flex: 1 1 auto
+        justify-content: center
+        min-width: 0
+
+      .v-audio-controls__time
+        font-size: $audio-time-stacked-font-size
+
+    &__actions
+      align-items: center
+      display: flex
+      flex: 1 0 auto
+      gap: $audio-controls-actions-gap
+
+      .v-audio-controls__progress
+        margin-inline: $audio-controls-progress-gap
+
+    &__progress
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      gap: $audio-controls-progress-gap
+      min-width: $audio-controls-progress-min-width
+
+    &__seek
+      align-items: center
+      display: flex
+      flex: 1 1 auto
+      min-width: 0
+
+    &__time
+      flex: 0 0 auto
+      font-size: $audio-time-font-size
+      font-variant-numeric: tabular-nums
+      letter-spacing: $audio-time-letter-spacing
+      line-height: $audio-time-line-height
+      min-width: $audio-time-min-width
+      text-align: center
+      white-space: nowrap
+
+    &__volume
+      align-items: center
+      display: flex
+      flex: 0 0 auto
+      gap: $audio-controls-volume-gap
+
+      &.v-media-volume--inline:not(.v-media-volume--collapsed)
+        width: $audio-volume-width

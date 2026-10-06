@@ -1,0 +1,38 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-audio
+    align-items: center
+    display: flex
+    min-width: $audio-min-width
+    position: relative
+    width: 100%
+
+    &--error
+      .v-audio__controls
+        visibility: hidden
+
+    &__controls
+      flex: 1 1 auto
+      min-width: 0
+      position: relative
+
+    &__loader
+      animation: v-audio-loader-in 0s $audio-loader-delay both
+      inset-inline: 0
+      bottom: 0
+      position: absolute
+
+    &__error
+      align-items: center
+      display: flex
+      font-size: $audio-time-font-size
+      gap: $audio-gap
+      inset: 0
+      justify-content: center
+      position: absolute
+
+  @keyframes v-audio-loader-in
+    from
+      visibility: hidden
