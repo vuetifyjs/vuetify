@@ -9,7 +9,7 @@
     "reverse": "Reverse the normal transition direction.",
     "showArrows": "Display the \"next\" and \"prev\" buttons.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
-    "transitionDuration": "Overrides transition duration. Does not work in firefox, safari <18, or with `prefers-reduced-motion: reduce`.",
+    "transitionDuration": "Overrides transition duration. Ignored with `prefers-reduced-motion: reduce`.",
     "verticalArrows": "Displays the navigation arrows vertically instead of horizontally."
   },
   "slots": {
