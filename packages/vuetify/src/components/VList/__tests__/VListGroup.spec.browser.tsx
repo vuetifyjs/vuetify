@@ -47,22 +47,22 @@ describe('VListGroup', () => {
     const visible = ref(true)
     const opened = ref(['Users'])
     render(() => (
-        <VList opened={ opened.value }>
-          {
-            visible.value && (
-              <VListGroup value="Users">
-                {{
-                  default: () => (
-                    <>
-                      <VListItem title="Foo" />
-                      <VListItem title="Bar" />
-                    </>
-                  ),
-                }}
-              </VListGroup>
-            )
-          }
-        </VList>
+      <VList opened={ opened.value }>
+        {
+          visible.value && (
+            <VListGroup value="Users">
+              {{
+                default: () => (
+                  <>
+                    <VListItem title="Foo" />
+                    <VListItem title="Bar" />
+                  </>
+                ),
+              }}
+            </VListGroup>
+          )
+        }
+      </VList>
     ))
 
     expect(screen.queryByRole('group')).not.toBeNull()

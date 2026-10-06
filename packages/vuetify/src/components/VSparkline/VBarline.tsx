@@ -313,38 +313,38 @@ export const VBarline = genericComponent<VBarlineSlots>()({
       const gradientData = !props.gradient.slice().length ? [''] : props.gradient.slice().reverse()
       return (
         <Fragment>
-        <svg
-          ref={ svgRef }
-          display="block"
-          tabindex={ props.interactive ? 0 : undefined }
-          onMousemove={ props.interactive ? onSvgMousemove : undefined }
-          onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
-          onFocus={ props.interactive ? onSvgFocus : undefined }
-          onBlur={ props.interactive ? onSvgBlur : undefined }
-          onKeydown={ props.interactive ? onSvgKeydown : undefined }
-          { ...attrs }
-        >
-          <defs>
-            <linearGradient
-              id={ id.value }
-              gradientUnits="userSpaceOnUse"
-              x1={ props.gradientDirection === 'left' ? '100%' : '0' }
-              y1={ props.gradientDirection === 'top' ? '100%' : '0' }
-              x2={ props.gradientDirection === 'right' ? '100%' : '0' }
-              y2={ props.gradientDirection === 'bottom' ? '100%' : '0' }
-            >
-              {
-                gradientData.map((color, index) => (
-                  <stop offset={ index / (Math.max(gradientData.length - 1, 1)) } stop-color={ color || 'currentColor' } />
-                ))
-              }
-            </linearGradient>
-          </defs>
+          <svg
+            ref={ svgRef }
+            display="block"
+            tabindex={ props.interactive ? 0 : undefined }
+            onMousemove={ props.interactive ? onSvgMousemove : undefined }
+            onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
+            onFocus={ props.interactive ? onSvgFocus : undefined }
+            onBlur={ props.interactive ? onSvgBlur : undefined }
+            onKeydown={ props.interactive ? onSvgKeydown : undefined }
+            { ...attrs }
+          >
+            <defs>
+              <linearGradient
+                id={ id.value }
+                gradientUnits="userSpaceOnUse"
+                x1={ props.gradientDirection === 'left' ? '100%' : '0' }
+                y1={ props.gradientDirection === 'top' ? '100%' : '0' }
+                x2={ props.gradientDirection === 'right' ? '100%' : '0' }
+                y2={ props.gradientDirection === 'bottom' ? '100%' : '0' }
+              >
+                {
+                  gradientData.map((color, index) => (
+                    <stop offset={ index / (Math.max(gradientData.length - 1, 1)) } stop-color={ color || 'currentColor' } />
+                  ))
+                }
+              </linearGradient>
+            </defs>
 
-          <clipPath id={ `${id.value}-clip` }>
-            {
-              bars.value.map((item, i) => (
-                <rect
+            <clipPath id={ `${id.value}-clip` }>
+              {
+                bars.value.map((item, i) => (
+                  <rect
                     ref={ (el: any) => { if (el) clipRects.value[i] = el } }
                     x={ item.x + offsetX.value }
                     y={ item.y }
@@ -352,75 +352,75 @@ export const VBarline = genericComponent<VBarlineSlots>()({
                     height={ item.height }
                     rx={ smooth.value }
                     ry={ smooth.value }
-                />
-              ))
-            }
-          </clipPath>
-
-          { hasLabels.value && (
-            <g
-              key="labels"
-              style={{
-                textAnchor: 'middle',
-                dominantBaseline: 'mathematical',
-                fill: 'currentColor',
-              }}
-            >
-              {
-                parsedLabels.value.map((item, i) => (
-                  <text
-                    x={ item.x + offsetX.value + lineWidth.value / 2 }
-                    y={ (parseInt(props.height, 10) - 2) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
-                    font-size={ Number(props.labelSize) || 7 }
-                  >
-                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
-                  </text>
+                  />
                 ))
               }
-            </g>
-          )}
+            </clipPath>
 
-          { props.interactive && currentIndex.value !== null && (
-            <rect
-              key="highlight"
-              x={ animatedX.value - offsetX.value }
-              y={ 0 }
-              width={ columnWidth.value }
-              height={ props.height }
-              fill="currentColor"
-              opacity={ 0.1 }
-              pointer-events="none"
+            { hasLabels.value && (
+              <g
+                key="labels"
+                style={{
+                  textAnchor: 'middle',
+                  dominantBaseline: 'mathematical',
+                  fill: 'currentColor',
+                }}
+              >
+                {
+                  parsedLabels.value.map((item, i) => (
+                    <text
+                      x={ item.x + offsetX.value + lineWidth.value / 2 }
+                      y={ (parseInt(props.height, 10) - 2) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
+                      font-size={ Number(props.labelSize) || 7 }
+                    >
+                      { slots.label?.({ index: i, value: item.value }) ?? item.value }
+                    </text>
+                  ))
+                }
+              </g>
+            )}
+
+            { props.interactive && currentIndex.value !== null && (
+              <rect
+                key="highlight"
+                x={ animatedX.value - offsetX.value }
+                y={ 0 }
+                width={ columnWidth.value }
+                height={ props.height }
+                fill="currentColor"
+                opacity={ 0.1 }
+                pointer-events="none"
+              />
+            )}
+
+            <g
+              clip-path={ `url(#${id.value}-clip)` }
+              fill={ `url(#${id.value})` }
+            >
+              <rect
+                x={ 0 }
+                y={ 0 }
+                width={ totalWidth.value }
+                height={ props.height }
+              ></rect>
+            </g>
+          </svg>
+
+          { !!props.tooltip && (
+            <VSparklineTooltip
+              key="tooltip"
+              modelValue={ tooltipVisible.value }
+              target={ tooltipTarget.value }
+              index={ currentIndex.value }
+              value={ currentIndex.value !== null ? bars.value[currentIndex.value].value : 0 }
+              offset={ tooltipConfig.value.offset }
+              contentClass={ tooltipConfig.value.class }
+              titleFormat={ tooltipConfig.value.titleFormat }
+              location="top center"
+              onAfterLeave={ onTooltipAfterLeave }
+              v-slots={{ default: slots.tooltip }}
             />
           )}
-
-          <g
-            clip-path={ `url(#${id.value}-clip)` }
-            fill={ `url(#${id.value})` }
-          >
-            <rect
-              x={ 0 }
-              y={ 0 }
-              width={ totalWidth.value }
-              height={ props.height }
-            ></rect>
-          </g>
-        </svg>
-
-        { !!props.tooltip && (
-          <VSparklineTooltip
-            key="tooltip"
-            modelValue={ tooltipVisible.value }
-            target={ tooltipTarget.value }
-            index={ currentIndex.value }
-            value={ currentIndex.value !== null ? bars.value[currentIndex.value].value : 0 }
-            offset={ tooltipConfig.value.offset }
-            contentClass={ tooltipConfig.value.class }
-            titleFormat={ tooltipConfig.value.titleFormat }
-            location="top center"
-            onAfterLeave={ onTooltipAfterLeave }
-            v-slots={{ default: slots.tooltip }}
-          />
-        )}
         </Fragment>
       )
     })

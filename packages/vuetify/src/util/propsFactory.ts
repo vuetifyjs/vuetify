@@ -1,5 +1,5 @@
 // Types
-import type { IfAny } from '@vue/shared' // eslint-disable-line vue/prefer-import-from-vue
+import type { IfAny } from '@vue/shared'
 import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
 import { isObject } from './v0'
 

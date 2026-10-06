@@ -1,4 +1,4 @@
-/* eslint-disable local-rules/sort-imports */
+/* eslint-disable local/sort-imports */
 
 import 'vue/jsx'
 import type { UnwrapNestedRefs, VNodeChild } from 'vue'

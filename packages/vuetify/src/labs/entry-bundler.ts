@@ -1,5 +1,4 @@
-/* eslint-disable local-rules/sort-imports */
-
+/* eslint-disable local/sort-imports */
 // Components
 import * as components from './allComponents'
 import * as directives from '@/directives'

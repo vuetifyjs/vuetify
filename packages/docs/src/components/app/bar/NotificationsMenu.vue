@@ -118,7 +118,6 @@
       emoji: string
       text: string
     }
-    // eslint-disable-next-line camelcase
     created_at: string
     slug: string
     title: string
