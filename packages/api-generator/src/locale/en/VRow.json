@@ -22,6 +22,11 @@
     "justifyXl": "Deprecated, use **justify-xl-\\*** class",
     "justifyXxl": "Deprecated, use **justify-xxl-\\*** class",
     "gap": "Sets the gap between `v-col`s. Can be a single value for both row and column gap, or the array of two values [column gap, row gap].",
+    "gapSm": "Changes the gap on small and greater breakpoints. Accepts the same values as **gap**.",
+    "gapMd": "Changes the gap on medium and greater breakpoints. Accepts the same values as **gap**.",
+    "gapLg": "Changes the gap on large and greater breakpoints. Accepts the same values as **gap**.",
+    "gapXl": "Changes the gap on extra large and greater breakpoints. Accepts the same values as **gap**.",
+    "gapXxl": "Changes the gap on extra extra large and greater breakpoints. Accepts the same values as **gap**.",
     "noGutters": "Removes the gutter between `v-col`s (same as `gap='0'`).",
     "size": "Sets the number of columns."
   }
