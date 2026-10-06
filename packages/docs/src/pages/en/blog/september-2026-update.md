@@ -311,7 +311,7 @@ v4.3.0 is due October 15. [v4.2.4](/getting-started/release-notes/?version=v4.2.
 
 :::
 
-Thanks to everyone who sent a PR in September: [SonTT19](https://github.com/SonTT19), [ajslater](https://github.com/ajslater), [lazerg](https://github.com/lazerg), [modos](https://github.com/modos), [morimorimokenpi](https://github.com/morimorimokenpi) and [pupuking723](https://github.com/pupuking723) in the framework, [sridhar-3009](https://github.com/sridhar-3009) in Vuetify0, and [MBK-fr](https://github.com/MBK-fr) in the Nuxt module.
+Thanks to everyone who sent a PR in September: [SonTT19](https://github.com/SonTT19), [ajslater](https://github.com/ajslater), [lazerg](https://github.com/lazerg), [modos](https://github.com/modos) and [morimorimokenpi](https://github.com/morimorimokenpi) in the framework, [sridhar-3009](https://github.com/sridhar-3009) in Vuetify0, and [MBK-fr](https://github.com/MBK-fr) in the Nuxt module.
 
 See you in October!
 
