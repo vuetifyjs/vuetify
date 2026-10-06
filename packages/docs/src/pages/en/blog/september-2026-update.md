@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: September 2026 Update
-  description: This september team shipped v4.2 folowed by 3 patches, while steadily moving to offload more utilities to @vuetify/v0.
+  description: This September the team shipped v4.2, followed by 3 patches, while steadily moving to offload more utilities to @vuetify/v0.
   keywords: Vuetify September 2026, Vuetify 4.2, Vuetify 4.3, @vuetify/v0, VInfiniteCarousel, CSS layers, Vuetify MCP
 ---
 
@@ -25,7 +25,7 @@ meta:
 
 # September 2026 Update
 
-**September was about Vuetify0 moving into Vuetify.** [v4.2.0](/getting-started/release-notes/?version=v4.2.0) went stable on September 2 and three patches followed. Meanwhile `dev` branch filled up for v4.3: a new labs component, MD3 tabs, a modal rail drawer, and the first Vuetify composables that are now thin wrappers over `@vuetify/v0`.
+**September was about Vuetify0 moving into Vuetify.** [v4.2.0](/getting-started/release-notes/?version=v4.2.0) went stable on September 2 and three patches followed. Meanwhile the `dev` branch filled up for v4.3: a new labs component, MD3 tabs, a modal rail drawer, and the first Vuetify composables that are now thin wrappers over `@vuetify/v0`.
 
 ![Hero image for September update](https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/september-hero.png "September hero image"){ height=112 }
 
@@ -106,11 +106,11 @@ Vuetify 4.2 added `@vuetify/v0` as a dependency but only used its type guards, `
 
 **RTL and locale.** `createRtl` keeps direction in v0, while the locale map still decides it. A sync watch updates `isRtl` in the same tick as the locale change, so nothing reads a stale value. `t('$vuetify.close')` strips the prefix and reads from v0, and v0 fills the `{0}` placeholders. `n()` stays on Vuetify's `Intl.NumberFormat`: v0's `n()` skips `Intl` when there is no `window`, which would change server-rendered pagination numbers. Neither v0 plugin is installed, so v0 does not set `dir` on `<html>`.
 
-**Observers.** `useResizeObserver` and `useIntersectionObserver` are now re-exports from v0, and `v-mutate` uses v0's mutation observer. The PR removes a net 184 lines but kept some code for precise measurements that layout components rely on.
+**Observers.** `useResizeObserver` and `useIntersectionObserver` are now re-exports from v0, and `v-mutate` uses v0's mutation observer. The PR removes a net 184 lines but keeps some code for precise measurements that layout components rely on.
 
 **Display.** The open PR computes breakpoint flags with v0's `createBreakpoints` and uses `matchMedia` where available, so zoomed pages follow the CSS media query instead of `innerWidth`. Writing it found two bugs in v0, both fixed in [1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3): flags didn't follow the matched breakpoint name when a custom threshold map wasn't sorted, and `createBreakpoints` only tracked resize when the plugin was installed ([#1003](https://github.com/vuetifyjs/0/pull/1003), [#1004](https://github.com/vuetifyjs/0/pull/1004)).
 
-**Theme, for now, stays.** v0 could only take over the `prefers-color-scheme` listener. Colors, variations, utility classes consitute majority of theme logic and would still live in Vuetify codebase. We'll revisit once a v0 adapter owns the CSS variable sheet. The full rewrite might land on `next` branch (for v5.0.0) instead.
+**Theme, for now, stays.** v0 could only take over the `prefers-color-scheme` listener. Colors, variations, utility classes constitute the majority of theme logic and would still live in Vuetify codebase. We'll revisit once a v0 adapter owns the CSS variable sheet. The full rewrite might land on `next` branch (for v5.0.0) instead.
 
 ### What this means for you
 
@@ -148,13 +148,13 @@ Nothing to change in your app. Vuetify depends on `@vuetify/v0@^1.2.1`, so a fix
 | **VExpansionPanels**          | `rounded-0` should not appear when `rounded` is not set              | v4.2.3   | [17c9f8d](https://github.com/vuetifyjs/vuetify/commit/17c9f8d) |
 | **VProgressLinear**           | Split buffer bar should render when value is 0                       | v4.2.3   | [af79966](https://github.com/vuetifyjs/vuetify/commit/af79966) |
 
-Notably, the autofill fix will make the VSelect and VAutocomplete accept address autofill (both from native browser functionality as well as browser extensions). For example browser inserts a code like `US` (A country or territory code) instead of `United States` when the field has `autocomplete='country'`. If you upgrade to latest Vuetify version, and the `items` effective values are country codes, your users will get country selection autocompleted. If you immediately think "_VSelect cannot hold all the subregions for all countries, what if after country field change, I load the regions/states lazily?_". Well.. we got you covrered. As long as the app is able to resolve regions list within 1 second and the field was not focused, it will re-apply the selection after `items` get updated.
+Notably, the autofill fix will make the VSelect and VAutocomplete accept address autofill (both from native browser functionality as well as browser extensions). For example, the browser inserts a code like `US` (a country or territory code) instead of `United States` when the field has `autocomplete='country'`. If you upgrade to the latest Vuetify version, and the `items` effective values are country codes, your users will get country selection autocompleted. If you immediately think "_VSelect cannot hold all the subregions for all countries, what if after country field change, I load the regions/states lazily?_". Well... we got you covered. As long as the app is able to resolve the regions list within 1 second and the field was not focused, it will re-apply the selection after `items` get updated.
 
 Meanwhile, **v3.13 LTS** got three patches: scroll glitches with expanded rows in VDataTableVirtual ([3.13.3](/getting-started/release-notes/?version=v3.13.3)), the CSS `zoom` overlay fixes ([3.13.4](/getting-started/release-notes/?version=v3.13.4)), and focus resolution in Shadow DOM ([3.13.5](/getting-started/release-notes/?version=v3.13.5)).
 
 ### CSS layer order { #css-layer-order }
 
-Vuetify 4 relies on the order of its cascade layers.. Actually, any website that makes use of CSS layers needs to make sure the browser gets them first. Unfortunately since Vite v8, the order of imports in `main.ts` does not guarantee the effective order for the browser (in production). The order is declared as part of `vuetify/styles/core`, but each component also imports its own CSS that opens `@layer vuetify-components`. Multiple community members reached out to let us know about different scenarios that led UI to "misbehave" - wrong colors, wrong text size. It took the team multiple weeks and fixes on multiple angles to finally solve it.. that is, as long as your project matches any of the supported scaffolding templates from `@vuetify/cli`. Still, if you struggle and troubleshooting drags for hours, our Discord server is open and someone will be there to help you get through different problems that arise during v3 » v4 migration.
+Vuetify 4 relies on the order of its cascade layers... Actually, any website that makes use of CSS layers needs to make sure the browser gets them first. Unfortunately since Vite v8, the order of imports in `main.ts` does not guarantee the effective order for the browser (in production). The order is declared as part of `vuetify/styles/core`, but each component also imports its own CSS that opens `@layer vuetify-components`. Multiple community members reached out to let us know about different scenarios that led UI to "misbehave" - wrong colors, wrong text size. It took the team multiple weeks and fixes on multiple angles to finally solve it... that is, as long as your project matches any of the supported scaffolding templates from `@vuetify/cli`. Still, if you struggle and troubleshooting drags for hours, our Discord server is open and someone will be there to help you get through different problems that arise during v3 » v4 migration.
 
 Anyways, the [layers guide](/styles/layers/#custom-layer-order) now recommends a static `public/layers.css` linked before any other stylesheet:
 
@@ -170,7 +170,7 @@ The Nuxt module inlines the layer order on its own ([nuxt-module#382](https://gi
 
 Merged to `dev`, targeting [v4.3.0](https://github.com/vuetifyjs/vuetify/milestone/93) (due October 15).
 
-**[VInfiniteCarousel](https://dev.vuetifyjs.com/en/components/infinite-carousels/)** (labs) scrolls its content as one continuous strip, repeating it as many times as needed to fill the container. It animates with the Web Animations API, supports dragging, arrows, reverse direction, gaps, separators and keyboard navigation. It clips with `overflow: clip` so the container is not glitch by unexpectedly moving to a focused item. Ships with touch support and vertical direction from day one. It utilizes WAAPI under the hood for smooth play/pause and dragging with cursor ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116)).
+**[VInfiniteCarousel](https://dev.vuetifyjs.com/en/components/infinite-carousels/)** (labs) scrolls its content as one continuous strip, repeating it as many times as needed to fill the container. It animates with the Web Animations API, supports dragging, arrows, reverse direction, gaps, separators and keyboard navigation. It clips with `overflow: clip` so the container does not glitch by unexpectedly moving to a focused item. Ships with touch support and vertical direction from day one. It utilizes WAAPI under the hood for smooth play/pause and dragging with cursor ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116)).
 
 <video width="100%" height="auto" loop controls class="mb-4">
   <source src="https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/demo-of--v-infinite-carousel.webm" type="video/webm"></source>
@@ -204,20 +204,20 @@ Early October additions on `dev`: wheel navigation for VWindow and VCarousel ([#
 
 Open PRs on the v4.3.0 milestone:
 
-* **VVideo** ([#23241](https://github.com/vuetifyjs/vuetify/pull/23241)) ships general overhaul, chapters, buffering, wavy progress bar, easier layout customization.
-* **VAudio** ([#23227](https://github.com/vuetifyjs/vuetify/pull/23227)) player for music tracks or podcasts with API aligned to match VVideo enhancements. Offers with optional wavefrom instead of progress bar.
-* **VMenu right-click support** ([#23196](https://github.com/vuetifyjs/vuetify/pull/23196)) for framework-native context menu that requires single prop in place of hacks and workarounds
+* **VVideo** ([#23241](https://github.com/vuetifyjs/vuetify/pull/23241)) ships a general overhaul, chapters, buffering, wavy progress bar, easier layout customization.
+* **VAudio** ([#23227](https://github.com/vuetifyjs/vuetify/pull/23227)) player for music tracks or podcasts with API aligned to match VVideo enhancements. Offers an optional waveform instead of progress bar.
+* **VMenu right-click support** ([#23196](https://github.com/vuetifyjs/vuetify/pull/23196)) for framework-native context menu that requires a single prop in place of hacks and workarounds
 * Multiple opt-in improvements to align with MD3
 
 ### Behind the scenes
 
-Framework maintainers keep the quality bar high and usually act as gate keepers, but multiple invisible improvements have been made to make it easier for external contributors to work in the forked repo and create PRs that meet all the quality standards.
+Framework maintainers keep the quality bar high and usually act as gatekeepers, but multiple invisible improvements have been made to make it easier for external contributors to work in the forked repo and create PRs that meet all the quality standards.
 
-* new [`AGENTS.md`](https://github.com/vuetifyjs/vuetify/blob/master/AGENTS.md) landed alongside handful of files and skills to guide AI tools
-* dev/Playground was extended to make it easier to test against different browser locales (if you work with i18n heavy apps, fill free to borrow the trick from [skills/playground](https://github.com/vuetifyjs/vuetify/blob/master/.claude/skills/playground/SKILL.md))
+* new [`AGENTS.md`](https://github.com/vuetifyjs/vuetify/blob/master/AGENTS.md) landed alongside a handful of files and skills to guide AI tools
+* dev/Playground was extended to make it easier to test against different browser locales (if you work with i18n heavy apps, feel free to borrow the trick from [skills/playground](https://github.com/vuetifyjs/vuetify/blob/master/.claude/skills/playground/SKILL.md))
 * dependencies are managed with a PNPM catalog which simplifies version lookup and future updates are in 1 file only
 * no more legacy Cypress specs and leftovers - codebase is fully migrated to Vitest browser mode and 100% of the 2000+ tests pass green
-* ESLint got ugraded to v10, lint checks consume less memory when running locally - though it landed in October, it fits nicely on the list
+* ESLint got upgraded to v10, lint checks consume less memory when running locally - though it landed in October, it fits nicely on the list
 
 ::: tip
 
