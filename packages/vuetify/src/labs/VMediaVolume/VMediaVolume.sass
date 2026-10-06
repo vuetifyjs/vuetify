@@ -3,9 +3,21 @@
 
 @include tools.layer('components')
   .v-media-volume
+    direction: ltr
+
     &--inline
       display: flex
       align-items: center
+
+    // keeps the thumb inside the track, like VMediaProgressBar
+    &__slider.v-slider.v-input--horizontal
+      .v-slider-track
+        margin-inline: calc(var(--v-media-volume-thumb-size) / 2)
+        width: calc(100% - var(--v-media-volume-thumb-size))
+
+      .v-slider-thumb
+        inset-inline-start: var(--v-slider-thumb-position)
+        transform: translate(calc(-1 * var(--v-slider-thumb-position)), -50%)
 
     &__expand
       display: grid

@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { MaybeTransition } from '@/composables/transition'
-import { getSeekStep, useMedia } from '@/labs/composables/media'
+import { getSeekStep, useMedia, usePlayhead } from '@/labs/composables/media'
 
 // Utilities
 import { onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
@@ -30,12 +30,19 @@ import { createRange, genericComponent, omit, pick, propsFactory, useRender } fr
 
 // Types
 import type { Component, PropType, TransitionProps } from 'vue'
-import type { VVideoControlsActionsSlot, VVideoControlsVariant } from './VVideoControls'
+import type { VVideoControlsActionsSlot, VVideoControlsPropsSlot, VVideoControlsVariant } from './VVideoControls'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VVideoSlots = {
+  [key: `action.${string}`]: VVideoControlsActionsSlot
   header: never
   controls: VVideoControlsActionsSlot
+  play: VVideoControlsPropsSlot
+  progress: VVideoControlsPropsSlot
+  time: VVideoControlsActionsSlot
+  'time.elapsed': VVideoControlsActionsSlot
+  'time.remaining': VVideoControlsActionsSlot
+  'time.total': VVideoControlsActionsSlot
   prepend: VVideoControlsActionsSlot
   append: VVideoControlsActionsSlot
   loader: LoaderSlotProps
@@ -49,22 +56,23 @@ type Variant = typeof allowedVariants[number]
 export const makeVVideoProps = propsFactory({
   aspectRatio: [String, Number],
   autoplay: Boolean,
-  muted: Boolean,
   eager: Boolean,
   error: [Boolean, Object] as PropType<MediaError | boolean>,
   src: String,
   srcObject: [Object, null] as PropType<MediaProvider | null>,
   type: String, // e.g. video/mp4
   image: String,
+  hideControls: Boolean,
   hideOverlay: Boolean,
   noFullscreen: Boolean,
-  showBuffer: Boolean,
+  hideBuffer: Boolean,
   startAt: [Number, String],
   variant: {
     type: String as PropType<Variant>,
     default: 'player',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  controlsGap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
   controlsTransition: {
     type: [Boolean, String, Object] as PropType<null | string | boolean | TransitionProps & { component?: any }>,
     component: VFadeTransition as Component,
@@ -85,6 +93,7 @@ export const makeVVideoProps = propsFactory({
   ...omit(makeVVideoControlsProps(), [
     'buffer',
     'fullscreen',
+    'gap',
     'variant',
   ]),
 }, 'VVideo')
@@ -139,12 +148,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
       onError: value => emit('error', value),
     })
 
+    const hasControls = toRef(() => props.variant === 'player' && !props.hideControls && props.controlsVariant !== 'hidden')
+    usePlayhead(videoRef, () => hasControls.value ? containerRef.value : undefined, { waiting })
+
     const state = toRef(() => error.value ? 'error'
       : loaded.value ? 'loaded'
       : triggered.value || props.autoplay ? 'loading'
       : 'idle')
-
-    const fullscreenEnabled = toRef(() => !props.noFullscreen && !String(attrs.controlsList ?? '').includes('nofullscreen'))
 
     function onLoadeddata () {
       loaded.value = true
@@ -201,10 +211,12 @@ export const VVideo = genericComponent<VVideoSlots>()({
           break
         }
         case e.key === 'ArrowUp': {
+          if (props.muted) break
           volume.value = Math.min(volume.value + 10, 100)
           break
         }
         case e.key === 'ArrowDown': {
+          if (props.muted) break
           volume.value = Math.max(volume.value - 10, 0)
           break
         }
@@ -247,7 +259,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     async function toggleFullscreen () {
-      if (!fullscreenEnabled.value || !document.fullscreenEnabled) {
+      if (props.noFullscreen || !document.fullscreenEnabled) {
         return
       }
       if (document.fullscreenElement) {
@@ -296,26 +308,24 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     useRender(() => {
-      const showControls = state.value === 'loaded' &&
-        props.variant === 'player' &&
-        props.controlsVariant !== 'hidden'
+      const showControls = state.value === 'loaded' && hasControls.value
 
       const posterTransition = props.variant === 'background'
         ? 'poster-fade-out'
         : 'fade-transition'
 
       const controlsProps = {
-        ...VVideoControls.filterProps(omit(props, ['variant', 'rounded', 'hideVolume'])),
+        ...VVideoControls.filterProps(omit(props, ['variant', 'rounded'])),
         rounded: Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded,
+        gap: props.controlsGap,
         fullscreen: fullscreen.value,
-        hideVolume: props.hideVolume || props.muted,
-        hideFullscreen: props.hideFullscreen || !fullscreenEnabled.value,
+        hideFullscreen: props.hideFullscreen || props.noFullscreen,
         density: props.density,
         variant: props.controlsVariant,
         playing: playing.value,
         progress: progress.value,
         duration: duration.value,
-        buffer: props.showBuffer ? buffered.value : 0,
+        buffer: props.hideBuffer ? 0 : buffered.value,
         volume: volume.value,
         ...props.controlsProps,
       }
@@ -447,7 +457,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
             }
             <MaybeTransition transition={ posterTransition }>
               { activeOverlays.poster && (
-                <div class="v-video__overlay-fill">
+                <div class="v-video__overlay-fill v-video__poster">
                   <VImg cover src={ props.image }>
                     <div
                       class={[
@@ -490,9 +500,8 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 { ...controlsEventHandlers }
               >
                 {{
+                  ...omit(slots, ['header', 'controls', 'loader', 'sources', 'error']),
                   default: slots.controls,
-                  prepend: slots.prepend,
-                  append: slots.append,
                 }}
               </VVideoControls>
             )}

@@ -4,7 +4,6 @@
       :start-at="10"
       :volume-props="{ inline: true }"
       class="mx-auto"
-      controls-variant="mini"
       height="300"
       image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       max-width="500"
@@ -15,7 +14,13 @@
       pills
     >
       <template v-slot:controls="{ play, pause, playing, progress, seek, volume, fullscreen, toggleFullscreen, labels }">
-        <v-defaults-provider :defaults="{ VIconBtn: { color: 'red', rounded: 'lg', size: '36', variant: 'flat' }, VSlider: { color: 'red', trackColor: 'white' } }">
+        <v-defaults-provider
+          :defaults="{
+            VIconBtn: { color: 'red', rounded: 'lg', size: '36', variant: 'flat' },
+            VMediaVolume: { VSlider: { color: 'red', trackColor: 'white' } },
+            VSlider: { color: 'red', trackColor: 'white' },
+          }"
+        >
           <div class="d-flex ga-3 w-100 px-2">
             <v-icon-btn
               :aria-label="labels.playAction"

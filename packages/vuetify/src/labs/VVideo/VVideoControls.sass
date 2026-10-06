@@ -9,8 +9,10 @@
     --v-background-opacity: #{$video-controls-default-background-opacity}
 
     // override by density logic
-    --v-video-controls-pill-height: 42px
+    --v-video-controls-pill-height: 44px
 
+    // players keep their layout in RTL
+    direction: ltr
     flex: 1 0 100%
     align-self: stretch
     padding: $video-controls-padding
@@ -43,7 +45,10 @@
     .v-video-control__pill
       display: flex
       align-items: center
-      gap: $video-controls-pill-gap
+      gap: var(--v-video-controls-pill-gap, #{$video-controls-pill-gap})
+
+      &:has(> .v-video__track)
+        flex: 1 1 auto
 
     &--pills
       --v-background-opacity: 1
@@ -73,18 +78,24 @@
           display: none
 
         &:has(> *:only-child)
-          padding-inline: 0
           justify-content: center
           border-radius: var(--v-video-controls-pill-border-radius)
 
-      > .v-video__time
+        &:has(> .v-video__action-play:only-child)
+          padding: 0
+
+      .v-video-control__pill > .v-video__time
         padding: $video-time-pill-padding
 
-    &--variant-tube
-      .v-video__track
+    &--stacked
+      > .v-video__track
+        --v-media-progress-bar-height: #{$video-tube-track-height}
         position: absolute
         top: $video-tube-track-top
         inset-inline: 0
+
+    &--stacked#{&}--pills > .v-video__track
+      inset-inline: $video-controls-padding
 
     &--split-time
       padding-inline: $video-controls-split-time-padding-inline

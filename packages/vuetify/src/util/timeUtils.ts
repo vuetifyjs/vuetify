@@ -1,5 +1,5 @@
-export function formatTime (seconds: number, fallback = '--:--') {
-  if (!Number.isFinite(seconds)) return fallback
+export function formatTime (seconds: number) {
+  if (!Number.isFinite(seconds)) return '--:--'
 
   const value = Math.max(0, seconds)
   return [

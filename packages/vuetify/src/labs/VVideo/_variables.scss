@@ -15,17 +15,18 @@ $video-center-icon-opacity: .6 !default;
 $video-center-icon-hover-transform: scale(1.05) !default;
 
 $video-tube-track-top: -12px !default;
+$video-tube-track-height: 4px !default;
 
 $video-time-font-size: 0.875rem !default;
 $video-time-line-height: 1 !default;
 $video-time-letter-spacing: 0.02em !default;
-$video-time-pill-padding: 0 16px !default;
+$video-time-pill-padding: 0 12px !default;
 
 $video-controls-height: 58px !default;
 $video-controls-padding: 8px !default;
 $video-controls-gap: 16px !default;
-$video-controls-pill-gap: 8px !default;
-$video-controls-pill-padding: 0 6px !default;
+$video-controls-pill-gap: 4px !default;
+$video-controls-pill-padding: 4px !default;
 $video-controls-pill-border-radius: 99px !default;
 $video-controls-pill-backdrop-filter: blur(5px) !default;
 $video-controls-default-background-opacity: .8 !default;

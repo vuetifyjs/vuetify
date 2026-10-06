@@ -9,8 +9,8 @@ import { VSlider } from '@/components/VSlider/VSlider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { useDisplay } from '@/composables/display'
-import { useLocale, useRtl } from '@/composables/locale'
+import { injectNestedDefaults } from '@/composables/defaults'
+import { LocaleSymbol, useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { canSetVolume, getVolumeIcon, useMute } from '@/labs/composables/media'
 
@@ -18,8 +18,8 @@ import { canSetVolume, getVolumeIcon, useMute } from '@/labs/composables/media'
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { shallowRef, toRef } from 'vue'
-import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
+import { provide, shallowRef, toRef } from 'vue'
+import { convertToUnit, EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,6 +33,7 @@ export const makeVMediaVolumeProps = propsFactory({
     default: 'visible',
   },
   label: String,
+  disabled: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'vertical',
@@ -69,11 +70,13 @@ export const VMediaVolume = genericComponent()({
   },
 
   setup (props, { attrs }) {
-    const { t } = useLocale()
-    const { isRtl } = useRtl()
-    const { platform } = useDisplay()
+    const locale = useLocale()
+    const { t } = locale
+    // VSlider mirrors from the injected locale, not from CSS direction
+    provide(LocaleSymbol, { ...locale, isRtl: shallowRef(false), rtlClasses: shallowRef('v-locale--is-ltr') })
     const volume = useProxiedModel(props, 'modelValue')
     const dragging = shallowRef(false)
+    const nestedSliderDefaults = injectNestedDefaults<VSlider['$props']>('VSlider')
     const { toggleMuted } = useMute(volume, dragging)
 
     const icon = toRef(() => {
@@ -84,11 +87,11 @@ export const VMediaVolume = genericComponent()({
 
     const label = toRef(() => props.label ?? t(volume.value > 0 ? '$vuetify.media.mute' : '$vuetify.media.unmute'))
 
-    const hideSlider = toRef(() => props.slider === 'hidden' || ((platform.value.ios || platform.value.mac) && !canSetVolume()))
+    const hideSlider = toRef(() => props.slider === 'hidden' || !canSetVolume())
     const isInline = toRef(() => !!props.inline)
     const isCollapsed = toRef(() => isInline.value && props.slider === 'hover')
     const hasMenu = toRef(() => !isInline.value && !hideSlider.value)
-    const isSliderFirst = toRef(() => props.inline === (isRtl.value ? 'right' : 'left'))
+    const isSliderFirst = toRef(() => props.inline === 'left')
 
     const containerRef = shallowRef<HTMLElement>()
     const menu = shallowRef(false)
@@ -107,10 +110,11 @@ export const VMediaVolume = genericComponent()({
     useRender(() => {
       const sliderDefaults = {
         hideDetails: true,
-        step: 5,
-        thumbSize: 16,
+        step: nestedSliderDefaults.value?.step ?? 5,
+        thumbSize: nestedSliderDefaults.value?.thumbSize ?? 16,
         onStart: () => dragging.value = true,
         onEnd: () => dragging.value = false,
+        onKeydown: (e: KeyboardEvent) => e.stopPropagation(),
       }
 
       const inlineSlider = isInline.value && (
@@ -118,9 +122,9 @@ export const VMediaVolume = genericComponent()({
           class="v-media-volume__slider"
           minWidth="50"
           aria-label={ t('$vuetify.media.volume') }
+          disabled={ props.disabled }
           modelValue={ volume.value }
           onUpdate:modelValue={ v => volume.value = v }
-          onKeydown={ (e: KeyboardEvent) => { e.stopPropagation() } }
           { ...sliderDefaults }
           { ...props.sliderProps }
         />
@@ -142,7 +146,10 @@ export const VMediaVolume = genericComponent()({
             },
             props.class,
           ]}
-          style={ props.style }
+          style={[
+            { '--v-media-volume-thumb-size': convertToUnit(props.sliderProps?.thumbSize ?? sliderDefaults.thumbSize) },
+            props.style,
+          ]}
           ref={ containerRef }
         >
           { isSliderFirst.value && slider }
@@ -150,6 +157,7 @@ export const VMediaVolume = genericComponent()({
           <VIconBtn
             icon={ icon.value }
             aria-label={ label.value }
+            disabled={ props.disabled }
             v-tooltip={[{
               text: props.label,
               location: 'top',
@@ -169,6 +177,7 @@ export const VMediaVolume = genericComponent()({
                 location="top center"
                 offset="8"
                 openOnHover
+                disabled={ props.disabled }
                 { ...props.menuProps }
               >
                 <div

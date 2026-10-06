@@ -2,8 +2,8 @@
   <v-video
     :volume="50"
     :volume-props="{ direction: 'horizontal', menuProps: { location: 'top left' } }"
+    actions="play next time - volume append fullscreen"
     class="mx-auto"
-    controls-variant="tube"
     density="comfortable"
     image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video-poster.jpg"
     max-width="450"
@@ -12,7 +12,7 @@
     track-color="red"
     eager
   >
-    <template v-slot:prepend>
+    <template v-slot:action.next>
       <v-icon-btn icon="mdi-skip-next"></v-icon-btn>
     </template>
     <template v-slot:append>

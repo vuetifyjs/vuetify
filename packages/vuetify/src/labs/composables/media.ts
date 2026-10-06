@@ -1,6 +1,6 @@
 // Utilities
 import { nextTick, onScopeDispose, shallowRef, watch } from 'vue'
-import { clamp, isNumber, isString } from '@/util'
+import { clamp, createRange, IN_BROWSER, isNullOrUndefined, isNumber, isString, isUndefined } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -28,7 +28,7 @@ export interface MediaOptions<T extends HTMLMediaElement> {
 }
 
 function toElementVolume (volume: number) {
-  return clamp(Number(volume) || 0, 0, 100) / 100
+  return clamp(volume || 0, 0, 100) / 100
 }
 
 export function resolveSeekTarget (target: MediaSeekTarget, current: number, total: number) {
@@ -38,6 +38,12 @@ export function resolveSeekTarget (target: MediaSeekTarget, current: number, tot
     : Number(value)
 
   return 'to' in target ? seconds : current + seconds
+}
+
+export function parseActions (actions: string | readonly (string | readonly string[])[]) {
+  return isString(actions)
+    ? actions.split(/([()])|[\s,]+/).filter(Boolean)
+    : actions.flatMap(item => isString(item) ? item : ['(', ...item, ')'])
 }
 
 export function getSeekStep (step: MediaSeekStep, large: boolean) {
@@ -58,7 +64,7 @@ export function useMedia<T extends HTMLMediaElement> (
 
   let startApplied = false
 
-  function writePosition (seconds: number, total: number) {
+  function setProgress (seconds: number, total: number) {
     progress.value = Number.isFinite(total) && total > 0
       ? clamp(100 * seconds / total, 0, 100)
       : 0
@@ -72,7 +78,7 @@ export function useMedia<T extends HTMLMediaElement> (
     const next = clamp(seconds, 0, total || seconds)
 
     media.currentTime = next
-    writePosition(next, total)
+    setProgress(next, total)
   }
 
   function seek (target: MediaSeekTarget) {
@@ -112,11 +118,11 @@ export function useMedia<T extends HTMLMediaElement> (
     el.value?.load()
   }
 
-  function onTimeupdate () {
+  function syncProgress () {
     const media = el.value
     if (!media || options.scrubbing?.value) return
 
-    writePosition(media.currentTime, media.duration)
+    setProgress(media.currentTime, media.duration)
   }
 
   function updateBuffered () {
@@ -124,14 +130,8 @@ export function useMedia<T extends HTMLMediaElement> (
     if (!media || !Number.isFinite(media.duration) || media.duration <= 0) return
 
     const { buffered: ranges, currentTime } = media
-    let end = 0
-    for (let i = 0; i < ranges.length; i++) {
-      if (ranges.start(i) <= currentTime && currentTime <= ranges.end(i)) {
-        end = ranges.end(i)
-        break
-      }
-    }
-    buffered.value = end
+    const index = createRange(ranges.length).find(i => ranges.start(i) <= currentTime && currentTime <= ranges.end(i))
+    buffered.value = isUndefined(index) ? 0 : ranges.end(index)
   }
 
   const listeners: Partial<Record<keyof HTMLMediaElementEventMap, () => void>> = {
@@ -141,7 +141,7 @@ export function useMedia<T extends HTMLMediaElement> (
 
       duration.value = Number.isFinite(media.duration) ? media.duration : 0
 
-      if (props.startAt != null && !startApplied) {
+      if (!isNullOrUndefined(props.startAt) && !startApplied) {
         startApplied = true
         seekTo(Number(props.startAt) || 0)
       }
@@ -149,7 +149,7 @@ export function useMedia<T extends HTMLMediaElement> (
       options.onLoaded?.(media)
     },
     timeupdate () {
-      onTimeupdate()
+      syncProgress()
       updateBuffered()
     },
     progress: updateBuffered,
@@ -160,7 +160,7 @@ export function useMedia<T extends HTMLMediaElement> (
     },
     pause () {
       playing.value = false
-      onTimeupdate()
+      syncProgress()
     },
     ended () {
       playing.value = false
@@ -189,13 +189,9 @@ export function useMedia<T extends HTMLMediaElement> (
     if (playbackRate) media.defaultPlaybackRate = media.playbackRate = playbackRate.value
     if (props.srcObject) media.srcObject = props.srcObject
 
-    for (const [name, listener] of Object.entries(listeners)) {
-      media.addEventListener(name, listener)
-    }
+    Object.entries(listeners).forEach(([name, listener]) => media.addEventListener(name, listener))
     onCleanup(() => {
-      for (const [name, listener] of Object.entries(listeners)) {
-        media.removeEventListener(name, listener)
-      }
+      Object.entries(listeners).forEach(([name, listener]) => media.removeEventListener(name, listener))
     })
   }, { immediate: true })
 
@@ -228,7 +224,7 @@ export function useMedia<T extends HTMLMediaElement> (
     buffered.value = 0
     waiting.value = false
     error.value = false
-    writePosition(0, 0)
+    setProgress(0, 0)
 
     // <source> src changes are ignored until load()
     nextTick(() => el.value?.load())
@@ -275,8 +271,10 @@ export function useMute (volume: Ref<number>, dragging?: Ref<boolean>) {
 
 let volumeSettable: boolean | undefined
 
+// iOS ignores volume writes, only mute works there
 export function canSetVolume () {
-  if (volumeSettable == null) {
+  if (!IN_BROWSER) return true
+  if (isUndefined(volumeSettable)) {
     const audio = document.createElement('audio')
     audio.volume = 0.5
     volumeSettable = audio.volume === 0.5
@@ -287,7 +285,93 @@ export function canSetVolume () {
 
 export function getVolumeIcon (volume: number) {
   if (volume > 50) return '$volumeHigh'
-  if (volume > 0) return '$volumeLow'
+  if (volume > 0) return '$volumeMedium'
 
   return '$volumeOff'
+}
+
+const CLOCK_RESYNC = 0.5
+const CLOCK_CATCH_UP = 0.02
+const CLOCK_HOLD_BACK = 0.2
+
+export interface PlayheadOptions {
+  waiting: Ref<boolean>
+  scrubbing?: Ref<boolean>
+}
+
+// currentTime ticks a few times per second and jumps ahead on resume,
+// so while playing, bars inside `container` follow a clock of their own eased toward it
+export function usePlayhead (
+  el: Ref<HTMLMediaElement | undefined>,
+  container: () => HTMLElement | undefined,
+  options: PlayheadOptions,
+) {
+  let frame = 0
+  let shown = -1
+  let shownAt = -1
+
+  function bars () {
+    return container()?.querySelectorAll<HTMLElement>('.v-media-progress-bar') ?? []
+  }
+
+  function paint (media: HTMLMediaElement, now: number) {
+    const reported = media.currentTime
+    const expected = shown + (shownAt < 0 ? 0 : now - shownAt) / 1000 * media.playbackRate
+    shown = shown < 0 || options.waiting.value || Math.abs(reported - expected) > CLOCK_RESYNC
+      ? reported
+      : expected + (reported - expected) * (reported > expected ? CLOCK_CATCH_UP : CLOCK_HOLD_BACK)
+    shownAt = now
+
+    const total = media.duration
+    const playhead = Number.isFinite(total) && total > 0
+      ? clamp(100 * shown / total, 0, 100)
+      : 0
+
+    // a bar being dragged shows the pointer, not the media
+    bars().forEach(bar => bar.classList.contains('v-media-progress-bar--dragging')
+      ? bar.style.removeProperty('--v-media-progress-bar-playhead')
+      : bar.style.setProperty('--v-media-progress-bar-playhead', String(playhead))
+    )
+  }
+
+  function tick () {
+    const media = el.value
+    if (!media || media.paused || options.scrubbing?.value) {
+      stop()
+      return
+    }
+
+    paint(media, performance.now())
+    frame = requestAnimationFrame(tick)
+  }
+
+  function start () {
+    if (frame || !container()) return
+
+    shownAt = -1
+    frame = requestAnimationFrame(tick)
+  }
+
+  function stop () {
+    if (frame) cancelAnimationFrame(frame)
+    frame = 0
+    bars().forEach(bar => bar.style.removeProperty('--v-media-progress-bar-playhead'))
+  }
+
+  const listeners = { play: start, pause: stop, seeking: () => shown = -1 }
+
+  watch(el, (media, _, onCleanup) => {
+    if (!media) return
+
+    Object.entries(listeners).forEach(([name, listener]) => media.addEventListener(name, listener))
+    onCleanup(() => {
+      Object.entries(listeners).forEach(([name, listener]) => media.removeEventListener(name, listener))
+    })
+  }, { immediate: true })
+
+  watch([() => options.scrubbing?.value, container], () => {
+    if (el.value && !el.value.paused) start()
+  })
+
+  onScopeDispose(stop)
 }

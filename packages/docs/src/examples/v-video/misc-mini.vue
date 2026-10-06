@@ -1,33 +1,29 @@
 <template>
   <div class="d-flex align-center justify-center ga-6 flex-wrap">
-    <v-defaults-provider :defaults="{ VVideoControls: { VIconBtn: { color: 'red', border: 'sm' } } }">
-      <v-video
-        aspect-ratio="1"
-        color="blue"
-        controls-variant="mini"
-        image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
-        rounded="lg"
-        src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
-        style="--v-video-controls-pill-border-radius: 8px"
-        width="300"
-        eager
-        hide-fullscreen
-        hide-volume
-        muted
-        pills
-      >
-        <template v-slot:prepend>
-          <VIconBtn class="mx-n1" icon="mdi-skip-previous"></VIconBtn>
-        </template>
-        <template v-slot:append>
-          <VIconBtn class="mx-n1" icon="mdi-skip-next"></VIconBtn>
-        </template>
-      </v-video>
-    </v-defaults-provider>
+    <v-video
+      :play-props="{ size: '56' }"
+      actions="- prev play next -"
+      aspect-ratio="1"
+      image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
+      progress-variant="pill"
+      rounded="lg"
+      src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
+      style="--v-video-controls-pill-border-radius: 8px"
+      width="300"
+      eager
+      muted
+      pills
+    >
+      <template v-slot:action.prev>
+        <VIconBtn icon="mdi-skip-previous"></VIconBtn>
+      </template>
+      <template v-slot:action.next>
+        <VIconBtn icon="mdi-skip-next"></VIconBtn>
+      </template>
+    </v-video>
 
     <v-video
       aspect-ratio="1"
-      controls-variant="mini"
       image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       rounded="xl"
       src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"

@@ -1,9 +1,19 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
+// registered so seeking can transition it
+@property --v-media-progress-bar-ratio
+  syntax: '<number>'
+  inherits: true
+  initial-value: 0
+
 @include tools.layer('components')
   .v-media-progress-bar
-    --v-media-progress-bar-at: var(--v-media-progress-bar-playhead, var(--v-media-progress-bar-position))
+    // unitless 0-100, so it can scale lengths as well as percentages
+    --v-media-progress-bar-ratio: var(--v-media-progress-bar-playhead, var(--v-media-progress-bar-position))
+    --v-media-progress-bar-at: calc(var(--v-media-progress-bar-ratio) * 1%)
+    --v-media-progress-bar-chapter-gap: #{$media-progress-bar-chapter-gap}
     align-items: center
     direction: ltr
     display: flex
@@ -28,10 +38,45 @@
         outline-offset: 2px
 
     &__track
+      border-radius: $media-progress-bar-border-radius
       flex: 1 1 auto
-      height: var(--v-media-progress-bar-height)
+      height: var(--v-media-progress-bar-height, #{$media-progress-bar-height})
       overflow: hidden
       position: relative
+
+    &__track--segmented
+      border-radius: 0
+      container-type: inline-size
+      overflow: visible
+
+    // layers keep full track width and shift back, so their clip-paths stay in track coordinates
+    &__segment
+      bottom: 0
+      overflow: hidden
+      position: absolute
+      top: 0
+      transition-duration: $media-progress-bar-segment-transition-duration
+      transition-property: top, bottom
+
+      > .v-media-progress-bar__background,
+      > .v-media-progress-bar__buffer,
+      > .v-media-progress-bar__fill
+        left: calc(-1 * var(--v-media-progress-bar-segment-offset))
+        right: auto
+        width: 100cqw
+
+      &:first-child
+        border-radius: $media-progress-bar-border-radius 0 0 $media-progress-bar-border-radius
+
+      // the wave svg may follow the segments, so not :last-child
+      &:last-of-type
+        border-radius: 0 $media-progress-bar-border-radius $media-progress-bar-border-radius 0
+
+      &--hovered
+        inset-block: calc(#{$media-progress-bar-segment-hover-grow} / -2)
+
+      @media (prefers-reduced-motion: reduce)
+        transition: none
 
     &__background,
     &__buffer,
@@ -50,19 +95,125 @@
     &__fill
       clip-path: inset(0 calc(100% - var(--v-media-progress-bar-at)) 0 0)
 
+    // the rail spans the track and measures it for the thumb
+    &__rail
+      container-type: inline-size
+      inset: 0
+      pointer-events: none
+      position: absolute
+
+    // transform, not `left`: `left` snaps to whole pixels and steps during slow playback
     &__thumb
       background: currentColor
       border-radius: 50%
-      height: $media-progress-bar-thumb-size
-      left: var(--v-media-progress-bar-at)
-      pointer-events: none
+      height: var(--v-media-progress-bar-thumb-size, #{$media-progress-bar-thumb-size})
+      left: 0
       position: absolute
       top: 50%
-      transform: translate(-50%, -50%)
-      width: $media-progress-bar-thumb-size
+      transform: translate(calc(var(--v-media-progress-bar-ratio) * (1cqw - 1%)), -50%)
+      width: var(--v-media-progress-bar-thumb-size, #{$media-progress-bar-thumb-size})
+      will-change: transform
 
     &--disabled &__thumb
       display: none
+
+    // MD3: a bar-shaped handle cuts a gap into the track
+    &--variant-pill,
+    &--variant-wavy
+      --v-media-progress-bar-handle: 0px
+      // without a handle the gap closes at both ends, so a full or empty bar has no notch
+      --v-media-progress-bar-gap: min(#{$media-progress-bar-handle-gap} / 2, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
+      // handle center in track coordinates, same travel as the thumb transform
+      --v-media-progress-bar-center: calc(var(--v-media-progress-bar-handle) / 2 + (100cqw - var(--v-media-progress-bar-handle)) * var(--v-media-progress-bar-ratio) / 100)
+      --v-media-progress-bar-before: calc(var(--v-media-progress-bar-center) - var(--v-media-progress-bar-handle) / 2 - var(--v-media-progress-bar-gap))
+      --v-media-progress-bar-after: calc(var(--v-media-progress-bar-center) + var(--v-media-progress-bar-handle) / 2 + var(--v-media-progress-bar-gap))
+      will-change: transform // makes thumb gaps even on both sides
+
+      &:not(.v-media-progress-bar--disabled):has(> .v-media-progress-bar__rail)
+        --v-media-progress-bar-handle: #{$media-progress-bar-handle-width}
+        --v-media-progress-bar-gap: #{$media-progress-bar-handle-gap}
+
+        &.v-media-progress-bar--dragging,
+        &:focus-visible
+          --v-media-progress-bar-handle: #{$media-progress-bar-handle-active-width}
+
+      .v-media-progress-bar__track
+        container-type: inline-size
+
+      // buffer sits over the background so opacities add up; a mask gap at the buffer end splits them
+      .v-media-progress-bar__background
+        --v-media-progress-bar-buffer-gap: clamp(0px, var(--v-media-progress-bar-buffer) - var(--v-media-progress-bar-after), #{$media-progress-bar-handle-gap})
+        clip-path: inset(0 0 0 var(--v-media-progress-bar-after) round $media-progress-bar-inner-radius)
+        mask-image: linear-gradient(90deg, #000 var(--v-media-progress-bar-buffer), transparent var(--v-media-progress-bar-buffer) calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)), #000 calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)))
+
+      .v-media-progress-bar__buffer
+        clip-path: inset(0 calc(100% - var(--v-media-progress-bar-buffer)) 0 var(--v-media-progress-bar-after) round $media-progress-bar-inner-radius)
+
+      .v-media-progress-bar__fill
+        clip-path: inset(0 calc(100% - var(--v-media-progress-bar-before)) 0 0)
+
+      .v-media-progress-bar__thumb
+        border-radius: calc(var(--v-media-progress-bar-handle) / 2)
+        // sizes meant for a round thumb are too short for a handle
+        height: max(var(--v-media-progress-bar-thumb-size, calc(var(--v-media-progress-bar-height, #{$media-progress-bar-height}) + #{$media-progress-bar-handle-offset})), #{$media-progress-bar-handle-min-height})
+        width: var(--v-media-progress-bar-handle)
+
+      // stop indicator, clipped like the background; its offset shrinks on thin bars
+      .v-media-progress-bar__track::after
+        --v-media-progress-bar-stop-offset: clamp(0px, #{$media-progress-bar-stop-offset}, (var(--v-media-progress-bar-height, #{$media-progress-bar-height}) - #{$media-progress-bar-stop-size}) / 2)
+        background: $media-progress-bar-stop-color
+        border-radius: 50%
+        clip-path: inset(0 0 0 calc(var(--v-media-progress-bar-after) - 100cqw + var(--v-media-progress-bar-stop-offset) + #{$media-progress-bar-stop-size}))
+        content: ''
+        height: $media-progress-bar-stop-size
+        position: absolute
+        right: var(--v-media-progress-bar-stop-offset)
+        opacity: $media-progress-bar-stop-opacity
+        top: calc(50% - #{$media-progress-bar-stop-size} / 2)
+        width: $media-progress-bar-stop-size
+
+    // played part is a static sine; without a handle a narrower gap still separates it from the track
+    &--variant-wavy
+      --v-media-progress-bar-gap: min(#{$media-progress-bar-wavy-gap}, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
+
+      .v-media-progress-bar__track
+        overflow: visible
+
+      .v-media-progress-bar__background,
+      .v-media-progress-bar__buffer
+        border-radius: inherit
+
+      &.v-media-progress-bar--seeking
+        transition-duration: $media-progress-bar-seek-duration
+        transition-property: --v-media-progress-bar-ratio
+        transition-timing-function: settings.$decelerated-easing
+
+        @media (prefers-reduced-motion: reduce)
+          transition: none
+
+    &__wave
+      --v-media-progress-bar-wave-stroke: var(--v-media-progress-bar-height, #{$media-progress-bar-height})
+      // path is drawn around y = 0, on the top edge of a box that sits on the track center;
+      // a zero-height svg is not painted at all
+      height: 1px
+      left: 0
+      overflow: visible
+      pointer-events: none
+      position: absolute
+      top: 50%
+      width: 100%
+
+      // dashes are measured along the curve, horizontal distances get stretched to match;
+      // round caps reach half a stroke past each dash end, so the dash is shortened by one stroke
+      > path
+        --v-media-progress-bar-wave-length: max(0px, min(var(--v-media-progress-bar-wave-end), var(--v-media-progress-bar-before)) - var(--v-media-progress-bar-wave-start) - var(--v-media-progress-bar-wave-stroke))
+        fill: none
+        stroke: currentColor
+        stroke-dasharray: calc(var(--v-media-progress-bar-wave-length) * var(--v-media-progress-bar-wave-stretch)) 100000px
+        stroke-dashoffset: calc((var(--v-media-progress-bar-wave-start) + var(--v-media-progress-bar-wave-stroke) / 2) * var(--v-media-progress-bar-wave-stretch) * -1)
+        stroke-linecap: round
+        // a zero-length dash still paints its round caps as a dot
+        stroke-width: clamp(0px, var(--v-media-progress-bar-wave-length) * 1000, var(--v-media-progress-bar-wave-stroke))
 
     &__tooltip
       background: $media-progress-bar-tooltip-background
@@ -86,6 +237,7 @@
 
     &__chapter
       font-weight: 500
+      unicode-bidi: plaintext
 
   @include tools.layer('trumps')
     @media (forced-colors: active)
@@ -93,7 +245,14 @@
         forced-color-adjust: none
         color: CanvasText
 
+        &::after
+          background: CanvasText
+
       .v-media-progress-bar__fill,
       .v-media-progress-bar__thumb
         forced-color-adjust: none
         background: Highlight
+
+      .v-media-progress-bar__wave > path
+        forced-color-adjust: none
+        stroke: Highlight

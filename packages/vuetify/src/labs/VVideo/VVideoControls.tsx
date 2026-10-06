@@ -12,24 +12,30 @@ import { VMediaVolume } from '@/labs/VMediaVolume/VMediaVolume'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { injectDefaults, injectNestedDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { resolveSeekTarget, useMute } from '@/labs/composables/media'
+import { parseActions, resolveSeekTarget, useMute } from '@/labs/composables/media'
 
 // Directives
 import vTooltip from '@/directives/tooltip'
 
 // Utilities
-import { computed, shallowRef, toRef } from 'vue'
-import { clamp, formatTime, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { computed, Fragment, shallowRef, toRef } from 'vue'
+import { clamp, convertToUnit, formatTime, genericComponent, isUndefined, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { VSlider } from '@/components/VSlider'
 import type { MediaSeekStep, MediaSeekTarget } from '@/labs/composables/media'
 import type { VMediaVolumeOptions, VMediaVolumeSlider } from '@/labs/VMediaVolume/VMediaVolume'
+
+export type VVideoAction =
+  | 'play' | 'progress' | 'time' | 'elapsed' | 'remaining' | 'volume' | 'fullscreen'
+  | 'prepend' | 'append' | '-' | (string & {})
 
 export type VVideoControlsActionsSlot = {
   play: () => void
@@ -38,14 +44,27 @@ export type VVideoControlsActionsSlot = {
   volume: Ref<number>
   playing: boolean
   progress: number
+  currentTime: { elapsed: string, remaining: string, total: string }
+  duration: number
   toggleMuted: () => void
   fullscreen: boolean
   toggleFullscreen: () => void
   labels: Record<string, string>
 }
 
+export type VVideoControlsPropsSlot = VVideoControlsActionsSlot & {
+  props: Record<string, unknown>
+}
+
 export type VVideoControlsSlots = {
+  [key: `action.${string}`]: VVideoControlsActionsSlot
   default: VVideoControlsActionsSlot
+  play: VVideoControlsPropsSlot
+  progress: VVideoControlsPropsSlot
+  time: VVideoControlsActionsSlot
+  'time.elapsed': VVideoControlsActionsSlot
+  'time.remaining': VVideoControlsActionsSlot
+  'time.total': VVideoControlsActionsSlot
   prepend: VVideoControlsActionsSlot
   append: VVideoControlsActionsSlot
 }
@@ -53,15 +72,30 @@ export type VVideoControlsSlots = {
 const allowedVariants = ['hidden', 'default', 'tube', 'mini'] as const
 export type VVideoControlsVariant = typeof allowedVariants[number]
 
+type Group = { names: string[], pill: boolean }
+
+function getPresetActions (variant: VVideoControlsVariant, splitTime: boolean, hideProgressBar: boolean) {
+  if (variant === 'mini') return ['-', 'prepend', 'play', '(', 'volume', 'append', 'fullscreen', ')', '-']
+
+  const progress = variant === 'tube' || hideProgressBar ? '-' : 'progress'
+  const time = splitTime ? ['elapsed', progress, 'remaining']
+    : variant === 'default' ? [progress]
+    : ['time', progress]
+
+  return ['play', 'prepend', ...time, '(', 'volume', 'append', 'fullscreen', ')']
+}
+
 export const makeVVideoControlsProps = propsFactory({
   color: String,
   bgColor: String,
   trackColor: String,
   playing: Boolean,
+  muted: Boolean,
   hidePlay: Boolean,
   hideVolume: Boolean,
   hideFullscreen: Boolean,
   hideProgressBar: Boolean,
+  hideThumb: Boolean,
   fullscreen: Boolean,
   floating: Boolean,
   splitTime: Boolean,
@@ -79,11 +113,23 @@ export const makeVVideoControlsProps = propsFactory({
     type: [Number, String],
     default: 100,
   },
+  gap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
+  actions: [String, Array] as PropType<string | readonly (VVideoAction | readonly VVideoAction[])[]>,
   variant: {
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  playProps: Object as PropType<VIconBtn['$props']>,
+  playIcon: {
+    type: String,
+    default: '$play',
+  },
+  pauseIcon: {
+    type: String,
+    default: '$pause',
+  },
+  progressVariant: String as PropType<VMediaProgressBar['$props']['variant']>,
   volumeProps: Object as PropType<VMediaVolumeOptions>,
   seekStep: {
     type: [Number, Array] as PropType<MediaSeekStep>,
@@ -94,7 +140,7 @@ export const makeVVideoControlsProps = propsFactory({
     default: 'visible',
   },
 
-  ...pick(makeVMediaProgressBarProps(), ['buffer']),
+  ...pick(makeVMediaProgressBarProps(), ['buffer', 'chapters']),
   ...makeDensityProps(),
   ...makeElevationProps(),
   ...makeThemeProps(),
@@ -125,22 +171,64 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       return props.bgColor ?? fallbackBackground
     })
 
+    const playing = useProxiedModel(props, 'playing')
+    const progress = useProxiedModel(props, 'progress')
+    const volume = useProxiedModel(props, 'volume', 100, (v?: number | string) => Number(v ?? 100))
+    const volumeRef = shallowRef<VMediaVolume>()
+    const progressBarDefaults = injectNestedDefaults<VMediaProgressBar['$props']>('VMediaProgressBar')
+    const sliderDefaults = injectNestedDefaults<VSlider['$props']>('VSlider')
+    const defaults = injectDefaults()
+    const fallbackMute = useMute(volume)
+
+    const actions = toRef(() => {
+      const list = isUndefined(props.actions)
+        ? getPresetActions(props.variant, props.splitTime, props.hideProgressBar)
+        : parseActions(props.actions)
+
+      return [
+        ...(list.includes('prepend') ? [] : ['prepend']),
+        ...list,
+        ...(list.includes('append') ? [] : ['append']),
+      ].filter(name => !(
+        (name === 'play' && props.hidePlay) ||
+        (name === 'volume' && props.hideVolume) ||
+        (name === 'fullscreen' && props.hideFullscreen)
+      ))
+    })
+
+    const groups = toRef(() => actions.value.reduce((state, name) => {
+      if (name === '(') {
+        if (!state.depth++) state.groups.push({ names: [], pill: true })
+      } else if (name === ')') {
+        state.depth = Math.max(state.depth - 1, 0)
+      } else if (name === '-' || (name === 'progress' && !state.depth)) {
+        state.groups.push({ names: [name], pill: false })
+        if (state.depth) state.groups.push({ names: [], pill: true })
+      } else if (state.depth) {
+        state.groups.at(-1)!.names.push(name)
+      } else {
+        state.groups.push({ names: [name], pill: true })
+      }
+      return state
+    }, { groups: [] as Group[], depth: 0 }).groups)
+
     const trackColor = toRef(() => {
       if (props.trackColor) {
         return props.trackColor
       }
 
-      const fallback = currentTheme.value.dark || !props.pills ? undefined : 'surface'
-      return (props.pills ? props.bgColor : props.color) ?? fallback
+      const onVideo = props.pills && !groups.value.some(({ names, pill }) => pill && names.includes('progress'))
+      const fallback = currentTheme.value.dark || !onVideo ? undefined : 'surface'
+      return (onVideo ? props.bgColor : props.color) ?? fallback
     })
 
-    const playing = useProxiedModel(props, 'playing')
-    const progress = useProxiedModel(props, 'progress')
-    const volume = useProxiedModel(props, 'volume', 100, (v?: number | string) => Number(v ?? 100))
-    const volumeRef = shallowRef<VMediaVolume>()
-    const fallbackMute = useMute(volume)
+    const stacked = toRef(() => !props.hideProgressBar &&
+      !actions.value.includes('progress') &&
+      (!isUndefined(props.actions) || props.variant === 'tube')
+    )
 
     function toggleMuted () {
+      if (props.muted) return
       if (volumeRef.value) volumeRef.value.toggleMuted()
       else fallbackMute.toggleMuted()
     }
@@ -156,7 +244,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     const labels = computed(() => {
       const playIconLocaleKey = playing.value ? 'pause' : 'play'
-      const volumeIconLocaleKey = volume.value ? 'mute' : 'unmute'
+      const volumeIconLocaleKey = volume.value && !props.muted ? 'mute' : 'unmute'
       const fullscreenIconLocaleKey = props.fullscreen ? 'exitFullscreen' : 'enterFullscreen'
       return {
         seek: t('$vuetify.media.seek'),
@@ -188,7 +276,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     useRender(() => {
       const sizes = props.pills
-        ? [42, 36, 30]
+        ? [36, 30, 24]
         : [32, 28, 24]
 
       const innerDefaults = {
@@ -203,13 +291,23 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           color: props.color,
         },
         VSlider: {
-          thumbSize: props.variant === 'tube' ? 10 : 16,
           hideDetails: true,
+        },
+        VMediaProgressBar: {
+          thumbSize: progressBarDefaults.value?.thumbSize ?? (stacked.value ? 10 : 16),
+        },
+        // inner provider wins over outer ones, so outer `VMediaVolume.VSlider` is spread back on top
+        VMediaVolume: {
+          VSlider: {
+            color: props.color,
+            ...sliderDefaults.value,
+            ...(defaults.value?.VMediaVolume as Record<string, any> | undefined)?.VSlider,
+          },
         },
       }
 
       const regularBtnSize = innerDefaults.VIconBtn.size
-      const playBtnSize = props.pills ? (regularBtnSize + 8) : regularBtnSize
+      const [gap, pillGap] = Array.isArray(props.gap) ? props.gap : [props.gap, props.gap]
 
       const pillClasses = [
         'v-video-control__pill',
@@ -225,6 +323,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         playing: playing.value,
         progress: progress.value,
         currentTime: currentTime.value,
+        duration: props.duration,
         seek,
         volume,
         toggleMuted,
@@ -233,12 +332,86 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         labels: labels.value,
       }
 
+      const playProps: Record<string, unknown> = {
+        size: props.pills ? (regularBtnSize + 8) : regularBtnSize,
+        ...props.playProps,
+        class: ['v-video__action-play', props.playProps?.class],
+        icon: playing.value ? props.pauseIcon : props.playIcon,
+        'aria-label': labels.value.playAction,
+        onClick: () => playing.value = !playing.value,
+      }
+
+      function timePart (name: 'elapsed' | 'remaining' | 'total') {
+        return slots[`time.${name}`]?.(slotProps) ??
+          (name === 'remaining' ? `-${currentTime.value.remaining}` : currentTime.value[name])
+      }
+
+      const progressBarProps: Record<string, unknown> = {
+        class: 'v-video__track',
+        modelValue: props.progress / 100 * props.duration,
+        max: props.duration,
+        buffer: props.buffer,
+        chapters: props.chapters,
+        color: trackColor.value ?? 'surface-variant',
+        bgColor: stacked.value ? 'white' : undefined,
+        step: props.seekStep,
+        thumb: !props.hideThumb,
+        variant: props.progressVariant,
+        'onUpdate:modelValue': (seconds: number) => seek({ to: seconds }),
+      }
+
+      const progressBar = slots.progress?.({ ...slotProps, props: progressBarProps }) ??
+        <VMediaProgressBar { ...progressBarProps } />
+
+      const builtins: Record<string, () => JSX.Element> = {
+        '-': () => <VSpacer />,
+        time: () => (
+          <span class="v-video__time">
+            { slots.time?.(slotProps) ?? <>{ timePart('elapsed') } / { timePart('total') }</> }
+          </span>
+        ),
+        elapsed: () => <span class="v-video__time">{ timePart('elapsed') }</span>,
+        remaining: () => <span class="v-video__time">{ timePart('remaining') }</span>,
+        volume: () => (
+          <VMediaVolume
+            ref={ volumeRef }
+            key="volume-control"
+            modelValue={ props.muted ? 0 : volume.value }
+            label={ labels.value.volumeAction }
+            onUpdate:modelValue={ v => volume.value = v }
+            slider={ props.volumeSlider }
+            { ...props.volumeProps }
+            disabled={ props.muted }
+          />
+        ),
+        fullscreen: () => (
+          <VIconBtn
+            icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
+            aria-label={ labels.value.fullscreenAction }
+            v-tooltip={[labels.value.fullscreenAction, 'top']}
+            onClick={ toggleFullscreen }
+          />
+        ),
+      }
+
+      function renderAction (name: string) {
+        if (name === 'play') {
+          return slots.play?.({ ...slotProps, props: playProps }) ??
+            <VIconBtn { ...playProps } v-tooltip={[labels.value.playAction, 'top']} />
+        }
+        if (name === 'progress') return progressBar
+
+        const slot = name === 'prepend' || name === 'append' ? slots[name] : slots[`action.${name}`]
+        return slot?.(slotProps) ?? builtins[name]?.()
+      }
+
       return (
         <div
           class={[
             'v-video-controls',
             `v-video-controls--variant-${props.variant}`,
             { 'v-video-controls--pills': props.pills },
+            { 'v-video-controls--stacked': stacked.value },
             { 'v-video-controls--detached': props.detached },
             { 'v-video-controls--floating': props.floating },
             { 'v-video-controls--fullscreen': props.fullscreen },
@@ -250,143 +423,30 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           ]}
           style={[
             !props.pills ? backgroundColorStyles.value : [],
-            { '--v-video-controls-pill-height': `${regularBtnSize}px` },
+            {
+              '--v-video-controls-pill-height': `${regularBtnSize + 8}px`,
+              '--v-video-controls-gap': convertToUnit(gap),
+              '--v-video-controls-pill-gap': convertToUnit(pillGap),
+            },
           ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
             { slots.default?.(slotProps) ?? (
               <>
-                { props.variant !== 'mini' && (
-                  <>
-                    { !props.hidePlay && (
-                      <div
-                        class={[pillClasses, 'v-video__action-play']}
-                        style={ pillStyles }
-                      >
-                        <VIconBtn
-                          icon={ playing.value ? '$pause' : '$play' }
-                          size={ playBtnSize }
-                          aria-label={ labels.value.playAction }
-                          v-tooltip={[labels.value.playAction, 'top']}
-                          onClick={ () => playing.value = !playing.value }
-                        />
-                      </div>
-                    )}
-                    { slots.prepend && (
-                      <div
-                        class={ pillClasses }
-                        style={ pillStyles }
-                      >
-                        { slots.prepend(slotProps) }
-                      </div>
-                    )}
-                    { props.splitTime
-                      ? (
-                        <span
-                          class={[pillClasses, 'v-video__time']}
-                          style={ pillStyles }
-                        >
-                          { currentTime.value.elapsed }
-                        </span>
-                      )
-                      : props.variant !== 'default'
-                        ? (
-                          <span
-                            class={[pillClasses, 'v-video__time']}
-                            style={ pillStyles }
-                          >
-                            { currentTime.value.elapsed } / { currentTime.value.total }
-                          </span>
-                        )
-                        : ''
-                    }
-                    { props.hideProgressBar
-                      ? <VSpacer />
-                      : (
-                          <VMediaProgressBar
-                            class="v-video__track"
-                            modelValue={ props.progress / 100 * props.duration }
-                            max={ props.duration }
-                            buffer={ props.buffer }
-                            color={ trackColor.value ?? 'surface-variant' }
-                            bgColor={ props.variant === 'tube' ? 'white' : undefined }
-                            step={ props.seekStep }
-                            thumb
-                            onUpdate:modelValue={ (seconds: number) => seek({ to: seconds }) }
-                          />
-                      )
-                    }
-                    { props.variant === 'tube' && <VSpacer /> }
-                    { props.splitTime
-                      ? (
-                        <span
-                          class={[pillClasses, 'v-video__time']}
-                          style={ pillStyles }
-                        >
-                          { currentTime.value.remaining }
-                        </span>
-                      )
-                      : ''
-                    }
-                  </>
-                )}
-                { props.variant === 'mini' && (
-                  <>
-                    <VSpacer />
-                    { slots.prepend && (
-                      <div
-                        class={ pillClasses }
-                        style={ pillStyles }
-                      >
-                        { slots.prepend(slotProps) }
-                      </div>
-                    )}
-                    { !props.hidePlay && (
-                      <div
-                        class={[pillClasses, 'v-video__action-play']}
-                        style={ pillStyles }
-                      >
-                        <VIconBtn
-                          icon={ playing.value ? '$pause' : '$play' }
-                          size={ playBtnSize }
-                          aria-label={ labels.value.playAction }
-                          v-tooltip={[labels.value.playAction, 'top']}
-                          onClick={ () => playing.value = !playing.value }
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-                { (!props.hideVolume || !props.hideFullscreen || slots.append) && (
-                  <div
-                    class={ pillClasses }
-                    style={ pillStyles }
-                  >
-                    { !props.hideVolume && (
-                      <VMediaVolume
-                        ref={ volumeRef }
-                        key="volume-control"
-                        sliderProps={{ color: props.color }}
-                        modelValue={ volume.value }
-                        label={ labels.value.volumeAction }
-                        onUpdate:modelValue={ v => volume.value = v }
-                        slider={ props.volumeSlider }
-                        { ...props.volumeProps }
-                      />
-                    )}
-                    { slots.append?.(slotProps) }
-                    { !props.hideFullscreen && (
-                      <VIconBtn
-                        icon={ props.fullscreen ? '$fullscreenExit' : '$fullscreen' }
-                        aria-label={ labels.value.fullscreenAction }
-                        v-tooltip={[labels.value.fullscreenAction, 'top']}
-                        onClick={ toggleFullscreen }
-                      />
-                    )}
-                  </div>
-                )}
+                { stacked.value && progressBar }
+                { groups.value.map(({ names, pill }, index) => {
+                  const content = names.map(renderAction).filter(Boolean)
+                  if (!content.length) return null
+                  if (!pill) {
+                    return <Fragment key={ `${index}${names}` }>{ content }</Fragment>
+                  }
 
-                { props.variant === 'mini' && (<VSpacer />) }
+                  return (
+                    <div key={ `${index}${names}` } class={ pillClasses } style={ pillStyles }>
+                      { content }
+                    </div>
+                  )
+                })}
               </>
             )}
           </VDefaultsProvider>

@@ -1,15 +1,18 @@
 {
   "description": "A seekable media timeline with a thumb, a hover tooltip and chapters.",
   "props": {
-    "modelValue": "Current position in seconds.",
-    "max": "Total duration in seconds.",
     "buffer": "Buffered position in seconds.",
-    "chapters": "Chapter starts in seconds, each with an optional `title`. The bar is split at every start and the tooltip and announced value name the chapter.",
     "chapterGap": "Width of the gap between chapters.",
-    "step": "Controls how much the progress is moved (in seconds) by when using the arrow keys. When passed as single number, user holding Shift key will move 10x the distance. For full control pass `[step, shiftStep]` to sets both. Page Up and Page Down move by a tenth of `max`.",
-    "thumb": "Shows a thumb at the current position.",
+    "chapters": "Chapter starts in seconds, each with an optional `title`. The bar is split at every start and the tooltip and announced value name the chapter.",
+    "elevation": "Elevation of the **thumb**.",
+    "max": "Total duration in seconds.",
+    "modelValue": "Current position in seconds.",
     "readonly": "Keeps the bar focusable and announced but ignores pointer and keyboard input.",
-    "tooltip": "Shows the time under the pointer while hovering. Pass an object to set `location` (`top` or `bottom`) and `offset` from the bar."
+    "step": "Controls who far progress is moved by the arrow keys (in seconds). Holding Shift moves 10x as far, or pass `[step, shiftStep]` to set both. Page Up and Page Down move by a tenth of **max**.",
+    "thumb": "Shows a thumb at the current position.",
+    "thumbSize": "Size of the **thumb**.",
+    "tooltip": "Shows the time under the pointer while hovering. Pass an object to set `location` (`top` or `bottom`) and `offset` from the bar.",
+    "variant": "`pill` applies the MD3 look: a bar-shaped **thumb** with a gap on both sides. `wavy` also draws the played part as a wave and eases jumps (clicks, keyboard seeks, start position), but not dragging or playback."
   },
   "events": {
     "update:modelValue": "Emitted with the new position in seconds while clicking, dragging or using the keyboard.",

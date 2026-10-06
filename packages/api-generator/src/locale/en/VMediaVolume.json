@@ -1,14 +1,15 @@
 {
   "description": "Volume control shared by `v-audio` and `v-video`: a mute button with a slider next to it or in a menu.",
   "props": {
-    "inline": "Display slider next to the icon instead of in a menu. `true` places it after the icon; `left` and `right` pin the side regardless of text direction. Recommended to pair with **sliderProps** to configure slider width.",
-    "slider": "`visible` shows the slider, `hover` keeps an **inline** slider collapsed until the control is hovered or focused, `hidden` leaves only the mute button. A menu always opens on hover, so `hover` has no effect there. The slider is always hidden on iOS and iPadOS, which ignore volume set from JavaScript.",
     "direction": "Switch between horizontal and vertical slider.",
+    "disabled": "Disables the mute button and the slider.",
+    "inline": "Display slider next to the icon instead of in a menu. `true` places it after the icon; `left` and `right` pin the side regardless of text direction. Recommended to pair with **sliderProps** to configure slider width.",
     "label": "Passed to `aria-label` and, when **inline**, shown in a tooltip. Without it the label comes from the locale.",
-    "modelValue": "Volume value (0 ~ 100)",
-    "volumeIcon": "Icon shown while not muted. When unset, the icon follows the volume level.",
-    "muteIcon": "Icon shown when the volume is 0.",
     "menuProps": "Props passed to VMenu containing volume slider. The menu opens on hover and focus, and a click on the button toggles mute. On touch, a tap opens and closes the menu instead.",
-    "sliderProps": "Selected props to customize volume slider."
+    "modelValue": "Volume value (0 ~ 100)",
+    "muteIcon": "Icon shown when the volume is 0.",
+    "slider": "`visible` shows the slider, `hover` keeps an **inline** slider collapsed until the control is hovered or focused, `hidden` leaves only the mute button. A menu always opens on hover, so `hover` has no effect there. The slider is always hidden on iOS and iPadOS, which ignore volume set from JavaScript.",
+    "sliderProps": "Selected props to customize volume slider.",
+    "volumeIcon": "Icon shown while not muted. When unset, the icon follows the volume level."
   }
 }

@@ -68,7 +68,8 @@ const aliases: IconAliases = {
   fullscreen: 'i-material-symbols:fullscreen',
   fullscreenExit: 'i-material-symbols:fullscreen-exit',
   volumeHigh: 'i-material-symbols:volume-up',
-  volumeLow: 'i-material-symbols:volume-down',
+  volumeMedium: 'i-material-symbols:volume-down',
+  volumeLow: 'i-material-symbols:volume-mute',
   volumeOff: 'i-material-symbols:volume-off',
   search: 'i-material-symbols:search',
 }

@@ -70,7 +70,8 @@ const aliases: IconAliases = {
   fullscreen: 'i-lucide:maximize',
   fullscreenExit: 'i-lucide:minimize',
   volumeHigh: 'i-lucide:volume-2',
-  volumeLow: 'i-lucide:volume-1',
+  volumeMedium: 'i-lucide:volume-1',
+  volumeLow: 'i-lucide:volume',
   volumeOff: 'i-lucide:volume-x',
   search: 'i-lucide:search',
 }

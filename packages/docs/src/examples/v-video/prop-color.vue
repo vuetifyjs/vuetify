@@ -3,7 +3,7 @@
     <v-sheet class="px-6 py-2 border-b mb-3" color="surface">
       <div class="d-flex ga-2 ga-md-12 flex-wrap align-center justify-center">
         <div class="d-flex align-center ga-3">
-          <v-chip-group v-model="controlsVariant" mandatory>
+          <v-chip-group v-model="layout" mandatory>
             <v-chip text="default" value="default" filter label></v-chip>
             <v-chip text="tube" value="tube" filter label></v-chip>
             <v-chip text="mini" value="mini" filter label></v-chip>
@@ -42,9 +42,9 @@
     </div>
 
     <v-video
+      :actions="layouts[layout]"
       :bg-color="colors.background"
       :color="colors.color"
-      :controls-variant="controlsVariant"
       :detached="features.includes('detached')"
       :floating="features.includes('floating')"
       :pills="features.includes('pills')"
@@ -72,7 +72,12 @@
   import { reactive, shallowRef } from 'vue'
 
   const features = shallowRef([])
-  const controlsVariant = shallowRef('default')
+  const layout = shallowRef('default')
+  const layouts = {
+    default: 'play progress append',
+    tube: 'play time - append',
+    mini: '- play append -',
+  }
   const colors = reactive({
     color: '#4cd2de',
     background: null,
@@ -84,7 +89,12 @@
   export default {
     data: () => ({
       features: [],
-      controlsVariant: 'default',
+      layout: 'default',
+      layouts: {
+        default: 'play progress append',
+        tube: 'play time - append',
+        mini: '- play append -',
+      },
       colors: {
         color: '#4cd2de',
         background: null,

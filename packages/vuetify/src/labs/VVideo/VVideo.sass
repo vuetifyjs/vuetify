@@ -65,8 +65,9 @@
         border-radius: inherit
         inset: 0
 
+    // the poster keeps its position while fading out under the controls
     &:has(.v-video-controls:not(.v-video-controls--detached))
-      .v-video__content .v-video__overlay-fill
+      .v-video__content > .v-video__overlay-fill:not(.v-video__poster)
         padding-bottom: var(--v-video-controls-height) // controls size
 
     &__center-icon.v-icon-btn
