@@ -40,11 +40,12 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
     adapter: VuetifyDateAdapter,
     locale: {
       af: 'af-ZA',
-      // ar: '', # not the same value for all variants
+      ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in ../adapters/vuetify.ts:25
       bg: 'bg-BG',
       ca: 'ca-ES',
-      ckb: 'ckb',
+      ckb: 'ckb-IQ',
       cs: 'cs-CZ',
+      da: 'da-DK',
       de: 'de-DE',
       el: 'el-GR',
       en: 'en-US',
@@ -59,6 +60,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
       id: 'id-ID',
       it: 'it-IT',
       ja: 'ja-JP',
+      km: 'km-KH',
       ko: 'ko-KR',
       lv: 'lv-LV',
       lt: 'lt-LT',
