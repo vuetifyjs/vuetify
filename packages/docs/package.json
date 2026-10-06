@@ -15,8 +15,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
-    "lint": "concurrently 'vue-tsc --noEmit --pretty' 'pnpm lint:md' 'eslint \"src/**/*.{js,ts,tsx,vue,json}\" -f codeframe --concurrency 4 --max-warnings 0' -n 'tsc,md,eslint' --kill-others-on-fail -gr",
-    "lint:fix": "pnpm fix:md && eslint src -f codeframe --max-warnings 0 --concurrency 4 --fix",
+    "lint": "concurrently 'vue-tsc --noEmit --pretty' 'pnpm lint:md' 'node ../../scripts/eslint.js src --concurrency 4' -n 'tsc,md,eslint' --kill-others-on-fail -gr",
+    "lint:fix": "pnpm fix:md && node ../../scripts/eslint.js src --concurrency 4 --fix",
     "lint:md": "markdownlint --config .markdownlintrc --rules build/markdownlint-rules/meta-length.cjs src/pages/en",
     "fix:md": "markdownlint --config .markdownlintrc --rules build/markdownlint-rules/meta-length.cjs src/pages/en --fix"
   },

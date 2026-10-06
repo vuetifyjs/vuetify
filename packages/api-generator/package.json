@@ -6,7 +6,7 @@
   "description": "",
   "scripts": {
     "build": "node src/index.ts",
-    "lint": "eslint src -f codeframe --max-warnings 0",
+    "lint": "node ../../scripts/eslint.js src",
     "lint:fix": "pnpm lint --fix"
   },
   "author": "",
