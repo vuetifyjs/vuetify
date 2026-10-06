@@ -218,6 +218,8 @@ minimumReleaseAgeExclude:
   - playwright-core
   - vitest@4.1.11
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: piscina@4.9.4
+  - piscina@4.9.4
 
 nodeLinker: hoisted
 
