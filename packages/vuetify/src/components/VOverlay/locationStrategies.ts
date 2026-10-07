@@ -198,7 +198,6 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // el.style.removeProperty('max-width')
   // el.style.removeProperty('max-height')
 
-  /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
   const computed = getComputedStyle(el)
@@ -336,7 +335,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     observer.disconnect()
   })
 
-  // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
     requestAnimationFrame(() => observe = true)

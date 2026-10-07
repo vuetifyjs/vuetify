@@ -1,12 +1,12 @@
 {
   "name": "@vuetify/api-generator",
   "type": "module",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "private": true,
   "description": "",
   "scripts": {
     "build": "node src/index.ts",
-    "lint": "eslint --ext .ts,.json src -f codeframe --max-warnings 0",
+    "lint": "node ../../scripts/eslint.js src",
     "lint:fix": "pnpm lint --fix"
   },
   "author": "",

@@ -16,9 +16,7 @@ describe('v-intersect', () => {
       },
     })
 
-    await waitIdle()
-
-    expect(callback).toHaveBeenCalled()
+    await expect.poll(() => callback).toHaveBeenCalled()
   })
 
   it('does not callback on mount when quiet', async () => {
@@ -71,13 +69,12 @@ describe('v-intersect', () => {
     ])('%s', async (name, height, quiet, ...v) => {
       const { callback, el } = await setup(height, quiet)
 
-      expect(callback).toHaveBeenCalledTimes(v[0])
-      expect(Object.keys(el._observe!)).toHaveLength(v[1])
+      await expect.poll(() => callback).toHaveBeenCalledTimes(v[0])
+      await expect.poll(() => Object.keys(el._observe!)).toHaveLength(v[1])
 
       el.scrollIntoView()
-      await waitIdle()
-      expect(callback).toHaveBeenCalledTimes(v[2])
-      expect(Object.keys(el._observe!)).toHaveLength(0)
+      await expect.poll(() => callback).toHaveBeenCalledTimes(v[2])
+      await expect.poll(() => Object.keys(el._observe!)).toHaveLength(0)
       callback.mockClear()
 
       await scroll({ top: 1000 })

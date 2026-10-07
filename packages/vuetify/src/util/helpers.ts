@@ -3,17 +3,16 @@ import {
   camelize,
   capitalize,
   Comment,
+  computed,
   Fragment,
   isProxy,
   isReactive,
   isRef,
   isVNode,
-  reactive,
   shallowRef,
   toRaw,
   toRef,
   unref,
-  watchEffect,
 } from 'vue'
 import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
@@ -368,12 +367,12 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N
 export function wrapInArray<T> (
   v: T | null | undefined
 ): T extends readonly any[]
-    ? IfAny<T, T[], T>
-    : NonNullable<T>[] {
+  ? IfAny<T, T[], T>
+  : NonNullable<T>[] {
   return isNullOrUndefined(v)
     ? [] as any
     : Array.isArray(v)
@@ -584,16 +583,10 @@ type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = reactive({}) as T
-  watchEffect(() => {
-    const base = getter()
-    for (const key in base) {
-      refs[key] = base[key]
-    }
-  }, { flush: 'sync' })
+  const base = computed(getter)
   const obj = {} as ToReadonlyRefs<T>
-  for (const key in refs) {
-    obj[key] = toRef(() => refs[key]) as any
+  for (const key in base.value) {
+    obj[key] = toRef(() => base.value[key]) as any
   }
   return obj
 }

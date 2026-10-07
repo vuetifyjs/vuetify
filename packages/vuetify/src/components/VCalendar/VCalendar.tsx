@@ -100,15 +100,15 @@ export const VCalendar = genericComponent<new (
     [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
   },
   slots: {
-    'category': CalendarDayCategorySlotScope
-    'day': DaySlotScope
+    category: CalendarDayCategorySlotScope
+    day: DaySlotScope
     'day-body': CalendarDayBodySlotScope
     'day-header': DayHeaderSlotScope
     'day-label': CalendarTimestamp
     'day-label-header': CalendarTimestamp
     'day-month': CalendarTimestamp
-    'event': EventSlotScope
-    'interval': CalendarDayCategorySlotScope
+    event: EventSlotScope
+    interval: CalendarDayCategorySlotScope
     'interval-header': never
   },
 ) => GenericProps<typeof props, typeof slots>>()({
