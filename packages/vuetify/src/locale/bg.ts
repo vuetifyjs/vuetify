@@ -174,7 +174,7 @@ export default {
     shortcut: 'Клавиатурна комбинация: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Пусни',
     pause: 'Пауза',
     seek: 'Търсене',

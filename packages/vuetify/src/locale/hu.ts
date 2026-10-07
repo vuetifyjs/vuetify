@@ -174,7 +174,7 @@ export default {
     shortcut: 'Billentyűparancs: {0}',
     or: 'vagy',
   },
-  video: {
+  media: {
     play: 'Lejátszás',
     pause: 'Szünet',
     seek: 'Keresés',

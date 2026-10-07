@@ -174,7 +174,7 @@ export default {
     shortcut: 'Drecera de teclat: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproduir',
     pause: 'Paura',
     seek: 'Cercar',

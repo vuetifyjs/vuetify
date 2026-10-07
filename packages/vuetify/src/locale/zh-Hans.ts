@@ -174,7 +174,7 @@ export default {
     shortcut: '键盘快捷键：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暂停',
     seek: '跳转',

@@ -174,7 +174,7 @@ export default {
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
     or: 'ឬ',
   },
-  video: {
+  media: {
     play: 'លេង',
     pause: 'ផ្អាក',
     seek: 'ស្វែងរក',

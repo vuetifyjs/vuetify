@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klávesová zkratka: {0}',
     or: 'nebo',
   },
-  video: {
+  media: {
     play: 'Přehrát',
     pause: 'Pozastavit',
     seek: 'Vyhledat',

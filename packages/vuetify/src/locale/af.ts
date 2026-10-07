@@ -174,7 +174,7 @@ export default {
     shortcut: 'Sleutelbordkortpad: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Speel',
     pause: 'Pouseer',
     seek: 'Soek',

@@ -23,28 +23,128 @@ describe('VPagination', () => {
     expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(3)
   })
 
-  it('should render all pages when length is less than 3 in a flexbox container', async () => {
+  async function sampleFrames (frames: number) {
+    const samples: string[] = []
+    for (let i = 0; i < frames; i++) {
+      await new Promise(resolve => requestAnimationFrame(resolve))
+      samples.push(screen.getByCSS('.v-pagination__list').textContent ?? '')
+    }
+    return samples
+  }
+
+  it('should still measure a container that is too small', async () => {
     render(() => (
-      <div class="d-flex">
-        <VPagination length="2" />
+      <div style="width: 300px">
+        <VPagination length="100" modelValue={ 1 } />
       </div>
     ))
 
-    await waitIdle() // resize-observer loop has to settle
+    await waitIdle()
 
-    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(2)
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toHaveTextContent('1')
-    expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
+    expect(screen.getAllByCSS('.v-pagination__item').length).toBeLessThan(8)
+    expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('100')
+
+    const samples = await sampleFrames(20)
+
+    expect(samples.filter((s, i) => i > 0 && s !== samples[i - 1])).toHaveLength(0)
   })
 
-  it('should still honor an explicit total-visible when length is less than 3', () => {
-    render(() => (
-      <div class="d-flex">
-        <VPagination length="2" totalVisible="1" />
-      </div>
-    ))
+  describe('in a flexbox container', () => {
+    it('should render all pages when length is less than 3', async () => {
+      render(() => (
+        <div class="d-flex">
+          <VPagination length="2" />
+        </div>
+      ))
 
-    expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(1)
+      await waitIdle()
+
+      expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(2)
+      expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(0)).toHaveTextContent('1')
+      expect(screen.getAllByCSS('.v-pagination__item .v-btn').at(1)).toHaveTextContent('2')
+    })
+
+    it('should not oscillate the range', async () => {
+      render(() => (
+        <div class="d-flex">
+          <VPagination length="5" modelValue={ 3 } />
+        </div>
+      ))
+
+      await waitIdle()
+
+      const samples = await sampleFrames(20)
+      const transitions = samples.filter((s, i) => i > 0 && s !== samples[i - 1])
+
+      expect(transitions).toHaveLength(0)
+      expect(samples.at(-1)).toBe('12345')
+    })
+
+    it('should fit pages next to controls of a different width', async () => {
+      render(() => (
+        <div class="d-flex" style="width: 600px">
+          <style>{ '.v-pagination__prev .v-btn, .v-pagination__next .v-btn { width: 30px; min-width: 30px }' }</style>
+          <VPagination length="999" modelValue={ 1 } />
+          <button style="width: 100px">something</button>
+        </div>
+      ))
+
+      await waitIdle()
+
+      const list = screen.getByCSS('.v-pagination__list')
+      const lastItem = screen.getAllByCSS('.v-pagination__next').at(-1)!
+      expect(lastItem.getBoundingClientRect().right).toBeLessThanOrEqual(list.getBoundingClientRect().right + 1)
+      expect(screen.getAllByCSS('.v-pagination__item').length).toBeGreaterThan(5)
+    })
+
+    it('should not overflow after jumping to wider page numbers', async () => {
+      for (const width of [600, 615, 630, 645, 660]) {
+        const model = ref(1)
+        const { unmount } = render(() => (
+          <div class="d-flex" style={{ width: `${width}px` }}>
+            <VPagination v-model={ model.value } length="100000" />
+          </div>
+        ))
+
+        await waitIdle()
+        model.value = 100000
+        await waitIdle()
+
+        const list = screen.getByCSS('.v-pagination__list').getBoundingClientRect()
+        const first = screen.getByCSS('.v-pagination__prev').getBoundingClientRect()
+        const last = screen.getByCSS('.v-pagination__next').getBoundingClientRect()
+        expect.soft(first.left, `${width}px`).toBeGreaterThanOrEqual(list.left)
+        expect.soft(last.right, `${width}px`).toBeLessThanOrEqual(list.right)
+        unmount()
+      }
+    })
+
+    it('should show more pages when the container grows', async () => {
+      const width = ref(300)
+      render(() => (
+        <div class="d-flex" style={{ width: `${width.value}px` }}>
+          <VPagination length="100" />
+        </div>
+      ))
+
+      await waitIdle()
+      const before = screen.getAllByCSS('.v-pagination__item').length
+
+      width.value = 600
+      await waitIdle()
+
+      expect(screen.getAllByCSS('.v-pagination__item').length).toBeGreaterThan(before)
+    })
+
+    it('should still honor an explicit total-visible when length is less than 3', () => {
+      render(() => (
+        <div class="d-flex">
+          <VPagination length="2" totalVisible="1" />
+        </div>
+      ))
+
+      expect(screen.getAllByCSS('.v-pagination__item')).toHaveLength(1)
+    })
   })
 
   it('should render without first and last page buttons', () => {

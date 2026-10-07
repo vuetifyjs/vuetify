@@ -174,7 +174,7 @@ export default {
     shortcut: 'Scorciatoia da tastiera: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Riproduci',
     pause: 'Metti in pausa',
     seek: 'Cerca',

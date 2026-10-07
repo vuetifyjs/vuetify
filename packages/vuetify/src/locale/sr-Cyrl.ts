@@ -174,7 +174,7 @@ export default {
     shortcut: 'Пречица на тастатури: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Пусти',
     pause: 'Паузирај',
     seek: 'Тражи',

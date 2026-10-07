@@ -47,6 +47,30 @@ const stories = Object.fromEntries(Object.entries({
 
 describe('VAutocomplete', () => {
   it.each([
+    [':autofill', 'CA'],
+    [':autofill', 'California'],
+    [':-webkit-autofill', 'CA'],
+    [':-webkit-autofill', 'California'],
+  ])('should match %s text %s against item titles or values', async (selector, value) => {
+    const model = ref()
+
+    render(() => (
+      <VAutocomplete
+        v-model={ model.value }
+        items={[{ title: 'California', value: 'CA' }]}
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    vi.spyOn(input, 'matches').mockImplementation(candidate => candidate === selector)
+
+    await userEvent.fill(input, value)
+    input.dispatchEvent(new Event('change', { bubbles: true }))
+
+    expect(model.value).toBe('CA')
+  })
+
+  it.each([
     ['{Tab}', 'after'],
     ['{Shift>}{Tab}{/Shift}', 'before'],
   ])('should leave the field with a single %s while the menu is open', async (keys, target) => {

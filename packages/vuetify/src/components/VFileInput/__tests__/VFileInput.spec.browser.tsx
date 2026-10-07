@@ -7,6 +7,7 @@ import { cloneVNode, defineComponent, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
+const textFile = new File(['text'], 'text.txt')
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -45,8 +46,7 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VFileInput', () => {
-  // TODO: wdio crashes on .upload since vitest 3.2
-  it.todo('should add file', async () => {
+  it('should add file', async () => {
     const model = ref()
     const { element } = render(() => (
       <VFileInput v-model={ model.value } />
@@ -54,7 +54,7 @@ describe('VFileInput', () => {
 
     const input = screen.getByCSS('input')
 
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(element).toHaveTextContent('text.txt')
     expect(model.value).toEqual(expect.objectContaining({ name: 'text.txt' }))
   })
@@ -150,7 +150,7 @@ describe('VFileInput', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8167
-  it.skip('should not emit change event when input is blurred', async () => {
+  it('should not emit change event when input is blurred', async () => {
     const change = vi.fn()
     const update = vi.fn()
     render(() => (
@@ -159,7 +159,7 @@ describe('VFileInput', () => {
 
     const input = screen.getByCSS('input')
     input.focus()
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     await userEvent.tab()
 
     expect(change).toHaveBeenCalledTimes(1)
@@ -174,7 +174,7 @@ describe('VFileInput', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16486
-  it.todo('should reset the underlying HTMLInput when model is controlled input', async () => {
+  it('should reset the underlying HTMLInput when model is controlled input', async () => {
     render(defineComponent({
       setup () {
         const files = ref<File[]>([])
@@ -194,7 +194,7 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
 
     // add file
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(input.files).toHaveLength(1)
 
     // reset input from wrapper/parent component
@@ -202,7 +202,7 @@ describe('VFileInput', () => {
     expect(input.files).toHaveLength(0)
 
     // add same file again
-    await userEvent.upload(input, 'text.txt')
+    await userEvent.upload(input, textFile)
     expect(input.files).toHaveLength(1)
 
     // reset input from wrapper/parent component
