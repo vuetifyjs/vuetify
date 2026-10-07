@@ -209,24 +209,24 @@ export function useDisplay (
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
-  function isBelow (px: number, width: number) {
-    if (SUPPORTS_MATCH_MEDIA) {
-      return !window.matchMedia(`(min-width: ${px}px)`).matches
-    }
-
-    return width < px
+  function isBelow (px: number, width: number, matchWithMediaQuery: boolean) {
+    return matchWithMediaQuery
+      ? !window.matchMedia(`(min-width: ${px}px)`).matches
+      : width < px
   }
 
   const mobile = computed(() => {
-    // Reactivity trigger, do not remove. matchMedia() does not subscribe.
+    // Reactivity triggers, do not remove. matchMedia() does not subscribe.
     const width = display.width.value
+    // Hydration must match the server's width comparison until update()
+    const matchWithMediaQuery = SUPPORTS_MATCH_MEDIA && !display.platform.value.ssr
 
     if (props.mobile) {
       return true
     } else if (isNumber(props.mobileBreakpoint)) {
-      return isBelow(props.mobileBreakpoint, width)
+      return isBelow(props.mobileBreakpoint, width, matchWithMediaQuery)
     } else if (props.mobileBreakpoint) {
-      return isBelow(display.thresholds.value[props.mobileBreakpoint], width)
+      return isBelow(display.thresholds.value[props.mobileBreakpoint], width, matchWithMediaQuery)
     } else if (isNull(props.mobile)) {
       return display.mobile.value
     } else {
