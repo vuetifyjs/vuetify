@@ -69,7 +69,7 @@ meta:
 **Patched in 4.2.x:**
 
 * **CSS layers** — docs now recommend linking `layers.css` in `<head>`, since bundlers can land component CSS before the layer order ([#23205](https://github.com/vuetifyjs/vuetify/pull/23205))
-* **VSelect / VAutocomplete** — browser autofill improvement that helps ([#20560](https://github.com/vuetifyjs/vuetify/issues/20560))
+* **VSelect / VAutocomplete** — browser autofill values are now matched against item values, so address autofill from browsers and extensions selects the right item ([#20560](https://github.com/vuetifyjs/vuetify/issues/20560))
 * **`menu-elevation`** — is now deprecated in favor of `menu-props` ([#23193](https://github.com/vuetifyjs/vuetify/pull/23193))
 
 **Beyond Vuetify core:**
@@ -307,7 +307,7 @@ v4.3.0 is due October 15. [v4.2.4](/getting-started/release-notes/?version=v4.2.
 
 ::: warning
 
-**Vuetify needs your support.** Open Collective funds are running low, the team has scaled down, and contributors are barely compensated for their work. If your team relies on Vuetify, point your organization at [Open Collective](https://opencollective.com/vuetify) or [GitHub Sponsors](https://github.com/sponsors/johnleider).
+**Help keep Vuetify going.** Open Collective funds are running low, and community support is what lets the team keep shipping. If your team relies on Vuetify, point your organization at [Open Collective](https://opencollective.com/vuetify) or [GitHub Sponsors](https://github.com/sponsors/johnleider).
 
 :::
 

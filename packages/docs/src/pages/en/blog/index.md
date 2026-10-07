@@ -20,7 +20,7 @@ Latest news, updates, and stories about Vuetify.
 
 ## September 2026 Update
 
-🖊️ Jacek Czarniecki • 📅 October 6th, 2026
+🖊️ Jacek Czarniecki • 📅 October 7th, 2026
 
 Vuetify 4.2 got three patches while dev branch marches up for 4.3: VInfiniteCarousel, MD3 tabs alignment, modal rail drawers and localized VDateInput hints for typing. Vuetify's RTL, locale and observer composables now run on @vuetify/v0, and moving display onto it surfaced two fixes in Vuetify0 1.2.3. { .text-medium-emphasis }
 
