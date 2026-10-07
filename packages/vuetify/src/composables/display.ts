@@ -53,24 +53,24 @@ export interface DisplayPlatform {
 }
 
 export interface DisplayInstance {
-  xs: Ref<boolean>
-  sm: Ref<boolean>
-  md: Ref<boolean>
-  lg: Ref<boolean>
-  xl: Ref<boolean>
-  xxl: Ref<boolean>
-  smAndUp: Ref<boolean>
-  mdAndUp: Ref<boolean>
-  lgAndUp: Ref<boolean>
-  xlAndUp: Ref<boolean>
-  smAndDown: Ref<boolean>
-  mdAndDown: Ref<boolean>
-  lgAndDown: Ref<boolean>
-  xlAndDown: Ref<boolean>
-  name: Ref<DisplayBreakpoint>
-  height: Ref<number>
-  width: Ref<number>
-  mobile: Ref<boolean>
+  xs: Readonly<Ref<boolean>>
+  sm: Readonly<Ref<boolean>>
+  md: Readonly<Ref<boolean>>
+  lg: Readonly<Ref<boolean>>
+  xl: Readonly<Ref<boolean>>
+  xxl: Readonly<Ref<boolean>>
+  smAndUp: Readonly<Ref<boolean>>
+  mdAndUp: Readonly<Ref<boolean>>
+  lgAndUp: Readonly<Ref<boolean>>
+  xlAndUp: Readonly<Ref<boolean>>
+  smAndDown: Readonly<Ref<boolean>>
+  mdAndDown: Readonly<Ref<boolean>>
+  lgAndDown: Readonly<Ref<boolean>>
+  xlAndDown: Readonly<Ref<boolean>>
+  name: Readonly<Ref<DisplayBreakpoint>>
+  height: Readonly<Ref<number>>
+  width: Readonly<Ref<number>>
+  mobile: Readonly<Ref<boolean>>
   mobileBreakpoint: Ref<number | DisplayBreakpoint>
   platform: Ref<DisplayPlatform>
   thresholds: Ref<DisplayThresholds>
@@ -190,7 +190,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): Disp
     thresholds: shallowRef(thresholds),
     ssr: !!ssr,
     update,
-  } as DisplayInstance
+  }
 }
 
 export const makeDisplayProps = propsFactory({
