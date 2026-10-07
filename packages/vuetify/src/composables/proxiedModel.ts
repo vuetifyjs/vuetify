@@ -3,7 +3,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, ref, toRaw, watch } from 'vue'
-import { getCurrentInstance, toKebabCase } from '@/util'
+import { getCurrentInstance, isUndefined, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -24,7 +24,7 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
-  const internal = ref(props[prop] !== undefined ? props[prop] : defaultValue) as Ref<Props[Prop]>
+  const internal = ref(!isUndefined(props[prop]) ? props[prop] : defaultValue) as Ref<Props[Prop]>
   const kebabProp = toKebabCase(prop)
   const checkKebab = kebabProp !== prop
 

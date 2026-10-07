@@ -7,11 +7,11 @@ import { makeComponentProps } from '@/composables/component'
 import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { shallowRef, Text } from 'vue'
-import { convertToUnit, flattenFragments, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, flattenFragments, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -35,7 +35,7 @@ export const VIcon = genericComponent()({
   setup (props, { attrs, slots }) {
     const slotIcon = shallowRef<string>()
 
-    const { themeClasses } = useTheme()
+    const { themeClasses } = provideTheme(props)
     const { iconData } = useIcon(() => slotIcon.value || props.icon)
     const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
@@ -44,7 +44,7 @@ export const VIcon = genericComponent()({
       const slotValue = slots.default?.()
       if (slotValue) {
         slotIcon.value = flattenFragments(slotValue).filter(node =>
-          node.type === Text && node.children && typeof node.children === 'string'
+          node.type === Text && node.children && isString(node.children)
         )[0]?.children as string
       }
       const hasClick = !!(attrs.onClick || attrs.onClickOnce)

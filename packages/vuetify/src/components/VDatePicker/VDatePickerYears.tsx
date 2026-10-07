@@ -14,7 +14,7 @@ import vIntersect from '@/directives/intersect'
 
 // Utilities
 import { computed, useId, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, templateRef, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, isFunction, propsFactory, templateRef, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -108,7 +108,7 @@ export const VDatePickerYears = genericComponent<VDatePickerYearsSlots>()({
         return props.allowedYears.includes(year)
       }
 
-      if (typeof props.allowedYears === 'function') {
+      if (isFunction(props.allowedYears)) {
         return props.allowedYears(year)
       }
 

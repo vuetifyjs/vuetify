@@ -94,7 +94,7 @@ export default {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
     appendAction: '{0} 附加操作',
-    otp: '請輸入第 {0} 個 OTP 字元',
+    otp: '請輸入驗證碼',
   },
   fileInput: {
     counter: '{0} 個檔案',
@@ -174,7 +174,7 @@ export default {
     shortcut: '鍵盤快捷鍵：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暫停',
     seek: '搜尋',

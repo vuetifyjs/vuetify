@@ -94,7 +94,7 @@ export default {
     clear: '{0} temizle',
     prependAction: '{0} ön işlem',
     appendAction: '{0} ek işlem',
-    otp: 'Lütfen OTP karakterini girin {0}',
+    otp: 'Doğrulama kodunu girin',
   },
   fileInput: {
     counter: '{0} dosya',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klavye kısayolu: {0}',
     or: 'veya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Duraklat',
     seek: 'Ara',

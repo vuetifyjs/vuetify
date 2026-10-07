@@ -34,6 +34,11 @@ describe('format', () => {
       expect(formatNumber(1.23456, opts({ precision: 2 }))).toBe('1.23')
     })
 
+    it('keeps all decimals when precision is null', () => {
+      expect(formatNumber(0.1234, opts({ precision: null }))).toBe('0.1234')
+      expect(formatNumber(1234.12345678, opts({ useGrouping: 'auto', precision: null }))).toBe('1,234.12345678')
+    })
+
     it('respects minFractionDigits', () => {
       expect(formatNumber(1.2, opts({ minFractionDigits: 3 }))).toBe('1.200')
     })
@@ -64,6 +69,11 @@ describe('format', () => {
     it('normalizes Arabic-Indic digits from locale formatter', () => {
       const result = formatNumber(1234, opts({ locale: 'ar-SA' }))
       expect(result).toBe('1,234')
+    })
+
+    it('renders the locale minus sign (hr uses U+2212)', () => {
+      const o = opts({ locale: 'hr', useGrouping: false, decimalSeparator: ',', groupSeparator: '.', precision: null })
+      expect(formatNumber(-1234.1234, o)).toBe('−1234,1234')
     })
   })
 })

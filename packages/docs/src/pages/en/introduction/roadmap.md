@@ -36,7 +36,7 @@ The following is a list of all planned components for the year 2026.
 | [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
 | [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
 | [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | Q3 2026       | Q4 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
 | v-date-time-picker                                              | Q3 2026       | Q4 2026            |
 | v-password-input                                                | Q3 2026       | Q4 2026            |
 
@@ -74,8 +74,7 @@ The following are the already released **minor** and **major** version updates. 
   - VDataTable - programatic control over groups state with `v-model:opened`
   - VSparkline - hover interactivity, markers and tooltips
   - VOtpInputs - grouping fields into segments, a11y and emojis
-  - Introduced [validation rules](/features/rules/) to the main framework from Labs
-  - Introduced 5 new components to the main framework from Labs:
+  - Introduced 7 new components to the main framework from Labs:
     - [v-icon-btn](/components/icon-buttons/)
     - [v-stepper-vertical](/components/vertical-steppers/)
     - [v-pull-to-refresh](/components/pull-to-refresh/)
@@ -97,6 +96,19 @@ The following are the already released **minor** and **major** version updates. 
   - overhaul of Grid system and VSnackbarQueue
   - reduced CSS reset - respecting browser defaults
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
+
+### v3.13 (LTS)
+
+- **Released:** July 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v3.13 Release](/getting-started/release-notes/?version=v3.13.0)
+- **Overview:**
+  - final v3 minor release — enters [long-term support](/introduction/long-term-support/)
+  - VSelect/VAutocomplete/VCombobox - new events for multi-selection
+  - VDataTable - mobile header slot and improved a11y for sorting and selection
+  - VSkeletonLoader - new `types` prop, `chip-group` type and `table` improvements
+  - VBtnGroup - `size` prop to align with standalone buttons
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/92)
 
 ### v3.12 (Warden)
 

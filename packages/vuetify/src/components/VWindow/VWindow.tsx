@@ -15,8 +15,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import vTouch from '@/directives/touch'
 
 // Utilities
-import { computed, nextTick, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, IN_BROWSER, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { convertToUnit, genericComponent, IN_BROWSER, isBoolean, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
@@ -37,6 +37,7 @@ type WindowProvide = {
   transition: ComputedRef<undefined | string>
   transitionCount: Ref<number>
   transitionHeight: Ref<undefined | string>
+  transitionDuration: Readonly<Ref<undefined | string>>
   isReversed: Ref<boolean>
   rootRef: Ref<HTMLElement | undefined>
 }
@@ -64,9 +65,10 @@ export const makeVWindowProps = propsFactory({
   reverse: Boolean,
   showArrows: {
     type: [Boolean, String],
-    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+    validator: (v: any) => isBoolean(v) || v === 'hover',
   },
   verticalArrows: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+  wheel: Boolean,
   touch: {
     type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
     default: undefined,
@@ -118,6 +120,18 @@ export const VWindow = genericComponent<new <T>(
     const { t } = useLocale()
 
     const group = useGroup(props, VWindowGroupSymbol)
+    const { prev: groupPrev, next: groupNext } = group
+
+    let stepDirection = 0
+
+    function step (move: () => void, direction: number) {
+      move()
+      stepDirection = direction
+      nextTick(() => { stepDirection = 0 })
+    }
+
+    group.prev = () => step(groupPrev, -1)
+    group.next = () => step(groupNext, 1)
 
     const rootRef = ref()
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
@@ -128,7 +142,8 @@ export const VWindow = genericComponent<new <T>(
       }
 
       const axis = props.direction === 'vertical' ? 'y' : 'x'
-      const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
+      const isAxisReversed = props.direction === 'vertical' ? props.reverse : isRtlReverse.value
+      const reverse = isAxisReversed ? !isReversed.value : isReversed.value
       const direction = reverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
@@ -152,18 +167,7 @@ export const VWindow = genericComponent<new <T>(
         savedScrollPosition.top = scrollableParent?.scrollTop
       }
 
-      const itemsLength = group.items.value.length
-      const lastIndex = itemsLength - 1
-
-      if (itemsLength <= 2) {
-        isReversed.value = newVal < oldVal
-      } else if (newVal === lastIndex && oldVal === 0) {
-        isReversed.value = false
-      } else if (newVal === 0 && oldVal === lastIndex) {
-        isReversed.value = true
-      } else {
-        isReversed.value = newVal < oldVal
-      }
+      isReversed.value = stepDirection ? stepDirection < 0 : newVal < oldVal
 
       nextTick(() => {
         if (!IN_BROWSER || !scrollableParent) return
@@ -191,6 +195,7 @@ export const VWindow = genericComponent<new <T>(
       isReversed,
       transitionCount,
       transitionHeight,
+      transitionDuration: toRef(() => PREFERS_REDUCED_MOTION() ? undefined : convertToUnit(props.transitionDuration, 'ms')),
       rootRef,
     })
 
@@ -205,11 +210,94 @@ export const VWindow = genericComponent<new <T>(
       canMoveForward.value && group.next()
     }
 
+    let wheelTimeout = -1
+    let nestedEl: HTMLElement | undefined
+    let wheelAt = 0
+    let isScrollLatchStale = false
+
+    function lockWheel () {
+      window.clearTimeout(wheelTimeout)
+      wheelTimeout = window.setTimeout(() => {
+        wheelTimeout = -1
+      }, 150)
+    }
+
+    function findNestedScroller (target: Element | null, isVertical: boolean, delta: number) {
+      if (!target || !rootRef.value?.contains(target)) return undefined
+
+      for (let el = target as HTMLElement | null; el && el !== rootRef.value; el = el.parentElement) {
+        const style = window.getComputedStyle(el)
+        const overflow = isVertical ? style.overflowY : style.overflowX
+        if (overflow !== 'auto' && overflow !== 'scroll') continue
+
+        const max = isVertical ? el.scrollHeight - el.clientHeight : el.scrollWidth - el.clientWidth
+        // RTL scrollLeft runs from 0 down to -max
+        const position = isVertical ? el.scrollTop : el.scrollLeft + (style.direction === 'rtl' ? max : 0)
+        if (delta > 0 ? position < max - 1 : position >= 1) return el
+      }
+
+      return undefined
+    }
+
+    function onWheel (e: WheelEvent) {
+      if (
+        !props.wheel ||
+        props.disabled ||
+        e.defaultPrevented ||
+        group.items.value.length < 2
+      ) return
+
+      const isVertical = props.direction === 'vertical'
+      const scrollDelta = isVertical
+        ? (e.shiftKey ? 0 : e.deltaY)
+        : e.deltaX || (e.shiftKey ? e.deltaY : 0)
+      if (!scrollDelta) return
+
+      const now = performance.now()
+      const gap = now - wheelAt
+      if (gap > 500) isScrollLatchStale = false
+      wheelAt = now
+
+      // if mouse does not move continuous wheel events get stuck to an element that just left the screen
+      const isStale = !(e.target as Element).getClientRects().length
+      const isLocked = wheelTimeout >= 0 || transitionCount.value > 0
+      if (!isLocked) {
+        const target = isStale ? document.elementFromPoint(e.clientX, e.clientY) : e.target as Element
+        nestedEl = findNestedScroller(target, isVertical, scrollDelta)
+      }
+
+      if (nestedEl) {
+        if (isStale || isScrollLatchStale) {
+          e.preventDefault()
+          const scale = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? (isVertical ? nestedEl.clientHeight : nestedEl.clientWidth) : 1
+          nestedEl.scrollBy({ [isVertical ? 'top' : 'left']: scrollDelta * scale })
+        }
+        lockWheel()
+        return
+      }
+
+      const delta = !isVertical && isRtlReverse.value ? -scrollDelta : scrollDelta
+      const canMove = delta > 0 ? canMoveForward.value : canMoveBack.value
+      if (!canMove && !isLocked) return
+
+      e.preventDefault()
+      lockWheel()
+
+      if (!isLocked) {
+        isScrollLatchStale = true
+        delta > 0 ? next() : prev()
+      }
+    }
+
+    onScopeDispose(() => {
+      if (IN_BROWSER) window.clearTimeout(wheelTimeout)
+    })
+
     const arrows = computed(() => {
       const arrows = []
 
       const prevProps = {
-        icon: isRtl.value ? props.nextIcon : props.prevIcon,
+        icon: isRtl.value && !props.verticalArrows ? props.nextIcon : props.prevIcon,
         class: `v-window__${isRtlReverse.value ? 'right' : 'left'}`,
         onClick: group.prev,
         'aria-label': t('$vuetify.carousel.prev'),
@@ -223,7 +311,7 @@ export const VWindow = genericComponent<new <T>(
       )
 
       const nextProps = {
-        icon: isRtl.value ? props.prevIcon : props.nextIcon,
+        icon: isRtl.value && !props.verticalArrows ? props.prevIcon : props.nextIcon,
         class: `v-window__${isRtlReverse.value ? 'left' : 'right'}`,
         onClick: group.next,
         'aria-label': t('$vuetify.carousel.next'),
@@ -261,8 +349,10 @@ export const VWindow = genericComponent<new <T>(
     })
 
     function onKeyDown (e: KeyboardEvent) {
+      const [backKey, forwardKey] = isRtl.value ? ['ArrowRight', 'ArrowLeft'] : ['ArrowLeft', 'ArrowRight']
+
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'horizontal' && e.key === backKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowUp')
       ) {
         e.preventDefault()
@@ -271,7 +361,7 @@ export const VWindow = genericComponent<new <T>(
       }
 
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'horizontal' && e.key === forwardKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowDown')
       ) {
         e.preventDefault()
@@ -302,15 +392,9 @@ export const VWindow = genericComponent<new <T>(
           themeClasses.value,
           props.class,
         ]}
-        style={[
-          props.style,
-          {
-            '--v-window-transition-duration': !PREFERS_REDUCED_MOTION()
-              ? convertToUnit(props.transitionDuration, 'ms')
-              : null,
-          },
-        ]}
+        style={ props.style }
         v-touch={ touchOptions.value }
+        onWheel={ onWheel }
       >
         <div
           class="v-window__container"

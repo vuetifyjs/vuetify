@@ -30,7 +30,7 @@ describe('elevation.ts', () => {
       [{ elevation: 1, hoverElevation: 0 }, ['elevation-1', 'hover-elevation-0']],
       [{ elevation: 1, hoverElevation: undefined }, ['elevation-1']],
       [{ elevation: 1, hoverElevation: null }, ['elevation-1']],
-      [{ elevation: undefined, hoverElevation: 3 }, []],
+      [{ elevation: undefined, hoverElevation: 3 }, ['hover-elevation-3']],
     ] as const
 
     for (const [props, equal] of values) {

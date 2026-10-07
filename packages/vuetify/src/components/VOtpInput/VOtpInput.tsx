@@ -15,14 +15,14 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { effectScope, provide, ref, toRef, watch } from 'vue'
+import { filterInputAttrs, genericComponent, isBoolean, pick, propsFactory, useRender } from '@/util'
 
 // Shared
 import { VOtpInputSymbol } from './shared'
@@ -151,7 +151,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         // Slot count, not `input.maxLength` (code units).
         maxLength: length.value,
       })
-      if (!result) return
+      if (!result || otp.isComposing.value) return
       if (input.selectionStart !== result.start || input.selectionEnd !== result.end) {
         input.setSelectionRange(result.start, result.end, result.direction)
       }
@@ -183,6 +183,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onCompositionend (e: CompositionEvent) {
       otp.endComposition()
       onInput(e)
+      onSelectionChange()
     }
 
     function onFocus () {
@@ -199,10 +200,13 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-        // Extend with our own anchor so the originally-selected slot stays included.
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         const direction = (e.key === 'ArrowLeft' ? -1 : 1) * (isRtl.value ? -1 : 1) as -1 | 1
-        if (otp.extendSelection(direction)) {
+        const moved = e.shiftKey
+          ? otp.extendSelection(direction)
+          : otp.moveCaret(direction)
+
+        if (moved) {
           e.preventDefault()
           syncDOM()
         }
@@ -273,6 +277,17 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
       applySelection()
     }
 
+    function slotIndexAtPoint (x: number, y: number): number | null {
+      const slot = document.elementsFromPoint(x, y).find(el => el.hasAttribute('data-otp-index'))
+      const index = slot ? Number(slot.getAttribute('data-otp-index')) : NaN
+      return Number.isNaN(index) ? null : index
+    }
+
+    function onClick (e: MouseEvent) {
+      const index = slotIndexAtPoint(e.clientX, e.clientY)
+      if (index != null) focusAt(index)
+    }
+
     // selectionchange is not in InputHTMLAttributes types
     watch(inputRef, (input, _, onCleanup) => {
       if (!input) return
@@ -283,13 +298,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
       intersectScope.run(() => {
-        const { intersectionRef, isIntersecting } = useIntersectionObserver()
-        watchEffect(() => {
-          intersectionRef.value = inputRef.value
-        })
+        const { isIntersecting } = useElementIntersection(inputRef)
         watch(isIntersecting, v => {
           if (!v) return
-          intersectionRef.value?.focus()
+          inputRef.value?.focus()
           intersectScope.stop()
         })
       })
@@ -340,7 +352,6 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           <div
             class="v-otp-input__content"
             style={[dimensionStyles.value]}
-            dir={ isRtl.value ? 'rtl' : 'ltr' }
           >
             { slots.fields ? slots.fields() : props.merged
               ? (
@@ -376,6 +387,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
               aria-label={ t(props.label) }
               value={ model.value }
               { ...inputAttrs }
+              onClick={ onClick }
               onInput={ onInput }
               onKeydown={ onKeydown }
               onBeforeinput={ onBeforeinput }
@@ -395,7 +407,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             >
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate
                   size="24"
                   width="2"

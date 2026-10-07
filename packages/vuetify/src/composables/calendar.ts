@@ -4,7 +4,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { propsFactory, wrapInArray } from '@/util'
+import { isFunction, isNullOrUndefined, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -107,7 +107,7 @@ export function useCalendar (props: CalendarProps) {
     'year',
     undefined,
     v => {
-      const value = v != null ? Number(v) : adapter.getYear(displayValue.value)
+      const value = !isNullOrUndefined(v) ? Number(v) : adapter.getYear(displayValue.value)
 
       return adapter.startOfYear(adapter.setYear(adapter.date(), value))
     },
@@ -119,7 +119,7 @@ export function useCalendar (props: CalendarProps) {
     'month',
     undefined,
     v => {
-      const value = v != null ? Number(v) : adapter.getMonth(displayValue.value)
+      const value = !isNullOrUndefined(v) ? Number(v) : adapter.getMonth(displayValue.value)
       const date = adapter.setYear(adapter.startOfMonth(adapter.date()), adapter.getYear(year.value))
 
       return adapter.setMonth(date, value)
@@ -229,7 +229,7 @@ export function useCalendar (props: CalendarProps) {
       return !props.allowedDates.some(d => adapter.isSameDay(adapter.date(d), date))
     }
 
-    if (typeof props.allowedDates === 'function') {
+    if (isFunction(props.allowedDates)) {
       return !props.allowedDates(date)
     }
 

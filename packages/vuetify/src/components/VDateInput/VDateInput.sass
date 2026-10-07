@@ -1,0 +1,28 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-date-input input
+    direction: ltr
+
+  // the mask reads its direction off the nearest locale provider, a descendant selector would miss it
+  .v-date-input--rtl
+    input
+      text-align: right
+
+    .v-date-input__format-hint
+      justify-content: flex-end
+
+  .v-date-input__format-hint
+    align-items: center
+    direction: ltr
+    display: flex
+    inset: 0
+    opacity: var(--v-disabled-opacity)
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    user-select: none
+    white-space: pre
+
+    > span
+      opacity: 0

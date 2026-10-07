@@ -1,3 +1,6 @@
+// Styles
+import './VDateInput.sass'
+
 // Components
 import { makeVConfirmEditProps, VConfirmEdit } from '@/components/VConfirmEdit/VConfirmEdit'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
@@ -8,17 +11,18 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 // Composables
 import { useCalendarRange } from '@/composables/calendar'
 import { useDate } from '@/composables/date'
-import { createDateRange } from '@/composables/date/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
+import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { createSegmentedEdit } from '@/composables/segmentedMask'
 
 // Utilities
 import { computed, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, isFunction, omit, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -51,6 +55,7 @@ export const makeVDateInputProps = propsFactory({
   },
   menu: Boolean,
   menuProps: Object as PropType<VMenu['$props']>,
+  openOnFocus: Boolean,
   updateOn: {
     type: Array as PropType<('blur' | 'enter')[]>,
     default: () => ['blur', 'enter'],
@@ -108,9 +113,28 @@ export const VDateInput = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t, current: currentLocale } = useLocale()
+    const { t, isRtl } = useLocale()
     const adapter = useDate()
-    const { isValid, parseDate, formatDate, parserFormat } = useDateFormat(props, currentLocale)
+    const adapterLocale = computed(() => adapter.locale)
+
+    const {
+      getHint,
+      isValid,
+      joinDates,
+      maskDate,
+      parseDate,
+      formatDate,
+      separator,
+      parserFormat,
+    } = useDateFormat(props, adapterLocale, isRtl)
+
+    const {
+      onBeforeinput,
+      onInput,
+      onKeydown: onInputKeydown,
+      text,
+    } = createSegmentedEdit(maskDate, separator, isRtl)
+
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
 
@@ -130,10 +154,13 @@ export const VDateInput = genericComponent<new <
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
+    const vMenuRef = ref<VMenu>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
+
     function format (date: unknown) {
-      if (typeof props.displayFormat === 'function') {
+      if (isFunction(props.displayFormat)) {
         return props.displayFormat(date)
       }
       if (props.displayFormat) {
@@ -157,11 +184,25 @@ export const VDateInput = genericComponent<new <
 
         if (!adapter.isValid(start) || !adapter.isValid(end)) return ''
 
-        return `${format(adapter.date(start))} - ${format(adapter.date(end))}`
+        return joinDates([format(adapter.date(start)), format(adapter.date(end))])
       }
 
       return adapter.isValid(model.value) ? format(adapter.date(model.value)) : ''
     })
+
+    const placeholder = computed(() => {
+      if (props.placeholder) return props.placeholder
+
+      if (props.multiple === 'range') return joinDates([parserFormat.value, parserFormat.value])
+      if (props.multiple) return `${parserFormat.value}, ...`
+
+      return parserFormat.value
+    })
+
+    const formatHint = computed(() => getHint(text.value))
+
+    // the mask writes to the input directly, the text field has to render the same value
+    watch(display, value => text.value = value ?? '', { immediate: true })
 
     const inputmode = computed(() => {
       if (!mobile.value) return undefined
@@ -186,6 +227,8 @@ export const VDateInput = genericComponent<new <
     })
 
     function onKeydown (e: KeyboardEvent) {
+      onInputKeydown(e)
+
       if (e.key !== 'Enter') return
 
       if (!menu.value || !isFocused.value) {
@@ -228,15 +271,23 @@ export const VDateInput = genericComponent<new <
     }
 
     function onBlur (e: FocusEvent) {
+      if ((e.relatedTarget as HTMLElement | null)?.closest('[data-v-date]')) {
+        return // first click on a day
+      }
+
       if (props.updateOn.includes('blur') && !props.readonly) {
         onUserInput(e.target as HTMLInputElement)
       }
+
+      text.value = display.value ?? ''
 
       // When in mobile mode and editing is done (due to keyboard dismissal), close the menu
       if (mobile.value && isEditingInput.value && !isFocused.value) {
         menu.value = false
         isEditingInput.value = false
       }
+
+      closeWhenFocusLeaves(menu, vTextFieldRef.value?.$el, vMenuRef.value?.contentEl)
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
@@ -247,14 +298,14 @@ export const VDateInput = genericComponent<new <
           model.value = clampDate(parseDate(value))
         }
       } else {
-        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/)
+        const parts = value.trim().split(/\D+-\D+|[^\d\-/.]+/).filter(Boolean)
         if (parts.every(isValid)) {
           if (props.multiple === 'range') {
             const [start, stop] = parts
               .map(parseDate)
               .map(clampDate)
               .toSorted((a, b) => adapter.isAfter(a, b) ? 1 : -1)
-            model.value = createDateRange(adapter, start, stop)
+            model.value = stop == null ? [start] : [start, adapter.endOfDay(stop)]
           } else {
             model.value = parts
               .map(parseDate)
@@ -287,13 +338,15 @@ export const VDateInput = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          class={['v-date-input', props.class]}
+          class={['v-date-input', { 'v-date-input--rtl': isRtl.value }, props.class]}
           style={ props.style }
-          modelValue={ display.value }
+          modelValue={ text.value }
           inputmode={ inputmode.value }
-          placeholder={ props.placeholder ?? parserFormat.value }
+          placeholder={ placeholder.value }
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
+          onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
+          onInput={ isInteractive.value ? onInput : undefined }
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
@@ -305,7 +358,17 @@ export const VDateInput = genericComponent<new <
             ...slots,
             default: () => (
               <>
+                { isFocused.value && !isReadonly.value && !!text.value && (
+                  <div class="v-date-input__format-hint" aria-hidden="true">
+                    <span style={{ order: isRtl.value ? 1 : 0 }}>{ text.value }</span>
+                    <bdi dir="ltr">
+                      { formatHint.value.split(/(\p{L}+)/u).map((part, i) => i % 2 ? <bdi>{ part }</bdi> : part) }
+                    </bdi>
+                  </div>
+                )}
+
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   minWidth="0"

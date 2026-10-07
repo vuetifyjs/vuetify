@@ -174,7 +174,7 @@ export default {
     shortcut: 'Keyboard shortcut: {0}',
     or: 'or',
   },
-  video: {
+  media: {
     play: 'Play',
     pause: 'Pause',
     seek: 'Seek',

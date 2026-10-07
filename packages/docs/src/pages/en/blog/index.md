@@ -18,6 +18,46 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## August 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 September 14th, 2026
+
+Vuetify 4.2 went into beta on August 27 and stable on September 2. It makes @vuetify/v0 the framework's first (and only) runtime dependency. Release included some cleanup and fixes that were too risky for patch releases so you might want to read this post closely. The team improved VDateInput, selection dropdowns, and many improvements landed in v0 for headless DataTable, DataGrid and Alert... { .text-medium-emphasis }
+
+[Read More](/blog/august-2026-update/) { .text-end }
+
+## July 2026 Update
+
+🖊️ John Leider • 📅 August 11th, 2026
+
+Vuetify0 reached 1.0 on July 22, shipping stable as @vuetify/v0 after 214 merged PRs and a thirteen-component stable spine. Five days later v3.13.0 shipped as the final Vuetify 3 minor and moved the line into long-term support through July 2027, on a window now shortened from eighteen months to twelve. The v4.1 patch line shipped five releases underneath both, fixing focus resolution in Shadow DOM, two defaults-inheritance leaks, and a run of select-family reports... { .text-medium-emphasis }
+
+[Read More](/blog/july-2026-update/) { .text-end }
+
+## Announcing Vuetify0 1.0
+
+🖊️ John Leider • 📅 July 22nd, 2026
+
+Vuetify0 is 1.0. The release candidate held — the frozen surface shipped through the validation window without a breaking change — and the package is now `@vuetify/v0`, no tag required. For a headless meta-framework, 1.0 is a promise about the foundation: nineteen composables, seventeen utilities, and a thirteen-component spine locked under semver for the whole 1.x line, enforced by CI, with the rest of the components promoting onto it individually. It ships 40 components, 71 composables, and 24 utilities — the logic layer a decade of Vuetify was built on, extracted, hardened, and frozen so you can build on it directly... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1/) { .text-end }
+
+## June 2026 Update
+
+🖊️ Jacek Czarniecki • 📅 July 8th, 2026
+
+This was a stabilization month. v4.1.0 shipped on June 2, followed by two patch releases. Most of that work went into the updated VOverlay, fixing placement and sizing bugs. Lot's of great new features were released to the users. Meanwhile Vuetify0 spent its first month in beta with the public API frozen, refining what shipped on the road to v1.0 in July... { .text-medium-emphasis }
+
+[Read More](/blog/june-2026-update/) { .text-end }
+
+## Announcing the Vuetify0 Release Candidate
+
+🖊️ John Leider • 📅 July 2nd, 2026
+
+Vuetify0 has reached release candidate. The API freeze held through six beta releases — nothing renamed, nothing removed — across 184 commits with 60 fixes and 5 performance rewrites. The RC promotes the v1 stable set — the selection family, createRegistry, and the core plugins — and the surface stands at 50 components, 71 composables, and 24 utilities, every component shipping a built-in English aria label (WCAG 4.1.2). From here to v1.0 the work is final testing and documentation — no new features... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-rc/) { .text-end }
+
 ## May 2026 Update
 
 🖊️ Jacek Czarniecki • 📅 June 16th, 2026

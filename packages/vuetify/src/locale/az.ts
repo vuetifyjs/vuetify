@@ -94,7 +94,7 @@ export default {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',
     appendAction: '{0} sonrakı əməliyyat',
-    otp: 'OTP daxil et {0}',
+    otp: 'Təsdiq kodunu daxil edin',
   },
   fileInput: {
     counter: '{0} fayl',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klaviatura qısayolu: {0}',
     or: 'və ya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Pauza',
     seek: 'Axtar',

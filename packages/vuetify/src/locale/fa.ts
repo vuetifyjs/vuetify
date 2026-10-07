@@ -94,7 +94,7 @@ export default {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',
     appendAction: '{0} اقدام افزوده‌شده',
-    otp: 'لطفا کد را وارد کنید {0}',
+    otp: 'کد تأیید را وارد کنید',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'میانبر صفحه کلید: {0}',
     or: 'یا',
   },
-  video: {
+  media: {
     play: 'پخش',
     pause: 'مکث',
     seek: 'جستجو',

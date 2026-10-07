@@ -94,7 +94,7 @@ export default {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',
     appendAction: '{0} lisätty toiminto',
-    otp: 'Syötä OTP-merkki {0}',
+    otp: 'Syötä vahvistuskoodi',
   },
   fileInput: {
     counter: '{0} tiedostoa',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Näppäinyhdistelmä: {0}',
     or: 'tai',
   },
-  video: {
+  media: {
     play: 'Toista',
     pause: 'Tauko',
     seek: 'Hae',

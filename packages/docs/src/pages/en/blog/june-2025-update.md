@@ -102,7 +102,7 @@ There are multiple new components in development with some of that functionality
 
 ### VHotkey Component and useHotkey Composable
 
-This month marked a significant milestone with the completion and pre-release of our [VHotkey component](https://dev.vuetifyjs.com/en/components/hotkeys/) and `useHotkey` composable system. After extensive development and iteration, these tools are now available in Labs for testing and feedback as we work toward their stable release.
+This month marked a significant milestone with the completion and pre-release of our [VHotkey component](https://vuetifyjs.com/en/components/hotkeys/) and `useHotkey` composable system. After extensive development and iteration, these tools are now available in Labs for testing and feedback as we work toward their stable release.
 
 **VHotkey Component Features:**
 
@@ -124,8 +124,8 @@ This functionality serves as a critical building block for the upcoming VCommand
 
 **Details:**
 
-* [VHotkey Component Documentation](https://dev.vuetifyjs.com/en/components/hotkeys/)
-* [useHotkey Composable Documentation](https://dev.vuetifyjs.com/en/features/hotkey/)
+* [VHotkey Component Documentation](https://vuetifyjs.com/en/components/hotkeys/)
+* [useHotkey Composable Documentation](https://vuetifyjs.com/en/features/hotkey/)
 
 ### New Component Development
 
@@ -152,7 +152,7 @@ We have several new components in development that we are confident will enhance
 **Details:**
 
 * [VMaskInput P.R.](https://github.com/vuetifyjs/vuetify/pull/21519)
-* [VEditor P.R.](https://dev.vuetifyjs.com/en/components/editor/)
+* [VEditor P.R.](https://vuetifyjs.com/en/components/editor/)
 * [VVideo P.R.](https://github.com/vuetifyjs/vuetify/pull/21460)
 
 ## Ecosystem Updates

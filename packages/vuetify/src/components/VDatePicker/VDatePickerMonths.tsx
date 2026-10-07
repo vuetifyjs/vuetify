@@ -11,7 +11,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, useId, watchEffect } from 'vue'
-import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, isFunction, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -92,7 +92,7 @@ export const VDatePickerMonths = genericComponent<VDatePickerMonthsSlots>()({
         return props.allowedMonths.includes(month)
       }
 
-      if (typeof props.allowedMonths === 'function') {
+      if (isFunction(props.allowedMonths)) {
         return props.allowedMonths(month)
       }
 

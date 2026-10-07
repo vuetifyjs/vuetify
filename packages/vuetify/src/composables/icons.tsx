@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, toValue } from 'vue'
-import { consoleWarn, defineComponent, genericComponent, propsFactory } from '@/util'
+import { consoleWarn, defineComponent, genericComponent, isString, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType } from 'vue'
@@ -197,7 +197,7 @@ export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
 
     let icon: IconValue | undefined = iconAlias
 
-    if (typeof icon === 'string') {
+    if (isString(icon)) {
       icon = icon.trim()
       if (icon.startsWith('$')) {
         icon = icons.aliases?.[icon.slice(1)]
@@ -211,7 +211,7 @@ export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
         component: VSvgIcon,
         icon,
       }
-    } else if (typeof icon !== 'string') {
+    } else if (!isString(icon)) {
       return {
         component: VComponentIcon,
         icon,
@@ -219,7 +219,7 @@ export const useIcon = (props: MaybeRefOrGetter<IconValue | undefined>) => {
     }
 
     const iconSetName = Object.keys(icons.sets).find(
-      setName => typeof icon === 'string' && icon.startsWith(`${setName}:`)
+      setName => isString(icon) && icon.startsWith(`${setName}:`)
     )
 
     const iconName = iconSetName ? icon.slice(iconSetName.length + 1) : icon

@@ -1,7 +1,8 @@
 import { VSwitch } from '../VSwitch'
 
 // Utilities
-import { gridOn, showcase } from '@test'
+import { gridOn, render, screen, showcase, waitIdle } from '@test'
+import { ref } from 'vue'
 
 const contextColor = 'rgb(0, 0, 255)'
 const color = 'rgb(255, 0, 0)'
@@ -51,4 +52,37 @@ const props = {
 
 describe('VSwitch', () => {
   showcase({ stories, props, component: VSwitch })
+
+  it('should focus and blur from a ref', async () => {
+    const cmp = ref<any>()
+
+    render(() => <VSwitch ref={ cmp } />)
+    await waitIdle()
+
+    cmp.value.focus()
+    expect(document.activeElement).toBe(screen.getByCSS('input[type="checkbox"]'))
+
+    cmp.value.blur()
+    expect(document.activeElement).not.toBe(screen.getByCSS('input[type="checkbox"]'))
+  })
+
+  it('should expose the VInput api it wraps and not shadow it', async () => {
+    const cmp = ref<any>()
+
+    render(() => <VSwitch ref={ cmp } />)
+    await waitIdle()
+
+    const missing = [
+      'focus',
+      'blur',
+      'reset',
+      'resetValidation',
+      'validate',
+    ].filter(k => typeof cmp.value[k] !== 'function')
+
+    expect(missing).toEqual([])
+
+    expect('isValid' in cmp.value).toBe(true)
+    expect(cmp.value.validate()).toBeInstanceOf(Promise)
+  })
 })

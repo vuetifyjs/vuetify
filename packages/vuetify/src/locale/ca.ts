@@ -94,7 +94,7 @@ export default {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',
     appendAction: 'Acció afegida {0}',
-    otp: 'Si us plau, introdueix el caràcter OTP {0}',
+    otp: 'Introduïu el codi de verificació',
   },
   fileInput: {
     counter: '{0} fitxers',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Drecera de teclat: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproduir',
     pause: 'Paura',
     seek: 'Cercar',

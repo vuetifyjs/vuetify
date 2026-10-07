@@ -31,7 +31,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isBoolean, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -115,9 +115,9 @@ export const VCard = genericComponent<VCardSlots>()({
     const loadingColor = shallowRef<string | undefined>(undefined)
 
     watch(() => props.loading, (val, old) => {
-      loadingColor.value = !val && typeof old === 'string'
+      loadingColor.value = !val && isString(old)
         ? old
-        : typeof val === 'boolean'
+        : isBoolean(val)
           ? undefined
           : val
     }, { immediate: true })

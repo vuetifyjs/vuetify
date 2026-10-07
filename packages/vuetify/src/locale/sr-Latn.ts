@@ -94,7 +94,7 @@ export default {
     clear: 'Obriši {0}',
     prependAction: '{0} prethodna radnja',
     appendAction: '{0} sledeća radnja',
-    otp: 'Unesite OTP znak {0}',
+    otp: 'Unesite kod za potvrdu',
   },
   fileInput: {
     counter: '{0} fajlova',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Prečica na tastaturi: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reprodukuj',
     pause: 'Pauziraj',
     seek: 'Traži',

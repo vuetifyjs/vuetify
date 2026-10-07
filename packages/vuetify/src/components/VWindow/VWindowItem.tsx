@@ -10,7 +10,7 @@ import vTouch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, shallowRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
@@ -114,7 +114,7 @@ export const VWindowItem = genericComponent()({
         : props.transition
 
       return !hasTransition.value ? false : {
-        name: typeof name !== 'string' ? window.transition.value : name,
+        name: !isString(name) ? window.transition.value : name,
         onBeforeEnter: onBeforeTransition,
         onAfterEnter: onAfterTransition,
         onEnterCancelled: onTransitionCancelled,
@@ -135,7 +135,7 @@ export const VWindowItem = genericComponent()({
             groupItem.selectedClass.value,
             props.class,
           ]}
-          style={ props.style }
+          style={[{ transitionDuration: window.transitionDuration.value }, props.style]}
           v-show={ groupItem.isSelected.value }
         >
           { hasContent.value && slots.default?.() }

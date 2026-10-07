@@ -13,7 +13,7 @@
     "alignContentSm": "Deprecated, use **align-content-sm-\\*** class",
     "alignContentXl": "Deprecated, use **align-content-xl-\\*** class",
     "alignContentXxl": "Deprecated, use **align-content-xxl-\\*** class",
-    "dense": "Deprecated, use `density` with **comfortable** instead.",
+    "dense": "Deprecated, use `density` with **compact** instead.",
     "density": "Adjusts the spacing between `v-col`s. Available options are: **default**, **comfortable**, **compact**.",
     "justify": "Deprecated, use **justify-\\***. Available options are: **start**, **center**, **end**, **space-between** and **space-around**.",
     "justifyLg": "Deprecated, use **justify-lg-\\*** class",

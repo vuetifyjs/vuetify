@@ -3,7 +3,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, reactive, watch } from 'vue'
-import { mergeDeep } from '@/util'
+import { isFunction, isString, mergeDeep } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -40,11 +40,12 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
     adapter: VuetifyDateAdapter,
     locale: {
       af: 'af-ZA',
-      // ar: '', # not the same value for all variants
+      ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in ../adapters/vuetify.ts:25
       bg: 'bg-BG',
       ca: 'ca-ES',
-      ckb: '',
+      ckb: 'ckb-IQ',
       cs: 'cs-CZ',
+      da: 'da-DK',
       de: 'de-DE',
       el: 'el-GR',
       en: 'en-US',
@@ -59,6 +60,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
       id: 'id-ID',
       it: 'it-IT',
       ja: 'ja-JP',
+      km: 'km-KH',
       ko: 'ko-KR',
       lv: 'lv-LV',
       lt: 'lt-LT',
@@ -70,8 +72,8 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
       ru: 'ru-RU',
       sk: 'sk-SK',
       sl: 'sl-SI',
-      srCyrl: 'sr-SP',
-      srLatn: 'sr-SP',
+      srCyrl: 'sr-Cyrl-RS',
+      srLatn: 'sr-Latn-RS',
       sv: 'sv-SE',
       th: 'th-TH',
       tr: 'tr-TR',
@@ -89,35 +91,19 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   }
 }
 
-export function createDateRange (adapter: DateInstance, start: unknown, stop?: unknown) {
-  const diff = daysDiff(adapter, start, stop)
-  const datesInRange = [start]
-
-  for (let i = 1; i < diff; i++) {
-    const nextDate = adapter.addDays(start, i)
-    datesInRange.push(nextDate)
-  }
-
-  if (stop) {
-    datesInRange.push(adapter.endOfDay(stop))
-  }
-
-  return datesInRange
-}
-
 export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
   const iso = [
     `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
     `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
   ]
-  return typeof adapter.date() === 'string'
+  return isString(adapter.date())
     ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
     : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
 }
 
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
   const instance = reactive(
-    typeof options.adapter === 'function'
+    isFunction(options.adapter)
       // eslint-disable-next-line new-cap
       ? new options.adapter({
         locale: options.locale[locale.current.value] ?? locale.current.value,

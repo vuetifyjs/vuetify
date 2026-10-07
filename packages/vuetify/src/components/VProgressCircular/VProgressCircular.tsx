@@ -4,16 +4,16 @@ import './VProgressCircular.sass'
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
+import { useElementSize } from '@/composables/resizeObserver'
 import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watchEffect } from 'vue'
-import { clamp, convertToUnit, genericComponent, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { computed, shallowRef, toRef } from 'vue'
+import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,6 +30,10 @@ export const makeVProgressCircularProps = propsFactory({
   rotate: {
     type: [Number, String],
     default: 0,
+  },
+  transition: {
+    type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
+    default: undefined,
   },
   width: {
     type: [Number, String],
@@ -56,24 +60,27 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement>()
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, contentRect } = useResizeObserver()
+    const { width: containerWidth } = useElementSize(root)
+    const { isIntersecting } = useElementIntersection(root)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
     const width = toRef(() => Number(props.width))
+    const transitionDuration = toRef(() => props.transition === false ? undefined : convertToUnit(
+      isObject(props.transition) ? props.transition.duration : undefined, 'ms'
+    ))
     const size = toRef(() => {
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
         ? Number(props.size)
-        : contentRect.value
-          ? contentRect.value.width
+        : containerWidth.value
+          ? containerWidth.value
           : Math.max(width.value, 32)
     })
     const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
@@ -91,11 +98,6 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         : baseAngle
     })
 
-    watchEffect(() => {
-      intersectionRef.value = root.value
-      resizeRef.value = root.value
-    })
-
     useRender(() => (
       <props.tag
         ref={ root }
@@ -107,6 +109,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             'v-progress-circular--disable-shrink': props.indeterminate &&
               (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
             'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),
+            'v-progress-circular--no-transition': props.transition === false,
           },
           themeClasses.value,
           sizeClasses.value,
@@ -117,7 +120,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           sizeStyles.value,
           textColorStyles.value,
           {
-            '--progress-reveal-duration': `${revealDuration.value}ms`,
+            '--v-progress-reveal-duration': `${revealDuration.value}ms`,
+            '--v-progress-circular-transition-duration': transitionDuration.value,
           },
           props.style,
         ]}

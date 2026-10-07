@@ -7,8 +7,8 @@ jobs:
   triage:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: vuetifyjs/triage-action@953df619fa87c3adea25eb49f988fdf9cb78bc00 # master
+      - uses: actions/checkout@v6
+      - uses: vuetifyjs/triage-action@1e4ff4fcdeecddee1dedab13ddd03d267ead0fba # master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           triageLabel: 'S: triage'

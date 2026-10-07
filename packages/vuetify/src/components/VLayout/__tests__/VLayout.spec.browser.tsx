@@ -1,5 +1,6 @@
 // Components
 import { VLayout } from '../VLayout'
+import { VLayoutItem } from '../VLayoutItem'
 import { VAppBar } from '@/components/VAppBar'
 import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
@@ -22,6 +23,26 @@ describe('VLayout', () => {
 
     await wait(100)
     expect(screen.getByCSS('.v-main')).toHaveStyle({ paddingTop: '64px', paddingLeft: '200px' })
+  })
+
+  it('should resolve percentage sizes against the layout', async () => {
+    render(() => (
+      <VLayout height={ 400 } width={ 500 }>
+        <VLayoutItem modelValue position="left" size="20%" />
+        <VLayoutItem modelValue position="top" size="25%" />
+        <VMain>
+          hello world
+        </VMain>
+      </VLayout>
+    ))
+
+    await wait(100)
+
+    const [left, top] = screen.queryAllByCSS('.v-layout-item')
+
+    expect(left.getBoundingClientRect().width).toBe(100)
+    expect(top.getBoundingClientRect().height).toBe(100)
+    expect(screen.getByCSS('.v-main')).toHaveStyle({ paddingLeft: '100px', paddingTop: '100px' })
   })
 
   it('should work with sticky elements', async () => {

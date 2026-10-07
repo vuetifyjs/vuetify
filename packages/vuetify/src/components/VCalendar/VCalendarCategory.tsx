@@ -9,7 +9,7 @@ import { makeIntervalHighlightProps, useIntervalHighlight } from './composables/
 // Utilities
 import { computed } from 'vue'
 import { getParsedCategories } from './util/parser'
-import { convertToUnit, defineComponent, getPrefixedEventHandlers, useRender } from '@/util'
+import { convertToUnit, defineComponent, getPrefixedEventHandlers, isObject, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -43,8 +43,7 @@ export const VCalendarCategory = defineComponent({
     })
 
     function getCategoryScope (scope: any, category: CalendarCategory) {
-      const cat = typeof category === 'object' && category &&
-          category.categoryName === props.categoryForInvalid ? null : category
+      const cat = isObject(category) && category.categoryName === props.categoryForInvalid ? null : category
       return {
         ...scope,
         category: cat,
@@ -62,7 +61,7 @@ export const VCalendarCategory = defineComponent({
     }
 
     function genDayHeaderCategory (day: CalendarTimestamp, scope: any) {
-      const headerTitle = typeof scope.category === 'object' ? scope.category.categoryName : scope.category
+      const headerTitle = isObject(scope.category) ? scope.category.categoryName : scope.category
       const events = getPrefixedEventHandlers(attrs, ':dayCategory', () => {
         return getCategoryScope(base.getSlotScope(day) || day, scope.category)
       })

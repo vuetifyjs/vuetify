@@ -94,7 +94,7 @@ export default {
     clear: 'Vymazat {0}',
     prependAction: '{0} předřazená akce',
     appendAction: '{0} připojená akce',
-    otp: 'Vložte OTP znak {0}',
+    otp: 'Zadejte verifikační kód',
   },
   fileInput: {
     counter: '{0} souborů',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klávesová zkratka: {0}',
     or: 'nebo',
   },
-  video: {
+  media: {
     play: 'Přehrát',
     pause: 'Pozastavit',
     seek: 'Vyhledat',

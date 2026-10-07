@@ -31,6 +31,7 @@ import {
   filterInputAttrs,
   genericComponent,
   getCurrentInstance,
+  isObject,
   propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -128,8 +129,10 @@ export const VImg = genericComponent<VImgSlots>()({
     const naturalWidth = shallowRef<number>()
     const naturalHeight = shallowRef<number>()
 
+    let deferredLoadEmit = false
+
     const normalisedSrc = computed<srcObject>(() => {
-      return props.src && typeof props.src === 'object'
+      return isObject(props.src)
         ? {
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,
@@ -142,6 +145,7 @@ export const VImg = genericComponent<VImgSlots>()({
           aspect: Number(props.aspectRatio || 0),
         }
     })
+
     const aspectRatio = computed(() => {
       return normalisedSrc.value.aspect || naturalWidth.value! / naturalHeight.value! || 0
     })
@@ -149,9 +153,22 @@ export const VImg = genericComponent<VImgSlots>()({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+
     watch(aspectRatio, (val, oldVal) => {
       if (!val && oldVal && image.value) {
         pollForSize(image.value)
+      }
+    })
+
+    watch(image, img => {
+      if (!img || state.value === 'idle') return
+
+      if (!aspectRatio.value) pollForSize(img)
+      getSrc(img)
+
+      if (deferredLoadEmit) {
+        deferredLoadEmit = false
+        emit('load', img.currentSrc || normalisedSrc.value.src)
       }
     })
 
@@ -192,9 +209,9 @@ export const VImg = genericComponent<VImgSlots>()({
 
             if (!aspectRatio.value) pollForSize(image.value, null)
             if (state.value === 'loading') onLoad()
-          } else {
-            if (!aspectRatio.value) pollForSize(image.value!)
-            getSrc()
+          } else if (image.value) {
+            if (!aspectRatio.value) pollForSize(image.value)
+            getSrc(image.value)
           }
         })
       })
@@ -203,10 +220,14 @@ export const VImg = genericComponent<VImgSlots>()({
     function onLoad () {
       if (vm.isUnmounted) return
 
-      getSrc()
-      pollForSize(image.value!)
+      if (image.value) {
+        getSrc(image.value)
+        pollForSize(image.value)
+        emit('load', image.value.currentSrc || normalisedSrc.value.src)
+      } else {
+        deferredLoadEmit = true
+      }
       state.value = 'loaded'
-      emit('load', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
     function onError () {
@@ -216,9 +237,8 @@ export const VImg = genericComponent<VImgSlots>()({
       emit('error', image.value?.currentSrc || normalisedSrc.value.src)
     }
 
-    function getSrc () {
-      const img = image.value
-      if (img) currentSrc.value = img.currentSrc || img.src
+    function getSrc (img: HTMLImageElement) {
+      currentSrc.value = img.currentSrc || img.src
     }
 
     let timer = -1
@@ -376,7 +396,7 @@ export const VImg = genericComponent<VImgSlots>()({
           { ...responsiveProps }
           { ...rootAttrs }
           aspectRatio={ aspectRatio.value }
-          aria-label={ props.alt }
+          aria-label={ props.alt || undefined }
           role={ props.alt ? 'img' : undefined }
           v-intersect={[{
             handler: init,

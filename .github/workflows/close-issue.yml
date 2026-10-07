@@ -16,6 +16,6 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.repository_owner == 'vuetifyjs'
     steps:
-      - uses: vuetifyjs/close-action@c0a4a544489ed6add12c6b899d18c8042db411a5 # master
+      - uses: vuetifyjs/close-action@7a2e1909290f2a1300ce5722068d7d1ce3b35629 # master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

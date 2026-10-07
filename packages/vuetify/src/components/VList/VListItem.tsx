@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VListItem.sass'
 
@@ -256,6 +258,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
 
+      // Treeview items own their Enter/Space handling
+      if ((e.currentTarget as HTMLElement | null)?.getAttribute('role') === 'treeitem') return
+
       if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
         e.stopPropagation()
@@ -317,7 +322,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
-          onClick={ onClick }
+          onClick={ (isClickable.value || props.onClick || props.onClickOnce) && onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
         >

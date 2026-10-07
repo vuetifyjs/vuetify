@@ -20,7 +20,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { genericComponent, isObject, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -86,7 +86,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
         dotSize: badgeDotSize.value,
         offsetX: badgeOffset.value,
         offsetY: badgeOffset.value,
-        color: typeof props.badge === 'string' ? props.badge : 'primary',
+        color: isString(props.badge) ? props.badge : 'primary',
         ...isObject(props.badge) ? props.badge : {},
       }
     })

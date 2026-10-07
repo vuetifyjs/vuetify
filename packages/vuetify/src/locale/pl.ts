@@ -94,7 +94,7 @@ export default {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
-    otp: 'Proszę wprowadzić znak nr {0}',
+    otp: 'Wprowadź kod weryfikacyjny',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Skrót klawiszowy: {0}',
     or: 'lub',
   },
-  video: {
+  media: {
     play: 'Odtwórz',
     pause: 'Wstrzymaj',
     seek: 'Przewiń',

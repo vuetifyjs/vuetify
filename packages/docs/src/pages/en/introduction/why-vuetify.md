@@ -75,7 +75,7 @@ Vuetify has been in active development since 2016 and is constantly responding t
 * ⛏️ MINOR **(Quarterly)**
 * ⚒️ MAJOR **(Bi-yearly to Yearly)**
 
-In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
+In addition, after every MAJOR release, the previous version is still maintained with 12 months of [Long-term support](/introduction/long-term-support/).
 
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 

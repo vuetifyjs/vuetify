@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-identical-functions */
 // Utilities
 import { toRaw } from 'vue'
-import { wrapInArray } from '@/util'
+import { isNullOrUndefined, wrapInArray } from '@/util'
 
 type ActiveStrategyFunction = (data: {
   id: unknown
@@ -50,7 +50,7 @@ export const independentActiveStrategy = (mandatory?: boolean): ActiveStrategy =
     in: (v, children, parents) => {
       let set = new Set()
 
-      if (v != null) {
+      if (!isNullOrUndefined(v)) {
         for (const id of wrapInArray(v)) {
           set = strategy.activate({
             id,
@@ -84,7 +84,7 @@ export const independentSingleActiveStrategy = (mandatory?: boolean): ActiveStra
     in: (v, children, parents) => {
       let set = new Set()
 
-      if (v != null) {
+      if (!isNullOrUndefined(v)) {
         const arr = wrapInArray(v)
         if (arr.length) {
           set = parentStrategy.in(arr.slice(0, 1), children, parents)

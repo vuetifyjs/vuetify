@@ -94,7 +94,7 @@ export default {
     clear: 'ล้าง {0}',
     prependAction: 'การกระทำก่อนหน้า {0}',
     appendAction: 'การกระทำเพิ่มเติม {0}',
-    otp: 'กรุณากรอกตัวอักษร OTP ตัวที่ {0}',
+    otp: 'กรอกรหัสยืนยัน',
   },
   fileInput: {
     counter: '{0} ไฟล์',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
     or: 'หรือ',
   },
-  video: {
+  media: {
     play: 'เล่น',
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',

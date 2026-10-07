@@ -94,7 +94,7 @@ export default {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',
     appendAction: '{0} の後に追加されたアクション',
-    otp: '{0}番目のワンタイムパスワードを入力してください',
+    otp: '確認コードを入力してください',
   },
   fileInput: {
     counter: '{0} ファイル',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'キーボードショートカット: {0}',
     or: 'または',
   },
-  video: {
+  media: {
     play: '再生',
     pause: '一時停止',
     seek: 'シーク',

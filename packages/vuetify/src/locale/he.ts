@@ -94,7 +94,7 @@ export default {
     clear: 'נקה {0}',
     prependAction: '{0} פעולה מקדימה',
     appendAction: '{0} פעולה נוספת',
-    otp: 'נא להזין תו OTP {0}',
+    otp: 'הזן קוד אימות',
   },
   fileInput: {
     counter: '{0} קבצים',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'קיצור דרך במקלדת: {0}',
     or: 'או',
   },
-  video: {
+  media: {
     play: 'נגן',
     pause: 'השהה',
     seek: 'חפש',

@@ -59,6 +59,12 @@ Find more information and examples on the [Server side tables](/components/data-
 
 The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports client-side sorting and filtering, but not pagination.
 
+::: warning
+
+When using virtualized variant of VDataTable, you have to set the **height** prop or constrain the table's height using custom CSS. Otherwise the table has no internal scroll area and will put all the rows in the DOM. This also applies to the **fixed-header** and **fixed-footer** props - those have no effect if the table **height** is unconstrained.
+
+:::
+
 | Component | Description |
 | - | - |
 | [v-data-table-virtual](/api/v-data-table-virtual/) | Primary Component |
@@ -158,6 +164,12 @@ The `v-data-table` renders a default footer using the `v-data-footer` component.
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
 <ExamplesExample file="v-data-table/prop-hide-header-footer" />
+
+#### Fixed footer
+
+Use the **fixed-footer** prop together with the `tfoot` slot to pin a custom footer to the bottom of a scrollable table. The slot exposes the currently visible `items`, so aggregates such as column totals recalculate automatically as the table is searched or filtered.
+
+<ExamplesExample file="v-data-table/prop-fixed-footer" />
 
 #### Sort icons
 

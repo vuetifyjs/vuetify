@@ -132,6 +132,23 @@
     opacity: 0
     pointer-events: none
 
+    @media (any-pointer: coarse)
+      inset: 0
+      width: 100%
+      height: 100%
+      opacity: 1
+      pointer-events: auto
+
+      &::selection
+        background: transparent
+        color: transparent
+
+      &:-webkit-autofill
+        background: transparent !important
+        color: transparent !important
+        -webkit-text-fill-color: transparent !important
+        box-shadow: none !important
+
   .v-otp-input__content
     align-items: center
     display: flex

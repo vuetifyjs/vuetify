@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Validation rules
   title: Validation rules composable
@@ -8,7 +9,7 @@ related:
   - /components/forms/
   - /features/internationalization/
 features:
-  github: /labs/rules/
+  github: /composables/rules/
   label: 'E: rules'
   report: true
 ---
@@ -27,8 +28,7 @@ To use the Rules plugin, you'll need to import and register it with your Vuetify
 
 ```js
 import { createVue } from 'vue'
-import { createVuetify } from 'vuetify'
-import { createRulesPlugin } from 'vuetify/labs/rules'
+import { createRulesPlugin, createVuetify } from 'vuetify'
 
 const app = createVue()
 const vuetify = createVuetify()
@@ -41,7 +41,7 @@ This will make the rules system available throughout your application. The plugi
 Inside of components, you can now import and utilize the rules composable:
 
 ```js
-import { useRules } from 'vuetify/labs/rules'
+import { useRules } from 'vuetify'
 
 const rules = useRules()
 ```
@@ -65,7 +65,7 @@ Existing rules' error messages can also be customized on the fly, to fit specifi
 </template>
 
 <script setup>
-  import { useRules } from 'vuetify/labs/rules'
+  import { useRules } from 'vuetify'
 
   const rules = useRules()
 
@@ -135,10 +135,9 @@ In this case, error message can be redefined as second parameter:
 </v-form>
 ```
 
-<!--
 ## Aliases
 
-Rules can also be used in inputs using the alias names syntax:
+Rather than importing `useRules` and calling builders by hand, any rule can be referenced directly in the `rules` prop by its **alias** — a string prefixed with `$` that resolves to the matching builder. This keeps templates terse and lets you skip a component-level `useRules()` call entirely:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -149,7 +148,17 @@ Rules can also be used in inputs using the alias names syntax:
 </v-form>
 ```
 
-RuleBuilders parameters can also be passed using an Array:
+The example above is shorthand for `[rules.required()]`.
+
+::: info
+
+Aliases are resolved by the rules plugin, so they only take effect when [`createRulesPlugin`](#installation) is registered. Without it, the string is passed through as-is and treated as a literal error message.
+
+:::
+
+### Passing options
+
+For rules that accept options, use an array where the first item is the alias and the remaining items are the builder's arguments. The last argument can still be a custom error message:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -157,12 +166,24 @@ RuleBuilders parameters can also be passed using an Array:
     label="Username"
     :rules="[
       ['$required', 'This field is mandatory'],
-      ['$maxLength', 10, 'You can\'t write over 10 characters']
+      ['$maxLength', 10, 'You can\'t write over 10 characters'],
     ]"
   ></v-text-field>
 </v-form>
 ```
--->
+
+Each array maps to its builder call — `['$maxLength', 10, '…']` resolves to `rules.maxLength(10, '…')`.
+
+### Custom aliases
+
+Because aliases reference the same builders registered through `createRulesPlugin`, your own [custom rules](#custom-rules) can be used by name too:
+
+```html { resource="src/App.vue" }
+<v-text-field
+  label="PIN"
+  :rules="['$pinCode']"
+></v-text-field>
+```
 
 ## Custom rules
 
@@ -170,8 +191,7 @@ Vuetify comes with an existing set of validation rules but you can overwrite the
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVue } from 'vue'
-import { createVuetify } from 'vuetify'
-import { createRulesPlugin } from 'vuetify/labs/rules'
+import { createRulesPlugin, createVuetify } from 'vuetify'
 
 const app = createVue()
 const vuetify = createVuetify()

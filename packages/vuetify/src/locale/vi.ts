@@ -94,7 +94,7 @@ export default {
     clear: 'Xóa {0}',
     prependAction: 'Hành động trước {0}',
     appendAction: 'Hành động sau {0}',
-    otp: 'Vui lòng nhập ký tự OTP thứ {0}',
+    otp: 'Nhập mã xác minh',
   },
   fileInput: {
     counter: '{0} tệp',
@@ -174,7 +174,7 @@ export default {
     shortcut: 'Phím tắt: {0}',
     or: 'hoặc',
   },
-  video: {
+  media: {
     play: 'Phát',
     pause: 'Tạm dừng',
     seek: 'Tìm kiếm',

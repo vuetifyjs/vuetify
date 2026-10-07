@@ -102,6 +102,58 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(2)
   })
 
+  it('navigates using arrows it in rtl', async () => {
+    render(() => (<VOtpInput length={ 6 } />), null, {
+      locale: { rtl: { en: true } },
+    })
+
+    await focusInput()
+    await userEvent.keyboard('1234')
+    expect(getActiveSlotIndex()).toBe(4)
+
+    for (const expected of [3, 2, 1, 0]) {
+      await userEvent.keyboard('{ArrowRight}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{ArrowRight}') // overshoot, no-op
+    expect(getActiveSlotIndex()).toBe(0)
+
+    for (const expected of [1, 2]) {
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{Delete}')
+    expect(getInput().value).toBe('124')
+    expect(getActiveSlotIndex()).toBe(2)
+  })
+
+  it('navigates using arrows it in ltr', async () => {
+    render(() => (<VOtpInput length={ 6 } />))
+
+    await focusInput()
+    await userEvent.keyboard('1234')
+    expect(getActiveSlotIndex()).toBe(4)
+
+    for (const expected of [3, 2, 1, 0]) {
+      await userEvent.keyboard('{ArrowLeft}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{ArrowLeft}') // overshoot, no-op
+    expect(getActiveSlotIndex()).toBe(0)
+
+    for (const expected of [1, 2]) {
+      await userEvent.keyboard('{ArrowRight}')
+      expect(getActiveSlotIndex()).toBe(expected)
+    }
+
+    await userEvent.keyboard('{Delete}')
+    expect(getInput().value).toBe('124')
+    expect(getActiveSlotIndex()).toBe(2)
+  })
+
   it('removes value and goes back when using backspace', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()
@@ -397,6 +449,30 @@ describe('VOtpInput', () => {
 
     expect(input.value).toBe('123456')
     expect(getActiveSlotIndex()).toBe(5)
+  })
+
+  it('advances while a latin word stays in composition', async () => {
+    render(() => (<VOtpInput type="text" />))
+    const input = getInput()
+
+    await focusInput()
+    input.dispatchEvent(new CompositionEvent('compositionstart', { data: '' }))
+    for (const word of ['a', 'ab', 'abc', 'abcd']) {
+      input.dispatchEvent(new CompositionEvent('compositionupdate', { data: word }))
+      input.value = word
+      input.setSelectionRange(word.length, word.length)
+      input.dispatchEvent(new InputEvent('input', { data: word, inputType: 'insertCompositionText', isComposing: true }))
+      input.dispatchEvent(new Event('selectionchange'))
+      await waitAnimationFrame()
+
+      expect(input.selectionStart).toBe(word.length)
+      expect(getActiveSlotIndex()).toBe(word.length)
+    }
+    input.dispatchEvent(new CompositionEvent('compositionend', { data: 'abcd' }))
+    await waitAnimationFrame()
+
+    expect(input.value).toBe('abcd')
+    expect(getActiveSlotIndex()).toBe(4)
   })
 
   it('selects correct slot when clicking a filled slot', async () => {
