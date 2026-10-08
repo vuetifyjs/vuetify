@@ -44,6 +44,7 @@ $button-positions: absolute fixed !default;
 $button-text-letter-spacing: map.get(settings.$typography, 'label-large', 'letter-spacing') !default;
 $button-text-transform: none !default;
 $button-transition-property: box-shadow, transform, opacity, background !default;
+$button-border-radius-transition: .35s cubic-bezier(.27, 1.06, .18, 1) !default;
 $button-vertical-align: middle !default;
 $button-width-ratio: math.div(16, 9) !default;
 $button-slim-padding: 0 8px !default;
@@ -72,6 +73,74 @@ $button-sizes: map.merge(
   ),
   $button-sizes
 );
+
+$button-named-sizes: (
+  'x-small': (
+    '--v-btn-height': 32px,
+    '--v-btn-size': .875rem,
+    'font-weight': 500,
+    'letter-spacing': .00714em,
+    'padding-inline': 12px,
+    'border-radius': 16px,
+    '--v-btn-border-radius-pressed': 8px,
+    '&.v-btn--icon': (
+      '--v-btn-height': 20px,
+      '.v-icon': ('font-size': 20px),
+    ),
+  ),
+  'small': (
+    '--v-btn-height': 40px,
+    '--v-btn-size': .875rem,
+    'font-weight': 500,
+    'letter-spacing': .00714em,
+    'padding-inline': 16px,
+    'border-radius': 20px,
+    '--v-btn-border-radius-pressed': 8px,
+    '&.v-btn--icon': (
+      '--v-btn-height': 28px,
+      '.v-icon': ('font-size': 24px),
+    ),
+  ),
+  'default': (
+    '--v-btn-height': 56px,
+    '--v-btn-size': 1rem,
+    'font-weight': 500,
+    'letter-spacing': .009375em,
+    'padding-inline': 24px,
+    'border-radius': 28px,
+    '--v-btn-border-radius-pressed': 12px,
+    '&.v-btn--icon': (
+      '--v-btn-height': 44px,
+      '.v-icon': ('font-size': 24px),
+    ),
+  ),
+  'large': (
+    '--v-btn-height': 96px,
+    '--v-btn-size': 1.5rem,
+    'font-weight': 400,
+    'letter-spacing': 0,
+    'padding-inline': 48px,
+    'border-radius': 48px,
+    '--v-btn-border-radius-pressed': 16px,
+    '&.v-btn--icon': (
+      '--v-btn-height': 84px,
+      '.v-icon': ('font-size': 32px),
+    ),
+  ),
+  'x-large': (
+    '--v-btn-height': 136px,
+    '--v-btn-size': 2rem,
+    'font-weight': 400,
+    'letter-spacing': 0,
+    'padding-inline': 64px,
+    'border-radius': 68px,
+    '--v-btn-border-radius-pressed': 16px,
+    '&.v-btn--icon': (
+      '--v-btn-height': 124px,
+      '.v-icon': ('font-size': 40px),
+    ),
+  ),
+) !default;
 
 $button-stacked-sizes: () !default;
 $button-stacked-sizes: map.merge(
