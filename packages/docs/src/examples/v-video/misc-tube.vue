@@ -9,7 +9,7 @@
     max-width="450"
     rounded="lg"
     src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video.mp4"
-    track-color="red"
+    progress-color="red"
     eager
   >
     <template v-slot:action.next>

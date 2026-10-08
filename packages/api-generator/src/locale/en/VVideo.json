@@ -3,9 +3,8 @@
   "props": {
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",
-    "chapters": "Chapter starts in seconds, each with an optional `title`, passed to the progress bar.",
-    "controlsGap": "Passed to the `gap` prop of the VVideoControls component. Pass `[controls, pills]` to set the gap between **pills** and the gap inside them separately.",
-    "controlsProps": "Pass props through to the `v-video-controls` component. Accepts an object with anything from [v-video-controls](/api/v-video-controls/#props) props, camelCase keys are recommended.",
+    "chapters": "Splits the progress bar into chapters. Each item needs a `start`, given as seconds or formatted time (`'1:30'`), and can have a `title`.",
+    "controlsProps": "Props passed to the [v-video-controls](/api/v-video-controls/#props) component, e.g. `class` or `gap`. Use camelCase keys. Playback state such as `playing`, `progress` or `volume` always comes from the video.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "**Deprecated**, use **actions** or **hide-controls**. Variant passed to the VVideoControls component.",
     "eager": "Silently loades the media file without waiting for user to click.",
@@ -19,7 +18,7 @@
     "rounded": "Applies a border radius to the video container and the controls. Accepts array of two values to customize elements separately.",
     "src": "Media file URL",
     "srcObject": "Sets the source of the video to a MediaStream, MediaSource, or Blob object. Useful for WebRTC streaming.",
-    "startAt": "Position in seconds to start playback from. Applies to the first loaded file only.",
+    "startAt": "Time to start playback from, given as seconds or formatted time (`'1:30'`). Applies to the first loaded file only.",
     "type": "Media file type (optional)"
   },
   "events": {
@@ -45,8 +44,11 @@
     "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods."
   },
   "exposed": {
+    "retry": "Reloads the media after an error and starts playback, unless the source is **srcObject**. Does nothing outside the error state.",
     "seek": "Move the playback position with `{ to }` or `{ by }`. Numbers are seconds, strings ending in `%` are relative to the duration, e.g. `seek({ to: '50%' })` or `seek({ by: -10 })`.",
+    "skipTo": "**Deprecated**, use **seek** with a percent string, e.g. `seek({ to: '50%' })`.",
     "toggleFullscreen": "Toggle fullscreen mode.",
-    "toggleMuted": "Mute/unmute audio."
+    "toggleMuted": "Mute/unmute audio.",
+    "video": "The native `<video>` element."
   }
 }

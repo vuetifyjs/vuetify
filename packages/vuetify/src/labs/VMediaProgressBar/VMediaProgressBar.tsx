@@ -24,6 +24,7 @@ import {
   isObject,
   isUndefined,
   keyValues,
+  parseTime,
   propsFactory,
   useRender,
   useTransition,
@@ -33,7 +34,7 @@ import {
 import type { PropType } from 'vue'
 import type { MediaSeekStep } from '@/labs/composables/media'
 
-export type VMediaProgressBarChapter = { start: number, title?: string }
+export type VMediaProgressBarChapter = { start: number | string, title?: string }
 
 const WAVE_AMPLITUDE = 3
 const WAVE_LENGTH = 40
@@ -104,8 +105,8 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
 
   emits: {
     'update:modelValue': (value: number) => true,
-    start: (value: number) => true,
-    end: (value: number) => true,
+    'drag:start': (value: number) => true,
+    'drag:end': (value: number) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -149,7 +150,11 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
       return props.max > 0 ? clamp(seconds / props.max * 100, 0, 100) : 0
     }
 
-    const chapters = computed(() => [...props.chapters].sort((a, b) => a.start - b.start))
+    const chapters = computed(() => props.chapters
+      .map(chapter => ({ ...chapter, start: parseTime(chapter.start) }))
+      .filter(chapter => Number.isFinite(chapter.start))
+      .sort((a, b) => a.start - b.start)
+    )
     const chapterStarts = computed(() => chapters.value
       .map(c => c.start)
       .filter(start => start > 0 && start < props.max)
@@ -240,7 +245,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
 
       rootRef.value!.setPointerCapture(e.pointerId)
       dragging.value = true
-      emit('start', model.value)
+      emit('drag:start', model.value)
       pointerJump = true
       pressedX = e.clientX
       commit(ratioAt(e) * props.max)
@@ -266,7 +271,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
       if (!dragging.value) return
 
       dragging.value = false
-      emit('end', model.value)
+      emit('drag:end', model.value)
     }
 
     function onKeydown (e: KeyboardEvent) {

@@ -1,6 +1,6 @@
 // Utilities
 import { nextTick, onScopeDispose, shallowRef, watch } from 'vue'
-import { clamp, createRange, IN_BROWSER, isNullOrUndefined, isNumber, isString, isUndefined } from '@/util'
+import { clamp, createRange, IN_BROWSER, isNullOrUndefined, isNumber, isString, isUndefined, parseTime } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -143,7 +143,7 @@ export function useMedia<T extends HTMLMediaElement> (
 
       if (!isNullOrUndefined(props.startAt) && !startApplied) {
         startApplied = true
-        seekTo(Number(props.startAt) || 0)
+        seekTo(parseTime(props.startAt) || 0)
       }
 
       options.onLoaded?.(media)

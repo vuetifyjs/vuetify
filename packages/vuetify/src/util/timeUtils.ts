@@ -13,3 +13,7 @@ export function formatTime (seconds: number) {
     .map((x, i) => i > 0 ? x.padStart(2, '0') : x)
     .join(':')
 }
+
+export function parseTime (value: number | string) {
+  return String(value).split(':').reduce((total, part) => total * 60 + Number(part), 0)
+}

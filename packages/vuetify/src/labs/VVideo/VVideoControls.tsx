@@ -41,6 +41,7 @@ export type VVideoControlsActionsSlot = {
   play: () => void
   pause: () => void
   seek: (target: MediaSeekTarget) => void
+  skipTo: (percent: number) => void
   volume: Ref<number>
   playing: boolean
   progress: number
@@ -88,6 +89,8 @@ function getPresetActions (variant: VVideoControlsVariant, splitTime: boolean, h
 export const makeVVideoControlsProps = propsFactory({
   color: String,
   bgColor: String,
+  backgroundColor: String,
+  progressColor: String,
   trackColor: String,
   playing: Boolean,
   muted: Boolean,
@@ -121,14 +124,6 @@ export const makeVVideoControlsProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
   playProps: Object as PropType<VIconBtn['$props']>,
-  playIcon: {
-    type: String,
-    default: '$play',
-  },
-  pauseIcon: {
-    type: String,
-    default: '$pause',
-  },
   progressVariant: String as PropType<VMediaProgressBar['$props']['variant']>,
   volumeProps: Object as PropType<VMediaVolumeOptions>,
   seekStep: {
@@ -166,9 +161,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
 
+    const bgColor = toRef(() => props.bgColor ?? props.backgroundColor)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
       const fallbackBackground = props.detached ? 'surface' : undefined
-      return props.bgColor ?? fallbackBackground
+      return bgColor.value ?? fallbackBackground
     })
 
     const playing = useProxiedModel(props, 'playing')
@@ -212,14 +208,14 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       return state
     }, { groups: [] as Group[], depth: 0 }).groups)
 
-    const trackColor = toRef(() => {
-      if (props.trackColor) {
-        return props.trackColor
+    const progressColor = toRef(() => {
+      if (props.progressColor ?? props.trackColor) {
+        return props.progressColor ?? props.trackColor
       }
 
       const onVideo = props.pills && !groups.value.some(({ names, pill }) => pill && names.includes('progress'))
       const fallback = currentTheme.value.dark || !onVideo ? undefined : 'surface'
-      return (onVideo ? props.bgColor : props.color) ?? fallback
+      return (onVideo ? bgColor.value : props.color) ?? fallback
     })
 
     const stacked = toRef(() => !props.hideProgressBar &&
@@ -268,6 +264,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
       const seconds = resolveSeekTarget(target, props.progress / 100 * props.duration, props.duration)
       if (Number.isFinite(seconds)) progress.value = clamp(seconds / props.duration * 100, 0, 100)
+    }
+
+    function skipTo (percent: number) {
+      seek({ to: `${percent}%` })
     }
 
     function toggleFullscreen () {
@@ -325,6 +325,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         currentTime: currentTime.value,
         duration: props.duration,
         seek,
+        skipTo,
         volume,
         toggleMuted,
         fullscreen: props.fullscreen,
@@ -336,7 +337,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         size: props.pills ? (regularBtnSize + 8) : regularBtnSize,
         ...props.playProps,
         class: ['v-video__action-play', props.playProps?.class],
-        icon: playing.value ? props.pauseIcon : props.playIcon,
+        icon: playing.value ? '$pause' : '$play',
         'aria-label': labels.value.playAction,
         onClick: () => playing.value = !playing.value,
       }
@@ -352,7 +353,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         max: props.duration,
         buffer: props.buffer,
         chapters: props.chapters,
-        color: trackColor.value ?? 'surface-variant',
+        color: progressColor.value ?? 'surface-variant',
         bgColor: stacked.value ? 'white' : undefined,
         step: props.seekStep,
         thumb: !props.hideThumb,

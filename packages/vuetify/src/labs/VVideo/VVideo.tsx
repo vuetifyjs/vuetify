@@ -72,7 +72,6 @@ export const makeVVideoProps = propsFactory({
     default: 'player',
     validator: (v: any) => allowedVariants.includes(v),
   },
-  controlsGap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
   controlsTransition: {
     type: [Boolean, String, Object] as PropType<null | string | boolean | TransitionProps & { component?: any }>,
     component: VFadeTransition as Component,
@@ -176,6 +175,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (!props.srcObject) {
         play()
       }
+    }
+
+    function skipTo (percent: number) {
+      seek({ to: `${percent}%` })
     }
 
     function onClick () {
@@ -317,17 +320,16 @@ export const VVideo = genericComponent<VVideoSlots>()({
       const controlsProps = {
         ...VVideoControls.filterProps(omit(props, ['variant', 'rounded'])),
         rounded: Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded,
-        gap: props.controlsGap,
-        fullscreen: fullscreen.value,
-        hideFullscreen: props.hideFullscreen || props.noFullscreen,
         density: props.density,
         variant: props.controlsVariant,
+        ...props.controlsProps,
+        fullscreen: fullscreen.value,
+        hideFullscreen: props.hideFullscreen || props.noFullscreen,
         playing: playing.value,
         progress: progress.value,
         duration: duration.value,
         buffer: props.hideBuffer ? 0 : buffered.value,
         volume: volume.value,
-        ...props.controlsProps,
       }
 
       const controlsEventHandlers = {
@@ -515,6 +517,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       ...forwardRefs({
         retry,
         seek,
+        skipTo,
         toggleFullscreen,
       }, controlsRef),
     }

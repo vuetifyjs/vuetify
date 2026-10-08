@@ -73,7 +73,7 @@ The **actions** prop lists the controls to render, in order: `play`, `progress`,
 
 #### Chapters
 
-The **chapters** prop splits the progress bar at each `start` (in seconds). The hover tooltip and the announced position include the chapter `title`.
+The **chapters** prop splits the progress bar at each `start`, given in seconds or as formatted time (`'1:10'`). The hover tooltip and the announced position include the chapter `title`.
 
 <ExamplesExample file="v-video/prop-chapters" />
 

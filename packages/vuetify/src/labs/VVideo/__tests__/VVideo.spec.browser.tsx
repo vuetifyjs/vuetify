@@ -35,7 +35,7 @@ describe('VVideo', () => {
 
   it('should mount eagerly and apply startAt and volume on load', async () => {
     const progress = ref(0)
-    render(() => <VVideo src={ SILENT_WAV } eager startAt={ 2 } volume={ 40 } v-model:progress={ progress.value } />)
+    render(() => <VVideo src={ SILENT_WAV } eager startAt="0:02" volume={ 40 } v-model:progress={ progress.value } />)
 
     expect(screen.queryByCSS('video')).not.toBeNull()
     await whenLoaded()

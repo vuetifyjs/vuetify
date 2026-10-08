@@ -1,25 +1,25 @@
 {
-  "description": "A seekable media timeline with a thumb, a hover tooltip and chapters.",
+  "description": "Seekable progress bar for media players, with optional chapters and a hover tooltip.",
   "props": {
-    "buffer": "Buffered position in seconds.",
+    "buffer": "End of the buffered range, in seconds.",
     "chapterGap": "Width of the gap between chapters.",
-    "chapters": "Chapter starts in seconds, each with an optional `title`. The bar is split at every start and the tooltip and announced value name the chapter.",
-    "elevation": "Elevation of the **thumb**.",
-    "max": "Total duration in seconds.",
-    "modelValue": "Current position in seconds.",
-    "readonly": "Keeps the bar focusable and announced but ignores pointer and keyboard input.",
-    "step": "Controls who far progress is moved by the arrow keys (in seconds). Holding Shift moves 10x as far, or pass `[step, shiftStep]` to set both. Page Up and Page Down move by a tenth of **max**.",
-    "thumb": "Shows a thumb at the current position.",
-    "thumbSize": "Size of the **thumb**.",
-    "tooltip": "Shows the time under the pointer while hovering. Pass an object to set `location` (`top` or `bottom`) and `offset` from the bar.",
-    "variant": "`pill` applies the MD3 look: a bar-shaped **thumb** with a gap on both sides. `wavy` also draws the played part as a wave and eases jumps (clicks, keyboard seeks, start position), but not dragging or playback."
+    "chapters": "Splits the bar into chapters. Each item needs a `start`, given as seconds or formatted time (`'1:30'`, `'1:02:30'`), and can have a `title` shown in the tooltip.",
+    "elevation": "Elevation of the thumb. Ignored with `pill` and `wavy` variants.",
+    "max": "Duration of the media, in seconds.",
+    "modelValue": "Current playback time, in seconds.",
+    "readonly": "Bar stays focusable, but does not react to pointer or keyboard.",
+    "step": "Seconds moved by the arrow keys. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both. Page Up and Page Down move by 10% of **max**.",
+    "thumb": "Shows the thumb at the current position.",
+    "thumbSize": "Size of the thumb.",
+    "tooltip": "Shows the time under the pointer. Accepts an object with `location` (`top` or `bottom`) and `offset`.",
+    "variant": "`pill` follows MD3 with a bar-shaped thumb. `wavy` additionally draws the played part as a wave."
   },
   "events": {
-    "update:modelValue": "Emitted with the new position in seconds while clicking, dragging or using the keyboard.",
-    "start": "Emitted when a drag starts.",
-    "end": "Emitted when a drag ends."
+    "update:modelValue": "Emitted when the position changes by clicking, dragging or keyboard.",
+    "drag:start": "Emitted with the current position when the user starts dragging.",
+    "drag:end": "Emitted with the final position when the user stops dragging."
   },
   "slots": {
-    "tooltip": "Replaces the contents of the hover tooltip. Receives the formatted time, the chapter title and the hovered position in seconds."
+    "tooltip": "Replaces the tooltip content. Receives `time` (formatted), `chapter` and `seconds`."
   }
 }

@@ -74,7 +74,7 @@ describe('VMediaProgressBar', () => {
   })
 
   it('should name the chapter in the tooltip and the announced value', async () => {
-    const chapters = [{ start: 0, title: 'Intro' }, { start: 60, title: 'Verse' }]
+    const chapters = [{ start: 0, title: 'Intro' }, { start: '1:00', title: 'Verse' }]
     render(() => <div style="width: 400px"><VMediaProgressBar modelValue={ 90 } max={ 120 } chapters={ chapters } /></div>)
 
     const bar = screen.getByRole('slider')

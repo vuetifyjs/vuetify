@@ -21,7 +21,7 @@
 
     <div class="d-flex justify-center ga-3 mb-3">
       <v-btn
-        v-for="key in ['color', 'background', 'track']"
+        v-for="key in ['color', 'background', 'progress']"
         :key="key"
         variant="text"
       >
@@ -49,7 +49,7 @@
       :floating="features.includes('floating')"
       :pills="features.includes('pills')"
       :start-at="10"
-      :track-color="colors.track"
+      :progress-color="colors.progress"
       class="mx-auto mb-3"
       image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       max-width="450"
@@ -81,7 +81,7 @@
   const colors = reactive({
     color: '#4cd2de',
     background: null,
-    track: null,
+    progress: null,
   })
 </script>
 
@@ -98,7 +98,7 @@
       colors: {
         color: '#4cd2de',
         background: null,
-        track: null,
+        progress: null,
       },
     }),
   }

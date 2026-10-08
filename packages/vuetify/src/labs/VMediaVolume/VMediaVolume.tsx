@@ -42,11 +42,6 @@ export const makeVMediaVolumeProps = propsFactory({
     type: Number,
     default: 0,
   },
-  volumeIcon: String,
-  muteIcon: {
-    type: String,
-    default: '$volumeOff',
-  },
   menuProps: Object as PropType<VMenu['$props']>,
   sliderProps: Object as PropType<Pick<VSlider['$props'],
     'color' | 'disabled' | 'step' | 'thumbSize' | 'trackSize' | 'trackColor' | 'maxWidth' | 'width'
@@ -79,11 +74,7 @@ export const VMediaVolume = genericComponent()({
     const nestedSliderDefaults = injectNestedDefaults<VSlider['$props']>('VSlider')
     const { toggleMuted } = useMute(volume, dragging)
 
-    const icon = toRef(() => {
-      if (volume.value <= 0) return props.muteIcon
-
-      return props.volumeIcon ?? getVolumeIcon(volume.value)
-    })
+    const icon = toRef(() => getVolumeIcon(volume.value))
 
     const label = toRef(() => props.label ?? t(volume.value > 0 ? '$vuetify.media.mute' : '$vuetify.media.unmute'))
 
@@ -211,5 +202,5 @@ export const VMediaVolume = genericComponent()({
 export type VMediaVolume = InstanceType<typeof VMediaVolume>
 
 export type VMediaVolumeOptions = Pick<VMediaVolume['$props'],
-  'direction' | 'inline' | 'sliderProps' | 'menuProps' | 'volumeIcon' | 'muteIcon'
+  'direction' | 'inline' | 'sliderProps' | 'menuProps'
 >
