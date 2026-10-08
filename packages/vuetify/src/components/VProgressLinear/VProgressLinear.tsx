@@ -4,7 +4,7 @@ import './VProgressLinear.sass'
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -16,7 +16,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, ref, shallowRef, Transition, watchEffect } from 'vue'
+import { computed, shallowRef, Transition } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
 import { clamp, convertToUnit, genericComponent, isObject, propsFactory, useRender } from '@/util'
 
@@ -85,7 +85,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   },
 
   setup (props, { slots }) {
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement>()
 
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl, rtlClasses } = useRtl()
@@ -105,11 +105,11 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       backgroundColorStyles: barColorStyles,
     } = useBackgroundColor(() => props.color)
     const { roundedClasses, roundedStyles } = useRounded(props)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { isIntersecting } = useElementIntersection(root)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const max = computed(() => parseFloat(props.max))
-    const height = computed(() => parseFloat(props.height))
+    const height = computed(() => convertToUnit(props.height))
     const normalizedBuffer = computed(() => clamp(parseFloat(props.bufferValue) / max.value * 100, 0, 100))
     const normalizedValue = computed(() => revealState.value === 'initial'
       ? 0
@@ -130,8 +130,9 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       isReversed
     )
     useToggleScope(hasChunks, () => {
-      const { resizeRef } = useResizeObserver(entries => containerWidth.value = entries[0].contentRect.width)
-      watchEffect(() => resizeRef.value = root.value)
+      useResizeObserver(root, entries => {
+        containerWidth.value = entries[0].contentRect.width
+      })
     })
 
     const bufferWidth = computed(() => {
@@ -147,17 +148,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     })
 
     function handleClick (e: MouseEvent) {
-      if (!intersectionRef.value) return
+      if (!root.value) return
 
-      const { left, right, width } = intersectionRef.value.getBoundingClientRect()
+      const { left, right, width } = root.value.getBoundingClientRect()
       const value = isReversed.value ? (width - e.clientX) + (right - width) : e.clientX - left
 
       progress.value = Math.round(value / width * max.value)
     }
-
-    watchEffect(() => {
-      intersectionRef.value = root.value
-    })
 
     function renderBackgroundBar () {
       return (
@@ -204,8 +201,8 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           {
             bottom: props.location === 'bottom' ? 0 : undefined,
             top: props.location === 'top' ? 0 : undefined,
-            height: props.active ? convertToUnit(height.value) : 0,
-            '--v-progress-linear-height': convertToUnit(height.value),
+            height: props.active ? height.value : 0,
+            '--v-progress-linear-height': height.value,
             '--v-progress-linear-transition-duration': transitionDuration.value,
             '--v-progress-reveal-duration': `${revealDuration.value}ms`,
             '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
@@ -231,12 +228,12 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             ]}
             style={{
               ...textColorStyles.value,
-              [isReversed.value ? 'left' : 'right']: convertToUnit(-height.value),
-              borderTop: `${convertToUnit(height.value / 2)} dotted`,
+              [isReversed.value ? 'left' : 'right']: `calc(${height.value} * -1)`,
+              borderTop: `calc(${height.value} / 2) dotted`,
               opacity: props.bufferOpacity != null ? parseFloat(props.bufferOpacity) : undefined,
-              top: `calc(50% - ${convertToUnit(height.value / 4)})`,
+              top: `calc(50% - ${height.value} / 4)`,
               width: convertToUnit(100 - normalizedBuffer.value, '%'),
-              '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
+              '--v-progress-linear-stream-to': `calc(${height.value} * ${isReversed.value ? 1 : -1})`,
             }}
           />
         )}

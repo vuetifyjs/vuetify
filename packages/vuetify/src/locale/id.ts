@@ -174,7 +174,7 @@ export default {
     shortcut: 'Pintasan keyboard: {0}',
     or: 'atau',
   },
-  video: {
+  media: {
     play: 'Putar',
     pause: 'Jeda',
     seek: 'Cari',

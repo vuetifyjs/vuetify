@@ -174,7 +174,7 @@ export default {
     shortcut: 'Toetsenbordsnelkoppeling: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Afspelen',
     pause: 'Pauzeren',
     seek: 'Zoeken',

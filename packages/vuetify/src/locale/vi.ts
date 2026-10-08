@@ -174,7 +174,7 @@ export default {
     shortcut: 'Phím tắt: {0}',
     or: 'hoặc',
   },
-  video: {
+  media: {
     play: 'Phát',
     pause: 'Tạm dừng',
     seek: 'Tìm kiếm',

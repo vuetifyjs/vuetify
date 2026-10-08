@@ -174,7 +174,7 @@ export default {
     shortcut: 'Tipkovnička prečica: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reproduciraj',
     pause: 'Pauziraj',
     seek: 'Traži',

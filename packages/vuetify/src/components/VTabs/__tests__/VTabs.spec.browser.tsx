@@ -16,6 +16,8 @@ const stories = {
   'With items': <VTabs items={ FAKE_ITEMS } />,
   'Without slider': <VTabs items={ FAKE_ITEMS } hideSlider />,
   Vertical: <VTabs items={ FAKE_ITEMS } direction="vertical" />,
+  'Primary slider': <VTabs items={ FAKE_ITEMS } sliderVariant="primary" />,
+  'Primary slider vertical': <VTabs items={ FAKE_ITEMS } sliderVariant="primary" direction="vertical" />,
 }
 
 describe('VTabs', () => {
@@ -104,6 +106,26 @@ describe('VTabs', () => {
     expect(model.value).toBe('B')
     show.value = true
     expect(model.value).toBe('B')
+  })
+
+  it.each([
+    ['horizontal', false, 'width', 'height', 'bottom'],
+    ['horizontal', true, 'width', 'height', 'bottom'],
+    ['vertical', false, 'height', 'width', 'left'],
+  ] as const)('should fit the primary slider to the %s tab content (stacked: %s)', async (direction, stacked, along, across, edge) => {
+    render(() => (
+      <VTabs modelValue="A" sliderVariant="primary" direction={ direction } stacked={ stacked }>
+        <VTab value="A" prependIcon="$vuetify">A</VTab>
+      </VTabs>
+    ))
+
+    await nextTick()
+    const tab = screen.getAllByCSS('.v-tab')[0].getBoundingClientRect()
+    const slider = screen.getAllByCSS('.v-tab__slider')[0].getBoundingClientRect()
+
+    expect(slider[along]).toBeLessThan(tab[along])
+    expect(slider[across]).toBe(3)
+    expect(slider[edge]).toBe(tab[edge])
   })
 
   showcase({ stories })

@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klaviatuuri otsetee: {0}',
     or: 'või',
   },
-  video: {
+  media: {
     play: 'Esita',
     pause: 'Peata',
     seek: 'Otsi',

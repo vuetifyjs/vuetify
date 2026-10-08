@@ -174,7 +174,7 @@ export default {
     shortcut: 'Skrót klawiszowy: {0}',
     or: 'lub',
   },
-  video: {
+  media: {
     play: 'Odtwórz',
     pause: 'Wstrzymaj',
     seek: 'Przewiń',

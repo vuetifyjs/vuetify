@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klavye kısayolu: {0}',
     or: 'veya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Duraklat',
     seek: 'Ara',

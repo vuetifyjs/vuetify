@@ -174,7 +174,7 @@ export default {
     shortcut: 'קיצור דרך במקלדת: {0}',
     or: 'או',
   },
-  video: {
+  media: {
     play: 'נגן',
     pause: 'השהה',
     seek: 'חפש',

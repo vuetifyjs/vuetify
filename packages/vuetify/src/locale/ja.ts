@@ -174,7 +174,7 @@ export default {
     shortcut: 'キーボードショートカット: {0}',
     or: 'または',
   },
-  video: {
+  media: {
     play: '再生',
     pause: '一時停止',
     seek: 'シーク',

@@ -174,7 +174,7 @@ export default {
     shortcut: 'Сочетание клавиш: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Воспроизвести',
     pause: 'Пауза',
     seek: 'Перемотка',

@@ -174,7 +174,7 @@ export default {
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
     or: 'หรือ',
   },
-  video: {
+  media: {
     play: 'เล่น',
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',

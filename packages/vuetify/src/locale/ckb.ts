@@ -174,7 +174,7 @@ export default {
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
     or: 'یان',
   },
-  video: {
+  media: {
     play: 'لێدان',
     pause: 'ڕاگرتن',
     seek: 'گەڕان',

@@ -174,7 +174,7 @@ export default {
     shortcut: 'Klaviatūros trumpinys: {0}',
     or: 'arba',
   },
-  video: {
+  media: {
     play: 'Groti',
     pause: 'Pauzė',
     seek: 'Ieškoti',

@@ -10,7 +10,9 @@
     "input": "The slot used for the default input element."
   },
   "exposed": {
-    "isFocused": "Will return true if the component is currently focused.",
-    "input": "Reference to the root input element."
+    "blur": "Removes focus from the input.",
+    "focus": "Focuses the input. Accepts standard `FocusOptions`, including `focusVisible`.",
+    "input": "Reference to the root input element.",
+    "isFocused": "Will return true if the component is currently focused."
   }
 }

@@ -174,7 +174,7 @@ export default {
     shortcut: '키보드 단축키: {0}',
     or: '또는',
   },
-  video: {
+  media: {
     play: '재생',
     pause: '일시정지',
     seek: '탐색',

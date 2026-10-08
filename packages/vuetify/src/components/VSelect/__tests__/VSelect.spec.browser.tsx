@@ -49,6 +49,29 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  it.each([
+    [':autofill', 'CA'],
+    [':autofill', 'California'],
+    [':-webkit-autofill', 'CA'],
+    [':-webkit-autofill', 'California'],
+  ])('should match %s text %s against item titles or values', async (selector, value) => {
+    const model = ref()
+
+    render(() => (
+      <VSelect
+        v-model={ model.value }
+        items={[{ title: 'California', value: 'CA' }]}
+      />
+    ))
+
+    const input = screen.getByCSS('input')
+    vi.spyOn(input, 'matches').mockImplementation(candidate => candidate === selector)
+
+    await userEvent.fill(input, value)
+
+    expect(model.value).toBe('CA')
+  })
+
   describe('open-on-focus', () => {
     it('should open the menu when the input is focused', async () => {
       render(() => (
@@ -1593,14 +1616,14 @@ describe('VSelect', () => {
         await userEvent.click(screen.getByCSS('.v-select'))
         await commands.waitStable('.v-list')
 
-        const list = screen.getByCSS('.v-select__content .v-list')
-        await expect.poll(() => list.scrollTop).toBeGreaterThan(0)
+        await expect.poll(() => document.activeElement?.textContent?.trim()).toBe(item)
 
-        const start = list.scrollTop
-        list.scrollTop = start - 100
+        const list = screen.getByCSS('.v-select__content .v-list')
+        const userScrollTop = list.scrollTop - 100
+        list.scrollTop = userScrollTop
         await wait(200)
 
-        expect(`${item} ${list.scrollTop < start - 50}`).toBe(`${item} true`)
+        expect(list.scrollTop).toBe(userScrollTop)
 
         await userEvent.keyboard('{Escape}')
         await wait(200)

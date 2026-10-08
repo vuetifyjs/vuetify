@@ -24,6 +24,7 @@ import { useScrolling } from '../VSelect/useScrolling'
 import { useSelectionMenu } from '../VSelect/useSelectionMenu'
 import { useTextColor } from '@/composables/color'
 import { injectNestedDefaults } from '@/composables/defaults'
+import { useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useFocusGroups } from '@/composables/focusGroups'
 import { useForm } from '@/composables/form'
@@ -141,6 +142,7 @@ export const VCombobox = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { elevationClasses } = useElevation(toRef(() => props.menuElevation))
 
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -326,8 +328,8 @@ export const VCombobox = genericComponent<new <
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
+        menu.value = !menu.value
       }
-      menu.value = !menu.value
     }
     function onMenuKeydown (e: KeyboardEvent) {
       if (e.key === 'Tab') {
@@ -649,7 +651,8 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          form=""
+          form={ props.autocomplete === 'suppress' ? '' : undefined }
+          name={ props.autocomplete === 'suppress' ? props.name : undefined }
           v-model={ search.value }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
@@ -707,10 +710,9 @@ export const VCombobox = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
-                  contentClass={['v-combobox__content', props.menuProps?.contentClass]}
+                  contentClass={['v-combobox__content', elevationClasses.value, props.menuProps?.contentClass]}
                 >
                   <VSheet
-                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onKeydown={ onMenuKeydown }
                     onMousedown={ onMousedownContent }

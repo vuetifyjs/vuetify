@@ -139,11 +139,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       const volumeIconLocaleKey = props.volumeProps?.inline ? (volume.value ? 'mute' : 'unmute') : 'showVolume'
       const fullscreenIconLocaleKey = props.fullscreen ? 'exitFullscreen' : 'enterFullscreen'
       return {
-        seek: t('$vuetify.video.seek'),
-        volume: t('$vuetify.video.volume'),
-        playAction: t(`$vuetify.video.${playIconLocaleKey}`),
-        volumeAction: t(`$vuetify.video.${volumeIconLocaleKey}`),
-        fullscreenAction: t(`$vuetify.video.${fullscreenIconLocaleKey}`),
+        seek: t('$vuetify.media.seek'),
+        volume: t('$vuetify.media.volume'),
+        playAction: t(`$vuetify.media.${playIconLocaleKey}`),
+        volumeAction: t(`$vuetify.media.${volumeIconLocaleKey}`),
+        fullscreenAction: t(`$vuetify.media.${fullscreenIconLocaleKey}`),
       }
     })
 

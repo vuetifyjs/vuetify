@@ -174,7 +174,7 @@ export default {
     shortcut: 'Prečica na tastaturi: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reprodukuj',
     pause: 'Pauziraj',
     seek: 'Traži',

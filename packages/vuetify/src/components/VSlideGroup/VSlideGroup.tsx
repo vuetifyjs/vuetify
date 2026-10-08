@@ -12,7 +12,7 @@ import { useGoTo } from '@/composables/goto'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementSize } from '@/composables/resizeObserver'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -28,6 +28,7 @@ import {
 } from './helpers'
 import {
   clamp,
+  convertToUnit,
   focusableChildren,
   genericComponent,
   IN_BROWSER,
@@ -36,7 +37,9 @@ import {
   isString,
   matchesSelector,
   propsFactory,
+  templateRef,
   useRender,
+  wrapInArray,
 } from '@/util'
 
 // Types
@@ -86,6 +89,8 @@ export const makeVSlideGroupProps = propsFactory({
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
   },
+  gap: [Number, String],
+  padding: [Number, String, Array] as PropType<number | string | (number | string)[]>,
   symbol: {
     type: null,
     default: VSlideGroupSymbol,
@@ -143,9 +148,15 @@ export const VSlideGroup = genericComponent<new <T>(
     const containerSize = shallowRef(0)
     const contentSize = shallowRef(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
+    const padding = computed(() => {
+      const [x, y = x] = wrapInArray(props.padding).map(v => convertToUnit(v))
+      return { x, y, shorthand: x && `${y} ${x}` }
+    })
 
-    const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const { resizeRef: contentRef, contentRect } = useResizeObserver()
+    const containerRef = templateRef()
+    const contentRef = templateRef()
+    const containerRect = useElementSize(() => containerRef.el)
+    const contentRect = useElementSize(() => contentRef.el)
 
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {
@@ -170,17 +181,20 @@ export const VSlideGroup = genericComponent<new <T>(
 
     if (IN_BROWSER) {
       let frame = -1
-      watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
+      watch(() => [
+        group.selected.value,
+        containerRect.width.value, containerRect.height.value,
+        contentRect.width.value, contentRect.height.value,
+        isHorizontal.value,
+      ], () => {
         cancelAnimationFrame(frame)
         frame = requestAnimationFrame(() => {
-          if (containerRect.value && contentRect.value) {
-            const sizeProperty = isHorizontal.value ? 'width' : 'height'
+          const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
-            containerSize.value = containerRect.value[sizeProperty]
-            contentSize.value = contentRect.value[sizeProperty]
+          containerSize.value = containerRect[sizeProperty].value
+          contentSize.value = contentRect[sizeProperty].value
 
-            isOverflowing.value = containerSize.value + 1 < contentSize.value
-          }
+          isOverflowing.value = containerSize.value + 1 < contentSize.value
 
           if (props.scrollToActive && firstSelectedIndex.value >= 0 && contentRef.el) {
             // TODO: Is this too naive? Should we store element references in group composable?
@@ -381,15 +395,23 @@ export const VSlideGroup = genericComponent<new <T>(
         : []
     }
 
-    function getSnapPosition (item: Bounds) {
-      if (props.scrollSnap === 'end') return item.end - containerSize.value
+    function getSnapInset () {
+      if (!padding.value.x) return 0
+
+      const style = getComputedStyle(contentRef.el!)
+      return parseFloat(isHorizontal.value ? style.paddingLeft : style.paddingTop)
+    }
+
+    function getSnapPosition (item: Bounds, inset = getSnapInset()) {
+      if (props.scrollSnap === 'end') return item.end + inset - containerSize.value
       if (props.scrollSnap === 'center') return (item.start + item.end - containerSize.value) / 2
 
-      return item.start
+      return item.start - inset
     }
 
     function getSnapPositions () {
-      return getItemBounds().map(getSnapPosition)
+      const inset = getSnapInset()
+      return getItemBounds().map(item => getSnapPosition(item, inset))
     }
 
     function getItemClippedAt (edge: number) {
@@ -522,7 +544,13 @@ export const VSlideGroup = genericComponent<new <T>(
           displayClasses.value,
           props.class,
         ]}
-        style={ props.style }
+        style={[
+          {
+            '--v-slide-group-padding-x': padding.value.x,
+            '--v-slide-group-padding-y': padding.value.y,
+          },
+          props.style,
+        ]}
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >
@@ -551,12 +579,19 @@ export const VSlideGroup = genericComponent<new <T>(
             'v-slide-group__container',
             props.contentClass,
           ]}
-          style={{ '--v-slide-group-snap-align': props.scrollSnap }}
+          style={{
+            '--v-slide-group-snap-align': props.scrollSnap,
+            scrollPadding: padding.value.shorthand,
+          }}
           onScroll={ onScroll }
         >
           <div
             ref={ contentRef }
             class="v-slide-group__content"
+            style={{
+              gap: convertToUnit(props.gap),
+              padding: padding.value.shorthand,
+            }}
             onFocusin={ onFocusin }
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }

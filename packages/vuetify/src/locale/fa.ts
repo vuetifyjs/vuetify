@@ -174,7 +174,7 @@ export default {
     shortcut: 'میانبر صفحه کلید: {0}',
     or: 'یا',
   },
-  video: {
+  media: {
     play: 'پخش',
     pause: 'مکث',
     seek: 'جستجو',

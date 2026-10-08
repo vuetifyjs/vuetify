@@ -3,10 +3,12 @@
   "props": {
     "disableResizeWatcher": "Prevents the automatic opening or closing of the drawer when resized, based on whether the device is mobile or desktop.",
     "disableRouteWatcher": "Disables opening of navigation drawer when route changes.",
+    "expanded": "Expands a **rail** drawer to its full **width**. The expanded drawer overlays the content instead of resizing the layout.",
     "expandOnHover": "Collapses the drawer to a **rail-variant** until hovering with the mouse.",
     "floating": "A floating drawer has no visible container (no border-right).",
     "image": "Apply a specific background image to the component.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component. This will apply alternate styles for mobile devices such as the `temporary` prop, or activate the `bottom` prop when the breakpoint value is met. Setting the value to `0` will disable this functionality.",
+    "modal": "Shows the scrim while a **rail** drawer is **expanded**.",
     "permanent": "The drawer remains visible regardless of screen size.",
     "rail": "Sets the component width to the **rail-width** value.",
     "railWidth": "Sets the width for the component when `rail` is enabled. Percentage values are relative to the layout.",
@@ -23,7 +25,8 @@
     "prepend": "A slot at the top of the drawer"
   },
   "events": {
-    "update:rail": "Event that is emitted when the rail model changes."
+    "update:rail": "Event that is emitted when the rail model changes.",
+    "update:expanded": "Event that is emitted when the expanded model changes."
   },
   "exposed": {
     "isStuck": "Used to determine if the drawer is stuck to the top of the page."

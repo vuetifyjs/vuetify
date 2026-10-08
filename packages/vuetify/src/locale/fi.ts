@@ -174,7 +174,7 @@ export default {
     shortcut: 'Näppäinyhdistelmä: {0}',
     or: 'tai',
   },
-  video: {
+  media: {
     play: 'Toista',
     pause: 'Tauko',
     seek: 'Hae',

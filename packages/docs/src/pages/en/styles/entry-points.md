@@ -37,10 +37,6 @@ If you are strictly managing bundle size or using a manual build process, you ca
 
 Contains the CSS reset, typography fundamentals, and basic application structure.
 
-::: info
-**Note:** This **must be first** in your import order to ensure the CSS layers have not already been declared elsewhere.
-:::
-
 #### `vuetify/styles/colors`
 
 Includes the Material Design color palette utility classes (e.g., `text-red`, `bg-blue-darken-1`). If you are defining your own theme colors and do not use the standard Material palette classes, you may omit this.
@@ -49,10 +45,14 @@ Includes the Material Design color palette utility classes (e.g., `text-red`, `b
 
 Contains helper classes for layout and spacing (e.g., `d-flex`, `mt-4`, `pa-2`).
 
+#### `vuetify/styles/layers`
+
+Only the `@layer` order declaration, no rules. Already included in `vuetify/styles/core`. Load it before any other stylesheet when you define a [custom layer order](/styles/layers/#custom-layer-order). It is helpful when project developers decide to stick with default layers and add all customization on top.
+
 **Example of modular import:**
 
 ```js { resource="src/plugins/vuetify.js" }
-import 'vuetify/styles/core'      // Reset and structure (Required first)
+import 'vuetify/styles/core'      // Reset and structure (Required)
 import 'vuetify/styles/colors'    // Optional: standard color classes
 import 'vuetify/styles/utilities' // Optional: helper classes
 ```
