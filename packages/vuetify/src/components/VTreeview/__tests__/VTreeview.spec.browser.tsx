@@ -1195,3 +1195,117 @@ describe('VTreeview with loading', () => {
     expect(screen.getByText(/file2.txt/)).toBeVisible()
   })
 })
+
+describe('VTreeview with hoverable', () => {
+  it('should emit the value of the node under the cursor', async () => {
+    const hovered = shallowRef()
+    render(() => (
+      <VTreeview
+        v-model:hovered={ hovered.value }
+        openAll
+        items={ items }
+        itemValue="id"
+        hoverable
+      />
+    ))
+
+    await userEvent.hover(screen.getByText(/Human Resources/))
+    expect(hovered.value).toBe(1)
+
+    await userEvent.hover(screen.getByText(/Core team/))
+    expect(hovered.value).toBe(2)
+
+    await userEvent.hover(screen.getByText(/John/))
+    expect(hovered.value).toBe(201)
+  })
+
+  it('should emit the item with return-object', async () => {
+    const hovered = shallowRef()
+    render(() => (
+      <VTreeview
+        v-model:hovered={ hovered.value }
+        openAll
+        items={ items }
+        itemValue="id"
+        hoverable
+        returnObject
+      />
+    ))
+
+    await userEvent.hover(screen.getByText(/Core team/))
+    expect(hovered.value).toBe(items[0].children[0])
+
+    await userEvent.hover(screen.getByText(/John/))
+    expect(hovered.value).toBe(items[0].children[0].children![0])
+  })
+
+  it('should emit null when the cursor leaves the tree', async () => {
+    const hovered = shallowRef()
+    render(() => (
+      <div>
+        <VTreeview
+          v-model:hovered={ hovered.value }
+          openAll
+          items={ items }
+          itemValue="id"
+          hoverable
+        />
+        <div>outside</div>
+      </div>
+    ))
+
+    await userEvent.hover(screen.getByText(/John/))
+    expect(hovered.value).toBe(201)
+
+    await userEvent.hover(screen.getByText('outside'))
+    expect(hovered.value).toBeNull()
+  })
+
+  it('should not emit without hoverable', async () => {
+    const onUpdateHovered = vi.fn()
+    render(() => (
+      <div>
+        <VTreeview
+          openAll
+          items={ items }
+          itemValue="id"
+          onUpdate:hovered={ onUpdateHovered }
+        />
+        <div>outside</div>
+      </div>
+    ))
+
+    await userEvent.hover(screen.getByText(/John/))
+    await userEvent.hover(screen.getByText('outside'))
+    expect(onUpdateHovered).not.toHaveBeenCalled()
+  })
+
+  it('should not interfere with activated and selected', async () => {
+    const hovered = shallowRef()
+    const activated = shallowRef([])
+    const selected = shallowRef([])
+    render(() => (
+      <VTreeview
+        v-model:hovered={ hovered.value }
+        v-model:activated={ activated.value }
+        v-model:selected={ selected.value }
+        openAll
+        items={ items }
+        itemValue="id"
+        hoverable
+        activatable
+        selectable
+      />
+    ))
+
+    await userEvent.click(screen.getByText(/John/))
+    expect(hovered.value).toBe(201)
+    expect(activated.value).toStrictEqual([201])
+    expect(selected.value).toStrictEqual([])
+
+    await userEvent.click(screen.getByText(/Kael/).closest('.v-treeview-item')!.querySelector('input')!)
+    expect(hovered.value).toBe(202)
+    expect(activated.value).toStrictEqual([201])
+    expect(selected.value).toStrictEqual([202])
+  })
+})
