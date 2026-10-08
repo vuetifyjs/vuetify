@@ -13,7 +13,7 @@
     display: contents
 
   .v-overlay
-    --v-overlay-opacity: #{$overlay-opacity}
+    --v-overlay-opacity: var(--v-scrim-opacity, #{$overlay-opacity})
     border-radius: inherit
     display: flex
     left: 0
@@ -32,14 +32,20 @@
 
   .v-overlay__scrim
     pointer-events: auto
-    background: $overlay-scrim-background
+    background: color-mix(in srgb, var(--v-scrim-color, #{$overlay-scrim-background}) calc(var(--v-overlay-opacity) * 100%), transparent)
+    -webkit-backdrop-filter: blur(var(--v-scrim-blur, #{$overlay-scrim-blur}))
+    backdrop-filter: blur(var(--v-scrim-blur, #{$overlay-scrim-blur}))
     border-radius: inherit
     bottom: 0
     left: 0
-    opacity: var(--v-overlay-opacity)
     position: fixed
     right: 0
     top: 0
+
+    @media (forced-colors: active)
+      -webkit-backdrop-filter: none
+      backdrop-filter: none
+      outline: thin solid
 
   .v-overlay--absolute
     position: absolute

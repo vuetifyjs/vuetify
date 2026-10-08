@@ -40,15 +40,26 @@ export function useTextColor (color: MaybeRefOrGetter<ColorValue>): TextColorDat
   return { textColorClasses, textColorStyles }
 }
 
-export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): BackgroundColorData {
-  const {
-    colorClasses: backgroundColorClasses,
-    colorStyles: backgroundColorStyles,
-  } = useColor(() => ({
-    background: toValue(color),
-  }))
+export function useBackgroundColor (
+  color: MaybeRefOrGetter<ColorValue>,
+  opacity?: MaybeRefOrGetter<number | string | undefined>,
+): BackgroundColorData {
+  return destructComputed(() => {
+    const {
+      class: backgroundColorClasses,
+      style: backgroundColorStyles,
+    } = computeColor({ background: toValue(color) })
+    const value = toValue(opacity)
 
-  return { backgroundColorClasses, backgroundColorStyles }
+    if (value !== undefined) {
+      backgroundColorStyles['--v-background-opacity'] = value
+      if (backgroundColorStyles.backgroundColor) {
+        backgroundColorStyles.backgroundColor = `color-mix(in srgb, ${backgroundColorStyles.backgroundColor} calc(var(--v-background-opacity) * 100%), transparent)`
+      }
+    }
+
+    return { backgroundColorClasses, backgroundColorStyles }
+  })
 }
 
 function normalizeColors (colors: { background?: ColorValue, text?: ColorValue }) {

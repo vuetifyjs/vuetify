@@ -7,7 +7,7 @@
     "contained": "Limits the size of the component and scrim to its offset parent. Implies `absolute` and `attach`. (Note: The parent element must have position: relative.).",
     "locationStrategy": "Sets how the overlay content is positioned. Defaults to `static`, which centers content in its container. Use `connected` to attach to an activator element, or `viewport` to position relative to the browser viewport.",
     "noClickAnimation": "Disables the bounce effect when clicking outside of the content element when using the persistent prop.",
-    "opacity": "Sets the opacity of the scrim element. Only applies if `scrim` is enabled.",
+    "opacity": "Sets the opacity of the scrim background without reducing backdrop blur. Overrides `--v-scrim-opacity`. Only applies if **scrim** is enabled.",
     "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
     "scrim": "Accepts true/false to enable background, and string to define color.",
     "zIndex": "The z-index used for the component."
