@@ -23,7 +23,7 @@
       --v-avatar-height: #{calc($height - 6px)};
 
       @at-root #{selector.append('.v-chip--pill', &)} {
-        --v-avatar-height: $height;
+        --v-avatar-height: `${$height}`;
       }
     }
 
