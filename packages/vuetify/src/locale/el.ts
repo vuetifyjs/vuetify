@@ -179,7 +179,6 @@ export default {
     pause: 'Παύση',
     seek: 'Αναζήτηση',
     volume: 'Ένταση',
-    showVolume: 'Εμφάνιση ελέγχου έντασης',
     mute: 'Σίγαση',
     unmute: 'Κατάργηση σίγασης',
     enterFullscreen: 'Πλήρης οθόνη',

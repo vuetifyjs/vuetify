@@ -1,0 +1,21 @@
+$media-progress-bar-height: 6px !default;
+$media-progress-bar-hit-height: 24px !default;
+$media-progress-bar-border-radius: 6px !default;
+$media-progress-bar-background-opacity: .2 !default;
+$media-progress-bar-buffer-opacity: .2 !default;
+$media-progress-bar-disabled-opacity: .38 !default;
+
+$media-progress-bar-chapter-gap: 3px !default;
+
+$media-progress-bar-thumb-size: 12px !default;
+
+$media-progress-bar-handle-width: 4px !default;
+$media-progress-bar-handle-gap: 2px !default;
+$media-progress-bar-seek-duration: .6s !default;
+
+$media-progress-bar-tooltip-background: rgba(var(--v-theme-surface-variant), .9) !default;
+$media-progress-bar-tooltip-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$media-progress-bar-tooltip-font-size: .75rem !default;
+$media-progress-bar-tooltip-padding: 2px 6px !default;
+$media-progress-bar-tooltip-border-radius: 4px !default;
+$media-progress-bar-tooltip-offset: 4px !default;

@@ -179,7 +179,6 @@ export default {
     pause: 'Pauzeren',
     seek: 'Zoeken',
     volume: 'Volume',
-    showVolume: 'Volumeregeling weergeven',
     mute: 'Dempen',
     unmute: 'Dempen opheffen',
     enterFullscreen: 'Volledig scherm',

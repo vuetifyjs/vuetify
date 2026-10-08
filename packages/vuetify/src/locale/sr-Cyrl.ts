@@ -179,7 +179,6 @@ export default {
     pause: 'Паузирај',
     seek: 'Тражи',
     volume: 'Јачина звука',
-    showVolume: 'Прикажи контролу јачине звука',
     mute: 'Искључи звук',
     unmute: 'Укључи звук',
     enterFullscreen: 'Цео екран',

@@ -179,7 +179,6 @@ export default {
     pause: 'Pauzēt',
     seek: 'Meklēt',
     volume: 'Skaļums',
-    showVolume: 'Rādīt skaļuma kontroli',
     mute: 'Izslēgt skaņu',
     unmute: 'Ieslēgt skaņu',
     enterFullscreen: 'Pilnekrāna režīms',

@@ -179,7 +179,6 @@ export default {
     pause: 'Pauzė',
     seek: 'Ieškoti',
     volume: 'Garsumas',
-    showVolume: 'Rodyti garso valdymą',
     mute: 'Nutildyti',
     unmute: 'Įjungti garsą',
     enterFullscreen: 'Visas ekranas',

@@ -179,7 +179,6 @@ export default {
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Glasnoća',
-    showVolume: 'Prikaži kontrolu glasnoće',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Puni zaslon',

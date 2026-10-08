@@ -179,7 +179,6 @@ export default {
     pause: 'Metti in pausa',
     seek: 'Cerca',
     volume: 'Volume',
-    showVolume: 'Mostra controllo volume',
     mute: 'Muto',
     unmute: 'Riattiva audio',
     enterFullscreen: 'Schermo intero',

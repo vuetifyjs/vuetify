@@ -179,7 +179,6 @@ export default {
     pause: 'Pause',
     seek: 'Søg',
     volume: 'Lydstyrke',
-    showVolume: 'Vis lydstyrkekontrol',
     mute: 'Slå lyd fra',
     unmute: 'Slå lyd til',
     enterFullscreen: 'Fuld skærm',
