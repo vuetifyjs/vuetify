@@ -25,7 +25,7 @@ meta:
 
 # September 2026 Update
 
-**September was about Vuetify0 moving into Vuetify.** [v4.2.0](/getting-started/release-notes/?version=v4.2.0) went stable on September 2 and three patches followed. Meanwhile the `dev` branch filled up for v4.3: a new labs component, MD3 tabs, a modal rail drawer, and the first Vuetify composables that are now thin wrappers over `@vuetify/v0`.
+Welcome to the September update! [v4.2.0](/getting-started/release-notes/?version=v4.2.0) shipped, three patches followed, and Vuetify started moving parts of itself onto Vuetify0 for 4.3. The bigger news might be for teams still on Vuetify 2. The Vuetify MCP can now plan your whole upgrade to v4 and do a lot of the heavy lifting for you. [Here's how it works](#upgrade-with-vuetify-mcp).
 
 ![Hero image for September update](https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/september-hero.png "September hero image"){ height=112 }
 
@@ -41,9 +41,24 @@ meta:
 
 ---
 
+## Thank you, sponsors { #thank-you-sponsors }
+
+Before we dig in, a big thank you to the companies that back Vuetify every single month. Our top and Platinum sponsors are below, and everyone else is on our [sponsors page](/introduction/sponsors-and-backers/). You're the reason we get to keep doing this.
+
+<SponsorSponsors tier="-2" />
+
+<SponsorSponsors tier="1" />
+
+<br>
+
+<SponsorSponsors tier="2" />
+
+---
+
 ## Table of Contents
 
 * [Key Improvements](#key-improvements)
+* [Spotlight: Leaving Vuetify 2 behind](#upgrade-with-vuetify-mcp)
 * [Spotlight: Vuetify0 inside Vuetify](#vuetify0-inside-vuetify)
 * [Framework Updates](#framework-updates)
   * [Bug Fixes](#bug-fixes)
@@ -58,7 +73,7 @@ meta:
 
 ## Key Improvements
 
-**On `dev`, coming in v4.3.0:**
+**Coming in v4.3.0:**
 
 * **Vuetify0 adoption** — RTL, locale and the resize/intersection/mutation observers now delegate to `@vuetify/v0` ([#23213](https://github.com/vuetifyjs/vuetify/pull/23213), [#23214](https://github.com/vuetifyjs/vuetify/pull/23214), [#23220](https://github.com/vuetifyjs/vuetify/pull/23220))
 * **[VInfiniteCarousel](https://dev.vuetifyjs.com/en/components/infinite-carousels/)** — new labs component for marquees and logo strips ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116))
@@ -74,8 +89,8 @@ meta:
 
 **Beyond Vuetify core:**
 
-* **[Vuetify0 1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3)** — `useBreakpoints` fixes found while moving Vuetify's display onto v0
-* **Vuetify MCP 0.12** — `get_upgrade_plan` and `get_upgrade_rules` for multi-hop upgrades like v2 → v4 ([#30](https://github.com/vuetifyjs/mcp/pull/30))
+* **[Vuetify0 1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3)**: `useBreakpoints` fixes found while moving Vuetify's display over
+* **[Vuetify MCP 0.12](#upgrade-with-vuetify-mcp)**: a new upgrade engine that plans multi-hop upgrades like v2 to v4 and lets your AI agent apply the safe changes for you ([#30](https://github.com/vuetifyjs/mcp/pull/30))
 
 **Details:**
 
@@ -86,35 +101,95 @@ meta:
 
 ---
 
+## Spotlight: Leaving Vuetify 2 behind { #upgrade-with-vuetify-mcp }
+
+<AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
+
+<br>
+
+Vuetify 2's [long-term support](/introduction/long-term-support/) ended on January 23rd, 2025, and a lot of you are still there. We want to help you move.
+
+**The hard part was never the code. It was the map.** v2 to v4 is two majors stacked on top of each other: Vue 2 to Vue 3 and Vuetify 2 to 3 first, then Vuetify 3 to 4. Each hop has its own breaking changes, its own tooling and its own upgrade guide, and it's easy to stall before you start.
+
+[Vuetify MCP v0.12.0](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.0) (September 10) adds an upgrade engine built for exactly this ([#30](https://github.com/vuetifyjs/mcp/pull/30)). The hosted server never sees your code. It gives your AI agent a plan and a rulebook, and the agent does the searching and editing inside your project:
+
+* **`get_upgrade_plan`** splits the trip into hops. Ask for `v2` to `v4` and you get two, each with an effort rating, a rule index and the right tools: [eslint-plugin-vuetify](https://github.com/vuetifyjs/eslint-plugin-vuetify) for the first hop, plus [vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) for the second.
+* **`get_upgrade_rules`** returns every rule with the patterns to grep for, the replacement and a link to the matching upgrade guide section.
+* **`get_migration_receipt_schema`** sets how the agent reports back. Each finding names the file, the proposed patch and a confidence level. Safe, exact matches are marked `auto` so they can be applied in bulk, and everything else is marked `review` for a human.
+
+Here's the top of the real plan it returns for a v2 app:
+
+```text
+# Vuetify Upgrade Plan: v2 → v4
+
+Total migration hops: 2
+Total rules: 35
+
+## Hop 1: v2 → v3
+**Effort:** very-high
+
+## Hop 2: v3 → v4
+**Effort:** medium
+```
+
+**Connecting takes a minute.** The hosted endpoint is free and needs no account:
+
+```bash
+# Claude Code
+claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
+
+# Cursor, VS Code, Windsurf, Trae and Claude (interactive setup)
+npx -y @vuetify/mcp config --remote
+```
+
+Then hand your agent something like this:
+
+```text
+Using the vuetify-mcp server, upgrade this project from Vuetify 2 to Vuetify 4. Start with get_upgrade_plan and take one hop at a time. Report every finding with the migration receipt schema, apply the auto changes, and list the review items for me.
+```
+
+**One hop at a time is the point.** Land on Vuetify 3.13 first, get your tests green, then take the second hop. The v3 line is supported until July 27th, 2027, so you have room to breathe in between. For the first hop, the `get_v3_upgrade_playbook` tool from [v0.11.0](https://github.com/vuetifyjs/mcp/releases/tag/v0.11.0) starts by capturing a Playwright baseline of your app, so you can prove nothing broke.
+
+::: tip
+
+Prefer reading the details yourself? The [Vuetify 2 to 3 guide](https://v3.vuetifyjs.com/en/getting-started/upgrade-guide/) and the [Vuetify 3 to 4 guide](/getting-started/upgrade-guide/) are the same sources the MCP rules link back to.
+
+:::
+
+If you've been putting off this upgrade, this is your sign. Try it on a branch and tell us where it trips in [Discord](https://community.vuetifyjs.com).
+
+---
+
 ## Spotlight: Vuetify0 inside Vuetify { #vuetify0-inside-vuetify }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
 <br>
 
-Vuetify 4.2 added `@vuetify/v0` as a dependency but only used its type guards, `range` and `findMatchRanges`. In September we started replacing Vuetify internals with v0 code, one system at a time. Each migration keeps Vuetify's public API and output unchanged. Where v0 behaves differently, the Vuetify side stays as it is, and the difference is either fixed in v0 or left documented in the PR.
+Vuetify 4.2 added `@vuetify/v0` but only leaned on a few small helpers. In September the real move started: we're swapping Vuetify's internals for Vuetify0 code, one system at a time, without changing the API or the output. If the two ever disagree, Vuetify keeps its behavior and the gap gets fixed upstream or written down in the PR.
 
 | Area                               | Status                         | PR                                                          |
 |------------------------------------|--------------------------------|-------------------------------------------------------------|
 | Type guards, `range`, highlighting | shipped in 4.2.0               | [#23039](https://github.com/vuetifyjs/vuetify/pull/23039)   |
-| RTL                                | merged to `dev`                | [#23213](https://github.com/vuetifyjs/vuetify/pull/23213)   |
-| Locale (`t()`)                     | merged to `dev`                | [#23214](https://github.com/vuetifyjs/vuetify/pull/23214)   |
-| Resize, intersection and mutation observers | merged to `dev`       | [#23220](https://github.com/vuetifyjs/vuetify/pull/23220)   |
-| Display / breakpoints              | open, v4.3.0 milestone         | [#23210](https://github.com/vuetifyjs/vuetify/pull/23210)   |
-| Theme selection                    | experiment closed              | [#23218](https://github.com/vuetifyjs/vuetify/pull/23218)   |
-| Full theme and date systems        | open, `next` branch            | [#22765](https://github.com/vuetifyjs/vuetify/pull/22765), [#22768](https://github.com/vuetifyjs/vuetify/pull/22768) |
+| RTL                                | coming in 4.3                  | [#23213](https://github.com/vuetifyjs/vuetify/pull/23213)   |
+| Locale (`t()`)                     | coming in 4.3                  | [#23214](https://github.com/vuetifyjs/vuetify/pull/23214)   |
+| Resize, intersection and mutation observers | coming in 4.3         | [#23220](https://github.com/vuetifyjs/vuetify/pull/23220)   |
+| Display / breakpoints              | in review for 4.3              | [#23210](https://github.com/vuetifyjs/vuetify/pull/23210)   |
+| Theme and date systems             | in progress for v5             | [#22765](https://github.com/vuetifyjs/vuetify/pull/22765), [#22768](https://github.com/vuetifyjs/vuetify/pull/22768) |
 
-**RTL and locale.** `createRtl` keeps direction in v0, while the locale map still decides it. A sync watch updates `isRtl` in the same tick as the locale change, so nothing reads a stale value. `t('$vuetify.close')` strips the prefix and reads from v0, and v0 fills the `{0}` placeholders. `n()` stays on Vuetify's `Intl.NumberFormat`: v0's `n()` skips `Intl` when there is no `window`, which would change server-rendered pagination numbers. Neither v0 plugin is installed, so v0 does not set `dir` on `<html>`.
+**RTL and locale.** Direction and translations now live in Vuetify0, while your locale settings still decide which way the page reads. Switching locales updates `isRtl` in the same tick, so nothing ever sees a stale direction. Number formatting (`n()`) stays on Vuetify's own `Intl.NumberFormat` for now, because Vuetify0's version skips `Intl` on the server and would change server-rendered pagination numbers. And since neither Vuetify0 plugin is installed, it never touches `dir` on your `<html>`.
 
-**Observers.** `useResizeObserver` and `useIntersectionObserver` are now re-exports from v0, and `v-mutate` uses v0's mutation observer. The PR removes a net 184 lines but keeps some code for precise measurements that layout components rely on.
+**Observers.** Resize, intersection and mutation observing (`useResizeObserver`, `useIntersectionObserver`, `v-mutate`) now run on Vuetify0. Vuetify gets a net 184 lines lighter and keeps only the precise measurements its layout components depend on.
 
-**Display.** The open PR computes breakpoint flags with v0's `createBreakpoints` and uses `matchMedia` where available, so zoomed pages follow the CSS media query instead of `innerWidth`. Writing it found two bugs in v0, both fixed in [1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3): flags didn't follow the matched breakpoint name when a custom threshold map wasn't sorted, and `createBreakpoints` only tracked resize when the plugin was installed ([#1003](https://github.com/vuetifyjs/0/pull/1003), [#1004](https://github.com/vuetifyjs/0/pull/1004)).
+**Display.** The display PR, still in review, moves breakpoints onto Vuetify0 and uses `matchMedia` where it can, so a zoomed page lands on the same breakpoint as your CSS media queries. Building it shook out two bugs in Vuetify0's `createBreakpoints`, both already fixed in [1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3) ([#1003](https://github.com/vuetifyjs/0/pull/1003), [#1004](https://github.com/vuetifyjs/0/pull/1004)).
 
-**Theme, for now, stays.** v0 could only take over the `prefers-color-scheme` listener. Colors, variations, utility classes constitute the majority of theme logic and would still live in Vuetify codebase. We'll revisit once a v0 adapter owns the CSS variable sheet. The full rewrite might land on `next` branch (for v5.0.0) instead.
+**Theme stays in Vuetify for 4.x.** Vuetify0 could only have taken over the `prefers-color-scheme` listener, so the full theme rebuild is happening on the v5 track instead (last row above).
 
 ### What this means for you
 
-Nothing to change in your app. Vuetify depends on `@vuetify/v0@^1.2.1`, so a fix in a shared v0 composable reaches Vuetify, [Emerald](https://0.vuetifyjs.com/systems/emerald) and [Bulma](https://0.vuetifyjs.com/systems/bulma) through a lockfile update, without waiting for a Vuetify release.
+You don't have to do anything. Because Vuetify pulls in `@vuetify/v0@^1.2.1`, a fix to a shared composable reaches Vuetify, [Emerald](https://0.vuetifyjs.com/systems/emerald) and [Bulma](https://0.vuetifyjs.com/systems/bulma) the next time you refresh your lockfile. No waiting on a Vuetify release.
+
+**Vuetify0 is the first dependency Vuetify has ever had.** Ten years and four major versions with an empty `dependencies` field, and the first package we let in is one we built ourselves. That's how much we trust it.
 
 ---
 
@@ -168,7 +243,7 @@ The Nuxt module inlines the layer order on its own ([nuxt-module#382](https://gi
 
 ### Coming in 4.3 { #coming-in-4-3 }
 
-Merged to `dev`, targeting [v4.3.0](https://github.com/vuetifyjs/vuetify/milestone/93) (due October 15).
+Merged and shipping in [v4.3.0](https://github.com/vuetifyjs/vuetify/milestone/93), due October 15.
 
 **[VInfiniteCarousel](https://dev.vuetifyjs.com/en/components/infinite-carousels/)** (labs) scrolls its content as one continuous strip, repeating it as many times as needed to fill the container. It animates with the Web Animations API, supports dragging, arrows, reverse direction, gaps, separators and keyboard navigation. It clips with `overflow: clip` so the container does not glitch by unexpectedly moving to a focused item. Ships with touch support and vertical direction from day one. It utilizes WAAPI under the hood for smooth play/pause and dragging with cursor ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116)).
 
@@ -233,33 +308,52 @@ pnpx rimraf -g "node_modules" "**/node_modules" && pnpm i
 
 ## Vuetify0 Progress Update { #vuetify0-progress }
 
-Three patches: [v1.2.1](https://0.vuetifyjs.com/releases/?version=v1.2.1) (September 1), [v1.2.2](https://0.vuetifyjs.com/releases/?version=v1.2.2) (September 10) and [v1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3) (September 24). No new features on `master`; those are collecting on `dev` for the next minor.
+<AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
+
+<br>
+
+Vuetify0 kept its releases boring in September, the good kind of boring: [v1.2.1](https://0.vuetifyjs.com/releases/?version=v1.2.1) (September 1), [v1.2.2](https://0.vuetifyjs.com/releases/?version=v1.2.2) (September 10) and [v1.2.3](https://0.vuetifyjs.com/releases/?version=v1.2.3) (September 24), and nothing but fixes. Everything new is lining up for 1.3, and there's a lot of it.
 
 ### Fixes
 
-* **Forms** — `required` on Input and NumberField registers a presence rule, so empty required fields fail `submit()` under the default `novalidate`. Unknown rule aliases now fail validation instead of passing silently ([#954](https://github.com/vuetifyjs/0/pull/954), [#953](https://github.com/vuetifyjs/0/pull/953))
-* **createFilter** — `keys` accepts a ref or getter, so changing the searched fields re-runs the filter ([#982](https://github.com/vuetifyjs/0/pull/982))
-* **findMatchRanges** — directional `ignoreAccents` matches an already-accented spelling verbatim ([#944](https://github.com/vuetifyjs/0/pull/944)). VHighlight's `ignore-accents` in Vuetify 4.2 is built on it.
-* **Toggle** — a disabled Toggle on the default `<button>` sets native `disabled` instead of `aria-disabled` ([#985](https://github.com/vuetifyjs/0/pull/985))
-* **useStorage** — falls back to memory when the browser refuses `localStorage` instead of throwing ([#1001](https://github.com/vuetifyjs/0/pull/1001))
-* **useBreakpoints** — the two fixes from the [display migration](#vuetify0-inside-vuetify) ([#1003](https://github.com/vuetifyjs/0/pull/1003), [#1004](https://github.com/vuetifyjs/0/pull/1004))
+* **Forms:** `required` on Input and NumberField now really requires a value, so an empty field fails `submit()` even under the default `novalidate`. A misspelled rule alias fails validation instead of quietly passing ([#954](https://github.com/vuetifyjs/0/pull/954), [#953](https://github.com/vuetifyjs/0/pull/953))
+* **createFilter:** `keys` takes a ref or getter, so changing which fields you search re-runs the filter ([#982](https://github.com/vuetifyjs/0/pull/982))
+* **findMatchRanges:** directional `ignoreAccents` matches text that's already accented exactly as written ([#944](https://github.com/vuetifyjs/0/pull/944)). It's the engine behind VHighlight's `ignore-accents` in Vuetify 4.2.
+* **Toggle:** a disabled Toggle on its default `<button>` uses native `disabled` instead of `aria-disabled` ([#985](https://github.com/vuetifyjs/0/pull/985))
+* **useStorage:** if the browser refuses `localStorage`, it falls back to memory instead of throwing ([#1001](https://github.com/vuetifyjs/0/pull/1001))
+* **useBreakpoints:** the two fixes found during the [display migration](#vuetify0-inside-vuetify) ([#1003](https://github.com/vuetifyjs/0/pull/1003), [#1004](https://github.com/vuetifyjs/0/pull/1004))
 
-One behavior change to check: `useTheme`'s adapter no longer sets `color: var(--*-on-background)` on `[data-theme]`. It still writes the custom properties and `color-scheme`. If you use v0 without a design system and relied on the inherited text color, set it yourself ([#982](https://github.com/vuetifyjs/0/pull/982)).
+**One behavior change to check.** `useTheme`'s adapter no longer sets `color: var(--*-on-background)` on `[data-theme]`. It still writes the custom properties and `color-scheme`. If you run Vuetify0 without a design system and relied on that inherited text color, set it yourself ([#982](https://github.com/vuetifyjs/0/pull/982)).
 
-### Queued on dev
+### Coming in 1.3 { #v0-coming-in-1-3 }
 
-* **[Otp](https://github.com/vuetifyjs/0/pull/787)** — `Otp.Root`, `Otp.Item` and `Otp.HiddenInput` over `createOtp`, with focus movement, paste and a localized `aria-label`
-* **createCombobox** — non-strict mode commits typed text that matches no option. Before, `strict` only changed `aria-autocomplete` and free text was dropped ([#383](https://github.com/vuetifyjs/0/pull/383))
+Vuetify0 1.3.0 is due **October 20** ([milestone](https://github.com/vuetifyjs/0/milestone/8)), and the [roadmap](https://0.vuetifyjs.com/roadmap) has the full release calendar. Already merged for it:
 
-Open: `createCalendar` for month grid geometry and keyboard navigation without selection semantics ([#980](https://github.com/vuetifyjs/0/pull/980)), and `OverlayPanel`, a non-modal overlay that handles stacking, Escape, click-outside and focus return but leaves positioning to you ([#979](https://github.com/vuetifyjs/0/pull/979)).
+* **Tour** ([#178](https://github.com/vuetifyjs/0/pull/178)): guided product tours, finally. `createTour` sequences the steps, and the `Tour` compound brings the pieces (Root, Activator, Highlight, Content, Keyboard, Title, Description, Progress, Prev, Next and Skip). A step can even wait on a form before letting the user move on.
+* **Otp** ([#787](https://github.com/vuetifyjs/0/pull/787)): `Otp.Root`, `Otp.Item` and `Otp.HiddenInput` over `createOtp`. Focus hops from box to box, a paste spreads across every box, each box gets its own `aria-label`, and `autocomplete="one-time-code"` lets phones offer the code from an SMS.
+* **createCombobox** ([#383](https://github.com/vuetifyjs/0/pull/383)): non-strict mode now keeps typed text that matches no option. Until now `strict` only changed `aria-autocomplete`, and free text was thrown away.
+* **Focusable form controls** ([#935](https://github.com/vuetifyjs/0/pull/935)): Checkbox, Radio, Switch, Toggle and Button roots expose their element, and each `.Group` gets a `focus()` that lands on the selected item, or the first one if nothing is selected.
+* **Dialog `scrim`** ([#961](https://github.com/vuetifyjs/0/pull/961)): pass `:scrim="false"` to `Dialog.Content` or `AlertDialog.Content` when you draw your own backdrop, so the page doesn't dim twice.
+
+Also merged and waiting for the next release: **useFocusTrap** ([#939](https://github.com/vuetifyjs/0/pull/939)) keeps Tab and Shift+Tab inside overlays that aren't a native `<dialog>` and returns focus when they close, and plugins can opt into a **Vue DevTools inspector** with `{ devtools: true }` ([#948](https://github.com/vuetifyjs/0/pull/948)).
+
+In review for 1.3:
+
+* **Virtualizer** ([#788](https://github.com/vuetifyjs/0/pull/788)): `Virtualizer.Root` and `Virtualizer.Item` put a component on top of `createVirtual`, which has handled virtual scrolling since 0.1.0. Each item measures its own height, so variable-height lists just work.
+* **Kanban** ([#1012](https://github.com/vuetifyjs/0/pull/1012)): a compound over `createKanban` with columns, drag and drop, a keyboard move model and screen reader announcements for every pick-up, move and drop.
+* **OverlayPanel** ([#979](https://github.com/vuetifyjs/0/pull/979)): a non-modal overlay that handles stacking, Escape, click-outside and focus return, and leaves positioning up to you.
+
+Further out, `createCalendar` brings month grid geometry and keyboard navigation without selection semantics, on the 1.5 milestone ([#980](https://github.com/vuetifyjs/0/pull/980)).
 
 ### Docs
 
-The docs now say "Vuetify0" instead of a bare "v0" to avoid confusion with Vercel's v0.dev ([#977](https://github.com/vuetifyjs/0/pull/977)). Every page has a markdown twin at the same path with `.md` added, for feeding to LLMs ([#976](https://github.com/vuetifyjs/0/pull/976)). The [`vuetify add`](https://0.vuetifyjs.com/guide/tooling/vuetify-cli) CLI command, which copies v0 examples into your project, is documented ([#973](https://github.com/vuetifyjs/0/pull/973)).
+The docs now say "Vuetify0" instead of a bare "v0", so nobody mixes us up with Vercel's v0.dev ([#977](https://github.com/vuetifyjs/0/pull/977)). Every page also has a markdown twin: add `.md` to the URL and you've got something you can hand straight to an LLM ([#976](https://github.com/vuetifyjs/0/pull/976)).
+
+The [`vuetify add`](https://0.vuetifyjs.com/guide/tooling/vuetify-cli) command is documented now too. Pick a Vuetify0 example and it drops the code right into your project ([#973](https://github.com/vuetifyjs/0/pull/973)).
 
 ::: success
 
-**Adopting Vuetify0 for your business?** Teams building production design systems, internal tooling, or product UI on top of v0 can [reach out](mailto:john@vuetifyjs.com) to talk through adoption, partnership, and roadmap input.
+**Adopting Vuetify0 for your business?** Teams building production design systems, internal tooling, or product UI on top of Vuetify0 can [reach out](mailto:john@vuetifyjs.com) to talk through adoption, partnership, and roadmap input.
 
 :::
 
@@ -275,17 +369,7 @@ The docs now say "Vuetify0" instead of a bare "v0" to avoid confusion with Verce
 
 ### Vuetify MCP
 
-<AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
-
-<br>
-
-[v0.12.0](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.0) (September 10) adds a version-upgrade engine ([#30](https://github.com/vuetifyjs/mcp/pull/30)). The hosted server can't read your files, so it returns rules and the agent scans your code:
-
-* `get_upgrade_plan({ from, to })` resolves multi-hop upgrades (`v2.6 → v4` becomes v2 → v3 → v4) and points at the ESLint plugin or codemods for each hop
-* `get_upgrade_rules` returns rules with grep patterns, replacements and docs links
-* `get_migration_receipt_schema` defines how the agent reports each finding, with `disposition: 'auto'` for safe batch changes and `'review'` for anything a human should look at
-
-[v0.12.1](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.1) fixes the launcher when run through an npm bin symlink.
+[v0.12.0](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.0) (September 10) shipped the upgrade engine covered in the [spotlight above](#upgrade-with-vuetify-mcp). [v0.12.1](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.1) (September 15) fixes the launcher when it runs through an npm bin symlink.
 
 ### Nuxt Module
 
@@ -299,11 +383,11 @@ The docs now say "Vuetify0" instead of a bare "v0" to avoid confusion with Verce
 
 ## What's Next { .mt-4 }
 
-v4.3.0 is due October 15. [v4.2.4](/getting-started/release-notes/?version=v4.2.4) and [v3.13.6](/getting-started/release-notes/?version=v3.13.6) shipped this week. Display is the next system to move onto v0, and we'll keep porting the rest through 4.x minors.
+v4.3.0 is due October 15. [v4.2.4](/getting-started/release-notes/?version=v4.2.4) and [v3.13.6](/getting-started/release-notes/?version=v3.13.6) shipped this week. Display is the next system to move onto Vuetify0, and we'll keep porting the rest through 4.x minors.
 
 * Link `layers.css` in `<head>` if your buttons or inputs render at the wrong size
 * Try [VInfiniteCarousel](https://dev.vuetifyjs.com/en/components/infinite-carousels/) and MD3 tabs on [dev.vuetifyjs.com](https://dev.vuetifyjs.com)
-* Planning a v2 or v3 upgrade? Connect Vuetify MCP to your agent and start with `get_upgrade_plan`
+* Planning a v2 or v3 upgrade? Connect Vuetify MCP to your agent and start with `get_upgrade_plan` ([how it works](#upgrade-with-vuetify-mcp))
 
 ::: warning
 
