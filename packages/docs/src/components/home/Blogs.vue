@@ -142,6 +142,15 @@
 
   const items = [
     {
+      title: 'September 2026 Update',
+      image: 'https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/september-hero.png',
+      shortDescription: 'Vuetify 4.2 got three patches while dev filled up for 4.3: VInfiniteCarousel, MD3 tab sliders, modal rail drawers and localized VDateInput hints. Vuetify\'s RTL, locale and observer composables now run on @vuetify/v0, and moving display onto it surfaced two fixes in Vuetify0 1.2.3. Also: why component CSS can load before the layer order, and how to fix it...',
+      date: 'October 7, 2026',
+      author: 'Jacek Czarniecki',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/j-sek.png',
+      to: rpath('/blog/september-2026-update'),
+    },
+    {
       title: 'August 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/august-2026-update/august-hero.png',
       shortDescription: 'Vuetify 4.2 went into beta on August 27 and stable on September 2. It makes @vuetify/v0 the framework\'s first (and only) runtime dependency. Release included some cleanup and fixes that were too risky for patch releases so you might want to read this post closely. The team improved VDateInput, selection dropdowns, and many improvements landed in v0 for headless DataTable, DataGrid and Alert...',
