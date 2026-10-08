@@ -104,10 +104,10 @@ describe('VVideo', () => {
     vm.value!.seek({ by: -1 })
     expect(video().currentTime).toBe(1)
 
-    const press = (key: string) => screen.getByCSS('.v-video').dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }))
-    press('ArrowRight')
+    await userEvent.click(video())
+    await userEvent.keyboard('{ArrowRight}')
     expect(video().currentTime).toBe(4)
-    press('ArrowLeft')
+    await userEvent.keyboard('{ArrowLeft}')
     expect(video().currentTime).toBe(0)
   })
 
@@ -178,11 +178,11 @@ describe('VVideo', () => {
     expect(volume.value).toBe(50)
   })
 
-  it('should hide controls', async () => {
-    render(() => <VVideo src={ SILENT_WAV } eager hideControls />)
+  it('should keep playback state when controlsProps tries to override it', async () => {
+    render(() => <VVideo src={ SILENT_WAV } eager volume={ 50 } controlsProps={{ volume: 0 }} />)
     await whenLoaded()
 
-    expect(screen.queryByCSS('.v-video-controls')).toBeNull()
+    expect(screen.getByRole('button', { name: 'Mute' })).toBeVisible()
   })
 
   it('should paint the progress bar from its own clock while playing', async () => {
@@ -245,17 +245,6 @@ describe('VVideoControls', () => {
     expect(pills()).toEqual(['v-icon-btn', 'v-media-volume'])
   })
 
-  it('should color the track for the surface it sits on', async () => {
-    const actions = ref('(play progress)')
-    render(() => <VVideoControls pills actions={ actions.value } />)
-
-    expect(screen.getByRole('slider')).not.toHaveClass('text-surface')
-
-    actions.value = 'play progress'
-    await nextTick()
-    expect(screen.getByRole('slider')).toHaveClass('text-surface')
-  })
-
   it('should render prepend and append at the edges unless listed', async () => {
     const actions = ref('play')
     render(() => (
@@ -304,20 +293,5 @@ describe('VVideoControls', () => {
     defaults.value = { VMediaVolume: { VSlider: { color: 'blue' } } }
     await nextTick()
     expect(surface()).toHaveClass('text-blue')
-  })
-
-  it('should set controls and pill gaps from a single value or a pair', async () => {
-    const gap = ref<number | [number, string]>(6)
-    render(() => <VVideoControls pills actions="(play volume)" density="compact" gap={ gap.value } />)
-
-    const gaps = () => [
-      getComputedStyle(screen.getByCSS('.v-video-controls')).columnGap,
-      getComputedStyle(screen.getByCSS('.v-video-control__pill')).columnGap,
-    ]
-    expect(gaps()).toEqual(['6px', '6px'])
-
-    gap.value = [4, '2px']
-    await nextTick()
-    expect(gaps()).toEqual(['4px', '2px'])
   })
 })

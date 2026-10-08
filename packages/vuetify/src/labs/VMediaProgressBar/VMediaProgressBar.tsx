@@ -122,7 +122,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
     const rootRef = shallowRef<HTMLElement>()
     const trackRef = shallowRef<HTMLElement>()
     const thumbRef = shallowRef<HTMLElement>()
-    const hover = shallowRef<number | null>(null)
+    const hoverRatio = shallowRef<number | null>(null)
     const dragging = shallowRef(false)
     const seeking = shallowRef(false)
 
@@ -213,7 +213,9 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
       awaitingTransition = true
       // no transition starts when the bar is hidden or motion is reduced
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (awaitingTransition) seeking.value = false
+        if (awaitingTransition) {
+          seeking.value = false
+        }
       }))
     }, { flush: 'sync' })
 
@@ -231,9 +233,12 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
     function onTransition (e: TransitionEvent) {
       if (e.target !== rootRef.value || e.propertyName !== '--v-media-progress-bar-ratio') return
 
-      if (e.type === 'transitionrun') awaitingTransition = false
-      // a jump during an ease replaces the transition, which cancels the previous one
-      else if (e.type === 'transitionend' || !easings().length) seeking.value = false
+      if (e.type === 'transitionrun') {
+        awaitingTransition = false
+      } else if (e.type === 'transitionend' || !easings().length) {
+        // a jump during an ease replaces the transition, which cancels the previous one
+        seeking.value = false
+      }
     }
 
     let pointerFocused = false
@@ -254,7 +259,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
     function onPointermove (e: PointerEvent) {
       if (!interactive.value) return
 
-      hover.value = ratioAt(e)
+      hoverRatio.value = ratioAt(e)
       if (!dragging.value) return
       if (pointerJump) {
         if (Math.abs(e.clientX - pressedX) <= DRAG_THRESHOLD) return
@@ -263,11 +268,13 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
         pointerJump = false
       }
 
-      commit(hover.value * props.max)
+      commit(hoverRatio.value * props.max)
     }
 
     function onPointerup (e: PointerEvent) {
-      if (e.pointerType !== 'mouse') hover.value = null
+      if (e.pointerType !== 'mouse') {
+        hoverRatio.value = null
+      }
       if (!dragging.value) return
 
       dragging.value = false
@@ -292,12 +299,14 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
         [pagedown]: -page,
       }[e.key]
 
-      if (!isUndefined(delta)) commit(model.value + delta)
-      else if (e.key === home) commit(0)
-      else if (e.key === end) commit(props.max)
-      else return
+      const target = !isUndefined(delta) ? model.value + delta
+        : e.key === home ? 0
+        : e.key === end ? props.max
+        : undefined
+      if (isUndefined(target)) return
 
       e.preventDefault()
+      commit(target)
     }
 
     const valueText = computed(() => {
@@ -307,11 +316,13 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
     })
 
     useRender(() => {
-      const hoverSeconds = (hover.value ?? 0) * props.max
+      const hoverSeconds = (hoverRatio.value ?? 0) * props.max
       const hoverChapter = chapterAt(hoverSeconds)
       const tooltip = isObject(props.tooltip) ? props.tooltip : {}
-      const hasTooltip = !!props.tooltip && hover.value !== null
-      const hoveredSegment = hover.value === null ? -1 : segments.value.filter(({ start }) => start <= hover.value! * 100).length - 1
+      const showTooltip = !!props.tooltip && hoverRatio.value !== null
+      const hoveredSegment = hoverRatio.value === null
+        ? -1
+        : segments.value.filter(({ start }) => start <= hoverRatio.value! * 100).length - 1
 
       // a function, not a shared vnode: one vnode mounted in several chapters is not patched reliably
       const layers = () => (
@@ -371,7 +382,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
           onPointermove={ onPointermove }
           onPointerup={ onPointerup }
           onPointercancel={ onPointerup }
-          onPointerleave={ () => !dragging.value && (hover.value = null) }
+          onPointerleave={ () => !dragging.value && (hoverRatio.value = null) }
           onKeydown={ onKeydown }
           onBlur={ () => pointerFocused = false }
           onTransitionrun={ onTransition }
@@ -431,11 +442,11 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
             </div>
           )}
 
-          { hasTooltip && (
+          { showTooltip && (
             <div
               key="tooltip"
               class="v-media-progress-bar__tooltip"
-              style={{ left: `calc(${hover.value! * 100}% + ${(0.5 - hover.value!) * (thumbRef.value?.offsetWidth ?? 0)}px)` }}
+              style={{ left: `calc(${hoverRatio.value! * 100}% + ${(0.5 - hoverRatio.value!) * (thumbRef.value?.offsetWidth ?? 0)}px)` }}
             >
               { slots.tooltip?.({
                 time: formatTime(hoverSeconds),

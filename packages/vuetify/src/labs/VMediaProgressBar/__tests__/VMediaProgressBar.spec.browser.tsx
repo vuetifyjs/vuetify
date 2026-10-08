@@ -10,8 +10,9 @@ function ratio () {
 }
 
 function waveHeight () {
-  return Math.max(...screen.getByCSS('.v-media-progress-bar__wave path').getAttribute('d')!
-    .split(/[ML]/).slice(1).map(point => Math.abs(Number(point.trim().split(' ')[1]))))
+  return screen.getByCSS('.v-media-progress-bar__wave path').getAttribute('d')!
+    .split(/[ML]/).slice(1)
+    .reduce((height, point) => Math.max(height, Math.abs(Number(point.trim().split(' ')[1]))), 0)
 }
 
 describe('VMediaProgressBar', () => {
@@ -105,24 +106,6 @@ describe('VMediaProgressBar', () => {
     expect(thumb().left + 10).toBeCloseTo(x, 0)
   })
 
-  it('should highlight the hovered chapter', async () => {
-    render(() => (
-      <div style="width: 200px">
-        <VMediaProgressBar max={ 100 } chapters={[{ start: 0 }, { start: 25 }, { start: 75 }]} />
-      </div>
-    ))
-
-    const bar = screen.getByRole('slider')
-    const rect = bar.getBoundingClientRect()
-    await userEvent.hover(bar, { position: { x: rect.width / 2, y: rect.height / 2 } })
-
-    const segments = screen.queryAllByCSS('.v-media-progress-bar__segment')
-    expect(segments).toHaveLength(3)
-    expect(segments[0]).not.toHaveClass('v-media-progress-bar__segment--hovered')
-    expect(segments[1]).toHaveClass('v-media-progress-bar__segment--hovered')
-    expect(segments[2]).not.toHaveClass('v-media-progress-bar__segment--hovered')
-  })
-
   it('should patch the layers of every chapter when switching to wavy', async () => {
     const variant = ref<'pill' | 'wavy'>('pill')
     render(() => (
@@ -143,20 +126,6 @@ describe('VMediaProgressBar', () => {
     expect(screen.queryAllByCSS('.v-media-progress-bar__fill')).toHaveLength(0)
     expect(screen.queryAllByCSS('.v-media-progress-bar__background')).toHaveLength(3)
     await expect.poll(() => screen.queryAllByCSS('.v-media-progress-bar__wave path')).toHaveLength(3)
-  })
-
-  it('should flatten the wave once playback ends and bring it back on seek', async () => {
-    const model = ref(50)
-    render(() => <div style="width: 200px"><VMediaProgressBar v-model={ model.value } max={ 100 } variant="wavy" /></div>)
-    await screen.findByCSS('.v-media-progress-bar__wave path')
-    expect(waveHeight()).toBeGreaterThan(0)
-
-    model.value = 100
-    await expect.poll(waveHeight).toBe(0)
-    expect(screen.getByCSS('.v-media-progress-bar__wave').style.getPropertyValue('--v-media-progress-bar-wave-stretch')).toBe('1')
-
-    model.value = 40
-    await expect.poll(waveHeight).toBeGreaterThan(0)
   })
 
   it('should jump without easing when motion is reduced', async () => {

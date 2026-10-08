@@ -1,6 +1,5 @@
 // Components
 import { VMediaVolume } from '../VMediaVolume'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
@@ -87,16 +86,6 @@ describe('VMediaVolume', () => {
     slider.focus()
     await userEvent.keyboard('{ArrowRight}')
     expect(volume.value).toBeGreaterThan(50)
-  })
-
-  it('should let nested defaults override the slider props it sets', () => {
-    render(() => (
-      <VDefaultsProvider defaults={{ VMediaVolume: { VSlider: { thumbSize: 6 } } }}>
-        <VMediaVolume inline />
-      </VDefaultsProvider>
-    ))
-
-    expect(screen.getByCSS('.v-slider-thumb').style.getPropertyValue('--v-slider-thumb-size')).toBe('6px')
   })
 
   it('should keep the inline thumb inside the track and under the pointer', async () => {

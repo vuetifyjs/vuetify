@@ -27,6 +27,10 @@ export interface MediaOptions<T extends HTMLMediaElement> {
   onError?: (error: MediaError | boolean) => void
 }
 
+function toPercent (seconds: number, total: number) {
+  return Number.isFinite(total) && total > 0 ? clamp(100 * seconds / total, 0, 100) : 0
+}
+
 function toElementVolume (volume: number) {
   return clamp(volume || 0, 0, 100) / 100
 }
@@ -64,12 +68,6 @@ export function useMedia<T extends HTMLMediaElement> (
 
   let startApplied = false
 
-  function setProgress (seconds: number, total: number) {
-    progress.value = Number.isFinite(total) && total > 0
-      ? clamp(100 * seconds / total, 0, 100)
-      : 0
-  }
-
   function seekTo (seconds: number) {
     const media = el.value
     if (!media) return
@@ -78,7 +76,7 @@ export function useMedia<T extends HTMLMediaElement> (
     const next = clamp(seconds, 0, total || seconds)
 
     media.currentTime = next
-    setProgress(next, total)
+    progress.value = toPercent(next, total)
   }
 
   function seek (target: MediaSeekTarget) {
@@ -86,7 +84,9 @@ export function useMedia<T extends HTMLMediaElement> (
     if (!media) return
 
     const seconds = resolveSeekTarget(target, media.currentTime, media.duration)
-    if (Number.isFinite(seconds)) seekTo(seconds)
+    if (!Number.isFinite(seconds)) return
+
+    seekTo(seconds)
   }
 
   async function play () {
@@ -122,7 +122,7 @@ export function useMedia<T extends HTMLMediaElement> (
     const media = el.value
     if (!media || options.scrubbing?.value) return
 
-    setProgress(media.currentTime, media.duration)
+    progress.value = toPercent(media.currentTime, media.duration)
   }
 
   function updateBuffered () {
@@ -186,8 +186,13 @@ export function useMedia<T extends HTMLMediaElement> (
     if (!media) return
 
     media.volume = toElementVolume(volume.value)
-    if (playbackRate) media.defaultPlaybackRate = media.playbackRate = playbackRate.value
-    if (props.srcObject) media.srcObject = props.srcObject
+    if (playbackRate) {
+      media.defaultPlaybackRate = playbackRate.value
+      media.playbackRate = playbackRate.value
+    }
+    if (props.srcObject) {
+      media.srcObject = props.srcObject
+    }
 
     Object.entries(listeners).forEach(([name, listener]) => media.addEventListener(name, listener))
     onCleanup(() => {
@@ -199,24 +204,36 @@ export function useMedia<T extends HTMLMediaElement> (
     const media = el.value
     if (!media || value === !media.paused) return
 
-    if (value) play()
-    else pause()
+    if (value) {
+      play()
+    } else {
+      pause()
+    }
   })
 
   watch(volume, value => {
-    if (el.value) el.value.volume = toElementVolume(value)
+    if (!el.value) return
+
+    el.value.volume = toElementVolume(value)
   })
 
   watch(() => playbackRate?.value, value => {
-    if (el.value && value) el.value.defaultPlaybackRate = el.value.playbackRate = value
+    if (!el.value || !value) return
+
+    el.value.defaultPlaybackRate = value
+    el.value.playbackRate = value
   })
 
   watch(error, value => {
-    if (value) el.value?.pause()
+    if (!value) return
+
+    el.value?.pause()
   })
 
   watch(() => props.srcObject, value => {
-    if (el.value) el.value.srcObject = value ?? null
+    if (!el.value) return
+
+    el.value.srcObject = value ?? null
   })
 
   watch([() => props.src, () => props.srcObject], () => {
@@ -224,7 +241,7 @@ export function useMedia<T extends HTMLMediaElement> (
     buffered.value = 0
     waiting.value = false
     error.value = false
-    setProgress(0, 0)
+    progress.value = 0
 
     // <source> src changes are ignored until load()
     nextTick(() => el.value?.load())
@@ -254,7 +271,9 @@ export function useMute (volume: Ref<number>, dragging?: Ref<boolean>) {
   let lastVolume = volume.value || 100
 
   watch(volume, value => {
-    if (value > 0 && !dragging?.value) lastVolume = value
+    if (value > 0 && !dragging?.value) {
+      lastVolume = value
+    }
   })
 
   function toggleMuted () {
@@ -322,10 +341,7 @@ export function usePlayhead (
       : expected + (reported - expected) * (reported > expected ? CLOCK_CATCH_UP : CLOCK_HOLD_BACK)
     shownAt = now
 
-    const total = media.duration
-    const playhead = Number.isFinite(total) && total > 0
-      ? clamp(100 * shown / total, 0, 100)
-      : 0
+    const playhead = toPercent(shown, media.duration)
 
     // a bar being dragged shows the pointer, not the media
     bars().forEach(bar => bar.classList.contains('v-media-progress-bar--dragging')
@@ -353,7 +369,7 @@ export function usePlayhead (
   }
 
   function stop () {
-    if (frame) cancelAnimationFrame(frame)
+    cancelAnimationFrame(frame)
     frame = 0
     bars().forEach(bar => bar.style.removeProperty('--v-media-progress-bar-playhead'))
   }
@@ -370,7 +386,9 @@ export function usePlayhead (
   }, { immediate: true })
 
   watch([() => options.scrubbing?.value, container], () => {
-    if (el.value && !el.value.paused) start()
+    if (!el.value || el.value.paused) return
+
+    start()
   })
 
   onScopeDispose(stop)

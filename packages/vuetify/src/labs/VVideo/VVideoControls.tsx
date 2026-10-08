@@ -17,6 +17,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { parseActions, resolveSeekTarget, useMute } from '@/labs/composables/media'
 
@@ -138,6 +139,7 @@ export const makeVVideoControlsProps = propsFactory({
   ...pick(makeVMediaProgressBarProps(), ['buffer', 'chapters']),
   ...makeDensityProps(),
   ...makeElevationProps(),
+  ...makeRoundedProps(),
   ...makeThemeProps(),
 }, 'VVideoControls')
 
@@ -149,9 +151,9 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
   props: makeVVideoControlsProps(),
 
   emits: {
-    'update:playing': (val: boolean) => true,
-    'update:progress': (val: number) => true,
-    'update:volume': (val: number) => true,
+    'update:playing': (value: boolean) => true,
+    'update:progress': (value: number) => true,
+    'update:volume': (value: number) => true,
     'click:fullscreen': () => true,
   },
 
@@ -160,6 +162,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     const { themeClasses, current: currentTheme } = provideTheme(props)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
 
     const bgColor = toRef(() => props.bgColor ?? props.backgroundColor)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => {
@@ -194,12 +197,17 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     const groups = toRef(() => actions.value.reduce((state, name) => {
       if (name === '(') {
-        if (!state.depth++) state.groups.push({ names: [], pill: true })
+        if (!state.depth) {
+          state.groups.push({ names: [], pill: true })
+        }
+        state.depth++
       } else if (name === ')') {
         state.depth = Math.max(state.depth - 1, 0)
       } else if (name === '-' || (name === 'progress' && !state.depth)) {
         state.groups.push({ names: [name], pill: false })
-        if (state.depth) state.groups.push({ names: [], pill: true })
+        if (state.depth) {
+          state.groups.push({ names: [], pill: true })
+        }
       } else if (state.depth) {
         state.groups.at(-1)!.names.push(name)
       } else {
@@ -209,9 +217,8 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     }, { groups: [] as Group[], depth: 0 }).groups)
 
     const progressColor = toRef(() => {
-      if (props.progressColor ?? props.trackColor) {
-        return props.progressColor ?? props.trackColor
-      }
+      const color = props.progressColor ?? props.trackColor
+      if (color) return color
 
       const onVideo = props.pills && !groups.value.some(({ names, pill }) => pill && names.includes('progress'))
       const fallback = currentTheme.value.dark || !onVideo ? undefined : 'surface'
@@ -225,29 +232,27 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
     function toggleMuted () {
       if (props.muted) return
-      if (volumeRef.value) volumeRef.value.toggleMuted()
-      else fallbackMute.toggleMuted()
+      (volumeRef.value ?? fallbackMute).toggleMuted()
     }
 
+    const elapsedSeconds = toRef(() => props.progress / 100 * props.duration)
+
     const currentTime = computed(() => {
-      const secondsElapsed = Math.round(props.progress / 100 * props.duration)
+      const elapsed = Math.round(elapsedSeconds.value)
       return {
-        elapsed: formatTime(secondsElapsed),
-        remaining: formatTime(props.duration - secondsElapsed),
+        elapsed: formatTime(elapsed),
+        remaining: formatTime(props.duration - elapsed),
         total: formatTime(props.duration),
       }
     })
 
     const labels = computed(() => {
-      const playIconLocaleKey = playing.value ? 'pause' : 'play'
-      const volumeIconLocaleKey = volume.value && !props.muted ? 'mute' : 'unmute'
-      const fullscreenIconLocaleKey = props.fullscreen ? 'exitFullscreen' : 'enterFullscreen'
       return {
         seek: t('$vuetify.media.seek'),
         volume: t('$vuetify.media.volume'),
-        playAction: t(`$vuetify.media.${playIconLocaleKey}`),
-        volumeAction: t(`$vuetify.media.${volumeIconLocaleKey}`),
-        fullscreenAction: t(`$vuetify.media.${fullscreenIconLocaleKey}`),
+        playAction: t(playing.value ? '$vuetify.media.pause' : '$vuetify.media.play'),
+        volumeAction: t(volume.value && !props.muted ? '$vuetify.media.mute' : '$vuetify.media.unmute'),
+        fullscreenAction: t(props.fullscreen ? '$vuetify.media.exitFullscreen' : '$vuetify.media.enterFullscreen'),
       }
     })
 
@@ -262,8 +267,10 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
     function seek (target: MediaSeekTarget) {
       if (!props.duration) return
 
-      const seconds = resolveSeekTarget(target, props.progress / 100 * props.duration, props.duration)
-      if (Number.isFinite(seconds)) progress.value = clamp(seconds / props.duration * 100, 0, 100)
+      const seconds = resolveSeekTarget(target, elapsedSeconds.value, props.duration)
+      if (!Number.isFinite(seconds)) return
+
+      progress.value = clamp(seconds / props.duration * 100, 0, 100)
     }
 
     function skipTo (percent: number) {
@@ -307,15 +314,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       }
 
       const regularBtnSize = innerDefaults.VIconBtn.size
+      const pillHeight = regularBtnSize + 8
       const [gap, pillGap] = Array.isArray(props.gap) ? props.gap : [props.gap, props.gap]
 
       const pillClasses = [
         'v-video-control__pill',
-        props.pills ? elevationClasses.value : [],
-        props.pills ? backgroundColorClasses.value : [],
+        props.pills && [elevationClasses.value, backgroundColorClasses.value, roundedClasses.value],
       ]
 
-      const pillStyles = props.pills ? backgroundColorStyles.value : []
+      const pillStyles = props.pills ? [backgroundColorStyles.value, roundedStyles.value] : []
 
       const slotProps = {
         play,
@@ -334,7 +341,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       }
 
       const playProps: Record<string, unknown> = {
-        size: props.pills ? (regularBtnSize + 8) : regularBtnSize,
+        size: props.pills ? pillHeight : regularBtnSize,
         ...props.playProps,
         class: ['v-video__action-play', props.playProps?.class],
         icon: playing.value ? '$pause' : '$play',
@@ -349,7 +356,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
 
       const progressBarProps: Record<string, unknown> = {
         class: 'v-video__track',
-        modelValue: props.progress / 100 * props.duration,
+        modelValue: elapsedSeconds.value,
         max: props.duration,
         buffer: props.buffer,
         chapters: props.chapters,
@@ -417,15 +424,15 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
             { 'v-video-controls--floating': props.floating },
             { 'v-video-controls--fullscreen': props.fullscreen },
             { 'v-video-controls--split-time': props.splitTime },
-            !props.pills ? backgroundColorClasses.value : [],
+            !props.pills && [backgroundColorClasses.value, roundedClasses.value],
             props.detached && !props.pills ? elevationClasses.value : [],
             densityClasses.value,
             themeClasses.value,
           ]}
           style={[
-            !props.pills ? backgroundColorStyles.value : [],
+            !props.pills && [backgroundColorStyles.value, roundedStyles.value],
             {
-              '--v-video-controls-pill-height': `${regularBtnSize + 8}px`,
+              '--v-video-controls-pill-height': convertToUnit(pillHeight),
               '--v-video-controls-gap': convertToUnit(gap),
               '--v-video-controls-pill-gap': convertToUnit(pillGap),
             },

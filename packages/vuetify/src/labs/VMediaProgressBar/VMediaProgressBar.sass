@@ -2,6 +2,9 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+$inner-radius: 2px
+$stop-size: 4px
+
 // registered so seeking can transition it
 @property --v-media-progress-bar-ratio
   syntax: '<number>'
@@ -55,7 +58,7 @@
       overflow: hidden
       position: absolute
       top: 0
-      transition-duration: $media-progress-bar-segment-transition-duration
+      transition-duration: .15s
       transition-property: top, bottom
 
       > .v-media-progress-bar__background,
@@ -73,7 +76,7 @@
         border-radius: 0 $media-progress-bar-border-radius $media-progress-bar-border-radius 0
 
       &--hovered
-        inset-block: calc(#{$media-progress-bar-segment-hover-grow} / -2)
+        inset-block: -2px
 
       @media (prefers-reduced-motion: reduce)
         transition: none
@@ -135,7 +138,7 @@
 
         &.v-media-progress-bar--dragging,
         &:focus-visible
-          --v-media-progress-bar-handle: #{$media-progress-bar-handle-active-width}
+          --v-media-progress-bar-handle: 2px
 
       .v-media-progress-bar__track
         container-type: inline-size
@@ -143,11 +146,11 @@
       // buffer sits over the background so opacities add up; a mask gap at the buffer end splits them
       .v-media-progress-bar__background
         --v-media-progress-bar-buffer-gap: clamp(0px, var(--v-media-progress-bar-buffer) - var(--v-media-progress-bar-after), #{$media-progress-bar-handle-gap})
-        clip-path: inset(0 0 0 var(--v-media-progress-bar-after) round $media-progress-bar-inner-radius)
+        clip-path: inset(0 0 0 var(--v-media-progress-bar-after) round $inner-radius)
         mask-image: linear-gradient(90deg, #000 var(--v-media-progress-bar-buffer), transparent var(--v-media-progress-bar-buffer) calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)), #000 calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)))
 
       .v-media-progress-bar__buffer
-        clip-path: inset(0 calc(100% - var(--v-media-progress-bar-buffer)) 0 var(--v-media-progress-bar-after) round $media-progress-bar-inner-radius)
+        clip-path: inset(0 calc(100% - var(--v-media-progress-bar-buffer)) 0 var(--v-media-progress-bar-after) round $inner-radius)
 
       .v-media-progress-bar__fill
         clip-path: inset(0 calc(100% - var(--v-media-progress-bar-before)) 0 0)
@@ -155,26 +158,26 @@
       .v-media-progress-bar__thumb
         border-radius: calc(var(--v-media-progress-bar-handle) / 2)
         // sizes meant for a round thumb are too short for a handle
-        height: max(var(--v-media-progress-bar-thumb-size, calc(var(--v-media-progress-bar-height, #{$media-progress-bar-height}) + #{$media-progress-bar-handle-offset})), #{$media-progress-bar-handle-min-height})
+        height: max(var(--v-media-progress-bar-thumb-size, calc(var(--v-media-progress-bar-height, #{$media-progress-bar-height}) + 8px)), 20px)
         width: var(--v-media-progress-bar-handle)
 
       // stop indicator, clipped like the background; its offset shrinks on thin bars
       .v-media-progress-bar__track::after
-        --v-media-progress-bar-stop-offset: clamp(0px, #{$media-progress-bar-stop-offset}, (var(--v-media-progress-bar-height, #{$media-progress-bar-height}) - #{$media-progress-bar-stop-size}) / 2)
-        background: $media-progress-bar-stop-color
+        --v-media-progress-bar-stop-offset: clamp(0px, 4px, (var(--v-media-progress-bar-height, #{$media-progress-bar-height}) - #{$stop-size}) / 2)
+        background: currentColor
         border-radius: 50%
-        clip-path: inset(0 0 0 calc(var(--v-media-progress-bar-after) - 100cqw + var(--v-media-progress-bar-stop-offset) + #{$media-progress-bar-stop-size}))
+        clip-path: inset(0 0 0 calc(var(--v-media-progress-bar-after) - 100cqw + var(--v-media-progress-bar-stop-offset) + #{$stop-size}))
         content: ''
-        height: $media-progress-bar-stop-size
+        height: $stop-size
+        opacity: .7
         position: absolute
         right: var(--v-media-progress-bar-stop-offset)
-        opacity: $media-progress-bar-stop-opacity
-        top: calc(50% - #{$media-progress-bar-stop-size} / 2)
-        width: $media-progress-bar-stop-size
+        top: calc(50% - #{$stop-size} / 2)
+        width: $stop-size
 
     // played part is a static sine; without a handle a narrower gap still separates it from the track
     &--variant-wavy
-      --v-media-progress-bar-gap: min(#{$media-progress-bar-wavy-gap}, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
+      --v-media-progress-bar-gap: min(2px, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
 
       .v-media-progress-bar__track
         overflow: visible

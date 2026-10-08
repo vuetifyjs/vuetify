@@ -7,9 +7,9 @@
     density="comfortable"
     image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video-poster.jpg"
     max-width="450"
+    progress-color="red"
     rounded="lg"
     src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video.mp4"
-    progress-color="red"
     eager
   >
     <template v-slot:action.next>

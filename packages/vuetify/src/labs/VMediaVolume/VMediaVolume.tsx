@@ -74,8 +74,6 @@ export const VMediaVolume = genericComponent()({
     const nestedSliderDefaults = injectNestedDefaults<VSlider['$props']>('VSlider')
     const { toggleMuted } = useMute(volume, dragging)
 
-    const icon = toRef(() => getVolumeIcon(volume.value))
-
     const label = toRef(() => props.label ?? t(volume.value > 0 ? '$vuetify.media.mute' : '$vuetify.media.unmute'))
 
     const hideSlider = toRef(() => props.slider === 'hidden' || !canSetVolume())
@@ -99,7 +97,10 @@ export const VMediaVolume = genericComponent()({
     }
 
     useRender(() => {
-      const sliderDefaults = {
+      const commonSliderProps = {
+        'aria-label': t('$vuetify.media.volume'),
+        modelValue: volume.value,
+        'onUpdate:modelValue': (value: number) => volume.value = value,
         hideDetails: true,
         step: nestedSliderDefaults.value?.step ?? 5,
         thumbSize: nestedSliderDefaults.value?.thumbSize ?? 16,
@@ -112,11 +113,8 @@ export const VMediaVolume = genericComponent()({
         <VSlider
           class="v-media-volume__slider"
           minWidth="50"
-          aria-label={ t('$vuetify.media.volume') }
           disabled={ props.disabled }
-          modelValue={ volume.value }
-          onUpdate:modelValue={ v => volume.value = v }
-          { ...sliderDefaults }
+          { ...commonSliderProps }
           { ...props.sliderProps }
         />
       )
@@ -138,7 +136,7 @@ export const VMediaVolume = genericComponent()({
             props.class,
           ]}
           style={[
-            { '--v-media-volume-thumb-size': convertToUnit(props.sliderProps?.thumbSize ?? sliderDefaults.thumbSize) },
+            { '--v-media-volume-thumb-size': convertToUnit(props.sliderProps?.thumbSize ?? commonSliderProps.thumbSize) },
             props.style,
           ]}
           ref={ containerRef }
@@ -146,7 +144,7 @@ export const VMediaVolume = genericComponent()({
           { isSliderFirst.value && slider }
 
           <VIconBtn
-            icon={ icon.value }
+            icon={ getVolumeIcon(volume.value) }
             aria-label={ label.value }
             disabled={ props.disabled }
             v-tooltip={[{
@@ -179,10 +177,7 @@ export const VMediaVolume = genericComponent()({
                 >
                   <VSlider
                     direction={ props.direction }
-                    aria-label={ t('$vuetify.media.volume') }
-                    modelValue={ volume.value }
-                    onUpdate:modelValue={ v => volume.value = v }
-                    { ...sliderDefaults }
+                    { ...commonSliderProps }
                     { ...props.sliderProps }
                   />
                 </div>

@@ -44,7 +44,8 @@ A basic example of the video component.
 | Component | Description |
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
-| [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
+| [v-video-controls](/api/v-video-controls/) | Control bar |
+| [v-media-progress-bar](/api/v-media-progress-bar/) | Progress bar with chapters |
 | [v-media-volume](/api/v-media-volume/) | Volume control |
 
 <ApiInline hide-links />
@@ -57,7 +58,7 @@ This component is only useful if you self-host videos or when you can reliably o
 
 ## Guide
 
-The `v-video` component lets you display videos with controls that nicely fit into your app design. It comes equiped with common keyboard shortcuts, and a control bar composed from built-in and custom actions.
+The `v-video` component lets you display videos with controls that nicely fit into your app design. It comes equipped with common keyboard shortcuts, and a control bar composed from built-in and custom actions.
 
 All attributes that are not explicitly defined in the component API (`autoplay`, `muted`, `loop`, etc.) are passed to the underlying native HTML video element.
 
@@ -158,7 +159,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 ### Video card
 
-Props like `floating` and `detached`, together with `elapsed` and `remaining` actions around the progress bar, can help you seamlesly integrate the video within card layout.
+Props like `floating` and `detached`, together with `elapsed` and `remaining` actions around the progress bar, help fit the video into a card layout.
 
 <ExamplesExample file="v-video/misc-in-card" />
 

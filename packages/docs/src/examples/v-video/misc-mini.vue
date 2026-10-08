@@ -8,7 +8,6 @@
       progress-variant="pill"
       rounded="lg"
       src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.mp4"
-      style="--v-video-controls-pill-border-radius: 8px"
       width="300"
       eager
       muted

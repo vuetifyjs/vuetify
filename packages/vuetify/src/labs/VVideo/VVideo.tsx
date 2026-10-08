@@ -93,6 +93,8 @@ export const makeVVideoProps = propsFactory({
     'buffer',
     'fullscreen',
     'gap',
+    'rounded',
+    'tile',
     'variant',
   ]),
 }, 'VVideo')
@@ -105,12 +107,12 @@ export const VVideo = genericComponent<VVideoSlots>()({
   props: makeVVideoProps(),
 
   emits: {
-    error: (val: MediaError | boolean) => true,
+    error: (value: MediaError | boolean) => true,
     loaded: (element: HTMLVideoElement) => true,
-    'update:error': (val: MediaError | boolean) => true,
-    'update:playing': (val: boolean) => true,
-    'update:progress': (val: number) => true,
-    'update:volume': (val: number) => true,
+    'update:error': (value: MediaError | boolean) => true,
+    'update:playing': (value: boolean) => true,
+    'update:progress': (value: number) => true,
+    'update:volume': (value: number) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -121,9 +123,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const { ssr } = useDisplay()
 
     const roundedForContainer = toRef(() => Array.isArray(props.rounded) ? props.rounded[0] : props.rounded)
-    const roundedForControls = toRef(() => Array.isArray(props.rounded) ? props.rounded.at(-1) : props.rounded ?? false)
-    const { roundedClasses: roundedContainerClasses, roundedStyles: roundedContainerStyles } = useRounded(roundedForContainer)
-    const { roundedClasses: roundedControlsClasses, roundedStyles: roundedControlsStyles } = useRounded(roundedForControls)
+    const { roundedClasses, roundedStyles } = useRounded(roundedForContainer)
 
     const containerRef = shallowRef<HTMLDivElement>()
     const videoRef = shallowRef<HTMLVideoElement>()
@@ -399,13 +399,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
             { 'v-video--playing': playing.value },
             themeClasses.value,
             densityClasses.value,
-            roundedContainerClasses.value,
+            roundedClasses.value,
             props.class,
           ]}
           style={[
             { '--v-video-aspect-ratio': props.aspectRatio },
             props.variant === 'background' ? [] : pick(dimensionStyles.value, ['width', 'minWidth', 'maxWidth']),
-            roundedContainerStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           tabindex="-1"
@@ -426,7 +426,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 key="video-element"
                 class={[
                   'v-video__video',
-                  roundedContainerClasses.value,
+                  roundedClasses.value,
                 ]}
                 { ...omit(attrs, ['controlslist', 'class', 'style']) }
                 controlslist={ controlslist }
@@ -464,7 +464,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                     <div
                       class={[
                         'v-video__overlay-fill',
-                        ...roundedContainerClasses.value,
+                        ...roundedClasses.value,
                       ]}
                     >
                       { props.variant === 'player' && overlayPlayIcon }
@@ -496,8 +496,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
             { showControls && (
               <VVideoControls
                 ref={ controlsRef }
-                class={ roundedControlsClasses.value }
-                style={ roundedControlsStyles.value }
                 { ...controlsProps }
                 { ...controlsEventHandlers }
               >

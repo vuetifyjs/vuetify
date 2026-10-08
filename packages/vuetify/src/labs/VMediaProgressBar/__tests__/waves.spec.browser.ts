@@ -32,7 +32,8 @@ describe('waves', () => {
     context.setLineDash([1600 * waveStretch(3, 40), 100000])
     context.stroke(new Path2D(wavePath(1700, 3, 40)))
 
-    const alpha = (x: number) => Math.max(...context.getImageData(x, 0, 1, 20).data.filter((_, index) => index % 4 === 3))
+    const alpha = (x: number) => context.getImageData(x, 0, 1, 20).data
+      .reduce((max, value, index) => index % 4 === 3 ? Math.max(max, value) : max, 0)
     expect(alpha(1598)).toBeGreaterThan(127)
     expect(alpha(1601)).toBeLessThanOrEqual(127)
   })
