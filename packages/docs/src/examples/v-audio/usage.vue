@@ -12,7 +12,6 @@
     <template v-slot:configuration>
       <v-select v-model="theme" :items="['light', 'dark']" label="Theme" clearable></v-select>
       <v-select v-model="color" :items="colorOptions" label="Color" clearable></v-select>
-      <v-select v-model="timeDisplay" :items="timeDisplays" label="Time display" clearable></v-select>
       <v-checkbox v-model="volume" label="Volume"></v-checkbox>
       <v-checkbox v-model="readonly" label="Readonly"></v-checkbox>
     </template>
@@ -22,14 +21,12 @@
 <script setup>
   const name = 'v-audio'
   const layouts = ['inline']
-  const timeDisplays = ['elapsed-duration', 'elapsed', 'remaining', 'duration']
 
   const model = shallowRef('default')
   const volume = shallowRef(false)
   const readonly = shallowRef(false)
   const theme = shallowRef(null)
   const color = shallowRef(null)
-  const timeDisplay = shallowRef(null)
 
   const colorOptions = [
     'primary',
@@ -53,7 +50,6 @@
     return {
       theme: theme.value || undefined,
       color: color.value || undefined,
-      'time-display': timeDisplay.value || undefined,
       actions: actions === 'play' ? undefined : actions,
       readonly: readonly.value || undefined,
       src: track.src,

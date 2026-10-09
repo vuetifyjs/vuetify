@@ -105,33 +105,12 @@ describe('VAudio', () => {
     expect(thumbSize()).toBe('6px')
   })
 
-  it('should render elapsed and remaining time actions', async () => {
-    render(() => <VAudio src={ SILENT_WAV } actions="elapsed progress remaining" />)
+  it('should render the time actions', async () => {
+    render(() => <VAudio src={ SILENT_WAV } actions="elapsed progress remaining time" />)
     await whenLoaded()
 
-    const times = screen.queryAllByCSS('.v-audio-controls__time').map(el => el.textContent)
-    expect(times).toEqual(['0:00', '-0:04'])
-  })
-
-  it('should format the time action by timeDisplay', async () => {
-    const timeDisplay = ref<'elapsed' | 'remaining' | 'duration' | 'elapsed-duration'>('elapsed-duration')
-    render(() => <VAudio src={ SILENT_WAV } actions="play progress time" timeDisplay={ timeDisplay.value } />)
-    await whenLoaded()
-
-    const time = () => screen.getByCSS('.v-audio-controls__time')
-    await expect.poll(time).toHaveTextContent('0:00 / 0:04')
-
-    timeDisplay.value = 'elapsed'
-    await nextTick()
-    expect(time()).toHaveTextContent('0:00')
-
-    timeDisplay.value = 'remaining'
-    await nextTick()
-    expect(time()).toHaveTextContent('-0:04')
-
-    timeDisplay.value = 'duration'
-    await nextTick()
-    expect(time()).toHaveTextContent('0:04')
+    const times = () => screen.queryAllByCSS('.v-audio-controls__time').map(el => el.textContent)
+    await expect.poll(times).toEqual(['0:00', '-0:04', '0:00 / 0:04'])
   })
 
   it('should apply startAt only to the first source', async () => {

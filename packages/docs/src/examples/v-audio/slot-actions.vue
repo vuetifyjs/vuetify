@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex justify-center">
     <v-card class="pa-6" rounded="xl" width="400">
-      <v-audio :src="track.src" actions="left play right" progress-class="mb-2">
+      <v-audio :src="track.src" actions="left play right">
         <template v-slot:action.left="{ seek }">
           <v-icon-btn aria-label="Repeat" icon="mdi-repeat"></v-icon-btn>
           <v-spacer></v-spacer>

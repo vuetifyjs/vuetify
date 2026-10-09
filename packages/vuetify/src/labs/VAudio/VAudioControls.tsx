@@ -19,12 +19,11 @@ import { parseActions, resolveSeekTarget, useMute } from '@/labs/composables/med
 
 // Utilities
 import { computed, Fragment, shallowRef, toRef } from 'vue'
-import { clamp, formatTime, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { clamp, convertToUnit, formatTime, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VSlider } from '@/components/VSlider'
-import type { ClassValue } from '@/composables/component'
 import type { MediaSeekStep, MediaSeekTarget } from '@/labs/composables/media'
 import type { VMediaVolumeOptions, VMediaVolumeSlider } from '@/labs/VMediaVolume/VMediaVolume'
 
@@ -34,7 +33,6 @@ export type VAudioControlsTime = {
   elapsed: string
   remaining: string
   total: string
-  progress: number
 }
 
 export type VAudioControlsActionsSlot = {
@@ -46,7 +44,7 @@ export type VAudioControlsActionsSlot = {
   progress: number
   currentTime: VAudioControlsTime
   duration: number
-  volume: number
+  volume: Ref<number>
   toggleMuted: () => void
   playbackRate: number
   setPlaybackRate: (value: number) => void
@@ -94,19 +92,11 @@ export const makeVAudioControlsProps = propsFactory({
     type: [String, Array] as PropType<string | readonly VAudioAction[]>,
     default: () => ['play'],
   },
-  actionsClass: null as unknown as PropType<ClassValue>,
-  progressClass: null as unknown as PropType<ClassValue>,
+  gap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
   progressVariant: String as PropType<VMediaProgressBar['$props']['variant']>,
   playProps: Object as PropType<VIconBtn['$props']>,
   hideTime: Boolean,
-  seekable: {
-    type: Boolean,
-    default: true,
-  },
-  timeDisplay: {
-    type: String as PropType<'elapsed' | 'remaining' | 'duration' | 'elapsed-duration'>,
-    default: 'elapsed-duration',
-  },
+  readonly: Boolean,
 
   volumeProps: Object as PropType<VMediaVolumeOptions>,
   seekStep: {
@@ -177,7 +167,6 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       elapsed: formatTime(elapsedSeconds.value),
       remaining: formatTime(props.duration - elapsedSeconds.value),
       total: formatTime(props.duration),
-      progress: progress.value,
     }))
 
     function play () {
@@ -218,7 +207,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       progress: progress.value,
       currentTime: currentTime.value,
       duration: props.duration,
-      volume: volume.value,
+      volume,
       toggleMuted,
       playbackRate: playbackRate.value,
       setPlaybackRate,
@@ -255,7 +244,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         tooltip: props.tooltip,
         color: props.color,
         disabled: !props.duration,
-        readonly: !props.seekable,
+        readonly: props.readonly,
         'onUpdate:modelValue': (seconds: number) => seek({ to: seconds }),
         'onDrag:start': (value: number) => emit('drag:start', value),
         'onDrag:end': (value: number) => emit('drag:end', value),
@@ -273,7 +262,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
       }
 
       const progressRow = (
-        <div class={['v-audio-controls__progress', props.progressClass]}>
+        <div class="v-audio-controls__progress">
           { !isProgressInlined && !props.hideTime && (
             <div key="elapsed" class="v-audio-controls__time">
               { timePart('elapsed') }
@@ -284,7 +273,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
 
           { !isProgressInlined && !props.hideTime && (
             <div key="total" class="v-audio-controls__time">
-              { timePart(props.timeDisplay === 'remaining' ? 'remaining' : 'total') }
+              { timePart('total') }
             </div>
           )}
         </div>
@@ -302,12 +291,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         '-': () => <VSpacer />,
         time: () => (
           <div class="v-audio-controls__time">
-            { slots.time?.(slotProps.value) ?? {
-              elapsed: timePart('elapsed'),
-              remaining: timePart('remaining'),
-              duration: timePart('total'),
-              'elapsed-duration': [timePart('elapsed'), ' / ', timePart('total')],
-            }[props.timeDisplay]}
+            { slots.time?.(slotProps.value) ?? <>{ timePart('elapsed') } / { timePart('total') }</> }
           </div>
         ),
         elapsed: () => <div class="v-audio-controls__time">{ timePart('elapsed') }</div>,
@@ -334,6 +318,8 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         return slot?.(slotProps.value) ?? builtins[name]?.()
       }
 
+      const [gap, progressGap] = Array.isArray(props.gap) ? props.gap : [props.gap, props.gap]
+
       return (
         <div
           class={[
@@ -343,14 +329,21 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
             textColorClasses.value,
             props.class,
           ]}
-          style={[textColorStyles.value, props.style]}
+          style={[
+            textColorStyles.value,
+            {
+              '--v-audio-controls-gap': convertToUnit(gap),
+              '--v-audio-controls-progress-gap': convertToUnit(progressGap),
+            },
+            props.style,
+          ]}
         >
           <VDefaultsProvider defaults={ innerDefaults }>
             { slots.default?.(slotProps.value) ?? (
               <>
                 { !actions.includes('prepend') && slots.prepend?.(slotProps.value) }
 
-                <div class={['v-audio-controls__actions', props.actionsClass]}>
+                <div class="v-audio-controls__actions">
                   { actions.map((name, index) => (
                     <Fragment key={ `${name}-${index}` }>{ renderAction(name) }</Fragment>
                   ))}

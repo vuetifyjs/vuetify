@@ -4,8 +4,8 @@
       :play-props="{ color: 'primary', size: 36, variant: 'flat' }"
       :src="track.src"
       actions="prev play next progress rate restart"
-      actions-class="ga-1"
       class="py-3 px-2 border"
+      gap="4"
     >
       <template v-slot:action.prev>
         <v-icon-btn aria-label="Previous" icon="mdi-skip-previous"></v-icon-btn>

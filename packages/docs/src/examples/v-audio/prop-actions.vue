@@ -2,7 +2,7 @@
   <v-container class="d-flex flex-column ga-8" max-width="560">
     <v-audio :src="track.src"></v-audio>
 
-    <v-audio :src="track.src" actions="prev play next - volume" time-display="remaining">
+    <v-audio :src="track.src" actions="prev play next - volume">
       <template v-slot:action.prev>
         <v-icon-btn aria-label="Previous" icon="mdi-skip-previous"></v-icon-btn>
       </template>
@@ -15,8 +15,8 @@
     <v-audio
       :src="track.src"
       actions="play time progress"
-      actions-class="ga-3"
       class="bg-surface rounded-pill border px-2"
+      gap="12"
       max-width="360"
     ></v-audio>
   </v-container>

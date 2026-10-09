@@ -9,10 +9,9 @@
 
     <v-audio
       v-if="src"
+      :gap="[0, 12]"
       :src="src"
-      actions="play progress time"
-      progress-class="mx-3"
-      time-display="elapsed"
+      actions="play progress elapsed"
     >
       <template v-slot:progress="{ props }">
         <v-audio-waveform v-bind="props" :peaks-source="file"></v-audio-waveform>

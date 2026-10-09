@@ -69,11 +69,12 @@ The **actions** prop lists what the controls render, in order. It takes an array
 
 - `play` toggles playback
 - `progress` places the seek bar inside the row, which turns the player into a single line
-- `time` shows the clock, formatted by **time-display**
+- `time` shows the elapsed and total time
+- `elapsed` and `remaining` show a single time
 - `volume` adds a mute button with a volume slider
 - `-` inserts a spacer
 
-Without `progress` in the list, the seek bar gets its own row above the actions, with the elapsed and total time underneath. Any other name renders the `action.<name>` slot, so a `prev` or `shuffle` button is an `#action.prev` or `#action.shuffle` slot away.
+Without `progress` in the list, the seek bar gets its own row above the actions, with the elapsed and total time underneath. **hide-time** hides them, and the `time.total` slot can show the remaining time instead. Any other name renders the `action.<name>` slot, so a `prev` or `shuffle` button is an `#action.prev` or `#action.shuffle` slot away.
 
 <ExamplesExample file="v-audio/prop-actions" />
 
@@ -104,7 +105,7 @@ The waveform never downloads the file itself. To decode in the browser, pass the
 
 #### Custom actions
 
-Each custom action name in **actions** becomes an `action.<name>` slot that receives the player state and methods: `playing`, `progress`, `currentTime`, `duration`, `play`, `pause`, `seek`, `setPlaybackRate` and more. `seek({ to })` and `seek({ by })` take seconds, or a string such as `'50%'` relative to the duration. The **play** slot also receives `props` for the built-in button, so `v-bind="props"` keeps the icon and label in sync. To only restyle the built-in button, pass **play-props** instead. Buttons rendered in slots follow `VAudioControls` defaults, and **actions-class** and **progress-class** style the rows.
+Each custom action name in **actions** becomes an `action.<name>` slot that receives the player state and methods: `playing`, `progress`, `currentTime`, `duration`, `play`, `pause`, `seek`, `setPlaybackRate` and more. `seek({ to })` and `seek({ by })` take seconds, or a string such as `'50%'` relative to the duration. The **play** slot also receives `props` for the built-in button, so `v-bind="props"` keeps the icon and label in sync. To only restyle the built-in button, pass **play-props** instead. Buttons rendered in slots follow `VAudioControls` defaults, and **gap** sets the spacing between actions and around the seek bar.
 
 <ExamplesExample file="v-audio/slot-actions" />
 

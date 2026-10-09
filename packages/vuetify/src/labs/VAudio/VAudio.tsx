@@ -58,11 +58,10 @@ export const makeVAudioProps = propsFactory({
   loop: Boolean,
   startAt: [Number, String],
   disabled: Boolean,
-  readonly: Boolean,
   hideBuffer: Boolean,
   bgColor: String,
 
-  ...omit(makeVAudioControlsProps(), ['duration', 'seekable', 'buffer']),
+  ...omit(makeVAudioControlsProps(), ['duration', 'buffer']),
   ...makeComponentProps(),
   ...makeDimensionProps(),
   ...makeRoundedProps(),
@@ -195,7 +194,7 @@ export const VAudio = genericComponent<VAudioSlots>()({
             progress={ progress.value }
             duration={ duration.value }
             buffer={ props.hideBuffer ? 0 : buffered.value }
-            seekable={ !props.readonly && !props.disabled }
+            readonly={ props.readonly || props.disabled }
             onUpdate:progress={ (percent: number) => seek({ to: `${percent}%` }) }
             onDrag:start={ () => scrubbing.value = true }
             onDrag:end={ () => scrubbing.value = false }

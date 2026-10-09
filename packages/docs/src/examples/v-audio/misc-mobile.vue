@@ -4,8 +4,9 @@
       <v-audio
         :src="track.src"
         actions="prev skip-backward play skip-forward next"
-        actions-class="bg-surface-light rounded-pill pa-2 ga-2 mt-2"
+        class="mobile-player"
         color="primary"
+        gap="8"
         width="358"
         hide-time
       >
@@ -61,6 +62,13 @@
 </script>
 
 <style scoped>
+.mobile-player :deep(.v-audio-controls__actions) {
+  background: rgb(var(--v-theme-surface-light));
+  border-radius: 9999px;
+  margin-top: 8px;
+  padding: 8px;
+}
+
 .animate-rounded {
   transition: border-radius .2s ease-in-out;
   &:active {

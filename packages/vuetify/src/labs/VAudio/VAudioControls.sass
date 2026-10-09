@@ -3,6 +3,9 @@
 
 @include tools.layer('components')
   .v-audio-controls
+    --v-audio-controls-gap: #{$audio-controls-actions-gap}
+    --v-audio-controls-progress-gap: #{$audio-controls-progress-gap}
+
     direction: ltr
     align-items: center
     background: transparent
@@ -41,16 +44,16 @@
       align-items: center
       display: flex
       flex: 1 0 auto
-      gap: $audio-controls-actions-gap
+      gap: var(--v-audio-controls-gap)
 
       .v-audio-controls__progress
-        margin-inline: $audio-controls-progress-gap
+        margin-inline: var(--v-audio-controls-progress-gap)
 
     &__progress
       align-items: center
       display: flex
       flex: 1 1 auto
-      gap: $audio-controls-progress-gap
+      gap: var(--v-audio-controls-progress-gap)
       min-width: $audio-controls-progress-min-width
 
     &__seek

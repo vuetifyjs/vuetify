@@ -20,6 +20,7 @@ import {
   genericComponent,
   IN_BROWSER,
   isNullOrUndefined,
+  omit,
   PREFERS_REDUCED_MOTION,
   propsFactory,
   templateRef,
@@ -66,7 +67,7 @@ export const makeVAudioWaveformProps = propsFactory({
   mirror: [Boolean, Number, String],
   live: Boolean,
 
-  ...makeVMediaProgressBarProps({ height: 32 }),
+  ...omit(makeVMediaProgressBarProps({ height: 32 }), ['variant']),
 }, 'VAudioWaveform')
 
 export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({

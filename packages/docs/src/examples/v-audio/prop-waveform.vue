@@ -1,10 +1,9 @@
 <template>
   <v-container max-width="560">
     <v-audio
-      actions="play progress time"
-      progress-class="mx-3"
+      :gap="[0, 12]"
+      actions="play progress elapsed"
       src="https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3"
-      time-display="elapsed"
     >
       <template v-slot:progress="{ props }">
         <v-audio-waveform v-bind="props" :peaks="peaks"></v-audio-waveform>
