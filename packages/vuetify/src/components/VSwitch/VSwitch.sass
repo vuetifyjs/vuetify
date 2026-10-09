@@ -12,6 +12,9 @@
     .v-label
       padding-inline-start: $switch-label-margin-inline-start
 
+    .v-selection-control__description
+      padding-inline-start: $switch-label-margin-inline-start
+
   @each $name, $size in $switch-sizes
     .v-switch--size-#{$name}
       --v-switch-scale: #{math.div(list.nth($size, 1), $switch-track-height)}
