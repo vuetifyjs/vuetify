@@ -21,12 +21,12 @@
     "justifySm": "Deprecated, use **justify-sm-\\*** class",
     "justifyXl": "Deprecated, use **justify-xl-\\*** class",
     "justifyXxl": "Deprecated, use **justify-xxl-\\*** class",
-    "gap": "Sets the gap between `v-col`s. Can be a single value for both row and column gap, or the array of two values [column gap, row gap].",
-    "gapSm": "Changes the gap on small and greater breakpoints. Accepts the same values as **gap**.",
-    "gapMd": "Changes the gap on medium and greater breakpoints. Accepts the same values as **gap**.",
-    "gapLg": "Changes the gap on large and greater breakpoints. Accepts the same values as **gap**.",
-    "gapXl": "Changes the gap on extra large and greater breakpoints. Accepts the same values as **gap**.",
-    "gapXxl": "Changes the gap on extra extra large and greater breakpoints. Accepts the same values as **gap**.",
+    "gap": "Gap between columns, expects value in pixels. One value for both axes, or [column gap, row gap].",
+    "gapSm": "Overrides **gap** from the **sm** breakpoint up, in pixels.",
+    "gapMd": "Overrides **gap** from the **md** breakpoint up, in pixels.",
+    "gapLg": "Overrides **gap** from the **lg** breakpoint up, in pixels.",
+    "gapXl": "Overrides **gap** from the **xl** breakpoint up, in pixels.",
+    "gapXxl": "Overrides **gap** from the **xxl** breakpoint up, in pixels.",
     "noGutters": "Removes the gutter between `v-col`s (same as `gap='0'`).",
     "size": "Sets the number of columns."
   }
