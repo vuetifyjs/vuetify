@@ -22,7 +22,17 @@ describe('VDatePicker accessibility', () => {
 
     expect(screen.getByTestId('prev-month').getAttribute('aria-label')).toBe('Previous month')
     expect(screen.getByTestId('next-month').getAttribute('aria-label')).toBe('Next month')
-    expect(screen.getByTestId('year-btn').getAttribute('aria-label')).toBe('Select year')
+
+    const monthButton = screen.getByTestId('month-btn')
+    const yearButton = screen.getByTestId('year-btn')
+
+    expect(monthButton.getAttribute('aria-label')).toContain('Select month')
+    expect(monthButton.textContent).toBeTruthy()
+    expect(monthButton.getAttribute('aria-label')).toContain(monthButton.textContent!.trim())
+
+    expect(yearButton.getAttribute('aria-label')).toContain('Select year')
+    expect(yearButton.textContent).toBeTruthy()
+    expect(yearButton.getAttribute('aria-label')).toContain(yearButton.textContent!.trim())
   })
 
   it('should have aria-current="date" on today\'s date', () => {

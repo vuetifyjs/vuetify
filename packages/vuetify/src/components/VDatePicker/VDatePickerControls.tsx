@@ -145,6 +145,16 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
       emit('click:month')
     }
 
+    function monthSelectLabel (visibleText?: string) {
+      const label = t('$vuetify.datePicker.ariaLabel.selectMonth')
+      return visibleText ? `${visibleText} ${label}` : label
+    }
+
+    function yearSelectLabel (visibleText?: string) {
+      const label = t('$vuetify.datePicker.ariaLabel.selectYear')
+      return visibleText ? `${visibleText} ${label}` : label
+    }
+
     useRender(() => {
       const innerDefaults = {
         VBtn: {
@@ -202,7 +212,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.monthText }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectMonth') }
+          aria-label={ monthSelectLabel(props.monthText) }
           onClick={ onClickMonth }
         />
       )
@@ -216,7 +226,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.yearText }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
+          aria-label={ yearSelectLabel(props.yearText) }
           onClick={ onClickYear }
         />
       )
@@ -230,7 +240,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.text }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
+          aria-label={ yearSelectLabel(props.text) }
           onClick={ onClickYear }
         />
       )
@@ -244,7 +254,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
             disabled={ disableMonth.value }
             text={ props.text }
             rounded
-            aria-label={ t('$vuetify.datePicker.ariaLabel.selectMonth') }
+            aria-label={ monthSelectLabel(props.text) }
             onClick={ onClickMonth }
           />
           <VBtn
