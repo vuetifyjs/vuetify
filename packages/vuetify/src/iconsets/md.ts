@@ -23,6 +23,7 @@ const aliases: IconAliases = {
   checkboxOn: 'check_box',
   checkboxOff: 'check_box_outline_blank',
   checkboxIndeterminate: 'indeterminate_check_box',
+  clock: 'schedule',
   delimiter: 'fiber_manual_record', // for carousel
   sortAsc: 'arrow_upward',
   sortDesc: 'arrow_downward',

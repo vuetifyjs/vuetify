@@ -25,6 +25,7 @@ const aliases: IconAliases = {
   checkboxOn: 'i-mdi:checkbox-marked',
   checkboxOff: 'i-mdi:checkbox-blank-outline',
   checkboxIndeterminate: 'i-mdi:minus-box',
+  clock: 'i-mdi:clock',
   delimiter: 'i-mdi:circle',
   // for carousel
   sortAsc: 'i-mdi:arrow-up',
