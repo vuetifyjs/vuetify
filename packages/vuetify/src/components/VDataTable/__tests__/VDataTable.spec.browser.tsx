@@ -3,7 +3,7 @@ import { VDataTable } from '../VDataTable'
 
 // Utilities
 import { render, screen } from '@test'
-import { nextTick, ref } from 'vue'
+import { createVNode, nextTick, ref } from 'vue'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
@@ -52,44 +52,32 @@ describe('VDataTable', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/23245
   it('should keep item column slots aligned when toggling a leading column', async () => {
-    const headers = ref([
+    const allHeaders = [
       { title: 'Extra', key: 'extra' },
       { title: 'Name', key: 'name' },
       { title: 'Actions', key: 'actions' },
-    ])
-
-    const items = [{ name: 'Item', actions: 'Edit' }]
+    ]
+    const headers = ref(allHeaders)
 
     render(() => (
-      <VDataTable headers={ headers.value } items={ items }>
+      <VDataTable headers={ headers.value } items={ [{ name: 'Item' }] }>
         {{
           'item.extra': () => <div class="extra-cell">Extra</div>,
-          'item.name': () => <div class="name-cell">Name</div>,
-          'item.actions': () => <div class="actions-cell">Actions</div>,
+          // normal JSX function would replace the class, createVNode simulates real-life better
+          'item.name': ({ item }: any) => createVNode('div', { class: 'name-cell' }, item.name, 1),
+          'item.actions': () => <div class="actions-cell">Action</div>,
         }}
       </VDataTable>
     ))
 
-    const nameCell = screen.getByCSS('tbody tr:first-child td:nth-child(2)')
-    const nameSlotRoot = nameCell.querySelector('.name-cell')!
-
-    headers.value = [
-      { title: 'Name', key: 'name' },
-      { title: 'Actions', key: 'actions' },
-    ]
+    headers.value = allHeaders.filter(h => h.key !== 'extra')
+    await nextTick()
+    headers.value = allHeaders
     await nextTick()
 
-    headers.value = [
-      { title: 'Extra', key: 'extra' },
-      { title: 'Name', key: 'name' },
-      { title: 'Actions', key: 'actions' },
-    ]
-    await nextTick()
-
-    const restoredNameCell = screen.getByCSS('tbody tr:first-child td:nth-child(2)')
-
-    expect(restoredNameCell).toBe(nameCell)
-    expect(restoredNameCell.querySelector('.name-cell')).toBe(nameSlotRoot)
-    expect(restoredNameCell.querySelector('.actions-cell')).toBeNull()
+    const cells = screen.getAllByCSS('tbody tr:first-child td')
+    expect(cells[0].firstElementChild!.className).toBe('extra-cell')
+    expect(cells[1].firstElementChild!.className).toBe('name-cell')
+    expect(cells[2].firstElementChild!.className).toBe('actions-cell')
   })
 })
