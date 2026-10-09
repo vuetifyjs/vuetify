@@ -1,5 +1,6 @@
 // Components
 import { VCommandPalette } from '../VCommandPalette'
+import { VListItem } from '@/components/VList'
 
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
@@ -550,6 +551,92 @@ describe('VCommandPalette', () => {
       await wait(100)
 
       expect(screen.getByTestId('no-data-slot')).toBeInTheDocument()
+    })
+
+    it('should focus, filter, navigate and execute from a custom input bound to the input slot props', async () => {
+      const model = ref(true)
+      const search = ref('')
+      const onClickItem = vi.fn()
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          v-model:search={ search.value }
+          items={ testItems }
+          onClick:item={ onClickItem }
+        >
+          {{
+            input: ({ props }) => (
+              <input
+                { ...props }
+                value={ search.value }
+                onInput={ (e: Event) => search.value = (e.target as HTMLInputElement).value }
+              />
+            ),
+          }}
+        </VCommandPalette>
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByRole('combobox')
+
+      await expect.poll(() => document.activeElement).toBe(input)
+      expect(input).toHaveAttribute('aria-controls', screen.getByRole('listbox').id)
+
+      await userEvent.click(input)
+      await userEvent.keyboard('file')
+      await expect.poll(() => screen.queryByText('Folder')).toBeNull()
+
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Open File')
+
+      await userEvent.keyboard('{Enter}')
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Open File' }),
+        expect.any(KeyboardEvent)
+      )
+    })
+
+    it('should execute an item rendered from the item slot props on click', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } onClick:item={ onClickItem }>
+          {{ item: ({ props }) => <VListItem { ...props } /> }}
+        </VCommandPalette>
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+
+      expect(document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('File')
+
+      await userEvent.click(screen.getByText('Folder'))
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Folder' }),
+        expect.any(MouseEvent)
+      )
+      await expect.poll(() => model.value).toBe(false)
+    })
+
+    it('should pass the original item and only list item props to the item slot', async () => {
+      const model = ref(true)
+      const onClick = vi.fn()
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={[{ title: 'Export', value: 'export', hotkey: 'ctrl+shift+e', onClick }]}
+        >
+          {{ item: ({ item, props }) => <VListItem { ...props } subtitle={ `value: ${(item as any).value}` } /> }}
+        </VCommandPalette>
+      ))
+
+      await screen.findByRole('dialog')
+
+      expect(screen.getByText('value: export')).toBeInTheDocument()
+      expect(screen.getByRole('option')).not.toHaveAttribute('hotkey')
+
+      await userEvent.click(screen.getByText('Export'))
+      expect(onClick).toHaveBeenCalledExactlyOnceWith(expect.any(MouseEvent), 'export')
     })
   })
 
