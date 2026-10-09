@@ -255,6 +255,7 @@ describe('VCommandPalette', () => {
       await expect.poll(() => input.getAttribute('aria-activedescendant')).toBeTruthy()
       expect(document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('File')
 
+      await userEvent.click(input)
       await userEvent.keyboard('{ArrowDown}')
       await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Folder')
 
