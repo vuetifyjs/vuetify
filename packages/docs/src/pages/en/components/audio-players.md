@@ -17,6 +17,12 @@ The `v-audio` component is a player for self-hosted audio: a seek bar, a time di
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v4.3.0](/getting-started/release-notes/?version=v4.3.0)
+
+:::
+
 ## Installation
 
 Labs components require manual import and registration with the Vuetify instance.
