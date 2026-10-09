@@ -60,7 +60,7 @@ describe('VDataTable', () => {
     const headers = ref(allHeaders)
 
     render(() => (
-      <VDataTable headers={ headers.value } items={ [{ name: 'Item' }] }>
+      <VDataTable headers={ headers.value } items={[{ name: 'Item' }]}>
         {{
           'item.extra': () => <div class="extra-cell">Extra</div>,
           // normal JSX function would replace the class, createVNode simulates real-life better
