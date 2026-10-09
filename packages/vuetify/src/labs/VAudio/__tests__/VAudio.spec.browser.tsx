@@ -34,7 +34,7 @@ const stories = {
 
 describe('VAudio', () => {
   it('should label every control through the locale', () => {
-    render(() => <VAudio src={ SILENT_WAV } actions="play volume" />)
+    render(() => <VAudio src={ SILENT_WAV } actions="play progress volume" />)
 
     // `t()` echoes the key back when it is missing, which only shows in aria-labels
     const labels = screen.queryAllByCSS('.v-audio [aria-label]').map(el => el.getAttribute('aria-label'))
@@ -67,7 +67,7 @@ describe('VAudio', () => {
   })
 
   it('should lock the volume when muted', () => {
-    render(() => <VAudio src={ SILENT_WAV } actions="play volume" muted />)
+    render(() => <VAudio src={ SILENT_WAV } actions="play progress volume" muted />)
 
     expect(screen.getByRole('button', { name: 'Unmute' })).toHaveClass('v-icon-btn--disabled')
     expect(screen.getByCSS('.v-media-volume .v-slider')).toHaveClass('v-input--disabled')
@@ -104,7 +104,7 @@ describe('VAudio', () => {
     const defaults = ref({})
     render(() => (
       <VDefaultsProvider defaults={ defaults.value }>
-        <VAudio src={ SILENT_WAV } actions="play volume" color="red" />
+        <VAudio src={ SILENT_WAV } actions="play progress volume" color="red" />
       </VDefaultsProvider>
     ))
 
