@@ -122,4 +122,4 @@ The `v-command-palette` component follows accessibility best practices:
 - Returns focus to the previously focused element on close
 - Supports full keyboard navigation without mouse interaction
 
-A custom input provided through the **#input** slot doesn't receive these attributes or the keyboard handling.
+When replacing the search field through the **#input** slot, bind the slot's **props** to your input so it keeps the keyboard handling and these attributes. The same applies to the **#item** slot: bind its **props** to a `v-list-item`.
