@@ -1,5 +1,7 @@
 // Components
-import { VList, VListItem } from '..'
+import { VList, VListItem, VListItemAction, VListSubheader } from '..'
+import { VCheckboxBtn } from '../../VCheckbox'
+import { VLocaleProvider } from '../../VLocaleProvider'
 
 // Utilities
 import { render, screen, showcase, userEvent } from '@test'
@@ -55,6 +57,51 @@ const stories = {
 }
 
 describe('VList', () => {
+  it.each([
+    { name: 'default LTR', density: 'default', rtl: false },
+    { name: 'comfortable LTR', density: 'comfortable', rtl: false },
+    { name: 'compact LTR', density: 'compact', rtl: false },
+    { name: 'compact RTL', density: 'compact', rtl: true },
+    { name: 'overridden control density', density: 'compact', controlDensity: 'default', rtl: false },
+  ] as const)('should align selection controls with subheaders ($name)', ({ density, controlDensity, rtl }) => {
+    render(() => (
+      <VLocaleProvider rtl={ rtl }>
+        <VList density={ density }>
+          <VListSubheader>Heading</VListSubheader>
+          <VListItem title="Item">
+            {{
+              prepend: () => (
+                <VListItemAction start>
+                  <VCheckboxBtn density={ controlDensity } modelValue />
+                </VListItemAction>
+              ),
+              append: () => (
+                <VListItemAction end>
+                  <VCheckboxBtn density={ controlDensity } modelValue />
+                </VListItemAction>
+              ),
+            }}
+          </VListItem>
+        </VList>
+      </VLocaleProvider>
+    ))
+
+    const subheader = screen.getByText('Heading').closest('.v-list-subheader')!
+    const subheaderStyles = getComputedStyle(subheader)
+    const subheaderRect = subheader.getBoundingClientRect()
+    const [startIcon, endIcon] = screen.getAllByCSS('.v-selection-control .v-icon')
+      .map(element => element.getBoundingClientRect())
+    const startEdge = rtl
+      ? subheaderRect.right - parseFloat(subheaderStyles.paddingRight)
+      : subheaderRect.left + parseFloat(subheaderStyles.paddingLeft)
+    const endEdge = rtl
+      ? subheaderRect.left + parseFloat(subheaderStyles.paddingLeft)
+      : subheaderRect.right - parseFloat(subheaderStyles.paddingRight)
+
+    expect(rtl ? startIcon.right : startIcon.left).toBeCloseTo(startEdge, 0)
+    expect(rtl ? endIcon.left : endIcon.right).toBeCloseTo(endEdge, 0)
+  })
+
   it('should set active item on route change', async () => {
     const router = createRouter({
       history: createWebHistory(),
