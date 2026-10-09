@@ -301,7 +301,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           hideDetails: true,
         },
         VMediaProgressBar: {
-          thumbSize: progressBarDefaults.value?.thumbSize ?? (stacked.value ? 10 : 16),
+          thumbSize: progressBarDefaults.value?.thumbSize ?? (
+            props.progressVariant && props.progressVariant !== 'default' ? undefined
+            : stacked.value ? 10
+            : 16
+          ),
         },
         // inner provider wins over outer ones, so outer `VMediaVolume.VSlider` is spread back on top
         VMediaVolume: {
