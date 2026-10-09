@@ -146,9 +146,7 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
     }, { immediate: true })
 
     watch(() => props.max, max => {
-      if (max) return
-
-      history.value = []
+      if (!max) history.value = []
     })
 
     function connectAnalyser () {
@@ -262,26 +260,26 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
 
     // one path, not a rect per bar: restyling hundreds of rects on every progress frame dominates the frame
     const path = computed(() => {
-      const { height: h } = viewBox.value
-      const baseline = h / (1 + mirror.value)
-      const w = barWidth.value
+      const boxHeight = viewBox.value.height
+      const baseline = boxHeight / (1 + mirror.value)
+      const thickness = barWidth.value
       const scale = width.value ? width.value / viewBox.value.width : 1
-      const renderedWidth = w * scale
+      const renderedWidth = thickness * scale
       // rounded corners on narrow bars are invisible and multiply the path's raster cost
       const radius = renderedWidth < 4 ? 0 : Math.min(Number(props.barRadius) || 0, renderedWidth / 2)
       let d = ''
 
-      heights.value.forEach((peak, index) => {
-        const barHeight = Math.max(1, peak * baseline)
-        const x = index * (w + barGap.value)
-        const y = mirror.value ? baseline - barHeight : (h - barHeight) / 2
+      heights.value.forEach((level, index) => {
+        const barHeight = Math.max(1, level * baseline)
+        const x = index * (thickness + barGap.value)
+        const y = mirror.value ? baseline - barHeight : (boxHeight - barHeight) / 2
         const ry = Math.min(radius, barHeight / 2)
         const rx = ry / scale
 
         d += ry > 0
-          ? `M${x + rx} ${y}h${w - 2 * rx}a${rx} ${ry} 0 0 1 ${rx} ${ry}v${barHeight - 2 * ry}a${rx} ${ry} 0 0 1 ${-rx} ${ry}` +
-            `h${2 * rx - w}a${rx} ${ry} 0 0 1 ${-rx} ${-ry}v${2 * ry - barHeight}a${rx} ${ry} 0 0 1 ${rx} ${-ry}z`
-          : `M${x} ${y}h${w}v${barHeight}h${-w}z`
+          ? `M${x + rx} ${y}h${thickness - 2 * rx}a${rx} ${ry} 0 0 1 ${rx} ${ry}v${barHeight - 2 * ry}a${rx} ${ry} 0 0 1 ${-rx} ${ry}` +
+            `h${2 * rx - thickness}a${rx} ${ry} 0 0 1 ${-rx} ${-ry}v${2 * ry - barHeight}a${rx} ${ry} 0 0 1 ${rx} ${-ry}z`
+          : `M${x} ${y}h${thickness}v${barHeight}h${-thickness}z`
       })
 
       return d

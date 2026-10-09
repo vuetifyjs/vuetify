@@ -153,12 +153,10 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
     }
 
     const labels = computed(() => ({
-      play: t('$vuetify.media.play'),
-      pause: t('$vuetify.media.pause'),
       seek: t('$vuetify.media.seek'),
       volume: t('$vuetify.media.volume'),
-      mute: t('$vuetify.media.mute'),
-      unmute: t('$vuetify.media.unmute'),
+      playAction: t(playing.value ? '$vuetify.media.pause' : '$vuetify.media.play'),
+      volumeAction: t(volume.value && !props.muted ? '$vuetify.media.mute' : '$vuetify.media.unmute'),
     }))
 
     const elapsedSeconds = toRef(() => progress.value / 100 * props.duration)
@@ -215,13 +213,13 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
     }))
 
     useRender(() => {
+      // inner provider wins over outer ones, so outer `VIconBtn` and `VMediaVolume.VSlider` defaults are spread back on top
       const innerDefaults = {
         VIconBtn: {
           variant: 'text',
-          color: props.color ?? buttonDefaults.value?.color,
+          color: props.color,
           ...buttonDefaults.value,
         },
-        // inner provider wins over outer ones, so outer `VMediaVolume.VSlider` is spread back on top
         VMediaVolume: {
           VSlider: {
             color: props.color,
@@ -261,9 +259,11 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
           (name === 'remaining' ? `-${currentTime.value.remaining}` : currentTime.value[name])
       }
 
+      const showTime = !isProgressInlined && !props.hideTime
+
       const progressRow = (
         <div class="v-audio-controls__progress">
-          { !isProgressInlined && !props.hideTime && (
+          { showTime && (
             <div key="elapsed" class="v-audio-controls__time">
               { timePart('elapsed') }
             </div>
@@ -271,7 +271,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
 
           <div class="v-audio-controls__seek">{ progressBar }</div>
 
-          { !isProgressInlined && !props.hideTime && (
+          { showTime && (
             <div key="total" class="v-audio-controls__time">
               { timePart('total') }
             </div>
@@ -283,11 +283,11 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         ...props.playProps,
         class: ['v-audio__action-play', props.playProps?.class],
         icon: playing.value ? '$pause' : '$play',
-        'aria-label': playing.value ? labels.value.pause : labels.value.play,
+        'aria-label': labels.value.playAction,
         onClick: togglePlay,
       }
 
-      const builtins: Record<string, () => JSX.Element> = {
+      const actionRenderers: Record<string, () => JSX.Element> = {
         '-': () => <VSpacer />,
         time: () => (
           <div class="v-audio-controls__time">
@@ -315,7 +315,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         if (name === 'progress') return progressRow
 
         const slot = name === 'prepend' || name === 'append' ? slots[name] : slots[`action.${name}`]
-        return slot?.(slotProps.value) ?? builtins[name]?.()
+        return slot?.(slotProps.value) ?? actionRenderers[name]?.()
       }
 
       const [gap, progressGap] = Array.isArray(props.gap) ? props.gap : [props.gap, props.gap]

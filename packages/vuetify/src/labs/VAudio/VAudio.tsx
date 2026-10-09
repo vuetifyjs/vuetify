@@ -25,20 +25,11 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { AudioProvide } from './shared'
-import type { VAudioControlsActionsSlot, VAudioControlsPropsSlot } from './VAudioControls'
+import type { VAudioControlsActionsSlot, VAudioControlsSlots } from './VAudioControls'
 import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VAudioSlots = {
-  [key: `action.${string}`]: VAudioControlsActionsSlot
+export type VAudioSlots = Omit<VAudioControlsSlots, 'default'> & {
   controls: VAudioControlsActionsSlot
-  play: VAudioControlsPropsSlot
-  progress: VAudioControlsPropsSlot
-  time: VAudioControlsActionsSlot
-  'time.elapsed': VAudioControlsActionsSlot
-  'time.remaining': VAudioControlsActionsSlot
-  'time.total': VAudioControlsActionsSlot
-  prepend: VAudioControlsActionsSlot
-  append: VAudioControlsActionsSlot
   loader: LoaderSlotProps
   error: { error?: MediaError | boolean }
   sources: never

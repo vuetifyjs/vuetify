@@ -35,6 +35,10 @@
       .v-audio-waveform__bars
         transform: translateX(calc(var(--v-audio-waveform-shift, 0) * var(--v-audio-waveform-step) * -1px))
 
+    @media (prefers-reduced-motion: reduce)
+      &--live .v-audio-waveform__bars
+        transform: none
+
   @include tools.layer('trumps')
     @media (forced-colors: active)
       .v-audio-waveform__svg

@@ -69,8 +69,7 @@ describe('VAudio', () => {
   it('should lock the volume when muted', () => {
     render(() => <VAudio src={ SILENT_WAV } actions="play volume" muted />)
 
-    const button = screen.getByRole('button', { name: 'Unmute' })
-    expect(button).toHaveClass('v-icon-btn--disabled')
+    expect(screen.getByRole('button', { name: 'Unmute' })).toHaveClass('v-icon-btn--disabled')
     expect(screen.getByCSS('.v-media-volume .v-slider')).toHaveClass('v-input--disabled')
   })
 
@@ -86,6 +85,18 @@ describe('VAudio', () => {
     vm.value!.toggleMuted()
     await nextTick()
     expect(volume.value).toBe(30)
+  })
+
+  it('should let a custom volume slot change the volume', async () => {
+    const volume = ref(100)
+    render(() => (
+      <VAudio src={ SILENT_WAV } actions="custom-volume" v-model:volume={ volume.value }>
+        {{ 'action.custom-volume': ({ volume }) => <button onClick={ () => volume.value = 50 }>Half</button> }}
+      </VAudio>
+    ))
+
+    await userEvent.click(screen.getByRole('button', { name: 'Half' }))
+    expect(volume.value).toBe(50)
   })
 
   it('should pass volume slider values as defaults users can override', async () => {

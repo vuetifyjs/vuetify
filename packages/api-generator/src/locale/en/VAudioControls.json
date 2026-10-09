@@ -1,22 +1,23 @@
 {
-  "description": "Subcomponent for `v-audio` used to display the transport bar.",
+  "description": "Controls bar of `v-audio`, also usable on its own.",
   "props": {
-    "actions": "Which built-in and custom actions to render, in order. Accepts an array or a comma/space separated string. Built-ins: `play`, `progress` (renders the seek bar inline and switches to a single row), `time`, `elapsed`, `remaining`, `volume` and `-` (a spacer). Any other name renders the `action.<name>` slot, which can also replace a built-in. `prepend` and `append` slots render at the edges unless listed.",
+    "actions": "Which built-in and custom actions to render, in order. Accepts an array or a space/comma separated string. Built-ins: `play`, `progress` (when omitted, the seek bar gets its own row above the actions), `time`, `elapsed`, `remaining`, `volume`, and `-` (a spacer). Any other name renders the `action.<name>` slot, which can also replace a built-in. `prepend` and `append` slots render at the edges unless listed.",
     "color": "General color applied to icons and the seek bar.",
-    "duration": "Total duration of the audio, used to calculate the displayed time.",
+    "duration": "Duration of the audio, in seconds.",
     "gap": "Space between actions. Pass `[actions, progress]` to set the gap between actions and the gap around the seek bar separately.",
-    "hideThumb": "Hides the progress bar thumb.",
-    "hideTime": "Hides the time display.",
-    "playbackRate": "Current playback rate, synced with the media element. Use it with the `setPlaybackRate` slot prop to build a rate control.",
-    "playing": "Applies the correct icon to the default play button.",
+    "hideThumb": "Hides the seek bar thumb.",
+    "hideTime": "Hides the elapsed and total time under the stacked seek bar.",
+    "muted": "Locks the volume control in the muted state.",
+    "playbackRate": "Playback rate. Slots receive it with `setPlaybackRate` to build a rate control.",
+    "playing": "Playing state. Switches the play button to the pause icon.",
     "playProps": "Props passed to the default play button, e.g. `color`, `variant` or `size`.",
-    "progress": "Controls the playback position (0 ~ 100).",
-    "progressVariant": "Passed to the `variant` prop of the progress bar.",
-    "readonly": "Locks the seek bar. It stays focusable, playback and volume remain usable.",
-    "seekStep": "Seconds moved by the arrow keys. Holding Shift moves 10x as far, or pass `[step, shiftStep]` to set both.",
-    "volume": "Volume value passed to the underlying control and slots.",
-    "volumeProps": "Props passed down to the VMediaVolume component.",
-    "volumeSlider": "Passed to the `slider` prop of the volume control."
+    "progress": "Current playback time, as a percentage of the duration (0 ~ 100).",
+    "progressVariant": "`pill` gives the seek bar the MD3 look with a bar-shaped thumb. `wavy` also draws the played part as a wave.",
+    "readonly": "Locks the seek bar while playback, volume and custom actions stay usable. The bar stays focusable.",
+    "seekStep": "Seconds moved by the arrow keys on the seek bar. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both.",
+    "volume": "Volume (0 ~ 100).",
+    "volumeProps": "Props passed to the VMediaVolume component.",
+    "volumeSlider": "`visible` shows the volume slider, `hover` keeps it collapsed until the control is hovered or focused, `hidden` leaves only the mute button."
   },
   "events": {
     "update:playing": "Emitted when the playing state changes.",
@@ -28,11 +29,11 @@
     "click:stop": "Emitted when `stop` is called from a slot."
   },
   "slots": {
-    "default": "Replaces the entire contents of the control bar.",
+    "default": "Replaces all controls. Receives the player state and methods.",
     "prepend": "Additional content on the left within the control bar.",
     "append": "Additional content on the right within the control bar.",
     "play": "Replaces the play button. Receives `props` to bind on your own button.",
-    "progress": "Replaces the seek bar. Receives `props` to bind on `v-media-progress-bar` or `v-audio-waveform`.",
+    "progress": "Replaces the seek bar, also when it is stacked. Receives `props` to bind on `v-media-progress-bar` or `v-audio-waveform`.",
     "time": "Replaces the text of the `time` action. Receives the player state, formatted times are in `currentTime`.",
     "time.elapsed": "Replaces the elapsed time wherever it is shown.",
     "time.remaining": "Replaces the remaining time, including its minus sign, wherever it is shown.",
@@ -40,6 +41,6 @@
     "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods."
   },
   "exposed": {
-    "toggleMuted": "Switches between 0 and the last non-zero volume."
+    "toggleMuted": "Switches between 0 and the last non-zero volume. Does nothing while **muted**."
   }
 }

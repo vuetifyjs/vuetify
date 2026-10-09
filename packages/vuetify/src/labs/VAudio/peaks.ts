@@ -36,7 +36,7 @@ const SLICE_BYTES = 4e6
 // kills the tab past ~90 minutes, before the promise can reject.
 const MAX_WHOLE_DURATION = 30 * 60
 
-// MPEG audio and ADTS AAC frames resync mid-stream, so any byte slice decodes on its own.
+// ID3 tag or MPEG/ADTS frame sync: these frames resync mid-stream, so any byte slice decodes on its own
 function isSliceable (head: Uint8Array) {
   return (head[0] === 0x49 && head[1] === 0x44 && head[2] === 0x33) ||
     (head[0] === 0xFF && (head[1] & 0xE0) === 0xE0)
@@ -53,8 +53,8 @@ export async function decodePeaks (source: Blob, options: {
   const reader = source.stream().getReader()
   const audioContext = new OfflineAudioContext(1, 1, 44100)
   const expectedWindows = duration * WINDOWS_PER_SECOND
-  const sums = new Float64Array(Math.min(buckets, Math.max(1, Math.floor(expectedWindows))))
-  const counts = new Uint32Array(sums.length)
+  const bucketLevels = new Float64Array(Math.min(buckets, Math.max(1, Math.floor(expectedWindows))))
+  const bucketCounts = new Uint32Array(bucketLevels.length)
   let windows: number[] = []
   let parts: Uint8Array<ArrayBuffer>[] = []
   let size = 0
@@ -62,7 +62,7 @@ export async function decodePeaks (source: Blob, options: {
   let sliceable: boolean | undefined
 
   function bucketPeaks () {
-    return Array.from(sums, (sum, index) => strategy === 'rms' ? Math.sqrt(sum / (counts[index] || 1)) : sum)
+    return Array.from(bucketLevels, (level, index) => strategy === 'rms' ? Math.sqrt(level / (bucketCounts[index] || 1)) : level)
   }
 
   async function flush () {
@@ -82,12 +82,12 @@ export async function decodePeaks (source: Blob, options: {
     }
 
     levels.forEach(level => {
-      const index = Math.min(sums.length - 1, Math.floor(windowIndex++ / expectedWindows * sums.length))
+      const index = Math.min(bucketLevels.length - 1, Math.floor(windowIndex++ / expectedWindows * bucketLevels.length))
       if (strategy === 'rms') {
-        sums[index] += level * level
-        counts[index]++
+        bucketLevels[index] += level * level
+        bucketCounts[index]++
       } else {
-        sums[index] = Math.max(sums[index], level)
+        bucketLevels[index] = Math.max(bucketLevels[index], level)
       }
     })
     options.onProgress?.(bucketPeaks())

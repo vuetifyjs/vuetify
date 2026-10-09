@@ -10,45 +10,35 @@
     "loop": "Restarts playback when the end is reached. The `ended` event is not emitted while looping.",
     "muted": "Disables the playback sound and locks the volume control.",
     "preload": "Forwarded to the native audio element. The default `metadata` obtains the duration without downloading the whole file.",
-    "readonly": "Locks the seek surface. Playback, volume and custom actions stay usable.",
+    "readonly": "Locks the seek bar while playback, volume and custom actions stay usable. Implied by **disabled**.",
     "rounded": "Applies a border radius to the container.",
-    "src": "Media file URL",
-    "srcObject": "Sets the source to a MediaStream, MediaSource, or Blob object. Live streams report an infinite duration, so the time display shows elapsed only.",
+    "src": "Media file URL.",
+    "srcObject": "Sets the source to a MediaStream, MediaSource, or Blob object.",
     "startAt": "Time to start playback from, given as seconds or formatted time (`'1:30'`). Applies to the first loaded file only.",
-    "type": "Media file type (optional). When set, the source is rendered as a nested `<source>` element so the hint is honored."
+    "type": "MIME type of **src**, e.g. `audio/mpeg`. When set, **src** renders as a nested `<source>` element."
   },
   "events": {
     "loaded": "Emitted when the audio has loaded its metadata and is ready to be played.",
     "ended": "Emitted when playback reaches the end. Not emitted while **loop** is set.",
     "error": "Emitted with the native MediaError when the audio fails to load.",
     "update:playing": "Emitted when the playing state changes.",
-    "update:progress": "Emitted when the playback position changes, as a percentage (0-100).",
+    "update:progress": "Emitted with the playback position in percent (0 ~ 100).",
     "update:volume": "Emitted when the volume changes.",
     "update:playbackRate": "Emitted when the playback rate changes.",
-    "update:error": "Emitted when the error state changes."
+    "update:error": "Emitted with the native MediaError on failure, or `false` once the error is cleared."
   },
   "slots": {
     "controls": "Replaces the control bar with custom content.",
-    "prepend": "Additional content on the left within the control bar.",
-    "append": "Additional content on the right within the control bar.",
     "loader": "Slot used to replace the loader displayed while the audio is being loaded.",
     "error": "Replaces the warning icon in the overlay shown over the controls in the error state. Receives the MediaError.",
-    "sources": "Slot for content placed within the native `<audio>` element.",
-    "play": "Replaces the play button. Receives `props` to bind on your own button.",
-    "progress": "Replaces the seek bar. Receives `props` to bind on `v-media-progress-bar` or `v-audio-waveform`.",
-    "time": "Replaces the text of the `time` action. Receives the player state, formatted times are in `currentTime`.",
-    "time.elapsed": "Replaces the elapsed time wherever it is shown.",
-    "time.remaining": "Replaces the remaining time, including its minus sign, wherever it is shown.",
-    "time.total": "Replaces the total duration wherever it is shown.",
-    "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods."
+    "sources": "Slot for content placed within the native `<audio>` element."
   },
   "exposed": {
-    "audio": "The underlying native audio element.",
-    "play": "Start playback.",
-    "pause": "Pause playback.",
-    "stop": "Pause playback and return to the start.",
-    "seek": "Move the playback position with `{ to }` or `{ by }`. Numbers are seconds, strings ending in `%` are relative to the duration, e.g. `seek({ to: '50%' })` or `seek({ by: -10 })`.",
-    "retry": "Clear the error state and load the source again.",
-    "toggleMuted": "Switches between 0 and the last non-zero volume."
+    "audio": "The native `<audio>` element.",
+    "play": "Starts playback.",
+    "pause": "Pauses playback.",
+    "stop": "Pauses playback and returns to the start.",
+    "seek": "Moves the playback position with `{ to }` or `{ by }`. Numbers are seconds, strings ending in `%` are relative to the duration, e.g. `seek({ to: '50%' })` or `seek({ by: -10 })`.",
+    "retry": "Clears the error state and loads the source again."
   }
 }
