@@ -179,7 +179,6 @@ export default {
     pause: 'Peata',
     seek: 'Otsi',
     volume: 'Helitugevus',
-    showVolume: 'Näita helitugevuse regulaatorit',
     mute: 'Vaigista',
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',

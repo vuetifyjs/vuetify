@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Videos
   title: Video component
@@ -43,8 +44,9 @@ A basic example of the video component.
 | Component | Description |
 | - | - |
 | [v-video](/api/v-video/) | Primary Component |
-| [v-video-controls](/api/v-video-controls/) | Sub-component used to display a video player controls |
-| [v-video-volume](/api/v-video-volume/) | Sub-component used to display a volume control |
+| [v-video-controls](/api/v-video-controls/) | Control bar |
+| [v-media-progress-bar](/api/v-media-progress-bar/) | Progress bar with chapters |
+| [v-media-volume](/api/v-media-volume/) | Volume control |
 
 <ApiInline hide-links />
 
@@ -56,13 +58,25 @@ This component is only useful if you self-host videos or when you can reliably o
 
 ## Guide
 
-The `v-video` component lets you display videos with controls that nicely fit into your app design. It comes equiped with common keyboard shortcuts, and three predefined control variants.
+The `v-video` component lets you display videos with controls that nicely fit into your app design. It comes equipped with common keyboard shortcuts, and a control bar composed from built-in and custom actions.
 
 All attributes that are not explicitly defined in the component API (`autoplay`, `muted`, `loop`, etc.) are passed to the underlying native HTML video element.
 
 ### Props
 
 The `v-video` component has several props that allow you to customize its appearance and behavior.
+
+#### Actions
+
+The **actions** prop lists the controls to render, in order: `play`, `progress`, `time`, `elapsed`, `remaining`, `volume`, `fullscreen` and `-` for a spacer. Without `progress` in the list, the progress bar is stacked on top of the control bar. Any other name renders the `action.<name>` slot. With **pills**, every action gets its own box, and actions wrapped in parentheses share one, e.g. `play (prev next) progress (volume fullscreen)`. A `-` inside parentheses splits the box in two. In the array form, a nested array is one box. Names are delimited with spaces or commas. Use **hide-controls** to remove the control bar entirely.
+
+<ExamplesExample file="v-video/prop-actions" />
+
+#### Chapters
+
+The **chapters** prop splits the progress bar at each `start`, given in seconds or as formatted time (`'1:10'`). The hover tooltip and the announced position include the chapter `title`.
+
+<ExamplesExample file="v-video/prop-chapters" />
 
 #### Image
 
@@ -75,6 +89,15 @@ You can display a cover image before the video is loaded.
 Video can automatically skip to certain timestamp upon load. It can be useful to let the users continue where they stopped last time.
 
 <ExamplesExample file="v-video/prop-start-at" />
+
+::: info
+**start-at** applies to the first loaded file only. To resume a later file, seek from the `loaded` event, which fires for every file:
+
+```html
+<v-video :src="file.src" @loaded="el => el.currentTime = file.resumeAt" />
+```
+
+:::
 
 #### Color
 
@@ -120,7 +143,7 @@ Optional **header** slot make it possible to put additional content on top of th
 
 #### Append and prepend
 
-`v-video` has `append` and `prepend` slots. You can place custom controls in them.
+`v-video` has `append` and `prepend` slots. You can place custom controls in them. They render at the edges of the control bar, unless you list `prepend` or `append` in **actions** to put them elsewhere.
 
 <ExamplesExample file="v-video/slot-append-and-prepend" />
 
@@ -136,7 +159,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 ### Video card
 
-Props like `floating`, `detached` and `split-time` can help you seamlesly integrate the video within card layout.
+Props like `floating` and `detached`, together with `elapsed` and `remaining` actions around the progress bar, help fit the video into a card layout.
 
 <ExamplesExample file="v-video/misc-in-card" />
 

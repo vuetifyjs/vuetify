@@ -179,7 +179,6 @@ export default {
     pause: 'Pausa',
     seek: 'Sök',
     volume: 'Volym',
-    showVolume: 'Visa volymkontroll',
     mute: 'Stäng av ljud',
     unmute: 'Slå på ljud',
     enterFullscreen: 'Helskärm',

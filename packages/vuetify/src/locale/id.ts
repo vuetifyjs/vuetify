@@ -179,7 +179,6 @@ export default {
     pause: 'Jeda',
     seek: 'Cari',
     volume: 'Volume',
-    showVolume: 'Tampilkan kontrol volume',
     mute: 'Bisukan',
     unmute: 'Bunyikan',
     enterFullscreen: 'Layar penuh',

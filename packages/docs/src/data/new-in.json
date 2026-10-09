@@ -87,7 +87,8 @@
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "pauseOnHover": "4.3.0"
     },
     "examples": {
       "misc-vertical": "3.9.0",
@@ -506,6 +507,11 @@
       "blur": "4.3.0",
       "focus": "4.3.0",
       "isFocused": "4.3.0"
+    }
+  },
+  "VRating": {
+    "props": {
+      "iconSize": "4.3.0"
     }
   },
   "VRow": {

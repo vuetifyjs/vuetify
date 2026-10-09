@@ -179,7 +179,6 @@ export default {
     pause: '一時停止',
     seek: 'シーク',
     volume: '音量',
-    showVolume: '音量コントロールを表示',
     mute: 'ミュート',
     unmute: 'ミュート解除',
     enterFullscreen: '全画面表示',

@@ -179,7 +179,6 @@ export default {
     pause: '暂停',
     seek: '跳转',
     volume: '音量',
-    showVolume: '显示音量控制',
     mute: '静音',
     unmute: '取消静音',
     enterFullscreen: '全屏',

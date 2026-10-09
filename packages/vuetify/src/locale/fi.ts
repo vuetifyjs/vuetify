@@ -179,7 +179,6 @@ export default {
     pause: 'Tauko',
     seek: 'Hae',
     volume: 'Äänenvoimakkuus',
-    showVolume: 'Näytä äänenvoimakkuuden säädin',
     mute: 'Mykistä',
     unmute: 'Poista mykistys',
     enterFullscreen: 'Koko näyttö',

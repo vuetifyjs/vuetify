@@ -179,7 +179,6 @@ export default {
     pause: '暫停',
     seek: '搜尋',
     volume: '音量',
-    showVolume: '顯示音量控制',
     mute: '靜音',
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',

@@ -1,0 +1,25 @@
+{
+  "description": "Seekable progress bar for media players, with optional chapters and a hover tooltip.",
+  "props": {
+    "buffer": "End of the buffered range, in seconds.",
+    "chapterGap": "Width of the gap between chapters.",
+    "chapters": "Splits the bar into chapters. Each item needs a `start`, given as seconds or formatted time (`'1:30'`, `'1:02:30'`), and can have a `title` shown in the tooltip.",
+    "elevation": "Elevation of the thumb. Ignored with `pill` and `wavy` variants.",
+    "max": "Duration of the media, in seconds.",
+    "modelValue": "Current playback time, in seconds.",
+    "readonly": "Bar stays focusable, but does not react to pointer or keyboard.",
+    "step": "Seconds moved by the arrow keys. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both. Page Up and Page Down move by 10% of **max**.",
+    "thumb": "Shows the thumb at the current position.",
+    "thumbSize": "Size of the thumb.",
+    "tooltip": "Shows the time under the pointer. Accepts an object with `location` (`top` or `bottom`) and `offset`.",
+    "variant": "`pill` follows MD3 with a bar-shaped thumb. `wavy` additionally draws the played part as a wave."
+  },
+  "events": {
+    "update:modelValue": "Emitted when the position changes by clicking, dragging or keyboard.",
+    "drag:start": "Emitted with the current position when the user starts dragging.",
+    "drag:end": "Emitted with the final position when the user stops dragging."
+  },
+  "slots": {
+    "tooltip": "Replaces the tooltip content. Receives `time` (formatted), `chapter` and `seconds`."
+  }
+}
