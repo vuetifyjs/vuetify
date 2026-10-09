@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
@@ -20,6 +21,39 @@
       font-size: var(--v-btn-size);
       min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
       padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
+    }
+  }
+}
+
+@mixin -declarations ($properties) {
+  @each $property, $value in $properties {
+    @if meta.type-of($value) == 'map' {
+      #{$property} {
+        @include -declarations($value);
+      }
+    } @else {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+@mixin button-named-sizes () {
+  $transition: ();
+  @each $property in $button-transition-property {
+    $transition: list.append($transition, $property .28s settings.$standard-easing, comma);
+  }
+  $transition: list.append($transition, border-radius $button-border-radius-transition, comma);
+
+  @each $name, $properties in $button-named-sizes {
+    .v-btn--size-#{$name} {
+      transition: $transition;
+      @include -declarations($properties);
+
+      @if map.has-key($properties, '--v-btn-border-radius-pressed') {
+        &:active {
+          border-radius: var(--v-btn-border-radius-pressed);
+        }
+      }
     }
   }
 }
