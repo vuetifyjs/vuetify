@@ -731,7 +731,12 @@
       "indentLines": "3.9.0",
       "indentLinesColor": "3.12.0",
       "indentLinesOpacity": "3.12.0",
-      "itemsRegistration": "3.11.0"
+      "itemsRegistration": "3.11.0",
+      "hoverable": "4.3.0",
+      "hovered": "4.3.0"
+    },
+    "events": {
+      "update:hovered": "4.3.0"
     },
     "slots": {
       "header": "3.10.0",

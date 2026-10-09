@@ -7,6 +7,8 @@
     "expandIcon": "Icon used to indicate that a node can be expanded.",
     "fluid": "Removes indentation from nested items.",
     "hideActions": "Hide the expand icon and loading indicator next to each item title.",
+    "hoverable": "Tracks the node under the cursor and exposes it through `v-model:hovered`.",
+    "hovered": "The value of the node under the cursor, or `null` when the cursor is outside the treeview. Only updated when `hoverable` is `true`.",
     "indeterminateIcon": "Icon used when node is in an indeterminate state. Only visible when `selectable` is `true`.",
     "itemChildren": "Property on supplied `items` that contains its children.",
     "items": "An array of items used to build the treeview.",
@@ -38,6 +40,7 @@
     "click:open": "Emits the item when it is clicked to open.",
     "click:select": "Emits the item when it is clicked to select.",
     "update:activated": "Emits the array of active items when this value changes.",
+    "update:hovered": "Emits the value of the node under the cursor, or `null` when the cursor leaves the treeview.",
     "update:opened": "Emits the array of open items when this value changes.",
     "update:selected": "Emits the array of selected items when this value changes."
   }
