@@ -31,7 +31,7 @@
     "header": "Slot for rendering custom group headers when using nested items. Receives `{ props }` containing the group's header item data plus activator props for expand/collapse functionality."
   },
   "exposed": {
-    "activeDescendant": "A computed ref that returns the id of the item at the current navigation index when using `navigationStrategy=\"track\"`, or undefined when no item is selected. Bind it to `aria-activedescendant` of the element that keeps focus, such as a search input.",
+    "activeDescendant": "The id of the highlighted (tracked) item when using `navigationStrategy=\"track\"`, or undefined when no item is highlighted. Bind it to `aria-activedescendant` of the element that keeps focus, such as a search input.",
     "children": "The nested list items within the component.",
     "focus": "Focus the list item.",
     "getPath": "Get the position of an item within the nested structure.",

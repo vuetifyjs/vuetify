@@ -167,6 +167,7 @@ describe('VList', () => {
         v-model:navigationIndex={ navigationIndex.value }
         items={ items }
         navigationStrategy="track"
+        activatable
       />
     ))
 
@@ -177,7 +178,7 @@ describe('VList', () => {
 
     const item = document.getElementById(listRef.value!.activeDescendant!)
     expect(item).toHaveTextContent('Beta')
-    expect(screen.getByRole('list')).toHaveAttribute('aria-activedescendant', item!.id)
+    expect(screen.getByRole('listbox')).toHaveAttribute('aria-activedescendant', item!.id)
   })
 
   describe('value-comparator', () => {

@@ -201,7 +201,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
 
     const uid = useId()
     const activeDescendant = toRef(() =>
-      props.navigationStrategy === 'track' && navigationIndex.value >= 0
+      props.navigationStrategy === 'track' && items.value[navigationIndex.value]?.type === 'item'
         ? `v-list-item-${uid}-${navigationIndex.value}`
         : undefined
     )

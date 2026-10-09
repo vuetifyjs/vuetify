@@ -279,6 +279,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     useRender(() => {
       const dialogProps = VDialog.filterProps(omit(props, ['modelValue', 'class', 'style']))
+      const hasResults = filteredItems.value.length > 0
 
       return (
         <VDialog
@@ -316,8 +317,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     flat
                     bgColor="transparent"
                     role="combobox"
-                    aria-expanded={ filteredItems.value.length > 0 }
-                    aria-controls={ filteredItems.value.length > 0 ? listId : undefined }
+                    aria-expanded={ hasResults }
+                    aria-controls={ hasResults ? listId : undefined }
                     aria-autocomplete="list"
                     aria-activedescendant={ listRef.value?.activeDescendant }
                     onKeydown={ handleSearchKeydown }
@@ -331,11 +332,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 <div class="v-command-palette__content">
                   { slots['list.prepend']?.() }
 
-                  { filteredItems.value.length > 0 ? (
+                  { hasResults ? (
                     <VList
                       key="list"
                       ref={ listRef }
-                      id={ listId }
                       class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }
@@ -343,6 +343,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       itemProps
                       activatable
                       { ...props.listProps }
+                      id={ listId }
                       navigationStrategy="track"
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }

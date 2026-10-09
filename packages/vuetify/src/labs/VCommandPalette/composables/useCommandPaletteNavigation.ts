@@ -59,7 +59,7 @@ export function useCommandPaletteNavigation (
       return
     }
 
-    selectedIndex.value = 0
+    selectedIndex.value = -1
     selectedItemKey.value = undefined
   }, { immediate: true })
 
@@ -97,7 +97,7 @@ export function useCommandPaletteNavigation (
       return
     }
 
-    selectedIndex.value = 0
+    selectedIndex.value = -1
     selectedItemKey.value = undefined
   }
 
