@@ -124,8 +124,9 @@ $stop-size: 4px
     &--variant-pill,
     &--variant-wavy
       --v-media-progress-bar-handle: 0px
-      // without a handle the gap closes at both ends, so a full or empty bar has no notch
-      --v-media-progress-bar-gap: min(#{$media-progress-bar-handle-gap} / 2, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
+      // without a handle the gap closes at both ends, so a full or empty bar has no notch;
+      // halving keeps a sliver of fill visible right from the start
+      --v-media-progress-bar-gap: min(#{$media-progress-bar-handle-gap} / 2, var(--v-media-progress-bar-center) / 2, (100cqw - var(--v-media-progress-bar-center)) / 2)
       // handle center in track coordinates, same travel as the thumb transform
       --v-media-progress-bar-center: calc(var(--v-media-progress-bar-handle) / 2 + (100cqw - var(--v-media-progress-bar-handle)) * var(--v-media-progress-bar-ratio) / 100)
       --v-media-progress-bar-before: calc(var(--v-media-progress-bar-center) - var(--v-media-progress-bar-handle) / 2 - var(--v-media-progress-bar-gap))
@@ -157,8 +158,7 @@ $stop-size: 4px
 
       .v-media-progress-bar__thumb
         border-radius: calc(var(--v-media-progress-bar-handle) / 2)
-        // sizes meant for a round thumb are too short for a handle
-        height: max(var(--v-media-progress-bar-thumb-size, calc(var(--v-media-progress-bar-height, #{$media-progress-bar-height}) + 8px)), 20px)
+        height: var(--v-media-progress-bar-thumb-size, max(var(--v-media-progress-bar-height, #{$media-progress-bar-height}) + 8px, 20px))
         width: var(--v-media-progress-bar-handle)
 
       // stop indicator, clipped like the background; its offset shrinks on thin bars
@@ -177,7 +177,7 @@ $stop-size: 4px
 
     // played part is a static sine; without a handle a narrower gap still separates it from the track
     &--variant-wavy
-      --v-media-progress-bar-gap: min(2px, var(--v-media-progress-bar-center), 100cqw - var(--v-media-progress-bar-center))
+      --v-media-progress-bar-gap: min(2px, var(--v-media-progress-bar-center) / 2, (100cqw - var(--v-media-progress-bar-center)) / 2)
 
       .v-media-progress-bar__track
         overflow: visible
@@ -207,16 +207,17 @@ $stop-size: 4px
       width: 100%
 
       // dashes are measured along the curve, horizontal distances get stretched to match;
-      // round caps reach half a stroke past each dash end, so the dash is shortened by one stroke
+      // round caps reach half a stroke past each dash end, so the dash is shortened by one stroke;
+      // in less room than a stroke the zero-length dash paints as a dot that grows into it
       > path
-        --v-media-progress-bar-wave-length: max(0px, min(var(--v-media-progress-bar-wave-end), var(--v-media-progress-bar-before)) - var(--v-media-progress-bar-wave-start) - var(--v-media-progress-bar-wave-stroke))
+        --v-media-progress-bar-wave-space: max(0px, min(var(--v-media-progress-bar-wave-end), var(--v-media-progress-bar-before)) - var(--v-media-progress-bar-wave-start))
+        --v-media-progress-bar-wave-width: min(var(--v-media-progress-bar-wave-space), var(--v-media-progress-bar-wave-stroke))
         fill: none
         stroke: currentColor
-        stroke-dasharray: calc(var(--v-media-progress-bar-wave-length) * var(--v-media-progress-bar-wave-stretch)) 100000px
-        stroke-dashoffset: calc((var(--v-media-progress-bar-wave-start) + var(--v-media-progress-bar-wave-stroke) / 2) * var(--v-media-progress-bar-wave-stretch) * -1)
+        stroke-dasharray: calc((var(--v-media-progress-bar-wave-space) - var(--v-media-progress-bar-wave-width)) * var(--v-media-progress-bar-wave-stretch)) 100000px
+        stroke-dashoffset: calc((var(--v-media-progress-bar-wave-start) + var(--v-media-progress-bar-wave-width) / 2) * var(--v-media-progress-bar-wave-stretch) * -1)
         stroke-linecap: round
-        // a zero-length dash still paints its round caps as a dot
-        stroke-width: clamp(0px, var(--v-media-progress-bar-wave-length) * 1000, var(--v-media-progress-bar-wave-stroke))
+        stroke-width: var(--v-media-progress-bar-wave-width)
 
     &__tooltip
       background: $media-progress-bar-tooltip-background
