@@ -25,8 +25,6 @@ const map = new Map(components.flatMap(file => {
   return Array.from(matches, m => [m[1] || m[2], file.replace('src/', '@/').replace('.ts', '')])
 }))
 
-const viteSSR = process.env.TEST ? () => null : (await import('vite-ssr/plugin.js').then(m => m.default))
-
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
@@ -55,7 +53,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       vueJsx({ optimize: false, enableObjectSlots: false }),
-      viteSSR(),
       Components({
         dts: !process.env.TEST,
         resolvers: [

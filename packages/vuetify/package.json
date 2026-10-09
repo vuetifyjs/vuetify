@@ -129,7 +129,7 @@
   "scripts": {
     "watch": "pnpm build:lib --watch",
     "dev": "NODE_ENV=development vite",
-    "dev:ssr": "NODE_ENV=development VITE_SSR=true vite-ssr",
+    "dev:ssr": "NODE_ENV=development VITE_SSR=true node dev/server.js",
     "dev:prod": "vite build -w",
     "dev:typecheck": "vue-tsc --noEmit --skipLibCheck --project ./tsconfig.dev.json",
     "build": "rimraf lib dist && pnpm build:lib && concurrently \"pnpm build:dist\" \"pnpm build:types:lib\" -n \"dist,types\" --kill-others-on-fail -gr && pnpm build:types:bundle",
@@ -210,7 +210,6 @@
     "unplugin-vue-components": "catalog:",
     "upath": "catalog:",
     "vite-live-preview": "catalog:",
-    "vite-ssr": "catalog:",
     "vitest": "catalog:",
     "vue": "catalog:",
     "vue-i18n": "catalog:",

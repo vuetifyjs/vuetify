@@ -33,7 +33,6 @@ catalog:
   vite-plugin-pwa: '^1.3.0'
   vite-plugin-vue-layouts: '^0.11.0'
   vite-plugin-inspect: 11.3.3
-  vite-ssr: '^0.17.2'
   vite-live-preview: '^0.4.0'
   unplugin-auto-import: 19.3.0
   unplugin-vue-components: '^0.28.0'
@@ -236,8 +235,6 @@ overrides:
   '@vue/babel-plugin-jsx': npm:@vuetify/babel-plugin-jsx@1.6.0
   brilliant-errors>bumpp: '-'
   brilliant-errors>vitest: '-'
-  vite-ssr>react-router-dom: '-'
-  vite-ssr>react-ssr-prepass: '-'
 
 patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
