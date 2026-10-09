@@ -82,11 +82,11 @@ Without `progress` in the list, the seek bar gets its own row above the actions,
 
 `v-audio-waveform` replaces the seek bar through the **progress** slot. Its `props` fit both `v-media-progress-bar` and `v-audio-waveform`, so `v-bind="props"` wires position, duration and seeking. Pass **peaks**, an array of amplitudes between 0 and 1, one per bar. Compute them where the file is produced and store them alongside it.
 
-<ExamplesExample file="v-audio/prop-waveform" />
+<ExamplesExample file="v-audio/prop-waveform-peaks" />
 
-The waveform never downloads the file itself. To decode in the browser, pass the file as a `Blob` to **peaks-source**: a `File` picked in `v-file-input`, or the result of your own `fetch`.
+To decode in the browser, pass the file as a `Blob` to **peaks-source**: a local file or a server response.
 
-<ExamplesExample file="v-audio/prop-peaks-source" />
+<ExamplesExample file="v-audio/prop-waveform-peaks-source" />
 
 #### Readonly and start position
 
@@ -135,7 +135,7 @@ The following are a collection of examples that demonstrate more advanced and re
 
 Nested defaults restyle every button in the controls at once, while slots rebuild the seek row and add track navigation.
 
-<ExamplesExample file="v-audio/misc-mobile" />
+<ExamplesExample file="v-audio/misc-mobile-player" />
 
 ### Waveform on its own
 
@@ -146,7 +146,3 @@ Nested defaults restyle every button in the controls at once, while slots rebuil
 ## Accessibility
 
 The seek bar is a `role="slider"` that responds to the arrow keys (hold <kbd>Shift</kbd> for 10× steps), <kbd>Page Up</kbd> / <kbd>Page Down</kbd> and <kbd>Home</kbd> / <kbd>End</kbd>. Every built-in button carries a label from the `$vuetify.media.*` locale keys; give your own slot buttons an `aria-label`.
-
-Like native players, the timeline and controls are not mirrored in RTL. Components rendered in slots keep the app's RTL setting, so wrap a custom seek control in `<v-locale-provider :rtl="false">` to match, and set `dir="auto"` on slot text such as a title.
-
-The native `<audio>` element stays in the DOM but is not exposed to assistive technology: browsers hide `audio` without a `controls` attribute, and giving it one would announce a second, duplicate set of controls. The component's own controls are the accessible interface.

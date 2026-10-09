@@ -18,7 +18,7 @@
     "seekStep": "Seconds moved by the arrow keys on the seek bar. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both.",
     "volume": "Volume (0 ~ 100).",
     "volumeProps": "Props passed to the VMediaVolume component.",
-    "volumeSlider": "`visible` shows the volume slider, `hover` keeps it collapsed until the control is hovered or focused, `hidden` leaves only the mute button."
+    "volumeSlider": "`visible` shows the volume slider, `hover` keeps it collapsed until the control is hovered or focused, `hidden` leaves only the mute button. Defaults to `hover` when `progress` is placed in `actions`, otherwise `visible`."
   },
   "events": {
     "update:playing": "Emitted when the playing state changes.",

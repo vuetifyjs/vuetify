@@ -41,8 +41,9 @@
     &__actions
       align-items: center
       display: flex
-      flex: 1 0 auto
+      flex: 1 1 auto
       gap: var(--v-audio-controls-gap)
+      min-width: 0
 
       .v-audio-controls__progress
         margin-inline: var(--v-audio-controls-progress-gap)
@@ -73,8 +74,9 @@
     &__volume
       align-items: center
       display: flex
-      flex: 0 0 auto
+      flex: 0 1 auto
       gap: $audio-controls-volume-gap
+      min-width: 0
 
       &.v-media-volume--inline:not(.v-media-volume--collapsed)
         width: $audio-volume-width

@@ -1,6 +1,7 @@
 <template>
   <v-container max-width="720">
     <v-audio
+      :autoplay="autoplay"
       :play-props="{ color: 'primary', size: 36, variant: 'flat' }"
       :src="track.src"
       actions="prev play next progress rate restart"
@@ -8,18 +9,22 @@
       gap="4"
     >
       <template v-slot:action.prev>
-        <v-icon-btn aria-label="Previous" icon="mdi-skip-previous"></v-icon-btn>
+        <v-icon-btn aria-label="Previous" icon="mdi-skip-previous" @click="skip(-1)"></v-icon-btn>
       </template>
 
       <template v-slot:action.next>
-        <v-icon-btn aria-label="Next" icon="mdi-skip-next"></v-icon-btn>
+        <v-icon-btn aria-label="Next" icon="mdi-skip-next" @click="skip(1)"></v-icon-btn>
       </template>
 
       <template v-slot:progress="{ progress, seek, currentTime, duration }">
         <div class="d-flex align-center ga-3 flex-grow-1 mx-1">
-          <v-avatar size="44" style="background: linear-gradient(135deg, #673ab7, #00e676)" rounded></v-avatar>
+          <transition :name="coverTransition" mode="out-in">
+            <v-avatar :key="index" :style="{ background: track.cover }" size="44" rounded></v-avatar>
+          </transition>
           <div class="d-flex flex-column flex-grow-1">
-            <div class="text-title-small font-weight-medium pb-1" dir="auto">{{ track.title }}</div>
+            <v-fade-transition mode="out-in">
+              <div :key="index" class="text-title-small font-weight-medium pt-2" dir="auto">{{ track.title }}</div>
+            </v-fade-transition>
             <div class="d-flex align-center ga-2 text-body-small">
               {{ currentTime.elapsed }}
               <v-locale-provider :rtl="false">
@@ -59,9 +64,38 @@
 </template>
 
 <script setup>
-  const track = {
-    artist: 'Evgeny_Bardyuzha',
-    src: 'https://cdn.pixabay.com/audio/2022/10/18/audio_31c2730e64.mp3',
-    title: 'Atmospheric Phonk Synthwave (Password Infinity)',
+  import { shallowRef, toRef } from 'vue'
+
+  const tracks = [
+    {
+      artist: 'Evgeny_Bardyuzha',
+      cover: 'linear-gradient(135deg, #673ab7, #00e676)',
+      src: 'https://cdn.pixabay.com/audio/2022/10/18/audio_31c2730e64.mp3',
+      title: 'Atmospheric Phonk Synthwave (Password Infinity)',
+    },
+    {
+      artist: 'MemoryArcade',
+      cover: 'linear-gradient(135deg, #ff5722, #ffc107)',
+      src: 'https://cdn.pixabay.com/audio/2026/02/06/audio_565c388dda.mp3',
+      title: 'Burning Skyline',
+    },
+    {
+      artist: 'HumanStudioED',
+      cover: 'linear-gradient(135deg, #e91e63, #00bcd4)',
+      src: 'https://cdn.pixabay.com/audio/2026/05/08/audio_c0a810ecde.mp3',
+      title: 'No Copyright Cyberpunk',
+    },
+  ]
+
+  const index = shallowRef(0)
+  const step = shallowRef(1)
+  const autoplay = shallowRef(false)
+  const track = toRef(() => tracks[index.value])
+  const coverTransition = toRef(() => step.value > 0 ? 'scroll-x-reverse-transition' : 'scroll-x-transition')
+
+  function skip (value) {
+    step.value = value
+    index.value = (index.value + value + tracks.length) % tracks.length
+    autoplay.value = true
   }
 </script>

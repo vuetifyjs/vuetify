@@ -26,6 +26,13 @@
     &__mirror
       opacity: $audio-waveform-mirror-opacity
 
+    .v-media-progress-bar__thumb
+      background: none
+      border-inline-start: 1px dashed currentColor
+      border-radius: 0
+      height: var(--v-media-progress-bar-height)
+      width: 1px
+
     &--live
       mask-image: $audio-waveform-live-mask
 
@@ -50,3 +57,7 @@
 
       .v-audio-waveform__progress
         fill: Highlight
+
+      .v-audio-waveform .v-media-progress-bar__thumb
+        background: none
+        border-color: Highlight

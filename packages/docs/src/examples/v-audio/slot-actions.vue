@@ -1,7 +1,20 @@
 <template>
   <v-container class="d-flex justify-center">
     <v-card class="pa-6" rounded="xl" width="400">
-      <v-audio :src="track.src" actions="left play right">
+      <div class="d-flex">
+        <div class="mr-auto">
+          <div class="text-title-medium font-weight-bold" dir="auto">{{ track.title }}</div>
+          <div class="text-body-medium text-medium-emphasis mb-2" dir="auto">{{ track.artist }}</div>
+        </div>
+        <v-icon-btn icon="mdi-heart-outline"></v-icon-btn>
+      </div>
+
+      <v-audio
+        :progress-props="{ thumbSize: 12, height: 4 }"
+        :src="track.src"
+        actions="left play right"
+        progress-variant="pill"
+      >
         <template v-slot:action.left="{ seek }">
           <v-icon-btn aria-label="Repeat" icon="mdi-repeat"></v-icon-btn>
           <v-spacer></v-spacer>
@@ -19,7 +32,7 @@
           <v-spacer></v-spacer>
           <v-icon-btn aria-label="More actions" icon="mdi-dots-horizontal" icon-size="20"></v-icon-btn>
           <v-spacer></v-spacer>
-          <v-icon-btn aria-label="Shuffle" icon="mdi-shuffle"></v-icon-btn>
+          <v-icon-btn aria-label="Shuffle" icon="mdi-shuffle-variant"></v-icon-btn>
         </template>
       </v-audio>
     </v-card>

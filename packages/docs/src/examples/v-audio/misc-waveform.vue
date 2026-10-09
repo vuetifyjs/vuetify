@@ -8,6 +8,7 @@
       :peaks="peaks"
       color="primary"
       mirror="0.5"
+      thumb
     ></v-audio-waveform>
 
     <div class="text-caption text-medium-emphasis text-center">

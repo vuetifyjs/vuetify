@@ -1,6 +1,6 @@
 <template>
   <v-container max-width="560">
-    <v-audio :src="track.src" actions="play progress time">
+    <v-audio :src="track.src" actions="play progress time" gap="8">
       <template v-slot:append>
         <v-icon-btn
           :href="track.src"
