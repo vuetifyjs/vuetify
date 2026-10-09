@@ -10,6 +10,7 @@
     "muted": "Locks the volume control in the muted state.",
     "playbackRate": "Playback rate. Slots receive it with `setPlaybackRate` to build a rate control.",
     "playing": "Playing state. Switches the play button to the pause icon.",
+    "progressProps": "Props passed to the default VMediaProgressBar, e.g. `height` or `thumb-size`.",
     "playProps": "Props passed to the default play button, e.g. `color`, `variant` or `size`.",
     "progress": "Current playback time, as a percentage of the duration (0 ~ 100).",
     "progressVariant": "`pill` gives the seek bar the MD3 look with a bar-shaped thumb. `wavy` also draws the played part as a wave.",

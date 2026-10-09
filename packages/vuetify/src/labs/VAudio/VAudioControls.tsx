@@ -94,7 +94,8 @@ export const makeVAudioControlsProps = propsFactory({
   },
   gap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
   progressVariant: String as PropType<VMediaProgressBar['$props']['variant']>,
-  playProps: Object as PropType<VIconBtn['$props']>,
+  progressProps: Object as PropType<VMediaProgressBar['$props']>,
+
   hideTime: Boolean,
   readonly: Boolean,
 
@@ -243,6 +244,7 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
         color: props.color,
         disabled: !props.duration,
         readonly: props.readonly,
+        ...props.progressProps,
         'onUpdate:modelValue': (seconds: number) => seek({ to: seconds }),
         'onDrag:start': (value: number) => emit('drag:start', value),
         'onDrag:end': (value: number) => emit('drag:end', value),
