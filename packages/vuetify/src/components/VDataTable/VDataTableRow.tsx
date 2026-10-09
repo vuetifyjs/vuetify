@@ -145,6 +145,7 @@ export const VDataTableRow = genericComponent<new <T>(
 
           return (
             <VDataTableColumn
+              key={ column.key ?? i }
               align={ column.align }
               indent={ column.indent }
               class={{
