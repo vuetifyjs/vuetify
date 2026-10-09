@@ -38,6 +38,7 @@
         v-model="rating"
         active-color="yellow-accent-4"
         color="white"
+        icon-size="24"
         size="18"
         half-increments
         hover

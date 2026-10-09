@@ -509,6 +509,11 @@
       "isFocused": "4.3.0"
     }
   },
+  "VRating": {
+    "props": {
+      "iconSize": "4.3.0"
+    }
+  },
   "VRow": {
     "props": {
       "size": "4.0.0"
