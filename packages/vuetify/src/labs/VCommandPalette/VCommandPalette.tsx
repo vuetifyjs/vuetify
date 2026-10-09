@@ -19,7 +19,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, useId, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
 import { convertToUnit, genericComponent, getActiveElement, isFunction, omit, propsFactory, useRender } from '@/util'
 
@@ -107,6 +107,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
     const searchInputRef = ref<VTextField>()
     const dialogRef = ref<VDialog>()
+    const listRef = ref<VList>()
+    const listId = `v-command-palette-list-${useId()}`
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
@@ -277,6 +279,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     useRender(() => {
       const dialogProps = VDialog.filterProps(omit(props, ['modelValue', 'class', 'style']))
+      const hasResults = filteredItems.value.length > 0
 
       return (
         <VDialog
@@ -313,6 +316,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     variant="solo"
                     flat
                     bgColor="transparent"
+                    role="combobox"
+                    aria-expanded={ hasResults }
+                    aria-controls={ hasResults ? listId : undefined }
+                    aria-autocomplete="list"
+                    aria-activedescendant={ listRef.value?.activeDescendant }
                     onKeydown={ handleSearchKeydown }
                     v-slots={{
                       'append-inner': slots['input.append-inner'],
@@ -324,9 +332,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 <div class="v-command-palette__content">
                   { slots['list.prepend']?.() }
 
-                  { filteredItems.value.length > 0 ? (
+                  { hasResults ? (
                     <VList
                       key="list"
+                      ref={ listRef }
                       class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }
@@ -334,6 +343,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       itemProps
                       activatable
                       { ...props.listProps }
+                      id={ listId }
                       navigationStrategy="track"
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }

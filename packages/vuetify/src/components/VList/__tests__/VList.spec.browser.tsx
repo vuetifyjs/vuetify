@@ -153,6 +153,34 @@ describe('VList', () => {
     expect(selectedItem.value).toEqual([items[1]])
   })
 
+  it('should expose the id of the tracked item', async () => {
+    const listRef = ref<VList>()
+    const navigationIndex = ref(-1)
+    const items = [
+      { title: 'Alpha', value: 'alpha' },
+      { title: 'Beta', value: 'beta' },
+    ]
+
+    render(() => (
+      <VList
+        ref={ listRef }
+        v-model:navigationIndex={ navigationIndex.value }
+        items={ items }
+        navigationStrategy="track"
+        activatable
+      />
+    ))
+
+    expect(listRef.value!.activeDescendant).toBeUndefined()
+
+    navigationIndex.value = 1
+    await expect.poll(() => listRef.value!.activeDescendant).toBeTruthy()
+
+    const item = document.getElementById(listRef.value!.activeDescendant!)
+    expect(item).toHaveTextContent('Beta')
+    expect(screen.getByRole('listbox')).toHaveAttribute('aria-activedescendant', item!.id)
+  })
+
   describe('value-comparator', () => {
     it('should apply to initial selected', async () => {
       const caseItems = [

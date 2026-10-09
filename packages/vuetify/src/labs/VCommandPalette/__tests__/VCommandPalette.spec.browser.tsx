@@ -84,7 +84,7 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
-      const input = screen.getByRole('textbox')
+      const input = screen.getByCSS('input[role="combobox"]')
 
       await userEvent.type(input, 'nonexistent')
       await wait(50)
@@ -117,7 +117,7 @@ describe('VCommandPalette', () => {
       expect(content).toBeInTheDocument()
 
       const initialTop = content!.getBoundingClientRect().top
-      const input = screen.getByRole('textbox')
+      const input = screen.getByCSS('input[role="combobox"]')
 
       await userEvent.type(input, 'special')
       await wait(100)
@@ -161,7 +161,7 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
-      const input = screen.getByRole('textbox')
+      const input = screen.getByCSS('input[role="combobox"]')
 
       await userEvent.type(input, 'FILE')
       await wait(50)
@@ -178,7 +178,7 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
-      const input = screen.getByRole('textbox') as HTMLInputElement
+      const input = screen.getByCSS('input[role="combobox"]') as HTMLInputElement
 
       await userEvent.type(input, 'test')
       await wait(50)
@@ -190,7 +190,7 @@ describe('VCommandPalette', () => {
       model.value = true
       await screen.findByRole('dialog')
 
-      const newInput = screen.getByRole('textbox') as HTMLInputElement
+      const newInput = screen.getByCSS('input[role="combobox"]') as HTMLInputElement
       expect(newInput.value).toBe('')
     })
   })
@@ -237,6 +237,71 @@ describe('VCommandPalette', () => {
       expect(listbox.getAttribute('aria-activedescendant')).toMatch(/^v-list-item-.*-5$/)
     })
 
+    it('should expose the highlighted item on the search input', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } />
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+      const listbox = screen.getByRole('listbox')
+
+      expect(input).toHaveAttribute('aria-expanded', 'true')
+      expect(input).toHaveAttribute('aria-autocomplete', 'list')
+      expect(input).toHaveAttribute('aria-controls', listbox.id)
+
+      await expect.poll(() => input.getAttribute('aria-activedescendant')).toBeTruthy()
+      expect(document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('File')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Folder')
+      expect(screen.getAllByRole('option', { selected: true })).toHaveLength(1)
+      expect(screen.getByRole('option', { selected: true }).id).toBe(input.getAttribute('aria-activedescendant'))
+
+      await userEvent.keyboard('{ArrowUp}{ArrowUp}')
+      await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Open File')
+
+      await userEvent.keyboard('nothing matches')
+      await expect.poll(() => input.hasAttribute('aria-activedescendant')).toBe(false)
+      expect(input).not.toHaveAttribute('aria-controls')
+    })
+
+    it('should not reference subheaders when no item is selectable', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      render(() => (
+        <VCommandPalette
+          v-model={ model.value }
+          items={[{ type: 'subheader' as const, title: 'Recent' }]}
+          onClick:item={ onClickItem }
+        />
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+
+      await userEvent.click(input)
+      await userEvent.keyboard('{Enter}')
+
+      expect(input).not.toHaveAttribute('aria-activedescendant')
+      expect(screen.getByRole('listbox')).not.toHaveAttribute('aria-activedescendant')
+      expect(onClickItem).not.toHaveBeenCalled()
+    })
+
+    it('should control the list when listProps sets an id', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } listProps={{ id: 'custom-list' } as any} />
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+
+      expect(input).toHaveAttribute('aria-controls', screen.getByRole('listbox').id)
+    })
+
     it('should keep focus in search input while navigating', async () => {
       const model = ref(true)
       render(() => (
@@ -244,7 +309,7 @@ describe('VCommandPalette', () => {
       ))
 
       await screen.findByRole('dialog')
-      const input = screen.getByRole('textbox')
+      const input = screen.getByCSS('input[role="combobox"]')
 
       await userEvent.click(input)
       expect(input).toHaveFocus()
@@ -480,7 +545,7 @@ describe('VCommandPalette', () => {
       expect(screen.getByTestId('append-slot')).toBeInTheDocument()
 
       // Type a search that yields no results to trigger no-data slot
-      const input = screen.getByRole('textbox')
+      const input = screen.getByCSS('input[role="combobox"]')
       await userEvent.type(input, 'nonexistent')
       await wait(100)
 
