@@ -72,6 +72,8 @@ export const makeVAudioControlsProps = propsFactory({
   playing: Boolean,
   muted: Boolean,
   hideThumb: Boolean,
+  hideTime: Boolean,
+  readonly: Boolean,
   progress: {
     type: Number,
     default: 0,
@@ -93,21 +95,15 @@ export const makeVAudioControlsProps = propsFactory({
     default: () => ['play'],
   },
   gap: [Number, String, Array] as PropType<number | string | readonly [number | string, number | string]>,
+  playProps: Object as PropType<VIconBtn['$props']>,
   progressVariant: String as PropType<VMediaProgressBar['$props']['variant']>,
   progressProps: Object as PropType<VMediaProgressBar['$props']>,
-
-  hideTime: Boolean,
-  readonly: Boolean,
-
   volumeProps: Object as PropType<VMediaVolumeOptions>,
   seekStep: {
     type: [Number, Array] as PropType<MediaSeekStep>,
     default: 5,
   },
-  volumeSlider: {
-    type: String as PropType<VMediaVolumeSlider>,
-    default: 'visible',
-  },
+  volumeSlider: String as PropType<VMediaVolumeSlider>,
 
   color: String,
 
@@ -255,6 +251,9 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
 
       const actions = parseActions(props.actions).filter(name => name !== '(' && name !== ')')
       const isProgressInlined = actions.includes('progress')
+      const volumeInline = isProgressInlined
+        ? actions.indexOf('volume') > actions.indexOf('progress') ? 'left' : 'right'
+        : false
 
       function timePart (name: 'elapsed' | 'remaining' | 'total') {
         return slots[`time.${name}`]?.(slotProps.value) ??
@@ -304,8 +303,8 @@ export const VAudioControls = genericComponent<VAudioControlsSlots>()({
             modelValue={ props.muted ? 0 : volume.value }
             onUpdate:modelValue={ v => volume.value = v }
             class="v-audio-controls__volume"
-            inline
-            slider={ props.volumeSlider }
+            inline={ volumeInline }
+            slider={ props.volumeSlider ?? (isProgressInlined ? 'hover' : 'visible') }
             { ...props.volumeProps }
             disabled={ props.muted }
           />
