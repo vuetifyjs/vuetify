@@ -20,7 +20,7 @@
   },
   "slots": {
     "prepend": "Content to render above the search input, inside the command palette card. Useful for headers, breadcrumbs, or instructions.",
-    "input": "Custom search input field. Replaces the default **v-text-field**. Bind the slot's **props** to the input to keep keyboard navigation and screen reader announcements.",
+    "input": "Custom search input field. Replaces the default **v-text-field**. Bind the slot's **props** to the input to keep keyboard navigation and screen reader announcements, and connect it to **v-model:search** for filtering.",
     "input.append-inner": "Content appended inside the search input field. Useful for adding icons or buttons within the input.",
     "append": "Content to render below the items list, inside the command palette card. Useful for footers, keyboard shortcut hints, or additional actions.",
     "no-data": "Custom content to display when no items match the search query. Replaces the default no-data message.",
