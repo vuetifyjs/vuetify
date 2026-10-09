@@ -94,6 +94,10 @@ To decode in the browser, pass the file as a `Blob` to **peaks-source**: a local
 
 <ExamplesExample file="v-audio/prop-waveform-peaks-source" />
 
+With **live**, the waveform skips decoding and draws bars from the audio as it plays, scrolling right to left.
+
+<ExamplesExample file="v-audio/prop-waveform-live" />
+
 #### Readonly and start position
 
 **readonly** locks the seek bar while playback, volume and custom actions stay usable. **start-at** starts playback at a position in seconds. **v-model:playback-rate** is applied to every file the player loads.
