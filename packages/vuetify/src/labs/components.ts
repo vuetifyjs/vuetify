@@ -1,3 +1,4 @@
+export * from './VAudio'
 export * from './VAvatarGroup'
 export * from './VCommandPalette'
 export * from './VDateRangePicker'
