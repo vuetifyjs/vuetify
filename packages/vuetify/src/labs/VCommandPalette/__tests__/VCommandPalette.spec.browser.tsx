@@ -1,5 +1,6 @@
 // Components
 import { VCommandPalette } from '../VCommandPalette'
+import { VListItem } from '@/components/VList'
 
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
@@ -550,6 +551,53 @@ describe('VCommandPalette', () => {
       await wait(100)
 
       expect(screen.getByTestId('no-data-slot')).toBeInTheDocument()
+    })
+
+    it('should navigate and execute from a custom input bound to the input slot props', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } onClick:item={ onClickItem }>
+          {{ input: ({ props }) => <input { ...props } /> }}
+        </VCommandPalette>
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByRole('combobox')
+
+      expect(input).toHaveAttribute('aria-controls', screen.getByRole('listbox').id)
+
+      await userEvent.click(input)
+      await userEvent.keyboard('{ArrowDown}')
+      await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Folder')
+
+      await userEvent.keyboard('{Enter}')
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Folder' }),
+        expect.any(KeyboardEvent)
+      )
+    })
+
+    it('should execute an item rendered from the item slot props on click', async () => {
+      const model = ref(true)
+      const onClickItem = vi.fn()
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } onClick:item={ onClickItem }>
+          {{ item: ({ props }) => <VListItem { ...props } /> }}
+        </VCommandPalette>
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+
+      expect(document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('File')
+
+      await userEvent.click(screen.getByText('Folder'))
+      expect(onClickItem).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Folder' }),
+        expect.any(MouseEvent)
+      )
+      await expect.poll(() => model.value).toBe(false)
     })
   })
 

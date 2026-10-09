@@ -74,12 +74,12 @@ export type VCommandPaletteSlots = {
   default: never
   prepend: never
   append: never
-  input: never
+  input: { props: Record<string, unknown> }
   'input.append-inner': never
   'no-data': never
   'list.prepend': never
   'list.subheader': VListChildrenSlots<any>['subheader']
-  item: { item: VCommandPaletteItemType, index: number }
+  item: { item: VCommandPaletteItemType, index: number, props: Record<string, unknown> }
   'item.prepend': { item: VCommandPaletteItemType, index: number }
   'item.title': { item: VCommandPaletteItemType, index: number }
   'item.append': { item: VCommandPaletteItemType, index: number }
@@ -280,6 +280,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     useRender(() => {
       const dialogProps = VDialog.filterProps(omit(props, ['modelValue', 'class', 'style']))
       const hasResults = filteredItems.value.length > 0
+      const inputProps = {
+        role: 'combobox',
+        'aria-expanded': hasResults,
+        'aria-controls': hasResults ? listId : undefined,
+        'aria-autocomplete': 'list',
+        'aria-activedescendant': listRef.value?.activeDescendant,
+        onKeydown: handleSearchKeydown,
+      }
 
       return (
         <VDialog
@@ -302,7 +310,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 { slots.prepend?.() }
 
               <div class="v-command-palette__input-container">
-                { slots.input?.() ?? (
+                { slots.input?.({ props: inputProps }) ?? (
                   <VTextField
                     ref={ searchInputRef }
                     v-model={ searchQuery.value }
@@ -316,12 +324,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     variant="solo"
                     flat
                     bgColor="transparent"
-                    role="combobox"
-                    aria-expanded={ hasResults }
-                    aria-controls={ hasResults ? listId : undefined }
-                    aria-autocomplete="list"
-                    aria-activedescendant={ listRef.value?.activeDescendant }
-                    onKeydown={ handleSearchKeydown }
+                    { ...inputProps }
                     v-slots={{
                       'append-inner': slots['input.append-inner'],
                     }}
@@ -350,7 +353,14 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       v-slots={{
                         subheader: slots['list.subheader'],
                         item: ({ props: itemProps }: { props: any }) => (
-                          slots.item?.({ item: itemProps, index: itemProps.index }) ?? (
+                          slots.item?.({
+                            item: itemProps,
+                            index: itemProps.index,
+                            props: {
+                              ...itemProps,
+                              onClick: (event: MouseEvent) => navigation.execute(itemProps.index, event),
+                            },
+                          }) ?? (
                             <VCommandPaletteItem
                               key={ `item-${itemProps.index}` }
                               item={ itemProps }
