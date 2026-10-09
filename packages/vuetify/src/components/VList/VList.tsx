@@ -200,6 +200,11 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
     )
 
     const uid = useId()
+    const activeDescendant = toRef(() =>
+      props.navigationStrategy === 'track' && navigationIndex.value >= 0
+        ? `v-list-item-${uid}-${navigationIndex.value}`
+        : undefined
+    )
 
     createList({
       filterable: props.filterable,
@@ -389,11 +394,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
           ]}
           tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role={ isSelectable.value ? 'listbox' : 'list' }
-          aria-activedescendant={
-            props.navigationStrategy === 'track' && navigationIndex.value >= 0
-              ? `v-list-item-${uid}-${navigationIndex.value}`
-              : undefined
-          }
+          aria-activedescendant={ activeDescendant.value }
           aria-multiselectable={ ariaMultiselectable }
           onFocusin={ onFocusin }
           onFocusout={ onFocusout }
@@ -419,6 +420,7 @@ export const VList = genericComponent<new <S, A, O, T extends readonly any[]>(
       parents,
       getPath,
       navigationIndex,
+      activeDescendant,
     }
   },
 })

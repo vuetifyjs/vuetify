@@ -19,7 +19,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, useId, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
 import { convertToUnit, genericComponent, getActiveElement, isFunction, omit, propsFactory, useRender } from '@/util'
 
@@ -107,6 +107,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
     const searchInputRef = ref<VTextField>()
     const dialogRef = ref<VDialog>()
+    const listRef = ref<VList>()
+    const listId = `v-command-palette-list-${useId()}`
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
@@ -313,6 +315,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                     variant="solo"
                     flat
                     bgColor="transparent"
+                    role="combobox"
+                    aria-expanded={ filteredItems.value.length > 0 }
+                    aria-controls={ filteredItems.value.length > 0 ? listId : undefined }
+                    aria-autocomplete="list"
+                    aria-activedescendant={ listRef.value?.activeDescendant }
                     onKeydown={ handleSearchKeydown }
                     v-slots={{
                       'append-inner': slots['input.append-inner'],
@@ -327,6 +334,8 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                   { filteredItems.value.length > 0 ? (
                     <VList
                       key="list"
+                      ref={ listRef }
+                      id={ listId }
                       class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }

@@ -398,6 +398,9 @@
       "indent": "3.11.0",
       "itemsRegistration": "3.11.0",
       "prependGap": "3.11.0"
+    },
+    "exposed": {
+      "activeDescendant": "4.3.0"
     }
   },
   "VListItem": {
