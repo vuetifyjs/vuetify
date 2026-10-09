@@ -18,7 +18,8 @@
 <script setup>
   const track = {
     artist: 'Bransboynd',
-    src: 'https://cdn.pixabay.com/audio/2026/09/07/audio_5e9aae4ea8.mp3',
+    origin: 'https://pixabay.com/music/ambient-cinematic-documentary-background-599280/',
+    src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/06.mp3',
     title: 'Cinematic Documentary Background',
   }
 </script>

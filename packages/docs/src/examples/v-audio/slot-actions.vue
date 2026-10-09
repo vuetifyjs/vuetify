@@ -42,7 +42,8 @@
 <script setup>
   const track = {
     artist: 'MemoryArcade',
-    src: 'https://cdn.pixabay.com/audio/2026/02/06/audio_565c388dda.mp3',
+    origin: 'https://pixabay.com/music/rock-burning-skyline-480100/',
+    src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/04.mp3',
     title: 'Burning Skyline',
   }
 </script>

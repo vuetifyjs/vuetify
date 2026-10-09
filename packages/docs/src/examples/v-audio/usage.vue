@@ -7,6 +7,20 @@
   >
     <div>
       <v-audio ref="audio" v-model:playing="playing" class="mx-auto" max-width="480" v-bind="props"></v-audio>
+
+      <div class="position-absolute bottom-0 left-0 pa-2" style="min-height: 24px">
+        <v-slide-y-reverse-transition>
+          <v-chip
+            v-show="credits"
+            :href="track.origin"
+            append-icon="mdi-chevron-right"
+            size="x-small"
+            target="_blank"
+            text="Track source: Pixabay"
+            variant="tonal"
+          ></v-chip>
+        </v-slide-y-reverse-transition>
+      </div>
     </div>
 
     <template v-slot:configuration>
@@ -38,6 +52,9 @@
   const progressVariant = shallowRef('default')
   const audio = useTemplateRef('audio')
   const playing = shallowRef(false)
+  const credits = shallowRef(false)
+
+  watch(playing, () => credits.value = true, { once: true })
 
   watch(progressVariant, value => {
     if (value !== 'wavy' || playing.value || audio.value?.audio.currentTime >= 10) return
@@ -61,7 +78,8 @@
 
   const track = {
     artist: 'Bransboynd',
-    src: 'https://cdn.pixabay.com/audio/2026/09/07/audio_5e9aae4ea8.mp3',
+    origin: 'https://pixabay.com/music/ambient-cinematic-documentary-background-599280/',
+    src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/06.mp3',
     title: 'Cinematic Documentary Background',
   }
 

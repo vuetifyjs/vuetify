@@ -70,19 +70,22 @@
     {
       artist: 'Evgeny_Bardyuzha',
       cover: 'linear-gradient(135deg, #673ab7, #00e676)',
-      src: 'https://cdn.pixabay.com/audio/2022/10/18/audio_31c2730e64.mp3',
-      title: 'Atmospheric Phonk Synthwave (Password Infinity)',
+      origin: 'https://pixabay.com/music/beats-atmospheric-phonk-synthwave-password-infinity-123276/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/02.mp3',
+      title: 'Atmospheric Phonk Synthwave',
     },
     {
       artist: 'MemoryArcade',
       cover: 'linear-gradient(135deg, #ff5722, #ffc107)',
-      src: 'https://cdn.pixabay.com/audio/2026/02/06/audio_565c388dda.mp3',
+      origin: 'https://pixabay.com/music/rock-burning-skyline-480100/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/04.mp3',
       title: 'Burning Skyline',
     },
     {
       artist: 'HumanStudioED',
       cover: 'linear-gradient(135deg, #e91e63, #00bcd4)',
-      src: 'https://cdn.pixabay.com/audio/2026/05/08/audio_c0a810ecde.mp3',
+      origin: 'https://pixabay.com/music/phonk-no-copyright-cyberpunk-525041/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/05.mp3',
       title: 'No Copyright Cyberpunk',
     },
   ]

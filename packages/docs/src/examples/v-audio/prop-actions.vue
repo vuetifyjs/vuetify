@@ -36,17 +36,20 @@
   const tracks = [
     {
       artist: 'Bransboynd',
-      src: 'https://cdn.pixabay.com/audio/2025/09/29/audio_8bde82c5c0.mp3',
+      origin: 'https://pixabay.com/music/beats-mysterious-future-trap-412274/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/03.mp3',
       title: 'Mysterious Future Trap',
     },
     {
       artist: 'MemoryArcade',
-      src: 'https://cdn.pixabay.com/audio/2026/02/06/audio_565c388dda.mp3',
+      origin: 'https://pixabay.com/music/rock-burning-skyline-480100/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/04.mp3',
       title: 'Burning Skyline',
     },
     {
       artist: 'HumanStudioED',
-      src: 'https://cdn.pixabay.com/audio/2026/05/08/audio_c0a810ecde.mp3',
+      origin: 'https://pixabay.com/music/phonk-no-copyright-cyberpunk-525041/',
+      src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/05.mp3',
       title: 'No Copyright Cyberpunk',
     },
   ]
@@ -61,7 +64,8 @@
 
   const track = {
     artist: 'Bransboynd',
-    src: 'https://cdn.pixabay.com/audio/2025/09/29/audio_8bde82c5c0.mp3',
+    origin: 'https://pixabay.com/music/beats-mysterious-future-trap-412274/',
+    src: 'https://cdn.vuetifyjs.com/docs/images/components/v-audio/03.mp3',
     title: 'Mysterious Future Trap',
   }
 </script>
