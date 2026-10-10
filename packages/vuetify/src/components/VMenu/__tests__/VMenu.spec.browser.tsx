@@ -367,12 +367,12 @@ describe('VMenu', () => {
     expect(Math.round(content.top)).toBe(Math.round(box.top + 120))
 
     area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 10, clientY: box.top + 10 }))
-    await expect.poll(() => screen.queryByTestId('menu-content')?.checkVisibility() ?? false).toBe(false)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
 
     area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 10, clientY: box.top + 10 }))
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
     await userEvent.click(area, { position: { x: 200, y: 250 } })
-    await expect.poll(() => screen.queryByTestId('menu-content')?.checkVisibility() ?? false).toBe(false)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
   })
 
   it('should close on right and middle click outside', async () => {
@@ -390,19 +390,17 @@ describe('VMenu', () => {
 
     const area = screen.getByTestId('area')
     const outside = screen.getByTestId('outside')
-    const isVisible = () => screen.queryByTestId('menu-content')?.checkVisibility() ?? false
 
     await userEvent.click(area, { button: 'right' })
-    await wait(100)
-    expect(isVisible()).toBe(true)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
 
     await userEvent.click(outside, { button: 'right' })
-    await expect.poll(isVisible).toBe(false)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
 
     await userEvent.click(area, { button: 'right' })
-    await expect.poll(isVisible).toBe(true)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
     await userEvent.click(outside, { button: 'middle' })
-    await expect.poll(isVisible).toBe(false)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
   })
 
   describe('cascade close', () => {
