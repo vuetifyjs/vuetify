@@ -11,7 +11,7 @@ import { VTextField } from '@/components/VTextField'
 import { VTooltip } from '@/components/VTooltip'
 
 // Utilities
-import { commands, render, screen, userEvent, wait } from '@test'
+import { commands, render, screen, touch, userEvent, wait } from '@test'
 import { nextTick, ref } from 'vue'
 
 describe('VMenu', () => {
@@ -373,6 +373,57 @@ describe('VMenu', () => {
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
     await userEvent.click(area, { position: { x: 200, y: 250 } })
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+  })
+
+  it('should open a context menu on long-press at the touch point', async () => {
+    render(() => (
+      <VSheet data-testid="area" height="300" width="300">
+        <VMenu activator="parent" contextMenu>
+          <VSheet data-testid="menu-content" height="40" width="80" />
+        </VMenu>
+      </VSheet>
+    ))
+    await nextTick()
+
+    const area = screen.getByTestId('area')
+    const { left: x, top: y } = area.getBoundingClientRect()
+
+    touch(area).start(x + 60, y + 70)
+    await wait(200)
+    touch(area).end(x + 60, y + 70)
+    await wait(400)
+    expect(screen.queryByTestId('menu-content')).toBeNull()
+
+    touch(area).start(x + 60, y + 70)
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+    touch(area).end(x + 60, y + 70)
+
+    const content = screen.getByTestId('menu-content').getBoundingClientRect()
+    expect(Math.round(content.left)).toBe(Math.round(x + 60))
+    expect(Math.round(content.top)).toBe(Math.round(y + 70))
+  })
+
+  it('should open once when the browser fires contextmenu during the long-press', async () => {
+    render(() => (
+      <VSheet data-testid="area" height="100" width="100">
+        <VMenu activator="parent" contextMenu>
+          <VSheet data-testid="menu-content" height="40" width="80" />
+        </VMenu>
+      </VSheet>
+    ))
+    await nextTick()
+
+    const area = screen.getByTestId('area')
+    const { left: x, top: y } = area.getBoundingClientRect()
+
+    touch(area).start(x + 10, y + 10)
+    await wait(200)
+    // a real event: the browser flushes microtasks between listeners, which script-dispatched events skip
+    await userEvent.click(area, { button: 'right', position: { x: 10, y: 10 } })
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+    await wait(600)
+
+    expect(screen.queryByTestId('menu-content')).toBeVisible()
   })
 
   it('should keep a cursor-positioned menu attached to the activator on scroll', async () => {
