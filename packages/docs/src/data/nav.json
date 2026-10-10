@@ -266,7 +266,8 @@
       "ripple",
       "scroll",
       "tooltip",
-      "touch"
+      "touch",
+      "touch-hold"
     ]
   },
   {
