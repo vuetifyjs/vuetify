@@ -174,12 +174,11 @@ export default {
     shortcut: '鍵盤快捷鍵：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暫停',
     seek: '搜尋',
     volume: '音量',
-    showVolume: '顯示音量控制',
     mute: '靜音',
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',

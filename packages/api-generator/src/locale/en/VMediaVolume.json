@@ -1,0 +1,16 @@
+{
+  "description": "Volume control for media players: a mute button with a slider next to it or in a menu.",
+  "props": {
+    "direction": "Orientation of the slider in the menu. The **inline** slider is always horizontal.",
+    "disabled": "Disables the mute button and the slider.",
+    "inline": "Shows the slider next to the button instead of in a menu. `true` places it after the button; `left` and `right` pin the side regardless of text direction. Pair with **slider-props** to set the slider width.",
+    "label": "Passed to `aria-label` and, when **inline**, shown in a tooltip. Without it the label comes from the locale.",
+    "menuProps": "Props passed to the VMenu holding the slider. The menu opens on hover and focus, and a click on the button toggles mute. On touch, a tap opens and closes the menu instead.",
+    "modelValue": "Volume (0 ~ 100).",
+    "slider": "`visible` shows the slider, `hover` keeps an **inline** slider collapsed until the control is hovered or focused, `hidden` leaves only the mute button. A menu always opens on hover, so `hover` has no effect there. The slider is always hidden on iOS and iPadOS, which ignore volume set from JavaScript.",
+    "sliderProps": "Props passed to the slider, e.g. `color`, `step` or `width`."
+  },
+  "exposed": {
+    "toggleMuted": "Switches between 0 and the last non-zero volume."
+  }
+}

@@ -174,12 +174,11 @@ export default {
     shortcut: 'Комбінація клавіш: {0}',
     or: 'або',
   },
-  video: {
+  media: {
     play: 'Відтворити',
     pause: 'Пауза',
     seek: 'Позиція відтворення',
     volume: 'Гучність',
-    showVolume: 'Показати регулятор гучності',
     mute: 'Вимкнути звук',
     unmute: 'Увімкнути звук',
     enterFullscreen: 'На весь екран',

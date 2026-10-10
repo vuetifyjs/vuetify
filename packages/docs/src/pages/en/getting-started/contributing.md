@@ -172,6 +172,10 @@ When creating a new component (or composable, though this is typically done by t
 
 Enabling **developer mode** in the documentation settings will allow you to see the source of truth on API description pages.
 
+### AI tooling
+
+If you use AI assistants, the repository provides guidance they pick up automatically: `AGENTS.md` at the root (read by most tools; `CLAUDE.md` imports it), path-scoped rules in `.claude/rules/`, and skills for the Playground and tests in `.claude/skills/`. You are still responsible for every line you submit — review the output and verify changes in the Playground.
+
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).

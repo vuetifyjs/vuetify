@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klaviatuuri otsetee: {0}',
     or: 'või',
   },
-  video: {
+  media: {
     play: 'Esita',
     pause: 'Peata',
     seek: 'Otsi',
     volume: 'Helitugevus',
-    showVolume: 'Näita helitugevuse regulaatorit',
     mute: 'Vaigista',
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',

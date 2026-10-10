@@ -448,8 +448,8 @@ describe('VNumberInput', () => {
         />
       ))
       const input = element.querySelector('input') as HTMLInputElement
-      input.focus()
       const lock = await commands.getLock()
+      input.focus()
       await navigator.clipboard.writeText(text)
       await userEvent.paste()
       await commands.releaseLock(lock)
@@ -476,8 +476,8 @@ describe('VNumberInput', () => {
         />
       ))
       const input = element.querySelector('input') as HTMLInputElement
-      input.focus()
       const lock = await commands.getLock()
+      input.focus()
       await navigator.clipboard.writeText(text)
       await userEvent.paste()
       await commands.releaseLock(lock)
@@ -531,8 +531,7 @@ describe('VNumberInput', () => {
   })
 
   describe('should indicate range error', () => {
-    // enable in 4.0.0
-    it.todo('on mount', async () => {
+    it('on mount', async () => {
       const model = ref(-13)
       const onChange = vi.fn()
       render(() => (

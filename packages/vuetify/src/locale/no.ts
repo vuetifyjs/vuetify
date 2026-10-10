@@ -174,12 +174,11 @@ export default {
     shortcut: 'Tastatursnarveier: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spill av',
     pause: 'Pause',
     seek: 'Søk',
     volume: 'Volum',
-    showVolume: 'Vis volumkontroll',
     mute: ' Demp',
     unmute: 'Slå på lyd',
     enterFullscreen: 'Fullskjerm',

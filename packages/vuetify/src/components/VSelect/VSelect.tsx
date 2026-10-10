@@ -18,11 +18,13 @@ import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
+import { useAutofill } from './useAutofill'
 import { useFocusRepair } from './useFocusRepair'
 import { useScrolling } from './useScrolling'
 import { useSelectionMenu } from './useSelectionMenu'
 import { useFocusGroups } from '../../composables/focusGroups'
 import { injectNestedDefaults } from '@/composables/defaults'
+import { useElevation } from '@/composables/elevation'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -43,9 +45,9 @@ import {
   genericComponent,
   getActiveElement,
   IN_BROWSER,
+  isAutofill,
   isFunction,
   isNumber,
-  matchesSelector,
   omit,
   propsFactory,
   useRender,
@@ -81,6 +83,7 @@ export const makeSelectProps = propsFactory({
     type: Object as PropType<VList['$props']>,
   },
   menu: Boolean,
+  /** @deprecated use menuProps.contentClass instead */
   menuElevation: [Number, String],
   menuIcon: {
     type: IconValue,
@@ -162,6 +165,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
+    const { elevationClasses } = useElevation(toRef(() => props.menuElevation))
 
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -171,6 +175,7 @@ export const VSelect = genericComponent<new <
     const vVirtualScrollRef = ref<VVirtualScroll>()
 
     const { items, transformIn, transformOut } = useItems(props)
+    const { autofill, resetAutofill } = useAutofill(items, item => select(item))
     const search = useProxiedModel(props, 'search', '')
     const { filteredItems, getMatches } = useFilter(props, items, () => search.value)
     const model = useProxiedModel(
@@ -486,19 +491,22 @@ export const VSelect = genericComponent<new <
         isFocused.value = false
       }
     }
+    let isAutofilling = false
+    function onInputCapture (e: Event) {
+      isAutofilling = isAutofill(e)
+    }
     function onModelUpdate (v: any) {
       if (v == null) {
         for (const item of model.value) emit('item:removed', item)
         model.value = []
-      } else if (matchesSelector(vTextFieldRef.value, ':autofill') || matchesSelector(vTextFieldRef.value, ':-webkit-autofill')) {
-        const item = items.value.find(item => item.title === v)
-        if (item) {
-          select(item)
-        }
+      } else if (isAutofilling) {
+        autofill(v)
       } else if (vTextFieldRef.value) {
         vTextFieldRef.value.value = ''
       }
     }
+
+    watch(isFocused, val => val && resetAutofill())
 
     watch(menu, val => {
       if (!val) {
@@ -573,6 +581,7 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
+          onInputCapture={ onInputCapture }
           aria-expanded={ ariaExpanded.value }
           aria-controls={ ariaControls.value }
         >
@@ -607,10 +616,9 @@ export const VSelect = genericComponent<new <
                   onAfterEnter={ onAfterEnter }
                   onAfterLeave={ onAfterLeave }
                   { ...computedMenuProps.value }
-                  contentClass={['v-select__content', computedMenuProps.value.contentClass]}
+                  contentClass={['v-select__content', elevationClasses.value, computedMenuProps.value.contentClass]}
                 >
                   <VSheet
-                    elevation={ props.menuElevation }
                     onFocusin={ onFocusin }
                     onFocusout={ onFocusout }
                     onKeydown={ onMenuKeydown }

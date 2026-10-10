@@ -174,12 +174,11 @@ export default {
     shortcut: 'Sleutelbordkortpad: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Speel',
     pause: 'Pouseer',
     seek: 'Soek',
     volume: 'Volume',
-    showVolume: 'Wys volumebeheer',
     mute: 'Demp',
     unmute: 'Ontdemp',
     enterFullscreen: 'Volskerm',

@@ -174,12 +174,11 @@ export default {
     shortcut: 'Tangentbordsgenväg: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spela upp',
     pause: 'Pausa',
     seek: 'Sök',
     volume: 'Volym',
-    showVolume: 'Visa volymkontroll',
     mute: 'Stäng av ljud',
     unmute: 'Slå på ljud',
     enterFullscreen: 'Helskärm',

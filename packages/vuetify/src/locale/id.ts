@@ -174,12 +174,11 @@ export default {
     shortcut: 'Pintasan keyboard: {0}',
     or: 'atau',
   },
-  video: {
+  media: {
     play: 'Putar',
     pause: 'Jeda',
     seek: 'Cari',
     volume: 'Volume',
-    showVolume: 'Tampilkan kontrol volume',
     mute: 'Bisukan',
     unmute: 'Bunyikan',
     enterFullscreen: 'Layar penuh',

@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klaviatūros trumpinys: {0}',
     or: 'arba',
   },
-  video: {
+  media: {
     play: 'Groti',
     pause: 'Pauzė',
     seek: 'Ieškoti',
     volume: 'Garsumas',
-    showVolume: 'Rodyti garso valdymą',
     mute: 'Nutildyti',
     unmute: 'Įjungti garsą',
     enterFullscreen: 'Visas ekranas',

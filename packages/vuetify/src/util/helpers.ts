@@ -3,17 +3,16 @@ import {
   camelize,
   capitalize,
   Comment,
+  computed,
   Fragment,
   isProxy,
   isReactive,
   isRef,
   isVNode,
-  reactive,
   shallowRef,
   toRaw,
   toRef,
   unref,
-  watchEffect,
 } from 'vue'
 import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
@@ -584,16 +583,10 @@ type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = reactive({}) as T
-  watchEffect(() => {
-    const base = getter()
-    for (const key in base) {
-      refs[key] = base[key]
-    }
-  }, { flush: 'sync' })
+  const base = computed(getter)
   const obj = {} as ToReadonlyRefs<T>
-  for (const key in refs) {
-    obj[key] = toRef(() => refs[key]) as any
+  for (const key in base.value) {
+    obj[key] = toRef(() => base.value[key]) as any
   }
   return obj
 }
@@ -730,6 +723,12 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function isAutofill (e: Event) {
+  return !e.isTrusted ||
+    !!matchesSelector(e.target as Element, ':autofill') ||
+    !!matchesSelector(e.target as Element, ':-webkit-autofill')
 }
 
 export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {

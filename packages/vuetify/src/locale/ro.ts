@@ -174,12 +174,11 @@ export default {
     shortcut: 'Comandă rapidă tastatură: {0}',
     or: 'sau',
   },
-  video: {
+  media: {
     play: 'Redare',
     pause: 'Pauză',
     seek: 'Căutare',
     volume: 'Volum',
-    showVolume: 'Afișare control volum',
     mute: 'Fără sunet',
     unmute: 'Cu sunet',
     enterFullscreen: 'Ecran complet',

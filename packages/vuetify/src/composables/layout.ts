@@ -25,7 +25,9 @@ import {
   isPercentage,
   propsFactory,
   resolveSize,
+  templateRef,
 } from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -84,8 +86,6 @@ export const makeLayoutProps = propsFactory({
   } as Prop<string[]>,
   fullHeight: Boolean,
 }, 'layout')
-
-// Composables
 export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
@@ -188,7 +188,12 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const priorities = reactive(new Map<string, Ref<number>>())
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
-  const { resizeRef, contentRect: layoutRect } = useResizeObserver()
+  const layoutRef = templateRef()
+  const layoutRect = shallowRef<DOMRectReadOnly>()
+  useResizeObserver(() => layoutRef.el, entries => {
+    const { left, top, width, height } = entries[0].contentRect
+    layoutRect.value = new Box({ x: left, y: top, width, height }) as DOMRectReadOnly
+  })
 
   function sizeOf (value: number | string | undefined, position: Position) {
     const span = position === 'left' || position === 'right'
@@ -398,6 +403,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     getLayoutItem,
     items,
     layoutRect,
-    layoutRef: resizeRef,
+    layoutRef,
   }
 }

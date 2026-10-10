@@ -174,12 +174,11 @@ export default {
     shortcut: 'Raccourci clavier : {0}',
     or: 'ou',
   },
-  video: {
+  media: {
     play: 'Lire',
     pause: 'Pause',
     seek: 'Chercher',
     volume: 'Volume',
-    showVolume: 'Afficher le contrôle du volume',
     mute: 'Muet',
     unmute: 'Activer le son',
     enterFullscreen: 'Plein écran',

@@ -174,12 +174,11 @@ export default {
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
     or: 'ឬ',
   },
-  video: {
+  media: {
     play: 'លេង',
     pause: 'ផ្អាក',
     seek: 'ស្វែងរក',
     volume: 'កម្រិតសំឡេង',
-    showVolume: 'បង្ហាញការគ្រប់គ្រងកម្រិតសំឡេង',
     mute: 'បិទសំឡេង',
     unmute: 'បើក​សំឡេង',
     enterFullscreen: 'ពេញអេក្រង់',

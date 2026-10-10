@@ -92,7 +92,8 @@
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "pauseOnHover": "4.3.0"
     },
     "examples": {
       "misc-vertical": "3.9.0",
@@ -108,6 +109,20 @@
       "prop-hour24": "4.1.0"
     }
   },
+  "VCheckbox": {
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "isFocused": "4.3.0"
+    }
+  },
+  "VCheckboxBtn": {
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "isFocused": "4.3.0"
+    }
+  },
   "VChip": {
     "props": {
       "baseColor": "3.8.0"
@@ -121,6 +136,15 @@
   "VColorInput": {
     "props": {
       "openOnFocus": "4.2.0"
+    },
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "reset": "4.3.0",
+      "resetValidation": "4.3.0",
+      "validate": "4.3.0",
+      "isValid": "4.3.0",
+      "errorMessages": "4.3.0"
     }
   },
   "VColorPicker": {
@@ -477,8 +501,35 @@
       "prop-transition": "4.2.0"
     }
   },
+  "VRadio": {
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "isFocused": "4.3.0"
+    }
+  },
+  "VRadioGroup": {
+    "events": {
+      "update:focused": "4.3.0"
+    },
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "isFocused": "4.3.0"
+    }
+  },
+  "VRating": {
+    "props": {
+      "iconSize": "4.3.0"
+    }
+  },
   "VRow": {
     "props": {
+      "gapSm": "4.3.0",
+      "gapMd": "4.3.0",
+      "gapLg": "4.3.0",
+      "gapXl": "4.3.0",
+      "gapXxl": "4.3.0",
       "size": "4.0.0"
     }
   },
@@ -509,6 +560,16 @@
     "props": {
       "indeterminate": "4.1.0",
       "indeterminateIcon": "4.1.0"
+    },
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0"
+    }
+  },
+  "VSelectionControlGroup": {
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0"
     }
   },
   "VSkeletonLoader": {
@@ -622,6 +683,11 @@
       "thumb": "3.5.0",
       "track-false": "3.5.0",
       "track-true": "3.5.0"
+    },
+    "exposed": {
+      "blur": "4.3.0",
+      "focus": "4.3.0",
+      "isFocused": "4.3.0"
     }
   },
   "VTab": {
@@ -741,7 +807,8 @@
   "VWindow": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "wheel": "4.3.0"
     }
   }
 }

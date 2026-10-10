@@ -1,7 +1,7 @@
 // Utilities
-import { computed, inject, onScopeDispose, reactive, shallowRef, toRef, toRefs, watchEffect } from 'vue'
-import { getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
-import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
+import { computed, effectScope, inject, shallowRef, toRef } from 'vue'
+import { createBreakpoints, getCurrentInstanceName, isNull, isNumber, isObject, mergeDeep, propsFactory } from '@/util'
+import { IN_BROWSER, SUPPORTS_MATCH_MEDIA, SUPPORTS_TOUCH } from '@/util/globals'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -53,24 +53,24 @@ export interface DisplayPlatform {
 }
 
 export interface DisplayInstance {
-  xs: Ref<boolean>
-  sm: Ref<boolean>
-  md: Ref<boolean>
-  lg: Ref<boolean>
-  xl: Ref<boolean>
-  xxl: Ref<boolean>
-  smAndUp: Ref<boolean>
-  mdAndUp: Ref<boolean>
-  lgAndUp: Ref<boolean>
-  xlAndUp: Ref<boolean>
-  smAndDown: Ref<boolean>
-  mdAndDown: Ref<boolean>
-  lgAndDown: Ref<boolean>
-  xlAndDown: Ref<boolean>
-  name: Ref<DisplayBreakpoint>
-  height: Ref<number>
-  width: Ref<number>
-  mobile: Ref<boolean>
+  xs: Readonly<Ref<boolean>>
+  sm: Readonly<Ref<boolean>>
+  md: Readonly<Ref<boolean>>
+  lg: Readonly<Ref<boolean>>
+  xl: Readonly<Ref<boolean>>
+  xxl: Readonly<Ref<boolean>>
+  smAndUp: Readonly<Ref<boolean>>
+  mdAndUp: Readonly<Ref<boolean>>
+  lgAndUp: Readonly<Ref<boolean>>
+  xlAndUp: Readonly<Ref<boolean>>
+  smAndDown: Readonly<Ref<boolean>>
+  mdAndDown: Readonly<Ref<boolean>>
+  lgAndDown: Readonly<Ref<boolean>>
+  xlAndDown: Readonly<Ref<boolean>>
+  name: Readonly<Ref<DisplayBreakpoint>>
+  height: Readonly<Ref<number>>
+  width: Readonly<Ref<number>>
+  mobile: Readonly<Ref<boolean>>
   mobileBreakpoint: Ref<number | DisplayBreakpoint>
   platform: Ref<DisplayPlatform>
   thresholds: Ref<DisplayThresholds>
@@ -97,18 +97,6 @@ const defaultDisplayOptions: DisplayOptions = {
 
 const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) => {
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
-}
-
-function getClientWidth (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerWidth
-    : (isObject(ssr) && ssr.clientWidth) || 0
-}
-
-function getClientHeight (ssr?: SSROptions) {
-  return IN_BROWSER && !ssr
-    ? window.innerHeight
-    : (isObject(ssr) && ssr.clientHeight) || 0
 }
 
 function getPlatform (ssr?: SSROptions): DisplayPlatform {
@@ -152,70 +140,57 @@ function getPlatform (ssr?: SSROptions): DisplayPlatform {
 export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = shallowRef(getClientHeight(ssr))
-  const platform = shallowRef(getPlatform(ssr))
-  const state = reactive({} as DisplayInstance)
-  const width = shallowRef(getClientWidth(ssr))
+  // `ssr: true` is the boolean form; createBreakpoints only accepts a size.
+  const ssrSize = isObject(ssr)
+    ? ssr
+    : ssr
+      ? { clientWidth: 0, clientHeight: 0 }
+      : undefined
 
-  function updateSize () {
-    height.value = getClientHeight()
-    width.value = getClientWidth()
-  }
+  const screen = createBreakpoints({
+    breakpoints: thresholds,
+    mobileBreakpoint,
+    ssr: ssrSize,
+  })
+
+  const platform = shallowRef(getPlatform(ssr))
+
+  // ssr defers the listener until update(), and that call happens after
+  // createVuetify's scope has returned. The child scope is still stopped
+  // with it, so unmount removes the listener.
+  const resizeScope = ssrSize ? effectScope() : undefined
+
   function update () {
-    updateSize()
+    if (resizeScope) resizeScope.run(() => screen.update())
+    else screen.update()
     platform.value = getPlatform()
   }
 
-  // eslint-disable-next-line max-statements
-  watchEffect(() => {
-    const xs = width.value < thresholds.sm
-    const sm = width.value < thresholds.md && !xs
-    const md = width.value < thresholds.lg && !(sm || xs)
-    const lg = width.value < thresholds.xl && !(md || sm || xs)
-    const xl = width.value < thresholds.xxl && !(lg || md || sm || xs)
-    const xxl = width.value >= thresholds.xxl
-    const name =
-      xs ? 'xs'
-      : sm ? 'sm'
-      : md ? 'md'
-      : lg ? 'lg'
-      : xl ? 'xl'
-      : 'xxl'
-    const breakpointValue = isNumber(mobileBreakpoint) ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = width.value < breakpointValue
-
-    state.xs = xs
-    state.sm = sm
-    state.md = md
-    state.lg = lg
-    state.xl = xl
-    state.xxl = xxl
-    state.smAndUp = !xs
-    state.mdAndUp = !(xs || sm)
-    state.lgAndUp = !(xs || sm || md)
-    state.xlAndUp = !(xs || sm || md || lg)
-    state.smAndDown = !(md || lg || xl || xxl)
-    state.mdAndDown = !(lg || xl || xxl)
-    state.lgAndDown = !(xl || xxl)
-    state.xlAndDown = !xxl
-    state.name = name
-    state.height = height.value
-    state.width = width.value
-    state.mobile = mobile
-    state.mobileBreakpoint = mobileBreakpoint
-    state.platform = platform.value
-    state.thresholds = thresholds
-  })
-
-  if (IN_BROWSER) {
-    window.addEventListener('resize', updateSize, { passive: true })
-
-    onScopeDispose(() => {
-      window.removeEventListener('resize', updateSize)
-    }, true)
+  return {
+    xs: screen.xs,
+    sm: screen.sm,
+    md: screen.md,
+    lg: screen.lg,
+    xl: screen.xl,
+    xxl: screen.xxl,
+    smAndUp: screen.smAndUp,
+    mdAndUp: screen.mdAndUp,
+    lgAndUp: screen.lgAndUp,
+    xlAndUp: screen.xlAndUp,
+    smAndDown: screen.smAndDown,
+    mdAndDown: screen.mdAndDown,
+    lgAndDown: screen.lgAndDown,
+    xlAndDown: screen.xlAndDown,
+    name: screen.name,
+    height: screen.height,
+    width: screen.width,
+    mobile: screen.isMobile,
+    mobileBreakpoint: shallowRef(mobileBreakpoint),
+    platform,
+    thresholds: shallowRef(thresholds),
+    ssr: !!ssr,
+    update,
   }
-
-  return { ...toRefs(state), update, ssr: !!ssr }
 }
 
 export const makeDisplayProps = propsFactory({
@@ -234,13 +209,24 @@ export function useDisplay (
 
   if (!display) throw new Error('Could not find Vuetify display injection')
 
+  function isBelow (px: number, width: number, matchWithMediaQuery: boolean) {
+    return matchWithMediaQuery
+      ? !window.matchMedia(`(min-width: ${px}px)`).matches
+      : width < px
+  }
+
   const mobile = computed(() => {
+    // Reactivity triggers, do not remove. matchMedia() does not subscribe.
+    const width = display.width.value
+    // Hydration must match the server's width comparison until update()
+    const matchWithMediaQuery = SUPPORTS_MATCH_MEDIA && !display.platform.value.ssr
+
     if (props.mobile) {
       return true
     } else if (isNumber(props.mobileBreakpoint)) {
-      return display.width.value < props.mobileBreakpoint
+      return isBelow(props.mobileBreakpoint, width, matchWithMediaQuery)
     } else if (props.mobileBreakpoint) {
-      return display.width.value < display.thresholds.value[props.mobileBreakpoint]
+      return isBelow(display.thresholds.value[props.mobileBreakpoint], width, matchWithMediaQuery)
     } else if (isNull(props.mobile)) {
       return display.mobile.value
     } else {

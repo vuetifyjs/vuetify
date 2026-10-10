@@ -174,12 +174,11 @@ export default {
     shortcut: 'Skrót klawiszowy: {0}',
     or: 'lub',
   },
-  video: {
+  media: {
     play: 'Odtwórz',
     pause: 'Wstrzymaj',
     seek: 'Przewiń',
     volume: 'Głośność',
-    showVolume: 'Pokaż regulację głośności',
     mute: 'Wycisz',
     unmute: 'Wyłącz wyciszenie',
     enterFullscreen: 'Pełny ekran',

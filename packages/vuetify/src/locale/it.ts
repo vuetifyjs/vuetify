@@ -174,12 +174,11 @@ export default {
     shortcut: 'Scorciatoia da tastiera: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Riproduci',
     pause: 'Metti in pausa',
     seek: 'Cerca',
     volume: 'Volume',
-    showVolume: 'Mostra controllo volume',
     mute: 'Muto',
     unmute: 'Riattiva audio',
     enterFullscreen: 'Schermo intero',

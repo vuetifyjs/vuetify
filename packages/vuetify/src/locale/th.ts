@@ -174,12 +174,11 @@ export default {
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
     or: 'หรือ',
   },
-  video: {
+  media: {
     play: 'เล่น',
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',
     volume: 'ระดับเสียง',
-    showVolume: 'แสดงตัวควบคุมระดับเสียง',
     mute: 'ปิดเสียง',
     unmute: 'เปิดเสียง',
     enterFullscreen: 'เต็มหน้าจอ',

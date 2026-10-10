@@ -174,12 +174,11 @@ export default {
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
     or: 'ή',
   },
-  video: {
+  media: {
     play: 'Αναπαραγωγή',
     pause: 'Παύση',
     seek: 'Αναζήτηση',
     volume: 'Ένταση',
-    showVolume: 'Εμφάνιση ελέγχου έντασης',
     mute: 'Σίγαση',
     unmute: 'Κατάργηση σίγασης',
     enterFullscreen: 'Πλήρης οθόνη',

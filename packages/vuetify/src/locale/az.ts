@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klaviatura qısayolu: {0}',
     or: 'və ya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Pauza',
     seek: 'Axtar',
     volume: 'Səs',
-    showVolume: 'Səs səviyyəsini göstər',
     mute: 'Səsi kəs',
     unmute: 'Səsi aç',
     enterFullscreen: 'Tam ekran',

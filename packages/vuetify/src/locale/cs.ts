@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klávesová zkratka: {0}',
     or: 'nebo',
   },
-  video: {
+  media: {
     play: 'Přehrát',
     pause: 'Pozastavit',
     seek: 'Vyhledat',
     volume: 'Hlasitost',
-    showVolume: 'Zobrazit ovládání hlasitosti',
     mute: 'Ztlumit',
     unmute: 'Zrušit ztlumení',
     enterFullscreen: 'Celá obrazovka',

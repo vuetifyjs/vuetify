@@ -7,21 +7,21 @@
       <v-card-text class="pb-4 px-6">
         <v-video
           :volume="50"
+          actions="elapsed progress remaining volume"
           aspect-ratio="4 / 3"
-          background-color="transparent"
+          bg-color="transparent"
           color="orange"
           controls-transition="slide-y-transition"
           elevation="0"
           image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video-poster.jpg"
+          progress-variant="wavy"
           rounded="xl"
           src="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-video.mp4"
           width="100%"
           detached
           eager
           floating
-          hide-play
           no-fullscreen
-          split-time
         ></v-video>
       </v-card-text>
     </v-card>

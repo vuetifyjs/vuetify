@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klávesová skratka: {0}',
     or: 'alebo',
   },
-  video: {
+  media: {
     play: 'Prehrať',
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',
     volume: 'Hlasitosť',
-    showVolume: 'Zobraziť ovládanie hlasitosti',
     mute: 'Stlmiť',
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',

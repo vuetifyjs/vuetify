@@ -174,12 +174,11 @@ export default {
     shortcut: 'Klavye kısayolu: {0}',
     or: 'veya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Duraklat',
     seek: 'Ara',
     volume: 'Ses',
-    showVolume: 'Ses kontrolünü göster',
     mute: 'Sesi kapat',
     unmute: 'Sesi aç',
     enterFullscreen: 'Tam ekran',

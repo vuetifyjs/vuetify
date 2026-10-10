@@ -101,7 +101,7 @@ export type ItemKeySlot<T> = ItemSlotBase<T> & {
 
 export type RowProps<T> = Record<string, any> | RowPropsFunction<T>
 export type RowPropsFunction<T> = (
-  data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem'>
+  data: Pick<ItemSlot<T>, 'index' | 'item' | 'internalItem' | 'isExpanded' | 'isSelected'>
 ) => Record<string, any>
 
 export type CellProps<T> = Record<string, any> | CellPropsFunction<T>

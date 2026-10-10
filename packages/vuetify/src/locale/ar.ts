@@ -174,12 +174,11 @@ export default {
     shortcut: 'اختصار لوحة المفاتيح: {0}',
     or: 'أو',
   },
-  video: {
+  media: {
     play: 'تشغيل',
     pause: 'إيقاف مؤقت',
     seek: 'بحث',
     volume: 'مستوى الصوت',
-    showVolume: 'إظهار التحكم في مستوى الصوت',
     mute: 'كتم الصوت',
     unmute: 'إلغاء كتم الصوت',
     enterFullscreen: 'ملء الشاشة',

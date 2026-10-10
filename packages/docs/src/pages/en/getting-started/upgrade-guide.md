@@ -157,22 +157,11 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-#### Layer order declaration must come first
-
-The layer order `@layer` statement must be imported **before any layered CSS is parsed** — including Vuetify's own styles. The browser assigns layer priority the first time a layer name appears, so if Vuetify's styles load first, the browser will establish the order from those, not from your declaration.
-
-Import your layer order statement at the very top of your app entrypoint:
-
-```js { resource="src/main.ts" }
-// @layer declaration comes first
-import './styles/layers.css'
-import 'vuetify/styles'
-import { createApp } from 'vue'
-```
+#### Custom layer order
 
 If you intend to migrate large application, it is recommended to define and adopt your own layers, so that developers can drop `!important` and gain more control over the stylesheets.
 
-```css { resource="src/styles/layers.css" }
+```css { resource="public/layers.css" }
 @layer vuetify-core;
 @layer vuetify-components;
 @layer vuetify-overrides;
@@ -187,9 +176,15 @@ If you intend to migrate large application, it is recommended to define and adop
 @layer vuetify-final;
 ```
 
+Link it from `index.html` instead of importing it, as described in [CSS Layers](/styles/layers/#custom-layer-order):
+
+```html { resource="index.html" }
+<link rel="stylesheet" href="/layers.css">
+```
+
 ::: warning
 
-If this import is missing or appears after Vuetify styles, reset styles or earlier-declared layers may unexpectedly override component styles. Symptoms vary per app depending on build output order, making it difficult to diagnose. This is often caused by Vite v8.x and/or `vue-router` v5.x.
+If `layers.css` is missing or bundled, your layers may end up ordered after `vuetify-final` or between the wrong Vuetify layers. Symptoms vary per app depending on build output order, making them difficult to diagnose.
 
 **Note**: using `@vuetify/cli` with `init` command to generate a working project for comparison is usually the fastest way to effectively troubleshoot the problems.
 

@@ -174,12 +174,11 @@ export default {
     shortcut: 'Tastenkürzel: {0}',
     or: 'oder',
   },
-  video: {
+  media: {
     play: 'Abspielen',
     pause: 'Pause',
     seek: 'Suchen',
     volume: 'Lautstärke',
-    showVolume: 'Lautstärkeregler anzeigen',
     mute: 'Stummschalten',
     unmute: 'Stummschaltung aufheben',
     enterFullscreen: 'Vollbild',

@@ -272,6 +272,10 @@
     "items": [
       "introduction",
       {
+        "title": "audio-players",
+        "subfolder": "components"
+      },
+      {
         "title": "avatar-groups",
         "subfolder": "components"
       },

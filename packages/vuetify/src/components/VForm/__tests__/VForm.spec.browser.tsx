@@ -247,7 +247,7 @@ describe('VForm', () => {
     fieldModel.value = 'foo'
 
     await userEvent.click(screen.getByCSS('.v-btn'))
-    await expect.poll(() => submit).toHaveBeenCalledOnce()
+    await expect.poll(() => submit).toHaveBeenCalledTimes(1)
 
     submit.mockRestore()
   })

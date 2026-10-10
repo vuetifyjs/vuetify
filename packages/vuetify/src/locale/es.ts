@@ -174,12 +174,11 @@ export default {
     shortcut: 'Atajo de teclado: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproducir',
     pause: 'Pausa',
     seek: 'Buscar',
     volume: 'Volumen',
-    showVolume: 'Mostrar control de volumen',
     mute: 'Silenciar',
     unmute: 'Activar sonido',
     enterFullscreen: 'Pantalla completa',

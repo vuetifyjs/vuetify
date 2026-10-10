@@ -174,12 +174,11 @@ export default {
     shortcut: 'Tipkovnička prečica: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reproduciraj',
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Glasnoća',
-    showVolume: 'Prikaži kontrolu glasnoće',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Puni zaslon',

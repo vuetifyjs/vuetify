@@ -174,12 +174,11 @@ export default {
     shortcut: 'Drecera de teclat: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproduir',
     pause: 'Paura',
     seek: 'Cercar',
     volume: 'Volum',
-    showVolume: 'Mostrar control de volum',
     mute: 'Silenciar',
     unmute: 'Activar so',
     enterFullscreen: 'Pantalla completa',

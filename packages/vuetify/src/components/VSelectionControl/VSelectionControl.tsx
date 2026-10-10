@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
+import { computed, inject, nextTick, shallowRef, toRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -177,12 +177,30 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
+
     const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
-    const input = ref<HTMLInputElement>()
+    const input = shallowRef<HTMLInputElement>()
     const id = toRef(() => props.id || `input-${uid}`)
     const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
+    function focus (options?: FocusOptions) {
+      input.value?.focus(options)
+      if (options?.focusVisible !== undefined && input.value?.matches(':focus')) {
+        isFocusVisible.value = options.focusVisible
+      }
+    }
+
+    function blur () {
+      input.value?.blur()
+    }
+
+    group?.register({
+      el: () => input.value,
+      focus,
+      isChecked: () => model.value,
+    })
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -328,6 +346,8 @@ export const VSelectionControl = genericComponent<new <T>(
     })
 
     return {
+      blur,
+      focus,
       isFocused,
       input,
     }

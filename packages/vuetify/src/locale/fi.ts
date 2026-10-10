@@ -174,12 +174,11 @@ export default {
     shortcut: 'Näppäinyhdistelmä: {0}',
     or: 'tai',
   },
-  video: {
+  media: {
     play: 'Toista',
     pause: 'Tauko',
     seek: 'Hae',
     volume: 'Äänenvoimakkuus',
-    showVolume: 'Näytä äänenvoimakkuuden säädin',
     mute: 'Mykistä',
     unmute: 'Poista mykistys',
     enterFullscreen: 'Koko näyttö',
