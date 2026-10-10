@@ -139,13 +139,20 @@ export function useActivator (
   const cursorTarget = ref<[x: number, y: number]>()
   let touchHoldTimer = -1
   let openedByTouchHold = false
+  let cursorOffset: [x: number, y: number] | undefined
+  function setCursorTarget (point: [x: number, y: number] | undefined) {
+    cursorTarget.value = point
+    const rect = activatorEl.value?.getBoundingClientRect()
+    cursorOffset = point && rect && [point[0] - rect.left, point[1] - rect.top]
+  }
+
   const availableEvents = {
     onClick: (e: MouseEvent) => {
       if (reopenLock && !isActive.value) return
       e.stopPropagation()
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (!isActive.value) {
-        cursorTarget.value = [e.clientX, e.clientY]
+        setCursorTarget([e.clientX, e.clientY])
       }
       isActive.value = !isActive.value
     },
@@ -153,12 +160,12 @@ export function useActivator (
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       if (props.target === 'cursor') {
-        cursorTarget.value = [e.clientX, e.clientY]
+        setCursorTarget([e.clientX, e.clientY])
       }
       runOpenDelay()
     },
     onMousemove: (e: MouseEvent) => {
-      cursorTarget.value = [e.clientX, e.clientY]
+      setCursorTarget([e.clientX, e.clientY])
     },
     onMouseleave: (e: MouseEvent) => {
       isHovered = false
@@ -187,7 +194,7 @@ export function useActivator (
       }
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       // keyboard-triggered contextmenu (Shift+F10) may report 0,0; anchor to the activator instead
-      cursorTarget.value = e.clientX || e.clientY ? [e.clientX, e.clientY] : undefined
+      setCursorTarget(e.clientX || e.clientY ? [e.clientX, e.clientY] : undefined)
       isActive.value = true
     },
     // iOS never fires contextmenu, so emulate the long-press
@@ -199,7 +206,7 @@ export function useActivator (
       const el = (e.currentTarget || e.target) as HTMLElement
       touchHoldTimer = window.setTimeout(() => {
         activatorEl.value = el
-        cursorTarget.value = [clientX, clientY]
+        setCursorTarget([clientX, clientY])
         openedByTouchHold = !isActive.value
         isActive.value = true
       }, 500)
@@ -321,9 +328,21 @@ export function useActivator (
     }
   })
 
+  // the cursor point is in viewport coordinates, so it has to follow the activator
+  function onScroll () {
+    const rect = activatorEl.value?.getBoundingClientRect()
+    if (!cursorOffset || !rect) return
+    cursorTarget.value = [rect.left + cursorOffset[0], rect.top + cursorOffset[1]]
+  }
+  watch(isActive, val => {
+    // target="cursor" keeps the point fixed in the viewport
+    if (val && props.contextMenu && !props.target) document.addEventListener('scroll', onScroll, { capture: true, passive: true })
+    else document.removeEventListener('scroll', onScroll, { capture: true })
+  })
+
   // clearing earlier makes the leave transition fly back to the activator
   function onAfterLeave () {
-    if (!isActive.value) cursorTarget.value = undefined
+    if (!isActive.value) setCursorTarget(undefined)
   }
 
   const activatorRef = templateRef()
@@ -361,6 +380,7 @@ export function useActivator (
 
   onScopeDispose(() => {
     clearTimeout(touchHoldTimer)
+    document.removeEventListener('scroll', onScroll, { capture: true })
     scope?.stop()
   })
 

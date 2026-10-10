@@ -12,7 +12,7 @@ import { VTooltip } from '@/components/VTooltip'
 
 // Utilities
 import { commands, render, screen, userEvent, wait } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 describe('VMenu', () => {
   describe('open-on-focus with template activator', () => {
@@ -373,6 +373,29 @@ describe('VMenu', () => {
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
     await userEvent.click(area, { position: { x: 200, y: 250 } })
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+  })
+
+  it('should keep a cursor-positioned menu attached to the activator on scroll', async () => {
+    render(() => (
+      <div data-testid="scroller" style="height: 200px; overflow: auto">
+        <VSheet data-testid="area" height="600" width="300">
+          <VMenu activator="parent" contextMenu>
+            <VSheet data-testid="menu-content" height="40" width="80" />
+          </VMenu>
+        </VSheet>
+      </div>
+    ))
+    await nextTick()
+
+    const area = screen.getByTestId('area')
+    const box = area.getBoundingClientRect()
+    area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 50, clientY: box.top + 100 }))
+    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
+    await wait(300)
+    const before = screen.getByTestId('menu-content').getBoundingClientRect().top
+
+    screen.getByTestId('scroller').scrollTop = 40
+    await expect.poll(() => Math.round(screen.getByTestId('menu-content').getBoundingClientRect().top)).toBe(Math.round(before - 40))
   })
 
   it('should close on right and middle click outside', async () => {
