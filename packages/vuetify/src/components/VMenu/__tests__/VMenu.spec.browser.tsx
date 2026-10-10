@@ -398,6 +398,39 @@ describe('VMenu', () => {
     await expect.poll(() => Math.round(screen.getByTestId('menu-content').getBoundingClientRect().top)).toBe(Math.round(before - 40))
   })
 
+  it('should move focus into a context menu and navigate it with arrows', async () => {
+    render(() => (
+      <VList>
+        <VListItem data-testid="row" link title="Row">
+          <VMenu activator="parent">
+            <VList>
+              <VListItem data-testid="click-item" link title="Click" />
+            </VList>
+          </VMenu>
+          <VMenu activator="parent" contextMenu>
+            <VList>
+              <VListItem data-testid="context-item" link title="Context" />
+            </VList>
+          </VMenu>
+        </VListItem>
+      </VList>
+    ))
+
+    await userEvent.click(screen.getByTestId('row'), { button: 'right' })
+    await expect.poll(() => screen.queryByTestId('context-item')).toBeVisible()
+    await expect.poll(() => screen.getByTestId('context-item').closest('.v-overlay__content')?.contains(document.activeElement)).toBe(true)
+
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId('context-item'))
+    expect(screen.queryByTestId('click-item')).toBeNull()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => document.activeElement).toBe(screen.getByTestId('row'))
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(() => screen.queryByTestId('click-item')).toBeVisible()
+    await expect.poll(() => screen.queryByTestId('context-item')).toBeNull()
+  })
+
   it('should close on right and middle click outside', async () => {
     render(() => (
       <div class="d-flex ga-4">
