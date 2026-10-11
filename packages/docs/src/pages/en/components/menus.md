@@ -81,7 +81,7 @@ You can disable the menu. Disabled menus can't be opened.
 
 #### Location
 
-Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location).
+Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location-strategies).
 
 <ExamplesExample file="v-menu/prop-location" />
 

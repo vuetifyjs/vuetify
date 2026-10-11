@@ -381,7 +381,7 @@ The [`vuetify add`](https://0.vuetifyjs.com/guide/tooling/vuetify-cli) command i
 
 ---
 
-## What's Next { .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 v4.3.0 is due October 15. [v4.2.4](/getting-started/release-notes/?version=v4.2.4) and [v3.13.6](/getting-started/release-notes/?version=v3.13.6) shipped this week. Display is the next system to move onto Vuetify0, and we'll keep porting the rest through 4.x minors.
 
