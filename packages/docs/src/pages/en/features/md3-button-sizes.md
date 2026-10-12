@@ -52,8 +52,7 @@ Icon buttons get the same height as text buttons, `$button-icon-density` is igno
 
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (
-  // preserve sizes in downstream components
-  $date-picker-month-day-btn-size: 40px,
+  // preserve sizes in VPagination
   $pagination-btn-sizes: (
     'x-small': 32px,
     'small': 40px,
