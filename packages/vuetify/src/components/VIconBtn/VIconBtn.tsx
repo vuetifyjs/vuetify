@@ -146,6 +146,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       )
 
       const iconProps = {
+        class: 'v-icon-btn__icon',
         icon,
         size: iconSize.value,
         color: props.iconColor,

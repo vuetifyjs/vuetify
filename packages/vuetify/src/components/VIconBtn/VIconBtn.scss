@@ -80,8 +80,13 @@
       width: var(--v-icon-btn-wide-width, #{$icon-btn-width});
     }
 
+    $icon-selector: '.v-icon-btn__icon';
+    @if btn.$icon-btn-named-sizes != () {
+      $icon-selector: '.v-icon';
+    }
+
     @each $name, $size in $icon-btn-icon-sizes {
-      .v-icon--size-#{$name} {
+      #{$icon-selector}.v-icon--size-#{$name} {
         font-size: var(--v-icon-btn-icon-size, #{$size});
       }
     }
