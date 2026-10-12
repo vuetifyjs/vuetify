@@ -2,7 +2,7 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VHighlight } from '@/labs/VHighlight'
+import { VHighlight } from '@/components/VHighlight'
 
 // Composables
 import { useExpanded } from './composables/expand'

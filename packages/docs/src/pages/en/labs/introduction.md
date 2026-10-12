@@ -83,7 +83,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-progress](/components/progress/)                  | A unified progress indicator component with a11y defaults  | [v4.0.3](/getting-started/release-notes/?version=v4.0.3)   |
 | [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
-| [v-highlight](/components/highlights/)               | Renders text with highlighted search matches               | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-audio](/components/audio-players/)                | A player for self-hosted audio with a seekable waveform    | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
 

@@ -185,6 +185,7 @@
           "virtual-tables"
         ]
       },
+      "highlights",
       "hotkeys",
       "sparklines",
       "infinite-scroller",
@@ -289,10 +290,6 @@
       },
       {
         "title": "heatmaps",
-        "subfolder": "components"
-      },
-      {
-        "title": "highlights",
         "subfolder": "components"
       },
       {
