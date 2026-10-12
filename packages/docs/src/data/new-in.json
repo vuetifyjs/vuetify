@@ -467,6 +467,11 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VProgress": {
+    "examples": {
+      "misc-loading-indicator": "4.3.0"
+    }
+  },
   "VProgressCircular": {
     "props": {
       "reveal": "3.12.0",

@@ -6,10 +6,11 @@
     flex-direction: column
     gap: 8px
 
-    > .v-progress-circular
+    > .v-progress-circular,
+    > .v-loading-indicator
       align-self: center
 
-    &:has(> .v-progress-circular) > .v-progress__details > *:only-child
+    &:has(> .v-progress-circular, > .v-loading-indicator) > .v-progress__details > *:only-child
       margin-inline: auto
 
     &__label

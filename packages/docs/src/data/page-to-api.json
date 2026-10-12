@@ -107,6 +107,7 @@
   "components/icons": ["VIcon"],
   "components/images": ["VImg"],
   "components/infinite-carousels": ["VInfiniteCarousel"],
+  "components/loading-indicators": ["VLoadingIndicator"],
   "components/infinite-scroller": ["VInfiniteScroll"],
   "components/inputs": ["VInput"],
   "components/item-groups": ["VItem", "VItemGroup"],

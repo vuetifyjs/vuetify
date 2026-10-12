@@ -295,6 +295,10 @@
         "subfolder": "components"
       },
       {
+        "title": "loading-indicators",
+        "subfolder": "components"
+      },
+      {
         "title": "mask-inputs",
         "subfolder": "components"
       },
