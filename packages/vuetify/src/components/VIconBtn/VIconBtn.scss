@@ -89,6 +89,11 @@
       #{$icon-selector}.v-icon--size-#{$name} {
         font-size: var(--v-icon-btn-icon-size, #{$size});
       }
+
+      .v-icon-btn__loader > .v-progress-circular--size-#{$name} {
+        height: var(--v-icon-btn-icon-size, #{$size});
+        width: var(--v-icon-btn-icon-size, #{$size});
+      }
     }
   }
 
