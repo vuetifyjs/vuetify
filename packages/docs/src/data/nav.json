@@ -212,6 +212,7 @@
       "banners",
       "empty-states",
       "hover",
+      "progress",
       "progress-circular",
       "progress-linear",
       "ratings",
@@ -303,10 +304,6 @@
       },
       {
         "title": "pie-charts",
-        "subfolder": "components"
-      },
-      {
-        "title": "progress",
         "subfolder": "components"
       },
       {

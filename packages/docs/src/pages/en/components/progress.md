@@ -8,7 +8,7 @@ related:
   - /components/progress-linear/
   - /components/progress-circular/
 features:
-  github: /labs/VProgress/
+  github: /components/VProgress/
   label: 'C: VProgress'
   report: true
 ---
@@ -21,23 +21,9 @@ The `v-progress` component is a unified wrapper for linear and circular progress
 
 ::: warning
 
-This feature requires [v4.0.3](/getting-started/release-notes/?version=v4.0.3)
+This feature was introduced in [v4.0.3](/getting-started/release-notes/?version=v4.0.3). For versions before [v4.3.0](/getting-started/release-notes/?version=v4.3.0) it requires import from `vuetify/labs/VProgress` (labs).
 
 :::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VProgress } from 'vuetify/labs/VProgress'
-
-export default createVuetify({
-  components: {
-    VProgress,
-  },
-})
-```
 
 ## Usage
 
