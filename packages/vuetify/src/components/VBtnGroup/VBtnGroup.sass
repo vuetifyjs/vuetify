@@ -22,7 +22,9 @@
     @include tools.rounded($btn-group-border-radius)
     @include tools.theme($btn-group-theme...)
 
-    $legacy: if($btn-group-named-sizes == (), '&', '&.v-btn-group--divided')
+    $legacy: '&'
+    @if $btn-group-named-sizes != ()
+      $legacy: '&.v-btn-group--divided'
 
     .v-btn
       border-color: inherit
