@@ -1,4 +1,7 @@
+@use 'sass:list'
+@use 'sass:map'
 @use 'sass:selector'
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use '../VBtn/mixins' as *
 @use '../VBtn/variables' as *
@@ -19,9 +22,13 @@
     @include tools.rounded($btn-group-border-radius)
     @include tools.theme($btn-group-theme...)
 
+    $legacy: if($btn-group-named-sizes == (), '&', '&.v-btn-group--divided')
+
     .v-btn
-      border-radius: 0
       border-color: inherit
+
+    #{$legacy} .v-btn
+      border-radius: 0
 
     &--tile
       @include tools.rounded($btn-group-tile-border-radius)
@@ -38,7 +45,7 @@
             &:not(.v-btn-group--has-size)
               height: $btn-group-height + $modifier
 
-      .v-btn
+      #{$legacy} .v-btn
         &:not(:last-child)
           border-inline-end: none
 
@@ -62,7 +69,7 @@
     &--vertical
       flex-direction: column
 
-      .v-btn
+      #{$legacy} .v-btn
         &:not(:last-child)
           border-block-end: none
 
@@ -82,3 +89,105 @@
           border-block-end-width: $btn-group-border-thin-width
           border-block-end-style: $btn-group-border-style
           border-block-end-color: $btn-group-border-color
+
+@if $btn-group-named-sizes != ()
+  @if $button-named-sizes == ()
+    @error '$btn-group-named-sizes requires $button-named-sizes'
+
+  @include tools.layer('components')
+    @each $name in map.keys(settings.$size-scales)
+      $tokens: map.get($btn-group-named-sizes, $name)
+      @if not $tokens
+        @error '$btn-group-named-sizes: missing size `#{$name}`'
+      @each $key in (gap, selected-radius, connected)
+        @if not map.has-key($tokens, $key)
+          @error '$btn-group-named-sizes: missing key `#{$key}` in `#{$name}`'
+      @each $key in map.keys($tokens)
+        @if not list.index((gap, selected-radius, connected), $key)
+          @error '$btn-group-named-sizes: unsupported key `#{$key}` in `#{$name}`, use one of: gap, selected-radius, connected'
+      @each $key in map.keys(map.get($tokens, 'connected'))
+        @if not list.index((inner-radius, inner-radius-pressed), $key)
+          @error '$btn-group-named-sizes: unsupported key `connected.#{$key}` in `#{$name}`, use one of: inner-radius, inner-radius-pressed'
+
+      .v-btn-group--size-#{$name}
+        --v-btn-group-gap: #{map.get($tokens, 'gap')}
+        --v-btn-group-selected-radius: #{map.get($tokens, 'selected-radius')}
+        --v-btn-group-inner-radius: #{map.get($tokens, 'connected', 'inner-radius')}
+        --v-btn-group-inner-radius-pressed: #{map.get($tokens, 'connected', 'inner-radius-pressed')}
+
+    .v-btn-group:not(.v-btn-group--divided)
+      background: none
+      border-radius: 0
+      gap: var(--v-btn-group-gap)
+      overflow: visible
+
+      > .v-btn
+        border-radius: var(--v-btn-border-radius)
+
+        > .v-btn__overlay,
+        > .v-btn__underlay
+          will-change: opacity
+
+        &:active
+          border-radius: var(--v-btn-border-radius-pressed)
+
+      &:not(.v-btn-group--connected) > .v-btn
+        &.v-btn--active,
+        &:active
+          border-radius: var(--v-btn-group-selected-radius)
+
+      &.v-btn-group--horizontal:not(.v-btn-group--connected) > .v-btn
+        --v-btn-group-expand: calc(var(--v-btn-height) * #{$btn-group-expand-ratio})
+
+        transition-property: list.join($button-transition-property, (padding, width), comma)
+
+        &:not(.v-btn--icon)
+          padding-inline: calc(var(--v-btn-padding-inline) + var(--v-btn-group-delta, 0px) / 2)
+
+        @each $density, $multiplier in button-icon-densities()
+          &.v-btn--icon.v-btn--density-#{$density}
+            width: calc(var(--v-btn-height) + #{$multiplier * settings.$spacer} + var(--v-btn-group-delta, 0px))
+
+        &:active
+          --v-btn-group-delta: calc(var(--v-btn-group-expand) * 2)
+
+        &:has(+ .v-btn:active),
+        &:active + .v-btn
+          --v-btn-group-delta: calc(var(--v-btn-group-expand) * -1)
+
+        &:has(+ .v-btn:last-child:active),
+        &:first-child:active + .v-btn
+          --v-btn-group-delta: calc(var(--v-btn-group-expand) * -2)
+
+      &.v-btn-group--connected
+        gap: $btn-group-connected-gap
+
+        > .v-btn
+          --v-btn-group-inner: var(--v-btn-group-inner-radius)
+          --v-btn-group-outer: var(--v-btn-border-radius)
+
+          border-radius: var(--v-btn-group-inner)
+
+          &:active
+            --v-btn-group-inner: var(--v-btn-group-inner-radius-pressed)
+
+          &.v-btn--active
+            --v-btn-group-inner: var(--v-btn-border-radius)
+
+        &.v-btn-group--horizontal > .v-btn
+          &:first-child
+            border-start-start-radius: var(--v-btn-group-outer)
+            border-end-start-radius: var(--v-btn-group-outer)
+
+          &:last-child
+            border-start-end-radius: var(--v-btn-group-outer)
+            border-end-end-radius: var(--v-btn-group-outer)
+
+        &.v-btn-group--vertical > .v-btn
+          &:first-child
+            border-start-start-radius: var(--v-btn-group-outer)
+            border-start-end-radius: var(--v-btn-group-outer)
+
+          &:last-child
+            border-end-start-radius: var(--v-btn-group-outer)
+            border-end-end-radius: var(--v-btn-group-outer)

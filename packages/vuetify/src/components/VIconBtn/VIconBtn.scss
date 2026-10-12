@@ -1,16 +1,19 @@
+@use 'sass:list';
+@use 'sass:map';
 @use '../../styles/settings';
 @use '../../styles/tools';
+@use '../VBtn/variables' as btn;
 @use './variables' as *;
 
 @include tools.layer('components') {
   .v-icon-btn {
     @include tools.border($icon-btn-border...);
-    @include tools.rounded($icon-btn-border-radius);
     @include tools.states('.v-icon-btn__overlay');
     @include tools.variant($icon-btn-variants...);
 
     & {
       align-items: center;
+      border-radius: var(--v-icon-btn-border-radius, #{$icon-btn-border-radius});
       cursor: pointer;
       display: inline-flex;
       flex: none;
@@ -22,8 +25,9 @@
       outline: none;
       overflow: hidden;
       position: relative;
-      transition-property: width, height, transform;
-      transition: 0.2s settings.$standard-easing;
+      transition-property: width, height, transform, border-radius, background-color, color, box-shadow, opacity;
+      transition-duration: .2s;
+      transition-timing-function: settings.$standard-easing;
       vertical-align: middle;
       width: #{$icon-btn-width};
 
@@ -59,6 +63,53 @@
 
     &--end {
       margin-inline-start: $icon-btn-margin-end;
+    }
+
+    @each $name, $size in $icon-btn-sizes {
+      &--#{$name} {
+        --v-icon-btn-height: #{$size};
+        --v-icon-btn-width: #{$size};
+      }
+    }
+
+    &--width-narrow {
+      width: var(--v-icon-btn-narrow-width, #{$icon-btn-width});
+    }
+
+    &--width-wide {
+      width: var(--v-icon-btn-wide-width, #{$icon-btn-width});
+    }
+
+    @each $name, $size in $icon-btn-icon-sizes {
+      .v-icon--size-#{$name} {
+        font-size: var(--v-icon-btn-icon-size, #{$size});
+      }
+    }
+  }
+
+  $keys: height, width, narrow-width, wide-width, icon-size, border-radius, border-radius-pressed;
+
+  @if btn.$icon-btn-named-sizes != () {
+    .v-icon-btn__overlay,
+    .v-icon-btn__underlay {
+      will-change: opacity;
+    }
+  }
+
+  @each $name, $tokens in btn.$icon-btn-named-sizes {
+    .v-icon-btn--#{$name} {
+      @each $key, $value in $tokens {
+        @if not list.index($keys, $key) {
+          @error '$icon-btn-named-sizes: unsupported key `#{$key}` in `#{$name}`, use one of: #{$keys}';
+        }
+        --v-icon-btn-#{$key}: #{$value};
+      }
+
+      @if map.has-key($tokens, 'border-radius-pressed') {
+        &:active {
+          border-radius: var(--v-icon-btn-border-radius-pressed);
+        }
+      }
     }
   }
 

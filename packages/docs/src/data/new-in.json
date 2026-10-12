@@ -81,6 +81,7 @@
   },
   "VBtnGroup": {
     "props": {
+      "connected": "4.3.0",
       "size": "4.2.0"
     }
   },
@@ -371,6 +372,11 @@
   "VIcon": {
     "props": {
       "opacity": "3.8.0"
+    }
+  },
+  "VIconBtn": {
+    "props": {
+      "widthVariant": "4.3.0"
     }
   },
   "VImg": {
