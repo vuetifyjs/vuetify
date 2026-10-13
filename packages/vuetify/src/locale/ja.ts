@@ -140,6 +140,9 @@ export default {
       end: '最大',
     },
   },
+  splitBtn: {
+    menu: 'その他のオプション',
+  },
   loading: 'ロード中...',
   infiniteScroll: {
     loadMore: 'さらに読み込む',

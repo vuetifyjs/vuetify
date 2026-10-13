@@ -1,0 +1,57 @@
+@use 'sass:list'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-split-btn
+    --v-split-btn-toggle-direction: 1
+
+    @include tools.rtl
+      --v-split-btn-toggle-direction: -1
+
+  .v-split-btn > .v-split-btn__toggle
+    min-width: 0
+    padding-inline: var(--v-split-btn-toggle-padding-inline, #{$split-btn-toggle-padding-inline})
+
+    .v-icon
+      transform: translateX(calc(var(--v-split-btn-toggle-icon-offset, 0px) * var(--v-split-btn-toggle-direction))) rotate(0)
+      transition: transform $split-btn-toggle-transition
+
+      @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    &.v-btn--active .v-icon
+      transform: translateX(0) rotate(180deg)
+
+@if $split-btn-named-sizes != ()
+  $keys: (action-padding-end, toggle-padding-inline, toggle-icon-size, toggle-icon-offset, inner-radius, inner-radius-pressed)
+
+  @include tools.layer('components')
+    @each $name in map.keys(settings.$size-scales)
+      $tokens: map.get($split-btn-named-sizes, $name)
+      @if not $tokens
+        @error '$split-btn-named-sizes: missing size `#{$name}`'
+      @each $key in $keys
+        @if not map.has-key($tokens, $key)
+          @error '$split-btn-named-sizes: missing key `#{$key}` in `#{$name}`'
+      @each $key in map.keys($tokens)
+        @if not list.index($keys, $key)
+          @error '$split-btn-named-sizes: unsupported key `#{$key}` in `#{$name}`, use one of: #{$keys}'
+
+      .v-split-btn.v-btn-group--size-#{$name}
+        --v-btn-group-inner-radius: #{map.get($tokens, 'inner-radius')}
+        --v-btn-group-inner-radius-pressed: #{map.get($tokens, 'inner-radius-pressed')}
+        --v-split-btn-toggle-padding-inline: #{map.get($tokens, 'toggle-padding-inline')}
+
+        > .v-split-btn__action:not(.v-btn--icon)
+          padding-inline-end: map.get($tokens, 'action-padding-end')
+
+        > .v-split-btn__toggle
+          --v-btn-icon-size: #{map.get($tokens, 'toggle-icon-size')}
+          --v-split-btn-toggle-icon-offset: #{map.get($tokens, 'toggle-icon-offset')}
+
+    // MD3 hover and pressed inner radii are equal at every size
+    .v-split-btn.v-btn-group--connected > .v-btn:hover:not(.v-btn--active)
+      --v-btn-group-inner: var(--v-btn-group-inner-radius-pressed)

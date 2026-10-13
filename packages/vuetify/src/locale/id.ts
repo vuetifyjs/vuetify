@@ -140,6 +140,9 @@ export default {
       end: 'Maksimum',
     },
   },
+  splitBtn: {
+    menu: 'Opsi lainnya',
+  },
   loading: 'Memuat...',
   infiniteScroll: {
     loadMore: 'Muat lebih banyak',

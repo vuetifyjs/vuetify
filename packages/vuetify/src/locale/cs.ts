@@ -140,6 +140,9 @@ export default {
       end: 'Maximum',
     },
   },
+  splitBtn: {
+    menu: 'Další možnosti',
+  },
   loading: 'Načítám...',
   infiniteScroll: {
     loadMore: 'Načíst více',

@@ -140,6 +140,9 @@ export default {
       end: 'Максимум',
     },
   },
+  splitBtn: {
+    menu: 'Више опција',
+  },
   loading: 'Учитавање...',
   infiniteScroll: {
     loadMore: 'Учитај више',

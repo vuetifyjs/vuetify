@@ -140,6 +140,9 @@ export default {
       end: 'Maksimum',
     },
   },
+  splitBtn: {
+    menu: 'Więcej opcji',
+  },
   loading: 'Wczytywanie danych...',
   infiniteScroll: {
     loadMore: 'Wczytaj więcej',

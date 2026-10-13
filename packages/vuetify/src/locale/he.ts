@@ -140,6 +140,9 @@ export default {
       end: 'מקסימום',
     },
   },
+  splitBtn: {
+    menu: 'אפשרויות נוספות',
+  },
   loading: 'טוען...',
   infiniteScroll: {
     loadMore: 'טען עוד',

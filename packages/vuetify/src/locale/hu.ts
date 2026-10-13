@@ -140,6 +140,9 @@ export default {
       end: 'Maximum',
     },
   },
+  splitBtn: {
+    menu: 'További lehetőségek',
+  },
   loading: 'Betöltés...',
   infiniteScroll: {
     loadMore: 'Továbbiak betöltése',

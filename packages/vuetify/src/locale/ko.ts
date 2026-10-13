@@ -140,6 +140,9 @@ export default {
       end: '최대',
     },
   },
+  splitBtn: {
+    menu: '추가 옵션',
+  },
   loading: '불러오는 중...',
   infiniteScroll: {
     loadMore: '더 불러오기',

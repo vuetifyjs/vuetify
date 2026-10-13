@@ -140,6 +140,9 @@ export default {
       end: 'Tối đa',
     },
   },
+  splitBtn: {
+    menu: 'Thêm tùy chọn',
+  },
   loading: 'Đang tải...',
   infiniteScroll: {
     loadMore: 'Tải thêm',

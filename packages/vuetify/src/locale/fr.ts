@@ -140,6 +140,9 @@ export default {
       end: 'Maximum',
     },
   },
+  splitBtn: {
+    menu: "Plus d'options",
+  },
   loading: 'Chargement...',
   infiniteScroll: {
     loadMore: 'Charger plus',

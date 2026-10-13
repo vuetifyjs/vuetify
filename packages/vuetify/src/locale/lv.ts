@@ -140,6 +140,9 @@ export default {
       end: 'Maksimums',
     },
   },
+  splitBtn: {
+    menu: 'Vairāk opciju',
+  },
   loading: 'Ielādē...',
   infiniteScroll: {
     loadMore: 'Ielādēt vairāk',

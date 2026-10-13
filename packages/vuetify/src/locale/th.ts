@@ -140,6 +140,9 @@ export default {
       end: 'สูงสุด',
     },
   },
+  splitBtn: {
+    menu: 'ตัวเลือกเพิ่มเติม',
+  },
   loading: 'กำลังโหลด...',
   infiniteScroll: {
     loadMore: 'โหลดเพิ่มเติม',

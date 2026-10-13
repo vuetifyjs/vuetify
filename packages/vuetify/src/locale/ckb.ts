@@ -140,6 +140,9 @@ export default {
       end: 'زۆرترین',
     },
   },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
+  },
   loading: 'بارکردن...',
   infiniteScroll: {
     loadMore: 'زیاتر باربکە',
