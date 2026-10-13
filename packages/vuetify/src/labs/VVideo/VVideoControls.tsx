@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-
 // Styles
 import './VVideoControls.sass'
 
@@ -301,7 +299,11 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
           hideDetails: true,
         },
         VMediaProgressBar: {
-          thumbSize: progressBarDefaults.value?.thumbSize ?? (stacked.value ? 10 : 16),
+          thumbSize: progressBarDefaults.value?.thumbSize ?? (
+            props.progressVariant && props.progressVariant !== 'default' ? undefined
+            : stacked.value ? 10
+            : 16
+          ),
         },
         // inner provider wins over outer ones, so outer `VMediaVolume.VSlider` is spread back on top
         VMediaVolume: {
@@ -371,7 +373,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
       const progressBar = slots.progress?.({ ...slotProps, props: progressBarProps }) ??
         <VMediaProgressBar { ...progressBarProps } />
 
-      const builtins: Record<string, () => JSX.Element> = {
+      const actionRenderers: Record<string, () => JSX.Element> = {
         '-': () => <VSpacer />,
         time: () => (
           <span class="v-video__time">
@@ -410,7 +412,7 @@ export const VVideoControls = genericComponent<VVideoControlsSlots>()({
         if (name === 'progress') return progressBar
 
         const slot = name === 'prepend' || name === 'append' ? slots[name] : slots[`action.${name}`]
-        return slot?.(slotProps) ?? builtins[name]?.()
+        return slot?.(slotProps) ?? actionRenderers[name]?.()
       }
 
       return (

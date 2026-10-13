@@ -186,7 +186,7 @@ export default {
      * @returns {Object|*|{range, text}}
      */
     function fixByTrimmingWhitespace (fixer, fromLoc, toLoc, mode, spacing) {
-      let replacementText = context.getSourceCode().text.slice(fromLoc, toLoc)
+      let replacementText = context.sourceCode.text.slice(fromLoc, toLoc)
       if (mode === 'start') {
         replacementText = replacementText.replace(/^\s+/gm, '')
       } else {
@@ -218,7 +218,7 @@ export default {
           token: token.value,
         },
         fix (fixer) {
-          const nextToken = context.getSourceCode().getTokenAfter(token)
+          const nextToken = context.sourceCode.getTokenAfter(token)
           return fixByTrimmingWhitespace(fixer, token.range[1], nextToken.range[0], 'start', spacing)
         },
       })
@@ -240,7 +240,7 @@ export default {
           token: token.value,
         },
         fix (fixer) {
-          const previousToken = context.getSourceCode().getTokenBefore(token)
+          const previousToken = context.sourceCode.getTokenBefore(token)
           return fixByTrimmingWhitespace(fixer, previousToken.range[1], token.range[0], 'end', spacing)
         },
       })
@@ -261,7 +261,7 @@ export default {
           token: token.value,
         },
         fix (fixer) {
-          const sourceCode = context.getSourceCode()
+          const sourceCode = context.sourceCode
           const nextToken = sourceCode.getTokenAfter(token)
           let nextComment
 
@@ -299,7 +299,7 @@ export default {
           token: token.value,
         },
         fix (fixer) {
-          const sourceCode = context.getSourceCode()
+          const sourceCode = context.sourceCode
           const previousToken = sourceCode.getTokenBefore(token)
           let previousComment
 
@@ -387,7 +387,7 @@ export default {
         return
       }
 
-      const sourceCode = context.getSourceCode()
+      const sourceCode = context.sourceCode
       const first = sourceCode.getFirstToken(node)
       const last = sourceCode.getLastToken(node)
       let second = sourceCode.getTokenAfter(first, { includeComments: true })
@@ -412,12 +412,12 @@ export default {
         : isMultilineClose ? (config.multilineCloseSpaces === SPACING.never ? 'mixed' : config.multilineCloseSpaces)
         : config.when
       if (spacing === SPACING.always) {
-        if (!sourceCode.isSpaceBetweenTokens(first, second)) {
+        if (!sourceCode.isSpaceBetween(first, second)) {
           reportRequiredBeginningSpace(node, first)
         } else if (!config.allowMultiline && isMultiline(first, second)) {
           reportNoBeginningNewline(node, first, spacing)
         }
-        if (!sourceCode.isSpaceBetweenTokens(penultimate, last)) {
+        if (!sourceCode.isSpaceBetween(penultimate, last)) {
           reportRequiredEndingSpace(node, last)
         } else if (!config.allowMultiline && isMultiline(penultimate, last)) {
           reportNoEndingNewline(node, last, spacing)
@@ -427,18 +427,18 @@ export default {
           if (!config.allowMultiline) {
             reportNoBeginningNewline(node, first, spacing)
           }
-        } else if (sourceCode.isSpaceBetweenTokens(first, second)) {
+        } else if (sourceCode.isSpaceBetween(first, second)) {
           reportNoBeginningSpace(node, first)
         }
         if (isMultiline(penultimate, last)) {
           if (!config.allowMultiline) {
             reportNoEndingNewline(node, last, spacing)
           }
-        } else if (sourceCode.isSpaceBetweenTokens(penultimate, last)) {
+        } else if (sourceCode.isSpaceBetween(penultimate, last)) {
           reportNoEndingSpace(node, last)
         }
       } else if (spacing === 'mixed') {
-        if (!sourceCode.isSpaceBetweenTokens(first, second)) {
+        if (!sourceCode.isSpaceBetween(first, second)) {
           reportRequiredBeginningSpace(node, first)
         } else if (!config.allowMultiline && isMultiline(first, second)) {
           reportNoBeginningNewline(node, first, spacing)
@@ -448,10 +448,10 @@ export default {
             reportNoEndingNewline(node, last, spacing)
           }
         } else if (isMultiline(first, last)) {
-          if (sourceCode.isSpaceBetweenTokens(penultimate, last)) {
+          if (sourceCode.isSpaceBetween(penultimate, last)) {
             reportNoEndingSpace(node, last)
           }
-        } else if (!sourceCode.isSpaceBetweenTokens(penultimate, last)) {
+        } else if (!sourceCode.isSpaceBetween(penultimate, last)) {
           reportRequiredEndingSpace(node, last)
         }
       }

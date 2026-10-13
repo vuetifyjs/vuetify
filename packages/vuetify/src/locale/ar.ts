@@ -134,6 +134,15 @@ export default {
       item: 'القييم {0} من {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'الحد الأدنى',
+      end: 'الحد الأقصى',
+    },
+  },
+  splitBtn: {
+    menu: 'المزيد من الخيارات',
+  },
   loading: 'جار التحميل...',
   infiniteScroll: {
     loadMore: 'تحميل المزيد',

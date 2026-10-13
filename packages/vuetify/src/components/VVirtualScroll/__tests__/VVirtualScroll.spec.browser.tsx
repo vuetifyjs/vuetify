@@ -44,16 +44,12 @@ describe('VVirtualScroll', () => {
     await waitIdle()
 
     collapsed.value = true
-
-    await waitIdle()
-    await waitIdle()
-    await waitIdle()
+    await nextTick()
 
     // the window has to grow to keep covering the viewport
     const container = screen.getByCSS('.v-virtual-scroll')
-    const last = screen.getAllByCSS('.v-virtual-scroll__item').at(-1)!
 
-    expect(last.getBoundingClientRect().bottom)
+    await expect.poll(() => screen.getAllByCSS('.v-virtual-scroll__item').at(-1)!.getBoundingClientRect().bottom)
       .toBeGreaterThan(container.getBoundingClientRect().bottom - 1)
   })
 

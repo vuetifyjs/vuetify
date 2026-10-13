@@ -299,7 +299,7 @@ Two v3 → v4 migration problems from a production migration are now documented 
 
 ---
 
-## What's Next { .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 [v4.2.0](/getting-started/release-notes/?version=v4.2.0) went stable on September 2 and [v4.2.1](/getting-started/release-notes/?version=v4.2.1) followed on September 9. If you set Sass variables, read [Before you upgrade](#before-you-upgrade) first. Three of the PRs that missed 4.2 are on the v4.3.0 milestone, and more of v0 will move into the framework through 4.x minors.
 

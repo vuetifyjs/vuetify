@@ -134,6 +134,15 @@ export default {
       item: 'ការវាយតម្លៃ {0} នៃ {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'អប្បបរមា',
+      end: 'អតិបរមា',
+    },
+  },
+  splitBtn: {
+    menu: 'ជម្រើសច្រើនទៀត',
+  },
   loading: 'កំពុងដំណើរការ...',
   infiniteScroll: {
     loadMore: 'ទាញយកបន្ថែម',

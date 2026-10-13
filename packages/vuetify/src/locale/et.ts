@@ -134,6 +134,15 @@ export default {
       item: 'Hinnang {0} {1}st',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Miinimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Rohkem valikuid',
+  },
   loading: 'Laadimine...',
   infiniteScroll: {
     loadMore: 'Laadi rohkem',

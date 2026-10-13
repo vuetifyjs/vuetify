@@ -81,6 +81,7 @@
   },
   "VBtnGroup": {
     "props": {
+      "connected": "4.3.0",
       "size": "4.2.0"
     }
   },
@@ -373,6 +374,11 @@
       "opacity": "3.8.0"
     }
   },
+  "VIconBtn": {
+    "props": {
+      "widthVariant": "4.3.0"
+    }
+  },
   "VImg": {
     "props": {
       "position": "3.4.0",
@@ -470,6 +476,11 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VProgress": {
+    "examples": {
+      "misc-loading-indicator": "4.3.0"
+    }
+  },
   "VProgressCircular": {
     "props": {
       "reveal": "3.12.0",
@@ -512,8 +523,28 @@
       "isFocused": "4.3.0"
     }
   },
+  "VRangeSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
+    "props": {
+      "endThumbAriaLabel": "4.3.0",
+      "startThumbAriaLabel": "4.3.0",
+      "valueFormat": "4.3.0"
+    }
+  },
+  "VRating": {
+    "props": {
+      "iconSize": "4.3.0"
+    }
+  },
   "VRow": {
     "props": {
+      "gapSm": "4.3.0",
+      "gapMd": "4.3.0",
+      "gapLg": "4.3.0",
+      "gapXl": "4.3.0",
+      "gapXxl": "4.3.0",
       "size": "4.0.0"
     }
   },
@@ -565,9 +596,15 @@
     }
   },
   "VSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
     "events": {
       "start": "3.2.0",
       "end": "3.2.0"
+    },
+    "props": {
+      "valueFormat": "4.3.0"
     }
   },
   "VSlideGroup": {

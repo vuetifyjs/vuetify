@@ -42,7 +42,9 @@ export const makeVMediaVolumeProps = propsFactory({
     type: Number,
     default: 0,
   },
-  menuProps: Object as PropType<VMenu['$props']>,
+  menuProps: Object as PropType<Pick<VMenu['$props'],
+    'location' | 'offset' | 'openOnHover' | 'openDelay' | 'closeDelay' | 'contentClass' | 'zIndex'
+  >>,
   sliderProps: Object as PropType<Pick<VSlider['$props'],
     'color' | 'disabled' | 'step' | 'thumbSize' | 'trackSize' | 'trackColor' | 'maxWidth' | 'width'
   >>,

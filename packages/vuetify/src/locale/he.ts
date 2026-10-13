@@ -134,6 +134,15 @@ export default {
       item: 'דירוג {0} מתוך {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'מינימום',
+      end: 'מקסימום',
+    },
+  },
+  splitBtn: {
+    menu: 'אפשרויות נוספות',
+  },
   loading: 'טוען...',
   infiniteScroll: {
     loadMore: 'טען עוד',

@@ -52,7 +52,7 @@ If you want to keep text sizes as close as possible to the previous MD2 sizes, u
 - **Large headings (h1-h3)**: MD3 display variants are significantly smaller than MD2 headings. Consider customizing these sizes if maintaining visual hierarchy is critical.
 - **Title variants (new in MD3)**: The `text-title-*` variants provide better semantic alternatives for medium-sized headings and subtitles with appropriate font weights (400-500). Use these instead of body variants when you need emphasized text.
 - **text-overline**: The `text-label-small` or `text-label-medium` classes don't include `text-transform: uppercase` by default. Use `text-uppercase` utility class or customize the variant.
-- **Font weight differences**: Some MD3 variants have different font weights. Check the [full comparison table](#key-differences) below for details.
+- **Font weight differences**: Some MD3 variants have different font weights. Check the [mapping table](#conservative-migration-mapping) above for details.
 :::
 
 ## Migration Steps

@@ -134,6 +134,15 @@ export default {
       item: 'Bewertung {0} von {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Weitere Optionen',
+  },
   loading: 'Laden...',
   infiniteScroll: {
     loadMore: 'Mehr laden',

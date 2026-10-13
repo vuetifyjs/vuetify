@@ -134,6 +134,15 @@ export default {
       item: 'Оценка {0} от {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Още опции',
+  },
   loading: 'Зареждане...',
   infiniteScroll: {
     loadMore: 'Зареди още',

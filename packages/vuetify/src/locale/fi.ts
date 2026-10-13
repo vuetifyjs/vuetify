@@ -134,6 +134,15 @@ export default {
       item: 'Luokitus {0}/{1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimi',
+      end: 'Maksimi',
+    },
+  },
+  splitBtn: {
+    menu: 'Lisää vaihtoehtoja',
+  },
   loading: 'Ladataan...',
   infiniteScroll: {
     loadMore: 'Lataa lisää',

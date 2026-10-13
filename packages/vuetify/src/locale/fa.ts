@@ -134,6 +134,15 @@ export default {
       item: 'امتیاز {0} از {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'حداقل',
+      end: 'حداکثر',
+    },
+  },
+  splitBtn: {
+    menu: 'گزینه‌های بیشتر',
+  },
   loading: 'در حال بارگذاری...',
   infiniteScroll: {
     loadMore: 'بارگذاری بیشتر',

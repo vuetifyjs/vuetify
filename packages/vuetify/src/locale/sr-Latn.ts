@@ -134,6 +134,15 @@ export default {
       item: 'Ocena {0} od {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Više opcija',
+  },
   loading: 'Učitavanje...',
   infiniteScroll: {
     loadMore: 'Učitaj još',

@@ -77,7 +77,7 @@ June continued our steady release cadence with several updates addressing bugs a
 
 ---
 
-## Spotlight: Vuetify Studio
+## Spotlight: Vuetify Studio { #spotlight-vuetify-studio }
 
 **Did you know?** [Vuetify Studio](https://studio.vuetifyjs.com/) is our comprehensive development platform that often goes unnoticed by the broader community. Studio provides a complete ecosystem for Vuetify development, including:
 
@@ -194,7 +194,7 @@ It's also now possible to access Bins saved while having an active Vuetify One s
 
 * [Vuetify Bin](https://bin.vuetifyjs.com/)
 
-## Q&A and Upcoming Webinars
+## Q&A and Upcoming Webinars { #qa-and-upcoming-webinars }
 
 June featured successful community Q&A sessions that provided direct interaction between our core team and the developer community. The feedback and engagement we received were invaluable in shaping our development priorities and understanding real-world usage patterns.
 
@@ -202,7 +202,7 @@ June featured successful community Q&A sessions that provided direct interaction
 
 We encourage community members to [share their input](https://community.vuetifyjs.com/) and help us make these educational sessions as valuable as possible for everyone.
 
-## Sneak Peek: Vuetify 0
+## Sneak Peek: Vuetify 0 { #sneak-peek-vuetify-0 }
 
 <AppFigure :src="zerologo" alt="Vuetify 0 logo" width="300" height="auto" class="mx-auto pa-4" title="Vuetify 0 Logo" />
 
@@ -335,7 +335,7 @@ Expand this section to see the detailed changelog for June 2025, including bug f
 
 ---
 
-## What's Next
+## What's Next { #whats-next }
 
 July will focus on finalizing the `VCommandPalette` Labs release, expanding `VMaskInput` and `VEditor` component development, and continuing our documentation excellence initiative. We're also actively working on enhanced MCP integration features that allow you to create and access existing Vuetify Bin, Playground, Studio files; in addition to new Studio platform capabilities.
 

@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 // Styles
 import './VVideo.sass'
 

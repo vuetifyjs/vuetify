@@ -134,6 +134,15 @@ export default {
       item: 'คะแนน {0} จาก {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'ต่ำสุด',
+      end: 'สูงสุด',
+    },
+  },
+  splitBtn: {
+    menu: 'ตัวเลือกเพิ่มเติม',
+  },
   loading: 'กำลังโหลด...',
   infiniteScroll: {
     loadMore: 'โหลดเพิ่มเติม',

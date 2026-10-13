@@ -134,6 +134,15 @@ export default {
       item: 'هەڵسەنگاندن {0} لە {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'کەمترین',
+      end: 'زۆرترین',
+    },
+  },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
+  },
   loading: 'بارکردن...',
   infiniteScroll: {
     loadMore: 'زیاتر باربکە',

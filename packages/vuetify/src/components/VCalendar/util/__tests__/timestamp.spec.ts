@@ -26,7 +26,7 @@ import {
   validateTimestamp,
 } from '../timestamp'
 
-describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
+describe('VCalendar/util/timestamp', () => {
   it('should parse time number', () => {
     expect(parseTime(0)).toBe(0)
     expect(parseTime(120)).toBe(120)
@@ -312,7 +312,7 @@ describe('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-state
     expect(cc.future).toBe(false)
   })
 
-  it('should calculate weekday', () => { // eslint-disable-line max-statements
+  it('should calculate weekday', () => {
     expect(parseTimestamp('2019-01-01')!.weekday).toBe(2)
     expect(parseTimestamp('2019-01-02')!.weekday).toBe(3)
     expect(parseTimestamp('2019-01-03')!.weekday).toBe(4)

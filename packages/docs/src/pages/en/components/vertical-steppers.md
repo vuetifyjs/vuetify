@@ -45,7 +45,7 @@ The `v-stepper-vertical` is the vertical variant of the [v-stepper](/components/
 
 #### Non linear
 
-Non-linear stepper allow the user to navigate freely – skip to a desired section without forcing clicks on the action buttons within, provided **editable** prop is also present. When combined with `:mandatory="false"`, allowes to collapse the section as well.
+The **non-linear** prop increases the opacity of unfinished steps. Add **editable** to let users select a step directly without using the action buttons. When combined with `:mandatory="false"`, sections can also be collapsed.
 
 <ExamplesExample file="v-stepper-vertical/prop-non-linear" />
 

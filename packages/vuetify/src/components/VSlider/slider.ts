@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
 import { useForm } from '@/composables/form'
@@ -7,11 +6,12 @@ import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
-import { clamp, createRange, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
+import { clamp, createRange, formatValue, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
+import type { ValueFormat } from '@/util'
 
 export type Tick = {
   value: number
@@ -49,6 +49,7 @@ type SliderProvide = {
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
+  getValueText: (value: number) => string | undefined
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
@@ -133,6 +134,7 @@ export const makeSliderProps = propsFactory({
   },
   reverse: Boolean,
   noKeyboard: Boolean,
+  valueFormat: [String, Function] as PropType<ValueFormat>,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -327,6 +329,12 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
+  function getValueText (value: number) {
+    return props.valueFormat
+      ? formatValue(props.valueFormat, value, max.value, position(value))
+      : undefined
+  }
+
   const showTicks = toRef(() => props.showTicks)
   const parsedTicks = computed<Tick[]>(() => {
     if (!showTicks.value) return []
@@ -357,6 +365,7 @@ export const useSlider = ({
     disabled: form.isDisabled,
     direction: toRef(() => props.direction),
     elevation: toRef(() => props.elevation),
+    getValueText,
     hasLabels,
     isReversed,
     indexFromEnd,

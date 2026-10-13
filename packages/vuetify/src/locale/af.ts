@@ -134,6 +134,15 @@ export default {
       item: 'Gradering {0} van {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opsies',
+  },
   loading: 'Laai...',
   infiniteScroll: {
     loadMore: 'Laai meer',

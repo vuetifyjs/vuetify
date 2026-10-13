@@ -91,7 +91,7 @@ View the complete list of changes in the [Full Changelog](#october-2025-changelo
 
 ---
 
-## Ecosystem Spotlight: Vuetify Link
+## Ecosystem Spotlight: Vuetify Link { #ecosystem-spotlight-vuetify-link }
 
 <AppFigure :src="linklogo" alt="Vuetify Link logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify Link Logo" />
 
@@ -178,7 +178,7 @@ We're working on a new **inset variant** for `VTabs`. This variant provides a mo
 
 ---
 
-## Vuetify MCP: HTTP Transport Support
+## Vuetify MCP: HTTP Transport Support { #vuetify-mcp-http-transport-support }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify MCP Logo" />
 
@@ -223,7 +223,7 @@ This integration enables your AI coding assistant to provide accurate, up-to-dat
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0: Progress Update { #vuetify0-progress-update }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify0 Logo" />
 
@@ -359,7 +359,7 @@ The following section provides an overview of the changes made in October 2025, 
 
 </details>
 
-## What's Next{ .mt-4 }
+## What's Next{ #whats-next .mt-4 }
 
 November brings us closer to the Vuetify v3.11 release as we continue stabilizing the framework and polishing components. Work continues on v0 composables with expanded documentation and integration testing, while in-development features like VCommandPalette and the VTabs inset variant move toward completion.
 
