@@ -151,6 +151,7 @@
   "components/snackbars": ["VSnackbar"],
   "components/sparklines": ["VSparkline", "VSparklineTooltip"],
   "components/speed-dials": ["VSpeedDial"],
+  "components/split-buttons": ["VSplitBtn"],
   "components/steppers": [
     "VStepper",
     "VStepperHeader",

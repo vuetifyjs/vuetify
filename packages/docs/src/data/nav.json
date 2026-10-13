@@ -312,6 +312,10 @@
         "subfolder": "components"
       },
       {
+        "title": "split-buttons",
+        "subfolder": "components"
+      },
+      {
         "title": "videos",
         "subfolder": "components"
       }

@@ -140,6 +140,9 @@ export default {
       end: 'Maksimumas',
     },
   },
+  splitBtn: {
+    menu: 'Daugiau parinkčių',
+  },
   loading: 'Kraunama...',
   infiniteScroll: {
     loadMore: 'Užkrauti daugiau',

@@ -140,6 +140,9 @@ export default {
       end: 'Максимум',
     },
   },
+  splitBtn: {
+    menu: 'Більше параметрів',
+  },
   loading: 'Завантаження...',
   infiniteScroll: {
     loadMore: 'Завантажити більше',

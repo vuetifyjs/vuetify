@@ -140,6 +140,9 @@ export default {
       end: 'អតិបរមា',
     },
   },
+  splitBtn: {
+    menu: 'ជម្រើសច្រើនទៀត',
+  },
   loading: 'កំពុងដំណើរការ...',
   infiniteScroll: {
     loadMore: 'ទាញយកបន្ថែម',

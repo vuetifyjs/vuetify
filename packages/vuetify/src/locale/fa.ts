@@ -140,6 +140,9 @@ export default {
       end: 'حداکثر',
     },
   },
+  splitBtn: {
+    menu: 'گزینه‌های بیشتر',
+  },
   loading: 'در حال بارگذاری...',
   infiniteScroll: {
     loadMore: 'بارگذاری بیشتر',

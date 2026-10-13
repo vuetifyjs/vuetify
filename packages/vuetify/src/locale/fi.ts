@@ -140,6 +140,9 @@ export default {
       end: 'Maksimi',
     },
   },
+  splitBtn: {
+    menu: 'Lisää vaihtoehtoja',
+  },
   loading: 'Ladataan...',
   infiniteScroll: {
     loadMore: 'Lataa lisää',

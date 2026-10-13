@@ -140,6 +140,9 @@ export default {
       end: 'Μέγιστο',
     },
   },
+  splitBtn: {
+    menu: 'Περισσότερες επιλογές',
+  },
   loading: 'Φόρτωση...',
   infiniteScroll: {
     loadMore: 'Φόρτωση περισσότερων',

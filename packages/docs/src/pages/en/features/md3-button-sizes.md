@@ -5,9 +5,9 @@ meta:
   description: Replace the default button size scale with Material Design 3 Expressive sizes using SASS variables.
   keywords: material design 3, md3, expressive, button sizes, icon button sizes, sass variables
 related:
-  - /features/sass-variables/
   - /components/buttons/
   - /components/icon-buttons/
+  - /components/split-buttons/
 features:
   report: true
 ---
@@ -246,6 +246,73 @@ export default createVuetify({
       'gap': 8px,
       'selected-radius': 28px,
       'connected': ('inner-radius': 20px, 'inner-radius-pressed': 16px),
+    ),
+  ),
+);
+```
+
+</details>
+
+<!-- TODO: screenshot -->
+
+## Split buttons
+
+`$split-btn-named-sizes` sets the paddings and inner corners of [v-split-btn](/components/split-buttons/). It requires `$button-named-sizes` and `$btn-group-named-sizes`. Like groups, split buttons need the **size** prop, add `VSplitBtn: { size: 'default' }` to the global defaults.
+
+| Key                     |                                               |
+|-------------------------|-----------------------------------------------|
+| `action-padding-end`    | Padding between the label and the menu button |
+| `toggle-padding-inline` | Horizontal padding of the menu button         |
+| `toggle-icon-size`      | Menu button icon size                         |
+| `toggle-icon-offset`    | Icon shift toward the action while closed     |
+| `inner-radius`          | Resting inner corners                         |
+| `inner-radius-pressed`  | Hovered and pressed inner corners             |
+
+<details>
+<summary>Material Design 3 Expressive</summary>
+
+```scss { resource="src/styles/settings.scss" }
+@use 'vuetify/settings' with (
+  $split-btn-named-sizes: (
+    'x-small': (
+      'action-padding-end': 10px,
+      'toggle-padding-inline': 13px,
+      'toggle-icon-size': 22px,
+      'toggle-icon-offset': -1px,
+      'inner-radius': 4px,
+      'inner-radius-pressed': 8px,
+    ),
+    'small': (
+      'action-padding-end': 12px,
+      'toggle-padding-inline': 13px,
+      'toggle-icon-size': 22px,
+      'toggle-icon-offset': -1px,
+      'inner-radius': 4px,
+      'inner-radius-pressed': 12px,
+    ),
+    'default': (
+      'action-padding-end': 24px,
+      'toggle-padding-inline': 15px,
+      'toggle-icon-size': 26px,
+      'toggle-icon-offset': -2px,
+      'inner-radius': 4px,
+      'inner-radius-pressed': 12px,
+    ),
+    'large': (
+      'action-padding-end': 48px,
+      'toggle-padding-inline': 29px,
+      'toggle-icon-size': 38px,
+      'toggle-icon-offset': -3px,
+      'inner-radius': 8px,
+      'inner-radius-pressed': 20px,
+    ),
+    'x-large': (
+      'action-padding-end': 64px,
+      'toggle-padding-inline': 43px,
+      'toggle-icon-size': 50px,
+      'toggle-icon-offset': -6px,
+      'inner-radius': 12px,
+      'inner-radius-pressed': 20px,
     ),
   ),
 );
