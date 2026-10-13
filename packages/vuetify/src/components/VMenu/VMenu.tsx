@@ -127,7 +127,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       }
     }, { immediate: true })
 
-    // focus stays on the activator otherwise, where arrows reach the activator's other menus
+    // arrows would otherwise reach the activator, where another menu may answer them
     watch(isActive, val => {
       if (val && props.contextMenu) focusContentEl()
     }, { flush: 'post' })

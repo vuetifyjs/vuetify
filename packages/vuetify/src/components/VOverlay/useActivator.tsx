@@ -315,21 +315,22 @@ export function useActivator (
     }
   })
 
-  // the cursor point is in viewport coordinates, so it has to follow the activator
+  // the cursor point is in viewport coordinates, so it has to follow the activator; target="cursor" keeps it fixed instead
   function onScroll () {
     const rect = activatorEl.value?.getBoundingClientRect()
     if (!cursorOffset || !rect) return
     cursorTarget.value = [rect.left + cursorOffset[0], rect.top + cursorOffset[1]]
   }
-  watch(isActive, val => {
-    // target="cursor" keeps the point fixed in the viewport
-    if (val && props.contextMenu && !props.target) document.addEventListener('scroll', onScroll, { capture: true, passive: true })
-    else document.removeEventListener('scroll', onScroll, { capture: true })
+  watch(isActive, (val, _, onCleanup) => {
+    if (!val || !props.contextMenu || props.target) return
+
+    document.addEventListener('scroll', onScroll, { capture: true, passive: true })
+    onCleanup(() => document.removeEventListener('scroll', onScroll, { capture: true }))
   })
 
-  watch([activatorEl, () => props.contextMenu], ([el, contextMenu]) => {
-    if (el && contextMenu) preventCallout(el)
-  }, { immediate: true })
+  watchEffect(() => {
+    if (activatorEl.value && props.contextMenu) preventCallout(activatorEl.value)
+  })
 
   // clearing earlier makes the leave transition fly back to the activator
   function onAfterLeave () {
@@ -371,7 +372,6 @@ export function useActivator (
 
   onScopeDispose(() => {
     touchHold.cancel()
-    document.removeEventListener('scroll', onScroll, { capture: true })
     scope?.stop()
   })
 

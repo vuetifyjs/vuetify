@@ -495,13 +495,14 @@ describe('VMenu', () => {
 
     const area = screen.getByTestId('area')
     const box = area.getBoundingClientRect()
+    const top = Math.round(box.top + 100)
     area.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: box.left + 50, clientY: box.top + 100 }))
-    await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
-    await wait(300)
-    const before = screen.getByTestId('menu-content').getBoundingClientRect().top
+
+    const contentTop = () => Math.round(screen.getByTestId('menu-content').getBoundingClientRect().top)
+    await expect.poll(contentTop).toBe(top)
 
     screen.getByTestId('scroller').scrollTop = 40
-    await expect.poll(() => Math.round(screen.getByTestId('menu-content').getBoundingClientRect().top)).toBe(Math.round(before - 40))
+    await expect.poll(contentTop).toBe(top - 40)
   })
 
   it('should move focus into a context menu and navigate it with arrows', async () => {
@@ -524,14 +525,14 @@ describe('VMenu', () => {
 
     await userEvent.click(screen.getByTestId('row'), { button: 'right' })
     await expect.poll(() => screen.queryByTestId('context-item')).toBeVisible()
-    await expect.poll(() => screen.getByTestId('context-item').closest('.v-overlay__content')?.contains(document.activeElement)).toBe(true)
+    await expect.poll(() => screen.getByTestId('context-item').closest('.v-overlay__content')).toHaveFocus()
 
     await userEvent.keyboard('{ArrowDown}')
-    await expect.poll(() => document.activeElement).toBe(screen.getByTestId('context-item'))
+    await expect.poll(() => screen.getByTestId('context-item')).toHaveFocus()
     expect(screen.queryByTestId('click-item')).toBeNull()
 
     await userEvent.keyboard('{Escape}')
-    await expect.poll(() => document.activeElement).toBe(screen.getByTestId('row'))
+    await expect.poll(() => screen.getByTestId('row')).toHaveFocus()
     await userEvent.keyboard('{ArrowDown}')
     await expect.poll(() => screen.queryByTestId('click-item')).toBeVisible()
     await expect.poll(() => screen.queryByTestId('context-item')).toBeNull()
