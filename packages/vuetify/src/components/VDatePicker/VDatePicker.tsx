@@ -25,11 +25,10 @@ import { convertToUnit, genericComponent, isFunction, omit, pickWithRest, propsF
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
-import type { VDatePickerMonthSlots } from './VDatePickerMonth'
+import type { DatePickerDay, VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { VPickerSlots } from '@/components/VPicker/VPicker'
-import type { CalendarDay } from '@/composables/calendar'
 import type { EventProp, GenericProps } from '@/util'
 
 // Types
@@ -99,7 +98,7 @@ export const VDatePicker = genericComponent<new <
     : T,
 > (
   props: {
-    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, CalendarDay]>
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, DatePickerDay]>
     modelValue?: TModel
     'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
