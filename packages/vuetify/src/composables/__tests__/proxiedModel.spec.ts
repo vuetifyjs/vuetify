@@ -26,10 +26,8 @@ const TestComponentWithPropDefaultValue = defineComponent({
     },
   },
   emits: ['update:foo'],
-  // eslint-disable-next-line sonarjs/no-identical-functions
   setup (props) {
     const proxiedModel = useProxiedModel(props, 'foo', 'syncDefaultValue')
-    // eslint-disable-next-line sonarjs/no-identical-functions
     return () => h('div', {
       onClick: () => proxiedModel.value = 'internal',
     }, [props.foo, proxiedModel.value].join(','))

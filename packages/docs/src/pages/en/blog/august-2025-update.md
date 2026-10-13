@@ -54,7 +54,7 @@ August focused on general component stability and bug fixes. View the complete l
 * [v3.9.5](https://vuetifyjs.com/getting-started/release-notes/?version=v3.9.5)
 * [v3.9.6](https://vuetifyjs.com/getting-started/release-notes/?version=v3.9.6)
 
-## "Mastering Vuetify Theming" Webinar Recap
+## "Mastering Vuetify Theming" Webinar Recap { #mastering-vuetify-theming-webinar-recap }
 
 On August 27th, we hosted our second community webinar: **"Mastering Vuetify's Theming Engine"**. Following the success of July's migration webinar, this session dove deep into one of Vuetify's most powerful features.
 
@@ -141,7 +141,7 @@ VEditor is in the final stages of testing and will be available soon. This rich 
 
 * [VEditor PR#21653](https://github.com/vuetifyjs/vuetify/pull/21653)
 
-## Ecosystem Spotlight: Vuetify Issues
+## Ecosystem Spotlight: Vuetify Issues { #ecosystem-spotlight-vuetify-issues }
 
 The redesigned issues experience is now live at [issues.vuetifyjs.com](https://issues.vuetifyjs.com). This release focused on migrating the app from Vuetify v1.5 to v3 for a modern, consistent UI and better developer ergonomics. We also integrated Vuetify One to enable future enhancements—like special labels for subscribers—to streamline triage and improve visibility.
 

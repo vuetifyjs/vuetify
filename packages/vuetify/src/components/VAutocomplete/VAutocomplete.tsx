@@ -666,87 +666,87 @@ export const VAutocomplete = genericComponent<new <
                         { ...listEvents }
                         { ...props.listProps }
                       >
-                      { slots['prepend-item']?.() }
+                        { slots['prepend-item']?.() }
 
-                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem key="no-data" title={ t(props.noDataText) } />
-                      ))}
+                        { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                          <VListItem key="no-data" title={ t(props.noDataText) } />
+                        ))}
 
-                      <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
-                        { ({ item, index, itemRef }) => {
-                          const camelizedProps = camelizeProps(item.props)
-                          const itemProps = mergeProps(item.props, {
-                            ref: itemRef,
-                            key: item.value,
-                            active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
-                            onClick: () => select(item, null),
-                            'aria-posinset': index + 1,
-                            'aria-setsize': displayItems.value.length,
-                          })
+                        <VVirtualScroll ref={ vVirtualScrollRef } renderless items={ displayItems.value } itemKey="value">
+                          { ({ item, index, itemRef }) => {
+                            const camelizedProps = camelizeProps(item.props)
+                            const itemProps = mergeProps(item.props, {
+                              ref: itemRef,
+                              key: item.value,
+                              active: (highlightFirst.value && item === firstSelectableItem.value) ? true : undefined,
+                              onClick: () => select(item, null),
+                              'aria-posinset': index + 1,
+                              'aria-setsize': displayItems.value.length,
+                            })
 
-                          if (item.type === 'divider') {
-                            return slots.divider?.({ props: item.raw, index }) ?? (
-                              <VDivider { ...item.props } ref={ itemRef } key={ `divider-${index}` } />
+                            if (item.type === 'divider') {
+                              return slots.divider?.({ props: item.raw, index }) ?? (
+                                <VDivider { ...item.props } ref={ itemRef } key={ `divider-${index}` } />
+                              )
+                            }
+
+                            if (item.type === 'subheader') {
+                              return slots.subheader?.({ props: item.raw, index }) ?? (
+                                <VListSubheader { ...item.props } ref={ itemRef } key={ `subheader-${index}` } />
+                              )
+                            }
+
+                            return slots.item?.({
+                              item: item.raw,
+                              internalItem: item,
+                              index,
+                              props: itemProps,
+                            }) ?? (
+                              <VListItem { ...itemProps } role="option">
+                                {{
+                                  prepend: ({ isSelected }) => (
+                                    <>
+                                      { props.multiple && !props.hideSelected ? (
+                                        <VCheckboxBtn
+                                          key={ item.value }
+                                          modelValue={ isSelected }
+                                          ripple={ false }
+                                          tabindex="-1"
+                                          aria-hidden
+                                          onClick={ (event: MouseEvent) => event.preventDefault() }
+                                        />
+                                      ) : undefined }
+
+                                      { camelizedProps.prependAvatar && (
+                                        <VAvatar image={ camelizedProps.prependAvatar } />
+                                      )}
+
+                                      { camelizedProps.prependIcon && (
+                                        <VIcon icon={ camelizedProps.prependIcon } />
+                                      )}
+                                    </>
+                                  ),
+                                  title: () => {
+                                    return isPristine.value
+                                      ? item.title
+                                      : (
+                                        <VHighlight
+                                          text={ item.title }
+                                          matches={ getMatches(item)?.title }
+                                          markClass="v-autocomplete__mask"
+                                          matchAll
+                                          ignoreCase
+                                        />
+                                      )
+                                  },
+                                }}
+                              </VListItem>
                             )
-                          }
+                          }}
+                        </VVirtualScroll>
 
-                          if (item.type === 'subheader') {
-                            return slots.subheader?.({ props: item.raw, index }) ?? (
-                              <VListSubheader { ...item.props } ref={ itemRef } key={ `subheader-${index}` } />
-                            )
-                          }
-
-                          return slots.item?.({
-                            item: item.raw,
-                            internalItem: item,
-                            index,
-                            props: itemProps,
-                          }) ?? (
-                            <VListItem { ...itemProps } role="option">
-                            {{
-                              prepend: ({ isSelected }) => (
-                                <>
-                                  { props.multiple && !props.hideSelected ? (
-                                    <VCheckboxBtn
-                                      key={ item.value }
-                                      modelValue={ isSelected }
-                                      ripple={ false }
-                                      tabindex="-1"
-                                      aria-hidden
-                                      onClick={ (event: MouseEvent) => event.preventDefault() }
-                                    />
-                                  ) : undefined }
-
-                                  { camelizedProps.prependAvatar && (
-                                    <VAvatar image={ camelizedProps.prependAvatar } />
-                                  )}
-
-                                  { camelizedProps.prependIcon && (
-                                    <VIcon icon={ camelizedProps.prependIcon } />
-                                  )}
-                                </>
-                              ),
-                              title: () => {
-                                return isPristine.value
-                                  ? item.title
-                                  : (
-                                    <VHighlight
-                                      text={ item.title }
-                                      matches={ getMatches(item)?.title }
-                                      markClass="v-autocomplete__mask"
-                                      matchAll
-                                      ignoreCase
-                                    />
-                                  )
-                              },
-                            }}
-                          </VListItem>
-                          )
-                        }}
-                      </VVirtualScroll>
-
-                      { slots['append-item']?.() }
-                    </VList>
+                        { slots['append-item']?.() }
+                      </VList>
                     )}
 
                     { slots['menu-footer'] && (

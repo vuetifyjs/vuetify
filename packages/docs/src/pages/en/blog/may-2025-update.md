@@ -73,7 +73,7 @@ May continued our steady release cadence with several patch updates addressing b
 - [v3.8.6](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.6)
 - [v3.8.7](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.7)
 
-## Official @vuetify/mcp Release
+## Official @vuetify/mcp Release { #official-vuetifymcp-release }
 
 After months of development and anticipation, we're excited to announce that **@vuetify/mcp** is officially publicly available!
 
@@ -154,7 +154,7 @@ This month also saw multiple updates to the [VNumberInput](https://vuetifyjs.com
 - [VNumberInput touch pointer capture PR #21436](https://github.com/vuetifyjs/vuetify/pull/21436)
 - [VNumberInput paste text extraction PR #21263](https://github.com/vuetifyjs/vuetify/pull/21263)
 
-### New Labs Component: VColorInput
+### New Labs Component: VColorInput { #new-labs-component-vcolorinput }
 
 This month also saw the introduction of a new [VColorInput](https://vuetifyjs.com/components/color-inputs/) component in the Labs section. This component provides an intuitive interface for color selection and input, featuring integration with color pickers and text-based hex input. As a Labs component, VColorInput is available for testing and feedback as we refine its API and functionality.
 
@@ -290,7 +290,7 @@ Expand this section to see the detailed changelog for May 2025, including bug fi
 
 ---
 
-## What's Next
+## What's Next { #whats-next }
 
 June is all about shipping. MCP gets API keys and primer prompts, v3.9.0 lands with the features we've been building, and we'll start showing off more of the new theming work in the release blog post coming next week. VDateInput will likely graduate from Labs soon, and we've got some performance improvements in the pipeline that I'm excited about.
 

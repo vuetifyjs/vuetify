@@ -155,7 +155,6 @@ describe('VDataTableServer', () => {
       itemsPerPage: 2,
     })
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     function load (opts: { page: number, itemsPerPage: number }) {
       optionsEmits.push(opts)
       setTimeout(() => {
@@ -200,7 +199,6 @@ describe('VDataTableServer', () => {
       itemsPerPage: 2,
     })
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     function load (opts: { page: number, itemsPerPage: number }) {
       optionsEmits.push(opts)
       setTimeout(() => {
@@ -245,7 +243,6 @@ describe('VDataTableServer', () => {
       itemsPerPage: 2,
     })
 
-    // eslint-disable-next-line sonarjs/no-identical-functions
     function load (opts: { page: number, itemsPerPage: number, search: string }) {
       optionsEmits.push(opts)
       setTimeout(() => {

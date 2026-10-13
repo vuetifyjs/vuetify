@@ -298,28 +298,28 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               >
                 { slots.prepend?.() }
 
-              <div class="v-command-palette__input-container">
-                { slots.input?.() ?? (
-                  <VTextField
-                    ref={ searchInputRef }
-                    v-model={ searchQuery.value }
-                    density={ props.density }
-                    placeholder={ t(props.placeholder) }
-                    prependInnerIcon={ props.inputIcon }
-                    autocomplete="off"
-                    autofocus
-                    singleLine
-                    hideDetails
-                    variant="solo"
-                    flat
-                    bgColor="transparent"
-                    onKeydown={ handleSearchKeydown }
-                    v-slots={{
-                      'append-inner': slots['input.append-inner'],
-                    }}
-                  />
-                )}
-              </div>
+                <div class="v-command-palette__input-container">
+                  { slots.input?.() ?? (
+                    <VTextField
+                      ref={ searchInputRef }
+                      v-model={ searchQuery.value }
+                      density={ props.density }
+                      placeholder={ t(props.placeholder) }
+                      prependInnerIcon={ props.inputIcon }
+                      autocomplete="off"
+                      autofocus
+                      singleLine
+                      hideDetails
+                      variant="solo"
+                      flat
+                      bgColor="transparent"
+                      onKeydown={ handleSearchKeydown }
+                      v-slots={{
+                        'append-inner': slots['input.append-inner'],
+                      }}
+                    />
+                  )}
+                </div>
 
                 <div class="v-command-palette__content">
                   { slots['list.prepend']?.() }

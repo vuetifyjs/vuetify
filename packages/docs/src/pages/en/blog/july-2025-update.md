@@ -157,7 +157,7 @@ theme: {
 
 We are looking forward to our next webinar this month. Make sure to sign up, and if you have suggestions for topics, let us know in the comments or on our [Discord](https://community.vuetifyjs.com).
 
-## Ecosystem Spotlight: Vuetify Bin
+## Ecosystem Spotlight: Vuetify Bin { #ecosystem-spotlight-vuetify-bin }
 
 Every month, we highlight one tool from the Vuetify ecosystem. This month, we're featuring **Vuetify Bin**—our answer to sharing and debugging Vuetify code snippets.
 
@@ -343,7 +343,7 @@ The following components have been promoted to the core framework from labs:
 
 ---
 
-## What's Next
+## What's Next { #whats-next }
 
 Next month promises to be an exciting one as we continue building momentum from July's achievements. Here's what's on the horizon:
 

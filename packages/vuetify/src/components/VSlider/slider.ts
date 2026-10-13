@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
 import { useForm } from '@/composables/form'

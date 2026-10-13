@@ -44,13 +44,13 @@ export interface LinkListeners {
   onClickOnce?: EventProp | undefined
 }
 
-export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'|'route'|'navigate'> {
+export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href' | 'route' | 'navigate'> {
   isLink: Readonly<Ref<boolean>>
   isRouterLink: Readonly<Ref<boolean>>
   isClickable: Readonly<Ref<boolean>>
   href: Ref<string | undefined>
   linkProps: Record<string, string | undefined>
-  route: Readonly<Ref<RouteLocation & { href: string} | undefined>>
+  route: Readonly<Ref<RouteLocation & { href: string } | undefined>>
   navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
 

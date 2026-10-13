@@ -1,6 +1,3 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-labels */
-
 // Utilities
 import { computed, shallowRef, unref, watchEffect } from 'vue'
 import {
