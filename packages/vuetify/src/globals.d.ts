@@ -18,6 +18,8 @@ declare global {
   interface Element {
     _clickOutside?: Record<number, {
       onClick: EventListener
+      onAuxclick: EventListener
+      onContextmenu: EventListener
       onMousedown: EventListener
     } | undefined> & { lastMousedownWasOutside: boolean }
     _onResize?: Record<number, {
