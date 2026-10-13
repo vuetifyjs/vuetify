@@ -20,6 +20,9 @@ export default {
       activateNone: 'Кликни да уклониш сортирање.',
       activateDescending: 'Кликни да сортираш опадајуће.',
       activateAscending: 'Кликни да сортираш растуће.',
+      selectRow: 'Изабери ред',
+      selectAll: 'Изабери све',
+      selectGroup: 'Изабери групу',
     },
     sortBy: 'Сортирај по',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Очисти {0}',
     prependAction: '{0} претходна акција',
     appendAction: '{0} додатна акција',
-    otp: 'Унесите OTP знак {0}',
+    otp: 'Унесите код за потврду',
   },
   fileInput: {
     counter: '{0} фајлова',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Оцена {0} од {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Више опција',
   },
   loading: 'Учитавање...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Пречица на тастатури: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Пусти',
     pause: 'Паузирај',
     seek: 'Тражи',
     volume: 'Јачина звука',
-    showVolume: 'Прикажи контролу јачине звука',
     mute: 'Искључи звук',
     unmute: 'Укључи звук',
     enterFullscreen: 'Цео екран',

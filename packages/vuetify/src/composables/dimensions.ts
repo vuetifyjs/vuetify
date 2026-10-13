@@ -33,12 +33,12 @@ export function useDimension (props: DimensionProps) {
     const minWidth = convertToUnit(props.minWidth)
     const width = convertToUnit(props.width)
 
-    if (height != null) styles.height = height
-    if (maxHeight != null) styles.maxHeight = maxHeight
-    if (maxWidth != null) styles.maxWidth = maxWidth
-    if (minHeight != null) styles.minHeight = minHeight
-    if (minWidth != null) styles.minWidth = minWidth
-    if (width != null) styles.width = width
+    if (height) styles.height = height
+    if (maxHeight) styles.maxHeight = maxHeight
+    if (maxWidth) styles.maxWidth = maxWidth
+    if (minHeight) styles.minHeight = minHeight
+    if (minWidth) styles.minWidth = minWidth
+    if (width) styles.width = width
 
     return styles
   })

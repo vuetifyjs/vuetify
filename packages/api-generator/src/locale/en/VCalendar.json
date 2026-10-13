@@ -29,6 +29,7 @@
     "format": "Forces a clock convention for interval labels and event times, overriding the locale.",
     "hideHeader": "If the header at the top of the `day` view should be visible.",
     "intervalCount": "The number of intervals to display in the `day` view.",
+    "intervalHighlight": "Highlights the interval row under the cursor in the `day`, `week`, and `category` views. Pass a color string to tint the highlight, otherwise the theme's `surface-variant` is used.",
     "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",
     "intervalHeight": "The height of an interval in pixels in the `day` view.",
     "intervalWidth": "The width of the interval gutter on the left side in the `day` view.",

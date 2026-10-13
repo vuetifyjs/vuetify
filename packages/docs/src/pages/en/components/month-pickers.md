@@ -19,7 +19,11 @@ The `v-month-picker` component is a standalone picker that allows users to selec
 
 <page-features />
 
-<DocIntroduced version="4.1.0" />
+::: warning
+
+This feature requires [v4.1.0](/getting-started/release-notes/?version=v4.1.0)
+
+:::
 
 ## Installation
 

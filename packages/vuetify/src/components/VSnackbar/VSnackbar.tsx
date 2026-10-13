@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -170,11 +170,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     let activeTimeout = -1
     function startTimeout () {
-      countdown.reset()
+      countdown.clear()
       window.clearTimeout(activeTimeout)
       const timeout = Number(props.timeout)
 
       if (!isActive.value || timeout === -1) return
+
+      countdown.reset()
 
       const element = refElement(timerRef.value)
 
@@ -261,7 +263,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const transition = computed(() => {
-      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+      if (!isString(props.transition) || !props.transition.endsWith('-auto')) {
         return props.transition
       }
 
@@ -348,7 +350,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             <div class="v-snackbar__header">{ slots.header?.() }</div>
           )}
 
-          { props.timer && countdown.time.value > 0 && !isHovering.value && (
+          { props.timer && Number(props.timeout) > 0 && !isHovering.value && (
             <div
               key="timer"
               class={[

@@ -19,6 +19,7 @@
       border-radius: 4px
       border-style: dashed
       border-width: 2px
+      transition: border-color 250ms settings.$standard-easing
 
     &.v-file-upload-dropzone--density-compact
       padding: 32px 0
@@ -33,6 +34,9 @@
       opacity: var(--v-disabled-opacity)
 
     &--dragging
+      &.v-sheet
+        border-color: rgba(var(--v-theme-on-surface), $file-upload-drag-border-opacity)
+
       > *
         pointer-events: none
 

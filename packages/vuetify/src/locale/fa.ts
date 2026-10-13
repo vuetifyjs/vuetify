@@ -20,6 +20,9 @@ export default {
       activateNone: 'غیرفعال‌سازی مرتب‌سازی',
       activateDescending: 'غیرفعال‌سازی مرتب‌سازی نزولی',
       activateAscending: 'غیرفعال‌سازی مرتب‌سازی صعودی',
+      selectRow: 'انتخاب ردیف',
+      selectAll: 'انتخاب همه',
+      selectGroup: 'انتخاب گروه',
     },
     sortBy: 'مرتب‌سازی براساس',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',
     appendAction: '{0} اقدام افزوده‌شده',
-    otp: 'لطفا کد را وارد کنید {0}',
+    otp: 'کد تأیید را وارد کنید',
   },
   fileInput: {
     counter: '{0} پرونده',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'امتیاز {0} از {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'حداقل',
+      end: 'حداکثر',
+    },
+  },
+  splitBtn: {
+    menu: 'گزینه‌های بیشتر',
   },
   loading: 'در حال بارگذاری...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'میانبر صفحه کلید: {0}',
     or: 'یا',
   },
-  video: {
+  media: {
     play: 'پخش',
     pause: 'مکث',
     seek: 'جستجو',
     volume: 'صدا',
-    showVolume: 'نمایش کنترل صدا',
     mute: 'بی‌صدا',
     unmute: 'با صدا',
     enterFullscreen: 'تمام صفحه',

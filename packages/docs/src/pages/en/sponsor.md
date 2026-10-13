@@ -3,7 +3,7 @@ layout: home
 meta:
   nav: Enterprise Sponsorship
   title: Enterprise Sponsorship
-  description: Direct support from the Vuetify team for companies running Vuetify in production. Private Discord, priority bug fixes, roadmap input, office hours, early access, and consulting hours.
+  description: Direct support from the Vuetify team for companies running Vuetify in production — private Discord, priority fixes, roadmap input, early access, and more.
   keywords: vuetify enterprise sponsorship, vuetify production support, priority support vuetify, sponsor vuetify
 ---
 

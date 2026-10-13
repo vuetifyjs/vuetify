@@ -1,5 +1,5 @@
 // Utilities
-import { convertToUnit, defineFunctionalComponent } from '@/util'
+import { convertToUnit, defineFunctionalComponent, isString } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -30,7 +30,7 @@ export const VDataTableColumn = defineFunctionalComponent({
 }, (props, { slots }) => {
   const Tag = props.tag ?? 'td'
 
-  const fixedSide = typeof props.fixed === 'string' ? props.fixed
+  const fixedSide = isString(props.fixed) ? props.fixed
     : props.fixed ? 'start'
     : 'none'
 

@@ -590,19 +590,12 @@ $utilities: () !default;
         class: h,
         values: (
           auto: auto,
-          screen: 100vh,
+          screen: 100dvh,
           0: 0,
           25: 25%,
           50: 50%,
           75: 75%,
           100: 100%
-        )
-      ),
-      "height-screen": (
-        property: height,
-        class: h,
-        values: (
-          screen: 100dvh
         )
       ),
       "width": (

@@ -32,49 +32,6 @@ describe('useScroll', () => {
     expect(data.isScrollingUp).toBe(true)
   })
 
-  it.todo('should use a custom target', async () => {
-    // const thresholdMetCallback = vi.fn()
-    // mountFunction({}, {
-    //   props: { scrollTarget: 'body', scrollThreshold: 300 },
-    // })
-    //
-    // await wait()
-    // expect(thresholdMetCallback).not.toHaveBeenCalled()
-    //
-    // await scroll({ top: 1000 }, document.body)
-    // await expect.poll(() => thresholdMetCallback).toHaveBeenCalled()
-  })
-
-  it.todo('should do nothing if !canScroll', async () => {
-    // const thresholdMetCallback = vi.fn()
-    // mountFunction({
-    //   canScroll: ref(false),
-    // }, {
-    //   props: { scrollTarget: 'body', scrollThreshold: 300 },
-    // })
-    //
-    // await wait()
-    // expect(thresholdMetCallback).not.toHaveBeenCalled()
-    //
-    // await scroll({ top: 1000 }, document.body)
-    // await expect.poll(() => thresholdMetCallback).not.toHaveBeenCalled()
-  })
-
-  it.todo('should do something if canScroll', async () => {
-    // const thresholdMetCallback = vi.fn()
-    // mountFunction({
-    //   canScroll: ref(true),
-    // }, {
-    //   props: { scrollTarget: 'body', scrollThreshold: 300 },
-    // })
-    //
-    // await wait()
-    // expect(thresholdMetCallback).not.toHaveBeenCalled()
-    //
-    // await scroll({ top: 1000 }, document.body)
-    // await expect.poll(() => thresholdMetCallback).toHaveBeenCalled()
-  })
-
   it('should reset savedScroll when isActive state changes', async () => {
     const { data } = setup()
 

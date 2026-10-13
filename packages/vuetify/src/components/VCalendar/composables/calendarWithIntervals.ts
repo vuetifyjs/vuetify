@@ -15,7 +15,7 @@ import {
   validateNumber,
   validateTime,
 } from '../util/timestamp'
-import { propsFactory } from '@/util'
+import { clamp, isBoolean, isObject, propsFactory } from '@/util'
 import { Box, getTargetBox } from '@/util/box'
 
 // Types
@@ -115,8 +115,13 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
       : parsedFirstInterval.value * parsedIntervalMinutes.value
   })
 
+  const effectiveIntervalCount = computed((): number => {
+    const dayLimit = Math.ceil((MINUTES_IN_DAY - firstMinute.value) / parsedIntervalMinutes.value)
+    return clamp(parsedIntervalCount.value, 0, dayLimit)
+  })
+
   const bodyHeight = computed((): number => {
-    return parsedIntervalCount.value * parsedIntervalHeight.value
+    return effectiveIntervalCount.value * parsedIntervalHeight.value
   })
 
   const days = computed((): CalendarTimestamp[] => {
@@ -133,7 +138,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     const daysValue = days.value
     const first: number = firstMinute.value
     const minutes: number = parsedIntervalMinutes.value
-    const count: number = parsedIntervalCount.value
+    const count: number = effectiveIntervalCount.value
     const now: CalendarTimestamp = base.times.now
 
     return daysValue.map(d => createIntervalList(d, first, minutes, count, now))
@@ -167,18 +172,20 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     return undefined
   }
 
-  function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
-    const timestamp: CalendarTimestamp = copyTimestamp(day)
+  function getIntervalAtEvent (e: Event): number {
     const bounds = new Box(e.currentTarget as HTMLElement)
-    const baseMinutes: number = firstMinute.value
     const touchEvent: TouchEvent = e as TouchEvent
     const mouseEvent: MouseEvent = e as MouseEvent
     const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
     const target = touches && touches[0] ? touches[0] : mouseEvent
     const point = getTargetBox([target.clientX, target.clientY])
-    const addIntervals: number = (point.y - bounds.top) / parsedIntervalHeight.value
-    const addMinutes: number = Math.floor(addIntervals * parsedIntervalMinutes.value)
-    const minutes: number = baseMinutes + addMinutes
+    return (point.y - bounds.top) / parsedIntervalHeight.value
+  }
+
+  function getTimestampAtEvent (e: Event, day: CalendarTimestamp): CalendarTimestamp {
+    const timestamp: CalendarTimestamp = copyTimestamp(day)
+    const addMinutes: number = Math.floor(getIntervalAtEvent(e) * parsedIntervalMinutes.value)
+    const minutes: number = firstMinute.value + addMinutes
 
     return updateMinutes(timestamp, minutes, base.times.now)
   }
@@ -191,7 +198,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     scope.week = days.value
     scope.intervalRange = [
       firstMinute.value,
-      firstMinute.value + parsedIntervalCount.value * parsedIntervalMinutes.value,
+      firstMinute.value + effectiveIntervalCount.value * parsedIntervalMinutes.value,
     ]
     return scope
   }
@@ -219,7 +226,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     targetDateOrClamp: CalendarTimestamp | boolean = false
   ): number | false {
     const clamp = targetDateOrClamp !== false
-    const targetDate = typeof targetDateOrClamp !== 'boolean' ? targetDateOrClamp : undefined
+    const targetDate = !isBoolean(targetDateOrClamp) ? targetDateOrClamp : undefined
 
     let y = timeDelta(time, targetDate)
     if (y === false) return y
@@ -250,9 +257,9 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
       return false
     }
 
-    const gap: number = parsedIntervalCount.value * parsedIntervalMinutes.value
+    const gap: number = effectiveIntervalCount.value * parsedIntervalMinutes.value
 
-    if (targetDate && typeof time === 'object' && 'day' in time) {
+    if (targetDate && isObject(time) && 'day' in time) {
       const a = getDayIdentifier(time)
       const b = getDayIdentifier(targetDate)
       minutes += (a - b) * gap
@@ -278,6 +285,7 @@ export function useCalendarWithIntervals (props: CalendarWithIntervalsProps) {
     intervalFormatter,
     showIntervalLabelDefault,
     intervalStyleDefault,
+    getIntervalAtEvent,
     getTimestampAtEvent,
     getSlotScope,
     scrollToTime,

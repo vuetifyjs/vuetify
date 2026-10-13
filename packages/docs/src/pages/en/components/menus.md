@@ -81,7 +81,7 @@ You can disable the menu. Disabled menus can't be opened.
 
 #### Location
 
-Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location).
+Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location-strategies).
 
 <ExamplesExample file="v-menu/prop-location" />
 
@@ -140,8 +140,14 @@ A single `v-menu` can be reused across multiple activators to create a gliding n
 
 <ExamplesExample file="v-menu/misc-gliding-nav" />
 
-#### Use In components
+#### In text fields
 
-Menus can be placed within almost any component.
+This is an example of image picker attached to a `v-text-field`.
 
-<ExamplesExample file="v-menu/misc-use-in-components" />
+<ExamplesExample file="v-menu/misc-use-in-text-field" />
+
+#### File context menu
+
+You are not limited to a single card. Here is a context menu separating common actions into separate section.
+
+<ExamplesExample file="v-menu/misc-file-context" />

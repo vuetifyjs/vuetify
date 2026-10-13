@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: February 2026 Update
-  description: February marks Vuetify's most significant milestone—the stable release of Vuetify 4.0.0 with CSS layers, MD3 design system, and unstyled component foundations. The CLI hits v1.0.0, VAvatarGroup ships, and Vuetify0 gains createDataTable and Breadcrumbs composables.
+  description: February ships stable Vuetify 4.0.0 — CSS layers, MD3, and unstyled foundations — plus CLI v1.0.0, VAvatarGroup, and new Vuetify0 composables.
   keywords: Vuetify February 2026, Vuetify 4.0.0 Revisionist, v4 stable, VAvatarGroup, CLI v1.0.0, Vuetify0, createDataTable
 ---
 
@@ -54,7 +54,7 @@ This is the release we've been building toward since the [2024 State of the Unio
   * [Bug Fixes](#bug-fixes)
   * [In Development](#in-development)
 * [Ecosystem Spotlight: Vuetify CLI v1.0.0](#ecosystem-spotlight-vuetify-cli-v100)
-* [Vuetify MCP: V4 Migration & Developer Tools](#vuetify-mcp-v4-migration--developer-tools)
+* [Vuetify MCP: V4 Migration & Developer Tools](#vuetify-mcp-v4-migration-developer-tools)
 * [Product Updates](#product-updates)
 * [Vuetify0: Progress Update](#vuetify0-progress-update)
 * [February 2026 Changelog](#february-2026-changelog)
@@ -88,7 +88,7 @@ View the complete list of changes in the [Full Changelog](#february-2026-changel
 
 ---
 
-## Vuetify 4.0.0 Stable
+## Vuetify 4.0.0 Stable { #vuetify-400-stable }
 
 The stable release of **Vuetify 4.0.0 (Revisionist)** landed on February 23rd after four beta releases (beta.0 through beta.3). This is a pivotal release for the Vuetify ecosystem—not just for the features it ships, but for the architecture it establishes.
 
@@ -110,7 +110,7 @@ The stable release of **Vuetify 4.0.0 (Revisionist)** landed on February 23rd af
 
 ### Migration
 
-The upgrade path from v3 to v4 is intentionally minimal. The [upgrade guide](https://vuetifyjs.com/getting-started/upgrade-guide/) covers the handful of breaking changes, and the [Vuetify MCP server](#vuetify-mcp-v4-migration--developer-tools) provides AI-assisted migration tooling.
+The upgrade path from v3 to v4 is intentionally minimal. The [upgrade guide](https://vuetifyjs.com/getting-started/upgrade-guide/) covers the handful of breaking changes, and the [Vuetify MCP server](#vuetify-mcp-v4-migration-developer-tools) provides AI-assisted migration tooling.
 
 Every breaking change in v4 can be reverted with a drop-in snippet — upgrade now, migrate visuals at your own pace:
 
@@ -249,7 +249,7 @@ A new `hover-elevation` prop and CSS utilities for elevation changes on hover—
 
 ---
 
-## Ecosystem Spotlight: Vuetify CLI v1.0.0
+## Ecosystem Spotlight: Vuetify CLI v1.0.0 { #ecosystem-spotlight-vuetify-cli-v100 }
 
 <AppFigure :src="clilogo" alt="Vuetify CLI Logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify CLI Logo" />
 
@@ -294,7 +294,7 @@ bun add -g @vuetify/cli
 
 ---
 
-## Vuetify MCP: V4 Migration & Developer Tools
+## Vuetify MCP: V4 Migration & Developer Tools { #vuetify-mcp-v4-migration-developer-tools }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
 
@@ -391,7 +391,7 @@ The [unocss-preset-vuetify](https://github.com/vuetifyjs/unocss-preset-vuetify) 
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0: Progress Update { #vuetify0-progress-update }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
@@ -543,7 +543,7 @@ The following section provides an overview of the changes made in February 2026,
 
 ---
 
-## What's Next{ .mt-4 }
+## What's Next{ #whats-next .mt-4 }
 
 With v4 stable, the focus shifts to two fronts. First, **v4.1** will land the features currently in development—VMorphingIcon, theme page transitions, and hover elevation. VFileUpload's VInput integration and VCommandPalette's `closeOnSelect` and `before-select` events have already landed, along with Nuxt and UnoCSS presets for the CLI.
 

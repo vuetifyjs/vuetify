@@ -20,6 +20,9 @@ export default {
       activateNone: 'Kliknij aby usunąć sortowanie.',
       activateDescending: 'Kliknij aby posortować malejąco.',
       activateAscending: 'Kliknij aby posortować rosnąco.',
+      selectRow: 'Wybierz wiersz',
+      selectAll: 'Wybierz wszystkie',
+      selectGroup: 'Wybierz grupę',
     },
     sortBy: 'Sortuj według',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Wyczyść {0}',
     prependAction: '{0} dodatkowa akcja',
     appendAction: '{0} dodatkowa akcja',
-    otp: 'Proszę wprowadzić znak nr {0}',
+    otp: 'Wprowadź kod weryfikacyjny',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Ocena {0} na {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Więcej opcji',
   },
   loading: 'Wczytywanie danych...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Skrót klawiszowy: {0}',
     or: 'lub',
   },
-  video: {
+  media: {
     play: 'Odtwórz',
     pause: 'Wstrzymaj',
     seek: 'Przewiń',
     volume: 'Głośność',
-    showVolume: 'Pokaż regulację głośności',
     mute: 'Wycisz',
     unmute: 'Wyłącz wyciszenie',
     enterFullscreen: 'Pełny ekran',

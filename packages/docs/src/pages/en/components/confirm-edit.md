@@ -2,7 +2,7 @@
 meta:
   nav: Confirm Edit
   title: Confirm Edit
-  description: The confirm edit component is used to allow the user to verify their changes before they are committed. This is useful when you want to prevent accidental changes or to allow the user to cancel their changes.
+  description: The confirm edit component lets users verify changes before they are committed — preventing accidental edits or letting them cancel before saving.
   keywords: v-confirm-edit, confirm edit, vuetify confirm edit, vuetify confirm edit component, vuetify confirm edit examples
 related:
   - /components/avatars/

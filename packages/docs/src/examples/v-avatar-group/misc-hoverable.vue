@@ -24,14 +24,14 @@
 
 <script setup>
   const users = Array.from({ length: 7 })
-    .map((_, i) => ({ avatarUrl: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` }))
+    .map((_, i) => ({ avatarUrl: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` }))
 </script>
 
 <script>
   export default {
     data: () => ({
       users: Array.from({ length: 7 })
-        .map((_, i) => ({ avatarUrl: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` })),
+        .map((_, i) => ({ avatarUrl: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` })),
     }),
   }
 </script>

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiver for at fjerne sortering.',
       activateDescending: 'Aktiver for at sortere faldende.',
       activateAscending: 'Aktiver for at sortere stigende.',
+      selectRow: 'Vælg række',
+      selectAll: 'Vælg alle',
+      selectGroup: 'Vælg gruppe',
     },
     sortBy: 'Sorter efter',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Ryd {0}',
     prependAction: '{0} foranstillet handling',
     appendAction: '{0} efterstillet handling',
-    otp: 'Indtast OTP-tegn {0}',
+    otp: 'Indtast bekræftelseskode',
   },
   fileInput: {
     counter: '{0} filer',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Bedømmelse {0} af {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Flere muligheder',
   },
   loading: 'Indlæser...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Tastaturgenvej: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Afspil',
     pause: 'Pause',
     seek: 'Søg',
     volume: 'Lydstyrke',
-    showVolume: 'Vis lydstyrkekontrol',
     mute: 'Slå lyd fra',
     unmute: 'Slå lyd til',
     enterFullscreen: 'Fuld skærm',

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activer pour supprimer le tri.',
       activateDescending: 'Activer pour trier par ordre décroissant.',
       activateAscending: 'Activer pour trier par ordre croissant.',
+      selectRow: 'Sélectionner la ligne',
+      selectAll: 'Tout sélectionner',
+      selectGroup: 'Sélectionner le groupe',
     },
     sortBy: 'Trier par',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Vider {0}',
     prependAction: '{0} action avant',
     appendAction: '{0} action après',
-    otp: 'Caractère {0} du mot de passe à usage unique',
+    otp: 'Saisissez le code de vérification',
   },
   fileInput: {
     counter: '{0} fichier(s)',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Note de {0} sur {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: "Plus d'options",
   },
   loading: 'Chargement...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Raccourci clavier : {0}',
     or: 'ou',
   },
-  video: {
+  media: {
     play: 'Lire',
     pause: 'Pause',
     seek: 'Chercher',
     volume: 'Volume',
-    showVolume: 'Afficher le contrôle du volume',
     mute: 'Muet',
     unmute: 'Activer le son',
     enterFullscreen: 'Plein écran',

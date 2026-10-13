@@ -1,6 +1,6 @@
 // Utilities
 import { normalizeKey } from './key-aliases'
-import { consoleWarn, includes } from '@/util'
+import { consoleWarn, includes, isString } from '@/util'
 
 // Types
 export type KeyCombination = Sequence | Alternate | Combo | Key
@@ -108,11 +108,11 @@ export function parseKeyCombination (input: string) {
   // key = /./ *(/[^-/+_ ]/)
   function parseKey (): Key {
     const ch = peek()
-    if (ch == null) {
+    if (!isString(ch)) {
       throw new ParseError('Unexpected end of input')
     }
     const next = peek(1)
-    if (isSep(ch) && next != null && !isSep(next)) {
+    if (isSep(ch) && isString(next) && !isSep(next)) {
       throw new ParseError(`Unexpected separator '${ch}' at position ${pos}`)
     }
     const first = consume()

@@ -3,6 +3,7 @@
   "props": {
     "hidePip": "Hide pip icon",
     "colorPip": "Synchronize pip color with current value",
+    "openOnFocus": "Open the color picker menu when the input receives focus.",
     "pipIcon": "The icon used for pip",
     "pipLocation": "Move pip icon to a different slot",
     "pipVariant": "Variant of the pip control"

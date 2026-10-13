@@ -20,6 +20,9 @@ export default {
       activateNone: 'Rendezés törlése.',
       activateDescending: 'Aktiváld a csökkenő rendezésért.',
       activateAscending: 'Aktiváld a növekvő rendezésért.',
+      selectRow: 'Sor kijelölése',
+      selectAll: 'Összes kijelölése',
+      selectGroup: 'Csoport kijelölése',
     },
     sortBy: 'Rendezés',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Törlés {0}',
     prependAction: '{0} előrehozott művelet',
     appendAction: '{0} hozzáadott művelet',
-    otp: 'Kérjük, adja meg az OTP karaktert: {0}',
+    otp: 'Adja meg az ellenőrző kódot',
   },
   fileInput: {
     counter: '{0} fájl',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Értékelés: {0} / {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'További lehetőségek',
   },
   loading: 'Betöltés...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Billentyűparancs: {0}',
     or: 'vagy',
   },
-  video: {
+  media: {
     play: 'Lejátszás',
     pause: 'Szünet',
     seek: 'Keresés',
     volume: 'Hangerő',
-    showVolume: 'Hangerőszabályzó megjelenítése',
     mute: 'Némítás',
     unmute: 'Némítás feloldása',
     enterFullscreen: 'Teljes képernyő',

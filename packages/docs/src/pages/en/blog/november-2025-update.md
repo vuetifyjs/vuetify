@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: November 2025 Update
-  description: November delivered Vuetify v3.11.0 with VCalendar and VHotkey promoted from labs, new VTimePicker input variant, VDatePicker MD3 improvements, and significant CLI progress.
+  description: November shipped Vuetify v3.11.0 with VCalendar and VHotkey promoted from labs, a new VTimePicker input variant, VDatePicker MD3 work, and CLI progress.
   keywords: Vuetify November 2025, v3.11.0 Harbinger, VCalendar, VHotkey, VTimePicker, VDatePicker MD3
 ---
 
@@ -53,7 +53,6 @@ Cool example of the month: [v0 Expansion Panel in VPlay](https://vtfy.link/i5Lxm
 * [Framework Updates](#framework-updates)
   * [Date & Time Picker Enhancements](#date-time-picker-enhancements)
   * [Component Refinements](#component-refinements)
-  * [In Development](#in-development)
 * [Vuetify MCP: Continued Evolution](#vuetify-mcp-continued-evolution)
 * [Vuetify0: Progress Update](#vuetify0-progress-update)
 * [November 2025 Changelog](#november-2025-changelog)
@@ -89,7 +88,7 @@ View the complete list of changes in the [Full Changelog](#november-2025-changel
 
 ---
 
-## Ecosystem Spotlight: Vuetify CLI
+## Ecosystem Spotlight: Vuetify CLI { #ecosystem-spotlight-vuetify-cli }
 
 November saw intensive development on the **Vuetify CLI**, with 37 commits laying the foundation for v0 tooling and developer workflows. While not yet released, this work represents a significant investment in the developer experience for Vuetify 4.0 and beyond.
 
@@ -115,7 +114,7 @@ The CLI will provide streamlined project scaffolding, component generation, and 
 
 November's framework work centered on date/time picker improvements and component polish. J-Sek delivered an outstanding 14 PRs, driving many of the enhancements below.
 
-### Date & Time Picker Enhancements
+### Date & Time Picker Enhancements { #date-time-picker-enhancements }
 
 The date and time picker components received significant attention this month, bringing them closer to Material Design 3 specifications and adding long-requested features.
 
@@ -186,7 +185,7 @@ Control variants have been aligned with Material Design 3, providing a more poli
 
 ---
 
-## Vuetify MCP: Continued Evolution
+## Vuetify MCP: Continued Evolution { #vuetify-mcp-continued-evolution }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify MCP Logo" />
 
@@ -219,7 +218,7 @@ To use the hosted MCP server with Claude Desktop or other MCP clients:
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0: Progress Update { #vuetify0-progress-update }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto my-4" title="Vuetify0 Logo" />
 
@@ -331,7 +330,7 @@ The following section provides an overview of the changes made in November 2025,
 
 </details>
 
-## What's Next{ .mt-4 }
+## What's Next{ #whats-next .mt-4 }
 
 December will see continued refinement of v3.11.x as we stabilize the new features and address community feedback. Work on VCommandPalette progresses toward an initial labs release, and we're expanding the v0 library with additional headless primitives.
 

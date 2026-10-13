@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: CSS Reset
   description: Vuetify applies a minimal CSS reset to normalize browser inconsistencies.

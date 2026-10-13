@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivirajte za odstranitev razvrščanja.',
       activateDescending: 'Aktivirajte za padajoče razvrščanje.',
       activateAscending: 'Aktivirajte za naraščajoče razvrščanje.',
+      selectRow: 'Izberi vrstico',
+      selectAll: 'Izberi vse',
+      selectGroup: 'Izberi skupino',
     },
     sortBy: 'Razvrsti po',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Počisti {0}',
     prependAction: 'Dejanje pred {0}',
     appendAction: 'Dejanje po {0}',
-    otp: 'Vnesite {0}. OTP znak',
+    otp: 'Vnesite potrditveno kodo',
   },
   fileInput: {
     counter: '{0} datotek',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Ocena {0} od {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Več možnosti',
   },
   loading: 'Nalaganje ...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Tipkovnična bližnjica: {0}',
     or: 'ali',
   },
-  video: {
+  media: {
     play: 'Predvajaj',
     pause: 'Zaustavi',
     seek: 'Išči',
     volume: 'Glasnost',
-    showVolume: 'Prikaži nadzor glasnosti',
     mute: 'Utišaj',
     unmute: 'Vklopi zvok',
     enterFullscreen: 'Celozaslonski način',

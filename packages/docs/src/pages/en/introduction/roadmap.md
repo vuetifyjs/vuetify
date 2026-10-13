@@ -25,8 +25,8 @@ The following is a list of all planned components for the year 2026.
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
-| [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | Q2 2026         |
-| [v4.2](https://github.com/vuetifyjs/vuetify/milestone/90)               | Q3 2026         |
+| [v4.1 (Ascendant)](https://github.com/vuetifyjs/vuetify/milestone/77)   | Q2 2026         |
+| [v4.2 (Crusader)](https://github.com/vuetifyjs/vuetify/milestone/90)    | Q3 2026         |
 | v4.3                                                                    | TBD             |
 
 ### New form components and features
@@ -36,7 +36,7 @@ The following is a list of all planned components for the year 2026.
 | [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
 | [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
 | [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709) | Q3 2026       | Q4 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
 | v-date-time-picker                                              | Q3 2026       | Q4 2026            |
 | v-password-input                                                | Q3 2026       | Q4 2026            |
 
@@ -61,7 +61,7 @@ The following is a list of all planned components for the year 2026.
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
-### v4.1 (Revisionist)
+### v4.1 (Ascendant)
 
 - **Released:** June 2026
 - **Target Release:** Q2 2026
@@ -74,8 +74,7 @@ The following are the already released **minor** and **major** version updates. 
   - VDataTable - programatic control over groups state with `v-model:opened`
   - VSparkline - hover interactivity, markers and tooltips
   - VOtpInputs - grouping fields into segments, a11y and emojis
-  - Introduced [validation rules](/features/rules/) to the main framework from Labs
-  - Introduced 5 new components to the main framework from Labs:
+  - Introduced 7 new components to the main framework from Labs:
     - [v-icon-btn](/components/icon-buttons/)
     - [v-stepper-vertical](/components/vertical-steppers/)
     - [v-pull-to-refresh](/components/pull-to-refresh/)
@@ -97,6 +96,19 @@ The following are the already released **minor** and **major** version updates. 
   - overhaul of Grid system and VSnackbarQueue
   - reduced CSS reset - respecting browser defaults
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
+
+### v3.13 (LTS)
+
+- **Released:** July 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v3.13 Release](/getting-started/release-notes/?version=v3.13.0)
+- **Overview:**
+  - final v3 minor release — enters [long-term support](/introduction/long-term-support/)
+  - VSelect/VAutocomplete/VCombobox - new events for multi-selection
+  - VDataTable - mobile header slot and improved a11y for sorting and selection
+  - VSkeletonLoader - new `types` prop, `chip-group` type and `table` improvements
+  - VBtnGroup - `size` prop to align with standalone buttons
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/92)
 
 ### v3.12 (Warden)
 

@@ -55,7 +55,7 @@ describe('hotkey.ts', () => {
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[0] }))
       vi.advanceTimersByTime(gap)
-      // eslint-disable-next-line @vitest/no-conditional-in-test
+      // eslint-disable-next-line vitest/no-conditional-in-test
       if (seq[1]) window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[1] }))
       expect(cb).toHaveBeenCalledTimes(expected)
 

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Icon Fonts
   description: Vuetify supports Material Design Icons, Font awesome and other icon sets through prefixes and global options.

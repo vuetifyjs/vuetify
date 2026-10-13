@@ -59,6 +59,12 @@ Using the **step** prop you can control the precision of the slider, and how muc
 
 <ExamplesExample file="v-slider/prop-step" />
 
+#### Value format
+
+The **value-format** prop formats the thumb label and the value read by screen readers. Use `[value]`, `[max]` and `[percent]` as placeholders, or pass a function.
+
+<ExamplesExample file="v-slider/prop-value-format" />
+
 #### Icons
 
 You can add icons to the slider with the **append-icon** and **prepend-icon** props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon.

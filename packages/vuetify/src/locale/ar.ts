@@ -1,11 +1,11 @@
 export default {
   badge: 'شارة',
-  open: 'Open',
+  open: 'فتح',
   close: 'إغلاق',
-  dismiss: 'Dismiss',
+  dismiss: 'تجاهل',
   confirmEdit: {
-    ok: 'OK',
-    cancel: 'Cancel',
+    ok: 'موافق',
+    cancel: 'إلغاء',
   },
   dataIterator: {
     noResultsText: 'لم يتم إيجاد نتائج',
@@ -20,6 +20,9 @@ export default {
       activateNone: 'نشط لإزالة الترتيب.',
       activateDescending: 'نشط للترتيب تنازلياً.',
       activateAscending: 'نشط للترتيب تصاعدياً.',
+      selectRow: 'تحديد الصف',
+      selectAll: 'تحديد الكل',
+      selectGroup: 'تحديد المجموعة',
     },
     sortBy: 'رتب حسب',
   },
@@ -33,7 +36,7 @@ export default {
     pageText: '{0}-{1} من {2}',
   },
   dateRangeInput: {
-    divider: 'to',
+    divider: 'إلى',
   },
   monthPicker: {
     title: 'اختر الشهر',
@@ -81,26 +84,26 @@ export default {
   },
   calendar: {
     moreEvents: '{0} أكثر',
-    today: 'Today',
+    today: 'اليوم',
   },
   heatmap: {
     less: 'أقل',
     more: 'أكثر',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    clear: 'مسح {0}',
+    prependAction: '{0} إجراء مُسبق',
+    appendAction: '{0} إجراء مُلحق',
+    otp: 'أدخل رمز التحقق',
   },
   fileInput: {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',
   },
   fileUpload: {
-    title: 'Drag and drop files here',
-    divider: 'or',
-    browse: 'Browse Files',
+    title: 'اسحب الملفات وأفلتها هنا',
+    divider: 'أو',
+    browse: 'استعراض الملفات',
   },
   timePicker: {
     am: 'صباحاً',
@@ -118,23 +121,32 @@ export default {
       previous: 'الصفحة السابقة',
       page: '{0} انتقل إلى الصفحة',
       currentPage: '{0} الصفحة الحالية رقمها',
-      first: 'First page',
-      last: 'Last page',
+      first: 'الصفحة الأولى',
+      last: 'الصفحة الأخيرة',
     },
   },
   stepper: {
-    next: 'Next',
-    prev: 'Previous',
+    next: 'التالي',
+    prev: 'السابق',
   },
   rating: {
     ariaLabel: {
       item: 'القييم {0} من {1}',
     },
   },
-  loading: 'Loading...',
+  rangeSlider: {
+    ariaLabel: {
+      start: 'الحد الأدنى',
+      end: 'الحد الأقصى',
+    },
+  },
+  splitBtn: {
+    menu: 'المزيد من الخيارات',
+  },
+  loading: 'جار التحميل...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'تحميل المزيد',
+    empty: 'لا مزيد',
   },
   rules: {
     required: 'هذه الخانة مطلوبه',
@@ -169,14 +181,13 @@ export default {
     space: 'مسافة',
     plus: 'زائد',
     shortcut: 'اختصار لوحة المفاتيح: {0}',
-    or: 'or',
+    or: 'أو',
   },
-  video: {
+  media: {
     play: 'تشغيل',
     pause: 'إيقاف مؤقت',
     seek: 'بحث',
     volume: 'مستوى الصوت',
-    showVolume: 'إظهار التحكم في مستوى الصوت',
     mute: 'كتم الصوت',
     unmute: 'إلغاء كتم الصوت',
     enterFullscreen: 'ملء الشاشة',

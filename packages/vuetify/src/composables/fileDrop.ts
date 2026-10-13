@@ -16,6 +16,10 @@ export function useFileDrop () {
     return entries.length > 0 || [...transfer?.files ?? []].length > 0
   }
 
+  function isDraggingFiles (e: DragEvent): boolean {
+    return e.dataTransfer?.types.includes('Files') ?? false
+  }
+
   async function handleDrop (e: DragEvent | ClipboardEvent) {
     const transfer = getTransfer(e)
     const result: File[] = []
@@ -40,6 +44,7 @@ export function useFileDrop () {
   return {
     handleDrop,
     hasFilesOrFolders,
+    isDraggingFiles,
   }
 }
 

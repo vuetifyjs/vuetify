@@ -3,7 +3,7 @@ import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 
 // Utilities
 import { onScopeDispose, toValue, watch } from 'vue'
-import { IN_BROWSER } from '@/util'
+import { getActiveElement, IN_BROWSER, isString } from '@/util'
 
 // Types
 import type { Combo, Key, KeyCombination, Sequence } from '@/composables/hotkey/hotkey-parsing'
@@ -47,7 +47,7 @@ export function useHotkey (
   function isInputFocused () {
     if (toValue(inputs)) return false
 
-    const activeElement = document.activeElement as HTMLElement
+    const activeElement = getActiveElement() as HTMLElement
 
     return activeElement && (
       activeElement.tagName === 'INPUT' ||
@@ -102,7 +102,7 @@ export function useHotkey (
     if (newKeys) {
       const parsed = parseKeyCombination(newKeys.toLowerCase())
       if (parsed) {
-        const parts = typeof parsed !== 'string' && parsed.type === 'sequence'
+        const parts = !isString(parsed) && parsed.type === 'sequence'
           ? parsed.parts
           : [parsed]
         isSequence = parts.length > 1
@@ -127,7 +127,7 @@ export function useHotkey (
 }
 
 function matchesKeyGroup (e: KeyboardEvent, group: Exclude<KeyCombination, Sequence>, isMac: boolean): boolean {
-  if (typeof group !== 'string' && group.type === 'alternate') {
+  if (!isString(group) && group.type === 'alternate') {
     return group.parts.some(part => matchesKeyGroup(e, part, isMac))
   }
 
@@ -149,7 +149,7 @@ function parseKeyGroup (group: Combo | Key): {
   modifiers: Record<Modifier, boolean>
   actualKey: string | undefined
 } {
-  const parts = typeof group === 'string' ? [group] : group.parts
+  const parts = isString(group) ? [group] : group.parts
   const modifiers = { ...emptyModifiers }
   let actualKey: string | undefined
 

@@ -17,14 +17,14 @@
 
 <script setup>
   const items = Array.from({ length: 4 })
-    .map((_, i) => ({ image: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` }))
+    .map((_, i) => ({ image: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` }))
 </script>
 
 <script>
   export default {
     data: () => ({
       items: Array.from({ length: 4 })
-        .map((_, i) => ({ image: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` })),
+        .map((_, i) => ({ image: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` })),
     }),
   }
 </script>

@@ -1,163 +1,72 @@
 <template>
-  <v-treeview
-    :items="items"
-    item-value="id"
-    activatable
-  ></v-treeview>
+  <div>
+    <div class="d-flex align-center ga-4 mb-2">
+      <v-chip-group
+        v-model="strategy"
+        color="primary"
+        mandatory
+      >
+        <v-chip
+          v-for="option in strategies"
+          :key="option"
+          :text="option"
+          :value="option"
+          size="small"
+        ></v-chip>
+      </v-chip-group>
+
+      <v-spacer></v-spacer>
+
+      <v-select
+        v-model="color"
+        :items="colors"
+        class="flex-0-0"
+        density="compact"
+        label="Color"
+        style="min-width: 140px;"
+        variant="outlined"
+        hide-details
+      ></v-select>
+    </div>
+
+    <v-treeview
+      v-model:activated="activated"
+      :active-strategy="strategy"
+      :color="color"
+      :items="items"
+      item-value="id"
+      activatable
+      open-all
+    ></v-treeview>
+  </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { shallowRef } from 'vue'
 
-  const items = ref([
+  const strategies = ['leaf', 'single-leaf', 'independent', 'single-independent']
+  const strategy = shallowRef('leaf')
+  const activated = shallowRef([])
+
+  const colors = ['primary', 'success', 'warning']
+  const color = shallowRef('primary')
+
+  const items = [
     {
       id: 1,
-      title: 'Applications :',
+      title: 'Documents',
       children: [
-        { id: 2, title: 'Calendar : app' },
-        { id: 3, title: 'Chrome : app' },
-        { id: 4, title: 'Webstorm : app' },
-      ],
-    },
-    {
-      id: 5,
-      title: 'Documents :',
-      children: [
+        { id: 2, title: 'Resume' },
+        { id: 3, title: 'Cover letter' },
         {
-          id: 6,
-          title: 'vuetify :',
+          id: 4,
+          title: 'Invoices',
           children: [
-            {
-              id: 7,
-              title: 'src :',
-              children: [
-                { id: 8, title: 'index : ts' },
-                { id: 9, title: 'bootstrap : ts' },
-              ],
-            },
-          ],
-        },
-        {
-          id: 10,
-          title: 'material2 :',
-          children: [
-            {
-              id: 11,
-              title: 'src :',
-              children: [
-                { id: 12, title: 'v-btn : ts' },
-                { id: 13, title: 'v-card : ts' },
-                { id: 14, title: 'v-window : ts' },
-              ],
-            },
+            { id: 5, title: 'January' },
+            { id: 6, title: 'February' },
           ],
         },
       ],
     },
-    {
-      id: 15,
-      title: 'Downloads :',
-      children: [
-        { id: 16, title: 'October : pdf' },
-        { id: 17, title: 'November : pdf' },
-        { id: 18, title: 'Tutorial : html' },
-      ],
-    },
-    {
-      id: 19,
-      title: 'Videos :',
-      children: [
-        {
-          id: 20,
-          title: 'Tutorials :',
-          children: [
-            { id: 21, title: 'Basic layouts : mp4' },
-            { id: 22, title: 'Advanced techniques : mp4' },
-            { id: 23, title: 'All about app : dir' },
-          ],
-        },
-        { id: 24, title: 'Intro : mov' },
-        { id: 25, title: 'Conference introduction : avi' },
-      ],
-    },
-  ])
-</script>
-
-<script>
-  export default {
-    data: () => ({
-      items: [
-        {
-          id: 1,
-          title: 'Applications :',
-          children: [
-            { id: 2, title: 'Calendar : app' },
-            { id: 3, title: 'Chrome : app' },
-            { id: 4, title: 'Webstorm : app' },
-          ],
-        },
-        {
-          id: 5,
-          title: 'Documents :',
-          children: [
-            {
-              id: 6,
-              title: 'vuetify :',
-              children: [
-                {
-                  id: 7,
-                  title: 'src :',
-                  children: [
-                    { id: 8, title: 'index : ts' },
-                    { id: 9, title: 'bootstrap : ts' },
-                  ],
-                },
-              ],
-            },
-            {
-              id: 10,
-              title: 'material2 :',
-              children: [
-                {
-                  id: 11,
-                  title: 'src :',
-                  children: [
-                    { id: 12, title: 'v-btn : ts' },
-                    { id: 13, title: 'v-card : ts' },
-                    { id: 14, title: 'v-window : ts' },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 15,
-          title: 'Downloads :',
-          children: [
-            { id: 16, title: 'October : pdf' },
-            { id: 17, title: 'November : pdf' },
-            { id: 18, title: 'Tutorial : html' },
-          ],
-        },
-        {
-          id: 19,
-          title: 'Videos :',
-          children: [
-            {
-              id: 20,
-              title: 'Tutorials :',
-              children: [
-                { id: 21, title: 'Basic layouts : mp4' },
-                { id: 22, title: 'Advanced techniques : mp4' },
-                { id: 23, title: 'All about app : dir' },
-              ],
-            },
-            { id: 24, title: 'Intro : mov' },
-            { id: 25, title: 'Conference introduction : avi' },
-          ],
-        },
-      ],
-    }),
-  }
+  ]
 </script>

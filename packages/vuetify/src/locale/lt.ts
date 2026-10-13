@@ -20,6 +20,9 @@ export default {
       activateNone: 'Suaktyvinkite, jei norite rikiavimą pašalinti.',
       activateDescending: 'Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
       activateAscending: 'Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
+      selectRow: 'Pasirinkti eilutę',
+      selectAll: 'Pasirinkti viską',
+      selectGroup: 'Pasirinkti grupę',
     },
     sortBy: 'Rikiuoti pagal',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Išvalyti {0}',
     prependAction: '{0} pridėtas veiksmas',
     appendAction: '{0} pridėtas veiksmas',
-    otp: 'Prašome įvesti OTP simbolį {0}',
+    otp: 'Įveskite patvirtinimo kodą',
   },
   fileInput: {
     counter: '{0} failų',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Įvertinimas {0} iš {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimumas',
+      end: 'Maksimumas',
+    },
+  },
+  splitBtn: {
+    menu: 'Daugiau parinkčių',
   },
   loading: 'Kraunama...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Klaviatūros trumpinys: {0}',
     or: 'arba',
   },
-  video: {
+  media: {
     play: 'Groti',
     pause: 'Pauzė',
     seek: 'Ieškoti',
     volume: 'Garsumas',
-    showVolume: 'Rodyti garso valdymą',
     mute: 'Nutildyti',
     unmute: 'Įjungti garsą',
     enterFullscreen: 'Visas ekranas',

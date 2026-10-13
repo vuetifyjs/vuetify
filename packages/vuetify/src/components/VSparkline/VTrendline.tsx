@@ -4,7 +4,7 @@ import { VSparklineTooltip } from './VSparklineTooltip'
 // Utilities
 import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
 import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
-import { genericComponent, getPropertyFromItem, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, isNumber, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
 // Types
@@ -42,10 +42,10 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const fillPath = ref<SVGPathElement | null>(null)
     const strokePath = ref<SVGPathElement | null>(null)
     const animationDuration = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.duration ?? 300) : 300
+      isObject(props.animation) ? (props.animation.duration ?? 300) : 300
     )
     const animationEasing = computed(() =>
-      typeof props.animation === 'object' ? (props.animation.easing ?? 'ease') : 'ease'
+      isObject(props.animation) ? (props.animation.easing ?? 'ease') : 'ease'
     )
 
     function genPoints (
@@ -132,7 +132,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const extendedPoints = computed(() => extendPoints(points.value, props.inset, totalWidth.value))
 
     function genPath (input: Point[] | number[], fill: boolean): string {
-      const points = typeof input[0] === 'number'
+      const points = isNumber(input[0])
         ? extendPoints(genPoints(input as number[], boundary.value), props.inset, totalWidth.value)
         : input as Point[]
 
@@ -299,7 +299,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
       showCrosshair: true,
       offset: 16 as number | undefined,
       titleFormat: (item: { index: number, value: number }) => String(item.value),
-      ...(typeof props.tooltip === 'object' ? props.tooltip : {}),
+      ...(isObject(props.tooltip) ? props.tooltip : {}),
     }))
 
     let frame = -1
@@ -378,136 +378,136 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
       return (
         <Fragment>
-        <svg
-          ref={ svgRef }
-          display="block"
-          stroke-width={ parseFloat(props.lineWidth) ?? 4 }
-          tabindex={ props.interactive ? 0 : undefined }
-          onMousemove={ props.interactive ? onSvgMousemove : undefined }
-          onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
-          onFocus={ props.interactive ? onSvgFocus : undefined }
-          onBlur={ props.interactive ? onSvgBlur : undefined }
-          onKeydown={ props.interactive ? onSvgKeydown : undefined }
-          { ...attrs }
-        >
-          <defs>
-            <linearGradient
-              id={ id.value }
-              gradientUnits="userSpaceOnUse"
-              x1={ props.gradientDirection === 'left' ? '100%' : '0' }
-              y1={ props.gradientDirection === 'top' ? '100%' : '0' }
-              x2={ props.gradientDirection === 'right' ? '100%' : '0' }
-              y2={ props.gradientDirection === 'bottom' ? '100%' : '0' }
-            >
-              {
-                gradientData.map((color, index) => (
-                  <stop offset={ index / (Math.max(gradientData.length - 1, 1)) } stop-color={ color || 'currentColor' } />
-                ))
-              }
-            </linearGradient>
-          </defs>
+          <svg
+            ref={ svgRef }
+            display="block"
+            stroke-width={ parseFloat(props.lineWidth) ?? 4 }
+            tabindex={ props.interactive ? 0 : undefined }
+            onMousemove={ props.interactive ? onSvgMousemove : undefined }
+            onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
+            onFocus={ props.interactive ? onSvgFocus : undefined }
+            onBlur={ props.interactive ? onSvgBlur : undefined }
+            onKeydown={ props.interactive ? onSvgKeydown : undefined }
+            { ...attrs }
+          >
+            <defs>
+              <linearGradient
+                id={ id.value }
+                gradientUnits="userSpaceOnUse"
+                x1={ props.gradientDirection === 'left' ? '100%' : '0' }
+                y1={ props.gradientDirection === 'top' ? '100%' : '0' }
+                x2={ props.gradientDirection === 'right' ? '100%' : '0' }
+                y2={ props.gradientDirection === 'bottom' ? '100%' : '0' }
+              >
+                {
+                  gradientData.map((color, index) => (
+                    <stop offset={ index / (Math.max(gradientData.length - 1, 1)) } stop-color={ color || 'currentColor' } />
+                  ))
+                }
+              </linearGradient>
+            </defs>
 
-          { hasLabels.value && (
-            <g
-              key="labels"
-              style={{
-                textAnchor: 'middle',
-                dominantBaseline: 'mathematical',
-                fill: 'currentColor',
-              }}
-            >
-              {
-                parsedLabels.value.map((item, i) => (
-                  <text
-                    x={ item.x }
-                    y={ (parseInt(props.height, 10) - 4) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
-                    font-size={ Number(props.labelSize) || 7 }
-                  >
-                    { slots.label?.({ index: i, value: item.value }) ?? item.value }
-                  </text>
-                ))
-              }
-            </g>
-          )}
+            { hasLabels.value && (
+              <g
+                key="labels"
+                style={{
+                  textAnchor: 'middle',
+                  dominantBaseline: 'mathematical',
+                  fill: 'currentColor',
+                }}
+              >
+                {
+                  parsedLabels.value.map((item, i) => (
+                    <text
+                      x={ item.x }
+                      y={ (parseInt(props.height, 10) - 4) + (parseInt(props.labelSize, 10) || 7 * 0.75) }
+                      font-size={ Number(props.labelSize) || 7 }
+                    >
+                      { slots.label?.({ index: i, value: item.value }) ?? item.value }
+                    </text>
+                  ))
+                }
+              </g>
+            )}
 
-          <path
-            key="fill"
-            ref={ props.fill ? fillPath : strokePath }
-            d={ genPath(extendedPoints.value, props.fill) }
-            fill={ props.fill ? `url(#${id.value})` : 'none' }
-            stroke={ props.fill ? 'none' : `url(#${id.value})` }
-          />
-
-          { props.fill && (
             <path
-              key="trendline"
-              ref={ strokePath }
-              d={ genPath(extendedPoints.value, false) }
-              fill="none"
-              stroke="currentColor"
+              key="fill"
+              ref={ props.fill ? fillPath : strokePath }
+              d={ genPath(extendedPoints.value, props.fill) }
+              fill={ props.fill ? `url(#${id.value})` : 'none' }
+              stroke={ props.fill ? 'none' : `url(#${id.value})` }
             />
-          )}
 
-          { props.showMarkers && (
-            <g key="markers">
-              { points.value.map((point, i) => (
+            { props.fill && (
+              <path
+                key="trendline"
+                ref={ strokePath }
+                d={ genPath(extendedPoints.value, false) }
+                fill="none"
+                stroke="currentColor"
+              />
+            )}
+
+            { props.showMarkers && (
+              <g key="markers">
+                { points.value.map((point, i) => (
+                  <circle
+                    key={ i }
+                    cx={ point.x }
+                    cy={ point.y }
+                    r={ markerRadius }
+                    fill="currentColor"
+                    stroke={ props.markerStroke }
+                    stroke-width={ 2 }
+                    pointer-events="none"
+                  />
+                ))}
+              </g>
+            )}
+
+            { props.interactive && currentPoint.value && (
+              <g key="hover" pointer-events="none">
+                { tooltipConfig.value.showCrosshair && (
+                  <line
+                    key="crosshair-line"
+                    x1={ markerPoint.value.x }
+                    y1={ props.inset ? 0 : boundary.value.minY }
+                    x2={ markerPoint.value.x }
+                    y2={ props.inset ? parseInt(props.height, 10) : boundary.value.maxY }
+                    stroke="currentColor"
+                    stroke-width={ 1 }
+                    stroke-dasharray="4 2"
+                    opacity={ 0.5 }
+                  />
+                )}
                 <circle
-                  key={ i }
-                  cx={ point.x }
-                  cy={ point.y }
+                  key="marker"
+                  cx={ markerPoint.value.x }
+                  cy={ markerPoint.value.y }
                   r={ markerRadius }
                   fill="currentColor"
                   stroke={ props.markerStroke }
                   stroke-width={ 2 }
-                  pointer-events="none"
                 />
-              ))}
-            </g>
+              </g>
+            )}
+
+          </svg>
+
+          { !!props.tooltip && (
+            <VSparklineTooltip
+              key="tooltip"
+              modelValue={ tooltipVisible.value }
+              target={ tooltipTarget.value }
+              index={ currentIndex.value }
+              value={ currentIndex.value !== null ? points.value[currentIndex.value].value : 0 }
+              offset={ tooltipConfig.value.offset }
+              contentClass={ tooltipConfig.value.class }
+              titleFormat={ tooltipConfig.value.titleFormat }
+              onAfterLeave={ onTooltipAfterLeave }
+              v-slots={{ default: slots.tooltip }}
+            />
           )}
-
-          { props.interactive && currentPoint.value && (
-            <g key="hover" pointer-events="none">
-              { tooltipConfig.value.showCrosshair && (
-                <line
-                  key="crosshair-line"
-                  x1={ markerPoint.value.x }
-                  y1={ props.inset ? 0 : boundary.value.minY }
-                  x2={ markerPoint.value.x }
-                  y2={ props.inset ? parseInt(props.height, 10) : boundary.value.maxY }
-                  stroke="currentColor"
-                  stroke-width={ 1 }
-                  stroke-dasharray="4 2"
-                  opacity={ 0.5 }
-                />
-              )}
-              <circle
-                key="marker"
-                cx={ markerPoint.value.x }
-                cy={ markerPoint.value.y }
-                r={ markerRadius }
-                fill="currentColor"
-                stroke={ props.markerStroke }
-                stroke-width={ 2 }
-              />
-            </g>
-          )}
-
-        </svg>
-
-        { !!props.tooltip && (
-          <VSparklineTooltip
-            key="tooltip"
-            modelValue={ tooltipVisible.value }
-            target={ tooltipTarget.value }
-            index={ currentIndex.value }
-            value={ currentIndex.value !== null ? points.value[currentIndex.value].value : 0 }
-            offset={ tooltipConfig.value.offset }
-            contentClass={ tooltipConfig.value.class }
-            titleFormat={ tooltipConfig.value.titleFormat }
-            onAfterLeave={ onTooltipAfterLeave }
-            v-slots={{ default: slots.tooltip }}
-          />
-        )}
         </Fragment>
       )
     })

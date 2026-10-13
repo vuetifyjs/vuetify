@@ -20,6 +20,9 @@ export default {
       activateNone: 'ចុចដើម្បីដកតំណទំហំ។',
       activateDescending: 'ចុចដើម្បីតំណទំហំចុះរួម។',
       activateAscending: 'ចុចដើម្បីតំណទំហំឡើងរួម។',
+      selectRow: 'ជ្រើសរើសជួរ',
+      selectAll: 'ជ្រើសរើសទាំងអស់',
+      selectGroup: 'ជ្រើសរើសក្រុម',
     },
     sortBy: 'តម្រៀបតាម',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'សម្អាត {0}',
     prependAction: '{0} សម្អាតសកម្ម',
     appendAction: '{0} សម្អាតសកម្ម',
-    otp: 'សូមបញ្ចូលតួអក្សរ OTP {0}',
+    otp: 'បញ្ចូលកូដផ្ទៀងផ្ទាត់',
   },
   fileInput: {
     counter: '{0} ឯកសារ',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'ការវាយតម្លៃ {0} នៃ {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'អប្បបរមា',
+      end: 'អតិបរមា',
+    },
+  },
+  splitBtn: {
+    menu: 'ជម្រើសច្រើនទៀត',
   },
   loading: 'កំពុងដំណើរការ...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
     or: 'ឬ',
   },
-  video: {
+  media: {
     play: 'លេង',
     pause: 'ផ្អាក',
     seek: 'ស្វែងរក',
     volume: 'កម្រិតសំឡេង',
-    showVolume: 'បង្ហាញការគ្រប់គ្រងកម្រិតសំឡេង',
     mute: 'បិទសំឡេង',
     unmute: 'បើក​សំឡេង',
     enterFullscreen: 'ពេញអេក្រង់',

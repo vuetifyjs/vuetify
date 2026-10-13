@@ -16,8 +16,19 @@ import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, getPrefixedEventHandlers, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, mergeProps, nextTick, shallowRef, toRef, useId, watch } from 'vue'
+import {
+  chunkArray,
+  genericComponent,
+  getPrefixedEventHandlers,
+  isFunction,
+  isObject,
+  isString,
+  omit,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -35,7 +46,7 @@ export type DatePickerEvents = string[] |
 export type VDatePickerMonthSlots = {
   day: {
     props: {
-      onClick: (e: PointerEvent) => void
+      onClick: () => void
     }
     item: any
     i: number
@@ -305,13 +316,13 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         return []
       } else if (eventData !== true) {
         eventColors = wrapInArray(eventData)
-      } else if (typeof eventColor === 'string') {
+      } else if (isString(eventColor)) {
         eventColors = [eventColor]
-      } else if (typeof eventColor === 'function') {
+      } else if (isFunction(eventColor)) {
         eventColors = wrapInArray(eventColor(date))
       } else if (Array.isArray(eventColor)) {
         eventColors = eventColor
-      } else if (typeof eventColor === 'object' && eventColor !== null) {
+      } else if (isObject(eventColor)) {
         eventColors = wrapInArray(eventColor[date])
       }
 
@@ -320,7 +331,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         ? ['surface-variant']
         : eventColors
           .filter(Boolean)
-          .map((color: string | boolean) => typeof color === 'string' ? color : 'surface-variant')
+          .map((color: string | boolean) => isString(color) ? color : 'surface-variant')
     }
 
     function genEvents (date: string): JSX.Element | null {
@@ -376,95 +387,91 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
               </div>
             )}
 
-            { dayRows.value.map((row, rowIndex) => {
-              const events = getPrefixedEventHandlers(attrs, ':day', nativeEvent => ({ nativeEvent, ...item }))
+            { dayRows.value.map((row, rowIndex) => (
+              <div class="v-date-picker-month__days-row" role="row">
+                { row.map((item, colIndex) => {
+                  const i = rowIndex * props.weekdays.length + colIndex
+                  const isSelected = isSelectedDay(item)
+                  const disabled = isDayDisabled(item)
+                  const rangeStart = range.isRangeStart(item.date)
+                  const rangeEnd = range.isRangeEnd(item.date)
+                  const rangeMiddle = range.isRangeMiddle(item.date)
+                  const previewStart = range.isPreviewStart(item.date)
+                  const previewEnd = range.isPreviewEnd(item.date)
+                  const previewMiddle = range.isPreviewMiddle(item.date)
+                  const events = getPrefixedEventHandlers(attrs, ':day', nativeEvent => ({ nativeEvent, ...item }))
 
-              return (
-                <div class="v-date-picker-month__days-row" role="row">
-                  { row.map((item, colIndex) => {
-                    const i = rowIndex * props.weekdays.length + colIndex
-                    const isSelected = isSelectedDay(item)
-                    const disabled = isDayDisabled(item)
-                    const rangeStart = range.isRangeStart(item.date)
-                    const rangeEnd = range.isRangeEnd(item.date)
-                    const rangeMiddle = range.isRangeMiddle(item.date)
-                    const previewStart = range.isPreviewStart(item.date)
-                    const previewEnd = range.isPreviewEnd(item.date)
-                    const previewMiddle = range.isPreviewMiddle(item.date)
+                  const slotProps = {
+                    props: mergeProps({
+                      class: 'v-date-picker-month__day-btn',
+                      color: ((isSelected && !rangeMiddle) || item.isToday) ? props.color : undefined,
+                      disabled,
+                      readonly: props.readonly,
+                      icon: true,
+                      ripple: false,
+                      tabindex: -1,
+                      variant: (isSelected && !rangeMiddle) ? 'flat' : item.isToday ? 'outlined' : 'text',
+                      'aria-label': getDateAriaLabel(item),
+                      'aria-current': item.isToday ? 'date' : undefined,
+                      id: `${uid}-day-${item.isoDate}`,
+                      'data-v-date': !disabled ? item.isoDate : undefined,
+                      onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
+                      onClick: () => onDayClick(item),
+                      onMouseenter: () => range.setPreview(item.date),
+                      onFocus: () => range.setPreview(item.date),
+                      onBlur: range.clearPreview,
+                    }, events) as VDatePickerMonthSlots['day']['props'],
+                    item,
+                    i,
+                  } as const
 
-                    const slotProps = {
-                      props: {
-                        class: 'v-date-picker-month__day-btn',
-                        color: ((isSelected && !rangeMiddle) || item.isToday) ? props.color : undefined,
-                        disabled,
-                        readonly: props.readonly,
-                        icon: true,
-                        ripple: false,
-                        tabindex: -1,
-                        variant: (isSelected && !rangeMiddle) ? 'flat' : item.isToday ? 'outlined' : 'text',
-                        'aria-label': getDateAriaLabel(item),
-                        'aria-current': item.isToday ? 'date' : undefined,
-                        id: `${uid}-day-${item.isoDate}`,
-                        'data-v-date': !disabled ? item.isoDate : undefined,
-                        onMousedown: (e: MouseEvent) => e.preventDefault(), // preserve virtual focus
-                        onClick: (e: PointerEvent) => { onDayClick(item); events.onClick?.(e) },
-                        onMouseenter: () => range.setPreview(item.date),
-                        onFocus: () => range.setPreview(item.date),
-                        onBlur: range.clearPreview,
-                        // ...events <-- TODO: merge with all existing handlers
-                      },
-                      item,
-                      i,
-                    } as const
+                  const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
+                  const hasPreviewBg = previewStart || previewEnd || previewMiddle
 
-                    const hasRangeBg = rangeStart || rangeEnd || rangeMiddle
-                    const hasPreviewBg = previewStart || previewEnd || previewMiddle
-
-                    return (
-                      <div
-                        class={[
-                          'v-date-picker-month__day',
-                          {
-                            'v-date-picker-month__day--adjacent': item.isAdjacent,
-                            'v-date-picker-month__day--hide-adjacent': item.isHidden,
-                            'v-date-picker-month__day--selected': isSelected,
-                            'v-date-picker-month__day--week-end': item.isWeekEnd,
-                            'v-date-picker-month__day--week-start': item.isWeekStart,
-                            'v-date-picker-month__day--range-start': rangeStart,
-                            'v-date-picker-month__day--range-end': rangeEnd,
-                            'v-date-picker-month__day--range-middle': rangeMiddle,
-                            'v-date-picker-month__day--preview-start': previewStart,
-                            'v-date-picker-month__day--preview-end': previewEnd,
-                            'v-date-picker-month__day--preview-middle': previewMiddle,
-                          },
-                        ]}
-                        role="gridcell"
-                      >
-                        { (hasRangeBg || hasPreviewBg) && (
-                          <div
-                            key="range-bg"
-                            class={[
-                              'v-date-picker-month__range-bg',
-                              hasRangeBg ? 'v-date-picker-month__range-bg--range' : 'v-date-picker-month__range-bg--preview',
-                              rangeColorClasses.value,
-                            ]}
-                            style={ rangeColorStyles.value }
-                          />
-                        )}
-                        { (props.showAdjacentMonths || !item.isAdjacent) && (
-                          slots.day?.(slotProps) ?? (
-                            <VBtn { ...slotProps.props }>
-                              { item.localized }
-                              { genEvents(item.isoDate) }
-                            </VBtn>
-                          )
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              )
-            })}
+                  return (
+                    <div
+                      class={[
+                        'v-date-picker-month__day',
+                        {
+                          'v-date-picker-month__day--adjacent': item.isAdjacent,
+                          'v-date-picker-month__day--hide-adjacent': item.isHidden,
+                          'v-date-picker-month__day--selected': isSelected,
+                          'v-date-picker-month__day--week-end': item.isWeekEnd,
+                          'v-date-picker-month__day--week-start': item.isWeekStart,
+                          'v-date-picker-month__day--range-start': rangeStart,
+                          'v-date-picker-month__day--range-end': rangeEnd,
+                          'v-date-picker-month__day--range-middle': rangeMiddle,
+                          'v-date-picker-month__day--preview-start': previewStart,
+                          'v-date-picker-month__day--preview-end': previewEnd,
+                          'v-date-picker-month__day--preview-middle': previewMiddle,
+                        },
+                      ]}
+                      role="gridcell"
+                    >
+                      { (hasRangeBg || hasPreviewBg) && (
+                        <div
+                          key="range-bg"
+                          class={[
+                            'v-date-picker-month__range-bg',
+                            hasRangeBg ? 'v-date-picker-month__range-bg--range' : 'v-date-picker-month__range-bg--preview',
+                            rangeColorClasses.value,
+                          ]}
+                          style={ rangeColorStyles.value }
+                        />
+                      )}
+                      { (props.showAdjacentMonths || !item.isAdjacent) && (
+                        slots.day?.(slotProps) ?? (
+                          <VBtn { ...slotProps.props }>
+                            { item.localized }
+                            { genEvents(item.isoDate) }
+                          </VBtn>
+                        )
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ))}
           </div>
         </MaybeTransition>
       </div>

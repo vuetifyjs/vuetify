@@ -6,6 +6,7 @@ interface GroupedInputOptions {
   precision: number | null
   grouping: 'always' | 'auto' | 'min2' | boolean
   locale: string
+  minusSign: string
 }
 
 const defaults: GroupedInputOptions = {
@@ -14,6 +15,7 @@ const defaults: GroupedInputOptions = {
   precision: 0,
   grouping: 'always',
   locale: 'en-US',
+  minusSign: '-',
 }
 
 function opts (overrides: Partial<GroupedInputOptions> = {}): GroupedInputOptions {
@@ -232,9 +234,10 @@ describe('typing', () => {
   })
 
   describe('processPlainInput', () => {
-    const plain = (overrides: Partial<{ decimalSeparator: string, precision: number | null }> = {}) => ({
+    const plain = (overrides: Partial<{ decimalSeparator: string, precision: number | null, minusSign: string }> = {}) => ({
       decimalSeparator: '.',
       precision: 0 as number | null,
+      minusSign: '-',
       ...overrides,
     })
 
@@ -294,6 +297,26 @@ describe('typing', () => {
 
       it('rejects second decimal separator', () => {
         expect(processPlainInput('.', '1.2', 3, 3, plain({ precision: 2 }))).toMatchObject({ text: '1.2' })
+      })
+    })
+
+    describe('minus sign variants (U+2212)', () => {
+      it('accepts a pasted U+2212 minus, normalizing to ASCII when locale uses ASCII', () => {
+        expect(processPlainInput('−123', '', 0, 0, plain())).toMatchObject({ text: '-123' })
+      })
+
+      it('keeps an existing U+2212 sign when correcting the field', () => {
+        // rejected char is stripped; the existing minus must survive, not be dropped
+        expect(processPlainInput('x', '−12', 3, 3, plain())).toMatchObject({ text: '-12', cursor: 3 })
+      })
+
+      it('renders the locale minus sign on correction', () => {
+        expect(processPlainInput('−123', '', 0, 0, plain({ minusSign: '−' }))).toMatchObject({ text: '−123' })
+      })
+
+      it('renders the locale minus sign in grouped input', () => {
+        const result = processGroupedInput('insertText', '4', '−123', 4, 4, opts({ minusSign: '−' }))
+        expect(result).toEqual({ text: '−1,234', cursor: 6 })
       })
     })
 

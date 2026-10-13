@@ -20,6 +20,10 @@ import {
   getLuma,
   hasLightForeground,
   IN_BROWSER,
+  isElement,
+  isNumber,
+  isObject,
+  isString,
   lighten,
   mergeDeep,
   parseColor,
@@ -108,9 +112,9 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
-  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => void
-  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => void
-  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => void
+  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => Promise<void>
+  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => Promise<void>
   setTransitionOrigin: (e: PointerEvent | Element | null) => void
 
   readonly isDisabled: boolean
@@ -260,15 +264,15 @@ function genCssVariables (theme: InternalThemeDefinition, prefix: string) {
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
     const rgb = parseColor(value)
-    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (rgb.a == null ? '' : `,${rgb.a}`))
+    variables.push(`--${prefix}theme-${key}: ${rgb.r},${rgb.g},${rgb.b}` + (isNumber(rgb.a) ? `,${rgb.a}` : ''))
     if (!key.startsWith('on-')) {
       variables.push(`--${prefix}theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
   }
 
   for (const [key, value] of Object.entries(theme.variables)) {
-    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    const color = isString(value) && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` + (isNumber(color.a) ? `, ${color.a}` : '') : undefined
     variables.push(`--${prefix}${key}: ${rgb ?? value}`)
   }
 
@@ -407,15 +411,13 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
     lines.push('@layer theme-base {\n')
 
-    if (current.value?.dark) {
-      createCssClass(lines, ':root', ['color-scheme: dark'], parsedOptions.scope)
-    }
+    createCssClass(lines, ':root', [`color-scheme: ${current.value?.dark ? 'dark' : 'light'}`], parsedOptions.scope)
 
     createCssClass(lines, ':root', genCssVariables(current.value, parsedOptions.prefix), parsedOptions.scope)
 
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
       createCssClass(lines, `.${parsedOptions.prefix}theme--${themeName}`, [
-        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'light'}`,
         ...genCssVariables(theme, parsedOptions.prefix),
       ], parsedOptions.scope)
     }
@@ -527,7 +529,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     let x: number
     let y: number
 
-    if (e instanceof Element) {
+    if (isElement(e)) {
       const box = new Box(e)
       x = box.left + box.width / 2
       y = box.top + box.height / 2
@@ -546,18 +548,18 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   ): ThemeTransitionOptions | false {
     const opt = transition ?? parsedOptions.transition
     if (!opt && !_transitionOrigin) return false
-    const global = typeof parsedOptions.transition === 'object' ? parsedOptions.transition : {}
-    const local = typeof transition === 'object' ? transition : {}
+    const global = isObject(parsedOptions.transition) ? parsedOptions.transition : {}
+    const local = isObject(transition) ? transition : {}
     return {
       origin: local.origin ?? _transitionOrigin ?? global.origin,
       duration: local.duration ?? global.duration,
     }
   }
 
-  function withPageTransition (callback: () => void, options: ThemeTransitionOptions) {
+  function withPageTransition (callback: () => void, options: ThemeTransitionOptions): Promise<void> {
     if (!IN_BROWSER || !document.startViewTransition || PREFERS_REDUCED_MOTION()) {
       callback()
-      return
+      return Promise.resolve()
     }
 
     const origin = options.origin ?? '50% 0%'
@@ -578,33 +580,36 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       _transitionOrigin = null
       style.remove()
     })
+
+    return transition.updateCallbackDone
   }
 
-  function change (themeName: string, transition?: boolean | ThemeTransitionOptions) {
+  function change (themeName: string, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     if (themeName !== 'system' && !themeNames.value.includes(themeName)) {
       consoleWarn(`Theme "${themeName}" not found on the Vuetify theme instance`)
-      return
+      return Promise.resolve()
     }
 
     const apply = () => { name.value = themeName }
     const transitionOptions = resolveTransitionOptions(transition)
 
     if (transitionOptions) {
-      withPageTransition(apply, transitionOptions)
-    } else {
-      apply()
+      return withPageTransition(apply, transitionOptions)
     }
+
+    apply()
+    return Promise.resolve()
   }
 
-  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions) {
+  function cycle (themeArray: string[] = themeNames.value, transition?: boolean | ThemeTransitionOptions): Promise<void> {
     const currentIndex = themeArray.indexOf(name.value)
     const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themeArray.length
 
-    change(themeArray[nextIndex], transition)
+    return change(themeArray[nextIndex], transition)
   }
 
-  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions) {
-    cycle(themeArray, transition)
+  function toggle (themeArray: [string, string] = ['light', 'dark'], transition?: boolean | ThemeTransitionOptions): Promise<void> {
+    return cycle(themeArray, transition)
   }
 
   const globalName = new Proxy(name, {
@@ -649,7 +654,7 @@ export function provideTheme (props: { theme?: string }) {
   if (!theme) throw new Error('Could not find Vuetify theme injection')
 
   const name = toRef(() => props.theme ?? theme.name.value)
-  const current = toRef(() => theme.themes.value[name.value])
+  const current = toRef(() => theme.computedThemes.value[name.value])
 
   const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${name.value}`)
 

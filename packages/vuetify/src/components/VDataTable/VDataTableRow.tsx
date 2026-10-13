@@ -2,7 +2,7 @@
 import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VHighlight } from '@/labs/VHighlight'
+import { VHighlight } from '@/components/VHighlight'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -12,10 +12,11 @@ import { useSort } from './composables/sort'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { toDisplayString, withModifiers } from 'vue'
-import { EventProp, genericComponent, getObjectValueByPath, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getObjectValueByPath, isFunction, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -51,6 +52,10 @@ export const makeVDataTableRowProps = propsFactory({
     type: IconValue,
     default: '$expand',
   },
+  selectRowLabel: {
+    type: String,
+    default: '$vuetify.dataTable.ariaLabel.selectRow',
+  },
 
   getMatches: Function as PropType<(item: DataTableItem) => Record<string, FilterMatchArrayMultiple | undefined> | undefined>,
   onClick: EventProp<[MouseEvent]>(),
@@ -73,6 +78,7 @@ export const VDataTableRow = genericComponent<new <T>(
   props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { displayClasses, mobile } = useDisplay(props, 'v-data-table__tr')
     const { isSelected, toggleSelect, someSelected, allSelected, selectAll } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
@@ -88,6 +94,8 @@ export const VDataTableRow = genericComponent<new <T>(
           },
           displayClasses.value,
         ]}
+        data-selected={ (props.item && isSelected([props.item])) || undefined }
+        data-expanded={ (props.item && isExpanded(props.item)) || undefined }
         onClick={ props.onClick as any }
         onContextmenu={ props.onContextmenu as any }
         onDblclick={ props.onDblclick as any }
@@ -119,7 +127,7 @@ export const VDataTableRow = genericComponent<new <T>(
             getSortIcon: () => '',
           }
 
-          const cellProps = typeof props.cellProps === 'function'
+          const cellProps = isFunction(props.cellProps)
             ? props.cellProps({
               index: slotProps.index,
               item: slotProps.item,
@@ -128,7 +136,7 @@ export const VDataTableRow = genericComponent<new <T>(
               column,
             })
             : props.cellProps
-          const columnCellProps = typeof column.cellProps === 'function'
+          const columnCellProps = isFunction(column.cellProps)
             ? column.cellProps({
               index: slotProps.index,
               item: slotProps.item,
@@ -142,6 +150,7 @@ export const VDataTableRow = genericComponent<new <T>(
 
           return (
             <VDataTableColumn
+              key={ column.key ?? i }
               align={ column.align }
               indent={ column.indent }
               class={{
@@ -174,6 +183,7 @@ export const VDataTableRow = genericComponent<new <T>(
                       },
                     }) ?? (
                       <VCheckboxBtn
+                        aria-label={ t(props.selectRowLabel) }
                         color={ props.color }
                         disabled={ !item.selectable }
                         density={ props.density }

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivizēt, lai noņemtu kārtošanu.',
       activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
       activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
+      selectRow: 'Atlasīt rindu',
+      selectAll: 'Atlasīt visu',
+      selectGroup: 'Atlasīt grupu',
     },
     sortBy: 'Kārtot pēc',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Notīrīt {0}',
     prependAction: '{0} pievienota darbība sākumā',
     appendAction: '{0} pievienota darbība beigās',
-    otp: 'Lūdzu, ievadiet OTP simbolu {0}',
+    otp: 'Ievadiet verifikācijas kodu',
   },
   fileInput: {
     counter: '{0} faili',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Vērtējums {0} no {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimums',
+      end: 'Maksimums',
+    },
+  },
+  splitBtn: {
+    menu: 'Vairāk opciju',
   },
   loading: 'Ielādē...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Tastatūras saīsne: {0}',
     or: 'vai',
   },
-  video: {
+  media: {
     play: 'Atskaņot',
     pause: 'Pauzēt',
     seek: 'Meklēt',
     volume: 'Skaļums',
-    showVolume: 'Rādīt skaļuma kontroli',
     mute: 'Izslēgt skaņu',
     unmute: 'Ieslēgt skaņu',
     enterFullscreen: 'Pilnekrāna režīms',

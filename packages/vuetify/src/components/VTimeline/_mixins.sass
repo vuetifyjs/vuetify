@@ -1,27 +1,17 @@
-@mixin vertical($immediate: false)
-  $selector: '.v-timeline--vertical'
-  @if $immediate
-    $selector: '#{$selector}#{&}'
-  @else
-    $selector: '#{$selector} #{&}'
-  @at-root #{$selector}
+@mixin vertical()
+  @at-root .v-timeline--vertical#{&}
     @content
 
-@mixin horizontal($immediate: false)
-  $selector: '.v-timeline--horizontal'
-  @if $immediate
-    $selector: '#{$selector}#{&}'
-  @else
-    $selector: '#{$selector} #{&}'
-  @at-root #{$selector}
+@mixin horizontal()
+  @at-root .v-timeline--horizontal#{&}
     @content
 
 @mixin timeline-first-item()
-  .v-timeline-item:first-child
-    .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
+  > .v-timeline-item:first-child
+    > .v-timeline-divider, > .v-timeline-item__body, > .v-timeline-item__opposite
       @content
 
 @mixin timeline-last-item()
-  .v-timeline-item:last-child
-    .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
+  > .v-timeline-item:last-child
+    > .v-timeline-divider, > .v-timeline-item__body, > .v-timeline-item__opposite
       @content

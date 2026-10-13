@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiver for å fjerne sortering.',
       activateDescending: 'Aktiver for å sortere synkende.',
       activateAscending: 'Aktiver for å sortere stigende.',
+      selectRow: 'Velg rad',
+      selectAll: 'Velg alle',
+      selectGroup: 'Velg gruppe',
     },
     sortBy: 'Sorter etter',
   },
@@ -91,7 +94,7 @@ export default {
     clear: 'Fjern {0}',
     prependAction: '{0} foranstilt handling',
     appendAction: '{0} etterstilt handling',
-    otp: 'Vennligst skriv inn OTP-tegn {0}',
+    otp: 'Skriv inn bekreftelseskode',
   },
   fileInput: {
     counter: '{0} filer',
@@ -130,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Anmeldelse {0} av {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Flere alternativer',
   },
   loading: 'Laster...',
   infiniteScroll: {
@@ -171,12 +183,11 @@ export default {
     shortcut: 'Tastatursnarveier: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spill av',
     pause: 'Pause',
     seek: 'Søk',
     volume: 'Volum',
-    showVolume: 'Vis volumkontroll',
     mute: ' Demp',
     unmute: 'Slå på lyd',
     enterFullscreen: 'Fullskjerm',

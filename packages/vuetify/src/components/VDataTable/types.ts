@@ -7,6 +7,12 @@ import type { SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number | null
 
+export type DataTableLoadingSide = 'start' | 'end' | 'both'
+export type DataTableLoading =
+  | boolean
+  | string
+  | { side?: DataTableLoadingSide, color?: string }
+
 export type DataTableHeader<T = Record<string, any>> = {
   key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})
   value?: SelectItemKey<T>
@@ -95,7 +101,7 @@ export type ItemKeySlot<T> = ItemSlotBase<T> & {
 
 export type RowProps<T> = Record<string, any> | RowPropsFunction<T>
 export type RowPropsFunction<T> = (
-  data: Pick<ItemKeySlot<T>, 'index' | 'item' | 'internalItem'>
+  data: Pick<ItemSlot<T>, 'index' | 'item' | 'internalItem' | 'isExpanded' | 'isSelected'>
 ) => Record<string, any>
 
 export type CellProps<T> = Record<string, any> | CellPropsFunction<T>

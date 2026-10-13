@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Announcing the Vuetify0 Alpha
-  description: The Vuetify0 alpha is here — a headless Vue framework with 46 components, 63 composables, first-class AI integration, and an adapter-based plugin system. 100% TypeScript, 0 styles, built for building UI libraries.
+  description: The Vuetify0 alpha is here — a headless Vue framework with 46 components, 63 composables, first-class AI integration, 100% TypeScript, and zero styles.
   keywords: Vuetify0 alpha, headless Vue, Vue component library, AI-native framework, TypeScript components, Vuetify MCP
 ---
 
