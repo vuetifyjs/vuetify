@@ -257,7 +257,6 @@ describe('VCommandPalette', () => {
       await userEvent.click(input)
       await userEvent.keyboard('{ArrowDown}')
       await expect.poll(() => document.getElementById(input.getAttribute('aria-activedescendant')!)).toHaveTextContent('Folder')
-      expect(screen.getAllByRole('option', { selected: true })).toHaveLength(1)
       expect(screen.getByRole('option', { selected: true }).id).toBe(input.getAttribute('aria-activedescendant'))
 
       await userEvent.keyboard('{ArrowUp}{ArrowUp}')
