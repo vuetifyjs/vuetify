@@ -134,6 +134,15 @@ export default {
       item: 'امتیاز {0} از {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'حداقل',
+      end: 'حداکثر',
+    },
+  },
+  splitBtn: {
+    menu: 'گزینه‌های بیشتر',
+  },
   loading: 'در حال بارگذاری...',
   infiniteScroll: {
     loadMore: 'بارگذاری بیشتر',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'میانبر صفحه کلید: {0}',
     or: 'یا',
   },
-  video: {
+  media: {
     play: 'پخش',
     pause: 'مکث',
     seek: 'جستجو',
     volume: 'صدا',
-    showVolume: 'نمایش کنترل صدا',
     mute: 'بی‌صدا',
     unmute: 'با صدا',
     enterFullscreen: 'تمام صفحه',

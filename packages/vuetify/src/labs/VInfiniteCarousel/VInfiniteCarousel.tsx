@@ -108,12 +108,14 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     const speed = toRef(() => Math.max(0, Number(props.speed) || 0))
     const loopDuration = toRef(() => speed.value ? loopDistance.value / speed.value * 1000 : 1000)
 
-    const { resizeRef: viewportRef } = useResizeObserver(onResize)
-    const { resizeRef: contentRef } = useResizeObserver(onResize)
+    const viewportRef = shallowRef<HTMLElement>()
+    const contentRef = shallowRef<HTMLElement>()
+    useResizeObserver(viewportRef, onResize)
+    useResizeObserver(contentRef, onResize)
 
     function onResize () {
-      const viewport = viewportRef.el
-      const group = contentRef.el
+      const viewport = viewportRef.value
+      const group = contentRef.value
       if (!viewport || !group) return
 
       const viewportStyles = getComputedStyle(viewport)
@@ -253,7 +255,7 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     }
 
     function reveal (el: HTMLElement) {
-      const group = contentRef.el
+      const group = contentRef.value
       if (!group) return
 
       cancelStep()
@@ -405,11 +407,11 @@ export const VInfiniteCarousel = genericComponent<VInfiniteCarouselSlots>()({
     }
 
     function collectItems () {
-      items.value = Array.from(contentRef.el?.children ?? [])
+      items.value = Array.from(contentRef.value?.children ?? [])
         .filter(el => !el.classList.contains('v-infinite-carousel__separator')) as HTMLElement[]
 
       // sticky: the tabindex set below keeps this true even if the content later loses its focusables
-      hasFocusableItems = !!contentRef.el && focusableChildren(contentRef.el, false).length > 0
+      hasFocusableItems = !!contentRef.value && focusableChildren(contentRef.value, false).length > 0
       if (hasFocusableItems) {
         items.value.forEach(item => {
           item.tabIndex = -1

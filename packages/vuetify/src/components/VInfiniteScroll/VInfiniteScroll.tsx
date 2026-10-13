@@ -7,7 +7,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 
@@ -81,7 +81,8 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const el = shallowRef<HTMLElement>()
+    const { isIntersecting } = useElementIntersection(el)
 
     watch(isIntersecting, async val => {
       emit('intersect', props.side, val)
@@ -93,7 +94,7 @@ export const VInfiniteScrollIntersect = defineComponent({
         style={{
           '--v-infinite-margin-size': props.rootMargin,
         }}
-        ref={ intersectionRef }
+        ref={ el }
       >&nbsp;</div>
     ))
 

@@ -134,6 +134,15 @@ export default {
       item: 'Βαθμολογία {0} από {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Ελάχιστο',
+      end: 'Μέγιστο',
+    },
+  },
+  splitBtn: {
+    menu: 'Περισσότερες επιλογές',
+  },
   loading: 'Φόρτωση...',
   infiniteScroll: {
     loadMore: 'Φόρτωση περισσότερων',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
     or: 'ή',
   },
-  video: {
+  media: {
     play: 'Αναπαραγωγή',
     pause: 'Παύση',
     seek: 'Αναζήτηση',
     volume: 'Ένταση',
-    showVolume: 'Εμφάνιση ελέγχου έντασης',
     mute: 'Σίγαση',
     unmute: 'Κατάργηση σίγασης',
     enterFullscreen: 'Πλήρης οθόνη',

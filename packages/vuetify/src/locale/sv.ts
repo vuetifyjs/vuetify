@@ -134,6 +134,15 @@ export default {
       item: 'Betyg {0} av {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Fler alternativ',
+  },
   loading: 'Laddar...',
   infiniteScroll: {
     loadMore: 'Ladda fler',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tangentbordsgenväg: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spela upp',
     pause: 'Pausa',
     seek: 'Sök',
     volume: 'Volym',
-    showVolume: 'Visa volymkontroll',
     mute: 'Stäng av ljud',
     unmute: 'Slå på ljud',
     enterFullscreen: 'Helskärm',

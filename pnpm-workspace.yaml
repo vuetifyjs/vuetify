@@ -67,7 +67,6 @@ catalog:
   ts-morph: '^25.0.1'
   '@types/node': 24.10.1
   '@types/lodash-es': '^4.17.12'
-  '@types/resize-observer-browser': '^0.1.11'
   '@types/stringify-object': '^4.0.5'
   '@types/prismjs': '^1.26.5'
   '@types/markdown-it': '^14.1.2'
@@ -244,6 +243,7 @@ patchedDependencies:
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
   '@typescript-eslint/typescript-estree@8.57.2': patches/@typescript-eslint__typescript-estree@8.57.2.patch
+  '@vitest/browser': patches/@vitest__browser.patch
   playwright-core: patches/playwright-core.patch
 
 peerDependencyRules:

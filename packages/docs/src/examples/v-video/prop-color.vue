@@ -3,7 +3,7 @@
     <v-sheet class="px-6 py-2 border-b mb-3" color="surface">
       <div class="d-flex ga-2 ga-md-12 flex-wrap align-center justify-center">
         <div class="d-flex align-center ga-3">
-          <v-chip-group v-model="controlsVariant" mandatory>
+          <v-chip-group v-model="layout" mandatory>
             <v-chip text="default" value="default" filter label></v-chip>
             <v-chip text="tube" value="tube" filter label></v-chip>
             <v-chip text="mini" value="mini" filter label></v-chip>
@@ -21,7 +21,7 @@
 
     <div class="d-flex justify-center ga-3 mb-3">
       <v-btn
-        v-for="key in ['color', 'background', 'track']"
+        v-for="key in ['color', 'background', 'progress']"
         :key="key"
         variant="text"
       >
@@ -42,14 +42,14 @@
     </div>
 
     <v-video
-      :background-color="colors.background"
+      :actions="layouts[layout]"
+      :bg-color="colors.background"
       :color="colors.color"
-      :controls-variant="controlsVariant"
       :detached="features.includes('detached')"
       :floating="features.includes('floating')"
       :pills="features.includes('pills')"
+      :progress-color="colors.progress"
       :start-at="10"
-      :track-color="colors.track"
       class="mx-auto mb-3"
       image="https://cdn.vuetifyjs.com/docs/images/components/v-video/vt-sunflowers.jpg"
       max-width="450"
@@ -72,11 +72,16 @@
   import { reactive, shallowRef } from 'vue'
 
   const features = shallowRef([])
-  const controlsVariant = shallowRef('default')
+  const layout = shallowRef('default')
+  const layouts = {
+    default: 'play progress append',
+    tube: 'play time - append',
+    mini: '- play append -',
+  }
   const colors = reactive({
     color: '#4cd2de',
     background: null,
-    track: null,
+    progress: null,
   })
 </script>
 
@@ -84,11 +89,16 @@
   export default {
     data: () => ({
       features: [],
-      controlsVariant: 'default',
+      layout: 'default',
+      layouts: {
+        default: 'play progress append',
+        tube: 'play time - append',
+        mini: '- play append -',
+      },
       colors: {
         color: '#4cd2de',
         background: null,
-        track: null,
+        progress: null,
       },
     }),
   }

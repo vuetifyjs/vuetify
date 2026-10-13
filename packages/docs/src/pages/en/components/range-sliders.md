@@ -65,6 +65,12 @@ You can set **min** and **max** values of sliders.
 
 <ExamplesExample file="v-range-slider/prop-step" />
 
+#### Value format
+
+The **value-format** prop formats the thumb labels and the value read by screen readers. Use **start-thumb-aria-label** and **end-thumb-aria-label** to name each thumb unless default "Minimum/Maximum" labels feel fine for the use case. **label** or `aria-label` names the slider as a whole.
+
+<ExamplesExample file="v-range-slider/prop-value-format" />
+
 #### Vertical sliders
 
 You can use the **vertical** prop to switch sliders to a vertical orientation.

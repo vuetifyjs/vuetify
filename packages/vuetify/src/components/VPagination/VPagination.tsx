@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, nextTick, shallowRef, toRef } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { createRange, genericComponent, isString, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -156,21 +156,45 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults(undefined, { scoped: true })
 
-    const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
-      if (!entries.length) return
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, () => {
+      maxButtons.value = measure() ?? maxButtons.value
+    })
 
-      const { target, contentRect } = entries[0]
+    function measure () {
+      const list = el.value?.querySelector('.v-pagination__list')
+      const items = Array.from(list?.children ?? [])
 
-      const firstItem = target.querySelector('.v-pagination__list > *') as HTMLElement
+      if (!list || items.length < 2) return
 
-      if (!firstItem) return
+      const rects = items.map(item => item.getBoundingClientRect())
+      const span = Math.max(...rects.map(rect => rect.right)) - Math.min(...rects.map(rect => rect.left))
+      const gap = (span - rects.reduce((total, rect) => total + rect.width, 0)) / (items.length - 1)
 
-      const totalWidth = contentRect.width
-      const itemWidth =
-        firstItem.offsetWidth +
-        parseFloat(getComputedStyle(firstItem).marginRight) * 2
+      let controlsWidth = 0
+      let pagesWidth = 0
+      let pages = 0
+      items.forEach((item, index) => {
+        const width = rects[index].width + gap
+        if (item.classList.contains('v-pagination__item')) {
+          pagesWidth += width
+          pages++
+        } else {
+          controlsWidth += width
+        }
+      })
 
-      maxButtons.value = getMax(totalWidth, itemWidth)
+      const pageWidth = pages ? pagesWidth / pages : rects[0].width + gap
+      return getMax(list.getBoundingClientRect().width - controlsWidth, pageWidth)
+    }
+
+    let parentWidth = 0
+    useResizeObserver(() => el.value?.parentElement, entries => {
+      const width = entries[0]?.contentRect.width ?? 0
+      const grew = parentWidth > 0 && width > parentWidth
+      parentWidth = width
+
+      if (grew) maxButtons.value = -1
     })
 
     const length = computed(() => parseInt(props.length, 10))
@@ -179,48 +203,64 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const totalVisible = computed(() => {
       if (props.totalVisible != null) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
-      return getMax(width.value, 58)
+      return getMax(width.value - 58 * (props.showFirstLastPage ? 4 : 2), 58)
     })
 
     function getMax (totalWidth: number, itemWidth: number) {
-      const minButtons = props.showFirstLastPage ? 5 : 3
-      return Math.max(0, Math.floor(
-        // Round to two decimal places to avoid floating point errors
-        Number(((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2))
-      ))
+      return Math.max(0, Math.floor(Number((totalWidth / itemWidth).toFixed(2))))
+    }
+
+    function getRange (visible: number): (string | number)[] {
+      if (visible <= 0) return []
+      else if (visible === 1) return [page.value]
+
+      if (length.value <= visible) {
+        return createRange(length.value, start.value)
+      }
+
+      const even = visible % 2 === 0
+      const middle = even ? visible / 2 : Math.floor(visible / 2)
+      const left = even ? middle : middle + 1
+      const right = length.value - middle
+
+      if (left - page.value >= 0) {
+        return [...createRange(Math.max(1, visible - 1), start.value), props.ellipsis, length.value]
+      } else if (page.value - right >= (even ? 1 : 0)) {
+        const rangeLength = visible - 1
+        const rangeStart = length.value - rangeLength + start.value
+        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
+      } else {
+        const rangeLength = Math.max(1, visible - 2)
+        const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
+        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
+      }
     }
 
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
-      if (props.totalVisible == null && length.value < 3) {
+      if (props.totalVisible != null) return getRange(totalVisible.value)
+
+      if (length.value < 3) {
         return createRange(length.value, start.value)
       }
 
-      if (totalVisible.value <= 0) return []
-      else if (totalVisible.value === 1) return [page.value]
+      const slots = totalVisible.value
+      let visible = slots
+      let items = getRange(visible)
+      while (items.length > slots) items = getRange(--visible)
 
-      if (length.value <= totalVisible.value) {
-        return createRange(length.value, start.value)
-      }
-
-      const even = totalVisible.value % 2 === 0
-      const middle = even ? totalVisible.value / 2 : Math.floor(totalVisible.value / 2)
-      const left = even ? middle : middle + 1
-      const right = length.value - middle
-
-      if (left - page.value >= 0) {
-        return [...createRange(Math.max(1, totalVisible.value - 1), start.value), props.ellipsis, length.value]
-      } else if (page.value - right >= (even ? 1 : 0)) {
-        const rangeLength = totalVisible.value - 1
-        const rangeStart = length.value - rangeLength + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
-      } else {
-        const rangeLength = Math.max(1, totalVisible.value - 2)
-        const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
-        return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
-      }
+      return items.map((item, index) => {
+        if (!isString(item)) return item
+        const previous = items[index - 1] as number
+        return items[index + 1] === previous + 2 ? previous + 1 : item
+      })
     })
+
+    watch(range, () => {
+      const count = measure()
+      if (count != null && count < totalVisible.value) maxButtons.value = count
+    }, { flush: 'post' })
 
     // TODO: 'first' | 'prev' | 'next' | 'last' does not work here?
     function setValue (e: Event, value: number, event?: any) {
@@ -333,7 +373,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-pagination',
           themeClasses.value,

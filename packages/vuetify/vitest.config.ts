@@ -93,7 +93,7 @@ export default defineConfig(configEnv => {
                 provider: playwright({
                   actionTimeout: 5000,
                   contextOptions: {
-                    viewport,
+                    viewport: process.env.TEST_BAIL ? null : viewport,
                     reducedMotion: 'reduce',
                     permissions: ['clipboard-write', 'clipboard-read'],
                   },

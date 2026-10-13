@@ -3,17 +3,16 @@ import {
   camelize,
   capitalize,
   Comment,
+  computed,
   Fragment,
   isProxy,
   isReactive,
   isRef,
   isVNode,
-  reactive,
   shallowRef,
   toRaw,
   toRef,
   unref,
-  watchEffect,
 } from 'vue'
 import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
@@ -404,6 +403,16 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
+export type ValueFormat = string | ((ctx: { value: number, max: number, percent: number }) => string)
+
+export function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
+  if (isFunction(format)) return format({ value, max, percent })
+  return format
+    .replaceAll('[value]', String(value))
+    .replaceAll('[max]', String(max))
+    .replaceAll('[percent]', String(Math.round(percent)))
+}
+
 export function getDecimals (value: number) {
   const trimmedStr = value.toString().trim()
   return trimmedStr.includes('.')
@@ -584,16 +593,10 @@ type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = reactive({}) as T
-  watchEffect(() => {
-    const base = getter()
-    for (const key in base) {
-      refs[key] = base[key]
-    }
-  }, { flush: 'sync' })
+  const base = computed(getter)
   const obj = {} as ToReadonlyRefs<T>
-  for (const key in refs) {
-    obj[key] = toRef(() => refs[key]) as any
+  for (const key in base.value) {
+    obj[key] = toRef(() => base.value[key]) as any
   }
   return obj
 }

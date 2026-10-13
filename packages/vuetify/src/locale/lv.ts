@@ -134,6 +134,15 @@ export default {
       item: 'Vērtējums {0} no {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimums',
+      end: 'Maksimums',
+    },
+  },
+  splitBtn: {
+    menu: 'Vairāk opciju',
+  },
   loading: 'Ielādē...',
   infiniteScroll: {
     loadMore: 'Ielādēt vairāk',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tastatūras saīsne: {0}',
     or: 'vai',
   },
-  video: {
+  media: {
     play: 'Atskaņot',
     pause: 'Pauzēt',
     seek: 'Meklēt',
     volume: 'Skaļums',
-    showVolume: 'Rādīt skaļuma kontroli',
     mute: 'Izslēgt skaņu',
     unmute: 'Ieslēgt skaņu',
     enterFullscreen: 'Pilnekrāna režīms',

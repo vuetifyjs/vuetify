@@ -12,7 +12,7 @@ import { useGoTo } from '@/composables/goto'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { IconValue } from '@/composables/icons'
 import { useRtl } from '@/composables/locale'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementSize } from '@/composables/resizeObserver'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -37,6 +37,7 @@ import {
   isString,
   matchesSelector,
   propsFactory,
+  templateRef,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -152,8 +153,10 @@ export const VSlideGroup = genericComponent<new <T>(
       return { x, y, shorthand: x && `${y} ${x}` }
     })
 
-    const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const { resizeRef: contentRef, contentRect } = useResizeObserver()
+    const containerRef = templateRef()
+    const contentRef = templateRef()
+    const containerRect = useElementSize(() => containerRef.el)
+    const contentRect = useElementSize(() => contentRef.el)
 
     const goTo = useGoTo()
     const goToOptions = computed<Partial<GoToOptions>>(() => {
@@ -178,17 +181,20 @@ export const VSlideGroup = genericComponent<new <T>(
 
     if (IN_BROWSER) {
       let frame = -1
-      watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
+      watch(() => [
+        group.selected.value,
+        containerRect.width.value, containerRect.height.value,
+        contentRect.width.value, contentRect.height.value,
+        isHorizontal.value,
+      ], () => {
         cancelAnimationFrame(frame)
         frame = requestAnimationFrame(() => {
-          if (containerRect.value && contentRect.value) {
-            const sizeProperty = isHorizontal.value ? 'width' : 'height'
+          const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
-            containerSize.value = containerRect.value[sizeProperty]
-            contentSize.value = contentRect.value[sizeProperty]
+          containerSize.value = containerRect[sizeProperty].value
+          contentSize.value = contentRect[sizeProperty].value
 
-            isOverflowing.value = containerSize.value + 1 < contentSize.value
-          }
+          isOverflowing.value = containerSize.value + 1 < contentSize.value
 
           if (props.scrollToActive && firstSelectedIndex.value >= 0 && contentRef.el) {
             // TODO: Is this too naive? Should we store element references in group composable?

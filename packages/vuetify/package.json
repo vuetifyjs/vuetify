@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "4.2.2",
+  "version": "4.2.4",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -72,6 +72,11 @@
       "sass": "./lib/styles/colors.scss",
       "types": "./lib/styles/styles.d.ts",
       "default": "./lib/styles/colors.css"
+    },
+    "./styles/layers": {
+      "sass": "./lib/styles/layers.scss",
+      "types": "./lib/styles/styles.d.ts",
+      "default": "./lib/styles/layers.css"
     },
     "./styles/utilities": {
       "sass": "./lib/styles/utilities.scss",
@@ -147,7 +152,7 @@
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
   },
   "dependencies": {
-    "@vuetify/v0": "^1.2.1"
+    "@vuetify/v0": "^1.2.3"
   },
   "devDependencies": {
     "@date-io/core": "catalog:",
@@ -166,7 +171,6 @@
     "@testing-library/dom": "catalog:",
     "@testing-library/user-event": "catalog:",
     "@testing-library/vue": "catalog:",
-    "@types/resize-observer-browser": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",

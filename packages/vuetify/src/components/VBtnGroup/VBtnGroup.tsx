@@ -22,6 +22,7 @@ import type { PropType } from 'vue'
 
 export const makeVBtnGroupProps = propsFactory({
   baseColor: String,
+  connected: Boolean,
   divided: Boolean,
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
@@ -70,9 +71,11 @@ export const VBtnGroup = genericComponent()({
             'v-btn-group',
             `v-btn-group--${props.direction}`,
             {
+              'v-btn-group--connected': props.connected,
               'v-btn-group--divided': props.divided,
               'v-btn-group--has-size': props.size != null,
             },
+            `v-btn-group--size-${props.size ?? 'default'}`,
             themeClasses.value,
             borderClasses.value,
             densityClasses.value,

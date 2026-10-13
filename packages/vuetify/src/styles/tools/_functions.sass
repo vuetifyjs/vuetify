@@ -45,10 +45,10 @@
 
 @function breakpoint-min($name, $breakpoints)
   $min: map.get($breakpoints, $name)
-  @if $min != 0
-    @return $min
-  @else
+  @if meta.type-of($min) == "number" and math.div($min, $min * 0 + 1) == 0
     @return null
+
+  @return $min
 
 @function breakpoint-infix($name, $breakpoints)
   @if breakpoint-min($name, $breakpoints) == null

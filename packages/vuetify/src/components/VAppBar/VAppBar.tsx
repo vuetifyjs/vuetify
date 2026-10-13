@@ -2,6 +2,7 @@
 import './VAppBar.sass'
 
 // Components
+import { useToolbarHeight } from '@/components/VToolbar/toolbar'
 import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
@@ -79,11 +80,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       )
     })
 
-    const appBarHeight = computed(() => {
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
-      return height + extensionHeight
-    })
+    const toolbarHeight = useToolbarHeight(props, toRef(() => props.extended ?? !!slots.extension))
+    const contentHeight = toolbarHeight.contentHeight
+    // only VToolbar knows if the extension slot rendered content, SSR has no ref to ask
+    const extensionHeight = toRef(() => vToolbarRef.value?.extensionHeight ?? toolbarHeight.extensionHeight.value)
+    const appBarHeight = toRef(() => contentHeight.value + extensionHeight.value)
 
     const {
       currentScroll,
@@ -118,14 +119,11 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     const height = computed(() => {
       if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
 
-      const height = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
-
-      if (!canHide.value) return (height + extensionHeight)
+      if (!canHide.value) return appBarHeight.value
 
       return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide
-        ? (height + extensionHeight)
-        : height
+        ? appBarHeight.value
+        : contentHeight.value
     })
 
     useToggleScope(() => !!props.scrollBehavior, () => {

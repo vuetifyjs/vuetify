@@ -38,7 +38,10 @@ export const makeVExpansionPanelsProps = propsFactory({
   flat: Boolean,
   gap: [String, Number],
   noDivider: Boolean,
-  rounded: [Boolean, Number, String, Array] as PropType<boolean | number | string | (number | string)[]>,
+  rounded: {
+    type: [Boolean, Number, String, Array] as PropType<boolean | number | string | (number | string)[]>,
+    default: undefined,
+  },
 
   ...makeGroupProps(),
   ...pick(makeVExpansionPanelProps(), [

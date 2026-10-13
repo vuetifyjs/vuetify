@@ -134,6 +134,15 @@ export default {
       item: 'Puntuación {0} de {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Mínimo',
+      end: 'Máximo',
+    },
+  },
+  splitBtn: {
+    menu: 'Más opciones',
+  },
   loading: 'Cargando...',
   infiniteScroll: {
     loadMore: 'Cargar más',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Atajo de teclado: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproducir',
     pause: 'Pausa',
     seek: 'Buscar',
     volume: 'Volumen',
-    showVolume: 'Mostrar control de volumen',
     mute: 'Silenciar',
     unmute: 'Activar sonido',
     enterFullscreen: 'Pantalla completa',

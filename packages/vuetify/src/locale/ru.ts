@@ -134,6 +134,15 @@ export default {
       item: 'Рейтинг {0} из {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Дополнительные параметры',
+  },
   loading: 'Загрузка...',
   infiniteScroll: {
     loadMore: 'Загрузить ещё',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Сочетание клавиш: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Воспроизвести',
     pause: 'Пауза',
     seek: 'Перемотка',
     volume: 'Громкость',
-    showVolume: 'Показать регулятор громкости',
     mute: 'Отключить звук',
     unmute: 'Включить звук',
     enterFullscreen: 'Полноэкранный режим',
