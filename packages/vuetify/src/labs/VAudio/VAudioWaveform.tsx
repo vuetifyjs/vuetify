@@ -30,11 +30,9 @@ import {
 // Types
 import type { PropType } from 'vue'
 import type { SampleStrategy } from './peaks'
-import type { VMediaProgressBarSlots } from '@/labs/VMediaProgressBar/VMediaProgressBar'
+import type { VAudioWaveformSlots } from './VAudioWaveform.types'
 
-export type VAudioWaveformSlots = {
-  tooltip: VMediaProgressBarSlots['tooltip']
-}
+export type { VAudioWaveformSlots }
 
 const RISE_DURATION = 400
 const RISE_STAGGER = 400

@@ -27,34 +27,11 @@ import {
 } from '@/util'
 
 // Types
-import type { CSSProperties, ExtractPropTypes, Ref, VNode, WritableComputedRef } from 'vue'
-import type { IconValue } from '@/composables/icons'
+import type { ExtractPropTypes } from 'vue'
+import type { SelectionControlSlot, VSelectionControlSlots } from './VSelectionControl.types'
 import type { EventProp, GenericProps } from '@/util'
 
-export type SelectionControlSlot = {
-  model: WritableComputedRef<boolean>
-  textColorClasses: Ref<string[]>
-  textColorStyles: Ref<CSSProperties>
-  backgroundColorClasses: Ref<string[]>
-  backgroundColorStyles: Ref<CSSProperties>
-  inputNode: VNode
-  icon: IconValue | undefined
-  props: {
-    onBlur: (e: Event) => void
-    onFocus: (e: FocusEvent) => void
-    id: string
-  }
-}
-
-export type VSelectionControlSlots = {
-  default: {
-    backgroundColorClasses: Ref<string[]>
-    backgroundColorStyles: Ref<CSSProperties>
-  }
-  label: { label: string | undefined, props: Record<string, unknown> }
-  description: never
-  input: SelectionControlSlot
-}
+export type { SelectionControlSlot, VSelectionControlSlots }
 
 export const makeVSelectionControlProps = propsFactory({
   indeterminate: Boolean,

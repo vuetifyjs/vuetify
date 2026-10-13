@@ -35,17 +35,9 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VFileInputSlots } from './VFileInput.types'
 
-export type VFileInputSlots = VInputSlots & VFieldSlots & {
-  counter: never
-  selection: {
-    fileNames: string[]
-    totalBytes: number
-    totalBytesReadable: string
-  }
-}
+export type { VFileInputSlots }
 
 export const makeVFileInputProps = propsFactory({
   chips: Boolean,

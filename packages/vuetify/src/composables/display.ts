@@ -5,12 +5,11 @@ import { IN_BROWSER, SUPPORTS_MATCH_MEDIA, SUPPORTS_TOUCH } from '@/util/globals
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { Breakpoint, DisplayBreakpoint } from './display.types'
 
-export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
+export type { Breakpoint, DisplayBreakpoint }
 
-export type Breakpoint = typeof breakpoints[number]
-
-export type DisplayBreakpoint = 'xs' | Breakpoint
+export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const satisfies readonly Breakpoint[] // no xs
 
 export type DisplayThresholds = {
   [key in DisplayBreakpoint]: number

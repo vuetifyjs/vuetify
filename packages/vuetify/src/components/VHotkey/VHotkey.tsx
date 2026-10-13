@@ -50,33 +50,15 @@ import { genericComponent, isString, mergeDeep, propsFactory, useRender } from '
 
 // Types
 import type { PropType } from 'vue'
+import type { DisplayMode, HotkeyVariant, KeyConfig, KeyMapConfig, PlatformKeyConfig } from './VHotkey.types'
 import type { KeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import type { IconValue } from '@/composables/icons'
-
-// Display mode types for different visual representations
-type DisplayMode = 'icon' | 'symbol' | 'text'
-
-// Extended variant type that includes our custom 'contained' variant
-type HotkeyVariant = 'elevated' | 'flat' | 'tonal' | 'outlined' | 'text' | 'plain' | 'contained'
 
 // Key display tuple: [mode, content] where content is string or IconValue
 type KeyDisplay = [Exclude<DisplayMode, 'icon'>, string] | [Extract<DisplayMode, 'icon'>, IconValue]
 
 // Key tuple: [mode, content, keycode] where content is string or IconValue
 type Key = [Exclude<DisplayMode, 'icon'>, string, string] | [Extract<DisplayMode, 'icon'>, IconValue, string]
-
-type KeyConfig = {
-  symbol?: string
-  icon?: string
-  text: string
-}
-
-type PlatformKeyConfig = {
-  mac?: KeyConfig
-  default: KeyConfig
-}
-
-type KeyMapConfig = Record<string, PlatformKeyConfig>
 
 function processKey (config: PlatformKeyConfig, requestedMode: DisplayMode, isMac: boolean): KeyDisplay {
   const keyCfg = (isMac && config.mac) ? config.mac : config.default

@@ -21,17 +21,11 @@ import { getScrollParent } from '@/util/getScrollParent'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
-import type { GroupItemProvide, GroupProvide } from '@/composables/group'
+import type { VWindowSlots } from './VWindow.types'
+import type { GroupItemProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
 import type { GenericProps } from '@/util'
-
-export type VWindowSlots = {
-  default: { group: GroupProvide }
-  additional: { group: GroupProvide }
-  prev: { props: ControlProps }
-  next: { props: ControlProps }
-}
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -40,13 +34,6 @@ type WindowProvide = {
   transitionDuration: Readonly<Ref<undefined | string>>
   isReversed: Ref<boolean>
   rootRef: Ref<HTMLElement | undefined>
-}
-
-type ControlProps = {
-  icon: IconValue
-  class: string
-  onClick: () => void
-  'aria-label': string
 }
 
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')

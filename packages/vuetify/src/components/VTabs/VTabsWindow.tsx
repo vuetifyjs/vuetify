@@ -10,7 +10,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import { VTabsSymbol } from './shared'
-import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { VWindowSlots } from '@/components/VWindow/VWindow.types'
 import type { GenericProps } from '@/util'
 
 export const makeVTabsWindowProps = propsFactory({

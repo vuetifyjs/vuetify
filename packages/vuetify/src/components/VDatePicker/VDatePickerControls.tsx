@@ -16,26 +16,9 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
+import type { ControlVariant, VDatePickerControlsDefaultSlotProps, VDatePickerControlsSlots } from './VDatePickerControls.types'
 
-type ControlVariant = 'docked' | 'modal'
-
-export type VDatePickerControlsDefaultSlotProps = {
-  viewMode: 'month' | 'months' | 'year'
-  monthYearText: string
-  monthText: string
-  yearText: string
-  disabled: string[]
-  openMonths: () => void
-  openYears: () => void
-  prevMonth: () => void
-  nextMonth: () => void
-  prevYear: () => void
-  nextYear: () => void
-}
-
-type VDatePickerControlsSlots = {
-  default: VDatePickerControlsDefaultSlotProps
-}
+export type { VDatePickerControlsDefaultSlotProps }
 
 export const makeVDatePickerControlsProps = propsFactory({
   active: {

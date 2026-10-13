@@ -25,15 +25,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { AudioProvide } from './shared'
-import type { VAudioControlsActionsSlot, VAudioControlsSlots } from './VAudioControls'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { VAudioSlots } from './VAudio.types'
 
-export type VAudioSlots = Omit<VAudioControlsSlots, 'default'> & {
-  controls: VAudioControlsActionsSlot
-  loader: LoaderSlotProps
-  error: { error?: MediaError | boolean }
-  sources: never
-}
+export type { VAudioSlots }
 
 export const makeVAudioProps = propsFactory({
   src: String,

@@ -25,38 +25,11 @@ import { convertToUnit, genericComponent, omit, pickWithRest, propsFactory, useR
 
 // Types
 import type { DeepReadonly, VNode, VNodeArrayChildren } from 'vue'
-import type { VDataTableSlotProps } from './VDataTable'
-import type { VDataTableHeadersSlots } from './VDataTableHeaders'
-import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { ItemType, VDataTableVirtualSlotProps, VDataTableVirtualSlots } from './VDataTableVirtual.types'
 import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
-import type { GenericProps, SelectItemKey, TemplateRef } from '@/util'
+import type { GenericProps, SelectItemKey } from '@/util'
 
-type VDataTableVirtualSlotProps<T> = Omit<
-  VDataTableSlotProps<T>,
-  | 'setItemsPerPage'
-  | 'page'
-  | 'pageCount'
-  | 'itemsPerPage'
-  | 'prevPage'
-  | 'nextPage'
-  | 'setPage'
->
-
-export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
-  caption: never
-  colgroup: VDataTableVirtualSlotProps<T>
-  top: VDataTableVirtualSlotProps<T>
-  headers: VDataTableHeadersSlots['headers']
-  tbody: VDataTableVirtualSlotProps<T>
-  thead: VDataTableVirtualSlotProps<T>
-  tfoot: VDataTableVirtualSlotProps<T>
-  bottom: VDataTableVirtualSlotProps<T>
-  'body.prepend': VDataTableVirtualSlotProps<T>
-  'body.append': VDataTableVirtualSlotProps<T>
-  item: {
-    itemRef: TemplateRef
-  }
-}
+export type { VDataTableVirtualSlots }
 
 export const makeVDataTableVirtualProps = propsFactory({
   ...omit(makeDataTableProps(), ['hideDefaultFooter']),
@@ -64,8 +37,6 @@ export const makeVDataTableVirtualProps = propsFactory({
   ...makeVirtualProps(),
   ...makeFilterProps(),
 }, 'VDataTableVirtual')
-
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 function elementNodes (nodes?: VNodeArrayChildren): VNode[] {
   return (nodes ?? []).flatMap(node =>

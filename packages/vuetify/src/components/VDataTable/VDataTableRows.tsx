@@ -20,19 +20,10 @@ import { genericComponent, getPrefixedEventHandlers, isFunction, pick, propsFact
 import type { Component, PropType, TransitionProps } from 'vue'
 import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableItem, DataTableLoading, GroupHeaderSlot, GroupSummarySlot, ItemSlot, RowProps } from './types'
-import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
-import type { VDataTableRowSlots } from './VDataTableRow'
+import type { VDataTableRowsSlots } from './VDataTableRows.types'
 import type { GenericProps } from '@/util'
 
-export type VDataTableRowsSlots<T> = VDataTableGroupHeaderRowSlots & VDataTableRowSlots<T> & {
-  item: ItemSlot<T> & { props: Record<string, any> }
-  loading: never
-  'group-header': GroupHeaderSlot
-  'group-summary': GroupSummarySlot
-  'no-data': never
-  'expanded-row': ItemSlot<T>
-  expanded: ItemSlot<T>
-}
+export type { VDataTableRowsSlots }
 
 export const makeVDataTableRowsProps = propsFactory({
   color: String,

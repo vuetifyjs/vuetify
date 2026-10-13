@@ -25,22 +25,10 @@ import { chunkArray, createRange, genericComponent, isFunction, omit, propsFacto
 
 // Types
 import type { PropType } from 'vue'
+import type { VMonthPickerSlots } from './VMonthPicker.types'
 import type { GenericProps } from '@/util'
 
-export type VMonthPickerSlots = {
-  header: never
-  title: never
-  actions: never
-  month: {
-    month: {
-      text: string
-      label: string
-      value: number
-    }
-    i: number
-    props: Record<string, unknown>
-  }
-}
+export type { VMonthPickerSlots }
 
 export const makeVMonthPickerProps = propsFactory({
   disabled: Boolean,

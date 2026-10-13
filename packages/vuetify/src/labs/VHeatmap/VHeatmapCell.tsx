@@ -4,10 +4,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { HeatmapCell } from './heatmap'
+import type { VHeatmapCellSlots } from './VHeatmapCell.types'
 
-export type VHeatmapCellSlots = {
-  default: { item: HeatmapCell }
-}
+export type { VHeatmapCellSlots }
 
 export const makeVHeatmapCellProps = propsFactory({
   item: {

@@ -57,22 +57,12 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { ItemType, Value } from './VAutocomplete.types'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { FilteredOrder } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-type Primitive = string | number | boolean | symbol
-
-type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
-  ? T
-  : (ReturnObject extends true ? T : any)
-
-type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
-  Multiple extends true
-    ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject> | null
 
 export const makeVAutocompleteProps = propsFactory({
   autoSelectFirst: {
@@ -94,8 +84,6 @@ export const makeVAutocompleteProps = propsFactory({
     role: 'combobox',
   }), ['validationValue', 'dirty']),
 }, 'VAutocomplete')
-
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export const VAutocomplete = genericComponent<new <
   T extends readonly any[],

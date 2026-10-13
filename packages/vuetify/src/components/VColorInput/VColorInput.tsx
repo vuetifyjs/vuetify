@@ -20,18 +20,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+import type { VColorInputActionsSlot, VColorInputSlots } from './VColorInput.types'
 
-export type VColorInputActionsSlot = {
-  save: () => void
-  cancel: () => void
-  isPristine: boolean
-}
-
-export type VColorInputSlots = Omit<VTextFieldSlots, 'default'> & {
-  actions: VColorInputActionsSlot
-  default: never
-}
+export type { VColorInputActionsSlot, VColorInputSlots }
 
 const availablePipLocations = ['prepend', 'prepend-inner', 'append', 'append-inner'] as const
 export type PipLocation = typeof availablePipLocations[number]

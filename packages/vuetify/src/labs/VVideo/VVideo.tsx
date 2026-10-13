@@ -29,25 +29,10 @@ import { createRange, genericComponent, omit, pick, propsFactory, useRender } fr
 
 // Types
 import type { Component, PropType, TransitionProps } from 'vue'
-import type { VVideoControlsActionsSlot, VVideoControlsPropsSlot, VVideoControlsVariant } from './VVideoControls'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { VVideoSlots } from './VVideo.types'
+import type { VVideoControlsVariant } from './VVideoControls'
 
-export type VVideoSlots = {
-  [key: `action.${string}`]: VVideoControlsActionsSlot
-  header: never
-  controls: VVideoControlsActionsSlot
-  play: VVideoControlsPropsSlot
-  progress: VVideoControlsPropsSlot
-  time: VVideoControlsActionsSlot
-  'time.elapsed': VVideoControlsActionsSlot
-  'time.remaining': VVideoControlsActionsSlot
-  'time.total': VVideoControlsActionsSlot
-  prepend: VVideoControlsActionsSlot
-  append: VVideoControlsActionsSlot
-  loader: LoaderSlotProps
-  sources: never
-  error: { error?: MediaError | boolean }
-}
+export type { VVideoSlots }
 
 const allowedVariants = ['background', 'player'] as const
 type Variant = typeof allowedVariants[number]

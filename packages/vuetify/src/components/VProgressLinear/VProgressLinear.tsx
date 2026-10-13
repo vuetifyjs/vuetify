@@ -23,10 +23,7 @@ import { clamp, convertToUnit, genericComponent, isNullOrUndefined, isObject, pr
 
 // Types
 import type { PropType } from 'vue'
-
-type VProgressLinearSlots = {
-  default: { value: number, buffer: number }
-}
+import type { VProgressLinearSlots } from './VProgressLinear.types'
 
 export const makeVProgressLinearProps = propsFactory({
   absolute: Boolean,

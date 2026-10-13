@@ -5,6 +5,7 @@ import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
+  skipAddingFilesFromTsConfig: true,
 })
 
 async function inspect (project: Project, node?: Node<ts.Node>) {
@@ -282,6 +283,8 @@ function getSource (declaration?: Node<ts.Node>) {
   const filePath = declaration?.getSourceFile().getFilePath()
     .replace(/.*\/node_modules\//, '')
     .replace(/.*\/packages\/vuetify\//, 'vuetify/')
+    // lib copies of handwritten types keep their line numbers
+    .replace(/^vuetify\/lib\/(.*\.types\.d\.ts)$/, 'vuetify/src/$1')
   const startLine = declaration?.getStartLineNumber()
   const endLine = declaration?.getEndLineNumber()
 

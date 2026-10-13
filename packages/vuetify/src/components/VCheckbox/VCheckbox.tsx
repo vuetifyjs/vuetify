@@ -15,11 +15,10 @@ import { shallowRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VCheckboxSlots } from './VCheckbox.types'
 import type { GenericProps } from '@/util'
 
-export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
+export type { VCheckboxSlots }
 
 export const makeVCheckboxProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),

@@ -15,13 +15,10 @@ import { makeTagProps } from '@/composables/tag'
 import { toDisplayString } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-export type VCardItemSlots = {
-  default: never
-  prepend: never
-  append: never
-  title: never
-  subtitle: never
-}
+// Types
+import type { VCardItemSlots } from './VCardItem.types'
+
+export type { VCardItemSlots }
 
 export const makeCardItemProps = propsFactory({
   appendAvatar: String,

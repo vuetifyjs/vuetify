@@ -4,22 +4,23 @@
  */
 
 // Util
-export type { Anchor, JSXComponent } from '@/util'
+export type { Anchor } from '@/util/anchor.types'
+export type { JSXComponent } from '@/util/shared.types'
 
 // Composables
 export type { DateOptions, DateInstance, DateModule } from '@/composables/date'
-export type { DefaultsInstance } from '@/composables/defaults'
+export type { DefaultsInstance } from '@/composables/defaults.types'
 export type { DisplayBreakpoint, DisplayInstance, DisplayThresholds } from '@/composables/display'
-export type { FilterFunction, InternalItem, FilterMatch } from '@/composables/filter'
-export type { SubmitEventPromise } from '@/composables/form'
+export type { FilterFunction, InternalItem, FilterMatch } from '@/composables/filter.types'
+export type { SubmitEventPromise } from '@/composables/form.types'
 export type { GoToInstance } from '@/composables/goto'
 export type { IconAliases, IconProps, IconSet, IconOptions } from '@/composables/icons'
 export type { LocaleInstance, LocaleMessages, RtlInstance, LocaleOptions, RtlOptions } from '@/composables/locale'
-export type { ActiveStrategy } from '@/composables/nested/activeStrategies'
-export type { OpenStrategy } from '@/composables/nested/openStrategies'
-export type { SelectStrategy } from '@/composables/nested/selectStrategies'
+export type { ActiveStrategy } from '@/composables/nested/activeStrategies.types'
+export type { OpenStrategy } from '@/composables/nested/openStrategies.types'
+export type { SelectStrategy } from '@/composables/nested/selectStrategies.types'
 export type { ThemeDefinition, ThemeInstance } from '@/composables/theme'
-export type { ValidationRule } from '@/composables/validation'
+export type { ValidationRule } from '@/composables/validation.types'
 
 // Components
 export type {
@@ -28,8 +29,8 @@ export type {
   RowPropsFunction as DataTableRowPropsFunction,
   CellPropsFunction as DataTableCellPropsFunction,
   HeaderCellPropsFunction as DataTableHeaderCellPropsFunction,
-} from '@/components/VDataTable/types'
-export type { SortItem as DataTableSortItem } from '@/components/VDataTable/composables/sort'
-export type { LocationStrategyFunction } from '@/components/VOverlay/locationStrategies'
-export type { ScrollStrategyFunction } from '@/components/VOverlay/scrollStrategies'
-export type { SnackbarMessage as SnackbarQueueMessage } from '@/components/VSnackbarQueue/VSnackbarQueue'
+} from '@/components/VDataTable/types.types'
+export type { SortItem as DataTableSortItem } from '@/components/VDataTable/composables/sort.types'
+export type { LocationStrategyFunction } from '@/components/VOverlay/locationStrategies.types'
+export type { ScrollStrategyFunction } from '@/components/VOverlay/scrollStrategies.types'
+export type { SnackbarMessage as SnackbarQueueMessage } from '@/components/VSnackbarQueue/VSnackbarQueue.types'

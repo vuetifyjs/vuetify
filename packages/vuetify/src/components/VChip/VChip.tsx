@@ -35,23 +35,10 @@ import { EventProp, genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VChipSlots } from './VChip.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type VChipSlots = {
-  default: {
-    isSelected: boolean | undefined
-    selectedClass: boolean | (string | undefined)[] | undefined
-    select: ((value: boolean) => void) | undefined
-    toggle: (() => void) | undefined
-    value: unknown
-    disabled: boolean
-  }
-  label: never
-  prepend: never
-  append: never
-  close: never
-  filter: never
-}
+export type { VChipSlots }
 
 export const makeVChipProps = propsFactory({
   activeClass: String,

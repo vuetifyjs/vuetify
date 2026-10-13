@@ -21,10 +21,10 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { toRef } from 'vue'
 import { convertToUnit, genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
-export type VBadgeSlots = {
-  default: never
-  badge: never
-}
+// Types
+import type { VBadgeSlots } from './VBadge.types'
+
+export type { VBadgeSlots }
 
 export const makeVBadgeProps = propsFactory({
   bordered: Boolean,

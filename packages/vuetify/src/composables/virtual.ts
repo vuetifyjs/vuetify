@@ -8,7 +8,10 @@ import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { ScrollToPosition } from './virtual.types'
 import type { SelectItemKey } from '@/util'
+
+export type { ScrollToPosition }
 
 const UP = -1
 const DOWN = 1
@@ -21,8 +24,6 @@ type VirtualProps = {
   itemKey: SelectItemKey
   height: number | string | undefined
 }
-
-export type ScrollToPosition = 'start' | 'center' | 'end'
 
 export const makeVirtualProps = propsFactory({
   itemHeight: {

@@ -18,6 +18,7 @@ import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VChipGroupSlots } from './VChipGroup.types'
 import type { GenericProps, ValueComparator } from '@/util'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
@@ -38,16 +39,6 @@ export const makeVChipGroupProps = propsFactory({
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
 }, 'VChipGroup')
-
-type VChipGroupSlots = {
-  default: {
-    isSelected: (id: string) => boolean
-    select: (id: string, value: boolean) => void
-    next: () => void
-    prev: () => void
-    selected: readonly string[]
-  }
-}
 
 export const VChipGroup = genericComponent<new <T>(
   props: {

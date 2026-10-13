@@ -14,20 +14,8 @@ import { clamp, formatValue, genericComponent, omit, pick, propsFactory, useRend
 
 // Types
 import type { PropType } from 'vue'
+import type { VProgressSlots } from './VProgress.types'
 import type { ValueFormat } from '@/util'
-
-type VProgressSlotsProps = {
-  max: number
-  percent: number
-  value: number
-  formattedValue: string
-}
-
-type VProgressSlots = {
-  default: VProgressSlotsProps
-  label: VProgressSlotsProps
-  value: VProgressSlotsProps
-}
 
 export const makeVProgressProps = propsFactory({
   type: {

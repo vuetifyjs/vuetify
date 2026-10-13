@@ -5,11 +5,10 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 import { genericComponent } from '@/util'
 
 // Types
+import type { VValidationSlots } from './VValidation.types'
 import type { GenericProps } from '@/util'
 
-export type VValidationSlots = {
-  default: ReturnType<typeof useValidation>
-}
+export type { VValidationSlots }
 
 export const VValidation = genericComponent<new <T>(
   props: {

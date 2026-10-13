@@ -24,12 +24,10 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { VVirtualScrollSlot } from './VVirtualScroll.types'
 import type { GenericProps } from '@/util'
 
-export interface VVirtualScrollSlot<T> {
-  item: T
-  index: number
-}
+export type { VVirtualScrollSlot }
 
 export const makeVVirtualScrollProps = propsFactory({
   items: {

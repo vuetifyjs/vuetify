@@ -28,29 +28,9 @@ import { createRange, genericComponent, isString, keyValues, propsFactory, useRe
 
 // Types
 import type { ComponentPublicInstance, PropType } from 'vue'
+import type { VPaginationSlots } from './VPagination.types'
 
-type ItemSlot = {
-  isActive: boolean
-  key: string | number
-  page: string
-  props: Record<string, any>
-}
-
-type ControlSlot = {
-  icon: IconValue
-  onClick: (e: Event) => void
-  disabled: boolean
-  'aria-label': string
-  'aria-disabled': boolean
-}
-
-export type VPaginationSlots = {
-  item: ItemSlot
-  first: ControlSlot
-  prev: ControlSlot
-  next: ControlSlot
-  last: ControlSlot
-}
+export type { VPaginationSlots }
 
 export const makeVPaginationProps = propsFactory({
   activeColor: String,

@@ -14,6 +14,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
+import type { VCounterSlots } from './VCounter.types'
+import type { VCounterSlot } from '@/components/VCounter/VCounter.types'
 
 export const makeVCounterProps = propsFactory({
   active: Boolean,
@@ -30,15 +32,7 @@ export const makeVCounterProps = propsFactory({
   }),
 }, 'VCounter')
 
-export type VCounterSlot = {
-  counter: string
-  max: string | number | undefined
-  value: string | number | undefined
-}
-
-type VCounterSlots = {
-  default: VCounterSlot
-}
+export type { VCounterSlot }
 
 export const VCounter = genericComponent<VCounterSlots>()({
   name: 'VCounter',

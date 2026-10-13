@@ -24,6 +24,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { DeepReadonly } from 'vue'
 import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable'
+import type { ItemType } from './VDataTableServer.types'
 import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey } from '@/util'
 
@@ -37,8 +38,6 @@ export const makeVDataTableServerProps = propsFactory({
   ...makeDataTableProps(),
   ...makeVDataTableFooterProps(),
 }, 'VDataTableServer')
-
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export const VDataTableServer = genericComponent<new <T extends readonly any[], V>(
   props: {

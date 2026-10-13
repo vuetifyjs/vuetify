@@ -27,20 +27,11 @@ import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VTimeInputActionsSlot, VTimeInputSlots } from './VTimeInput.types'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 import type { VTimePickerViewMode } from '@/components/VTimePicker/shared'
 
-export type VTimeInputActionsSlot = {
-  save: () => void
-  cancel: () => void
-  isPristine: boolean
-}
-
-export type VTimeInputSlots = Omit<VTextFieldSlots, 'default'> & {
-  actions: VTimeInputActionsSlot
-  default: never
-}
+export type { VTimeInputActionsSlot, VTimeInputSlots }
 
 function toSeconds (time: string) {
   const [hour, minute, second = 0] = time.split(':').map(Number)

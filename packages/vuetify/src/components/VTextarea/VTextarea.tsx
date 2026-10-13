@@ -39,9 +39,7 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { VCounterSlot } from '@/components/VCounter/VCounter'
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VTextareaSlots } from './VTextarea.types'
 
 export const makeVTextareaProps = propsFactory({
   autoGrow: Boolean,
@@ -76,10 +74,6 @@ export const makeVTextareaProps = propsFactory({
   ...omit(makeVInputProps(), ['direction']),
   ...makeVFieldProps(),
 }, 'VTextarea')
-
-type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  counter: VCounterSlot
-}
 
 export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
