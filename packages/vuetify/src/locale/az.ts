@@ -134,6 +134,12 @@ export default {
       item: 'Reytinq {0}/{1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
   loading: 'Yüklənir...',
   infiniteScroll: {
     loadMore: 'Daha çox yüklə',

@@ -134,6 +134,12 @@ export default {
       item: 'Valutazione {0} di {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimo',
+      end: 'Massimo',
+    },
+  },
   loading: 'Caricamento...',
   infiniteScroll: {
     loadMore: 'Carica altro',

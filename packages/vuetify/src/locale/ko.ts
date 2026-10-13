@@ -134,6 +134,12 @@ export default {
       item: '{1} 중 {0} 점',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '최소',
+      end: '최대',
+    },
+  },
   loading: '불러오는 중...',
   infiniteScroll: {
     loadMore: '더 불러오기',

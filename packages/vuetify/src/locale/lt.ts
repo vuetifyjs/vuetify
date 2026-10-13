@@ -134,6 +134,12 @@ export default {
       item: 'Įvertinimas {0} iš {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimumas',
+      end: 'Maksimumas',
+    },
+  },
   loading: 'Kraunama...',
   infiniteScroll: {
     loadMore: 'Užkrauti daugiau',

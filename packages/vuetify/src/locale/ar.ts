@@ -134,6 +134,12 @@ export default {
       item: 'القييم {0} من {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'الحد الأدنى',
+      end: 'الحد الأقصى',
+    },
+  },
   loading: 'جار التحميل...',
   infiniteScroll: {
     loadMore: 'تحميل المزيد',

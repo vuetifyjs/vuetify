@@ -134,6 +134,12 @@ export default {
       item: 'Anmeldelse {0} av {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
   loading: 'Laster...',
   infiniteScroll: {
     loadMore: 'Last flere',

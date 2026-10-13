@@ -514,6 +514,16 @@
       "isFocused": "4.3.0"
     }
   },
+  "VRangeSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
+    "props": {
+      "endThumbAriaLabel": "4.3.0",
+      "startThumbAriaLabel": "4.3.0",
+      "valueFormat": "4.3.0"
+    }
+  },
   "VRating": {
     "props": {
       "iconSize": "4.3.0"
@@ -577,9 +587,15 @@
     }
   },
   "VSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
     "events": {
       "start": "3.2.0",
       "end": "3.2.0"
+    },
+    "props": {
+      "valueFormat": "4.3.0"
     }
   },
   "VSlideGroup": {

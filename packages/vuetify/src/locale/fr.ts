@@ -134,6 +134,12 @@ export default {
       item: 'Note de {0} sur {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
   loading: 'Chargement...',
   infiniteScroll: {
     loadMore: 'Charger plus',

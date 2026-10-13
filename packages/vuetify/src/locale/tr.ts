@@ -134,6 +134,12 @@ export default {
       item: '{1} üzerinden {0} puan',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
   loading: 'Yükleniyor...',
   infiniteScroll: {
     loadMore: 'Daha fazla yükle',

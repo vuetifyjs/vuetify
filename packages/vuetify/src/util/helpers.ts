@@ -403,6 +403,16 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
+export type ValueFormat = string | ((ctx: { value: number, max: number, percent: number }) => string)
+
+export function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
+  if (isFunction(format)) return format({ value, max, percent })
+  return format
+    .replaceAll('[value]', String(value))
+    .replaceAll('[max]', String(max))
+    .replaceAll('[percent]', String(Math.round(percent)))
+}
+
 export function getDecimals (value: number) {
   const trimmedStr = value.toString().trim()
   return trimmedStr.includes('.')

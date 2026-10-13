@@ -134,6 +134,12 @@ export default {
       item: 'Оцінка {0} з {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Мінімум',
+      end: 'Максимум',
+    },
+  },
   loading: 'Завантаження...',
   infiniteScroll: {
     loadMore: 'Завантажити більше',

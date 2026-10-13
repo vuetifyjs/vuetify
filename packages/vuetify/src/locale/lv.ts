@@ -134,6 +134,12 @@ export default {
       item: 'Vērtējums {0} no {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimums',
+      end: 'Maksimums',
+    },
+  },
   loading: 'Ielādē...',
   infiniteScroll: {
     loadMore: 'Ielādēt vairāk',

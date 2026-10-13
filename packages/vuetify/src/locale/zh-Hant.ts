@@ -134,6 +134,12 @@ export default {
       item: '評分 {0} / {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小值',
+      end: '最大值',
+    },
+  },
   loading: '載入中...',
   infiniteScroll: {
     loadMore: '載入更多',

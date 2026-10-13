@@ -134,6 +134,12 @@ export default {
       item: 'Értékelés: {0} / {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
   loading: 'Betöltés...',
   infiniteScroll: {
     loadMore: 'Továbbiak betöltése',

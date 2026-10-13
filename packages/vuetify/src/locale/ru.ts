@@ -134,6 +134,12 @@ export default {
       item: 'Рейтинг {0} из {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
   loading: 'Загрузка...',
   infiniteScroll: {
     loadMore: 'Загрузить ещё',

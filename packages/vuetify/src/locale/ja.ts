@@ -134,6 +134,12 @@ export default {
       item: '評価 {1} のうち {0}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小',
+      end: '最大',
+    },
+  },
   loading: 'ロード中...',
   infiniteScroll: {
     loadMore: 'さらに読み込む',

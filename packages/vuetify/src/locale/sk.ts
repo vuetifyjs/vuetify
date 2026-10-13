@@ -134,6 +134,12 @@ export default {
       item: 'Hodnotenie {0} z {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
   loading: 'Načítavam...',
   infiniteScroll: {
     loadMore: 'Načítať viac',

@@ -134,6 +134,12 @@ export default {
       item: 'Hinnang {0} {1}st',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Miinimum',
+      end: 'Maksimum',
+    },
+  },
   loading: 'Laadimine...',
   infiniteScroll: {
     loadMore: 'Laadi rohkem',

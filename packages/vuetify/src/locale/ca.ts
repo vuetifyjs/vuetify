@@ -134,6 +134,12 @@ export default {
       item: 'Puntuació {0} de {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Mínim',
+      end: 'Màxim',
+    },
+  },
   loading: 'Carregant...',
   infiniteScroll: {
     loadMore: 'Carrega més',
