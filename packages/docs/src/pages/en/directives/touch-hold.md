@@ -18,13 +18,13 @@ The `v-touch-hold` directive calls a function when the user touches an element a
 
 ## Usage
 
-On a touch device, touch and hold a file to start selecting. Once a hold fires, the tap that would follow it is cancelled, and the browser's own long-press behavior (text selection, the iOS link callout and the Android context menu) is suppressed for the element.
+Touch and hold a file to start selecting, or hold the left mouse button with the `mouse` modifier. Once a hold fires, the click that would follow it is cancelled, and the browser's own long-press behavior (text selection, the iOS link callout and the Android context menu) is suppressed for the element.
 
 <ExamplesExample file="v-touch-hold/usage" />
 
 ::: info
 
-`v-touch-hold` only reacts to touch. For mouse and keyboard users, pair it with a `@contextmenu` listener.
+Keyboard users reach neither gesture, so pair the directive with a `@contextmenu` listener where the action has no other route.
 
 :::
 

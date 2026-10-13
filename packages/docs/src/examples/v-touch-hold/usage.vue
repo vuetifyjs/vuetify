@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="400">
     <v-toolbar :color="selected.length ? 'primary' : undefined" density="compact">
       <v-toolbar-title>
-        {{ selected.length ? `${selected.length} selected` : 'Touch and hold a file' }}
+        {{ selected.length ? `${selected.length} selected` : 'Hold a file to select' }}
       </v-toolbar-title>
       <v-btn
         v-if="selected.length"
@@ -20,18 +20,25 @@
         :title="file"
         color="primary"
         link
-        v-touch-hold="() => toggle(file)"
-        @click="selected.length && toggle(file)"
+        v-touch-hold.mouse="() => toggle(file)"
+        @click="selected.length ? toggle(file) : logSimpleClick(file)"
       ></v-list-item>
     </v-list>
+
+    <div class="text-body-small text-medium-emphasis pa-3">{{ last }}</div>
   </v-card>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, shallowRef } from 'vue'
 
   const files = ['Invoice.pdf', 'Photo.jpg', 'Notes.txt', 'Slides.pptx']
   const selected = ref([])
+  const last = shallowRef('')
+
+  function logSimpleClick (file) {
+    last.value = `Opened ${file}`
+  }
 
   function toggle (file) {
     selected.value = selected.value.includes(file)

@@ -99,6 +99,41 @@ describe('v-touch-hold', () => {
     expect(onRender).toHaveBeenCalledTimes(2)
   })
 
+  it('should hold the left mouse button with the mouse modifier and swallow its click', async () => {
+    const handler = vi.fn()
+    const touchOnly = vi.fn()
+    const onClick = vi.fn()
+    render(defineComponent({
+      directives: { vTouchHold },
+      setup: () => () => (
+        <>
+          <div
+            data-testid="el"
+            v-touch-hold_mouse={{ handler, duration: 100 }}
+            style="width: 100px; height: 100px"
+            onClick={ onClick }
+          />
+          <div data-testid="touch-only" v-touch-hold={{ handler: touchOnly, duration: 100 }} />
+        </>
+      ),
+    }))
+
+    screen.getByTestId('touch-only').dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    await wait(150)
+    expect(touchOnly).not.toHaveBeenCalled()
+
+    const el = screen.getByTestId('el')
+    el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 2 }))
+    await wait(150)
+    expect(handler).not.toHaveBeenCalled()
+
+    el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientX: 50, clientY: 50 }))
+    await expect.poll(() => handler).toHaveBeenCalledTimes(1)
+
+    el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+    expect(onClick).not.toHaveBeenCalled()
+  })
+
   it('should only call the innermost handler when nested', async () => {
     const outer = vi.fn()
     const inner = vi.fn()

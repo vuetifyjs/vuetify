@@ -16,8 +16,11 @@ export interface TouchHoldOptions {
   duration?: number
 }
 
-export interface TouchHoldDirectiveBinding extends Omit<DirectiveBinding, 'value'> {
+export interface TouchHoldDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
   value?: TouchHoldOptions['handler'] | TouchHoldOptions | null
+  modifiers: {
+    mouse?: boolean
+  }
 }
 
 export type TouchHoldState = ReturnType<typeof createTouchHold>
@@ -35,18 +38,19 @@ function lockStyles (el: HTMLElement) {
   return () => lockedStyles.forEach((p, i) => previous[i] ? el.style.setProperty(p, previous[i]) : el.style.removeProperty(p))
 }
 
-// nested holds share one touchstart; the innermost one takes it
+// nested holds share one press event; the innermost one takes it
 const claimed = new WeakSet<Event>()
 
 export function createTouchHold (options: TouchHoldOptions) {
   let timer = -1
   let held = false
   let handling = false
-  let press: { el: HTMLElement, target: EventTarget, x: number, y: number, unlock: () => void } | undefined
+  let press: { el: HTMLElement, x: number, y: number, detach: () => void, unlock?: () => void } | undefined
 
   const state = {
     options,
     onTouchstart,
+    onMousedown,
     cancel: end,
   }
 
@@ -60,11 +64,43 @@ export function createTouchHold (options: TouchHoldOptions) {
     const { clientX, clientY } = e.touches[0]
     // touch events keep targeting the original node even after it leaves the DOM, where they no longer bubble to el
     const target = e.target!
-    press = { el, target, x: clientX, y: clientY, unlock: lockStyles(el) }
+    press = {
+      el,
+      x: clientX,
+      y: clientY,
+      unlock: lockStyles(el),
+      detach: () => {
+        target.removeEventListener('touchmove', onTouchmove as EventListener)
+        target.removeEventListener('touchend', onTouchend as EventListener)
+        target.removeEventListener('touchcancel', onTouchend as EventListener)
+        window.removeEventListener('contextmenu', onContextmenu, { capture: true })
+      },
+    }
     target.addEventListener('touchmove', onTouchmove as EventListener, { passive: true })
     target.addEventListener('touchend', onTouchend as EventListener, { passive: false })
     target.addEventListener('touchcancel', onTouchend as EventListener)
     window.addEventListener('contextmenu', onContextmenu, { capture: true })
+
+    timer = window.setTimeout(() => trigger(e), state.options.duration ?? 500)
+  }
+
+  function onMousedown (e: MouseEvent) {
+    end()
+    held = false
+    if (e.button !== 0 || claimed.has(e)) return
+    claimed.add(e)
+
+    press = {
+      el: e.currentTarget as HTMLElement,
+      x: e.clientX,
+      y: e.clientY,
+      detach: () => {
+        window.removeEventListener('mousemove', onMousemove)
+        window.removeEventListener('click', onClick, { capture: true })
+      },
+    }
+    window.addEventListener('mousemove', onMousemove, { passive: true })
+    window.addEventListener('click', onClick, { capture: true })
 
     timer = window.setTimeout(() => trigger(e), state.options.duration ?? 500)
   }
@@ -94,6 +130,20 @@ export function createTouchHold (options: TouchHoldOptions) {
     end()
   }
 
+  function onMousemove (e: MouseEvent) {
+    if (!press || held) return
+    if (Math.hypot(e.clientX - press.x, e.clientY - press.y) > 10) end()
+  }
+
+  // the release ends the press, and the click it carries must not reach the element the hold acted on
+  function onClick (e: MouseEvent) {
+    if (held) {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+    }
+    end()
+  }
+
   // Android fires contextmenu for the same long-press, and click-outside would close what the handler just opened
   function onContextmenu (e: MouseEvent) {
     if (handling || !press?.el.contains(e.target as Node)) return
@@ -106,12 +156,10 @@ export function createTouchHold (options: TouchHoldOptions) {
     clearTimeout(timer)
     if (!press) return
 
-    const { target, unlock } = press
+    const { detach, unlock } = press
     press = undefined
-    target.removeEventListener('touchmove', onTouchmove as EventListener)
-    target.removeEventListener('touchend', onTouchend as EventListener)
-    target.removeEventListener('touchcancel', onTouchend as EventListener)
-    window.removeEventListener('contextmenu', onContextmenu, { capture: true })
+    detach()
+    if (!unlock) return
     // restoring right away still lets the finger lift start a selection
     if (held) setTimeout(unlock, 10)
     else unlock()
@@ -133,6 +181,7 @@ function mounted (el: HTMLElement, binding: TouchHoldDirectiveBinding) {
   el._touchHold ??= Object.create(null)
   el._touchHold![uid] = hold
   el.addEventListener('touchstart', hold.onTouchstart, { passive: true })
+  if (binding.modifiers.mouse) el.addEventListener('mousedown', hold.onMousedown)
 }
 
 function unmounted (el: HTMLElement, binding: TouchHoldDirectiveBinding) {
@@ -142,6 +191,7 @@ function unmounted (el: HTMLElement, binding: TouchHoldDirectiveBinding) {
 
   hold.cancel()
   el.removeEventListener('touchstart', hold.onTouchstart)
+  el.removeEventListener('mousedown', hold.onMousedown)
   delete el._touchHold![uid!]
 }
 
