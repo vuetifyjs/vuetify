@@ -14,13 +14,15 @@ export { screen } from '@testing-library/vue'
 export * from './templates'
 
 export function touch (element: Element) {
-  const createTrigger = (eventName: string) => (clientX: number, clientY: number) => {
-    const touches = [{ clientX, clientY }]
-    const event = new Event(eventName)
-
-    ;(event as any).touches = touches
-    ;(event as any).changedTouches = touches
-    element.dispatchEvent(event)
+  const createTrigger = (type: string, active = true) => (clientX: number, clientY: number) => {
+    const touches = [new Touch({ identifier: 0, target: element, clientX, clientY })]
+    element.dispatchEvent(new TouchEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      touches: active ? touches : [],
+      targetTouches: active ? touches : [],
+      changedTouches: touches,
+    }))
 
     return touch(element)
   }
@@ -28,7 +30,7 @@ export function touch (element: Element) {
   return {
     start: createTrigger('touchstart'),
     move: createTrigger('touchmove'),
-    end: createTrigger('touchend'),
+    end: createTrigger('touchend', false),
   }
 }
 
