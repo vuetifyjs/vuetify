@@ -29,37 +29,18 @@ import { Box, getElementBox, getOverflow, getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { Anchor } from '@/util'
+import type {
+  LocationStrategyData,
+  LocationStrategyFunction,
+  LocationStrategyProps as StrategyProps,
+} from '@/components/VOverlay/locationStrategies.types'
+import type { Anchor } from '@/util/anchor.types'
 
-export interface LocationStrategyData {
-  contentEl: Ref<HTMLElement | undefined>
-  target: Ref<HTMLElement | [x: number, y: number] | undefined>
-  isActive: Ref<boolean>
-  isRtl: Ref<boolean>
-}
-
-export type LocationStrategyFunction = (
-  data: LocationStrategyData,
-  props: StrategyProps,
-  contentStyles: Ref<Record<string, string>>
-) => undefined | { updateLocation: (e?: Event) => void }
+export type { LocationStrategyData, LocationStrategyFunction, StrategyProps }
 
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
   connected: connectedLocationStrategy, // connected to a certain element
-}
-
-export interface StrategyProps {
-  locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
-  location?: Anchor
-  origin: Anchor | 'auto' | 'overlap'
-  offset?: number | string | number[]
-  stickToTarget?: boolean
-  viewportMargin?: number | string
-  maxHeight?: number | string
-  maxWidth?: number | string
-  minHeight?: number | string
-  minWidth?: number | string
 }
 
 export const makeLocationStrategyProps = propsFactory({

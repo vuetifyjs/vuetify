@@ -27,8 +27,10 @@ import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
+import type { VDataTableHeadersSlots } from './VDataTableHeaders.types'
 import type { ItemProps } from '@/composables/list-items'
-import type { LoaderSlotProps } from '@/composables/loader'
+
+export type { VDataTableHeadersSlots }
 
 export type HeadersSlotProps = {
   headers: InternalDataTableHeader[][]
@@ -52,14 +54,6 @@ export type VDataTableHeaderCellColumnSlotProps = {
   allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
   getSortIcon: (column: InternalDataTableHeader) => IconValue
 }
-
-export type VDataTableHeadersSlots = {
-  headers: HeadersSlotProps
-  loader: LoaderSlotProps
-  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
-  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
-  'mobile.header': HeadersSlotProps
-} & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,

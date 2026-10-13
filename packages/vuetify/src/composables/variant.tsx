@@ -7,6 +7,7 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, PropType } from 'vue'
+import type { Variant } from '@/composables/variant.types'
 
 export const allowedVariants = [
   'elevated',
@@ -15,9 +16,9 @@ export const allowedVariants = [
   'outlined',
   'text',
   'plain',
-] as const
+] as const satisfies readonly Variant[]
 
-export type Variant = typeof allowedVariants[number]
+export type { Variant }
 
 export interface VariantProps {
   color?: string

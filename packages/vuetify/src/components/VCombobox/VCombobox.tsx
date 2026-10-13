@@ -57,21 +57,11 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { ItemType, Value } from './VCombobox.types'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
-
-type Primitive = string | number | boolean | symbol
-
-type Val <T, ReturnObject extends boolean> = string | ([T] extends [Primitive]
-  ? T
-  : (ReturnObject extends true ? T : any))
-
-type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
-  Multiple extends true
-    ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject> | null
 
 export const makeVComboboxProps = propsFactory({
   alwaysFilter: Boolean,
@@ -93,8 +83,6 @@ export const makeVComboboxProps = propsFactory({
     role: 'combobox',
   }), ['validationValue', 'dirty']),
 }, 'VCombobox')
-
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export const VCombobox = genericComponent<new <
   T extends readonly any[],

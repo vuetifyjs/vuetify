@@ -34,12 +34,14 @@ import { genericComponent, isEmpty, propsFactory, useRender } from '@/util'
 // Types
 import type { Component } from 'vue'
 import type { DataIteratorItem } from './composables/items'
+import type { VDataIteratorSlots } from './VDataIterator.types'
 import type { Group, GroupSummary } from '@/components/VDataTable/composables/group'
 import type { SortItem } from '@/components/VDataTable/composables/sort'
-import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 
-type VDataIteratorSlotProps<T> = {
+export type { VDataIteratorSlots }
+
+export type VDataIteratorSlotProps<T> = {
   page: number
   itemsPerPage: number
   sortBy: readonly SortItem[]
@@ -60,14 +62,6 @@ type VDataIteratorSlotProps<T> = {
   items: readonly DataIteratorItem<T>[]
   itemsCount: number
   groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>> | GroupSummary<DataIteratorItem<T>>)[]
-}
-
-export type VDataIteratorSlots<T> = {
-  default: VDataIteratorSlotProps<T>
-  header: VDataIteratorSlotProps<T>
-  footer: VDataIteratorSlotProps<T>
-  loader: LoaderSlotProps
-  'no-data': never
 }
 
 export const makeVDataIteratorProps = propsFactory({

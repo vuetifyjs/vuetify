@@ -21,30 +21,8 @@ import { clamp, createRange, genericComponent, propsFactory, useRender } from '@
 
 // Types
 import type { Prop } from 'vue'
+import type { VRatingSlots } from './VRating.types'
 import type { Variant } from '@/composables/variant'
-
-type VRatingItemSlot = {
-  value: number
-  index: number
-  isFilled: boolean
-  isHovered: boolean
-  icon: IconValue
-  color?: string
-  activeColor?: string
-  props: Record<string, unknown>
-  rating: number
-}
-
-type VRatingItemLabelSlot = {
-  value: number
-  index: number
-  label?: string
-}
-
-type VRatingSlots = {
-  item: VRatingItemSlot
-  'item-label': VRatingItemLabelSlot
-}
 
 const iconScale = { default: 1 / 2, comfortable: 2 / 3, compact: 6 / 7 }
 

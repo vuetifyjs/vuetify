@@ -21,26 +21,11 @@ import { chunkArray, genericComponent, isFunction, isObject, isString, omit, pro
 
 // Types
 import type { PropType } from 'vue'
+import type { DatePickerEventColors, DatePickerEventColorValue, DatePickerEvents, VDatePickerMonthSlots } from './VDatePickerMonth.types'
 import type { CalendarWeekdays } from '@/composables/calendar'
 import type { GenericProps } from '@/util'
 
-export type DatePickerEventColorValue = boolean | string | string[]
-
-export type DatePickerEventColors = DatePickerEventColorValue |
-Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
-
-export type DatePickerEvents = string[] |
-((date: string) => DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
-
-export type VDatePickerMonthSlots = {
-  day: {
-    props: {
-      onClick: () => void
-    }
-    item: any
-    i: number
-  }
-}
+export type { DatePickerEventColorValue, DatePickerEventColors, DatePickerEvents, VDatePickerMonthSlots }
 
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,

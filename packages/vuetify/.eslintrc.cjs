@@ -42,6 +42,12 @@ module.exports = {
       },
     },
     {
+      files: ['src/**/*.types.d.ts', 'src/components/__tests__/types.spec.ts'],
+      rules: {
+        'max-len': 'off',
+      },
+    },
+    {
       files: '**/*.spec.?(browser.){ts,tsx}',
       plugins: ['@vitest'],
       extends: ['plugin:@vitest/legacy-all'],

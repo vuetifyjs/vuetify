@@ -11,9 +11,9 @@ import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+import type { VMaskInputSlots } from './VMaskInput.types'
 
-export type VMaskInputSlots = VTextFieldSlots
+export type { VMaskInputSlots }
 
 export const makeVMaskInputProps = propsFactory({
   returnMaskedValue: Boolean,

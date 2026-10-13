@@ -14,23 +14,10 @@ import { computed, ref } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { StepperVerticalItemActionSlot, VStepperVerticalItemSlots } from './VStepperVerticalItem.types'
 import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
 
-export type StepperVerticalItemActionSlot<T = any> = StepperItemSlot<T> & {
-  next: () => void
-  prev: () => void
-}
-
-export type VStepperVerticalItemSlots<T = any> = {
-  default: StepperItemSlot<T>
-  icon: StepperItemSlot<T>
-  subtitle: StepperItemSlot<T>
-  title: StepperItemSlot<T>
-  text: StepperItemSlot<T>
-  prev: StepperVerticalItemActionSlot<T>
-  next: StepperVerticalItemActionSlot<T>
-  actions: StepperVerticalItemActionSlot<T>
-}
+export type { StepperVerticalItemActionSlot, VStepperVerticalItemSlots }
 
 export const makeVStepperVerticalItemProps = propsFactory({
   hideActions: Boolean,

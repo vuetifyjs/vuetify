@@ -19,36 +19,31 @@ import {
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type {
+  FilterFunction,
+  FilterKeyFunctions,
+  FilterKeys,
+  FilterMatch,
+  FilterMatchArray,
+  FilterMatchArrayMultiple,
+  FilterMatchArraySingle,
+  FilterMode,
+  FilterProps,
+  InternalItem,
+} from '@/composables/filter.types'
 import type { IgnoreAccents, MaybeRef } from '@/util'
 
-/**
- * - boolean: match without highlight
- * - number: single match (index), length already known
- * - []: single match (start, end)
- * - [][]: multiple matches (start, end), shouldn't overlap
- */
-export type FilterMatchArraySingle = readonly [number, number]
-export type FilterMatchArrayMultiple = readonly FilterMatchArraySingle[]
-export type FilterMatchArray = FilterMatchArraySingle | FilterMatchArrayMultiple
-export type FilterMatch = boolean | number | FilterMatchArray
-export type FilterFunction = (value: string, query: string, item?: InternalItem) => FilterMatch
-export type FilterKeyFunctions = Record<string, FilterFunction>
-export type FilterKeys = string | string[]
-export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
-
-export interface FilterProps {
-  customFilter?: FilterFunction
-  customKeyFilter?: FilterKeyFunctions
-  filterKeys?: FilterKeys
-  filterMode?: FilterMode
-  ignoreAccents?: IgnoreAccents
-  noFilter?: boolean
-}
-
-export interface InternalItem<T = any> {
-  value: any
-  raw: T
-  type?: string
+export type {
+  FilterFunction,
+  FilterKeyFunctions,
+  FilterKeys,
+  FilterMatch,
+  FilterMatchArray,
+  FilterMatchArrayMultiple,
+  FilterMatchArraySingle,
+  FilterMode,
+  FilterProps,
+  InternalItem,
 }
 
 type FilterResult = {

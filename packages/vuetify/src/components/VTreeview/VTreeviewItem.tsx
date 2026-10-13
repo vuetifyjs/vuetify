@@ -21,9 +21,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { ToggleListItemSlot } from './shared'
-import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { VTreeviewItemSlots } from './VTreeviewItem.types'
 import type { IndentLineType } from '@/util'
+
+export type { VTreeviewItemSlots }
 
 export const makeVTreeviewItemProps = propsFactory({
   loading: Boolean,
@@ -34,10 +35,6 @@ export const makeVTreeviewItemProps = propsFactory({
 
   ...makeVListItemProps({ slim: true }),
 }, 'VTreeviewItem')
-
-export type VTreeviewItemSlots = VListItemSlots & {
-  toggle: ToggleListItemSlot & { loading: boolean }
-}
 
 export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   name: 'VTreeviewItem',

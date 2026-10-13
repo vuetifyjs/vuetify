@@ -36,31 +36,11 @@ import { consoleError, getCurrentInstance, isFunction, isNullOrUndefined, isObje
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
-import type { ActiveStrategy } from './activeStrategies'
-import type { OpenStrategy } from './openStrategies'
-import type { SelectStrategy } from './selectStrategies'
 import type { ListItem } from '@/composables/list-items'
+import type { ActiveStrategyProp, ItemsRegistrationType, OpenStrategyProp, SelectStrategyProp } from '@/composables/nested/nested.types'
 import type { EventProp, ValueComparator } from '@/util'
 
-export type ActiveStrategyProp =
-  | 'single-leaf'
-  | 'leaf'
-  | 'independent'
-  | 'single-independent'
-  | ActiveStrategy
-  | ((mandatory: boolean) => ActiveStrategy)
-export type SelectStrategyProp =
-  | 'single-leaf'
-  | 'leaf'
-  | 'independent'
-  | 'single-independent'
-  | 'classic'
-  | 'trunk'
-  | 'branch'
-  | SelectStrategy
-  | ((mandatory: boolean) => SelectStrategy)
-export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
-export type ItemsRegistrationType = 'props' | 'render'
+export type { ActiveStrategyProp, ItemsRegistrationType, OpenStrategyProp, SelectStrategyProp }
 
 export interface NestedProps {
   activatable: boolean

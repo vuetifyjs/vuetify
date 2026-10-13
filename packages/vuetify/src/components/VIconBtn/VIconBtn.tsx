@@ -23,15 +23,13 @@ import { convertToUnit, genericComponent, isBoolean, propsFactory, useRender } f
 
 // Types
 import type { PropType } from 'vue'
+import type { VIconBtnSizes, VIconBtnSlots } from './VIconBtn.types'
 import type { IconValue } from '@/composables/icons'
 import type { Variant } from '@/composables/variant'
 
-export type VIconBtnSlots = {
-  default: never
-  loader: never
-}
+export type { VIconBtnSlots }
 
-export type VIconBtnSizes = 'x-small' | 'small' | 'default' | 'large' | 'x-large'
+export type { VIconBtnSizes }
 
 export const makeVIconBtnProps = propsFactory({
   active: {

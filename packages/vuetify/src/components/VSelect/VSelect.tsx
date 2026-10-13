@@ -55,22 +55,11 @@ import {
 } from '@/util'
 
 // Types
-import type { Component, PropType, Ref } from 'vue'
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { Component, PropType } from 'vue'
+import type { VSelectGeneric } from './VSelect.types'
+import type { VList as VListTypes } from '@/components/VList/VList.types'
+import type { VMenu as VMenuTypes } from '@/components/VMenu/VMenu.types'
 import type { ListItem } from '@/composables/list-items'
-import type { GenericProps, SelectItemKey } from '@/util'
-
-type Primitive = string | number | boolean | symbol
-
-type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
-  ? T
-  : (ReturnObject extends true ? T : any)
-
-type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
-  Multiple extends true
-    ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -80,7 +69,7 @@ export const makeSelectProps = propsFactory({
   hideNoData: Boolean,
   hideSelected: Boolean,
   listProps: {
-    type: Object as PropType<VList['$props']>,
+    type: Object as PropType<VListTypes['$props']>,
   },
   menu: Boolean,
   /** @deprecated use menuProps.contentClass instead */
@@ -90,7 +79,7 @@ export const makeSelectProps = propsFactory({
     default: '$dropdown',
   },
   menuProps: {
-    type: Object as PropType<VMenu['$props']>,
+    type: Object as PropType<VMenuTypes['$props']>,
   },
   multiple: Boolean,
   noDataText: {
@@ -118,38 +107,7 @@ export const makeVSelectProps = propsFactory({
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'VSelect')
 
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
-
-export const VSelect = genericComponent<new <
-  T extends readonly any[],
-  Item = ItemType<T>,
-  ReturnObject extends boolean = false,
-  Multiple extends boolean = false,
-  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
->(
-  props: {
-    items?: T
-    itemTitle?: SelectItemKey<ItemType<T>>
-    itemValue?: SelectItemKey<ItemType<T>>
-    itemProps?: SelectItemKey<ItemType<T>>
-    returnObject?: ReturnObject
-    multiple?: Multiple
-    modelValue?: V | null
-    'onUpdate:modelValue'?: (value: V) => void
-  },
-  slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
-    chip: { item: Item, internalItem: ListItem<Item>, index: number, props: Record<string, unknown> }
-    selection: { item: Item, internalItem: ListItem<Item>, index: number }
-    subheader: { props: Record<string, unknown>, index: number }
-    divider: { props: Record<string, unknown>, index: number }
-    'prepend-item': never
-    'append-item': never
-    'no-data': never
-    'menu-header': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
-    'menu-footer': { search: Ref<string | undefined>, filteredItems: ListItem<Item>[] }
-  }
-) => GenericProps<typeof props, typeof slots>>()({
+export const VSelect = genericComponent<VSelectGeneric>()({
   name: 'VSelect',
 
   props: makeVSelectProps(),

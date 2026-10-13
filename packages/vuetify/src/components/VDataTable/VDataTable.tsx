@@ -36,9 +36,10 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import type { DeepReadonly, UnwrapRef } from 'vue'
 import type { Group, GroupSummary } from './composables/group'
 import type { CellProps, DataTableHeader, DataTableItem, InternalDataTableHeader, RowProps } from './types'
-import type { VDataTableHeadersSlots } from './VDataTableHeaders'
-import type { VDataTableRowsSlots } from './VDataTableRows'
+import type { ItemType, VDataTableSlots } from './VDataTable.types'
 import type { GenericProps, SelectItemKey } from '@/util'
+
+export type { VDataTableSlots }
 
 export type VDataTableSlotProps<T> = {
   page: number
@@ -68,21 +69,6 @@ export type VDataTableSlotProps<T> = {
   headers: InternalDataTableHeader[][]
 }
 
-export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
-  default: VDataTableSlotProps<T>
-  caption: never
-  colgroup: VDataTableSlotProps<T>
-  top: VDataTableSlotProps<T>
-  body: VDataTableSlotProps<T>
-  tbody: VDataTableSlotProps<T>
-  thead: VDataTableSlotProps<T>
-  tfoot: VDataTableSlotProps<T>
-  bottom: VDataTableSlotProps<T>
-  'body.prepend': VDataTableSlotProps<T>
-  'body.append': VDataTableSlotProps<T>
-  'footer.prepend': never
-}
-
 export const makeDataTableProps = propsFactory({
   ...makeVDataTableRowsProps(),
 
@@ -108,8 +94,6 @@ export const makeVDataTableProps = propsFactory({
   ...makeFilterProps(),
   ...makeVDataTableFooterProps(),
 }, 'VDataTable')
-
-type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export const VDataTable = genericComponent<new <T extends readonly any[], V>(
   props: {

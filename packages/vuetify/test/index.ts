@@ -94,3 +94,7 @@ export function unfill (o: Record<string, any>) {
     return result
   }, {} as Record<string, any>)
 }
+
+type Flat<T> = { [K in keyof T]: T[K] }
+// expectTypeOf().toEqualTypeOf() gives false negatives on component props
+export type Equal<A, B> = (<T>() => T extends Flat<A> ? 1 : 2) extends (<T>() => T extends Flat<B> ? 1 : 2) ? true : false

@@ -13,17 +13,9 @@ import { convertToUnit, genericComponent, isBoolean, pickWithRest, propsFactory,
 
 // Types
 import type { PropType } from 'vue'
+import type { Gridlines, Striped, VTableSlots } from './VTable.types'
 
-export type VTableSlots = {
-  default: never
-  top: never
-  bottom: never
-  wrapper: never
-  caption: never
-}
-
-export type Striped = null | 'odd' | 'even'
-export type Gridlines = 'horizontal' | 'vertical' | 'all'
+export type { Gridlines, Striped, VTableSlots }
 
 export const makeVTableProps = propsFactory({
   gridlines: {

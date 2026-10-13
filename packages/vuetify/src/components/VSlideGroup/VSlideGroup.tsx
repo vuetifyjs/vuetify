@@ -44,30 +44,14 @@ import {
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
+import type { VSlideGroupEdge, VSlideGroupSlots, VSlideGroupTarget } from './VSlideGroup.types'
 import type { GoToOptions } from '@/composables/goto'
 import type { GroupProvide } from '@/composables/group'
 import type { GenericProps } from '@/util'
 
+export type { VSlideGroupEdge, VSlideGroupSlots, VSlideGroupTarget }
+
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
-
-interface SlideGroupSlot {
-  next: GroupProvide['next']
-  prev: GroupProvide['prev']
-  select: GroupProvide['select']
-  isSelected: GroupProvide['isSelected']
-}
-
-export type VSlideGroupEdge = 'start' | 'end'
-
-export type VSlideGroupTarget = 'prev' | 'next'
-  | { by: string | number }
-  | { index: number }
-
-export type VSlideGroupSlots = {
-  default: SlideGroupSlot
-  prev: SlideGroupSlot
-  next: SlideGroupSlot
-}
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,

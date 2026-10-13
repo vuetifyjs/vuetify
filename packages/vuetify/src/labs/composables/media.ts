@@ -4,9 +4,9 @@ import { clamp, createRange, IN_BROWSER, isNullOrUndefined, isNumber, isString, 
 
 // Types
 import type { Ref } from 'vue'
+import type { MediaSeekStep, MediaSeekTarget } from './media.types'
 
-export type MediaSeekTarget = { to: number | string } | { by: number | string }
-export type MediaSeekStep = number | readonly [number, number]
+export type { MediaSeekStep, MediaSeekTarget }
 
 export interface MediaProps {
   src?: string

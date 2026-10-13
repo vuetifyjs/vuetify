@@ -23,6 +23,9 @@ import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { VFileUploadDropzoneSlots } from './VFileUploadDropzone.types'
+
+export type { VFileUploadDropzoneSlots }
 
 export interface VFileUploadContext {
   files: Ref<readonly File[]>
@@ -35,31 +38,6 @@ export interface VFileUploadContext {
 }
 
 export const VFileUploadKey: InjectionKey<VFileUploadContext> = Symbol.for('vuetify:file-upload')
-
-export type VFileUploadDropzoneSlots = {
-  default: {
-    isDragging: boolean
-    hasFiles: boolean
-    files: readonly File[]
-    props: { onClick: () => void }
-  }
-  browse: {
-    props: { onClick: (e: MouseEvent) => void }
-  }
-  icon: never
-  title: never
-  divider: never
-  single: {
-    file: File
-    props: { 'onClick:remove': () => void }
-  }
-  item: {
-    file: File
-    props: { 'onClick:remove': () => void }
-  }
-  input: never
-  loader: never
-}
 
 export const makeVFileUploadDropzoneProps = propsFactory({
   browseText: {

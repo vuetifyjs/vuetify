@@ -8,26 +8,13 @@ import { clamp } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter, ShallowRef } from 'vue'
-import type { ColorScale, ColorScaleStop, LinearColorScale } from './colorScale'
-import type { PivotCell, PivotGroup, PivotProps } from './pivot'
+import type { ColorScaleStop, LinearColorScale } from './colorScale'
+import type { HeatmapCell, HeatmapGroup, HeatmapThresholds } from './heatmap.types'
+import type { PivotProps } from './pivot'
+
+export type { HeatmapCell, HeatmapGroup, HeatmapThresholds }
 
 export { isLinearColorScale as isLinearScale } from './colorScale'
-
-export type HeatmapThresholds = ColorScale
-
-export interface HeatmapCell extends PivotCell {
-  value: number
-  bucketIndex: number
-  mixPercentage?: number
-  readonly color: string | undefined
-}
-
-export interface HeatmapGroup extends PivotGroup<HeatmapCell> {
-  x: number
-  width: number
-  hasOverlap: boolean
-  labelOffset: number
-}
 
 export interface HeatmapProps extends PivotProps {
   thresholds: MaybeRefOrGetter<HeatmapThresholds>
