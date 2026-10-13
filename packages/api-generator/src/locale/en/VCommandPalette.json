@@ -26,6 +26,7 @@
     "no-data": "Custom content to display when no items match the search query. Replaces the default no-data message.",
     "list.prepend": "Content to render above the items list, inside the command palette card.",
     "list.subheader": "Slot for customizing the rendering of subheader items in the list.",
+    "item": "Replaces the rendering of each item. Bind **item** to a **v-list-item** (`v-bind=\"item\"`) to keep the keyboard highlight and screen reader announcements.",
     "item.prepend": "Content to display before each item's title.",
     "item.title": "Slot for customizing the title of each item.",
     "item.append": "Content to display after each item's title, replaces hotkey (if provided)."
