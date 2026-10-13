@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { useToolbarHeight } from './toolbar'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
@@ -20,7 +21,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, shallowRef } from 'vue'
+import { shallowRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -93,21 +94,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { rtlClasses } = useRtl()
 
     const isExtended = shallowRef(props.extended === null ? !!(slots.extension?.()) : props.extended)
-    const contentHeight = computed(() => parseInt((
-      Number(props.height) +
-      (props.density === 'prominent' ? Number(props.height) : 0) -
-      (props.density === 'comfortable' ? 8 : 0) -
-      (props.density === 'compact' ? 16 : 0)
-    ), 10))
-    const extensionHeight = computed(() => isExtended.value
-      ? parseInt((
-        Number(props.extensionHeight) +
-        (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
-        (props.density === 'comfortable' ? 4 : 0) -
-        (props.density === 'compact' ? 8 : 0)
-      ), 10)
-      : 0
-    )
+    const { contentHeight, extensionHeight } = useToolbarHeight(props, isExtended)
 
     provideDefaults({
       VBtn: {
