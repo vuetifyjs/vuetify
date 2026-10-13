@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, isFunction, omit, pickWithRest, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
@@ -28,8 +28,8 @@ import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
 import type { VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
-import type { CalendarDay } from '@/composables/calendar'
 import type { VPickerSlots } from '@/components/VPicker/VPicker'
+import type { CalendarDay } from '@/composables/calendar'
 import type { EventProp, GenericProps } from '@/util'
 
 // Types
@@ -507,7 +507,7 @@ export const VDatePicker = genericComponent<new <
                     <VDatePickerMonth
                       ref={ monthGridRef }
                       key="date-picker-month"
-                      { ...attrs } // <-- TODO: filter by `on` prefix
+                      { ...pickWithRest(attrs, [/^on.+:day$/])[0] }
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }
