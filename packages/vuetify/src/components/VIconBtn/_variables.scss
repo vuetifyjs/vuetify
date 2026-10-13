@@ -20,6 +20,8 @@ $icon-btn-width: var(--v-icon-btn-width) !default;
 $icon-btn-margin-start: 8px !default;
 $icon-btn-margin-end: 8px !default;
 $icon-btn-plain-opacity: .62 !default;
+$icon-btn-sizes: ('x-small': 16px, 'small': 24px, 'default': 40px, 'large': 48px, 'x-large': 56px) !default;
+$icon-btn-icon-sizes: ('x-small': 10px, 'small': 16px, 'default': 24px, 'large': 28px, 'x-large': 32px) !default;
 
 $icon-btn-border: (
   $icon-btn-border-color,
