@@ -107,6 +107,10 @@
   }
 
   @each $name, $tokens in btn.$icon-btn-named-sizes {
+    @if not map.has-key(settings.$size-scales, $name) {
+      @error '$icon-btn-named-sizes: unknown size `#{$name}`, use one of: #{map.keys(settings.$size-scales)}';
+    }
+
     .v-icon-btn--#{$name} {
       @each $key, $value in $tokens {
         @if not list.index($keys, $key) {
