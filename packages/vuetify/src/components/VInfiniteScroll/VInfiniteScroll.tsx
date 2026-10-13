@@ -17,22 +17,9 @@ import { convertToUnit, defineComponent, genericComponent, propsFactory, useRend
 
 // Types
 import type { PropType } from 'vue'
+import type { InfiniteScrollSide, InfiniteScrollStatus, VInfiniteScrollSlots } from './VInfiniteScroll.types'
 
-export type InfiniteScrollSide = 'start' | 'end' | 'both'
-export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
-
-type InfiniteScrollSlot = {
-  side: InfiniteScrollSide
-  props: Record<string, any>
-}
-
-type VInfiniteScrollSlots = {
-  default: never
-  loading: InfiniteScrollSlot
-  error: InfiniteScrollSlot
-  empty: InfiniteScrollSlot
-  'load-more': InfiniteScrollSlot
-}
+export type { InfiniteScrollSide, InfiniteScrollStatus }
 
 export const makeVInfiniteScrollProps = propsFactory({
   color: String,

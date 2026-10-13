@@ -15,21 +15,11 @@ import { convertToUnit, genericComponent, isFunction, isObject, propsFactory, us
 
 // Types
 import type { CSSProperties, PropType } from 'vue'
-import type { HeatmapCell, HeatmapGroup, HeatmapThresholds } from './heatmap'
+import type { HeatmapCell, HeatmapThresholds } from './heatmap'
+import type { HeatmapLegendOptions, VHeatmapSlots } from './VHeatmap.types'
 import type { SelectItemKey } from '@/util'
 
-export interface HeatmapLegendOptions {
-  labels?: string[]
-  cellSize?: string | number | (string | number)[]
-}
-
-export type VHeatmapSlots = {
-  cell: { item: HeatmapCell }
-  legend: { thresholds: HeatmapThresholds, activeBuckets: number[], toggle: (index: number) => void }
-  'row-header': { row: any, index: number, items: HeatmapCell[] }
-  'column-header': { column: any, index: number, items: HeatmapCell[] }
-  'group-header': { group: HeatmapGroup, items: HeatmapCell[] }
-}
+export type { HeatmapLegendOptions, VHeatmapSlots }
 
 export const makeVHeatmapProps = propsFactory({
   cellSize: {

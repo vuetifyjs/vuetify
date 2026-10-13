@@ -11,9 +11,7 @@ import { propsFactory } from '@/util/propsFactory'
 
 // Types
 import type {
-  AllowedComponentProps,
   Component,
-  ComponentCustomProps,
   ComponentInjectOptions,
   ComponentObjectPropsOptions,
   ComponentOptions,
@@ -29,12 +27,19 @@ import type {
   ExtractPropTypes,
   FunctionalComponent,
   MethodOptions,
-  ObjectEmitsOptions,
   SlotsType,
-  VNode,
-  VNodeChild,
-  VNodeProps,
 } from 'vue'
+import type {
+  EmitsToProps,
+  GenericProps,
+  MakeSlots,
+  PublicProps,
+  RawSlots,
+  SlotsToProps,
+  ToListeners,
+  VuetifyComponent,
+} from '@/util/defineComponent.types'
+import type { JSXComponent } from '@/util/shared.types'
 
 // No props
 export function defineComponent<
@@ -133,38 +138,6 @@ export function defineComponent (options: ComponentOptions) {
   }
 
   return options
-}
-
-type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
-
-export type SlotsToProps<
-  U extends RawSlots,
-  T = MakeInternalSlots<U>
-> = {
-  $children?: (
-    | VNodeChild
-    | (T extends { default: infer V } ? V : {})
-    | { [K in keyof T]?: T[K] }
-    | { $stable?: boolean }
-  )
-  'v-slots'?: { [K in keyof T]?: T[K] | false }
-} & {
-  [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
-}
-
-type RawSlots = Record<string, unknown>
-type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
-type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
-type MakeInternalSlots<T extends RawSlots> = {
-  [K in keyof T]: Slot<T[K]>
-}
-type MakeSlots<T extends RawSlots> = {
-  [K in keyof T]: VueSlot<T[K]>
-}
-
-export type GenericProps<Props, Slots extends Record<string, unknown>> = {
-  $props: Props & SlotsToProps<Slots>
-  $slots: MakeSlots<Slots>
 }
 
 type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>, slots: RawSlots) => {
@@ -271,30 +244,6 @@ export function defineFunctionalComponent<
   return render as any
 }
 
-type EmitsToProps<T extends EmitsOptions> = T extends string[]
-  ? {
-    [K in string & `on${Capitalize<T[number]>}`]?: (...args: any[]) => any
-  }
-  : T extends ObjectEmitsOptions
-    ? {
-      [K in string &
-        `on${Capitalize<string & keyof T>}`]?: K extends `on${infer C}`
-        ? T[Uncapitalize<C>] extends null
-          ? (...args: any[]) => any
-          : (
-            ...args: T[Uncapitalize<C>] extends (...args: infer P) => any
-              ? P
-              : never
-          ) => any
-        : never
-    }
-    : {}
-
-type PublicProps =
-  & VNodeProps
-  & AllowedComponentProps
-  & ComponentCustomProps
-
 // Adds a filterProps method to the component options
 export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentPropsOptions>, Props = ExtractPropTypes<PropsOptions>> {
   filterProps<
@@ -329,6 +278,4 @@ type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
   [K in keyof E]: (...args: E[K]) => any;
 } : E;
 
-export type JSXComponent<Props = any> =
-  | { new (): ComponentPublicInstance<Props> }
-  | FunctionalComponent<Props>
+export type { GenericProps, JSXComponent, SlotsToProps, VuetifyComponent }

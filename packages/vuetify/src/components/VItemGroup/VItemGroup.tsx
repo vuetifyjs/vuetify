@@ -11,6 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
+import type { VItemGroupSlots } from './VItemGroup.types'
 import type { GenericProps } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
@@ -23,16 +24,6 @@ export const makeVItemGroupProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
 }, 'VItemGroup')
-
-type VItemGroupSlots = {
-  default: {
-    isSelected: (id: string) => boolean
-    select: (id: string, value: boolean) => void
-    next: () => void
-    prev: () => void
-    selected: readonly string[]
-  }
-}
 
 export const VItemGroup = genericComponent<new <T>(
   props: {

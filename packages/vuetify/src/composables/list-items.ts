@@ -4,19 +4,10 @@ import { deepEqual, getPropertyFromItem, isNull, isObject, isPrimitive, isString
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalItem } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items.types'
 import type { Primitive, SelectItemKey, ValueComparator } from '@/util'
 
-export interface ListItem<T = any> extends InternalItem<T> {
-  title: string
-  props: {
-    [key: string]: any
-    title: string
-    value: any
-  }
-  children: ListItem<T>[] | undefined
-  type: string
-}
+export type { ListItem }
 
 export interface ItemProps {
   items: any[]

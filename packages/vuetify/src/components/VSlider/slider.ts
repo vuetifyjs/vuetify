@@ -11,13 +11,10 @@ import { clamp, createRange, getDecimals, IN_BROWSER, isBoolean, propsFactory } 
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
+import type { Tick } from './slider.types'
 import type { VSliderTrack } from './VSliderTrack'
 
-export type Tick = {
-  value: number
-  position: number
-  label?: string
-}
+export type { Tick }
 
 type SliderProvide = {
   activeThumbRef: Ref<HTMLElement | undefined>

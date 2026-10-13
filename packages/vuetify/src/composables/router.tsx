@@ -19,7 +19,10 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
+import type { LinkProps } from './router.types'
 import type { EventProp } from '@/util'
+
+export type { LinkProps }
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
   const vm = getCurrentInstance('useRoute')
@@ -29,14 +32,6 @@ export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
 
 export function useRouter (): Router | undefined {
   return getCurrentInstance('useRouter')?.proxy?.$router
-}
-
-export interface LinkProps {
-  href: string | undefined
-  replace: boolean | undefined
-  to: RouteLocationRaw | undefined
-  exact: boolean | undefined
-  disabled: boolean | undefined
 }
 
 export interface LinkListeners {

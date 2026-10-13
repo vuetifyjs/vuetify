@@ -22,27 +22,11 @@ import { shallowRef, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, isString, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
-import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
-import type { IconValue } from '@/composables/icons'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { PropType } from 'vue'
+import type { VSwitchSlot, VSwitchSlots } from './VSwitch.types'
 import type { GenericProps } from '@/util'
 
-export type VSwitchSlot = {
-  model: Ref<boolean>
-  isValid: ComputedRef<boolean | null>
-}
-
-export type VSwitchSlots =
-  & VInputSlots
-  & VSelectionControlSlots
-  & {
-    loader: LoaderSlotProps
-    thumb: { icon: IconValue | undefined } & VSwitchSlot
-    'track-false': VSwitchSlot
-    'track-true': VSwitchSlot
-  }
+export type { VSwitchSlot, VSwitchSlots }
 
 export const makeVSwitchProps = propsFactory({
   inset: {

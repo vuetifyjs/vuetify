@@ -11,18 +11,11 @@ import { computed, ref, watchEffect } from 'vue'
 import { deepEqual, deepToRaw, genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType } from 'vue'
+import type { VConfirmEditSlots } from './VConfirmEdit.types'
 import type { GenericProps } from '@/util'
 
-export type VConfirmEditSlots<T> = {
-  default: {
-    model: Ref<T>
-    save: () => void
-    cancel: () => void
-    isPristine: boolean
-    get actions (): (props?: {}) => VNode
-  }
-}
+export type { VConfirmEditSlots }
 
 export const makeVConfirmEditProps = propsFactory({
   modelValue: null,

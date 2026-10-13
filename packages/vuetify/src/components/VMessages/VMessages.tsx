@@ -15,14 +15,12 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
+import type { VMessagesSlots } from './VMessages.types'
+import type { VMessageSlot } from '@/components/VMessages/VMessages.types'
 
-export type VMessageSlot = {
-  message: string
-}
+export type { VMessagesSlots }
 
-export type VMessagesSlots = {
-  message: VMessageSlot
-}
+export type { VMessageSlot }
 
 export const makeVMessagesProps = propsFactory({
   active: Boolean,

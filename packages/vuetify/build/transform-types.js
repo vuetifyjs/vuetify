@@ -3,9 +3,21 @@ import fs from 'node:fs/promises'
 import { codeTransform } from './types-code-transform.js'
 import path from 'upath'
 
+for (const source of fg.sync('src/**/*.types.d.ts')) {
+  const target = source.replace(/^src\//, 'lib/')
+  await fs.copyFile(source, target)
+
+  const name = path.basename(source, '.types.d.ts')
+  if (!/^export declare const /m.test(await fs.readFile(source, 'utf-8'))) continue
+
+  const index = path.join(path.dirname(target), 'index.d.ts')
+  const code = await fs.readFile(index, 'utf-8')
+  await fs.writeFile(index, code.replaceAll(`from './${name}'`, `from './${name}.types'`), 'utf-8')
+}
+
 const files = fg.sync('lib/**/*.d.ts')
 
-const importRegexp = /(?<a1>(?:import|export)(?:[^;])*?from ['"])(?<a2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<a3>['"];)|(?<b1>import\(['"])(?<b2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<b3>['"]\))/gm
+const importRegexp = /(?<a1>(?:import|export)(?:[^;])*?from ['"])(?<a2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<a3>['"];?)|(?<b1>import\(['"])(?<b2>(?:\.\.?|@)(?:\/[^;'"]*)?)(?<b3>['"]\))/gm
 
 for (const name of files) {
   const code = await fs.readFile(name, 'utf-8')

@@ -19,13 +19,9 @@ import { computed, ref } from 'vue'
 import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VSliderThumbSlots } from './VSliderThumb'
-import type { VSliderTrackSlots } from './VSliderTrack'
-import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
+import type { VSliderSlots } from './VSlider.types'
 
-export type VSliderSlots = VInputSlots & VSliderThumbSlots & VSliderTrackSlots & {
-  label: VInputSlot
-}
+export type { VSliderSlots }
 
 export const makeVSliderProps = propsFactory({
   ...makeFocusProps(),

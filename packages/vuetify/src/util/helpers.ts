@@ -31,6 +31,7 @@ import type {
   VNodeChild,
 } from 'vue'
 import { isBoolean, isFunction, isNull, isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
+import type { SelectItemKey, TemplateRef, UnionToIntersection } from '@/util/shared.types'
 
 export function getNestedValue (obj: any, path: readonly (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -58,11 +59,7 @@ export function getObjectValueByPath (obj: any, path?: string | null, fallback?:
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey<T = Record<string, any>> =
-  | boolean | null | undefined // Ignored
-  | string // Lookup by key, can use dot notation for nested objects
-  | readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
-  | ((item: T, fallback?: any) => any)
+export type { SelectItemKey }
 
 export function getPropertyFromItem (
   item: any,
@@ -560,8 +557,7 @@ export class CircularBuffer<T = never> {
   }
 }
 
-export type UnionToIntersection<U> =
-  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+export type { UnionToIntersection }
 
 export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   if ('touches' in e) {
@@ -763,11 +759,7 @@ export function defer (timeout: number, cb: () => void) {
   return () => window.clearTimeout(timeoutId)
 }
 
-export type TemplateRef = {
-  (target: Element | ComponentPublicInstance | null): void
-  value: HTMLElement | ComponentPublicInstance | null | undefined
-  readonly el: HTMLElement | undefined
-}
+export type { TemplateRef }
 export function templateRef () {
   const el = shallowRef<HTMLElement | ComponentPublicInstance | null>()
   const fn = (target: HTMLElement | ComponentPublicInstance | null) => {

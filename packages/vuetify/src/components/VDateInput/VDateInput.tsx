@@ -26,23 +26,11 @@ import { genericComponent, isFunction, omit, pick, propsFactory, useRender, wrap
 
 // Types
 import type { PropType } from 'vue'
-import type { VDatePickerSlots } from '@/components/VDatePicker/VDatePicker'
+import type { VDateInputActionsSlot, VDateInputSlots } from './VDateInput.types'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
 import type { GenericProps } from '@/util'
 
-// Types
-export type VDateInputActionsSlot = {
-  save: () => void
-  cancel: () => void
-  isPristine: boolean
-}
-
-export type VDateInputSlots = Omit<VTextFieldSlots, 'default'> &
-  Pick<VDatePickerSlots, 'title' | 'header' | 'day' | 'month' | 'year'> & {
-    actions: VDateInputActionsSlot
-    default: never
-  }
+export type { VDateInputActionsSlot, VDateInputSlots }
 
 export const makeVDateInputProps = propsFactory({
   displayFormat: {

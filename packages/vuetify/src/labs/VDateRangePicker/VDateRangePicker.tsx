@@ -16,13 +16,11 @@ import { computed, nextTick, shallowRef, watch } from 'vue'
 import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VDateRangePickerSlots } from './VDateRangePicker.types'
 import type { VDatePickerControlsDefaultSlotProps } from '@/components/VDatePicker/VDatePickerControls'
 import type { GenericProps } from '@/util'
 
-export type VDateRangePickerSlots = {
-  default: never
-  footer: never
-}
+export type { VDateRangePickerSlots }
 
 const datePickerForwardedKeys = [
   'min',

@@ -16,38 +16,12 @@ import { genericComponent, getIndentLines, pick, propsFactory, renderSlot } from
 
 // Types
 import type { PropType } from 'vue'
-import type { VTreeviewItemSlots } from './VTreeviewItem'
+import type { VTreeviewChildrenSlots } from './VTreeviewChildren.types'
 import type { InternalListItem } from '@/components/VList/VList'
 import type { SelectStrategyProp } from '@/composables/nested/nested'
 import type { GenericProps, IndentLinesVariant, IndentLineType } from '@/util'
 
-export type VTreeviewChildrenSlots<T> = {
-  [K in keyof Omit<VTreeviewItemSlots, 'default'>]: VTreeviewItemSlots[K] & {
-    item: T
-    internalItem: InternalListItem<T>
-  }
-} & {
-  default: never
-  item: {
-    props: InternalListItem['props'] & { indentLines?: IndentLineType[] }
-    item: T
-    internalItem: InternalListItem<T>
-  }
-  header: {
-    props: InternalListItem['props'] & { indentLines?: IndentLineType[] }
-    item: T
-    internalItem: InternalListItem<T>
-    loading: boolean
-  }
-  footer: {
-    props: { indentLines?: IndentLineType[] }
-    item: T
-    internalItem: InternalListItem<T>
-    loading: boolean
-  }
-  divider: { props: InternalListItem['props'] }
-  subheader: { props: InternalListItem['props'] }
-}
+export type { VTreeviewChildrenSlots }
 
 export const makeVTreeviewChildrenProps = propsFactory({
   fluid: Boolean,

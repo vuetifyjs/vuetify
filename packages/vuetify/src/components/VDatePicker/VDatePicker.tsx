@@ -23,28 +23,10 @@ import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { convertToUnit, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
-import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
-import type { VDatePickerMonthSlots } from './VDatePickerMonth'
-import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
-import type { VDatePickerYearsSlots } from './VDatePickerYears'
-import type { VPickerSlots } from '@/components/VPicker/VPicker'
+import type { VDatePickerSlots } from './VDatePicker.types'
 import type { GenericProps } from '@/util'
 
-// Types
-export type VDatePickerSlots =
-  & Omit<VPickerSlots, 'header' | 'default'>
-  & Omit<VDatePickerHeaderSlots, 'default'>
-  & VDatePickerYearsSlots
-  & VDatePickerMonthsSlots
-  & VDatePickerMonthSlots
-  & {
-    header: {
-      header: string
-      transition: string
-    }
-    controls: VDatePickerControlsDefaultSlotProps
-  }
+export type { VDatePickerSlots }
 
 export const makeVDatePickerProps = propsFactory({
   // TODO: implement in v3.5

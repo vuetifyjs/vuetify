@@ -20,11 +20,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { Period, VTimePickerViewMode } from './shared'
-import type { VPickerSlots } from '@/components/VPicker/VPicker'
+import type { Variant, VTimePickerSlots } from './VTimePicker.types'
 
-export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
-
-type Variant = 'dial' | 'input'
+export type { VTimePickerSlots }
 
 export const makeVTimePickerProps = propsFactory({
   disabled: Boolean,

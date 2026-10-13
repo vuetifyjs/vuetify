@@ -1,2 +1,4 @@
-export type Period = 'am' | 'pm'
-export type VTimePickerViewMode = 'hour' | 'minute' | 'second'
+// Types
+import type { Period, VTimePickerViewMode } from './shared.types'
+
+export type { Period, VTimePickerViewMode }

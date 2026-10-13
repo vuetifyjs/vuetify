@@ -35,9 +35,10 @@ import { convertToUnit, genericComponent, isBoolean, isString, propsFactory, use
 
 // Types
 import type { PropType } from 'vue'
-import type { VCardItemSlots } from './VCardItem'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { VCardSlots } from './VCard.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
+
+export type { VCardSlots }
 
 export const makeVCardProps = propsFactory({
   appendAvatar: String,
@@ -83,15 +84,6 @@ export const makeVCardProps = propsFactory({
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
 }, 'VCard')
-
-export type VCardSlots = VCardItemSlots & {
-  default: never
-  actions: never
-  text: never
-  loader: LoaderSlotProps
-  image: never
-  item: never
-}
 
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',

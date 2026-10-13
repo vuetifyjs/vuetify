@@ -24,6 +24,9 @@ import { genericComponent, isObject, isString, propsFactory, useRender } from '@
 
 // Types
 import type { PropType } from 'vue'
+import type { VAvatarSlots } from './VAvatar.types'
+
+export type { VAvatarSlots }
 
 export const makeVAvatarProps = propsFactory({
   badge: {
@@ -45,11 +48,6 @@ export const makeVAvatarProps = propsFactory({
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
 }, 'VAvatar')
-
-export type VAvatarSlots = {
-  default: never
-  badge: never
-}
 
 export const VAvatar = genericComponent<VAvatarSlots>()({
   name: 'VAvatar',

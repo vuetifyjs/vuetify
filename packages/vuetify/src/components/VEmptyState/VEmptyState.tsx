@@ -21,21 +21,9 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
+import type { VEmptyStateSlots } from './VEmptyState.types'
 
-// Types
-
-export type VEmptyStateSlots = {
-  actions: {
-    props: {
-      onClick: (e: Event) => void
-    }
-  }
-  default: never
-  headline: never
-  title: never
-  media: never
-  text: never
-}
+export type { VEmptyStateSlots }
 
 export const makeVEmptyStateProps = propsFactory({
   actionText: String,

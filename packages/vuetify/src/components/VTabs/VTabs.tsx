@@ -22,25 +22,10 @@ import { convertToUnit, genericComponent, isObject, pick, propsFactory, useRende
 
 // Types
 import type { PropType } from 'vue'
+import type { TabItem, VTabsSlot, VTabsSlots } from './VTabs.types'
 import type { GenericProps } from '@/util'
 
-export type TabItem = string | number | Record<string, any>
-
-export type VTabsSlot<T> = {
-  item: T
-}
-
-export type VTabsSlots<T> = {
-  default: never
-  tab: VTabsSlot<T>
-  item: VTabsSlot<T>
-  window: never
-  prev: never
-  next: never
-} & {
-  [key: `tab.${string}`]: VTabsSlot<T>
-  [key: `item.${string}`]: VTabsSlot<T>
-}
+export type { TabItem, VTabsSlot, VTabsSlots }
 
 function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []

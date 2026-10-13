@@ -5,6 +5,7 @@ import { isString } from '@/util'
 // Types
 import type { InjectionKey, Ref } from 'vue'
 import type { LocaleInstance } from '@/composables/locale'
+import type { ValidationAlias, ValidationRuleParams } from '@/composables/rules/rules.types'
 import type { ValidationProps, ValidationRule } from '@/composables/validation'
 
 export type ValidationRuleBuilderWithoutOptions = (err?: string) => ValidationRule
@@ -30,8 +31,7 @@ export type RulesOptions = {
   aliases?: Partial<RuleAliases>
 }
 
-type ValidationRuleParams = [any, string?]
-export type ValidationAlias = string | [string, ...ValidationRuleParams]
+export type { ValidationAlias }
 
 export type RulesInstance = {
   resolve: (fn: () => ValidationProps['rules']) => Readonly<Ref<any[]>>

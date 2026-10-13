@@ -4,28 +4,10 @@ import { getPropertyFromItem } from '@/util'
 
 // Types
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
+import type { PivotCell, PivotColumn, PivotGroup } from './pivot.types'
 import type { SelectItemKey } from '@/util'
 
-export interface PivotCell<T = Record<string, any>> {
-  value: any
-  raw: T
-  row: any
-  column: any
-  groupKey: string
-}
-
-export interface PivotColumn<C> {
-  key: string
-  cells: (C | null)[]
-  items: C[]
-}
-
-export interface PivotGroup<C> {
-  key: string
-  label: string
-  columns: PivotColumn<C>[]
-  items: C[]
-}
+export type { PivotCell, PivotColumn, PivotGroup }
 
 export interface PivotProps<T = Record<string, any>> {
   items: MaybeRefOrGetter<T[]>

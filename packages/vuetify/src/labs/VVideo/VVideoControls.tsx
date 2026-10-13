@@ -29,47 +29,13 @@ import { computed, Fragment, shallowRef, toRef } from 'vue'
 import { clamp, convertToUnit, formatTime, genericComponent, isUndefined, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type { VVideoAction, VVideoControlsActionsSlot, VVideoControlsPropsSlot, VVideoControlsSlots } from './VVideoControls.types'
 import type { VSlider } from '@/components/VSlider'
 import type { MediaSeekStep, MediaSeekTarget } from '@/labs/composables/media'
 import type { VMediaVolumeOptions, VMediaVolumeSlider } from '@/labs/VMediaVolume/VMediaVolume'
 
-export type VVideoAction =
-  | 'play' | 'progress' | 'time' | 'elapsed' | 'remaining' | 'volume' | 'fullscreen'
-  | 'prepend' | 'append' | '-' | (string & {})
-
-export type VVideoControlsActionsSlot = {
-  play: () => void
-  pause: () => void
-  seek: (target: MediaSeekTarget) => void
-  skipTo: (percent: number) => void
-  volume: Ref<number>
-  playing: boolean
-  progress: number
-  currentTime: { elapsed: string, remaining: string, total: string }
-  duration: number
-  toggleMuted: () => void
-  fullscreen: boolean
-  toggleFullscreen: () => void
-  labels: Record<string, string>
-}
-
-export type VVideoControlsPropsSlot = VVideoControlsActionsSlot & {
-  props: Record<string, unknown>
-}
-
-export type VVideoControlsSlots = {
-  [key: `action.${string}`]: VVideoControlsActionsSlot
-  default: VVideoControlsActionsSlot
-  play: VVideoControlsPropsSlot
-  progress: VVideoControlsPropsSlot
-  time: VVideoControlsActionsSlot
-  'time.elapsed': VVideoControlsActionsSlot
-  'time.remaining': VVideoControlsActionsSlot
-  'time.total': VVideoControlsActionsSlot
-  prepend: VVideoControlsActionsSlot
-  append: VVideoControlsActionsSlot
-}
+export type { VVideoAction, VVideoControlsActionsSlot, VVideoControlsPropsSlot, VVideoControlsSlots }
 
 const allowedVariants = ['hidden', 'default', 'tube', 'mini'] as const
 export type VVideoControlsVariant = typeof allowedVariants[number]

@@ -26,8 +26,9 @@ import { convertToUnit, genericComponent, getActiveElement, isFunction, omit, pr
 // Types
 import type { PropType, Ref } from 'vue'
 import type { VCommandPaletteItem as VCommandPaletteItemType } from './types'
-import type { VListChildrenSlots } from '@/components/VList/VListChildren'
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { VCommandPaletteSlots } from './VCommandPalette.types'
+
+export type { VCommandPaletteSlots }
 
 export const makeVCommandPaletteProps = propsFactory({
   modelValue: Boolean,
@@ -68,22 +69,6 @@ export const makeVCommandPaletteProps = propsFactory({
     viewportMargin: 16,
   }), ['modelValue']),
 }, 'VCommandPalette')
-
-export type VCommandPaletteSlots = {
-  activator: OverlaySlots['activator']
-  default: never
-  prepend: never
-  append: never
-  input: never
-  'input.append-inner': never
-  'no-data': never
-  'list.prepend': never
-  'list.subheader': VListChildrenSlots<any>['subheader']
-  item: { item: VCommandPaletteItemType, index: number }
-  'item.prepend': { item: VCommandPaletteItemType, index: number }
-  'item.title': { item: VCommandPaletteItemType, index: number }
-  'item.append': { item: VCommandPaletteItemType, index: number }
-}
 
 export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
   name: 'VCommandPalette',

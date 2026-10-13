@@ -17,6 +17,7 @@ import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTIO
 
 // Types
 import type { PropType } from 'vue'
+import type { VProgressCircularSlots } from './VProgressCircular.types'
 
 export const makeVProgressCircularProps = propsFactory({
   bgColor: String,
@@ -46,10 +47,6 @@ export const makeVProgressCircularProps = propsFactory({
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
 }, 'VProgressCircular')
-
-type VProgressCircularSlots = {
-  default: { value: number }
-}
 
 export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',

@@ -3,10 +3,9 @@ import { propsFactory } from '@/util/propsFactory'
 
 // Types
 import type { PropType, StyleValue } from 'vue'
+import type { ClassValue } from '@/util/shared.types'
 
-// TODO: import from vue once upstream PR is merged
-// https://github.com/vuejs/core/pull/14441
-export type ClassValue = any
+export type { ClassValue }
 
 export interface ComponentProps {
   class: ClassValue

@@ -8,6 +8,9 @@ import { isFunction, isNullOrUndefined, propsFactory, wrapInArray } from '@/util
 
 // Types
 import type { PropType } from 'vue'
+import type { CalendarWeekdays } from './calendar.types'
+
+export type { CalendarWeekdays }
 
 // Types
 export interface CalendarProps {
@@ -49,8 +52,6 @@ export type CalendarDay = {
   month: number
   year: number
 }
-
-export type CalendarWeekdays = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 // Composables
 export const makeCalendarProps = propsFactory({

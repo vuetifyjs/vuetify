@@ -13,6 +13,7 @@ import { convertToUnit, deprecate, genericComponent, propsFactory } from '@/util
 
 // Types
 import type { PropType } from 'vue'
+import type { Gap } from './VRow.types'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
@@ -34,8 +35,6 @@ const propMap = {
 }
 
 const gapProps = ['gap', 'gapSm', 'gapMd', 'gapLg', 'gapXl', 'gapXxl'] as const
-
-type Gap = number | string | (string | number)[]
 
 const classMap = {
   align: 'align',

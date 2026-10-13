@@ -2,21 +2,13 @@
 import { isFunction, isSymbol } from '@/util'
 
 // Types
-import type { ComponentOptionsBase, ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
-import type { NonEmptyArray, UnionToIntersection } from '@/util'
+import type { ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
+import type { ForwardRefs } from './forwardRefs.types'
+import type { NonEmptyArray } from '@/util'
+
+export type { ForwardRefs }
 
 const Refs = Symbol('Forwarded refs')
-
-/** Omit properties starting with P */
-type OmitPrefix<
-  T,
-  P extends string,
-  E = Extract<keyof T, `${P}${any}`>,
-> = [E] extends [never] ? T : Omit<T, `${P}${any}`>
-type OmitPrivate<T> = OmitPrefix<T, '$'>
-
-/** Omit keyof $props from T */
-type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : T
 
 function getDescriptor (obj: any, key: PropertyKey) {
   let currentObj = obj
@@ -31,18 +23,7 @@ function getDescriptor (obj: any, key: PropertyKey) {
 export function forwardRefs<
   T extends {},
   U extends NonEmptyArray<Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>>,
-  UU = { [K in keyof U]: NonNullable<UnwrapRef<U[K]>> }[number],
-  UC = { [K in keyof U]: OmitPrivate<OmitProps<NonNullable<UnwrapRef<U[K]>>>> }[number],
-  R = T & UnionToIntersection<UC> & {
-    _allExposed: T | (
-      UU extends { $options: infer O }
-        ? O extends ComponentOptionsBase<any, infer E, any, any, any, any, any, any>
-          ? E
-          : never
-        : never
-    )
-  }
-> (target: T, ...refs: U): R {
+> (target: T, ...refs: U): ForwardRefs<T, { [K in keyof U]: NonNullable<UnwrapRef<U[K]>> }> {
   (target as any)[Refs] = refs
 
   return new Proxy(target, {

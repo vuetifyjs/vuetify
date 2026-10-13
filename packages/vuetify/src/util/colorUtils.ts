@@ -7,16 +7,15 @@ import * as CIELAB from '@/util/color/transformCIELAB'
 import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
+import type { Color, HSL, HSV, RGB } from './colorUtils.types'
 import { isNullOrUndefined, isNumber, isString } from './v0'
 import type { Colors } from '@/composables/theme'
 
+export type { Color, HSL, HSV, RGB }
+
 export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
-export type HSV = { h: number, s: number, v: number, a?: number }
-export type RGB = { r: number, g: number, b: number, a?: number }
-export type HSL = { h: number, s: number, l: number, a?: number }
 export type Hex = string & { __hexBrand: never }
-export type Color = string | number | HSV | RGB | HSL
 
 export function isCssColor (color?: string | null | false): boolean {
   return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
