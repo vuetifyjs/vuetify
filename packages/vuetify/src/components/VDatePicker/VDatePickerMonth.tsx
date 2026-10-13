@@ -16,12 +16,24 @@ import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, isFunction, isObject, isString, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, mergeProps, nextTick, shallowRef, toRef, useId, watch } from 'vue'
+import {
+  chunkArray,
+  genericComponent,
+  getPrefixedEventHandlers,
+  isFunction,
+  isObject,
+  isString,
+  omit,
+  pick,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarWeekdays } from '@/composables/calendar'
+import type { CalendarDay, CalendarWeekdays } from '@/composables/calendar'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -31,6 +43,8 @@ Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventCo
 
 export type DatePickerEvents = string[] |
 ((date: string) => DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
+
+export type DatePickerDay = Pick<CalendarDay, 'date' | 'isoDate' | 'isAdjacent' | 'isToday'>
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -88,7 +102,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const uid = useId()
     const { t } = useLocale()
 
@@ -388,9 +402,10 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   const previewStart = range.isPreviewStart(item.date)
                   const previewEnd = range.isPreviewEnd(item.date)
                   const previewMiddle = range.isPreviewMiddle(item.date)
+                  const events = getPrefixedEventHandlers(attrs, ':day', () => pick(item, ['date', 'isoDate', 'isAdjacent', 'isToday']))
 
                   const slotProps = {
-                    props: {
+                    props: mergeProps({
                       class: 'v-date-picker-month__day-btn',
                       color: ((isSelected && !rangeMiddle) || item.isToday) ? props.color : undefined,
                       disabled,
@@ -408,7 +423,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                       onMouseenter: () => range.setPreview(item.date),
                       onFocus: () => range.setPreview(item.date),
                       onBlur: range.clearPreview,
-                    },
+                    }, events) as VDatePickerMonthSlots['day']['props'],
                     item,
                     i,
                   } as const
