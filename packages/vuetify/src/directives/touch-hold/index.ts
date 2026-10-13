@@ -5,7 +5,9 @@ import { isFunction, isUndefined } from '@/util'
 import type { DirectiveBinding } from 'vue'
 
 export interface TouchHoldEvent {
+  // Android fires contextmenu for a long-press, so the event type does not tell the input apart
   originalEvent: TouchEvent | MouseEvent
+  touch: boolean
   target: HTMLElement
   clientX: number
   clientY: number
@@ -81,7 +83,7 @@ export function createTouchHold (options: TouchHoldOptions) {
     target.addEventListener('touchcancel', onTouchend as EventListener)
     window.addEventListener('contextmenu', onContextmenu, { capture: true })
 
-    timer = window.setTimeout(() => trigger(e), state.options.duration ?? 500)
+    timer = window.setTimeout(() => trigger(e, true), state.options.duration ?? 500)
   }
 
   function onMousedown (e: MouseEvent) {
@@ -102,16 +104,16 @@ export function createTouchHold (options: TouchHoldOptions) {
     window.addEventListener('mousemove', onMousemove, { passive: true })
     window.addEventListener('click', onClick, { capture: true })
 
-    timer = window.setTimeout(() => trigger(e), state.options.duration ?? 500)
+    timer = window.setTimeout(() => trigger(e, false), state.options.duration ?? 500)
   }
 
-  function trigger (originalEvent: TouchEvent | MouseEvent) {
+  function trigger (originalEvent: TouchEvent | MouseEvent, touch: boolean) {
     clearTimeout(timer)
     held = true
     getSelection()?.removeAllRanges()
     handling = true
     try {
-      state.options.handler({ originalEvent, target: press!.el, clientX: press!.x, clientY: press!.y })
+      state.options.handler({ originalEvent, touch, target: press!.el, clientX: press!.x, clientY: press!.y })
     } finally {
       handling = false
     }
@@ -149,7 +151,7 @@ export function createTouchHold (options: TouchHoldOptions) {
     if (handling || !press?.el.contains(e.target as Node)) return
     e.preventDefault()
     e.stopImmediatePropagation()
-    if (!held) trigger(e)
+    if (!held) trigger(e, true)
   }
 
   function end () {

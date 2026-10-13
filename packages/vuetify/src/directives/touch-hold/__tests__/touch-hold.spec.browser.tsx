@@ -45,7 +45,7 @@ describe('v-touch-hold', () => {
     expect(el.style.getPropertyValue('user-select')).toBe('none')
 
     await expect.poll(() => handler).toHaveBeenCalledTimes(1)
-    expect(handler.mock.calls[0][0]).toMatchObject({ target: el, clientX: 20, clientY: 30 })
+    expect(handler.mock.calls[0][0]).toMatchObject({ target: el, touch: true, clientX: 20, clientY: 30 })
     expect(dispatch('touchend', inner).defaultPrevented).toBe(true)
 
     await expect.poll(() => el.style.getPropertyValue('user-select')).toBe('')
@@ -129,6 +129,7 @@ describe('v-touch-hold', () => {
 
     el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientX: 50, clientY: 50 }))
     await expect.poll(() => handler).toHaveBeenCalledTimes(1)
+    expect(handler.mock.calls[0][0]).toMatchObject({ touch: false, clientX: 50, clientY: 50 })
 
     el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
     expect(onClick).not.toHaveBeenCalled()

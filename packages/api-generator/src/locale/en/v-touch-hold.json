@@ -1,5 +1,5 @@
 {
-  "value": "Takes either a function or an object with `handler` and `duration` (in milliseconds, 500 by default). The handler receives `originalEvent` (the `touchstart`, the `mousedown`, or the `contextmenu` Android fires for the same hold), `target` (the element the directive is bound to) and `clientX`/`clientY` where the hold started. Moving more than 10px or releasing early cancels the hold.",
+  "value": "Takes either a function or an object with `handler` and `duration` (in milliseconds, 500 by default). The handler receives `originalEvent` (the `touchstart`, the `mousedown`, or the `contextmenu` Android fires for the same hold), `touch` (false only for a mouse hold, whatever the event type), `target` (the element the directive is bound to) and `clientX`/`clientY` where the hold started. Moving more than 10px or releasing early cancels the hold.",
   "modifiers": {
     "mouse": "Also hold with the left mouse button, for desktop users. The click that would follow the hold is cancelled."
   }
