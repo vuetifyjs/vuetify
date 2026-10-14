@@ -141,7 +141,15 @@
         activeStack.splice(activeStack.indexOf(entry.target.id), 1)
       }
     })
-    activeItem.value = activeStack.at(-1) || activeItem.value || frontmatter.value?.toc?.[0]?.to.slice(1) || ''
+    // Enter page from left aside -> click toc slots link -> re-enter page from left aside.
+    // The observer band is rootMargin: '-10% 0px -75%', a thin zone in the upper viewport.
+    // After "click Slots → click left link → instant jump to top", the Slots section leaves
+    // the band and — because of the page's tall header/search area — no section has entered
+    // it yet.
+    // Stack goes empty, and the || activeItem.value fallback deliberately keeps the previous
+    // value: stale "Slots" highlight at the top of the page.
+    const firstEntry = frontmatter.value?.toc?.[0]?.to.slice(1) || ''
+    activeItem.value = activeStack.at(-1) || (window.scrollY < 200 ? firstEntry : activeItem.value) || firstEntry
   }, { rootMargin: '-10% 0px -75%' })
 
   async function observeToc () {
@@ -150,7 +158,7 @@
     observer.disconnect()
     await nextTick()
     frontmatter.value?.toc?.forEach(v => {
-      const el = document.querySelector(v.to)
+      const el = document.getElementById(v.to.slice(1))
       el && observer.observe(el)
     })
   }
@@ -169,8 +177,10 @@
     if (!val || internalScrolling) return
 
     const query = route.query
+    const firstEntry = frontmatter.value?.toc?.[0]?.to.slice(1)
 
-    if (val === frontmatter.value?.toc?.[0]?.to.slice(1) && route.hash) {
+    // preserve hash when it is present on the url (page refresh)
+    if (val === firstEntry && route.hash && route.hash.slice(1) !== val) {
       router.replace({ path: route.path, query })
     } else {
       const toc = frontmatter.value?.toc?.find(v => v.to.slice(1) === val)
@@ -180,6 +190,27 @@
     }
   })
 
+  function handleScroll (top: number, el: HTMLElement) {
+    // If the user does not want animations, or the jump is greater than 500 pixels, instant.
+    const isReduced =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      Math.abs(top) > 500
+
+    // Listener to release internalScrolling just at the end of the animation
+    let fallbackTimeout: ReturnType<typeof setTimeout>
+    const onScrollEnd = () => {
+      internalScrolling = false
+      clearTimeout(fallbackTimeout)
+      document.removeEventListener('scrollend', onScrollEnd)
+    }
+    document.addEventListener('scrollend', onScrollEnd)
+
+    // Security fallback of 1000ms for older browsers or instant jumps
+    fallbackTimeout = setTimeout(onScrollEnd, 1000)
+
+    el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+  }
+
   async function onClick (hash: string) {
     internalScrolling = true
     await router.replace({ path: route.path, hash })
@@ -187,24 +218,15 @@
     // avoid CSS selector issues by only allowing ID selectors
     const el = document.getElementById(hash.slice(1))
     if (el) {
-      // If the user does not want animations, or the jump is greater than 500 pixels, instant.
-      const isReduced =
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        Math.abs(el.getBoundingClientRect().top) > 500
-
-      // Listener to release internalScrolling just at the end of the animation
-      let fallbackTimeout: ReturnType<typeof setTimeout>
-      const onScrollEnd = () => {
-        internalScrolling = false
-        clearTimeout(fallbackTimeout)
-        document.removeEventListener('scrollend', onScrollEnd)
-      }
-      document.addEventListener('scrollend', onScrollEnd)
-
-      // Security fallback of 1000ms for older browsers or instant jumps
-      fallbackTimeout = setTimeout(onScrollEnd, 1000)
-
-      el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+      requestAnimationFrame(() => {
+        // give scroll spy a chance to update the activeItem before forcing a re-layout
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            // force re-layout only once
+            handleScroll(el.getBoundingClientRect().top, el)
+          })
+        }, 0)
+      })
     } else {
       // release the internalScrolling flag if the element is not found, to avoid locking the state
       internalScrolling = false
