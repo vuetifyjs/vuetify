@@ -2,8 +2,9 @@
 import { VSparklineTooltip } from './VSparklineTooltip'
 
 // Utilities
-import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
+import { computed, Fragment, inject, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
 import { buildPath, extendPoints, makeLineProps, resample } from './util/line'
+import { indexAt, VSparklineGroupSymbol } from '@/labs/VSparklineGroup/sparklineGroup'
 import { genericComponent, getPropertyFromItem, isNumber, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
@@ -35,6 +36,7 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
 
   setup (props, { slots, attrs, emit }) {
     const uid = useId()
+    const group = inject(VSparklineGroupSymbol, null)
     const id = computed(() => props.id || `trendline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || (props.fill ? 500 : 2000))
 
@@ -207,7 +209,8 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
         path.style.transition = `stroke-dashoffset ${autoDrawDuration.value}ms ${props.autoDrawEasing}${dTransition}`
         path.style.strokeDashoffset = '0'
 
-        if (shouldDrawOnce) {
+        // a stale dasharray truncates the line once its length changes (e.g. resized group)
+        if (shouldDrawOnce || group) {
           path.addEventListener('transitionend', e => {
             if (e.propertyName !== 'stroke-dashoffset') return
             path.style.strokeDasharray = ''
@@ -254,6 +257,15 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
     const svgRef = shallowRef<SVGSVGElement | null>(null)
     const currentIndex = shallowRef<number | null>(null)
     const tooltipVisible = shallowRef(false)
+    const isInteractive = toRef(() => group ? group.interactive.value : props.interactive)
+    const listens = toRef(() => props.interactive && !group)
+
+    if (group) {
+      watch(() => group.fraction.value === null ? null : indexAt('trend', points.value.length, group.fraction.value), index => {
+        currentIndex.value = index
+        emit('update:currentIndex', index)
+      })
+    }
 
     const currentPoint = computed(() =>
       currentIndex.value !== null ? points.value[currentIndex.value] : null
@@ -382,12 +394,12 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
             ref={ svgRef }
             display="block"
             stroke-width={ parseFloat(props.lineWidth) ?? 4 }
-            tabindex={ props.interactive ? 0 : undefined }
-            onMousemove={ props.interactive ? onSvgMousemove : undefined }
-            onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
-            onFocus={ props.interactive ? onSvgFocus : undefined }
-            onBlur={ props.interactive ? onSvgBlur : undefined }
-            onKeydown={ props.interactive ? onSvgKeydown : undefined }
+            tabindex={ listens.value ? 0 : undefined }
+            onMousemove={ listens.value ? onSvgMousemove : undefined }
+            onMouseleave={ listens.value ? onSvgMouseleave : undefined }
+            onFocus={ listens.value ? onSvgFocus : undefined }
+            onBlur={ listens.value ? onSvgBlur : undefined }
+            onKeydown={ listens.value ? onSvgKeydown : undefined }
             { ...attrs }
           >
             <defs>
@@ -465,9 +477,9 @@ export const VTrendline = genericComponent<VTrendlineSlots>()({
               </g>
             )}
 
-            { props.interactive && currentPoint.value && (
+            { isInteractive.value && currentPoint.value && (
               <g key="hover" pointer-events="none">
-                { tooltipConfig.value.showCrosshair && (
+                { tooltipConfig.value.showCrosshair && !group && (
                   <line
                     key="crosshair-line"
                     x1={ markerPoint.value.x }

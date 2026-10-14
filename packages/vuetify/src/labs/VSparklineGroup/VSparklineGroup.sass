@@ -1,0 +1,56 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-sparkline-group
+    display: grid
+    grid-template-areas: 'y plot' '. x'
+    grid-template-columns: auto 1fr
+    padding-block: $sparkline-group-padding-block
+
+    &__y-axis
+      grid-area: y
+      padding-inline-end: $sparkline-group-gap
+
+    &__x-axis
+      grid-area: x
+      padding-top: $sparkline-group-gap
+
+    &__plot
+      grid-area: plot
+      position: relative
+      display: grid
+      height: var(--v-sparkline-group-height)
+      outline: none
+
+      > svg
+        grid-area: 1 / 1
+        align-self: end
+        position: relative
+        overflow: visible
+
+    &__grid-line
+      position: absolute
+      inset-inline: 0
+      bottom: calc(var(--v-chart-axis-position) * 100%)
+      border-bottom: $sparkline-group-grid-line-border
+      transition: $chart-axis-transition
+      pointer-events: none
+
+    &__crosshair
+      position: absolute
+      inset-block: 0
+      left: calc(var(--v-sparkline-group-cursor) * 100%)
+      border-inline-start: $sparkline-group-crosshair-border
+      opacity: $sparkline-group-crosshair-opacity
+      pointer-events: none
+
+    &__tooltip-item
+      display: flex
+      align-items: center
+      gap: 6px
+
+  @media (forced-colors: active)
+    .v-sparkline-group__grid-line,
+    .v-sparkline-group__crosshair
+      border-color: CanvasText

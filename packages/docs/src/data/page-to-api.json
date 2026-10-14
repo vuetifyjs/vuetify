@@ -149,6 +149,7 @@
   "components/sliders": ["VRangeSlider", "VSlider"],
   "components/snackbar-queue": ["VSnackbarQueue", "VSnackbar"],
   "components/snackbars": ["VSnackbar"],
+  "components/sparkline-groups": ["VSparklineGroup", "VSparkline"],
   "components/sparklines": ["VSparkline", "VSparklineTooltip"],
   "components/speed-dials": ["VSpeedDial"],
   "components/split-buttons": ["VSplitBtn"],
