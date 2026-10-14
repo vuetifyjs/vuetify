@@ -1,0 +1,31 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@property --v-chart-axis-position
+  syntax: '<number>'
+  inherits: false
+  initial-value: 0
+
+@include tools.layer('components')
+  .v-chart-axis
+    display: grid
+    font-size: $chart-axis-font-size
+    color: $chart-axis-color
+    white-space: nowrap
+
+    &__tick
+      grid-area: 1 / 1
+      position: relative
+      transition: $chart-axis-transition
+
+    &--vertical &__tick
+      align-self: end
+      justify-self: end
+      bottom: calc(var(--v-chart-axis-position) * 100%)
+      translate: 0 50%
+
+    // physical: the plotted SVG does not mirror in RTL
+    &--horizontal &__tick
+      justify-self: start
+      left: calc(var(--v-chart-axis-position) * 100%)
+      translate: calc(var(--v-chart-axis-position) * -100%) 0
