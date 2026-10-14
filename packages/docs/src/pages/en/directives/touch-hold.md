@@ -16,6 +16,12 @@ The `v-touch-hold` directive calls a function when the user touches an element a
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v4.3.0](/getting-started/release-notes/?version=v4.3.0)
+
+:::
+
 ## Usage
 
 Touch and hold a file to start selecting, or hold the left mouse button with the `mouse` modifier. Once a hold fires, the click that would follow it is cancelled, and the browser's own long-press behavior (text selection, the iOS link callout and the Android context menu) is suppressed for the element.
@@ -37,3 +43,11 @@ Keyboard users reach neither gesture, so pair the directive with a `@contextmenu
 | [v-touch-hold](/api/v-touch-hold-directive/) | The touch hold directive |
 
 <ApiInline hide-links />
+
+## Examples
+
+### Photo gallery
+
+Desktop users get a checkbox on hover, while touch users hold a photo to start selecting and then tap to toggle more.
+
+<ExamplesExample file="v-touch-hold/misc-gallery" />
