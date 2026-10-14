@@ -302,7 +302,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                             const { props: rowProps, ...itemSlot } = itemSlotProps
                             const index = itemSlotProps.internalItem.virtualIndex ?? itemSlotProps.internalItem.index
                             const itemExpanded = isExpanded(itemSlotProps.internalItem)
-                            const expandedRows = props.showExpand && itemExpanded && slots['expanded-row']
+                            const expandedRows = itemExpanded && slots['expanded-row']
                               ? elementNodes(slots['expanded-row'](itemSlot))
                               : []
 
@@ -330,7 +330,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   )}
                                 </VVirtualScrollItem>
 
-                                { props.showExpand && slots['expanded-row'] && expandedRows.map((node, row) => (
+                                { slots['expanded-row'] && expandedRows.map((node, row) => (
                                   <VVirtualScrollItem
                                     key={ `${index}-expanded-${row}` }
                                     renderless
