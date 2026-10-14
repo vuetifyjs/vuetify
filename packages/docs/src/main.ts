@@ -6,14 +6,13 @@ import 'prism-theme-vars/base.css'
 import * as Swetrix from 'swetrix'
 import * as Sentry from '@sentry/vue'
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, START_LOCATION } from 'vue-router'
 import { createHead } from '@unhead/vue/client'
 import { installVuetify } from '@/plugins/vuetify'
 import { installPinia, pinia } from '@/plugins/pinia'
 import { installGlobalComponents } from '@/plugins/global-components'
 import { installOne } from '@/plugins/one'
 import { installI18n } from '@/plugins/i18n'
-import { useAppStore } from '@/stores/app'
 import { useLocaleStore } from '@/stores/locale'
 import { installPwa } from '@/plugins/pwa'
 import { useUserStore } from '@vuetify/one'
@@ -41,7 +40,6 @@ import { IN_BROWSER } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
-const appStore = useAppStore(pinia)
 const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
@@ -78,6 +76,67 @@ if (IN_BROWSER) {
   })
 }
 
+const waitForElementStable = (selector: string, maxWaitMs = 3000): Promise<boolean> => {
+  return new Promise<boolean>(resolve => {
+    const startTime = performance.now()
+    let lastTop: number | null = null
+    let stableFrames = 0
+    let userAborted = false
+
+    // Listen for user events to abort the automatic scroll
+    const abortEvents = ['wheel', 'touchmove', 'keydown']
+    const onUserInteraction = () => {
+      userAborted = true
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      cleanup()
+      // Return false to cancel the scrollIntoView
+      resolve(false)
+    }
+
+    const cleanup = () => {
+      abortEvents.forEach(e => window.removeEventListener(e, onUserInteraction, { capture: true }))
+    }
+
+    // Register the listeners (once: true so they clean up automatically when triggered)
+    abortEvents.forEach(e => window.addEventListener(e, onUserInteraction, { capture: true, once: true, passive: true }))
+
+    const checkFrame = (currentTime: number) => {
+      // If the user moved, stop the loop immediately
+      if (userAborted) return
+
+      // abort if we exceed 3 seconds (bounded)
+      if (currentTime - startTime > maxWaitMs) {
+        cleanup()
+        return resolve(false)
+      }
+
+      // avoid CSS selector issues by only allowing ID selectors
+      const el = document.getElementById(selector.slice(1))
+      if (el) {
+        const currentTop = el.getBoundingClientRect().top
+        // Check if the Y position is identical to the previous frame
+        if (lastTop === currentTop) {
+          stableFrames++
+          // If it has been stable for 3 consecutive frames, consider it "position stable"
+          if (stableFrames >= 3) {
+            cleanup()
+            return resolve(true)
+          }
+        } else {
+          // If it has moved, reset the counter
+          stableFrames = 0
+          lastTop = currentTop
+        }
+      }
+
+      // next frame
+      requestAnimationFrame(checkFrame)
+    }
+
+    requestAnimationFrame(checkFrame)
+  })
+}
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -107,31 +166,61 @@ const router = createRouter({
     },
   ],
   async scrollBehavior (to, from, savedPosition) {
-    if (appStore.scrolling) return
+    // 1: Table of Contents (TOC) rewrites should never scroll: Toc.vue will scroll.
+    if (to.path === from.path && to.hash !== from.hash) return false
 
-    let main = IN_BROWSER && document.querySelector('main')
-    // For default & hash navigation
-    let wait = 0
+    // 2: Initial load
+    if (from === START_LOCATION) {
+      // Respect browser reload convention: restore saved position if available
+      if (savedPosition) {
+        return savedPosition
+      }
 
-    if (!main) {
-      // For initial page load
-      wait = 1500
-      main = document.querySelector('main')
-    } else if (to.path !== from.path && to.hash) {
-      // For cross page navigation
-      wait = 500
+      if (to.hash) {
+        // We do the rAF poll limited to 3s
+        const isStable = await waitForElementStable(to.hash, 3000)
+
+        if (isStable) {
+          // avoid CSS selector issues by only allowing ID selectors
+          const el = document.getElementById(to.hash.slice(1))
+          if (el) {
+            // manual scroll with "instant" (without behavior: smooth) because the user just entered the page
+            // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
+            el.scrollIntoView({ behavior: 'instant' })
+          }
+        }
+        // If unstable or aborted by user interaction, do not yank to top; stay put
+        return false
+      }
+      return { top: 0 }
     }
 
-    await (new Promise(resolve => setTimeout(resolve, wait)))
+    // 3: Standard navigation crossing pages
+    if (to.path !== from.path && to.hash) {
+      // We use the rAF poll instead of a blind 500ms timeout
+      const isStable = await waitForElementStable(to.hash, 3000)
 
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: main ? 'smooth' : undefined,
-        top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+      if (isStable) {
+        // avoid CSS selector issues by only allowing ID selectors
+        const el = document.getElementById(to.hash.slice(1))
+        if (el) {
+          // manual scroll with "instant/smooth"
+          // vue-router's scrollBehavior uses scrollTo that does no respect scroll-margin-top CSS rule
+          const isReduced =
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            Math.abs(el.getBoundingClientRect().top) > 500
+
+          el.scrollIntoView({ behavior: isReduced ? 'instant' : 'smooth' })
+        }
       }
-    } else if (savedPosition) return savedPosition
-    else return { top: 0 }
+
+      // Fallback if the element is not found or the user aborted; do not jump to top
+      return false
+    } else if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
   },
 })
 
