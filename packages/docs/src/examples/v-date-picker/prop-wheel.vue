@@ -1,7 +1,7 @@
 <template>
   <v-row class="justify-center">
     <v-date-picker
-      scrollable
+      wheel
       show-adjacent-months
     ></v-date-picker>
   </v-row>

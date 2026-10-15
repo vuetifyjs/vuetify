@@ -2,7 +2,7 @@
 import { VDatePicker } from '..'
 
 // Utilities
-import { render, screen, userEvent, waitIdle } from '@test'
+import { render, screen, userEvent, wait, waitIdle } from '@test'
 import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { nextTick, ref } from 'vue'
@@ -165,33 +165,37 @@ describe('VDatePicker', () => {
     expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
   })
 
-  it('scrollable should navigate to next month on mouse wheel', async () => {
+  it('navigates months with horizontal wheel only when wheel is set', async () => {
     render(() => (
-      <VDatePicker
-        modelValue="2026-01-15"
-        month={ 0 }
-        year={ 2026 }
-        scrollable
-      />
+      <VDatePicker modelValue="2026-01-15" max="2026-02-20" wheel />
     ))
 
-    const days = document.querySelector('.v-date-picker-month__days')
-    expect(days).not.toBeNull()
+    const days = () => document.querySelector('.v-date-picker-month__days')!
+    const wheel = (init: WheelEventInit) => {
+      const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, ...init })
+      days().dispatchEvent(event)
+      return event
+    }
 
-    days!.dispatchEvent(new WheelEvent('wheel', { deltaY: 1, bubbles: true, cancelable: true }))
+    expect(wheel({ deltaY: 100 }).defaultPrevented).toBe(false)
     await nextTick()
+    expect(document.querySelector('[data-v-date="2026-01-20"]')).not.toBeNull()
 
-    expect(document.querySelector('[data-v-date="2026-02-15"]')).not.toBeNull()
+    expect(wheel({ deltaY: 100, shiftKey: true }).defaultPrevented).toBe(true)
+    // inertia from the same gesture is swallowed
+    wheel({ deltaX: 100 })
+    await nextTick()
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).not.toBeNull()
+
+    // polling would fire events and keep renewing the lock
+    await wait(200)
+    expect(wheel({ deltaX: 100 }).defaultPrevented).toBe(false)
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).not.toBeNull()
   })
 
-  it('scrollable should navigate to next month on swipe gesture', async () => {
+  it('navigates to next month on swipe gesture', async () => {
     render(() => (
-      <VDatePicker
-        modelValue="2026-01-15"
-        month={ 0 }
-        year={ 2026 }
-        scrollable
-      />
+      <VDatePicker modelValue="2026-01-15" />
     ))
 
     const days = document.querySelector('.v-date-picker-month__days')

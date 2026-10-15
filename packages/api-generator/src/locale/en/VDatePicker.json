@@ -20,9 +20,9 @@
     "nextIcon": "Sets the icon for next month/year button.",
     "prevIcon": "Sets the icon for previous month/year button.",
     "readonly": "Makes the picker readonly (doesn't allow to select new date).",
-    "scrollable": "Enables mouse wheel and touch swipe interactions to navigate between months.",
     "showAdjacentMonths": "Toggles visibility of days from previous and next months.",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar.",
+    "wheel": "Navigate between months with the mouse wheel or trackpad. Responds to horizontal scrolling or Shift + wheel.",
     "width": "Width of the picker.",
     "modeIcon": "Icon displayed next to the current month and year, toggles year selection when clicked.",
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`."
