@@ -5,7 +5,7 @@
 
 @mixin background-color($color_value) {
   & {
-    background-color: $color_value;
+    background-color: color-mix(in srgb, $color_value calc(var(--v-background-opacity, 1) * 100%), transparent);
   }
 }
 @mixin text-color($color_value) {

@@ -81,15 +81,23 @@
       width: $navigation-drawer-img-width
 
   .v-navigation-drawer__scrim
+    --v-navigation-drawer-scrim-opacity: var(--v-scrim-opacity, #{$navigation-drawer-scrim-opacity})
+    --v-navigation-drawer-scrim-progress: 1
     position: absolute
     top: 0
     left: 0
     width: 100%
     height: 100%
-    background: black
-    opacity: $navigation-drawer-scrim-opacity
+    background: color-mix(in srgb, var(--v-scrim-color, #{$navigation-drawer-scrim-background}) calc(var(--v-navigation-drawer-scrim-opacity) * var(--v-navigation-drawer-scrim-progress) * 100%), transparent)
+    -webkit-backdrop-filter: blur(calc(var(--v-scrim-blur, #{$navigation-drawer-scrim-blur}) * var(--v-navigation-drawer-scrim-progress)))
+    backdrop-filter: blur(calc(var(--v-scrim-blur, #{$navigation-drawer-scrim-blur}) * var(--v-navigation-drawer-scrim-progress)))
     transition: opacity $navigation-drawer-transition-duration $navigation-drawer-transition-timing-function
     z-index: 1
+
+    @media (forced-colors: active)
+      -webkit-backdrop-filter: none
+      backdrop-filter: none
+      outline: thin solid
 
   .v-navigation-drawer__prepend,
   .v-navigation-drawer__append

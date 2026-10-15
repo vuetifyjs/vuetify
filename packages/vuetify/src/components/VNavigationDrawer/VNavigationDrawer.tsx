@@ -208,10 +208,10 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const scrimColor = useBackgroundColor(() => {
       return isString(props.scrim) ? props.scrim : null
-    })
+    }, 'calc(var(--v-navigation-drawer-scrim-opacity) * var(--v-navigation-drawer-scrim-progress))')
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
-        opacity: dragProgress.value * 0.2,
+        '--v-navigation-drawer-scrim-progress': dragProgress.value,
         transition: 'none',
       } : undefined,
       ...layoutItemScrimStyles.value,
@@ -313,7 +313,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
           <Transition name="fade-transition">
             { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
               <div
-                class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
+                class={['v-navigation-drawer__scrim', themeClasses.value, scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => {
                   if (isPersistent.value) return

@@ -25,6 +25,8 @@ $navigation-drawer-transition-duration: 0.2s !default;
 $navigation-drawer-transition-property: box-shadow, transform, visibility, width, height, left, right, top, bottom !default;
 $navigation-drawer-transition-timing-function: settings.$standard-easing !default;
 $navigation-drawer-scrim-opacity: .2 !default;
+$navigation-drawer-scrim-background: #000 !default;
+$navigation-drawer-scrim-blur: 0px !default;
 
 // Lists
 $navigation-drawer-border: (

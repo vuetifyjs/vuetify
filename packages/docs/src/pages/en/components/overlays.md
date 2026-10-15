@@ -36,6 +36,51 @@ In its simplest form, the `v-overlay` component will add a dimmed layer over you
 
 <ApiInline hide-links />
 
+## Scrim customization
+
+Overlays, dialogs, and temporary navigation drawers share three CSS custom properties:
+
+| Property | Value | Default |
+| - | - | - |
+| `--v-scrim-blur` | CSS length, such as `8px` | `0px` |
+| `--v-scrim-color` | Complete CSS color, such as `rgb(0 0 0)` | Black |
+| `--v-scrim-opacity` | Number from `0` to `1` | `0.32` for overlays, `0.2` for drawers |
+
+Tint opacity applies to the background color, so blur keeps its strength. The **scrim** prop still accepts a boolean or a color string. A string overrides `--v-scrim-color`, and its existing alpha is multiplied by the tint opacity. The overlay **opacity** prop or `--v-overlay-opacity` overrides the shared opacity. Set **scrim** to `false` to disable both tint and blur.
+
+Configure these properties on `:root` to reach teleported overlays and drawer scrims:
+
+```css
+:root {
+  --v-scrim-blur: 8px;
+  --v-scrim-color: rgb(0 0 0);
+}
+```
+
+Leaving `--v-scrim-opacity` unset preserves each component's default. Setting it configures a shared tint opacity. Existing `$overlay-opacity`, `$overlay-scrim-background`, and `$navigation-drawer-scrim-opacity` Sass variables remain fallback values.
+
+You can also configure tokens per theme using [theme variables](/features/theme/#custom-themes):
+
+```js
+createVuetify({
+  theme: {
+    themes: {
+      light: {
+        variables: {
+          'scrim-blur': '8px',
+          'scrim-color': 'rgb(0 0 0)',
+          'scrim-opacity': 0.24,
+        },
+      },
+    },
+  },
+})
+```
+
+Use a complete CSS color such as `rgb(...)` for the `scrim-color` theme variable; hexadecimal theme variables are converted to RGB channels. Tokens follow the component's selected theme, including teleported overlays and the drawer's sibling scrim. For local configuration, put tokens on the overlay or on a drawer's containing layout; styles on the drawer element do not cascade to its sibling scrim.
+
+<ExamplesExample file="v-overlay/misc-scrim-tokens" />
+
 ## Activator
 
 Overlays can be opened with v-model, or by clicking or hovering on an activator element. An activator is mandatory for the connected location strategy. The activator element (if present) will also be used by some transitions to slide or scale from the activator's location instead of the middle of the screen.
