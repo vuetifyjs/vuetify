@@ -137,6 +137,12 @@ The close icon automatically applies a default `aria-label` and is configurable 
   For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
 :::
 
+#### Timeout
+
+The **timeout** property automatically dismisses the alert after the specified time in milliseconds. Use `-1` (the default) to keep the alert visible indefinitely. The countdown pauses while the alert is hovered or focused, so it stays visible while being read or interacted with.
+
+<ExamplesExample file="v-alert/prop-timeout" />
+
 ## Additional Examples
 
 The following is a collection of `v-alert` examples that demonstrate how different the properties work in an application.
