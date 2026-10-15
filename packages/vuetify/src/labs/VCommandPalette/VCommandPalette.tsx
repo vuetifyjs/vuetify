@@ -23,10 +23,8 @@ import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, useId
 import { isActionItem } from './types'
 import {
   convertToUnit,
-  focusableChildren,
   genericComponent,
   getActiveElement,
-  isFunction,
   omit,
   pick,
   propsFactory,
@@ -115,7 +113,6 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const { t } = useLocale()
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
-    const searchInputRef = ref<VTextField>()
     const inputContainerRef = ref<HTMLElement>()
     const dialogRef = ref<VDialog>()
     const listRef = ref<VList>()
@@ -270,11 +267,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         // Use requestAnimationFrame to ensure DOM is fully rendered
         nextTick(() => {
           requestAnimationFrame(() => {
-            if (searchInputRef.value && isFunction(searchInputRef.value.focus)) {
-              searchInputRef.value.focus()
-            } else if (inputContainerRef.value) {
-              focusableChildren(inputContainerRef.value)[0]?.focus()
-            }
+            inputContainerRef.value?.querySelector<HTMLElement>('[autofocus]')?.focus()
           })
         })
       } else if (!newValue && oldValue) {
@@ -299,6 +292,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         'aria-controls': hasResults ? listId : undefined,
         'aria-autocomplete': 'list',
         'aria-activedescendant': listRef.value?.activeDescendant,
+        autofocus: true,
         onKeydown: handleSearchKeydown,
       }
 
@@ -325,13 +319,11 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                 <div ref={ inputContainerRef } class="v-command-palette__input-container">
                   { slots.input?.({ props: inputProps }) ?? (
                     <VTextField
-                      ref={ searchInputRef }
                       v-model={ searchQuery.value }
                       density={ props.density }
                       placeholder={ t(props.placeholder) }
                       prependInnerIcon={ props.inputIcon }
                       autocomplete="off"
-                      autofocus
                       singleLine
                       hideDetails
                       variant="solo"

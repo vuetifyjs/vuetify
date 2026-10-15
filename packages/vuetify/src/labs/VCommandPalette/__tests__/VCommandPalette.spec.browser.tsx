@@ -302,6 +302,23 @@ describe('VCommandPalette', () => {
       expect(input).toHaveAttribute('aria-controls', screen.getByRole('listbox').id)
     })
 
+    it('should focus the search input when an eager palette reopens', async () => {
+      const model = ref(true)
+      render(() => (
+        <VCommandPalette v-model={ model.value } items={ testItems } eager />
+      ))
+
+      await screen.findByRole('dialog')
+      const input = screen.getByCSS('input[role="combobox"]')
+      await expect.poll(() => document.activeElement).toBe(input)
+
+      model.value = false
+      await expect.poll(() => document.activeElement).not.toBe(input)
+
+      model.value = true
+      await expect.poll(() => document.activeElement).toBe(input)
+    })
+
     it('should keep focus in search input while navigating', async () => {
       const model = ref(true)
       render(() => (
