@@ -5,6 +5,7 @@
 $progress-linear-background: currentColor !default;
 $progress-linear-background-opacity: var(--v-border-opacity) !default;
 $progress-linear-border-radius: map.get(settings.$rounded, 'pill') !default;
+$progress-linear-stop-size: 4px !default;
 $progress-linear-stream-opacity: 0.3 !default;
 $progress-linear-stripe-gradient: linear-gradient(
   135deg,

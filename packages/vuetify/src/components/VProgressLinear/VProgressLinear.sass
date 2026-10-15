@@ -75,6 +75,22 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
     width: 100%
     transition: $bar-transition
 
+  // isReversed already folds RTL in, so this sits at the physical end like the bars
+  .v-progress-linear > .v-progress-linear__stop
+    --v-progress-linear-stop-inset: max(0px, (var(--v-progress-linear-height) - #{$progress-linear-stop-size}) / 2)
+
+    border-radius: 50%
+    height: min(#{$progress-linear-stop-size}, var(--v-progress-linear-height))
+    position: absolute
+    right: var(--v-progress-linear-stop-inset)
+    top: 50%
+    translate: 0 -50%
+    width: min(#{$progress-linear-stop-size}, var(--v-progress-linear-height))
+
+  .v-progress-linear--reverse > .v-progress-linear__stop
+    left: var(--v-progress-linear-stop-inset)
+    right: auto
+
   @include tools.layer('trumps')
     @media (forced-colors: active)
       .v-progress-linear__buffer
@@ -85,6 +101,7 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
         stroke: highlight
 
       .v-progress-linear__stop
+        background-color: highlight
         fill: highlight
 
   .v-progress-linear__content

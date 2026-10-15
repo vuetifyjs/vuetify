@@ -66,6 +66,10 @@ export const makeVProgressLinearProps = propsFactory({
     default: 'flat',
     validator: (v: string) => ['flat', 'wavy'].includes(v),
   },
+  stopIndicator: {
+    type: Boolean,
+    default: undefined,
+  },
   stream: Boolean,
   striped: Boolean,
   roundedBar: Boolean,
@@ -132,6 +136,10 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       isObject(props.transition) ? props.transition.duration : undefined, 'ms'
     ))
     const isWavy = toRef(() => props.shape === 'wavy')
+    // undefined keeps split without the stop until the next major
+    const hasStopIndicator = toRef(() => !props.indeterminate && (
+      isWavy.value ? props.stopIndicator !== false : props.variant === 'split' && props.stopIndicator === true
+    ))
     const transitionName = computed(() => props.indeterminate ? 'fade-transition' : 'slide-x-transition')
 
     const containerWidth = shallowRef(0)
@@ -352,12 +360,14 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           ) : (
             <>
               { renderTrack() }
-              <circle
-                class="v-progress-linear__stop"
-                cx={ geometry.value.end }
-                cy={ geometry.value.center }
-                r={ Math.min(2, geometry.value.stroke / 2) }
-              />
+              { hasStopIndicator.value && (
+                <circle
+                  class="v-progress-linear__stop"
+                  cx={ geometry.value.end }
+                  cy={ geometry.value.center }
+                  r={ Math.min(2, geometry.value.stroke / 2) }
+                />
+              )}
               <path ref={ waveEl } class="v-progress-linear__wave" />
             </>
           )}
@@ -446,6 +456,16 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                 splitStyles.value?.buffer,
               ]}
             />
+
+            { hasStopIndicator.value && (
+              <div
+                class={[
+                  'v-progress-linear__stop',
+                  barColorClasses.value,
+                ]}
+                style={ barColorStyles.value }
+              />
+            )}
 
             <Transition name={ transitionName.value }>
               { !props.indeterminate ? (
