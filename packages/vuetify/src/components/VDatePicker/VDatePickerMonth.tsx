@@ -369,7 +369,10 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
           </div>
         )}
 
-        <MaybeTransition name={ transition.value }>
+        <MaybeTransition
+          name={ transition.value }
+          onBeforeLeave={ (el: Element) => { (el as HTMLElement).style.width = getComputedStyle(el).width } }
+        >
           <div
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
