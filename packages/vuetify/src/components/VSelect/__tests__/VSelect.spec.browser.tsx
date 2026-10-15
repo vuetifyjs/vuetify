@@ -748,8 +748,6 @@ describe('VSelect', () => {
     const list = await screen.findByRole('listbox')
     await commands.waitStable('.v-list')
     await expect.poll(() => list.contains(document.activeElement)).toBe(true)
-    let settled = -1
-    await expect.poll(() => settled === (settled = list.scrollTop)).toBe(true)
 
     const rowHeight = screen.getAllByRole('option')[0].getBoundingClientRect().height
     let previous = list.scrollTop

@@ -20,6 +20,7 @@
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**.",
     "striped": "Adds a stripe background to the filled portion of the progress component.",
     "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (e.g. `0.4s`), or `false` to remove it. Does not affect `indeterminate`, `stream` or `striped` animations.",
+    "shape": "Sets the shape of the filled portion. **wavy** draws it as an animated wave, applies the **split** gap and grows the bar to fit the wave.",
     "variant": "Applies a distinct style to the component. **split** visually divides the progress bar at the current value, separating the filled and unfilled portions with a gap."
   },
   "slots": {

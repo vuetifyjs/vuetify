@@ -5,7 +5,18 @@
     :name="name"
     :options="options"
   >
-    <div class="text-center">
+    <div class="d-flex flex-column align-center ga-3">
+      <v-fade-transition>
+        <v-chip
+          v-if="wavy"
+          class="position-absolute top-0 mt-6"
+          color="warning"
+          prepend-icon="mdi-information-outline"
+          text="Requires Vuetify v4.3.0+"
+          variant="tonal"
+        ></v-chip>
+      </v-fade-transition>
+
       <v-progress-circular v-bind="props"></v-progress-circular>
     </div>
 
@@ -34,6 +45,8 @@
       ></v-slider>
 
       <v-checkbox v-model="indeterminate" label="Indeterminate"></v-checkbox>
+
+      <v-checkbox v-model="wavy" label="Wavy"></v-checkbox>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -43,6 +56,7 @@
   const model = ref('default')
   const color = ref()
   const indeterminate = ref(false)
+  const wavy = ref(false)
   const size = ref()
   const width = ref()
   const options = []
@@ -50,6 +64,7 @@
     return {
       color: color.value || undefined,
       indeterminate: indeterminate.value || undefined,
+      shape: wavy.value ? 'wavy' : undefined,
       'model-value': !indeterminate.value ? '20' : undefined,
       size: size.value !== 32 ? size.value : undefined,
       width: width.value !== 4 ? width.value : undefined,
