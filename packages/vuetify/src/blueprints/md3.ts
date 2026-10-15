@@ -78,6 +78,16 @@ export const md3: Blueprint = {
         rounded: undefined,
       },
     },
+    VProgressCircular: {
+      variant: 'split',
+      rounded: true,
+    },
+    VProgressLinear: {
+      variant: 'split',
+      stopIndicator: true,
+      rounded: true,
+      roundedBar: true,
+    },
     VRadioGroup: {
       indentDetails: true,
     },

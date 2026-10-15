@@ -5,6 +5,7 @@
 $progress-linear-background: currentColor !default;
 $progress-linear-background-opacity: var(--v-border-opacity) !default;
 $progress-linear-border-radius: map.get(settings.$rounded, 'pill') !default;
+$progress-linear-stop-size: 4px !default;
 $progress-linear-stream-opacity: 0.3 !default;
 $progress-linear-stripe-gradient: linear-gradient(
   135deg,
@@ -17,6 +18,7 @@ $progress-linear-stripe-gradient: linear-gradient(
   transparent
 ) !default;
 $progress-linear-indeterminate-animation-duration: 2.2s !default;
+$progress-linear-wavy-animation-duration: 1.8s !default;
 $progress-linear-reveal-duration: 900ms !default;
 $progress-linear-stream-animation: stream .25s infinite linear !default;
 $progress-linear-striped-animation: progress-linear-stripes 1s infinite linear !default;
