@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Announcing the Vuetify0 Beta
-  description: Vuetify0 has reached beta, freezing the public API. A summary of what changed since the alpha — 49 components, 68 composables, a headless drag-and-drop family, and the testing work leading to v1.
+  description: Vuetify0 hits beta and freezes its public API — 49 components, 68 composables, a headless drag-and-drop family, and the testing work leading to v1.
   keywords: Vuetify0 beta, headless Vue, API freeze, Vue drag and drop, createSortable, createKanban, TypeScript components, Vuetify0 v1
 ---
 

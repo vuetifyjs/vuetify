@@ -3,6 +3,7 @@ import { useVirtualFocus } from '@/composables/virtualFocus'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
+import { isNullOrUndefined } from '@/util'
 
 // Types
 import type { MaybeRefOrGetter } from 'vue'
@@ -73,14 +74,14 @@ export function useGridSelection<T extends string | number> ({
     const targetEl = e.target as HTMLElement | null
     const targetId = targetEl?.getAttribute?.(itemAttribute)
 
-    if (targetId != null && items().some(item => String(item.value) === targetId)) {
+    if (!isNullOrUndefined(targetId) && items().some(item => String(item.value) === targetId)) {
       virtualFocus.highlight(targetId as T)
 
       return
     }
 
     const initial = initialValue(virtualFocus.highlightedId.value as T | undefined)
-    if (initial != null) virtualFocus.highlight(initial)
+    if (!isNullOrUndefined(initial)) virtualFocus.highlight(initial)
     virtualFocus.focusHighlighted()
   }
 
@@ -93,7 +94,7 @@ export function useGridSelection<T extends string | number> ({
 
   function onActivate () {
     const id = virtualFocus.highlightedId.value as T | undefined
-    if (id == null) return
+    if (isNullOrUndefined(id)) return
 
     const item = items().find(x => x.value === id)
 
@@ -111,7 +112,7 @@ export function useGridSelection<T extends string | number> ({
 
   function focusItem (value: T) {
     virtualFocus.highlight(value)
-    if (virtualFocus.highlightedId.value == null) virtualFocus.first()
+    if (isNullOrUndefined(virtualFocus.highlightedId.value)) virtualFocus.first()
     virtualFocus.focusHighlighted()
   }
 
@@ -122,7 +123,7 @@ export function useGridSelection<T extends string | number> ({
       return
     }
 
-    if ((e.key === 'Enter' || e.key === ' ') && virtualFocus.highlightedId.value != null) {
+    if ((e.key === 'Enter' || e.key === ' ') && !isNullOrUndefined(virtualFocus.highlightedId.value)) {
       e.preventDefault()
       onActivate()
       return

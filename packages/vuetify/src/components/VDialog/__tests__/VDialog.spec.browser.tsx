@@ -1,5 +1,7 @@
 // Components
 import { VDialog } from '../VDialog'
+import { VBtn } from '@/components/VBtn'
+import { VTextField } from '@/components/VTextField'
 
 // Utilities
 import { commands, page, render, screen, userEvent, wait } from '@test'
@@ -8,6 +10,24 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 
 // Tests
 describe('VDialog', () => {
+  it('should autofocus text field inside dialog', async () => {
+    render(() => (
+      <VBtn>
+        Open
+        <VDialog activator="parent">
+          <div>
+            <VTextField label="before" />
+            <VTextField label="autofocus" autofocus data-testid="field" />
+            <VTextField label="after" />
+          </div>
+        </VDialog>
+      </VBtn>
+    ))
+
+    await userEvent.click(screen.getByCSS('button'))
+    await expect.poll(() => screen.getByTestId('field').querySelector('input')).toHaveFocus()
+  })
+
   it('should render correctly', async () => {
     const model = ref(false)
     render(() => (

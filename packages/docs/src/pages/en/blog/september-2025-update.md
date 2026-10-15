@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: September 2025 Update
-  description: September marks significant progress as we assemble the building blocks for Vuetify's next phase. From revolutionary design-to-development workflows with our new Figma UI Kit to foundational v0 composables, September has been about connecting the pieces that will define the future of Vue development.
+  description: September assembles the building blocks for Vuetify's next phase — from the new Figma UI Kit and design-to-development workflows to foundational v0 composables.
   keywords: Vuetify September 2025, Figma UI Kit, Vuetify0
 ---
 
@@ -93,7 +93,7 @@ We're thrilled to announce the release of our **[updated Vuetify 3 UI Kit for Fi
 
 ![Vuetify Figma UI Kit Update](https://cdn.vuetifyjs.com/docs/images/blog/september-2025-update/figma.png "Vuetify Figma UI Kit Update")
 
-### What's Included
+### What's Included { #whats-included }
 
 * **Complete Component Library**: Every Vuetify 3 component meticulously recreated in Figma
 * **Material Design 3 Foundation**: Built on the latest Material Design specifications
@@ -152,7 +152,7 @@ Design faster with 1:1 Vuetify components, production-ready variants and style c
 * [Free Figma UI Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
 * [Go PRO](https://store.vuetifyjs.com/products/official-vuetify-3-ui-kit-for-figma)
 
-## September Webinar Recap: Performance Crisis
+## September Webinar Recap: Performance Crisis { #september-webinar-recap-performance-crisis }
 
 Thank you to everyone who joined our September performance optimization webinar. We had an engaging Q&A session with the community discussing bundle size reduction strategies. Some highlights and key takeaways:
 
@@ -163,7 +163,7 @@ Thank you to everyone who joined our September performance optimization webinar.
 
 Never miss another event by joining our [Discord Community](https://community.vuetifyjs.com/) and following us on [X](https://x.com/vuetifyjs)!.
 
-### Next Event: v0 Live Coding with John
+### Next Event: v0 Live Coding with John { #next-event-v0-live-coding-with-john }
 
 **Wednesday, October 29th**: Join John for an exclusive live coding session where he'll build a complete application using Vuetify0 from scratch!
 
@@ -183,7 +183,7 @@ This will be a true live demo, so expect some surprises and spontaneous problem-
 * Start Time: 9:00 AM CST
 * [See what Vuetify0 is all about](https://discord.gg/vuetify-340160225338195969?event=1426220686162268311)
 
-## Vuetify0: Composables Taking Shape
+## Vuetify0: Composables Taking Shape { #vuetify0-composables-taking-shape }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto" title="Vuetify0 Logo" />
 
@@ -324,7 +324,7 @@ See all available composables on the [Vuetify0 documentation site](https://0.vue
 * [useFeatures Documentation](https://0.vuetifyjs.com/composables/plugins/use-features/)
 * [useTimeline Documentation](https://0.vuetifyjs.com/composables/registration/use-timeline/)
 
-## Framework & Security Updates
+## Framework & Security Updates { #framework-security-updates }
 
 With all the buzz around security vulnerabilities in the NPM ecosystem, we've prioritized enhancing our build and publishing processes to ensure the highest level of security for our users.
 
@@ -342,7 +342,7 @@ This month brought significant improvements to our build infrastructure in Vueti
 * [Commit: af9a9bf](https://github.com/vuetifyjs/vuetify/commit/af9a9bfc63fa44721f89076431fbe004e70d7c1c)
 * [Commit: c78f8aa](https://github.com/vuetifyjs/vuetify/commit/c78f8aa066164f6ee5f2e1f106ed121963faffe5)
 
-## Ecosystem Spotlight: Vuetify Link
+## Ecosystem Spotlight: Vuetify Link { #ecosystem-spotlight-vuetify-link }
 
 <AppFigure :src="linklogo" alt="Vuetify Link logo" width="200" height="auto" class="mx-auto" title="Vuetify Link Logo" />
 
@@ -355,7 +355,7 @@ Vuetify Link is a new service that simplifies the process of creating and managi
 * **Analytics**: Monitor link performance with detailed statistics
 * **Free & Pro Plans**: Basic link shortening is free, with advanced features available for Vuetify One subscribers
 
-![Vuetify Link Landing Screenshot](https://vuetifyjs.b-cdn.net/docs/images/blog/september-2025-update/vlink_banner.png "Vuetify Link Landing")
+![Vuetify Link Landing Screenshot](https://cdn.vuetifyjs.com/docs/images/blog/september-2025-update/vlink_banner.png "Vuetify Link Landing")
 
 We anticipate launching this new service **this month!** Stay tuned for the official release announcement with all the details.
 

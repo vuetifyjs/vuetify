@@ -43,5 +43,5 @@
   const colors = ['primary', 'red', 'success', 'purple', 'warning']
   const icons = ['mdi-star', '$close', '$complete', 'mdi-reply', 'mdi-thumb-up']
   const users = Array.from({ length: 5 })
-    .map((_, i) => `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${2 + i}.jpg`)
+    .map((_, i) => `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${2 + i}.jpg`)
 </script>

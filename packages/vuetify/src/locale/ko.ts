@@ -94,7 +94,7 @@ export default {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
     appendAction: '{0} 뒤에 추가된 동작',
-    otp: 'OTP 문자 {0}를 입력하세요',
+    otp: '인증 코드를 입력하세요',
   },
   fileInput: {
     counter: '{0}개 파일',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: '{1} 중 {0} 점',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '최소',
+      end: '최대',
+    },
+  },
+  splitBtn: {
+    menu: '추가 옵션',
   },
   loading: '불러오는 중...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: '키보드 단축키: {0}',
     or: '또는',
   },
-  video: {
+  media: {
     play: '재생',
     pause: '일시정지',
     seek: '탐색',
     volume: '볼륨',
-    showVolume: '볼륨 조절 표시',
     mute: '음소거',
     unmute: '음소거 해제',
     enterFullscreen: '전체 화면',

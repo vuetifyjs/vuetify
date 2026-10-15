@@ -27,11 +27,11 @@ const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="$vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
-      <VBadge { ...{ [xy]: offset } } content="0">
-        <VBtn variant="tonal">
-          { String(offset) }
-        </VBtn>
-      </VBadge>
+    <VBadge { ...{ [xy]: offset } } content="0">
+      <VBtn variant="tonal">
+        { String(offset) }
+      </VBtn>
+    </VBadge>
   )),
   Color: gridOn([null], defaultColors, (_, color) => (
     <VBadge color={ color } content="0">

@@ -41,7 +41,6 @@
     right: 0
     top: 0
 
-  // Modifier
   .v-overlay--absolute
     position: absolute
 
@@ -50,6 +49,20 @@
 
   .v-overlay--scroll-blocked
     padding-inline-end: var(--v-scrollbar-offset)
+
+@include tools.layer('overrides')
+  .v-overlay--justify-start
+    justify-content: flex-start
+  .v-overlay--justify-center
+    justify-content: center
+  .v-overlay--justify-end
+    justify-content: flex-end
+  .v-overlay--align-start
+    align-items: flex-start
+  .v-overlay--align-center
+    align-items: center
+  .v-overlay--align-end
+    align-items: flex-end
 
 @include tools.layer('trumps')
   .v-overlay-scroll-blocked

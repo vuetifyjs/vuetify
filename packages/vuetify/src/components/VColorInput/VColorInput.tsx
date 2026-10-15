@@ -10,6 +10,8 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { makeFocusProps } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -38,6 +40,7 @@ export const makeVColorInputProps = propsFactory({
   hidePip: Boolean,
   colorPip: Boolean,
   menuProps: Object as PropType<VMenu['$props']>,
+  openOnFocus: Boolean,
   pipIcon: {
     type: String,
     default: '$color',
@@ -76,11 +79,15 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
+    const vMenuRef = shallowRef<VMenu>()
+    const vTextFieldRef = shallowRef<VTextField>()
     const isFocused = shallowRef(props.focused)
 
     const isInteractive = computed(() => !props.disabled && !props.readonly)
 
     const display = computed(() => model.value || null)
+
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && isInteractive.value)
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key !== 'Enter') return
@@ -101,6 +108,10 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       e.stopPropagation()
 
       menu.value = true
+    }
+
+    function onBlur () {
+      closeWhenFocusLeaves(menu, vTextFieldRef.value?.$el, vMenuRef.value?.contentEl)
     }
 
     function onSave () {
@@ -145,6 +156,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
 
       return (
         <VTextField
+          ref={ vTextFieldRef }
           { ...textFieldProps }
           class={[
             'v-color-input',
@@ -157,6 +169,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           onClick:control={ !props.disabled ? onClick : undefined }
           onClick:prependInner={ !props.disabled ? onClick : undefined }
           onUpdate:focused={ event => isFocused.value = event }
+          onBlur={ onBlur }
           onClick:appendInner={ !props.disabled ? onClick : undefined }
           onUpdate:modelValue={ val => {
             model.value = val
@@ -168,6 +181,7 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   minWidth="0"
@@ -214,6 +228,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
         </VTextField>
       )
     })
+
+    return forwardRefs({}, vTextFieldRef)
   },
 })
 

@@ -94,7 +94,7 @@ export default {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',
     appendAction: '{0} の後に追加されたアクション',
-    otp: '{0}番目のワンタイムパスワードを入力してください',
+    otp: '確認コードを入力してください',
   },
   fileInput: {
     counter: '{0} ファイル',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: '評価 {1} のうち {0}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小',
+      end: '最大',
+    },
+  },
+  splitBtn: {
+    menu: 'その他のオプション',
   },
   loading: 'ロード中...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'キーボードショートカット: {0}',
     or: 'または',
   },
-  video: {
+  media: {
     play: '再生',
     pause: '一時停止',
     seek: 'シーク',
     volume: '音量',
-    showVolume: '音量コントロールを表示',
     mute: 'ミュート',
     unmute: 'ミュート解除',
     enterFullscreen: '全画面表示',

@@ -18,6 +18,9 @@ import {
   getScrollParents,
   IN_BROWSER,
   isFixedPosition,
+  isFunction,
+  isNumber,
+  isString,
   nullifyTransforms,
   parseAnchor,
   propsFactory,
@@ -48,8 +51,7 @@ const locationStrategies = {
 
 export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | LocationStrategyFunction
-  contained?: boolean
-  location: Anchor
+  location?: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
   stickToTarget?: boolean
@@ -64,12 +66,9 @@ export const makeLocationStrategyProps = propsFactory({
   locationStrategy: {
     type: [String, Function] as PropType<StrategyProps['locationStrategy']>,
     default: 'static',
-    validator: (val: any) => typeof val === 'function' || val in locationStrategies,
+    validator: (val: any) => isFunction(val) || val in locationStrategies,
   },
-  location: {
-    type: String as PropType<StrategyProps['location']>,
-    default: 'bottom',
-  },
+  location: String as PropType<StrategyProps['location']>,
   origin: {
     type: String as PropType<StrategyProps['origin']>,
     default: 'auto',
@@ -97,13 +96,16 @@ export function useLocationStrategies (
         visualViewport?.removeEventListener('resize', onVisualResize)
         visualViewport?.removeEventListener('scroll', onVisualScroll)
         updateLocation.value = undefined
+        if (data.isActive.value) {
+          contentStyles.value = {}
+        }
       })
 
       window.addEventListener('resize', onResize, { passive: true })
       visualViewport?.addEventListener('resize', onVisualResize, { passive: true })
       visualViewport?.addEventListener('scroll', onVisualScroll, { passive: true })
 
-      if (typeof props.locationStrategy === 'function') {
+      if (isFunction(props.locationStrategy)) {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
@@ -129,61 +131,43 @@ export function useLocationStrategies (
   }
 }
 
+export function getStaticLocationClasses (location: Anchor | undefined) {
+  if (!location) return undefined
+
+  const normalized = location.includes(' ') ? location : `${location} center`
+
+  let justify = 'center'
+  let align = 'center'
+  const inline: Record<string, string> = { left: 'start', start: 'start', right: 'end', end: 'end' }
+  const block: Record<string, string> = { top: 'start', bottom: 'end' }
+
+  for (const token of normalized.split(' ')) {
+    if (token in inline) justify = inline[token]
+    else if (token in block) align = block[token]
+  }
+
+  return {
+    [`v-overlay--justify-${justify}`]: true,
+    [`v-overlay--align-${align}`]: true,
+  }
+}
+
 function staticLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  if (props.contained) return
-
-  const target = ref<[x: number, y: number]>()
-  const connectedStyles = ref<Record<string, string>>({})
-
-  // reactive equivalent of `{ ...props, origin: 'auto' }`
-  const connectedProps = new Proxy(props, {
-    get: (target, key) => key === 'origin' ? 'auto' : Reflect.get(target, key),
-  })
-
-  const connected = connectedLocationStrategy(
-    { ...data, target },
-    connectedProps,
-    connectedStyles
-  )
-
+  // Positioning is handled by CSS flexbox alignment on the overlay root, keeping
+  // the content's insets `auto` so user utility classes (justify-*, align-*) compose.
+  // Here we only forward an explicit `origin` to `transform-origin` for the transition.
   function updateStyles () {
     if (props.origin !== 'auto' && props.origin !== 'overlap') {
       const { side, align } = parseAnchor(props.origin, data.isRtl.value)
-      contentStyles.value = { ...connectedStyles.value, transformOrigin: `${side} ${align}` }
+      contentStyles.value = { transformOrigin: `${side} ${align}` }
     } else {
-      contentStyles.value = connectedStyles.value
+      contentStyles.value = {}
     }
   }
 
-  watch(connectedStyles, updateStyles, { deep: true })
-  watch([() => props.origin, data.isRtl], updateStyles)
+  watch([() => props.origin, data.isRtl], updateStyles, { immediate: true })
 
-  function updateTarget () {
-    const viewportBox = new Box({
-      x: visualViewport?.offsetLeft ?? 0,
-      y: visualViewport?.offsetTop ?? 0,
-      width: visualViewport?.width ?? window.innerWidth,
-      height: visualViewport?.height ?? window.innerHeight,
-    })
-
-    const point = anchorToPoint(parseAnchor(props.location, data.isRtl.value), viewportBox)
-    target.value = [point.x, point.y]
-  }
-
-  function updateLocation () {
-    updateTarget()
-    connected.updateLocation()
-  }
-
-  watch(() => [props.location, data.isRtl.value], () => {
-    updateLocation()
-  })
-
-  nextTick(() => {
-    updateLocation()
-  })
-
-  return { updateLocation }
+  return { updateLocation: () => {} }
 }
 
 /** Resolve a CSS length the browser understands (calc(), min(), vw, …) to pixels */
@@ -214,15 +198,19 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // el.style.removeProperty('max-width')
   // el.style.removeProperty('max-height')
 
-  /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
-  if (isRtl) {
-    contentBox.x += parseFloat(el.style.right || 0)
-  } else {
-    contentBox.x -= parseFloat(el.style.left || 0)
+  const computed = getComputedStyle(el)
+  function offset (side: 'left' | 'right' | 'top') {
+    return el.style[side] ? parseFloat(computed[side]) || 0 : 0
   }
-  contentBox.y -= parseFloat(el.style.top || 0)
+
+  if (isRtl) {
+    contentBox.x += offset('right')
+  } else {
+    contentBox.x -= offset('left')
+  }
+  contentBox.y -= offset('top')
 
   // el.style.maxWidth = initialMaxWidth
   // el.style.maxHeight = initialMaxHeight
@@ -244,7 +232,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   }
 
   const { preferredAnchor, preferredOrigin } = destructComputed(() => {
-    const parsedAnchor = parseAnchor(props.location, data.isRtl.value)
+    const parsedAnchor = parseAnchor(props.location ?? 'bottom', data.isRtl.value)
     const parsedOrigin =
       props.origin === 'overlap' ? parsedAnchor
       : props.origin === 'auto' ? flipSide(parsedAnchor)
@@ -273,7 +261,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
         const container = (data.contentEl.value?.parentElement ?? document.documentElement) as HTMLElement
 
-        if (typeof raw === 'number' || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
+        if (isNumber(raw) || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
           return parseFloat(raw as string)
         }
         if (raw.endsWith('%')) {
@@ -290,12 +278,12 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (Array.isArray(props.offset)) {
       return props.offset
     }
-    if (typeof props.offset === 'string') {
+    if (isString(props.offset)) {
       const offset = props.offset.split(' ').map(parseFloat)
       if (offset.length < 2) offset.push(0)
       return offset
     }
-    return typeof props.offset === 'number' ? [props.offset, 0] : [0, 0]
+    return isNumber(props.offset) ? [props.offset, 0] : [0, 0]
   })
 
   let observe = false
@@ -347,7 +335,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     observer.disconnect()
   })
 
-  // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
     requestAnimationFrame(() => observe = true)
@@ -372,7 +359,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
-      if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
+      if (!(data.contentEl.value.style.top && data.contentEl.value.style[data.isRtl.value ? 'right' : 'left'])) {
         contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
         contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }

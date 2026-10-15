@@ -349,6 +349,30 @@ describe('VMaskInput', () => {
         expect(model.value).toBe(outputText)
         expect(input.selectionStart).toBe(outputCaret)
       })
+
+      it('should reformat pasted value when replacing a full selection', async () => {
+        const { input, model, insertCaretAt } = renderComponent({
+          defaultModel: '0000000000000000',
+          defaultMask: '####-####-####-####',
+        })
+
+        const pasteOverAll = async (text: string) => {
+          await insertCaretAt(0, input.value.length)
+          const lock = await commands.getLock()
+          await navigator.clipboard.writeText(text)
+          await userEvent.paste()
+          await commands.releaseLock(lock)
+        }
+
+        await pasteOverAll('1234-5678-9012-3456')
+        expect(model.value).toBe('1234-5678-9012-3456')
+
+        await pasteOverAll('98765432-reformat10987654')
+        expect(model.value).toBe('9876-5432-1098-7654')
+
+        await pasteOverAll('1111 / 2222 / 3333 / 4444')
+        expect(model.value).toBe('1111-2222-3333-4444')
+      })
     })
   })
 })

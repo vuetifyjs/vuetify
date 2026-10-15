@@ -3,7 +3,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { shallowRef } from 'vue'
-import { propsFactory } from '@/util'
+import { isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -29,7 +29,7 @@ export function useIntervalHighlight (
 
   // The underlay paints `background: currentColor`, so we only need a text color.
   const { textColorClasses, textColorStyles } = useTextColor(() =>
-    typeof props.intervalHighlight === 'string' && props.intervalHighlight
+    isString(props.intervalHighlight) && props.intervalHighlight
       ? props.intervalHighlight
       : 'surface-variant'
   )

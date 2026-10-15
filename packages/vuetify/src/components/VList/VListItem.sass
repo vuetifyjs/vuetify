@@ -23,6 +23,9 @@
     @include tools.rounded($list-item-border-radius)
     @include tools.variant($list-item-variants...)
 
+    &--variant-tonal
+      overflow: hidden
+
     &--focus-visible
       .v-list-item__overlay
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
@@ -68,8 +71,7 @@
     &--link
       cursor: pointer
 
-    .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
-    .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+    .v-navigation-drawer--rail:not(.v-navigation-drawer--expanded) &
       .v-avatar
         --v-avatar-height: 24px
 
@@ -163,8 +165,7 @@
     overflow: hidden
     min-width: $list-item-content-min-width
 
-    .v-navigation-drawer--rail:not(.v-navigation-drawer--expand-on-hover) &,
-    .v-navigation-drawer--rail.v-navigation-drawer--expand-on-hover:not(.v-navigation-drawer--is-hovering) &
+    .v-navigation-drawer--rail:not(.v-navigation-drawer--expanded) &
       min-width: 0
 
   .v-list-item-action
@@ -172,8 +173,14 @@
     display: flex
     align-items: center
     flex: none
-    transition: inherit
+
+    // TODO: cleanup in v5.0
+    // not effective, transition inheritance takes only from immediate parent
+    // which is typically the append slot container, so it requires custom CSS
     transition-property: height, width
+    transition-duration: inherit
+    transition-timing-function: inherit
+    transition-delay: inherit
 
     &--start
       margin-inline-end: $list-item-action-margin-end
@@ -307,6 +314,11 @@
 
     .v-list-item--active.v-list-item--variant-elevated &
       --v-theme-overlay-multiplier: 0
+
+  .v-list--navigable
+    .v-list-item::after,
+    .v-list-item__overlay
+      transition: none
 
   $base-padding: list.nth($list-item-padding, 2)
   .v-list

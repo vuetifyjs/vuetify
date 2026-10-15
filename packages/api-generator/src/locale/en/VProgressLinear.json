@@ -14,10 +14,12 @@
     "indeterminate": "Constantly animates, use when loading progress is unknown.",
     "max": "Sets the maximum value the progress can reach.",
     "opacity": "Set the opacity of the progress bar.",
+    "reveal": "Animates the progress bar from 0 to its model value when the component mounts.",
     "reverse": "Displays reversed progress (right to left in LTR mode and left to right in RTL).",
     "roundedBar": "Applies a border radius to the progress bar.",
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**.",
     "striped": "Adds a stripe background to the filled portion of the progress component.",
+    "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (e.g. `0.4s`), or `false` to remove it. Does not affect `indeterminate`, `stream` or `striped` animations.",
     "variant": "Applies a distinct style to the component. **split** visually divides the progress bar at the current value, separating the filled and unfilled portions with a gap."
   },
   "slots": {

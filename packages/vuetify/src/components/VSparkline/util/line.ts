@@ -1,7 +1,7 @@
 // Utilities
 import { genMonotonePath } from './monotone'
 import { genRoundedPath } from './path'
-import { propsFactory } from '@/util'
+import { isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -163,7 +163,7 @@ export interface BuildPathOptions {
 }
 
 export function buildPath (points: Point[], options: BuildPathOptions): string {
-  const smoothValue = typeof options.smooth === 'boolean'
+  const smoothValue = isBoolean(options.smooth)
     ? (options.smooth ? 8 : 0)
     : Number(options.smooth ?? 0)
 

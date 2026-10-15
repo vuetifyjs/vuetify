@@ -94,7 +94,7 @@ export default {
     clear: '{0} leeren',
     prependAction: '{0} vorangestellte Aktion',
     appendAction: '{0} angehängte Aktion',
-    otp: 'Bitte OTP-Zeichen {0} eingeben',
+    otp: 'Bestätigungscode eingeben',
   },
   fileInput: {
     counter: '{0} Dateien',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Bewertung {0} von {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Weitere Optionen',
   },
   loading: 'Laden...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tastenkürzel: {0}',
     or: 'oder',
   },
-  video: {
+  media: {
     play: 'Abspielen',
     pause: 'Pause',
     seek: 'Suchen',
     volume: 'Lautstärke',
-    showVolume: 'Lautstärkeregler anzeigen',
     mute: 'Stummschalten',
     unmute: 'Stummschaltung aufheben',
     enterFullscreen: 'Vollbild',

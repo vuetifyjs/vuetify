@@ -4,7 +4,6 @@
 
 // VTextField
 $text-field-affix-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
-$text-field-border-radius: settings.$border-radius-root !default;
 $text-field-disabled-affix-color: tools.theme-color('on-surface', var(--v-disabled-opacity)) !default;
 $text-field-input-flex: 1 !default;
 $text-field-input-padding-end: 0 !default;

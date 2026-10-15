@@ -47,7 +47,7 @@ export function formatNumber (val: number, options: FormatNumberOptions): string
       minimumFractionDigits: minFractionDigits && precision != null
         ? Math.min(minFractionDigits, precision)
         : (minFractionDigits ?? precision ?? undefined),
-      maximumFractionDigits: precision ?? undefined,
+      maximumFractionDigits: precision ?? 20, // Intl defaults are dynamic (0, 2, 3)
       useGrouping: options.useGrouping,
     })
 

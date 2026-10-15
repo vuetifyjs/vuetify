@@ -6,7 +6,7 @@ meta:
   description: The highlight component visually marks matching substrings within a block of text, supporting plain string queries and pre-computed match ranges.
   keywords: vuetify highlight component, vue highlight component, text highlight, search highlight, mark
 features:
-  github: /labs/VHighlight/
+  github: /components/VHighlight/
   label: 'C: VHighlight'
   report: true
 ---
@@ -19,23 +19,9 @@ The `v-highlight` component marks matching substrings within a block of text.
 
 ::: warning
 
-This feature requires [v4.1.0](/getting-started/release-notes/?version=v4.1.0)
+This feature was introduced in [v4.1.0](/getting-started/release-notes/?version=v4.1.0). For versions before [v4.3.0](/getting-started/release-notes/?version=v4.3.0) it requires import from `vuetify/labs/VHighlight` (labs).
 
 :::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VHighlight } from 'vuetify/labs/VHighlight'
-
-export default createVuetify({
-  components: {
-    VHighlight,
-  },
-})
-```
 
 ## Usage
 
@@ -66,6 +52,12 @@ Pass a string or array of strings to **query** to be marked. Multiple terms are 
 Pass pre-computed `[start, end]` index pairs to **matches** to skip the internal search step entirely. This is useful if you need to bind fuzzy-search algorithm that responds with matching ranges.
 
 <ExamplesExample file="v-highlight/prop-matches" />
+
+#### Ignore accents (i18n)
+
+Set **ignore-accents** so a plain query still marks accented or other non-ASCII text. It is directional: `'target'` ignores accents in the text, `'query'` ignores them in the query, and `true` ignores them on both sides.
+
+<ExamplesExample file="v-highlight/prop-ignore-accents" />
 
 #### Mark class
 

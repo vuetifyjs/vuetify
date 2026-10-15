@@ -23,7 +23,7 @@
 
       <v-main>
         <v-empty-state
-          image="https://vuetifyjs.b-cdn.net/docs/images/components/v-empty-state/astro-dog.svg"
+          image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/astro-dog.svg"
           size="200"
           text-width="250"
         >

@@ -94,7 +94,7 @@ export default {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
     appendAction: '{0} کرداری دواتر',
-    otp: 'تکایە نووسینی نمرەی OTP {0}',
+    otp: 'کۆدی پشتڕاستکردنەوە بنووسە',
   },
   fileInput: {
     counter: '{0} فایل',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'هەڵسەنگاندن {0} لە {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'کەمترین',
+      end: 'زۆرترین',
+    },
+  },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
   },
   loading: 'بارکردن...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
     or: 'یان',
   },
-  video: {
+  media: {
     play: 'لێدان',
     pause: 'ڕاگرتن',
     seek: 'گەڕان',
     volume: 'دەنگ',
-    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
     mute: 'بێدەنگکردن',
     unmute: 'لە بێدەنگی دەرهێنان',
     enterFullscreen: 'پڕ بە شاشە',

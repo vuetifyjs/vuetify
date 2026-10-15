@@ -115,9 +115,11 @@ The command palette supports full keyboard navigation:
 
 The `v-command-palette` component follows accessibility best practices:
 
-- Uses semantic ARIA roles (`listbox` for the list, `option` for items)
+- Uses semantic ARIA roles: the search input is a `combobox` that controls a `listbox` of `option` items
 - Provides descriptive labels for screen readers
-- Implements `aria-activedescendant` for proper focus announcement
+- Sets `aria-activedescendant` on the search input, so screen readers announce the highlighted command while focus stays in the input
 - Maintains focus within the dialog while open
 - Returns focus to the previously focused element on close
 - Supports full keyboard navigation without mouse interaction
+
+A custom input provided through the **#input** slot doesn't receive these attributes or the keyboard handling.

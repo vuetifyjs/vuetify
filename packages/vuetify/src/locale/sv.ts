@@ -94,7 +94,7 @@ export default {
     clear: 'Rensa {0}',
     prependAction: '{0} föregående åtgärd',
     appendAction: '{0} efterföljande åtgärd',
-    otp: 'Vänligen ange OTP-tecken {0}',
+    otp: 'Ange verifieringskod',
   },
   fileInput: {
     counter: '{0} filer',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Betyg {0} av {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Fler alternativ',
   },
   loading: 'Laddar...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tangentbordsgenväg: {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spela upp',
     pause: 'Pausa',
     seek: 'Sök',
     volume: 'Volym',
-    showVolume: 'Visa volymkontroll',
     mute: 'Stäng av ljud',
     unmute: 'Slå på ljud',
     enterFullscreen: 'Helskärm',

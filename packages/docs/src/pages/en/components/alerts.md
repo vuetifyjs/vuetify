@@ -127,7 +127,7 @@ The `v-alert` has 6 style variants, **elevated**, **flat**, **tonal**, **outline
 
 #### Closable
 
-The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
+The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting its internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
 
 <ExamplesExample file="v-alert/prop-closable" />
 
