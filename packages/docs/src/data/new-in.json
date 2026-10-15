@@ -111,6 +111,12 @@
     }
   },
   "VCheckbox": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -118,6 +124,12 @@
     }
   },
   "VCheckboxBtn": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -516,6 +528,12 @@
     }
   },
   "VRadio": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -583,7 +601,11 @@
   "VSelectionControl": {
     "props": {
       "indeterminate": "4.1.0",
-      "indeterminateIcon": "4.1.0"
+      "indeterminateIcon": "4.1.0",
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
     },
     "exposed": {
       "blur": "4.3.0",
@@ -707,12 +729,14 @@
   "VSwitch": {
     "props": {
       "size": "4.1.0",
-      "thumbColor": "4.1.0"
+      "thumbColor": "4.1.0",
+      "description": "4.3.0"
     },
     "slots": {
       "thumb": "3.5.0",
       "track-false": "3.5.0",
-      "track-true": "3.5.0"
+      "track-true": "3.5.0",
+      "description": "4.3.0"
     },
     "exposed": {
       "blur": "4.3.0",
