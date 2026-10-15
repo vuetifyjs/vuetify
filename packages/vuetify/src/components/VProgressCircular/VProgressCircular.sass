@@ -60,7 +60,6 @@ $split-transition: var(--v-progress-circular-transition-duration) settings.$dece
       --v-progress-circular-length: max(0, var(--v-progress-circular-to) - var(--v-progress-circular-from))
       fill: none
       stroke-dasharray: calc(var(--v-progress-circular-length) * 1px) 400px
-      stroke-linecap: round
       // a zero-length dash still draws its round caps
       stroke-width: clamp(0px, var(--v-progress-circular-length) * 1000px, var(--v-progress-circular-stroke))
 
@@ -119,6 +118,7 @@ $split-transition: var(--v-progress-circular-transition-duration) settings.$dece
       transform-origin: center center
       transition: $progress-circular-intermediate-svg-transition
 
+    &.v-progress-circular--variant-split > svg,
     &.v-progress-circular--shape-wavy > svg
       animation: progress-circular-split-spin $progress-circular-split-animation-duration linear infinite
 

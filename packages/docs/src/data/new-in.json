@@ -495,7 +495,8 @@
       "reveal": "3.12.0",
       "rounded": "3.11.0",
       "shape": "4.3.0",
-      "transition": "4.2.0"
+      "transition": "4.2.0",
+      "variant": "4.3.0"
     },
     "examples": {
       "prop-reveal": "3.12.0",
