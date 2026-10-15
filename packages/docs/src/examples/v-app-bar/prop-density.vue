@@ -38,3 +38,9 @@
     </v-layout>
   </v-card>
 </template>
+
+<example-meta lang="json">
+{
+  "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=1655-146578"
+}
+</example-meta>
