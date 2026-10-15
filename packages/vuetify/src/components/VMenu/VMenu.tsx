@@ -70,9 +70,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
     const { isRtl } = useRtl()
@@ -270,6 +273,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           contentProps={ props.contextMenu ? mergeProps({ tabindex: -1 }, props.contentProps) : props.contentProps }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onKeydown={ onKeydown }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
+          onAfterLeave={ () => emit('afterLeave') }
           { ...scopeId }
         >
           {{
