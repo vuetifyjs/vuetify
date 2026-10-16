@@ -1,0 +1,16 @@
+{
+  "description": "Overlays multiple `v-sparkline` components on a shared scale with axes, gridlines and a combined tooltip.",
+  "props": {
+    "height": "Height of the plot area. Children fill it unless they set their own `height`, which renders them as a band anchored to the bottom.",
+    "interactive": "Enables a shared crosshair, markers on every series, and keyboard navigation (arrow keys). Replaces the per-sparkline interaction.",
+    "max": "Upper bound of the shared scale. When omitted, it is derived from the data and rounded to a tick.",
+    "min": "Lower bound of the shared scale. When omitted, it is derived from the data and rounded to a tick.",
+    "tooltip": "Displays one tooltip listing the value of every series at the active point. Requires **interactive**. Can be `true` or an object with `location` (`'left'` or `'right'` of the crosshair, flipped when there is no room inside the plot), `offset` and `class`.",
+    "xAxis": "Shows the horizontal axis. Can be `true` or an object with `labels` (spread evenly from the first to the last point), or `ticks` (count) and `format` (receives the point index, also used as the tooltip title).",
+    "yAxis": "Shows the vertical axis. Can be `true` or an object with `ticks` (approximate count), `format` (receives the value) and `grid` to draw a line at every tick."
+  },
+  "slots": {
+    "default": "The `v-sparkline` components to plot. A sparkline with its own `min` or `max` keeps an independent scale and is excluded from the y-axis.",
+    "tooltip": "Custom content for the combined tooltip. Receives `{ index: number, items: { index, value, color, type }[] }`, one item per sparkline."
+  }
+}

@@ -1,0 +1,12 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$sparkline-group-gap: 8px !default;
+$sparkline-group-padding-block: 8px !default;
+$sparkline-group-grid-line-border: 1px dashed tools.theme-color('on-surface', .12) !default;
+$sparkline-group-crosshair-border: 1px dashed currentColor !default;
+$sparkline-group-crosshair-opacity: .5 !default;
+
+$chart-axis-font-size: .75rem !default;
+$chart-axis-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
+$chart-axis-transition: --v-chart-axis-position 300ms settings.$standard-easing !default;
