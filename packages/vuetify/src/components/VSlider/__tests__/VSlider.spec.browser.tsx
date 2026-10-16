@@ -36,6 +36,22 @@ describe('VSlider', () => {
     expect(model.value).toBeDefined()
   })
 
+  it.each(['default', 'pill'] as const)('should fill track from the end when reversed (%s)', async variant => {
+    render(() => <VSlider variant={ variant } modelValue={ 30 } reverse />)
+
+    const track = screen.getByCSS('.v-slider-track').getBoundingClientRect()
+    const fill = screen.getByCSS('.v-slider-track__fill').getBoundingClientRect()
+
+    expect(fill.right).toBeCloseTo(track.right, 0)
+    expect(fill.width).toBeLessThan(track.width / 2)
+  })
+
+  it('should treat reverse bound to undefined as not reversed', async () => {
+    render(() => <VSlider modelValue={ 20 } reverse={ undefined } />)
+
+    expect(screen.getByCSS('.v-slider-thumb').style.getPropertyValue('--v-slider-thumb-position')).toBe('20%')
+  })
+
   it('should allow user to drag thumb', async () => {
     const model = ref()
     render(() => <VSlider v-model={ model.value } />)

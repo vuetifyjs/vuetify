@@ -186,6 +186,36 @@
     .v-slider-thumb__ripple
       display: none
 
+    .v-slider-thumb__label
+      background: $slider-pill-thumb-label-background
+      color: $slider-pill-thumb-label-color
+      font-size: map.get($slider-pill-thumb-label-typography, 'size')
+      font-weight: map.get($slider-pill-thumb-label-typography, 'weight')
+      line-height: map.get($slider-pill-thumb-label-typography, 'line-height')
+      letter-spacing: map.get($slider-pill-thumb-label-typography, 'letter-spacing')
+      height: $slider-pill-thumb-label-height
+      min-width: $slider-pill-thumb-label-min-width
+      padding: $slider-pill-thumb-label-padding
+      border-radius: $slider-pill-thumb-label-border-radius
+
+      > .v-slider-thumb__label-wedge
+        display: none
+
+    &.v-input--horizontal
+      .v-slider-thumb__label-container
+        left: calc(#{$slider-pill-thumb-width} / 2)
+
+      .v-slider-thumb__label
+        bottom: $slider-pill-thumb-label-offset
+
+    &.v-input--vertical
+      .v-slider-thumb__label-container
+        top: calc(#{$slider-pill-thumb-width} / 2)
+
+      .v-slider-thumb__label
+        top: math.div($slider-pill-thumb-label-height, -2)
+        left: $slider-pill-thumb-label-offset
+
     .v-slider-thumb:focus-visible,
     .v-slider-thumb--focused
       .v-slider-thumb__surface

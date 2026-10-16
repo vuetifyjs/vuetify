@@ -202,7 +202,7 @@ export const useSlider = ({
 }) => {
   const form = useForm(props)
   const { isRtl } = useRtl()
-  const isReversed = toRef(() => props.reverse)
+  const isReversed = toRef(() => !!props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 

@@ -182,9 +182,20 @@
   .v-slider--variant-pill
     --v-slider-pill-gap: #{$slider-pill-gap}
     --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
+    --v-slider-pill-thumb-gap: calc(var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
 
     .v-slider-track
+      --v-slider-pill-start-gap: 0px
+      --v-slider-pill-stop-gap: var(--v-slider-pill-thumb-gap)
       border-radius: $slider-pill-track-outer-radius
+
+    .v-slider-track--reverse
+      --v-slider-pill-start-gap: var(--v-slider-pill-thumb-gap)
+      --v-slider-pill-stop-gap: 0px
+
+    &.v-range-slider .v-slider-track
+      --v-slider-pill-start-gap: var(--v-slider-pill-thumb-gap)
+      --v-slider-pill-stop-gap: var(--v-slider-pill-thumb-gap)
 
     .v-slider-track__background,
     .v-slider-track__fill
@@ -201,27 +212,29 @@
           height: var(--v-slider-track-size)
 
         &__fill
-          inset-inline-start: calc(var(--v-slider-value-start) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-          width: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) - var(--v-slider-pill-gap) * 2)
+          inset-inline-start: calc(var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
+          width: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-start-gap) - var(--v-slider-pill-stop-gap))
           height: var(--v-slider-track-size)
 
       .v-slider-track__inactive--before
         inset-inline-start: 0
         width: calc(var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-radius: $slider-pill-track-outer-radius $slider-pill-track-inner-radius $slider-pill-track-inner-radius $slider-pill-track-outer-radius
+        border-start-end-radius: $slider-pill-track-inner-radius
+        border-end-end-radius: $slider-pill-track-inner-radius
 
         ~ .v-slider-track__fill
-          border-top-left-radius: $slider-pill-track-inner-radius
-          border-bottom-left-radius: $slider-pill-track-inner-radius
+          border-start-start-radius: $slider-pill-track-inner-radius
+          border-end-start-radius: $slider-pill-track-inner-radius
 
       .v-slider-track__inactive--after
         inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
         width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-radius: $slider-pill-track-inner-radius $slider-pill-track-outer-radius $slider-pill-track-outer-radius $slider-pill-track-inner-radius
+        border-start-start-radius: $slider-pill-track-inner-radius
+        border-end-start-radius: $slider-pill-track-inner-radius
 
         ~ .v-slider-track__fill
-          border-top-right-radius: $slider-pill-track-inner-radius
-          border-bottom-right-radius: $slider-pill-track-inner-radius
+          border-start-end-radius: $slider-pill-track-inner-radius
+          border-end-end-radius: $slider-pill-track-inner-radius
 
       .v-slider-track__inactive--before,
       .v-slider-track__inactive--after
@@ -236,10 +249,10 @@
           transform: translateY(-50%)
 
       .v-slider-track__inactive--before::before
-        left: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+        inset-inline-start: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
 
       .v-slider-track__inactive--after::before
-        right: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+        inset-inline-end: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
 
     &.v-input--vertical
       .v-slider-track
@@ -249,8 +262,8 @@
           width: var(--v-slider-track-size)
 
         &__fill
-          top: calc(100% - var(--v-slider-value-stop) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-          height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) - var(--v-slider-pill-gap) * 2)
+          top: calc(100% - var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap))
+          height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-start-gap) - var(--v-slider-pill-stop-gap))
           width: var(--v-slider-track-size)
 
       .v-slider-track__inactive--before
@@ -288,3 +301,37 @@
 
       .v-slider-track__inactive--after::before
         top: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
+
+    .v-slider-track__tick
+      // Collapses to 0 when the tick is inside a thumb gap
+      --v-slider-pill-tick-size: clamp(0px, 1000 * min(max(var(--v-slider-tick-position) - var(--v-slider-value-start), var(--v-slider-value-start) - var(--v-slider-tick-position)) - var(--v-slider-pill-start-gap), max(var(--v-slider-tick-position) - var(--v-slider-value-stop), var(--v-slider-value-stop) - var(--v-slider-tick-position)) - var(--v-slider-pill-stop-gap)), #{$slider-pill-stop-indicator-size})
+      width: $slider-pill-stop-indicator-size
+      height: $slider-pill-stop-indicator-size
+      border-radius: $slider-pill-stop-indicator-border-radius
+      background-color: currentColor
+
+      &--filled
+        background-color: $slider-pill-tick-filled-background
+
+      &--first, &--last
+        background-color: transparent
+
+    &.v-input--horizontal
+      .v-slider-track__tick
+        width: var(--v-slider-pill-tick-size)
+        top: 50%
+        margin-top: 0
+        transform: translate(-50%, -50%)
+
+        @include tools.rtl()
+          transform: translate(50%, -50%)
+
+    &.v-input--vertical
+      .v-slider-track__tick
+        height: var(--v-slider-pill-tick-size)
+        inset-inline-start: 50%
+        margin-inline-start: 0
+        transform: translate(-50%, 50%)
+
+        @include tools.rtl()
+          transform: translate(50%, 50%)

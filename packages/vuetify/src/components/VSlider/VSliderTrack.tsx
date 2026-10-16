@@ -5,7 +5,7 @@ import './VSliderTrack.sass'
 import { VSliderSymbol } from './slider'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useRounded } from '@/composables/rounded'
 
@@ -49,6 +49,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       color,
       parsedTicks,
       rounded,
+      isReversed,
       showTicks,
       tickSize,
       trackColor,
@@ -58,10 +59,11 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       vertical,
       min,
       max,
-      // indexFromEnd, TODO: understand and restore behavior
     } = slider
 
     const isPill = computed(() => variant.value === 'pill')
+    const visualStart = computed(() => isReversed.value ? 100 - props.stop : props.start)
+    const visualStop = computed(() => isReversed.value ? 100 - props.start : props.stop)
 
     const { roundedClasses, roundedStyles } = useRounded(rounded)
 
@@ -75,6 +77,11 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
       backgroundColorStyles: trackColorStyles,
     } = useBackgroundColor(trackColor)
 
+    const {
+      textColorClasses: tickColorClasses,
+      textColorStyles: tickColorStyles,
+    } = useTextColor(() => isPill.value ? trackFillColor.value : undefined)
+
     const computedTicks = computed(() => {
       if (!showTicks.value) return []
 
@@ -82,7 +89,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
 
       return ticks.map((tick, index) => {
         const directionValue = tick.value !== min.value && tick.value !== max.value
-          ? convertToUnit(tick.position, '%')
+          ? convertToUnit(isReversed.value ? 100 - tick.position : tick.position, '%')
           : undefined
 
         return (
@@ -92,8 +99,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
               'v-slider-track__tick',
               {
                 'v-slider-track__tick--filled': tick.position >= props.start && tick.position <= props.stop,
-                'v-slider-track__tick--first': tick.value === min.value,
-                'v-slider-track__tick--last': tick.value === max.value,
+                'v-slider-track__tick--first': tick.value === (isReversed.value ? max.value : min.value),
+                'v-slider-track__tick--last': tick.value === (isReversed.value ? min.value : max.value),
               },
             ]}
             style={{ '--v-slider-tick-position': directionValue }}
@@ -115,6 +122,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
         <div
           class={[
             'v-slider-track',
+            { 'v-slider-track--reverse': isReversed.value },
             roundedClasses.value,
             props.class,
           ]}
@@ -122,8 +130,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             {
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),
-              '--v-slider-value-start': convertToUnit(props.start, '%'),
-              '--v-slider-value-stop': convertToUnit(props.stop, '%'),
+              '--v-slider-value-start': convertToUnit(visualStart.value, '%'),
+              '--v-slider-value-stop': convertToUnit(visualStop.value, '%'),
             },
             roundedStyles.value,
             props.style,
@@ -131,7 +139,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
         >
           { isPill.value ? (
             <>
-              { props.start > 0 && (
+              { visualStart.value > 0 && (
                 <div
                   class={[
                     'v-slider-track__background',
@@ -144,17 +152,19 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
                   style={[trackColorStyles.value]}
                 />
               )}
-              <div
-                class={[
-                  'v-slider-track__background',
-                  'v-slider-track__inactive--after',
-                  trackColorClasses.value,
-                  {
-                    'v-slider-track__background--opacity': !!color.value || !trackFillColor.value,
-                  },
-                ]}
-                style={[trackColorStyles.value]}
-              />
+              { visualStop.value < 100 && (
+                <div
+                  class={[
+                    'v-slider-track__background',
+                    'v-slider-track__inactive--after',
+                    trackColorClasses.value,
+                    {
+                      'v-slider-track__background--opacity': !!color.value || !trackFillColor.value,
+                    },
+                  ]}
+                  style={[trackColorStyles.value]}
+                />
+              )}
             </>
           ) : (
             <div
@@ -184,7 +194,9 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
                 {
                   'v-slider-track__ticks--always-show': showTicks.value === 'always',
                 },
+                tickColorClasses.value,
               ]}
+              style={ tickColorStyles.value }
             >
               { computedTicks.value }
             </div>
