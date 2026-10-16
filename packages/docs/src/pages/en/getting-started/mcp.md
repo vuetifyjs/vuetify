@@ -18,13 +18,7 @@ Vuetify MCP is the official [Model Context Protocol](https://modelcontextprotoco
 
 ## Quick start
 
-The hosted server needs no install and no API key:
-
-```bash
-claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
-```
-
-Or let the CLI detect your editor and configure it:
+The hosted server at `https://mcp.vuetifyjs.com/mcp` needs no install and no API key. Pick your client below, or let the CLI detect your editor and configure it for you:
 
 ```bash
 npx -y @vuetify/mcp config --remote   # hosted
@@ -35,19 +29,18 @@ npx -y @vuetify/mcp config            # local (stdio)
 
 To use [bins, playgrounds and links](#share-reproductions-vuetify-one) you need to connect to the `/one` endpoint instead and log in with your Vuetify One account. See [Authentication](https://github.com/vuetifyjs/mcp#authentication) in the MCP README for setup instructions.
 
-```bash
-claude mcp add --transport http vuetify-one https://mcp.vuetifyjs.com/one
-```
+Use `https://mcp.vuetifyjs.com/one` in place of `https://mcp.vuetifyjs.com/mcp` in any of the configurations below.
 
 :::
 
-## Editor configuration
+## Client setup
 
-### Cursor
+### Editors and CLIs
 
-`~/.cursor/mcp.json`:
+::: tabs
 
-```json
+```json [Cursor]
+// ~/.cursor/mcp.json
 {
   "mcpServers": {
     "vuetify-mcp": { "url": "https://mcp.vuetifyjs.com/mcp" }
@@ -55,11 +48,8 @@ claude mcp add --transport http vuetify-one https://mcp.vuetifyjs.com/one
 }
 ```
 
-### VS Code
-
-`.vscode/mcp.json` in your workspace:
-
-```json
+```json [VS Code]
+// .vscode/mcp.json
 {
   "servers": {
     "vuetify-mcp": { "type": "http", "url": "https://mcp.vuetifyjs.com/mcp" }
@@ -67,11 +57,54 @@ claude mcp add --transport http vuetify-one https://mcp.vuetifyjs.com/one
 }
 ```
 
-### Claude Desktop
+```json [Windsurf]
+// mcp_config.json (Cascade panel > ... > Open MCP config file)
+{
+  "mcpServers": {
+    "vuetify-mcp": { "serverUrl": "https://mcp.vuetifyjs.com/mcp" }
+  }
+}
+```
 
-Add the hosted server as a custom connector: open **Customize > Connectors**, click **+ Add > Add custom connector**, and enter `https://mcp.vuetifyjs.com/mcp`. Custom connectors are available on all Claude plans (Free is limited to one) and are reached from Anthropic's cloud, not your machine.
+```json [Zed]
+// settings.json
+{
+  "context_servers": {
+    "vuetify-mcp": { "url": "https://mcp.vuetifyjs.com/mcp" }
+  }
+}
+```
 
-To run the server locally instead, add it to `claude_desktop_config.json`:
+```bash [Claude Code]
+claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
+```
+
+```bash [Codex]
+codex mcp add vuetify-mcp --url https://mcp.vuetifyjs.com/mcp
+```
+
+```json [Gemini CLI]
+// ~/.gemini/settings.json
+{
+  "mcpServers": {
+    "vuetify-mcp": { "httpUrl": "https://mcp.vuetifyjs.com/mcp" }
+  }
+}
+```
+
+:::
+
+### Chat apps
+
+- **Grok**: go to [grok.com/connectors](https://grok.com/connectors), click **New Connector**, choose **Custom**, and enter `https://mcp.vuetifyjs.com/mcp`.
+- **Claude Desktop / claude.ai**: open **Customize > Connectors**, click **+ Add > Add custom connector**, and enter `https://mcp.vuetifyjs.com/mcp`. Free plans are limited to one custom connector.
+- **ChatGPT desktop**: open **Settings > MCP servers**, click **Add server**, choose **Streamable HTTP**, and enter `https://mcp.vuetifyjs.com/mcp`.
+
+Connectors in chat apps are reached from the provider's cloud, so they always use the hosted server.
+
+### Local (stdio)
+
+To run the server on your machine instead, use this entry in any client that supports stdio servers (for example `claude_desktop_config.json` or `~/.cursor/mcp.json`):
 
 ```json
 {
@@ -79,12 +112,6 @@ To run the server locally instead, add it to `claude_desktop_config.json`:
     "vuetify-mcp": { "command": "npx", "args": ["-y", "@vuetify/mcp"] }
   }
 }
-```
-
-### Any client (local stdio)
-
-```json
-{ "command": "npx", "args": ["-y", "@vuetify/mcp"] }
 ```
 
 ## What your assistant can do
