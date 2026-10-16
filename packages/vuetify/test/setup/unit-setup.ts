@@ -1,7 +1,7 @@
 import { afterEach, vi } from 'vitest'
 import { cleanup } from '@testing-library/vue'
 
-// Stub visualViewport so Vuetify components (e.g. VMenu) don't crash in JSDOM
+// Stub visualViewport so Vuetify components (e.g. VMenu) don't crash in the test DOM
 if (!globalThis.visualViewport) {
   vi.stubGlobal('visualViewport', new EventTarget())
 }

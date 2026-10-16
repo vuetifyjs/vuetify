@@ -15,7 +15,7 @@ Colocated in `__tests__/` next to the source.
 
 | File                 | Project                         | For                                                        |
 | -------------------- | ------------------------------- | ---------------------------------------------------------- |
-| `*.spec.ts(x)`       | `unit` (jsdom)                  | pure logic: composables, util, local composables           |
+| `*.spec.ts(x)`       | `unit` (warpdom)                | pure logic: composables, util, local composables           |
 | `*.spec.browser.tsx` | `browser` (Playwright Chromium) | anything with layout, focus, keyboard, overlays, scrolling |
 
 Prefer extracting logic into a local composable and unit-testing it over mounting a component for a calculation.

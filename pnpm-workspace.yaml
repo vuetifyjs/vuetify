@@ -128,10 +128,11 @@ catalog:
   vue-eslint-parser: '^10.4.1'
 
   # Testing
-  jsdom: '^27.2.0'
   '@testing-library/user-event': '^14.6.1'
   '@testing-library/vue': '^8.1.0'
   timezone-mock: '^1.3.6'
+  warpdom: '^0.1.3'
+  vitest-environment-warpdom: '^0.1.0'
   playwright: '^1.62.1'
   '@vizzly-testing/cli': '^0.22.2'
   '@vizzly-testing/vitest': '^0.1.1'

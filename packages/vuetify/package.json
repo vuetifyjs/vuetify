@@ -191,7 +191,6 @@
     "dayjs": "catalog:",
     "dotenv": "catalog:",
     "fast-glob": "catalog:",
-    "jsdom": "catalog:",
     "luxon": "catalog:",
     "micromatch": "catalog:",
     "moment": "catalog:",
@@ -206,9 +205,11 @@
     "vite-live-preview": "catalog:",
     "vite-ssr": "catalog:",
     "vitest": "catalog:",
+    "vitest-environment-warpdom": "catalog:",
     "vue": "catalog:",
     "vue-i18n": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "warpdom": "catalog:"
   },
   "peerDependencies": {
     "typescript": ">=4.7",

@@ -78,7 +78,7 @@ export default defineConfig(configEnv => {
               name: 'unit',
               include: ['**/*.spec.{ts,tsx}'],
               setupFiles: ['../test/setup/unit-setup.ts'],
-              environment: 'jsdom',
+              environment: 'warpdom',
             },
           },
           {
