@@ -69,7 +69,9 @@ claude mcp add --transport http vuetify-one https://mcp.vuetifyjs.com/one
 
 ### Claude Desktop
 
-Claude Desktop only accepts stdio servers. Run it locally:
+Add the hosted server as a custom connector: open **Settings > Connectors**, choose **Add custom connector**, and enter `https://mcp.vuetifyjs.com/mcp`. Custom connectors are available on all Claude plans (Free is limited to one) and are reached from Anthropic's cloud, not your machine.
+
+To run the server locally instead, add it to `claude_desktop_config.json`:
 
 ```json
 {
@@ -78,8 +80,6 @@ Claude Desktop only accepts stdio servers. Run it locally:
   }
 }
 ```
-
-Or bridge to the hosted server with `"args": ["-y", "mcp-remote", "https://mcp.vuetifyjs.com/mcp"]`.
 
 ### Any client (local stdio)
 
