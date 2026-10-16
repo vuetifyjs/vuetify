@@ -6,7 +6,7 @@ import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { makeVColorPickerPreviewProps, VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useRtl } from '@/composables'

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Color inputs
   title: Color input component
@@ -11,7 +12,7 @@ related:
 features:
   label: 'C: VColorInput'
   report: true
-  github: /labs/VColorInput/
+  github: /components/VColorInput/
 ---
 
 # Color inputs
@@ -19,20 +20,6 @@ features:
 The `v-color-input` component combines a text field with a color picker..
 
 <PageFeatures />
-
-## Installation
-
-Labs components require a manual import and installation of the component.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VColorInput } from 'vuetify/labs/VColorInput'
-
-export default createVuetify({
-  components: {
-    VColorInput,
-  },
-})
-```
 
 ## Usage
 

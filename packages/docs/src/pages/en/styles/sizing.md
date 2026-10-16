@@ -20,14 +20,13 @@ Sizing utility classes are used to modify the dimensions of an element.
 | Class        | Description      |
 | ------------ |------------------|
 | **h-auto**   | height: auto   |
-| **h-screen** | height: 100vh |
+| **h-screen** | height: 100dvh |
 | **h-0**      | height: 0      |
 | **h-25**     | height: 25%    |
 | **h-50**     | height: 50%    |
 | **h-75**     | height: 75%    |
 | **h-100**    | height: 100%   |
 | **fill-height** | height: 100% |
-| **height-screen** | height: 100dvh |
 | **w-auto**   | width: auto    |
 | **w-0**      | width: 0       |
 | **w-33**     | width: 33% |
@@ -77,19 +76,12 @@ You can also use the following SASS variables to customize the generated height 
       class: h,
       values: (
         auto: auto,
-        screen: 100vh,
+        screen: 100dvh,
         0: 0,
         25: 25%,
         50: 50%,
         75: 75%,
         100: 100%
-      )
-    ),
-    "height-screen": (
-      property: height,
-      class: h,
-      values: (
-        screen: 100dvh
       )
     ),
     "width": (
@@ -111,14 +103,13 @@ You can also use the following SASS variables to customize the generated height 
 );
 ```
 
-Disable height/width class generation by setting the the fill-height, height, height-screen, and, width variables to **false**.
+Disable height/width class generation by setting the the `fill-height`, `height` and `width` variables to **false**.
 
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (
   $utilities: (
     "fill-height": false,
     "height": false,
-    "height-screen": false,
     "width": false
   )
 );

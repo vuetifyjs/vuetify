@@ -89,6 +89,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       decimals,
       indexFromEnd,
       variant,
+      getValueText,
     } = slider
 
     const isHovered = shallowRef(false)
@@ -159,6 +160,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     useRender(() => {
       const positionPercentage = convertToUnit(indexFromEnd.value ? 100 - props.position : props.position, '%')
 
+      const valueText = getValueText(props.modelValue)
       const thumbLabelVisible = thumbLabel.value === 'always' ||
         (thumbLabel.value === true && props.focused) ||
         (thumbLabel.value === 'hover' && (isHovered.value || (props.focused && !isHidden.value)))
@@ -187,6 +189,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-valuemin={ min.value }
           aria-valuemax={ max.value }
           aria-valuenow={ props.modelValue }
+          aria-valuetext={ valueText }
           aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
@@ -222,7 +225,9 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
                 style={ backgroundColorStyles.value }
               >
                 <div>
-                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ?? props.modelValue.toFixed(step.value ? decimals.value : 1) }
+                  { slots['thumb-label']?.({ modelValue: props.modelValue }) ??
+                    valueText ??
+                    props.modelValue.toFixed(step.value ? decimals.value : 1)}
                 </div>
                 <div class="v-slider-thumb__label-wedge" />
               </div>

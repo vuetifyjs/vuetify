@@ -1,4 +1,5 @@
 {
+  "description": "Standard replacement for `form` HTML element. `v-model` makes it easy to determine if the fields inside are all valid and ready to submit.",
   "events": {
     "submit": "Emitted when form is submitted.",
     "update:modelValue": "Event emitted when the form's validity changes."

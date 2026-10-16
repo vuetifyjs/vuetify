@@ -15,6 +15,8 @@ export interface CommandPaletteProvide {
 
 export const VCommandPaletteSymbol: InjectionKey<CommandPaletteProvide> = Symbol.for('vuetify:command-palette')
 
+export const listItemKeys = ['value', 'title', 'subtitle', 'prependIcon', 'prependAvatar', 'appendIcon', 'appendAvatar'] as const
+
 export function useCommandPalette () {
   const commandPalette = inject(VCommandPaletteSymbol)
 

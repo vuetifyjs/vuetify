@@ -3,7 +3,7 @@
     <v-container :style="{ minHeight: '100%' }" class="d-flex">
       <v-row class="align-center justify-center">
         <v-col cols="auto">
-          <h1 class="text-h3 text-primary">
+          <h1 class="text-display-medium text-primary">
             Whoops, 404
           </h1>
 

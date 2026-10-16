@@ -11,12 +11,12 @@ import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { useRtl } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
@@ -28,6 +28,14 @@ export const makeVRangeSliderProps = propsFactory({
   ...makeSliderProps(),
 
   strict: Boolean,
+  startThumbAriaLabel: {
+    type: String,
+    default: '$vuetify.rangeSlider.ariaLabel.start',
+  },
+  endThumbAriaLabel: {
+    type: String,
+    default: '$vuetify.rangeSlider.ariaLabel.end',
+  },
   modelValue: {
     type: Array as PropType<readonly (string | number)[]>,
     default: () => ([0, 0]),
@@ -53,6 +61,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
     const { rtlClasses } = useRtl()
+    const { t } = useLocale()
 
     function getActiveThumb (e: MouseEvent | TouchEvent) {
       if (!startThumbRef.value || !stopThumbRef.value) return
@@ -148,6 +157,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       const inputProps = VInput.filterProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
+      const hasLabelElement = !!props.label && !slots.label && !inputAttrs['aria-label']
+
+      const thumbAttrs = omit(inputAttrs, ['aria-label', 'aria-labelledby'])
 
       return (
         <VInput
@@ -178,6 +190,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   props.label
                     ? (
                       <VLabel
+                        id={ `${slotProps.id.value}_label` }
                         class="v-slider__label"
                         text={ props.label }
                       />
@@ -190,6 +203,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
+                role="group"
+                aria-label={ inputAttrs['aria-label'] as string | undefined }
+                aria-labelledby={ (inputAttrs['aria-labelledby'] as string | undefined) ?? (hasLabelElement ? `${id.value}_label` : undefined) }
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }
                 onTouchstartPassive={ !readonly.value ? onSliderTouchstart : undefined }
               >
@@ -251,7 +267,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ model.value[1] }
                   position={ trackStart.value }
                   ripple={ props.ripple }
-                  { ...inputAttrs }
+                  { ...thumbAttrs }
+                  aria-label={ t(props.startThumbAriaLabel) }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>
@@ -288,7 +305,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   max={ max.value }
                   position={ trackStop.value }
                   ripple={ props.ripple }
-                  { ...inputAttrs }
+                  { ...thumbAttrs }
+                  aria-label={ t(props.endThumbAriaLabel) }
                 >
                   {{ 'thumb-label': slots['thumb-label'] }}
                 </VSliderThumb>

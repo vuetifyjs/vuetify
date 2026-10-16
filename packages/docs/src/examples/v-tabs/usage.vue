@@ -56,6 +56,12 @@
         label="Slider color"
         clearable
       ></v-select>
+      <v-select
+        v-if="model !== 'inset'"
+        v-model="sliderVariant"
+        :items="['primary', 'secondary']"
+        label="Slider variant"
+      ></v-select>
       <v-checkbox v-model="grow" label="Grow" hide-details></v-checkbox>
       <v-checkbox v-if="model !== 'inset'" v-model="hideSlider" label="Hide slider" hide-details></v-checkbox>
     </template>
@@ -72,6 +78,7 @@
   const color = shallowRef('primary')
   const bgColor = shallowRef(null)
   const sliderColor = shallowRef(null)
+  const sliderVariant = shallowRef('secondary')
   const grow = shallowRef(false)
   const hideSlider = shallowRef(false)
 
@@ -81,6 +88,7 @@
       'bg-color': bgColor.value || undefined,
       direction: direction.value === 'vertical' ? direction.value : undefined,
       'slider-color': sliderColor.value || undefined,
+      'slider-variant': (model.value !== 'inset' && sliderVariant.value === 'primary') ? 'primary' : undefined,
       grow: grow.value || undefined,
       'hide-slider': (model.value !== 'inset' && hideSlider.value) || undefined,
       inset: model.value === 'inset' || undefined,

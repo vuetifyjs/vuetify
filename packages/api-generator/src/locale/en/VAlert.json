@@ -1,4 +1,5 @@
 {
+  "description": "Used to convey important message that has to stand out from the regular content. Easy to use with `type` for typical error, warning, info, and success callouts.",
   "props": {
     "border": "Adds a colored border to the component.",
     "borderColor": "Specifies the color of the border. Only used in combination with **border** prop. Accepts any color value.",

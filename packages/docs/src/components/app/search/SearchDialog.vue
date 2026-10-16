@@ -3,7 +3,8 @@
   <v-dialog
     v-model="model"
     activator="parent"
-    content-class="overflow-visible align-self-start mt-16"
+    content-class="overflow-visible mt-16"
+    location="top center"
     max-height="900"
     width="600"
     scrollable

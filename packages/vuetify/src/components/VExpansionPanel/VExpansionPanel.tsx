@@ -47,7 +47,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
     const groupItem = useGroupItem(props, VExpansionPanelSymbol)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const isDisabled = toRef(() => groupItem?.disabled.value || props.disabled)
 
     const selectedIndices = computed(() => groupItem.group.items.value.reduce<number[]>((arr, item, index) => {
@@ -92,6 +92,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
           ]}
           style={[
             backgroundColorStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >

@@ -144,6 +144,24 @@ describe('validation', () => {
     expect(wrapper.vm.isValid).toBeNull()
   })
 
+  it('should validate when the value is cleared to null while focused', async () => {
+    const wrapper = mountFunction({
+      rules: [(v: any) => !!v || 'required'],
+      modelValue: 1,
+      focused: true,
+    })
+
+    await nextTick()
+
+    expect(wrapper.vm.errorMessages).toEqual([])
+
+    await wrapper.setProps({ modelValue: null })
+    await nextTick()
+
+    expect(wrapper.vm.errorMessages).toEqual(['required'])
+    expect(wrapper.vm.isValid).toBe(false)
+  })
+
   it('should return valid if no rules are set', async () => {
     const wrapper = mountFunction()
 

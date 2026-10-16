@@ -20,6 +20,9 @@ export default {
       activateNone: 'Odaberite za uklanjanje sortiranja.',
       activateDescending: 'Odaberite za silazno sortiranje.',
       activateAscending: 'Odaberite za uzlazno sortiranje.',
+      selectRow: 'Odaberi redak',
+      selectAll: 'Odaberi sve',
+      selectGroup: 'Odaberi grupu',
     },
     sortBy: 'Sortirajte po',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'do',
+  },
+  monthPicker: {
+    title: 'Odaberite mjesec',
+    itemsSelected: '{0} odabrano',
+    header: 'Unesite mjesec',
+    range: {
+      title: 'Unesite mjesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sljedeća godina',
+      selectYear: 'Odaberite godinu',
+      currentMonth: 'Trenutni mjesec, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} odabrano',
@@ -69,11 +86,15 @@ export default {
     moreEvents: 'Još {0}',
     today: 'Danas',
   },
+  heatmap: {
+    less: 'Manje',
+    more: 'Više',
+  },
   input: {
     clear: 'Očisti {0}',
     prependAction: '{0} prethodna radnja',
     appendAction: '{0} dodana radnja',
-    otp: 'Unesite OTP znak {0}',
+    otp: 'Unesite kod za potvrdu',
   },
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Ocjena {0} od {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Više opcija',
   },
   loading: 'Učitavanje...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Tipkovnička prečica: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reproduciraj',
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Glasnoća',
-    showVolume: 'Prikaži kontrolu glasnoće',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Puni zaslon',

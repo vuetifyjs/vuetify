@@ -1,4 +1,5 @@
 {
+  "description": "Shows slides with simple navigation, support for horizontal and vertical orientation, auto-play control. Built on top of `v-window`.",
   "props": {
     "color": "Applies a color to the navigation dots - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "continuous": "Determines whether carousel is continuous.",
@@ -8,6 +9,7 @@
     "hideDelimiterBackground": "Hides the bottom delimiter background.",
     "interval": "The duration between image cycles. Requires the **cycle** prop.",
     "nextIcon": "The displayed icon for forcing pagination to the next item.",
+    "pauseOnHover": "Pauses automatic cycling while the pointer is over the carousel. Keyboard focus inside the carousel pauses it regardless of this prop. Requires the **cycle** prop.",
     "prevIcon": "The displayed icon for forcing pagination to the previous item.",
     "progress": "Displays a carousel progress bar. Requires the **cycle** prop and **interval**.",
     "showArrows": "Displays arrows for next/previous navigation.",

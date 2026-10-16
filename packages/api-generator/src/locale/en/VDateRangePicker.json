@@ -1,0 +1,12 @@
+{
+  "description": "A dual-month date range picker built on top of `v-date-picker`. Shows two adjacent months side-by-side with a single shared range selection.",
+  "props": {
+    "independentMonths": "Decouples the two calendar panels so each month can be navigated independently."
+  },
+  "events": {
+    "update:modelValue": "Emitted when the range selection changes."
+  },
+  "slots": {
+    "footer": "Slot rendered below the calendar panels. Sits inside the picker container so it does not span across externally composed siblings such as a presets sidebar."
+  }
+}

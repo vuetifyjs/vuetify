@@ -12,7 +12,7 @@
 
 <script setup>
   const items = Array.from({ length: 5 })
-    .map((_, i) => ({ image: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` }))
+    .map((_, i) => ({ image: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` }))
 
   const sizeGroups = [
     { size: 'x-small', gap: -6 },
@@ -27,7 +27,7 @@
   export default {
     data: () => ({
       items: Array.from({ length: 5 })
-        .map((_, i) => ({ image: `https://vuetifyjs.b-cdn.net/docs/images/one/snips/avatars/${i}.jpg` })),
+        .map((_, i) => ({ image: `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${i}.jpg` })),
       sizeGroups: [
         { size: 'x-small', gap: -6 },
         { size: 'small', gap: -8 },

@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { isObject, propsFactory } from '@/util'
+import { isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -42,10 +42,6 @@ const presets: Record<string, string> = {
   'time-with-seconds': '##:##:##',
 }
 
-export function isMaskDelimiter (char: string): boolean {
-  return char ? defaultDelimiters.test(char) : false
-}
-
 const defaultTokens: Record<string, MaskItem> = {
   '#': {
     pattern: /[0-9]/,
@@ -73,7 +69,7 @@ const defaultTokens: Record<string, MaskItem> = {
 
 export function useMask (props: MaskProps) {
   const mask = computed(() => {
-    if (typeof props.mask === 'string') {
+    if (isString(props.mask)) {
       if (props.mask in presets) return presets[props.mask]
       return props.mask
     }
@@ -91,7 +87,7 @@ export function useMask (props: MaskProps) {
   }
 
   function maskValidates (mask: string, char: string): boolean {
-    if (char == null || !isMask(mask)) return false
+    if (!isString(char) || !isMask(mask)) return false
     const item = tokens.value[mask]
     if (item.pattern) return item.pattern.test(char)
     return item.test(char)
@@ -105,7 +101,7 @@ export function useMask (props: MaskProps) {
   function maskText (text: string | null | undefined): string {
     const trimmedText = text?.trim().replace(/\s+/g, ' ')
 
-    if (trimmedText == null) return ''
+    if (!isString(trimmedText)) return ''
 
     if (!mask.value.length || !trimmedText.length) return trimmedText
 
@@ -132,6 +128,10 @@ export function useMask (props: MaskProps) {
       } else if (maskValidates(mchar, tchar)) {
         newText += convert(mchar, tchar)
         textIndex++
+      } else if (textIndex < trimmedText.length) {
+        // No match, try the next input character
+        textIndex++
+        continue
       } else {
         break
       }
@@ -142,22 +142,38 @@ export function useMask (props: MaskProps) {
   }
 
   function unmaskText (text: string | null): string | null {
-    if (text == null) return null
+    if (!isString(text)) return null
 
     if (!mask.value.length || !text.length) return text
 
+    let result = ''
+    const unmaskMap = getUnmaskMap(text)
+    for (let i = 0; i < text.length; i++) {
+      if (!unmaskMap[i]) result += text[i]
+    }
+    return result
+  }
+
+  function isDelimiter (text: string, index: number): boolean {
+    if (!mask.value.length || !text.length) return false
+    return !!getUnmaskMap(text)[index]
+  }
+
+  function getUnmaskMap (text: string | null): boolean[] {
+    if (!isString(text) || !mask.value.length || !text.length) return []
+
     let textIndex = 0
     let maskIndex = 0
-    let newText = ''
+    const result = Array.from({ length: text.length }, () => true)
 
     while (true) {
       const mchar = mask.value[maskIndex]
       const tchar = text[textIndex]
 
-      if (tchar == null) break
+      if (!isString(tchar)) break
 
-      if (mchar == null) {
-        newText += tchar
+      if (!isString(mchar)) {
+        result[textIndex] = false
         textIndex++
         continue
       }
@@ -173,7 +189,7 @@ export function useMask (props: MaskProps) {
 
       if (maskValidates(mchar, tchar)) {
         // masked char
-        newText += tchar
+        result[textIndex] = false
         textIndex++
         maskIndex++
         continue
@@ -181,7 +197,7 @@ export function useMask (props: MaskProps) {
         // input doesn't match mask, skip forward until it does
         while (true) {
           const mchar = mask.value[maskIndex++]
-          if (mchar == null || maskValidates(mchar, tchar)) break
+          if (!isString(mchar) || maskValidates(mchar, tchar)) break
         }
         continue
       }
@@ -189,7 +205,8 @@ export function useMask (props: MaskProps) {
       textIndex++
       maskIndex++
     }
-    return newText
+
+    return result
   }
 
   function isValid (text: string): boolean {
@@ -206,6 +223,7 @@ export function useMask (props: MaskProps) {
   }
 
   return {
+    isDelimiter,
     isValid,
     isComplete,
     mask: maskText,

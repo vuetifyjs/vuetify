@@ -33,7 +33,7 @@
         <v-list-item>
           <pre
             v-if="logs.length"
-            class="overflow-y-auto text-caption text-pre-wrap my-0"
+            class="overflow-y-auto text-body-small text-pre-wrap my-0"
             style="max-height: 80px"
           >{{ logs.join('\n') }}</pre>
         </v-list-item>
@@ -106,6 +106,7 @@
 
   const props = computed(() => {
     return {
+      ref: 'snackbarQueue',
       'v-model': 'messages',
       'display-strategy': displayStrategy.value !== 'hold' ? displayStrategy.value : undefined,
       collapsed: collapsed.value || undefined,
@@ -137,6 +138,7 @@
     return `<script setup>
   import { ref } from 'vue'
 
+  const snackbarQueue = ref()
   const messages = ref([])
   const logs = ref([])
   let messageCount = 0

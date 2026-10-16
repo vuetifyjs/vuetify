@@ -8,10 +8,12 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 // Utilities
 import { computed, onMounted, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
+import { getTargetBox } from '@/util/box'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
+import type { Box } from '@/util/box'
 
 export const makeVColorPickerCanvasProps = propsFactory({
   color: {
@@ -82,8 +84,9 @@ export const VColorPickerCanvas = defineComponent({
       }
     })
 
-    const { resizeRef } = useResizeObserver(entries => {
-      if (!resizeRef.el?.offsetParent) return
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, entries => {
+      if (!el.value?.offsetParent) return
 
       const { width, height } = entries[0].contentRect
 
@@ -91,7 +94,7 @@ export const VColorPickerCanvas = defineComponent({
       canvasHeight.value = Math.round(height)
     })
 
-    function updateDotPosition (x: number, y: number, rect: DOMRect) {
+    function updateDotPosition (x: number, y: number, rect: Box) {
       const { left, top, width, height } = rect
       dotPosition.value = {
         x: clamp(x - left, 0, width),
@@ -121,8 +124,9 @@ export const VColorPickerCanvas = defineComponent({
       isInteracting.value = true
 
       const coords = getEventCoordinates(e)
+      const point = getTargetBox([coords.clientX, coords.clientY])
 
-      updateDotPosition(coords.clientX, coords.clientY, canvasRef.value.getBoundingClientRect())
+      updateDotPosition(point.x, point.y, getTargetBox(canvasRef.value))
     }
 
     function handleMouseUp () {
@@ -178,7 +182,7 @@ export const VColorPickerCanvas = defineComponent({
 
     useRender(() => (
       <div
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-color-picker-canvas',
           props.class,

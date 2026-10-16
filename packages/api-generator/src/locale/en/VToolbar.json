@@ -1,4 +1,5 @@
 {
+  "description": "Pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.",
   "props": {
     "absolute": "Applies position: absolute to the component.",
     "collapse": "Puts the toolbar into a collapsed state reducing its maximum width.",

@@ -20,7 +20,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, isObject, propsFactory, useRender } from '@/util'
+import { genericComponent, isObject, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -61,7 +61,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
 
     const badgeDotSize = computed(() => {
@@ -86,7 +86,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
         dotSize: badgeDotSize.value,
         offsetX: badgeOffset.value,
         offsetY: badgeOffset.value,
-        color: typeof props.badge === 'string' ? props.badge : 'primary',
+        color: isString(props.badge) ? props.badge : 'primary',
         ...isObject(props.badge) ? props.badge : {},
       }
     })
@@ -112,6 +112,7 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
           style={[
             colorStyles.value,
             sizeStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >

@@ -4,7 +4,7 @@ import './VTimePicker.sass'
 // Components
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -20,7 +20,7 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { Period, VTimePickerViewMode } from './shared'
-import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { VPickerSlots } from '@/components/VPicker/VPicker'
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 
@@ -113,6 +113,15 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
     watch(inputHour, emitValue)
     watch(inputMinute, emitValue)
     watch(inputSecond, emitValue)
+
+    watch(period, (newPeriod, oldPeriod) => {
+      if (inputHour.value == null || newPeriod === oldPeriod) return
+      if (newPeriod === 'pm' && inputHour.value < 12) {
+        inputHour.value = inputHour.value + 12
+      } else if (newPeriod === 'am' && inputHour.value >= 12) {
+        inputHour.value = inputHour.value - 12
+      }
+    })
 
     watch(() => props.modelValue, val => setInputData(val))
 

@@ -34,7 +34,12 @@
       transition-property: $rating-item-button-transition-property
 
       .v-icon
-        transition: inherit
+        // TODO: cleanup in v5.0
+        // not effective, transition inheritance takes only from immediate parent
+        // which is the .v-btn__content, isolating transition properties of .v-btn
+        transition-property: inherit;
+        transition-duration: inherit;
+        transition-delay: inherit;
         transition-timing-function: $rating-item-transition-timing-function
 
     &:hover:not(.v-rating__item--focused)

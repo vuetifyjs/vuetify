@@ -20,6 +20,9 @@ export default {
       activateNone: 'Активируйте, чтобы убрать сортировку.',
       activateDescending: 'Активируйте для упорядочивания убыванию.',
       activateAscending: 'Активируйте для упорядочивания по возрастанию.',
+      selectRow: 'Выбрать строку',
+      selectAll: 'Выбрать всё',
+      selectGroup: 'Выбрать группу',
     },
     sortBy: 'Сортировать по',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'до',
+  },
+  monthPicker: {
+    title: 'Выбрать месяц',
+    itemsSelected: '{0} выбрано',
+    header: 'Ввод месяца',
+    range: {
+      title: 'Ввод месяцев',
+    },
+    ariaLabel: {
+      previousYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      selectYear: 'Выбрать год',
+      currentMonth: 'Текущий месяц, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} выбрано',
@@ -69,11 +86,15 @@ export default {
     moreEvents: 'Еще {0}',
     today: 'Сегодня',
   },
+  heatmap: {
+    less: 'Меньше',
+    more: 'Больше',
+  },
   input: {
     clear: 'Очистить {0}',
     prependAction: '{0} предварительных действий',
     appendAction: '{0} добавочных действий',
-    otp: 'Пожалуйста введите символы OTP {0}',
+    otp: 'Введите код подтверждения',
   },
   fileInput: {
     counter: 'Файлов: {0}',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Рейтинг {0} из {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Дополнительные параметры',
   },
   loading: 'Загрузка...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Сочетание клавиш: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Воспроизвести',
     pause: 'Пауза',
     seek: 'Перемотка',
     volume: 'Громкость',
-    showVolume: 'Показать регулятор громкости',
     mute: 'Отключить звук',
     unmute: 'Включить звук',
     enterFullscreen: 'Полноэкранный режим',

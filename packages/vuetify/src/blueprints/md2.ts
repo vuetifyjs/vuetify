@@ -6,9 +6,6 @@ import type { Blueprint } from '@/framework'
 
 export const md2: Blueprint = {
   defaults: {
-    global: {
-      rounded: 'md',
-    },
     VAvatar: {
       rounded: 'circle',
     },

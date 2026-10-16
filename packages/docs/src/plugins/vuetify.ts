@@ -31,6 +31,7 @@ export function installVuetify (app: App) {
     aliases: {
       BorderChip: VChip,
       NewInChip: VChip,
+      CodemodChip: VChip,
       PageFeatureChip: VChip,
       PrimaryBtn: VBtn,
       SettingsSwitch: VSwitch,
@@ -52,6 +53,13 @@ export function installVuetify (app: App) {
           class: 'ms-2',
           size: 'small',
         },
+      },
+      CodemodChip: {
+        class: 'text-mono',
+        color: 'info',
+        size: 'small',
+        variant: 'flat',
+        label: true,
       },
       PageFeatureChip: {
         variant: 'tonal',

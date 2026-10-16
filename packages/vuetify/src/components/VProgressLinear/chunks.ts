@@ -3,12 +3,13 @@ import { computed, toRef, toValue } from 'vue'
 import { clamp, convertToUnit, propsFactory } from '@/util'
 
 // Types
-import type { MaybeRefOrGetter } from 'vue'
+import type { MaybeRefOrGetter, PropType } from 'vue'
 
 export interface ChunksProps {
-  chunkCount: number | string
-  chunkWidth: number | string
+  chunkCount: number | string | null
+  chunkWidth: number | string | null
   chunkGap: number | string
+  variant: 'split' | undefined
 }
 
 // Composables
@@ -25,34 +26,40 @@ export const makeChunksProps = propsFactory({
     type: [Number, String],
     default: 4,
   },
+  variant: {
+    type: String as PropType<'split'>,
+    default: undefined,
+    validator: (v: string) => ['split'].includes(v),
+  },
 }, 'chunks')
 
 export function useChunks (
   props: ChunksProps,
   containerWidth: MaybeRefOrGetter<number | undefined>,
+  value: MaybeRefOrGetter<number>,
+  bufferValue: MaybeRefOrGetter<number>,
+  reversed: MaybeRefOrGetter<boolean>,
 ) {
-  const hasChunks = toRef(() => !!props.chunkCount || !!props.chunkWidth)
+  const isSplit = toRef(() => props.variant === 'split')
+  const chunkCount = toRef(() => isSplit.value ? 2 : Number(props.chunkCount) || 0)
+  const hasChunks = toRef(() => !isSplit.value && (!!chunkCount.value || !!props.chunkWidth))
 
   const chunkWidth = computed(() => {
     const containerSize = toValue(containerWidth)
-    if (!containerSize) {
-      return 0
+    if (!containerSize) return 0
+
+    if (chunkCount.value) {
+      const availableWidth = containerSize - Number(props.chunkGap) * (chunkCount.value - 1)
+      return availableWidth / chunkCount.value
     }
 
-    if (!props.chunkCount) {
-      return Number(props.chunkWidth)
-    }
-
-    const count = Number(props.chunkCount)
-    const availableWidth = containerSize - Number(props.chunkGap) * (count - 1)
-    return availableWidth / count
+    return Number(props.chunkWidth)
   })
 
   const chunkGap = toRef(() => Number(props.chunkGap))
+
   const chunksMaskStyles = computed(() => {
-    if (!hasChunks.value) {
-      return {}
-    }
+    if (!hasChunks.value) return {}
 
     const chunkGapPx = convertToUnit(chunkGap.value)
     const chunkWidthPx = convertToUnit(chunkWidth.value)
@@ -64,21 +71,62 @@ export function useChunks (
     }
   })
 
-  function snapValueToChunk (val: number) {
-    const containerSize = toValue(containerWidth)
-    if (!containerSize) {
-      return val
+  const splitStyles = computed(() => {
+    if (!isSplit.value) return undefined
+
+    const halfGap = convertToUnit(chunkGap.value / 2)
+    const position = toValue(reversed) ? 'right' : 'left'
+
+    const val = toValue(value)
+    if (val >= 100) return undefined
+
+    const buffer = toValue(bufferValue)
+    const hasBar = val > 0
+    const hasBuffer = buffer > val && buffer < 100
+    if (!hasBar && !hasBuffer) return undefined
+
+    const split = convertToUnit(val, '%')
+    const bufferSplit = convertToUnit(buffer, '%')
+    const edge = hasBuffer ? bufferSplit : split
+
+    return {
+      bar: hasBar ? {
+        width: `calc(${split} - ${halfGap})`,
+      } : undefined,
+      buffer: hasBuffer ? {
+        [position]: hasBar ? `calc(${split} + ${halfGap})` : 0,
+        width: hasBar
+          ? `calc(${bufferSplit} - ${split} - ${convertToUnit(chunkGap.value)})`
+          : `calc(${bufferSplit} - ${halfGap})`,
+      } : undefined,
+      background: {
+        [position]: `calc(${edge} + ${halfGap})`,
+        width: `calc(100% - ${edge} - ${halfGap})`,
+      },
     }
+  })
+
+  function snapValueToChunk (val: number) {
+    if (isSplit.value) return val
+
+    const containerSize = toValue(containerWidth)
+    if (!containerSize) return val
 
     const gapRelativeSize = 100 * chunkGap.value / containerSize
     const chunkRelativeSize = 100 * (chunkWidth.value + chunkGap.value) / containerSize
-    const filledChunks = Math.floor((val + gapRelativeSize) / chunkRelativeSize)
-    return clamp(0, filledChunks * chunkRelativeSize - gapRelativeSize / 2, 100)
+
+    // low-effort workaround to floating-point rounding in the division
+    const filledChunks = Math.floor((val + gapRelativeSize) / chunkRelativeSize + 1e-9)
+
+    return clamp(filledChunks * chunkRelativeSize - gapRelativeSize / 2, 0, 100)
   }
 
   return {
-    hasChunks,
+    hasChunks: toRef(() => hasChunks.value || isSplit.value),
+    isSplit,
+    chunkCount,
     chunksMaskStyles,
+    splitStyles,
     snapValueToChunk,
   }
 }

@@ -11,7 +11,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, mergeProps, ref, shallowRef, toRef, triggerRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { genericComponent, isString, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, VNodeProps } from 'vue'
@@ -35,31 +35,34 @@ export type SnackbarMessageDismissType =
   | 'overflow'
   | 'auto'
 
+type SingleSnackbarProps = Omit<
+  VSnackbar['$props'],
+  | 'modelValue'
+  | 'onUpdate:modelValue'
+  | 'activator'
+  | 'activatorProps'
+  | 'closeDelay'
+  | 'openDelay'
+  | 'openOnClick'
+  | 'openOnFocus'
+  | 'openOnHover'
+  | 'collapsed'
+  | 'style'
+  | '$children'
+  | 'v-slots'
+  | `v-slot:${string}`
+  | keyof VNodeProps
+> & {
+  style?: any
+}
+
 export type SnackbarMessage =
   | string
-  | (Omit<
-    VSnackbar['$props'],
-    | 'modelValue'
-    | 'onUpdate:modelValue'
-    | 'activator'
-    | 'activatorProps'
-    | 'closeDelay'
-    | 'openDelay'
-    | 'openOnClick'
-    | 'openOnFocus'
-    | 'openOnHover'
-    | 'collapsed'
-    | 'style'
-    | '$children'
-    | 'v-slots'
-    | `v-slot:${string}`
-    | keyof VNodeProps
-  > & {
-    style?: any
+  | (SingleSnackbarProps & {
     collapsed?: { width: number, height: number }
     promise?: Promise<unknown>
-    success?: (val?: unknown) => Exclude<SnackbarMessage, string>
-    error?: (val?: Error) => Exclude<SnackbarMessage, string>
+    success?: (val?: unknown) => SingleSnackbarProps
+    error?: (val?: Error) => SingleSnackbarProps
     onDismiss?: (reason: SnackbarMessageDismissType) => void
   })
 
@@ -162,7 +165,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
       const [next, ...rest] = props.modelValue
       emit('update:modelValue', rest)
 
-      const item = typeof next === 'string' ? { text: next } : next
+      const item = isString(next) ? { text: next } : next
       const { promise, success, error, onDismiss, ...itemProps } = item
 
       const newItem: SnackbarQueueItem = {
@@ -212,7 +215,7 @@ export const VSnackbarQueue = genericComponent<new <T extends readonly SnackbarM
     }
 
     const btnProps = computed(() => ({
-      color: typeof props.closable === 'string' ? props.closable : undefined,
+      color: isString(props.closable) ? props.closable : undefined,
       text: t(props.closeText),
     }))
 

@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 // Styles
 import './VListItem.sass'
 
@@ -167,6 +169,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
+      if (list?.navigationStrategy.value === 'track' && !root.selectable.value) return isTracked.value
       return root.activatable.value ? isActivated.value
         : root.selectable.value ? isSelected.value
         : isActive.value
@@ -211,7 +214,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(roundedProps)
+    const { roundedClasses, roundedStyles } = useRounded(roundedProps)
     const lineClasses = toRef(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
     const rippleOptions = toRef(() =>
       (
@@ -255,6 +258,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       const target = e.target as HTMLElement
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+
+      // Treeview items own their Enter/Space handling
+      if ((e.currentTarget as HTMLElement | null)?.getAttribute('role') === 'treeitem') return
 
       if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()
@@ -311,12 +317,13 @@ export const VListItem = genericComponent<VListItemSlots>()({
             },
             colorStyles.value,
             dimensionStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
           tabindex={ props.tabindex ?? (isClickable.value ? (list ? -2 : 0) : undefined) }
           aria-selected={ ariaSelected.value }
           role={ role.value }
-          onClick={ onClick }
+          onClick={ (isClickable.value || props.onClick || props.onClickOnce) && onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && rippleOptions.value }
         >

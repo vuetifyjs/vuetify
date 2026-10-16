@@ -32,7 +32,7 @@ import {
   leafSingleSelectStrategy,
   trunkSelectStrategy,
 } from './selectStrategies'
-import { consoleError, getCurrentInstance, propsFactory, throttle } from '@/util'
+import { consoleError, getCurrentInstance, isFunction, isNullOrUndefined, isObject, isUndefined, propsFactory, throttle } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -40,7 +40,7 @@ import type { ActiveStrategy } from './activeStrategies'
 import type { OpenStrategy } from './openStrategies'
 import type { SelectStrategy } from './selectStrategies'
 import type { ListItem } from '@/composables/list-items'
-import type { EventProp } from '@/util'
+import type { EventProp, ValueComparator } from '@/util'
 
 export type ActiveStrategyProp =
   | 'single-leaf'
@@ -153,10 +153,12 @@ export const useNested = (
     items,
     returnObject,
     scrollToActive,
+    valueComparator,
   }: {
     items: Ref<ListItem[]>
     returnObject: MaybeRefOrGetter<boolean>
     scrollToActive: MaybeRefOrGetter<boolean>
+    valueComparator?: MaybeRefOrGetter<ValueComparator | undefined>
   },
 ) => {
   let isUnmounted = false
@@ -172,9 +174,20 @@ export const useNested = (
     v => [...v.values()],
   )
 
+  // opening multiple nodes in a sync loop cannot wait for the proxied model to catch up
+  let batch: Set<unknown> | null = null
+  function currentOpened () {
+    if (!batch) queueMicrotask(() => { batch = null })
+    return batch ?? opened.value
+  }
+  function setOpened (value: Set<unknown>) {
+    batch = value
+    opened.value = value
+  }
+
   const activeStrategy = computed(() => {
-    if (typeof props.activeStrategy === 'object') return props.activeStrategy
-    if (typeof props.activeStrategy === 'function') return props.activeStrategy(props.mandatory)
+    if (isFunction(props.activeStrategy)) return props.activeStrategy(props.mandatory)
+    if (isObject(props.activeStrategy)) return props.activeStrategy
 
     switch (props.activeStrategy) {
       case 'leaf': return leafActiveStrategy(props.mandatory)
@@ -186,8 +199,8 @@ export const useNested = (
   })
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
-    if (typeof props.selectStrategy === 'function') return props.selectStrategy(props.mandatory)
+    if (isFunction(props.selectStrategy)) return props.selectStrategy(props.mandatory)
+    if (isObject(props.selectStrategy)) return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
@@ -202,7 +215,7 @@ export const useNested = (
   })
 
   const openStrategy = computed(() => {
-    if (typeof props.openStrategy === 'object') return props.openStrategy
+    if (isObject(props.openStrategy)) return props.openStrategy
 
     switch (props.openStrategy) {
       case 'list': return listOpenStrategy
@@ -212,18 +225,49 @@ export const useNested = (
     }
   })
 
+  const flatItems = computed(() => {
+    const flat: ListItem[] = []
+    const stack = [...items.value]
+    while (stack.length) {
+      const item = stack.pop()!
+      flat.push(item)
+      if (item.children) stack.push(...item.children)
+    }
+    return flat
+  })
+
+  function resolveValue (value: unknown): unknown {
+    const comparator = toValue(valueComparator)
+    if (!comparator) return value
+    const _returnObject = toValue(returnObject)
+    for (const item of flatItems.value) {
+      const itemVal = _returnObject ? toRaw(item.raw) : item.value
+      if (comparator(value, itemVal)) return itemVal
+    }
+    return value
+  }
+
   const activated = useProxiedModel(
     props,
     'activated',
     props.activated,
-    v => activeStrategy.value.in(v, children.value, parents.value),
+    v => activeStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+    ),
     v => activeStrategy.value.out(v, children.value, parents.value),
   )
   const selected = useProxiedModel(
     props,
     'selected',
     props.selected,
-    v => selectStrategy.value.in(v, children.value, parents.value, disabled.value),
+    v => selectStrategy.value.in(
+      Array.isArray(v) ? v.map(resolveValue) : v,
+      children.value,
+      parents.value,
+      disabled.value,
+    ),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
 
@@ -235,7 +279,7 @@ export const useNested = (
     const path: unknown[] = []
     let parent: unknown = toRaw(id)
 
-    while (parent !== undefined) {
+    while (!isUndefined(parent)) {
       path.unshift(parent)
       parent = parents.value.get(parent)
     }
@@ -330,7 +374,7 @@ export const useNested = (
         isDisabled && disabled.value.add(id)
         isGroup && children.value.set(id, [])
 
-        if (parentId != null) {
+        if (!isNullOrUndefined(parentId)) {
           children.value.set(parentId, [...children.value.get(parentId) || [], id])
         }
         itemsUpdatePropagation()
@@ -368,25 +412,25 @@ export const useNested = (
         const newOpened = openStrategy.value.open({
           id,
           value,
-          opened: new Set(opened.value),
+          opened: new Set(currentOpened()),
           children: children.value,
           parents: parents.value,
           event,
         })
 
-        newOpened && (opened.value = newOpened)
+        newOpened && setOpened(newOpened)
       },
       openOnSelect: (id, value, event) => {
         const newOpened = openStrategy.value.select({
           id,
           value,
           selected: new Map(selected.value),
-          opened: new Set(opened.value),
+          opened: new Set(currentOpened()),
           children: children.value,
           parents: parents.value,
           event,
         })
-        newOpened && (opened.value = newOpened)
+        newOpened && setOpened(newOpened)
       },
       select: (id, value, event) => {
         vm.emit('click:select', { id, value, path: getPath(id), event })
@@ -455,7 +499,7 @@ export const useNestedItem = (id: MaybeRefOrGetter<unknown>, isDisabled: MaybeRe
   const uidSymbol = Symbol('nested item')
   const computedId = computed(() => {
     const idValue = toRaw(toValue(id))
-    return idValue !== undefined ? idValue : uidSymbol
+    return !isUndefined(idValue) ? idValue : uidSymbol
   })
 
   const item = {

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Ative para remover a ordenação.',
       activateDescending: 'Ative para ordenar decrescente.',
       activateAscending: 'Ative para ordenar crescente.',
+      selectRow: 'Selecionar linha',
+      selectAll: 'Selecionar tudo',
+      selectGroup: 'Selecionar grupo',
     },
     sortBy: 'Ordenar por',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'até',
+  },
+  monthPicker: {
+    title: 'Selecionar mês',
+    itemsSelected: '{0} selecionados',
+    header: 'Digite o mês',
+    range: {
+      title: 'Digite os meses',
+    },
+    ariaLabel: {
+      previousYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      selectYear: 'Selecionar ano',
+      currentMonth: 'Mês atual, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} selecionados',
@@ -69,11 +86,15 @@ export default {
     moreEvents: 'Mais {0}',
     today: 'Hoje',
   },
+  heatmap: {
+    less: 'Menos',
+    more: 'Mais',
+  },
   input: {
     clear: 'Limpar {0}',
     prependAction: '{0} ação antes',
     appendAction: '{0} ação depois',
-    otp: 'Por favor, insira o caractere OTP {0}',
+    otp: 'Insira o código de verificação',
   },
   fileInput: {
     counter: '{0} arquivo(s)',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Avaliação {0} de {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Mínimo',
+      end: 'Máximo',
+    },
+  },
+  splitBtn: {
+    menu: 'Mais opções',
   },
   loading: 'Carregando...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Atalho de teclado: {0}',
     or: 'ou',
   },
-  video: {
+  media: {
     play: 'Reproduzir',
     pause: 'Pausar',
     seek: 'Buscar',
     volume: 'Volume',
-    showVolume: 'Mostrar controle de volume',
     mute: 'Silenciar',
     unmute: 'Ativar som',
     enterFullscreen: 'Tela cheia',

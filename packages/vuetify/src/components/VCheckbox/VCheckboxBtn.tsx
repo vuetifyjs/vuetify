@@ -2,11 +2,11 @@
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { toRef } from 'vue'
+import { shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -14,15 +14,10 @@ import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSel
 import type { GenericProps } from '@/util'
 
 export const makeVCheckboxBtnProps = propsFactory({
-  indeterminate: Boolean,
-  indeterminateIcon: {
-    type: IconValue,
-    default: '$checkboxIndeterminate',
-  },
-
   ...makeVSelectionControlProps({
     falseIcon: '$checkboxOff',
     trueIcon: '$checkboxOn',
+    indeterminateIcon: '$checkboxIndeterminate',
   }),
 }, 'VCheckboxBtn')
 
@@ -45,6 +40,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
   setup (props, { slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
+    const controlRef = shallowRef<VSelectionControl>()
 
     function onChange (v: any) {
       if (indeterminate.value) {
@@ -52,22 +48,11 @@ export const VCheckboxBtn = genericComponent<new <T>(
       }
     }
 
-    const falseIcon = toRef(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.falseIcon
-    })
-
-    const trueIcon = toRef(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.trueIcon
-    })
-
     useRender(() => {
       const controlProps = omit(VSelectionControl.filterProps(props), ['modelValue'])
       return (
         <VSelectionControl
+          ref={ controlRef }
           { ...controlProps }
           v-model={ model.value }
           class={[
@@ -77,15 +62,13 @@ export const VCheckboxBtn = genericComponent<new <T>(
           style={ props.style }
           type="checkbox"
           onUpdate:modelValue={ onChange }
-          falseIcon={ falseIcon.value }
-          trueIcon={ trueIcon.value }
           aria-checked={ indeterminate.value ? 'mixed' : undefined }
           v-slots={ slots }
         />
       )
     })
 
-    return {}
+    return forwardRefs({}, controlRef)
   },
 })
 

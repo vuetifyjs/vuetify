@@ -18,6 +18,9 @@ export const makeVBottomSheetProps = propsFactory({
 
   ...makeVDialogProps({
     transition: 'bottom-sheet-transition',
+    location: 'bottom center' as const,
+    origin: 'bottom center' as const,
+    viewportMargin: 0,
   }),
 }, 'VBottomSheet')
 
@@ -28,9 +31,12 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
@@ -52,6 +58,9 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
             props.class,
           ]}
           style={ props.style }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
+          onAfterLeave={ () => emit('afterLeave') }
           v-slots={ slots }
         />
       )

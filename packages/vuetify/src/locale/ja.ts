@@ -20,6 +20,9 @@ export default {
       activateNone: 'ソートを削除するには有効にしてください。',
       activateDescending: '降順の並び替えのためには有効にしてください。',
       activateAscending: '昇順のソートのためには有効にしてください。',
+      selectRow: '行を選択',
+      selectAll: 'すべて選択',
+      selectGroup: 'グループを選択',
     },
     sortBy: 'ソート方式',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'から',
+  },
+  monthPicker: {
+    title: '月を選択',
+    itemsSelected: '{0} 選択済',
+    header: '月を入力',
+    range: {
+      title: '月を入力',
+    },
+    ariaLabel: {
+      previousYear: '前の年',
+      nextYear: '次の年',
+      selectYear: '年を選択',
+      currentMonth: '今月、{0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} 選択済',
@@ -69,11 +86,15 @@ export default {
     moreEvents: 'さらに{0}',
     today: '今日',
   },
+  heatmap: {
+    less: '少ない',
+    more: '多い',
+  },
   input: {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',
     appendAction: '{0} の後に追加されたアクション',
-    otp: '{0}番目のワンタイムパスワードを入力してください',
+    otp: '確認コードを入力してください',
   },
   fileInput: {
     counter: '{0} ファイル',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: '評価 {1} のうち {0}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小',
+      end: '最大',
+    },
+  },
+  splitBtn: {
+    menu: 'その他のオプション',
   },
   loading: 'ロード中...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'キーボードショートカット: {0}',
     or: 'または',
   },
-  video: {
+  media: {
     play: '再生',
     pause: '一時停止',
     seek: 'シーク',
     volume: '音量',
-    showVolume: '音量コントロールを表示',
     mute: 'ミュート',
     unmute: 'ミュート解除',
     enterFullscreen: '全画面表示',

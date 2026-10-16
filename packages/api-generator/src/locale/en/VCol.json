@@ -1,4 +1,5 @@
 {
+  "description": "Grid column wrapper meant to be placed inside `v-row`.",
   "props": {
     "alignSelf": "Deprecated, use **align-self-\\*** class. Available options are: **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
     "cols": "Sets the default number of columns the component extends. Available options are: **1 -> 12** and **auto**. It accepts `{n}/{size}` syntax (e.g. 1/5 or 3/24) that overrides grid columns count for size calculation.",

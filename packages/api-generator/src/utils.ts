@@ -48,6 +48,7 @@ function getPropDefault (definition: any, type: string | string[]) {
 }
 
 type ComponentData = {
+  description?: Record<string, string>
   props?: Record<string, Definition>
   slots?: Record<string, Definition>
   events?: Record<string, Definition>
@@ -130,20 +131,28 @@ type MissingDescription = {
   section: string
   key: string
   locale: string
+  color?: keyof typeof ansiColors
 }
 
 const missingDescriptions: MissingDescription[] = []
 
+const ansiColors = {
+  red: '\x1b[31m',
+  yellow: '\x1b[33m',
+  green: '\x1b[32m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+}
+const reset = '\x1b[0m'
+
 export function reportMissingDescriptions () {
   if (!missingDescriptions.length) return
 
-  const red = '\x1b[31m'
-  const reset = '\x1b[0m'
-  const space = '\x20'
-
-  console.warn(`\n${red}Missing API Descriptions:${reset}`)
-  missingDescriptions.forEach(({ name, section, key, locale }) => {
-    console.warn(`${red}- ${name} (${locale}): [${section}]${space + key + reset}`)
+  console.warn(`\n${ansiColors.red}Missing API Descriptions:${reset}`)
+  missingDescriptions.forEach(({ name, section, key, locale, color }) => {
+    const c = ansiColors[color ?? 'red']
+    console.warn(`${c}- ${name} (${locale}): [${section}] ${key}${reset}`)
   })
 
   // Clear missing descriptions in case of multiple runs
@@ -186,6 +195,14 @@ async function getSources (name: string, locale: string, sources: string[]) {
 
 export async function addDescriptions (name: string, componentData: ComponentData, locales: string[], sources: string[] = []) {
   for (const locale of locales) {
+    const localeData = await loadLocale(name, locale)
+    componentData.description ??= {}
+    const desc = localeData.description as string
+    componentData.description[locale] = desc ?? ''
+    if (!desc) {
+      missingDescriptions.push({ name, section: 'description', key: '', locale, color: 'yellow' })
+    }
+
     const descriptions = await getSources(name, locale, sources)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {

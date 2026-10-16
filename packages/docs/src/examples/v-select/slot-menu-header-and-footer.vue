@@ -25,7 +25,7 @@
 
       <template v-slot:menu-footer="{ search, filteredItems }">
         <div class="d-flex align-center pa-2 pl-4 border-t">
-          <span v-if="search.value" class="text-body-2">
+          <span v-if="search.value" class="text-body-medium">
             Found {{ filteredItems.length }} of {{ items.length }}
           </span>
 

@@ -1,0 +1,54 @@
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-loading-indicator
+    --v-loading-indicator-shape-size: #{$loading-indicator-shape-size}
+
+    align-items: center
+    display: inline-flex
+    flex: none
+    height: $loading-indicator-size
+    justify-content: center
+    position: relative
+    vertical-align: middle
+    width: $loading-indicator-size
+
+    @each $name, $multiplier in $loading-indicator-sizes
+      &--size-#{$name}
+        --v-loading-indicator-shape-size: #{map.get($loading-indicator-shape-sizes, $name)}
+
+        $size: $loading-indicator-size + (settings.$size-scale * $multiplier)
+        height: $size
+        width: $size
+
+  .v-loading-indicator__shape
+    fill: currentColor
+    height: var(--v-loading-indicator-shape-size)
+    overflow: visible
+    position: relative
+    width: var(--v-loading-indicator-shape-size)
+
+  .v-loading-indicator--contained
+    &::before
+      background: currentColor
+      border-radius: 50%
+      content: ''
+      inset: 0
+      opacity: $loading-indicator-container-opacity
+      position: absolute
+
+  @media (forced-colors: active)
+    .v-loading-indicator__shape
+      fill: none
+      stroke: currentColor
+      stroke-width: $loading-indicator-forced-colors-stroke-width
+
+      > path
+        vector-effect: non-scaling-stroke
+
+    .v-loading-indicator--contained
+      border: $loading-indicator-forced-colors-stroke-width solid
+      border-radius: 50%

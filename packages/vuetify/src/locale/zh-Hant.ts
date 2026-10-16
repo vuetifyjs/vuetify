@@ -20,6 +20,9 @@ export default {
       activateNone: '點擊以移除排序方式。',
       activateDescending: '點擊以降序排列。',
       activateAscending: '點擊以移除排序方式。',
+      selectRow: '選擇行',
+      selectAll: '選擇全部',
+      selectGroup: '選擇分組',
     },
     sortBy: '排序方式',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '至',
+  },
+  monthPicker: {
+    title: '選擇月份',
+    itemsSelected: '已選擇 {0} 個日期',
+    header: '輸入月份',
+    range: {
+      title: '輸入月份',
+    },
+    ariaLabel: {
+      previousYear: '上一年',
+      nextYear: '下一年',
+      selectYear: '選擇年份',
+      currentMonth: '本月，{0}',
+    },
   },
   datePicker: {
     itemsSelected: '已選擇 {0} 個日期',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '還有其他 {0} 項',
     today: '今天',
   },
+  heatmap: {
+    less: '少',
+    more: '多',
+  },
   input: {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
     appendAction: '{0} 附加操作',
-    otp: '請輸入第 {0} 個 OTP 字元',
+    otp: '請輸入驗證碼',
   },
   fileInput: {
     counter: '{0} 個檔案',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: '評分 {0} / {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小值',
+      end: '最大值',
+    },
+  },
+  splitBtn: {
+    menu: '更多選項',
   },
   loading: '載入中...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: '鍵盤快捷鍵：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暫停',
     seek: '搜尋',
     volume: '音量',
-    showVolume: '顯示音量控制',
     mute: '靜音',
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',

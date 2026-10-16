@@ -55,6 +55,8 @@
       "hotkey",
       "icon-fonts",
       "internationalization",
+      "md3-button-sizes",
+      "rules",
       "scrolling",
       "sass-variables",
       "theme",
@@ -120,6 +122,7 @@
       { "subheader": "containment" },
       "bottom-sheets",
       "buttons",
+      "icon-buttons",
       "cards",
       "chips",
       "dialogs",
@@ -147,8 +150,11 @@
       { "subheader": "form-inputs-and-controls" },
       "autocompletes",
       "checkboxes",
+      "color-inputs",
       "combobox",
+      "date-inputs",
       "file-inputs",
+      "file-upload",
       "forms",
       "inputs",
       "number-inputs",
@@ -180,6 +186,7 @@
           "virtual-tables"
         ]
       },
+      "highlights",
       "hotkeys",
       "sparklines",
       "infinite-scroller",
@@ -197,6 +204,7 @@
       "item-groups",
       "slide-groups",
       "steppers",
+      "vertical-steppers",
       "windows",
       { "divider": true },
       { "subheader": "feedback" },
@@ -205,6 +213,7 @@
       "banners",
       "empty-states",
       "hover",
+      "progress",
       "progress-circular",
       "progress-linear",
       "ratings",
@@ -216,6 +225,7 @@
       { "subheader": "images-and-icons" },
       "aspect-ratios",
       "avatars",
+      "avatar-groups",
       "icons",
       "images",
       "parallax",
@@ -232,7 +242,8 @@
       { "divider": true },
       { "subheader": "miscellaneous" },
       "lazy",
-      "no-ssr"
+      "no-ssr",
+      "pull-to-refresh"
     ]
   },
   {
@@ -255,7 +266,8 @@
       "ripple",
       "scroll",
       "tooltip",
-      "touch"
+      "touch",
+      "touch-hold"
     ]
   },
   {
@@ -265,11 +277,7 @@
     "items": [
       "introduction",
       {
-        "title": "avatar-groups",
-        "subfolder": "components"
-      },
-      {
-        "title": "color-inputs",
+        "title": "audio-players",
         "subfolder": "components"
       },
       {
@@ -277,27 +285,19 @@
         "subfolder": "components"
       },
       {
-        "title": "date-inputs",
+        "title": "date-range-pickers",
         "subfolder": "components"
       },
       {
-        "title": "file-upload",
+        "title": "heatmaps",
         "subfolder": "components"
       },
       {
-        "title": "icon-buttons",
+        "title": "infinite-carousels",
         "subfolder": "components"
       },
       {
-        "title": "pie-charts",
-        "subfolder": "components"
-      },
-      {
-        "title": "pull-to-refresh",
-        "subfolder": "components"
-      },
-      {
-        "title": "vertical-steppers",
+        "title": "loading-indicators",
         "subfolder": "components"
       },
       {
@@ -305,12 +305,20 @@
         "subfolder": "components"
       },
       {
-        "title": "videos",
+        "title": "month-pickers",
         "subfolder": "components"
       },
       {
-        "title": "rules",
-        "subfolder": "features"
+        "title": "pie-charts",
+        "subfolder": "components"
+      },
+      {
+        "title": "split-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "videos",
+        "subfolder": "components"
       }
     ]
   },

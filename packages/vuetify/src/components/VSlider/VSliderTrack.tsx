@@ -63,7 +63,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
 
     const isPill = computed(() => variant.value === 'pill')
 
-    const { roundedClasses } = useRounded(rounded)
+    const { roundedClasses, roundedStyles } = useRounded(rounded)
 
     const {
       backgroundColorClasses: trackFillColorClasses,
@@ -125,6 +125,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
               '--v-slider-value-start': convertToUnit(props.start, '%'),
               '--v-slider-value-stop': convertToUnit(props.stop, '%'),
             },
+            roundedStyles.value,
             props.style,
           ]}
         >

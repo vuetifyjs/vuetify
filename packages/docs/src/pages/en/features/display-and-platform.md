@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Display & Platform
   description: Access display viewport information using the Vuetify Breakpoint composable.

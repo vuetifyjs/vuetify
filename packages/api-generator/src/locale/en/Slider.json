@@ -13,6 +13,7 @@
     "tickSize": "Controls the size of **ticks**",
     "trackColor": "Sets the track's color",
     "trackFillColor": "Sets the track's fill color",
-    "trackSize": "Sets the track's size (height)."
+    "trackSize": "Sets the track's size (height).",
+    "valueFormat": "Formatter for the thumb label and `aria-valuetext`. Use `[value]`, `[max]` and `[percent]` as placeholders in strings, or pass a function that receives `{ value, max, percent }` and returns a string."
   }
 }

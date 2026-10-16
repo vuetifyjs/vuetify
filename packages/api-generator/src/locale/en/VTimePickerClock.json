@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent for `v-time-picker` that provides the clock interface for selecting time.",
   "props": {
     "allowedValues": "Restricts which hours can be selected.",
     "ampm": "Displays time in a 12-hour format.",

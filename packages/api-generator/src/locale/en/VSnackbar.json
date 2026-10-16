@@ -1,4 +1,5 @@
 {
+  "description": "Used to display a quick message or notification to a user. Supports positioning, auto-dismiss with timeout, and a dedicated slot for action.",
   "props": {
     "loading": "Displays a loading spinner in the prepend area.",
     "prependAvatar": "Displays an avatar in the prepend area using the provided image source.",

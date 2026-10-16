@@ -1,4 +1,3 @@
-/* eslint-disable max-statements */
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
 import { useForm } from '@/composables/form'
@@ -7,11 +6,12 @@ import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
-import { clamp, createRange, getDecimals, propsFactory } from '@/util'
+import { clamp, createRange, formatValue, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
+import type { ValueFormat } from '@/util'
 
 export type Tick = {
   value: number
@@ -51,6 +51,7 @@ type SliderProvide = {
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
+  getValueText: (value: number) => string | undefined
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   variant: Ref<SliderVariant>
@@ -104,7 +105,7 @@ export const makeSliderProps = propsFactory({
   thumbLabel: {
     type: [Boolean, String] as PropType<boolean | 'always' | 'hover' | undefined>,
     default: undefined,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always' || v === 'hover',
+    validator: (v: any) => isBoolean(v) || v === 'always' || v === 'hover',
   },
   thumbSize: {
     type: [Number, String],
@@ -113,7 +114,7 @@ export const makeSliderProps = propsFactory({
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
     default: false,
-    validator: (v: any) => typeof v === 'boolean' || v === 'always',
+    validator: (v: any) => isBoolean(v) || v === 'always',
   },
   ticks: {
     type: [Array, Object] as PropType<readonly number[] | Record<number, string>>,
@@ -141,6 +142,7 @@ export const makeSliderProps = propsFactory({
     default: 'default',
     validator: (v: any) => ['default', 'pill'].includes(v),
   },
+  valueFormat: [String, Function] as PropType<ValueFormat>,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -324,6 +326,7 @@ export const useSlider = ({
   }
 
   onScopeDispose(() => {
+    if (!IN_BROWSER) return
     window.removeEventListener('touchmove', onMouseMove)
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('mouseup', onSliderMouseUp)
@@ -332,6 +335,12 @@ export const useSlider = ({
   const position = (val: number) => {
     const percentage = (val - min.value) / (max.value - min.value) * 100
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
+  }
+
+  function getValueText (value: number) {
+    return props.valueFormat
+      ? formatValue(props.valueFormat, value, max.value, position(value))
+      : undefined
   }
 
   const showTicks = toRef(() => props.showTicks)
@@ -364,6 +373,7 @@ export const useSlider = ({
     disabled: form.isDisabled,
     direction: toRef(() => props.direction),
     elevation: toRef(() => props.elevation),
+    getValueText,
     hasLabels,
     isReversed,
     indexFromEnd,

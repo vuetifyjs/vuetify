@@ -18,6 +18,7 @@
     line-height: $button-line-height
     max-width: $button-max-width
     outline: none
+    overflow: hidden
     position: relative
     text-decoration: none
     text-indent: $button-text-letter-spacing
@@ -30,11 +31,16 @@
     flex-shrink: 0
 
     .v-locale--is-rtl &
+      letter-spacing: 0
+
       @if meta.type-of($button-text-letter-spacing) == 'number'
         text-indent: -1 * $button-text-letter-spacing
 
     @at-root
-      @include button-sizes()
+      @if $button-named-sizes == ()
+        @include button-sizes()
+      @else
+        @include button-named-sizes()
       @include button-density('height', $button-density)
 
     @include tools.border($button-border...)
@@ -65,7 +71,7 @@
         --v-btn-size: #{$button-icon-font-size}
 
       @at-root &
-        @include button-density(('width', 'height'), $button-icon-density)
+        @include button-density(('width', 'height'), button-icon-densities())
 
     &--elevated
       &:hover,
@@ -198,13 +204,13 @@
     transition: $button-content-transition
 
   .v-btn__prepend
-    margin-inline: $button-margin-start $button-margin-end
+    margin-inline: $button-margin-start var(--v-btn-icon-gap, #{$button-margin-end})
 
     .v-btn--slim &
       margin-inline-start: 0
 
   .v-btn__append
-    margin-inline: $button-margin-end $button-margin-start
+    margin-inline: var(--v-btn-icon-gap, #{$button-margin-end}) $button-margin-start
 
     .v-btn--slim &
       margin-inline-end: 0
@@ -224,9 +230,11 @@
 
   .v-btn__overlay
     background-color: currentColor
-    border-radius: inherit
     opacity: 0
     transition: opacity .2s ease-in-out
+
+  .v-btn > .v-ripple__container
+    border-radius: 0
 
   .v-btn__overlay,
   .v-btn__underlay
@@ -238,7 +246,7 @@
     .v-btn
       width: auto
       padding-inline: $button-pagination-padding-inline
-      @include button-density('min-width', $button-icon-density)
+      @include button-density('min-width', button-icon-densities())
       @include tools.rounded($button-pagination-border-radius)
 
       &--rounded
@@ -251,7 +259,7 @@
     &__next
       .v-btn
         padding-inline: 0
-        @include button-density('width', $button-icon-density)
+        @include button-density('width', button-icon-densities())
 
     .v-pagination__item--is-active .v-btn__overlay
       opacity: $button-pagination-active-overlay-opacity

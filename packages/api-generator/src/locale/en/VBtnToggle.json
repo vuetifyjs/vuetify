@@ -1,4 +1,5 @@
 {
+  "description": "An alternative to radio group and checkboxes. A simple wrapper for `v-item-group` built specifically to work with `v-btn`.",
   "props": {
     "rounded": "Round edge buttons.",
     "tile": "Removes the component's border-radius."

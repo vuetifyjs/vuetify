@@ -1,4 +1,5 @@
 {
+  "description": "Guides users through a sequence of steps. Same as `v-stepper`, but for vertical orientation.",
   "props": {
     "completeIcon": "Icon to display when step is marked as completed.",
     "editIcon": "Icon to display when step is editable.",

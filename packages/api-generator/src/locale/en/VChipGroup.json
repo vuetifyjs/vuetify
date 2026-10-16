@@ -1,4 +1,5 @@
 {
+  "description": "Used to group the `v-chip` components for users to pick one or many options without a dedicated field wrapper.",
   "props": {
     "baseColor": "Sets the color of component when not focused. Recommended with `color` or `filter` to properly highlight selected items.",
     "centerActive": "Forces the selected chip to be centered.",

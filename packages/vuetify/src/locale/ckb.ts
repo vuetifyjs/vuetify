@@ -20,6 +20,9 @@ export default {
       activateNone: 'چالاککردن بۆ لابردنی ڕیزکردن.',
       activateDescending: 'چالاککردن بۆ ڕیزکردنی سەربەرەوخوار.',
       activateAscending: 'چالاککردن بۆ ڕیزکردنی سەر بەرەو ژوور.',
+      selectRow: 'ڕیز هەڵبژێرە',
+      selectAll: 'هەمووی هەڵبژێرە',
+      selectGroup: 'گرووپ هەڵبژێرە',
     },
     sortBy: 'ڕیزکردن بەپێی',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'بۆ',
+  },
+  monthPicker: {
+    title: 'مانگ هەڵبژێرە',
+    itemsSelected: '{0} هەڵبژێردراوە',
+    header: 'مانگ بنووسە',
+    range: {
+      title: 'مانگەکان بنووسە',
+    },
+    ariaLabel: {
+      previousYear: 'ساڵی پێشوو',
+      nextYear: 'ساڵی داهاتوو',
+      selectYear: 'ساڵ هەڵبژێرە',
+      currentMonth: 'مانگی ئێستا، {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} زیاتر',
     today: 'ئەمڕو',
   },
+  heatmap: {
+    less: 'کەمتر',
+    more: 'زیاتر',
+  },
   input: {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
     appendAction: '{0} کرداری دواتر',
-    otp: 'تکایە نووسینی نمرەی OTP {0}',
+    otp: 'کۆدی پشتڕاستکردنەوە بنووسە',
   },
   fileInput: {
     counter: '{0} فایل',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'هەڵسەنگاندن {0} لە {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'کەمترین',
+      end: 'زۆرترین',
+    },
+  },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
   },
   loading: 'بارکردن...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
     or: 'یان',
   },
-  video: {
+  media: {
     play: 'لێدان',
     pause: 'ڕاگرتن',
     seek: 'گەڕان',
     volume: 'دەنگ',
-    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
     mute: 'بێدەنگکردن',
     unmute: 'لە بێدەنگی دەرهێنان',
     enterFullscreen: 'پڕ بە شاشە',

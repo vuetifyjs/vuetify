@@ -1,4 +1,5 @@
 {
+  "description": "Displays brief informational text when users hover over or focus on an element.",
   "props": {
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true).",
     "id": "HTML id attribute of the tooltip overlay. If not set, a globally unique id will be used.",

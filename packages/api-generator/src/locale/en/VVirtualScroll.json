@@ -1,4 +1,5 @@
 {
+  "description": "Displays a virtualized container where only subset of items is actually rendered in the DOM. Yields massive performance gains when used correctly.",
   "props": {
     "height": "Height of the component as a css value/",
     "itemKey": "Should point to a property with a unique value for each item, if not set then item index will be used as a key which may result in unnecessary re-renders.",

@@ -20,6 +20,9 @@ export default {
       activateNone: `Attiva per rimuovere l'ordinamento.`,
       activateDescending: 'Attiva per ordinare in ordine decrescente.',
       activateAscending: 'Attiva per ordinare in ordine crescente.',
+      selectRow: 'Seleziona riga',
+      selectAll: 'Seleziona tutto',
+      selectGroup: 'Seleziona gruppo',
     },
     sortBy: 'Ordina per',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'a',
+  },
+  monthPicker: {
+    title: 'Seleziona mese',
+    itemsSelected: '{0} selezionato/i',
+    header: 'Inserisci mese',
+    range: {
+      title: 'Inserisci mesi',
+    },
+    ariaLabel: {
+      previousYear: 'Anno precedente',
+      nextYear: 'Anno successivo',
+      selectYear: 'Seleziona anno',
+      currentMonth: 'Mese corrente, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} selezionato/i',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} di più',
     today: 'Oggi',
   },
+  heatmap: {
+    less: 'Meno',
+    more: 'Più',
+  },
   input: {
     clear: 'Cancella {0}',
     prependAction: 'Azione precedente {0}',
     appendAction: 'Azione successiva {0}',
-    otp: 'Inserisci il codice OTP {0}',
+    otp: 'Inserisci il codice di verifica',
   },
   fileInput: {
     counter: '{0} file',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Valutazione {0} di {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimo',
+      end: 'Massimo',
+    },
+  },
+  splitBtn: {
+    menu: 'Altre opzioni',
   },
   loading: 'Caricamento...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Scorciatoia da tastiera: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Riproduci',
     pause: 'Metti in pausa',
     seek: 'Cerca',
     volume: 'Volume',
-    showVolume: 'Mostra controllo volume',
     mute: 'Muto',
     unmute: 'Riattiva audio',
     enterFullscreen: 'Schermo intero',

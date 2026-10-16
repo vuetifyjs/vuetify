@@ -1,0 +1,9 @@
+{
+  "props": {
+    "cellSize": "Sets size of each legend cell. A single value sets both width and height. Accepts `[width, height]` tuple.",
+    "activeBuckets": "Indexes of the threshold buckets currently active. Toggled by clicking a legend cell.",
+    "labels": "Tuple of text labels shown around the threshold cells. Pass empty strings to hide individual labels.",
+    "rounded": "Cell corner radius. Accepts a number or string with `px` or `%` units only — the value is passed directly to the SVG `<rect>` `rx`/`ry` attributes.",
+    "thresholds": "Either a list of `{ min, color }` thresholds or a linear scale `{ from, to }`, shared with the parent `v-heatmap`. Linear scales render as a gradient bar."
+  }
+}

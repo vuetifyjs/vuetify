@@ -1,4 +1,5 @@
 {
+  "description": "A fully featured date selection component that lets users select a single date, date range, limit available selection.",
   "props": {
     "allowedDates": "Restricts which dates can be selected.",
     "eventColor": "Sets the color for event dots. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",
@@ -15,6 +16,7 @@
     "max": "Maximum allowed date/month (ISO 8601 format).",
     "min": "Minimum allowed date/month (ISO 8601 format).",
     "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections.",
+    "noAutoNavigation": "Prevents the displayed month from automatically following the selected value. Useful when building multi-calendar layouts where each picker manages its own view.",
     "nextIcon": "Sets the icon for next month/year button.",
     "prevIcon": "Sets the icon for previous month/year button.",
     "readonly": "Makes the picker readonly (doesn't allow to select new date).",
@@ -25,6 +27,7 @@
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`."
   },
   "events": {
+    "[`${string}:day`]": "Any event on a day button. The second argument is the day value.",
     "update:month": "Emitted when the month changes.",
     "update:viewMode": "Emitted when the view mode changes.",
     "update:year": "Emitted when the year changes."

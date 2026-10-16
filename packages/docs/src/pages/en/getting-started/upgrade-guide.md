@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Upgrade guide
   title: Upgrade guide
@@ -61,7 +60,7 @@ Even though these migrations mostly come down to adjusting CSS classes, manually
 
 Identify the areas with the highest usage first, apply the corresponding compatibility snippets, and then schedule the full class-by-class migration as a follow-up.
 
-[vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods) can be used to automate many of these changes.
+Sections tagged with <codemod-chip>Codemod Available</codemod-chip> can be automated using [vuetify-codemods](https://www.npmjs.com/package/vuetify-codemods).
 
 ## Styles
 
@@ -85,7 +84,7 @@ If you notice browser styles adding unnecessary spaces and impact text size, it 
     margin: 0;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 }
@@ -128,9 +127,26 @@ Restoring most of the previous reset styles would be heavy-handed, but will get 
 }
 ```
 
+#### Applying without a build step
+
+The snippets above are plain CSS and do not require Sass compiler — drop them into any stylesheet, or inline them within `<style>` block when using the CDN build:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@4/dist/vuetify.css">
+
+<style>
+  @layer vuetify-core.reset {
+    ul, ol, figure, details, summary { padding: 0; margin: 0; }
+    h1, h2, h3, h4, h5, h6, p { margin: 0; }
+  }
+</style>
+```
+
+Place the `<style>` block after Vuetify's stylesheet so the layer order declared in `vuetify.css` takes effect first. Subsequent `@layer vuetify-core.reset { … }` rules append to the existing layer and won't override component styles.
+
 ### Layers
 
-Cascade layers are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer) are now being used everywhere. If you have other styles that are not using `@layer` they will now always take priority over vuetify.
 
 If you were already using `$layers: true` in Vuetify 3, there are now five top-level layers instead of one.
 
@@ -139,27 +155,60 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 + @layer base, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final, overrides;
 ```
 
-This can be used to easily interleave your own layers with ours:
-
-```css
-@layer vuetify-core, base, vuetify-components, vuetify-overrides, overrides, vuetify-utilities, utilities, vuetify-final;
-```
-
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-### Typography
+#### Custom layer order
 
-The typography system has been updated from Material Design 2 to Material Design 3. Variant names have changed:
+If you intend to migrate large application, it is recommended to define and adopt your own layers, so that developers can drop `!important` and gain more control over the stylesheets.
 
-| MD2 (Legacy)           | MD3 (New)                                             |
-|------------------------|-------------------------------------------------------|
-| `h1` - `h3`            | `display-large`, `display-medium`, `display-small`    |
-| `h4` - `h6`            | `headline-large`, `headline-medium`, `headline-small` |
-| `subtitle-1`, `body-1` | `body-large`                                          |
-| `body-2`               | `body-medium`                                         |
-| `caption`              | `body-small`                                          |
-| `button`, `subtitle-2` | `label-large`                                         |
-| `overline`             | `label-small`                                         |
+```css { resource="public/layers.css" }
+@layer vuetify-core;
+@layer vuetify-components;
+@layer vuetify-overrides;
+
+@layer my-app-base;
+@layer my-app-components;
+
+@layer vuetify-utilities;
+
+@layer my-app-utilities;
+
+@layer vuetify-final;
+```
+
+Link it from `index.html` instead of importing it, as described in [CSS Layers](/styles/layers/#custom-layer-order):
+
+```html { resource="index.html" }
+<link rel="stylesheet" href="/layers.css">
+```
+
+::: warning
+
+If `layers.css` is missing or bundled, your layers may end up ordered after `vuetify-final` or between the wrong Vuetify layers. Symptoms vary per app depending on build output order, making them difficult to diagnose.
+
+**Note**: using `@vuetify/cli` with `init` command to generate a working project for comparison is usually the fastest way to effectively troubleshoot the problems.
+
+:::
+
+### Typography {codemod-available}
+
+The typography system has been updated from Material Design 2 to Material Design 3. The following replacements will have some minor font size differences:
+
+| MD2 (Legacy)      | MD3 (New)                          |
+|-------------------|------------------------------------|
+| `text-h1`         | `text-display-large` (96px → 60px) |
+| `text-h2`         | `text-display-large`               |
+| `text-h3`         | `text-display-medium`              |
+| `text-h4`         | `text-headline-large`              |
+| `text-h5`         | `text-headline-small`              |
+| `text-h6`         | `text-title-large`                 |
+| `text-subtitle-1` | `text-body-large`                  |
+| `text-subtitle-2` | `text-title-small`                 |
+| `text-body-1`     | `text-body-large`                  |
+| `text-body-2`     | `text-body-medium`                 |
+| `text-button`     | `text-label-large` (No uppercase)  |
+| `text-caption`    | `text-body-small`                  |
+| `text-overline`   | `text-label-medium` (No uppercase) |
 
 For detailed mapping and migration instructions, see [Typography Migration](/getting-started/typography-migration/).
 
@@ -204,7 +253,7 @@ export default createVuetify({
 );
 ```
 
-### Elevation
+### Elevation {codemod-available}
 
 Elevation classes (shadows) have been updated to Material Design 3 which uses 6 levels (0-5) instead of 25 (0-24).
 
@@ -249,6 +298,10 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
 +   $button-stacked-gap,
   );
 ```
+
+### VBtn sizes
+
+Buttons and icon buttons can use Material Design 3 Expressive sizes through new SASS maps, see [Material Design 3 button sizes](/features/md3-button-sizes/).
 
 ### VBtn text-transform
 
@@ -329,6 +382,15 @@ VCounter is used to display the counter hint under VTextField, VTextarea and VFi
 }
 ```
 
+### VDatePicker
+
+`multiple="range"` emits only the start and end dates instead of everything in between. Use something like [date-fns' `eachDayOfInterval`](https://date-fns.org/v4.1.0/docs/eachDayOfInterval) if you need all dates in the range.
+
+```diff
+- ['2023-09-28', '2023-09-29', '2023-09-30', '2023-10-01', '2023-10-02']
++ ['2023-09-28', '2023-10-02']
+```
+
 ### VFileInput
 
 Removed the **$file-input-details-padding-inline** Sass variable.
@@ -340,7 +402,7 @@ Removed the **$file-input-details-padding-inline** Sass variable.
 );
 ```
 
-### VForm
+### VForm {codemod-available}
 
 Slot variables are no longer refs, read-only values passed to slots are now unwrapped:
 
@@ -374,7 +436,7 @@ Removed the **$radio-group-details-padding-inline** Sass variable.
 );
 ```
 
-### VSelect/VCombobox/VAutocomplete
+### VSelect/VCombobox/VAutocomplete {codemod-available}
 
 `item` in slots has been renamed to `internalItem` for consistency with VList and VDataTable. `item` is still available but is now an alias for `internalItem.raw` which seems like the most common use case.
 
@@ -412,7 +474,7 @@ Or remove `.raw`:
   </VSelect>
 ```
 
-### VSnackbar
+### VSnackbar {codemod-available}
 
 ::: warning
 This component has its internal HTML structure overhauled to incorporate **header** and **prepend** slots
@@ -429,7 +491,7 @@ Removed the `multi-line` prop and the **$snackbar-multi-line-wrapper-min-height*
   />
 ```
 
-### VSnackbarQueue
+### VSnackbarQueue {codemod-available}
 
 ::: warning
 This component has been rewritten to enable showing multiple snackbars at once
@@ -469,7 +531,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | Gaps from padding                                             | No default padding, utilizes CSS `gap` |
 | Widths from hardcoded percentage (e.g., `75%` for `.v-col-9`) | Calculated width accounting for gaps   |
 
-#### Prop changes on VRow
+#### Prop changes on VRow {codemod-available}
 
 | Previous                         | New                                              |
 |----------------------------------|--------------------------------------------------|
@@ -480,7 +542,7 @@ The grid system has been refactored to use CSS `gap` instead of negative margins
 | `align-sm`, `justify-md`, etc.   | use responsive utility classes                   |
 | no fine-grained control over gap | `gap` prop accepts number, string, or `[x, y]`   |
 
-#### Prop changes on VCol
+#### Prop changes on VCol {codemod-available}
 
 | Previous                                | New                                                 |
 |-----------------------------------------|-----------------------------------------------------|
@@ -564,7 +626,6 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
   $avatar-margin-end: 8px;
   $avatar-margin-start: 8px;
 
-  $icon-left-margin-left: 8px;
   $icon-margin-end: 8px;
   $icon-margin-start: 8px;
 
@@ -576,6 +637,44 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
 #### Restoring the legacy grid behavior
 
 If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
+#### Removed unused Sass variables
+
+A number of other Sass variables that had no effect on rendered output were also removed in v4. If you're migrating a project with custom Sass overrides, see [Unused Sass variables](/getting-started/unused-sass-variables/) for the full list, including ones that stopped working as far back as v3.
+
+## Tooling
+
+### Vite: overlay z-index in dev mode
+
+Vuetify 4 calculates overlay z-index through a shared `useStack` singleton — when a dialog opens at 2400, any overlay rendered inside it (a select menu, a tooltip, etc.) automatically stacks at 2410. This works correctly in production, but can silently break in Vite dev mode.
+
+**Symptom:** Menus, selects, or other overlays opened inside a dialog appear behind it — they render, but are invisible because they sit at the default z-index (2000) instead of stacking above the dialog.
+
+**Root cause:** Vite's dependency pre-bundler can serve some Vuetify modules from its optimized cache and others from raw ESM. When this split happens, two separate `useStack` instances are created. Each overlay registers with its own instance, so they never see each other's stack — and auto-stacking stops working.
+
+**Fix:** Force Vite to pre-bundle Vuetify's overlay-related modules consistently, then clear the cache:
+
+```ts { resource="vite.config.ts" }
+export default defineConfig({
+  optimizeDeps: {
+    include: [
+      'vuetify/components/VOverlay',
+      'vuetify/components/VDialog',
+      'vuetify/components/VMenu',
+      'vuetify/components/VSelect',
+      'vuetify/components/VTooltip',
+    ],
+  },
+})
+```
+
+After updating the config, delete the `.vite` cache directory and restart the dev server:
+
+```bash
+rm -rf node_modules/.vite
+```
+
+This issue only manifests in dev mode. Production builds are not affected because Vite bundles everything into a single module graph.
 
 ## Defaults
 

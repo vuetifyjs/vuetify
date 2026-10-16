@@ -1,4 +1,5 @@
 {
+  "description": "A low level component for building specialized custom field components to work inside `v-form`.",
   "props": {
     "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **append-inner** slot.",
     "baseColor": "Sets the color of the input when it is not focused.",

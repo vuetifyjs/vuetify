@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Avatar groups
   title: Avatar group component
@@ -10,7 +9,7 @@ related:
   - /components/chip-groups/
   - /components/lists/
 features:
-  github: /labs/VAvatarGroup/
+  github: /components/VAvatarGroup/
   label: 'C: VAvatarGroup'
   report: true
 ---
@@ -21,19 +20,11 @@ The `v-avatar-group` component is used to display a collection of avatars in a s
 
 <PageFeatures />
 
-## Installation
+::: warning
 
-Labs components require manual import and registration with the Vuetify instance.
+This feature was introduced in [v3.12.0](/getting-started/release-notes/?version=v3.12.0). For versions before [v4.3.0](/getting-started/release-notes/?version=v4.3.0) it requires import from `vuetify/labs/VAvatarGroup` (labs).
 
-```js { resource="src/plugins/vuetify.js" }
-import { VAvatarGroup } from 'vuetify/labs/VAvatarGroup'
-
-export default createVuetify({
-  components: {
-    VAvatarGroup,
-  },
-})
-```
+:::
 
 ## Usage
 
@@ -67,12 +58,6 @@ Use the **items** prop to render avatars from an array. Strings are treated as i
 Use the **size** prop to control avatar dimensions and the **gap** prop to adjust the overlap between avatars.
 
 <ExamplesExample file="v-avatar-group/prop-size" />
-
-#### Limit
-
-Use the **limit** prop to restrict the number of visible avatars. Overflow is indicated with a "+N" avatar.
-
-<ExamplesExample file="v-avatar-group/prop-limit" />
 
 #### Reverse
 

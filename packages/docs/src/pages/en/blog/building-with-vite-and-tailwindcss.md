@@ -65,7 +65,7 @@ bun create vuetify
 
 :::
 
-...choose the "Recommended" preset for Vite and select Vuetify 4.
+...choose the "Base" preset and "None" when asked for the CSS framework. The point is to learn how the pieces work together by performing code changes manually.
 
 Verify the boilerplate by building it with the standard NPM build script (e.g. `pnpm run build`).
 
@@ -142,7 +142,9 @@ In order for Vuetify transitions to work properly, we have to ensure `tailwind.*
 @layer vuetify-components;
 @layer vuetify-overrides;
 @layer vuetify-utilities;
+
 @layer tailwind; /* <-- our new utilities */
+
 @layer vuetify-final;
 ```
 
@@ -157,14 +159,13 @@ import 'vuetify/styles'
 // followed by createVuetify({ ... })
 ```
 
-![CSS Layers preview in browser DevTools](https://vuetifyjs.b-cdn.net/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
+![CSS Layers preview in browser DevTools](https://cdn.vuetifyjs.com/docs/images/blog/building-with-vite-and-tailwindcss/vuetify-tailwindcss-layers.png)
 
 ### Disable Vuetify utilities
 
 Let's adjust `src/styles/settings.scss`:
 
 ```scss { resource="src/styles/settings.scss" }
-@use './layers';
 @use 'vuetify/settings' with (
   $color-pack: false,
   $utilities: false,
@@ -180,7 +181,7 @@ after:  481.24 kB │ gzip: 115.70 kB
 
 The expected difference is substantial, but we still pay the tax of using the full MDI icon font. Switching to SVG icons (`@mdi/js`) is not a big deal, but we will keep this guide focused on integrating TailwindCSS. If you need to optimize the bundle size further, Vuetify documentation already covers [how to switch to SVG icon set](/features/icon-fonts/#mdi-js-svg).
 
-### Migrate HelloWorld.vue and AppFooter.vue
+### Migrate HelloWorld.vue and AppFooter.vue { #migrate-helloworldvue-and-appfootervue }
 
 With utilities disabled, some classes used in the scaffolded template will stop working. Here are the replacements:
 
@@ -421,7 +422,7 @@ Now you can use `bg-primary`, `text-success`, `hover:bg-error` and similar class
 
 ---
 
-## Configure class-based light/dark variants
+## Configure class-based light/dark variants { #configure-class-based-lightdark-variants }
 
 Let's add some color-dependent classes and try using the `dark:*` prefix to see what happens. By default, Tailwind's `dark:` variant targets `@media (prefers-color-scheme: dark)` or a `.dark` class. Vuetify uses `.v-theme--dark` instead, so the generated selectors won't match.
 

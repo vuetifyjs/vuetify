@@ -17,11 +17,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isPercentage, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
@@ -72,18 +72,24 @@ export const VBottomNavigation = genericComponent<new <T>(
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme()
+    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.bgColor)
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const { ssrBootStyles } = useSsrBoot()
-    const height = computed(() => (
-      Number(props.height) -
-      (props.density === 'comfortable' ? 8 : 0) -
-      (props.density === 'compact' ? 16 : 0)
-    ))
+    const height = computed(() => {
+      if (isPercentage(props.height)) {
+        return props.height
+      }
+
+      return (
+        Number(props.height) -
+        (props.density === 'comfortable' ? 8 : 0) -
+        (props.density === 'compact' ? 16 : 0)
+      )
+    })
     const isActive = useProxiedModel(props, 'active', props.active)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
@@ -132,6 +138,7 @@ export const VBottomNavigation = genericComponent<new <T>(
               height: convertToUnit(height.value),
             },
             ssrBootStyles.value,
+            roundedStyles.value,
             props.style,
           ]}
         >

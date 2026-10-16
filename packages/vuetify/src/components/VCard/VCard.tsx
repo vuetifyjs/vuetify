@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-
 // Styles
 import './VCard.sass'
 
@@ -31,7 +29,7 @@ import vRipple from '@/directives/ripple'
 
 // Utilities
 import { shallowRef, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isBoolean, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -110,14 +108,14 @@ export const VCard = genericComponent<VCardSlots>()({
     const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses, roundedStyles } = useRounded(props)
     const link = useLink(props, attrs)
     const loadingColor = shallowRef<string | undefined>(undefined)
 
     watch(() => props.loading, (val, old) => {
-      loadingColor.value = !val && typeof old === 'string'
+      loadingColor.value = !val && isString(old)
         ? old
-        : typeof val === 'boolean'
+        : isBoolean(val)
           ? undefined
           : val
     }, { immediate: true })
@@ -168,6 +166,7 @@ export const VCard = genericComponent<VCardSlots>()({
             {
               '--v-card-height': convertToUnit(props.height),
             },
+            roundedStyles.value,
             props.style,
           ]}
           onClick={ isClickable && link.navigate.value }

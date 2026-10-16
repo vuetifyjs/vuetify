@@ -1,4 +1,5 @@
 {
+  "description": "A modified `v-dialog` that slides from the bottom.",
   "props": {
     "inset": "Reduces the sheet content maximum width to 70%."
   }

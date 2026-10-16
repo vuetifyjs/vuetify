@@ -9,29 +9,21 @@
     <div class="text-center">
       <v-command-palette
         v-model:search="search"
-        :hotkey="hotkey"
+        v-bind="props"
         :items="items"
-        :placeholder="placeholder"
         @click:item="onItemClick"
       >
         <template v-slot:activator="{ props: activatorProps }">
-          <v-btn v-bind="activatorProps">
-            Open Command Palette
-          </v-btn>
+          <v-btn v-bind="activatorProps">Open Command Palette</v-btn>
         </template>
       </v-command-palette>
-
-      <v-snackbar v-model="snackbar" :timeout="2000">
-        Selected: {{ selectedItem }}
-      </v-snackbar>
     </div>
 
     <template v-slot:configuration>
       <v-text-field
         v-model="placeholder"
-        hint="Custom placeholder text for search input"
         label="Placeholder"
-        persistent-hint
+        hide-details
       ></v-text-field>
 
       <v-text-field
@@ -40,6 +32,18 @@
         label="Global Hotkey"
         persistent-hint
       ></v-text-field>
+
+      <v-slider
+        v-model="offsetTop"
+        :max="40"
+        :min="0"
+        :step="1"
+        label="Offset Top"
+        hide-details
+        thumb-label
+      >
+        <template v-slot:thumb-label>{{ offsetTop }}vh</template>
+      </v-slider>
     </template>
   </ExamplesUsageExample>
 </template>
@@ -48,10 +52,9 @@
   const name = 'v-command-palette'
   const model = ref('default')
   const search = ref('')
-  const snackbar = ref(false)
-  const selectedItem = ref('')
   const placeholder = ref('Search commands...')
   const hotkey = ref('ctrl+shift+k')
+  const offsetTop = ref(15)
   const options = []
 
   const items = [
@@ -67,13 +70,8 @@
       prependIcon: 'mdi-folder-open',
       value: 'open-project',
     },
-    {
-      type: 'divider',
-    },
-    {
-      type: 'subheader',
-      title: 'Settings',
-    },
+    { type: 'divider' },
+    { type: 'subheader', title: 'Settings' },
     {
       title: 'Help',
       subtitle: 'View documentation',
@@ -82,25 +80,25 @@
     },
   ]
 
+  const props = computed(() => ({
+    placeholder: placeholder.value,
+    hotkey: hotkey.value || undefined,
+    'offset-top': offsetTop.value !== 15 ? `${offsetTop.value}vh` : undefined,
+  }))
+
   const code = computed(() => {
     return `<v-command-palette
   v-model:search="search"
-  :items="items"
-  hotkey="${hotkey.value}"
-  placeholder="${placeholder.value}"
-  @click:item="onItemClick"
+  :items="items"${propsToString(props.value)}  @click:item="onItemClick"
 >
   <template v-slot:activator="{ props: activatorProps }">
-    <v-btn v-bind="activatorProps">
-      Open Command Palette
-    </v-btn>
+    <v-btn v-bind="activatorProps">Open Command Palette</v-btn>
   </template>
 </v-command-palette>`
   })
 
-  function onItemClick (item, event) {
-    selectedItem.value = item.title
-    snackbar.value = true
+  function onItemClick (item) {
+    console.log('selected item:', item)
   }
 
   const script = computed(() => {
@@ -110,7 +108,7 @@
   const search = shallowRef('')
   const items = ${JSON.stringify(items, null, 2)}
 
-  function onItemClick (item, event) {
+  function onItemClick (item) {
     console.log('selected item:', item)
   }
 <` + '/script>'

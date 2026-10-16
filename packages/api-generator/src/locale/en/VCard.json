@@ -1,4 +1,5 @@
 {
+  "description": "An alternative to `v-sheet` that provides a semantic interface for various types of cards holding title, general content, and optional actions, icon and image.",
   "props": {
     "flat": "Removes the card's elevation.",
     "hover": "Applies **3dp** (level 2) of elevation when hovered (default 1dp). You can find more information on the [elevation page](/styles/elevation).",

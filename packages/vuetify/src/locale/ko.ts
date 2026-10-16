@@ -20,6 +20,9 @@ export default {
       activateNone: '정렬을 취소하려면 활성화하세요.',
       activateDescending: '내림차순 정렬을 위해 활성화하세요.',
       activateAscending: '오름차순 정렬을 위해 활성화하세요.',
+      selectRow: '행 선택',
+      selectAll: '모두 선택',
+      selectGroup: '그룹 선택',
     },
     sortBy: '정렬 기준',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '부터',
+  },
+  monthPicker: {
+    title: '월 선택',
+    itemsSelected: '{0}개 선택됨',
+    header: '월 입력',
+    range: {
+      title: '월 입력',
+    },
+    ariaLabel: {
+      previousYear: '이전 연도',
+      nextYear: '다음 연도',
+      selectYear: '연도 선택',
+      currentMonth: '이번 달, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0}개 선택됨',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} 더보기',
     today: '오늘',
   },
+  heatmap: {
+    less: '적음',
+    more: '많음',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',
     appendAction: '{0} 뒤에 추가된 동작',
-    otp: 'OTP 문자 {0}를 입력하세요',
+    otp: '인증 코드를 입력하세요',
   },
   fileInput: {
     counter: '{0}개 파일',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: '{1} 중 {0} 점',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '최소',
+      end: '최대',
+    },
+  },
+  splitBtn: {
+    menu: '추가 옵션',
   },
   loading: '불러오는 중...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: '키보드 단축키: {0}',
     or: '또는',
   },
-  video: {
+  media: {
     play: '재생',
     pause: '일시정지',
     seek: '탐색',
     volume: '볼륨',
-    showVolume: '볼륨 조절 표시',
     mute: '음소거',
     unmute: '음소거 해제',
     enterFullscreen: '전체 화면',

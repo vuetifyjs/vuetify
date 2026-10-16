@@ -29,6 +29,18 @@ const stories = {
       }}
     </VProgressLinear>
   ),
+  'Split variant': <VProgressLinear modelValue="40" variant="split" />,
+  'Split variant with buffer': <VProgressLinear modelValue="40" bufferValue="70" variant="split" />,
+  'Rounded bar with buffer': (
+    <div class="d-flex flex-column ga-3 w-100">
+      <VProgressLinear height="16" modelValue="30" bufferValue="50" rounded />
+      <VProgressLinear height="16" modelValue="40" bufferValue="60" roundedBar />
+      <VProgressLinear height="16" modelValue="70" bufferValue="90" rounded="md" roundedBar />
+      <VProgressLinear height="16" modelValue="30" bufferValue="50" rounded reverse />
+      <VProgressLinear height="16" modelValue="40" bufferValue="60" roundedBar reverse />
+      <VProgressLinear height="16" modelValue="70" bufferValue="90" rounded="md" roundedBar reverse />
+    </div>
+  ),
 }
 
 describe('VProgressLinear', () => {

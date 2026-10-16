@@ -18,55 +18,106 @@ Vuetify is always under development. We are constantly working towards improving
 
 <PromotedEntry />
 
-## 2025/2026 Roadmap
+## 2026 Roadmap
 
-The following is a list of all planned components for the year 2025.
-
-### Versions
+The following is a list of all planned components for the year 2026.
 
 | Version                                                                 | Planned Release |
 |-------------------------------------------------------------------------|-----------------|
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
-| [v4.1](https://github.com/vuetifyjs/vuetify/milestone/77)               | TBD             |
+| [v4.1 (Ascendant)](https://github.com/vuetifyjs/vuetify/milestone/77)   | Q2 2026         |
+| [v4.2 (Crusader)](https://github.com/vuetifyjs/vuetify/milestone/90)    | Q3 2026         |
+| [v4.3 (Paladin)](https://github.com/vuetifyjs/vuetify/milestone/93)     | Q4 2026         |
+| [v4.4 (Arbiter)](https://github.com/vuetifyjs/vuetify/milestone/95)     | Q4 2026         |
 
 ### New form components and features
 
-| Name                                                              | Entering Labs | Production Release |
-|-------------------------------------------------------------------|---------------|--------------------|
-| [validation rules](/features/rules)                               | *             | Q1 2026            |
-| [v-file-upload](/components/file-upload/)                         | *             | Q1 2026            |
-| [v-date-input](/components/date-inputs/)                          | *             | Q1 2026            |
-| [v-color-input](/components/color-inputs/)                        | *             | Q1 2026            |
-| [v-mask-input](/components/mask-inputs/)                          | *             | Q2 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/19709)   | Q1 2026       | Q3 2026            |
-| [v-month-picker](https://github.com/vuetifyjs/vuetify/pull/22534) | Q1 2026       | TBD                |
-| v-date-time-picker                                                | Q1 2026       | TBD                |
-| v-date-range-picker                                               | Q2 2026       | TBD                |
-| v-password-input                                                  | Q2 2026       | TBD                |
-| [v-editor](https://github.com/vuetifyjs/vuetify/pull/21653)       | TBD           | TBD                |
+| Name                                                            | Entering Labs | Production Release |
+|-----------------------------------------------------------------|---------------|--------------------|
+| [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
+| [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
+| [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
+| v-date-time-picker                                              | Q3 2026       | Q4 2026            |
+| v-password-input                                                | Q3 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
 ### Other components and features
 
-| Name                                                                 | Entering Labs | Production Release |
-|----------------------------------------------------------------------|---------------|--------------------|
-| [v-icon-btn](/components/icon-buttons/)                              | *             | Q1 2026            |
-| [v-video](/components/videos)                                        | *             | TBD                |
-| [v-pie](/components/pie-charts)                                      | *             | TBD                |
-| [v-command-palette](https://github.com/vuetifyjs/vuetify/pull/22403) | Q1 2026       | TBD                |
-| [v-avatar-group](https://github.com/vuetifyjs/vuetify/pull/22495)    | Q1 2026       | TBD                |
-| [v-heatmap](https://github.com/vuetifyjs/vuetify/pull/22535)         | Q2 2026       | TBD                |
-| v-split-btn                                                          | Q2 2026       | TBD                |
-| v-feature-discovery                                                  | TBD           | TBD                |
-| v-drag (directive)                                                   | TBD           | TBD                |
-| v-chat                                                               | TBD           | TBD                |
+| Name                                                  | Entering Labs | Production Release |
+|-------------------------------------------------------|---------------|--------------------|
+| [v-command-palette](/components/command-palettes)     | *             | Q3 2026            |
+| [v-pie](/components/pie-charts)                       | *             | Q3 2026            |
+| [v-video](/components/videos)                         | *             | Q4 2026            |
+| [v-heatmap](/components/heatmaps)                     | *             | Q4 2026            |
+| [v-split-btn](/components/split-buttons)              | *             | Q4 2026            |
+| [v-audio](/components/audio-players)                  | *             | Q4 2026            |
+| [v-infinite-carousel](/components/infinite-carousels) | *             | Q4 2026            |
+| [v-loading-indicator](/components/loading-indicators) | *             | Q4 2026            |
+| v-drag (directive)                                    | Q3 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v4.3 (Paladin)
+
+<!-- - **Released:** October 2026 -->
+<!-- - **Target Release:** Q4 2026 -->
+<!-- - **Notes:** [v4.3 Release](/getting-started/release-notes/?version=v4.3.0) -->
+- **Overview:**
+  - VNavigationDrawer - `modal` prop and `v-model:expanded`
+  - VBtn/VIconBtn/VBtnGroup - opt-in MD3 sizing and radius animation
+  - VTabs - `slider-variant` for MD3
+  - VWindow/VCarousel - prop for mouse wheel navigation, `pause-on-hover`
+  - VRow - responsive gap props
+  - VOverlay - `contextmenu` prop
+  - new [v-touch-hold](/directives/touch-hold/) directive
+  - Introduced 3 new components to the main framework from Labs:
+    - [v-avatar-group](/components/avatar-groups/)
+    - [v-highlight](/components/highlights/)
+    - [v-progress](/components/progress/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/93)
+
+### v4.2 (Crusader)
+
+- **Released:** September 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v4.2 Release](/getting-started/release-notes/?version=v4.2.0)
+- **Overview:**
+  - `@vuetify/v0` utilities consumed in core
+  - VSelect/VAutocomplete/VCombobox - `open-on-focus`, persistent menu, new events for multi-selection
+  - VSlideGroup - `scroll-snap`, `scroll-distance` and `slide` function
+  - VProgressLinear - `reveal` prop and transition duration for `model-value` changes
+  - VSkeletonLoader - updated `table`, new `types` prop and `chip-group` type
+  - promoted [rules](/features/rules/) from Labs
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/90)
+
+### v4.1 (Ascendant)
+
+- **Released:** June 2026
+- **Target Release:** Q2 2026
+- **Notes:** [v4.1 Release](/getting-started/release-notes/?version=v4.1.0)
+- **Overview:**
+  - VExpansionPanels - more props for customization
+  - VDialog/VCommandPalette - `location` and `origin` to enforce specific viewport placement
+  - VNumberInput - support for grouping (typically for thousands separators)
+  - VDatePicker - improved range selection, keyboard navigation
+  - VDataTable - programatic control over groups state with `v-model:opened`
+  - VSparkline - hover interactivity, markers and tooltips
+  - VOtpInputs - grouping fields into segments, a11y and emojis
+  - Introduced 7 new components to the main framework from Labs:
+    - [v-icon-btn](/components/icon-buttons/)
+    - [v-stepper-vertical](/components/vertical-steppers/)
+    - [v-pull-to-refresh](/components/pull-to-refresh/)
+    - [v-file-upload](/components/file-upload/)
+    - [v-date-input](/components/date-inputs/)
+    - [v-color-input](/components/color-inputs/)
+    - [v-picker](/api/v-picker/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/77)
 
 ### v4.0 (Revisionist)
 
@@ -80,6 +131,19 @@ The following are the already released **minor** and **major** version updates. 
   - reduced CSS reset - respecting browser defaults
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/62)
 
+### v3.13 (LTS)
+
+- **Released:** July 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v3.13 Release](/getting-started/release-notes/?version=v3.13.0)
+- **Overview:**
+  - final v3 minor release — enters [long-term support](/introduction/long-term-support/)
+  - VSelect/VAutocomplete/VCombobox - new events for multi-selection
+  - VDataTable - mobile header slot and improved a11y for sorting and selection
+  - VSkeletonLoader - new `types` prop, `chip-group` type and `table` improvements
+  - VBtnGroup - `size` prop to align with standalone buttons
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/92)
+
 ### v3.12 (Warden)
 
 - **Released:** February 2026
@@ -89,9 +153,6 @@ The following are the already released **minor** and **major** version updates. 
   - VSelect/VAutocomplete/VCombobox — new `menu-header` and `menu-footer` slots
   - VDataTable — control over paging strategy with `page-by` prop
   - `mdi-unocss` icon set
-  - Introduced 2 new components to the main framework from Labs:
-    - [v-command-palette](/components/command-palettes/)
-    - [v-avatar-group](/components/avatar-groups/)
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/86)
 
 ### v3.11 (Harbinger)

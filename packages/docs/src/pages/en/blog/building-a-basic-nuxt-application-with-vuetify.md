@@ -230,7 +230,7 @@ We will use the v-app-bar component, which is a Vuetify component used to displa
     <!-- Toolbar at the top of the screen -->
     <v-app-bar color="primary" height="48">
       <!-- Title of the application with adjusted margin and font size -->
-      <v-app-bar-title class="text-h6 ms-3">
+      <v-app-bar-title class="text-title-large ms-3">
         <v-icon icon="mdi-apps"></v-icon>
 
         <span class="ms-1">My Application</span>
@@ -292,7 +292,7 @@ The app.vue file is therefore modified:
     <!-- Toolbar at the top of the screen -->
     <v-app-bar color="primary" height="48">
     <!-- Title of the application with adjusted margin and font size -->
-      <v-app-bar-title class="text-h6 ms-3">
+      <v-app-bar-title class="text-title-large ms-3">
         <v-icon icon="mdi-apps"></v-icon>
 
         <span class="ms-1">My Application</span>
@@ -306,7 +306,7 @@ The app.vue file is therefore modified:
 
     <!-- Smaller footer at the bottom of the screen -->
     <v-footer color="secondary" height="30">
-      <v-container class="text-center text-caption">
+      <v-container class="text-center text-body-small">
         © {{ new Date().getFullYear() }} My Application - All Rights Reserved
       </v-container>
     </v-footer>
@@ -330,7 +330,7 @@ Let's add the app attribute to both our v-app-bar and v-footer components:
     <!-- Toolbar at the top of the screen -->
     <v-app-bar color="primary" height="48">
       <!-- Title of the application with adjusted margin and font size -->
-      <v-app-bar-title class="text-h6 ms-3">
+      <v-app-bar-title class="text-title-large ms-3">
         <v-icon icon="mdi-apps"></v-icon>
 
         <span class="ms-1">My Application</span>
@@ -344,7 +344,7 @@ Let's add the app attribute to both our v-app-bar and v-footer components:
 
     <!-- Smaller footer at the bottom of the screen -->
     <v-footer app color="secondary" height="30">
-      <v-container class="text-center text-caption">
+      <v-container class="text-center text-body-small">
         © {{ new Date().getFullYear() }} My Application - All Rights Reserved
       </v-container>
     </v-footer>
@@ -378,7 +378,7 @@ The app.vue component is modified to integrate the navigation menu:
   <!-- Toolbar at the top of the screen -->
   <v-app-bar color="primary" height="48">
     <!-- Title of the application with adjusted margin and font size -->
-    <v-app-bar-title class="text-h6 ms-3">
+    <v-app-bar-title class="text-title-large ms-3">
       <v-icon icon="mdi-apps"></v-icon>
 
       <span class="ms-1">My Application</span>
@@ -416,7 +416,7 @@ The app.vue component is modified to integrate the navigation menu:
 
   <!-- Smaller footer at the bottom of the screen -->
   <v-footer app color="secondary" height="30">
-    <v-container class="text-center text-caption">
+    <v-container class="text-center text-body-small">
       © {{ new Date().getFullYear() }} My Application - All Rights Reserved
     </v-container>
   </v-footer>
@@ -469,7 +469,7 @@ We therefore insert buttons in the form of icons into the application's toolbar.
     <!-- Toolbar at the top of the screen -->
     <v-app-bar color="primary" height="48">
       <!-- Title of the application with adjusted margin and font size -->
-      <v-app-bar-title class="text-h6 ms-3">
+      <v-app-bar-title class="text-title-large ms-3">
         <v-icon icon="mdi-apps" @click="drawer = !drawer"></v-icon>
 
         <span class="ms-1">My Application</span>
@@ -519,7 +519,7 @@ We therefore insert buttons in the form of icons into the application's toolbar.
 
     <!-- Smaller footer at the bottom of the screen -->
     <v-footer app color="secondary" height="30">
-      <v-container class="text-caption text-center">
+      <v-container class="text-body-small text-center">
         © {{ new Date().getFullYear() }} My Application - All Rights Reserved
       </v-container>
     </v-footer>

@@ -1,4 +1,5 @@
 {
+  "description": "A lightweight button component meant to hold only the icon.",
   "props": {
     "active": "When undefined (default), the component utilizes its default variant, otherwise it will use the activeVariant if active is true, or the baseVariant if active is false.",
     "activeIcon": "When active is a boolean, this icon is used when active is true.",
@@ -9,7 +10,8 @@
     "loading": "Displays circular progress bar in place of the icon.",
     "readonly": "Puts the button in a readonly state. Cannot be clicked or navigated to by keyboard.",
     "rotate": "The rotation of the icon in degrees.",
-    "sizes": "An array of tuples that define the button sizes for each named size."
+    "widthVariant": "Makes the button narrower or wider than its height. Requires [Material Design 3 button sizes](/features/md3-button-sizes/).",
+    "sizes": "Deprecated, use `$icon-btn-named-sizes` SASS variable instead."
   },
   "events": {
     "update:active": "Event that is emitted when the active state changes."

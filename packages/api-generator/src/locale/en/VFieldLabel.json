@@ -1,4 +1,5 @@
 {
+  "description": "A label component used within `v-field`.",
   "props": {
     "floating": "Elevates the label above the slotted content."
   }

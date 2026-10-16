@@ -49,17 +49,15 @@ The **interactive** prop prevents the tooltip from closing during mouse interact
 
 #### Location
 
-Use the **location** prop to specify on which side of the element the tooltip should show. Read more about **location** [here](/components/overlays/#location).
+Use the **location** prop to specify on which side of the element the tooltip should show. Read more about **location** [here](/components/overlays/#location-strategies).
 
 <ExamplesExample file="v-tooltip/prop-location" />
 
-<!-- TODO: not supported
 #### Color
 
 Tooltip color can be set with the `color` prop.
 
 <ExamplesExample file="v-tooltip/prop-color" />
--->
 
 #### Open on Click
 

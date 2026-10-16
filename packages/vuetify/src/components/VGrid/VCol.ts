@@ -8,7 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent, keys, propsFactory } from '@/util'
+import { genericComponent, isString, keys, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ const propMap = {
 }
 
 function parseCols (val: boolean | string | number) {
-  if (typeof val === 'string' && val.includes('/')) {
+  if (isString(val) && val.includes('/')) {
     const [cols, size] = val.split('/')
     return { cols: Number(cols), size: Number(size) }
   }
@@ -103,15 +103,15 @@ export const makeVColProps = propsFactory({
   /** @deprecated use order-* class instead */
   order: { type: [String, Number], default: null },
   /** @deprecated use order-sm-* class instead */
-  orderSm: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderSm: { type: [String, Number], default: null },
   /** @deprecated use order-md-* class instead */
-  orderMd: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderMd: { type: [String, Number], default: null },
   /** @deprecated use order-lg-* class instead */
-  orderLg: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderLg: { type: [String, Number], default: null },
   /** @deprecated use order-xl-* class instead */
-  orderXl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderXl: { type: [String, Number], default: null },
   /** @deprecated use order-xxl-* class instead */
-  orderXxl: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null },
+  orderXxl: { type: [String, Number], default: null },
   /** @deprecated use align-self-* class instead */
   alignSelf: { type: String as PropType<typeof ALIGN_SELF_VALUES[number]>, default: null, validator: alignSelfValidator },
 

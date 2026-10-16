@@ -1,17 +1,15 @@
-@use "sass:map";
+@use 'sass:map';
 @use '../../styles/settings';
-@use "../../styles/settings/variables";
-@use "../../styles/tools/functions";
+@use '../../styles/tools';
 
 // VToolbar
 $toolbar-background: rgb(var(--v-theme-surface-light)) !default;
-$toolbar-color: functions.theme-color('on-surface-light', var(--v-high-emphasis-opacity)) !default;
+$toolbar-color: tools.theme-color('on-surface-light', var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-color: settings.$border-color-root !default;
 $toolbar-border-radius: map.get(settings.$rounded, 0) !default;
 $toolbar-border-style: settings.$border-style-root !default;
 $toolbar-border-thin-width: thin !default;
 $toolbar-border-width: 0 !default;
-$toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
 $toolbar-elevation: 0 !default;
@@ -19,8 +17,8 @@ $toolbar-flat-elevation: 0 !default;
 $toolbar-flex: none !default;
 $toolbar-prepend-btn-margin-start: 4px !default;
 $toolbar-append-btn-margin-end: 4px !default;
-$toolbar-rounded-border-radius: variables.$border-radius-root !default;
-$toolbar-transition: .2s variables.$standard-easing !default;
+$toolbar-rounded-border-radius: settings.$border-radius-root !default;
+$toolbar-transition: .2s settings.$standard-easing !default;
 
 // VToolbarTitle
 $toolbar-title-margin: 20px !default;
@@ -63,9 +61,3 @@ $toolbar-theme: (
   $toolbar-background,
   $toolbar-color
 ) !default;
-
-
-// Deprecated
-$toolbar-content-padding-x: 16px !default;
-$toolbar-content-padding-y: 4px !default;
-$toolbar-title-extended-padding: 56px !default;

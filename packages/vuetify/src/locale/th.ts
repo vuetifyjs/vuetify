@@ -20,6 +20,9 @@ export default {
       activateNone: 'กดเพื่อปิดการเรียงลำดับ',
       activateDescending: 'กดเพื่อเรียงจากมากไปน้อย',
       activateAscending: 'กดเพื่อเรียงจากน้อยไปมาก',
+      selectRow: 'เลือกแถว',
+      selectAll: 'เลือกทั้งหมด',
+      selectGroup: 'เลือกกลุ่ม',
     },
     sortBy: 'เรียงตาม',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'ถึง',
+  },
+  monthPicker: {
+    title: 'เลือกเดือน',
+    itemsSelected: 'เลือกแล้ว {0} รายการ',
+    header: 'ป้อนเดือน',
+    range: {
+      title: 'ป้อนเดือน',
+    },
+    ariaLabel: {
+      previousYear: 'ปีก่อนหน้า',
+      nextYear: 'ปีถัดไป',
+      selectYear: 'เลือกปี',
+      currentMonth: 'เดือนนี้, {0}',
+    },
   },
   datePicker: {
     itemsSelected: 'เลือกแล้ว {0} รายการ',
@@ -69,11 +86,15 @@ export default {
     moreEvents: 'มีอีก {0}',
     today: 'วันนี้',
   },
+  heatmap: {
+    less: 'น้อย',
+    more: 'มาก',
+  },
   input: {
     clear: 'ล้าง {0}',
     prependAction: 'การกระทำก่อนหน้า {0}',
     appendAction: 'การกระทำเพิ่มเติม {0}',
-    otp: 'กรุณากรอกตัวอักษร OTP ตัวที่ {0}',
+    otp: 'กรอกรหัสยืนยัน',
   },
   fileInput: {
     counter: '{0} ไฟล์',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'คะแนน {0} จาก {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'ต่ำสุด',
+      end: 'สูงสุด',
+    },
+  },
+  splitBtn: {
+    menu: 'ตัวเลือกเพิ่มเติม',
   },
   loading: 'กำลังโหลด...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
     or: 'หรือ',
   },
-  video: {
+  media: {
     play: 'เล่น',
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',
     volume: 'ระดับเสียง',
-    showVolume: 'แสดงตัวควบคุมระดับเสียง',
     mute: 'ปิดเสียง',
     unmute: 'เปิดเสียง',
     enterFullscreen: 'เต็มหน้าจอ',

@@ -1,4 +1,5 @@
 {
+  "description": "A specialized input for showing sequence of icons for the user to express feedback.",
   "props": {
     "clearable": "Allows for the component to be cleared by clicking on the current value.",
     "emptyIcon": "The icon displayed when empty.",
@@ -7,6 +8,7 @@
     "itemLabelPosition": "Position of item labels. Accepts 'top' and 'bottom'.",
     "halfIncrements": "Allows the selection of half increments.",
     "hover": "Provides visual feedback when hovering over icons.",
+    "iconSize": "Sets the size of the icons. When unset, icons scale with a numeric **size**.",
     "length": "The amount of items to show.",
     "readonly": "Removes all hover effects and pointer events.",
     "itemAriaLabel": "The **aria-label** used for each item."

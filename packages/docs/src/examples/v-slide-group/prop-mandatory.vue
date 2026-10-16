@@ -19,7 +19,7 @@
         <v-card
           :class="['ma-4', selectedClass]"
           color="grey-lighten-1"
-          height="200"
+          height="100"
           width="100"
           @click="toggle"
         >

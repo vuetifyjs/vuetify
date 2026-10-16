@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiveer om sortering te verwyder.',
       activateDescending: 'Aktiveer om aflopend te sorteer.',
       activateAscending: 'Aktiveer om oplopend te sorteer.',
+      selectRow: 'Kies ry',
+      selectAll: 'Kies alles',
+      selectGroup: 'Kies groep',
     },
     sortBy: 'Sorteer volgens',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'tot',
+  },
+  monthPicker: {
+    title: 'Kies maand',
+    itemsSelected: '{0} gekies',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maande in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorige jaar',
+      nextYear: 'Volgende jaar',
+      selectYear: 'Kies jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} gekies',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} meer',
     today: 'Vandag',
   },
+  heatmap: {
+    less: 'Minder',
+    more: 'Meer',
+  },
   input: {
     clear: 'Maak skoon {0}',
     prependAction: '{0} voorafgevoegde aksie',
     appendAction: '{0} bygevoegde aksie',
-    otp: 'Voer asseblief OTP-karakter {0} in',
+    otp: 'Voer verifikasiekode in',
   },
   fileInput: {
     counter: '{0} lêers',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Gradering {0} van {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opsies',
   },
   loading: 'Laai...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Sleutelbordkortpad: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Speel',
     pause: 'Pouseer',
     seek: 'Soek',
     volume: 'Volume',
-    showVolume: 'Wys volumebeheer',
     mute: 'Demp',
     unmute: 'Ontdemp',
     enterFullscreen: 'Volskerm',

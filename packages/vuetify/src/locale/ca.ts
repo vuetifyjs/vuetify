@@ -20,6 +20,9 @@ export default {
       activateNone: 'Premi per treure la ordenació.',
       activateDescending: 'Premi per ordenar descendent.',
       activateAscending: 'Premi per ordenar ascendent.',
+      selectRow: 'Seleccionar fila',
+      selectAll: 'Seleccionar tot',
+      selectGroup: 'Seleccionar grup',
     },
     sortBy: 'Ordenat per',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'fins a',
+  },
+  monthPicker: {
+    title: 'Selecciona mes',
+    itemsSelected: '{0} seleccionats',
+    header: 'Introdueix el mes',
+    range: {
+      title: 'Introdueix els mesos',
+    },
+    ariaLabel: {
+      previousYear: 'Any anterior',
+      nextYear: 'Any següent',
+      selectYear: 'Selecciona any',
+      currentMonth: 'Mes actual, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seleccionats',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} més',
     today: 'Avui',
   },
+  heatmap: {
+    less: 'Menys',
+    more: 'Més',
+  },
   input: {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',
     appendAction: 'Acció afegida {0}',
-    otp: 'Si us plau, introdueix el caràcter OTP {0}',
+    otp: 'Introduïu el codi de verificació',
   },
   fileInput: {
     counter: '{0} fitxers',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Puntuació {0} de {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Mínim',
+      end: 'Màxim',
+    },
+  },
+  splitBtn: {
+    menu: 'Més opcions',
   },
   loading: 'Carregant...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Drecera de teclat: {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproduir',
     pause: 'Paura',
     seek: 'Cercar',
     volume: 'Volum',
-    showVolume: 'Mostrar control de volum',
     mute: 'Silenciar',
     unmute: 'Activar so',
     enterFullscreen: 'Pantalla completa',

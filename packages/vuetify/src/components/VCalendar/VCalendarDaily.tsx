@@ -1,9 +1,10 @@
 // Components
-import { VIconBtn } from '@/labs/VIconBtn'
+import { VIconBtn } from '@/components/VIconBtn'
 
 // Composables
 import { makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithIntervalsProps, useCalendarWithIntervals } from './composables/calendarWithIntervals'
+import { makeIntervalHighlightProps, useIntervalHighlight } from './composables/intervalHighlight'
 
 // Directives
 import vResize from '@/directives/resize'
@@ -32,6 +33,7 @@ export const VCalendarDaily = defineComponent({
     },
     hideHeader: Boolean,
 
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithIntervalsProps(),
   },
@@ -40,6 +42,7 @@ export const VCalendarDaily = defineComponent({
     const scrollPush = ref(0)
     const pane = ref<HTMLElement>()
     const base = useCalendarWithIntervals(props)
+    const highlight = useIntervalHighlight(props, base)
 
     function init () {
       nextTick(onResize)
@@ -194,6 +197,8 @@ export const VCalendarDaily = defineComponent({
             key={ day.date }
             class={['v-calendar-daily__day', base.getRelativeClasses(day)]}
             { ...events }
+            onMousemove={ highlight.onMousemove }
+            onMouseleave={ highlight.onMouseleave }
           >
             { genDayIntervals(index) }
             { genDayBody(day) }
@@ -215,10 +220,13 @@ export const VCalendarDaily = defineComponent({
       const styler = props.intervalStyle || base.intervalStyleDefault
       return (
         <div
-          class="v-calendar-daily__day-interval"
+          class={['v-calendar-daily__day-interval', {
+            'v-calendar-daily__day-interval--hover': highlight.isHighlighted(interval),
+          }]}
           key={ interval.time }
           style={[{ height }, styler(interval)]}
         >
+          { highlight.genUnderlay() }
           { slots.interval?.(base.getSlotScope(interval)) }
         </div>
       )

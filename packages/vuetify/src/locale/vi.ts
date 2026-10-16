@@ -20,6 +20,9 @@ export default {
       activateNone: 'Kích hoạt để bỏ sắp xếp.',
       activateDescending: 'Kích hoạt để sắp xếp giảm dần.',
       activateAscending: 'Kích hoạt để sắp xếp tăng dần.',
+      selectRow: 'Chọn hàng',
+      selectAll: 'Chọn tất cả',
+      selectGroup: 'Chọn nhóm',
     },
     sortBy: 'Sắp xếp',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'đến',
+  },
+  monthPicker: {
+    title: 'Chọn tháng',
+    itemsSelected: '{0} mục đã chọn',
+    header: 'Nhập tháng',
+    range: {
+      title: 'Nhập tháng',
+    },
+    ariaLabel: {
+      previousYear: 'Năm trước',
+      nextYear: 'Năm sau',
+      selectYear: 'Chọn năm',
+      currentMonth: 'Tháng này, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} mục đã chọn',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} nữa',
     today: 'Hôm nay',
   },
+  heatmap: {
+    less: 'Ít hơn',
+    more: 'Nhiều hơn',
+  },
   input: {
     clear: 'Xóa {0}',
     prependAction: 'Hành động trước {0}',
     appendAction: 'Hành động sau {0}',
-    otp: 'Vui lòng nhập ký tự OTP thứ {0}',
+    otp: 'Nhập mã xác minh',
   },
   fileInput: {
     counter: '{0} tệp',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Đánh giá {0} trên {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Tối thiểu',
+      end: 'Tối đa',
+    },
+  },
+  splitBtn: {
+    menu: 'Thêm tùy chọn',
   },
   loading: 'Đang tải...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'Phím tắt: {0}',
     or: 'hoặc',
   },
-  video: {
+  media: {
     play: 'Phát',
     pause: 'Tạm dừng',
     seek: 'Tìm kiếm',
     volume: 'Âm lượng',
-    showVolume: 'Hiện điều khiển âm lượng',
     mute: 'Tắt tiếng',
     unmute: 'Bật tiếng',
     enterFullscreen: 'Toàn màn hình',

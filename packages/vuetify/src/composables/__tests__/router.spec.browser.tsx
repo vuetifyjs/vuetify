@@ -1,7 +1,10 @@
+// Components
+import { VBtn } from '@/components/VBtn'
+
 // Utilities
 import { render, screen, userEvent, wait } from '@test'
 import { defineComponent, h, nextTick, ref, shallowRef } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import { useLink } from '../router'
 
 describe('useLink', () => {
@@ -65,7 +68,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -86,7 +89,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     pageReloadAttempted = false
     expect(router.currentRoute.value.fullPath).toBe('/page1')
 
@@ -96,7 +99,7 @@ describe('useLink', () => {
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page2')
   })
 
@@ -122,7 +125,7 @@ describe('useLink', () => {
 
     await userEvent.click(anchor)
 
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(router.currentRoute.value.fullPath).toBe('/page1')
   })
 
@@ -141,11 +144,31 @@ describe('useLink', () => {
 
     await userEvent.click(screen.getByCSS('a[href]'))
     await nextTick()
-    expect(pageReloadAttempted).toBeFalsy()
+    expect(pageReloadAttempted).toBe(false)
     expect(link.isActive?.value).toBe(true)
 
     to.value = { name: 'page2' }
     await wait()
     expect(link.isActive?.value).toBe(false)
+  })
+
+  it('should not throw when leaving the route that provided implicit params', async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        { path: '/', name: 'home', component: { render: () => h('div', 'home') } },
+        {
+          path: '/parent/:id',
+          component: { render: () => h('div', [h(VBtn, { to: { name: 'child' } }), h(RouterView)]) },
+          children: [{ path: '', name: 'child', component: { render: () => h('div') } }],
+        },
+      ],
+    })
+    await router.push('/parent/1')
+    render(() => h(RouterView), { global: { plugins: [router] } })
+    expect(screen.getByCSS('a').getAttribute('href')).toBe('/parent/1')
+
+    await router.push('/')
+    expect(router.currentRoute.value.fullPath).toBe('/')
   })
 })

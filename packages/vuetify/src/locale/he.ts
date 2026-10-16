@@ -20,6 +20,9 @@ export default {
       activateNone: 'הפעל להסרת המיון.',
       activateDescending: 'הפעל למיון יורד.',
       activateAscending: 'הפעל למיון עולה.',
+      selectRow: 'בחר שורה',
+      selectAll: 'בחר הכל',
+      selectGroup: 'בחר קבוצה',
     },
     sortBy: 'סדר לפי',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'עד',
+  },
+  monthPicker: {
+    title: 'בחר חודש',
+    itemsSelected: '{0} נבחר',
+    header: 'הזן חודש',
+    range: {
+      title: 'הזן חודשים',
+    },
+    ariaLabel: {
+      previousYear: 'השנה הקודמת',
+      nextYear: 'השנה הבאה',
+      selectYear: 'בחר שנה',
+      currentMonth: 'החודש הנוכחי, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} נבחר',
@@ -69,11 +86,15 @@ export default {
     moreEvents: '{0} נוספים',
     today: 'היום',
   },
+  heatmap: {
+    less: 'פחות',
+    more: 'יותר',
+  },
   input: {
     clear: 'נקה {0}',
     prependAction: '{0} פעולה מקדימה',
     appendAction: '{0} פעולה נוספת',
-    otp: 'נא להזין תו OTP {0}',
+    otp: 'הזן קוד אימות',
   },
   fileInput: {
     counter: '{0} קבצים',
@@ -112,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'דירוג {0} מתוך {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'מינימום',
+      end: 'מקסימום',
+    },
+  },
+  splitBtn: {
+    menu: 'אפשרויות נוספות',
   },
   loading: 'טוען...',
   infiniteScroll: {
@@ -153,12 +183,11 @@ export default {
     shortcut: 'קיצור דרך במקלדת: {0}',
     or: 'או',
   },
-  video: {
+  media: {
     play: 'נגן',
     pause: 'השהה',
     seek: 'חפש',
     volume: 'עוצמת שמע',
-    showVolume: 'הצג בקרת עוצמת שמע',
     mute: 'השתק',
     unmute: 'בטל השתקה',
     enterFullscreen: 'מסך מלא',
