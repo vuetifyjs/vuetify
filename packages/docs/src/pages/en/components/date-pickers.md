@@ -75,6 +75,12 @@ By default days from previous and next months are not visible. They can be displ
 
 <ExamplesExample file="v-date-picker/prop-show-adjacent-months" />
 
+#### Wheel
+
+Use **wheel** to navigate months with horizontal scrolling or Shift + mouse wheel.
+
+<ExamplesExample file="v-date-picker/prop-wheel" />
+
 #### Colors
 
 Date picker colors can be set using the **color** props.
