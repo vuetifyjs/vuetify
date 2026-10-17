@@ -52,6 +52,31 @@ describe('VSlider', () => {
     expect(screen.getByCSS('.v-slider-thumb').style.getPropertyValue('--v-slider-thumb-position')).toBe('20%')
   })
 
+  it('should show focus ring only after keyboard interaction', async () => {
+    render(() => <VSlider />)
+
+    await userEvent.click(screen.getByCSS('.v-slider-track'))
+    await expect.element(screen.getByCSS('.v-slider-thumb')).toHaveFocus()
+    expect(screen.getByCSS('.v-slider-thumb')).not.toHaveClass('v-slider-thumb--focus-visible')
+
+    await userEvent.keyboard('{ArrowRight}')
+    await expect.element(screen.getByCSS('.v-slider-thumb')).toHaveClass('v-slider-thumb--focus-visible')
+
+    await userEvent.click(screen.getByCSS('.v-slider-thumb'))
+    await expect.element(screen.getByCSS('.v-slider-thumb')).not.toHaveClass('v-slider-thumb--focus-visible')
+  })
+
+  it('should move inner icon past the thumb when the fill is too short', async () => {
+    const model = ref(50)
+    render(() => <VSlider v-model={ model.value } variant="pill" prependInnerIcon="$minus" />)
+
+    const icon = screen.getByCSS('.v-slider__inner-icon')
+    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--popped')
+
+    model.value = 2
+    await expect.element(icon).toHaveClass('v-slider__inner-icon--popped')
+  })
+
   it('should allow user to drag thumb', async () => {
     const model = ref()
     render(() => <VSlider v-model={ model.value } />)

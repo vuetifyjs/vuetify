@@ -78,7 +78,6 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       step,
       disabled,
       thumbSize,
-      trackSize,
       thumbLabel,
       direction,
       isReversed,
@@ -86,15 +85,14 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       readonly,
       elevation,
       mousePressed,
+      focusVisible,
       decimals,
       indexFromEnd,
-      variant,
       getValueText,
     } = slider
 
     const isHovered = shallowRef(false)
     const isHidden = shallowRef(false)
-    const isPill = computed(() => variant.value === 'pill')
 
     const elevationProps = computed(() => !disabled.value ? elevation.value : undefined)
     const { elevationClasses } = useElevation(elevationProps)
@@ -144,6 +142,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     function onKeydown (e: KeyboardEvent) {
       const newValue = parseKeydown(e, props.modelValue)
 
+      focusVisible.value = true
+
       if (newValue != null) {
         isHidden.value = false
 
@@ -152,6 +152,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     }
 
     watch(() => props.focused, val => {
+      if (val) focusVisible.value = !mousePressed.value
+
       if (val) {
         isHidden.value = false
       }
@@ -171,6 +173,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
             'v-slider-thumb',
             {
               'v-slider-thumb--focused': props.focused,
+              'v-slider-thumb--focus-visible': props.focused && focusVisible.value,
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
             props.class,
@@ -179,7 +182,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           style={[
             {
               '--v-slider-thumb-position': positionPercentage,
-              '--v-slider-thumb-size': convertToUnit(isPill.value ? (trackSize.value + 8) : thumbSize.value),
+              '--v-slider-thumb-size': convertToUnit(thumbSize.value),
             },
             props.style,
           ]}

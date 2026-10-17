@@ -5,7 +5,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { clamp, createRange, formatValue, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
 
 // Types
@@ -20,6 +20,8 @@ export type Tick = {
 }
 
 export type SliderVariant = 'default' | 'pill'
+export type SliderTrackThumb = 'idle' | 'active'
+export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
 
 type SliderProvide = {
   activeThumbRef: Ref<HTMLElement | undefined>
@@ -31,6 +33,7 @@ type SliderProvide = {
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
+  focusVisible: Ref<boolean>
   noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
@@ -44,12 +47,12 @@ type SliderProvide = {
   showTicks: Ref<boolean | 'always'>
   startOffset: Ref<number>
   step: Ref<number>
-  thumbSize: Ref<number>
+  thumbSize: Ref<number | string | undefined>
   thumbColor: Ref<string | undefined>
   thumbLabelColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
-  trackSize: Ref<number>
+  trackSize: Ref<number | string | undefined>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
   getValueText: (value: number) => string | undefined
   tickSize: Ref<number>
@@ -107,10 +110,7 @@ export const makeSliderProps = propsFactory({
     default: undefined,
     validator: (v: any) => isBoolean(v) || v === 'always' || v === 'hover',
   },
-  thumbSize: {
-    type: [Number, String],
-    default: 20,
-  },
+  thumbSize: [Number, String],
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
     default: false,
@@ -126,10 +126,7 @@ export const makeSliderProps = propsFactory({
   color: String,
   trackColor: String,
   trackFillColor: String,
-  trackSize: {
-    type: [Number, String],
-    default: 4,
-  },
+  trackSize: [Number, String],
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -137,6 +134,11 @@ export const makeSliderProps = propsFactory({
   },
   reverse: Boolean,
   noKeyboard: Boolean,
+  size: {
+    type: String as PropType<SliderSize>,
+    default: 'x-small',
+    validator: (v: any) => ['x-small', 'small', 'medium', 'large', 'x-large'].includes(v),
+  },
   variant: {
     type: String as PropType<SliderVariant>,
     default: 'default',
@@ -208,9 +210,9 @@ export const useSlider = ({
 
   const { min, max, step, decimals, roundValue } = steps
 
-  const thumbSize = computed(() => parseInt(props.thumbSize, 10))
+  const thumbSize = toRef(() => props.thumbSize)
   const tickSize = computed(() => parseInt(props.tickSize, 10))
-  const trackSize = computed(() => parseInt(props.trackSize, 10))
+  const trackSize = toRef(() => props.trackSize)
   const numTicks = computed(() => (max.value - min.value) / step.value)
 
   const thumbColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor ?? props.color)
@@ -219,6 +221,11 @@ export const useSlider = ({
   const trackFillColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = shallowRef(false)
+  const focusVisible = shallowRef(false)
+
+  watch(mousePressed, pressed => {
+    if (pressed) focusVisible.value = false
+  })
 
   const startOffset = shallowRef(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
@@ -373,6 +380,7 @@ export const useSlider = ({
     disabled: form.isDisabled,
     direction: toRef(() => props.direction),
     elevation: toRef(() => props.elevation),
+    focusVisible,
     getValueText,
     hasLabels,
     isReversed,
@@ -403,7 +411,7 @@ export const useSlider = ({
     trackContainerRef,
     trackFillColor,
     trackSize,
-    variant: toRef(() => props.variant ?? 'default') as Ref<SliderVariant>,
+    variant: toRef(() => props.variant),
     vertical,
   }
 

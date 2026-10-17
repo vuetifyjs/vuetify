@@ -556,8 +556,10 @@
     },
     "props": {
       "endThumbAriaLabel": "4.3.0",
+      "size": "4.3.0",
       "startThumbAriaLabel": "4.3.0",
-      "valueFormat": "4.3.0"
+      "valueFormat": "4.3.0",
+      "variant": "4.3.0"
     }
   },
   "VRating": {
@@ -635,7 +637,15 @@
       "end": "3.2.0"
     },
     "props": {
-      "valueFormat": "4.3.0"
+      "appendInnerIcon": "4.3.0",
+      "prependInnerIcon": "4.3.0",
+      "size": "4.3.0",
+      "valueFormat": "4.3.0",
+      "variant": "4.3.0"
+    },
+    "slots": {
+      "append-inner": "4.3.0",
+      "prepend-inner": "4.3.0"
     }
   },
   "VSlideGroup": {

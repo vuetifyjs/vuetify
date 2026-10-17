@@ -6,6 +6,12 @@
 @use './variables' as *
 @use '../VInput/variables' as *
 
+@mixin slider-pill-size ($tokens)
+  --v-slider-track-size: #{map.get($tokens, track-size)}
+  --v-slider-pill-handle-height: #{map.get($tokens, handle-height)}
+  --v-slider-pill-track-radius: #{map.get($tokens, track-radius)}
+  --v-slider-pill-icon-size: #{map.get($tokens, icon-size)}
+
 @include tools.layer('components')
   // Block
   .v-slider
@@ -22,6 +28,7 @@
 
   // Elements
   .v-slider__container
+    --v-slider-track-size: #{$slider-track-size}
     position: relative
     min-height: inherit
     width: 100%
@@ -71,6 +78,61 @@
     margin-inline-end: $slider-label-margin-end
 
   // Pill variant
-  .v-slider--variant-pill
-    .v-slider__container
-      cursor: pointer
+  @each $name, $tokens in $slider-pill-sizes
+    .v-slider--variant-pill.v-slider--size-#{$name} .v-slider__container
+      @include slider-pill-size($tokens)
+
+  .v-slider--has-prepend-inner.v-slider--variant-pill .v-slider-track__inactive--before::before,
+  .v-slider--has-append-inner.v-slider--variant-pill .v-slider-track__inactive--after::before
+    display: none
+
+  .v-slider--has-prepend-inner,
+  .v-slider--has-append-inner
+    .v-slider__inner-icon
+      position: absolute
+      display: flex
+      align-items: center
+      justify-content: center
+      pointer-events: none
+
+      > .v-icon
+        font-size: var(--v-slider-pill-icon-size)
+
+      &--filled > *
+        color: $slider-pill-inner-icon-filled-color
+
+    &.v-input--horizontal .v-slider__inner-icon
+      inset-block: 0
+      margin-block: auto
+      width: calc(var(--v-slider-pill-icon-size) + #{$slider-pill-inner-icon-inset} * 2)
+      height: var(--v-slider-pill-icon-size)
+
+      &--prepend
+        inset-inline-start: 0
+
+        &.v-slider__inner-icon--popped
+          inset-inline-start: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+
+      &--append
+        inset-inline-end: 0
+
+        &.v-slider__inner-icon--popped
+          inset-inline-end: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+
+    &.v-input--vertical .v-slider__inner-icon
+      inset-inline: 0
+      margin-inline: auto
+      width: var(--v-slider-pill-icon-size)
+      height: calc(var(--v-slider-pill-icon-size) + #{$slider-pill-inner-icon-inset} * 2)
+
+      &--prepend
+        bottom: 0
+
+        &.v-slider__inner-icon--popped
+          bottom: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+
+      &--append
+        top: 0
+
+        &.v-slider__inner-icon--popped
+          top: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})

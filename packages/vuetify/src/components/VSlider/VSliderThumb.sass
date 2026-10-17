@@ -23,6 +23,7 @@
 
   // Block
   .v-slider-thumb
+    --v-slider-thumb-size: #{$slider-thumb-size}
     outline: none
     position: absolute
     transition: $slider-transition
@@ -149,7 +150,14 @@
       .v-slider-thumb__surface::before
         transform: scale(2)
 
+    .v-slider-thumb:hover:not(.v-slider-thumb--focused)
+      .v-slider-thumb__surface::before
+        opacity: $slider-thumb-hover-opacity
+
   .v-slider--variant-pill
+    .v-slider-thumb
+      --v-slider-thumb-size: var(--v-slider-pill-handle-height)
+
     .v-slider-thumb__surface
       border-radius: $slider-pill-thumb-border-radius
 
@@ -162,10 +170,9 @@
 
       > .v-slider-thumb__surface
         width: $slider-pill-thumb-width
-        min-height: $slider-pill-thumb-min-height
 
-      &:focus-visible,
-      &.v-slider-thumb--focused
+      &.v-slider-thumb--pressed,
+      &.v-slider-thumb--focus-visible
         > .v-slider-thumb__surface
           width: $slider-pill-focused-thumb-width
           margin-inline-start: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
@@ -175,10 +182,9 @@
 
       > .v-slider-thumb__surface
         height: $slider-pill-thumb-width
-        min-width: $slider-pill-thumb-min-height
 
-      &:focus-visible,
-      &.v-slider-thumb--focused
+      &.v-slider-thumb--pressed,
+      &.v-slider-thumb--focus-visible
         > .v-slider-thumb__surface
           height: $slider-pill-focused-thumb-width
           margin-top: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
@@ -216,8 +222,7 @@
         top: math.div($slider-pill-thumb-label-height, -2)
         left: $slider-pill-thumb-label-offset
 
-    .v-slider-thumb:focus-visible,
-    .v-slider-thumb--focused
+    .v-slider-thumb--focus-visible
       .v-slider-thumb__surface
-        outline: 3px solid currentColor
-        outline-offset: 2px
+        outline: $slider-pill-thumb-focus-outline
+        outline-offset: $slider-pill-thumb-focus-outline-offset

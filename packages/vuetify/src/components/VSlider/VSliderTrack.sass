@@ -4,6 +4,17 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+// Masks the end on $side with the full track radius; border-radius would scale it down on segments narrower than the radius
+@mixin slider-pill-end ($side)
+  $radius: min(var(--v-slider-pill-track-radius), var(--v-slider-track-size) / 2)
+  $corner: radial-gradient(circle closest-side, #000 calc(100% - 1px), transparent)
+  $solid: linear-gradient(#000 0 0)
+  $opposite: map.get((left: right, right: left, top: bottom, bottom: top), $side)
+  @if $side == left or $side == right
+    mask: $corner $side top / calc(#{$radius} * 2) calc(#{$radius} * 2) no-repeat, $corner $side bottom / calc(#{$radius} * 2) calc(#{$radius} * 2) no-repeat, $solid $side center / #{$radius} calc(100% - #{$radius} * 2) no-repeat, $solid $opposite center / calc(100% - #{$radius}) 100% no-repeat
+  @else
+    mask: $corner left $side / calc(#{$radius} * 2) calc(#{$radius} * 2) no-repeat, $corner right $side / calc(#{$radius} * 2) calc(#{$radius} * 2) no-repeat, $solid center $side / calc(100% - #{$radius} * 2) #{$radius} no-repeat, $solid center $opposite / 100% calc(100% - #{$radius}) no-repeat
+
 @include tools.layer('components')
   // Theme
   .v-slider-track__background
@@ -183,33 +194,55 @@
     --v-slider-pill-gap: #{$slider-pill-gap}
     --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
     --v-slider-pill-thumb-gap: calc(var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+    --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap))
 
     .v-slider-track
-      --v-slider-pill-start-gap: 0px
-      --v-slider-pill-stop-gap: var(--v-slider-pill-thumb-gap)
-      border-radius: $slider-pill-track-outer-radius
-
-    .v-slider-track--reverse
-      --v-slider-pill-start-gap: var(--v-slider-pill-thumb-gap)
-      --v-slider-pill-stop-gap: 0px
-
-    &.v-range-slider .v-slider-track
-      --v-slider-pill-start-gap: var(--v-slider-pill-thumb-gap)
-      --v-slider-pill-stop-gap: var(--v-slider-pill-thumb-gap)
+      border-radius: var(--v-slider-pill-track-radius)
 
     .v-slider-track__background,
     .v-slider-track__fill
-      border-radius: $slider-pill-track-outer-radius
+      border-radius: $slider-pill-track-inner-radius
 
     .v-slider-track__background--opacity
-      opacity: 0.24
+      opacity: $slider-pill-track-background-opacity
+
+    &.v-input--horizontal
+      .v-slider-track__inactive--before,
+      .v-slider-track__fill--start
+        @include tools.ltr()
+          @include slider-pill-end(left)
+        @include tools.rtl()
+          @include slider-pill-end(right)
+
+      .v-slider-track__inactive--after,
+      .v-slider-track__fill--stop
+        @include tools.ltr()
+          @include slider-pill-end(right)
+        @include tools.rtl()
+          @include slider-pill-end(left)
+
+    &.v-input--vertical
+      .v-slider-track__inactive--before,
+      .v-slider-track__fill--start
+        @include slider-pill-end(bottom)
+
+      .v-slider-track__inactive--after,
+      .v-slider-track__fill--stop
+        @include slider-pill-end(top)
+
+    .v-slider-track__inactive--before,
+    .v-slider-track__inactive--after
+      &::before
+        content: ''
+        position: absolute
+        width: $slider-pill-stop-indicator-size
+        height: $slider-pill-stop-indicator-size
+        border-radius: $slider-pill-stop-indicator-border-radius
+        background: currentColor
 
     &.v-input--horizontal
       .v-slider-track
         height: var(--v-slider-track-size)
-
-        &__background
-          height: var(--v-slider-track-size)
 
         &__fill
           inset-inline-start: calc(var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
@@ -218,33 +251,15 @@
 
       .v-slider-track__inactive--before
         inset-inline-start: 0
-        width: calc(var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-start-end-radius: $slider-pill-track-inner-radius
-        border-end-end-radius: $slider-pill-track-inner-radius
-
-        ~ .v-slider-track__fill
-          border-start-start-radius: $slider-pill-track-inner-radius
-          border-end-start-radius: $slider-pill-track-inner-radius
+        width: calc(var(--v-slider-value-start) - var(--v-slider-pill-start-gap))
 
       .v-slider-track__inactive--after
-        inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-        width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-start-start-radius: $slider-pill-track-inner-radius
-        border-end-start-radius: $slider-pill-track-inner-radius
-
-        ~ .v-slider-track__fill
-          border-start-end-radius: $slider-pill-track-inner-radius
-          border-end-end-radius: $slider-pill-track-inner-radius
+        inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap))
+        width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
 
       .v-slider-track__inactive--before,
       .v-slider-track__inactive--after
         &::before
-          content: ''
-          position: absolute
-          width: $slider-pill-stop-indicator-size
-          height: $slider-pill-stop-indicator-size
-          border-radius: $slider-pill-stop-indicator-border-radius
-          background: currentColor
           top: 50%
           transform: translateY(-50%)
 
@@ -258,41 +273,22 @@
       .v-slider-track
         width: var(--v-slider-track-size)
 
-        &__background
-          width: var(--v-slider-track-size)
-
         &__fill
           top: calc(100% - var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap))
           height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-start-gap) - var(--v-slider-pill-stop-gap))
           width: var(--v-slider-track-size)
 
       .v-slider-track__inactive--before
-        top: calc(100% - var(--v-slider-value-start) + var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-        height: calc(var(--v-slider-value-start) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-radius: $slider-pill-track-inner-radius $slider-pill-track-inner-radius $slider-pill-track-outer-radius $slider-pill-track-outer-radius
-
-        ~ .v-slider-track__fill
-          border-bottom-left-radius: $slider-pill-track-inner-radius
-          border-bottom-right-radius: $slider-pill-track-inner-radius
+        top: calc(100% - var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
+        height: calc(var(--v-slider-value-start) - var(--v-slider-pill-start-gap))
 
       .v-slider-track__inactive--after
         top: 0
-        height: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-thumb-width) / 2 - var(--v-slider-pill-gap))
-        border-radius: $slider-pill-track-outer-radius $slider-pill-track-outer-radius $slider-pill-track-inner-radius $slider-pill-track-inner-radius
-
-        ~ .v-slider-track__fill
-          border-top-left-radius: $slider-pill-track-inner-radius
-          border-top-right-radius: $slider-pill-track-inner-radius
+        height: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
 
       .v-slider-track__inactive--before,
       .v-slider-track__inactive--after
         &::before
-          content: ''
-          position: absolute
-          width: $slider-pill-stop-indicator-size
-          height: $slider-pill-stop-indicator-size
-          border-radius: $slider-pill-stop-indicator-border-radius
-          background: currentColor
           left: 50%
           transform: translateX(-50%)
 
@@ -335,3 +331,36 @@
 
         @include tools.rtl()
           transform: translate(50%, 50%)
+
+    // Lines up background images across segments as if they were one track
+    &.v-input--horizontal
+      .v-slider-track__background,
+      .v-slider-track__fill
+        background-size: var(--v-slider-track-length) 100%
+
+      .v-slider-track__inactive--before
+        @include tools.rtl()
+          background-position-x: right
+
+      .v-slider-track__inactive--after
+        background-position-x: calc(-1 * (var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap)))
+
+        @include tools.rtl()
+          background-position-x: right calc(-1 * (var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap)))
+
+      .v-slider-track__fill
+        background-position-x: calc(-1 * (var(--v-slider-value-start-offset) + var(--v-slider-pill-start-gap)))
+
+        @include tools.rtl()
+          background-position-x: right calc(-1 * (var(--v-slider-value-start-offset) + var(--v-slider-pill-start-gap)))
+
+    &.v-input--vertical
+      .v-slider-track__background,
+      .v-slider-track__fill
+        background-size: 100% var(--v-slider-track-length)
+
+      .v-slider-track__inactive--before
+        background-position-y: bottom
+
+      .v-slider-track__fill
+        background-position-y: calc(-1 * (var(--v-slider-track-length) - var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap)))
