@@ -23,6 +23,7 @@
 
   // Block
   .v-slider-thumb
+    --v-slider-thumb-size: #{$slider-thumb-size}
     outline: none
     position: absolute
     transition: $slider-transition
@@ -152,3 +153,76 @@
     .v-slider-thumb:hover:not(.v-slider-thumb--focused)
       .v-slider-thumb__surface::before
         opacity: $slider-thumb-hover-opacity
+
+  .v-slider--variant-pill
+    .v-slider-thumb
+      --v-slider-thumb-size: var(--v-slider-pill-handle-height)
+
+    .v-slider-thumb__surface
+      border-radius: $slider-pill-thumb-border-radius
+
+      &::before,
+      &::after
+        display: none
+
+    &.v-input--horizontal .v-slider-thumb
+      inset-inline-start: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
+
+      > .v-slider-thumb__surface
+        width: $slider-pill-thumb-width
+
+      &.v-slider-thumb--pressed,
+      &.v-slider-thumb--focus-visible
+        > .v-slider-thumb__surface
+          width: $slider-pill-focused-thumb-width
+          margin-inline-start: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
+
+    &.v-input--vertical .v-slider-thumb
+      top: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
+
+      > .v-slider-thumb__surface
+        height: $slider-pill-thumb-width
+
+      &.v-slider-thumb--pressed,
+      &.v-slider-thumb--focus-visible
+        > .v-slider-thumb__surface
+          height: $slider-pill-focused-thumb-width
+          margin-top: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
+
+    .v-slider-thumb__ripple
+      display: none
+
+    .v-slider-thumb__label
+      background: $slider-pill-thumb-label-background
+      color: $slider-pill-thumb-label-color
+      font-size: map.get($slider-pill-thumb-label-typography, 'size')
+      font-weight: map.get($slider-pill-thumb-label-typography, 'weight')
+      line-height: map.get($slider-pill-thumb-label-typography, 'line-height')
+      letter-spacing: map.get($slider-pill-thumb-label-typography, 'letter-spacing')
+      height: $slider-pill-thumb-label-height
+      min-width: $slider-pill-thumb-label-min-width
+      padding: $slider-pill-thumb-label-padding
+      border-radius: $slider-pill-thumb-label-border-radius
+
+      > .v-slider-thumb__label-wedge
+        display: none
+
+    &.v-input--horizontal
+      .v-slider-thumb__label-container
+        left: calc(#{$slider-pill-thumb-width} / 2)
+
+      .v-slider-thumb__label
+        bottom: $slider-pill-thumb-label-offset
+
+    &.v-input--vertical
+      .v-slider-thumb__label-container
+        top: calc(#{$slider-pill-thumb-width} / 2)
+
+      .v-slider-thumb__label
+        top: math.div($slider-pill-thumb-label-height, -2)
+        left: $slider-pill-thumb-label-offset
+
+    .v-slider-thumb--focus-visible
+      .v-slider-thumb__surface
+        outline: $slider-pill-thumb-focus-outline
+        outline-offset: $slider-pill-thumb-focus-outline-offset

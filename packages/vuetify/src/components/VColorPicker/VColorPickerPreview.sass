@@ -1,27 +1,20 @@
+@use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
 
 @include tools.layer('components')
   .v-color-picker-preview__alpha
-    .v-slider-track__background
+    .v-slider-track__background,
+    .v-slider-track__fill
       @include tools.layer('overrides')
         background-color: transparent
+        background-size: var(--v-slider-track-length, 100%) 100%, auto
+        background-repeat: no-repeat, repeat
 
       @include tools.ltr()
-        background-image: linear-gradient(to right, transparent, var(--v-color-picker-color-hsv))
+        background-image: linear-gradient(to right, transparent, var(--v-color-picker-color-hsv)), list.nth($color-picker-checkerboard, 1)
       @include tools.rtl()
-        background-image: linear-gradient(to left, transparent, var(--v-color-picker-color-hsv))
-
-      &::after
-        content: ''
-        z-index: -1
-        left: 0
-        top: 0
-        width: 100%
-        height: 100%
-        position: absolute
-        background: $color-picker-checkerboard
-        border-radius: inherit
+        background-image: linear-gradient(to left, transparent, var(--v-color-picker-color-hsv)), list.nth($color-picker-checkerboard, 1)
 
   .v-color-picker-preview__sliders
     display: flex
@@ -44,12 +37,13 @@
 
   .v-color-picker-preview__hue
     &:not(.v-input--is-disabled)
-      .v-slider-track__background
+      .v-slider-track__background,
+      .v-slider-track__fill
         @include tools.ltr()
-          background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+          background-image: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
         @include tools.rtl()
-          background: linear-gradient(to left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+          background-image: linear-gradient(to left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
   .v-color-picker-preview__track
     position: relative
@@ -58,7 +52,10 @@
     @include tools.layer('overrides')
       margin: 0
 
-    .v-slider-track__fill
+    &:not(.v-slider--variant-pill) .v-slider-track__fill
+      display: none
+
+    .v-slider-track__background::before
       display: none
 
   .v-color-picker-preview
