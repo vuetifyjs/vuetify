@@ -106,5 +106,19 @@ describe('VTabs', () => {
     expect(model.value).toBe('B')
   })
 
+  it('should only render phrasing content inside the button content span', () => {
+    const { container } = render(() => (
+      <VTabs>
+        <VTab value="A">A</VTab>
+      </VTabs>
+    ))
+
+    const content = container.querySelector('.v-tab .v-btn__content')!
+
+    expect(content.tagName).toBe('SPAN')
+    expect(content.querySelector('.v-tab__slider')).not.toBeNull()
+    expect(content.querySelectorAll('div')).toHaveLength(0)
+  })
+
   showcase({ stories })
 })
