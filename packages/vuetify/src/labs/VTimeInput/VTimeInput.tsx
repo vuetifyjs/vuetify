@@ -386,7 +386,6 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
                         return (
                           <VTimePicker
                             { ...timePickerProps }
-                            class="v-time-input__picker"
                             v-model:viewMode={ viewMode.value }
                             modelValue={ props.hideActions ? model.value : proxyModel.value }
                             onUpdate:modelValue={ onUpdateModel }

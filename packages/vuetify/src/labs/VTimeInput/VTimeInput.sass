@@ -1,12 +1,8 @@
 @use '../../styles/tools'
-@use './variables' as *
 
 @include tools.layer('components')
   .v-time-input input
     direction: ltr
-
-  .v-time-input__picker .v-picker__header-wrapper > .v-picker__header:first-child .v-time-picker-controls
-    margin-top: $time-input-picker-controls-margin-top
 
   // the mask reads its direction off the nearest locale provider, a descendant selector would miss it
   .v-time-input--rtl
