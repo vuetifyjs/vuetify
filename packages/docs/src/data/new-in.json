@@ -217,7 +217,8 @@
       "landscape": "3.11.0",
       "landscapeHeaderWidth": "3.11.0",
       "noAutoNavigation": "4.1.0",
-      "noMonthPicker": "3.11.0"
+      "noMonthPicker": "3.11.0",
+      "wheel": "4.3.0"
     },
     "slots": {
       "controls": "3.11.0"
