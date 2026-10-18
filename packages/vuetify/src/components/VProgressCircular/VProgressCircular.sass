@@ -82,13 +82,13 @@ $split-transition: var(--v-progress-circular-transition-duration) settings.$dece
     animation: progress-circular-wave 1s linear infinite
 
   @media (prefers-reduced-motion: reduce)
-    .v-progress-circular__split,
     .v-progress-circular--shape-wavy .v-progress-circular__wave
       animation: none
 
-  @media (forced-colors: active)
-    .v-progress-circular__wave
-      stroke: highlight
+  @include tools.layer('trumps')
+    @media (forced-colors: active)
+      .v-progress-circular__wave
+        stroke: highlight
 
   .v-progress-circular--revealing
     --v-progress-reveal-duration: #{$progress-circular-reveal-duration}

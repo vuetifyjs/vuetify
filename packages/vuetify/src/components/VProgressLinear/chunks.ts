@@ -10,7 +10,6 @@ export interface ChunksProps {
   chunkWidth: number | string | null
   chunkGap: number | string
   variant: 'split' | undefined
-  shape?: 'flat' | 'wavy'
 }
 
 // Composables
@@ -41,7 +40,7 @@ export function useChunks (
   bufferValue: MaybeRefOrGetter<number>,
   reversed: MaybeRefOrGetter<boolean>,
 ) {
-  const isSplit = toRef(() => props.variant === 'split' || props.shape === 'wavy')
+  const isSplit = toRef(() => props.variant === 'split')
   const chunkCount = toRef(() => isSplit.value ? 2 : Number(props.chunkCount) || 0)
   const hasChunks = toRef(() => !isSplit.value && (!!chunkCount.value || !!props.chunkWidth))
 

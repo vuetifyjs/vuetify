@@ -63,6 +63,18 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
     @media (forced-colors: active)
       border: thin solid buttontext
 
+      // a real border shrinks the svg below its viewBox height, which scales the whole wave down
+      &.v-progress-linear--shape-wavy
+        border: none
+
+        &::after
+          border: thin solid buttontext
+          border-radius: inherit
+          content: ''
+          inset: 0
+          pointer-events: none
+          position: absolute
+
   // Elements
   .v-progress-linear__background,
   .v-progress-linear__buffer
@@ -210,6 +222,7 @@ $bar-transition: width $progress-linear-transition, left $progress-linear-transi
 
     > .v-progress-linear__stop
       fill: currentColor
+      r: calc(min(#{$progress-linear-stop-size}, var(--v-progress-linear-stroke)) / 2)
 
   .v-progress-linear__wavy--indeterminate
     animation: progress-linear-wave 1s linear infinite, progress-linear-wavy $progress-linear-wavy-animation-duration linear infinite

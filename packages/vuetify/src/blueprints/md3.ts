@@ -79,14 +79,14 @@ export const md3: Blueprint = {
       },
     },
     VProgressCircular: {
-      variant: 'split',
       rounded: true,
+      variant: 'split',
     },
     VProgressLinear: {
-      variant: 'split',
-      stopIndicator: true,
       rounded: true,
       roundedBar: true,
+      stopIndicator: true,
+      variant: 'split',
     },
     VRadioGroup: {
       indentDetails: true,

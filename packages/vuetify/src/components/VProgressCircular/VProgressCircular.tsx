@@ -116,25 +116,26 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         : baseAngle
     })
 
+    const isWavy = toRef(() => props.shape === 'wavy')
     const geometry = computed(() => {
-      if (props.variant !== 'split' && props.shape !== 'wavy') return undefined
+      if (props.variant !== 'split' && !isWavy.value) return undefined
 
       const scale = diameter.value / size.value
       const radius = MAGIC_RADIUS_CONSTANT
-      const amplitude = props.shape === 'wavy' && (props.indeterminate || hasWave(normalizedValue.value)) ? WAVE_AMPLITUDE * scale : 0
+      const amplitude = isWavy.value && (props.indeterminate || hasWave(normalizedValue.value)) ? WAVE_AMPLITUDE * scale : 0
       const waves = Math.max(3, Math.floor(CIRCUMFERENCE / (WAVELENGTH * scale)))
       const center = diameter.value / 2
       const arc = `A ${radius} ${radius} 0 1 1`
-      const round = props.rounded || props.shape === 'wavy'
+      const roundCaps = props.rounded || isWavy.value
 
       return {
         waves,
-        linecap: round ? 'round' as const : 'butt' as const,
+        linecap: roundCaps ? 'round' as const : 'butt' as const,
         // round caps reach half a stroke into the gap from each side
-        gap: (WAVE_GAP * scale + (round ? strokeWidth.value : 0)) / CIRCUMFERENCE * 100,
-        // Two turns so the indeterminate track can wrap past the start
+        gap: (WAVE_GAP * scale + (roundCaps ? strokeWidth.value : 0)) / CIRCUMFERENCE * 100,
+        // two turns so the indeterminate track can wrap past the start
         track: `M ${center + radius} ${center}` + ` ${arc} ${center - radius} ${center} ${arc} ${center + radius} ${center}`.repeat(2),
-        // Peaks sit on the track and troughs dip inward, so a flat wave lands on the track
+        // peaks sit on the track and troughs dip inward, so a flat wave lands on the track
         wave: circularWavePath(center, radius - amplitude, amplitude, waves),
       }
     })
@@ -148,7 +149,7 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
             'v-progress-circular--variant-split': props.variant === 'split',
-            'v-progress-circular--shape-wavy': props.shape === 'wavy',
+            'v-progress-circular--shape-wavy': isWavy.value,
             'v-progress-circular--disable-shrink': props.indeterminate &&
               (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
             'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),

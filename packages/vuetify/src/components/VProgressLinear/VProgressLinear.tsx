@@ -16,15 +16,13 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { computed, onScopeDispose, shallowRef, toRef, Transition, watch } from 'vue'
+import { computed, shallowRef, toRef, Transition } from 'vue'
 import { makeChunksProps, useChunks } from './chunks'
-import { hasWave, linearWavePath } from './waves'
-import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
+import { useWavy, WAVE_AMPLITUDE } from './wavy'
+import { clamp, convertToUnit, genericComponent, isNullOrUndefined, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-
-const WAVE_AMPLITUDE = 3
 
 type VProgressLinearSlots = {
   default: { value: number, buffer: number }
@@ -135,6 +133,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     const transitionDuration = computed(() => props.transition === false ? undefined : convertToUnit(
       isObject(props.transition) ? props.transition.duration : undefined, 'ms'
     ))
+    const bgOpacity = toRef(() => isNullOrUndefined(props.bgOpacity) ? undefined : parseFloat(props.bgOpacity))
     const isWavy = toRef(() => props.shape === 'wavy')
     // undefined keeps split without the stop until the next major
     const hasStopIndicator = toRef(() => !props.indeterminate && (
@@ -168,107 +167,16 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         : normalizedValue.value
     })
 
-    const geometry = computed(() => {
-      const width = containerWidth.value
-      if (!isWavy.value || !width) return undefined
-
-      // ponytail: geometry assumes a px height, rem/em heights would need measuring
-      const stroke = parseFloat(props.height)
-      const wavelength = props.indeterminate ? 20 : 40
-      const center = stroke / 2 + WAVE_AMPLITUDE
-      const start = stroke / 2
-      const end = Math.max(width - start, start + 1)
-      const range = end - start
-
-      return {
-        width,
-        stroke,
-        wavelength,
-        center,
-        start,
-        end,
-        offset: wavelength / range * 100,
-        gap: (parseFloat(props.chunkGap) + stroke) / range * 100,
-        track: `M ${start} ${center} H ${end}`,
-        wave: props.indeterminate ? linearWavePath(start - wavelength, end, center, WAVE_AMPLITUDE, wavelength) : '',
-      }
+    const { geometry, svgEl, waveEl } = useWavy(props, {
+      containerWidth,
+      value: normalizedValue,
+      isActive: () => props.active && isIntersecting.value,
+      duration: () => {
+        if (revealState.value === 'pending') return revealDuration.value
+        const duration = getComputedStyle(root.value!).getPropertyValue('--v-progress-linear-transition-duration').trim()
+        return parseFloat(duration) * (duration.endsWith('ms') ? 1 : 1000)
+      },
     })
-
-    // determinate wave is drawn per frame: a critically damped spring keeps the head smooth however often the value updates
-    const svgEl = shallowRef<SVGSVGElement>()
-    const waveEl = shallowRef<SVGPathElement>()
-    const springDuration = computed(() => {
-      if (revealState.value === 'pending') return revealDuration.value
-      if (props.transition === false) return 0
-      const duration = transitionDuration.value
-      return !duration ? 200 : duration.endsWith('ms') ? parseFloat(duration) : parseFloat(duration) * 1000
-    })
-    const isAnimating = computed(() => (
-      isWavy.value && !props.indeterminate && props.active && isIntersecting.value && !!svgEl.value
-    ))
-
-    function amplitudeFor (value: number) {
-      return hasWave(value) ? 1 : 0
-    }
-
-    let displayedValue = normalizedValue.value
-    let velocity = 0
-    let amplitude = amplitudeFor(displayedValue)
-    let phase = 0
-    let lastFrameTime = 0
-    let frame = -1
-
-    function draw () {
-      if (!geometry.value || !svgEl.value || !waveEl.value) return
-
-      const { start, end, center, wavelength } = geometry.value
-      const head = start + (end - start) * displayedValue / 100
-      const eased = amplitude * amplitude * (3 - 2 * amplitude)
-      waveEl.value.setAttribute('d', linearWavePath(start, head, center, WAVE_AMPLITUDE * eased, wavelength, phase))
-      svgEl.value.style.setProperty('--v-progress-linear-value', String(displayedValue))
-    }
-
-    function tick (now: number) {
-      const elapsed = lastFrameTime ? Math.min(now - lastFrameTime, 100) / 1000 : 0
-      lastFrameTime = now
-
-      const target = normalizedValue.value
-      const omega = 4000 / springDuration.value
-      if (!Number.isFinite(omega)) {
-        displayedValue = target
-        velocity = 0
-      } else {
-        const offset = displayedValue - target
-        const decay = Math.exp(-omega * elapsed)
-        const coefficient = velocity + omega * offset
-        displayedValue = target + (offset + coefficient * elapsed) * decay
-        velocity = (velocity - omega * coefficient * elapsed) * decay
-        if (Math.abs(displayedValue - target) < 0.01 && Math.abs(velocity) < 0.01) {
-          displayedValue = target
-          velocity = 0
-        }
-      }
-
-      const targetAmplitude = amplitudeFor(displayedValue)
-      amplitude = targetAmplitude > amplitude ? Math.min(amplitude + elapsed * 2, 1) : Math.max(amplitude - elapsed * 2, 0)
-
-      const reduceMotion = PREFERS_REDUCED_MOTION()
-      const wavelength = geometry.value?.wavelength ?? 40
-      if (!reduceMotion) phase = (phase - elapsed * wavelength) % wavelength
-
-      draw()
-
-      const settled = displayedValue === target && amplitude === targetAmplitude
-      frame = isAnimating.value && (!reduceMotion || !settled) ? requestAnimationFrame(tick) : -1
-    }
-
-    watch([isAnimating, normalizedValue, springDuration], () => {
-      if (!isAnimating.value || frame >= 0) return
-      lastFrameTime = 0
-      frame = requestAnimationFrame(tick)
-    }, { immediate: true })
-    watch([svgEl, geometry], draw, { flush: 'post' })
-    onScopeDispose(() => cancelAnimationFrame(frame))
 
     function handleClick (e: MouseEvent) {
       if (!root.value) return
@@ -289,7 +197,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           style={[
             backgroundColorStyles.value,
             {
-              opacity: props.bgOpacity != null ? parseFloat(props.bgOpacity) : undefined,
+              opacity: bgOpacity.value,
               width: props.stream ? 0 : undefined,
             },
             props.indeterminate ? {} : splitStyles.value?.background,
@@ -301,7 +209,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     function renderWavy () {
       if (!geometry.value) return null
 
-      const { track, wave, offset } = geometry.value
+      const { width, stroke, wavelength, center, end, gap, track, wave, offset } = geometry.value
 
       function renderTrack () {
         return (
@@ -312,7 +220,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             ]}
             style={[
               trackColorStyles.value,
-              { opacity: props.bgOpacity != null ? parseFloat(props.bgOpacity) : undefined },
+              { opacity: bgOpacity.value },
             ]}
             d={ track }
             pathLength="100"
@@ -341,13 +249,13 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           style={[
             textColorStyles.value,
             {
-              '--v-progress-linear-stroke': convertToUnit(geometry.value.stroke),
-              '--v-progress-linear-wavelength': convertToUnit(geometry.value.wavelength),
+              '--v-progress-linear-stroke': convertToUnit(stroke),
+              '--v-progress-linear-wavelength': convertToUnit(wavelength),
               '--v-progress-linear-wave-offset': offset,
-              '--v-progress-linear-wave-gap': geometry.value.gap,
+              '--v-progress-linear-wave-gap': gap,
             },
           ]}
-          viewBox={ `0 0 ${geometry.value.width} ${geometry.value.center * 2}` }
+          viewBox={ `0 0 ${width} ${center * 2}` }
         >
           { props.indeterminate ? (
             <>
@@ -363,9 +271,8 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               { hasStopIndicator.value && (
                 <circle
                   class="v-progress-linear__stop"
-                  cx={ geometry.value.end }
-                  cy={ geometry.value.center }
-                  r={ Math.min(2, geometry.value.stroke / 2) }
+                  cx={ end }
+                  cy={ center }
                 />
               )}
               <path ref={ waveEl } class="v-progress-linear__wave" />
@@ -391,6 +298,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             'v-progress-linear--no-transition': props.transition === false,
             'v-progress-linear--revealing': ['initial', 'pending'].includes(revealState.value),
             'v-progress-linear--variant-split': props.variant === 'split',
+            'v-progress-linear--shape-wavy': isWavy.value,
           },
           roundedClasses.value,
           themeClasses.value,
@@ -408,7 +316,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             '--v-progress-chunk-gap': convertToUnit(props.chunkGap),
             ...(props.absolute ? locationStyles.value : {}),
           },
-          chunksMaskStyles.value,
+          isWavy.value ? undefined : chunksMaskStyles.value,
           roundedStyles.value,
           props.style,
         ]}

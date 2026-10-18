@@ -31,19 +31,17 @@ export function circularWavePath (center: number, radius: number, amplitude: num
     const angle = index * step
     const cos = Math.cos(angle)
     const sin = Math.sin(angle)
-    const r = radius + amplitude * Math.sin(waves * angle)
-    const dr = amplitude * waves * Math.cos(waves * angle)
-    // tangent scaled to a third of the segment = cubic Bézier control point offset
+    const distance = radius + amplitude * Math.sin(waves * angle)
+    const slope = amplitude * waves * Math.cos(waves * angle)
     return {
-      x: center + r * cos,
-      y: center + r * sin,
-      dx: (dr * cos - r * sin) * step / 3,
-      dy: (dr * sin + r * cos) * step / 3,
+      x: center + distance * cos,
+      y: center + distance * sin,
+      dx: (slope * cos - distance * sin) * step / 3,
+      dy: (slope * sin + distance * cos) * step / 3,
     }
   }
 
   const start = point(0)
-  // one extra wave so the dash can slide forward while the path rotates back
   return `M ${round(start.x)} ${round(start.y)}` + createRange(count + 4).map(index => {
     const from = point(index)
     const to = point(index + 1)
