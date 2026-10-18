@@ -82,6 +82,13 @@
     .v-slider--variant-pill.v-slider--size-#{$name} .v-slider__container
       @include slider-pill-size($tokens)
 
+  // Declared where they are read, so --v-slider-pill-gap can come from any ancestor
+  .v-slider--variant-pill
+    .v-slider-track,
+    .v-slider__inner-icon
+      --v-slider-pill-thumb-gap: calc(#{$slider-pill-thumb-width} / 2 + var(--v-slider-pill-gap, #{$slider-pill-gap}))
+      --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap, #{$slider-pill-gap}))
+
   .v-slider--has-prepend-inner.v-slider--variant-pill .v-slider-track__stop--start,
   .v-slider--has-append-inner.v-slider--variant-pill .v-slider-track__stop--stop
     display: none

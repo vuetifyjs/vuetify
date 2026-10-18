@@ -191,13 +191,6 @@
 
   // Pill variant
   .v-slider--variant-pill
-    // on the container, so the thumb-gap prop set inline there reaches the derived gaps
-    .v-slider__container
-      --v-slider-pill-gap: #{$slider-pill-gap}
-      --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
-      --v-slider-pill-thumb-gap: calc(var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-      --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap))
-
     .v-slider-track
       // A segment collapsed to nothing must not let the inactive track into the other edge's gap
       --v-slider-pill-before-end: min(var(--v-slider-value-start) - var(--v-slider-pill-start-gap), var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
