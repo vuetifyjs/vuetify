@@ -97,11 +97,14 @@
   .v-slider.v-input--horizontal
     .v-slider-thumb
       top: 50%
-      transform: translateY(-50%)
-      inset-inline-start: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+      inset-inline-start: var(--v-slider-thumb-position)
+      transform: translate(-50%, -50%)
+
+      @include tools.rtl()
+        transform: translate(50%, -50%)
 
     .v-slider-thumb__label-container
-      left: calc(var(--v-slider-thumb-size) / 2)
+      left: 50%
       top: 0
 
     .v-slider-thumb__label
@@ -119,10 +122,11 @@
   // Vertical
   .v-slider.v-input--vertical
     .v-slider-thumb
-      top: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+      top: var(--v-slider-thumb-position)
+      transform: translateY(-50%)
 
     .v-slider-thumb__label-container
-      top: calc(var(--v-slider-thumb-size) / 2)
+      top: 50%
       right: 0
 
     .v-slider-thumb__label
@@ -166,8 +170,6 @@
         display: none
 
     &.v-input--horizontal .v-slider-thumb
-      inset-inline-start: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
-
       > .v-slider-thumb__surface
         width: $slider-pill-thumb-width
 
@@ -175,11 +177,8 @@
       &.v-slider-thumb--focus-visible
         > .v-slider-thumb__surface
           width: $slider-pill-focused-thumb-width
-          margin-inline-start: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
 
     &.v-input--vertical .v-slider-thumb
-      top: calc(var(--v-slider-thumb-position) - #{$slider-pill-thumb-width} / 2)
-
       > .v-slider-thumb__surface
         height: $slider-pill-thumb-width
 
@@ -187,7 +186,6 @@
       &.v-slider-thumb--focus-visible
         > .v-slider-thumb__surface
           height: $slider-pill-focused-thumb-width
-          margin-top: calc((#{$slider-pill-thumb-width} - #{$slider-pill-focused-thumb-width}) / 2)
 
     .v-slider-thumb__ripple
       display: none
@@ -208,16 +206,10 @@
         display: none
 
     &.v-input--horizontal
-      .v-slider-thumb__label-container
-        left: calc(#{$slider-pill-thumb-width} / 2)
-
       .v-slider-thumb__label
         bottom: $slider-pill-thumb-label-offset
 
     &.v-input--vertical
-      .v-slider-thumb__label-container
-        top: calc(#{$slider-pill-thumb-width} / 2)
-
       .v-slider-thumb__label
         top: math.div($slider-pill-thumb-label-height, -2)
         left: $slider-pill-thumb-label-offset
