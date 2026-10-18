@@ -101,7 +101,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       trackSize,
       disabled,
       readonly,
-      thumbState,
+      getThumbState,
     } = useSlider({
       props,
       steps,
@@ -152,7 +152,6 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     })
 
     const { isFocused, focus, blur } = useFocus(props)
-
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
 
@@ -209,7 +208,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 class="v-slider__container"
                 style={{
                   '--v-slider-track-size': convertToUnit(trackSize.value),
-                  '--v-slider-pill-gap': convertToUnit(props.thumbGap),
+                  '--v-slider-thumb-gap': convertToUnit(props.thumbGap),
                 }}
                 role="group"
                 aria-label={ inputAttrs['aria-label'] as string | undefined }
@@ -239,8 +238,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   ref={ trackContainerRef }
                   start={ trackStart.value }
                   stop={ trackStop.value }
-                  startThumb={ thumbState(activeThumbRef.value === startThumbRef.value?.$el) }
-                  stopThumb={ thumbState(activeThumbRef.value === stopThumbRef.value?.$el) }
+                  startThumb={ getThumbState(activeThumbRef.value === startThumbRef.value?.$el) }
+                  stopThumb={ getThumbState(activeThumbRef.value === stopThumbRef.value?.$el) }
                 >
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>

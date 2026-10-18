@@ -6,12 +6,6 @@
 @use './variables' as *
 @use '../VInput/variables' as *
 
-@mixin slider-pill-size ($tokens)
-  --v-slider-track-size: #{map.get($tokens, track-size)}
-  --v-slider-pill-handle-height: #{map.get($tokens, handle-height)}
-  --v-slider-pill-track-radius: #{map.get($tokens, track-radius)}
-  --v-slider-pill-icon-size: #{map.get($tokens, icon-size)}
-
 @include tools.layer('components')
   // Block
   .v-slider
@@ -80,17 +74,20 @@
   // Pill variant
   @each $name, $tokens in $slider-pill-sizes
     .v-slider--variant-pill.v-slider--size-#{$name} .v-slider__container
-      @include slider-pill-size($tokens)
+      --v-slider-track-size: #{map.get($tokens, track-size)}
+      --v-slider-pill-handle-height: #{map.get($tokens, handle-height)}
+      --v-slider-pill-track-radius: #{map.get($tokens, track-radius)}
+      --v-slider-pill-icon-size: #{map.get($tokens, icon-size)}
 
-  // Declared where they are read, so --v-slider-pill-gap can come from any ancestor
+  // Declared where they are read, so --v-slider-thumb-gap can come from any ancestor
   .v-slider--variant-pill
     .v-slider-track,
     .v-slider__inner-icon
-      --v-slider-pill-thumb-gap: calc(#{$slider-pill-thumb-width} / 2 + var(--v-slider-pill-gap, #{$slider-pill-gap}))
-      --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap, #{$slider-pill-gap}))
+      --v-slider-pill-idle-clearance: calc(#{$slider-pill-thumb-width} / 2 + var(--v-slider-thumb-gap, #{$slider-pill-thumb-gap}))
+      --v-slider-pill-active-clearance: calc(#{$slider-pill-active-thumb-width} / 2 + var(--v-slider-thumb-gap, #{$slider-pill-thumb-gap}))
 
   .v-slider--has-prepend-inner.v-slider--variant-pill .v-slider-track__stop--start,
-  .v-slider--has-append-inner.v-slider--variant-pill .v-slider-track__stop--stop
+  .v-slider--has-append-inner.v-slider--variant-pill .v-slider-track__stop--end
     display: none
 
   .v-slider--has-prepend-inner,
@@ -118,13 +115,13 @@
         inset-inline-start: 0
 
         &.v-slider__inner-icon--popped
-          inset-inline-start: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+          inset-inline-start: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
       &--append
         inset-inline-end: 0
 
         &.v-slider__inner-icon--popped
-          inset-inline-end: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+          inset-inline-end: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
     &.v-input--vertical .v-slider__inner-icon
       inset-inline: 0
@@ -136,10 +133,10 @@
         bottom: 0
 
         &.v-slider__inner-icon--popped
-          bottom: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+          bottom: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
       &--append
         top: 0
 
         &.v-slider__inner-icon--popped
-          top: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-thumb-gap) - #{$slider-pill-inner-icon-inset})
+          top: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})

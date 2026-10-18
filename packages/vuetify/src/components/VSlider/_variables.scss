@@ -43,11 +43,11 @@ $slider-pill-sizes: (
 ) !default;
 $slider-pill-track-inner-radius: 2px !default;
 $slider-pill-thumb-width: 4px !default;
-$slider-pill-focused-thumb-width: 2px !default;
+$slider-pill-active-thumb-width: 2px !default;
 $slider-pill-thumb-border-radius: 4px !default;
 $slider-pill-thumb-focus-outline: 3px solid currentColor !default;
 $slider-pill-thumb-focus-outline-offset: 2px !default;
-$slider-pill-gap: 6px !default;
+$slider-pill-thumb-gap: 6px !default;
 $slider-pill-track-background-opacity: 0.24 !default;
 $slider-pill-stop-indicator-size: 4px !default;
 $slider-pill-stop-indicator-offset: 4px !default;

@@ -196,7 +196,7 @@
       --v-slider-pill-before-end: min(var(--v-slider-value-start) - var(--v-slider-pill-start-gap), var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
       --v-slider-pill-after-start: max(var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap), var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
       --v-slider-pill-after-start-offset: max(var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap), var(--v-slider-value-start-offset) + var(--v-slider-pill-start-gap))
-      --v-slider-pill-stop-offset: clamp(0px, #{$slider-pill-stop-indicator-offset}, (var(--v-slider-track-size) - #{$slider-pill-stop-indicator-size}) / 2)
+      --v-slider-pill-stop-indicator-inset: clamp(0px, #{$slider-pill-stop-indicator-offset}, (var(--v-slider-track-size) - #{$slider-pill-stop-indicator-size}) / 2)
       border-radius: var(--v-slider-pill-track-radius)
 
     .v-slider-track__background,
@@ -207,37 +207,37 @@
       opacity: $slider-pill-track-background-opacity
 
     &.v-input--horizontal
-      .v-slider-track__inactive--before,
+      .v-slider-track__background--before,
       .v-slider-track__fill--start
         @include tools.ltr()
           @include slider-pill-end(left)
         @include tools.rtl()
           @include slider-pill-end(right)
 
-      .v-slider-track__inactive--after,
-      .v-slider-track__fill--stop
+      .v-slider-track__background--after,
+      .v-slider-track__fill--end
         @include tools.ltr()
           @include slider-pill-end(right)
         @include tools.rtl()
           @include slider-pill-end(left)
 
     &.v-input--vertical
-      .v-slider-track__inactive--before,
+      .v-slider-track__background--before,
       .v-slider-track__fill--start
         @include slider-pill-end(bottom)
 
-      .v-slider-track__inactive--after,
-      .v-slider-track__fill--stop
+      .v-slider-track__background--after,
+      .v-slider-track__fill--end
         @include slider-pill-end(top)
 
     .v-slider-track__stop
       position: absolute
 
       &--start
-        --v-slider-tick-position: calc(var(--v-slider-pill-stop-offset) + #{$slider-pill-stop-indicator-size} / 2)
+        --v-slider-tick-position: calc(var(--v-slider-pill-stop-indicator-inset) + #{$slider-pill-stop-indicator-size} / 2)
 
-      &--stop
-        --v-slider-tick-position: calc(100% - var(--v-slider-pill-stop-offset) - #{$slider-pill-stop-indicator-size} / 2)
+      &--end
+        --v-slider-tick-position: calc(100% - var(--v-slider-pill-stop-indicator-inset) - #{$slider-pill-stop-indicator-size} / 2)
 
     &.v-input--horizontal
       .v-slider-track
@@ -248,11 +248,11 @@
           width: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-start-gap) - var(--v-slider-pill-stop-gap))
           height: var(--v-slider-track-size)
 
-      .v-slider-track__inactive--before
+      .v-slider-track__background--before
         inset-inline-start: 0
         width: var(--v-slider-pill-before-end)
 
-      .v-slider-track__inactive--after
+      .v-slider-track__background--after
         inset-inline-start: var(--v-slider-pill-after-start)
         width: calc(100% - var(--v-slider-pill-after-start))
 
@@ -265,11 +265,11 @@
           height: calc(var(--v-slider-value-stop) - var(--v-slider-value-start) - var(--v-slider-pill-start-gap) - var(--v-slider-pill-stop-gap))
           width: var(--v-slider-track-size)
 
-      .v-slider-track__inactive--before
+      .v-slider-track__background--before
         top: calc(100% - var(--v-slider-pill-before-end))
         height: var(--v-slider-pill-before-end)
 
-      .v-slider-track__inactive--after
+      .v-slider-track__background--after
         top: 0
         height: calc(100% - var(--v-slider-pill-after-start))
 
@@ -322,11 +322,11 @@
       .v-slider-track__fill
         background-size: var(--v-slider-track-length) 100%
 
-      .v-slider-track__inactive--before
+      .v-slider-track__background--before
         @include tools.rtl()
           background-position-x: right
 
-      .v-slider-track__inactive--after
+      .v-slider-track__background--after
         background-position-x: calc(-1 * var(--v-slider-pill-after-start-offset))
 
         @include tools.rtl()
@@ -343,7 +343,7 @@
       .v-slider-track__fill
         background-size: 100% var(--v-slider-track-length)
 
-      .v-slider-track__inactive--before
+      .v-slider-track__background--before
         background-position-y: bottom
 
       .v-slider-track__fill

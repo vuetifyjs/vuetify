@@ -5,7 +5,7 @@ import { useRtl } from '@/composables/locale'
 import { makeRoundedProps } from '@/composables/rounded'
 
 // Utilities
-import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, provide, ref, shallowRef, toRef } from 'vue'
 import { clamp, createRange, formatValue, getDecimals, IN_BROWSER, isBoolean, propsFactory } from '@/util'
 
 // Types
@@ -20,7 +20,7 @@ export type Tick = {
 }
 
 export type SliderVariant = 'default' | 'pill'
-export type SliderTrackThumb = 'idle' | 'active'
+export type SliderThumbState = 'idle' | 'active'
 export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
 
 type SliderProvide = {
@@ -55,7 +55,7 @@ type SliderProvide = {
   trackSize: Ref<number | string | undefined>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
   getValueText: (value: number) => string | undefined
-  thumbState: (isFocused: boolean) => SliderTrackThumb
+  getThumbState: (isFocused: boolean) => SliderThumbState
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   variant: Ref<SliderVariant>
@@ -225,11 +225,7 @@ export const useSlider = ({
   const mousePressed = shallowRef(false)
   const focusVisible = shallowRef(false)
 
-  watch(mousePressed, pressed => {
-    if (pressed) focusVisible.value = false
-  })
-
-  function thumbState (isFocused: boolean): SliderTrackThumb {
+  function getThumbState (isFocused: boolean): SliderThumbState {
     return isFocused && (mousePressed.value || focusVisible.value) ? 'active' : 'idle'
   }
 
@@ -278,6 +274,7 @@ export const useSlider = ({
     if (!activeThumbRef.value) return
 
     mousePressed.value = true
+    focusVisible.value = false
 
     if (activeThumbRef.value.contains(e.target as Node)) {
       startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
@@ -388,7 +385,7 @@ export const useSlider = ({
     elevation: toRef(() => props.elevation),
     focusVisible,
     getValueText,
-    thumbState,
+    getThumbState,
     hasLabels,
     isReversed,
     indexFromEnd,

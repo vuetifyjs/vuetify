@@ -161,6 +161,11 @@
   .v-slider--variant-pill
     .v-slider-thumb
       --v-slider-thumb-size: var(--v-slider-pill-handle-height)
+      --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
+
+      &--pressed,
+      &--focus-visible
+        --v-slider-pill-thumb-width: #{$slider-pill-active-thumb-width}
 
     .v-slider-thumb__surface
       border-radius: $slider-pill-thumb-border-radius
@@ -169,23 +174,11 @@
       &::after
         display: none
 
-    &.v-input--horizontal .v-slider-thumb
-      > .v-slider-thumb__surface
-        width: $slider-pill-thumb-width
+    &.v-input--horizontal .v-slider-thumb__surface
+      width: var(--v-slider-pill-thumb-width)
 
-      &.v-slider-thumb--pressed,
-      &.v-slider-thumb--focus-visible
-        > .v-slider-thumb__surface
-          width: $slider-pill-focused-thumb-width
-
-    &.v-input--vertical .v-slider-thumb
-      > .v-slider-thumb__surface
-        height: $slider-pill-thumb-width
-
-      &.v-slider-thumb--pressed,
-      &.v-slider-thumb--focus-visible
-        > .v-slider-thumb__surface
-          height: $slider-pill-focused-thumb-width
+    &.v-input--vertical .v-slider-thumb__surface
+      height: var(--v-slider-pill-thumb-width)
 
     .v-slider-thumb__ripple
       display: none

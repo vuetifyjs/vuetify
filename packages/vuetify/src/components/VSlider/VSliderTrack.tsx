@@ -16,7 +16,7 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { SliderTrackThumb, Tick } from './slider'
+import type { SliderThumbState, Tick } from './slider'
 
 export type VSliderTrackSlots = {
   'tick-label': { tick: Tick, index: number }
@@ -31,8 +31,8 @@ export const makeVSliderTrackProps = propsFactory({
     type: Number,
     required: true,
   },
-  startThumb: String as PropType<SliderTrackThumb>,
-  stopThumb: String as PropType<SliderTrackThumb>,
+  startThumb: String as PropType<SliderThumbState>,
+  stopThumb: String as PropType<SliderThumbState>,
 
   ...makeComponentProps(),
 }, 'VSliderTrack')
@@ -70,9 +70,9 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
     const visualStartThumb = toRef(() => isReversed.value ? props.stopThumb : props.startThumb)
     const visualStopThumb = toRef(() => isReversed.value ? props.startThumb : props.stopThumb)
 
-    function thumbGap (thumb?: SliderTrackThumb) {
+    function thumbGap (thumb?: SliderThumbState) {
       if (!thumb) return '0px'
-      return thumb === 'active' ? 'var(--v-slider-pill-active-thumb-gap)' : 'var(--v-slider-pill-thumb-gap)'
+      return thumb === 'active' ? 'var(--v-slider-pill-active-clearance)' : 'var(--v-slider-pill-idle-clearance)'
     }
 
     const rootEl = ref<HTMLElement>()
@@ -136,7 +136,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
         <div
           class={[
             'v-slider-track__background',
-            side && `v-slider-track__inactive--${side}`,
+            side && `v-slider-track__background--${side}`,
             trackColorClasses.value,
             {
               'v-slider-track__background--opacity': !!color.value || !trackFillColor.value,
@@ -154,7 +154,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             'v-slider-track__fill',
             {
               'v-slider-track__fill--start': isPill.value && !visualStartThumb.value,
-              'v-slider-track__fill--stop': isPill.value && !visualStopThumb.value,
+              'v-slider-track__fill--end': isPill.value && !visualStopThumb.value,
             },
             trackFillColorClasses.value,
           ]}
@@ -204,8 +204,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
           )}
           { isPill.value && visualStop.value < 100 && (
             <div
-              key="stop-stop"
-              class={['v-slider-track__stop', 'v-slider-track__stop--stop', tickColorClasses.value]}
+              key="stop-end"
+              class={['v-slider-track__stop', 'v-slider-track__stop--end', tickColorClasses.value]}
               style={ tickColorStyles.value }
             />
           )}

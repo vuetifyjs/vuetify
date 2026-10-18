@@ -152,9 +152,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
     }
 
     watch(() => props.focused, val => {
-      if (val) focusVisible.value = !mousePressed.value
-
       if (val) {
+        focusVisible.value = !mousePressed.value
         isHidden.value = false
       }
     })
