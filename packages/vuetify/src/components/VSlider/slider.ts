@@ -55,6 +55,7 @@ type SliderProvide = {
   trackSize: Ref<number | string | undefined>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
   getValueText: (value: number) => string | undefined
+  thumbState: (isFocused: boolean) => SliderTrackThumb
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   variant: Ref<SliderVariant>
@@ -228,6 +229,10 @@ export const useSlider = ({
     if (pressed) focusVisible.value = false
   })
 
+  function thumbState (isFocused: boolean): SliderTrackThumb {
+    return isFocused && (mousePressed.value || focusVisible.value) ? 'active' : 'idle'
+  }
+
   const startOffset = shallowRef(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
@@ -383,6 +388,7 @@ export const useSlider = ({
     elevation: toRef(() => props.elevation),
     focusVisible,
     getValueText,
+    thumbState,
     hasLabels,
     isReversed,
     indexFromEnd,

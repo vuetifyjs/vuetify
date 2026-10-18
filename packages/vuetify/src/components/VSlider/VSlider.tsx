@@ -83,7 +83,6 @@ export const VSlider = genericComponent<VSliderSlots>()({
       min,
       max,
       mousePressed,
-      focusVisible,
       roundValue,
       onSliderMousedown,
       onSliderTouchstart,
@@ -98,6 +97,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
       trackSize,
       variant,
       vertical,
+      thumbState,
     } = useSlider({
       props,
       steps,
@@ -216,7 +216,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   ref={ trackContainerRef }
                   start={ 0 }
                   stop={ trackStop.value }
-                  stopThumb={ isFocused.value && (mousePressed.value || focusVisible.value) ? 'active' : 'idle' }
+                  stopThumb={ thumbState(isFocused.value) }
                 >
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>
